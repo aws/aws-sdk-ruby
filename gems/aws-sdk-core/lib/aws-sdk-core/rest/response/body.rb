@@ -17,12 +17,12 @@ module Aws
             # When string, blob, or enum as a payload, use value directly
             if string_or_blob_payload?
               # Empty blob payloads are omitted
-              target[@ref.shape[:http_payload]] = body unless empty_blob_payload?(body)
+              target[@ref.target[:http_payload]] = body unless empty_blob_payload?(body)
             # Otherwise, parse the payload member
-            elsif @ref.shape[:http_payload_member]
-              parsed = parse(@ref.shape[:http_payload_member], body.read)
-              target[@ref.shape[:http_payload]] = parsed if parsed && !parsed.empty?
-            elsif !@ref.shape.members.empty?
+            elsif @ref.target[:http_payload_member]
+              parsed = parse(@ref.target[:http_payload_member], body.read)
+              target[@ref.target[:http_payload]] = parsed if parsed && !parsed.empty?
+            elsif !@ref.target.members.empty?
               parse(@ref, body.read, target)
             end
           end
@@ -30,9 +30,9 @@ module Aws
           private
 
           def string_or_blob_payload?
-            return false unless @ref.shape[:http_payload_member]
+            return false unless @ref.target[:http_payload_member]
 
-            payload = @ref.shape[:http_payload_member].shape
+            payload = @ref.target[:http_payload_member].target
             payload.is_a?(StringShape) || payload.is_a?(BlobShape) || payload.is_a?(EnumShape)
           end
 
@@ -41,9 +41,9 @@ module Aws
           end
 
           def non_streaming_blob_payload?
-            return false unless @ref.shape[:http_payload_member]
+            return false unless @ref.target[:http_payload_member]
 
-            payload = @ref.shape[:http_payload_member].shape
+            payload = @ref.target[:http_payload_member].target
             payload.is_a?(BlobShape) && !payload.traits.key?('smithy.api#streaming')
           end
 

@@ -13,7 +13,7 @@ module Aws
 
           def apply(response)
             output = response.context.operation.output
-            response.data = output.shape.type.new
+            response.data = output.type.new
             apply_status_code(output, response)
             apply_headers(output, response)
             apply_body(output, response)

@@ -37,8 +37,8 @@ module Aws
           end
 
           def apply_content_type_header(context)
-            if (payload_member = context.operation.input.shape[:http_payload_member])
-              context.http_request.headers['Content-Type'] ||= payload_content_type(context, payload_member.shape)
+            if (payload_member = context.operation.input[:http_payload_member])
+              context.http_request.headers['Content-Type'] ||= payload_content_type(context, payload_member.target)
             elsif known_body?(context)
               context.http_request.headers['Content-Type'] ||= default_content_type(context)
             end

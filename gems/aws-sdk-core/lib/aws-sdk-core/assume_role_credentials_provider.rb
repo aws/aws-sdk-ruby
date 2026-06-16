@@ -53,7 +53,7 @@ module Aws
       private
 
       def build_parameters(options, client_params)
-        assume_role_options = Set.new(STS::Client.service.operation(:assume_role).input.shape.members.keys)
+        assume_role_options = Set.new(STS::Client.service.operation(:assume_role).input.members.keys)
         options.each_pair do |key, value|
           if assume_role_options.include?(key)
             @assume_role_params[key] = value

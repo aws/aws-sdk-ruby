@@ -32,7 +32,7 @@ module Aws
         private
 
         def apply_status_code(http_resp, operation, data)
-          operation.output.shape.members.each do |member_name, member_ref|
+          operation.output.members.each do |member_name, member_ref|
             code = member_ref.traits.dig('smithy.api#http', 'code')
             next unless code
 

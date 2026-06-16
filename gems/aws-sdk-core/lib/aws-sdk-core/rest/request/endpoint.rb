@@ -31,9 +31,9 @@ module Aws
 
           def param_value_for_placeholder(placeholder, params)
             name = param_name(placeholder)
-            member_ref = @ref.shape.member(name)
+            member_ref = @ref.target.member(name)
             value =
-              case member_ref.shape
+              case member_ref.target
               when TimestampShape
                 timestamp(member_ref, params[name]).to_s
               else
@@ -52,13 +52,13 @@ module Aws
           def param_name(placeholder)
             member_name = placeholder.gsub(/[{}+]/, '')
             # TODO: optimize
-            param_name, = @ref.shape.members.find { |_, shape| shape.location_name == member_name }
+            param_name, = @ref.target.members.find { |_, shape| shape.location_name == member_name }
             param_name
           end
 
           def timestamp(ref, value)
             trait = 'smithy.api#timestampFormat'
-            case ref.traits[trait] || ref.shape.traits[trait]
+            case ref.traits[trait] || ref.target.traits[trait]
             when 'epoch-seconds' then value.to_i
             when 'http-date' then value.utc.httpdate
             else
@@ -69,7 +69,7 @@ module Aws
 
           def apply_querystring_params(uri, params) # rubocop:disable Metrics/AbcSize
             # collect params that are supposed to be part of the query string
-            parts = @ref.shape.members.each_with_object([]) do |(member_name, member_ref), parts|
+            parts = @ref.target.members.each_with_object([]) do |(member_name, member_ref), parts|
               next unless member_ref.traits.key?('smithy.api#httpQuery') ||
                           member_ref.traits.key?('smithy.api#httpQueryParams')
               next if params[member_name].nil?

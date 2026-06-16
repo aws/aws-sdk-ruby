@@ -11,7 +11,7 @@ module Aws
           end
 
           def apply(http_resp, target)
-            @ref.shape.members.each do |member_name, member_ref|
+            @ref.target.members.each do |member_name, member_ref|
               status_code = member_ref.traits['smithy.api#httpResponseCode']
               next unless status_code
 

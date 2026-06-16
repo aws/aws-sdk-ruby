@@ -22,7 +22,7 @@ module Aws
       def self.from_event(event)
         return unless event.is_a?(Hash)
 
-        ref = Smithy::Schema::Shapes::ShapeRef.new(shape: Schema::GetRecordsOutput)
+        ref = Smithy::Schema::Shapes::MemberShape.new(target: Schema::GetRecordsOutput)
         translator = Plugins::SimpleAttributes::ValueTranslator.new(ref, :unmarshal)
         parser = Smithy::Json::Parser.new
         input = parser.parse(ref, Smithy::Json.dump(event))

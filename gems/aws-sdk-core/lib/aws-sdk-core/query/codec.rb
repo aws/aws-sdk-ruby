@@ -12,7 +12,7 @@ module Aws
           @options = options
         end
 
-        # @param [ShapeRef, Shape] shape
+        # @param [Shape] shape
         # @param [Object] data
         # @return [String, nil]
         def build(shape, data, target = nil)

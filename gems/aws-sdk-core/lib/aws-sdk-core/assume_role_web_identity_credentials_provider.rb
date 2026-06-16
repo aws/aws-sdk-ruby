@@ -66,7 +66,7 @@ module Aws
 
       def build_parameters(options, client_params)
         assume_role_with_web_identity_options = Set.new(
-          STS::Client.service.operation(:assume_role_with_web_identity).input.shape.members.keys
+          STS::Client.service.operation(:assume_role_with_web_identity).input.members.keys
         )
         options.each_pair do |key, value|
           if assume_role_with_web_identity_options.include?(key)

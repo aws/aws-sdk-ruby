@@ -25,7 +25,7 @@ module Aws
           code = error_code(context, body)
           klass, code, data = parse_error_data(context, body, code)
           [klass, code, data]
-        rescue Smithy::Xml::Parser::ParsingError
+        rescue Smithy::Xml::ParseError
           [http_status_error_code(context), Smithy::Schema::EmptyStructure.new]
         end
 
@@ -46,33 +46,33 @@ module Aws
 
         def parse_error_data(context, body, code) # rubocop:disable Metrics/AbcSize
           data = Smithy::Schema::EmptyStructure.new
-          context.operation.errors.each do |ref|
+          context.operation.errors.each do |shape|
             # query protocol may have custom error code defined by the trait
-            query_code = query_error_code(ref)
-            next unless code == query_code || code == ref.shape.name
+            query_code = query_error_code(shape)
+            next unless code == query_code || code == shape.target.name
 
-            data = error_data(context.config.xml_codec, ref, body)
-            return [ref.shape.name, query_code || code, data] if context.config.protocol != 'aws.protocols#restXml'
+            data = error_data(context.config.xml_codec, shape, body)
+            return [shape.target.name, query_code || code, data] if context.config.protocol != 'aws.protocols#restXml'
 
-            Rest::Response::Headers.new(ref).apply(context.http_response, data)
-            return [ref.shape.name, query_code || code, data]
+            Rest::Response::Headers.new(shape).apply(context.http_response, data)
+            return [shape.target.name, query_code || code, data]
           end
           [code, code, data]
         end
 
-        def query_error_code(ref)
-          traits = ref.shape.traits
+        def query_error_code(shape)
+          traits = shape.target.traits
           return unless traits.key?('aws.protocols#awsQueryError')
 
           traits['aws.protocols#awsQueryError']['code']
         end
 
-        def error_data(codec, ref, body)
+        def error_data(codec, shape, body)
           # errors may nested under <Errors><Error>structure_data</Error></Errors>
           # Or may be flat and under <Error>structure_data</Error>
           body = body.tr("\n", '')
           if (matches = body.match(%r{<Error>(.+?)</Error>}))
-            codec.parse(ref, "<#{ref.shape.name}>#{matches[1]}</#{ref.shape.name}>")
+            codec.parse(shape, "<#{shape.target.name}>#{matches[1]}</#{shape.target.name}>")
           else
             Smithy::Schema::EmptyStructure.new
           end

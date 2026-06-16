@@ -40,13 +40,13 @@ module Aws
 
         def parse_error_data(context, body, code) # rubocop:disable Metrics/AbcSize
           data = Smithy::Schema::EmptyStructure.new
-          context.operation.errors.each do |ref|
-            next unless ref.shape.name == code
+          context.operation.errors.each do |shape|
+            next unless shape.target.name == code
 
-            data = context.config.json_codec.parse(ref.shape, body, ref.shape.type.new)
+            data = context.config.json_codec.parse(shape.target, body, shape.target.type.new)
             return data if context.config.protocol != 'aws.protocols#restJson1'
 
-            Rest::Response::Headers.new(ref).apply(context.http_response, data)
+            Rest::Response::Headers.new(shape).apply(context.http_response, data)
             return data
           end
           data

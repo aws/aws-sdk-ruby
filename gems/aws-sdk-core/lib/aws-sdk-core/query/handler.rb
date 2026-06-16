@@ -45,28 +45,28 @@ module Aws
 
         def parse_body(context) # rubocop:disable Metrics/AbcSize
           if context.config.protocol == 'aws.protocols#ec2Query'
-            ref = context.operation.output
-            context.config.xml_codec.parse(ref, context.http_response.body.read)
+            shape = context.operation.output
+            context.config.xml_codec.parse(shape, context.http_response.body.read)
           else
-            ref = wrap(context.operation)
-            data = context.config.xml_codec.parse(ref, context.http_response.body.read)
+            shape = wrap(context.operation)
+            data = context.config.xml_codec.parse(shape, context.http_response.body.read)
             unwrap(context, data)
           end
         end
 
-        def wrap(operation) # rubocop:disable Metrics/AbcSize
-          result_ref = ShapeRef.new(shape: operation.output.shape, location_name: "#{operation.name}Result")
+        def wrap(operation)
+          member = MemberShape.new(target: operation.output, location_name: "#{operation.name}Result")
           result = StructureShape.new
-          result.add_member(:result, result_ref)
+          result.add_member(:result, member)
           result.type = ::Struct.new(:result, :response_metadata)
 
           response_metadata = StructureShape.new
           response_metadata.type = ::Struct.new(:request_id)
-          response_metadata.add_member(:request_id, ShapeRef.new(shape: StringShape.new, location_name: 'RequestId'))
-          response_metadata_ref = ShapeRef.new(shape: response_metadata, location_name: 'ResponseMetadata')
-
-          result.add_member(:response_metadata, response_metadata_ref)
-          ShapeRef.new(shape: result)
+          request_id_member = MemberShape.new(target: StringShape.new, location_name: 'RequestId')
+          response_metadata.add_member(:request_id, request_id_member)
+          response_metadata_member = MemberShape.new(target: response_metadata, location_name: 'ResponseMetadata')
+          result.add_member(:response_metadata, response_metadata_member)
+          result
         end
 
         def unwrap(context, data)

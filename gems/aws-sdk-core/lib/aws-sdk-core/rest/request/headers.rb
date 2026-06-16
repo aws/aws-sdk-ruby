@@ -13,7 +13,7 @@ module Aws
           end
 
           def apply(request_or_response, params)
-            @ref.shape.members.each do |member_name, member_ref|
+            @ref.target.members.each do |member_name, member_ref|
               value = params[member_name]
               next if value.nil?
 
@@ -31,9 +31,9 @@ module Aws
           private
 
           def apply_header(headers, header_name, member_ref, value)
-            case member_ref.shape
+            case member_ref.target
             when ListShape then list(headers, header_name, member_ref, value)
-            when StringShape then string(headers, header_name, member_ref.shape, value)
+            when StringShape then string(headers, header_name, member_ref.target, value)
             when TimestampShape then headers[header_name] = timestamp(member_ref, value)
             else default(headers, header_name, value)
             end
@@ -48,9 +48,9 @@ module Aws
           def list(headers, header_name, ref, values)
             return if values.nil?
 
-            member_ref = ref.shape.member
+            member_ref = ref.target.member
             values = values.collect do |value|
-              case member_ref.shape
+              case member_ref.target
               when TimestampShape
                 timestamp(member_ref, value).to_s
               else
@@ -70,7 +70,7 @@ module Aws
 
           def timestamp(ref, value)
             trait = 'smithy.api#timestampFormat'
-            case ref.traits[trait] || ref.shape.traits[trait]
+            case ref.traits[trait] || ref.target.traits[trait]
             when 'date-time' then value.utc.iso8601
             when 'epoch-seconds' then value.to_i
             else

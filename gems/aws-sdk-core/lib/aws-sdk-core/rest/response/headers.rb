@@ -13,7 +13,7 @@ module Aws
           end
 
           def apply(http_resp, target)
-            @ref.shape.members.each do |name, member|
+            @ref.target.members.each do |name, member|
               member_traits = member.traits
               if member_traits.key?('smithy.api#httpHeader')
                 header = member_traits['smithy.api#httpHeader']
@@ -44,7 +44,7 @@ module Aws
           end
 
           def value(ref, value)
-            shape = ref.shape
+            shape = ref.target
             case shape
             when BooleanShape then value == 'true'
             when FloatShape then float(value)
@@ -67,7 +67,7 @@ module Aws
           end
 
           def list(ref, value)
-            shape = ref.shape
+            shape = ref.target
             case shape
             when StringShape then HeaderListParser.parse_string_list(value)
             when TimestampShape then HeaderListParser.parse_timestamp_list(ref, shape, value)

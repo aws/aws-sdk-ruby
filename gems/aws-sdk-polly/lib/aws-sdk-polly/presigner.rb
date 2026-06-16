@@ -29,8 +29,8 @@ module Aws
         input = context.operation.input
         Smithy::Client::ParamValidator.new(input).validate!(params)
         parts = []
-        input.shape.members.each do |name, ref|
-          parts << [ref, params[name]] unless params[name].nil?
+        input.members.each do |name, shape|
+          parts << [shape, params[name]] unless params[name].nil?
         end
         query = Aws::Core::Rest::Request::QuerystringBuilder.new.build(parts)
 

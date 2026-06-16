@@ -162,7 +162,7 @@ module Aws
 
           def translate_error_data(context, error_data)
             shape = context.operation.errors.find do |e|
-              error_data.is_a?(e.shape.type)
+              error_data.is_a?(e.type)
             end
             if shape
               ValueTranslator.new(shape, :unmarshal).apply(error_data)
@@ -194,7 +194,7 @@ module Aws
           def list(ref, values)
             return values unless values.is_a?(Array)
 
-            member_ref = ref.shape.member
+            member_ref = ref.target.member
             values.inject([]) do |list, value|
               list << translate(member_ref, value)
             end
@@ -203,14 +203,14 @@ module Aws
           def map(ref, values)
             return values unless values.is_a?(Hash)
 
-            value_ref = ref.shape.value
+            value_ref = ref.target.value
             values.each.with_object({}) do |(key, value), hash|
               hash[key] = translate(value_ref, value)
             end
           end
 
           def structure(ref, values) # rubocop:disable Metrics/AbcSize
-            shape = ref.shape
+            shape = ref.target
             if values.is_a?(Struct)
               values.members.each.with_object(values.class.new) do |key, st|
                 st[key] = translate(shape.member(key), values[key])
@@ -225,7 +225,7 @@ module Aws
           end
 
           def translate(ref, value)
-            if ref.shape == Schema::AttributeValue
+            if ref.target == Schema::AttributeValue
               AttributeValue.new.send(@mode, value)
             else
               translate_complex(ref, value)
@@ -233,7 +233,7 @@ module Aws
           end
 
           def translate_complex(ref, value)
-            case ref.shape
+            case ref.target
 
             when ListShape then list(ref, value)
             when MapShape then map(ref, value)

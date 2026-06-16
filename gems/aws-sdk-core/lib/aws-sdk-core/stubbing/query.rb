@@ -29,10 +29,13 @@ module Aws
         private
 
         def build_body(config, operation, data)
-          operation.output.location_name = "#{operation.name}Result"
+          xml = []
+          config.xml_codec.build(operation.output, data, xml)
+          xml.shift
+          xml.pop
           <<~XML.strip
             <#{operation.name}Response xmlns="#{xmlns(config.service)}">
-              #{config.xml_codec.build(operation.output, data)}
+              <#{operation.name}Result>#{xml.join}</#{operation.name}Result>
               <ResponseMetadata>
                 <RequestId>stubbed-request-id</RequestId>
               </ResponseMetadata>
