@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - IoT Events Data has been removed from the SDK because it has been discontinued.
+
 1.76.0 (2026-06-01)
 ------------------
 

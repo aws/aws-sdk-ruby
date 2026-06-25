@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - SimSpaceWeaver has been removed from the SDK because it has been discontinued.
+
 1.48.0 (2026-05-22)
 ------------------
 
