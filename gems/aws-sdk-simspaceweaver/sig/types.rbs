@@ -1,0 +1,320 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SimSpaceWeaver
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsLogGroup
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotInput
+      attr_accessor destination: Types::S3Destination
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotOutput < Aws::EmptyStructure
+    end
+
+    class DeleteAppInput
+      attr_accessor app: ::String
+      attr_accessor domain: ::String
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppOutput < Aws::EmptyStructure
+    end
+
+    class DeleteSimulationInput
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSimulationOutput < Aws::EmptyStructure
+    end
+
+    class DescribeAppInput
+      attr_accessor app: ::String
+      attr_accessor domain: ::String
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppOutput
+      attr_accessor description: ::String
+      attr_accessor domain: ::String
+      attr_accessor endpoint_info: Types::SimulationAppEndpointInfo
+      attr_accessor launch_overrides: Types::LaunchOverrides
+      attr_accessor name: ::String
+      attr_accessor simulation: ::String
+      attr_accessor status: ("STARTING" | "STARTED" | "STOPPING" | "STOPPED" | "ERROR" | "UNKNOWN")
+      attr_accessor target_status: ("UNKNOWN" | "STARTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class DescribeSimulationInput
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSimulationOutput
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor live_simulation_state: Types::LiveSimulationState
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor maximum_duration: ::String
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor schema_error: ::String
+      attr_accessor schema_s3_location: Types::S3Location
+      attr_accessor snapshot_s3_location: Types::S3Location
+      attr_accessor start_error: ::String
+      attr_accessor status: ("UNKNOWN" | "STARTING" | "STARTED" | "STOPPING" | "STOPPED" | "FAILED" | "DELETING" | "DELETED" | "SNAPSHOT_IN_PROGRESS")
+      attr_accessor target_status: ("UNKNOWN" | "STARTED" | "STOPPED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class Domain
+      attr_accessor lifecycle: ("Unknown" | "PerWorker" | "BySpatialSubdivision" | "ByRequest")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchOverrides
+      attr_accessor launch_commands: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListAppsInput
+      attr_accessor domain: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppsOutput
+      attr_accessor apps: ::Array[Types::SimulationAppMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSimulationsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSimulationsOutput
+      attr_accessor next_token: ::String
+      attr_accessor simulations: ::Array[Types::SimulationMetadata]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LiveSimulationState
+      attr_accessor clocks: ::Array[Types::SimulationClock]
+      attr_accessor domains: ::Array[Types::Domain]
+      SENSITIVE: []
+    end
+
+    class LogDestination
+      attr_accessor cloud_watch_logs_log_group: Types::CloudWatchLogsLogGroup
+      SENSITIVE: []
+    end
+
+    class LoggingConfiguration
+      attr_accessor destinations: ::Array[Types::LogDestination]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Destination
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SimulationAppEndpointInfo
+      attr_accessor address: ::String
+      attr_accessor ingress_port_mappings: ::Array[Types::SimulationAppPortMapping]
+      SENSITIVE: []
+    end
+
+    class SimulationAppMetadata
+      attr_accessor domain: ::String
+      attr_accessor name: ::String
+      attr_accessor simulation: ::String
+      attr_accessor status: ("STARTING" | "STARTED" | "STOPPING" | "STOPPED" | "ERROR" | "UNKNOWN")
+      attr_accessor target_status: ("UNKNOWN" | "STARTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class SimulationAppPortMapping
+      attr_accessor actual: ::Integer
+      attr_accessor declared: ::Integer
+      SENSITIVE: []
+    end
+
+    class SimulationClock
+      attr_accessor status: ("UNKNOWN" | "STARTING" | "STARTED" | "STOPPING" | "STOPPED")
+      attr_accessor target_status: ("UNKNOWN" | "STARTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class SimulationMetadata
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("UNKNOWN" | "STARTING" | "STARTED" | "STOPPING" | "STOPPED" | "FAILED" | "DELETING" | "DELETED" | "SNAPSHOT_IN_PROGRESS")
+      attr_accessor target_status: ("UNKNOWN" | "STARTED" | "STOPPED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class StartAppInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain: ::String
+      attr_accessor launch_overrides: Types::LaunchOverrides
+      attr_accessor name: ::String
+      attr_accessor simulation: ::String
+      SENSITIVE: [:client_token]
+    end
+
+    class StartAppOutput
+      attr_accessor domain: ::String
+      attr_accessor name: ::String
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class StartClockInput
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class StartClockOutput < Aws::EmptyStructure
+    end
+
+    class StartSimulationInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor maximum_duration: ::String
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor schema_s3_location: Types::S3Location
+      attr_accessor snapshot_s3_location: Types::S3Location
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:client_token]
+    end
+
+    class StartSimulationOutput
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopAppInput
+      attr_accessor app: ::String
+      attr_accessor domain: ::String
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class StopAppOutput < Aws::EmptyStructure
+    end
+
+    class StopClockInput
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class StopClockOutput < Aws::EmptyStructure
+    end
+
+    class StopSimulationInput
+      attr_accessor simulation: ::String
+      SENSITIVE: []
+    end
+
+    class StopSimulationOutput < Aws::EmptyStructure
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

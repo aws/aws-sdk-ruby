@@ -1,0 +1,413 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTEventsData
+  module Types
+
+    class AcknowledgeActionConfiguration
+      attr_accessor note: ::String
+      SENSITIVE: []
+    end
+
+    class AcknowledgeAlarmActionRequest
+      attr_accessor request_id: ::String
+      attr_accessor alarm_model_name: ::String
+      attr_accessor key_value: ::String
+      attr_accessor note: ::String
+      SENSITIVE: []
+    end
+
+    class Alarm
+      attr_accessor alarm_model_name: ::String
+      attr_accessor alarm_model_version: ::String
+      attr_accessor key_value: ::String
+      attr_accessor alarm_state: Types::AlarmState
+      attr_accessor severity: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class AlarmState
+      attr_accessor state_name: ("DISABLED" | "NORMAL" | "ACTIVE" | "ACKNOWLEDGED" | "SNOOZE_DISABLED" | "LATCHED")
+      attr_accessor rule_evaluation: Types::RuleEvaluation
+      attr_accessor customer_action: Types::CustomerAction
+      attr_accessor system_event: Types::SystemEvent
+      SENSITIVE: []
+    end
+
+    class AlarmSummary
+      attr_accessor alarm_model_name: ::String
+      attr_accessor alarm_model_version: ::String
+      attr_accessor key_value: ::String
+      attr_accessor state_name: ("DISABLED" | "NORMAL" | "ACTIVE" | "ACKNOWLEDGED" | "SNOOZE_DISABLED" | "LATCHED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchAcknowledgeAlarmRequest
+      attr_accessor acknowledge_action_requests: ::Array[Types::AcknowledgeAlarmActionRequest]
+      SENSITIVE: []
+    end
+
+    class BatchAcknowledgeAlarmResponse
+      attr_accessor error_entries: ::Array[Types::BatchAlarmActionErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BatchAlarmActionErrorEntry
+      attr_accessor request_id: ::String
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "InternalFailureException" | "ServiceUnavailableException" | "ThrottlingException")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDetectorErrorEntry
+      attr_accessor message_id: ::String
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "InternalFailureException" | "ServiceUnavailableException" | "ThrottlingException")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDetectorRequest
+      attr_accessor detectors: ::Array[Types::DeleteDetectorRequest]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDetectorResponse
+      attr_accessor batch_delete_detector_error_entries: ::Array[Types::BatchDeleteDetectorErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BatchDisableAlarmRequest
+      attr_accessor disable_action_requests: ::Array[Types::DisableAlarmActionRequest]
+      SENSITIVE: []
+    end
+
+    class BatchDisableAlarmResponse
+      attr_accessor error_entries: ::Array[Types::BatchAlarmActionErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BatchEnableAlarmRequest
+      attr_accessor enable_action_requests: ::Array[Types::EnableAlarmActionRequest]
+      SENSITIVE: []
+    end
+
+    class BatchEnableAlarmResponse
+      attr_accessor error_entries: ::Array[Types::BatchAlarmActionErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BatchPutMessageErrorEntry
+      attr_accessor message_id: ::String
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "InternalFailureException" | "ServiceUnavailableException" | "ThrottlingException")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchPutMessageRequest
+      attr_accessor messages: ::Array[Types::Message]
+      SENSITIVE: []
+    end
+
+    class BatchPutMessageResponse
+      attr_accessor batch_put_message_error_entries: ::Array[Types::BatchPutMessageErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BatchResetAlarmRequest
+      attr_accessor reset_action_requests: ::Array[Types::ResetAlarmActionRequest]
+      SENSITIVE: []
+    end
+
+    class BatchResetAlarmResponse
+      attr_accessor error_entries: ::Array[Types::BatchAlarmActionErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BatchSnoozeAlarmRequest
+      attr_accessor snooze_action_requests: ::Array[Types::SnoozeAlarmActionRequest]
+      SENSITIVE: []
+    end
+
+    class BatchSnoozeAlarmResponse
+      attr_accessor error_entries: ::Array[Types::BatchAlarmActionErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateDetectorErrorEntry
+      attr_accessor message_id: ::String
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "InternalFailureException" | "ServiceUnavailableException" | "ThrottlingException")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateDetectorRequest
+      attr_accessor detectors: ::Array[Types::UpdateDetectorRequest]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateDetectorResponse
+      attr_accessor batch_update_detector_error_entries: ::Array[Types::BatchUpdateDetectorErrorEntry]
+      SENSITIVE: []
+    end
+
+    class CustomerAction
+      attr_accessor action_name: ("SNOOZE" | "ENABLE" | "DISABLE" | "ACKNOWLEDGE" | "RESET")
+      attr_accessor snooze_action_configuration: Types::SnoozeActionConfiguration
+      attr_accessor enable_action_configuration: Types::EnableActionConfiguration
+      attr_accessor disable_action_configuration: Types::DisableActionConfiguration
+      attr_accessor acknowledge_action_configuration: Types::AcknowledgeActionConfiguration
+      attr_accessor reset_action_configuration: Types::ResetActionConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteDetectorRequest
+      attr_accessor message_id: ::String
+      attr_accessor detector_model_name: ::String
+      attr_accessor key_value: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAlarmRequest
+      attr_accessor alarm_model_name: ::String
+      attr_accessor key_value: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAlarmResponse
+      attr_accessor alarm: Types::Alarm
+      SENSITIVE: []
+    end
+
+    class DescribeDetectorRequest
+      attr_accessor detector_model_name: ::String
+      attr_accessor key_value: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDetectorResponse
+      attr_accessor detector: Types::Detector
+      SENSITIVE: []
+    end
+
+    class Detector
+      attr_accessor detector_model_name: ::String
+      attr_accessor key_value: ::String
+      attr_accessor detector_model_version: ::String
+      attr_accessor state: Types::DetectorState
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DetectorState
+      attr_accessor state_name: ::String
+      attr_accessor variables: ::Array[Types::Variable]
+      attr_accessor timers: ::Array[Types::Timer]
+      SENSITIVE: []
+    end
+
+    class DetectorStateDefinition
+      attr_accessor state_name: ::String
+      attr_accessor variables: ::Array[Types::VariableDefinition]
+      attr_accessor timers: ::Array[Types::TimerDefinition]
+      SENSITIVE: []
+    end
+
+    class DetectorStateSummary
+      attr_accessor state_name: ::String
+      SENSITIVE: []
+    end
+
+    class DetectorSummary
+      attr_accessor detector_model_name: ::String
+      attr_accessor key_value: ::String
+      attr_accessor detector_model_version: ::String
+      attr_accessor state: Types::DetectorStateSummary
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DisableActionConfiguration
+      attr_accessor note: ::String
+      SENSITIVE: []
+    end
+
+    class DisableAlarmActionRequest
+      attr_accessor request_id: ::String
+      attr_accessor alarm_model_name: ::String
+      attr_accessor key_value: ::String
+      attr_accessor note: ::String
+      SENSITIVE: []
+    end
+
+    class EnableActionConfiguration
+      attr_accessor note: ::String
+      SENSITIVE: []
+    end
+
+    class EnableAlarmActionRequest
+      attr_accessor request_id: ::String
+      attr_accessor alarm_model_name: ::String
+      attr_accessor key_value: ::String
+      attr_accessor note: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlarmsRequest
+      attr_accessor alarm_model_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAlarmsResponse
+      attr_accessor alarm_summaries: ::Array[Types::AlarmSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDetectorsRequest
+      attr_accessor detector_model_name: ::String
+      attr_accessor state_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDetectorsResponse
+      attr_accessor detector_summaries: ::Array[Types::DetectorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor message_id: ::String
+      attr_accessor input_name: ::String
+      attr_accessor payload: ::String
+      attr_accessor timestamp: Types::TimestampValue
+      SENSITIVE: []
+    end
+
+    class ResetActionConfiguration
+      attr_accessor note: ::String
+      SENSITIVE: []
+    end
+
+    class ResetAlarmActionRequest
+      attr_accessor request_id: ::String
+      attr_accessor alarm_model_name: ::String
+      attr_accessor key_value: ::String
+      attr_accessor note: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RuleEvaluation
+      attr_accessor simple_rule_evaluation: Types::SimpleRuleEvaluation
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SimpleRuleEvaluation
+      attr_accessor input_property_value: ::String
+      attr_accessor operator: ("GREATER" | "GREATER_OR_EQUAL" | "LESS" | "LESS_OR_EQUAL" | "EQUAL" | "NOT_EQUAL")
+      attr_accessor threshold_value: ::String
+      SENSITIVE: []
+    end
+
+    class SnoozeActionConfiguration
+      attr_accessor snooze_duration: ::Integer
+      attr_accessor note: ::String
+      SENSITIVE: []
+    end
+
+    class SnoozeAlarmActionRequest
+      attr_accessor request_id: ::String
+      attr_accessor alarm_model_name: ::String
+      attr_accessor key_value: ::String
+      attr_accessor note: ::String
+      attr_accessor snooze_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class StateChangeConfiguration
+      attr_accessor trigger_type: ("SNOOZE_TIMEOUT")
+      SENSITIVE: []
+    end
+
+    class SystemEvent
+      attr_accessor event_type: ("STATE_CHANGE")
+      attr_accessor state_change_configuration: Types::StateChangeConfiguration
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Timer
+      attr_accessor name: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class TimerDefinition
+      attr_accessor name: ::String
+      attr_accessor seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimestampValue
+      attr_accessor time_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateDetectorRequest
+      attr_accessor message_id: ::String
+      attr_accessor detector_model_name: ::String
+      attr_accessor key_value: ::String
+      attr_accessor state: Types::DetectorStateDefinition
+      SENSITIVE: []
+    end
+
+    class Variable
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class VariableDefinition
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,294 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTEvents
+    module Params
+      type alarm_notification = {
+      notification_actions: Array[
+        Params::notification_action
+      ]?
+    }
+
+      type notification_target_actions = {
+      lambda_action: {
+        function_arn: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?
+    }
+
+      type notification_action = {
+      action: Params::notification_target_actions,
+      sms_configurations: Array[
+        Params::sms_configuration
+      ]?,
+      email_configurations: Array[
+        Params::email_configuration
+      ]?
+    }
+
+      type sms_configuration = {
+      sender_id: ::String?,
+      additional_message: ::String?,
+      recipients: Array[
+        {
+          sso_identity: {
+            identity_store_id: ::String,
+            user_id: ::String?
+          }?
+        }
+      ]
+    }
+
+      type email_recipients = {
+      to: Array[
+        {
+          sso_identity: {
+            identity_store_id: ::String,
+            user_id: ::String?
+          }?
+        }
+      ]?
+    }
+
+      type email_configuration = {
+      from: ::String,
+      content: {
+        subject: ::String?,
+        additional_message: ::String?
+      }?,
+      recipients: Params::email_recipients
+    }
+
+      type alarm_event_actions = {
+      alarm_actions: Array[
+        Params::alarm_action
+      ]?
+    }
+
+      type sqs_action = {
+      queue_url: ::String,
+      use_base_64: bool?,
+      payload: {
+        content_expression: ::String,
+        type: ("STRING" | "JSON")
+      }?
+    }
+
+      type firehose_action = {
+      delivery_stream_name: ::String,
+      separator: ::String?,
+      payload: {
+        content_expression: ::String,
+        type: ("STRING" | "JSON")
+      }?
+    }
+
+      type dynamo_db_action = {
+      hash_key_type: ::String?,
+      hash_key_field: ::String,
+      hash_key_value: ::String,
+      range_key_type: ::String?,
+      range_key_field: ::String?,
+      range_key_value: ::String?,
+      operation: ::String?,
+      payload_field: ::String?,
+      table_name: ::String,
+      payload: {
+        content_expression: ::String,
+        type: ("STRING" | "JSON")
+      }?
+    }
+
+      type asset_property_value = {
+      value: {
+        string_value: ::String?,
+        integer_value: ::String?,
+        double_value: ::String?,
+        boolean_value: ::String?
+      }?,
+      timestamp: {
+        time_in_seconds: ::String,
+        offset_in_nanos: ::String?
+      }?,
+      quality: ::String?
+    }
+
+      type iot_site_wise_action = {
+      entry_id: ::String?,
+      asset_id: ::String?,
+      property_id: ::String?,
+      property_alias: ::String?,
+      property_value: Params::asset_property_value?
+    }
+
+      type alarm_action = {
+      sns: {
+        target_arn: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?,
+      iot_topic_publish: {
+        mqtt_topic: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?,
+      lambda: {
+        function_arn: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?,
+      iot_events: {
+        input_name: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?,
+      sqs: Params::sqs_action?,
+      firehose: Params::firehose_action?,
+      dynamo_db: Params::dynamo_db_action?,
+      dynamo_d_bv_2: {
+        table_name: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?,
+      iot_site_wise: Params::iot_site_wise_action?
+    }
+
+      type alarm_capabilities = {
+      initialization_configuration: {
+        disabled_on_initialization: bool
+      }?,
+      acknowledge_flow: {
+        enabled: bool
+      }?
+    }
+
+      type detector_model_definition = {
+      states: Array[
+        Params::state
+      ],
+      initial_state_name: ::String
+    }
+
+      type on_input_lifecycle = {
+      events: Array[
+        Params::event
+      ]?,
+      transition_events: Array[
+        Params::transition_event
+      ]?
+    }
+
+      type on_enter_lifecycle = {
+      events: Array[
+        Params::event
+      ]?
+    }
+
+      type on_exit_lifecycle = {
+      events: Array[
+        Params::event
+      ]?
+    }
+
+      type state = {
+      state_name: ::String,
+      on_input: Params::on_input_lifecycle?,
+      on_enter: Params::on_enter_lifecycle?,
+      on_exit: Params::on_exit_lifecycle?
+    }
+
+      type event = {
+      event_name: ::String,
+      condition: ::String?,
+      actions: Array[
+        Params::action
+      ]?
+    }
+
+      type action = {
+      set_variable: {
+        variable_name: ::String,
+        value: ::String
+      }?,
+      sns: {
+        target_arn: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?,
+      iot_topic_publish: {
+        mqtt_topic: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?,
+      set_timer: {
+        timer_name: ::String,
+        seconds: ::Integer?,
+        duration_expression: ::String?
+      }?,
+      clear_timer: {
+        timer_name: ::String
+      }?,
+      reset_timer: {
+        timer_name: ::String
+      }?,
+      lambda: {
+        function_arn: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?,
+      iot_events: {
+        input_name: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?,
+      sqs: Params::sqs_action?,
+      firehose: Params::firehose_action?,
+      dynamo_db: Params::dynamo_db_action?,
+      dynamo_d_bv_2: {
+        table_name: ::String,
+        payload: {
+          content_expression: ::String,
+          type: ("STRING" | "JSON")
+        }?
+      }?,
+      iot_site_wise: Params::iot_site_wise_action?
+    }
+
+      type transition_event = {
+      event_name: ::String,
+      condition: ::String,
+      actions: Array[
+        Params::action
+      ]?,
+      next_state: ::String
+    }
+
+    end
+  end
+end

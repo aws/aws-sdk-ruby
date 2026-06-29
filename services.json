@@ -635,6 +635,14 @@
   "IoTDeviceAdvisor": {
     "models": "iotdeviceadvisor/2020-09-18"
   },
+  "IoTEvents": {
+    "models": "iotevents/2018-07-27",
+    "deprecated": true
+  },
+  "IoTEventsData": {
+    "models": "iotevents-data/2018-10-23",
+    "deprecated": true
+  },
   "IoTFleetWise": {
     "models": "iotfleetwise/2021-06-17"
   },
@@ -931,6 +939,10 @@
   },
   "PI": {
     "models": "pi/2018-02-27"
+  },
+  "Panorama": {
+    "models": "panorama/2019-07-24",
+    "deprecated": true
   },
   "PartnerCentralAccount": {
     "models": "partnercentral-account/2025-04-04"
@@ -1258,6 +1270,10 @@
   "Signin": {
     "models": "signin/2023-01-01",
     "gemName": "aws-sdk-core"
+  },
+  "SimSpaceWeaver": {
+    "models": "simspaceweaver/2022-10-28",
+    "deprecated": true
   },
   "SimpleDB": {
     "models": "sdb/2009-04-15",
