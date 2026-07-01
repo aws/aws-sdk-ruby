@@ -9,17 +9,19 @@ gem 'base64'
 gem 'bigdecimal'
 gem 'csv'
 gem 'http-2'
+gem 'jmespath'
 if defined?(JRUBY_VERSION)
   gem 'irb', '< 1.17.0'
+  # rdoc >= 8.0.0 depends on rbs, which fails to build its native ext on JRuby
+  # https://github.com/ruby/rbs/issues/3018
+  gem 'rdoc', '< 8.0.0'
+  gem 'jruby-openssl'
 else
   gem 'irb'
+  gem 'rdoc'
 end
-gem 'jmespath'
-gem 'jruby-openssl' if defined?(JRUBY_VERSION)
-gem 'rdoc'
 
 # protocol parsers
-
 gem 'json'
 gem 'nokogiri'
 gem 'oga'
