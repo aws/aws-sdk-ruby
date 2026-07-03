@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix stream uploader to not read ahead of thread pool capacity, to prevent unbounded usage of memory or disk.
+
 1.226.0 (2026-06-16)
 ------------------
 
