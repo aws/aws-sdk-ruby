@@ -12,7 +12,7 @@ module Aws
       def initialize(options = {})
         @max_threads = options[:max_threads] || DEFAULT_MAX_THREADS
         @state = RUNNING
-        @queue = Queue.new
+        @queue = SizedQueue.new(@max_threads)
         @pool = []
         @mutex = Mutex.new
       end
@@ -25,9 +25,9 @@ module Aws
         @mutex.synchronize do
           raise 'Executor has been shutdown and is no longer accepting tasks' unless @state == RUNNING
 
-          @queue << [args, block]
           ensure_worker_available
         end
+        @queue << [args, block]
         true
       end
 

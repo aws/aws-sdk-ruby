@@ -113,18 +113,21 @@ module Aws
       def read_to_part_body(read_pipe)
         return if read_pipe.closed?
 
-        temp_io = @tempfile ? Tempfile.new('aws-sdk-s3-upload_stream') : StringIO.new(String.new)
-        temp_io.binmode
-        bytes_copied = IO.copy_stream(read_pipe, temp_io, @part_size)
-        temp_io.rewind
-        if bytes_copied.zero?
-          if temp_io.is_a?(Tempfile)
+        if @tempfile
+          temp_io = Tempfile.new('aws-sdk-s3-upload_stream')
+          temp_io.binmode
+          bytes_copied = IO.copy_stream(read_pipe, temp_io, @part_size)
+          temp_io.rewind
+          if bytes_copied.zero?
             temp_io.close
             temp_io.unlink
+            nil
+          else
+            temp_io
           end
-          nil
         else
-          temp_io
+          data = read_pipe.read(@part_size)
+          data.nil? || data.empty? ? nil : StringIO.new(data)
         end
       end
 
