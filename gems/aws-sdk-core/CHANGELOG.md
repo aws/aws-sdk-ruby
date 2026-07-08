@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Serialize `BigDecimal` values as JSON numbers in document types.
+
 3.252.0 (2026-06-10)
 ------------------
 

@@ -56,7 +56,23 @@ module Aws
         when TimestampShape then timestamp(ref, value)
         when BlobShape      then encode(value)
         when FloatShape     then Util.serialize_number(value)
+        when DocumentShape  then format_document(value)
         else value
+        end
+      end
+
+      def format_document(value)
+        case value
+        when Hash
+          value.transform_values { |v| format_document(v) }
+        when Array
+          value.map { |v| format_document(v) }
+        when BigDecimal
+          value.to_f
+        when Float
+          Util.serialize_number(value)
+        else
+          value
         end
       end
 
