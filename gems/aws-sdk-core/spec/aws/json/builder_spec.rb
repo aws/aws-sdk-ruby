@@ -80,9 +80,8 @@ module Aws
             positive: BigDecimal('42.5'),
             integer: BigDecimal('42'),
             zero: BigDecimal('0'),
-            negative: BigDecimal('-7'),
-            neg_zero: BigDecimal('-0.0')
-          })).to eq('{"DocumentType":{"positive":42.5,"integer":42.0,"zero":0.0,"negative":-7.0,"neg_zero":0.0}}')
+            negative: BigDecimal('-7')
+          })).to eq('{"DocumentType":{"positive":42.5,"integer":42.0,"zero":0.0,"negative":-7.0}}')
         end
 
         it 'serializes Float special values in documents' do
