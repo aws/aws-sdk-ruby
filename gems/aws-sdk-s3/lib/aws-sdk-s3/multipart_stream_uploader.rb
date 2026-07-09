@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'thread'
 require 'set'
 require 'tempfile'
 require 'stringio'
@@ -9,7 +8,6 @@ module Aws
   module S3
     # @api private
     class MultipartStreamUploader
-
       DEFAULT_PART_SIZE = 5 * 1024 * 1024 # 5MB
       CREATE_OPTIONS = Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
       UPLOAD_PART_OPTIONS = Set.new(Client.api.operation(:upload_part).input.shape.member_names)
@@ -133,10 +131,22 @@ module Aws
         queued_parts = 0
         part_number = 0
         mutex = Mutex.new
+        concurent_readed_parts = 0 # slots available for reading
+
         loop do
           part_body, current_part_num = mutex.synchronize do
-            [read_to_part_body(read_pipe), part_number += 1]
+            # Prevent reading ahead of the executor if no slots available
+            if concurent_readed_parts >= @executor.max_threads
+              [:skip, -1]
+            else
+              concurent_readed_parts += 1
+              [read_to_part_body(read_pipe), part_number += 1]
+            end
           end
+
+          next if part_body == :skip # Wait for the executor free a read slot
+
+          # No more parts to read or we need at least one part for empty content
           break unless part_body || current_part_num == 1
 
           queued_parts += 1
@@ -145,8 +155,10 @@ module Aws
             resp = @client.upload_part(part)
             completed_part = create_completed_part(resp, part)
             completed.push(completed_part)
+            mutex.synchronize { concurent_readed_parts -= 1 } # free a read slot
           rescue StandardError => e
             mutex.synchronize do
+              concurent_readed_parts -= 1 # free a read slot
               errors.push(e)
               read_pipe.close_read unless read_pipe.closed?
             end

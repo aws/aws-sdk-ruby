@@ -9,6 +9,8 @@ module Aws
       SHUTTING_DOWN = :shutting_down
       SHUTDOWN = :shutdown
 
+      attr_reader :max_threads
+
       def initialize(options = {})
         @max_threads = options[:max_threads] || DEFAULT_MAX_THREADS
         @state = RUNNING

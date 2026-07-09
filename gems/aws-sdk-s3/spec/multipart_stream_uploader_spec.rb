@@ -82,6 +82,68 @@ module Aws
           end
         end
 
+        let(:blocking_executor) do
+          Class.new(DefaultExecutor) do
+            attr_accessor :queue, :mutex, :paused
+
+            def initialize(options = {})
+              @paused = true
+              options[:max_threads] = 1
+              super
+            end
+
+            def post(*args, &block)
+              @mutex.synchronize do
+                if @state == :running
+                  new_block = lambda do
+                    block.call(*args)
+                    # Block until external shutdown
+                    loop do
+                      is_paused = @mutex.synchronize { @paused }
+                      sleep 0.01
+                      break unless is_paused
+                    end
+                  end
+                  @queue << [nil, new_block]
+                  ensure_worker_available
+                end
+              end
+              true
+            end
+          end.new
+        end
+
+        context 'with a faster writer than the executor can process' do
+          let(:subject) { MultipartStreamUploader.new(client: client, executor: blocking_executor) }
+
+          it 'only read when an executor is ready' do
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
+            client.stub_responses(:upload_part, etag: 'etag')
+            client.stub_responses(:complete_multipart_upload)
+
+            thread = Thread.new do
+              subject.upload(params) do |write_stream|
+                Thread.current[:io] = write_stream
+                write_stream << seventeen_mb
+              end
+            end
+
+            sleep 0.1 # Wait for multiple reads to occur
+
+            executor_queue_size = blocking_executor.mutex.synchronize do
+              queue_size = blocking_executor.queue.size # get the queue when executor is blocked
+              blocking_executor.paused = false # unblock the executor
+              queue_size
+            end
+            thread.join
+
+            # If the executor queue is not empty
+            # /!\ The IO pipe has been read ahead of the executor
+            # /!\ This will result in a memory leak in the Executor queue /!\
+            expect(executor_queue_size).to eq(0)
+          end
+        end
+
         it 'passes stringios with correct contents to upload_part' do
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
