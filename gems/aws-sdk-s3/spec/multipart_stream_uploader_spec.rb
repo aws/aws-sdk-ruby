@@ -22,83 +22,6 @@ module Aws
         end
       end
 
-      describe '#upload_stream memory bounds', :jruby_flaky do
-        it 'bounds queued parts to the thread count when source outpaces upload' do
-          num_threads = 4
-          part_size = 1024 * 1024 # 1 MB parts for faster test
-          total_parts = 20
-          total_data = part_size * total_parts
-
-          client.stub_responses(:create_multipart_upload, upload_id: 'id')
-          client.stub_responses(:complete_multipart_upload)
-
-          mutex = Mutex.new
-          queue_depth_samples = []
-
-          executor = DefaultExecutor.new(max_threads: num_threads)
-
-          # Simulate slow uploads so parts queue up faster than they drain
-          allow(client).to receive(:upload_part) do |_part|
-            mutex.synchronize do
-              queue_depth_samples << executor.instance_variable_get(:@queue).size
-            end
-            sleep(0.05)
-            double(:upload_part, etag: 'etag')
-          end
-
-          uploader = MultipartStreamUploader.new(
-            client: client,
-            executor: executor,
-            part_size: part_size
-          )
-
-          uploader.upload(params) do |write_stream|
-            write_stream << ('a' * total_data)
-          end
-
-          peak_queue_depth = queue_depth_samples.max || 0
-
-          # With backpressure (SizedQueue), the reader blocks when the
-          # queue is full, so depth never exceeds the thread count.
-          expect(peak_queue_depth).to be <= num_threads,
-            "Expected peak queue depth (#{peak_queue_depth}) to be at most " \
-            "num_threads (#{num_threads}), but the queue grew unbounded."
-        end
-
-        it 'completes all parts under backpressure' do
-          num_threads = 2
-          part_size = 1024 * 1024 # 1 MB
-          total_parts = 10
-          total_data = part_size * total_parts
-
-          client.stub_responses(:create_multipart_upload, upload_id: 'id')
-          client.stub_responses(:complete_multipart_upload)
-
-          mutex = Mutex.new
-          uploaded_parts = []
-
-          executor = DefaultExecutor.new(max_threads: num_threads)
-
-          allow(client).to receive(:upload_part) do |part|
-            sleep(0.05) # slow upload
-            mutex.synchronize { uploaded_parts << part[:part_number] }
-            double(:upload_part, etag: 'etag')
-          end
-
-          uploader = MultipartStreamUploader.new(
-            client: client,
-            executor: executor,
-            part_size: part_size
-          )
-
-          uploader.upload(params) do |write_stream|
-            write_stream << ('a' * total_data)
-          end
-
-          expect(uploaded_parts.sort).to eq((1..total_parts).to_a)
-        end
-      end
-
       describe '#upload_stream', :jruby_flaky do
         it 'can upload empty stream' do
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
@@ -228,6 +151,51 @@ module Aws
           expect do
             subject.upload(params) { |write_stream| write_stream << seventeen_mb }
           end.to raise_error(S3::MultipartUploadError, /failed to abort multipart upload: network-error/)
+        end
+
+        context 'when source outpaces upload' do
+          let(:num_threads) { 4 }
+          let(:executor) { DefaultExecutor.new(max_threads: num_threads) }
+          let(:subject) { MultipartStreamUploader.new(client: client, executor: executor, part_size: 1024 * 1024) }
+
+          it 'bounds concurrent in-flight parts to the thread count' do
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
+            client.stub_responses(:complete_multipart_upload)
+            mutex = Mutex.new
+            in_flight = 0
+            peak_in_flight = 0
+            allow(client).to receive(:upload_part) do |_part|
+              mutex.synchronize do
+                in_flight += 1
+                peak_in_flight = in_flight if in_flight > peak_in_flight
+              end
+              sleep(0.05)
+              mutex.synchronize { in_flight -= 1 }
+            end.and_return(double(:upload_part, etag: 'etag'))
+
+            subject.upload(params) do |write_stream|
+              20.times { write_stream << one_mb }
+            end
+
+            expect(peak_in_flight).to be <= num_threads
+          end
+
+          it 'completes all parts under backpressure' do
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
+            client.stub_responses(:complete_multipart_upload)
+            mutex = Mutex.new
+            uploaded_parts = []
+            allow(client).to receive(:upload_part) do |part|
+              sleep(0.05)
+              mutex.synchronize { uploaded_parts << part[:part_number] }
+            end.and_return(double(:upload_part, etag: 'etag'))
+
+            subject.upload(params) do |write_stream|
+              10.times { write_stream << one_mb }
+            end
+
+            expect(uploaded_parts.sort).to eq((1..10).to_a)
+          end
         end
 
         context 'when tempfile is true' do
