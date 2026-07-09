@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'base64'
+require 'bigdecimal'
 
 module Aws
   module Json
@@ -56,21 +57,19 @@ module Aws
         when TimestampShape then timestamp(ref, value)
         when BlobShape      then encode(value)
         when FloatShape     then Util.serialize_number(value)
-        when DocumentShape  then format_document(value)
+        when DocumentShape  then document(value)
         else value
         end
       end
 
-      def format_document(value)
+      def document(value)
         case value
         when Hash
-          value.transform_values { |v| format_document(v) }
+          value.transform_values { |v| document(v) }
         when Array
-          value.map { |v| format_document(v) }
-        when BigDecimal
-          value.to_f
-        when Float
-          Util.serialize_number(value)
+          value.map { |v| document(v) }
+        when BigDecimal, Float
+          Util.serialize_number(value.to_f)
         else
           value
         end

@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Serialize `BigDecimal` values as JSON numbers in document types.
+* Feature - Serialize `BigDecimal` values as JSON numbers in document types for REST-JSON and JSON protocols.
 
 3.253.0 (2026-07-08)
 ------------------
