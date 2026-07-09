@@ -224,5 +224,99 @@ module Aws::Signin
       end
     end
 
+    context "OAuth endpoint in us-east-1 (aws partition)" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://us-east-1.oauth.signin.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "signin", "signingRegion" => "us-east-1"}]}}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{is_o_auth_endpoint: true, region: "us-east-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "OAuth endpoint in us-west-2 (aws partition)" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://us-west-2.oauth.signin.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "signin", "signingRegion" => "us-west-2"}]}}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{is_o_auth_endpoint: true, region: "us-west-2", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "OAuth endpoint with FIPS returns an error (no FIPS variant exists)" do
+      let(:expected) do
+        {"error" => "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{is_o_auth_endpoint: true, region: "us-east-1", use_fips: true, use_dual_stack: false})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "OAuth endpoint with FIPS returns an error in us-west-2 (aws partition)" do
+      let(:expected) do
+        {"error" => "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{is_o_auth_endpoint: true, region: "us-west-2", use_fips: true, use_dual_stack: false})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "OAuth endpoint with FIPS returns an error in cn-north-1 (non-aws partition, error is partition-agnostic)" do
+      let(:expected) do
+        {"error" => "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{is_o_auth_endpoint: true, region: "cn-north-1", use_fips: true, use_dual_stack: false})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "OAuth endpoint with FIPS returns an error even with a custom SDK endpoint override" do
+      let(:expected) do
+        {"error" => "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{is_o_auth_endpoint: true, region: "us-east-1", endpoint: "https://custom.signin.example.com", use_fips: true, use_dual_stack: false})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "OAuth operation with custom SDK endpoint override" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://custom.signin.example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{is_o_auth_endpoint: true, region: "us-east-1", endpoint: "https://custom.signin.example.com", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
   end
 end

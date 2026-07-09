@@ -19,6 +19,12 @@ module Aws::Signin
         end
         return Aws::Endpoints::Endpoint.new(url: "https://signin.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "signin", "signingRegion" => "#{parameters.region}"}]})
       end
+      if Aws::Endpoints::Matchers.set?(parameters.is_o_auth_endpoint) && Aws::Endpoints::Matchers.boolean_equals?(parameters.is_o_auth_endpoint, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
+        raise ArgumentError, "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation."
+      end
+      if Aws::Endpoints::Matchers.set?(parameters.is_o_auth_endpoint) && Aws::Endpoints::Matchers.boolean_equals?(parameters.is_o_auth_endpoint, true) && Aws::Endpoints::Matchers.set?(parameters.region) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(parameters.endpoint)) && (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region)) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws")
+        return Aws::Endpoints::Endpoint.new(url: "https://#{parameters.region}.oauth.signin.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "signin", "signingRegion" => "#{parameters.region}"}]})
+      end
       if Aws::Endpoints::Matchers.set?(parameters.region) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(parameters.endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region)) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws")
         return Aws::Endpoints::Endpoint.new(url: "https://#{parameters.region}.signin.aws.amazon.com", headers: {}, properties: {})
       end

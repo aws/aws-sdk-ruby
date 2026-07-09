@@ -559,6 +559,45 @@ module Aws::Signin
       req.send_request(options)
     end
 
+    # Grants permission to exchange client credentials for an OAuth 2.0
+    # access token scoped to a resource that can be used to access AWS
+    # services from applications
+    #
+    # @option params [required, String] :grant_type
+    #   OAuth 2.0 grant type. Must be "client\_credentials".
+    #
+    # @option params [required, String] :resource
+    #   The OAuth resource for which the access token is requested. Example:
+    #   "aws-mcp.amazonaws.com".
+    #
+    # @return [Types::CreateOAuth2TokenWithIAMResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOAuth2TokenWithIAMResponse#access_token #access_token} => String
+    #   * {Types::CreateOAuth2TokenWithIAMResponse#token_type #token_type} => String
+    #   * {Types::CreateOAuth2TokenWithIAMResponse#expires_in #expires_in} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_o_auth_2_token_with_iam({
+    #     grant_type: "ClientCredentialsGrantType", # required
+    #     resource: "CreateOAuth2TokenWithIAMRequestResourceString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_token #=> String
+    #   resp.token_type #=> String
+    #   resp.expires_in #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenWithIAM AWS API Documentation
+    #
+    # @overload create_o_auth_2_token_with_iam(params = {})
+    # @param [Hash] params ({})
+    def create_o_auth_2_token_with_iam(params = {}, options = {})
+      req = build_request(:create_o_auth_2_token_with_iam, params)
+      req.send_request(options)
+    end
+
     # Delete console authorization configuration with automatic scope
     # detection
     #
@@ -681,6 +720,79 @@ module Aws::Signin
     # @param [Hash] params ({})
     def get_resource_policy(params = {}, options = {})
       req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Grants permission to inspect the metadata and state of an OAuth 2.0
+    # access token or refresh token
+    #
+    # Implements RFC 7662 OAuth 2.0 Token Introspection over a
+    # SigV4-authenticated endpoint. Inspects the metadata of an
+    # access\_token or refresh\_token issued by AWS Sign-In and returns the
+    # claims associated with it.
+    #
+    # Inactive token semantics (RFC 7662 §2.2): when the supplied token is
+    # unknown, expired, revoked, malformed, or owned by a different account,
+    # the response body is exactly \{ "active": false } with all other
+    # claims omitted.
+    #
+    # @option params [required, String] :token
+    #   The string value of the token to introspect. May be either an
+    #   access\_token or a refresh\_token issued by AWS Sign-In.
+    #
+    # @option params [String] :token_type_hint
+    #   Optional hint about the type of the token submitted for introspection.
+    #   The server uses this hint to optimize lookup, but still falls back to
+    #   the other token type on miss. Allowed values: access\_token,
+    #   refresh\_token.
+    #
+    # @return [Types::IntrospectOAuth2TokenWithIAMResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#active #active} => Boolean
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#client_id #client_id} => String
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#user_id #user_id} => String
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#token_type #token_type} => String
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#exp #exp} => Integer
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#iat #iat} => Integer
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#nbf #nbf} => Integer
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#sub #sub} => String
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#aud #aud} => String
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#iss #iss} => String
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#jti #jti} => String
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#account_id #account_id} => String
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#signin_session #signin_session} => String
+    #   * {Types::IntrospectOAuth2TokenWithIAMResponse#resource #resource} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.introspect_o_auth_2_token_with_iam({
+    #     token: "IntrospectionToken", # required
+    #     token_type_hint: "TokenTypeHint",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.active #=> Boolean
+    #   resp.client_id #=> String
+    #   resp.user_id #=> String
+    #   resp.token_type #=> String
+    #   resp.exp #=> Integer
+    #   resp.iat #=> Integer
+    #   resp.nbf #=> Integer
+    #   resp.sub #=> String
+    #   resp.aud #=> String
+    #   resp.iss #=> String
+    #   resp.jti #=> String
+    #   resp.account_id #=> String
+    #   resp.signin_session #=> String
+    #   resp.resource #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/IntrospectOAuth2TokenWithIAM AWS API Documentation
+    #
+    # @overload introspect_o_auth_2_token_with_iam(params = {})
+    # @param [Hash] params ({})
+    def introspect_o_auth_2_token_with_iam(params = {}, options = {})
+      req = build_request(:introspect_o_auth_2_token_with_iam, params)
       req.send_request(options)
     end
 
@@ -820,6 +932,39 @@ module Aws::Signin
       req.send_request(options)
     end
 
+    # Grants permission to revoke an OAuth 2.0 refresh token and its
+    # associated refresh tokens
+    #
+    # Revokes a refresh\_token issued by AWS Sign-In, invalidating the
+    # entire token chain so that the refresh\_token can no longer be used to
+    # mint new access\_tokens.
+    #
+    # Idempotency: revoking an already-revoked, expired, or otherwise
+    # invalid token still returns 200 OK with an empty body. Only the
+    # refresh\_token type is accepted.
+    #
+    # @option params [required, String] :token
+    #   The refresh\_token to revoke. Must be a refresh\_token issued by AWS
+    #   Sign-In (prefix "ASOR"); access\_tokens are not accepted for
+    #   revocation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_o_auth_2_token_with_iam({
+    #     token: "RevocationToken", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/RevokeOAuth2TokenWithIAM AWS API Documentation
+    #
+    # @overload revoke_o_auth_2_token_with_iam(params = {})
+    # @param [Hash] params ({})
+    def revoke_o_auth_2_token_with_iam(params = {}, options = {})
+      req = build_request(:revoke_o_auth_2_token_with_iam, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -838,7 +983,7 @@ module Aws::Signin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.252.0'
+      context[:gem_version] = '3.253.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
