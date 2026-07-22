@@ -126,6 +126,13 @@ module Aws
         end
 
         it 'closes all file parts even when a part upload fails' do
+          # Fail the last part so the posting loop can't break early and skip
+          # un-posted parts. This keeps the assertion deterministic across MRI
+          # (GIL-serialized) and JRuby (truly parallel) threads.
+          file = Tempfile.new('six-meg-file').tap do |f|
+            6.times { f.write(one_mb) }
+            f.rewind
+          end
           file_parts = []
           allow(FilePart).to receive(:new).and_wrap_original do |original, *args|
             original.call(*args).tap do |fp|
@@ -138,16 +145,14 @@ module Aws
             :upload_part,
             [
               { etag: 'etag-1' },
-              RuntimeError.new('part 2 failed'),
-              { etag: 'etag-3' },
-              { etag: 'etag-4' }
+              RuntimeError.new('part 2 failed')
             ]
           )
 
-          expect { subject.upload(large_file, params) }
+          expect { subject.upload(file, params) }
             .to raise_error(/multipart upload failed: part 2 failed/)
 
-          expect(file_parts).not_to be_empty
+          expect(file_parts.size).to eq(2)
           file_parts.each { |fp| expect(fp).to have_received(:close) }
         end
 
