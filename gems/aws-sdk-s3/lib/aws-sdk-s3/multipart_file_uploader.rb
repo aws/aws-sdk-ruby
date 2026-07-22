@@ -154,7 +154,6 @@ module Aws
             Thread.current[:net_http_override_body_stream_chunk] = @http_chunk_size if @http_chunk_size
             update_progress(progress, p)
             resp = @client.upload_part(p)
-            p[:body].close
             completed_part = { etag: resp.etag, part_number: p[:part_number] }
             apply_part_checksum(resp, completed_part)
             completed.push(completed_part)
@@ -162,6 +161,7 @@ module Aws
             abort_upload = true
             errors << e
           ensure
+            p[:body].close
             Thread.current[:net_http_override_body_stream_chunk] = nil if @http_chunk_size
             completion_queue << :done
           end

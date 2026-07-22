@@ -125,6 +125,32 @@ module Aws
           expect { subject.upload(large_file, params) }.to raise_error(/multipart upload failed: part 3 failed/)
         end
 
+        it 'closes all file parts even when a part upload fails' do
+          file_parts = []
+          allow(FilePart).to receive(:new).and_wrap_original do |original, *args|
+            original.call(*args).tap do |fp|
+              allow(fp).to receive(:close).and_call_original
+              file_parts << fp
+            end
+          end
+
+          client.stub_responses(
+            :upload_part,
+            [
+              { etag: 'etag-1' },
+              RuntimeError.new('part 2 failed'),
+              { etag: 'etag-3' },
+              { etag: 'etag-4' }
+            ]
+          )
+
+          expect { subject.upload(large_file, params) }
+            .to raise_error(/multipart upload failed: part 2 failed/)
+
+          expect(file_parts).not_to be_empty
+          file_parts.each { |fp| expect(fp).to have_received(:close) }
+        end
+
         it 'reports when it is unable to abort a failed multipart upload', :jruby_flaky do
           client.stub_responses(:upload_part, RuntimeError.new('part failed'))
           client.stub_responses(:abort_multipart_upload, RuntimeError.new('network-error'))
