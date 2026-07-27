@@ -115,9 +115,15 @@ module Aws
 
         private
 
-        # Raise a decryption error for a malformed material description.
+        # Raise a decryption error for a malformed material description. A
+        # material description must be a JSON object.
         def extract_encryption_context(matdesc)
-          Json.load(matdesc)
+          context = Json.load(matdesc) if matdesc.is_a?(String)
+          unless context.is_a?(Hash)
+            raise Errors::DecryptionError, 'Malformed material description'
+          end
+
+          context
         rescue Aws::Json::ParseError, EncodingError
           raise Errors::DecryptionError, 'Malformed material description'
         end

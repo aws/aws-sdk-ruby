@@ -22,6 +22,20 @@ module Aws
               end.to raise_error(Errors::DecryptionError, /Malformed material description/)
             end
           end
+
+          # Valid JSON that isn't an object, or an absent matdesc, is malformed.
+          ['[]', 'true', '"str"', '123', nil].each do |matdesc|
+            it "raises DecryptionError (#{matdesc.inspect})" do
+              envelope = {
+                'x-amz-matdesc' => matdesc,
+                'x-amz-wrap-alg' => 'kms+context',
+                'x-amz-cek-alg' => 'AES/GCM/NoPadding'
+              }
+              expect do
+                provider.decryption_cipher(envelope)
+              end.to raise_error(Errors::DecryptionError, /Malformed material description/)
+            end
+          end
         end
       end
     end
