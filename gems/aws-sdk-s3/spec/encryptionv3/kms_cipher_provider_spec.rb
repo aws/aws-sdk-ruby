@@ -15,7 +15,7 @@ module Aws
 
         describe '#decryption_cipher' do
           # A malformed material description raises DecryptionError.
-          ["abc\xFF", '=?utf-8?B?gA==?=', '[]', '123'].each do |matdesc|
+          ['=?utf-8?B?gA==?=', '=?utf-8?B?/w==?=', '=?utf-8?B?YWJj/w==?=', "abc\xFF", '123'].each do |matdesc|
             it "raises DecryptionError (#{matdesc.inspect})" do
               expect do
                 provider.decryption_cipher('x-amz-w' => '12', 'x-amz-t' => matdesc)
