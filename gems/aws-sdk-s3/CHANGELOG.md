@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Return a decryption error for a malformed material description.
+
 1.228.1 (2026-07-23)
 ------------------
 
