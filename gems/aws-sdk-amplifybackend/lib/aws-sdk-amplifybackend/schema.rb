@@ -933,6 +933,7 @@ module Aws::AmplifyBackend
         operation.errors << NotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/backend/{AppId}/job/{BackendEnvironmentName}", "code" => 200}}
+        operation[:paginator] = Paginators::ListBackendJobs.new
       end)
       service.add_operation(:list_s3_buckets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amplifybackend#ListS3Buckets"

@@ -984,6 +984,8 @@ module Aws::RDS
     # @api private
     class DownloadDBLogFilePortion
       def next_tokens(data)
+        return {} unless data.additional_data_pending
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 

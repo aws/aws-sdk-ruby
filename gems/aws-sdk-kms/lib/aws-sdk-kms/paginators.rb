@@ -9,6 +9,8 @@ module Aws::KMS
     # @api private
     class DescribeCustomKeyStores
       def next_tokens(data)
+        return {} unless data.truncated
+
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -34,6 +36,8 @@ module Aws::KMS
     # @api private
     class ListAliases
       def next_tokens(data)
+        return {} unless data.truncated
+
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -59,6 +63,8 @@ module Aws::KMS
     # @api private
     class ListGrants
       def next_tokens(data)
+        return {} unless data.truncated
+
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -84,6 +90,8 @@ module Aws::KMS
     # @api private
     class ListKeyPolicies
       def next_tokens(data)
+        return {} unless data.truncated
+
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -109,6 +117,8 @@ module Aws::KMS
     # @api private
     class ListKeyRotations
       def next_tokens(data)
+        return {} unless data.truncated
+
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -134,6 +144,8 @@ module Aws::KMS
     # @api private
     class ListKeys
       def next_tokens(data)
+        return {} unless data.truncated
+
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -159,6 +171,8 @@ module Aws::KMS
     # @api private
     class ListResourceTags
       def next_tokens(data)
+        return {} unless data.truncated
+
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -184,6 +198,8 @@ module Aws::KMS
     # @api private
     class ListRetirableGrants
       def next_tokens(data)
+        return {} unless data.truncated
+
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
 

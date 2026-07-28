@@ -9,6 +9,8 @@ module Aws::DataPipeline
     # @api private
     class DescribeObjects
       def next_tokens(data)
+        return {} unless data.has_more_results
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -34,6 +36,8 @@ module Aws::DataPipeline
     # @api private
     class ListPipelines
       def next_tokens(data)
+        return {} unless data.has_more_results
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -59,6 +63,8 @@ module Aws::DataPipeline
     # @api private
     class QueryObjects
       def next_tokens(data)
+        return {} unless data.has_more_results
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 

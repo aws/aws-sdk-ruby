@@ -33,6 +33,7 @@ require 'aws-sdk-s3/plugins/accelerate'
 require 'aws-sdk-s3/plugins/arn'
 require 'aws-sdk-s3/plugins/bucket_dns'
 require 'aws-sdk-s3/plugins/iad_regional_endpoint'
+require 'aws-sdk-s3/plugins/custom_paginators'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:s3)
 
@@ -76,6 +77,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::ARN)
     add_plugin(Aws::S3::Plugins::BucketDns)
     add_plugin(Aws::S3::Plugins::IADRegionalEndpoint)
+    add_plugin(Aws::S3::Plugins::CustomPaginators)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id

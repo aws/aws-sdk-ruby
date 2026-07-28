@@ -84,6 +84,8 @@ module Aws::S3
     # @api private
     class ListParts
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.next_part_number_marker
         return {} if next_token.nil? || next_token.empty?
 

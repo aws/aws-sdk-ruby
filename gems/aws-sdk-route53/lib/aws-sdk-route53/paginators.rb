@@ -84,6 +84,8 @@ module Aws::Route53
     # @api private
     class ListHealthChecks
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -109,6 +111,8 @@ module Aws::Route53
     # @api private
     class ListHostedZones
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
 

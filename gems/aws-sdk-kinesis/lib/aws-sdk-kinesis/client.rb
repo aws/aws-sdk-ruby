@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/json_rpc_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-kinesis/plugins/custom_paginators'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:kinesis)
 
@@ -68,6 +69,7 @@ module Aws::Kinesis
     add_plugin(Aws::Core::Plugins::JsonRpcProtocol)
     add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::Kinesis::Plugins::CustomPaginators)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id

@@ -34,6 +34,8 @@ module Aws::Kinesis
     # @api private
     class ListStreams
       def next_tokens(data)
+        return {} unless data.has_more_streams
+
         next_token = data.next_token
         return {} if next_token.nil? || next_token.empty?
 

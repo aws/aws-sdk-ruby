@@ -9,6 +9,8 @@ module Aws::IAM
     # @api private
     class GetAccountAuthorizationDetails
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -34,6 +36,8 @@ module Aws::IAM
     # @api private
     class GetGroup
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -59,6 +63,8 @@ module Aws::IAM
     # @api private
     class ListAccessKeys
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -84,6 +90,8 @@ module Aws::IAM
     # @api private
     class ListAccountAliases
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -109,6 +117,8 @@ module Aws::IAM
     # @api private
     class ListAttachedGroupPolicies
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -134,6 +144,8 @@ module Aws::IAM
     # @api private
     class ListAttachedRolePolicies
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -159,6 +171,8 @@ module Aws::IAM
     # @api private
     class ListAttachedUserPolicies
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -184,6 +198,8 @@ module Aws::IAM
     # @api private
     class ListEntitiesForPolicy
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -209,6 +225,8 @@ module Aws::IAM
     # @api private
     class ListGroupPolicies
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -234,6 +252,8 @@ module Aws::IAM
     # @api private
     class ListGroups
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -259,6 +279,8 @@ module Aws::IAM
     # @api private
     class ListGroupsForUser
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -284,6 +306,8 @@ module Aws::IAM
     # @api private
     class ListInstanceProfileTags
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -309,6 +333,8 @@ module Aws::IAM
     # @api private
     class ListInstanceProfiles
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -334,6 +360,8 @@ module Aws::IAM
     # @api private
     class ListInstanceProfilesForRole
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -359,6 +387,8 @@ module Aws::IAM
     # @api private
     class ListMFADeviceTags
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -384,6 +414,8 @@ module Aws::IAM
     # @api private
     class ListMFADevices
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -409,6 +441,8 @@ module Aws::IAM
     # @api private
     class ListOpenIDConnectProviderTags
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -434,6 +468,8 @@ module Aws::IAM
     # @api private
     class ListPolicies
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -459,6 +495,8 @@ module Aws::IAM
     # @api private
     class ListPolicyTags
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -484,6 +522,8 @@ module Aws::IAM
     # @api private
     class ListPolicyVersions
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -509,6 +549,8 @@ module Aws::IAM
     # @api private
     class ListRolePolicies
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -534,6 +576,8 @@ module Aws::IAM
     # @api private
     class ListRoleTags
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -559,6 +603,8 @@ module Aws::IAM
     # @api private
     class ListRoles
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -584,6 +630,8 @@ module Aws::IAM
     # @api private
     class ListSAMLProviderTags
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -609,6 +657,8 @@ module Aws::IAM
     # @api private
     class ListSSHPublicKeys
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -634,6 +684,8 @@ module Aws::IAM
     # @api private
     class ListServerCertificateTags
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -659,6 +711,8 @@ module Aws::IAM
     # @api private
     class ListServerCertificates
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -684,6 +738,8 @@ module Aws::IAM
     # @api private
     class ListSigningCertificates
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -709,6 +765,8 @@ module Aws::IAM
     # @api private
     class ListUserPolicies
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -734,6 +792,8 @@ module Aws::IAM
     # @api private
     class ListUserTags
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -759,6 +819,8 @@ module Aws::IAM
     # @api private
     class ListUsers
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -784,6 +846,8 @@ module Aws::IAM
     # @api private
     class ListVirtualMFADevices
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -809,6 +873,8 @@ module Aws::IAM
     # @api private
     class SimulateCustomPolicy
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 
@@ -834,6 +900,8 @@ module Aws::IAM
     # @api private
     class SimulatePrincipalPolicy
       def next_tokens(data)
+        return {} unless data.is_truncated
+
         next_token = data.marker
         return {} if next_token.nil? || next_token.empty?
 

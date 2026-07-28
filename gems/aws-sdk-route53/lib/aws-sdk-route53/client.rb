@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/rest_xml_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-route53/plugins/custom_paginators'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:route53)
 
@@ -68,6 +69,7 @@ module Aws::Route53
     add_plugin(Aws::Core::Plugins::RestXmlProtocol)
     add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::Route53::Plugins::CustomPaginators)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
