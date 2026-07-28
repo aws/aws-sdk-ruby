@@ -394,8 +394,6 @@ RubyGems.org page under "LINKS" section.
 | AWS IoT                                               | Aws::IoT                                 | aws-sdk-iot                                 | 2015-05-28  |
 | AWS IoT Core Device Advisor                           | Aws::IoTDeviceAdvisor                    | aws-sdk-iotdeviceadvisor                    | 2020-09-18  |
 | AWS IoT Data Plane                                    | Aws::IoTDataPlane                        | aws-sdk-iotdataplane                        | 2015-05-28  |
-| AWS IoT Events                                        | Aws::IoTEvents                           | aws-sdk-iotevents                           | 2018-07-27  |
-| AWS IoT Events Data                                   | Aws::IoTEventsData                       | aws-sdk-ioteventsdata                       | 2018-10-23  |
 | AWS IoT FleetWise                                     | Aws::IoTFleetWise                        | aws-sdk-iotfleetwise                        | 2021-06-17  |
 | AWS IoT Greengrass V2                                 | Aws::GreengrassV2                        | aws-sdk-greengrassv2                        | 2020-11-30  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                    | aws-sdk-iotjobsdataplane                    | 2017-09-29  |
@@ -430,7 +428,6 @@ RubyGems.org page under "LINKS" section.
 | AWS Network Manager                                   | Aws::NetworkManager                      | aws-sdk-networkmanager                      | 2019-07-05  |
 | AWS Organizations                                     | Aws::Organizations                       | aws-sdk-organizations                       | 2016-11-28  |
 | AWS Outposts                                          | Aws::Outposts                            | aws-sdk-outposts                            | 2019-12-03  |
-| AWS Panorama                                          | Aws::Panorama                            | aws-sdk-panorama                            | 2019-07-24  |
 | AWS Parallel Computing Service                        | Aws::PCS                                 | aws-sdk-pcs                                 | 2023-02-10  |
 | AWS Performance Insights                              | Aws::PI                                  | aws-sdk-pi                                  | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                             | aws-sdk-pricing                             | 2017-10-15  |
@@ -459,7 +456,6 @@ RubyGems.org page under "LINKS" section.
 | AWS Sign-In Service                                   | Aws::Signin                              | aws-sdk-core                                | 2023-01-01  |
 | AWS Signer                                            | Aws::Signer                              | aws-sdk-signer                              | 2017-08-25  |
 | AWS Signer Data Plane                                 | Aws::SignerData                          | aws-sdk-signerdata                          | 2017-08-25  |
-| AWS SimSpace Weaver                                   | Aws::SimSpaceWeaver                      | aws-sdk-simspaceweaver                      | 2022-10-28  |
 | AWS Single Sign-On                                    | Aws::SSO                                 | aws-sdk-core                                | 2019-06-10  |
 | AWS Single Sign-On Admin                              | Aws::SSOAdmin                            | aws-sdk-ssoadmin                            | 2020-07-20  |
 | AWS Snow Device Management                            | Aws::SnowDeviceManagement                | aws-sdk-snowdevicemanagement                | 2021-08-04  |
@@ -714,6 +710,7 @@ RubyGems.org page under "LINKS" section.
 | Partner Central Account API                           | Aws::PartnerCentralAccount               | aws-sdk-partnercentralaccount               | 2025-04-04  |
 | Partner Central Benefits API                          | Aws::PartnerCentralBenefits              | aws-sdk-partnercentralbenefits              | 2018-05-10  |
 | Partner Central Channel API                           | Aws::PartnerCentralChannel               | aws-sdk-partnercentralchannel               | 2024-03-18  |
+| Partner Central Revenue Measurement API               | Aws::PartnerCentralRevenueMeasurement    | aws-sdk-partnercentralrevenuemeasurement    | 2022-07-26  |
 | Partner Central Selling API                           | Aws::PartnerCentralSelling               | aws-sdk-partnercentralselling               | 2022-07-26  |
 | Payment Cryptography Control Plane                    | Aws::PaymentCryptography                 | aws-sdk-paymentcryptography                 | 2021-09-14  |
 | Payment Cryptography Data Plane                       | Aws::PaymentCryptographyData             | aws-sdk-paymentcryptographydata             | 2022-02-03  |
@@ -731,6 +728,7 @@ RubyGems.org page under "LINKS" section.
 | Schemas                                               | Aws::Schemas                             | aws-sdk-schemas                             | 2019-12-02  |
 | Security Incident Response                            | Aws::SecurityIR                          | aws-sdk-securityir                          | 2018-05-10  |
 | Service Quotas                                        | Aws::ServiceQuotas                       | aws-sdk-servicequotas                       | 2019-06-24  |
+| SupportAuthZ                                          | Aws::SupportAuthZ                        | aws-sdk-supportauthz                        | 2026-06-30  |
 | Synthetics                                            | Aws::Synthetics                          | aws-sdk-synthetics                          | 2017-10-11  |
 | Tax Settings                                          | Aws::TaxSettings                         | aws-sdk-taxsettings                         | 2018-05-10  |
 | Timestream InfluxDB                                   | Aws::TimestreamInfluxDB                  | aws-sdk-timestreaminfluxdb                  | 2023-01-27  |

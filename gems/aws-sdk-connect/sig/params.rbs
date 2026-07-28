@@ -1317,6 +1317,36 @@ module Aws
       }?
     }
 
+      type rules_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
       type security_profile_search_criteria = {
       or_conditions: Array[
         {

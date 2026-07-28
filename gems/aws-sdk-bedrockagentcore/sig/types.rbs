@@ -675,6 +675,13 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class EfsConfiguration
+      attr_accessor access_point_arn: ::String
+      attr_accessor mount_path: ::String
+      attr_accessor file_system_arn: ::String
+      SENSITIVE: []
+    end
+
     class EmbeddedCryptoWallet
       attr_accessor network: ("ETHEREUM" | "SOLANA")
       attr_accessor linked_accounts: ::Array[Types::LinkedAccount]
@@ -1035,6 +1042,7 @@ module Aws::BedrockAgentCore
       attr_accessor streams: Types::BrowserSessionStream
       attr_accessor proxy_configuration: Types::ProxyConfiguration
       attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor filesystem_configurations: ::Array[Types::ToolsFileSystemConfiguration]
       attr_accessor session_replay_artifact: ::String
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -1054,6 +1062,7 @@ module Aws::BedrockAgentCore
       attr_accessor session_timeout_seconds: ::Integer
       attr_accessor status: ("READY" | "TERMINATED")
       attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor filesystem_configurations: ::Array[Types::ToolsFileSystemConfiguration]
       SENSITIVE: []
     end
 
@@ -1302,6 +1311,7 @@ module Aws::BedrockAgentCore
       attr_accessor tool_use: Types::HarnessToolUseBlockDelta
       attr_accessor tool_result: ::Array[Types::HarnessToolResultBlockDelta]
       attr_accessor reasoning_content: Types::HarnessReasoningContentBlockDelta
+      attr_accessor tool_result_metadata: Types::HarnessToolResultMetadataBlockDelta
       attr_accessor unknown: untyped
       SENSITIVE: [:text, :reasoning_content]
 
@@ -1312,6 +1322,8 @@ module Aws::BedrockAgentCore
       class ToolResult < HarnessContentBlockDelta
       end
       class ReasoningContent < HarnessContentBlockDelta
+      end
+      class ToolResultMetadata < HarnessContentBlockDelta
       end
       class Unknown < HarnessContentBlockDelta
       end
@@ -1375,6 +1387,7 @@ module Aws::BedrockAgentCore
       attr_accessor temperature: ::Float
       attr_accessor top_p: ::Float
       attr_accessor top_k: ::Integer
+      attr_accessor additional_params: untyped
       SENSITIVE: []
     end
 
@@ -1634,6 +1647,11 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class HarnessToolResultMetadataBlockDelta
+      attr_accessor metadata: ::String
+      SENSITIVE: [:metadata]
+    end
+
     class HarnessToolUseBlock
       attr_accessor name: ::String
       attr_accessor tool_use_id: ::String
@@ -1732,6 +1750,8 @@ module Aws::BedrockAgentCore
       attr_accessor mcp_session_id: ::String
       attr_accessor runtime_session_id: ::String
       attr_accessor mcp_protocol_version: ::String
+      attr_accessor mcp_method: ::String
+      attr_accessor mcp_name: ::String
       attr_accessor runtime_user_id: ::String
       attr_accessor trace_id: ::String
       attr_accessor trace_parent: ::String
@@ -1792,6 +1812,10 @@ module Aws::BedrockAgentCore
       attr_accessor qualifier: ::String
       attr_accessor runtime_session_id: ::String
       attr_accessor runtime_user_id: ::String
+      attr_accessor trace_parent: ::String
+      attr_accessor trace_state: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor baggage: ::String
       attr_accessor messages: ::Array[Types::HarnessMessage]
       attr_accessor model: Types::HarnessModelConfiguration
       attr_accessor system_prompt: ::Array[Types::HarnessSystemContentBlock]
@@ -2657,6 +2681,13 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class S3FilesConfiguration
+      attr_accessor access_point_arn: ::String
+      attr_accessor mount_path: ::String
+      attr_accessor file_system_arn: ::String
+      SENSITIVE: []
+    end
+
     class S3Location
       attr_accessor bucket: ::String
       attr_accessor prefix: ::String
@@ -2826,6 +2857,7 @@ module Aws::BedrockAgentCore
       attr_accessor proxy_configuration: Types::ProxyConfiguration
       attr_accessor enterprise_policies: ::Array[Types::BrowserEnterprisePolicy]
       attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor filesystem_configurations: ::Array[Types::ToolsFileSystemConfiguration]
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -2845,6 +2877,7 @@ module Aws::BedrockAgentCore
       attr_accessor name: ::String
       attr_accessor session_timeout_seconds: ::Integer
       attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor filesystem_configurations: ::Array[Types::ToolsFileSystemConfiguration]
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -3139,6 +3172,20 @@ module Aws::BedrockAgentCore
       attr_accessor protocol_version: ::String
       attr_accessor inline_content: ::String
       SENSITIVE: []
+    end
+
+    class ToolsFileSystemConfiguration
+      attr_accessor s3_files_configuration: Types::S3FilesConfiguration
+      attr_accessor efs_configuration: Types::EfsConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3FilesConfiguration < ToolsFileSystemConfiguration
+      end
+      class EfsConfiguration < ToolsFileSystemConfiguration
+      end
+      class Unknown < ToolsFileSystemConfiguration
+      end
     end
 
     class UnauthorizedException

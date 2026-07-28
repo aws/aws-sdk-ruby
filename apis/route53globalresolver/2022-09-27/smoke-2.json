@@ -69,23 +69,6 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetGlobalResolverFailure",
-    "operationName" : "GetGlobalResolver",
-    "input" : {
-      "globalResolverId" : "gr-doesnotexist1111"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-2",
-      "useFips" : false,
-      "useDualstack" : true,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "GetHostedZoneAssociationFailure",
     "operationName" : "GetHostedZoneAssociation",
     "input" : {
@@ -103,10 +86,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetAccessTokenFailure",
-    "operationName" : "GetAccessToken",
+    "id" : "GetGlobalResolverFailure",
+    "operationName" : "GetGlobalResolver",
     "input" : {
-      "accessTokenId" : "at-doesnotexist1111"
+      "globalResolverId" : "gr-doesnotexist1111"
     },
     "expectation" : {
       "failure" : {
@@ -124,6 +107,23 @@
     "operationName" : "GetAccessSource",
     "input" : {
       "accessSourceId" : "as-doesnotexist1111"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-2",
+      "useFips" : false,
+      "useDualstack" : true,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAccessTokenFailure",
+    "operationName" : "GetAccessToken",
+    "input" : {
+      "accessTokenId" : "at-doesnotexist1111"
     },
     "expectation" : {
       "failure" : {

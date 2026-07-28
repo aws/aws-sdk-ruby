@@ -25,6 +25,7 @@ module Aws::IVS
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor media_tailor_playback_configurations: ::Array[Types::MediaTailorPlaybackConfiguration]
+      attr_accessor post_roll_configuration: Types::PostRollConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -33,6 +34,7 @@ module Aws::IVS
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor media_tailor_playback_configurations: ::Array[Types::MediaTailorPlaybackConfiguration]
+      attr_accessor post_roll_configuration: Types::PostRollConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -185,6 +187,7 @@ module Aws::IVS
     class CreateAdConfigurationRequest
       attr_accessor name: ::String
       attr_accessor media_tailor_playback_configurations: ::Array[Types::MediaTailorPlaybackConfiguration]
+      attr_accessor post_roll_configuration: Types::PostRollConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -596,6 +599,12 @@ module Aws::IVS
       SENSITIVE: []
     end
 
+    class PostRollConfiguration
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class PutMetadataRequest
       attr_accessor channel_arn: ::String
       attr_accessor metadata: ::String
@@ -822,6 +831,7 @@ module Aws::IVS
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor media_tailor_playback_configurations: ::Array[Types::MediaTailorPlaybackConfiguration]
+      attr_accessor post_roll_configuration: Types::PostRollConfiguration
       SENSITIVE: []
     end
 

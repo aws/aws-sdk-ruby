@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2026-07-21)
+------------------
+
+* Feature - Add support for real time matching with AWS Entity Resolution matching workflows with advanced rule sets.
+
+1.51.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2026-05-29)
 ------------------
 

@@ -116,7 +116,8 @@ module Aws
                                                   },
                                                   ?export_bucket_arn: ::String,
                                                   ?post_launch_enabled: bool,
-                                                  ?launch_into_source_instance: bool
+                                                  ?launch_into_source_instance: bool,
+                                                  ?recovery_mode: ("FAST" | "OPTIMAL")
                                                 ) -> _CreateLaunchConfigurationTemplateResponseSuccess
                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLaunchConfigurationTemplateResponseSuccess
 
@@ -433,6 +434,7 @@ module Aws
         def licensing: () -> Types::Licensing
         def post_launch_enabled: () -> bool
         def launch_into_instance_properties: () -> Types::LaunchIntoInstanceProperties
+        def recovery_mode: () -> ("FAST" | "OPTIMAL")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#get_launch_configuration-instance_method
       def get_launch_configuration: (
@@ -730,6 +732,7 @@ module Aws
         def licensing: () -> Types::Licensing
         def post_launch_enabled: () -> bool
         def launch_into_instance_properties: () -> Types::LaunchIntoInstanceProperties
+        def recovery_mode: () -> ("FAST" | "OPTIMAL")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#update_launch_configuration-instance_method
       def update_launch_configuration: (
@@ -745,7 +748,8 @@ module Aws
                                          ?post_launch_enabled: bool,
                                          ?launch_into_instance_properties: {
                                            launch_into_ec2_instance_id: ::String?
-                                         }
+                                         },
+                                         ?recovery_mode: ("FAST" | "OPTIMAL")
                                        ) -> _UpdateLaunchConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchConfigurationResponseSuccess
 
@@ -765,7 +769,8 @@ module Aws
                                                   },
                                                   ?export_bucket_arn: ::String,
                                                   ?post_launch_enabled: bool,
-                                                  ?launch_into_source_instance: bool
+                                                  ?launch_into_source_instance: bool,
+                                                  ?recovery_mode: ("FAST" | "OPTIMAL")
                                                 ) -> _UpdateLaunchConfigurationTemplateResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchConfigurationTemplateResponseSuccess
 

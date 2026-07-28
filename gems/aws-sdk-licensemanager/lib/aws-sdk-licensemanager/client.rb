@@ -1515,6 +1515,11 @@ module Aws::LicenseManager
     # @option params [String] :source_version
     #   Current version of the license.
     #
+    # @option params [Boolean] :reset_usage
+    #   Specifies whether to reset the license usage for the new license
+    #   version. If you don't specify a value, the license usage is not
+    #   reset.
+    #
     # @return [Types::CreateLicenseVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLicenseVersionResponse#license_arn #license_arn} => String
@@ -1565,6 +1570,7 @@ module Aws::LicenseManager
     #     status: "AVAILABLE", # required, accepts AVAILABLE, PENDING_AVAILABLE, DEACTIVATED, SUSPENDED, EXPIRED, PENDING_DELETE, DELETED
     #     client_token: "ClientToken", # required
     #     source_version: "String",
+    #     reset_usage: false,
     #   })
     #
     # @example Response structure
@@ -4380,7 +4386,7 @@ module Aws::LicenseManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

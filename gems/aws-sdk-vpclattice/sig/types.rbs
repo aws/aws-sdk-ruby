@@ -262,6 +262,7 @@ module Aws::VPCLattice
       attr_accessor custom_domain_name: ::String
       attr_accessor certificate_arn: ::String
       attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor idle_timeout_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -273,6 +274,7 @@ module Aws::VPCLattice
       attr_accessor certificate_arn: ::String
       attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor idle_timeout_seconds: ::Integer
       attr_accessor dns_entry: Types::DnsEntry
       SENSITIVE: []
     end
@@ -762,6 +764,7 @@ module Aws::VPCLattice
       attr_accessor certificate_arn: ::String
       attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor idle_timeout_seconds: ::Integer
       attr_accessor failure_code: ::String
       attr_accessor failure_message: ::String
       SENSITIVE: []
@@ -1592,6 +1595,7 @@ module Aws::VPCLattice
       attr_accessor service_identifier: ::String
       attr_accessor certificate_arn: ::String
       attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor idle_timeout_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -1602,6 +1606,7 @@ module Aws::VPCLattice
       attr_accessor custom_domain_name: ::String
       attr_accessor certificate_arn: ::String
       attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor idle_timeout_seconds: ::Integer
       SENSITIVE: []
     end
 

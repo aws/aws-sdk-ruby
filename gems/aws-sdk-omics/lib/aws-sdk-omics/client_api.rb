@@ -602,6 +602,7 @@ module Aws::Omics
     TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     TaskStatusMessage = Shapes::StringShape.new(name: 'TaskStatusMessage')
     TaskTimestamp = Shapes::TimestampShape.new(name: 'TaskTimestamp', timestampFormat: "iso8601")
+    TaskUuid = Shapes::StringShape.new(name: 'TaskUuid')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TsvOptions = Shapes::StructureShape.new(name: 'TsvOptions')
     TsvStoreOptions = Shapes::StructureShape.new(name: 'TsvStoreOptions')
@@ -1588,6 +1589,7 @@ module Aws::Omics
     GetRunTaskResponse.add_member(:instance_type, Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
     GetRunTaskResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: TaskFailureReason, location_name: "failureReason"))
     GetRunTaskResponse.add_member(:image_details, Shapes::ShapeRef.new(shape: ImageDetails, location_name: "imageDetails"))
+    GetRunTaskResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: TaskUuid, location_name: "uuid"))
     GetRunTaskResponse.struct_class = Types::GetRunTaskResponse
 
     GetS3AccessPolicyRequest.add_member(:s3_access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, required: true, location: "uri", location_name: "s3AccessPointArn"))
@@ -2596,6 +2598,7 @@ module Aws::Omics
     TaskListItem.add_member(:stop_time, Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "stopTime"))
     TaskListItem.add_member(:gpus, Shapes::ShapeRef.new(shape: TaskListItemGpusInteger, location_name: "gpus"))
     TaskListItem.add_member(:instance_type, Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
+    TaskListItem.add_member(:uuid, Shapes::ShapeRef.new(shape: TaskUuid, location_name: "uuid"))
     TaskListItem.struct_class = Types::TaskListItem
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))

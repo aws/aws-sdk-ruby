@@ -98,6 +98,8 @@ module Aws::CleanRooms
       attr_accessor additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")
       attr_accessor disallowed_output_columns: ::Array[::String]
       attr_accessor differential_privacy: Types::DifferentialPrivacyConfiguration
+      attr_accessor allowed_result_receivers: ::Array[::String]
+      attr_accessor allowed_additional_analyses: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -361,6 +363,15 @@ module Aws::CleanRooms
       end
     end
 
+    class ChildResource
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("INTERMEDIATE_TABLE")
+      attr_accessor resource_name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor resource_status: ("CREATED" | "POPULATE_STARTED" | "POPULATE_SUCCESS" | "POPULATE_FAILED" | "DISALLOWED_BY_DATA_PROVIDER" | "BASE_TABLE_REMOVED" | "RETENTION_PERIOD_EXPIRED")
+      SENSITIVE: []
+    end
+
     class Collaboration
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -571,6 +582,16 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class ColumnLineageEntry
+      attr_accessor column: ::String
+      attr_accessor source_column: ::String
+      attr_accessor source_name: ::String
+      attr_accessor source_id: ::String
+      attr_accessor source_type: ("TABLE" | "INTERMEDIATE_TABLE" | "ID_MAPPING_TABLE")
+      attr_accessor source_account_id: ::String
+      SENSITIVE: []
+    end
+
     class ComputeConfiguration
       attr_accessor worker: Types::WorkerComputeConfiguration
       attr_accessor unknown: untyped
@@ -690,6 +711,7 @@ module Aws::CleanRooms
       attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
+      attr_accessor child_resources: ::Array[Types::ChildResource]
       SENSITIVE: []
     end
 
@@ -748,6 +770,11 @@ module Aws::CleanRooms
       end
       class Unknown < ConfiguredTableAssociationAnalysisRulePolicyV1
       end
+    end
+
+    class ConfiguredTableAssociationSchemaTypeProperties
+      attr_accessor configured_table_association_id: ::String
+      SENSITIVE: []
     end
 
     class ConfiguredTableAssociationSummary
@@ -1001,6 +1028,35 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class CreateIntermediateTableAnalysisRuleInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor intermediate_table_identifier: ::String
+      attr_accessor analysis_rule_type: ("CUSTOM")
+      attr_accessor analysis_rule_policy: Types::IntermediateTableAnalysisRulePolicy
+      SENSITIVE: []
+    end
+
+    class CreateIntermediateTableAnalysisRuleOutput
+      attr_accessor analysis_rule: Types::IntermediateTableAnalysisRule
+      SENSITIVE: []
+    end
+
+    class CreateIntermediateTableInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor population_analysis_configuration: Types::PopulationAnalysisConfiguration
+      attr_accessor kms_key_arn: ::String
+      attr_accessor retention_in_days: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateIntermediateTableOutput
+      attr_accessor intermediate_table: Types::IntermediateTable
+      SENSITIVE: []
+    end
+
     class CreateMembershipInput
       attr_accessor collaboration_identifier: ::String
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
@@ -1120,6 +1176,25 @@ module Aws::CleanRooms
     class DeleteIdNamespaceAssociationOutput < Aws::EmptyStructure
     end
 
+    class DeleteIntermediateTableAnalysisRuleInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor intermediate_table_identifier: ::String
+      attr_accessor analysis_rule_type: ("CUSTOM")
+      SENSITIVE: []
+    end
+
+    class DeleteIntermediateTableAnalysisRuleOutput < Aws::EmptyStructure
+    end
+
+    class DeleteIntermediateTableInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor intermediate_table_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntermediateTableOutput < Aws::EmptyStructure
+    end
+
     class DeleteMemberInput
       attr_accessor collaboration_identifier: ::String
       attr_accessor account_id: ::String
@@ -1221,6 +1296,16 @@ module Aws::CleanRooms
     class DirectAnalysisConfigurationDetails
       attr_accessor receiver_account_ids: ::Array[::String]
       SENSITIVE: []
+    end
+
+    class DisallowIntermediateTableInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor intermediate_table_name: ::String
+      attr_accessor include_descendants: bool
+      SENSITIVE: []
+    end
+
+    class DisallowIntermediateTableOutput < Aws::EmptyStructure
     end
 
     class ErrorMessageConfiguration
@@ -1381,6 +1466,29 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class GetIntermediateTableAnalysisRuleInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor intermediate_table_identifier: ::String
+      attr_accessor analysis_rule_type: ("CUSTOM")
+      SENSITIVE: []
+    end
+
+    class GetIntermediateTableAnalysisRuleOutput
+      attr_accessor analysis_rule: Types::IntermediateTableAnalysisRule
+      SENSITIVE: []
+    end
+
+    class GetIntermediateTableInput
+      attr_accessor intermediate_table_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntermediateTableOutput
+      attr_accessor intermediate_table: Types::IntermediateTable
+      SENSITIVE: []
+    end
+
     class GetMembershipInput
       attr_accessor membership_identifier: ::String
       SENSITIVE: []
@@ -1478,6 +1586,7 @@ module Aws::CleanRooms
       attr_accessor update_time: ::Time
       attr_accessor input_reference_properties: Types::IdMappingTableInputReferenceProperties
       attr_accessor kms_key_arn: ::String
+      attr_accessor child_resources: ::Array[Types::ChildResource]
       SENSITIVE: []
     end
 
@@ -1500,6 +1609,7 @@ module Aws::CleanRooms
 
     class IdMappingTableSchemaTypeProperties
       attr_accessor id_mapping_table_input_source: ::Array[Types::IdMappingTableInputSource]
+      attr_accessor id_mapping_table_id: ::String
       SENSITIVE: []
     end
 
@@ -1565,6 +1675,215 @@ module Aws::CleanRooms
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor input_reference_properties: Types::IdNamespaceAssociationInputReferencePropertiesSummary
+      SENSITIVE: []
+    end
+
+    class InheritedAdditionalAnalyses
+      attr_accessor value: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")
+      attr_accessor sources: ::Array[Types::InheritedAdditionalAnalysesSource]
+      SENSITIVE: []
+    end
+
+    class InheritedAdditionalAnalysesSource
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor type: ("TABLE" | "INTERMEDIATE_TABLE" | "ID_MAPPING_TABLE")
+      attr_accessor value: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")
+      attr_accessor source_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class InheritedAllowedAdditionalAnalyses
+      attr_accessor value: ::Array[::String]
+      attr_accessor sources: ::Array[Types::InheritedAllowedAdditionalAnalysesSource]
+      SENSITIVE: []
+    end
+
+    class InheritedAllowedAdditionalAnalysesSource
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor type: ("TABLE" | "INTERMEDIATE_TABLE" | "ID_MAPPING_TABLE")
+      attr_accessor value: ::Array[::String]
+      attr_accessor source_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class InheritedAllowedResultReceivers
+      attr_accessor value: ::Array[::String]
+      attr_accessor sources: ::Array[Types::InheritedAllowedResultReceiversSource]
+      SENSITIVE: []
+    end
+
+    class InheritedAllowedResultReceiversSource
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor type: ("TABLE" | "INTERMEDIATE_TABLE" | "ID_MAPPING_TABLE")
+      attr_accessor value: ::Array[::String]
+      attr_accessor source_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class InheritedDisallowedOutputColumns
+      attr_accessor value: ::Array[::String]
+      attr_accessor column_lineage: ::Array[Types::ColumnLineageEntry]
+      SENSITIVE: []
+    end
+
+    class IntermediateTable
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor child_resources: ::Array[Types::ChildResource]
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor status: ("CREATED" | "POPULATE_STARTED" | "POPULATE_SUCCESS" | "POPULATE_FAILED" | "DISALLOWED_BY_DATA_PROVIDER" | "BASE_TABLE_REMOVED" | "RETENTION_PERIOD_EXPIRED")
+      attr_accessor status_reason: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor population_analysis_configuration: Types::PopulationAnalysisConfiguration
+      attr_accessor retention_in_days: ::Integer
+      attr_accessor table_dependencies: ::Array[Types::IntermediateTableDependency]
+      attr_accessor intermediate_table_version: Types::IntermediateTableActiveVersion
+      attr_accessor analysis_rule_types: ::Array[("CUSTOM")]
+      attr_accessor schema: Types::IntermediateTableSchema
+      SENSITIVE: []
+    end
+
+    class IntermediateTableActiveVersion
+      attr_accessor version_id: ::String
+      attr_accessor analysis_id: ::String
+      attr_accessor analysis_type: ("QUERY")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor inherited_constraints: Types::IntermediateTableInheritedConstraints
+      attr_accessor expiration_time: ::Time
+      SENSITIVE: [:parameters]
+    end
+
+    class IntermediateTableAnalysisRule
+      attr_accessor intermediate_table_identifier: ::String
+      attr_accessor intermediate_table_arn: ::String
+      attr_accessor analysis_rule_policy: Types::IntermediateTableAnalysisRulePolicy
+      attr_accessor analysis_rule_type: ("CUSTOM")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class IntermediateTableAnalysisRuleCustom
+      attr_accessor allowed_analyses: ::Array[::String]
+      attr_accessor additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")
+      attr_accessor allowed_additional_analyses: ::Array[::String]
+      attr_accessor allowed_analysis_providers: ::Array[::String]
+      attr_accessor allowed_result_receivers: ::Array[::String]
+      attr_accessor differential_privacy: Types::DifferentialPrivacyConfiguration
+      attr_accessor disallowed_output_columns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IntermediateTableAnalysisRulePolicy
+      attr_accessor v1: Types::IntermediateTableAnalysisRulePolicyV1
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class V1 < IntermediateTableAnalysisRulePolicy
+      end
+      class Unknown < IntermediateTableAnalysisRulePolicy
+      end
+    end
+
+    class IntermediateTableAnalysisRulePolicyV1
+      attr_accessor custom: Types::IntermediateTableAnalysisRuleCustom
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Custom < IntermediateTableAnalysisRulePolicyV1
+      end
+      class Unknown < IntermediateTableAnalysisRulePolicyV1
+      end
+    end
+
+    class IntermediateTableColumn
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class IntermediateTableComputeConfiguration
+      attr_accessor query_compute_configuration: Types::WorkerComputeConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class QueryComputeConfiguration < IntermediateTableComputeConfiguration
+      end
+      class Unknown < IntermediateTableComputeConfiguration
+      end
+    end
+
+    class IntermediateTableDependency
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("TABLE" | "INTERMEDIATE_TABLE" | "ID_MAPPING_TABLE")
+      attr_accessor parent_type: ("DIRECT" | "INDIRECT")
+      attr_accessor creator_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class IntermediateTableInheritedConstraints
+      attr_accessor additional_analyses: Types::InheritedAdditionalAnalyses
+      attr_accessor allowed_additional_analyses: Types::InheritedAllowedAdditionalAnalyses
+      attr_accessor allowed_result_receivers: Types::InheritedAllowedResultReceivers
+      attr_accessor disallowed_output_columns: Types::InheritedDisallowedOutputColumns
+      SENSITIVE: []
+    end
+
+    class IntermediateTableOutputConfiguration
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class IntermediateTableSchema
+      attr_accessor columns: ::Array[Types::Column]
+      SENSITIVE: []
+    end
+
+    class IntermediateTableSchemaTypeProperties
+      attr_accessor intermediate_table_id: ::String
+      SENSITIVE: []
+    end
+
+    class IntermediateTableSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor status: ("CREATED" | "POPULATE_STARTED" | "POPULATE_SUCCESS" | "POPULATE_FAILED" | "DISALLOWED_BY_DATA_PROVIDER" | "BASE_TABLE_REMOVED" | "RETENTION_PERIOD_EXPIRED")
+      attr_accessor retention_in_days: ::Integer
+      attr_accessor analysis_rule_types: ::Array[("CUSTOM")]
+      SENSITIVE: []
+    end
+
+    class IntermediateTableVersionSummary
+      attr_accessor version_id: ::String
+      attr_accessor table_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor analysis_id: ::String
+      attr_accessor status: ("POPULATE_STARTED" | "POPULATE_SUCCESS" | "POPULATE_FAILED" | "RETENTION_PERIOD_EXPIRED")
+      attr_accessor analysis_type: ("QUERY")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor expiration_time: ::Time
       SENSITIVE: []
     end
 
@@ -1749,6 +2068,33 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class ListIntermediateTableVersionsInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor intermediate_table_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIntermediateTableVersionsOutput
+      attr_accessor intermediate_table_version_summaries: ::Array[Types::IntermediateTableVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntermediateTablesInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIntermediateTablesOutput
+      attr_accessor intermediate_table_summaries: ::Array[Types::IntermediateTableSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListMembersInput
       attr_accessor collaboration_identifier: ::String
       attr_accessor next_token: ::String
@@ -1833,7 +2179,7 @@ module Aws::CleanRooms
 
     class ListSchemasInput
       attr_accessor collaboration_identifier: ::String
-      attr_accessor schema_type: ("TABLE" | "ID_MAPPING_TABLE")
+      attr_accessor schema_type: ("TABLE" | "ID_MAPPING_TABLE" | "INTERMEDIATE_TABLE")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -2044,6 +2390,39 @@ module Aws::CleanRooms
 
     class PopulateIdMappingTableOutput
       attr_accessor id_mapping_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class PopulateIntermediateTableInput
+      attr_accessor intermediate_table_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor compute_configuration: Types::IntermediateTableComputeConfiguration
+      attr_accessor analysis_payer_account_id: ::String
+      SENSITIVE: [:parameters]
+    end
+
+    class PopulateIntermediateTableOutput
+      attr_accessor analysis_id: ::String
+      attr_accessor analysis_type: ("QUERY")
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class PopulationAnalysisConfiguration
+      attr_accessor sql_parameters: Types::PopulationAnalysisSqlParameters
+      attr_accessor unknown: untyped
+      SENSITIVE: [:sql_parameters]
+
+      class SqlParameters < PopulationAnalysisConfiguration
+      end
+      class Unknown < PopulationAnalysisConfiguration
+      end
+    end
+
+    class PopulationAnalysisSqlParameters
+      attr_accessor query_string: ::String
+      attr_accessor analysis_template_arn: ::String
       SENSITIVE: []
     end
 
@@ -2424,6 +2803,7 @@ module Aws::CleanRooms
       attr_accessor s3: Types::ProtectedQueryS3OutputConfiguration
       attr_accessor member: Types::ProtectedQueryMemberOutputConfiguration
       attr_accessor distribute: Types::ProtectedQueryDistributeOutputConfiguration
+      attr_accessor intermediate_table: Types::IntermediateTableOutputConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -2432,6 +2812,8 @@ module Aws::CleanRooms
       class Member < ProtectedQueryOutputConfiguration
       end
       class Distribute < ProtectedQueryOutputConfiguration
+      end
+      class IntermediateTable < ProtectedQueryOutputConfiguration
       end
       class Unknown < ProtectedQueryOutputConfiguration
       end
@@ -2464,7 +2846,7 @@ module Aws::CleanRooms
       attr_accessor query_string: ::String
       attr_accessor analysis_template_arn: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:parameters]
     end
 
     class ProtectedQuerySingleMemberOutput
@@ -2486,6 +2868,7 @@ module Aws::CleanRooms
       attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS" | "TIMED_OUT")
       attr_accessor receiver_configurations: ::Array[Types::ReceiverConfiguration]
       attr_accessor query_compute_payer_account_id: ::String
+      attr_accessor intermediate_table_configuration: Types::IntermediateTableOutputConfiguration
       SENSITIVE: []
     end
 
@@ -2542,7 +2925,7 @@ module Aws::CleanRooms
       attr_accessor description: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      attr_accessor type: ("TABLE" | "ID_MAPPING_TABLE")
+      attr_accessor type: ("TABLE" | "ID_MAPPING_TABLE" | "INTERMEDIATE_TABLE")
       attr_accessor schema_status_details: ::Array[Types::SchemaStatusDetail]
       attr_accessor resource_arn: ::String
       attr_accessor schema_type_properties: Types::SchemaTypeProperties
@@ -2565,14 +2948,14 @@ module Aws::CleanRooms
     end
 
     class SchemaStatusReason
-      attr_accessor code: ("ANALYSIS_RULE_MISSING" | "ANALYSIS_TEMPLATES_NOT_CONFIGURED" | "ANALYSIS_PROVIDERS_NOT_CONFIGURED" | "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED" | "ID_MAPPING_TABLE_NOT_POPULATED" | "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED" | "ADDITIONAL_ANALYSES_NOT_CONFIGURED" | "RESULT_RECEIVERS_NOT_CONFIGURED" | "ADDITIONAL_ANALYSES_NOT_ALLOWED" | "RESULT_RECEIVERS_NOT_ALLOWED" | "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE")
+      attr_accessor code: ("ANALYSIS_RULE_MISSING" | "ANALYSIS_TEMPLATES_NOT_CONFIGURED" | "ANALYSIS_PROVIDERS_NOT_CONFIGURED" | "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED" | "ID_MAPPING_TABLE_NOT_POPULATED" | "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED" | "ADDITIONAL_ANALYSES_NOT_CONFIGURED" | "RESULT_RECEIVERS_NOT_CONFIGURED" | "ADDITIONAL_ANALYSES_NOT_ALLOWED" | "RESULT_RECEIVERS_NOT_ALLOWED" | "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE" | "INTERMEDIATE_TABLE_NOT_POPULATED" | "INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING" | "INTERMEDIATE_TABLE_BASE_TABLE_REMOVED" | "INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED" | "INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER" | "INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED")
       attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class SchemaSummary
       attr_accessor name: ::String
-      attr_accessor type: ("TABLE" | "ID_MAPPING_TABLE")
+      attr_accessor type: ("TABLE" | "ID_MAPPING_TABLE" | "INTERMEDIATE_TABLE")
       attr_accessor creator_account_id: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
@@ -2587,10 +2970,16 @@ module Aws::CleanRooms
 
     class SchemaTypeProperties
       attr_accessor id_mapping_table: Types::IdMappingTableSchemaTypeProperties
+      attr_accessor intermediate_table: Types::IntermediateTableSchemaTypeProperties
+      attr_accessor configured_table_association: Types::ConfiguredTableAssociationSchemaTypeProperties
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class IdMappingTable < SchemaTypeProperties
+      end
+      class IntermediateTable < SchemaTypeProperties
+      end
+      class ConfiguredTableAssociation < SchemaTypeProperties
       end
       class Unknown < SchemaTypeProperties
       end
@@ -2854,6 +3243,33 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class UpdateIntermediateTableAnalysisRuleInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor intermediate_table_identifier: ::String
+      attr_accessor analysis_rule_type: ("CUSTOM")
+      attr_accessor analysis_rule_policy: Types::IntermediateTableAnalysisRulePolicy
+      SENSITIVE: []
+    end
+
+    class UpdateIntermediateTableAnalysisRuleOutput
+      attr_accessor analysis_rule: Types::IntermediateTableAnalysisRule
+      SENSITIVE: []
+    end
+
+    class UpdateIntermediateTableInput
+      attr_accessor intermediate_table_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor columns: ::Array[Types::IntermediateTableColumn]
+      SENSITIVE: []
+    end
+
+    class UpdateIntermediateTableOutput
+      attr_accessor intermediate_table: Types::IntermediateTable
+      SENSITIVE: []
+    end
+
     class UpdateMembershipInput
       attr_accessor membership_identifier: ::String
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
@@ -2927,7 +3343,7 @@ module Aws::CleanRooms
     end
 
     class WorkerComputeConfiguration
-      attr_accessor type: ("CR.1X" | "CR.4X")
+      attr_accessor type: ("CR.1X" | "CR.4X" | "CR.8X")
       attr_accessor number: ::Integer
       attr_accessor properties: Types::WorkerComputeConfigurationProperties
       SENSITIVE: []

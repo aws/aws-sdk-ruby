@@ -54,7 +54,7 @@ module Aws::IoTDataPlane
   autoload :EndpointProvider, 'aws-sdk-iotdataplane/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotdataplane/endpoints'
 
-  GEM_VERSION = '1.92.0'
+  GEM_VERSION = '1.93.0'
 
 end
 

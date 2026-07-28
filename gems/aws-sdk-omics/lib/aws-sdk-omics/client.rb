@@ -3810,6 +3810,7 @@ module Aws::Omics
     #   * {Types::GetRunTaskResponse#instance_type #instance_type} => String
     #   * {Types::GetRunTaskResponse#failure_reason #failure_reason} => String
     #   * {Types::GetRunTaskResponse#image_details #image_details} => Types::ImageDetails
+    #   * {Types::GetRunTaskResponse#uuid #uuid} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3838,6 +3839,7 @@ module Aws::Omics
     #   resp.image_details.image #=> String
     #   resp.image_details.image_digest #=> String
     #   resp.image_details.source_image #=> String
+    #   resp.uuid #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5358,6 +5360,7 @@ module Aws::Omics
     #   resp.items[0].stop_time #=> Time
     #   resp.items[0].gpus #=> Integer
     #   resp.items[0].instance_type #=> String
+    #   resp.items[0].uuid #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListRunTasks AWS API Documentation
@@ -7412,7 +7415,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

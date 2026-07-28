@@ -56,18 +56,6 @@ Feature: Smoke tests for Route53GlobalResolver
     Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
 
   @route53globalresolver @smoke
-  Scenario: GetGlobalResolverFailure
-    Given I create a 'Aws::Route53GlobalResolver' client with config:
-      """
-{"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":true}
-      """
-    When I call the operation 'get_global_resolver' with params:
-      """
-{"global_resolver_id":"gr-doesnotexist1111"}
-      """
-    Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
-
-  @route53globalresolver @smoke
   Scenario: GetHostedZoneAssociationFailure
     Given I create a 'Aws::Route53GlobalResolver' client with config:
       """
@@ -80,14 +68,14 @@ Feature: Smoke tests for Route53GlobalResolver
     Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
 
   @route53globalresolver @smoke
-  Scenario: GetAccessTokenFailure
+  Scenario: GetGlobalResolverFailure
     Given I create a 'Aws::Route53GlobalResolver' client with config:
       """
 {"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":true}
       """
-    When I call the operation 'get_access_token' with params:
+    When I call the operation 'get_global_resolver' with params:
       """
-{"access_token_id":"at-doesnotexist1111"}
+{"global_resolver_id":"gr-doesnotexist1111"}
       """
     Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
 
@@ -100,5 +88,17 @@ Feature: Smoke tests for Route53GlobalResolver
     When I call the operation 'get_access_source' with params:
       """
 {"access_source_id":"as-doesnotexist1111"}
+      """
+    Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
+
+  @route53globalresolver @smoke
+  Scenario: GetAccessTokenFailure
+    Given I create a 'Aws::Route53GlobalResolver' client with config:
+      """
+{"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":true}
+      """
+    When I call the operation 'get_access_token' with params:
+      """
+{"access_token_id":"at-doesnotexist1111"}
       """
     Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised

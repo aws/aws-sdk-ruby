@@ -160,7 +160,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_arn: ::String
       attr_accessor application_description: ::String
       attr_accessor application_name: ::String
-      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2")
+      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2" | "FLINK-2_3")
       attr_accessor service_execution_role: ::String
       attr_accessor application_status: ("DELETING" | "STARTING" | "STOPPING" | "READY" | "RUNNING" | "UPDATING" | "AUTOSCALING" | "FORCE_STOPPING" | "ROLLING_BACK" | "MAINTENANCE" | "ROLLED_BACK")
       attr_accessor application_version_id: ::Integer
@@ -252,7 +252,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_arn: ::String
       attr_accessor application_status: ("DELETING" | "STARTING" | "STOPPING" | "READY" | "RUNNING" | "UPDATING" | "AUTOSCALING" | "FORCE_STOPPING" | "ROLLING_BACK" | "MAINTENANCE" | "ROLLED_BACK")
       attr_accessor application_version_id: ::Integer
-      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2")
+      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2" | "FLINK-2_3")
       attr_accessor application_mode: ("STREAMING" | "INTERACTIVE")
       SENSITIVE: []
     end
@@ -394,7 +394,7 @@ module Aws::KinesisAnalyticsV2
     class CreateApplicationRequest
       attr_accessor application_name: ::String
       attr_accessor application_description: ::String
-      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2")
+      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2" | "FLINK-2_3")
       attr_accessor service_execution_role: ::String
       attr_accessor application_configuration: Types::ApplicationConfiguration
       attr_accessor cloud_watch_logging_options: ::Array[Types::CloudWatchLoggingOption]
@@ -1174,7 +1174,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor snapshot_status: ("CREATING" | "READY" | "DELETING" | "FAILED")
       attr_accessor application_version_id: ::Integer
       attr_accessor snapshot_creation_timestamp: ::Time
-      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2")
+      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2" | "FLINK-2_3")
       attr_accessor application_encryption_configuration_description: Types::ApplicationEncryptionConfigurationDescription
       SENSITIVE: []
     end
@@ -1296,7 +1296,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor run_configuration_update: Types::RunConfigurationUpdate
       attr_accessor cloud_watch_logging_option_updates: ::Array[Types::CloudWatchLoggingOptionUpdate]
       attr_accessor conditional_token: ::String
-      attr_accessor runtime_environment_update: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2")
+      attr_accessor runtime_environment_update: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2" | "FLINK-2_3")
       SENSITIVE: []
     end
 

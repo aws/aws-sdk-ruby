@@ -624,25 +624,32 @@ module Aws::Evs
     # Creates an Amazon EVS environment that runs VCF software, such as SDDC
     # Manager, NSX Manager, and vCenter Server.
     #
-    # During environment creation, Amazon EVS performs validations on DNS
-    # settings, provisions VLAN subnets and hosts, and deploys the supplied
-    # version of VCF.
+    # <note markdown="1"> When you specify `SELF_DEPLOYED` for `vcfVersion`, Amazon EVS
+    # provisions only the VLAN subnets; no hosts are added and no VCF
+    # installation is performed. After the environment is created, you can
+    # add hosts with `CreateEnvironmentHost` and install VCF yourself. The
+    # `licenseInfo`, `hosts`, `vcfHostnames`, `siteId`, and
+    # `connectivityInfo` parameters are not supported in this mode.
     #
-    # It can take several hours to create an environment. After the
-    # deployment completes, you can configure VCF in the vSphere user
-    # interface according to your needs.
+    #  </note>
     #
-    # When creating a new environment, the default ESX version for the
-    # selected VCF version will be used, you cannot choose a specific ESX
-    # version in `CreateEnvironment` action. When a host has been added with
-    # a specific ESX version, it can only be upgraded using vCenter
-    # Lifecycle Manager.
+    # When you specify any other VCF version, Amazon EVS installs and
+    # configures VCF for you. For more information, see [Self-deployed
+    # mode][1] in the *Amazon EVS User Guide*.
+    #
+    # When Amazon EVS installs VCF, the default ESX version for the selected
+    # VCF version will be used. After a host is added with a specific ESX
+    # version, it can only be upgraded using vCenter Lifecycle Manager.
     #
     # <note markdown="1"> You cannot use the `dedicatedHostId` and `placementGroupId` parameters
     # together in the same `CreateEnvironment` action. This results in a
     # `ValidationException` response.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/evs/latest/userguide/getting-started-self-deployed.html
     #
     # @option params [String] :client_token
     #   <note markdown="1"> This parameter is not used in Amazon EVS
@@ -720,23 +727,49 @@ module Aws::Evs
     #
     # @option params [required, String] :service_access_subnet_id
     #   The subnet that is used to establish connectivity between the Amazon
-    #   EVS control plane and VPC. Amazon EVS uses this subnet to validate
-    #   mandatory DNS records for your VCF appliances and hosts and create the
-    #   environment.
+    #   EVS control plane and VPC. The Amazon EVS control plane uses this
+    #   subnet to interface with your environment. This includes validating
+    #   DNS records and enabling Amazon EVS Connectors.
     #
     # @option params [required, String] :vcf_version
     #   The VCF version to use for the environment.
     #
-    # @option params [required, Boolean] :terms_accepted
-    #   Customer confirmation that the customer has purchased and will
-    #   continue to maintain the required number of VCF software licenses to
-    #   cover all physical processor cores in the Amazon EVS environment.
-    #   Information about your VCF software in Amazon EVS will be shared with
-    #   Broadcom to verify license compliance. Amazon EVS does not validate
-    #   license keys. To validate license keys, visit the Broadcom support
-    #   portal.
+    #   * `SELF_DEPLOYED`: You install VCF yourself. The `licenseInfo`,
+    #     `hosts`, `vcfHostnames`, `siteId`, and `connectivityInfo` parameters
+    #     are not supported.
     #
-    # @option params [required, Array<Types::LicenseInfo>] :license_info
+    #   * Any other valid value: Amazon EVS installs and configures VCF for
+    #     you in the version you specify.
+    #
+    # @option params [required, Boolean] :terms_accepted
+    #   Confirmation that the customer has purchased and will continue to
+    #   maintain the required number of VCF software licenses to cover all
+    #   physical processor cores in the Amazon EVS environment. Information
+    #   about your VCF software in Amazon EVS will be shared with Broadcom to
+    #   verify license compliance. Amazon EVS does not validate license keys.
+    #   To validate license keys, visit the Broadcom support portal.
+    #
+    # @option params [required, Types::InitialVlans] :initial_vlans
+    #   The initial VLAN subnets for the Amazon EVS environment.
+    #
+    #   <note markdown="1"> For each Amazon EVS VLAN subnet, you must specify a non-overlapping
+    #   CIDR block. Amazon EVS VLAN subnets have a minimum CIDR block size of
+    #   /28 and a maximum size of /24.
+    #
+    #    </note>
+    #
+    # @option params [Types::ConnectivityInfo] :connectivity_info
+    #   The connectivity configuration for the environment. Amazon EVS
+    #   requires that you specify two route server peer IDs. During
+    #   environment creation, the route server endpoints peer with the NSX
+    #   edges over the NSX uplink subnet, providing BGP-based dynamic routing
+    #   for overlay networks.
+    #
+    #   <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::LicenseInfo>] :license_info
     #   The license information that Amazon EVS requires to create an
     #   environment. Amazon EVS requires two license keys: a VCF solution key
     #   and a vSAN license key. The VCF solution key must meet minimum core
@@ -751,48 +784,46 @@ module Aws::Evs
     #
     #   VCF license information can be retrieved from the Broadcom portal.
     #
+    #   <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html
     #
-    # @option params [required, Types::InitialVlans] :initial_vlans
-    #   The initial VLAN subnets for the Amazon EVS environment.
+    # @option params [Array<Types::HostInfoForCreate>] :hosts
+    #   The ESX hosts to add to the environment. For each host, provide the
+    #   desired hostname, EC2 SSH keypair name, and EC2 instance type.
+    #   Optionally, provide a partition or cluster placement group, or use
+    #   Amazon EC2 Dedicated Hosts.
     #
-    #   <note markdown="1"> For each Amazon EVS VLAN subnet, you must specify a non-overlapping
-    #   CIDR block. Amazon EVS VLAN subnets have a minimum CIDR block size of
-    #   /28 and a maximum size of /24.
+    #   <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`. In that case, you
+    #   can add hosts using `CreateEnvironmentHost` after the environment is
+    #   created.
     #
     #    </note>
     #
-    # @option params [required, Array<Types::HostInfoForCreate>] :hosts
-    #   The ESX hosts to add to the environment. Amazon EVS requires that you
-    #   provide details for a minimum of 4 hosts during environment creation.
-    #
-    #   For each host, you must provide the desired hostname, EC2 SSH keypair
-    #   name, and EC2 instance type. Optionally, you can also provide a
-    #   partition or cluster placement group to use, or use Amazon EC2
-    #   Dedicated Hosts.
-    #
-    # @option params [required, Types::ConnectivityInfo] :connectivity_info
-    #   The connectivity configuration for the environment. Amazon EVS
-    #   requires that you specify two route server peer IDs. During
-    #   environment creation, the route server endpoints peer with the NSX
-    #   edges over the NSX uplink subnet, providing BGP-based dynamic routing
-    #   for overlay networks.
-    #
-    # @option params [required, Types::VcfHostnames] :vcf_hostnames
+    # @option params [Types::VcfHostnames] :vcf_hostnames
     #   The DNS hostnames for the virtual machines that host the VCF
-    #   management appliances. Amazon EVS requires that you provide DNS
-    #   hostnames for the following appliances: vCenter, NSX Manager, SDDC
-    #   Manager, and Cloud Builder.
+    #   management appliances. Provide hostnames for vCenter, NSX Manager,
+    #   SDDC Manager, and Cloud Builder.
     #
-    # @option params [required, String] :site_id
+    #   <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`.
+    #
+    #    </note>
+    #
+    # @option params [String] :site_id
     #   The Broadcom Site ID that is allocated to you as part of your
     #   electronic software delivery. This ID allows customer access to the
     #   Broadcom portal, and is provided to you by Broadcom at the close of
     #   your software contract or contract renewal. Amazon EVS uses the
     #   Broadcom Site ID that you provide to meet Broadcom VCF license usage
     #   reporting requirements for Amazon EVS.
+    #
+    #   <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`.
+    #
+    #    </note>
     #
     # @return [Types::CreateEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -812,14 +843,8 @@ module Aws::Evs
     #     },
     #     vpc_id: "VpcId", # required
     #     service_access_subnet_id: "SubnetId", # required
-    #     vcf_version: "VCF-5.2.1", # required, accepts VCF-5.2.1, VCF-5.2.2
+    #     vcf_version: "VCF-5.2.1", # required, accepts VCF-5.2.1, VCF-5.2.2, SELF_DEPLOYED
     #     terms_accepted: false, # required
-    #     license_info: [ # required
-    #       {
-    #         solution_key: "SolutionKey", # required
-    #         vsan_key: "VSanLicenseKey", # required
-    #       },
-    #     ],
     #     initial_vlans: { # required
     #       vmk_management: { # required
     #         cidr: "Cidr", # required
@@ -854,7 +879,16 @@ module Aws::Evs
     #       is_hcx_public: false,
     #       hcx_network_acl_id: "NetworkAclId",
     #     },
-    #     hosts: [ # required
+    #     connectivity_info: {
+    #       private_route_server_peerings: ["RouteServerPeering"], # required
+    #     },
+    #     license_info: [
+    #       {
+    #         solution_key: "SolutionKey", # required
+    #         vsan_key: "VSanLicenseKey", # required
+    #       },
+    #     ],
+    #     hosts: [
     #       {
     #         host_name: "HostName", # required
     #         key_name: "KeyName", # required
@@ -863,10 +897,7 @@ module Aws::Evs
     #         dedicated_host_id: "DedicatedHostId",
     #       },
     #     ],
-    #     connectivity_info: { # required
-    #       private_route_server_peerings: ["RouteServerPeering"], # required
-    #     },
-    #     vcf_hostnames: { # required
+    #     vcf_hostnames: {
     #       v_center: "HostName", # required
     #       nsx: "HostName", # required
     #       nsx_manager_1: "HostName", # required
@@ -877,7 +908,7 @@ module Aws::Evs
     #       sddc_manager: "HostName", # required
     #       cloud_builder: "HostName", # required
     #     },
-    #     site_id: "String", # required
+    #     site_id: "String",
     #   })
     #
     # @example Response structure
@@ -891,7 +922,7 @@ module Aws::Evs
     #   resp.environment.environment_name #=> String
     #   resp.environment.vpc_id #=> String
     #   resp.environment.service_access_subnet_id #=> String
-    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
+    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2", "SELF_DEPLOYED"
     #   resp.environment.terms_accepted #=> Boolean
     #   resp.environment.license_info #=> Array
     #   resp.environment.license_info[0].solution_key #=> String
@@ -899,7 +930,8 @@ module Aws::Evs
     #   resp.environment.site_id #=> String
     #   resp.environment.environment_status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment.checks #=> Array
-    #   resp.environment.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT"
+    #   resp.environment.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT", "OPERATIONS_MANAGER_REACHABILITY", "SDDC_MANAGER_REACHABILITY", "SDDC_MANAGER_HOST_COUNT", "SDDC_MANAGER_KEY_COVERAGE", "SDDC_MANAGER_KEY_REUSE", "CONNECTOR_HEALTH"
+    #   resp.environment.checks[0].id #=> String
     #   resp.environment.checks[0].result #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment.checks[0].impaired_since #=> Time
     #   resp.environment.connectivity_info.private_route_server_peerings #=> Array
@@ -928,10 +960,19 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Creates a connector for an Amazon EVS environment. A connector
-    # establishes a connection to a VCF appliance, such as vCenter, using a
-    # fully qualified domain name and an Amazon Web Services Secrets Manager
-    # secret that stores the appliance credentials.
+    # Creates a connector for an Amazon EVS environment. A connector allows
+    # the Amazon EVS control plane to interface with VCF appliances using a
+    # fully qualified domain name.
+    #
+    # You can create only one connector of each type per environment. For
+    # environments where Amazon EVS installs VCF, the `SDDC_MANAGER`
+    # connector is created automatically.
+    #
+    # <note markdown="1"> Amazon EVS requires an active connector to SDDC Manager or VCF
+    # Operations Manager to monitor environment health and license
+    # compliance.
+    #
+    #  </note>
     #
     # @option params [String] :client_token
     #   <note markdown="1"> This parameter is not used in Amazon EVS
@@ -954,16 +995,28 @@ module Aws::Evs
     # @option params [required, String] :type
     #   The type of connector to create.
     #
+    #   * `OPERATIONS_MANAGER`: Connector to an Operations Manager appliance.
+    #     Required for VCF 9x environments.
+    #
+    #   * `SDDC_MANAGER`: Connector to an SDDC Manager appliance. Required for
+    #     VCF 5.x environments.
+    #
+    #   * `VCENTER`: Connector to a vCenter Server appliance. Required for
+    #     features that depend on vCenter, such as Windows Server
+    #     license-included.
+    #
     # @option params [required, String] :appliance_fqdn
     #   The fully qualified domain name (FQDN) of the VCF appliance that the
     #   connector targets.
     #
     # @option params [required, String] :secret_identifier
     #   The ARN or name of the Amazon Web Services Secrets Manager secret that
-    #   stores the credentials for the VCF appliance.
+    #   stores the credentials for the VCF appliance. `SDDC_MANAGER` requires
+    #   an `apiKey` field; `OPERATIONS_MANAGER` and `VCENTER` require
+    #   `username` and `password` fields.
     #
     #   Do not use credentials with Administrator privileges. We recommend
-    #   using a service account with the minimum required permissions.
+    #   using a service account with read-only permissions.
     #
     # @return [Types::CreateEnvironmentConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -974,7 +1027,7 @@ module Aws::Evs
     #   resp = client.create_environment_connector({
     #     client_token: "ClientToken",
     #     environment_id: "EnvironmentId", # required
-    #     type: "VCENTER", # required, accepts VCENTER
+    #     type: "OPERATIONS_MANAGER", # required, accepts OPERATIONS_MANAGER, SDDC_MANAGER, VCENTER
     #     appliance_fqdn: "ApplianceFqdn", # required
     #     secret_identifier: "SecretIdentifier", # required
     #   })
@@ -983,14 +1036,14 @@ module Aws::Evs
     #
     #   resp.connector.environment_id #=> String
     #   resp.connector.connector_id #=> String
-    #   resp.connector.type #=> String, one of "VCENTER"
+    #   resp.connector.type #=> String, one of "OPERATIONS_MANAGER", "SDDC_MANAGER", "VCENTER"
     #   resp.connector.appliance_fqdn #=> String
     #   resp.connector.secret_arn #=> String
     #   resp.connector.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETED"
     #   resp.connector.state_details #=> String
     #   resp.connector.status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.connector.checks #=> Array
-    #   resp.connector.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT"
+    #   resp.connector.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT", "OPERATIONS_MANAGER_REACHABILITY", "SDDC_MANAGER_REACHABILITY", "SDDC_MANAGER_HOST_COUNT", "SDDC_MANAGER_KEY_COVERAGE", "SDDC_MANAGER_KEY_REUSE", "CONNECTOR_HEALTH"
     #   resp.connector.checks[0].result #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.connector.checks[0].last_check_attempt #=> Time
     #   resp.connector.checks[0].impaired_since #=> Time
@@ -1006,8 +1059,7 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Creates an ESX host and adds it to an Amazon EVS environment. Amazon
-    # EVS supports 4-32 hosts per environment.
+    # Creates an ESX host and adds it to an Amazon EVS environment.
     #
     # This action can only be used after the Amazon EVS environment is
     # deployed.
@@ -1020,13 +1072,11 @@ module Aws::Evs
     #
     # <note markdown="1"> If you don't specify an ESX version when adding hosts using
     # `CreateEnvironmentHost` action, Amazon EVS automatically uses the
-    # default ESX version associated with your environment's VCF version.
-    # To find the default ESX version for a particular VCF version, use the
+    # default ESX version for your environment's VCF version. To find the
+    # available ESX versions for a particular VCF version, use the
     # `GetVersions` action.
     #
-    #  </note>
-    #
-    # <note markdown="1"> You cannot use the `dedicatedHostId` and `placementGroupId` parameters
+    #  You cannot use the `dedicatedHostId` and `placementGroupId` parameters
     # together in the same `CreateEnvironmentHost` action. This results in a
     # `ValidationException` response.
     #
@@ -1080,7 +1130,7 @@ module Aws::Evs
     #
     #   resp.environment_summary.environment_id #=> String
     #   resp.environment_summary.environment_name #=> String
-    #   resp.environment_summary.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
+    #   resp.environment_summary.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2", "SELF_DEPLOYED"
     #   resp.environment_summary.environment_status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment_summary.environment_state #=> String, one of "CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.environment_summary.created_at #=> Time
@@ -1230,7 +1280,7 @@ module Aws::Evs
     #   resp.environment.environment_name #=> String
     #   resp.environment.vpc_id #=> String
     #   resp.environment.service_access_subnet_id #=> String
-    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
+    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2", "SELF_DEPLOYED"
     #   resp.environment.terms_accepted #=> Boolean
     #   resp.environment.license_info #=> Array
     #   resp.environment.license_info[0].solution_key #=> String
@@ -1238,7 +1288,8 @@ module Aws::Evs
     #   resp.environment.site_id #=> String
     #   resp.environment.environment_status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment.checks #=> Array
-    #   resp.environment.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT"
+    #   resp.environment.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT", "OPERATIONS_MANAGER_REACHABILITY", "SDDC_MANAGER_REACHABILITY", "SDDC_MANAGER_HOST_COUNT", "SDDC_MANAGER_KEY_COVERAGE", "SDDC_MANAGER_KEY_REUSE", "CONNECTOR_HEALTH"
+    #   resp.environment.checks[0].id #=> String
     #   resp.environment.checks[0].result #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment.checks[0].impaired_since #=> Time
     #   resp.environment.connectivity_info.private_route_server_peerings #=> Array
@@ -1312,14 +1363,14 @@ module Aws::Evs
     #
     #   resp.connector.environment_id #=> String
     #   resp.connector.connector_id #=> String
-    #   resp.connector.type #=> String, one of "VCENTER"
+    #   resp.connector.type #=> String, one of "OPERATIONS_MANAGER", "SDDC_MANAGER", "VCENTER"
     #   resp.connector.appliance_fqdn #=> String
     #   resp.connector.secret_arn #=> String
     #   resp.connector.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETED"
     #   resp.connector.state_details #=> String
     #   resp.connector.status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.connector.checks #=> Array
-    #   resp.connector.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT"
+    #   resp.connector.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT", "OPERATIONS_MANAGER_REACHABILITY", "SDDC_MANAGER_REACHABILITY", "SDDC_MANAGER_HOST_COUNT", "SDDC_MANAGER_KEY_COVERAGE", "SDDC_MANAGER_KEY_REUSE", "CONNECTOR_HEALTH"
     #   resp.connector.checks[0].result #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.connector.checks[0].last_check_attempt #=> Time
     #   resp.connector.checks[0].impaired_since #=> Time
@@ -1327,7 +1378,7 @@ module Aws::Evs
     #   resp.connector.modified_at #=> Time
     #   resp.environment_summary.environment_id #=> String
     #   resp.environment_summary.environment_name #=> String
-    #   resp.environment_summary.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
+    #   resp.environment_summary.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2", "SELF_DEPLOYED"
     #   resp.environment_summary.environment_status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment_summary.environment_state #=> String, one of "CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.environment_summary.created_at #=> Time
@@ -1389,7 +1440,7 @@ module Aws::Evs
     #
     #   resp.environment_summary.environment_id #=> String
     #   resp.environment_summary.environment_name #=> String
-    #   resp.environment_summary.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
+    #   resp.environment_summary.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2", "SELF_DEPLOYED"
     #   resp.environment_summary.environment_status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment_summary.environment_state #=> String, one of "CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.environment_summary.created_at #=> Time
@@ -1555,7 +1606,7 @@ module Aws::Evs
     #   resp.environment.environment_name #=> String
     #   resp.environment.vpc_id #=> String
     #   resp.environment.service_access_subnet_id #=> String
-    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
+    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2", "SELF_DEPLOYED"
     #   resp.environment.terms_accepted #=> Boolean
     #   resp.environment.license_info #=> Array
     #   resp.environment.license_info[0].solution_key #=> String
@@ -1563,7 +1614,8 @@ module Aws::Evs
     #   resp.environment.site_id #=> String
     #   resp.environment.environment_status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment.checks #=> Array
-    #   resp.environment.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT"
+    #   resp.environment.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT", "OPERATIONS_MANAGER_REACHABILITY", "SDDC_MANAGER_REACHABILITY", "SDDC_MANAGER_HOST_COUNT", "SDDC_MANAGER_KEY_COVERAGE", "SDDC_MANAGER_KEY_REUSE", "CONNECTOR_HEALTH"
+    #   resp.environment.checks[0].id #=> String
     #   resp.environment.checks[0].result #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment.checks[0].impaired_since #=> Time
     #   resp.environment.connectivity_info.private_route_server_peerings #=> Array
@@ -1604,7 +1656,7 @@ module Aws::Evs
     # @example Response structure
     #
     #   resp.vcf_versions #=> Array
-    #   resp.vcf_versions[0].vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
+    #   resp.vcf_versions[0].vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2", "SELF_DEPLOYED"
     #   resp.vcf_versions[0].status #=> String
     #   resp.vcf_versions[0].default_esx_version #=> String
     #   resp.vcf_versions[0].instance_types #=> Array
@@ -1662,14 +1714,14 @@ module Aws::Evs
     #   resp.connectors #=> Array
     #   resp.connectors[0].environment_id #=> String
     #   resp.connectors[0].connector_id #=> String
-    #   resp.connectors[0].type #=> String, one of "VCENTER"
+    #   resp.connectors[0].type #=> String, one of "OPERATIONS_MANAGER", "SDDC_MANAGER", "VCENTER"
     #   resp.connectors[0].appliance_fqdn #=> String
     #   resp.connectors[0].secret_arn #=> String
     #   resp.connectors[0].state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETED"
     #   resp.connectors[0].state_details #=> String
     #   resp.connectors[0].status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.connectors[0].checks #=> Array
-    #   resp.connectors[0].checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT"
+    #   resp.connectors[0].checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT", "OPERATIONS_MANAGER_REACHABILITY", "SDDC_MANAGER_REACHABILITY", "SDDC_MANAGER_HOST_COUNT", "SDDC_MANAGER_KEY_COVERAGE", "SDDC_MANAGER_KEY_REUSE", "CONNECTOR_HEALTH"
     #   resp.connectors[0].checks[0].result #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.connectors[0].checks[0].last_check_attempt #=> Time
     #   resp.connectors[0].checks[0].impaired_since #=> Time
@@ -1846,7 +1898,7 @@ module Aws::Evs
     #   resp.environment_summaries #=> Array
     #   resp.environment_summaries[0].environment_id #=> String
     #   resp.environment_summaries[0].environment_name #=> String
-    #   resp.environment_summaries[0].vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
+    #   resp.environment_summaries[0].vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2", "SELF_DEPLOYED"
     #   resp.environment_summaries[0].environment_status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment_summaries[0].environment_state #=> String, one of "CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.environment_summaries[0].created_at #=> Time
@@ -2078,14 +2130,14 @@ module Aws::Evs
     #
     #   resp.connector.environment_id #=> String
     #   resp.connector.connector_id #=> String
-    #   resp.connector.type #=> String, one of "VCENTER"
+    #   resp.connector.type #=> String, one of "OPERATIONS_MANAGER", "SDDC_MANAGER", "VCENTER"
     #   resp.connector.appliance_fqdn #=> String
     #   resp.connector.secret_arn #=> String
     #   resp.connector.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETED"
     #   resp.connector.state_details #=> String
     #   resp.connector.status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.connector.checks #=> Array
-    #   resp.connector.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT"
+    #   resp.connector.checks[0].type #=> String, one of "KEY_REUSE", "KEY_COVERAGE", "REACHABILITY", "HOST_COUNT", "VCENTER_REACHABILITY", "VCENTER_VM_SYNC", "VCENTER_VM_EVENT", "OPERATIONS_MANAGER_REACHABILITY", "SDDC_MANAGER_REACHABILITY", "SDDC_MANAGER_HOST_COUNT", "SDDC_MANAGER_KEY_COVERAGE", "SDDC_MANAGER_KEY_REUSE", "CONNECTOR_HEALTH"
     #   resp.connector.checks[0].result #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.connector.checks[0].last_check_attempt #=> Time
     #   resp.connector.checks[0].impaired_since #=> Time
@@ -2119,7 +2171,7 @@ module Aws::Evs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-evs'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1141,7 +1141,7 @@ module Aws::SESV2
     #       domain_signing_selector: "Selector",
     #       domain_signing_private_key: "PrivateKey",
     #       next_signing_key_length: "RSA_1024_BIT", # accepts RSA_1024_BIT, RSA_2048_BIT
-    #       domain_signing_attributes_origin: "AWS_SES", # accepts AWS_SES, EXTERNAL, AWS_SES_AF_SOUTH_1, AWS_SES_EU_NORTH_1, AWS_SES_AP_SOUTH_1, AWS_SES_EU_WEST_3, AWS_SES_EU_WEST_2, AWS_SES_EU_SOUTH_1, AWS_SES_EU_WEST_1, AWS_SES_AP_NORTHEAST_3, AWS_SES_AP_NORTHEAST_2, AWS_SES_ME_SOUTH_1, AWS_SES_AP_NORTHEAST_1, AWS_SES_IL_CENTRAL_1, AWS_SES_SA_EAST_1, AWS_SES_CA_CENTRAL_1, AWS_SES_AP_SOUTHEAST_1, AWS_SES_AP_SOUTHEAST_2, AWS_SES_AP_SOUTHEAST_3, AWS_SES_EU_CENTRAL_1, AWS_SES_US_EAST_1, AWS_SES_US_EAST_2, AWS_SES_US_WEST_1, AWS_SES_US_WEST_2, AWS_SES_ME_CENTRAL_1, AWS_SES_AP_SOUTH_2, AWS_SES_EU_CENTRAL_2, AWS_SES_AP_SOUTHEAST_5, AWS_SES_CA_WEST_1
+    #       domain_signing_attributes_origin: "AWS_SES", # accepts AWS_SES, EXTERNAL, AWS_SES_AF_SOUTH_1, AWS_SES_EU_NORTH_1, AWS_SES_AP_SOUTH_1, AWS_SES_EU_WEST_3, AWS_SES_EU_WEST_2, AWS_SES_EU_SOUTH_1, AWS_SES_EU_WEST_1, AWS_SES_AP_NORTHEAST_3, AWS_SES_AP_NORTHEAST_2, AWS_SES_ME_SOUTH_1, AWS_SES_AP_NORTHEAST_1, AWS_SES_IL_CENTRAL_1, AWS_SES_SA_EAST_1, AWS_SES_CA_CENTRAL_1, AWS_SES_AP_SOUTHEAST_1, AWS_SES_AP_SOUTHEAST_2, AWS_SES_AP_SOUTHEAST_3, AWS_SES_EU_CENTRAL_1, AWS_SES_US_EAST_1, AWS_SES_US_EAST_2, AWS_SES_US_WEST_1, AWS_SES_US_WEST_2, AWS_SES_ME_CENTRAL_1, AWS_SES_AP_SOUTH_2, AWS_SES_EU_CENTRAL_2, AWS_SES_AP_SOUTHEAST_5, AWS_SES_CA_WEST_1, AWS_SES_US_GOV_EAST_1, AWS_SES_US_GOV_WEST_1
     #     },
     #     configuration_set_name: "ConfigurationSetName",
     #   })
@@ -1155,7 +1155,7 @@ module Aws::SESV2
     #   resp.dkim_attributes.tokens #=> Array
     #   resp.dkim_attributes.tokens[0] #=> String
     #   resp.dkim_attributes.signing_hosted_zone #=> String
-    #   resp.dkim_attributes.signing_attributes_origin #=> String, one of "AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1"
+    #   resp.dkim_attributes.signing_attributes_origin #=> String, one of "AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1", "AWS_SES_US_GOV_EAST_1", "AWS_SES_US_GOV_WEST_1"
     #   resp.dkim_attributes.next_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
     #   resp.dkim_attributes.current_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
     #   resp.dkim_attributes.last_key_generation_timestamp #=> Time
@@ -1469,9 +1469,9 @@ module Aws::SESV2
     # The primary region is going to be the AWS-Region where the operation
     # is executed. The secondary region has to be provided in request's
     # parameters. From the data flow standpoint there is no difference
-    # between primary and secondary regions - sending traffic will be split
-    # equally between the two. The primary region is the region where the
-    # resource has been created and where it can be managed.
+    # between primary and secondary regions - sending traffic is divided
+    # between the two. The primary region is the region where the resource
+    # has been created and where it can be managed.
     #
     # @option params [required, String] :endpoint_name
     #   The name of the multi-region endpoint (global-endpoint).
@@ -2025,6 +2025,7 @@ module Aws::SESV2
     #   * {Types::GetAccountResponse#suppression_attributes #suppression_attributes} => Types::SuppressionAttributes
     #   * {Types::GetAccountResponse#details #details} => Types::AccountDetails
     #   * {Types::GetAccountResponse#vdm_attributes #vdm_attributes} => Types::VdmAttributes
+    #   * {Types::GetAccountResponse#pricing_attributes #pricing_attributes} => Types::PricingAttributes
     #
     # @example Response structure
     #
@@ -2050,6 +2051,8 @@ module Aws::SESV2
     #   resp.vdm_attributes.vdm_enabled #=> String, one of "ENABLED", "DISABLED"
     #   resp.vdm_attributes.dashboard_attributes.engagement_metrics #=> String, one of "ENABLED", "DISABLED"
     #   resp.vdm_attributes.guardian_attributes.optimized_shared_delivery #=> String, one of "ENABLED", "DISABLED"
+    #   resp.pricing_attributes.current_plan #=> String, one of "NONE", "ESSENTIALS", "PRO", "ENTERPRISE"
+    #   resp.pricing_attributes.next_plan #=> String, one of "NONE", "ESSENTIALS", "PRO", "ENTERPRISE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccount AWS API Documentation
     #
@@ -2792,7 +2795,7 @@ module Aws::SESV2
     #   resp.dkim_attributes.tokens #=> Array
     #   resp.dkim_attributes.tokens[0] #=> String
     #   resp.dkim_attributes.signing_hosted_zone #=> String
-    #   resp.dkim_attributes.signing_attributes_origin #=> String, one of "AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1"
+    #   resp.dkim_attributes.signing_attributes_origin #=> String, one of "AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1", "AWS_SES_US_GOV_EAST_1", "AWS_SES_US_GOV_WEST_1"
     #   resp.dkim_attributes.next_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
     #   resp.dkim_attributes.current_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
     #   resp.dkim_attributes.last_key_generation_timestamp #=> Time
@@ -4531,6 +4534,43 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Set the pricing plan for your Amazon SES account. Use this operation
+    # to choose a billing plan that packages multiple Amazon SES features at
+    # a single rate.
+    #
+    # @option params [required, String] :plan
+    #   The pricing plan to apply to your Amazon SES account. Can be one of
+    #   the following:
+    #
+    #   * `NONE` – No pricing plan is applied; billing follows per-feature
+    #     pricing.
+    #
+    #   * `ESSENTIALS` – Baseline Amazon SES capabilities and select premium
+    #     features.
+    #
+    #   * `PRO` – Includes everything in `ESSENTIALS`, plus additional premium
+    #     features for growing senders.
+    #
+    #   * `ENTERPRISE` – Includes everything in `PRO`, plus features intended
+    #     for large-scale senders.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_pricing_attributes({
+    #     plan: "NONE", # required, accepts NONE, ESSENTIALS, PRO, ENTERPRISE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountPricingAttributes AWS API Documentation
+    #
+    # @overload put_account_pricing_attributes(params = {})
+    # @param [Hash] params ({})
+    def put_account_pricing_attributes(params = {}, options = {})
+      req = build_request(:put_account_pricing_attributes, params)
+      req.send_request(options)
+    end
+
     # Enable or disable the ability of your account to send email.
     #
     # @option params [Boolean] :sending_enabled
@@ -5193,12 +5233,12 @@ module Aws::SESV2
     #
     #   resp = client.put_email_identity_dkim_signing_attributes({
     #     email_identity: "Identity", # required
-    #     signing_attributes_origin: "AWS_SES", # required, accepts AWS_SES, EXTERNAL, AWS_SES_AF_SOUTH_1, AWS_SES_EU_NORTH_1, AWS_SES_AP_SOUTH_1, AWS_SES_EU_WEST_3, AWS_SES_EU_WEST_2, AWS_SES_EU_SOUTH_1, AWS_SES_EU_WEST_1, AWS_SES_AP_NORTHEAST_3, AWS_SES_AP_NORTHEAST_2, AWS_SES_ME_SOUTH_1, AWS_SES_AP_NORTHEAST_1, AWS_SES_IL_CENTRAL_1, AWS_SES_SA_EAST_1, AWS_SES_CA_CENTRAL_1, AWS_SES_AP_SOUTHEAST_1, AWS_SES_AP_SOUTHEAST_2, AWS_SES_AP_SOUTHEAST_3, AWS_SES_EU_CENTRAL_1, AWS_SES_US_EAST_1, AWS_SES_US_EAST_2, AWS_SES_US_WEST_1, AWS_SES_US_WEST_2, AWS_SES_ME_CENTRAL_1, AWS_SES_AP_SOUTH_2, AWS_SES_EU_CENTRAL_2, AWS_SES_AP_SOUTHEAST_5, AWS_SES_CA_WEST_1
+    #     signing_attributes_origin: "AWS_SES", # required, accepts AWS_SES, EXTERNAL, AWS_SES_AF_SOUTH_1, AWS_SES_EU_NORTH_1, AWS_SES_AP_SOUTH_1, AWS_SES_EU_WEST_3, AWS_SES_EU_WEST_2, AWS_SES_EU_SOUTH_1, AWS_SES_EU_WEST_1, AWS_SES_AP_NORTHEAST_3, AWS_SES_AP_NORTHEAST_2, AWS_SES_ME_SOUTH_1, AWS_SES_AP_NORTHEAST_1, AWS_SES_IL_CENTRAL_1, AWS_SES_SA_EAST_1, AWS_SES_CA_CENTRAL_1, AWS_SES_AP_SOUTHEAST_1, AWS_SES_AP_SOUTHEAST_2, AWS_SES_AP_SOUTHEAST_3, AWS_SES_EU_CENTRAL_1, AWS_SES_US_EAST_1, AWS_SES_US_EAST_2, AWS_SES_US_WEST_1, AWS_SES_US_WEST_2, AWS_SES_ME_CENTRAL_1, AWS_SES_AP_SOUTH_2, AWS_SES_EU_CENTRAL_2, AWS_SES_AP_SOUTHEAST_5, AWS_SES_CA_WEST_1, AWS_SES_US_GOV_EAST_1, AWS_SES_US_GOV_WEST_1
     #     signing_attributes: {
     #       domain_signing_selector: "Selector",
     #       domain_signing_private_key: "PrivateKey",
     #       next_signing_key_length: "RSA_1024_BIT", # accepts RSA_1024_BIT, RSA_2048_BIT
-    #       domain_signing_attributes_origin: "AWS_SES", # accepts AWS_SES, EXTERNAL, AWS_SES_AF_SOUTH_1, AWS_SES_EU_NORTH_1, AWS_SES_AP_SOUTH_1, AWS_SES_EU_WEST_3, AWS_SES_EU_WEST_2, AWS_SES_EU_SOUTH_1, AWS_SES_EU_WEST_1, AWS_SES_AP_NORTHEAST_3, AWS_SES_AP_NORTHEAST_2, AWS_SES_ME_SOUTH_1, AWS_SES_AP_NORTHEAST_1, AWS_SES_IL_CENTRAL_1, AWS_SES_SA_EAST_1, AWS_SES_CA_CENTRAL_1, AWS_SES_AP_SOUTHEAST_1, AWS_SES_AP_SOUTHEAST_2, AWS_SES_AP_SOUTHEAST_3, AWS_SES_EU_CENTRAL_1, AWS_SES_US_EAST_1, AWS_SES_US_EAST_2, AWS_SES_US_WEST_1, AWS_SES_US_WEST_2, AWS_SES_ME_CENTRAL_1, AWS_SES_AP_SOUTH_2, AWS_SES_EU_CENTRAL_2, AWS_SES_AP_SOUTHEAST_5, AWS_SES_CA_WEST_1
+    #       domain_signing_attributes_origin: "AWS_SES", # accepts AWS_SES, EXTERNAL, AWS_SES_AF_SOUTH_1, AWS_SES_EU_NORTH_1, AWS_SES_AP_SOUTH_1, AWS_SES_EU_WEST_3, AWS_SES_EU_WEST_2, AWS_SES_EU_SOUTH_1, AWS_SES_EU_WEST_1, AWS_SES_AP_NORTHEAST_3, AWS_SES_AP_NORTHEAST_2, AWS_SES_ME_SOUTH_1, AWS_SES_AP_NORTHEAST_1, AWS_SES_IL_CENTRAL_1, AWS_SES_SA_EAST_1, AWS_SES_CA_CENTRAL_1, AWS_SES_AP_SOUTHEAST_1, AWS_SES_AP_SOUTHEAST_2, AWS_SES_AP_SOUTHEAST_3, AWS_SES_EU_CENTRAL_1, AWS_SES_US_EAST_1, AWS_SES_US_EAST_2, AWS_SES_US_WEST_1, AWS_SES_US_WEST_2, AWS_SES_ME_CENTRAL_1, AWS_SES_AP_SOUTH_2, AWS_SES_EU_CENTRAL_2, AWS_SES_AP_SOUTHEAST_5, AWS_SES_CA_WEST_1, AWS_SES_US_GOV_EAST_1, AWS_SES_US_GOV_WEST_1
     #     },
     #   })
     #
@@ -6384,7 +6424,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

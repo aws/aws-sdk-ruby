@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2026-07-20)
+------------------
+
+* Feature - For new SaaS product integrations, CustomerIdentifier is not populated in ResolveCustomer responses and is not supported in BatchMeterUsage. Use CustomerAWSAccountId and LicenseArn instead.
+
+1.101.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2026-07-07)
+------------------
+
+* Feature - The usage reporting window for the BatchMeterUsage API has been extended from 6 hours to 24 hours. Sellers can now submit usage records for up to 24 hours after a metered event occurs. The existing 6-hour grace period at the end of a billing cycle still applies.
+
+1.99.0 (2026-07-01)
+------------------
+
+* Feature - The usage reporting window for the BatchMeterUsage API has been extended from 6 hours to 24 hours. Sellers can now submit usage records for up to 24 hours after a metered event occurs.
+
 1.98.0 (2026-06-02)
 ------------------
 

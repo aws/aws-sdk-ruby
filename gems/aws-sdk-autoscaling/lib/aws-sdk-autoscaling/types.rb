@@ -798,6 +798,10 @@ module Aws::AutoScaling
     #   * `balanced-best-effort` - If launches fail in an Availability Zone,
     #     Auto Scaling will attempt to launch in another healthy
     #     Availability Zone instead.
+    #
+    #   * `reservations-then-balanced` - Auto Scaling will first attempt to
+    #     launch into your Capacity Reservations, and then balance any
+    #     remaining capacity across the healthy Availability Zones.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AvailabilityZoneDistribution AWS API Documentation

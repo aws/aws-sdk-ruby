@@ -74,6 +74,41 @@ module Aws
         expect(json(string: 'abc', integer: nil)).to eq('{"String":"abc"}')
       end
 
+      describe 'document types' do
+        it 'serializes BigDecimal values as JSON numbers' do
+          expect(json(document_type: {
+            positive: BigDecimal('42.5'),
+            integer: BigDecimal('42'),
+            zero: BigDecimal('0'),
+            negative: BigDecimal('-7')
+          })).to eq('{"DocumentType":{"positive":42.5,"integer":42.0,"zero":0.0,"negative":-7.0}}')
+        end
+
+        it 'serializes Float special values in documents' do
+          expect(json(document_type: {
+            inf: Float::INFINITY,
+            neg_inf: -Float::INFINITY,
+            nan: Float::NAN
+          })).to eq('{"DocumentType":{"inf":"Infinity","neg_inf":"-Infinity","nan":"NaN"}}')
+        end
+
+        it 'recursively converts BigDecimal in nested documents' do
+          expect(json(document_type: {
+            list: [BigDecimal('1.1'), BigDecimal('2.2')],
+            nested: { deep: [{ val: BigDecimal('3.14') }] }
+          })).to eq('{"DocumentType":{"list":[1.1,2.2],"nested":{"deep":[{"val":3.14}]}}}')
+        end
+
+        it 'passes through other document value types unchanged' do
+          expect(json(document_type: {
+            integer: 42,
+            float: 3.14,
+            string: 'hello',
+            boolean: true,
+            null_val: nil
+          })).to eq('{"DocumentType":{"integer":42,"float":3.14,"string":"hello","boolean":true,"null_val":null}}')
+        end
+      end
     end
   end
 end

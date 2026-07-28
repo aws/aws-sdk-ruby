@@ -365,7 +365,9 @@ module Aws
                              enabled: bool,
                              start_time: ::Time?,
                              end_time: ::Time?
-                           }
+                           },
+                           ?use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED"),
+                           ?engine_mode: ("GENERAL" | "OPTIMIZED")
                          ) -> _CreateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
 
@@ -941,6 +943,23 @@ module Aws
                      ) -> _GetIndexResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIndexResponseSuccess
 
+      interface _GetMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMigrationResponse]
+        def migration_id: () -> ::String
+        def status: () -> ::String
+        def application_id: () -> ::String
+        def source: () -> Types::MigrationSource
+        def exported_count: () -> ::Integer
+        def imported_count: () -> ::Integer
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_migration-instance_method
+      def get_migration: (
+                           migration_id: ::String
+                         ) -> _GetMigrationResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMigrationResponseSuccess
+
       interface _GetPackageVersionHistoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPackageVersionHistoryResponse]
         def package_id: () -> ::String
@@ -979,6 +998,22 @@ module Aws
                                 domain_name: ::String
                               ) -> _GetUpgradeStatusResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUpgradeStatusResponseSuccess
+
+      interface _InsightFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InsightFeedbackResponse]
+        def status: () -> ("SUCCESS" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#insight_feedback-instance_method
+      def insight_feedback: (
+                              entity: {
+                                type: ("DomainName"),
+                                value: ::String
+                              },
+                              insight_id: ::String,
+                              thumbs: ("Up" | "Down"),
+                              ?feedback_text: ::String
+                            ) -> _InsightFeedbackResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InsightFeedbackResponseSuccess
 
       interface _ListApplicationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
@@ -1101,6 +1136,20 @@ module Aws
                                         ?instance_type: ::String
                                       ) -> _ListInstanceTypeDetailsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstanceTypeDetailsResponseSuccess
+
+      interface _ListMigrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMigrationsResponse]
+        def migrations: () -> ::Array[Types::MigrationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_migrations-instance_method
+      def list_migrations: (
+                             application_id: ::String,
+                             ?status: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListMigrationsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMigrationsResponseSuccess
 
       interface _ListPackagesForDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPackagesForDomainResponse]
@@ -1280,6 +1329,40 @@ module Aws
                                     ) -> _StartDomainMaintenanceResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDomainMaintenanceResponseSuccess
 
+      interface _StartMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMigrationResponse]
+        def migration_id: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#start_migration-instance_method
+      def start_migration: (
+                             application_id: ::String,
+                             migration_options: {
+                               source: {
+                                 datasource_arn: ::String
+                               },
+                               workspace: {
+                                 workspace_id: ::String?,
+                                 create_workspace: bool?,
+                                 name: ::String?,
+                                 type: ::String?
+                               },
+                               export_options: {
+                                 types: Array[::String]?,
+                                 objects: Array[
+                                   {
+                                     type: ::String,
+                                     id: ::String
+                                   }
+                                 ]?,
+                                 include_references_deep: bool?
+                               }?,
+                               conflict_resolution: ::String?
+                             },
+                             ?client_token: ::String
+                           ) -> _StartMigrationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMigrationResponseSuccess
+
       interface _StartServiceSoftwareUpdateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartServiceSoftwareUpdateResponse]
         def service_software_options: () -> Types::ServiceSoftwareOptions
@@ -1442,7 +1525,9 @@ module Aws
                                     enabled: bool,
                                     start_time: ::Time?,
                                     end_time: ::Time?
-                                  }
+                                  },
+                                  ?use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED"),
+                                  ?engine_mode: ("GENERAL" | "OPTIMIZED")
                                 ) -> _UpdateDomainConfigResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainConfigResponseSuccess
 

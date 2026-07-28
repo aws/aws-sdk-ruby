@@ -199,7 +199,7 @@ module Aws
                                     }
                                   ],
                                   name: ::String,
-                                  description: ::String,
+                                  ?description: ::String,
                                   creator_member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")],
                                   ?creator_ml_member_abilities: {
                                     custom_ml_member_abilities: Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
@@ -360,6 +360,40 @@ module Aws
                                            ) -> _CreateIdNamespaceAssociationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdNamespaceAssociationResponseSuccess
 
+      interface _CreateIntermediateTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntermediateTableOutput]
+        def intermediate_table: () -> Types::IntermediateTable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_intermediate_table-instance_method
+      def create_intermediate_table: (
+                                       membership_identifier: ::String,
+                                       name: ::String,
+                                       ?description: ::String,
+                                       population_analysis_configuration: {
+                                         sql_parameters: {
+                                           query_string: ::String?,
+                                           analysis_template_arn: ::String?
+                                         }?
+                                       },
+                                       ?kms_key_arn: ::String,
+                                       ?retention_in_days: ::Integer,
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _CreateIntermediateTableResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntermediateTableResponseSuccess
+
+      interface _CreateIntermediateTableAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntermediateTableAnalysisRuleOutput]
+        def analysis_rule: () -> Types::IntermediateTableAnalysisRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_intermediate_table_analysis_rule-instance_method
+      def create_intermediate_table_analysis_rule: (
+                                                     membership_identifier: ::String,
+                                                     intermediate_table_identifier: ::String,
+                                                     analysis_rule_type: ("CUSTOM"),
+                                                     analysis_rule_policy: Params::intermediate_table_analysis_rule_policy
+                                                   ) -> _CreateIntermediateTableAnalysisRuleResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntermediateTableAnalysisRuleResponseSuccess
+
       interface _CreateMembershipResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateMembershipOutput]
         def membership: () -> Types::Membership
@@ -503,6 +537,27 @@ module Aws
                                            ) -> _DeleteIdNamespaceAssociationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdNamespaceAssociationResponseSuccess
 
+      interface _DeleteIntermediateTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIntermediateTableOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_intermediate_table-instance_method
+      def delete_intermediate_table: (
+                                       membership_identifier: ::String,
+                                       intermediate_table_identifier: ::String
+                                     ) -> _DeleteIntermediateTableResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIntermediateTableResponseSuccess
+
+      interface _DeleteIntermediateTableAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIntermediateTableAnalysisRuleOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_intermediate_table_analysis_rule-instance_method
+      def delete_intermediate_table_analysis_rule: (
+                                                     membership_identifier: ::String,
+                                                     intermediate_table_identifier: ::String,
+                                                     analysis_rule_type: ("CUSTOM")
+                                                   ) -> _DeleteIntermediateTableAnalysisRuleResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIntermediateTableAnalysisRuleResponseSuccess
+
       interface _DeleteMemberResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMemberOutput]
       end
@@ -531,6 +586,17 @@ module Aws
                                             privacy_budget_template_identifier: ::String
                                           ) -> _DeletePrivacyBudgetTemplateResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePrivacyBudgetTemplateResponseSuccess
+
+      interface _DisallowIntermediateTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisallowIntermediateTableOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#disallow_intermediate_table-instance_method
+      def disallow_intermediate_table: (
+                                         membership_identifier: ::String,
+                                         intermediate_table_name: ::String,
+                                         ?include_descendants: bool
+                                       ) -> _DisallowIntermediateTableResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisallowIntermediateTableResponseSuccess
 
       interface _GetAnalysisTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAnalysisTemplateOutput]
@@ -684,6 +750,29 @@ module Aws
                                           membership_identifier: ::String
                                         ) -> _GetIdNamespaceAssociationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdNamespaceAssociationResponseSuccess
+
+      interface _GetIntermediateTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIntermediateTableOutput]
+        def intermediate_table: () -> Types::IntermediateTable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_intermediate_table-instance_method
+      def get_intermediate_table: (
+                                    intermediate_table_identifier: ::String,
+                                    membership_identifier: ::String
+                                  ) -> _GetIntermediateTableResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntermediateTableResponseSuccess
+
+      interface _GetIntermediateTableAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIntermediateTableAnalysisRuleOutput]
+        def analysis_rule: () -> Types::IntermediateTableAnalysisRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_intermediate_table_analysis_rule-instance_method
+      def get_intermediate_table_analysis_rule: (
+                                                  membership_identifier: ::String,
+                                                  intermediate_table_identifier: ::String,
+                                                  analysis_rule_type: ("CUSTOM")
+                                                ) -> _GetIntermediateTableAnalysisRuleResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntermediateTableAnalysisRuleResponseSuccess
 
       interface _GetMembershipResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMembershipOutput]
@@ -922,6 +1011,33 @@ module Aws
                                           ) -> _ListIdNamespaceAssociationsResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdNamespaceAssociationsResponseSuccess
 
+      interface _ListIntermediateTableVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIntermediateTableVersionsOutput]
+        def intermediate_table_version_summaries: () -> ::Array[Types::IntermediateTableVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_intermediate_table_versions-instance_method
+      def list_intermediate_table_versions: (
+                                              membership_identifier: ::String,
+                                              intermediate_table_identifier: ::String,
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _ListIntermediateTableVersionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntermediateTableVersionsResponseSuccess
+
+      interface _ListIntermediateTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIntermediateTablesOutput]
+        def intermediate_table_summaries: () -> ::Array[Types::IntermediateTableSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_intermediate_tables-instance_method
+      def list_intermediate_tables: (
+                                      membership_identifier: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListIntermediateTablesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntermediateTablesResponseSuccess
+
       interface _ListMembersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersOutput]
         def next_token: () -> ::String
@@ -1012,7 +1128,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_schemas-instance_method
       def list_schemas: (
                           collaboration_identifier: ::String,
-                          ?schema_type: ("TABLE" | "ID_MAPPING_TABLE"),
+                          ?schema_type: ("TABLE" | "ID_MAPPING_TABLE" | "INTERMEDIATE_TABLE"),
                           ?next_token: ::String,
                           ?max_results: ::Integer
                         ) -> _ListSchemasResponseSuccess
@@ -1039,6 +1155,30 @@ module Aws
                                        ?job_type: ("BATCH" | "INCREMENTAL" | "DELETE_ONLY")
                                      ) -> _PopulateIdMappingTableResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PopulateIdMappingTableResponseSuccess
+
+      interface _PopulateIntermediateTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PopulateIntermediateTableOutput]
+        def analysis_id: () -> ::String
+        def analysis_type: () -> ("QUERY")
+        def version_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#populate_intermediate_table-instance_method
+      def populate_intermediate_table: (
+                                         intermediate_table_identifier: ::String,
+                                         membership_identifier: ::String,
+                                         ?parameters: Hash[::String, ::String],
+                                         ?compute_configuration: {
+                                           query_compute_configuration: {
+                                             type: ("CR.1X" | "CR.4X" | "CR.8X")?,
+                                             number: ::Integer?,
+                                             properties: {
+                                               spark: Hash[::String, ::String]?
+                                             }?
+                                           }?
+                                         },
+                                         ?analysis_payer_account_id: ::String
+                                       ) -> _PopulateIntermediateTableResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PopulateIntermediateTableResponseSuccess
 
       interface _PreviewPrivacyImpactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PreviewPrivacyImpactOutput]
@@ -1126,12 +1266,17 @@ module Aws
                                              }?
                                            }
                                          ]
+                                       }?,
+                                       intermediate_table: {
+                                         id: ::String,
+                                         arn: ::String,
+                                         name: ::String
                                        }?
                                      }
                                    },
                                    ?compute_configuration: {
                                      worker: {
-                                       type: ("CR.1X" | "CR.4X")?,
+                                       type: ("CR.1X" | "CR.4X" | "CR.8X")?,
                                        number: ::Integer?,
                                        properties: {
                                          spark: Hash[::String, ::String]?
@@ -1294,6 +1439,38 @@ module Aws
                                              }
                                            ) -> _UpdateIdNamespaceAssociationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdNamespaceAssociationResponseSuccess
+
+      interface _UpdateIntermediateTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIntermediateTableOutput]
+        def intermediate_table: () -> Types::IntermediateTable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_intermediate_table-instance_method
+      def update_intermediate_table: (
+                                       intermediate_table_identifier: ::String,
+                                       membership_identifier: ::String,
+                                       ?description: ::String,
+                                       ?kms_key_arn: ::String,
+                                       ?columns: Array[
+                                         {
+                                           name: ::String,
+                                           type: ::String
+                                         }
+                                       ]
+                                     ) -> _UpdateIntermediateTableResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntermediateTableResponseSuccess
+
+      interface _UpdateIntermediateTableAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIntermediateTableAnalysisRuleOutput]
+        def analysis_rule: () -> Types::IntermediateTableAnalysisRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_intermediate_table_analysis_rule-instance_method
+      def update_intermediate_table_analysis_rule: (
+                                                     membership_identifier: ::String,
+                                                     intermediate_table_identifier: ::String,
+                                                     analysis_rule_type: ("CUSTOM"),
+                                                     analysis_rule_policy: Params::intermediate_table_analysis_rule_policy
+                                                   ) -> _UpdateIntermediateTableAnalysisRuleResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntermediateTableAnalysisRuleResponseSuccess
 
       interface _UpdateMembershipResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMembershipOutput]

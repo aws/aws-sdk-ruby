@@ -643,8 +643,8 @@ module Aws::BCMDataExports
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_owner
-    #   The AWS Account ID that owns the S3 bucket used as the destination
-    #   for the data export.
+    #   The Amazon Web Services account ID that owns the S3 bucket used as
+    #   the destination for the data export.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix

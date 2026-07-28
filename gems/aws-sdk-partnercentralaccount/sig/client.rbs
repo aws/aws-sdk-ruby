@@ -363,6 +363,59 @@ module Aws
                                   ) -> _GetProfileVisibilityResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileVisibilityResponseSuccess
 
+      interface _GetQualificationsAssociationDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQualificationsAssociationDetailsResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("ASSOCIATED" | "NOT_ASSOCIATED")
+        def primary_partner: () -> Types::QualificationsAssociationPartner
+        def associated_partners: () -> ::Array[Types::QualificationsAssociationPartner]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_qualifications_association_details-instance_method
+      def get_qualifications_association_details: (
+                                                    catalog: ::String,
+                                                    identifier: ::String
+                                                  ) -> _GetQualificationsAssociationDetailsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQualificationsAssociationDetailsResponseSuccess
+
+      interface _GetQualificationsAssociationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQualificationsAssociationTaskResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def task_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED")
+        def primary_partner: () -> Types::QualificationsAssociationPartner
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_qualifications_association_task-instance_method
+      def get_qualifications_association_task: (
+                                                 catalog: ::String,
+                                                 identifier: ::String
+                                               ) -> _GetQualificationsAssociationTaskResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQualificationsAssociationTaskResponseSuccess
+
+      interface _GetQualificationsDisassociationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQualificationsDisassociationTaskResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def task_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED")
+        def associated_partner: () -> Types::QualificationsAssociationPartner
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_qualifications_disassociation_task-instance_method
+      def get_qualifications_disassociation_task: (
+                                                    catalog: ::String,
+                                                    identifier: ::String
+                                                  ) -> _GetQualificationsDisassociationTaskResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQualificationsDisassociationTaskResponseSuccess
+
       interface _GetVerificationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetVerificationResponse]
         def verification_type: () -> ("BUSINESS_VERIFICATION" | "REGISTRANT_VERIFICATION")
@@ -539,10 +592,58 @@ module Aws
                                              logo_url: ::String,
                                              locale: ::String
                                            }
-                                         ]?
+                                         ]?,
+                                         headquarters: {
+                                           country_code: ::String,
+                                           subdivision_code: ::String
+                                         }?
                                        }
                                      ) -> _StartProfileUpdateTaskResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartProfileUpdateTaskResponseSuccess
+
+      interface _StartQualificationsAssociationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartQualificationsAssociationTaskResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def task_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED")
+        def primary_partner: () -> Types::QualificationsAssociationPartner
+        def started_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#start_qualifications_association_task-instance_method
+      def start_qualifications_association_task: (
+                                                   catalog: ::String,
+                                                   identifier: ::String,
+                                                   ?client_token: ::String,
+                                                   primary_partner: {
+                                                     profile_id: ::String?,
+                                                     account_id: ::String?
+                                                   }
+                                                 ) -> _StartQualificationsAssociationTaskResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQualificationsAssociationTaskResponseSuccess
+
+      interface _StartQualificationsDisassociationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartQualificationsDisassociationTaskResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def task_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED")
+        def associated_partner: () -> Types::QualificationsAssociationPartner
+        def started_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#start_qualifications_disassociation_task-instance_method
+      def start_qualifications_disassociation_task: (
+                                                      catalog: ::String,
+                                                      identifier: ::String,
+                                                      ?client_token: ::String,
+                                                      associated_partner: {
+                                                        profile_id: ::String?,
+                                                        account_id: ::String?
+                                                      }
+                                                    ) -> _StartQualificationsDisassociationTaskResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQualificationsDisassociationTaskResponseSuccess
 
       interface _StartVerificationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartVerificationResponse]

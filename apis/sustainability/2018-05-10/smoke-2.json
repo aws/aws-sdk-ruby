@@ -1,12 +1,12 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetEstimatedCarbonEmissionsDimensionValuesSuccess",
-    "operationName" : "GetEstimatedCarbonEmissionsDimensionValues",
+    "id" : "GetEstimatedWaterAllocationDimensionValuesSuccess",
+    "operationName" : "GetEstimatedWaterAllocationDimensionValues",
     "input" : {
       "TimePeriod" : {
         "Start" : 1735689600,
-        "End" : 1767225599
+        "End" : 1767225600
       },
       "Dimensions" : [ "REGION", "SERVICE" ]
     },
@@ -20,14 +20,52 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetEstimatedCarbonEmissionsDimensionValuesFailure",
-    "operationName" : "GetEstimatedCarbonEmissionsDimensionValues",
+    "id" : "GetEstimatedWaterAllocationDimensionValuesFailure",
+    "operationName" : "GetEstimatedWaterAllocationDimensionValues",
     "input" : {
       "TimePeriod" : {
-        "Start" : 1767225599,
+        "Start" : 1767225600,
         "End" : 1735689600
       },
       "Dimensions" : [ "REGION", "SERVICE" ]
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ValidationException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetEstimatedWaterAllocationSuccess",
+    "operationName" : "GetEstimatedWaterAllocation",
+    "input" : {
+      "TimePeriod" : {
+        "Start" : 1735689600,
+        "End" : 1767225600
+      }
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetEstimatedWaterAllocationFailure",
+    "operationName" : "GetEstimatedWaterAllocation",
+    "input" : {
+      "TimePeriod" : {
+        "Start" : 1767225600,
+        "End" : 1735689600
+      }
     },
     "expectation" : {
       "failure" : {
@@ -66,6 +104,46 @@
         "Start" : 1767225599,
         "End" : 1735689600
       }
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ValidationException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetEstimatedCarbonEmissionsDimensionValuesSuccess",
+    "operationName" : "GetEstimatedCarbonEmissionsDimensionValues",
+    "input" : {
+      "TimePeriod" : {
+        "Start" : 1735689600,
+        "End" : 1767225599
+      },
+      "Dimensions" : [ "REGION", "SERVICE" ]
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetEstimatedCarbonEmissionsDimensionValuesFailure",
+    "operationName" : "GetEstimatedCarbonEmissionsDimensionValues",
+    "input" : {
+      "TimePeriod" : {
+        "Start" : 1767225599,
+        "End" : 1735689600
+      },
+      "Dimensions" : [ "REGION", "SERVICE" ]
     },
     "expectation" : {
       "failure" : {

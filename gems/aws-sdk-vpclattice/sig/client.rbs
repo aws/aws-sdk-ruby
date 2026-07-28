@@ -236,6 +236,7 @@ module Aws
         def certificate_arn: () -> ::String
         def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
         def auth_type: () -> ("NONE" | "AWS_IAM")
+        def idle_timeout_seconds: () -> ::Integer
         def dns_entry: () -> Types::DnsEntry
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_service-instance_method
@@ -245,7 +246,8 @@ module Aws
                             ?tags: Hash[::String, ::String],
                             ?custom_domain_name: ::String,
                             ?certificate_arn: ::String,
-                            ?auth_type: ("NONE" | "AWS_IAM")
+                            ?auth_type: ("NONE" | "AWS_IAM"),
+                            ?idle_timeout_seconds: ::Integer
                           ) -> _CreateServiceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceResponseSuccess
 
@@ -698,6 +700,7 @@ module Aws
         def certificate_arn: () -> ::String
         def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
         def auth_type: () -> ("NONE" | "AWS_IAM")
+        def idle_timeout_seconds: () -> ::Integer
         def failure_code: () -> ::String
         def failure_message: () -> ::String
       end
@@ -1218,12 +1221,14 @@ module Aws
         def custom_domain_name: () -> ::String
         def certificate_arn: () -> ::String
         def auth_type: () -> ("NONE" | "AWS_IAM")
+        def idle_timeout_seconds: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_service-instance_method
       def update_service: (
                             service_identifier: ::String,
                             ?certificate_arn: ::String,
-                            ?auth_type: ("NONE" | "AWS_IAM")
+                            ?auth_type: ("NONE" | "AWS_IAM"),
+                            ?idle_timeout_seconds: ::Integer
                           ) -> _UpdateServiceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceResponseSuccess
 

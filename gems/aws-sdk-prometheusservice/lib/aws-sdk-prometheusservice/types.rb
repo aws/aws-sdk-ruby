@@ -280,6 +280,23 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # The configuration identifies the CloudWatch dataset used as a scraper
+    # destination.
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch dataset. To use the
+    #   default dataset, specify
+    #   `arn:aws:cloudwatch:<region>:<account-id>:dataset/default`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CloudWatchConfiguration AWS API Documentation
+    #
+    class CloudWatchConfiguration < Struct.new(
+      :dataset_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration details for logging to CloudWatch Logs.
     #
     # @!attribute [rw] log_group_arn
@@ -654,8 +671,9 @@ module Aws::PrometheusService
     #   @return [Types::Source]
     #
     # @!attribute [rw] destination
-    #   The Amazon Managed Service for Prometheus workspace to send metrics
-    #   to.
+    #   The destination where the scraper sends the collected metrics. Valid
+    #   destinations are Amazon Managed Service for Prometheus workspaces
+    #   and CloudWatch datasets.
     #   @return [Types::Destination]
     #
     # @!attribute [rw] role_configuration
@@ -1364,16 +1382,22 @@ module Aws::PrometheusService
     #   to.
     #   @return [Types::AmpConfiguration]
     #
+    # @!attribute [rw] cloud_watch_configuration
+    #   The CloudWatch dataset to send metrics to.
+    #   @return [Types::CloudWatchConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/Destination AWS API Documentation
     #
     class Destination < Struct.new(
       :amp_configuration,
+      :cloud_watch_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class AmpConfiguration < Destination; end
+      class CloudWatchConfiguration < Destination; end
       class Unknown < Destination; end
     end
 
@@ -2536,8 +2560,9 @@ module Aws::PrometheusService
     #   @return [Types::Source]
     #
     # @!attribute [rw] destination
-    #   The Amazon Managed Service for Prometheus workspace the scraper
-    #   sends metrics to.
+    #   The destination where the scraper sends metrics. Valid destinations
+    #   are Amazon Managed Service for Prometheus workspaces and CloudWatch
+    #   datasets.
     #   @return [Types::Destination]
     #
     # @!attribute [rw] role_configuration
@@ -2671,8 +2696,9 @@ module Aws::PrometheusService
     #   @return [Types::Source]
     #
     # @!attribute [rw] destination
-    #   The Amazon Managed Service for Prometheus workspace the scraper
-    #   sends metrics to.
+    #   The destination where the scraper sends metrics. Valid destinations
+    #   are Amazon Managed Service for Prometheus workspaces and CloudWatch
+    #   datasets.
     #   @return [Types::Destination]
     #
     # @!attribute [rw] role_configuration
@@ -2979,8 +3005,9 @@ module Aws::PrometheusService
     #   @return [Types::ScrapeConfiguration]
     #
     # @!attribute [rw] destination
-    #   The new Amazon Managed Service for Prometheus workspace to send
-    #   metrics to.
+    #   The new destination where the scraper sends metrics. Valid
+    #   destinations are Amazon Managed Service for Prometheus workspaces
+    #   and CloudWatch datasets.
     #   @return [Types::Destination]
     #
     # @!attribute [rw] role_configuration

@@ -69,6 +69,7 @@ module Aws
       allowed_audience: Array[::String]?,
       allowed_clients: Array[::String]?,
       allowed_scopes: Array[::String]?,
+      advertised_scope_mapping: Hash[::String, ::String]?,
       custom_claims: Array[
         Params::custom_claim_validation_type
       ]?,
@@ -118,6 +119,19 @@ module Aws
       efs_access_point: {
         access_point_arn: ::String,
         mount_path: ::String
+      }?
+    }
+
+      type tools_file_system_configuration = {
+      s3_files_configuration: {
+        access_point_arn: ::String,
+        mount_path: ::String,
+        file_system_arn: ::String
+      }?,
+      efs_configuration: {
+        access_point_arn: ::String,
+        mount_path: ::String,
+        file_system_arn: ::String
       }?
     }
 
@@ -326,7 +340,8 @@ module Aws
 
       type connector_target_configuration = {
       source: {
-        connector_id: ::String
+        connector_id: ::String,
+        version: ::String?
       },
       enabled: Array[::String]?,
       configurations: Array[
@@ -530,7 +545,9 @@ module Aws
       max_tokens: ::Integer?,
       temperature: ::Float?,
       top_p: ::Float?,
-      top_k: ::Integer?
+      top_k: ::Integer?,
+      additional_params: {
+      }?
     }
 
       type harness_lite_llm_model_config = {

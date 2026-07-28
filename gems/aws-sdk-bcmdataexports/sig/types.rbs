@@ -60,7 +60,7 @@ module Aws::BCMDataExports
 
     class ExecutionStatus
       attr_accessor status_code: ("INITIATION_IN_PROCESS" | "QUERY_QUEUED" | "QUERY_IN_PROCESS" | "QUERY_FAILURE" | "DELIVERY_IN_PROCESS" | "DELIVERY_SUCCESS" | "DELIVERY_FAILURE")
-      attr_accessor status_reason: ("INSUFFICIENT_PERMISSION" | "BILL_OWNER_CHANGED" | "INTERNAL_FAILURE")
+      attr_accessor status_reason: ("INSUFFICIENT_PERMISSION" | "BILL_OWNER_CHANGED" | "INTERNAL_FAILURE" | "DEPRECATED")
       attr_accessor created_at: ::Time
       attr_accessor completed_at: ::Time
       attr_accessor last_updated_at: ::Time
@@ -86,7 +86,7 @@ module Aws::BCMDataExports
 
     class ExportStatus
       attr_accessor status_code: ("HEALTHY" | "UNHEALTHY")
-      attr_accessor status_reason: ("INSUFFICIENT_PERMISSION" | "BILL_OWNER_CHANGED" | "INTERNAL_FAILURE")
+      attr_accessor status_reason: ("INSUFFICIENT_PERMISSION" | "BILL_OWNER_CHANGED" | "INTERNAL_FAILURE" | "DEPRECATED")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor last_refreshed_at: ::Time
@@ -216,7 +216,7 @@ module Aws::BCMDataExports
     class S3OutputConfigurations
       attr_accessor output_type: ("CUSTOM" | "ATHENA" | "REDSHIFT")
       attr_accessor format: ("TEXT_OR_CSV" | "PARQUET")
-      attr_accessor compression: ("GZIP" | "PARQUET")
+      attr_accessor compression: ("GZIP" | "PARQUET" | "ZIP")
       attr_accessor overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
       SENSITIVE: []
     end

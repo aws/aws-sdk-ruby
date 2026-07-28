@@ -1296,6 +1296,11 @@ module Aws::SSM
     #   set to Failed.
     #   @return [String]
     #
+    # @!attribute [rw] warning_message
+    #   A message that describes a non-critical issue that occurred during
+    #   the automation execution.
+    #   @return [String]
+    #
     # @!attribute [rw] mode
     #   The automation execution mode.
     #   @return [String]
@@ -1424,6 +1429,7 @@ module Aws::SSM
       :parameters,
       :outputs,
       :failure_message,
+      :warning_message,
       :mode,
       :parent_automation_execution_id,
       :executed_by,
@@ -1592,7 +1598,13 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] failure_message
-    #   The list of execution outputs as defined in the Automation runbook.
+    #   A message that describes a failure that occurred during the
+    #   automation execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] warning_message
+    #   A message that describes a non-critical issue that occurred during
+    #   the automation execution.
     #   @return [String]
     #
     # @!attribute [rw] target_parameter_name
@@ -1704,6 +1716,7 @@ module Aws::SSM
       :current_step_name,
       :current_action,
       :failure_message,
+      :warning_message,
       :target_parameter_name,
       :targets,
       :target_maps,
@@ -1798,6 +1811,63 @@ module Aws::SSM
     #
     class AutomationStepNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The access details and targets for connecting to a Microsoft Azure
+    # tenant, including the application registration used for authentication
+    # and the subscriptions to target.
+    #
+    # @!attribute [rw] tenant_id
+    #   The ID of the Azure tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_display_name
+    #   The display name of the Azure tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the Azure application registration used for
+    #   authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_display_name
+    #   The display name of the Azure application registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The target Azure subscriptions for the cloud connector.
+    #   @return [Types::ConfigurationTargets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AzureConfiguration AWS API Documentation
+    #
+    class AzureConfiguration < Struct.new(
+      :tenant_id,
+      :tenant_display_name,
+      :application_id,
+      :application_display_name,
+      :targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Azure subscription targeted by the cloud
+    # connector.
+    #
+    # @!attribute [rw] id
+    #   The ID of the Azure subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the Azure subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AzureSubscription AWS API Documentation
+    #
+    class AzureSubscription < Struct.new(
+      :id,
+      :display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1940,6 +2010,99 @@ module Aws::SSM
     #
     class CancelMaintenanceWindowExecutionResult < Struct.new(
       :window_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that provides access details and targets for
+    # connecting to a third-party cloud environment.
+    #
+    # @note CloudConnectorConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CloudConnectorConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CloudConnectorConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] azure_configuration
+    #   The access details and targets for connecting to a Microsoft Azure
+    #   environment.
+    #   @return [Types::AzureConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CloudConnectorConfiguration AWS API Documentation
+    #
+    class CloudConnectorConfiguration < Struct.new(
+      :azure_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AzureConfiguration < CloudConnectorConfiguration; end
+      class Unknown < CloudConnectorConfiguration; end
+    end
+
+    # A filter for listing cloud connectors.
+    #
+    # @!attribute [rw] filter_key
+    #   The name of the filter key.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_values
+    #   The filter values. Valid values for each filter key are as follows:
+    #
+    #   SubscriptionId
+    #
+    #   : The Azure subscription ID to filter by. To return only
+    #     tenant-level connectors, specify `NONE`.
+    #
+    #   TenantId
+    #
+    #   : The Azure tenant ID to filter by. Filters the results to
+    #     connectors that target the specified tenant.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CloudConnectorFilter AWS API Documentation
+    #
+    class CloudConnectorFilter < Struct.new(
+      :filter_key,
+      :filter_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a cloud connector.
+    #
+    # @!attribute [rw] cloud_connector_id
+    #   The ID of the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The friendly name of the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role used by the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the cloud connector was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the cloud connector was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CloudConnectorSummary AWS API Documentation
+    #
+    class CloudConnectorSummary < Struct.new(
+      :cloud_connector_id,
+      :display_name,
+      :description,
+      :role_arn,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2860,6 +3023,43 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The target resources in the third-party cloud environment.
+    #
+    # @note ConfigurationTargets is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ConfigurationTargets is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigurationTargets corresponding to the set member.
+    #
+    # @!attribute [rw] subscriptions
+    #   A list of Azure subscriptions to target.
+    #   @return [Array<Types::AzureSubscription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ConfigurationTargets AWS API Documentation
+    #
+    class ConfigurationTargets < Struct.new(
+      :subscriptions,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Subscriptions < ConfigurationTargets; end
+      class Unknown < ConfigurationTargets; end
+    end
+
+    # An error occurred because of a conflict with a concurrent request or
+    # the current state of the resource. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] description
     #   A user-defined description of the resource that you want to register
     #   with Systems Manager.
@@ -3429,7 +3629,7 @@ module Aws::SSM
     #   Use this action to create an association in multiple Regions and
     #   multiple accounts.
     #
-    #   <note markdown="1"> The `IncludeChildOrganizationUnits` parameter is not supported by
+    #   <note markdown="1"> The `TargetLocationAlarmConfiguration` parameter is not supported by
     #   State Manager.
     #
     #    </note>
@@ -3550,6 +3750,61 @@ module Aws::SSM
     #
     class CreateAssociationResult < Struct.new(
       :association_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   A friendly name for the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the cloud
+    #   connector uses to communicate with the third-party cloud
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration details for connecting to the third-party cloud
+    #   environment.
+    #   @return [Types::CloudConnectorConfiguration]
+    #
+    # @!attribute [rw] config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector associated with
+    #   this cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateCloudConnectorRequest AWS API Documentation
+    #
+    class CreateCloudConnectorRequest < Struct.new(
+      :display_name,
+      :role_arn,
+      :description,
+      :configuration,
+      :config_connector_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_connector_id
+    #   The ID of the cloud connector that was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateCloudConnectorResult AWS API Documentation
+    #
+    class CreateCloudConnectorResult < Struct.new(
+      :cloud_connector_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4404,6 +4659,30 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteAssociationResult AWS API Documentation
     #
     class DeleteAssociationResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] cloud_connector_id
+    #   The ID of the cloud connector to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteCloudConnectorRequest AWS API Documentation
+    #
+    class DeleteCloudConnectorRequest < Struct.new(
+      :cloud_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_connector_id
+    #   The ID of the cloud connector that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteCloudConnectorResult AWS API Documentation
+    #
+    class DeleteCloudConnectorResult < Struct.new(
+      :cloud_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] name
     #   The name of the document.
@@ -7846,6 +8125,67 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @!attribute [rw] cloud_connector_id
+    #   The ID of the cloud connector to retrieve information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCloudConnectorRequest AWS API Documentation
+    #
+    class GetCloudConnectorRequest < Struct.new(
+      :cloud_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_connector_arn
+    #   The ARN of the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The friendly name of the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role used by the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration details for the third-party cloud environment
+    #   connection.
+    #   @return [Types::CloudConnectorConfiguration]
+    #
+    # @!attribute [rw] config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector associated with
+    #   this cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the cloud connector was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the cloud connector was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCloudConnectorResult AWS API Documentation
+    #
+    class GetCloudConnectorResult < Struct.new(
+      :cloud_connector_arn,
+      :display_name,
+      :description,
+      :role_arn,
+      :configuration,
+      :config_connector_arn,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] command_id
     #   (Required) The parent command ID of the invocation plugin.
     #   @return [String]
@@ -9390,7 +9730,7 @@ module Aws::SSM
     #
     # @!attribute [rw] operating_system
     #   Returns the operating system rule specified for patch groups using
-    #   the patch baseline.
+    #   the patch baseline. The default value is `WINDOWS`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroupRequest AWS API Documentation
@@ -9934,6 +10274,10 @@ module Aws::SSM
     #   Indicates whether the node is managed by Systems Manager.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name assigned to the managed node.
+    #   @return [String]
+    #
     # @!attribute [rw] platform_type
     #   The operating system platform type of the managed node.
     #   @return [String]
@@ -9952,6 +10296,29 @@ module Aws::SSM
     #   machine type in a hybrid fleet.
     #   @return [String]
     #
+    # @!attribute [rw] source_type
+    #   The type of the source resource. For IoT Greengrass devices,
+    #   `SourceType` is `AWS::IoT::Thing`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_id
+    #   The ID of the source resource. For IoT Greengrass devices,
+    #   `SourceId` is the Thing name.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location
+    #   The location of the source resource in the third-party cloud
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the managed node is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID where the managed node is located.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceInfo AWS API Documentation
     #
     class InstanceInfo < Struct.new(
@@ -9961,10 +10328,16 @@ module Aws::SSM
       :instance_status,
       :ip_address,
       :managed_status,
+      :name,
       :platform_type,
       :platform_name,
       :platform_version,
-      :resource_type)
+      :resource_type,
+      :source_type,
+      :source_id,
+      :source_location,
+      :availability_zone,
+      :availability_zone_id)
       SENSITIVE = [:ip_address]
       include Aws::Structure
     end
@@ -10100,7 +10473,13 @@ module Aws::SSM
     #
     # @!attribute [rw] source_type
     #   The type of the source resource. For IoT Greengrass devices,
-    #   `SourceType` is `AWS::IoT::Thing`.
+    #   `SourceType` is `AWS::IoT::Thing`. For Azure Virtual Machines,
+    #   `SourceType` is `Microsoft.Compute/virtualMachines`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location
+    #   The location of the source resource in the third-party cloud
+    #   environment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceInformation AWS API Documentation
@@ -10126,7 +10505,8 @@ module Aws::SSM
       :last_successful_association_execution_date,
       :association_overview,
       :source_id,
-      :source_type)
+      :source_type,
+      :source_location)
       SENSITIVE = [:ip_address]
       include Aws::Structure
     end
@@ -10164,7 +10544,7 @@ module Aws::SSM
     #
     #   Valid filter key values: ActivationIds \| AgentVersion \|
     #   AssociationStatus \| IamRole \| InstanceIds \| PingStatus \|
-    #   PlatformType \| ResourceType \| SourceIds \| SourceTypes \|
+    #   PlatformTypes \| ResourceType \| SourceIds \| SourceTypes \|
     #   "tag-key" \| "tag:`{keyname}`
     #
     #   * Valid values for the `AssociationStatus` filter key: Success \|
@@ -10173,14 +10553,15 @@ module Aws::SSM
     #   * Valid values for the `PingStatus` filter key: Online \|
     #     ConnectionLost \| Inactive (deprecated)
     #
-    #   * Valid values for the `PlatformType` filter key: Windows \| Linux
+    #   * Valid values for the `PlatformTypes` filter key: Windows \| Linux
     #     \| MacOS
     #
     #   * Valid values for the `ResourceType` filter key: EC2Instance \|
     #     ManagedInstance
     #
     #   * Valid values for the `SourceType` filter key: AWS::EC2::Instance
-    #     \| AWS::SSM::ManagedInstance \| AWS::IoT::Thing
+    #     \| AWS::SSM::ManagedInstance \| AWS::IoT::Thing \|
+    #     Microsoft.Compute/virtualMachines
     #
     #   * Valid tag examples: `Key=tag-key,Values=Purpose` \|
     #     `Key=tag:Purpose,Values=Test`.
@@ -10563,7 +10944,18 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] source_type
-    #   The type of the source resource.
+    #   The type of the source resource. Valid values: `AWS::EC2::Instance`
+    #   \| `AWS::SSM::ManagedInstance` \| `AWS::IoT::Thing` \|
+    #   `Microsoft.Compute/virtualMachines`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location
+    #   The location of the source resource in the third-party cloud
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the managed node is located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceProperty AWS API Documentation
@@ -10594,7 +10986,9 @@ module Aws::SSM
       :last_successful_association_execution_date,
       :association_overview,
       :source_id,
-      :source_type)
+      :source_type,
+      :source_location,
+      :availability_zone)
       SENSITIVE = [:ip_address]
       include Aws::Structure
     end
@@ -11887,6 +12281,47 @@ module Aws::SSM
     #
     class ListAssociationsResult < Struct.new(
       :associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters to limit the cloud connectors returned in the
+    #   response.
+    #   @return [Array<Types::CloudConnectorFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCloudConnectorsRequest AWS API Documentation
+    #
+    class ListCloudConnectorsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_connectors
+    #   A list of cloud connector summary objects.
+    #   @return [Array<Types::CloudConnectorSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCloudConnectorsResult AWS API Documentation
+    #
+    class ListCloudConnectorsResult < Struct.new(
+      :cloud_connectors,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -13426,6 +13861,12 @@ module Aws::SSM
     #   Systems Manager (SSM document) name or ARN. For `LAMBDA` tasks,
     #   it's the function name or ARN. For `STEP_FUNCTIONS` tasks, it's
     #   the state machine ARN.
+    #
+    #   <note markdown="1"> Maintenance Window does not validate the TaskArn when you register a
+    #   task. A successful registration does not guarantee that the TaskArn
+    #   is valid.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -15765,9 +16206,9 @@ module Aws::SSM
     #   days after they are released.
     #
     #   Patch Manager evaluates patch release dates using Coordinated
-    #   Universal Time (UTC). If the day represented by `7` is `2025-11-16`,
-    #   patches released between `2025-11-16T00:00:00Z` and
-    #   `2025-11-16T23:59:59Z` will be included in the approval.
+    #   Universal Time (UTC). If a patch is released at
+    #   `2025-11-09T18:00:00Z` and `ApproveAfterDays` is set to `7`, the
+    #   patch will be approved after `2025-11-16T18:00:00Z`.
     #
     #   This parameter is marked as `Required: No`, but your request must
     #   include a value for either `ApproveAfterDays` or `ApproveUntilDate`.
@@ -18904,6 +19345,12 @@ module Aws::SSM
     #   If a step failed, this message explains why the execution failed.
     #   @return [String]
     #
+    # @!attribute [rw] warning_message
+    #   A message that describes a non-critical issue that occurred during
+    #   the step execution. Present only if the step status includes a
+    #   warning.
+    #   @return [String]
+    #
     # @!attribute [rw] failure_details
     #   Information about the Automation failure.
     #   @return [Types::FailureDetails]
@@ -18971,6 +19418,7 @@ module Aws::SSM
       :outputs,
       :response,
       :failure_message,
+      :warning_message,
       :failure_details,
       :step_execution_id,
       :overridden_parameters,
@@ -19212,10 +19660,6 @@ module Aws::SSM
     # @!attribute [rw] include_child_organization_units
     #   Indicates whether to include child organizational units (OUs) that
     #   are children of the targeted OUs. The default is `false`.
-    #
-    #   <note markdown="1"> This parameter is not supported by State Manager.
-    #
-    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] exclude_accounts
@@ -19750,7 +20194,7 @@ module Aws::SSM
     #   Use this action to update an association in multiple Regions and
     #   multiple accounts.
     #
-    #   <note markdown="1"> The `IncludeChildOrganizationUnits` parameter is not supported by
+    #   <note markdown="1"> The `TargetLocationAlarmConfiguration` parameter is not supported by
     #   State Manager.
     #
     #    </note>
@@ -19897,6 +20341,46 @@ module Aws::SSM
     #
     class UpdateAssociationStatusResult < Struct.new(
       :association_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_connector_id
+    #   The ID of the cloud connector to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   A new friendly name for the cloud connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The updated configuration details for connecting to the third-party
+    #   cloud environment.
+    #   @return [Types::CloudConnectorConfiguration]
+    #
+    # @!attribute [rw] description
+    #   A new description for the cloud connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateCloudConnectorRequest AWS API Documentation
+    #
+    class UpdateCloudConnectorRequest < Struct.new(
+      :cloud_connector_id,
+      :display_name,
+      :configuration,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_connector_id
+    #   The ID of the cloud connector that was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateCloudConnectorResult AWS API Documentation
+    #
+    class UpdateCloudConnectorResult < Struct.new(
+      :cloud_connector_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21207,6 +21691,46 @@ module Aws::SSM
     #
     class UpdateServiceSettingResult < Aws::EmptyStructure; end
 
+    # @!attribute [rw] cloud_connector_id
+    #   The ID of the cloud connector to validate.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of validation findings to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ValidateCloudConnectorRequest AWS API Documentation
+    #
+    class ValidateCloudConnectorRequest < Struct.new(
+      :cloud_connector_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] validation_findings
+    #   A list of validation findings for the cloud connector.
+    #   @return [Array<Types::ValidationFinding>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ValidateCloudConnectorResult AWS API Documentation
+    #
+    class ValidateCloudConnectorResult < Struct.new(
+      :validation_findings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request isn't valid. Verify that you entered valid contents for
     # the command and try again.
     #
@@ -21222,6 +21746,61 @@ module Aws::SSM
     class ValidationException < Struct.new(
       :message,
       :reason_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A validation finding from a cloud connector validation check.
+    #
+    # @!attribute [rw] type
+    #   The type of the validation finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   A code that identifies the specific validation finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that describes the validation finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_message
+    #   A message from the third-party cloud provider related to the
+    #   validation finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The scope of the validation finding, identifying the specific
+    #   resource affected.
+    #   @return [Types::ValidationFindingScope]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ValidationFinding AWS API Documentation
+    #
+    class ValidationFinding < Struct.new(
+      :type,
+      :code,
+      :message,
+      :provider_message,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the specific resource scope of a validation finding.
+    #
+    # @!attribute [rw] type
+    #   The type of the resource scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the resource within the scope.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ValidationFindingScope AWS API Documentation
+    #
+    class ValidationFindingScope < Struct.new(
+      :type,
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end

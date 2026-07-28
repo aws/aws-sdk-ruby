@@ -335,6 +335,17 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class BatchGetDataQualityRulesetEvaluationRunRequest
+      attr_accessor run_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDataQualityRulesetEvaluationRunResponse
+      attr_accessor runs: ::Array[Types::DataQualityRulesetEvaluationRun]
+      attr_accessor runs_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class BatchGetDevEndpointsRequest
       attr_accessor dev_endpoint_names: ::Array[::String]
       SENSITIVE: []
@@ -718,6 +729,14 @@ module Aws::Glue
       attr_accessor table: ::String
       attr_accessor partition_predicate: ::String
       attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class CatalogTableConfigOptions
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor s3_location: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -1968,7 +1987,8 @@ module Aws::Glue
       attr_accessor description: ::String
       attr_accessor evaluation_message: ::String
       attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
-      SENSITIVE: [:description, :evaluation_message, :evaluated_metrics]
+      attr_accessor evaluated_distributions: ::Hash[::String, Types::DistributionData]
+      SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_distributions]
     end
 
     class DataQualityEncryption
@@ -1982,6 +2002,12 @@ module Aws::Glue
       attr_accessor results_s3_prefix: ::String
       attr_accessor composite_rule_evaluation_method: ("COLUMN" | "ROW")
       attr_accessor custom_log_group_prefix: ::String
+      attr_accessor row_level_results: Types::RowLevelResultsOptions
+      attr_accessor profiling_results: Types::ProfilingResultsOptions
+      attr_accessor observation_scope: ("ALL" | "NONE")
+      attr_accessor observation_mode: ("SCHEDULED" | "FIXED")
+      attr_accessor data_quality_rule_results: Types::DataQualityRuleResultsOptions
+      attr_accessor observation_results: Types::ObservationResultsOptions
       SENSITIVE: []
     end
 
@@ -2046,11 +2072,17 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class DataQualityRuleRecommendationRunAdditionalRunOptions
+      attr_accessor custom_log_group_prefix: ::String
+      SENSITIVE: []
+    end
+
     class DataQualityRuleRecommendationRunDescription
       attr_accessor run_id: ::String
       attr_accessor status: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
       attr_accessor started_on: ::Time
       attr_accessor data_source: Types::DataSource
+      attr_accessor created_ruleset_name: ::String
       SENSITIVE: []
     end
 
@@ -2071,6 +2103,31 @@ module Aws::Glue
       attr_accessor rule_metrics: ::Hash[::String, ::Float]
       attr_accessor labels: ::Hash[::String, ::String]
       SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule, :rule_metrics]
+    end
+
+    class DataQualityRuleResultsOptions
+      attr_accessor write_data_quality_rule_results_enabled: bool
+      attr_accessor catalog_table_config: Types::CatalogTableConfigOptions
+      SENSITIVE: []
+    end
+
+    class DataQualityRulesetEvaluationRun
+      attr_accessor run_id: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor role: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor additional_run_options: Types::DataQualityEvaluationRunAdditionalRunOptions
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      attr_accessor error_string: ::String
+      attr_accessor started_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor execution_time: ::Integer
+      attr_accessor ruleset_names: ::Array[::String]
+      attr_accessor result_ids: ::Array[::String]
+      attr_accessor additional_data_sources: ::Hash[::String, Types::DataSource]
+      SENSITIVE: []
     end
 
     class DataQualityRulesetEvaluationRunDescription
@@ -2735,6 +2792,19 @@ module Aws::Glue
     class DisassociateGlossaryTermsResponse
       attr_accessor asset_identifier: ::String
       attr_accessor glossary_terms: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DistributionData
+      attr_accessor bin_edges: ::Array[::String]
+      attr_accessor count: ::Array[::Integer]
+      attr_accessor data_type: ::String
+      SENSITIVE: []
+    end
+
+    class DistributionResultsOptions
+      attr_accessor write_distribution_results_enabled: bool
+      attr_accessor catalog_table_config: Types::CatalogTableConfigOptions
       SENSITIVE: []
     end
 
@@ -3407,6 +3477,7 @@ module Aws::Glue
       attr_accessor recommended_ruleset: ::String
       attr_accessor created_ruleset_name: ::String
       attr_accessor data_quality_security_configuration: ::String
+      attr_accessor additional_run_options: Types::DataQualityRuleRecommendationRunAdditionalRunOptions
       SENSITIVE: []
     end
 
@@ -5096,6 +5167,7 @@ module Aws::Glue
       attr_accessor filter: Types::DataQualityRuleRecommendationRunFilter
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -5680,6 +5752,12 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ObservationResultsOptions
+      attr_accessor write_observation_results_enabled: bool
+      attr_accessor catalog_table_config: Types::CatalogTableConfigOptions
+      SENSITIVE: []
+    end
+
     class OffsetConfiguration
       attr_accessor offset_parameter: Types::ExtractedParameter
       attr_accessor limit_parameter: Types::ExtractedParameter
@@ -5865,6 +5943,13 @@ module Aws::Glue
     class ProfileConfiguration
       attr_accessor session_configuration: ::Hash[::String, Types::ConfigurationObject]
       attr_accessor job_configuration: ::Hash[::String, Types::ConfigurationObject]
+      SENSITIVE: []
+    end
+
+    class ProfilingResultsOptions
+      attr_accessor write_profiling_results_enabled: bool
+      attr_accessor catalog_table_config: Types::CatalogTableConfigOptions
+      attr_accessor distribution_results: Types::DistributionResultsOptions
       SENSITIVE: []
     end
 
@@ -6252,6 +6337,13 @@ module Aws::Glue
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
       attr_accessor group_filters_list: ::Array[Types::GroupFilters]
+      SENSITIVE: []
+    end
+
+    class RowLevelResultsOptions
+      attr_accessor max_rows_to_write: ::Integer
+      attr_accessor result_type: ("ALL" | "PASSED_ONLY" | "FAILED_ONLY")
+      attr_accessor catalog_table_config: Types::CatalogTableConfigOptions
       SENSITIVE: []
     end
 
@@ -7030,6 +7122,7 @@ module Aws::Glue
       attr_accessor created_ruleset_name: ::String
       attr_accessor data_quality_security_configuration: ::String
       attr_accessor client_token: ::String
+      attr_accessor additional_run_options: Types::DataQualityRuleRecommendationRunAdditionalRunOptions
       SENSITIVE: []
     end
 
@@ -7211,6 +7304,7 @@ module Aws::Glue
       attr_accessor run_identifier: Types::RunIdentifier
       attr_accessor statistic_name: ::String
       attr_accessor double_value: ::Float
+      attr_accessor distribution_value: Types::DistributionData
       attr_accessor evaluation_level: ("Dataset" | "Column" | "Multicolumn")
       attr_accessor columns_referenced: ::Array[::String]
       attr_accessor referenced_datasets: ::Array[::String]
@@ -7670,6 +7764,22 @@ module Aws::Glue
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAssetRequest
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAssetResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class UpdateBlueprintRequest

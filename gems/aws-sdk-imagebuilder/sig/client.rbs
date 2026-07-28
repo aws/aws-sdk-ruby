@@ -305,6 +305,7 @@ module Aws
                                    user_data_override: ::String?
                                  },
                                  ?ami_tags: Hash[::String, ::String],
+                                 ?ami_watermarks: Array[::String],
                                  client_token: ::String
                                ) -> _CreateImageRecipeResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageRecipeResponseSuccess

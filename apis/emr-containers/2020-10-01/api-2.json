@@ -109,6 +109,19 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "DeleteSecurityConfiguration":{
+      "name":"DeleteSecurityConfiguration",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/securityconfigurations/{securityConfigurationId}"
+      },
+      "input":{"shape":"DeleteSecurityConfigurationRequest"},
+      "output":{"shape":"DeleteSecurityConfigurationResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "DeleteVirtualCluster":{
       "name":"DeleteVirtualCluster",
       "http":{
@@ -327,6 +340,21 @@
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"}
       ]
+    },
+    "UpdateVirtualCluster":{
+      "name":"UpdateVirtualCluster",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/virtualclusters/{virtualClusterId}"
+      },
+      "input":{"shape":"UpdateVirtualClusterRequest"},
+      "output":{"shape":"UpdateVirtualClusterResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"}
+      ],
+      "idempotent":true
     }
   },
   "shapes":{
@@ -342,6 +370,13 @@
         "ENABLED",
         "DISABLED"
       ]
+    },
+    "AuthenticationConfiguration":{
+      "type":"structure",
+      "members":{
+        "identityCenterConfiguration":{"shape":"IdentityCenterConfiguration"},
+        "iamConfiguration":{"shape":"IAMConfiguration"}
+      }
     },
     "AuthorizationConfiguration":{
       "type":"structure",
@@ -525,7 +560,8 @@
           "shape":"ClientToken",
           "idempotencyToken":true
         },
-        "tags":{"shape":"TagMap"}
+        "tags":{"shape":"TagMap"},
+        "sessionIdleTimeoutInMinutes":{"shape":"SessionIdleTimeoutInMinutes"}
       }
     },
     "CreateManagedEndpointResponse":{
@@ -578,7 +614,9 @@
           "idempotencyToken":true
         },
         "tags":{"shape":"TagMap"},
-        "securityConfigurationId":{"shape":"ResourceIdString"}
+        "securityConfigurationId":{"shape":"ResourceIdString"},
+        "sessionEnabled":{"shape":"Boolean"},
+        "schedulerConfiguration":{"shape":"SchedulerConfiguration"}
       }
     },
     "CreateVirtualClusterResponse":{
@@ -647,6 +685,23 @@
       "members":{
         "id":{"shape":"ResourceIdString"},
         "virtualClusterId":{"shape":"ResourceIdString"}
+      }
+    },
+    "DeleteSecurityConfigurationRequest":{
+      "type":"structure",
+      "required":["id"],
+      "members":{
+        "id":{
+          "shape":"ResourceIdString",
+          "location":"uri",
+          "locationName":"securityConfigurationId"
+        }
+      }
+    },
+    "DeleteSecurityConfigurationResponse":{
+      "type":"structure",
+      "members":{
+        "id":{"shape":"ResourceIdString"}
       }
     },
     "DeleteVirtualClusterRequest":{
@@ -779,8 +834,12 @@
       "type":"structure",
       "members":{
         "namespace":{"shape":"KubernetesNamespace"},
-        "nodeLabel":{"shape":"ResourceNameString"}
+        "nodeLabel":{"shape":"NodeLabelString"}
       }
+    },
+    "EmrIdentityCenterApplicationARN":{
+      "type":"string",
+      "pattern":"^arn:(aws[a-zA-Z0-9-]*):sso:::application/ssoins-[0-9a-zA-Z/\\\\-_]+/apl-[0-9a-zA-Z/\\\\-_]+"
     },
     "EncryptionConfiguration":{
       "type":"structure",
@@ -807,6 +866,7 @@
         "certificateAuthority":{"shape":"Certificate"},
         "configurationOverrides":{"shape":"ConfigurationOverrides"},
         "serverUrl":{"shape":"UriString"},
+        "authProxyUrl":{"shape":"UriString"},
         "createdAt":{"shape":"Date"},
         "securityGroup":{"shape":"String256"},
         "subnetIds":{"shape":"SubnetIds"},
@@ -912,7 +972,14 @@
       "members":{
         "id":{"shape":"ResourceIdString"},
         "credentials":{"shape":"Credentials"},
+        "endpointCredentials":{"shape":"Credentials"},
         "expiresAt":{"shape":"Date"}
+      }
+    },
+    "IAMConfiguration":{
+      "type":"structure",
+      "members":{
+        "systemRole":{"shape":"IAMRoleArn"}
       }
     },
     "IAMRoleArn":{
@@ -920,6 +987,27 @@
       "max":2048,
       "min":20,
       "pattern":"^arn:(aws[a-zA-Z0-9-]*):iam::(\\d{12})?:(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$"
+    },
+    "IdentityCenterConfiguration":{
+      "type":"structure",
+      "members":{
+        "enableIdentityCenter":{"shape":"Boolean"},
+        "identityCenterApplicationAssignmentRequired":{"shape":"Boolean"},
+        "identityCenterInstanceARN":{"shape":"IdentityCenterInstanceARN"},
+        "emrIdentityCenterApplicationARN":{"shape":"EmrIdentityCenterApplicationARN"}
+      }
+    },
+    "IdentityCenterInstanceARN":{
+      "type":"string",
+      "max":1224,
+      "min":10,
+      "pattern":"^arn:(aws[a-zA-Z0-9-]*):sso:::instance/ssoins-[0-9a-zA-Z/\\\\-_]+"
+    },
+    "InQueueJobLimitInteger":{
+      "type":"integer",
+      "box":true,
+      "max":10000,
+      "min":100
     },
     "InTransitEncryptionConfiguration":{
       "type":"structure",
@@ -948,6 +1036,12 @@
         "sparkSubmitJobDriver":{"shape":"SparkSubmitJobDriver"},
         "sparkSqlJobDriver":{"shape":"SparkSqlJobDriver"}
       }
+    },
+    "JobLimitInteger":{
+      "type":"integer",
+      "box":true,
+      "max":10000,
+      "min":1
     },
     "JobRun":{
       "type":"structure",
@@ -1323,6 +1417,16 @@
       "min":1,
       "pattern":".*\\S.*"
     },
+    "NodeLabelString":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+    },
+    "NonNegativeInteger":{
+      "type":"integer",
+      "min":0
+    },
     "ParametricCloudWatchMonitoringConfiguration":{
       "type":"structure",
       "members":{
@@ -1440,7 +1544,28 @@
       "type":"structure",
       "required":["logUri"],
       "members":{
-        "logUri":{"shape":"UriString"}
+        "logUri":{"shape":"UriString"},
+        "encryptionKeyArn":{"shape":"KmsKeyArn"}
+      }
+    },
+    "SchedulerConfiguration":{
+      "type":"structure",
+      "members":{
+        "maxInQueueJobRuns":{
+          "shape":"InQueueJobLimitInteger",
+          "box":true
+        },
+        "maxConcurrentJobRuns":{
+          "shape":"JobLimitInteger",
+          "box":true
+        }
+      }
+    },
+    "SchedulerStatus":{
+      "type":"structure",
+      "members":{
+        "currentInQueueJobRuns":{"shape":"NonNegativeInteger"},
+        "currentConcurrentJobRuns":{"shape":"NonNegativeInteger"}
       }
     },
     "SecretsManagerArn":{
@@ -1477,7 +1602,8 @@
     "SecurityConfigurationData":{
       "type":"structure",
       "members":{
-        "authorizationConfiguration":{"shape":"AuthorizationConfiguration"}
+        "authorizationConfiguration":{"shape":"AuthorizationConfiguration"},
+        "authenticationConfiguration":{"shape":"AuthenticationConfiguration"}
       }
     },
     "SecurityConfigurations":{
@@ -1491,6 +1617,7 @@
       "max":100,
       "sensitive":true
     },
+    "SessionIdleTimeoutInMinutes":{"type":"integer"},
     "SessionTagValue":{
       "type":"string",
       "max":512,
@@ -1704,6 +1831,31 @@
       "type":"structure",
       "members":{}
     },
+    "UpdateVirtualClusterRequest":{
+      "type":"structure",
+      "required":[
+        "id",
+        "clientToken"
+      ],
+      "members":{
+        "id":{
+          "shape":"ResourceIdString",
+          "location":"uri",
+          "locationName":"virtualClusterId"
+        },
+        "schedulerConfiguration":{"shape":"SchedulerConfiguration"},
+        "clientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "UpdateVirtualClusterResponse":{
+      "type":"structure",
+      "members":{
+        "virtualCluster":{"shape":"VirtualCluster"}
+      }
+    },
     "UriString":{
       "type":"string",
       "max":10280,
@@ -1728,7 +1880,10 @@
         "containerProvider":{"shape":"ContainerProvider"},
         "createdAt":{"shape":"Date"},
         "tags":{"shape":"TagMap"},
-        "securityConfigurationId":{"shape":"ResourceIdString"}
+        "securityConfigurationId":{"shape":"ResourceIdString"},
+        "sessionEnabled":{"shape":"Boolean"},
+        "schedulerConfiguration":{"shape":"SchedulerConfiguration"},
+        "schedulerStatus":{"shape":"SchedulerStatus"}
       }
     },
     "VirtualClusterArn":{

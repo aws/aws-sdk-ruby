@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2026-06-29)
+------------------
+
+* Feature - This launch is an expansion of our Q1 RCS for business launch where we will release an API that supports rich media and interactive messaging elements.
+
 1.58.0 (2026-05-28)
 ------------------
 

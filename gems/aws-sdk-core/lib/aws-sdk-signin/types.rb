@@ -45,9 +45,7 @@ module Aws::Signin
 
     # AWS credentials structure containing temporary access credentials
     #
-    # The scoped-down, 15 minute duration AWS credentials. Scoping down will
-    # be based on CLI policy (CLI team needs to create it). Similar to cloud
-    # shell implementation.
+    # Scoped, temporary AWS credentials with a 15-minute duration.
     #
     # @!attribute [rw] access_key_id
     #   AWS access key ID for temporary credentials
@@ -232,6 +230,55 @@ module Aws::Signin
       include Aws::Structure
     end
 
+    # Input structure for CreateOAuth2TokenWithIAM operation
+    #
+    # @!attribute [rw] grant_type
+    #   OAuth 2.0 grant type. Must be "client\_credentials".
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The OAuth resource for which the access token is requested. Example:
+    #   "aws-mcp.amazonaws.com".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenWithIAMRequest AWS API Documentation
+    #
+    class CreateOAuth2TokenWithIAMRequest < Struct.new(
+      :grant_type,
+      :resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output structure for CreateOAuth2TokenWithIAM operation
+    #
+    # Contains the JWT access token, token type, and expiration per RFC 6749
+    # §5.1.
+    #
+    # @!attribute [rw] access_token
+    #   JWT access token containing principal identity, resource scope, and
+    #   session metadata
+    #   @return [String]
+    #
+    # @!attribute [rw] token_type
+    #   Always "Bearer" per OAuth 2.1 specification
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_in
+    #   Token lifetime in seconds. Value is the minimum of session validity
+    #   and 1 hour.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenWithIAMResponse AWS API Documentation
+    #
+    class CreateOAuth2TokenWithIAMResponse < Struct.new(
+      :access_token,
+      :token_type,
+      :expires_in)
+      SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
     # Input for DeleteConsoleAuthorizationConfiguration operation
     #
     # @!attribute [rw] target_id
@@ -380,6 +427,125 @@ module Aws::Signin
     class InternalServerException < Struct.new(
       :error,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input structure for IntrospectOAuth2TokenWithIAM operation
+    #
+    # RFC 7662 §2.1 introspection request. Contains the token to inspect and
+    # an optional hint about the token's type.
+    #
+    # @!attribute [rw] token
+    #   The string value of the token to introspect. May be either an
+    #   access\_token or a refresh\_token issued by AWS Sign-In.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_type_hint
+    #   Optional hint about the type of the token submitted for
+    #   introspection. The server uses this hint to optimize lookup, but
+    #   still falls back to the other token type on miss. Allowed values:
+    #   access\_token, refresh\_token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/IntrospectOAuth2TokenWithIAMRequest AWS API Documentation
+    #
+    class IntrospectOAuth2TokenWithIAMRequest < Struct.new(
+      :token,
+      :token_type_hint)
+      SENSITIVE = [:token]
+      include Aws::Structure
+    end
+
+    # Output structure for IntrospectOAuth2TokenWithIAM operation
+    #
+    # RFC 7662 §2.2 introspection response. Only `active` is required; all
+    # other claims are omitted when the token is inactive.
+    #
+    # @!attribute [rw] active
+    #   Indicates whether the token is currently active. `true` only when
+    #   the token is valid, has not expired, has not been revoked, and
+    #   belongs to the caller's account.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_id
+    #   Client identifier for the OAuth 2.0 client that requested the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   User identifier matching sts:GetCallerIdentity's `UserId` field for
+    #   the token's subject principal (e.g. "AIDAEXAMPLE" for an IAM user,
+    #   or "AROAEXAMPLE:session-name" for an assumed role).
+    #   @return [String]
+    #
+    # @!attribute [rw] token_type
+    #   Indicates which kind of token was introspected. One of
+    #   "access\_token" or "refresh\_token".
+    #   @return [String]
+    #
+    # @!attribute [rw] exp
+    #   Token expiration time as a NumericDate (Unix epoch seconds).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] iat
+    #   Token issuance time as a NumericDate (Unix epoch seconds).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] nbf
+    #   Token "not before" time as a NumericDate (Unix epoch seconds).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sub
+    #   Subject of the token: the IAM principal ARN. For assumed-role
+    #   sessions, this is the session ARN (matches sts:GetCallerIdentity's
+    #   `Arn` field), e.g.
+    #   arn:aws:sts::123456789012:assumed-role/MyRole/session-name.
+    #   @return [String]
+    #
+    # @!attribute [rw] aud
+    #   Audience of the token: the OAuth resource the token is scoped to
+    #   (for example, "aws-mcp.amazonaws.com"). Omitted for refresh tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] iss
+    #   Issuer of the token. Always "signin.amazonaws.com" for AWS Sign-In.
+    #   @return [String]
+    #
+    # @!attribute [rw] jti
+    #   Unique identifier for the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   12-digit AWS account ID of the token's subject principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] signin_session
+    #   AWS Sign-In session ARN bound to the token, of the form
+    #   arn:aws:signin:\{region}:\{account}:session/\{uuid}.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The OAuth resource the token is scoped to during Human OAuth flow.
+    #   Only present for refresh token introspection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/IntrospectOAuth2TokenWithIAMResponse AWS API Documentation
+    #
+    class IntrospectOAuth2TokenWithIAMResponse < Struct.new(
+      :active,
+      :client_id,
+      :user_id,
+      :token_type,
+      :exp,
+      :iat,
+      :nbf,
+      :sub,
+      :aud,
+      :iss,
+      :jti,
+      :account_id,
+      :signin_session,
+      :resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -604,6 +770,34 @@ module Aws::Signin
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Input structure for RevokeOAuth2TokenWithIAM operation
+    #
+    # RFC 7009 §2.1 revocation request. Contains the refresh\_token to
+    # revoke.
+    #
+    # @!attribute [rw] token
+    #   The refresh\_token to revoke. Must be a refresh\_token issued by AWS
+    #   Sign-In (prefix "ASOR"); access\_tokens are not accepted for
+    #   revocation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/RevokeOAuth2TokenWithIAMRequest AWS API Documentation
+    #
+    class RevokeOAuth2TokenWithIAMRequest < Struct.new(
+      :token)
+      SENSITIVE = [:token]
+      include Aws::Structure
+    end
+
+    # Output structure for RevokeOAuth2TokenWithIAM operation
+    #
+    # RFC 7009 §2.2 revocation response. The endpoint returns 200 OK with an
+    # empty body on success; there are no response fields.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/RevokeOAuth2TokenWithIAMResponse AWS API Documentation
+    #
+    class RevokeOAuth2TokenWithIAMResponse < Aws::EmptyStructure; end
 
     # Error thrown when service quota is exceeded
     #

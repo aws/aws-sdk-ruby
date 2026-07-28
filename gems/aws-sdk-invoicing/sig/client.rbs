@@ -305,6 +305,17 @@ module Aws
                                              ) -> _PutProcurementPortalPreferenceResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProcurementPortalPreferenceResponseSuccess
 
+      interface _SendProcurementPortalValidationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendProcurementPortalValidationResponse]
+        def procurement_portal_preference_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#send_procurement_portal_validation-instance_method
+      def send_procurement_portal_validation: (
+                                                procurement_portal_preference_arn: ::String,
+                                                ?client_token: ::String
+                                              ) -> _SendProcurementPortalValidationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendProcurementPortalValidationResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -354,13 +365,25 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#update_procurement_portal_preference_status-instance_method
       def update_procurement_portal_preference_status: (
                                                          procurement_portal_preference_arn: ::String,
-                                                         ?einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED"),
+                                                         ?einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED"),
                                                          ?einvoice_delivery_preference_status_reason: ::String,
-                                                         ?purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED"),
+                                                         ?purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED"),
                                                          ?purchase_order_retrieval_preference_status_reason: ::String,
                                                          ?client_token: ::String
                                                        ) -> _UpdateProcurementPortalPreferenceStatusResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProcurementPortalPreferenceStatusResponseSuccess
+
+      interface _VerifyProcurementPortalValidationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyProcurementPortalValidationResponse]
+        def procurement_portal_preference_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#verify_procurement_portal_validation-instance_method
+      def verify_procurement_portal_validation: (
+                                                  procurement_portal_preference_arn: ::String,
+                                                  code: ::String,
+                                                  ?client_token: ::String
+                                                ) -> _VerifyProcurementPortalValidationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyProcurementPortalValidationResponseSuccess
     end
   end
 end

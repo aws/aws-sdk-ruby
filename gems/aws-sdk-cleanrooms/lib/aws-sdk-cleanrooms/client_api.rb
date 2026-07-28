@@ -24,6 +24,7 @@ module Aws::CleanRooms
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDeniedExceptionReason = Shapes::StringShape.new(name: 'AccessDeniedExceptionReason')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     AdditionalAnalyses = Shapes::StringShape.new(name: 'AdditionalAnalyses')
     AdditionalAnalysesResourceArn = Shapes::StringShape.new(name: 'AdditionalAnalysesResourceArn')
     AggregateColumn = Shapes::StructureShape.new(name: 'AggregateColumn')
@@ -34,10 +35,13 @@ module Aws::CleanRooms
     AggregationConstraints = Shapes::ListShape.new(name: 'AggregationConstraints')
     AggregationType = Shapes::StringShape.new(name: 'AggregationType')
     AllowedAdditionalAnalyses = Shapes::ListShape.new(name: 'AllowedAdditionalAnalyses')
+    AllowedAnalysesList = Shapes::ListShape.new(name: 'AllowedAnalysesList')
+    AllowedAnalysisProviderList = Shapes::ListShape.new(name: 'AllowedAnalysisProviderList')
     AllowedColumnList = Shapes::ListShape.new(name: 'AllowedColumnList')
     AllowedResultReceivers = Shapes::ListShape.new(name: 'AllowedResultReceivers')
     AllowedResultRegions = Shapes::ListShape.new(name: 'AllowedResultRegions')
     AnalysisFormat = Shapes::StringShape.new(name: 'AnalysisFormat')
+    AnalysisIdentifier = Shapes::StringShape.new(name: 'AnalysisIdentifier')
     AnalysisMethod = Shapes::StringShape.new(name: 'AnalysisMethod')
     AnalysisParameter = Shapes::StructureShape.new(name: 'AnalysisParameter')
     AnalysisParameterList = Shapes::ListShape.new(name: 'AnalysisParameterList')
@@ -46,6 +50,7 @@ module Aws::CleanRooms
     AnalysisRuleAggregationAggregateColumnsList = Shapes::ListShape.new(name: 'AnalysisRuleAggregationAggregateColumnsList')
     AnalysisRuleColumnList = Shapes::ListShape.new(name: 'AnalysisRuleColumnList')
     AnalysisRuleColumnName = Shapes::StringShape.new(name: 'AnalysisRuleColumnName')
+    AnalysisRuleColumnNameList = Shapes::ListShape.new(name: 'AnalysisRuleColumnNameList')
     AnalysisRuleCustom = Shapes::StructureShape.new(name: 'AnalysisRuleCustom')
     AnalysisRuleCustomAllowedAnalysesList = Shapes::ListShape.new(name: 'AnalysisRuleCustomAllowedAnalysesList')
     AnalysisRuleCustomAllowedAnalysisProvidersList = Shapes::ListShape.new(name: 'AnalysisRuleCustomAllowedAnalysisProvidersList')
@@ -92,6 +97,8 @@ module Aws::CleanRooms
     AutoApprovedChangeType = Shapes::StringShape.new(name: 'AutoApprovedChangeType')
     AutoApprovedChangeTypeList = Shapes::ListShape.new(name: 'AutoApprovedChangeTypeList')
     AutoRefreshMode = Shapes::StringShape.new(name: 'AutoRefreshMode')
+    BaseTableDependencyType = Shapes::StringShape.new(name: 'BaseTableDependencyType')
+    BaseTableParentType = Shapes::StringShape.new(name: 'BaseTableParentType')
     BatchGetCollaborationAnalysisTemplateError = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateError')
     BatchGetCollaborationAnalysisTemplateErrorList = Shapes::ListShape.new(name: 'BatchGetCollaborationAnalysisTemplateErrorList')
     BatchGetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateInput')
@@ -121,6 +128,9 @@ module Aws::CleanRooms
     ChangeSpecificationType = Shapes::StringShape.new(name: 'ChangeSpecificationType')
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     ChangeTypeList = Shapes::ListShape.new(name: 'ChangeTypeList')
+    ChildResource = Shapes::StructureShape.new(name: 'ChildResource')
+    ChildResourceList = Shapes::ListShape.new(name: 'ChildResourceList')
+    ChildResourceType = Shapes::StringShape.new(name: 'ChildResourceType')
     CleanroomsArn = Shapes::StringShape.new(name: 'CleanroomsArn')
     Collaboration = Shapes::StructureShape.new(name: 'Collaboration')
     CollaborationAnalysisTemplate = Shapes::StructureShape.new(name: 'CollaborationAnalysisTemplate')
@@ -153,6 +163,8 @@ module Aws::CleanRooms
     CollaborationSummaryList = Shapes::ListShape.new(name: 'CollaborationSummaryList')
     Column = Shapes::StructureShape.new(name: 'Column')
     ColumnClassificationDetails = Shapes::StructureShape.new(name: 'ColumnClassificationDetails')
+    ColumnLineageEntry = Shapes::StructureShape.new(name: 'ColumnLineageEntry')
+    ColumnLineageList = Shapes::ListShape.new(name: 'ColumnLineageList')
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnMappingList = Shapes::ListShape.new(name: 'ColumnMappingList')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
@@ -185,6 +197,7 @@ module Aws::CleanRooms
     ConfiguredTableAssociationAnalysisRuleTypeList = Shapes::ListShape.new(name: 'ConfiguredTableAssociationAnalysisRuleTypeList')
     ConfiguredTableAssociationArn = Shapes::StringShape.new(name: 'ConfiguredTableAssociationArn')
     ConfiguredTableAssociationIdentifier = Shapes::StringShape.new(name: 'ConfiguredTableAssociationIdentifier')
+    ConfiguredTableAssociationSchemaTypeProperties = Shapes::StructureShape.new(name: 'ConfiguredTableAssociationSchemaTypeProperties')
     ConfiguredTableAssociationSummary = Shapes::StructureShape.new(name: 'ConfiguredTableAssociationSummary')
     ConfiguredTableAssociationSummaryList = Shapes::ListShape.new(name: 'ConfiguredTableAssociationSummaryList')
     ConfiguredTableIdentifier = Shapes::StringShape.new(name: 'ConfiguredTableIdentifier')
@@ -221,6 +234,11 @@ module Aws::CleanRooms
     CreateIdMappingTableOutput = Shapes::StructureShape.new(name: 'CreateIdMappingTableOutput')
     CreateIdNamespaceAssociationInput = Shapes::StructureShape.new(name: 'CreateIdNamespaceAssociationInput')
     CreateIdNamespaceAssociationOutput = Shapes::StructureShape.new(name: 'CreateIdNamespaceAssociationOutput')
+    CreateIntermediateTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'CreateIntermediateTableAnalysisRuleInput')
+    CreateIntermediateTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'CreateIntermediateTableAnalysisRuleOutput')
+    CreateIntermediateTableInput = Shapes::StructureShape.new(name: 'CreateIntermediateTableInput')
+    CreateIntermediateTableInputRetentionInDaysInteger = Shapes::IntegerShape.new(name: 'CreateIntermediateTableInputRetentionInDaysInteger')
+    CreateIntermediateTableOutput = Shapes::StructureShape.new(name: 'CreateIntermediateTableOutput')
     CreateMembershipInput = Shapes::StructureShape.new(name: 'CreateMembershipInput')
     CreateMembershipOutput = Shapes::StructureShape.new(name: 'CreateMembershipOutput')
     CreatePrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'CreatePrivacyBudgetTemplateInput')
@@ -246,12 +264,17 @@ module Aws::CleanRooms
     DeleteIdMappingTableOutput = Shapes::StructureShape.new(name: 'DeleteIdMappingTableOutput')
     DeleteIdNamespaceAssociationInput = Shapes::StructureShape.new(name: 'DeleteIdNamespaceAssociationInput')
     DeleteIdNamespaceAssociationOutput = Shapes::StructureShape.new(name: 'DeleteIdNamespaceAssociationOutput')
+    DeleteIntermediateTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'DeleteIntermediateTableAnalysisRuleInput')
+    DeleteIntermediateTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'DeleteIntermediateTableAnalysisRuleOutput')
+    DeleteIntermediateTableInput = Shapes::StructureShape.new(name: 'DeleteIntermediateTableInput')
+    DeleteIntermediateTableOutput = Shapes::StructureShape.new(name: 'DeleteIntermediateTableOutput')
     DeleteMemberInput = Shapes::StructureShape.new(name: 'DeleteMemberInput')
     DeleteMemberOutput = Shapes::StructureShape.new(name: 'DeleteMemberOutput')
     DeleteMembershipInput = Shapes::StructureShape.new(name: 'DeleteMembershipInput')
     DeleteMembershipOutput = Shapes::StructureShape.new(name: 'DeleteMembershipOutput')
     DeletePrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'DeletePrivacyBudgetTemplateInput')
     DeletePrivacyBudgetTemplateOutput = Shapes::StructureShape.new(name: 'DeletePrivacyBudgetTemplateOutput')
+    DependencyList = Shapes::ListShape.new(name: 'DependencyList')
     DifferentialPrivacyAggregationExpression = Shapes::StringShape.new(name: 'DifferentialPrivacyAggregationExpression')
     DifferentialPrivacyAggregationType = Shapes::StringShape.new(name: 'DifferentialPrivacyAggregationType')
     DifferentialPrivacyColumn = Shapes::StructureShape.new(name: 'DifferentialPrivacyColumn')
@@ -275,6 +298,8 @@ module Aws::CleanRooms
     DifferentialPrivacyTemplateParametersOutput = Shapes::StructureShape.new(name: 'DifferentialPrivacyTemplateParametersOutput')
     DifferentialPrivacyTemplateUpdateParameters = Shapes::StructureShape.new(name: 'DifferentialPrivacyTemplateUpdateParameters')
     DirectAnalysisConfigurationDetails = Shapes::StructureShape.new(name: 'DirectAnalysisConfigurationDetails')
+    DisallowIntermediateTableInput = Shapes::StructureShape.new(name: 'DisallowIntermediateTableInput')
+    DisallowIntermediateTableOutput = Shapes::StructureShape.new(name: 'DisallowIntermediateTableOutput')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -312,6 +337,10 @@ module Aws::CleanRooms
     GetIdMappingTableOutput = Shapes::StructureShape.new(name: 'GetIdMappingTableOutput')
     GetIdNamespaceAssociationInput = Shapes::StructureShape.new(name: 'GetIdNamespaceAssociationInput')
     GetIdNamespaceAssociationOutput = Shapes::StructureShape.new(name: 'GetIdNamespaceAssociationOutput')
+    GetIntermediateTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'GetIntermediateTableAnalysisRuleInput')
+    GetIntermediateTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'GetIntermediateTableAnalysisRuleOutput')
+    GetIntermediateTableInput = Shapes::StructureShape.new(name: 'GetIntermediateTableInput')
+    GetIntermediateTableOutput = Shapes::StructureShape.new(name: 'GetIntermediateTableOutput')
     GetMembershipInput = Shapes::StructureShape.new(name: 'GetMembershipInput')
     GetMembershipOutput = Shapes::StructureShape.new(name: 'GetMembershipOutput')
     GetPrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'GetPrivacyBudgetTemplateInput')
@@ -351,6 +380,42 @@ module Aws::CleanRooms
     IdNamespaceAssociationSummary = Shapes::StructureShape.new(name: 'IdNamespaceAssociationSummary')
     IdNamespaceAssociationSummaryList = Shapes::ListShape.new(name: 'IdNamespaceAssociationSummaryList')
     IdNamespaceType = Shapes::StringShape.new(name: 'IdNamespaceType')
+    InheritedAdditionalAnalyses = Shapes::StructureShape.new(name: 'InheritedAdditionalAnalyses')
+    InheritedAdditionalAnalysesSource = Shapes::StructureShape.new(name: 'InheritedAdditionalAnalysesSource')
+    InheritedAdditionalAnalysesSourceList = Shapes::ListShape.new(name: 'InheritedAdditionalAnalysesSourceList')
+    InheritedAllowedAdditionalAnalyses = Shapes::StructureShape.new(name: 'InheritedAllowedAdditionalAnalyses')
+    InheritedAllowedAdditionalAnalysesSource = Shapes::StructureShape.new(name: 'InheritedAllowedAdditionalAnalysesSource')
+    InheritedAllowedAdditionalAnalysesSourceList = Shapes::ListShape.new(name: 'InheritedAllowedAdditionalAnalysesSourceList')
+    InheritedAllowedResultReceivers = Shapes::StructureShape.new(name: 'InheritedAllowedResultReceivers')
+    InheritedAllowedResultReceiversSource = Shapes::StructureShape.new(name: 'InheritedAllowedResultReceiversSource')
+    InheritedAllowedResultReceiversSourceList = Shapes::ListShape.new(name: 'InheritedAllowedResultReceiversSourceList')
+    InheritedDisallowedOutputColumns = Shapes::StructureShape.new(name: 'InheritedDisallowedOutputColumns')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntermediateTable = Shapes::StructureShape.new(name: 'IntermediateTable')
+    IntermediateTableActiveVersion = Shapes::StructureShape.new(name: 'IntermediateTableActiveVersion')
+    IntermediateTableAnalysisRule = Shapes::StructureShape.new(name: 'IntermediateTableAnalysisRule')
+    IntermediateTableAnalysisRuleCustom = Shapes::StructureShape.new(name: 'IntermediateTableAnalysisRuleCustom')
+    IntermediateTableAnalysisRulePolicy = Shapes::UnionShape.new(name: 'IntermediateTableAnalysisRulePolicy')
+    IntermediateTableAnalysisRulePolicyV1 = Shapes::UnionShape.new(name: 'IntermediateTableAnalysisRulePolicyV1')
+    IntermediateTableAnalysisRuleType = Shapes::StringShape.new(name: 'IntermediateTableAnalysisRuleType')
+    IntermediateTableAnalysisRuleTypeList = Shapes::ListShape.new(name: 'IntermediateTableAnalysisRuleTypeList')
+    IntermediateTableArn = Shapes::StringShape.new(name: 'IntermediateTableArn')
+    IntermediateTableColumn = Shapes::StructureShape.new(name: 'IntermediateTableColumn')
+    IntermediateTableColumnList = Shapes::ListShape.new(name: 'IntermediateTableColumnList')
+    IntermediateTableColumnTypeString = Shapes::StringShape.new(name: 'IntermediateTableColumnTypeString')
+    IntermediateTableComputeConfiguration = Shapes::UnionShape.new(name: 'IntermediateTableComputeConfiguration')
+    IntermediateTableDependency = Shapes::StructureShape.new(name: 'IntermediateTableDependency')
+    IntermediateTableIdentifier = Shapes::StringShape.new(name: 'IntermediateTableIdentifier')
+    IntermediateTableInheritedConstraints = Shapes::StructureShape.new(name: 'IntermediateTableInheritedConstraints')
+    IntermediateTableOutputConfiguration = Shapes::StructureShape.new(name: 'IntermediateTableOutputConfiguration')
+    IntermediateTableSchema = Shapes::StructureShape.new(name: 'IntermediateTableSchema')
+    IntermediateTableSchemaTypeProperties = Shapes::StructureShape.new(name: 'IntermediateTableSchemaTypeProperties')
+    IntermediateTableStatus = Shapes::StringShape.new(name: 'IntermediateTableStatus')
+    IntermediateTableSummary = Shapes::StructureShape.new(name: 'IntermediateTableSummary')
+    IntermediateTableSummaryList = Shapes::ListShape.new(name: 'IntermediateTableSummaryList')
+    IntermediateTableVersionStatus = Shapes::StringShape.new(name: 'IntermediateTableVersionStatus')
+    IntermediateTableVersionSummary = Shapes::StructureShape.new(name: 'IntermediateTableVersionSummary')
+    IntermediateTableVersionSummaryList = Shapes::ListShape.new(name: 'IntermediateTableVersionSummaryList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobComputePaymentConfig = Shapes::StructureShape.new(name: 'JobComputePaymentConfig')
     JobParameterMap = Shapes::MapShape.new(name: 'JobParameterMap')
@@ -388,6 +453,10 @@ module Aws::CleanRooms
     ListIdMappingTablesOutput = Shapes::StructureShape.new(name: 'ListIdMappingTablesOutput')
     ListIdNamespaceAssociationsInput = Shapes::StructureShape.new(name: 'ListIdNamespaceAssociationsInput')
     ListIdNamespaceAssociationsOutput = Shapes::StructureShape.new(name: 'ListIdNamespaceAssociationsOutput')
+    ListIntermediateTableVersionsInput = Shapes::StructureShape.new(name: 'ListIntermediateTableVersionsInput')
+    ListIntermediateTableVersionsOutput = Shapes::StructureShape.new(name: 'ListIntermediateTableVersionsOutput')
+    ListIntermediateTablesInput = Shapes::StructureShape.new(name: 'ListIntermediateTablesInput')
+    ListIntermediateTablesOutput = Shapes::StructureShape.new(name: 'ListIntermediateTablesOutput')
     ListMembersInput = Shapes::StructureShape.new(name: 'ListMembersInput')
     ListMembersOutput = Shapes::StructureShape.new(name: 'ListMembersOutput')
     ListMembershipsInput = Shapes::StructureShape.new(name: 'ListMembershipsInput')
@@ -448,6 +517,12 @@ module Aws::CleanRooms
     PaymentConfiguration = Shapes::StructureShape.new(name: 'PaymentConfiguration')
     PopulateIdMappingTableInput = Shapes::StructureShape.new(name: 'PopulateIdMappingTableInput')
     PopulateIdMappingTableOutput = Shapes::StructureShape.new(name: 'PopulateIdMappingTableOutput')
+    PopulateIntermediateTableAnalysisType = Shapes::StringShape.new(name: 'PopulateIntermediateTableAnalysisType')
+    PopulateIntermediateTableInput = Shapes::StructureShape.new(name: 'PopulateIntermediateTableInput')
+    PopulateIntermediateTableOutput = Shapes::StructureShape.new(name: 'PopulateIntermediateTableOutput')
+    PopulationAnalysisConfiguration = Shapes::UnionShape.new(name: 'PopulationAnalysisConfiguration')
+    PopulationAnalysisSqlParameters = Shapes::StructureShape.new(name: 'PopulationAnalysisSqlParameters')
+    PopulationAnalysisSqlParametersQueryStringString = Shapes::StringShape.new(name: 'PopulationAnalysisSqlParametersQueryStringString')
     PreviewPrivacyImpactInput = Shapes::StructureShape.new(name: 'PreviewPrivacyImpactInput')
     PreviewPrivacyImpactOutput = Shapes::StructureShape.new(name: 'PreviewPrivacyImpactOutput')
     PreviewPrivacyImpactParametersInput = Shapes::UnionShape.new(name: 'PreviewPrivacyImpactParametersInput')
@@ -535,6 +610,7 @@ module Aws::CleanRooms
     ResourceAlias = Shapes::StringShape.new(name: 'ResourceAlias')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResultFormat = Shapes::StringShape.new(name: 'ResultFormat')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -624,6 +700,10 @@ module Aws::CleanRooms
     UpdateIdMappingTableOutput = Shapes::StructureShape.new(name: 'UpdateIdMappingTableOutput')
     UpdateIdNamespaceAssociationInput = Shapes::StructureShape.new(name: 'UpdateIdNamespaceAssociationInput')
     UpdateIdNamespaceAssociationOutput = Shapes::StructureShape.new(name: 'UpdateIdNamespaceAssociationOutput')
+    UpdateIntermediateTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'UpdateIntermediateTableAnalysisRuleInput')
+    UpdateIntermediateTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'UpdateIntermediateTableAnalysisRuleOutput')
+    UpdateIntermediateTableInput = Shapes::StructureShape.new(name: 'UpdateIntermediateTableInput')
+    UpdateIntermediateTableOutput = Shapes::StructureShape.new(name: 'UpdateIntermediateTableOutput')
     UpdateMembershipInput = Shapes::StructureShape.new(name: 'UpdateMembershipInput')
     UpdateMembershipOutput = Shapes::StructureShape.new(name: 'UpdateMembershipOutput')
     UpdateMembershipPaymentConfiguration = Shapes::StructureShape.new(name: 'UpdateMembershipPaymentConfiguration')
@@ -673,6 +753,8 @@ module Aws::CleanRooms
     AccessDeniedException.add_member(:reason, Shapes::ShapeRef.new(shape: AccessDeniedExceptionReason, location_name: "reason"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
+
     AggregateColumn.add_member(:column_names, Shapes::ShapeRef.new(shape: AggregateColumnColumnNamesList, required: true, location_name: "columnNames"))
     AggregateColumn.add_member(:function, Shapes::ShapeRef.new(shape: AggregateFunctionName, required: true, location_name: "function"))
     AggregateColumn.struct_class = Types::AggregateColumn
@@ -687,6 +769,10 @@ module Aws::CleanRooms
     AggregationConstraints.member = Shapes::ShapeRef.new(shape: AggregationConstraint)
 
     AllowedAdditionalAnalyses.member = Shapes::ShapeRef.new(shape: AdditionalAnalysesResourceArn)
+
+    AllowedAnalysesList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateArnOrQueryWildcard)
+
+    AllowedAnalysisProviderList.member = Shapes::ShapeRef.new(shape: AccountId)
 
     AllowedColumnList.member = Shapes::ShapeRef.new(shape: ColumnName)
 
@@ -725,11 +811,15 @@ module Aws::CleanRooms
 
     AnalysisRuleColumnList.member = Shapes::ShapeRef.new(shape: AnalysisRuleColumnName)
 
+    AnalysisRuleColumnNameList.member = Shapes::ShapeRef.new(shape: AnalysisRuleColumnName)
+
     AnalysisRuleCustom.add_member(:allowed_analyses, Shapes::ShapeRef.new(shape: AnalysisRuleCustomAllowedAnalysesList, required: true, location_name: "allowedAnalyses"))
     AnalysisRuleCustom.add_member(:allowed_analysis_providers, Shapes::ShapeRef.new(shape: AnalysisRuleCustomAllowedAnalysisProvidersList, location_name: "allowedAnalysisProviders"))
     AnalysisRuleCustom.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: AdditionalAnalyses, location_name: "additionalAnalyses"))
     AnalysisRuleCustom.add_member(:disallowed_output_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, location_name: "disallowedOutputColumns"))
     AnalysisRuleCustom.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyConfiguration, location_name: "differentialPrivacy"))
+    AnalysisRuleCustom.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
+    AnalysisRuleCustom.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
     AnalysisRuleCustom.struct_class = Types::AnalysisRuleCustom
 
     AnalysisRuleCustomAllowedAnalysesList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateArnOrQueryWildcard)
@@ -949,6 +1039,15 @@ module Aws::CleanRooms
 
     ChangeTypeList.member = Shapes::ShapeRef.new(shape: ChangeType)
 
+    ChildResource.add_member(:resource_id, Shapes::ShapeRef.new(shape: UUID, location_name: "resourceId"))
+    ChildResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ChildResourceType, required: true, location_name: "resourceType"))
+    ChildResource.add_member(:resource_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "resourceName"))
+    ChildResource.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "ownerAccountId"))
+    ChildResource.add_member(:resource_status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "resourceStatus"))
+    ChildResource.struct_class = Types::ChildResource
+
+    ChildResourceList.member = Shapes::ShapeRef.new(shape: ChildResource)
+
     Collaboration.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     Collaboration.add_member(:arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "arn"))
     Collaboration.add_member(:name, Shapes::ShapeRef.new(shape: CollaborationName, required: true, location_name: "name"))
@@ -1143,6 +1242,16 @@ module Aws::CleanRooms
     ColumnClassificationDetails.add_member(:column_mapping, Shapes::ShapeRef.new(shape: ColumnMappingList, required: true, location_name: "columnMapping"))
     ColumnClassificationDetails.struct_class = Types::ColumnClassificationDetails
 
+    ColumnLineageEntry.add_member(:column, Shapes::ShapeRef.new(shape: AnalysisRuleColumnName, required: true, location_name: "column"))
+    ColumnLineageEntry.add_member(:source_column, Shapes::ShapeRef.new(shape: AnalysisRuleColumnName, required: true, location_name: "sourceColumn"))
+    ColumnLineageEntry.add_member(:source_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "sourceName"))
+    ColumnLineageEntry.add_member(:source_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "sourceId"))
+    ColumnLineageEntry.add_member(:source_type, Shapes::ShapeRef.new(shape: BaseTableDependencyType, required: true, location_name: "sourceType"))
+    ColumnLineageEntry.add_member(:source_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "sourceAccountId"))
+    ColumnLineageEntry.struct_class = Types::ColumnLineageEntry
+
+    ColumnLineageList.member = Shapes::ShapeRef.new(shape: ColumnLineageEntry)
+
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
 
     ColumnMappingList.member = Shapes::ShapeRef.new(shape: SyntheticDataColumnProperties)
@@ -1239,6 +1348,7 @@ module Aws::CleanRooms
     ConfiguredTableAssociation.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleTypeList, location_name: "analysisRuleTypes"))
     ConfiguredTableAssociation.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
     ConfiguredTableAssociation.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    ConfiguredTableAssociation.add_member(:child_resources, Shapes::ShapeRef.new(shape: ChildResourceList, location_name: "childResources"))
     ConfiguredTableAssociation.struct_class = Types::ConfiguredTableAssociation
 
     ConfiguredTableAssociationAnalysisRule.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location_name: "membershipIdentifier"))
@@ -1279,6 +1389,9 @@ module Aws::CleanRooms
     ConfiguredTableAssociationAnalysisRulePolicyV1.struct_class = Types::ConfiguredTableAssociationAnalysisRulePolicyV1
 
     ConfiguredTableAssociationAnalysisRuleTypeList.member = Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleType)
+
+    ConfiguredTableAssociationSchemaTypeProperties.add_member(:configured_table_association_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "configuredTableAssociationId"))
+    ConfiguredTableAssociationSchemaTypeProperties.struct_class = Types::ConfiguredTableAssociationSchemaTypeProperties
 
     ConfiguredTableAssociationSummary.add_member(:configured_table_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "configuredTableId"))
     ConfiguredTableAssociationSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location_name: "membershipId"))
@@ -1388,7 +1501,7 @@ module Aws::CleanRooms
 
     CreateCollaborationInput.add_member(:members, Shapes::ShapeRef.new(shape: MemberList, required: true, location_name: "members"))
     CreateCollaborationInput.add_member(:name, Shapes::ShapeRef.new(shape: CollaborationName, required: true, location_name: "name"))
-    CreateCollaborationInput.add_member(:description, Shapes::ShapeRef.new(shape: CollaborationDescription, required: true, location_name: "description"))
+    CreateCollaborationInput.add_member(:description, Shapes::ShapeRef.new(shape: CollaborationDescription, location_name: "description"))
     CreateCollaborationInput.add_member(:creator_member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "creatorMemberAbilities"))
     CreateCollaborationInput.add_member(:creator_ml_member_abilities, Shapes::ShapeRef.new(shape: MLMemberAbilities, location_name: "creatorMLMemberAbilities"))
     CreateCollaborationInput.add_member(:creator_display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "creatorDisplayName"))
@@ -1479,6 +1592,27 @@ module Aws::CleanRooms
     CreateIdNamespaceAssociationOutput.add_member(:id_namespace_association, Shapes::ShapeRef.new(shape: IdNamespaceAssociation, required: true, location_name: "idNamespaceAssociation"))
     CreateIdNamespaceAssociationOutput.struct_class = Types::CreateIdNamespaceAssociationOutput
 
+    CreateIntermediateTableAnalysisRuleInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    CreateIntermediateTableAnalysisRuleInput.add_member(:intermediate_table_identifier, Shapes::ShapeRef.new(shape: IntermediateTableIdentifier, required: true, location: "uri", location_name: "intermediateTableIdentifier"))
+    CreateIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRuleType, required: true, location_name: "analysisRuleType"))
+    CreateIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_policy, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRulePolicy, required: true, location_name: "analysisRulePolicy"))
+    CreateIntermediateTableAnalysisRuleInput.struct_class = Types::CreateIntermediateTableAnalysisRuleInput
+
+    CreateIntermediateTableAnalysisRuleOutput.add_member(:analysis_rule, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRule, required: true, location_name: "analysisRule"))
+    CreateIntermediateTableAnalysisRuleOutput.struct_class = Types::CreateIntermediateTableAnalysisRuleOutput
+
+    CreateIntermediateTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    CreateIntermediateTableInput.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
+    CreateIntermediateTableInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    CreateIntermediateTableInput.add_member(:population_analysis_configuration, Shapes::ShapeRef.new(shape: PopulationAnalysisConfiguration, required: true, location_name: "populationAnalysisConfiguration"))
+    CreateIntermediateTableInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "kmsKeyArn"))
+    CreateIntermediateTableInput.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: CreateIntermediateTableInputRetentionInDaysInteger, location_name: "retentionInDays"))
+    CreateIntermediateTableInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateIntermediateTableInput.struct_class = Types::CreateIntermediateTableInput
+
+    CreateIntermediateTableOutput.add_member(:intermediate_table, Shapes::ShapeRef.new(shape: IntermediateTable, required: true, location_name: "intermediateTable"))
+    CreateIntermediateTableOutput.struct_class = Types::CreateIntermediateTableOutput
+
     CreateMembershipInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location_name: "collaborationIdentifier"))
     CreateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
     CreateMembershipInput.add_member(:job_log_status, Shapes::ShapeRef.new(shape: MembershipJobLogStatus, location_name: "jobLogStatus"))
@@ -1563,6 +1697,19 @@ module Aws::CleanRooms
 
     DeleteIdNamespaceAssociationOutput.struct_class = Types::DeleteIdNamespaceAssociationOutput
 
+    DeleteIntermediateTableAnalysisRuleInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    DeleteIntermediateTableAnalysisRuleInput.add_member(:intermediate_table_identifier, Shapes::ShapeRef.new(shape: IntermediateTableIdentifier, required: true, location: "uri", location_name: "intermediateTableIdentifier"))
+    DeleteIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRuleType, required: true, location: "uri", location_name: "analysisRuleType"))
+    DeleteIntermediateTableAnalysisRuleInput.struct_class = Types::DeleteIntermediateTableAnalysisRuleInput
+
+    DeleteIntermediateTableAnalysisRuleOutput.struct_class = Types::DeleteIntermediateTableAnalysisRuleOutput
+
+    DeleteIntermediateTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    DeleteIntermediateTableInput.add_member(:intermediate_table_identifier, Shapes::ShapeRef.new(shape: IntermediateTableIdentifier, required: true, location: "uri", location_name: "intermediateTableIdentifier"))
+    DeleteIntermediateTableInput.struct_class = Types::DeleteIntermediateTableInput
+
+    DeleteIntermediateTableOutput.struct_class = Types::DeleteIntermediateTableOutput
+
     DeleteMemberInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
     DeleteMemberInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "uri", location_name: "accountId"))
     DeleteMemberInput.struct_class = Types::DeleteMemberInput
@@ -1579,6 +1726,8 @@ module Aws::CleanRooms
     DeletePrivacyBudgetTemplateInput.struct_class = Types::DeletePrivacyBudgetTemplateInput
 
     DeletePrivacyBudgetTemplateOutput.struct_class = Types::DeletePrivacyBudgetTemplateOutput
+
+    DependencyList.member = Shapes::ShapeRef.new(shape: IntermediateTableDependency)
 
     DifferentialPrivacyColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "name"))
     DifferentialPrivacyColumn.struct_class = Types::DifferentialPrivacyColumn
@@ -1638,6 +1787,13 @@ module Aws::CleanRooms
 
     DirectAnalysisConfigurationDetails.add_member(:receiver_account_ids, Shapes::ShapeRef.new(shape: ReceiverAccountIds, location_name: "receiverAccountIds"))
     DirectAnalysisConfigurationDetails.struct_class = Types::DirectAnalysisConfigurationDetails
+
+    DisallowIntermediateTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    DisallowIntermediateTableInput.add_member(:intermediate_table_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "intermediateTableName"))
+    DisallowIntermediateTableInput.add_member(:include_descendants, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeDescendants"))
+    DisallowIntermediateTableInput.struct_class = Types::DisallowIntermediateTableInput
+
+    DisallowIntermediateTableOutput.struct_class = Types::DisallowIntermediateTableOutput
 
     ErrorMessageConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ErrorMessageType, required: true, location_name: "type"))
     ErrorMessageConfiguration.struct_class = Types::ErrorMessageConfiguration
@@ -1739,6 +1895,21 @@ module Aws::CleanRooms
     GetIdNamespaceAssociationOutput.add_member(:id_namespace_association, Shapes::ShapeRef.new(shape: IdNamespaceAssociation, required: true, location_name: "idNamespaceAssociation"))
     GetIdNamespaceAssociationOutput.struct_class = Types::GetIdNamespaceAssociationOutput
 
+    GetIntermediateTableAnalysisRuleInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    GetIntermediateTableAnalysisRuleInput.add_member(:intermediate_table_identifier, Shapes::ShapeRef.new(shape: IntermediateTableIdentifier, required: true, location: "uri", location_name: "intermediateTableIdentifier"))
+    GetIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRuleType, required: true, location: "uri", location_name: "analysisRuleType"))
+    GetIntermediateTableAnalysisRuleInput.struct_class = Types::GetIntermediateTableAnalysisRuleInput
+
+    GetIntermediateTableAnalysisRuleOutput.add_member(:analysis_rule, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRule, required: true, location_name: "analysisRule"))
+    GetIntermediateTableAnalysisRuleOutput.struct_class = Types::GetIntermediateTableAnalysisRuleOutput
+
+    GetIntermediateTableInput.add_member(:intermediate_table_identifier, Shapes::ShapeRef.new(shape: IntermediateTableIdentifier, required: true, location: "uri", location_name: "intermediateTableIdentifier"))
+    GetIntermediateTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    GetIntermediateTableInput.struct_class = Types::GetIntermediateTableInput
+
+    GetIntermediateTableOutput.add_member(:intermediate_table, Shapes::ShapeRef.new(shape: IntermediateTable, required: true, location_name: "intermediateTable"))
+    GetIntermediateTableOutput.struct_class = Types::GetIntermediateTableOutput
+
     GetMembershipInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     GetMembershipInput.struct_class = Types::GetMembershipInput
 
@@ -1807,6 +1978,7 @@ module Aws::CleanRooms
     IdMappingTable.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     IdMappingTable.add_member(:input_reference_properties, Shapes::ShapeRef.new(shape: IdMappingTableInputReferenceProperties, required: true, location_name: "inputReferenceProperties"))
     IdMappingTable.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "kmsKeyArn"))
+    IdMappingTable.add_member(:child_resources, Shapes::ShapeRef.new(shape: ChildResourceList, location_name: "childResources"))
     IdMappingTable.struct_class = Types::IdMappingTable
 
     IdMappingTableInputReferenceConfig.add_member(:input_reference_arn, Shapes::ShapeRef.new(shape: IdMappingTableInputReferenceArn, required: true, location_name: "inputReferenceArn"))
@@ -1823,6 +1995,7 @@ module Aws::CleanRooms
     IdMappingTableInputSourceList.member = Shapes::ShapeRef.new(shape: IdMappingTableInputSource)
 
     IdMappingTableSchemaTypeProperties.add_member(:id_mapping_table_input_source, Shapes::ShapeRef.new(shape: IdMappingTableInputSourceList, required: true, location_name: "idMappingTableInputSource"))
+    IdMappingTableSchemaTypeProperties.add_member(:id_mapping_table_id, Shapes::ShapeRef.new(shape: UUID, location_name: "idMappingTableId"))
     IdMappingTableSchemaTypeProperties.struct_class = Types::IdMappingTableSchemaTypeProperties
 
     IdMappingTableSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
@@ -1883,6 +2056,176 @@ module Aws::CleanRooms
     IdNamespaceAssociationSummary.struct_class = Types::IdNamespaceAssociationSummary
 
     IdNamespaceAssociationSummaryList.member = Shapes::ShapeRef.new(shape: IdNamespaceAssociationSummary)
+
+    InheritedAdditionalAnalyses.add_member(:value, Shapes::ShapeRef.new(shape: AdditionalAnalyses, required: true, location_name: "value"))
+    InheritedAdditionalAnalyses.add_member(:sources, Shapes::ShapeRef.new(shape: InheritedAdditionalAnalysesSourceList, required: true, location_name: "sources"))
+    InheritedAdditionalAnalyses.struct_class = Types::InheritedAdditionalAnalyses
+
+    InheritedAdditionalAnalysesSource.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
+    InheritedAdditionalAnalysesSource.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    InheritedAdditionalAnalysesSource.add_member(:type, Shapes::ShapeRef.new(shape: BaseTableDependencyType, required: true, location_name: "type"))
+    InheritedAdditionalAnalysesSource.add_member(:value, Shapes::ShapeRef.new(shape: AdditionalAnalyses, required: true, location_name: "value"))
+    InheritedAdditionalAnalysesSource.add_member(:source_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "sourceAccountId"))
+    InheritedAdditionalAnalysesSource.struct_class = Types::InheritedAdditionalAnalysesSource
+
+    InheritedAdditionalAnalysesSourceList.member = Shapes::ShapeRef.new(shape: InheritedAdditionalAnalysesSource)
+
+    InheritedAllowedAdditionalAnalyses.add_member(:value, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, required: true, location_name: "value"))
+    InheritedAllowedAdditionalAnalyses.add_member(:sources, Shapes::ShapeRef.new(shape: InheritedAllowedAdditionalAnalysesSourceList, required: true, location_name: "sources"))
+    InheritedAllowedAdditionalAnalyses.struct_class = Types::InheritedAllowedAdditionalAnalyses
+
+    InheritedAllowedAdditionalAnalysesSource.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
+    InheritedAllowedAdditionalAnalysesSource.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    InheritedAllowedAdditionalAnalysesSource.add_member(:type, Shapes::ShapeRef.new(shape: BaseTableDependencyType, required: true, location_name: "type"))
+    InheritedAllowedAdditionalAnalysesSource.add_member(:value, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, required: true, location_name: "value"))
+    InheritedAllowedAdditionalAnalysesSource.add_member(:source_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "sourceAccountId"))
+    InheritedAllowedAdditionalAnalysesSource.struct_class = Types::InheritedAllowedAdditionalAnalysesSource
+
+    InheritedAllowedAdditionalAnalysesSourceList.member = Shapes::ShapeRef.new(shape: InheritedAllowedAdditionalAnalysesSource)
+
+    InheritedAllowedResultReceivers.add_member(:value, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "value"))
+    InheritedAllowedResultReceivers.add_member(:sources, Shapes::ShapeRef.new(shape: InheritedAllowedResultReceiversSourceList, required: true, location_name: "sources"))
+    InheritedAllowedResultReceivers.struct_class = Types::InheritedAllowedResultReceivers
+
+    InheritedAllowedResultReceiversSource.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
+    InheritedAllowedResultReceiversSource.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    InheritedAllowedResultReceiversSource.add_member(:type, Shapes::ShapeRef.new(shape: BaseTableDependencyType, required: true, location_name: "type"))
+    InheritedAllowedResultReceiversSource.add_member(:value, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "value"))
+    InheritedAllowedResultReceiversSource.add_member(:source_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "sourceAccountId"))
+    InheritedAllowedResultReceiversSource.struct_class = Types::InheritedAllowedResultReceiversSource
+
+    InheritedAllowedResultReceiversSourceList.member = Shapes::ShapeRef.new(shape: InheritedAllowedResultReceiversSource)
+
+    InheritedDisallowedOutputColumns.add_member(:value, Shapes::ShapeRef.new(shape: AnalysisRuleColumnNameList, required: true, location_name: "value"))
+    InheritedDisallowedOutputColumns.add_member(:column_lineage, Shapes::ShapeRef.new(shape: ColumnLineageList, required: true, location_name: "columnLineage"))
+    InheritedDisallowedOutputColumns.struct_class = Types::InheritedDisallowedOutputColumns
+
+    IntermediateTable.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    IntermediateTable.add_member(:arn, Shapes::ShapeRef.new(shape: IntermediateTableArn, required: true, location_name: "arn"))
+    IntermediateTable.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
+    IntermediateTable.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    IntermediateTable.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    IntermediateTable.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
+    IntermediateTable.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    IntermediateTable.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    IntermediateTable.add_member(:child_resources, Shapes::ShapeRef.new(shape: ChildResourceList, location_name: "childResources"))
+    IntermediateTable.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    IntermediateTable.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    IntermediateTable.add_member(:status, Shapes::ShapeRef.new(shape: IntermediateTableStatus, required: true, location_name: "status"))
+    IntermediateTable.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    IntermediateTable.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "kmsKeyArn"))
+    IntermediateTable.add_member(:population_analysis_configuration, Shapes::ShapeRef.new(shape: PopulationAnalysisConfiguration, required: true, location_name: "populationAnalysisConfiguration"))
+    IntermediateTable.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "retentionInDays"))
+    IntermediateTable.add_member(:table_dependencies, Shapes::ShapeRef.new(shape: DependencyList, location_name: "tableDependencies"))
+    IntermediateTable.add_member(:intermediate_table_version, Shapes::ShapeRef.new(shape: IntermediateTableActiveVersion, location_name: "intermediateTableVersion"))
+    IntermediateTable.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRuleTypeList, location_name: "analysisRuleTypes"))
+    IntermediateTable.add_member(:schema, Shapes::ShapeRef.new(shape: IntermediateTableSchema, location_name: "schema"))
+    IntermediateTable.struct_class = Types::IntermediateTable
+
+    IntermediateTableActiveVersion.add_member(:version_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "versionId"))
+    IntermediateTableActiveVersion.add_member(:analysis_id, Shapes::ShapeRef.new(shape: AnalysisIdentifier, required: true, location_name: "analysisId"))
+    IntermediateTableActiveVersion.add_member(:analysis_type, Shapes::ShapeRef.new(shape: PopulateIntermediateTableAnalysisType, required: true, location_name: "analysisType"))
+    IntermediateTableActiveVersion.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "kmsKeyArn"))
+    IntermediateTableActiveVersion.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "parameters"))
+    IntermediateTableActiveVersion.add_member(:inherited_constraints, Shapes::ShapeRef.new(shape: IntermediateTableInheritedConstraints, required: true, location_name: "inheritedConstraints"))
+    IntermediateTableActiveVersion.add_member(:expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationTime"))
+    IntermediateTableActiveVersion.struct_class = Types::IntermediateTableActiveVersion
+
+    IntermediateTableAnalysisRule.add_member(:intermediate_table_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "intermediateTableIdentifier"))
+    IntermediateTableAnalysisRule.add_member(:intermediate_table_arn, Shapes::ShapeRef.new(shape: IntermediateTableArn, required: true, location_name: "intermediateTableArn"))
+    IntermediateTableAnalysisRule.add_member(:analysis_rule_policy, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRulePolicy, required: true, location_name: "analysisRulePolicy"))
+    IntermediateTableAnalysisRule.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRuleType, required: true, location_name: "analysisRuleType"))
+    IntermediateTableAnalysisRule.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    IntermediateTableAnalysisRule.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    IntermediateTableAnalysisRule.struct_class = Types::IntermediateTableAnalysisRule
+
+    IntermediateTableAnalysisRuleCustom.add_member(:allowed_analyses, Shapes::ShapeRef.new(shape: AllowedAnalysesList, location_name: "allowedAnalyses"))
+    IntermediateTableAnalysisRuleCustom.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: AdditionalAnalyses, location_name: "additionalAnalyses"))
+    IntermediateTableAnalysisRuleCustom.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
+    IntermediateTableAnalysisRuleCustom.add_member(:allowed_analysis_providers, Shapes::ShapeRef.new(shape: AllowedAnalysisProviderList, location_name: "allowedAnalysisProviders"))
+    IntermediateTableAnalysisRuleCustom.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
+    IntermediateTableAnalysisRuleCustom.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyConfiguration, location_name: "differentialPrivacy"))
+    IntermediateTableAnalysisRuleCustom.add_member(:disallowed_output_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, location_name: "disallowedOutputColumns"))
+    IntermediateTableAnalysisRuleCustom.struct_class = Types::IntermediateTableAnalysisRuleCustom
+
+    IntermediateTableAnalysisRulePolicy.add_member(:v1, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRulePolicyV1, location_name: "v1"))
+    IntermediateTableAnalysisRulePolicy.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IntermediateTableAnalysisRulePolicy.add_member_subclass(:v1, Types::IntermediateTableAnalysisRulePolicy::V1)
+    IntermediateTableAnalysisRulePolicy.add_member_subclass(:unknown, Types::IntermediateTableAnalysisRulePolicy::Unknown)
+    IntermediateTableAnalysisRulePolicy.struct_class = Types::IntermediateTableAnalysisRulePolicy
+
+    IntermediateTableAnalysisRulePolicyV1.add_member(:custom, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRuleCustom, location_name: "custom"))
+    IntermediateTableAnalysisRulePolicyV1.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IntermediateTableAnalysisRulePolicyV1.add_member_subclass(:custom, Types::IntermediateTableAnalysisRulePolicyV1::Custom)
+    IntermediateTableAnalysisRulePolicyV1.add_member_subclass(:unknown, Types::IntermediateTableAnalysisRulePolicyV1::Unknown)
+    IntermediateTableAnalysisRulePolicyV1.struct_class = Types::IntermediateTableAnalysisRulePolicyV1
+
+    IntermediateTableAnalysisRuleTypeList.member = Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRuleType)
+
+    IntermediateTableColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "name"))
+    IntermediateTableColumn.add_member(:type, Shapes::ShapeRef.new(shape: IntermediateTableColumnTypeString, required: true, location_name: "type"))
+    IntermediateTableColumn.struct_class = Types::IntermediateTableColumn
+
+    IntermediateTableColumnList.member = Shapes::ShapeRef.new(shape: IntermediateTableColumn)
+
+    IntermediateTableComputeConfiguration.add_member(:query_compute_configuration, Shapes::ShapeRef.new(shape: WorkerComputeConfiguration, location_name: "queryComputeConfiguration"))
+    IntermediateTableComputeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IntermediateTableComputeConfiguration.add_member_subclass(:query_compute_configuration, Types::IntermediateTableComputeConfiguration::QueryComputeConfiguration)
+    IntermediateTableComputeConfiguration.add_member_subclass(:unknown, Types::IntermediateTableComputeConfiguration::Unknown)
+    IntermediateTableComputeConfiguration.struct_class = Types::IntermediateTableComputeConfiguration
+
+    IntermediateTableDependency.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    IntermediateTableDependency.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
+    IntermediateTableDependency.add_member(:type, Shapes::ShapeRef.new(shape: BaseTableDependencyType, required: true, location_name: "type"))
+    IntermediateTableDependency.add_member(:parent_type, Shapes::ShapeRef.new(shape: BaseTableParentType, required: true, location_name: "parentType"))
+    IntermediateTableDependency.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
+    IntermediateTableDependency.struct_class = Types::IntermediateTableDependency
+
+    IntermediateTableInheritedConstraints.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: InheritedAdditionalAnalyses, location_name: "additionalAnalyses"))
+    IntermediateTableInheritedConstraints.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: InheritedAllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
+    IntermediateTableInheritedConstraints.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: InheritedAllowedResultReceivers, location_name: "allowedResultReceivers"))
+    IntermediateTableInheritedConstraints.add_member(:disallowed_output_columns, Shapes::ShapeRef.new(shape: InheritedDisallowedOutputColumns, location_name: "disallowedOutputColumns"))
+    IntermediateTableInheritedConstraints.struct_class = Types::IntermediateTableInheritedConstraints
+
+    IntermediateTableOutputConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    IntermediateTableOutputConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: IntermediateTableArn, required: true, location_name: "arn"))
+    IntermediateTableOutputConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
+    IntermediateTableOutputConfiguration.struct_class = Types::IntermediateTableOutputConfiguration
+
+    IntermediateTableSchema.add_member(:columns, Shapes::ShapeRef.new(shape: ColumnList, required: true, location_name: "columns"))
+    IntermediateTableSchema.struct_class = Types::IntermediateTableSchema
+
+    IntermediateTableSchemaTypeProperties.add_member(:intermediate_table_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "intermediateTableId"))
+    IntermediateTableSchemaTypeProperties.struct_class = Types::IntermediateTableSchemaTypeProperties
+
+    IntermediateTableSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    IntermediateTableSummary.add_member(:arn, Shapes::ShapeRef.new(shape: IntermediateTableArn, required: true, location_name: "arn"))
+    IntermediateTableSummary.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
+    IntermediateTableSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    IntermediateTableSummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    IntermediateTableSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
+    IntermediateTableSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    IntermediateTableSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    IntermediateTableSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    IntermediateTableSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    IntermediateTableSummary.add_member(:status, Shapes::ShapeRef.new(shape: IntermediateTableStatus, required: true, location_name: "status"))
+    IntermediateTableSummary.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "retentionInDays"))
+    IntermediateTableSummary.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRuleTypeList, location_name: "analysisRuleTypes"))
+    IntermediateTableSummary.struct_class = Types::IntermediateTableSummary
+
+    IntermediateTableSummaryList.member = Shapes::ShapeRef.new(shape: IntermediateTableSummary)
+
+    IntermediateTableVersionSummary.add_member(:version_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "versionId"))
+    IntermediateTableVersionSummary.add_member(:table_id, Shapes::ShapeRef.new(shape: IntermediateTableIdentifier, required: true, location_name: "tableId"))
+    IntermediateTableVersionSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    IntermediateTableVersionSummary.add_member(:analysis_id, Shapes::ShapeRef.new(shape: AnalysisIdentifier, required: true, location_name: "analysisId"))
+    IntermediateTableVersionSummary.add_member(:status, Shapes::ShapeRef.new(shape: IntermediateTableVersionStatus, required: true, location_name: "status"))
+    IntermediateTableVersionSummary.add_member(:analysis_type, Shapes::ShapeRef.new(shape: PopulateIntermediateTableAnalysisType, required: true, location_name: "analysisType"))
+    IntermediateTableVersionSummary.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "kmsKeyArn"))
+    IntermediateTableVersionSummary.add_member(:expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationTime"))
+    IntermediateTableVersionSummary.struct_class = Types::IntermediateTableVersionSummary
+
+    IntermediateTableVersionSummaryList.member = Shapes::ShapeRef.new(shape: IntermediateTableVersionSummary)
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -2013,6 +2356,25 @@ module Aws::CleanRooms
     ListIdNamespaceAssociationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListIdNamespaceAssociationsOutput.add_member(:id_namespace_association_summaries, Shapes::ShapeRef.new(shape: IdNamespaceAssociationSummaryList, required: true, location_name: "idNamespaceAssociationSummaries"))
     ListIdNamespaceAssociationsOutput.struct_class = Types::ListIdNamespaceAssociationsOutput
+
+    ListIntermediateTableVersionsInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    ListIntermediateTableVersionsInput.add_member(:intermediate_table_identifier, Shapes::ShapeRef.new(shape: IntermediateTableIdentifier, required: true, location: "uri", location_name: "intermediateTableIdentifier"))
+    ListIntermediateTableVersionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListIntermediateTableVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListIntermediateTableVersionsInput.struct_class = Types::ListIntermediateTableVersionsInput
+
+    ListIntermediateTableVersionsOutput.add_member(:intermediate_table_version_summaries, Shapes::ShapeRef.new(shape: IntermediateTableVersionSummaryList, required: true, location_name: "intermediateTableVersionSummaries"))
+    ListIntermediateTableVersionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListIntermediateTableVersionsOutput.struct_class = Types::ListIntermediateTableVersionsOutput
+
+    ListIntermediateTablesInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    ListIntermediateTablesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListIntermediateTablesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListIntermediateTablesInput.struct_class = Types::ListIntermediateTablesInput
+
+    ListIntermediateTablesOutput.add_member(:intermediate_table_summaries, Shapes::ShapeRef.new(shape: IntermediateTableSummaryList, required: true, location_name: "intermediateTableSummaries"))
+    ListIntermediateTablesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListIntermediateTablesOutput.struct_class = Types::ListIntermediateTablesOutput
 
     ListMembersInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
     ListMembersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -2236,6 +2598,28 @@ module Aws::CleanRooms
 
     PopulateIdMappingTableOutput.add_member(:id_mapping_job_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "idMappingJobId"))
     PopulateIdMappingTableOutput.struct_class = Types::PopulateIdMappingTableOutput
+
+    PopulateIntermediateTableInput.add_member(:intermediate_table_identifier, Shapes::ShapeRef.new(shape: IntermediateTableIdentifier, required: true, location: "uri", location_name: "intermediateTableIdentifier"))
+    PopulateIntermediateTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    PopulateIntermediateTableInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "parameters"))
+    PopulateIntermediateTableInput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: IntermediateTableComputeConfiguration, location_name: "computeConfiguration"))
+    PopulateIntermediateTableInput.add_member(:analysis_payer_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "analysisPayerAccountId"))
+    PopulateIntermediateTableInput.struct_class = Types::PopulateIntermediateTableInput
+
+    PopulateIntermediateTableOutput.add_member(:analysis_id, Shapes::ShapeRef.new(shape: AnalysisIdentifier, required: true, location_name: "analysisId"))
+    PopulateIntermediateTableOutput.add_member(:analysis_type, Shapes::ShapeRef.new(shape: PopulateIntermediateTableAnalysisType, required: true, location_name: "analysisType"))
+    PopulateIntermediateTableOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "versionId"))
+    PopulateIntermediateTableOutput.struct_class = Types::PopulateIntermediateTableOutput
+
+    PopulationAnalysisConfiguration.add_member(:sql_parameters, Shapes::ShapeRef.new(shape: PopulationAnalysisSqlParameters, location_name: "sqlParameters"))
+    PopulationAnalysisConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PopulationAnalysisConfiguration.add_member_subclass(:sql_parameters, Types::PopulationAnalysisConfiguration::SqlParameters)
+    PopulationAnalysisConfiguration.add_member_subclass(:unknown, Types::PopulationAnalysisConfiguration::Unknown)
+    PopulationAnalysisConfiguration.struct_class = Types::PopulationAnalysisConfiguration
+
+    PopulationAnalysisSqlParameters.add_member(:query_string, Shapes::ShapeRef.new(shape: PopulationAnalysisSqlParametersQueryStringString, location_name: "queryString"))
+    PopulationAnalysisSqlParameters.add_member(:analysis_template_arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, location_name: "analysisTemplateArn"))
+    PopulationAnalysisSqlParameters.struct_class = Types::PopulationAnalysisSqlParameters
 
     PreviewPrivacyImpactInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     PreviewPrivacyImpactInput.add_member(:parameters, Shapes::ShapeRef.new(shape: PreviewPrivacyImpactParametersInput, required: true, location_name: "parameters"))
@@ -2501,10 +2885,12 @@ module Aws::CleanRooms
     ProtectedQueryOutputConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3OutputConfiguration, location_name: "s3"))
     ProtectedQueryOutputConfiguration.add_member(:member, Shapes::ShapeRef.new(shape: ProtectedQueryMemberOutputConfiguration, location_name: "member"))
     ProtectedQueryOutputConfiguration.add_member(:distribute, Shapes::ShapeRef.new(shape: ProtectedQueryDistributeOutputConfiguration, location_name: "distribute"))
+    ProtectedQueryOutputConfiguration.add_member(:intermediate_table, Shapes::ShapeRef.new(shape: IntermediateTableOutputConfiguration, location_name: "intermediateTable"))
     ProtectedQueryOutputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProtectedQueryOutputConfiguration.add_member_subclass(:s3, Types::ProtectedQueryOutputConfiguration::S3)
     ProtectedQueryOutputConfiguration.add_member_subclass(:member, Types::ProtectedQueryOutputConfiguration::Member)
     ProtectedQueryOutputConfiguration.add_member_subclass(:distribute, Types::ProtectedQueryOutputConfiguration::Distribute)
+    ProtectedQueryOutputConfiguration.add_member_subclass(:intermediate_table, Types::ProtectedQueryOutputConfiguration::IntermediateTable)
     ProtectedQueryOutputConfiguration.add_member_subclass(:unknown, Types::ProtectedQueryOutputConfiguration::Unknown)
     ProtectedQueryOutputConfiguration.struct_class = Types::ProtectedQueryOutputConfiguration
 
@@ -2542,6 +2928,7 @@ module Aws::CleanRooms
     ProtectedQuerySummary.add_member(:status, Shapes::ShapeRef.new(shape: ProtectedQueryStatus, required: true, location_name: "status"))
     ProtectedQuerySummary.add_member(:receiver_configurations, Shapes::ShapeRef.new(shape: ReceiverConfigurationsList, required: true, location_name: "receiverConfigurations"))
     ProtectedQuerySummary.add_member(:query_compute_payer_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "queryComputePayerAccountId"))
+    ProtectedQuerySummary.add_member(:intermediate_table_configuration, Shapes::ShapeRef.new(shape: IntermediateTableOutputConfiguration, location_name: "intermediateTableConfiguration"))
     ProtectedQuerySummary.struct_class = Types::ProtectedQuerySummary
 
     ProtectedQuerySummaryList.member = Shapes::ShapeRef.new(shape: ProtectedQuerySummary)
@@ -2642,8 +3029,12 @@ module Aws::CleanRooms
     SchemaSummaryList.member = Shapes::ShapeRef.new(shape: SchemaSummary)
 
     SchemaTypeProperties.add_member(:id_mapping_table, Shapes::ShapeRef.new(shape: IdMappingTableSchemaTypeProperties, location_name: "idMappingTable"))
+    SchemaTypeProperties.add_member(:intermediate_table, Shapes::ShapeRef.new(shape: IntermediateTableSchemaTypeProperties, location_name: "intermediateTable"))
+    SchemaTypeProperties.add_member(:configured_table_association, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationSchemaTypeProperties, location_name: "configuredTableAssociation"))
     SchemaTypeProperties.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SchemaTypeProperties.add_member_subclass(:id_mapping_table, Types::SchemaTypeProperties::IdMappingTable)
+    SchemaTypeProperties.add_member_subclass(:intermediate_table, Types::SchemaTypeProperties::IntermediateTable)
+    SchemaTypeProperties.add_member_subclass(:configured_table_association, Types::SchemaTypeProperties::ConfiguredTableAssociation)
     SchemaTypeProperties.add_member_subclass(:unknown, Types::SchemaTypeProperties::Unknown)
     SchemaTypeProperties.struct_class = Types::SchemaTypeProperties
 
@@ -2835,6 +3226,25 @@ module Aws::CleanRooms
 
     UpdateIdNamespaceAssociationOutput.add_member(:id_namespace_association, Shapes::ShapeRef.new(shape: IdNamespaceAssociation, required: true, location_name: "idNamespaceAssociation"))
     UpdateIdNamespaceAssociationOutput.struct_class = Types::UpdateIdNamespaceAssociationOutput
+
+    UpdateIntermediateTableAnalysisRuleInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    UpdateIntermediateTableAnalysisRuleInput.add_member(:intermediate_table_identifier, Shapes::ShapeRef.new(shape: IntermediateTableIdentifier, required: true, location: "uri", location_name: "intermediateTableIdentifier"))
+    UpdateIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRuleType, required: true, location: "uri", location_name: "analysisRuleType"))
+    UpdateIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_policy, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRulePolicy, required: true, location_name: "analysisRulePolicy"))
+    UpdateIntermediateTableAnalysisRuleInput.struct_class = Types::UpdateIntermediateTableAnalysisRuleInput
+
+    UpdateIntermediateTableAnalysisRuleOutput.add_member(:analysis_rule, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRule, required: true, location_name: "analysisRule"))
+    UpdateIntermediateTableAnalysisRuleOutput.struct_class = Types::UpdateIntermediateTableAnalysisRuleOutput
+
+    UpdateIntermediateTableInput.add_member(:intermediate_table_identifier, Shapes::ShapeRef.new(shape: IntermediateTableIdentifier, required: true, location: "uri", location_name: "intermediateTableIdentifier"))
+    UpdateIntermediateTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    UpdateIntermediateTableInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    UpdateIntermediateTableInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "kmsKeyArn"))
+    UpdateIntermediateTableInput.add_member(:columns, Shapes::ShapeRef.new(shape: IntermediateTableColumnList, location_name: "columns"))
+    UpdateIntermediateTableInput.struct_class = Types::UpdateIntermediateTableInput
+
+    UpdateIntermediateTableOutput.add_member(:intermediate_table, Shapes::ShapeRef.new(shape: IntermediateTable, required: true, location_name: "intermediateTable"))
+    UpdateIntermediateTableOutput.struct_class = Types::UpdateIntermediateTableOutput
 
     UpdateMembershipInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     UpdateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, location_name: "queryLogStatus"))
@@ -3104,6 +3514,36 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_intermediate_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIntermediateTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables"
+        o.input = Shapes::ShapeRef.new(shape: CreateIntermediateTableInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateIntermediateTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_intermediate_table_analysis_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIntermediateTableAnalysisRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule"
+        o.input = Shapes::ShapeRef.new(shape: CreateIntermediateTableAnalysisRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateIntermediateTableAnalysisRuleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_membership, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMembership"
         o.http_method = "POST"
@@ -3254,6 +3694,34 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_intermediate_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIntermediateTable"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIntermediateTableInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIntermediateTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_intermediate_table_analysis_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIntermediateTableAnalysisRule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIntermediateTableAnalysisRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIntermediateTableAnalysisRuleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_member, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMember"
         o.http_method = "DELETE"
@@ -3288,6 +3756,20 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: DeletePrivacyBudgetTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: DeletePrivacyBudgetTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:disallow_intermediate_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisallowIntermediateTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/disallowIntermediateTable"
+        o.input = Shapes::ShapeRef.new(shape: DisallowIntermediateTableInput)
+        o.output = Shapes::ShapeRef.new(shape: DisallowIntermediateTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -3469,6 +3951,32 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: GetIdNamespaceAssociationInput)
         o.output = Shapes::ShapeRef.new(shape: GetIdNamespaceAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_intermediate_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIntermediateTable"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetIntermediateTableInput)
+        o.output = Shapes::ShapeRef.new(shape: GetIntermediateTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_intermediate_table_analysis_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIntermediateTableAnalysisRule"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}"
+        o.input = Shapes::ShapeRef.new(shape: GetIntermediateTableAnalysisRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: GetIntermediateTableAnalysisRuleOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -3799,6 +4307,44 @@ module Aws::CleanRooms
         )
       end)
 
+      api.add_operation(:list_intermediate_table_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIntermediateTableVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListIntermediateTableVersionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListIntermediateTableVersionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_intermediate_tables, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIntermediateTables"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables"
+        o.input = Shapes::ShapeRef.new(shape: ListIntermediateTablesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListIntermediateTablesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_members, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListMembers"
         o.http_method = "GET"
@@ -3947,6 +4493,21 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}/populate"
         o.input = Shapes::ShapeRef.new(shape: PopulateIdMappingTableInput)
         o.output = Shapes::ShapeRef.new(shape: PopulateIdMappingTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:populate_intermediate_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PopulateIntermediateTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/populate"
+        o.input = Shapes::ShapeRef.new(shape: PopulateIntermediateTableInput)
+        o.output = Shapes::ShapeRef.new(shape: PopulateIntermediateTableOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -4145,6 +4706,33 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: UpdateIdNamespaceAssociationInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateIdNamespaceAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_intermediate_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIntermediateTable"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIntermediateTableInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIntermediateTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_intermediate_table_analysis_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIntermediateTableAnalysisRule"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIntermediateTableAnalysisRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIntermediateTableAnalysisRuleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

@@ -19,6 +19,12 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class Amount
+      attr_accessor currency_code: ::String
+      attr_accessor currency_amount: ::String
+      SENSITIVE: []
+    end
+
     class AssociateSourceViewsRequest
       attr_accessor arn: ::String
       attr_accessor source_views: ::Array[::String]
@@ -27,6 +33,34 @@ module Aws::Billing
 
     class AssociateSourceViewsResponse
       attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class BillingFeatureFilter
+      attr_accessor name: ("PREFERENCE_KEY")
+      attr_accessor value: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BillingPeriod
+      attr_accessor year: ::Integer
+      attr_accessor month: ::Integer
+      SENSITIVE: []
+    end
+
+    class BillingPreferenceForKey
+      attr_accessor key: ::String
+      attr_accessor value: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class BillingPreferenceSummary
+      attr_accessor feature: ("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS")
+      attr_accessor key: ::String
+      attr_accessor value: ("ENABLED" | "DISABLED")
+      attr_accessor account_name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor billing_period: Types::BillingPeriod
       SENSITIVE: []
     end
 
@@ -98,6 +132,41 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class CreditAllocationHistoryEntry
+      attr_accessor credit_id: ::String
+      attr_accessor credit_amount: Types::Amount
+      attr_accessor description: ::String
+      attr_accessor account_id: ::String
+      attr_accessor applied_service_name: ::String
+      attr_accessor billing_month: ::String
+      attr_accessor is_estimated_bill: bool
+      SENSITIVE: []
+    end
+
+    class CreditData
+      attr_accessor credit_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor credit_type: ::String
+      attr_accessor initial_amount: Types::Amount
+      attr_accessor remaining_amount: Types::Amount
+      attr_accessor estimated_amount: Types::Amount
+      attr_accessor applicable_product_names: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor exhaust_date: ::Time
+      attr_accessor application_type: ("BEFORE_CROSS_SERVICE_DISCOUNTS" | "AFTER_DISCOUNTS")
+      attr_accessor shareable_accounts: ::Array[::String]
+      attr_accessor account_has_credit_sharing_enabled: bool
+      attr_accessor credit_console_visibility: ::String
+      attr_accessor credit_sharing_type: ("DEFAULT" | "DISABLED" | "CUSTOM" | "COST_CATEGORY_RULE")
+      attr_accessor cost_category_arn: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor credit_status: ("ENABLED" | "DISABLED")
+      attr_accessor purchase_type_applications: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class DeleteBillingViewRequest
       attr_accessor arn: ::String
       attr_accessor force: bool
@@ -134,6 +203,20 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class GetBillingPreferencesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor features: ::Array[("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS")]
+      attr_accessor filters: ::Array[Types::BillingFeatureFilter]
+      SENSITIVE: []
+    end
+
+    class GetBillingPreferencesResponse
+      attr_accessor billing_preferences: ::Array[Types::BillingPreferenceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class GetBillingViewRequest
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -141,6 +224,37 @@ module Aws::Billing
 
     class GetBillingViewResponse
       attr_accessor billing_view: Types::BillingViewElement
+      SENSITIVE: []
+    end
+
+    class GetCreditAllocationHistoryRequest
+      attr_accessor account_id: ::String
+      attr_accessor credit_id: ::Integer
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCreditAllocationHistoryResponse
+      attr_accessor credit_allocation_history_list: ::Array[Types::CreditAllocationHistoryEntry]
+      attr_accessor partial_results: bool
+      attr_accessor failed_months: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCreditsRequest
+      attr_accessor account_id: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor payer_account_flag: bool
+      SENSITIVE: []
+    end
+
+    class GetCreditsResponse
+      attr_accessor credits: ::Array[Types::CreditData]
       SENSITIVE: []
     end
 
@@ -199,6 +313,14 @@ module Aws::Billing
     class ListTagsForResourceResponse
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       SENSITIVE: []
+    end
+
+    class RedeemCreditsRequest
+      attr_accessor promo_code: ::String
+      SENSITIVE: []
+    end
+
+    class RedeemCreditsResponse < Aws::EmptyStructure
     end
 
     class ResourceNotFoundException
@@ -262,6 +384,15 @@ module Aws::Billing
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateBillingPreferencesRequest
+      attr_accessor feature: ("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS")
+      attr_accessor billing_preferences_per_key: ::Array[Types::BillingPreferenceForKey]
+      SENSITIVE: []
+    end
+
+    class UpdateBillingPreferencesResponse < Aws::EmptyStructure
     end
 
     class UpdateBillingViewRequest

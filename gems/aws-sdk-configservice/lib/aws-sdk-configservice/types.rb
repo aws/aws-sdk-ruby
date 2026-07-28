@@ -543,6 +543,25 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # The configuration details for connecting to Microsoft Azure.
+    #
+    # @!attribute [rw] tenant_identifier
+    #   The Azure tenant identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_identifier
+    #   The Azure client identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AzureConnectorConfiguration AWS API Documentation
+    #
+    class AzureConnectorConfiguration < Struct.new(
+      :tenant_identifier,
+      :client_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The detailed configurations of a specified resource.
     #
     # @!attribute [rw] version
@@ -1745,6 +1764,16 @@ module Aws::ConfigService
     #   Amazon Web Services service for the configuration recorder.
     #   @return [String]
     #
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that specifies the
+    #   connection between a third-party cloud service provider and Config.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   Specifies the scope of resources to record from the third-party
+    #   cloud service provider connected through the connector.
+    #   @return [Types::ScopeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorder AWS API Documentation
     #
     class ConfigurationRecorder < Struct.new(
@@ -1754,7 +1783,9 @@ module Aws::ConfigService
       :recording_group,
       :recording_mode,
       :recording_scope,
-      :service_principal)
+      :service_principal,
+      :connector_arn,
+      :scope_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1855,7 +1886,7 @@ module Aws::ConfigService
     end
 
     # A summary of a configuration recorder, including the `arn`, `name`,
-    # `servicePrincipal`, and `recordingScope`.
+    # `servicePrincipal`, `recordingScope`, and `provider`.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the configuration recorder.
@@ -1880,13 +1911,20 @@ module Aws::ConfigService
     #   [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html
     #   @return [String]
     #
+    # @!attribute [rw] provider
+    #   For service-linked configuration recorders that record resources
+    #   from a third-party cloud service provider, indicates the cloud
+    #   service provider. Currently, `AZURE` is supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorderSummary AWS API Documentation
     #
     class ConfigurationRecorderSummary < Struct.new(
       :arn,
       :name,
       :service_principal,
-      :recording_scope)
+      :recording_scope,
+      :provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1895,16 +1933,35 @@ module Aws::ConfigService
     # service-linked recorder because a service-linked recorder already
     # exists for the specified service.
     #
-    # For [DeleteServiceLinkedConfigurationRecorder][2], you cannot delete
+    # For [PutThirdPartyServiceLinkedConfigurationRecorder][2], you cannot
+    # create a service-linked recorder because the specified service
+    # principal does not support multiple configuration recorders and one
+    # already exists.
+    #
+    # For [PutThirdPartyServiceLinkedConfigurationRecorder][2], another
+    # in-progress operation is currently referencing the same connector or
+    # service principal. Please try again later.
+    #
+    # For [PutConnector][3], you cannot create a connector because a
+    # connector already exists for the specified connector configuration.
+    #
+    # For [DeleteServiceLinkedConfigurationRecorder][4], you cannot delete
     # the service-linked recorder because it is currently in use by the
     # linked Amazon Web Services service.
     #
-    # For [DeleteDeliveryChannel][3], you cannot delete the specified
+    # For [DeleteServiceLinkedConfigurationRecorder][4], another in-progress
+    # operation is currently referencing the same connector. Please try
+    # again later.
+    #
+    # For [DeleteConnector][5], another in-progress operation is currently
+    # referencing the connector. Please try again later.
+    #
+    # For [DeleteDeliveryChannel][6], you cannot delete the specified
     # delivery channel because the customer managed configuration recorder
-    # is running. Use the [StopConfigurationRecorder][4] operation to stop
+    # is running. Use the [StopConfigurationRecorder][7] operation to stop
     # the customer managed configuration recorder.
     #
-    # For [AssociateResourceTypes][5] and [DisassociateResourceTypes][6],
+    # For [AssociateResourceTypes][8] and [DisassociateResourceTypes][9],
     # one of the following errors:
     #
     # * For service-linked configuration recorders, the configuration
@@ -1918,11 +1975,14 @@ module Aws::ConfigService
     #
     #
     # [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html
-    # [2]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html
-    # [3]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html
-    # [4]: https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html
-    # [5]: https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html
-    # [6]: https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html
+    # [2]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html
+    # [3]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html
+    # [4]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html
+    # [5]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteConnector.html
+    # [6]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html
+    # [7]: https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html
+    # [8]: https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html
+    # [9]: https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConflictException AWS API Documentation
     #
@@ -2291,6 +2351,108 @@ module Aws::ConfigService
     #
     class ConformancePackTemplateValidationException < Aws::EmptyStructure; end
 
+    # The details of the connector, including the connector configuration
+    # and connector ARN.
+    #
+    # @!attribute [rw] name
+    #   The name of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_configuration
+    #   The provider-specific configuration for connecting to the
+    #   third-party cloud service provider.
+    #   @return [Types::ConnectorConfiguration]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that the connector was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Connector AWS API Documentation
+    #
+    class Connector < Struct.new(
+      :name,
+      :arn,
+      :connector_configuration,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The provider-specific configuration for connecting to the third-party
+    # cloud service provider. You must specify exactly one provider
+    # configuration.
+    #
+    # @!attribute [rw] azure
+    #   The configuration for an Azure connector.
+    #   @return [Types::AzureConnectorConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConnectorConfiguration AWS API Documentation
+    #
+    class ConnectorConfiguration < Struct.new(
+      :azure)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters connectors based on the connector provider.
+    #
+    # @!attribute [rw] filter_name
+    #   The name of the filter. Currently, only `provider` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_values
+    #   The value of the filter. For `provider`, valid values include:
+    #   `AZURE`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConnectorFilter AWS API Documentation
+    #
+    class ConnectorFilter < Struct.new(
+      :filter_name,
+      :filter_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a connector.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The third-party cloud service provider. Currently, `AZURE` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_identifier
+    #   The Azure tenant identifier for the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that the connector was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConnectorSummary AWS API Documentation
+    #
+    class ConnectorSummary < Struct.new(
+      :arn,
+      :name,
+      :provider,
+      :tenant_identifier,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the runtime system, policy definition, and whether debug
     # logging enabled. You can specify the following CustomPolicyDetails
     # parameter values only for Config Custom Policy rules.
@@ -2396,6 +2558,19 @@ module Aws::ConfigService
     #
     class DeleteConformancePackRequest < Struct.new(
       :conformance_pack_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the connector that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConnectorRequest AWS API Documentation
+    #
+    class DeleteConnectorRequest < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2563,13 +2738,24 @@ module Aws::ConfigService
 
     # @!attribute [rw] service_principal
     #   The service principal of the Amazon Web Services service for the
-    #   service-linked configuration recorder that you want to delete.
+    #   service-linked configuration recorder that you want to delete. This
+    #   field is only supported for Amazon Web Services service principals.
+    #   For third-party service-linked configuration recorders, use `Arn`
+    #   instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the service-linked configuration
+    #   recorder that you want to delete. For third-party service-linked
+    #   configuration recorders, you must use `Arn`. You must specify
+    #   exactly one of `Arn` or `ServicePrincipal`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteServiceLinkedConfigurationRecorderRequest AWS API Documentation
     #
     class DeleteServiceLinkedConfigurationRecorderRequest < Struct.new(
-      :service_principal)
+      :service_principal,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3060,11 +3246,6 @@ module Aws::ConfigService
     #   not specify any names, Config returns details for all your rules.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] next_token
-    #   The `nextToken` string returned on a previous page that you use to
-    #   get the next page of results in a paginated response.
-    #   @return [String]
-    #
     # @!attribute [rw] filters
     #   Returns a list of Detective or Proactive Config rules. By default,
     #   this API returns an unfiltered list. For more information on
@@ -3076,12 +3257,17 @@ module Aws::ConfigService
     #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html
     #   @return [Types::DescribeConfigRulesFilters]
     #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRulesRequest AWS API Documentation
     #
     class DescribeConfigRulesRequest < Struct.new(
       :config_rule_names,
-      :next_token,
-      :filters)
+      :filters,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3216,7 +3402,9 @@ module Aws::ConfigService
     # @!attribute [rw] service_principal
     #   For service-linked configuration recorders, you can use the service
     #   principal of the linked Amazon Web Services service to specify the
-    #   configuration recorder.
+    #   configuration recorder. This field is only supported for Amazon Web
+    #   Services service principals. For third-party service-linked
+    #   configuration recorders, use `Arn` instead.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -3264,7 +3452,9 @@ module Aws::ConfigService
     # @!attribute [rw] service_principal
     #   For service-linked configuration recorders, you can use the service
     #   principal of the linked Amazon Web Services service to specify the
-    #   configuration recorder.
+    #   configuration recorder. This field is only supported for Amazon Web
+    #   Services service principals. For third-party service-linked
+    #   configuration recorders, use `Arn` instead.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4858,6 +5048,30 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConnectorRequest AWS API Documentation
+    #
+    class GetConnectorRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector
+    #   The details of the specified connector.
+    #   @return [Types::Connector]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConnectorResponse AWS API Documentation
+    #
+    class GetConnectorResponse < Struct.new(
+      :connector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] config_rule_name
     #   The name of your Config Custom Policy rule.
     #   @return [String]
@@ -5306,6 +5520,9 @@ module Aws::ConfigService
     #   configuration recorder cannot be created because you do not have the
     #   following permissions: IAM `CreateServiceLinkedRole`.
     #
+    # * For [PutConnector][6], a connector cannot be created because you do
+    #   not have the following permissions: IAM `CreateServiceLinkedRole`.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigRule.html
@@ -5313,6 +5530,7 @@ module Aws::ConfigService
     # [3]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html
     # [4]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConformancePack.html
     # [5]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html
+    # [6]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InsufficientPermissionsException AWS API Documentation
     #
@@ -5617,6 +5835,48 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters the results based on a list of `ConnectorFilter` objects
+    #   that you specify.
+    #   @return [Array<Types::ConnectorFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListConnectorsRequest AWS API Documentation
+    #
+    class ListConnectorsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_summaries
+    #   A list of `ConnectorSummary` objects.
+    #   @return [Array<Types::ConnectorSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListConnectorsResponse AWS API Documentation
+    #
+    class ListConnectorsResponse < Struct.new(
+      :connector_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_type
     #   The type of resources that you want Config to list in the response.
     #   @return [String]
@@ -5785,6 +6045,8 @@ module Aws::ConfigService
     #   * `AggregationAuthorization`
     #
     #   * `StoredQuery`
+    #
+    #   * `Connector`
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -5864,6 +6126,13 @@ module Aws::ConfigService
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/MaxNumberOfConformancePacksExceededException AWS API Documentation
     #
     class MaxNumberOfConformancePacksExceededException < Aws::EmptyStructure; end
+
+    # You have reached the limit of the number of connectors in your
+    # account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/MaxNumberOfConnectorsExceededException AWS API Documentation
+    #
+    class MaxNumberOfConnectorsExceededException < Aws::EmptyStructure; end
 
     # You have reached the limit of the number of delivery channels you can
     # create.
@@ -7138,6 +7407,37 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @!attribute [rw] connector_configuration
+    #   The provider-specific configuration for connecting to the
+    #   third-party cloud service provider.
+    #   @return [Types::ConnectorConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the connector. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConnectorRequest AWS API Documentation
+    #
+    class PutConnectorRequest < Struct.new(
+      :connector_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConnectorResponse AWS API Documentation
+    #
+    class PutConnectorResponse < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the PutDeliveryChannel action.
     #
     # @!attribute [rw] delivery_channel
@@ -7258,6 +7558,11 @@ module Aws::ConfigService
     #   Amazon Web Services resources against a rule.
     #   @return [Types::OrganizationCustomPolicyRuleMetadata]
     #
+    # @!attribute [rw] tags
+    #   The tags for the organization Config rule. Each tag consists of a
+    #   key and an optional value, both of which you define.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRuleRequest AWS API Documentation
     #
     class PutOrganizationConfigRuleRequest < Struct.new(
@@ -7265,7 +7570,8 @@ module Aws::ConfigService
       :organization_managed_rule_metadata,
       :organization_custom_rule_metadata,
       :excluded_accounts,
-      :organization_custom_policy_rule_metadata)
+      :organization_custom_policy_rule_metadata,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7334,6 +7640,11 @@ module Aws::ConfigService
     #   organization conformance pack while deploying a conformance pack.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The tags for the organization conformance pack. Each tag consists of
+    #   a key and an optional value, both of which you define.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConformancePackRequest AWS API Documentation
     #
     class PutOrganizationConformancePackRequest < Struct.new(
@@ -7343,7 +7654,8 @@ module Aws::ConfigService
       :delivery_s3_bucket,
       :delivery_s3_key_prefix,
       :conformance_pack_input_parameters,
-      :excluded_accounts)
+      :excluded_accounts,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7587,6 +7899,56 @@ module Aws::ConfigService
     #
     class PutStoredQueryResponse < Struct.new(
       :query_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_principal
+    #   The service principal of the Amazon Web Services service for the
+    #   service-linked configuration recorder that you want to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that specifies the
+    #   connection between the third-party cloud service provider and
+    #   Config. The specified connector must exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   Specifies the scope of resources to record from the third-party
+    #   cloud service provider.
+    #   @return [Types::ScopeConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags for a service-linked configuration recorder. Each tag
+    #   consists of a key and an optional value, both of which you define.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutThirdPartyServiceLinkedConfigurationRecorderRequest AWS API Documentation
+    #
+    class PutThirdPartyServiceLinkedConfigurationRecorderRequest < Struct.new(
+      :service_principal,
+      :connector_arn,
+      :scope_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the specified configuration
+    #   recorder.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the specified configuration recorder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutThirdPartyServiceLinkedConfigurationRecorderResponse AWS API Documentation
+    #
+    class PutThirdPartyServiceLinkedConfigurationRecorderResponse < Struct.new(
+      :arn,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8771,6 +9133,42 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Specifies the scope of resources to record from a third-party cloud
+    # service provider.
+    #
+    # @!attribute [rw] scope_type
+    #   The type of scope for the third-party cloud resources. Valid values
+    #   include `tenant` and `subscription`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_values
+    #   The list of specific scope values for the third-party cloud
+    #   resources. For example, a list of Azure subscriptions or management
+    #   groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_regions
+    #   Specifies whether to record resources from all supported regions for
+    #   the third-party cloud service provider.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] included_regions
+    #   The list of regions from the third-party cloud service provider to
+    #   include when recording resources. Used when `allRegions` is set to
+    #   `false`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ScopeConfiguration AWS API Documentation
+    #
+    class ScopeConfiguration < Struct.new(
+      :scope_type,
+      :scope_values,
+      :all_regions,
+      :included_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] expression
     #   The SQL query SELECT command.
     #   @return [String]
@@ -9371,6 +9769,8 @@ module Aws::ConfigService
     #   * `AggregationAuthorization`
     #
     #   * `StoredQuery`
+    #
+    #   * `Connector`
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -9510,6 +9910,8 @@ module Aws::ConfigService
     #   * `AggregationAuthorization`
     #
     #   * `StoredQuery`
+    #
+    #   * `Connector`
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -9558,6 +9960,15 @@ module Aws::ConfigService
     #   recorder does not record one or more of the specified resource
     #   types.
     #
+    # For [DeleteServiceLinkedConfigurationRecorder][6], one of the
+    # following errors:
+    #
+    # * You have provided both `Arn` and `ServicePrincipal`. Only one of
+    #   `Arn` or `ServicePrincipal` can be specified.
+    #
+    # * You have provided a service principal for service-linked
+    #   configuration recorder that is not valid.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutStoredQuery.html
@@ -9565,6 +9976,7 @@ module Aws::ConfigService
     # [3]: https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorderStatus.html
     # [4]: https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html
     # [5]: https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html
+    # [6]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ValidationException AWS API Documentation
     #

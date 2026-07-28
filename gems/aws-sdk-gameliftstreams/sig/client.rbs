@@ -165,6 +165,19 @@ module Aws
                                ) -> _CreateStreamGroupResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamGroupResponseSuccess
 
+      interface _CreateStreamSessionAdminShellResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamSessionAdminShellOutput]
+        def session_id: () -> ::String
+        def stream_url: () -> ::String
+        def token_value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#create_stream_session_admin_shell-instance_method
+      def create_stream_session_admin_shell: (
+                                               identifier: ::String,
+                                               stream_session_identifier: ::String
+                                             ) -> _CreateStreamSessionAdminShellResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamSessionAdminShellResponseSuccess
+
       interface _CreateStreamSessionConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamSessionConnectionOutput]
         def signal_response: () -> ::String
@@ -264,7 +277,7 @@ module Aws
         def stream_group_id: () -> ::String
         def user_id: () -> ::String
         def status: () -> ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
+        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "assumeRoleFailed" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
         def protocol: () -> ("WebRTC")
         def location: () -> ::String
         def signal_request: () -> ::String
@@ -280,6 +293,8 @@ module Aws
         def created_at: () -> ::Time
         def application_arn: () -> ::String
         def export_files_metadata: () -> Types::ExportFilesMetadata
+        def role_arn: () -> ::String
+        def display_configuration: () -> Types::DisplayConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#get_stream_session-instance_method
       def get_stream_session: (
@@ -365,7 +380,7 @@ module Aws
         def stream_group_id: () -> ::String
         def user_id: () -> ::String
         def status: () -> ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
+        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "assumeRoleFailed" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
         def protocol: () -> ("WebRTC")
         def location: () -> ::String
         def signal_request: () -> ::String
@@ -381,6 +396,8 @@ module Aws
         def created_at: () -> ::Time
         def application_arn: () -> ::String
         def export_files_metadata: () -> Types::ExportFilesMetadata
+        def role_arn: () -> ::String
+        def display_configuration: () -> Types::DisplayConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#start_stream_session-instance_method
       def start_stream_session: (
@@ -398,6 +415,13 @@ module Aws
                                   ?additional_environment_variables: Hash[::String, ::String],
                                   ?performance_stats_configuration: {
                                     shared_with_client: bool?
+                                  },
+                                  ?role_arn: ::String,
+                                  ?display_configuration: {
+                                    resolution: {
+                                      width: ::Integer,
+                                      height: ::Integer
+                                    }?
                                   }
                                 ) -> _StartStreamSessionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartStreamSessionResponseSuccess

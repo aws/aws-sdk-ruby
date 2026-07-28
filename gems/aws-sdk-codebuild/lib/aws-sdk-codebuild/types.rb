@@ -2602,6 +2602,11 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] status
     #   A DockerServerStatus object to use for this docker server.
+    #
+    #   <note markdown="1"> Note that `status` is only an output and cannot be passed in as an
+    #   input.
+    #
+    #    </note>
     #   @return [Types::DockerServerStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DockerServer AWS API Documentation
@@ -5148,6 +5153,23 @@ module Aws::CodeBuild
     #   A DockerServer object to use for this build project.
     #   @return [Types::DockerServer]
     #
+    # @!attribute [rw] host_kernel
+    #   The host operating system kernel used for on-demand builds in the
+    #   build project. The host kernel does not affect the build environment
+    #   operating system, which is determined by the image you specify.
+    #   Valid values are:
+    #
+    #   * `LINUX_KERNEL_4`: Runs on an Amazon Linux 2 host (kernel 4.x).
+    #
+    #   * `LINUX_KERNEL_6`: Runs on an Amazon Linux 2023 host (kernel 6.x).
+    #
+    #   * `LINUX_KERNEL_LATEST`: Runs on the latest supported host kernel.
+    #
+    #   This setting applies to the `LINUX_CONTAINER`, `ARM_CONTAINER`,
+    #   `LINUX_EC2`, and `ARM_EC2` environment types. It is not applicable
+    #   to Windows, Lambda, or Mac environment types.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectEnvironment AWS API Documentation
     #
     class ProjectEnvironment < Struct.new(
@@ -5161,7 +5183,8 @@ module Aws::CodeBuild
       :certificate,
       :registry_credential,
       :image_pull_credentials_type,
-      :docker_server)
+      :docker_server,
+      :host_kernel)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7103,6 +7126,11 @@ module Aws::CodeBuild
     #   up to 2 additional times.
     #   @return [Integer]
     #
+    # @!attribute [rw] host_kernel_override
+    #   The host operating system kernel for this build that overrides the
+    #   one specified in the build project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
     class StartBuildInput < Struct.new(
@@ -7138,7 +7166,8 @@ module Aws::CodeBuild
       :image_pull_credentials_type_override,
       :debug_session_enabled,
       :fleet_override,
-      :auto_retry_limit_override)
+      :auto_retry_limit_override,
+      :host_kernel_override)
       SENSITIVE = []
       include Aws::Structure
     end

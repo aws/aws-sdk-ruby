@@ -18,6 +18,11 @@ module Aws::RedshiftDataAPIService
       SENSITIVE: []
     end
 
+    class ActiveWaitingRequestsExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class BatchExecuteStatementException
       attr_accessor message: ::String
       attr_accessor statement_id: ::String
@@ -38,6 +43,8 @@ module Aws::RedshiftDataAPIService
       attr_accessor result_format: ("JSON" | "CSV")
       attr_accessor session_keep_alive_seconds: ::Integer
       attr_accessor session_id: ::String
+      attr_accessor execution_mode: ("TRANSACTION" | "AUTO_COMMIT")
+      attr_accessor wait_time_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -51,6 +58,9 @@ module Aws::RedshiftDataAPIService
       attr_accessor secret_arn: ::String
       attr_accessor workgroup_name: ::String
       attr_accessor session_id: ::String
+      attr_accessor status: ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED")
+      attr_accessor redshift_pid: ::Integer
+      attr_accessor has_result_set: bool
       SENSITIVE: []
     end
 
@@ -88,6 +98,7 @@ module Aws::RedshiftDataAPIService
 
     class DescribeStatementRequest
       attr_accessor id: ::String
+      attr_accessor wait_time_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -113,6 +124,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor workgroup_name: ::String
       attr_accessor result_format: ("JSON" | "CSV")
       attr_accessor session_id: ::String
+      attr_accessor execution_mode: ("TRANSACTION" | "AUTO_COMMIT")
       SENSITIVE: []
     end
 
@@ -157,6 +169,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor result_format: ("JSON" | "CSV")
       attr_accessor session_keep_alive_seconds: ::Integer
       attr_accessor session_id: ::String
+      attr_accessor wait_time_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -170,6 +183,9 @@ module Aws::RedshiftDataAPIService
       attr_accessor secret_arn: ::String
       attr_accessor workgroup_name: ::String
       attr_accessor session_id: ::String
+      attr_accessor status: ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED")
+      attr_accessor redshift_pid: ::Integer
+      attr_accessor has_result_set: bool
       SENSITIVE: []
     end
 
@@ -202,6 +218,7 @@ module Aws::RedshiftDataAPIService
     class GetStatementResultRequest
       attr_accessor id: ::String
       attr_accessor next_token: ::String
+      attr_accessor wait_time_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -216,6 +233,7 @@ module Aws::RedshiftDataAPIService
     class GetStatementResultV2Request
       attr_accessor id: ::String
       attr_accessor next_token: ::String
+      attr_accessor wait_time_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -265,6 +283,24 @@ module Aws::RedshiftDataAPIService
 
     class ListSchemasResponse
       attr_accessor schemas: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor session_id: ::String
+      attr_accessor status: ("AVAILABLE" | "BUSY" | "CLOSED")
+      attr_accessor role_level: bool
+      attr_accessor cluster_identifier: ::String
+      attr_accessor workgroup_name: ::String
+      attr_accessor database: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsResponse
+      attr_accessor sessions: ::Array[Types::SessionData]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -326,6 +362,21 @@ module Aws::RedshiftDataAPIService
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class SessionData
+      attr_accessor session_id: ::String
+      attr_accessor status: ("AVAILABLE" | "BUSY" | "CLOSED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor cluster_identifier: ::String
+      attr_accessor workgroup_name: ::String
+      attr_accessor session_alive_seconds: ::Integer
+      attr_accessor session_ttl: ::Time
+      attr_accessor current_statement_id: ::String
       SENSITIVE: []
     end
 

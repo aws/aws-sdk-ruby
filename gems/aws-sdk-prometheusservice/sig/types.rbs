@@ -89,6 +89,11 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class CloudWatchConfiguration
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
     class CloudWatchLogDestination
       attr_accessor log_group_arn: ::String
       SENSITIVE: []
@@ -388,10 +393,13 @@ module Aws::PrometheusService
 
     class Destination
       attr_accessor amp_configuration: Types::AmpConfiguration
+      attr_accessor cloud_watch_configuration: Types::CloudWatchConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class AmpConfiguration < Destination
+      end
+      class CloudWatchConfiguration < Destination
       end
       class Unknown < Destination
       end

@@ -50,6 +50,7 @@ module Aws::CloudWatch
   #    * This error class is not used. `LimitExceeded` is used during parsing instead.
   # * {MissingRequiredParameterException}
   #    * This error class is not used. `MissingParameter` is used during parsing instead.
+  # * {ResourceConflict}
   # * {ResourceNotFound}
   # * {ResourceNotFoundException}
   #
@@ -285,6 +286,21 @@ module Aws::CloudWatch
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudWatch::Types::MissingRequiredParameterException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourceConflict < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatch::Types::ResourceConflict] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

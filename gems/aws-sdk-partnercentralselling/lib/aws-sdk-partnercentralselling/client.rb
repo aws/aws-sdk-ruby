@@ -648,7 +648,7 @@ module Aws::PartnerCentralSelling
     #   resp = client.associate_opportunity({
     #     catalog: "CatalogIdentifier", # required
     #     opportunity_identifier: "OpportunityIdentifier", # required
-    #     related_entity_type: "Solutions", # required, accepts Solutions, AwsProducts, AwsMarketplaceOffers, AwsMarketplaceOfferSets
+    #     related_entity_type: "Solutions", # required, accepts Solutions, AwsProducts, AwsMarketplaceOffers, AwsMarketplaceOfferSets, AwsMarketplaceSolutions, AwsMarketplaceProducts
     #     related_entity_identifier: "AssociateOpportunityRequestRelatedEntityIdentifierString", # required
     #   })
     #
@@ -1612,7 +1612,7 @@ module Aws::PartnerCentralSelling
     #   resp = client.disassociate_opportunity({
     #     catalog: "CatalogIdentifier", # required
     #     opportunity_identifier: "OpportunityIdentifier", # required
-    #     related_entity_type: "Solutions", # required, accepts Solutions, AwsProducts, AwsMarketplaceOffers, AwsMarketplaceOfferSets
+    #     related_entity_type: "Solutions", # required, accepts Solutions, AwsProducts, AwsMarketplaceOffers, AwsMarketplaceOfferSets, AwsMarketplaceSolutions, AwsMarketplaceProducts
     #     related_entity_identifier: "DisassociateOpportunityRequestRelatedEntityIdentifierString", # required
     #   })
     #
@@ -1733,6 +1733,10 @@ module Aws::PartnerCentralSelling
     #   resp.related_entity_ids.aws_products[0] #=> String
     #   resp.related_entity_ids.solutions #=> Array
     #   resp.related_entity_ids.solutions[0] #=> String
+    #   resp.related_entity_ids.aws_marketplace_solutions #=> Array
+    #   resp.related_entity_ids.aws_marketplace_solutions[0] #=> String
+    #   resp.related_entity_ids.aws_marketplace_products #=> Array
+    #   resp.related_entity_ids.aws_marketplace_products[0] #=> String
     #   resp.customer.contacts #=> Array
     #   resp.customer.contacts[0].email #=> String
     #   resp.customer.contacts[0].first_name #=> String
@@ -2084,6 +2088,10 @@ module Aws::PartnerCentralSelling
     #   resp.related_entity_identifiers.solutions[0] #=> String
     #   resp.related_entity_identifiers.aws_products #=> Array
     #   resp.related_entity_identifiers.aws_products[0] #=> String
+    #   resp.related_entity_identifiers.aws_marketplace_solutions #=> Array
+    #   resp.related_entity_identifiers.aws_marketplace_solutions[0] #=> String
+    #   resp.related_entity_identifiers.aws_marketplace_products #=> Array
+    #   resp.related_entity_identifiers.aws_marketplace_products[0] #=> String
     #   resp.life_cycle.stage #=> String, one of "Prospect", "Qualified", "Technical Validation", "Business Validation", "Committed", "Launched", "Closed Lost"
     #   resp.life_cycle.closed_lost_reason #=> String, one of "Customer Deficiency", "Delay / Cancellation of Project", "Legal / Tax / Regulatory", "Lost to Competitor - Google", "Lost to Competitor - Microsoft", "Lost to Competitor - SoftLayer", "Lost to Competitor - VMWare", "Lost to Competitor - Other", "No Opportunity", "On Premises Deployment", "Partner Gap", "Price", "Security / Compliance", "Technical Limitations", "Customer Experience", "Other", "People/Relationship/Governance", "Product/Technology", "Financial/Commercial"
     #   resp.life_cycle.next_steps #=> String
@@ -2288,6 +2296,10 @@ module Aws::PartnerCentralSelling
     #   resp.payload.opportunity_summary.related_entity_identifiers.solutions[0] #=> String
     #   resp.payload.opportunity_summary.related_entity_identifiers.aws_products #=> Array
     #   resp.payload.opportunity_summary.related_entity_identifiers.aws_products[0] #=> String
+    #   resp.payload.opportunity_summary.related_entity_identifiers.aws_marketplace_solutions #=> Array
+    #   resp.payload.opportunity_summary.related_entity_identifiers.aws_marketplace_solutions[0] #=> String
+    #   resp.payload.opportunity_summary.related_entity_identifiers.aws_marketplace_products #=> Array
+    #   resp.payload.opportunity_summary.related_entity_identifiers.aws_marketplace_products[0] #=> String
     #   resp.payload.aws_opportunity_summary_full_view.related_opportunity_id #=> String
     #   resp.payload.aws_opportunity_summary_full_view.origin #=> String, one of "AWS Referral", "Partner Referral"
     #   resp.payload.aws_opportunity_summary_full_view.involvement_type #=> String, one of "For Visibility Only", "Co-Sell"
@@ -2354,6 +2366,10 @@ module Aws::PartnerCentralSelling
     #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.aws_products[0] #=> String
     #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.solutions #=> Array
     #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.solutions[0] #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.aws_marketplace_solutions #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.aws_marketplace_solutions[0] #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.aws_marketplace_products #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.aws_marketplace_products[0] #=> String
     #   resp.payload.aws_opportunity_summary_full_view.customer.contacts #=> Array
     #   resp.payload.aws_opportunity_summary_full_view.customer.contacts[0].email #=> String
     #   resp.payload.aws_opportunity_summary_full_view.customer.contacts[0].first_name #=> String
@@ -3513,6 +3529,10 @@ module Aws::PartnerCentralSelling
     #   allows partners to search for solutions within specific categories,
     #   such as `Software`, `Consulting`, or `Managed Services`.
     #
+    # @option params [Array<String>] :aws_marketplace_solution_arn
+    #   Filters results by AWS Marketplace solution ARN. You can provide up to
+    #   10 ARNs.
+    #
     # @return [Types::ListSolutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSolutionsResponse#solution_summaries #solution_summaries} => Array&lt;Types::SolutionBase&gt;
@@ -3533,6 +3553,7 @@ module Aws::PartnerCentralSelling
     #     status: ["Active"], # accepts Active, Inactive, Draft
     #     identifier: ["SolutionIdentifier"],
     #     category: ["String"],
+    #     aws_marketplace_solution_arn: ["AwsMarketplaceSolutionArn"],
     #   })
     #
     # @example Response structure
@@ -3545,6 +3566,7 @@ module Aws::PartnerCentralSelling
     #   resp.solution_summaries[0].status #=> String, one of "Active", "Inactive", "Draft"
     #   resp.solution_summaries[0].category #=> String
     #   resp.solution_summaries[0].created_date #=> Time
+    #   resp.solution_summaries[0].aws_marketplace_solution_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListSolutions AWS API Documentation
@@ -4558,7 +4580,7 @@ module Aws::PartnerCentralSelling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralselling'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

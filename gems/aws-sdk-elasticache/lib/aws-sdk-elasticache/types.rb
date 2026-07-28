@@ -2829,7 +2829,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
@@ -6031,7 +6031,12 @@ module Aws::ElastiCache
     #
     #   If you perform a `ModifyCacheCluster` before a pending modification
     #   is applied, the pending modification is replaced by the newer
-    #   modification.
+    #   modification. However, a pending node-count increase on Memcached
+    #   clusters cannot be superseded by a request to add fewer nodes. To
+    #   change a pending node addition, first cancel it by setting
+    #   `NumCacheNodes` equal to the current number of nodes in the cluster,
+    #   then submit the new request. See the `NumCacheNodes` parameter for
+    #   details on node scaling behavior.
     #
     #   Valid values: `true` \| `false`
     #
@@ -6620,7 +6625,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupMessage AWS API Documentation
@@ -7883,7 +7888,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html
     #   @return [String]
     #
     # @!attribute [rw] effective_durability
@@ -7895,7 +7900,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/ConfiguringDurability.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.Configuring.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
@@ -9296,7 +9301,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Snapshot AWS API Documentation

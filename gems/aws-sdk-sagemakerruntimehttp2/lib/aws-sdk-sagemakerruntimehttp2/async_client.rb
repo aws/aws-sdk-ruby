@@ -626,7 +626,7 @@ module Aws::SageMakerRuntimeHTTP2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemakerruntimehttp2'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

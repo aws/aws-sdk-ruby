@@ -714,6 +714,7 @@ module Aws::MarketplaceCatalog
       attr_accessor status: Types::ResaleAuthorizationStatusFilter
       attr_accessor offer_extended_status: Types::ResaleAuthorizationOfferExtendedStatusFilter
       attr_accessor last_modified_date: Types::ResaleAuthorizationLastModifiedDateFilter
+      attr_accessor reseller_role: Types::ResaleAuthorizationResellerRoleFilter
       SENSITIVE: []
     end
 
@@ -775,6 +776,11 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class ResaleAuthorizationResellerRoleFilter
+      attr_accessor value_list: ::Array[("ChannelPartner" | "Distributor")]
+      SENSITIVE: []
+    end
+
     class ResaleAuthorizationSort
       attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ProductName" | "ManufacturerAccountId" | "ManufacturerLegalName" | "ResellerAccountID" | "ResellerLegalName" | "Status" | "OfferExtendedStatus" | "CreatedDate" | "AvailabilityEndDate" | "LastModifiedDate")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
@@ -798,6 +804,7 @@ module Aws::MarketplaceCatalog
       attr_accessor offer_extended_status: ::String
       attr_accessor created_date: ::String
       attr_accessor availability_end_date: ::String
+      attr_accessor reseller_role: ("ChannelPartner" | "Distributor")
       SENSITIVE: []
     end
 

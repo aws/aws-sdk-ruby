@@ -146,7 +146,7 @@ module Aws::PinpointSMSVoiceV2
     class CreateEventDestinationRequest
       attr_accessor configuration_set_name: ::String
       attr_accessor event_destination_name: ::String
-      attr_accessor matching_event_types: ::Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")]
+      attr_accessor matching_event_types: ::Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED" | "RCS_ALL" | "RCS_QUEUED" | "RCS_SENT" | "RCS_DELIVERED" | "RCS_READ" | "RCS_FAILED" | "RCS_TTL_EXPIRED" | "RCS_PROTECT_BLOCKED" | "RCS_FALLEN_BACK_TO_SMS")]
       attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination
       attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
       attr_accessor sns_destination: Types::SnsDestination
@@ -271,6 +271,10 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor two_way_channel_arn: ::String
       attr_accessor two_way_channel_role: ::String
       attr_accessor two_way_enabled: bool
+      attr_accessor two_way_media_s3_bucket_name: ::String
+      attr_accessor two_way_media_s3_key_prefix: ::String
+      attr_accessor two_way_media_s3_role: ::String
+      attr_accessor two_way_rcs_events_enabled: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -572,6 +576,15 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor two_way_channel_arn: ::String
       attr_accessor two_way_channel_role: ::String
       attr_accessor two_way_enabled: bool
+      attr_accessor two_way_rcs_events_enabled: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteRcsMessageSpendLimitOverrideRequest < Aws::EmptyStructure
+    end
+
+    class DeleteRcsMessageSpendLimitOverrideResult
+      attr_accessor monthly_limit: ::Integer
       SENSITIVE: []
     end
 
@@ -1054,7 +1067,7 @@ module Aws::PinpointSMSVoiceV2
     class EventDestination
       attr_accessor event_destination_name: ::String
       attr_accessor enabled: bool
-      attr_accessor matching_event_types: ::Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")]
+      attr_accessor matching_event_types: ::Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED" | "RCS_ALL" | "RCS_QUEUED" | "RCS_SENT" | "RCS_DELIVERED" | "RCS_READ" | "RCS_FAILED" | "RCS_TTL_EXPIRED" | "RCS_PROTECT_BLOCKED" | "RCS_FALLEN_BACK_TO_SMS")]
       attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination
       attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
       attr_accessor sns_destination: Types::SnsDestination
@@ -1479,7 +1492,172 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor two_way_channel_role: ::String
       attr_accessor two_way_enabled: bool
       attr_accessor pool_id: ::String
+      attr_accessor two_way_media_s3_bucket_name: ::String
+      attr_accessor two_way_media_s3_key_prefix: ::String
+      attr_accessor two_way_media_s3_role: ::String
+      attr_accessor two_way_rcs_events_enabled: ::Array[::String]
       attr_accessor testing_agent: Types::TestingAgentInformation
+      SENSITIVE: []
+    end
+
+    class RcsCardContent
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor media: Types::RcsCardMedia
+      attr_accessor suggestions: ::Array[Types::RcsSuggestedAction]
+      SENSITIVE: []
+    end
+
+    class RcsCardMedia
+      attr_accessor file_url: ::String
+      attr_accessor thumbnail_url: ::String
+      attr_accessor height: ::String
+      SENSITIVE: []
+    end
+
+    class RcsCarousel
+      attr_accessor card_width: ::String
+      attr_accessor card_contents: ::Array[Types::RcsCarouselCardContent]
+      SENSITIVE: []
+    end
+
+    class RcsCarouselCardContent
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor media: Types::RcsCarouselCardMedia
+      attr_accessor suggestions: ::Array[Types::RcsSuggestedAction]
+      SENSITIVE: []
+    end
+
+    class RcsCarouselCardMedia
+      attr_accessor file_url: ::String
+      attr_accessor thumbnail_url: ::String
+      attr_accessor height: ::String
+      SENSITIVE: []
+    end
+
+    class RcsContent
+      attr_accessor text_message: Types::RcsTextMessage
+      attr_accessor file_message: Types::RcsFileMessage
+      attr_accessor rich_card: Types::RcsStandaloneCard
+      attr_accessor carousel: Types::RcsCarousel
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TextMessage < RcsContent
+      end
+      class FileMessage < RcsContent
+      end
+      class RichCard < RcsContent
+      end
+      class Carousel < RcsContent
+      end
+      class Unknown < RcsContent
+      end
+    end
+
+    class RcsCreateCalendarEventAction
+      attr_accessor text: ::String
+      attr_accessor postback_data: ::String
+      attr_accessor title: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class RcsDialPhoneAction
+      attr_accessor text: ::String
+      attr_accessor postback_data: ::String
+      attr_accessor phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class RcsFallbackConfiguration
+      attr_accessor channel: ("SMS" | "MMS")
+      attr_accessor message_body: ::String
+      attr_accessor media_urls: ::Array[::String]
+      attr_accessor origination_identity: ::String
+      SENSITIVE: []
+    end
+
+    class RcsFileMessage
+      attr_accessor file_url: ::String
+      attr_accessor thumbnail_url: ::String
+      SENSITIVE: []
+    end
+
+    class RcsMessageContent
+      attr_accessor content: Types::RcsContent
+      attr_accessor suggestions: ::Array[Types::RcsSuggestedAction]
+      SENSITIVE: []
+    end
+
+    class RcsOpenUrlAction
+      attr_accessor text: ::String
+      attr_accessor postback_data: ::String
+      attr_accessor url: ::String
+      attr_accessor application: ::String
+      attr_accessor webview_view_mode: ::String
+      SENSITIVE: []
+    end
+
+    class RcsReplyAction
+      attr_accessor text: ::String
+      attr_accessor postback_data: ::String
+      SENSITIVE: []
+    end
+
+    class RcsRequestLocationAction
+      attr_accessor text: ::String
+      attr_accessor postback_data: ::String
+      SENSITIVE: []
+    end
+
+    class RcsShowLocationAction
+      attr_accessor text: ::String
+      attr_accessor postback_data: ::String
+      attr_accessor latitude: ::Float
+      attr_accessor longitude: ::Float
+      attr_accessor label: ::String
+      SENSITIVE: []
+    end
+
+    class RcsStandaloneCard
+      attr_accessor card_orientation: ::String
+      attr_accessor thumbnail_image_alignment: ::String
+      attr_accessor card_content: Types::RcsCardContent
+      SENSITIVE: []
+    end
+
+    class RcsSuggestedAction
+      attr_accessor reply: Types::RcsReplyAction
+      attr_accessor open_url: Types::RcsOpenUrlAction
+      attr_accessor dial_phone: Types::RcsDialPhoneAction
+      attr_accessor show_location: Types::RcsShowLocationAction
+      attr_accessor request_location: Types::RcsRequestLocationAction
+      attr_accessor create_calendar_event: Types::RcsCreateCalendarEventAction
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Reply < RcsSuggestedAction
+      end
+      class OpenUrl < RcsSuggestedAction
+      end
+      class DialPhone < RcsSuggestedAction
+      end
+      class ShowLocation < RcsSuggestedAction
+      end
+      class RequestLocation < RcsSuggestedAction
+      end
+      class CreateCalendarEvent < RcsSuggestedAction
+      end
+      class Unknown < RcsSuggestedAction
+      end
+    end
+
+    class RcsTextMessage
+      attr_accessor body: ::String
       SENSITIVE: []
     end
 
@@ -1842,6 +2020,27 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class SendRcsMessageRequest
+      attr_accessor destination_phone_number: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor rcs_message_content: Types::RcsMessageContent
+      attr_accessor time_to_live: ::Integer
+      attr_accessor message_traffic_type: ::String
+      attr_accessor fallback_configuration: Types::RcsFallbackConfiguration
+      attr_accessor protect_configuration_id: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor max_price: ::String
+      attr_accessor dry_run: bool
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor message_feedback_enabled: bool
+      SENSITIVE: []
+    end
+
+    class SendRcsMessageResult
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
     class SendTextMessageRequest
       attr_accessor destination_phone_number: ::String
       attr_accessor origination_identity: ::String
@@ -1911,7 +2110,7 @@ module Aws::PinpointSMSVoiceV2
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor reason: ("ASSOCIATIONS_PER_REGISTRATION" | "CONFIGURATION_SETS_PER_ACCOUNT" | "DAILY_DESTINATION_CALL_LIMIT" | "DAILY_NOTIFY_TIER_MESSAGE_LIMIT" | "EVENT_DESTINATIONS_PER_CONFIGURATION_SET" | "KEYWORDS_PER_PHONE_NUMBER" | "KEYWORDS_PER_POOL" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE" | "NOTIFY_CONFIGURATIONS_PER_ACCOUNT" | "OPT_OUT_LISTS_PER_ACCOUNT" | "ORIGINATION_IDENTITIES_PER_POOL" | "PHONE_NUMBERS_PER_ACCOUNT" | "PHONE_NUMBERS_PER_REGISTRATION" | "POOLS_PER_ACCOUNT" | "RCS_AGENTS_PER_ACCOUNT" | "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY" | "REGISTRATION_ATTACHMENTS_PER_ACCOUNT" | "REGISTRATION_VERSIONS_CREATED_PER_DAY" | "REGISTRATIONS_PER_ACCOUNT" | "SENDER_IDS_PER_ACCOUNT" | "TAGS_PER_RESOURCE" | "VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT" | "VERIFICATION_ATTEMPTS_PER_DAY" | "PROTECT_CONFIGURATIONS_PER_ACCOUNT")
+      attr_accessor reason: ("ASSOCIATIONS_PER_REGISTRATION" | "CONFIGURATION_SETS_PER_ACCOUNT" | "DAILY_DESTINATION_CALL_LIMIT" | "DAILY_NOTIFY_TIER_MESSAGE_LIMIT" | "EVENT_DESTINATIONS_PER_CONFIGURATION_SET" | "KEYWORDS_PER_PHONE_NUMBER" | "KEYWORDS_PER_POOL" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_RCS" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE" | "NOTIFY_CONFIGURATIONS_PER_ACCOUNT" | "OPT_OUT_LISTS_PER_ACCOUNT" | "ORIGINATION_IDENTITIES_PER_POOL" | "PHONE_NUMBERS_PER_ACCOUNT" | "PHONE_NUMBERS_PER_REGISTRATION" | "POOLS_PER_ACCOUNT" | "RCS_AGENTS_PER_ACCOUNT" | "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY" | "REGISTRATION_ATTACHMENTS_PER_ACCOUNT" | "REGISTRATION_VERSIONS_CREATED_PER_DAY" | "REGISTRATIONS_PER_ACCOUNT" | "SENDER_IDS_PER_ACCOUNT" | "TAGS_PER_RESOURCE" | "VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT" | "VERIFICATION_ATTEMPTS_PER_DAY" | "PROTECT_CONFIGURATIONS_PER_ACCOUNT")
       SENSITIVE: []
     end
 
@@ -1985,6 +2184,16 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class SetRcsMessageSpendLimitOverrideRequest
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class SetRcsMessageSpendLimitOverrideResult
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
     class SetTextMessageSpendLimitOverrideRequest
       attr_accessor monthly_limit: ::Integer
       SENSITIVE: []
@@ -2011,7 +2220,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class SpendLimit
-      attr_accessor name: ("TEXT_MESSAGE_MONTHLY_SPEND_LIMIT" | "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT" | "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT" | "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT")
+      attr_accessor name: ("TEXT_MESSAGE_MONTHLY_SPEND_LIMIT" | "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT" | "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT" | "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT" | "RCS_MESSAGE_MONTHLY_SPEND_LIMIT")
       attr_accessor enforced_limit: ::Integer
       attr_accessor max_limit: ::Integer
       attr_accessor overridden: bool
@@ -2103,7 +2312,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor configuration_set_name: ::String
       attr_accessor event_destination_name: ::String
       attr_accessor enabled: bool
-      attr_accessor matching_event_types: ::Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")]
+      attr_accessor matching_event_types: ::Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED" | "RCS_ALL" | "RCS_QUEUED" | "RCS_SENT" | "RCS_DELIVERED" | "RCS_READ" | "RCS_FAILED" | "RCS_TTL_EXPIRED" | "RCS_PROTECT_BLOCKED" | "RCS_FALLEN_BACK_TO_SMS")]
       attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination
       attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
       attr_accessor sns_destination: Types::SnsDestination
@@ -2245,6 +2454,10 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor two_way_channel_arn: ::String
       attr_accessor two_way_channel_role: ::String
       attr_accessor two_way_enabled: bool
+      attr_accessor two_way_media_s3_bucket_name: ::String
+      attr_accessor two_way_media_s3_key_prefix: ::String
+      attr_accessor two_way_media_s3_role: ::String
+      attr_accessor two_way_rcs_events_enabled: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -2259,6 +2472,10 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor two_way_channel_arn: ::String
       attr_accessor two_way_channel_role: ::String
       attr_accessor two_way_enabled: bool
+      attr_accessor two_way_media_s3_bucket_name: ::String
+      attr_accessor two_way_media_s3_key_prefix: ::String
+      attr_accessor two_way_media_s3_role: ::String
+      attr_accessor two_way_rcs_events_enabled: ::Array[::String]
       SENSITIVE: []
     end
 

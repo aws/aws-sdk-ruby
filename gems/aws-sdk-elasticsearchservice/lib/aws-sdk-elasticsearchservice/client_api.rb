@@ -141,6 +141,7 @@ module Aws::ElasticsearchService
     DomainArn = Shapes::StringShape.new(name: 'DomainArn')
     DomainEndpointOptions = Shapes::StructureShape.new(name: 'DomainEndpointOptions')
     DomainEndpointOptionsStatus = Shapes::StructureShape.new(name: 'DomainEndpointOptionsStatus')
+    DomainEngineMode = Shapes::StringShape.new(name: 'DomainEngineMode')
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainInfo = Shapes::StructureShape.new(name: 'DomainInfo')
     DomainInfoList = Shapes::ListShape.new(name: 'DomainInfoList')
@@ -152,6 +153,7 @@ module Aws::ElasticsearchService
     DomainPackageDetailsList = Shapes::ListShape.new(name: 'DomainPackageDetailsList')
     DomainPackageStatus = Shapes::StringShape.new(name: 'DomainPackageStatus')
     DomainProcessingStatusType = Shapes::StringShape.new(name: 'DomainProcessingStatusType')
+    DomainUseCase = Shapes::StringShape.new(name: 'DomainUseCase')
     Double = Shapes::FloatShape.new(name: 'Double')
     DryRun = Shapes::BooleanShape.new(name: 'DryRun')
     DryRunResults = Shapes::StructureShape.new(name: 'DryRunResults')
@@ -174,6 +176,7 @@ module Aws::ElasticsearchService
     EncryptionAtRestOptionsStatus = Shapes::StructureShape.new(name: 'EncryptionAtRestOptionsStatus')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
+    EngineModeStatus = Shapes::StructureShape.new(name: 'EngineModeStatus')
     EngineType = Shapes::StringShape.new(name: 'EngineType')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -344,6 +347,7 @@ module Aws::ElasticsearchService
     UpgradeStep = Shapes::StringShape.new(name: 'UpgradeStep')
     UpgradeStepItem = Shapes::StructureShape.new(name: 'UpgradeStepItem')
     UpgradeStepsList = Shapes::ListShape.new(name: 'UpgradeStepsList')
+    UseCaseStatus = Shapes::StructureShape.new(name: 'UseCaseStatus')
     UserPoolId = Shapes::StringShape.new(name: 'UserPoolId')
     Username = Shapes::StringShape.new(name: 'Username')
     VPCDerivedInfo = Shapes::StructureShape.new(name: 'VPCDerivedInfo')
@@ -579,6 +583,8 @@ module Aws::ElasticsearchService
     CreateElasticsearchDomainRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     CreateElasticsearchDomainRequest.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, location_name: "DeploymentStrategyOptions"))
     CreateElasticsearchDomainRequest.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseRequestOptions, location_name: "AutomatedSnapshotPauseOptions"))
+    CreateElasticsearchDomainRequest.add_member(:use_case, Shapes::ShapeRef.new(shape: DomainUseCase, location_name: "UseCase"))
+    CreateElasticsearchDomainRequest.add_member(:engine_mode, Shapes::ShapeRef.new(shape: DomainEngineMode, location_name: "EngineMode"))
     CreateElasticsearchDomainRequest.struct_class = Types::CreateElasticsearchDomainRequest
 
     CreateElasticsearchDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus, location_name: "DomainStatus"))
@@ -852,6 +858,8 @@ module Aws::ElasticsearchService
     ElasticsearchDomainConfig.add_member(:modifying_properties, Shapes::ShapeRef.new(shape: ModifyingPropertiesList, location_name: "ModifyingProperties"))
     ElasticsearchDomainConfig.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptionsStatus, location_name: "DeploymentStrategyOptions"))
     ElasticsearchDomainConfig.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseOptionsStatus, location_name: "AutomatedSnapshotPauseOptions"))
+    ElasticsearchDomainConfig.add_member(:use_case, Shapes::ShapeRef.new(shape: UseCaseStatus, location_name: "UseCase"))
+    ElasticsearchDomainConfig.add_member(:engine_mode, Shapes::ShapeRef.new(shape: EngineModeStatus, location_name: "EngineMode"))
     ElasticsearchDomainConfig.struct_class = Types::ElasticsearchDomainConfig
 
     ElasticsearchDomainStatus.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
@@ -883,6 +891,8 @@ module Aws::ElasticsearchService
     ElasticsearchDomainStatus.add_member(:modifying_properties, Shapes::ShapeRef.new(shape: ModifyingPropertiesList, location_name: "ModifyingProperties"))
     ElasticsearchDomainStatus.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, location_name: "DeploymentStrategyOptions"))
     ElasticsearchDomainStatus.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseOptions, location_name: "AutomatedSnapshotPauseOptions"))
+    ElasticsearchDomainStatus.add_member(:use_case, Shapes::ShapeRef.new(shape: DomainUseCase, location_name: "UseCase"))
+    ElasticsearchDomainStatus.add_member(:engine_mode, Shapes::ShapeRef.new(shape: DomainEngineMode, location_name: "EngineMode"))
     ElasticsearchDomainStatus.struct_class = Types::ElasticsearchDomainStatus
 
     ElasticsearchDomainStatusList.member = Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus)
@@ -905,6 +915,10 @@ module Aws::ElasticsearchService
 
     EndpointsMap.key = Shapes::ShapeRef.new(shape: String)
     EndpointsMap.value = Shapes::ShapeRef.new(shape: ServiceUrl)
+
+    EngineModeStatus.add_member(:options, Shapes::ShapeRef.new(shape: DomainEngineMode, required: true, location_name: "Options"))
+    EngineModeStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+    EngineModeStatus.struct_class = Types::EngineModeStatus
 
     ErrorDetails.add_member(:error_type, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorType"))
     ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
@@ -1287,6 +1301,8 @@ module Aws::ElasticsearchService
     UpdateElasticsearchDomainConfigRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
     UpdateElasticsearchDomainConfigRequest.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, location_name: "DeploymentStrategyOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseRequestOptions, location_name: "AutomatedSnapshotPauseOptions"))
+    UpdateElasticsearchDomainConfigRequest.add_member(:use_case, Shapes::ShapeRef.new(shape: DomainUseCase, location_name: "UseCase"))
+    UpdateElasticsearchDomainConfigRequest.add_member(:engine_mode, Shapes::ShapeRef.new(shape: DomainEngineMode, location_name: "EngineMode"))
     UpdateElasticsearchDomainConfigRequest.struct_class = Types::UpdateElasticsearchDomainConfigRequest
 
     UpdateElasticsearchDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: ElasticsearchDomainConfig, required: true, location_name: "DomainConfig"))
@@ -1335,6 +1351,10 @@ module Aws::ElasticsearchService
     UpgradeStepItem.struct_class = Types::UpgradeStepItem
 
     UpgradeStepsList.member = Shapes::ShapeRef.new(shape: UpgradeStepItem)
+
+    UseCaseStatus.add_member(:options, Shapes::ShapeRef.new(shape: DomainUseCase, required: true, location_name: "Options"))
+    UseCaseStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+    UseCaseStatus.struct_class = Types::UseCaseStatus
 
     VPCDerivedInfo.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VPCId"))
     VPCDerivedInfo.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SubnetIds"))

@@ -37,6 +37,8 @@ module Aws::GameLiftStreams
     CreateApplicationOutput = Shapes::StructureShape.new(name: 'CreateApplicationOutput')
     CreateStreamGroupInput = Shapes::StructureShape.new(name: 'CreateStreamGroupInput')
     CreateStreamGroupOutput = Shapes::StructureShape.new(name: 'CreateStreamGroupOutput')
+    CreateStreamSessionAdminShellInput = Shapes::StructureShape.new(name: 'CreateStreamSessionAdminShellInput')
+    CreateStreamSessionAdminShellOutput = Shapes::StructureShape.new(name: 'CreateStreamSessionAdminShellOutput')
     CreateStreamSessionConnectionInput = Shapes::StructureShape.new(name: 'CreateStreamSessionConnectionInput')
     CreateStreamSessionConnectionOutput = Shapes::StructureShape.new(name: 'CreateStreamSessionConnectionOutput')
     DefaultApplication = Shapes::StructureShape.new(name: 'DefaultApplication')
@@ -45,6 +47,7 @@ module Aws::GameLiftStreams
     Description = Shapes::StringShape.new(name: 'Description')
     DisassociateApplicationsInput = Shapes::StructureShape.new(name: 'DisassociateApplicationsInput')
     DisassociateApplicationsOutput = Shapes::StructureShape.new(name: 'DisassociateApplicationsOutput')
+    DisplayConfiguration = Shapes::StructureShape.new(name: 'DisplayConfiguration')
     EnvironmentVariables = Shapes::MapShape.new(name: 'EnvironmentVariables')
     EnvironmentVariablesKeyString = Shapes::StringShape.new(name: 'EnvironmentVariablesKeyString')
     EnvironmentVariablesValueString = Shapes::StringShape.new(name: 'EnvironmentVariablesValueString')
@@ -64,6 +67,7 @@ module Aws::GameLiftStreams
     GetStreamGroupOutput = Shapes::StructureShape.new(name: 'GetStreamGroupOutput')
     GetStreamSessionInput = Shapes::StructureShape.new(name: 'GetStreamSessionInput')
     GetStreamSessionOutput = Shapes::StructureShape.new(name: 'GetStreamSessionOutput')
+    IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     Id = Shapes::StringShape.new(name: 'Id')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     Identifiers = Shapes::ListShape.new(name: 'Identifiers')
@@ -98,11 +102,15 @@ module Aws::GameLiftStreams
     ReplicationStatus = Shapes::StructureShape.new(name: 'ReplicationStatus')
     ReplicationStatusType = Shapes::StringShape.new(name: 'ReplicationStatusType')
     ReplicationStatuses = Shapes::ListShape.new(name: 'ReplicationStatuses')
+    Resolution = Shapes::StructureShape.new(name: 'Resolution')
+    ResolutionHeight = Shapes::IntegerShape.new(name: 'ResolutionHeight')
+    ResolutionWidth = Shapes::IntegerShape.new(name: 'ResolutionWidth')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RuntimeEnvironment = Shapes::StructureShape.new(name: 'RuntimeEnvironment')
     RuntimeEnvironmentType = Shapes::StringShape.new(name: 'RuntimeEnvironmentType')
     RuntimeEnvironmentVersion = Shapes::StringShape.new(name: 'RuntimeEnvironmentVersion')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SessionId = Shapes::StringShape.new(name: 'SessionId')
     SessionLengthSeconds = Shapes::IntegerShape.new(name: 'SessionLengthSeconds')
     SignalRequest = Shapes::StringShape.new(name: 'SignalRequest')
     SignalResponse = Shapes::StringShape.new(name: 'SignalResponse')
@@ -114,10 +122,12 @@ module Aws::GameLiftStreams
     StreamGroupStatusReason = Shapes::StringShape.new(name: 'StreamGroupStatusReason')
     StreamGroupSummary = Shapes::StructureShape.new(name: 'StreamGroupSummary')
     StreamGroupSummaryList = Shapes::ListShape.new(name: 'StreamGroupSummaryList')
+    StreamSessionAccessNotReadyException = Shapes::StructureShape.new(name: 'StreamSessionAccessNotReadyException')
     StreamSessionStatus = Shapes::StringShape.new(name: 'StreamSessionStatus')
     StreamSessionStatusReason = Shapes::StringShape.new(name: 'StreamSessionStatusReason')
     StreamSessionSummary = Shapes::StructureShape.new(name: 'StreamSessionSummary')
     StreamSessionSummaryList = Shapes::ListShape.new(name: 'StreamSessionSummaryList')
+    StreamUrl = Shapes::StringShape.new(name: 'StreamUrl')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -129,6 +139,7 @@ module Aws::GameLiftStreams
     TerminateStreamSessionInput = Shapes::StructureShape.new(name: 'TerminateStreamSessionInput')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TokenValue = Shapes::StringShape.new(name: 'TokenValue')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateApplicationInput = Shapes::StructureShape.new(name: 'UpdateApplicationInput')
@@ -225,6 +236,15 @@ module Aws::GameLiftStreams
     CreateStreamGroupOutput.add_member(:associated_applications, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedApplications"))
     CreateStreamGroupOutput.struct_class = Types::CreateStreamGroupOutput
 
+    CreateStreamSessionAdminShellInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    CreateStreamSessionAdminShellInput.add_member(:stream_session_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "StreamSessionIdentifier"))
+    CreateStreamSessionAdminShellInput.struct_class = Types::CreateStreamSessionAdminShellInput
+
+    CreateStreamSessionAdminShellOutput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
+    CreateStreamSessionAdminShellOutput.add_member(:stream_url, Shapes::ShapeRef.new(shape: StreamUrl, location_name: "StreamUrl"))
+    CreateStreamSessionAdminShellOutput.add_member(:token_value, Shapes::ShapeRef.new(shape: TokenValue, location_name: "TokenValue"))
+    CreateStreamSessionAdminShellOutput.struct_class = Types::CreateStreamSessionAdminShellOutput
+
     CreateStreamSessionConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateStreamSessionConnectionInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
     CreateStreamSessionConnectionInput.add_member(:stream_session_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "StreamSessionIdentifier"))
@@ -251,6 +271,9 @@ module Aws::GameLiftStreams
     DisassociateApplicationsOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DisassociateApplicationsOutput.add_member(:application_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "ApplicationArns"))
     DisassociateApplicationsOutput.struct_class = Types::DisassociateApplicationsOutput
+
+    DisplayConfiguration.add_member(:resolution, Shapes::ShapeRef.new(shape: Resolution, location_name: "Resolution"))
+    DisplayConfiguration.struct_class = Types::DisplayConfiguration
 
     EnvironmentVariables.key = Shapes::ShapeRef.new(shape: EnvironmentVariablesKeyString)
     EnvironmentVariables.value = Shapes::ShapeRef.new(shape: EnvironmentVariablesValueString)
@@ -332,6 +355,8 @@ module Aws::GameLiftStreams
     GetStreamSessionOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     GetStreamSessionOutput.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
     GetStreamSessionOutput.add_member(:export_files_metadata, Shapes::ShapeRef.new(shape: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
+    GetStreamSessionOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    GetStreamSessionOutput.add_member(:display_configuration, Shapes::ShapeRef.new(shape: DisplayConfiguration, location_name: "DisplayConfiguration"))
     GetStreamSessionOutput.struct_class = Types::GetStreamSessionOutput
 
     Identifiers.member = Shapes::ShapeRef.new(shape: Identifier)
@@ -426,6 +451,10 @@ module Aws::GameLiftStreams
 
     ReplicationStatuses.member = Shapes::ShapeRef.new(shape: ReplicationStatus)
 
+    Resolution.add_member(:width, Shapes::ShapeRef.new(shape: ResolutionWidth, required: true, location_name: "Width"))
+    Resolution.add_member(:height, Shapes::ShapeRef.new(shape: ResolutionHeight, required: true, location_name: "Height"))
+    Resolution.struct_class = Types::Resolution
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -449,6 +478,8 @@ module Aws::GameLiftStreams
     StartStreamSessionInput.add_member(:additional_launch_args, Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
     StartStreamSessionInput.add_member(:additional_environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
     StartStreamSessionInput.add_member(:performance_stats_configuration, Shapes::ShapeRef.new(shape: PerformanceStatsConfiguration, location_name: "PerformanceStatsConfiguration"))
+    StartStreamSessionInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    StartStreamSessionInput.add_member(:display_configuration, Shapes::ShapeRef.new(shape: DisplayConfiguration, location_name: "DisplayConfiguration"))
     StartStreamSessionInput.struct_class = Types::StartStreamSessionInput
 
     StartStreamSessionOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -472,6 +503,8 @@ module Aws::GameLiftStreams
     StartStreamSessionOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     StartStreamSessionOutput.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
     StartStreamSessionOutput.add_member(:export_files_metadata, Shapes::ShapeRef.new(shape: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
+    StartStreamSessionOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    StartStreamSessionOutput.add_member(:display_configuration, Shapes::ShapeRef.new(shape: DisplayConfiguration, location_name: "DisplayConfiguration"))
     StartStreamSessionOutput.struct_class = Types::StartStreamSessionOutput
 
     StreamGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Arn"))
@@ -487,6 +520,9 @@ module Aws::GameLiftStreams
 
     StreamGroupSummaryList.member = Shapes::ShapeRef.new(shape: StreamGroupSummary)
 
+    StreamSessionAccessNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    StreamSessionAccessNotReadyException.struct_class = Types::StreamSessionAccessNotReadyException
+
     StreamSessionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     StreamSessionSummary.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
     StreamSessionSummary.add_member(:status, Shapes::ShapeRef.new(shape: StreamSessionStatus, location_name: "Status"))
@@ -497,6 +533,7 @@ module Aws::GameLiftStreams
     StreamSessionSummary.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
     StreamSessionSummary.add_member(:export_files_metadata, Shapes::ShapeRef.new(shape: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
     StreamSessionSummary.add_member(:location, Shapes::ShapeRef.new(shape: LocationName, location_name: "Location"))
+    StreamSessionSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
     StreamSessionSummary.struct_class = Types::StreamSessionSummary
 
     StreamSessionSummaryList.member = Shapes::ShapeRef.new(shape: StreamSessionSummary)
@@ -654,6 +691,20 @@ module Aws::GameLiftStreams
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_stream_session_admin_shell, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStreamSessionAdminShell"
+        o.http_method = "POST"
+        o.http_request_uri = "/streamgroups/{Identifier}/streamsessions/{StreamSessionIdentifier}/access"
+        o.input = Shapes::ShapeRef.new(shape: CreateStreamSessionAdminShellInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateStreamSessionAdminShellOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: StreamSessionAccessNotReadyException)
       end)
 
       api.add_operation(:create_stream_session_connection, Seahorse::Model::Operation.new.tap do |o|

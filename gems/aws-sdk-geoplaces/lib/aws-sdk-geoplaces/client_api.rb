@@ -17,6 +17,7 @@ module Aws::GeoPlaces
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessPoint = Shapes::StructureShape.new(name: 'AccessPoint')
     AccessPointList = Shapes::ListShape.new(name: 'AccessPointList')
+    AccessPointType = Shapes::StringShape.new(name: 'AccessPointType')
     AccessRestriction = Shapes::StructureShape.new(name: 'AccessRestriction')
     AccessRestrictionList = Shapes::ListShape.new(name: 'AccessRestrictionList')
     Address = Shapes::StructureShape.new(name: 'Address')
@@ -33,6 +34,11 @@ module Aws::GeoPlaces
     AddressStreetString = Shapes::StringShape.new(name: 'AddressStreetString')
     AddressSubBlockString = Shapes::StringShape.new(name: 'AddressSubBlockString')
     AddressSubDistrictString = Shapes::StringShape.new(name: 'AddressSubDistrictString')
+    AddressTranslationComponent = Shapes::StringShape.new(name: 'AddressTranslationComponent')
+    AddressTranslationComponentList = Shapes::ListShape.new(name: 'AddressTranslationComponentList')
+    AdminNames = Shapes::StructureShape.new(name: 'AdminNames')
+    AdminNamesList = Shapes::ListShape.new(name: 'AdminNamesList')
+    AdminNamesPreference = Shapes::StringShape.new(name: 'AdminNamesPreference')
     ApiKey = Shapes::StringShape.new(name: 'ApiKey')
     AutocompleteAdditionalFeature = Shapes::StringShape.new(name: 'AutocompleteAdditionalFeature')
     AutocompleteAdditionalFeatureList = Shapes::ListShape.new(name: 'AutocompleteAdditionalFeatureList')
@@ -73,6 +79,10 @@ module Aws::GeoPlaces
     CountryCodeList = Shapes::ListShape.new(name: 'CountryCodeList')
     CountryHighlights = Shapes::StructureShape.new(name: 'CountryHighlights')
     CountryNameString = Shapes::StringShape.new(name: 'CountryNameString')
+    CrossReference = Shapes::StructureShape.new(name: 'CrossReference')
+    CrossReferenceList = Shapes::ListShape.new(name: 'CrossReferenceList')
+    CrossReferenceSourcePlaceIdString = Shapes::StringShape.new(name: 'CrossReferenceSourcePlaceIdString')
+    CrossReferenceSourceString = Shapes::StringShape.new(name: 'CrossReferenceSourceString')
     DistanceMeters = Shapes::IntegerShape.new(name: 'DistanceMeters')
     Double = Shapes::FloatShape.new(name: 'Double')
     FilterBusinessChainList = Shapes::ListShape.new(name: 'FilterBusinessChainList')
@@ -89,6 +99,7 @@ module Aws::GeoPlaces
     FoodTypeLocalizedNameString = Shapes::StringShape.new(name: 'FoodTypeLocalizedNameString')
     GeocodeAdditionalFeature = Shapes::StringShape.new(name: 'GeocodeAdditionalFeature')
     GeocodeAdditionalFeatureList = Shapes::ListShape.new(name: 'GeocodeAdditionalFeatureList')
+    GeocodeAddressNamesMode = Shapes::StringShape.new(name: 'GeocodeAddressNamesMode')
     GeocodeFilter = Shapes::StructureShape.new(name: 'GeocodeFilter')
     GeocodeFilterPlaceType = Shapes::StringShape.new(name: 'GeocodeFilterPlaceType')
     GeocodeFilterPlaceTypeList = Shapes::ListShape.new(name: 'GeocodeFilterPlaceTypeList')
@@ -114,6 +125,7 @@ module Aws::GeoPlaces
     GeocodeResultItemTitleString = Shapes::StringShape.new(name: 'GeocodeResultItemTitleString')
     GetPlaceAdditionalFeature = Shapes::StringShape.new(name: 'GetPlaceAdditionalFeature')
     GetPlaceAdditionalFeatureList = Shapes::ListShape.new(name: 'GetPlaceAdditionalFeatureList')
+    GetPlaceAddressNamesMode = Shapes::StringShape.new(name: 'GetPlaceAddressNamesMode')
     GetPlaceIntendedUse = Shapes::StringShape.new(name: 'GetPlaceIntendedUse')
     GetPlaceRequest = Shapes::StructureShape.new(name: 'GetPlaceRequest')
     GetPlaceRequestPlaceIdString = Shapes::StringShape.new(name: 'GetPlaceRequestPlaceIdString')
@@ -163,6 +175,8 @@ module Aws::GeoPlaces
     PhonemeTranscription = Shapes::StructureShape.new(name: 'PhonemeTranscription')
     PhonemeTranscriptionList = Shapes::ListShape.new(name: 'PhonemeTranscriptionList')
     PhonemeTranscriptionValueString = Shapes::StringShape.new(name: 'PhonemeTranscriptionValueString')
+    PlaceAttribute = Shapes::StringShape.new(name: 'PlaceAttribute')
+    PlaceAttributeList = Shapes::ListShape.new(name: 'PlaceAttributeList')
     PlaceType = Shapes::StringShape.new(name: 'PlaceType')
     Position = Shapes::ListShape.new(name: 'Position')
     PostalAuthority = Shapes::StringShape.new(name: 'PostalAuthority')
@@ -189,6 +203,7 @@ module Aws::GeoPlaces
     RelatedPlaceTitleString = Shapes::StringShape.new(name: 'RelatedPlaceTitleString')
     ReverseGeocodeAdditionalFeature = Shapes::StringShape.new(name: 'ReverseGeocodeAdditionalFeature')
     ReverseGeocodeAdditionalFeatureList = Shapes::ListShape.new(name: 'ReverseGeocodeAdditionalFeatureList')
+    ReverseGeocodeAddressNamesMode = Shapes::StringShape.new(name: 'ReverseGeocodeAddressNamesMode')
     ReverseGeocodeFilter = Shapes::StructureShape.new(name: 'ReverseGeocodeFilter')
     ReverseGeocodeFilterPlaceType = Shapes::StringShape.new(name: 'ReverseGeocodeFilterPlaceType')
     ReverseGeocodeFilterPlaceTypeList = Shapes::ListShape.new(name: 'ReverseGeocodeFilterPlaceTypeList')
@@ -226,6 +241,7 @@ module Aws::GeoPlaces
     SearchTextResultItemList = Shapes::ListShape.new(name: 'SearchTextResultItemList')
     SearchTextResultItemPlaceIdString = Shapes::StringShape.new(name: 'SearchTextResultItemPlaceIdString')
     SearchTextResultItemTitleString = Shapes::StringShape.new(name: 'SearchTextResultItemTitleString')
+    SearchTextTravelMode = Shapes::StringShape.new(name: 'SearchTextTravelMode')
     SecondaryAddressComponent = Shapes::StructureShape.new(name: 'SecondaryAddressComponent')
     SecondaryAddressComponentDesignatorString = Shapes::StringShape.new(name: 'SecondaryAddressComponentDesignatorString')
     SecondaryAddressComponentList = Shapes::ListShape.new(name: 'SecondaryAddressComponentList')
@@ -233,6 +249,7 @@ module Aws::GeoPlaces
     SecondaryAddressComponentMatchScoreList = Shapes::ListShape.new(name: 'SecondaryAddressComponentMatchScoreList')
     SecondaryAddressComponentNumberString = Shapes::StringShape.new(name: 'SecondaryAddressComponentNumberString')
     SensitiveBoolean = Shapes::BooleanShape.new(name: 'SensitiveBoolean')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     StreetComponents = Shapes::StructureShape.new(name: 'StreetComponents')
     StreetComponentsBaseNameString = Shapes::StringShape.new(name: 'StreetComponentsBaseNameString')
     StreetComponentsDirectionString = Shapes::StringShape.new(name: 'StreetComponentsDirectionString')
@@ -264,12 +281,18 @@ module Aws::GeoPlaces
     SuggestResultItemList = Shapes::ListShape.new(name: 'SuggestResultItemList')
     SuggestResultItemTitleString = Shapes::StringShape.new(name: 'SuggestResultItemTitleString')
     SuggestResultItemType = Shapes::StringShape.new(name: 'SuggestResultItemType')
+    SuggestTravelMode = Shapes::StringShape.new(name: 'SuggestTravelMode')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeZone = Shapes::StructureShape.new(name: 'TimeZone')
     TimeZoneNameString = Shapes::StringShape.new(name: 'TimeZoneNameString')
     TimeZoneOffsetSecondsLong = Shapes::IntegerShape.new(name: 'TimeZoneOffsetSecondsLong')
     TimeZoneOffsetString = Shapes::StringShape.new(name: 'TimeZoneOffsetString')
     Token = Shapes::StringShape.new(name: 'Token')
+    TranslationDetails = Shapes::StructureShape.new(name: 'TranslationDetails')
+    TranslationName = Shapes::StructureShape.new(name: 'TranslationName')
+    TranslationNameList = Shapes::ListShape.new(name: 'TranslationNameList')
+    TranslationNameType = Shapes::StringShape.new(name: 'TranslationNameType')
+    TranslationNameValueString = Shapes::StringShape.new(name: 'TranslationNameValueString')
     TypePlacement = Shapes::StringShape.new(name: 'TypePlacement')
     TypeSeparator = Shapes::StringShape.new(name: 'TypeSeparator')
     UspsZip = Shapes::StructureShape.new(name: 'UspsZip')
@@ -284,6 +307,9 @@ module Aws::GeoPlaces
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccessPoint.add_member(:position, Shapes::ShapeRef.new(shape: Position, location_name: "Position"))
+    AccessPoint.add_member(:type, Shapes::ShapeRef.new(shape: AccessPointType, location_name: "Type"))
+    AccessPoint.add_member(:primary, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "Primary"))
+    AccessPoint.add_member(:label, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Label"))
     AccessPoint.struct_class = Types::AccessPoint
 
     AccessPointList.member = Shapes::ShapeRef.new(shape: AccessPoint)
@@ -340,6 +366,14 @@ module Aws::GeoPlaces
     AddressComponentPhonemes.add_member(:street, Shapes::ShapeRef.new(shape: PhonemeTranscriptionList, location_name: "Street"))
     AddressComponentPhonemes.struct_class = Types::AddressComponentPhonemes
 
+    AddressTranslationComponentList.member = Shapes::ShapeRef.new(shape: AddressTranslationComponent)
+
+    AdminNames.add_member(:names, Shapes::ShapeRef.new(shape: TranslationNameList, required: true, location_name: "Names"))
+    AdminNames.add_member(:preference, Shapes::ShapeRef.new(shape: AdminNamesPreference, location_name: "Preference"))
+    AdminNames.struct_class = Types::AdminNames
+
+    AdminNamesList.member = Shapes::ShapeRef.new(shape: AdminNames)
+
     AutocompleteAdditionalFeatureList.member = Shapes::ShapeRef.new(shape: AutocompleteAdditionalFeature)
 
     AutocompleteAddressHighlights.add_member(:label, Shapes::ShapeRef.new(shape: HighlightList, location_name: "Label"))
@@ -394,6 +428,7 @@ module Aws::GeoPlaces
     AutocompleteResultItem.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     AutocompleteResultItem.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3, location_name: "PoliticalView"))
     AutocompleteResultItem.add_member(:highlights, Shapes::ShapeRef.new(shape: AutocompleteHighlights, location_name: "Highlights"))
+    AutocompleteResultItem.add_member(:estimated_point_address, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "EstimatedPointAddress"))
     AutocompleteResultItem.struct_class = Types::AutocompleteResultItem
 
     AutocompleteResultItemList.member = Shapes::ShapeRef.new(shape: AutocompleteResultItem)
@@ -442,6 +477,13 @@ module Aws::GeoPlaces
     CountryHighlights.add_member(:name, Shapes::ShapeRef.new(shape: HighlightList, location_name: "Name"))
     CountryHighlights.struct_class = Types::CountryHighlights
 
+    CrossReference.add_member(:source, Shapes::ShapeRef.new(shape: CrossReferenceSourceString, required: true, location_name: "Source"))
+    CrossReference.add_member(:source_place_id, Shapes::ShapeRef.new(shape: CrossReferenceSourcePlaceIdString, required: true, location_name: "SourcePlaceId"))
+    CrossReference.add_member(:source_categories, Shapes::ShapeRef.new(shape: CategoryList, location_name: "SourceCategories"))
+    CrossReference.struct_class = Types::CrossReference
+
+    CrossReferenceList.member = Shapes::ShapeRef.new(shape: CrossReference)
+
     FilterBusinessChainList.member = Shapes::ShapeRef.new(shape: FilterBusinessChainListMemberString)
 
     FilterCategoryList.member = Shapes::ShapeRef.new(shape: FilterCategoryListMemberString)
@@ -484,6 +526,7 @@ module Aws::GeoPlaces
     GeocodeParsedQueryAddressComponents.add_member(:address_number, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "AddressNumber"))
     GeocodeParsedQueryAddressComponents.add_member(:building, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "Building"))
     GeocodeParsedQueryAddressComponents.add_member(:secondary_address_components, Shapes::ShapeRef.new(shape: ParsedQuerySecondaryAddressComponentList, location_name: "SecondaryAddressComponents"))
+    GeocodeParsedQueryAddressComponents.add_member(:other_components, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "OtherComponents"))
     GeocodeParsedQueryAddressComponents.struct_class = Types::GeocodeParsedQueryAddressComponents
 
     GeocodeQueryComponents.add_member(:country, Shapes::ShapeRef.new(shape: GeocodeQueryComponentsCountryString, location_name: "Country"))
@@ -506,6 +549,9 @@ module Aws::GeoPlaces
     GeocodeRequest.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode, location_name: "PoliticalView"))
     GeocodeRequest.add_member(:intended_use, Shapes::ShapeRef.new(shape: GeocodeIntendedUse, location_name: "IntendedUse"))
     GeocodeRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
+    GeocodeRequest.add_member(:postal_code_mode, Shapes::ShapeRef.new(shape: PostalCodeMode, location_name: "PostalCodeMode"))
+    GeocodeRequest.add_member(:address_translations, Shapes::ShapeRef.new(shape: AddressTranslationComponentList, location_name: "AddressTranslations"))
+    GeocodeRequest.add_member(:address_names_mode, Shapes::ShapeRef.new(shape: GeocodeAddressNamesMode, location_name: "AddressNamesMode"))
     GeocodeRequest.struct_class = Types::GeocodeRequest
 
     GeocodeResponse.add_member(:pricing_bucket, Shapes::ShapeRef.new(shape: String, required: true, location: "header", location_name: "x-amz-geo-pricing-bucket"))
@@ -531,6 +577,8 @@ module Aws::GeoPlaces
     GeocodeResultItem.add_member(:intersections, Shapes::ShapeRef.new(shape: IntersectionList, location_name: "Intersections"))
     GeocodeResultItem.add_member(:main_address, Shapes::ShapeRef.new(shape: RelatedPlace, location_name: "MainAddress"))
     GeocodeResultItem.add_member(:secondary_addresses, Shapes::ShapeRef.new(shape: RelatedPlaceList, location_name: "SecondaryAddresses"))
+    GeocodeResultItem.add_member(:translations, Shapes::ShapeRef.new(shape: TranslationDetails, location_name: "Translations"))
+    GeocodeResultItem.add_member(:estimated_point_address, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "EstimatedPointAddress"))
     GeocodeResultItem.struct_class = Types::GeocodeResultItem
 
     GeocodeResultItemList.member = Shapes::ShapeRef.new(shape: GeocodeResultItem)
@@ -543,6 +591,7 @@ module Aws::GeoPlaces
     GetPlaceRequest.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode, location: "querystring", location_name: "political-view"))
     GetPlaceRequest.add_member(:intended_use, Shapes::ShapeRef.new(shape: GetPlaceIntendedUse, location: "querystring", location_name: "intended-use"))
     GetPlaceRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
+    GetPlaceRequest.add_member(:address_names_mode, Shapes::ShapeRef.new(shape: GetPlaceAddressNamesMode, location: "querystring", location_name: "address-names-mode"))
     GetPlaceRequest.struct_class = Types::GetPlaceRequest
 
     GetPlaceResponse.add_member(:place_id, Shapes::ShapeRef.new(shape: GetPlaceResponsePlaceIdString, required: true, location_name: "PlaceId"))
@@ -566,6 +615,9 @@ module Aws::GeoPlaces
     GetPlaceResponse.add_member(:phonemes, Shapes::ShapeRef.new(shape: PhonemeDetails, location_name: "Phonemes"))
     GetPlaceResponse.add_member(:main_address, Shapes::ShapeRef.new(shape: RelatedPlace, location_name: "MainAddress"))
     GetPlaceResponse.add_member(:secondary_addresses, Shapes::ShapeRef.new(shape: RelatedPlaceList, location_name: "SecondaryAddresses"))
+    GetPlaceResponse.add_member(:place_attributes, Shapes::ShapeRef.new(shape: PlaceAttributeList, location_name: "PlaceAttributes"))
+    GetPlaceResponse.add_member(:estimated_point_address, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "EstimatedPointAddress"))
+    GetPlaceResponse.add_member(:cross_references, Shapes::ShapeRef.new(shape: CrossReferenceList, location_name: "CrossReferences"))
     GetPlaceResponse.struct_class = Types::GetPlaceResponse
 
     Highlight.add_member(:start_index, Shapes::ShapeRef.new(shape: HighlightStartIndexInteger, location_name: "StartIndex"))
@@ -643,6 +695,8 @@ module Aws::GeoPlaces
 
     PhonemeTranscriptionList.member = Shapes::ShapeRef.new(shape: PhonemeTranscription)
 
+    PlaceAttributeList.member = Shapes::ShapeRef.new(shape: PlaceAttribute)
+
     Position.member = Shapes::ShapeRef.new(shape: Double)
 
     PostalCodeDetails.add_member(:postal_code, Shapes::ShapeRef.new(shape: PostalCodeDetailsPostalCodeString, location_name: "PostalCode"))
@@ -697,6 +751,7 @@ module Aws::GeoPlaces
     ReverseGeocodeRequest.add_member(:intended_use, Shapes::ShapeRef.new(shape: ReverseGeocodeIntendedUse, location_name: "IntendedUse"))
     ReverseGeocodeRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     ReverseGeocodeRequest.add_member(:heading, Shapes::ShapeRef.new(shape: Heading, location_name: "Heading"))
+    ReverseGeocodeRequest.add_member(:address_names_mode, Shapes::ShapeRef.new(shape: ReverseGeocodeAddressNamesMode, location_name: "AddressNamesMode"))
     ReverseGeocodeRequest.struct_class = Types::ReverseGeocodeRequest
 
     ReverseGeocodeResponse.add_member(:pricing_bucket, Shapes::ShapeRef.new(shape: String, required: true, location: "header", location_name: "x-amz-geo-pricing-bucket"))
@@ -718,6 +773,8 @@ module Aws::GeoPlaces
     ReverseGeocodeResultItem.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
     ReverseGeocodeResultItem.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3, location_name: "PoliticalView"))
     ReverseGeocodeResultItem.add_member(:intersections, Shapes::ShapeRef.new(shape: IntersectionList, location_name: "Intersections"))
+    ReverseGeocodeResultItem.add_member(:main_address, Shapes::ShapeRef.new(shape: RelatedPlace, location_name: "MainAddress"))
+    ReverseGeocodeResultItem.add_member(:estimated_point_address, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "EstimatedPointAddress"))
     ReverseGeocodeResultItem.struct_class = Types::ReverseGeocodeResultItem
 
     ReverseGeocodeResultItemList.member = Shapes::ShapeRef.new(shape: ReverseGeocodeResultItem)
@@ -769,6 +826,8 @@ module Aws::GeoPlaces
     SearchNearbyResultItem.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
     SearchNearbyResultItem.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3, location_name: "PoliticalView"))
     SearchNearbyResultItem.add_member(:phonemes, Shapes::ShapeRef.new(shape: PhonemeDetails, location_name: "Phonemes"))
+    SearchNearbyResultItem.add_member(:place_attributes, Shapes::ShapeRef.new(shape: PlaceAttributeList, location_name: "PlaceAttributes"))
+    SearchNearbyResultItem.add_member(:cross_references, Shapes::ShapeRef.new(shape: CrossReferenceList, location_name: "CrossReferences"))
     SearchNearbyResultItem.struct_class = Types::SearchNearbyResultItem
 
     SearchNearbyResultItemList.member = Shapes::ShapeRef.new(shape: SearchNearbyResultItem)
@@ -790,6 +849,7 @@ module Aws::GeoPlaces
     SearchTextRequest.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode, location_name: "PoliticalView"))
     SearchTextRequest.add_member(:intended_use, Shapes::ShapeRef.new(shape: SearchTextIntendedUse, location_name: "IntendedUse"))
     SearchTextRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    SearchTextRequest.add_member(:travel_mode, Shapes::ShapeRef.new(shape: SearchTextTravelMode, location_name: "TravelMode"))
     SearchTextRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     SearchTextRequest.struct_class = Types::SearchTextRequest
 
@@ -816,6 +876,8 @@ module Aws::GeoPlaces
     SearchTextResultItem.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
     SearchTextResultItem.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3, location_name: "PoliticalView"))
     SearchTextResultItem.add_member(:phonemes, Shapes::ShapeRef.new(shape: PhonemeDetails, location_name: "Phonemes"))
+    SearchTextResultItem.add_member(:place_attributes, Shapes::ShapeRef.new(shape: PlaceAttributeList, location_name: "PlaceAttributes"))
+    SearchTextResultItem.add_member(:cross_references, Shapes::ShapeRef.new(shape: CrossReferenceList, location_name: "CrossReferences"))
     SearchTextResultItem.struct_class = Types::SearchTextResultItem
 
     SearchTextResultItemList.member = Shapes::ShapeRef.new(shape: SearchTextResultItem)
@@ -879,6 +941,8 @@ module Aws::GeoPlaces
     SuggestPlaceResult.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
     SuggestPlaceResult.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3, location_name: "PoliticalView"))
     SuggestPlaceResult.add_member(:phonemes, Shapes::ShapeRef.new(shape: PhonemeDetails, location_name: "Phonemes"))
+    SuggestPlaceResult.add_member(:place_attributes, Shapes::ShapeRef.new(shape: PlaceAttributeList, location_name: "PlaceAttributes"))
+    SuggestPlaceResult.add_member(:cross_references, Shapes::ShapeRef.new(shape: CrossReferenceList, location_name: "CrossReferences"))
     SuggestPlaceResult.struct_class = Types::SuggestPlaceResult
 
     SuggestQueryResult.add_member(:query_id, Shapes::ShapeRef.new(shape: SuggestQueryResultQueryIdString, location_name: "QueryId"))
@@ -894,6 +958,7 @@ module Aws::GeoPlaces
     SuggestRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SuggestRequest.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode, location_name: "PoliticalView"))
     SuggestRequest.add_member(:intended_use, Shapes::ShapeRef.new(shape: SuggestIntendedUse, location_name: "IntendedUse"))
+    SuggestRequest.add_member(:travel_mode, Shapes::ShapeRef.new(shape: SuggestTravelMode, location_name: "TravelMode"))
     SuggestRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     SuggestRequest.struct_class = Types::SuggestRequest
 
@@ -918,6 +983,21 @@ module Aws::GeoPlaces
     TimeZone.add_member(:offset, Shapes::ShapeRef.new(shape: TimeZoneOffsetString, location_name: "Offset"))
     TimeZone.add_member(:offset_seconds, Shapes::ShapeRef.new(shape: TimeZoneOffsetSecondsLong, location_name: "OffsetSeconds"))
     TimeZone.struct_class = Types::TimeZone
+
+    TranslationDetails.add_member(:locality, Shapes::ShapeRef.new(shape: AdminNamesList, location_name: "Locality"))
+    TranslationDetails.add_member(:region, Shapes::ShapeRef.new(shape: AdminNamesList, location_name: "Region"))
+    TranslationDetails.add_member(:district, Shapes::ShapeRef.new(shape: AdminNamesList, location_name: "District"))
+    TranslationDetails.add_member(:sub_region, Shapes::ShapeRef.new(shape: AdminNamesList, location_name: "SubRegion"))
+    TranslationDetails.struct_class = Types::TranslationDetails
+
+    TranslationName.add_member(:value, Shapes::ShapeRef.new(shape: TranslationNameValueString, required: true, location_name: "Value"))
+    TranslationName.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
+    TranslationName.add_member(:type, Shapes::ShapeRef.new(shape: TranslationNameType, required: true, location_name: "Type"))
+    TranslationName.add_member(:primary, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "Primary"))
+    TranslationName.add_member(:transliterated, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "Transliterated"))
+    TranslationName.struct_class = Types::TranslationName
+
+    TranslationNameList.member = Shapes::ShapeRef.new(shape: TranslationName)
 
     UspsZip.add_member(:zip_classification_code, Shapes::ShapeRef.new(shape: ZipClassificationCode, location_name: "ZipClassificationCode"))
     UspsZip.struct_class = Types::UspsZip

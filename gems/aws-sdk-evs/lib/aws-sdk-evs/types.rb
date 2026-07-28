@@ -67,28 +67,51 @@ module Aws::Evs
     # VMware VCF licensing compliance.
     #
     # @!attribute [rw] type
-    #   The check type. Amazon EVS performs the following checks.
+    #   The check type. Amazon EVS performs the following checks:
     #
-    #   * `KEY_REUSE`: checks that the VCF license key is not used by
-    #     another Amazon EVS environment. This check fails if a used license
-    #     is added to the environment.
+    #   * `KEY_REUSE`: Verifies that the VCF license key is not used by
+    #     another Amazon EVS environment.
     #
-    #   * `KEY_COVERAGE`: checks that your VCF license key allocates
-    #     sufficient vCPU cores for all deployed hosts. The check fails when
-    #     any assigned hosts in the EVS environment are not covered by
-    #     license keys, or when any unassigned hosts cannot be covered by
-    #     available vCPU cores in keys.
+    #   * `KEY_COVERAGE`: Verifies that the VCF license key allocates
+    #     sufficient vCPU cores for all deployed hosts.
     #
-    #   * `REACHABILITY`: checks that the Amazon EVS control plane has a
-    #     persistent connection to SDDC Manager. If Amazon EVS cannot reach
-    #     the environment, this check fails.
+    #   * `REACHABILITY`: Verifies that the Amazon EVS control plane has a
+    #     persistent connection to SDDC Manager.
     #
-    #   * `HOST_COUNT`: Checks that your environment has a minimum of 4
-    #     hosts.
+    #   * `HOST_COUNT`: Verifies that the environment meets the minimum host
+    #     count.
     #
-    #     If this check fails, you will need to add hosts so that your
-    #     environment meets this minimum requirement. Amazon EVS only
-    #     supports environments with 4-32 hosts.
+    #   * `VCENTER_REACHABILITY`: Verifies vCenter Server reachability
+    #     through the vCenter connector.
+    #
+    #   * `VCENTER_VM_SYNC`: Verifies that the vCenter connector can
+    #     synchronize VM inventory from vCenter Server.
+    #
+    #   * `VCENTER_VM_EVENT`: Verifies that the vCenter connector can
+    #     receive VM lifecycle events from vCenter Server.
+    #
+    #   * `OPERATIONS_MANAGER_REACHABILITY`: Verifies Operations Manager
+    #     reachability through the Operations Manager connector.
+    #
+    #   * `SDDC_MANAGER_REACHABILITY`: Verifies SDDC Manager reachability
+    #     through the SDDC Manager connector.
+    #
+    #   * `SDDC_MANAGER_HOST_COUNT`: Verifies that the host count reported
+    #     by SDDC Manager meets Amazon EVS minimum requirements.
+    #
+    #   * `SDDC_MANAGER_KEY_COVERAGE`: Verifies that the VCF license key
+    #     configured in SDDC Manager covers all deployed hosts.
+    #
+    #   * `SDDC_MANAGER_KEY_REUSE`: Verifies that the VCF license key
+    #     configured in SDDC Manager is not used by another Amazon EVS
+    #     environment.
+    #
+    #   * `CONNECTOR_HEALTH`: Aggregate health across all connectors in the
+    #     environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique ID for the check.
     #   @return [String]
     #
     # @!attribute [rw] result
@@ -103,6 +126,7 @@ module Aws::Evs
     #
     class Check < Struct.new(
       :type,
+      :id,
       :result,
       :impaired_since)
       SENSITIVE = []
@@ -113,6 +137,10 @@ module Aws::Evs
     # requires that you specify two route server peer IDs. During
     # environment creation, the route server endpoints peer with the NSX
     # uplink VLAN for connectivity to the NSX overlay network.
+    #
+    # <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`.
+    #
+    #  </note>
     #
     # @!attribute [rw] private_route_server_peerings
     #   The unique IDs for private route server peers.
@@ -127,8 +155,8 @@ module Aws::Evs
     end
 
     # An object that represents a connector for an Amazon EVS environment. A
-    # connector establishes a vCenter connection using the credentials
-    # stored in Amazon Web Services Secrets Manager.
+    # connector establishes a connection to the given appliance type using
+    # the credentials stored in Amazon Web Services Secrets Manager.
     #
     # @!attribute [rw] environment_id
     #   The unique ID of the environment that the connector belongs to.
@@ -302,6 +330,16 @@ module Aws::Evs
     #
     # @!attribute [rw] type
     #   The type of connector to create.
+    #
+    #   * `OPERATIONS_MANAGER`: Connector to an Operations Manager
+    #     appliance. Required for VCF 9x environments.
+    #
+    #   * `SDDC_MANAGER`: Connector to an SDDC Manager appliance. Required
+    #     for VCF 5.x environments.
+    #
+    #   * `VCENTER`: Connector to a vCenter Server appliance. Required for
+    #     features that depend on vCenter, such as Windows Server
+    #     license-included.
     #   @return [String]
     #
     # @!attribute [rw] appliance_fqdn
@@ -311,10 +349,12 @@ module Aws::Evs
     #
     # @!attribute [rw] secret_identifier
     #   The ARN or name of the Amazon Web Services Secrets Manager secret
-    #   that stores the credentials for the VCF appliance.
+    #   that stores the credentials for the VCF appliance. `SDDC_MANAGER`
+    #   requires an `apiKey` field; `OPERATIONS_MANAGER` and `VCENTER`
+    #   require `username` and `password` fields.
     #
     #   Do not use credentials with Administrator privileges. We recommend
-    #   using a service account with the minimum required permissions.
+    #   using a service account with read-only permissions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/CreateEnvironmentConnectorRequest AWS API Documentation
@@ -481,24 +521,52 @@ module Aws::Evs
     #
     # @!attribute [rw] service_access_subnet_id
     #   The subnet that is used to establish connectivity between the Amazon
-    #   EVS control plane and VPC. Amazon EVS uses this subnet to validate
-    #   mandatory DNS records for your VCF appliances and hosts and create
-    #   the environment.
+    #   EVS control plane and VPC. The Amazon EVS control plane uses this
+    #   subnet to interface with your environment. This includes validating
+    #   DNS records and enabling Amazon EVS Connectors.
     #   @return [String]
     #
     # @!attribute [rw] vcf_version
     #   The VCF version to use for the environment.
+    #
+    #   * `SELF_DEPLOYED`: You install VCF yourself. The `licenseInfo`,
+    #     `hosts`, `vcfHostnames`, `siteId`, and `connectivityInfo`
+    #     parameters are not supported.
+    #
+    #   * Any other valid value: Amazon EVS installs and configures VCF for
+    #     you in the version you specify.
     #   @return [String]
     #
     # @!attribute [rw] terms_accepted
-    #   Customer confirmation that the customer has purchased and will
-    #   continue to maintain the required number of VCF software licenses to
-    #   cover all physical processor cores in the Amazon EVS environment.
-    #   Information about your VCF software in Amazon EVS will be shared
-    #   with Broadcom to verify license compliance. Amazon EVS does not
-    #   validate license keys. To validate license keys, visit the Broadcom
-    #   support portal.
+    #   Confirmation that the customer has purchased and will continue to
+    #   maintain the required number of VCF software licenses to cover all
+    #   physical processor cores in the Amazon EVS environment. Information
+    #   about your VCF software in Amazon EVS will be shared with Broadcom
+    #   to verify license compliance. Amazon EVS does not validate license
+    #   keys. To validate license keys, visit the Broadcom support portal.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] initial_vlans
+    #   The initial VLAN subnets for the Amazon EVS environment.
+    #
+    #   <note markdown="1"> For each Amazon EVS VLAN subnet, you must specify a non-overlapping
+    #   CIDR block. Amazon EVS VLAN subnets have a minimum CIDR block size
+    #   of /28 and a maximum size of /24.
+    #
+    #    </note>
+    #   @return [Types::InitialVlans]
+    #
+    # @!attribute [rw] connectivity_info
+    #   The connectivity configuration for the environment. Amazon EVS
+    #   requires that you specify two route server peer IDs. During
+    #   environment creation, the route server endpoints peer with the NSX
+    #   edges over the NSX uplink subnet, providing BGP-based dynamic
+    #   routing for overlay networks.
+    #
+    #   <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`.
+    #
+    #    </note>
+    #   @return [Types::ConnectivityInfo]
     #
     # @!attribute [rw] license_info
     #   The license information that Amazon EVS requires to create an
@@ -516,45 +584,36 @@ module Aws::Evs
     #
     #   VCF license information can be retrieved from the Broadcom portal.
     #
+    #   <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html
     #   @return [Array<Types::LicenseInfo>]
     #
-    # @!attribute [rw] initial_vlans
-    #   The initial VLAN subnets for the Amazon EVS environment.
+    # @!attribute [rw] hosts
+    #   The ESX hosts to add to the environment. For each host, provide the
+    #   desired hostname, EC2 SSH keypair name, and EC2 instance type.
+    #   Optionally, provide a partition or cluster placement group, or use
+    #   Amazon EC2 Dedicated Hosts.
     #
-    #   <note markdown="1"> For each Amazon EVS VLAN subnet, you must specify a non-overlapping
-    #   CIDR block. Amazon EVS VLAN subnets have a minimum CIDR block size
-    #   of /28 and a maximum size of /24.
+    #   <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`. In that case,
+    #   you can add hosts using `CreateEnvironmentHost` after the
+    #   environment is created.
     #
     #    </note>
-    #   @return [Types::InitialVlans]
-    #
-    # @!attribute [rw] hosts
-    #   The ESX hosts to add to the environment. Amazon EVS requires that
-    #   you provide details for a minimum of 4 hosts during environment
-    #   creation.
-    #
-    #   For each host, you must provide the desired hostname, EC2 SSH
-    #   keypair name, and EC2 instance type. Optionally, you can also
-    #   provide a partition or cluster placement group to use, or use Amazon
-    #   EC2 Dedicated Hosts.
     #   @return [Array<Types::HostInfoForCreate>]
-    #
-    # @!attribute [rw] connectivity_info
-    #   The connectivity configuration for the environment. Amazon EVS
-    #   requires that you specify two route server peer IDs. During
-    #   environment creation, the route server endpoints peer with the NSX
-    #   edges over the NSX uplink subnet, providing BGP-based dynamic
-    #   routing for overlay networks.
-    #   @return [Types::ConnectivityInfo]
     #
     # @!attribute [rw] vcf_hostnames
     #   The DNS hostnames for the virtual machines that host the VCF
-    #   management appliances. Amazon EVS requires that you provide DNS
-    #   hostnames for the following appliances: vCenter, NSX Manager, SDDC
-    #   Manager, and Cloud Builder.
+    #   management appliances. Provide hostnames for vCenter, NSX Manager,
+    #   SDDC Manager, and Cloud Builder.
+    #
+    #   <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`.
+    #
+    #    </note>
     #   @return [Types::VcfHostnames]
     #
     # @!attribute [rw] site_id
@@ -564,6 +623,10 @@ module Aws::Evs
     #   your software contract or contract renewal. Amazon EVS uses the
     #   Broadcom Site ID that you provide to meet Broadcom VCF license usage
     #   reporting requirements for Amazon EVS.
+    #
+    #   <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/CreateEnvironmentRequest AWS API Documentation
@@ -578,10 +641,10 @@ module Aws::Evs
       :service_access_subnet_id,
       :vcf_version,
       :terms_accepted,
-      :license_info,
       :initial_vlans,
-      :hosts,
       :connectivity_info,
+      :license_info,
+      :hosts,
       :vcf_hostnames,
       :site_id)
       SENSITIVE = []
@@ -962,8 +1025,7 @@ module Aws::Evs
     #   @return [String]
     #
     # @!attribute [rw] checks
-    #   A check on the environment to identify instance health and VMware
-    #   VCF licensing issues.
+    #   A check on the environment to identify connector health.
     #   @return [Array<Types::Check>]
     #
     # @!attribute [rw] connectivity_info
@@ -1193,10 +1255,7 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # An ESX host that runs on an Amazon EC2 bare metal instance. Four hosts
-    # are created in an Amazon EVS environment during environment creation.
-    # You can add hosts to an environment using the `CreateEnvironmentHost`
-    # operation. Amazon EVS supports 4-32 hosts per environment.
+    # An ESX host that runs on an Amazon EC2 bare metal instance.
     #
     # @!attribute [rw] host_name
     #   The DNS hostname of the host. DNS hostnames for hosts must be unique
@@ -2109,12 +2168,16 @@ module Aws::Evs
     # VMware VCF requires the deployment of two NSX Edge nodes, and three
     # NSX Manager virtual machines.
     #
+    # <note markdown="1"> Not supported when `vcfVersion` is `SELF_DEPLOYED`.
+    #
+    #  </note>
+    #
     # @!attribute [rw] v_center
     #   The VMware vCenter hostname.
     #   @return [String]
     #
     # @!attribute [rw] nsx
-    #   The VMware NSX hostname.
+    #   The VMware NSX Virtual IP (VIP) hostname.
     #   @return [String]
     #
     # @!attribute [rw] nsx_manager_1

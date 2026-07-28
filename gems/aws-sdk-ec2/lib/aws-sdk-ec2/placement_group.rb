@@ -91,6 +91,12 @@ module Aws::EC2
       data[:operator]
     end
 
+    # The ID of the parent placement group.
+    # @return [String]
+    def parent_group_id
+      data[:parent_group_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

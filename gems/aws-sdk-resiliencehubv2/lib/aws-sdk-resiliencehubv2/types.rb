@@ -41,12 +41,18 @@ module Aws::Resiliencehubv2
     #   the service.
     #   @return [String]
     #
+    # @!attribute [rw] data_recovery_time_between_backups
+    #   The achievability status of the data recovery time between backups
+    #   for the service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/Achievability AWS API Documentation
     #
     class Achievability < Struct.new(
       :availability_slo,
       :multi_az_rto_rpo,
-      :multi_region_rto_rpo)
+      :multi_region_rto_rpo,
+      :data_recovery_time_between_backups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1027,11 +1033,22 @@ module Aws::Resiliencehubv2
     #   The timestamp when dependency discovery was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] eligible_resource_count
+    #   The count of resources eligible for dependency attribution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message
+    #   A status message for dependency discovery, displayed during the
+    #   initialization state.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DependencyDiscoveryConfig AWS API Documentation
     #
     class DependencyDiscoveryConfig < Struct.new(
       :status,
-      :updated_at)
+      :updated_at,
+      :eligible_resource_count,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1841,6 +1858,28 @@ module Aws::Resiliencehubv2
     #   ARN identifier.
     #   @return [String]
     #
+    # @!attribute [rw] assessment_statuses
+    #   Specifies the assessment statuses to include in the results.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] started_after
+    #   Specifies that only assessments that started at or after this
+    #   timestamp appear in the results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_before
+    #   Specifies that only assessments that ended at or before this
+    #   timestamp appear in the results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to use for sorting failure mode assessments.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   Pagination page size.
     #   @return [Integer]
@@ -1853,6 +1892,11 @@ module Aws::Resiliencehubv2
     #
     class ListFailureModeAssessmentsRequest < Struct.new(
       :service_arn,
+      :assessment_statuses,
+      :started_after,
+      :ended_before,
+      :sort_by,
+      :sort_order,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -2064,6 +2108,15 @@ module Aws::Resiliencehubv2
     #   Filter resources by AWS Region.
     #   @return [String]
     #
+    # @!attribute [rw] resource_types
+    #   The CloudFormation resource types to include in the response.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] billable
+    #   Specifies whether to filter non-billable resources. When true (the
+    #   default), the operation returns only billable resources.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] max_results
     #   Pagination page size.
     #   @return [Integer]
@@ -2078,6 +2131,8 @@ module Aws::Resiliencehubv2
       :service_arn,
       :service_function_id,
       :aws_region,
+      :resource_types,
+      :billable,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -3828,6 +3883,22 @@ module Aws::Resiliencehubv2
     #   The identifier of the destination resource.
     #   @return [String]
     #
+    # @!attribute [rw] source_region
+    #   The AWS Region of the source resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_region
+    #   The AWS Region of the destination resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account
+    #   The AWS account ID of the source resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_account
+    #   The AWS account ID of the destination resource.
+    #   @return [String]
+    #
     # @!attribute [rw] properties
     #   The properties of the topology edge.
     #   @return [Array<Types::EdgePropertySummary>]
@@ -3837,6 +3908,10 @@ module Aws::Resiliencehubv2
     class ServiceTopologyEdgeSummary < Struct.new(
       :source_resource_identifier,
       :destination_resource_identifier,
+      :source_region,
+      :destination_region,
+      :source_account,
+      :destination_account,
       :properties)
       SENSITIVE = []
       include Aws::Structure

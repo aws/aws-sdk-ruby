@@ -112,6 +112,7 @@ module Aws::IoTWireless
     DakCertificateId = Shapes::StringShape.new(name: 'DakCertificateId')
     DakCertificateMetadata = Shapes::StructureShape.new(name: 'DakCertificateMetadata')
     DakCertificateMetadataList = Shapes::ListShape.new(name: 'DakCertificateMetadataList')
+    DefaultSessionParametersMulticast = Shapes::StructureShape.new(name: 'DefaultSessionParametersMulticast')
     DeleteDestinationRequest = Shapes::StructureShape.new(name: 'DeleteDestinationRequest')
     DeleteDestinationResponse = Shapes::StructureShape.new(name: 'DeleteDestinationResponse')
     DeleteDeviceProfileRequest = Shapes::StructureShape.new(name: 'DeleteDeviceProfileRequest')
@@ -987,6 +988,10 @@ module Aws::IoTWireless
 
     DakCertificateMetadataList.member = Shapes::ShapeRef.new(shape: DakCertificateMetadata)
 
+    DefaultSessionParametersMulticast.add_member(:dl_dr, Shapes::ShapeRef.new(shape: DlDr, location_name: "DlDr"))
+    DefaultSessionParametersMulticast.add_member(:dl_freq, Shapes::ShapeRef.new(shape: DlFreq, location_name: "DlFreq"))
+    DefaultSessionParametersMulticast.struct_class = Types::DefaultSessionParametersMulticast
+
     DeleteDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location: "uri", location_name: "Name"))
     DeleteDestinationRequest.struct_class = Types::DeleteDestinationRequest
 
@@ -1797,6 +1802,7 @@ module Aws::IoTWireless
     LoRaWANMulticast.add_member(:rf_region, Shapes::ShapeRef.new(shape: SupportedRfRegion, location_name: "RfRegion"))
     LoRaWANMulticast.add_member(:dl_class, Shapes::ShapeRef.new(shape: DlClass, location_name: "DlClass"))
     LoRaWANMulticast.add_member(:participating_gateways, Shapes::ShapeRef.new(shape: ParticipatingGatewaysMulticast, location_name: "ParticipatingGateways"))
+    LoRaWANMulticast.add_member(:default_session_parameters, Shapes::ShapeRef.new(shape: DefaultSessionParametersMulticast, location_name: "DefaultSessionParameters"))
     LoRaWANMulticast.struct_class = Types::LoRaWANMulticast
 
     LoRaWANMulticastGet.add_member(:rf_region, Shapes::ShapeRef.new(shape: SupportedRfRegion, location_name: "RfRegion"))
@@ -1804,6 +1810,7 @@ module Aws::IoTWireless
     LoRaWANMulticastGet.add_member(:number_of_devices_requested, Shapes::ShapeRef.new(shape: NumberOfDevicesRequested, location_name: "NumberOfDevicesRequested"))
     LoRaWANMulticastGet.add_member(:number_of_devices_in_group, Shapes::ShapeRef.new(shape: NumberOfDevicesInGroup, location_name: "NumberOfDevicesInGroup"))
     LoRaWANMulticastGet.add_member(:participating_gateways, Shapes::ShapeRef.new(shape: ParticipatingGatewaysMulticast, location_name: "ParticipatingGateways"))
+    LoRaWANMulticastGet.add_member(:default_session_parameters, Shapes::ShapeRef.new(shape: DefaultSessionParametersMulticast, location_name: "DefaultSessionParameters"))
     LoRaWANMulticastGet.struct_class = Types::LoRaWANMulticastGet
 
     LoRaWANMulticastMetadata.add_member(:f_port, Shapes::ShapeRef.new(shape: FPort, location_name: "FPort"))

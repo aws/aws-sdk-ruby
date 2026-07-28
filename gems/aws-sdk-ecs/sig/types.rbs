@@ -874,6 +874,8 @@ module Aws::ECS
     class DeploymentCircuitBreaker
       attr_accessor enable: bool
       attr_accessor rollback: bool
+      attr_accessor reset_on_healthy_task: bool
+      attr_accessor threshold_configuration: Types::ThresholdConfiguration
       SENSITIVE: []
     end
 
@@ -2189,6 +2191,11 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class RuntimePlatformOverride
+      attr_accessor cpu_architecture: ::String
+      SENSITIVE: []
+    end
+
     class S3FilesVolumeConfiguration
       attr_accessor file_system_arn: ::String
       attr_accessor root_directory: ::String
@@ -2442,6 +2449,7 @@ module Aws::ECS
       attr_accessor vpc_lattice_configurations: ::Array[Types::VpcLatticeConfiguration]
       attr_accessor resolved_configuration: Types::ResolvedConfiguration
       attr_accessor ecs_managed_resources: Types::ECSManagedResources
+      attr_accessor overrides: Types::ServiceRevisionOverrides
       attr_accessor monitoring: Types::MonitoringConfiguration
       SENSITIVE: []
     end
@@ -2449,6 +2457,11 @@ module Aws::ECS
     class ServiceRevisionLoadBalancer
       attr_accessor target_group_arn: ::String
       attr_accessor production_listener_rule: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceRevisionOverrides
+      attr_accessor runtime_platform: Types::RuntimePlatformOverride
       SENSITIVE: []
     end
 
@@ -2759,6 +2772,12 @@ module Aws::ECS
     class TaskVolumeConfiguration
       attr_accessor name: ::String
       attr_accessor managed_ebs_volume: Types::TaskManagedEBSVolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class ThresholdConfiguration
+      attr_accessor type: ("COUNT" | "BOUNDED_PERCENT" | "UNBOUNDED_PERCENT")
+      attr_accessor value: ::Integer
       SENSITIVE: []
     end
 

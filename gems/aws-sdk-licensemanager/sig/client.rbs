@@ -415,7 +415,8 @@ module Aws
                                     consumption_configuration: Params::consumption_configuration,
                                     status: ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED"),
                                     client_token: ::String,
-                                    ?source_version: ::String
+                                    ?source_version: ::String,
+                                    ?reset_usage: bool
                                   ) -> _CreateLicenseVersionResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseVersionResponseSuccess
 

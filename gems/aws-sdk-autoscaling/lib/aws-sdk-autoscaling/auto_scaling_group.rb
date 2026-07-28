@@ -1337,7 +1337,7 @@ module Aws::AutoScaling
     #       max_healthy_percentage: 1,
     #     },
     #     availability_zone_distribution: {
-    #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort
+    #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort, reservations-then-balanced
     #     },
     #     availability_zone_impairment_policy: {
     #       zonal_shift_enabled: false,

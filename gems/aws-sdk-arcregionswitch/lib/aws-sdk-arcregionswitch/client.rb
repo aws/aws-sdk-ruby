@@ -2202,6 +2202,21 @@ module Aws::ARCRegionswitch
     #   opposite region post-recovery is ran in. Required when starting a
     #   post-recovery execution.
     #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request and returns the result of the
+    #   original successful request. If you don't provide a client token, the
+    #   service automatically generates one. For more information about
+    #   idempotency, see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
     # @return [Types::StartPlanExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartPlanExecutionResponse#execution_id #execution_id} => String
@@ -2220,6 +2235,7 @@ module Aws::ARCRegionswitch
     #     comment: "ExecutionComment",
     #     latest_version: "String",
     #     recovery_execution_id: "RecoveryExecutionId",
+    #     client_token: "StartPlanExecutionRequestClientTokenString",
     #   })
     #
     # @example Response structure
@@ -2855,7 +2871,7 @@ module Aws::ARCRegionswitch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-arcregionswitch'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

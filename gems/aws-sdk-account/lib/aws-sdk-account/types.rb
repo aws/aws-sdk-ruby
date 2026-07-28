@@ -696,6 +696,59 @@ module Aws::Account
 
     # @!attribute [rw] account_id
     #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. To
+    #   use this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account. The specified account ID must be a member account in the
+    #   same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated admin][4] account assigned.
+    #
+    #   This operation can only be called from the management account or the
+    #   delegated administrator account of an organization for a member
+    #   account.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetPrimaryEmailUpdateStatusRequest AWS API Documentation
+    #
+    class GetPrimaryEmailUpdateStatusRequest < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the most recent primary email update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the most recent primary email update status
+    #   was last changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetPrimaryEmailUpdateStatusResponse AWS API Documentation
+    #
+    class GetPrimaryEmailUpdateStatusResponse < Struct.new(
+      :status,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
     #   account that you want to access or modify with this operation. If
     #   you don't specify this parameter, it defaults to the Amazon Web
     #   Services account of the identity used to call the operation. To use

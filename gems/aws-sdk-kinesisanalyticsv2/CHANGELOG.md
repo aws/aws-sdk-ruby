@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2026-07-17)
+------------------
+
+* Feature - Support for Flink 2.3 in Managed Service for Apache Flink
+
+1.94.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.93.0 (2026-05-28)
 ------------------
 

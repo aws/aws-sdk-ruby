@@ -537,6 +537,125 @@ module Aws::SageMakerFeatureStoreRuntime
       req.send_request(options)
     end
 
+    # Writes a batch of `Records` to one or more `FeatureGroup`s. Use this
+    # API for bulk ingestion of records into the `OnlineStore` and
+    # `OfflineStore`.
+    #
+    # You can set the ingested records to expire at a given time to live
+    # (TTL) duration after the record's event time by specifying the
+    # `TtlDuration` parameter. A request level `TtlDuration` applies to all
+    # entries that do not specify their own `TtlDuration`.
+    #
+    # @option params [required, Array<Types::BatchWriteRecordEntry>] :entries
+    #   A list of records to write. Each entry specifies the `FeatureGroup`,
+    #   the record data, and optionally target stores and a TTL duration.
+    #
+    # @option params [Types::TtlDuration] :ttl_duration
+    #   Time to live duration applied to all entries in the batch that do not
+    #   specify their own `TtlDuration`; `ExpiresAt` = `EventTime` +
+    #   `TtlDuration`. For information on HardDelete, see the
+    #   [DeleteRecord][1] API in the Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #
+    # @return [Types::BatchWriteRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchWriteRecordResponse#errors #errors} => Array&lt;Types::BatchWriteRecordError&gt;
+    #   * {Types::BatchWriteRecordResponse#unprocessed_entries #unprocessed_entries} => Array&lt;Types::BatchWriteRecordEntry&gt;
+    #
+    #
+    # @example Example: Write records to multiple feature groups
+    #
+    #   resp = client.batch_write_record({
+    #     entries: [
+    #       {
+    #         feature_group_name: "my-feature-group", 
+    #         record: [
+    #           {
+    #             feature_name: "customer_id", 
+    #             value_as_string: "cust-001", 
+    #           }, 
+    #           {
+    #             feature_name: "age", 
+    #             value_as_string: "25", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     unprocessed_entries: [
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_write_record({
+    #     entries: [ # required
+    #       {
+    #         feature_group_name: "FeatureGroupNameOrArn", # required
+    #         record: [ # required
+    #           {
+    #             feature_name: "FeatureName", # required
+    #             value_as_string: "ValueAsString",
+    #             value_as_string_list: ["ValueAsString"],
+    #           },
+    #         ],
+    #         target_stores: ["OnlineStore"], # accepts OnlineStore, OfflineStore
+    #         ttl_duration: {
+    #           unit: "Seconds", # required, accepts Seconds, Minutes, Hours, Days, Weeks
+    #           value: 1, # required
+    #         },
+    #       },
+    #     ],
+    #     ttl_duration: {
+    #       unit: "Seconds", # required, accepts Seconds, Minutes, Hours, Days, Weeks
+    #       value: 1, # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].entry.feature_group_name #=> String
+    #   resp.errors[0].entry.record #=> Array
+    #   resp.errors[0].entry.record[0].feature_name #=> String
+    #   resp.errors[0].entry.record[0].value_as_string #=> String
+    #   resp.errors[0].entry.record[0].value_as_string_list #=> Array
+    #   resp.errors[0].entry.record[0].value_as_string_list[0] #=> String
+    #   resp.errors[0].entry.target_stores #=> Array
+    #   resp.errors[0].entry.target_stores[0] #=> String, one of "OnlineStore", "OfflineStore"
+    #   resp.errors[0].entry.ttl_duration.unit #=> String, one of "Seconds", "Minutes", "Hours", "Days", "Weeks"
+    #   resp.errors[0].entry.ttl_duration.value #=> Integer
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.unprocessed_entries #=> Array
+    #   resp.unprocessed_entries[0].feature_group_name #=> String
+    #   resp.unprocessed_entries[0].record #=> Array
+    #   resp.unprocessed_entries[0].record[0].feature_name #=> String
+    #   resp.unprocessed_entries[0].record[0].value_as_string #=> String
+    #   resp.unprocessed_entries[0].record[0].value_as_string_list #=> Array
+    #   resp.unprocessed_entries[0].record[0].value_as_string_list[0] #=> String
+    #   resp.unprocessed_entries[0].target_stores #=> Array
+    #   resp.unprocessed_entries[0].target_stores[0] #=> String, one of "OnlineStore", "OfflineStore"
+    #   resp.unprocessed_entries[0].ttl_duration.unit #=> String, one of "Seconds", "Minutes", "Hours", "Days", "Weeks"
+    #   resp.unprocessed_entries[0].ttl_duration.value #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/BatchWriteRecord AWS API Documentation
+    #
+    # @overload batch_write_record(params = {})
+    # @param [Hash] params ({})
+    def batch_write_record(params = {}, options = {})
+      req = build_request(:batch_write_record, params)
+      req.send_request(options)
+    end
+
     # Deletes a `Record` from a `FeatureGroup` in the `OnlineStore`. Feature
     # Store supports both `SoftDelete` and `HardDelete`. For `SoftDelete`
     # (default), feature columns are set to `null` and the record is no
@@ -570,7 +689,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records-offline-store.html#feature-store-delete-records-offline-store
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records.html#feature-store-delete-records-offline-store
     #
     # @option params [required, String] :feature_group_name
     #   The name or Amazon Resource Name (ARN) of the feature group to delete
@@ -665,6 +784,75 @@ module Aws::SageMakerFeatureStoreRuntime
     # @param [Hash] params ({})
     def get_record(params = {}, options = {})
       req = build_request(:get_record, params)
+      req.send_request(options)
+    end
+
+    # Lists the `RecordIdentifier` values of all records stored in a
+    # `FeatureGroup`'s `OnlineStore`. This enables you to discover which
+    # records exist without retrieving the full record data.
+    #
+    # @option params [required, String] :feature_group_name
+    #   The name or Amazon Resource Name (ARN) of the feature group to list
+    #   records from.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of record identifiers to return in a single page of
+    #   results. For the `InMemory` tier, this value is a hint and not a
+    #   strict requirement. The response may contain more or fewer results
+    #   than the specified `MaxResults`.
+    #
+    # @option params [String] :next_token
+    #   A token to resume pagination of `ListRecords` results.
+    #
+    # @option params [Boolean] :include_soft_deleted_records
+    #   If set to `true`, the result includes records that have been soft
+    #   deleted.
+    #
+    # @return [Types::ListRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecordsResponse#record_identifiers #record_identifiers} => Array&lt;String&gt;
+    #   * {Types::ListRecordsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List record identifiers from a feature group
+    #
+    #   resp = client.list_records({
+    #     feature_group_name: "my-feature-group", 
+    #     max_results: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "eyJsYXN0RXZhbHVhdGVkS2V5IjoiYWJjMTIzIn0=", 
+    #     record_identifiers: [
+    #       "record-id-1", 
+    #       "record-id-2", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_records({
+    #     feature_group_name: "FeatureGroupNameOrArn", # required
+    #     max_results: 1,
+    #     next_token: "ListRecordsNextToken",
+    #     include_soft_deleted_records: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.record_identifiers #=> Array
+    #   resp.record_identifiers[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/ListRecords AWS API Documentation
+    #
+    # @overload list_records(params = {})
+    # @param [Hash] params ({})
+    def list_records(params = {}, options = {})
+      req = build_request(:list_records, params)
       req.send_request(options)
     end
 
@@ -764,7 +952,7 @@ module Aws::SageMakerFeatureStoreRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemakerfeaturestoreruntime'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

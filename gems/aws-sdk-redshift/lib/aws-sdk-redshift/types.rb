@@ -2014,9 +2014,9 @@ module Aws::Redshift
     #   about node types, go to [ Working with Clusters][1] in the *Amazon
     #   Redshift Cluster Management Guide*.
     #
-    #   Valid Values: `dc2.large` \| `dc2.8xlarge`\| `rg.xlarge` \|
-    #   `rg.4xlarge` \| `ra3.large` \| `ra3.xlplus` \| `ra3.4xlarge` \|
-    #   `ra3.16xlarge`
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `rg.large` \|
+    #   `rg.xlarge` \| `rg.4xlarge` \| `rg.12xlarge` \| `ra3.large` \|
+    #   `ra3.xlplus` \| `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -3020,6 +3020,52 @@ module Aws::Redshift
     end
 
     # @!attribute [rw] idc_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   used to create the Amazon Redshift Query Editor (QEV2) managed
+    #   application.
+    #   @return [String]
+    #
+    # @!attribute [rw] qev_2_idc_application_name
+    #   The name of the Amazon Redshift Query Editor (QEV2) application in
+    #   IAM Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_display_name
+    #   The display name for the Amazon Redshift Query Editor (QEV2) IAM
+    #   Identity Center application. It appears in the console.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to associate with the application. Tags are key-value
+    #   pairs that you can use to organize and identify your resources.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateQev2IdcApplicationMessage AWS API Documentation
+    #
+    class CreateQev2IdcApplicationMessage < Struct.new(
+      :idc_instance_arn,
+      :qev_2_idc_application_name,
+      :idc_display_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] qev_2_idc_application
+    #   Contains configuration and status information for an Amazon Redshift
+    #   Query Editor (QEV2) application that is registered with IAM Identity
+    #   Center.
+    #   @return [Types::Qev2IdcApplication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateQev2IdcApplicationResult AWS API Documentation
+    #
+    class CreateQev2IdcApplicationResult < Struct.new(
+      :qev_2_idc_application)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] idc_instance_arn
     #   The Amazon resource name (ARN) of the IAM Identity Center instance
     #   where Amazon Redshift creates a new managed application.
     #   @return [String]
@@ -3849,6 +3895,19 @@ module Aws::Redshift
     #
     class DeleteIntegrationMessage < Struct.new(
       :integration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] qev_2_idc_application_arn
+    #   The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor
+    #   (QEV2) IAM Identity Center application to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteQev2IdcApplicationMessage AWS API Documentation
+    #
+    class DeleteQev2IdcApplicationMessage < Struct.new(
+      :qev_2_idc_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5526,6 +5585,61 @@ module Aws::Redshift
     #
     class DescribePartnersOutputMessage < Struct.new(
       :partner_integration_info_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] qev_2_idc_application_arn
+    #   The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor
+    #   (QEV2) application that integrates with IAM Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   MaxRecords value, a value is returned in a marker field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the Marker parameter and retrying the
+    #   command. If the Marker field is empty, all response records have
+    #   been retrieved for the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeQev2IdcApplicationsMessage AWS API Documentation
+    #
+    class DescribeQev2IdcApplicationsMessage < Struct.new(
+      :qev_2_idc_application_arn,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] qev_2_idc_applications
+    #   The list of Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    #   applications.
+    #   @return [Array<Types::Qev2IdcApplication>]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the Marker parameter and retrying the
+    #   command. If the Marker field is empty, all response records have
+    #   been retrieved for the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeQev2IdcApplicationsResult AWS API Documentation
+    #
+    class DescribeQev2IdcApplicationsResult < Struct.new(
+      :qev_2_idc_applications,
+      :marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8374,9 +8488,9 @@ module Aws::Redshift
     #   Clusters in Amazon Redshift][1] in the *Amazon Redshift Cluster
     #   Management Guide*.
     #
-    #   Valid Values: `dc2.large` \| `dc2.8xlarge`\| `rg.xlarge` \|
-    #   `rg.4xlarge` \| `ra3.large` \| `ra3.xlplus` \| `ra3.4xlarge` \|
-    #   `ra3.16xlarge`
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `rg.large` \|
+    #   `rg.xlarge` \| `rg.4xlarge` \| `rg.12xlarge` \| `ra3.large` \|
+    #   `ra3.xlplus` \| `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -9093,6 +9207,39 @@ module Aws::Redshift
       :lakehouse_idc_registration,
       :lakehouse_idc_application_arn,
       :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] qev_2_idc_application_arn
+    #   The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor
+    #   (QEV2) application that integrates with IAM Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_display_name
+    #   The display name for the Amazon Redshift Query Editor (QEV2) IAM
+    #   Identity Center application. It appears in the console.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyQev2IdcApplicationMessage AWS API Documentation
+    #
+    class ModifyQev2IdcApplicationMessage < Struct.new(
+      :qev_2_idc_application_arn,
+      :idc_display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] qev_2_idc_application
+    #   Contains configuration and status information for an Amazon Redshift
+    #   Query Editor (QEV2) application that is registered with IAM Identity
+    #   Center.
+    #   @return [Types::Qev2IdcApplication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyQev2IdcApplicationResult AWS API Documentation
+    #
+    class ModifyQev2IdcApplicationResult < Struct.new(
+      :qev_2_idc_application)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9878,6 +10025,76 @@ module Aws::Redshift
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Contains configuration and status information for an Amazon Redshift
+    # Query Editor (QEV2) application that is registered with IAM Identity
+    # Center.
+    #
+    # @!attribute [rw] idc_instance_arn
+    #   The Amazon Resource Name (ARN) for the IAM Identity Center instance
+    #   that the Amazon Redshift Query Editor (QEV2) application integrates
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] qev_2_idc_application_name
+    #   The name of the Amazon Redshift Query Editor (QEV2) application in
+    #   IAM Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] qev_2_idc_application_arn
+    #   The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor
+    #   (QEV2) application that integrates with IAM Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_managed_application_arn
+    #   The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor
+    #   (QEV2) IAM Identity Center managed application.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_onboard_status
+    #   The onboarding status for the Amazon Redshift Query Editor (QEV2)
+    #   IAM Identity Center application.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_display_name
+    #   The display name for the Amazon Redshift Query Editor (QEV2) IAM
+    #   Identity Center application. It appears in the console.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the application. Tags are key-value
+    #   pairs that you can use to organize and identify your resources.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Qev2IdcApplication AWS API Documentation
+    #
+    class Qev2IdcApplication < Struct.new(
+      :idc_instance_arn,
+      :qev_2_idc_application_name,
+      :qev_2_idc_application_arn,
+      :idc_managed_application_arn,
+      :idc_onboard_status,
+      :idc_display_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    # application already exists. Use a different application name or
+    # describe existing applications to find the ARN.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Qev2IdcApplicationAlreadyExistsFault AWS API Documentation
+    #
+    class Qev2IdcApplicationAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    # application doesn't exist. Verify that the application ARN is correct
+    # and that the application exists in this Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Qev2IdcApplicationNotExistsFault AWS API Documentation
+    #
+    class Qev2IdcApplicationNotExistsFault < Aws::EmptyStructure; end
 
     # The S3 Access Grants scope.
     #

@@ -558,11 +558,21 @@ module Aws::PartnerCentralSelling
     #   positioned as part of the overall AWS opportunity.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] aws_marketplace_solutions
+    #   The AWS Marketplace solution ARNs associated with this opportunity.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aws_marketplace_products
+    #   The AWS Marketplace product ARNs associated with this opportunity.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsOpportunityRelatedEntities AWS API Documentation
     #
     class AwsOpportunityRelatedEntities < Struct.new(
       :aws_products,
-      :solutions)
+      :solutions,
+      :aws_marketplace_solutions,
+      :aws_marketplace_products)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4996,6 +5006,11 @@ module Aws::PartnerCentralSelling
     #   categories, such as `Software`, `Consulting`, or `Managed Services`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] aws_marketplace_solution_arn
+    #   Filters results by AWS Marketplace solution ARN. You can provide up
+    #   to 10 ARNs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListSolutionsRequest AWS API Documentation
     #
     class ListSolutionsRequest < Struct.new(
@@ -5005,7 +5020,8 @@ module Aws::PartnerCentralSelling
       :sort,
       :status,
       :identifier,
-      :category)
+      :category,
+      :aws_marketplace_solution_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6263,13 +6279,27 @@ module Aws::PartnerCentralSelling
     #   [1]: https://github.com/aws-samples/partner-crm-integration-samples/blob/main/resources/aws_products.json
     #   @return [Array<String>]
     #
+    # @!attribute [rw] aws_marketplace_solutions
+    #   Specifies the AWS Marketplace solutions to associate with the
+    #   `Opportunity`. Each value is an Amazon Resource Name (ARN) that
+    #   identifies a solution listing in AWS Marketplace.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aws_marketplace_products
+    #   Specifies the AWS Marketplace products to associate with the
+    #   `Opportunity`. Each value is an Amazon Resource Name (ARN) that
+    #   identifies a product listing in AWS Marketplace.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/RelatedEntityIdentifiers AWS API Documentation
     #
     class RelatedEntityIdentifiers < Struct.new(
       :aws_marketplace_offers,
       :aws_marketplace_offer_sets,
       :solutions,
-      :aws_products)
+      :aws_products,
+      :aws_marketplace_solutions,
+      :aws_marketplace_products)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6551,6 +6581,11 @@ module Aws::PartnerCentralSelling
     #   audit.
     #   @return [Time]
     #
+    # @!attribute [rw] aws_marketplace_solution_arn
+    #   The Amazon Resource Name (ARN) of the AWS Marketplace solution
+    #   associated with this partner solution.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/SolutionBase AWS API Documentation
     #
     class SolutionBase < Struct.new(
@@ -6560,7 +6595,8 @@ module Aws::PartnerCentralSelling
       :name,
       :status,
       :category,
-      :created_date)
+      :created_date,
+      :aws_marketplace_solution_arn)
       SENSITIVE = []
       include Aws::Structure
     end

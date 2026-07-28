@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2026-07-21)
+------------------
+
+* Feature - This release adds support for custom plugins in Amazon Timestream for InfluxDB. InfluxDB 3 Core and Enterprise DB parameter groups now accept a plugin repository URL and optional AWS Secrets Manager secret ARN, so the Processing Engine loads your Python plugins from a public or private repository.
+
+1.44.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.43.0 (2026-05-28)
 ------------------
 

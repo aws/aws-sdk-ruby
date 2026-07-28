@@ -797,6 +797,18 @@ module Aws::CustomerProfiles
       end
     end
 
+    class DiversityColumn
+      attr_accessor name: ::String
+      attr_accessor cap_type: ("PERCENTAGE" | "VALUE")
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class DiversityConfig
+      attr_accessor diversity_columns: ::Array[Types::DiversityColumn]
+      SENSITIVE: []
+    end
+
     class DomainObjectTypeField
       attr_accessor source: ::String
       attr_accessor target: ::String
@@ -1275,6 +1287,7 @@ module Aws::CustomerProfiles
       attr_accessor candidate_ids: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor metadata_config: Types::MetadataConfig
+      attr_accessor diversity_config: Types::RecommendationDiversityConfig
       SENSITIVE: [:context]
     end
 
@@ -1319,6 +1332,7 @@ module Aws::CustomerProfiles
       attr_accessor created_at: ::Time
       attr_accessor failure_reason: ::String
       attr_accessor latest_recommender_update: Types::RecommenderUpdate
+      attr_accessor active_recommender_version_name: ::String
       attr_accessor training_metrics: ::Array[Types::TrainingMetrics]
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
@@ -2308,12 +2322,19 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class RecommendationDiversityConfig
+      attr_accessor enabled: bool
+      attr_accessor values: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
     class RecommenderConfig
       attr_accessor events_config: Types::EventsConfig
       attr_accessor training_frequency: ::Integer
       attr_accessor inference_config: Types::InferenceConfig
       attr_accessor included_columns: ::Hash[::String, ::Array[::String]]
       attr_accessor excluded_columns: ::Hash[::String, ::Array[::String]]
+      attr_accessor diversity_config: Types::DiversityConfig
       SENSITIVE: []
     end
 
@@ -2385,6 +2406,7 @@ module Aws::CustomerProfiles
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor failure_reason: ::String
+      attr_accessor recommender_version_name: ::String
       SENSITIVE: []
     end
 
@@ -2607,6 +2629,7 @@ module Aws::CustomerProfiles
     class TrainingMetrics
       attr_accessor time: ::Time
       attr_accessor metrics: ::Hash[("hit" | "coverage" | "recall" | "popularity" | "freshness" | "similarity" | "mean_reciprocal_rank_at_25" | "normalized_discounted_cumulative_gain_at_5" | "normalized_discounted_cumulative_gain_at_10" | "normalized_discounted_cumulative_gain_at_25" | "precision_at_5" | "precision_at_10" | "precision_at_25"), ::Float]
+      attr_accessor recommender_version_name: ::String
       SENSITIVE: []
     end
 
@@ -2785,6 +2808,7 @@ module Aws::CustomerProfiles
       attr_accessor recommender_name: ::String
       attr_accessor description: ::String
       attr_accessor recommender_config: Types::RecommenderConfig
+      attr_accessor recommender_version_name: ::String
       SENSITIVE: [:description]
     end
 

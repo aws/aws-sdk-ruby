@@ -643,6 +643,9 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"],
     #         allowed_scopes: ["AllowedScopeType"],
+    #         advertised_scope_mapping: {
+    #           "AllowedScopeType" => "AllowedScopeType",
+    #         },
     #         custom_claims: [
     #           {
     #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
@@ -918,6 +921,13 @@ module Aws::BedrockAgentCoreControl
     # @option params [Array<Types::Certificate>] :certificates
     #   A list of certificates to install in the browser.
     #
+    # @option params [Array<Types::ToolsFileSystemConfiguration>] :filesystem_configurations
+    #   The file system configurations to mount into the browser. Use these
+    #   configurations to mount your own Amazon Simple Storage Service (Amazon
+    #   S3) Files or Amazon Elastic File System (Amazon EFS) access points.
+    #   Your sessions can then access your data. If you don't specify this
+    #   field, no file systems are mounted.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
@@ -982,6 +992,20 @@ module Aws::BedrockAgentCoreControl
     #           secrets_manager: {
     #             secret_arn: "ToolSecretArn", # required
     #           },
+    #         },
+    #       },
+    #     ],
+    #     filesystem_configurations: [
+    #       {
+    #         s3_files_configuration: {
+    #           access_point_arn: "S3FilesAccessPointArn", # required
+    #           mount_path: "MountPath", # required
+    #           file_system_arn: "S3FilesFileSystemArn", # required
+    #         },
+    #         efs_configuration: {
+    #           access_point_arn: "EfsAccessPointArn", # required
+    #           mount_path: "MountPath", # required
+    #           file_system_arn: "EfsFileSystemArn", # required
     #         },
     #       },
     #     ],
@@ -1089,6 +1113,13 @@ module Aws::BedrockAgentCoreControl
     # @option params [Array<Types::Certificate>] :certificates
     #   A list of certificates to install in the code interpreter.
     #
+    # @option params [Array<Types::ToolsFileSystemConfiguration>] :filesystem_configurations
+    #   The file system configurations to mount into the code interpreter. Use
+    #   these configurations to mount your own Amazon Simple Storage Service
+    #   (Amazon S3) Files or Amazon Elastic File System (Amazon EFS) access
+    #   points. Your sessions can then access your data. If you don't specify
+    #   this field, no file systems are mounted.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
@@ -1130,6 +1161,20 @@ module Aws::BedrockAgentCoreControl
     #           secrets_manager: {
     #             secret_arn: "ToolSecretArn", # required
     #           },
+    #         },
+    #       },
+    #     ],
+    #     filesystem_configurations: [
+    #       {
+    #         s3_files_configuration: {
+    #           access_point_arn: "S3FilesAccessPointArn", # required
+    #           mount_path: "MountPath", # required
+    #           file_system_arn: "S3FilesFileSystemArn", # required
+    #         },
+    #         efs_configuration: {
+    #           access_point_arn: "EfsAccessPointArn", # required
+    #           mount_path: "MountPath", # required
+    #           file_system_arn: "EfsFileSystemArn", # required
     #         },
     #       },
     #     ],
@@ -1655,6 +1700,9 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"],
     #         allowed_scopes: ["AllowedScopeType"],
+    #         advertised_scope_mapping: {
+    #           "AllowedScopeType" => "AllowedScopeType",
+    #         },
     #         custom_claims: [
     #           {
     #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
@@ -1772,6 +1820,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -2154,6 +2204,7 @@ module Aws::BedrockAgentCoreControl
     #         connector: {
     #           source: { # required
     #             connector_id: "ConnectorId", # required
+    #             version: "ConnectorVersion",
     #           },
     #           enabled: ["String"],
     #           configurations: [
@@ -2336,6 +2387,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_filters[0].methods #=> Array
     #   resp.target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_filters[0].methods[0] #=> String, one of "GET", "DELETE", "HEAD", "OPTIONS", "PATCH", "PUT", "POST"
     #   resp.target_configuration.mcp.connector.source.connector_id #=> String
+    #   resp.target_configuration.mcp.connector.source.version #=> String
     #   resp.target_configuration.mcp.connector.enabled #=> Array
     #   resp.target_configuration.mcp.connector.enabled[0] #=> String
     #   resp.target_configuration.mcp.connector.configurations #=> Array
@@ -2547,6 +2599,9 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"],
     #         allowed_scopes: ["AllowedScopeType"],
+    #         advertised_scope_mapping: {
+    #           "AllowedScopeType" => "AllowedScopeType",
+    #         },
     #         custom_claims: [
     #           {
     #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
@@ -2632,6 +2687,8 @@ module Aws::BedrockAgentCoreControl
     #         temperature: 1.0,
     #         top_p: 1.0,
     #         top_k: 1,
+    #         additional_params: {
+    #         },
     #       },
     #       lite_llm_model_config: {
     #         model_id: "ModelId", # required
@@ -2850,6 +2907,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -4183,6 +4242,9 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"],
     #         allowed_scopes: ["AllowedScopeType"],
+    #         advertised_scope_mapping: {
+    #           "AllowedScopeType" => "AllowedScopeType",
+    #         },
     #         custom_claims: [
     #           {
     #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
@@ -4261,6 +4323,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -4600,6 +4664,9 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"],
     #         allowed_scopes: ["AllowedScopeType"],
+    #         advertised_scope_mapping: {
+    #           "AllowedScopeType" => "AllowedScopeType",
+    #         },
     #         custom_claims: [
     #           {
     #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
@@ -5503,6 +5570,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -6126,6 +6195,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -6288,6 +6359,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetBrowserResponse#browser_signing #browser_signing} => Types::BrowserSigningConfigOutput
     #   * {Types::GetBrowserResponse#enterprise_policies #enterprise_policies} => Array&lt;Types::BrowserEnterprisePolicy&gt;
     #   * {Types::GetBrowserResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
+    #   * {Types::GetBrowserResponse#filesystem_configurations #filesystem_configurations} => Array&lt;Types::ToolsFileSystemConfiguration&gt;
     #   * {Types::GetBrowserResponse#status #status} => String
     #   * {Types::GetBrowserResponse#failure_reason #failure_reason} => String
     #   * {Types::GetBrowserResponse#created_at #created_at} => Time
@@ -6324,6 +6396,13 @@ module Aws::BedrockAgentCoreControl
     #   resp.enterprise_policies[0].type #=> String, one of "MANAGED", "RECOMMENDED"
     #   resp.certificates #=> Array
     #   resp.certificates[0].location.secrets_manager.secret_arn #=> String
+    #   resp.filesystem_configurations #=> Array
+    #   resp.filesystem_configurations[0].s3_files_configuration.access_point_arn #=> String
+    #   resp.filesystem_configurations[0].s3_files_configuration.mount_path #=> String
+    #   resp.filesystem_configurations[0].s3_files_configuration.file_system_arn #=> String
+    #   resp.filesystem_configurations[0].efs_configuration.access_point_arn #=> String
+    #   resp.filesystem_configurations[0].efs_configuration.mount_path #=> String
+    #   resp.filesystem_configurations[0].efs_configuration.file_system_arn #=> String
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "READY", "DELETING", "DELETE_FAILED", "DELETED"
     #   resp.failure_reason #=> String
     #   resp.created_at #=> Time
@@ -6399,6 +6478,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetCodeInterpreterResponse#network_configuration #network_configuration} => Types::CodeInterpreterNetworkConfiguration
     #   * {Types::GetCodeInterpreterResponse#status #status} => String
     #   * {Types::GetCodeInterpreterResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
+    #   * {Types::GetCodeInterpreterResponse#filesystem_configurations #filesystem_configurations} => Array&lt;Types::ToolsFileSystemConfiguration&gt;
     #   * {Types::GetCodeInterpreterResponse#failure_reason #failure_reason} => String
     #   * {Types::GetCodeInterpreterResponse#created_at #created_at} => Time
     #   * {Types::GetCodeInterpreterResponse#last_updated_at #last_updated_at} => Time
@@ -6425,6 +6505,13 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "READY", "DELETING", "DELETE_FAILED", "DELETED"
     #   resp.certificates #=> Array
     #   resp.certificates[0].location.secrets_manager.secret_arn #=> String
+    #   resp.filesystem_configurations #=> Array
+    #   resp.filesystem_configurations[0].s3_files_configuration.access_point_arn #=> String
+    #   resp.filesystem_configurations[0].s3_files_configuration.mount_path #=> String
+    #   resp.filesystem_configurations[0].s3_files_configuration.file_system_arn #=> String
+    #   resp.filesystem_configurations[0].efs_configuration.access_point_arn #=> String
+    #   resp.filesystem_configurations[0].efs_configuration.mount_path #=> String
+    #   resp.filesystem_configurations[0].efs_configuration.file_system_arn #=> String
     #   resp.failure_reason #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
@@ -6759,6 +6846,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -6979,6 +7068,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_filters[0].methods #=> Array
     #   resp.target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_filters[0].methods[0] #=> String, one of "GET", "DELETE", "HEAD", "OPTIONS", "PATCH", "PUT", "POST"
     #   resp.target_configuration.mcp.connector.source.connector_id #=> String
+    #   resp.target_configuration.mcp.connector.source.version #=> String
     #   resp.target_configuration.mcp.connector.enabled #=> Array
     #   resp.target_configuration.mcp.connector.enabled[0] #=> String
     #   resp.target_configuration.mcp.connector.configurations #=> Array
@@ -7173,6 +7263,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -7787,6 +7879,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -8225,6 +8319,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -10672,6 +10768,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.targets[0].target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_filters[0].methods #=> Array
     #   resp.targets[0].target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_filters[0].methods[0] #=> String, one of "GET", "DELETE", "HEAD", "OPTIONS", "PATCH", "PUT", "POST"
     #   resp.targets[0].target_configuration.mcp.connector.source.connector_id #=> String
+    #   resp.targets[0].target_configuration.mcp.connector.source.version #=> String
     #   resp.targets[0].target_configuration.mcp.connector.enabled #=> Array
     #   resp.targets[0].target_configuration.mcp.connector.enabled[0] #=> String
     #   resp.targets[0].target_configuration.mcp.connector.configurations #=> Array
@@ -10915,6 +11012,9 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"],
     #         allowed_scopes: ["AllowedScopeType"],
+    #         advertised_scope_mapping: {
+    #           "AllowedScopeType" => "AllowedScopeType",
+    #         },
     #         custom_claims: [
     #           {
     #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
@@ -11597,6 +11697,9 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"],
     #         allowed_scopes: ["AllowedScopeType"],
+    #         advertised_scope_mapping: {
+    #           "AllowedScopeType" => "AllowedScopeType",
+    #         },
     #         custom_claims: [
     #           {
     #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
@@ -11719,6 +11822,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -12078,6 +12183,7 @@ module Aws::BedrockAgentCoreControl
     #         connector: {
     #           source: { # required
     #             connector_id: "ConnectorId", # required
+    #             version: "ConnectorVersion",
     #           },
     #           enabled: ["String"],
     #           configurations: [
@@ -12260,6 +12366,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_filters[0].methods #=> Array
     #   resp.target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_filters[0].methods[0] #=> String, one of "GET", "DELETE", "HEAD", "OPTIONS", "PATCH", "PUT", "POST"
     #   resp.target_configuration.mcp.connector.source.connector_id #=> String
+    #   resp.target_configuration.mcp.connector.source.version #=> String
     #   resp.target_configuration.mcp.connector.enabled #=> Array
     #   resp.target_configuration.mcp.connector.enabled[0] #=> String
     #   resp.target_configuration.mcp.connector.configurations #=> Array
@@ -12477,6 +12584,9 @@ module Aws::BedrockAgentCoreControl
     #           allowed_audience: ["AllowedAudience"],
     #           allowed_clients: ["AllowedClient"],
     #           allowed_scopes: ["AllowedScopeType"],
+    #           advertised_scope_mapping: {
+    #             "AllowedScopeType" => "AllowedScopeType",
+    #           },
     #           custom_claims: [
     #             {
     #               inbound_token_claim_name: "InboundTokenClaimNameType", # required
@@ -12563,6 +12673,8 @@ module Aws::BedrockAgentCoreControl
     #         temperature: 1.0,
     #         top_p: 1.0,
     #         top_k: 1,
+    #         additional_params: {
+    #         },
     #       },
     #       lite_llm_model_config: {
     #         model_id: "ModelId", # required
@@ -12780,6 +12892,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -14213,6 +14327,9 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"],
     #         allowed_scopes: ["AllowedScopeType"],
+    #         advertised_scope_mapping: {
+    #           "AllowedScopeType" => "AllowedScopeType",
+    #         },
     #         custom_claims: [
     #           {
     #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
@@ -14513,6 +14630,9 @@ module Aws::BedrockAgentCoreControl
     #           allowed_audience: ["AllowedAudience"],
     #           allowed_clients: ["AllowedClient"],
     #           allowed_scopes: ["AllowedScopeType"],
+    #           advertised_scope_mapping: {
+    #             "AllowedScopeType" => "AllowedScopeType",
+    #           },
     #           custom_claims: [
     #             {
     #               inbound_token_claim_name: "InboundTokenClaimNameType", # required
@@ -14593,6 +14713,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.advertised_scope_mapping["AllowedScopeType"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
@@ -14957,7 +15079,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

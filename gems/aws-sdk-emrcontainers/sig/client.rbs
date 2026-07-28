@@ -152,7 +152,8 @@ module Aws
                                      ?certificate_arn: ::String,
                                      ?configuration_overrides: Params::configuration_overrides,
                                      client_token: ::String,
-                                     ?tags: Hash[::String, ::String]
+                                     ?tags: Hash[::String, ::String],
+                                     ?session_idle_timeout_in_minutes: ::Integer
                                    ) -> _CreateManagedEndpointResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateManagedEndpointResponseSuccess
 
@@ -186,6 +187,17 @@ module Aws
                                                    }?
                                                  }?
                                                }?
+                                             }?,
+                                             authentication_configuration: {
+                                               identity_center_configuration: {
+                                                 enable_identity_center: bool?,
+                                                 identity_center_application_assignment_required: bool?,
+                                                 identity_center_instance_arn: ::String?,
+                                                 emr_identity_center_application_arn: ::String?
+                                               }?,
+                                               iam_configuration: {
+                                                 system_role: ::String?
+                                               }?
                                              }?
                                            },
                                            ?tags: Hash[::String, ::String]
@@ -204,7 +216,12 @@ module Aws
                                     container_provider: Params::container_provider,
                                     client_token: ::String,
                                     ?tags: Hash[::String, ::String],
-                                    ?security_configuration_id: ::String
+                                    ?security_configuration_id: ::String,
+                                    ?session_enabled: bool,
+                                    ?scheduler_configuration: {
+                                      max_in_queue_job_runs: ::Integer?,
+                                      max_concurrent_job_runs: ::Integer?
+                                    }
                                   ) -> _CreateVirtualClusterResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVirtualClusterResponseSuccess
 
@@ -229,6 +246,16 @@ module Aws
                                      virtual_cluster_id: ::String
                                    ) -> _DeleteManagedEndpointResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteManagedEndpointResponseSuccess
+
+      interface _DeleteSecurityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSecurityConfigurationResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#delete_security_configuration-instance_method
+      def delete_security_configuration: (
+                                           id: ::String
+                                         ) -> _DeleteSecurityConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSecurityConfigurationResponseSuccess
 
       interface _DeleteVirtualClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVirtualClusterResponse]
@@ -296,6 +323,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedEndpointSessionCredentialsResponse]
         def id: () -> ::String
         def credentials: () -> Types::Credentials
+        def endpoint_credentials: () -> Types::Credentials
         def expires_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#get_managed_endpoint_session_credentials-instance_method
@@ -444,6 +472,21 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateVirtualClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVirtualClusterResponse]
+        def virtual_cluster: () -> Types::VirtualCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#update_virtual_cluster-instance_method
+      def update_virtual_cluster: (
+                                    id: ::String,
+                                    ?scheduler_configuration: {
+                                      max_in_queue_job_runs: ::Integer?,
+                                      max_concurrent_job_runs: ::Integer?
+                                    },
+                                    client_token: ::String
+                                  ) -> _UpdateVirtualClusterResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVirtualClusterResponseSuccess
     end
   end
 end

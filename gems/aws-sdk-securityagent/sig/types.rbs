@@ -2039,6 +2039,7 @@ module Aws::SecurityAgent
       attr_accessor target_endpoint: Types::Endpoint
       attr_accessor execution_status: ("IN_PROGRESS" | "ABORTED" | "COMPLETED" | "INTERNAL_ERROR" | "FAILED")
       attr_accessor logs_location: Types::LogLocation
+      attr_accessor task_hours: ::Float
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -2052,6 +2053,7 @@ module Aws::SecurityAgent
       attr_accessor title: ::String
       attr_accessor risk_type: ("CROSS_SITE_SCRIPTING" | "DEFAULT_CREDENTIALS" | "INSECURE_DIRECT_OBJECT_REFERENCE" | "PRIVILEGE_ESCALATION" | "SERVER_SIDE_TEMPLATE_INJECTION" | "COMMAND_INJECTION" | "CODE_INJECTION" | "SQL_INJECTION" | "ARBITRARY_FILE_UPLOAD" | "INSECURE_DESERIALIZATION" | "LOCAL_FILE_INCLUSION" | "INFORMATION_DISCLOSURE" | "PATH_TRAVERSAL" | "SERVER_SIDE_REQUEST_FORGERY" | "JSON_WEB_TOKEN_VULNERABILITIES" | "XML_EXTERNAL_ENTITY" | "FILE_DELETION" | "OTHER" | "GRAPHQL_VULNERABILITIES" | "BUSINESS_LOGIC_VULNERABILITIES" | "CRYPTOGRAPHIC_VULNERABILITIES" | "DENIAL_OF_SERVICE" | "FILE_ACCESS" | "FILE_CREATION" | "DATABASE_MODIFICATION" | "DATABASE_ACCESS" | "OUTBOUND_SERVICE_REQUEST" | "UNKNOWN")
       attr_accessor execution_status: ("IN_PROGRESS" | "ABORTED" | "COMPLETED" | "INTERNAL_ERROR" | "FAILED")
+      attr_accessor task_hours: ::Float
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []

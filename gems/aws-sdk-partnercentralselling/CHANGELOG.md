@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2026-06-30)
+------------------
+
+* Feature - This release adds AwsMarketplaceSolutions and AwsMarketplaceProducts entity types to the Associate and Disassociate APIs, returns them in GetOpportunity, and adds AwsMarketplaceSolutionArn to ListSolutions ,letting partners link Marketplace listings directly to opportunities.
+
 1.36.0 (2026-06-17)
 ------------------
 

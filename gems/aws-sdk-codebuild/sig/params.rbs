@@ -101,7 +101,8 @@ module Aws
         credential_provider: ("SECRETS_MANAGER")
       }?,
       image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")?,
-      docker_server: Params::docker_server?
+      docker_server: Params::docker_server?,
+      host_kernel: ("LINUX_KERNEL_4" | "LINUX_KERNEL_6" | "LINUX_KERNEL_LATEST")?
     }
 
       type logs_config = {

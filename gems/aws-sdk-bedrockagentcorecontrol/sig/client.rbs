@@ -225,6 +225,9 @@ module Aws
                                 }
                               }
                             ],
+                            ?filesystem_configurations: Array[
+                              Params::tools_file_system_configuration
+                            ],
                             ?client_token: ::String,
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateBrowserResponseSuccess
@@ -274,6 +277,9 @@ module Aws
                                            }?
                                          }
                                        }
+                                     ],
+                                     ?filesystem_configurations: Array[
+                                       Params::tools_file_system_configuration
                                      ],
                                      ?client_token: ::String,
                                      ?tags: Hash[::String, ::String]
@@ -1220,6 +1226,7 @@ module Aws
         def browser_signing: () -> Types::BrowserSigningConfigOutput
         def enterprise_policies: () -> ::Array[Types::BrowserEnterprisePolicy]
         def certificates: () -> ::Array[Types::Certificate]
+        def filesystem_configurations: () -> ::Array[Types::ToolsFileSystemConfiguration]
         def status: () -> ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
         def failure_reason: () -> ::String
         def created_at: () -> ::Time
@@ -1260,6 +1267,7 @@ module Aws
         def network_configuration: () -> Types::CodeInterpreterNetworkConfiguration
         def status: () -> ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
         def certificates: () -> ::Array[Types::Certificate]
+        def filesystem_configurations: () -> ::Array[Types::ToolsFileSystemConfiguration]
         def failure_reason: () -> ::String
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time

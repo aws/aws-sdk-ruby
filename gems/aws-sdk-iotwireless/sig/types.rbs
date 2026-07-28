@@ -358,6 +358,12 @@ module Aws::IoTWireless
       SENSITIVE: []
     end
 
+    class DefaultSessionParametersMulticast
+      attr_accessor dl_dr: ::Integer
+      attr_accessor dl_freq: ::Integer
+      SENSITIVE: []
+    end
+
     class DeleteDestinationRequest
       attr_accessor name: ::String
       SENSITIVE: []
@@ -1442,6 +1448,7 @@ module Aws::IoTWireless
       attr_accessor rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")
       attr_accessor dl_class: ("ClassB" | "ClassC")
       attr_accessor participating_gateways: Types::ParticipatingGatewaysMulticast
+      attr_accessor default_session_parameters: Types::DefaultSessionParametersMulticast
       SENSITIVE: []
     end
 
@@ -1451,6 +1458,7 @@ module Aws::IoTWireless
       attr_accessor number_of_devices_requested: ::Integer
       attr_accessor number_of_devices_in_group: ::Integer
       attr_accessor participating_gateways: Types::ParticipatingGatewaysMulticast
+      attr_accessor default_session_parameters: Types::DefaultSessionParametersMulticast
       SENSITIVE: []
     end
 

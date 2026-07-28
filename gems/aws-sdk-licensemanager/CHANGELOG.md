@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2026-07-10)
+------------------
+
+* Feature - Added the ResetUsage field to the CreateLicenseVersion API. When set to true, the entitlement usage counts for the license are reset to 0. If it is false or not specified, entitlement usage is left unchanged.
+
+1.93.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.92.0 (2026-06-01)
 ------------------
 

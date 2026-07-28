@@ -138,6 +138,18 @@ module Aws
                                               ) -> _AssociateIdentityProviderConfigResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateIdentityProviderConfigResponseSuccess
 
+      interface _CancelUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelUpdateResponse]
+        def update: () -> Types::Update
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#cancel_update-instance_method
+      def cancel_update: (
+                           name: ::String,
+                           update_id: ::String,
+                           ?client_request_token: ::String
+                         ) -> _CancelUpdateResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelUpdateResponseSuccess
+
       interface _CreateAccessEntryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessEntryResponse]
         def access_entry: () -> Types::AccessEntry
@@ -847,7 +859,7 @@ module Aws
       def list_insights: (
                            cluster_name: ::String,
                            ?filter: {
-                             categories: Array[("UPGRADE_READINESS" | "MISCONFIGURATION")]?,
+                             categories: Array[("UPGRADE_READINESS" | "MISCONFIGURATION" | "ROLLBACK_READINESS")]?,
                              kubernetes_versions: Array[::String]?,
                              statuses: Array[("PASSING" | "WARNING" | "ERROR" | "UNKNOWN")]?
                            },
@@ -1098,7 +1110,10 @@ module Aws
                                     name: ::String,
                                     version: ::String,
                                     ?client_request_token: ::String,
-                                    ?force: bool
+                                    ?force: bool,
+                                    ?rollback_config: {
+                                      timeout_minutes: ::Integer?
+                                    }
                                   ) -> _UpdateClusterVersionResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterVersionResponseSuccess
 

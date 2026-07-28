@@ -78,6 +78,40 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateComplianceInquiryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComplianceInquiryResponse]
+        def compliance_inquiry_summary: () -> Types::InquirySummary
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#create_compliance_inquiry-instance_method
+      def create_compliance_inquiry: (
+                                       name: ::String,
+                                       inquiry_content: {
+                                         query: ::String?,
+                                         file_content: {
+                                           file_sections: Array[::String]?,
+                                           content: ::String
+                                         }?
+                                       },
+                                       ?client_token: ::String,
+                                       ?support_mode: ("AI_ONLY" | "FULL_SUPPORT"),
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _CreateComplianceInquiryResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComplianceInquiryResponseSuccess
+
+      interface _ExportComplianceInquiryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportComplianceInquiryResponse]
+        def document_presigned_url: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#export_compliance_inquiry-instance_method
+      def export_compliance_inquiry: (
+                                       compliance_inquiry_id: ::String,
+                                       ?query_identifiers: Array[::Integer],
+                                       ?include_citations: bool
+                                     ) -> _ExportComplianceInquiryResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportComplianceInquiryResponseSuccess
+
       interface _GetAccountSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSettingsResponse]
         def account_settings: () -> Types::AccountSettings
@@ -86,6 +120,17 @@ module Aws
       def get_account_settings: (
                                 ) -> _GetAccountSettingsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingsResponseSuccess
+
+      interface _GetComplianceInquiryMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComplianceInquiryMetadataResponse]
+        def compliance_inquiry_detail: () -> Types::InquiryDetail
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#get_compliance_inquiry_metadata-instance_method
+      def get_compliance_inquiry_metadata: (
+                                             compliance_inquiry_id: ::String
+                                           ) -> _GetComplianceInquiryMetadataResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComplianceInquiryMetadataResponseSuccess
 
       interface _GetReportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetReportResponse]
@@ -121,6 +166,31 @@ module Aws
                                  ?report_version: ::Integer
                                ) -> _GetTermForReportResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTermForReportResponseSuccess
+
+      interface _ListComplianceInquiriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComplianceInquiriesResponse]
+        def compliance_inquiries: () -> ::Array[Types::InquirySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#list_compliance_inquiries-instance_method
+      def list_compliance_inquiries: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListComplianceInquiriesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComplianceInquiriesResponseSuccess
+
+      interface _ListComplianceInquiryQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComplianceInquiryQueriesResponse]
+        def queries: () -> ::Array[Types::QuerySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#list_compliance_inquiry_queries-instance_method
+      def list_compliance_inquiry_queries: (
+                                             compliance_inquiry_id: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListComplianceInquiryQueriesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComplianceInquiryQueriesResponseSuccess
 
       interface _ListCustomerAgreementsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomerAgreementsResponse]
@@ -159,6 +229,16 @@ module Aws
                         ) -> _ListReportsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReportsResponseSuccess
 
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
       interface _PutAccountSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountSettingsResponse]
         def account_settings: () -> Types::AccountSettings
@@ -168,6 +248,42 @@ module Aws
                                   ?notification_subscription_status: ("SUBSCRIBED" | "NOT_SUBSCRIBED")
                                 ) -> _PutAccountSettingsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSettingsResponseSuccess
+
+      interface _PutComplianceInquiryFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutComplianceInquiryFeedbackResponse]
+        def submitted_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#put_compliance_inquiry_feedback-instance_method
+      def put_compliance_inquiry_feedback: (
+                                             compliance_inquiry_id: ::String,
+                                             ?query_identifier: ::Integer,
+                                             rating: ("THUMBS_UP" | "THUMBS_DOWN"),
+                                             ?response_revision_id: ::Integer,
+                                             ?reason_codes: Array[("OTHER" | "PARTIAL_RESPONSE" | "IRRELEVANT_RESPONSE")],
+                                             ?comment: ::String,
+                                             ?client_token: ::String
+                                           ) -> _PutComplianceInquiryFeedbackResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutComplianceInquiryFeedbackResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
     end
   end
 end

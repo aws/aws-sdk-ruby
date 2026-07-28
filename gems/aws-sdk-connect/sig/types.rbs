@@ -198,6 +198,15 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AnalyticsConfiguration
+      attr_accessor language_configuration: Types::LanguageConfiguration
+      attr_accessor redaction_configuration: Types::RedactionConfiguration
+      attr_accessor sentiment_configuration: Types::SentimentConfiguration
+      attr_accessor summary_configuration: Types::SummaryConfiguration
+      attr_accessor rules_configuration: Types::RulesConfiguration
+      SENSITIVE: []
+    end
+
     class AnalyticsDataAssociationResult
       attr_accessor data_set_id: ::String
       attr_accessor target_account_id: ::String
@@ -442,7 +451,7 @@ module Aws::Connect
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
       attr_accessor created_by: Types::CreatedByInfo
-      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT")
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
       attr_accessor associated_resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -516,6 +525,14 @@ module Aws::Connect
     class AudioQualityMetricsInfo
       attr_accessor quality_score: ::Float
       attr_accessor potential_quality_issues: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AuthScope
+      attr_accessor security_profile_ids: ::Array[::String]
+      attr_accessor entity_type: ("CUSTOMER_PROFILE")
+      attr_accessor entity_id: ::String
+      attr_accessor domain_name: ::String
       SENSITIVE: []
     end
 
@@ -1183,6 +1200,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ContactNotTerminatedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ContactSearchSummary
       attr_accessor arn: ::String
       attr_accessor id: ::String
@@ -1229,6 +1251,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ContentAttributes
+      attr_accessor recommender_config: Types::RecommenderConfig
+      SENSITIVE: []
+    end
+
     class ControlPlaneAttributeFilter
       attr_accessor or_conditions: ::Array[Types::CommonAttributeAndCondition]
       attr_accessor and_condition: Types::CommonAttributeAndCondition
@@ -1265,6 +1292,40 @@ module Aws::Connect
       attr_accessor agent_status_arn: ::String
       attr_accessor agent_status_id: ::String
       SENSITIVE: []
+    end
+
+    class CreateAttachedFileRequest
+      attr_accessor client_token: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
+      attr_accessor file_source_uri: ::String
+      attr_accessor associated_resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAttachedFileResponse
+      attr_accessor file_arn: ::String
+      attr_accessor file_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateAuthCodeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor scope: Types::AuthScope
+      attr_accessor max_session_duration_minutes: ::Integer
+      attr_accessor session_inactivity_duration_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAuthCodeResponse
+      attr_accessor auth_code: ::String
+      attr_accessor session_id: ::String
+      attr_accessor entity_type: ("CUSTOMER_PROFILE")
+      attr_accessor entity_id: ::String
+      SENSITIVE: [:auth_code]
     end
 
     class CreateCaseActionDefinition
@@ -2135,6 +2196,16 @@ module Aws::Connect
     class DeleteAttachedFileResponse < Aws::EmptyStructure
     end
 
+    class DeleteContactDataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor contact_fields: ::Array[("CUSTOMER_ENDPOINT" | "ADDITIONAL_EMAIL_RECIPIENTS" | "EMAIL_SUBJECT")]
+      SENSITIVE: []
+    end
+
+    class DeleteContactDataResponse < Aws::EmptyStructure
+    end
+
     class DeleteContactEvaluationRequest
       attr_accessor instance_id: ::String
       attr_accessor evaluation_id: ::String
@@ -2310,6 +2381,15 @@ module Aws::Connect
       attr_accessor instance_id: ::String
       attr_accessor security_profile_id: ::String
       SENSITIVE: []
+    end
+
+    class DeleteSessionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSessionResponse < Aws::EmptyStructure
     end
 
     class DeleteTaskTemplateRequest
@@ -3912,7 +3992,7 @@ module Aws::Connect
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor associated_resource_arn: ::String
-      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT")
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor download_url_metadata: Types::DownloadUrlMetadata
       attr_accessor tags: ::Hash[::String, ::String]
@@ -4016,10 +4096,10 @@ module Aws::Connect
     end
 
     class GetFederationTokenResponse
+      attr_accessor user_id: ::String
+      attr_accessor user_arn: ::String
       attr_accessor credentials: Types::Credentials
       attr_accessor sign_in_url: ::String
-      attr_accessor user_arn: ::String
-      attr_accessor user_id: ::String
       SENSITIVE: [:credentials]
     end
 
@@ -4540,6 +4620,11 @@ module Aws::Connect
       attr_accessor prefix: ::String
       attr_accessor retention_period_hours: ::Integer
       attr_accessor encryption_config: Types::EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class LanguageConfiguration
+      attr_accessor language_locale: ::String
       SENSITIVE: []
     end
 
@@ -6410,6 +6495,13 @@ module Aws::Connect
       end
     end
 
+    class RecommenderConfig
+      attr_accessor domain_name: ::String
+      attr_accessor recommender_name: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class RecordPrimaryValue
       attr_accessor record_id: ::String
       attr_accessor primary_values: ::Array[Types::PrimaryValueResponse]
@@ -6444,6 +6536,14 @@ module Aws::Connect
       attr_accessor by_month: ::Array[::Integer]
       attr_accessor by_month_day: ::Array[::Integer]
       attr_accessor by_weekday_occurrence: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class RedactionConfiguration
+      attr_accessor behavior: ("Enable" | "Disable")
+      attr_accessor policy: ("None" | "RedactedOnly" | "RedactedAndOriginal")
+      attr_accessor entities: ::Array[::String]
+      attr_accessor mask_mode: ("PII" | "EntityType")
       SENSITIVE: []
     end
 
@@ -6693,6 +6793,7 @@ module Aws::Connect
       attr_accessor rule_id: ::String
       attr_accessor rule_arn: ::String
       attr_accessor trigger_event_source: Types::RuleTriggerEventSource
+      attr_accessor rule_capability_tiers: ::Array[("GenerativeAI")]
       attr_accessor function: ::String
       attr_accessor actions: ::Array[Types::RuleAction]
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
@@ -6717,12 +6818,40 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class RuleAttributeAndCondition
+      attr_accessor tag_conditions: ::Array[Types::TagCondition]
+      SENSITIVE: []
+    end
+
+    class RuleAttributeFilter
+      attr_accessor or_conditions: ::Array[Types::RuleAttributeAndCondition]
+      attr_accessor and_condition: Types::RuleAttributeAndCondition
+      attr_accessor tag_condition: Types::TagCondition
+      SENSITIVE: []
+    end
+
+    class RuleSearchSummary
+      attr_accessor name: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor trigger_event_source: Types::RuleTriggerEventSource
+      attr_accessor action_summaries: ::Array[Types::ActionSummary]
+      attr_accessor rule_capability_tiers: ::Array[("GenerativeAI")]
+      attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor last_updated_by: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class RuleSummary
       attr_accessor name: ::String
       attr_accessor rule_id: ::String
       attr_accessor rule_arn: ::String
       attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach" | "OnAlertUpdate" | "OnSchedulePublish" | "OnScheduleUpdate" | "OnScheduleTimeOffRequestActivity")
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor rule_capability_tiers: ::Array[("GenerativeAI")]
       attr_accessor action_summaries: ::Array[Types::ActionSummary]
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
@@ -6732,6 +6861,23 @@ module Aws::Connect
     class RuleTriggerEventSource
       attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach" | "OnAlertUpdate" | "OnSchedulePublish" | "OnScheduleUpdate" | "OnScheduleTimeOffRequestActivity")
       attr_accessor integration_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class RulesConfiguration
+      attr_accessor behavior: ("Enable" | "Disable")
+      SENSITIVE: []
+    end
+
+    class RulesSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::RulesSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::RulesSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class RulesSearchFilter
+      attr_accessor attribute_filter: Types::RuleAttributeFilter
       SENSITIVE: []
     end
 
@@ -7073,6 +7219,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class SearchRulesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor search_criteria: Types::RulesSearchCriteria
+      attr_accessor search_filter: Types::RulesSearchFilter
+      SENSITIVE: []
+    end
+
+    class SearchRulesResponse
+      attr_accessor rules: ::Array[Types::RuleSearchSummary]
+      attr_accessor approximate_total_count: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class SearchSecurityProfilesRequest
       attr_accessor instance_id: ::String
       attr_accessor next_token: ::String
@@ -7350,6 +7512,26 @@ module Aws::Connect
     class SendOutboundEmailResponse < Aws::EmptyStructure
     end
 
+    class SendOutboundWebNotificationRequest
+      attr_accessor instance_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor browser_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor source: Types::WebNotificationSource
+      attr_accessor destination: Types::WidgetDestination
+      attr_accessor content: Types::WebNotificationContent
+      SENSITIVE: []
+    end
+
+    class SendOutboundWebNotificationResponse < Aws::EmptyStructure
+    end
+
+    class SentimentConfiguration
+      attr_accessor behavior: ("Enable" | "Disable")
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor reason: Types::ServiceQuotaExceededExceptionReason
@@ -7403,7 +7585,7 @@ module Aws::Connect
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor url_expiry_in_seconds: ::Integer
-      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT")
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
       attr_accessor associated_resource_arn: ::String
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor tags: ::Hash[::String, ::String]
@@ -7443,6 +7625,21 @@ module Aws::Connect
       attr_accessor participant_id: ::String
       attr_accessor participant_token: ::String
       attr_accessor continued_from_contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartContactConversationalAnalyticsJobRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor analytics_modes: ::Array[("PostContact" | "RealTime" | "ContactLens" | "AutomatedInteraction")]
+      attr_accessor analytics_configuration: Types::AnalyticsConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartContactConversationalAnalyticsJobResponse
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
       SENSITIVE: []
     end
 
@@ -7771,6 +7968,11 @@ module Aws::Connect
     class SuccessfulRequest
       attr_accessor request_identifier: ::String
       attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class SummaryConfiguration
+      attr_accessor summary_modes: ::Array[("PostContact" | "AutomatedInteraction" | "ContactChain")]
       SENSITIVE: []
     end
 
@@ -9089,6 +9291,24 @@ module Aws::Connect
     class VoiceRecordingConfiguration
       attr_accessor voice_recording_track: ("FROM_AGENT" | "TO_AGENT" | "ALL")
       attr_accessor ivr_recording_track: ("ALL")
+      SENSITIVE: []
+    end
+
+    class WebNotificationContent
+      attr_accessor type: ("WIDGET_VIEW" | "WIDGET_ACTION")
+      attr_accessor view_arn: ::String
+      attr_accessor attributes: Types::ContentAttributes
+      SENSITIVE: []
+    end
+
+    class WebNotificationSource
+      attr_accessor source_campaign: Types::SourceCampaign
+      SENSITIVE: []
+    end
+
+    class WidgetDestination
+      attr_accessor widget_id: ::String
+      attr_accessor profile_id: ::String
       SENSITIVE: []
     end
 

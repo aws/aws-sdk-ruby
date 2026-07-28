@@ -745,6 +745,40 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The configuration for conversational analytics.
+    #
+    # @!attribute [rw] language_configuration
+    #   The language configuration for conversational analytics.
+    #   @return [Types::LanguageConfiguration]
+    #
+    # @!attribute [rw] redaction_configuration
+    #   The redaction configuration for conversational analytics.
+    #   @return [Types::RedactionConfiguration]
+    #
+    # @!attribute [rw] sentiment_configuration
+    #   The sentiment configuration for conversational analytics.
+    #   @return [Types::SentimentConfiguration]
+    #
+    # @!attribute [rw] summary_configuration
+    #   The summary configuration for conversational analytics.
+    #   @return [Types::SummaryConfiguration]
+    #
+    # @!attribute [rw] rules_configuration
+    #   The rules configuration for conversational analytics.
+    #   @return [Types::RulesConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AnalyticsConfiguration AWS API Documentation
+    #
+    class AnalyticsConfiguration < Struct.new(
+      :language_configuration,
+      :redaction_configuration,
+      :sentiment_configuration,
+      :summary_configuration,
+      :rules_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This API is in preview release for Connect Customer and is subject to
     # change.
     #
@@ -2065,6 +2099,37 @@ module Aws::Connect
     class AudioQualityMetricsInfo < Struct.new(
       :quality_score,
       :potential_quality_issues)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the scope configuration for an authorization code. Defines
+    # the permissions and access boundaries for the session.
+    #
+    # @!attribute [rw] security_profile_ids
+    #   The list of security profile identifiers to scope the session to.
+    #   Maximum of 10 security profiles.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of entity to scope the session to.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of the entity to scope the session to.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the Customer Profiles domain to scope the session to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AuthScope AWS API Documentation
+    #
+    class AuthScope < Struct.new(
+      :security_profile_ids,
+      :entity_type,
+      :entity_id,
+      :domain_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4857,6 +4922,21 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The contact has not been disconnected and is not in a terminated
+    # state. PII can be deleted only from a contact that has been
+    # disconnected. This error is returned with an HTTP 409 status code.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactNotTerminatedException AWS API Documentation
+    #
+    class ContactNotTerminatedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information of returned contact.
     #
     # @!attribute [rw] arn
@@ -5052,6 +5132,23 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Optional attributes used to populate the content of an outbound web
+    # notification, such as recommender configuration for personalized
+    # content.
+    #
+    # @!attribute [rw] recommender_config
+    #   Configuration for the recommender used to generate personalized
+    #   recommendations for the notification content.
+    #   @return [Types::RecommenderConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContentAttributes AWS API Documentation
+    #
+    class ContentAttributes < Struct.new(
+      :recommender_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that can be used to specify Tag conditions inside the
     # `SearchFilter`. This accepts an `OR` or `AND` (List of List) input
     # where:
@@ -5227,6 +5324,164 @@ module Aws::Connect
       :agent_status_arn,
       :agent_status_id)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] file_use_case_type
+    #   The use case for the file.
+    #
+    #   Only `VOICE_RECORDING` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_source_uri
+    #   The S3 URI of the file to be attached. Only S3 source URIs are
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_resource_arn
+    #   The ARN of the completed voice contact to attach the file to. Only
+    #   voice contacts with Telephony subtype are supported.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, `{ "Tags": {"key1":"value1", "key2":"value2"}
+    #   }`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAttachedFileRequest AWS API Documentation
+    #
+    class CreateAttachedFileRequest < Struct.new(
+      :client_token,
+      :instance_id,
+      :file_use_case_type,
+      :file_source_uri,
+      :associated_resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response from CreateAttachedFile API.
+    #
+    # @!attribute [rw] file_arn
+    #   The unique identifier of the attached file resource (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] file_id
+    #   The unique identifier of the attached file resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time of Creation of the file resource as an ISO timestamp. It's
+    #   specified in ISO 8601 format: `yyyy-MM-ddThh:mm:ss.SSSZ`. For
+    #   example, `2024-05-03T02:41:28.172Z`.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_status
+    #   The current status of the attached file. Valid values: `PROCESSING`
+    #   \| `APPROVED` \| `REJECTED` \| `FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAttachedFileResponse AWS API Documentation
+    #
+    class CreateAttachedFileResponse < Struct.new(
+      :file_arn,
+      :file_id,
+      :creation_time,
+      :file_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The scope for the authorization code. Defines the permissions and
+    #   access boundaries for the session.
+    #   @return [Types::AuthScope]
+    #
+    # @!attribute [rw] max_session_duration_minutes
+    #   The maximum duration of the session, in minutes. Minimum value of
+    #   1440 (24 hours). Maximum value of 43200 (30 days). If no value is
+    #   provided, the session will expire after 400 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_inactivity_duration_minutes
+    #   The duration of inactivity, in minutes, after which the session
+    #   expires. Minimum value of 1440 (24 hours). Maximum value of 20160
+    #   (14 days).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAuthCodeRequest AWS API Documentation
+    #
+    class CreateAuthCodeRequest < Struct.new(
+      :instance_id,
+      :scope,
+      :max_session_duration_minutes,
+      :session_inactivity_duration_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auth_code
+    #   The authorization code to use for establishing a session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of the session created with the authorization code.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of entity associated with the authorization code.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of the entity associated with the authorization code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAuthCodeResponse AWS API Documentation
+    #
+    class CreateAuthCodeResponse < Struct.new(
+      :auth_code,
+      :session_id,
+      :entity_type,
+      :entity_id)
+      SENSITIVE = [:auth_code]
       include Aws::Structure
     end
 
@@ -6122,7 +6377,7 @@ module Aws::Connect
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateHoursOfOperationOverrideRequest AWS API Documentation
@@ -6188,7 +6443,7 @@ module Aws::Connect
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
     #   @return [Array<Types::ParentHoursOfOperationConfig>]
     #
     # @!attribute [rw] tags
@@ -9033,6 +9288,41 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact. PII can be deleted only from a
+    #   contact that has been disconnected (is in a terminated state).
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_fields
+    #   The categories of PII to redact from the contact. Valid values are
+    #   `CUSTOMER_ENDPOINT`, `ADDITIONAL_EMAIL_RECIPIENTS`, and
+    #   `EMAIL_SUBJECT`. `ADDITIONAL_EMAIL_RECIPIENTS` and `EMAIL_SUBJECT`
+    #   are supported only for contacts in the email channel.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactDataRequest AWS API Documentation
+    #
+    class DeleteContactDataRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :contact_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactDataResponse AWS API Documentation
+    #
+    class DeleteContactDataResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] evaluation_id
     #   A unique identifier for the contact evaluation.
     #   @return [String]
@@ -9607,6 +9897,32 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of the session to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteSessionRequest AWS API Documentation
+    #
+    class DeleteSessionRequest < Struct.new(
+      :instance_id,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteSessionResponse AWS API Documentation
+    #
+    class DeleteSessionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Connect Customer instance. You can [find the
@@ -15753,7 +16069,7 @@ module Aws::Connect
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
     #   @return [Array<Types::EffectiveOverrideHours>]
     #
     # @!attribute [rw] time_zone
@@ -15857,6 +16173,15 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_id
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_arn
+    #   The Amazon Resource Name (ARN) of the user.
+    #   @return [String]
+    #
     # @!attribute [rw] credentials
     #   The credentials to use for federation.
     #   @return [Types::Credentials]
@@ -15865,22 +16190,13 @@ module Aws::Connect
     #   The URL to sign into the user's instance.
     #   @return [String]
     #
-    # @!attribute [rw] user_arn
-    #   The Amazon Resource Name (ARN) of the user.
-    #   @return [String]
-    #
-    # @!attribute [rw] user_id
-    #   The identifier for the user. This can be the ID or the ARN of the
-    #   user.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationTokenResponse AWS API Documentation
     #
     class GetFederationTokenResponse < Struct.new(
-      :credentials,
-      :sign_in_url,
+      :user_id,
       :user_arn,
-      :user_id)
+      :credentials,
+      :sign_in_url)
       SENSITIVE = [:credentials]
       include Aws::Structure
     end
@@ -16367,24 +16683,26 @@ module Aws::Connect
     #   `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
     #   `ANSWERING_MACHINE_DETECTION_STATUS` \| `BOT_ALIAS` \| `BOT_ID` \|
-    #   `BOT_INTENT_NAME` \| `BOT_LOCALE` \| `BOT_VERSION` \| `CAMPAIGN` \|
-    #   `CAMPAIGN_DELIVERY_EVENT_TYPE` \| `CAMPAIGN_EXCLUDED_EVENT_TYPE` \|
-    #   `CASE_STATUS` \| `CASE_TEMPLATE_ARN` \| `CHANNEL` \|
+    #   `BOT_INTENT_NAME` \| `BOT_LOCALE` \| `BOT_VERSION` \| `BROWSER_NAME`
+    #   \| `CAMPAIGN` \| `CAMPAIGN_DELIVERY_EVENT_TYPE` \|
+    #   `CAMPAIGN_EXCLUDED_EVENT_TYPE` \| `CASE_STATUS` \|
+    #   `CASE_TEMPLATE_ARN` \| `CHANNEL` \|
     #   `contact/segmentAttributes/connect:Subtype` \|
     #   `contact/segmentAttributes/connect:ValidationTestType` \|
-    #   `DISCONNECT_REASON` \| `EVALUATION_FORM` \| `EVALUATION_QUESTION` \|
-    #   `EVALUATION_SECTION` \| `EVALUATION_SOURCE` \| `EVALUATOR_ID` \|
-    #   `FEATURE` \| `FLOW_ACTION_ID` \| `FLOW_TYPE` \|
-    #   `FLOWS_MODULE_RESOURCE_ID` \| `FLOWS_NEXT_RESOURCE_ID` \|
-    #   `FLOWS_NEXT_RESOURCE_QUEUE_ID` \| `FLOWS_OUTCOME_TYPE` \|
-    #   `FLOWS_RESOURCE_ID` \| `FORM_VERSION` \| `INITIATING_FLOW` \|
-    #   `INITIATION_METHOD` \| `INVOKING_RESOURCE_PUBLISHED_TIMESTAMP` \|
-    #   `INVOKING_RESOURCE_TYPE` \| `KNOWLEDGE_BASE_NAME` \|
-    #   `PARENT_FLOWS_RESOURCE_ID` \| `Q_CONNECT_ENABLED` \| `QUEUE` \|
-    #   `RESOURCE_PUBLISHED_TIMESTAMP` \| `ROUTING_PROFILE` \|
-    #   `ROUTING_STEP_EXPRESSION` \| `SESSION_ID` \| `TEST_CASE` \|
-    #   `TEST_CASE_EXECUTION_FAILURE_REASON` \| `TEST_CASE_EXECUTION_RESULT`
-    #   \| `TEST_CASE_EXECUTION_STATE`
+    #   `DEVICE_MODEL` \| `DEVICE_TYPE` \| `DISCONNECT_REASON` \|
+    #   `EVALUATION_FORM` \| `EVALUATION_QUESTION` \| `EVALUATION_SECTION`
+    #   \| `EVALUATION_SOURCE` \| `EVALUATOR_ID` \| `FEATURE` \|
+    #   `FLOW_ACTION_ID` \| `FLOW_TYPE` \| `FLOWS_MODULE_RESOURCE_ID` \|
+    #   `FLOWS_NEXT_RESOURCE_ID` \| `FLOWS_NEXT_RESOURCE_QUEUE_ID` \|
+    #   `FLOWS_OUTCOME_TYPE` \| `FLOWS_RESOURCE_ID` \| `FORM_VERSION` \|
+    #   `INITIATING_FLOW` \| `INITIATION_METHOD` \|
+    #   `INVOKING_RESOURCE_PUBLISHED_TIMESTAMP` \| `INVOKING_RESOURCE_TYPE`
+    #   \| `KNOWLEDGE_BASE_NAME` \| `PARENT_FLOWS_RESOURCE_ID` \|
+    #   `Q_CONNECT_ENABLED` \| `QUEUE` \| `RESOURCE_PUBLISHED_TIMESTAMP` \|
+    #   `ROUTING_PROFILE` \| `ROUTING_STEP_EXPRESSION` \| `SESSION_ID` \|
+    #   `TEST_CASE` \| `TEST_CASE_EXECUTION_FAILURE_REASON` \|
+    #   `TEST_CASE_EXECUTION_RESULT` \| `TEST_CASE_EXECUTION_STATE` \|
+    #   `WEB_NOTIFICATION_TYPE`
     #
     #   <note markdown="1"> The following filter keys correspond to Connect Customer resources
     #   and are used for authorizing requests. A `GetMetricDataV2` request
@@ -16463,22 +16781,23 @@ module Aws::Connect
     #   `AGENT_HIERARCHY_LEVEL_THREE` \| `AGENT_HIERARCHY_LEVEL_FOUR` \|
     #   `AGENT_HIERARCHY_LEVEL_FIVE` \| `ANSWERING_MACHINE_DETECTION_STATUS`
     #   \| `BOT_ID` \| `BOT_ALIAS` \| `BOT_VERSION` \| `BOT_LOCALE` \|
-    #   `BOT_INTENT_NAME` \| `CAMPAIGN` \| `CAMPAIGN_DELIVERY_EVENT_TYPE` \|
-    #   `CAMPAIGN_EXCLUDED_EVENT_TYPE` \| `CAMPAIGN_EXECUTION_TIMESTAMP` \|
-    #   `CASE_TEMPLATE_ARN` \| `CASE_STATUS` \| `CHANNEL` \|
-    #   `contact/segmentAttributes/connect:Subtype` \| `DISCONNECT_REASON`
-    #   \| `EVALUATION_FORM` \| `EVALUATION_SECTION` \|
-    #   `EVALUATION_QUESTION` \| `EVALUATION_SOURCE` \| `EVALUATOR_ID` \|
-    #   `FLOWS_RESOURCE_ID` \| `FLOWS_MODULE_RESOURCE_ID` \|
-    #   `FLOW_ACTION_ID` \| `FLOW_TYPE` \| `FLOWS_OUTCOME_TYPE` \|
-    #   `FORM_VERSION` \| `INITIATION_METHOD` \|
+    #   `BOT_INTENT_NAME` \| `BROWSER_NAME` \| `CAMPAIGN` \|
+    #   `CAMPAIGN_DELIVERY_EVENT_TYPE` \| `CAMPAIGN_EXCLUDED_EVENT_TYPE` \|
+    #   `CAMPAIGN_EXECUTION_TIMESTAMP` \| `CASE_TEMPLATE_ARN` \|
+    #   `CASE_STATUS` \| `CHANNEL` \|
+    #   `contact/segmentAttributes/connect:Subtype` \| `DEVICE_MODEL` \|
+    #   `DEVICE_TYPE` \| `DISCONNECT_REASON` \| `EVALUATION_FORM` \|
+    #   `EVALUATION_SECTION` \| `EVALUATION_QUESTION` \| `EVALUATION_SOURCE`
+    #   \| `EVALUATOR_ID` \| `FLOWS_RESOURCE_ID` \|
+    #   `FLOWS_MODULE_RESOURCE_ID` \| `FLOW_ACTION_ID` \| `FLOW_TYPE` \|
+    #   `FLOWS_OUTCOME_TYPE` \| `FORM_VERSION` \| `INITIATION_METHOD` \|
     #   `INVOKING_RESOURCE_PUBLISHED_TIMESTAMP` \| `INVOKING_RESOURCE_TYPE`
     #   \| `KNOWLEDGE_ARTICLE_NAME` \| `KNOWLEDGE_BASE_NAME` \|
     #   `PARENT_FLOWS_RESOURCE_ID` \| `Q_CONNECT_ENABLED` \| `QUEUE` \|
     #   `RESOURCE_PUBLISHED_TIMESTAMP` \| `ROUTING_PROFILE` \|
     #   `ROUTING_STEP_EXPRESSION` \| `SESSION_ID` \| `TEST_CASE` \|
     #   `TEST_CASE_EXECUTION_FAILURE_REASON` \|
-    #   `TEST_CASE_INVOCATION_METHOD`
+    #   `TEST_CASE_INVOCATION_METHOD` \| `WEB_NOTIFICATION_TYPE`
     #
     #   <note markdown="1"> `AI_AGENT_NAME_VERSION`, `AI_PROMPT_NAME_VERSION`, and
     #   `KNOWLEDGE_ARTICLE_NAME` are valid groupings but not valid filters.
@@ -17572,13 +17891,15 @@ module Aws::Connect
     #   CAMPAIGN\_INTERACTIONS
     #
     #   : This metric is available only for outbound campaigns using the
-    #     email delivery mode.
+    #     email, WhatsApp, and web notification delivery modes.
     #
     #     Unit: Count
     #
     #     Valid metric filter key: CAMPAIGN\_INTERACTION\_EVENT\_TYPE
     #
-    #     Valid groupings and filters: Campaign
+    #     Valid groupings and filters: Browser Name, Campaign, Channel,
+    #     contact/segmentAttributes/connect:Subtype, Device Model, Device
+    #     Type, Web Notification Type
     #
     #     UI name: [Campaign interactions][93]
     #
@@ -17837,17 +18158,18 @@ module Aws::Connect
     #     `CAMPAIGN_DELIVERY_EVENT_TYPE`, `DISCONNECT_REASON`
     #
     #     Valid groupings and filters: Agent, Answering Machine Detection
-    #     Status, Campaign, Campaign Delivery EventType, Channel,
-    #     contact/segmentAttributes/connect:Subtype, Disconnect Reason,
-    #     Queue, Routing Profile
+    #     Status, Browser Name, Campaign, Campaign Delivery EventType,
+    #     Channel, contact/segmentAttributes/connect:Subtype, Device Model,
+    #     Device Type, Disconnect Reason, Queue, Routing Profile, Web
+    #     Notification Type
     #
     #     UI name: [Delivery attempts][116]
     #
     #     <note markdown="1"> Campaign Delivery EventType filter and grouping are only available
-    #     for SMS and Email campaign delivery modes. Agent, Queue, Routing
-    #     Profile, Answering Machine Detection Status and Disconnect Reason
-    #     are only available for agent assisted voice and automated voice
-    #     delivery modes.
+    #     for SMS, Email, WhatsApp, and web notification campaign delivery
+    #     modes. Agent, Queue, Routing Profile, Answering Machine Detection
+    #     Status and Disconnect Reason are only available for agent assisted
+    #     voice and automated voice delivery modes.
     #
     #      </note>
     #
@@ -17863,17 +18185,18 @@ module Aws::Connect
     #     `CAMPAIGN_DELIVERY_EVENT_TYPE`, `DISCONNECT_REASON`
     #
     #     Valid groupings and filters: Agent, Answering Machine Detection
-    #     Status, Campaign, Channel,
-    #     contact/segmentAttributes/connect:Subtype, Disconnect Reason,
-    #     Queue, Routing Profile
+    #     Status, Browser Name, Campaign, Channel,
+    #     contact/segmentAttributes/connect:Subtype, Device Model, Device
+    #     Type, Disconnect Reason, Queue, Routing Profile, Web Notification
+    #     Type
     #
     #     UI name: [Delivery attempt disposition rate][117]
     #
     #     <note markdown="1"> Campaign Delivery Event Type filter and grouping are only
-    #     available for SMS and Email campaign delivery modes. Agent, Queue,
-    #     Routing Profile, Answering Machine Detection Status and Disconnect
-    #     Reason are only available for agent assisted voice and automated
-    #     voice delivery modes.
+    #     available for SMS, Email, WhatsApp, and web notification campaign
+    #     delivery modes. Agent, Queue, Routing Profile, Answering Machine
+    #     Detection Status and Disconnect Reason are only available for
+    #     agent assisted voice and automated voice delivery modes.
     #
     #      </note>
     #
@@ -20589,6 +20912,20 @@ module Aws::Connect
       :prefix,
       :retention_period_hours,
       :encryption_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The language configuration for conversational analytics.
+    #
+    # @!attribute [rw] language_locale
+    #   The language locale setting for conversational analytics.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/LanguageConfiguration AWS API Documentation
+    #
+    class LanguageConfiguration < Struct.new(
+      :language_locale)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27647,6 +27984,33 @@ module Aws::Connect
       class Unknown < RealtimeContactAnalysisSegment; end
     end
 
+    # Configuration for the recommender used to generate personalized
+    # recommendations included in an outbound web notification.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the Amazon Personalize domain that hosts the
+    #   recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_name
+    #   The name of the recommender used to generate the recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   A map of contextual key-value pairs supplied to the recommender to
+    #   influence the recommendations returned.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RecommenderConfig AWS API Documentation
+    #
+    class RecommenderConfig < Struct.new(
+      :domain_name,
+      :recommender_name,
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A record primary value.
     #
     # @!attribute [rw] record_id
@@ -27841,6 +28205,42 @@ module Aws::Connect
       :by_month,
       :by_month_day,
       :by_weekday_occurrence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The redaction configuration for conversational analytics.
+    #
+    # @!attribute [rw] behavior
+    #   Controls whether redaction is applied to the analytics output. Valid
+    #   values: `Enable` \| `Disable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The redaction output policy that determines which versions of the
+    #   transcript are stored. Valid values: `None` \| `RedactedOnly` \|
+    #   `RedactedAndOriginal`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entities
+    #   The list of PII entity types to redact from the transcript (for
+    #   example, `NAME`, `ADDRESS`, `CREDIT_DEBIT_NUMBER`).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mask_mode
+    #   The masking mode that determines how redacted content is replaced in
+    #   the output. Valid values: `PII` (replaces with the literal string
+    #   \[PII\]) \| `EntityType` (replaces with the entity type name, for
+    #   example \[NAME\]).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RedactionConfiguration AWS API Documentation
+    #
+    class RedactionConfiguration < Struct.new(
+      :behavior,
+      :policy,
+      :entities,
+      :mask_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28792,6 +29192,11 @@ module Aws::Connect
     #   The event source to trigger the rule.
     #   @return [Types::RuleTriggerEventSource]
     #
+    # @!attribute [rw] rule_capability_tiers
+    #   The list of capability tiers associated with the rule. Used for
+    #   categorizing rules by capability (for example, `GenerativeAI`).
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] function
     #   The conditions of the rule.
     #   @return [String]
@@ -28830,6 +29235,7 @@ module Aws::Connect
       :rule_id,
       :rule_arn,
       :trigger_event_source,
+      :rule_capability_tiers,
       :function,
       :actions,
       :publish_status,
@@ -28929,6 +29335,126 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A list of conditions which would be applied together with an `AND`
+    # condition.
+    #
+    # @!attribute [rw] tag_conditions
+    #   A list of tag conditions that need to be applied with `AND`
+    #   condition.
+    #   @return [Array<Types::TagCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RuleAttributeAndCondition AWS API Documentation
+    #
+    class RuleAttributeAndCondition < Struct.new(
+      :tag_conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that can be used to specify tag conditions inside the
+    # `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    # where:
+    #
+    # * The top level list specifies conditions that need to be applied with
+    #   `OR` operator.
+    #
+    # * The inner list specifies conditions that need to be applied with
+    #   `AND` operator.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an `OR`
+    #   condition.
+    #   @return [Array<Types::RuleAttributeAndCondition>]
+    #
+    # @!attribute [rw] and_condition
+    #   A list of conditions which would be applied together with an `AND`
+    #   condition.
+    #   @return [Types::RuleAttributeAndCondition]
+    #
+    # @!attribute [rw] tag_condition
+    #   A leaf node condition which can be used to specify a tag condition,
+    #   for example, `HAVE BPO = 123`.
+    #   @return [Types::TagCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RuleAttributeFilter AWS API Documentation
+    #
+    class RuleAttributeFilter < Struct.new(
+      :or_conditions,
+      :and_condition,
+      :tag_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of information about a rule, returned as part of the
+    # response to a `SearchRules` operation.
+    #
+    # @!attribute [rw] name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   A unique identifier for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_event_source
+    #   The event source to trigger the rule.
+    #   @return [Types::RuleTriggerEventSource]
+    #
+    # @!attribute [rw] action_summaries
+    #   A list of `ActionTypes` associated with a rule.
+    #   @return [Array<Types::ActionSummary>]
+    #
+    # @!attribute [rw] rule_capability_tiers
+    #   The list of capability tiers associated with the rule. Used for
+    #   categorizing rules by capability (for example, `GenerativeAI`).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] publish_status
+    #   The publish status of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp for when the rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp for when the rule was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RuleSearchSummary AWS API Documentation
+    #
+    class RuleSearchSummary < Struct.new(
+      :name,
+      :rule_id,
+      :rule_arn,
+      :trigger_event_source,
+      :action_summaries,
+      :rule_capability_tiers,
+      :publish_status,
+      :created_time,
+      :last_updated_time,
+      :last_updated_by,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of `ActionTypes` associated with a rule.
     #
     # @!attribute [rw] name
@@ -28951,6 +29477,11 @@ module Aws::Connect
     #   The publish status of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] rule_capability_tiers
+    #   The list of capability tiers associated with the rule. Used for
+    #   categorizing rules by capability (for example, `GenerativeAI`).
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] action_summaries
     #   A list of ActionTypes associated with a rule.
     #   @return [Array<Types::ActionSummary>]
@@ -28971,6 +29502,7 @@ module Aws::Connect
       :rule_arn,
       :event_source_name,
       :publish_status,
+      :rule_capability_tiers,
       :action_summaries,
       :created_time,
       :last_updated_time)
@@ -28997,6 +29529,71 @@ module Aws::Connect
     class RuleTriggerEventSource < Struct.new(
       :event_source_name,
       :integration_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The rules configuration for conversational analytics. Controls whether
+    # Contact Lens rules are evaluated against the analytics output.
+    #
+    # @!attribute [rw] behavior
+    #   Controls whether Contact Lens rules are evaluated for the contact.
+    #   Valid values: `Enable` \| `Disable`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RulesConfiguration AWS API Documentation
+    #
+    class RulesConfiguration < Struct.new(
+      :behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria to be used to return rules.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an OR
+    #   condition.
+    #   @return [Array<Types::RulesSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an AND
+    #   condition.
+    #   @return [Array<Types::RulesSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `Name`,
+    #   `PublishStatus`, `EventSourceName`, `RuleId`,
+    #   `IntegrationAssociationId`, `ActionSummaries`, and
+    #   `RuleCapabilityTiers`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RulesSearchCriteria AWS API Documentation
+    #
+    class RulesSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @!attribute [rw] attribute_filter
+    #   An object that can be used to specify tag conditions inside the
+    #   `SearchFilter`.
+    #   @return [Types::RuleAttributeFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RulesSearchFilter AWS API Documentation
+    #
+    class RulesSearchFilter < Struct.new(
+      :attribute_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30388,6 +30985,68 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return rules.
+    #   @return [Types::RulesSearchCriteria]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results, such as tag-based filters.
+    #   @return [Types::RulesSearchFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchRulesRequest AWS API Documentation
+    #
+    class SearchRulesRequest < Struct.new(
+      :instance_id,
+      :max_results,
+      :next_token,
+      :search_criteria,
+      :search_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rules
+    #   Information about the rules.
+    #   @return [Array<Types::RuleSearchSummary>]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of rules which matched your search query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchRulesResponse AWS API Documentation
+    #
+    class SearchRulesResponse < Struct.new(
+      :rules,
+      :approximate_total_count,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -31504,6 +32163,97 @@ module Aws::Connect
     #
     class SendOutboundEmailResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] browser_id
+    #   A unique identifier for the customer's web browser instance to
+    #   which the notification is being sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   A unique identifier for the customer's web session to which the
+    #   notification is being sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The timestamp, in Unix epoch time format, at which the web
+    #   notification expires. After this time, the notification is no longer
+    #   delivered to the customer's browser.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source
+    #   The source of the web notification. A `SourceCampaign` object
+    #   identifies the campaign and outbound request that triggered this
+    #   notification.
+    #   @return [Types::WebNotificationSource]
+    #
+    # @!attribute [rw] destination
+    #   The destination for the web notification, specifying the
+    #   communication widget that delivers the notification and the customer
+    #   profile of the recipient.
+    #   @return [Types::WidgetDestination]
+    #
+    # @!attribute [rw] content
+    #   The content of the web notification, including the notification
+    #   type, the view to render, and any optional attributes used to
+    #   populate it.
+    #   @return [Types::WebNotificationContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SendOutboundWebNotificationRequest AWS API Documentation
+    #
+    class SendOutboundWebNotificationRequest < Struct.new(
+      :instance_id,
+      :client_token,
+      :browser_id,
+      :session_id,
+      :expires_at,
+      :source,
+      :destination,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SendOutboundWebNotificationResponse AWS API Documentation
+    #
+    class SendOutboundWebNotificationResponse < Aws::EmptyStructure; end
+
+    # The sentiment configuration for conversational analytics.
+    #
+    # @!attribute [rw] behavior
+    #   Controls whether sentiment analysis is applied to the analytics
+    #   output. Valid values: `Enable` \| `Disable`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SentimentConfiguration AWS API Documentation
+    #
+    class SentimentConfiguration < Struct.new(
+      :behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The service quota has been exceeded.
     #
     # @!attribute [rw] message
@@ -31951,6 +32701,68 @@ module Aws::Connect
       :participant_id,
       :participant_token,
       :continued_from_contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Connect Customer.
+    #   @return [String]
+    #
+    # @!attribute [rw] analytics_modes
+    #   The analytics modes to run for the contact. Valid values:
+    #   `PostContact`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] analytics_configuration
+    #   The configuration for the conversational analytics job.
+    #   @return [Types::AnalyticsConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactConversationalAnalyticsJobRequest AWS API Documentation
+    #
+    class StartContactConversationalAnalyticsJobRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :analytics_modes,
+      :analytics_configuration,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactConversationalAnalyticsJobResponse AWS API Documentation
+    #
+    class StartContactConversationalAnalyticsJobResponse < Struct.new(
+      :instance_id,
+      :contact_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33473,6 +34285,22 @@ module Aws::Connect
     class SuccessfulRequest < Struct.new(
       :request_identifier,
       :contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary configuration for conversational analytics.
+    #
+    # @!attribute [rw] summary_modes
+    #   The summary modes that determine what type of summarization is
+    #   generated. Valid values: `PostContact` \| `AutomatedInteraction` \|
+    #   `ContactChain`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SummaryConfiguration AWS API Documentation
+    #
+    class SummaryConfiguration < Struct.new(
+      :summary_modes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35729,7 +36557,7 @@ module Aws::Connect
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateHoursOfOperationOverrideRequest AWS API Documentation
@@ -38937,6 +39765,73 @@ module Aws::Connect
     class VoiceRecordingConfiguration < Struct.new(
       :voice_recording_track,
       :ivr_recording_track)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The content of an outbound web notification, including the
+    # notification type, the view to render, and any optional attributes
+    # used to populate the view.
+    #
+    # @!attribute [rw] type
+    #   The type of web notification to send.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_arn
+    #   The Amazon Resource Name (ARN) of the view to render for the
+    #   notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Optional attributes used to populate the notification content, such
+    #   as recommender configuration for personalized content.
+    #   @return [Types::ContentAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/WebNotificationContent AWS API Documentation
+    #
+    class WebNotificationContent < Struct.new(
+      :type,
+      :view_arn,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of an outbound web notification. Identifies the campaign
+    # and outbound request that triggered the notification.
+    #
+    # @!attribute [rw] source_campaign
+    #   Information about the campaign that triggered the web notification,
+    #   including the campaign identifier and outbound request identifier.
+    #   @return [Types::SourceCampaign]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/WebNotificationSource AWS API Documentation
+    #
+    class WebNotificationSource < Struct.new(
+      :source_campaign)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The destination for an outbound web notification, specifying the
+    # communication widget that delivers the notification and the customer
+    # profile of the recipient.
+    #
+    # @!attribute [rw] widget_id
+    #   The identifier of the communication widget that delivers the
+    #   notification to the customer's browser.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The identifier of the customer profile associated with the browser
+    #   session that should receive the notification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/WidgetDestination AWS API Documentation
+    #
+    class WidgetDestination < Struct.new(
+      :widget_id,
+      :profile_id)
       SENSITIVE = []
       include Aws::Structure
     end

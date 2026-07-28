@@ -4067,7 +4067,7 @@ module Aws::Macie2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

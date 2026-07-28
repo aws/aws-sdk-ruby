@@ -1751,7 +1751,7 @@ module Aws::Route53RecoveryReadiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53recoveryreadiness'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

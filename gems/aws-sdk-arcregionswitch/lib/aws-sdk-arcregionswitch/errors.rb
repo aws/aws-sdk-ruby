@@ -28,6 +28,7 @@ module Aws::ARCRegionswitch
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {IllegalArgumentException}
   # * {IllegalStateException}
   # * {InternalServerException}
@@ -51,6 +52,31 @@ module Aws::ARCRegionswitch
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ARCRegionswitch::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
       end
     end
 

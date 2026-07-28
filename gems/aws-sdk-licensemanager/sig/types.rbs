@@ -276,6 +276,7 @@ module Aws::LicenseManager
       attr_accessor status: ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED")
       attr_accessor client_token: ::String
       attr_accessor source_version: ::String
+      attr_accessor reset_usage: bool
       SENSITIVE: []
     end
 

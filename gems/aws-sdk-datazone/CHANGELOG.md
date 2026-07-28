@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2026-07-23)
+------------------
+
+* Feature - Adds support for notebook sync with S3 ipynb files
+
+1.84.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.83.0 (2026-06-30)
+------------------
+
+* Feature - Amazon DataZone now supports SNOWFLAKE as a connection type in the CreateConnection API, enabling metadata and lineage retrieval from Snowflake databases. Specify snowflakeProperties with connection details, a Secrets Manager secret, an Athena spill bucket, and an identity mapping for Snowflake.
+
 1.82.0 (2026-06-15)
 ------------------
 

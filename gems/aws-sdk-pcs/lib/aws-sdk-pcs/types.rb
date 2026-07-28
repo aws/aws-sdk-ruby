@@ -508,6 +508,13 @@ module Aws::PCS
     #   Additional options related to the Slurm scheduler.
     #   @return [Types::ComputeNodeGroupSlurmConfiguration]
     #
+    # @!attribute [rw] node_lifecycle_actions
+    #   The lifecycle actions to run on compute nodes in the compute node
+    #   group. Use lifecycle actions to run custom scripts at defined stages
+    #   of a compute node's lifecycle, such as when a compute node finishes
+    #   bootstrapping or becomes ready to accept jobs.
+    #   @return [Types::NodeLifecycleActions]
+    #
     # @!attribute [rw] error_info
     #   The list of errors that occurred during compute node group
     #   provisioning.
@@ -532,6 +539,7 @@ module Aws::PCS
       :instance_configs,
       :spot_options,
       :slurm_configuration,
+      :node_lifecycle_actions,
       :error_info)
       SENSITIVE = []
       include Aws::Structure
@@ -850,6 +858,13 @@ module Aws::PCS
     #   Additional options related to the Slurm scheduler.
     #   @return [Types::ComputeNodeGroupSlurmConfigurationRequest]
     #
+    # @!attribute [rw] node_lifecycle_actions
+    #   The lifecycle actions to run on compute nodes in the compute node
+    #   group. Use lifecycle actions to run custom scripts at defined stages
+    #   of a compute node's lifecycle, such as when a compute node finishes
+    #   bootstrapping or becomes ready to accept jobs.
+    #   @return [Types::NodeLifecycleActionsRequest]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -882,6 +897,7 @@ module Aws::PCS
       :instance_configs,
       :spot_options,
       :slurm_configuration,
+      :node_lifecycle_actions,
       :client_token,
       :tags)
       SENSITIVE = []
@@ -1561,6 +1577,141 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # The lifecycle actions configured on a compute node group. Lifecycle
+    # actions define scripts that PCS runs on compute nodes at specific
+    # stages of their lifecycle.
+    #
+    # @!attribute [rw] stages
+    #   The lifecycle stages where you configure scripts to run.
+    #   @return [Types::NodeLifecycleStages]
+    #
+    # @!attribute [rw] script_caching_policy
+    #   The caching policy for node lifecycle scripts. The default value is
+    #   `CACHE_ONCE`. Valid values:
+    #
+    #   * `CACHE_ONCE` – Downloads each script once and reuses it on
+    #     subsequent boots.
+    #
+    #   * `REFRESH_ON_REBOOT` – Downloads each script on every boot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/NodeLifecycleActions AWS API Documentation
+    #
+    class NodeLifecycleActions < Struct.new(
+      :stages,
+      :script_caching_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The lifecycle actions to configure on a compute node group when you
+    # create it. Lifecycle actions define scripts that PCS runs on compute
+    # nodes at specific stages of their lifecycle.
+    #
+    # @!attribute [rw] stages
+    #   The lifecycle stages where you configure scripts to run.
+    #   @return [Types::NodeLifecycleStages]
+    #
+    # @!attribute [rw] script_caching_policy
+    #   The caching policy for node lifecycle scripts. The default value is
+    #   `CACHE_ONCE`. Valid values:
+    #
+    #   * `CACHE_ONCE` – Downloads each script once and reuses it on
+    #     subsequent boots.
+    #
+    #   * `REFRESH_ON_REBOOT` – Downloads each script on every boot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/NodeLifecycleActionsRequest AWS API Documentation
+    #
+    class NodeLifecycleActionsRequest < Struct.new(
+      :stages,
+      :script_caching_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A script to run during a compute node lifecycle stage.
+    #
+    # @!attribute [rw] name
+    #   A unique name for the script. The name can be up to 64 characters
+    #   long. Valid characters are letters, numbers, spaces, underscores
+    #   (`_`), and hyphens (`-`). The first character must be a letter or a
+    #   number.
+    #   @return [String]
+    #
+    # @!attribute [rw] script_source
+    #   The source location and integrity information for the script.
+    #   @return [Types::ScriptSource]
+    #
+    # @!attribute [rw] arguments
+    #   The command-line arguments to pass to the script. You can specify up
+    #   to 20 arguments, and each argument can be up to 256 characters long.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] on_error
+    #   The behavior when the script fails. The default value is
+    #   `TERMINATE`. Valid values:
+    #
+    #   * `TERMINATE` – Terminates the compute node.
+    #
+    #   * `STOP_SEQUENCE` – Stops running subsequent scripts in the sequence
+    #     but doesn't terminate the compute node.
+    #
+    #   * `CONTINUE` – Ignores the error and continues running the next
+    #     script.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_policy
+    #   The policy that determines when the script runs. The default value
+    #   is `FIRST_BOOT_ONLY`. Valid values:
+    #
+    #   * `FIRST_BOOT_ONLY` – Runs the script only the first time the
+    #     compute node boots.
+    #
+    #   * `EVERY_BOOT` – Runs the script every time the compute node boots,
+    #     including reboots.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/NodeLifecycleScript AWS API Documentation
+    #
+    class NodeLifecycleScript < Struct.new(
+      :name,
+      :script_source,
+      :arguments,
+      :on_error,
+      :execution_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The stages of a compute node's lifecycle where you can configure
+    # scripts to run.
+    #
+    # @!attribute [rw] node_bootstrapped
+    #   The scripts to run after PCS finishes setting up the compute node
+    #   and before the Slurm daemon (`slurmd`) starts. Use this stage for
+    #   tasks that must complete before the node accepts jobs, such as
+    #   mounting shared storage, configuring networking, or installing
+    #   software packages.
+    #   @return [Array<Types::NodeLifecycleScript>]
+    #
+    # @!attribute [rw] node_ready
+    #   The scripts to run after the Slurm daemon (`slurmd`) starts and the
+    #   compute node registers with the Slurm controller. Use this stage for
+    #   tasks that require Slurm to be running, such as running Slurm
+    #   commands.
+    #   @return [Array<Types::NodeLifecycleScript>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/NodeLifecycleStages AWS API Documentation
+    #
+    class NodeLifecycleStages < Struct.new(
+      :node_bootstrapped,
+      :node_ready)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A queue resource.
     #
     # @!attribute [rw] name
@@ -1762,12 +1913,36 @@ module Aws::PCS
     #   The list of endpoints available for interaction with the scheduler.
     #   @return [Array<Types::Endpoint>]
     #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster that the compute node registered into.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_node_group_id
+    #   The ID of the compute node group that the compute node registered
+    #   into.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_node_group_name
+    #   The name of the compute node group that the compute node registered
+    #   into.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_lifecycle_actions
+    #   The node lifecycle actions configured for the node group, including
+    #   scripts to run when a compute node finishes bootstrapping or becomes
+    #   ready to accept jobs.
+    #   @return [Types::NodeLifecycleActions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/RegisterComputeNodeGroupInstanceResponse AWS API Documentation
     #
     class RegisterComputeNodeGroupInstanceResponse < Struct.new(
       :node_id,
       :shared_secret,
-      :endpoints)
+      :endpoints,
+      :cluster_name,
+      :compute_node_group_id,
+      :compute_node_group_name,
+      :node_lifecycle_actions)
       SENSITIVE = [:shared_secret]
       include Aws::Structure
     end
@@ -1850,14 +2025,17 @@ module Aws::PCS
     #
     # @!attribute [rw] version
     #   The version of the specified scheduling software that PCS uses to
-    #   manage cluster scaling and job scheduling. For more information, see
-    #   [Slurm versions in PCS][1] in the *PCS User Guide*.
+    #   manage cluster scaling and job scheduling. You can update this
+    #   version using the `UpdateCluster` API action. For more information,
+    #   see [Updating the scheduler version on a cluster][1] and [Slurm
+    #   versions in PCS][2] in the *PCS User Guide*.
     #
     #   Valid Values: `23.11 | 24.05 | 24.11 | 25.05 | 25.11`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
+    #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/Scheduler AWS API Documentation
@@ -1893,6 +2071,36 @@ module Aws::PCS
     class SchedulerRequest < Struct.new(
       :type,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source location and integrity information for a node lifecycle
+    # script.
+    #
+    # @!attribute [rw] script_location
+    #   The location of the script. Specify either an Amazon S3 URI in the
+    #   format `s3://bucket-name/key` or an HTTPS URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_version_id
+    #   The Amazon S3 version ID of the script. Use this value to pin the
+    #   script to a specific version in a versioned Amazon S3 bucket. This
+    #   value is only valid when `scriptLocation` is an Amazon S3 URI.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum
+    #   The SHA-256 checksum of the script content, as a 64-character
+    #   hexadecimal string. This value is optional. When specified, PCS uses
+    #   this value to verify the integrity of the downloaded script.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ScriptSource AWS API Documentation
+    #
+    class ScriptSource < Struct.new(
+      :script_location,
+      :s3_version_id,
+      :checksum)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2213,12 +2421,23 @@ module Aws::PCS
     #   Additional options related to the Slurm scheduler.
     #   @return [Types::UpdateClusterSlurmConfigurationRequest]
     #
+    # @!attribute [rw] scheduler
+    #   The scheduler configuration to update for the cluster. Use this to
+    #   update the scheduler version. For more information, see [Updating
+    #   the scheduler version on a cluster][1] in the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
+    #   @return [Types::UpdateSchedulerRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateClusterRequest AWS API Documentation
     #
     class UpdateClusterRequest < Struct.new(
       :cluster_identifier,
       :client_token,
-      :slurm_configuration)
+      :slurm_configuration,
+      :scheduler)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2353,6 +2572,13 @@ module Aws::PCS
     #   Additional options related to the Slurm scheduler.
     #   @return [Types::UpdateComputeNodeGroupSlurmConfigurationRequest]
     #
+    # @!attribute [rw] node_lifecycle_actions
+    #   The lifecycle actions to run on compute nodes in the compute node
+    #   group. Use lifecycle actions to run custom scripts at defined stages
+    #   of a compute node's lifecycle, such as when a compute node finishes
+    #   bootstrapping or becomes ready to accept jobs.
+    #   @return [Types::UpdateNodeLifecycleActionsRequest]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -2379,6 +2605,7 @@ module Aws::PCS
       :scaling_configuration,
       :iam_instance_profile_arn,
       :slurm_configuration,
+      :node_lifecycle_actions,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2416,6 +2643,33 @@ module Aws::PCS
     class UpdateComputeNodeGroupSlurmConfigurationRequest < Struct.new(
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The lifecycle actions to configure on a compute node group when you
+    # update it. Lifecycle actions define scripts that PCS runs on compute
+    # nodes at specific stages of their lifecycle.
+    #
+    # @!attribute [rw] stages
+    #   The lifecycle stages where you configure scripts to run.
+    #   @return [Types::NodeLifecycleStages]
+    #
+    # @!attribute [rw] script_caching_policy
+    #   The caching policy for node lifecycle scripts. The default value is
+    #   `CACHE_ONCE`. Valid values:
+    #
+    #   * `CACHE_ONCE` – Downloads each script once and reuses it on
+    #     subsequent boots.
+    #
+    #   * `REFRESH_ON_REBOOT` – Downloads each script on every boot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateNodeLifecycleActionsRequest AWS API Documentation
+    #
+    class UpdateNodeLifecycleActionsRequest < Struct.new(
+      :stages,
+      :script_caching_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2485,6 +2739,30 @@ module Aws::PCS
     #
     class UpdateQueueSlurmConfigurationRequest < Struct.new(
       :slurm_custom_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scheduler configuration for updating a cluster. Use this to
+    # specify the scheduler version to update to.
+    #
+    # @!attribute [rw] version
+    #   The scheduler version to update the cluster to. You can only update
+    #   to a newer version. For more information about supported versions
+    #   and update paths, see [Updating the scheduler version on a
+    #   cluster][1] in the *PCS User Guide*.
+    #
+    #   Valid Values: `24.05 | 24.11 | 25.05 | 25.11`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateSchedulerRequest AWS API Documentation
+    #
+    class UpdateSchedulerRequest < Struct.new(
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end

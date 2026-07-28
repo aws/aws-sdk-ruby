@@ -306,7 +306,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_resource_telemetry-instance_method
       def list_resource_telemetry: (
                                      ?resource_identifier_prefix: ::String,
-                                     ?resource_types: Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster")],
+                                     ?resource_types: Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase")],
                                      ?telemetry_configuration_state: Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")],
                                      ?resource_tags: Hash[::String, ::String],
                                      ?max_results: ::Integer,
@@ -323,7 +323,7 @@ module Aws
       def list_resource_telemetry_for_organization: (
                                                       ?account_identifiers: Array[::String],
                                                       ?resource_identifier_prefix: ::String,
-                                                      ?resource_types: Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster")],
+                                                      ?resource_types: Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase")],
                                                       ?telemetry_configuration_state: Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")],
                                                       ?resource_tags: Hash[::String, ::String],
                                                       ?max_results: ::Integer,
@@ -453,7 +453,8 @@ module Aws
                                      ],
                                      configuration: {
                                        body: ::String
-                                     }
+                                     },
+                                     ?signal_type: ("LOG" | "METRIC")
                                    ) -> _TestTelemetryPipelineResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestTelemetryPipelineResponseSuccess
 

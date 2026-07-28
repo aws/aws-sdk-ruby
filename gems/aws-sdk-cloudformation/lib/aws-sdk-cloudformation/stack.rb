@@ -108,6 +108,13 @@ module Aws::CloudFormation
       data[:disable_rollback]
     end
 
+    # The deployment configuration for the stack, including the deployment
+    # mode used for stack operations.
+    # @return [Types::DeploymentConfig]
+    def deployment_config
+      data[:deployment_config]
+    end
+
     # Amazon SNS topic Amazon Resource Names (ARNs) to which stack related
     # events are published.
     # @return [Array<String>]
@@ -482,6 +489,11 @@ module Aws::CloudFormation
     #     client_request_token: "ClientRequestToken",
     #     enable_termination_protection: false,
     #     retain_except_on_create: false,
+    #     deployment_config: {
+    #       mode: "STANDARD", # accepts STANDARD, EXPRESS
+    #       disable_rollback: false,
+    #     },
+    #     disable_validation: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :template_body
@@ -725,6 +737,14 @@ module Aws::CloudFormation
     #   with a deletion policy of `Retain`.
     #
     #   Default: `false`
+    # @option options [Types::DeploymentConfig] :deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    # @option options [Boolean] :disable_validation
+    #   Set to `true` to disable pre-deployment validations in changeset or
+    #   stack operations.
+    #
+    #   Default: `false`
     # @return [Types::CreateStackOutput]
     def create(options = {})
       options = options.merge(stack_name: @name)
@@ -741,6 +761,10 @@ module Aws::CloudFormation
     #     role_arn: "RoleARN",
     #     client_request_token: "ClientRequestToken",
     #     deletion_mode: "STANDARD", # accepts STANDARD, FORCE_DELETE_STACK
+    #     deployment_config: {
+    #       mode: "STANDARD", # accepts STANDARD, EXPRESS
+    #       disable_rollback: false,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :retain_resources
@@ -788,6 +812,9 @@ module Aws::CloudFormation
     #
     #   * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
     #     `DELETE_FAILED` state due to resource deletion failure.
+    # @option options [Types::DeploymentConfig] :deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(stack_name: @name)
@@ -837,6 +864,11 @@ module Aws::CloudFormation
     #     disable_rollback: false,
     #     client_request_token: "ClientRequestToken",
     #     retain_except_on_create: false,
+    #     deployment_config: {
+    #       mode: "STANDARD", # accepts STANDARD, EXPRESS
+    #       disable_rollback: false,
+    #     },
+    #     disable_validation: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :template_body
@@ -1094,6 +1126,14 @@ module Aws::CloudFormation
     #   When set to `true`, newly created resources are deleted when the
     #   operation rolls back. This includes newly created resources marked
     #   with a deletion policy of `Retain`.
+    #
+    #   Default: `false`
+    # @option options [Types::DeploymentConfig] :deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    # @option options [Boolean] :disable_validation
+    #   Set to `true` to disable pre-deployment validations in changeset or
+    #   stack operations.
     #
     #   Default: `false`
     # @return [Types::UpdateStackOutput]

@@ -48,7 +48,6 @@ module Aws::EMR
     CancelStepsInput = Shapes::StructureShape.new(name: 'CancelStepsInput')
     CancelStepsOutput = Shapes::StructureShape.new(name: 'CancelStepsOutput')
     CancelStepsRequestStatus = Shapes::StringShape.new(name: 'CancelStepsRequestStatus')
-    CertificateAuthority = Shapes::StructureShape.new(name: 'CertificateAuthority')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CloudWatchAlarmDefinition = Shapes::StructureShape.new(name: 'CloudWatchAlarmDefinition')
     CloudWatchLogConfiguration = Shapes::StructureShape.new(name: 'CloudWatchLogConfiguration')
@@ -487,10 +486,6 @@ module Aws::EMR
 
     CancelStepsOutput.add_member(:cancel_steps_info_list, Shapes::ShapeRef.new(shape: CancelStepsInfoList, location_name: "CancelStepsInfoList"))
     CancelStepsOutput.struct_class = Types::CancelStepsOutput
-
-    CertificateAuthority.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "CertificateArn"))
-    CertificateAuthority.add_member(:certificate_data, Shapes::ShapeRef.new(shape: XmlString, location_name: "CertificateData"))
-    CertificateAuthority.struct_class = Types::CertificateAuthority
 
     CloudWatchAlarmDefinition.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
     CloudWatchAlarmDefinition.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: Integer, location_name: "EvaluationPeriods"))
@@ -1570,7 +1565,6 @@ module Aws::EMR
     Session.add_member(:engine_configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "EngineConfigurations"))
     Session.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: SessionMonitoringConfiguration, location_name: "MonitoringConfiguration"))
     Session.add_member(:session_idle_timeout_in_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "SessionIdleTimeoutInMinutes"))
-    Session.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: CertificateAuthority, location_name: "CertificateAuthority"))
     Session.add_member(:server_url, Shapes::ShapeRef.new(shape: XmlString, location_name: "ServerUrl"))
     Session.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Session.struct_class = Types::Session

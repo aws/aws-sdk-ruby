@@ -2310,6 +2310,11 @@ module Aws::PaymentCryptographyData
     #   verification.
     #   @return [Types::SessionKeyVisa]
     #
+    # @!attribute [rw] union_pay
+    #   Parameters to derive session key for a UnionPay payment card for
+    #   Authorization Request Cryptogram (ARQC) generation and verification.
+    #   @return [Types::SessionKeyUnionPay]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/SessionKeyDerivation AWS API Documentation
     #
     class SessionKeyDerivation < Struct.new(
@@ -2318,6 +2323,7 @@ module Aws::PaymentCryptographyData
       :emv_2000,
       :amex,
       :visa,
+      :union_pay,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2328,6 +2334,7 @@ module Aws::PaymentCryptographyData
       class Emv2000 < SessionKeyDerivation; end
       class Amex < SessionKeyDerivation; end
       class Visa < SessionKeyDerivation; end
+      class UnionPay < SessionKeyDerivation; end
       class Unknown < SessionKeyDerivation; end
     end
 
@@ -2448,6 +2455,36 @@ module Aws::PaymentCryptographyData
       :pan_sequence_number,
       :application_transaction_counter,
       :unpredictable_number)
+      SENSITIVE = [:primary_account_number]
+      include Aws::Structure
+    end
+
+    # Parameters to derive session key for a UnionPay payment card for
+    # Authorization Request Cryptogram (ARQC) generation and verification.
+    #
+    # @!attribute [rw] primary_account_number
+    #   The Primary Account Number (PAN) of the cardholder. A PAN is a
+    #   unique identifier for a payment credit or debit card and associates
+    #   the card to a specific account holder.
+    #   @return [String]
+    #
+    # @!attribute [rw] pan_sequence_number
+    #   A number that identifies and differentiates payment cards with the
+    #   same Primary Account Number (PAN). If not used, enter `00`.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_transaction_counter
+    #   The transaction counter that the terminal provides during
+    #   transaction processing. This value is in hexadecimal format. For
+    #   example, enter a decimal counter of 109 as `006D`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/SessionKeyUnionPay AWS API Documentation
+    #
+    class SessionKeyUnionPay < Struct.new(
+      :primary_account_number,
+      :pan_sequence_number,
+      :application_transaction_counter)
       SENSITIVE = [:primary_account_number]
       include Aws::Structure
     end

@@ -113,6 +113,7 @@ module Aws
                            },
                            publicly_accessible: bool,
                            ?security_groups: Array[::String],
+                           ?storage_size: ::Integer,
                            ?storage_type: ("EBS" | "EFS"),
                            ?subnet_ids: Array[::String],
                            ?tags: Hash[::String, ::String],
@@ -232,8 +233,10 @@ module Aws
         def pending_host_instance_type: () -> ::String
         def pending_ldap_server_metadata: () -> Types::LdapServerMetadataOutput
         def pending_security_groups: () -> ::Array[::String]
+        def pending_storage_size: () -> ::Integer
         def publicly_accessible: () -> bool
         def security_groups: () -> ::Array[::String]
+        def storage_size: () -> ::Integer
         def storage_type: () -> ("EBS" | "EFS")
         def subnet_ids: () -> ::Array[::String]
         def tags: () -> ::Hash[::String, ::String]
@@ -442,6 +445,7 @@ module Aws
         def data_replication_mode: () -> ("NONE" | "CRDR")
         def pending_data_replication_metadata: () -> Types::DataReplicationMetadataOutput
         def pending_data_replication_mode: () -> ("NONE" | "CRDR")
+        def storage_size: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#update_broker-instance_method
       def update_broker: (
@@ -466,6 +470,7 @@ module Aws
                            },
                            ?resource_share_arns: Array[::String],
                            ?security_groups: Array[::String],
+                           ?storage_size: ::Integer,
                            ?data_replication_mode: ("NONE" | "CRDR")
                          ) -> _UpdateBrokerResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrokerResponseSuccess

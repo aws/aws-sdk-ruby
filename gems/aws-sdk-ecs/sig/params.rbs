@@ -129,11 +129,18 @@ module Aws
       }?
     }
 
+      type deployment_circuit_breaker = {
+      enable: bool,
+      rollback: bool,
+      reset_on_healthy_task: bool?,
+      threshold_configuration: {
+        type: ("COUNT" | "BOUNDED_PERCENT" | "UNBOUNDED_PERCENT"),
+        value: ::Integer
+      }?
+    }
+
       type deployment_configuration = {
-      deployment_circuit_breaker: {
-        enable: bool,
-        rollback: bool
-      }?,
+      deployment_circuit_breaker: Params::deployment_circuit_breaker?,
       maximum_percent: ::Integer?,
       minimum_healthy_percent: ::Integer?,
       alarms: {

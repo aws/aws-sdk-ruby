@@ -23,6 +23,13 @@ module Aws::SageMakerFeatureStoreRuntime
     BatchGetRecordResponse = Shapes::StructureShape.new(name: 'BatchGetRecordResponse')
     BatchGetRecordResultDetail = Shapes::StructureShape.new(name: 'BatchGetRecordResultDetail')
     BatchGetRecordResultDetails = Shapes::ListShape.new(name: 'BatchGetRecordResultDetails')
+    BatchWriteRecordEntries = Shapes::ListShape.new(name: 'BatchWriteRecordEntries')
+    BatchWriteRecordEntry = Shapes::StructureShape.new(name: 'BatchWriteRecordEntry')
+    BatchWriteRecordError = Shapes::StructureShape.new(name: 'BatchWriteRecordError')
+    BatchWriteRecordErrors = Shapes::ListShape.new(name: 'BatchWriteRecordErrors')
+    BatchWriteRecordRequest = Shapes::StructureShape.new(name: 'BatchWriteRecordRequest')
+    BatchWriteRecordResponse = Shapes::StructureShape.new(name: 'BatchWriteRecordResponse')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     DeleteRecordRequest = Shapes::StructureShape.new(name: 'DeleteRecordRequest')
     DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
     ExpirationTimeResponse = Shapes::StringShape.new(name: 'ExpirationTimeResponse')
@@ -34,9 +41,14 @@ module Aws::SageMakerFeatureStoreRuntime
     GetRecordRequest = Shapes::StructureShape.new(name: 'GetRecordRequest')
     GetRecordResponse = Shapes::StructureShape.new(name: 'GetRecordResponse')
     InternalFailure = Shapes::StructureShape.new(name: 'InternalFailure')
+    ListRecordsMaxResults = Shapes::IntegerShape.new(name: 'ListRecordsMaxResults')
+    ListRecordsNextToken = Shapes::StringShape.new(name: 'ListRecordsNextToken')
+    ListRecordsRequest = Shapes::StructureShape.new(name: 'ListRecordsRequest')
+    ListRecordsResponse = Shapes::StructureShape.new(name: 'ListRecordsResponse')
     Message = Shapes::StringShape.new(name: 'Message')
     PutRecordRequest = Shapes::StructureShape.new(name: 'PutRecordRequest')
     Record = Shapes::ListShape.new(name: 'Record')
+    RecordIdentifierList = Shapes::ListShape.new(name: 'RecordIdentifierList')
     RecordIdentifiers = Shapes::ListShape.new(name: 'RecordIdentifiers')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     ServiceUnavailable = Shapes::StructureShape.new(name: 'ServiceUnavailable')
@@ -45,6 +57,7 @@ module Aws::SageMakerFeatureStoreRuntime
     TtlDuration = Shapes::StructureShape.new(name: 'TtlDuration')
     TtlDurationUnit = Shapes::StringShape.new(name: 'TtlDurationUnit')
     TtlDurationValue = Shapes::IntegerShape.new(name: 'TtlDurationValue')
+    UnprocessedBatchWriteRecordEntries = Shapes::ListShape.new(name: 'UnprocessedBatchWriteRecordEntries')
     UnprocessedIdentifiers = Shapes::ListShape.new(name: 'UnprocessedIdentifiers')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     ValueAsString = Shapes::StringShape.new(name: 'ValueAsString')
@@ -85,6 +98,29 @@ module Aws::SageMakerFeatureStoreRuntime
 
     BatchGetRecordResultDetails.member = Shapes::ShapeRef.new(shape: BatchGetRecordResultDetail)
 
+    BatchWriteRecordEntries.member = Shapes::ShapeRef.new(shape: BatchWriteRecordEntry)
+
+    BatchWriteRecordEntry.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location_name: "FeatureGroupName"))
+    BatchWriteRecordEntry.add_member(:record, Shapes::ShapeRef.new(shape: Record, required: true, location_name: "Record"))
+    BatchWriteRecordEntry.add_member(:target_stores, Shapes::ShapeRef.new(shape: TargetStores, location_name: "TargetStores"))
+    BatchWriteRecordEntry.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))
+    BatchWriteRecordEntry.struct_class = Types::BatchWriteRecordEntry
+
+    BatchWriteRecordError.add_member(:entry, Shapes::ShapeRef.new(shape: BatchWriteRecordEntry, required: true, location_name: "Entry"))
+    BatchWriteRecordError.add_member(:error_code, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location_name: "ErrorCode"))
+    BatchWriteRecordError.add_member(:error_message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "ErrorMessage"))
+    BatchWriteRecordError.struct_class = Types::BatchWriteRecordError
+
+    BatchWriteRecordErrors.member = Shapes::ShapeRef.new(shape: BatchWriteRecordError)
+
+    BatchWriteRecordRequest.add_member(:entries, Shapes::ShapeRef.new(shape: BatchWriteRecordEntries, required: true, location_name: "Entries"))
+    BatchWriteRecordRequest.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))
+    BatchWriteRecordRequest.struct_class = Types::BatchWriteRecordRequest
+
+    BatchWriteRecordResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchWriteRecordErrors, required: true, location_name: "Errors"))
+    BatchWriteRecordResponse.add_member(:unprocessed_entries, Shapes::ShapeRef.new(shape: UnprocessedBatchWriteRecordEntries, required: true, location_name: "UnprocessedEntries"))
+    BatchWriteRecordResponse.struct_class = Types::BatchWriteRecordResponse
+
     DeleteRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location: "uri", location_name: "FeatureGroupName"))
     DeleteRecordRequest.add_member(:record_identifier_value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "RecordIdentifierValueAsString"))
     DeleteRecordRequest.add_member(:event_time, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "EventTime"))
@@ -112,6 +148,16 @@ module Aws::SageMakerFeatureStoreRuntime
     InternalFailure.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalFailure.struct_class = Types::InternalFailure
 
+    ListRecordsRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location: "uri", location_name: "FeatureGroupName"))
+    ListRecordsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecordsMaxResults, location_name: "MaxResults"))
+    ListRecordsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecordsNextToken, location_name: "NextToken"))
+    ListRecordsRequest.add_member(:include_soft_deleted_records, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeSoftDeletedRecords"))
+    ListRecordsRequest.struct_class = Types::ListRecordsRequest
+
+    ListRecordsResponse.add_member(:record_identifiers, Shapes::ShapeRef.new(shape: RecordIdentifierList, required: true, location_name: "RecordIdentifiers"))
+    ListRecordsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecordsNextToken, location_name: "NextToken"))
+    ListRecordsResponse.struct_class = Types::ListRecordsResponse
+
     PutRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location: "uri", location_name: "FeatureGroupName"))
     PutRecordRequest.add_member(:record, Shapes::ShapeRef.new(shape: Record, required: true, location_name: "Record"))
     PutRecordRequest.add_member(:target_stores, Shapes::ShapeRef.new(shape: TargetStores, location_name: "TargetStores"))
@@ -119,6 +165,8 @@ module Aws::SageMakerFeatureStoreRuntime
     PutRecordRequest.struct_class = Types::PutRecordRequest
 
     Record.member = Shapes::ShapeRef.new(shape: FeatureValue)
+
+    RecordIdentifierList.member = Shapes::ShapeRef.new(shape: ValueAsString)
 
     RecordIdentifiers.member = Shapes::ShapeRef.new(shape: ValueAsString)
 
@@ -133,6 +181,8 @@ module Aws::SageMakerFeatureStoreRuntime
     TtlDuration.add_member(:unit, Shapes::ShapeRef.new(shape: TtlDurationUnit, required: true, location_name: "Unit"))
     TtlDuration.add_member(:value, Shapes::ShapeRef.new(shape: TtlDurationValue, required: true, location_name: "Value"))
     TtlDuration.struct_class = Types::TtlDuration
+
+    UnprocessedBatchWriteRecordEntries.member = Shapes::ShapeRef.new(shape: BatchWriteRecordEntry)
 
     UnprocessedIdentifiers.member = Shapes::ShapeRef.new(shape: BatchGetRecordIdentifier)
 
@@ -173,6 +223,19 @@ module Aws::SageMakerFeatureStoreRuntime
         o.errors << Shapes::ShapeRef.new(shape: AccessForbidden)
       end)
 
+      api.add_operation(:batch_write_record, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchWriteRecord"
+        o.http_method = "POST"
+        o.http_request_uri = "/BatchWriteRecord"
+        o.input = Shapes::ShapeRef.new(shape: BatchWriteRecordRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchWriteRecordResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailure)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailable)
+        o.errors << Shapes::ShapeRef.new(shape: AccessForbidden)
+      end)
+
       api.add_operation(:delete_record, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRecord"
         o.http_method = "DELETE"
@@ -196,6 +259,25 @@ module Aws::SageMakerFeatureStoreRuntime
         o.errors << Shapes::ShapeRef.new(shape: InternalFailure)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailable)
         o.errors << Shapes::ShapeRef.new(shape: AccessForbidden)
+      end)
+
+      api.add_operation(:list_records, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecords"
+        o.http_method = "POST"
+        o.http_request_uri = "/FeatureGroup/{FeatureGroupName}/ListRecords"
+        o.input = Shapes::ShapeRef.new(shape: ListRecordsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRecordsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailure)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailable)
+        o.errors << Shapes::ShapeRef.new(shape: AccessForbidden)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_record, Seahorse::Model::Operation.new.tap do |o|

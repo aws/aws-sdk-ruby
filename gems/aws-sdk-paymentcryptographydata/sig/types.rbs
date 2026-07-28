@@ -530,7 +530,7 @@ module Aws::PaymentCryptographyData
       attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
       attr_accessor primary_account_number: ::String
       attr_accessor pan_sequence_number: ::String
-      attr_accessor session_key_derivation_mode: ("EMV_COMMON_SESSION_KEY" | "EMV2000" | "AMEX" | "MASTERCARD_SESSION_KEY" | "VISA")
+      attr_accessor session_key_derivation_mode: ("EMV_COMMON_SESSION_KEY" | "EMV2000" | "AMEX" | "MASTERCARD_SESSION_KEY" | "VISA" | "UNION_PAY")
       attr_accessor session_key_derivation_value: Types::SessionKeyDerivationValue
       SENSITIVE: [:primary_account_number]
     end
@@ -685,6 +685,7 @@ module Aws::PaymentCryptographyData
       attr_accessor emv_2000: Types::SessionKeyEmv2000
       attr_accessor amex: Types::SessionKeyAmex
       attr_accessor visa: Types::SessionKeyVisa
+      attr_accessor union_pay: Types::SessionKeyUnionPay
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -697,6 +698,8 @@ module Aws::PaymentCryptographyData
       class Amex < SessionKeyDerivation
       end
       class Visa < SessionKeyDerivation
+      end
+      class UnionPay < SessionKeyDerivation
       end
       class Unknown < SessionKeyDerivation
       end
@@ -735,6 +738,13 @@ module Aws::PaymentCryptographyData
       attr_accessor pan_sequence_number: ::String
       attr_accessor application_transaction_counter: ::String
       attr_accessor unpredictable_number: ::String
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class SessionKeyUnionPay
+      attr_accessor primary_account_number: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor application_transaction_counter: ::String
       SENSITIVE: [:primary_account_number]
     end
 

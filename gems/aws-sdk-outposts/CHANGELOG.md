@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.106.0 (2026-07-02)
+------------------
+
+* Feature - Tighten Outpost site ContactPhoneNumber regex to perform phone number validation.
+
 1.105.0 (2026-06-16)
 ------------------
 

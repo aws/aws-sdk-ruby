@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.193.0 (2026-07-27)
+------------------
+
+* Feature - Added new Governance fields to Custom Permissions API to support Deny By Default functionality.
+
+1.192.0 (2026-07-23)
+------------------
+
+* Feature - Added new capabilities to custom permissions profiles to control access to Amazon Quick through the browser extension and Microsoft Word, Outlook, Excel, and PowerPoint add-ins.
+
+1.191.0 (2026-07-20)
+------------------
+
+* Feature - Adds support for custom permissions for Triggers, allowing administrators to control user access to Schedule, Inbound Email and Quick Event triggers.
+
+1.190.0 (2026-07-10)
+------------------
+
+* Feature - Provides CreateKnowledgeBase and UpdateKnowledgeBase APIs
+
+1.189.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.188.0 (2026-07-01)
+------------------
+
+* Feature - Adding support for FileSource PhysicalTables.  This adds support for datasets with file sources.
+
 1.187.0 (2026-06-22)
 ------------------
 

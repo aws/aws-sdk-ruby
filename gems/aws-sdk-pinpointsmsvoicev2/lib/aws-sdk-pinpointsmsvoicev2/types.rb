@@ -1176,6 +1176,26 @@ module Aws::PinpointSMSVoiceV2
     #   incoming text messages from your end recipients.
     #   @return [Boolean]
     #
+    # @!attribute [rw] two_way_media_s3_bucket_name
+    #   The name of the S3 bucket where inbound RCS media files are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_media_s3_key_prefix
+    #   The key prefix used for inbound RCS media objects in the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_media_s3_role
+    #   The ARN of the IAM role used to write inbound RCS media files to the
+    #   S3 bucket. The role must have `s3:PutObject` permission on the
+    #   bucket and a trust policy allowing `sms-voice.amazonaws.com` to
+    #   assume it.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_rcs_events_enabled
+    #   The list of RCS event types enabled for two-way messaging on the
+    #   agent.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] tags
     #   An array of tags (key and value pairs) associated with the RCS
     #   agent.
@@ -1194,6 +1214,10 @@ module Aws::PinpointSMSVoiceV2
       :two_way_channel_arn,
       :two_way_channel_role,
       :two_way_enabled,
+      :two_way_media_s3_bucket_name,
+      :two_way_media_s3_key_prefix,
+      :two_way_media_s3_role,
+      :two_way_rcs_events_enabled,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2401,6 +2425,11 @@ module Aws::PinpointSMSVoiceV2
     #   incoming text messages from your end recipients.
     #   @return [Boolean]
     #
+    # @!attribute [rw] two_way_rcs_events_enabled
+    #   The list of RCS event types that were enabled for two-way messaging
+    #   on the deleted agent.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRcsAgentResult AWS API Documentation
     #
     class DeleteRcsAgentResult < Struct.new(
@@ -2413,7 +2442,26 @@ module Aws::PinpointSMSVoiceV2
       :self_managed_opt_outs_enabled,
       :two_way_channel_arn,
       :two_way_channel_role,
-      :two_way_enabled)
+      :two_way_enabled,
+      :two_way_rcs_events_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRcsMessageSpendLimitOverrideRequest AWS API Documentation
+    #
+    class DeleteRcsMessageSpendLimitOverrideRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] monthly_limit
+    #   The current monthly limit to enforce on RCS message spending.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRcsMessageSpendLimitOverrideResult AWS API Documentation
+    #
+    class DeleteRcsMessageSpendLimitOverrideResult < Struct.new(
+      :monthly_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5901,6 +5949,24 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier of the pool associated with the RCS agent.
     #   @return [String]
     #
+    # @!attribute [rw] two_way_media_s3_bucket_name
+    #   The name of the S3 bucket where inbound RCS media files are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_media_s3_key_prefix
+    #   The key prefix used for inbound RCS media objects in the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_media_s3_role
+    #   The ARN of the IAM role used to write inbound RCS media files to the
+    #   S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_rcs_events_enabled
+    #   The list of RCS event types enabled for two-way messaging on the
+    #   agent.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] testing_agent
     #   The testing agent information associated with the RCS agent.
     #   @return [Types::TestingAgentInformation]
@@ -5919,7 +5985,562 @@ module Aws::PinpointSMSVoiceV2
       :two_way_channel_role,
       :two_way_enabled,
       :pool_id,
+      :two_way_media_s3_bucket_name,
+      :two_way_media_s3_key_prefix,
+      :two_way_media_s3_role,
+      :two_way_rcs_events_enabled,
       :testing_agent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The content of a rich card, including title, description, media, and
+    # card-level suggested actions.
+    #
+    # @!attribute [rw] title
+    #   The title of the card. Maximum 200 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description text of the card. Maximum 2000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] media
+    #   The media content of the card, including the file URL, optional
+    #   thumbnail, and display height.
+    #   @return [Types::RcsCardMedia]
+    #
+    # @!attribute [rw] suggestions
+    #   Card-level suggested actions. Maximum 4 suggestions per card.
+    #   @return [Array<Types::RcsSuggestedAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsCardContent AWS API Documentation
+    #
+    class RcsCardContent < Struct.new(
+      :title,
+      :description,
+      :media,
+      :suggestions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The media content of a rich card, including the file URL, optional
+    # thumbnail, and display height.
+    #
+    # @!attribute [rw] file_url
+    #   The S3 URI of the media file for the card, in the format
+    #   `s3://bucket-name/key`. Maximum 2000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_url
+    #   The S3 URI of an optional thumbnail image for the card media.
+    #   Maximum 2000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] height
+    #   The display height of the media in the card. Valid values are SHORT,
+    #   MEDIUM, and TALL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsCardMedia AWS API Documentation
+    #
+    class RcsCardMedia < Struct.new(
+      :file_url,
+      :thumbnail_url,
+      :height)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A carousel of 2 to 10 scrollable rich cards.
+    #
+    # @!attribute [rw] card_width
+    #   The width of cards in the carousel. Valid values are SMALL and
+    #   MEDIUM.
+    #   @return [String]
+    #
+    # @!attribute [rw] card_contents
+    #   The list of cards in the carousel. Minimum 2, maximum 10 cards.
+    #   @return [Array<Types::RcsCarouselCardContent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsCarousel AWS API Documentation
+    #
+    class RcsCarousel < Struct.new(
+      :card_width,
+      :card_contents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The content of a carousel card, including title, description, media,
+    # and card-level suggested actions. Media height is restricted to SHORT
+    # or MEDIUM.
+    #
+    # @!attribute [rw] title
+    #   The title of the carousel card. Maximum 200 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description text of the carousel card. Maximum 2000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] media
+    #   The media content of the carousel card. Media height is restricted
+    #   to SHORT or MEDIUM (TALL is not supported in carousels).
+    #   @return [Types::RcsCarouselCardMedia]
+    #
+    # @!attribute [rw] suggestions
+    #   Card-level suggested actions for this carousel card. Maximum 4
+    #   suggestions per card.
+    #   @return [Array<Types::RcsSuggestedAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsCarouselCardContent AWS API Documentation
+    #
+    class RcsCarouselCardContent < Struct.new(
+      :title,
+      :description,
+      :media,
+      :suggestions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The media content of a carousel card. Display height is restricted to
+    # SHORT or MEDIUM (TALL is not supported in carousels).
+    #
+    # @!attribute [rw] file_url
+    #   The S3 URI of the media file for the carousel card. Maximum 2000
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_url
+    #   The S3 URI of an optional thumbnail image for the carousel card
+    #   media. Maximum 2000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] height
+    #   The display height of the media in the carousel card. Valid values
+    #   are SHORT and MEDIUM.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsCarouselCardMedia AWS API Documentation
+    #
+    class RcsCarouselCardMedia < Struct.new(
+      :file_url,
+      :thumbnail_url,
+      :height)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The message body of an RCS message. Exactly one content type must be
+    # specified.
+    #
+    # @note RcsContent is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] text_message
+    #   A plain text RCS message.
+    #   @return [Types::RcsTextMessage]
+    #
+    # @!attribute [rw] file_message
+    #   A file message containing a media file (image, video, audio, or PDF)
+    #   with an optional thumbnail.
+    #   @return [Types::RcsFileMessage]
+    #
+    # @!attribute [rw] rich_card
+    #   A standalone rich card with media, title, description, and suggested
+    #   actions.
+    #   @return [Types::RcsStandaloneCard]
+    #
+    # @!attribute [rw] carousel
+    #   A carousel of 2 to 10 scrollable cards, each with media, title,
+    #   description, and suggested actions.
+    #   @return [Types::RcsCarousel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsContent AWS API Documentation
+    #
+    class RcsContent < Struct.new(
+      :text_message,
+      :file_message,
+      :rich_card,
+      :carousel,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class TextMessage < RcsContent; end
+      class FileMessage < RcsContent; end
+      class RichCard < RcsContent; end
+      class Carousel < RcsContent; end
+      class Unknown < RcsContent; end
+    end
+
+    # A suggested action that creates a calendar event on the recipient's
+    # device.
+    #
+    # @!attribute [rw] text
+    #   The display text of the action. Maximum 25 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] postback_data
+    #   The postback data sent to your webhook when the user taps this
+    #   action. Maximum 2048 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the calendar event. Maximum 100 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the calendar event in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the calendar event in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the calendar event. Maximum 500
+    #   characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsCreateCalendarEventAction AWS API Documentation
+    #
+    class RcsCreateCalendarEventAction < Struct.new(
+      :text,
+      :postback_data,
+      :title,
+      :start_time,
+      :end_time,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A suggested action that initiates a phone call to a specified number
+    # when tapped by the recipient.
+    #
+    # @!attribute [rw] text
+    #   The display text of the action. Maximum 25 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] postback_data
+    #   The postback data sent to your webhook when the user taps this
+    #   action. Maximum 2048 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number to dial in E.164 format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsDialPhoneAction AWS API Documentation
+    #
+    class RcsDialPhoneAction < Struct.new(
+      :text,
+      :postback_data,
+      :phone_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for SMS or MMS fallback when RCS delivery fails or the
+    # TimeToLive expires without delivery confirmation.
+    #
+    # @!attribute [rw] channel
+    #   The fallback channel to use when RCS delivery fails. Valid values
+    #   are SMS and MMS. SMS and MMS are mutually exclusive.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_body
+    #   The text body of the fallback message. Required for SMS fallback.
+    #   For MMS fallback, at least one of MessageBody or MediaUrls must be
+    #   provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_urls
+    #   An array of S3 URIs to media files for MMS fallback. Only valid when
+    #   Channel is MMS.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] origination_identity
+    #   The origination identity to use for the fallback message. This can
+    #   be a PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, or
+    #   SenderIdArn. Pool IDs and pool ARNs are not accepted. If not
+    #   specified and the original message was sent via a pool, the service
+    #   selects a suitable number from the pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsFallbackConfiguration AWS API Documentation
+    #
+    class RcsFallbackConfiguration < Struct.new(
+      :channel,
+      :message_body,
+      :media_urls,
+      :origination_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A file message containing a media file (image, video, audio, or PDF)
+    # with an optional thumbnail.
+    #
+    # @!attribute [rw] file_url
+    #   The S3 URI of the media file to send, in the format
+    #   `s3://bucket-name/key`. The service downloads the file from your S3
+    #   bucket, rehosts it, and generates a presigned URL for the
+    #   aggregator. Maximum 2000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_url
+    #   The S3 URI of an optional thumbnail image for the media file, in the
+    #   format `s3://bucket-name/key`. Maximum 2000 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsFileMessage AWS API Documentation
+    #
+    class RcsFileMessage < Struct.new(
+      :file_url,
+      :thumbnail_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The content of an RCS message, containing the message body (text,
+    # file, rich card, or carousel) and optional message-level suggested
+    # actions.
+    #
+    # @!attribute [rw] content
+    #   The content of the RCS message. Exactly one content type must be
+    #   specified: TextMessage, FileMessage, RichCard, or Carousel.
+    #   @return [Types::RcsContent]
+    #
+    # @!attribute [rw] suggestions
+    #   Message-level suggested actions displayed to the recipient. Maximum
+    #   11 suggestions per message.
+    #   @return [Array<Types::RcsSuggestedAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsMessageContent AWS API Documentation
+    #
+    class RcsMessageContent < Struct.new(
+      :content,
+      :suggestions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A suggested action that opens a URL in the recipient's browser or an
+    # in-app webview.
+    #
+    # @!attribute [rw] text
+    #   The display text of the action. Maximum 25 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] postback_data
+    #   The postback data sent to your webhook when the user taps this
+    #   action. Maximum 2048 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open. Must start with https://. Maximum 2048 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] application
+    #   How to open the URL. BROWSER opens in the device's default browser.
+    #   WEBVIEW opens in an in-app webview.
+    #   @return [String]
+    #
+    # @!attribute [rw] webview_view_mode
+    #   The display mode of the webview. Valid values are FULL, HALF, and
+    #   TALL. Only applicable when Application is WEBVIEW.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsOpenUrlAction AWS API Documentation
+    #
+    class RcsOpenUrlAction < Struct.new(
+      :text,
+      :postback_data,
+      :url,
+      :application,
+      :webview_view_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A suggested reply action that sends predefined text and postback data
+    # when tapped by the recipient.
+    #
+    # @!attribute [rw] text
+    #   The display text of the suggested reply. Maximum 25 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] postback_data
+    #   The postback data sent to your webhook when the user taps this
+    #   reply. Maximum 2048 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsReplyAction AWS API Documentation
+    #
+    class RcsReplyAction < Struct.new(
+      :text,
+      :postback_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A suggested action that requests the recipient's current location.
+    #
+    # @!attribute [rw] text
+    #   The display text of the action. Maximum 25 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] postback_data
+    #   The postback data sent to your webhook when the user taps this
+    #   action. Maximum 2048 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsRequestLocationAction AWS API Documentation
+    #
+    class RcsRequestLocationAction < Struct.new(
+      :text,
+      :postback_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A suggested action that shows a location on a map when tapped by the
+    # recipient.
+    #
+    # @!attribute [rw] text
+    #   The display text of the action. Maximum 25 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] postback_data
+    #   The postback data sent to your webhook when the user taps this
+    #   action. Maximum 2048 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] latitude
+    #   The latitude of the location. Valid values are -90 to 90.
+    #   @return [Float]
+    #
+    # @!attribute [rw] longitude
+    #   The longitude of the location. Valid values are -180 to 180.
+    #   @return [Float]
+    #
+    # @!attribute [rw] label
+    #   An optional label for the location pin. Maximum 100 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsShowLocationAction AWS API Documentation
+    #
+    class RcsShowLocationAction < Struct.new(
+      :text,
+      :postback_data,
+      :latitude,
+      :longitude,
+      :label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A standalone rich card with media, title, description, and suggested
+    # actions.
+    #
+    # @!attribute [rw] card_orientation
+    #   The orientation of the rich card. Valid values are HORIZONTAL and
+    #   VERTICAL.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_image_alignment
+    #   The alignment of the thumbnail image in a horizontal card. Valid
+    #   values are LEFT and RIGHT. Only applicable when CardOrientation is
+    #   HORIZONTAL.
+    #   @return [String]
+    #
+    # @!attribute [rw] card_content
+    #   The content of the rich card, including title, description, media,
+    #   and card-level suggested actions.
+    #   @return [Types::RcsCardContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsStandaloneCard AWS API Documentation
+    #
+    class RcsStandaloneCard < Struct.new(
+      :card_orientation,
+      :thumbnail_image_alignment,
+      :card_content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A suggested action displayed to the RCS message recipient. Can be a
+    # reply, open URL, dial phone, show location, request location, or
+    # create calendar event.
+    #
+    # @note RcsSuggestedAction is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] reply
+    #   A suggested reply that sends predefined text and postback data when
+    #   tapped.
+    #   @return [Types::RcsReplyAction]
+    #
+    # @!attribute [rw] open_url
+    #   A suggested action that opens a URL in the user's browser or a
+    #   webview.
+    #   @return [Types::RcsOpenUrlAction]
+    #
+    # @!attribute [rw] dial_phone
+    #   A suggested action that initiates a phone call to the specified
+    #   number.
+    #   @return [Types::RcsDialPhoneAction]
+    #
+    # @!attribute [rw] show_location
+    #   A suggested action that shows a location on a map.
+    #   @return [Types::RcsShowLocationAction]
+    #
+    # @!attribute [rw] request_location
+    #   A suggested action that requests the user's current location.
+    #   @return [Types::RcsRequestLocationAction]
+    #
+    # @!attribute [rw] create_calendar_event
+    #   A suggested action that creates a calendar event on the user's
+    #   device.
+    #   @return [Types::RcsCreateCalendarEventAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsSuggestedAction AWS API Documentation
+    #
+    class RcsSuggestedAction < Struct.new(
+      :reply,
+      :open_url,
+      :dial_phone,
+      :show_location,
+      :request_location,
+      :create_calendar_event,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Reply < RcsSuggestedAction; end
+      class OpenUrl < RcsSuggestedAction; end
+      class DialPhone < RcsSuggestedAction; end
+      class ShowLocation < RcsSuggestedAction; end
+      class RequestLocation < RcsSuggestedAction; end
+      class CreateCalendarEvent < RcsSuggestedAction; end
+      class Unknown < RcsSuggestedAction; end
+    end
+
+    # A plain text RCS message body.
+    #
+    # @!attribute [rw] body
+    #   The text body of the RCS message. Maximum 3072 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsTextMessage AWS API Documentation
+    #
+    class RcsTextMessage < Struct.new(
+      :body)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7054,7 +7675,10 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # @!attribute [rw] sender_id
-    #   The sender ID string to request.
+    #   The sender ID string to request. The sender ID can be 1-11
+    #   alphanumeric characters including letters (A-Z, a-z), numbers (0-9),
+    #   or hyphens (-). The sender ID must contain at least one letter and
+    #   cannot start or end with a hyphen.
     #   @return [String]
     #
     # @!attribute [rw] iso_country_code
@@ -7577,8 +8201,104 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] origination_identity
     #   The origination identity of the message. This can be either the
-    #   PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn,
-    #   PoolId, or PoolArn.
+    #   RcsAgentId, RcsAgentArn, PoolId, or PoolArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] rcs_message_content
+    #   The content of the RCS message. Contains the message content (text,
+    #   file, rich card, or carousel) and optional message-level suggested
+    #   actions.
+    #   @return [Types::RcsMessageContent]
+    #
+    # @!attribute [rw] time_to_live
+    #   The duration in seconds that the RCS message is valid for delivery.
+    #   If the message cannot be delivered within this duration, it is
+    #   considered expired. Valid values are 1 to 172800 (48 hours). If a
+    #   FallbackConfiguration is provided, the fallback is triggered when
+    #   the duration expires without delivery confirmation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message_traffic_type
+    #   The traffic type of the RCS message. Valid values are
+    #   AUTHENTICATION, TRANSACTION, PROMOTION, SERVICE\_REQUEST, and
+    #   ACKNOWLEDGEMENT. This field is reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] fallback_configuration
+    #   Configuration for SMS or MMS fallback when RCS delivery fails. If
+    #   provided, the service sends a fallback message via the specified
+    #   channel when the RCS message fails or the TimeToLive expires.
+    #   @return [Types::RcsFallbackConfiguration]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier of the protect configuration to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_price
+    #   The maximum amount that you want to spend, in US dollars, per each
+    #   RCS message.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   When set to true, the message is checked and validated, but isn't
+    #   sent to the end recipient.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] context
+    #   You can specify custom data in this field. If you do, that data is
+    #   logged to the event destination.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] message_feedback_enabled
+    #   Set to true to enable message feedback for the message. When a user
+    #   receives the message you need to update the message status using
+    #   PutMessageFeedback.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendRcsMessageRequest AWS API Documentation
+    #
+    class SendRcsMessageRequest < Struct.new(
+      :destination_phone_number,
+      :origination_identity,
+      :rcs_message_content,
+      :time_to_live,
+      :message_traffic_type,
+      :fallback_configuration,
+      :protect_configuration_id,
+      :configuration_set_name,
+      :max_price,
+      :dry_run,
+      :context,
+      :message_feedback_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_id
+    #   The unique identifier for the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendRcsMessageResult AWS API Documentation
+    #
+    class SendRcsMessageResult < Struct.new(
+      :message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_phone_number
+    #   The destination phone number in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] origination_identity
+    #   The origination identity of the message. This can be either the
+    #   PhoneNumber, PhoneNumberId, PhoneNumberArn, RcsAgentId, RcsAgentArn,
+    #   SenderId, SenderIdArn, PoolId, or PoolArn.
     #
     #   If you are using a shared End User Messaging SMS resource then you
     #   must use the full Amazon Resource Name(ARN).
@@ -8131,6 +8851,30 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # @!attribute [rw] monthly_limit
+    #   The new monthly limit to enforce on RCS message spending.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetRcsMessageSpendLimitOverrideRequest AWS API Documentation
+    #
+    class SetRcsMessageSpendLimitOverrideRequest < Struct.new(
+      :monthly_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monthly_limit
+    #   The current monthly limit to enforce on RCS message spending.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetRcsMessageSpendLimitOverrideResult AWS API Documentation
+    #
+    class SetRcsMessageSpendLimitOverrideResult < Struct.new(
+      :monthly_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monthly_limit
     #   The new monthly limit to enforce on text messages.
     #   @return [Integer]
     #
@@ -8640,13 +9384,18 @@ module Aws::PinpointSMSVoiceV2
     #   @return [String]
     #
     # @!attribute [rw] default_template_id
-    #   The template ID to set as the default, or the special value
-    #   UNSET\_DEFAULT\_TEMPLATE to clear the current default template.
+    #   The default template identifier to associate with the notify
+    #   configuration. If specified, this template is used when sending
+    #   messages without an explicit template identifier. Pass the special
+    #   value `UNSET_DEFAULT_TEMPLATE` to clear the current default template
+    #   from the notify configuration.
     #   @return [String]
     #
     # @!attribute [rw] pool_id
-    #   The pool ID or ARN to associate, or the special value
-    #   UNSET\_DEFAULT\_POOL\_FOR\_NOTIFY to clear the current default pool.
+    #   The pool identifier or Amazon Resource Name (ARN) to associate with
+    #   the notify configuration. Pass the special value
+    #   `UNSET_DEFAULT_POOL_FOR_NOTIFY` to clear the current default pool
+    #   from the notify configuration.
     #   @return [String]
     #
     # @!attribute [rw] enabled_countries
@@ -9230,6 +9979,34 @@ module Aws::PinpointSMSVoiceV2
     #   incoming text messages from your end recipients.
     #   @return [Boolean]
     #
+    # @!attribute [rw] two_way_media_s3_bucket_name
+    #   The name of the S3 bucket where inbound RCS media files are stored.
+    #   Two-way messaging must be enabled on the agent. To remove the media
+    #   configuration, pass the sentinel value
+    #   `UNSET_RCS_MEDIA_CONFIGURATION` for both this field and
+    #   TwoWayMediaS3Role.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_media_s3_key_prefix
+    #   The key prefix used for inbound RCS media objects in the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_media_s3_role
+    #   The ARN of the IAM role used to write inbound RCS media files to the
+    #   S3 bucket. The role must have `s3:PutObject` permission on the
+    #   bucket and a trust policy allowing `sms-voice.amazonaws.com` to
+    #   assume it. To remove the media configuration, pass the sentinel
+    #   value `UNSET_RCS_MEDIA_CONFIGURATION` for both this field and
+    #   TwoWayMediaS3BucketName.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_rcs_events_enabled
+    #   The list of RCS event types to enable for two-way messaging. Pass an
+    #   empty list to disable all event types. The special value `ALL`
+    #   enables all current and future event types and must be the sole
+    #   element if used.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateRcsAgentRequest AWS API Documentation
     #
     class UpdateRcsAgentRequest < Struct.new(
@@ -9239,7 +10016,11 @@ module Aws::PinpointSMSVoiceV2
       :self_managed_opt_outs_enabled,
       :two_way_channel_arn,
       :two_way_channel_role,
-      :two_way_enabled)
+      :two_way_enabled,
+      :two_way_media_s3_bucket_name,
+      :two_way_media_s3_key_prefix,
+      :two_way_media_s3_role,
+      :two_way_rcs_events_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9294,6 +10075,24 @@ module Aws::PinpointSMSVoiceV2
     #   incoming text messages from your end recipients.
     #   @return [Boolean]
     #
+    # @!attribute [rw] two_way_media_s3_bucket_name
+    #   The name of the S3 bucket where inbound RCS media files are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_media_s3_key_prefix
+    #   The key prefix used for inbound RCS media objects in the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_media_s3_role
+    #   The ARN of the IAM role used to write inbound RCS media files to the
+    #   S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_rcs_events_enabled
+    #   The list of RCS event types enabled for two-way messaging on the
+    #   agent.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateRcsAgentResult AWS API Documentation
     #
     class UpdateRcsAgentResult < Struct.new(
@@ -9306,7 +10105,11 @@ module Aws::PinpointSMSVoiceV2
       :self_managed_opt_outs_enabled,
       :two_way_channel_arn,
       :two_way_channel_role,
-      :two_way_enabled)
+      :two_way_enabled,
+      :two_way_media_s3_bucket_name,
+      :two_way_media_s3_key_prefix,
+      :two_way_media_s3_role,
+      :two_way_rcs_events_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

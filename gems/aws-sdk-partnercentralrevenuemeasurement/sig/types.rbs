@@ -1,0 +1,513 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PartnerCentralRevenueMeasurement
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor reason: ("ACCESS_DENIED")
+      SENSITIVE: []
+    end
+
+    class AttributionSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor name: ::String
+      attr_accessor tenancy_model: ("MULTI_TENANT" | "SINGLE_TENANT")
+      attr_accessor marketplace_product: Types::MarketplaceProductSummary
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor latest_revision: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor total_active_revenue_attribution_allocation_count: ::Integer
+      attr_accessor total_revenue_attribution_allocation_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CONFLICT_CLIENT_TOKEN" | "CONCURRENT_MODIFICATION" | "RESOURCE_ALREADY_EXISTS" | "REVISION_MISMATCH")
+      SENSITIVE: []
+    end
+
+    class CreateMarketplaceRevenueShareAllocationInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor product_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor revenue_share_percent: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMarketplaceRevenueShareAllocationOutput
+      attr_accessor marketplace_revenue_share_allocation_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor product_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor revenue_share_percent: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor latest_marketplace_revenue_share_revision: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMarketplaceRevenueShareInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor client_token: ::String
+      attr_accessor product_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateMarketplaceRevenueShareOutput
+      attr_accessor product_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor product_code: ::String
+      attr_accessor product_name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateRevenueAttributionInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tenancy_model: ("MULTI_TENANT" | "SINGLE_TENANT")
+      attr_accessor product_identifier: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRevenueAttributionOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tenancy_model: ("MULTI_TENANT" | "SINGLE_TENANT")
+      attr_accessor marketplace_product: Types::MarketplaceProductSummary
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetMarketplaceRevenueShareAllocationInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor product_id: ::String
+      attr_accessor marketplace_revenue_share_allocation_id: ::String
+      attr_accessor marketplace_revenue_share_revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetMarketplaceRevenueShareAllocationOutput
+      attr_accessor marketplace_revenue_share_allocation_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor product_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor revenue_share_percent: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor latest_marketplace_revenue_share_revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetMarketplaceRevenueShareInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor product_id: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetMarketplaceRevenueShareOutput
+      attr_accessor product_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor product_code: ::String
+      attr_accessor product_name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor revision: ::Integer
+      attr_accessor latest_revision: ::Integer
+      attr_accessor total_active_marketplace_revenue_share_allocation_count: ::Integer
+      attr_accessor total_marketplace_revenue_share_allocation_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRevenueAttributionAllocationInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor revenue_attribution_identifier: ::String
+      attr_accessor revenue_attribution_allocation_id: ::String
+      attr_accessor revenue_attribution_revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetRevenueAttributionAllocationOutput
+      attr_accessor revenue_attribution_allocation_id: ::String
+      attr_accessor revenue_attribution_identifier: ::String
+      attr_accessor entity_type: ("OFFER" | "OPPORTUNITY")
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_name: ::String
+      attr_accessor customer_aws_account_id: ::String
+      attr_accessor revenue_share_percent: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor revenue_attribution_revision: ::String
+      attr_accessor revenue_attribution_latest_revision: ::String
+      SENSITIVE: [:customer_aws_account_id]
+    end
+
+    class GetRevenueAttributionAllocationsTaskInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor revenue_attribution_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetRevenueAttributionAllocationsTaskOutput
+      attr_accessor task_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor revenue_attribution_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor total_revenue_attribution_allocation_records: ::Integer
+      attr_accessor description: ::String
+      attr_accessor revenue_attribution_latest_revision: ::String
+      attr_accessor error_detail_list: ::Array[Types::RevenueAttributionAllocationErrorDetail]
+      SENSITIVE: []
+    end
+
+    class GetRevenueAttributionInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor identifier: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetRevenueAttributionOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tenancy_model: ("MULTI_TENANT" | "SINGLE_TENANT")
+      attr_accessor marketplace_product: Types::MarketplaceProductSummary
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor revision: ::String
+      attr_accessor latest_revision: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor total_active_revenue_attribution_allocation_count: ::Integer
+      attr_accessor total_revenue_attribution_allocation_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListMarketplaceRevenueShareAllocationsInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor product_id: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor after_effective_from: ::String
+      attr_accessor before_effective_from: ::String
+      attr_accessor sort_by: ("EffectiveFrom")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor marketplace_revenue_share_revision: ::String
+      SENSITIVE: []
+    end
+
+    class ListMarketplaceRevenueShareAllocationsOutput
+      attr_accessor marketplace_revenue_share_allocation_summaries: ::Array[Types::MarketplaceRevenueShareAllocationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMarketplaceRevenueSharesInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor product_ids: ::Array[::String]
+      attr_accessor product_codes: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("LastModifiedDate")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ListMarketplaceRevenueSharesOutput
+      attr_accessor marketplace_revenue_share_summaries: ::Array[Types::MarketplaceRevenueShareSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRevenueAttributionAllocationsInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor revenue_attribution_identifier: ::String
+      attr_accessor entity_type_filters: ::Array[("OFFER" | "OPPORTUNITY")]
+      attr_accessor entity_identifier_filters: ::Array[::String]
+      attr_accessor customer_aws_account_id_filters: ::Array[::String]
+      attr_accessor status_filter: ("ACTIVE" | "INACTIVE")
+      attr_accessor after_effective_from: ::String
+      attr_accessor before_effective_from: ::String
+      attr_accessor after_effective_until: ::String
+      attr_accessor before_effective_until: ::String
+      attr_accessor sort_by: ("EffectiveFrom")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor revenue_attribution_revision: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRevenueAttributionAllocationsOutput
+      attr_accessor revenue_attribution_allocation_summaries: ::Array[Types::RevenueAttributionAllocationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRevenueAttributionsInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor identifiers: ::Array[::String]
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor sort_by: ("LastModifiedDate")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRevenueAttributionsOutput
+      attr_accessor revenue_attribution_summaries: ::Array[Types::AttributionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MarketplaceProductSummary
+      attr_accessor product_id: ::String
+      attr_accessor product_code: ::String
+      attr_accessor product_name: ::String
+      SENSITIVE: []
+    end
+
+    class MarketplaceRevenueShareAllocationSummary
+      attr_accessor marketplace_revenue_share_allocation_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor product_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor revenue_share_percent: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class MarketplaceRevenueShareSummary
+      attr_accessor product_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor product_code: ::String
+      attr_accessor product_name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor latest_revision: ::Integer
+      attr_accessor total_active_marketplace_revenue_share_allocation_count: ::Integer
+      attr_accessor total_marketplace_revenue_share_allocation_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor reason: ("RESOURCE_NOT_FOUND")
+      SENSITIVE: []
+    end
+
+    class RevenueAttributionAllocationErrorDetail
+      attr_accessor revenue_attribution_allocation_id: ::String
+      attr_accessor entity_type: ("OFFER" | "OPPORTUNITY")
+      attr_accessor entity_id: ::String
+      attr_accessor customer_aws_account_id: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor action: ("CREATE" | "UPDATE")
+      attr_accessor error_code: ("ALLOCATION_CAP_EXCEEDED" | "RESOURCE_NOT_FOUND" | "IMMUTABLE_ALLOCATION" | "ACCESS_DENIED" | "INVALID_VALUE" | "CONCURRENT_MODIFICATION" | "INTERNAL_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: [:customer_aws_account_id]
+    end
+
+    class RevenueAttributionAllocationSummary
+      attr_accessor revenue_attribution_allocation_id: ::String
+      attr_accessor revenue_attribution_identifier: ::String
+      attr_accessor entity_type: ("OFFER" | "OPPORTUNITY")
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_name: ::String
+      attr_accessor customer_aws_account_id: ::String
+      attr_accessor revenue_share_percent: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: [:customer_aws_account_id]
+    end
+
+    class RevenueShareAllocation
+      attr_accessor action: ("CREATE" | "UPDATE")
+      attr_accessor revenue_attribution_allocation_id: ::String
+      attr_accessor entity_type: ("OFFER" | "OPPORTUNITY")
+      attr_accessor entity_identifier: ::String
+      attr_accessor customer_aws_account_id: ::String
+      attr_accessor revenue_share_percent: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: [:customer_aws_account_id]
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor reason: ("ATTRIBUTION_LIMIT_EXCEEDED" | "TAG_LIMIT_EXCEEDED")
+      SENSITIVE: []
+    end
+
+    class StartRevenueAttributionAllocationsTaskInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor revenue_attribution_identifier: ::String
+      attr_accessor revenue_attribution_revision: ::String
+      attr_accessor revenue_share_allocations: ::Array[Types::RevenueShareAllocation]
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class StartRevenueAttributionAllocationsTaskOutput
+      attr_accessor task_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor revenue_attribution_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor total_revenue_attribution_allocation_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateMarketplaceRevenueShareAllocationInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor product_id: ::String
+      attr_accessor marketplace_revenue_share_allocation_id: ::String
+      attr_accessor marketplace_revenue_share_revision: ::String
+      attr_accessor client_token: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor revenue_share_percent: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class UpdateMarketplaceRevenueShareAllocationOutput
+      attr_accessor marketplace_revenue_share_allocation_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor product_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
+      attr_accessor revenue_share_percent: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor latest_marketplace_revenue_share_revision: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRevenueAttributionInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRevenueAttributionOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor latest_revision: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("REQUEST_VALIDATION_FAILED" | "BUSINESS_VALIDATION_FAILED")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      attr_accessor code: ("REQUIRED_FIELD_MISSING" | "DUPLICATE_VALUE" | "INVALID_VALUE" | "INVALID_STRING_FORMAT" | "TOO_MANY_VALUES" | "ACTION_NOT_PERMITTED" | "INVALID_ENUM_VALUE" | "INVALID_NUMBER_FORMAT" | "INVALID_STRING_LENGTH")
+      SENSITIVE: []
+    end
+  end
+end

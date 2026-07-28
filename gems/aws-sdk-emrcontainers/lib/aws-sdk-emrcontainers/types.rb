@@ -10,6 +10,26 @@
 module Aws::EMRContainers
   module Types
 
+    # Contains the authentication settings for a security configuration,
+    # including Identity Center and IAM configuration options.
+    #
+    # @!attribute [rw] identity_center_configuration
+    #   The IAM Identity Center configuration to use for authentication.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
+    # @!attribute [rw] iam_configuration
+    #   The IAM configuration to use for authentication.
+    #   @return [Types::IAMConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/AuthenticationConfiguration AWS API Documentation
+    #
+    class AuthenticationConfiguration < Struct.new(
+      :identity_center_configuration,
+      :iam_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Authorization-related configuration inputs for the security
     # configuration.
     #
@@ -333,6 +353,11 @@ module Aws::EMRContainers
     #   The tags of the managed endpoint.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] session_idle_timeout_in_minutes
+    #   The number of idle minutes before the managed endpoint session times
+    #   out.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateManagedEndpointRequest AWS API Documentation
     #
     class CreateManagedEndpointRequest < Struct.new(
@@ -344,7 +369,8 @@ module Aws::EMRContainers
       :certificate_arn,
       :configuration_overrides,
       :client_token,
-      :tags)
+      :tags,
+      :session_idle_timeout_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -457,6 +483,16 @@ module Aws::EMRContainers
     #   The ID of the security configuration.
     #   @return [String]
     #
+    # @!attribute [rw] session_enabled
+    #   Indicates whether the virtual cluster has session support enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] scheduler_configuration
+    #   The scheduler configuration (concurrency and queue limits) to apply
+    #   to the virtual cluster at creation time. When omitted, no limits are
+    #   applied.
+    #   @return [Types::SchedulerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateVirtualClusterRequest AWS API Documentation
     #
     class CreateVirtualClusterRequest < Struct.new(
@@ -464,7 +500,9 @@ module Aws::EMRContainers
       :container_provider,
       :client_token,
       :tags,
-      :security_configuration_id)
+      :security_configuration_id,
+      :session_enabled,
+      :scheduler_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -566,6 +604,30 @@ module Aws::EMRContainers
     class DeleteManagedEndpointResponse < Struct.new(
       :id,
       :virtual_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the security configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DeleteSecurityConfigurationRequest AWS API Documentation
+    #
+    class DeleteSecurityConfigurationRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the deleted security configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DeleteSecurityConfigurationResponse AWS API Documentation
+    #
+    class DeleteSecurityConfigurationResponse < Struct.new(
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -828,6 +890,10 @@ module Aws::EMRContainers
     #   The server URL of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] auth_proxy_url
+    #   The authentication proxy URL of the endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The date and time when the endpoint was created.
     #   @return [Time]
@@ -867,6 +933,7 @@ module Aws::EMRContainers
       :certificate_authority,
       :configuration_overrides,
       :server_url,
+      :auth_proxy_url,
       :created_at,
       :security_group,
       :subnet_ids,
@@ -934,6 +1001,10 @@ module Aws::EMRContainers
     #   The structure containing the session credentials.
     #   @return [Types::Credentials]
     #
+    # @!attribute [rw] endpoint_credentials
+    #   The session credentials that the operation returns.
+    #   @return [Types::Credentials]
+    #
     # @!attribute [rw] expires_at
     #   The date and time when the session token will expire.
     #   @return [Time]
@@ -943,7 +1014,58 @@ module Aws::EMRContainers
     class GetManagedEndpointSessionCredentialsResponse < Struct.new(
       :id,
       :credentials,
+      :endpoint_credentials,
       :expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the IAM settings for a security configuration, including the
+    # system role used for authentication.
+    #
+    # @!attribute [rw] system_role
+    #   The Amazon Resource Name (ARN) of the system role used by the
+    #   security configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/IAMConfiguration AWS API Documentation
+    #
+    class IAMConfiguration < Struct.new(
+      :system_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the IAM Identity Center settings for a security
+    # configuration, including instance ARN, application assignment
+    # requirements, and application ARN.
+    #
+    # @!attribute [rw] enable_identity_center
+    #   Specifies whether Identity Center is enabled for the security
+    #   configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] identity_center_application_assignment_required
+    #   Specifies whether user assignment is required for the Identity
+    #   Center application.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the Identity Center instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] emr_identity_center_application_arn
+    #   The Amazon Resource Name (ARN) of the Amazon EMR Identity Center
+    #   application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/IdentityCenterConfiguration AWS API Documentation
+    #
+    class IdentityCenterConfiguration < Struct.new(
+      :enable_identity_center,
+      :identity_center_application_assignment_required,
+      :identity_center_instance_arn,
+      :emr_identity_center_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1727,10 +1849,66 @@ module Aws::EMRContainers
     #   Amazon S3 destination URI for log publishing.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the encryption key for logs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/S3MonitoringConfiguration AWS API Documentation
     #
     class S3MonitoringConfiguration < Struct.new(
-      :log_uri)
+      :log_uri,
+      :encryption_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scheduler configuration for a virtual cluster on Amazon EMR on
+    # EKS. It controls how many job runs can run concurrently and how many
+    # can wait in the queue. When not set, no concurrency or queue limits
+    # are applied.
+    #
+    # @!attribute [rw] max_in_queue_job_runs
+    #   The maximum number of job runs that can be in the `PENDING` or
+    #   `SUBMITTED` state at any time for the virtual cluster. When the
+    #   queue is full, the service rejects `StartJobRun` requests with a
+    #   `ValidationException`. If you omit this field, the service applies
+    #   no queue-depth limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrent_job_runs
+    #   The maximum number of job runs that can be in the `RUNNING` state at
+    #   any time for the virtual cluster. As running slots free up, queued
+    #   job runs start automatically. If you omit this field, the service
+    #   applies no concurrency limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/SchedulerConfiguration AWS API Documentation
+    #
+    class SchedulerConfiguration < Struct.new(
+      :max_in_queue_job_runs,
+      :max_concurrent_job_runs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current job-run counts for a virtual cluster, reflecting how much
+    # of the configured scheduler capacity is in use.
+    #
+    # @!attribute [rw] current_in_queue_job_runs
+    #   The number of job runs currently waiting in the queue (`PENDING` or
+    #   `SUBMITTED`) for the virtual cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_concurrent_job_runs
+    #   The number of job runs currently in the `RUNNING` state for the
+    #   virtual cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/SchedulerStatus AWS API Documentation
+    #
+    class SchedulerStatus < Struct.new(
+      :current_in_queue_job_runs,
+      :current_concurrent_job_runs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1809,10 +1987,16 @@ module Aws::EMRContainers
     #   configuration.
     #   @return [Types::AuthorizationConfiguration]
     #
+    # @!attribute [rw] authentication_configuration
+    #   Authentication-related configuration input for the security
+    #   configuration.
+    #   @return [Types::AuthenticationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/SecurityConfigurationData AWS API Documentation
     #
     class SecurityConfigurationData < Struct.new(
-      :authorization_configuration)
+      :authorization_configuration,
+      :authentication_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2044,6 +2228,54 @@ module Aws::EMRContainers
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # Contains the parameters for a request to update a virtual cluster on
+    # Amazon EMR on EKS.
+    #
+    # @!attribute [rw] id
+    #   The ID of the virtual cluster to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduler_configuration
+    #   The scheduler configuration to apply to the virtual cluster. The new
+    #   configuration fully replaces the existing one. If you omit a field,
+    #   the corresponding limit is removed.
+    #   @return [Types::SchedulerConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If this token matches
+    #   a previous request, the service ignores the request, but does not
+    #   return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/UpdateVirtualClusterRequest AWS API Documentation
+    #
+    class UpdateVirtualClusterRequest < Struct.new(
+      :id,
+      :scheduler_configuration,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the virtual cluster returned after a successful update
+    # request.
+    #
+    # @!attribute [rw] virtual_cluster
+    #   The updated virtual cluster.
+    #   @return [Types::VirtualCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/UpdateVirtualClusterResponse AWS API Documentation
+    #
+    class UpdateVirtualClusterResponse < Struct.new(
+      :virtual_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There are invalid parameters in the client request.
     #
     # @!attribute [rw] message
@@ -2097,6 +2329,21 @@ module Aws::EMRContainers
     #   The ID of the security configuration.
     #   @return [String]
     #
+    # @!attribute [rw] session_enabled
+    #   Specifies whether the virtual cluster has session support enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] scheduler_configuration
+    #   The scheduler configuration (concurrency and queue limits) applied
+    #   to the virtual cluster. The service does not return this field when
+    #   no scheduler limits are configured.
+    #   @return [Types::SchedulerConfiguration]
+    #
+    # @!attribute [rw] scheduler_status
+    #   The current in-queue and concurrent job-run counts for the virtual
+    #   cluster.
+    #   @return [Types::SchedulerStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/VirtualCluster AWS API Documentation
     #
     class VirtualCluster < Struct.new(
@@ -2107,7 +2354,10 @@ module Aws::EMRContainers
       :container_provider,
       :created_at,
       :tags,
-      :security_configuration_id)
+      :security_configuration_id,
+      :session_enabled,
+      :scheduler_configuration,
+      :scheduler_status)
       SENSITIVE = []
       include Aws::Structure
     end

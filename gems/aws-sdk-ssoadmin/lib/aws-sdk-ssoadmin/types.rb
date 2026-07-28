@@ -2390,6 +2390,16 @@ module Aws::SSOAdmin
     #   insufficient permissions.
     #   @return [String]
     #
+    # @!attribute [rw] primary_region
+    #   The primary Region where the IAM Identity Center instance was
+    #   originally enabled. The primary Region cannot be removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The list of Regions enabled in the IAM Identity Center instance,
+    #   including Regions with ACTIVE, ADDING, or REMOVING status.
+    #   @return [Array<Types::RegionMetadata>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/InstanceMetadata AWS API Documentation
     #
     class InstanceMetadata < Struct.new(
@@ -2399,7 +2409,9 @@ module Aws::SSOAdmin
       :name,
       :created_date,
       :status,
-      :status_reason)
+      :status_reason,
+      :primary_region,
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end

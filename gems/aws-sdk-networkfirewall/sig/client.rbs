@@ -166,6 +166,42 @@ module Aws
                                                      ) -> _AttachRuleGroupsToProxyConfigurationResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachRuleGroupsToProxyConfigurationResponseSuccess
 
+      interface _CreateContainerAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContainerAssociationResponse]
+        def container_association_name: () -> ::String
+        def container_association_arn: () -> ::String
+        def description: () -> ::String
+        def type: () -> ("ECS" | "EKS")
+        def container_monitoring_configurations: () -> ::Array[Types::ContainerMonitoringConfiguration]
+        def status: () -> ("ACTIVE" | "CREATING" | "DELETING")
+        def tags: () -> ::Array[Types::Tag]
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_container_association-instance_method
+      def create_container_association: (
+                                          container_association_name: ::String,
+                                          ?description: ::String,
+                                          type: ("ECS" | "EKS"),
+                                          container_monitoring_configurations: Array[
+                                            {
+                                              cluster_arn: ::String,
+                                              attribute_filters: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                }
+                                              ]?
+                                            }
+                                          ],
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            }
+                                          ]
+                                        ) -> _CreateContainerAssociationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerAssociationResponseSuccess
+
       interface _CreateFirewallResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFirewallResponse]
         def firewall: () -> Types::Firewall
@@ -419,6 +455,19 @@ module Aws
                                            ) -> _CreateVpcEndpointAssociationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcEndpointAssociationResponseSuccess
 
+      interface _DeleteContainerAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContainerAssociationResponse]
+        def container_association_name: () -> ::String
+        def container_association_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "CREATING" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_container_association-instance_method
+      def delete_container_association: (
+                                          ?container_association_name: ::String,
+                                          ?container_association_arn: ::String
+                                        ) -> _DeleteContainerAssociationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContainerAssociationResponseSuccess
+
       interface _DeleteFirewallResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallResponse]
         def firewall: () -> Types::Firewall
@@ -545,6 +594,26 @@ module Aws
                                              vpc_endpoint_association_arn: ::String
                                            ) -> _DeleteVpcEndpointAssociationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcEndpointAssociationResponseSuccess
+
+      interface _DescribeContainerAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContainerAssociationResponse]
+        def container_association_name: () -> ::String
+        def container_association_arn: () -> ::String
+        def description: () -> ::String
+        def type: () -> ("ECS" | "EKS")
+        def container_monitoring_configurations: () -> ::Array[Types::ContainerMonitoringConfiguration]
+        def status: () -> ("ACTIVE" | "CREATING" | "DELETING")
+        def resolved_cidr_count: () -> ::Integer
+        def last_updated_time: () -> ::Time
+        def tags: () -> ::Array[Types::Tag]
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_container_association-instance_method
+      def describe_container_association: (
+                                            ?container_association_name: ::String,
+                                            ?container_association_arn: ::String
+                                          ) -> _DescribeContainerAssociationResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContainerAssociationResponseSuccess
 
       interface _DescribeFirewallResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFirewallResponse]
@@ -841,6 +910,18 @@ module Aws
                                  ) -> _ListAnalysisReportsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnalysisReportsResponseSuccess
 
+      interface _ListContainerAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContainerAssociationsResponse]
+        def container_associations: () -> ::Array[Types::ContainerAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_container_associations-instance_method
+      def list_container_associations: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListContainerAssociationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContainerAssociationsResponseSuccess
+
       interface _ListFirewallPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallPoliciesResponse]
         def next_token: () -> ::String
@@ -1109,6 +1190,44 @@ module Aws
                                                         availability_zone_change_protection: bool
                                                       ) -> _UpdateAvailabilityZoneChangeProtectionResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAvailabilityZoneChangeProtectionResponseSuccess
+
+      interface _UpdateContainerAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContainerAssociationResponse]
+        def container_association_name: () -> ::String
+        def container_association_arn: () -> ::String
+        def description: () -> ::String
+        def type: () -> ("ECS" | "EKS")
+        def container_monitoring_configurations: () -> ::Array[Types::ContainerMonitoringConfiguration]
+        def status: () -> ("ACTIVE" | "CREATING" | "DELETING")
+        def tags: () -> ::Array[Types::Tag]
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_container_association-instance_method
+      def update_container_association: (
+                                          ?container_association_name: ::String,
+                                          ?container_association_arn: ::String,
+                                          ?description: ::String,
+                                          type: ("ECS" | "EKS"),
+                                          container_monitoring_configurations: Array[
+                                            {
+                                              cluster_arn: ::String,
+                                              attribute_filters: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                }
+                                              ]?
+                                            }
+                                          ],
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            }
+                                          ],
+                                          update_token: ::String
+                                        ) -> _UpdateContainerAssociationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContainerAssociationResponseSuccess
 
       interface _UpdateFirewallAnalysisSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallAnalysisSettingsResponse]

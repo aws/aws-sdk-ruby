@@ -533,6 +533,13 @@ module Aws::ConfigService
     #   resp.configuration_recorder.recording_mode.recording_mode_overrides[0].recording_frequency #=> String, one of "CONTINUOUS", "DAILY"
     #   resp.configuration_recorder.recording_scope #=> String, one of "INTERNAL", "PAID"
     #   resp.configuration_recorder.service_principal #=> String
+    #   resp.configuration_recorder.connector_arn #=> String
+    #   resp.configuration_recorder.scope_configuration.scope_type #=> String
+    #   resp.configuration_recorder.scope_configuration.scope_values #=> Array
+    #   resp.configuration_recorder.scope_configuration.scope_values[0] #=> String
+    #   resp.configuration_recorder.scope_configuration.all_regions #=> Boolean
+    #   resp.configuration_recorder.scope_configuration.included_regions #=> Array
+    #   resp.configuration_recorder.scope_configuration.included_regions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AssociateResourceTypes AWS API Documentation
     #
@@ -870,6 +877,29 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def delete_conformance_pack(params = {}, options = {})
       req = build_request(:delete_conformance_pack, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified connector.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the connector that you want to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connector({
+    #     arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConnector AWS API Documentation
+    #
+    # @overload delete_connector(params = {})
+    # @param [Hash] params ({})
+    def delete_connector(params = {}, options = {})
+      req = build_request(:delete_connector, params)
       req.send_request(options)
     end
 
@@ -1211,9 +1241,18 @@ module Aws::ConfigService
     #
     # [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_GetResourceConfigHistory.html
     #
-    # @option params [required, String] :service_principal
+    # @option params [String] :service_principal
     #   The service principal of the Amazon Web Services service for the
-    #   service-linked configuration recorder that you want to delete.
+    #   service-linked configuration recorder that you want to delete. This
+    #   field is only supported for Amazon Web Services service principals.
+    #   For third-party service-linked configuration recorders, use `Arn`
+    #   instead.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) of the service-linked configuration
+    #   recorder that you want to delete. For third-party service-linked
+    #   configuration recorders, you must use `Arn`. You must specify exactly
+    #   one of `Arn` or `ServicePrincipal`.
     #
     # @return [Types::DeleteServiceLinkedConfigurationRecorderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1223,7 +1262,8 @@ module Aws::ConfigService
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_service_linked_configuration_recorder({
-    #     service_principal: "ServicePrincipal", # required
+    #     service_principal: "ServicePrincipal",
+    #     arn: "AmazonResourceName",
     #   })
     #
     # @example Response structure
@@ -1711,10 +1751,6 @@ module Aws::ConfigService
     #   The names of the Config rules for which you want details. If you do
     #   not specify any names, Config returns details for all your rules.
     #
-    # @option params [String] :next_token
-    #   The `nextToken` string returned on a previous page that you use to get
-    #   the next page of results in a paginated response.
-    #
     # @option params [Types::DescribeConfigRulesFilters] :filters
     #   Returns a list of Detective or Proactive Config rules. By default,
     #   this API returns an unfiltered list. For more information on Detective
@@ -1724,6 +1760,10 @@ module Aws::ConfigService
     #
     #
     #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
     #
     # @return [Types::DescribeConfigRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1736,11 +1776,11 @@ module Aws::ConfigService
     #
     #   resp = client.describe_config_rules({
     #     config_rule_names: ["ConfigRuleName"],
-    #     next_token: "String",
     #     filters: {
     #       evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
     #       rule_evaluation_visibility: "EXTERNAL", # accepts EXTERNAL, INTERNAL
     #     },
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -1942,7 +1982,9 @@ module Aws::ConfigService
     # @option params [String] :service_principal
     #   For service-linked configuration recorders, you can use the service
     #   principal of the linked Amazon Web Services service to specify the
-    #   configuration recorder.
+    #   configuration recorder. This field is only supported for Amazon Web
+    #   Services service principals. For third-party service-linked
+    #   configuration recorders, use `Arn` instead.
     #
     # @option params [String] :arn
     #   The Amazon Resource Name (ARN) of the configuration recorder that you
@@ -2006,7 +2048,9 @@ module Aws::ConfigService
     # @option params [String] :service_principal
     #   For service-linked configuration recorders, you can use the service
     #   principal of the linked Amazon Web Services service to specify the
-    #   configuration recorder.
+    #   configuration recorder. This field is only supported for Amazon Web
+    #   Services service principals. For third-party service-linked
+    #   configuration recorders, use `Arn` instead.
     #
     # @option params [String] :arn
     #   The Amazon Resource Name (ARN) of the configuration recorder that you
@@ -2045,6 +2089,13 @@ module Aws::ConfigService
     #   resp.configuration_recorders[0].recording_mode.recording_mode_overrides[0].recording_frequency #=> String, one of "CONTINUOUS", "DAILY"
     #   resp.configuration_recorders[0].recording_scope #=> String, one of "INTERNAL", "PAID"
     #   resp.configuration_recorders[0].service_principal #=> String
+    #   resp.configuration_recorders[0].connector_arn #=> String
+    #   resp.configuration_recorders[0].scope_configuration.scope_type #=> String
+    #   resp.configuration_recorders[0].scope_configuration.scope_values #=> Array
+    #   resp.configuration_recorders[0].scope_configuration.scope_values[0] #=> String
+    #   resp.configuration_recorders[0].scope_configuration.all_regions #=> Boolean
+    #   resp.configuration_recorders[0].scope_configuration.included_regions #=> Array
+    #   resp.configuration_recorders[0].scope_configuration.included_regions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorders AWS API Documentation
     #
@@ -2955,6 +3006,13 @@ module Aws::ConfigService
     #   resp.configuration_recorder.recording_mode.recording_mode_overrides[0].recording_frequency #=> String, one of "CONTINUOUS", "DAILY"
     #   resp.configuration_recorder.recording_scope #=> String, one of "INTERNAL", "PAID"
     #   resp.configuration_recorder.service_principal #=> String
+    #   resp.configuration_recorder.connector_arn #=> String
+    #   resp.configuration_recorder.scope_configuration.scope_type #=> String
+    #   resp.configuration_recorder.scope_configuration.scope_values #=> Array
+    #   resp.configuration_recorder.scope_configuration.scope_values[0] #=> String
+    #   resp.configuration_recorder.scope_configuration.all_regions #=> Boolean
+    #   resp.configuration_recorder.scope_configuration.included_regions #=> Array
+    #   resp.configuration_recorder.scope_configuration.included_regions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DisassociateResourceTypes AWS API Documentation
     #
@@ -3641,6 +3699,38 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns the details of the specified connector.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #
+    # @return [Types::GetConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectorResponse#connector #connector} => Types::Connector
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connector({
+    #     arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector.name #=> String
+    #   resp.connector.arn #=> String
+    #   resp.connector.connector_configuration.azure.tenant_identifier #=> String
+    #   resp.connector.connector_configuration.azure.client_identifier #=> String
+    #   resp.connector.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConnector AWS API Documentation
+    #
+    # @overload get_connector(params = {})
+    # @param [Hash] params ({})
+    def get_connector(params = {}, options = {})
+      req = build_request(:get_connector, params)
+      req.send_request(options)
+    end
+
     # Returns the policy definition containing the logic for your Config
     # Custom Policy rule.
     #
@@ -4246,6 +4336,7 @@ module Aws::ConfigService
     #   resp.configuration_recorder_summaries[0].name #=> String
     #   resp.configuration_recorder_summaries[0].service_principal #=> String
     #   resp.configuration_recorder_summaries[0].recording_scope #=> String, one of "INTERNAL", "PAID"
+    #   resp.configuration_recorder_summaries[0].provider #=> String, one of "AZURE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListConfigurationRecorders AWS API Documentation
@@ -4340,6 +4431,58 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def list_conformance_pack_compliance_scores(params = {}, options = {})
       req = build_request(:list_conformance_pack_compliance_scores, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of connectors depending on the filters you specify.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response.
+    #
+    # @option params [String] :next_token
+    #   The `NextToken` string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @option params [Array<Types::ConnectorFilter>] :filters
+    #   Filters the results based on a list of `ConnectorFilter` objects that
+    #   you specify.
+    #
+    # @return [Types::ListConnectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectorsResponse#connector_summaries #connector_summaries} => Array&lt;Types::ConnectorSummary&gt;
+    #   * {Types::ListConnectorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connectors({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [
+    #       {
+    #         filter_name: "provider", # accepts provider
+    #         filter_values: ["String"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_summaries #=> Array
+    #   resp.connector_summaries[0].arn #=> String
+    #   resp.connector_summaries[0].name #=> String
+    #   resp.connector_summaries[0].provider #=> String, one of "AZURE"
+    #   resp.connector_summaries[0].tenant_identifier #=> String
+    #   resp.connector_summaries[0].created_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListConnectors AWS API Documentation
+    #
+    # @overload list_connectors(params = {})
+    # @param [Hash] params ({})
+    def list_connectors(params = {}, options = {})
+      req = build_request(:list_connectors, params)
       req.send_request(options)
     end
 
@@ -4561,6 +4704,8 @@ module Aws::ConfigService
     #   * `AggregationAuthorization`
     #
     #   * `StoredQuery`
+    #
+    #   * `Connector`
     #
     # @option params [Integer] :limit
     #   The maximum number of tags returned on each page. The limit maximum is
@@ -5022,6 +5167,13 @@ module Aws::ConfigService
     #       },
     #       recording_scope: "INTERNAL", # accepts INTERNAL, PAID
     #       service_principal: "ServicePrincipal",
+    #       connector_arn: "AmazonResourceName",
+    #       scope_configuration: {
+    #         scope_type: "ScopeType", # required
+    #         scope_values: ["ScopeValue"],
+    #         all_regions: false, # required
+    #         included_regions: ["ThirdPartyCloudRegion"],
+    #       },
     #     },
     #     tags: [
     #       {
@@ -5185,6 +5337,82 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def put_conformance_pack(params = {}, options = {})
       req = build_request(:put_conformance_pack, params)
+      req.send_request(options)
+    end
+
+    # Creates a connector that specifies the connection between a
+    # third-party cloud service provider and Config.
+    #
+    # A connector is required to create a service-linked configuration
+    # recorder for a third-party cloud service provider using the
+    # [PutThirdPartyServiceLinkedConfigurationRecorder][1] operation.
+    #
+    # This API creates a service-linked role
+    # `AWSServiceRoleForConfigThirdParty` in your account. The
+    # service-linked role is created only when the role does not exist in
+    # your account.
+    #
+    # <note markdown="1"> **Connectors cannot be updated**
+    #
+    #  To update the connector configuration, you must delete all associated
+    # configuration recorders, delete the connector, and recreate it with
+    # the updated configuration.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> **Tags are added at creation and cannot be updated with this
+    # operation**
+    #
+    #  Use [TagResource][2] and [UntagResource][3] to update tags after
+    # creation.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html
+    # [2]: https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html
+    # [3]: https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html
+    #
+    # @option params [required, Types::ConnectorConfiguration] :connector_configuration
+    #   The provider-specific configuration for connecting to the third-party
+    #   cloud service provider.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the connector. Each tag consists of a key and an optional
+    #   value, both of which you define.
+    #
+    # @return [Types::PutConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutConnectorResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_connector({
+    #     connector_configuration: { # required
+    #       azure: {
+    #         tenant_identifier: "AzureTenantIdentifier", # required
+    #         client_identifier: "AzureClientIdentifier", # required
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConnector AWS API Documentation
+    #
+    # @overload put_connector(params = {})
+    # @param [Hash] params ({})
+    def put_connector(params = {}, options = {})
+      req = build_request(:put_connector, params)
       req.send_request(options)
     end
 
@@ -5435,6 +5663,10 @@ module Aws::ConfigService
     #   organization trigger types that initiate Config to evaluate Amazon Web
     #   Services resources against a rule.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the organization Config rule. Each tag consists of a key
+    #   and an optional value, both of which you define.
+    #
     # @return [Types::PutOrganizationConfigRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutOrganizationConfigRuleResponse#organization_config_rule_arn #organization_config_rule_arn} => String
@@ -5478,6 +5710,12 @@ module Aws::ConfigService
     #       policy_text: "PolicyText", # required
     #       debug_log_delivery_accounts: ["AccountId"],
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5589,6 +5827,10 @@ module Aws::ConfigService
     #   A list of Amazon Web Services accounts to be excluded from an
     #   organization conformance pack while deploying a conformance pack.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the organization conformance pack. Each tag consists of a
+    #   key and an optional value, both of which you define.
+    #
     # @return [Types::PutOrganizationConformancePackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutOrganizationConformancePackResponse#organization_conformance_pack_arn #organization_conformance_pack_arn} => String
@@ -5608,6 +5850,12 @@ module Aws::ConfigService
     #       },
     #     ],
     #     excluded_accounts: ["AccountId"],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6135,6 +6383,95 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Creates or updates a service-linked configuration recorder that is
+    # linked to a third-party cloud service provider based on the
+    # `ConnectorArn` you specify.
+    #
+    # The configuration recorder's `name`, `recordingGroup`,
+    # `recordingMode`, and `recordingScope` is set by the service that is
+    # linked to the configuration recorder.
+    #
+    # If a service-linked configuration recorder already exists for the
+    # specified service principal and connector, calling this operation
+    # again updates the `ScopeConfiguration`.
+    #
+    # <note markdown="1"> **This operation can only be called by the Amazon Web Services service
+    # linked to the configuration recorder**
+    #
+    #  Customers cannot call this operation directly. Only the linked Amazon
+    # Web Services service can create or update the service-linked
+    # configuration recorder.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> **Tags are added at creation and cannot be updated with this
+    # operation**
+    #
+    #  Use [TagResource][1] and [UntagResource][2] to update tags after
+    # creation.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html
+    # [2]: https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html
+    #
+    # @option params [required, String] :service_principal
+    #   The service principal of the Amazon Web Services service for the
+    #   service-linked configuration recorder that you want to create.
+    #
+    # @option params [required, String] :connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that specifies the
+    #   connection between the third-party cloud service provider and Config.
+    #   The specified connector must exist.
+    #
+    # @option params [required, Types::ScopeConfiguration] :scope_configuration
+    #   Specifies the scope of resources to record from the third-party cloud
+    #   service provider.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for a service-linked configuration recorder. Each tag
+    #   consists of a key and an optional value, both of which you define.
+    #
+    # @return [Types::PutThirdPartyServiceLinkedConfigurationRecorderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutThirdPartyServiceLinkedConfigurationRecorderResponse#arn #arn} => String
+    #   * {Types::PutThirdPartyServiceLinkedConfigurationRecorderResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_third_party_service_linked_configuration_recorder({
+    #     service_principal: "ServicePrincipal", # required
+    #     connector_arn: "AmazonResourceName", # required
+    #     scope_configuration: { # required
+    #       scope_type: "ScopeType", # required
+    #       scope_values: ["ScopeValue"],
+    #       all_regions: false, # required
+    #       included_regions: ["ThirdPartyCloudRegion"],
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutThirdPartyServiceLinkedConfigurationRecorder AWS API Documentation
+    #
+    # @overload put_third_party_service_linked_configuration_recorder(params = {})
+    # @param [Hash] params ({})
+    def put_third_party_service_linked_configuration_recorder(params = {}, options = {})
+      req = build_request(:put_third_party_service_linked_configuration_recorder, params)
+      req.send_request(options)
+    end
+
     # Accepts a structured query language (SQL) SELECT command and an
     # aggregator to query configuration state of Amazon Web Services
     # resources across multiple accounts and regions, performs the
@@ -6555,6 +6892,8 @@ module Aws::ConfigService
     #
     #   * `StoredQuery`
     #
+    #   * `Connector`
+    #
     # @option params [required, Array<Types::Tag>] :tags
     #   An array of tag object.
     #
@@ -6603,6 +6942,8 @@ module Aws::ConfigService
     #
     #   * `StoredQuery`
     #
+    #   * `Connector`
+    #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to be removed.
     #
@@ -6642,7 +6983,7 @@ module Aws::ConfigService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

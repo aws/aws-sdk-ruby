@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2026-07-22)
+------------------
+
+* Feature - Adds documented value constraints for CloudWatch Log Alarm scheduled query configuration fields, and makes LogGroupIdentifiers optional for log alarms.
+
+1.144.0 (2026-07-10)
+------------------
+
+* Feature - CloudWatch now assigns a unique identifier to each anomaly detector. PutAnomalyDetector and DescribeAnomalyDetectors return this AnomalyDetectorId, which you can use to describe or delete a specific anomaly detector directly.
+
+1.143.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.142.0 (2026-06-30)
+------------------
+
+* Feature - Customers can configure alarms with wall-clock-aligned evaluation windows instead of sliding windows, with optional timezone support for daily or weekly periods
+
+1.141.0 (2026-06-29)
+------------------
+
+* Feature - This release adds the API (PutLogAlarm) to manage a new CloudWatch resource, Log Based Alarms. Log Based Alarms allows customers to alarm directly on CloudWatch Logs query results.
+
 1.140.0 (2026-06-09)
 ------------------
 

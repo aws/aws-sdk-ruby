@@ -23,6 +23,15 @@ The endpoint provider used to resolve endpoints. Any object that responds to
         Aws::ACM::EndpointProvider.new
       end
 
+      option(
+        :service_type,
+        doc_type: 'string',
+        docstring: <<~DOCS) do |cfg|
+The service type: ACM or ACM-ACME. Injected via @staticContextParams.
+        DOCS
+        nil
+      end
+
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)

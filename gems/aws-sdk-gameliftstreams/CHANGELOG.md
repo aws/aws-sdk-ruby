@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2026-07-23)
+------------------
+
+* Feature - GameLift Streams now supports configuring a custom aspect ratio per stream session to accommodate different player devices. Supported aspect ratios include landscape, portrait, and square - delivering a full-screen experience without letterboxing or cropping.
+
+1.32.0 (2026-07-17)
+------------------
+
+* Feature - Amazon GameLift Streams now supports assigning an IAM role to a stream session, enabling your application to securely access resources in your AWS account, such as Amazon S3 buckets and DynamoDB tables.
+
+1.31.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2026-07-01)
+------------------
+
+* Feature - Added CreateStreamSessionAdminShell API operation to enable customers to establish secure terminal connections to the live runtime environment of streaming sessions for troubleshooting purposes.
+
 1.29.0 (2026-05-22)
 ------------------
 

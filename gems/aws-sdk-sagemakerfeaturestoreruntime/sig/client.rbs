@@ -97,6 +97,37 @@ module Aws
                             ) -> _BatchGetRecordResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetRecordResponseSuccess
 
+      interface _BatchWriteRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchWriteRecordResponse]
+        def errors: () -> ::Array[Types::BatchWriteRecordError]
+        def unprocessed_entries: () -> ::Array[Types::BatchWriteRecordEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerFeatureStoreRuntime/Client.html#batch_write_record-instance_method
+      def batch_write_record: (
+                                entries: Array[
+                                  {
+                                    feature_group_name: ::String,
+                                    record: Array[
+                                      {
+                                        feature_name: ::String,
+                                        value_as_string: ::String?,
+                                        value_as_string_list: Array[::String]?
+                                      }
+                                    ],
+                                    target_stores: Array[("OnlineStore" | "OfflineStore")]?,
+                                    ttl_duration: {
+                                      unit: ("Seconds" | "Minutes" | "Hours" | "Days" | "Weeks"),
+                                      value: ::Integer
+                                    }?
+                                  }
+                                ],
+                                ?ttl_duration: {
+                                  unit: ("Seconds" | "Minutes" | "Hours" | "Days" | "Weeks"),
+                                  value: ::Integer
+                                }
+                              ) -> _BatchWriteRecordResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchWriteRecordResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerFeatureStoreRuntime/Client.html#delete_record-instance_method
       def delete_record: (
                            feature_group_name: ::String,
@@ -120,6 +151,20 @@ module Aws
                         ?expiration_time_response: ("Enabled" | "Disabled")
                       ) -> _GetRecordResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecordResponseSuccess
+
+      interface _ListRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecordsResponse]
+        def record_identifiers: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerFeatureStoreRuntime/Client.html#list_records-instance_method
+      def list_records: (
+                          feature_group_name: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?include_soft_deleted_records: bool
+                        ) -> _ListRecordsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecordsResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerFeatureStoreRuntime/Client.html#put_record-instance_method
       def put_record: (

@@ -479,7 +479,7 @@ module Aws::Organizations
     #   *Organizations User Guide*.
     #
     # * ACCOUNT\_CREATION\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed
-    #   the number of accounts that you can create in one day.
+    #   the number of accounts that can be in progress at a time.
     #
     # * ACCOUNT\_CREATION\_NOT\_COMPLETE: Your account setup isn't complete
     #   or your account isn't fully active. You must complete the account
@@ -2707,7 +2707,9 @@ module Aws::Organizations
     #   (account, organization, or email) as a party.
     #
     # * INVALID\_PATTERN: You provided a value that doesn't match the
-    #   required pattern.
+    #   required pattern. The service also validates your free-text field
+    #   values against common cross-site scripting (XSS) patterns and
+    #   rejects requests that contain matching values.
     #
     # * INVALID\_PATTERN\_TARGET\_ID: You specified a policy target ID that
     #   doesn't match the required pattern.

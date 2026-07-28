@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2026-07-21)
+------------------
+
+* Feature - GA date - July 21st 2026, remove Tags field from ListCodeSecurityIntegration and ListCodeSecurityScanConfiguration.
+
+1.79.0 (2026-07-20)
+------------------
+
+* Feature - Adds Windows path support for deep inspection. Fixes tag propagation for connector CloudFormation stack operations.
+
+1.78.0 (2026-07-10)
+------------------
+
+* Feature - Support for 3 day and 7 day ECR re-scan durations
+
+1.77.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.76.0 (2026-07-07)
+------------------
+
+* Feature - This release extends vulnerability management to Azure VM, container registries and function apps. Adds support for per-member-account scan configuration settings.
+
 1.75.0 (2026-06-03)
 ------------------
 

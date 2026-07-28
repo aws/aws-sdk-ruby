@@ -783,6 +783,8 @@ module Aws::PartnerCentralAccount
     #   resp.task_details.localized_contents[0].website_url #=> String
     #   resp.task_details.localized_contents[0].logo_url #=> String
     #   resp.task_details.localized_contents[0].locale #=> String
+    #   resp.task_details.headquarters.country_code #=> String
+    #   resp.task_details.headquarters.subdivision_code #=> String
     #   resp.started_at #=> Time
     #   resp.status #=> String, one of "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
     #   resp.ended_at #=> Time
@@ -971,6 +973,8 @@ module Aws::PartnerCentralAccount
     #   resp.profile.localized_contents[0].website_url #=> String
     #   resp.profile.localized_contents[0].logo_url #=> String
     #   resp.profile.localized_contents[0].locale #=> String
+    #   resp.profile.headquarters.country_code #=> String
+    #   resp.profile.headquarters.subdivision_code #=> String
     #   resp.profile.profile_id #=> String
     #   resp.aws_training_certification_email_domains #=> Array
     #   resp.aws_training_certification_email_domains[0].domain_name #=> String
@@ -1267,6 +1271,8 @@ module Aws::PartnerCentralAccount
     #   resp.profile.localized_contents[0].website_url #=> String
     #   resp.profile.localized_contents[0].logo_url #=> String
     #   resp.profile.localized_contents[0].locale #=> String
+    #   resp.profile.headquarters.country_code #=> String
+    #   resp.profile.headquarters.subdivision_code #=> String
     #   resp.profile.profile_id #=> String
     #   resp.aws_training_certification_email_domains #=> Array
     #   resp.aws_training_certification_email_domains[0].domain_name #=> String
@@ -1328,6 +1334,8 @@ module Aws::PartnerCentralAccount
     #   resp.task_details.localized_contents[0].website_url #=> String
     #   resp.task_details.localized_contents[0].logo_url #=> String
     #   resp.task_details.localized_contents[0].locale #=> String
+    #   resp.task_details.headquarters.country_code #=> String
+    #   resp.task_details.headquarters.subdivision_code #=> String
     #   resp.started_at #=> Time
     #   resp.status #=> String, one of "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
     #   resp.ended_at #=> Time
@@ -1383,6 +1391,164 @@ module Aws::PartnerCentralAccount
     # @param [Hash] params ({})
     def get_profile_visibility(params = {}, options = {})
       req = build_request(:get_profile_visibility, params)
+      req.send_request(options)
+    end
+
+    # Returns your current qualifications association status, the primary
+    # partner, and the full list of partners associated under the primary
+    # partner.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog in which to look up the qualifications association. Valid
+    #   values: `AWS`, `Sandbox`.
+    #
+    # @option params [required, String] :identifier
+    #   Your partner identifier. You can provide either a partner ID (for
+    #   example, `partner-abc123`) or a partner ARN. You must own this
+    #   identifier.
+    #
+    # @return [Types::GetQualificationsAssociationDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQualificationsAssociationDetailsResponse#catalog #catalog} => String
+    #   * {Types::GetQualificationsAssociationDetailsResponse#arn #arn} => String
+    #   * {Types::GetQualificationsAssociationDetailsResponse#id #id} => String
+    #   * {Types::GetQualificationsAssociationDetailsResponse#status #status} => String
+    #   * {Types::GetQualificationsAssociationDetailsResponse#primary_partner #primary_partner} => Types::QualificationsAssociationPartner
+    #   * {Types::GetQualificationsAssociationDetailsResponse#associated_partners #associated_partners} => Array&lt;Types::QualificationsAssociationPartner&gt;
+    #   * {Types::GetQualificationsAssociationDetailsResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_qualifications_association_details({
+    #     catalog: "Catalog", # required
+    #     identifier: "PartnerIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog #=> String
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "ASSOCIATED", "NOT_ASSOCIATED"
+    #   resp.primary_partner.profile_id #=> String
+    #   resp.primary_partner.account_id #=> String
+    #   resp.associated_partners #=> Array
+    #   resp.associated_partners[0].profile_id #=> String
+    #   resp.associated_partners[0].account_id #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-account-2025-04-04/GetQualificationsAssociationDetails AWS API Documentation
+    #
+    # @overload get_qualifications_association_details(params = {})
+    # @param [Hash] params ({})
+    def get_qualifications_association_details(params = {}, options = {})
+      req = build_request(:get_qualifications_association_details, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the status and details of the most recent qualifications
+    # association task for your partner account. Use this operation to poll
+    # the progress of an association task initiated by
+    # `StartQualificationsAssociationTask`.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog in which to look up the qualifications association task.
+    #   Valid values: `AWS`, `Sandbox`.
+    #
+    # @option params [required, String] :identifier
+    #   Your partner identifier. You can provide either a partner ID (for
+    #   example, `partner-abc123`) or a partner ARN. You must own this
+    #   identifier.
+    #
+    # @return [Types::GetQualificationsAssociationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQualificationsAssociationTaskResponse#catalog #catalog} => String
+    #   * {Types::GetQualificationsAssociationTaskResponse#arn #arn} => String
+    #   * {Types::GetQualificationsAssociationTaskResponse#id #id} => String
+    #   * {Types::GetQualificationsAssociationTaskResponse#task_id #task_id} => String
+    #   * {Types::GetQualificationsAssociationTaskResponse#status #status} => String
+    #   * {Types::GetQualificationsAssociationTaskResponse#primary_partner #primary_partner} => Types::QualificationsAssociationPartner
+    #   * {Types::GetQualificationsAssociationTaskResponse#started_at #started_at} => Time
+    #   * {Types::GetQualificationsAssociationTaskResponse#ended_at #ended_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_qualifications_association_task({
+    #     catalog: "Catalog", # required
+    #     identifier: "PartnerIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog #=> String
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.task_id #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED"
+    #   resp.primary_partner.profile_id #=> String
+    #   resp.primary_partner.account_id #=> String
+    #   resp.started_at #=> Time
+    #   resp.ended_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-account-2025-04-04/GetQualificationsAssociationTask AWS API Documentation
+    #
+    # @overload get_qualifications_association_task(params = {})
+    # @param [Hash] params ({})
+    def get_qualifications_association_task(params = {}, options = {})
+      req = build_request(:get_qualifications_association_task, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the status and details of the most recent qualifications
+    # disassociation task for your partner account. Use this operation to
+    # poll the progress of a disassociation task initiated by
+    # `StartQualificationsDisassociationTask`.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog in which to look up the qualifications disassociation
+    #   task. Valid values: `AWS`, `Sandbox`.
+    #
+    # @option params [required, String] :identifier
+    #   Your partner identifier. You can provide either a partner ID (for
+    #   example, `partner-abc123`) or a partner ARN. You must own this
+    #   identifier.
+    #
+    # @return [Types::GetQualificationsDisassociationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQualificationsDisassociationTaskResponse#catalog #catalog} => String
+    #   * {Types::GetQualificationsDisassociationTaskResponse#arn #arn} => String
+    #   * {Types::GetQualificationsDisassociationTaskResponse#id #id} => String
+    #   * {Types::GetQualificationsDisassociationTaskResponse#task_id #task_id} => String
+    #   * {Types::GetQualificationsDisassociationTaskResponse#status #status} => String
+    #   * {Types::GetQualificationsDisassociationTaskResponse#associated_partner #associated_partner} => Types::QualificationsAssociationPartner
+    #   * {Types::GetQualificationsDisassociationTaskResponse#started_at #started_at} => Time
+    #   * {Types::GetQualificationsDisassociationTaskResponse#ended_at #ended_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_qualifications_disassociation_task({
+    #     catalog: "Catalog", # required
+    #     identifier: "PartnerIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog #=> String
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.task_id #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED"
+    #   resp.associated_partner.profile_id #=> String
+    #   resp.associated_partner.account_id #=> String
+    #   resp.started_at #=> Time
+    #   resp.ended_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-account-2025-04-04/GetQualificationsDisassociationTask AWS API Documentation
+    #
+    # @overload get_qualifications_disassociation_task(params = {})
+    # @param [Hash] params ({})
+    def get_qualifications_disassociation_task(params = {}, options = {})
+      req = build_request(:get_qualifications_disassociation_task, params)
       req.send_request(options)
     end
 
@@ -1899,6 +2065,10 @@ module Aws::PartnerCentralAccount
     #           locale: "Locale", # required
     #         },
     #       ],
+    #       headquarters: {
+    #         country_code: "CountryCode", # required
+    #         subdivision_code: "SubdivisionCode", # required
+    #       },
     #     },
     #   })
     #
@@ -1922,6 +2092,8 @@ module Aws::PartnerCentralAccount
     #   resp.task_details.localized_contents[0].website_url #=> String
     #   resp.task_details.localized_contents[0].logo_url #=> String
     #   resp.task_details.localized_contents[0].locale #=> String
+    #   resp.task_details.headquarters.country_code #=> String
+    #   resp.task_details.headquarters.subdivision_code #=> String
     #   resp.started_at #=> Time
     #   resp.status #=> String, one of "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
     #   resp.ended_at #=> Time
@@ -1936,6 +2108,144 @@ module Aws::PartnerCentralAccount
     # @param [Hash] params ({})
     def start_profile_update_task(params = {}, options = {})
       req = build_request(:start_profile_update_task, params)
+      req.send_request(options)
+    end
+
+    # Initiates an asynchronous task to associate your partner
+    # qualifications with a primary account. You must be a subsidiary of the
+    # primary account with an active subsidiary connection. Use
+    # `GetQualificationsAssociationTask` to monitor task progress.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog in which to perform the qualifications association. Valid
+    #   values: `AWS`, `Sandbox`.
+    #
+    # @option params [required, String] :identifier
+    #   Your partner identifier. You can provide either a partner ID (for
+    #   example, `partner-abc123`) or a partner ARN. You must own this
+    #   identifier.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::QualificationsAssociationPartner] :primary_partner
+    #   The primary (acquiring) partner's profile and account identifier to
+    #   associate qualifications with. You must provide at least one of
+    #   `ProfileId` or `AccountId`. You cannot specify yourself as the primary
+    #   partner.
+    #
+    # @return [Types::StartQualificationsAssociationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartQualificationsAssociationTaskResponse#catalog #catalog} => String
+    #   * {Types::StartQualificationsAssociationTaskResponse#arn #arn} => String
+    #   * {Types::StartQualificationsAssociationTaskResponse#id #id} => String
+    #   * {Types::StartQualificationsAssociationTaskResponse#task_id #task_id} => String
+    #   * {Types::StartQualificationsAssociationTaskResponse#status #status} => String
+    #   * {Types::StartQualificationsAssociationTaskResponse#primary_partner #primary_partner} => Types::QualificationsAssociationPartner
+    #   * {Types::StartQualificationsAssociationTaskResponse#started_at #started_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_qualifications_association_task({
+    #     catalog: "Catalog", # required
+    #     identifier: "PartnerIdentifier", # required
+    #     client_token: "ClientToken",
+    #     primary_partner: { # required
+    #       profile_id: "PartnerProfileId",
+    #       account_id: "AwsAccountId",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog #=> String
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.task_id #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED"
+    #   resp.primary_partner.profile_id #=> String
+    #   resp.primary_partner.account_id #=> String
+    #   resp.started_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-account-2025-04-04/StartQualificationsAssociationTask AWS API Documentation
+    #
+    # @overload start_qualifications_association_task(params = {})
+    # @param [Hash] params ({})
+    def start_qualifications_association_task(params = {}, options = {})
+      req = build_request(:start_qualifications_association_task, params)
+      req.send_request(options)
+    end
+
+    # Initiates an asynchronous task to disassociate your partner
+    # qualifications from a primary account. You must currently be
+    # associated and cannot disassociate if you are the primary partner. Use
+    # `GetQualificationsDisassociationTask` to monitor task progress.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog in which to perform the qualifications disassociation.
+    #   Valid values: `AWS`, `Sandbox`.
+    #
+    # @option params [required, String] :identifier
+    #   Your partner identifier. You can provide either a partner ID (for
+    #   example, `partner-abc123`) or a partner ARN. You must own this
+    #   identifier.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::QualificationsAssociationPartner] :associated_partner
+    #   The primary partner's profile and account identifier that you are
+    #   currently associated with and will disassociate from. You must provide
+    #   at least one of `ProfileId` or `AccountId`. The specified partner must
+    #   match your current primary association.
+    #
+    # @return [Types::StartQualificationsDisassociationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartQualificationsDisassociationTaskResponse#catalog #catalog} => String
+    #   * {Types::StartQualificationsDisassociationTaskResponse#arn #arn} => String
+    #   * {Types::StartQualificationsDisassociationTaskResponse#id #id} => String
+    #   * {Types::StartQualificationsDisassociationTaskResponse#task_id #task_id} => String
+    #   * {Types::StartQualificationsDisassociationTaskResponse#status #status} => String
+    #   * {Types::StartQualificationsDisassociationTaskResponse#associated_partner #associated_partner} => Types::QualificationsAssociationPartner
+    #   * {Types::StartQualificationsDisassociationTaskResponse#started_at #started_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_qualifications_disassociation_task({
+    #     catalog: "Catalog", # required
+    #     identifier: "PartnerIdentifier", # required
+    #     client_token: "ClientToken",
+    #     associated_partner: { # required
+    #       profile_id: "PartnerProfileId",
+    #       account_id: "AwsAccountId",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog #=> String
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.task_id #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED"
+    #   resp.associated_partner.profile_id #=> String
+    #   resp.associated_partner.account_id #=> String
+    #   resp.started_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-account-2025-04-04/StartQualificationsDisassociationTask AWS API Documentation
+    #
+    # @overload start_qualifications_disassociation_task(params = {})
+    # @param [Hash] params ({})
+    def start_qualifications_disassociation_task(params = {}, options = {})
+      req = build_request(:start_qualifications_disassociation_task, params)
       req.send_request(options)
     end
 
@@ -2138,7 +2448,7 @@ module Aws::PartnerCentralAccount
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralaccount'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

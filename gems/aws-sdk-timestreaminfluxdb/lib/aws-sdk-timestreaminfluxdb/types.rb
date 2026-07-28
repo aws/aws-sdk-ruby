@@ -1975,6 +1975,16 @@ module Aws::TimestreamInfluxDB
     #   Default: 90d
     #   @return [Types::Duration]
     #
+    # @!attribute [rw] plugin_repository_url
+    #   Specifies the URL of the repository that InfluxDB downloads plugins
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] plugin_repository_secret_arn
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret that
+    #   holds your repository access token.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/InfluxDBv3CoreParameters AWS API Documentation
     #
     class InfluxDBv3CoreParameters < Struct.new(
@@ -2016,7 +2026,9 @@ module Aws::TimestreamInfluxDB
       :gen1_lookback_duration,
       :retention_check_interval,
       :delete_grace_period,
-      :hard_delete_default_duration)
+      :hard_delete_default_duration,
+      :plugin_repository_url,
+      :plugin_repository_secret_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2273,6 +2285,16 @@ module Aws::TimestreamInfluxDB
     #   Default: 90d
     #   @return [Types::Duration]
     #
+    # @!attribute [rw] plugin_repository_url
+    #   Specifies the URL of the repository that InfluxDB downloads plugins
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] plugin_repository_secret_arn
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret that
+    #   holds your repository access token.
+    #   @return [String]
+    #
     # @!attribute [rw] ingest_query_instances
     #   Specifies number of instances in the DbCluster which can both ingest
     #   and query.
@@ -2400,6 +2422,8 @@ module Aws::TimestreamInfluxDB
       :retention_check_interval,
       :delete_grace_period,
       :hard_delete_default_duration,
+      :plugin_repository_url,
+      :plugin_repository_secret_arn,
       :ingest_query_instances,
       :query_only_instances,
       :dedicated_compactor,

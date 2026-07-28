@@ -207,7 +207,7 @@ module Aws
                              trigger_type: ("ToPhoneNumber" | "RequestUriHostname"),
                              trigger_value: ::String,
                              ?disabled: bool,
-                             ?target_applications: Array[
+                             target_applications: Array[
                                {
                                  sip_media_application_id: ::String?,
                                  priority: ::Integer?,
@@ -247,9 +247,10 @@ module Aws
                                           ?voice_connector_items: Array[
                                             {
                                               voice_connector_id: ::String,
-                                              priority: ::Integer
+                                              priority: ::Integer?
                                             }
-                                          ]
+                                          ],
+                                          ?call_distribution_type: ("PriorityWeightedDistribution" | "LoadBalancedDistribution")
                                         ) -> _CreateVoiceConnectorGroupResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVoiceConnectorGroupResponseSuccess
 
@@ -1033,11 +1034,11 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKVoice/Client.html#update_global_settings-instance_method
       def update_global_settings: (
-                                    ?voice_connector: {
+                                    voice_connector: {
                                       cdr_bucket: ::String?
                                     }
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
-                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _UpdatePhoneNumberResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePhoneNumberResponse]
@@ -1141,9 +1142,10 @@ module Aws
                                           voice_connector_items: Array[
                                             {
                                               voice_connector_id: ::String,
-                                              priority: ::Integer
+                                              priority: ::Integer?
                                             }
-                                          ]
+                                          ],
+                                          ?call_distribution_type: ("PriorityWeightedDistribution" | "LoadBalancedDistribution")
                                         ) -> _UpdateVoiceConnectorGroupResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVoiceConnectorGroupResponseSuccess
 

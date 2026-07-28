@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2026-07-14)
+------------------
+
+* Feature - Fixed Cloud Map endpoint resolution to correctly route to the dualstack endpoint when dualstack is enabled.
+
+1.103.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.102.0 (2026-05-26)
 ------------------
 

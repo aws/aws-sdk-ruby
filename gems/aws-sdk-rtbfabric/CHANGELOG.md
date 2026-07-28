@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2026-07-24)
+------------------
+
+* Feature - The deprecated inboundLinksCount field has been removed from the GetResponderGateway API response. Customers who previously relied on this field should use linksRequestedCount instead.
+
+1.15.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2026-05-27)
 ------------------
 

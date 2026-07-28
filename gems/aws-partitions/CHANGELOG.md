@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.1274.0 (2026-07-27)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1273.0 (2026-07-24)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1272.0 (2026-07-22)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1271.0 (2026-07-17)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1270.0 (2026-07-16)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1269.0 (2026-07-13)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1268.0 (2026-07-10)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1267.0 (2026-07-07)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PartnerCentralRevenueMeasurement`.
+
+1.1266.0 (2026-07-06)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1265.0 (2026-07-02)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1264.0 (2026-07-01)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1263.0 (2026-06-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SupportAuthZ`.
+
 1.1262.0 (2026-06-22)
 ------------------
 

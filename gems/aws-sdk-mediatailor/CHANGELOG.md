@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2026-07-20)
+------------------
+
+* Feature - This change adds api support for configuring ad decision server timeouts and concurrency fields on MediaTailor playback configurations
+
+1.123.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.122.0 (2026-07-02)
+------------------
+
+* Feature - Added dual-stack (IPv4 and IPv6) endpoint fields to SSAI and Channel Assembly API responses.
+
 1.121.0 (2026-05-21)
 ------------------
 

@@ -541,35 +541,7 @@ module Aws
                                      spark_properties: Hash[::String, ::String]?,
                                      athena_properties: Hash[::String, ::String]?,
                                      python_properties: Hash[::String, ::String]?,
-                                     authentication_configuration: {
-                                       authentication_type: ("BASIC" | "OAUTH2" | "CUSTOM")?,
-                                       o_auth_2_properties: {
-                                         o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")?,
-                                         o_auth_2_client_application: {
-                                           user_managed_client_application_client_id: ::String?,
-                                           a_ws_managed_client_application_reference: ::String?
-                                         }?,
-                                         token_url: ::String?,
-                                         token_url_parameters_map: Hash[::String, ::String]?,
-                                         authorization_code_properties: {
-                                           authorization_code: ::String?,
-                                           redirect_uri: ::String?
-                                         }?,
-                                         o_auth_2_credentials: {
-                                           user_managed_client_application_client_secret: ::String?,
-                                           access_token: ::String?,
-                                           refresh_token: ::String?,
-                                           jwt_token: ::String?
-                                         }?
-                                       }?,
-                                       secret_arn: ::String?,
-                                       kms_key_arn: ::String?,
-                                       basic_authentication_credentials: {
-                                         user_name: ::String?,
-                                         password: ::String?
-                                       }?,
-                                       custom_authentication_credentials: Hash[::String, ::String]?
-                                     }?
+                                     authentication_configuration: Params::authentication_configuration_input?
                                    }?
                                  }?,
                                  hyper_pod_properties: {
@@ -627,6 +599,35 @@ module Aws
                                    s3_uri: ::String,
                                    s3_access_grant_location_id: ::String?,
                                    register_s3_access_grant_location: bool?
+                                 }?,
+                                 snowflake_properties: {
+                                   connectivity_properties: {
+                                     connection_properties: Hash[::String, ::String]?,
+                                     physical_connection_requirements: {
+                                       subnet_id: ::String?,
+                                       subnet_id_list: Array[::String]?,
+                                       security_group_id_list: Array[::String]?,
+                                       availability_zone: ::String?
+                                     }?,
+                                     name: ::String?,
+                                     description: ::String?,
+                                     validate_credentials: bool?,
+                                     validate_for_compute_environments: Array[("SPARK" | "ATHENA" | "PYTHON")]?,
+                                     spark_properties: Hash[::String, ::String]?,
+                                     athena_properties: Hash[::String, ::String]?,
+                                     python_properties: Hash[::String, ::String]?,
+                                     authentication_configuration: Params::authentication_configuration_input?
+                                   }?,
+                                   snowflake_role: ::String,
+                                   identity_mapping: {
+                                     username_attribute: ::String,
+                                     prefix: ::String?
+                                   },
+                                   lineage_sync: {
+                                     timezone: ("UTC" | "AFRICA_JOHANNESBURG" | "AMERICA_MONTREAL" | "AMERICA_SAO_PAULO" | "ASIA_BAHRAIN" | "ASIA_BANGKOK" | "ASIA_CALCUTTA" | "ASIA_DUBAI" | "ASIA_HONG_KONG" | "ASIA_JAKARTA" | "ASIA_KUALA_LUMPUR" | "ASIA_SEOUL" | "ASIA_SHANGHAI" | "ASIA_SINGAPORE" | "ASIA_TAIPEI" | "ASIA_TOKYO" | "AUSTRALIA_MELBOURNE" | "AUSTRALIA_SYDNEY" | "CANADA_CENTRAL" | "CET" | "CST6CDT" | "ETC_GMT" | "ETC_GMT0" | "ETC_GMT_ADD_0" | "ETC_GMT_ADD_1" | "ETC_GMT_ADD_10" | "ETC_GMT_ADD_11" | "ETC_GMT_ADD_12" | "ETC_GMT_ADD_2" | "ETC_GMT_ADD_3" | "ETC_GMT_ADD_4" | "ETC_GMT_ADD_5" | "ETC_GMT_ADD_6" | "ETC_GMT_ADD_7" | "ETC_GMT_ADD_8" | "ETC_GMT_ADD_9" | "ETC_GMT_NEG_0" | "ETC_GMT_NEG_1" | "ETC_GMT_NEG_10" | "ETC_GMT_NEG_11" | "ETC_GMT_NEG_12" | "ETC_GMT_NEG_13" | "ETC_GMT_NEG_14" | "ETC_GMT_NEG_2" | "ETC_GMT_NEG_3" | "ETC_GMT_NEG_4" | "ETC_GMT_NEG_5" | "ETC_GMT_NEG_6" | "ETC_GMT_NEG_7" | "ETC_GMT_NEG_8" | "ETC_GMT_NEG_9" | "EUROPE_DUBLIN" | "EUROPE_LONDON" | "EUROPE_PARIS" | "EUROPE_STOCKHOLM" | "EUROPE_ZURICH" | "ISRAEL" | "MEXICO_GENERAL" | "MST7MDT" | "PACIFIC_AUCKLAND" | "US_CENTRAL" | "US_EASTERN" | "US_MOUNTAIN" | "US_PACIFIC")?,
+                                     enabled: bool,
+                                     schedule: ::String?
+                                   }?
                                  }?,
                                  amazon_q_properties: {
                                    is_enabled: bool,
@@ -1103,7 +1104,7 @@ module Aws
         def owning_project_id: () -> ::String
         def domain_id: () -> ::String
         def cell_order: () -> ::Array[Types::CellInformation]
-        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
         def description: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -1116,6 +1117,7 @@ module Aws
         def metadata: () -> ::Hash[::String, ::String]
         def parameters: () -> ::Hash[::String, ::String]
         def environment_configuration: () -> Types::EnvironmentConfig
+        def git_metadata: () -> Types::GitMetadata
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_notebook-instance_method
       def create_notebook: (
@@ -2363,7 +2365,7 @@ module Aws
         def owning_project_id: () -> ::String
         def domain_id: () -> ::String
         def cell_order: () -> ::Array[Types::CellInformation]
-        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
         def description: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -2376,6 +2378,7 @@ module Aws
         def metadata: () -> ::Hash[::String, ::String]
         def parameters: () -> ::Hash[::String, ::String]
         def environment_configuration: () -> Types::EnvironmentConfig
+        def git_metadata: () -> Types::GitMetadata
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_notebook-instance_method
       def get_notebook: (
@@ -3000,7 +3003,7 @@ module Aws
                             ?max_results: ::Integer,
                             ?sort_order: ("ASCENDING" | "DESCENDING"),
                             ?sort_by: ("CREATED_AT" | "UPDATED_AT"),
-                            ?status: ("ACTIVE" | "ARCHIVED"),
+                            ?status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED"),
                             ?next_token: ::String
                           ) -> _ListNotebooksResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebooksResponseSuccess
@@ -3641,7 +3644,7 @@ module Aws
       interface _StartNotebookImportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartNotebookImportOutput]
         def notebook_id: () -> ::String
-        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
         def domain_id: () -> ::String
         def owning_project_id: () -> ::String
         def name: () -> ::String
@@ -3715,6 +3718,42 @@ module Aws
                                 ?client_token: ::String
                               ) -> _StartNotebookRunResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNotebookRunResponseSuccess
+
+      interface _StartNotebookSyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNotebookSyncOutput]
+        def notebook_id: () -> ::String
+        def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+        def domain_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def source_location: () -> Types::SourceLocation
+        def git_metadata: () -> Types::GitMetadata
+        def name: () -> ::String
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#start_notebook_sync-instance_method
+      def start_notebook_sync: (
+                                 domain_identifier: ::String,
+                                 owning_project_identifier: ::String,
+                                 source_location: {
+                                   s3: ::String?
+                                 },
+                                 ?git_metadata: {
+                                   connection_id: ::String,
+                                   repository: ::String,
+                                   branch: ::String,
+                                   commit_hash: ::String,
+                                   file_name: ::String?,
+                                   committed_at: ::Time?,
+                                   commit_message: ::String?
+                                 },
+                                 ?notebook_id: ::String,
+                                 ?name: ::String,
+                                 ?description: ::String,
+                                 ?client_token: ::String
+                               ) -> _StartNotebookSyncResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNotebookSyncResponseSuccess
 
       interface _StopNotebookRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopNotebookRunOutput]
@@ -3889,6 +3928,25 @@ module Aws
                                    s3_uri: ::String,
                                    s3_access_grant_location_id: ::String?,
                                    register_s3_access_grant_location: bool?
+                                 }?,
+                                 snowflake_properties: {
+                                   connectivity_properties_patch: {
+                                     description: ::String?,
+                                     connection_properties: Hash[::String, ::String]?,
+                                     authentication_configuration: {
+                                       secret_arn: ::String?,
+                                       basic_authentication_credentials: {
+                                         user_name: ::String?,
+                                         password: ::String?
+                                       }?
+                                     }?
+                                   }?,
+                                   snowflake_role: ::String?,
+                                   lineage_sync: {
+                                     timezone: ("UTC" | "AFRICA_JOHANNESBURG" | "AMERICA_MONTREAL" | "AMERICA_SAO_PAULO" | "ASIA_BAHRAIN" | "ASIA_BANGKOK" | "ASIA_CALCUTTA" | "ASIA_DUBAI" | "ASIA_HONG_KONG" | "ASIA_JAKARTA" | "ASIA_KUALA_LUMPUR" | "ASIA_SEOUL" | "ASIA_SHANGHAI" | "ASIA_SINGAPORE" | "ASIA_TAIPEI" | "ASIA_TOKYO" | "AUSTRALIA_MELBOURNE" | "AUSTRALIA_SYDNEY" | "CANADA_CENTRAL" | "CET" | "CST6CDT" | "ETC_GMT" | "ETC_GMT0" | "ETC_GMT_ADD_0" | "ETC_GMT_ADD_1" | "ETC_GMT_ADD_10" | "ETC_GMT_ADD_11" | "ETC_GMT_ADD_12" | "ETC_GMT_ADD_2" | "ETC_GMT_ADD_3" | "ETC_GMT_ADD_4" | "ETC_GMT_ADD_5" | "ETC_GMT_ADD_6" | "ETC_GMT_ADD_7" | "ETC_GMT_ADD_8" | "ETC_GMT_ADD_9" | "ETC_GMT_NEG_0" | "ETC_GMT_NEG_1" | "ETC_GMT_NEG_10" | "ETC_GMT_NEG_11" | "ETC_GMT_NEG_12" | "ETC_GMT_NEG_13" | "ETC_GMT_NEG_14" | "ETC_GMT_NEG_2" | "ETC_GMT_NEG_3" | "ETC_GMT_NEG_4" | "ETC_GMT_NEG_5" | "ETC_GMT_NEG_6" | "ETC_GMT_NEG_7" | "ETC_GMT_NEG_8" | "ETC_GMT_NEG_9" | "EUROPE_DUBLIN" | "EUROPE_LONDON" | "EUROPE_PARIS" | "EUROPE_STOCKHOLM" | "EUROPE_ZURICH" | "ISRAEL" | "MEXICO_GENERAL" | "MST7MDT" | "PACIFIC_AUCKLAND" | "US_CENTRAL" | "US_EASTERN" | "US_MOUNTAIN" | "US_PACIFIC")?,
+                                     enabled: bool,
+                                     schedule: ::String?
+                                   }?
                                  }?,
                                  amazon_q_properties: {
                                    is_enabled: bool,
@@ -4215,7 +4273,7 @@ module Aws
         def owning_project_id: () -> ::String
         def domain_id: () -> ::String
         def cell_order: () -> ::Array[Types::CellInformation]
-        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
         def description: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -4228,13 +4286,14 @@ module Aws
         def metadata: () -> ::Hash[::String, ::String]
         def parameters: () -> ::Hash[::String, ::String]
         def environment_configuration: () -> Types::EnvironmentConfig
+        def git_metadata: () -> Types::GitMetadata
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_notebook-instance_method
       def update_notebook: (
                              domain_identifier: ::String,
                              identifier: ::String,
                              ?description: ::String,
-                             ?status: ("ACTIVE" | "ARCHIVED"),
+                             ?status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED"),
                              ?name: ::String,
                              ?cell_order: Array[
                                {

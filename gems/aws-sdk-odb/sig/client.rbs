@@ -206,6 +206,14 @@ module Aws
                                             kms_key_id: ::String?
                                           }?
                                         },
+                                        ?admin_password_source: ("CUSTOMER_MANAGED_AWS_SECRET" | "API_REQUEST_PARAMETER"),
+                                        ?admin_password_source_configuration: {
+                                          customer_managed_aws_secret: {
+                                            secret_id: ::String?,
+                                            iam_role_arn: ::String?,
+                                            external_id_type: ("database_ocid" | "compartment_ocid" | "tenant_ocid")?
+                                          }?
+                                        },
                                         ?client_token: ::String,
                                         ?tags: Hash[::String, ::String]
                                       ) -> _CreateAutonomousDatabaseResponseSuccess
@@ -236,7 +244,15 @@ module Aws
       def create_autonomous_database_wallet: (
                                                autonomous_database_id: ::String,
                                                ?wallet_type: ("REGIONAL" | "INSTANCE"),
-                                               password: ::String,
+                                               ?password: ::String,
+                                               ?password_source: ("CUSTOMER_MANAGED_AWS_SECRET" | "API_REQUEST_PARAMETER"),
+                                               ?password_source_configuration: {
+                                                 customer_managed_aws_secret: {
+                                                   secret_id: ::String?,
+                                                   iam_role_arn: ::String?,
+                                                   external_id_type: ("database_ocid" | "compartment_ocid" | "tenant_ocid")?
+                                                 }?
+                                               },
                                                ?client_token: ::String
                                              ) -> _CreateAutonomousDatabaseWalletResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAutonomousDatabaseWalletResponseSuccess
@@ -606,7 +622,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#initialize_service-instance_method
       def initialize_service: (
-                                ?oci_identity_domain: bool
+                                ?oci_identity_domain: bool,
+                                ?autonomous_database_oci_aws_secrets_manager_integration: ("ENABLED" | "DISABLED")
                               ) -> _InitializeServiceResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitializeServiceResponseSuccess
 
@@ -1062,6 +1079,14 @@ module Aws
                                             iam_role_arn: ::String?,
                                             external_id_type: ("database_ocid" | "compartment_ocid" | "tenant_ocid")?,
                                             kms_key_id: ::String?
+                                          }?
+                                        },
+                                        ?admin_password_source: ("CUSTOMER_MANAGED_AWS_SECRET" | "API_REQUEST_PARAMETER"),
+                                        ?admin_password_source_configuration: {
+                                          customer_managed_aws_secret: {
+                                            secret_id: ::String?,
+                                            iam_role_arn: ::String?,
+                                            external_id_type: ("database_ocid" | "compartment_ocid" | "tenant_ocid")?
                                           }?
                                         }
                                       ) -> _UpdateAutonomousDatabaseResponseSuccess

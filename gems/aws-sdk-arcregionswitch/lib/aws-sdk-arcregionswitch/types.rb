@@ -432,6 +432,32 @@ module Aws::ARCRegionswitch
     #
     class CancelPlanExecutionResponse < Aws::EmptyStructure; end
 
+    # The client token was already used with different request parameters. A
+    # client token must map to the same parameters for every request. To
+    # retry this operation, provide a new client token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource involved in the client token
+    #   conflict.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource involved in the client token conflict.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] description
     #   The description of a Region switch plan.
     #   @return [String]
@@ -2502,6 +2528,23 @@ module Aws::ARCRegionswitch
     #   post-recovery execution.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request and returns the result of
+    #   the original successful request. If you don't provide a client
+    #   token, the service automatically generates one. For more information
+    #   about idempotency, see [Making retries safe with idempotent
+    #   APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/StartPlanExecutionRequest AWS API Documentation
     #
     class StartPlanExecutionRequest < Struct.new(
@@ -2511,7 +2554,8 @@ module Aws::ARCRegionswitch
       :mode,
       :comment,
       :latest_version,
-      :recovery_execution_id)
+      :recovery_execution_id,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -33,6 +33,7 @@ module Aws::ChimeSDKVoice
     BatchUpdatePhoneNumberResponse = Shapes::StructureShape.new(name: 'BatchUpdatePhoneNumberResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CallDetails = Shapes::StructureShape.new(name: 'CallDetails')
+    CallDistributionType = Shapes::StringShape.new(name: 'CallDistributionType')
     CallLegType = Shapes::StringShape.new(name: 'CallLegType')
     CallingName = Shapes::StringShape.new(name: 'CallingName')
     CallingNameStatus = Shapes::StringShape.new(name: 'CallingNameStatus')
@@ -249,6 +250,7 @@ module Aws::ChimeSDKVoice
     RestorePhoneNumberRequest = Shapes::StructureShape.new(name: 'RestorePhoneNumberRequest')
     RestorePhoneNumberResponse = Shapes::StructureShape.new(name: 'RestorePhoneNumberResponse')
     ResultMax = Shapes::IntegerShape.new(name: 'ResultMax')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     SMACreateCallArgumentsMap = Shapes::MapShape.new(name: 'SMACreateCallArgumentsMap')
     SMAUpdateCallArgumentsMap = Shapes::MapShape.new(name: 'SMAUpdateCallArgumentsMap')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
@@ -337,6 +339,7 @@ module Aws::ChimeSDKVoice
     VoiceConnectorGroup = Shapes::StructureShape.new(name: 'VoiceConnectorGroup')
     VoiceConnectorGroupList = Shapes::ListShape.new(name: 'VoiceConnectorGroupList')
     VoiceConnectorGroupName = Shapes::StringShape.new(name: 'VoiceConnectorGroupName')
+    VoiceConnectorId = Shapes::StringShape.new(name: 'VoiceConnectorId')
     VoiceConnectorIntegrationType = Shapes::StringShape.new(name: 'VoiceConnectorIntegrationType')
     VoiceConnectorItem = Shapes::StructureShape.new(name: 'VoiceConnectorItem')
     VoiceConnectorItemList = Shapes::ListShape.new(name: 'VoiceConnectorItemList')
@@ -378,7 +381,7 @@ module Aws::ChimeSDKVoice
     AssociatePhoneNumbersWithVoiceConnectorGroupResponse.add_member(:phone_number_errors, Shapes::ShapeRef.new(shape: PhoneNumberErrorList, location_name: "PhoneNumberErrors"))
     AssociatePhoneNumbersWithVoiceConnectorGroupResponse.struct_class = Types::AssociatePhoneNumbersWithVoiceConnectorGroupResponse
 
-    AssociatePhoneNumbersWithVoiceConnectorRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    AssociatePhoneNumbersWithVoiceConnectorRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     AssociatePhoneNumbersWithVoiceConnectorRequest.add_member(:e164_phone_numbers, Shapes::ShapeRef.new(shape: E164PhoneNumberList, required: true, location_name: "E164PhoneNumbers"))
     AssociatePhoneNumbersWithVoiceConnectorRequest.add_member(:force_associate, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ForceAssociate"))
     AssociatePhoneNumbersWithVoiceConnectorRequest.struct_class = Types::AssociatePhoneNumbersWithVoiceConnectorRequest
@@ -400,7 +403,7 @@ module Aws::ChimeSDKVoice
     BatchUpdatePhoneNumberResponse.add_member(:phone_number_errors, Shapes::ShapeRef.new(shape: PhoneNumberErrorList, location_name: "PhoneNumberErrors"))
     BatchUpdatePhoneNumberResponse.struct_class = Types::BatchUpdatePhoneNumberResponse
 
-    CallDetails.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, location_name: "VoiceConnectorId"))
+    CallDetails.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, location_name: "VoiceConnectorId"))
     CallDetails.add_member(:transaction_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "TransactionId"))
     CallDetails.add_member(:is_caller, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsCaller"))
     CallDetails.struct_class = Types::CallDetails
@@ -434,7 +437,7 @@ module Aws::ChimeSDKVoice
     CreatePhoneNumberOrderResponse.add_member(:phone_number_order, Shapes::ShapeRef.new(shape: PhoneNumberOrder, location_name: "PhoneNumberOrder"))
     CreatePhoneNumberOrderResponse.struct_class = Types::CreatePhoneNumberOrderResponse
 
-    CreateProxySessionRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "voiceConnectorId"))
+    CreateProxySessionRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     CreateProxySessionRequest.add_member(:participant_phone_numbers, Shapes::ShapeRef.new(shape: ParticipantPhoneNumberList, required: true, location_name: "ParticipantPhoneNumbers"))
     CreateProxySessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProxySessionNameString, location_name: "Name"))
     CreateProxySessionRequest.add_member(:expiry_minutes, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "ExpiryMinutes"))
@@ -470,7 +473,7 @@ module Aws::ChimeSDKVoice
     CreateSipRuleRequest.add_member(:trigger_type, Shapes::ShapeRef.new(shape: SipRuleTriggerType, required: true, location_name: "TriggerType"))
     CreateSipRuleRequest.add_member(:trigger_value, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "TriggerValue"))
     CreateSipRuleRequest.add_member(:disabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Disabled"))
-    CreateSipRuleRequest.add_member(:target_applications, Shapes::ShapeRef.new(shape: SipRuleTargetApplicationList, location_name: "TargetApplications"))
+    CreateSipRuleRequest.add_member(:target_applications, Shapes::ShapeRef.new(shape: SipRuleTargetApplicationList, required: true, location_name: "TargetApplications"))
     CreateSipRuleRequest.struct_class = Types::CreateSipRuleRequest
 
     CreateSipRuleResponse.add_member(:sip_rule, Shapes::ShapeRef.new(shape: SipRule, location_name: "SipRule"))
@@ -478,6 +481,7 @@ module Aws::ChimeSDKVoice
 
     CreateVoiceConnectorGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: VoiceConnectorGroupName, required: true, location_name: "Name"))
     CreateVoiceConnectorGroupRequest.add_member(:voice_connector_items, Shapes::ShapeRef.new(shape: VoiceConnectorItemList, location_name: "VoiceConnectorItems"))
+    CreateVoiceConnectorGroupRequest.add_member(:call_distribution_type, Shapes::ShapeRef.new(shape: CallDistributionType, location_name: "CallDistributionType"))
     CreateVoiceConnectorGroupRequest.struct_class = Types::CreateVoiceConnectorGroupRequest
 
     CreateVoiceConnectorGroupResponse.add_member(:voice_connector_group, Shapes::ShapeRef.new(shape: VoiceConnectorGroup, location_name: "VoiceConnectorGroup"))
@@ -526,7 +530,7 @@ module Aws::ChimeSDKVoice
     DeletePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location: "uri", location_name: "phoneNumberId"))
     DeletePhoneNumberRequest.struct_class = Types::DeletePhoneNumberRequest
 
-    DeleteProxySessionRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "voiceConnectorId"))
+    DeleteProxySessionRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteProxySessionRequest.add_member(:proxy_session_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "proxySessionId"))
     DeleteProxySessionRequest.struct_class = Types::DeleteProxySessionRequest
 
@@ -536,32 +540,32 @@ module Aws::ChimeSDKVoice
     DeleteSipRuleRequest.add_member(:sip_rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipRuleId"))
     DeleteSipRuleRequest.struct_class = Types::DeleteSipRuleRequest
 
-    DeleteVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    DeleteVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorEmergencyCallingConfigurationRequest.struct_class = Types::DeleteVoiceConnectorEmergencyCallingConfigurationRequest
 
-    DeleteVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    DeleteVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorExternalSystemsConfigurationRequest.struct_class = Types::DeleteVoiceConnectorExternalSystemsConfigurationRequest
 
     DeleteVoiceConnectorGroupRequest.add_member(:voice_connector_group_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorGroupId"))
     DeleteVoiceConnectorGroupRequest.struct_class = Types::DeleteVoiceConnectorGroupRequest
 
-    DeleteVoiceConnectorOriginationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    DeleteVoiceConnectorOriginationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorOriginationRequest.struct_class = Types::DeleteVoiceConnectorOriginationRequest
 
-    DeleteVoiceConnectorProxyRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "voiceConnectorId"))
+    DeleteVoiceConnectorProxyRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorProxyRequest.struct_class = Types::DeleteVoiceConnectorProxyRequest
 
-    DeleteVoiceConnectorRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    DeleteVoiceConnectorRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorRequest.struct_class = Types::DeleteVoiceConnectorRequest
 
-    DeleteVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    DeleteVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorStreamingConfigurationRequest.struct_class = Types::DeleteVoiceConnectorStreamingConfigurationRequest
 
-    DeleteVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    DeleteVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorTerminationCredentialsRequest.add_member(:usernames, Shapes::ShapeRef.new(shape: SensitiveStringList, required: true, location_name: "Usernames"))
     DeleteVoiceConnectorTerminationCredentialsRequest.struct_class = Types::DeleteVoiceConnectorTerminationCredentialsRequest
 
-    DeleteVoiceConnectorTerminationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    DeleteVoiceConnectorTerminationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorTerminationRequest.struct_class = Types::DeleteVoiceConnectorTerminationRequest
 
     DeleteVoiceProfileDomainRequest.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceProfileDomainId"))
@@ -577,7 +581,7 @@ module Aws::ChimeSDKVoice
     DisassociatePhoneNumbersFromVoiceConnectorGroupResponse.add_member(:phone_number_errors, Shapes::ShapeRef.new(shape: PhoneNumberErrorList, location_name: "PhoneNumberErrors"))
     DisassociatePhoneNumbersFromVoiceConnectorGroupResponse.struct_class = Types::DisassociatePhoneNumbersFromVoiceConnectorGroupResponse
 
-    DisassociatePhoneNumbersFromVoiceConnectorRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    DisassociatePhoneNumbersFromVoiceConnectorRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     DisassociatePhoneNumbersFromVoiceConnectorRequest.add_member(:e164_phone_numbers, Shapes::ShapeRef.new(shape: E164PhoneNumberList, required: true, location_name: "E164PhoneNumbers"))
     DisassociatePhoneNumbersFromVoiceConnectorRequest.struct_class = Types::DisassociatePhoneNumbersFromVoiceConnectorRequest
 
@@ -618,7 +622,7 @@ module Aws::ChimeSDKVoice
     GetPhoneNumberSettingsResponse.add_member(:calling_name_updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CallingNameUpdatedTimestamp"))
     GetPhoneNumberSettingsResponse.struct_class = Types::GetPhoneNumberSettingsResponse
 
-    GetProxySessionRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "voiceConnectorId"))
+    GetProxySessionRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetProxySessionRequest.add_member(:proxy_session_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "proxySessionId"))
     GetProxySessionRequest.struct_class = Types::GetProxySessionRequest
 
@@ -649,20 +653,20 @@ module Aws::ChimeSDKVoice
     GetSipRuleResponse.add_member(:sip_rule, Shapes::ShapeRef.new(shape: SipRule, location_name: "SipRule"))
     GetSipRuleResponse.struct_class = Types::GetSipRuleResponse
 
-    GetSpeakerSearchTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    GetSpeakerSearchTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "VoiceConnectorId"))
     GetSpeakerSearchTaskRequest.add_member(:speaker_search_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "SpeakerSearchTaskId"))
     GetSpeakerSearchTaskRequest.struct_class = Types::GetSpeakerSearchTaskRequest
 
     GetSpeakerSearchTaskResponse.add_member(:speaker_search_task, Shapes::ShapeRef.new(shape: SpeakerSearchTask, location_name: "SpeakerSearchTask"))
     GetSpeakerSearchTaskResponse.struct_class = Types::GetSpeakerSearchTaskResponse
 
-    GetVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    GetVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetVoiceConnectorEmergencyCallingConfigurationRequest.struct_class = Types::GetVoiceConnectorEmergencyCallingConfigurationRequest
 
     GetVoiceConnectorEmergencyCallingConfigurationResponse.add_member(:emergency_calling_configuration, Shapes::ShapeRef.new(shape: EmergencyCallingConfiguration, location_name: "EmergencyCallingConfiguration"))
     GetVoiceConnectorEmergencyCallingConfigurationResponse.struct_class = Types::GetVoiceConnectorEmergencyCallingConfigurationResponse
 
-    GetVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    GetVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetVoiceConnectorExternalSystemsConfigurationRequest.struct_class = Types::GetVoiceConnectorExternalSystemsConfigurationRequest
 
     GetVoiceConnectorExternalSystemsConfigurationResponse.add_member(:external_systems_configuration, Shapes::ShapeRef.new(shape: ExternalSystemsConfiguration, location_name: "ExternalSystemsConfiguration"))
@@ -674,43 +678,43 @@ module Aws::ChimeSDKVoice
     GetVoiceConnectorGroupResponse.add_member(:voice_connector_group, Shapes::ShapeRef.new(shape: VoiceConnectorGroup, location_name: "VoiceConnectorGroup"))
     GetVoiceConnectorGroupResponse.struct_class = Types::GetVoiceConnectorGroupResponse
 
-    GetVoiceConnectorLoggingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    GetVoiceConnectorLoggingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetVoiceConnectorLoggingConfigurationRequest.struct_class = Types::GetVoiceConnectorLoggingConfigurationRequest
 
     GetVoiceConnectorLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     GetVoiceConnectorLoggingConfigurationResponse.struct_class = Types::GetVoiceConnectorLoggingConfigurationResponse
 
-    GetVoiceConnectorOriginationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    GetVoiceConnectorOriginationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetVoiceConnectorOriginationRequest.struct_class = Types::GetVoiceConnectorOriginationRequest
 
     GetVoiceConnectorOriginationResponse.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, location_name: "Origination"))
     GetVoiceConnectorOriginationResponse.struct_class = Types::GetVoiceConnectorOriginationResponse
 
-    GetVoiceConnectorProxyRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "voiceConnectorId"))
+    GetVoiceConnectorProxyRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetVoiceConnectorProxyRequest.struct_class = Types::GetVoiceConnectorProxyRequest
 
     GetVoiceConnectorProxyResponse.add_member(:proxy, Shapes::ShapeRef.new(shape: Proxy, location_name: "Proxy"))
     GetVoiceConnectorProxyResponse.struct_class = Types::GetVoiceConnectorProxyResponse
 
-    GetVoiceConnectorRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    GetVoiceConnectorRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetVoiceConnectorRequest.struct_class = Types::GetVoiceConnectorRequest
 
     GetVoiceConnectorResponse.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnector, location_name: "VoiceConnector"))
     GetVoiceConnectorResponse.struct_class = Types::GetVoiceConnectorResponse
 
-    GetVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    GetVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetVoiceConnectorStreamingConfigurationRequest.struct_class = Types::GetVoiceConnectorStreamingConfigurationRequest
 
     GetVoiceConnectorStreamingConfigurationResponse.add_member(:streaming_configuration, Shapes::ShapeRef.new(shape: StreamingConfiguration, location_name: "StreamingConfiguration"))
     GetVoiceConnectorStreamingConfigurationResponse.struct_class = Types::GetVoiceConnectorStreamingConfigurationResponse
 
-    GetVoiceConnectorTerminationHealthRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    GetVoiceConnectorTerminationHealthRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetVoiceConnectorTerminationHealthRequest.struct_class = Types::GetVoiceConnectorTerminationHealthRequest
 
     GetVoiceConnectorTerminationHealthResponse.add_member(:termination_health, Shapes::ShapeRef.new(shape: TerminationHealth, location_name: "TerminationHealth"))
     GetVoiceConnectorTerminationHealthResponse.struct_class = Types::GetVoiceConnectorTerminationHealthResponse
 
-    GetVoiceConnectorTerminationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    GetVoiceConnectorTerminationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetVoiceConnectorTerminationRequest.struct_class = Types::GetVoiceConnectorTerminationRequest
 
     GetVoiceConnectorTerminationResponse.add_member(:termination, Shapes::ShapeRef.new(shape: Termination, location_name: "Termination"))
@@ -728,7 +732,7 @@ module Aws::ChimeSDKVoice
     GetVoiceProfileResponse.add_member(:voice_profile, Shapes::ShapeRef.new(shape: VoiceProfile, location_name: "VoiceProfile"))
     GetVoiceProfileResponse.struct_class = Types::GetVoiceProfileResponse
 
-    GetVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    GetVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "VoiceConnectorId"))
     GetVoiceToneAnalysisTaskRequest.add_member(:voice_tone_analysis_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceToneAnalysisTaskId"))
     GetVoiceToneAnalysisTaskRequest.add_member(:is_caller, Shapes::ShapeRef.new(shape: Boolean, required: true, location: "querystring", location_name: "isCaller"))
     GetVoiceToneAnalysisTaskRequest.struct_class = Types::GetVoiceToneAnalysisTaskRequest
@@ -741,7 +745,7 @@ module Aws::ChimeSDKVoice
     ListAvailableVoiceConnectorRegionsResponse.add_member(:voice_connector_regions, Shapes::ShapeRef.new(shape: VoiceConnectorAwsRegionList, location_name: "VoiceConnectorRegions"))
     ListAvailableVoiceConnectorRegionsResponse.struct_class = Types::ListAvailableVoiceConnectorRegionsResponse
 
-    ListPhoneNumberOrdersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListPhoneNumberOrdersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "next-token"))
     ListPhoneNumberOrdersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
     ListPhoneNumberOrdersRequest.struct_class = Types::ListPhoneNumberOrdersRequest
 
@@ -761,7 +765,7 @@ module Aws::ChimeSDKVoice
     ListPhoneNumbersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListPhoneNumbersResponse.struct_class = Types::ListPhoneNumbersResponse
 
-    ListProxySessionsRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "voiceConnectorId"))
+    ListProxySessionsRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     ListProxySessionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ProxySessionStatus, location: "querystring", location_name: "status"))
     ListProxySessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "next-token"))
     ListProxySessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
@@ -808,7 +812,7 @@ module Aws::ChimeSDKVoice
     ListVoiceConnectorGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListVoiceConnectorGroupsResponse.struct_class = Types::ListVoiceConnectorGroupsResponse
 
-    ListVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    ListVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     ListVoiceConnectorTerminationCredentialsRequest.struct_class = Types::ListVoiceConnectorTerminationCredentialsRequest
 
     ListVoiceConnectorTerminationCredentialsResponse.add_member(:usernames, Shapes::ShapeRef.new(shape: SensitiveStringList, location_name: "Usernames"))
@@ -880,6 +884,7 @@ module Aws::ChimeSDKVoice
 
     PhoneNumber.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "PhoneNumberId"))
     PhoneNumber.add_member(:e164_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "E164PhoneNumber"))
+    PhoneNumber.add_member(:phone_number_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PhoneNumberArn"))
     PhoneNumber.add_member(:country, Shapes::ShapeRef.new(shape: Alpha2CountryCode, location_name: "Country"))
     PhoneNumber.add_member(:type, Shapes::ShapeRef.new(shape: PhoneNumberType, location_name: "Type"))
     PhoneNumber.add_member(:product_type, Shapes::ShapeRef.new(shape: PhoneNumberProductType, location_name: "ProductType"))
@@ -932,7 +937,7 @@ module Aws::ChimeSDKVoice
     PhoneNumberOrder.add_member(:ordered_phone_numbers, Shapes::ShapeRef.new(shape: OrderedPhoneNumberList, location_name: "OrderedPhoneNumbers"))
     PhoneNumberOrder.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
     PhoneNumberOrder.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
-    PhoneNumberOrder.add_member(:foc_date, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "FocDate"))
+    PhoneNumberOrder.add_member(:foc_date, Shapes::ShapeRef.new(shape: String, location_name: "FocDate"))
     PhoneNumberOrder.struct_class = Types::PhoneNumberOrder
 
     PhoneNumberOrderList.member = Shapes::ShapeRef.new(shape: PhoneNumberOrder)
@@ -945,7 +950,7 @@ module Aws::ChimeSDKVoice
     Proxy.add_member(:phone_number_countries, Shapes::ShapeRef.new(shape: StringList, location_name: "PhoneNumberCountries"))
     Proxy.struct_class = Types::Proxy
 
-    ProxySession.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, location_name: "VoiceConnectorId"))
+    ProxySession.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, location_name: "VoiceConnectorId"))
     ProxySession.add_member(:proxy_session_id, Shapes::ShapeRef.new(shape: NonEmptyString128, location_name: "ProxySessionId"))
     ProxySession.add_member(:name, Shapes::ShapeRef.new(shape: String128, location_name: "Name"))
     ProxySession.add_member(:status, Shapes::ShapeRef.new(shape: ProxySessionStatus, location_name: "Status"))
@@ -976,14 +981,14 @@ module Aws::ChimeSDKVoice
     PutSipMediaApplicationLoggingConfigurationResponse.add_member(:sip_media_application_logging_configuration, Shapes::ShapeRef.new(shape: SipMediaApplicationLoggingConfiguration, location_name: "SipMediaApplicationLoggingConfiguration"))
     PutSipMediaApplicationLoggingConfigurationResponse.struct_class = Types::PutSipMediaApplicationLoggingConfigurationResponse
 
-    PutVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    PutVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:emergency_calling_configuration, Shapes::ShapeRef.new(shape: EmergencyCallingConfiguration, required: true, location_name: "EmergencyCallingConfiguration"))
     PutVoiceConnectorEmergencyCallingConfigurationRequest.struct_class = Types::PutVoiceConnectorEmergencyCallingConfigurationRequest
 
     PutVoiceConnectorEmergencyCallingConfigurationResponse.add_member(:emergency_calling_configuration, Shapes::ShapeRef.new(shape: EmergencyCallingConfiguration, location_name: "EmergencyCallingConfiguration"))
     PutVoiceConnectorEmergencyCallingConfigurationResponse.struct_class = Types::PutVoiceConnectorEmergencyCallingConfigurationResponse
 
-    PutVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "voiceConnectorId"))
+    PutVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorExternalSystemsConfigurationRequest.add_member(:session_border_controller_types, Shapes::ShapeRef.new(shape: SessionBorderControllerTypeList, location_name: "SessionBorderControllerTypes"))
     PutVoiceConnectorExternalSystemsConfigurationRequest.add_member(:contact_center_system_types, Shapes::ShapeRef.new(shape: ContactCenterSystemTypeList, location_name: "ContactCenterSystemTypes"))
     PutVoiceConnectorExternalSystemsConfigurationRequest.struct_class = Types::PutVoiceConnectorExternalSystemsConfigurationRequest
@@ -991,21 +996,21 @@ module Aws::ChimeSDKVoice
     PutVoiceConnectorExternalSystemsConfigurationResponse.add_member(:external_systems_configuration, Shapes::ShapeRef.new(shape: ExternalSystemsConfiguration, location_name: "ExternalSystemsConfiguration"))
     PutVoiceConnectorExternalSystemsConfigurationResponse.struct_class = Types::PutVoiceConnectorExternalSystemsConfigurationResponse
 
-    PutVoiceConnectorLoggingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    PutVoiceConnectorLoggingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorLoggingConfigurationRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, required: true, location_name: "LoggingConfiguration"))
     PutVoiceConnectorLoggingConfigurationRequest.struct_class = Types::PutVoiceConnectorLoggingConfigurationRequest
 
     PutVoiceConnectorLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     PutVoiceConnectorLoggingConfigurationResponse.struct_class = Types::PutVoiceConnectorLoggingConfigurationResponse
 
-    PutVoiceConnectorOriginationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    PutVoiceConnectorOriginationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorOriginationRequest.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, required: true, location_name: "Origination"))
     PutVoiceConnectorOriginationRequest.struct_class = Types::PutVoiceConnectorOriginationRequest
 
     PutVoiceConnectorOriginationResponse.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, location_name: "Origination"))
     PutVoiceConnectorOriginationResponse.struct_class = Types::PutVoiceConnectorOriginationResponse
 
-    PutVoiceConnectorProxyRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "voiceConnectorId"))
+    PutVoiceConnectorProxyRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorProxyRequest.add_member(:default_session_expiry_minutes, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DefaultSessionExpiryMinutes"))
     PutVoiceConnectorProxyRequest.add_member(:phone_number_pool_countries, Shapes::ShapeRef.new(shape: CountryList, required: true, location_name: "PhoneNumberPoolCountries"))
     PutVoiceConnectorProxyRequest.add_member(:fall_back_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "FallBackPhoneNumber"))
@@ -1015,18 +1020,18 @@ module Aws::ChimeSDKVoice
     PutVoiceConnectorProxyResponse.add_member(:proxy, Shapes::ShapeRef.new(shape: Proxy, location_name: "Proxy"))
     PutVoiceConnectorProxyResponse.struct_class = Types::PutVoiceConnectorProxyResponse
 
-    PutVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    PutVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorStreamingConfigurationRequest.add_member(:streaming_configuration, Shapes::ShapeRef.new(shape: StreamingConfiguration, required: true, location_name: "StreamingConfiguration"))
     PutVoiceConnectorStreamingConfigurationRequest.struct_class = Types::PutVoiceConnectorStreamingConfigurationRequest
 
     PutVoiceConnectorStreamingConfigurationResponse.add_member(:streaming_configuration, Shapes::ShapeRef.new(shape: StreamingConfiguration, location_name: "StreamingConfiguration"))
     PutVoiceConnectorStreamingConfigurationResponse.struct_class = Types::PutVoiceConnectorStreamingConfigurationResponse
 
-    PutVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    PutVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorTerminationCredentialsRequest.add_member(:credentials, Shapes::ShapeRef.new(shape: CredentialList, location_name: "Credentials"))
     PutVoiceConnectorTerminationCredentialsRequest.struct_class = Types::PutVoiceConnectorTerminationCredentialsRequest
 
-    PutVoiceConnectorTerminationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    PutVoiceConnectorTerminationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorTerminationRequest.add_member(:termination, Shapes::ShapeRef.new(shape: Termination, required: true, location_name: "Termination"))
     PutVoiceConnectorTerminationRequest.struct_class = Types::PutVoiceConnectorTerminationRequest
 
@@ -1140,7 +1145,7 @@ module Aws::ChimeSDKVoice
     SpeakerSearchTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
     SpeakerSearchTask.struct_class = Types::SpeakerSearchTask
 
-    StartSpeakerSearchTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    StartSpeakerSearchTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "VoiceConnectorId"))
     StartSpeakerSearchTaskRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location_name: "TransactionId"))
     StartSpeakerSearchTaskRequest.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location_name: "VoiceProfileDomainId"))
     StartSpeakerSearchTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestId, location_name: "ClientRequestToken"))
@@ -1150,7 +1155,7 @@ module Aws::ChimeSDKVoice
     StartSpeakerSearchTaskResponse.add_member(:speaker_search_task, Shapes::ShapeRef.new(shape: SpeakerSearchTask, location_name: "SpeakerSearchTask"))
     StartSpeakerSearchTaskResponse.struct_class = Types::StartSpeakerSearchTaskResponse
 
-    StartVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    StartVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "VoiceConnectorId"))
     StartVoiceToneAnalysisTaskRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location_name: "TransactionId"))
     StartVoiceToneAnalysisTaskRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     StartVoiceToneAnalysisTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestId, location_name: "ClientRequestToken"))
@@ -1159,11 +1164,11 @@ module Aws::ChimeSDKVoice
     StartVoiceToneAnalysisTaskResponse.add_member(:voice_tone_analysis_task, Shapes::ShapeRef.new(shape: VoiceToneAnalysisTask, location_name: "VoiceToneAnalysisTask"))
     StartVoiceToneAnalysisTaskResponse.struct_class = Types::StartVoiceToneAnalysisTaskResponse
 
-    StopSpeakerSearchTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    StopSpeakerSearchTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "VoiceConnectorId"))
     StopSpeakerSearchTaskRequest.add_member(:speaker_search_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "SpeakerSearchTaskId"))
     StopSpeakerSearchTaskRequest.struct_class = Types::StopSpeakerSearchTaskRequest
 
-    StopVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    StopVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "VoiceConnectorId"))
     StopVoiceToneAnalysisTaskRequest.add_member(:voice_tone_analysis_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceToneAnalysisTaskId"))
     StopVoiceToneAnalysisTaskRequest.struct_class = Types::StopVoiceToneAnalysisTaskRequest
 
@@ -1213,7 +1218,7 @@ module Aws::ChimeSDKVoice
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
-    UpdateGlobalSettingsRequest.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnectorSettings, location_name: "VoiceConnector"))
+    UpdateGlobalSettingsRequest.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnectorSettings, required: true, location_name: "VoiceConnector"))
     UpdateGlobalSettingsRequest.struct_class = Types::UpdateGlobalSettingsRequest
 
     UpdatePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location: "uri", location_name: "phoneNumberId"))
@@ -1236,7 +1241,7 @@ module Aws::ChimeSDKVoice
     UpdatePhoneNumberSettingsRequest.add_member(:calling_name, Shapes::ShapeRef.new(shape: CallingName, required: true, location_name: "CallingName"))
     UpdatePhoneNumberSettingsRequest.struct_class = Types::UpdatePhoneNumberSettingsRequest
 
-    UpdateProxySessionRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "voiceConnectorId"))
+    UpdateProxySessionRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     UpdateProxySessionRequest.add_member(:proxy_session_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "proxySessionId"))
     UpdateProxySessionRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: CapabilityList, required: true, location_name: "Capabilities"))
     UpdateProxySessionRequest.add_member(:expiry_minutes, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "ExpiryMinutes"))
@@ -1273,12 +1278,13 @@ module Aws::ChimeSDKVoice
     UpdateVoiceConnectorGroupRequest.add_member(:voice_connector_group_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorGroupId"))
     UpdateVoiceConnectorGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: VoiceConnectorGroupName, required: true, location_name: "Name"))
     UpdateVoiceConnectorGroupRequest.add_member(:voice_connector_items, Shapes::ShapeRef.new(shape: VoiceConnectorItemList, required: true, location_name: "VoiceConnectorItems"))
+    UpdateVoiceConnectorGroupRequest.add_member(:call_distribution_type, Shapes::ShapeRef.new(shape: CallDistributionType, location_name: "CallDistributionType"))
     UpdateVoiceConnectorGroupRequest.struct_class = Types::UpdateVoiceConnectorGroupRequest
 
     UpdateVoiceConnectorGroupResponse.add_member(:voice_connector_group, Shapes::ShapeRef.new(shape: VoiceConnectorGroup, location_name: "VoiceConnectorGroup"))
     UpdateVoiceConnectorGroupResponse.struct_class = Types::UpdateVoiceConnectorGroupResponse
 
-    UpdateVoiceConnectorRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
+    UpdateVoiceConnectorRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location: "uri", location_name: "voiceConnectorId"))
     UpdateVoiceConnectorRequest.add_member(:name, Shapes::ShapeRef.new(shape: VoiceConnectorName, required: true, location_name: "Name"))
     UpdateVoiceConnectorRequest.add_member(:require_encryption, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "RequireEncryption"))
     UpdateVoiceConnectorRequest.struct_class = Types::UpdateVoiceConnectorRequest
@@ -1316,7 +1322,7 @@ module Aws::ChimeSDKVoice
     ValidateE911AddressResponse.add_member(:candidate_address_list, Shapes::ShapeRef.new(shape: CandidateAddressList, location_name: "CandidateAddressList"))
     ValidateE911AddressResponse.struct_class = Types::ValidateE911AddressResponse
 
-    VoiceConnector.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VoiceConnectorId"))
+    VoiceConnector.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, location_name: "VoiceConnectorId"))
     VoiceConnector.add_member(:aws_region, Shapes::ShapeRef.new(shape: VoiceConnectorAwsRegion, location_name: "AwsRegion"))
     VoiceConnector.add_member(:name, Shapes::ShapeRef.new(shape: VoiceConnectorName, location_name: "Name"))
     VoiceConnector.add_member(:outbound_host_name, Shapes::ShapeRef.new(shape: String, location_name: "OutboundHostName"))
@@ -1336,19 +1342,20 @@ module Aws::ChimeSDKVoice
     VoiceConnectorGroup.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
     VoiceConnectorGroup.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
     VoiceConnectorGroup.add_member(:voice_connector_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VoiceConnectorGroupArn"))
+    VoiceConnectorGroup.add_member(:call_distribution_type, Shapes::ShapeRef.new(shape: CallDistributionType, location_name: "CallDistributionType"))
     VoiceConnectorGroup.struct_class = Types::VoiceConnectorGroup
 
     VoiceConnectorGroupList.member = Shapes::ShapeRef.new(shape: VoiceConnectorGroup)
 
-    VoiceConnectorItem.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "VoiceConnectorId"))
-    VoiceConnectorItem.add_member(:priority, Shapes::ShapeRef.new(shape: VoiceConnectorItemPriority, required: true, location_name: "Priority"))
+    VoiceConnectorItem.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: VoiceConnectorId, required: true, location_name: "VoiceConnectorId"))
+    VoiceConnectorItem.add_member(:priority, Shapes::ShapeRef.new(shape: VoiceConnectorItemPriority, location_name: "Priority"))
     VoiceConnectorItem.struct_class = Types::VoiceConnectorItem
 
     VoiceConnectorItemList.member = Shapes::ShapeRef.new(shape: VoiceConnectorItem)
 
     VoiceConnectorList.member = Shapes::ShapeRef.new(shape: VoiceConnector)
 
-    VoiceConnectorSettings.add_member(:cdr_bucket, Shapes::ShapeRef.new(shape: String, location_name: "CdrBucket"))
+    VoiceConnectorSettings.add_member(:cdr_bucket, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "CdrBucket"))
     VoiceConnectorSettings.struct_class = Types::VoiceConnectorSettings
 
     VoiceProfile.add_member(:voice_profile_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "VoiceProfileId"))
@@ -1498,6 +1505,7 @@ module Aws::ChimeSDKVoice
         o.name = "CreateProxySession"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/proxy-sessions"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateProxySessionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateProxySessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -1582,6 +1590,7 @@ module Aws::ChimeSDKVoice
         o.input = Shapes::ShapeRef.new(shape: CreateVoiceConnectorGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateVoiceConnectorGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -1646,6 +1655,7 @@ module Aws::ChimeSDKVoice
         o.name = "DeleteProxySession"
         o.http_method = "DELETE"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/proxy-sessions/{proxySessionId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteProxySessionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -1770,6 +1780,7 @@ module Aws::ChimeSDKVoice
         o.name = "DeleteVoiceConnectorProxy"
         o.http_method = "DELETE"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteVoiceConnectorProxyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -1952,6 +1963,7 @@ module Aws::ChimeSDKVoice
         o.name = "GetProxySession"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/proxy-sessions/{proxySessionId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetProxySessionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetProxySessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -1989,6 +2001,7 @@ module Aws::ChimeSDKVoice
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: GoneException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -2135,6 +2148,7 @@ module Aws::ChimeSDKVoice
         o.name = "GetVoiceConnectorProxy"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetVoiceConnectorProxyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVoiceConnectorProxyResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -2299,6 +2313,7 @@ module Aws::ChimeSDKVoice
         o.name = "ListProxySessions"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/proxy-sessions"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListProxySessionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListProxySessionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -2343,6 +2358,7 @@ module Aws::ChimeSDKVoice
         o.input = Shapes::ShapeRef.new(shape: ListSipRulesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSipRulesResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
@@ -2493,6 +2509,7 @@ module Aws::ChimeSDKVoice
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: GoneException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -2570,6 +2587,7 @@ module Aws::ChimeSDKVoice
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -2578,6 +2596,7 @@ module Aws::ChimeSDKVoice
         o.name = "PutVoiceConnectorProxy"
         o.http_method = "PUT"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutVoiceConnectorProxyRequest)
         o.output = Shapes::ShapeRef.new(shape: PutVoiceConnectorProxyResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -2826,6 +2845,7 @@ module Aws::ChimeSDKVoice
         o.name = "UpdateProxySession"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/proxy-sessions/{proxySessionId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateProxySessionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProxySessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)

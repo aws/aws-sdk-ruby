@@ -54,7 +54,7 @@ module Aws::MediaPackageVod
   autoload :EndpointProvider, 'aws-sdk-mediapackagevod/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediapackagevod/endpoints'
 
-  GEM_VERSION = '1.87.0'
+  GEM_VERSION = '1.88.0'
 
 end
 

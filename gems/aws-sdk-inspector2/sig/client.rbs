@@ -268,6 +268,28 @@ module Aws
                                                    ) -> _CreateCodeSecurityScanConfigurationResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeSecurityScanConfigurationResponseSuccess
 
+      interface _CreateConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorResponse]
+        def connector_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#create_connector-instance_method
+      def create_connector: (
+                              ?client_token: ::String,
+                              name: ::String,
+                              provider: ("AZURE"),
+                              ?description: ::String,
+                              provider_detail: {
+                                azure: {
+                                  aws_config_connector_arn: ::String,
+                                  scope_configuration: Params::azure_scope_configuration_input,
+                                  azure_regions: Array[::String],
+                                  auto_install_vm_scanner: bool?
+                                }?
+                              },
+                              ?tags: Hash[::String, ::String]
+                            ) -> _CreateConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorResponseSuccess
+
       interface _CreateFilterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFilterResponse]
         def arn: () -> ::String
@@ -395,6 +417,15 @@ module Aws
                                                      scan_configuration_arn: ::String
                                                    ) -> _DeleteCodeSecurityScanConfigurationResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCodeSecurityScanConfigurationResponseSuccess
+
+      interface _DeleteConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#delete_connector-instance_method
+      def delete_connector: (
+                              connector_arn: ::String
+                            ) -> _DeleteConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectorResponseSuccess
 
       interface _DeleteFilterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFilterResponse]
@@ -558,8 +589,8 @@ module Aws
         def status_reason: () -> ::String
         def created_on: () -> ::Time
         def last_update_on: () -> ::Time
-        def tags: () -> ::Hash[::String, ::String]
         def authorization_url: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_code_security_integration-instance_method
       def get_code_security_integration: (
@@ -612,6 +643,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_configuration-instance_method
       def get_configuration: (
+                               ?account_id: ::String
                              ) -> _GetConfigurationResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationResponseSuccess
 
@@ -643,7 +675,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_encryption_key-instance_method
       def get_encryption_key: (
                                 scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
                               ) -> _GetEncryptionKeyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEncryptionKeyResponseSuccess
 
@@ -976,6 +1008,63 @@ module Aws
                                                   ) -> _ListCodeSecurityScanConfigurationsResponseSuccess
                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeSecurityScanConfigurationsResponseSuccess
 
+      interface _ListConnectorScanConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorScanConfigurationsResponse]
+        def scan_configurations: () -> ::Array[Types::ConnectorScanConfigurationItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_connector_scan_configurations-instance_method
+      def list_connector_scan_configurations: (
+                                                ?aws_config_connector_arns: Array[::String],
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListConnectorScanConfigurationsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorScanConfigurationsResponseSuccess
+
+      interface _ListConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorsResponse]
+        def items: () -> ::Array[Types::Connector]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_connectors-instance_method
+      def list_connectors: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?filter_criteria: {
+                               connector_arns: Array[
+                                 {
+                                   comparison: ("EQUALS"),
+                                   value: ::String
+                                 }
+                               ]?,
+                               accounts: Array[
+                                 {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }
+                               ]?,
+                               aws_config_connector_arns: Array[
+                                 {
+                                   comparison: ("EQUALS"),
+                                   value: ::String
+                                 }
+                               ]?,
+                               connector_type: Array[
+                                 {
+                                   comparison: ("EQUALS"),
+                                   value: ("CUSTOMER_MANAGED" | "SERVICE_LINKED")
+                                 }
+                               ]?,
+                               provider: Array[
+                                 {
+                                   comparison: ("EQUALS"),
+                                   value: ("AZURE")
+                                 }
+                               ]?
+                             }
+                           ) -> _ListConnectorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorsResponseSuccess
+
       interface _ListCoverageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCoverageResponse]
         def next_token: () -> ::String
@@ -998,7 +1087,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_coverage_statistics-instance_method
       def list_coverage_statistics: (
                                       ?filter_criteria: Params::coverage_filter_criteria,
-                                      ?group_by: ("SCAN_STATUS_CODE" | "SCAN_STATUS_REASON" | "ACCOUNT_ID" | "RESOURCE_TYPE" | "ECR_REPOSITORY_NAME"),
+                                      ?group_by: ("SCAN_STATUS_CODE" | "SCAN_STATUS_REASON" | "ACCOUNT_ID" | "RESOURCE_TYPE" | "ECR_REPOSITORY_NAME" | "PROVIDER" | "PROVIDER_ACCOUNT_ID" | "PROVIDER_REGION" | "PROVIDER_ORG_ID"),
                                       ?next_token: ::String
                                     ) -> _ListCoverageStatisticsResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoverageStatisticsResponseSuccess
@@ -1031,13 +1120,13 @@ module Aws
 
       interface _ListFindingAggregationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingAggregationsResponse]
-        def aggregation_type: () -> ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY")
+        def aggregation_type: () -> ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY" | "VM_INSTANCE" | "CONTAINER_IMAGE" | "SERVERLESS_FUNCTION")
         def responses: () -> ::Array[Types::AggregationResponse]
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_finding_aggregations-instance_method
       def list_finding_aggregations: (
-                                       aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY"),
+                                       aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY" | "VM_INSTANCE" | "CONTAINER_IMAGE" | "SERVERLESS_FUNCTION"),
                                        ?next_token: ::String,
                                        ?max_results: ::Integer,
                                        ?account_ids: Array[
@@ -1049,7 +1138,7 @@ module Aws
                                        ?aggregation_request: {
                                          account_aggregation: {
                                            finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
-                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")?,
                                            sort_order: ("ASC" | "DESC")?,
                                            sort_by: ("CRITICAL" | "HIGH" | "ALL")?
                                          }?,
@@ -1140,7 +1229,7 @@ module Aws
                                          }?,
                                          finding_type_aggregation: {
                                            finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
-                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")?,
                                            sort_order: ("ASC" | "DESC")?,
                                            sort_by: ("CRITICAL" | "HIGH" | "ALL")?
                                          }?,
@@ -1158,6 +1247,36 @@ module Aws
                                              }
                                            ]?,
                                            layer_hashes: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_providers: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_account_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_org_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_regions: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_partitions: Array[
                                              {
                                                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                                value: ::String
@@ -1199,10 +1318,10 @@ module Aws
                                                value: ::String
                                              }
                                            ]?,
-                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")?,
+                                           finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
                                            sort_order: ("ASC" | "DESC")?,
-                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?,
-                                           finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?
                                          }?,
                                          lambda_layer_aggregation: {
                                            function_names: Array[
@@ -1276,6 +1395,206 @@ module Aws
                                                value: ::String
                                              }
                                            ]?
+                                         }?,
+                                         vm_instance_aggregation: {
+                                           resource_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           operating_systems: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           instance_tags: Array[
+                                             {
+                                               comparison: ("EQUALS"),
+                                               key: ::String,
+                                               value: ::String?
+                                             }
+                                           ]?,
+                                           vm_image_references: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_providers: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_partitions: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_regions: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_org_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_account_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           sort_order: ("ASC" | "DESC")?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL" | "NETWORK_FINDINGS")?
+                                         }?,
+                                         container_image_aggregation: {
+                                           resource_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           image_digests: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           repositories: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           registries: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           architectures: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           image_tags: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_providers: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_partitions: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_regions: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_org_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_account_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           last_in_use_at: Array[
+                                             {
+                                               start_inclusive: ::Time?,
+                                               end_inclusive: ::Time?
+                                             }
+                                           ]?,
+                                           in_use_count: Array[
+                                             {
+                                               upper_inclusive: ::Float?,
+                                               lower_inclusive: ::Float?
+                                             }
+                                           ]?,
+                                           sort_order: ("ASC" | "DESC")?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?
+                                         }?,
+                                         serverless_function_aggregation: {
+                                           resource_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           function_names: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           runtimes: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           function_tags: Array[
+                                             {
+                                               comparison: ("EQUALS"),
+                                               key: ::String,
+                                               value: ::String?
+                                             }
+                                           ]?,
+                                           cloud_providers: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_partitions: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_regions: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_org_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           cloud_account_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             }
+                                           ]?,
+                                           sort_order: ("ASC" | "DESC")?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?
                                          }?
                                        }
                                      ) -> _ListFindingAggregationsResponseSuccess
@@ -1340,7 +1659,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#reset_encryption_key-instance_method
       def reset_encryption_key: (
                                   scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
                                 ) -> _ResetEncryptionKeyResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetEncryptionKeyResponseSuccess
 
@@ -1515,17 +1834,55 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_configuration-instance_method
       def update_configuration: (
+                                  ?account_id: ::String,
                                   ?ecr_configuration: {
-                                    rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90"),
-                                    pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")?,
+                                    rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90" | "DAYS_3" | "DAYS_7"),
+                                    pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180" | "DAYS_3" | "DAYS_7")?,
                                     pull_date_rescan_mode: ("LAST_PULL_DATE" | "LAST_IN_USE_AT")?
                                   },
                                   ?ec2_configuration: {
                                     scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_HYBRID"),
                                     activate_vm_scanner: bool?
+                                  },
+                                  ?update_configuration_inheritance: {
+                                    ec2_configuration: ("INHERIT_FROM_ADMIN")?,
+                                    ecr_configuration: ("INHERIT_FROM_ADMIN")?
                                   }
                                 ) -> _UpdateConfigurationResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationResponseSuccess
+
+      interface _UpdateConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorResponse]
+        def connector_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_connector-instance_method
+      def update_connector: (
+                              connector_arn: ::String,
+                              ?description: ::String,
+                              ?provider_detail: {
+                                azure: {
+                                  azure_regions: Array[::String]?,
+                                  scope_configuration: Params::azure_scope_configuration_input?,
+                                  auto_install_vm_scanner: bool?
+                                }?
+                              }
+                            ) -> _UpdateConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorResponseSuccess
+
+      interface _UpdateConnectorScanConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorScanConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_connector_scan_configuration-instance_method
+      def update_connector_scan_configuration: (
+                                                 aws_config_connector_arn: ::String,
+                                                 scan_configuration: {
+                                                   container_image_scanning: {
+                                                     push_duration: ("LIFETIME" | "DAYS_3" | "DAYS_7" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")?,
+                                                     pull_duration: ("DAYS_3" | "DAYS_7" | "DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")?
+                                                   }?
+                                                 }
+                                               ) -> _UpdateConnectorScanConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorScanConfigurationResponseSuccess
 
       interface _UpdateEc2DeepInspectionConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEc2DeepInspectionConfigurationResponse]
@@ -1548,7 +1905,7 @@ module Aws
       def update_encryption_key: (
                                    kms_key_id: ::String,
                                    scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
                                  ) -> _UpdateEncryptionKeyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEncryptionKeyResponseSuccess
 
@@ -1591,6 +1948,119 @@ module Aws
                                                }
                                              ) -> _UpdateOrganizationConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOrganizationConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#wait_until-instance_method
+      def wait_until: (:connector_connected waiter_name, 
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?filter_criteria: {
+                      connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      accounts: Array[
+                        {
+                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      aws_config_connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      connector_type: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("CUSTOMER_MANAGED" | "SERVICE_LINKED")
+                        }
+                      ]?,
+                      provider: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("AZURE")
+                        }
+                      ]?
+                    }
+                  ) -> Client::_ListConnectorsResponseSuccess
+                    | (:connector_connected waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_ListConnectorsResponseSuccess
+                    | (:connector_deleted waiter_name, 
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?filter_criteria: {
+                      connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      accounts: Array[
+                        {
+                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      aws_config_connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      connector_type: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("CUSTOMER_MANAGED" | "SERVICE_LINKED")
+                        }
+                      ]?,
+                      provider: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("AZURE")
+                        }
+                      ]?
+                    }
+                  ) -> Client::_ListConnectorsResponseSuccess
+                    | (:connector_deleted waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_ListConnectorsResponseSuccess
+                    | (:connector_enabled waiter_name, 
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?filter_criteria: {
+                      connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      accounts: Array[
+                        {
+                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      aws_config_connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      connector_type: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("CUSTOMER_MANAGED" | "SERVICE_LINKED")
+                        }
+                      ]?,
+                      provider: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("AZURE")
+                        }
+                      ]?
+                    }
+                  ) -> Client::_ListConnectorsResponseSuccess
+                    | (:connector_enabled waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_ListConnectorsResponseSuccess
     end
   end
 end

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.266.0 (2026-07-27)
+------------------
+
+* Feature - Adds BatchGetDataQualityRulesetEvaluationRun API to retrieve multiple runs in one call, ObservationScope and ObservationMode parameters for anomaly detection, writing evaluation results to Data Catalog tables, and custom log group paths for recommendation runs.
+
+1.265.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.264.0 (2026-06-29)
+------------------
+
+* Feature - Added the UpdateAsset operation to set the business name and description for an existing AWS Glue Data Catalog asset.
+
 1.263.0 (2026-06-19)
 ------------------
 

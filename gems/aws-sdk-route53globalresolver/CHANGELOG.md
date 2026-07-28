@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2026-07-07)
+------------------
+
+* Feature - Adds ListSharedDNSViews operation to list all DNS Views shared with caller using AWS Resource Access Manager. Also updates ListHostedZoneAssociations operation so that resource ARN param is optional, allowing caller to list all HostedZoneAssociations in account.
+
 1.10.0 (2026-05-26)
 ------------------
 

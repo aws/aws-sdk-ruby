@@ -25,6 +25,7 @@ module Aws::ConnectCampaignsV2
     Attributes = Shapes::MapShape.new(name: 'Attributes')
     BandwidthAllocation = Shapes::FloatShape.new(name: 'BandwidthAllocation')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BrowserId = Shapes::StringShape.new(name: 'BrowserId')
     Campaign = Shapes::StructureShape.new(name: 'Campaign')
     CampaignArn = Shapes::StringShape.new(name: 'CampaignArn')
     CampaignDeletionPolicy = Shapes::StringShape.new(name: 'CampaignDeletionPolicy')
@@ -35,6 +36,7 @@ module Aws::ConnectCampaignsV2
     CampaignSummary = Shapes::StructureShape.new(name: 'CampaignSummary')
     CampaignSummaryList = Shapes::ListShape.new(name: 'CampaignSummaryList')
     Capacity = Shapes::FloatShape.new(name: 'Capacity')
+    ChannelContext = Shapes::StructureShape.new(name: 'ChannelContext')
     ChannelSubtype = Shapes::StringShape.new(name: 'ChannelSubtype')
     ChannelSubtypeConfig = Shapes::StructureShape.new(name: 'ChannelSubtypeConfig')
     ChannelSubtypeList = Shapes::ListShape.new(name: 'ChannelSubtypeList')
@@ -84,6 +86,7 @@ module Aws::ConnectCampaignsV2
     EntryLimitsConfig = Shapes::StructureShape.new(name: 'EntryLimitsConfig')
     EntryLimitsConfigMaxEntryCountInteger = Shapes::IntegerShape.new(name: 'EntryLimitsConfigMaxEntryCountInteger')
     EventTrigger = Shapes::StructureShape.new(name: 'EventTrigger')
+    EventTriggerContext = Shapes::StructureShape.new(name: 'EventTriggerContext')
     EventType = Shapes::StringShape.new(name: 'EventType')
     ExternalCampaignType = Shapes::StringShape.new(name: 'ExternalCampaignType')
     FailedCampaignStateResponse = Shapes::StructureShape.new(name: 'FailedCampaignStateResponse')
@@ -174,11 +177,13 @@ module Aws::ConnectCampaignsV2
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     ServiceLinkedRoleArn = Shapes::StringShape.new(name: 'ServiceLinkedRoleArn')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SessionId = Shapes::StringShape.new(name: 'SessionId')
     SmsChannelSubtypeConfig = Shapes::StructureShape.new(name: 'SmsChannelSubtypeConfig')
     SmsChannelSubtypeParameters = Shapes::StructureShape.new(name: 'SmsChannelSubtypeParameters')
     SmsOutboundConfig = Shapes::StructureShape.new(name: 'SmsOutboundConfig')
     SmsOutboundMode = Shapes::UnionShape.new(name: 'SmsOutboundMode')
     Source = Shapes::UnionShape.new(name: 'Source')
+    SourceEvent = Shapes::StringShape.new(name: 'SourceEvent')
     SourcePhoneNumber = Shapes::StringShape.new(name: 'SourcePhoneNumber')
     StartCampaignRequest = Shapes::StructureShape.new(name: 'StartCampaignRequest')
     StartInstanceOnboardingJobRequest = Shapes::StructureShape.new(name: 'StartInstanceOnboardingJobRequest')
@@ -218,6 +223,7 @@ module Aws::ConnectCampaignsV2
     UpdateCampaignScheduleRequest = Shapes::StructureShape.new(name: 'UpdateCampaignScheduleRequest')
     UpdateCampaignSourceRequest = Shapes::StructureShape.new(name: 'UpdateCampaignSourceRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    WebNotificationContext = Shapes::StructureShape.new(name: 'WebNotificationContext')
     WhatsAppChannelSubtypeConfig = Shapes::StructureShape.new(name: 'WhatsAppChannelSubtypeConfig')
     WhatsAppChannelSubtypeParameters = Shapes::StructureShape.new(name: 'WhatsAppChannelSubtypeParameters')
     WhatsAppOutboundConfig = Shapes::StructureShape.new(name: 'WhatsAppOutboundConfig')
@@ -269,6 +275,9 @@ module Aws::ConnectCampaignsV2
     CampaignSummary.struct_class = Types::CampaignSummary
 
     CampaignSummaryList.member = Shapes::ShapeRef.new(shape: CampaignSummary)
+
+    ChannelContext.add_member(:web_notification_context, Shapes::ShapeRef.new(shape: WebNotificationContext, location_name: "webNotificationContext"))
+    ChannelContext.struct_class = Types::ChannelContext
 
     ChannelSubtypeConfig.add_member(:telephony, Shapes::ShapeRef.new(shape: TelephonyChannelSubtypeConfig, location_name: "telephony"))
     ChannelSubtypeConfig.add_member(:sms, Shapes::ShapeRef.new(shape: SmsChannelSubtypeConfig, location_name: "sms"))
@@ -418,6 +427,10 @@ module Aws::ConnectCampaignsV2
 
     EventTrigger.add_member(:customer_profiles_domain_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "customerProfilesDomainArn"))
     EventTrigger.struct_class = Types::EventTrigger
+
+    EventTriggerContext.add_member(:source_event, Shapes::ShapeRef.new(shape: SourceEvent, location_name: "sourceEvent"))
+    EventTriggerContext.add_member(:channel_context, Shapes::ShapeRef.new(shape: ChannelContext, location_name: "channelContext"))
+    EventTriggerContext.struct_class = Types::EventTriggerContext
 
     FailedCampaignStateResponse.add_member(:campaign_id, Shapes::ShapeRef.new(shape: CampaignId, location_name: "campaignId"))
     FailedCampaignStateResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: GetCampaignStateBatchFailureCode, location_name: "failureCode"))
@@ -604,6 +617,7 @@ module Aws::ConnectCampaignsV2
     ProfileOutboundRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken"))
     ProfileOutboundRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileId, required: true, location_name: "profileId"))
     ProfileOutboundRequest.add_member(:expiration_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "expirationTime"))
+    ProfileOutboundRequest.add_member(:event_trigger_context, Shapes::ShapeRef.new(shape: EventTriggerContext, location_name: "eventTriggerContext"))
     ProfileOutboundRequest.struct_class = Types::ProfileOutboundRequest
 
     ProfileOutboundRequestList.member = Shapes::ShapeRef.new(shape: ProfileOutboundRequest)
@@ -829,6 +843,10 @@ module Aws::ConnectCampaignsV2
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:x_amz_error_type, Shapes::ShapeRef.new(shape: XAmazonErrorType, location: "header", location_name: "x-amzn-ErrorType"))
     ValidationException.struct_class = Types::ValidationException
+
+    WebNotificationContext.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "sessionId"))
+    WebNotificationContext.add_member(:browser_id, Shapes::ShapeRef.new(shape: BrowserId, location_name: "browserId"))
+    WebNotificationContext.struct_class = Types::WebNotificationContext
 
     WhatsAppChannelSubtypeConfig.add_member(:capacity, Shapes::ShapeRef.new(shape: Capacity, location_name: "capacity"))
     WhatsAppChannelSubtypeConfig.add_member(:outbound_mode, Shapes::ShapeRef.new(shape: WhatsAppOutboundMode, required: true, location_name: "outboundMode"))

@@ -54,7 +54,7 @@ module Aws::ResourceGroups
   autoload :EndpointProvider, 'aws-sdk-resourcegroups/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-resourcegroups/endpoints'
 
-  GEM_VERSION = '1.99.0'
+  GEM_VERSION = '1.100.0'
 
 end
 

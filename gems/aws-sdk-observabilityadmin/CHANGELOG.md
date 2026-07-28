@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2026-07-22)
+------------------
+
+* Feature - Enablement for ALB and Bedrock Knowledge Base logs via Observability Admin Telemetry Rule for account and organization level
+
+1.34.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2026-06-30)
+------------------
+
+* Feature - Organization and account level telemetry rule via Observability Admin and CloudWatch pipelines for metrics
+
 1.32.0 (2026-06-08)
 ------------------
 

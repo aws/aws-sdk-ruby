@@ -254,6 +254,7 @@ module Aws::OpenSearchService
     DomainState = Shapes::StringShape.new(name: 'DomainState')
     DomainStatus = Shapes::StructureShape.new(name: 'DomainStatus')
     DomainStatusList = Shapes::ListShape.new(name: 'DomainStatusList')
+    DomainUseCase = Shapes::StringShape.new(name: 'DomainUseCase')
     Double = Shapes::FloatShape.new(name: 'Double')
     DryRun = Shapes::BooleanShape.new(name: 'DryRun')
     DryRunMode = Shapes::StringShape.new(name: 'DryRunMode')
@@ -267,6 +268,8 @@ module Aws::OpenSearchService
     EncryptionAtRestOptionsStatus = Shapes::StructureShape.new(name: 'EncryptionAtRestOptionsStatus')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
+    EngineMode = Shapes::StringShape.new(name: 'EngineMode')
+    EngineModeStatus = Shapes::StructureShape.new(name: 'EngineModeStatus')
     EngineType = Shapes::StringShape.new(name: 'EngineType')
     EngineVersion = Shapes::StringShape.new(name: 'EngineVersion')
     EnvironmentInfo = Shapes::StructureShape.new(name: 'EnvironmentInfo')
@@ -274,6 +277,7 @@ module Aws::OpenSearchService
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
+    ExportOptions = Shapes::StructureShape.new(name: 'ExportOptions')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     GUID = Shapes::StringShape.new(name: 'GUID')
@@ -294,6 +298,8 @@ module Aws::OpenSearchService
     GetDomainMaintenanceStatusResponse = Shapes::StructureShape.new(name: 'GetDomainMaintenanceStatusResponse')
     GetIndexRequest = Shapes::StructureShape.new(name: 'GetIndexRequest')
     GetIndexResponse = Shapes::StructureShape.new(name: 'GetIndexResponse')
+    GetMigrationRequest = Shapes::StructureShape.new(name: 'GetMigrationRequest')
+    GetMigrationResponse = Shapes::StructureShape.new(name: 'GetMigrationResponse')
     GetPackageVersionHistoryRequest = Shapes::StructureShape.new(name: 'GetPackageVersionHistoryRequest')
     GetPackageVersionHistoryResponse = Shapes::StructureShape.new(name: 'GetPackageVersionHistoryResponse')
     GetUpgradeHistoryRequest = Shapes::StructureShape.new(name: 'GetUpgradeHistoryRequest')
@@ -329,12 +335,19 @@ module Aws::OpenSearchService
     InsightEntity = Shapes::StructureShape.new(name: 'InsightEntity')
     InsightEntityType = Shapes::StringShape.new(name: 'InsightEntityType')
     InsightEntityValue = Shapes::StringShape.new(name: 'InsightEntityValue')
+    InsightFeedbackEntity = Shapes::StructureShape.new(name: 'InsightFeedbackEntity')
+    InsightFeedbackEntityType = Shapes::StringShape.new(name: 'InsightFeedbackEntityType')
+    InsightFeedbackRequest = Shapes::StructureShape.new(name: 'InsightFeedbackRequest')
+    InsightFeedbackResponse = Shapes::StructureShape.new(name: 'InsightFeedbackResponse')
+    InsightFeedbackText = Shapes::StringShape.new(name: 'InsightFeedbackText')
+    InsightFeedbackThumbs = Shapes::StringShape.new(name: 'InsightFeedbackThumbs')
     InsightField = Shapes::StructureShape.new(name: 'InsightField')
     InsightFieldList = Shapes::ListShape.new(name: 'InsightFieldList')
     InsightFieldType = Shapes::StringShape.new(name: 'InsightFieldType')
     InsightList = Shapes::ListShape.new(name: 'InsightList')
     InsightPageSize = Shapes::IntegerShape.new(name: 'InsightPageSize')
     InsightPriorityLevel = Shapes::StringShape.new(name: 'InsightPriorityLevel')
+    InsightResponseStatus = Shapes::StringShape.new(name: 'InsightResponseStatus')
     InsightSortOrder = Shapes::StringShape.new(name: 'InsightSortOrder')
     InsightStatus = Shapes::StringShape.new(name: 'InsightStatus')
     InsightTimeRange = Shapes::StructureShape.new(name: 'InsightTimeRange')
@@ -386,6 +399,8 @@ module Aws::OpenSearchService
     ListInsightsResponse = Shapes::StructureShape.new(name: 'ListInsightsResponse')
     ListInstanceTypeDetailsRequest = Shapes::StructureShape.new(name: 'ListInstanceTypeDetailsRequest')
     ListInstanceTypeDetailsResponse = Shapes::StructureShape.new(name: 'ListInstanceTypeDetailsResponse')
+    ListMigrationsRequest = Shapes::StructureShape.new(name: 'ListMigrationsRequest')
+    ListMigrationsResponse = Shapes::StructureShape.new(name: 'ListMigrationsResponse')
     ListPackagesForDomainRequest = Shapes::StructureShape.new(name: 'ListPackagesForDomainRequest')
     ListPackagesForDomainResponse = Shapes::StructureShape.new(name: 'ListPackagesForDomainResponse')
     ListScheduledActionsRequest = Shapes::StructureShape.new(name: 'ListScheduledActionsRequest')
@@ -413,6 +428,12 @@ module Aws::OpenSearchService
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumInstanceCount = Shapes::IntegerShape.new(name: 'MaximumInstanceCount')
     Message = Shapes::StringShape.new(name: 'Message')
+    MigrationError = Shapes::StructureShape.new(name: 'MigrationError')
+    MigrationOptions = Shapes::StructureShape.new(name: 'MigrationOptions')
+    MigrationSource = Shapes::StructureShape.new(name: 'MigrationSource')
+    MigrationSummary = Shapes::StructureShape.new(name: 'MigrationSummary')
+    MigrationSummaryList = Shapes::ListShape.new(name: 'MigrationSummaryList')
+    MigrationWorkspace = Shapes::StructureShape.new(name: 'MigrationWorkspace')
     MinimumInstanceCount = Shapes::IntegerShape.new(name: 'MinimumInstanceCount')
     ModifyingProperties = Shapes::StructureShape.new(name: 'ModifyingProperties')
     ModifyingPropertiesList = Shapes::ListShape.new(name: 'ModifyingPropertiesList')
@@ -522,6 +543,8 @@ module Aws::OpenSearchService
     SAMLMetadata = Shapes::StringShape.new(name: 'SAMLMetadata')
     SAMLOptionsInput = Shapes::StructureShape.new(name: 'SAMLOptionsInput')
     SAMLOptionsOutput = Shapes::StructureShape.new(name: 'SAMLOptionsOutput')
+    SavedObjectIdentifier = Shapes::StructureShape.new(name: 'SavedObjectIdentifier')
+    SavedObjectIdentifierList = Shapes::ListShape.new(name: 'SavedObjectIdentifierList')
     ScheduleAt = Shapes::StringShape.new(name: 'ScheduleAt')
     ScheduledAction = Shapes::StructureShape.new(name: 'ScheduledAction')
     ScheduledActionsList = Shapes::ListShape.new(name: 'ScheduledActionsList')
@@ -546,6 +569,8 @@ module Aws::OpenSearchService
     StartAt = Shapes::TimestampShape.new(name: 'StartAt')
     StartDomainMaintenanceRequest = Shapes::StructureShape.new(name: 'StartDomainMaintenanceRequest')
     StartDomainMaintenanceResponse = Shapes::StructureShape.new(name: 'StartDomainMaintenanceResponse')
+    StartMigrationRequest = Shapes::StructureShape.new(name: 'StartMigrationRequest')
+    StartMigrationResponse = Shapes::StructureShape.new(name: 'StartMigrationResponse')
     StartServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'StartServiceSoftwareUpdateRequest')
     StartServiceSoftwareUpdateResponse = Shapes::StructureShape.new(name: 'StartServiceSoftwareUpdateResponse')
     StartTimeHours = Shapes::IntegerShape.new(name: 'StartTimeHours')
@@ -600,6 +625,7 @@ module Aws::OpenSearchService
     UpgradeStep = Shapes::StringShape.new(name: 'UpgradeStep')
     UpgradeStepItem = Shapes::StructureShape.new(name: 'UpgradeStepItem')
     UpgradeStepsList = Shapes::ListShape.new(name: 'UpgradeStepsList')
+    UseCaseStatus = Shapes::StructureShape.new(name: 'UseCaseStatus')
     UserPoolId = Shapes::StringShape.new(name: 'UserPoolId')
     Username = Shapes::StringShape.new(name: 'Username')
     VPCDerivedInfo = Shapes::StructureShape.new(name: 'VPCDerivedInfo')
@@ -1024,6 +1050,8 @@ module Aws::OpenSearchService
     CreateDomainRequest.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsInput, location_name: "AIMLOptions"))
     CreateDomainRequest.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, location_name: "DeploymentStrategyOptions"))
     CreateDomainRequest.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseRequestOptions, location_name: "AutomatedSnapshotPauseOptions"))
+    CreateDomainRequest.add_member(:use_case, Shapes::ShapeRef.new(shape: DomainUseCase, location_name: "UseCase"))
+    CreateDomainRequest.add_member(:engine_mode, Shapes::ShapeRef.new(shape: EngineMode, location_name: "EngineMode"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
     CreateDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
@@ -1398,6 +1426,8 @@ module Aws::OpenSearchService
     DomainConfig.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsStatus, location_name: "AIMLOptions"))
     DomainConfig.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptionsStatus, location_name: "DeploymentStrategyOptions"))
     DomainConfig.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseOptionsStatus, location_name: "AutomatedSnapshotPauseOptions"))
+    DomainConfig.add_member(:use_case, Shapes::ShapeRef.new(shape: UseCaseStatus, location_name: "UseCase"))
+    DomainConfig.add_member(:engine_mode, Shapes::ShapeRef.new(shape: EngineModeStatus, location_name: "EngineMode"))
     DomainConfig.struct_class = Types::DomainConfig
 
     DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
@@ -1497,6 +1527,8 @@ module Aws::OpenSearchService
     DomainStatus.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsOutput, location_name: "AIMLOptions"))
     DomainStatus.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, location_name: "DeploymentStrategyOptions"))
     DomainStatus.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseOptions, location_name: "AutomatedSnapshotPauseOptions"))
+    DomainStatus.add_member(:use_case, Shapes::ShapeRef.new(shape: DomainUseCase, location_name: "UseCase"))
+    DomainStatus.add_member(:engine_mode, Shapes::ShapeRef.new(shape: EngineMode, location_name: "EngineMode"))
     DomainStatus.struct_class = Types::DomainStatus
 
     DomainStatusList.member = Shapes::ShapeRef.new(shape: DomainStatus)
@@ -1538,6 +1570,10 @@ module Aws::OpenSearchService
     EndpointsMap.key = Shapes::ShapeRef.new(shape: String)
     EndpointsMap.value = Shapes::ShapeRef.new(shape: ServiceUrl)
 
+    EngineModeStatus.add_member(:options, Shapes::ShapeRef.new(shape: EngineMode, required: true, location_name: "Options"))
+    EngineModeStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+    EngineModeStatus.struct_class = Types::EngineModeStatus
+
     EnvironmentInfo.add_member(:availability_zone_information, Shapes::ShapeRef.new(shape: AvailabilityZoneInfoList, location_name: "AvailabilityZoneInformation"))
     EnvironmentInfo.struct_class = Types::EnvironmentInfo
 
@@ -1546,6 +1582,11 @@ module Aws::OpenSearchService
     ErrorDetails.add_member(:error_type, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorType"))
     ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     ErrorDetails.struct_class = Types::ErrorDetails
+
+    ExportOptions.add_member(:types, Shapes::ShapeRef.new(shape: StringList, location_name: "types"))
+    ExportOptions.add_member(:objects, Shapes::ShapeRef.new(shape: SavedObjectIdentifierList, location_name: "objects"))
+    ExportOptions.add_member(:include_references_deep, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeReferencesDeep"))
+    ExportOptions.struct_class = Types::ExportOptions
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "Values"))
@@ -1632,6 +1673,20 @@ module Aws::OpenSearchService
 
     GetIndexResponse.add_member(:index_schema, Shapes::ShapeRef.new(shape: IndexSchema, required: true, location_name: "IndexSchema"))
     GetIndexResponse.struct_class = Types::GetIndexResponse
+
+    GetMigrationRequest.add_member(:migration_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "migrationId"))
+    GetMigrationRequest.struct_class = Types::GetMigrationRequest
+
+    GetMigrationResponse.add_member(:migration_id, Shapes::ShapeRef.new(shape: String, location_name: "migrationId"))
+    GetMigrationResponse.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    GetMigrationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId"))
+    GetMigrationResponse.add_member(:source, Shapes::ShapeRef.new(shape: MigrationSource, location_name: "source"))
+    GetMigrationResponse.add_member(:exported_count, Shapes::ShapeRef.new(shape: Integer, location_name: "exportedCount"))
+    GetMigrationResponse.add_member(:imported_count, Shapes::ShapeRef.new(shape: Integer, location_name: "importedCount"))
+    GetMigrationResponse.add_member(:error, Shapes::ShapeRef.new(shape: MigrationError, location_name: "error"))
+    GetMigrationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "createdAt"))
+    GetMigrationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "updatedAt"))
+    GetMigrationResponse.struct_class = Types::GetMigrationResponse
 
     GetPackageVersionHistoryRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
     GetPackageVersionHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1731,6 +1786,19 @@ module Aws::OpenSearchService
     InsightEntity.add_member(:type, Shapes::ShapeRef.new(shape: InsightEntityType, required: true, location_name: "Type"))
     InsightEntity.add_member(:value, Shapes::ShapeRef.new(shape: InsightEntityValue, location_name: "Value"))
     InsightEntity.struct_class = Types::InsightEntity
+
+    InsightFeedbackEntity.add_member(:type, Shapes::ShapeRef.new(shape: InsightFeedbackEntityType, required: true, location_name: "Type"))
+    InsightFeedbackEntity.add_member(:value, Shapes::ShapeRef.new(shape: InsightEntityValue, required: true, location_name: "Value"))
+    InsightFeedbackEntity.struct_class = Types::InsightFeedbackEntity
+
+    InsightFeedbackRequest.add_member(:entity, Shapes::ShapeRef.new(shape: InsightFeedbackEntity, required: true, location_name: "Entity"))
+    InsightFeedbackRequest.add_member(:insight_id, Shapes::ShapeRef.new(shape: GUID, required: true, location_name: "InsightId"))
+    InsightFeedbackRequest.add_member(:thumbs, Shapes::ShapeRef.new(shape: InsightFeedbackThumbs, required: true, location_name: "Thumbs"))
+    InsightFeedbackRequest.add_member(:feedback_text, Shapes::ShapeRef.new(shape: InsightFeedbackText, location_name: "FeedbackText"))
+    InsightFeedbackRequest.struct_class = Types::InsightFeedbackRequest
+
+    InsightFeedbackResponse.add_member(:status, Shapes::ShapeRef.new(shape: InsightResponseStatus, location_name: "Status"))
+    InsightFeedbackResponse.struct_class = Types::InsightFeedbackResponse
 
     InsightField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     InsightField.add_member(:type, Shapes::ShapeRef.new(shape: InsightFieldType, required: true, location_name: "Type"))
@@ -1884,6 +1952,16 @@ module Aws::OpenSearchService
     ListInstanceTypeDetailsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListInstanceTypeDetailsResponse.struct_class = Types::ListInstanceTypeDetailsResponse
 
+    ListMigrationsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "querystring", location_name: "applicationId"))
+    ListMigrationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "status"))
+    ListMigrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "maxResults"))
+    ListMigrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListMigrationsRequest.struct_class = Types::ListMigrationsRequest
+
+    ListMigrationsResponse.add_member(:migrations, Shapes::ShapeRef.new(shape: MigrationSummaryList, location_name: "migrations"))
+    ListMigrationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListMigrationsResponse.struct_class = Types::ListMigrationsResponse
+
     ListPackagesForDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     ListPackagesForDomainRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListPackagesForDomainRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1954,6 +2032,38 @@ module Aws::OpenSearchService
     MasterUserOptions.add_member(:master_user_name, Shapes::ShapeRef.new(shape: Username, location_name: "MasterUserName"))
     MasterUserOptions.add_member(:master_user_password, Shapes::ShapeRef.new(shape: Password, location_name: "MasterUserPassword"))
     MasterUserOptions.struct_class = Types::MasterUserOptions
+
+    MigrationError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    MigrationError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    MigrationError.struct_class = Types::MigrationError
+
+    MigrationOptions.add_member(:source, Shapes::ShapeRef.new(shape: MigrationSource, required: true, location_name: "source"))
+    MigrationOptions.add_member(:workspace, Shapes::ShapeRef.new(shape: MigrationWorkspace, required: true, location_name: "workspace"))
+    MigrationOptions.add_member(:export_options, Shapes::ShapeRef.new(shape: ExportOptions, location_name: "exportOptions"))
+    MigrationOptions.add_member(:conflict_resolution, Shapes::ShapeRef.new(shape: String, location_name: "conflictResolution"))
+    MigrationOptions.struct_class = Types::MigrationOptions
+
+    MigrationSource.add_member(:datasource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "datasourceArn"))
+    MigrationSource.struct_class = Types::MigrationSource
+
+    MigrationSummary.add_member(:migration_id, Shapes::ShapeRef.new(shape: String, location_name: "migrationId"))
+    MigrationSummary.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    MigrationSummary.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId"))
+    MigrationSummary.add_member(:source, Shapes::ShapeRef.new(shape: MigrationSource, location_name: "source"))
+    MigrationSummary.add_member(:exported_count, Shapes::ShapeRef.new(shape: Integer, location_name: "exportedCount"))
+    MigrationSummary.add_member(:imported_count, Shapes::ShapeRef.new(shape: Integer, location_name: "importedCount"))
+    MigrationSummary.add_member(:error, Shapes::ShapeRef.new(shape: MigrationError, location_name: "error"))
+    MigrationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "createdAt"))
+    MigrationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "updatedAt"))
+    MigrationSummary.struct_class = Types::MigrationSummary
+
+    MigrationSummaryList.member = Shapes::ShapeRef.new(shape: MigrationSummary)
+
+    MigrationWorkspace.add_member(:workspace_id, Shapes::ShapeRef.new(shape: String, location_name: "workspaceId"))
+    MigrationWorkspace.add_member(:create_workspace, Shapes::ShapeRef.new(shape: Boolean, location_name: "createWorkspace"))
+    MigrationWorkspace.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    MigrationWorkspace.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    MigrationWorkspace.struct_class = Types::MigrationWorkspace
 
     ModifyingProperties.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     ModifyingProperties.add_member(:active_value, Shapes::ShapeRef.new(shape: String, location_name: "ActiveValue"))
@@ -2217,6 +2327,12 @@ module Aws::OpenSearchService
     SAMLOptionsOutput.add_member(:session_timeout_minutes, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "SessionTimeoutMinutes"))
     SAMLOptionsOutput.struct_class = Types::SAMLOptionsOutput
 
+    SavedObjectIdentifier.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
+    SavedObjectIdentifier.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    SavedObjectIdentifier.struct_class = Types::SavedObjectIdentifier
+
+    SavedObjectIdentifierList.member = Shapes::ShapeRef.new(shape: SavedObjectIdentifier)
+
     ScheduledAction.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
     ScheduledAction.add_member(:type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "Type"))
     ScheduledAction.add_member(:severity, Shapes::ShapeRef.new(shape: ActionSeverity, required: true, location_name: "Severity"))
@@ -2284,6 +2400,15 @@ module Aws::OpenSearchService
 
     StartDomainMaintenanceResponse.add_member(:maintenance_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "MaintenanceId"))
     StartDomainMaintenanceResponse.struct_class = Types::StartDomainMaintenanceResponse
+
+    StartMigrationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
+    StartMigrationRequest.add_member(:migration_options, Shapes::ShapeRef.new(shape: MigrationOptions, required: true, location_name: "migrationOptions"))
+    StartMigrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    StartMigrationRequest.struct_class = Types::StartMigrationRequest
+
+    StartMigrationResponse.add_member(:migration_id, Shapes::ShapeRef.new(shape: String, location_name: "migrationId"))
+    StartMigrationResponse.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    StartMigrationResponse.struct_class = Types::StartMigrationResponse
 
     StartServiceSoftwareUpdateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     StartServiceSoftwareUpdateRequest.add_member(:schedule_at, Shapes::ShapeRef.new(shape: ScheduleAt, location_name: "ScheduleAt"))
@@ -2375,6 +2500,8 @@ module Aws::OpenSearchService
     UpdateDomainConfigRequest.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsInput, location_name: "AIMLOptions"))
     UpdateDomainConfigRequest.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, location_name: "DeploymentStrategyOptions"))
     UpdateDomainConfigRequest.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseRequestOptions, location_name: "AutomatedSnapshotPauseOptions"))
+    UpdateDomainConfigRequest.add_member(:use_case, Shapes::ShapeRef.new(shape: DomainUseCase, location_name: "UseCase"))
+    UpdateDomainConfigRequest.add_member(:engine_mode, Shapes::ShapeRef.new(shape: EngineMode, location_name: "EngineMode"))
     UpdateDomainConfigRequest.struct_class = Types::UpdateDomainConfigRequest
 
     UpdateDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: DomainConfig, required: true, location_name: "DomainConfig"))
@@ -2457,6 +2584,10 @@ module Aws::OpenSearchService
     UpgradeStepItem.struct_class = Types::UpgradeStepItem
 
     UpgradeStepsList.member = Shapes::ShapeRef.new(shape: UpgradeStepItem)
+
+    UseCaseStatus.add_member(:options, Shapes::ShapeRef.new(shape: DomainUseCase, required: true, location_name: "Options"))
+    UseCaseStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+    UseCaseStatus.struct_class = Types::UseCaseStatus
 
     VPCDerivedInfo.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VPCId"))
     VPCDerivedInfo.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SubnetIds"))
@@ -3288,6 +3419,19 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMigration"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/app-migrations/{migrationId}"
+        o.input = Shapes::ShapeRef.new(shape: GetMigrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
       api.add_operation(:get_package_version_history, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPackageVersionHistory"
         o.http_method = "GET"
@@ -3337,6 +3481,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:insight_feedback, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InsightFeedback"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/insight-feedback"
+        o.input = Shapes::ShapeRef.new(shape: InsightFeedbackRequest)
+        o.output = Shapes::ShapeRef.new(shape: InsightFeedbackResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:list_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -3477,6 +3635,18 @@ module Aws::OpenSearchService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_migrations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMigrations"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/app-migrations"
+        o.input = Shapes::ShapeRef.new(shape: ListMigrationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMigrationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:list_packages_for_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -3680,6 +3850,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
+      api.add_operation(:start_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/app-migrations"
+        o.input = Shapes::ShapeRef.new(shape: StartMigrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 

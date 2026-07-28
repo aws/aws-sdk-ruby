@@ -95,9 +95,9 @@ module Aws
                               radius: ::Integer
                             }?,
                             include_countries: Array[::String]?,
-                            include_place_types: Array[("Locality" | "PostalCode")]?
+                            include_place_types: Array[("Locality" | "PostalCode" | "Street" | "Intersection" | "PointAddress" | "InterpolatedAddress" | "Country" | "Region")]?
                           },
-                          ?postal_code_mode: ("MergeAllSpannedLocalities" | "EnumerateSpannedLocalities"),
+                          ?postal_code_mode: ("MergeAllSpannedLocalities" | "EnumerateSpannedLocalities" | "EnumerateSpannedDistricts"),
                           ?additional_features: Array[("Core")],
                           ?language: ::String,
                           ?political_view: ::String,
@@ -128,13 +128,16 @@ module Aws
                      ?bias_position: Array[::Float],
                      ?filter: {
                        include_countries: Array[::String]?,
-                       include_place_types: Array[("Locality" | "PostalCode" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress")]?
+                       include_place_types: Array[("Locality" | "PostalCode" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "PointOfInterest" | "Country" | "Region")]?
                      },
                      ?additional_features: Array[("TimeZone" | "Access" | "SecondaryAddresses" | "Intersections")],
                      ?language: ::String,
                      ?political_view: ::String,
                      ?intended_use: ("SingleUse" | "Storage"),
-                     ?key: ::String
+                     ?key: ::String,
+                     ?postal_code_mode: ("MergeAllSpannedLocalities" | "EnumerateSpannedLocalities" | "EnumerateSpannedDistricts"),
+                     ?address_translations: Array[("District" | "Locality" | "Region" | "SubRegion")],
+                     ?address_names_mode: ("Matched" | "Administrative")
                    ) -> _GeocodeResponseSuccess
                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GeocodeResponseSuccess
 
@@ -161,15 +164,19 @@ module Aws
         def phonemes: () -> Types::PhonemeDetails
         def main_address: () -> Types::RelatedPlace
         def secondary_addresses: () -> ::Array[Types::RelatedPlace]
+        def place_attributes: () -> ::Array[("DriveThrough")]
+        def estimated_point_address: () -> bool
+        def cross_references: () -> ::Array[Types::CrossReference]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoPlaces/Client.html#get_place-instance_method
       def get_place: (
                        place_id: ::String,
-                       ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact" | "SecondaryAddresses")],
+                       ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact" | "SecondaryAddresses" | "CrossReferences")],
                        ?language: ::String,
                        ?political_view: ::String,
                        ?intended_use: ("SingleUse" | "Storage"),
-                       ?key: ::String
+                       ?key: ::String,
+                       ?address_names_mode: ("Administrative")
                      ) -> _GetPlaceResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlaceResponseSuccess
 
@@ -184,14 +191,15 @@ module Aws
                              ?query_radius: ::Integer,
                              ?max_results: ::Integer,
                              ?filter: {
-                               include_place_types: Array[("Locality" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress")]?
+                               include_place_types: Array[("Locality" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "PointOfInterest")]?
                              },
                              ?additional_features: Array[("TimeZone" | "Access" | "Intersections")],
                              ?language: ::String,
                              ?political_view: ::String,
                              ?intended_use: ("SingleUse" | "Storage"),
                              ?key: ::String,
-                             ?heading: ::Float
+                             ?heading: ::Float,
+                             ?address_names_mode: ("Administrative")
                            ) -> _ReverseGeocodeResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReverseGeocodeResponseSuccess
 
@@ -216,7 +224,7 @@ module Aws
                              include_food_types: Array[::String]?,
                              exclude_food_types: Array[::String]?
                            },
-                           ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact")],
+                           ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact" | "CrossReferences")],
                            ?language: ::String,
                            ?political_view: ::String,
                            ?intended_use: ("SingleUse" | "Storage"),
@@ -245,11 +253,12 @@ module Aws
                            }?,
                            include_countries: Array[::String]?
                          },
-                         ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact")],
+                         ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact" | "CrossReferences")],
                          ?language: ::String,
                          ?political_view: ::String,
                          ?intended_use: ("SingleUse" | "Storage"),
                          ?next_token: ::String,
+                         ?travel_mode: ("Car" | "Scooter" | "Truck"),
                          ?key: ::String
                        ) -> _SearchTextResponseSuccess
                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTextResponseSuccess
@@ -274,10 +283,11 @@ module Aws
                        }?,
                        include_countries: Array[::String]?
                      },
-                     ?additional_features: Array[("Core" | "TimeZone" | "Phonemes" | "Access")],
+                     ?additional_features: Array[("Core" | "TimeZone" | "Phonemes" | "Access" | "CrossReferences")],
                      ?language: ::String,
                      ?political_view: ::String,
                      ?intended_use: ("SingleUse"),
+                     ?travel_mode: ("Car" | "Scooter" | "Truck"),
                      ?key: ::String
                    ) -> _SuggestResponseSuccess
                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SuggestResponseSuccess

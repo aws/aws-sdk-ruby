@@ -409,6 +409,9 @@ module Aws::ACM
     #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
     #     `Aws::ACM::EndpointParameters`.
     #
+    #   @option options [string] :service_type
+    #     The service type: ACM or ACM-ACME. Injected via @staticContextParams.
+    #
     #   @option options [Float] :http_continue_timeout (1)
     #     The number of seconds to wait for a 100-continue response before sending the
     #     request body.  This option has no effect unless the request has "Expect"
@@ -487,6 +490,11 @@ module Aws::ACM
     # certificate on input by its Amazon Resource Name (ARN). You specify
     # the tag by using a key-value pair.
     #
+    # <note markdown="1"> This action applies only to the `certificate` resource type. For all
+    # other ACM resource types, use TagResource instead.
+    #
+    #  </note>
+    #
     # You can apply a tag to just one certificate if you want to identify a
     # specific characteristic of that certificate, or you can apply the same
     # tag to multiple certificates if you want to filter for a common
@@ -544,6 +552,281 @@ module Aws::ACM
       req.send_request(options)
     end
 
+    # Creates a domain validation for an ACME endpoint. Domain validations
+    # authorize the endpoint to issue certificates for specified domain
+    # names. You configure prevalidation to prove domain ownership.
+    #
+    # @option params [String] :idempotency_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name to validate.
+    #
+    # @option params [required, Types::PrevalidationOptions] :prevalidation_options
+    #   The prevalidation options for the domain.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags to associate with the domain validation.
+    #
+    # @return [Types::CreateAcmeDomainValidationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAcmeDomainValidationResponse#acme_domain_validation_arn #acme_domain_validation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_acme_domain_validation({
+    #     idempotency_token: "String",
+    #     acme_endpoint_arn: "AcmeEndpointArn", # required
+    #     domain_name: "DomainName", # required
+    #     prevalidation_options: { # required
+    #       dns_prevalidation: {
+    #         domain_scope: {
+    #           exact_domain: "ENABLED", # accepts ENABLED, DISABLED
+    #           subdomains: "ENABLED", # accepts ENABLED, DISABLED
+    #           wildcards: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         hosted_zone_id: "HostedZoneId",
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.acme_domain_validation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CreateAcmeDomainValidation AWS API Documentation
+    #
+    # @overload create_acme_domain_validation(params = {})
+    # @param [Hash] params ({})
+    def create_acme_domain_validation(params = {}, options = {})
+      req = build_request(:create_acme_domain_validation, params)
+      req.send_request(options)
+    end
+
+    # Creates an ACME endpoint, which is a managed ACME server with a unique
+    # endpoint URL. After creation, ACME clients can use the endpoint URL to
+    # automate certificate issuance using the ACME protocol.
+    #
+    # @option params [String] :idempotency_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :authorization_behavior
+    #   The authorization behavior for the ACME endpoint.
+    #
+    # @option params [String] :contact
+    #   Specifies whether ACME clients must provide contact information during
+    #   account registration.
+    #
+    # @option params [required, Types::CertificateAuthority] :certificate_authority
+    #   The type of certificate authority to use for issuing certificates
+    #   through this ACME endpoint.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags to associate with the ACME endpoint.
+    #
+    # @option params [Array<Types::Tag>] :certificate_tags
+    #   Tags to apply to certificates issued through this ACME endpoint.
+    #
+    # @return [Types::CreateAcmeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAcmeEndpointResponse#acme_endpoint_arn #acme_endpoint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_acme_endpoint({
+    #     idempotency_token: "String",
+    #     authorization_behavior: "PRE_APPROVED", # required, accepts PRE_APPROVED
+    #     contact: "REQUIRED", # accepts REQUIRED, NOT_REQUIRED
+    #     certificate_authority: { # required
+    #       public_certificate_authority: {
+    #         allowed_key_algorithms: ["RSA_2048"], # accepts RSA_2048, EC_prime256v1, EC_secp384r1
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     certificate_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.acme_endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CreateAcmeEndpoint AWS API Documentation
+    #
+    # @overload create_acme_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_acme_endpoint(params = {}, options = {})
+      req = build_request(:create_acme_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Creates an external account binding (EAB) for an ACME endpoint. An EAB
+    # provides credentials that authorize an ACME client to register an
+    # account with the endpoint. Each EAB is associated with an IAM role
+    # that controls what certificate operations the ACME client can perform.
+    #
+    # @option params [String] :idempotency_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to associate with the
+    #   external account binding.
+    #
+    # @option params [Types::Expiration] :expiration
+    #   The expiration configuration for the external account binding.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags to associate with the external account binding.
+    #
+    # @return [Types::CreateAcmeExternalAccountBindingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAcmeExternalAccountBindingResponse#external_account_binding #external_account_binding} => Types::AcmeExternalAccountBinding
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_acme_external_account_binding({
+    #     idempotency_token: "String",
+    #     acme_endpoint_arn: "AcmeEndpointArn", # required
+    #     role_arn: "RoleArn", # required
+    #     expiration: {
+    #       value: 1, # required
+    #       type: "MINUTES", # required, accepts MINUTES, HOURS, DAYS
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.external_account_binding.acme_external_account_binding_arn #=> String
+    #   resp.external_account_binding.acme_endpoint_arn #=> String
+    #   resp.external_account_binding.role_arn #=> String
+    #   resp.external_account_binding.expires_at #=> Time
+    #   resp.external_account_binding.revoked_at #=> Time
+    #   resp.external_account_binding.last_used_at #=> Time
+    #   resp.external_account_binding.created_at #=> Time
+    #   resp.external_account_binding.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CreateAcmeExternalAccountBinding AWS API Documentation
+    #
+    # @overload create_acme_external_account_binding(params = {})
+    # @param [Hash] params ({})
+    def create_acme_external_account_binding(params = {}, options = {})
+      req = build_request(:create_acme_external_account_binding, params)
+      req.send_request(options)
+    end
+
+    # Deletes a domain validation. After deletion, the ACME endpoint can no
+    # longer issue certificates for the associated domain.
+    #
+    # @option params [required, String] :acme_domain_validation_arn
+    #   The Amazon Resource Name (ARN) of the ACME domain validation to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_acme_domain_validation({
+    #     acme_domain_validation_arn: "AcmeDomainValidationArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteAcmeDomainValidation AWS API Documentation
+    #
+    # @overload delete_acme_domain_validation(params = {})
+    # @param [Hash] params ({})
+    def delete_acme_domain_validation(params = {}, options = {})
+      req = build_request(:delete_acme_domain_validation, params)
+      req.send_request(options)
+    end
+
+    # Deletes an ACME endpoint. After deletion, the endpoint URL is no
+    # longer accessible and ACME clients cannot issue certificates through
+    # it. Any existing external account bindings and domain validations
+    # associated with the endpoint are also deleted.
+    #
+    # @option params [required, String] :acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_acme_endpoint({
+    #     acme_endpoint_arn: "AcmeEndpointArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteAcmeEndpoint AWS API Documentation
+    #
+    # @overload delete_acme_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_acme_endpoint(params = {}, options = {})
+      req = build_request(:delete_acme_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Deletes an external account binding. Previously fetched credentials
+    # for this binding will no longer be usable for account registration. A
+    # deleted binding cannot be recovered.
+    #
+    # @option params [required, String] :acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the ACME external account binding to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_acme_external_account_binding({
+    #     acme_external_account_binding_arn: "AcmeExternalAccountBindingArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteAcmeExternalAccountBinding AWS API Documentation
+    #
+    # @overload delete_acme_external_account_binding(params = {})
+    # @param [Hash] params ({})
+    def delete_acme_external_account_binding(params = {}, options = {})
+      req = build_request(:delete_acme_external_account_binding, params)
+      req.send_request(options)
+    end
+
     # Deletes a certificate and its associated private key. If this action
     # succeeds, the certificate is not available for use by Amazon Web
     # Services services integrated with ACM. Deleting a certificate is
@@ -561,6 +844,10 @@ module Aws::ACM
     # has no effect on the CA. You will continue to be charged for the CA
     # until it is deleted. For more information, see [ Deleting Your Private
     # CA][1] in the *Private Certificate Authority User Guide*.
+    #
+    #  You cannot delete a certificate with a `CertificateKeyPairOrigin` of
+    # `ACME`. ACM automatically deletes these certificates 1 year after they
+    # expire.
     #
     #  </note>
     #
@@ -601,6 +888,182 @@ module Aws::ACM
     # @param [Hash] params ({})
     def delete_certificate(params = {}, options = {})
       req = build_request(:delete_certificate, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed metadata about the specified ACME account, including
+    # its status, public key thumbprint, and associated external account
+    # binding.
+    #
+    # @option params [required, String] :acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #
+    # @option params [required, String] :account_url
+    #   The URL of the ACME account.
+    #
+    # @return [Types::DescribeAcmeAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAcmeAccountResponse#acme_account #acme_account} => Types::AcmeAccount
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_acme_account({
+    #     acme_endpoint_arn: "AcmeEndpointArn", # required
+    #     account_url: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.acme_account.account_url #=> String
+    #   resp.acme_account.public_key_thumbprint #=> String
+    #   resp.acme_account.status #=> String, one of "VALID", "DEACTIVATED", "REVOKED"
+    #   resp.acme_account.created_at #=> Time
+    #   resp.acme_account.acme_external_account_binding_arn #=> String
+    #   resp.acme_account.contacts #=> Array
+    #   resp.acme_account.contacts[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeAccount AWS API Documentation
+    #
+    # @overload describe_acme_account(params = {})
+    # @param [Hash] params ({})
+    def describe_acme_account(params = {}, options = {})
+      req = build_request(:describe_acme_account, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed metadata about the specified domain validation,
+    # including its status, domain scope, and DNS resource records required
+    # for validation.
+    #
+    # @option params [required, String] :acme_domain_validation_arn
+    #   The Amazon Resource Name (ARN) of the ACME domain validation.
+    #
+    # @return [Types::DescribeAcmeDomainValidationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAcmeDomainValidationResponse#acme_domain_validation #acme_domain_validation} => Types::AcmeDomainValidation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_acme_domain_validation({
+    #     acme_domain_validation_arn: "AcmeDomainValidationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.acme_domain_validation.acme_domain_validation_arn #=> String
+    #   resp.acme_domain_validation.acme_endpoint_arn #=> String
+    #   resp.acme_domain_validation.domain_name #=> String
+    #   resp.acme_domain_validation.prevalidation_type #=> String, one of "DNS_PREVALIDATION"
+    #   resp.acme_domain_validation.prevalidation_details.dns_prevalidation.domain_scope.exact_domain #=> String, one of "ENABLED", "DISABLED"
+    #   resp.acme_domain_validation.prevalidation_details.dns_prevalidation.domain_scope.subdomains #=> String, one of "ENABLED", "DISABLED"
+    #   resp.acme_domain_validation.prevalidation_details.dns_prevalidation.domain_scope.wildcards #=> String, one of "ENABLED", "DISABLED"
+    #   resp.acme_domain_validation.prevalidation_details.dns_prevalidation.hosted_zone_id #=> String
+    #   resp.acme_domain_validation.prevalidation_details.dns_prevalidation.resource_record.name #=> String
+    #   resp.acme_domain_validation.prevalidation_details.dns_prevalidation.resource_record.type #=> String, one of "CNAME"
+    #   resp.acme_domain_validation.prevalidation_details.dns_prevalidation.resource_record.value #=> String
+    #   resp.acme_domain_validation.status #=> String, one of "VALIDATING", "VALID", "INVALID", "DELETING"
+    #   resp.acme_domain_validation.failure_details.reason #=> String, one of "ACCESS_DENIED", "DOMAIN_MISMATCH", "DOMAIN_NOT_ALLOWED", "ENDPOINT_NOT_ACTIVE", "HOSTED_ZONE_NOT_FOUND", "INTERNAL_FAILURE", "INVALID_CHANGE_BATCH", "INVALID_PUBLIC_DOMAIN", "TIMED_OUT"
+    #   resp.acme_domain_validation.failure_details.message #=> String
+    #   resp.acme_domain_validation.created_at #=> Time
+    #   resp.acme_domain_validation.updated_at #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * acme_domain_validation_deleted
+    #   * acme_domain_validation_validated
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeDomainValidation AWS API Documentation
+    #
+    # @overload describe_acme_domain_validation(params = {})
+    # @param [Hash] params ({})
+    def describe_acme_domain_validation(params = {}, options = {})
+      req = build_request(:describe_acme_domain_validation, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed metadata about the specified ACME endpoint, including
+    # its status, URL, authorization behavior, and certificate authority
+    # configuration.
+    #
+    # @option params [required, String] :acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #
+    # @return [Types::DescribeAcmeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAcmeEndpointResponse#acme_endpoint #acme_endpoint} => Types::AcmeEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_acme_endpoint({
+    #     acme_endpoint_arn: "AcmeEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.acme_endpoint.acme_endpoint_arn #=> String
+    #   resp.acme_endpoint.endpoint_url #=> String
+    #   resp.acme_endpoint.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.acme_endpoint.failure_reason #=> String
+    #   resp.acme_endpoint.authorization_behavior #=> String, one of "PRE_APPROVED"
+    #   resp.acme_endpoint.contact #=> String, one of "REQUIRED", "NOT_REQUIRED"
+    #   resp.acme_endpoint.certificate_authority.public_certificate_authority.allowed_key_algorithms #=> Array
+    #   resp.acme_endpoint.certificate_authority.public_certificate_authority.allowed_key_algorithms[0] #=> String, one of "RSA_2048", "EC_prime256v1", "EC_secp384r1"
+    #   resp.acme_endpoint.certificate_tags #=> Array
+    #   resp.acme_endpoint.certificate_tags[0].key #=> String
+    #   resp.acme_endpoint.certificate_tags[0].value #=> String
+    #   resp.acme_endpoint.created_at #=> Time
+    #   resp.acme_endpoint.updated_at #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * acme_endpoint_active
+    #   * acme_endpoint_deleted
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeEndpoint AWS API Documentation
+    #
+    # @overload describe_acme_endpoint(params = {})
+    # @param [Hash] params ({})
+    def describe_acme_endpoint(params = {}, options = {})
+      req = build_request(:describe_acme_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed metadata about the specified external account
+    # binding, including the associated IAM role, expiration time, and usage
+    # history.
+    #
+    # @option params [required, String] :acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the ACME external account binding.
+    #
+    # @return [Types::DescribeAcmeExternalAccountBindingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAcmeExternalAccountBindingResponse#external_account_binding #external_account_binding} => Types::AcmeExternalAccountBinding
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_acme_external_account_binding({
+    #     acme_external_account_binding_arn: "AcmeExternalAccountBindingArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.external_account_binding.acme_external_account_binding_arn #=> String
+    #   resp.external_account_binding.acme_endpoint_arn #=> String
+    #   resp.external_account_binding.role_arn #=> String
+    #   resp.external_account_binding.expires_at #=> Time
+    #   resp.external_account_binding.revoked_at #=> Time
+    #   resp.external_account_binding.last_used_at #=> Time
+    #   resp.external_account_binding.created_at #=> Time
+    #   resp.external_account_binding.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeExternalAccountBinding AWS API Documentation
+    #
+    # @overload describe_acme_external_account_binding(params = {})
+    # @param [Hash] params ({})
+    def describe_acme_external_account_binding(params = {}, options = {})
+      req = build_request(:describe_acme_external_account_binding, params)
       req.send_request(options)
     end
 
@@ -693,6 +1156,9 @@ module Aws::ACM
     #   resp.certificate.renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
     #   resp.certificate.options.certificate_transparency_logging_preference #=> String, one of "ENABLED", "DISABLED"
     #   resp.certificate.options.export #=> String, one of "ENABLED", "DISABLED"
+    #   resp.certificate.certificate_key_pair_origin #=> String, one of "AWS_MANAGED", "ACME", "CUSTOMER_PROVIDED"
+    #   resp.certificate.acme_endpoint_arn #=> String
+    #   resp.certificate.acme_account_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -795,6 +1261,38 @@ module Aws::ACM
     # @param [Hash] params ({})
     def get_account_configuration(params = {}, options = {})
       req = build_request(:get_account_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the key ID and MAC key credentials for an external account
+    # binding. These credentials are used by ACME clients during account
+    # registration to bind to the endpoint.
+    #
+    # @option params [required, String] :acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the ACME external account binding.
+    #
+    # @return [Types::GetAcmeExternalAccountBindingCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAcmeExternalAccountBindingCredentialsResponse#key_id #key_id} => String
+    #   * {Types::GetAcmeExternalAccountBindingCredentialsResponse#mac_key #mac_key} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_acme_external_account_binding_credentials({
+    #     acme_external_account_binding_arn: "AcmeExternalAccountBindingArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_id #=> String
+    #   resp.mac_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetAcmeExternalAccountBindingCredentials AWS API Documentation
+    #
+    # @overload get_acme_external_account_binding_credentials(params = {})
+    # @param [Hash] params ({})
+    def get_acme_external_account_binding_credentials(params = {}, options = {})
+      req = build_request(:get_acme_external_account_binding_credentials, params)
       req.send_request(options)
     end
 
@@ -965,14 +1463,231 @@ module Aws::ACM
       req.send_request(options)
     end
 
+    # Retrieves a list of ACME accounts registered with the specified ACME
+    # endpoint. ACME accounts are created when clients use external account
+    # binding credentials to register.
+    #
+    # @option params [String] :next_token
+    #   A token for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [required, String] :acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #
+    # @return [Types::ListAcmeAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAcmeAccountsResponse#acme_accounts #acme_accounts} => Array&lt;Types::AcmeAccountSummary&gt;
+    #   * {Types::ListAcmeAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_acme_accounts({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     acme_endpoint_arn: "AcmeEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.acme_accounts #=> Array
+    #   resp.acme_accounts[0].account_url #=> String
+    #   resp.acme_accounts[0].public_key_thumbprint #=> String
+    #   resp.acme_accounts[0].status #=> String, one of "VALID", "DEACTIVATED", "REVOKED"
+    #   resp.acme_accounts[0].created_at #=> Time
+    #   resp.acme_accounts[0].acme_external_account_binding_arn #=> String
+    #   resp.acme_accounts[0].contacts #=> Array
+    #   resp.acme_accounts[0].contacts[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeAccounts AWS API Documentation
+    #
+    # @overload list_acme_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_acme_accounts(params = {}, options = {})
+      req = build_request(:list_acme_accounts, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of domain validations for the specified ACME
+    # endpoint.
+    #
+    # @option params [String] :next_token
+    #   A token for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [required, String] :acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #
+    # @return [Types::ListAcmeDomainValidationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAcmeDomainValidationsResponse#acme_domain_validations #acme_domain_validations} => Array&lt;Types::AcmeDomainValidationSummary&gt;
+    #   * {Types::ListAcmeDomainValidationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_acme_domain_validations({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     acme_endpoint_arn: "AcmeEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.acme_domain_validations #=> Array
+    #   resp.acme_domain_validations[0].acme_domain_validation_arn #=> String
+    #   resp.acme_domain_validations[0].acme_endpoint_arn #=> String
+    #   resp.acme_domain_validations[0].domain_name #=> String
+    #   resp.acme_domain_validations[0].prevalidation_type #=> String, one of "DNS_PREVALIDATION"
+    #   resp.acme_domain_validations[0].prevalidation_details.dns_prevalidation.domain_scope.exact_domain #=> String, one of "ENABLED", "DISABLED"
+    #   resp.acme_domain_validations[0].prevalidation_details.dns_prevalidation.domain_scope.subdomains #=> String, one of "ENABLED", "DISABLED"
+    #   resp.acme_domain_validations[0].prevalidation_details.dns_prevalidation.domain_scope.wildcards #=> String, one of "ENABLED", "DISABLED"
+    #   resp.acme_domain_validations[0].prevalidation_details.dns_prevalidation.hosted_zone_id #=> String
+    #   resp.acme_domain_validations[0].prevalidation_details.dns_prevalidation.resource_record.name #=> String
+    #   resp.acme_domain_validations[0].prevalidation_details.dns_prevalidation.resource_record.type #=> String, one of "CNAME"
+    #   resp.acme_domain_validations[0].prevalidation_details.dns_prevalidation.resource_record.value #=> String
+    #   resp.acme_domain_validations[0].status #=> String, one of "VALIDATING", "VALID", "INVALID", "DELETING"
+    #   resp.acme_domain_validations[0].failure_details.reason #=> String, one of "ACCESS_DENIED", "DOMAIN_MISMATCH", "DOMAIN_NOT_ALLOWED", "ENDPOINT_NOT_ACTIVE", "HOSTED_ZONE_NOT_FOUND", "INTERNAL_FAILURE", "INVALID_CHANGE_BATCH", "INVALID_PUBLIC_DOMAIN", "TIMED_OUT"
+    #   resp.acme_domain_validations[0].failure_details.message #=> String
+    #   resp.acme_domain_validations[0].created_at #=> Time
+    #   resp.acme_domain_validations[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeDomainValidations AWS API Documentation
+    #
+    # @overload list_acme_domain_validations(params = {})
+    # @param [Hash] params ({})
+    def list_acme_domain_validations(params = {}, options = {})
+      req = build_request(:list_acme_domain_validations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of ACME endpoints in your account. Use this operation
+    # to view all configured ACME endpoints and their current status.
+    #
+    # @option params [String] :next_token
+    #   A token for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListAcmeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAcmeEndpointsResponse#acme_endpoints #acme_endpoints} => Array&lt;Types::AcmeEndpointSummary&gt;
+    #   * {Types::ListAcmeEndpointsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_acme_endpoints({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.acme_endpoints #=> Array
+    #   resp.acme_endpoints[0].acme_endpoint_arn #=> String
+    #   resp.acme_endpoints[0].endpoint_url #=> String
+    #   resp.acme_endpoints[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.acme_endpoints[0].failure_reason #=> String
+    #   resp.acme_endpoints[0].authorization_behavior #=> String, one of "PRE_APPROVED"
+    #   resp.acme_endpoints[0].contact #=> String, one of "REQUIRED", "NOT_REQUIRED"
+    #   resp.acme_endpoints[0].certificate_authority.public_certificate_authority.allowed_key_algorithms #=> Array
+    #   resp.acme_endpoints[0].certificate_authority.public_certificate_authority.allowed_key_algorithms[0] #=> String, one of "RSA_2048", "EC_prime256v1", "EC_secp384r1"
+    #   resp.acme_endpoints[0].certificate_tags #=> Array
+    #   resp.acme_endpoints[0].certificate_tags[0].key #=> String
+    #   resp.acme_endpoints[0].certificate_tags[0].value #=> String
+    #   resp.acme_endpoints[0].created_at #=> Time
+    #   resp.acme_endpoints[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeEndpoints AWS API Documentation
+    #
+    # @overload list_acme_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_acme_endpoints(params = {}, options = {})
+      req = build_request(:list_acme_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of external account bindings for the specified ACME
+    # endpoint.
+    #
+    # @option params [String] :next_token
+    #   A token for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [required, String] :acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #
+    # @return [Types::ListAcmeExternalAccountBindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAcmeExternalAccountBindingsResponse#external_account_bindings #external_account_bindings} => Array&lt;Types::AcmeExternalAccountBindingSummary&gt;
+    #   * {Types::ListAcmeExternalAccountBindingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_acme_external_account_bindings({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     acme_endpoint_arn: "AcmeEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.external_account_bindings #=> Array
+    #   resp.external_account_bindings[0].acme_external_account_binding_arn #=> String
+    #   resp.external_account_bindings[0].acme_endpoint_arn #=> String
+    #   resp.external_account_bindings[0].role_arn #=> String
+    #   resp.external_account_bindings[0].expires_at #=> Time
+    #   resp.external_account_bindings[0].revoked_at #=> Time
+    #   resp.external_account_bindings[0].last_used_at #=> Time
+    #   resp.external_account_bindings[0].created_at #=> Time
+    #   resp.external_account_bindings[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeExternalAccountBindings AWS API Documentation
+    #
+    # @overload list_acme_external_account_bindings(params = {})
+    # @param [Hash] params ({})
+    def list_acme_external_account_bindings(params = {}, options = {})
+      req = build_request(:list_acme_external_account_bindings, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of certificate ARNs and domain names. You can request
     # that only certificates that match a specific status be listed. You can
     # also filter by specific attributes of the certificate. Default
     # filtering returns only `RSA_2048` certificates. For more information,
     # see Filters.
     #
+    # <note markdown="1"> By default, this action does not return certificates with a
+    # `CertificateKeyPairOrigin` of `ACME`. To include ACME certificates,
+    # specify `ACME` in the `CertificateKeyPairOrigins` filter.
+    #
+    #  </note>
+    #
     # @option params [Array<String>] :certificate_statuses
     #   Filter the certificate list by status value.
+    #
+    # @option params [Array<String>] :certificate_key_pair_origins
+    #   Filter the certificate list by certificate key pair origin. Specify
+    #   one or more `CertificateKeyPairOrigin` values. Default filtering
+    #   returns only certificates with key pair origin of `AWS_MANAGED` and
+    #   `CUSTOMER_PROVIDED`.
     #
     # @option params [Types::Filters] :includes
     #   Filter the certificate list. For more information, see the Filters
@@ -1010,6 +1725,7 @@ module Aws::ACM
     #
     #   resp = client.list_certificates({
     #     certificate_statuses: ["PENDING_VALIDATION"], # accepts PENDING_VALIDATION, ISSUED, INACTIVE, EXPIRED, VALIDATION_TIMED_OUT, REVOKED, FAILED
+    #     certificate_key_pair_origins: ["AWS_MANAGED"], # accepts AWS_MANAGED, ACME, CUSTOMER_PROVIDED
     #     includes: {
     #       extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
     #       key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
@@ -1050,6 +1766,7 @@ module Aws::ACM
     #   resp.certificate_summary_list[0].imported_at #=> Time
     #   resp.certificate_summary_list[0].revoked_at #=> Time
     #   resp.certificate_summary_list[0].managed_by #=> String, one of "CLOUDFRONT"
+    #   resp.certificate_summary_list[0].certificate_key_pair_origin #=> String, one of "AWS_MANAGED", "ACME", "CUSTOMER_PROVIDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates AWS API Documentation
     #
@@ -1064,6 +1781,11 @@ module Aws::ACM
     # certificate's Amazon Resource Name (ARN) to specify the certificate.
     # To add a tag to an ACM certificate, use the AddTagsToCertificate
     # action. To delete a tag, use the RemoveTagsFromCertificate action.
+    #
+    # <note markdown="1"> This action applies only to the `certificate` resource type. For all
+    # other ACM resource types, use ListTagsForResource instead.
+    #
+    #  </note>
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the ACM certificate for which you want
@@ -1100,6 +1822,45 @@ module Aws::ACM
     # @param [Hash] params ({})
     def list_tags_for_certificate(params = {}, options = {})
       req = build_request(:list_tags_for_certificate, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags associated with an ACM resource.
+    #
+    # <note markdown="1"> Use this action for all ACM resource types except the `certificate`
+    # resource type. For certificate resources, use ListTagsForCertificate
+    # instead.
+    #
+    #  </note>
+    #
+    # To add one or more tags, use the TagResource action. To remove one or
+    # more tags, use the UntagResource action.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the ACM resource for which to list tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1147,6 +1908,11 @@ module Aws::ACM
     # when calling this function, the tag will be removed regardless of
     # value. If you specify a value, the tag is removed only if it is
     # associated with the specified value.
+    #
+    # <note markdown="1"> This action applies only to the `certificate` resource type. For all
+    # other ACM resource types, use UntagResource instead.
+    #
+    #  </note>
     #
     # To add tags to a certificate, use the AddTagsToCertificate action. To
     # view all of the tags that have been applied to a specific ACM
@@ -1519,6 +2285,59 @@ module Aws::ACM
       req.send_request(options)
     end
 
+    # Revokes an ACME account, preventing it from requesting or revoking
+    # certificates. This operation is irreversible.
+    #
+    # @option params [required, String] :acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #
+    # @option params [required, String] :account_url
+    #   The URL of the ACME account to revoke.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_acme_account({
+    #     acme_endpoint_arn: "AcmeEndpointArn", # required
+    #     account_url: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RevokeAcmeAccount AWS API Documentation
+    #
+    # @overload revoke_acme_account(params = {})
+    # @param [Hash] params ({})
+    def revoke_acme_account(params = {}, options = {})
+      req = build_request(:revoke_acme_account, params)
+      req.send_request(options)
+    end
+
+    # Revokes an external account binding, preventing new ACME accounts from
+    # being registered using this binding. Existing ACME accounts that were
+    # previously registered using the binding are not affected and must be
+    # revoked separately.
+    #
+    # @option params [required, String] :acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the ACME external account binding to
+    #   revoke.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_acme_external_account_binding({
+    #     acme_external_account_binding_arn: "AcmeExternalAccountBindingArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RevokeAcmeExternalAccountBinding AWS API Documentation
+    #
+    # @overload revoke_acme_external_account_binding(params = {})
+    # @param [Hash] params ({})
+    def revoke_acme_external_account_binding(params = {}, options = {})
+      req = build_request(:revoke_acme_external_account_binding, params)
+      req.send_request(options)
+    end
+
     # Revokes a public ACM certificate. You can only revoke certificates
     # that have been previously exported.
     #
@@ -1651,12 +2470,15 @@ module Aws::ACM
     #           export_option: "ENABLED", # accepts ENABLED, DISABLED
     #           managed_by: "CLOUDFRONT", # accepts CLOUDFRONT
     #           validation_method: "EMAIL", # accepts EMAIL, DNS, HTTP
+    #           certificate_key_pair_origin: "AWS_MANAGED", # accepts AWS_MANAGED, ACME, CUSTOMER_PROVIDED
+    #           acme_endpoint_arn: "Arn",
+    #           acme_account_id: "AcmeAccountId",
     #         },
     #       },
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     sort_by: "CREATED_AT", # accepts CREATED_AT, NOT_AFTER, STATUS, RENEWAL_STATUS, EXPORTED, IN_USE, NOT_BEFORE, KEY_ALGORITHM, TYPE, CERTIFICATE_ARN, COMMON_NAME, REVOKED_AT, RENEWAL_ELIGIBILITY, ISSUED_AT, MANAGED_BY, EXPORT_OPTION, VALIDATION_METHOD, IMPORTED_AT
+    #     sort_by: "CREATED_AT", # accepts CREATED_AT, NOT_AFTER, STATUS, RENEWAL_STATUS, EXPORTED, IN_USE, NOT_BEFORE, KEY_ALGORITHM, TYPE, CERTIFICATE_ARN, COMMON_NAME, REVOKED_AT, RENEWAL_ELIGIBILITY, ISSUED_AT, MANAGED_BY, EXPORT_OPTION, VALIDATION_METHOD, IMPORTED_AT, ACME_ENDPOINT_ARN, ACME_ACCOUNT_ID, CERTIFICATE_KEY_PAIR_ORIGIN
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #   })
     #
@@ -1750,6 +2572,9 @@ module Aws::ACM
     #   resp.results[0].certificate_metadata.acm_certificate_metadata.export_option #=> String, one of "ENABLED", "DISABLED"
     #   resp.results[0].certificate_metadata.acm_certificate_metadata.managed_by #=> String, one of "CLOUDFRONT"
     #   resp.results[0].certificate_metadata.acm_certificate_metadata.validation_method #=> String, one of "EMAIL", "DNS", "HTTP"
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.certificate_key_pair_origin #=> String, one of "AWS_MANAGED", "ACME", "CUSTOMER_PROVIDED"
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.acme_endpoint_arn #=> String
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.acme_account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/SearchCertificates AWS API Documentation
@@ -1758,6 +2583,162 @@ module Aws::ACM
     # @param [Hash] params ({})
     def search_certificates(params = {}, options = {})
       req = build_request(:search_certificates, params)
+      req.send_request(options)
+    end
+
+    # Adds one or more tags to an ACM resource. Tags are labels that you can
+    # use to identify and organize your Amazon Web Services resources. Each
+    # tag consists of a `key` and an optional `value`.
+    #
+    # <note markdown="1"> Use this action for all ACM resource types except the `certificate`
+    # resource type. For certificate resources, use AddTagsToCertificate
+    # instead.
+    #
+    #  </note>
+    #
+    # To remove one or more tags, use the UntagResource action. To view all
+    # of the tags that have been applied to a resource, use the
+    # ListTagsForResource action.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the ACM resource to which the tag is to be applied.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The key-value pair that defines the tag to apply.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from an ACM resource.
+    #
+    # <note markdown="1"> Use this action for all ACM resource types except the `certificate`
+    # resource type. For certificate resources, use
+    # RemoveTagsFromCertificate instead.
+    #
+    #  </note>
+    #
+    # To add one or more tags, use the TagResource action. To view all of
+    # the tags that have been applied to a resource, use the
+    # ListTagsForResource action.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the ACM resource from which the tag is to be removed.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The key of each tag to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the prevalidation configuration of an existing domain
+    # validation.
+    #
+    # @option params [required, String] :acme_domain_validation_arn
+    #   The Amazon Resource Name (ARN) of the ACME domain validation to
+    #   update.
+    #
+    # @option params [Types::PrevalidationOptions] :prevalidation_options
+    #   The updated prevalidation options.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_acme_domain_validation({
+    #     acme_domain_validation_arn: "AcmeDomainValidationArn", # required
+    #     prevalidation_options: {
+    #       dns_prevalidation: {
+    #         domain_scope: {
+    #           exact_domain: "ENABLED", # accepts ENABLED, DISABLED
+    #           subdomains: "ENABLED", # accepts ENABLED, DISABLED
+    #           wildcards: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         hosted_zone_id: "HostedZoneId",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateAcmeDomainValidation AWS API Documentation
+    #
+    # @overload update_acme_domain_validation(params = {})
+    # @param [Hash] params ({})
+    def update_acme_domain_validation(params = {}, options = {})
+      req = build_request(:update_acme_domain_validation, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of an existing ACME endpoint. You can change
+    # the authorization behavior, contact requirement, or certificate
+    # authority settings.
+    #
+    # @option params [required, String] :acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint to update.
+    #
+    # @option params [String] :authorization_behavior
+    #   The updated authorization behavior.
+    #
+    # @option params [String] :contact
+    #   The updated contact requirement.
+    #
+    # @option params [Types::CertificateAuthority] :certificate_authority
+    #   The updated certificate authority configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_acme_endpoint({
+    #     acme_endpoint_arn: "AcmeEndpointArn", # required
+    #     authorization_behavior: "PRE_APPROVED", # accepts PRE_APPROVED
+    #     contact: "REQUIRED", # accepts REQUIRED, NOT_REQUIRED
+    #     certificate_authority: {
+    #       public_certificate_authority: {
+    #         allowed_key_algorithms: ["RSA_2048"], # accepts RSA_2048, EC_prime256v1, EC_secp384r1
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateAcmeEndpoint AWS API Documentation
+    #
+    # @overload update_acme_endpoint(params = {})
+    # @param [Hash] params ({})
+    def update_acme_endpoint(params = {}, options = {})
+      req = build_request(:update_acme_endpoint, params)
       req.send_request(options)
     end
 
@@ -1828,7 +2809,7 @@ module Aws::ACM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1894,9 +2875,13 @@ module Aws::ACM
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params                        | :delay   | :max_attempts |
-    # | --------------------- | ----------------------------- | -------- | ------------- |
-    # | certificate_validated | {Client#describe_certificate} | 60       | 5             |
+    # | waiter_name                      | params                                   | :delay   | :max_attempts |
+    # | -------------------------------- | ---------------------------------------- | -------- | ------------- |
+    # | acme_domain_validation_deleted   | {Client#describe_acme_domain_validation} | 5        | 60            |
+    # | acme_domain_validation_validated | {Client#describe_acme_domain_validation} | 5        | 60            |
+    # | acme_endpoint_active             | {Client#describe_acme_endpoint}          | 5        | 60            |
+    # | acme_endpoint_deleted            | {Client#describe_acme_endpoint}          | 5        | 60            |
+    # | certificate_validated            | {Client#describe_certificate}            | 60       | 5             |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -1947,6 +2932,10 @@ module Aws::ACM
 
     def waiters
       {
+        acme_domain_validation_deleted: Waiters::AcmeDomainValidationDeleted,
+        acme_domain_validation_validated: Waiters::AcmeDomainValidationValidated,
+        acme_endpoint_active: Waiters::AcmeEndpointActive,
+        acme_endpoint_deleted: Waiters::AcmeEndpointDeleted,
         certificate_validated: Waiters::CertificateValidated
       }
     end

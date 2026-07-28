@@ -926,6 +926,18 @@ module Aws::Route53GlobalResolver
       SENSITIVE: []
     end
 
+    class ListSharedDNSViewsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSharedDNSViewsOutput
+      attr_accessor next_token: ::String
+      attr_accessor dns_views: ::Array[Types::SharedDNSViewSummary]
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -957,6 +969,23 @@ module Aws::Route53GlobalResolver
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class SharedDNSViewSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dnssec_validation: ("ENABLED" | "DISABLED")
+      attr_accessor edns_client_subnet: ("ENABLED" | "DISABLED")
+      attr_accessor firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      attr_accessor owner_account_id: ::String
       SENSITIVE: []
     end
 

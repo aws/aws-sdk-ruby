@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2026-07-22)
+------------------
+
+* Feature - Amazon GuardDuty now returns filter lifecycle metadata in GetFilter responses. The response includes createdAt and updatedAt timestamps and a version number that increments on each update, giving you visibility into when a filter was created and last modified.
+
+1.157.0 (2026-07-13)
+------------------
+
+* Feature - GuardDuty AI Protection is now publicly available. Findings include Bedrock guardrail details, model details, observation numbers, and continuous scan details. GuardrailArn and GuardrailVersion are deprecated in favor of the guardrails list.
+
+1.156.0 (2026-07-09)
+------------------
+
+* Feature - Adding "AI Analyst" enum value for detector
+
 1.155.0 (2026-06-22)
 ------------------
 

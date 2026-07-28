@@ -227,6 +227,10 @@ module Aws::Drs
     #   or availability zone, using the instance ID of the source instance.
     #   @return [Boolean]
     #
+    # @!attribute [rw] recovery_mode
+    #   Recovery mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateLaunchConfigurationTemplateRequest AWS API Documentation
     #
     class CreateLaunchConfigurationTemplateRequest < Struct.new(
@@ -238,7 +242,8 @@ module Aws::Drs
       :licensing,
       :export_bucket_arn,
       :post_launch_enabled,
-      :launch_into_source_instance)
+      :launch_into_source_instance,
+      :recovery_mode)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
@@ -1647,6 +1652,10 @@ module Aws::Drs
     #   Launch into existing instance properties.
     #   @return [Types::LaunchIntoInstanceProperties]
     #
+    # @!attribute [rw] recovery_mode
+    #   Recovery mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchConfiguration AWS API Documentation
     #
     class LaunchConfiguration < Struct.new(
@@ -1659,7 +1668,8 @@ module Aws::Drs
       :copy_tags,
       :licensing,
       :post_launch_enabled,
-      :launch_into_instance_properties)
+      :launch_into_instance_properties,
+      :recovery_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1712,6 +1722,10 @@ module Aws::Drs
     #   or availability zone, using the instance ID of the source instance.
     #   @return [Boolean]
     #
+    # @!attribute [rw] recovery_mode
+    #   Recovery mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchConfigurationTemplate AWS API Documentation
     #
     class LaunchConfigurationTemplate < Struct.new(
@@ -1725,7 +1739,8 @@ module Aws::Drs
       :licensing,
       :export_bucket_arn,
       :post_launch_enabled,
-      :launch_into_source_instance)
+      :launch_into_source_instance,
+      :recovery_mode)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
@@ -3824,6 +3839,10 @@ module Aws::Drs
     #   Launch into existing instance properties.
     #   @return [Types::LaunchIntoInstanceProperties]
     #
+    # @!attribute [rw] recovery_mode
+    #   Recovery mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfigurationRequest AWS API Documentation
     #
     class UpdateLaunchConfigurationRequest < Struct.new(
@@ -3835,7 +3854,8 @@ module Aws::Drs
       :copy_tags,
       :licensing,
       :post_launch_enabled,
-      :launch_into_instance_properties)
+      :launch_into_instance_properties,
+      :recovery_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3878,6 +3898,10 @@ module Aws::Drs
     #   or availability zone, using the instance ID of the source instance.
     #   @return [Boolean]
     #
+    # @!attribute [rw] recovery_mode
+    #   Recovery mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfigurationTemplateRequest AWS API Documentation
     #
     class UpdateLaunchConfigurationTemplateRequest < Struct.new(
@@ -3889,7 +3913,8 @@ module Aws::Drs
       :licensing,
       :export_bucket_arn,
       :post_launch_enabled,
-      :launch_into_source_instance)
+      :launch_into_source_instance,
+      :recovery_mode)
       SENSITIVE = []
       include Aws::Structure
     end

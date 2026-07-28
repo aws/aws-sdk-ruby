@@ -90,6 +90,7 @@ module Aws::GameLift
     ContainerMountPoint = Shapes::StructureShape.new(name: 'ContainerMountPoint')
     ContainerMountPointAccessLevel = Shapes::StringShape.new(name: 'ContainerMountPointAccessLevel')
     ContainerMountPointList = Shapes::ListShape.new(name: 'ContainerMountPointList')
+    ContainerNameQueryFilter = Shapes::StringShape.new(name: 'ContainerNameQueryFilter')
     ContainerOperatingSystem = Shapes::StringShape.new(name: 'ContainerOperatingSystem')
     ContainerPathString = Shapes::StringShape.new(name: 'ContainerPathString')
     ContainerPortConfiguration = Shapes::StructureShape.new(name: 'ContainerPortConfiguration')
@@ -1186,7 +1187,7 @@ module Aws::GameLift
     DescribeContainerGroupPortMappingsInput.add_member(:container_group_type, Shapes::ShapeRef.new(shape: ContainerGroupType, required: true, location_name: "ContainerGroupType"))
     DescribeContainerGroupPortMappingsInput.add_member(:compute_name, Shapes::ShapeRef.new(shape: ComputeNameOrArn, location_name: "ComputeName"))
     DescribeContainerGroupPortMappingsInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
-    DescribeContainerGroupPortMappingsInput.add_member(:container_name, Shapes::ShapeRef.new(shape: NonZeroAnd128MaxAsciiString, location_name: "ContainerName"))
+    DescribeContainerGroupPortMappingsInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerNameQueryFilter, location_name: "ContainerName"))
     DescribeContainerGroupPortMappingsInput.struct_class = Types::DescribeContainerGroupPortMappingsInput
 
     DescribeContainerGroupPortMappingsOutput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
@@ -2824,6 +2825,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
@@ -3036,6 +3038,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
@@ -3125,6 +3128,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:deregister_game_server, Seahorse::Model::Operation.new.tap do |o|
@@ -3949,6 +3953,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: NotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:register_game_server, Seahorse::Model::Operation.new.tap do |o|

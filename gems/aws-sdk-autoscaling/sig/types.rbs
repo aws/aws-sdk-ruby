@@ -190,7 +190,7 @@ module Aws::AutoScaling
     end
 
     class AvailabilityZoneDistribution
-      attr_accessor capacity_distribution_strategy: ("balanced-only" | "balanced-best-effort")
+      attr_accessor capacity_distribution_strategy: ("balanced-only" | "balanced-best-effort" | "reservations-then-balanced")
       SENSITIVE: []
     end
 

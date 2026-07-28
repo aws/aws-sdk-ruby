@@ -96,6 +96,7 @@ module Aws::PCS
       attr_accessor instance_configs: ::Array[Types::InstanceConfig]
       attr_accessor spot_options: Types::SpotOptions
       attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfiguration
+      attr_accessor node_lifecycle_actions: Types::NodeLifecycleActions
       attr_accessor error_info: ::Array[Types::ErrorInfo]
       SENSITIVE: []
     end
@@ -163,6 +164,7 @@ module Aws::PCS
       attr_accessor instance_configs: ::Array[Types::InstanceConfig]
       attr_accessor spot_options: Types::SpotOptions
       attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfigurationRequest
+      attr_accessor node_lifecycle_actions: Types::NodeLifecycleActionsRequest
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -353,6 +355,33 @@ module Aws::PCS
       SENSITIVE: []
     end
 
+    class NodeLifecycleActions
+      attr_accessor stages: Types::NodeLifecycleStages
+      attr_accessor script_caching_policy: ("CACHE_ONCE" | "REFRESH_ON_REBOOT")
+      SENSITIVE: []
+    end
+
+    class NodeLifecycleActionsRequest
+      attr_accessor stages: Types::NodeLifecycleStages
+      attr_accessor script_caching_policy: ("CACHE_ONCE" | "REFRESH_ON_REBOOT")
+      SENSITIVE: []
+    end
+
+    class NodeLifecycleScript
+      attr_accessor name: ::String
+      attr_accessor script_source: Types::ScriptSource
+      attr_accessor arguments: ::Array[::String]
+      attr_accessor on_error: ("TERMINATE" | "STOP_SEQUENCE" | "CONTINUE")
+      attr_accessor execution_policy: ("FIRST_BOOT_ONLY" | "EVERY_BOOT")
+      SENSITIVE: []
+    end
+
+    class NodeLifecycleStages
+      attr_accessor node_bootstrapped: ::Array[Types::NodeLifecycleScript]
+      attr_accessor node_ready: ::Array[Types::NodeLifecycleScript]
+      SENSITIVE: []
+    end
+
     class Queue
       attr_accessor name: ::String
       attr_accessor id: ::String
@@ -398,6 +427,10 @@ module Aws::PCS
       attr_accessor node_id: ::String
       attr_accessor shared_secret: ::String
       attr_accessor endpoints: ::Array[Types::Endpoint]
+      attr_accessor cluster_name: ::String
+      attr_accessor compute_node_group_id: ::String
+      attr_accessor compute_node_group_name: ::String
+      attr_accessor node_lifecycle_actions: Types::NodeLifecycleActions
       SENSITIVE: [:shared_secret]
     end
 
@@ -429,6 +462,13 @@ module Aws::PCS
     class SchedulerRequest
       attr_accessor type: ("SLURM")
       attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ScriptSource
+      attr_accessor script_location: ::String
+      attr_accessor s3_version_id: ::String
+      attr_accessor checksum: ::String
       SENSITIVE: []
     end
 
@@ -508,6 +548,7 @@ module Aws::PCS
       attr_accessor cluster_identifier: ::String
       attr_accessor client_token: ::String
       attr_accessor slurm_configuration: Types::UpdateClusterSlurmConfigurationRequest
+      attr_accessor scheduler: Types::UpdateSchedulerRequest
       SENSITIVE: []
     end
 
@@ -537,6 +578,7 @@ module Aws::PCS
       attr_accessor scaling_configuration: Types::ScalingConfigurationRequest
       attr_accessor iam_instance_profile_arn: ::String
       attr_accessor slurm_configuration: Types::UpdateComputeNodeGroupSlurmConfigurationRequest
+      attr_accessor node_lifecycle_actions: Types::UpdateNodeLifecycleActionsRequest
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -549,6 +591,12 @@ module Aws::PCS
     class UpdateComputeNodeGroupSlurmConfigurationRequest
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      SENSITIVE: []
+    end
+
+    class UpdateNodeLifecycleActionsRequest
+      attr_accessor stages: Types::NodeLifecycleStages
+      attr_accessor script_caching_policy: ("CACHE_ONCE" | "REFRESH_ON_REBOOT")
       SENSITIVE: []
     end
 
@@ -568,6 +616,11 @@ module Aws::PCS
 
     class UpdateQueueSlurmConfigurationRequest
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      SENSITIVE: []
+    end
+
+    class UpdateSchedulerRequest
+      attr_accessor version: ::String
       SENSITIVE: []
     end
 

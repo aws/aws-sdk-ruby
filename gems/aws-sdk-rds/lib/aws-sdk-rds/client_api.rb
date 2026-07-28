@@ -143,6 +143,8 @@ module Aws::RDS
     CustomEngineVersionStatus = Shapes::StringShape.new(name: 'CustomEngineVersionStatus')
     DBCluster = Shapes::StructureShape.new(name: 'DBCluster')
     DBClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBClusterAlreadyExistsFault', error: {"code" => "DBClusterAlreadyExistsFault", "httpStatusCode" => 400, "senderFault" => true})
+    DBClusterAssociatedRole = Shapes::StructureShape.new(name: 'DBClusterAssociatedRole')
+    DBClusterAssociatedRoles = Shapes::ListShape.new(name: 'DBClusterAssociatedRoles')
     DBClusterAutomatedBackup = Shapes::StructureShape.new(name: 'DBClusterAutomatedBackup')
     DBClusterAutomatedBackupList = Shapes::ListShape.new(name: 'DBClusterAutomatedBackupList')
     DBClusterAutomatedBackupMessage = Shapes::StructureShape.new(name: 'DBClusterAutomatedBackupMessage')
@@ -453,6 +455,7 @@ module Aws::RDS
     GlobalClusterQuotaExceededFault = Shapes::StructureShape.new(name: 'GlobalClusterQuotaExceededFault', error: {"code" => "GlobalClusterQuotaExceededFault", "httpStatusCode" => 400, "senderFault" => true})
     GlobalClustersMessage = Shapes::StructureShape.new(name: 'GlobalClustersMessage')
     IAMAuthMode = Shapes::StringShape.new(name: 'IAMAuthMode')
+    IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     IPRange = Shapes::StructureShape.new(name: 'IPRange')
     IPRangeList = Shapes::ListShape.new(name: 'IPRangeList')
     IamRoleMissingPermissionsFault = Shapes::StructureShape.new(name: 'IamRoleMissingPermissionsFault', error: {"code" => "IamRoleMissingPermissions", "httpStatusCode" => 400, "senderFault" => true})
@@ -815,7 +818,7 @@ module Aws::RDS
     ActivityStreamModeList.member = Shapes::ShapeRef.new(shape: String)
 
     AddRoleToDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
-    AddRoleToDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
+    AddRoleToDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
     AddRoleToDBClusterMessage.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, location_name: "FeatureName"))
     AddRoleToDBClusterMessage.struct_class = Types::AddRoleToDBClusterMessage
 
@@ -1170,6 +1173,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     CreateDBClusterMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
     CreateDBClusterMessage.add_member(:with_express_configuration, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "WithExpressConfiguration"))
+    CreateDBClusterMessage.add_member(:associated_roles, Shapes::ShapeRef.new(shape: DBClusterAssociatedRoles, location_name: "AssociatedRoles"))
     CreateDBClusterMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
 
@@ -1556,6 +1560,12 @@ module Aws::RDS
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
+
+    DBClusterAssociatedRole.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
+    DBClusterAssociatedRole.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, location_name: "FeatureName"))
+    DBClusterAssociatedRole.struct_class = Types::DBClusterAssociatedRole
+
+    DBClusterAssociatedRoles.member = Shapes::ShapeRef.new(shape: DBClusterAssociatedRole, location_name: "DBClusterAssociatedRole")
 
     DBClusterAutomatedBackup.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     DBClusterAutomatedBackup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
@@ -3276,6 +3286,7 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:enable_limitless_database, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLimitlessDatabase"))
     ModifyDBClusterMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     ModifyDBClusterMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
+    ModifyDBClusterMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     ModifyDBClusterMessage.struct_class = Types::ModifyDBClusterMessage
 
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))
@@ -3358,6 +3369,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: ModifyAdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     ModifyDBInstanceMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     ModifyDBInstanceMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
+    ModifyDBInstanceMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3848,7 +3860,7 @@ module Aws::RDS
     RemoveFromGlobalClusterResult.struct_class = Types::RemoveFromGlobalClusterResult
 
     RemoveRoleFromDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
-    RemoveRoleFromDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
+    RemoveRoleFromDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
     RemoveRoleFromDBClusterMessage.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, location_name: "FeatureName"))
     RemoveRoleFromDBClusterMessage.struct_class = Types::RemoveRoleFromDBClusterMessage
 
@@ -3972,6 +3984,7 @@ module Aws::RDS
     RestoreDBClusterFromS3Message.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
     RestoreDBClusterFromS3Message.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     RestoreDBClusterFromS3Message.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
+    RestoreDBClusterFromS3Message.add_member(:associated_roles, Shapes::ShapeRef.new(shape: DBClusterAssociatedRoles, location_name: "AssociatedRoles"))
     RestoreDBClusterFromS3Message.struct_class = Types::RestoreDBClusterFromS3Message
 
     RestoreDBClusterFromS3Result.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -4017,6 +4030,7 @@ module Aws::RDS
     RestoreDBClusterFromSnapshotMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     RestoreDBClusterFromSnapshotMessage.add_member(:enable_vpc_networking, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableVPCNetworking"))
     RestoreDBClusterFromSnapshotMessage.add_member(:enable_internet_access_gateway, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableInternetAccessGateway"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:associated_roles, Shapes::ShapeRef.new(shape: DBClusterAssociatedRoles, location_name: "AssociatedRoles"))
     RestoreDBClusterFromSnapshotMessage.struct_class = Types::RestoreDBClusterFromSnapshotMessage
 
     RestoreDBClusterFromSnapshotResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -4062,6 +4076,7 @@ module Aws::RDS
     RestoreDBClusterToPointInTimeMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     RestoreDBClusterToPointInTimeMessage.add_member(:enable_vpc_networking, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableVPCNetworking"))
     RestoreDBClusterToPointInTimeMessage.add_member(:enable_internet_access_gateway, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableInternetAccessGateway"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:associated_roles, Shapes::ShapeRef.new(shape: DBClusterAssociatedRoles, location_name: "AssociatedRoles"))
     RestoreDBClusterToPointInTimeMessage.struct_class = Types::RestoreDBClusterToPointInTimeMessage
 
     RestoreDBClusterToPointInTimeResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -4842,6 +4857,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
@@ -6561,6 +6577,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
@@ -6596,6 +6613,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
@@ -6626,6 +6644,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.6.0 (2026-07-02)
+------------------
+
+* Feature - Adding new BDD representation of endpoint ruleset
+
 1.5.0 (2026-05-27)
 ------------------
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2026-07-23)
+------------------
+
+* Feature - Adds support for the Bring Your Own Storage(BYOS) feature in AgentCore Browser and Code Interpreter. Enables mounting S3Files and EFS File Systems via Access points.
+
+1.58.0 (2026-07-20)
+------------------
+
+* Feature - This release adds support for specifying a connector version on Gateway targets to pin the connector's tool schema. It also introduces web-search connector version 1.2.0, which adds agent-side domain filtering, published date range filtering, and admin-side domain allowlisting.
+
+1.57.0 (2026-07-15)
+------------------
+
+* Feature - Fix HarnessEndpointArn pattern to match the actual service-emitted ARN format ('harness-endpoint' instead of 'endpoint'). Add additionalParams to Gemini model configuration for passing provider-specific parameters through to the model unchanged.
+
+1.56.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.55.0 (2026-07-08)
+------------------
+
+* Feature - AgentCore Gateway now supports mapping allowed scopes to separate advertised scopes on the inbound authorizer.
+
 1.54.0 (2026-06-17)
 ------------------
 

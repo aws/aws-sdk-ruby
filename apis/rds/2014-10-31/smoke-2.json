@@ -1,13 +1,11 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "DescribeDBInstancesFailure",
-    "operationName" : "DescribeDBInstances",
-    "input" : {
-      "DBInstanceIdentifier" : "fake-id"
-    },
+    "id" : "DescribeDBEngineVersionsSuccess",
+    "operationName" : "DescribeDBEngineVersions",
+    "input" : { },
     "expectation" : {
-      "failure" : { }
+      "success" : { }
     },
     "config" : {
       "region" : "us-west-2",
@@ -115,11 +113,13 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "DescribeDBEngineVersionsSuccess",
-    "operationName" : "DescribeDBEngineVersions",
-    "input" : { },
+    "id" : "DescribeDBInstancesFailure",
+    "operationName" : "DescribeDBInstances",
+    "input" : {
+      "DBInstanceIdentifier" : "fake-id"
+    },
     "expectation" : {
-      "success" : { }
+      "failure" : { }
     },
     "config" : {
       "region" : "us-west-2",

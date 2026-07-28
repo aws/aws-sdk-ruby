@@ -51,6 +51,7 @@ module Aws::ConfigService
   # * {MaxNumberOfConfigRulesExceededException}
   # * {MaxNumberOfConfigurationRecordersExceededException}
   # * {MaxNumberOfConformancePacksExceededException}
+  # * {MaxNumberOfConnectorsExceededException}
   # * {MaxNumberOfDeliveryChannelsExceededException}
   # * {MaxNumberOfOrganizationConfigRulesExceededException}
   # * {MaxNumberOfOrganizationConformancePacksExceededException}
@@ -330,6 +331,16 @@ module Aws::ConfigService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ConfigService::Types::MaxNumberOfConformancePacksExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class MaxNumberOfConnectorsExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ConfigService::Types::MaxNumberOfConnectorsExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

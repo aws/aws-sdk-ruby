@@ -67,9 +67,11 @@ module Aws::RedshiftServerless
     #   you define performance boundaries. You can either specify individual
     #   query monitoring metrics (such as `max_scan_row_count`,
     #   `max_query_execution_time`) or use `wlm_json_configuration` to
-    #   define query queues with rules, but not both. For more information
-    #   about query monitoring rules and available metrics, see [Query
-    #   monitoring metrics for Amazon Redshift Serverless][1].
+    #   define query queues with rules, but not both. If you're using
+    #   `wlm_json_configuration`, the maximum size of `parameterValue` is
+    #   8000 characters. For more information about query monitoring rules
+    #   and available metrics, see [Query monitoring metrics for Amazon
+    #   Redshift Serverless][1].
     #
     #
     #
@@ -2770,6 +2772,15 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] maintain_integration
+    #   If `true`, maintain existing data sharing, zero-ETL and S3 event
+    #   integrations when restoring. Otherwise, integrations will not be
+    #   maintained after the restore operation. Integrations are only
+    #   maintained when restored to the same serverless namespace.
+    #
+    #   Default: true
+    #   @return [Boolean]
+    #
     # @!attribute [rw] namespace_name
     #   The name of the namespace to restore data into.
     #   @return [String]
@@ -2785,6 +2796,7 @@ module Aws::RedshiftServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/RestoreFromRecoveryPointRequest AWS API Documentation
     #
     class RestoreFromRecoveryPointRequest < Struct.new(
+      :maintain_integration,
       :namespace_name,
       :recovery_point_id,
       :workgroup_name)
@@ -2813,6 +2825,15 @@ module Aws::RedshiftServerless
     #   The ID of the Key Management Service (KMS) key used to encrypt and
     #   store the namespace's admin credentials secret.
     #   @return [String]
+    #
+    # @!attribute [rw] maintain_integration
+    #   If `true`, maintain existing data sharing, zero-ETL and S3 event
+    #   integrations when restoring. Otherwise, integrations will not be
+    #   maintained after the restore operation. Integrations are only
+    #   maintained when restored to the same serverless namespace.
+    #
+    #   Default: true
+    #   @return [Boolean]
     #
     # @!attribute [rw] manage_admin_password
     #   If `true`, Amazon Redshift uses Secrets Manager to manage the
@@ -2852,6 +2873,7 @@ module Aws::RedshiftServerless
     #
     class RestoreFromSnapshotRequest < Struct.new(
       :admin_password_secret_kms_key_id,
+      :maintain_integration,
       :manage_admin_password,
       :namespace_name,
       :owner_account,

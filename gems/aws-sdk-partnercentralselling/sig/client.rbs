@@ -104,7 +104,7 @@ module Aws
       def associate_opportunity: (
                                    catalog: ::String,
                                    opportunity_identifier: ::String,
-                                   related_entity_type: ("Solutions" | "AwsProducts" | "AwsMarketplaceOffers" | "AwsMarketplaceOfferSets"),
+                                   related_entity_type: ("Solutions" | "AwsProducts" | "AwsMarketplaceOffers" | "AwsMarketplaceOfferSets" | "AwsMarketplaceSolutions" | "AwsMarketplaceProducts"),
                                    related_entity_identifier: ::String
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -314,7 +314,7 @@ module Aws
       def disassociate_opportunity: (
                                       catalog: ::String,
                                       opportunity_identifier: ::String,
-                                      related_entity_type: ("Solutions" | "AwsProducts" | "AwsMarketplaceOffers" | "AwsMarketplaceOfferSets"),
+                                      related_entity_type: ("Solutions" | "AwsProducts" | "AwsMarketplaceOffers" | "AwsMarketplaceOfferSets" | "AwsMarketplaceSolutions" | "AwsMarketplaceProducts"),
                                       related_entity_identifier: ::String
                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -735,7 +735,8 @@ module Aws
                             },
                             ?status: Array[("Active" | "Inactive" | "Draft")],
                             ?identifier: Array[::String],
-                            ?category: Array[::String]
+                            ?category: Array[::String],
+                            ?aws_marketplace_solution_arn: Array[::String]
                           ) -> _ListSolutionsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSolutionsResponseSuccess
 

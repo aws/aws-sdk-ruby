@@ -41,6 +41,73 @@ module Aws::Odb
       include Aws::Structure
     end
 
+    # The configuration of the admin password source. This is a union, so
+    # only one of the following members can be specified.
+    #
+    # @note AdminPasswordSourceConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AdminPasswordSourceConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] customer_managed_aws_secret
+    #   The configuration for a customer-managed Amazon Web Services Secrets
+    #   Manager secret used as the admin password source.
+    #   @return [Types::CustomerManagedAwsSecretConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AdminPasswordSourceConfiguration AWS API Documentation
+    #
+    class AdminPasswordSourceConfiguration < Struct.new(
+      :customer_managed_aws_secret,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CustomerManagedAwsSecret < AdminPasswordSourceConfiguration; end
+      class Unknown < AdminPasswordSourceConfiguration; end
+    end
+
+    # The input configuration for the admin password source. This is a
+    # union, so only one of the following members can be specified.
+    #
+    # @note AdminPasswordSourceConfigurationInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] customer_managed_aws_secret
+    #   The configuration for using a customer-managed Amazon Web Services
+    #   Secrets Manager secret as the admin password source.
+    #   @return [Types::CustomerManagedAwsSecretConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AdminPasswordSourceConfigurationInput AWS API Documentation
+    #
+    class AdminPasswordSourceConfigurationInput < Struct.new(
+      :customer_managed_aws_secret,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CustomerManagedAwsSecret < AdminPasswordSourceConfigurationInput; end
+      class Unknown < AdminPasswordSourceConfigurationInput; end
+    end
+
+    # A summary of the admin password source configuration for an Autonomous
+    # Database.
+    #
+    # @!attribute [rw] admin_password_source
+    #   The source of the admin password for the Autonomous Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_password_source_configuration
+    #   The configuration of the admin password source for the Autonomous
+    #   Database.
+    #   @return [Types::AdminPasswordSourceConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AdminPasswordSourceSummary AWS API Documentation
+    #
+    class AdminPasswordSourceSummary < Struct.new(
+      :admin_password_source,
+      :admin_password_source_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] iam_role_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
     #   and Access Management (IAM) service role to associate with the
@@ -558,6 +625,11 @@ module Aws::Odb
     #   deletion.
     #   @return [Time]
     #
+    # @!attribute [rw] admin_password_source_summary
+    #   The summary of the admin password source configuration for the
+    #   Autonomous Database.
+    #   @return [Types::AdminPasswordSourceSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AutonomousDatabase AWS API Documentation
     #
     class AutonomousDatabase < Struct.new(
@@ -663,7 +735,8 @@ module Aws::Odb
       :time_disaster_recovery_role_changed,
       :time_until_reconnect_clone_enabled,
       :next_long_term_backup_time_stamp,
-      :time_undeleted)
+      :time_undeleted,
+      :admin_password_source_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1501,6 +1574,11 @@ module Aws::Odb
     #   deletion.
     #   @return [Time]
     #
+    # @!attribute [rw] admin_password_source_summary
+    #   The summary of the admin password source configuration for the
+    #   Autonomous Database.
+    #   @return [Types::AdminPasswordSourceSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AutonomousDatabaseSummary AWS API Documentation
     #
     class AutonomousDatabaseSummary < Struct.new(
@@ -1606,7 +1684,8 @@ module Aws::Odb
       :time_disaster_recovery_role_changed,
       :time_until_reconnect_clone_enabled,
       :next_long_term_backup_time_stamp,
-      :time_undeleted)
+      :time_undeleted,
+      :admin_password_source_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1649,11 +1728,17 @@ module Aws::Odb
     #   rotated.
     #   @return [Time]
     #
+    # @!attribute [rw] password_source_summary
+    #   The summary of the password source configuration for the Autonomous
+    #   Database wallet.
+    #   @return [Types::WalletPasswordSourceSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AutonomousDatabaseWalletDetails AWS API Documentation
     #
     class AutonomousDatabaseWalletDetails < Struct.new(
       :status,
-      :time_rotated)
+      :time_rotated,
+      :password_source_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3752,6 +3837,17 @@ module Aws::Odb
     #   Database.
     #   @return [Types::EncryptionKeyConfigurationInput]
     #
+    # @!attribute [rw] admin_password_source
+    #   The source of the admin password for the Autonomous Database. When
+    #   set to `CUSTOMER_MANAGED_AWS_SECRET`, the admin password is
+    #   retrieved from an Amazon Web Services Secrets Manager secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_password_source_configuration
+    #   The configuration of the admin password source for the Autonomous
+    #   Database.
+    #   @return [Types::AdminPasswordSourceConfigurationInput]
+    #
     # @!attribute [rw] client_token
     #   A client-provided token to ensure the idempotency of the request.
     #
@@ -3804,6 +3900,8 @@ module Aws::Odb
       :source_configuration,
       :encryption_key_provider,
       :encryption_key_configuration,
+      :admin_password_source,
+      :admin_password_source_configuration,
       :client_token,
       :tags)
       SENSITIVE = [:admin_password]
@@ -3852,6 +3950,17 @@ module Aws::Odb
     #   The password to encrypt the keys inside the wallet.
     #   @return [String]
     #
+    # @!attribute [rw] password_source
+    #   The source of the password for encrypting the wallet. When set to
+    #   `CUSTOMER_MANAGED_AWS_SECRET`, the password is retrieved from an
+    #   Amazon Web Services Secrets Manager secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] password_source_configuration
+    #   The configuration of the password source for the Autonomous Database
+    #   wallet.
+    #   @return [Types::WalletPasswordSourceConfigurationInput]
+    #
     # @!attribute [rw] client_token
     #   A client-provided token to ensure the idempotency of the request.
     #
@@ -3865,6 +3974,8 @@ module Aws::Odb
       :autonomous_database_id,
       :wallet_type,
       :password,
+      :password_source,
+      :password_source_configuration,
       :client_token)
       SENSITIVE = [:password]
       include Aws::Structure
@@ -4668,6 +4779,70 @@ module Aws::Odb
     class CustomerContact < Struct.new(
       :email)
       SENSITIVE = [:email]
+      include Aws::Structure
+    end
+
+    # The configuration of a customer-managed Amazon Web Services Secrets
+    # Manager secret used to supply a password.
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) role that OCI assumes to retrieve the
+    #   secret value.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_id
+    #   The identifier or ARN of the Amazon Web Services Secrets Manager
+    #   secret that contains the password.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id_type
+    #   The type of Oracle Cloud Identifier (OCID) used as the external ID
+    #   when assuming the IAM role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CustomerManagedAwsSecretConfiguration AWS API Documentation
+    #
+    class CustomerManagedAwsSecretConfiguration < Struct.new(
+      :iam_role_arn,
+      :secret_id,
+      :external_id_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input configuration for a customer-managed Amazon Web Services
+    # Secrets Manager secret used to supply a password.
+    #
+    # @!attribute [rw] secret_id
+    #   The identifier or ARN of the Amazon Web Services Secrets Manager
+    #   secret that contains the password.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) role that OCI assumes to retrieve the
+    #   secret value.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id_type
+    #   The type of Oracle Cloud Identifier (OCID) used as the external ID
+    #   when assuming the IAM role.
+    #
+    #   The valid values depend on the operation. For the
+    #   `CreateAutonomousDatabase` operation, only `compartment_ocid` and
+    #   `tenant_ocid` are allowed. For the `UpdateAutonomousDatabase` and
+    #   `CreateAutonomousDatabaseWallet` operations, `database_ocid`,
+    #   `compartment_ocid`, and `tenant_ocid` are all allowed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CustomerManagedAwsSecretConfigurationInput AWS API Documentation
+    #
+    class CustomerManagedAwsSecretConfigurationInput < Struct.new(
+      :secret_id,
+      :iam_role_arn,
+      :external_id_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6378,10 +6553,17 @@ module Aws::Odb
     #   for service initialization.
     #   @return [Boolean]
     #
+    # @!attribute [rw] autonomous_database_oci_aws_secrets_manager_integration
+    #   Specifies whether to enable or disable the OCI service-account role
+    #   for Amazon Web Services Secrets Manager integration with Autonomous
+    #   Database.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/InitializeServiceInput AWS API Documentation
     #
     class InitializeServiceInput < Struct.new(
-      :oci_identity_domain)
+      :oci_identity_domain,
+      :autonomous_database_oci_aws_secrets_manager_integration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7488,11 +7670,22 @@ module Aws::Odb
     #   role.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the IAM service role.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the current status of the IAM service
+    #   role, if applicable.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/OciIamRole AWS API Documentation
     #
     class OciIamRole < Struct.new(
       :iam_role_arn,
-      :aws_integration)
+      :aws_integration,
+      :status,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9048,6 +9241,17 @@ module Aws::Odb
     #   Database.
     #   @return [Types::EncryptionKeyConfigurationInput]
     #
+    # @!attribute [rw] admin_password_source
+    #   The source of the admin password for the Autonomous Database. When
+    #   set to `CUSTOMER_MANAGED_AWS_SECRET`, the admin password is
+    #   retrieved from an Amazon Web Services Secrets Manager secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_password_source_configuration
+    #   The configuration of the admin password source for the Autonomous
+    #   Database.
+    #   @return [Types::AdminPasswordSourceConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateAutonomousDatabaseInput AWS API Documentation
     #
     class UpdateAutonomousDatabaseInput < Struct.new(
@@ -9093,7 +9297,9 @@ module Aws::Odb
       :auto_refresh_point_lag_in_seconds,
       :time_of_auto_refresh_start,
       :encryption_key_provider,
-      :encryption_key_configuration)
+      :encryption_key_configuration,
+      :admin_password_source,
+      :admin_password_source_configuration)
       SENSITIVE = [:admin_password]
       include Aws::Structure
     end
@@ -9386,6 +9592,73 @@ module Aws::Odb
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the wallet password source. This is a union, so
+    # only one of the following members can be specified.
+    #
+    # @note WalletPasswordSourceConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of WalletPasswordSourceConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] customer_managed_aws_secret
+    #   The configuration for a customer-managed Amazon Web Services Secrets
+    #   Manager secret used as the wallet password source.
+    #   @return [Types::CustomerManagedAwsSecretConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/WalletPasswordSourceConfiguration AWS API Documentation
+    #
+    class WalletPasswordSourceConfiguration < Struct.new(
+      :customer_managed_aws_secret,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CustomerManagedAwsSecret < WalletPasswordSourceConfiguration; end
+      class Unknown < WalletPasswordSourceConfiguration; end
+    end
+
+    # The input configuration for the wallet password source. This is a
+    # union, so only one of the following members can be specified.
+    #
+    # @note WalletPasswordSourceConfigurationInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] customer_managed_aws_secret
+    #   The configuration for using a customer-managed Amazon Web Services
+    #   Secrets Manager secret as the wallet password source.
+    #   @return [Types::CustomerManagedAwsSecretConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/WalletPasswordSourceConfigurationInput AWS API Documentation
+    #
+    class WalletPasswordSourceConfigurationInput < Struct.new(
+      :customer_managed_aws_secret,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CustomerManagedAwsSecret < WalletPasswordSourceConfigurationInput; end
+      class Unknown < WalletPasswordSourceConfigurationInput; end
+    end
+
+    # A summary of the password source configuration for an Autonomous
+    # Database wallet.
+    #
+    # @!attribute [rw] password_source
+    #   The source of the password for the Autonomous Database wallet.
+    #   @return [String]
+    #
+    # @!attribute [rw] password_source_configuration
+    #   The configuration of the password source for the Autonomous Database
+    #   wallet.
+    #   @return [Types::WalletPasswordSourceConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/WalletPasswordSourceSummary AWS API Documentation
+    #
+    class WalletPasswordSourceSummary < Struct.new(
+      :password_source,
+      :password_source_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

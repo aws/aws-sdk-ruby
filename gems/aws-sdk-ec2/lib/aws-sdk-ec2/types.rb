@@ -535,6 +535,111 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the account-level VPC Encryption Control configuration,
+    # including its mode, state, and exclusions.
+    #
+    # For more information, see [Enforce VPC encryption in transit][1] in
+    # the *Amazon VPC User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html
+    #
+    # @!attribute [rw] state
+    #   The current state of the account-level VPC Encryption Control
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The encryption mode for the account-level VPC Encryption Control
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusions
+    #   Information about the traffic exclusions for the account-level VPC
+    #   Encryption Control configuration.
+    #   @return [Types::AccountVpcEncryptionControlExclusions]
+    #
+    # @!attribute [rw] managed_by
+    #   The entity that manages the account-level VPC Encryption Control
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_timestamp
+    #   The date and time when the account-level VPC Encryption Control
+    #   configuration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountVpcEncryptionControl AWS API Documentation
+    #
+    class AccountVpcEncryptionControl < Struct.new(
+      :state,
+      :mode,
+      :exclusions,
+      :managed_by,
+      :last_update_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the exclusion configurations for the various resource types
+    # in the account-level VPC Encryption Control configuration.
+    #
+    # For more information, see [Enforce VPC encryption in transit][1] in
+    # the *Amazon VPC User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html
+    #
+    # @!attribute [rw] internet_gateway
+    #   The exclusion configuration for internet gateway resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_only_internet_gateway
+    #   The exclusion configuration for egress-only internet gateway
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway
+    #   The exclusion configuration for NAT gateway resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_private_gateway
+    #   The exclusion configuration for virtual private gateway resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_peering
+    #   The exclusion configuration for VPC peering connection resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda
+    #   The exclusion configuration for Lambda service.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_lattice
+    #   The exclusion configuration for VPC Lattice service.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_file_system
+    #   The exclusion configuration for Elastic File System service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountVpcEncryptionControlExclusions AWS API Documentation
+    #
+    class AccountVpcEncryptionControlExclusions < Struct.new(
+      :internet_gateway,
+      :egress_only_internet_gateway,
+      :nat_gateway,
+      :virtual_private_gateway,
+      :vpc_peering,
+      :lambda,
+      :vpc_lattice,
+      :elastic_file_system)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a running instance in a Spot Fleet.
     #
     # @!attribute [rw] instance_id
@@ -1228,6 +1333,10 @@ module Aws::EC2
     #   The ID of the Availability Zone.
     #   @return [String]
     #
+    # @!attribute [rw] cpu_options
+    #   The CPU configuration options to apply to the Dedicated Host.
+    #   @return [Types::HostCpuOptionsRequest]
+    #
     # @!attribute [rw] auto_placement
     #   Indicates whether the host accepts any untargeted instance launches
     #   that match its instance type configuration, or if it only accepts
@@ -1287,6 +1396,7 @@ module Aws::EC2
       :host_maintenance,
       :asset_ids,
       :availability_zone_id,
+      :cpu_options,
       :auto_placement,
       :client_token,
       :instance_type,
@@ -10427,6 +10537,26 @@ module Aws::EC2
     #   Otherwise, the value is blank.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which the instance was launched.
+    #   For example, `use2-az1`.
+    #
+    #   Supported only for fleets of type `instant`.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The name of the Availability Zone in which the instance was
+    #   launched. For example, `us-east-2a`.
+    #
+    #   Supported only for fleets of type `instant`.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which the instance was launched.
+    #
+    #   Supported only for fleets of type `instant`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetInstance AWS API Documentation
     #
     class CreateFleetInstance < Struct.new(
@@ -10434,7 +10564,10 @@ module Aws::EC2
       :lifecycle,
       :instance_ids,
       :instance_type,
-      :platform)
+      :platform,
+      :availability_zone_id,
+      :availability_zone,
+      :subnet_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10550,12 +10683,14 @@ module Aws::EC2
     #   For more information, see [Tag your resources][1].
     #
     #   If the fleet type is `instant`, specify a resource type of `fleet`
-    #   to tag the fleet or `instance` to tag the instances at launch.
+    #   to tag the fleet, `instance` to tag the instances at launch,
+    #   `volume` to tag the volumes at launch, or `network-interface` to tag
+    #   the network interfaces at launch.
     #
     #   If the fleet type is `maintain` or `request`, specify a resource
     #   type of `fleet` to tag the fleet. You cannot specify a resource type
-    #   of `instance`. To tag instances at launch, specify the tags in a
-    #   [launch template][2].
+    #   of `instance`, `volume`, or `network-interface`. To tag instances at
+    #   launch, specify the tags in a [launch template][2].
     #
     #
     #
@@ -13515,6 +13650,11 @@ module Aws::EC2
     #   Reserved for internal use.
     #   @return [Types::OperatorRequest]
     #
+    # @!attribute [rw] parent_group_id
+    #   The ID of a parent placement group. Valid only when **Strategy** is
+    #   set to `cluster`.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -13541,6 +13681,7 @@ module Aws::EC2
       :spread_level,
       :linked_group_id,
       :operator,
+      :parent_group_id,
       :dry_run,
       :group_name,
       :strategy)
@@ -13619,8 +13760,9 @@ module Aws::EC2
     #   previously created from the original root volume.
     #
     #   If you want to restore the replacement root volume to the initial
-    #   launch state, or if you want to restore the replacement root volume
-    #   from an AMI, omit this parameter.
+    #   launch state, if you want to restore the replacement root volume
+    #   from an AMI, or if you want to replace the root volume with a
+    #   specified volume, omit this parameter.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -13654,8 +13796,9 @@ module Aws::EC2
     #   architecture type, and virtualization type as that of the instance.
     #
     #   If you want to restore the replacement volume from a specific
-    #   snapshot, or if you want to restore it to its launch state, omit
-    #   this parameter.
+    #   snapshot, if you want to restore it to its launch state, or if you
+    #   want to replace the root volume with a specified volume, omit this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] delete_replaced_root_volume
@@ -13700,6 +13843,17 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_id
+    #   The ID of the volume to use as the replacement root volume. The
+    #   specified volume must be in the same Availability Zone as the
+    #   instance, must be in the `available` state, and must not be attached
+    #   to an instance. If the original root volume is encrypted, the
+    #   specified volume must also be encrypted.
+    #
+    #   If you want to restore the replacement root volume from a specific
+    #   snapshot, an AMI, or to its launch state, omit this parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTaskRequest AWS API Documentation
     #
     class CreateReplaceRootVolumeTaskRequest < Struct.new(
@@ -13710,7 +13864,8 @@ module Aws::EC2
       :tag_specifications,
       :image_id,
       :delete_replaced_root_volume,
-      :volume_initialization_rate)
+      :volume_initialization_rate,
+      :volume_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21717,6 +21872,34 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAccountVpcEncryptionControlRequest AWS API Documentation
+    #
+    class DescribeAccountVpcEncryptionControlRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_vpc_encryption_control
+    #   Information about the account-level VPC Encryption Control
+    #   configuration.
+    #   @return [Types::AccountVpcEncryptionControl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAccountVpcEncryptionControlResult AWS API Documentation
+    #
+    class DescribeAccountVpcEncryptionControlResult < Struct.new(
+      :account_vpc_encryption_control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] allocation_ids
     #   The allocation IDs of Elastic IP addresses.
     #   @return [Array<String>]
@@ -25632,6 +25815,27 @@ module Aws::EC2
     #
     #   * `image-id` - The ID of the image.
     #
+    #   * `image-watermark.source-image-creation-time` - The creation date
+    #     of the source AMI, in the ISO 8601 format in the UTC time zone (`
+    #     YYYY-MM-DDTHH:MM:SS.ssssss+HH:MM `). You can use a wildcard (`*`),
+    #     for example, `2021-09-29T*`, which matches an entire day.
+    #
+    #   * `image-watermark.source-image-id` - The ID of the AMI to which the
+    #     watermark was originally attached.
+    #
+    #   * `image-watermark.source-image-region` - The Region where the
+    #     watermark was originally attached.
+    #
+    #   * `image-watermark.watermark-creation-time` - The date and time the
+    #     watermark was attached to the AMI, in the ISO 8601 format in the
+    #     UTC time zone (` YYYY-MM-DDTHH:MM:SS.ssssss+HH:MM `). You can use
+    #     a wildcard (`*`), for example, `2021-09-29T*`, which matches an
+    #     entire day.
+    #
+    #   * `image-watermark.watermark-key` - The watermark identifier, in
+    #     `accountId:watermarkName` format (for example,
+    #     `123456789012:approvedAmi`).
+    #
     #   * `image-type` - The image type (`machine` \| `kernel` \|
     #     `ramdisk`).
     #
@@ -25661,6 +25865,12 @@ module Aws::EC2
     #
     #   * `product-code.type` - The type of the product code
     #     (`marketplace`).
+    #
+    #   * `public-ssm-parameter-name` - The name of a public Systems Manager
+    #     parameter associated with the AMI. The parameter must be in a
+    #     trusted Amazon Web Services namespace under `aws/service/`.
+    #     Returns all AMIs that have ever been associated with the
+    #     parameter, including previous versions.
     #
     #   * `ramdisk-id` - The RAM disk ID.
     #
@@ -30353,7 +30563,7 @@ module Aws::EC2
     #     `available` \| `deleting` \| `deleted`).
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
-    #     `spread` \| `partition`).
+    #     `spread` \| `partition` \| `precision-time`).
     #
     #   * `tag:<key>` - The key/value combination of a tag assigned to the
     #     resource. Use the tag key in the filter name and the tag value as
@@ -34990,6 +35200,13 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
+    # @!attribute [rw] include_managed_resources
+    #   Indicates whether to include managed resources in the output. If
+    #   this parameter is set to `true`, the output includes resources that
+    #   are managed by Amazon Web Services services, even if managed
+    #   resource visibility is set to hidden.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesModificationsRequest AWS API Documentation
     #
     class DescribeVolumesModificationsRequest < Struct.new(
@@ -34997,7 +35214,8 @@ module Aws::EC2
       :volume_ids,
       :filters,
       :next_token,
-      :max_results)
+      :max_results,
+      :include_managed_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42739,6 +42957,67 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an IAM instance profile. Supported only for fleets of type
+    # `instant`.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the instance profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetIamInstanceProfileSpecificationRequest AWS API Documentation
+    #
+    class FleetIamInstanceProfileSpecificationRequest < Struct.new(
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the metadata options for the instances. Supported only for
+    # fleets of type `instant`.
+    #
+    # @!attribute [rw] http_tokens
+    #   Indicates whether IMDSv2 is required.
+    #
+    #   * `optional` - IMDSv2 is optional, which means that you can use
+    #     either IMDSv2 or IMDSv1.
+    #
+    #   * `required` - IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. The larger the number, the further instance metadata
+    #   requests can travel.
+    #
+    #   Default: `1`
+    #
+    #   Possible values: Integers from 1 to 64
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_endpoint
+    #   Enables or disables the HTTP metadata endpoint on your instances.
+    #
+    #   * `enabled` - The HTTP metadata endpoint is enabled.
+    #
+    #   * `disabled` - The HTTP metadata endpoint is disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetInstanceMetadataOptionsRequest AWS API Documentation
+    #
+    class FleetInstanceMetadataOptionsRequest < Struct.new(
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a launch template and overrides.
     #
     # @!attribute [rw] launch_template_specification
@@ -43045,6 +43324,19 @@ module Aws::EC2
     #   The location where the instance launched, if applicable.
     #   @return [Types::Placement]
     #
+    # @!attribute [rw] key_name
+    #   The name of the key pair to use for the instances.
+    #
+    #   Supported only for fleets of type `instant`.
+    #
+    #   For more information, see [Amazon EC2 key pairs][1] in the *Amazon
+    #   EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    #   @return [String]
+    #
     # @!attribute [rw] block_device_mappings
     #   The block device mappings, which define the EBS volumes and instance
     #   store volumes to attach to the instance at launch.
@@ -43058,6 +43350,32 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
     #   @return [Array<Types::FleetBlockDeviceMappingRequest>]
+    #
+    # @!attribute [rw] iam_instance_profile
+    #   The IAM instance profile to associate with the instances.
+    #
+    #   Supported only for fleets of type `instant`.
+    #
+    #   For more information, see [IAM roles for Amazon EC2][1] in the
+    #   *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
+    #   @return [Types::FleetIamInstanceProfileSpecificationRequest]
+    #
+    # @!attribute [rw] metadata_options
+    #   The metadata options for the instances.
+    #
+    #   Supported only for fleets of type `instant`.
+    #
+    #   For more information, see [Configure the instance metadata
+    #   service][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
+    #   @return [Types::FleetInstanceMetadataOptionsRequest]
     #
     # @!attribute [rw] instance_requirements
     #   The attributes for the instance types. When you specify instance
@@ -43132,7 +43450,10 @@ module Aws::EC2
       :weighted_capacity,
       :priority,
       :placement,
+      :key_name,
       :block_device_mappings,
+      :iam_instance_profile,
+      :metadata_options,
       :instance_requirements,
       :image_id,
       :availability_zone_id)
@@ -43222,13 +43543,22 @@ module Aws::EC2
     #   the launch template.
     #   @return [String]
     #
+    # @!attribute [rw] launch_template_specification_user_data
+    #   The base64-encoded user data for instances launched by the fleet.
+    #   User data is limited to 16 KB, in raw form, before it is
+    #   base64-encoded.
+    #
+    #   Supported only for fleets of type `instant`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecificationRequest AWS API Documentation
     #
     class FleetLaunchTemplateSpecificationRequest < Struct.new(
       :launch_template_id,
       :launch_template_name,
-      :version)
-      SENSITIVE = []
+      :version,
+      :launch_template_specification_user_data)
+      SENSITIVE = [:launch_template_specification_user_data]
       include Aws::Structure
     end
 
@@ -47998,6 +48328,12 @@ module Aws::EC2
     #   allocated.
     #   @return [String]
     #
+    # @!attribute [rw] cpu_options
+    #   The CPU options for the Dedicated Host, including AMD Secure
+    #   Encrypted Virtualization-Secure Nested Paging (AMD SEV-SNP)
+    #   settings.
+    #   @return [Types::HostCpuOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
     #
     class Host < Struct.new(
@@ -48020,7 +48356,43 @@ module Aws::EC2
       :member_of_service_linked_resource_group,
       :outpost_arn,
       :host_maintenance,
-      :asset_id)
+      :asset_id,
+      :cpu_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the CPU options for a Dedicated Host, including AMD Secure
+    # Encrypted Virtualization-Secure Nested Paging (AMD SEV-SNP) settings.
+    #
+    # @!attribute [rw] amd_sev_snp
+    #   Specifies whether AMD Secure Encrypted Virtualization-Secure Nested
+    #   Paging (AMD SEV-SNP) is enabled or disabled for the Dedicated Host.
+    #   If you don't specify a value, AMD SEV-SNP is `disabled`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostCpuOptions AWS API Documentation
+    #
+    class HostCpuOptions < Struct.new(
+      :amd_sev_snp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the CPU configuration options for a Dedicated Host allocation
+    # request. Options include AMD Secure Encrypted Virtualization-Secure
+    # Nested Paging (AMD SEV-SNP) settings.
+    #
+    # @!attribute [rw] amd_sev_snp
+    #   Specifies whether AMD Secure Encrypted Virtualization-Secure Nested
+    #   Paging (AMD SEV-SNP) is enabled or disabled for the Dedicated Host.
+    #   If you don't specify a value, AMD SEV-SNP is `disabled`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostCpuOptionsRequest AWS API Documentation
+    #
+    class HostCpuOptionsRequest < Struct.new(
+      :amd_sev_snp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48551,6 +48923,11 @@ module Aws::EC2
     #   * If `false`, the AMI is not eligible for Free Tier.
     #   @return [Boolean]
     #
+    # @!attribute [rw] public_ssm_parameter_name
+    #   The name of the public Systems Manager parameter that resolves to
+    #   this AMI, under the `aws/service/` namespace.
+    #   @return [String]
+    #
     # @!attribute [rw] image_watermarks
     #   The watermarks attached to the AMI.
     #   @return [Array<Types::ImageWatermark>]
@@ -48637,6 +49014,7 @@ module Aws::EC2
       :source_image_id,
       :source_image_region,
       :free_tier_eligible,
+      :public_ssm_parameter_name,
       :image_watermarks,
       :image_id,
       :image_location,
@@ -60992,6 +61370,88 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] mode
+    #   The encryption mode for the account encryption control
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] internet_gateway
+    #   Specifies whether to exclude internet gateway resource from
+    #   account-level encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_only_internet_gateway
+    #   Specifies whether to exclude egress-only internet gateway resource
+    #   from account-level encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway
+    #   Specifies whether to exclude NAT gateway resource from account-level
+    #   encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_private_gateway
+    #   Specifies whether to exclude virtual private gateway resource from
+    #   account-level encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_peering
+    #   Specifies whether to exclude VPC peering connection resource from
+    #   account-level encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda
+    #   Specifies whether to exclude Lambda service from account-level
+    #   encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_lattice
+    #   Specifies whether to exclude VPC Lattice service from account-level
+    #   encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_file_system
+    #   Specifies whether to exclude Elastic File System service from
+    #   account-level encryption enforcement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAccountVpcEncryptionControlRequest AWS API Documentation
+    #
+    class ModifyAccountVpcEncryptionControlRequest < Struct.new(
+      :dry_run,
+      :mode,
+      :internet_gateway,
+      :egress_only_internet_gateway,
+      :nat_gateway,
+      :virtual_private_gateway,
+      :vpc_peering,
+      :lambda,
+      :vpc_lattice,
+      :elastic_file_system)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_vpc_encryption_control
+    #   Information about the account-level VPC Encryption Control
+    #   configuration.
+    #   @return [Types::AccountVpcEncryptionControl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAccountVpcEncryptionControlResult AWS API Documentation
+    #
+    class ModifyAccountVpcEncryptionControlResult < Struct.new(
+      :account_vpc_encryption_control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] allocation_id
     #   \[EC2-VPC\] The allocation ID.
     #   @return [String]
@@ -65944,6 +66404,60 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] service_id
+    #   The ID of the VPC endpoint service.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] payer_responsibility
+    #   The Amazon Web Services account to which the usage of VPC endpoint
+    #   is charged.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The scope of usage/charges for which the billing account is being
+    #   modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointPayerResponsibilityRequest AWS API Documentation
+    #
+    class ModifyVpcEndpointPayerResponsibilityRequest < Struct.new(
+      :dry_run,
+      :service_id,
+      :vpc_endpoint_id,
+      :payer_responsibility,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] payer_responsibilities
+    #   The payer responsibility settings for the VPC endpoint.
+    #   @return [Array<Types::PayerResponsibilityEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointPayerResponsibilityResult AWS API Documentation
+    #
+    class ModifyVpcEndpointPayerResponsibilityResult < Struct.new(
+      :vpc_endpoint_id,
+      :payer_responsibilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] vpc_endpoint_id
     #   The ID of the endpoint.
     #   @return [String]
@@ -69180,6 +69694,25 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a payer responsibility setting for a VPC endpoint.
+    #
+    # @!attribute [rw] scope
+    #   The scope of usage/charges.
+    #   @return [String]
+    #
+    # @!attribute [rw] payer_responsibility_type
+    #   The Amazon Web Services account to which the usage is charged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PayerResponsibilityEntry AWS API Documentation
+    #
+    class PayerResponsibilityEntry < Struct.new(
+      :scope,
+      :payer_responsibility_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the data that identifies an Amazon FPGA image (AFI) on the
     # PCI bus.
     #
@@ -69794,6 +70327,10 @@ module Aws::EC2
     #   The service provider that manages the Placement Group.
     #   @return [Types::OperatorResponse]
     #
+    # @!attribute [rw] parent_group_id
+    #   The ID of the parent placement group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroup AWS API Documentation
     #
     class PlacementGroup < Struct.new(
@@ -69806,7 +70343,8 @@ module Aws::EC2
       :group_arn,
       :spread_level,
       :linked_group_id,
-      :operator)
+      :operator,
+      :parent_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -86529,6 +87067,10 @@ module Aws::EC2
     #   The modification completion or failure time.
     #   @return [Time]
     #
+    # @!attribute [rw] operator
+    #   The service provider that manages the resource.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeModification AWS API Documentation
     #
     class VolumeModification < Struct.new(
@@ -86547,7 +87089,8 @@ module Aws::EC2
       :original_multi_attach_enabled,
       :progress,
       :start_time,
-      :end_time)
+      :end_time,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -87528,6 +88071,10 @@ module Aws::EC2
     #   The Region where the service is hosted.
     #   @return [String]
     #
+    # @!attribute [rw] payer_responsibilities
+    #   The payer responsibility settings for the endpoint.
+    #   @return [Array<Types::PayerResponsibilityEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint AWS API Documentation
     #
     class VpcEndpoint < Struct.new(
@@ -87555,7 +88102,8 @@ module Aws::EC2
       :failure_reason,
       :service_network_arn,
       :resource_configuration_arn,
-      :service_region)
+      :service_region,
+      :payer_responsibilities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -87686,6 +88234,10 @@ module Aws::EC2
     #   The Region of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] payer_responsibilities
+    #   The payer responsibility settings for the endpoint.
+    #   @return [Array<Types::PayerResponsibilityEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpointConnection AWS API Documentation
     #
     class VpcEndpointConnection < Struct.new(
@@ -87700,7 +88252,8 @@ module Aws::EC2
       :ip_address_type,
       :vpc_endpoint_connection_id,
       :tags,
-      :vpc_endpoint_region)
+      :vpc_endpoint_region,
+      :payer_responsibilities)
       SENSITIVE = []
       include Aws::Structure
     end

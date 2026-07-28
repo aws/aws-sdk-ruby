@@ -1194,6 +1194,7 @@ module Aws::MediaConvert
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             end_of_stream_markers: "INCLUDE", # accepts INCLUDE, SUPPRESS
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
+    #             explicit_weighted_prediction: "DISABLED", # accepts DISABLED, ENABLED
     #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
@@ -1517,6 +1518,11 @@ module Aws::MediaConvert
     #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #             mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
     #             profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
+    #           },
+    #           duration_control: {
+    #             integer_duration_maximum_compression_denominator: 1,
+    #             integer_duration_maximum_compression_numerator: 1,
+    #             integer_duration_trim_threshold_milliseconds: 1,
     #           },
     #           hdr_10_plus: {
     #             mastering_monitor_nits: 1,
@@ -1964,6 +1970,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.explicit_weighted_prediction #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -2240,6 +2247,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
+    #   resp.preset.settings.video_description.video_preprocessors.duration_control.integer_duration_maximum_compression_denominator #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.duration_control.integer_duration_maximum_compression_numerator #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.duration_control.integer_duration_trim_threshold_milliseconds #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -3060,6 +3070,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.explicit_weighted_prediction #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -3336,6 +3347,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
+    #   resp.preset.settings.video_description.video_preprocessors.duration_control.integer_duration_maximum_compression_denominator #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.duration_control.integer_duration_maximum_compression_numerator #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.duration_control.integer_duration_trim_threshold_milliseconds #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -3965,6 +3979,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.explicit_weighted_prediction #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -4241,6 +4256,9 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
+    #   resp.presets[0].settings.video_description.video_preprocessors.duration_control.integer_duration_maximum_compression_denominator #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.duration_control.integer_duration_maximum_compression_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.video_preprocessors.duration_control.integer_duration_trim_threshold_milliseconds #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -4463,7 +4481,7 @@ module Aws::MediaConvert
     #
     #   resp.probe_results #=> Array
     #   resp.probe_results[0].container.duration #=> Float
-    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm", "mxf", "wave", "avi", "mpegts", "mpegps"
+    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm", "mxf", "wave", "avi", "mpegts", "mpegps", "mp3"
     #   resp.probe_results[0].container.start_timecode #=> String
     #   resp.probe_results[0].container.tracks #=> Array
     #   resp.probe_results[0].container.tracks[0].audio_properties.bit_depth #=> Integer
@@ -5302,6 +5320,7 @@ module Aws::MediaConvert
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             end_of_stream_markers: "INCLUDE", # accepts INCLUDE, SUPPRESS
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
+    #             explicit_weighted_prediction: "DISABLED", # accepts DISABLED, ENABLED
     #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
@@ -5625,6 +5644,11 @@ module Aws::MediaConvert
     #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
     #             mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
     #             profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
+    #           },
+    #           duration_control: {
+    #             integer_duration_maximum_compression_denominator: 1,
+    #             integer_duration_maximum_compression_numerator: 1,
+    #             integer_duration_trim_threshold_milliseconds: 1,
     #           },
     #           hdr_10_plus: {
     #             mastering_monitor_nits: 1,
@@ -6069,6 +6093,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.explicit_weighted_prediction #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -6345,6 +6370,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
+    #   resp.preset.settings.video_description.video_preprocessors.duration_control.integer_duration_maximum_compression_denominator #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.duration_control.integer_duration_maximum_compression_numerator #=> Integer
+    #   resp.preset.settings.video_description.video_preprocessors.duration_control.integer_duration_trim_threshold_milliseconds #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -6495,7 +6523,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.188.0'
+      context[:gem_version] = '1.190.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

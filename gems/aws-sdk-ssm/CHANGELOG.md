@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.220.0 (2026-07-21)
+------------------
+
+* Feature - Added a WarningMessage field to Automation along with corresponding public documentation.
+
+1.219.0 (2026-07-14)
+------------------
+
+* Feature - Update AWS Systems Manager Automation Targets to be correct max value.
+
+1.218.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.217.0 (2026-07-07)
+------------------
+
+* Feature - Adding SSM Cloud Connector to support Azure Virtual Machines onboarding to AWS Systems Manager
+
 1.216.0 (2026-06-02)
 ------------------
 

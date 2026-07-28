@@ -2900,6 +2900,54 @@ module Aws::CustomerProfiles
       class Unknown < Dimension; end
     end
 
+    # Defines a diversity constraint for a single item column, specifying a
+    # cap type and a target value or placeholder that controls how many
+    # recommended items may share the same column value.
+    #
+    # @!attribute [rw] name
+    #   The name of the item catalog column on which to apply the diversity
+    #   cap. The column must be defined in the recommender schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] cap_type
+    #   The type of diversity cap to apply. Valid values are `PERCENTAGE`
+    #   (interpret `Target` as a percentage of returned items) and `VALUE`
+    #   (interpret `Target` as an absolute count).
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The diversity cap target. Either an integer literal (for example,
+    #   `"25"`) or a placeholder expression of the form `$name` whose value
+    #   is supplied at inference time through `GetProfileRecommendations`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DiversityColumn AWS API Documentation
+    #
+    class DiversityColumn < Struct.new(
+      :name,
+      :cap_type,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that controls diversity of recommendation results by
+    # capping the representation of specified item columns.
+    #
+    # @!attribute [rw] diversity_columns
+    #   A list of up to two diversity columns. Each column defines a cap on
+    #   the number or percentage of recommended items that share the same
+    #   value for that column.
+    #   @return [Array<Types::DiversityColumn>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DiversityConfig AWS API Documentation
+    #
+    class DiversityConfig < Struct.new(
+      :diversity_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The standard domain object type.
     #
     # @!attribute [rw] source
@@ -4811,6 +4859,12 @@ module Aws::CustomerProfiles
     #   alongside recommended items.
     #   @return [Types::MetadataConfig]
     #
+    # @!attribute [rw] diversity_config
+    #   Runtime diversity configuration for this request. Enables
+    #   diversity-aware recommendations and optionally supplies values for
+    #   placeholder-based diversity caps configured on the recommender.
+    #   @return [Types::RecommendationDiversityConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetProfileRecommendationsRequest AWS API Documentation
     #
     class GetProfileRecommendationsRequest < Struct.new(
@@ -4822,7 +4876,8 @@ module Aws::CustomerProfiles
       :recommender_promotional_filters,
       :candidate_ids,
       :max_results,
-      :metadata_config)
+      :metadata_config,
+      :diversity_config)
       SENSITIVE = [:context]
       include Aws::Structure
     end
@@ -4974,6 +5029,11 @@ module Aws::CustomerProfiles
     #   recommender, including status and timestamp.
     #   @return [Types::RecommenderUpdate]
     #
+    # @!attribute [rw] active_recommender_version_name
+    #   The name of the recommender version currently serving
+    #   recommendations. Omitted when no active recommender version is set.
+    #   @return [String]
+    #
     # @!attribute [rw] training_metrics
     #   A set of metrics that provide information about the recommender's
     #   training performance and accuracy.
@@ -4997,6 +5057,7 @@ module Aws::CustomerProfiles
       :created_at,
       :failure_reason,
       :latest_recommender_update,
+      :active_recommender_version_name,
       :training_metrics,
       :tags)
       SENSITIVE = [:description]
@@ -8792,6 +8853,29 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Runtime diversity configuration for a `GetProfileRecommendations`
+    # request.
+    #
+    # @!attribute [rw] enabled
+    #   Whether diversity-aware recommendations are enabled for this
+    #   request.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] values
+    #   An optional map of placeholder name to integer cap value used to
+    #   resolve `$name` placeholders defined in the recommender's
+    #   `DiversityConfig` at inference time. Up to 2 entries are supported.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RecommendationDiversityConfig AWS API Documentation
+    #
+    class RecommendationDiversityConfig < Struct.new(
+      :enabled,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration settings that define the behavior and parameters of a
     # recommender.
     #
@@ -8833,6 +8917,12 @@ module Aws::CustomerProfiles
     #   IncludedColumns — both cannot be specified in the same request.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] diversity_config
+    #   Configuration for diversity-aware recommendations. When set, the
+    #   recommender applies diversity constraints defined per item column to
+    #   reduce over-concentration of similar items in the results.
+    #   @return [Types::DiversityConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RecommenderConfig AWS API Documentation
     #
     class RecommenderConfig < Struct.new(
@@ -8840,7 +8930,8 @@ module Aws::CustomerProfiles
       :training_frequency,
       :inference_config,
       :included_columns,
-      :excluded_columns)
+      :excluded_columns,
+      :diversity_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9129,6 +9220,11 @@ module Aws::CustomerProfiles
     #   If the update operation failed, provides the reason for the failure.
     #   @return [String]
     #
+    # @!attribute [rw] recommender_version_name
+    #   The name of the recommender version associated with this update
+    #   operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RecommenderUpdate AWS API Documentation
     #
     class RecommenderUpdate < Struct.new(
@@ -9136,7 +9232,8 @@ module Aws::CustomerProfiles
       :status,
       :created_at,
       :last_updated_at,
-      :failure_reason)
+      :failure_reason,
+      :recommender_version_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9991,11 +10088,17 @@ module Aws::CustomerProfiles
     #   process.
     #   @return [Hash<String,Float>]
     #
+    # @!attribute [rw] recommender_version_name
+    #   The name of the recommender version that produced these training
+    #   metrics.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/TrainingMetrics AWS API Documentation
     #
     class TrainingMetrics < Struct.new(
       :time,
-      :metrics)
+      :metrics,
+      :recommender_version_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10773,13 +10876,20 @@ module Aws::CustomerProfiles
     #   including updated parameters and settings that define its behavior.
     #   @return [Types::RecommenderConfig]
     #
+    # @!attribute [rw] recommender_version_name
+    #   The name of a specific recommender version to activate as part of
+    #   this update (for example, to roll back to a previously trained
+    #   version).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateRecommenderRequest AWS API Documentation
     #
     class UpdateRecommenderRequest < Struct.new(
       :domain_name,
       :recommender_name,
       :description,
-      :recommender_config)
+      :recommender_config,
+      :recommender_version_name)
       SENSITIVE = [:description]
       include Aws::Structure
     end

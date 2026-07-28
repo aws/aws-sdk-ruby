@@ -662,6 +662,11 @@ module Aws::IVS
     #
     #   [1]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
     #
+    # @option params [Types::PostRollConfiguration] :post_roll_configuration
+    #   Configuration for the post-roll ad break to use for this ad
+    #   configuration. Default: disabled (`enabled` set to false,
+    #   `durationSeconds` set to 15).
+    #
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
     #   [Best practices and strategies][1] in *Tagging Amazon Web Services
@@ -686,6 +691,10 @@ module Aws::IVS
     #         playback_configuration_arn: "MediaTailorPlaybackConfigurationArn",
     #       },
     #     ],
+    #     post_roll_configuration: {
+    #       duration_seconds: 1, # required
+    #       enabled: false, # required
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -697,6 +706,8 @@ module Aws::IVS
     #   resp.ad_configuration.name #=> String
     #   resp.ad_configuration.media_tailor_playback_configurations #=> Array
     #   resp.ad_configuration.media_tailor_playback_configurations[0].playback_configuration_arn #=> String
+    #   resp.ad_configuration.post_roll_configuration.duration_seconds #=> Integer
+    #   resp.ad_configuration.post_roll_configuration.enabled #=> Boolean
     #   resp.ad_configuration.tags #=> Hash
     #   resp.ad_configuration.tags["TagKey"] #=> String
     #
@@ -1256,6 +1267,8 @@ module Aws::IVS
     #   resp.ad_configuration.name #=> String
     #   resp.ad_configuration.media_tailor_playback_configurations #=> Array
     #   resp.ad_configuration.media_tailor_playback_configurations[0].playback_configuration_arn #=> String
+    #   resp.ad_configuration.post_roll_configuration.duration_seconds #=> Integer
+    #   resp.ad_configuration.post_roll_configuration.enabled #=> Boolean
     #   resp.ad_configuration.tags #=> Hash
     #   resp.ad_configuration.tags["TagKey"] #=> String
     #
@@ -1745,6 +1758,8 @@ module Aws::IVS
     #   resp.ad_configurations[0].name #=> String
     #   resp.ad_configurations[0].media_tailor_playback_configurations #=> Array
     #   resp.ad_configurations[0].media_tailor_playback_configurations[0].playback_configuration_arn #=> String
+    #   resp.ad_configurations[0].post_roll_configuration.duration_seconds #=> Integer
+    #   resp.ad_configurations[0].post_roll_configuration.enabled #=> Boolean
     #   resp.ad_configurations[0].tags #=> Hash
     #   resp.ad_configurations[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -2339,6 +2354,10 @@ module Aws::IVS
     #
     #   [1]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
     #
+    # @option params [Types::PostRollConfiguration] :post_roll_configuration
+    #   Configuration for the post-roll ad break to use for this ad
+    #   configuration.
+    #
     # @return [Types::UpdateAdConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAdConfigurationResponse#ad_configuration #ad_configuration} => Types::AdConfiguration
@@ -2353,6 +2372,10 @@ module Aws::IVS
     #         playback_configuration_arn: "MediaTailorPlaybackConfigurationArn",
     #       },
     #     ],
+    #     post_roll_configuration: {
+    #       duration_seconds: 1, # required
+    #       enabled: false, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2361,6 +2384,8 @@ module Aws::IVS
     #   resp.ad_configuration.name #=> String
     #   resp.ad_configuration.media_tailor_playback_configurations #=> Array
     #   resp.ad_configuration.media_tailor_playback_configurations[0].playback_configuration_arn #=> String
+    #   resp.ad_configuration.post_roll_configuration.duration_seconds #=> Integer
+    #   resp.ad_configuration.post_roll_configuration.enabled #=> Boolean
     #   resp.ad_configuration.tags #=> Hash
     #   resp.ad_configuration.tags["TagKey"] #=> String
     #
@@ -2577,7 +2602,7 @@ module Aws::IVS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

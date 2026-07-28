@@ -1247,6 +1247,36 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] run_ids
+    #   A list of unique run identifiers for the evaluation runs to
+    #   retrieve.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityRulesetEvaluationRunRequest AWS API Documentation
+    #
+    class BatchGetDataQualityRulesetEvaluationRunRequest < Struct.new(
+      :run_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] runs
+    #   A list of evaluation run details for the requested run IDs.
+    #   @return [Array<Types::DataQualityRulesetEvaluationRun>]
+    #
+    # @!attribute [rw] runs_not_found
+    #   A list of run IDs that were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityRulesetEvaluationRunResponse AWS API Documentation
+    #
+    class BatchGetDataQualityRulesetEvaluationRunResponse < Struct.new(
+      :runs,
+      :runs_not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dev_endpoint_names
     #   The list of `DevEndpoint` names, which might be the names returned
     #   from the `ListDevEndpoint` operation.
@@ -2646,6 +2676,36 @@ module Aws::Glue
       :table,
       :partition_predicate,
       :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a Glue Data Catalog table used to store data
+    # quality results.
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table in the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_location
+    #   The Amazon S3 location for storing the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_id
+    #   A unique identifier for the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogTableConfigOptions AWS API Documentation
+    #
+    class CatalogTableConfigOptions < Struct.new(
+      :database_name,
+      :table_name,
+      :s3_location,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8580,14 +8640,20 @@ module Aws::Glue
     #   A map of metrics associated with the evaluation of the analyzer.
     #   @return [Hash<String,Float>]
     #
+    # @!attribute [rw] evaluated_distributions
+    #   A map of distribution metrics associated with the evaluation of the
+    #   analyzer.
+    #   @return [Hash<String,Types::DistributionData>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityAnalyzerResult AWS API Documentation
     #
     class DataQualityAnalyzerResult < Struct.new(
       :name,
       :description,
       :evaluation_message,
-      :evaluated_metrics)
-      SENSITIVE = [:description, :evaluation_message, :evaluated_metrics]
+      :evaluated_metrics,
+      :evaluated_distributions)
+      SENSITIVE = [:description, :evaluation_message, :evaluated_metrics, :evaluated_distributions]
       include Aws::Structure
     end
 
@@ -8639,13 +8705,49 @@ module Aws::Glue
     #   log groups.
     #   @return [String]
     #
+    # @!attribute [rw] row_level_results
+    #   The configuration for writing row-level evaluation results to a Glue
+    #   Data Catalog table.
+    #   @return [Types::RowLevelResultsOptions]
+    #
+    # @!attribute [rw] profiling_results
+    #   The configuration for writing profiling results to a Glue Data
+    #   Catalog table.
+    #   @return [Types::ProfilingResultsOptions]
+    #
+    # @!attribute [rw] observation_scope
+    #   The scope of the observation for the evaluation run. Specifies
+    #   whether anomaly detection is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] observation_mode
+    #   The observation mode for the evaluation run. Specifies how anomaly
+    #   detection bounds are calculated.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_rule_results
+    #   The configuration for writing rule results to a Glue Data Catalog
+    #   table.
+    #   @return [Types::DataQualityRuleResultsOptions]
+    #
+    # @!attribute [rw] observation_results
+    #   The configuration for writing observation results to a Glue Data
+    #   Catalog table.
+    #   @return [Types::ObservationResultsOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityEvaluationRunAdditionalRunOptions AWS API Documentation
     #
     class DataQualityEvaluationRunAdditionalRunOptions < Struct.new(
       :cloud_watch_metrics_enabled,
       :results_s3_prefix,
       :composite_rule_evaluation_method,
-      :custom_log_group_prefix)
+      :custom_log_group_prefix,
+      :row_level_results,
+      :profiling_results,
+      :observation_scope,
+      :observation_mode,
+      :data_quality_rule_results,
+      :observation_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8916,6 +9018,24 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Additional run options you can specify for a recommendation run.
+    #
+    # @!attribute [rw] custom_log_group_prefix
+    #   A custom prefix for the CloudWatch log group names. When specified,
+    #   recommendation run logs are written to
+    #   `<CustomLogGroupPrefix>/error` and `<CustomLogGroupPrefix>/output`
+    #   instead of the default `/aws-glue/data-quality/error` and
+    #   `/aws-glue/data-quality/output` log groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleRecommendationRunAdditionalRunOptions AWS API Documentation
+    #
+    class DataQualityRuleRecommendationRunAdditionalRunOptions < Struct.new(
+      :custom_log_group_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the result of a data quality rule recommendation run.
     #
     # @!attribute [rw] run_id
@@ -8934,13 +9054,18 @@ module Aws::Glue
     #   The data source (Glue table) associated with the recommendation run.
     #   @return [Types::DataSource]
     #
+    # @!attribute [rw] created_ruleset_name
+    #   The name of the ruleset that was created by the recommendation run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleRecommendationRunDescription AWS API Documentation
     #
     class DataQualityRuleRecommendationRunDescription < Struct.new(
       :run_id,
       :status,
       :started_on,
-      :data_source)
+      :data_source,
+      :created_ruleset_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9016,6 +9141,115 @@ module Aws::Glue
       :rule_metrics,
       :labels)
       SENSITIVE = [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule, :rule_metrics]
+      include Aws::Structure
+    end
+
+    # The configuration for writing data quality rule results.
+    #
+    # @!attribute [rw] write_data_quality_rule_results_enabled
+    #   Set to true to write data quality rule results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] catalog_table_config
+    #   The Glue Data Catalog table configuration for storing the rule
+    #   results.
+    #   @return [Types::CatalogTableConfigOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleResultsOptions AWS API Documentation
+    #
+    class DataQualityRuleResultsOptions < Struct.new(
+      :write_data_quality_rule_results_enabled,
+      :catalog_table_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a data quality ruleset evaluation run.
+    #
+    # @!attribute [rw] run_id
+    #   The unique run identifier associated with this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   A data source (an Glue table) for which you want data quality
+    #   results.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] role
+    #   An IAM role supplied to encrypt the results of the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is
+    #   5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The timeout for a run in minutes. This is the maximum time that a
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_run_options
+    #   Additional run options you can specify for an evaluation run.
+    #   @return [Types::DataQualityEvaluationRunAdditionalRunOptions]
+    #
+    # @!attribute [rw] status
+    #   The status for this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_string
+    #   The error strings that are associated with the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time when this run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   A timestamp. The last point in time when this run was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_on
+    #   The date and time when this run was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_time
+    #   The amount of time (in seconds) that the run consumed resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ruleset_names
+    #   A list of ruleset names for the run.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] result_ids
+    #   A list of result IDs for the data quality results for the run.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_data_sources
+    #   A map of reference strings to additional data sources you can
+    #   specify for an evaluation run.
+    #   @return [Hash<String,Types::DataSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRulesetEvaluationRun AWS API Documentation
+    #
+    class DataQualityRulesetEvaluationRun < Struct.new(
+      :run_id,
+      :data_source,
+      :role,
+      :number_of_workers,
+      :timeout,
+      :additional_run_options,
+      :status,
+      :error_string,
+      :started_on,
+      :last_modified_on,
+      :completed_on,
+      :execution_time,
+      :ruleset_names,
+      :result_ids,
+      :additional_data_sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11221,6 +11455,50 @@ module Aws::Glue
     class DisassociateGlossaryTermsResponse < Struct.new(
       :asset_identifier,
       :glossary_terms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The distribution data for a statistic.
+    #
+    # @!attribute [rw] bin_edges
+    #   The bin edge values for the distribution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] count
+    #   The frequency count for each bin in the distribution.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] data_type
+    #   The data type of the column for the distribution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DistributionData AWS API Documentation
+    #
+    class DistributionData < Struct.new(
+      :bin_edges,
+      :count,
+      :data_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for writing distribution results.
+    #
+    # @!attribute [rw] write_distribution_results_enabled
+    #   Set to true to write distribution results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] catalog_table_config
+    #   The Glue Data Catalog table configuration for storing the
+    #   distribution results.
+    #   @return [Types::CatalogTableConfigOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DistributionResultsOptions AWS API Documentation
+    #
+    class DistributionResultsOptions < Struct.new(
+      :write_distribution_results_enabled,
+      :catalog_table_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13657,6 +13935,10 @@ module Aws::Glue
     #   encryption option.
     #   @return [String]
     #
+    # @!attribute [rw] additional_run_options
+    #   Additional run options you can specify for a recommendation run.
+    #   @return [Types::DataQualityRuleRecommendationRunAdditionalRunOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRunResponse AWS API Documentation
     #
     class GetDataQualityRuleRecommendationRunResponse < Struct.new(
@@ -13673,7 +13955,8 @@ module Aws::Glue
       :execution_time,
       :recommended_ruleset,
       :created_ruleset_name,
-      :data_quality_security_configuration)
+      :data_quality_security_configuration,
+      :additional_run_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20976,12 +21259,17 @@ module Aws::Glue
     #   The maximum number of results to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A list of key-value pair tags to filter recommendation runs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRuleRecommendationRunsRequest AWS API Documentation
     #
     class ListDataQualityRuleRecommendationRunsRequest < Struct.new(
       :filter,
       :next_token,
-      :max_results)
+      :max_results,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23158,6 +23446,26 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The configuration for writing observation results.
+    #
+    # @!attribute [rw] write_observation_results_enabled
+    #   Set to true to write observation results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] catalog_table_config
+    #   The Glue Data Catalog table configuration for storing the
+    #   observation results.
+    #   @return [Types::CatalogTableConfigOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ObservationResultsOptions AWS API Documentation
+    #
+    class ObservationResultsOptions < Struct.new(
+      :write_observation_results_enabled,
+      :catalog_table_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Offset-based pagination configuration that defines how to handle
     # pagination using numeric offsets and limits.
     #
@@ -23856,6 +24164,31 @@ module Aws::Glue
     class ProfileConfiguration < Struct.new(
       :session_configuration,
       :job_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for writing profiling results.
+    #
+    # @!attribute [rw] write_profiling_results_enabled
+    #   Set to true to write profiling results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] catalog_table_config
+    #   The Glue Data Catalog table configuration for storing the profiling
+    #   results.
+    #   @return [Types::CatalogTableConfigOptions]
+    #
+    # @!attribute [rw] distribution_results
+    #   The configuration for writing distribution results.
+    #   @return [Types::DistributionResultsOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ProfilingResultsOptions AWS API Documentation
+    #
+    class ProfilingResultsOptions < Struct.new(
+      :write_profiling_results_enabled,
+      :catalog_table_config,
+      :distribution_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25272,6 +25605,30 @@ module Aws::Glue
       :name,
       :inputs,
       :group_filters_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for writing row-level evaluation results.
+    #
+    # @!attribute [rw] max_rows_to_write
+    #   The maximum number of rows to write in the results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] result_type
+    #   The result type to include in the row-level results output.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_table_config
+    #   The Glue Data Catalog table configuration for storing the results.
+    #   @return [Types::CatalogTableConfigOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RowLevelResultsOptions AWS API Documentation
+    #
+    class RowLevelResultsOptions < Struct.new(
+      :max_rows_to_write,
+      :result_type,
+      :catalog_table_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28364,6 +28721,10 @@ module Aws::Glue
     #   the same resource.
     #   @return [String]
     #
+    # @!attribute [rw] additional_run_options
+    #   Additional run options you can specify for a recommendation run.
+    #   @return [Types::DataQualityRuleRecommendationRunAdditionalRunOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRuleRecommendationRunRequest AWS API Documentation
     #
     class StartDataQualityRuleRecommendationRunRequest < Struct.new(
@@ -28373,7 +28734,8 @@ module Aws::Glue
       :timeout,
       :created_ruleset_name,
       :data_quality_security_configuration,
-      :client_token)
+      :client_token,
+      :additional_run_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29112,6 +29474,10 @@ module Aws::Glue
     #   The value of the statistic.
     #   @return [Float]
     #
+    # @!attribute [rw] distribution_value
+    #   The distribution value for the statistic.
+    #   @return [Types::DistributionData]
+    #
     # @!attribute [rw] evaluation_level
     #   The evaluation level of the statistic. Possible values: `Dataset`,
     #   `Column`, `Multicolumn`.
@@ -29146,6 +29512,7 @@ module Aws::Glue
       :run_identifier,
       :statistic_name,
       :double_value,
+      :distribution_value,
       :evaluation_level,
       :columns_referenced,
       :referenced_datasets,
@@ -30963,6 +31330,64 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the asset to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The new name of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateAssetRequest AWS API Documentation
+    #
+    class UpdateAssetRequest < Struct.new(
+      :identifier,
+      :name,
+      :description,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The unique identifier of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the asset was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateAssetResponse AWS API Documentation
+    #
+    class UpdateAssetResponse < Struct.new(
+      :id,
+      :name,
+      :description,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] name
     #   The name of the blueprint.

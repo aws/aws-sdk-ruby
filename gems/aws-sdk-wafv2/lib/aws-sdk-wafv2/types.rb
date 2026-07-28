@@ -553,6 +553,10 @@ module Aws::WAFV2
     #
     #   * For an Amplify application:
     #     `arn:partition:amplify:region:account-id:apps/app-id `
+    #
+    #   * For an Amazon Bedrock AgentCore Gateway:
+    #     `arn:partition:bedrock-agentcore:region:account-id:gateway/gateway-id
+    #     `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AssociateWebACLRequest AWS API Documentation
@@ -2818,6 +2822,10 @@ module Aws::WAFV2
     #
     #   * For an Amplify application:
     #     `arn:partition:amplify:region:account-id:apps/app-id `
+    #
+    #   * For an Amazon Bedrock AgentCore Gateway:
+    #     `arn:partition:bedrock-agentcore:region:account-id:gateway/gateway-id
+    #     `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisassociateWebACLRequest AWS API Documentation
@@ -4385,6 +4393,10 @@ module Aws::WAFV2
     #
     #   * For an Amplify application:
     #     `arn:partition:amplify:region:account-id:apps/app-id `
+    #
+    #   * For an Amazon Bedrock AgentCore Gateway:
+    #     `arn:partition:bedrock-agentcore:region:account-id:gateway/gateway-id
+    #     `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLForResourceRequest AWS API Documentation
@@ -9916,7 +9928,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] verified
-    #   Whether the AI bot's identity was verified.
+    #   Indicates whether the AI bot's identity was verified — for example,
+    #   through a cryptographically signed request (Web Bot Auth) or another
+    #   published verification method. This value is meaningful only when
+    #   GroupBy is NAME, where each result represents a single, identifiable
+    #   bot. For all other GroupBy values (CATEGORY, INTENT, ORGANIZATION,
+    #   or WEBACL), a result aggregates multiple bots that may have
+    #   different verification states, so Verified is always returned as
+    #   false and should be ignored. Type and required-ness are unchanged
+    #   (Boolean, optional).
     #   @return [Boolean]
     #
     # @!attribute [rw] group_by_value

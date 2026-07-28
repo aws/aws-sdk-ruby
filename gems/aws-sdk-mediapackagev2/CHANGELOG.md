@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-07-23)
+------------------
+
+* Feature - This release adds support for non-epoch-locked CMAF ingest in MediaPackageV2 channels.
+
+1.68.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.67.0 (2026-06-08)
 ------------------
 

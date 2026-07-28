@@ -1380,14 +1380,14 @@ module Aws::GameLift
     #   resp.container_fleet.new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
     #   resp.container_fleet.game_session_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.container_fleet.game_session_creation_limit_policy.policy_period_in_minutes #=> Integer
-    #   resp.container_fleet.status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleet.status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING", "EXPIRED"
     #   resp.container_fleet.deployment_details.latest_deployment_id #=> String
     #   resp.container_fleet.log_configuration.log_destination #=> String, one of "NONE", "CLOUDWATCH", "S3"
     #   resp.container_fleet.log_configuration.s3_bucket_name #=> String
     #   resp.container_fleet.log_configuration.log_group_arn #=> String
     #   resp.container_fleet.location_attributes #=> Array
     #   resp.container_fleet.location_attributes[0].location #=> String
-    #   resp.container_fleet.location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleet.location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING", "EXPIRED"
     #   resp.container_fleet.location_attributes[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.container_fleet.player_gateway_mode #=> String, one of "DISABLED", "ENABLED", "REQUIRED"
     #
@@ -2209,7 +2209,7 @@ module Aws::GameLift
     #   resp.fleet_attributes.name #=> String
     #   resp.fleet_attributes.creation_time #=> Time
     #   resp.fleet_attributes.termination_time #=> Time
-    #   resp.fleet_attributes.status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
+    #   resp.fleet_attributes.status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND", "EXPIRED"
     #   resp.fleet_attributes.build_id #=> String
     #   resp.fleet_attributes.build_arn #=> String
     #   resp.fleet_attributes.script_id #=> String
@@ -2235,7 +2235,7 @@ module Aws::GameLift
     #   resp.fleet_attributes.player_gateway_configuration.game_server_ip_protocol_supported #=> String, one of "IPv4", "DUAL_STACK"
     #   resp.location_states #=> Array
     #   resp.location_states[0].location #=> String
-    #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
+    #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND", "EXPIRED"
     #   resp.location_states[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet AWS API Documentation
@@ -2316,7 +2316,7 @@ module Aws::GameLift
     #   resp.fleet_arn #=> String
     #   resp.location_states #=> Array
     #   resp.location_states[0].location #=> String
-    #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
+    #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND", "EXPIRED"
     #   resp.location_states[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetLocations AWS API Documentation
@@ -4220,7 +4220,7 @@ module Aws::GameLift
     #   resp.fleet_arn #=> String
     #   resp.location_states #=> Array
     #   resp.location_states[0].location #=> String
-    #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
+    #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND", "EXPIRED"
     #   resp.location_states[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteFleetLocations AWS API Documentation
@@ -4986,14 +4986,14 @@ module Aws::GameLift
     #   resp.container_fleet.new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
     #   resp.container_fleet.game_session_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.container_fleet.game_session_creation_limit_policy.policy_period_in_minutes #=> Integer
-    #   resp.container_fleet.status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleet.status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING", "EXPIRED"
     #   resp.container_fleet.deployment_details.latest_deployment_id #=> String
     #   resp.container_fleet.log_configuration.log_destination #=> String, one of "NONE", "CLOUDWATCH", "S3"
     #   resp.container_fleet.log_configuration.s3_bucket_name #=> String
     #   resp.container_fleet.log_configuration.log_group_arn #=> String
     #   resp.container_fleet.location_attributes #=> Array
     #   resp.container_fleet.location_attributes[0].location #=> String
-    #   resp.container_fleet.location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleet.location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING", "EXPIRED"
     #   resp.container_fleet.location_attributes[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.container_fleet.player_gateway_mode #=> String, one of "DISABLED", "ENABLED", "REQUIRED"
     #
@@ -5231,7 +5231,7 @@ module Aws::GameLift
     #     container_group_type: "GAME_SERVER", # required, accepts GAME_SERVER, PER_INSTANCE
     #     compute_name: "ComputeNameOrArn",
     #     instance_id: "InstanceId",
-    #     container_name: "NonZeroAnd128MaxAsciiString",
+    #     container_name: "ContainerNameQueryFilter",
     #   })
     #
     # @example Response structure
@@ -5441,7 +5441,7 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].name #=> String
     #   resp.fleet_attributes[0].creation_time #=> Time
     #   resp.fleet_attributes[0].termination_time #=> Time
-    #   resp.fleet_attributes[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
+    #   resp.fleet_attributes[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND", "EXPIRED"
     #   resp.fleet_attributes[0].build_id #=> String
     #   resp.fleet_attributes[0].build_arn #=> String
     #   resp.fleet_attributes[0].script_id #=> String
@@ -5717,7 +5717,7 @@ module Aws::GameLift
     #   resp.events #=> Array
     #   resp.events[0].event_id #=> String
     #   resp.events[0].resource_id #=> String
-    #   resp.events[0].event_code #=> String, one of "GENERIC_EVENT", "FLEET_CREATED", "FLEET_DELETED", "FLEET_SCALING_EVENT", "FLEET_STATE_DOWNLOADING", "FLEET_STATE_VALIDATING", "FLEET_STATE_BUILDING", "FLEET_STATE_ACTIVATING", "FLEET_STATE_ACTIVE", "FLEET_STATE_ERROR", "FLEET_STATE_PENDING", "FLEET_STATE_CREATING", "FLEET_STATE_CREATED", "FLEET_STATE_UPDATING", "FLEET_INITIALIZATION_FAILED", "FLEET_BINARY_DOWNLOAD_FAILED", "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND", "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE", "FLEET_VALIDATION_TIMED_OUT", "FLEET_ACTIVATION_FAILED", "FLEET_ACTIVATION_FAILED_NO_INSTANCES", "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED", "SERVER_PROCESS_INVALID_PATH", "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT", "SERVER_PROCESS_PROCESS_READY_TIMEOUT", "SERVER_PROCESS_CRASHED", "SERVER_PROCESS_TERMINATED_UNHEALTHY", "SERVER_PROCESS_FORCE_TERMINATED", "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT", "SERVER_PROCESS_SDK_INITIALIZATION_FAILED", "SERVER_PROCESS_MISCONFIGURED_CONTAINER_PORT", "GAME_SESSION_ACTIVATION_TIMEOUT", "FLEET_CREATION_EXTRACTING_BUILD", "FLEET_CREATION_RUNNING_INSTALLER", "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG", "FLEET_VPC_PEERING_SUCCEEDED", "FLEET_VPC_PEERING_FAILED", "FLEET_VPC_PEERING_DELETED", "INSTANCE_INTERRUPTED", "INSTANCE_RECYCLED", "INSTANCE_REPLACED_UNHEALTHY", "FLEET_CREATION_COMPLETED_INSTALLER", "FLEET_CREATION_FAILED_INSTALLER", "COMPUTE_LOG_UPLOAD_FAILED", "GAME_SERVER_CONTAINER_GROUP_CRASHED", "PER_INSTANCE_CONTAINER_GROUP_CRASHED", "GAME_SERVER_CONTAINER_GROUP_REPLACED_UNHEALTHY", "LOCATION_STATE_PENDING", "LOCATION_STATE_CREATING", "LOCATION_STATE_CREATED", "LOCATION_STATE_ACTIVATING", "LOCATION_STATE_ACTIVE", "LOCATION_STATE_UPDATING", "LOCATION_STATE_ERROR", "LOCATION_STATE_DELETING", "LOCATION_STATE_DELETED"
+    #   resp.events[0].event_code #=> String, one of "GENERIC_EVENT", "FLEET_CREATED", "FLEET_DELETED", "FLEET_EXPIRED", "FLEET_SCALING_EVENT", "FLEET_STATE_DOWNLOADING", "FLEET_STATE_VALIDATING", "FLEET_STATE_BUILDING", "FLEET_STATE_ACTIVATING", "FLEET_STATE_ACTIVE", "FLEET_STATE_ERROR", "FLEET_STATE_PENDING", "FLEET_STATE_CREATING", "FLEET_STATE_CREATED", "FLEET_STATE_UPDATING", "FLEET_INITIALIZATION_FAILED", "FLEET_BINARY_DOWNLOAD_FAILED", "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND", "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE", "FLEET_VALIDATION_TIMED_OUT", "FLEET_ACTIVATION_FAILED", "FLEET_ACTIVATION_FAILED_NO_INSTANCES", "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED", "SERVER_PROCESS_INVALID_PATH", "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT", "SERVER_PROCESS_PROCESS_READY_TIMEOUT", "SERVER_PROCESS_CRASHED", "SERVER_PROCESS_TERMINATED_UNHEALTHY", "SERVER_PROCESS_FORCE_TERMINATED", "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT", "SERVER_PROCESS_SDK_INITIALIZATION_FAILED", "SERVER_PROCESS_MISCONFIGURED_CONTAINER_PORT", "GAME_SESSION_ACTIVATION_TIMEOUT", "FLEET_CREATION_EXTRACTING_BUILD", "FLEET_CREATION_RUNNING_INSTALLER", "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG", "FLEET_VPC_PEERING_SUCCEEDED", "FLEET_VPC_PEERING_FAILED", "FLEET_VPC_PEERING_DELETED", "INSTANCE_INTERRUPTED", "INSTANCE_RECYCLED", "INSTANCE_REPLACED_UNHEALTHY", "FLEET_CREATION_COMPLETED_INSTALLER", "FLEET_CREATION_FAILED_INSTALLER", "COMPUTE_LOG_UPLOAD_FAILED", "GAME_SERVER_CONTAINER_GROUP_CRASHED", "PER_INSTANCE_CONTAINER_GROUP_CRASHED", "GAME_SERVER_CONTAINER_GROUP_REPLACED_UNHEALTHY", "LOCATION_STATE_PENDING", "LOCATION_STATE_CREATING", "LOCATION_STATE_CREATED", "LOCATION_STATE_ACTIVATING", "LOCATION_STATE_ACTIVE", "LOCATION_STATE_UPDATING", "LOCATION_STATE_ERROR", "LOCATION_STATE_DELETING", "LOCATION_STATE_DELETED"
     #   resp.events[0].message #=> String
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].pre_signed_log_url #=> String
@@ -5809,7 +5809,7 @@ module Aws::GameLift
     #   resp.fleet_arn #=> String
     #   resp.location_attributes #=> Array
     #   resp.location_attributes[0].location_state.location #=> String
-    #   resp.location_attributes[0].location_state.status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
+    #   resp.location_attributes[0].location_state.status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND", "EXPIRED"
     #   resp.location_attributes[0].location_state.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.location_attributes[0].stopped_actions #=> Array
     #   resp.location_attributes[0].stopped_actions[0] #=> String, one of "AUTO_SCALING"
@@ -8338,14 +8338,14 @@ module Aws::GameLift
     #   resp.container_fleets[0].new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
     #   resp.container_fleets[0].game_session_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.container_fleets[0].game_session_creation_limit_policy.policy_period_in_minutes #=> Integer
-    #   resp.container_fleets[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleets[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING", "EXPIRED"
     #   resp.container_fleets[0].deployment_details.latest_deployment_id #=> String
     #   resp.container_fleets[0].log_configuration.log_destination #=> String, one of "NONE", "CLOUDWATCH", "S3"
     #   resp.container_fleets[0].log_configuration.s3_bucket_name #=> String
     #   resp.container_fleets[0].log_configuration.log_group_arn #=> String
     #   resp.container_fleets[0].location_attributes #=> Array
     #   resp.container_fleets[0].location_attributes[0].location #=> String
-    #   resp.container_fleets[0].location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleets[0].location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING", "EXPIRED"
     #   resp.container_fleets[0].location_attributes[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.container_fleets[0].player_gateway_mode #=> String, one of "DISABLED", "ENABLED", "REQUIRED"
     #   resp.next_token #=> String
@@ -11469,14 +11469,14 @@ module Aws::GameLift
     #   resp.container_fleet.new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
     #   resp.container_fleet.game_session_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.container_fleet.game_session_creation_limit_policy.policy_period_in_minutes #=> Integer
-    #   resp.container_fleet.status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleet.status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING", "EXPIRED"
     #   resp.container_fleet.deployment_details.latest_deployment_id #=> String
     #   resp.container_fleet.log_configuration.log_destination #=> String, one of "NONE", "CLOUDWATCH", "S3"
     #   resp.container_fleet.log_configuration.s3_bucket_name #=> String
     #   resp.container_fleet.log_configuration.log_group_arn #=> String
     #   resp.container_fleet.location_attributes #=> Array
     #   resp.container_fleet.location_attributes[0].location #=> String
-    #   resp.container_fleet.location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleet.location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING", "EXPIRED"
     #   resp.container_fleet.location_attributes[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.container_fleet.player_gateway_mode #=> String, one of "DISABLED", "ENABLED", "REQUIRED"
     #
@@ -13019,7 +13019,7 @@ module Aws::GameLift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -196,6 +196,7 @@ module Aws::SecurityAgent
     DocumentInfo = Shapes::StructureShape.new(name: 'DocumentInfo')
     DocumentList = Shapes::ListShape.new(name: 'DocumentList')
     DomainVerificationMethod = Shapes::StringShape.new(name: 'DomainVerificationMethod')
+    Double = Shapes::FloatShape.new(name: 'Double')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointList = Shapes::ListShape.new(name: 'EndpointList')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
@@ -2147,6 +2148,7 @@ module Aws::SecurityAgent
     Task.add_member(:target_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "targetEndpoint"))
     Task.add_member(:execution_status, Shapes::ShapeRef.new(shape: TaskExecutionStatus, location_name: "executionStatus"))
     Task.add_member(:logs_location, Shapes::ShapeRef.new(shape: LogLocation, location_name: "logsLocation"))
+    Task.add_member(:task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "taskHours"))
     Task.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     Task.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     Task.struct_class = Types::Task
@@ -2162,6 +2164,7 @@ module Aws::SecurityAgent
     TaskSummary.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
     TaskSummary.add_member(:risk_type, Shapes::ShapeRef.new(shape: RiskType, location_name: "riskType"))
     TaskSummary.add_member(:execution_status, Shapes::ShapeRef.new(shape: TaskExecutionStatus, location_name: "executionStatus"))
+    TaskSummary.add_member(:task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "taskHours"))
     TaskSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     TaskSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     TaskSummary.struct_class = Types::TaskSummary

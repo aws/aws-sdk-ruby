@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2026-07-15)
+------------------
+
+* Feature - Adds support for UnionPay session key derivation to the GenerateAuthRequestCryptogram, VerifyAuthRequestCryptogram, GenerateMac, and VerifyMac APIs.
+
+1.55.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.54.0 (2026-05-29)
 ------------------
 

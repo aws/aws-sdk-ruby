@@ -1073,7 +1073,7 @@ module Aws::CleanRoomsML
     #           },
     #           compute_configuration: {
     #             worker: {
-    #               type: "CR.1X", # accepts CR.1X, CR.4X
+    #               type: "CR.1X", # accepts CR.1X, CR.4X, CR.8X
     #               number: 1,
     #               properties: {
     #                 spark: {
@@ -1691,7 +1691,7 @@ module Aws::CleanRoomsML
     #   resp.seed_audience.sql_parameters.analysis_template_arn #=> String
     #   resp.seed_audience.sql_parameters.parameters #=> Hash
     #   resp.seed_audience.sql_parameters.parameters["ParameterName"] #=> String
-    #   resp.seed_audience.sql_compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
+    #   resp.seed_audience.sql_compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X", "CR.8X"
     #   resp.seed_audience.sql_compute_configuration.worker.number #=> Integer
     #   resp.seed_audience.sql_compute_configuration.worker.properties.spark #=> Hash
     #   resp.seed_audience.sql_compute_configuration.worker.properties.spark["SparkPropertyKey"] #=> String
@@ -2365,7 +2365,7 @@ module Aws::CleanRoomsML
     #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.analysis_template_arn #=> String
     #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.parameters #=> Hash
     #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.parameters["ParameterName"] #=> String
-    #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
+    #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X", "CR.8X"
     #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.number #=> Integer
     #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.properties.spark #=> Hash
     #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.properties.spark["SparkPropertyKey"] #=> String
@@ -3753,7 +3753,7 @@ module Aws::CleanRoomsML
     #       },
     #       sql_compute_configuration: {
     #         worker: {
-    #           type: "CR.1X", # accepts CR.1X, CR.4X
+    #           type: "CR.1X", # accepts CR.1X, CR.4X, CR.8X
     #           number: 1,
     #           properties: {
     #             spark: {
@@ -4146,7 +4146,7 @@ module Aws::CleanRoomsML
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanroomsml'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

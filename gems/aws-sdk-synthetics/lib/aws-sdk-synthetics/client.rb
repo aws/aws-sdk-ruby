@@ -689,6 +689,12 @@ module Aws::Synthetics
     #   including the encryption-at-rest settings for artifacts that the
     #   canary uploads to Amazon S3.
     #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer-managed AWS Key
+    #   Management Service (AWS KMS) key used to encrypt the canary's AWS
+    #   Lambda function environment variables at rest. If you don't specify a
+    #   value, the service uses an AWS-managed key.
+    #
     # @return [Types::CreateCanaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCanaryResponse#canary #canary} => Types::Canary
@@ -752,6 +758,7 @@ module Aws::Synthetics
     #           security_group_ids: ["SecurityGroupId"],
     #           ipv_6_allowed_for_dual_stack: false,
     #         },
+    #         kms_key_arn: "KmsKeyArn",
     #       },
     #     ],
     #     tags: {
@@ -763,6 +770,7 @@ module Aws::Synthetics
     #         kms_key_arn: "KmsKeyArn",
     #       },
     #     },
+    #     kms_key_arn: "KmsKeyArn",
     #   })
     #
     # @example Response structure
@@ -841,6 +849,7 @@ module Aws::Synthetics
     #   resp.canary.tags["TagKey"] #=> String
     #   resp.canary.artifact_config.s3_encryption.encryption_mode #=> String, one of "SSE_S3", "SSE_KMS"
     #   resp.canary.artifact_config.s3_encryption.kms_key_arn #=> String
+    #   resp.canary.kms_key_arn #=> String
     #   resp.canary.dry_run_config.dry_run_id #=> String
     #   resp.canary.dry_run_config.last_dry_run_execution_status #=> String
     #
@@ -1161,6 +1170,7 @@ module Aws::Synthetics
     #   resp.canaries[0].tags["TagKey"] #=> String
     #   resp.canaries[0].artifact_config.s3_encryption.encryption_mode #=> String, one of "SSE_S3", "SSE_KMS"
     #   resp.canaries[0].artifact_config.s3_encryption.kms_key_arn #=> String
+    #   resp.canaries[0].kms_key_arn #=> String
     #   resp.canaries[0].dry_run_config.dry_run_id #=> String
     #   resp.canaries[0].dry_run_config.last_dry_run_execution_status #=> String
     #   resp.next_token #=> String
@@ -1450,6 +1460,7 @@ module Aws::Synthetics
     #   resp.canary.tags["TagKey"] #=> String
     #   resp.canary.artifact_config.s3_encryption.encryption_mode #=> String, one of "SSE_S3", "SSE_KMS"
     #   resp.canary.artifact_config.s3_encryption.kms_key_arn #=> String
+    #   resp.canary.kms_key_arn #=> String
     #   resp.canary.dry_run_config.dry_run_id #=> String
     #   resp.canary.dry_run_config.last_dry_run_execution_status #=> String
     #
@@ -2355,6 +2366,14 @@ module Aws::Synthetics
     #   remove. All replicas can be removed in a single API call and you
     #   cannot remove the primary location.
     #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer-managed AWS Key
+    #   Management Service (AWS KMS) key used to encrypt the canary's AWS
+    #   Lambda function environment variables at rest. If you don't specify a
+    #   value, the service uses an AWS-managed key. If you omit this
+    #   parameter, the service retains the existing value. To revert to the
+    #   AWS-managed key, set this parameter to an empty string.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2444,9 +2463,11 @@ module Aws::Synthetics
     #           security_group_ids: ["SecurityGroupId"],
     #           ipv_6_allowed_for_dual_stack: false,
     #         },
+    #         kms_key_arn: "KmsKeyArn",
     #       },
     #     ],
     #     remove_replica_locations: ["Location"],
+    #     kms_key_arn: "KmsKeyArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/UpdateCanary AWS API Documentation
@@ -2476,7 +2497,7 @@ module Aws::Synthetics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

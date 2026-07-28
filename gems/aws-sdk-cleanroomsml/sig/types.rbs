@@ -1209,7 +1209,7 @@ module Aws::CleanRoomsML
       attr_accessor query_string: ::String
       attr_accessor analysis_template_arn: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:parameters]
     end
 
     class PutConfiguredAudienceModelPolicyRequest
@@ -1487,7 +1487,7 @@ module Aws::CleanRoomsML
     end
 
     class WorkerComputeConfiguration
-      attr_accessor type: ("CR.1X" | "CR.4X")
+      attr_accessor type: ("CR.1X" | "CR.4X" | "CR.8X")
       attr_accessor number: ::Integer
       attr_accessor properties: Types::WorkerComputeConfigurationProperties
       SENSITIVE: []

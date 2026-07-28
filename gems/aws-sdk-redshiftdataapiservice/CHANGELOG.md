@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2026-07-23)
+------------------
+
+* Feature - This release include long polling provids a new parameter wait-time-seconds to 5 API operations, new API ListSessions, and a new parameter execution-mode to BatchExecuteStatement
+
+1.77.0 (2026-07-21)
+------------------
+
+* Feature - update the workgroupArn to include EUSC partition, tests in THF Gamma and Prod no issue
+
+1.76.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.75.0 (2026-05-28)
 ------------------
 

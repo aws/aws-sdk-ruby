@@ -683,7 +683,7 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_configuration_profile({
-    #     application_id: "Id", # required
+    #     application_id: "Name", # required
     #     name: "LongName", # required
     #     description: "Description",
     #     location_uri: "Uri", # required
@@ -739,6 +739,21 @@ module Aws::AppConfig
     #
     # @option params [required, Integer] :deployment_duration_in_minutes
     #   Total amount of time for a deployment to last.
+    #
+    #   <note markdown="1"> AppConfig Agent supports deploying feature flag or free-form
+    #   configuration data to specific segments or individual users during a
+    #   gradual rollout. Entity-based gradual deployments ensure that once a
+    #   user or segment receives a configuration version, they continue to
+    #   receive that same version throughout the deployment period, regardless
+    #   of which compute resource serves their requests. For more information,
+    #   see [Using AppConfig Agent for user-based or entity-based gradual
+    #   deployments][1]
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-agent-how-to-use.html#appconfig-entity-based-gradual-deployments
     #
     # @option params [Integer] :final_bake_time_in_minutes
     #   Specifies the amount of time AppConfig monitors for Amazon CloudWatch
@@ -923,7 +938,7 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_environment({
-    #     application_id: "Id", # required
+    #     application_id: "Name", # required
     #     name: "Name", # required
     #     description: "Description",
     #     monitors: [
@@ -954,6 +969,209 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def create_environment(params = {}, options = {})
       req = build_request(:create_environment, params)
+      req.send_request(options)
+    end
+
+    # Creates an experiment definition in AppConfig. An experiment
+    # definition describes the purpose, scope, and operational configuration
+    # of an experiment, including the target audience, feature flag, and
+    # treatment configurations.
+    #
+    # @option params [required, String] :application_identifier
+    #   The application ID or name.
+    #
+    # @option params [required, String] :name
+    #   A name for the experiment definition.
+    #
+    # @option params [required, String] :configuration_profile_identifier
+    #   The configuration profile ID or name that stores the feature flag.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The environment ID or name where the experiment will run.
+    #
+    # @option params [required, String] :flag_key
+    #   The key of the existing feature flag to use with the experiment.
+    #
+    # @option params [required, Array<Types::TreatmentInput>] :treatments
+    #   A list of treatments to evaluate during the experiment. Each treatment
+    #   defines a distinct variation compared to the control.
+    #
+    # @option params [required, Types::TreatmentInput] :control
+    #   The control treatment that represents the baseline experience for
+    #   comparison.
+    #
+    # @option params [required, String] :audience_rule
+    #   A rule that defines which users are eligible to be assigned to
+    #   treatments during the experiment.
+    #
+    # @option params [String] :hypothesis
+    #   A description of the goal or hypothesis the experiment is designed to
+    #   validate.
+    #
+    # @option params [String] :audience_description
+    #   A description of the intended audience for the experiment.
+    #
+    # @option params [String] :launch_criteria
+    #   Information about the conditions under which you would launch the
+    #   winning treatment.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the experiment definition. Tags help organize
+    #   and categorize your AppConfig resources.
+    #
+    # @return [Types::ExperimentDefinition] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExperimentDefinition#application_id #application_id} => String
+    #   * {Types::ExperimentDefinition#id #id} => String
+    #   * {Types::ExperimentDefinition#name #name} => String
+    #   * {Types::ExperimentDefinition#hypothesis #hypothesis} => String
+    #   * {Types::ExperimentDefinition#status #status} => String
+    #   * {Types::ExperimentDefinition#configuration_profile_id #configuration_profile_id} => String
+    #   * {Types::ExperimentDefinition#environment_id #environment_id} => String
+    #   * {Types::ExperimentDefinition#flag_key #flag_key} => String
+    #   * {Types::ExperimentDefinition#audience_rule #audience_rule} => String
+    #   * {Types::ExperimentDefinition#audience_description #audience_description} => String
+    #   * {Types::ExperimentDefinition#launch_criteria #launch_criteria} => String
+    #   * {Types::ExperimentDefinition#treatments #treatments} => Array&lt;Types::Treatment&gt;
+    #   * {Types::ExperimentDefinition#control #control} => Types::Treatment
+    #   * {Types::ExperimentDefinition#created_at #created_at} => Time
+    #   * {Types::ExperimentDefinition#updated_at #updated_at} => Time
+    #   * {Types::ExperimentDefinition#kms_key_identifier #kms_key_identifier} => String
+    #
+    #
+    # @example Example: To create an experiment definition
+    #
+    #   # The following CreateExperimentDefinition example creates an experiment definition that tests a feature flag with a 50/50
+    #   # traffic split.
+    #
+    #   resp = client.create_experiment_definition({
+    #     application_identifier: "339ohji", 
+    #     audience_rule: "(eq $country \"US\")", 
+    #     configuration_profile_identifier: "ur8hx2f", 
+    #     control: {
+    #       flag_value: {
+    #         enabled: false, 
+    #       }, 
+    #       weight: 50, 
+    #     }, 
+    #     environment_identifier: "54j1r29", 
+    #     flag_key: "my-feature-flag", 
+    #     name: "Example-Experiment-Definition", 
+    #     treatments: [
+    #       {
+    #         flag_value: {
+    #           enabled: true, 
+    #         }, 
+    #         weight: 50, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     audience_rule: "(eq $country \"US\")", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     control: {
+    #       flag_value: {
+    #         enabled: false, 
+    #       }, 
+    #       key: "c", 
+    #       weight: 50.0, 
+    #     }, 
+    #     created_at: Time.parse("2026-06-16T17:54:55.847Z"), 
+    #     environment_id: "54j1r29", 
+    #     flag_key: "my-feature-flag", 
+    #     id: "bsxyd7k", 
+    #     name: "Example-Experiment-Definition", 
+    #     status: "IDLE", 
+    #     treatments: [
+    #       {
+    #         flag_value: {
+    #           enabled: true, 
+    #         }, 
+    #         key: "t1", 
+    #         weight: 50.0, 
+    #       }, 
+    #     ], 
+    #     updated_at: Time.parse("2026-06-16T17:54:55.847Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_experiment_definition({
+    #     application_identifier: "Identifier", # required
+    #     name: "NameWithReservedAwsPrefix", # required
+    #     configuration_profile_identifier: "Identifier", # required
+    #     environment_identifier: "Identifier", # required
+    #     flag_key: "FlagKey", # required
+    #     treatments: [ # required
+    #       {
+    #         weight: 1.0, # required
+    #         description: "Description",
+    #         flag_value: { # required
+    #           enabled: false, # required
+    #           attribute_values: {
+    #             "AttributeKey" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     control: { # required
+    #       weight: 1.0, # required
+    #       description: "Description",
+    #       flag_value: { # required
+    #         enabled: false, # required
+    #         attribute_values: {
+    #           "AttributeKey" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         },
+    #       },
+    #     },
+    #     audience_rule: "Rule", # required
+    #     hypothesis: "Description",
+    #     audience_description: "Description",
+    #     launch_criteria: "Description",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.hypothesis #=> String
+    #   resp.status #=> String, one of "ACTIVE", "IDLE", "ARCHIVED"
+    #   resp.configuration_profile_id #=> String
+    #   resp.environment_id #=> String
+    #   resp.flag_key #=> String
+    #   resp.audience_rule #=> String
+    #   resp.audience_description #=> String
+    #   resp.launch_criteria #=> String
+    #   resp.treatments #=> Array
+    #   resp.treatments[0].key #=> String
+    #   resp.treatments[0].weight #=> Float
+    #   resp.treatments[0].description #=> String
+    #   resp.treatments[0].flag_value.enabled #=> Boolean
+    #   resp.treatments[0].flag_value.attribute_values #=> Hash
+    #   resp.treatments[0].flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.control.key #=> String
+    #   resp.control.weight #=> Float
+    #   resp.control.description #=> String
+    #   resp.control.flag_value.enabled #=> Boolean
+    #   resp.control.flag_value.attribute_values #=> Hash
+    #   resp.control.flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.kms_key_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateExperimentDefinition AWS API Documentation
+    #
+    # @overload create_experiment_definition(params = {})
+    # @param [Hash] params ({})
+    def create_experiment_definition(params = {}, options = {})
+      req = build_request(:create_experiment_definition, params)
       req.send_request(options)
     end
 
@@ -1164,7 +1382,7 @@ module Aws::AppConfig
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile-feature-flags.html#appconfig-type-reference-feature-flags
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-type-reference-feature-flags.html
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -1174,6 +1392,10 @@ module Aws::AppConfig
     #
     # @option params [String] :description
     #   A description of the configuration.
+    #
+    #   <note markdown="1"> Due to HTTP limitations, this field only supports ASCII characters.
+    #
+    #    </note>
     #
     # @option params [required, String, StringIO, File] :content
     #   The configuration data, as bytes.
@@ -1239,8 +1461,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_hosted_configuration_version({
-    #     application_id: "Id", # required
-    #     configuration_profile_id: "Id", # required
+    #     application_id: "Name", # required
+    #     configuration_profile_id: "LongName", # required
     #     description: "Description",
     #     content: "data", # required
     #     content_type: "StringWithLengthBetween1And255", # required
@@ -1287,7 +1509,7 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_application({
-    #     application_id: "Id", # required
+    #     application_id: "Name", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteApplication AWS API Documentation
@@ -1356,8 +1578,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_configuration_profile({
-    #     application_id: "Id", # required
-    #     configuration_profile_id: "Id", # required
+    #     application_id: "Name", # required
+    #     configuration_profile_id: "LongName", # required
     #     deletion_protection_check: "ACCOUNT_DEFAULT", # accepts ACCOUNT_DEFAULT, APPLY, BYPASS
     #   })
     #
@@ -1458,8 +1680,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_environment({
-    #     environment_id: "Id", # required
-    #     application_id: "Id", # required
+    #     environment_id: "Name", # required
+    #     application_id: "Name", # required
     #     deletion_protection_check: "ACCOUNT_DEFAULT", # accepts ACCOUNT_DEFAULT, APPLY, BYPASS
     #   })
     #
@@ -1469,6 +1691,49 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def delete_environment(params = {}, options = {})
       req = build_request(:delete_environment, params)
+      req.send_request(options)
+    end
+
+    # Deletes an experiment definition. You can archive the definition to
+    # hide it from the active list while preserving it for future reference,
+    # or permanently delete it along with all associated run history.
+    #
+    # @option params [required, String] :application_identifier
+    #   The application ID or name.
+    #
+    # @option params [required, String] :experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #
+    # @option params [String] :delete_type
+    #   The type of deletion to perform. Valid values include archive (hide
+    #   but preserve) and permanent (delete permanently).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete an experiment definition
+    #
+    #   # The following DeleteExperimentDefinition example archives (soft-deletes) the specified experiment definition.
+    #
+    #   resp = client.delete_experiment_definition({
+    #     application_identifier: "339ohji", 
+    #     experiment_definition_identifier: "bsxyd7k", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_experiment_definition({
+    #     application_identifier: "Identifier", # required
+    #     experiment_definition_identifier: "Identifier", # required
+    #     delete_type: "ARCHIVE", # accepts ARCHIVE, DESTROY
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteExperimentDefinition AWS API Documentation
+    #
+    # @overload delete_experiment_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_experiment_definition(params = {}, options = {})
+      req = build_request(:delete_experiment_definition, params)
       req.send_request(options)
     end
 
@@ -1553,8 +1818,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_hosted_configuration_version({
-    #     application_id: "Id", # required
-    #     configuration_profile_id: "Id", # required
+    #     application_id: "Name", # required
+    #     configuration_profile_id: "LongName", # required
     #     version_number: 1, # required
     #   })
     #
@@ -1573,11 +1838,13 @@ module Aws::AppConfig
     # @return [Types::AccountSettings] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AccountSettings#deletion_protection #deletion_protection} => Types::DeletionProtectionSettings
+    #   * {Types::AccountSettings#vended_metrics #vended_metrics} => Types::VendedMetricsSettings
     #
     # @example Response structure
     #
     #   resp.deletion_protection.enabled #=> Boolean
     #   resp.deletion_protection.protection_period_in_minutes #=> Integer
+    #   resp.vended_metrics.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetAccountSettings AWS API Documentation
     #
@@ -1617,7 +1884,7 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_application({
-    #     application_id: "Id", # required
+    #     application_id: "Name", # required
     #   })
     #
     # @example Response structure
@@ -1796,8 +2063,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_configuration_profile({
-    #     application_id: "Id", # required
-    #     configuration_profile_id: "Id", # required
+    #     application_id: "Name", # required
+    #     configuration_profile_id: "LongName", # required
     #   })
     #
     # @example Response structure
@@ -1941,8 +2208,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_deployment({
-    #     application_id: "Id", # required
-    #     environment_id: "Id", # required
+    #     application_id: "Name", # required
+    #     environment_id: "Name", # required
     #     deployment_number: 1, # required
     #   })
     #
@@ -2113,8 +2380,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_environment({
-    #     application_id: "Id", # required
-    #     environment_id: "Id", # required
+    #     application_id: "Name", # required
+    #     environment_id: "Name", # required
     #   })
     #
     # @example Response structure
@@ -2139,6 +2406,250 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def get_environment(params = {}, options = {})
       req = build_request(:get_environment, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an experiment definition.
+    #
+    # @option params [required, String] :application_identifier
+    #   The application ID or name.
+    #
+    # @option params [required, String] :experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #
+    # @return [Types::ExperimentDefinition] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExperimentDefinition#application_id #application_id} => String
+    #   * {Types::ExperimentDefinition#id #id} => String
+    #   * {Types::ExperimentDefinition#name #name} => String
+    #   * {Types::ExperimentDefinition#hypothesis #hypothesis} => String
+    #   * {Types::ExperimentDefinition#status #status} => String
+    #   * {Types::ExperimentDefinition#configuration_profile_id #configuration_profile_id} => String
+    #   * {Types::ExperimentDefinition#environment_id #environment_id} => String
+    #   * {Types::ExperimentDefinition#flag_key #flag_key} => String
+    #   * {Types::ExperimentDefinition#audience_rule #audience_rule} => String
+    #   * {Types::ExperimentDefinition#audience_description #audience_description} => String
+    #   * {Types::ExperimentDefinition#launch_criteria #launch_criteria} => String
+    #   * {Types::ExperimentDefinition#treatments #treatments} => Array&lt;Types::Treatment&gt;
+    #   * {Types::ExperimentDefinition#control #control} => Types::Treatment
+    #   * {Types::ExperimentDefinition#created_at #created_at} => Time
+    #   * {Types::ExperimentDefinition#updated_at #updated_at} => Time
+    #   * {Types::ExperimentDefinition#kms_key_identifier #kms_key_identifier} => String
+    #
+    #
+    # @example Example: To get an experiment definition
+    #
+    #   # The following GetExperimentDefinition example retrieves the details of an experiment definition.
+    #
+    #   resp = client.get_experiment_definition({
+    #     application_identifier: "339ohji", 
+    #     experiment_definition_identifier: "bsxyd7k", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     audience_rule: "(eq $country \"US\")", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     control: {
+    #       flag_value: {
+    #         enabled: false, 
+    #       }, 
+    #       key: "c", 
+    #       weight: 50.0, 
+    #     }, 
+    #     created_at: Time.parse("2026-06-16T17:54:55.847Z"), 
+    #     environment_id: "54j1r29", 
+    #     flag_key: "my-feature-flag", 
+    #     id: "bsxyd7k", 
+    #     name: "Example-Experiment-Definition", 
+    #     status: "IDLE", 
+    #     treatments: [
+    #       {
+    #         flag_value: {
+    #           enabled: true, 
+    #         }, 
+    #         key: "t1", 
+    #         weight: 50.0, 
+    #       }, 
+    #     ], 
+    #     updated_at: Time.parse("2026-06-16T17:57:36Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_experiment_definition({
+    #     application_identifier: "Identifier", # required
+    #     experiment_definition_identifier: "Identifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.hypothesis #=> String
+    #   resp.status #=> String, one of "ACTIVE", "IDLE", "ARCHIVED"
+    #   resp.configuration_profile_id #=> String
+    #   resp.environment_id #=> String
+    #   resp.flag_key #=> String
+    #   resp.audience_rule #=> String
+    #   resp.audience_description #=> String
+    #   resp.launch_criteria #=> String
+    #   resp.treatments #=> Array
+    #   resp.treatments[0].key #=> String
+    #   resp.treatments[0].weight #=> Float
+    #   resp.treatments[0].description #=> String
+    #   resp.treatments[0].flag_value.enabled #=> Boolean
+    #   resp.treatments[0].flag_value.attribute_values #=> Hash
+    #   resp.treatments[0].flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.control.key #=> String
+    #   resp.control.weight #=> Float
+    #   resp.control.description #=> String
+    #   resp.control.flag_value.enabled #=> Boolean
+    #   resp.control.flag_value.attribute_values #=> Hash
+    #   resp.control.flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.kms_key_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetExperimentDefinition AWS API Documentation
+    #
+    # @overload get_experiment_definition(params = {})
+    # @param [Hash] params ({})
+    def get_experiment_definition(params = {}, options = {})
+      req = build_request(:get_experiment_definition, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an experiment run, including its status,
+    # start time, and exposure settings.
+    #
+    # @option params [required, String] :application_identifier
+    #   The application ID or name.
+    #
+    # @option params [required, String] :experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #
+    # @option params [required, Integer] :run
+    #   The run number to retrieve.
+    #
+    # @return [Types::ExperimentRun] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExperimentRun#application_id #application_id} => String
+    #   * {Types::ExperimentRun#experiment_definition_id #experiment_definition_id} => String
+    #   * {Types::ExperimentRun#run #run} => Integer
+    #   * {Types::ExperimentRun#description #description} => String
+    #   * {Types::ExperimentRun#status #status} => String
+    #   * {Types::ExperimentRun#exposure_percentage #exposure_percentage} => Float
+    #   * {Types::ExperimentRun#treatment_overrides #treatment_overrides} => Types::TreatmentOverrides
+    #   * {Types::ExperimentRun#result #result} => Types::ExperimentRunResult
+    #   * {Types::ExperimentRun#started_at #started_at} => Time
+    #   * {Types::ExperimentRun#updated_at #updated_at} => Time
+    #   * {Types::ExperimentRun#ended_at #ended_at} => Time
+    #   * {Types::ExperimentRun#experiment_definition_snapshot #experiment_definition_snapshot} => Types::ExperimentDefinitionSnapshot
+    #
+    #
+    # @example Example: To get an experiment run
+    #
+    #   # The following GetExperimentRun example retrieves the details of an experiment run.
+    #
+    #   resp = client.get_experiment_run({
+    #     application_identifier: "339ohji", 
+    #     experiment_definition_identifier: "bsxyd7k", 
+    #     run: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     experiment_definition_id: "bsxyd7k", 
+    #     experiment_definition_snapshot: {
+    #       application_id: "339ohji", 
+    #       audience_rule: "(eq $country \"US\")", 
+    #       configuration_profile_id: "ur8hx2f", 
+    #       control: {
+    #         flag_value: {
+    #           enabled: false, 
+    #         }, 
+    #         key: "c", 
+    #         weight: 50.0, 
+    #       }, 
+    #       environment_id: "54j1r29", 
+    #       flag_key: "my-feature-flag", 
+    #       id: "bsxyd7k", 
+    #       name: "Example-Experiment-Definition", 
+    #       treatments: [
+    #         {
+    #           flag_value: {
+    #             enabled: true, 
+    #           }, 
+    #           key: "t1", 
+    #           weight: 50.0, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     exposure_percentage: 50.0, 
+    #     run: 1, 
+    #     started_at: Time.parse("2026-06-16T17:57:10.046Z"), 
+    #     status: "RUNNING", 
+    #     updated_at: Time.parse("2026-06-16T17:57:10.567Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_experiment_run({
+    #     application_identifier: "Identifier", # required
+    #     experiment_definition_identifier: "Identifier", # required
+    #     run: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.experiment_definition_id #=> String
+    #   resp.run #=> Integer
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "RUNNING", "DONE"
+    #   resp.exposure_percentage #=> Float
+    #   resp.treatment_overrides.inline #=> Hash
+    #   resp.treatment_overrides.inline["EntityId"] #=> String
+    #   resp.result.executive_summary #=> String
+    #   resp.result.reasons_to_launch #=> String
+    #   resp.result.reasons_not_to_launch #=> String
+    #   resp.started_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.ended_at #=> Time
+    #   resp.experiment_definition_snapshot.application_id #=> String
+    #   resp.experiment_definition_snapshot.id #=> String
+    #   resp.experiment_definition_snapshot.name #=> String
+    #   resp.experiment_definition_snapshot.hypothesis #=> String
+    #   resp.experiment_definition_snapshot.configuration_profile_id #=> String
+    #   resp.experiment_definition_snapshot.environment_id #=> String
+    #   resp.experiment_definition_snapshot.flag_key #=> String
+    #   resp.experiment_definition_snapshot.audience_rule #=> String
+    #   resp.experiment_definition_snapshot.audience_description #=> String
+    #   resp.experiment_definition_snapshot.launch_criteria #=> String
+    #   resp.experiment_definition_snapshot.treatments #=> Array
+    #   resp.experiment_definition_snapshot.treatments[0].key #=> String
+    #   resp.experiment_definition_snapshot.treatments[0].weight #=> Float
+    #   resp.experiment_definition_snapshot.treatments[0].description #=> String
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.enabled #=> Boolean
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.attribute_values #=> Hash
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.experiment_definition_snapshot.control.key #=> String
+    #   resp.experiment_definition_snapshot.control.weight #=> Float
+    #   resp.experiment_definition_snapshot.control.description #=> String
+    #   resp.experiment_definition_snapshot.control.flag_value.enabled #=> Boolean
+    #   resp.experiment_definition_snapshot.control.flag_value.attribute_values #=> Hash
+    #   resp.experiment_definition_snapshot.control.flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetExperimentRun AWS API Documentation
+    #
+    # @overload get_experiment_run(params = {})
+    # @param [Hash] params ({})
+    def get_experiment_run(params = {}, options = {})
+      req = build_request(:get_experiment_run, params)
       req.send_request(options)
     end
 
@@ -2285,8 +2796,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_hosted_configuration_version({
-    #     application_id: "Id", # required
-    #     configuration_profile_id: "Id", # required
+    #     application_id: "Name", # required
+    #     configuration_profile_id: "LongName", # required
     #     version_number: 1, # required
     #   })
     #
@@ -2430,7 +2941,7 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configuration_profiles({
-    #     application_id: "Id", # required
+    #     application_id: "Name", # required
     #     max_results: 1,
     #     next_token: "NextToken",
     #     type: "ConfigurationProfileType",
@@ -2587,8 +3098,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_deployments({
-    #     application_id: "Id", # required
-    #     environment_id: "Id", # required
+    #     application_id: "Name", # required
+    #     environment_id: "Name", # required
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -2597,6 +3108,7 @@ module Aws::AppConfig
     #
     #   resp.items #=> Array
     #   resp.items[0].deployment_number #=> Integer
+    #   resp.items[0].configuration_profile_id #=> String
     #   resp.items[0].configuration_name #=> String
     #   resp.items[0].configuration_version #=> String
     #   resp.items[0].deployment_duration_in_minutes #=> Integer
@@ -2608,6 +3120,7 @@ module Aws::AppConfig
     #   resp.items[0].started_at #=> Time
     #   resp.items[0].completed_at #=> Time
     #   resp.items[0].version_label #=> String
+    #   resp.items[0].type #=> String, one of "USER", "MANAGED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListDeployments AWS API Documentation
@@ -2665,7 +3178,7 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_environments({
-    #     application_id: "Id", # required
+    #     application_id: "Name", # required
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -2689,6 +3202,263 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def list_environments(params = {}, options = {})
       req = build_request(:list_environments, params)
+      req.send_request(options)
+    end
+
+    # Lists the experiment definitions for an account. You can filter
+    # results by application, configuration profile, environment, or status.
+    #
+    # @option params [String] :application_identifier
+    #   The application ID or name to filter results.
+    #
+    # @option params [String] :configuration_profile_identifier
+    #   The configuration profile ID or name to filter results.
+    #
+    # @option params [String] :environment_identifier
+    #   The environment ID or name to filter results.
+    #
+    # @option params [String] :status
+    #   A filter for the experiment definition status.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list from a previously truncated response.
+    #
+    # @return [Types::ExperimentDefinitions] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExperimentDefinitions#items #items} => Array&lt;Types::ExperimentDefinitionSummary&gt;
+    #   * {Types::ExperimentDefinitions#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list experiment definitions
+    #
+    #   # The following ListExperimentDefinitions example lists the experiment definitions for an application.
+    #
+    #   resp = client.list_experiment_definitions({
+    #     application_identifier: "339ohji", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         application_id: "339ohji", 
+    #         configuration_profile_id: "ur8hx2f", 
+    #         created_at: Time.parse("2026-06-16T17:54:55.847Z"), 
+    #         environment_id: "54j1r29", 
+    #         flag_key: "my-feature-flag", 
+    #         id: "bsxyd7k", 
+    #         name: "Example-Experiment-Definition", 
+    #         status: "IDLE", 
+    #         updated_at: Time.parse("2026-06-16T17:57:36Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_experiment_definitions({
+    #     application_identifier: "Identifier",
+    #     configuration_profile_identifier: "Identifier",
+    #     environment_identifier: "Identifier",
+    #     status: "ACTIVE", # accepts ACTIVE, IDLE, ARCHIVED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].application_id #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].hypothesis #=> String
+    #   resp.items[0].status #=> String, one of "ACTIVE", "IDLE", "ARCHIVED"
+    #   resp.items[0].configuration_profile_id #=> String
+    #   resp.items[0].environment_id #=> String
+    #   resp.items[0].flag_key #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListExperimentDefinitions AWS API Documentation
+    #
+    # @overload list_experiment_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_experiment_definitions(params = {}, options = {})
+      req = build_request(:list_experiment_definitions, params)
+      req.send_request(options)
+    end
+
+    # Lists the events for a specified experiment run. Events provide a
+    # timeline of actions and state changes that occurred during the run.
+    #
+    # @option params [required, String] :application_identifier
+    #   The application ID or name.
+    #
+    # @option params [required, String] :experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #
+    # @option params [required, Integer] :run
+    #   The run number.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list from a previously truncated response.
+    #
+    # @return [Types::ExperimentRunEvents] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExperimentRunEvents#items #items} => Array&lt;Types::ExperimentRunEvent&gt;
+    #   * {Types::ExperimentRunEvents#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list experiment run events
+    #
+    #   # The following ListExperimentRunEvents example lists the events for an experiment run.
+    #
+    #   resp = client.list_experiment_run_events({
+    #     application_identifier: "339ohji", 
+    #     experiment_definition_identifier: "bsxyd7k", 
+    #     run: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         description: "Experiment run stopped", 
+    #         event_type: "RUN_STOPPED", 
+    #         exposure_percentage: 50.0, 
+    #         occurred_at: Time.parse("2026-06-16T17:57:36.083Z"), 
+    #         triggered_by: "USER", 
+    #       }, 
+    #       {
+    #         description: "Experiment run started", 
+    #         event_type: "RUN_STARTED", 
+    #         exposure_percentage: 50.0, 
+    #         occurred_at: Time.parse("2026-06-16T17:57:10.567Z"), 
+    #         triggered_by: "USER", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_experiment_run_events({
+    #     application_identifier: "Identifier", # required
+    #     experiment_definition_identifier: "Identifier", # required
+    #     run: 1, # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].description #=> String
+    #   resp.items[0].associated_deployment #=> String
+    #   resp.items[0].event_type #=> String, one of "RUN_STARTED", "EXPOSURE_UPDATED", "OVERRIDES_UPDATED", "RUN_STOPPED"
+    #   resp.items[0].occurred_at #=> Time
+    #   resp.items[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
+    #   resp.items[0].exposure_percentage #=> Float
+    #   resp.items[0].treatment_overrides.inline #=> Hash
+    #   resp.items[0].treatment_overrides.inline["EntityId"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListExperimentRunEvents AWS API Documentation
+    #
+    # @overload list_experiment_run_events(params = {})
+    # @param [Hash] params ({})
+    def list_experiment_run_events(params = {}, options = {})
+      req = build_request(:list_experiment_run_events, params)
+      req.send_request(options)
+    end
+
+    # Lists the experiment runs for a specified experiment definition. You
+    # can filter by status.
+    #
+    # @option params [required, String] :application_identifier
+    #   The application ID or name.
+    #
+    # @option params [required, String] :experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list from a previously truncated response.
+    #
+    # @option params [String] :status
+    #   A filter for the experiment run status.
+    #
+    # @return [Types::ExperimentRuns] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExperimentRuns#items #items} => Array&lt;Types::ExperimentRunSummary&gt;
+    #   * {Types::ExperimentRuns#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list experiment runs
+    #
+    #   # The following ListExperimentRuns example lists the experiment runs for an experiment definition.
+    #
+    #   resp = client.list_experiment_runs({
+    #     application_identifier: "339ohji", 
+    #     experiment_definition_identifier: "bsxyd7k", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         ended_at: Time.parse("2026-06-16T17:57:36.083Z"), 
+    #         experiment_definition_id: "bsxyd7k", 
+    #         run: 1, 
+    #         started_at: Time.parse("2026-06-16T17:57:10.046Z"), 
+    #         status: "DONE", 
+    #         updated_at: Time.parse("2026-06-16T17:57:36.083Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_experiment_runs({
+    #     application_identifier: "Identifier", # required
+    #     experiment_definition_identifier: "Identifier", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     status: "RUNNING", # accepts RUNNING, DONE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].experiment_definition_id #=> String
+    #   resp.items[0].run #=> Integer
+    #   resp.items[0].description #=> String
+    #   resp.items[0].status #=> String, one of "RUNNING", "DONE"
+    #   resp.items[0].started_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListExperimentRuns AWS API Documentation
+    #
+    # @overload list_experiment_runs(params = {})
+    # @param [Hash] params ({})
+    def list_experiment_runs(params = {}, options = {})
+      req = build_request(:list_experiment_runs, params)
       req.send_request(options)
     end
 
@@ -2865,8 +3635,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_hosted_configuration_versions({
-    #     application_id: "Id", # required
-    #     configuration_profile_id: "Id", # required
+    #     application_id: "Name", # required
+    #     configuration_profile_id: "LongName", # required
     #     max_results: 1,
     #     next_token: "NextToken",
     #     version_label: "QueryName",
@@ -2940,6 +3710,21 @@ module Aws::AppConfig
 
     # Starts a deployment.
     #
+    # <note markdown="1"> AppConfig Agent supports deploying feature flag or free-form
+    # configuration data to specific segments or individual users during a
+    # gradual rollout. Entity-based gradual deployments ensure that once a
+    # user or segment receives a configuration version, they continue to
+    # receive that same version throughout the deployment period, regardless
+    # of which compute resource serves their requests. For more information,
+    # see [Using AppConfig Agent for user-based or entity-based gradual
+    # deployments][1]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-agent-how-to-use.html#appconfig-entity-based-gradual-deployments
+    #
     # @option params [required, String] :application_id
     #   The application ID.
     #
@@ -2974,6 +3759,11 @@ module Aws::AppConfig
     # @option params [Hash<String,String>] :dynamic_extension_parameters
     #   A map of dynamic extension parameter names to values to pass to
     #   associated extensions with `PRE_START_DEPLOYMENT` actions.
+    #
+    # @option params [Integer] :latest_deployment_number
+    #   The number of the latest deployment. Use this value to ensure that the
+    #   deployment starts from the expected state and to prevent conflicting
+    #   updates.
     #
     # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3047,10 +3837,10 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_deployment({
-    #     application_id: "Id", # required
-    #     environment_id: "Id", # required
+    #     application_id: "Name", # required
+    #     environment_id: "Name", # required
     #     deployment_strategy_id: "DeploymentStrategyId", # required
-    #     configuration_profile_id: "Id", # required
+    #     configuration_profile_id: "LongName", # required
     #     configuration_version: "Version", # required
     #     description: "Description",
     #     tags: {
@@ -3060,6 +3850,7 @@ module Aws::AppConfig
     #     dynamic_extension_parameters: {
     #       "DynamicParameterKey" => "StringWithLengthBetween1And2048",
     #     },
+    #     latest_deployment_number: 1,
     #   })
     #
     # @example Response structure
@@ -3110,6 +3901,181 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def start_deployment(params = {}, options = {})
       req = build_request(:start_deployment, params)
+      req.send_request(options)
+    end
+
+    # Starts an experiment run for the specified experiment definition. An
+    # experiment run delivers treatments to the target audience and collects
+    # metrics. You can start multiple experiment runs from the same
+    # experiment definition.
+    #
+    # <note markdown="1"> Billing for this experiment begins when you call this operation and
+    # continues until the experiment is stopped. For pricing details, see
+    # [AppConfig pricing][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/systems-manager/pricing/
+    #
+    # @option params [required, String] :application_identifier
+    #   The application ID or name.
+    #
+    # @option params [required, String] :experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #
+    # @option params [String] :description
+    #   A description of this experiment run.
+    #
+    # @option params [Float] :exposure_percentage
+    #   The percentage of the target audience to expose to treatments. Set to
+    #   0 to validate the experiment before exposing production users.
+    #
+    # @option params [Types::TreatmentOverrides] :treatment_overrides
+    #   Treatment assignment overrides that assign specific entity IDs to
+    #   treatments directly, bypassing random assignment.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the experiment run.
+    #
+    # @option params [Types::DeploymentParameters] :deployment_parameters
+    #   The deployment parameters for the experiment run, including a KMS key
+    #   identifier for encryption.
+    #
+    # @return [Types::ExperimentRun] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExperimentRun#application_id #application_id} => String
+    #   * {Types::ExperimentRun#experiment_definition_id #experiment_definition_id} => String
+    #   * {Types::ExperimentRun#run #run} => Integer
+    #   * {Types::ExperimentRun#description #description} => String
+    #   * {Types::ExperimentRun#status #status} => String
+    #   * {Types::ExperimentRun#exposure_percentage #exposure_percentage} => Float
+    #   * {Types::ExperimentRun#treatment_overrides #treatment_overrides} => Types::TreatmentOverrides
+    #   * {Types::ExperimentRun#result #result} => Types::ExperimentRunResult
+    #   * {Types::ExperimentRun#started_at #started_at} => Time
+    #   * {Types::ExperimentRun#updated_at #updated_at} => Time
+    #   * {Types::ExperimentRun#ended_at #ended_at} => Time
+    #   * {Types::ExperimentRun#experiment_definition_snapshot #experiment_definition_snapshot} => Types::ExperimentDefinitionSnapshot
+    #
+    #
+    # @example Example: To start an experiment run
+    #
+    #   # The following StartExperimentRun example starts an experiment run with 50% audience exposure.
+    #
+    #   resp = client.start_experiment_run({
+    #     application_identifier: "339ohji", 
+    #     experiment_definition_identifier: "bsxyd7k", 
+    #     exposure_percentage: 50.0, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     experiment_definition_id: "bsxyd7k", 
+    #     experiment_definition_snapshot: {
+    #       application_id: "339ohji", 
+    #       audience_rule: "(eq $country \"US\")", 
+    #       configuration_profile_id: "ur8hx2f", 
+    #       control: {
+    #         flag_value: {
+    #           enabled: false, 
+    #         }, 
+    #         key: "c", 
+    #         weight: 50.0, 
+    #       }, 
+    #       environment_id: "54j1r29", 
+    #       flag_key: "my-feature-flag", 
+    #       id: "bsxyd7k", 
+    #       name: "Example-Experiment-Definition", 
+    #       treatments: [
+    #         {
+    #           flag_value: {
+    #             enabled: true, 
+    #           }, 
+    #           key: "t1", 
+    #           weight: 50.0, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     exposure_percentage: 50.0, 
+    #     run: 1, 
+    #     started_at: Time.parse("2026-06-16T17:57:10.046Z"), 
+    #     status: "RUNNING", 
+    #     updated_at: Time.parse("2026-06-16T17:57:10.567Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_experiment_run({
+    #     application_identifier: "Identifier", # required
+    #     experiment_definition_identifier: "Identifier", # required
+    #     description: "Description",
+    #     exposure_percentage: 1.0,
+    #     treatment_overrides: {
+    #       inline: {
+    #         "EntityId" => "TreatmentKey",
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     deployment_parameters: {
+    #       dynamic_extension_parameters: {
+    #         "DynamicParameterKey" => "StringWithLengthBetween1And2048",
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.experiment_definition_id #=> String
+    #   resp.run #=> Integer
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "RUNNING", "DONE"
+    #   resp.exposure_percentage #=> Float
+    #   resp.treatment_overrides.inline #=> Hash
+    #   resp.treatment_overrides.inline["EntityId"] #=> String
+    #   resp.result.executive_summary #=> String
+    #   resp.result.reasons_to_launch #=> String
+    #   resp.result.reasons_not_to_launch #=> String
+    #   resp.started_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.ended_at #=> Time
+    #   resp.experiment_definition_snapshot.application_id #=> String
+    #   resp.experiment_definition_snapshot.id #=> String
+    #   resp.experiment_definition_snapshot.name #=> String
+    #   resp.experiment_definition_snapshot.hypothesis #=> String
+    #   resp.experiment_definition_snapshot.configuration_profile_id #=> String
+    #   resp.experiment_definition_snapshot.environment_id #=> String
+    #   resp.experiment_definition_snapshot.flag_key #=> String
+    #   resp.experiment_definition_snapshot.audience_rule #=> String
+    #   resp.experiment_definition_snapshot.audience_description #=> String
+    #   resp.experiment_definition_snapshot.launch_criteria #=> String
+    #   resp.experiment_definition_snapshot.treatments #=> Array
+    #   resp.experiment_definition_snapshot.treatments[0].key #=> String
+    #   resp.experiment_definition_snapshot.treatments[0].weight #=> Float
+    #   resp.experiment_definition_snapshot.treatments[0].description #=> String
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.enabled #=> Boolean
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.attribute_values #=> Hash
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.experiment_definition_snapshot.control.key #=> String
+    #   resp.experiment_definition_snapshot.control.weight #=> Float
+    #   resp.experiment_definition_snapshot.control.description #=> String
+    #   resp.experiment_definition_snapshot.control.flag_value.enabled #=> Boolean
+    #   resp.experiment_definition_snapshot.control.flag_value.attribute_values #=> Hash
+    #   resp.experiment_definition_snapshot.control.flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StartExperimentRun AWS API Documentation
+    #
+    # @overload start_experiment_run(params = {})
+    # @param [Hash] params ({})
+    def start_experiment_run(params = {}, options = {})
+      req = build_request(:start_experiment_run, params)
       req.send_request(options)
     end
 
@@ -3182,8 +4148,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_deployment({
-    #     application_id: "Id", # required
-    #     environment_id: "Id", # required
+    #     application_id: "Name", # required
+    #     environment_id: "Name", # required
     #     deployment_number: 1, # required
     #     allow_revert: false,
     #   })
@@ -3236,6 +4202,167 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def stop_deployment(params = {}, options = {})
       req = build_request(:stop_deployment, params)
+      req.send_request(options)
+    end
+
+    # Stops a running experiment. Stopping an experiment run ends audience
+    # exposure and returns users to the currently deployed feature flag
+    # configuration.
+    #
+    # @option params [required, String] :application_identifier
+    #   The application ID or name.
+    #
+    # @option params [required, String] :experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #
+    # @option params [required, Integer] :run
+    #   The run number to stop.
+    #
+    # @option params [Types::ExperimentRunResult] :result
+    #   The result of the experiment run, including an executive summary and
+    #   reasons for or against launching.
+    #
+    # @option params [Types::DeploymentParameters] :deployment_parameters
+    #   The deployment parameters for the stop operation.
+    #
+    # @return [Types::ExperimentRun] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExperimentRun#application_id #application_id} => String
+    #   * {Types::ExperimentRun#experiment_definition_id #experiment_definition_id} => String
+    #   * {Types::ExperimentRun#run #run} => Integer
+    #   * {Types::ExperimentRun#description #description} => String
+    #   * {Types::ExperimentRun#status #status} => String
+    #   * {Types::ExperimentRun#exposure_percentage #exposure_percentage} => Float
+    #   * {Types::ExperimentRun#treatment_overrides #treatment_overrides} => Types::TreatmentOverrides
+    #   * {Types::ExperimentRun#result #result} => Types::ExperimentRunResult
+    #   * {Types::ExperimentRun#started_at #started_at} => Time
+    #   * {Types::ExperimentRun#updated_at #updated_at} => Time
+    #   * {Types::ExperimentRun#ended_at #ended_at} => Time
+    #   * {Types::ExperimentRun#experiment_definition_snapshot #experiment_definition_snapshot} => Types::ExperimentDefinitionSnapshot
+    #
+    #
+    # @example Example: To stop an experiment run
+    #
+    #   # The following StopExperimentRun example stops a running experiment and records the result.
+    #
+    #   resp = client.stop_experiment_run({
+    #     application_identifier: "339ohji", 
+    #     experiment_definition_identifier: "bsxyd7k", 
+    #     result: {
+    #       executive_summary: "t1 wins with 16% lift in conversion", 
+    #       reasons_to_launch: "Significant improvement in key metric", 
+    #     }, 
+    #     run: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     ended_at: Time.parse("2026-06-16T17:57:36.083Z"), 
+    #     experiment_definition_id: "bsxyd7k", 
+    #     experiment_definition_snapshot: {
+    #       application_id: "339ohji", 
+    #       audience_rule: "(eq $country \"US\")", 
+    #       configuration_profile_id: "ur8hx2f", 
+    #       control: {
+    #         flag_value: {
+    #           enabled: false, 
+    #         }, 
+    #         key: "c", 
+    #         weight: 50.0, 
+    #       }, 
+    #       environment_id: "54j1r29", 
+    #       flag_key: "my-feature-flag", 
+    #       id: "bsxyd7k", 
+    #       name: "Example-Experiment-Definition", 
+    #       treatments: [
+    #         {
+    #           flag_value: {
+    #             enabled: true, 
+    #           }, 
+    #           key: "t1", 
+    #           weight: 50.0, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     exposure_percentage: 50.0, 
+    #     result: {
+    #       executive_summary: "t1 wins with 16% lift in conversion", 
+    #       reasons_to_launch: "Significant improvement in key metric", 
+    #     }, 
+    #     run: 1, 
+    #     started_at: Time.parse("2026-06-16T17:57:10.046Z"), 
+    #     status: "DONE", 
+    #     updated_at: Time.parse("2026-06-16T17:57:36.083Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_experiment_run({
+    #     application_identifier: "Identifier", # required
+    #     experiment_definition_identifier: "Identifier", # required
+    #     run: 1, # required
+    #     result: {
+    #       executive_summary: "Description",
+    #       reasons_to_launch: "Description",
+    #       reasons_not_to_launch: "Description",
+    #     },
+    #     deployment_parameters: {
+    #       dynamic_extension_parameters: {
+    #         "DynamicParameterKey" => "StringWithLengthBetween1And2048",
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.experiment_definition_id #=> String
+    #   resp.run #=> Integer
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "RUNNING", "DONE"
+    #   resp.exposure_percentage #=> Float
+    #   resp.treatment_overrides.inline #=> Hash
+    #   resp.treatment_overrides.inline["EntityId"] #=> String
+    #   resp.result.executive_summary #=> String
+    #   resp.result.reasons_to_launch #=> String
+    #   resp.result.reasons_not_to_launch #=> String
+    #   resp.started_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.ended_at #=> Time
+    #   resp.experiment_definition_snapshot.application_id #=> String
+    #   resp.experiment_definition_snapshot.id #=> String
+    #   resp.experiment_definition_snapshot.name #=> String
+    #   resp.experiment_definition_snapshot.hypothesis #=> String
+    #   resp.experiment_definition_snapshot.configuration_profile_id #=> String
+    #   resp.experiment_definition_snapshot.environment_id #=> String
+    #   resp.experiment_definition_snapshot.flag_key #=> String
+    #   resp.experiment_definition_snapshot.audience_rule #=> String
+    #   resp.experiment_definition_snapshot.audience_description #=> String
+    #   resp.experiment_definition_snapshot.launch_criteria #=> String
+    #   resp.experiment_definition_snapshot.treatments #=> Array
+    #   resp.experiment_definition_snapshot.treatments[0].key #=> String
+    #   resp.experiment_definition_snapshot.treatments[0].weight #=> Float
+    #   resp.experiment_definition_snapshot.treatments[0].description #=> String
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.enabled #=> Boolean
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.attribute_values #=> Hash
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.experiment_definition_snapshot.control.key #=> String
+    #   resp.experiment_definition_snapshot.control.weight #=> Float
+    #   resp.experiment_definition_snapshot.control.description #=> String
+    #   resp.experiment_definition_snapshot.control.flag_value.enabled #=> Boolean
+    #   resp.experiment_definition_snapshot.control.flag_value.attribute_values #=> Hash
+    #   resp.experiment_definition_snapshot.control.flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StopExperimentRun AWS API Documentation
+    #
+    # @overload stop_experiment_run(params = {})
+    # @param [Hash] params ({})
+    def stop_experiment_run(params = {}, options = {})
+      req = build_request(:stop_experiment_run, params)
       req.send_request(options)
     end
 
@@ -3336,9 +4463,13 @@ module Aws::AppConfig
     #
     #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
     #
+    # @option params [Types::VendedMetricsSettings] :vended_metrics
+    #   The configuration for vended metrics in the account.
+    #
     # @return [Types::AccountSettings] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AccountSettings#deletion_protection #deletion_protection} => Types::DeletionProtectionSettings
+    #   * {Types::AccountSettings#vended_metrics #vended_metrics} => Types::VendedMetricsSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -3347,12 +4478,16 @@ module Aws::AppConfig
     #       enabled: false,
     #       protection_period_in_minutes: 1,
     #     },
+    #     vended_metrics: {
+    #       enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.deletion_protection.enabled #=> Boolean
     #   resp.deletion_protection.protection_period_in_minutes #=> Integer
+    #   resp.vended_metrics.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateAccountSettings AWS API Documentation
     #
@@ -3401,7 +4536,7 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_application({
-    #     application_id: "Id", # required
+    #     application_id: "Name", # required
     #     name: "Name",
     #     description: "Description",
     #   })
@@ -3492,8 +4627,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_configuration_profile({
-    #     application_id: "Id", # required
-    #     configuration_profile_id: "Id", # required
+    #     application_id: "Name", # required
+    #     configuration_profile_id: "LongName", # required
     #     name: "LongName",
     #     description: "Description",
     #     retrieval_role_arn: "RoleArn",
@@ -3692,8 +4827,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_environment({
-    #     application_id: "Id", # required
-    #     environment_id: "Id", # required
+    #     application_id: "Name", # required
+    #     environment_id: "Name", # required
     #     name: "Name",
     #     description: "Description",
     #     monitors: [
@@ -3721,6 +4856,332 @@ module Aws::AppConfig
     # @param [Hash] params ({})
     def update_environment(params = {}, options = {})
       req = build_request(:update_environment, params)
+      req.send_request(options)
+    end
+
+    # Updates an experiment definition. You can update treatments, the
+    # control, audience rules, and other properties. You cannot update an
+    # experiment definition while an experiment run is active.
+    #
+    # @option params [required, String] :application_identifier
+    #   The application ID or name.
+    #
+    # @option params [required, String] :experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #
+    # @option params [Array<Types::TreatmentInput>] :treatments
+    #   The updated list of treatments to evaluate during the experiment. Each
+    #   treatment defines a distinct variation compared to the control.
+    #
+    # @option params [Types::TreatmentInput] :control
+    #   An updated control treatment.
+    #
+    # @option params [String] :hypothesis
+    #   An updated hypothesis.
+    #
+    # @option params [String] :audience_rule
+    #   An updated audience rule.
+    #
+    # @option params [String] :audience_description
+    #   An updated audience description.
+    #
+    # @option params [String] :launch_criteria
+    #   Updated launch criteria.
+    #
+    # @return [Types::ExperimentDefinition] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExperimentDefinition#application_id #application_id} => String
+    #   * {Types::ExperimentDefinition#id #id} => String
+    #   * {Types::ExperimentDefinition#name #name} => String
+    #   * {Types::ExperimentDefinition#hypothesis #hypothesis} => String
+    #   * {Types::ExperimentDefinition#status #status} => String
+    #   * {Types::ExperimentDefinition#configuration_profile_id #configuration_profile_id} => String
+    #   * {Types::ExperimentDefinition#environment_id #environment_id} => String
+    #   * {Types::ExperimentDefinition#flag_key #flag_key} => String
+    #   * {Types::ExperimentDefinition#audience_rule #audience_rule} => String
+    #   * {Types::ExperimentDefinition#audience_description #audience_description} => String
+    #   * {Types::ExperimentDefinition#launch_criteria #launch_criteria} => String
+    #   * {Types::ExperimentDefinition#treatments #treatments} => Array&lt;Types::Treatment&gt;
+    #   * {Types::ExperimentDefinition#control #control} => Types::Treatment
+    #   * {Types::ExperimentDefinition#created_at #created_at} => Time
+    #   * {Types::ExperimentDefinition#updated_at #updated_at} => Time
+    #   * {Types::ExperimentDefinition#kms_key_identifier #kms_key_identifier} => String
+    #
+    #
+    # @example Example: To update an experiment definition
+    #
+    #   # The following UpdateExperimentDefinition example updates the hypothesis and audience rule of an experiment definition.
+    #
+    #   resp = client.update_experiment_definition({
+    #     application_identifier: "339ohji", 
+    #     audience_rule: "(eq $country \"US\")", 
+    #     experiment_definition_identifier: "bsxyd7k", 
+    #     hypothesis: "Enabling the feature will increase conversion by 10%", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     audience_rule: "(eq $country \"US\")", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     control: {
+    #       flag_value: {
+    #         enabled: false, 
+    #       }, 
+    #       key: "c", 
+    #       weight: 50.0, 
+    #     }, 
+    #     created_at: Time.parse("2026-06-16T17:54:55.847Z"), 
+    #     environment_id: "54j1r29", 
+    #     flag_key: "my-feature-flag", 
+    #     hypothesis: "Enabling the feature will increase conversion by 10%", 
+    #     id: "bsxyd7k", 
+    #     name: "Example-Experiment-Definition", 
+    #     status: "IDLE", 
+    #     treatments: [
+    #       {
+    #         flag_value: {
+    #           enabled: true, 
+    #         }, 
+    #         key: "t1", 
+    #         weight: 50.0, 
+    #       }, 
+    #     ], 
+    #     updated_at: Time.parse("2026-06-16T18:04:33.632Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_experiment_definition({
+    #     application_identifier: "Identifier", # required
+    #     experiment_definition_identifier: "Identifier", # required
+    #     treatments: [
+    #       {
+    #         weight: 1.0, # required
+    #         description: "Description",
+    #         flag_value: { # required
+    #           enabled: false, # required
+    #           attribute_values: {
+    #             "AttributeKey" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     control: {
+    #       weight: 1.0, # required
+    #       description: "Description",
+    #       flag_value: { # required
+    #         enabled: false, # required
+    #         attribute_values: {
+    #           "AttributeKey" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         },
+    #       },
+    #     },
+    #     hypothesis: "Description",
+    #     audience_rule: "Rule",
+    #     audience_description: "Description",
+    #     launch_criteria: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.hypothesis #=> String
+    #   resp.status #=> String, one of "ACTIVE", "IDLE", "ARCHIVED"
+    #   resp.configuration_profile_id #=> String
+    #   resp.environment_id #=> String
+    #   resp.flag_key #=> String
+    #   resp.audience_rule #=> String
+    #   resp.audience_description #=> String
+    #   resp.launch_criteria #=> String
+    #   resp.treatments #=> Array
+    #   resp.treatments[0].key #=> String
+    #   resp.treatments[0].weight #=> Float
+    #   resp.treatments[0].description #=> String
+    #   resp.treatments[0].flag_value.enabled #=> Boolean
+    #   resp.treatments[0].flag_value.attribute_values #=> Hash
+    #   resp.treatments[0].flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.control.key #=> String
+    #   resp.control.weight #=> Float
+    #   resp.control.description #=> String
+    #   resp.control.flag_value.enabled #=> Boolean
+    #   resp.control.flag_value.attribute_values #=> Hash
+    #   resp.control.flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.kms_key_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateExperimentDefinition AWS API Documentation
+    #
+    # @overload update_experiment_definition(params = {})
+    # @param [Hash] params ({})
+    def update_experiment_definition(params = {}, options = {})
+      req = build_request(:update_experiment_definition, params)
+      req.send_request(options)
+    end
+
+    # Updates a running experiment. Use this operation to increase audience
+    # exposure, modify treatment assignment overrides, or update the
+    # description of an active experiment run. Audience exposure can only be
+    # increased, not decreased.
+    #
+    # @option params [required, String] :application_identifier
+    #   The application ID or name.
+    #
+    # @option params [required, String] :experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #
+    # @option params [required, Integer] :run
+    #   The run number to update.
+    #
+    # @option params [String] :description
+    #   An updated description for the experiment run.
+    #
+    # @option params [Float] :exposure_percentage
+    #   The new exposure percentage. This value can only be increased from the
+    #   current setting.
+    #
+    # @option params [Types::TreatmentOverrides] :treatment_overrides
+    #   The updated treatment assignment overrides that assign specific entity
+    #   IDs to treatments, bypassing random assignment.
+    #
+    # @option params [Types::DeploymentParameters] :deployment_parameters
+    #   The updated deployment parameters for the experiment run.
+    #
+    # @return [Types::ExperimentRun] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExperimentRun#application_id #application_id} => String
+    #   * {Types::ExperimentRun#experiment_definition_id #experiment_definition_id} => String
+    #   * {Types::ExperimentRun#run #run} => Integer
+    #   * {Types::ExperimentRun#description #description} => String
+    #   * {Types::ExperimentRun#status #status} => String
+    #   * {Types::ExperimentRun#exposure_percentage #exposure_percentage} => Float
+    #   * {Types::ExperimentRun#treatment_overrides #treatment_overrides} => Types::TreatmentOverrides
+    #   * {Types::ExperimentRun#result #result} => Types::ExperimentRunResult
+    #   * {Types::ExperimentRun#started_at #started_at} => Time
+    #   * {Types::ExperimentRun#updated_at #updated_at} => Time
+    #   * {Types::ExperimentRun#ended_at #ended_at} => Time
+    #   * {Types::ExperimentRun#experiment_definition_snapshot #experiment_definition_snapshot} => Types::ExperimentDefinitionSnapshot
+    #
+    #
+    # @example Example: To update an experiment run
+    #
+    #   # The following UpdateExperimentRun example increases the exposure percentage of a running experiment.
+    #
+    #   resp = client.update_experiment_run({
+    #     application_identifier: "339ohji", 
+    #     experiment_definition_identifier: "bsxyd7k", 
+    #     exposure_percentage: 75.0, 
+    #     run: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     experiment_definition_id: "bsxyd7k", 
+    #     experiment_definition_snapshot: {
+    #       application_id: "339ohji", 
+    #       audience_rule: "(eq $country \"US\")", 
+    #       configuration_profile_id: "ur8hx2f", 
+    #       control: {
+    #         flag_value: {
+    #           enabled: false, 
+    #         }, 
+    #         key: "c", 
+    #         weight: 50.0, 
+    #       }, 
+    #       environment_id: "54j1r29", 
+    #       flag_key: "my-feature-flag", 
+    #       id: "bsxyd7k", 
+    #       name: "Example-Experiment-Definition", 
+    #       treatments: [
+    #         {
+    #           flag_value: {
+    #             enabled: true, 
+    #           }, 
+    #           key: "t1", 
+    #           weight: 50.0, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     exposure_percentage: 75.0, 
+    #     run: 1, 
+    #     started_at: Time.parse("2026-06-16T17:57:10.046Z"), 
+    #     status: "RUNNING", 
+    #     updated_at: Time.parse("2026-06-16T18:01:24.769Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_experiment_run({
+    #     application_identifier: "Identifier", # required
+    #     experiment_definition_identifier: "Identifier", # required
+    #     run: 1, # required
+    #     description: "Description",
+    #     exposure_percentage: 1.0,
+    #     treatment_overrides: {
+    #       inline: {
+    #         "EntityId" => "TreatmentKey",
+    #       },
+    #     },
+    #     deployment_parameters: {
+    #       dynamic_extension_parameters: {
+    #         "DynamicParameterKey" => "StringWithLengthBetween1And2048",
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.experiment_definition_id #=> String
+    #   resp.run #=> Integer
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "RUNNING", "DONE"
+    #   resp.exposure_percentage #=> Float
+    #   resp.treatment_overrides.inline #=> Hash
+    #   resp.treatment_overrides.inline["EntityId"] #=> String
+    #   resp.result.executive_summary #=> String
+    #   resp.result.reasons_to_launch #=> String
+    #   resp.result.reasons_not_to_launch #=> String
+    #   resp.started_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.ended_at #=> Time
+    #   resp.experiment_definition_snapshot.application_id #=> String
+    #   resp.experiment_definition_snapshot.id #=> String
+    #   resp.experiment_definition_snapshot.name #=> String
+    #   resp.experiment_definition_snapshot.hypothesis #=> String
+    #   resp.experiment_definition_snapshot.configuration_profile_id #=> String
+    #   resp.experiment_definition_snapshot.environment_id #=> String
+    #   resp.experiment_definition_snapshot.flag_key #=> String
+    #   resp.experiment_definition_snapshot.audience_rule #=> String
+    #   resp.experiment_definition_snapshot.audience_description #=> String
+    #   resp.experiment_definition_snapshot.launch_criteria #=> String
+    #   resp.experiment_definition_snapshot.treatments #=> Array
+    #   resp.experiment_definition_snapshot.treatments[0].key #=> String
+    #   resp.experiment_definition_snapshot.treatments[0].weight #=> Float
+    #   resp.experiment_definition_snapshot.treatments[0].description #=> String
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.enabled #=> Boolean
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.attribute_values #=> Hash
+    #   resp.experiment_definition_snapshot.treatments[0].flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.experiment_definition_snapshot.control.key #=> String
+    #   resp.experiment_definition_snapshot.control.weight #=> Float
+    #   resp.experiment_definition_snapshot.control.description #=> String
+    #   resp.experiment_definition_snapshot.control.flag_value.enabled #=> Boolean
+    #   resp.experiment_definition_snapshot.control.flag_value.attribute_values #=> Hash
+    #   resp.experiment_definition_snapshot.control.flag_value.attribute_values["AttributeKey"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateExperimentRun AWS API Documentation
+    #
+    # @overload update_experiment_run(params = {})
+    # @param [Hash] params ({})
+    def update_experiment_run(params = {}, options = {})
+      req = build_request(:update_experiment_run, params)
       req.send_request(options)
     end
 
@@ -3887,8 +5348,8 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.validate_configuration({
-    #     application_id: "Id", # required
-    #     configuration_profile_id: "Id", # required
+    #     application_id: "Name", # required
+    #     configuration_profile_id: "LongName", # required
     #     configuration_version: "Version", # required
     #   })
     #
@@ -3919,7 +5380,7 @@ module Aws::AppConfig
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

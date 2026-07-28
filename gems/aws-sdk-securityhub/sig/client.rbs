@@ -303,8 +303,17 @@ module Aws
                                          {
                                            type: ::String,
                                            id: ::String,
-                                           partition: ("aws" | "aws-cn" | "aws-us-gov")?,
+                                           partition: ("aws" | "aws-cn" | "aws-us-gov" | "aws-us-iso" | "aws-us-iso-b" | "AzureCloud")?,
                                            region: ::String?,
+                                           provider: ("Azure" | "AWS")?,
+                                           owner: {
+                                             account: {
+                                               id: ::String?
+                                             }?,
+                                             org: {
+                                               id: ::String?
+                                             }?
+                                           }?,
                                            resource_role: ::String?,
                                            tags: Hash[::String, ::String]?,
                                            data_classification: {
@@ -3722,6 +3731,8 @@ module Aws
                                                provider_type: ::String?,
                                                project_name: ::String?,
                                                code_security_integration_arn: ::String?
+                                             }?,
+                                             azure_resource: {
                                              }?
                                            }?,
                                            application_name: ::String?,
@@ -4184,12 +4195,32 @@ module Aws
                                        ) -> _CreateConfigurationPolicyResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationPolicyResponseSuccess
 
+      interface _CreateConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorResponse]
+        def connector_arn: () -> ::String
+        def connector_id: () -> ::String
+        def connector_status: () -> ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN")
+        def enablement_status: () -> ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#create_connector-instance_method
+      def create_connector: (
+                              name: ::String,
+                              ?description: ::String,
+                              provider: {
+                                azure: Params::azure_provider_configuration?
+                              },
+                              ?tags: Hash[::String, ::String],
+                              ?client_token: ::String
+                            ) -> _CreateConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorResponseSuccess
+
       interface _CreateConnectorV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorV2Response]
         def connector_arn: () -> ::String
         def connector_id: () -> ::String
         def auth_url: () -> ::String
-        def connector_status: () -> ("CONNECTED" | "FAILED_TO_CONNECT" | "PENDING_CONFIGURATION" | "PENDING_AUTHORIZATION")
+        def connector_status: () -> ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN")
+        def enablement_status: () -> ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#create_connector_v2-instance_method
       def create_connector_v2: (
@@ -4202,7 +4233,8 @@ module Aws
                                    service_now: {
                                      instance_name: ::String,
                                      secret_arn: ::String
-                                   }?
+                                   }?,
+                                   azure: Params::azure_provider_configuration?
                                  },
                                  ?kms_key_arn: ::String,
                                  ?tags: Hash[::String, ::String],
@@ -4312,8 +4344,19 @@ module Aws
                                        ) -> _DeleteConfigurationPolicyResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationPolicyResponseSuccess
 
+      interface _DeleteConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectorResponse]
+        def enablement_status: () -> ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#delete_connector-instance_method
+      def delete_connector: (
+                              connector_id: ::String
+                            ) -> _DeleteConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectorResponseSuccess
+
       interface _DeleteConnectorV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectorV2Response]
+        def enablement_status: () -> ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#delete_connector_v2-instance_method
       def delete_connector_v2: (
@@ -4427,6 +4470,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSecurityHubV2Response]
         def hub_v2_arn: () -> ::String
         def subscribed_at: () -> ::String
+        def features: () -> ::Hash[::String, Types::FeatureDetail]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#describe_security_hub_v2-instance_method
       def describe_security_hub_v2: (
@@ -4441,7 +4485,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#describe_standards-instance_method
       def describe_standards: (
                                 ?next_token: ::String,
-                                ?max_results: ::Integer
+                                ?max_results: ::Integer,
+                                ?providers: Array[("AWS" | "Azure")]
                               ) -> _DescribeStandardsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStandardsResponseSuccess
 
@@ -4484,6 +4529,15 @@ module Aws
       def disable_security_hub: (
                                 ) -> _DisableSecurityHubResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableSecurityHubResponseSuccess
+
+      interface _DisableSecurityHubFeatureV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableSecurityHubFeatureV2Response]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#disable_security_hub_feature_v2-instance_method
+      def disable_security_hub_feature_v2: (
+                                             feature_name: ("NETWORK_SCANNING")
+                                           ) -> _DisableSecurityHubFeatureV2ResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableSecurityHubFeatureV2ResponseSuccess
 
       interface _DisableSecurityHubV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisableSecurityHubV2Response]
@@ -4550,6 +4604,15 @@ module Aws
                                  ?control_finding_generator: ("STANDARD_CONTROL" | "SECURITY_CONTROL")
                                ) -> _EnableSecurityHubResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableSecurityHubResponseSuccess
+
+      interface _EnableSecurityHubFeatureV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableSecurityHubFeatureV2Response]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#enable_security_hub_feature_v2-instance_method
+      def enable_security_hub_feature_v2: (
+                                            feature_name: ("NETWORK_SCANNING")
+                                          ) -> _EnableSecurityHubFeatureV2ResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableSecurityHubFeatureV2ResponseSuccess
 
       interface _EnableSecurityHubV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EnableSecurityHubV2Response]
@@ -4647,6 +4710,25 @@ module Aws
                                                 ) -> _GetConfigurationPolicyAssociationResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationPolicyAssociationResponseSuccess
 
+      interface _GetConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectorResponse]
+        def connector_arn: () -> ::String
+        def connector_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def health: () -> Types::CspmHealthCheck
+        def provider_detail: () -> Types::CspmProviderDetail
+        def created_by: () -> ::String
+        def enablement_status: () -> ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#get_connector-instance_method
+      def get_connector: (
+                           connector_id: ::String
+                         ) -> _GetConnectorResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectorResponseSuccess
+
       interface _GetConnectorV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectorV2Response]
         def connector_arn: () -> ::String
@@ -4658,6 +4740,8 @@ module Aws
         def last_updated_at: () -> ::Time
         def health: () -> Types::HealthCheck
         def provider_detail: () -> Types::ProviderDetail
+        def enablement_status: () -> ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
+        def enablement_status_reason: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#get_connector_v2-instance_method
       def get_connector_v2: (
@@ -4674,7 +4758,8 @@ module Aws
       def get_enabled_standards: (
                                    ?standards_subscription_arns: Array[::String],
                                    ?next_token: ::String,
-                                   ?max_results: ::Integer
+                                   ?max_results: ::Integer,
+                                   ?providers: Array[("AWS" | "Azure")]
                                  ) -> _GetEnabledStandardsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnabledStandardsResponseSuccess
 
@@ -4718,7 +4803,7 @@ module Aws
                                        group_by_rules: Array[
                                          {
                                            filters: Params::ocsf_finding_filters?,
-                                           group_by_field: ("activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.name" | "compliance.status" | "compliance.control" | "finding_info.title" | "finding_info.related_events.traits.category" | "finding_info.types" | "metadata.product.name" | "metadata.product.uid" | "resources.type" | "resources.uid" | "severity" | "status" | "vulnerabilities.fix_coverage" | "class_name" | "vulnerabilities.affected_packages.name" | "finding_info.analytic.name" | "compliance.standards" | "cloud.account.name" | "vendor_attributes.severity" | "metadata.product.vendor_name")
+                                           group_by_field: ("activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.name" | "compliance.status" | "compliance.control" | "finding_info.title" | "finding_info.related_events.traits.category" | "finding_info.types" | "metadata.product.name" | "metadata.product.uid" | "resources.type" | "resources.cloud_partition" | "resources.name" | "resources.owner.account.uid" | "resources.owner.org.uid" | "resources.owner.account.name" | "resources.provider" | "resources.region" | "resources.uid" | "severity" | "status" | "vulnerabilities.fix_coverage" | "class_name" | "vulnerabilities.affected_packages.name" | "finding_info.analytic.name" | "compliance.standards" | "cloud.account.name" | "vendor_attributes.severity" | "metadata.product.vendor_name")
                                          }
                                        ],
                                        ?scopes: {
@@ -4877,7 +4962,7 @@ module Aws
       def get_resources_statistics_v2: (
                                          group_by_rules: Array[
                                            {
-                                             group_by_field: ("AccountId" | "Region" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType"),
+                                             group_by_field: ("AccountId" | "AccountName" | "Region" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition" | "ResourceRegion" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType" | "ResourceSubCategory" | "DiscoveryType" | "ResourceInfo.AIDetails.HostResourceType" | "ResourceInfo.AIDetails.CanonicalId"),
                                              filters: Params::resources_filters?
                                            }
                                          ],
@@ -5027,6 +5112,21 @@ module Aws
                                                   ) -> _ListConfigurationPolicyAssociationsResponseSuccess
                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationPolicyAssociationsResponseSuccess
 
+      interface _ListConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorsResponse]
+        def next_token: () -> ::String
+        def connectors: () -> ::Array[Types::CspmConnectorSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#list_connectors-instance_method
+      def list_connectors: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             ?provider_name: ("AZURE"),
+                             ?connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN"),
+                             ?enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+                           ) -> _ListConnectorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorsResponseSuccess
+
       interface _ListConnectorsV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorsV2Response]
         def next_token: () -> ::String
@@ -5036,8 +5136,9 @@ module Aws
       def list_connectors_v2: (
                                 ?next_token: ::String,
                                 ?max_results: ::Integer,
-                                ?provider_name: ("JIRA_CLOUD" | "SERVICENOW"),
-                                ?connector_status: ("CONNECTED" | "FAILED_TO_CONNECT" | "PENDING_CONFIGURATION" | "PENDING_AUTHORIZATION")
+                                ?provider_name: ("JIRA_CLOUD" | "SERVICENOW" | "AZURE"),
+                                ?connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN"),
+                                ?enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
                               ) -> _ListConnectorsV2ResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorsV2ResponseSuccess
 
@@ -5113,7 +5214,8 @@ module Aws
       def list_security_control_definitions: (
                                                ?standards_arn: ::String,
                                                ?next_token: ::String,
-                                               ?max_results: ::Integer
+                                               ?max_results: ::Integer,
+                                               ?providers: Array[("AWS" | "Azure")]
                                              ) -> _ListSecurityControlDefinitionsResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityControlDefinitionsResponseSuccess
 
@@ -5270,8 +5372,31 @@ module Aws
                                        ) -> _UpdateConfigurationPolicyResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationPolicyResponseSuccess
 
+      interface _UpdateConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorResponse]
+        def connector_status: () -> ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN")
+        def enablement_status: () -> ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#update_connector-instance_method
+      def update_connector: (
+                              connector_id: ::String,
+                              ?description: ::String,
+                              ?provider: {
+                                azure: {
+                                  scope_configuration: {
+                                    scope_type: ("TENANT" | "SUBSCRIPTION"),
+                                    scope_values: Array[::String]?
+                                  },
+                                  azure_regions: Array[::String]
+                                }?
+                              }
+                            ) -> _UpdateConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorResponseSuccess
+
       interface _UpdateConnectorV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorV2Response]
+        def connector_status: () -> ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN")
+        def enablement_status: () -> ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#update_connector_v2-instance_method
       def update_connector_v2: (
@@ -5283,6 +5408,13 @@ module Aws
                                    }?,
                                    service_now: {
                                      secret_arn: ::String?
+                                   }?,
+                                   azure: {
+                                     scope_configuration: {
+                                       scope_type: ("TENANT" | "SUBSCRIPTION"),
+                                       scope_values: Array[::String]?
+                                     },
+                                     azure_regions: Array[::String]
                                    }?
                                  }
                                ) -> _UpdateConnectorV2ResponseSuccess

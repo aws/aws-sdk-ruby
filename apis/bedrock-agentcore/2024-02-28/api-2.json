@@ -2681,6 +2681,31 @@
       },
       "exception":true
     },
+    "EfsAccessPointArn":{
+      "type":"string",
+      "max":128,
+      "min":0,
+      "pattern":"arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:access-point/fsap-[0-9a-f]{8,40}"
+    },
+    "EfsConfiguration":{
+      "type":"structure",
+      "required":[
+        "accessPointArn",
+        "mountPath",
+        "fileSystemArn"
+      ],
+      "members":{
+        "accessPointArn":{"shape":"EfsAccessPointArn"},
+        "mountPath":{"shape":"MountPath"},
+        "fileSystemArn":{"shape":"EfsFileSystemArn"}
+      }
+    },
+    "EfsFileSystemArn":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"arn:aws[-a-z]*:elasticfilesystem:[a-z0-9-]+:[0-9]{12}:file-system/fs-[0-9a-f]{8,40}"
+    },
     "Email":{
       "type":"string",
       "max":254,
@@ -3361,6 +3386,7 @@
         "streams":{"shape":"BrowserSessionStream"},
         "proxyConfiguration":{"shape":"ProxyConfiguration"},
         "certificates":{"shape":"Certificates"},
+        "filesystemConfigurations":{"shape":"ToolsFileSystemConfigurations"},
         "sessionReplayArtifact":{"shape":"String"},
         "lastUpdatedAt":{"shape":"DateTimestamp"}
       }
@@ -3398,7 +3424,8 @@
         "createdAt":{"shape":"DateTimestamp"},
         "sessionTimeoutSeconds":{"shape":"CodeInterpreterSessionTimeout"},
         "status":{"shape":"CodeInterpreterSessionStatus"},
-        "certificates":{"shape":"Certificates"}
+        "certificates":{"shape":"Certificates"},
+        "filesystemConfigurations":{"shape":"ToolsFileSystemConfigurations"}
       }
     },
     "GetEventInput":{
@@ -3830,7 +3857,8 @@
         "text":{"shape":"SensitiveText"},
         "toolUse":{"shape":"HarnessToolUseBlockDelta"},
         "toolResult":{"shape":"HarnessToolResultBlocksDelta"},
-        "reasoningContent":{"shape":"HarnessReasoningContentBlockDelta"}
+        "reasoningContent":{"shape":"HarnessReasoningContentBlockDelta"},
+        "toolResultMetadata":{"shape":"HarnessToolResultMetadataBlockDelta"}
       },
       "union":true
     },
@@ -3910,7 +3938,8 @@
         "maxTokens":{"shape":"MaxTokens"},
         "temperature":{"shape":"Temperature"},
         "topP":{"shape":"TopP"},
-        "topK":{"shape":"TopK"}
+        "topK":{"shape":"TopK"},
+        "additionalParams":{"shape":"Document"}
       }
     },
     "HarnessInlineFunctionConfig":{
@@ -4102,11 +4131,13 @@
     },
     "HarnessSkillGitUrl":{
       "type":"string",
+      "max":16383,
       "min":8,
       "pattern":"https://[^#@]+"
     },
     "HarnessSkillPath":{
       "type":"string",
+      "max":4096,
       "min":1
     },
     "HarnessSkillS3Source":{
@@ -4118,6 +4149,7 @@
     },
     "HarnessSkillS3Uri":{
       "type":"string",
+      "max":16383,
       "min":5,
       "pattern":"s3://.*"
     },
@@ -4272,6 +4304,13 @@
     "HarnessToolResultContentBlocks":{
       "type":"list",
       "member":{"shape":"HarnessToolResultContentBlock"}
+    },
+    "HarnessToolResultMetadataBlockDelta":{
+      "type":"structure",
+      "required":["metadata"],
+      "members":{
+        "metadata":{"shape":"SensitiveText"}
+      }
     },
     "HarnessToolType":{
       "type":"string",
@@ -4704,6 +4743,16 @@
           "location":"header",
           "locationName":"Mcp-Protocol-Version"
         },
+        "mcpMethod":{
+          "shape":"StringType",
+          "location":"header",
+          "locationName":"Mcp-Method"
+        },
+        "mcpName":{
+          "shape":"StringType",
+          "location":"header",
+          "locationName":"Mcp-Name"
+        },
         "runtimeUserId":{
           "shape":"StringType",
           "location":"header",
@@ -4942,6 +4991,26 @@
           "location":"header",
           "locationName":"X-Amzn-Bedrock-AgentCore-Runtime-User-Id"
         },
+        "traceParent":{
+          "shape":"InvokeHarnessRequestTraceParentString",
+          "location":"header",
+          "locationName":"traceparent"
+        },
+        "traceState":{
+          "shape":"InvokeHarnessRequestTraceStateString",
+          "location":"header",
+          "locationName":"tracestate"
+        },
+        "traceId":{
+          "shape":"InvokeHarnessRequestTraceIdString",
+          "location":"header",
+          "locationName":"X-Amzn-Trace-Id"
+        },
+        "baggage":{
+          "shape":"InvokeHarnessRequestBaggageString",
+          "location":"header",
+          "locationName":"baggage"
+        },
         "messages":{"shape":"HarnessMessages"},
         "model":{"shape":"HarnessModelConfiguration"},
         "systemPrompt":{"shape":"HarnessSystemPrompt"},
@@ -4954,11 +5023,31 @@
         "actorId":{"shape":"String"}
       }
     },
+    "InvokeHarnessRequestBaggageString":{
+      "type":"string",
+      "max":8192,
+      "min":0
+    },
     "InvokeHarnessRequestRuntimeSessionIdString":{
       "type":"string",
       "max":100,
       "min":33,
       "pattern":"[a-zA-Z0-9][a-zA-Z0-9-_]*"
+    },
+    "InvokeHarnessRequestTraceIdString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "InvokeHarnessRequestTraceParentString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "InvokeHarnessRequestTraceStateString":{
+      "type":"string",
+      "max":512,
+      "min":0
     },
     "InvokeHarnessResponse":{
       "type":"structure",
@@ -5777,6 +5866,12 @@
       "min":1
     },
     "ModelId":{"type":"string"},
+    "MountPath":{
+      "type":"string",
+      "max":200,
+      "min":6,
+      "pattern":"/mnt/[a-zA-Z0-9._-]+/?"
+    },
     "MouseButton":{
       "type":"string",
       "enum":[
@@ -6786,6 +6881,31 @@
       },
       "exception":true
     },
+    "S3FilesAccessPointArn":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}/access-point/fsap-[0-9a-f]{17,40}"
+    },
+    "S3FilesConfiguration":{
+      "type":"structure",
+      "required":[
+        "accessPointArn",
+        "mountPath",
+        "fileSystemArn"
+      ],
+      "members":{
+        "accessPointArn":{"shape":"S3FilesAccessPointArn"},
+        "mountPath":{"shape":"MountPath"},
+        "fileSystemArn":{"shape":"S3FilesFileSystemArn"}
+      }
+    },
+    "S3FilesFileSystemArn":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"arn:aws[-a-z]*:s3files:[a-z0-9-]+:[0-9]{12}:file-system/fs-[0-9a-f]{17,40}"
+    },
     "S3Location":{
       "type":"structure",
       "required":[
@@ -7223,6 +7343,7 @@
         "proxyConfiguration":{"shape":"ProxyConfiguration"},
         "enterprisePolicies":{"shape":"BrowserEnterprisePolicies"},
         "certificates":{"shape":"Certificates"},
+        "filesystemConfigurations":{"shape":"ToolsFileSystemConfigurations"},
         "clientToken":{
           "shape":"ClientToken",
           "idempotencyToken":true
@@ -7275,6 +7396,7 @@
         "name":{"shape":"Name"},
         "sessionTimeoutSeconds":{"shape":"CodeInterpreterSessionTimeout"},
         "certificates":{"shape":"Certificates"},
+        "filesystemConfigurations":{"shape":"ToolsFileSystemConfigurations"},
         "clientToken":{
           "shape":"ClientToken",
           "idempotencyToken":true
@@ -7952,6 +8074,20 @@
         "protocolVersion":{"shape":"SchemaVersion"},
         "inlineContent":{"shape":"InlineContent"}
       }
+    },
+    "ToolsFileSystemConfiguration":{
+      "type":"structure",
+      "members":{
+        "s3FilesConfiguration":{"shape":"S3FilesConfiguration"},
+        "efsConfiguration":{"shape":"EfsConfiguration"}
+      },
+      "union":true
+    },
+    "ToolsFileSystemConfigurations":{
+      "type":"list",
+      "member":{"shape":"ToolsFileSystemConfiguration"},
+      "max":10,
+      "min":0
     },
     "TopK":{
       "type":"integer",

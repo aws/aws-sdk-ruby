@@ -579,7 +579,7 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
     #   resp.update.params #=> Array
     #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
     #   resp.update.params[0].value #=> String
@@ -589,6 +589,8 @@ module Aws::EKS
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateEncryptionConfig AWS API Documentation
     #
@@ -663,7 +665,7 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
     #   resp.update.params #=> Array
     #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
     #   resp.update.params[0].value #=> String
@@ -673,6 +675,8 @@ module Aws::EKS
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -682,6 +686,67 @@ module Aws::EKS
     # @param [Hash] params ({})
     def associate_identity_provider_config(params = {}, options = {})
       req = build_request(:associate_identity_provider_config, params)
+      req.send_request(options)
+    end
+
+    # Cancels an in-progress update to an Amazon EKS cluster on a
+    # best-effort basis. Cancellation is only performed if the update can be
+    # cancelled. Currently, this is supported for `VersionRollback` update
+    # types on EKS Auto Mode clusters when nodes are rolling back.
+    #
+    # A successful cancellation stops the node rollback. After cancellation,
+    # nodes converge to the current cluster version honoring configured
+    # disruption controls. If the control plane rollback has already begun,
+    # the cancellation request fails.
+    #
+    # @option params [required, String] :name
+    #   The name of the Amazon EKS cluster associated with the update.
+    #
+    # @option params [required, String] :update_id
+    #   The ID of the update to cancel.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CancelUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelUpdateResponse#update #update} => Types::Update
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_update({
+    #     name: "String", # required
+    #     update_id: "String", # required
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CancelUpdate AWS API Documentation
+    #
+    # @overload cancel_update(params = {})
+    # @param [Hash] params ({})
+    def cancel_update(params = {}, options = {})
+      req = build_request(:cancel_update, params)
       req.send_request(options)
     end
 
@@ -3791,7 +3856,7 @@ module Aws::EKS
     #
     #   resp.insight.id #=> String
     #   resp.insight.name #=> String
-    #   resp.insight.category #=> String, one of "UPGRADE_READINESS", "MISCONFIGURATION"
+    #   resp.insight.category #=> String, one of "UPGRADE_READINESS", "MISCONFIGURATION", "ROLLBACK_READINESS"
     #   resp.insight.kubernetes_version #=> String
     #   resp.insight.last_refresh_time #=> Time
     #   resp.insight.last_transition_time #=> Time
@@ -4059,7 +4124,7 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
     #   resp.update.params #=> Array
     #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
     #   resp.update.params[0].value #=> String
@@ -4069,6 +4134,8 @@ module Aws::EKS
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdate AWS API Documentation
     #
@@ -4148,7 +4215,7 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
     #   resp.update.params #=> Array
     #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
     #   resp.update.params[0].value #=> String
@@ -4158,6 +4225,8 @@ module Aws::EKS
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DisassociateIdentityProviderConfig AWS API Documentation
     #
@@ -4789,7 +4858,7 @@ module Aws::EKS
     #   resp = client.list_insights({
     #     cluster_name: "String", # required
     #     filter: {
-    #       categories: ["UPGRADE_READINESS"], # accepts UPGRADE_READINESS, MISCONFIGURATION
+    #       categories: ["UPGRADE_READINESS"], # accepts UPGRADE_READINESS, MISCONFIGURATION, ROLLBACK_READINESS
     #       kubernetes_versions: ["String"],
     #       statuses: ["PASSING"], # accepts PASSING, WARNING, ERROR, UNKNOWN
     #     },
@@ -4802,7 +4871,7 @@ module Aws::EKS
     #   resp.insights #=> Array
     #   resp.insights[0].id #=> String
     #   resp.insights[0].name #=> String
-    #   resp.insights[0].category #=> String, one of "UPGRADE_READINESS", "MISCONFIGURATION"
+    #   resp.insights[0].category #=> String, one of "UPGRADE_READINESS", "MISCONFIGURATION", "ROLLBACK_READINESS"
     #   resp.insights[0].kubernetes_version #=> String
     #   resp.insights[0].last_refresh_time #=> Time
     #   resp.insights[0].last_transition_time #=> Time
@@ -5504,7 +5573,7 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
     #   resp.update.params #=> Array
     #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
     #   resp.update.params[0].value #=> String
@@ -5514,6 +5583,8 @@ module Aws::EKS
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAddon AWS API Documentation
     #
@@ -5613,7 +5684,7 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
     #   resp.update.params #=> Array
     #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
     #   resp.update.params[0].value #=> String
@@ -5623,6 +5694,8 @@ module Aws::EKS
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateCapability AWS API Documentation
     #
@@ -5858,7 +5931,7 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
     #   resp.update.params #=> Array
     #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
     #   resp.update.params[0].value #=> String
@@ -5868,6 +5941,8 @@ module Aws::EKS
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfig AWS API Documentation
     #
@@ -5911,8 +5986,11 @@ module Aws::EKS
     #   not need to pass this option.**
     #
     # @option params [Boolean] :force
-    #   Set this value to `true` to override upgrade-blocking readiness checks
-    #   when updating a cluster.
+    #   Set this value to `true` to override upgrade-blocking or
+    #   rollback-blocking readiness checks when updating a cluster.
+    #
+    # @option params [Types::RollbackConfig] :rollback_config
+    #   The rollback configuration for the cluster version rollback.
     #
     # @return [Types::UpdateClusterVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5925,13 +6003,16 @@ module Aws::EKS
     #     version: "String", # required
     #     client_request_token: "String",
     #     force: false,
+    #     rollback_config: {
+    #       timeout_minutes: 1,
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
     #   resp.update.params #=> Array
     #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
     #   resp.update.params[0].value #=> String
@@ -5941,6 +6022,8 @@ module Aws::EKS
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterVersion AWS API Documentation
     #
@@ -6132,7 +6215,7 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
     #   resp.update.params #=> Array
     #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
     #   resp.update.params[0].value #=> String
@@ -6142,6 +6225,8 @@ module Aws::EKS
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateNodegroupConfig AWS API Documentation
     #
@@ -6279,7 +6364,7 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
     #   resp.update.params #=> Array
     #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
     #   resp.update.params[0].value #=> String
@@ -6289,6 +6374,8 @@ module Aws::EKS
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.update.cancellation.status #=> String, one of "InProgress", "Failed", "Successful"
+    #   resp.update.cancellation.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateNodegroupVersion AWS API Documentation
     #
@@ -6466,7 +6553,7 @@ module Aws::EKS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.170.0'
+      context[:gem_version] = '1.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

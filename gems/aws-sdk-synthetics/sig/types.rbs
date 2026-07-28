@@ -16,6 +16,7 @@ module Aws::Synthetics
     class AddReplicaLocationInput
       attr_accessor location: ::String
       attr_accessor vpc_config: Types::VpcConfigInput
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -77,6 +78,7 @@ module Aws::Synthetics
       attr_accessor multi_location_config: Types::MultiLocationConfig
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor artifact_config: Types::ArtifactConfigOutput
+      attr_accessor kms_key_arn: ::String
       attr_accessor dry_run_config: Types::DryRunConfigOutput
       SENSITIVE: []
     end
@@ -208,6 +210,7 @@ module Aws::Synthetics
       attr_accessor add_replica_locations: ::Array[Types::AddReplicaLocationInput]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor artifact_config: Types::ArtifactConfigInput
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -570,6 +573,7 @@ module Aws::Synthetics
       attr_accessor browser_configs: ::Array[Types::BrowserConfig]
       attr_accessor add_replica_locations: ::Array[Types::AddReplicaLocationInput]
       attr_accessor remove_replica_locations: ::Array[::String]
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 

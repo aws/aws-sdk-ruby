@@ -109,6 +109,19 @@ module Aws::GameLiftStreams
       SENSITIVE: []
     end
 
+    class CreateStreamSessionAdminShellInput
+      attr_accessor identifier: ::String
+      attr_accessor stream_session_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStreamSessionAdminShellOutput
+      attr_accessor session_id: ::String
+      attr_accessor stream_url: ::String
+      attr_accessor token_value: ::String
+      SENSITIVE: [:token_value]
+    end
+
     class CreateStreamSessionConnectionInput
       attr_accessor client_token: ::String
       attr_accessor identifier: ::String
@@ -147,6 +160,11 @@ module Aws::GameLiftStreams
     class DisassociateApplicationsOutput
       attr_accessor arn: ::String
       attr_accessor application_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisplayConfiguration
+      attr_accessor resolution: Types::Resolution
       SENSITIVE: []
     end
 
@@ -223,7 +241,7 @@ module Aws::GameLiftStreams
       attr_accessor stream_group_id: ::String
       attr_accessor user_id: ::String
       attr_accessor status: ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
+      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "assumeRoleFailed" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
       attr_accessor protocol: ("WebRTC")
       attr_accessor location: ::String
       attr_accessor signal_request: ::String
@@ -239,7 +257,9 @@ module Aws::GameLiftStreams
       attr_accessor created_at: ::Time
       attr_accessor application_arn: ::String
       attr_accessor export_files_metadata: Types::ExportFilesMetadata
-      SENSITIVE: [:signal_request, :signal_response]
+      attr_accessor role_arn: ::String
+      attr_accessor display_configuration: Types::DisplayConfiguration
+      SENSITIVE: [:signal_request, :signal_response, :role_arn]
     end
 
     class InternalServerException
@@ -352,6 +372,12 @@ module Aws::GameLiftStreams
       SENSITIVE: []
     end
 
+    class Resolution
+      attr_accessor width: ::Integer
+      attr_accessor height: ::Integer
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -382,7 +408,9 @@ module Aws::GameLiftStreams
       attr_accessor additional_launch_args: ::Array[::String]
       attr_accessor additional_environment_variables: ::Hash[::String, ::String]
       attr_accessor performance_stats_configuration: Types::PerformanceStatsConfiguration
-      SENSITIVE: [:signal_request]
+      attr_accessor role_arn: ::String
+      attr_accessor display_configuration: Types::DisplayConfiguration
+      SENSITIVE: [:signal_request, :role_arn]
     end
 
     class StartStreamSessionOutput
@@ -391,7 +419,7 @@ module Aws::GameLiftStreams
       attr_accessor stream_group_id: ::String
       attr_accessor user_id: ::String
       attr_accessor status: ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
+      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "assumeRoleFailed" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
       attr_accessor protocol: ("WebRTC")
       attr_accessor location: ::String
       attr_accessor signal_request: ::String
@@ -407,7 +435,9 @@ module Aws::GameLiftStreams
       attr_accessor created_at: ::Time
       attr_accessor application_arn: ::String
       attr_accessor export_files_metadata: Types::ExportFilesMetadata
-      SENSITIVE: [:signal_request, :signal_response]
+      attr_accessor role_arn: ::String
+      attr_accessor display_configuration: Types::DisplayConfiguration
+      SENSITIVE: [:signal_request, :signal_response, :role_arn]
     end
 
     class StreamGroupSummary
@@ -423,18 +453,24 @@ module Aws::GameLiftStreams
       SENSITIVE: []
     end
 
+    class StreamSessionAccessNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class StreamSessionSummary
       attr_accessor arn: ::String
       attr_accessor user_id: ::String
       attr_accessor status: ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
+      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "assumeRoleFailed" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
       attr_accessor protocol: ("WebRTC")
       attr_accessor last_updated_at: ::Time
       attr_accessor created_at: ::Time
       attr_accessor application_arn: ::String
       attr_accessor export_files_metadata: Types::ExportFilesMetadata
       attr_accessor location: ::String
-      SENSITIVE: []
+      attr_accessor role_arn: ::String
+      SENSITIVE: [:role_arn]
     end
 
     class TagResourceRequest

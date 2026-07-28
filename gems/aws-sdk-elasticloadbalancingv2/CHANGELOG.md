@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2026-07-22)
+------------------
+
+* Feature - This adds CLI examples for the IpAddressType field on SourceIpConfig, enabling Network Load Balancer listener rules to match traffic based on whether the source IP is IPv4 or IPv6.
+
+1.155.0 (2026-07-15)
+------------------
+
+* Feature - This release adds support for the IpAddressType field on SourceIpConfig, enabling Network Load Balancer listener rules to match traffic based on whether the source IP is IPv4 or IPv6.
+
+1.154.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.153.0 (2026-06-01)
 ------------------
 

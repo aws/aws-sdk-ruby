@@ -14,6 +14,12 @@ module Aws::SageMaker
 
     include Seahorse::Model
 
+    AIAdapterId = Shapes::StringShape.new(name: 'AIAdapterId')
+    AIAdapterModelPackageEntry = Shapes::StructureShape.new(name: 'AIAdapterModelPackageEntry')
+    AIAdapterModelPackageEntryList = Shapes::ListShape.new(name: 'AIAdapterModelPackageEntryList')
+    AIAdapterS3Entry = Shapes::StructureShape.new(name: 'AIAdapterS3Entry')
+    AIAdapterS3EntryList = Shapes::ListShape.new(name: 'AIAdapterS3EntryList')
+    AIAdapterSource = Shapes::UnionShape.new(name: 'AIAdapterSource')
     AIBenchmarkEndpoint = Shapes::StructureShape.new(name: 'AIBenchmarkEndpoint')
     AIBenchmarkInferenceComponent = Shapes::StructureShape.new(name: 'AIBenchmarkInferenceComponent')
     AIBenchmarkInferenceComponentList = Shapes::ListShape.new(name: 'AIBenchmarkInferenceComponentList')
@@ -42,6 +48,7 @@ module Aws::SageMaker
     AIModelSource = Shapes::UnionShape.new(name: 'AIModelSource')
     AIModelSourceS3 = Shapes::StructureShape.new(name: 'AIModelSourceS3')
     AIRecommendation = Shapes::StructureShape.new(name: 'AIRecommendation')
+    AIRecommendationAdapterDetails = Shapes::StructureShape.new(name: 'AIRecommendationAdapterDetails')
     AIRecommendationAllowOptimization = Shapes::BooleanShape.new(name: 'AIRecommendationAllowOptimization')
     AIRecommendationComputeSpec = Shapes::StructureShape.new(name: 'AIRecommendationComputeSpec')
     AIRecommendationConstraint = Shapes::StructureShape.new(name: 'AIRecommendationConstraint')
@@ -63,6 +70,7 @@ module Aws::SageMaker
     AIRecommendationJobSummaryList = Shapes::ListShape.new(name: 'AIRecommendationJobSummaryList')
     AIRecommendationList = Shapes::ListShape.new(name: 'AIRecommendationList')
     AIRecommendationMetric = Shapes::StringShape.new(name: 'AIRecommendationMetric')
+    AIRecommendationMinCpuMemoryRequiredInMb = Shapes::IntegerShape.new(name: 'AIRecommendationMinCpuMemoryRequiredInMb')
     AIRecommendationModelDetails = Shapes::StructureShape.new(name: 'AIRecommendationModelDetails')
     AIRecommendationOptimizationConfigMap = Shapes::MapShape.new(name: 'AIRecommendationOptimizationConfigMap')
     AIRecommendationOptimizationDetail = Shapes::StructureShape.new(name: 'AIRecommendationOptimizationDetail')
@@ -2151,6 +2159,7 @@ module Aws::SageMaker
     OptimizationJobStatus = Shapes::StringShape.new(name: 'OptimizationJobStatus')
     OptimizationJobSummaries = Shapes::ListShape.new(name: 'OptimizationJobSummaries')
     OptimizationJobSummary = Shapes::StructureShape.new(name: 'OptimizationJobSummary')
+    OptimizationJobTrainingPlanArns = Shapes::ListShape.new(name: 'OptimizationJobTrainingPlanArns')
     OptimizationModelAcceptEula = Shapes::BooleanShape.new(name: 'OptimizationModelAcceptEula')
     OptimizationModelAccessConfig = Shapes::StructureShape.new(name: 'OptimizationModelAccessConfig')
     OptimizationOutput = Shapes::StructureShape.new(name: 'OptimizationOutput')
@@ -3031,6 +3040,26 @@ module Aws::SageMaker
     WorkteamName = Shapes::StringShape.new(name: 'WorkteamName')
     Workteams = Shapes::ListShape.new(name: 'Workteams')
 
+    AIAdapterModelPackageEntry.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AIAdapterId, required: true, location_name: "AdapterId"))
+    AIAdapterModelPackageEntry.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
+    AIAdapterModelPackageEntry.struct_class = Types::AIAdapterModelPackageEntry
+
+    AIAdapterModelPackageEntryList.member = Shapes::ShapeRef.new(shape: AIAdapterModelPackageEntry)
+
+    AIAdapterS3Entry.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AIAdapterId, required: true, location_name: "AdapterId"))
+    AIAdapterS3Entry.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    AIAdapterS3Entry.struct_class = Types::AIAdapterS3Entry
+
+    AIAdapterS3EntryList.member = Shapes::ShapeRef.new(shape: AIAdapterS3Entry)
+
+    AIAdapterSource.add_member(:model_package_arns, Shapes::ShapeRef.new(shape: AIAdapterModelPackageEntryList, location_name: "ModelPackageArns"))
+    AIAdapterSource.add_member(:s3_uris, Shapes::ShapeRef.new(shape: AIAdapterS3EntryList, location_name: "S3Uris"))
+    AIAdapterSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AIAdapterSource.add_member_subclass(:model_package_arns, Types::AIAdapterSource::ModelPackageArns)
+    AIAdapterSource.add_member_subclass(:s3_uris, Types::AIAdapterSource::S3Uris)
+    AIAdapterSource.add_member_subclass(:unknown, Types::AIAdapterSource::Unknown)
+    AIAdapterSource.struct_class = Types::AIAdapterSource
+
     AIBenchmarkEndpoint.add_member(:identifier, Shapes::ShapeRef.new(shape: AIResourceIdentifier, required: true, location_name: "Identifier"))
     AIBenchmarkEndpoint.add_member(:target_container_hostname, Shapes::ShapeRef.new(shape: String, location_name: "TargetContainerHostname"))
     AIBenchmarkEndpoint.add_member(:inference_components, Shapes::ShapeRef.new(shape: AIBenchmarkInferenceComponentList, location_name: "InferenceComponents"))
@@ -3107,7 +3136,12 @@ module Aws::SageMaker
     AIRecommendation.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: AIRecommendationDeploymentConfiguration, location_name: "DeploymentConfiguration"))
     AIRecommendation.add_member(:ai_benchmark_job_arn, Shapes::ShapeRef.new(shape: AIBenchmarkJobArn, location_name: "AIBenchmarkJobArn"))
     AIRecommendation.add_member(:expected_performance, Shapes::ShapeRef.new(shape: ExpectedPerformanceList, location_name: "ExpectedPerformance"))
+    AIRecommendation.add_member(:adapter_details, Shapes::ShapeRef.new(shape: AIRecommendationAdapterDetails, location_name: "AdapterDetails"))
     AIRecommendation.struct_class = Types::AIRecommendation
+
+    AIRecommendationAdapterDetails.add_member(:model_package_arns, Shapes::ShapeRef.new(shape: AIAdapterModelPackageEntryList, required: true, location_name: "ModelPackageArns"))
+    AIRecommendationAdapterDetails.add_member(:s3_uris, Shapes::ShapeRef.new(shape: AIAdapterS3EntryList, required: true, location_name: "S3Uris"))
+    AIRecommendationAdapterDetails.struct_class = Types::AIRecommendationAdapterDetails
 
     AIRecommendationComputeSpec.add_member(:instance_types, Shapes::ShapeRef.new(shape: AIRecommendationInstanceTypeList, location_name: "InstanceTypes"))
     AIRecommendationComputeSpec.add_member(:capacity_reservation_config, Shapes::ShapeRef.new(shape: AICapacityReservationConfig, location_name: "CapacityReservationConfig"))
@@ -3124,6 +3158,7 @@ module Aws::SageMaker
     AIRecommendationDeploymentConfiguration.add_member(:instance_count, Shapes::ShapeRef.new(shape: AIRecommendationInstanceCount, location_name: "InstanceCount"))
     AIRecommendationDeploymentConfiguration.add_member(:copy_count_per_instance, Shapes::ShapeRef.new(shape: AIRecommendationCopyCountPerInstance, location_name: "CopyCountPerInstance"))
     AIRecommendationDeploymentConfiguration.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "EnvironmentVariables"))
+    AIRecommendationDeploymentConfiguration.add_member(:min_cpu_memory_required_in_mb, Shapes::ShapeRef.new(shape: AIRecommendationMinCpuMemoryRequiredInMb, location_name: "MinCpuMemoryRequiredInMb"))
     AIRecommendationDeploymentConfiguration.struct_class = Types::AIRecommendationDeploymentConfiguration
 
     AIRecommendationDeploymentS3Channel.add_member(:channel_name, Shapes::ShapeRef.new(shape: AIChannelName, location_name: "ChannelName"))
@@ -4564,6 +4599,7 @@ module Aws::SageMaker
     CreateAIRecommendationJobRequest.add_member(:inference_specification, Shapes::ShapeRef.new(shape: AIRecommendationInferenceSpecification, location_name: "InferenceSpecification"))
     CreateAIRecommendationJobRequest.add_member(:optimize_model, Shapes::ShapeRef.new(shape: AIRecommendationAllowOptimization, location_name: "OptimizeModel"))
     CreateAIRecommendationJobRequest.add_member(:compute_spec, Shapes::ShapeRef.new(shape: AIRecommendationComputeSpec, location_name: "ComputeSpec"))
+    CreateAIRecommendationJobRequest.add_member(:adapter_source, Shapes::ShapeRef.new(shape: AIAdapterSource, location_name: "AdapterSource"))
     CreateAIRecommendationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAIRecommendationJobRequest.struct_class = Types::CreateAIRecommendationJobRequest
 
@@ -5214,6 +5250,7 @@ module Aws::SageMaker
     CreateOptimizationJobRequest.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
     CreateOptimizationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateOptimizationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: OptimizationVpcConfig, location_name: "VpcConfig"))
+    CreateOptimizationJobRequest.add_member(:training_plan_arns, Shapes::ShapeRef.new(shape: OptimizationJobTrainingPlanArns, location_name: "TrainingPlanArns"))
     CreateOptimizationJobRequest.struct_class = Types::CreateOptimizationJobRequest
 
     CreateOptimizationJobResponse.add_member(:optimization_job_arn, Shapes::ShapeRef.new(shape: OptimizationJobArn, required: true, location_name: "OptimizationJobArn"))
@@ -5976,6 +6013,7 @@ module Aws::SageMaker
     DescribeAIRecommendationJobResponse.add_member(:recommendations, Shapes::ShapeRef.new(shape: AIRecommendationList, location_name: "Recommendations"))
     DescribeAIRecommendationJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     DescribeAIRecommendationJobResponse.add_member(:compute_spec, Shapes::ShapeRef.new(shape: AIRecommendationComputeSpec, location_name: "ComputeSpec"))
+    DescribeAIRecommendationJobResponse.add_member(:adapter_source, Shapes::ShapeRef.new(shape: AIAdapterSource, location_name: "AdapterSource"))
     DescribeAIRecommendationJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeAIRecommendationJobResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     DescribeAIRecommendationJobResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
@@ -6977,6 +7015,7 @@ module Aws::SageMaker
     DescribeOptimizationJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     DescribeOptimizationJobResponse.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
     DescribeOptimizationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: OptimizationVpcConfig, location_name: "VpcConfig"))
+    DescribeOptimizationJobResponse.add_member(:training_plan_arns, Shapes::ShapeRef.new(shape: OptimizationJobTrainingPlanArns, location_name: "TrainingPlanArns"))
     DescribeOptimizationJobResponse.struct_class = Types::DescribeOptimizationJobResponse
 
     DescribePartnerAppRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PartnerAppArn, required: true, location_name: "Arn"))
@@ -10840,6 +10879,8 @@ module Aws::SageMaker
     OptimizationJobSummary.add_member(:max_instance_count, Shapes::ShapeRef.new(shape: OptimizationJobMaxInstanceCount, location_name: "MaxInstanceCount"))
     OptimizationJobSummary.add_member(:optimization_types, Shapes::ShapeRef.new(shape: OptimizationTypes, required: true, location_name: "OptimizationTypes"))
     OptimizationJobSummary.struct_class = Types::OptimizationJobSummary
+
+    OptimizationJobTrainingPlanArns.member = Shapes::ShapeRef.new(shape: TrainingPlanArn)
 
     OptimizationModelAccessConfig.add_member(:accept_eula, Shapes::ShapeRef.new(shape: OptimizationModelAcceptEula, required: true, location_name: "AcceptEula", metadata: {"box" => true}))
     OptimizationModelAccessConfig.struct_class = Types::OptimizationModelAccessConfig

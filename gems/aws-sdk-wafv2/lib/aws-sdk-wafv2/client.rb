@@ -560,6 +560,10 @@ module Aws::WAFV2
     #   * For an Amplify application:
     #     `arn:partition:amplify:region:account-id:apps/app-id `
     #
+    #   * For an Amazon Bedrock AgentCore Gateway:
+    #     `arn:partition:bedrock-agentcore:region:account-id:gateway/gateway-id
+    #     `
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3623,6 +3627,10 @@ module Aws::WAFV2
     #   * For an Amplify application:
     #     `arn:partition:amplify:region:account-id:apps/app-id `
     #
+    #   * For an Amazon Bedrock AgentCore Gateway:
+    #     `arn:partition:bedrock-agentcore:region:account-id:gateway/gateway-id
+    #     `
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5225,6 +5233,10 @@ module Aws::WAFV2
     #   * For an Amplify application:
     #     `arn:partition:amplify:region:account-id:apps/app-id `
     #
+    #   * For an Amazon Bedrock AgentCore Gateway:
+    #     `arn:partition:bedrock-agentcore:region:account-id:gateway/gateway-id
+    #     `
+    #
     # @return [Types::GetWebACLForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetWebACLForResourceResponse#web_acl #web_acl} => Types::WebACL
@@ -5862,7 +5874,7 @@ module Aws::WAFV2
     #
     #   resp = client.list_resources_for_web_acl({
     #     web_acl_arn: "ResourceArn", # required
-    #     resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY, APPSYNC, COGNITO_USER_POOL, APP_RUNNER_SERVICE, VERIFIED_ACCESS_INSTANCE, AMPLIFY
+    #     resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY, APPSYNC, COGNITO_USER_POOL, APP_RUNNER_SERVICE, VERIFIED_ACCESS_INSTANCE, AMPLIFY, AGENTCORE_GATEWAY
     #   })
     #
     # @example Response structure
@@ -9254,7 +9266,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -112,7 +112,8 @@ module Aws
         values: Array[::String]?
       }?,
       source_ip_config: {
-        values: Array[::String]?
+        values: Array[::String]?,
+        ip_address_type: ("ipv4" | "ipv6")?
       }?,
       regex_values: Array[::String]?
     }

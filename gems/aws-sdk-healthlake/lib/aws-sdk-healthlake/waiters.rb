@@ -67,47 +67,103 @@ module Aws::HealthLake
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name               | params                            | :delay   | :max_attempts |
-  # | ------------------------- | --------------------------------- | -------- | ------------- |
-  # | fhir_datastore_active     | {Client#describe_fhir_datastore}  | 60       | 360           |
-  # | fhir_datastore_deleted    | {Client#describe_fhir_datastore}  | 120      | 360           |
-  # | fhir_export_job_completed | {Client#describe_fhir_export_job} | 120      | 360           |
-  # | fhir_import_job_completed | {Client#describe_fhir_import_job} | 120      | 720           |
+  # | waiter_name                       | params                                    | :delay   | :max_attempts |
+  # | --------------------------------- | ----------------------------------------- | -------- | ------------- |
+  # | data_transformation_job_completed | {Client#describe_data_transformation_job} | 30       | 5             |
+  # | fhir_datastore_active             | {Client#describe_fhir_datastore}          | 60       | 5             |
+  # | fhir_datastore_deleted            | {Client#describe_fhir_datastore}          | 120      | 5             |
+  # | fhir_export_job_completed         | {Client#describe_fhir_export_job}         | 120      | 5             |
+  # | fhir_import_job_completed         | {Client#describe_fhir_import_job}         | 120      | 5             |
   #
   module Waiters
+
+    class DataTransformationJobCompleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (5)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 5,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_data_transformation_job,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "transformation_job_properties.job_status",
+                "state" => "success",
+                "expected" => "COMPLETED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "transformation_job_properties.job_status",
+                "state" => "success",
+                "expected" => "COMPLETED_WITH_ERRORS"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "transformation_job_properties.job_status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "failure",
+                "expected" => "ResourceNotFoundException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_data_transformation_job)
+      # @return (see Client#describe_data_transformation_job)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     class FHIRDatastoreActive
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (360)
+      # @option options [Integer] :max_attempts (5)
       # @option options [Integer] :delay (60)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 360,
+          max_attempts: 5,
           delay: 60,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_fhir_datastore,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "datastore_properties.datastore_status",
+                "state" => "success",
                 "expected" => "ACTIVE"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "datastore_properties.datastore_status",
+                "state" => "failure",
                 "expected" => "CREATE_FAILED"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "datastore_properties.datastore_status",
+                "state" => "failure",
                 "expected" => "DELETED"
               }
             ]
@@ -130,21 +186,21 @@ module Aws::HealthLake
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (360)
+      # @option options [Integer] :max_attempts (5)
       # @option options [Integer] :delay (120)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 360,
+          max_attempts: 5,
           delay: 120,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_fhir_datastore,
             acceptors: [{
-              "state" => "success",
               "matcher" => "path",
               "argument" => "datastore_properties.datastore_status",
+              "state" => "success",
               "expected" => "DELETED"
             }]
           )
@@ -166,46 +222,46 @@ module Aws::HealthLake
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (360)
+      # @option options [Integer] :max_attempts (5)
       # @option options [Integer] :delay (120)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 360,
+          max_attempts: 5,
           delay: 120,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_fhir_export_job,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "export_job_properties.job_status",
+                "state" => "success",
                 "expected" => "COMPLETED"
               },
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "export_job_properties.job_status",
+                "state" => "success",
                 "expected" => "COMPLETED_WITH_ERRORS"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "export_job_properties.job_status",
+                "state" => "failure",
                 "expected" => "CANCEL_COMPLETED"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "export_job_properties.job_status",
+                "state" => "failure",
                 "expected" => "FAILED"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "export_job_properties.job_status",
+                "state" => "failure",
                 "expected" => "CANCEL_FAILED"
               }
             ]
@@ -228,34 +284,34 @@ module Aws::HealthLake
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (720)
+      # @option options [Integer] :max_attempts (5)
       # @option options [Integer] :delay (120)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 720,
+          max_attempts: 5,
           delay: 120,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_fhir_import_job,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "import_job_properties.job_status",
+                "state" => "success",
                 "expected" => "COMPLETED"
               },
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "import_job_properties.job_status",
+                "state" => "success",
                 "expected" => "COMPLETED_WITH_ERRORS"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "import_job_properties.job_status",
+                "state" => "failure",
                 "expected" => "FAILED"
               }
             ]

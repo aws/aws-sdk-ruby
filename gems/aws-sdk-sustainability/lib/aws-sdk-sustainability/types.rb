@@ -107,10 +107,47 @@ module Aws::Sustainability
       include Aws::Structure
     end
 
-    # Filters emission values by specific dimension values.
+    # Contains estimated water allocation data for a specific time period
+    # and dimension grouping.
+    #
+    # @!attribute [rw] time_period
+    #   The reporting period for water allocation values.
+    #   @return [Types::TimePeriod]
+    #
+    # @!attribute [rw] dimensions_values
+    #   The dimensions used to group water allocation values.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] model_version
+    #   The semantic version-formatted string that indicates the methodology
+    #   version used to calculate the water allocation values.
+    #
+    #   <note markdown="1"> The AWS Sustainability service reflects the most recent model
+    #   version for every month. You will not see two entries for the same
+    #   month with different `ModelVersion` values.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_values
+    #   The allocation values for the requested water allocation types.
+    #   @return [Hash<String,Types::WaterAllocation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sustainability-2018-05-10/EstimatedWaterAllocation AWS API Documentation
+    #
+    class EstimatedWaterAllocation < Struct.new(
+      :time_period,
+      :dimensions_values,
+      :model_version,
+      :allocation_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters environmental impact values by specific dimension values.
     #
     # @!attribute [rw] dimensions
-    #   Filters emission values by specific dimension values.
+    #   Filters environmental impact values by specific dimension values.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sustainability-2018-05-10/FilterExpression AWS API Documentation
@@ -122,7 +159,9 @@ module Aws::Sustainability
     end
 
     # @!attribute [rw] time_period
-    #   The date range for fetching the dimension values.
+    #   The date range for fetching the dimension values. The range must
+    #   include the start date of a month for that month's dimensions to be
+    #   included in the response.
     #   @return [Types::TimePeriod]
     #
     # @!attribute [rw] dimensions
@@ -131,7 +170,7 @@ module Aws::Sustainability
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. Default is
-    #   40.
+    #   1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -172,7 +211,9 @@ module Aws::Sustainability
     end
 
     # @!attribute [rw] time_period
-    #   The date range for fetching estimated carbon emissions.
+    #   The date range for fetching estimated carbon emissions. The range
+    #   must include the start date of a month for that month's data to be
+    #   included in the response.
     #   @return [Types::TimePeriod]
     #
     # @!attribute [rw] group_by
@@ -180,7 +221,9 @@ module Aws::Sustainability
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter_by
-    #   The criteria for filtering estimated carbon emissions.
+    #   The criteria for filtering estimated carbon emissions. To determine
+    #   which dimensions are available to be filtered by, you can first call
+    #   GetEstimatedCarbonEmissionsDimensionValues
     #   @return [Types::FilterExpression]
     #
     # @!attribute [rw] emissions_types
@@ -191,7 +234,14 @@ module Aws::Sustainability
     #
     # @!attribute [rw] granularity
     #   The time granularity for the results. If absent, uses `MONTHLY` time
-    #   granularity.
+    #   granularity. The smallest supported granularity for carbon emissions
+    #   is `MONTHLY`.
+    #
+    #   If requesting partial time periods, data will be returned based on
+    #   the smallest supported granularity. For example, requesting
+    #   `2025-04-01T00:00:00Z` to `2026-04-01T00:00:00Z` with
+    #   `YEARLY_CALENDAR` granularity will return the last 9 months for 2025
+    #   and the first 3 months of 2026.
     #   @return [String]
     #
     # @!attribute [rw] granularity_configuration
@@ -201,7 +251,7 @@ module Aws::Sustainability
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. Default is
-    #   40.
+    #   1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -238,6 +288,134 @@ module Aws::Sustainability
     # @see http://docs.aws.amazon.com/goto/WebAPI/sustainability-2018-05-10/GetEstimatedCarbonEmissionsResponse AWS API Documentation
     #
     class GetEstimatedCarbonEmissionsResponse < Struct.new(
+      :results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] time_period
+    #   The date range for fetching the dimension values. The range must
+    #   include the start date of a year for that year's data to be
+    #   included in the response.
+    #   @return [Types::TimePeriod]
+    #
+    # @!attribute [rw] dimensions
+    #   The dimensions available for grouping estimated water allocation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Default is
+    #   1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token specifying which page of results to return in
+    #   the response. If no token is provided, the default page is the first
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sustainability-2018-05-10/GetEstimatedWaterAllocationDimensionValuesRequest AWS API Documentation
+    #
+    class GetEstimatedWaterAllocationDimensionValuesRequest < Struct.new(
+      :time_period,
+      :dimensions,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   The list of possible dimensions over which the allocation data is
+    #   aggregated.
+    #   @return [Array<Types::DimensionEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token indicating there are additional pages
+    #   available. You can use the token in a following request to fetch the
+    #   next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sustainability-2018-05-10/GetEstimatedWaterAllocationDimensionValuesResponse AWS API Documentation
+    #
+    class GetEstimatedWaterAllocationDimensionValuesResponse < Struct.new(
+      :results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] time_period
+    #   The date range for fetching estimated water allocation. The range
+    #   must include the start date of a year for that year's data to be
+    #   included in the response.
+    #   @return [Types::TimePeriod]
+    #
+    # @!attribute [rw] group_by
+    #   The dimensions available for grouping estimated water allocation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filter_by
+    #   The criteria for filtering estimated water allocation. To determine
+    #   which dimensions are available to be filtered by, you can first call
+    #   GetEstimatedWaterAllocationDimensionValues
+    #   @return [Types::FilterExpression]
+    #
+    # @!attribute [rw] allocation_types
+    #   The allocation types to include in the results. If absent, returns
+    #   `TOTAL_WATER_WITHDRAWALS` allocation types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] granularity
+    #   The time granularity for the results. Only `YEARLY_CALENDAR` time
+    #   granularity is currently supported for water allocation. Defaults to
+    #   `YEARLY_CALENDAR` if absent.
+    #
+    #   If requesting partial time periods, data will be returned based on
+    #   the smallest supported granularity. For example, requesting
+    #   `2025-04-01T00:00:00Z` to `2026-04-01T00:00:00Z` with
+    #   `YEARLY_CALENDAR` will return all the data for 2026 only.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Default is
+    #   1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token specifying which page of results to return in
+    #   the response. If no token is provided, the default page is the first
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sustainability-2018-05-10/GetEstimatedWaterAllocationRequest AWS API Documentation
+    #
+    class GetEstimatedWaterAllocationRequest < Struct.new(
+      :time_period,
+      :group_by,
+      :filter_by,
+      :allocation_types,
+      :granularity,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   The result of the requested inputs.
+    #   @return [Array<Types::EstimatedWaterAllocation>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token indicating there are additional pages
+    #   available. You can use the token in a following request to fetch the
+    #   next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sustainability-2018-05-10/GetEstimatedWaterAllocationResponse AWS API Documentation
+    #
+    class GetEstimatedWaterAllocationResponse < Struct.new(
       :results,
       :next_token)
       SENSITIVE = []
@@ -319,6 +497,26 @@ module Aws::Sustainability
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a water allocation quantity with its value and unit of
+    # measurement.
+    #
+    # @!attribute [rw] value
+    #   The numeric value of the allocation quantity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] unit
+    #   The unit of measurement for the allocation value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sustainability-2018-05-10/WaterAllocation AWS API Documentation
+    #
+    class WaterAllocation < Struct.new(
+      :value,
+      :unit)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -23,10 +23,15 @@ module Aws::AppConfig
     #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
     #   @return [Types::DeletionProtectionSettings]
     #
+    # @!attribute [rw] vended_metrics
+    #   The configuration for vended metrics in the account.
+    #   @return [Types::VendedMetricsSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/AccountSettings AWS API Documentation
     #
     class AccountSettings < Struct.new(
-      :deletion_protection)
+      :deletion_protection,
+      :vended_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -205,6 +210,54 @@ module Aws::AppConfig
       :parameters)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A value for a feature flag attribute. Only one of the members can be
+    # set.
+    #
+    # @note AttributeValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AttributeValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AttributeValue corresponding to the set member.
+    #
+    # @!attribute [rw] string_value
+    #   A string value for the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_value
+    #   A numeric value for the attribute.
+    #   @return [Float]
+    #
+    # @!attribute [rw] boolean_value
+    #   A Boolean value for the attribute.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] string_array
+    #   An array of string values for the attribute.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] number_array
+    #   An array of numeric values for the attribute.
+    #   @return [Array<Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/AttributeValue AWS API Documentation
+    #
+    class AttributeValue < Struct.new(
+      :string_value,
+      :number_value,
+      :boolean_value,
+      :string_array,
+      :number_array,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class StringValue < AttributeValue; end
+      class NumberValue < AttributeValue; end
+      class BooleanValue < AttributeValue; end
+      class StringArray < AttributeValue; end
+      class NumberArray < AttributeValue; end
+      class Unknown < AttributeValue; end
     end
 
     # Detailed information about the input that failed to satisfy the
@@ -567,6 +620,21 @@ module Aws::AppConfig
     #
     # @!attribute [rw] deployment_duration_in_minutes
     #   Total amount of time for a deployment to last.
+    #
+    #   <note markdown="1"> AppConfig Agent supports deploying feature flag or free-form
+    #   configuration data to specific segments or individual users during a
+    #   gradual rollout. Entity-based gradual deployments ensure that once a
+    #   user or segment receives a configuration version, they continue to
+    #   receive that same version throughout the deployment period,
+    #   regardless of which compute resource serves their requests. For more
+    #   information, see [Using AppConfig Agent for user-based or
+    #   entity-based gradual deployments][1]
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-agent-how-to-use.html#appconfig-entity-based-gradual-deployments
     #   @return [Integer]
     #
     # @!attribute [rw] final_bake_time_in_minutes
@@ -678,6 +746,79 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_identifier
+    #   The application ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the experiment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_identifier
+    #   The configuration profile ID or name that stores the feature flag.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The environment ID or name where the experiment will run.
+    #   @return [String]
+    #
+    # @!attribute [rw] flag_key
+    #   The key of the existing feature flag to use with the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] treatments
+    #   A list of treatments to evaluate during the experiment. Each
+    #   treatment defines a distinct variation compared to the control.
+    #   @return [Array<Types::TreatmentInput>]
+    #
+    # @!attribute [rw] control
+    #   The control treatment that represents the baseline experience for
+    #   comparison.
+    #   @return [Types::TreatmentInput]
+    #
+    # @!attribute [rw] audience_rule
+    #   A rule that defines which users are eligible to be assigned to
+    #   treatments during the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] hypothesis
+    #   A description of the goal or hypothesis the experiment is designed
+    #   to validate.
+    #   @return [String]
+    #
+    # @!attribute [rw] audience_description
+    #   A description of the intended audience for the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_criteria
+    #   Information about the conditions under which you would launch the
+    #   winning treatment.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the experiment definition. Tags help organize
+    #   and categorize your AppConfig resources.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateExperimentDefinitionRequest AWS API Documentation
+    #
+    class CreateExperimentDefinitionRequest < Struct.new(
+      :application_identifier,
+      :name,
+      :configuration_profile_identifier,
+      :environment_identifier,
+      :flag_key,
+      :treatments,
+      :control,
+      :audience_rule,
+      :hypothesis,
+      :audience_description,
+      :launch_criteria,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] extension_identifier
     #   The name, the ID, or the Amazon Resource Name (ARN) of the
     #   extension.
@@ -773,6 +914,10 @@ module Aws::AppConfig
     #
     # @!attribute [rw] description
     #   A description of the configuration.
+    #
+    #   <note markdown="1"> Due to HTTP limitations, this field only supports ASCII characters.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] content
@@ -933,6 +1078,29 @@ module Aws::AppConfig
       :environment_id,
       :application_id,
       :deletion_protection_check)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_identifier
+    #   The application ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_type
+    #   The type of deletion to perform. Valid values include archive (hide
+    #   but preserve) and permanent (delete permanently).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteExperimentDefinitionRequest AWS API Documentation
+    #
+    class DeleteExperimentDefinitionRequest < Struct.new(
+      :application_identifier,
+      :experiment_definition_identifier,
+      :delete_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1207,6 +1375,26 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # The deployment parameters for an experiment run, including dynamic
+    # extension parameters and tags.
+    #
+    # @!attribute [rw] dynamic_extension_parameters
+    #   A map of extension parameters for the deployment.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the deployment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeploymentParameters AWS API Documentation
+    #
+    class DeploymentParameters < Struct.new(
+      :dynamic_extension_parameters,
+      :tags)
+      SENSITIVE = [:dynamic_extension_parameters]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] items
     #   The elements from this collection.
     #   @return [Array<Types::DeploymentStrategy>]
@@ -1281,6 +1469,10 @@ module Aws::AppConfig
     #   The sequence number of the deployment.
     #   @return [Integer]
     #
+    # @!attribute [rw] configuration_profile_id
+    #   The ID of the configuration profile that was deployed.
+    #   @return [String]
+    #
     # @!attribute [rw] configuration_name
     #   The name of the configuration.
     #   @return [String]
@@ -1328,10 +1520,15 @@ module Aws::AppConfig
     #   A user-defined label for an AppConfig hosted configuration version.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of deployment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeploymentSummary AWS API Documentation
     #
     class DeploymentSummary < Struct.new(
       :deployment_number,
+      :configuration_profile_id,
       :configuration_name,
       :configuration_version,
       :deployment_duration_in_minutes,
@@ -1342,7 +1539,8 @@ module Aws::AppConfig
       :percentage_complete,
       :started_at,
       :completed_at,
-      :version_label)
+      :version_label,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1416,6 +1614,482 @@ module Aws::AppConfig
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Environments AWS API Documentation
     #
     class Environments < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an experiment definition, including the target audience,
+    # feature flag, treatments, and current status.
+    #
+    # @!attribute [rw] application_id
+    #   The application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The experiment definition ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the experiment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] hypothesis
+    #   The hypothesis that the experiment is designed to validate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the experiment definition. Valid values:
+    #   `ACTIVE`, `IDLE`, `ARCHIVED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_id
+    #   The configuration profile ID associated with the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The environment ID where the experiment runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] flag_key
+    #   The key of the feature flag used by the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] audience_rule
+    #   The rule that defines which users are eligible to be assigned to
+    #   treatments.
+    #   @return [String]
+    #
+    # @!attribute [rw] audience_description
+    #   A description of the intended audience for the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_criteria
+    #   The conditions under which the winning treatment should be launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] treatments
+    #   The list of treatments defined for the experiment.
+    #   @return [Array<Types::Treatment>]
+    #
+    # @!attribute [rw] control
+    #   The control treatment used as the baseline for comparison.
+    #   @return [Types::Treatment]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the experiment definition was created, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the experiment definition was last updated, in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_identifier
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt
+    #   experiment data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExperimentDefinition AWS API Documentation
+    #
+    class ExperimentDefinition < Struct.new(
+      :application_id,
+      :id,
+      :name,
+      :hypothesis,
+      :status,
+      :configuration_profile_id,
+      :environment_id,
+      :flag_key,
+      :audience_rule,
+      :audience_description,
+      :launch_criteria,
+      :treatments,
+      :control,
+      :created_at,
+      :updated_at,
+      :kms_key_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A snapshot of the experiment definition captured at the time an
+    # experiment run was started. This preserves the configuration that was
+    # active during the run.
+    #
+    # @!attribute [rw] application_id
+    #   The application ID at the time the run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The experiment definition ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the experiment definition at the time the run was
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] hypothesis
+    #   The hypothesis at the time the run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_id
+    #   The configuration profile ID at the time the run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The environment ID at the time the run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] flag_key
+    #   The feature flag key at the time the run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] audience_rule
+    #   The audience rule at the time the run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] audience_description
+    #   The audience description at the time the run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_criteria
+    #   The launch criteria at the time the run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] treatments
+    #   The treatments at the time the run was started.
+    #   @return [Array<Types::Treatment>]
+    #
+    # @!attribute [rw] control
+    #   The control treatment at the time the run was started.
+    #   @return [Types::Treatment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExperimentDefinitionSnapshot AWS API Documentation
+    #
+    class ExperimentDefinitionSnapshot < Struct.new(
+      :application_id,
+      :id,
+      :name,
+      :hypothesis,
+      :configuration_profile_id,
+      :environment_id,
+      :flag_key,
+      :audience_rule,
+      :audience_description,
+      :launch_criteria,
+      :treatments,
+      :control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an experiment definition.
+    #
+    # @!attribute [rw] application_id
+    #   The application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The experiment definition ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the experiment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] hypothesis
+    #   The hypothesis that the experiment is designed to validate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the experiment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_id
+    #   The configuration profile ID associated with the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The environment ID where the experiment runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] flag_key
+    #   The key of the feature flag used by the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the experiment definition was created, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the experiment definition was last updated, in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExperimentDefinitionSummary AWS API Documentation
+    #
+    class ExperimentDefinitionSummary < Struct.new(
+      :application_id,
+      :id,
+      :name,
+      :hypothesis,
+      :status,
+      :configuration_profile_id,
+      :environment_id,
+      :flag_key,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response for a list experiment definitions request.
+    #
+    # @!attribute [rw] items
+    #   The list of experiment definitions.
+    #   @return [Array<Types::ExperimentDefinitionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExperimentDefinitions AWS API Documentation
+    #
+    class ExperimentDefinitions < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an experiment run, including its status, exposure settings,
+    # and treatment overrides.
+    #
+    # @!attribute [rw] application_id
+    #   The application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_definition_id
+    #   The experiment definition ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] run
+    #   The experiment run number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description of the experiment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the experiment run. Valid values: `RUNNING`,
+    #   `DONE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] exposure_percentage
+    #   The percentage of the target audience exposed to treatments.
+    #   @return [Float]
+    #
+    # @!attribute [rw] treatment_overrides
+    #   Treatment assignment overrides that assign specific entity IDs to
+    #   treatments.
+    #   @return [Types::TreatmentOverrides]
+    #
+    # @!attribute [rw] result
+    #   The result of the experiment run, including the executive summary
+    #   and launch decision rationale.
+    #   @return [Types::ExperimentRunResult]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time the experiment run started, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the experiment run was last updated, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The date and time the experiment run ended, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] experiment_definition_snapshot
+    #   A snapshot of the experiment definition at the time the run was
+    #   started.
+    #   @return [Types::ExperimentDefinitionSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExperimentRun AWS API Documentation
+    #
+    class ExperimentRun < Struct.new(
+      :application_id,
+      :experiment_definition_id,
+      :run,
+      :description,
+      :status,
+      :exposure_percentage,
+      :treatment_overrides,
+      :result,
+      :started_at,
+      :updated_at,
+      :ended_at,
+      :experiment_definition_snapshot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an event that occurred during an experiment run.
+    #
+    # @!attribute [rw] description
+    #   A description of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_deployment
+    #   The Amazon Resource Name (ARN) of the deployment associated with
+    #   this event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event. Valid values: `RUN_STARTED`, `EXPOSURE_UPDATED`,
+    #   `OVERRIDES_UPDATED`, `RUN_STOPPED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] occurred_at
+    #   The date and time the event occurred, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] triggered_by
+    #   The principal that triggered the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] exposure_percentage
+    #   The exposure percentage at the time of the event.
+    #   @return [Float]
+    #
+    # @!attribute [rw] treatment_overrides
+    #   The treatment overrides at the time of the event.
+    #   @return [Types::TreatmentOverrides]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExperimentRunEvent AWS API Documentation
+    #
+    class ExperimentRunEvent < Struct.new(
+      :description,
+      :associated_deployment,
+      :event_type,
+      :occurred_at,
+      :triggered_by,
+      :exposure_percentage,
+      :treatment_overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response for a list experiment run events request.
+    #
+    # @!attribute [rw] items
+    #   The list of experiment run events.
+    #   @return [Array<Types::ExperimentRunEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExperimentRunEvents AWS API Documentation
+    #
+    class ExperimentRunEvents < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of an experiment run, including the executive summary and
+    # launch decision rationale.
+    #
+    # @!attribute [rw] executive_summary
+    #   A summary of the experiment outcome and key findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons_to_launch
+    #   Evidence in favor of launching the winning treatment.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons_not_to_launch
+    #   Evidence against launching the treatment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExperimentRunResult AWS API Documentation
+    #
+    class ExperimentRunResult < Struct.new(
+      :executive_summary,
+      :reasons_to_launch,
+      :reasons_not_to_launch)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an experiment run.
+    #
+    # @!attribute [rw] experiment_definition_id
+    #   The experiment definition ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] run
+    #   The experiment run number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description of the experiment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the experiment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time the experiment run started, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the experiment run was last updated, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The date and time the experiment run ended, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExperimentRunSummary AWS API Documentation
+    #
+    class ExperimentRunSummary < Struct.new(
+      :experiment_definition_id,
+      :run,
+      :description,
+      :status,
+      :started_at,
+      :updated_at,
+      :ended_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response for a list experiment runs request.
+    #
+    # @!attribute [rw] items
+    #   The list of experiment runs.
+    #   @return [Array<Types::ExperimentRunSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ExperimentRuns AWS API Documentation
+    #
+    class ExperimentRuns < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -1610,6 +2284,26 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # The feature flag value configuration for a treatment, including the
+    # enabled state and attribute values.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether the feature flag is enabled for this treatment.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] attribute_values
+    #   The attribute values associated with this flag value.
+    #   @return [Hash<String,Types::AttributeValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/FlagValue AWS API Documentation
+    #
+    class FlagValue < Struct.new(
+      :enabled,
+      :attribute_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
     #   The ID of the application you want to get.
     #   @return [String]
@@ -1755,6 +2449,45 @@ module Aws::AppConfig
     class GetEnvironmentRequest < Struct.new(
       :application_id,
       :environment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_identifier
+    #   The application ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetExperimentDefinitionRequest AWS API Documentation
+    #
+    class GetExperimentDefinitionRequest < Struct.new(
+      :application_identifier,
+      :experiment_definition_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_identifier
+    #   The application ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] run
+    #   The run number to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetExperimentRunRequest AWS API Documentation
+    #
+    class GetExperimentRunRequest < Struct.new(
+      :application_identifier,
+      :experiment_definition_identifier,
+      :run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2119,6 +2852,107 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_identifier
+    #   The application ID or name to filter results.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_profile_identifier
+    #   The configuration profile ID or name to filter results.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The environment ID or name to filter results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A filter for the experiment definition status.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list from a previously truncated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListExperimentDefinitionsRequest AWS API Documentation
+    #
+    class ListExperimentDefinitionsRequest < Struct.new(
+      :application_identifier,
+      :configuration_profile_identifier,
+      :environment_identifier,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_identifier
+    #   The application ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] run
+    #   The run number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list from a previously truncated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListExperimentRunEventsRequest AWS API Documentation
+    #
+    class ListExperimentRunEventsRequest < Struct.new(
+      :application_identifier,
+      :experiment_definition_identifier,
+      :run,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_identifier
+    #   The application ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list from a previously truncated response.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A filter for the experiment run status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListExperimentRunsRequest AWS API Documentation
+    #
+    class ListExperimentRunsRequest < Struct.new(
+      :application_identifier,
+      :experiment_definition_identifier,
+      :max_results,
+      :next_token,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_identifier
     #   The ARN of an application, configuration profile, or environment.
     #   @return [String]
@@ -2348,12 +3182,6 @@ module Aws::AppConfig
     #
     # Applications: 100 max
     #
-    # Deployment strategies: 20 max
-    #
-    # Configuration profiles: 100 max per application
-    #
-    # Environments: 20 max per application
-    #
     # To resolve this issue, you can delete one or more resources and try
     # again. Or, you can request a quota increase. For more information
     # about quotas and to request an increase, see [Service quotas for
@@ -2418,6 +3246,12 @@ module Aws::AppConfig
     #   associated extensions with `PRE_START_DEPLOYMENT` actions.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] latest_deployment_number
+    #   The number of the latest deployment. Use this value to ensure that
+    #   the deployment starts from the expected state and to prevent
+    #   conflicting updates.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StartDeploymentRequest AWS API Documentation
     #
     class StartDeploymentRequest < Struct.new(
@@ -2429,8 +3263,54 @@ module Aws::AppConfig
       :description,
       :tags,
       :kms_key_identifier,
-      :dynamic_extension_parameters)
+      :dynamic_extension_parameters,
+      :latest_deployment_number)
       SENSITIVE = [:dynamic_extension_parameters]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_identifier
+    #   The application ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of this experiment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] exposure_percentage
+    #   The percentage of the target audience to expose to treatments. Set
+    #   to 0 to validate the experiment before exposing production users.
+    #   @return [Float]
+    #
+    # @!attribute [rw] treatment_overrides
+    #   Treatment assignment overrides that assign specific entity IDs to
+    #   treatments directly, bypassing random assignment.
+    #   @return [Types::TreatmentOverrides]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the experiment run.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] deployment_parameters
+    #   The deployment parameters for the experiment run, including a KMS
+    #   key identifier for encryption.
+    #   @return [Types::DeploymentParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StartExperimentRunRequest AWS API Documentation
+    #
+    class StartExperimentRunRequest < Struct.new(
+      :application_identifier,
+      :experiment_definition_identifier,
+      :description,
+      :exposure_percentage,
+      :treatment_overrides,
+      :tags,
+      :deployment_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2463,6 +3343,39 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_identifier
+    #   The application ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] run
+    #   The run number to stop.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] result
+    #   The result of the experiment run, including an executive summary and
+    #   reasons for or against launching.
+    #   @return [Types::ExperimentRunResult]
+    #
+    # @!attribute [rw] deployment_parameters
+    #   The deployment parameters for the stop operation.
+    #   @return [Types::DeploymentParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StopExperimentRunRequest AWS API Documentation
+    #
+    class StopExperimentRunRequest < Struct.new(
+      :application_identifier,
+      :experiment_definition_identifier,
+      :run,
+      :result,
+      :deployment_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource for which to retrieve tags.
     #   @return [String]
@@ -2480,6 +3393,87 @@ module Aws::AppConfig
       :tags)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Describes a treatment in an experiment, including its traffic
+    # allocation weight and feature flag value.
+    #
+    # @!attribute [rw] key
+    #   The unique key that identifies this treatment.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The traffic allocation weight for this treatment.
+    #   @return [Float]
+    #
+    # @!attribute [rw] description
+    #   A description of the treatment.
+    #   @return [String]
+    #
+    # @!attribute [rw] flag_value
+    #   The feature flag value served to users assigned to this treatment.
+    #   @return [Types::FlagValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Treatment AWS API Documentation
+    #
+    class Treatment < Struct.new(
+      :key,
+      :weight,
+      :description,
+      :flag_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input structure for defining a treatment when creating or updating an
+    # experiment definition.
+    #
+    # @!attribute [rw] weight
+    #   The traffic allocation weight for this treatment.
+    #   @return [Float]
+    #
+    # @!attribute [rw] description
+    #   A description of the treatment.
+    #   @return [String]
+    #
+    # @!attribute [rw] flag_value
+    #   The feature flag value to serve to users assigned to this treatment.
+    #   @return [Types::FlagValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/TreatmentInput AWS API Documentation
+    #
+    class TreatmentInput < Struct.new(
+      :weight,
+      :description,
+      :flag_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Treatment assignment overrides that assign specific entity IDs to
+    # treatments, bypassing random assignment.
+    #
+    # @note TreatmentOverrides is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TreatmentOverrides is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TreatmentOverrides corresponding to the set member.
+    #
+    # @!attribute [rw] inline
+    #   A map of entity IDs to treatment keys. Each entry assigns the
+    #   specified entity to the specified treatment, bypassing random
+    #   assignment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/TreatmentOverrides AWS API Documentation
+    #
+    class TreatmentOverrides < Struct.new(
+      :inline,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Inline < TreatmentOverrides; end
+      class Unknown < TreatmentOverrides; end
     end
 
     # @!attribute [rw] resource_arn
@@ -2512,10 +3506,15 @@ module Aws::AppConfig
     #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
     #   @return [Types::DeletionProtectionSettings]
     #
+    # @!attribute [rw] vended_metrics
+    #   The configuration for vended metrics in the account.
+    #   @return [Types::VendedMetricsSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateAccountSettingsRequest AWS API Documentation
     #
     class UpdateAccountSettingsRequest < Struct.new(
-      :deletion_protection)
+      :deletion_protection,
+      :vended_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2694,6 +3693,98 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_identifier
+    #   The application ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] treatments
+    #   The updated list of treatments to evaluate during the experiment.
+    #   Each treatment defines a distinct variation compared to the control.
+    #   @return [Array<Types::TreatmentInput>]
+    #
+    # @!attribute [rw] control
+    #   An updated control treatment.
+    #   @return [Types::TreatmentInput]
+    #
+    # @!attribute [rw] hypothesis
+    #   An updated hypothesis.
+    #   @return [String]
+    #
+    # @!attribute [rw] audience_rule
+    #   An updated audience rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] audience_description
+    #   An updated audience description.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_criteria
+    #   Updated launch criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateExperimentDefinitionRequest AWS API Documentation
+    #
+    class UpdateExperimentDefinitionRequest < Struct.new(
+      :application_identifier,
+      :experiment_definition_identifier,
+      :treatments,
+      :control,
+      :hypothesis,
+      :audience_rule,
+      :audience_description,
+      :launch_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_identifier
+    #   The application ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_definition_identifier
+    #   The experiment definition ID or name.
+    #   @return [String]
+    #
+    # @!attribute [rw] run
+    #   The run number to update.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   An updated description for the experiment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] exposure_percentage
+    #   The new exposure percentage. This value can only be increased from
+    #   the current setting.
+    #   @return [Float]
+    #
+    # @!attribute [rw] treatment_overrides
+    #   The updated treatment assignment overrides that assign specific
+    #   entity IDs to treatments, bypassing random assignment.
+    #   @return [Types::TreatmentOverrides]
+    #
+    # @!attribute [rw] deployment_parameters
+    #   The updated deployment parameters for the experiment run.
+    #   @return [Types::DeploymentParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateExperimentRunRequest AWS API Documentation
+    #
+    class UpdateExperimentRunRequest < Struct.new(
+      :application_identifier,
+      :experiment_definition_identifier,
+      :run,
+      :description,
+      :exposure_percentage,
+      :treatment_overrides,
+      :deployment_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] extension_association_id
     #   The system-generated ID for the association.
     #   @return [String]
@@ -2793,6 +3884,21 @@ module Aws::AppConfig
       :type,
       :content)
       SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
+    # The configuration settings for vended metrics in your AppConfig
+    # account.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether vended metrics are enabled for the account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/VendedMetricsSettings AWS API Documentation
+    #
+    class VendedMetricsSettings < Struct.new(
+      :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 

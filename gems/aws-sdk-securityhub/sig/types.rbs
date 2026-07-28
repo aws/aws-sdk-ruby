@@ -8,6 +8,21 @@
 module Aws::SecurityHub
   module Types
 
+    class AIDetails
+      attr_accessor host_resource_guid: ::String
+      attr_accessor host_resource_type: ::String
+      attr_accessor canonical_id: ::String
+      attr_accessor self_hosted_ai_model_resource_count: ::Integer
+      attr_accessor self_hosted_ai_agent_resource_count: ::Integer
+      attr_accessor self_hosted_ai_model_serving_resource_count: ::Integer
+      attr_accessor self_hosted_ai_external_endpoint_resource_count: ::Integer
+      attr_accessor self_hosted_ai_development_resource_count: ::Integer
+      attr_accessor self_hosted_ai_agent_framework_resource_count: ::Integer
+      attr_accessor self_hosted_ai_agent_tools_and_identity_resource_count: ::Integer
+      attr_accessor self_hosted_total_ai_resource_count: ::Integer
+      SENSITIVE: []
+    end
+
     class AcceptAdministratorInvitationRequest
       attr_accessor administrator_id: ::String
       attr_accessor invitation_id: ::String
@@ -241,6 +256,9 @@ module Aws::SecurityHub
       attr_accessor resource_application_arn: ::Array[Types::StringFilter]
       attr_accessor resource_application_name: ::Array[Types::StringFilter]
       attr_accessor aws_account_name: ::Array[Types::StringFilter]
+      attr_accessor resource_provider: ::Array[Types::StringFilter]
+      attr_accessor resource_owner_account_id: ::Array[Types::StringFilter]
+      attr_accessor resource_owner_org_id: ::Array[Types::StringFilter]
       SENSITIVE: []
     end
 
@@ -4322,6 +4340,9 @@ module Aws::SecurityHub
       attr_accessor aws_account_name: ::Array[Types::StringFilter]
       attr_accessor resource_application_name: ::Array[Types::StringFilter]
       attr_accessor resource_application_arn: ::Array[Types::StringFilter]
+      attr_accessor resource_owner_account_id: ::Array[Types::StringFilter]
+      attr_accessor resource_owner_org_id: ::Array[Types::StringFilter]
+      attr_accessor resource_provider: ::Array[Types::StringFilter]
       SENSITIVE: []
     end
 
@@ -4689,6 +4710,32 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class AzureDetail
+      attr_accessor aws_config_connector_arn: ::String
+      attr_accessor scope_configuration: Types::AzureScopeConfiguration
+      attr_accessor azure_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AzureProviderConfiguration
+      attr_accessor aws_config_connector_arn: ::String
+      attr_accessor scope_configuration: Types::AzureScopeConfiguration
+      attr_accessor azure_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AzureScopeConfiguration
+      attr_accessor scope_type: ("TENANT" | "SUBSCRIPTION")
+      attr_accessor scope_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AzureUpdateConfiguration
+      attr_accessor scope_configuration: Types::AzureScopeConfiguration
+      attr_accessor azure_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class BatchDeleteAutomationRulesRequest
       attr_accessor automation_rules_arns: ::Array[::String]
       SENSITIVE: []
@@ -5014,6 +5061,8 @@ module Aws::SecurityHub
       attr_accessor description: ::String
       attr_accessor provider_summary: Types::ProviderSummary
       attr_accessor created_at: ::Time
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
+      attr_accessor enablement_status_reason: ::String
       SENSITIVE: []
     end
 
@@ -5116,6 +5165,23 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class CreateConnectorRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider: Types::CspmProviderConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectorResponse
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_id: ::String
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN")
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+      SENSITIVE: []
+    end
+
     class CreateConnectorV2Request
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -5130,7 +5196,8 @@ module Aws::SecurityHub
       attr_accessor connector_arn: ::String
       attr_accessor connector_id: ::String
       attr_accessor auth_url: ::String
-      attr_accessor connector_status: ("CONNECTED" | "FAILED_TO_CONNECT" | "PENDING_CONFIGURATION" | "PENDING_AUTHORIZATION")
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN")
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
       SENSITIVE: []
     end
 
@@ -5192,6 +5259,66 @@ module Aws::SecurityHub
       class OcsfFindingCriteria < Criteria
       end
       class Unknown < Criteria
+      end
+    end
+
+    class CspmConnectorSummary
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider_summary: Types::CspmProviderSummary
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+      SENSITIVE: []
+    end
+
+    class CspmHealthCheck
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN")
+      attr_accessor message: ::String
+      attr_accessor last_checked_at: ::Time
+      attr_accessor issues: ::Array[Types::HealthIssue]
+      SENSITIVE: []
+    end
+
+    class CspmProviderConfiguration
+      attr_accessor azure: Types::AzureProviderConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < CspmProviderConfiguration
+      end
+      class Unknown < CspmProviderConfiguration
+      end
+    end
+
+    class CspmProviderDetail
+      attr_accessor azure: Types::AzureDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < CspmProviderDetail
+      end
+      class Unknown < CspmProviderDetail
+      end
+    end
+
+    class CspmProviderSummary
+      attr_accessor provider_name: ("AZURE")
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN")
+      attr_accessor provider_configuration: Types::CspmProviderDetail
+      SENSITIVE: []
+    end
+
+    class CspmProviderUpdateConfiguration
+      attr_accessor azure: Types::AzureUpdateConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < CspmProviderUpdateConfiguration
+      end
+      class Unknown < CspmProviderUpdateConfiguration
       end
     end
 
@@ -5282,12 +5409,24 @@ module Aws::SecurityHub
     class DeleteConfigurationPolicyResponse < Aws::EmptyStructure
     end
 
+    class DeleteConnectorRequest
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorResponse
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+      SENSITIVE: []
+    end
+
     class DeleteConnectorV2Request
       attr_accessor connector_id: ::String
       SENSITIVE: []
     end
 
-    class DeleteConnectorV2Response < Aws::EmptyStructure
+    class DeleteConnectorV2Response
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
+      SENSITIVE: []
     end
 
     class DeleteFindingAggregatorRequest
@@ -5396,6 +5535,7 @@ module Aws::SecurityHub
     class DescribeSecurityHubV2Response
       attr_accessor hub_v2_arn: ::String
       attr_accessor subscribed_at: ::String
+      attr_accessor features: ::Hash[::String, Types::FeatureDetail]
       SENSITIVE: []
     end
 
@@ -5415,6 +5555,7 @@ module Aws::SecurityHub
     class DescribeStandardsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor providers: ::Array[("AWS" | "Azure")]
       SENSITIVE: []
     end
 
@@ -5444,6 +5585,14 @@ module Aws::SecurityHub
     end
 
     class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure
+    end
+
+    class DisableSecurityHubFeatureV2Request
+      attr_accessor feature_name: ("NETWORK_SCANNING")
+      SENSITIVE: []
+    end
+
+    class DisableSecurityHubFeatureV2Response < Aws::EmptyStructure
     end
 
     class DisableSecurityHubRequest < Aws::EmptyStructure
@@ -5514,6 +5663,14 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class EnableSecurityHubFeatureV2Request
+      attr_accessor feature_name: ("NETWORK_SCANNING")
+      SENSITIVE: []
+    end
+
+    class EnableSecurityHubFeatureV2Response < Aws::EmptyStructure
+    end
+
     class EnableSecurityHubRequest
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor enable_default_standards: bool
@@ -5549,6 +5706,12 @@ module Aws::SecurityHub
 
     class ExternalIntegrationConfiguration
       attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FeatureDetail
+      attr_accessor feature_status: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -5622,7 +5785,7 @@ module Aws::SecurityHub
     end
 
     class FindingsTrendsStringFilter
-      attr_accessor field_name: ("account_id" | "region" | "finding_types" | "finding_status" | "finding_cve_ids" | "finding_compliance_status" | "finding_control_id" | "finding_class_name" | "finding_provider" | "finding_activity_name")
+      attr_accessor field_name: ("account_id" | "region" | "finding_types" | "finding_status" | "finding_cve_ids" | "finding_compliance_status" | "finding_control_id" | "finding_class_name" | "finding_provider" | "finding_activity_name" | "resource_cloud_providers" | "resource_regions" | "resource_owner_ids" | "resource_owner_organization_ids")
       attr_accessor filter: Types::StringFilter
       SENSITIVE: []
     end
@@ -5746,6 +5909,25 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class GetConnectorRequest
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectorResponse
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor health: Types::CspmHealthCheck
+      attr_accessor provider_detail: Types::CspmProviderDetail
+      attr_accessor created_by: ::String
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+      SENSITIVE: []
+    end
+
     class GetConnectorV2Request
       attr_accessor connector_id: ::String
       SENSITIVE: []
@@ -5761,6 +5943,8 @@ module Aws::SecurityHub
       attr_accessor last_updated_at: ::Time
       attr_accessor health: Types::HealthCheck
       attr_accessor provider_detail: Types::ProviderDetail
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
+      attr_accessor enablement_status_reason: ::String
       SENSITIVE: []
     end
 
@@ -5768,6 +5952,7 @@ module Aws::SecurityHub
       attr_accessor standards_subscription_arns: ::Array[::String]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor providers: ::Array[("AWS" | "Azure")]
       SENSITIVE: []
     end
 
@@ -5992,7 +6177,7 @@ module Aws::SecurityHub
 
     class GroupByRule
       attr_accessor filters: Types::OcsfFindingFilters
-      attr_accessor group_by_field: ("activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.name" | "compliance.status" | "compliance.control" | "finding_info.title" | "finding_info.related_events.traits.category" | "finding_info.types" | "metadata.product.name" | "metadata.product.uid" | "resources.type" | "resources.uid" | "severity" | "status" | "vulnerabilities.fix_coverage" | "class_name" | "vulnerabilities.affected_packages.name" | "finding_info.analytic.name" | "compliance.standards" | "cloud.account.name" | "vendor_attributes.severity" | "metadata.product.vendor_name")
+      attr_accessor group_by_field: ("activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.name" | "compliance.status" | "compliance.control" | "finding_info.title" | "finding_info.related_events.traits.category" | "finding_info.types" | "metadata.product.name" | "metadata.product.uid" | "resources.type" | "resources.cloud_partition" | "resources.name" | "resources.owner.account.uid" | "resources.owner.org.uid" | "resources.owner.account.name" | "resources.provider" | "resources.region" | "resources.uid" | "severity" | "status" | "vulnerabilities.fix_coverage" | "class_name" | "vulnerabilities.affected_packages.name" | "finding_info.analytic.name" | "compliance.standards" | "cloud.account.name" | "vendor_attributes.severity" | "metadata.product.vendor_name")
       SENSITIVE: []
     end
 
@@ -6003,9 +6188,16 @@ module Aws::SecurityHub
     end
 
     class HealthCheck
-      attr_accessor connector_status: ("CONNECTED" | "FAILED_TO_CONNECT" | "PENDING_CONFIGURATION" | "PENDING_AUTHORIZATION")
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN")
       attr_accessor message: ::String
       attr_accessor last_checked_at: ::Time
+      attr_accessor issues: ::Array[Types::HealthIssue]
+      SENSITIVE: []
+    end
+
+    class HealthIssue
+      attr_accessor code: ("AUTHENTICATION_FAILURE" | "STREAM_AUTHORIZATION_FAILURE" | "DISCOVERY_FAILURE" | "STREAM_LIMIT_EXCEEDED" | "STREAM_DISCONNECTED" | "RECORDING_FAILURE" | "NO_HEALTH_DATA")
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -6219,11 +6411,27 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class ListConnectorsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor provider_name: ("AZURE")
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN")
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+      SENSITIVE: []
+    end
+
+    class ListConnectorsResponse
+      attr_accessor next_token: ::String
+      attr_accessor connectors: ::Array[Types::CspmConnectorSummary]
+      SENSITIVE: []
+    end
+
     class ListConnectorsV2Request
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor provider_name: ("JIRA_CLOUD" | "SERVICENOW")
-      attr_accessor connector_status: ("CONNECTED" | "FAILED_TO_CONNECT" | "PENDING_CONFIGURATION" | "PENDING_AUTHORIZATION")
+      attr_accessor provider_name: ("JIRA_CLOUD" | "SERVICENOW" | "AZURE")
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN")
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
       SENSITIVE: []
     end
 
@@ -6300,6 +6508,7 @@ module Aws::SecurityHub
       attr_accessor standards_arn: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor providers: ::Array[("AWS" | "Azure")]
       SENSITIVE: []
     end
 
@@ -6516,7 +6725,7 @@ module Aws::SecurityHub
     end
 
     class OcsfStringFilter
-      attr_accessor field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.traits.category" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name" | "vendor_attributes.severity")
+      attr_accessor field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.traits.category" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.name" | "resources.owner.account.uid" | "resources.owner.org.uid" | "resources.owner.account.name" | "resources.provider" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name" | "vendor_attributes.severity")
       attr_accessor filter: Types::StringFilter
       SENSITIVE: []
     end
@@ -6685,12 +6894,15 @@ module Aws::SecurityHub
     class ProviderConfiguration
       attr_accessor jira_cloud: Types::JiraCloudProviderConfiguration
       attr_accessor service_now: Types::ServiceNowProviderConfiguration
+      attr_accessor azure: Types::AzureProviderConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class JiraCloud < ProviderConfiguration
       end
       class ServiceNow < ProviderConfiguration
+      end
+      class Azure < ProviderConfiguration
       end
       class Unknown < ProviderConfiguration
       end
@@ -6699,6 +6911,7 @@ module Aws::SecurityHub
     class ProviderDetail
       attr_accessor jira_cloud: Types::JiraCloudDetail
       attr_accessor service_now: Types::ServiceNowDetail
+      attr_accessor azure: Types::AzureDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -6706,25 +6919,31 @@ module Aws::SecurityHub
       end
       class ServiceNow < ProviderDetail
       end
+      class Azure < ProviderDetail
+      end
       class Unknown < ProviderDetail
       end
     end
 
     class ProviderSummary
-      attr_accessor provider_name: ("JIRA_CLOUD" | "SERVICENOW")
-      attr_accessor connector_status: ("CONNECTED" | "FAILED_TO_CONNECT" | "PENDING_CONFIGURATION" | "PENDING_AUTHORIZATION")
+      attr_accessor provider_name: ("JIRA_CLOUD" | "SERVICENOW" | "AZURE")
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN")
+      attr_accessor provider_configuration: Types::ProviderDetail
       SENSITIVE: []
     end
 
     class ProviderUpdateConfiguration
       attr_accessor jira_cloud: Types::JiraCloudUpdateConfiguration
       attr_accessor service_now: Types::ServiceNowUpdateConfiguration
+      attr_accessor azure: Types::AzureUpdateConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class JiraCloud < ProviderUpdateConfiguration
       end
       class ServiceNow < ProviderUpdateConfiguration
+      end
+      class Azure < ProviderUpdateConfiguration
       end
       class Unknown < ProviderUpdateConfiguration
       end
@@ -6792,8 +7011,10 @@ module Aws::SecurityHub
     class Resource
       attr_accessor type: ::String
       attr_accessor id: ::String
-      attr_accessor partition: ("aws" | "aws-cn" | "aws-us-gov")
+      attr_accessor partition: ("aws" | "aws-cn" | "aws-us-gov" | "aws-us-iso" | "aws-us-iso-b" | "AzureCloud")
       attr_accessor region: ::String
+      attr_accessor provider: ("Azure" | "AWS")
+      attr_accessor owner: Types::ResourceOwner
       attr_accessor resource_role: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor data_classification: Types::DataClassificationDetails
@@ -6910,6 +7131,7 @@ module Aws::SecurityHub
       attr_accessor aws_s3_access_point: Types::AwsS3AccessPointDetails
       attr_accessor aws_ec2_client_vpn_endpoint: Types::AwsEc2ClientVpnEndpointDetails
       attr_accessor code_repository: Types::CodeRepositoryDetails
+      attr_accessor azure_resource: untyped
       SENSITIVE: []
     end
 
@@ -6922,7 +7144,7 @@ module Aws::SecurityHub
     end
 
     class ResourceGroupByRule
-      attr_accessor group_by_field: ("AccountId" | "Region" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType")
+      attr_accessor group_by_field: ("AccountId" | "AccountName" | "Region" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition" | "ResourceRegion" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType" | "ResourceSubCategory" | "DiscoveryType" | "ResourceInfo.AIDetails.HostResourceType" | "ResourceInfo.AIDetails.CanonicalId")
       attr_accessor filters: Types::ResourcesFilters
       SENSITIVE: []
     end
@@ -6933,9 +7155,30 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class ResourceInfo
+      attr_accessor ai_details: Types::AIDetails
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceOwner
+      attr_accessor account: Types::ResourceOwnerAccount
+      attr_accessor org: Types::ResourceOwnerOrg
+      SENSITIVE: []
+    end
+
+    class ResourceOwnerAccount
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceOwnerOrg
+      attr_accessor id: ::String
       SENSITIVE: []
     end
 
@@ -6943,8 +7186,14 @@ module Aws::SecurityHub
       attr_accessor resource_guid: ::String
       attr_accessor resource_id: ::String
       attr_accessor account_id: ::String
+      attr_accessor account_name: ::String
       attr_accessor region: ::String
-      attr_accessor resource_category: ("Compute" | "Database" | "Storage" | "Code" | "AI/ML" | "Identity" | "Network" | "Other")
+      attr_accessor resource_provider: ::String
+      attr_accessor resource_owner_account_id: ::String
+      attr_accessor resource_owner_org_id: ::String
+      attr_accessor resource_cloud_partition: ::String
+      attr_accessor resource_region: ::String
+      attr_accessor resource_category: ("Compute" | "Database" | "Storage" | "Code" | "AI/ML" | "Identity" | "Network" | "Messaging" | "Other")
       attr_accessor resource_type: ::String
       attr_accessor resource_name: ::String
       attr_accessor resource_creation_time_dt: ::String
@@ -6952,6 +7201,9 @@ module Aws::SecurityHub
       attr_accessor findings_summary: ::Array[Types::ResourceFindingsSummary]
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor resource_config: untyped
+      attr_accessor resource_sub_category: ("Model" | "ModelServing" | "Agent" | "AgentFramework" | "AgentToolsAndIdentity" | "SafetyAndGuardrail" | "KnowledgeAndData" | "OrchestrationAndPipeline" | "ExternalEndpoint" | "Development" | "Other")
+      attr_accessor discovery_type: ("Managed" | "SelfHosted")
+      attr_accessor resource_info: Types::ResourceInfo
       SENSITIVE: []
     end
 
@@ -7012,13 +7264,13 @@ module Aws::SecurityHub
     end
 
     class ResourcesNumberFilter
-      attr_accessor field_name: ("FindingsSummary.TotalFindings" | "FindingsSummary.Severities.Other" | "FindingsSummary.Severities.Fatal" | "FindingsSummary.Severities.Critical" | "FindingsSummary.Severities.High" | "FindingsSummary.Severities.Medium" | "FindingsSummary.Severities.Low" | "FindingsSummary.Severities.Informational" | "FindingsSummary.Severities.Unknown")
+      attr_accessor field_name: ("FindingsSummary.TotalFindings" | "FindingsSummary.Severities.Other" | "FindingsSummary.Severities.Fatal" | "FindingsSummary.Severities.Critical" | "FindingsSummary.Severities.High" | "FindingsSummary.Severities.Medium" | "FindingsSummary.Severities.Low" | "FindingsSummary.Severities.Informational" | "FindingsSummary.Severities.Unknown" | "ResourceInfo.AIDetails.SelfHostedAIModelResourceCount" | "ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount" | "ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount" | "ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount" | "ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount" | "ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount" | "ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount" | "ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount")
       attr_accessor filter: Types::NumberFilter
       SENSITIVE: []
     end
 
     class ResourcesStringFilter
-      attr_accessor field_name: ("ResourceGuid" | "ResourceId" | "AccountId" | "Region" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType" | "FindingsSummary.ProductName")
+      attr_accessor field_name: ("ResourceGuid" | "ResourceId" | "AccountId" | "AccountName" | "Region" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition" | "ResourceRegion" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType" | "FindingsSummary.ProductName" | "ResourceSubCategory" | "DiscoveryType" | "ResourceInfo.AIDetails.HostResourceGuid" | "ResourceInfo.AIDetails.HostResourceType" | "ResourceInfo.AIDetails.CanonicalId")
       attr_accessor filter: Types::StringFilter
       SENSITIVE: []
     end
@@ -7043,7 +7295,7 @@ module Aws::SecurityHub
     end
 
     class ResourcesTrendsStringFilter
-      attr_accessor field_name: ("account_id" | "region" | "resource_type" | "resource_category")
+      attr_accessor field_name: ("account_id" | "region" | "resource_type" | "resource_category" | "resource_cloud_provider" | "resource_region" | "resource_owner_id" | "resource_owner_organization_id")
       attr_accessor filter: Types::StringFilter
       SENSITIVE: []
     end
@@ -7212,6 +7464,7 @@ module Aws::SecurityHub
       attr_accessor update_status: ("READY" | "UPDATING")
       attr_accessor parameters: ::Hash[::String, Types::ParameterConfiguration]
       attr_accessor last_update_reason: ::String
+      attr_accessor provider: ("AWS" | "Azure")
       SENSITIVE: []
     end
 
@@ -7230,6 +7483,7 @@ module Aws::SecurityHub
       attr_accessor current_region_availability: ("AVAILABLE" | "UNAVAILABLE")
       attr_accessor customizable_properties: ::Array[("Parameters")]
       attr_accessor parameter_definitions: ::Hash[::String, Types::ParameterDefinition]
+      attr_accessor provider: ("AWS" | "Azure")
       SENSITIVE: []
     end
 
@@ -7372,6 +7626,7 @@ module Aws::SecurityHub
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor enabled_by_default: bool
+      attr_accessor provider: ("AWS" | "Azure")
       attr_accessor standards_managed_by: Types::StandardsManagedBy
       SENSITIVE: []
     end
@@ -7438,7 +7693,7 @@ module Aws::SecurityHub
     end
 
     class StandardsStatusReason
-      attr_accessor status_reason_code: ("NO_AVAILABLE_CONFIGURATION_RECORDER" | "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED" | "INTERNAL_ERROR")
+      attr_accessor status_reason_code: ("NO_AVAILABLE_CONFIGURATION_RECORDER" | "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED" | "NO_AVAILABLE_MULTICLOUD_CONNECTOR" | "INTERNAL_ERROR")
       SENSITIVE: []
     end
 
@@ -7449,6 +7704,7 @@ module Aws::SecurityHub
       attr_accessor standards_status: ("PENDING" | "READY" | "FAILED" | "DELETING" | "INCOMPLETE")
       attr_accessor standards_controls_updatable: ("READY_FOR_UPDATES" | "NOT_READY_FOR_UPDATES")
       attr_accessor standards_status_reason: Types::StandardsStatusReason
+      attr_accessor provider: ("AWS" | "Azure")
       SENSITIVE: []
     end
 
@@ -7711,6 +7967,19 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class UpdateConnectorRequest
+      attr_accessor connector_id: ::String
+      attr_accessor description: ::String
+      attr_accessor provider: Types::CspmProviderUpdateConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorResponse
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN")
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
+      SENSITIVE: []
+    end
+
     class UpdateConnectorV2Request
       attr_accessor connector_id: ::String
       attr_accessor description: ::String
@@ -7718,7 +7987,10 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
-    class UpdateConnectorV2Response < Aws::EmptyStructure
+    class UpdateConnectorV2Response
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN")
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
+      SENSITIVE: []
     end
 
     class UpdateFindingAggregatorRequest

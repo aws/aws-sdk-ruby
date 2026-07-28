@@ -1286,6 +1286,14 @@ module Aws::OpenSearchService
     #
     #   Maximum suspension duration: 3 days.
     #
+    # @option params [String] :use_case
+    #   The primary use case for the domain. For valid values, see
+    #   `DomainUseCase`.
+    #
+    # @option params [String] :engine_mode
+    #   The engine mode for the domain. For valid values and requirements, see
+    #   `EngineMode`.
+    #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResponse#domain_status #domain_status} => Types::DomainStatus
@@ -1462,6 +1470,8 @@ module Aws::OpenSearchService
     #       start_time: Time.now,
     #       end_time: Time.now,
     #     },
+    #     use_case: "SEARCH", # accepts SEARCH, VECTOR, OBSERVABILITY, MIXED
+    #     engine_mode: "GENERAL", # accepts GENERAL, OPTIMIZED
     #   })
     #
     # @example Response structure
@@ -1591,6 +1601,8 @@ module Aws::OpenSearchService
     #   resp.domain_status.automated_snapshot_pause_options.start_time #=> Time
     #   resp.domain_status.automated_snapshot_pause_options.end_time #=> Time
     #   resp.domain_status.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
+    #   resp.domain_status.use_case #=> String, one of "SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"
+    #   resp.domain_status.engine_mode #=> String, one of "GENERAL", "OPTIMIZED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomain AWS API Documentation
     #
@@ -2130,6 +2142,8 @@ module Aws::OpenSearchService
     #   resp.domain_status.automated_snapshot_pause_options.start_time #=> Time
     #   resp.domain_status.automated_snapshot_pause_options.end_time #=> Time
     #   resp.domain_status.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
+    #   resp.domain_status.use_case #=> String, one of "SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"
+    #   resp.domain_status.engine_mode #=> String, one of "GENERAL", "OPTIMIZED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDomain AWS API Documentation
     #
@@ -2583,6 +2597,8 @@ module Aws::OpenSearchService
     #   resp.domain_status.automated_snapshot_pause_options.start_time #=> Time
     #   resp.domain_status.automated_snapshot_pause_options.end_time #=> Time
     #   resp.domain_status.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
+    #   resp.domain_status.use_case #=> String, one of "SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"
+    #   resp.domain_status.engine_mode #=> String, one of "GENERAL", "OPTIMIZED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomain AWS API Documentation
     #
@@ -2936,6 +2952,18 @@ module Aws::OpenSearchService
     #   resp.domain_config.automated_snapshot_pause_options.status.update_version #=> Integer
     #   resp.domain_config.automated_snapshot_pause_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.automated_snapshot_pause_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.use_case.options #=> String, one of "SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"
+    #   resp.domain_config.use_case.status.creation_date #=> Time
+    #   resp.domain_config.use_case.status.update_date #=> Time
+    #   resp.domain_config.use_case.status.update_version #=> Integer
+    #   resp.domain_config.use_case.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.use_case.status.pending_deletion #=> Boolean
+    #   resp.domain_config.engine_mode.options #=> String, one of "GENERAL", "OPTIMIZED"
+    #   resp.domain_config.engine_mode.status.creation_date #=> Time
+    #   resp.domain_config.engine_mode.status.update_date #=> Time
+    #   resp.domain_config.engine_mode.status.update_version #=> Integer
+    #   resp.domain_config.engine_mode.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.engine_mode.status.pending_deletion #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainConfig AWS API Documentation
     #
@@ -3190,6 +3218,8 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].automated_snapshot_pause_options.start_time #=> Time
     #   resp.domain_status_list[0].automated_snapshot_pause_options.end_time #=> Time
     #   resp.domain_status_list[0].automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
+    #   resp.domain_status_list[0].use_case #=> String, one of "SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"
+    #   resp.domain_status_list[0].engine_mode #=> String, one of "GENERAL", "OPTIMIZED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomains AWS API Documentation
     #
@@ -3367,6 +3397,8 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.automated_snapshot_pause_options.start_time #=> Time
     #   resp.dry_run_config.automated_snapshot_pause_options.end_time #=> Time
     #   resp.dry_run_config.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
+    #   resp.dry_run_config.use_case #=> String, one of "SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"
+    #   resp.dry_run_config.engine_mode #=> String, one of "GENERAL", "OPTIMIZED"
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #
@@ -4336,6 +4368,53 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Retrieves the current status and progress of a migration job,
+    # including the number of exported and imported objects and error
+    # details if the migration failed.
+    #
+    # @option params [required, String] :migration_id
+    #   The unique identifier of the migration job to retrieve.
+    #
+    # @return [Types::GetMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMigrationResponse#migration_id #migration_id} => String
+    #   * {Types::GetMigrationResponse#status #status} => String
+    #   * {Types::GetMigrationResponse#application_id #application_id} => String
+    #   * {Types::GetMigrationResponse#source #source} => Types::MigrationSource
+    #   * {Types::GetMigrationResponse#exported_count #exported_count} => Integer
+    #   * {Types::GetMigrationResponse#imported_count #imported_count} => Integer
+    #   * {Types::GetMigrationResponse#error #error} => Types::MigrationError
+    #   * {Types::GetMigrationResponse#created_at #created_at} => Time
+    #   * {Types::GetMigrationResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_migration({
+    #     migration_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_id #=> String
+    #   resp.status #=> String
+    #   resp.application_id #=> String
+    #   resp.source.datasource_arn #=> String
+    #   resp.exported_count #=> Integer
+    #   resp.imported_count #=> Integer
+    #   resp.error.code #=> String
+    #   resp.error.message #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetMigration AWS API Documentation
+    #
+    # @overload get_migration(params = {})
+    # @param [Hash] params ({})
+    def get_migration(params = {}, options = {})
+      req = build_request(:get_migration, params)
+      req.send_request(options)
+    end
+
     # Returns a list of Amazon OpenSearch Service package versions, along
     # with their creation time, commit message, and plugin properties (if
     # the package is a zip plugin package). For more information, see
@@ -4485,6 +4564,54 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def get_upgrade_status(params = {}, options = {})
       req = build_request(:get_upgrade_status, params)
+      req.send_request(options)
+    end
+
+    # Submits feedback for an existing insight in an Amazon OpenSearch
+    # Service domain. Allows users to provide a thumbs up or thumbs down
+    # rating and optional text feedback for a specific insight.
+    #
+    # @option params [required, Types::InsightFeedbackEntity] :entity
+    #   The entity for which to submit insight feedback. Specifies the type
+    #   and value of the entity, such as a domain name.
+    #
+    # @option params [required, String] :insight_id
+    #   The unique identifier of the insight for which to submit feedback.
+    #
+    # @option params [required, String] :thumbs
+    #   The thumbs up or thumbs down feedback for the insight. Possible values
+    #   are `Up` and `Down`.
+    #
+    # @option params [String] :feedback_text
+    #   Optional text feedback providing additional details about the insight.
+    #   Maximum length is 1000 characters.
+    #
+    # @return [Types::InsightFeedbackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InsightFeedbackResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.insight_feedback({
+    #     entity: { # required
+    #       type: "DomainName", # required, accepts DomainName
+    #       value: "InsightEntityValue", # required
+    #     },
+    #     insight_id: "GUID", # required
+    #     thumbs: "Up", # required, accepts Up, Down
+    #     feedback_text: "InsightFeedbackText",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "SUCCESS", "ERROR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InsightFeedback AWS API Documentation
+    #
+    # @overload insight_feedback(params = {})
+    # @param [Hash] params ({})
+    def insight_feedback(params = {}, options = {})
+      req = build_request(:insight_feedback, params)
       req.send_request(options)
     end
 
@@ -4961,6 +5088,63 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def list_instance_type_details(params = {}, options = {})
       req = build_request(:list_instance_type_details, params)
+      req.send_request(options)
+    end
+
+    # Lists migration jobs for an Amazon OpenSearch Service application. You
+    # can filter results by migration status. Use pagination to ensure that
+    # the operation returns quickly and successfully.
+    #
+    # @option params [required, String] :application_id
+    #   The unique identifier of the OpenSearch application to list migrations
+    #   for.
+    #
+    # @option params [String] :status
+    #   Filters the results by migration status. Valid values are `PENDING`,
+    #   `IN_PROGRESS`, `SUCCEEDED`, and `FAILED`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous call to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListMigrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMigrationsResponse#migrations #migrations} => Array&lt;Types::MigrationSummary&gt;
+    #   * {Types::ListMigrationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_migrations({
+    #     application_id: "ApplicationId", # required
+    #     status: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migrations #=> Array
+    #   resp.migrations[0].migration_id #=> String
+    #   resp.migrations[0].status #=> String
+    #   resp.migrations[0].application_id #=> String
+    #   resp.migrations[0].source.datasource_arn #=> String
+    #   resp.migrations[0].exported_count #=> Integer
+    #   resp.migrations[0].imported_count #=> Integer
+    #   resp.migrations[0].error.code #=> String
+    #   resp.migrations[0].error.message #=> String
+    #   resp.migrations[0].created_at #=> Time
+    #   resp.migrations[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListMigrations AWS API Documentation
+    #
+    # @overload list_migrations(params = {})
+    # @param [Hash] params ({})
+    def list_migrations(params = {}, options = {})
+      req = build_request(:list_migrations, params)
       req.send_request(options)
     end
 
@@ -5614,6 +5798,76 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Initiates a migration job to migrate saved objects from a data source
+    # to an Amazon OpenSearch Service application workspace. Saved objects
+    # include dashboards, visualizations, index patterns, and searches. You
+    # can specify export filters to control the scope of the migration and a
+    # conflict resolution strategy for handling existing objects in the
+    # target workspace.
+    #
+    # @option params [required, String] :application_id
+    #   The unique identifier of the OpenSearch application to migrate saved
+    #   objects into.
+    #
+    # @option params [required, Types::MigrationOptions] :migration_options
+    #   The configuration options for the migration, including the source data
+    #   source, target workspace, export filters, and conflict resolution
+    #   strategy.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon OpenSearch Service ignores the request but does not
+    #   return an error.
+    #
+    # @return [Types::StartMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMigrationResponse#migration_id #migration_id} => String
+    #   * {Types::StartMigrationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_migration({
+    #     application_id: "ApplicationId", # required
+    #     migration_options: { # required
+    #       source: { # required
+    #         datasource_arn: "ARN", # required
+    #       },
+    #       workspace: { # required
+    #         workspace_id: "String",
+    #         create_workspace: false,
+    #         name: "String",
+    #         type: "String",
+    #       },
+    #       export_options: {
+    #         types: ["String"],
+    #         objects: [
+    #           {
+    #             type: "String", # required
+    #             id: "String", # required
+    #           },
+    #         ],
+    #         include_references_deep: false,
+    #       },
+    #       conflict_resolution: "String",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_id #=> String
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartMigration AWS API Documentation
+    #
+    # @overload start_migration(params = {})
+    # @param [Hash] params ({})
+    def start_migration(params = {}, options = {})
+      req = build_request(:start_migration, params)
+      req.send_request(options)
+    end
+
     # Schedules a service software update for an Amazon OpenSearch Service
     # domain. For more information, see [Service software updates in Amazon
     # OpenSearch Service][1].
@@ -6011,6 +6265,14 @@ module Aws::OpenSearchService
     #
     #   Maximum suspension duration: 3 days.
     #
+    # @option params [String] :use_case
+    #   The primary use case for the domain. For valid values, see
+    #   `DomainUseCase`.
+    #
+    # @option params [String] :engine_mode
+    #   The engine mode for the domain. The engine mode can't be changed
+    #   after the domain is created. For valid values, see `EngineMode`.
+    #
     # @return [Types::UpdateDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigResponse#domain_config #domain_config} => Types::DomainConfig
@@ -6185,6 +6447,8 @@ module Aws::OpenSearchService
     #       start_time: Time.now,
     #       end_time: Time.now,
     #     },
+    #     use_case: "SEARCH", # accepts SEARCH, VECTOR, OBSERVABILITY, MIXED
+    #     engine_mode: "GENERAL", # accepts GENERAL, OPTIMIZED
     #   })
     #
     # @example Response structure
@@ -6404,6 +6668,18 @@ module Aws::OpenSearchService
     #   resp.domain_config.automated_snapshot_pause_options.status.update_version #=> Integer
     #   resp.domain_config.automated_snapshot_pause_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.automated_snapshot_pause_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.use_case.options #=> String, one of "SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"
+    #   resp.domain_config.use_case.status.creation_date #=> Time
+    #   resp.domain_config.use_case.status.update_date #=> Time
+    #   resp.domain_config.use_case.status.update_version #=> Integer
+    #   resp.domain_config.use_case.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.use_case.status.pending_deletion #=> Boolean
+    #   resp.domain_config.engine_mode.options #=> String, one of "GENERAL", "OPTIMIZED"
+    #   resp.domain_config.engine_mode.status.creation_date #=> Time
+    #   resp.domain_config.engine_mode.status.update_date #=> Time
+    #   resp.domain_config.engine_mode.status.update_version #=> Integer
+    #   resp.domain_config.engine_mode.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.engine_mode.status.pending_deletion #=> Boolean
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #   resp.dry_run_progress_status.dry_run_id #=> String
@@ -6821,7 +7097,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

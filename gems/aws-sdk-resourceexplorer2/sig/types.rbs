@@ -387,6 +387,7 @@ module Aws::ResourceExplorer2
       attr_accessor region: ::String
       attr_accessor resource_type: ::String
       attr_accessor service: ::String
+      attr_accessor cfn_resource_type: ::String
       attr_accessor last_reported_at: ::Time
       attr_accessor properties: ::Array[Types::ResourceProperty]
       SENSITIVE: []
@@ -431,6 +432,13 @@ module Aws::ResourceExplorer2
       SENSITIVE: []
     end
 
+    class ServiceLinkedRecorderInfo
+      attr_accessor service_principal: ::String
+      attr_accessor recorder_name: ::String
+      attr_accessor recorder_type: ("AWS" | "THIRD_PARTY")
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor name: ::String
@@ -445,6 +453,7 @@ module Aws::ResourceExplorer2
       attr_accessor included_properties: ::Array[Types::IncludedProperty]
       attr_accessor streaming_access_for_service: ::String
       attr_accessor scope_type: ::String
+      attr_accessor service_linked_recorder: Types::ServiceLinkedRecorderInfo
       SENSITIVE: [:filters]
     end
 
@@ -457,6 +466,7 @@ module Aws::ResourceExplorer2
     class SupportedResourceType
       attr_accessor service: ::String
       attr_accessor resource_type: ::String
+      attr_accessor cfn_resource_types: ::Array[::String]
       SENSITIVE: []
     end
 

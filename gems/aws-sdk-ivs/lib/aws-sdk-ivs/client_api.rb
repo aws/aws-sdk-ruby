@@ -149,6 +149,7 @@ module Aws::IVS
     PlaybackRestrictionPolicyName = Shapes::StringShape.new(name: 'PlaybackRestrictionPolicyName')
     PlaybackRestrictionPolicySummary = Shapes::StructureShape.new(name: 'PlaybackRestrictionPolicySummary')
     PlaybackURL = Shapes::StringShape.new(name: 'PlaybackURL')
+    PostRollConfiguration = Shapes::StructureShape.new(name: 'PostRollConfiguration')
     PutMetadataRequest = Shapes::StructureShape.new(name: 'PutMetadataRequest')
     RecordingConfiguration = Shapes::StructureShape.new(name: 'RecordingConfiguration')
     RecordingConfigurationArn = Shapes::StringShape.new(name: 'RecordingConfigurationArn')
@@ -243,6 +244,7 @@ module Aws::IVS
     AdConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: AdConfigurationArn, required: true, location_name: "arn"))
     AdConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: AdConfigurationName, location_name: "name"))
     AdConfiguration.add_member(:media_tailor_playback_configurations, Shapes::ShapeRef.new(shape: MediaTailorPlaybackConfigurationsList, required: true, location_name: "mediaTailorPlaybackConfigurations"))
+    AdConfiguration.add_member(:post_roll_configuration, Shapes::ShapeRef.new(shape: PostRollConfiguration, location_name: "postRollConfiguration"))
     AdConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     AdConfiguration.struct_class = Types::AdConfiguration
 
@@ -251,6 +253,7 @@ module Aws::IVS
     AdConfigurationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: AdConfigurationArn, required: true, location_name: "arn"))
     AdConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: AdConfigurationName, location_name: "name"))
     AdConfigurationSummary.add_member(:media_tailor_playback_configurations, Shapes::ShapeRef.new(shape: MediaTailorPlaybackConfigurationsList, required: true, location_name: "mediaTailorPlaybackConfigurations"))
+    AdConfigurationSummary.add_member(:post_roll_configuration, Shapes::ShapeRef.new(shape: PostRollConfiguration, location_name: "postRollConfiguration"))
     AdConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     AdConfigurationSummary.struct_class = Types::AdConfigurationSummary
 
@@ -387,6 +390,7 @@ module Aws::IVS
 
     CreateAdConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: AdConfigurationName, location_name: "name"))
     CreateAdConfigurationRequest.add_member(:media_tailor_playback_configurations, Shapes::ShapeRef.new(shape: MediaTailorPlaybackConfigurationsList, required: true, location_name: "mediaTailorPlaybackConfigurations"))
+    CreateAdConfigurationRequest.add_member(:post_roll_configuration, Shapes::ShapeRef.new(shape: PostRollConfiguration, location_name: "postRollConfiguration"))
     CreateAdConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateAdConfigurationRequest.struct_class = Types::CreateAdConfigurationRequest
 
@@ -678,6 +682,10 @@ module Aws::IVS
     PlaybackRestrictionPolicySummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PlaybackRestrictionPolicySummary.struct_class = Types::PlaybackRestrictionPolicySummary
 
+    PostRollConfiguration.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: AdDurationSeconds, required: true, location_name: "durationSeconds"))
+    PostRollConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    PostRollConfiguration.struct_class = Types::PostRollConfiguration
+
     PutMetadataRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
     PutMetadataRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: StreamMetadata, required: true, location_name: "metadata"))
     PutMetadataRequest.struct_class = Types::PutMetadataRequest
@@ -874,6 +882,7 @@ module Aws::IVS
     UpdateAdConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AdConfigurationArn, required: true, location_name: "arn"))
     UpdateAdConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: AdConfigurationName, location_name: "name"))
     UpdateAdConfigurationRequest.add_member(:media_tailor_playback_configurations, Shapes::ShapeRef.new(shape: MediaTailorPlaybackConfigurationsList, location_name: "mediaTailorPlaybackConfigurations"))
+    UpdateAdConfigurationRequest.add_member(:post_roll_configuration, Shapes::ShapeRef.new(shape: PostRollConfiguration, location_name: "postRollConfiguration"))
     UpdateAdConfigurationRequest.struct_class = Types::UpdateAdConfigurationRequest
 
     UpdateAdConfigurationResponse.add_member(:ad_configuration, Shapes::ShapeRef.new(shape: AdConfiguration, required: true, location_name: "adConfiguration"))

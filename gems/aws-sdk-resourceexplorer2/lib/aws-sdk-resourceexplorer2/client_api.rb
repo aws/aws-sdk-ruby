@@ -26,6 +26,7 @@ module Aws::ResourceExplorer2
     BatchGetViewInputViewArnsList = Shapes::ListShape.new(name: 'BatchGetViewInputViewArnsList')
     BatchGetViewOutput = Shapes::StructureShape.new(name: 'BatchGetViewOutput')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CFNResourceTypeList = Shapes::ListShape.new(name: 'CFNResourceTypeList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateIndexInput = Shapes::StructureShape.new(name: 'CreateIndexInput')
     CreateIndexOutput = Shapes::StructureShape.new(name: 'CreateIndexOutput')
@@ -130,6 +131,7 @@ module Aws::ResourceExplorer2
     OperationStatus = Shapes::StringShape.new(name: 'OperationStatus')
     OrgConfiguration = Shapes::StructureShape.new(name: 'OrgConfiguration')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
+    RecorderType = Shapes::StringShape.new(name: 'RecorderType')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     RegionListMemberString = Shapes::StringShape.new(name: 'RegionListMemberString')
     RegionStatus = Shapes::StructureShape.new(name: 'RegionStatus')
@@ -151,6 +153,7 @@ module Aws::ResourceExplorer2
     SearchOutput = Shapes::StructureShape.new(name: 'SearchOutput')
     SearchOutputNextTokenString = Shapes::StringShape.new(name: 'SearchOutputNextTokenString')
     SearchOutputViewArnString = Shapes::StringShape.new(name: 'SearchOutputViewArnString')
+    ServiceLinkedRecorderInfo = Shapes::StructureShape.new(name: 'ServiceLinkedRecorderInfo')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceView = Shapes::StructureShape.new(name: 'ServiceView')
     ServiceViewArnList = Shapes::ListShape.new(name: 'ServiceViewArnList')
@@ -205,6 +208,8 @@ module Aws::ResourceExplorer2
     BatchGetViewOutput.add_member(:views, Shapes::ShapeRef.new(shape: ViewList, location_name: "Views"))
     BatchGetViewOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetViewErrors, location_name: "Errors"))
     BatchGetViewOutput.struct_class = Types::BatchGetViewOutput
+
+    CFNResourceTypeList.member = Shapes::ShapeRef.new(shape: String)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
@@ -466,6 +471,7 @@ module Aws::ResourceExplorer2
     Resource.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "Region"))
     Resource.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
     Resource.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "Service"))
+    Resource.add_member(:cfn_resource_type, Shapes::ShapeRef.new(shape: String, location_name: "CfnResourceType"))
     Resource.add_member(:last_reported_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "LastReportedAt"))
     Resource.add_member(:properties, Shapes::ShapeRef.new(shape: ResourcePropertyList, location_name: "Properties"))
     Resource.struct_class = Types::Resource
@@ -503,6 +509,11 @@ module Aws::ResourceExplorer2
     SearchOutput.add_member(:count, Shapes::ShapeRef.new(shape: ResourceCount, location_name: "Count"))
     SearchOutput.struct_class = Types::SearchOutput
 
+    ServiceLinkedRecorderInfo.add_member(:service_principal, Shapes::ShapeRef.new(shape: String, location_name: "ServicePrincipal"))
+    ServiceLinkedRecorderInfo.add_member(:recorder_name, Shapes::ShapeRef.new(shape: String, location_name: "RecorderName"))
+    ServiceLinkedRecorderInfo.add_member(:recorder_type, Shapes::ShapeRef.new(shape: RecorderType, location_name: "RecorderType"))
+    ServiceLinkedRecorderInfo.struct_class = Types::ServiceLinkedRecorderInfo
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ServiceQuotaExceededException.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     ServiceQuotaExceededException.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
@@ -514,6 +525,7 @@ module Aws::ResourceExplorer2
     ServiceView.add_member(:included_properties, Shapes::ShapeRef.new(shape: IncludedPropertyList, location_name: "IncludedProperties"))
     ServiceView.add_member(:streaming_access_for_service, Shapes::ShapeRef.new(shape: String, location_name: "StreamingAccessForService"))
     ServiceView.add_member(:scope_type, Shapes::ShapeRef.new(shape: String, location_name: "ScopeType"))
+    ServiceView.add_member(:service_linked_recorder, Shapes::ShapeRef.new(shape: ServiceLinkedRecorderInfo, location_name: "ServiceLinkedRecorder"))
     ServiceView.struct_class = Types::ServiceView
 
     ServiceViewArnList.member = Shapes::ShapeRef.new(shape: String)
@@ -528,6 +540,7 @@ module Aws::ResourceExplorer2
 
     SupportedResourceType.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "Service"))
     SupportedResourceType.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    SupportedResourceType.add_member(:cfn_resource_types, Shapes::ShapeRef.new(shape: CFNResourceTypeList, location_name: "CFNResourceTypes"))
     SupportedResourceType.struct_class = Types::SupportedResourceType
 
     TagMap.key = Shapes::ShapeRef.new(shape: String)

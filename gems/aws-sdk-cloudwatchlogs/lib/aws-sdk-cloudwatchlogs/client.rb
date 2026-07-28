@@ -4920,6 +4920,27 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Returns the storage tier policy for your account.
+    #
+    # @return [Types::GetStorageTierPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStorageTierPolicyResponse#storage_tier #storage_tier} => String
+    #   * {Types::GetStorageTierPolicyResponse#last_updated_time #last_updated_time} => Integer
+    #
+    # @example Response structure
+    #
+    #   resp.storage_tier #=> String, one of "STANDARD", "INTELLIGENT_TIERING"
+    #   resp.last_updated_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetStorageTierPolicy AWS API Documentation
+    #
+    # @overload get_storage_tier_policy(params = {})
+    # @param [Hash] params ({})
+    def get_storage_tier_policy(params = {}, options = {})
+      req = build_request(:get_storage_tier_policy, params)
+      req.send_request(options)
+    end
+
     # Returns the information about the log transformer associated with this
     # log group.
     #
@@ -6790,8 +6811,8 @@ module Aws::CloudWatchLogs
     #   * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS`
     #     and `EVENT_LOGS`.
     #
-    #   * For Amazon Bedrock Knowledge Bases, the valid value is
-    #     `APPLICATION_LOGS`.
+    #   * For Amazon Bedrock Knowledge Bases, the valid values are
+    #     `APPLICATION_LOGS` and `TRACES`.
     #
     #   * For Amazon Bedrock AgentCore Runtime, the valid values are
     #     `APPLICATION_LOGS`, `USAGE_LOGS` and `TRACES`.
@@ -6854,6 +6875,8 @@ module Aws::CloudWatchLogs
     #     `APPLICATION_LOGS`.
     #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and `SYNC_JOB_LOGS`.
+    #
+    #   * For Amazon S3, the valid value is `S3_SERVER_ACCESS_LOGS`.
     #
     #   * For Amazon Web Services Security Hub CSPM, the valid value is
     #     `SECURITY_FINDING_LOGS`.
@@ -7804,6 +7827,40 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def put_retention_policy(params = {}, options = {})
       req = build_request(:put_retention_policy, params)
+      req.send_request(options)
+    end
+
+    # Sets the storage tier policy for your account. When you set the
+    # storage tier to `INTELLIGENT_TIERING`, CloudWatch Logs automatically
+    # moves your log data between storage tiers based on access patterns to
+    # optimize costs.
+    #
+    # @option params [required, String] :storage_tier
+    #   The storage tier to set for the account. Valid values are `STANDARD`
+    #   and `INTELLIGENT_TIERING`.
+    #
+    # @return [Types::PutStorageTierPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutStorageTierPolicyResponse#storage_tier #storage_tier} => String
+    #   * {Types::PutStorageTierPolicyResponse#last_updated_time #last_updated_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_storage_tier_policy({
+    #     storage_tier: "STANDARD", # required, accepts STANDARD, INTELLIGENT_TIERING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_tier #=> String, one of "STANDARD", "INTELLIGENT_TIERING"
+    #   resp.last_updated_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutStorageTierPolicy AWS API Documentation
+    #
+    # @overload put_storage_tier_policy(params = {})
+    # @param [Hash] params ({})
+    def put_storage_tier_policy(params = {}, options = {})
+      req = build_request(:put_storage_tier_policy, params)
       req.send_request(options)
     end
 
@@ -9502,7 +9559,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.157.0'
+      context[:gem_version] = '1.159.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

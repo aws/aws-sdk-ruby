@@ -338,6 +338,7 @@ module Aws::ElasticLoadBalancingV2
     SetSecurityGroupsOutput = Shapes::StructureShape.new(name: 'SetSecurityGroupsOutput')
     SetSubnetsInput = Shapes::StructureShape.new(name: 'SetSubnetsInput')
     SetSubnetsOutput = Shapes::StructureShape.new(name: 'SetSubnetsOutput')
+    SourceIpAddressTypeEnum = Shapes::StringShape.new(name: 'SourceIpAddressTypeEnum')
     SourceIpConditionConfig = Shapes::StructureShape.new(name: 'SourceIpConditionConfig')
     SourceNatIpv6Prefix = Shapes::StringShape.new(name: 'SourceNatIpv6Prefix')
     SourceNatIpv6Prefixes = Shapes::ListShape.new(name: 'SourceNatIpv6Prefixes')
@@ -1233,6 +1234,7 @@ module Aws::ElasticLoadBalancingV2
     SetSubnetsOutput.struct_class = Types::SetSubnetsOutput
 
     SourceIpConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    SourceIpConditionConfig.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: SourceIpAddressTypeEnum, location_name: "IpAddressType"))
     SourceIpConditionConfig.struct_class = Types::SourceIpConditionConfig
 
     SourceNatIpv6Prefixes.member = Shapes::ShapeRef.new(shape: SourceNatIpv6Prefix)

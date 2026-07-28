@@ -1098,6 +1098,18 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/drift-aware-change-sets.html
     #   @return [String]
     #
+    # @!attribute [rw] deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    #   @return [Types::DeploymentConfig]
+    #
+    # @!attribute [rw] disable_validation
+    #   Set to `true` to disable pre-deployment validations in changeset or
+    #   stack operations.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
     #
     class CreateChangeSetInput < Struct.new(
@@ -1120,7 +1132,9 @@ module Aws::CloudFormation
       :include_nested_stacks,
       :on_stack_failure,
       :import_existing_resources,
-      :deployment_mode)
+      :deployment_mode,
+      :deployment_config,
+      :disable_validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1479,6 +1493,18 @@ module Aws::CloudFormation
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    #   @return [Types::DeploymentConfig]
+    #
+    # @!attribute [rw] disable_validation
+    #   Set to `true` to disable pre-deployment validations in changeset or
+    #   stack operations.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInput AWS API Documentation
     #
     class CreateStackInput < Struct.new(
@@ -1499,7 +1525,9 @@ module Aws::CloudFormation
       :tags,
       :client_request_token,
       :enable_termination_protection,
-      :retain_except_on_create)
+      :retain_except_on_create,
+      :deployment_config,
+      :disable_validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2133,6 +2161,11 @@ module Aws::CloudFormation
     #     `DELETE_FAILED` state due to resource deletion failure.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    #   @return [Types::DeploymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInput AWS API Documentation
     #
     class DeleteStackInput < Struct.new(
@@ -2140,7 +2173,8 @@ module Aws::CloudFormation
       :retain_resources,
       :role_arn,
       :client_request_token,
-      :deletion_mode)
+      :deletion_mode,
+      :deployment_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2294,6 +2328,40 @@ module Aws::CloudFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetOutput AWS API Documentation
     #
     class DeleteStackSetOutput < Aws::EmptyStructure; end
+
+    # The deployment configuration for a stack operation, including the
+    # deployment mode.
+    #
+    # @!attribute [rw] mode
+    #   Specifies the deployment mode for the stack operation. Possible
+    #   values are:
+    #
+    #   * `STANDARD` - Use the standard deployment behavior, ensuring
+    #     resources are ready to serve traffic before completing the
+    #     operation. This is the default. You do not need to specify this
+    #     value explicitly.
+    #
+    #   * `EXPRESS` - Complete the stack operation when resource
+    #     configuration is applied, without waiting for resources to become
+    #     ready to serve traffic. Resources continue becoming ready in the
+    #     background.
+    #   @return [String]
+    #
+    # @!attribute [rw] disable_rollback
+    #   Specifies whether to disable rollback of the stack if the stack
+    #   operation fails.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeploymentConfig AWS API Documentation
+    #
+    class DeploymentConfig < Struct.new(
+      :mode,
+      :disable_rollback)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Specifies the Organizations accounts where you want to create, update,
     # or delete stack instances. You can target either your entire
@@ -2720,6 +2788,11 @@ module Aws::CloudFormation
     #   value is `REVERT_DRIFT`. Only present for drift-aware change sets.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_config
+    #   The deployment configuration specified when the change set was
+    #   created.
+    #   @return [Types::DeploymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetOutput AWS API Documentation
     #
     class DescribeChangeSetOutput < Struct.new(
@@ -2745,13 +2818,16 @@ module Aws::CloudFormation
       :root_change_set_id,
       :on_stack_failure,
       :import_existing_resources,
-      :deployment_mode)
+      :deployment_mode,
+      :deployment_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] stack_name
     #   The name or unique stack ID for which you want to retrieve events.
+    #   If you specified the name of a change set, specify the stack name or
+    #   ID (ARN) of the change set you want to describe.
     #   @return [String]
     #
     # @!attribute [rw] change_set_name
@@ -8227,13 +8303,19 @@ module Aws::CloudFormation
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    #   @return [Types::DeploymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackStackInput AWS API Documentation
     #
     class RollbackStackInput < Struct.new(
       :stack_name,
       :role_arn,
       :client_request_token,
-      :retain_except_on_create)
+      :retain_except_on_create,
+      :deployment_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8653,6 +8735,11 @@ module Aws::CloudFormation
     #   * `false`: enable rollback.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_config
+    #   The deployment configuration for the stack, including the deployment
+    #   mode used for stack operations.
+    #   @return [Types::DeploymentConfig]
+    #
     # @!attribute [rw] notification_arns
     #   Amazon SNS topic Amazon Resource Names (ARNs) to which stack related
     #   events are published.
@@ -8783,6 +8870,7 @@ module Aws::CloudFormation
       :stack_status,
       :stack_status_reason,
       :disable_rollback,
+      :deployment_config,
       :notification_arns,
       :timeout_in_minutes,
       :capabilities,
@@ -12130,6 +12218,18 @@ module Aws::CloudFormation
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    #   @return [Types::DeploymentConfig]
+    #
+    # @!attribute [rw] disable_validation
+    #   Set to `true` to disable pre-deployment validations in changeset or
+    #   stack operations.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInput AWS API Documentation
     #
     class UpdateStackInput < Struct.new(
@@ -12150,7 +12250,9 @@ module Aws::CloudFormation
       :tags,
       :disable_rollback,
       :client_request_token,
-      :retain_except_on_create)
+      :retain_except_on_create,
+      :deployment_config,
+      :disable_validation)
       SENSITIVE = []
       include Aws::Structure
     end

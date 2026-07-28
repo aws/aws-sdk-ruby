@@ -118,6 +118,8 @@ module Aws::CloudFormation
     DeleteStackSetOutput = Shapes::StructureShape.new(name: 'DeleteStackSetOutput')
     DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
     DeletionTime = Shapes::TimestampShape.new(name: 'DeletionTime')
+    DeploymentConfig = Shapes::StructureShape.new(name: 'DeploymentConfig')
+    DeploymentConfigMode = Shapes::StringShape.new(name: 'DeploymentConfigMode')
     DeploymentMode = Shapes::StringShape.new(name: 'DeploymentMode')
     DeploymentTargets = Shapes::StructureShape.new(name: 'DeploymentTargets')
     DeprecatedStatus = Shapes::StringShape.new(name: 'DeprecatedStatus')
@@ -174,6 +176,7 @@ module Aws::CloudFormation
     DetectionReason = Shapes::StringShape.new(name: 'DetectionReason')
     DifferenceType = Shapes::StringShape.new(name: 'DifferenceType')
     DisableRollback = Shapes::BooleanShape.new(name: 'DisableRollback')
+    DisableValidation = Shapes::BooleanShape.new(name: 'DisableValidation')
     DriftIgnoredReason = Shapes::StringShape.new(name: 'DriftIgnoredReason')
     DriftedStackInstancesCount = Shapes::IntegerShape.new(name: 'DriftedStackInstancesCount')
     EnableStackCreation = Shapes::BooleanShape.new(name: 'EnableStackCreation')
@@ -827,6 +830,8 @@ module Aws::CloudFormation
     CreateChangeSetInput.add_member(:on_stack_failure, Shapes::ShapeRef.new(shape: OnStackFailure, location_name: "OnStackFailure"))
     CreateChangeSetInput.add_member(:import_existing_resources, Shapes::ShapeRef.new(shape: ImportExistingResources, location_name: "ImportExistingResources"))
     CreateChangeSetInput.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: DeploymentMode, location_name: "DeploymentMode"))
+    CreateChangeSetInput.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "DeploymentConfig"))
+    CreateChangeSetInput.add_member(:disable_validation, Shapes::ShapeRef.new(shape: DisableValidation, location_name: "DisableValidation"))
     CreateChangeSetInput.struct_class = Types::CreateChangeSetInput
 
     CreateChangeSetOutput.add_member(:id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "Id"))
@@ -860,6 +865,8 @@ module Aws::CloudFormation
     CreateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     CreateStackInput.add_member(:enable_termination_protection, Shapes::ShapeRef.new(shape: EnableTerminationProtection, location_name: "EnableTerminationProtection"))
     CreateStackInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
+    CreateStackInput.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "DeploymentConfig"))
+    CreateStackInput.add_member(:disable_validation, Shapes::ShapeRef.new(shape: DisableValidation, location_name: "DisableValidation"))
     CreateStackInput.struct_class = Types::CreateStackInput
 
     CreateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
@@ -935,6 +942,7 @@ module Aws::CloudFormation
     DeleteStackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     DeleteStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     DeleteStackInput.add_member(:deletion_mode, Shapes::ShapeRef.new(shape: DeletionMode, location_name: "DeletionMode"))
+    DeleteStackInput.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "DeploymentConfig"))
     DeleteStackInput.struct_class = Types::DeleteStackInput
 
     DeleteStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
@@ -955,6 +963,10 @@ module Aws::CloudFormation
     DeleteStackSetInput.struct_class = Types::DeleteStackSetInput
 
     DeleteStackSetOutput.struct_class = Types::DeleteStackSetOutput
+
+    DeploymentConfig.add_member(:mode, Shapes::ShapeRef.new(shape: DeploymentConfigMode, location_name: "Mode"))
+    DeploymentConfig.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
+    DeploymentConfig.struct_class = Types::DeploymentConfig
 
     DeploymentTargets.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
     DeploymentTargets.add_member(:accounts_url, Shapes::ShapeRef.new(shape: AccountsUrl, location_name: "AccountsUrl"))
@@ -1021,6 +1033,7 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:on_stack_failure, Shapes::ShapeRef.new(shape: OnStackFailure, location_name: "OnStackFailure"))
     DescribeChangeSetOutput.add_member(:import_existing_resources, Shapes::ShapeRef.new(shape: ImportExistingResources, location_name: "ImportExistingResources"))
     DescribeChangeSetOutput.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: DeploymentMode, location_name: "DeploymentMode"))
+    DescribeChangeSetOutput.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "DeploymentConfig"))
     DescribeChangeSetOutput.struct_class = Types::DescribeChangeSetOutput
 
     DescribeEventsInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
@@ -1894,6 +1907,7 @@ module Aws::CloudFormation
     RollbackStackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     RollbackStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     RollbackStackInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
+    RollbackStackInput.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "DeploymentConfig"))
     RollbackStackInput.struct_class = Types::RollbackStackInput
 
     RollbackStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
@@ -1967,6 +1981,7 @@ module Aws::CloudFormation
     Stack.add_member(:stack_status, Shapes::ShapeRef.new(shape: StackStatus, required: true, location_name: "StackStatus"))
     Stack.add_member(:stack_status_reason, Shapes::ShapeRef.new(shape: StackStatusReason, location_name: "StackStatusReason"))
     Stack.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
+    Stack.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "DeploymentConfig"))
     Stack.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NotificationARNs, location_name: "NotificationARNs"))
     Stack.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeoutMinutes, location_name: "TimeoutInMinutes"))
     Stack.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
@@ -2463,6 +2478,8 @@ module Aws::CloudFormation
     UpdateStackInput.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
     UpdateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     UpdateStackInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
+    UpdateStackInput.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "DeploymentConfig"))
+    UpdateStackInput.add_member(:disable_validation, Shapes::ShapeRef.new(shape: DisableValidation, location_name: "DisableValidation"))
     UpdateStackInput.struct_class = Types::UpdateStackInput
 
     UpdateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))

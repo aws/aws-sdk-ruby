@@ -143,6 +143,38 @@ module Aws
       row_configuration: Params::row_filter_configuration?
     }
 
+      type o_auth_2_properties = {
+      o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")?,
+      o_auth_2_client_application: {
+        user_managed_client_application_client_id: ::String?,
+        a_ws_managed_client_application_reference: ::String?
+      }?,
+      token_url: ::String?,
+      token_url_parameters_map: Hash[::String, ::String]?,
+      authorization_code_properties: {
+        authorization_code: ::String?,
+        redirect_uri: ::String?
+      }?,
+      o_auth_2_credentials: {
+        user_managed_client_application_client_secret: ::String?,
+        access_token: ::String?,
+        refresh_token: ::String?,
+        jwt_token: ::String?
+      }?
+    }
+
+      type authentication_configuration_input = {
+      authentication_type: ("BASIC" | "OAUTH2" | "CUSTOM")?,
+      o_auth_2_properties: Params::o_auth_2_properties?,
+      secret_arn: ::String?,
+      kms_key_arn: ::String?,
+      basic_authentication_credentials: {
+        user_name: ::String?,
+        password: ::String?
+      }?,
+      custom_authentication_credentials: Hash[::String, ::String]?
+    }
+
       type glue_run_configuration_input = {
       data_access_role: ::String?,
       relational_filter_configurations: Array[

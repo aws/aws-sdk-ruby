@@ -1829,7 +1829,7 @@ module Aws::Detective
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

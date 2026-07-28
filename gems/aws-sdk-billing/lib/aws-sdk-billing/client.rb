@@ -741,6 +741,70 @@ module Aws::Billing
       req.send_request(options)
     end
 
+    # Retrieves billing preferences for the specified feature. Each feature
+    # controls a distinct billing capability: which accounts can share
+    # Reserved Instances or credits, whether billing alerts are enabled, the
+    # historical record of sharing changes, and per-credit options.
+    #
+    # @option params [String] :next_token
+    #   Pagination token from a previous response. Pass the value returned in
+    #   `nextToken` to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of records to return per page. Range: 1 to 50.
+    #   Default: 50.
+    #
+    # @option params [required, Array<String>] :features
+    #   The feature to retrieve. Specify exactly one value. Valid values:
+    #   `BILLING_ALERTS`, `RI_SHARING`, `RI_SHARING_HISTORY`,
+    #   `CREDIT_SHARING`, `CREDIT_SHARING_HISTORY`, `CREDIT_LEVEL_SHARING`,
+    #   `CREDIT_PREFERENCE_OPTIONS`.
+    #
+    # @option params [Array<Types::BillingFeatureFilter>] :filters
+    #   Filters to narrow results. Specify exactly one filter when supplied.
+    #   The supported filter name is `PREFERENCE_KEY`, which accepts 1 to 10
+    #   values to match preference keys.
+    #
+    # @return [Types::GetBillingPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBillingPreferencesResponse#billing_preferences #billing_preferences} => Array&lt;Types::BillingPreferenceSummary&gt;
+    #   * {Types::GetBillingPreferencesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_billing_preferences({
+    #     next_token: "PageToken",
+    #     max_results: 1,
+    #     features: ["RI_SHARING"], # required, accepts RI_SHARING, RI_SHARING_HISTORY, CREDIT_SHARING, CREDIT_SHARING_HISTORY, CREDIT_LEVEL_SHARING, BILLING_ALERTS, CREDIT_PREFERENCE_OPTIONS
+    #     filters: [
+    #       {
+    #         name: "PREFERENCE_KEY", # accepts PREFERENCE_KEY
+    #         value: ["BillingFeatureFilterValue"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.billing_preferences #=> Array
+    #   resp.billing_preferences[0].feature #=> String, one of "RI_SHARING", "RI_SHARING_HISTORY", "CREDIT_SHARING", "CREDIT_SHARING_HISTORY", "CREDIT_LEVEL_SHARING", "BILLING_ALERTS", "CREDIT_PREFERENCE_OPTIONS"
+    #   resp.billing_preferences[0].key #=> String
+    #   resp.billing_preferences[0].value #=> String, one of "ENABLED", "DISABLED"
+    #   resp.billing_preferences[0].account_name #=> String
+    #   resp.billing_preferences[0].account_id #=> String
+    #   resp.billing_preferences[0].billing_period.year #=> Integer
+    #   resp.billing_preferences[0].billing_period.month #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetBillingPreferences AWS API Documentation
+    #
+    # @overload get_billing_preferences(params = {})
+    # @param [Hash] params ({})
+    def get_billing_preferences(params = {}, options = {})
+      req = build_request(:get_billing_preferences, params)
+      req.send_request(options)
+    end
+
     # Returns the metadata associated to the specified billing view ARN.
     #
     # @option params [required, String] :arn
@@ -817,6 +881,160 @@ module Aws::Billing
     # @param [Hash] params ({})
     def get_billing_view(params = {}, options = {})
       req = build_request(:get_billing_view, params)
+      req.send_request(options)
+    end
+
+    # Returns the per-billing-month allocation history for credits applied
+    # to an Amazon Web Services account's bills. Traverses the consolidated
+    # billing family to capture cross-account credit applications. Supports
+    # pagination and optional filtering to a single credit.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID whose allocation history to
+    #   retrieve. Must be a 12-digit numeric string.
+    #
+    # @option params [Integer] :credit_id
+    #   Filters the result to a single credit. When omitted, returns
+    #   allocation entries for all credits.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date
+    #   Inclusive start date as Unix epoch seconds. Must be on or before
+    #   `endDate`. The range from `startDate` to `endDate` cannot exceed 24
+    #   billing months.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date
+    #   Inclusive end date as Unix epoch seconds.
+    #
+    # @option params [String] :next_token
+    #   Pagination token from a previous response. Pass the value returned in
+    #   `nextToken` to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of records to return per page. Range: 1 to 1000.
+    #   Default: 100.
+    #
+    # @return [Types::GetCreditAllocationHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCreditAllocationHistoryResponse#credit_allocation_history_list #credit_allocation_history_list} => Array&lt;Types::CreditAllocationHistoryEntry&gt;
+    #   * {Types::GetCreditAllocationHistoryResponse#partial_results #partial_results} => Boolean
+    #   * {Types::GetCreditAllocationHistoryResponse#failed_months #failed_months} => Array&lt;String&gt;
+    #   * {Types::GetCreditAllocationHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_credit_allocation_history({
+    #     account_id: "AccountId", # required
+    #     credit_id: 1,
+    #     start_date: Time.now, # required
+    #     end_date: Time.now, # required
+    #     next_token: "PageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credit_allocation_history_list #=> Array
+    #   resp.credit_allocation_history_list[0].credit_id #=> String
+    #   resp.credit_allocation_history_list[0].credit_amount.currency_code #=> String
+    #   resp.credit_allocation_history_list[0].credit_amount.currency_amount #=> String
+    #   resp.credit_allocation_history_list[0].description #=> String
+    #   resp.credit_allocation_history_list[0].account_id #=> String
+    #   resp.credit_allocation_history_list[0].applied_service_name #=> String
+    #   resp.credit_allocation_history_list[0].billing_month #=> String
+    #   resp.credit_allocation_history_list[0].is_estimated_bill #=> Boolean
+    #   resp.partial_results #=> Boolean
+    #   resp.failed_months #=> Array
+    #   resp.failed_months[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetCreditAllocationHistory AWS API Documentation
+    #
+    # @overload get_credit_allocation_history(params = {})
+    # @param [Hash] params ({})
+    def get_credit_allocation_history(params = {}, options = {})
+      req = build_request(:get_credit_allocation_history, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of Amazon Web Services account credits for the
+    # specified account. Each credit includes its identifier, type, monetary
+    # amounts, applicable products, expiration, sharing configuration, and
+    # current enabled status.
+    #
+    # When the caller is the management account of a consolidated billing
+    # family and `payerAccountFlag` is `true`, the response aggregates
+    # credits across the entire family. Otherwise, the response includes
+    # only credits owned by the account specified in `accountId`.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID. Must be a 12-digit numeric string.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date
+    #   The start date for the credit period as Unix epoch seconds. Must be a
+    #   past date that is not more than one year before the current date.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   The end date for the credit period as Unix epoch seconds. Must not be
+    #   a future date and must be on or after `startDate`. Defaults to the
+    #   current date when omitted.
+    #
+    # @option params [Boolean] :payer_account_flag
+    #   When `true` and the caller is the management account, the response
+    #   aggregates credits across the entire consolidated billing family. When
+    #   `false` or omitted, returns only credits for the specified
+    #   `accountId`.
+    #
+    # @return [Types::GetCreditsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCreditsResponse#credits #credits} => Array&lt;Types::CreditData&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_credits({
+    #     account_id: "String", # required
+    #     start_date: Time.now, # required
+    #     end_date: Time.now,
+    #     payer_account_flag: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credits #=> Array
+    #   resp.credits[0].credit_id #=> String
+    #   resp.credits[0].account_id #=> String
+    #   resp.credits[0].credit_type #=> String
+    #   resp.credits[0].initial_amount.currency_code #=> String
+    #   resp.credits[0].initial_amount.currency_amount #=> String
+    #   resp.credits[0].remaining_amount.currency_code #=> String
+    #   resp.credits[0].remaining_amount.currency_amount #=> String
+    #   resp.credits[0].estimated_amount.currency_code #=> String
+    #   resp.credits[0].estimated_amount.currency_amount #=> String
+    #   resp.credits[0].applicable_product_names #=> Array
+    #   resp.credits[0].applicable_product_names[0] #=> String
+    #   resp.credits[0].description #=> String
+    #   resp.credits[0].start_date #=> Time
+    #   resp.credits[0].end_date #=> Time
+    #   resp.credits[0].exhaust_date #=> Time
+    #   resp.credits[0].application_type #=> String, one of "BEFORE_CROSS_SERVICE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.credits[0].shareable_accounts #=> Array
+    #   resp.credits[0].shareable_accounts[0] #=> String
+    #   resp.credits[0].account_has_credit_sharing_enabled #=> Boolean
+    #   resp.credits[0].credit_console_visibility #=> String
+    #   resp.credits[0].credit_sharing_type #=> String, one of "DEFAULT", "DISABLED", "CUSTOM", "COST_CATEGORY_RULE"
+    #   resp.credits[0].cost_category_arn #=> String
+    #   resp.credits[0].rule_name #=> String
+    #   resp.credits[0].credit_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.credits[0].purchase_type_applications #=> Array
+    #   resp.credits[0].purchase_type_applications[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetCredits AWS API Documentation
+    #
+    # @overload get_credits(params = {})
+    # @param [Hash] params ({})
+    def get_credits(params = {}, options = {})
+      req = build_request(:get_credits, params)
       req.send_request(options)
     end
 
@@ -1092,6 +1310,33 @@ module Aws::Billing
       req.send_request(options)
     end
 
+    # Redeems an Amazon Web Services promotional credit code on behalf of
+    # the calling account. On success, a new credit is added to the
+    # account's credit ledger with the amount, validity period, and
+    # applicable products defined by the promotion. The credit is then
+    # automatically applied to subsequent bills according to the standard
+    # credit application order.
+    #
+    # @option params [required, String] :promo_code
+    #   The promotional credit code to redeem.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.redeem_credits({
+    #     promo_code: "PromoCode", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/RedeemCredits AWS API Documentation
+    #
+    # @overload redeem_credits(params = {})
+    # @param [Hash] params ({})
+    def redeem_credits(params = {}, options = {})
+      req = build_request(:redeem_credits, params)
+      req.send_request(options)
+    end
+
     # An API operation for adding one or more tags (key-value pairs) to a
     # resource.
     #
@@ -1179,6 +1424,53 @@ module Aws::Billing
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates billing preferences for the specified feature. Each feature
+    # targets a distinct billing capability and has its own set of supported
+    # keys. The action sets the value for each provided key; keys not
+    # present in the request are unchanged.
+    #
+    # Sharing keys (`RI_SHARING`, `CREDIT_SHARING`, `CREDIT_LEVEL_SHARING`,
+    # and sharing keys under `CREDIT_PREFERENCE_OPTIONS`) may only be set by
+    # the management account of a consolidated billing family. The
+    # `credit/{creditId}/status` key may be set by member accounts for
+    # credits they own, or by the management account for any credit in the
+    # family.
+    #
+    # @option params [required, String] :feature
+    #   The feature to update. Valid values: `BILLING_ALERTS`, `RI_SHARING`,
+    #   `CREDIT_SHARING`, `CREDIT_LEVEL_SHARING`, `CREDIT_PREFERENCE_OPTIONS`.
+    #   The history features (`RI_SHARING_HISTORY` and
+    #   `CREDIT_SHARING_HISTORY`) are read-only and cannot be updated.
+    #
+    # @option params [required, Array<Types::BillingPreferenceForKey>] :billing_preferences_per_key
+    #   Key/value pairs to apply. All keys in a single request must be valid
+    #   for the specified `feature` and must not be duplicated. For
+    #   `CREDIT_PREFERENCE_OPTIONS`, all keys must reference the same
+    #   `creditId`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_billing_preferences({
+    #     feature: "RI_SHARING", # required, accepts RI_SHARING, RI_SHARING_HISTORY, CREDIT_SHARING, CREDIT_SHARING_HISTORY, CREDIT_LEVEL_SHARING, BILLING_ALERTS, CREDIT_PREFERENCE_OPTIONS
+    #     billing_preferences_per_key: [ # required
+    #       {
+    #         key: "PreferenceKey", # required
+    #         value: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/UpdateBillingPreferences AWS API Documentation
+    #
+    # @overload update_billing_preferences(params = {})
+    # @param [Hash] params ({})
+    def update_billing_preferences(params = {}, options = {})
+      req = build_request(:update_billing_preferences, params)
       req.send_request(options)
     end
 
@@ -1288,7 +1580,7 @@ module Aws::Billing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billing'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

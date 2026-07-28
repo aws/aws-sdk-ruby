@@ -1764,6 +1764,41 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference
+    #   to validate.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/SendProcurementPortalValidationRequest AWS API Documentation
+    #
+    class SendProcurementPortalValidationRequest < Struct.new(
+      :procurement_portal_preference_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference
+    #   for which the validation request was sent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/SendProcurementPortalValidationResponse AWS API Documentation
+    #
+    class SendProcurementPortalValidationResponse < Struct.new(
+      :procurement_portal_preference_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was rejected because it attempted to create resources
     # beyond the current Amazon Web Services account limits. The error
     # message describes the limit exceeded.
@@ -2159,6 +2194,47 @@ module Aws::Invoicing
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference
+    #   to validate.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The validation code received from the procurement portal in response
+    #   to a previous `SendProcurementPortalValidation` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/VerifyProcurementPortalValidationRequest AWS API Documentation
+    #
+    class VerifyProcurementPortalValidationRequest < Struct.new(
+      :procurement_portal_preference_arn,
+      :code,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference
+    #   for which validation was completed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/VerifyProcurementPortalValidationResponse AWS API Documentation
+    #
+    class VerifyProcurementPortalValidationResponse < Struct.new(
+      :procurement_portal_preference_arn)
       SENSITIVE = []
       include Aws::Structure
     end

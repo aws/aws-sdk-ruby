@@ -147,6 +147,7 @@ module Aws::PaymentCryptographyData
     SessionKeyEmv2000 = Shapes::StructureShape.new(name: 'SessionKeyEmv2000')
     SessionKeyEmvCommon = Shapes::StructureShape.new(name: 'SessionKeyEmvCommon')
     SessionKeyMastercard = Shapes::StructureShape.new(name: 'SessionKeyMastercard')
+    SessionKeyUnionPay = Shapes::StructureShape.new(name: 'SessionKeyUnionPay')
     SessionKeyVisa = Shapes::StructureShape.new(name: 'SessionKeyVisa')
     SharedInformation = Shapes::StringShape.new(name: 'SharedInformation')
     String = Shapes::StringShape.new(name: 'String')
@@ -653,12 +654,14 @@ module Aws::PaymentCryptographyData
     SessionKeyDerivation.add_member(:emv_2000, Shapes::ShapeRef.new(shape: SessionKeyEmv2000, location_name: "Emv2000"))
     SessionKeyDerivation.add_member(:amex, Shapes::ShapeRef.new(shape: SessionKeyAmex, location_name: "Amex"))
     SessionKeyDerivation.add_member(:visa, Shapes::ShapeRef.new(shape: SessionKeyVisa, location_name: "Visa"))
+    SessionKeyDerivation.add_member(:union_pay, Shapes::ShapeRef.new(shape: SessionKeyUnionPay, location_name: "UnionPay"))
     SessionKeyDerivation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SessionKeyDerivation.add_member_subclass(:emv_common, Types::SessionKeyDerivation::EmvCommon)
     SessionKeyDerivation.add_member_subclass(:mastercard, Types::SessionKeyDerivation::Mastercard)
     SessionKeyDerivation.add_member_subclass(:emv_2000, Types::SessionKeyDerivation::Emv2000)
     SessionKeyDerivation.add_member_subclass(:amex, Types::SessionKeyDerivation::Amex)
     SessionKeyDerivation.add_member_subclass(:visa, Types::SessionKeyDerivation::Visa)
+    SessionKeyDerivation.add_member_subclass(:union_pay, Types::SessionKeyDerivation::UnionPay)
     SessionKeyDerivation.add_member_subclass(:unknown, Types::SessionKeyDerivation::Unknown)
     SessionKeyDerivation.struct_class = Types::SessionKeyDerivation
 
@@ -685,6 +688,11 @@ module Aws::PaymentCryptographyData
     SessionKeyMastercard.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthEquals4, required: true, location_name: "ApplicationTransactionCounter"))
     SessionKeyMastercard.add_member(:unpredictable_number, Shapes::ShapeRef.new(shape: HexLengthEquals8, required: true, location_name: "UnpredictableNumber"))
     SessionKeyMastercard.struct_class = Types::SessionKeyMastercard
+
+    SessionKeyUnionPay.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
+    SessionKeyUnionPay.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
+    SessionKeyUnionPay.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthEquals4, required: true, location_name: "ApplicationTransactionCounter"))
+    SessionKeyUnionPay.struct_class = Types::SessionKeyUnionPay
 
     SessionKeyVisa.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
     SessionKeyVisa.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))

@@ -13,6 +13,24 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
+    class AgentInputMessage
+      attr_accessor body: ::String
+      attr_accessor type: ("normal" | "confirmation_response")
+      SENSITIVE: [:body]
+    end
+
+    class AgentMessageOutOfContextException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AgentOutputMessage
+      attr_accessor body: ::String
+      attr_accessor type: ("INITIAL_GREETING" | "normal" | "confirmation" | "complete" | "error" | "options" | "choices")
+      attr_accessor options_list: ::Array[::String]
+      SENSITIVE: [:body]
+    end
+
     class AnalyticsConfiguration
       attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING" | "PAUSING" | "PAUSED")
       SENSITIVE: []
@@ -21,6 +39,52 @@ module Aws::HealthLake
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class ConversationNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataTransformationProfileRequest
+      attr_accessor source_format: ("CCDA" | "CSV")
+      attr_accessor source: Types::CreateDataTransformationProfileSource
+      attr_accessor kms_key_id: ::String
+      attr_accessor profile_description: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataTransformationProfileResponse
+      attr_accessor profile_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor source_format: ("CCDA" | "CSV")
+      attr_accessor target_format: ("FHIR_R4")
+      attr_accessor profile_name: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateDataTransformationProfileSource
+      attr_accessor starter_profile: Types::StarterProfileSource
+      attr_accessor existing_versioned_profile_id: Types::ExistingVersionedProfileSource
+      attr_accessor profile_mapping: Types::ProfileMappingSource
+      attr_accessor sample_data: Types::SampleDataSource
+      attr_accessor unknown: untyped
+      SENSITIVE: [:profile_mapping]
+
+      class StarterProfile < CreateDataTransformationProfileSource
+      end
+      class ExistingVersionedProfileId < CreateDataTransformationProfileSource
+      end
+      class ProfileMapping < CreateDataTransformationProfileSource
+      end
+      class SampleData < CreateDataTransformationProfileSource
+      end
+      class Unknown < CreateDataTransformationProfileSource
+      end
     end
 
     class CreateFHIRDatastoreRequest
@@ -42,6 +106,34 @@ module Aws::HealthLake
       attr_accessor datastore_arn: ::String
       attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED")
       attr_accessor datastore_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class DataTransformationProfileSummary
+      attr_accessor profile_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor source_format: ("CCDA" | "CSV")
+      attr_accessor target_format: ("FHIR_R4")
+      attr_accessor profile_name: ::String
+      attr_accessor profile_description: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DataTransformationProfileVersionSummary
+      attr_accessor profile_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor source_format: ("CCDA" | "CSV")
+      attr_accessor target_format: ("FHIR_R4")
+      attr_accessor profile_name: ::String
+      attr_accessor change_description: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DataTransformationS3Configuration
+      attr_accessor s3_uri: ::String
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -71,6 +163,18 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
+    class DeleteDataTransformationProfileRequest
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataTransformationProfileResponse
+      attr_accessor profile_id: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor deletion_time: ::Time
+      SENSITIVE: []
+    end
+
     class DeleteFHIRDatastoreRequest
       attr_accessor datastore_id: ::String
       SENSITIVE: []
@@ -81,6 +185,16 @@ module Aws::HealthLake
       attr_accessor datastore_arn: ::String
       attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED")
       attr_accessor datastore_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataTransformationJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataTransformationJobResponse
+      attr_accessor transformation_job_properties: Types::TransformationJobProperties
       SENSITIVE: []
     end
 
@@ -122,6 +236,12 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
+    class ExistingVersionedProfileSource
+      attr_accessor profile_id: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
     class ExportJobProperties
       attr_accessor job_id: ::String
       attr_accessor job_name: ::String
@@ -133,6 +253,30 @@ module Aws::HealthLake
       attr_accessor data_access_role_arn: ::String
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class FailedDependencyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataTransformationProfileRequest
+      attr_accessor profile_id: ::String
+      attr_accessor profile_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDataTransformationProfileResponse
+      attr_accessor profile_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor source_format: ("CCDA" | "CSV")
+      attr_accessor target_format: ("FHIR_R4")
+      attr_accessor profile_mapping: ::Hash[::String, ::String]
+      attr_accessor profile_name: ::String
+      attr_accessor profile_description: ::String
+      attr_accessor change_description: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:profile_mapping]
     end
 
     class IdentityProviderConfiguration
@@ -183,13 +327,64 @@ module Aws::HealthLake
       attr_accessor total_number_of_resources_imported: ::Integer
       attr_accessor total_number_of_resources_with_customer_error: ::Integer
       attr_accessor total_number_of_files_read_with_customer_error: ::Integer
+      attr_accessor total_number_of_scanned_non_fhir_files: ::Integer
+      attr_accessor total_size_of_scanned_non_fhir_files_in_mb: ::Float
+      attr_accessor total_number_of_imported_non_fhir_files: ::Integer
+      attr_accessor total_number_of_non_fhir_resources_scanned: ::Integer
+      attr_accessor total_number_of_non_fhir_resources_imported: ::Integer
+      attr_accessor total_number_of_non_fhir_resources_with_customer_error: ::Integer
+      attr_accessor total_number_of_non_fhir_files_read_with_customer_error: ::Integer
       attr_accessor throughput: ::Float
+      attr_accessor total_files_converted: ::Integer
+      attr_accessor total_resources_generated: ::Integer
       SENSITIVE: []
     end
 
     class KmsEncryptionConfig
       attr_accessor cmk_type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY")
       attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataTransformationJobsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor job_status: ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      attr_accessor job_name: ::String
+      attr_accessor submitted_after: ::Time
+      attr_accessor submitted_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ListDataTransformationJobsResponse
+      attr_accessor items: ::Array[Types::TransformationJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataTransformationProfileVersionsRequest
+      attr_accessor profile_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataTransformationProfileVersionsResponse
+      attr_accessor items: ::Array[Types::DataTransformationProfileVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataTransformationProfilesRequest
+      attr_accessor source_format: ("CCDA" | "CSV")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataTransformationProfilesResponse
+      attr_accessor items: ::Array[Types::DataTransformationProfileSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -251,7 +446,12 @@ module Aws::HealthLake
     end
 
     class NlpConfiguration
-      attr_accessor status: ("ENABLED" | "DISABLED" | "ENABLING" | "DISABLING")
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
+      SENSITIVE: []
+    end
+
+    class NotImplementedOperationException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -276,6 +476,29 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
+    class ProfileMappingSource
+      attr_accessor profile_mapping: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PublishDataTransformationProfileRequest
+      attr_accessor profile_id: ::String
+      attr_accessor source_format: ("CCDA" | "CSV")
+      attr_accessor from_existing_version: ::Integer
+      attr_accessor change_description: ::String
+      SENSITIVE: []
+    end
+
+    class PublishDataTransformationProfileResponse
+      attr_accessor profile_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor source_format: ("CCDA" | "CSV")
+      attr_accessor target_format: ("FHIR_R4")
+      attr_accessor profile_name: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -287,8 +510,36 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
+    class SampleDataSource
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class SseConfiguration
       attr_accessor kms_encryption_config: Types::KmsEncryptionConfig
+      SENSITIVE: []
+    end
+
+    class StartDataTransformationJobRequest
+      attr_accessor input_data_config: Types::TransformationInputDataConfig
+      attr_accessor output_data_config: Types::TransformationOutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor job_name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor drift_detection_enabled: bool
+      attr_accessor provenance_enabled: bool
+      SENSITIVE: []
+    end
+
+    class StartDataTransformationJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
       SENSITIVE: []
     end
 
@@ -316,6 +567,9 @@ module Aws::HealthLake
       attr_accessor data_access_role_arn: ::String
       attr_accessor client_token: ::String
       attr_accessor validation_level: ("strict" | "structure-only" | "minimal")
+      attr_accessor profile_id: ::String
+      attr_accessor input_format: ::String
+      attr_accessor drift_detection_enabled: bool
       SENSITIVE: []
     end
 
@@ -323,6 +577,11 @@ module Aws::HealthLake
       attr_accessor job_id: ::String
       attr_accessor job_status: ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED")
       attr_accessor datastore_id: ::String
+      SENSITIVE: []
+    end
+
+    class StarterProfileSource
+      attr_accessor starter_profile_name: ::String
       SENSITIVE: []
     end
 
@@ -346,6 +605,64 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
+    class TransformationInputDataConfig
+      attr_accessor s3_uri: ::String
+      attr_accessor source_format: ("CCDA" | "CSV")
+      SENSITIVE: []
+    end
+
+    class TransformationJobProgressReport
+      attr_accessor total_files_scanned: ::Integer
+      attr_accessor total_files_converted: ::Integer
+      attr_accessor total_files_failed: ::Integer
+      attr_accessor total_resources_generated: ::Integer
+      SENSITIVE: []
+    end
+
+    class TransformationJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      attr_accessor input_data_config: Types::TransformationInputDataConfig
+      attr_accessor output_data_config: Types::TransformationOutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor job_name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor profile_version: ::Integer
+      attr_accessor end_time: ::Time
+      attr_accessor drift_detection_enabled: bool
+      attr_accessor provenance_enabled: bool
+      attr_accessor message: ::String
+      attr_accessor job_progress_report: Types::TransformationJobProgressReport
+      SENSITIVE: []
+    end
+
+    class TransformationJobSummary
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      attr_accessor submit_time: ::Time
+      attr_accessor job_name: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor source_format: ("CCDA" | "CSV")
+      SENSITIVE: []
+    end
+
+    class TransformationOutputDataConfig
+      attr_accessor s3_configuration: Types::DataTransformationS3Configuration
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedMIMETypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -355,11 +672,27 @@ module Aws::HealthLake
     class UntagResourceResponse < Aws::EmptyStructure
     end
 
+    class UpdateDataTransformationProfileRequest
+      attr_accessor profile_id: ::String
+      attr_accessor profile_mapping: ::Hash[::String, ::String]
+      attr_accessor change_description: ::String
+      SENSITIVE: [:profile_mapping]
+    end
+
+    class UpdateDataTransformationProfileResponse
+      attr_accessor profile_id: ::String
+      attr_accessor source_format: ("CCDA" | "CSV")
+      attr_accessor target_format: ("FHIR_R4")
+      attr_accessor profile_name: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class UpdateFHIRDatastoreRequest
       attr_accessor datastore_id: ::String
       attr_accessor datastore_name: ::String
-      attr_accessor nlp_configuration: Types::NlpConfiguration
       attr_accessor analytics_configuration: Types::AnalyticsConfiguration
+      attr_accessor nlp_configuration: Types::NlpConfiguration
       attr_accessor profile_configuration: Types::ProfileConfiguration
       attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
       SENSITIVE: []
@@ -367,6 +700,20 @@ module Aws::HealthLake
 
     class UpdateFHIRDatastoreResponse
       attr_accessor datastore_properties: Types::DatastoreProperties
+      SENSITIVE: []
+    end
+
+    class UpdateProfileWithAgentRequest
+      attr_accessor profile_id: ::String
+      attr_accessor source_format: ("CCDA" | "CSV")
+      attr_accessor input_message: Types::AgentInputMessage
+      attr_accessor conversation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProfileWithAgentResponse
+      attr_accessor agent_response: Types::AgentOutputMessage
+      attr_accessor conversation_id: ::String
       SENSITIVE: []
     end
 

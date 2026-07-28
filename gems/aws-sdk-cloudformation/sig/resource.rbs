@@ -119,7 +119,12 @@ module Aws
                           ],
                           ?client_request_token: ::String,
                           ?enable_termination_protection: bool,
-                          ?retain_except_on_create: bool
+                          ?retain_except_on_create: bool,
+                          ?deployment_config: {
+                            mode: ("STANDARD" | "EXPRESS")?,
+                            disable_rollback: bool?
+                          },
+                          ?disable_validation: bool
                         ) -> Stack
                       | (?Hash[Symbol, untyped]) -> Stack
 

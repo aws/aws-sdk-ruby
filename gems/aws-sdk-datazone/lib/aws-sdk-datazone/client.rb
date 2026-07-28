@@ -2069,6 +2069,75 @@ module Aws::DataZone
     #         s3_access_grant_location_id: "S3AccessGrantLocationId",
     #         register_s3_access_grant_location: false,
     #       },
+    #       snowflake_properties: {
+    #         connectivity_properties: {
+    #           connection_properties: {
+    #             "String" => "ConnectionPropertiesValueString",
+    #           },
+    #           physical_connection_requirements: {
+    #             subnet_id: "SubnetId",
+    #             subnet_id_list: ["SubnetId"],
+    #             security_group_id_list: ["SecurityGroupIdListMemberString"],
+    #             availability_zone: "PhysicalConnectionRequirementsAvailabilityZoneString",
+    #           },
+    #           name: "ConnectivityPropertiesNameString",
+    #           description: "ConnectivityPropertiesDescriptionString",
+    #           validate_credentials: false,
+    #           validate_for_compute_environments: ["SPARK"], # accepts SPARK, ATHENA, PYTHON
+    #           spark_properties: {
+    #             "PropertyMapKeyString" => "PropertyMapValueString",
+    #           },
+    #           athena_properties: {
+    #             "PropertyMapKeyString" => "PropertyMapValueString",
+    #           },
+    #           python_properties: {
+    #             "PropertyMapKeyString" => "PropertyMapValueString",
+    #           },
+    #           authentication_configuration: {
+    #             authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM
+    #             o_auth_2_properties: {
+    #               o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #               o_auth_2_client_application: {
+    #                 user_managed_client_application_client_id: "OAuth2ClientApplicationUserManagedClientApplicationClientIdString",
+    #                 a_ws_managed_client_application_reference: "OAuth2ClientApplicationAWSManagedClientApplicationReferenceString",
+    #               },
+    #               token_url: "OAuth2PropertiesTokenUrlString",
+    #               token_url_parameters_map: {
+    #                 "TokenUrlParametersMapKeyString" => "TokenUrlParametersMapValueString",
+    #               },
+    #               authorization_code_properties: {
+    #                 authorization_code: "AuthorizationCodePropertiesAuthorizationCodeString",
+    #                 redirect_uri: "AuthorizationCodePropertiesRedirectUriString",
+    #               },
+    #               o_auth_2_credentials: {
+    #                 user_managed_client_application_client_secret: "GlueOAuth2CredentialsUserManagedClientApplicationClientSecretString",
+    #                 access_token: "GlueOAuth2CredentialsAccessTokenString",
+    #                 refresh_token: "GlueOAuth2CredentialsRefreshTokenString",
+    #                 jwt_token: "GlueOAuth2CredentialsJwtTokenString",
+    #               },
+    #             },
+    #             secret_arn: "AuthenticationConfigurationInputSecretArnString",
+    #             kms_key_arn: "AuthenticationConfigurationInputKmsKeyArnString",
+    #             basic_authentication_credentials: {
+    #               user_name: "BasicAuthenticationCredentialsUserNameString",
+    #               password: "BasicAuthenticationCredentialsPasswordString",
+    #             },
+    #             custom_authentication_credentials: {
+    #               "CredentialMapKeyString" => "CredentialMapValueString",
+    #             },
+    #           },
+    #         },
+    #         snowflake_role: "SnowflakeRole", # required
+    #         identity_mapping: { # required
+    #           username_attribute: "String", # required
+    #           prefix: "String",
+    #         },
+    #         lineage_sync: {
+    #           timezone: "UTC", # accepts UTC, AFRICA_JOHANNESBURG, AMERICA_MONTREAL, AMERICA_SAO_PAULO, ASIA_BAHRAIN, ASIA_BANGKOK, ASIA_CALCUTTA, ASIA_DUBAI, ASIA_HONG_KONG, ASIA_JAKARTA, ASIA_KUALA_LUMPUR, ASIA_SEOUL, ASIA_SHANGHAI, ASIA_SINGAPORE, ASIA_TAIPEI, ASIA_TOKYO, AUSTRALIA_MELBOURNE, AUSTRALIA_SYDNEY, CANADA_CENTRAL, CET, CST6CDT, ETC_GMT, ETC_GMT0, ETC_GMT_ADD_0, ETC_GMT_ADD_1, ETC_GMT_ADD_10, ETC_GMT_ADD_11, ETC_GMT_ADD_12, ETC_GMT_ADD_2, ETC_GMT_ADD_3, ETC_GMT_ADD_4, ETC_GMT_ADD_5, ETC_GMT_ADD_6, ETC_GMT_ADD_7, ETC_GMT_ADD_8, ETC_GMT_ADD_9, ETC_GMT_NEG_0, ETC_GMT_NEG_1, ETC_GMT_NEG_10, ETC_GMT_NEG_11, ETC_GMT_NEG_12, ETC_GMT_NEG_13, ETC_GMT_NEG_14, ETC_GMT_NEG_2, ETC_GMT_NEG_3, ETC_GMT_NEG_4, ETC_GMT_NEG_5, ETC_GMT_NEG_6, ETC_GMT_NEG_7, ETC_GMT_NEG_8, ETC_GMT_NEG_9, EUROPE_DUBLIN, EUROPE_LONDON, EUROPE_PARIS, EUROPE_STOCKHOLM, EUROPE_ZURICH, ISRAEL, MEXICO_GENERAL, MST7MDT, PACIFIC_AUCKLAND, US_CENTRAL, US_EASTERN, US_MOUNTAIN, US_PACIFIC
+    #           enabled: false, # required
+    #           schedule: "LineageSyncScheduleCronString",
+    #         },
+    #       },
     #       amazon_q_properties: {
     #         is_enabled: false, # required
     #         profile_arn: "AmazonQPropertiesInputProfileArnString",
@@ -2216,6 +2285,15 @@ module Aws::DataZone
     #   resp.props.s3_properties.register_s3_access_grant_location #=> Boolean
     #   resp.props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.s3_properties.error_message #=> String
+    #   resp.props.snowflake_properties.snowflake_role #=> String
+    #   resp.props.snowflake_properties.identity_mapping.username_attribute #=> String
+    #   resp.props.snowflake_properties.identity_mapping.prefix #=> String
+    #   resp.props.snowflake_properties.lineage_sync.lineage_job_id #=> String
+    #   resp.props.snowflake_properties.lineage_sync.timezone #=> String, one of "UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"
+    #   resp.props.snowflake_properties.lineage_sync.enabled #=> Boolean
+    #   resp.props.snowflake_properties.lineage_sync.schedule #=> String
+    #   resp.props.snowflake_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.props.snowflake_properties.error_message #=> String
     #   resp.props.amazon_q_properties.is_enabled #=> Boolean
     #   resp.props.amazon_q_properties.profile_arn #=> String
     #   resp.props.amazon_q_properties.auth_mode #=> String
@@ -2923,6 +3001,11 @@ module Aws::DataZone
     #
     # @option params [String] :environment_blueprint_identifier
     #   The ID of the blueprint with which the environment is being created.
+    #
+    #   <note markdown="1"> This parameter is only valid for V1 domains. If provided for a V2
+    #   domain, the service returns a ValidationException.
+    #
+    #    </note>
     #
     # @option params [Integer] :deployment_order
     #   The deployment order of the environment.
@@ -3746,6 +3829,7 @@ module Aws::DataZone
     #   * {Types::CreateNotebookOutput#parameters #parameters} => Hash&lt;String,String&gt;
     #   * {Types::CreateNotebookOutput#environment_configuration #environment_configuration} => Types::EnvironmentConfig
     #   * {Types::CreateNotebookOutput#error #error} => Types::NotebookError
+    #   * {Types::CreateNotebookOutput#git_metadata #git_metadata} => Types::GitMetadata
     #
     # @example Request syntax with placeholder values
     #
@@ -3770,7 +3854,7 @@ module Aws::DataZone
     #   resp.owning_project_id #=> String
     #   resp.domain_id #=> String
     #   resp.cell_order #=> Array
-    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -3788,6 +3872,13 @@ module Aws::DataZone
     #   resp.environment_configuration.package_config.package_manager #=> String, one of "UV"
     #   resp.environment_configuration.package_config.package_specification #=> String
     #   resp.error.message #=> String
+    #   resp.git_metadata.connection_id #=> String
+    #   resp.git_metadata.repository #=> String
+    #   resp.git_metadata.branch #=> String
+    #   resp.git_metadata.commit_hash #=> String
+    #   resp.git_metadata.file_name #=> String
+    #   resp.git_metadata.committed_at #=> Time
+    #   resp.git_metadata.commit_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateNotebook AWS API Documentation
     #
@@ -6376,6 +6467,15 @@ module Aws::DataZone
     #   resp.props.s3_properties.register_s3_access_grant_location #=> Boolean
     #   resp.props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.s3_properties.error_message #=> String
+    #   resp.props.snowflake_properties.snowflake_role #=> String
+    #   resp.props.snowflake_properties.identity_mapping.username_attribute #=> String
+    #   resp.props.snowflake_properties.identity_mapping.prefix #=> String
+    #   resp.props.snowflake_properties.lineage_sync.lineage_job_id #=> String
+    #   resp.props.snowflake_properties.lineage_sync.timezone #=> String, one of "UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"
+    #   resp.props.snowflake_properties.lineage_sync.enabled #=> Boolean
+    #   resp.props.snowflake_properties.lineage_sync.schedule #=> String
+    #   resp.props.snowflake_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.props.snowflake_properties.error_message #=> String
     #   resp.props.amazon_q_properties.is_enabled #=> Boolean
     #   resp.props.amazon_q_properties.profile_arn #=> String
     #   resp.props.amazon_q_properties.auth_mode #=> String
@@ -7862,6 +7962,7 @@ module Aws::DataZone
     #   * {Types::GetNotebookOutput#parameters #parameters} => Hash&lt;String,String&gt;
     #   * {Types::GetNotebookOutput#environment_configuration #environment_configuration} => Types::EnvironmentConfig
     #   * {Types::GetNotebookOutput#error #error} => Types::NotebookError
+    #   * {Types::GetNotebookOutput#git_metadata #git_metadata} => Types::GitMetadata
     #
     # @example Request syntax with placeholder values
     #
@@ -7877,7 +7978,7 @@ module Aws::DataZone
     #   resp.owning_project_id #=> String
     #   resp.domain_id #=> String
     #   resp.cell_order #=> Array
-    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -7895,6 +7996,13 @@ module Aws::DataZone
     #   resp.environment_configuration.package_config.package_manager #=> String, one of "UV"
     #   resp.environment_configuration.package_config.package_specification #=> String
     #   resp.error.message #=> String
+    #   resp.git_metadata.connection_id #=> String
+    #   resp.git_metadata.repository #=> String
+    #   resp.git_metadata.branch #=> String
+    #   resp.git_metadata.commit_hash #=> String
+    #   resp.git_metadata.file_name #=> String
+    #   resp.git_metadata.committed_at #=> Time
+    #   resp.git_metadata.commit_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetNotebook AWS API Documentation
     #
@@ -9205,6 +9313,15 @@ module Aws::DataZone
     #   resp.items[0].props.s3_properties.register_s3_access_grant_location #=> Boolean
     #   resp.items[0].props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.items[0].props.s3_properties.error_message #=> String
+    #   resp.items[0].props.snowflake_properties.snowflake_role #=> String
+    #   resp.items[0].props.snowflake_properties.identity_mapping.username_attribute #=> String
+    #   resp.items[0].props.snowflake_properties.identity_mapping.prefix #=> String
+    #   resp.items[0].props.snowflake_properties.lineage_sync.lineage_job_id #=> String
+    #   resp.items[0].props.snowflake_properties.lineage_sync.timezone #=> String, one of "UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"
+    #   resp.items[0].props.snowflake_properties.lineage_sync.enabled #=> Boolean
+    #   resp.items[0].props.snowflake_properties.lineage_sync.schedule #=> String
+    #   resp.items[0].props.snowflake_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.items[0].props.snowflake_properties.error_message #=> String
     #   resp.items[0].props.amazon_q_properties.is_enabled #=> Boolean
     #   resp.items[0].props.amazon_q_properties.profile_arn #=> String
     #   resp.items[0].props.amazon_q_properties.auth_mode #=> String
@@ -10560,7 +10677,7 @@ module Aws::DataZone
     #     max_results: 1,
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     sort_by: "CREATED_AT", # accepts CREATED_AT, UPDATED_AT
-    #     status: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #     status: "ACTIVE", # accepts ACTIVE, ARCHIVED, SYNC_IN_PROGRESS, SYNC_FAILED
     #     next_token: "PaginationToken",
     #   })
     #
@@ -10571,7 +10688,7 @@ module Aws::DataZone
     #   resp.items[0].name #=> String
     #   resp.items[0].owning_project_id #=> String
     #   resp.items[0].domain_id #=> String
-    #   resp.items[0].status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.items[0].status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
     #   resp.items[0].description #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].created_by #=> String
@@ -13577,7 +13694,7 @@ module Aws::DataZone
     # @example Response structure
     #
     #   resp.notebook_id #=> String
-    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
     #   resp.domain_id #=> String
     #   resp.owning_project_id #=> String
     #   resp.name #=> String
@@ -13750,6 +13867,106 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def start_notebook_run(params = {}, options = {})
       req = build_request(:start_notebook_run, params)
+      req.send_request(options)
+    end
+
+    # Starts a notebook sync in Amazon SageMaker Unified Studio. This
+    # operation syncs a notebook from a Git repository into a project.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   to sync the notebook.
+    #
+    # @option params [required, String] :owning_project_identifier
+    #   The identifier of the project that will own the synced notebook.
+    #
+    # @option params [required, Types::SourceLocation] :source_location
+    #   The source location of the notebook to sync. This specifies the Amazon
+    #   Simple Storage Service URI of the notebook file.
+    #
+    # @option params [Types::GitMetadata] :git_metadata
+    #   The Git metadata for the notebook sync, including repository, branch,
+    #   and commit information.
+    #
+    # @option params [String] :notebook_id
+    #   The identifier of an existing notebook to sync. If not specified, a
+    #   new notebook is created.
+    #
+    # @option params [String] :name
+    #   The name of the notebook. The name must be between 1 and 256
+    #   characters.
+    #
+    # @option params [String] :description
+    #   The description of the notebook.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartNotebookSyncOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNotebookSyncOutput#notebook_id #notebook_id} => String
+    #   * {Types::StartNotebookSyncOutput#status #status} => String
+    #   * {Types::StartNotebookSyncOutput#domain_id #domain_id} => String
+    #   * {Types::StartNotebookSyncOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::StartNotebookSyncOutput#source_location #source_location} => Types::SourceLocation
+    #   * {Types::StartNotebookSyncOutput#git_metadata #git_metadata} => Types::GitMetadata
+    #   * {Types::StartNotebookSyncOutput#name #name} => String
+    #   * {Types::StartNotebookSyncOutput#description #description} => String
+    #   * {Types::StartNotebookSyncOutput#created_at #created_at} => Time
+    #   * {Types::StartNotebookSyncOutput#created_by #created_by} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_notebook_sync({
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     source_location: { # required
+    #       s3: "S3SourceLocation",
+    #     },
+    #     git_metadata: {
+    #       connection_id: "GitConnectionId", # required
+    #       repository: "GitRepository", # required
+    #       branch: "GitBranch", # required
+    #       commit_hash: "CommitHash", # required
+    #       file_name: "FileName",
+    #       committed_at: Time.now,
+    #       commit_message: "CommitMessage",
+    #     },
+    #     notebook_id: "NotebookId",
+    #     name: "NotebookName",
+    #     description: "Description",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_id #=> String
+    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
+    #   resp.domain_id #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.source_location.s3 #=> String
+    #   resp.git_metadata.connection_id #=> String
+    #   resp.git_metadata.repository #=> String
+    #   resp.git_metadata.branch #=> String
+    #   resp.git_metadata.commit_hash #=> String
+    #   resp.git_metadata.file_name #=> String
+    #   resp.git_metadata.committed_at #=> Time
+    #   resp.git_metadata.commit_message #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartNotebookSync AWS API Documentation
+    #
+    # @overload start_notebook_sync(params = {})
+    # @param [Hash] params ({})
+    def start_notebook_sync(params = {}, options = {})
+      req = build_request(:start_notebook_sync, params)
       req.send_request(options)
     end
 
@@ -14238,6 +14455,27 @@ module Aws::DataZone
     #         s3_access_grant_location_id: "S3AccessGrantLocationId",
     #         register_s3_access_grant_location: false,
     #       },
+    #       snowflake_properties: {
+    #         connectivity_properties_patch: {
+    #           description: "ConnectivityPropertiesPatchDescriptionString",
+    #           connection_properties: {
+    #             "String" => "ConnectionPropertiesValueString",
+    #           },
+    #           authentication_configuration: {
+    #             secret_arn: "AuthenticationConfigurationPatchSecretArnString",
+    #             basic_authentication_credentials: {
+    #               user_name: "BasicAuthenticationCredentialsUserNameString",
+    #               password: "BasicAuthenticationCredentialsPasswordString",
+    #             },
+    #           },
+    #         },
+    #         snowflake_role: "SnowflakeRole",
+    #         lineage_sync: {
+    #           timezone: "UTC", # accepts UTC, AFRICA_JOHANNESBURG, AMERICA_MONTREAL, AMERICA_SAO_PAULO, ASIA_BAHRAIN, ASIA_BANGKOK, ASIA_CALCUTTA, ASIA_DUBAI, ASIA_HONG_KONG, ASIA_JAKARTA, ASIA_KUALA_LUMPUR, ASIA_SEOUL, ASIA_SHANGHAI, ASIA_SINGAPORE, ASIA_TAIPEI, ASIA_TOKYO, AUSTRALIA_MELBOURNE, AUSTRALIA_SYDNEY, CANADA_CENTRAL, CET, CST6CDT, ETC_GMT, ETC_GMT0, ETC_GMT_ADD_0, ETC_GMT_ADD_1, ETC_GMT_ADD_10, ETC_GMT_ADD_11, ETC_GMT_ADD_12, ETC_GMT_ADD_2, ETC_GMT_ADD_3, ETC_GMT_ADD_4, ETC_GMT_ADD_5, ETC_GMT_ADD_6, ETC_GMT_ADD_7, ETC_GMT_ADD_8, ETC_GMT_ADD_9, ETC_GMT_NEG_0, ETC_GMT_NEG_1, ETC_GMT_NEG_10, ETC_GMT_NEG_11, ETC_GMT_NEG_12, ETC_GMT_NEG_13, ETC_GMT_NEG_14, ETC_GMT_NEG_2, ETC_GMT_NEG_3, ETC_GMT_NEG_4, ETC_GMT_NEG_5, ETC_GMT_NEG_6, ETC_GMT_NEG_7, ETC_GMT_NEG_8, ETC_GMT_NEG_9, EUROPE_DUBLIN, EUROPE_LONDON, EUROPE_PARIS, EUROPE_STOCKHOLM, EUROPE_ZURICH, ISRAEL, MEXICO_GENERAL, MST7MDT, PACIFIC_AUCKLAND, US_CENTRAL, US_EASTERN, US_MOUNTAIN, US_PACIFIC
+    #           enabled: false, # required
+    #           schedule: "LineageSyncScheduleCronString",
+    #         },
+    #       },
     #       amazon_q_properties: {
     #         is_enabled: false, # required
     #         profile_arn: "AmazonQPropertiesPatchProfileArnString",
@@ -14378,6 +14616,15 @@ module Aws::DataZone
     #   resp.props.s3_properties.register_s3_access_grant_location #=> Boolean
     #   resp.props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.s3_properties.error_message #=> String
+    #   resp.props.snowflake_properties.snowflake_role #=> String
+    #   resp.props.snowflake_properties.identity_mapping.username_attribute #=> String
+    #   resp.props.snowflake_properties.identity_mapping.prefix #=> String
+    #   resp.props.snowflake_properties.lineage_sync.lineage_job_id #=> String
+    #   resp.props.snowflake_properties.lineage_sync.timezone #=> String, one of "UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"
+    #   resp.props.snowflake_properties.lineage_sync.enabled #=> Boolean
+    #   resp.props.snowflake_properties.lineage_sync.schedule #=> String
+    #   resp.props.snowflake_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.props.snowflake_properties.error_message #=> String
     #   resp.props.amazon_q_properties.is_enabled #=> Boolean
     #   resp.props.amazon_q_properties.profile_arn #=> String
     #   resp.props.amazon_q_properties.auth_mode #=> String
@@ -15423,6 +15670,7 @@ module Aws::DataZone
     #   * {Types::UpdateNotebookOutput#parameters #parameters} => Hash&lt;String,String&gt;
     #   * {Types::UpdateNotebookOutput#environment_configuration #environment_configuration} => Types::EnvironmentConfig
     #   * {Types::UpdateNotebookOutput#error #error} => Types::NotebookError
+    #   * {Types::UpdateNotebookOutput#git_metadata #git_metadata} => Types::GitMetadata
     #
     # @example Request syntax with placeholder values
     #
@@ -15430,7 +15678,7 @@ module Aws::DataZone
     #     domain_identifier: "DomainId", # required
     #     identifier: "NotebookId", # required
     #     description: "Description",
-    #     status: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #     status: "ACTIVE", # accepts ACTIVE, ARCHIVED, SYNC_IN_PROGRESS, SYNC_FAILED
     #     name: "NotebookName",
     #     cell_order: [
     #       {
@@ -15459,7 +15707,7 @@ module Aws::DataZone
     #   resp.owning_project_id #=> String
     #   resp.domain_id #=> String
     #   resp.cell_order #=> Array
-    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -15477,6 +15725,13 @@ module Aws::DataZone
     #   resp.environment_configuration.package_config.package_manager #=> String, one of "UV"
     #   resp.environment_configuration.package_config.package_specification #=> String
     #   resp.error.message #=> String
+    #   resp.git_metadata.connection_id #=> String
+    #   resp.git_metadata.repository #=> String
+    #   resp.git_metadata.branch #=> String
+    #   resp.git_metadata.commit_hash #=> String
+    #   resp.git_metadata.file_name #=> String
+    #   resp.git_metadata.committed_at #=> Time
+    #   resp.git_metadata.commit_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateNotebook AWS API Documentation
     #
@@ -16335,7 +16590,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

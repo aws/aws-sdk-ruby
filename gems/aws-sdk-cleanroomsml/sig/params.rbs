@@ -31,7 +31,7 @@ module Aws
 
       type compute_configuration = {
       worker: {
-        type: ("CR.1X" | "CR.4X")?,
+        type: ("CR.1X" | "CR.4X" | "CR.8X")?,
         number: ::Integer?,
         properties: {
           spark: Hash[::String, ::String]?

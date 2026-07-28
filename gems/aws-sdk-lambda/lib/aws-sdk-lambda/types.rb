@@ -573,6 +573,11 @@ module Aws::Lambda
     #   the capacity provider.
     #   @return [Types::PropagateTags]
     #
+    # @!attribute [rw] telemetry_config
+    #   The telemetry configuration for the capacity provider, including
+    #   logging settings.
+    #   @return [Types::CapacityProviderTelemetryConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CapacityProvider AWS API Documentation
     #
     class CapacityProvider < Struct.new(
@@ -584,7 +589,8 @@ module Aws::Lambda
       :capacity_provider_scaling_config,
       :kms_key_arn,
       :last_modified,
-      :propagate_tags)
+      :propagate_tags,
+      :telemetry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -624,6 +630,33 @@ module Aws::Lambda
     class CapacityProviderLimitExceededException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The capacity provider's Amazon CloudWatch Logs configuration
+    # settings.
+    #
+    # @!attribute [rw] system_log_level
+    #   Set this property to filter the system logs for your capacity
+    #   provider that Lambda sends to CloudWatch. Lambda only sends system
+    #   logs at the selected level of detail and lower, where `DEBUG` is the
+    #   highest level and `WARN` is the lowest.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group
+    #   The name of the Amazon CloudWatch log group the capacity provider
+    #   sends logs to. By default, Lambda capacity providers send logs to a
+    #   default log group named `/aws/lambda/capacity-provider/<capacity
+    #   provider name>`. To use a different log group, enter an existing log
+    #   group or enter a new log group name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CapacityProviderLoggingConfig AWS API Documentation
+    #
+    class CapacityProviderLoggingConfig < Struct.new(
+      :system_log_level,
+      :log_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -668,6 +701,22 @@ module Aws::Lambda
       :max_v_cpu_count,
       :scaling_mode,
       :scaling_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that specifies the telemetry collection for the capacity
+    # provider.
+    #
+    # @!attribute [rw] logging_config
+    #   The capacity provider's Amazon CloudWatch Logs configuration
+    #   settings.
+    #   @return [Types::CapacityProviderLoggingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CapacityProviderTelemetryConfig AWS API Documentation
+    #
+    class CapacityProviderTelemetryConfig < Struct.new(
+      :logging_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1346,6 +1395,11 @@ module Aws::Lambda
     #   Specifies tags to apply to managed resources at launch.
     #   @return [Types::PropagateTags]
     #
+    # @!attribute [rw] telemetry_config
+    #   The telemetry configuration for the capacity provider. Specifies
+    #   logging settings for managed resources.
+    #   @return [Types::CapacityProviderTelemetryConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateCapacityProviderRequest AWS API Documentation
     #
     class CreateCapacityProviderRequest < Struct.new(
@@ -1356,7 +1410,8 @@ module Aws::Lambda
       :capacity_provider_scaling_config,
       :kms_key_arn,
       :tags,
-      :propagate_tags)
+      :propagate_tags,
+      :telemetry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2463,11 +2518,20 @@ module Aws::Lambda
     end
 
     # Configuration settings for [durable functions][1], including execution
-    # timeout and retention period for execution history.
+    # timeout, retention period for execution history, and an optional ARN
+    # of the Key Management Service (KMS) customer managed key that is used
+    # to encrypt your durable execution's payload data, including input,
+    # output, and error payloads.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that is used to encrypt your durable execution's payload data,
+    #   including input, output, and error payloads.
+    #   @return [String]
     #
     # @!attribute [rw] retention_period_in_days
     #   The number of days to retain execution history after a durable
@@ -2484,6 +2548,7 @@ module Aws::Lambda
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DurableConfig AWS API Documentation
     #
     class DurableConfig < Struct.new(
+      :kms_key_arn,
       :retention_period_in_days,
       :execution_timeout)
       SENSITIVE = []
@@ -3413,6 +3478,12 @@ module Aws::Lambda
     #   [1]: https://www.w3.org/TR/NOTE-datetime
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that is used to encrypt your durable execution's payload data,
+    #   including input, output, and error payloads.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Execution AWS API Documentation
     #
     class Execution < Struct.new(
@@ -3421,7 +3492,8 @@ module Aws::Lambda
       :function_arn,
       :status,
       :start_timestamp,
-      :end_timestamp)
+      :end_timestamp,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3641,6 +3713,13 @@ module Aws::Lambda
     #   to use.
     #   @return [String]
     #
+    # @!attribute [rw] s3_object_storage_mode
+    #   Specifies how the deployment package is stored. Use `COPY` (default)
+    #   to upload a copy of your deployment package to Lambda. Use
+    #   `REFERENCE` to have Lambda reference the deployment package from the
+    #   specified Amazon S3 bucket.
+    #   @return [String]
+    #
     # @!attribute [rw] image_uri
     #   URI of a [container image][1] in the Amazon ECR registry.
     #
@@ -3667,6 +3746,7 @@ module Aws::Lambda
       :s3_bucket,
       :s3_key,
       :s3_object_version,
+      :s3_object_storage_mode,
       :image_uri,
       :source_kms_key_arn)
       SENSITIVE = [:zip_file]
@@ -3691,6 +3771,10 @@ module Aws::Lambda
     #   The resolved URI for the image.
     #   @return [String]
     #
+    # @!attribute [rw] resolved_s3_object
+    #   The resolved Amazon S3 object that contains the deployment package.
+    #   @return [Types::ResolvedS3Object]
+    #
     # @!attribute [rw] source_kms_key_arn
     #   The ARN of the Key Management Service (KMS) customer managed key
     #   that's used to encrypt your function's .zip deployment package. If
@@ -3702,6 +3786,11 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
     #   @return [String]
     #
+    # @!attribute [rw] error
+    #   An object that contains details about an error related to function
+    #   deployment package retrieval.
+    #   @return [Types::FunctionCodeLocationError]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocation AWS API Documentation
     #
     class FunctionCodeLocation < Struct.new(
@@ -3709,8 +3798,30 @@ module Aws::Lambda
       :location,
       :image_uri,
       :resolved_image_uri,
-      :source_kms_key_arn)
+      :resolved_s3_object,
+      :source_kms_key_arn,
+      :error)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an error related to retrieving a function's deployment
+    # package.
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the failed retrieval.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocationError AWS API Documentation
+    #
+    class FunctionCodeLocationError < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -4383,10 +4494,18 @@ module Aws::Lambda
     #   The Amazon Resource Name (ARN) of the durable execution.
     #   @return [String]
     #
+    # @!attribute [rw] include_execution_data
+    #   Specifies whether to include execution data such as input payload,
+    #   result, and error information in the response. Set to `false` for a
+    #   more compact response that includes only execution metadata. The
+    #   default value is set to `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetDurableExecutionRequest AWS API Documentation
     #
     class GetDurableExecutionRequest < Struct.new(
-      :durable_execution_arn)
+      :durable_execution_arn,
+      :include_execution_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4455,6 +4574,20 @@ module Aws::Lambda
     #   The trace headers associated with the durable execution.
     #   @return [Types::TraceHeader]
     #
+    # @!attribute [rw] execution_data_included
+    #   Indicates whether execution data is included in this response.
+    #   Returns `false` when `IncludeExecutionData` is set to `false` in the
+    #   request.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] durable_config
+    #   Configuration settings for the durable execution, including
+    #   execution timeout, retention period for execution history, and an
+    #   optional ARN of the Key Management Service (KMS) customer managed
+    #   key that is used to encrypt your durable execution's payload data,
+    #   including input, output, and error payloads.
+    #   @return [Types::DurableConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetDurableExecutionResponse AWS API Documentation
     #
     class GetDurableExecutionResponse < Struct.new(
@@ -4468,7 +4601,9 @@ module Aws::Lambda
       :status,
       :end_timestamp,
       :version,
-      :trace_header)
+      :trace_header,
+      :execution_data_included,
+      :durable_config)
       SENSITIVE = [:input_payload, :result]
       include Aws::Structure
     end
@@ -5577,9 +5712,18 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] durable_execution_name
-    #   Optional unique name for the durable execution. When you start your
-    #   special function, you can give it a unique name to identify this
-    #   specific execution. It's like giving a nickname to a task.
+    #   A unique name for the durable execution. If you invoke a durable
+    #   function using a name that already exists with the same payload,
+    #   Lambda returns the existing execution instead of creating a
+    #   duplicate. If the payload differs, Lambda returns a
+    #   `DurableExecutionAlreadyStartedException` error.
+    #
+    #   If not specified, Lambda generates a unique identifier
+    #   automatically. For more information, see [Execution names][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-execution-idempotency.html#durable-idempotency-execution-names
     #   @return [String]
     #
     # @!attribute [rw] payload
@@ -5762,18 +5906,6 @@ module Aws::Lambda
     #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
-    # @!attribute [rw] invocation_type
-    #   Use one of the following options:
-    #
-    #   * `RequestResponse` (default) – Invoke the function synchronously.
-    #     Keep the connection open until the function returns a response or
-    #     times out. The API operation response includes the function
-    #     response and additional data.
-    #
-    #   * `DryRun` – Validate parameter values and verify that the IAM user
-    #     or role has permission to invoke the function.
-    #   @return [String]
-    #
     # @!attribute [rw] log_type
     #   Set to `Tail` to include the execution log in the response. Applies
     #   to synchronously invoked functions only.
@@ -5800,16 +5932,28 @@ module Aws::Lambda
     #   The identifier of the tenant in a multi-tenant Lambda function.
     #   @return [String]
     #
+    # @!attribute [rw] invocation_type
+    #   Use one of the following options:
+    #
+    #   * `RequestResponse` (default) – Invoke the function synchronously.
+    #     Keep the connection open until the function returns a response or
+    #     times out. The API operation response includes the function
+    #     response and additional data.
+    #
+    #   * `DryRun` – Validate parameter values and verify that the IAM user
+    #     or role has permission to invoke the function.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeWithResponseStreamRequest AWS API Documentation
     #
     class InvokeWithResponseStreamRequest < Struct.new(
       :function_name,
-      :invocation_type,
       :log_type,
       :client_context,
       :qualifier,
       :payload,
-      :tenant_id)
+      :tenant_id,
+      :invocation_type)
       SENSITIVE = [:payload]
       include Aws::Structure
     end
@@ -6093,6 +6237,10 @@ module Aws::Lambda
     #   use.
     #   @return [String]
     #
+    # @!attribute [rw] s3_object_storage_mode
+    #   The storage mode for a function's deployment package.
+    #   @return [String]
+    #
     # @!attribute [rw] zip_file
     #   The base64-encoded contents of the layer archive. Amazon Web
     #   Services SDK and Amazon Web Services CLI clients handle the encoding
@@ -6105,6 +6253,7 @@ module Aws::Lambda
       :s3_bucket,
       :s3_key,
       :s3_object_version,
+      :s3_object_storage_mode,
       :zip_file)
       SENSITIVE = [:zip_file]
       include Aws::Structure
@@ -6137,6 +6286,11 @@ module Aws::Lambda
     #   The Amazon Resource Name (ARN) of a signing job.
     #   @return [String]
     #
+    # @!attribute [rw] resolved_s3_object
+    #   Details about the resolved Amazon S3 object that contains a
+    #   function's deployment package.
+    #   @return [Types::ResolvedS3Object]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionContentOutput AWS API Documentation
     #
     class LayerVersionContentOutput < Struct.new(
@@ -6144,7 +6298,8 @@ module Aws::Lambda
       :code_sha_256,
       :code_size,
       :signing_profile_version_arn,
-      :signing_job_arn)
+      :signing_job_arn,
+      :resolved_s3_object)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8341,6 +8496,31 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # Details about the resolved Amazon S3 object that contains a
+    # function's deployment package.
+    #
+    # @!attribute [rw] s3_bucket
+    #   The Amazon S3 bucket that contains the deployment package.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   The Amazon S3 key of the deployment package.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_version
+    #   The version of the deployment package object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResolvedS3Object AWS API Documentation
+    #
+    class ResolvedS3Object < Struct.new(
+      :s3_bucket,
+      :s3_key,
+      :s3_object_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource already exists, or another operation is in progress.
     #
     # @!attribute [rw] type
@@ -9318,12 +9498,17 @@ module Aws::Lambda
     #   the capacity provider.
     #   @return [Types::PropagateTags]
     #
+    # @!attribute [rw] telemetry_config
+    #   The updated telemetry configuration for the capacity provider.
+    #   @return [Types::CapacityProviderTelemetryConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateCapacityProviderRequest AWS API Documentation
     #
     class UpdateCapacityProviderRequest < Struct.new(
       :capacity_provider_name,
       :capacity_provider_scaling_config,
-      :propagate_tags)
+      :propagate_tags,
+      :telemetry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9639,6 +9824,13 @@ module Aws::Lambda
     #   to use.
     #   @return [String]
     #
+    # @!attribute [rw] s3_object_storage_mode
+    #   Specifies how the deployment package is stored. Use `COPY` (default)
+    #   to upload a copy of your deployment package to Lambda. Use
+    #   `REFERENCE` to have Lambda reference the deployment package from the
+    #   specified Amazon S3 bucket.
+    #   @return [String]
+    #
     # @!attribute [rw] image_uri
     #   URI of a container image in the Amazon ECR registry. Do not use for
     #   a function defined with a .zip file archive.
@@ -9686,6 +9878,7 @@ module Aws::Lambda
       :s3_bucket,
       :s3_key,
       :s3_object_version,
+      :s3_object_storage_mode,
       :image_uri,
       :architectures,
       :publish,
@@ -9902,9 +10095,15 @@ module Aws::Lambda
     #   @return [Types::CapacityProviderConfig]
     #
     # @!attribute [rw] durable_config
-    #   Configuration settings for durable functions. Allows updating
-    #   execution timeout and retention period for functions with durability
-    #   enabled.
+    #   Configuration settings for [durable functions][1], including
+    #   execution timeout, retention period for execution history, and an
+    #   optional ARN of the Key Management Service (KMS) customer managed
+    #   key that is used to encrypt your durable execution's payload data,
+    #   including input, output, and error payloads.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
     #   @return [Types::DurableConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation

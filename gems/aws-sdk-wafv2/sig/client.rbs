@@ -229,7 +229,7 @@ module Aws
                             },
                             ?token_domains: Array[::String],
                             ?association_config: {
-                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE"), {
+                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), {
                                   default_size_inspection_limit: ("KB_16" | "KB_32" | "KB_48" | "KB_64")
                                 }]?
                             },
@@ -772,7 +772,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#list_resources_for_web_acl-instance_method
       def list_resources_for_web_acl: (
                                         web_acl_arn: ::String,
-                                        ?resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY" | "APPSYNC" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AMPLIFY")
+                                        ?resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY" | "APPSYNC" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AMPLIFY" | "AGENTCORE_GATEWAY")
                                       ) -> _ListResourcesForWebACLResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesForWebACLResponseSuccess
 
@@ -1047,7 +1047,7 @@ module Aws
                             },
                             ?token_domains: Array[::String],
                             ?association_config: {
-                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE"), {
+                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), {
                                   default_size_inspection_limit: ("KB_16" | "KB_32" | "KB_48" | "KB_64")
                                 }]?
                             },

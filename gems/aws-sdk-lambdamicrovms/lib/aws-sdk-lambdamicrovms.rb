@@ -54,7 +54,7 @@ module Aws::LambdaMicrovms
   autoload :EndpointProvider, 'aws-sdk-lambdamicrovms/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lambdamicrovms/endpoints'
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end
 

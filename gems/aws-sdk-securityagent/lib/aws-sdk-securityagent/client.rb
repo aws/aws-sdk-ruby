@@ -1161,6 +1161,7 @@ module Aws::SecurityAgent
     #   resp.tasks[0].logs_location.log_type #=> String, one of "CLOUDWATCH"
     #   resp.tasks[0].logs_location.cloud_watch_log.log_group #=> String
     #   resp.tasks[0].logs_location.cloud_watch_log.log_stream #=> String
+    #   resp.tasks[0].task_hours #=> Float
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -4027,6 +4028,7 @@ module Aws::SecurityAgent
     #   resp.task_summaries[0].title #=> String
     #   resp.task_summaries[0].risk_type #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
     #   resp.task_summaries[0].execution_status #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.task_summaries[0].task_hours #=> Float
     #   resp.task_summaries[0].created_at #=> Time
     #   resp.task_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -5963,7 +5965,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

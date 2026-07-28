@@ -180,6 +180,8 @@ module Aws::CloudFormation
       attr_accessor on_stack_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE")
       attr_accessor import_existing_resources: bool
       attr_accessor deployment_mode: ("REVERT_DRIFT")
+      attr_accessor deployment_config: Types::DeploymentConfig
+      attr_accessor disable_validation: bool
       SENSITIVE: []
     end
 
@@ -221,6 +223,8 @@ module Aws::CloudFormation
       attr_accessor client_request_token: ::String
       attr_accessor enable_termination_protection: bool
       attr_accessor retain_except_on_create: bool
+      attr_accessor deployment_config: Types::DeploymentConfig
+      attr_accessor disable_validation: bool
       SENSITIVE: []
     end
 
@@ -323,6 +327,7 @@ module Aws::CloudFormation
       attr_accessor role_arn: ::String
       attr_accessor client_request_token: ::String
       attr_accessor deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK")
+      attr_accessor deployment_config: Types::DeploymentConfig
       SENSITIVE: []
     end
 
@@ -350,6 +355,12 @@ module Aws::CloudFormation
     end
 
     class DeleteStackSetOutput < Aws::EmptyStructure
+    end
+
+    class DeploymentConfig
+      attr_accessor mode: ("STANDARD" | "EXPRESS")
+      attr_accessor disable_rollback: bool
+      SENSITIVE: []
     end
 
     class DeploymentTargets
@@ -433,6 +444,7 @@ module Aws::CloudFormation
       attr_accessor on_stack_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE")
       attr_accessor import_existing_resources: bool
       attr_accessor deployment_mode: ("REVERT_DRIFT")
+      attr_accessor deployment_config: Types::DeploymentConfig
       SENSITIVE: []
     end
 
@@ -1525,6 +1537,7 @@ module Aws::CloudFormation
       attr_accessor role_arn: ::String
       attr_accessor client_request_token: ::String
       attr_accessor retain_except_on_create: bool
+      attr_accessor deployment_config: Types::DeploymentConfig
       SENSITIVE: []
     end
 
@@ -1611,6 +1624,7 @@ module Aws::CloudFormation
       attr_accessor stack_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "REVIEW_IN_PROGRESS" | "IMPORT_IN_PROGRESS" | "IMPORT_COMPLETE" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE")
       attr_accessor stack_status_reason: ::String
       attr_accessor disable_rollback: bool
+      attr_accessor deployment_config: Types::DeploymentConfig
       attr_accessor notification_arns: ::Array[::String]
       attr_accessor timeout_in_minutes: ::Integer
       attr_accessor capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
@@ -2139,6 +2153,8 @@ module Aws::CloudFormation
       attr_accessor disable_rollback: bool
       attr_accessor client_request_token: ::String
       attr_accessor retain_except_on_create: bool
+      attr_accessor deployment_config: Types::DeploymentConfig
+      attr_accessor disable_validation: bool
       SENSITIVE: []
     end
 

@@ -15,6 +15,11 @@ module Aws::QuickSight
       SENSITIVE: [:api_key, :email]
     end
 
+    class AccessControlConfiguration
+      attr_accessor is_acl_enabled: bool
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
@@ -816,7 +821,7 @@ module Aws::QuickSight
     end
 
     class AuthorizedTargetsByService
-      attr_accessor service: ("REDSHIFT" | "QBUSINESS" | "ATHENA")
+      attr_accessor service: ("REDSHIFT" | "QBUSINESS" | "ATHENA" | "GLUE_DATA_CATALOG")
       attr_accessor authorized_targets: ::Array[::String]
       SENSITIVE: []
     end
@@ -1260,234 +1265,243 @@ module Aws::QuickSight
     end
 
     class Capabilities
-      attr_accessor export_to_csv: ("DENY")
-      attr_accessor export_to_excel: ("DENY")
-      attr_accessor export_to_pdf: ("DENY")
-      attr_accessor print_reports: ("DENY")
-      attr_accessor create_and_update_themes: ("DENY")
-      attr_accessor add_or_run_anomaly_detection_for_analyses: ("DENY")
-      attr_accessor share_analyses: ("DENY")
-      attr_accessor create_and_update_datasets: ("DENY")
-      attr_accessor share_datasets: ("DENY")
-      attr_accessor subscribe_dashboard_email_reports: ("DENY")
-      attr_accessor create_and_update_dashboard_email_reports: ("DENY")
-      attr_accessor share_dashboards: ("DENY")
-      attr_accessor create_and_update_threshold_alerts: ("DENY")
-      attr_accessor rename_shared_folders: ("DENY")
-      attr_accessor create_shared_folders: ("DENY")
-      attr_accessor create_and_update_data_sources: ("DENY")
-      attr_accessor share_data_sources: ("DENY")
-      attr_accessor view_account_spice_capacity: ("DENY")
-      attr_accessor create_spice_dataset: ("DENY")
-      attr_accessor export_to_pdf_in_scheduled_reports: ("DENY")
-      attr_accessor export_to_csv_in_scheduled_reports: ("DENY")
-      attr_accessor export_to_excel_in_scheduled_reports: ("DENY")
-      attr_accessor include_content_in_scheduled_reports_email: ("DENY")
-      attr_accessor dashboard: ("DENY")
-      attr_accessor analysis: ("DENY")
-      attr_accessor automate: ("DENY")
-      attr_accessor flow: ("DENY")
-      attr_accessor apps: ("DENY")
-      attr_accessor create_and_update_apps: ("DENY")
-      attr_accessor share_apps: ("DENY")
-      attr_accessor invoke_apps_ai_inference: ("DENY")
-      attr_accessor access_apps_native_data_store: ("DENY")
-      attr_accessor publish_without_approval: ("DENY")
-      attr_accessor use_bedrock_models: ("DENY")
-      attr_accessor perform_flow_ui_task: ("DENY")
-      attr_accessor approve_flow_share_requests: ("DENY")
-      attr_accessor use_agent_web_search: ("DENY")
-      attr_accessor knowledge_base: ("DENY")
-      attr_accessor action: ("DENY")
-      attr_accessor generic_http_action: ("DENY")
-      attr_accessor create_and_update_generic_http_action: ("DENY")
-      attr_accessor share_generic_http_action: ("DENY")
-      attr_accessor use_generic_http_action: ("DENY")
-      attr_accessor asana_action: ("DENY")
-      attr_accessor create_and_update_asana_action: ("DENY")
-      attr_accessor share_asana_action: ("DENY")
-      attr_accessor use_asana_action: ("DENY")
-      attr_accessor slack_action: ("DENY")
-      attr_accessor create_and_update_slack_action: ("DENY")
-      attr_accessor share_slack_action: ("DENY")
-      attr_accessor use_slack_action: ("DENY")
-      attr_accessor service_now_action: ("DENY")
-      attr_accessor create_and_update_service_now_action: ("DENY")
-      attr_accessor share_service_now_action: ("DENY")
-      attr_accessor use_service_now_action: ("DENY")
-      attr_accessor salesforce_action: ("DENY")
-      attr_accessor create_and_update_salesforce_action: ("DENY")
-      attr_accessor share_salesforce_action: ("DENY")
-      attr_accessor use_salesforce_action: ("DENY")
-      attr_accessor ms_exchange_action: ("DENY")
-      attr_accessor create_and_update_ms_exchange_action: ("DENY")
-      attr_accessor share_ms_exchange_action: ("DENY")
-      attr_accessor use_ms_exchange_action: ("DENY")
-      attr_accessor pager_duty_action: ("DENY")
-      attr_accessor create_and_update_pager_duty_action: ("DENY")
-      attr_accessor share_pager_duty_action: ("DENY")
-      attr_accessor use_pager_duty_action: ("DENY")
-      attr_accessor jira_action: ("DENY")
-      attr_accessor create_and_update_jira_action: ("DENY")
-      attr_accessor share_jira_action: ("DENY")
-      attr_accessor use_jira_action: ("DENY")
-      attr_accessor confluence_action: ("DENY")
-      attr_accessor create_and_update_confluence_action: ("DENY")
-      attr_accessor share_confluence_action: ("DENY")
-      attr_accessor use_confluence_action: ("DENY")
-      attr_accessor one_drive_action: ("DENY")
-      attr_accessor create_and_update_one_drive_action: ("DENY")
-      attr_accessor share_one_drive_action: ("DENY")
-      attr_accessor use_one_drive_action: ("DENY")
-      attr_accessor share_point_action: ("DENY")
-      attr_accessor create_and_update_share_point_action: ("DENY")
-      attr_accessor share_share_point_action: ("DENY")
-      attr_accessor use_share_point_action: ("DENY")
-      attr_accessor ms_teams_action: ("DENY")
-      attr_accessor create_and_update_ms_teams_action: ("DENY")
-      attr_accessor share_ms_teams_action: ("DENY")
-      attr_accessor use_ms_teams_action: ("DENY")
-      attr_accessor google_calendar_action: ("DENY")
-      attr_accessor create_and_update_google_calendar_action: ("DENY")
-      attr_accessor share_google_calendar_action: ("DENY")
-      attr_accessor use_google_calendar_action: ("DENY")
-      attr_accessor zendesk_action: ("DENY")
-      attr_accessor create_and_update_zendesk_action: ("DENY")
-      attr_accessor share_zendesk_action: ("DENY")
-      attr_accessor use_zendesk_action: ("DENY")
-      attr_accessor smartsheet_action: ("DENY")
-      attr_accessor create_and_update_smartsheet_action: ("DENY")
-      attr_accessor share_smartsheet_action: ("DENY")
-      attr_accessor use_smartsheet_action: ("DENY")
-      attr_accessor sap_business_partner_action: ("DENY")
-      attr_accessor create_and_update_sap_business_partner_action: ("DENY")
-      attr_accessor share_sap_business_partner_action: ("DENY")
-      attr_accessor use_sap_business_partner_action: ("DENY")
-      attr_accessor sap_product_master_data_action: ("DENY")
-      attr_accessor create_and_update_sap_product_master_data_action: ("DENY")
-      attr_accessor share_sap_product_master_data_action: ("DENY")
-      attr_accessor use_sap_product_master_data_action: ("DENY")
-      attr_accessor sap_physical_inventory_action: ("DENY")
-      attr_accessor create_and_update_sap_physical_inventory_action: ("DENY")
-      attr_accessor share_sap_physical_inventory_action: ("DENY")
-      attr_accessor use_sap_physical_inventory_action: ("DENY")
-      attr_accessor sap_bill_of_material_action: ("DENY")
-      attr_accessor create_and_update_sap_bill_of_material_action: ("DENY")
-      attr_accessor share_sap_bill_of_material_action: ("DENY")
-      attr_accessor use_sap_bill_of_material_action: ("DENY")
-      attr_accessor sap_material_stock_action: ("DENY")
-      attr_accessor create_and_update_sap_material_stock_action: ("DENY")
-      attr_accessor share_sap_material_stock_action: ("DENY")
-      attr_accessor use_sap_material_stock_action: ("DENY")
-      attr_accessor fact_set_action: ("DENY")
-      attr_accessor create_and_update_fact_set_action: ("DENY")
-      attr_accessor share_fact_set_action: ("DENY")
-      attr_accessor use_fact_set_action: ("DENY")
-      attr_accessor amazon_s_three_action: ("DENY")
-      attr_accessor create_and_update_amazon_s_three_action: ("DENY")
-      attr_accessor share_amazon_s_three_action: ("DENY")
-      attr_accessor use_amazon_s_three_action: ("DENY")
-      attr_accessor textract_action: ("DENY")
-      attr_accessor create_and_update_textract_action: ("DENY")
-      attr_accessor share_textract_action: ("DENY")
-      attr_accessor use_textract_action: ("DENY")
-      attr_accessor comprehend_action: ("DENY")
-      attr_accessor create_and_update_comprehend_action: ("DENY")
-      attr_accessor share_comprehend_action: ("DENY")
-      attr_accessor use_comprehend_action: ("DENY")
-      attr_accessor comprehend_medical_action: ("DENY")
-      attr_accessor create_and_update_comprehend_medical_action: ("DENY")
-      attr_accessor share_comprehend_medical_action: ("DENY")
-      attr_accessor use_comprehend_medical_action: ("DENY")
-      attr_accessor amazon_bedrock_ars_action: ("DENY")
-      attr_accessor create_and_update_amazon_bedrock_ars_action: ("DENY")
-      attr_accessor share_amazon_bedrock_ars_action: ("DENY")
-      attr_accessor use_amazon_bedrock_ars_action: ("DENY")
-      attr_accessor amazon_bedrock_fs_action: ("DENY")
-      attr_accessor create_and_update_amazon_bedrock_fs_action: ("DENY")
-      attr_accessor share_amazon_bedrock_fs_action: ("DENY")
-      attr_accessor use_amazon_bedrock_fs_action: ("DENY")
-      attr_accessor amazon_bedrock_krs_action: ("DENY")
-      attr_accessor create_and_update_amazon_bedrock_krs_action: ("DENY")
-      attr_accessor share_amazon_bedrock_krs_action: ("DENY")
-      attr_accessor use_amazon_bedrock_krs_action: ("DENY")
-      attr_accessor mcp_action: ("DENY")
-      attr_accessor create_and_update_mcp_action: ("DENY")
-      attr_accessor share_mcp_action: ("DENY")
-      attr_accessor use_mcp_action: ("DENY")
-      attr_accessor open_api_action: ("DENY")
-      attr_accessor create_and_update_open_api_action: ("DENY")
-      attr_accessor share_open_api_action: ("DENY")
-      attr_accessor use_open_api_action: ("DENY")
-      attr_accessor sand_pgmi_action: ("DENY")
-      attr_accessor create_and_update_sand_pgmi_action: ("DENY")
-      attr_accessor share_sand_pgmi_action: ("DENY")
-      attr_accessor use_sand_pgmi_action: ("DENY")
-      attr_accessor sand_p_global_energy_action: ("DENY")
-      attr_accessor create_and_update_sand_p_global_energy_action: ("DENY")
-      attr_accessor share_sand_p_global_energy_action: ("DENY")
-      attr_accessor use_sand_p_global_energy_action: ("DENY")
-      attr_accessor bamboo_hr_action: ("DENY")
-      attr_accessor create_and_update_bamboo_hr_action: ("DENY")
-      attr_accessor share_bamboo_hr_action: ("DENY")
-      attr_accessor use_bamboo_hr_action: ("DENY")
-      attr_accessor box_agent_action: ("DENY")
-      attr_accessor create_and_update_box_agent_action: ("DENY")
-      attr_accessor share_box_agent_action: ("DENY")
-      attr_accessor use_box_agent_action: ("DENY")
-      attr_accessor canva_agent_action: ("DENY")
-      attr_accessor create_and_update_canva_agent_action: ("DENY")
-      attr_accessor share_canva_agent_action: ("DENY")
-      attr_accessor use_canva_agent_action: ("DENY")
-      attr_accessor github_action: ("DENY")
-      attr_accessor create_and_update_github_action: ("DENY")
-      attr_accessor share_github_action: ("DENY")
-      attr_accessor use_github_action: ("DENY")
-      attr_accessor notion_action: ("DENY")
-      attr_accessor create_and_update_notion_action: ("DENY")
-      attr_accessor share_notion_action: ("DENY")
-      attr_accessor use_notion_action: ("DENY")
-      attr_accessor linear_action: ("DENY")
-      attr_accessor create_and_update_linear_action: ("DENY")
-      attr_accessor share_linear_action: ("DENY")
-      attr_accessor use_linear_action: ("DENY")
-      attr_accessor hugging_face_action: ("DENY")
-      attr_accessor create_and_update_hugging_face_action: ("DENY")
-      attr_accessor share_hugging_face_action: ("DENY")
-      attr_accessor use_hugging_face_action: ("DENY")
-      attr_accessor monday_action: ("DENY")
-      attr_accessor create_and_update_monday_action: ("DENY")
-      attr_accessor share_monday_action: ("DENY")
-      attr_accessor use_monday_action: ("DENY")
-      attr_accessor hubspot_action: ("DENY")
-      attr_accessor create_and_update_hubspot_action: ("DENY")
-      attr_accessor share_hubspot_action: ("DENY")
-      attr_accessor use_hubspot_action: ("DENY")
-      attr_accessor intercom_action: ("DENY")
-      attr_accessor create_and_update_intercom_action: ("DENY")
-      attr_accessor share_intercom_action: ("DENY")
-      attr_accessor use_intercom_action: ("DENY")
-      attr_accessor new_relic_action: ("DENY")
-      attr_accessor create_and_update_new_relic_action: ("DENY")
-      attr_accessor share_new_relic_action: ("DENY")
-      attr_accessor use_new_relic_action: ("DENY")
-      attr_accessor topic: ("DENY")
-      attr_accessor edit_visual_with_q: ("DENY")
-      attr_accessor build_calculated_field_with_q: ("DENY")
-      attr_accessor create_dashboard_executive_summary_with_q: ("DENY")
-      attr_accessor space: ("DENY")
-      attr_accessor create_spaces: ("DENY")
-      attr_accessor share_spaces: ("DENY")
-      attr_accessor chat_agent: ("DENY")
-      attr_accessor create_chat_agents: ("DENY")
-      attr_accessor share_chat_agents: ("DENY")
-      attr_accessor research: ("DENY")
-      attr_accessor self_upgrade_user_role: ("DENY")
-      attr_accessor extension: ("DENY")
-      attr_accessor manage_shared_folders: ("DENY")
-      attr_accessor generate_analyses: ("DENY")
-      attr_accessor story: ("DENY")
-      attr_accessor scenario: ("DENY")
+      attr_accessor export_to_csv: ("DENY" | "ALLOW")
+      attr_accessor export_to_excel: ("DENY" | "ALLOW")
+      attr_accessor export_to_pdf: ("DENY" | "ALLOW")
+      attr_accessor print_reports: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_themes: ("DENY" | "ALLOW")
+      attr_accessor add_or_run_anomaly_detection_for_analyses: ("DENY" | "ALLOW")
+      attr_accessor share_analyses: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_datasets: ("DENY" | "ALLOW")
+      attr_accessor share_datasets: ("DENY" | "ALLOW")
+      attr_accessor subscribe_dashboard_email_reports: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_dashboard_email_reports: ("DENY" | "ALLOW")
+      attr_accessor share_dashboards: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_threshold_alerts: ("DENY" | "ALLOW")
+      attr_accessor rename_shared_folders: ("DENY" | "ALLOW")
+      attr_accessor create_shared_folders: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_data_sources: ("DENY" | "ALLOW")
+      attr_accessor share_data_sources: ("DENY" | "ALLOW")
+      attr_accessor view_account_spice_capacity: ("DENY" | "ALLOW")
+      attr_accessor create_spice_dataset: ("DENY" | "ALLOW")
+      attr_accessor export_to_pdf_in_scheduled_reports: ("DENY" | "ALLOW")
+      attr_accessor export_to_csv_in_scheduled_reports: ("DENY" | "ALLOW")
+      attr_accessor export_to_excel_in_scheduled_reports: ("DENY" | "ALLOW")
+      attr_accessor include_content_in_scheduled_reports_email: ("DENY" | "ALLOW")
+      attr_accessor dashboard: ("DENY" | "ALLOW")
+      attr_accessor analysis: ("DENY" | "ALLOW")
+      attr_accessor automate: ("DENY" | "ALLOW")
+      attr_accessor flow: ("DENY" | "ALLOW")
+      attr_accessor apps: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_apps: ("DENY" | "ALLOW")
+      attr_accessor share_apps: ("DENY" | "ALLOW")
+      attr_accessor invoke_apps_ai_inference: ("DENY" | "ALLOW")
+      attr_accessor access_apps_native_data_store: ("DENY" | "ALLOW")
+      attr_accessor publish_without_approval: ("DENY" | "ALLOW")
+      attr_accessor use_bedrock_models: ("DENY" | "ALLOW")
+      attr_accessor perform_flow_ui_task: ("DENY" | "ALLOW")
+      attr_accessor approve_flow_share_requests: ("DENY" | "ALLOW")
+      attr_accessor use_agent_web_search: ("DENY" | "ALLOW")
+      attr_accessor knowledge_base: ("DENY" | "ALLOW")
+      attr_accessor action: ("DENY" | "ALLOW")
+      attr_accessor generic_http_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_generic_http_action: ("DENY" | "ALLOW")
+      attr_accessor share_generic_http_action: ("DENY" | "ALLOW")
+      attr_accessor use_generic_http_action: ("DENY" | "ALLOW")
+      attr_accessor asana_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_asana_action: ("DENY" | "ALLOW")
+      attr_accessor share_asana_action: ("DENY" | "ALLOW")
+      attr_accessor use_asana_action: ("DENY" | "ALLOW")
+      attr_accessor slack_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_slack_action: ("DENY" | "ALLOW")
+      attr_accessor share_slack_action: ("DENY" | "ALLOW")
+      attr_accessor use_slack_action: ("DENY" | "ALLOW")
+      attr_accessor service_now_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_service_now_action: ("DENY" | "ALLOW")
+      attr_accessor share_service_now_action: ("DENY" | "ALLOW")
+      attr_accessor use_service_now_action: ("DENY" | "ALLOW")
+      attr_accessor salesforce_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_salesforce_action: ("DENY" | "ALLOW")
+      attr_accessor share_salesforce_action: ("DENY" | "ALLOW")
+      attr_accessor use_salesforce_action: ("DENY" | "ALLOW")
+      attr_accessor ms_exchange_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_ms_exchange_action: ("DENY" | "ALLOW")
+      attr_accessor share_ms_exchange_action: ("DENY" | "ALLOW")
+      attr_accessor use_ms_exchange_action: ("DENY" | "ALLOW")
+      attr_accessor pager_duty_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_pager_duty_action: ("DENY" | "ALLOW")
+      attr_accessor share_pager_duty_action: ("DENY" | "ALLOW")
+      attr_accessor use_pager_duty_action: ("DENY" | "ALLOW")
+      attr_accessor jira_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_jira_action: ("DENY" | "ALLOW")
+      attr_accessor share_jira_action: ("DENY" | "ALLOW")
+      attr_accessor use_jira_action: ("DENY" | "ALLOW")
+      attr_accessor confluence_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_confluence_action: ("DENY" | "ALLOW")
+      attr_accessor share_confluence_action: ("DENY" | "ALLOW")
+      attr_accessor use_confluence_action: ("DENY" | "ALLOW")
+      attr_accessor one_drive_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_one_drive_action: ("DENY" | "ALLOW")
+      attr_accessor share_one_drive_action: ("DENY" | "ALLOW")
+      attr_accessor use_one_drive_action: ("DENY" | "ALLOW")
+      attr_accessor share_point_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_share_point_action: ("DENY" | "ALLOW")
+      attr_accessor share_share_point_action: ("DENY" | "ALLOW")
+      attr_accessor use_share_point_action: ("DENY" | "ALLOW")
+      attr_accessor ms_teams_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_ms_teams_action: ("DENY" | "ALLOW")
+      attr_accessor share_ms_teams_action: ("DENY" | "ALLOW")
+      attr_accessor use_ms_teams_action: ("DENY" | "ALLOW")
+      attr_accessor google_calendar_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_google_calendar_action: ("DENY" | "ALLOW")
+      attr_accessor share_google_calendar_action: ("DENY" | "ALLOW")
+      attr_accessor use_google_calendar_action: ("DENY" | "ALLOW")
+      attr_accessor zendesk_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_zendesk_action: ("DENY" | "ALLOW")
+      attr_accessor share_zendesk_action: ("DENY" | "ALLOW")
+      attr_accessor use_zendesk_action: ("DENY" | "ALLOW")
+      attr_accessor smartsheet_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_smartsheet_action: ("DENY" | "ALLOW")
+      attr_accessor share_smartsheet_action: ("DENY" | "ALLOW")
+      attr_accessor use_smartsheet_action: ("DENY" | "ALLOW")
+      attr_accessor sap_business_partner_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_sap_business_partner_action: ("DENY" | "ALLOW")
+      attr_accessor share_sap_business_partner_action: ("DENY" | "ALLOW")
+      attr_accessor use_sap_business_partner_action: ("DENY" | "ALLOW")
+      attr_accessor sap_product_master_data_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_sap_product_master_data_action: ("DENY" | "ALLOW")
+      attr_accessor share_sap_product_master_data_action: ("DENY" | "ALLOW")
+      attr_accessor use_sap_product_master_data_action: ("DENY" | "ALLOW")
+      attr_accessor sap_physical_inventory_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_sap_physical_inventory_action: ("DENY" | "ALLOW")
+      attr_accessor share_sap_physical_inventory_action: ("DENY" | "ALLOW")
+      attr_accessor use_sap_physical_inventory_action: ("DENY" | "ALLOW")
+      attr_accessor sap_bill_of_material_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_sap_bill_of_material_action: ("DENY" | "ALLOW")
+      attr_accessor share_sap_bill_of_material_action: ("DENY" | "ALLOW")
+      attr_accessor use_sap_bill_of_material_action: ("DENY" | "ALLOW")
+      attr_accessor sap_material_stock_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_sap_material_stock_action: ("DENY" | "ALLOW")
+      attr_accessor share_sap_material_stock_action: ("DENY" | "ALLOW")
+      attr_accessor use_sap_material_stock_action: ("DENY" | "ALLOW")
+      attr_accessor fact_set_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_fact_set_action: ("DENY" | "ALLOW")
+      attr_accessor share_fact_set_action: ("DENY" | "ALLOW")
+      attr_accessor use_fact_set_action: ("DENY" | "ALLOW")
+      attr_accessor amazon_s_three_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_amazon_s_three_action: ("DENY" | "ALLOW")
+      attr_accessor share_amazon_s_three_action: ("DENY" | "ALLOW")
+      attr_accessor use_amazon_s_three_action: ("DENY" | "ALLOW")
+      attr_accessor textract_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_textract_action: ("DENY" | "ALLOW")
+      attr_accessor share_textract_action: ("DENY" | "ALLOW")
+      attr_accessor use_textract_action: ("DENY" | "ALLOW")
+      attr_accessor comprehend_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_comprehend_action: ("DENY" | "ALLOW")
+      attr_accessor share_comprehend_action: ("DENY" | "ALLOW")
+      attr_accessor use_comprehend_action: ("DENY" | "ALLOW")
+      attr_accessor comprehend_medical_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_comprehend_medical_action: ("DENY" | "ALLOW")
+      attr_accessor share_comprehend_medical_action: ("DENY" | "ALLOW")
+      attr_accessor use_comprehend_medical_action: ("DENY" | "ALLOW")
+      attr_accessor amazon_bedrock_ars_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_amazon_bedrock_ars_action: ("DENY" | "ALLOW")
+      attr_accessor share_amazon_bedrock_ars_action: ("DENY" | "ALLOW")
+      attr_accessor use_amazon_bedrock_ars_action: ("DENY" | "ALLOW")
+      attr_accessor amazon_bedrock_fs_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_amazon_bedrock_fs_action: ("DENY" | "ALLOW")
+      attr_accessor share_amazon_bedrock_fs_action: ("DENY" | "ALLOW")
+      attr_accessor use_amazon_bedrock_fs_action: ("DENY" | "ALLOW")
+      attr_accessor amazon_bedrock_krs_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_amazon_bedrock_krs_action: ("DENY" | "ALLOW")
+      attr_accessor share_amazon_bedrock_krs_action: ("DENY" | "ALLOW")
+      attr_accessor use_amazon_bedrock_krs_action: ("DENY" | "ALLOW")
+      attr_accessor mcp_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_mcp_action: ("DENY" | "ALLOW")
+      attr_accessor share_mcp_action: ("DENY" | "ALLOW")
+      attr_accessor use_mcp_action: ("DENY" | "ALLOW")
+      attr_accessor open_api_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_open_api_action: ("DENY" | "ALLOW")
+      attr_accessor share_open_api_action: ("DENY" | "ALLOW")
+      attr_accessor use_open_api_action: ("DENY" | "ALLOW")
+      attr_accessor sand_pgmi_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_sand_pgmi_action: ("DENY" | "ALLOW")
+      attr_accessor share_sand_pgmi_action: ("DENY" | "ALLOW")
+      attr_accessor use_sand_pgmi_action: ("DENY" | "ALLOW")
+      attr_accessor sand_p_global_energy_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_sand_p_global_energy_action: ("DENY" | "ALLOW")
+      attr_accessor share_sand_p_global_energy_action: ("DENY" | "ALLOW")
+      attr_accessor use_sand_p_global_energy_action: ("DENY" | "ALLOW")
+      attr_accessor bamboo_hr_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_bamboo_hr_action: ("DENY" | "ALLOW")
+      attr_accessor share_bamboo_hr_action: ("DENY" | "ALLOW")
+      attr_accessor use_bamboo_hr_action: ("DENY" | "ALLOW")
+      attr_accessor box_agent_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_box_agent_action: ("DENY" | "ALLOW")
+      attr_accessor share_box_agent_action: ("DENY" | "ALLOW")
+      attr_accessor use_box_agent_action: ("DENY" | "ALLOW")
+      attr_accessor canva_agent_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_canva_agent_action: ("DENY" | "ALLOW")
+      attr_accessor share_canva_agent_action: ("DENY" | "ALLOW")
+      attr_accessor use_canva_agent_action: ("DENY" | "ALLOW")
+      attr_accessor github_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_github_action: ("DENY" | "ALLOW")
+      attr_accessor share_github_action: ("DENY" | "ALLOW")
+      attr_accessor use_github_action: ("DENY" | "ALLOW")
+      attr_accessor notion_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_notion_action: ("DENY" | "ALLOW")
+      attr_accessor share_notion_action: ("DENY" | "ALLOW")
+      attr_accessor use_notion_action: ("DENY" | "ALLOW")
+      attr_accessor linear_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_linear_action: ("DENY" | "ALLOW")
+      attr_accessor share_linear_action: ("DENY" | "ALLOW")
+      attr_accessor use_linear_action: ("DENY" | "ALLOW")
+      attr_accessor hugging_face_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_hugging_face_action: ("DENY" | "ALLOW")
+      attr_accessor share_hugging_face_action: ("DENY" | "ALLOW")
+      attr_accessor use_hugging_face_action: ("DENY" | "ALLOW")
+      attr_accessor monday_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_monday_action: ("DENY" | "ALLOW")
+      attr_accessor share_monday_action: ("DENY" | "ALLOW")
+      attr_accessor use_monday_action: ("DENY" | "ALLOW")
+      attr_accessor hubspot_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_hubspot_action: ("DENY" | "ALLOW")
+      attr_accessor share_hubspot_action: ("DENY" | "ALLOW")
+      attr_accessor use_hubspot_action: ("DENY" | "ALLOW")
+      attr_accessor intercom_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_intercom_action: ("DENY" | "ALLOW")
+      attr_accessor share_intercom_action: ("DENY" | "ALLOW")
+      attr_accessor use_intercom_action: ("DENY" | "ALLOW")
+      attr_accessor new_relic_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_new_relic_action: ("DENY" | "ALLOW")
+      attr_accessor share_new_relic_action: ("DENY" | "ALLOW")
+      attr_accessor use_new_relic_action: ("DENY" | "ALLOW")
+      attr_accessor topic: ("DENY" | "ALLOW")
+      attr_accessor edit_visual_with_q: ("DENY" | "ALLOW")
+      attr_accessor build_calculated_field_with_q: ("DENY" | "ALLOW")
+      attr_accessor create_dashboard_executive_summary_with_q: ("DENY" | "ALLOW")
+      attr_accessor space: ("DENY" | "ALLOW")
+      attr_accessor create_spaces: ("DENY" | "ALLOW")
+      attr_accessor share_spaces: ("DENY" | "ALLOW")
+      attr_accessor chat_agent: ("DENY" | "ALLOW")
+      attr_accessor create_chat_agents: ("DENY" | "ALLOW")
+      attr_accessor share_chat_agents: ("DENY" | "ALLOW")
+      attr_accessor research: ("DENY" | "ALLOW")
+      attr_accessor self_upgrade_user_role: ("DENY" | "ALLOW")
+      attr_accessor extension: ("DENY" | "ALLOW")
+      attr_accessor use_browser_extension: ("DENY" | "ALLOW")
+      attr_accessor use_word_add_in_extension: ("DENY" | "ALLOW")
+      attr_accessor use_outlook_add_in_extension: ("DENY" | "ALLOW")
+      attr_accessor use_excel_add_in_extension: ("DENY" | "ALLOW")
+      attr_accessor use_powerpoint_add_in_extension: ("DENY" | "ALLOW")
+      attr_accessor manage_shared_folders: ("DENY" | "ALLOW")
+      attr_accessor generate_analyses: ("DENY" | "ALLOW")
+      attr_accessor story: ("DENY" | "ALLOW")
+      attr_accessor scenario: ("DENY" | "ALLOW")
+      attr_accessor trigger: ("DENY" | "ALLOW")
+      attr_accessor schedule_trigger: ("DENY" | "ALLOW")
+      attr_accessor inbound_email_trigger: ("DENY" | "ALLOW")
+      attr_accessor quick_event_trigger: ("DENY" | "ALLOW")
       SENSITIVE: []
     end
 
@@ -2109,6 +2123,7 @@ module Aws::QuickSight
       attr_accessor aws_account_id: ::String
       attr_accessor custom_permissions_name: ::String
       attr_accessor capabilities: Types::Capabilities
+      attr_accessor governance: Types::Governance
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -2323,6 +2338,30 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor ingestion_id: ::String
       attr_accessor ingestion_status: ("INITIALIZED" | "QUEUED" | "RUNNING" | "FAILED" | "COMPLETED" | "CANCELLED")
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateKnowledgeBaseRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor name: ::String
+      attr_accessor data_source_arn: ::String
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
+      attr_accessor description: ::String
+      attr_accessor permissions: ::Array[Types::ResourcePermission]
+      attr_accessor media_extraction_configuration: Types::MediaExtractionConfiguration
+      attr_accessor access_control_configuration: Types::AccessControlConfiguration
+      attr_accessor primary_owner_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:knowledge_base_configuration]
+    end
+
+    class CreateKnowledgeBaseResponse
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor creation_status: ("CREATING" | "UPDATING" | "ACTIVE" | "FAILED" | "DELETING")
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
@@ -2676,6 +2715,7 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor custom_permissions_name: ::String
       attr_accessor capabilities: Types::Capabilities
+      attr_accessor governance: Types::Governance
       SENSITIVE: []
     end
 
@@ -3230,6 +3270,8 @@ module Aws::QuickSight
       attr_accessor ssl_properties: Types::SslProperties
       attr_accessor error_info: Types::DataSourceErrorInfo
       attr_accessor secret_arn: ::String
+      attr_accessor credential_status: ("CONNECTED" | "AUTH_FAILED" | "NOT_VERIFIED")
+      attr_accessor last_credential_verified_at: ::Time
       SENSITIVE: []
     end
 
@@ -3283,6 +3325,10 @@ module Aws::QuickSight
       attr_accessor web_crawler_parameters: Types::WebCrawlerParameters
       attr_accessor confluence_parameters: Types::ConfluenceParameters
       attr_accessor q_business_parameters: Types::QBusinessParameters
+      attr_accessor share_point_parameters: Types::SharePointParameters
+      attr_accessor google_drive_parameters: Types::GoogleDriveParameters
+      attr_accessor one_drive_parameters: Types::OneDriveParameters
+      attr_accessor fmkb_parameters: Types::FMKBParameters
       SENSITIVE: []
     end
 
@@ -3852,7 +3898,7 @@ module Aws::QuickSight
 
     class DeleteIdentityPropagationConfigRequest
       attr_accessor aws_account_id: ::String
-      attr_accessor service: ("REDSHIFT" | "QBUSINESS" | "ATHENA")
+      attr_accessor service: ("REDSHIFT" | "QBUSINESS" | "ATHENA" | "GLUE_DATA_CATALOG")
       SENSITIVE: []
     end
 
@@ -5216,6 +5262,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class FMKBParameters
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor linked_data_source_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class FailedKeyRegistrationEntry
       attr_accessor key_arn: ::String
       attr_accessor message: ::String
@@ -5293,6 +5345,14 @@ module Aws::QuickSight
       attr_accessor label: ::String
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor tooltip_target: ("BOTH" | "BAR" | "LINE")
+      SENSITIVE: []
+    end
+
+    class FileSource
+      attr_accessor data_source_arn: ::String
+      attr_accessor upload_settings: Types::UploadSettings
+      attr_accessor sheet_index: ::Integer
+      attr_accessor input_columns: ::Array[Types::InputColumn]
       SENSITIVE: []
     end
 
@@ -6275,6 +6335,16 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class GoogleDriveParameters
+      attr_accessor auth_type: ("THREE_LEGGED_OAUTH" | "TWO_LEGGED_OAUTH" | "SERVICE_ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class Governance
+      attr_accessor default_category_effects: ::Hash[::String, ("DENY_BY_DEFAULT")]
+      SENSITIVE: []
+    end
+
     class GradientColor
       attr_accessor stops: ::Array[Types::GradientStop]
       SENSITIVE: []
@@ -6898,6 +6968,7 @@ module Aws::QuickSight
       attr_accessor data_source_arn: ::String
       attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor media_extraction_configuration: Types::MediaExtractionConfiguration
+      attr_accessor access_control_configuration: Types::AccessControlConfiguration
       attr_accessor type: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -6915,7 +6986,6 @@ module Aws::QuickSight
 
     class KnowledgeBaseConfiguration
       attr_accessor template_configuration: Types::KbTemplateConfiguration
-      attr_accessor event_enabled: bool
       SENSITIVE: []
     end
 
@@ -6928,7 +6998,7 @@ module Aws::QuickSight
     end
 
     class KnowledgeBaseSearchFilter
-      attr_accessor name: ("KNOWLEDGE_BASE_ID" | "KNOWLEDGE_BASE_NAME" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "KNOWLEDGE_BASE_SIZE_BYTES" | "PRIMARY_OWNER")
+      attr_accessor name: ("KNOWLEDGE_BASE_ID" | "KNOWLEDGE_BASE_NAME" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "KNOWLEDGE_BASE_SIZE_BYTES" | "PRIMARY_OWNER" | "DATASOURCE_ARN")
       attr_accessor operator: ("STRING_EQUALS" | "STRING_LIKE" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN_OR_EQUALS")
       attr_accessor value: ::String
       SENSITIVE: []
@@ -8174,6 +8244,13 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class OneDriveParameters
+      attr_accessor tenant_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor auth_type: ("THREE_LEGGED_OAUTH" | "TWO_LEGGED_OAUTH" | "SERVICE_ACCOUNT")
+      SENSITIVE: []
+    end
+
     class OracleParameters
       attr_accessor host: ::String
       attr_accessor port: ::Integer
@@ -8395,6 +8472,7 @@ module Aws::QuickSight
       attr_accessor custom_sql: Types::CustomSql
       attr_accessor s3_source: Types::S3Source
       attr_accessor saa_s_table: Types::SaaSTable
+      attr_accessor file_source: Types::FileSource
       SENSITIVE: []
     end
 
@@ -9813,6 +9891,14 @@ module Aws::QuickSight
 
     class ShapeConditionalFormat
       attr_accessor background_color: Types::ConditionalFormattingColor
+      SENSITIVE: []
+    end
+
+    class SharePointParameters
+      attr_accessor share_point_domain: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor auth_type: ("THREE_LEGGED_OAUTH" | "TWO_LEGGED_OAUTH" | "SERVICE_ACCOUNT")
       SENSITIVE: []
     end
 
@@ -11727,6 +11813,7 @@ module Aws::QuickSight
       attr_accessor aws_account_id: ::String
       attr_accessor custom_permissions_name: ::String
       attr_accessor capabilities: Types::Capabilities
+      attr_accessor governance: Types::Governance
       SENSITIVE: []
     end
 
@@ -12024,7 +12111,7 @@ module Aws::QuickSight
 
     class UpdateIdentityPropagationConfigRequest
       attr_accessor aws_account_id: ::String
-      attr_accessor service: ("REDSHIFT" | "QBUSINESS" | "ATHENA")
+      attr_accessor service: ("REDSHIFT" | "QBUSINESS" | "ATHENA" | "GLUE_DATA_CATALOG")
       attr_accessor authorized_targets: ::Array[::String]
       SENSITIVE: []
     end
@@ -12076,6 +12163,26 @@ module Aws::QuickSight
       attr_accessor knowledge_base_arn: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor permissions: ::Array[Types::ResourcePermission]
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateKnowledgeBaseRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
+      attr_accessor media_extraction_configuration: Types::MediaExtractionConfiguration
+      attr_accessor is_email_notification_opted_for_ingestion_failures: bool
+      attr_accessor access_control_configuration: Types::AccessControlConfiguration
+      SENSITIVE: [:knowledge_base_configuration]
+    end
+
+    class UpdateKnowledgeBaseResponse
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []

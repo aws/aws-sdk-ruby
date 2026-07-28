@@ -1099,6 +1099,20 @@
         {"shape":"ConflictException"}
       ]
     },
+    "PutAccountPricingAttributes":{
+      "name":"PutAccountPricingAttributes",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/v2/email/account/pricing-attributes"
+      },
+      "input":{"shape":"PutAccountPricingAttributesRequest"},
+      "output":{"shape":"PutAccountPricingAttributesResponse"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ConflictException"}
+      ]
+    },
     "PutAccountSendingAttributes":{
       "name":"PutAccountSendingAttributes",
       "http":{
@@ -2709,7 +2723,9 @@
         "AWS_SES_AP_SOUTH_2",
         "AWS_SES_EU_CENTRAL_2",
         "AWS_SES_AP_SOUTHEAST_5",
-        "AWS_SES_CA_WEST_1"
+        "AWS_SES_CA_WEST_1",
+        "AWS_SES_US_GOV_EAST_1",
+        "AWS_SES_US_GOV_WEST_1"
       ]
     },
     "DkimSigningKeyLength":{
@@ -3072,7 +3088,8 @@
         "SendingEnabled":{"shape":"Enabled"},
         "SuppressionAttributes":{"shape":"SuppressionAttributes"},
         "Details":{"shape":"AccountDetails"},
-        "VdmAttributes":{"shape":"VdmAttributes"}
+        "VdmAttributes":{"shape":"VdmAttributes"},
+        "PricingAttributes":{"shape":"PricingAttributes"}
       }
     },
     "GetBlacklistReportsRequest":{
@@ -4569,6 +4586,22 @@
       "min":1
     },
     "PoolName":{"type":"string"},
+    "PricingAttributes":{
+      "type":"structure",
+      "members":{
+        "CurrentPlan":{"shape":"PricingPlan"},
+        "NextPlan":{"shape":"PricingPlan"}
+      }
+    },
+    "PricingPlan":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "ESSENTIALS",
+        "PRO",
+        "ENTERPRISE"
+      ]
+    },
     "PrimaryNameServer":{"type":"string"},
     "PrivateKey":{
       "type":"string",
@@ -4604,6 +4637,17 @@
       }
     },
     "PutAccountDetailsResponse":{
+      "type":"structure",
+      "members":{}
+    },
+    "PutAccountPricingAttributesRequest":{
+      "type":"structure",
+      "required":["Plan"],
+      "members":{
+        "Plan":{"shape":"PricingPlan"}
+      }
+    },
+    "PutAccountPricingAttributesResponse":{
       "type":"structure",
       "members":{}
     },

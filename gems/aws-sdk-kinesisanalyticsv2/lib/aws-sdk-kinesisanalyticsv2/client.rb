@@ -1035,7 +1035,7 @@ module Aws::KinesisAnalyticsV2
     #   resp = client.create_application({
     #     application_name: "ApplicationName", # required
     #     application_description: "ApplicationDescription",
-    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0, FLINK-1_15, ZEPPELIN-FLINK-3_0, FLINK-1_18, FLINK-1_19, FLINK-1_20, FLINK-2_2
+    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0, FLINK-1_15, ZEPPELIN-FLINK-3_0, FLINK-1_18, FLINK-1_19, FLINK-1_20, FLINK-2_2, FLINK-2_3
     #     service_execution_role: "RoleARN", # required
     #     application_configuration: {
     #       sql_application_configuration: {
@@ -1237,7 +1237,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -1787,7 +1787,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -1983,7 +1983,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.snapshot_details.snapshot_status #=> String, one of "CREATING", "READY", "DELETING", "FAILED"
     #   resp.snapshot_details.application_version_id #=> Integer
     #   resp.snapshot_details.snapshot_creation_timestamp #=> Time
-    #   resp.snapshot_details.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2"
+    #   resp.snapshot_details.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"
     #   resp.snapshot_details.application_encryption_configuration_description.key_id #=> String
     #   resp.snapshot_details.application_encryption_configuration_description.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
     #
@@ -2028,7 +2028,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_version_detail.application_arn #=> String
     #   resp.application_version_detail.application_description #=> String
     #   resp.application_version_detail.application_name #=> String
-    #   resp.application_version_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2"
+    #   resp.application_version_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"
     #   resp.application_version_detail.service_execution_role #=> String
     #   resp.application_version_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_version_detail.application_version_id #=> Integer
@@ -2334,7 +2334,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.snapshot_summaries[0].snapshot_status #=> String, one of "CREATING", "READY", "DELETING", "FAILED"
     #   resp.snapshot_summaries[0].application_version_id #=> Integer
     #   resp.snapshot_summaries[0].snapshot_creation_timestamp #=> Time
-    #   resp.snapshot_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2"
+    #   resp.snapshot_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"
     #   resp.snapshot_summaries[0].application_encryption_configuration_description.key_id #=> String
     #   resp.snapshot_summaries[0].application_encryption_configuration_description.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
     #   resp.next_token #=> String
@@ -2448,7 +2448,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_summaries[0].application_arn #=> String
     #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_summaries[0].application_version_id #=> Integer
-    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2"
+    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"
     #   resp.application_summaries[0].application_mode #=> String, one of "STREAMING", "INTERACTIVE"
     #   resp.next_token #=> String
     #
@@ -2531,7 +2531,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -3096,7 +3096,7 @@ module Aws::KinesisAnalyticsV2
     #       },
     #     ],
     #     conditional_token: "ConditionalToken",
-    #     runtime_environment_update: "SQL-1_0", # accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0, FLINK-1_15, ZEPPELIN-FLINK-3_0, FLINK-1_18, FLINK-1_19, FLINK-1_20, FLINK-2_2
+    #     runtime_environment_update: "SQL-1_0", # accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0, FLINK-1_15, ZEPPELIN-FLINK-3_0, FLINK-1_18, FLINK-1_19, FLINK-1_20, FLINK-2_2, FLINK-2_3
     #   })
     #
     # @example Response structure
@@ -3104,7 +3104,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -3313,7 +3313,7 @@ module Aws::KinesisAnalyticsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

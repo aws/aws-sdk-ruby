@@ -50,6 +50,21 @@ module Aws::MediaTailor
       SENSITIVE: []
     end
 
+    class AdsPersonalizationConcurrency
+      attr_accessor max_concurrent_ads_requests: ::Integer
+      attr_accessor enable_vod_vast_parallelization: bool
+      SENSITIVE: []
+    end
+
+    class AdsPersonalizationTimeouts
+      attr_accessor ads_request_timeout_milliseconds: ::Integer
+      attr_accessor live_maximum_ads_personalization_time_milliseconds: ::Integer
+      attr_accessor vod_maximum_ads_personalization_time_milliseconds: ::Integer
+      attr_accessor prefetch_ads_request_timeout_milliseconds: ::Integer
+      attr_accessor prefetch_maximum_ads_personalization_time_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
     class Alert
       attr_accessor alert_code: ::String
       attr_accessor alert_message: ::String
@@ -311,6 +326,7 @@ module Aws::MediaTailor
 
     class DashConfiguration
       attr_accessor manifest_endpoint_prefix: ::String
+      attr_accessor dual_stack_manifest_endpoint_prefix: ::String
       attr_accessor mpd_location: ::String
       attr_accessor origin_manifest_type: ("SINGLE_PERIOD" | "MULTI_PERIOD")
       SENSITIVE: []
@@ -590,7 +606,9 @@ module Aws::MediaTailor
       attr_accessor personalization_threshold_seconds: ::Integer
       attr_accessor playback_configuration_arn: ::String
       attr_accessor playback_endpoint_prefix: ::String
+      attr_accessor dual_stack_playback_endpoint_prefix: ::String
       attr_accessor session_initialization_endpoint_prefix: ::String
+      attr_accessor dual_stack_session_initialization_endpoint_prefix: ::String
       attr_accessor slate_ad_url: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor transcode_profile_name: ::String
@@ -598,6 +616,8 @@ module Aws::MediaTailor
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
       attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
+      attr_accessor ads_personalization_timeouts: Types::AdsPersonalizationTimeouts
+      attr_accessor ads_personalization_concurrency: Types::AdsPersonalizationConcurrency
       SENSITIVE: []
     end
 
@@ -622,6 +642,7 @@ module Aws::MediaTailor
 
     class HlsConfiguration
       attr_accessor manifest_endpoint_prefix: ::String
+      attr_accessor dual_stack_manifest_endpoint_prefix: ::String
       SENSITIVE: []
     end
 
@@ -837,7 +858,9 @@ module Aws::MediaTailor
       attr_accessor personalization_threshold_seconds: ::Integer
       attr_accessor playback_configuration_arn: ::String
       attr_accessor playback_endpoint_prefix: ::String
+      attr_accessor dual_stack_playback_endpoint_prefix: ::String
       attr_accessor session_initialization_endpoint_prefix: ::String
+      attr_accessor dual_stack_session_initialization_endpoint_prefix: ::String
       attr_accessor slate_ad_url: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor transcode_profile_name: ::String
@@ -845,6 +868,8 @@ module Aws::MediaTailor
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
       attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
+      attr_accessor ads_personalization_timeouts: Types::AdsPersonalizationTimeouts
+      attr_accessor ads_personalization_concurrency: Types::AdsPersonalizationConcurrency
       SENSITIVE: []
     end
 
@@ -929,6 +954,8 @@ module Aws::MediaTailor
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
       attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
+      attr_accessor ads_personalization_timeouts: Types::AdsPersonalizationTimeouts
+      attr_accessor ads_personalization_concurrency: Types::AdsPersonalizationConcurrency
       SENSITIVE: []
     end
 
@@ -948,7 +975,9 @@ module Aws::MediaTailor
       attr_accessor personalization_threshold_seconds: ::Integer
       attr_accessor playback_configuration_arn: ::String
       attr_accessor playback_endpoint_prefix: ::String
+      attr_accessor dual_stack_playback_endpoint_prefix: ::String
       attr_accessor session_initialization_endpoint_prefix: ::String
+      attr_accessor dual_stack_session_initialization_endpoint_prefix: ::String
       attr_accessor slate_ad_url: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor transcode_profile_name: ::String
@@ -956,6 +985,8 @@ module Aws::MediaTailor
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
       attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
+      attr_accessor ads_personalization_timeouts: Types::AdsPersonalizationTimeouts
+      attr_accessor ads_personalization_concurrency: Types::AdsPersonalizationConcurrency
       SENSITIVE: []
     end
 
@@ -995,6 +1026,7 @@ module Aws::MediaTailor
       attr_accessor hls_playlist_settings: Types::HlsPlaylistSettings
       attr_accessor manifest_name: ::String
       attr_accessor playback_url: ::String
+      attr_accessor dual_stack_playback_url: ::String
       attr_accessor source_group: ::String
       SENSITIVE: []
     end

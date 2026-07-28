@@ -44,6 +44,21 @@ module Aws
       rule_set_categories: Array[("SAST" | "IAC" | "SCA")]
     }
 
+      type azure_scope_configuration_input = {
+      vm_scanning: {
+        scope_type: ("TENANT" | "SUBSCRIPTION"),
+        scope_values: Array[::String]?
+      }?,
+      container_image_scanning: {
+        scope_type: ("TENANT" | "SUBSCRIPTION"),
+        scope_values: Array[::String]?
+      }?,
+      serverless_scanning: {
+        scope_type: ("TENANT" | "SUBSCRIPTION"),
+        scope_values: Array[::String]?
+      }?
+    }
+
       type filter_criteria = {
       finding_arn: Array[
         {
@@ -318,6 +333,120 @@ module Aws
           comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
           value: ::String
         }
+      ]?,
+      cloud_provider: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_provider_region: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_provider_account_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_provider_org_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_vm_image_reference: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_vm_network_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_vm_subnet_ids: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_image_repository_name: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_image_registry: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_image_digest: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_image_tags: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_image_pushed_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      cloud_image_architecture: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_image_last_in_use_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      cloud_image_in_use_count: Array[
+        {
+          upper_inclusive: ::Float?,
+          lower_inclusive: ::Float?
+        }
+      ]?,
+      cloud_serverless_function_name: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_serverless_function_runtime: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_serverless_function_last_modified_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      cloud_serverless_function_execution_role: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
       ]?
     }
 
@@ -480,6 +609,74 @@ module Aws
         }
       ]?,
       last_scanned_commit_id: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_provider: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_provider_account_id: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_provider_region: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_vm_instance_tags: Array[
+        {
+          comparison: ("EQUALS"),
+          key: ::String,
+          value: ::String?
+        }
+      ]?,
+      cloud_container_image_tags: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_container_repository_name: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_container_registry_name: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_serverless_function_name: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_serverless_function_runtime: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      cloud_serverless_function_tags: Array[
+        {
+          comparison: ("EQUALS"),
+          key: ::String,
+          value: ::String?
+        }
+      ]?,
+      cloud_provider_org_id: Array[
         {
           comparison: ("EQUALS" | "NOT_EQUALS"),
           value: ::String

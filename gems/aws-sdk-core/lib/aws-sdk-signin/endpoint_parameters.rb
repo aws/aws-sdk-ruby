@@ -35,12 +35,18 @@ module Aws::Signin
   #
   #   @return [boolean]
   #
+  # @!attribute is_o_auth_endpoint
+  #   Indicates if the operation targets the OAuth token endpoint
+  #
+  #   @return [boolean]
+  #
   EndpointParameters = Struct.new(
     :use_dual_stack,
     :use_fips,
     :endpoint,
     :region,
     :is_control_plane,
+    :is_o_auth_endpoint,
   ) do
     include Aws::Structure
 
@@ -52,6 +58,7 @@ module Aws::Signin
         'Endpoint' => :endpoint,
         'Region' => :region,
         'IsControlPlane' => :is_control_plane,
+        'IsOAuthEndpoint' => :is_o_auth_endpoint,
       }.freeze
     end
 
@@ -63,6 +70,7 @@ module Aws::Signin
       self[:endpoint] = options[:endpoint]
       self[:region] = options[:region]
       self[:is_control_plane] = options[:is_control_plane]
+      self[:is_o_auth_endpoint] = options[:is_o_auth_endpoint]
     end
 
     def self.create(config, options={})

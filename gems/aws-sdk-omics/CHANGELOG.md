@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2026-07-16)
+------------------
+
+* Feature - Adds support for returning the task UUID (universally unique identifier) in GetRunTask and ListRunTasks responses
+
+1.75.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.74.0 (2026-06-22)
 ------------------
 

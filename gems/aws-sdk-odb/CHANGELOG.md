@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2026-07-24)
+------------------
+
+* Feature - Documentation-only update to clarify the operation-specific valid values for the externalIdType field.
+
+1.25.0 (2026-07-17)
+------------------
+
+* Feature - Adds support for sourcing Autonomous Database admin and wallet passwords from customer-managed AWS Secrets Manager secrets, including password source configuration and summaries, and enabling or disabling the OCI IAM service role for Secrets Manager integration via InitializeService.
+
+1.24.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2026-07-02)
+------------------
+
+* Feature - Updated model definitions for ODB service.
+
 1.22.0 (2026-06-09)
 ------------------
 

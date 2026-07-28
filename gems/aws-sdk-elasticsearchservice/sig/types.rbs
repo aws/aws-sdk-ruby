@@ -285,6 +285,8 @@ module Aws::ElasticsearchService
       attr_accessor tag_list: ::Array[Types::Tag]
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
       attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions
+      attr_accessor use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED")
+      attr_accessor engine_mode: ("GENERAL" | "OPTIMIZED")
       SENSITIVE: []
     end
 
@@ -665,6 +667,8 @@ module Aws::ElasticsearchService
       attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptionsStatus
       attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptionsStatus
+      attr_accessor use_case: Types::UseCaseStatus
+      attr_accessor engine_mode: Types::EngineModeStatus
       SENSITIVE: []
     end
 
@@ -698,6 +702,8 @@ module Aws::ElasticsearchService
       attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
       attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptions
+      attr_accessor use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED")
+      attr_accessor engine_mode: ("GENERAL" | "OPTIMIZED")
       SENSITIVE: []
     end
 
@@ -715,6 +721,12 @@ module Aws::ElasticsearchService
 
     class EncryptionAtRestOptionsStatus
       attr_accessor options: Types::EncryptionAtRestOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class EngineModeStatus
+      attr_accessor options: ("GENERAL" | "OPTIMIZED")
       attr_accessor status: Types::OptionStatus
       SENSITIVE: []
     end
@@ -1202,6 +1214,8 @@ module Aws::ElasticsearchService
       attr_accessor dry_run: bool
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
       attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions
+      attr_accessor use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED")
+      attr_accessor engine_mode: ("GENERAL" | "OPTIMIZED")
       SENSITIVE: []
     end
 
@@ -1263,6 +1277,12 @@ module Aws::ElasticsearchService
       attr_accessor upgrade_step_status: ("IN_PROGRESS" | "SUCCEEDED" | "SUCCEEDED_WITH_ISSUES" | "FAILED")
       attr_accessor issues: ::Array[::String]
       attr_accessor progress_percent: ::Float
+      SENSITIVE: []
+    end
+
+    class UseCaseStatus
+      attr_accessor options: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED")
+      attr_accessor status: Types::OptionStatus
       SENSITIVE: []
     end
 

@@ -513,6 +513,8 @@ module Aws::OpenSearchService
       attr_accessor aiml_options: Types::AIMLOptionsInput
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
       attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions
+      attr_accessor use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED")
+      attr_accessor engine_mode: ("GENERAL" | "OPTIMIZED")
       SENSITIVE: []
     end
 
@@ -1040,6 +1042,8 @@ module Aws::OpenSearchService
       attr_accessor aiml_options: Types::AIMLOptionsStatus
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptionsStatus
       attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptionsStatus
+      attr_accessor use_case: Types::UseCaseStatus
+      attr_accessor engine_mode: Types::EngineModeStatus
       SENSITIVE: []
     end
 
@@ -1145,6 +1149,8 @@ module Aws::OpenSearchService
       attr_accessor aiml_options: Types::AIMLOptionsOutput
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
       attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptions
+      attr_accessor use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED")
+      attr_accessor engine_mode: ("GENERAL" | "OPTIMIZED")
       SENSITIVE: []
     end
 
@@ -1196,6 +1202,12 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class EngineModeStatus
+      attr_accessor options: ("GENERAL" | "OPTIMIZED")
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
     class EnvironmentInfo
       attr_accessor availability_zone_information: ::Array[Types::AvailabilityZoneInfo]
       SENSITIVE: []
@@ -1204,6 +1216,13 @@ module Aws::OpenSearchService
     class ErrorDetails
       attr_accessor error_type: ::String
       attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ExportOptions
+      attr_accessor types: ::Array[::String]
+      attr_accessor objects: ::Array[Types::SavedObjectIdentifier]
+      attr_accessor include_references_deep: bool
       SENSITIVE: []
     end
 
@@ -1319,6 +1338,24 @@ module Aws::OpenSearchService
 
     class GetIndexResponse
       attr_accessor index_schema: untyped
+      SENSITIVE: []
+    end
+
+    class GetMigrationRequest
+      attr_accessor migration_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMigrationResponse
+      attr_accessor migration_id: ::String
+      attr_accessor status: ::String
+      attr_accessor application_id: ::String
+      attr_accessor source: Types::MigrationSource
+      attr_accessor exported_count: ::Integer
+      attr_accessor imported_count: ::Integer
+      attr_accessor error: Types::MigrationError
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -1452,6 +1489,25 @@ module Aws::OpenSearchService
     class InsightEntity
       attr_accessor type: ("Account" | "DomainName")
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class InsightFeedbackEntity
+      attr_accessor type: ("DomainName")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class InsightFeedbackRequest
+      attr_accessor entity: Types::InsightFeedbackEntity
+      attr_accessor insight_id: ::String
+      attr_accessor thumbs: ("Up" | "Down")
+      attr_accessor feedback_text: ::String
+      SENSITIVE: []
+    end
+
+    class InsightFeedbackResponse
+      attr_accessor status: ("SUCCESS" | "ERROR")
       SENSITIVE: []
     end
 
@@ -1650,6 +1706,20 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class ListMigrationsRequest
+      attr_accessor application_id: ::String
+      attr_accessor status: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMigrationsResponse
+      attr_accessor migrations: ::Array[Types::MigrationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListPackagesForDomainRequest
       attr_accessor domain_name: ::String
       attr_accessor max_results: ::Integer
@@ -1750,6 +1820,46 @@ module Aws::OpenSearchService
       attr_accessor master_user_name: ::String
       attr_accessor master_user_password: ::String
       SENSITIVE: [:master_user_name, :master_user_password]
+    end
+
+    class MigrationError
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MigrationOptions
+      attr_accessor source: Types::MigrationSource
+      attr_accessor workspace: Types::MigrationWorkspace
+      attr_accessor export_options: Types::ExportOptions
+      attr_accessor conflict_resolution: ::String
+      SENSITIVE: []
+    end
+
+    class MigrationSource
+      attr_accessor datasource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MigrationSummary
+      attr_accessor migration_id: ::String
+      attr_accessor status: ::String
+      attr_accessor application_id: ::String
+      attr_accessor source: Types::MigrationSource
+      attr_accessor exported_count: ::Integer
+      attr_accessor imported_count: ::Integer
+      attr_accessor error: Types::MigrationError
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class MigrationWorkspace
+      attr_accessor workspace_id: ::String
+      attr_accessor create_workspace: bool
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
     end
 
     class ModifyingProperties
@@ -2081,6 +2191,12 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class SavedObjectIdentifier
+      attr_accessor type: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
     class ScheduledAction
       attr_accessor id: ::String
       attr_accessor type: ("SERVICE_SOFTWARE_UPDATE" | "JVM_HEAP_SIZE_TUNING" | "JVM_YOUNG_GEN_TUNING")
@@ -2169,6 +2285,19 @@ module Aws::OpenSearchService
 
     class StartDomainMaintenanceResponse
       attr_accessor maintenance_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMigrationRequest
+      attr_accessor application_id: ::String
+      attr_accessor migration_options: Types::MigrationOptions
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartMigrationResponse
+      attr_accessor migration_id: ::String
+      attr_accessor status: ::String
       SENSITIVE: []
     end
 
@@ -2278,6 +2407,8 @@ module Aws::OpenSearchService
       attr_accessor aiml_options: Types::AIMLOptionsInput
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
       attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions
+      attr_accessor use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED")
+      attr_accessor engine_mode: ("GENERAL" | "OPTIMIZED")
       SENSITIVE: []
     end
 
@@ -2385,6 +2516,12 @@ module Aws::OpenSearchService
       attr_accessor upgrade_step_status: ("IN_PROGRESS" | "SUCCEEDED" | "SUCCEEDED_WITH_ISSUES" | "FAILED")
       attr_accessor issues: ::Array[::String]
       attr_accessor progress_percent: ::Float
+      SENSITIVE: []
+    end
+
+    class UseCaseStatus
+      attr_accessor options: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED")
+      attr_accessor status: Types::OptionStatus
       SENSITIVE: []
     end
 

@@ -861,6 +861,9 @@ module Aws::GameLift
     #
     #   * `UPDATING` -- Updates to the container fleet is being updated. A
     #     deployment is in progress.
+    #
+    #   * `EXPIRED` -- The container fleet has been expired. The fleet is
+    #     scaled down to zero instances and cannot host new game sessions.
     #   @return [String]
     #
     # @!attribute [rw] deployment_details
@@ -951,6 +954,9 @@ module Aws::GameLift
     #
     #   * `UPDATING` -- Updates to the container fleet is being updated. A
     #     deployment is in progress.
+    #
+    #   * `EXPIRED` -- The container fleet has been expired. The fleet is
+    #     scaled down to zero instances and cannot host new game sessions.
     #   @return [String]
     #
     # @!attribute [rw] player_gateway_status
@@ -4398,7 +4404,7 @@ module Aws::GameLift
     class DescribeFleetEventsOutput < Struct.new(
       :events,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:events]
       include Aws::Structure
     end
 
@@ -5766,6 +5772,9 @@ module Aws::GameLift
     #
     #   * FLEET\_DELETED -- A request to delete a fleet was initiated.
     #
+    #   * FLEET\_EXPIRED -- The fleet has been expired. The fleet is scaled
+    #     down to zero instances and can no longer host game sessions.
+    #
     #   * GENERIC\_EVENT -- An unspecified event has occurred.
     #
     #
@@ -5928,6 +5937,9 @@ module Aws::GameLift
     #
     #   * ERROR -- An error occurred when downloading, validating, building,
     #     or activating the fleet.
+    #
+    #   * EXPIRED -- The fleet has been expired. The fleet is scaled down to
+    #     zero instances and cannot host new game sessions.
     #
     #   * DELETING -- Hosts are responding to a delete fleet request.
     #

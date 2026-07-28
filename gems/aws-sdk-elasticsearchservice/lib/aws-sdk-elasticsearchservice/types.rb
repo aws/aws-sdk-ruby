@@ -1052,6 +1052,16 @@ module Aws::ElasticsearchService
     #   Maximum suspension duration: 3 days.
     #   @return [Types::AutomatedSnapshotPauseRequestOptions]
     #
+    # @!attribute [rw] use_case
+    #   The primary use case for the domain. For valid values, see
+    #   `DomainUseCase`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_mode
+    #   The engine mode for the domain. For valid values and requirements,
+    #   see `DomainEngineMode`.
+    #   @return [String]
+    #
     class CreateElasticsearchDomainRequest < Struct.new(
       :domain_name,
       :elasticsearch_version,
@@ -1070,7 +1080,9 @@ module Aws::ElasticsearchService
       :auto_tune_options,
       :tag_list,
       :deployment_strategy_options,
-      :automated_snapshot_pause_options)
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2387,6 +2399,14 @@ module Aws::ElasticsearchService
     #   Specifies `AutomatedSnapshotPauseOptions` for the domain.
     #   @return [Types::AutomatedSnapshotPauseOptionsStatus]
     #
+    # @!attribute [rw] use_case
+    #   The use case configured for the domain.
+    #   @return [Types::UseCaseStatus]
+    #
+    # @!attribute [rw] engine_mode
+    #   The engine mode configured for the domain.
+    #   @return [Types::EngineModeStatus]
+    #
     class ElasticsearchDomainConfig < Struct.new(
       :elasticsearch_version,
       :elasticsearch_cluster_config,
@@ -2405,7 +2425,9 @@ module Aws::ElasticsearchService
       :change_progress_details,
       :modifying_properties,
       :deployment_strategy_options,
-      :automated_snapshot_pause_options)
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2568,6 +2590,14 @@ module Aws::ElasticsearchService
     #   pause options.
     #   @return [Types::AutomatedSnapshotPauseOptions]
     #
+    # @!attribute [rw] use_case
+    #   The primary use case for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_mode
+    #   The engine mode for the domain.
+    #   @return [String]
+    #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
       :domain_name,
@@ -2597,7 +2627,9 @@ module Aws::ElasticsearchService
       :domain_processing_status,
       :modifying_properties,
       :deployment_strategy_options,
-      :automated_snapshot_pause_options)
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2653,6 +2685,23 @@ module Aws::ElasticsearchService
     #   @return [Types::OptionStatus]
     #
     class EncryptionAtRestOptionsStatus < Struct.new(
+      :options,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the engine mode for the domain.
+    #
+    # @!attribute [rw] options
+    #   The engine mode configured for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the engine mode for the domain.
+    #   @return [Types::OptionStatus]
+    #
+    class EngineModeStatus < Struct.new(
       :options,
       :status)
       SENSITIVE = []
@@ -4384,6 +4433,16 @@ module Aws::ElasticsearchService
     #   Maximum suspension duration: 3 days.
     #   @return [Types::AutomatedSnapshotPauseRequestOptions]
     #
+    # @!attribute [rw] use_case
+    #   The primary use case for the domain. For valid values, see
+    #   `DomainUseCase`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_mode
+    #   The engine mode for the domain. For valid values and requirements,
+    #   see `DomainEngineMode`.
+    #   @return [String]
+    #
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       :elasticsearch_cluster_config,
@@ -4401,7 +4460,9 @@ module Aws::ElasticsearchService
       :auto_tune_options,
       :dry_run,
       :deployment_strategy_options,
-      :automated_snapshot_pause_options)
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4625,6 +4686,23 @@ module Aws::ElasticsearchService
       :upgrade_step_status,
       :issues,
       :progress_percent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the use case for the domain.
+    #
+    # @!attribute [rw] options
+    #   The use case configured for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the use case for the domain.
+    #   @return [Types::OptionStatus]
+    #
+    class UseCaseStatus < Struct.new(
+      :options,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

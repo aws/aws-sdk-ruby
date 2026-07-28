@@ -20,6 +20,7 @@ module Aws::Sustainability
     DimensionEntryList = Shapes::ListShape.new(name: 'DimensionEntryList')
     DimensionList = Shapes::ListShape.new(name: 'DimensionList')
     DimensionListMap = Shapes::MapShape.new(name: 'DimensionListMap')
+    DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
     DimensionValueList = Shapes::ListShape.new(name: 'DimensionValueList')
     DimensionsMap = Shapes::MapShape.new(name: 'DimensionsMap')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -30,11 +31,17 @@ module Aws::Sustainability
     EmissionsUnit = Shapes::StringShape.new(name: 'EmissionsUnit')
     EstimatedCarbonEmissions = Shapes::StructureShape.new(name: 'EstimatedCarbonEmissions')
     EstimatedCarbonEmissionsList = Shapes::ListShape.new(name: 'EstimatedCarbonEmissionsList')
+    EstimatedWaterAllocation = Shapes::StructureShape.new(name: 'EstimatedWaterAllocation')
+    EstimatedWaterAllocationList = Shapes::ListShape.new(name: 'EstimatedWaterAllocationList')
     FilterExpression = Shapes::StructureShape.new(name: 'FilterExpression')
     GetEstimatedCarbonEmissionsDimensionValuesRequest = Shapes::StructureShape.new(name: 'GetEstimatedCarbonEmissionsDimensionValuesRequest')
     GetEstimatedCarbonEmissionsDimensionValuesResponse = Shapes::StructureShape.new(name: 'GetEstimatedCarbonEmissionsDimensionValuesResponse')
     GetEstimatedCarbonEmissionsRequest = Shapes::StructureShape.new(name: 'GetEstimatedCarbonEmissionsRequest')
     GetEstimatedCarbonEmissionsResponse = Shapes::StructureShape.new(name: 'GetEstimatedCarbonEmissionsResponse')
+    GetEstimatedWaterAllocationDimensionValuesRequest = Shapes::StructureShape.new(name: 'GetEstimatedWaterAllocationDimensionValuesRequest')
+    GetEstimatedWaterAllocationDimensionValuesResponse = Shapes::StructureShape.new(name: 'GetEstimatedWaterAllocationDimensionValuesResponse')
+    GetEstimatedWaterAllocationRequest = Shapes::StructureShape.new(name: 'GetEstimatedWaterAllocationRequest')
+    GetEstimatedWaterAllocationResponse = Shapes::StructureShape.new(name: 'GetEstimatedWaterAllocationResponse')
     GranularityConfiguration = Shapes::StructureShape.new(name: 'GranularityConfiguration')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -47,12 +54,17 @@ module Aws::Sustainability
     TimePeriod = Shapes::StructureShape.new(name: 'TimePeriod')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    WaterAllocation = Shapes::StructureShape.new(name: 'WaterAllocation')
+    WaterAllocationMap = Shapes::MapShape.new(name: 'WaterAllocationMap')
+    WaterAllocationType = Shapes::StringShape.new(name: 'WaterAllocationType')
+    WaterAllocationTypeList = Shapes::ListShape.new(name: 'WaterAllocationTypeList')
+    WaterAllocationUnit = Shapes::StringShape.new(name: 'WaterAllocationUnit')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     DimensionEntry.add_member(:dimension, Shapes::ShapeRef.new(shape: Dimension, required: true, location_name: "Dimension"))
-    DimensionEntry.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    DimensionEntry.add_member(:value, Shapes::ShapeRef.new(shape: DimensionValue, required: true, location_name: "Value"))
     DimensionEntry.struct_class = Types::DimensionEntry
 
     DimensionEntryList.member = Shapes::ShapeRef.new(shape: DimensionEntry)
@@ -62,10 +74,10 @@ module Aws::Sustainability
     DimensionListMap.key = Shapes::ShapeRef.new(shape: Dimension)
     DimensionListMap.value = Shapes::ShapeRef.new(shape: DimensionValueList)
 
-    DimensionValueList.member = Shapes::ShapeRef.new(shape: String)
+    DimensionValueList.member = Shapes::ShapeRef.new(shape: DimensionValue)
 
     DimensionsMap.key = Shapes::ShapeRef.new(shape: Dimension)
-    DimensionsMap.value = Shapes::ShapeRef.new(shape: String)
+    DimensionsMap.value = Shapes::ShapeRef.new(shape: DimensionValue)
 
     Emissions.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "Value"))
     Emissions.add_member(:unit, Shapes::ShapeRef.new(shape: EmissionsUnit, required: true, location_name: "Unit"))
@@ -83,6 +95,14 @@ module Aws::Sustainability
     EstimatedCarbonEmissions.struct_class = Types::EstimatedCarbonEmissions
 
     EstimatedCarbonEmissionsList.member = Shapes::ShapeRef.new(shape: EstimatedCarbonEmissions)
+
+    EstimatedWaterAllocation.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, required: true, location_name: "TimePeriod"))
+    EstimatedWaterAllocation.add_member(:dimensions_values, Shapes::ShapeRef.new(shape: DimensionsMap, required: true, location_name: "DimensionsValues"))
+    EstimatedWaterAllocation.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, required: true, location_name: "ModelVersion"))
+    EstimatedWaterAllocation.add_member(:allocation_values, Shapes::ShapeRef.new(shape: WaterAllocationMap, required: true, location_name: "AllocationValues"))
+    EstimatedWaterAllocation.struct_class = Types::EstimatedWaterAllocation
+
+    EstimatedWaterAllocationList.member = Shapes::ShapeRef.new(shape: EstimatedWaterAllocation)
 
     FilterExpression.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionListMap, location_name: "Dimensions"))
     FilterExpression.struct_class = Types::FilterExpression
@@ -111,6 +131,29 @@ module Aws::Sustainability
     GetEstimatedCarbonEmissionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetEstimatedCarbonEmissionsResponse.struct_class = Types::GetEstimatedCarbonEmissionsResponse
 
+    GetEstimatedWaterAllocationDimensionValuesRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, required: true, location_name: "TimePeriod"))
+    GetEstimatedWaterAllocationDimensionValuesRequest.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionList, required: true, location_name: "Dimensions"))
+    GetEstimatedWaterAllocationDimensionValuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetEstimatedWaterAllocationDimensionValuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetEstimatedWaterAllocationDimensionValuesRequest.struct_class = Types::GetEstimatedWaterAllocationDimensionValuesRequest
+
+    GetEstimatedWaterAllocationDimensionValuesResponse.add_member(:results, Shapes::ShapeRef.new(shape: DimensionEntryList, required: true, location_name: "Results"))
+    GetEstimatedWaterAllocationDimensionValuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetEstimatedWaterAllocationDimensionValuesResponse.struct_class = Types::GetEstimatedWaterAllocationDimensionValuesResponse
+
+    GetEstimatedWaterAllocationRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, required: true, location_name: "TimePeriod"))
+    GetEstimatedWaterAllocationRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: DimensionList, location_name: "GroupBy"))
+    GetEstimatedWaterAllocationRequest.add_member(:filter_by, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "FilterBy"))
+    GetEstimatedWaterAllocationRequest.add_member(:allocation_types, Shapes::ShapeRef.new(shape: WaterAllocationTypeList, location_name: "AllocationTypes"))
+    GetEstimatedWaterAllocationRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: TimeGranularity, location_name: "Granularity"))
+    GetEstimatedWaterAllocationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetEstimatedWaterAllocationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetEstimatedWaterAllocationRequest.struct_class = Types::GetEstimatedWaterAllocationRequest
+
+    GetEstimatedWaterAllocationResponse.add_member(:results, Shapes::ShapeRef.new(shape: EstimatedWaterAllocationList, required: true, location_name: "Results"))
+    GetEstimatedWaterAllocationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetEstimatedWaterAllocationResponse.struct_class = Types::GetEstimatedWaterAllocationResponse
+
     GranularityConfiguration.add_member(:fiscal_year_start_month, Shapes::ShapeRef.new(shape: Month, location_name: "FiscalYearStartMonth"))
     GranularityConfiguration.struct_class = Types::GranularityConfiguration
 
@@ -126,6 +169,15 @@ module Aws::Sustainability
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
+
+    WaterAllocation.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "Value"))
+    WaterAllocation.add_member(:unit, Shapes::ShapeRef.new(shape: WaterAllocationUnit, required: true, location_name: "Unit"))
+    WaterAllocation.struct_class = Types::WaterAllocation
+
+    WaterAllocationMap.key = Shapes::ShapeRef.new(shape: WaterAllocationType)
+    WaterAllocationMap.value = Shapes::ShapeRef.new(shape: WaterAllocation)
+
+    WaterAllocationTypeList.member = Shapes::ShapeRef.new(shape: WaterAllocationType)
 
 
     # @api private
@@ -170,6 +222,42 @@ module Aws::Sustainability
         o.http_request_uri = "/v1/estimated-carbon-emissions-dimension-values"
         o.input = Shapes::ShapeRef.new(shape: GetEstimatedCarbonEmissionsDimensionValuesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetEstimatedCarbonEmissionsDimensionValuesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_estimated_water_allocation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEstimatedWaterAllocation"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/estimated-water-allocation"
+        o.input = Shapes::ShapeRef.new(shape: GetEstimatedWaterAllocationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEstimatedWaterAllocationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_estimated_water_allocation_dimension_values, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEstimatedWaterAllocationDimensionValues"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/estimated-water-allocation-dimension-values"
+        o.input = Shapes::ShapeRef.new(shape: GetEstimatedWaterAllocationDimensionValuesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEstimatedWaterAllocationDimensionValuesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

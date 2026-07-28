@@ -1095,6 +1095,15 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class GetStorageTierPolicyRequest < Aws::EmptyStructure
+    end
+
+    class GetStorageTierPolicyResponse
+      attr_accessor storage_tier: ("STANDARD" | "INTELLIGENT_TIERING")
+      attr_accessor last_updated_time: ::Integer
+      SENSITIVE: []
+    end
+
     class GetTransformerRequest
       attr_accessor log_group_identifier: ::String
       SENSITIVE: []
@@ -1884,6 +1893,17 @@ module Aws::CloudWatchLogs
     class PutRetentionPolicyRequest
       attr_accessor log_group_name: ::String
       attr_accessor retention_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutStorageTierPolicyRequest
+      attr_accessor storage_tier: ("STANDARD" | "INTELLIGENT_TIERING")
+      SENSITIVE: []
+    end
+
+    class PutStorageTierPolicyResponse
+      attr_accessor storage_tier: ("STANDARD" | "INTELLIGENT_TIERING")
+      attr_accessor last_updated_time: ::Integer
       SENSITIVE: []
     end
 

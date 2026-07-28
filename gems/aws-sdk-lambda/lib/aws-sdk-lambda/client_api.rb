@@ -58,6 +58,7 @@ module Aws::Lambda
     CapacityProviderArn = Shapes::StringShape.new(name: 'CapacityProviderArn')
     CapacityProviderConfig = Shapes::StructureShape.new(name: 'CapacityProviderConfig')
     CapacityProviderLimitExceededException = Shapes::StructureShape.new(name: 'CapacityProviderLimitExceededException')
+    CapacityProviderLoggingConfig = Shapes::StructureShape.new(name: 'CapacityProviderLoggingConfig')
     CapacityProviderMaxVCpuCount = Shapes::IntegerShape.new(name: 'CapacityProviderMaxVCpuCount')
     CapacityProviderName = Shapes::StringShape.new(name: 'CapacityProviderName')
     CapacityProviderPermissionsConfig = Shapes::StructureShape.new(name: 'CapacityProviderPermissionsConfig')
@@ -68,6 +69,7 @@ module Aws::Lambda
     CapacityProviderSecurityGroupIds = Shapes::ListShape.new(name: 'CapacityProviderSecurityGroupIds')
     CapacityProviderState = Shapes::StringShape.new(name: 'CapacityProviderState')
     CapacityProviderSubnetIds = Shapes::ListShape.new(name: 'CapacityProviderSubnetIds')
+    CapacityProviderTelemetryConfig = Shapes::StructureShape.new(name: 'CapacityProviderTelemetryConfig')
     CapacityProviderVpcConfig = Shapes::StructureShape.new(name: 'CapacityProviderVpcConfig')
     CapacityProvidersList = Shapes::ListShape.new(name: 'CapacityProvidersList')
     ChainedInvokeDetails = Shapes::StructureShape.new(name: 'ChainedInvokeDetails')
@@ -184,6 +186,7 @@ module Aws::Lambda
     EventType = Shapes::StringShape.new(name: 'EventType')
     Events = Shapes::ListShape.new(name: 'Events')
     Execution = Shapes::StructureShape.new(name: 'Execution')
+    ExecutionDataIncluded = Shapes::BooleanShape.new(name: 'ExecutionDataIncluded')
     ExecutionDetails = Shapes::StructureShape.new(name: 'ExecutionDetails')
     ExecutionEnvironmentMemoryGiBPerVCpu = Shapes::FloatShape.new(name: 'ExecutionEnvironmentMemoryGiBPerVCpu')
     ExecutionFailedDetails = Shapes::StructureShape.new(name: 'ExecutionFailedDetails')
@@ -209,6 +212,7 @@ module Aws::Lambda
     FunctionArnList = Shapes::ListShape.new(name: 'FunctionArnList')
     FunctionCode = Shapes::StructureShape.new(name: 'FunctionCode')
     FunctionCodeLocation = Shapes::StructureShape.new(name: 'FunctionCodeLocation')
+    FunctionCodeLocationError = Shapes::StructureShape.new(name: 'FunctionCodeLocationError')
     FunctionConfiguration = Shapes::StructureShape.new(name: 'FunctionConfiguration')
     FunctionEventInvokeConfig = Shapes::StructureShape.new(name: 'FunctionEventInvokeConfig')
     FunctionEventInvokeConfigList = Shapes::ListShape.new(name: 'FunctionEventInvokeConfigList')
@@ -459,6 +463,7 @@ module Aws::Lambda
     ReplayChildren = Shapes::BooleanShape.new(name: 'ReplayChildren')
     RequestTooLargeException = Shapes::StructureShape.new(name: 'RequestTooLargeException')
     ReservedConcurrentExecutions = Shapes::IntegerShape.new(name: 'ReservedConcurrentExecutions')
+    ResolvedS3Object = Shapes::StructureShape.new(name: 'ResolvedS3Object')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
@@ -478,6 +483,7 @@ module Aws::Lambda
     S3FilesMountFailureException = Shapes::StructureShape.new(name: 'S3FilesMountFailureException')
     S3FilesMountTimeoutException = Shapes::StructureShape.new(name: 'S3FilesMountTimeoutException')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    S3ObjectStorageMode = Shapes::StringShape.new(name: 'S3ObjectStorageMode')
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
     ScalingConfig = Shapes::StructureShape.new(name: 'ScalingConfig')
     SchemaRegistryEventRecordFormat = Shapes::StringShape.new(name: 'SchemaRegistryEventRecordFormat')
@@ -698,6 +704,7 @@ module Aws::Lambda
     CapacityProvider.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KmsKeyArn"))
     CapacityProvider.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     CapacityProvider.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "PropagateTags"))
+    CapacityProvider.add_member(:telemetry_config, Shapes::ShapeRef.new(shape: CapacityProviderTelemetryConfig, location_name: "TelemetryConfig"))
     CapacityProvider.struct_class = Types::CapacityProvider
 
     CapacityProviderConfig.add_member(:lambda_managed_instances_capacity_provider_config, Shapes::ShapeRef.new(shape: LambdaManagedInstancesCapacityProviderConfig, required: true, location_name: "LambdaManagedInstancesCapacityProviderConfig"))
@@ -706,6 +713,10 @@ module Aws::Lambda
     CapacityProviderLimitExceededException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     CapacityProviderLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     CapacityProviderLimitExceededException.struct_class = Types::CapacityProviderLimitExceededException
+
+    CapacityProviderLoggingConfig.add_member(:system_log_level, Shapes::ShapeRef.new(shape: SystemLogLevel, location_name: "SystemLogLevel"))
+    CapacityProviderLoggingConfig.add_member(:log_group, Shapes::ShapeRef.new(shape: LogGroup, location_name: "LogGroup"))
+    CapacityProviderLoggingConfig.struct_class = Types::CapacityProviderLoggingConfig
 
     CapacityProviderPermissionsConfig.add_member(:capacity_provider_operator_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "CapacityProviderOperatorRoleArn"))
     CapacityProviderPermissionsConfig.struct_class = Types::CapacityProviderPermissionsConfig
@@ -720,6 +731,9 @@ module Aws::Lambda
     CapacityProviderSecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     CapacityProviderSubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+    CapacityProviderTelemetryConfig.add_member(:logging_config, Shapes::ShapeRef.new(shape: CapacityProviderLoggingConfig, location_name: "LoggingConfig"))
+    CapacityProviderTelemetryConfig.struct_class = Types::CapacityProviderTelemetryConfig
 
     CapacityProviderVpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: CapacityProviderSubnetIds, required: true, location_name: "SubnetIds"))
     CapacityProviderVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: CapacityProviderSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
@@ -851,6 +865,7 @@ module Aws::Lambda
     CreateCapacityProviderRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArnNonEmpty, location_name: "KmsKeyArn"))
     CreateCapacityProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateCapacityProviderRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "PropagateTags"))
+    CreateCapacityProviderRequest.add_member(:telemetry_config, Shapes::ShapeRef.new(shape: CapacityProviderTelemetryConfig, location_name: "TelemetryConfig"))
     CreateCapacityProviderRequest.struct_class = Types::CreateCapacityProviderRequest
 
     CreateCapacityProviderResponse.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: CapacityProvider, required: true, location_name: "CapacityProvider"))
@@ -999,6 +1014,7 @@ module Aws::Lambda
     DocumentDBEventSourceConfig.add_member(:full_document, Shapes::ShapeRef.new(shape: FullDocument, location_name: "FullDocument"))
     DocumentDBEventSourceConfig.struct_class = Types::DocumentDBEventSourceConfig
 
+    DurableConfig.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     DurableConfig.add_member(:retention_period_in_days, Shapes::ShapeRef.new(shape: RetentionPeriodInDays, location_name: "RetentionPeriodInDays"))
     DurableConfig.add_member(:execution_timeout, Shapes::ShapeRef.new(shape: ExecutionTimeout, location_name: "ExecutionTimeout"))
     DurableConfig.struct_class = Types::DurableConfig
@@ -1172,6 +1188,7 @@ module Aws::Lambda
     Execution.add_member(:status, Shapes::ShapeRef.new(shape: ExecutionStatus, required: true, location_name: "Status"))
     Execution.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, required: true, location_name: "StartTimestamp"))
     Execution.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, location_name: "EndTimestamp"))
+    Execution.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     Execution.struct_class = Types::Execution
 
     ExecutionDetails.add_member(:input_payload, Shapes::ShapeRef.new(shape: InputPayload, location_name: "InputPayload"))
@@ -1219,6 +1236,7 @@ module Aws::Lambda
     FunctionCode.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
     FunctionCode.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     FunctionCode.add_member(:s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "S3ObjectVersion"))
+    FunctionCode.add_member(:s3_object_storage_mode, Shapes::ShapeRef.new(shape: S3ObjectStorageMode, location_name: "S3ObjectStorageMode"))
     FunctionCode.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
     FunctionCode.add_member(:source_kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "SourceKMSKeyArn"))
     FunctionCode.struct_class = Types::FunctionCode
@@ -1227,8 +1245,14 @@ module Aws::Lambda
     FunctionCodeLocation.add_member(:location, Shapes::ShapeRef.new(shape: SensitiveStringOnServerOnly, location_name: "Location"))
     FunctionCodeLocation.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
     FunctionCodeLocation.add_member(:resolved_image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ResolvedImageUri"))
+    FunctionCodeLocation.add_member(:resolved_s3_object, Shapes::ShapeRef.new(shape: ResolvedS3Object, location_name: "ResolvedS3Object"))
     FunctionCodeLocation.add_member(:source_kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "SourceKMSKeyArn"))
+    FunctionCodeLocation.add_member(:error, Shapes::ShapeRef.new(shape: FunctionCodeLocationError, location_name: "Error"))
     FunctionCodeLocation.struct_class = Types::FunctionCodeLocation
+
+    FunctionCodeLocationError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    FunctionCodeLocationError.add_member(:message, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Message"))
+    FunctionCodeLocationError.struct_class = Types::FunctionCodeLocationError
 
     FunctionConfiguration.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, location_name: "FunctionName"))
     FunctionConfiguration.add_member(:function_arn, Shapes::ShapeRef.new(shape: NameSpacedFunctionArn, location_name: "FunctionArn"))
@@ -1344,6 +1368,7 @@ module Aws::Lambda
     GetDurableExecutionHistoryResponse.struct_class = Types::GetDurableExecutionHistoryResponse
 
     GetDurableExecutionRequest.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location: "uri", location_name: "DurableExecutionArn"))
+    GetDurableExecutionRequest.add_member(:include_execution_data, Shapes::ShapeRef.new(shape: IncludeExecutionData, location: "querystring", location_name: "IncludeExecutionData"))
     GetDurableExecutionRequest.struct_class = Types::GetDurableExecutionRequest
 
     GetDurableExecutionResponse.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location_name: "DurableExecutionArn"))
@@ -1357,6 +1382,8 @@ module Aws::Lambda
     GetDurableExecutionResponse.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, location_name: "EndTimestamp"))
     GetDurableExecutionResponse.add_member(:version, Shapes::ShapeRef.new(shape: VersionWithLatestPublished, location_name: "Version"))
     GetDurableExecutionResponse.add_member(:trace_header, Shapes::ShapeRef.new(shape: TraceHeader, location_name: "TraceHeader"))
+    GetDurableExecutionResponse.add_member(:execution_data_included, Shapes::ShapeRef.new(shape: ExecutionDataIncluded, location_name: "ExecutionDataIncluded"))
+    GetDurableExecutionResponse.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
     GetDurableExecutionResponse.struct_class = Types::GetDurableExecutionResponse
 
     GetDurableExecutionStateRequest.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location: "uri", location_name: "DurableExecutionArn"))
@@ -1583,12 +1610,12 @@ module Aws::Lambda
     InvokeWithResponseStreamCompleteEvent.struct_class = Types::InvokeWithResponseStreamCompleteEvent
 
     InvokeWithResponseStreamRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
-    InvokeWithResponseStreamRequest.add_member(:invocation_type, Shapes::ShapeRef.new(shape: ResponseStreamingInvocationType, location: "header", location_name: "X-Amz-Invocation-Type"))
     InvokeWithResponseStreamRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location: "header", location_name: "X-Amz-Log-Type"))
     InvokeWithResponseStreamRequest.add_member(:client_context, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Amz-Client-Context"))
     InvokeWithResponseStreamRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: NumericLatestPublishedOrAliasQualifier, location: "querystring", location_name: "Qualifier"))
     InvokeWithResponseStreamRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, location_name: "Payload"))
     InvokeWithResponseStreamRequest.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantId, location: "header", location_name: "X-Amz-Tenant-Id"))
+    InvokeWithResponseStreamRequest.add_member(:invocation_type, Shapes::ShapeRef.new(shape: ResponseStreamingInvocationType, location: "header", location_name: "X-Amz-Invocation-Type"))
     InvokeWithResponseStreamRequest.struct_class = Types::InvokeWithResponseStreamRequest
     InvokeWithResponseStreamRequest[:payload] = :payload
     InvokeWithResponseStreamRequest[:payload_member] = InvokeWithResponseStreamRequest.member(:payload)
@@ -1654,6 +1681,7 @@ module Aws::Lambda
     LayerVersionContentInput.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
     LayerVersionContentInput.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     LayerVersionContentInput.add_member(:s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "S3ObjectVersion"))
+    LayerVersionContentInput.add_member(:s3_object_storage_mode, Shapes::ShapeRef.new(shape: S3ObjectStorageMode, location_name: "S3ObjectStorageMode"))
     LayerVersionContentInput.add_member(:zip_file, Shapes::ShapeRef.new(shape: Blob, location_name: "ZipFile"))
     LayerVersionContentInput.struct_class = Types::LayerVersionContentInput
 
@@ -1662,6 +1690,7 @@ module Aws::Lambda
     LayerVersionContentOutput.add_member(:code_size, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSize"))
     LayerVersionContentOutput.add_member(:signing_profile_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningProfileVersionArn"))
     LayerVersionContentOutput.add_member(:signing_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningJobArn"))
+    LayerVersionContentOutput.add_member(:resolved_s3_object, Shapes::ShapeRef.new(shape: ResolvedS3Object, location_name: "ResolvedS3Object"))
     LayerVersionContentOutput.struct_class = Types::LayerVersionContentOutput
 
     LayerVersionsList.member = Shapes::ShapeRef.new(shape: LayerVersionsListItem)
@@ -2028,6 +2057,11 @@ module Aws::Lambda
     RequestTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     RequestTooLargeException.struct_class = Types::RequestTooLargeException
 
+    ResolvedS3Object.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
+    ResolvedS3Object.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
+    ResolvedS3Object.add_member(:s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "S3ObjectVersion"))
+    ResolvedS3Object.struct_class = Types::ResolvedS3Object
+
     ResourceConflictException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceConflictException.struct_class = Types::ResourceConflictException
@@ -2238,6 +2272,7 @@ module Aws::Lambda
     UpdateCapacityProviderRequest.add_member(:capacity_provider_name, Shapes::ShapeRef.new(shape: CapacityProviderName, required: true, location: "uri", location_name: "CapacityProviderName"))
     UpdateCapacityProviderRequest.add_member(:capacity_provider_scaling_config, Shapes::ShapeRef.new(shape: CapacityProviderScalingConfig, location_name: "CapacityProviderScalingConfig"))
     UpdateCapacityProviderRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "PropagateTags"))
+    UpdateCapacityProviderRequest.add_member(:telemetry_config, Shapes::ShapeRef.new(shape: CapacityProviderTelemetryConfig, location_name: "TelemetryConfig"))
     UpdateCapacityProviderRequest.struct_class = Types::UpdateCapacityProviderRequest
 
     UpdateCapacityProviderResponse.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: CapacityProvider, required: true, location_name: "CapacityProvider"))
@@ -2281,6 +2316,7 @@ module Aws::Lambda
     UpdateFunctionCodeRequest.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
     UpdateFunctionCodeRequest.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     UpdateFunctionCodeRequest.add_member(:s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "S3ObjectVersion"))
+    UpdateFunctionCodeRequest.add_member(:s3_object_storage_mode, Shapes::ShapeRef.new(shape: S3ObjectStorageMode, location_name: "S3ObjectStorageMode"))
     UpdateFunctionCodeRequest.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
     UpdateFunctionCodeRequest.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
     UpdateFunctionCodeRequest.add_member(:publish, Shapes::ShapeRef.new(shape: Boolean, location_name: "Publish"))
@@ -2420,8 +2456,12 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: CheckpointDurableExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: CheckpointDurableExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
       end)
 
       api.add_operation(:create_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -2700,9 +2740,13 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: GetDurableExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDurableExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
       end)
 
       api.add_operation(:get_durable_execution_history, Seahorse::Model::Operation.new.tap do |o|
@@ -2712,9 +2756,13 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: GetDurableExecutionHistoryRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDurableExecutionHistoryResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2730,8 +2778,12 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: GetDurableExecutionStateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDurableExecutionStateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -3469,10 +3521,14 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: SendDurableExecutionCallbackFailureRequest)
         o.output = Shapes::ShapeRef.new(shape: SendDurableExecutionCallbackFailureResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: CallbackTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
       end)
 
       api.add_operation(:send_durable_execution_callback_heartbeat, Seahorse::Model::Operation.new.tap do |o|
@@ -3495,10 +3551,14 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: SendDurableExecutionCallbackSuccessRequest)
         o.output = Shapes::ShapeRef.new(shape: SendDurableExecutionCallbackSuccessResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: CallbackTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
       end)
 
       api.add_operation(:stop_durable_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -3508,9 +3568,13 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: StopDurableExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: StopDurableExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

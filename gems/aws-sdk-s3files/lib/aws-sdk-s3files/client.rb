@@ -1537,7 +1537,7 @@ module Aws::S3Files
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3files'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

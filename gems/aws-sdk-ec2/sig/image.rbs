@@ -93,6 +93,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#free_tier_eligible-instance_method
       def free_tier_eligible: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#public_ssm_parameter_name-instance_method
+      def public_ssm_parameter_name: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_watermarks-instance_method
       def image_watermarks: () -> ::Array[Types::ImageWatermark]
 

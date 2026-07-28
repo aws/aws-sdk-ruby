@@ -681,6 +681,23 @@
         "PRE_ADS_REQUEST_FUNCTION_COMPLETED"
       ]
     },
+    "AdsPersonalizationConcurrency":{
+      "type":"structure",
+      "members":{
+        "MaxConcurrentAdsRequests":{"shape":"__integer"},
+        "EnableVodVastParallelization":{"shape":"__boolean"}
+      }
+    },
+    "AdsPersonalizationTimeouts":{
+      "type":"structure",
+      "members":{
+        "AdsRequestTimeoutMilliseconds":{"shape":"__integer"},
+        "LiveMaximumAdsPersonalizationTimeMilliseconds":{"shape":"__integer"},
+        "VodMaximumAdsPersonalizationTimeMilliseconds":{"shape":"__integer"},
+        "PrefetchAdsRequestTimeoutMilliseconds":{"shape":"__integer"},
+        "PrefetchMaximumAdsPersonalizationTimeMilliseconds":{"shape":"__integer"}
+      }
+    },
     "Alert":{
       "type":"structure",
       "required":[
@@ -1153,6 +1170,7 @@
       "type":"structure",
       "members":{
         "ManifestEndpointPrefix":{"shape":"__string"},
+        "DualStackManifestEndpointPrefix":{"shape":"__string"},
         "MpdLocation":{"shape":"__string"},
         "OriginManifestType":{"shape":"OriginManifestType"}
       }
@@ -1685,7 +1703,9 @@
         "PersonalizationThresholdSeconds":{"shape":"__integerMin1"},
         "PlaybackConfigurationArn":{"shape":"__string"},
         "PlaybackEndpointPrefix":{"shape":"__string"},
+        "DualStackPlaybackEndpointPrefix":{"shape":"__string"},
         "SessionInitializationEndpointPrefix":{"shape":"__string"},
+        "DualStackSessionInitializationEndpointPrefix":{"shape":"__string"},
         "SlateAdUrl":{"shape":"__string"},
         "Tags":{
           "shape":"__mapOf__string",
@@ -1695,7 +1715,9 @@
         "VideoContentSourceUrl":{"shape":"__string"},
         "AdConditioningConfiguration":{"shape":"AdConditioningConfiguration"},
         "AdDecisionServerConfiguration":{"shape":"AdDecisionServerConfiguration"},
-        "FunctionMapping":{"shape":"FunctionMapping"}
+        "FunctionMapping":{"shape":"FunctionMapping"},
+        "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
+        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
       }
     },
     "GetPrefetchScheduleRequest":{
@@ -1737,7 +1759,8 @@
     "HlsConfiguration":{
       "type":"structure",
       "members":{
-        "ManifestEndpointPrefix":{"shape":"__string"}
+        "ManifestEndpointPrefix":{"shape":"__string"},
+        "DualStackManifestEndpointPrefix":{"shape":"__string"}
       }
     },
     "HlsPlaylistSettings":{
@@ -2231,7 +2254,9 @@
         "PersonalizationThresholdSeconds":{"shape":"__integerMin1"},
         "PlaybackConfigurationArn":{"shape":"__string"},
         "PlaybackEndpointPrefix":{"shape":"__string"},
+        "DualStackPlaybackEndpointPrefix":{"shape":"__string"},
         "SessionInitializationEndpointPrefix":{"shape":"__string"},
+        "DualStackSessionInitializationEndpointPrefix":{"shape":"__string"},
         "SlateAdUrl":{"shape":"__string"},
         "Tags":{
           "shape":"__mapOf__string",
@@ -2241,7 +2266,9 @@
         "VideoContentSourceUrl":{"shape":"__string"},
         "AdConditioningConfiguration":{"shape":"AdConditioningConfiguration"},
         "AdDecisionServerConfiguration":{"shape":"AdDecisionServerConfiguration"},
-        "FunctionMapping":{"shape":"FunctionMapping"}
+        "FunctionMapping":{"shape":"FunctionMapping"},
+        "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
+        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
       }
     },
     "PlaybackMode":{
@@ -2387,7 +2414,9 @@
         "VideoContentSourceUrl":{"shape":"__string"},
         "AdConditioningConfiguration":{"shape":"AdConditioningConfiguration"},
         "AdDecisionServerConfiguration":{"shape":"AdDecisionServerConfiguration"},
-        "FunctionMapping":{"shape":"FunctionMapping"}
+        "FunctionMapping":{"shape":"FunctionMapping"},
+        "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
+        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
       }
     },
     "PutPlaybackConfigurationResponse":{
@@ -2408,7 +2437,9 @@
         "PersonalizationThresholdSeconds":{"shape":"__integerMin1"},
         "PlaybackConfigurationArn":{"shape":"__string"},
         "PlaybackEndpointPrefix":{"shape":"__string"},
+        "DualStackPlaybackEndpointPrefix":{"shape":"__string"},
         "SessionInitializationEndpointPrefix":{"shape":"__string"},
+        "DualStackSessionInitializationEndpointPrefix":{"shape":"__string"},
         "SlateAdUrl":{"shape":"__string"},
         "Tags":{
           "shape":"__mapOf__string",
@@ -2418,7 +2449,9 @@
         "VideoContentSourceUrl":{"shape":"__string"},
         "AdConditioningConfiguration":{"shape":"AdConditioningConfiguration"},
         "AdDecisionServerConfiguration":{"shape":"AdDecisionServerConfiguration"},
-        "FunctionMapping":{"shape":"FunctionMapping"}
+        "FunctionMapping":{"shape":"FunctionMapping"},
+        "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
+        "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
       }
     },
     "RecurringConsumption":{
@@ -2488,6 +2521,7 @@
         "HlsPlaylistSettings":{"shape":"HlsPlaylistSettings"},
         "ManifestName":{"shape":"__string"},
         "PlaybackUrl":{"shape":"__string"},
+        "DualStackPlaybackUrl":{"shape":"__string"},
         "SourceGroup":{"shape":"__string"}
       }
     },

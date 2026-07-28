@@ -851,6 +851,165 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # High-level information about a container association, returned by the
+    # ListContainerAssociations operation. You can use this information to
+    # retrieve the full details of a container association using
+    # DescribeContainerAssociation.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the container association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ContainerAssociationSummary AWS API Documentation
+    #
+    class ContainerAssociationSummary < Struct.new(
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value pair that defines a container attribute filter for a
+    # container monitoring configuration.
+    #
+    # @!attribute [rw] key
+    #   The key of the container attribute to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the container attribute to filter on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ContainerAttribute AWS API Documentation
+    #
+    class ContainerAttribute < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a container cluster to monitor, along with optional attribute
+    # filters that narrow the scope of monitored containers within the
+    # cluster.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the container cluster to monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_filters
+    #   A list of key-value pairs that filter which containers within the
+    #   cluster are monitored. Only containers that match the specified
+    #   attributes are included.
+    #   @return [Array<Types::ContainerAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ContainerMonitoringConfiguration AWS API Documentation
+    #
+    class ContainerMonitoringConfiguration < Struct.new(
+      :cluster_arn,
+      :attribute_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_association_name
+    #   The descriptive name of the container association. You can't change
+    #   the name of a container association after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of container orchestration platform for the clusters in
+    #   this association. Valid values are `ECS` and `EKS`. You can't
+    #   change the type after creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_monitoring_configurations
+    #   The list of container monitoring configurations that define which
+    #   clusters and container attributes to monitor.
+    #   @return [Array<Types::ContainerMonitoringConfiguration>]
+    #
+    # @!attribute [rw] tags
+    #   The key:value pairs to associate with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateContainerAssociationRequest AWS API Documentation
+    #
+    class CreateContainerAssociationRequest < Struct.new(
+      :container_association_name,
+      :description,
+      :type,
+      :container_monitoring_configurations,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_association_name
+    #   The descriptive name of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_association_arn
+    #   The Amazon Resource Name (ARN) of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of container orchestration platform. Either `ECS` or `EKS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_monitoring_configurations
+    #   The container monitoring configurations for this container
+    #   association.
+    #   @return [Array<Types::ContainerMonitoringConfiguration>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key:value pairs associated with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the container association. The
+    #   token marks the state of the container association resource at the
+    #   time of the request. To make an update to the container association,
+    #   provide the token in your request. Network Firewall uses the token
+    #   to ensure that the container association hasn't changed since you
+    #   last retrieved it. If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the container
+    #   association again to get a current copy of it with a new token.
+    #   Reapply your changes as needed, then try the operation again using
+    #   the new token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateContainerAssociationResponse AWS API Documentation
+    #
+    class CreateContainerAssociationResponse < Struct.new(
+      :container_association_name,
+      :container_association_arn,
+      :description,
+      :type,
+      :container_monitoring_configurations,
+      :status,
+      :tags,
+      :update_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] firewall_policy_name
     #   The descriptive name of the firewall policy. You can't change the
     #   name of a firewall policy after you create it.
@@ -1809,6 +1968,47 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] container_association_name
+    #   The descriptive name of the container association. You must specify
+    #   the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_association_arn
+    #   The Amazon Resource Name (ARN) of the container association. You
+    #   must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteContainerAssociationRequest AWS API Documentation
+    #
+    class DeleteContainerAssociationRequest < Struct.new(
+      :container_association_name,
+      :container_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_association_name
+    #   The descriptive name of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_association_arn
+    #   The Amazon Resource Name (ARN) of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the container association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteContainerAssociationResponse AWS API Documentation
+    #
+    class DeleteContainerAssociationResponse < Struct.new(
+      :container_association_name,
+      :container_association_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] firewall_policy_name
     #   The descriptive name of the firewall policy. You can't change the
     #   name of a firewall policy after you create it.
@@ -2261,6 +2461,88 @@ module Aws::NetworkFirewall
     class DeleteVpcEndpointAssociationResponse < Struct.new(
       :vpc_endpoint_association,
       :vpc_endpoint_association_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_association_name
+    #   The descriptive name of the container association. You must specify
+    #   the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_association_arn
+    #   The Amazon Resource Name (ARN) of the container association. You
+    #   must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeContainerAssociationRequest AWS API Documentation
+    #
+    class DescribeContainerAssociationRequest < Struct.new(
+      :container_association_name,
+      :container_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_association_name
+    #   The descriptive name of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_association_arn
+    #   The Amazon Resource Name (ARN) of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of container orchestration platform. Either `ECS` or `EKS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_monitoring_configurations
+    #   The container monitoring configurations for this container
+    #   association.
+    #   @return [Array<Types::ContainerMonitoringConfiguration>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_cidr_count
+    #   The number of CIDR blocks that have been resolved from the monitored
+    #   containers for this container association.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The last time that the container association was updated or resolved
+    #   new container IP addresses.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The key:value pairs associated with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the container association. The
+    #   token marks the state of the container association resource at the
+    #   time of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeContainerAssociationResponse AWS API Documentation
+    #
+    class DescribeContainerAssociationResponse < Struct.new(
+      :container_association_name,
+      :container_association_arn,
+      :description,
+      :type,
+      :container_monitoring_configurations,
+      :status,
+      :resolved_cidr_count,
+      :last_updated_time,
+      :tags,
+      :update_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4319,9 +4601,8 @@ module Aws::NetworkFirewall
     # Describes the amount of time that can pass without any traffic sent
     # through the firewall before the firewall determines that the
     # connection is idle and Network Firewall removes the flow entry from
-    # its flow table. Existing connections and flows are not impacted when
-    # you update this value. Only new connections after you update this
-    # value are impacted.
+    # its flow table. When you update this value, existing connections will
+    # be treated according to your stream exception policy configuration.
     #
     # @!attribute [rw] tcp_idle_timeout_seconds
     #   The number of seconds that can pass without any TCP traffic sent
@@ -4789,6 +5070,51 @@ module Aws::NetworkFirewall
     #
     class ListAnalysisReportsResponse < Struct.new(
       :analysis_reports,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Network Firewall to
+    #   return for this request. If more objects are available, in the
+    #   response, Network Firewall provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListContainerAssociationsRequest AWS API Documentation
+    #
+    class ListContainerAssociationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_associations
+    #   The container association metadata objects.
+    #   @return [Array<Types::ContainerAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListContainerAssociationsResponse AWS API Documentation
+    #
+    class ListContainerAssociationsResponse < Struct.new(
+      :container_associations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -8224,6 +8550,113 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :availability_zone_change_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_association_name
+    #   The descriptive name of the container association. You must specify
+    #   the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_association_arn
+    #   The Amazon Resource Name (ARN) of the container association. You
+    #   must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of container orchestration platform. This must match the
+    #   type specified when the container association was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_monitoring_configurations
+    #   The updated list of container monitoring configurations that define
+    #   which clusters and container attributes to monitor.
+    #   @return [Array<Types::ContainerMonitoringConfiguration>]
+    #
+    # @!attribute [rw] tags
+    #   The key:value pairs associated with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the container association. The
+    #   token marks the state of the container association resource at the
+    #   time of the request. To make an update to the container association,
+    #   provide the token in your request. Network Firewall uses the token
+    #   to ensure that the container association hasn't changed since you
+    #   last retrieved it. If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the container
+    #   association again to get a current copy of it with a new token.
+    #   Reapply your changes as needed, then try the operation again using
+    #   the new token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateContainerAssociationRequest AWS API Documentation
+    #
+    class UpdateContainerAssociationRequest < Struct.new(
+      :container_association_name,
+      :container_association_arn,
+      :description,
+      :type,
+      :container_monitoring_configurations,
+      :tags,
+      :update_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_association_name
+    #   The descriptive name of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_association_arn
+    #   The Amazon Resource Name (ARN) of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of container orchestration platform. Either `ECS` or `EKS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_monitoring_configurations
+    #   The container monitoring configurations for this container
+    #   association.
+    #   @return [Array<Types::ContainerMonitoringConfiguration>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the container association.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key:value pairs associated with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the container association. The
+    #   token marks the state of the container association resource at the
+    #   time of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateContainerAssociationResponse AWS API Documentation
+    #
+    class UpdateContainerAssociationResponse < Struct.new(
+      :container_association_name,
+      :container_association_arn,
+      :description,
+      :type,
+      :container_monitoring_configurations,
+      :status,
+      :tags,
+      :update_token)
       SENSITIVE = []
       include Aws::Structure
     end

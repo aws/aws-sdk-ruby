@@ -673,6 +673,9 @@ module Aws::Drs
     #   performing a drill, recovery or failback to the previous region or
     #   availability zone, using the instance ID of the source instance.
     #
+    # @option params [String] :recovery_mode
+    #   Recovery mode.
+    #
     # @return [Types::CreateLaunchConfigurationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLaunchConfigurationTemplateResponse#launch_configuration_template #launch_configuration_template} => Types::LaunchConfigurationTemplate
@@ -693,6 +696,7 @@ module Aws::Drs
     #     export_bucket_arn: "ARN",
     #     post_launch_enabled: false,
     #     launch_into_source_instance: false,
+    #     recovery_mode: "FAST", # accepts FAST, OPTIMAL
     #   })
     #
     # @example Response structure
@@ -709,6 +713,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.post_launch_enabled #=> Boolean
     #   resp.launch_configuration_template.launch_into_source_instance #=> Boolean
+    #   resp.launch_configuration_template.recovery_mode #=> String, one of "FAST", "OPTIMAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateLaunchConfigurationTemplate AWS API Documentation
     #
@@ -1265,6 +1270,7 @@ module Aws::Drs
     #   resp.items[0].export_bucket_arn #=> String
     #   resp.items[0].post_launch_enabled #=> Boolean
     #   resp.items[0].launch_into_source_instance #=> Boolean
+    #   resp.items[0].recovery_mode #=> String, one of "FAST", "OPTIMAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeLaunchConfigurationTemplates AWS API Documentation
@@ -1908,6 +1914,7 @@ module Aws::Drs
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#post_launch_enabled #post_launch_enabled} => Boolean
     #   * {Types::LaunchConfiguration#launch_into_instance_properties #launch_into_instance_properties} => Types::LaunchIntoInstanceProperties
+    #   * {Types::LaunchConfiguration#recovery_mode #recovery_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1927,6 +1934,7 @@ module Aws::Drs
     #   resp.licensing.os_byol #=> Boolean
     #   resp.post_launch_enabled #=> Boolean
     #   resp.launch_into_instance_properties.launch_into_ec2_instance_id #=> String
+    #   resp.recovery_mode #=> String, one of "FAST", "OPTIMAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetLaunchConfiguration AWS API Documentation
     #
@@ -3161,6 +3169,9 @@ module Aws::Drs
     # @option params [Types::LaunchIntoInstanceProperties] :launch_into_instance_properties
     #   Launch into existing instance properties.
     #
+    # @option params [String] :recovery_mode
+    #   Recovery mode.
+    #
     # @return [Types::LaunchConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
@@ -3173,6 +3184,7 @@ module Aws::Drs
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#post_launch_enabled #post_launch_enabled} => Boolean
     #   * {Types::LaunchConfiguration#launch_into_instance_properties #launch_into_instance_properties} => Types::LaunchIntoInstanceProperties
+    #   * {Types::LaunchConfiguration#recovery_mode #recovery_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3190,6 +3202,7 @@ module Aws::Drs
     #     launch_into_instance_properties: {
     #       launch_into_ec2_instance_id: "EC2InstanceID",
     #     },
+    #     recovery_mode: "FAST", # accepts FAST, OPTIMAL
     #   })
     #
     # @example Response structure
@@ -3204,6 +3217,7 @@ module Aws::Drs
     #   resp.licensing.os_byol #=> Boolean
     #   resp.post_launch_enabled #=> Boolean
     #   resp.launch_into_instance_properties.launch_into_ec2_instance_id #=> String
+    #   resp.recovery_mode #=> String, one of "FAST", "OPTIMAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfiguration AWS API Documentation
     #
@@ -3245,6 +3259,9 @@ module Aws::Drs
     #   performing a drill, recovery or failback to the previous region or
     #   availability zone, using the instance ID of the source instance.
     #
+    # @option params [String] :recovery_mode
+    #   Recovery mode.
+    #
     # @return [Types::UpdateLaunchConfigurationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLaunchConfigurationTemplateResponse#launch_configuration_template #launch_configuration_template} => Types::LaunchConfigurationTemplate
@@ -3263,6 +3280,7 @@ module Aws::Drs
     #     export_bucket_arn: "ARN",
     #     post_launch_enabled: false,
     #     launch_into_source_instance: false,
+    #     recovery_mode: "FAST", # accepts FAST, OPTIMAL
     #   })
     #
     # @example Response structure
@@ -3279,6 +3297,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.post_launch_enabled #=> Boolean
     #   resp.launch_configuration_template.launch_into_source_instance #=> Boolean
+    #   resp.launch_configuration_template.recovery_mode #=> String, one of "FAST", "OPTIMAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfigurationTemplate AWS API Documentation
     #
@@ -3629,7 +3648,7 @@ module Aws::Drs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

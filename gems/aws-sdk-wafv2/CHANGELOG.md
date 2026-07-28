@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.133.0 (2026-06-29)
+------------------
+
+* Feature - AWS WAF added support for associating AWS WAF web ACLs with Amazon Bedrock AgentCore Gateway resources. You can now use AssociateWebACL, DisassociateWebACL, GetWebACLForResource, and ListResourcesForWebACL to protect your AgentCore Gateways with AWS WAF.
+
 1.132.0 (2026-06-15)
 ------------------
 

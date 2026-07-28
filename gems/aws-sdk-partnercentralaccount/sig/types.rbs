@@ -53,7 +53,7 @@ module Aws::PartnerCentralAccount
 
     class BusinessValidationError
       attr_accessor message: ::String
-      attr_accessor code: ("INCOMPATIBLE_CONNECTION_INVITATION_REQUEST" | "INCOMPATIBLE_LEGAL_NAME" | "INCOMPATIBLE_KNOW_YOUR_BUSINESS_STATUS" | "INCOMPATIBLE_IDENTITY_VERIFICATION_STATUS" | "INVALID_ACCOUNT_LINKING_STATUS" | "INVALID_ACCOUNT_STATE" | "INCOMPATIBLE_DOMAIN" | "INELIGIBLE_ACCOUNT_TIER")
+      attr_accessor code: ("INCOMPATIBLE_CONNECTION_INVITATION_REQUEST" | "INCOMPATIBLE_LEGAL_NAME" | "INCOMPATIBLE_KNOW_YOUR_BUSINESS_STATUS" | "INCOMPATIBLE_IDENTITY_VERIFICATION_STATUS" | "INVALID_ACCOUNT_LINKING_STATUS" | "INVALID_ACCOUNT_STATE" | "INCOMPATIBLE_DOMAIN" | "INELIGIBLE_ACCOUNT_TIER" | "MISSING_ACTIVE_SUBSIDIARY_CONNECTION" | "INCOMPATIBLE_SUBSIDIARY_CONNECTION" | "INCOMPATIBLE_PRIMARY_PARTNER" | "QUALIFICATIONS_ASSOCIATION_LIMIT_EXCEEDED" | "QUALIFICATIONS_ASSOCIATION_NOT_FOUND" | "QUALIFICATIONS_ASSOCIATION_EXISTS")
       SENSITIVE: []
     end
 
@@ -139,7 +139,7 @@ module Aws::PartnerCentralAccount
 
     class ConflictException
       attr_accessor message: ::String
-      attr_accessor reason: ("CONFLICT_CLIENT_TOKEN" | "DUPLICATE_PARTNER" | "INCOMPATIBLE_PROFILE_STATE" | "INCOMPATIBLE_PARTNER_PROFILE_TASK_STATE" | "DUPLICATE_CONNECTION_INVITATION" | "INCOMPATIBLE_CONNECTION_INVITATION_STATE" | "INCOMPATIBLE_CONNECTION_INVITATION_RECEIVER" | "DUPLICATE_CONNECTION" | "INCOMPATIBLE_CONNECTION_STATE" | "INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION" | "ACCOUNT_ALREADY_VERIFIED" | "VERIFICATION_ALREADY_IN_PROGRESS")
+      attr_accessor reason: ("CONFLICT_CLIENT_TOKEN" | "DUPLICATE_PARTNER" | "INCOMPATIBLE_PROFILE_STATE" | "INCOMPATIBLE_PARTNER_PROFILE_TASK_STATE" | "DUPLICATE_CONNECTION_INVITATION" | "INCOMPATIBLE_CONNECTION_INVITATION_STATE" | "INCOMPATIBLE_CONNECTION_INVITATION_RECEIVER" | "DUPLICATE_CONNECTION" | "INCOMPATIBLE_CONNECTION_STATE" | "INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION" | "ACCOUNT_ALREADY_VERIFIED" | "VERIFICATION_ALREADY_IN_PROGRESS" | "INCOMPATIBLE_QUALIFICATIONS_ASSOCIATION_TASK_STATE")
       SENSITIVE: []
     end
 
@@ -392,6 +392,59 @@ module Aws::PartnerCentralAccount
       SENSITIVE: []
     end
 
+    class GetQualificationsAssociationDetailsRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetQualificationsAssociationDetailsResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("ASSOCIATED" | "NOT_ASSOCIATED")
+      attr_accessor primary_partner: Types::QualificationsAssociationPartner
+      attr_accessor associated_partners: ::Array[Types::QualificationsAssociationPartner]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetQualificationsAssociationTaskRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetQualificationsAssociationTaskResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED")
+      attr_accessor primary_partner: Types::QualificationsAssociationPartner
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetQualificationsDisassociationTaskRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetQualificationsDisassociationTaskResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED")
+      attr_accessor associated_partner: Types::QualificationsAssociationPartner
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      SENSITIVE: []
+    end
+
     class GetVerificationRequest
       attr_accessor verification_type: ("BUSINESS_VERIFICATION" | "REGISTRANT_VERIFICATION")
       SENSITIVE: []
@@ -404,6 +457,12 @@ module Aws::PartnerCentralAccount
       attr_accessor verification_response_details: Types::VerificationResponseDetails
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Headquarters
+      attr_accessor country_code: ::String
+      attr_accessor subdivision_code: ::String
       SENSITIVE: []
     end
 
@@ -508,6 +567,7 @@ module Aws::PartnerCentralAccount
       attr_accessor industry_segments: ::Array[("AGRICULTURE_MINING" | "BIOTECHNOLOGY" | "BUSINESS_CONSUMER_SERVICES" | "BUSINESS_SERV" | "COMMUNICATIONS" | "COMPUTER_HARDWARE" | "COMPUTERS_ELECTRONICS" | "COMPUTER_SOFTWARE" | "CONSUMER_GOODS" | "CONSUMER_RELATED" | "EDUCATION" | "ENERGY_UTILITIES" | "FINANCIAL_SERVICES" | "GAMING" | "GOVERNMENT" | "GOVERNMENT_EDUCATION_PUBLIC_SERVICES" | "HEALTHCARE" | "HEALTHCARE_PHARMACEUTICALS_BIOTECH" | "INDUSTRIAL_ENERGY" | "INTERNET_SPECIFIC" | "LIFE_SCIENCES" | "MANUFACTURING" | "MEDIA_ENTERTAINMENT_LEISURE" | "MEDIA_ENTERTAINMENT" | "MEDICAL_HEALTH" | "NON_PROFIT_ORGANIZATION" | "OTHER" | "PROFESSIONAL_SERVICES" | "REAL_ESTATE_CONSTRUCTION" | "RETAIL" | "RETAIL_WHOLESALE_DISTRIBUTION" | "SEMICONDUCTOR_ELECTR" | "SOFTWARE_INTERNET" | "TELECOMMUNICATIONS" | "TRANSPORTATION_LOGISTICS" | "TRAVEL_HOSPITALITY" | "WHOLESALE_DISTRIBUTION")]
       attr_accessor translation_source_locale: ::String
       attr_accessor localized_contents: ::Array[Types::LocalizedContent]
+      attr_accessor headquarters: Types::Headquarters
       attr_accessor profile_id: ::String
       SENSITIVE: []
     end
@@ -559,6 +619,12 @@ module Aws::PartnerCentralAccount
       SENSITIVE: []
     end
 
+    class QualificationsAssociationPartner
+      attr_accessor profile_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
     class RegistrantVerificationDetails < Aws::EmptyStructure
     end
 
@@ -596,7 +662,7 @@ module Aws::PartnerCentralAccount
 
     class ResourceNotFoundException
       attr_accessor message: ::String
-      attr_accessor reason: ("PARTNER_NOT_FOUND" | "PARTNER_PROFILE_NOT_FOUND" | "PARTNER_PROFILE_TASK_NOT_FOUND" | "PARTNER_DOMAIN_NOT_FOUND" | "SENDER_PROFILE_NOT_FOUND" | "RECEIVER_PROFILE_NOT_FOUND" | "CONNECTION_INVITATION_NOT_FOUND" | "CONNECTION_NOT_FOUND" | "VERIFICATION_NOT_FOUND")
+      attr_accessor reason: ("PARTNER_NOT_FOUND" | "PARTNER_PROFILE_NOT_FOUND" | "PARTNER_PROFILE_TASK_NOT_FOUND" | "PARTNER_DOMAIN_NOT_FOUND" | "SENDER_PROFILE_NOT_FOUND" | "RECEIVER_PROFILE_NOT_FOUND" | "CONNECTION_INVITATION_NOT_FOUND" | "CONNECTION_NOT_FOUND" | "VERIFICATION_NOT_FOUND" | "QUALIFICATIONS_ASSOCIATION_TASK_NOT_FOUND" | "QUALIFICATIONS_DISASSOCIATION_TASK_NOT_FOUND")
       SENSITIVE: []
     end
 
@@ -642,6 +708,44 @@ module Aws::PartnerCentralAccount
       SENSITIVE: []
     end
 
+    class StartQualificationsAssociationTaskRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor primary_partner: Types::QualificationsAssociationPartner
+      SENSITIVE: []
+    end
+
+    class StartQualificationsAssociationTaskResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED")
+      attr_accessor primary_partner: Types::QualificationsAssociationPartner
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StartQualificationsDisassociationTaskRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor associated_partner: Types::QualificationsAssociationPartner
+      SENSITIVE: []
+    end
+
+    class StartQualificationsDisassociationTaskResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED")
+      attr_accessor associated_partner: Types::QualificationsAssociationPartner
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
     class StartVerificationRequest
       attr_accessor client_token: ::String
       attr_accessor verification_details: Types::VerificationDetails
@@ -682,6 +786,7 @@ module Aws::PartnerCentralAccount
       attr_accessor industry_segments: ::Array[("AGRICULTURE_MINING" | "BIOTECHNOLOGY" | "BUSINESS_CONSUMER_SERVICES" | "BUSINESS_SERV" | "COMMUNICATIONS" | "COMPUTER_HARDWARE" | "COMPUTERS_ELECTRONICS" | "COMPUTER_SOFTWARE" | "CONSUMER_GOODS" | "CONSUMER_RELATED" | "EDUCATION" | "ENERGY_UTILITIES" | "FINANCIAL_SERVICES" | "GAMING" | "GOVERNMENT" | "GOVERNMENT_EDUCATION_PUBLIC_SERVICES" | "HEALTHCARE" | "HEALTHCARE_PHARMACEUTICALS_BIOTECH" | "INDUSTRIAL_ENERGY" | "INTERNET_SPECIFIC" | "LIFE_SCIENCES" | "MANUFACTURING" | "MEDIA_ENTERTAINMENT_LEISURE" | "MEDIA_ENTERTAINMENT" | "MEDICAL_HEALTH" | "NON_PROFIT_ORGANIZATION" | "OTHER" | "PROFESSIONAL_SERVICES" | "REAL_ESTATE_CONSTRUCTION" | "RETAIL" | "RETAIL_WHOLESALE_DISTRIBUTION" | "SEMICONDUCTOR_ELECTR" | "SOFTWARE_INTERNET" | "TELECOMMUNICATIONS" | "TRANSPORTATION_LOGISTICS" | "TRAVEL_HOSPITALITY" | "WHOLESALE_DISTRIBUTION")]
       attr_accessor translation_source_locale: ::String
       attr_accessor localized_contents: ::Array[Types::LocalizedContent]
+      attr_accessor headquarters: Types::Headquarters
       SENSITIVE: []
     end
 

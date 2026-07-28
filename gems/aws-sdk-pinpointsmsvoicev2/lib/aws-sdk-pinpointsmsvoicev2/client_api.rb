@@ -113,6 +113,8 @@ module Aws::PinpointSMSVoiceV2
     DeleteProtectConfigurationRuleSetNumberOverrideResult = Shapes::StructureShape.new(name: 'DeleteProtectConfigurationRuleSetNumberOverrideResult')
     DeleteRcsAgentRequest = Shapes::StructureShape.new(name: 'DeleteRcsAgentRequest')
     DeleteRcsAgentResult = Shapes::StructureShape.new(name: 'DeleteRcsAgentResult')
+    DeleteRcsMessageSpendLimitOverrideRequest = Shapes::StructureShape.new(name: 'DeleteRcsMessageSpendLimitOverrideRequest')
+    DeleteRcsMessageSpendLimitOverrideResult = Shapes::StructureShape.new(name: 'DeleteRcsMessageSpendLimitOverrideResult')
     DeleteRegistrationAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteRegistrationAttachmentRequest')
     DeleteRegistrationAttachmentResult = Shapes::StructureShape.new(name: 'DeleteRegistrationAttachmentResult')
     DeleteRegistrationFieldValueRequest = Shapes::StructureShape.new(name: 'DeleteRegistrationFieldValueRequest')
@@ -202,6 +204,7 @@ module Aws::PinpointSMSVoiceV2
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResult = Shapes::StructureShape.new(name: 'GetResourcePolicyResult')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
+    IamRoleArnOrUnset = Shapes::StringShape.new(name: 'IamRoleArnOrUnset')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IsoCountryCode = Shapes::StringShape.new(name: 'IsoCountryCode')
@@ -353,6 +356,54 @@ module Aws::PinpointSMSVoiceV2
     RcsAgentInformation = Shapes::StructureShape.new(name: 'RcsAgentInformation')
     RcsAgentInformationList = Shapes::ListShape.new(name: 'RcsAgentInformationList')
     RcsAgentStatus = Shapes::StringShape.new(name: 'RcsAgentStatus')
+    RcsCalendarEventDescription = Shapes::StringShape.new(name: 'RcsCalendarEventDescription')
+    RcsCalendarEventTitle = Shapes::StringShape.new(name: 'RcsCalendarEventTitle')
+    RcsCardContent = Shapes::StructureShape.new(name: 'RcsCardContent')
+    RcsCardDescription = Shapes::StringShape.new(name: 'RcsCardDescription')
+    RcsCardMedia = Shapes::StructureShape.new(name: 'RcsCardMedia')
+    RcsCardMediaHeightString = Shapes::StringShape.new(name: 'RcsCardMediaHeightString')
+    RcsCardSuggestedActionList = Shapes::ListShape.new(name: 'RcsCardSuggestedActionList')
+    RcsCardTitle = Shapes::StringShape.new(name: 'RcsCardTitle')
+    RcsCarousel = Shapes::StructureShape.new(name: 'RcsCarousel')
+    RcsCarouselCardContent = Shapes::StructureShape.new(name: 'RcsCarouselCardContent')
+    RcsCarouselCardContentList = Shapes::ListShape.new(name: 'RcsCarouselCardContentList')
+    RcsCarouselCardMedia = Shapes::StructureShape.new(name: 'RcsCarouselCardMedia')
+    RcsCarouselCardMediaHeightString = Shapes::StringShape.new(name: 'RcsCarouselCardMediaHeightString')
+    RcsCarouselCardWidthString = Shapes::StringShape.new(name: 'RcsCarouselCardWidthString')
+    RcsContent = Shapes::UnionShape.new(name: 'RcsContent')
+    RcsCreateCalendarEventAction = Shapes::StructureShape.new(name: 'RcsCreateCalendarEventAction')
+    RcsDialPhoneAction = Shapes::StructureShape.new(name: 'RcsDialPhoneAction')
+    RcsEventType = Shapes::StringShape.new(name: 'RcsEventType')
+    RcsEventTypeList = Shapes::ListShape.new(name: 'RcsEventTypeList')
+    RcsFallbackChannel = Shapes::StringShape.new(name: 'RcsFallbackChannel')
+    RcsFallbackConfiguration = Shapes::StructureShape.new(name: 'RcsFallbackConfiguration')
+    RcsFallbackMessageBody = Shapes::StringShape.new(name: 'RcsFallbackMessageBody')
+    RcsFallbackOriginationIdentity = Shapes::StringShape.new(name: 'RcsFallbackOriginationIdentity')
+    RcsFileMessage = Shapes::StructureShape.new(name: 'RcsFileMessage')
+    RcsLocationLabel = Shapes::StringShape.new(name: 'RcsLocationLabel')
+    RcsMediaUrl = Shapes::StringShape.new(name: 'RcsMediaUrl')
+    RcsMessageContent = Shapes::StructureShape.new(name: 'RcsMessageContent')
+    RcsMessageOriginationIdentity = Shapes::StringShape.new(name: 'RcsMessageOriginationIdentity')
+    RcsMessageTrafficType = Shapes::StringShape.new(name: 'RcsMessageTrafficType')
+    RcsOpenUrlAction = Shapes::StructureShape.new(name: 'RcsOpenUrlAction')
+    RcsOpenUrlActionApplicationString = Shapes::StringShape.new(name: 'RcsOpenUrlActionApplicationString')
+    RcsOpenUrlActionWebviewViewModeString = Shapes::StringShape.new(name: 'RcsOpenUrlActionWebviewViewModeString')
+    RcsOpenUrlValue = Shapes::StringShape.new(name: 'RcsOpenUrlValue')
+    RcsPostbackData = Shapes::StringShape.new(name: 'RcsPostbackData')
+    RcsReplyAction = Shapes::StructureShape.new(name: 'RcsReplyAction')
+    RcsRequestLocationAction = Shapes::StructureShape.new(name: 'RcsRequestLocationAction')
+    RcsShowLocationAction = Shapes::StructureShape.new(name: 'RcsShowLocationAction')
+    RcsShowLocationActionLatitudeDouble = Shapes::FloatShape.new(name: 'RcsShowLocationActionLatitudeDouble')
+    RcsShowLocationActionLongitudeDouble = Shapes::FloatShape.new(name: 'RcsShowLocationActionLongitudeDouble')
+    RcsStandaloneCard = Shapes::StructureShape.new(name: 'RcsStandaloneCard')
+    RcsStandaloneCardCardOrientationString = Shapes::StringShape.new(name: 'RcsStandaloneCardCardOrientationString')
+    RcsStandaloneCardThumbnailImageAlignmentString = Shapes::StringShape.new(name: 'RcsStandaloneCardThumbnailImageAlignmentString')
+    RcsSuggestedAction = Shapes::UnionShape.new(name: 'RcsSuggestedAction')
+    RcsSuggestedActionList = Shapes::ListShape.new(name: 'RcsSuggestedActionList')
+    RcsSuggestedActionText = Shapes::StringShape.new(name: 'RcsSuggestedActionText')
+    RcsTextBody = Shapes::StringShape.new(name: 'RcsTextBody')
+    RcsTextMessage = Shapes::StructureShape.new(name: 'RcsTextMessage')
+    RcsTimeToLive = Shapes::IntegerShape.new(name: 'RcsTimeToLive')
     RegistrationAssociationBehavior = Shapes::StringShape.new(name: 'RegistrationAssociationBehavior')
     RegistrationAssociationFilter = Shapes::StructureShape.new(name: 'RegistrationAssociationFilter')
     RegistrationAssociationFilterList = Shapes::ListShape.new(name: 'RegistrationAssociationFilterList')
@@ -430,6 +481,8 @@ module Aws::PinpointSMSVoiceV2
     SendNotifyTextMessageResult = Shapes::StructureShape.new(name: 'SendNotifyTextMessageResult')
     SendNotifyVoiceMessageRequest = Shapes::StructureShape.new(name: 'SendNotifyVoiceMessageRequest')
     SendNotifyVoiceMessageResult = Shapes::StructureShape.new(name: 'SendNotifyVoiceMessageResult')
+    SendRcsMessageRequest = Shapes::StructureShape.new(name: 'SendRcsMessageRequest')
+    SendRcsMessageResult = Shapes::StructureShape.new(name: 'SendRcsMessageResult')
     SendTextMessageRequest = Shapes::StructureShape.new(name: 'SendTextMessageRequest')
     SendTextMessageResult = Shapes::StructureShape.new(name: 'SendTextMessageResult')
     SendVoiceMessageRequest = Shapes::StructureShape.new(name: 'SendVoiceMessageRequest')
@@ -457,6 +510,8 @@ module Aws::PinpointSMSVoiceV2
     SetMediaMessageSpendLimitOverrideResult = Shapes::StructureShape.new(name: 'SetMediaMessageSpendLimitOverrideResult')
     SetNotifyMessageSpendLimitOverrideRequest = Shapes::StructureShape.new(name: 'SetNotifyMessageSpendLimitOverrideRequest')
     SetNotifyMessageSpendLimitOverrideResult = Shapes::StructureShape.new(name: 'SetNotifyMessageSpendLimitOverrideResult')
+    SetRcsMessageSpendLimitOverrideRequest = Shapes::StructureShape.new(name: 'SetRcsMessageSpendLimitOverrideRequest')
+    SetRcsMessageSpendLimitOverrideResult = Shapes::StructureShape.new(name: 'SetRcsMessageSpendLimitOverrideResult')
     SetTextMessageSpendLimitOverrideRequest = Shapes::StructureShape.new(name: 'SetTextMessageSpendLimitOverrideRequest')
     SetTextMessageSpendLimitOverrideResult = Shapes::StructureShape.new(name: 'SetTextMessageSpendLimitOverrideResult')
     SetVoiceMessageSpendLimitOverrideRequest = Shapes::StructureShape.new(name: 'SetVoiceMessageSpendLimitOverrideRequest')
@@ -499,6 +554,9 @@ module Aws::PinpointSMSVoiceV2
     TimeToLive = Shapes::IntegerShape.new(name: 'TimeToLive')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TwoWayChannelArn = Shapes::StringShape.new(name: 'TwoWayChannelArn')
+    TwoWayMediaS3BucketName = Shapes::StringShape.new(name: 'TwoWayMediaS3BucketName')
+    TwoWayMediaS3BucketNameOrUnset = Shapes::StringShape.new(name: 'TwoWayMediaS3BucketNameOrUnset')
+    TwoWayMediaS3KeyPrefix = Shapes::StringShape.new(name: 'TwoWayMediaS3KeyPrefix')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResult = Shapes::StructureShape.new(name: 'UntagResourceResult')
     UpdateEventDestinationRequest = Shapes::StructureShape.new(name: 'UpdateEventDestinationRequest')
@@ -763,6 +821,10 @@ module Aws::PinpointSMSVoiceV2
     CreateRcsAgentResult.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
     CreateRcsAgentResult.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     CreateRcsAgentResult.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "TwoWayEnabled"))
+    CreateRcsAgentResult.add_member(:two_way_media_s3_bucket_name, Shapes::ShapeRef.new(shape: TwoWayMediaS3BucketName, location_name: "TwoWayMediaS3BucketName"))
+    CreateRcsAgentResult.add_member(:two_way_media_s3_key_prefix, Shapes::ShapeRef.new(shape: TwoWayMediaS3KeyPrefix, location_name: "TwoWayMediaS3KeyPrefix"))
+    CreateRcsAgentResult.add_member(:two_way_media_s3_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayMediaS3Role"))
+    CreateRcsAgentResult.add_member(:two_way_rcs_events_enabled, Shapes::ShapeRef.new(shape: RcsEventTypeList, location_name: "TwoWayRcsEventsEnabled"))
     CreateRcsAgentResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateRcsAgentResult.struct_class = Types::CreateRcsAgentResult
 
@@ -987,7 +1049,13 @@ module Aws::PinpointSMSVoiceV2
     DeleteRcsAgentResult.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
     DeleteRcsAgentResult.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     DeleteRcsAgentResult.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "TwoWayEnabled"))
+    DeleteRcsAgentResult.add_member(:two_way_rcs_events_enabled, Shapes::ShapeRef.new(shape: RcsEventTypeList, location_name: "TwoWayRcsEventsEnabled"))
     DeleteRcsAgentResult.struct_class = Types::DeleteRcsAgentResult
+
+    DeleteRcsMessageSpendLimitOverrideRequest.struct_class = Types::DeleteRcsMessageSpendLimitOverrideRequest
+
+    DeleteRcsMessageSpendLimitOverrideResult.add_member(:monthly_limit, Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
+    DeleteRcsMessageSpendLimitOverrideResult.struct_class = Types::DeleteRcsMessageSpendLimitOverrideResult
 
     DeleteRegistrationAttachmentRequest.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: RegistrationAttachmentIdOrArn, required: true, location_name: "RegistrationAttachmentId"))
     DeleteRegistrationAttachmentRequest.struct_class = Types::DeleteRegistrationAttachmentRequest
@@ -1754,10 +1822,133 @@ module Aws::PinpointSMSVoiceV2
     RcsAgentInformation.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     RcsAgentInformation.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "TwoWayEnabled"))
     RcsAgentInformation.add_member(:pool_id, Shapes::ShapeRef.new(shape: String, location_name: "PoolId"))
+    RcsAgentInformation.add_member(:two_way_media_s3_bucket_name, Shapes::ShapeRef.new(shape: TwoWayMediaS3BucketName, location_name: "TwoWayMediaS3BucketName"))
+    RcsAgentInformation.add_member(:two_way_media_s3_key_prefix, Shapes::ShapeRef.new(shape: TwoWayMediaS3KeyPrefix, location_name: "TwoWayMediaS3KeyPrefix"))
+    RcsAgentInformation.add_member(:two_way_media_s3_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayMediaS3Role"))
+    RcsAgentInformation.add_member(:two_way_rcs_events_enabled, Shapes::ShapeRef.new(shape: RcsEventTypeList, location_name: "TwoWayRcsEventsEnabled"))
     RcsAgentInformation.add_member(:testing_agent, Shapes::ShapeRef.new(shape: TestingAgentInformation, location_name: "TestingAgent"))
     RcsAgentInformation.struct_class = Types::RcsAgentInformation
 
     RcsAgentInformationList.member = Shapes::ShapeRef.new(shape: RcsAgentInformation)
+
+    RcsCardContent.add_member(:title, Shapes::ShapeRef.new(shape: RcsCardTitle, location_name: "Title"))
+    RcsCardContent.add_member(:description, Shapes::ShapeRef.new(shape: RcsCardDescription, location_name: "Description"))
+    RcsCardContent.add_member(:media, Shapes::ShapeRef.new(shape: RcsCardMedia, location_name: "Media"))
+    RcsCardContent.add_member(:suggestions, Shapes::ShapeRef.new(shape: RcsCardSuggestedActionList, location_name: "Suggestions"))
+    RcsCardContent.struct_class = Types::RcsCardContent
+
+    RcsCardMedia.add_member(:file_url, Shapes::ShapeRef.new(shape: RcsMediaUrl, required: true, location_name: "FileUrl"))
+    RcsCardMedia.add_member(:thumbnail_url, Shapes::ShapeRef.new(shape: RcsMediaUrl, location_name: "ThumbnailUrl"))
+    RcsCardMedia.add_member(:height, Shapes::ShapeRef.new(shape: RcsCardMediaHeightString, location_name: "Height"))
+    RcsCardMedia.struct_class = Types::RcsCardMedia
+
+    RcsCardSuggestedActionList.member = Shapes::ShapeRef.new(shape: RcsSuggestedAction)
+
+    RcsCarousel.add_member(:card_width, Shapes::ShapeRef.new(shape: RcsCarouselCardWidthString, required: true, location_name: "CardWidth"))
+    RcsCarousel.add_member(:card_contents, Shapes::ShapeRef.new(shape: RcsCarouselCardContentList, required: true, location_name: "CardContents"))
+    RcsCarousel.struct_class = Types::RcsCarousel
+
+    RcsCarouselCardContent.add_member(:title, Shapes::ShapeRef.new(shape: RcsCardTitle, location_name: "Title"))
+    RcsCarouselCardContent.add_member(:description, Shapes::ShapeRef.new(shape: RcsCardDescription, location_name: "Description"))
+    RcsCarouselCardContent.add_member(:media, Shapes::ShapeRef.new(shape: RcsCarouselCardMedia, location_name: "Media"))
+    RcsCarouselCardContent.add_member(:suggestions, Shapes::ShapeRef.new(shape: RcsCardSuggestedActionList, location_name: "Suggestions"))
+    RcsCarouselCardContent.struct_class = Types::RcsCarouselCardContent
+
+    RcsCarouselCardContentList.member = Shapes::ShapeRef.new(shape: RcsCarouselCardContent)
+
+    RcsCarouselCardMedia.add_member(:file_url, Shapes::ShapeRef.new(shape: RcsMediaUrl, required: true, location_name: "FileUrl"))
+    RcsCarouselCardMedia.add_member(:thumbnail_url, Shapes::ShapeRef.new(shape: RcsMediaUrl, location_name: "ThumbnailUrl"))
+    RcsCarouselCardMedia.add_member(:height, Shapes::ShapeRef.new(shape: RcsCarouselCardMediaHeightString, location_name: "Height"))
+    RcsCarouselCardMedia.struct_class = Types::RcsCarouselCardMedia
+
+    RcsContent.add_member(:text_message, Shapes::ShapeRef.new(shape: RcsTextMessage, location_name: "TextMessage"))
+    RcsContent.add_member(:file_message, Shapes::ShapeRef.new(shape: RcsFileMessage, location_name: "FileMessage"))
+    RcsContent.add_member(:rich_card, Shapes::ShapeRef.new(shape: RcsStandaloneCard, location_name: "RichCard"))
+    RcsContent.add_member(:carousel, Shapes::ShapeRef.new(shape: RcsCarousel, location_name: "Carousel"))
+    RcsContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RcsContent.add_member_subclass(:text_message, Types::RcsContent::TextMessage)
+    RcsContent.add_member_subclass(:file_message, Types::RcsContent::FileMessage)
+    RcsContent.add_member_subclass(:rich_card, Types::RcsContent::RichCard)
+    RcsContent.add_member_subclass(:carousel, Types::RcsContent::Carousel)
+    RcsContent.add_member_subclass(:unknown, Types::RcsContent::Unknown)
+    RcsContent.struct_class = Types::RcsContent
+
+    RcsCreateCalendarEventAction.add_member(:text, Shapes::ShapeRef.new(shape: RcsSuggestedActionText, required: true, location_name: "Text"))
+    RcsCreateCalendarEventAction.add_member(:postback_data, Shapes::ShapeRef.new(shape: RcsPostbackData, required: true, location_name: "PostbackData"))
+    RcsCreateCalendarEventAction.add_member(:title, Shapes::ShapeRef.new(shape: RcsCalendarEventTitle, required: true, location_name: "Title"))
+    RcsCreateCalendarEventAction.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    RcsCreateCalendarEventAction.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    RcsCreateCalendarEventAction.add_member(:description, Shapes::ShapeRef.new(shape: RcsCalendarEventDescription, location_name: "Description"))
+    RcsCreateCalendarEventAction.struct_class = Types::RcsCreateCalendarEventAction
+
+    RcsDialPhoneAction.add_member(:text, Shapes::ShapeRef.new(shape: RcsSuggestedActionText, required: true, location_name: "Text"))
+    RcsDialPhoneAction.add_member(:postback_data, Shapes::ShapeRef.new(shape: RcsPostbackData, required: true, location_name: "PostbackData"))
+    RcsDialPhoneAction.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "PhoneNumber"))
+    RcsDialPhoneAction.struct_class = Types::RcsDialPhoneAction
+
+    RcsEventTypeList.member = Shapes::ShapeRef.new(shape: RcsEventType)
+
+    RcsFallbackConfiguration.add_member(:channel, Shapes::ShapeRef.new(shape: RcsFallbackChannel, required: true, location_name: "Channel"))
+    RcsFallbackConfiguration.add_member(:message_body, Shapes::ShapeRef.new(shape: RcsFallbackMessageBody, location_name: "MessageBody"))
+    RcsFallbackConfiguration.add_member(:media_urls, Shapes::ShapeRef.new(shape: MediaUrlList, location_name: "MediaUrls"))
+    RcsFallbackConfiguration.add_member(:origination_identity, Shapes::ShapeRef.new(shape: RcsFallbackOriginationIdentity, location_name: "OriginationIdentity"))
+    RcsFallbackConfiguration.struct_class = Types::RcsFallbackConfiguration
+
+    RcsFileMessage.add_member(:file_url, Shapes::ShapeRef.new(shape: RcsMediaUrl, required: true, location_name: "FileUrl"))
+    RcsFileMessage.add_member(:thumbnail_url, Shapes::ShapeRef.new(shape: RcsMediaUrl, location_name: "ThumbnailUrl"))
+    RcsFileMessage.struct_class = Types::RcsFileMessage
+
+    RcsMessageContent.add_member(:content, Shapes::ShapeRef.new(shape: RcsContent, required: true, location_name: "Content"))
+    RcsMessageContent.add_member(:suggestions, Shapes::ShapeRef.new(shape: RcsSuggestedActionList, location_name: "Suggestions"))
+    RcsMessageContent.struct_class = Types::RcsMessageContent
+
+    RcsOpenUrlAction.add_member(:text, Shapes::ShapeRef.new(shape: RcsSuggestedActionText, required: true, location_name: "Text"))
+    RcsOpenUrlAction.add_member(:postback_data, Shapes::ShapeRef.new(shape: RcsPostbackData, required: true, location_name: "PostbackData"))
+    RcsOpenUrlAction.add_member(:url, Shapes::ShapeRef.new(shape: RcsOpenUrlValue, required: true, location_name: "Url"))
+    RcsOpenUrlAction.add_member(:application, Shapes::ShapeRef.new(shape: RcsOpenUrlActionApplicationString, location_name: "Application"))
+    RcsOpenUrlAction.add_member(:webview_view_mode, Shapes::ShapeRef.new(shape: RcsOpenUrlActionWebviewViewModeString, location_name: "WebviewViewMode"))
+    RcsOpenUrlAction.struct_class = Types::RcsOpenUrlAction
+
+    RcsReplyAction.add_member(:text, Shapes::ShapeRef.new(shape: RcsSuggestedActionText, required: true, location_name: "Text"))
+    RcsReplyAction.add_member(:postback_data, Shapes::ShapeRef.new(shape: RcsPostbackData, required: true, location_name: "PostbackData"))
+    RcsReplyAction.struct_class = Types::RcsReplyAction
+
+    RcsRequestLocationAction.add_member(:text, Shapes::ShapeRef.new(shape: RcsSuggestedActionText, required: true, location_name: "Text"))
+    RcsRequestLocationAction.add_member(:postback_data, Shapes::ShapeRef.new(shape: RcsPostbackData, required: true, location_name: "PostbackData"))
+    RcsRequestLocationAction.struct_class = Types::RcsRequestLocationAction
+
+    RcsShowLocationAction.add_member(:text, Shapes::ShapeRef.new(shape: RcsSuggestedActionText, required: true, location_name: "Text"))
+    RcsShowLocationAction.add_member(:postback_data, Shapes::ShapeRef.new(shape: RcsPostbackData, required: true, location_name: "PostbackData"))
+    RcsShowLocationAction.add_member(:latitude, Shapes::ShapeRef.new(shape: RcsShowLocationActionLatitudeDouble, required: true, location_name: "Latitude"))
+    RcsShowLocationAction.add_member(:longitude, Shapes::ShapeRef.new(shape: RcsShowLocationActionLongitudeDouble, required: true, location_name: "Longitude"))
+    RcsShowLocationAction.add_member(:label, Shapes::ShapeRef.new(shape: RcsLocationLabel, location_name: "Label"))
+    RcsShowLocationAction.struct_class = Types::RcsShowLocationAction
+
+    RcsStandaloneCard.add_member(:card_orientation, Shapes::ShapeRef.new(shape: RcsStandaloneCardCardOrientationString, required: true, location_name: "CardOrientation"))
+    RcsStandaloneCard.add_member(:thumbnail_image_alignment, Shapes::ShapeRef.new(shape: RcsStandaloneCardThumbnailImageAlignmentString, location_name: "ThumbnailImageAlignment"))
+    RcsStandaloneCard.add_member(:card_content, Shapes::ShapeRef.new(shape: RcsCardContent, required: true, location_name: "CardContent"))
+    RcsStandaloneCard.struct_class = Types::RcsStandaloneCard
+
+    RcsSuggestedAction.add_member(:reply, Shapes::ShapeRef.new(shape: RcsReplyAction, location_name: "Reply"))
+    RcsSuggestedAction.add_member(:open_url, Shapes::ShapeRef.new(shape: RcsOpenUrlAction, location_name: "OpenUrl"))
+    RcsSuggestedAction.add_member(:dial_phone, Shapes::ShapeRef.new(shape: RcsDialPhoneAction, location_name: "DialPhone"))
+    RcsSuggestedAction.add_member(:show_location, Shapes::ShapeRef.new(shape: RcsShowLocationAction, location_name: "ShowLocation"))
+    RcsSuggestedAction.add_member(:request_location, Shapes::ShapeRef.new(shape: RcsRequestLocationAction, location_name: "RequestLocation"))
+    RcsSuggestedAction.add_member(:create_calendar_event, Shapes::ShapeRef.new(shape: RcsCreateCalendarEventAction, location_name: "CreateCalendarEvent"))
+    RcsSuggestedAction.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RcsSuggestedAction.add_member_subclass(:reply, Types::RcsSuggestedAction::Reply)
+    RcsSuggestedAction.add_member_subclass(:open_url, Types::RcsSuggestedAction::OpenUrl)
+    RcsSuggestedAction.add_member_subclass(:dial_phone, Types::RcsSuggestedAction::DialPhone)
+    RcsSuggestedAction.add_member_subclass(:show_location, Types::RcsSuggestedAction::ShowLocation)
+    RcsSuggestedAction.add_member_subclass(:request_location, Types::RcsSuggestedAction::RequestLocation)
+    RcsSuggestedAction.add_member_subclass(:create_calendar_event, Types::RcsSuggestedAction::CreateCalendarEvent)
+    RcsSuggestedAction.add_member_subclass(:unknown, Types::RcsSuggestedAction::Unknown)
+    RcsSuggestedAction.struct_class = Types::RcsSuggestedAction
+
+    RcsSuggestedActionList.member = Shapes::ShapeRef.new(shape: RcsSuggestedAction)
+
+    RcsTextMessage.add_member(:body, Shapes::ShapeRef.new(shape: RcsTextBody, required: true, location_name: "Body"))
+    RcsTextMessage.struct_class = Types::RcsTextMessage
 
     RegistrationAssociationFilter.add_member(:name, Shapes::ShapeRef.new(shape: RegistrationAssociationFilterName, required: true, location_name: "Name"))
     RegistrationAssociationFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
@@ -2086,6 +2277,23 @@ module Aws::PinpointSMSVoiceV2
     SendNotifyVoiceMessageResult.add_member(:resolved_message_body, Shapes::ShapeRef.new(shape: String, location_name: "ResolvedMessageBody"))
     SendNotifyVoiceMessageResult.struct_class = Types::SendNotifyVoiceMessageResult
 
+    SendRcsMessageRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    SendRcsMessageRequest.add_member(:origination_identity, Shapes::ShapeRef.new(shape: RcsMessageOriginationIdentity, required: true, location_name: "OriginationIdentity"))
+    SendRcsMessageRequest.add_member(:rcs_message_content, Shapes::ShapeRef.new(shape: RcsMessageContent, location_name: "RcsMessageContent"))
+    SendRcsMessageRequest.add_member(:time_to_live, Shapes::ShapeRef.new(shape: RcsTimeToLive, location_name: "TimeToLive"))
+    SendRcsMessageRequest.add_member(:message_traffic_type, Shapes::ShapeRef.new(shape: RcsMessageTrafficType, location_name: "MessageTrafficType"))
+    SendRcsMessageRequest.add_member(:fallback_configuration, Shapes::ShapeRef.new(shape: RcsFallbackConfiguration, location_name: "FallbackConfiguration"))
+    SendRcsMessageRequest.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
+    SendRcsMessageRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, location_name: "ConfigurationSetName"))
+    SendRcsMessageRequest.add_member(:max_price, Shapes::ShapeRef.new(shape: MaxPrice, location_name: "MaxPrice"))
+    SendRcsMessageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "DryRun"))
+    SendRcsMessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: ContextMap, location_name: "Context"))
+    SendRcsMessageRequest.add_member(:message_feedback_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MessageFeedbackEnabled"))
+    SendRcsMessageRequest.struct_class = Types::SendRcsMessageRequest
+
+    SendRcsMessageResult.add_member(:message_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageId"))
+    SendRcsMessageResult.struct_class = Types::SendRcsMessageResult
+
     SendTextMessageRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
     SendTextMessageRequest.add_member(:origination_identity, Shapes::ShapeRef.new(shape: TextMessageOriginationIdentity, location_name: "OriginationIdentity"))
     SendTextMessageRequest.add_member(:message_body, Shapes::ShapeRef.new(shape: TextMessageBody, location_name: "MessageBody"))
@@ -2194,6 +2402,12 @@ module Aws::PinpointSMSVoiceV2
 
     SetNotifyMessageSpendLimitOverrideResult.add_member(:monthly_limit, Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
     SetNotifyMessageSpendLimitOverrideResult.struct_class = Types::SetNotifyMessageSpendLimitOverrideResult
+
+    SetRcsMessageSpendLimitOverrideRequest.add_member(:monthly_limit, Shapes::ShapeRef.new(shape: MonthlyLimit, required: true, location_name: "MonthlyLimit"))
+    SetRcsMessageSpendLimitOverrideRequest.struct_class = Types::SetRcsMessageSpendLimitOverrideRequest
+
+    SetRcsMessageSpendLimitOverrideResult.add_member(:monthly_limit, Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
+    SetRcsMessageSpendLimitOverrideResult.struct_class = Types::SetRcsMessageSpendLimitOverrideResult
 
     SetTextMessageSpendLimitOverrideRequest.add_member(:monthly_limit, Shapes::ShapeRef.new(shape: MonthlyLimit, required: true, location_name: "MonthlyLimit"))
     SetTextMessageSpendLimitOverrideRequest.struct_class = Types::SetTextMessageSpendLimitOverrideRequest
@@ -2415,6 +2629,10 @@ module Aws::PinpointSMSVoiceV2
     UpdateRcsAgentRequest.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
     UpdateRcsAgentRequest.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     UpdateRcsAgentRequest.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "TwoWayEnabled"))
+    UpdateRcsAgentRequest.add_member(:two_way_media_s3_bucket_name, Shapes::ShapeRef.new(shape: TwoWayMediaS3BucketNameOrUnset, location_name: "TwoWayMediaS3BucketName"))
+    UpdateRcsAgentRequest.add_member(:two_way_media_s3_key_prefix, Shapes::ShapeRef.new(shape: TwoWayMediaS3KeyPrefix, location_name: "TwoWayMediaS3KeyPrefix"))
+    UpdateRcsAgentRequest.add_member(:two_way_media_s3_role, Shapes::ShapeRef.new(shape: IamRoleArnOrUnset, location_name: "TwoWayMediaS3Role"))
+    UpdateRcsAgentRequest.add_member(:two_way_rcs_events_enabled, Shapes::ShapeRef.new(shape: RcsEventTypeList, location_name: "TwoWayRcsEventsEnabled"))
     UpdateRcsAgentRequest.struct_class = Types::UpdateRcsAgentRequest
 
     UpdateRcsAgentResult.add_member(:rcs_agent_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RcsAgentArn"))
@@ -2427,6 +2645,10 @@ module Aws::PinpointSMSVoiceV2
     UpdateRcsAgentResult.add_member(:two_way_channel_arn, Shapes::ShapeRef.new(shape: TwoWayChannelArn, location_name: "TwoWayChannelArn"))
     UpdateRcsAgentResult.add_member(:two_way_channel_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayChannelRole"))
     UpdateRcsAgentResult.add_member(:two_way_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "TwoWayEnabled"))
+    UpdateRcsAgentResult.add_member(:two_way_media_s3_bucket_name, Shapes::ShapeRef.new(shape: TwoWayMediaS3BucketName, location_name: "TwoWayMediaS3BucketName"))
+    UpdateRcsAgentResult.add_member(:two_way_media_s3_key_prefix, Shapes::ShapeRef.new(shape: TwoWayMediaS3KeyPrefix, location_name: "TwoWayMediaS3KeyPrefix"))
+    UpdateRcsAgentResult.add_member(:two_way_media_s3_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayMediaS3Role"))
+    UpdateRcsAgentResult.add_member(:two_way_rcs_events_enabled, Shapes::ShapeRef.new(shape: RcsEventTypeList, location_name: "TwoWayRcsEventsEnabled"))
     UpdateRcsAgentResult.struct_class = Types::UpdateRcsAgentResult
 
     UpdateSenderIdRequest.add_member(:sender_id, Shapes::ShapeRef.new(shape: SenderIdOrArn, required: true, location_name: "SenderId"))
@@ -2921,6 +3143,18 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_rcs_message_spend_limit_override, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRcsMessageSpendLimitOverride"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRcsMessageSpendLimitOverrideRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRcsMessageSpendLimitOverrideResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -3804,6 +4038,21 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:send_rcs_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendRcsMessage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendRcsMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendRcsMessageResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:send_text_message, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SendTextMessage"
         o.http_method = "POST"
@@ -3904,6 +4153,18 @@ module Aws::PinpointSMSVoiceV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SetNotifyMessageSpendLimitOverrideRequest)
         o.output = Shapes::ShapeRef.new(shape: SetNotifyMessageSpendLimitOverrideResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:set_rcs_message_spend_limit_override, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetRcsMessageSpendLimitOverride"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetRcsMessageSpendLimitOverrideRequest)
+        o.output = Shapes::ShapeRef.new(shape: SetRcsMessageSpendLimitOverrideResult)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

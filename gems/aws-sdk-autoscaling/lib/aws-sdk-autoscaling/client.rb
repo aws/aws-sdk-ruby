@@ -1700,7 +1700,7 @@ module Aws::AutoScaling
     #       max_healthy_percentage: 1,
     #     },
     #     availability_zone_distribution: {
-    #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort
+    #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort, reservations-then-balanced
     #     },
     #     availability_zone_impairment_policy: {
     #       zonal_shift_enabled: false,
@@ -2846,7 +2846,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].instance_maintenance_policy.min_healthy_percentage #=> Integer
     #   resp.auto_scaling_groups[0].instance_maintenance_policy.max_healthy_percentage #=> Integer
     #   resp.auto_scaling_groups[0].deletion_protection #=> String, one of "none", "prevent-force-deletion", "prevent-all-deletion"
-    #   resp.auto_scaling_groups[0].availability_zone_distribution.capacity_distribution_strategy #=> String, one of "balanced-only", "balanced-best-effort"
+    #   resp.auto_scaling_groups[0].availability_zone_distribution.capacity_distribution_strategy #=> String, one of "balanced-only", "balanced-best-effort", "reservations-then-balanced"
     #   resp.auto_scaling_groups[0].availability_zone_impairment_policy.zonal_shift_enabled #=> Boolean
     #   resp.auto_scaling_groups[0].availability_zone_impairment_policy.impaired_zone_health_check_behavior #=> String, one of "ReplaceUnhealthy", "IgnoreUnhealthy"
     #   resp.auto_scaling_groups[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "capacity-reservations-only", "capacity-reservations-first", "none", "default"
@@ -7698,7 +7698,7 @@ module Aws::AutoScaling
     #       max_healthy_percentage: 1,
     #     },
     #     availability_zone_distribution: {
-    #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort
+    #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort, reservations-then-balanced
     #     },
     #     availability_zone_impairment_policy: {
     #       zonal_shift_enabled: false,
@@ -7747,7 +7747,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.161.0'
+      context[:gem_version] = '1.163.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

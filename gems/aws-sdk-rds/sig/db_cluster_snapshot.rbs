@@ -218,7 +218,13 @@ module Aws
                        }
                      ],
                      ?enable_vpc_networking: bool,
-                     ?enable_internet_access_gateway: bool
+                     ?enable_internet_access_gateway: bool,
+                     ?associated_roles: Array[
+                       {
+                         role_arn: ::String,
+                         feature_name: ::String?
+                       }
+                     ]
                    ) -> DBCluster
                  | (?Hash[Symbol, untyped]) -> DBCluster
 

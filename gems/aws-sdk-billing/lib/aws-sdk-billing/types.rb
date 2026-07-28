@@ -42,6 +42,27 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # A monetary amount with a currency code. Used throughout the Billing
+    # API to represent credit balances, allocations, and adjustments.
+    #
+    # @!attribute [rw] currency_code
+    #   The ISO 4217 currency code for the amount (for example, `USD`).
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_amount
+    #   The amount as a decimal string (for example, `"743.21"`). Negative
+    #   values represent credits that reduce a bill.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/Amount AWS API Documentation
+    #
+    class Amount < Struct.new(
+      :currency_code,
+      :currency_amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the billing view to associate
     #   source views with.
@@ -69,6 +90,109 @@ module Aws::Billing
     #
     class AssociateSourceViewsResponse < Struct.new(
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that narrows the set of preferences returned by
+    # `GetBillingPreferences`.
+    #
+    # @!attribute [rw] name
+    #   The filter name. Currently the only supported value is
+    #   `PREFERENCE_KEY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The filter values to match. For `PREFERENCE_KEY`, supply 1 to 10
+    #   preference key values to match.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingFeatureFilter AWS API Documentation
+    #
+    class BillingFeatureFilter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A specific billing period identified by year and month.
+    #
+    # @!attribute [rw] year
+    #   The four-digit year of the billing period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] month
+    #   The month of the billing period as an integer between 1 and 12.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingPeriod AWS API Documentation
+    #
+    class BillingPeriod < Struct.new(
+      :year,
+      :month)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single key/value entry used to update a billing preference.
+    #
+    # @!attribute [rw] key
+    #   The preference key. Format depends on the feature being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The preference value. Valid values: `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingPreferenceForKey AWS API Documentation
+    #
+    class BillingPreferenceForKey < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single billing preference entry returned by `GetBillingPreferences`.
+    #
+    # @!attribute [rw] feature
+    #   The feature this preference belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The preference key. Format depends on the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The preference value. Valid values: `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_name
+    #   The display name of the account. Populated together with
+    #   `accountId`; `null` otherwise.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The associated Amazon Web Services account ID. Populated for
+    #   account-list keys; `null` otherwise.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_period
+    #   The billing period associated with the preference change. Populated
+    #   only for the history features `RI_SHARING_HISTORY` and
+    #   `CREDIT_SHARING_HISTORY`.
+    #   @return [Types::BillingPeriod]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingPreferenceSummary AWS API Documentation
+    #
+    class BillingPreferenceSummary < Struct.new(
+      :feature,
+      :key,
+      :value,
+      :account_name,
+      :account_id,
+      :billing_period)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -349,6 +473,174 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # A single entry in the credit allocation history, representing how a
+    # credit was applied to a specific service during a billing month.
+    #
+    # @!attribute [rw] credit_id
+    #   The identifier of the credit that was applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] credit_amount
+    #   The amount of credit applied. Negative values represent credits that
+    #   reduced the bill.
+    #   @return [Types::Amount]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the credit allocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account the credit was applied to.
+    #   @return [String]
+    #
+    # @!attribute [rw] applied_service_name
+    #   The Amazon Web Services service the credit was applied to.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_month
+    #   The billing month of the application in `YYYY-MM` format.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_estimated_bill
+    #   `true` when the entry was applied to an in-flight bill that has not
+    #   yet been finalized.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/CreditAllocationHistoryEntry AWS API Documentation
+    #
+    class CreditAllocationHistoryEntry < Struct.new(
+      :credit_id,
+      :credit_amount,
+      :description,
+      :account_id,
+      :applied_service_name,
+      :billing_month,
+      :is_estimated_bill)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about an Amazon Web Services credit, including
+    # its identifier, type, monetary amounts, applicable products, sharing
+    # configuration, and current enabled status.
+    #
+    # @!attribute [rw] credit_id
+    #   The unique identifier for the credit.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID that owns the credit.
+    #   @return [String]
+    #
+    # @!attribute [rw] credit_type
+    #   The type of credit. Examples: `Promotion`, `Refund`, `TrueUp`.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_amount
+    #   The initial amount of the credit when it was issued.
+    #   @return [Types::Amount]
+    #
+    # @!attribute [rw] remaining_amount
+    #   The unused balance of the credit.
+    #   @return [Types::Amount]
+    #
+    # @!attribute [rw] estimated_amount
+    #   The estimated remaining balance, including in-flight (open) bills
+    #   that have not yet been finalized.
+    #   @return [Types::Amount]
+    #
+    # @!attribute [rw] applicable_product_names
+    #   The names of Amazon Web Services services this credit applies to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the credit.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The date the credit becomes valid, as Unix epoch seconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The date the credit expires, as Unix epoch seconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] exhaust_date
+    #   The date the credit balance reached zero, as Unix epoch seconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] application_type
+    #   When the credit is applied during bill computation. Valid values:
+    #   `BEFORE_CROSS_SERVICE_DISCOUNTS`, `AFTER_DISCOUNTS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] shareable_accounts
+    #   The Amazon Web Services account IDs entitled to apply this credit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] account_has_credit_sharing_enabled
+    #   Whether the owning account has account-level credit sharing turned
+    #   on.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] credit_console_visibility
+    #   The display configuration for the credit in the Amazon Web Services
+    #   Billing console.
+    #   @return [String]
+    #
+    # @!attribute [rw] credit_sharing_type
+    #   The sharing configuration for the credit. Valid values: `DEFAULT`,
+    #   `DISABLED`, `CUSTOM`, `COST_CATEGORY_RULE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_arn
+    #   The Amazon Resource Name (ARN) of the Cost Category controlling the
+    #   credit's sharing scope. Present only when `creditSharingType` is
+    #   `COST_CATEGORY_RULE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_name
+    #   The rule name within the Cost Category. Present only when
+    #   `creditSharingType` is `COST_CATEGORY_RULE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] credit_status
+    #   Whether the credit participates in billing runs. Valid values:
+    #   `ENABLED`, `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_type_applications
+    #   Restricts which purchase types this credit applies to. When `null`
+    #   or omitted, the credit applies to all purchase types.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/CreditData AWS API Documentation
+    #
+    class CreditData < Struct.new(
+      :credit_id,
+      :account_id,
+      :credit_type,
+      :initial_amount,
+      :remaining_amount,
+      :estimated_amount,
+      :applicable_product_names,
+      :description,
+      :start_date,
+      :end_date,
+      :exhaust_date,
+      :application_type,
+      :shareable_accounts,
+      :account_has_credit_sharing_enabled,
+      :credit_console_visibility,
+      :credit_sharing_type,
+      :cost_category_arn,
+      :rule_name,
+      :credit_status,
+      :purchase_type_applications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) that can be used to uniquely identify
     #   the billing view.
@@ -468,6 +760,58 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   Pagination token from a previous response. Pass the value returned
+    #   in `nextToken` to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of records to return per page. Range: 1 to 50.
+    #   Default: 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] features
+    #   The feature to retrieve. Specify exactly one value. Valid values:
+    #   `BILLING_ALERTS`, `RI_SHARING`, `RI_SHARING_HISTORY`,
+    #   `CREDIT_SHARING`, `CREDIT_SHARING_HISTORY`, `CREDIT_LEVEL_SHARING`,
+    #   `CREDIT_PREFERENCE_OPTIONS`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Filters to narrow results. Specify exactly one filter when supplied.
+    #   The supported filter name is `PREFERENCE_KEY`, which accepts 1 to 10
+    #   values to match preference keys.
+    #   @return [Array<Types::BillingFeatureFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetBillingPreferencesRequest AWS API Documentation
+    #
+    class GetBillingPreferencesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :features,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] billing_preferences
+    #   The list of preference entries matching the request.
+    #   @return [Array<Types::BillingPreferenceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Present when more pages are available; `null` when
+    #   there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetBillingPreferencesResponse AWS API Documentation
+    #
+    class GetBillingPreferencesResponse < Struct.new(
+      :billing_preferences,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) that can be used to uniquely identify
     #   the billing view.
@@ -489,6 +833,126 @@ module Aws::Billing
     #
     class GetBillingViewResponse < Struct.new(
       :billing_view)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID whose allocation history to
+    #   retrieve. Must be a 12-digit numeric string.
+    #   @return [String]
+    #
+    # @!attribute [rw] credit_id
+    #   Filters the result to a single credit. When omitted, returns
+    #   allocation entries for all credits.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_date
+    #   Inclusive start date as Unix epoch seconds. Must be on or before
+    #   `endDate`. The range from `startDate` to `endDate` cannot exceed 24
+    #   billing months.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   Inclusive end date as Unix epoch seconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token from a previous response. Pass the value returned
+    #   in `nextToken` to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of records to return per page. Range: 1 to 1000.
+    #   Default: 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetCreditAllocationHistoryRequest AWS API Documentation
+    #
+    class GetCreditAllocationHistoryRequest < Struct.new(
+      :account_id,
+      :credit_id,
+      :start_date,
+      :end_date,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credit_allocation_history_list
+    #   Allocation entries sorted by `billingMonth` in descending order.
+    #   @return [Array<Types::CreditAllocationHistoryEntry>]
+    #
+    # @!attribute [rw] partial_results
+    #   `true` when data could not be retrieved for one or more billing
+    #   months. The `failedMonths` field lists which months are missing.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] failed_months
+    #   Billing months in `YYYY-MM` format that failed to return data.
+    #   Non-empty only when `partialResults` is `true`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Present when more pages are available; `null` when
+    #   there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetCreditAllocationHistoryResponse AWS API Documentation
+    #
+    class GetCreditAllocationHistoryResponse < Struct.new(
+      :credit_allocation_history_list,
+      :partial_results,
+      :failed_months,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID. Must be a 12-digit numeric
+    #   string.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The start date for the credit period as Unix epoch seconds. Must be
+    #   a past date that is not more than one year before the current date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date for the credit period as Unix epoch seconds. Must not
+    #   be a future date and must be on or after `startDate`. Defaults to
+    #   the current date when omitted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] payer_account_flag
+    #   When `true` and the caller is the management account, the response
+    #   aggregates credits across the entire consolidated billing family.
+    #   When `false` or omitted, returns only credits for the specified
+    #   `accountId`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetCreditsRequest AWS API Documentation
+    #
+    class GetCreditsRequest < Struct.new(
+      :account_id,
+      :start_date,
+      :end_date,
+      :payer_account_flag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credits
+    #   The list of credits matching the request. Returns an empty list when
+    #   no credits exist.
+    #   @return [Array<Types::CreditData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetCreditsResponse AWS API Documentation
+    #
+    class GetCreditsResponse < Struct.new(
+      :credits)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -680,6 +1144,22 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # @!attribute [rw] promo_code
+    #   The promotional credit code to redeem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/RedeemCreditsRequest AWS API Documentation
+    #
+    class RedeemCreditsRequest < Struct.new(
+      :promo_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/RedeemCreditsResponse AWS API Documentation
+    #
+    class RedeemCreditsResponse < Aws::EmptyStructure; end
+
     # The specified ARN in the request doesn't exist.
     #
     # @!attribute [rw] message
@@ -870,6 +1350,34 @@ module Aws::Billing
     # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] feature
+    #   The feature to update. Valid values: `BILLING_ALERTS`, `RI_SHARING`,
+    #   `CREDIT_SHARING`, `CREDIT_LEVEL_SHARING`,
+    #   `CREDIT_PREFERENCE_OPTIONS`. The history features
+    #   (`RI_SHARING_HISTORY` and `CREDIT_SHARING_HISTORY`) are read-only
+    #   and cannot be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_preferences_per_key
+    #   Key/value pairs to apply. All keys in a single request must be valid
+    #   for the specified `feature` and must not be duplicated. For
+    #   `CREDIT_PREFERENCE_OPTIONS`, all keys must reference the same
+    #   `creditId`.
+    #   @return [Array<Types::BillingPreferenceForKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/UpdateBillingPreferencesRequest AWS API Documentation
+    #
+    class UpdateBillingPreferencesRequest < Struct.new(
+      :feature,
+      :billing_preferences_per_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/UpdateBillingPreferencesResponse AWS API Documentation
+    #
+    class UpdateBillingPreferencesResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) that can be used to uniquely identify

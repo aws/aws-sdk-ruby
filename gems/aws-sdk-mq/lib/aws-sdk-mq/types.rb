@@ -530,6 +530,10 @@ module Aws::MQ
     #   connections to brokers.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] storage_size
+    #   The broker's storage size in GB.
+    #   @return [Integer]
+    #
     # @!attribute [rw] storage_type
     #   The broker's storage type.
     #   @return [String]
@@ -593,6 +597,7 @@ module Aws::MQ
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
+      :storage_size,
       :storage_type,
       :subnet_ids,
       :tags,
@@ -681,6 +686,10 @@ module Aws::MQ
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] storage_size
+    #   The broker's storage size in GB.
+    #   @return [Integer]
+    #
     # @!attribute [rw] storage_type
     #   The broker's storage type.
     #
@@ -721,6 +730,7 @@ module Aws::MQ
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
+      :storage_size,
       :storage_type,
       :subnet_ids,
       :tags,
@@ -1363,6 +1373,11 @@ module Aws::MQ
     #   brokers.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] pending_storage_size
+    #   The pending storage size in GB, to be applied on the next broker
+    #   restart.
+    #   @return [Integer]
+    #
     # @!attribute [rw] publicly_accessible
     #   Enables connections from applications outside of the VPC that hosts
     #   the broker's subnets.
@@ -1372,6 +1387,10 @@ module Aws::MQ
     #   The list of rules (1 minimum, 125 maximum) that authorize
     #   connections to brokers.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_size
+    #   The broker's storage size in GB.
+    #   @return [Integer]
     #
     # @!attribute [rw] storage_type
     #   The broker's storage type.
@@ -1420,8 +1439,10 @@ module Aws::MQ
       :pending_host_instance_type,
       :pending_ldap_server_metadata,
       :pending_security_groups,
+      :pending_storage_size,
       :publicly_accessible,
       :security_groups,
+      :storage_size,
       :storage_type,
       :subnet_ids,
       :tags,
@@ -1527,11 +1548,20 @@ module Aws::MQ
     # @!attribute [rw] pending_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] pending_storage_size
+    #   The pending storage size in GB, to be applied on the next broker
+    #   restart.
+    #   @return [Integer]
+    #
     # @!attribute [rw] publicly_accessible
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_size
+    #   The broker's storage size in GB.
+    #   @return [Integer]
     #
     # @!attribute [rw] storage_type
     #   The broker's storage type.
@@ -1594,8 +1624,10 @@ module Aws::MQ
       :pending_host_instance_type,
       :pending_ldap_server_metadata,
       :pending_security_groups,
+      :pending_storage_size,
       :publicly_accessible,
       :security_groups,
+      :storage_size,
       :storage_type,
       :subnet_ids,
       :tags,
@@ -2850,6 +2882,10 @@ module Aws::MQ
     #   connections to brokers.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] storage_size
+    #   The broker's storage size in GB.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerInput AWS API Documentation
     #
     class UpdateBrokerInput < Struct.new(
@@ -2863,7 +2899,8 @@ module Aws::MQ
       :logs,
       :maintenance_window_start_time,
       :resource_share_arns,
-      :security_groups)
+      :security_groups,
+      :storage_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2953,6 +2990,10 @@ module Aws::MQ
     #   connections to brokers.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] storage_size
+    #   The broker's storage size in GB.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerOutput AWS API Documentation
     #
     class UpdateBrokerOutput < Struct.new(
@@ -2970,7 +3011,8 @@ module Aws::MQ
       :pending_data_replication_metadata,
       :pending_data_replication_mode,
       :resource_share_arns,
-      :security_groups)
+      :security_groups,
+      :storage_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3019,6 +3061,10 @@ module Aws::MQ
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] storage_size
+    #   The broker's storage size in GB.
+    #   @return [Integer]
+    #
     # @!attribute [rw] data_replication_mode
     #   Specifies whether a broker is a part of a data replication pair.
     #   @return [String]
@@ -3037,6 +3083,7 @@ module Aws::MQ
       :maintenance_window_start_time,
       :resource_share_arns,
       :security_groups,
+      :storage_size,
       :data_replication_mode)
       SENSITIVE = []
       include Aws::Structure
@@ -3104,6 +3151,10 @@ module Aws::MQ
     #   Specifies whether a broker is a part of a data replication pair.
     #   @return [String]
     #
+    # @!attribute [rw] storage_size
+    #   The broker's storage size in GB.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerResponse AWS API Documentation
     #
     class UpdateBrokerResponse < Struct.new(
@@ -3121,7 +3172,8 @@ module Aws::MQ
       :data_replication_metadata,
       :data_replication_mode,
       :pending_data_replication_metadata,
-      :pending_data_replication_mode)
+      :pending_data_replication_mode,
+      :storage_size)
       SENSITIVE = []
       include Aws::Structure
     end

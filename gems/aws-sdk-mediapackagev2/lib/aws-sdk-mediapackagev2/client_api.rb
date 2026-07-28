@@ -189,6 +189,8 @@ module Aws::MediaPackageV2
     OriginEndpointListConfiguration = Shapes::StructureShape.new(name: 'OriginEndpointListConfiguration')
     OriginEndpointsList = Shapes::ListShape.new(name: 'OriginEndpointsList')
     OutputHeaderConfiguration = Shapes::StructureShape.new(name: 'OutputHeaderConfiguration')
+    OutputLockingMode = Shapes::StringShape.new(name: 'OutputLockingMode')
+    OutputTimestampMode = Shapes::StringShape.new(name: 'OutputTimestampMode')
     PolicyText = Shapes::StringShape.new(name: 'PolicyText')
     PresetSpeke20Audio = Shapes::StringShape.new(name: 'PresetSpeke20Audio')
     PresetSpeke20Video = Shapes::StringShape.new(name: 'PresetSpeke20Video')
@@ -285,6 +287,7 @@ module Aws::MediaPackageV2
     ChannelListConfiguration.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
     ChannelListConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     ChannelListConfiguration.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
+    ChannelListConfiguration.add_member(:output_locking_mode, Shapes::ShapeRef.new(shape: OutputLockingMode, location_name: "OutputLockingMode"))
     ChannelListConfiguration.struct_class = Types::ChannelListConfiguration
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -314,6 +317,7 @@ module Aws::MediaPackageV2
     CreateChannelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateChannelRequest.add_member(:input_switch_configuration, Shapes::ShapeRef.new(shape: InputSwitchConfiguration, location_name: "InputSwitchConfiguration"))
     CreateChannelRequest.add_member(:output_header_configuration, Shapes::ShapeRef.new(shape: OutputHeaderConfiguration, location_name: "OutputHeaderConfiguration"))
+    CreateChannelRequest.add_member(:output_locking_mode, Shapes::ShapeRef.new(shape: OutputLockingMode, location_name: "OutputLockingMode"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
@@ -329,6 +333,7 @@ module Aws::MediaPackageV2
     CreateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateChannelResponse.add_member(:input_switch_configuration, Shapes::ShapeRef.new(shape: InputSwitchConfiguration, location_name: "InputSwitchConfiguration"))
     CreateChannelResponse.add_member(:output_header_configuration, Shapes::ShapeRef.new(shape: OutputHeaderConfiguration, location_name: "OutputHeaderConfiguration"))
+    CreateChannelResponse.add_member(:output_locking_mode, Shapes::ShapeRef.new(shape: OutputLockingMode, location_name: "OutputLockingMode"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
 
     CreateDashManifestConfiguration.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ManifestName, required: true, location_name: "ManifestName"))
@@ -609,6 +614,7 @@ module Aws::MediaPackageV2
     GetChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetChannelResponse.add_member(:input_switch_configuration, Shapes::ShapeRef.new(shape: InputSwitchConfiguration, location_name: "InputSwitchConfiguration"))
     GetChannelResponse.add_member(:output_header_configuration, Shapes::ShapeRef.new(shape: OutputHeaderConfiguration, location_name: "OutputHeaderConfiguration"))
+    GetChannelResponse.add_member(:output_locking_mode, Shapes::ShapeRef.new(shape: OutputLockingMode, location_name: "OutputLockingMode"))
     GetChannelResponse.struct_class = Types::GetChannelResponse
 
     GetDashManifestConfiguration.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ManifestName"))
@@ -949,6 +955,7 @@ module Aws::MediaPackageV2
     Segment.add_member(:ts_include_dvb_subtitles, Shapes::ShapeRef.new(shape: Boolean, location_name: "TsIncludeDvbSubtitles"))
     Segment.add_member(:scte, Shapes::ShapeRef.new(shape: Scte, location_name: "Scte"))
     Segment.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
+    Segment.add_member(:output_timestamp_mode, Shapes::ShapeRef.new(shape: OutputTimestampMode, location_name: "OutputTimestampMode"))
     Segment.struct_class = Types::Segment
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1019,6 +1026,7 @@ module Aws::MediaPackageV2
     UpdateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     UpdateChannelResponse.add_member(:input_switch_configuration, Shapes::ShapeRef.new(shape: InputSwitchConfiguration, location_name: "InputSwitchConfiguration"))
     UpdateChannelResponse.add_member(:output_header_configuration, Shapes::ShapeRef.new(shape: OutputHeaderConfiguration, location_name: "OutputHeaderConfiguration"))
+    UpdateChannelResponse.add_member(:output_locking_mode, Shapes::ShapeRef.new(shape: OutputLockingMode, location_name: "OutputLockingMode"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
 
     UpdateOriginEndpointRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))

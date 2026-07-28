@@ -119,6 +119,45 @@ module Aws
                                                              ?next_token: ::String
                                                            ) -> _GetEstimatedCarbonEmissionsDimensionValuesResponseSuccess
                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEstimatedCarbonEmissionsDimensionValuesResponseSuccess
+
+      interface _GetEstimatedWaterAllocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEstimatedWaterAllocationResponse]
+        def results: () -> ::Array[Types::EstimatedWaterAllocation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Sustainability/Client.html#get_estimated_water_allocation-instance_method
+      def get_estimated_water_allocation: (
+                                            time_period: {
+                                              start: ::Time,
+                                              end: ::Time
+                                            },
+                                            ?group_by: Array[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE")],
+                                            ?filter_by: {
+                                              dimensions: Hash[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE"), Array[::String]]?
+                                            },
+                                            ?allocation_types: Array[("TOTAL_WATER_WITHDRAWALS")],
+                                            ?granularity: ("YEARLY_CALENDAR" | "YEARLY_FISCAL" | "QUARTERLY_CALENDAR" | "QUARTERLY_FISCAL" | "MONTHLY"),
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _GetEstimatedWaterAllocationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEstimatedWaterAllocationResponseSuccess
+
+      interface _GetEstimatedWaterAllocationDimensionValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEstimatedWaterAllocationDimensionValuesResponse]
+        def results: () -> ::Array[Types::DimensionEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Sustainability/Client.html#get_estimated_water_allocation_dimension_values-instance_method
+      def get_estimated_water_allocation_dimension_values: (
+                                                             time_period: {
+                                                               start: ::Time,
+                                                               end: ::Time
+                                                             },
+                                                             dimensions: Array[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE")],
+                                                             ?max_results: ::Integer,
+                                                             ?next_token: ::String
+                                                           ) -> _GetEstimatedWaterAllocationDimensionValuesResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEstimatedWaterAllocationDimensionValuesResponseSuccess
     end
   end
 end

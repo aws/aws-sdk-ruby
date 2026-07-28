@@ -484,6 +484,7 @@ module Aws::ECS
     RunTaskRequest = Shapes::StructureShape.new(name: 'RunTaskRequest')
     RunTaskResponse = Shapes::StructureShape.new(name: 'RunTaskResponse')
     RuntimePlatform = Shapes::StructureShape.new(name: 'RuntimePlatform')
+    RuntimePlatformOverride = Shapes::StructureShape.new(name: 'RuntimePlatformOverride')
     S3FilesVolumeConfiguration = Shapes::StructureShape.new(name: 'S3FilesVolumeConfiguration')
     Scale = Shapes::StructureShape.new(name: 'Scale')
     ScaleUnit = Shapes::StringShape.new(name: 'ScaleUnit')
@@ -534,6 +535,7 @@ module Aws::ECS
     ServiceRevision = Shapes::StructureShape.new(name: 'ServiceRevision')
     ServiceRevisionLoadBalancer = Shapes::StructureShape.new(name: 'ServiceRevisionLoadBalancer')
     ServiceRevisionLoadBalancers = Shapes::ListShape.new(name: 'ServiceRevisionLoadBalancers')
+    ServiceRevisionOverrides = Shapes::StructureShape.new(name: 'ServiceRevisionOverrides')
     ServiceRevisionSummary = Shapes::StructureShape.new(name: 'ServiceRevisionSummary')
     ServiceRevisions = Shapes::ListShape.new(name: 'ServiceRevisions')
     ServiceRevisionsSummaryList = Shapes::ListShape.new(name: 'ServiceRevisionsSummaryList')
@@ -603,6 +605,8 @@ module Aws::ECS
     TaskVolumeConfigurations = Shapes::ListShape.new(name: 'TaskVolumeConfigurations')
     TaskVolumeStorageGiB = Shapes::IntegerShape.new(name: 'TaskVolumeStorageGiB')
     Tasks = Shapes::ListShape.new(name: 'Tasks')
+    ThresholdConfiguration = Shapes::StructureShape.new(name: 'ThresholdConfiguration')
+    ThresholdType = Shapes::StringShape.new(name: 'ThresholdType')
     TimeoutConfiguration = Shapes::StructureShape.new(name: 'TimeoutConfiguration')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Tmpfs = Shapes::StructureShape.new(name: 'Tmpfs')
@@ -1391,6 +1395,8 @@ module Aws::ECS
 
     DeploymentCircuitBreaker.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
     DeploymentCircuitBreaker.add_member(:rollback, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "rollback"))
+    DeploymentCircuitBreaker.add_member(:reset_on_healthy_task, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "resetOnHealthyTask"))
+    DeploymentCircuitBreaker.add_member(:threshold_configuration, Shapes::ShapeRef.new(shape: ThresholdConfiguration, location_name: "thresholdConfiguration"))
     DeploymentCircuitBreaker.struct_class = Types::DeploymentCircuitBreaker
 
     DeploymentConfiguration.add_member(:deployment_circuit_breaker, Shapes::ShapeRef.new(shape: DeploymentCircuitBreaker, location_name: "deploymentCircuitBreaker"))
@@ -2452,6 +2458,9 @@ module Aws::ECS
     RuntimePlatform.add_member(:operating_system_family, Shapes::ShapeRef.new(shape: OSFamily, location_name: "operatingSystemFamily"))
     RuntimePlatform.struct_class = Types::RuntimePlatform
 
+    RuntimePlatformOverride.add_member(:cpu_architecture, Shapes::ShapeRef.new(shape: String, location_name: "cpuArchitecture"))
+    RuntimePlatformOverride.struct_class = Types::RuntimePlatformOverride
+
     S3FilesVolumeConfiguration.add_member(:file_system_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fileSystemArn"))
     S3FilesVolumeConfiguration.add_member(:root_directory, Shapes::ShapeRef.new(shape: String, location_name: "rootDirectory"))
     S3FilesVolumeConfiguration.add_member(:transit_encryption_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "transitEncryptionPort"))
@@ -2674,6 +2683,7 @@ module Aws::ECS
     ServiceRevision.add_member(:vpc_lattice_configurations, Shapes::ShapeRef.new(shape: VpcLatticeConfigurations, location_name: "vpcLatticeConfigurations"))
     ServiceRevision.add_member(:resolved_configuration, Shapes::ShapeRef.new(shape: ResolvedConfiguration, location_name: "resolvedConfiguration"))
     ServiceRevision.add_member(:ecs_managed_resources, Shapes::ShapeRef.new(shape: ECSManagedResources, location_name: "ecsManagedResources"))
+    ServiceRevision.add_member(:overrides, Shapes::ShapeRef.new(shape: ServiceRevisionOverrides, location_name: "overrides"))
     ServiceRevision.add_member(:monitoring, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoring"))
     ServiceRevision.struct_class = Types::ServiceRevision
 
@@ -2682,6 +2692,9 @@ module Aws::ECS
     ServiceRevisionLoadBalancer.struct_class = Types::ServiceRevisionLoadBalancer
 
     ServiceRevisionLoadBalancers.member = Shapes::ShapeRef.new(shape: ServiceRevisionLoadBalancer)
+
+    ServiceRevisionOverrides.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatformOverride, location_name: "runtimePlatform"))
+    ServiceRevisionOverrides.struct_class = Types::ServiceRevisionOverrides
 
     ServiceRevisionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     ServiceRevisionSummary.add_member(:requested_task_count, Shapes::ShapeRef.new(shape: Integer, location_name: "requestedTaskCount"))
@@ -2968,6 +2981,10 @@ module Aws::ECS
     TaskVolumeConfigurations.member = Shapes::ShapeRef.new(shape: TaskVolumeConfiguration)
 
     Tasks.member = Shapes::ShapeRef.new(shape: Task)
+
+    ThresholdConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ThresholdType, required: true, location_name: "type"))
+    ThresholdConfiguration.add_member(:value, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "value"))
+    ThresholdConfiguration.struct_class = Types::ThresholdConfiguration
 
     TimeoutConfiguration.add_member(:idle_timeout_seconds, Shapes::ShapeRef.new(shape: Duration, location_name: "idleTimeoutSeconds"))
     TimeoutConfiguration.add_member(:per_request_timeout_seconds, Shapes::ShapeRef.new(shape: Duration, location_name: "perRequestTimeoutSeconds"))

@@ -22,7 +22,7 @@ module Aws::Inspector2
 
     class AccountAggregation
       attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
       attr_accessor sort_order: ("ASC" | "DESC")
       attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
@@ -56,6 +56,9 @@ module Aws::Inspector2
       attr_accessor lambda_layer_aggregation: Types::LambdaLayerAggregation
       attr_accessor lambda_function_aggregation: Types::LambdaFunctionAggregation
       attr_accessor code_repository_aggregation: Types::CodeRepositoryAggregation
+      attr_accessor vm_instance_aggregation: Types::VmInstanceAggregation
+      attr_accessor container_image_aggregation: Types::ContainerImageAggregation
+      attr_accessor serverless_function_aggregation: Types::ServerlessFunctionAggregation
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -83,6 +86,12 @@ module Aws::Inspector2
       end
       class CodeRepositoryAggregation < AggregationRequest
       end
+      class VmInstanceAggregation < AggregationRequest
+      end
+      class ContainerImageAggregation < AggregationRequest
+      end
+      class ServerlessFunctionAggregation < AggregationRequest
+      end
       class Unknown < AggregationRequest
       end
     end
@@ -100,6 +109,9 @@ module Aws::Inspector2
       attr_accessor lambda_layer_aggregation: Types::LambdaLayerAggregationResponse
       attr_accessor lambda_function_aggregation: Types::LambdaFunctionAggregationResponse
       attr_accessor code_repository_aggregation: Types::CodeRepositoryAggregationResponse
+      attr_accessor vm_instance_aggregation: Types::VmInstanceAggregationResponse
+      attr_accessor container_image_aggregation: Types::ContainerImageAggregationResponse
+      attr_accessor serverless_function_aggregation: Types::ServerlessFunctionAggregationResponse
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -127,6 +139,12 @@ module Aws::Inspector2
       end
       class CodeRepositoryAggregation < AggregationResponse
       end
+      class VmInstanceAggregation < AggregationResponse
+      end
+      class ContainerImageAggregation < AggregationResponse
+      end
+      class ServerlessFunctionAggregation < AggregationResponse
+      end
       class Unknown < AggregationResponse
       end
     end
@@ -141,6 +159,11 @@ module Aws::Inspector2
     class AmiAggregationResponse
       attr_accessor ami: ::String
       attr_accessor account_id: ::String
+      attr_accessor cloud_provider: ("AWS" | "AZURE")
+      attr_accessor cloud_partition: ::String
+      attr_accessor cloud_region: ::String
+      attr_accessor cloud_org_id: ::String
+      attr_accessor cloud_account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
       attr_accessor affected_instances: ::Integer
       SENSITIVE: []
@@ -176,6 +199,12 @@ module Aws::Inspector2
       attr_accessor lambda: bool
       attr_accessor lambda_code: bool
       attr_accessor code_repository: bool
+      SENSITIVE: []
+    end
+
+    class AwsConfigConnectorArnFilter
+      attr_accessor comparison: ("EQUALS")
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -253,7 +282,7 @@ module Aws::Inspector2
 
     class AwsLambdaFunctionDetails
       attr_accessor function_name: ::String
-      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2" | "DOTNET_10" | "NODEJS_24_X")
+      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2" | "DOTNET_10" | "NODEJS_24_X" | "NODEJS_22_X" | "JAVA_21" | "JAVA_25")
       attr_accessor code_sha_256: ::String
       attr_accessor version: ::String
       attr_accessor execution_role_arn: ::String
@@ -262,6 +291,35 @@ module Aws::Inspector2
       attr_accessor package_type: ("IMAGE" | "ZIP")
       attr_accessor architectures: ::Array[("X86_64" | "ARM64")]
       attr_accessor last_modified_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AzureProviderDetailCreate
+      attr_accessor aws_config_connector_arn: ::String
+      attr_accessor scope_configuration: Types::AzureScopeConfigurationInput
+      attr_accessor azure_regions: ::Array[::String]
+      attr_accessor auto_install_vm_scanner: bool
+      SENSITIVE: []
+    end
+
+    class AzureProviderDetailUpdate
+      attr_accessor azure_regions: ::Array[::String]
+      attr_accessor scope_configuration: Types::AzureScopeConfigurationInput
+      attr_accessor auto_install_vm_scanner: bool
+      SENSITIVE: []
+    end
+
+    class AzureScopeConfiguration
+      attr_accessor vm_scanning: Types::ScopeConfiguration
+      attr_accessor container_image_scanning: Types::ScopeConfiguration
+      attr_accessor serverless_scanning: Types::ScopeConfiguration
+      SENSITIVE: []
+    end
+
+    class AzureScopeConfigurationInput
+      attr_accessor vm_scanning: Types::ScopeConfigurationInput
+      attr_accessor container_image_scanning: Types::ScopeConfigurationInput
+      attr_accessor serverless_scanning: Types::ScopeConfigurationInput
       SENSITIVE: []
     end
 
@@ -649,7 +707,6 @@ module Aws::Inspector2
       attr_accessor status_reason: ::String
       attr_accessor created_on: ::Time
       attr_accessor last_update_on: ::Time
-      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -685,7 +742,6 @@ module Aws::Inspector2
       attr_accessor continuous_integration_scan_supported_events: ::Array[("PULL_REQUEST" | "PUSH")]
       attr_accessor rule_set_categories: ::Array[("SAST" | "IAC" | "SCA")]
       attr_accessor scope_settings: Types::ScopeSettings
-      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -731,6 +787,129 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class Connector
+      attr_accessor connector_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider: ("AZURE")
+      attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "DELETED" | "FAILED_TO_DELETE")
+      attr_accessor enablement_status_reason: ::String
+      attr_accessor health: Types::ConnectorHealth
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor azure_regions: ::Array[::String]
+      attr_accessor aws_config_connector_arn: ::String
+      attr_accessor scope_configuration: Types::AzureScopeConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor auto_install_vm_scanner: bool
+      SENSITIVE: []
+    end
+
+    class ConnectorArnFilter
+      attr_accessor comparison: ("EQUALS")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorContainerImageScanConfiguration
+      attr_accessor push_duration: ("LIFETIME" | "DAYS_3" | "DAYS_7" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
+      attr_accessor pull_duration: ("DAYS_3" | "DAYS_7" | "DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")
+      SENSITIVE: []
+    end
+
+    class ConnectorFilterCriteria
+      attr_accessor connector_arns: ::Array[Types::ConnectorArnFilter]
+      attr_accessor accounts: ::Array[Types::StringFilter]
+      attr_accessor aws_config_connector_arns: ::Array[Types::AwsConfigConnectorArnFilter]
+      attr_accessor connector_type: ::Array[Types::ConnectorTypeFilter]
+      attr_accessor provider: ::Array[Types::ProviderFilter]
+      SENSITIVE: []
+    end
+
+    class ConnectorHealth
+      attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN")
+      attr_accessor last_checked_at: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorScanConfiguration
+      attr_accessor container_image_scanning: Types::ConnectorContainerImageScanConfiguration
+      SENSITIVE: []
+    end
+
+    class ConnectorScanConfigurationItem
+      attr_accessor aws_config_connector_arn: ::String
+      attr_accessor connector_arns: ::Array[::String]
+      attr_accessor scan_configuration: Types::ConnectorScanConfiguration
+      SENSITIVE: []
+    end
+
+    class ConnectorTypeFilter
+      attr_accessor comparison: ("EQUALS")
+      attr_accessor value: ("CUSTOMER_MANAGED" | "SERVICE_LINKED")
+      SENSITIVE: []
+    end
+
+    class ContainerImageAggregation
+      attr_accessor resource_ids: ::Array[Types::StringFilter]
+      attr_accessor image_digests: ::Array[Types::StringFilter]
+      attr_accessor repositories: ::Array[Types::StringFilter]
+      attr_accessor registries: ::Array[Types::StringFilter]
+      attr_accessor architectures: ::Array[Types::StringFilter]
+      attr_accessor image_tags: ::Array[Types::StringFilter]
+      attr_accessor cloud_providers: ::Array[Types::StringFilter]
+      attr_accessor cloud_partitions: ::Array[Types::StringFilter]
+      attr_accessor cloud_regions: ::Array[Types::StringFilter]
+      attr_accessor cloud_org_ids: ::Array[Types::StringFilter]
+      attr_accessor cloud_account_ids: ::Array[Types::StringFilter]
+      attr_accessor last_in_use_at: ::Array[Types::DateFilter]
+      attr_accessor in_use_count: ::Array[Types::NumberFilter]
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      SENSITIVE: []
+    end
+
+    class ContainerImageAggregationResponse
+      attr_accessor resource_id: ::String
+      attr_accessor cloud_provider: ("AWS" | "AZURE")
+      attr_accessor cloud_account_id: ::String
+      attr_accessor cloud_partition: ::String
+      attr_accessor cloud_region: ::String
+      attr_accessor cloud_org_id: ::String
+      attr_accessor image_digest: ::String
+      attr_accessor repository: ::String
+      attr_accessor registry: ::String
+      attr_accessor architecture: ::String
+      attr_accessor image_tags: ::Array[::String]
+      attr_accessor account_id: ::String
+      attr_accessor severity_counts: Types::SeverityCounts
+      attr_accessor last_in_use_at: ::Time
+      attr_accessor in_use_count: ::Integer
+      attr_accessor exploit_available_active_findings_count: ::Integer
+      attr_accessor fix_available_active_findings_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ContainerImageMetadata
+      attr_accessor image_tags: ::Array[::String]
+      attr_accessor image_pulled_at: ::Time
+      attr_accessor last_in_use_at: ::Time
+      attr_accessor in_use_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ContainerRegistryMetadata
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerRepositoryMetadata
+      attr_accessor name: ::String
+      attr_accessor scan_frequency: ::String
+      SENSITIVE: []
+    end
+
     class ContinuousIntegrationScanConfiguration
       attr_accessor supported_events: ::Array[("PULL_REQUEST" | "PUSH")]
       SENSITIVE: []
@@ -738,7 +917,7 @@ module Aws::Inspector2
 
     class Counts
       attr_accessor count: ::Integer
-      attr_accessor group_key: ("SCAN_STATUS_CODE" | "SCAN_STATUS_REASON" | "ACCOUNT_ID" | "RESOURCE_TYPE" | "ECR_REPOSITORY_NAME")
+      attr_accessor group_key: ("SCAN_STATUS_CODE" | "SCAN_STATUS_REASON" | "ACCOUNT_ID" | "RESOURCE_TYPE" | "ECR_REPOSITORY_NAME" | "PROVIDER" | "PROVIDER_ACCOUNT_ID" | "PROVIDER_REGION" | "PROVIDER_ORG_ID")
       SENSITIVE: []
     end
 
@@ -770,6 +949,17 @@ module Aws::Inspector2
       attr_accessor code_repository_provider_type: ::Array[Types::CoverageStringFilter]
       attr_accessor code_repository_provider_type_visibility: ::Array[Types::CoverageStringFilter]
       attr_accessor last_scanned_commit_id: ::Array[Types::CoverageStringFilter]
+      attr_accessor cloud_provider: ::Array[Types::CoverageStringFilter]
+      attr_accessor cloud_provider_account_id: ::Array[Types::CoverageStringFilter]
+      attr_accessor cloud_provider_region: ::Array[Types::CoverageStringFilter]
+      attr_accessor cloud_vm_instance_tags: ::Array[Types::CoverageMapFilter]
+      attr_accessor cloud_container_image_tags: ::Array[Types::CoverageStringFilter]
+      attr_accessor cloud_container_repository_name: ::Array[Types::CoverageStringFilter]
+      attr_accessor cloud_container_registry_name: ::Array[Types::CoverageStringFilter]
+      attr_accessor cloud_serverless_function_name: ::Array[Types::CoverageStringFilter]
+      attr_accessor cloud_serverless_function_runtime: ::Array[Types::CoverageStringFilter]
+      attr_accessor cloud_serverless_function_tags: ::Array[Types::CoverageMapFilter]
+      attr_accessor cloud_provider_org_id: ::Array[Types::CoverageStringFilter]
       SENSITIVE: []
     end
 
@@ -793,14 +983,19 @@ module Aws::Inspector2
     end
 
     class CoveredResource
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.ContainerRegistry/registry/containerRepository" | "Microsoft.Web/sites" | "Microsoft.ContainerRegistry/registries")
       attr_accessor resource_id: ::String
       attr_accessor account_id: ::String
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
       attr_accessor scan_status: Types::ScanStatus
       attr_accessor resource_metadata: Types::ResourceScanMetadata
       attr_accessor last_scanned_at: ::Time
-      attr_accessor scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_AGENTLESS" | "EC2_INSPECTOR_AGENT_BASED")
+      attr_accessor scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_AGENTLESS" | "EC2_INSPECTOR_AGENT_BASED" | "VM_INSPECTOR_AGENT_BASED")
+      attr_accessor provider: ("AWS" | "AZURE")
+      attr_accessor provider_account_id: ::String
+      attr_accessor provider_org_id: ::String
+      attr_accessor provider_region: ::String
+      attr_accessor provider_partition: ::String
       SENSITIVE: []
     end
 
@@ -850,6 +1045,21 @@ module Aws::Inspector2
 
     class CreateCodeSecurityScanConfigurationResponse
       attr_accessor scan_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectorRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ("AZURE")
+      attr_accessor description: ::String
+      attr_accessor provider_detail: Types::ProviderDetailCreate
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateConnectorResponse
+      attr_accessor connector_arn: ::String
       SENSITIVE: []
     end
 
@@ -1004,6 +1214,14 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class DeleteConnectorRequest
+      attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorResponse < Aws::EmptyStructure
+    end
+
     class DeleteFilterRequest
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -1115,8 +1333,8 @@ module Aws::Inspector2
     end
 
     class EcrConfiguration
-      attr_accessor rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
-      attr_accessor pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")
+      attr_accessor rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90" | "DAYS_3" | "DAYS_7")
+      attr_accessor pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180" | "DAYS_3" | "DAYS_7")
       attr_accessor pull_date_rescan_mode: ("LAST_PULL_DATE" | "LAST_IN_USE_AT")
       SENSITIVE: []
     end
@@ -1141,10 +1359,10 @@ module Aws::Inspector2
     end
 
     class EcrRescanDurationState
-      attr_accessor rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
+      attr_accessor rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90" | "DAYS_3" | "DAYS_7")
       attr_accessor status: ("SUCCESS" | "PENDING" | "FAILED")
       attr_accessor updated_at: ::Time
-      attr_accessor pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")
+      attr_accessor pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180" | "DAYS_3" | "DAYS_7")
       attr_accessor pull_date_rescan_mode: ("LAST_PULL_DATE" | "LAST_IN_USE_AT")
       SENSITIVE: []
     end
@@ -1286,6 +1504,25 @@ module Aws::Inspector2
       attr_accessor epss_score: ::Array[Types::NumberFilter]
       attr_accessor code_repository_project_name: ::Array[Types::StringFilter]
       attr_accessor code_repository_provider_type: ::Array[Types::StringFilter]
+      attr_accessor cloud_provider: ::Array[Types::StringFilter]
+      attr_accessor cloud_provider_region: ::Array[Types::StringFilter]
+      attr_accessor cloud_provider_account_id: ::Array[Types::StringFilter]
+      attr_accessor cloud_provider_org_id: ::Array[Types::StringFilter]
+      attr_accessor cloud_vm_image_reference: ::Array[Types::StringFilter]
+      attr_accessor cloud_vm_network_id: ::Array[Types::StringFilter]
+      attr_accessor cloud_vm_subnet_ids: ::Array[Types::StringFilter]
+      attr_accessor cloud_image_repository_name: ::Array[Types::StringFilter]
+      attr_accessor cloud_image_registry: ::Array[Types::StringFilter]
+      attr_accessor cloud_image_digest: ::Array[Types::StringFilter]
+      attr_accessor cloud_image_tags: ::Array[Types::StringFilter]
+      attr_accessor cloud_image_pushed_at: ::Array[Types::DateFilter]
+      attr_accessor cloud_image_architecture: ::Array[Types::StringFilter]
+      attr_accessor cloud_image_last_in_use_at: ::Array[Types::DateFilter]
+      attr_accessor cloud_image_in_use_count: ::Array[Types::NumberFilter]
+      attr_accessor cloud_serverless_function_name: ::Array[Types::StringFilter]
+      attr_accessor cloud_serverless_function_runtime: ::Array[Types::StringFilter]
+      attr_accessor cloud_serverless_function_last_modified_at: ::Array[Types::DateFilter]
+      attr_accessor cloud_serverless_function_execution_role: ::Array[Types::StringFilter]
       SENSITIVE: []
     end
 
@@ -1337,7 +1574,7 @@ module Aws::Inspector2
 
     class FindingTypeAggregation
       attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
       attr_accessor sort_order: ("ASC" | "DESC")
       attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
@@ -1348,6 +1585,11 @@ module Aws::Inspector2
       attr_accessor severity_counts: Types::SeverityCounts
       attr_accessor exploit_available_count: ::Integer
       attr_accessor fix_available_count: ::Integer
+      attr_accessor cloud_provider: ::String
+      attr_accessor cloud_account_id: ::String
+      attr_accessor cloud_org_id: ::String
+      attr_accessor cloud_region: ::String
+      attr_accessor cloud_partition: ::String
       SENSITIVE: []
     end
 
@@ -1358,10 +1600,11 @@ module Aws::Inspector2
     end
 
     class FreeTrialInfo
-      attr_accessor type: ("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE" | "CODE_REPOSITORY")
+      attr_accessor type: ("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE" | "CODE_REPOSITORY" | "VM" | "CONTAINER_IMAGE" | "SERVERLESS_FUNCTION")
       attr_accessor start: ::Time
       attr_accessor end: ::Time
       attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor cloud_provider: ("AWS" | "AZURE" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
@@ -1430,8 +1673,8 @@ module Aws::Inspector2
       attr_accessor status_reason: ::String
       attr_accessor created_on: ::Time
       attr_accessor last_update_on: ::Time
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor authorization_url: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:authorization_url]
     end
 
@@ -1470,7 +1713,9 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
-    class GetConfigurationRequest < Aws::EmptyStructure
+    class GetConfigurationRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
     end
 
     class GetConfigurationResponse
@@ -1500,7 +1745,7 @@ module Aws::Inspector2
 
     class GetEncryptionKeyRequest
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
       SENSITIVE: []
     end
 
@@ -1550,10 +1795,29 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class Image
+      attr_accessor repository_name: ::String
+      attr_accessor registry: ::String
+      attr_accessor image_tags: ::Array[::String]
+      attr_accessor image_digest: ::String
+      attr_accessor pushed_at: ::Time
+      attr_accessor architecture: ::String
+      attr_accessor author: ::String
+      attr_accessor in_use_count: ::Integer
+      attr_accessor last_in_use_at: ::Time
+      attr_accessor platform: ::String
+      SENSITIVE: []
+    end
+
     class ImageLayerAggregation
       attr_accessor repositories: ::Array[Types::StringFilter]
       attr_accessor resource_ids: ::Array[Types::StringFilter]
       attr_accessor layer_hashes: ::Array[Types::StringFilter]
+      attr_accessor cloud_providers: ::Array[Types::StringFilter]
+      attr_accessor cloud_account_ids: ::Array[Types::StringFilter]
+      attr_accessor cloud_org_ids: ::Array[Types::StringFilter]
+      attr_accessor cloud_regions: ::Array[Types::StringFilter]
+      attr_accessor cloud_partitions: ::Array[Types::StringFilter]
       attr_accessor sort_order: ("ASC" | "DESC")
       attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
@@ -1564,6 +1828,11 @@ module Aws::Inspector2
       attr_accessor resource_id: ::String
       attr_accessor layer_hash: ::String
       attr_accessor account_id: ::String
+      attr_accessor cloud_provider: ::String
+      attr_accessor cloud_account_id: ::String
+      attr_accessor cloud_org_id: ::String
+      attr_accessor cloud_region: ::String
+      attr_accessor cloud_partition: ::String
       attr_accessor severity_counts: Types::SeverityCounts
       SENSITIVE: []
     end
@@ -1604,7 +1873,7 @@ module Aws::Inspector2
       attr_accessor function_tags: ::Hash[::String, ::String]
       attr_accessor layers: ::Array[::String]
       attr_accessor function_name: ::String
-      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2" | "DOTNET_10" | "NODEJS_24_X")
+      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2" | "DOTNET_10" | "NODEJS_24_X" | "NODEJS_22_X" | "JAVA_21" | "JAVA_25")
       SENSITIVE: []
     end
 
@@ -1767,6 +2036,32 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class ListConnectorScanConfigurationsRequest
+      attr_accessor aws_config_connector_arns: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListConnectorScanConfigurationsResponse
+      attr_accessor scan_configurations: ::Array[Types::ConnectorScanConfigurationItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListConnectorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter_criteria: Types::ConnectorFilterCriteria
+      SENSITIVE: [:next_token]
+    end
+
+    class ListConnectorsResponse
+      attr_accessor items: ::Array[Types::Connector]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
     class ListCoverageRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -1782,7 +2077,7 @@ module Aws::Inspector2
 
     class ListCoverageStatisticsRequest
       attr_accessor filter_criteria: Types::CoverageFilterCriteria
-      attr_accessor group_by: ("SCAN_STATUS_CODE" | "SCAN_STATUS_REASON" | "ACCOUNT_ID" | "RESOURCE_TYPE" | "ECR_REPOSITORY_NAME")
+      attr_accessor group_by: ("SCAN_STATUS_CODE" | "SCAN_STATUS_REASON" | "ACCOUNT_ID" | "RESOURCE_TYPE" | "ECR_REPOSITORY_NAME" | "PROVIDER" | "PROVIDER_ACCOUNT_ID" | "PROVIDER_REGION" | "PROVIDER_ORG_ID")
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1821,7 +2116,7 @@ module Aws::Inspector2
     end
 
     class ListFindingAggregationsRequest
-      attr_accessor aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY")
+      attr_accessor aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY" | "VM_INSTANCE" | "CONTAINER_IMAGE" | "SERVERLESS_FUNCTION")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor account_ids: ::Array[Types::StringFilter]
@@ -1830,7 +2125,7 @@ module Aws::Inspector2
     end
 
     class ListFindingAggregationsResponse
-      attr_accessor aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY")
+      attr_accessor aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY" | "VM_INSTANCE" | "CONTAINER_IMAGE" | "SERVERLESS_FUNCTION")
       attr_accessor responses: ::Array[Types::AggregationResponse]
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -2023,6 +2318,34 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class ProviderDetailCreate
+      attr_accessor azure: Types::AzureProviderDetailCreate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < ProviderDetailCreate
+      end
+      class Unknown < ProviderDetailCreate
+      end
+    end
+
+    class ProviderDetailUpdate
+      attr_accessor azure: Types::AzureProviderDetailUpdate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < ProviderDetailUpdate
+      end
+      class Unknown < ProviderDetailUpdate
+      end
+    end
+
+    class ProviderFilter
+      attr_accessor comparison: ("EQUALS")
+      attr_accessor value: ("AZURE")
+      SENSITIVE: []
+    end
+
     class Recommendation
       attr_accessor text: ::String
       attr_accessor url: ::String
@@ -2044,6 +2367,11 @@ module Aws::Inspector2
     class RepositoryAggregationResponse
       attr_accessor repository: ::String
       attr_accessor account_id: ::String
+      attr_accessor cloud_provider: ("AWS" | "AZURE")
+      attr_accessor cloud_partition: ::String
+      attr_accessor cloud_region: ::String
+      attr_accessor cloud_org_id: ::String
+      attr_accessor cloud_account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
       attr_accessor affected_images: ::Integer
       SENSITIVE: []
@@ -2051,7 +2379,7 @@ module Aws::Inspector2
 
     class ResetEncryptionKeyRequest
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
       SENSITIVE: []
     end
 
@@ -2059,12 +2387,15 @@ module Aws::Inspector2
     end
 
     class Resource
-      attr_accessor type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+      attr_accessor type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
       attr_accessor id: ::String
       attr_accessor partition: ::String
       attr_accessor region: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor details: Types::ResourceDetails
+      attr_accessor provider: ("AWS" | "AZURE")
+      attr_accessor provider_account_id: ::String
+      attr_accessor provider_org_id: ::String
       SENSITIVE: []
     end
 
@@ -2073,6 +2404,9 @@ module Aws::Inspector2
       attr_accessor aws_ecr_container_image: Types::AwsEcrContainerImageDetails
       attr_accessor aws_lambda_function: Types::AwsLambdaFunctionDetails
       attr_accessor code_repository: Types::CodeRepositoryDetails
+      attr_accessor vm: Types::Vm
+      attr_accessor image: Types::Image
+      attr_accessor serverless_function: Types::ServerlessFunction
       SENSITIVE: []
     end
 
@@ -2106,6 +2440,11 @@ module Aws::Inspector2
       attr_accessor ec2: Types::Ec2Metadata
       attr_accessor lambda_function: Types::LambdaFunctionMetadata
       attr_accessor code_repository: Types::CodeRepositoryMetadata
+      attr_accessor vm_instance: Types::VmInstanceMetadata
+      attr_accessor container_image: Types::ContainerImageMetadata
+      attr_accessor container_repository: Types::ContainerRepositoryMetadata
+      attr_accessor container_registry: Types::ContainerRegistryMetadata
+      attr_accessor serverless_function: Types::ServerlessFunctionMetadata
       SENSITIVE: []
     end
 
@@ -2135,7 +2474,7 @@ module Aws::Inspector2
 
     class ScanStatus
       attr_accessor status_code: ("ACTIVE" | "INACTIVE")
-      attr_accessor reason: ("PENDING_INITIAL_SCAN" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "UNMANAGED_EC2_INSTANCE" | "UNSUPPORTED_OS" | "SCAN_ELIGIBILITY_EXPIRED" | "RESOURCE_TERMINATED" | "SUCCESSFUL" | "NO_RESOURCES_FOUND" | "IMAGE_SIZE_EXCEEDED" | "SCAN_FREQUENCY_MANUAL" | "SCAN_FREQUENCY_SCAN_ON_PUSH" | "EC2_INSTANCE_STOPPED" | "PENDING_DISABLE" | "NO_INVENTORY" | "STALE_INVENTORY" | "EXCLUDED_BY_TAG" | "UNSUPPORTED_RUNTIME" | "UNSUPPORTED_MEDIA_TYPE" | "UNSUPPORTED_CONFIG_FILE" | "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED" | "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED" | "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "DEEP_INSPECTION_NO_INVENTORY" | "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED" | "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED" | "PENDING_REVIVAL_SCAN" | "INTEGRATION_CONNECTION_LOST" | "ACCESS_DENIED_TO_ENCRYPTION_KEY" | "UNSUPPORTED_LANGUAGE" | "NO_SCAN_CONFIGURATION_ASSOCIATED" | "SCAN_IN_PROGRESS" | "IMAGE_ARCHIVED" | "UNSUPPORTED_CODE_ARTIFACTS")
+      attr_accessor reason: ("PENDING_INITIAL_SCAN" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "UNMANAGED_EC2_INSTANCE" | "UNSUPPORTED_OS" | "SCAN_ELIGIBILITY_EXPIRED" | "RESOURCE_TERMINATED" | "SUCCESSFUL" | "NO_RESOURCES_FOUND" | "IMAGE_SIZE_EXCEEDED" | "SCAN_FREQUENCY_MANUAL" | "SCAN_FREQUENCY_SCAN_ON_PUSH" | "EC2_INSTANCE_STOPPED" | "PENDING_DISABLE" | "NO_INVENTORY" | "STALE_INVENTORY" | "EXCLUDED_BY_TAG" | "UNSUPPORTED_RUNTIME" | "UNSUPPORTED_MEDIA_TYPE" | "UNSUPPORTED_CONFIG_FILE" | "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED" | "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED" | "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "DEEP_INSPECTION_NO_INVENTORY" | "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED" | "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED" | "PENDING_REVIVAL_SCAN" | "INTEGRATION_CONNECTION_LOST" | "ACCESS_DENIED_TO_ENCRYPTION_KEY" | "UNSUPPORTED_LANGUAGE" | "NO_SCAN_CONFIGURATION_ASSOCIATED" | "SCAN_IN_PROGRESS" | "IMAGE_ARCHIVED" | "UNSUPPORTED_CODE_ARTIFACTS" | "RESOURCE_UNMANAGED" | "RESOURCE_STOPPED")
       SENSITIVE: []
     end
 
@@ -2157,6 +2496,20 @@ module Aws::Inspector2
       end
       class Unknown < Schedule
       end
+    end
+
+    class ScopeConfiguration
+      attr_accessor scope_type: ("TENANT" | "SUBSCRIPTION")
+      attr_accessor scope_values: ::Array[::String]
+      attr_accessor state: ("ACTIVE" | "PENDING" | "ERROR" | "DISABLED")
+      attr_accessor state_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ScopeConfigurationInput
+      attr_accessor scope_type: ("TENANT" | "SUBSCRIPTION")
+      attr_accessor scope_values: ::Array[::String]
+      SENSITIVE: []
     end
 
     class ScopeSettings
@@ -2198,6 +2551,62 @@ module Aws::Inspector2
     end
 
     class SendCisSessionTelemetryResponse < Aws::EmptyStructure
+    end
+
+    class ServerlessFunction
+      attr_accessor serverless_function_name: ::String
+      attr_accessor runtime: ::String
+      attr_accessor version: ::String
+      attr_accessor code_digest: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor network_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor execution_role: ::String
+      attr_accessor package_type: ("IMAGE" | "ZIP")
+      attr_accessor architectures: ::Array[("X86_64" | "ARM64")]
+      attr_accessor layers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ServerlessFunctionAggregation
+      attr_accessor resource_ids: ::Array[Types::StringFilter]
+      attr_accessor function_names: ::Array[Types::StringFilter]
+      attr_accessor runtimes: ::Array[Types::StringFilter]
+      attr_accessor function_tags: ::Array[Types::MapFilter]
+      attr_accessor cloud_providers: ::Array[Types::StringFilter]
+      attr_accessor cloud_partitions: ::Array[Types::StringFilter]
+      attr_accessor cloud_regions: ::Array[Types::StringFilter]
+      attr_accessor cloud_org_ids: ::Array[Types::StringFilter]
+      attr_accessor cloud_account_ids: ::Array[Types::StringFilter]
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
+      SENSITIVE: []
+    end
+
+    class ServerlessFunctionAggregationResponse
+      attr_accessor resource_id: ::String
+      attr_accessor cloud_provider: ("AWS" | "AZURE")
+      attr_accessor cloud_account_id: ::String
+      attr_accessor cloud_partition: ::String
+      attr_accessor cloud_region: ::String
+      attr_accessor cloud_org_id: ::String
+      attr_accessor function_name: ::String
+      attr_accessor runtime: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor account_id: ::String
+      attr_accessor severity_counts: Types::SeverityCounts
+      attr_accessor last_modified_at: ::Time
+      attr_accessor exploit_available_active_findings_count: ::Integer
+      attr_accessor fix_available_active_findings_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServerlessFunctionMetadata
+      attr_accessor serverless_function_name: ::String
+      attr_accessor runtime: ::String
+      attr_accessor function_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
     end
 
     class ServiceQuotaExceededException
@@ -2348,10 +2757,10 @@ module Aws::Inspector2
     class TitleAggregation
       attr_accessor titles: ::Array[Types::StringFilter]
       attr_accessor vulnerability_ids: ::Array[Types::StringFilter]
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+      attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
       attr_accessor sort_order: ("ASC" | "DESC")
       attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
-      attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
       SENSITIVE: []
     end
 
@@ -2415,13 +2824,42 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class UpdateConfigurationInheritance
+      attr_accessor ec2_configuration: ("INHERIT_FROM_ADMIN")
+      attr_accessor ecr_configuration: ("INHERIT_FROM_ADMIN")
+      SENSITIVE: []
+    end
+
     class UpdateConfigurationRequest
+      attr_accessor account_id: ::String
       attr_accessor ecr_configuration: Types::EcrConfiguration
       attr_accessor ec2_configuration: Types::Ec2Configuration
+      attr_accessor update_configuration_inheritance: Types::UpdateConfigurationInheritance
       SENSITIVE: []
     end
 
     class UpdateConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConnectorRequest
+      attr_accessor connector_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor provider_detail: Types::ProviderDetailUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorResponse
+      attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorScanConfigurationRequest
+      attr_accessor aws_config_connector_arn: ::String
+      attr_accessor scan_configuration: Types::ConnectorScanConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorScanConfigurationResponse < Aws::EmptyStructure
     end
 
     class UpdateEc2DeepInspectionConfigurationRequest
@@ -2441,7 +2879,7 @@ module Aws::Inspector2
     class UpdateEncryptionKeyRequest
       attr_accessor kms_key_id: ::String
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
       SENSITIVE: []
     end
 
@@ -2507,10 +2945,11 @@ module Aws::Inspector2
     end
 
     class Usage
-      attr_accessor type: ("EC2_INSTANCE_HOURS" | "ECR_INITIAL_SCAN" | "ECR_RESCAN" | "LAMBDA_FUNCTION_HOURS" | "LAMBDA_FUNCTION_CODE_HOURS" | "CODE_REPOSITORY_SAST" | "CODE_REPOSITORY_IAC" | "CODE_REPOSITORY_SCA" | "EC2_AGENTLESS_INSTANCE_HOURS")
+      attr_accessor type: ("EC2_INSTANCE_HOURS" | "ECR_INITIAL_SCAN" | "ECR_RESCAN" | "LAMBDA_FUNCTION_HOURS" | "LAMBDA_FUNCTION_CODE_HOURS" | "CODE_REPOSITORY_SAST" | "CODE_REPOSITORY_IAC" | "CODE_REPOSITORY_SCA" | "EC2_AGENTLESS_INSTANCE_HOURS" | "AZURE_CONTAINER_IMAGE_INITIAL_SCAN" | "AZURE_CONTAINER_IMAGE_RESCAN" | "AZURE_VM_AGENT_BASED_INSTANCE_HOURS" | "AZURE_SERVERLESS_FUNCTION_HOURS")
       attr_accessor total: ::Float
       attr_accessor estimated_monthly_cost: ::Float
       attr_accessor currency: ("USD")
+      attr_accessor cloud_provider: ("AWS" | "AZURE" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
@@ -2537,6 +2976,63 @@ module Aws::Inspector2
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Vm
+      attr_accessor type: ::String
+      attr_accessor vm_name: ::String
+      attr_accessor vm_image_reference: ::String
+      attr_accessor ip_v4_addresses: ::Array[::String]
+      attr_accessor ip_v6_addresses: ::Array[::String]
+      attr_accessor network_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor launched_at: ::Time
+      attr_accessor platform: ::String
+      attr_accessor execution_role: ::String
+      attr_accessor key_name: ::String
+      SENSITIVE: []
+    end
+
+    class VmInstanceAggregation
+      attr_accessor resource_ids: ::Array[Types::StringFilter]
+      attr_accessor operating_systems: ::Array[Types::StringFilter]
+      attr_accessor instance_tags: ::Array[Types::MapFilter]
+      attr_accessor vm_image_references: ::Array[Types::StringFilter]
+      attr_accessor cloud_providers: ::Array[Types::StringFilter]
+      attr_accessor cloud_partitions: ::Array[Types::StringFilter]
+      attr_accessor cloud_regions: ::Array[Types::StringFilter]
+      attr_accessor cloud_org_ids: ::Array[Types::StringFilter]
+      attr_accessor cloud_account_ids: ::Array[Types::StringFilter]
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL" | "NETWORK_FINDINGS")
+      SENSITIVE: []
+    end
+
+    class VmInstanceAggregationResponse
+      attr_accessor resource_id: ::String
+      attr_accessor cloud_provider: ("AWS" | "AZURE")
+      attr_accessor cloud_account_id: ::String
+      attr_accessor cloud_partition: ::String
+      attr_accessor cloud_region: ::String
+      attr_accessor cloud_org_id: ::String
+      attr_accessor vm_image_reference: ::String
+      attr_accessor operating_system: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor account_id: ::String
+      attr_accessor severity_counts: Types::SeverityCounts
+      attr_accessor network_findings: ::Integer
+      attr_accessor exploit_available_active_findings_count: ::Integer
+      attr_accessor fix_available_active_findings_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class VmInstanceMetadata
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor platform: ("WINDOWS" | "LINUX" | "UNKNOWN")
+      attr_accessor inventory_hash: ::String
+      attr_accessor vm_image_reference: ::String
       SENSITIVE: []
     end
 

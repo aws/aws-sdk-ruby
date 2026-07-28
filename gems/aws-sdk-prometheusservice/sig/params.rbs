@@ -35,6 +35,15 @@ module Aws
       }
     }
 
+      type destination = {
+      amp_configuration: {
+        workspace_arn: ::String
+      }?,
+      cloud_watch_configuration: {
+        dataset_arn: ::String
+      }?
+    }
+
     end
   end
 end

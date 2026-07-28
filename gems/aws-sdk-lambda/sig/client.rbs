@@ -212,6 +212,12 @@ module Aws
                                       ?propagate_tags: {
                                         mode: ("None" | "Explicit")?,
                                         explicit_tags: Hash[::String, ::String]?
+                                      },
+                                      ?telemetry_config: {
+                                        logging_config: {
+                                          system_log_level: ("DEBUG" | "INFO" | "WARN")?,
+                                          log_group: ::String?
+                                        }?
                                       }
                                     ) -> _CreateCapacityProviderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCapacityProviderResponseSuccess
@@ -333,7 +339,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
         def function_name: () -> ::String
         def function_arn: () -> ::String
-        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")
         def role: () -> ::String
         def handler: () -> ::String
         def code_size: () -> ::Integer
@@ -353,10 +359,10 @@ module Aws
         def layers: () -> ::Array[Types::Layer]
         def state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions")
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions" | "DependencyError")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DependencyError")
         def file_system_configs: () -> ::Array[Types::FileSystemConfig]
         def signing_profile_version_arn: () -> ::String
         def signing_job_arn: () -> ::String
@@ -375,7 +381,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_function-instance_method
       def create_function: (
                              function_name: ::String,
-                             ?runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023"),
+                             ?runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023"),
                              role: ::String,
                              ?handler: ::String,
                              code: {
@@ -383,6 +389,7 @@ module Aws
                                s3_bucket: ::String?,
                                s3_key: ::String?,
                                s3_object_version: ::String?,
+                               s3_object_storage_mode: ("COPY" | "REFERENCE")?,
                                image_uri: ::String?,
                                source_kms_key_arn: ::String?
                              },
@@ -445,6 +452,7 @@ module Aws
                                }
                              },
                              ?durable_config: {
+                               kms_key_arn: ::String?,
                                retention_period_in_days: ::Integer?,
                                execution_timeout: ::Integer?
                              }
@@ -647,10 +655,13 @@ module Aws
         def end_timestamp: () -> ::Time
         def version: () -> ::String
         def trace_header: () -> Types::TraceHeader
+        def execution_data_included: () -> bool
+        def durable_config: () -> Types::DurableConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_durable_execution-instance_method
       def get_durable_execution: (
-                                   durable_execution_arn: ::String
+                                   durable_execution_arn: ::String,
+                                   ?include_execution_data: bool
                                  ) -> _GetDurableExecutionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDurableExecutionResponseSuccess
 
@@ -765,7 +776,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
         def function_name: () -> ::String
         def function_arn: () -> ::String
-        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")
         def role: () -> ::String
         def handler: () -> ::String
         def code_size: () -> ::Integer
@@ -785,10 +796,10 @@ module Aws
         def layers: () -> ::Array[Types::Layer]
         def state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions")
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions" | "DependencyError")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DependencyError")
         def file_system_configs: () -> ::Array[Types::FileSystemConfig]
         def signing_profile_version_arn: () -> ::String
         def signing_job_arn: () -> ::String
@@ -875,7 +886,7 @@ module Aws
         def created_date: () -> ::Time
         def version: () -> ::Integer
         def compatible_architectures: () -> ::Array[("x86_64" | "arm64")]
-        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")]
+        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")]
         def license_info: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_layer_version-instance_method
@@ -894,7 +905,7 @@ module Aws
         def created_date: () -> ::Time
         def version: () -> ::Integer
         def compatible_architectures: () -> ::Array[("x86_64" | "arm64")]
-        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")]
+        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")]
         def license_info: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_layer_version_by_arn-instance_method
@@ -999,12 +1010,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#invoke_with_response_stream-instance_method
       def invoke_with_response_stream: (
                                          function_name: ::String,
-                                         ?invocation_type: ("RequestResponse" | "DryRun"),
                                          ?log_type: ("None" | "Tail"),
                                          ?client_context: ::String,
                                          ?qualifier: ::String,
                                          ?payload: ::String,
-                                         ?tenant_id: ::String
+                                         ?tenant_id: ::String,
+                                         ?invocation_type: ("RequestResponse" | "DryRun")
                                        ) ?{ (*untyped) -> void } -> _InvokeWithResponseStreamResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeWithResponseStreamResponseSuccess
 
@@ -1155,7 +1166,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_layer_versions-instance_method
       def list_layer_versions: (
                                  ?compatible_architecture: ("x86_64" | "arm64"),
-                                 ?compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023"),
+                                 ?compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023"),
                                  layer_name: ::String,
                                  ?marker: ::String,
                                  ?max_items: ::Integer
@@ -1170,7 +1181,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_layers-instance_method
       def list_layers: (
                          ?compatible_architecture: ("x86_64" | "arm64"),
-                         ?compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023"),
+                         ?compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023"),
                          ?marker: ::String,
                          ?max_items: ::Integer
                        ) -> _ListLayersResponseSuccess
@@ -1221,7 +1232,7 @@ module Aws
         def created_date: () -> ::Time
         def version: () -> ::Integer
         def compatible_architectures: () -> ::Array[("x86_64" | "arm64")]
-        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")]
+        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")]
         def license_info: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#publish_layer_version-instance_method
@@ -1232,10 +1243,11 @@ module Aws
                                      s3_bucket: ::String?,
                                      s3_key: ::String?,
                                      s3_object_version: ::String?,
+                                     s3_object_storage_mode: ("COPY" | "REFERENCE")?,
                                      zip_file: ::String?
                                    },
                                    ?compatible_architectures: Array[("x86_64" | "arm64")],
-                                   ?compatible_runtimes: Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")],
+                                   ?compatible_runtimes: Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")],
                                    ?license_info: ::String
                                  ) -> _PublishLayerVersionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishLayerVersionResponseSuccess
@@ -1244,7 +1256,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
         def function_name: () -> ::String
         def function_arn: () -> ::String
-        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")
         def role: () -> ::String
         def handler: () -> ::String
         def code_size: () -> ::Integer
@@ -1264,10 +1276,10 @@ module Aws
         def layers: () -> ::Array[Types::Layer]
         def state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions")
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions" | "DependencyError")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DependencyError")
         def file_system_configs: () -> ::Array[Types::FileSystemConfig]
         def signing_profile_version_arn: () -> ::String
         def signing_job_arn: () -> ::String
@@ -1507,6 +1519,12 @@ module Aws
                                       ?propagate_tags: {
                                         mode: ("None" | "Explicit")?,
                                         explicit_tags: Hash[::String, ::String]?
+                                      },
+                                      ?telemetry_config: {
+                                        logging_config: {
+                                          system_log_level: ("DEBUG" | "INFO" | "WARN")?,
+                                          log_group: ::String?
+                                        }?
                                       }
                                     ) -> _UpdateCapacityProviderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCapacityProviderResponseSuccess
@@ -1620,7 +1638,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
         def function_name: () -> ::String
         def function_arn: () -> ::String
-        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")
         def role: () -> ::String
         def handler: () -> ::String
         def code_size: () -> ::Integer
@@ -1640,10 +1658,10 @@ module Aws
         def layers: () -> ::Array[Types::Layer]
         def state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions")
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions" | "DependencyError")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DependencyError")
         def file_system_configs: () -> ::Array[Types::FileSystemConfig]
         def signing_profile_version_arn: () -> ::String
         def signing_job_arn: () -> ::String
@@ -1666,6 +1684,7 @@ module Aws
                                   ?s3_bucket: ::String,
                                   ?s3_key: ::String,
                                   ?s3_object_version: ::String,
+                                  ?s3_object_storage_mode: ("COPY" | "REFERENCE"),
                                   ?image_uri: ::String,
                                   ?architectures: Array[("x86_64" | "arm64")],
                                   ?publish: bool,
@@ -1680,7 +1699,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
         def function_name: () -> ::String
         def function_arn: () -> ::String
-        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")
         def role: () -> ::String
         def handler: () -> ::String
         def code_size: () -> ::Integer
@@ -1700,10 +1719,10 @@ module Aws
         def layers: () -> ::Array[Types::Layer]
         def state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions")
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions" | "DependencyError")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DependencyError")
         def file_system_configs: () -> ::Array[Types::FileSystemConfig]
         def signing_profile_version_arn: () -> ::String
         def signing_job_arn: () -> ::String
@@ -1735,7 +1754,7 @@ module Aws
                                            ?environment: {
                                              variables: Hash[::String, ::String]?
                                            },
-                                           ?runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023"),
+                                           ?runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023"),
                                            ?dead_letter_config: {
                                              target_arn: ::String?
                                            },
@@ -1776,6 +1795,7 @@ module Aws
                                              }
                                            },
                                            ?durable_config: {
+                                             kms_key_arn: ::String?,
                                              retention_period_in_days: ::Integer?,
                                              execution_timeout: ::Integer?
                                            }

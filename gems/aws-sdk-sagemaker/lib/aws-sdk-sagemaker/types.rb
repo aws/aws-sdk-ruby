@@ -10,6 +10,87 @@
 module Aws::SageMaker
   module Types
 
+    # A LoRA adapter entry identified by a model package ARN.
+    #
+    # @!attribute [rw] adapter_id
+    #   A unique identifier for the adapter. This ID is used as the
+    #   inference component name when the adapter is deployed. The ID must
+    #   start and end with an alphanumeric character, can contain hyphens
+    #   between alphanumeric characters, and can be up to 63 characters
+    #   long.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_arn
+    #   The Amazon Resource Name (ARN) of the model package that contains
+    #   the LoRA adapter artifacts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AIAdapterModelPackageEntry AWS API Documentation
+    #
+    class AIAdapterModelPackageEntry < Struct.new(
+      :adapter_id,
+      :model_package_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A LoRA adapter entry identified by an Amazon S3 URI.
+    #
+    # @!attribute [rw] adapter_id
+    #   A unique identifier for the adapter. This ID is used as the
+    #   inference component name when the adapter is deployed. The ID must
+    #   start and end with an alphanumeric character, can contain hyphens
+    #   between alphanumeric characters, and can be up to 63 characters
+    #   long.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI of the directory that contains the LoRA adapter
+    #   artifacts in PEFT format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AIAdapterS3Entry AWS API Documentation
+    #
+    class AIAdapterS3Entry < Struct.new(
+      :adapter_id,
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of LoRA adapters for an AI recommendation job. This is a
+    # union type — specify exactly one of the members.
+    #
+    # @note AIAdapterSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AIAdapterSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AIAdapterSource corresponding to the set member.
+    #
+    # @!attribute [rw] model_package_arns
+    #   A list of LoRA adapters identified by their model package ARNs. Use
+    #   this when your adapters were produced by a SageMaker AI fine-tuning
+    #   workflow that registers model packages.
+    #   @return [Array<Types::AIAdapterModelPackageEntry>]
+    #
+    # @!attribute [rw] s3_uris
+    #   A list of LoRA adapters identified by their Amazon S3 URIs. Use this
+    #   when your adapters are stored as raw artifacts in Amazon S3.
+    #   @return [Array<Types::AIAdapterS3Entry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AIAdapterSource AWS API Documentation
+    #
+    class AIAdapterSource < Struct.new(
+      :model_package_arns,
+      :s3_uris,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ModelPackageArns < AIAdapterSource; end
+      class S3Uris < AIAdapterSource; end
+      class Unknown < AIAdapterSource; end
+    end
+
     # The SageMaker endpoint configuration for benchmarking.
     #
     # @!attribute [rw] identifier
@@ -328,6 +409,13 @@ module Aws::SageMaker
     #   The expected performance metrics for this recommendation.
     #   @return [Array<Types::AIRecommendationPerformanceMetric>]
     #
+    # @!attribute [rw] adapter_details
+    #   The LoRA adapter details for this recommendation. This field
+    #   contains both the model package ARNs and Amazon S3 URIs for each
+    #   adapter, regardless of which form was originally supplied. This
+    #   field is absent when the job was created without LoRA adapters.
+    #   @return [Types::AIRecommendationAdapterDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AIRecommendation AWS API Documentation
     #
     class AIRecommendation < Struct.new(
@@ -336,7 +424,31 @@ module Aws::SageMaker
       :model_details,
       :deployment_configuration,
       :ai_benchmark_job_arn,
-      :expected_performance)
+      :expected_performance,
+      :adapter_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The per-recommendation LoRA adapter details. Contains both the model
+    # package ARNs and Amazon S3 URIs for each adapter, regardless of which
+    # form was originally supplied in the request. When the customer
+    # supplies only Amazon S3 URIs, Amazon SageMaker AI creates model
+    # packages on their behalf.
+    #
+    # @!attribute [rw] model_package_arns
+    #   The list of LoRA adapters with their model package ARNs.
+    #   @return [Array<Types::AIAdapterModelPackageEntry>]
+    #
+    # @!attribute [rw] s3_uris
+    #   The list of LoRA adapters with their Amazon S3 URIs.
+    #   @return [Array<Types::AIAdapterS3Entry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AIRecommendationAdapterDetails AWS API Documentation
+    #
+    class AIRecommendationAdapterDetails < Struct.new(
+      :model_package_arns,
+      :s3_uris)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -402,6 +514,15 @@ module Aws::SageMaker
     #   The environment variables for the deployment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] min_cpu_memory_required_in_mb
+    #   The minimum host (CPU) memory, in MiB, to reserve per model copy
+    #   when deploying the recommendation as an Inference Component. This
+    #   value maps to the base Inference Component's
+    #   `ComputeResourceRequirements$MinMemoryRequiredInMb` and is sized so
+    #   that `CopyCountPerInstance` copies co-place within the instance's
+    #   allocatable host memory.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AIRecommendationDeploymentConfiguration AWS API Documentation
     #
     class AIRecommendationDeploymentConfiguration < Struct.new(
@@ -410,7 +531,8 @@ module Aws::SageMaker
       :instance_type,
       :instance_count,
       :copy_count_per_instance,
-      :environment_variables)
+      :environment_variables,
+      :min_cpu_memory_required_in_mb)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5955,6 +6077,18 @@ module Aws::SageMaker
     #
     # @!attribute [rw] patching_strategy
     #   The strategy for applying patches to instances in the group.
+    #
+    #   * `WhenIdle`: Cordons all instances and patches each instance as it
+    #     becomes idle (no running jobs). Each instance is uncordoned
+    #     immediately after patching and becomes available for new jobs. If
+    #     instances do not become idle, they remain on the previous AMI
+    #     version. You can then use UpdateClusterSoftware with the desired
+    #     ImageReleaseVersion to manually update the remaining instances.
+    #
+    #   * `WhenAllIdle`: Cordons all instances and waits for all to become
+    #     idle before patching. All instances are uncordoned after patching
+    #     completes. If not all instances become idle, no patching occurs
+    #     and all instances remain on the previous AMI version.
     #   @return [String]
     #
     # @!attribute [rw] patch_schedule
@@ -5982,6 +6116,18 @@ module Aws::SageMaker
     #
     # @!attribute [rw] patching_strategy
     #   The strategy used for applying patches to instances in the group.
+    #
+    #   * `WhenIdle`: Cordons all instances and patches each instance as it
+    #     becomes idle (no running jobs). Each instance is uncordoned
+    #     immediately after patching and becomes available for new jobs. If
+    #     instances do not become idle, they remain on the previous AMI
+    #     version. You can then use UpdateClusterSoftware with the desired
+    #     ImageReleaseVersion to manually update the remaining instances.
+    #
+    #   * `WhenAllIdle`: Cordons all instances and waits for all to become
+    #     idle before patching. All instances are uncordoned after patching
+    #     completes. If not all instances become idle, no patching occurs
+    #     and all instances remain on the previous AMI version.
     #   @return [String]
     #
     # @!attribute [rw] current_patch_schedule
@@ -6689,7 +6835,9 @@ module Aws::SageMaker
     #
     #   * `CustomAmiId`: Use your custom AMI
     #
-    #   * `default`: Use the default latest system image
+    #   * `default`: Use the default latest system image. For clusters with
+    #     continuous scaling node provisioning mode, new instance groups
+    #     inherit the AMI from the earliest existing instance group
     #
     #   If you choose to use a custom AMI (`CustomAmiId`), ensure it meets
     #   the following requirements:
@@ -8953,6 +9101,13 @@ module Aws::SageMaker
     #   provide capacity reservation configuration.
     #   @return [Types::AIRecommendationComputeSpec]
     #
+    # @!attribute [rw] adapter_source
+    #   The LoRA adapter source for the recommendation job. Specify either a
+    #   list of model package ARNs or Amazon S3 URIs for your LoRA adapters.
+    #   When this parameter is absent, the recommendation job runs without
+    #   LoRA adapter support.
+    #   @return [Types::AIAdapterSource]
+    #
     # @!attribute [rw] tags
     #   The metadata that you apply to Amazon Web Services resources to help
     #   you categorize and organize them.
@@ -8970,6 +9125,7 @@ module Aws::SageMaker
       :inference_specification,
       :optimize_model,
       :compute_spec,
+      :adapter_source,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -13322,6 +13478,24 @@ module Aws::SageMaker
     #   A VPC in Amazon VPC that your optimized model has access to.
     #   @return [Types::OptimizationVpcConfig]
     #
+    # @!attribute [rw] training_plan_arns
+    #   The Amazon Resource Name (ARN) of the training plan to use for this
+    #   optimization job.
+    #
+    #   When you use reserved capacity from a training plan, the
+    #   optimization job runs on that reserved capacity instead of on-demand
+    #   capacity. If you omit this field, the job uses on-demand capacity.
+    #   Currently, you can specify at most one training plan.
+    #
+    #   For more information about how to reserve GPU capacity for your
+    #   optimization jobs using Amazon SageMaker Training Plans, see
+    #   [Reserve capacity with training plans][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateOptimizationJobRequest AWS API Documentation
     #
     class CreateOptimizationJobRequest < Struct.new(
@@ -13335,7 +13509,8 @@ module Aws::SageMaker
       :output_config,
       :stopping_condition,
       :tags,
-      :vpc_config)
+      :vpc_config,
+      :training_plan_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17187,6 +17362,12 @@ module Aws::SageMaker
     #   The compute resource specification for the recommendation job.
     #   @return [Types::AIRecommendationComputeSpec]
     #
+    # @!attribute [rw] adapter_source
+    #   The LoRA adapter source that was specified when the recommendation
+    #   job was created. This field is absent when the job was created
+    #   without LoRA adapters.
+    #   @return [Types::AIAdapterSource]
+    #
     # @!attribute [rw] creation_time
     #   A timestamp that indicates when the recommendation job was created.
     #   @return [Time]
@@ -17220,6 +17401,7 @@ module Aws::SageMaker
       :recommendations,
       :role_arn,
       :compute_spec,
+      :adapter_source,
       :creation_time,
       :start_time,
       :end_time,
@@ -22716,6 +22898,13 @@ module Aws::SageMaker
     #   A VPC in Amazon VPC that your optimized model has access to.
     #   @return [Types::OptimizationVpcConfig]
     #
+    # @!attribute [rw] training_plan_arns
+    #   The Amazon Resource Name (ARN) of the training plan associated with
+    #   this optimization job. This field appears only when you specified a
+    #   training plan when you created the job. Optimization jobs that use
+    #   on-demand capacity don't return this field.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeOptimizationJobResponse AWS API Documentation
     #
     class DescribeOptimizationJobResponse < Struct.new(
@@ -22736,7 +22925,8 @@ module Aws::SageMaker
       :optimization_output,
       :role_arn,
       :stopping_condition,
-      :vpc_config)
+      :vpc_config,
+      :training_plan_arns)
       SENSITIVE = []
       include Aws::Structure
     end

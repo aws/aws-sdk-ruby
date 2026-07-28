@@ -846,6 +846,99 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Creates a container association for Network Firewall. A container
+    # association links container clusters (ECS or EKS) to Network Firewall,
+    # enabling dynamic IP resolution for firewall rules based on container
+    # attributes.
+    #
+    # To manage a container association's tags, use the standard Amazon Web
+    # Services resource tagging operations, ListTagsForResource,
+    # TagResource, and UntagResource.
+    #
+    # To retrieve information about container associations, use
+    # ListContainerAssociations and DescribeContainerAssociation.
+    #
+    # @option params [required, String] :container_association_name
+    #   The descriptive name of the container association. You can't change
+    #   the name of a container association after you create it.
+    #
+    # @option params [String] :description
+    #   A description of the container association.
+    #
+    # @option params [required, String] :type
+    #   The type of container orchestration platform for the clusters in this
+    #   association. Valid values are `ECS` and `EKS`. You can't change the
+    #   type after creation.
+    #
+    # @option params [required, Array<Types::ContainerMonitoringConfiguration>] :container_monitoring_configurations
+    #   The list of container monitoring configurations that define which
+    #   clusters and container attributes to monitor.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key:value pairs to associate with the resource.
+    #
+    # @return [Types::CreateContainerAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContainerAssociationResponse#container_association_name #container_association_name} => String
+    #   * {Types::CreateContainerAssociationResponse#container_association_arn #container_association_arn} => String
+    #   * {Types::CreateContainerAssociationResponse#description #description} => String
+    #   * {Types::CreateContainerAssociationResponse#type #type} => String
+    #   * {Types::CreateContainerAssociationResponse#container_monitoring_configurations #container_monitoring_configurations} => Array&lt;Types::ContainerMonitoringConfiguration&gt;
+    #   * {Types::CreateContainerAssociationResponse#status #status} => String
+    #   * {Types::CreateContainerAssociationResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::CreateContainerAssociationResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_container_association({
+    #     container_association_name: "ResourceName", # required
+    #     description: "Description",
+    #     type: "ECS", # required, accepts ECS, EKS
+    #     container_monitoring_configurations: [ # required
+    #       {
+    #         cluster_arn: "ResourceArn", # required
+    #         attribute_filters: [
+    #           {
+    #             key: "ContainerAttributeKey", # required
+    #             value: "ContainerAttributeValue", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.container_association_name #=> String
+    #   resp.container_association_arn #=> String
+    #   resp.description #=> String
+    #   resp.type #=> String, one of "ECS", "EKS"
+    #   resp.container_monitoring_configurations #=> Array
+    #   resp.container_monitoring_configurations[0].cluster_arn #=> String
+    #   resp.container_monitoring_configurations[0].attribute_filters #=> Array
+    #   resp.container_monitoring_configurations[0].attribute_filters[0].key #=> String
+    #   resp.container_monitoring_configurations[0].attribute_filters[0].value #=> String
+    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateContainerAssociation AWS API Documentation
+    #
+    # @overload create_container_association(params = {})
+    # @param [Hash] params ({})
+    def create_container_association(params = {}, options = {})
+      req = build_request(:create_container_association, params)
+      req.send_request(options)
+    end
+
     # Creates an Network Firewall Firewall and accompanying FirewallStatus
     # for a VPC.
     #
@@ -2235,6 +2328,47 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Deletes the specified container association. When you delete a
+    # container association, Network Firewall stops monitoring the
+    # associated container clusters and removes the resolved IP addresses
+    # from firewall rules.
+    #
+    # @option params [String] :container_association_name
+    #   The descriptive name of the container association. You must specify
+    #   the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :container_association_arn
+    #   The Amazon Resource Name (ARN) of the container association. You must
+    #   specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DeleteContainerAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteContainerAssociationResponse#container_association_name #container_association_name} => String
+    #   * {Types::DeleteContainerAssociationResponse#container_association_arn #container_association_arn} => String
+    #   * {Types::DeleteContainerAssociationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_container_association({
+    #     container_association_name: "ResourceName",
+    #     container_association_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.container_association_name #=> String
+    #   resp.container_association_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteContainerAssociation AWS API Documentation
+    #
+    # @overload delete_container_association(params = {})
+    # @param [Hash] params ({})
+    def delete_container_association(params = {}, options = {})
+      req = build_request(:delete_container_association, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Firewall and its FirewallStatus. This operation
     # requires the firewall's `DeleteProtection` flag to be `FALSE`. You
     # can't revert this operation.
@@ -2822,6 +2956,64 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def delete_vpc_endpoint_association(params = {}, options = {})
       req = build_request(:delete_vpc_endpoint_association, params)
+      req.send_request(options)
+    end
+
+    # Returns the properties of a container association.
+    #
+    # @option params [String] :container_association_name
+    #   The descriptive name of the container association. You must specify
+    #   the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :container_association_arn
+    #   The Amazon Resource Name (ARN) of the container association. You must
+    #   specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DescribeContainerAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeContainerAssociationResponse#container_association_name #container_association_name} => String
+    #   * {Types::DescribeContainerAssociationResponse#container_association_arn #container_association_arn} => String
+    #   * {Types::DescribeContainerAssociationResponse#description #description} => String
+    #   * {Types::DescribeContainerAssociationResponse#type #type} => String
+    #   * {Types::DescribeContainerAssociationResponse#container_monitoring_configurations #container_monitoring_configurations} => Array&lt;Types::ContainerMonitoringConfiguration&gt;
+    #   * {Types::DescribeContainerAssociationResponse#status #status} => String
+    #   * {Types::DescribeContainerAssociationResponse#resolved_cidr_count #resolved_cidr_count} => Integer
+    #   * {Types::DescribeContainerAssociationResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::DescribeContainerAssociationResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::DescribeContainerAssociationResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_container_association({
+    #     container_association_name: "ResourceName",
+    #     container_association_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.container_association_name #=> String
+    #   resp.container_association_arn #=> String
+    #   resp.description #=> String
+    #   resp.type #=> String, one of "ECS", "EKS"
+    #   resp.container_monitoring_configurations #=> Array
+    #   resp.container_monitoring_configurations[0].cluster_arn #=> String
+    #   resp.container_monitoring_configurations[0].attribute_filters #=> Array
+    #   resp.container_monitoring_configurations[0].attribute_filters[0].key #=> String
+    #   resp.container_monitoring_configurations[0].attribute_filters[0].value #=> String
+    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.resolved_cidr_count #=> Integer
+    #   resp.last_updated_time #=> Time
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeContainerAssociation AWS API Documentation
+    #
+    # @overload describe_container_association(params = {})
+    # @param [Hash] params ({})
+    def describe_container_association(params = {}, options = {})
+      req = build_request(:describe_container_association, params)
       req.send_request(options)
     end
 
@@ -4184,6 +4376,52 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Retrieves the metadata for the container associations that you have
+    # defined. You can optionally page through results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @return [Types::ListContainerAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContainerAssociationsResponse#container_associations #container_associations} => Array&lt;Types::ContainerAssociationSummary&gt;
+    #   * {Types::ListContainerAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_container_associations({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.container_associations #=> Array
+    #   resp.container_associations[0].arn #=> String
+    #   resp.container_associations[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListContainerAssociations AWS API Documentation
+    #
+    # @overload list_container_associations(params = {})
+    # @param [Hash] params ({})
+    def list_container_associations(params = {}, options = {})
+      req = build_request(:list_container_associations, params)
+      req.send_request(options)
+    end
+
     # Retrieves the metadata for the firewall policies that you have
     # defined. Depending on your setting for max results and the number of
     # firewall policies, a single call might not return the full list.
@@ -5353,6 +5591,108 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def update_availability_zone_change_protection(params = {}, options = {})
       req = build_request(:update_availability_zone_change_protection, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of an existing container association. Use this
+    # to modify the container monitoring configurations or description.
+    #
+    # @option params [String] :container_association_name
+    #   The descriptive name of the container association. You must specify
+    #   the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :container_association_arn
+    #   The Amazon Resource Name (ARN) of the container association. You must
+    #   specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :description
+    #   A description of the container association.
+    #
+    # @option params [required, String] :type
+    #   The type of container orchestration platform. This must match the type
+    #   specified when the container association was created.
+    #
+    # @option params [required, Array<Types::ContainerMonitoringConfiguration>] :container_monitoring_configurations
+    #   The updated list of container monitoring configurations that define
+    #   which clusters and container attributes to monitor.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key:value pairs associated with the resource.
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the container association. The token
+    #   marks the state of the container association resource at the time of
+    #   the request. To make an update to the container association, provide
+    #   the token in your request. Network Firewall uses the token to ensure
+    #   that the container association hasn't changed since you last
+    #   retrieved it. If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the container
+    #   association again to get a current copy of it with a new token.
+    #   Reapply your changes as needed, then try the operation again using the
+    #   new token.
+    #
+    # @return [Types::UpdateContainerAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateContainerAssociationResponse#container_association_name #container_association_name} => String
+    #   * {Types::UpdateContainerAssociationResponse#container_association_arn #container_association_arn} => String
+    #   * {Types::UpdateContainerAssociationResponse#description #description} => String
+    #   * {Types::UpdateContainerAssociationResponse#type #type} => String
+    #   * {Types::UpdateContainerAssociationResponse#container_monitoring_configurations #container_monitoring_configurations} => Array&lt;Types::ContainerMonitoringConfiguration&gt;
+    #   * {Types::UpdateContainerAssociationResponse#status #status} => String
+    #   * {Types::UpdateContainerAssociationResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::UpdateContainerAssociationResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_container_association({
+    #     container_association_name: "ResourceName",
+    #     container_association_arn: "ResourceArn",
+    #     description: "Description",
+    #     type: "ECS", # required, accepts ECS, EKS
+    #     container_monitoring_configurations: [ # required
+    #       {
+    #         cluster_arn: "ResourceArn", # required
+    #         attribute_filters: [
+    #           {
+    #             key: "ContainerAttributeKey", # required
+    #             value: "ContainerAttributeValue", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     update_token: "UpdateToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.container_association_name #=> String
+    #   resp.container_association_arn #=> String
+    #   resp.description #=> String
+    #   resp.type #=> String, one of "ECS", "EKS"
+    #   resp.container_monitoring_configurations #=> Array
+    #   resp.container_monitoring_configurations[0].cluster_arn #=> String
+    #   resp.container_monitoring_configurations[0].attribute_filters #=> Array
+    #   resp.container_monitoring_configurations[0].attribute_filters[0].key #=> String
+    #   resp.container_monitoring_configurations[0].attribute_filters[0].value #=> String
+    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateContainerAssociation AWS API Documentation
+    #
+    # @overload update_container_association(params = {})
+    # @param [Hash] params ({})
+    def update_container_association(params = {}, options = {})
+      req = build_request(:update_container_association, params)
       req.send_request(options)
     end
 
@@ -6922,7 +7262,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

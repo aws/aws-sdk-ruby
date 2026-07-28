@@ -27,6 +27,8 @@ module Aws::MediaTailor
     AdsInteractionExcludeEventType = Shapes::StringShape.new(name: 'AdsInteractionExcludeEventType')
     AdsInteractionLog = Shapes::StructureShape.new(name: 'AdsInteractionLog')
     AdsInteractionPublishOptInEventType = Shapes::StringShape.new(name: 'AdsInteractionPublishOptInEventType')
+    AdsPersonalizationConcurrency = Shapes::StructureShape.new(name: 'AdsPersonalizationConcurrency')
+    AdsPersonalizationTimeouts = Shapes::StructureShape.new(name: 'AdsPersonalizationTimeouts')
     Alert = Shapes::StructureShape.new(name: 'Alert')
     AlertCategory = Shapes::StringShape.new(name: 'AlertCategory')
     AlternateMedia = Shapes::StructureShape.new(name: 'AlternateMedia')
@@ -283,6 +285,17 @@ module Aws::MediaTailor
     AdsInteractionLog.add_member(:exclude_event_types, Shapes::ShapeRef.new(shape: __adsInteractionExcludeEventTypesList, location_name: "ExcludeEventTypes"))
     AdsInteractionLog.struct_class = Types::AdsInteractionLog
 
+    AdsPersonalizationConcurrency.add_member(:max_concurrent_ads_requests, Shapes::ShapeRef.new(shape: __integer, location_name: "MaxConcurrentAdsRequests"))
+    AdsPersonalizationConcurrency.add_member(:enable_vod_vast_parallelization, Shapes::ShapeRef.new(shape: __boolean, location_name: "EnableVodVastParallelization"))
+    AdsPersonalizationConcurrency.struct_class = Types::AdsPersonalizationConcurrency
+
+    AdsPersonalizationTimeouts.add_member(:ads_request_timeout_milliseconds, Shapes::ShapeRef.new(shape: __integer, location_name: "AdsRequestTimeoutMilliseconds"))
+    AdsPersonalizationTimeouts.add_member(:live_maximum_ads_personalization_time_milliseconds, Shapes::ShapeRef.new(shape: __integer, location_name: "LiveMaximumAdsPersonalizationTimeMilliseconds"))
+    AdsPersonalizationTimeouts.add_member(:vod_maximum_ads_personalization_time_milliseconds, Shapes::ShapeRef.new(shape: __integer, location_name: "VodMaximumAdsPersonalizationTimeMilliseconds"))
+    AdsPersonalizationTimeouts.add_member(:prefetch_ads_request_timeout_milliseconds, Shapes::ShapeRef.new(shape: __integer, location_name: "PrefetchAdsRequestTimeoutMilliseconds"))
+    AdsPersonalizationTimeouts.add_member(:prefetch_maximum_ads_personalization_time_milliseconds, Shapes::ShapeRef.new(shape: __integer, location_name: "PrefetchMaximumAdsPersonalizationTimeMilliseconds"))
+    AdsPersonalizationTimeouts.struct_class = Types::AdsPersonalizationTimeouts
+
     Alert.add_member(:alert_code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "AlertCode"))
     Alert.add_member(:alert_message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "AlertMessage"))
     Alert.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, required: true, location_name: "LastModifiedTime"))
@@ -497,6 +510,7 @@ module Aws::MediaTailor
     CustomOutputConfiguration.struct_class = Types::CustomOutputConfiguration
 
     DashConfiguration.add_member(:manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ManifestEndpointPrefix"))
+    DashConfiguration.add_member(:dual_stack_manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "DualStackManifestEndpointPrefix"))
     DashConfiguration.add_member(:mpd_location, Shapes::ShapeRef.new(shape: __string, location_name: "MpdLocation"))
     DashConfiguration.add_member(:origin_manifest_type, Shapes::ShapeRef.new(shape: OriginManifestType, location_name: "OriginManifestType"))
     DashConfiguration.struct_class = Types::DashConfiguration
@@ -706,7 +720,9 @@ module Aws::MediaTailor
     GetPlaybackConfigurationResponse.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
     GetPlaybackConfigurationResponse.add_member(:playback_configuration_arn, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationArn"))
     GetPlaybackConfigurationResponse.add_member(:playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackEndpointPrefix"))
+    GetPlaybackConfigurationResponse.add_member(:dual_stack_playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "DualStackPlaybackEndpointPrefix"))
     GetPlaybackConfigurationResponse.add_member(:session_initialization_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "SessionInitializationEndpointPrefix"))
+    GetPlaybackConfigurationResponse.add_member(:dual_stack_session_initialization_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "DualStackSessionInitializationEndpointPrefix"))
     GetPlaybackConfigurationResponse.add_member(:slate_ad_url, Shapes::ShapeRef.new(shape: __string, location_name: "SlateAdUrl"))
     GetPlaybackConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     GetPlaybackConfigurationResponse.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
@@ -714,6 +730,8 @@ module Aws::MediaTailor
     GetPlaybackConfigurationResponse.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
+    GetPlaybackConfigurationResponse.add_member(:ads_personalization_timeouts, Shapes::ShapeRef.new(shape: AdsPersonalizationTimeouts, location_name: "AdsPersonalizationTimeouts"))
+    GetPlaybackConfigurationResponse.add_member(:ads_personalization_concurrency, Shapes::ShapeRef.new(shape: AdsPersonalizationConcurrency, location_name: "AdsPersonalizationConcurrency"))
     GetPlaybackConfigurationResponse.struct_class = Types::GetPlaybackConfigurationResponse
 
     GetPrefetchScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
@@ -732,6 +750,7 @@ module Aws::MediaTailor
     GetPrefetchScheduleResponse.struct_class = Types::GetPrefetchScheduleResponse
 
     HlsConfiguration.add_member(:manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ManifestEndpointPrefix"))
+    HlsConfiguration.add_member(:dual_stack_manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "DualStackManifestEndpointPrefix"))
     HlsConfiguration.struct_class = Types::HlsConfiguration
 
     HlsPlaylistSettings.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "ManifestWindowSeconds"))
@@ -889,7 +908,9 @@ module Aws::MediaTailor
     PlaybackConfiguration.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
     PlaybackConfiguration.add_member(:playback_configuration_arn, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationArn"))
     PlaybackConfiguration.add_member(:playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackEndpointPrefix"))
+    PlaybackConfiguration.add_member(:dual_stack_playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "DualStackPlaybackEndpointPrefix"))
     PlaybackConfiguration.add_member(:session_initialization_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "SessionInitializationEndpointPrefix"))
+    PlaybackConfiguration.add_member(:dual_stack_session_initialization_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "DualStackSessionInitializationEndpointPrefix"))
     PlaybackConfiguration.add_member(:slate_ad_url, Shapes::ShapeRef.new(shape: __string, location_name: "SlateAdUrl"))
     PlaybackConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     PlaybackConfiguration.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
@@ -897,6 +918,8 @@ module Aws::MediaTailor
     PlaybackConfiguration.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
     PlaybackConfiguration.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
     PlaybackConfiguration.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
+    PlaybackConfiguration.add_member(:ads_personalization_timeouts, Shapes::ShapeRef.new(shape: AdsPersonalizationTimeouts, location_name: "AdsPersonalizationTimeouts"))
+    PlaybackConfiguration.add_member(:ads_personalization_concurrency, Shapes::ShapeRef.new(shape: AdsPersonalizationConcurrency, location_name: "AdsPersonalizationConcurrency"))
     PlaybackConfiguration.struct_class = Types::PlaybackConfiguration
 
     PrefetchConsumption.add_member(:avail_matching_criteria, Shapes::ShapeRef.new(shape: __listOfAvailMatchingCriteria, location_name: "AvailMatchingCriteria"))
@@ -966,6 +989,8 @@ module Aws::MediaTailor
     PutPlaybackConfigurationRequest.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
+    PutPlaybackConfigurationRequest.add_member(:ads_personalization_timeouts, Shapes::ShapeRef.new(shape: AdsPersonalizationTimeouts, location_name: "AdsPersonalizationTimeouts"))
+    PutPlaybackConfigurationRequest.add_member(:ads_personalization_concurrency, Shapes::ShapeRef.new(shape: AdsPersonalizationConcurrency, location_name: "AdsPersonalizationConcurrency"))
     PutPlaybackConfigurationRequest.struct_class = Types::PutPlaybackConfigurationRequest
 
     PutPlaybackConfigurationResponse.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
@@ -983,7 +1008,9 @@ module Aws::MediaTailor
     PutPlaybackConfigurationResponse.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
     PutPlaybackConfigurationResponse.add_member(:playback_configuration_arn, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationArn"))
     PutPlaybackConfigurationResponse.add_member(:playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackEndpointPrefix"))
+    PutPlaybackConfigurationResponse.add_member(:dual_stack_playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "DualStackPlaybackEndpointPrefix"))
     PutPlaybackConfigurationResponse.add_member(:session_initialization_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "SessionInitializationEndpointPrefix"))
+    PutPlaybackConfigurationResponse.add_member(:dual_stack_session_initialization_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "DualStackSessionInitializationEndpointPrefix"))
     PutPlaybackConfigurationResponse.add_member(:slate_ad_url, Shapes::ShapeRef.new(shape: __string, location_name: "SlateAdUrl"))
     PutPlaybackConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     PutPlaybackConfigurationResponse.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
@@ -991,6 +1018,8 @@ module Aws::MediaTailor
     PutPlaybackConfigurationResponse.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
+    PutPlaybackConfigurationResponse.add_member(:ads_personalization_timeouts, Shapes::ShapeRef.new(shape: AdsPersonalizationTimeouts, location_name: "AdsPersonalizationTimeouts"))
+    PutPlaybackConfigurationResponse.add_member(:ads_personalization_concurrency, Shapes::ShapeRef.new(shape: AdsPersonalizationConcurrency, location_name: "AdsPersonalizationConcurrency"))
     PutPlaybackConfigurationResponse.struct_class = Types::PutPlaybackConfigurationResponse
 
     RecurringConsumption.add_member(:retrieved_ad_expiration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "RetrievedAdExpirationSeconds"))
@@ -1022,6 +1051,7 @@ module Aws::MediaTailor
     ResponseOutputItem.add_member(:hls_playlist_settings, Shapes::ShapeRef.new(shape: HlsPlaylistSettings, location_name: "HlsPlaylistSettings"))
     ResponseOutputItem.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ManifestName"))
     ResponseOutputItem.add_member(:playback_url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "PlaybackUrl"))
+    ResponseOutputItem.add_member(:dual_stack_playback_url, Shapes::ShapeRef.new(shape: __string, location_name: "DualStackPlaybackUrl"))
     ResponseOutputItem.add_member(:source_group, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceGroup"))
     ResponseOutputItem.struct_class = Types::ResponseOutputItem
 

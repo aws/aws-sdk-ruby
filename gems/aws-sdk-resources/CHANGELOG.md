@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+3.267.0 (2026-07-07)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-partnercentralrevenuemeasurement` gem.
+
+3.266.0 (2026-06-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-supportauthz` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-simspaceweaver` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-panorama` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-ioteventsdata` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-iotevents` gem.
+
 3.265.0 (2026-06-22)
 ------------------
 

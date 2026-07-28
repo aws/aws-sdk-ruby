@@ -679,6 +679,8 @@ module Aws::SSOAdmin
       attr_accessor created_date: ::Time
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "ACTIVE")
       attr_accessor status_reason: ::String
+      attr_accessor primary_region: ::String
+      attr_accessor regions: ::Array[Types::RegionMetadata]
       SENSITIVE: []
     end
 

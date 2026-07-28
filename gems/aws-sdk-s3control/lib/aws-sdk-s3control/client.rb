@@ -8218,7 +8218,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

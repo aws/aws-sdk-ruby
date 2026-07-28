@@ -136,12 +136,6 @@ module Aws::EMR
       SENSITIVE: []
     end
 
-    class CertificateAuthority
-      attr_accessor certificate_arn: ::String
-      attr_accessor certificate_data: ::String
-      SENSITIVE: []
-    end
-
     class CloudWatchAlarmDefinition
       attr_accessor comparison_operator: ("GREATER_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN" | "LESS_THAN_OR_EQUAL")
       attr_accessor evaluation_periods: ::Integer
@@ -1477,7 +1471,6 @@ module Aws::EMR
       attr_accessor engine_configurations: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::SessionMonitoringConfiguration
       attr_accessor session_idle_timeout_in_minutes: ::Integer
-      attr_accessor certificate_authority: Types::CertificateAuthority
       attr_accessor server_url: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []

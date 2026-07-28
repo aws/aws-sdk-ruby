@@ -437,6 +437,12 @@ module Aws::MarketplaceMetering
     #   registration token is resolved to obtain a `CustomerIdentifier`
     #   along with the `CustomerAWSAccountId`, `ProductCode`, and
     #   `LicenseArn`.
+    #
+    #   <note markdown="1"> For new SaaS product integrations, the `CustomerIdentifier` field is
+    #   not populated. Use `CustomerAWSAccountId` and `LicenseArn` for
+    #   customer identification.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomerRequest AWS API Documentation
@@ -454,6 +460,10 @@ module Aws::MarketplaceMetering
     # @!attribute [rw] customer_identifier
     #   The `CustomerIdentifier` is used to identify an individual customer
     #   in your application.
+    #
+    #   For new SaaS product integrations, this field is not populated. Use
+    #   `CustomerAWSAccountId` and `LicenseArn` to identify customers
+    #   instead.
     #   @return [String]
     #
     # @!attribute [rw] product_code
@@ -578,14 +588,21 @@ module Aws::MarketplaceMetering
     # @!attribute [rw] timestamp
     #   Timestamp, in UTC, for which the usage is being reported.
     #
-    #   Your application can meter usage for up to six hours in the past.
+    #   Your application can meter usage for up to 24 hours in the past.
     #   Make sure the `timestamp` value is not before the start of the
     #   software usage.
+    #
+    #   At the end of each billing cycle, you have a 6-hour grace period to
+    #   submit usage records for the previous billing month before 06:00 UTC
+    #   on the first day of the next month.
     #   @return [Time]
     #
     # @!attribute [rw] customer_identifier
     #   The `CustomerIdentifier` is obtained through the `ResolveCustomer`
     #   operation and represents an individual buyer in your application.
+    #
+    #   `CustomerIdentifier` is not supported for new SaaS product
+    #   integrations. Use `CustomerAWSAccountId` to identify the buyer.
     #   @return [String]
     #
     # @!attribute [rw] dimension

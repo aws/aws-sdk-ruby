@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2026-07-13)
+------------------
+
+* Feature - Amazon GameLift Servers now includes fleet expiration for managed fleets. A managed fleet expires one year after creation, transitioning to EXPIRED status, emitting a FLEET EXPIRED event, and scaling to zero instances. Expired fleets cannot host new game sessions or increase capacity.
+
+1.132.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.131.0 (2026-06-18)
 ------------------
 

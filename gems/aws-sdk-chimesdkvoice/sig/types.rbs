@@ -166,6 +166,7 @@ module Aws::ChimeSDKVoice
     class CreateVoiceConnectorGroupRequest
       attr_accessor name: ::String
       attr_accessor voice_connector_items: ::Array[Types::VoiceConnectorItem]
+      attr_accessor call_distribution_type: ("PriorityWeightedDistribution" | "LoadBalancedDistribution")
       SENSITIVE: []
     end
 
@@ -769,6 +770,7 @@ module Aws::ChimeSDKVoice
     class PhoneNumber
       attr_accessor phone_number_id: ::String
       attr_accessor e164_phone_number: ::String
+      attr_accessor phone_number_arn: ::String
       attr_accessor country: ::String
       attr_accessor type: ("Local" | "TollFree")
       attr_accessor product_type: ("VoiceConnector" | "SipMediaApplicationDialIn")
@@ -810,7 +812,7 @@ module Aws::ChimeSDKVoice
 
     class PhoneNumberError
       attr_accessor phone_number_id: ::String
-      attr_accessor error_code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist" | "Gone")
+      attr_accessor error_code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist" | "Gone" | "Validation")
       attr_accessor error_message: ::String
       SENSITIVE: [:phone_number_id]
     end
@@ -823,7 +825,7 @@ module Aws::ChimeSDKVoice
       attr_accessor ordered_phone_numbers: ::Array[Types::OrderedPhoneNumber]
       attr_accessor created_timestamp: ::Time
       attr_accessor updated_timestamp: ::Time
-      attr_accessor foc_date: ::Time
+      attr_accessor foc_date: ::String
       SENSITIVE: []
     end
 
@@ -1257,6 +1259,7 @@ module Aws::ChimeSDKVoice
       attr_accessor voice_connector_group_id: ::String
       attr_accessor name: ::String
       attr_accessor voice_connector_items: ::Array[Types::VoiceConnectorItem]
+      attr_accessor call_distribution_type: ("PriorityWeightedDistribution" | "LoadBalancedDistribution")
       SENSITIVE: []
     end
 
@@ -1340,6 +1343,7 @@ module Aws::ChimeSDKVoice
       attr_accessor created_timestamp: ::Time
       attr_accessor updated_timestamp: ::Time
       attr_accessor voice_connector_group_arn: ::String
+      attr_accessor call_distribution_type: ("PriorityWeightedDistribution" | "LoadBalancedDistribution")
       SENSITIVE: []
     end
 

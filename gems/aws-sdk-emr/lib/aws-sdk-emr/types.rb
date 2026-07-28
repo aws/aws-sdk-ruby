@@ -505,31 +505,6 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # Describes the certificate authority used to establish an mTLS
-    # connection to the Spark Connect server when connecting directly over
-    # VPC peering.
-    #
-    # @!attribute [rw] certificate_arn
-    #   The Amazon Resource Name (ARN) of the certificate authority in
-    #   Amazon Web Services Private CA that issued the Spark Connect server
-    #   certificate.
-    #   @return [String]
-    #
-    # @!attribute [rw] certificate_data
-    #   The PEM-encoded root CA certificate data. Provide this certificate
-    #   to your client's trust store when connecting directly to the Spark
-    #   Connect server over VPC peering.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CertificateAuthority AWS API Documentation
-    #
-    class CertificateAuthority < Struct.new(
-      :certificate_arn,
-      :certificate_data)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The definition of a CloudWatch metric alarm, which determines when an
     # automatic scaling activity is triggered. When the defined alarm
     # conditions are satisfied, scaling activity begins.
@@ -6521,11 +6496,6 @@ module Aws::EMR
     #   duration, Amazon EMR automatically terminates it.
     #   @return [Integer]
     #
-    # @!attribute [rw] certificate_authority
-    #   The certificate authority used to establish an mTLS connection to
-    #   the Spark Connect server when connecting directly over VPC peering.
-    #   @return [Types::CertificateAuthority]
-    #
     # @!attribute [rw] server_url
     #   The Spark Connect server URL for the session. Use this URL with the
     #   `Credentials` returned by `GetSessionEndpoint` to connect directly
@@ -6556,7 +6526,6 @@ module Aws::EMR
       :engine_configurations,
       :monitoring_configuration,
       :session_idle_timeout_in_minutes,
-      :certificate_authority,
       :server_url,
       :tags)
       SENSITIVE = []

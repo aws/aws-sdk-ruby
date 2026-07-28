@@ -360,7 +360,7 @@ module Aws::CloudWatch
     #
     #   composite_alarm.describe_history({
     #     alarm_contributor_id: "ContributorId",
-    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
+    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm, LogAlarm
     #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action, AlarmContributorStateUpdate, AlarmContributorAction
     #     start_date: Time.now,
     #     end_date: Time.now,
@@ -374,8 +374,8 @@ module Aws::CloudWatch
     #   alarm history results.
     # @option options [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
-    #   metric alarms or composite alarms. If you omit this parameter, only
-    #   metric alarms are returned.
+    #   metric alarms, composite alarms, or log alarms. If you omit this
+    #   parameter, only metric alarms are returned.
     # @option options [String] :history_item_type
     #   The type of alarm histories to retrieve.
     # @option options [Time,DateTime,Date,Integer,String] :start_date

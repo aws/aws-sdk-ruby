@@ -261,6 +261,24 @@
         {"shape":"InternalErrorException"}
       ]
     },
+    "AdminGetUserAuthFactors":{
+      "name":"AdminGetUserAuthFactors",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminGetUserAuthFactorsRequest"},
+      "output":{"shape":"AdminGetUserAuthFactorsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"OperationNotEnabledException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"InternalErrorException"}
+      ]
+    },
     "AdminInitiateAuth":{
       "name":"AdminInitiateAuth",
       "http":{
@@ -1482,6 +1500,22 @@
         {"shape":"ResourceNotFoundException"}
       ]
     },
+    "GetProvisionedLimit":{
+      "name":"GetProvisionedLimit",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetProvisionedLimitRequest"},
+      "output":{"shape":"GetProvisionedLimitResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ]
+    },
     "GetSigningCertificate":{
       "name":"GetSigningCertificate",
       "http":{
@@ -2357,6 +2391,23 @@
         {"shape":"InternalErrorException"}
       ]
     },
+    "UpdateProvisionedLimit":{
+      "name":"UpdateProvisionedLimit",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateProvisionedLimitRequest"},
+      "output":{"shape":"UpdateProvisionedLimitResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"InternalErrorException"}
+      ]
+    },
     "UpdateResourceServer":{
       "name":"UpdateResourceServer",
       "http":{
@@ -2830,6 +2881,27 @@
         "Device":{"shape":"DeviceType"}
       }
     },
+    "AdminGetUserAuthFactorsRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Username"
+      ],
+      "members":{
+        "UserPoolId":{"shape":"UserPoolIdType"},
+        "Username":{"shape":"UsernameType"}
+      }
+    },
+    "AdminGetUserAuthFactorsResponse":{
+      "type":"structure",
+      "required":["Username"],
+      "members":{
+        "Username":{"shape":"UsernameType"},
+        "PreferredMfaSetting":{"shape":"StringType"},
+        "UserMFASettingList":{"shape":"UserMFASettingListType"},
+        "ConfiguredUserAuthFactors":{"shape":"ConfiguredUserAuthFactorsListType"}
+      }
+    },
     "AdminGetUserRequest":{
       "type":"structure",
       "required":[
@@ -3184,7 +3256,7 @@
     "AllowedFirstAuthFactorsListType":{
       "type":"list",
       "member":{"shape":"AuthFactorType"},
-      "max":4,
+      "max":5,
       "min":1
     },
     "AnalyticsConfigurationType":{
@@ -3351,7 +3423,8 @@
         "PASSWORD",
         "EMAIL_OTP",
         "SMS_OTP",
-        "WEB_AUTHN"
+        "WEB_AUTHN",
+        "SOFTWARE_TOKEN"
       ]
     },
     "AuthFlowType":{
@@ -3839,7 +3912,8 @@
       "members":{
         "JobName":{"shape":"UserImportJobNameType"},
         "UserPoolId":{"shape":"UserPoolIdType"},
-        "CloudWatchLogsRoleArn":{"shape":"ArnType"}
+        "CloudWatchLogsRoleArn":{"shape":"ArnType"},
+        "PasswordHashingAlgorithm":{"shape":"PasswordHashingAlgorithmType"}
       }
     },
     "CreateUserImportJobResponse":{
@@ -4576,6 +4650,19 @@
         "CUSTOMER_MANAGED_KEY"
       ]
     },
+    "EumsSmsConfigurationType":{
+      "type":"structure",
+      "required":["CallerArn"],
+      "members":{
+        "CallerArn":{"shape":"ArnType"},
+        "ExternalId":{"shape":"StringType"},
+        "OriginationIdentity":{"shape":"StringType"},
+        "ConfigurationSetName":{"shape":"StringType"},
+        "InEntityId":{"shape":"StringType"},
+        "InTemplateId":{"shape":"StringType"},
+        "Region":{"shape":"RegionCodeType"}
+      }
+    },
     "EventContextDataType":{
       "type":"structure",
       "members":{
@@ -4825,6 +4912,20 @@
       "type":"structure",
       "members":{
         "LogDeliveryConfiguration":{"shape":"LogDeliveryConfigurationType"}
+      }
+    },
+    "GetProvisionedLimitRequest":{
+      "type":"structure",
+      "required":["LimitDefinition"],
+      "members":{
+        "LimitDefinition":{"shape":"LimitDefinitionType"}
+      }
+    },
+    "GetProvisionedLimitResponse":{
+      "type":"structure",
+      "required":["Limit"],
+      "members":{
+        "Limit":{"shape":"LimitType"}
       }
     },
     "GetSigningCertificateRequest":{
@@ -5214,12 +5315,40 @@
       "type":"string",
       "pattern":"^cognito:(default|dutch|english|french|spanish|german|bahasa-indonesia|italian|japanese|korean|portuguese-brazil|chinese-(simplified|traditional))$"
     },
+    "LimitClass":{
+      "type":"string",
+      "enum":["API_CATEGORY"]
+    },
+    "LimitDefinitionType":{
+      "type":"structure",
+      "required":[
+        "LimitClass",
+        "Attributes"
+      ],
+      "members":{
+        "LimitClass":{"shape":"LimitClass"},
+        "Attributes":{"shape":"StringToStringMapType"}
+      }
+    },
     "LimitExceededException":{
       "type":"structure",
       "members":{
         "message":{"shape":"MessageType"}
       },
       "exception":true
+    },
+    "LimitType":{
+      "type":"structure",
+      "required":[
+        "LimitDefinition",
+        "ProvisionedLimitValue",
+        "FreeLimitValue"
+      ],
+      "members":{
+        "LimitDefinition":{"shape":"LimitDefinitionType"},
+        "ProvisionedLimitValue":{"shape":"IntegerType"},
+        "FreeLimitValue":{"shape":"IntegerType"}
+      }
     },
     "LinkUrlType":{
       "type":"string",
@@ -5653,6 +5782,12 @@
       },
       "exception":true
     },
+    "OptionalArnType":{
+      "type":"string",
+      "max":2048,
+      "min":0,
+      "pattern":"(arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:([\\w+=/,.@-]*)?:[0-9]+:[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?)?"
+    },
     "PaginationKey":{
       "type":"string",
       "max":131072,
@@ -5663,6 +5798,15 @@
       "type":"string",
       "min":1,
       "pattern":"[\\S]+"
+    },
+    "PasswordHashingAlgorithmType":{
+      "type":"string",
+      "enum":[
+        "BCRYPT",
+        "SCRYPT",
+        "ARGON2ID",
+        "PBKDF2_SHA256"
+      ]
     },
     "PasswordHistoryPolicyViolationException":{
       "type":"structure",
@@ -6172,6 +6316,13 @@
         "TLS_V1_3_2025"
       ]
     },
+    "ServiceQuotaExceededException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"MessageType"}
+      },
+      "exception":true
+    },
     "SessionType":{
       "type":"string",
       "max":2048,
@@ -6326,11 +6477,11 @@
     },
     "SmsConfigurationType":{
       "type":"structure",
-      "required":["SnsCallerArn"],
       "members":{
-        "SnsCallerArn":{"shape":"ArnType"},
+        "SnsCallerArn":{"shape":"OptionalArnType"},
         "ExternalId":{"shape":"StringType"},
-        "SnsRegion":{"shape":"RegionCodeType"}
+        "SnsRegion":{"shape":"RegionCodeType"},
+        "EumsSms":{"shape":"EumsSmsConfigurationType"}
       }
     },
     "SmsInviteMessageType":{
@@ -6440,6 +6591,11 @@
         "MinLength":{"shape":"StringType"},
         "MaxLength":{"shape":"StringType"}
       }
+    },
+    "StringToStringMapType":{
+      "type":"map",
+      "key":{"shape":"StringType"},
+      "value":{"shape":"StringType"}
     },
     "StringType":{
       "type":"string",
@@ -6755,6 +6911,24 @@
         "ManagedLoginBranding":{"shape":"ManagedLoginBrandingType"}
       }
     },
+    "UpdateProvisionedLimitRequest":{
+      "type":"structure",
+      "required":[
+        "LimitDefinition",
+        "RequestedLimitValue"
+      ],
+      "members":{
+        "LimitDefinition":{"shape":"LimitDefinitionType"},
+        "RequestedLimitValue":{"shape":"IntegerType"}
+      }
+    },
+    "UpdateProvisionedLimitResponse":{
+      "type":"structure",
+      "required":["Limit"],
+      "members":{
+        "Limit":{"shape":"LimitType"}
+      }
+    },
     "UpdateReplicaStatusType":{
       "type":"string",
       "enum":[
@@ -6999,7 +7173,8 @@
         "ImportedUsers":{"shape":"LongType"},
         "SkippedUsers":{"shape":"LongType"},
         "FailedUsers":{"shape":"LongType"},
-        "CompletionMessage":{"shape":"CompletionMessageType"}
+        "CompletionMessage":{"shape":"CompletionMessageType"},
+        "PasswordHashingAlgorithm":{"shape":"PasswordHashingAlgorithmType"}
       }
     },
     "UserImportJobsListType":{

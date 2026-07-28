@@ -26,6 +26,9 @@ module Aws
       class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class StreamSessionAccessNotReadyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ThrottlingException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

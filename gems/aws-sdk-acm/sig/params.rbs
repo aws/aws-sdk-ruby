@@ -8,6 +8,19 @@
 module Aws
   module ACM
     module Params
+      type dns_prevalidation_options = {
+      domain_scope: {
+        exact_domain: ("ENABLED" | "DISABLED")?,
+        subdomains: ("ENABLED" | "DISABLED")?,
+        wildcards: ("ENABLED" | "DISABLED")?
+      }?,
+      hosted_zone_id: ::String?
+    }
+
+      type prevalidation_options = {
+      dns_prevalidation: Params::dns_prevalidation_options?
+    }
+
       type certificate_filter_statement = {
       and: Array[
         {
@@ -50,7 +63,10 @@ module Aws
               exported: bool?,
               export_option: ("ENABLED" | "DISABLED")?,
               managed_by: ("CLOUDFRONT")?,
-              validation_method: ("EMAIL" | "DNS" | "HTTP")?
+              validation_method: ("EMAIL" | "DNS" | "HTTP")?,
+              certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")?,
+              acme_endpoint_arn: ::String?,
+              acme_account_id: ::String?
             }?
           }?
         }
@@ -96,7 +112,10 @@ module Aws
               exported: bool?,
               export_option: ("ENABLED" | "DISABLED")?,
               managed_by: ("CLOUDFRONT")?,
-              validation_method: ("EMAIL" | "DNS" | "HTTP")?
+              validation_method: ("EMAIL" | "DNS" | "HTTP")?,
+              certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")?,
+              acme_endpoint_arn: ::String?,
+              acme_account_id: ::String?
             }?
           }?
         }
@@ -145,7 +164,10 @@ module Aws
             exported: bool?,
             export_option: ("ENABLED" | "DISABLED")?,
             managed_by: ("CLOUDFRONT")?,
-            validation_method: ("EMAIL" | "DNS" | "HTTP")?
+            validation_method: ("EMAIL" | "DNS" | "HTTP")?,
+            certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")?,
+            acme_endpoint_arn: ::String?,
+            acme_account_id: ::String?
           }?
         }?
       }?,
@@ -185,7 +207,10 @@ module Aws
           exported: bool?,
           export_option: ("ENABLED" | "DISABLED")?,
           managed_by: ("CLOUDFRONT")?,
-          validation_method: ("EMAIL" | "DNS" | "HTTP")?
+          validation_method: ("EMAIL" | "DNS" | "HTTP")?,
+          certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")?,
+          acme_endpoint_arn: ::String?,
+          acme_account_id: ::String?
         }?
       }?
     }

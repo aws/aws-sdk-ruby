@@ -391,6 +391,12 @@
       "base": "<p>The maximum number of capacity providers for your account has been exceeded. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html\">Lambda quotas</a> </p>",
       "refs": {}
     },
+    "CapacityProviderLoggingConfig": {
+      "base": "<p>The capacity provider's Amazon CloudWatch Logs configuration settings.</p>",
+      "refs": {
+        "CapacityProviderTelemetryConfig$LoggingConfig": "<p>The capacity provider's Amazon CloudWatch Logs configuration settings.</p>"
+      }
+    },
     "CapacityProviderMaxVCpuCount": {
       "base": null,
       "refs": {
@@ -457,6 +463,14 @@
       "base": null,
       "refs": {
         "CapacityProviderVpcConfig$SubnetIds": "<p>A list of subnet IDs where the capacity provider launches compute instances.</p>"
+      }
+    },
+    "CapacityProviderTelemetryConfig": {
+      "base": "<p>Configuration that specifies the telemetry collection for the capacity provider.</p>",
+      "refs": {
+        "CapacityProvider$TelemetryConfig": "<p>The telemetry configuration for the capacity provider, including logging settings.</p>",
+        "CreateCapacityProviderRequest$TelemetryConfig": "<p>The telemetry configuration for the capacity provider. Specifies logging settings for managed resources.</p>",
+        "UpdateCapacityProviderRequest$TelemetryConfig": "<p>The updated telemetry configuration for the capacity provider.</p>"
       }
     },
     "CapacityProviderVpcConfig": {
@@ -847,11 +861,12 @@
       }
     },
     "DurableConfig": {
-      "base": "<p>Configuration settings for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable functions</a>, including execution timeout and retention period for execution history.</p>",
+      "base": "<p>Configuration settings for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable functions</a>, including execution timeout, retention period for execution history, and an optional ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
       "refs": {
         "CreateFunctionRequest$DurableConfig": "<p>Configuration settings for durable functions. Enables creating functions with durability that can remember their state and continue execution even after interruptions.</p>",
         "FunctionConfiguration$DurableConfig": "<p>The function's durable execution configuration settings, if the function is configured for durability.</p>",
-        "UpdateFunctionConfigurationRequest$DurableConfig": "<p>Configuration settings for durable functions. Allows updating execution timeout and retention period for functions with durability enabled.</p>"
+        "GetDurableExecutionResponse$DurableConfig": "<p>Configuration settings for the durable execution, including execution timeout, retention period for execution history, and an optional ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
+        "UpdateFunctionConfigurationRequest$DurableConfig": "<p>Configuration settings for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable functions</a>, including execution timeout, retention period for execution history, and an optional ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>"
       }
     },
     "DurableExecutionAlreadyStartedException": {
@@ -877,7 +892,7 @@
       "refs": {
         "Execution$DurableExecutionName": "<p>The unique name of the durable execution, if one was provided when the execution was started.</p>",
         "GetDurableExecutionResponse$DurableExecutionName": "<p>The name of the durable execution. This is either the name you provided when invoking the function, or a system-generated unique identifier if no name was provided.</p>",
-        "InvocationRequest$DurableExecutionName": "<p>Optional unique name for the durable execution. When you start your special function, you can give it a unique name to identify this specific execution. It's like giving a nickname to a task.</p>",
+        "InvocationRequest$DurableExecutionName": "<p>A unique name for the durable execution. If you invoke a durable function using a name that already exists with the same payload, Lambda returns the existing execution instead of creating a duplicate. If the payload differs, Lambda returns a <code>DurableExecutionAlreadyStartedException</code> error.</p> <p>If not specified, Lambda generates a unique identifier automatically. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-execution-idempotency.html#durable-idempotency-execution-names\">Execution names</a>.</p>",
         "ListDurableExecutionsByFunctionRequest$DurableExecutionName": "<p>Filter executions by name. Only executions with names that matches this string are returned.</p>"
       }
     },
@@ -1178,6 +1193,12 @@
         "DurableExecutions$member": null
       }
     },
+    "ExecutionDataIncluded": {
+      "base": null,
+      "refs": {
+        "GetDurableExecutionResponse$ExecutionDataIncluded": "<p>Indicates whether execution data is included in this response. Returns <code>false</code> when <code>IncludeExecutionData</code> is set to <code>false</code> in the request.</p>"
+      }
+    },
     "ExecutionDetails": {
       "base": "<p>Details about a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable execution</a>.</p>",
       "refs": {
@@ -1357,6 +1378,12 @@
       "base": "<p>Details about a function's deployment package.</p>",
       "refs": {
         "GetFunctionResponse$Code": "<p>The deployment package of the function or version.</p>"
+      }
+    },
+    "FunctionCodeLocationError": {
+      "base": "<p>Details about an error related to retrieving a function's deployment package.</p>",
+      "refs": {
+        "FunctionCodeLocation$Error": "<p>An object that contains details about an error related to function deployment package retrieval.</p>"
       }
     },
     "FunctionConfiguration": {
@@ -1725,7 +1752,8 @@
     "IncludeExecutionData": {
       "base": null,
       "refs": {
-        "GetDurableExecutionHistoryRequest$IncludeExecutionData": "<p>Specifies whether to include execution data such as step results and callback payloads in the history events. Set to <code>true</code> to include data, or <code>false</code> to exclude it for a more compact response. The default is <code>true</code>.</p>"
+        "GetDurableExecutionHistoryRequest$IncludeExecutionData": "<p>Specifies whether to include execution data such as step results and callback payloads in the history events. Set to <code>true</code> to include data, or <code>false</code> to exclude it for a more compact response. The default is <code>true</code>.</p>",
+        "GetDurableExecutionRequest$IncludeExecutionData": "<p>Specifies whether to include execution data such as input payload, result, and error information in the response. Set to <code>false</code> for a more compact response that includes only execution metadata. The default value is set to <code>true</code>.</p>"
       }
     },
     "InputPayload": {
@@ -1890,7 +1918,9 @@
         "CapacityProvider$KmsKeyArn": "<p>The ARN of the KMS key used to encrypt the capacity provider's resources.</p>",
         "CreateEventSourceMappingRequest$KMSKeyArn": "<p> The ARN of the Key Management Service (KMS) customer managed key that Lambda uses to encrypt your function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics\">filter criteria</a>. By default, Lambda does not encrypt your filter criteria object. Specify this property to encrypt data using your own customer managed key. </p>",
         "CreateFunctionRequest$KMSKeyArn": "<p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt the following resources:</p> <ul> <li> <p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption\">environment variables</a>.</p> </li> <li> <p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html\">Lambda SnapStart</a> snapshots.</p> </li> <li> <p>When used with <code>SourceKMSKeyArn</code>, the unzipped version of the .zip deployment package that's used for function invocations. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/encrypt-zip-package.html#enable-zip-custom-encryption\"> Specifying a customer managed key for Lambda</a>.</p> </li> <li> <p>The optimized version of the container image that's used for function invocations. Note that this is not the same key that's used to protect your container image in the Amazon Elastic Container Registry (Amazon ECR). For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-lifecycle\">Function lifecycle</a>.</p> </li> </ul> <p>If you don't provide a customer managed key, Lambda uses an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk\">Amazon Web Services owned key</a> or an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed key</a>.</p>",
+        "DurableConfig$KMSKeyArn": "<p>The ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
         "EventSourceMappingConfiguration$KMSKeyArn": "<p> The ARN of the Key Management Service (KMS) customer managed key that Lambda uses to encrypt your function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics\">filter criteria</a>.</p>",
+        "Execution$KMSKeyArn": "<p>The ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
         "FunctionCode$SourceKMSKeyArn": "<p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's .zip deployment package. If you don't provide a customer managed key, Lambda uses an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk\">Amazon Web Services owned key</a>.</p>",
         "FunctionCodeLocation$SourceKMSKeyArn": "<p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's .zip deployment package. If you don't provide a customer managed key, Lambda uses an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk\">Amazon Web Services owned key</a>.</p>",
         "FunctionConfiguration$KMSKeyArn": "<p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt the following resources:</p> <ul> <li> <p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption\">environment variables</a>.</p> </li> <li> <p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html\">Lambda SnapStart</a> snapshots.</p> </li> <li> <p>When used with <code>SourceKMSKeyArn</code>, the unzipped version of the .zip deployment package that's used for function invocations. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/encrypt-zip-package.html#enable-zip-custom-encryption\"> Specifying a customer managed key for Lambda</a>.</p> </li> <li> <p>The optimized version of the container image that's used for function invocations. Note that this is not the same key that's used to protect your container image in the Amazon Elastic Container Registry (Amazon ECR). For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-lifecycle\">Function lifecycle</a>.</p> </li> </ul> <p>If you don't provide a customer managed key, Lambda uses an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk\">Amazon Web Services owned key</a> or an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed key</a>.</p>",
@@ -2234,6 +2264,7 @@
     "LogGroup": {
       "base": null,
       "refs": {
+        "CapacityProviderLoggingConfig$LogGroup": "<p>The name of the Amazon CloudWatch log group the capacity provider sends logs to. By default, Lambda capacity providers send logs to a default log group named <code>/aws/lambda/capacity-provider/&lt;capacity provider name&gt;</code>. To use a different log group, enter an existing log group or enter a new log group name.</p>",
         "LoggingConfig$LogGroup": "<p>The name of the Amazon CloudWatch log group the function sends logs to. By default, Lambda functions send logs to a default log group named <code>/aws/lambda/&lt;function name&gt;</code>. To use a different log group, enter an existing log group or enter a new log group name.</p>"
       }
     },
@@ -2849,6 +2880,13 @@
         "PutFunctionConcurrencyRequest$ReservedConcurrentExecutions": "<p>The number of simultaneous executions to reserve for the function.</p>"
       }
     },
+    "ResolvedS3Object": {
+      "base": "<p>Details about the resolved Amazon S3 object that contains a function's deployment package.</p>",
+      "refs": {
+        "FunctionCodeLocation$ResolvedS3Object": "<p>The resolved Amazon S3 object that contains the deployment package.</p>",
+        "LayerVersionContentOutput$ResolvedS3Object": null
+      }
+    },
     "ResourceArn": {
       "base": null,
       "refs": {
@@ -2943,6 +2981,7 @@
       "refs": {
         "FunctionCode$S3Bucket": "<p>An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.</p>",
         "LayerVersionContentInput$S3Bucket": "<p>The Amazon S3 bucket of the layer archive.</p>",
+        "ResolvedS3Object$S3Bucket": "<p>The Amazon S3 bucket that contains the deployment package.</p>",
         "UpdateFunctionCodeRequest$S3Bucket": "<p>An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account. Use only with a function defined with a .zip file archive deployment package.</p>"
       }
     },
@@ -2963,7 +3002,16 @@
       "refs": {
         "FunctionCode$S3Key": "<p>The Amazon S3 key of the deployment package.</p>",
         "LayerVersionContentInput$S3Key": "<p>The Amazon S3 key of the layer archive.</p>",
+        "ResolvedS3Object$S3Key": "<p>The Amazon S3 key of the deployment package.</p>",
         "UpdateFunctionCodeRequest$S3Key": "<p>The Amazon S3 key of the deployment package. Use only with a function defined with a .zip file archive deployment package.</p>"
+      }
+    },
+    "S3ObjectStorageMode": {
+      "base": "<p>The storage mode for a function's deployment package.</p>",
+      "refs": {
+        "FunctionCode$S3ObjectStorageMode": "<p>Specifies how the deployment package is stored. Use <code>COPY</code> (default) to upload a copy of your deployment package to Lambda. Use <code>REFERENCE</code> to have Lambda reference the deployment package from the specified Amazon S3 bucket.</p>",
+        "LayerVersionContentInput$S3ObjectStorageMode": null,
+        "UpdateFunctionCodeRequest$S3ObjectStorageMode": "<p>Specifies how the deployment package is stored. Use <code>COPY</code> (default) to upload a copy of your deployment package to Lambda. Use <code>REFERENCE</code> to have Lambda reference the deployment package from the specified Amazon S3 bucket.</p>"
       }
     },
     "S3ObjectVersion": {
@@ -2971,6 +3019,7 @@
       "refs": {
         "FunctionCode$S3ObjectVersion": "<p>For versioned objects, the version of the deployment package object to use.</p>",
         "LayerVersionContentInput$S3ObjectVersion": "<p>For versioned objects, the version of the layer archive object to use.</p>",
+        "ResolvedS3Object$S3ObjectVersion": "<p>The version of the deployment package object.</p>",
         "UpdateFunctionCodeRequest$S3ObjectVersion": "<p>For versioned objects, the version of the deployment package object to use.</p>"
       }
     },
@@ -3051,6 +3100,7 @@
       "base": null,
       "refs": {
         "EnvironmentError$Message": "<p>The error message.</p>",
+        "FunctionCodeLocationError$Message": "<p>A description of the error.</p>",
         "ImageConfigError$Message": "<p>Error message.</p>",
         "RuntimeVersionError$Message": "<p>The error message.</p>"
       }
@@ -3289,6 +3339,7 @@
         "FunctionCodeLocation$RepositoryType": "<p>The service that's hosting the file.</p>",
         "FunctionCodeLocation$ImageUri": "<p>URI of a container image in the Amazon ECR registry.</p>",
         "FunctionCodeLocation$ResolvedImageUri": "<p>The resolved URI for the image.</p>",
+        "FunctionCodeLocationError$ErrorCode": "<p>The error code for the failed retrieval.</p>",
         "FunctionConfiguration$CodeSha256": "<p>The SHA256 hash of the function's deployment package.</p>",
         "FunctionConfiguration$RevisionId": "<p>The latest updated revision of the function or alias.</p>",
         "FunctionConfiguration$ConfigSha256": "<p>The SHA256 hash of the function configuration.</p>",
@@ -3457,6 +3508,7 @@
     "SystemLogLevel": {
       "base": null,
       "refs": {
+        "CapacityProviderLoggingConfig$SystemLogLevel": "<p>Set this property to filter the system logs for your capacity provider that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where <code>DEBUG</code> is the highest level and <code>WARN</code> is the lowest.</p>",
         "LoggingConfig$SystemLogLevel": "<p>Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where <code>DEBUG</code> is the highest level and <code>WARN</code> is the lowest.</p>"
       }
     },

@@ -3176,6 +3176,12 @@ module Aws::SSOAdmin
     #   resp.instances[0].created_date #=> Time
     #   resp.instances[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_IN_PROGRESS", "ACTIVE"
     #   resp.instances[0].status_reason #=> String
+    #   resp.instances[0].primary_region #=> String
+    #   resp.instances[0].regions #=> Array
+    #   resp.instances[0].regions[0].region_name #=> String
+    #   resp.instances[0].regions[0].status #=> String, one of "ACTIVE", "ADDING", "REMOVING"
+    #   resp.instances[0].regions[0].added_date #=> Time
+    #   resp.instances[0].regions[0].is_primary_region #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListInstances AWS API Documentation
@@ -4316,7 +4322,7 @@ module Aws::SSOAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -527,7 +527,7 @@ module Aws::Account
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "PENDING", "ACCEPTED"
+    #   resp.status #=> String, one of "PENDING", "ACCEPTED", "COMPLETED", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/AcceptPrimaryEmailUpdate AWS API Documentation
     #
@@ -1077,6 +1077,66 @@ module Aws::Account
       req.send_request(options)
     end
 
+    # Retrieves the status of the most recent primary email update for the
+    # specified account. For complete details about how to update the
+    # primary email address, see [Update the primary email address for your
+    # AWS account][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-root-user-email.html
+    #
+    # @option params [String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. To use
+    #   this parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   This operation can only be called from the management account or the
+    #   delegated administrator account of an organization for a member
+    #   account.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
+    #
+    # @return [Types::GetPrimaryEmailUpdateStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPrimaryEmailUpdateStatusResponse#status #status} => String
+    #   * {Types::GetPrimaryEmailUpdateStatusResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_primary_email_update_status({
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "ACCEPTED", "COMPLETED", "FAILED"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetPrimaryEmailUpdateStatus AWS API Documentation
+    #
+    # @overload get_primary_email_update_status(params = {})
+    # @param [Hash] params ({})
+    def get_primary_email_update_status(params = {}, options = {})
+      req = build_request(:get_primary_email_update_status, params)
+      req.send_request(options)
+    end
+
     # Retrieves the opt-in status of a particular Region.
     #
     # @option params [String] :account_id
@@ -1508,7 +1568,7 @@ module Aws::Account
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "PENDING", "ACCEPTED"
+    #   resp.status #=> String, one of "PENDING", "ACCEPTED", "COMPLETED", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/StartPrimaryEmailUpdate AWS API Documentation
     #
@@ -1537,7 +1597,7 @@ module Aws::Account
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-account'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -10,6 +10,7 @@ module Aws::AppConfig
 
     class AccountSettings
       attr_accessor deletion_protection: Types::DeletionProtectionSettings
+      attr_accessor vended_metrics: Types::VendedMetricsSettings
       SENSITIVE: []
     end
 
@@ -51,6 +52,29 @@ module Aws::AppConfig
       attr_accessor version_number: ::Integer
       attr_accessor parameters: ::Hash[::String, ::String]
       SENSITIVE: []
+    end
+
+    class AttributeValue
+      attr_accessor string_value: ::String
+      attr_accessor number_value: ::Float
+      attr_accessor boolean_value: bool
+      attr_accessor string_array: ::Array[::String]
+      attr_accessor number_array: ::Array[::Float]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StringValue < AttributeValue
+      end
+      class NumberValue < AttributeValue
+      end
+      class BooleanValue < AttributeValue
+      end
+      class StringArray < AttributeValue
+      end
+      class NumberArray < AttributeValue
+      end
+      class Unknown < AttributeValue
+      end
     end
 
     class BadRequestDetails
@@ -154,6 +178,22 @@ module Aws::AppConfig
       SENSITIVE: []
     end
 
+    class CreateExperimentDefinitionRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor configuration_profile_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor flag_key: ::String
+      attr_accessor treatments: ::Array[Types::TreatmentInput]
+      attr_accessor control: Types::TreatmentInput
+      attr_accessor audience_rule: ::String
+      attr_accessor hypothesis: ::String
+      attr_accessor audience_description: ::String
+      attr_accessor launch_criteria: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class CreateExtensionAssociationRequest
       attr_accessor extension_identifier: ::String
       attr_accessor extension_version_number: ::Integer
@@ -205,6 +245,13 @@ module Aws::AppConfig
       attr_accessor environment_id: ::String
       attr_accessor application_id: ::String
       attr_accessor deletion_protection_check: ("ACCOUNT_DEFAULT" | "APPLY" | "BYPASS")
+      SENSITIVE: []
+    end
+
+    class DeleteExperimentDefinitionRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor experiment_definition_identifier: ::String
+      attr_accessor delete_type: ("ARCHIVE" | "DESTROY")
       SENSITIVE: []
     end
 
@@ -267,6 +314,12 @@ module Aws::AppConfig
       SENSITIVE: []
     end
 
+    class DeploymentParameters
+      attr_accessor dynamic_extension_parameters: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:dynamic_extension_parameters]
+    end
+
     class DeploymentStrategies
       attr_accessor items: ::Array[Types::DeploymentStrategy]
       attr_accessor next_token: ::String
@@ -287,6 +340,7 @@ module Aws::AppConfig
 
     class DeploymentSummary
       attr_accessor deployment_number: ::Integer
+      attr_accessor configuration_profile_id: ::String
       attr_accessor configuration_name: ::String
       attr_accessor configuration_version: ::String
       attr_accessor deployment_duration_in_minutes: ::Integer
@@ -298,6 +352,7 @@ module Aws::AppConfig
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time
       attr_accessor version_label: ::String
+      attr_accessor type: ("USER" | "MANAGED")
       SENSITIVE: []
     end
 
@@ -319,6 +374,119 @@ module Aws::AppConfig
 
     class Environments
       attr_accessor items: ::Array[Types::Environment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentDefinition
+      attr_accessor application_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor hypothesis: ::String
+      attr_accessor status: ("ACTIVE" | "IDLE" | "ARCHIVED")
+      attr_accessor configuration_profile_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor flag_key: ::String
+      attr_accessor audience_rule: ::String
+      attr_accessor audience_description: ::String
+      attr_accessor launch_criteria: ::String
+      attr_accessor treatments: ::Array[Types::Treatment]
+      attr_accessor control: Types::Treatment
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor kms_key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentDefinitionSnapshot
+      attr_accessor application_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor hypothesis: ::String
+      attr_accessor configuration_profile_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor flag_key: ::String
+      attr_accessor audience_rule: ::String
+      attr_accessor audience_description: ::String
+      attr_accessor launch_criteria: ::String
+      attr_accessor treatments: ::Array[Types::Treatment]
+      attr_accessor control: Types::Treatment
+      SENSITIVE: []
+    end
+
+    class ExperimentDefinitionSummary
+      attr_accessor application_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor hypothesis: ::String
+      attr_accessor status: ("ACTIVE" | "IDLE" | "ARCHIVED")
+      attr_accessor configuration_profile_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor flag_key: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ExperimentDefinitions
+      attr_accessor items: ::Array[Types::ExperimentDefinitionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentRun
+      attr_accessor application_id: ::String
+      attr_accessor experiment_definition_id: ::String
+      attr_accessor run: ::Integer
+      attr_accessor description: ::String
+      attr_accessor status: ("RUNNING" | "DONE")
+      attr_accessor exposure_percentage: ::Float
+      attr_accessor treatment_overrides: Types::TreatmentOverrides
+      attr_accessor result: Types::ExperimentRunResult
+      attr_accessor started_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor experiment_definition_snapshot: Types::ExperimentDefinitionSnapshot
+      SENSITIVE: []
+    end
+
+    class ExperimentRunEvent
+      attr_accessor description: ::String
+      attr_accessor associated_deployment: ::String
+      attr_accessor event_type: ("RUN_STARTED" | "EXPOSURE_UPDATED" | "OVERRIDES_UPDATED" | "RUN_STOPPED")
+      attr_accessor occurred_at: ::Time
+      attr_accessor triggered_by: ("USER" | "APPCONFIG" | "CLOUDWATCH_ALARM" | "INTERNAL_ERROR")
+      attr_accessor exposure_percentage: ::Float
+      attr_accessor treatment_overrides: Types::TreatmentOverrides
+      SENSITIVE: []
+    end
+
+    class ExperimentRunEvents
+      attr_accessor items: ::Array[Types::ExperimentRunEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentRunResult
+      attr_accessor executive_summary: ::String
+      attr_accessor reasons_to_launch: ::String
+      attr_accessor reasons_not_to_launch: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentRunSummary
+      attr_accessor experiment_definition_id: ::String
+      attr_accessor run: ::Integer
+      attr_accessor description: ::String
+      attr_accessor status: ("RUNNING" | "DONE")
+      attr_accessor started_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor ended_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ExperimentRuns
+      attr_accessor items: ::Array[Types::ExperimentRunSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -372,6 +540,12 @@ module Aws::AppConfig
       SENSITIVE: []
     end
 
+    class FlagValue
+      attr_accessor enabled: bool
+      attr_accessor attribute_values: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
     class GetApplicationRequest
       attr_accessor application_id: ::String
       SENSITIVE: []
@@ -407,6 +581,19 @@ module Aws::AppConfig
     class GetEnvironmentRequest
       attr_accessor application_id: ::String
       attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetExperimentDefinitionRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor experiment_definition_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetExperimentRunRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor experiment_definition_identifier: ::String
+      attr_accessor run: ::Integer
       SENSITIVE: []
     end
 
@@ -506,6 +693,34 @@ module Aws::AppConfig
       SENSITIVE: []
     end
 
+    class ListExperimentDefinitionsRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor configuration_profile_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor status: ("ACTIVE" | "IDLE" | "ARCHIVED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentRunEventsRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor experiment_definition_identifier: ::String
+      attr_accessor run: ::Integer
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentRunsRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor experiment_definition_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("RUNNING" | "DONE")
+      SENSITIVE: []
+    end
+
     class ListExtensionAssociationsRequest
       attr_accessor resource_identifier: ::String
       attr_accessor extension_identifier: ::String
@@ -583,7 +798,19 @@ module Aws::AppConfig
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor kms_key_identifier: ::String
       attr_accessor dynamic_extension_parameters: ::Hash[::String, ::String]
+      attr_accessor latest_deployment_number: ::Integer
       SENSITIVE: [:dynamic_extension_parameters]
+    end
+
+    class StartExperimentRunRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor experiment_definition_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor exposure_percentage: ::Float
+      attr_accessor treatment_overrides: Types::TreatmentOverrides
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor deployment_parameters: Types::DeploymentParameters
+      SENSITIVE: []
     end
 
     class StopDeploymentRequest
@@ -594,10 +821,45 @@ module Aws::AppConfig
       SENSITIVE: []
     end
 
+    class StopExperimentRunRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor experiment_definition_identifier: ::String
+      attr_accessor run: ::Integer
+      attr_accessor result: Types::ExperimentRunResult
+      attr_accessor deployment_parameters: Types::DeploymentParameters
+      SENSITIVE: []
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
+    end
+
+    class Treatment
+      attr_accessor key: ::String
+      attr_accessor weight: ::Float
+      attr_accessor description: ::String
+      attr_accessor flag_value: Types::FlagValue
+      SENSITIVE: []
+    end
+
+    class TreatmentInput
+      attr_accessor weight: ::Float
+      attr_accessor description: ::String
+      attr_accessor flag_value: Types::FlagValue
+      SENSITIVE: []
+    end
+
+    class TreatmentOverrides
+      attr_accessor inline: ::Hash[::String, ::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Inline < TreatmentOverrides
+      end
+      class Unknown < TreatmentOverrides
+      end
     end
 
     class UntagResourceRequest
@@ -608,6 +870,7 @@ module Aws::AppConfig
 
     class UpdateAccountSettingsRequest
       attr_accessor deletion_protection: Types::DeletionProtectionSettings
+      attr_accessor vended_metrics: Types::VendedMetricsSettings
       SENSITIVE: []
     end
 
@@ -648,6 +911,29 @@ module Aws::AppConfig
       SENSITIVE: []
     end
 
+    class UpdateExperimentDefinitionRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor experiment_definition_identifier: ::String
+      attr_accessor treatments: ::Array[Types::TreatmentInput]
+      attr_accessor control: Types::TreatmentInput
+      attr_accessor hypothesis: ::String
+      attr_accessor audience_rule: ::String
+      attr_accessor audience_description: ::String
+      attr_accessor launch_criteria: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateExperimentRunRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor experiment_definition_identifier: ::String
+      attr_accessor run: ::Integer
+      attr_accessor description: ::String
+      attr_accessor exposure_percentage: ::Float
+      attr_accessor treatment_overrides: Types::TreatmentOverrides
+      attr_accessor deployment_parameters: Types::DeploymentParameters
+      SENSITIVE: []
+    end
+
     class UpdateExtensionAssociationRequest
       attr_accessor extension_association_id: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
@@ -674,6 +960,11 @@ module Aws::AppConfig
       attr_accessor type: ("JSON_SCHEMA" | "LAMBDA")
       attr_accessor content: ::String
       SENSITIVE: [:content]
+    end
+
+    class VendedMetricsSettings
+      attr_accessor enabled: bool
+      SENSITIVE: []
     end
   end
 end

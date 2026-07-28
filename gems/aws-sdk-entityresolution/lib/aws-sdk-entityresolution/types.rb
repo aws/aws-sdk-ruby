@@ -418,8 +418,8 @@ module Aws::EntityResolution
     #   object contains only the `incrementalRunType` field, which appears
     #   as "Automatic" in the console.
     #
-    #   For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    #   incremental processing is not supported.
+    #   For workflows where `resolutionType` is `PROVIDER`, incremental
+    #   processing is not supported.
     #   @return [Types::IncrementalRunConfig]
     #
     # @!attribute [rw] role_arn
@@ -855,6 +855,11 @@ module Aws::EntityResolution
     #   console): Generates new match IDs without checking existing matches,
     #   with updates processed asynchronously. Provides fastest response
     #   time but should only be used for records known to be unique.
+    #
+    #   <note markdown="1"> Advanced matching workflows don't support the `processingType`
+    #   field.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GenerateMatchIdInput AWS API Documentation
@@ -1930,15 +1935,15 @@ module Aws::EntityResolution
     # contains only the `incrementalRunType` field, which appears as
     # "Automatic" in the console.
     #
-    # For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    # incremental processing is not supported.
+    # For workflows where `resolutionType` is `PROVIDER`, incremental
+    # processing is not supported.
     #
     # @!attribute [rw] incremental_run_type
     #   The type of incremental run. The only valid value is `IMMEDIATE`.
     #   This appears as "Automatic" in the console.
     #
-    #   For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    #   incremental processing is not supported.
+    #   For workflows where `resolutionType` is `PROVIDER`, incremental
+    #   processing is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IncrementalRunConfig AWS API Documentation
@@ -2944,6 +2949,12 @@ module Aws::EntityResolution
     #   An object containing the `rules` for a matching workflow.
     #   @return [Types::RuleConditionProperties]
     #
+    # @!attribute [rw] enable_real_time_matching
+    #   Specifies whether real-time matching is enabled for the rule-based
+    #   matching workflow. When you enable real-time matching, you can use
+    #   the `GenerateMatchId` operation with the workflow.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] provider_properties
     #   The properties of the provider service.
     #   @return [Types::ProviderProperties]
@@ -2954,6 +2965,7 @@ module Aws::EntityResolution
       :resolution_type,
       :rule_based_properties,
       :rule_condition_properties,
+      :enable_real_time_matching,
       :provider_properties)
       SENSITIVE = []
       include Aws::Structure
@@ -3602,8 +3614,8 @@ module Aws::EntityResolution
     #   object contains only the `incrementalRunType` field, which appears
     #   as "Automatic" in the console.
     #
-    #   For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    #   incremental processing is not supported.
+    #   For workflows where `resolutionType` is `PROVIDER`, incremental
+    #   processing is not supported.
     #   @return [Types::IncrementalRunConfig]
     #
     # @!attribute [rw] role_arn

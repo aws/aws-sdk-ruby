@@ -778,9 +778,9 @@ module Aws
       def list_hosted_zone_associations: (
                                            ?max_results: ::Integer,
                                            ?next_token: ::String,
-                                           resource_arn: ::String
+                                           ?resource_arn: ::String
                                          ) -> _ListHostedZoneAssociationsResponseSuccess
-                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostedZoneAssociationsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostedZoneAssociationsResponseSuccess
 
       interface _ListManagedFirewallDomainListsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedFirewallDomainListsOutput]
@@ -794,6 +794,18 @@ module Aws
                                                 managed_firewall_domain_list_type: ::String
                                               ) -> _ListManagedFirewallDomainListsResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedFirewallDomainListsResponseSuccess
+
+      interface _ListSharedDNSViewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSharedDNSViewsOutput]
+        def next_token: () -> ::String
+        def dns_views: () -> ::Array[Types::SharedDNSViewSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_shared_dns_views-instance_method
+      def list_shared_dns_views: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListSharedDNSViewsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSharedDNSViewsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]

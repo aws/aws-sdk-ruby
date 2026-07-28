@@ -55,7 +55,7 @@ module Aws::SecurityIR
   autoload :EndpointProvider, 'aws-sdk-securityir/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-securityir/endpoints'
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end
 

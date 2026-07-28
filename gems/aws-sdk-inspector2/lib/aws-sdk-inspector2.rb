@@ -49,12 +49,13 @@ module Aws::Inspector2
   end
   autoload :Client, 'aws-sdk-inspector2/client'
   autoload :Errors, 'aws-sdk-inspector2/errors'
+  autoload :Waiters, 'aws-sdk-inspector2/waiters'
   autoload :Resource, 'aws-sdk-inspector2/resource'
   autoload :EndpointParameters, 'aws-sdk-inspector2/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-inspector2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-inspector2/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.80.0'
 
 end
 

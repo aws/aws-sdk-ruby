@@ -157,6 +157,12 @@ module Aws
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#delete_connector-instance_method
+      def delete_connector: (
+                              arn: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#delete_delivery_channel-instance_method
       def delete_delivery_channel: (
                                      delivery_channel_name: ::String
@@ -237,9 +243,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#delete_service_linked_configuration_recorder-instance_method
       def delete_service_linked_configuration_recorder: (
-                                                          service_principal: ::String
+                                                          ?service_principal: ::String,
+                                                          ?arn: ::String
                                                         ) -> _DeleteServiceLinkedConfigurationRecorderResponseSuccess
-                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceLinkedConfigurationRecorderResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceLinkedConfigurationRecorderResponseSuccess
 
       interface _DeleteStoredQueryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStoredQueryResponse]
@@ -359,11 +366,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#describe_config_rules-instance_method
       def describe_config_rules: (
                                    ?config_rule_names: Array[::String],
-                                   ?next_token: ::String,
                                    ?filters: {
                                      evaluation_mode: ("DETECTIVE" | "PROACTIVE")?,
                                      rule_evaluation_visibility: ("EXTERNAL" | "INTERNAL")?
-                                   }
+                                   },
+                                   ?next_token: ::String
                                  ) -> _DescribeConfigRulesResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigRulesResponseSuccess
 
@@ -790,6 +797,16 @@ module Aws
                                                    ) -> _GetConformancePackComplianceSummaryResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConformancePackComplianceSummaryResponseSuccess
 
+      interface _GetConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectorResponse]
+        def connector: () -> Types::Connector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#get_connector-instance_method
+      def get_connector: (
+                           arn: ::String
+                         ) -> _GetConnectorResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectorResponseSuccess
+
       interface _GetCustomRulePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomRulePolicyResponse]
         def policy_text: () -> ::String
@@ -955,6 +972,24 @@ module Aws
                                                      ?next_token: ::String
                                                    ) -> _ListConformancePackComplianceScoresResponseSuccess
                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConformancePackComplianceScoresResponseSuccess
+
+      interface _ListConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorsResponse]
+        def connector_summaries: () -> ::Array[Types::ConnectorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#list_connectors-instance_method
+      def list_connectors: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?filters: Array[
+                               {
+                                 filter_name: ("provider")?,
+                                 filter_values: Array[::String]?
+                               }
+                             ]
+                           ) -> _ListConnectorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorsResponseSuccess
 
       interface _ListDiscoveredResourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDiscoveredResourcesResponse]
@@ -1150,7 +1185,14 @@ module Aws
                                             ]?
                                           }?,
                                           recording_scope: ("INTERNAL" | "PAID")?,
-                                          service_principal: ::String?
+                                          service_principal: ::String?,
+                                          connector_arn: ::String?,
+                                          scope_configuration: {
+                                            scope_type: ::String,
+                                            scope_values: Array[::String]?,
+                                            all_regions: bool,
+                                            included_regions: Array[::String]?
+                                          }?
                                         },
                                         ?tags: Array[
                                           {
@@ -1190,6 +1232,27 @@ module Aws
                                   ]
                                 ) -> _PutConformancePackResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConformancePackResponseSuccess
+
+      interface _PutConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConnectorResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#put_connector-instance_method
+      def put_connector: (
+                           connector_configuration: {
+                             azure: {
+                               tenant_identifier: ::String,
+                               client_identifier: ::String
+                             }?
+                           },
+                           ?tags: Array[
+                             {
+                               key: ::String?,
+                               value: ::String?
+                             }
+                           ]
+                         ) -> _PutConnectorResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConnectorResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#put_delivery_channel-instance_method
       def put_delivery_channel: (
@@ -1283,7 +1346,13 @@ module Aws
                                             policy_runtime: ::String,
                                             policy_text: ::String,
                                             debug_log_delivery_accounts: Array[::String]?
-                                          }
+                                          },
+                                          ?tags: Array[
+                                            {
+                                              key: ::String?,
+                                              value: ::String?
+                                            }
+                                          ]
                                         ) -> _PutOrganizationConfigRuleResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutOrganizationConfigRuleResponseSuccess
 
@@ -1304,7 +1373,13 @@ module Aws
                                                    parameter_value: ::String
                                                  }
                                                ],
-                                               ?excluded_accounts: Array[::String]
+                                               ?excluded_accounts: Array[::String],
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   value: ::String?
+                                                 }
+                                               ]
                                              ) -> _PutOrganizationConformancePackResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutOrganizationConformancePackResponseSuccess
 
@@ -1422,6 +1497,30 @@ module Aws
                               ]
                             ) -> _PutStoredQueryResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutStoredQueryResponseSuccess
+
+      interface _PutThirdPartyServiceLinkedConfigurationRecorderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutThirdPartyServiceLinkedConfigurationRecorderResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#put_third_party_service_linked_configuration_recorder-instance_method
+      def put_third_party_service_linked_configuration_recorder: (
+                                                                   service_principal: ::String,
+                                                                   connector_arn: ::String,
+                                                                   scope_configuration: {
+                                                                     scope_type: ::String,
+                                                                     scope_values: Array[::String]?,
+                                                                     all_regions: bool,
+                                                                     included_regions: Array[::String]?
+                                                                   },
+                                                                   ?tags: Array[
+                                                                     {
+                                                                       key: ::String?,
+                                                                       value: ::String?
+                                                                     }
+                                                                   ]
+                                                                 ) -> _PutThirdPartyServiceLinkedConfigurationRecorderResponseSuccess
+                                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutThirdPartyServiceLinkedConfigurationRecorderResponseSuccess
 
       interface _SelectAggregateResourceConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SelectAggregateResourceConfigResponse]

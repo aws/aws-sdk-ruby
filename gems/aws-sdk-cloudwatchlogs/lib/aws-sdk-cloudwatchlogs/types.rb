@@ -4595,6 +4595,30 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetStorageTierPolicyRequest AWS API Documentation
+    #
+    class GetStorageTierPolicyRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] storage_tier
+    #   The current storage tier for the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the storage tier policy was last updated, expressed as
+    #   the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetStorageTierPolicyResponse AWS API Documentation
+    #
+    class GetStorageTierPolicyResponse < Struct.new(
+      :storage_tier,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] log_group_identifier
     #   Specify either the name or ARN of the log group to return
     #   transformer information for. If the log group is in a source account
@@ -7963,8 +7987,8 @@ module Aws::CloudWatchLogs
     #   * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS`
     #     and `EVENT_LOGS`.
     #
-    #   * For Amazon Bedrock Knowledge Bases, the valid value is
-    #     `APPLICATION_LOGS`.
+    #   * For Amazon Bedrock Knowledge Bases, the valid values are
+    #     `APPLICATION_LOGS` and `TRACES`.
     #
     #   * For Amazon Bedrock AgentCore Runtime, the valid values are
     #     `APPLICATION_LOGS`, `USAGE_LOGS` and `TRACES`.
@@ -8030,6 +8054,8 @@ module Aws::CloudWatchLogs
     #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and
     #     `SYNC_JOB_LOGS`.
+    #
+    #   * For Amazon S3, the valid value is `S3_SERVER_ACCESS_LOGS`.
     #
     #   * For Amazon Web Services Security Hub CSPM, the valid value is
     #     `SECURITY_FINDING_LOGS`.
@@ -8640,6 +8666,37 @@ module Aws::CloudWatchLogs
     class PutRetentionPolicyRequest < Struct.new(
       :log_group_name,
       :retention_in_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_tier
+    #   The storage tier to set for the account. Valid values are `STANDARD`
+    #   and `INTELLIGENT_TIERING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutStorageTierPolicyRequest AWS API Documentation
+    #
+    class PutStorageTierPolicyRequest < Struct.new(
+      :storage_tier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_tier
+    #   The storage tier that was set.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the storage tier policy was last updated, expressed as
+    #   the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutStorageTierPolicyResponse AWS API Documentation
+    #
+    class PutStorageTierPolicyResponse < Struct.new(
+      :storage_tier,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -256,6 +256,19 @@ module Aws::CloudWatch
       data[:state_transitioned_timestamp]
     end
 
+    # The evaluation window that the alarm uses to select the range of
+    # metric data that it evaluates. This is either a sliding window or a
+    # wall clock window. For more information, see [Alarm evaluation
+    # windows][1] in the *CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html
+    # @return [Types::EvaluationWindow]
+    def evaluation_window
+      data[:evaluation_window]
+    end
+
     # The evaluation criteria for the alarm.
     # @return [Types::EvaluationCriteria]
     def evaluation_criteria
@@ -456,7 +469,7 @@ module Aws::CloudWatch
     #
     #   alarm.describe_history({
     #     alarm_contributor_id: "ContributorId",
-    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
+    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm, LogAlarm
     #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action, AlarmContributorStateUpdate, AlarmContributorAction
     #     start_date: Time.now,
     #     end_date: Time.now,
@@ -470,8 +483,8 @@ module Aws::CloudWatch
     #   alarm history results.
     # @option options [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
-    #   metric alarms or composite alarms. If you omit this parameter, only
-    #   metric alarms are returned.
+    #   metric alarms, composite alarms, or log alarms. If you omit this
+    #   parameter, only metric alarms are returned.
     # @option options [String] :history_item_type
     #   The type of alarm histories to retrieve.
     # @option options [Time,DateTime,Date,Integer,String] :start_date

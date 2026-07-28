@@ -67,11 +67,205 @@ module Aws::ACM
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name           | params                        | :delay   | :max_attempts |
-  # | --------------------- | ----------------------------- | -------- | ------------- |
-  # | certificate_validated | {Client#describe_certificate} | 60       | 5             |
+  # | waiter_name                      | params                                   | :delay   | :max_attempts |
+  # | -------------------------------- | ---------------------------------------- | -------- | ------------- |
+  # | acme_domain_validation_deleted   | {Client#describe_acme_domain_validation} | 5        | 60            |
+  # | acme_domain_validation_validated | {Client#describe_acme_domain_validation} | 5        | 60            |
+  # | acme_endpoint_active             | {Client#describe_acme_endpoint}          | 5        | 60            |
+  # | acme_endpoint_deleted            | {Client#describe_acme_endpoint}          | 5        | 60            |
+  # | certificate_validated            | {Client#describe_certificate}            | 60       | 5             |
   #
   module Waiters
+
+    # Wait until an ACME domain validation has been deleted.
+    class AcmeDomainValidationDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_acme_domain_validation,
+            acceptors: [
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "acme_domain_validation.status",
+                "state" => "retry",
+                "expected" => "DELETING"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_acme_domain_validation)
+      # @return (see Client#describe_acme_domain_validation)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until an ACME domain validation reaches a terminal validation state.
+    class AcmeDomainValidationValidated
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_acme_domain_validation,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "acme_domain_validation.status",
+                "state" => "success",
+                "expected" => "VALID"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "acme_domain_validation.status",
+                "state" => "failure",
+                "expected" => "INVALID"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "acme_domain_validation.status",
+                "state" => "retry",
+                "expected" => "VALIDATING"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_acme_domain_validation)
+      # @return (see Client#describe_acme_domain_validation)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until an ACME endpoint has finished provisioning and is ACTIVE.
+    class AcmeEndpointActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_acme_endpoint,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "acme_endpoint.status",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "acme_endpoint.status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "acme_endpoint.status",
+                "state" => "retry",
+                "expected" => "CREATING"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_acme_endpoint)
+      # @return (see Client#describe_acme_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until an ACME endpoint has been deleted.
+    class AcmeEndpointDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_acme_endpoint,
+            acceptors: [
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "acme_endpoint.status",
+                "state" => "retry",
+                "expected" => "DELETING"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_acme_endpoint)
+      # @return (see Client#describe_acme_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     class CertificateValidated
 

@@ -1598,6 +1598,75 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Lists the authentication options for a user in a user pool. Returns
+    # the following:
+    #
+    # 1.  The user's multi-factor authentication (MFA) preferences.
+    #
+    # 2.  The user's options for choice-based authentication with the
+    #     `USER_AUTH` flow.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool where you want to get information about the
+    #   user's authentication factors.
+    #
+    # @option params [required, String] :username
+    #   The name of the user that you want to query or modify. The value of
+    #   this parameter is typically your user's username, but it can be any
+    #   of their alias attributes. If `username` isn't an alias attribute in
+    #   your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
+    #
+    # @return [Types::AdminGetUserAuthFactorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AdminGetUserAuthFactorsResponse#username #username} => String
+    #   * {Types::AdminGetUserAuthFactorsResponse#preferred_mfa_setting #preferred_mfa_setting} => String
+    #   * {Types::AdminGetUserAuthFactorsResponse#user_mfa_setting_list #user_mfa_setting_list} => Array&lt;String&gt;
+    #   * {Types::AdminGetUserAuthFactorsResponse#configured_user_auth_factors #configured_user_auth_factors} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_get_user_auth_factors({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     username: "UsernameType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.username #=> String
+    #   resp.preferred_mfa_setting #=> String
+    #   resp.user_mfa_setting_list #=> Array
+    #   resp.user_mfa_setting_list[0] #=> String
+    #   resp.configured_user_auth_factors #=> Array
+    #   resp.configured_user_auth_factors[0] #=> String, one of "PASSWORD", "EMAIL_OTP", "SMS_OTP", "WEB_AUTHN", "SOFTWARE_TOKEN"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserAuthFactors AWS API Documentation
+    #
+    # @overload admin_get_user_auth_factors(params = {})
+    # @param [Hash] params ({})
+    def admin_get_user_auth_factors(params = {}, options = {})
+      req = build_request(:admin_get_user_auth_factors, params)
+      req.send_request(options)
+    end
+
     # Starts sign-in for applications with a server-side component, for
     # example a traditional web application. This operation specifies the
     # authentication flow that you'd like to begin. The authentication flow
@@ -4703,6 +4772,12 @@ module Aws::CognitoIdentityProvider
     #   results to Amazon CloudWatch Logs. This parameter is the ARN of that
     #   role.
     #
+    # @option params [String] :password_hashing_algorithm
+    #   The password hashing algorithm used to generate the hashes in the CSV
+    #   file for this import job.
+    #
+    #   Valid values: `BCRYPT` \| `SCRYPT` \| `ARGON2ID` \| `PBKDF2_SHA256`
+    #
     # @return [Types::CreateUserImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserImportJobResponse#user_import_job #user_import_job} => Types::UserImportJobType
@@ -4713,6 +4788,7 @@ module Aws::CognitoIdentityProvider
     #     job_name: "UserImportJobNameType", # required
     #     user_pool_id: "UserPoolIdType", # required
     #     cloud_watch_logs_role_arn: "ArnType", # required
+    #     password_hashing_algorithm: "BCRYPT", # accepts BCRYPT, SCRYPT, ARGON2ID, PBKDF2_SHA256
     #   })
     #
     # @example Response structure
@@ -4730,6 +4806,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_import_job.skipped_users #=> Integer
     #   resp.user_import_job.failed_users #=> Integer
     #   resp.user_import_job.completion_message #=> String
+    #   resp.user_import_job.password_hashing_algorithm #=> String, one of "BCRYPT", "SCRYPT", "ARGON2ID", "PBKDF2_SHA256"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserImportJob AWS API Documentation
     #
@@ -4878,6 +4955,23 @@ module Aws::CognitoIdentityProvider
     #   automatically prompt users to set up MFA. Amazon Cognito generates MFA
     #   prompts in API responses and in managed login for users who have
     #   chosen and configured a preferred MFA factor.
+    #
+    #   The `CreateUserPool` operation supports only SMS MFA configuration. If
+    #   you set `MfaConfiguration` to either of these values, include an
+    #   `SmsConfiguration` in the same request:
+    #
+    #   * `ON` – Requires MFA for all users
+    #
+    #   * `OPTIONAL` – Makes MFA optional for each user
+    #
+    #   If you omit `SmsConfiguration`, the operation returns an
+    #   `InvalidParameterException`. To configure TOTP or email MFA, use the
+    #   [SetUserPoolMfaConfig][1] operation. You can also use
+    #   `SetUserPoolMfaConfig` to add MFA factors later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
     #
     # @option params [Types::UserAttributeUpdateSettingsType] :user_attribute_update_settings
     #   The settings for updates to user attributes. These settings include
@@ -5496,7 +5590,7 @@ module Aws::CognitoIdentityProvider
     #         temporary_password_validity_days: 1,
     #       },
     #       sign_in_policy: {
-    #         allowed_first_auth_factors: ["PASSWORD"], # accepts PASSWORD, EMAIL_OTP, SMS_OTP, WEB_AUTHN
+    #         allowed_first_auth_factors: ["PASSWORD"], # accepts PASSWORD, EMAIL_OTP, SMS_OTP, WEB_AUTHN, SOFTWARE_TOKEN
     #       },
     #     },
     #     deletion_protection: "ACTIVE", # accepts ACTIVE, INACTIVE
@@ -5560,9 +5654,18 @@ module Aws::CognitoIdentityProvider
     #       configuration_set: "SESConfigurationSet",
     #     },
     #     sms_configuration: {
-    #       sns_caller_arn: "ArnType", # required
+    #       sns_caller_arn: "OptionalArnType",
     #       external_id: "StringType",
     #       sns_region: "RegionCodeType",
+    #       eums_sms: {
+    #         caller_arn: "ArnType", # required
+    #         external_id: "StringType",
+    #         origination_identity: "StringType",
+    #         configuration_set_name: "StringType",
+    #         in_entity_id: "StringType",
+    #         in_template_id: "StringType",
+    #         region: "RegionCodeType",
+    #       },
     #     },
     #     user_pool_tags: {
     #       "TagKeysType" => "TagValueType",
@@ -5632,7 +5735,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.policies.password_policy.password_history_size #=> Integer
     #   resp.user_pool.policies.password_policy.temporary_password_validity_days #=> Integer
     #   resp.user_pool.policies.sign_in_policy.allowed_first_auth_factors #=> Array
-    #   resp.user_pool.policies.sign_in_policy.allowed_first_auth_factors[0] #=> String, one of "PASSWORD", "EMAIL_OTP", "SMS_OTP", "WEB_AUTHN"
+    #   resp.user_pool.policies.sign_in_policy.allowed_first_auth_factors[0] #=> String, one of "PASSWORD", "EMAIL_OTP", "SMS_OTP", "WEB_AUTHN", "SOFTWARE_TOKEN"
     #   resp.user_pool.deletion_protection #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.user_pool.lambda_config.pre_sign_up #=> String
     #   resp.user_pool.lambda_config.custom_message #=> String
@@ -5696,6 +5799,13 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_configuration.sns_caller_arn #=> String
     #   resp.user_pool.sms_configuration.external_id #=> String
     #   resp.user_pool.sms_configuration.sns_region #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.caller_arn #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.external_id #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.origination_identity #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.configuration_set_name #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.in_entity_id #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.in_template_id #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.region #=> String
     #   resp.user_pool.user_pool_tags #=> Hash
     #   resp.user_pool.user_pool_tags["TagKeysType"] #=> String
     #   resp.user_pool.sms_configuration_failure #=> String
@@ -6400,9 +6510,18 @@ module Aws::CognitoIdentityProvider
     #   Managed login requires that your user pool be configured for any
     #   [feature plan][1] other than `Lite`.
     #
+    #   A `ManagedLoginVersion` value of `2` does not activate managed login
+    #   pages for your app client. When you create an app client
+    #   programmatically, your app client has no branding style. To use
+    #   managed login, create a branding style using the
+    #   [CreateManagedLoginBranding][2] operation. When you use the console,
+    #   Amazon Cognito assigns a default branding style automatically. When
+    #   you use the API or an SDK, you must create a branding style yourself.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html
+    #   [2]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateManagedLoginBranding.html
     #
     # @option params [Types::CustomDomainConfigType] :custom_domain_config
     #   The configuration for a custom domain. Configures your domain with an
@@ -7503,6 +7622,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_import_job.skipped_users #=> Integer
     #   resp.user_import_job.failed_users #=> Integer
     #   resp.user_import_job.completion_message #=> String
+    #   resp.user_import_job.password_hashing_algorithm #=> String, one of "BCRYPT", "SCRYPT", "ARGON2ID", "PBKDF2_SHA256"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserImportJob AWS API Documentation
     #
@@ -7560,7 +7680,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.policies.password_policy.password_history_size #=> Integer
     #   resp.user_pool.policies.password_policy.temporary_password_validity_days #=> Integer
     #   resp.user_pool.policies.sign_in_policy.allowed_first_auth_factors #=> Array
-    #   resp.user_pool.policies.sign_in_policy.allowed_first_auth_factors[0] #=> String, one of "PASSWORD", "EMAIL_OTP", "SMS_OTP", "WEB_AUTHN"
+    #   resp.user_pool.policies.sign_in_policy.allowed_first_auth_factors[0] #=> String, one of "PASSWORD", "EMAIL_OTP", "SMS_OTP", "WEB_AUTHN", "SOFTWARE_TOKEN"
     #   resp.user_pool.deletion_protection #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.user_pool.lambda_config.pre_sign_up #=> String
     #   resp.user_pool.lambda_config.custom_message #=> String
@@ -7624,6 +7744,13 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_configuration.sns_caller_arn #=> String
     #   resp.user_pool.sms_configuration.external_id #=> String
     #   resp.user_pool.sms_configuration.sns_region #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.caller_arn #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.external_id #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.origination_identity #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.configuration_set_name #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.in_entity_id #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.in_template_id #=> String
+    #   resp.user_pool.sms_configuration.eums_sms.region #=> String
     #   resp.user_pool.user_pool_tags #=> Hash
     #   resp.user_pool.user_pool_tags["TagKeysType"] #=> String
     #   resp.user_pool.sms_configuration_failure #=> String
@@ -8307,6 +8434,90 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Returns the current provisioned limit for a specific API category.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, Types::LimitDefinitionType] :limit_definition
+    #   The limit to retrieve. Specify the limit class and the attributes that
+    #   identify the limit.
+    #
+    # @return [Types::GetProvisionedLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProvisionedLimitResponse#limit #limit} => Types::LimitType
+    #
+    #
+    # @example Example: Example get a provisioned limit
+    #
+    #   # The following example returns the provisioned limit for the UserAuthentication API category.
+    #
+    #   resp = client.get_provisioned_limit({
+    #     limit_definition: {
+    #       attributes: {
+    #         "Category" => "UserAuthentication", 
+    #       }, 
+    #       limit_class: "API_CATEGORY", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     limit: {
+    #       free_limit_value: 120, 
+    #       limit_definition: {
+    #         attributes: {
+    #           "Category" => "UserAuthentication", 
+    #         }, 
+    #         limit_class: "API_CATEGORY", 
+    #       }, 
+    #       provisioned_limit_value: 120, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_provisioned_limit({
+    #     limit_definition: { # required
+    #       limit_class: "API_CATEGORY", # required, accepts API_CATEGORY
+    #       attributes: { # required
+    #         "StringType" => "StringType",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limit.limit_definition.limit_class #=> String, one of "API_CATEGORY"
+    #   resp.limit.limit_definition.attributes #=> Hash
+    #   resp.limit.limit_definition.attributes["StringType"] #=> String
+    #   resp.limit.provisioned_limit_value #=> Integer
+    #   resp.limit.free_limit_value #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetProvisionedLimit AWS API Documentation
+    #
+    # @overload get_provisioned_limit(params = {})
+    # @param [Hash] params ({})
+    def get_provisioned_limit(params = {}, options = {})
+      req = build_request(:get_provisioned_limit, params)
+      req.send_request(options)
+    end
+
     # Given a user pool ID, returns the signing certificate for SAML 2.0
     # federation.
     #
@@ -8743,7 +8954,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_mfa_setting_list #=> Array
     #   resp.user_mfa_setting_list[0] #=> String
     #   resp.configured_user_auth_factors #=> Array
-    #   resp.configured_user_auth_factors[0] #=> String, one of "PASSWORD", "EMAIL_OTP", "SMS_OTP", "WEB_AUTHN"
+    #   resp.configured_user_auth_factors[0] #=> String, one of "PASSWORD", "EMAIL_OTP", "SMS_OTP", "WEB_AUTHN", "SOFTWARE_TOKEN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAuthFactors AWS API Documentation
     #
@@ -8810,6 +9021,13 @@ module Aws::CognitoIdentityProvider
     #   resp.sms_mfa_configuration.sms_configuration.sns_caller_arn #=> String
     #   resp.sms_mfa_configuration.sms_configuration.external_id #=> String
     #   resp.sms_mfa_configuration.sms_configuration.sns_region #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.caller_arn #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.external_id #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.origination_identity #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.configuration_set_name #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.in_entity_id #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.in_template_id #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.region #=> String
     #   resp.software_token_mfa_configuration.enabled #=> Boolean
     #   resp.email_mfa_configuration.message #=> String
     #   resp.email_mfa_configuration.subject #=> String
@@ -9683,6 +9901,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_import_jobs[0].skipped_users #=> Integer
     #   resp.user_import_jobs[0].failed_users #=> Integer
     #   resp.user_import_jobs[0].completion_message #=> String
+    #   resp.user_import_jobs[0].password_hashing_algorithm #=> String, one of "BCRYPT", "SCRYPT", "ARGON2ID", "PBKDF2_SHA256"
     #   resp.pagination_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserImportJobs AWS API Documentation
@@ -11492,9 +11711,18 @@ module Aws::CognitoIdentityProvider
     #     sms_mfa_configuration: {
     #       sms_authentication_message: "SmsVerificationMessageType",
     #       sms_configuration: {
-    #         sns_caller_arn: "ArnType", # required
+    #         sns_caller_arn: "OptionalArnType",
     #         external_id: "StringType",
     #         sns_region: "RegionCodeType",
+    #         eums_sms: {
+    #           caller_arn: "ArnType", # required
+    #           external_id: "StringType",
+    #           origination_identity: "StringType",
+    #           configuration_set_name: "StringType",
+    #           in_entity_id: "StringType",
+    #           in_template_id: "StringType",
+    #           region: "RegionCodeType",
+    #         },
     #       },
     #     },
     #     software_token_mfa_configuration: {
@@ -11518,6 +11746,13 @@ module Aws::CognitoIdentityProvider
     #   resp.sms_mfa_configuration.sms_configuration.sns_caller_arn #=> String
     #   resp.sms_mfa_configuration.sms_configuration.external_id #=> String
     #   resp.sms_mfa_configuration.sms_configuration.sns_region #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.caller_arn #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.external_id #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.origination_identity #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.configuration_set_name #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.in_entity_id #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.in_template_id #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.eums_sms.region #=> String
     #   resp.software_token_mfa_configuration.enabled #=> Boolean
     #   resp.email_mfa_configuration.message #=> String
     #   resp.email_mfa_configuration.subject #=> String
@@ -11838,6 +12073,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_import_job.skipped_users #=> Integer
     #   resp.user_import_job.failed_users #=> Integer
     #   resp.user_import_job.completion_message #=> String
+    #   resp.user_import_job.password_hashing_algorithm #=> String, one of "BCRYPT", "SCRYPT", "ARGON2ID", "PBKDF2_SHA256"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartUserImportJob AWS API Documentation
     #
@@ -11926,6 +12162,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_import_job.skipped_users #=> Integer
     #   resp.user_import_job.failed_users #=> Integer
     #   resp.user_import_job.completion_message #=> String
+    #   resp.user_import_job.password_hashing_algorithm #=> String, one of "BCRYPT", "SCRYPT", "ARGON2ID", "PBKDF2_SHA256"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StopUserImportJob AWS API Documentation
     #
@@ -12578,6 +12815,101 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Sets the provisioned limit for a specific API category. The value must
+    # be between the default limit and your account-level maximum limit in
+    # Service Quotas.
+    #
+    # Managed login user pools don't support adjustments to the
+    # `UserAuthentication` or `UserFederation` categories. To increase these
+    # limits, submit a Service Quotas increase request.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, Types::LimitDefinitionType] :limit_definition
+    #   The limit to update. Specify the limit class and the attributes that
+    #   identify the limit.
+    #
+    # @option params [required, Integer] :requested_limit_value
+    #   The provisioned rate to set, in requests per second (RPS).
+    #
+    # @return [Types::UpdateProvisionedLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProvisionedLimitResponse#limit #limit} => Types::LimitType
+    #
+    #
+    # @example Example: Example update a provisioned limit
+    #
+    #   # The following example sets the provisioned limit for the UserAuthentication API category to 300 RPS.
+    #
+    #   resp = client.update_provisioned_limit({
+    #     limit_definition: {
+    #       attributes: {
+    #         "Category" => "UserAuthentication", 
+    #       }, 
+    #       limit_class: "API_CATEGORY", 
+    #     }, 
+    #     requested_limit_value: 300, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     limit: {
+    #       free_limit_value: 120, 
+    #       limit_definition: {
+    #         attributes: {
+    #           "Category" => "UserAuthentication", 
+    #         }, 
+    #         limit_class: "API_CATEGORY", 
+    #       }, 
+    #       provisioned_limit_value: 300, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_provisioned_limit({
+    #     limit_definition: { # required
+    #       limit_class: "API_CATEGORY", # required, accepts API_CATEGORY
+    #       attributes: { # required
+    #         "StringType" => "StringType",
+    #       },
+    #     },
+    #     requested_limit_value: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limit.limit_definition.limit_class #=> String, one of "API_CATEGORY"
+    #   resp.limit.limit_definition.attributes #=> Hash
+    #   resp.limit.limit_definition.attributes["StringType"] #=> String
+    #   resp.limit.provisioned_limit_value #=> Integer
+    #   resp.limit.free_limit_value #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateProvisionedLimit AWS API Documentation
+    #
+    # @overload update_provisioned_limit(params = {})
+    # @param [Hash] params ({})
+    def update_provisioned_limit(params = {}, options = {})
+      req = build_request(:update_provisioned_limit, params)
+      req.send_request(options)
+    end
+
     # Updates the name and scopes of a resource server. All other fields are
     # read-only. For more information about resource servers, see [Access
     # control with resource servers][1].
@@ -13152,7 +13484,7 @@ module Aws::CognitoIdentityProvider
     #         temporary_password_validity_days: 1,
     #       },
     #       sign_in_policy: {
-    #         allowed_first_auth_factors: ["PASSWORD"], # accepts PASSWORD, EMAIL_OTP, SMS_OTP, WEB_AUTHN
+    #         allowed_first_auth_factors: ["PASSWORD"], # accepts PASSWORD, EMAIL_OTP, SMS_OTP, WEB_AUTHN, SOFTWARE_TOKEN
     #       },
     #     },
     #     deletion_protection: "ACTIVE", # accepts ACTIVE, INACTIVE
@@ -13214,9 +13546,18 @@ module Aws::CognitoIdentityProvider
     #       configuration_set: "SESConfigurationSet",
     #     },
     #     sms_configuration: {
-    #       sns_caller_arn: "ArnType", # required
+    #       sns_caller_arn: "OptionalArnType",
     #       external_id: "StringType",
     #       sns_region: "RegionCodeType",
+    #       eums_sms: {
+    #         caller_arn: "ArnType", # required
+    #         external_id: "StringType",
+    #         origination_identity: "StringType",
+    #         configuration_set_name: "StringType",
+    #         in_entity_id: "StringType",
+    #         in_template_id: "StringType",
+    #         region: "RegionCodeType",
+    #       },
     #     },
     #     user_pool_tags: {
     #       "TagKeysType" => "TagValueType",
@@ -14077,7 +14418,7 @@ module Aws::CognitoIdentityProvider
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

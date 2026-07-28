@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.265.0 (2026-07-14)
+------------------
+
+* Feature - This release adds SearchRules API which can be used to search for rules within an Amazon Connect instance.
+
+1.264.0 (2026-07-09)
+------------------
+
+* Feature - Amazon Connect - Added DeleteContactData API to support PII deletion of customer endpoint, additional email recipients and email subject.
+
+1.263.0 (2026-07-07)
+------------------
+
+* Feature - Adds support for CreateAuthCode and DeleteSession APIs.
+
+1.262.0 (2026-07-01)
+------------------
+
+* Feature - Adds a new Amazon Connect Service API, SendOutboundWebNotification, that delivers web notifications to end-customer chat widget sessions. Callable only by the Amazon Connect Outbound Campaigns service principal.
+
+1.261.0 (2026-06-30)
+------------------
+
+* Feature - Amazon Connect - Added CreateAttachedFile and StartContactConversationalAnalyticsJob APIs to import call recordings and run conversational analytics.
+
 1.260.0 (2026-06-19)
 ------------------
 

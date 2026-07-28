@@ -79,6 +79,41 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateDataTransformationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataTransformationProfileResponse]
+        def profile_id: () -> ::String
+        def version: () -> ::Integer
+        def source_format: () -> ("CCDA" | "CSV")
+        def target_format: () -> ("FHIR_R4")
+        def profile_name: () -> ::String
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#create_data_transformation_profile-instance_method
+      def create_data_transformation_profile: (
+                                                source_format: ("CCDA" | "CSV"),
+                                                source: {
+                                                  starter_profile: {
+                                                    starter_profile_name: ::String
+                                                  }?,
+                                                  existing_versioned_profile_id: {
+                                                    profile_id: ::String,
+                                                    version: ::Integer
+                                                  }?,
+                                                  profile_mapping: {
+                                                    profile_mapping: Hash[::String, ::String]
+                                                  }?,
+                                                  sample_data: {
+                                                    s3_uri: ::String
+                                                  }?
+                                                },
+                                                ?kms_key_id: ::String,
+                                                ?profile_description: ::String,
+                                                profile_name: ::String,
+                                                ?tags: Hash[::String, ::String],
+                                                ?client_token: ::String
+                                              ) -> _CreateDataTransformationProfileResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataTransformationProfileResponseSuccess
+
       interface _CreateFHIRDatastoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFHIRDatastoreResponse]
         def datastore_id: () -> ::String
@@ -116,13 +151,25 @@ module Aws
                                      status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING" | "PAUSING" | "PAUSED")?
                                    },
                                    ?nlp_configuration: {
-                                     status: ("ENABLED" | "DISABLED" | "ENABLING" | "DISABLING")?
+                                     status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")?
                                    },
                                    ?profile_configuration: {
                                      default_profiles: Array[::String]?
                                    }
                                  ) -> _CreateFHIRDatastoreResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFHIRDatastoreResponseSuccess
+
+      interface _DeleteDataTransformationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataTransformationProfileResponse]
+        def profile_id: () -> ::String
+        def profile_name: () -> ::String
+        def deletion_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#delete_data_transformation_profile-instance_method
+      def delete_data_transformation_profile: (
+                                                profile_id: ::String
+                                              ) -> _DeleteDataTransformationProfileResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataTransformationProfileResponseSuccess
 
       interface _DeleteFHIRDatastoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFHIRDatastoreResponse]
@@ -136,6 +183,16 @@ module Aws
                                    datastore_id: ::String
                                  ) -> _DeleteFHIRDatastoreResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFHIRDatastoreResponseSuccess
+
+      interface _DescribeDataTransformationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataTransformationJobResponse]
+        def transformation_job_properties: () -> Types::TransformationJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#describe_data_transformation_job-instance_method
+      def describe_data_transformation_job: (
+                                              job_id: ::String
+                                            ) -> _DescribeDataTransformationJobResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataTransformationJobResponseSuccess
 
       interface _DescribeFHIRDatastoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFHIRDatastoreResponse]
@@ -168,6 +225,67 @@ module Aws
                                       job_id: ::String
                                     ) -> _DescribeFHIRImportJobResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFHIRImportJobResponseSuccess
+
+      interface _GetDataTransformationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataTransformationProfileResponse]
+        def profile_id: () -> ::String
+        def version: () -> ::Integer
+        def source_format: () -> ("CCDA" | "CSV")
+        def target_format: () -> ("FHIR_R4")
+        def profile_mapping: () -> ::Hash[::String, ::String]
+        def profile_name: () -> ::String
+        def profile_description: () -> ::String
+        def change_description: () -> ::String
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#get_data_transformation_profile-instance_method
+      def get_data_transformation_profile: (
+                                             profile_id: ::String,
+                                             ?profile_version: ::Integer
+                                           ) -> _GetDataTransformationProfileResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataTransformationProfileResponseSuccess
+
+      interface _ListDataTransformationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataTransformationJobsResponse]
+        def items: () -> ::Array[Types::TransformationJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#list_data_transformation_jobs-instance_method
+      def list_data_transformation_jobs: (
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           ?job_status: ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED"),
+                                           ?job_name: ::String,
+                                           ?submitted_after: ::Time,
+                                           ?submitted_before: ::Time
+                                         ) -> _ListDataTransformationJobsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataTransformationJobsResponseSuccess
+
+      interface _ListDataTransformationProfileVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataTransformationProfileVersionsResponse]
+        def items: () -> ::Array[Types::DataTransformationProfileVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#list_data_transformation_profile_versions-instance_method
+      def list_data_transformation_profile_versions: (
+                                                       profile_id: ::String,
+                                                       ?max_results: ::Integer,
+                                                       ?next_token: ::String
+                                                     ) -> _ListDataTransformationProfileVersionsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataTransformationProfileVersionsResponseSuccess
+
+      interface _ListDataTransformationProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataTransformationProfilesResponse]
+        def items: () -> ::Array[Types::DataTransformationProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#list_data_transformation_profiles-instance_method
+      def list_data_transformation_profiles: (
+                                               source_format: ("CCDA" | "CSV"),
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListDataTransformationProfilesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataTransformationProfilesResponseSuccess
 
       interface _ListFHIRDatastoresResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFHIRDatastoresResponse]
@@ -231,6 +349,50 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _PublishDataTransformationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishDataTransformationProfileResponse]
+        def profile_id: () -> ::String
+        def version: () -> ::Integer
+        def source_format: () -> ("CCDA" | "CSV")
+        def target_format: () -> ("FHIR_R4")
+        def profile_name: () -> ::String
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#publish_data_transformation_profile-instance_method
+      def publish_data_transformation_profile: (
+                                                 profile_id: ::String,
+                                                 source_format: ("CCDA" | "CSV"),
+                                                 ?from_existing_version: ::Integer,
+                                                 ?change_description: ::String
+                                               ) -> _PublishDataTransformationProfileResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishDataTransformationProfileResponseSuccess
+
+      interface _StartDataTransformationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDataTransformationJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#start_data_transformation_job-instance_method
+      def start_data_transformation_job: (
+                                           input_data_config: {
+                                             s3_uri: ::String,
+                                             source_format: ("CCDA" | "CSV")?
+                                           },
+                                           output_data_config: {
+                                             s3_configuration: {
+                                               s3_uri: ::String,
+                                               kms_key_id: ::String
+                                             }
+                                           },
+                                           data_access_role_arn: ::String,
+                                           client_token: ::String,
+                                           ?job_name: ::String,
+                                           profile_id: ::String,
+                                           ?drift_detection_enabled: bool,
+                                           ?provenance_enabled: bool
+                                         ) -> _StartDataTransformationJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataTransformationJobResponseSuccess
+
       interface _StartFHIRExportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartFHIRExportJobResponse]
         def job_id: () -> ::String
@@ -273,7 +435,10 @@ module Aws
                                    datastore_id: ::String,
                                    data_access_role_arn: ::String,
                                    ?client_token: ::String,
-                                   ?validation_level: ("strict" | "structure-only" | "minimal")
+                                   ?validation_level: ("strict" | "structure-only" | "minimal"),
+                                   ?profile_id: ::String,
+                                   ?input_format: ::String,
+                                   ?drift_detection_enabled: bool
                                  ) -> _StartFHIRImportJobResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFHIRImportJobResponseSuccess
 
@@ -302,6 +467,22 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdateDataTransformationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataTransformationProfileResponse]
+        def profile_id: () -> ::String
+        def source_format: () -> ("CCDA" | "CSV")
+        def target_format: () -> ("FHIR_R4")
+        def profile_name: () -> ::String
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#update_data_transformation_profile-instance_method
+      def update_data_transformation_profile: (
+                                                profile_id: ::String,
+                                                profile_mapping: Hash[::String, ::String],
+                                                ?change_description: ::String
+                                              ) -> _UpdateDataTransformationProfileResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataTransformationProfileResponseSuccess
+
       interface _UpdateFHIRDatastoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFHIRDatastoreResponse]
         def datastore_properties: () -> Types::DatastoreProperties
@@ -310,11 +491,11 @@ module Aws
       def update_fhir_datastore: (
                                    datastore_id: ::String,
                                    ?datastore_name: ::String,
-                                   ?nlp_configuration: {
-                                     status: ("ENABLED" | "DISABLED" | "ENABLING" | "DISABLING")?
-                                   },
                                    ?analytics_configuration: {
                                      status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING" | "PAUSING" | "PAUSED")?
+                                   },
+                                   ?nlp_configuration: {
+                                     status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")?
                                    },
                                    ?profile_configuration: {
                                      default_profiles: Array[::String]?
@@ -328,8 +509,29 @@ module Aws
                                  ) -> _UpdateFHIRDatastoreResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFHIRDatastoreResponseSuccess
 
+      interface _UpdateProfileWithAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProfileWithAgentResponse]
+        def agent_response: () -> Types::AgentOutputMessage
+        def conversation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#update_profile_with_agent-instance_method
+      def update_profile_with_agent: (
+                                       profile_id: ::String,
+                                       source_format: ("CCDA" | "CSV"),
+                                       input_message: {
+                                         body: ::String,
+                                         type: ("normal" | "confirmation_response")
+                                       },
+                                       ?conversation_id: ::String
+                                     ) -> _UpdateProfileWithAgentResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileWithAgentResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#wait_until-instance_method
-      def wait_until: (:fhir_datastore_active waiter_name, 
+      def wait_until: (:data_transformation_job_completed waiter_name, 
+                    job_id: ::String
+                  ) -> Client::_DescribeDataTransformationJobResponseSuccess
+                    | (:data_transformation_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeDataTransformationJobResponseSuccess
+                    | (:fhir_datastore_active waiter_name, 
                     datastore_id: ::String
                   ) -> Client::_DescribeFHIRDatastoreResponseSuccess
                     | (:fhir_datastore_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFHIRDatastoreResponseSuccess

@@ -481,6 +481,98 @@ module Aws::HealthLake
 
     # @!group API Operations
 
+    # Creates a data transformation profile in DRAFT state. Specify a
+    # built-in starter profile, an existing profile version, raw profile
+    # content, or a sample data file as the source.
+    #
+    # @option params [required, String] :source_format
+    #   The source data format that this profile converts from (Consolidated
+    #   Clinical Document Architecture (C-CDA) or Comma-separated values
+    #   (CSV)).
+    #
+    # @option params [required, Types::CreateDataTransformationProfileSource] :source
+    #   The source for the initial profile content. Specify a built-in starter
+    #   profile, an existing profile version to clone, raw profile content for
+    #   CI/CD workflows, or a sample data file in Amazon S3.
+    #
+    # @option params [String] :kms_key_id
+    #   The AWS Key Management Service (AWS KMS) key identifier used to
+    #   encrypt the profile content at rest.
+    #
+    # @option params [String] :profile_description
+    #   A human-readable description of the profile's purpose.
+    #
+    # @option params [required, String] :profile_name
+    #   A name for the data transformation profile.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to associate with the profile at creation time.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateDataTransformationProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataTransformationProfileResponse#profile_id #profile_id} => String
+    #   * {Types::CreateDataTransformationProfileResponse#version #version} => Integer
+    #   * {Types::CreateDataTransformationProfileResponse#source_format #source_format} => String
+    #   * {Types::CreateDataTransformationProfileResponse#target_format #target_format} => String
+    #   * {Types::CreateDataTransformationProfileResponse#profile_name #profile_name} => String
+    #   * {Types::CreateDataTransformationProfileResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_transformation_profile({
+    #     source_format: "CCDA", # required, accepts CCDA, CSV
+    #     source: { # required
+    #       starter_profile: {
+    #         starter_profile_name: "String", # required
+    #       },
+    #       existing_versioned_profile_id: {
+    #         profile_id: "String", # required
+    #         version: 1, # required
+    #       },
+    #       profile_mapping: {
+    #         profile_mapping: { # required
+    #           "String" => "String",
+    #         },
+    #       },
+    #       sample_data: {
+    #         s3_uri: "SampleDataS3Uri", # required
+    #       },
+    #     },
+    #     kms_key_id: "KmsKeyId",
+    #     profile_description: "ProfileDescription",
+    #     profile_name: "ProfileNameString", # required
+    #     tags: {
+    #       "DataTransformationTagKey" => "DataTransformationTagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #   resp.version #=> Integer
+    #   resp.source_format #=> String, one of "CCDA", "CSV"
+    #   resp.target_format #=> String, one of "FHIR_R4"
+    #   resp.profile_name #=> String
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateDataTransformationProfile AWS API Documentation
+    #
+    # @overload create_data_transformation_profile(params = {})
+    # @param [Hash] params ({})
+    def create_data_transformation_profile(params = {}, options = {})
+      req = build_request(:create_data_transformation_profile, params)
+      req.send_request(options)
+    end
+
     # Create a FHIR-enabled data store.
     #
     # @option params [String] :datastore_name
@@ -558,10 +650,10 @@ module Aws::HealthLake
     #       status: "ENABLED", # accepts ENABLED, ENABLING, DISABLED, DISABLING, PAUSING, PAUSED
     #     },
     #     nlp_configuration: {
-    #       status: "ENABLED", # accepts ENABLED, DISABLED, ENABLING, DISABLING
+    #       status: "ENABLED", # accepts ENABLED, ENABLING, DISABLED, DISABLING
     #     },
     #     profile_configuration: {
-    #       default_profiles: ["String"],
+    #       default_profiles: ["HealthLakeString"],
     #     },
     #   })
     #
@@ -578,6 +670,39 @@ module Aws::HealthLake
     # @param [Hash] params ({})
     def create_fhir_datastore(params = {}, options = {})
       req = build_request(:create_fhir_datastore, params)
+      req.send_request(options)
+    end
+
+    # Deletes a data transformation profile and all its versions, including
+    # the DRAFT and all published versions.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile to delete.
+    #
+    # @return [Types::DeleteDataTransformationProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataTransformationProfileResponse#profile_id #profile_id} => String
+    #   * {Types::DeleteDataTransformationProfileResponse#profile_name #profile_name} => String
+    #   * {Types::DeleteDataTransformationProfileResponse#deletion_time #deletion_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_transformation_profile({
+    #     profile_id: "ProfileIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #   resp.profile_name #=> String
+    #   resp.deletion_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DeleteDataTransformationProfile AWS API Documentation
+    #
+    # @overload delete_data_transformation_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_data_transformation_profile(params = {}, options = {})
+      req = build_request(:delete_data_transformation_profile, params)
       req.send_request(options)
     end
 
@@ -615,6 +740,59 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
+    # Describes a data transformation job, including its current status,
+    # configuration, and progress information.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the data transformation job to describe.
+    #
+    # @return [Types::DescribeDataTransformationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataTransformationJobResponse#transformation_job_properties #transformation_job_properties} => Types::TransformationJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_transformation_job({
+    #     job_id: "DataTransformationJobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transformation_job_properties.job_id #=> String
+    #   resp.transformation_job_properties.job_status #=> String, one of "SUBMITTED", "QUEUED", "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"
+    #   resp.transformation_job_properties.input_data_config.s3_uri #=> String
+    #   resp.transformation_job_properties.input_data_config.source_format #=> String, one of "CCDA", "CSV"
+    #   resp.transformation_job_properties.output_data_config.s3_configuration.s3_uri #=> String
+    #   resp.transformation_job_properties.output_data_config.s3_configuration.kms_key_id #=> String
+    #   resp.transformation_job_properties.data_access_role_arn #=> String
+    #   resp.transformation_job_properties.submit_time #=> Time
+    #   resp.transformation_job_properties.job_name #=> String
+    #   resp.transformation_job_properties.profile_id #=> String
+    #   resp.transformation_job_properties.profile_name #=> String
+    #   resp.transformation_job_properties.profile_version #=> Integer
+    #   resp.transformation_job_properties.end_time #=> Time
+    #   resp.transformation_job_properties.drift_detection_enabled #=> Boolean
+    #   resp.transformation_job_properties.provenance_enabled #=> Boolean
+    #   resp.transformation_job_properties.message #=> String
+    #   resp.transformation_job_properties.job_progress_report.total_files_scanned #=> Integer
+    #   resp.transformation_job_properties.job_progress_report.total_files_converted #=> Integer
+    #   resp.transformation_job_properties.job_progress_report.total_files_failed #=> Integer
+    #   resp.transformation_job_properties.job_progress_report.total_resources_generated #=> Integer
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * data_transformation_job_completed
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeDataTransformationJob AWS API Documentation
+    #
+    # @overload describe_data_transformation_job(params = {})
+    # @param [Hash] params ({})
+    def describe_data_transformation_job(params = {}, options = {})
+      req = build_request(:describe_data_transformation_job, params)
+      req.send_request(options)
+    end
+
     # Get properties for a FHIR-enabled data store.
     #
     # @option params [required, String] :datastore_id
@@ -648,7 +826,7 @@ module Aws::HealthLake
     #   resp.datastore_properties.identity_provider_configuration.idp_lambda_arn #=> String
     #   resp.datastore_properties.error_cause.error_message #=> String
     #   resp.datastore_properties.error_cause.error_category #=> String, one of "RETRYABLE_ERROR", "NON_RETRYABLE_ERROR"
-    #   resp.datastore_properties.nlp_configuration.status #=> String, one of "ENABLED", "DISABLED", "ENABLING", "DISABLING"
+    #   resp.datastore_properties.nlp_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
     #   resp.datastore_properties.analytics_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PAUSING", "PAUSED"
     #   resp.datastore_properties.profile_configuration.default_profiles #=> Array
     #   resp.datastore_properties.profile_configuration.default_profiles[0] #=> String
@@ -752,7 +930,16 @@ module Aws::HealthLake
     #   resp.import_job_properties.job_progress_report.total_number_of_resources_imported #=> Integer
     #   resp.import_job_properties.job_progress_report.total_number_of_resources_with_customer_error #=> Integer
     #   resp.import_job_properties.job_progress_report.total_number_of_files_read_with_customer_error #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_number_of_scanned_non_fhir_files #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_size_of_scanned_non_fhir_files_in_mb #=> Float
+    #   resp.import_job_properties.job_progress_report.total_number_of_imported_non_fhir_files #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_number_of_non_fhir_resources_scanned #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_number_of_non_fhir_resources_imported #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_number_of_non_fhir_resources_with_customer_error #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_number_of_non_fhir_files_read_with_customer_error #=> Integer
     #   resp.import_job_properties.job_progress_report.throughput #=> Float
+    #   resp.import_job_properties.job_progress_report.total_files_converted #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_resources_generated #=> Integer
     #   resp.import_job_properties.data_access_role_arn #=> String
     #   resp.import_job_properties.message #=> String
     #   resp.import_job_properties.validation_level #=> String, one of "strict", "structure-only", "minimal"
@@ -768,6 +955,231 @@ module Aws::HealthLake
     # @param [Hash] params ({})
     def describe_fhir_import_job(params = {}, options = {})
       req = build_request(:describe_fhir_import_job, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a data transformation profile's metadata and profile
+    # content at a specific version. Specify version 0 to retrieve the
+    # DRAFT, a version number between 1 and 99 to retrieve a specific
+    # published version, or omit the version to retrieve the latest
+    # published version.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile to retrieve.
+    #
+    # @option params [Integer] :profile_version
+    #   The version number to retrieve. Specify 0 to retrieve the DRAFT
+    #   version. If you omit this parameter, the service returns the latest
+    #   published version.
+    #
+    # @return [Types::GetDataTransformationProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataTransformationProfileResponse#profile_id #profile_id} => String
+    #   * {Types::GetDataTransformationProfileResponse#version #version} => Integer
+    #   * {Types::GetDataTransformationProfileResponse#source_format #source_format} => String
+    #   * {Types::GetDataTransformationProfileResponse#target_format #target_format} => String
+    #   * {Types::GetDataTransformationProfileResponse#profile_mapping #profile_mapping} => Hash&lt;String,String&gt;
+    #   * {Types::GetDataTransformationProfileResponse#profile_name #profile_name} => String
+    #   * {Types::GetDataTransformationProfileResponse#profile_description #profile_description} => String
+    #   * {Types::GetDataTransformationProfileResponse#change_description #change_description} => String
+    #   * {Types::GetDataTransformationProfileResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_transformation_profile({
+    #     profile_id: "ProfileIdString", # required
+    #     profile_version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #   resp.version #=> Integer
+    #   resp.source_format #=> String, one of "CCDA", "CSV"
+    #   resp.target_format #=> String, one of "FHIR_R4"
+    #   resp.profile_mapping #=> Hash
+    #   resp.profile_mapping["ProfileMappingKey"] #=> String
+    #   resp.profile_name #=> String
+    #   resp.profile_description #=> String
+    #   resp.change_description #=> String
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/GetDataTransformationProfile AWS API Documentation
+    #
+    # @overload get_data_transformation_profile(params = {})
+    # @param [Hash] params ({})
+    def get_data_transformation_profile(params = {}, options = {})
+      req = build_request(:get_data_transformation_profile, params)
+      req.send_request(options)
+    end
+
+    # Lists data transformation jobs for your AWS account. Results can be
+    # filtered by status, job name, and submit time window. Results are
+    # paginated. Use the `NextToken` parameter to retrieve additional
+    # results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of jobs to return per page. If you don't specify a
+    #   value, the service returns up to 100 results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous response. Pass this value to
+    #   retrieve the next page of results.
+    #
+    # @option params [String] :job_status
+    #   Filters the results to include only jobs with the specified status.
+    #
+    # @option params [String] :job_name
+    #   Filters the results to include only jobs with the specified name.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :submitted_after
+    #   Filters the results to include only jobs submitted at or after this
+    #   timestamp.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :submitted_before
+    #   Filters the results to include only jobs submitted at or before this
+    #   timestamp.
+    #
+    # @return [Types::ListDataTransformationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataTransformationJobsResponse#items #items} => Array&lt;Types::TransformationJobSummary&gt;
+    #   * {Types::ListDataTransformationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_transformation_jobs({
+    #     max_results: 1,
+    #     next_token: "DataTransformationNextToken",
+    #     job_status: "SUBMITTED", # accepts SUBMITTED, QUEUED, IN_PROGRESS, COMPLETED, COMPLETED_WITH_ERRORS, FAILED
+    #     job_name: "DataTransformationJobName",
+    #     submitted_after: Time.now,
+    #     submitted_before: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].job_status #=> String, one of "SUBMITTED", "QUEUED", "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"
+    #   resp.items[0].submit_time #=> Time
+    #   resp.items[0].job_name #=> String
+    #   resp.items[0].end_time #=> Time
+    #   resp.items[0].source_format #=> String, one of "CCDA", "CSV"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListDataTransformationJobs AWS API Documentation
+    #
+    # @overload list_data_transformation_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_data_transformation_jobs(params = {}, options = {})
+      req = build_request(:list_data_transformation_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists all versions of a specific data transformation profile (DRAFT
+    # and published), in reverse chronological order (newest first). Use
+    # `GetDataTransformationProfile` to retrieve profile content. Results
+    # are paginated. Use the `NextToken` parameter to retrieve additional
+    # results.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile whose versions to list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of profile versions to return per page. If you
+    #   don't specify a value, the service returns up to 100 results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous response. Pass this value to
+    #   retrieve the next page of results.
+    #
+    # @return [Types::ListDataTransformationProfileVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataTransformationProfileVersionsResponse#items #items} => Array&lt;Types::DataTransformationProfileVersionSummary&gt;
+    #   * {Types::ListDataTransformationProfileVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_transformation_profile_versions({
+    #     profile_id: "ProfileIdString", # required
+    #     max_results: 1,
+    #     next_token: "DataTransformationNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].profile_id #=> String
+    #   resp.items[0].version #=> Integer
+    #   resp.items[0].source_format #=> String, one of "CCDA", "CSV"
+    #   resp.items[0].target_format #=> String, one of "FHIR_R4"
+    #   resp.items[0].profile_name #=> String
+    #   resp.items[0].change_description #=> String
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListDataTransformationProfileVersions AWS API Documentation
+    #
+    # @overload list_data_transformation_profile_versions(params = {})
+    # @param [Hash] params ({})
+    def list_data_transformation_profile_versions(params = {}, options = {})
+      req = build_request(:list_data_transformation_profile_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists all data transformation profiles in your account, returning the
+    # latest version summary for each. Use `GetDataTransformationProfile` to
+    # retrieve profile content. Results are paginated. Use the `NextToken`
+    # parameter to retrieve additional results.
+    #
+    # @option params [required, String] :source_format
+    #   Filters the results by source data format.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of profiles to return per page. If you don't
+    #   specify a value, the service returns up to 100 results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous response. Pass this value to
+    #   retrieve the next page of results.
+    #
+    # @return [Types::ListDataTransformationProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataTransformationProfilesResponse#items #items} => Array&lt;Types::DataTransformationProfileSummary&gt;
+    #   * {Types::ListDataTransformationProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_transformation_profiles({
+    #     source_format: "CCDA", # required, accepts CCDA, CSV
+    #     max_results: 1,
+    #     next_token: "DataTransformationNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].profile_id #=> String
+    #   resp.items[0].version #=> Integer
+    #   resp.items[0].source_format #=> String, one of "CCDA", "CSV"
+    #   resp.items[0].target_format #=> String, one of "FHIR_R4"
+    #   resp.items[0].profile_name #=> String
+    #   resp.items[0].profile_description #=> String
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListDataTransformationProfiles AWS API Documentation
+    #
+    # @overload list_data_transformation_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_data_transformation_profiles(params = {}, options = {})
+      req = build_request(:list_data_transformation_profiles, params)
       req.send_request(options)
     end
 
@@ -823,7 +1235,7 @@ module Aws::HealthLake
     #   resp.datastore_properties_list[0].identity_provider_configuration.idp_lambda_arn #=> String
     #   resp.datastore_properties_list[0].error_cause.error_message #=> String
     #   resp.datastore_properties_list[0].error_cause.error_category #=> String, one of "RETRYABLE_ERROR", "NON_RETRYABLE_ERROR"
-    #   resp.datastore_properties_list[0].nlp_configuration.status #=> String, one of "ENABLED", "DISABLED", "ENABLING", "DISABLING"
+    #   resp.datastore_properties_list[0].nlp_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
     #   resp.datastore_properties_list[0].analytics_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PAUSING", "PAUSED"
     #   resp.datastore_properties_list[0].profile_configuration.default_profiles #=> Array
     #   resp.datastore_properties_list[0].profile_configuration.default_profiles[0] #=> String
@@ -977,7 +1389,16 @@ module Aws::HealthLake
     #   resp.import_job_properties_list[0].job_progress_report.total_number_of_resources_imported #=> Integer
     #   resp.import_job_properties_list[0].job_progress_report.total_number_of_resources_with_customer_error #=> Integer
     #   resp.import_job_properties_list[0].job_progress_report.total_number_of_files_read_with_customer_error #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_scanned_non_fhir_files #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_size_of_scanned_non_fhir_files_in_mb #=> Float
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_imported_non_fhir_files #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_non_fhir_resources_scanned #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_non_fhir_resources_imported #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_non_fhir_resources_with_customer_error #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_non_fhir_files_read_with_customer_error #=> Integer
     #   resp.import_job_properties_list[0].job_progress_report.throughput #=> Float
+    #   resp.import_job_properties_list[0].job_progress_report.total_files_converted #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_resources_generated #=> Integer
     #   resp.import_job_properties_list[0].data_access_role_arn #=> String
     #   resp.import_job_properties_list[0].message #=> String
     #   resp.import_job_properties_list[0].validation_level #=> String, one of "strict", "structure-only", "minimal"
@@ -1020,6 +1441,141 @@ module Aws::HealthLake
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Promotes the current DRAFT version of a data transformation profile to
+    # a new immutable published version. Also supports rollback by
+    # publishing from a previously published version.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile to publish.
+    #
+    # @option params [required, String] :source_format
+    #   The source data format of the profile.
+    #
+    # @option params [Integer] :from_existing_version
+    #   The version number of a previously published version to republish as
+    #   the new latest version. Use this parameter for rollback scenarios. If
+    #   you omit this parameter, the service publishes the current DRAFT
+    #   version.
+    #
+    # @option params [String] :change_description
+    #   A description of what changed or why this version is being published.
+    #
+    # @return [Types::PublishDataTransformationProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PublishDataTransformationProfileResponse#profile_id #profile_id} => String
+    #   * {Types::PublishDataTransformationProfileResponse#version #version} => Integer
+    #   * {Types::PublishDataTransformationProfileResponse#source_format #source_format} => String
+    #   * {Types::PublishDataTransformationProfileResponse#target_format #target_format} => String
+    #   * {Types::PublishDataTransformationProfileResponse#profile_name #profile_name} => String
+    #   * {Types::PublishDataTransformationProfileResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.publish_data_transformation_profile({
+    #     profile_id: "ProfileIdString", # required
+    #     source_format: "CCDA", # required, accepts CCDA, CSV
+    #     from_existing_version: 1,
+    #     change_description: "ChangeDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #   resp.version #=> Integer
+    #   resp.source_format #=> String, one of "CCDA", "CSV"
+    #   resp.target_format #=> String, one of "FHIR_R4"
+    #   resp.profile_name #=> String
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/PublishDataTransformationProfile AWS API Documentation
+    #
+    # @overload publish_data_transformation_profile(params = {})
+    # @param [Hash] params ({})
+    def publish_data_transformation_profile(params = {}, options = {})
+      req = build_request(:publish_data_transformation_profile, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous data transformation job that converts source
+    # files from Amazon Simple Storage Service (Amazon S3) and writes the
+    # output to Amazon S3 or AWS HealthLake.
+    #
+    # @option params [required, Types::TransformationInputDataConfig] :input_data_config
+    #   The Amazon S3 location and format of the source files to transform.
+    #
+    # @option params [required, Types::TransformationOutputDataConfig] :output_data_config
+    #   The Amazon S3 output location and AWS Key Management Service (AWS KMS)
+    #   encryption configuration.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that AWS HealthLake assumes to read from and
+    #   write to the specified Amazon S3 locations.
+    #
+    # @option params [required, String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request but does not return an error.
+    #
+    # @option params [String] :job_name
+    #   A descriptive name for the data transformation job.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the data transformation profile to use for
+    #   conversion.
+    #
+    # @option params [Boolean] :drift_detection_enabled
+    #   Specifies whether drift detection is enabled for this job. When
+    #   enabled, AWS HealthLake writes a drift report to the output Amazon S3
+    #   location alongside the converted files.
+    #
+    # @option params [Boolean] :provenance_enabled
+    #   Specifies whether FHIR R4 Provenance resource generation is enabled
+    #   for this transformation job. When provenance is enabled, the service
+    #   also generates related DocumentReference and Device resources. If you
+    #   don't specify a value, the default is `true`. To disable provenance
+    #   output, set this parameter to `false`.
+    #
+    # @return [Types::StartDataTransformationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDataTransformationJobResponse#job_id #job_id} => String
+    #   * {Types::StartDataTransformationJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_data_transformation_job({
+    #     input_data_config: { # required
+    #       s3_uri: "DataTransformationS3Uri", # required
+    #       source_format: "CCDA", # accepts CCDA, CSV
+    #     },
+    #     output_data_config: { # required
+    #       s3_configuration: { # required
+    #         s3_uri: "DataTransformationS3Uri", # required
+    #         kms_key_id: "KmsKeyId", # required
+    #       },
+    #     },
+    #     data_access_role_arn: "DataTransformationIamRoleArn", # required
+    #     client_token: "ClientToken", # required
+    #     job_name: "DataTransformationJobName",
+    #     profile_id: "ProfileIdString", # required
+    #     drift_detection_enabled: false,
+    #     provenance_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "QUEUED", "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartDataTransformationJob AWS API Documentation
+    #
+    # @overload start_data_transformation_job(params = {})
+    # @param [Hash] params ({})
+    def start_data_transformation_job(params = {}, options = {})
+      req = build_request(:start_data_transformation_job, params)
       req.send_request(options)
     end
 
@@ -1111,6 +1667,15 @@ module Aws::HealthLake
     # @option params [String] :validation_level
     #   The validation level of the import job.
     #
+    # @option params [String] :profile_id
+    #   A bounded-length string value.
+    #
+    # @option params [String] :input_format
+    #   A bounded-length string value.
+    #
+    # @option params [Boolean] :drift_detection_enabled
+    #   A boolean value.
+    #
     # @return [Types::StartFHIRImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartFHIRImportJobResponse#job_id #job_id} => String
@@ -1134,6 +1699,9 @@ module Aws::HealthLake
     #     data_access_role_arn: "IamRoleArn", # required
     #     client_token: "ClientTokenString",
     #     validation_level: "strict", # accepts strict, structure-only, minimal
+    #     profile_id: "BoundedLengthString",
+    #     input_format: "BoundedLengthString",
+    #     drift_detection_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1211,6 +1779,55 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
+    # Updates the DRAFT version (version 0) of a data transformation profile
+    # with new profile content. The update replaces all existing DRAFT
+    # content.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile to update.
+    #
+    # @option params [required, Hash<String,String>] :profile_mapping
+    #   The new profile content for the DRAFT version. This is a full
+    #   replacement of all profile files.
+    #
+    # @option params [String] :change_description
+    #   A description of what changed in this update.
+    #
+    # @return [Types::UpdateDataTransformationProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataTransformationProfileResponse#profile_id #profile_id} => String
+    #   * {Types::UpdateDataTransformationProfileResponse#source_format #source_format} => String
+    #   * {Types::UpdateDataTransformationProfileResponse#target_format #target_format} => String
+    #   * {Types::UpdateDataTransformationProfileResponse#profile_name #profile_name} => String
+    #   * {Types::UpdateDataTransformationProfileResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_transformation_profile({
+    #     profile_id: "ProfileIdString", # required
+    #     profile_mapping: { # required
+    #       "ProfileMappingKey" => "ProfileMappingValue",
+    #     },
+    #     change_description: "ChangeDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #   resp.source_format #=> String, one of "CCDA", "CSV"
+    #   resp.target_format #=> String, one of "FHIR_R4"
+    #   resp.profile_name #=> String
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UpdateDataTransformationProfile AWS API Documentation
+    #
+    # @overload update_data_transformation_profile(params = {})
+    # @param [Hash] params ({})
+    def update_data_transformation_profile(params = {}, options = {})
+      req = build_request(:update_data_transformation_profile, params)
+      req.send_request(options)
+    end
+
     # Update the properties of a FHIR-enabled data store.
     #
     # @option params [required, String] :datastore_id
@@ -1219,12 +1836,12 @@ module Aws::HealthLake
     # @option params [String] :datastore_name
     #   The data store name.
     #
+    # @option params [Types::AnalyticsConfiguration] :analytics_configuration
+    #   The analytics configuration for the data store.
+    #
     # @option params [Types::NlpConfiguration] :nlp_configuration
     #   The natural language processing (NLP) configuration for the data
     #   store.
-    #
-    # @option params [Types::AnalyticsConfiguration] :analytics_configuration
-    #   The analytics configuration for the data store.
     #
     # @option params [Types::ProfileConfiguration] :profile_configuration
     #   The profile configuration for the data store.
@@ -1241,14 +1858,14 @@ module Aws::HealthLake
     #   resp = client.update_fhir_datastore({
     #     datastore_id: "DatastoreId", # required
     #     datastore_name: "DatastoreName",
-    #     nlp_configuration: {
-    #       status: "ENABLED", # accepts ENABLED, DISABLED, ENABLING, DISABLING
-    #     },
     #     analytics_configuration: {
     #       status: "ENABLED", # accepts ENABLED, ENABLING, DISABLED, DISABLING, PAUSING, PAUSED
     #     },
+    #     nlp_configuration: {
+    #       status: "ENABLED", # accepts ENABLED, ENABLING, DISABLED, DISABLING
+    #     },
     #     profile_configuration: {
-    #       default_profiles: ["String"],
+    #       default_profiles: ["HealthLakeString"],
     #     },
     #     identity_provider_configuration: {
     #       authorization_strategy: "SMART_ON_FHIR_V1", # required, accepts SMART_ON_FHIR_V1, SMART_ON_FHIR, AWS_AUTH
@@ -1276,7 +1893,7 @@ module Aws::HealthLake
     #   resp.datastore_properties.identity_provider_configuration.idp_lambda_arn #=> String
     #   resp.datastore_properties.error_cause.error_message #=> String
     #   resp.datastore_properties.error_cause.error_category #=> String, one of "RETRYABLE_ERROR", "NON_RETRYABLE_ERROR"
-    #   resp.datastore_properties.nlp_configuration.status #=> String, one of "ENABLED", "DISABLED", "ENABLING", "DISABLING"
+    #   resp.datastore_properties.nlp_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
     #   resp.datastore_properties.analytics_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PAUSING", "PAUSED"
     #   resp.datastore_properties.profile_configuration.default_profiles #=> Array
     #   resp.datastore_properties.profile_configuration.default_profiles[0] #=> String
@@ -1287,6 +1904,57 @@ module Aws::HealthLake
     # @param [Hash] params ({})
     def update_fhir_datastore(params = {}, options = {})
       req = build_request(:update_fhir_datastore, params)
+      req.send_request(options)
+    end
+
+    # Updates a data transformation profile using chat-based interaction
+    # with an agent. Supports multi-turn conversations for iteratively
+    # customizing profiles.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile to update via the agent.
+    #
+    # @option params [required, String] :source_format
+    #   The source data format for the transformation.
+    #
+    # @option params [required, Types::AgentInputMessage] :input_message
+    #   The message to send to the agent.
+    #
+    # @option params [String] :conversation_id
+    #   The conversation identifier for multi-turn interactions. Omit to start
+    #   a new conversation.
+    #
+    # @return [Types::UpdateProfileWithAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProfileWithAgentResponse#agent_response #agent_response} => Types::AgentOutputMessage
+    #   * {Types::UpdateProfileWithAgentResponse#conversation_id #conversation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_profile_with_agent({
+    #     profile_id: "ProfileIdString", # required
+    #     source_format: "CCDA", # required, accepts CCDA, CSV
+    #     input_message: { # required
+    #       body: "AgentMessageString", # required
+    #       type: "normal", # required, accepts normal, confirmation_response
+    #     },
+    #     conversation_id: "ConversationIdString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_response.body #=> String
+    #   resp.agent_response.type #=> String, one of "INITIAL_GREETING", "normal", "confirmation", "complete", "error", "options", "choices"
+    #   resp.agent_response.options_list #=> Array
+    #   resp.agent_response.options_list[0] #=> String
+    #   resp.conversation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UpdateProfileWithAgent AWS API Documentation
+    #
+    # @overload update_profile_with_agent(params = {})
+    # @param [Hash] params ({})
+    def update_profile_with_agent(params = {}, options = {})
+      req = build_request(:update_profile_with_agent, params)
       req.send_request(options)
     end
 
@@ -1308,7 +1976,7 @@ module Aws::HealthLake
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1374,12 +2042,13 @@ module Aws::HealthLake
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name               | params                            | :delay   | :max_attempts |
-    # | ------------------------- | --------------------------------- | -------- | ------------- |
-    # | fhir_datastore_active     | {Client#describe_fhir_datastore}  | 60       | 360           |
-    # | fhir_datastore_deleted    | {Client#describe_fhir_datastore}  | 120      | 360           |
-    # | fhir_export_job_completed | {Client#describe_fhir_export_job} | 120      | 360           |
-    # | fhir_import_job_completed | {Client#describe_fhir_import_job} | 120      | 720           |
+    # | waiter_name                       | params                                    | :delay   | :max_attempts |
+    # | --------------------------------- | ----------------------------------------- | -------- | ------------- |
+    # | data_transformation_job_completed | {Client#describe_data_transformation_job} | 30       | 5             |
+    # | fhir_datastore_active             | {Client#describe_fhir_datastore}          | 60       | 5             |
+    # | fhir_datastore_deleted            | {Client#describe_fhir_datastore}          | 120      | 5             |
+    # | fhir_export_job_completed         | {Client#describe_fhir_export_job}         | 120      | 5             |
+    # | fhir_import_job_completed         | {Client#describe_fhir_import_job}         | 120      | 5             |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -1430,6 +2099,7 @@ module Aws::HealthLake
 
     def waiters
       {
+        data_transformation_job_completed: Waiters::DataTransformationJobCompleted,
         fhir_datastore_active: Waiters::FHIRDatastoreActive,
         fhir_datastore_deleted: Waiters::FHIRDatastoreDeleted,
         fhir_export_job_completed: Waiters::FHIRExportJobCompleted,

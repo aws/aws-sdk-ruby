@@ -171,6 +171,12 @@ module Aws
                                ],
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
                                ?with_express_configuration: bool,
+                               ?associated_roles: Array[
+                                 {
+                                   role_arn: ::String,
+                                   feature_name: ::String?
+                                 }
+                               ],
                                ?source_region: ::String
                              ) -> DBCluster
                            | (?Hash[Symbol, untyped]) -> DBCluster

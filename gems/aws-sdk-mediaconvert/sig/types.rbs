@@ -513,7 +513,7 @@ module Aws::MediaConvert
 
     class Container
       attr_accessor duration: ::Float
-      attr_accessor format: ("mp4" | "quicktime" | "matroska" | "webm" | "mxf" | "wave" | "avi" | "mpegts" | "mpegps")
+      attr_accessor format: ("mp4" | "quicktime" | "matroska" | "webm" | "mxf" | "wave" | "avi" | "mpegts" | "mpegps" | "mp3")
       attr_accessor start_timecode: ::String
       attr_accessor tracks: ::Array[Types::Track]
       SENSITIVE: []
@@ -759,6 +759,13 @@ module Aws::MediaConvert
     class DolbyVisionLevel6Metadata
       attr_accessor max_cll: ::Integer
       attr_accessor max_fall: ::Integer
+      SENSITIVE: []
+    end
+
+    class DurationControl
+      attr_accessor integer_duration_maximum_compression_denominator: ::Integer
+      attr_accessor integer_duration_maximum_compression_numerator: ::Integer
+      attr_accessor integer_duration_trim_threshold_milliseconds: ::Integer
       SENSITIVE: []
     end
 
@@ -1081,6 +1088,7 @@ module Aws::MediaConvert
       attr_accessor dynamic_sub_gop: ("ADAPTIVE" | "STATIC")
       attr_accessor end_of_stream_markers: ("INCLUDE" | "SUPPRESS")
       attr_accessor entropy_encoding: ("CABAC" | "CAVLC")
+      attr_accessor explicit_weighted_prediction: ("DISABLED" | "ENABLED")
       attr_accessor field_encoding: ("PAFF" | "FORCE_FIELD" | "MBAFF")
       attr_accessor flicker_adaptive_quantization: ("DISABLED" | "ENABLED")
       attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
@@ -2572,6 +2580,7 @@ module Aws::MediaConvert
       attr_accessor color_corrector: Types::ColorCorrector
       attr_accessor deinterlacer: Types::Deinterlacer
       attr_accessor dolby_vision: Types::DolbyVision
+      attr_accessor duration_control: Types::DurationControl
       attr_accessor hdr_10_plus: Types::Hdr10Plus
       attr_accessor image_inserter: Types::ImageInserter
       attr_accessor noise_reducer: Types::NoiseReducer

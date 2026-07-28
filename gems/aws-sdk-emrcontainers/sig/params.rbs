@@ -31,7 +31,8 @@ module Aws
         log_stream_name_prefix: ::String?
       }?,
       s3_monitoring_configuration: {
-        log_uri: ::String
+        log_uri: ::String,
+        encryption_key_arn: ::String?
       }?,
       container_log_rotation_configuration: {
         rotation_size: ::String,

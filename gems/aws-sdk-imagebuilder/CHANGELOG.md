@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.108.0 (2026-06-29)
+------------------
+
+* Feature - Adds support for AMI watermarks in Image Builder.
+
 1.107.0 (2026-05-27)
 ------------------
 

@@ -157,6 +157,7 @@ module Aws::TimestreamInfluxDB
     PercentOrAbsoluteLong = Shapes::UnionShape.new(name: 'PercentOrAbsoluteLong')
     PercentOrAbsoluteLongAbsoluteLong = Shapes::IntegerShape.new(name: 'PercentOrAbsoluteLongAbsoluteLong')
     PercentOrAbsoluteLongPercentString = Shapes::StringShape.new(name: 'PercentOrAbsoluteLongPercentString')
+    PluginRepositorySecretArn = Shapes::StringShape.new(name: 'PluginRepositorySecretArn')
     Port = Shapes::IntegerShape.new(name: 'Port')
     RebootDbClusterInput = Shapes::StructureShape.new(name: 'RebootDbClusterInput')
     RebootDbClusterInputInstanceIdsList = Shapes::ListShape.new(name: 'RebootDbClusterInputInstanceIdsList')
@@ -530,6 +531,8 @@ module Aws::TimestreamInfluxDB
     InfluxDBv3CoreParameters.add_member(:retention_check_interval, Shapes::ShapeRef.new(shape: Duration, location_name: "retentionCheckInterval"))
     InfluxDBv3CoreParameters.add_member(:delete_grace_period, Shapes::ShapeRef.new(shape: Duration, location_name: "deleteGracePeriod"))
     InfluxDBv3CoreParameters.add_member(:hard_delete_default_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "hardDeleteDefaultDuration"))
+    InfluxDBv3CoreParameters.add_member(:plugin_repository_url, Shapes::ShapeRef.new(shape: String, location_name: "pluginRepositoryUrl"))
+    InfluxDBv3CoreParameters.add_member(:plugin_repository_secret_arn, Shapes::ShapeRef.new(shape: PluginRepositorySecretArn, location_name: "pluginRepositorySecretArn"))
     InfluxDBv3CoreParameters.struct_class = Types::InfluxDBv3CoreParameters
 
     InfluxDBv3EnterpriseParameters.add_member(:query_file_limit, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersQueryFileLimitInteger, location_name: "queryFileLimit"))
@@ -571,6 +574,8 @@ module Aws::TimestreamInfluxDB
     InfluxDBv3EnterpriseParameters.add_member(:retention_check_interval, Shapes::ShapeRef.new(shape: Duration, location_name: "retentionCheckInterval"))
     InfluxDBv3EnterpriseParameters.add_member(:delete_grace_period, Shapes::ShapeRef.new(shape: Duration, location_name: "deleteGracePeriod"))
     InfluxDBv3EnterpriseParameters.add_member(:hard_delete_default_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "hardDeleteDefaultDuration"))
+    InfluxDBv3EnterpriseParameters.add_member(:plugin_repository_url, Shapes::ShapeRef.new(shape: String, location_name: "pluginRepositoryUrl"))
+    InfluxDBv3EnterpriseParameters.add_member(:plugin_repository_secret_arn, Shapes::ShapeRef.new(shape: PluginRepositorySecretArn, location_name: "pluginRepositorySecretArn"))
     InfluxDBv3EnterpriseParameters.add_member(:ingest_query_instances, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersIngestQueryInstancesInteger, required: true, location_name: "ingestQueryInstances"))
     InfluxDBv3EnterpriseParameters.add_member(:query_only_instances, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersQueryOnlyInstancesInteger, required: true, location_name: "queryOnlyInstances"))
     InfluxDBv3EnterpriseParameters.add_member(:dedicated_compactor, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "dedicatedCompactor"))

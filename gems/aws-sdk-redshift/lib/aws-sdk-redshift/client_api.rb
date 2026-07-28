@@ -151,6 +151,8 @@ module Aws::Redshift
     CreateHsmConfigurationMessage = Shapes::StructureShape.new(name: 'CreateHsmConfigurationMessage')
     CreateHsmConfigurationResult = Shapes::StructureShape.new(name: 'CreateHsmConfigurationResult')
     CreateIntegrationMessage = Shapes::StructureShape.new(name: 'CreateIntegrationMessage')
+    CreateQev2IdcApplicationMessage = Shapes::StructureShape.new(name: 'CreateQev2IdcApplicationMessage')
+    CreateQev2IdcApplicationResult = Shapes::StructureShape.new(name: 'CreateQev2IdcApplicationResult')
     CreateRedshiftIdcApplicationMessage = Shapes::StructureShape.new(name: 'CreateRedshiftIdcApplicationMessage')
     CreateRedshiftIdcApplicationResult = Shapes::StructureShape.new(name: 'CreateRedshiftIdcApplicationResult')
     CreateScheduledActionMessage = Shapes::StructureShape.new(name: 'CreateScheduledActionMessage')
@@ -195,6 +197,7 @@ module Aws::Redshift
     DeleteHsmClientCertificateMessage = Shapes::StructureShape.new(name: 'DeleteHsmClientCertificateMessage')
     DeleteHsmConfigurationMessage = Shapes::StructureShape.new(name: 'DeleteHsmConfigurationMessage')
     DeleteIntegrationMessage = Shapes::StructureShape.new(name: 'DeleteIntegrationMessage')
+    DeleteQev2IdcApplicationMessage = Shapes::StructureShape.new(name: 'DeleteQev2IdcApplicationMessage')
     DeleteRedshiftIdcApplicationMessage = Shapes::StructureShape.new(name: 'DeleteRedshiftIdcApplicationMessage')
     DeleteResourcePolicyMessage = Shapes::StructureShape.new(name: 'DeleteResourcePolicyMessage')
     DeleteScheduledActionMessage = Shapes::StructureShape.new(name: 'DeleteScheduledActionMessage')
@@ -246,6 +249,8 @@ module Aws::Redshift
     DescribeOrderableClusterOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOrderableClusterOptionsMessage')
     DescribePartnersInputMessage = Shapes::StructureShape.new(name: 'DescribePartnersInputMessage')
     DescribePartnersOutputMessage = Shapes::StructureShape.new(name: 'DescribePartnersOutputMessage')
+    DescribeQev2IdcApplicationsMessage = Shapes::StructureShape.new(name: 'DescribeQev2IdcApplicationsMessage')
+    DescribeQev2IdcApplicationsResult = Shapes::StructureShape.new(name: 'DescribeQev2IdcApplicationsResult')
     DescribeRedshiftIdcApplicationsMessage = Shapes::StructureShape.new(name: 'DescribeRedshiftIdcApplicationsMessage')
     DescribeRedshiftIdcApplicationsResult = Shapes::StructureShape.new(name: 'DescribeRedshiftIdcApplicationsResult')
     DescribeReservedNodeExchangeStatusInputMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodeExchangeStatusInputMessage')
@@ -434,6 +439,8 @@ module Aws::Redshift
     ModifyEventSubscriptionResult = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionResult')
     ModifyIntegrationMessage = Shapes::StructureShape.new(name: 'ModifyIntegrationMessage')
     ModifyLakehouseConfigurationMessage = Shapes::StructureShape.new(name: 'ModifyLakehouseConfigurationMessage')
+    ModifyQev2IdcApplicationMessage = Shapes::StructureShape.new(name: 'ModifyQev2IdcApplicationMessage')
+    ModifyQev2IdcApplicationResult = Shapes::StructureShape.new(name: 'ModifyQev2IdcApplicationResult')
     ModifyRedshiftIdcApplicationMessage = Shapes::StructureShape.new(name: 'ModifyRedshiftIdcApplicationMessage')
     ModifyRedshiftIdcApplicationResult = Shapes::StructureShape.new(name: 'ModifyRedshiftIdcApplicationResult')
     ModifyScheduledActionMessage = Shapes::StructureShape.new(name: 'ModifyScheduledActionMessage')
@@ -481,6 +488,11 @@ module Aws::Redshift
     PurchaseReservedNodeOfferingResult = Shapes::StructureShape.new(name: 'PurchaseReservedNodeOfferingResult')
     PutResourcePolicyMessage = Shapes::StructureShape.new(name: 'PutResourcePolicyMessage')
     PutResourcePolicyResult = Shapes::StructureShape.new(name: 'PutResourcePolicyResult')
+    Qev2IdcApplication = Shapes::StructureShape.new(name: 'Qev2IdcApplication')
+    Qev2IdcApplicationAlreadyExistsFault = Shapes::StructureShape.new(name: 'Qev2IdcApplicationAlreadyExistsFault', error: {"code" => "Qev2IdcApplicationAlreadyExists", "httpStatusCode" => 400, "senderFault" => true})
+    Qev2IdcApplicationList = Shapes::ListShape.new(name: 'Qev2IdcApplicationList')
+    Qev2IdcApplicationName = Shapes::StringShape.new(name: 'Qev2IdcApplicationName')
+    Qev2IdcApplicationNotExistsFault = Shapes::StructureShape.new(name: 'Qev2IdcApplicationNotExistsFault', error: {"code" => "Qev2IdcApplicationNotExists", "httpStatusCode" => 404, "senderFault" => true})
     ReadWriteAccess = Shapes::StructureShape.new(name: 'ReadWriteAccess')
     RebootClusterMessage = Shapes::StructureShape.new(name: 'RebootClusterMessage')
     RebootClusterResult = Shapes::StructureShape.new(name: 'RebootClusterResult')
@@ -1210,6 +1222,15 @@ module Aws::Redshift
     CreateIntegrationMessage.add_member(:description, Shapes::ShapeRef.new(shape: IntegrationDescription, location_name: "Description"))
     CreateIntegrationMessage.struct_class = Types::CreateIntegrationMessage
 
+    CreateQev2IdcApplicationMessage.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IdcInstanceArn"))
+    CreateQev2IdcApplicationMessage.add_member(:qev_2_idc_application_name, Shapes::ShapeRef.new(shape: Qev2IdcApplicationName, required: true, location_name: "Qev2IdcApplicationName"))
+    CreateQev2IdcApplicationMessage.add_member(:idc_display_name, Shapes::ShapeRef.new(shape: IdcDisplayNameString, required: true, location_name: "IdcDisplayName"))
+    CreateQev2IdcApplicationMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateQev2IdcApplicationMessage.struct_class = Types::CreateQev2IdcApplicationMessage
+
+    CreateQev2IdcApplicationResult.add_member(:qev_2_idc_application, Shapes::ShapeRef.new(shape: Qev2IdcApplication, location_name: "Qev2IdcApplication"))
+    CreateQev2IdcApplicationResult.struct_class = Types::CreateQev2IdcApplicationResult
+
     CreateRedshiftIdcApplicationMessage.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IdcInstanceArn"))
     CreateRedshiftIdcApplicationMessage.add_member(:redshift_idc_application_name, Shapes::ShapeRef.new(shape: RedshiftIdcApplicationName, required: true, location_name: "RedshiftIdcApplicationName"))
     CreateRedshiftIdcApplicationMessage.add_member(:identity_namespace, Shapes::ShapeRef.new(shape: IdentityNamespaceString, location_name: "IdentityNamespace"))
@@ -1374,6 +1395,9 @@ module Aws::Redshift
 
     DeleteIntegrationMessage.add_member(:integration_arn, Shapes::ShapeRef.new(shape: IntegrationArn, required: true, location_name: "IntegrationArn"))
     DeleteIntegrationMessage.struct_class = Types::DeleteIntegrationMessage
+
+    DeleteQev2IdcApplicationMessage.add_member(:qev_2_idc_application_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Qev2IdcApplicationArn"))
+    DeleteQev2IdcApplicationMessage.struct_class = Types::DeleteQev2IdcApplicationMessage
 
     DeleteRedshiftIdcApplicationMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RedshiftIdcApplicationArn"))
     DeleteRedshiftIdcApplicationMessage.struct_class = Types::DeleteRedshiftIdcApplicationMessage
@@ -1622,6 +1646,15 @@ module Aws::Redshift
 
     DescribePartnersOutputMessage.add_member(:partner_integration_info_list, Shapes::ShapeRef.new(shape: PartnerIntegrationInfoList, location_name: "PartnerIntegrationInfoList"))
     DescribePartnersOutputMessage.struct_class = Types::DescribePartnersOutputMessage
+
+    DescribeQev2IdcApplicationsMessage.add_member(:qev_2_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "Qev2IdcApplicationArn"))
+    DescribeQev2IdcApplicationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeQev2IdcApplicationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeQev2IdcApplicationsMessage.struct_class = Types::DescribeQev2IdcApplicationsMessage
+
+    DescribeQev2IdcApplicationsResult.add_member(:qev_2_idc_applications, Shapes::ShapeRef.new(shape: Qev2IdcApplicationList, location_name: "Qev2IdcApplications"))
+    DescribeQev2IdcApplicationsResult.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeQev2IdcApplicationsResult.struct_class = Types::DescribeQev2IdcApplicationsResult
 
     DescribeRedshiftIdcApplicationsMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "RedshiftIdcApplicationArn"))
     DescribeRedshiftIdcApplicationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -2288,6 +2321,13 @@ module Aws::Redshift
     ModifyLakehouseConfigurationMessage.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DryRun"))
     ModifyLakehouseConfigurationMessage.struct_class = Types::ModifyLakehouseConfigurationMessage
 
+    ModifyQev2IdcApplicationMessage.add_member(:qev_2_idc_application_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Qev2IdcApplicationArn"))
+    ModifyQev2IdcApplicationMessage.add_member(:idc_display_name, Shapes::ShapeRef.new(shape: IdcDisplayNameString, location_name: "IdcDisplayName"))
+    ModifyQev2IdcApplicationMessage.struct_class = Types::ModifyQev2IdcApplicationMessage
+
+    ModifyQev2IdcApplicationResult.add_member(:qev_2_idc_application, Shapes::ShapeRef.new(shape: Qev2IdcApplication, location_name: "Qev2IdcApplication"))
+    ModifyQev2IdcApplicationResult.struct_class = Types::ModifyQev2IdcApplicationResult
+
     ModifyRedshiftIdcApplicationMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RedshiftIdcApplicationArn"))
     ModifyRedshiftIdcApplicationMessage.add_member(:identity_namespace, Shapes::ShapeRef.new(shape: IdentityNamespaceString, location_name: "IdentityNamespace"))
     ModifyRedshiftIdcApplicationMessage.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamRoleArn"))
@@ -2452,6 +2492,21 @@ module Aws::Redshift
 
     PutResourcePolicyResult.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
     PutResourcePolicyResult.struct_class = Types::PutResourcePolicyResult
+
+    Qev2IdcApplication.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "IdcInstanceArn"))
+    Qev2IdcApplication.add_member(:qev_2_idc_application_name, Shapes::ShapeRef.new(shape: Qev2IdcApplicationName, location_name: "Qev2IdcApplicationName"))
+    Qev2IdcApplication.add_member(:qev_2_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "Qev2IdcApplicationArn"))
+    Qev2IdcApplication.add_member(:idc_managed_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "IdcManagedApplicationArn"))
+    Qev2IdcApplication.add_member(:idc_onboard_status, Shapes::ShapeRef.new(shape: String, location_name: "IdcOnboardStatus"))
+    Qev2IdcApplication.add_member(:idc_display_name, Shapes::ShapeRef.new(shape: IdcDisplayNameString, location_name: "IdcDisplayName"))
+    Qev2IdcApplication.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Qev2IdcApplication.struct_class = Types::Qev2IdcApplication
+
+    Qev2IdcApplicationAlreadyExistsFault.struct_class = Types::Qev2IdcApplicationAlreadyExistsFault
+
+    Qev2IdcApplicationList.member = Shapes::ShapeRef.new(shape: Qev2IdcApplication)
+
+    Qev2IdcApplicationNotExistsFault.struct_class = Types::Qev2IdcApplicationNotExistsFault
 
     ReadWriteAccess.add_member(:authorization, Shapes::ShapeRef.new(shape: ServiceAuthorization, required: true, location_name: "Authorization"))
     ReadWriteAccess.struct_class = Types::ReadWriteAccess
@@ -3441,6 +3496,18 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
+      api.add_operation(:create_qev_2_idc_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateQev2IdcApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateQev2IdcApplicationMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateQev2IdcApplicationResult)
+        o.errors << Shapes::ShapeRef.new(shape: Qev2IdcApplicationAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
+      end)
+
       api.add_operation(:create_redshift_idc_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRedshiftIdcApplication"
         o.http_method = "POST"
@@ -3677,6 +3744,18 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:delete_qev_2_idc_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQev2IdcApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQev2IdcApplicationMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: Qev2IdcApplicationNotExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
       end)
 
       api.add_operation(:delete_redshift_idc_application, Seahorse::Model::Operation.new.tap do |o|
@@ -4186,6 +4265,24 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:describe_qev_2_idc_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeQev2IdcApplications"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeQev2IdcApplicationsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeQev2IdcApplicationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: Qev2IdcApplicationNotExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_redshift_idc_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -4748,6 +4845,18 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationNotExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
+      end)
+
+      api.add_operation(:modify_qev_2_idc_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyQev2IdcApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyQev2IdcApplicationMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyQev2IdcApplicationResult)
+        o.errors << Shapes::ShapeRef.new(shape: Qev2IdcApplicationNotExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
       end)
 

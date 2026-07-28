@@ -675,7 +675,9 @@ module Aws::SecurityHub
     #   {
     #     standards_subscriptions: [
     #       {
+    #         provider: "AWS", 
     #         standards_arn: "arn:aws:securityhub:eu-central-1::standards/pci-dss/v/3.2.1", 
+    #         standards_controls_updatable: "NOT_READY_FOR_UPDATES", 
     #         standards_input: {
     #         }, 
     #         standards_status: "DELETING", 
@@ -699,7 +701,8 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_input["NonEmptyString"] #=> String
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
-    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "INTERNAL_ERROR"
+    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"
+    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDisableStandards AWS API Documentation
     #
@@ -745,7 +748,9 @@ module Aws::SecurityHub
     #   {
     #     standards_subscriptions: [
     #       {
+    #         provider: "AWS", 
     #         standards_arn: "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1", 
+    #         standards_controls_updatable: "NOT_READY_FOR_UPDATES", 
     #         standards_input: {
     #         }, 
     #         standards_status: "PENDING", 
@@ -776,7 +781,8 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_input["NonEmptyString"] #=> String
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
-    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "INTERNAL_ERROR"
+    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"
+    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchEnableStandards AWS API Documentation
     #
@@ -1045,6 +1051,15 @@ module Aws::SecurityHub
     #   resp.rules[0].criteria.aws_account_name #=> Array
     #   resp.rules[0].criteria.aws_account_name[0].value #=> String
     #   resp.rules[0].criteria.aws_account_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
+    #   resp.rules[0].criteria.resource_provider #=> Array
+    #   resp.rules[0].criteria.resource_provider[0].value #=> String
+    #   resp.rules[0].criteria.resource_provider[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
+    #   resp.rules[0].criteria.resource_owner_account_id #=> Array
+    #   resp.rules[0].criteria.resource_owner_account_id[0].value #=> String
+    #   resp.rules[0].criteria.resource_owner_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
+    #   resp.rules[0].criteria.resource_owner_org_id #=> Array
+    #   resp.rules[0].criteria.resource_owner_org_id[0].value #=> String
+    #   resp.rules[0].criteria.resource_owner_org_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
     #   resp.rules[0].actions #=> Array
     #   resp.rules[0].actions[0].type #=> String, one of "FINDING_FIELDS_UPDATE"
     #   resp.rules[0].actions[0].finding_fields_update.note.text #=> String
@@ -1221,6 +1236,7 @@ module Aws::SecurityHub
     #             value_type: "DEFAULT", 
     #           }, 
     #         }, 
+    #         provider: "AWS", 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation", 
     #         security_control_arn: "arn:aws:securityhub:us-west-2:123456789012:security-control/ACM.1", 
     #         security_control_id: "ACM.1", 
@@ -1240,6 +1256,7 @@ module Aws::SecurityHub
     #             value_type: "CUSTOM", 
     #           }, 
     #         }, 
+    #         provider: "AWS", 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation", 
     #         security_control_arn: "arn:aws:securityhub:us-west-2:123456789012:security-control/APIGateway.1", 
     #         security_control_id: "APIGateway.1", 
@@ -1282,6 +1299,7 @@ module Aws::SecurityHub
     #   resp.security_controls[0].parameters["NonEmptyString"].value.enum_list #=> Array
     #   resp.security_controls[0].parameters["NonEmptyString"].value.enum_list[0] #=> String
     #   resp.security_controls[0].last_update_reason #=> String
+    #   resp.security_controls[0].provider #=> String, one of "AWS", "Azure"
     #   resp.unprocessed_ids #=> Array
     #   resp.unprocessed_ids[0].security_control_id #=> String
     #   resp.unprocessed_ids[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "RESOURCE_NOT_FOUND", "LIMIT_EXCEEDED"
@@ -1845,6 +1863,24 @@ module Aws::SecurityHub
     #             },
     #           ],
     #           aws_account_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #             },
+    #           ],
+    #           resource_provider: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #             },
+    #           ],
+    #           resource_owner_account_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #             },
+    #           ],
+    #           resource_owner_org_id: [
     #             {
     #               value: "NonEmptyString",
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -2820,6 +2856,24 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
     #         },
     #       ],
+    #       resource_provider: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
+    #       resource_owner_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
+    #       resource_owner_org_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
     #     },
     #     actions: [ # required
     #       {
@@ -2915,7 +2969,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
+    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -3212,6 +3266,103 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Creates a connector to a third-party cloud provider in Security Hub
+    # CSPM. A connector establishes a connection between Security Hub CSPM
+    # and a third-party cloud provider, enabling Security Hub CSPM to ingest
+    # security findings and resource data from the connected environment.
+    #
+    # @option params [required, String] :name
+    #   The name of the connector. Must be unique within the account.
+    #
+    # @option params [String] :description
+    #   The description of the connector.
+    #
+    # @option params [required, Types::CspmProviderConfiguration] :provider
+    #   The configuration for the cloud provider to connect to. Currently
+    #   supports Azure.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to the connector resource.
+    #
+    # @option params [String] :client_token
+    #   A unique identifier used to ensure idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectorResponse#connector_arn #connector_arn} => String
+    #   * {Types::CreateConnectorResponse#connector_id #connector_id} => String
+    #   * {Types::CreateConnectorResponse#connector_status #connector_status} => String
+    #   * {Types::CreateConnectorResponse#enablement_status #enablement_status} => String
+    #
+    #
+    # @example Example: To create a CSPM connector
+    #
+    #   # This operation creates a CSPM connector to connect Security Hub to an Azure environment.
+    #
+    #   resp = client.create_connector({
+    #     description: "Connector for Azure tenant monitoring", 
+    #     name: "MyAzureConnector", 
+    #     provider: {
+    #       azure: {
+    #         aws_config_connector_arn: "arn:aws:config:us-east-1:123456789012:connector/azure-connector-1234", 
+    #         azure_regions: [
+    #           "eastus", 
+    #           "westus2", 
+    #         ], 
+    #         scope_configuration: {
+    #           scope_type: "TENANT", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     connector_arn: "arn:aws:securityhub:us-east-1:123456789012:connector/cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     enablement_status: "PENDING_ENABLEMENT", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connector({
+    #     name: "NonEmptyString", # required
+    #     description: "NonEmptyString",
+    #     provider: { # required
+    #       azure: {
+    #         aws_config_connector_arn: "NonEmptyString", # required
+    #         scope_configuration: { # required
+    #           scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         azure_regions: ["NonEmptyString"], # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_arn #=> String
+    #   resp.connector_id #=> String
+    #   resp.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"
+    #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConnector AWS API Documentation
+    #
+    # @overload create_connector(params = {})
+    # @param [Hash] params ({})
+    def create_connector(params = {}, options = {})
+      req = build_request(:create_connector, params)
+      req.send_request(options)
+    end
+
     # Grants permission to create a connectorV2 based on input parameters.
     #
     # @option params [required, String] :name
@@ -3242,6 +3393,7 @@ module Aws::SecurityHub
     #   * {Types::CreateConnectorV2Response#connector_id #connector_id} => String
     #   * {Types::CreateConnectorV2Response#auth_url #auth_url} => String
     #   * {Types::CreateConnectorV2Response#connector_status #connector_status} => String
+    #   * {Types::CreateConnectorV2Response#enablement_status #enablement_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3256,6 +3408,14 @@ module Aws::SecurityHub
     #         instance_name: "NonEmptyString", # required
     #         secret_arn: "NonEmptyString", # required
     #       },
+    #       azure: {
+    #         aws_config_connector_arn: "NonEmptyString", # required
+    #         scope_configuration: { # required
+    #           scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         azure_regions: ["NonEmptyString"], # required
+    #       },
     #     },
     #     kms_key_arn: "NonEmptyString",
     #     tags: {
@@ -3269,7 +3429,8 @@ module Aws::SecurityHub
     #   resp.connector_arn #=> String
     #   resp.connector_id #=> String
     #   resp.auth_url #=> String
-    #   resp.connector_status #=> String, one of "CONNECTED", "FAILED_TO_CONNECT", "PENDING_CONFIGURATION", "PENDING_AUTHORIZATION"
+    #   resp.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"
+    #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConnectorV2 AWS API Documentation
     #
@@ -4156,6 +4317,24 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
     #         },
     #       ],
+    #       resource_owner_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
+    #       resource_owner_org_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
+    #       resource_provider: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
     #     },
     #     group_by_attribute: "NonEmptyString", # required
     #   })
@@ -4524,18 +4703,68 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Deletes a CSPM connector. When you delete a connector, Security Hub
+    # CSPM stops ingesting findings and resource data from the connected
+    # cloud provider environment.
+    #
+    # @option params [required, String] :connector_id
+    #   The unique identifier of the connector to delete.
+    #
+    # @return [Types::DeleteConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteConnectorResponse#enablement_status #enablement_status} => String
+    #
+    #
+    # @example Example: To delete a CSPM connector
+    #
+    #   # This operation deletes a CSPM connector.
+    #
+    #   resp = client.delete_connector({
+    #     connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     enablement_status: "PENDING_DELETION", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connector({
+    #     connector_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConnector AWS API Documentation
+    #
+    # @overload delete_connector(params = {})
+    # @param [Hash] params ({})
+    def delete_connector(params = {}, options = {})
+      req = build_request(:delete_connector, params)
+      req.send_request(options)
+    end
+
     # Grants permission to delete a connectorV2.
     #
     # @option params [required, String] :connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::DeleteConnectorV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteConnectorV2Response#enablement_status #enablement_status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_connector_v2({
     #     connector_id: "NonEmptyString", # required
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConnectorV2 AWS API Documentation
     #
@@ -5085,11 +5314,15 @@ module Aws::SecurityHub
     #
     #   * {Types::DescribeSecurityHubV2Response#hub_v2_arn #hub_v2_arn} => String
     #   * {Types::DescribeSecurityHubV2Response#subscribed_at #subscribed_at} => String
+    #   * {Types::DescribeSecurityHubV2Response#features #features} => Hash&lt;String,Types::FeatureDetail&gt;
     #
     # @example Response structure
     #
     #   resp.hub_v2_arn #=> String
     #   resp.subscribed_at #=> String
+    #   resp.features #=> Hash
+    #   resp.features["FeatureNameKey"].feature_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.features["FeatureNameKey"].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeSecurityHubV2 AWS API Documentation
     #
@@ -5117,6 +5350,11 @@ module Aws::SecurityHub
     # @option params [Integer] :max_results
     #   The maximum number of standards to return.
     #
+    # @option params [Array<String>] :providers
+    #   A list of cloud providers to filter the standards by. For example,
+    #   specify `Azure` to return only standards that evaluate Azure
+    #   resources.
+    #
     # @return [Types::DescribeStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeStandardsResponse#standards #standards} => Array&lt;Types::Standard&gt;
@@ -5139,25 +5377,83 @@ module Aws::SecurityHub
     #         description: "The AWS Foundational Security Best Practices standard is a set of automated security checks that detect when AWS accounts and deployed resources do not align to security best practices. The standard is defined by AWS security experts. This curated set of controls helps improve your security posture in AWS, and cover AWS's most popular and foundational services.", 
     #         enabled_by_default: true, 
     #         name: "AWS Foundational Security Best Practices v1.0.0", 
+    #         provider: "AWS", 
     #         standards_arn: "arn:aws:securityhub:us-west-1::standards/aws-foundational-security-best-practices/v/1.0.0", 
+    #         standards_managed_by: {
+    #           company: "AWS", 
+    #           product: "Security Hub", 
+    #         }, 
     #       }, 
     #       {
     #         description: "The Center for Internet Security (CIS) AWS Foundations Benchmark v1.2.0 is a set of security configuration best practices for AWS. This Security Hub standard automatically checks for your compliance readiness against a subset of CIS requirements.", 
     #         enabled_by_default: true, 
     #         name: "CIS AWS Foundations Benchmark v1.2.0", 
+    #         provider: "AWS", 
     #         standards_arn: "arn:aws:securityhub:us-west-1::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #         standards_managed_by: {
+    #           company: "AWS", 
+    #           product: "Security Hub", 
+    #         }, 
     #       }, 
     #       {
     #         description: "The Center for Internet Security (CIS) AWS Foundations Benchmark v1.4.0 is a set of security configuration best practices for AWS. This Security Hub standard automatically checks for your compliance readiness against a subset of CIS requirements.", 
     #         enabled_by_default: false, 
     #         name: "CIS AWS Foundations Benchmark v1.4.0", 
+    #         provider: "AWS", 
     #         standards_arn: "arn:aws::securityhub:us-west-1::standards/cis-aws-foundations-benchmark/v/1.4.0", 
+    #         standards_managed_by: {
+    #           company: "AWS", 
+    #           product: "Security Hub", 
+    #         }, 
     #       }, 
     #       {
     #         description: "The Payment Card Industry Data Security Standard (PCI DSS) v3.2.1 is an information security standard for entities that store, process, and/or transmit cardholder data. This Security Hub standard automatically checks for your compliance readiness against a subset of PCI DSS requirements.", 
     #         enabled_by_default: false, 
     #         name: "PCI DSS v3.2.1", 
+    #         provider: "AWS", 
     #         standards_arn: "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1", 
+    #         standards_managed_by: {
+    #           company: "AWS", 
+    #           product: "Security Hub", 
+    #         }, 
+    #       }, 
+    #       {
+    #         description: "The Center for Internet Security (CIS) Microsoft Azure Foundations Benchmark v4.0.0 is a set of security configuration best practices for Azure. This Security Hub standard automatically checks your compliance readiness against a subset of CIS requirements.", 
+    #         enabled_by_default: false, 
+    #         name: "CIS Azure Foundations Benchmark v4.0.0", 
+    #         provider: "Azure", 
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/cis-azure-foundations-benchmark/v/4.0.0", 
+    #         standards_managed_by: {
+    #           company: "AWS", 
+    #           product: "Security Hub", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To get available Azure security standards
+    #
+    #   # The following example returns a list of available security standards from a specified provider.
+    #
+    #   resp = client.describe_standards({
+    #     providers: [
+    #       "Azure", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     standards: [
+    #       {
+    #         description: "The Center for Internet Security (CIS) Microsoft Azure Foundations Benchmark v4.0.0 is a set of security configuration best practices for Azure. This Security Hub standard automatically checks your compliance readiness against a subset of CIS requirements.", 
+    #         enabled_by_default: false, 
+    #         name: "CIS Azure Foundations Benchmark v4.0.0", 
+    #         provider: "Azure", 
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/cis-azure-foundations-benchmark/v/4.0.0", 
+    #         standards_managed_by: {
+    #           company: "AWS", 
+    #           product: "Security Hub", 
+    #         }, 
     #       }, 
     #     ], 
     #   }
@@ -5167,6 +5463,7 @@ module Aws::SecurityHub
     #   resp = client.describe_standards({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     providers: ["AWS"], # accepts AWS, Azure
     #   })
     #
     # @example Response structure
@@ -5176,6 +5473,7 @@ module Aws::SecurityHub
     #   resp.standards[0].name #=> String
     #   resp.standards[0].description #=> String
     #   resp.standards[0].enabled_by_default #=> Boolean
+    #   resp.standards[0].provider #=> String, one of "AWS", "Azure"
     #   resp.standards[0].standards_managed_by.company #=> String
     #   resp.standards[0].standards_managed_by.product #=> String
     #   resp.next_token #=> String
@@ -5409,8 +5707,35 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Disables an opt-in feature for the calling account in the current
+    # Amazon Web Services Region. The operation is idempotent. If the
+    # feature is already disabled, no changes are made. You cannot disable a
+    # feature that is managed by an organization policy.
+    #
+    # @option params [required, String] :feature_name
+    #   The name of the feature to disable.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_security_hub_feature_v2({
+    #     feature_name: "NETWORK_SCANNING", # required, accepts NETWORK_SCANNING
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubFeatureV2 AWS API Documentation
+    #
+    # @overload disable_security_hub_feature_v2(params = {})
+    # @param [Hash] params ({})
+    def disable_security_hub_feature_v2(params = {}, options = {})
+      req = build_request(:disable_security_hub_feature_v2, params)
+      req.send_request(options)
+    end
+
     # Disable the service for the current Amazon Web Services Region or
-    # specified Amazon Web Services Region.
+    # specified Amazon Web Services Region. Disabling the service also
+    # disables all opt-in features that are currently enabled in that
+    # Region.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5707,6 +6032,32 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Enables an opt-in feature for the calling account in the current
+    # Amazon Web Services Region. The service must be enabled before you can
+    # enable a feature. The operation is idempotent. If the feature is
+    # already enabled, no changes are made. You cannot enable a feature that
+    # is managed by an organization policy.
+    #
+    # @option params [required, String] :feature_name
+    #   The name of the feature to enable.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_security_hub_feature_v2({
+    #     feature_name: "NETWORK_SCANNING", # required, accepts NETWORK_SCANNING
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubFeatureV2 AWS API Documentation
+    #
+    # @overload enable_security_hub_feature_v2(params = {})
+    # @param [Hash] params ({})
+    def enable_security_hub_feature_v2(params = {}, options = {})
+      req = build_request(:enable_security_hub_feature_v2, params)
+      req.send_request(options)
+    end
+
     # Enables the service in account for the current Amazon Web Services
     # Region or specified Amazon Web Services Region.
     #
@@ -5876,7 +6227,7 @@ module Aws::SecurityHub
     #   resp.description #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters #=> Array
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters #=> Array
-    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].filter.value #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].filter.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters #=> Array
@@ -6107,6 +6458,98 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Retrieves details for a CSPM connector based on the connector ID.
+    #
+    # @option params [required, String] :connector_id
+    #   The unique identifier of the connector to retrieve.
+    #
+    # @return [Types::GetConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectorResponse#connector_arn #connector_arn} => String
+    #   * {Types::GetConnectorResponse#connector_id #connector_id} => String
+    #   * {Types::GetConnectorResponse#name #name} => String
+    #   * {Types::GetConnectorResponse#description #description} => String
+    #   * {Types::GetConnectorResponse#created_at #created_at} => Time
+    #   * {Types::GetConnectorResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetConnectorResponse#health #health} => Types::CspmHealthCheck
+    #   * {Types::GetConnectorResponse#provider_detail #provider_detail} => Types::CspmProviderDetail
+    #   * {Types::GetConnectorResponse#created_by #created_by} => String
+    #   * {Types::GetConnectorResponse#enablement_status #enablement_status} => String
+    #
+    #
+    # @example Example: To get details of a CSPM connector
+    #
+    #   # This operation retrieves details for a CSPM connector.
+    #
+    #   resp = client.get_connector({
+    #     connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     connector_arn: "arn:aws:securityhub:us-east-1:123456789012:connector/cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     created_at: Time.parse("2026-01-15T10:30:00.000Z"), 
+    #     created_by: "securityhub.amazonaws.com", 
+    #     description: "Connector for Azure tenant monitoring", 
+    #     health: {
+    #       connector_status: "CONNECTED", 
+    #       last_checked_at: Time.parse("2026-05-20T14:00:00.000Z"), 
+    #     }, 
+    #     last_updated_at: Time.parse("2026-05-20T14:00:00.000Z"), 
+    #     name: "MyAzureConnector", 
+    #     provider_detail: {
+    #       azure: {
+    #         aws_config_connector_arn: "arn:aws:config:us-east-1:123456789012:connector/azure-connector-1234", 
+    #         azure_regions: [
+    #           "eastus", 
+    #           "westus2", 
+    #         ], 
+    #         scope_configuration: {
+    #           scope_type: "TENANT", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connector({
+    #     connector_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_arn #=> String
+    #   resp.connector_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.health.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"
+    #   resp.health.message #=> String
+    #   resp.health.last_checked_at #=> Time
+    #   resp.health.issues #=> Array
+    #   resp.health.issues[0].code #=> String, one of "AUTHENTICATION_FAILURE", "STREAM_AUTHORIZATION_FAILURE", "DISCOVERY_FAILURE", "STREAM_LIMIT_EXCEEDED", "STREAM_DISCONNECTED", "RECORDING_FAILURE", "NO_HEALTH_DATA"
+    #   resp.health.issues[0].message #=> String
+    #   resp.provider_detail.azure.aws_config_connector_arn #=> String
+    #   resp.provider_detail.azure.scope_configuration.scope_type #=> String, one of "TENANT", "SUBSCRIPTION"
+    #   resp.provider_detail.azure.scope_configuration.scope_values #=> Array
+    #   resp.provider_detail.azure.scope_configuration.scope_values[0] #=> String
+    #   resp.provider_detail.azure.azure_regions #=> Array
+    #   resp.provider_detail.azure.azure_regions[0] #=> String
+    #   resp.created_by #=> String
+    #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConnector AWS API Documentation
+    #
+    # @overload get_connector(params = {})
+    # @param [Hash] params ({})
+    def get_connector(params = {}, options = {})
+      req = build_request(:get_connector, params)
+      req.send_request(options)
+    end
+
     # Grants permission to retrieve details for a connectorV2 based on
     # connector id.
     #
@@ -6124,6 +6567,8 @@ module Aws::SecurityHub
     #   * {Types::GetConnectorV2Response#last_updated_at #last_updated_at} => Time
     #   * {Types::GetConnectorV2Response#health #health} => Types::HealthCheck
     #   * {Types::GetConnectorV2Response#provider_detail #provider_detail} => Types::ProviderDetail
+    #   * {Types::GetConnectorV2Response#enablement_status #enablement_status} => String
+    #   * {Types::GetConnectorV2Response#enablement_status_reason #enablement_status_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6140,9 +6585,12 @@ module Aws::SecurityHub
     #   resp.kms_key_arn #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
-    #   resp.health.connector_status #=> String, one of "CONNECTED", "FAILED_TO_CONNECT", "PENDING_CONFIGURATION", "PENDING_AUTHORIZATION"
+    #   resp.health.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"
     #   resp.health.message #=> String
     #   resp.health.last_checked_at #=> Time
+    #   resp.health.issues #=> Array
+    #   resp.health.issues[0].code #=> String, one of "AUTHENTICATION_FAILURE", "STREAM_AUTHORIZATION_FAILURE", "DISCOVERY_FAILURE", "STREAM_LIMIT_EXCEEDED", "STREAM_DISCONNECTED", "RECORDING_FAILURE", "NO_HEALTH_DATA"
+    #   resp.health.issues[0].message #=> String
     #   resp.provider_detail.jira_cloud.cloud_id #=> String
     #   resp.provider_detail.jira_cloud.project_key #=> String
     #   resp.provider_detail.jira_cloud.domain #=> String
@@ -6151,6 +6599,14 @@ module Aws::SecurityHub
     #   resp.provider_detail.service_now.instance_name #=> String
     #   resp.provider_detail.service_now.secret_arn #=> String
     #   resp.provider_detail.service_now.auth_status #=> String, one of "ACTIVE", "FAILED"
+    #   resp.provider_detail.azure.aws_config_connector_arn #=> String
+    #   resp.provider_detail.azure.scope_configuration.scope_type #=> String, one of "TENANT", "SUBSCRIPTION"
+    #   resp.provider_detail.azure.scope_configuration.scope_values #=> Array
+    #   resp.provider_detail.azure.scope_configuration.scope_values[0] #=> String
+    #   resp.provider_detail.azure.azure_regions #=> Array
+    #   resp.provider_detail.azure.azure_regions[0] #=> String
+    #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"
+    #   resp.enablement_status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConnectorV2 AWS API Documentation
     #
@@ -6179,6 +6635,11 @@ module Aws::SecurityHub
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
     #
+    # @option params [Array<String>] :providers
+    #   A list of cloud providers to filter the enabled standards by. For
+    #   example, specify `Azure` to return only enabled standards that
+    #   evaluate Azure resources.
+    #
     # @return [Types::GetEnabledStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetEnabledStandardsResponse#standards_subscriptions #standards_subscriptions} => Array&lt;Types::StandardsSubscription&gt;
@@ -6201,6 +6662,7 @@ module Aws::SecurityHub
     #   {
     #     standards_subscriptions: [
     #       {
+    #         provider: "AWS", 
     #         standards_arn: "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1", 
     #         standards_input: {
     #         }, 
@@ -6216,6 +6678,7 @@ module Aws::SecurityHub
     #     standards_subscription_arns: ["NonEmptyString"],
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     providers: ["AWS"], # accepts AWS, Azure
     #   })
     #
     # @example Response structure
@@ -6227,7 +6690,8 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_input["NonEmptyString"] #=> String
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
-    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "INTERNAL_ERROR"
+    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"
+    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandards AWS API Documentation
@@ -6516,7 +6980,7 @@ module Aws::SecurityHub
     #             {
     #               string_filters: [
     #                 {
-    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
+    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #                   filter: {
     #                     value: "NonEmptyString",
     #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -6583,7 +7047,7 @@ module Aws::SecurityHub
     #           ],
     #           composite_operator: "AND", # accepts AND, OR
     #         },
-    #         group_by_field: "activity_name", # required, accepts activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.name, compliance.status, compliance.control, finding_info.title, finding_info.related_events.traits.category, finding_info.types, metadata.product.name, metadata.product.uid, resources.type, resources.uid, severity, status, vulnerabilities.fix_coverage, class_name, vulnerabilities.affected_packages.name, finding_info.analytic.name, compliance.standards, cloud.account.name, vendor_attributes.severity, metadata.product.vendor_name
+    #         group_by_field: "activity_name", # required, accepts activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.name, compliance.status, compliance.control, finding_info.title, finding_info.related_events.traits.category, finding_info.types, metadata.product.name, metadata.product.uid, resources.type, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.uid, severity, status, vulnerabilities.fix_coverage, class_name, vulnerabilities.affected_packages.name, finding_info.analytic.name, compliance.standards, cloud.account.name, vendor_attributes.severity, metadata.product.vendor_name
     #       },
     #     ],
     #     scopes: {
@@ -7471,6 +7935,24 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
     #         },
     #       ],
+    #       resource_owner_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
+    #       resource_owner_org_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
+    #       resource_provider: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
     #     },
     #     sort_criteria: [
     #       {
@@ -7530,7 +8012,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "account_id", # accepts account_id, region, finding_types, finding_status, finding_cve_ids, finding_compliance_status, finding_control_id, finding_class_name, finding_provider, finding_activity_name
+    #               field_name: "account_id", # accepts account_id, region, finding_types, finding_status, finding_cve_ids, finding_compliance_status, finding_control_id, finding_class_name, finding_provider, finding_activity_name, resource_cloud_providers, resource_regions, resource_owner_ids, resource_owner_organization_ids
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -7639,7 +8121,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
+    #               field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -8243,6 +8725,15 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.resource_application_arn #=> Array
     #   resp.insights[0].filters.resource_application_arn[0].value #=> String
     #   resp.insights[0].filters.resource_application_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
+    #   resp.insights[0].filters.resource_owner_account_id #=> Array
+    #   resp.insights[0].filters.resource_owner_account_id[0].value #=> String
+    #   resp.insights[0].filters.resource_owner_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
+    #   resp.insights[0].filters.resource_owner_org_id #=> Array
+    #   resp.insights[0].filters.resource_owner_org_id[0].value #=> String
+    #   resp.insights[0].filters.resource_owner_org_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
+    #   resp.insights[0].filters.resource_provider #=> Array
+    #   resp.insights[0].filters.resource_provider[0].value #=> String
+    #   resp.insights[0].filters.resource_provider[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
     #   resp.insights[0].group_by_attribute #=> String
     #   resp.next_token #=> String
     #
@@ -8493,6 +8984,12 @@ module Aws::SecurityHub
     # organizational units. Only the delegated administrator account can use
     # `Scopes`.
     #
+    # If you set `GroupByField` to `ResourceSubCategory`,
+    # `ResourceInfo.AIDetails.HostResourceType`, or
+    # `ResourceInfo.AIDetails.CanonicalId`, you must include a
+    # `ResourceCategory` string filter with comparison set to `EQUALS` and
+    # value `AI/ML` in the corresponding `ResourceGroupByRule`.
+    #
     # @option params [required, Array<Types::ResourceGroupByRule>] :group_by_rules
     #   How resource statistics should be aggregated and organized in the
     #   response.
@@ -8527,13 +9024,13 @@ module Aws::SecurityHub
     #   resp = client.get_resources_statistics_v2({
     #     group_by_rules: [ # required
     #       {
-    #         group_by_field: "AccountId", # required, accepts AccountId, Region, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType
+    #         group_by_field: "AccountId", # required, accepts AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId
     #         filters: {
     #           composite_filters: [
     #             {
     #               string_filters: [
     #                 {
-    #                   field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, Region, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName
+    #                   field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceGuid, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId
     #                   filter: {
     #                     value: "NonEmptyString",
     #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -8556,7 +9053,7 @@ module Aws::SecurityHub
     #               ],
     #               number_filters: [
     #                 {
-    #                   field_name: "FindingsSummary.TotalFindings", # accepts FindingsSummary.TotalFindings, FindingsSummary.Severities.Other, FindingsSummary.Severities.Fatal, FindingsSummary.Severities.Critical, FindingsSummary.Severities.High, FindingsSummary.Severities.Medium, FindingsSummary.Severities.Low, FindingsSummary.Severities.Informational, FindingsSummary.Severities.Unknown
+    #                   field_name: "FindingsSummary.TotalFindings", # accepts FindingsSummary.TotalFindings, FindingsSummary.Severities.Other, FindingsSummary.Severities.Fatal, FindingsSummary.Severities.Critical, FindingsSummary.Severities.High, FindingsSummary.Severities.Medium, FindingsSummary.Severities.Low, FindingsSummary.Severities.Informational, FindingsSummary.Severities.Unknown, ResourceInfo.AIDetails.SelfHostedAIModelResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount, ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount, ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount, ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount, ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount
     #                   filter: {
     #                     gte: 1.0,
     #                     lte: 1.0,
@@ -8654,7 +9151,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "account_id", # accepts account_id, region, resource_type, resource_category
+    #               field_name: "account_id", # accepts account_id, region, resource_type, resource_category, resource_cloud_provider, resource_region, resource_owner_id, resource_owner_organization_id
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -8705,6 +9202,18 @@ module Aws::SecurityHub
     # or together. When both are provided, `Scopes` narrows the data set
     # first, and then `Filters` refines results within that scoped data set.
     #
+    # For AI/ML resources, the response includes the `ResourceSubCategory`
+    # field. For self-hosted AI resources and their host resources, the
+    # response also includes `ResourceInfo` with AI-specific details.
+    # Self-hosted AI resources use a `ResourceType` with the
+    # `SelfHosted::AI::` prefix, such as `SelfHosted::AI::Model`,
+    # `SelfHosted::AI::Agent`, `SelfHosted::AI::InferenceEndpoint`, and
+    # `SelfHosted::AI::ExternalEndpoint`.
+    #
+    # If you filter by `ResourceSubCategory`, you must also include a
+    # `ResourceCategory` string filter with comparison set to `EQUALS` and
+    # value `AI/ML` in the same request.
+    #
     # @option params [Types::ResourcesFilters] :filters
     #   Filters resources based on a set of criteria.
     #
@@ -8749,7 +9258,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, Region, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName
+    #               field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceGuid, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -8772,7 +9281,7 @@ module Aws::SecurityHub
     #           ],
     #           number_filters: [
     #             {
-    #               field_name: "FindingsSummary.TotalFindings", # accepts FindingsSummary.TotalFindings, FindingsSummary.Severities.Other, FindingsSummary.Severities.Fatal, FindingsSummary.Severities.Critical, FindingsSummary.Severities.High, FindingsSummary.Severities.Medium, FindingsSummary.Severities.Low, FindingsSummary.Severities.Informational, FindingsSummary.Severities.Unknown
+    #               field_name: "FindingsSummary.TotalFindings", # accepts FindingsSummary.TotalFindings, FindingsSummary.Severities.Other, FindingsSummary.Severities.Fatal, FindingsSummary.Severities.Critical, FindingsSummary.Severities.High, FindingsSummary.Severities.Medium, FindingsSummary.Severities.Low, FindingsSummary.Severities.Informational, FindingsSummary.Severities.Unknown, ResourceInfo.AIDetails.SelfHostedAIModelResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount, ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount, ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount, ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount, ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount
     #               filter: {
     #                 gte: 1.0,
     #                 lte: 1.0,
@@ -8824,8 +9333,14 @@ module Aws::SecurityHub
     #   resp.resources[0].resource_guid #=> String
     #   resp.resources[0].resource_id #=> String
     #   resp.resources[0].account_id #=> String
+    #   resp.resources[0].account_name #=> String
     #   resp.resources[0].region #=> String
-    #   resp.resources[0].resource_category #=> String, one of "Compute", "Database", "Storage", "Code", "AI/ML", "Identity", "Network", "Other"
+    #   resp.resources[0].resource_provider #=> String
+    #   resp.resources[0].resource_owner_account_id #=> String
+    #   resp.resources[0].resource_owner_org_id #=> String
+    #   resp.resources[0].resource_cloud_partition #=> String
+    #   resp.resources[0].resource_region #=> String
+    #   resp.resources[0].resource_category #=> String, one of "Compute", "Database", "Storage", "Code", "AI/ML", "Identity", "Network", "Messaging", "Other"
     #   resp.resources[0].resource_type #=> String
     #   resp.resources[0].resource_name #=> String
     #   resp.resources[0].resource_creation_time_dt #=> String
@@ -8845,6 +9360,19 @@ module Aws::SecurityHub
     #   resp.resources[0].resource_tags #=> Array
     #   resp.resources[0].resource_tags[0].key #=> String
     #   resp.resources[0].resource_tags[0].value #=> String
+    #   resp.resources[0].resource_sub_category #=> String, one of "Model", "ModelServing", "Agent", "AgentFramework", "AgentToolsAndIdentity", "SafetyAndGuardrail", "KnowledgeAndData", "OrchestrationAndPipeline", "ExternalEndpoint", "Development", "Other"
+    #   resp.resources[0].discovery_type #=> String, one of "Managed", "SelfHosted"
+    #   resp.resources[0].resource_info.ai_details.host_resource_guid #=> String
+    #   resp.resources[0].resource_info.ai_details.host_resource_type #=> String
+    #   resp.resources[0].resource_info.ai_details.canonical_id #=> String
+    #   resp.resources[0].resource_info.ai_details.self_hosted_ai_model_resource_count #=> Integer
+    #   resp.resources[0].resource_info.ai_details.self_hosted_ai_agent_resource_count #=> Integer
+    #   resp.resources[0].resource_info.ai_details.self_hosted_ai_model_serving_resource_count #=> Integer
+    #   resp.resources[0].resource_info.ai_details.self_hosted_ai_external_endpoint_resource_count #=> Integer
+    #   resp.resources[0].resource_info.ai_details.self_hosted_ai_development_resource_count #=> Integer
+    #   resp.resources[0].resource_info.ai_details.self_hosted_ai_agent_framework_resource_count #=> Integer
+    #   resp.resources[0].resource_info.ai_details.self_hosted_ai_agent_tools_and_identity_resource_count #=> Integer
+    #   resp.resources[0].resource_info.ai_details.self_hosted_total_ai_resource_count #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesV2 AWS API Documentation
@@ -8894,6 +9422,7 @@ module Aws::SecurityHub
     #           description: "Number of days the EC2 instance is allowed to be in a stopped state before generating a failed finding", 
     #         }, 
     #       }, 
+    #       provider: "AWS", 
     #       remediation_url: "https://docs.aws.amazon.com/console/securityhub/EC2.4/remediation", 
     #       security_control_id: "EC2.4", 
     #       severity_rating: "MEDIUM", 
@@ -8947,6 +9476,7 @@ module Aws::SecurityHub
     #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.max_items #=> Integer
     #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values #=> Array
     #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values[0] #=> String
+    #   resp.security_control_definition.provider #=> String, one of "AWS", "Azure"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSecurityControlDefinition AWS API Documentation
     #
@@ -9385,6 +9915,92 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Lists the CSPM connectors and their metadata for the calling account.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :provider_name
+    #   The name of the cloud provider to filter connectors by.
+    #
+    # @option params [String] :connector_status
+    #   The connectivity status to filter connectors by.
+    #
+    # @option params [String] :enablement_status
+    #   The enablement status to filter connectors by.
+    #
+    # @return [Types::ListConnectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectorsResponse#next_token #next_token} => String
+    #   * {Types::ListConnectorsResponse#connectors #connectors} => Array&lt;Types::CspmConnectorSummary&gt;
+    #
+    #
+    # @example Example: To list CSPM connectors
+    #
+    #   # This operation lists the CSPM connectors for the calling account.
+    #
+    #   resp = client.list_connectors({
+    #     max_results: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     connectors: [
+    #       {
+    #         connector_arn: "arn:aws:securityhub:us-east-1:123456789012:connector/cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         created_at: Time.parse("2026-01-15T10:30:00.000Z"), 
+    #         name: "MyAzureConnector", 
+    #         provider_summary: {
+    #           connector_status: "CONNECTED", 
+    #           provider_name: "AZURE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connectors({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     provider_name: "AZURE", # accepts AZURE
+    #     connector_status: "CONNECTED", # accepts CONNECTED, DEGRADED, FAILED_TO_CONNECT, UNKNOWN
+    #     enablement_status: "ENABLED", # accepts ENABLED, PENDING_ENABLEMENT, PENDING_UPDATE, PENDING_DELETION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.connectors #=> Array
+    #   resp.connectors[0].connector_arn #=> String
+    #   resp.connectors[0].connector_id #=> String
+    #   resp.connectors[0].name #=> String
+    #   resp.connectors[0].description #=> String
+    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "AZURE"
+    #   resp.connectors[0].provider_summary.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.aws_config_connector_arn #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_type #=> String, one of "TENANT", "SUBSCRIPTION"
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_values #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_values[0] #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions[0] #=> String
+    #   resp.connectors[0].created_at #=> Time
+    #   resp.connectors[0].created_by #=> String
+    #   resp.connectors[0].enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConnectors AWS API Documentation
+    #
+    # @overload list_connectors(params = {})
+    # @param [Hash] params ({})
+    def list_connectors(params = {}, options = {})
+      req = build_request(:list_connectors, params)
+      req.send_request(options)
+    end
+
     # Grants permission to retrieve a list of connectorsV2 and their
     # metadata for the calling account.
     #
@@ -9400,6 +10016,9 @@ module Aws::SecurityHub
     # @option params [String] :connector_status
     #   The status for the connectorV2.
     #
+    # @option params [String] :enablement_status
+    #   The enablement status to filter connectors by.
+    #
     # @return [Types::ListConnectorsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListConnectorsV2Response#next_token #next_token} => String
@@ -9410,8 +10029,9 @@ module Aws::SecurityHub
     #   resp = client.list_connectors_v2({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     provider_name: "JIRA_CLOUD", # accepts JIRA_CLOUD, SERVICENOW
-    #     connector_status: "CONNECTED", # accepts CONNECTED, FAILED_TO_CONNECT, PENDING_CONFIGURATION, PENDING_AUTHORIZATION
+    #     provider_name: "JIRA_CLOUD", # accepts JIRA_CLOUD, SERVICENOW, AZURE
+    #     connector_status: "CONNECTED", # accepts CONNECTED, DEGRADED, FAILED_TO_CONNECT, PENDING_AUTHORIZATION, PENDING_CONFIGURATION, UNKNOWN
+    #     enablement_status: "ENABLED", # accepts ENABLED, PENDING_ENABLEMENT, FAILED_TO_ENABLE, PENDING_UPDATE, FAILED_TO_UPDATE, PENDING_DELETION, FAILED_TO_DELETE
     #   })
     #
     # @example Response structure
@@ -9422,9 +10042,25 @@ module Aws::SecurityHub
     #   resp.connectors[0].connector_id #=> String
     #   resp.connectors[0].name #=> String
     #   resp.connectors[0].description #=> String
-    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "JIRA_CLOUD", "SERVICENOW"
-    #   resp.connectors[0].provider_summary.connector_status #=> String, one of "CONNECTED", "FAILED_TO_CONNECT", "PENDING_CONFIGURATION", "PENDING_AUTHORIZATION"
+    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "JIRA_CLOUD", "SERVICENOW", "AZURE"
+    #   resp.connectors[0].provider_summary.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"
+    #   resp.connectors[0].provider_summary.provider_configuration.jira_cloud.cloud_id #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.jira_cloud.project_key #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.jira_cloud.domain #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.jira_cloud.auth_url #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.jira_cloud.auth_status #=> String, one of "ACTIVE", "FAILED"
+    #   resp.connectors[0].provider_summary.provider_configuration.service_now.instance_name #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.service_now.secret_arn #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.service_now.auth_status #=> String, one of "ACTIVE", "FAILED"
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.aws_config_connector_arn #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_type #=> String, one of "TENANT", "SUBSCRIPTION"
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_values #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_values[0] #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions[0] #=> String
     #   resp.connectors[0].created_at #=> Time
+    #   resp.connectors[0].enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"
+    #   resp.connectors[0].enablement_status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConnectorsV2 AWS API Documentation
     #
@@ -9822,6 +10458,11 @@ module Aws::SecurityHub
     #   the next 25 controls. This repeats until all controls for the standard
     #   are returned.
     #
+    # @option params [Array<String>] :providers
+    #   A list of cloud providers to filter the security control definitions
+    #   by. For example, specify `Azure` to return only controls that evaluate
+    #   Azure resources.
+    #
     # @return [Types::ListSecurityControlDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSecurityControlDefinitionsResponse#security_control_definitions #security_control_definitions} => Array&lt;Types::SecurityControlDefinition&gt;
@@ -9850,6 +10491,7 @@ module Aws::SecurityHub
     #           "Parameters", 
     #         ], 
     #         description: "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.", 
+    #         provider: "AWS", 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation", 
     #         security_control_id: "ACM.1", 
     #         severity_rating: "MEDIUM", 
@@ -9861,6 +10503,7 @@ module Aws::SecurityHub
     #           "Parameters", 
     #         ], 
     #         description: "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.", 
+    #         provider: "AWS", 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation", 
     #         security_control_id: "APIGateway.1", 
     #         severity_rating: "MEDIUM", 
@@ -9869,10 +10512,73 @@ module Aws::SecurityHub
     #       {
     #         current_region_availability: "AVAILABLE", 
     #         description: "This control checks whether Amazon API Gateway REST API stages have SSL certificates configured that backend systems can use to authenticate that incoming requests are from the API Gateway.", 
+    #         provider: "AWS", 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.2/remediation", 
     #         security_control_id: "APIGateway.2", 
     #         severity_rating: "MEDIUM", 
     #         title: "API Gateway REST API stages should be configured to use SSL certificates for backend authentication", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether Azure Container Apps have managed identity enabled. The control fails if the Container App has a system-assigned or user-assigned managed identity enabled.", 
+    #         provider: "Azure", 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.1/remediation", 
+    #         security_control_id: "Azure.App.1", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "Azure Container Apps with managed identity enabled should follow least privilege", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list Azure security control definitions
+    #
+    #   # The following example lists security control definitions for a specified provider.
+    #
+    #   resp = client.list_security_control_definitions({
+    #     max_results: 3, 
+    #     providers: [
+    #       "Azure", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "U2FsdGVkX1...", 
+    #     security_control_definitions: [
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether Azure Container Apps have managed identity enabled. The control fails if the Container App has a system-assigned or user-assigned managed identity enabled.", 
+    #         provider: "Azure", 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.1/remediation", 
+    #         security_control_id: "Azure.App.1", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "Azure Container Apps with managed identity enabled should follow least privilege", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether an Azure Container App passes Azure SDK credentials as plain-text container environment variables. The control fails if any container (including initContainers) defines AZURE_CLIENT_SECRET, AZURE_CLIENT_CERTIFICATE_PASSWORD, or AZURE_PASSWORD as a plain-text environment variable instead of referencing a secret via secretRef.", 
+    #         provider: "Azure", 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.2/remediation", 
+    #         security_control_id: "Azure.App.2", 
+    #         severity_rating: "CRITICAL", 
+    #         title: "Azure Container Apps should not pass Azure SDK credentials as environment variables", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether Azure Container Apps have external ingress configured. The control fails if the Container App ingress is set to accept traffic from anywhere (external).", 
+    #         provider: "Azure", 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.3/remediation", 
+    #         security_control_id: "Azure.App.3", 
+    #         severity_rating: "HIGH", 
+    #         title: "Azure Container Apps should not have external ingress enabled", 
     #       }, 
     #     ], 
     #   }
@@ -9883,6 +10589,7 @@ module Aws::SecurityHub
     #     standards_arn: "NonEmptyString",
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     providers: ["AWS"], # accepts AWS, Azure
     #   })
     #
     # @example Response structure
@@ -9926,6 +10633,7 @@ module Aws::SecurityHub
     #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.max_items #=> Integer
     #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values #=> Array
     #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values[0] #=> String
+    #   resp.security_control_definitions[0].provider #=> String, one of "AWS", "Azure"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitions AWS API Documentation
@@ -10469,7 +11177,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
+    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -10762,6 +11470,85 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Updates a CSPM connector's configuration, such as the scope or
+    # regions for the connected cloud provider.
+    #
+    # @option params [required, String] :connector_id
+    #   The unique identifier of the connector to update.
+    #
+    # @option params [String] :description
+    #   The updated description of the connector.
+    #
+    # @option params [Types::CspmProviderUpdateConfiguration] :provider
+    #   The updated cloud provider configuration for the connector.
+    #
+    # @return [Types::UpdateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectorResponse#connector_status #connector_status} => String
+    #   * {Types::UpdateConnectorResponse#enablement_status #enablement_status} => String
+    #
+    #
+    # @example Example: To update a CSPM connector
+    #
+    #   # This operation updates the configuration of a CSPM connector.
+    #
+    #   resp = client.update_connector({
+    #     connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     description: "Updated connector description", 
+    #     provider: {
+    #       azure: {
+    #         azure_regions: [
+    #           "eastus", 
+    #           "westus2", 
+    #           "northeurope", 
+    #         ], 
+    #         scope_configuration: {
+    #           scope_type: "SUBSCRIPTION", 
+    #           scope_values: [
+    #             "sub-1234-5678-abcd", 
+    #             "sub-9012-3456-efgh", 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     connector_status: "CONNECTED", 
+    #     enablement_status: "PENDING_UPDATE", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connector({
+    #     connector_id: "NonEmptyString", # required
+    #     description: "NonEmptyString",
+    #     provider: {
+    #       azure: {
+    #         scope_configuration: { # required
+    #           scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         azure_regions: ["NonEmptyString"], # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"
+    #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConnector AWS API Documentation
+    #
+    # @overload update_connector(params = {})
+    # @param [Hash] params ({})
+    def update_connector(params = {}, options = {})
+      req = build_request(:update_connector, params)
+      req.send_request(options)
+    end
+
     # Grants permission to update a connectorV2 based on its id and input
     # parameters.
     #
@@ -10774,7 +11561,10 @@ module Aws::SecurityHub
     # @option params [Types::ProviderUpdateConfiguration] :provider
     #   The third-party provider’s service configuration.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::UpdateConnectorV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectorV2Response#connector_status #connector_status} => String
+    #   * {Types::UpdateConnectorV2Response#enablement_status #enablement_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -10788,8 +11578,20 @@ module Aws::SecurityHub
     #       service_now: {
     #         secret_arn: "NonEmptyString",
     #       },
+    #       azure: {
+    #         scope_configuration: { # required
+    #           scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         azure_regions: ["NonEmptyString"], # required
+    #       },
     #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"
+    #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConnectorV2 AWS API Documentation
     #
@@ -11650,6 +12452,24 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
     #         },
     #       ],
+    #       resource_owner_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
+    #       resource_owner_org_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
+    #       resource_provider: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
     #     },
     #     note: {
     #       text: "NonEmptyString", # required
@@ -12419,6 +13239,24 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
     #         },
     #       ],
+    #       resource_owner_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
+    #       resource_owner_org_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
+    #       resource_provider: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #         },
+    #       ],
     #     },
     #     group_by_attribute: "NonEmptyString",
     #   })
@@ -12709,7 +13547,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.158.0'
+      context[:gem_version] = '1.162.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

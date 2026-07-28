@@ -66,6 +66,7 @@ module Aws::PCS
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     ErrorInfo = Shapes::StructureShape.new(name: 'ErrorInfo')
     ErrorInfoList = Shapes::ListShape.new(name: 'ErrorInfoList')
+    ExecutionPolicy = Shapes::StringShape.new(name: 'ExecutionPolicy')
     GetClusterRequest = Shapes::StructureShape.new(name: 'GetClusterRequest')
     GetClusterResponse = Shapes::StructureShape.new(name: 'GetClusterResponse')
     GetComputeNodeGroupRequest = Shapes::StructureShape.new(name: 'GetComputeNodeGroupRequest')
@@ -91,6 +92,15 @@ module Aws::PCS
     NetworkType = Shapes::StringShape.new(name: 'NetworkType')
     Networking = Shapes::StructureShape.new(name: 'Networking')
     NetworkingRequest = Shapes::StructureShape.new(name: 'NetworkingRequest')
+    NodeLifecycleActions = Shapes::StructureShape.new(name: 'NodeLifecycleActions')
+    NodeLifecycleActionsRequest = Shapes::StructureShape.new(name: 'NodeLifecycleActionsRequest')
+    NodeLifecycleScript = Shapes::StructureShape.new(name: 'NodeLifecycleScript')
+    NodeLifecycleScriptArgument = Shapes::StringShape.new(name: 'NodeLifecycleScriptArgument')
+    NodeLifecycleScriptArguments = Shapes::ListShape.new(name: 'NodeLifecycleScriptArguments')
+    NodeLifecycleScriptList = Shapes::ListShape.new(name: 'NodeLifecycleScriptList')
+    NodeLifecycleScriptNameString = Shapes::StringShape.new(name: 'NodeLifecycleScriptNameString')
+    NodeLifecycleStages = Shapes::StructureShape.new(name: 'NodeLifecycleStages')
+    OnError = Shapes::StringShape.new(name: 'OnError')
     PurchaseOption = Shapes::StringShape.new(name: 'PurchaseOption')
     Queue = Shapes::StructureShape.new(name: 'Queue')
     QueueIdentifier = Shapes::StringShape.new(name: 'QueueIdentifier')
@@ -115,6 +125,11 @@ module Aws::PCS
     Scheduler = Shapes::StructureShape.new(name: 'Scheduler')
     SchedulerRequest = Shapes::StructureShape.new(name: 'SchedulerRequest')
     SchedulerType = Shapes::StringShape.new(name: 'SchedulerType')
+    ScriptCachingPolicy = Shapes::StringShape.new(name: 'ScriptCachingPolicy')
+    ScriptSource = Shapes::StructureShape.new(name: 'ScriptSource')
+    ScriptSourceChecksumString = Shapes::StringShape.new(name: 'ScriptSourceChecksumString')
+    ScriptSourceS3VersionIdString = Shapes::StringShape.new(name: 'ScriptSourceS3VersionIdString')
+    ScriptSourceScriptLocationString = Shapes::StringShape.new(name: 'ScriptSourceScriptLocationString')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -153,9 +168,11 @@ module Aws::PCS
     UpdateComputeNodeGroupResponse = Shapes::StructureShape.new(name: 'UpdateComputeNodeGroupResponse')
     UpdateComputeNodeGroupSlurmConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateComputeNodeGroupSlurmConfigurationRequest')
     UpdateComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger = Shapes::IntegerShape.new(name: 'UpdateComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger')
+    UpdateNodeLifecycleActionsRequest = Shapes::StructureShape.new(name: 'UpdateNodeLifecycleActionsRequest')
     UpdateQueueRequest = Shapes::StructureShape.new(name: 'UpdateQueueRequest')
     UpdateQueueResponse = Shapes::StructureShape.new(name: 'UpdateQueueResponse')
     UpdateQueueSlurmConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateQueueSlurmConfigurationRequest')
+    UpdateSchedulerRequest = Shapes::StructureShape.new(name: 'UpdateSchedulerRequest')
     UpdateSlurmRestRequest = Shapes::StructureShape.new(name: 'UpdateSlurmRestRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
@@ -237,6 +254,7 @@ module Aws::PCS
     ComputeNodeGroup.add_member(:instance_configs, Shapes::ShapeRef.new(shape: InstanceList, required: true, location_name: "instanceConfigs"))
     ComputeNodeGroup.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptions, location_name: "spotOptions"))
     ComputeNodeGroup.add_member(:slurm_configuration, Shapes::ShapeRef.new(shape: ComputeNodeGroupSlurmConfiguration, location_name: "slurmConfiguration"))
+    ComputeNodeGroup.add_member(:node_lifecycle_actions, Shapes::ShapeRef.new(shape: NodeLifecycleActions, location_name: "nodeLifecycleActions"))
     ComputeNodeGroup.add_member(:error_info, Shapes::ShapeRef.new(shape: ErrorInfoList, location_name: "errorInfo"))
     ComputeNodeGroup.struct_class = Types::ComputeNodeGroup
 
@@ -292,6 +310,7 @@ module Aws::PCS
     CreateComputeNodeGroupRequest.add_member(:instance_configs, Shapes::ShapeRef.new(shape: InstanceList, required: true, location_name: "instanceConfigs"))
     CreateComputeNodeGroupRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptions, location_name: "spotOptions"))
     CreateComputeNodeGroupRequest.add_member(:slurm_configuration, Shapes::ShapeRef.new(shape: ComputeNodeGroupSlurmConfigurationRequest, location_name: "slurmConfiguration"))
+    CreateComputeNodeGroupRequest.add_member(:node_lifecycle_actions, Shapes::ShapeRef.new(shape: NodeLifecycleActionsRequest, location_name: "nodeLifecycleActions"))
     CreateComputeNodeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateComputeNodeGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateComputeNodeGroupRequest.struct_class = Types::CreateComputeNodeGroupRequest
@@ -426,6 +445,29 @@ module Aws::PCS
     NetworkingRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
     NetworkingRequest.struct_class = Types::NetworkingRequest
 
+    NodeLifecycleActions.add_member(:stages, Shapes::ShapeRef.new(shape: NodeLifecycleStages, required: true, location_name: "stages"))
+    NodeLifecycleActions.add_member(:script_caching_policy, Shapes::ShapeRef.new(shape: ScriptCachingPolicy, location_name: "scriptCachingPolicy"))
+    NodeLifecycleActions.struct_class = Types::NodeLifecycleActions
+
+    NodeLifecycleActionsRequest.add_member(:stages, Shapes::ShapeRef.new(shape: NodeLifecycleStages, required: true, location_name: "stages"))
+    NodeLifecycleActionsRequest.add_member(:script_caching_policy, Shapes::ShapeRef.new(shape: ScriptCachingPolicy, location_name: "scriptCachingPolicy"))
+    NodeLifecycleActionsRequest.struct_class = Types::NodeLifecycleActionsRequest
+
+    NodeLifecycleScript.add_member(:name, Shapes::ShapeRef.new(shape: NodeLifecycleScriptNameString, required: true, location_name: "name"))
+    NodeLifecycleScript.add_member(:script_source, Shapes::ShapeRef.new(shape: ScriptSource, required: true, location_name: "scriptSource"))
+    NodeLifecycleScript.add_member(:arguments, Shapes::ShapeRef.new(shape: NodeLifecycleScriptArguments, location_name: "arguments"))
+    NodeLifecycleScript.add_member(:on_error, Shapes::ShapeRef.new(shape: OnError, location_name: "onError"))
+    NodeLifecycleScript.add_member(:execution_policy, Shapes::ShapeRef.new(shape: ExecutionPolicy, location_name: "executionPolicy"))
+    NodeLifecycleScript.struct_class = Types::NodeLifecycleScript
+
+    NodeLifecycleScriptArguments.member = Shapes::ShapeRef.new(shape: NodeLifecycleScriptArgument)
+
+    NodeLifecycleScriptList.member = Shapes::ShapeRef.new(shape: NodeLifecycleScript)
+
+    NodeLifecycleStages.add_member(:node_bootstrapped, Shapes::ShapeRef.new(shape: NodeLifecycleScriptList, location_name: "nodeBootstrapped"))
+    NodeLifecycleStages.add_member(:node_ready, Shapes::ShapeRef.new(shape: NodeLifecycleScriptList, location_name: "nodeReady"))
+    NodeLifecycleStages.struct_class = Types::NodeLifecycleStages
+
     Queue.add_member(:name, Shapes::ShapeRef.new(shape: QueueName, required: true, location_name: "name"))
     Queue.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     Queue.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
@@ -462,6 +504,10 @@ module Aws::PCS
     RegisterComputeNodeGroupInstanceResponse.add_member(:node_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "nodeID"))
     RegisterComputeNodeGroupInstanceResponse.add_member(:shared_secret, Shapes::ShapeRef.new(shape: SharedSecret, required: true, location_name: "sharedSecret"))
     RegisterComputeNodeGroupInstanceResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, required: true, location_name: "endpoints"))
+    RegisterComputeNodeGroupInstanceResponse.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    RegisterComputeNodeGroupInstanceResponse.add_member(:compute_node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "computeNodeGroupId"))
+    RegisterComputeNodeGroupInstanceResponse.add_member(:compute_node_group_name, Shapes::ShapeRef.new(shape: String, location_name: "computeNodeGroupName"))
+    RegisterComputeNodeGroupInstanceResponse.add_member(:node_lifecycle_actions, Shapes::ShapeRef.new(shape: NodeLifecycleActions, location_name: "nodeLifecycleActions"))
     RegisterComputeNodeGroupInstanceResponse.struct_class = Types::RegisterComputeNodeGroupInstanceResponse
 
     RequestTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -490,6 +536,11 @@ module Aws::PCS
     SchedulerRequest.add_member(:type, Shapes::ShapeRef.new(shape: SchedulerType, required: true, location_name: "type"))
     SchedulerRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "version"))
     SchedulerRequest.struct_class = Types::SchedulerRequest
+
+    ScriptSource.add_member(:script_location, Shapes::ShapeRef.new(shape: ScriptSourceScriptLocationString, required: true, location_name: "scriptLocation"))
+    ScriptSource.add_member(:s3_version_id, Shapes::ShapeRef.new(shape: ScriptSourceS3VersionIdString, location_name: "s3VersionId"))
+    ScriptSource.add_member(:checksum, Shapes::ShapeRef.new(shape: ScriptSourceChecksumString, location_name: "checksum"))
+    ScriptSource.struct_class = Types::ScriptSource
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -554,6 +605,7 @@ module Aws::PCS
     UpdateClusterRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifier, required: true, location_name: "clusterIdentifier"))
     UpdateClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateClusterRequest.add_member(:slurm_configuration, Shapes::ShapeRef.new(shape: UpdateClusterSlurmConfigurationRequest, location_name: "slurmConfiguration"))
+    UpdateClusterRequest.add_member(:scheduler, Shapes::ShapeRef.new(shape: UpdateSchedulerRequest, location_name: "scheduler"))
     UpdateClusterRequest.struct_class = Types::UpdateClusterRequest
 
     UpdateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -577,6 +629,7 @@ module Aws::PCS
     UpdateComputeNodeGroupRequest.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationRequest, location_name: "scalingConfiguration"))
     UpdateComputeNodeGroupRequest.add_member(:iam_instance_profile_arn, Shapes::ShapeRef.new(shape: InstanceProfileArn, location_name: "iamInstanceProfileArn"))
     UpdateComputeNodeGroupRequest.add_member(:slurm_configuration, Shapes::ShapeRef.new(shape: UpdateComputeNodeGroupSlurmConfigurationRequest, location_name: "slurmConfiguration"))
+    UpdateComputeNodeGroupRequest.add_member(:node_lifecycle_actions, Shapes::ShapeRef.new(shape: UpdateNodeLifecycleActionsRequest, location_name: "nodeLifecycleActions"))
     UpdateComputeNodeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateComputeNodeGroupRequest.struct_class = Types::UpdateComputeNodeGroupRequest
 
@@ -586,6 +639,10 @@ module Aws::PCS
     UpdateComputeNodeGroupSlurmConfigurationRequest.add_member(:scale_down_idle_time_in_seconds, Shapes::ShapeRef.new(shape: UpdateComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger, location_name: "scaleDownIdleTimeInSeconds"))
     UpdateComputeNodeGroupSlurmConfigurationRequest.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
     UpdateComputeNodeGroupSlurmConfigurationRequest.struct_class = Types::UpdateComputeNodeGroupSlurmConfigurationRequest
+
+    UpdateNodeLifecycleActionsRequest.add_member(:stages, Shapes::ShapeRef.new(shape: NodeLifecycleStages, required: true, location_name: "stages"))
+    UpdateNodeLifecycleActionsRequest.add_member(:script_caching_policy, Shapes::ShapeRef.new(shape: ScriptCachingPolicy, location_name: "scriptCachingPolicy"))
+    UpdateNodeLifecycleActionsRequest.struct_class = Types::UpdateNodeLifecycleActionsRequest
 
     UpdateQueueRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifier, required: true, location_name: "clusterIdentifier"))
     UpdateQueueRequest.add_member(:queue_identifier, Shapes::ShapeRef.new(shape: QueueIdentifier, required: true, location_name: "queueIdentifier"))
@@ -599,6 +656,9 @@ module Aws::PCS
 
     UpdateQueueSlurmConfigurationRequest.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
     UpdateQueueSlurmConfigurationRequest.struct_class = Types::UpdateQueueSlurmConfigurationRequest
+
+    UpdateSchedulerRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "version"))
+    UpdateSchedulerRequest.struct_class = Types::UpdateSchedulerRequest
 
     UpdateSlurmRestRequest.add_member(:mode, Shapes::ShapeRef.new(shape: SlurmRestMode, location_name: "mode"))
     UpdateSlurmRestRequest.struct_class = Types::UpdateSlurmRestRequest

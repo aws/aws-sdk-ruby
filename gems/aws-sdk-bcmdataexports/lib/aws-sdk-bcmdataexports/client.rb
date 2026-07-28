@@ -546,7 +546,7 @@ module Aws::BCMDataExports
     #           s3_output_configurations: { # required
     #             output_type: "CUSTOM", # required, accepts CUSTOM, ATHENA, REDSHIFT
     #             format: "TEXT_OR_CSV", # required, accepts TEXT_OR_CSV, PARQUET
-    #             compression: "GZIP", # required, accepts GZIP, PARQUET
+    #             compression: "GZIP", # required, accepts GZIP, PARQUET, ZIP
     #             overwrite: "CREATE_NEW_REPORT", # required, accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
     #           },
     #         },
@@ -642,11 +642,11 @@ module Aws::BCMDataExports
     #   resp.export.destination_configurations.s3_destination.s3_region #=> String
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.output_type #=> String, one of "CUSTOM", "ATHENA", "REDSHIFT"
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.format #=> String, one of "TEXT_OR_CSV", "PARQUET"
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.compression #=> String, one of "GZIP", "PARQUET"
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.compression #=> String, one of "GZIP", "PARQUET", "ZIP"
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.overwrite #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
     #   resp.export.refresh_cadence.frequency #=> String, one of "SYNCHRONOUS"
     #   resp.execution_status.status_code #=> String, one of "INITIATION_IN_PROCESS", "QUERY_QUEUED", "QUERY_IN_PROCESS", "QUERY_FAILURE", "DELIVERY_IN_PROCESS", "DELIVERY_SUCCESS", "DELIVERY_FAILURE"
-    #   resp.execution_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"
+    #   resp.execution_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE", "DEPRECATED"
     #   resp.execution_status.created_at #=> Time
     #   resp.execution_status.completed_at #=> Time
     #   resp.execution_status.last_updated_at #=> Time
@@ -691,11 +691,11 @@ module Aws::BCMDataExports
     #   resp.export.destination_configurations.s3_destination.s3_region #=> String
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.output_type #=> String, one of "CUSTOM", "ATHENA", "REDSHIFT"
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.format #=> String, one of "TEXT_OR_CSV", "PARQUET"
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.compression #=> String, one of "GZIP", "PARQUET"
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.compression #=> String, one of "GZIP", "PARQUET", "ZIP"
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.overwrite #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
     #   resp.export.refresh_cadence.frequency #=> String, one of "SYNCHRONOUS"
     #   resp.export_status.status_code #=> String, one of "HEALTHY", "UNHEALTHY"
-    #   resp.export_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"
+    #   resp.export_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE", "DEPRECATED"
     #   resp.export_status.created_at #=> Time
     #   resp.export_status.last_updated_at #=> Time
     #   resp.export_status.last_refreshed_at #=> Time
@@ -790,7 +790,7 @@ module Aws::BCMDataExports
     #   resp.executions #=> Array
     #   resp.executions[0].execution_id #=> String
     #   resp.executions[0].execution_status.status_code #=> String, one of "INITIATION_IN_PROCESS", "QUERY_QUEUED", "QUERY_IN_PROCESS", "QUERY_FAILURE", "DELIVERY_IN_PROCESS", "DELIVERY_SUCCESS", "DELIVERY_FAILURE"
-    #   resp.executions[0].execution_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"
+    #   resp.executions[0].execution_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE", "DEPRECATED"
     #   resp.executions[0].execution_status.created_at #=> Time
     #   resp.executions[0].execution_status.completed_at #=> Time
     #   resp.executions[0].execution_status.last_updated_at #=> Time
@@ -833,7 +833,7 @@ module Aws::BCMDataExports
     #   resp.exports[0].export_arn #=> String
     #   resp.exports[0].export_name #=> String
     #   resp.exports[0].export_status.status_code #=> String, one of "HEALTHY", "UNHEALTHY"
-    #   resp.exports[0].export_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"
+    #   resp.exports[0].export_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE", "DEPRECATED"
     #   resp.exports[0].export_status.created_at #=> Time
     #   resp.exports[0].export_status.last_updated_at #=> Time
     #   resp.exports[0].export_status.last_refreshed_at #=> Time
@@ -1028,7 +1028,7 @@ module Aws::BCMDataExports
     #           s3_output_configurations: { # required
     #             output_type: "CUSTOM", # required, accepts CUSTOM, ATHENA, REDSHIFT
     #             format: "TEXT_OR_CSV", # required, accepts TEXT_OR_CSV, PARQUET
-    #             compression: "GZIP", # required, accepts GZIP, PARQUET
+    #             compression: "GZIP", # required, accepts GZIP, PARQUET, ZIP
     #             overwrite: "CREATE_NEW_REPORT", # required, accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
     #           },
     #         },
@@ -1070,7 +1070,7 @@ module Aws::BCMDataExports
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bcmdataexports'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -203,6 +203,10 @@ module Aws
       end
       class PartnerNotFoundFault < ::Aws::Errors::ServiceError
       end
+      class Qev2IdcApplicationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class Qev2IdcApplicationNotExistsFault < ::Aws::Errors::ServiceError
+      end
       class RedshiftIdcApplicationAlreadyExistsFault < ::Aws::Errors::ServiceError
       end
       class RedshiftIdcApplicationNotExistsFault < ::Aws::Errors::ServiceError

@@ -1640,10 +1640,6 @@ module Aws::RTBFabric
     #   The total count of links for the responder gateway.
     #   @return [Integer]
     #
-    # @!attribute [rw] inbound_links_count
-    #   Deprecated. Use 'linksRequestedCount' instead.
-    #   @return [Integer]
-    #
     # @!attribute [rw] links_requested_count
     #   The count of requested links waiting for the responder gateway to
     #   accept or reject.
@@ -1677,7 +1673,6 @@ module Aws::RTBFabric
       :tags,
       :active_links_count,
       :total_links_count,
-      :inbound_links_count,
       :links_requested_count,
       :gateway_type,
       :external_inbound_endpoint)

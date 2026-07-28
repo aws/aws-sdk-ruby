@@ -3,6 +3,21 @@ Unreleased Changes
 
 * Issue - Bound memory usage in `upload_stream` when the source produces data faster than parts can be uploaded.
 
+1.228.1 (2026-07-23)
+------------------
+
+* Issue - Ensure the source file is closed on multipart `upload_file` part failure, preventing leaked file descriptors (#3408).
+
+1.228.0 (2026-07-16)
+------------------
+
+* Feature - Documentation update for removing the 30 day minimum restriction for transition to Standard-IA or OneZone-IA storage classes
+
+1.227.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.226.0 (2026-06-16)
 ------------------
 

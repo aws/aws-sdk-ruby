@@ -163,6 +163,110 @@ module Aws::SageMakerFeatureStoreRuntime
       include Aws::Structure
     end
 
+    # An entry to write as part of a `BatchWriteRecord` request.
+    #
+    # @!attribute [rw] feature_group_name
+    #   The name or Amazon Resource Name (ARN) of the `FeatureGroup` to
+    #   write the record to.
+    #   @return [String]
+    #
+    # @!attribute [rw] record
+    #   List of FeatureValues to be inserted. This will be a full
+    #   over-write.
+    #   @return [Array<Types::FeatureValue>]
+    #
+    # @!attribute [rw] target_stores
+    #   A list of stores to which you're adding the record. By default,
+    #   Feature Store adds the record to all of the stores that you're
+    #   using for the `FeatureGroup`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ttl_duration
+    #   Time to live duration for this entry, where the record is hard
+    #   deleted after the expiration time is reached; `ExpiresAt` =
+    #   `EventTime` + `TtlDuration`. This overrides the request level
+    #   `TtlDuration`.
+    #   @return [Types::TtlDuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/BatchWriteRecordEntry AWS API Documentation
+    #
+    class BatchWriteRecordEntry < Struct.new(
+      :feature_group_name,
+      :record,
+      :target_stores,
+      :ttl_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error that has occurred when attempting to write a record in a
+    # batch.
+    #
+    # @!attribute [rw] entry
+    #   The entry that failed to be written.
+    #   @return [Types::BatchWriteRecordEntry]
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the failed record write.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the failed record write.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/BatchWriteRecordError AWS API Documentation
+    #
+    class BatchWriteRecordError < Struct.new(
+      :entry,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entries
+    #   A list of records to write. Each entry specifies the `FeatureGroup`,
+    #   the record data, and optionally target stores and a TTL duration.
+    #   @return [Array<Types::BatchWriteRecordEntry>]
+    #
+    # @!attribute [rw] ttl_duration
+    #   Time to live duration applied to all entries in the batch that do
+    #   not specify their own `TtlDuration`; `ExpiresAt` = `EventTime` +
+    #   `TtlDuration`. For information on HardDelete, see the
+    #   [DeleteRecord][1] API in the Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #   @return [Types::TtlDuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/BatchWriteRecordRequest AWS API Documentation
+    #
+    class BatchWriteRecordRequest < Struct.new(
+      :entries,
+      :ttl_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   A list of errors that occurred when writing records in the batch.
+    #   @return [Array<Types::BatchWriteRecordError>]
+    #
+    # @!attribute [rw] unprocessed_entries
+    #   A list of entries that were not processed. These entries can be
+    #   retried.
+    #   @return [Array<Types::BatchWriteRecordEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/BatchWriteRecordResponse AWS API Documentation
+    #
+    class BatchWriteRecordResponse < Struct.new(
+      :errors,
+      :unprocessed_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] feature_group_name
     #   The name or Amazon Resource Name (ARN) of the feature group to
     #   delete the record from.
@@ -290,6 +394,57 @@ module Aws::SageMakerFeatureStoreRuntime
     #
     class InternalFailure < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] feature_group_name
+    #   The name or Amazon Resource Name (ARN) of the feature group to list
+    #   records from.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of record identifiers to return in a single page
+    #   of results. For the `InMemory` tier, this value is a hint and not a
+    #   strict requirement. The response may contain more or fewer results
+    #   than the specified `MaxResults`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination of `ListRecords` results.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_soft_deleted_records
+    #   If set to `true`, the result includes records that have been soft
+    #   deleted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/ListRecordsRequest AWS API Documentation
+    #
+    class ListRecordsRequest < Struct.new(
+      :feature_group_name,
+      :max_results,
+      :next_token,
+      :include_soft_deleted_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] record_identifiers
+    #   A list of record identifier values for the records stored in the
+    #   `OnlineStore`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination if the response includes more record
+    #   identifiers than `MaxResults`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/ListRecordsResponse AWS API Documentation
+    #
+    class ListRecordsResponse < Struct.new(
+      :record_identifiers,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -54,7 +54,7 @@ module Aws::CodeGuruProfiler
   autoload :EndpointProvider, 'aws-sdk-codeguruprofiler/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codeguruprofiler/endpoints'
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.71.0'
 
 end
 

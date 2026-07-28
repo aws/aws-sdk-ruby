@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2026-06-30)
+------------------
+
+* Feature - AWS Network Firewall now supports container associations for monitoring ECS and EKS workloads. You can create container associations to dynamically track the IP addresses of running containers in your Amazon ECS and Amazon EKS clusters.
+
 1.91.0 (2026-05-22)
 ------------------
 

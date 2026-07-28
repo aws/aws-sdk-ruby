@@ -56,6 +56,9 @@ module Aws::ConfigService
     AutoRemediationAttempts = Shapes::IntegerShape.new(name: 'AutoRemediationAttempts')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
+    AzureClientIdentifier = Shapes::StringShape.new(name: 'AzureClientIdentifier')
+    AzureConnectorConfiguration = Shapes::StructureShape.new(name: 'AzureConnectorConfiguration')
+    AzureTenantIdentifier = Shapes::StringShape.new(name: 'AzureTenantIdentifier')
     BaseConfigurationItem = Shapes::StructureShape.new(name: 'BaseConfigurationItem')
     BaseConfigurationItems = Shapes::ListShape.new(name: 'BaseConfigurationItems')
     BaseResourceId = Shapes::StringShape.new(name: 'BaseResourceId')
@@ -148,6 +151,14 @@ module Aws::ConfigService
     ConformancePackStatusDetailsList = Shapes::ListShape.new(name: 'ConformancePackStatusDetailsList')
     ConformancePackStatusReason = Shapes::StringShape.new(name: 'ConformancePackStatusReason')
     ConformancePackTemplateValidationException = Shapes::StructureShape.new(name: 'ConformancePackTemplateValidationException')
+    Connector = Shapes::StructureShape.new(name: 'Connector')
+    ConnectorConfiguration = Shapes::StructureShape.new(name: 'ConnectorConfiguration')
+    ConnectorFilter = Shapes::StructureShape.new(name: 'ConnectorFilter')
+    ConnectorFilterList = Shapes::ListShape.new(name: 'ConnectorFilterList')
+    ConnectorFilterName = Shapes::StringShape.new(name: 'ConnectorFilterName')
+    ConnectorName = Shapes::StringShape.new(name: 'ConnectorName')
+    ConnectorSummaries = Shapes::ListShape.new(name: 'ConnectorSummaries')
+    ConnectorSummary = Shapes::StructureShape.new(name: 'ConnectorSummary')
     ControlsList = Shapes::ListShape.new(name: 'ControlsList')
     CosmosPageLimit = Shapes::IntegerShape.new(name: 'CosmosPageLimit')
     CustomPolicyDetails = Shapes::StructureShape.new(name: 'CustomPolicyDetails')
@@ -158,6 +169,7 @@ module Aws::ConfigService
     DeleteConfigurationAggregatorRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationAggregatorRequest')
     DeleteConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationRecorderRequest')
     DeleteConformancePackRequest = Shapes::StructureShape.new(name: 'DeleteConformancePackRequest')
+    DeleteConnectorRequest = Shapes::StructureShape.new(name: 'DeleteConnectorRequest')
     DeleteDeliveryChannelRequest = Shapes::StructureShape.new(name: 'DeleteDeliveryChannelRequest')
     DeleteEvaluationResultsRequest = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsRequest')
     DeleteEvaluationResultsResponse = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsResponse')
@@ -272,6 +284,7 @@ module Aws::ConfigService
     FieldInfo = Shapes::StructureShape.new(name: 'FieldInfo')
     FieldInfoList = Shapes::ListShape.new(name: 'FieldInfoList')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
+    FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     GetAggregateComplianceDetailsByConfigRuleRequest = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleRequest')
     GetAggregateComplianceDetailsByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleResponse')
     GetAggregateConfigRuleComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryRequest')
@@ -294,6 +307,8 @@ module Aws::ConfigService
     GetConformancePackComplianceDetailsResponse = Shapes::StructureShape.new(name: 'GetConformancePackComplianceDetailsResponse')
     GetConformancePackComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetConformancePackComplianceSummaryRequest')
     GetConformancePackComplianceSummaryResponse = Shapes::StructureShape.new(name: 'GetConformancePackComplianceSummaryResponse')
+    GetConnectorRequest = Shapes::StructureShape.new(name: 'GetConnectorRequest')
+    GetConnectorResponse = Shapes::StructureShape.new(name: 'GetConnectorResponse')
     GetCustomRulePolicyRequest = Shapes::StructureShape.new(name: 'GetCustomRulePolicyRequest')
     GetCustomRulePolicyResponse = Shapes::StructureShape.new(name: 'GetCustomRulePolicyResponse')
     GetDiscoveredResourceCountsRequest = Shapes::StructureShape.new(name: 'GetDiscoveredResourceCountsRequest')
@@ -315,6 +330,7 @@ module Aws::ConfigService
     GroupedResourceCountList = Shapes::ListShape.new(name: 'GroupedResourceCountList')
     IdempotentParameterMismatch = Shapes::StructureShape.new(name: 'IdempotentParameterMismatch')
     IncludeGlobalResourceTypes = Shapes::BooleanShape.new(name: 'IncludeGlobalResourceTypes')
+    IncludedRegions = Shapes::ListShape.new(name: 'IncludedRegions')
     InsufficientDeliveryPolicyException = Shapes::StructureShape.new(name: 'InsufficientDeliveryPolicyException')
     InsufficientPermissionsException = Shapes::StructureShape.new(name: 'InsufficientPermissionsException')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -342,6 +358,9 @@ module Aws::ConfigService
     ListConfigurationRecordersResponse = Shapes::StructureShape.new(name: 'ListConfigurationRecordersResponse')
     ListConformancePackComplianceScoresRequest = Shapes::StructureShape.new(name: 'ListConformancePackComplianceScoresRequest')
     ListConformancePackComplianceScoresResponse = Shapes::StructureShape.new(name: 'ListConformancePackComplianceScoresResponse')
+    ListConnectorsMaxResults = Shapes::IntegerShape.new(name: 'ListConnectorsMaxResults')
+    ListConnectorsRequest = Shapes::StructureShape.new(name: 'ListConnectorsRequest')
+    ListConnectorsResponse = Shapes::StructureShape.new(name: 'ListConnectorsResponse')
     ListDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesRequest')
     ListDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesResponse')
     ListResourceEvaluationsPageItemLimit = Shapes::IntegerShape.new(name: 'ListResourceEvaluationsPageItemLimit')
@@ -356,6 +375,7 @@ module Aws::ConfigService
     MaxNumberOfConfigRulesExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigRulesExceededException')
     MaxNumberOfConfigurationRecordersExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigurationRecordersExceededException')
     MaxNumberOfConformancePacksExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConformancePacksExceededException')
+    MaxNumberOfConnectorsExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConnectorsExceededException')
     MaxNumberOfDeliveryChannelsExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfDeliveryChannelsExceededException')
     MaxNumberOfOrganizationConfigRulesExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfOrganizationConfigRulesExceededException')
     MaxNumberOfOrganizationConformancePacksExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfOrganizationConformancePacksExceededException')
@@ -425,6 +445,7 @@ module Aws::ConfigService
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     PolicyRuntime = Shapes::StringShape.new(name: 'PolicyRuntime')
     PolicyText = Shapes::StringShape.new(name: 'PolicyText')
+    Provider = Shapes::StringShape.new(name: 'Provider')
     PutAggregationAuthorizationRequest = Shapes::StructureShape.new(name: 'PutAggregationAuthorizationRequest')
     PutAggregationAuthorizationResponse = Shapes::StructureShape.new(name: 'PutAggregationAuthorizationResponse')
     PutConfigRuleRequest = Shapes::StructureShape.new(name: 'PutConfigRuleRequest')
@@ -433,6 +454,8 @@ module Aws::ConfigService
     PutConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'PutConfigurationRecorderRequest')
     PutConformancePackRequest = Shapes::StructureShape.new(name: 'PutConformancePackRequest')
     PutConformancePackResponse = Shapes::StructureShape.new(name: 'PutConformancePackResponse')
+    PutConnectorRequest = Shapes::StructureShape.new(name: 'PutConnectorRequest')
+    PutConnectorResponse = Shapes::StructureShape.new(name: 'PutConnectorResponse')
     PutDeliveryChannelRequest = Shapes::StructureShape.new(name: 'PutDeliveryChannelRequest')
     PutEvaluationsRequest = Shapes::StructureShape.new(name: 'PutEvaluationsRequest')
     PutEvaluationsResponse = Shapes::StructureShape.new(name: 'PutEvaluationsResponse')
@@ -453,6 +476,8 @@ module Aws::ConfigService
     PutServiceLinkedConfigurationRecorderResponse = Shapes::StructureShape.new(name: 'PutServiceLinkedConfigurationRecorderResponse')
     PutStoredQueryRequest = Shapes::StructureShape.new(name: 'PutStoredQueryRequest')
     PutStoredQueryResponse = Shapes::StructureShape.new(name: 'PutStoredQueryResponse')
+    PutThirdPartyServiceLinkedConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'PutThirdPartyServiceLinkedConfigurationRecorderRequest')
+    PutThirdPartyServiceLinkedConfigurationRecorderResponse = Shapes::StructureShape.new(name: 'PutThirdPartyServiceLinkedConfigurationRecorderResponse')
     QueryArn = Shapes::StringShape.new(name: 'QueryArn')
     QueryDescription = Shapes::StringShape.new(name: 'QueryDescription')
     QueryExpression = Shapes::StringShape.new(name: 'QueryExpression')
@@ -540,6 +565,10 @@ module Aws::ConfigService
     SSMDocumentVersion = Shapes::StringShape.new(name: 'SSMDocumentVersion')
     SchemaVersionId = Shapes::StringShape.new(name: 'SchemaVersionId')
     Scope = Shapes::StructureShape.new(name: 'Scope')
+    ScopeConfiguration = Shapes::StructureShape.new(name: 'ScopeConfiguration')
+    ScopeType = Shapes::StringShape.new(name: 'ScopeType')
+    ScopeValue = Shapes::StringShape.new(name: 'ScopeValue')
+    ScopeValues = Shapes::ListShape.new(name: 'ScopeValues')
     SelectAggregateResourceConfigRequest = Shapes::StructureShape.new(name: 'SelectAggregateResourceConfigRequest')
     SelectAggregateResourceConfigResponse = Shapes::StructureShape.new(name: 'SelectAggregateResourceConfigResponse')
     SelectResourceConfigRequest = Shapes::StructureShape.new(name: 'SelectResourceConfigRequest')
@@ -590,6 +619,7 @@ module Aws::ConfigService
     TemplateBody = Shapes::StringShape.new(name: 'TemplateBody')
     TemplateS3Uri = Shapes::StringShape.new(name: 'TemplateS3Uri')
     TemplateSSMDocumentDetails = Shapes::StructureShape.new(name: 'TemplateSSMDocumentDetails')
+    ThirdPartyCloudRegion = Shapes::StringShape.new(name: 'ThirdPartyCloudRegion')
     TimeWindow = Shapes::StructureShape.new(name: 'TimeWindow')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UnmodifiableEntityException = Shapes::StructureShape.new(name: 'UnmodifiableEntityException')
@@ -715,6 +745,10 @@ module Aws::ConfigService
 
     AssociateResourceTypesResponse.add_member(:configuration_recorder, Shapes::ShapeRef.new(shape: ConfigurationRecorder, required: true, location_name: "ConfigurationRecorder"))
     AssociateResourceTypesResponse.struct_class = Types::AssociateResourceTypesResponse
+
+    AzureConnectorConfiguration.add_member(:tenant_identifier, Shapes::ShapeRef.new(shape: AzureTenantIdentifier, required: true, location_name: "tenantIdentifier"))
+    AzureConnectorConfiguration.add_member(:client_identifier, Shapes::ShapeRef.new(shape: AzureClientIdentifier, required: true, location_name: "clientIdentifier"))
+    AzureConnectorConfiguration.struct_class = Types::AzureConnectorConfiguration
 
     BaseConfigurationItem.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     BaseConfigurationItem.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
@@ -896,6 +930,8 @@ module Aws::ConfigService
     ConfigurationRecorder.add_member(:recording_mode, Shapes::ShapeRef.new(shape: RecordingMode, location_name: "recordingMode"))
     ConfigurationRecorder.add_member(:recording_scope, Shapes::ShapeRef.new(shape: RecordingScope, location_name: "recordingScope"))
     ConfigurationRecorder.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "servicePrincipal"))
+    ConfigurationRecorder.add_member(:connector_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "connectorArn"))
+    ConfigurationRecorder.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: ScopeConfiguration, location_name: "scopeConfiguration"))
     ConfigurationRecorder.struct_class = Types::ConfigurationRecorder
 
     ConfigurationRecorderFilter.add_member(:filter_name, Shapes::ShapeRef.new(shape: ConfigurationRecorderFilterName, location_name: "filterName"))
@@ -930,6 +966,7 @@ module Aws::ConfigService
     ConfigurationRecorderSummary.add_member(:name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "name"))
     ConfigurationRecorderSummary.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "servicePrincipal"))
     ConfigurationRecorderSummary.add_member(:recording_scope, Shapes::ShapeRef.new(shape: RecordingScope, required: true, location_name: "recordingScope"))
+    ConfigurationRecorderSummary.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, location_name: "provider"))
     ConfigurationRecorderSummary.struct_class = Types::ConfigurationRecorderSummary
 
     ConflictException.struct_class = Types::ConflictException
@@ -1019,6 +1056,30 @@ module Aws::ConfigService
 
     ConformancePackTemplateValidationException.struct_class = Types::ConformancePackTemplateValidationException
 
+    Connector.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorName, required: true, location_name: "name"))
+    Connector.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    Connector.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: ConnectorConfiguration, required: true, location_name: "connectorConfiguration"))
+    Connector.add_member(:created_time, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "createdTime"))
+    Connector.struct_class = Types::Connector
+
+    ConnectorConfiguration.add_member(:azure, Shapes::ShapeRef.new(shape: AzureConnectorConfiguration, location_name: "azure"))
+    ConnectorConfiguration.struct_class = Types::ConnectorConfiguration
+
+    ConnectorFilter.add_member(:filter_name, Shapes::ShapeRef.new(shape: ConnectorFilterName, location_name: "filterName"))
+    ConnectorFilter.add_member(:filter_values, Shapes::ShapeRef.new(shape: FilterValueList, location_name: "filterValues"))
+    ConnectorFilter.struct_class = Types::ConnectorFilter
+
+    ConnectorFilterList.member = Shapes::ShapeRef.new(shape: ConnectorFilter)
+
+    ConnectorSummaries.member = Shapes::ShapeRef.new(shape: ConnectorSummary)
+
+    ConnectorSummary.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    ConnectorSummary.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorName, required: true, location_name: "name"))
+    ConnectorSummary.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, required: true, location_name: "provider"))
+    ConnectorSummary.add_member(:tenant_identifier, Shapes::ShapeRef.new(shape: AzureTenantIdentifier, required: true, location_name: "tenantIdentifier"))
+    ConnectorSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "createdTime"))
+    ConnectorSummary.struct_class = Types::ConnectorSummary
+
     ControlsList.member = Shapes::ShapeRef.new(shape: StringWithCharLimit128)
 
     CustomPolicyDetails.add_member(:policy_runtime, Shapes::ShapeRef.new(shape: PolicyRuntime, required: true, location_name: "PolicyRuntime"))
@@ -1043,6 +1104,9 @@ module Aws::ConfigService
 
     DeleteConformancePackRequest.add_member(:conformance_pack_name, Shapes::ShapeRef.new(shape: ConformancePackName, required: true, location_name: "ConformancePackName"))
     DeleteConformancePackRequest.struct_class = Types::DeleteConformancePackRequest
+
+    DeleteConnectorRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "Arn"))
+    DeleteConnectorRequest.struct_class = Types::DeleteConnectorRequest
 
     DeleteDeliveryChannelRequest.add_member(:delivery_channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "DeliveryChannelName"))
     DeleteDeliveryChannelRequest.struct_class = Types::DeleteDeliveryChannelRequest
@@ -1082,7 +1146,8 @@ module Aws::ConfigService
     DeleteRetentionConfigurationRequest.add_member(:retention_configuration_name, Shapes::ShapeRef.new(shape: RetentionConfigurationName, required: true, location_name: "RetentionConfigurationName"))
     DeleteRetentionConfigurationRequest.struct_class = Types::DeleteRetentionConfigurationRequest
 
-    DeleteServiceLinkedConfigurationRecorderRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, required: true, location_name: "ServicePrincipal"))
+    DeleteServiceLinkedConfigurationRecorderRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal"))
+    DeleteServiceLinkedConfigurationRecorderRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "Arn"))
     DeleteServiceLinkedConfigurationRecorderRequest.struct_class = Types::DeleteServiceLinkedConfigurationRecorderRequest
 
     DeleteServiceLinkedConfigurationRecorderResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "Arn"))
@@ -1182,8 +1247,8 @@ module Aws::ConfigService
     DescribeConfigRulesFilters.struct_class = Types::DescribeConfigRulesFilters
 
     DescribeConfigRulesRequest.add_member(:config_rule_names, Shapes::ShapeRef.new(shape: ConfigRuleNames, location_name: "ConfigRuleNames"))
-    DescribeConfigRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeConfigRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeConfigRulesFilters, location_name: "Filters"))
+    DescribeConfigRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeConfigRulesRequest.struct_class = Types::DescribeConfigRulesRequest
 
     DescribeConfigRulesResponse.add_member(:config_rules, Shapes::ShapeRef.new(shape: ConfigRules, location_name: "ConfigRules"))
@@ -1433,6 +1498,8 @@ module Aws::ConfigService
 
     FieldInfoList.member = Shapes::ShapeRef.new(shape: FieldInfo)
 
+    FilterValueList.member = Shapes::ShapeRef.new(shape: String)
+
     GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
     GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
     GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
@@ -1540,6 +1607,12 @@ module Aws::ConfigService
     GetConformancePackComplianceSummaryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetConformancePackComplianceSummaryResponse.struct_class = Types::GetConformancePackComplianceSummaryResponse
 
+    GetConnectorRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "Arn"))
+    GetConnectorRequest.struct_class = Types::GetConnectorRequest
+
+    GetConnectorResponse.add_member(:connector, Shapes::ShapeRef.new(shape: Connector, required: true, location_name: "Connector"))
+    GetConnectorResponse.struct_class = Types::GetConnectorResponse
+
     GetCustomRulePolicyRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
     GetCustomRulePolicyRequest.struct_class = Types::GetCustomRulePolicyRequest
 
@@ -1622,6 +1695,8 @@ module Aws::ConfigService
     IdempotentParameterMismatch.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     IdempotentParameterMismatch.struct_class = Types::IdempotentParameterMismatch
 
+    IncludedRegions.member = Shapes::ShapeRef.new(shape: ThirdPartyCloudRegion)
+
     InsufficientDeliveryPolicyException.struct_class = Types::InsufficientDeliveryPolicyException
 
     InsufficientPermissionsException.struct_class = Types::InsufficientPermissionsException
@@ -1687,6 +1762,15 @@ module Aws::ConfigService
     ListConformancePackComplianceScoresResponse.add_member(:conformance_pack_compliance_scores, Shapes::ShapeRef.new(shape: ConformancePackComplianceScores, required: true, location_name: "ConformancePackComplianceScores"))
     ListConformancePackComplianceScoresResponse.struct_class = Types::ListConformancePackComplianceScoresResponse
 
+    ListConnectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListConnectorsMaxResults, location_name: "MaxResults"))
+    ListConnectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListConnectorsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ConnectorFilterList, location_name: "Filters"))
+    ListConnectorsRequest.struct_class = Types::ListConnectorsRequest
+
+    ListConnectorsResponse.add_member(:connector_summaries, Shapes::ShapeRef.new(shape: ConnectorSummaries, required: true, location_name: "ConnectorSummaries"))
+    ListConnectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListConnectorsResponse.struct_class = Types::ListConnectorsResponse
+
     ListDiscoveredResourcesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     ListDiscoveredResourcesRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "resourceIds"))
     ListDiscoveredResourcesRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "resourceName"))
@@ -1732,6 +1816,8 @@ module Aws::ConfigService
     MaxNumberOfConfigurationRecordersExceededException.struct_class = Types::MaxNumberOfConfigurationRecordersExceededException
 
     MaxNumberOfConformancePacksExceededException.struct_class = Types::MaxNumberOfConformancePacksExceededException
+
+    MaxNumberOfConnectorsExceededException.struct_class = Types::MaxNumberOfConnectorsExceededException
 
     MaxNumberOfDeliveryChannelsExceededException.struct_class = Types::MaxNumberOfDeliveryChannelsExceededException
 
@@ -1949,6 +2035,13 @@ module Aws::ConfigService
     PutConformancePackResponse.add_member(:conformance_pack_arn, Shapes::ShapeRef.new(shape: ConformancePackArn, location_name: "ConformancePackArn"))
     PutConformancePackResponse.struct_class = Types::PutConformancePackResponse
 
+    PutConnectorRequest.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: ConnectorConfiguration, required: true, location_name: "ConnectorConfiguration"))
+    PutConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    PutConnectorRequest.struct_class = Types::PutConnectorRequest
+
+    PutConnectorResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "Arn"))
+    PutConnectorResponse.struct_class = Types::PutConnectorResponse
+
     PutDeliveryChannelRequest.add_member(:delivery_channel, Shapes::ShapeRef.new(shape: DeliveryChannel, required: true, location_name: "DeliveryChannel"))
     PutDeliveryChannelRequest.struct_class = Types::PutDeliveryChannelRequest
 
@@ -1971,6 +2064,7 @@ module Aws::ConfigService
     PutOrganizationConfigRuleRequest.add_member(:organization_custom_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
     PutOrganizationConfigRuleRequest.add_member(:excluded_accounts, Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))
     PutOrganizationConfigRuleRequest.add_member(:organization_custom_policy_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomPolicyRuleMetadata, location_name: "OrganizationCustomPolicyRuleMetadata"))
+    PutOrganizationConfigRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
     PutOrganizationConfigRuleRequest.struct_class = Types::PutOrganizationConfigRuleRequest
 
     PutOrganizationConfigRuleResponse.add_member(:organization_config_rule_arn, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "OrganizationConfigRuleArn"))
@@ -1983,6 +2077,7 @@ module Aws::ConfigService
     PutOrganizationConformancePackRequest.add_member(:delivery_s3_key_prefix, Shapes::ShapeRef.new(shape: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
     PutOrganizationConformancePackRequest.add_member(:conformance_pack_input_parameters, Shapes::ShapeRef.new(shape: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
     PutOrganizationConformancePackRequest.add_member(:excluded_accounts, Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))
+    PutOrganizationConformancePackRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
     PutOrganizationConformancePackRequest.struct_class = Types::PutOrganizationConformancePackRequest
 
     PutOrganizationConformancePackResponse.add_member(:organization_conformance_pack_arn, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "OrganizationConformancePackArn"))
@@ -2031,6 +2126,16 @@ module Aws::ConfigService
 
     PutStoredQueryResponse.add_member(:query_arn, Shapes::ShapeRef.new(shape: QueryArn, location_name: "QueryArn"))
     PutStoredQueryResponse.struct_class = Types::PutStoredQueryResponse
+
+    PutThirdPartyServiceLinkedConfigurationRecorderRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, required: true, location_name: "ServicePrincipal"))
+    PutThirdPartyServiceLinkedConfigurationRecorderRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ConnectorArn"))
+    PutThirdPartyServiceLinkedConfigurationRecorderRequest.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: ScopeConfiguration, required: true, location_name: "ScopeConfiguration"))
+    PutThirdPartyServiceLinkedConfigurationRecorderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    PutThirdPartyServiceLinkedConfigurationRecorderRequest.struct_class = Types::PutThirdPartyServiceLinkedConfigurationRecorderRequest
+
+    PutThirdPartyServiceLinkedConfigurationRecorderResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "Arn"))
+    PutThirdPartyServiceLinkedConfigurationRecorderResponse.add_member(:name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "Name"))
+    PutThirdPartyServiceLinkedConfigurationRecorderResponse.struct_class = Types::PutThirdPartyServiceLinkedConfigurationRecorderResponse
 
     QueryInfo.add_member(:select_fields, Shapes::ShapeRef.new(shape: FieldInfoList, location_name: "SelectFields"))
     QueryInfo.struct_class = Types::QueryInfo
@@ -2217,6 +2322,14 @@ module Aws::ConfigService
     Scope.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ComplianceResourceId"))
     Scope.add_member(:service_principals, Shapes::ShapeRef.new(shape: ServicePrincipals, location_name: "ServicePrincipals"))
     Scope.struct_class = Types::Scope
+
+    ScopeConfiguration.add_member(:scope_type, Shapes::ShapeRef.new(shape: ScopeType, required: true, location_name: "scopeType"))
+    ScopeConfiguration.add_member(:scope_values, Shapes::ShapeRef.new(shape: ScopeValues, location_name: "scopeValues"))
+    ScopeConfiguration.add_member(:all_regions, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "allRegions"))
+    ScopeConfiguration.add_member(:included_regions, Shapes::ShapeRef.new(shape: IncludedRegions, location_name: "includedRegions"))
+    ScopeConfiguration.struct_class = Types::ScopeConfiguration
+
+    ScopeValues.member = Shapes::ShapeRef.new(shape: ScopeValue)
 
     SelectAggregateResourceConfigRequest.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
     SelectAggregateResourceConfigRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
@@ -2452,6 +2565,16 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConformancePackException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:delete_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_delivery_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -3149,6 +3272,16 @@ module Aws::ConfigService
         )
       end)
 
+      api.add_operation(:get_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_custom_rule_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCustomRulePolicy"
         o.http_method = "POST"
@@ -3310,6 +3443,21 @@ module Aws::ConfigService
         )
       end)
 
+      api.add_operation(:list_connectors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConnectors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListConnectorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConnectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_discovered_resources, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDiscoveredResources"
         o.http_method = "POST"
@@ -3440,6 +3588,18 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MaxNumberOfConformancePacksExceededException)
+      end)
+
+      api.add_operation(:put_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+        o.errors << Shapes::ShapeRef.new(shape: MaxNumberOfConnectorsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:put_delivery_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -3574,6 +3734,17 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConcurrentModificationException)
+      end)
+
+      api.add_operation(:put_third_party_service_linked_configuration_recorder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutThirdPartyServiceLinkedConfigurationRecorder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutThirdPartyServiceLinkedConfigurationRecorderRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutThirdPartyServiceLinkedConfigurationRecorderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:select_aggregate_resource_config, Seahorse::Model::Operation.new.tap do |o|

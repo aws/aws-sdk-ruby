@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2026-06-29)
+------------------
+
+* Feature - Updated documentation to remove Aurora Serverless V1 references.
+
 1.88.0 (2026-05-29)
 ------------------
 

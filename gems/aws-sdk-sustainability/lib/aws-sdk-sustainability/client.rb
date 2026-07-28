@@ -479,13 +479,17 @@ module Aws::Sustainability
     # the operation returns quickly and successfully.
     #
     # @option params [required, Types::TimePeriod] :time_period
-    #   The date range for fetching estimated carbon emissions.
+    #   The date range for fetching estimated carbon emissions. The range must
+    #   include the start date of a month for that month's data to be
+    #   included in the response.
     #
     # @option params [Array<String>] :group_by
     #   The dimensions available for grouping estimated carbon emissions.
     #
     # @option params [Types::FilterExpression] :filter_by
-    #   The criteria for filtering estimated carbon emissions.
+    #   The criteria for filtering estimated carbon emissions. To determine
+    #   which dimensions are available to be filtered by, you can first call
+    #   GetEstimatedCarbonEmissionsDimensionValues
     #
     # @option params [Array<String>] :emissions_types
     #   The emission types to include in the results. If absent, returns
@@ -494,7 +498,14 @@ module Aws::Sustainability
     #
     # @option params [String] :granularity
     #   The time granularity for the results. If absent, uses `MONTHLY` time
-    #   granularity.
+    #   granularity. The smallest supported granularity for carbon emissions
+    #   is `MONTHLY`.
+    #
+    #   If requesting partial time periods, data will be returned based on the
+    #   smallest supported granularity. For example, requesting
+    #   `2025-04-01T00:00:00Z` to `2026-04-01T00:00:00Z` with
+    #   `YEARLY_CALENDAR` granularity will return the last 9 months for 2025
+    #   and the first 3 months of 2026.
     #
     # @option params [Types::GranularityConfiguration] :granularity_configuration
     #   Configuration for fiscal year calculations when using `YEARLY_FISCAL`
@@ -502,7 +513,7 @@ module Aws::Sustainability
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. Default is
-    #   40.
+    #   1000.
     #
     # @option params [String] :next_token
     #   The pagination token specifying which page of results to return in the
@@ -594,7 +605,7 @@ module Aws::Sustainability
     #     group_by: ["USAGE_ACCOUNT_ID"], # accepts USAGE_ACCOUNT_ID, REGION, SERVICE
     #     filter_by: {
     #       dimensions: {
-    #         "USAGE_ACCOUNT_ID" => ["String"],
+    #         "USAGE_ACCOUNT_ID" => ["DimensionValue"],
     #       },
     #     },
     #     emissions_types: ["TOTAL_LBM_CARBON_EMISSIONS"], # accepts TOTAL_LBM_CARBON_EMISSIONS, TOTAL_MBM_CARBON_EMISSIONS, TOTAL_SCOPE_1_CARBON_EMISSIONS, TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS, TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS, TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS, TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS
@@ -633,14 +644,16 @@ module Aws::Sustainability
     # returns quickly and successfully.
     #
     # @option params [required, Types::TimePeriod] :time_period
-    #   The date range for fetching the dimension values.
+    #   The date range for fetching the dimension values. The range must
+    #   include the start date of a month for that month's dimensions to be
+    #   included in the response.
     #
     # @option params [required, Array<String>] :dimensions
     #   The dimensions available for grouping estimated carbon emissions.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. Default is
-    #   40.
+    #   1000.
     #
     # @option params [String] :next_token
     #   The pagination token specifying which page of results to return in the
@@ -730,6 +743,236 @@ module Aws::Sustainability
       req.send_request(options)
     end
 
+    # Returns estimated water allocation values based on customer grouping
+    # and filtering parameters. We recommend using pagination to ensure that
+    # the operation returns quickly and successfully.
+    #
+    # @option params [required, Types::TimePeriod] :time_period
+    #   The date range for fetching estimated water allocation. The range must
+    #   include the start date of a year for that year's data to be included
+    #   in the response.
+    #
+    # @option params [Array<String>] :group_by
+    #   The dimensions available for grouping estimated water allocation.
+    #
+    # @option params [Types::FilterExpression] :filter_by
+    #   The criteria for filtering estimated water allocation. To determine
+    #   which dimensions are available to be filtered by, you can first call
+    #   GetEstimatedWaterAllocationDimensionValues
+    #
+    # @option params [Array<String>] :allocation_types
+    #   The allocation types to include in the results. If absent, returns
+    #   `TOTAL_WATER_WITHDRAWALS` allocation types.
+    #
+    # @option params [String] :granularity
+    #   The time granularity for the results. Only `YEARLY_CALENDAR` time
+    #   granularity is currently supported for water allocation. Defaults to
+    #   `YEARLY_CALENDAR` if absent.
+    #
+    #   If requesting partial time periods, data will be returned based on the
+    #   smallest supported granularity. For example, requesting
+    #   `2025-04-01T00:00:00Z` to `2026-04-01T00:00:00Z` with
+    #   `YEARLY_CALENDAR` will return all the data for 2026 only.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Default is
+    #   1000.
+    #
+    # @option params [String] :next_token
+    #   The pagination token specifying which page of results to return in the
+    #   response. If no token is provided, the default page is the first page.
+    #
+    # @return [Types::GetEstimatedWaterAllocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEstimatedWaterAllocationResponse#results #results} => Array&lt;Types::EstimatedWaterAllocation&gt;
+    #   * {Types::GetEstimatedWaterAllocationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: GetEstimatedWaterAllocationSuccess
+    #
+    #   resp = client.get_estimated_water_allocation({
+    #     allocation_types: [
+    #       "TOTAL_WATER_WITHDRAWALS", 
+    #     ], 
+    #     granularity: "YEARLY_CALENDAR", 
+    #     group_by: [
+    #       "SERVICE", 
+    #     ], 
+    #     time_period: {
+    #       end: Time.parse("2026-01-01T00:00:00.00Z"), 
+    #       start: Time.parse("2025-01-01T00:00:00.00Z"), 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     results: [
+    #       {
+    #         allocation_values: {
+    #           "TOTAL_WATER_WITHDRAWALS" => {
+    #             unit: "m3", 
+    #             value: 1, 
+    #           }, 
+    #         }, 
+    #         dimensions_values: {
+    #           "SERVICE" => "AmazonEC2", 
+    #         }, 
+    #         model_version: "v1.0.0", 
+    #         time_period: {
+    #           end: Time.parse("2026-01-01T00:00:00Z"), 
+    #           start: Time.parse("2025-01-01T00:00:00Z"), 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_estimated_water_allocation({
+    #     time_period: { # required
+    #       start: Time.now, # required
+    #       end: Time.now, # required
+    #     },
+    #     group_by: ["USAGE_ACCOUNT_ID"], # accepts USAGE_ACCOUNT_ID, REGION, SERVICE
+    #     filter_by: {
+    #       dimensions: {
+    #         "USAGE_ACCOUNT_ID" => ["DimensionValue"],
+    #       },
+    #     },
+    #     allocation_types: ["TOTAL_WATER_WITHDRAWALS"], # accepts TOTAL_WATER_WITHDRAWALS
+    #     granularity: "YEARLY_CALENDAR", # accepts YEARLY_CALENDAR, YEARLY_FISCAL, QUARTERLY_CALENDAR, QUARTERLY_FISCAL, MONTHLY
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].time_period.start #=> Time
+    #   resp.results[0].time_period.end #=> Time
+    #   resp.results[0].dimensions_values #=> Hash
+    #   resp.results[0].dimensions_values["Dimension"] #=> String
+    #   resp.results[0].model_version #=> String
+    #   resp.results[0].allocation_values #=> Hash
+    #   resp.results[0].allocation_values["WaterAllocationType"].value #=> Float
+    #   resp.results[0].allocation_values["WaterAllocationType"].unit #=> String, one of "m3"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sustainability-2018-05-10/GetEstimatedWaterAllocation AWS API Documentation
+    #
+    # @overload get_estimated_water_allocation(params = {})
+    # @param [Hash] params ({})
+    def get_estimated_water_allocation(params = {}, options = {})
+      req = build_request(:get_estimated_water_allocation, params)
+      req.send_request(options)
+    end
+
+    # Returns the possible dimension values available for a customer's
+    # account. We recommend using pagination to ensure that the operation
+    # returns quickly and successfully.
+    #
+    # @option params [required, Types::TimePeriod] :time_period
+    #   The date range for fetching the dimension values. The range must
+    #   include the start date of a year for that year's data to be included
+    #   in the response.
+    #
+    # @option params [required, Array<String>] :dimensions
+    #   The dimensions available for grouping estimated water allocation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Default is
+    #   1000.
+    #
+    # @option params [String] :next_token
+    #   The pagination token specifying which page of results to return in the
+    #   response. If no token is provided, the default page is the first page.
+    #
+    # @return [Types::GetEstimatedWaterAllocationDimensionValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEstimatedWaterAllocationDimensionValuesResponse#results #results} => Array&lt;Types::DimensionEntry&gt;
+    #   * {Types::GetEstimatedWaterAllocationDimensionValuesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: GetEstimatedWaterAllocationDimensionValuesSuccess
+    #
+    #   resp = client.get_estimated_water_allocation_dimension_values({
+    #     dimensions: [
+    #       "REGION", 
+    #       "SERVICE", 
+    #       "USAGE_ACCOUNT_ID", 
+    #     ], 
+    #     time_period: {
+    #       end: Time.parse("2026-01-01T00:00:00.00Z"), 
+    #       start: Time.parse("2025-01-01T00:00:00.00Z"), 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     results: [
+    #       {
+    #         dimension: "SERVICE", 
+    #         value: "AmazonEC2", 
+    #       }, 
+    #       {
+    #         dimension: "SERVICE", 
+    #         value: "AmazonS3", 
+    #       }, 
+    #       {
+    #         dimension: "SERVICE", 
+    #         value: "AmazonCloudFront", 
+    #       }, 
+    #       {
+    #         dimension: "REGION", 
+    #         value: "global", 
+    #       }, 
+    #       {
+    #         dimension: "REGION", 
+    #         value: "us-east-1", 
+    #       }, 
+    #       {
+    #         dimension: "REGION", 
+    #         value: "us-west-2", 
+    #       }, 
+    #       {
+    #         dimension: "USAGE_ACCOUNT_ID", 
+    #         value: "111222333444", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_estimated_water_allocation_dimension_values({
+    #     time_period: { # required
+    #       start: Time.now, # required
+    #       end: Time.now, # required
+    #     },
+    #     dimensions: ["USAGE_ACCOUNT_ID"], # required, accepts USAGE_ACCOUNT_ID, REGION, SERVICE
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].dimension #=> String, one of "USAGE_ACCOUNT_ID", "REGION", "SERVICE"
+    #   resp.results[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sustainability-2018-05-10/GetEstimatedWaterAllocationDimensionValues AWS API Documentation
+    #
+    # @overload get_estimated_water_allocation_dimension_values(params = {})
+    # @param [Hash] params ({})
+    def get_estimated_water_allocation_dimension_values(params = {}, options = {})
+      req = build_request(:get_estimated_water_allocation_dimension_values, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -748,7 +991,7 @@ module Aws::Sustainability
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sustainability'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

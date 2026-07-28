@@ -320,6 +320,7 @@ module Aws::Imagebuilder
       attr_accessor working_directory: ::String
       attr_accessor additional_instance_configuration: Types::AdditionalInstanceConfiguration
       attr_accessor ami_tags: ::Hash[::String, ::String]
+      attr_accessor ami_watermarks: ::Array[::String]
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -972,6 +973,7 @@ module Aws::Imagebuilder
       attr_accessor working_directory: ::String
       attr_accessor additional_instance_configuration: Types::AdditionalInstanceConfiguration
       attr_accessor ami_tags: ::Hash[::String, ::String]
+      attr_accessor ami_watermarks: ::Array[::String]
       SENSITIVE: []
     end
 

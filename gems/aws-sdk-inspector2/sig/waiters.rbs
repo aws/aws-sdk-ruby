@@ -8,6 +8,135 @@
 module Aws
   module Inspector2
     module Waiters
+
+      class ConnectorConnected
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?filter_criteria: {
+                      connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      accounts: Array[
+                        {
+                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      aws_config_connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      connector_type: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("CUSTOMER_MANAGED" | "SERVICE_LINKED")
+                        }
+                      ]?,
+                      provider: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("AZURE")
+                        }
+                      ]?
+                    }
+                  ) -> Client::_ListConnectorsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_ListConnectorsResponseSuccess
+      end
+
+      class ConnectorDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?filter_criteria: {
+                      connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      accounts: Array[
+                        {
+                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      aws_config_connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      connector_type: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("CUSTOMER_MANAGED" | "SERVICE_LINKED")
+                        }
+                      ]?,
+                      provider: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("AZURE")
+                        }
+                      ]?
+                    }
+                  ) -> Client::_ListConnectorsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_ListConnectorsResponseSuccess
+      end
+
+      class ConnectorEnabled
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?filter_criteria: {
+                      connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      accounts: Array[
+                        {
+                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      aws_config_connector_arns: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ::String
+                        }
+                      ]?,
+                      connector_type: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("CUSTOMER_MANAGED" | "SERVICE_LINKED")
+                        }
+                      ]?,
+                      provider: Array[
+                        {
+                          comparison: ("EQUALS"),
+                          value: ("AZURE")
+                        }
+                      ]?
+                    }
+                  ) -> Client::_ListConnectorsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_ListConnectorsResponseSuccess
+      end
     end
   end
 end

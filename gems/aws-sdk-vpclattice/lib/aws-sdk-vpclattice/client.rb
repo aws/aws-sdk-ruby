@@ -1243,6 +1243,13 @@ module Aws::VPCLattice
     #   * `AWS_IAM`: The resource uses an IAM policy. When this type is used,
     #     auth is enabled and an auth policy is required.
     #
+    # @option params [Integer] :idle_timeout_seconds
+    #   The amount of time, in seconds, that a connection can remain idle (no
+    #   data sent) before VPC Lattice closes it. The valid range is 60 to 600
+    #   seconds. If you don't specify a value, the default is 60 seconds.
+    #   This setting does not change the maximum connection duration of 10
+    #   minutes; connections are still closed when they reach that limit.
+    #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServiceResponse#id #id} => String
@@ -1252,6 +1259,7 @@ module Aws::VPCLattice
     #   * {Types::CreateServiceResponse#certificate_arn #certificate_arn} => String
     #   * {Types::CreateServiceResponse#status #status} => String
     #   * {Types::CreateServiceResponse#auth_type #auth_type} => String
+    #   * {Types::CreateServiceResponse#idle_timeout_seconds #idle_timeout_seconds} => Integer
     #   * {Types::CreateServiceResponse#dns_entry #dns_entry} => Types::DnsEntry
     #
     # @example Request syntax with placeholder values
@@ -1265,6 +1273,7 @@ module Aws::VPCLattice
     #     custom_domain_name: "ServiceCustomDomainName",
     #     certificate_arn: "CertificateArn",
     #     auth_type: "NONE", # accepts NONE, AWS_IAM
+    #     idle_timeout_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -1276,6 +1285,7 @@ module Aws::VPCLattice
     #   resp.certificate_arn #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.idle_timeout_seconds #=> Integer
     #   resp.dns_entry.domain_name #=> String
     #   resp.dns_entry.hosted_zone_id #=> String
     #
@@ -2658,6 +2668,7 @@ module Aws::VPCLattice
     #   * {Types::GetServiceResponse#certificate_arn #certificate_arn} => String
     #   * {Types::GetServiceResponse#status #status} => String
     #   * {Types::GetServiceResponse#auth_type #auth_type} => String
+    #   * {Types::GetServiceResponse#idle_timeout_seconds #idle_timeout_seconds} => Integer
     #   * {Types::GetServiceResponse#failure_code #failure_code} => String
     #   * {Types::GetServiceResponse#failure_message #failure_message} => String
     #
@@ -2680,6 +2691,7 @@ module Aws::VPCLattice
     #   resp.certificate_arn #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.idle_timeout_seconds #=> Integer
     #   resp.failure_code #=> String
     #   resp.failure_message #=> String
     #
@@ -4428,6 +4440,13 @@ module Aws::VPCLattice
     #   * `AWS_IAM`: The resource uses an IAM policy. When this type is used,
     #     auth is enabled and an auth policy is required.
     #
+    # @option params [Integer] :idle_timeout_seconds
+    #   The amount of time, in seconds, that a connection can remain idle (no
+    #   data sent) before VPC Lattice closes it. The valid range is 60 to 600
+    #   seconds. If you don't specify a value, the default is 60 seconds.
+    #   This setting does not change the maximum connection duration of 10
+    #   minutes; connections are still closed when they reach that limit.
+    #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServiceResponse#id #id} => String
@@ -4436,6 +4455,7 @@ module Aws::VPCLattice
     #   * {Types::UpdateServiceResponse#custom_domain_name #custom_domain_name} => String
     #   * {Types::UpdateServiceResponse#certificate_arn #certificate_arn} => String
     #   * {Types::UpdateServiceResponse#auth_type #auth_type} => String
+    #   * {Types::UpdateServiceResponse#idle_timeout_seconds #idle_timeout_seconds} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -4443,6 +4463,7 @@ module Aws::VPCLattice
     #     service_identifier: "ServiceIdentifier", # required
     #     certificate_arn: "CertificateArn",
     #     auth_type: "NONE", # accepts NONE, AWS_IAM
+    #     idle_timeout_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -4453,6 +4474,7 @@ module Aws::VPCLattice
     #   resp.custom_domain_name #=> String
     #   resp.certificate_arn #=> String
     #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.idle_timeout_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateService AWS API Documentation
     #
@@ -4641,7 +4663,7 @@ module Aws::VPCLattice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

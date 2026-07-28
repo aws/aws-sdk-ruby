@@ -676,6 +676,19 @@ module Aws::Redshift
       SENSITIVE: []
     end
 
+    class CreateQev2IdcApplicationMessage
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor qev_2_idc_application_name: ::String
+      attr_accessor idc_display_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateQev2IdcApplicationResult
+      attr_accessor qev_2_idc_application: Types::Qev2IdcApplication
+      SENSITIVE: []
+    end
+
     class CreateRedshiftIdcApplicationMessage
       attr_accessor idc_instance_arn: ::String
       attr_accessor redshift_idc_application_name: ::String
@@ -892,6 +905,11 @@ module Aws::Redshift
 
     class DeleteIntegrationMessage
       attr_accessor integration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQev2IdcApplicationMessage
+      attr_accessor qev_2_idc_application_arn: ::String
       SENSITIVE: []
     end
 
@@ -1229,6 +1247,19 @@ module Aws::Redshift
 
     class DescribePartnersOutputMessage
       attr_accessor partner_integration_info_list: ::Array[Types::PartnerIntegrationInfo]
+      SENSITIVE: []
+    end
+
+    class DescribeQev2IdcApplicationsMessage
+      attr_accessor qev_2_idc_application_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQev2IdcApplicationsResult
+      attr_accessor qev_2_idc_applications: ::Array[Types::Qev2IdcApplication]
+      attr_accessor marker: ::String
       SENSITIVE: []
     end
 
@@ -2093,6 +2124,17 @@ module Aws::Redshift
       SENSITIVE: []
     end
 
+    class ModifyQev2IdcApplicationMessage
+      attr_accessor qev_2_idc_application_arn: ::String
+      attr_accessor idc_display_name: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyQev2IdcApplicationResult
+      attr_accessor qev_2_idc_application: Types::Qev2IdcApplication
+      SENSITIVE: []
+    end
+
     class ModifyRedshiftIdcApplicationMessage
       attr_accessor redshift_idc_application_arn: ::String
       attr_accessor identity_namespace: ::String
@@ -2299,6 +2341,23 @@ module Aws::Redshift
     class PutResourcePolicyResult
       attr_accessor resource_policy: Types::ResourcePolicy
       SENSITIVE: []
+    end
+
+    class Qev2IdcApplication
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor qev_2_idc_application_name: ::String
+      attr_accessor qev_2_idc_application_arn: ::String
+      attr_accessor idc_managed_application_arn: ::String
+      attr_accessor idc_onboard_status: ::String
+      attr_accessor idc_display_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Qev2IdcApplicationAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class Qev2IdcApplicationNotExistsFault < Aws::EmptyStructure
     end
 
     class ReadWriteAccess

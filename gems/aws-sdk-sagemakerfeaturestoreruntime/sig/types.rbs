@@ -49,6 +49,33 @@ module Aws::SageMakerFeatureStoreRuntime
       SENSITIVE: []
     end
 
+    class BatchWriteRecordEntry
+      attr_accessor feature_group_name: ::String
+      attr_accessor record: ::Array[Types::FeatureValue]
+      attr_accessor target_stores: ::Array[("OnlineStore" | "OfflineStore")]
+      attr_accessor ttl_duration: Types::TtlDuration
+      SENSITIVE: []
+    end
+
+    class BatchWriteRecordError
+      attr_accessor entry: Types::BatchWriteRecordEntry
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchWriteRecordRequest
+      attr_accessor entries: ::Array[Types::BatchWriteRecordEntry]
+      attr_accessor ttl_duration: Types::TtlDuration
+      SENSITIVE: []
+    end
+
+    class BatchWriteRecordResponse
+      attr_accessor errors: ::Array[Types::BatchWriteRecordError]
+      attr_accessor unprocessed_entries: ::Array[Types::BatchWriteRecordEntry]
+      SENSITIVE: []
+    end
+
     class DeleteRecordRequest
       attr_accessor feature_group_name: ::String
       attr_accessor record_identifier_value_as_string: ::String
@@ -81,6 +108,20 @@ module Aws::SageMakerFeatureStoreRuntime
 
     class InternalFailure
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecordsRequest
+      attr_accessor feature_group_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor include_soft_deleted_records: bool
+      SENSITIVE: []
+    end
+
+    class ListRecordsResponse
+      attr_accessor record_identifiers: ::Array[::String]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 

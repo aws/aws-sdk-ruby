@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2026-06-29)
+------------------
+
+* Feature - Expand input validation to support Unicode characters and markdown table syntax.
+
 1.7.0 (2026-06-10)
 ------------------
 

@@ -525,11 +525,12 @@ module Aws::RedshiftDataAPIService
     # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
     #
     # @option params [required, Array<String>] :sqls
-    #   One or more SQL statements to run. The SQL statements are run as a
-    #   single transaction. They run serially in the order of the array.
-    #   Subsequent SQL statements don't start until the previous statement in
-    #   the array completes. If any SQL statement fails, then because they are
-    #   run as one transaction, all work is rolled back.
+    #   One or more SQL statements to run. The SQL statements run serially in
+    #   the order of the array. Subsequent SQL statements don't start until
+    #   the previous statement in the array completes. By default, the SQL
+    #   statements are run as a single transaction. If any SQL statement
+    #   fails, all work is rolled back. To change this behavior, see the
+    #   `ExecutionMode` parameter.
     #
     # @option params [String] :cluster_identifier
     #   The cluster identifier. This parameter is required when connecting to
@@ -558,8 +559,10 @@ module Aws::RedshiftDataAPIService
     #   you create them to identify the query.
     #
     # @option params [Array<Types::SqlParameter>] :parameters
-    #   The parameters for the SQL statements. The parameters are shared
-    #   across all SQL statements in the batch.
+    #   The parameters for the SQL statements. The parameters are available to
+    #   all SQL statements in the batch. Each statement can reference any
+    #   subset of the provided parameters. Each provided parameter must be
+    #   referenced by at least one SQL statement in the batch.
     #
     # @option params [String] :workgroup_name
     #   The serverless workgroup name or Amazon Resource Name (ARN). This
@@ -585,6 +588,19 @@ module Aws::RedshiftDataAPIService
     # @option params [String] :session_id
     #   The session identifier of the query.
     #
+    # @option params [String] :execution_mode
+    #   Determines how the SQL statements in the batch are run. If set to
+    #   `TRANSACTION` (the default), all SQL statements are run as a single
+    #   transaction and they are committed or rolled back together. If set to
+    #   `AUTO_COMMIT`, each SQL statement is committed individually, and a
+    #   failure of one statement does not affect the others.
+    #
+    # @option params [Integer] :wait_time_seconds
+    #   The number of seconds to wait for all SQL statements in the batch to
+    #   complete execution before returning the response. If the SQL
+    #   statements do not complete within the specified time, the response
+    #   returns the current status. The maximum value is 30 seconds.
+    #
     # @return [Types::BatchExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchExecuteStatementOutput#id #id} => String
@@ -596,6 +612,9 @@ module Aws::RedshiftDataAPIService
     #   * {Types::BatchExecuteStatementOutput#secret_arn #secret_arn} => String
     #   * {Types::BatchExecuteStatementOutput#workgroup_name #workgroup_name} => String
     #   * {Types::BatchExecuteStatementOutput#session_id #session_id} => String
+    #   * {Types::BatchExecuteStatementOutput#status #status} => String
+    #   * {Types::BatchExecuteStatementOutput#redshift_pid #redshift_pid} => Integer
+    #   * {Types::BatchExecuteStatementOutput#has_result_set #has_result_set} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -618,6 +637,8 @@ module Aws::RedshiftDataAPIService
     #     result_format: "JSON", # accepts JSON, CSV
     #     session_keep_alive_seconds: 1,
     #     session_id: "UUID",
+    #     execution_mode: "TRANSACTION", # accepts TRANSACTION, AUTO_COMMIT
+    #     wait_time_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -632,6 +653,9 @@ module Aws::RedshiftDataAPIService
     #   resp.secret_arn #=> String
     #   resp.workgroup_name #=> String
     #   resp.session_id #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED"
+    #   resp.redshift_pid #=> Integer
+    #   resp.has_result_set #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/BatchExecuteStatement AWS API Documentation
     #
@@ -703,6 +727,11 @@ module Aws::RedshiftDataAPIService
     #   is returned by `BatchExecuteStatment`, `ExecuteStatement`, and
     #   `ListStatements`.
     #
+    # @option params [Integer] :wait_time_seconds
+    #   The number of seconds to wait for the SQL statement to complete
+    #   execution before returning the description. The maximum value is 30
+    #   seconds.
+    #
     # @return [Types::DescribeStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeStatementResponse#id #id} => String
@@ -726,11 +755,13 @@ module Aws::RedshiftDataAPIService
     #   * {Types::DescribeStatementResponse#workgroup_name #workgroup_name} => String
     #   * {Types::DescribeStatementResponse#result_format #result_format} => String
     #   * {Types::DescribeStatementResponse#session_id #session_id} => String
+    #   * {Types::DescribeStatementResponse#execution_mode #execution_mode} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_statement({
     #     id: "UUID", # required
+    #     wait_time_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -769,6 +800,7 @@ module Aws::RedshiftDataAPIService
     #   resp.workgroup_name #=> String
     #   resp.result_format #=> String, one of "JSON", "CSV"
     #   resp.session_id #=> String
+    #   resp.execution_mode #=> String, one of "TRANSACTION", "AUTO_COMMIT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeStatement AWS API Documentation
     #
@@ -1022,6 +1054,12 @@ module Aws::RedshiftDataAPIService
     # @option params [String] :session_id
     #   The session identifier of the query.
     #
+    # @option params [Integer] :wait_time_seconds
+    #   The number of seconds to wait for the SQL statement to complete
+    #   execution before returning the response. If the SQL statement does not
+    #   complete within the specified time, the response returns the current
+    #   status. The maximum value is 30 seconds.
+    #
     # @return [Types::ExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExecuteStatementOutput#id #id} => String
@@ -1033,6 +1071,9 @@ module Aws::RedshiftDataAPIService
     #   * {Types::ExecuteStatementOutput#secret_arn #secret_arn} => String
     #   * {Types::ExecuteStatementOutput#workgroup_name #workgroup_name} => String
     #   * {Types::ExecuteStatementOutput#session_id #session_id} => String
+    #   * {Types::ExecuteStatementOutput#status #status} => String
+    #   * {Types::ExecuteStatementOutput#redshift_pid #redshift_pid} => Integer
+    #   * {Types::ExecuteStatementOutput#has_result_set #has_result_set} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1055,6 +1096,7 @@ module Aws::RedshiftDataAPIService
     #     result_format: "JSON", # accepts JSON, CSV
     #     session_keep_alive_seconds: 1,
     #     session_id: "UUID",
+    #     wait_time_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -1069,6 +1111,9 @@ module Aws::RedshiftDataAPIService
     #   resp.secret_arn #=> String
     #   resp.workgroup_name #=> String
     #   resp.session_id #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED"
+    #   resp.redshift_pid #=> Integer
+    #   resp.has_result_set #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ExecuteStatement AWS API Documentation
     #
@@ -1110,6 +1155,11 @@ module Aws::RedshiftDataAPIService
     #   command. If the NextToken field is empty, all response records have
     #   been retrieved for the request.
     #
+    # @option params [Integer] :wait_time_seconds
+    #   The number of seconds to wait for the SQL statement to complete
+    #   execution before returning the result. The maximum value is 30
+    #   seconds.
+    #
     # @return [Types::GetStatementResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetStatementResultResponse#records #records} => Array&lt;Array&lt;Types::Field&gt;&gt;
@@ -1124,6 +1174,7 @@ module Aws::RedshiftDataAPIService
     #   resp = client.get_statement_result({
     #     id: "UUID", # required
     #     next_token: "String",
+    #     wait_time_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -1192,6 +1243,11 @@ module Aws::RedshiftDataAPIService
     #   command. If the NextToken field is empty, all response records have
     #   been retrieved for the request.
     #
+    # @option params [Integer] :wait_time_seconds
+    #   The number of seconds to wait for the SQL statement to complete
+    #   execution before returning the result. The maximum value is 30
+    #   seconds.
+    #
     # @return [Types::GetStatementResultV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetStatementResultV2Response#records #records} => Array&lt;Types::QueryRecords&gt;
@@ -1207,6 +1263,7 @@ module Aws::RedshiftDataAPIService
     #   resp = client.get_statement_result_v2({
     #     id: "UUID", # required
     #     next_token: "String",
+    #     wait_time_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -1474,6 +1531,119 @@ module Aws::RedshiftDataAPIService
     # @param [Hash] params ({})
     def list_schemas(params = {}, options = {})
       req = build_request(:list_schemas, params)
+      req.send_request(options)
+    end
+
+    # Lists the sessions that the caller created in the last 24 hours. By
+    # default, only sessions with a status of `AVAILABLE` or `BUSY` are
+    # returned. You can filter the results by session status, compute target
+    # (cluster or serverless workgroup), or database. To retrieve the
+    # metadata for a single session, provide the `SessionId` parameter. Use
+    # `NextToken` to page through the session list.
+    #
+    # Returns only the sessions that the caller created. When
+    # identity-enhanced role sessions are used, you must provide either the
+    # `ClusterIdentifier` or `WorkgroupName` parameter to ensure that the
+    # AWS IAM Identity Center user can only access the Amazon Redshift IAM
+    # Identity Center applications they are assigned. For more information,
+    # see [ Trusted identity propagation overview][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html
+    #
+    # @option params [String] :next_token
+    #   A value that indicates the starting point for the next set of response
+    #   records in a subsequent request. If a value is returned in a response,
+    #   you can retrieve the next set of records by providing this returned
+    #   NextToken value in the next NextToken parameter and retrying the
+    #   command. If the NextToken field is empty, all response records have
+    #   been retrieved for the request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of sessions to return in the response. If more
+    #   sessions exist than fit in one response, the operation returns
+    #   `NextToken` to paginate the results.
+    #
+    # @option params [String] :session_id
+    #   The identifier of a specific session to return metadata for. This
+    #   value is a universally unique identifier (UUID) generated by Amazon
+    #   Redshift Data API. When you provide `SessionId`, you can't specify
+    #   `Status`, `ClusterIdentifier`, `WorkgroupName`, or `Database`.
+    #
+    # @option params [String] :status
+    #   The status of the sessions to list. If no status is specified,
+    #   sessions with a status of `AVAILABLE` or `BUSY` are returned. Status
+    #   values are defined as follows:
+    #
+    #   * AVAILABLE – The session is open and ready to run a SQL statement.
+    #
+    #   * BUSY – The session is currently running a SQL statement.
+    #
+    #   * CLOSED – The session is closed and can no longer run SQL statements.
+    #
+    # @option params [Boolean] :role_level
+    #   Specifies whether to return all sessions created by the caller's IAM
+    #   role, including sessions from previous IAM sessions. If false, only
+    #   sessions created in the current IAM session are returned. The default
+    #   is true.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier. Only sessions on this cluster are returned.
+    #   When providing `ClusterIdentifier`, then `WorkgroupName` can't be
+    #   specified.
+    #
+    # @option params [String] :workgroup_name
+    #   The serverless workgroup name or Amazon Resource Name (ARN). Only
+    #   sessions on this workgroup are returned. When providing
+    #   `WorkgroupName`, then `ClusterIdentifier` can't be specified.
+    #
+    # @option params [String] :database
+    #   The name of the database. Only sessions connected to this database are
+    #   returned.
+    #
+    # @return [Types::ListSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSessionsResponse#sessions #sessions} => Array&lt;Types::SessionData&gt;
+    #   * {Types::ListSessionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sessions({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     session_id: "UUID",
+    #     status: "AVAILABLE", # accepts AVAILABLE, BUSY, CLOSED
+    #     role_level: false,
+    #     cluster_identifier: "ClusterIdentifierString",
+    #     workgroup_name: "WorkgroupNameString",
+    #     database: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].session_id #=> String
+    #   resp.sessions[0].status #=> String, one of "AVAILABLE", "BUSY", "CLOSED"
+    #   resp.sessions[0].created_at #=> Time
+    #   resp.sessions[0].updated_at #=> Time
+    #   resp.sessions[0].database #=> String
+    #   resp.sessions[0].db_user #=> String
+    #   resp.sessions[0].cluster_identifier #=> String
+    #   resp.sessions[0].workgroup_name #=> String
+    #   resp.sessions[0].session_alive_seconds #=> Integer
+    #   resp.sessions[0].session_ttl #=> Time
+    #   resp.sessions[0].current_statement_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListSessions AWS API Documentation
+    #
+    # @overload list_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_sessions(params = {}, options = {})
+      req = build_request(:list_sessions, params)
       req.send_request(options)
     end
 
@@ -1765,7 +1935,7 @@ module Aws::RedshiftDataAPIService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

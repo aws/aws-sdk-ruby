@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.177.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.176.0 (2026-06-30)
+------------------
+
+* Feature - Adds support for host kernel selection for on-demand builds.
+
 1.175.0 (2026-05-29)
 ------------------
 

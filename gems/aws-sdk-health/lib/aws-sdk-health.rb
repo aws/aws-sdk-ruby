@@ -54,7 +54,7 @@ module Aws::Health
   autoload :EndpointProvider, 'aws-sdk-health/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-health/endpoints'
 
-  GEM_VERSION = '1.101.0'
+  GEM_VERSION = '1.102.0'
 
 end
 

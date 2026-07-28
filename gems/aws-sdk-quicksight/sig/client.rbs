@@ -337,6 +337,9 @@ module Aws
                                        aws_account_id: ::String,
                                        custom_permissions_name: ::String,
                                        ?capabilities: Params::capabilities,
+                                       ?governance: {
+                                         default_category_effects: Hash[::String, ("DENY_BY_DEFAULT")]?
+                                       },
                                        ?tags: Array[
                                          {
                                            key: ::String,
@@ -645,6 +648,47 @@ module Aws
                               ?ingestion_type: ("INCREMENTAL_REFRESH" | "FULL_REFRESH")
                             ) -> _CreateIngestionResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngestionResponseSuccess
+
+      interface _CreateKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKnowledgeBaseResponse]
+        def knowledge_base_arn: () -> ::String
+        def knowledge_base_id: () -> ::String
+        def creation_status: () -> ("CREATING" | "UPDATING" | "ACTIVE" | "FAILED" | "DELETING")
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_knowledge_base-instance_method
+      def create_knowledge_base: (
+                                   aws_account_id: ::String,
+                                   knowledge_base_id: ::String,
+                                   name: ::String,
+                                   data_source_arn: ::String,
+                                   knowledge_base_configuration: {
+                                     template_configuration: {
+                                       template: {
+                                       }?
+                                     }?
+                                   },
+                                   ?description: ::String,
+                                   ?permissions: Array[
+                                     {
+                                       principal: ::String,
+                                       actions: Array[::String]
+                                     }
+                                   ],
+                                   ?media_extraction_configuration: Params::media_extraction_configuration,
+                                   ?access_control_configuration: {
+                                     is_acl_enabled: bool?
+                                   },
+                                   ?primary_owner_arn: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     }
+                                   ]
+                                 ) -> _CreateKnowledgeBaseResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKnowledgeBaseResponseSuccess
 
       interface _CreateNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateNamespaceResponse]
@@ -1180,7 +1224,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_identity_propagation_config-instance_method
       def delete_identity_propagation_config: (
                                                 aws_account_id: ::String,
-                                                service: ("REDSHIFT" | "QBUSINESS" | "ATHENA")
+                                                service: ("REDSHIFT" | "QBUSINESS" | "ATHENA" | "GLUE_DATA_CATALOG")
                                               ) -> _DeleteIdentityPropagationConfigResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdentityPropagationConfigResponseSuccess
 
@@ -3524,7 +3568,7 @@ module Aws
                                     ?max_results: ::Integer,
                                     ?filters: Array[
                                       {
-                                        name: ("KNOWLEDGE_BASE_ID" | "KNOWLEDGE_BASE_NAME" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "KNOWLEDGE_BASE_SIZE_BYTES" | "PRIMARY_OWNER"),
+                                        name: ("KNOWLEDGE_BASE_ID" | "KNOWLEDGE_BASE_NAME" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "KNOWLEDGE_BASE_SIZE_BYTES" | "PRIMARY_OWNER" | "DATASOURCE_ARN"),
                                         operator: ("STRING_EQUALS" | "STRING_LIKE" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN_OR_EQUALS"),
                                         value: ::String
                                       }
@@ -4267,7 +4311,10 @@ module Aws
       def update_custom_permissions: (
                                        aws_account_id: ::String,
                                        custom_permissions_name: ::String,
-                                       ?capabilities: Params::capabilities
+                                       ?capabilities: Params::capabilities,
+                                       ?governance: {
+                                         default_category_effects: Hash[::String, ("DENY_BY_DEFAULT")]?
+                                       }
                                      ) -> _UpdateCustomPermissionsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomPermissionsResponseSuccess
 
@@ -4664,7 +4711,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_identity_propagation_config-instance_method
       def update_identity_propagation_config: (
                                                 aws_account_id: ::String,
-                                                service: ("REDSHIFT" | "QBUSINESS" | "ATHENA"),
+                                                service: ("REDSHIFT" | "QBUSINESS" | "ATHENA" | "GLUE_DATA_CATALOG"),
                                                 ?authorized_targets: Array[::String]
                                               ) -> _UpdateIdentityPropagationConfigResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdentityPropagationConfigResponseSuccess
@@ -4702,6 +4749,33 @@ module Aws
                                      ]
                                    ) -> _UpdateKeyRegistrationResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKeyRegistrationResponseSuccess
+
+      interface _UpdateKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKnowledgeBaseResponse]
+        def knowledge_base_arn: () -> ::String
+        def knowledge_base_id: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_knowledge_base-instance_method
+      def update_knowledge_base: (
+                                   aws_account_id: ::String,
+                                   knowledge_base_id: ::String,
+                                   ?name: ::String,
+                                   ?description: ::String,
+                                   ?knowledge_base_configuration: {
+                                     template_configuration: {
+                                       template: {
+                                       }?
+                                     }?
+                                   },
+                                   ?media_extraction_configuration: Params::media_extraction_configuration,
+                                   ?is_email_notification_opted_for_ingestion_failures: bool,
+                                   ?access_control_configuration: {
+                                     is_acl_enabled: bool?
+                                   }
+                                 ) -> _UpdateKnowledgeBaseResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBaseResponseSuccess
 
       interface _UpdateKnowledgeBasePermissionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKnowledgeBasePermissionsResponse]

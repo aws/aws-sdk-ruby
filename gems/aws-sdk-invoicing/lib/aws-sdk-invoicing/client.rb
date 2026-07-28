@@ -1276,9 +1276,9 @@ module Aws::Invoicing
     #   resp.procurement_portal_preference.contacts #=> Array
     #   resp.procurement_portal_preference.contacts[0].name #=> String
     #   resp.procurement_portal_preference.contacts[0].email #=> String
-    #   resp.procurement_portal_preference.einvoice_delivery_preference_status #=> String, one of "PENDING_VERIFICATION", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
+    #   resp.procurement_portal_preference.einvoice_delivery_preference_status #=> String, one of "PENDING_VERIFICATION", "VALIDATED", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
     #   resp.procurement_portal_preference.einvoice_delivery_preference_status_reason #=> String
-    #   resp.procurement_portal_preference.purchase_order_retrieval_preference_status #=> String, one of "PENDING_VERIFICATION", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
+    #   resp.procurement_portal_preference.purchase_order_retrieval_preference_status #=> String, one of "PENDING_VERIFICATION", "VALIDATED", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
     #   resp.procurement_portal_preference.purchase_order_retrieval_preference_status_reason #=> String
     #   resp.procurement_portal_preference.version #=> Integer
     #   resp.procurement_portal_preference.create_date #=> Time
@@ -2445,9 +2445,9 @@ module Aws::Invoicing
     #   resp.procurement_portal_preferences[0].selector.seller_of_records[0] #=> String
     #   resp.procurement_portal_preferences[0].einvoice_delivery_enabled #=> Boolean
     #   resp.procurement_portal_preferences[0].purchase_order_retrieval_enabled #=> Boolean
-    #   resp.procurement_portal_preferences[0].einvoice_delivery_preference_status #=> String, one of "PENDING_VERIFICATION", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
+    #   resp.procurement_portal_preferences[0].einvoice_delivery_preference_status #=> String, one of "PENDING_VERIFICATION", "VALIDATED", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
     #   resp.procurement_portal_preferences[0].einvoice_delivery_preference_status_reason #=> String
-    #   resp.procurement_portal_preferences[0].purchase_order_retrieval_preference_status #=> String, one of "PENDING_VERIFICATION", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
+    #   resp.procurement_portal_preferences[0].purchase_order_retrieval_preference_status #=> String, one of "PENDING_VERIFICATION", "VALIDATED", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
     #   resp.procurement_portal_preferences[0].purchase_order_retrieval_preference_status_reason #=> String
     #   resp.procurement_portal_preferences[0].version #=> Integer
     #   resp.procurement_portal_preferences[0].create_date #=> Time
@@ -2674,6 +2674,64 @@ module Aws::Invoicing
     # @param [Hash] params ({})
     def put_procurement_portal_preference(params = {}, options = {})
       req = build_request(:put_procurement_portal_preference, params)
+      req.send_request(options)
+    end
+
+    # <i> <b>This feature API is subject to changing at any time. For more
+    # information, see the <a
+    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
+    # Service Terms</a> (Betas and Previews).</b> </i>
+    #
+    # Sends a validation request for a procurement portal preference. This
+    # operation initiates the validation process by issuing a validation
+    # code that confirms ownership and connectivity of the configured
+    # procurement portal endpoint. Use `VerifyProcurementPortalValidation`
+    # to submit the received code and complete validation.
+    #
+    # @option params [required, String] :procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference to
+    #   validate.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::SendProcurementPortalValidationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendProcurementPortalValidationResponse#procurement_portal_preference_arn #procurement_portal_preference_arn} => String
+    #
+    #
+    # @example Example: SendProcurementPortalValidation call
+    #
+    #   resp = client.send_procurement_portal_validation({
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_procurement_portal_validation({
+    #     procurement_portal_preference_arn: "ProcurementPortalPreferenceArnString", # required
+    #     client_token: "BasicStringWithoutSpace",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.procurement_portal_preference_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/SendProcurementPortalValidation AWS API Documentation
+    #
+    # @overload send_procurement_portal_validation(params = {})
+    # @param [Hash] params ({})
+    def send_procurement_portal_validation(params = {}, options = {})
+      req = build_request(:send_procurement_portal_validation, params)
       req.send_request(options)
     end
 
@@ -2914,9 +2972,9 @@ module Aws::Invoicing
     #
     #   resp = client.update_procurement_portal_preference_status({
     #     procurement_portal_preference_arn: "ProcurementPortalPreferenceArnString", # required
-    #     einvoice_delivery_preference_status: "PENDING_VERIFICATION", # accepts PENDING_VERIFICATION, TEST_INITIALIZED, TEST_INITIALIZATION_FAILED, TEST_FAILED, ACTIVE, SUSPENDED
+    #     einvoice_delivery_preference_status: "PENDING_VERIFICATION", # accepts PENDING_VERIFICATION, VALIDATED, TEST_INITIALIZED, TEST_INITIALIZATION_FAILED, TEST_FAILED, ACTIVE, SUSPENDED
     #     einvoice_delivery_preference_status_reason: "BasicString",
-    #     purchase_order_retrieval_preference_status: "PENDING_VERIFICATION", # accepts PENDING_VERIFICATION, TEST_INITIALIZED, TEST_INITIALIZATION_FAILED, TEST_FAILED, ACTIVE, SUSPENDED
+    #     purchase_order_retrieval_preference_status: "PENDING_VERIFICATION", # accepts PENDING_VERIFICATION, VALIDATED, TEST_INITIALIZED, TEST_INITIALIZATION_FAILED, TEST_FAILED, ACTIVE, SUSPENDED
     #     purchase_order_retrieval_preference_status_reason: "BasicString",
     #     client_token: "BasicStringWithoutSpace",
     #   })
@@ -2931,6 +2989,69 @@ module Aws::Invoicing
     # @param [Hash] params ({})
     def update_procurement_portal_preference_status(params = {}, options = {})
       req = build_request(:update_procurement_portal_preference_status, params)
+      req.send_request(options)
+    end
+
+    # <i> <b>This feature API is subject to changing at any time. For more
+    # information, see the <a
+    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
+    # Service Terms</a> (Betas and Previews).</b> </i>
+    #
+    # Submits a validation code to complete the validation of a procurement
+    # portal preference. Use this operation after calling
+    # `SendProcurementPortalValidation` to confirm ownership and
+    # connectivity of the configured procurement portal endpoint.
+    #
+    # @option params [required, String] :procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference to
+    #   validate.
+    #
+    # @option params [required, String] :code
+    #   The validation code received from the procurement portal in response
+    #   to a previous `SendProcurementPortalValidation` request.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::VerifyProcurementPortalValidationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VerifyProcurementPortalValidationResponse#procurement_portal_preference_arn #procurement_portal_preference_arn} => String
+    #
+    #
+    # @example Example: VerifyProcurementPortalValidation call
+    #
+    #   resp = client.verify_procurement_portal_validation({
+    #     code: "validation-code-123", 
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.verify_procurement_portal_validation({
+    #     procurement_portal_preference_arn: "ProcurementPortalPreferenceArnString", # required
+    #     code: "BasicStringWithoutSpace", # required
+    #     client_token: "BasicStringWithoutSpace",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.procurement_portal_preference_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/VerifyProcurementPortalValidation AWS API Documentation
+    #
+    # @overload verify_procurement_portal_validation(params = {})
+    # @param [Hash] params ({})
+    def verify_procurement_portal_validation(params = {}, options = {})
+      req = build_request(:verify_procurement_portal_validation, params)
       req.send_request(options)
     end
 
@@ -2952,7 +3073,7 @@ module Aws::Invoicing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-invoicing'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

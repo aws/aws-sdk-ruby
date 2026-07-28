@@ -62,7 +62,20 @@ module Aws::NetworkFirewall
     ConditionKey = Shapes::StringShape.new(name: 'ConditionKey')
     ConditionOperator = Shapes::StringShape.new(name: 'ConditionOperator')
     ConfigurationSyncState = Shapes::StringShape.new(name: 'ConfigurationSyncState')
+    ContainerAssociationLastUpdatedTime = Shapes::TimestampShape.new(name: 'ContainerAssociationLastUpdatedTime')
+    ContainerAssociationStatus = Shapes::StringShape.new(name: 'ContainerAssociationStatus')
+    ContainerAssociationSummary = Shapes::StructureShape.new(name: 'ContainerAssociationSummary')
+    ContainerAssociations = Shapes::ListShape.new(name: 'ContainerAssociations')
+    ContainerAttribute = Shapes::StructureShape.new(name: 'ContainerAttribute')
+    ContainerAttributeKey = Shapes::StringShape.new(name: 'ContainerAttributeKey')
+    ContainerAttributeValue = Shapes::StringShape.new(name: 'ContainerAttributeValue')
+    ContainerAttributes = Shapes::ListShape.new(name: 'ContainerAttributes')
+    ContainerMonitoringConfiguration = Shapes::StructureShape.new(name: 'ContainerMonitoringConfiguration')
+    ContainerMonitoringConfigurations = Shapes::ListShape.new(name: 'ContainerMonitoringConfigurations')
+    ContainerMonitoringType = Shapes::StringShape.new(name: 'ContainerMonitoringType')
     Count = Shapes::IntegerShape.new(name: 'Count')
+    CreateContainerAssociationRequest = Shapes::StructureShape.new(name: 'CreateContainerAssociationRequest')
+    CreateContainerAssociationResponse = Shapes::StructureShape.new(name: 'CreateContainerAssociationResponse')
     CreateFirewallPolicyRequest = Shapes::StructureShape.new(name: 'CreateFirewallPolicyRequest')
     CreateFirewallPolicyResponse = Shapes::StructureShape.new(name: 'CreateFirewallPolicyResponse')
     CreateFirewallRequest = Shapes::StructureShape.new(name: 'CreateFirewallRequest')
@@ -88,6 +101,8 @@ module Aws::NetworkFirewall
     CustomAction = Shapes::StructureShape.new(name: 'CustomAction')
     CustomActions = Shapes::ListShape.new(name: 'CustomActions')
     DeepThreatInspection = Shapes::BooleanShape.new(name: 'DeepThreatInspection')
+    DeleteContainerAssociationRequest = Shapes::StructureShape.new(name: 'DeleteContainerAssociationRequest')
+    DeleteContainerAssociationResponse = Shapes::StructureShape.new(name: 'DeleteContainerAssociationResponse')
     DeleteFirewallPolicyRequest = Shapes::StructureShape.new(name: 'DeleteFirewallPolicyRequest')
     DeleteFirewallPolicyResponse = Shapes::StructureShape.new(name: 'DeleteFirewallPolicyResponse')
     DeleteFirewallRequest = Shapes::StructureShape.new(name: 'DeleteFirewallRequest')
@@ -111,6 +126,8 @@ module Aws::NetworkFirewall
     DeleteTime = Shapes::TimestampShape.new(name: 'DeleteTime')
     DeleteVpcEndpointAssociationRequest = Shapes::StructureShape.new(name: 'DeleteVpcEndpointAssociationRequest')
     DeleteVpcEndpointAssociationResponse = Shapes::StructureShape.new(name: 'DeleteVpcEndpointAssociationResponse')
+    DescribeContainerAssociationRequest = Shapes::StructureShape.new(name: 'DescribeContainerAssociationRequest')
+    DescribeContainerAssociationResponse = Shapes::StructureShape.new(name: 'DescribeContainerAssociationResponse')
     DescribeFirewallMetadataRequest = Shapes::StructureShape.new(name: 'DescribeFirewallMetadataRequest')
     DescribeFirewallMetadataResponse = Shapes::StructureShape.new(name: 'DescribeFirewallMetadataResponse')
     DescribeFirewallPolicyRequest = Shapes::StructureShape.new(name: 'DescribeFirewallPolicyRequest')
@@ -219,6 +236,8 @@ module Aws::NetworkFirewall
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAnalysisReportsRequest = Shapes::StructureShape.new(name: 'ListAnalysisReportsRequest')
     ListAnalysisReportsResponse = Shapes::StructureShape.new(name: 'ListAnalysisReportsResponse')
+    ListContainerAssociationsRequest = Shapes::StructureShape.new(name: 'ListContainerAssociationsRequest')
+    ListContainerAssociationsResponse = Shapes::StructureShape.new(name: 'ListContainerAssociationsResponse')
     ListFirewallPoliciesRequest = Shapes::StructureShape.new(name: 'ListFirewallPoliciesRequest')
     ListFirewallPoliciesResponse = Shapes::StructureShape.new(name: 'ListFirewallPoliciesResponse')
     ListFirewallsRequest = Shapes::StructureShape.new(name: 'ListFirewallsRequest')
@@ -433,6 +452,8 @@ module Aws::NetworkFirewall
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAvailabilityZoneChangeProtectionRequest = Shapes::StructureShape.new(name: 'UpdateAvailabilityZoneChangeProtectionRequest')
     UpdateAvailabilityZoneChangeProtectionResponse = Shapes::StructureShape.new(name: 'UpdateAvailabilityZoneChangeProtectionResponse')
+    UpdateContainerAssociationRequest = Shapes::StructureShape.new(name: 'UpdateContainerAssociationRequest')
+    UpdateContainerAssociationResponse = Shapes::StructureShape.new(name: 'UpdateContainerAssociationResponse')
     UpdateFirewallAnalysisSettingsRequest = Shapes::StructureShape.new(name: 'UpdateFirewallAnalysisSettingsRequest')
     UpdateFirewallAnalysisSettingsResponse = Shapes::StructureShape.new(name: 'UpdateFirewallAnalysisSettingsResponse')
     UpdateFirewallDeleteProtectionRequest = Shapes::StructureShape.new(name: 'UpdateFirewallDeleteProtectionRequest')
@@ -599,6 +620,41 @@ module Aws::NetworkFirewall
     CheckCertificateRevocationStatusActions.add_member(:unknown_status_action, Shapes::ShapeRef.new(shape: RevocationCheckAction, location_name: "UnknownStatusAction"))
     CheckCertificateRevocationStatusActions.struct_class = Types::CheckCertificateRevocationStatusActions
 
+    ContainerAssociationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
+    ContainerAssociationSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    ContainerAssociationSummary.struct_class = Types::ContainerAssociationSummary
+
+    ContainerAssociations.member = Shapes::ShapeRef.new(shape: ContainerAssociationSummary)
+
+    ContainerAttribute.add_member(:key, Shapes::ShapeRef.new(shape: ContainerAttributeKey, required: true, location_name: "Key"))
+    ContainerAttribute.add_member(:value, Shapes::ShapeRef.new(shape: ContainerAttributeValue, required: true, location_name: "Value"))
+    ContainerAttribute.struct_class = Types::ContainerAttribute
+
+    ContainerAttributes.member = Shapes::ShapeRef.new(shape: ContainerAttribute)
+
+    ContainerMonitoringConfiguration.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ClusterArn"))
+    ContainerMonitoringConfiguration.add_member(:attribute_filters, Shapes::ShapeRef.new(shape: ContainerAttributes, location_name: "AttributeFilters"))
+    ContainerMonitoringConfiguration.struct_class = Types::ContainerMonitoringConfiguration
+
+    ContainerMonitoringConfigurations.member = Shapes::ShapeRef.new(shape: ContainerMonitoringConfiguration)
+
+    CreateContainerAssociationRequest.add_member(:container_association_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ContainerAssociationName"))
+    CreateContainerAssociationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateContainerAssociationRequest.add_member(:type, Shapes::ShapeRef.new(shape: ContainerMonitoringType, required: true, location_name: "Type"))
+    CreateContainerAssociationRequest.add_member(:container_monitoring_configurations, Shapes::ShapeRef.new(shape: ContainerMonitoringConfigurations, required: true, location_name: "ContainerMonitoringConfigurations"))
+    CreateContainerAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateContainerAssociationRequest.struct_class = Types::CreateContainerAssociationRequest
+
+    CreateContainerAssociationResponse.add_member(:container_association_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ContainerAssociationName"))
+    CreateContainerAssociationResponse.add_member(:container_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ContainerAssociationArn"))
+    CreateContainerAssociationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateContainerAssociationResponse.add_member(:type, Shapes::ShapeRef.new(shape: ContainerMonitoringType, location_name: "Type"))
+    CreateContainerAssociationResponse.add_member(:container_monitoring_configurations, Shapes::ShapeRef.new(shape: ContainerMonitoringConfigurations, location_name: "ContainerMonitoringConfigurations"))
+    CreateContainerAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ContainerAssociationStatus, location_name: "Status"))
+    CreateContainerAssociationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateContainerAssociationResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    CreateContainerAssociationResponse.struct_class = Types::CreateContainerAssociationResponse
+
     CreateFirewallPolicyRequest.add_member(:firewall_policy_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "FirewallPolicyName"))
     CreateFirewallPolicyRequest.add_member(:firewall_policy, Shapes::ShapeRef.new(shape: FirewallPolicy, required: true, location_name: "FirewallPolicy"))
     CreateFirewallPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -735,6 +791,15 @@ module Aws::NetworkFirewall
 
     CustomActions.member = Shapes::ShapeRef.new(shape: CustomAction)
 
+    DeleteContainerAssociationRequest.add_member(:container_association_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ContainerAssociationName"))
+    DeleteContainerAssociationRequest.add_member(:container_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ContainerAssociationArn"))
+    DeleteContainerAssociationRequest.struct_class = Types::DeleteContainerAssociationRequest
+
+    DeleteContainerAssociationResponse.add_member(:container_association_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ContainerAssociationName"))
+    DeleteContainerAssociationResponse.add_member(:container_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ContainerAssociationArn"))
+    DeleteContainerAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ContainerAssociationStatus, location_name: "Status"))
+    DeleteContainerAssociationResponse.struct_class = Types::DeleteContainerAssociationResponse
+
     DeleteFirewallPolicyRequest.add_member(:firewall_policy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallPolicyName"))
     DeleteFirewallPolicyRequest.add_member(:firewall_policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallPolicyArn"))
     DeleteFirewallPolicyRequest.struct_class = Types::DeleteFirewallPolicyRequest
@@ -817,6 +882,22 @@ module Aws::NetworkFirewall
     DeleteVpcEndpointAssociationResponse.add_member(:vpc_endpoint_association, Shapes::ShapeRef.new(shape: VpcEndpointAssociation, location_name: "VpcEndpointAssociation"))
     DeleteVpcEndpointAssociationResponse.add_member(:vpc_endpoint_association_status, Shapes::ShapeRef.new(shape: VpcEndpointAssociationStatus, location_name: "VpcEndpointAssociationStatus"))
     DeleteVpcEndpointAssociationResponse.struct_class = Types::DeleteVpcEndpointAssociationResponse
+
+    DescribeContainerAssociationRequest.add_member(:container_association_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ContainerAssociationName"))
+    DescribeContainerAssociationRequest.add_member(:container_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ContainerAssociationArn"))
+    DescribeContainerAssociationRequest.struct_class = Types::DescribeContainerAssociationRequest
+
+    DescribeContainerAssociationResponse.add_member(:container_association_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ContainerAssociationName"))
+    DescribeContainerAssociationResponse.add_member(:container_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ContainerAssociationArn"))
+    DescribeContainerAssociationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeContainerAssociationResponse.add_member(:type, Shapes::ShapeRef.new(shape: ContainerMonitoringType, location_name: "Type"))
+    DescribeContainerAssociationResponse.add_member(:container_monitoring_configurations, Shapes::ShapeRef.new(shape: ContainerMonitoringConfigurations, location_name: "ContainerMonitoringConfigurations"))
+    DescribeContainerAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ContainerAssociationStatus, location_name: "Status"))
+    DescribeContainerAssociationResponse.add_member(:resolved_cidr_count, Shapes::ShapeRef.new(shape: CIDRCount, location_name: "ResolvedCidrCount"))
+    DescribeContainerAssociationResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: ContainerAssociationLastUpdatedTime, location_name: "LastUpdatedTime"))
+    DescribeContainerAssociationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    DescribeContainerAssociationResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    DescribeContainerAssociationResponse.struct_class = Types::DescribeContainerAssociationResponse
 
     DescribeFirewallMetadataRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     DescribeFirewallMetadataRequest.struct_class = Types::DescribeFirewallMetadataRequest
@@ -1212,6 +1293,14 @@ module Aws::NetworkFirewall
     ListAnalysisReportsResponse.add_member(:analysis_reports, Shapes::ShapeRef.new(shape: AnalysisReports, location_name: "AnalysisReports"))
     ListAnalysisReportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListAnalysisReportsResponse.struct_class = Types::ListAnalysisReportsResponse
+
+    ListContainerAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListContainerAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListContainerAssociationsRequest.struct_class = Types::ListContainerAssociationsRequest
+
+    ListContainerAssociationsResponse.add_member(:container_associations, Shapes::ShapeRef.new(shape: ContainerAssociations, location_name: "ContainerAssociations"))
+    ListContainerAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListContainerAssociationsResponse.struct_class = Types::ListContainerAssociationsResponse
 
     ListFirewallPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListFirewallPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
@@ -1819,6 +1908,25 @@ module Aws::NetworkFirewall
     UpdateAvailabilityZoneChangeProtectionResponse.add_member(:availability_zone_change_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "AvailabilityZoneChangeProtection"))
     UpdateAvailabilityZoneChangeProtectionResponse.struct_class = Types::UpdateAvailabilityZoneChangeProtectionResponse
 
+    UpdateContainerAssociationRequest.add_member(:container_association_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ContainerAssociationName"))
+    UpdateContainerAssociationRequest.add_member(:container_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ContainerAssociationArn"))
+    UpdateContainerAssociationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateContainerAssociationRequest.add_member(:type, Shapes::ShapeRef.new(shape: ContainerMonitoringType, required: true, location_name: "Type"))
+    UpdateContainerAssociationRequest.add_member(:container_monitoring_configurations, Shapes::ShapeRef.new(shape: ContainerMonitoringConfigurations, required: true, location_name: "ContainerMonitoringConfigurations"))
+    UpdateContainerAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    UpdateContainerAssociationRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
+    UpdateContainerAssociationRequest.struct_class = Types::UpdateContainerAssociationRequest
+
+    UpdateContainerAssociationResponse.add_member(:container_association_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ContainerAssociationName"))
+    UpdateContainerAssociationResponse.add_member(:container_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ContainerAssociationArn"))
+    UpdateContainerAssociationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateContainerAssociationResponse.add_member(:type, Shapes::ShapeRef.new(shape: ContainerMonitoringType, location_name: "Type"))
+    UpdateContainerAssociationResponse.add_member(:container_monitoring_configurations, Shapes::ShapeRef.new(shape: ContainerMonitoringConfigurations, location_name: "ContainerMonitoringConfigurations"))
+    UpdateContainerAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ContainerAssociationStatus, location_name: "Status"))
+    UpdateContainerAssociationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    UpdateContainerAssociationResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    UpdateContainerAssociationResponse.struct_class = Types::UpdateContainerAssociationResponse
+
     UpdateFirewallAnalysisSettingsRequest.add_member(:enabled_analysis_types, Shapes::ShapeRef.new(shape: EnabledAnalysisTypes, location_name: "EnabledAnalysisTypes"))
     UpdateFirewallAnalysisSettingsRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     UpdateFirewallAnalysisSettingsRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
@@ -2120,6 +2228,19 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_container_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContainerAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateContainerAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContainerAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
+      end)
+
       api.add_operation(:create_firewall, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateFirewall"
         o.http_method = "POST"
@@ -2235,6 +2356,19 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+      end)
+
+      api.add_operation(:delete_container_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteContainerAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteContainerAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteContainerAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
@@ -2378,6 +2512,18 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+      end)
+
+      api.add_operation(:describe_container_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeContainerAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeContainerAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeContainerAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_firewall, Seahorse::Model::Operation.new.tap do |o|
@@ -2627,6 +2773,23 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_container_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContainerAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListContainerAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContainerAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -2925,6 +3088,19 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceOwnerCheckException)
+      end)
+
+      api.add_operation(:update_container_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateContainerAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateContainerAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateContainerAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
       api.add_operation(:update_firewall_analysis_settings, Seahorse::Model::Operation.new.tap do |o|

@@ -79,6 +79,11 @@ module Aws
       visa: {
         primary_account_number: ::String,
         pan_sequence_number: ::String
+      }?,
+      union_pay: {
+        primary_account_number: ::String,
+        pan_sequence_number: ::String,
+        application_transaction_counter: ::String
       }?
     }
 
@@ -86,7 +91,7 @@ module Aws
       major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
       primary_account_number: ::String,
       pan_sequence_number: ::String,
-      session_key_derivation_mode: ("EMV_COMMON_SESSION_KEY" | "EMV2000" | "AMEX" | "MASTERCARD_SESSION_KEY" | "VISA"),
+      session_key_derivation_mode: ("EMV_COMMON_SESSION_KEY" | "EMV2000" | "AMEX" | "MASTERCARD_SESSION_KEY" | "VISA" | "UNION_PAY"),
       session_key_derivation_value: {
         application_cryptogram: ::String?,
         application_transaction_counter: ::String?

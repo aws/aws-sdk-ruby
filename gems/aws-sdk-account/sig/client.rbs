@@ -80,7 +80,7 @@ module Aws
 
       interface _AcceptPrimaryEmailUpdateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AcceptPrimaryEmailUpdateResponse]
-        def status: () -> ("PENDING" | "ACCEPTED")
+        def status: () -> ("PENDING" | "ACCEPTED" | "COMPLETED" | "FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#accept_primary_email_update-instance_method
       def accept_primary_email_update: (
@@ -166,6 +166,17 @@ module Aws
                              ) -> _GetPrimaryEmailResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPrimaryEmailResponseSuccess
 
+      interface _GetPrimaryEmailUpdateStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPrimaryEmailUpdateStatusResponse]
+        def status: () -> ("PENDING" | "ACCEPTED" | "COMPLETED" | "FAILED")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#get_primary_email_update_status-instance_method
+      def get_primary_email_update_status: (
+                                             ?account_id: ::String
+                                           ) -> _GetPrimaryEmailUpdateStatusResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPrimaryEmailUpdateStatusResponseSuccess
+
       interface _GetRegionOptStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRegionOptStatusResponse]
         def region_name: () -> ::String
@@ -232,7 +243,7 @@ module Aws
 
       interface _StartPrimaryEmailUpdateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartPrimaryEmailUpdateResponse]
-        def status: () -> ("PENDING" | "ACCEPTED")
+        def status: () -> ("PENDING" | "ACCEPTED" | "COMPLETED" | "FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#start_primary_email_update-instance_method
       def start_primary_email_update: (

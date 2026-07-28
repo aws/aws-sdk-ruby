@@ -98,7 +98,9 @@ module Aws
             name: ::String
           }
         ]
-      }?
+      }?,
+      allowed_result_receivers: Array[::String]?,
+      allowed_additional_analyses: Array[::String]?
     }
 
       type configured_table_analysis_rule_policy_v1 = {
@@ -133,6 +135,30 @@ module Aws
 
       type configured_table_association_analysis_rule_policy = {
       v1: Params::configured_table_association_analysis_rule_policy_v1?
+    }
+
+      type intermediate_table_analysis_rule_custom = {
+      allowed_analyses: Array[::String]?,
+      additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")?,
+      allowed_additional_analyses: Array[::String]?,
+      allowed_analysis_providers: Array[::String]?,
+      allowed_result_receivers: Array[::String]?,
+      differential_privacy: {
+        columns: Array[
+          {
+            name: ::String
+          }
+        ]
+      }?,
+      disallowed_output_columns: Array[::String]?
+    }
+
+      type intermediate_table_analysis_rule_policy_v1 = {
+      custom: Params::intermediate_table_analysis_rule_custom?
+    }
+
+      type intermediate_table_analysis_rule_policy = {
+      v1: Params::intermediate_table_analysis_rule_policy_v1?
     }
 
       type membership_protected_query_output_configuration = {

@@ -110,6 +110,18 @@ module Aws::ACM
     #   Specifies the domain validation method.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_key_pair_origin
+    #   The origin of the certificate's key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The ARN of the ACME endpoint used to issue the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_account_id
+    #   The ACME account identifier associated with the certificate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmCertificateMetadata AWS API Documentation
     #
     class AcmCertificateMetadata < Struct.new(
@@ -125,7 +137,10 @@ module Aws::ACM
       :type,
       :export_option,
       :managed_by,
-      :validation_method)
+      :validation_method,
+      :certificate_key_pair_origin,
+      :acme_endpoint_arn,
+      :acme_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -166,6 +181,18 @@ module Aws::ACM
     #   Filter by validation method.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_key_pair_origin
+    #   Filter by certificate key pair origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   Filter by ACME endpoint ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_account_id
+    #   Filter by ACME account identifier.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmCertificateMetadataFilter AWS API Documentation
     #
     class AcmCertificateMetadataFilter < Struct.new(
@@ -177,6 +204,9 @@ module Aws::ACM
       :export_option,
       :managed_by,
       :validation_method,
+      :certificate_key_pair_origin,
+      :acme_endpoint_arn,
+      :acme_account_id,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -190,7 +220,418 @@ module Aws::ACM
       class ExportOption < AcmCertificateMetadataFilter; end
       class ManagedBy < AcmCertificateMetadataFilter; end
       class ValidationMethod < AcmCertificateMetadataFilter; end
+      class CertificateKeyPairOrigin < AcmCertificateMetadataFilter; end
+      class AcmeEndpointArn < AcmCertificateMetadataFilter; end
+      class AcmeAccountId < AcmCertificateMetadataFilter; end
       class Unknown < AcmCertificateMetadataFilter; end
+    end
+
+    # Contains detailed information about an ACME account.
+    #
+    # @!attribute [rw] account_url
+    #   The URL of the ACME account.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key_thumbprint
+    #   The thumbprint of the public key associated with the ACME account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the ACME account.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the ACME account was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the external account binding
+    #   associated with this ACME account.
+    #   @return [String]
+    #
+    # @!attribute [rw] contacts
+    #   The contact information for the ACME account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmeAccount AWS API Documentation
+    #
+    class AcmeAccount < Struct.new(
+      :account_url,
+      :public_key_thumbprint,
+      :status,
+      :created_at,
+      :acme_external_account_binding_arn,
+      :contacts)
+      SENSITIVE = [:contacts]
+      include Aws::Structure
+    end
+
+    # Contains summary information about an ACME account.
+    #
+    # @!attribute [rw] account_url
+    #   The URL of the ACME account.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key_thumbprint
+    #   The thumbprint of the public key associated with the ACME account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the ACME account.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the ACME account was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the external account binding
+    #   associated with this ACME account.
+    #   @return [String]
+    #
+    # @!attribute [rw] contacts
+    #   The contact information for the ACME account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmeAccountSummary AWS API Documentation
+    #
+    class AcmeAccountSummary < Struct.new(
+      :account_url,
+      :public_key_thumbprint,
+      :status,
+      :created_at,
+      :acme_external_account_binding_arn,
+      :contacts)
+      SENSITIVE = [:contacts]
+      include Aws::Structure
+    end
+
+    # Contains detailed information about an ACME domain validation.
+    #
+    # @!attribute [rw] acme_domain_validation_arn
+    #   The Amazon Resource Name (ARN) of the ACME domain validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name being validated.
+    #   @return [String]
+    #
+    # @!attribute [rw] prevalidation_type
+    #   The type of prevalidation used.
+    #   @return [String]
+    #
+    # @!attribute [rw] prevalidation_details
+    #   Details about the prevalidation configuration.
+    #   @return [Types::PrevalidationDetails]
+    #
+    # @!attribute [rw] status
+    #   The status of the domain validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_details
+    #   Details about the failure, if the validation failed.
+    #   @return [Types::FailureDetails]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the domain validation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the domain validation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmeDomainValidation AWS API Documentation
+    #
+    class AcmeDomainValidation < Struct.new(
+      :acme_domain_validation_arn,
+      :acme_endpoint_arn,
+      :domain_name,
+      :prevalidation_type,
+      :prevalidation_details,
+      :status,
+      :failure_details,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an ACME domain validation.
+    #
+    # @!attribute [rw] acme_domain_validation_arn
+    #   The Amazon Resource Name (ARN) of the ACME domain validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name being validated.
+    #   @return [String]
+    #
+    # @!attribute [rw] prevalidation_type
+    #   The type of prevalidation used.
+    #   @return [String]
+    #
+    # @!attribute [rw] prevalidation_details
+    #   Details about the prevalidation configuration.
+    #   @return [Types::PrevalidationDetails]
+    #
+    # @!attribute [rw] status
+    #   The status of the domain validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_details
+    #   Details about the failure, if the validation failed.
+    #   @return [Types::FailureDetails]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the domain validation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the domain validation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmeDomainValidationSummary AWS API Documentation
+    #
+    class AcmeDomainValidationSummary < Struct.new(
+      :acme_domain_validation_arn,
+      :acme_endpoint_arn,
+      :domain_name,
+      :prevalidation_type,
+      :prevalidation_details,
+      :status,
+      :failure_details,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about an ACME endpoint.
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_url
+    #   The URL of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason the ACME endpoint failed, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_behavior
+    #   The authorization behavior of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact
+    #   Whether ACME clients must provide contact information during account
+    #   registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority
+    #   The certificate authority configuration for the ACME endpoint.
+    #   @return [Types::CertificateAuthority]
+    #
+    # @!attribute [rw] certificate_tags
+    #   Tags applied to certificates issued through this ACME endpoint.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the ACME endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the ACME endpoint was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmeEndpoint AWS API Documentation
+    #
+    class AcmeEndpoint < Struct.new(
+      :acme_endpoint_arn,
+      :endpoint_url,
+      :status,
+      :failure_reason,
+      :authorization_behavior,
+      :contact,
+      :certificate_authority,
+      :certificate_tags,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an ACME endpoint.
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_url
+    #   The URL of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason the ACME endpoint failed, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_behavior
+    #   The authorization behavior of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact
+    #   Whether ACME clients must provide contact information during account
+    #   registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority
+    #   The certificate authority configuration for the ACME endpoint.
+    #   @return [Types::CertificateAuthority]
+    #
+    # @!attribute [rw] certificate_tags
+    #   Tags applied to certificates issued through this ACME endpoint.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the ACME endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the ACME endpoint was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmeEndpointSummary AWS API Documentation
+    #
+    class AcmeEndpointSummary < Struct.new(
+      :acme_endpoint_arn,
+      :endpoint_url,
+      :status,
+      :failure_reason,
+      :authorization_behavior,
+      :contact,
+      :certificate_authority,
+      :certificate_tags,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about an ACME external account binding.
+    #
+    # @!attribute [rw] acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the ACME external account binding.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   external account binding.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The time at which the external account binding expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] revoked_at
+    #   The time at which the external account binding was revoked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_used_at
+    #   The time at which the external account binding was last used.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the external account binding was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the external account binding was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmeExternalAccountBinding AWS API Documentation
+    #
+    class AcmeExternalAccountBinding < Struct.new(
+      :acme_external_account_binding_arn,
+      :acme_endpoint_arn,
+      :role_arn,
+      :expires_at,
+      :revoked_at,
+      :last_used_at,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an ACME external account binding.
+    #
+    # @!attribute [rw] acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the ACME external account binding.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   external account binding.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The time at which the external account binding expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] revoked_at
+    #   The time at which the external account binding was revoked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_used_at
+    #   The time at which the external account binding was last used.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the external account binding was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the external account binding was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmeExternalAccountBindingSummary AWS API Documentation
+    #
+    class AcmeExternalAccountBindingSummary < Struct.new(
+      :acme_external_account_binding_arn,
+      :acme_endpoint_arn,
+      :role_arn,
+      :expires_at,
+      :revoked_at,
+      :last_used_at,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] certificate_arn
@@ -218,6 +659,29 @@ module Aws::ACM
       :tags)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Defines the certificate authority to use for an ACME endpoint.
+    #
+    # @note CertificateAuthority is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CertificateAuthority is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CertificateAuthority corresponding to the set member.
+    #
+    # @!attribute [rw] public_certificate_authority
+    #   Configuration for using a public certificate authority.
+    #   @return [Types::PublicCertificateAuthority]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateAuthority AWS API Documentation
+    #
+    class CertificateAuthority < Struct.new(
+      :public_certificate_authority,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PublicCertificateAuthority < CertificateAuthority; end
+      class Unknown < CertificateAuthority; end
     end
 
     # Contains metadata about an ACM certificate. This structure is returned
@@ -405,6 +869,18 @@ module Aws::ACM
     #   in a certificate transparency log.
     #   @return [Types::CertificateOptions]
     #
+    # @!attribute [rw] certificate_key_pair_origin
+    #   The origin of the certificate's key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The ARN of the ACME endpoint used to issue the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_account_id
+    #   The ACME account identifier associated with the certificate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateDetail AWS API Documentation
     #
     class CertificateDetail < Struct.new(
@@ -434,7 +910,10 @@ module Aws::ACM
       :extended_key_usages,
       :certificate_authority_arn,
       :renewal_eligibility,
-      :options)
+      :options,
+      :certificate_key_pair_origin,
+      :acme_endpoint_arn,
+      :acme_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -716,8 +1195,7 @@ module Aws::ACM
     #   @return [Boolean]
     #
     # @!attribute [rw] exported
-    #   Indicates whether the certificate has been exported. This value
-    #   exists only when the certificate type is `PRIVATE`.
+    #   Indicates whether the certificate has been exported.
     #   @return [Boolean]
     #
     # @!attribute [rw] renewal_eligibility
@@ -758,6 +1236,10 @@ module Aws::ACM
     #   certificate issued by ACM.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_key_pair_origin
+    #   The origin of the certificate's key pair.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateSummary AWS API Documentation
     #
     class CertificateSummary < Struct.new(
@@ -780,7 +1262,8 @@ module Aws::ACM
       :issued_at,
       :imported_at,
       :revoked_at,
-      :managed_by)
+      :managed_by,
+      :certificate_key_pair_origin)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -819,6 +1302,158 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @!attribute [rw] idempotency_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name to validate.
+    #   @return [String]
+    #
+    # @!attribute [rw] prevalidation_options
+    #   The prevalidation options for the domain.
+    #   @return [Types::PrevalidationOptions]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags to associate with the domain validation.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CreateAcmeDomainValidationRequest AWS API Documentation
+    #
+    class CreateAcmeDomainValidationRequest < Struct.new(
+      :idempotency_token,
+      :acme_endpoint_arn,
+      :domain_name,
+      :prevalidation_options,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_domain_validation_arn
+    #   The Amazon Resource Name (ARN) of the created domain validation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CreateAcmeDomainValidationResponse AWS API Documentation
+    #
+    class CreateAcmeDomainValidationResponse < Struct.new(
+      :acme_domain_validation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] idempotency_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_behavior
+    #   The authorization behavior for the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact
+    #   Specifies whether ACME clients must provide contact information
+    #   during account registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority
+    #   The type of certificate authority to use for issuing certificates
+    #   through this ACME endpoint.
+    #   @return [Types::CertificateAuthority]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags to associate with the ACME endpoint.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] certificate_tags
+    #   Tags to apply to certificates issued through this ACME endpoint.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CreateAcmeEndpointRequest AWS API Documentation
+    #
+    class CreateAcmeEndpointRequest < Struct.new(
+      :idempotency_token,
+      :authorization_behavior,
+      :contact,
+      :certificate_authority,
+      :tags,
+      :certificate_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the created ACME endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CreateAcmeEndpointResponse AWS API Documentation
+    #
+    class CreateAcmeEndpointResponse < Struct.new(
+      :acme_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] idempotency_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to associate with the
+    #   external account binding.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The expiration configuration for the external account binding.
+    #   @return [Types::Expiration]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags to associate with the external account binding.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CreateAcmeExternalAccountBindingRequest AWS API Documentation
+    #
+    class CreateAcmeExternalAccountBindingRequest < Struct.new(
+      :idempotency_token,
+      :acme_endpoint_arn,
+      :role_arn,
+      :expiration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] external_account_binding
+    #   The created external account binding.
+    #   @return [Types::AcmeExternalAccountBinding]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CreateAcmeExternalAccountBindingResponse AWS API Documentation
+    #
+    class CreateAcmeExternalAccountBindingResponse < Struct.new(
+      :external_account_binding)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the X.500 relative distinguished name (RDN).
     #
     # @!attribute [rw] object_identifier
@@ -835,6 +1470,44 @@ module Aws::ACM
     class CustomAttribute < Struct.new(
       :object_identifier,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_domain_validation_arn
+    #   The Amazon Resource Name (ARN) of the ACME domain validation to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteAcmeDomainValidationRequest AWS API Documentation
+    #
+    class DeleteAcmeDomainValidationRequest < Struct.new(
+      :acme_domain_validation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteAcmeEndpointRequest AWS API Documentation
+    #
+    class DeleteAcmeEndpointRequest < Struct.new(
+      :acme_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the ACME external account binding
+    #   to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteAcmeExternalAccountBindingRequest AWS API Documentation
+    #
+    class DeleteAcmeExternalAccountBindingRequest < Struct.new(
+      :acme_external_account_binding_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -857,6 +1530,107 @@ module Aws::ACM
     #
     class DeleteCertificateRequest < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_url
+    #   The URL of the ACME account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeAccountRequest AWS API Documentation
+    #
+    class DescribeAcmeAccountRequest < Struct.new(
+      :acme_endpoint_arn,
+      :account_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_account
+    #   The ACME account details.
+    #   @return [Types::AcmeAccount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeAccountResponse AWS API Documentation
+    #
+    class DescribeAcmeAccountResponse < Struct.new(
+      :acme_account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_domain_validation_arn
+    #   The Amazon Resource Name (ARN) of the ACME domain validation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeDomainValidationRequest AWS API Documentation
+    #
+    class DescribeAcmeDomainValidationRequest < Struct.new(
+      :acme_domain_validation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_domain_validation
+    #   The ACME domain validation details.
+    #   @return [Types::AcmeDomainValidation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeDomainValidationResponse AWS API Documentation
+    #
+    class DescribeAcmeDomainValidationResponse < Struct.new(
+      :acme_domain_validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeEndpointRequest AWS API Documentation
+    #
+    class DescribeAcmeEndpointRequest < Struct.new(
+      :acme_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_endpoint
+    #   The ACME endpoint details.
+    #   @return [Types::AcmeEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeEndpointResponse AWS API Documentation
+    #
+    class DescribeAcmeEndpointResponse < Struct.new(
+      :acme_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the ACME external account binding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeExternalAccountBindingRequest AWS API Documentation
+    #
+    class DescribeAcmeExternalAccountBindingRequest < Struct.new(
+      :acme_external_account_binding_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] external_account_binding
+    #   The external account binding details.
+    #   @return [Types::AcmeExternalAccountBinding]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeAcmeExternalAccountBindingResponse AWS API Documentation
+    #
+    class DescribeAcmeExternalAccountBindingResponse < Struct.new(
+      :external_account_binding)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1005,6 +1779,74 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # DNS prevalidation details including the resource record for
+    # validation.
+    #
+    # @!attribute [rw] domain_scope
+    #   The scope of domains covered by this prevalidation.
+    #   @return [Types::DomainScope]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The Route 53 hosted zone ID for DNS validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_record
+    #   The DNS resource record to create for domain validation.
+    #   @return [Types::ResourceRecord]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DnsPrevalidationDetails AWS API Documentation
+    #
+    class DnsPrevalidationDetails < Struct.new(
+      :domain_scope,
+      :hosted_zone_id,
+      :resource_record)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # DNS prevalidation options for domain validation.
+    #
+    # @!attribute [rw] domain_scope
+    #   The scope of domains covered by this prevalidation.
+    #   @return [Types::DomainScope]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The Route 53 hosted zone ID for DNS validation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DnsPrevalidationOptions AWS API Documentation
+    #
+    class DnsPrevalidationOptions < Struct.new(
+      :domain_scope,
+      :hosted_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the scope of domain validation.
+    #
+    # @!attribute [rw] exact_domain
+    #   Whether validation applies to the exact domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdomains
+    #   Whether validation applies to subdomains.
+    #   @return [String]
+    #
+    # @!attribute [rw] wildcards
+    #   Whether validation applies to wildcard domains.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DomainScope AWS API Documentation
+    #
+    class DomainScope < Struct.new(
+      :exact_domain,
+      :subdomains,
+      :wildcards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the validation of each domain name in the
     # certificate.
     #
@@ -1108,6 +1950,25 @@ module Aws::ACM
     class DomainValidationOption < Struct.new(
       :domain_name,
       :validation_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an expiration configuration.
+    #
+    # @!attribute [rw] value
+    #   The numeric value of the expiration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The time unit for the expiration value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Expiration AWS API Documentation
+    #
+    class Expiration < Struct.new(
+      :value,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1225,6 +2086,25 @@ module Aws::ACM
     class ExtendedKeyUsage < Struct.new(
       :name,
       :oid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a failure.
+    #
+    # @!attribute [rw] reason
+    #   The reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/FailureDetails AWS API Documentation
+    #
+    class FailureDetails < Struct.new(
+      :reason,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1359,6 +2239,35 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @!attribute [rw] acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the ACME external account binding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetAcmeExternalAccountBindingCredentialsRequest AWS API Documentation
+    #
+    class GetAcmeExternalAccountBindingCredentialsRequest < Struct.new(
+      :acme_external_account_binding_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   The key identifier for the external account binding credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_key
+    #   The MAC key for the external account binding credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetAcmeExternalAccountBindingCredentialsResponse AWS API Documentation
+    #
+    class GetAcmeExternalAccountBindingCredentialsResponse < Struct.new(
+      :key_id,
+      :mac_key)
+      SENSITIVE = [:mac_key]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] certificate_arn
     #   String that contains a certificate ARN in the following format:
     #
@@ -1480,6 +2389,20 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # The request processing has failed because of an unknown error,
+    # exception, or failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # One or more of request parameters specified is not valid.
     #
     # @!attribute [rw] message
@@ -1590,8 +2513,166 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   A token for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeAccountsRequest AWS API Documentation
+    #
+    class ListAcmeAccountsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :acme_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_accounts
+    #   The list of ACME accounts.
+    #   @return [Array<Types::AcmeAccountSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeAccountsResponse AWS API Documentation
+    #
+    class ListAcmeAccountsResponse < Struct.new(
+      :acme_accounts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeDomainValidationsRequest AWS API Documentation
+    #
+    class ListAcmeDomainValidationsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :acme_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_domain_validations
+    #   The list of domain validations.
+    #   @return [Array<Types::AcmeDomainValidationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeDomainValidationsResponse AWS API Documentation
+    #
+    class ListAcmeDomainValidationsResponse < Struct.new(
+      :acme_domain_validations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeEndpointsRequest AWS API Documentation
+    #
+    class ListAcmeEndpointsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_endpoints
+    #   The list of ACME endpoints.
+    #   @return [Array<Types::AcmeEndpointSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeEndpointsResponse AWS API Documentation
+    #
+    class ListAcmeEndpointsResponse < Struct.new(
+      :acme_endpoints,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeExternalAccountBindingsRequest AWS API Documentation
+    #
+    class ListAcmeExternalAccountBindingsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :acme_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] external_account_bindings
+    #   The list of external account bindings.
+    #   @return [Array<Types::AcmeExternalAccountBindingSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListAcmeExternalAccountBindingsResponse AWS API Documentation
+    #
+    class ListAcmeExternalAccountBindingsResponse < Struct.new(
+      :external_account_bindings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] certificate_statuses
     #   Filter the certificate list by status value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] certificate_key_pair_origins
+    #   Filter the certificate list by certificate key pair origin. Specify
+    #   one or more `CertificateKeyPairOrigin` values. Default filtering
+    #   returns only certificates with key pair origin of `AWS_MANAGED` and
+    #   `CUSTOMER_PROVIDED`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] includes
@@ -1628,6 +2709,7 @@ module Aws::ACM
     #
     class ListCertificatesRequest < Struct.new(
       :certificate_statuses,
+      :certificate_key_pair_origins,
       :includes,
       :next_token,
       :max_items,
@@ -1690,6 +2772,30 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The ARN of the ACM resource for which to list tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags associated with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a custom ASN.1 X.400 `GeneralName` using an object identifier
     # (OID) and value. For more information, see NIST's definition of
     # [Object Identifier (OID)][1].
@@ -1711,6 +2817,63 @@ module Aws::ACM
     class OtherName < Struct.new(
       :object_identifier,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the prevalidation configuration.
+    #
+    # @note PrevalidationDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PrevalidationDetails corresponding to the set member.
+    #
+    # @!attribute [rw] dns_prevalidation
+    #   DNS-based prevalidation details.
+    #   @return [Types::DnsPrevalidationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/PrevalidationDetails AWS API Documentation
+    #
+    class PrevalidationDetails < Struct.new(
+      :dns_prevalidation,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DnsPrevalidation < PrevalidationDetails; end
+      class Unknown < PrevalidationDetails; end
+    end
+
+    # Specifies prevalidation options for domain validation.
+    #
+    # @note PrevalidationOptions is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] dns_prevalidation
+    #   DNS-based prevalidation options.
+    #   @return [Types::DnsPrevalidationOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/PrevalidationOptions AWS API Documentation
+    #
+    class PrevalidationOptions < Struct.new(
+      :dns_prevalidation,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DnsPrevalidation < PrevalidationOptions; end
+      class Unknown < PrevalidationOptions; end
+    end
+
+    # Configuration for a public certificate authority.
+    #
+    # @!attribute [rw] allowed_key_algorithms
+    #   The key algorithms allowed for certificates issued by this
+    #   certificate authority.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/PublicCertificateAuthority AWS API Documentation
+    #
+    class PublicCertificateAuthority < Struct.new(
+      :allowed_key_algorithms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2138,6 +3301,36 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_url
+    #   The URL of the ACME account to revoke.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RevokeAcmeAccountRequest AWS API Documentation
+    #
+    class RevokeAcmeAccountRequest < Struct.new(
+      :acme_endpoint_arn,
+      :account_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_external_account_binding_arn
+    #   The Amazon Resource Name (ARN) of the ACME external account binding
+    #   to revoke.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RevokeAcmeExternalAccountBindingRequest AWS API Documentation
+    #
+    class RevokeAcmeExternalAccountBindingRequest < Struct.new(
+      :acme_external_account_binding_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] certificate_arn
     #   The Amazon Resource Name (ARN) of the public or private certificate
     #   that will be revoked. The ARN must have the following form:
@@ -2234,6 +3427,19 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # A service quota has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Filters certificates by subject alternative name attributes.
     #
     # @note SubjectAlternativeNameFilter is a union - when making an API calls you must set exactly one of the members.
@@ -2310,6 +3516,23 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The ARN of the ACM resource to which the tag is to be applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair that defines the tag to apply.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was denied because it exceeded a quota.
     #
     # @!attribute [rw] message
@@ -2376,6 +3599,68 @@ module Aws::ACM
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the ACM resource from which the tag is to be removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The key of each tag to remove.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_domain_validation_arn
+    #   The Amazon Resource Name (ARN) of the ACME domain validation to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] prevalidation_options
+    #   The updated prevalidation options.
+    #   @return [Types::PrevalidationOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateAcmeDomainValidationRequest AWS API Documentation
+    #
+    class UpdateAcmeDomainValidationRequest < Struct.new(
+      :acme_domain_validation_arn,
+      :prevalidation_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acme_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the ACME endpoint to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_behavior
+    #   The updated authorization behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact
+    #   The updated contact requirement.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority
+    #   The updated certificate authority configuration.
+    #   @return [Types::CertificateAuthority]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateAcmeEndpointRequest AWS API Documentation
+    #
+    class UpdateAcmeEndpointRequest < Struct.new(
+      :acme_endpoint_arn,
+      :authorization_behavior,
+      :contact,
+      :certificate_authority)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -27,6 +27,9 @@ module Aws::ACM
       attr_accessor export_option: ("ENABLED" | "DISABLED")
       attr_accessor managed_by: ("CLOUDFRONT")
       attr_accessor validation_method: ("EMAIL" | "DNS" | "HTTP")
+      attr_accessor certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor acme_account_id: ::String
       SENSITIVE: []
     end
 
@@ -39,6 +42,9 @@ module Aws::ACM
       attr_accessor export_option: ("ENABLED" | "DISABLED")
       attr_accessor managed_by: ("CLOUDFRONT")
       attr_accessor validation_method: ("EMAIL" | "DNS" | "HTTP")
+      attr_accessor certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor acme_account_id: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -58,14 +64,129 @@ module Aws::ACM
       end
       class ValidationMethod < AcmCertificateMetadataFilter
       end
+      class CertificateKeyPairOrigin < AcmCertificateMetadataFilter
+      end
+      class AcmeEndpointArn < AcmCertificateMetadataFilter
+      end
+      class AcmeAccountId < AcmCertificateMetadataFilter
+      end
       class Unknown < AcmCertificateMetadataFilter
       end
+    end
+
+    class AcmeAccount
+      attr_accessor account_url: ::String
+      attr_accessor public_key_thumbprint: ::String
+      attr_accessor status: ("VALID" | "DEACTIVATED" | "REVOKED")
+      attr_accessor created_at: ::Time
+      attr_accessor acme_external_account_binding_arn: ::String
+      attr_accessor contacts: ::Array[::String]
+      SENSITIVE: [:contacts]
+    end
+
+    class AcmeAccountSummary
+      attr_accessor account_url: ::String
+      attr_accessor public_key_thumbprint: ::String
+      attr_accessor status: ("VALID" | "DEACTIVATED" | "REVOKED")
+      attr_accessor created_at: ::Time
+      attr_accessor acme_external_account_binding_arn: ::String
+      attr_accessor contacts: ::Array[::String]
+      SENSITIVE: [:contacts]
+    end
+
+    class AcmeDomainValidation
+      attr_accessor acme_domain_validation_arn: ::String
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor prevalidation_type: ("DNS_PREVALIDATION")
+      attr_accessor prevalidation_details: Types::PrevalidationDetails
+      attr_accessor status: ("VALIDATING" | "VALID" | "INVALID" | "DELETING")
+      attr_accessor failure_details: Types::FailureDetails
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AcmeDomainValidationSummary
+      attr_accessor acme_domain_validation_arn: ::String
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor prevalidation_type: ("DNS_PREVALIDATION")
+      attr_accessor prevalidation_details: Types::PrevalidationDetails
+      attr_accessor status: ("VALIDATING" | "VALID" | "INVALID" | "DELETING")
+      attr_accessor failure_details: Types::FailureDetails
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AcmeEndpoint
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor endpoint_url: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor authorization_behavior: ("PRE_APPROVED")
+      attr_accessor contact: ("REQUIRED" | "NOT_REQUIRED")
+      attr_accessor certificate_authority: Types::CertificateAuthority
+      attr_accessor certificate_tags: ::Array[Types::Tag]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AcmeEndpointSummary
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor endpoint_url: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor authorization_behavior: ("PRE_APPROVED")
+      attr_accessor contact: ("REQUIRED" | "NOT_REQUIRED")
+      attr_accessor certificate_authority: Types::CertificateAuthority
+      attr_accessor certificate_tags: ::Array[Types::Tag]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AcmeExternalAccountBinding
+      attr_accessor acme_external_account_binding_arn: ::String
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor revoked_at: ::Time
+      attr_accessor last_used_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AcmeExternalAccountBindingSummary
+      attr_accessor acme_external_account_binding_arn: ::String
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor revoked_at: ::Time
+      attr_accessor last_used_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class AddTagsToCertificateRequest
       attr_accessor certificate_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
+    end
+
+    class CertificateAuthority
+      attr_accessor public_certificate_authority: Types::PublicCertificateAuthority
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PublicCertificateAuthority < CertificateAuthority
+      end
+      class Unknown < CertificateAuthority
+      end
     end
 
     class CertificateDetail
@@ -96,6 +217,9 @@ module Aws::ACM
       attr_accessor certificate_authority_arn: ::String
       attr_accessor renewal_eligibility: ("ELIGIBLE" | "INELIGIBLE")
       attr_accessor options: Types::CertificateOptions
+      attr_accessor certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor acme_account_id: ::String
       SENSITIVE: []
     end
 
@@ -181,6 +305,7 @@ module Aws::ACM
       attr_accessor imported_at: ::Time
       attr_accessor revoked_at: ::Time
       attr_accessor managed_by: ("CLOUDFRONT")
+      attr_accessor certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")
       SENSITIVE: []
     end
 
@@ -195,14 +320,113 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class CreateAcmeDomainValidationRequest
+      attr_accessor idempotency_token: ::String
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor prevalidation_options: Types::PrevalidationOptions
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAcmeDomainValidationResponse
+      attr_accessor acme_domain_validation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAcmeEndpointRequest
+      attr_accessor idempotency_token: ::String
+      attr_accessor authorization_behavior: ("PRE_APPROVED")
+      attr_accessor contact: ("REQUIRED" | "NOT_REQUIRED")
+      attr_accessor certificate_authority: Types::CertificateAuthority
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor certificate_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAcmeEndpointResponse
+      attr_accessor acme_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAcmeExternalAccountBindingRequest
+      attr_accessor idempotency_token: ::String
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor expiration: Types::Expiration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAcmeExternalAccountBindingResponse
+      attr_accessor external_account_binding: Types::AcmeExternalAccountBinding
+      SENSITIVE: []
+    end
+
     class CustomAttribute
       attr_accessor object_identifier: ::String
       attr_accessor value: ::String
       SENSITIVE: []
     end
 
+    class DeleteAcmeDomainValidationRequest
+      attr_accessor acme_domain_validation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAcmeEndpointRequest
+      attr_accessor acme_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAcmeExternalAccountBindingRequest
+      attr_accessor acme_external_account_binding_arn: ::String
+      SENSITIVE: []
+    end
+
     class DeleteCertificateRequest
       attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAcmeAccountRequest
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor account_url: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAcmeAccountResponse
+      attr_accessor acme_account: Types::AcmeAccount
+      SENSITIVE: []
+    end
+
+    class DescribeAcmeDomainValidationRequest
+      attr_accessor acme_domain_validation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAcmeDomainValidationResponse
+      attr_accessor acme_domain_validation: Types::AcmeDomainValidation
+      SENSITIVE: []
+    end
+
+    class DescribeAcmeEndpointRequest
+      attr_accessor acme_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAcmeEndpointResponse
+      attr_accessor acme_endpoint: Types::AcmeEndpoint
+      SENSITIVE: []
+    end
+
+    class DescribeAcmeExternalAccountBindingRequest
+      attr_accessor acme_external_account_binding_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAcmeExternalAccountBindingResponse
+      attr_accessor external_account_binding: Types::AcmeExternalAccountBinding
       SENSITIVE: []
     end
 
@@ -242,6 +466,26 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class DnsPrevalidationDetails
+      attr_accessor domain_scope: Types::DomainScope
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor resource_record: Types::ResourceRecord
+      SENSITIVE: []
+    end
+
+    class DnsPrevalidationOptions
+      attr_accessor domain_scope: Types::DomainScope
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class DomainScope
+      attr_accessor exact_domain: ("ENABLED" | "DISABLED")
+      attr_accessor subdomains: ("ENABLED" | "DISABLED")
+      attr_accessor wildcards: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class DomainValidation
       attr_accessor domain_name: ::String
       attr_accessor validation_emails: ::Array[::String]
@@ -256,6 +500,12 @@ module Aws::ACM
     class DomainValidationOption
       attr_accessor domain_name: ::String
       attr_accessor validation_domain: ::String
+      SENSITIVE: []
+    end
+
+    class Expiration
+      attr_accessor value: ::Integer
+      attr_accessor type: ("MINUTES" | "HOURS" | "DAYS")
       SENSITIVE: []
     end
 
@@ -280,6 +530,12 @@ module Aws::ACM
     class ExtendedKeyUsage
       attr_accessor name: ("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")
       attr_accessor oid: ::String
+      SENSITIVE: []
+    end
+
+    class FailureDetails
+      attr_accessor reason: ("ACCESS_DENIED" | "DOMAIN_MISMATCH" | "DOMAIN_NOT_ALLOWED" | "ENDPOINT_NOT_ACTIVE" | "HOSTED_ZONE_NOT_FOUND" | "INTERNAL_FAILURE" | "INVALID_CHANGE_BATCH" | "INVALID_PUBLIC_DOMAIN" | "TIMED_OUT")
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -326,6 +582,17 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class GetAcmeExternalAccountBindingCredentialsRequest
+      attr_accessor acme_external_account_binding_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAcmeExternalAccountBindingCredentialsResponse
+      attr_accessor key_id: ::String
+      attr_accessor mac_key: ::String
+      SENSITIVE: [:mac_key]
+    end
+
     class GetCertificateRequest
       attr_accessor certificate_arn: ::String
       SENSITIVE: []
@@ -354,6 +621,11 @@ module Aws::ACM
 
     class ImportCertificateResponse
       attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -397,8 +669,60 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class ListAcmeAccountsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor acme_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAcmeAccountsResponse
+      attr_accessor acme_accounts: ::Array[Types::AcmeAccountSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAcmeDomainValidationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor acme_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAcmeDomainValidationsResponse
+      attr_accessor acme_domain_validations: ::Array[Types::AcmeDomainValidationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAcmeEndpointsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAcmeEndpointsResponse
+      attr_accessor acme_endpoints: ::Array[Types::AcmeEndpointSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAcmeExternalAccountBindingsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor acme_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAcmeExternalAccountBindingsResponse
+      attr_accessor external_account_bindings: ::Array[Types::AcmeExternalAccountBindingSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListCertificatesRequest
       attr_accessor certificate_statuses: ::Array[("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")]
+      attr_accessor certificate_key_pair_origins: ::Array[("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")]
       attr_accessor includes: Types::Filters
       attr_accessor next_token: ::String
       attr_accessor max_items: ::Integer
@@ -423,9 +747,46 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class OtherName
       attr_accessor object_identifier: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PrevalidationDetails
+      attr_accessor dns_prevalidation: Types::DnsPrevalidationDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DnsPrevalidation < PrevalidationDetails
+      end
+      class Unknown < PrevalidationDetails
+      end
+    end
+
+    class PrevalidationOptions
+      attr_accessor dns_prevalidation: Types::DnsPrevalidationOptions
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DnsPrevalidation < PrevalidationOptions
+      end
+      class Unknown < PrevalidationOptions
+      end
+    end
+
+    class PublicCertificateAuthority
+      attr_accessor allowed_key_algorithms: ::Array[("RSA_2048" | "EC_prime256v1" | "EC_secp384r1")]
       SENSITIVE: []
     end
 
@@ -502,6 +863,17 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class RevokeAcmeAccountRequest
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor account_url: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeAcmeExternalAccountBindingRequest
+      attr_accessor acme_external_account_binding_arn: ::String
+      SENSITIVE: []
+    end
+
     class RevokeCertificateRequest
       attr_accessor certificate_arn: ::String
       attr_accessor revocation_reason: ("UNSPECIFIED" | "KEY_COMPROMISE" | "CA_COMPROMISE" | "AFFILIATION_CHANGED" | "SUPERCEDED" | "SUPERSEDED" | "CESSATION_OF_OPERATION" | "CERTIFICATE_HOLD" | "REMOVE_FROM_CRL" | "PRIVILEGE_WITHDRAWN" | "A_A_COMPROMISE")
@@ -517,7 +889,7 @@ module Aws::ACM
       attr_accessor filter_statement: Types::CertificateFilterStatement
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor sort_by: ("CREATED_AT" | "NOT_AFTER" | "STATUS" | "RENEWAL_STATUS" | "EXPORTED" | "IN_USE" | "NOT_BEFORE" | "KEY_ALGORITHM" | "TYPE" | "CERTIFICATE_ARN" | "COMMON_NAME" | "REVOKED_AT" | "RENEWAL_ELIGIBILITY" | "ISSUED_AT" | "MANAGED_BY" | "EXPORT_OPTION" | "VALIDATION_METHOD" | "IMPORTED_AT")
+      attr_accessor sort_by: ("CREATED_AT" | "NOT_AFTER" | "STATUS" | "RENEWAL_STATUS" | "EXPORTED" | "IN_USE" | "NOT_BEFORE" | "KEY_ALGORITHM" | "TYPE" | "CERTIFICATE_ARN" | "COMMON_NAME" | "REVOKED_AT" | "RENEWAL_ELIGIBILITY" | "ISSUED_AT" | "MANAGED_BY" | "EXPORT_OPTION" | "VALIDATION_METHOD" | "IMPORTED_AT" | "ACME_ENDPOINT_ARN" | "ACME_ACCOUNT_ID" | "CERTIFICATE_KEY_PAIR_ORIGIN")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       SENSITIVE: []
     end
@@ -525,6 +897,11 @@ module Aws::ACM
     class SearchCertificatesResponse
       attr_accessor results: ::Array[Types::CertificateSearchResult]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -561,6 +938,12 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class ThrottlingException
       attr_accessor message: ::String
       attr_accessor throttling_reasons: ::Array[Types::ThrottlingReason]
@@ -581,6 +964,26 @@ module Aws::ACM
 
     class TooManyTagsException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAcmeDomainValidationRequest
+      attr_accessor acme_domain_validation_arn: ::String
+      attr_accessor prevalidation_options: Types::PrevalidationOptions
+      SENSITIVE: []
+    end
+
+    class UpdateAcmeEndpointRequest
+      attr_accessor acme_endpoint_arn: ::String
+      attr_accessor authorization_behavior: ("PRE_APPROVED")
+      attr_accessor contact: ("REQUIRED" | "NOT_REQUIRED")
+      attr_accessor certificate_authority: Types::CertificateAuthority
       SENSITIVE: []
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2026-07-08)
+------------------
+
+* Feature - Update ExperimentRun APIs to support ConflictExceptions.
+
+1.83.0 (2026-06-29)
+------------------
+
+* Feature - AWS AppConfig introduces Experimentation tools - enhanced capabilities within AWS AppConfig that enable you to run AB tests, multivariate tests, and gradual feature rollouts across your application stack.
+
 1.82.0 (2026-05-22)
 ------------------
 

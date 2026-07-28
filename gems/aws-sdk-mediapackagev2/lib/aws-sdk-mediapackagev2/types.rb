@@ -174,6 +174,20 @@ module Aws::MediaPackageV2
     #     segments with optional DASH manifests).
     #   @return [String]
     #
+    # @!attribute [rw] output_locking_mode
+    #   The output locking mode configured for the channel.
+    #
+    #   The allowed values are:
+    #
+    #   * `EPOCH_LOCKED` - The channel uses epoch-locked behavior with
+    #     deterministic sequence numbering and fixed segment boundaries
+    #     aligned to epoch time.
+    #
+    #   * `NON_EPOCH_LOCKED` - The channel uses non-epoch-locked behavior
+    #     with duration-based segment combining and monotonically increasing
+    #     sequence numbers starting from 0.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ChannelListConfiguration AWS API Documentation
     #
     class ChannelListConfiguration < Struct.new(
@@ -183,7 +197,8 @@ module Aws::MediaPackageV2
       :created_at,
       :modified_at,
       :description,
-      :input_type)
+      :input_type,
+      :output_locking_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -351,6 +366,25 @@ module Aws::MediaPackageV2
     #   setting is valid only when `InputType` is `CMAF`.
     #   @return [Types::OutputHeaderConfiguration]
     #
+    # @!attribute [rw] output_locking_mode
+    #   The output locking mode for the channel. This setting is only valid
+    #   when `InputType` is `CMAF`. This value is immutable after channel
+    #   creation. If you don't specify a value, the default is
+    #   `EPOCH_LOCKED`.
+    #
+    #   The allowed values are:
+    #
+    #   * `EPOCH_LOCKED` - The channel uses epoch-locked behavior with
+    #     deterministic sequence numbering and fixed segment boundaries
+    #     aligned to epoch time. This mode supports cross-region
+    #     synchronization and failover.
+    #
+    #   * `NON_EPOCH_LOCKED` - The channel uses non-epoch-locked behavior
+    #     with duration-based segment combining and monotonically increasing
+    #     sequence numbers starting from 0. This mode does not support
+    #     cross-region synchronization or failover.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A comma-separated list of tag key:value pairs that you define. For
     #   example:
@@ -370,6 +404,7 @@ module Aws::MediaPackageV2
       :description,
       :input_switch_configuration,
       :output_header_configuration,
+      :output_locking_mode,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -444,6 +479,20 @@ module Aws::MediaPackageV2
     #   setting is valid only when `InputType` is `CMAF`.
     #   @return [Types::OutputHeaderConfiguration]
     #
+    # @!attribute [rw] output_locking_mode
+    #   The output locking mode configured for the channel.
+    #
+    #   The allowed values are:
+    #
+    #   * `EPOCH_LOCKED` - The channel uses epoch-locked behavior with
+    #     deterministic sequence numbering and fixed segment boundaries
+    #     aligned to epoch time.
+    #
+    #   * `NON_EPOCH_LOCKED` - The channel uses non-epoch-locked behavior
+    #     with duration-based segment combining and monotonically increasing
+    #     sequence numbers starting from 0.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateChannelResponse AWS API Documentation
     #
     class CreateChannelResponse < Struct.new(
@@ -458,7 +507,8 @@ module Aws::MediaPackageV2
       :etag,
       :tags,
       :input_switch_configuration,
-      :output_header_configuration)
+      :output_header_configuration,
+      :output_locking_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2094,6 +2144,20 @@ module Aws::MediaPackageV2
     #   setting is valid only when `InputType` is `CMAF`.
     #   @return [Types::OutputHeaderConfiguration]
     #
+    # @!attribute [rw] output_locking_mode
+    #   The output locking mode configured for the channel.
+    #
+    #   The allowed values are:
+    #
+    #   * `EPOCH_LOCKED` - The channel uses epoch-locked behavior with
+    #     deterministic sequence numbering and fixed segment boundaries
+    #     aligned to epoch time.
+    #
+    #   * `NON_EPOCH_LOCKED` - The channel uses non-epoch-locked behavior
+    #     with duration-based segment combining and monotonically increasing
+    #     sequence numbers starting from 0.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetChannelResponse AWS API Documentation
     #
     class GetChannelResponse < Struct.new(
@@ -2109,7 +2173,8 @@ module Aws::MediaPackageV2
       :etag,
       :tags,
       :input_switch_configuration,
-      :output_header_configuration)
+      :output_header_configuration,
+      :output_locking_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3898,6 +3963,22 @@ module Aws::MediaPackageV2
     #   The parameters for encrypting content.
     #   @return [Types::Encryption]
     #
+    # @!attribute [rw] output_timestamp_mode
+    #   The output timestamp mode for the origin endpoint's segments. This
+    #   setting is only configurable on channels with `OutputLockingMode`
+    #   set to `NON_EPOCH_LOCKED`. This value is immutable after endpoint
+    #   creation. If you don't specify a value, the default is
+    #   `PASSTHROUGH`.
+    #
+    #   The allowed values are:
+    #
+    #   * `PASSTHROUGH` - Output PTS (Presentation Timestamp) values pass
+    #     through unchanged from the input.
+    #
+    #   * `REBASED_TO_CHANNEL_START` - Output PTS is rebased relative to the
+    #     channel start time.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/Segment AWS API Documentation
     #
     class Segment < Struct.new(
@@ -3907,7 +3988,8 @@ module Aws::MediaPackageV2
       :include_iframe_only_streams,
       :ts_include_dvb_subtitles,
       :scte,
-      :encryption)
+      :encryption,
+      :output_timestamp_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4270,6 +4352,21 @@ module Aws::MediaPackageV2
     #   setting is valid only when `InputType` is `CMAF`.
     #   @return [Types::OutputHeaderConfiguration]
     #
+    # @!attribute [rw] output_locking_mode
+    #   The output locking mode configured for the channel. This value is
+    #   immutable after channel creation.
+    #
+    #   The allowed values are:
+    #
+    #   * `EPOCH_LOCKED` - The channel uses epoch-locked behavior with
+    #     deterministic sequence numbering and fixed segment boundaries
+    #     aligned to epoch time.
+    #
+    #   * `NON_EPOCH_LOCKED` - The channel uses non-epoch-locked behavior
+    #     with duration-based segment combining and monotonically increasing
+    #     sequence numbers starting from 0.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateChannelResponse AWS API Documentation
     #
     class UpdateChannelResponse < Struct.new(
@@ -4284,7 +4381,8 @@ module Aws::MediaPackageV2
       :etag,
       :tags,
       :input_switch_configuration,
-      :output_header_configuration)
+      :output_header_configuration,
+      :output_locking_mode)
       SENSITIVE = []
       include Aws::Structure
     end

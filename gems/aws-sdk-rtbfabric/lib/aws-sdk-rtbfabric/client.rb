@@ -2423,7 +2423,6 @@ module Aws::RTBFabric
     #   * {Types::GetResponderGatewayResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetResponderGatewayResponse#active_links_count #active_links_count} => Integer
     #   * {Types::GetResponderGatewayResponse#total_links_count #total_links_count} => Integer
-    #   * {Types::GetResponderGatewayResponse#inbound_links_count #inbound_links_count} => Integer
     #   * {Types::GetResponderGatewayResponse#links_requested_count #links_requested_count} => Integer
     #   * {Types::GetResponderGatewayResponse#gateway_type #gateway_type} => String
     #   * {Types::GetResponderGatewayResponse#external_inbound_endpoint #external_inbound_endpoint} => String
@@ -2443,7 +2442,6 @@ module Aws::RTBFabric
     #     created_at: Time.parse("2024-01-15T10:30:00Z"), 
     #     description: "My responder gateway", 
     #     gateway_id: "rtb-gw-12345678", 
-    #     inbound_links_count: 3, 
     #     links_requested_count: 3, 
     #     port: 443, 
     #     protocol: "HTTPS", 
@@ -2506,7 +2504,6 @@ module Aws::RTBFabric
     #   resp.tags["TagKey"] #=> String
     #   resp.active_links_count #=> Integer
     #   resp.total_links_count #=> Integer
-    #   resp.inbound_links_count #=> Integer
     #   resp.links_requested_count #=> Integer
     #   resp.gateway_type #=> String, one of "EXTERNAL", "INTERNAL"
     #   resp.external_inbound_endpoint #=> String
@@ -3713,7 +3710,7 @@ module Aws::RTBFabric
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rtbfabric'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

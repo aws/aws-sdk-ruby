@@ -144,6 +144,7 @@ module Aws::Lambda
       attr_accessor kms_key_arn: ::String
       attr_accessor last_modified: ::Time
       attr_accessor propagate_tags: Types::PropagateTags
+      attr_accessor telemetry_config: Types::CapacityProviderTelemetryConfig
       SENSITIVE: []
     end
 
@@ -158,6 +159,12 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class CapacityProviderLoggingConfig
+      attr_accessor system_log_level: ("DEBUG" | "INFO" | "WARN")
+      attr_accessor log_group: ::String
+      SENSITIVE: []
+    end
+
     class CapacityProviderPermissionsConfig
       attr_accessor capacity_provider_operator_role_arn: ::String
       SENSITIVE: []
@@ -167,6 +174,11 @@ module Aws::Lambda
       attr_accessor max_v_cpu_count: ::Integer
       attr_accessor scaling_mode: ("Auto" | "Manual")
       attr_accessor scaling_policies: ::Array[Types::TargetTrackingScalingPolicy]
+      SENSITIVE: []
+    end
+
+    class CapacityProviderTelemetryConfig
+      attr_accessor logging_config: Types::CapacityProviderLoggingConfig
       SENSITIVE: []
     end
 
@@ -346,6 +358,7 @@ module Aws::Lambda
       attr_accessor kms_key_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor propagate_tags: Types::PropagateTags
+      attr_accessor telemetry_config: Types::CapacityProviderTelemetryConfig
       SENSITIVE: []
     end
 
@@ -401,7 +414,7 @@ module Aws::Lambda
 
     class CreateFunctionRequest
       attr_accessor function_name: ::String
-      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")
       attr_accessor role: ::String
       attr_accessor handler: ::String
       attr_accessor code: Types::FunctionCode
@@ -543,6 +556,7 @@ module Aws::Lambda
     end
 
     class DurableConfig
+      attr_accessor kms_key_arn: ::String
       attr_accessor retention_period_in_days: ::Integer
       attr_accessor execution_timeout: ::Integer
       SENSITIVE: []
@@ -746,6 +760,7 @@ module Aws::Lambda
       attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")
       attr_accessor start_timestamp: ::Time
       attr_accessor end_timestamp: ::Time
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -807,6 +822,7 @@ module Aws::Lambda
       attr_accessor s3_bucket: ::String
       attr_accessor s3_key: ::String
       attr_accessor s3_object_version: ::String
+      attr_accessor s3_object_storage_mode: ("COPY" | "REFERENCE")
       attr_accessor image_uri: ::String
       attr_accessor source_kms_key_arn: ::String
       SENSITIVE: [:zip_file]
@@ -817,14 +833,22 @@ module Aws::Lambda
       attr_accessor location: ::String
       attr_accessor image_uri: ::String
       attr_accessor resolved_image_uri: ::String
+      attr_accessor resolved_s3_object: Types::ResolvedS3Object
       attr_accessor source_kms_key_arn: ::String
+      attr_accessor error: Types::FunctionCodeLocationError
       SENSITIVE: []
+    end
+
+    class FunctionCodeLocationError
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
     end
 
     class FunctionConfiguration
       attr_accessor function_name: ::String
       attr_accessor function_arn: ::String
-      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")
       attr_accessor role: ::String
       attr_accessor handler: ::String
       attr_accessor code_size: ::Integer
@@ -844,10 +868,10 @@ module Aws::Lambda
       attr_accessor layers: ::Array[Types::Layer]
       attr_accessor state: ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
       attr_accessor state_reason: ::String
-      attr_accessor state_reason_code: ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions")
+      attr_accessor state_reason_code: ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions" | "DependencyError")
       attr_accessor last_update_status: ("Successful" | "Failed" | "InProgress")
       attr_accessor last_update_status_reason: ::String
-      attr_accessor last_update_status_reason_code: ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
+      attr_accessor last_update_status_reason_code: ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DependencyError")
       attr_accessor file_system_configs: ::Array[Types::FileSystemConfig]
       attr_accessor signing_profile_version_arn: ::String
       attr_accessor signing_job_arn: ::String
@@ -955,6 +979,7 @@ module Aws::Lambda
 
     class GetDurableExecutionRequest
       attr_accessor durable_execution_arn: ::String
+      attr_accessor include_execution_data: bool
       SENSITIVE: []
     end
 
@@ -970,6 +995,8 @@ module Aws::Lambda
       attr_accessor end_timestamp: ::Time
       attr_accessor version: ::String
       attr_accessor trace_header: Types::TraceHeader
+      attr_accessor execution_data_included: bool
+      attr_accessor durable_config: Types::DurableConfig
       SENSITIVE: [:input_payload, :result]
     end
 
@@ -1111,7 +1138,7 @@ module Aws::Lambda
       attr_accessor created_date: ::Time
       attr_accessor version: ::Integer
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")]
       attr_accessor license_info: ::String
       SENSITIVE: []
     end
@@ -1282,12 +1309,12 @@ module Aws::Lambda
 
     class InvokeWithResponseStreamRequest
       attr_accessor function_name: ::String
-      attr_accessor invocation_type: ("RequestResponse" | "DryRun")
       attr_accessor log_type: ("None" | "Tail")
       attr_accessor client_context: ::String
       attr_accessor qualifier: ::String
       attr_accessor payload: ::String
       attr_accessor tenant_id: ::String
+      attr_accessor invocation_type: ("RequestResponse" | "DryRun")
       SENSITIVE: [:payload]
     end
 
@@ -1361,6 +1388,7 @@ module Aws::Lambda
       attr_accessor s3_bucket: ::String
       attr_accessor s3_key: ::String
       attr_accessor s3_object_version: ::String
+      attr_accessor s3_object_storage_mode: ("COPY" | "REFERENCE")
       attr_accessor zip_file: ::String
       SENSITIVE: [:zip_file]
     end
@@ -1371,6 +1399,7 @@ module Aws::Lambda
       attr_accessor code_size: ::Integer
       attr_accessor signing_profile_version_arn: ::String
       attr_accessor signing_job_arn: ::String
+      attr_accessor resolved_s3_object: Types::ResolvedS3Object
       SENSITIVE: []
     end
 
@@ -1380,7 +1409,7 @@ module Aws::Lambda
       attr_accessor description: ::String
       attr_accessor created_date: ::Time
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")]
       attr_accessor license_info: ::String
       SENSITIVE: []
     end
@@ -1533,7 +1562,7 @@ module Aws::Lambda
 
     class ListLayerVersionsRequest
       attr_accessor compatible_architecture: ("x86_64" | "arm64")
-      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")
+      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")
       attr_accessor layer_name: ::String
       attr_accessor marker: ::String
       attr_accessor max_items: ::Integer
@@ -1548,7 +1577,7 @@ module Aws::Lambda
 
     class ListLayersRequest
       attr_accessor compatible_architecture: ("x86_64" | "arm64")
-      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")
+      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")
       attr_accessor marker: ::String
       attr_accessor max_items: ::Integer
       SENSITIVE: []
@@ -1714,7 +1743,7 @@ module Aws::Lambda
       attr_accessor description: ::String
       attr_accessor content: Types::LayerVersionContentInput
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")]
       attr_accessor license_info: ::String
       SENSITIVE: []
     end
@@ -1727,7 +1756,7 @@ module Aws::Lambda
       attr_accessor created_date: ::Time
       attr_accessor version: ::Integer
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")]
       attr_accessor license_info: ::String
       SENSITIVE: []
     end
@@ -1848,6 +1877,13 @@ module Aws::Lambda
     class RequestTooLargeException
       attr_accessor type: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResolvedS3Object
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor s3_object_version: ::String
       SENSITIVE: []
     end
 
@@ -2129,6 +2165,7 @@ module Aws::Lambda
       attr_accessor capacity_provider_name: ::String
       attr_accessor capacity_provider_scaling_config: Types::CapacityProviderScalingConfig
       attr_accessor propagate_tags: Types::PropagateTags
+      attr_accessor telemetry_config: Types::CapacityProviderTelemetryConfig
       SENSITIVE: []
     end
 
@@ -2182,6 +2219,7 @@ module Aws::Lambda
       attr_accessor s3_bucket: ::String
       attr_accessor s3_key: ::String
       attr_accessor s3_object_version: ::String
+      attr_accessor s3_object_storage_mode: ("COPY" | "REFERENCE")
       attr_accessor image_uri: ::String
       attr_accessor architectures: ::Array[("x86_64" | "arm64")]
       attr_accessor publish: bool
@@ -2201,7 +2239,7 @@ module Aws::Lambda
       attr_accessor memory_size: ::Integer
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor environment: Types::Environment
-      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023")
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x" | "java8" | "java8.al2" | "java11" | "java17" | "java21" | "java25" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "python3.10" | "python3.11" | "python3.12" | "python3.13" | "python3.14" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "dotnet10" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "ruby4.0" | "provided" | "provided.al2" | "provided.al2023" | "java8.al2023" | "java11.al2023" | "java17.al2023")
       attr_accessor dead_letter_config: Types::DeadLetterConfig
       attr_accessor kms_key_arn: ::String
       attr_accessor tracing_config: Types::TracingConfig

@@ -650,6 +650,12 @@ module Aws::RDS
     #     ],
     #     enable_vpc_networking: false,
     #     enable_internet_access_gateway: false,
+    #     associated_roles: [
+    #       {
+    #         role_arn: "IAMRoleArn", # required
+    #         feature_name: "String",
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
@@ -1121,7 +1127,7 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
     # @option options [String] :engine_lifecycle_support
-    #   The life cycle type for this DB cluster.
+    #   The lifecycle type for this DB cluster.
     #
     #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
     #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
@@ -1186,6 +1192,15 @@ module Aws::RDS
     #   `EnableIAMDatabaseAuthentication`.
     #
     #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    # @option options [Array<Types::DBClusterAssociatedRole>] :associated_roles
+    #   A list of Amazon Web Services Identity and Access Management (IAM)
+    #   roles to associate with the DB cluster when it's restored from a
+    #   snapshot. Each role grants the DB cluster permission to access other
+    #   Amazon Web Services on your behalf. For each role, specify a role ARN
+    #   and, optionally, the feature name (such as `s3Import`, `s3Export`, or
+    #   `Lambda`).
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)

@@ -1357,9 +1357,9 @@ module Aws::Redshift
     #   node types, go to [ Working with Clusters][1] in the *Amazon Redshift
     #   Cluster Management Guide*.
     #
-    #   Valid Values: `dc2.large` \| `dc2.8xlarge`\| `rg.xlarge` \|
-    #   `rg.4xlarge` \| `ra3.large` \| `ra3.xlplus` \| `ra3.4xlarge` \|
-    #   `ra3.16xlarge`
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `rg.large` \|
+    #   `rg.xlarge` \| `rg.4xlarge` \| `rg.12xlarge` \| `ra3.large` \|
+    #   `ra3.xlplus` \| `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -2759,6 +2759,65 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Creates an Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    # application.
+    #
+    # @option params [required, String] :idc_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   used to create the Amazon Redshift Query Editor (QEV2) managed
+    #   application.
+    #
+    # @option params [required, String] :qev_2_idc_application_name
+    #   The name of the Amazon Redshift Query Editor (QEV2) application in IAM
+    #   Identity Center.
+    #
+    # @option params [required, String] :idc_display_name
+    #   The display name for the Amazon Redshift Query Editor (QEV2) IAM
+    #   Identity Center application. It appears in the console.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to associate with the application. Tags are key-value
+    #   pairs that you can use to organize and identify your resources.
+    #
+    # @return [Types::CreateQev2IdcApplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQev2IdcApplicationResult#qev_2_idc_application #qev_2_idc_application} => Types::Qev2IdcApplication
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_qev_2_idc_application({
+    #     idc_instance_arn: "String", # required
+    #     qev_2_idc_application_name: "Qev2IdcApplicationName", # required
+    #     idc_display_name: "IdcDisplayNameString", # required
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.qev_2_idc_application.idc_instance_arn #=> String
+    #   resp.qev_2_idc_application.qev_2_idc_application_name #=> String
+    #   resp.qev_2_idc_application.qev_2_idc_application_arn #=> String
+    #   resp.qev_2_idc_application.idc_managed_application_arn #=> String
+    #   resp.qev_2_idc_application.idc_onboard_status #=> String
+    #   resp.qev_2_idc_application.idc_display_name #=> String
+    #   resp.qev_2_idc_application.tags #=> Array
+    #   resp.qev_2_idc_application.tags[0].key #=> String
+    #   resp.qev_2_idc_application.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateQev2IdcApplication AWS API Documentation
+    #
+    # @overload create_qev_2_idc_application(params = {})
+    # @param [Hash] params ({})
+    def create_qev_2_idc_application(params = {}, options = {})
+      req = build_request(:create_qev_2_idc_application, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Redshift application for use with IAM Identity
     # Center.
     #
@@ -4016,6 +4075,30 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_partner(params = {}, options = {})
       req = build_request(:delete_partner, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    # application.
+    #
+    # @option params [required, String] :qev_2_idc_application_arn
+    #   The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor
+    #   (QEV2) IAM Identity Center application to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_qev_2_idc_application({
+    #     qev_2_idc_application_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteQev2IdcApplication AWS API Documentation
+    #
+    # @overload delete_qev_2_idc_application(params = {})
+    # @param [Hash] params ({})
+    def delete_qev_2_idc_application(params = {}, options = {})
+      req = build_request(:delete_qev_2_idc_application, params)
       req.send_request(options)
     end
 
@@ -6729,6 +6812,67 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Lists the Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    # applications. To retrieve additional results, use the MaxRecords and
+    # Marker parameters.
+    #
+    # @option params [String] :qev_2_idc_application_arn
+    #   The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor
+    #   (QEV2) application that integrates with IAM Identity Center.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified MaxRecords
+    #   value, a value is returned in a marker field of the response. You can
+    #   retrieve the next set of records by retrying the command with the
+    #   returned marker value.
+    #
+    # @option params [String] :marker
+    #   A value that indicates the starting point for the next set of response
+    #   records in a subsequent request. If a value is returned in a response,
+    #   you can retrieve the next set of records by providing this returned
+    #   marker value in the Marker parameter and retrying the command. If the
+    #   Marker field is empty, all response records have been retrieved for
+    #   the request.
+    #
+    # @return [Types::DescribeQev2IdcApplicationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQev2IdcApplicationsResult#qev_2_idc_applications #qev_2_idc_applications} => Array&lt;Types::Qev2IdcApplication&gt;
+    #   * {Types::DescribeQev2IdcApplicationsResult#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_qev_2_idc_applications({
+    #     qev_2_idc_application_arn: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.qev_2_idc_applications #=> Array
+    #   resp.qev_2_idc_applications[0].idc_instance_arn #=> String
+    #   resp.qev_2_idc_applications[0].qev_2_idc_application_name #=> String
+    #   resp.qev_2_idc_applications[0].qev_2_idc_application_arn #=> String
+    #   resp.qev_2_idc_applications[0].idc_managed_application_arn #=> String
+    #   resp.qev_2_idc_applications[0].idc_onboard_status #=> String
+    #   resp.qev_2_idc_applications[0].idc_display_name #=> String
+    #   resp.qev_2_idc_applications[0].tags #=> Array
+    #   resp.qev_2_idc_applications[0].tags[0].key #=> String
+    #   resp.qev_2_idc_applications[0].tags[0].value #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeQev2IdcApplications AWS API Documentation
+    #
+    # @overload describe_qev_2_idc_applications(params = {})
+    # @param [Hash] params ({})
+    def describe_qev_2_idc_applications(params = {}, options = {})
+      req = build_request(:describe_qev_2_idc_applications, params)
+      req.send_request(options)
+    end
+
     # Lists the Amazon Redshift IAM Identity Center applications.
     #
     # @option params [String] :redshift_idc_application_arn
@@ -9103,9 +9247,9 @@ module Aws::Redshift
     #   in Amazon Redshift][1] in the *Amazon Redshift Cluster Management
     #   Guide*.
     #
-    #   Valid Values: `dc2.large` \| `dc2.8xlarge`\| `rg.xlarge` \|
-    #   `rg.4xlarge` \| `ra3.large` \| `ra3.xlplus` \| `ra3.4xlarge` \|
-    #   `ra3.16xlarge`
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `rg.large` \|
+    #   `rg.xlarge` \| `rg.4xlarge` \| `rg.12xlarge` \| `ra3.large` \|
+    #   `ra3.xlplus` \| `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -10703,6 +10847,49 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Modifies an Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    # application.
+    #
+    # @option params [required, String] :qev_2_idc_application_arn
+    #   The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor
+    #   (QEV2) application that integrates with IAM Identity Center.
+    #
+    # @option params [String] :idc_display_name
+    #   The display name for the Amazon Redshift Query Editor (QEV2) IAM
+    #   Identity Center application. It appears in the console.
+    #
+    # @return [Types::ModifyQev2IdcApplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyQev2IdcApplicationResult#qev_2_idc_application #qev_2_idc_application} => Types::Qev2IdcApplication
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_qev_2_idc_application({
+    #     qev_2_idc_application_arn: "String", # required
+    #     idc_display_name: "IdcDisplayNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.qev_2_idc_application.idc_instance_arn #=> String
+    #   resp.qev_2_idc_application.qev_2_idc_application_name #=> String
+    #   resp.qev_2_idc_application.qev_2_idc_application_arn #=> String
+    #   resp.qev_2_idc_application.idc_managed_application_arn #=> String
+    #   resp.qev_2_idc_application.idc_onboard_status #=> String
+    #   resp.qev_2_idc_application.idc_display_name #=> String
+    #   resp.qev_2_idc_application.tags #=> Array
+    #   resp.qev_2_idc_application.tags[0].key #=> String
+    #   resp.qev_2_idc_application.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyQev2IdcApplication AWS API Documentation
+    #
+    # @overload modify_qev_2_idc_application(params = {})
+    # @param [Hash] params ({})
+    def modify_qev_2_idc_application(params = {}, options = {})
+      req = build_request(:modify_qev_2_idc_application, params)
+      req.send_request(options)
+    end
+
     # Changes an existing Amazon Redshift IAM Identity Center application.
     #
     # @option params [required, String] :redshift_idc_application_arn
@@ -11818,9 +12005,13 @@ module Aws::Redshift
     #
     #   * dc2.8xlarge
     #
+    #   * rg.large
+    #
     #   * rg.xlarge
     #
     #   * rg.4xlarge
+    #
+    #   * rg.12xlarge
     #
     #   * ra3.large
     #
@@ -13279,7 +13470,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.161.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

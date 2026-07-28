@@ -571,7 +571,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association, CloudConnector
     #     resource_id: "ResourceId", # required
     #     tags: [ # required
     #       {
@@ -1014,7 +1014,7 @@ module Aws::SSM
     #   action to create an association in multiple Regions and multiple
     #   accounts.
     #
-    #   <note markdown="1"> The `IncludeChildOrganizationUnits` parameter is not supported by
+    #   <note markdown="1"> The `TargetLocationAlarmConfiguration` parameter is not supported by
     #   State Manager.
     #
     #    </note>
@@ -1514,6 +1514,80 @@ module Aws::SSM
     # @param [Hash] params ({})
     def create_association_batch(params = {}, options = {})
       req = build_request(:create_association_batch, params)
+      req.send_request(options)
+    end
+
+    # Creates a cloud connector that establishes a connection between
+    # Systems Manager and a third-party cloud environment.
+    #
+    # @option params [required, String] :display_name
+    #   A friendly name for the cloud connector.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the cloud
+    #   connector uses to communicate with the third-party cloud environment.
+    #
+    # @option params [String] :description
+    #   A description for the cloud connector.
+    #
+    # @option params [required, Types::CloudConnectorConfiguration] :configuration
+    #   The configuration details for connecting to the third-party cloud
+    #   environment.
+    #
+    # @option params [required, String] :config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector associated with
+    #   this cloud connector.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment.
+    #
+    # @return [Types::CreateCloudConnectorResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCloudConnectorResult#cloud_connector_id #cloud_connector_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cloud_connector({
+    #     display_name: "DisplayName", # required
+    #     role_arn: "CloudConnectorIamRoleArn", # required
+    #     description: "CloudConnectorDescription",
+    #     configuration: { # required
+    #       azure_configuration: {
+    #         tenant_id: "AzureTenantId", # required
+    #         tenant_display_name: "AzureTenantDisplayName",
+    #         application_id: "AzureApplicationId", # required
+    #         application_display_name: "AzureApplicationDisplayName",
+    #         targets: {
+    #           subscriptions: [
+    #             {
+    #               id: "AzureSubscriptionId", # required
+    #               display_name: "AzureSubscriptionDisplayName",
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #     config_connector_arn: "ConfigConnectorArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_connector_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateCloudConnector AWS API Documentation
+    #
+    # @overload create_cloud_connector(params = {})
+    # @param [Hash] params ({})
+    def create_cloud_connector(params = {}, options = {})
+      req = build_request(:create_cloud_connector, params)
       req.send_request(options)
     end
 
@@ -2533,6 +2607,34 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Deletes a cloud connector.
+    #
+    # @option params [required, String] :cloud_connector_id
+    #   The ID of the cloud connector to delete.
+    #
+    # @return [Types::DeleteCloudConnectorResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCloudConnectorResult#cloud_connector_id #cloud_connector_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cloud_connector({
+    #     cloud_connector_id: "CloudConnectorId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_connector_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteCloudConnector AWS API Documentation
+    #
+    # @overload delete_cloud_connector(params = {})
+    # @param [Hash] params ({})
+    def delete_cloud_connector(params = {}, options = {})
+      req = build_request(:delete_cloud_connector, params)
+      req.send_request(options)
+    end
+
     # Deletes the Amazon Web Services Systems Manager document (SSM
     # document) and all managed node associations to the document.
     #
@@ -3447,6 +3549,7 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].current_step_name #=> String
     #   resp.automation_execution_metadata_list[0].current_action #=> String
     #   resp.automation_execution_metadata_list[0].failure_message #=> String
+    #   resp.automation_execution_metadata_list[0].warning_message #=> String
     #   resp.automation_execution_metadata_list[0].target_parameter_name #=> String
     #   resp.automation_execution_metadata_list[0].targets #=> Array
     #   resp.automation_execution_metadata_list[0].targets[0].key #=> String
@@ -3588,6 +3691,7 @@ module Aws::SSM
     #   resp.step_executions[0].outputs["AutomationParameterKey"][0] #=> String
     #   resp.step_executions[0].response #=> String
     #   resp.step_executions[0].failure_message #=> String
+    #   resp.step_executions[0].warning_message #=> String
     #   resp.step_executions[0].failure_details.failure_stage #=> String
     #   resp.step_executions[0].failure_details.failure_type #=> String
     #   resp.step_executions[0].failure_details.details #=> Hash
@@ -4228,7 +4332,8 @@ module Aws::SSM
     #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count #=> Hash
     #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.instance_information_list[0].source_id #=> String
-    #   resp.instance_information_list[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance"
+    #   resp.instance_information_list[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"
+    #   resp.instance_information_list[0].source_location #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceInformation AWS API Documentation
@@ -4548,7 +4653,9 @@ module Aws::SSM
     #   resp.instance_properties[0].association_overview.instance_association_status_aggregated_count #=> Hash
     #   resp.instance_properties[0].association_overview.instance_association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.instance_properties[0].source_id #=> String
-    #   resp.instance_properties[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance"
+    #   resp.instance_properties[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"
+    #   resp.instance_properties[0].source_location #=> String
+    #   resp.instance_properties[0].availability_zone #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceProperties AWS API Documentation
@@ -5897,6 +6004,7 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].outputs["AutomationParameterKey"][0] #=> String
     #   resp.automation_execution.step_executions[0].response #=> String
     #   resp.automation_execution.step_executions[0].failure_message #=> String
+    #   resp.automation_execution.step_executions[0].warning_message #=> String
     #   resp.automation_execution.step_executions[0].failure_details.failure_stage #=> String
     #   resp.automation_execution.step_executions[0].failure_details.failure_type #=> String
     #   resp.automation_execution.step_executions[0].failure_details.details #=> Hash
@@ -5950,6 +6058,7 @@ module Aws::SSM
     #   resp.automation_execution.outputs["AutomationParameterKey"] #=> Array
     #   resp.automation_execution.outputs["AutomationParameterKey"][0] #=> String
     #   resp.automation_execution.failure_message #=> String
+    #   resp.automation_execution.warning_message #=> String
     #   resp.automation_execution.mode #=> String, one of "Auto", "Interactive"
     #   resp.automation_execution.parent_automation_execution_id #=> String
     #   resp.automation_execution.executed_by #=> String
@@ -6118,6 +6227,54 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_calendar_state(params = {}, options = {})
       req = build_request(:get_calendar_state, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed information about a cloud connector.
+    #
+    # @option params [required, String] :cloud_connector_id
+    #   The ID of the cloud connector to retrieve information about.
+    #
+    # @return [Types::GetCloudConnectorResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCloudConnectorResult#cloud_connector_arn #cloud_connector_arn} => String
+    #   * {Types::GetCloudConnectorResult#display_name #display_name} => String
+    #   * {Types::GetCloudConnectorResult#description #description} => String
+    #   * {Types::GetCloudConnectorResult#role_arn #role_arn} => String
+    #   * {Types::GetCloudConnectorResult#configuration #configuration} => Types::CloudConnectorConfiguration
+    #   * {Types::GetCloudConnectorResult#config_connector_arn #config_connector_arn} => String
+    #   * {Types::GetCloudConnectorResult#created_at #created_at} => Time
+    #   * {Types::GetCloudConnectorResult#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cloud_connector({
+    #     cloud_connector_id: "CloudConnectorId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_connector_arn #=> String
+    #   resp.display_name #=> String
+    #   resp.description #=> String
+    #   resp.role_arn #=> String
+    #   resp.configuration.azure_configuration.tenant_id #=> String
+    #   resp.configuration.azure_configuration.tenant_display_name #=> String
+    #   resp.configuration.azure_configuration.application_id #=> String
+    #   resp.configuration.azure_configuration.application_display_name #=> String
+    #   resp.configuration.azure_configuration.targets.subscriptions #=> Array
+    #   resp.configuration.azure_configuration.targets.subscriptions[0].id #=> String
+    #   resp.configuration.azure_configuration.targets.subscriptions[0].display_name #=> String
+    #   resp.config_connector_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCloudConnector AWS API Documentation
+    #
+    # @overload get_cloud_connector(params = {})
+    # @param [Hash] params ({})
+    def get_cloud_connector(params = {}, options = {})
+      req = build_request(:get_cloud_connector, params)
       req.send_request(options)
     end
 
@@ -7260,6 +7417,29 @@ module Aws::SSM
     #
     #  </note>
     #
+    # <note markdown="1"> Parameter Store throughput defines the number of API transactions per
+    # second (TPS) that Systems Manager can process. This applies to
+    # `GetParameter`, `GetParameters`, and `PutParameter` API calls for your
+    # Amazon Web Services account and Amazon Web Services Region. By
+    # default, Parameter Store is configured with a standard throughput
+    # quota suitable for low- to moderate-volume workloads. Applications
+    # that retrieve configuration data infrequently or operate at smaller
+    # scale can use this default setting without additional cost.
+    #
+    #  For higher-volume workloads, you can enable higher throughput. This
+    # increases the maximum number of supported transactions per second for
+    # your account and Region. Increased throughput supports applications
+    # and workloads that need concurrent access to multiple parameters. If
+    # you experience `ThrottlingException: Rate exceeded` errors, enable
+    # higher throughput. For more information, see [Changing Parameter Store
+    # throughput][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
+    #
     # @option params [required, String] :name
     #   The name or Amazon Resource Name (ARN) of the parameter that you want
     #   to query. For parameters shared with you from another account, you
@@ -7401,6 +7581,29 @@ module Aws::SSM
     # specified for the beginning or end of a parameter name. If the
     # specified name for a parameter contains spaces between characters, the
     # request fails with a `ValidationException` error.
+    #
+    # <note markdown="1"> Parameter Store throughput defines the number of API transactions per
+    # second (TPS) that Systems Manager can process. This applies to
+    # `GetParameter`, `GetParameters`, and `PutParameter` API calls for your
+    # Amazon Web Services account and Amazon Web Services Region. By
+    # default, Parameter Store is configured with a standard throughput
+    # quota suitable for low- to moderate-volume workloads. Applications
+    # that retrieve configuration data infrequently or operate at smaller
+    # scale can use this default setting without additional cost.
+    #
+    #  For higher-volume workloads, you can enable higher throughput. This
+    # increases the maximum number of supported transactions per second for
+    # your account and Region. Increased throughput supports applications
+    # and workloads that need concurrent access to multiple parameters. If
+    # you experience `ThrottlingException: Rate exceeded` errors, enable
+    # higher throughput. For more information, see [Changing Parameter Store
+    # throughput][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
     #
     # @option params [required, Array<String>] :names
     #   The names or Amazon Resource Names (ARNs) of the parameters that you
@@ -7662,7 +7865,7 @@ module Aws::SSM
     #
     # @option params [String] :operating_system
     #   Returns the operating system rule specified for patch groups using the
-    #   patch baseline.
+    #   patch baseline. The default value is `WINDOWS`.
     #
     # @return [Types::GetPatchBaselineForPatchGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8025,7 +8228,7 @@ module Aws::SSM
     #   resp = client.list_associations({
     #     association_filter_list: [
     #       {
-    #         key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName, ResourceGroupName
+    #         key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName, ResourceGroupName, CloudConnectorId
     #         value: "AssociationFilterValue", # required
     #       },
     #     ],
@@ -8066,6 +8269,60 @@ module Aws::SSM
     # @param [Hash] params ({})
     def list_associations(params = {}, options = {})
       req = build_request(:list_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of cloud connectors in the current Amazon Web Services
+    # account and Amazon Web Services Region.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @option params [Array<Types::CloudConnectorFilter>] :filters
+    #   One or more filters to limit the cloud connectors returned in the
+    #   response.
+    #
+    # @return [Types::ListCloudConnectorsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCloudConnectorsResult#cloud_connectors #cloud_connectors} => Array&lt;Types::CloudConnectorSummary&gt;
+    #   * {Types::ListCloudConnectorsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cloud_connectors({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         filter_key: "SubscriptionId", # accepts SubscriptionId, TenantId
+    #         filter_values: ["CloudConnectorFilterValue"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_connectors #=> Array
+    #   resp.cloud_connectors[0].cloud_connector_id #=> String
+    #   resp.cloud_connectors[0].display_name #=> String
+    #   resp.cloud_connectors[0].description #=> String
+    #   resp.cloud_connectors[0].role_arn #=> String
+    #   resp.cloud_connectors[0].created_at #=> Time
+    #   resp.cloud_connectors[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCloudConnectors AWS API Documentation
+    #
+    # @overload list_cloud_connectors(params = {})
+    # @param [Hash] params ({})
+    def list_cloud_connectors(params = {}, options = {})
+      req = build_request(:list_cloud_connectors, params)
       req.send_request(options)
     end
 
@@ -8792,7 +9049,7 @@ module Aws::SSM
     #     sync_name: "ResourceDataSyncName",
     #     filters: [
     #       {
-    #         key: "AgentType", # required, accepts AgentType, AgentVersion, ComputerName, InstanceId, InstanceStatus, IpAddress, ManagedStatus, PlatformName, PlatformType, PlatformVersion, ResourceType, OrganizationalUnitId, OrganizationalUnitPath, Region, AccountId
+    #         key: "AgentType", # required, accepts AgentType, AgentVersion, ComputerName, InstanceId, InstanceStatus, IpAddress, ManagedStatus, PlatformName, PlatformType, PlatformVersion, ResourceType, OrganizationalUnitId, OrganizationalUnitPath, Region, AccountId, SourceType, SourceId, SourceLocation, AvailabilityZone, AvailabilityZoneId
     #         values: ["NodeFilterValue"], # required
     #         type: "Equal", # accepts Equal, NotEqual, BeginWith
     #       },
@@ -8816,10 +9073,16 @@ module Aws::SSM
     #   resp.nodes[0].node_type.instance.instance_status #=> String
     #   resp.nodes[0].node_type.instance.ip_address #=> String
     #   resp.nodes[0].node_type.instance.managed_status #=> String, one of "All", "Managed", "Unmanaged"
+    #   resp.nodes[0].node_type.instance.name #=> String
     #   resp.nodes[0].node_type.instance.platform_type #=> String, one of "Windows", "Linux", "MacOS"
     #   resp.nodes[0].node_type.instance.platform_name #=> String
     #   resp.nodes[0].node_type.instance.platform_version #=> String
     #   resp.nodes[0].node_type.instance.resource_type #=> String, one of "ManagedInstance", "EC2Instance"
+    #   resp.nodes[0].node_type.instance.source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"
+    #   resp.nodes[0].node_type.instance.source_id #=> String
+    #   resp.nodes[0].node_type.instance.source_location #=> String
+    #   resp.nodes[0].node_type.instance.availability_zone #=> String
+    #   resp.nodes[0].node_type.instance.availability_zone_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListNodes AWS API Documentation
@@ -8919,7 +9182,7 @@ module Aws::SSM
     #     sync_name: "ResourceDataSyncName",
     #     filters: [
     #       {
-    #         key: "AgentType", # required, accepts AgentType, AgentVersion, ComputerName, InstanceId, InstanceStatus, IpAddress, ManagedStatus, PlatformName, PlatformType, PlatformVersion, ResourceType, OrganizationalUnitId, OrganizationalUnitPath, Region, AccountId
+    #         key: "AgentType", # required, accepts AgentType, AgentVersion, ComputerName, InstanceId, InstanceStatus, IpAddress, ManagedStatus, PlatformName, PlatformType, PlatformVersion, ResourceType, OrganizationalUnitId, OrganizationalUnitPath, Region, AccountId, SourceType, SourceId, SourceLocation, AvailabilityZone, AvailabilityZoneId
     #         values: ["NodeFilterValue"], # required
     #         type: "Equal", # accepts Equal, NotEqual, BeginWith
     #       },
@@ -8928,7 +9191,7 @@ module Aws::SSM
     #       {
     #         aggregator_type: "Count", # required, accepts Count
     #         type_name: "Instance", # required, accepts Instance
-    #         attribute_name: "AgentVersion", # required, accepts AgentVersion, PlatformName, PlatformType, PlatformVersion, Region, ResourceType
+    #         attribute_name: "AgentVersion", # required, accepts AgentVersion, PlatformName, PlatformType, PlatformVersion, Region, ResourceType, SourceType, AvailabilityZone
     #         aggregators: {
     #           # recursive NodeAggregatorList
     #         },
@@ -9308,7 +9571,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association, CloudConnector
     #     resource_id: "ResourceId", # required
     #   })
     #
@@ -9563,6 +9826,29 @@ module Aws::SSM
     end
 
     # Create or update a parameter in Parameter Store.
+    #
+    # <note markdown="1"> Parameter Store throughput defines the number of API transactions per
+    # second (TPS) that Systems Manager can process. This applies to
+    # `GetParameter`, `GetParameters`, and `PutParameter` API calls for your
+    # Amazon Web Services account and Amazon Web Services Region. By
+    # default, Parameter Store is configured with a standard throughput
+    # quota suitable for low- to moderate-volume workloads. Applications
+    # that retrieve configuration data infrequently or operate at smaller
+    # scale can use this default setting without additional cost.
+    #
+    #  For higher-volume workloads, you can enable higher throughput. This
+    # increases the maximum number of supported transactions per second for
+    # your account and Region. Increased throughput supports applications
+    # and workloads that need concurrent access to multiple parameters. If
+    # you experience `ThrottlingException: Rate exceeded` errors, enable
+    # higher throughput. For more information, see [Changing Parameter Store
+    # throughput][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
     #
     # @option params [required, String] :name
     #   The fully qualified name of the parameter that you want to create or
@@ -10458,7 +10744,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation, Association, CloudConnector
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
@@ -11833,7 +12119,7 @@ module Aws::SSM
     #   action to update an association in multiple Regions and multiple
     #   accounts.
     #
-    #   <note markdown="1"> The `IncludeChildOrganizationUnits` parameter is not supported by
+    #   <note markdown="1"> The `TargetLocationAlarmConfiguration` parameter is not supported by
     #   State Manager.
     #
     #    </note>
@@ -12179,6 +12465,62 @@ module Aws::SSM
     # @param [Hash] params ({})
     def update_association_status(params = {}, options = {})
       req = build_request(:update_association_status, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing cloud connector with new configuration details.
+    #
+    # @option params [required, String] :cloud_connector_id
+    #   The ID of the cloud connector to update.
+    #
+    # @option params [String] :display_name
+    #   A new friendly name for the cloud connector.
+    #
+    # @option params [Types::CloudConnectorConfiguration] :configuration
+    #   The updated configuration details for connecting to the third-party
+    #   cloud environment.
+    #
+    # @option params [String] :description
+    #   A new description for the cloud connector.
+    #
+    # @return [Types::UpdateCloudConnectorResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCloudConnectorResult#cloud_connector_id #cloud_connector_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cloud_connector({
+    #     cloud_connector_id: "CloudConnectorId", # required
+    #     display_name: "DisplayName",
+    #     configuration: {
+    #       azure_configuration: {
+    #         tenant_id: "AzureTenantId", # required
+    #         tenant_display_name: "AzureTenantDisplayName",
+    #         application_id: "AzureApplicationId", # required
+    #         application_display_name: "AzureApplicationDisplayName",
+    #         targets: {
+    #           subscriptions: [
+    #             {
+    #               id: "AzureSubscriptionId", # required
+    #               display_name: "AzureSubscriptionDisplayName",
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #     description: "CloudConnectorDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_connector_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateCloudConnector AWS API Documentation
+    #
+    # @overload update_cloud_connector(params = {})
+    # @param [Hash] params ({})
+    def update_cloud_connector(params = {}, options = {})
+      req = build_request(:update_cloud_connector, params)
       req.send_request(options)
     end
 
@@ -13633,6 +13975,53 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Validates the configuration and connectivity of a cloud connector.
+    #
+    # @option params [required, String] :cloud_connector_id
+    #   The ID of the cloud connector to validate.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of validation findings to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::ValidateCloudConnectorResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidateCloudConnectorResult#validation_findings #validation_findings} => Array&lt;Types::ValidationFinding&gt;
+    #   * {Types::ValidateCloudConnectorResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_cloud_connector({
+    #     cloud_connector_id: "CloudConnectorId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.validation_findings #=> Array
+    #   resp.validation_findings[0].type #=> String, one of "INFO", "WARN", "ERROR"
+    #   resp.validation_findings[0].code #=> String, one of "TargetInaccessible", "TargetUnusable", "TargetStateWarning", "AwsRoleAssumptionFailed", "WebIdentityTokenFailed", "OutboundWebIdentityFederationDisabled", "ProviderCredentialCreationFailed", "TenantSummary", "SubscriptionAccessible"
+    #   resp.validation_findings[0].message #=> String
+    #   resp.validation_findings[0].provider_message #=> String
+    #   resp.validation_findings[0].scope.type #=> String, one of "azure:tenant", "azure:subscription"
+    #   resp.validation_findings[0].scope.id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ValidateCloudConnector AWS API Documentation
+    #
+    # @overload validate_cloud_connector(params = {})
+    # @param [Hash] params ({})
+    def validate_cloud_connector(params = {}, options = {})
+      req = build_request(:validate_cloud_connector, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -13651,7 +14040,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.216.0'
+      context[:gem_version] = '1.220.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

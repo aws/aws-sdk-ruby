@@ -7274,6 +7274,11 @@ module Aws::SecurityAgent
     #   The location of the task execution logs.
     #   @return [Types::LogLocation]
     #
+    # @!attribute [rw] task_hours
+    #   The number of active work hours consumed by the task during
+    #   execution.
+    #   @return [Float]
+    #
     # @!attribute [rw] created_at
     #   The date and time the task was created, in UTC format.
     #   @return [Time]
@@ -7296,6 +7301,7 @@ module Aws::SecurityAgent
       :target_endpoint,
       :execution_status,
       :logs_location,
+      :task_hours,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -7332,6 +7338,11 @@ module Aws::SecurityAgent
     #   The current execution status of the task.
     #   @return [String]
     #
+    # @!attribute [rw] task_hours
+    #   The number of active work hours consumed by the task during
+    #   execution.
+    #   @return [Float]
+    #
     # @!attribute [rw] created_at
     #   The date and time the task was created, in UTC format.
     #   @return [Time]
@@ -7350,6 +7361,7 @@ module Aws::SecurityAgent
       :title,
       :risk_type,
       :execution_status,
+      :task_hours,
       :created_at,
       :updated_at)
       SENSITIVE = []

@@ -34,6 +34,25 @@ module Aws
       targets_max_errors: ::String?
     }
 
+      type azure_configuration = {
+      tenant_id: ::String,
+      tenant_display_name: ::String?,
+      application_id: ::String,
+      application_display_name: ::String?,
+      targets: {
+        subscriptions: Array[
+          {
+            id: ::String,
+            display_name: ::String?
+          }
+        ]?
+      }?
+    }
+
+      type cloud_connector_configuration = {
+      azure_configuration: Params::azure_configuration?
+    }
+
       type patch_rule_group = {
       patch_rules: Array[
         Params::patch_rule

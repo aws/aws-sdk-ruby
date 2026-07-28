@@ -1203,6 +1203,68 @@ module Aws::GameLiftStreams
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The stream group that runs this stream session.
+    #
+    #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_session_identifier
+    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
+    #   the stream session resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567`.
+    #   Example ID: `ABC123def4567`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/CreateStreamSessionAdminShellInput AWS API Documentation
+    #
+    class CreateStreamSessionAdminShellInput < Struct.new(
+      :identifier,
+      :stream_session_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   An Amazon Web Services Systems Manager session identifier that
+    #   uniquely identifies the requested terminal session. Use this value
+    #   with the Amazon Web Services Systems Manager Session Manager plugin.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   An Amazon Web Services Systems Manager WebSocket connection endpoint
+    #   for the requested terminal session.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_value
+    #   An Amazon Web Services Systems Manager authentication token that
+    #   authenticates your access to the session ID and WebSocket URL. This
+    #   token must be treated with the same level of security as other user
+    #   credentials. The token value is only valid for establishing a new
+    #   connection within 60 seconds of generation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/CreateStreamSessionAdminShellOutput AWS API Documentation
+    #
+    class CreateStreamSessionAdminShellOutput < Struct.new(
+      :session_id,
+      :stream_url,
+      :token_value)
+      SENSITIVE = [:token_value]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A unique identifier that represents a client request. The request is
     #   idempotent, which ensures that an API request completes only once.
@@ -1400,6 +1462,24 @@ module Aws::GameLiftStreams
     class DisassociateApplicationsOutput < Struct.new(
       :arn,
       :application_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The virtual monitor settings for a stream session, including the
+    # resolution. If not specified, the stream session uses the default
+    # resolution of 1920 × 1080.
+    #
+    # @!attribute [rw] resolution
+    #   The resolution to apply to the stream session's virtual monitor.
+    #   When specified, this value overrides the default resolution of 1920
+    #   × 1080.
+    #   @return [Types::Resolution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/DisplayConfiguration AWS API Documentation
+    #
+    class DisplayConfiguration < Struct.new(
+      :resolution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2306,6 +2386,16 @@ module Aws::GameLiftStreams
     #   Provides details about the stream session's exported files.
     #   @return [Types::ExportFilesMetadata]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   Amazon GameLift Streams assumes on behalf of your application during
+    #   the stream session.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_configuration
+    #   The configuration for the stream session's virtual monitor.
+    #   @return [Types::DisplayConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/GetStreamSessionOutput AWS API Documentation
     #
     class GetStreamSessionOutput < Struct.new(
@@ -2329,8 +2419,10 @@ module Aws::GameLiftStreams
       :last_updated_at,
       :created_at,
       :application_arn,
-      :export_files_metadata)
-      SENSITIVE = [:signal_request, :signal_response]
+      :export_files_metadata,
+      :role_arn,
+      :display_configuration)
+      SENSITIVE = [:signal_request, :signal_response, :role_arn]
       include Aws::Structure
     end
 
@@ -2888,6 +2980,30 @@ module Aws::GameLiftStreams
       include Aws::Structure
     end
 
+    # Contains the width and height dimensions, in pixels, that define the
+    # resolution of the stream session's virtual monitor. The total number
+    # of pixels (width × height) must not exceed 2,073,600 (equivalent to
+    # 1920 × 1080).
+    #
+    # @!attribute [rw] width
+    #   The width of the stream session's virtual monitor, in pixels. The
+    #   value must be an even number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height
+    #   The height of the stream session's virtual monitor, in pixels. The
+    #   value must be an even number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/Resolution AWS API Documentation
+    #
+    class Resolution < Struct.new(
+      :width,
+      :height)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource specified in the request was not found. Correct the
     # request before you try again.
     #
@@ -3094,6 +3210,24 @@ module Aws::GameLiftStreams
     #   stats with the client
     #   @return [Types::PerformanceStatsConfiguration]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of an AWS Identity and Access Management (IAM) role that
+    #   Amazon GameLift Streams assumes on your behalf during the stream
+    #   session. The role grants Amazon GameLift Streams permission to
+    #   obtain temporary credentials for your application. The role's trust
+    #   policy must allow the `gameliftstreams.amazonaws.com` service
+    #   principal to assume it. The role name must start with
+    #   `GameLiftStreams-`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_configuration
+    #   The configuration for the stream session's virtual monitor,
+    #   including the resolution settings.
+    #
+    #   If not specified, Amazon GameLift Streams uses the default
+    #   resolution of 1920 × 1080.
+    #   @return [Types::DisplayConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/StartStreamSessionInput AWS API Documentation
     #
     class StartStreamSessionInput < Struct.new(
@@ -3109,8 +3243,10 @@ module Aws::GameLiftStreams
       :session_length_seconds,
       :additional_launch_args,
       :additional_environment_variables,
-      :performance_stats_configuration)
-      SENSITIVE = [:signal_request]
+      :performance_stats_configuration,
+      :role_arn,
+      :display_configuration)
+      SENSITIVE = [:signal_request, :role_arn]
       include Aws::Structure
     end
 
@@ -3347,6 +3483,16 @@ module Aws::GameLiftStreams
     #   Provides details about the stream session's exported files.
     #   @return [Types::ExportFilesMetadata]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   Amazon GameLift Streams assumes on behalf of your application during
+    #   the stream session.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_configuration
+    #   The configuration for the stream session's virtual monitor.
+    #   @return [Types::DisplayConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/StartStreamSessionOutput AWS API Documentation
     #
     class StartStreamSessionOutput < Struct.new(
@@ -3370,8 +3516,10 @@ module Aws::GameLiftStreams
       :last_updated_at,
       :created_at,
       :application_arn,
-      :export_files_metadata)
-      SENSITIVE = [:signal_request, :signal_response]
+      :export_files_metadata,
+      :role_arn,
+      :display_configuration)
+      SENSITIVE = [:signal_request, :signal_response, :role_arn]
       include Aws::Structure
     end
 
@@ -3682,6 +3830,21 @@ module Aws::GameLiftStreams
       include Aws::Structure
     end
 
+    # The terminal connection to the stream session is not yet available.
+    # Wait before retrying the request.
+    #
+    # @!attribute [rw] message
+    #   Description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/StreamSessionAccessNotReadyException AWS API Documentation
+    #
+    class StreamSessionAccessNotReadyException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Amazon GameLift Streams stream session. To retrieve
     # additional details for the stream session, call [GetStreamSession][1].
     #
@@ -3833,6 +3996,12 @@ module Aws::GameLiftStreams
     #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
     #   @return [String]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   Amazon GameLift Streams assumes on behalf of your application during
+    #   the stream session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/StreamSessionSummary AWS API Documentation
     #
     class StreamSessionSummary < Struct.new(
@@ -3845,8 +4014,9 @@ module Aws::GameLiftStreams
       :created_at,
       :application_arn,
       :export_files_metadata,
-      :location)
-      SENSITIVE = []
+      :location,
+      :role_arn)
+      SENSITIVE = [:role_arn]
       include Aws::Structure
     end
 

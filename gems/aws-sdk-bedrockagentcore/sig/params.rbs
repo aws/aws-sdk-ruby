@@ -41,6 +41,19 @@ module Aws
       right: Params::memory_record_right_expression?
     }
 
+      type tools_file_system_configuration = {
+      s3_files_configuration: {
+        access_point_arn: ::String,
+        mount_path: ::String,
+        file_system_arn: ::String
+      }?,
+      efs_configuration: {
+        access_point_arn: ::String,
+        mount_path: ::String,
+        file_system_arn: ::String
+      }?
+    }
+
       type cloud_watch_logs_rule = {
       filters: Array[
         Params::cloud_watch_logs_filter

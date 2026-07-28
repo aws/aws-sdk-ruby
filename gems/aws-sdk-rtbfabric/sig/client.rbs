@@ -470,7 +470,6 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def active_links_count: () -> ::Integer
         def total_links_count: () -> ::Integer
-        def inbound_links_count: () -> ::Integer
         def links_requested_count: () -> ::Integer
         def gateway_type: () -> ("EXTERNAL" | "INTERNAL")
         def external_inbound_endpoint: () -> ::String

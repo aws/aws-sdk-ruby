@@ -8,6 +8,12 @@
 module Aws::EMRContainers
   module Types
 
+    class AuthenticationConfiguration
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
+      attr_accessor iam_configuration: Types::IAMConfiguration
+      SENSITIVE: []
+    end
+
     class AuthorizationConfiguration
       attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
@@ -102,6 +108,7 @@ module Aws::EMRContainers
       attr_accessor configuration_overrides: Types::ConfigurationOverrides
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor session_idle_timeout_in_minutes: ::Integer
       SENSITIVE: []
     end
 
@@ -135,6 +142,8 @@ module Aws::EMRContainers
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor security_configuration_id: ::String
+      attr_accessor session_enabled: bool
+      attr_accessor scheduler_configuration: Types::SchedulerConfiguration
       SENSITIVE: []
     end
 
@@ -175,6 +184,16 @@ module Aws::EMRContainers
     class DeleteManagedEndpointResponse
       attr_accessor id: ::String
       attr_accessor virtual_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSecurityConfigurationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSecurityConfigurationResponse
+      attr_accessor id: ::String
       SENSITIVE: []
     end
 
@@ -269,6 +288,7 @@ module Aws::EMRContainers
       attr_accessor certificate_authority: Types::Certificate
       attr_accessor configuration_overrides: Types::ConfigurationOverrides
       attr_accessor server_url: ::String
+      attr_accessor auth_proxy_url: ::String
       attr_accessor created_at: ::Time
       attr_accessor security_group: ::String
       attr_accessor subnet_ids: ::Array[::String]
@@ -292,7 +312,21 @@ module Aws::EMRContainers
     class GetManagedEndpointSessionCredentialsResponse
       attr_accessor id: ::String
       attr_accessor credentials: Types::Credentials
+      attr_accessor endpoint_credentials: Types::Credentials
       attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IAMConfiguration
+      attr_accessor system_role: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityCenterConfiguration
+      attr_accessor enable_identity_center: bool
+      attr_accessor identity_center_application_assignment_required: bool
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor emr_identity_center_application_arn: ::String
       SENSITIVE: []
     end
 
@@ -515,6 +549,19 @@ module Aws::EMRContainers
 
     class S3MonitoringConfiguration
       attr_accessor log_uri: ::String
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SchedulerConfiguration
+      attr_accessor max_in_queue_job_runs: ::Integer
+      attr_accessor max_concurrent_job_runs: ::Integer
+      SENSITIVE: []
+    end
+
+    class SchedulerStatus
+      attr_accessor current_in_queue_job_runs: ::Integer
+      attr_accessor current_concurrent_job_runs: ::Integer
       SENSITIVE: []
     end
 
@@ -537,6 +584,7 @@ module Aws::EMRContainers
 
     class SecurityConfigurationData
       attr_accessor authorization_configuration: Types::AuthorizationConfiguration
+      attr_accessor authentication_configuration: Types::AuthenticationConfiguration
       SENSITIVE: []
     end
 
@@ -607,6 +655,18 @@ module Aws::EMRContainers
     class UntagResourceResponse < Aws::EmptyStructure
     end
 
+    class UpdateVirtualClusterRequest
+      attr_accessor id: ::String
+      attr_accessor scheduler_configuration: Types::SchedulerConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVirtualClusterResponse
+      attr_accessor virtual_cluster: Types::VirtualCluster
+      SENSITIVE: []
+    end
+
     class ValidationException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -621,6 +681,9 @@ module Aws::EMRContainers
       attr_accessor created_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor security_configuration_id: ::String
+      attr_accessor session_enabled: bool
+      attr_accessor scheduler_configuration: Types::SchedulerConfiguration
+      attr_accessor scheduler_status: Types::SchedulerStatus
       SENSITIVE: []
     end
   end

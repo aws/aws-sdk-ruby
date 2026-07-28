@@ -234,6 +234,7 @@ module Aws::MediaConvert
     DolbyVisionMapping = Shapes::StringShape.new(name: 'DolbyVisionMapping')
     DolbyVisionProfile = Shapes::StringShape.new(name: 'DolbyVisionProfile')
     DropFrameTimecode = Shapes::StringShape.new(name: 'DropFrameTimecode')
+    DurationControl = Shapes::StructureShape.new(name: 'DurationControl')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
     DvbSdtSettings = Shapes::StructureShape.new(name: 'DvbSdtSettings')
     DvbSubDestinationSettings = Shapes::StructureShape.new(name: 'DvbSubDestinationSettings')
@@ -330,6 +331,7 @@ module Aws::MediaConvert
     H264DynamicSubGop = Shapes::StringShape.new(name: 'H264DynamicSubGop')
     H264EndOfStreamMarkers = Shapes::StringShape.new(name: 'H264EndOfStreamMarkers')
     H264EntropyEncoding = Shapes::StringShape.new(name: 'H264EntropyEncoding')
+    H264ExplicitWeightedPrediction = Shapes::StringShape.new(name: 'H264ExplicitWeightedPrediction')
     H264FieldEncoding = Shapes::StringShape.new(name: 'H264FieldEncoding')
     H264FlickerAdaptiveQuantization = Shapes::StringShape.new(name: 'H264FlickerAdaptiveQuantization')
     H264FramerateControl = Shapes::StringShape.new(name: 'H264FramerateControl')
@@ -1621,6 +1623,11 @@ module Aws::MediaConvert
     DolbyVisionLevel6Metadata.add_member(:max_fall, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "maxFall"))
     DolbyVisionLevel6Metadata.struct_class = Types::DolbyVisionLevel6Metadata
 
+    DurationControl.add_member(:integer_duration_maximum_compression_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "integerDurationMaximumCompressionDenominator"))
+    DurationControl.add_member(:integer_duration_maximum_compression_numerator, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "integerDurationMaximumCompressionNumerator"))
+    DurationControl.add_member(:integer_duration_trim_threshold_milliseconds, Shapes::ShapeRef.new(shape: __integerMin0Max500, location_name: "integerDurationTrimThresholdMilliseconds"))
+    DurationControl.struct_class = Types::DurationControl
+
     DvbNitSettings.add_member(:network_id, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "networkId"))
     DvbNitSettings.add_member(:network_name, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "networkName"))
     DvbNitSettings.add_member(:nit_interval, Shapes::ShapeRef.new(shape: __integerMin25Max10000, location_name: "nitInterval"))
@@ -1858,6 +1865,7 @@ module Aws::MediaConvert
     H264Settings.add_member(:dynamic_sub_gop, Shapes::ShapeRef.new(shape: H264DynamicSubGop, location_name: "dynamicSubGop"))
     H264Settings.add_member(:end_of_stream_markers, Shapes::ShapeRef.new(shape: H264EndOfStreamMarkers, location_name: "endOfStreamMarkers"))
     H264Settings.add_member(:entropy_encoding, Shapes::ShapeRef.new(shape: H264EntropyEncoding, location_name: "entropyEncoding"))
+    H264Settings.add_member(:explicit_weighted_prediction, Shapes::ShapeRef.new(shape: H264ExplicitWeightedPrediction, location_name: "explicitWeightedPrediction"))
     H264Settings.add_member(:field_encoding, Shapes::ShapeRef.new(shape: H264FieldEncoding, location_name: "fieldEncoding"))
     H264Settings.add_member(:flicker_adaptive_quantization, Shapes::ShapeRef.new(shape: H264FlickerAdaptiveQuantization, location_name: "flickerAdaptiveQuantization"))
     H264Settings.add_member(:framerate_control, Shapes::ShapeRef.new(shape: H264FramerateControl, location_name: "framerateControl"))
@@ -3051,6 +3059,7 @@ module Aws::MediaConvert
     VideoPreprocessor.add_member(:color_corrector, Shapes::ShapeRef.new(shape: ColorCorrector, location_name: "colorCorrector"))
     VideoPreprocessor.add_member(:deinterlacer, Shapes::ShapeRef.new(shape: Deinterlacer, location_name: "deinterlacer"))
     VideoPreprocessor.add_member(:dolby_vision, Shapes::ShapeRef.new(shape: DolbyVision, location_name: "dolbyVision"))
+    VideoPreprocessor.add_member(:duration_control, Shapes::ShapeRef.new(shape: DurationControl, location_name: "durationControl"))
     VideoPreprocessor.add_member(:hdr_10_plus, Shapes::ShapeRef.new(shape: Hdr10Plus, location_name: "hdr10Plus"))
     VideoPreprocessor.add_member(:image_inserter, Shapes::ShapeRef.new(shape: ImageInserter, location_name: "imageInserter"))
     VideoPreprocessor.add_member(:noise_reducer, Shapes::ShapeRef.new(shape: NoiseReducer, location_name: "noiseReducer"))

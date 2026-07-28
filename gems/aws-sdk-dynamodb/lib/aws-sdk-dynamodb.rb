@@ -56,7 +56,7 @@ module Aws::DynamoDB
   autoload :Endpoints, 'aws-sdk-dynamodb/endpoints'
   autoload :Table, 'aws-sdk-dynamodb/table'
 
-  GEM_VERSION = '1.169.0'
+  GEM_VERSION = '1.171.0'
 
 end
 

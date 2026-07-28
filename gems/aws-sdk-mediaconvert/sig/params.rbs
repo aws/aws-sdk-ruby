@@ -807,6 +807,7 @@ module Aws
       dynamic_sub_gop: ("ADAPTIVE" | "STATIC")?,
       end_of_stream_markers: ("INCLUDE" | "SUPPRESS")?,
       entropy_encoding: ("CABAC" | "CAVLC")?,
+      explicit_weighted_prediction: ("DISABLED" | "ENABLED")?,
       field_encoding: ("PAFF" | "FORCE_FIELD" | "MBAFF")?,
       flicker_adaptive_quantization: ("DISABLED" | "ENABLED")?,
       framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
@@ -1168,6 +1169,11 @@ module Aws
         mode: ("DEINTERLACE" | "INVERSE_TELECINE" | "ADAPTIVE")?
       }?,
       dolby_vision: Params::dolby_vision?,
+      duration_control: {
+        integer_duration_maximum_compression_denominator: ::Integer?,
+        integer_duration_maximum_compression_numerator: ::Integer?,
+        integer_duration_trim_threshold_milliseconds: ::Integer?
+      }?,
       hdr_10_plus: {
         mastering_monitor_nits: ::Integer?,
         target_monitor_nits: ::Integer?

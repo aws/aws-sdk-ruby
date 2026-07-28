@@ -1641,6 +1641,11 @@ module Aws::ResourceExplorer2
     #   responsible for creating and updating it.
     #   @return [String]
     #
+    # @!attribute [rw] cfn_resource_type
+    #   The CloudFormation resource type identifier for the resource, such
+    #   as `AWS::EC2::Instance` or `AWS::S3::Bucket`.
+    #   @return [String]
+    #
     # @!attribute [rw] last_reported_at
     #   The date and time that Resource Explorer last queried this resource
     #   and updated the index with the latest information about the
@@ -1661,6 +1666,7 @@ module Aws::ResourceExplorer2
       :region,
       :resource_type,
       :service,
+      :cfn_resource_type,
       :last_reported_at,
       :properties)
       SENSITIVE = []
@@ -1872,6 +1878,34 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
+    # Contains information about the service-linked recorder paired with a
+    # service view.
+    #
+    # @!attribute [rw] service_principal
+    #   The service principal of the Amazon Web Services service that owns
+    #   the service-linked recorder, such as
+    #   `observabilityadmin.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] recorder_name
+    #   The name of the service-linked recorder, such as
+    #   `AWSConfigurationRecorderForObservabilityAdmin`.
+    #   @return [String]
+    #
+    # @!attribute [rw] recorder_type
+    #   The type of the recorder. Valid values are `AWS` and `THIRD_PARTY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ServiceLinkedRecorderInfo AWS API Documentation
+    #
+    class ServiceLinkedRecorderInfo < Struct.new(
+      :service_principal,
+      :recorder_name,
+      :recorder_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request failed because it exceeds a service quota.
     #
     # @!attribute [rw] message
@@ -1926,6 +1960,13 @@ module Aws::ResourceExplorer2
     #   are included.
     #   @return [String]
     #
+    # @!attribute [rw] service_linked_recorder
+    #   Information about the service-linked recorder associated with this
+    #   service view. When a service view is paired with a service-linked
+    #   recorder, Resource Explorer uses the recorder's resource type list
+    #   to filter search results and streaming data.
+    #   @return [Types::ServiceLinkedRecorderInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ServiceView AWS API Documentation
     #
     class ServiceView < Struct.new(
@@ -1934,7 +1975,8 @@ module Aws::ResourceExplorer2
       :filters,
       :included_properties,
       :streaming_access_for_service,
-      :scope_type)
+      :scope_type,
+      :service_linked_recorder)
       SENSITIVE = [:filters]
       include Aws::Structure
     end
@@ -1975,11 +2017,17 @@ module Aws::ResourceExplorer2
     #   The unique identifier of the resource type.
     #   @return [String]
     #
+    # @!attribute [rw] cfn_resource_types
+    #   The CloudFormation resource type identifiers for this resource type,
+    #   such as `AWS::EC2::Instance`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/SupportedResourceType AWS API Documentation
     #
     class SupportedResourceType < Struct.new(
       :service,
-      :resource_type)
+      :resource_type,
+      :cfn_resource_types)
       SENSITIVE = []
       include Aws::Structure
     end

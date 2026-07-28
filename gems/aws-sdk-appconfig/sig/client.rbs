@@ -172,6 +172,44 @@ module Aws
                               ) -> _CreateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
 
+      interface _CreateExperimentDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExperimentDefinition]
+        def application_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def hypothesis: () -> ::String
+        def status: () -> ("ACTIVE" | "IDLE" | "ARCHIVED")
+        def configuration_profile_id: () -> ::String
+        def environment_id: () -> ::String
+        def flag_key: () -> ::String
+        def audience_rule: () -> ::String
+        def audience_description: () -> ::String
+        def launch_criteria: () -> ::String
+        def treatments: () -> ::Array[Types::Treatment]
+        def control: () -> Types::Treatment
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def kms_key_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#create_experiment_definition-instance_method
+      def create_experiment_definition: (
+                                          application_identifier: ::String,
+                                          name: ::String,
+                                          configuration_profile_identifier: ::String,
+                                          environment_identifier: ::String,
+                                          flag_key: ::String,
+                                          treatments: Array[
+                                            Params::treatment_input
+                                          ],
+                                          control: Params::treatment_input,
+                                          audience_rule: ::String,
+                                          ?hypothesis: ::String,
+                                          ?audience_description: ::String,
+                                          ?launch_criteria: ::String,
+                                          ?tags: Hash[::String, ::String]
+                                        ) -> _CreateExperimentDefinitionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExperimentDefinitionResponseSuccess
+
       interface _CreateExtensionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Extension]
         def id: () -> ::String
@@ -274,6 +312,14 @@ module Aws
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_experiment_definition-instance_method
+      def delete_experiment_definition: (
+                                          application_identifier: ::String,
+                                          experiment_definition_identifier: ::String,
+                                          ?delete_type: ("ARCHIVE" | "DESTROY")
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_extension-instance_method
       def delete_extension: (
                               extension_identifier: ::String,
@@ -298,6 +344,7 @@ module Aws
       interface _GetAccountSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AccountSettings]
         def deletion_protection: () -> Types::DeletionProtectionSettings
+        def vended_metrics: () -> Types::VendedMetricsSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_account_settings-instance_method
       def get_account_settings: () -> _GetAccountSettingsResponseSuccess
@@ -417,6 +464,55 @@ module Aws
                            ) -> _GetEnvironmentResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
 
+      interface _GetExperimentDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExperimentDefinition]
+        def application_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def hypothesis: () -> ::String
+        def status: () -> ("ACTIVE" | "IDLE" | "ARCHIVED")
+        def configuration_profile_id: () -> ::String
+        def environment_id: () -> ::String
+        def flag_key: () -> ::String
+        def audience_rule: () -> ::String
+        def audience_description: () -> ::String
+        def launch_criteria: () -> ::String
+        def treatments: () -> ::Array[Types::Treatment]
+        def control: () -> Types::Treatment
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def kms_key_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_experiment_definition-instance_method
+      def get_experiment_definition: (
+                                       application_identifier: ::String,
+                                       experiment_definition_identifier: ::String
+                                     ) -> _GetExperimentDefinitionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExperimentDefinitionResponseSuccess
+
+      interface _GetExperimentRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExperimentRun]
+        def application_id: () -> ::String
+        def experiment_definition_id: () -> ::String
+        def run: () -> ::Integer
+        def description: () -> ::String
+        def status: () -> ("RUNNING" | "DONE")
+        def exposure_percentage: () -> ::Float
+        def treatment_overrides: () -> Types::TreatmentOverrides
+        def result: () -> Types::ExperimentRunResult
+        def started_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def experiment_definition_snapshot: () -> Types::ExperimentDefinitionSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_experiment_run-instance_method
+      def get_experiment_run: (
+                                application_identifier: ::String,
+                                experiment_definition_identifier: ::String,
+                                run: ::Integer
+                              ) -> _GetExperimentRunResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExperimentRunResponseSuccess
+
       interface _GetExtensionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Extension]
         def id: () -> ::String
@@ -533,6 +629,52 @@ module Aws
                              ) -> _ListEnvironmentsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
 
+      interface _ListExperimentDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExperimentDefinitions]
+        def items: () -> ::Array[Types::ExperimentDefinitionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_experiment_definitions-instance_method
+      def list_experiment_definitions: (
+                                         ?application_identifier: ::String,
+                                         ?configuration_profile_identifier: ::String,
+                                         ?environment_identifier: ::String,
+                                         ?status: ("ACTIVE" | "IDLE" | "ARCHIVED"),
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListExperimentDefinitionsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperimentDefinitionsResponseSuccess
+
+      interface _ListExperimentRunEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExperimentRunEvents]
+        def items: () -> ::Array[Types::ExperimentRunEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_experiment_run_events-instance_method
+      def list_experiment_run_events: (
+                                        application_identifier: ::String,
+                                        experiment_definition_identifier: ::String,
+                                        run: ::Integer,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListExperimentRunEventsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperimentRunEventsResponseSuccess
+
+      interface _ListExperimentRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExperimentRuns]
+        def items: () -> ::Array[Types::ExperimentRunSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_experiment_runs-instance_method
+      def list_experiment_runs: (
+                                  application_identifier: ::String,
+                                  experiment_definition_identifier: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?status: ("RUNNING" | "DONE")
+                                ) -> _ListExperimentRunsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperimentRunsResponseSuccess
+
       interface _ListExtensionAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ExtensionAssociations]
         def items: () -> ::Array[Types::ExtensionAssociationSummary]
@@ -621,9 +763,42 @@ module Aws
                               ?description: ::String,
                               ?tags: Hash[::String, ::String],
                               ?kms_key_identifier: ::String,
-                              ?dynamic_extension_parameters: Hash[::String, ::String]
+                              ?dynamic_extension_parameters: Hash[::String, ::String],
+                              ?latest_deployment_number: ::Integer
                             ) -> _StartDeploymentResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeploymentResponseSuccess
+
+      interface _StartExperimentRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExperimentRun]
+        def application_id: () -> ::String
+        def experiment_definition_id: () -> ::String
+        def run: () -> ::Integer
+        def description: () -> ::String
+        def status: () -> ("RUNNING" | "DONE")
+        def exposure_percentage: () -> ::Float
+        def treatment_overrides: () -> Types::TreatmentOverrides
+        def result: () -> Types::ExperimentRunResult
+        def started_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def experiment_definition_snapshot: () -> Types::ExperimentDefinitionSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#start_experiment_run-instance_method
+      def start_experiment_run: (
+                                  application_identifier: ::String,
+                                  experiment_definition_identifier: ::String,
+                                  ?description: ::String,
+                                  ?exposure_percentage: ::Float,
+                                  ?treatment_overrides: {
+                                    inline: Hash[::String, ::String]?
+                                  },
+                                  ?tags: Hash[::String, ::String],
+                                  ?deployment_parameters: {
+                                    dynamic_extension_parameters: Hash[::String, ::String]?,
+                                    tags: Hash[::String, ::String]?
+                                  }
+                                ) -> _StartExperimentRunResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartExperimentRunResponseSuccess
 
       interface _StopDeploymentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Deployment]
@@ -659,6 +834,38 @@ module Aws
                            ) -> _StopDeploymentResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDeploymentResponseSuccess
 
+      interface _StopExperimentRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExperimentRun]
+        def application_id: () -> ::String
+        def experiment_definition_id: () -> ::String
+        def run: () -> ::Integer
+        def description: () -> ::String
+        def status: () -> ("RUNNING" | "DONE")
+        def exposure_percentage: () -> ::Float
+        def treatment_overrides: () -> Types::TreatmentOverrides
+        def result: () -> Types::ExperimentRunResult
+        def started_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def experiment_definition_snapshot: () -> Types::ExperimentDefinitionSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#stop_experiment_run-instance_method
+      def stop_experiment_run: (
+                                 application_identifier: ::String,
+                                 experiment_definition_identifier: ::String,
+                                 run: ::Integer,
+                                 ?result: {
+                                   executive_summary: ::String?,
+                                   reasons_to_launch: ::String?,
+                                   reasons_not_to_launch: ::String?
+                                 },
+                                 ?deployment_parameters: {
+                                   dynamic_extension_parameters: Hash[::String, ::String]?,
+                                   tags: Hash[::String, ::String]?
+                                 }
+                               ) -> _StopExperimentRunResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopExperimentRunResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#tag_resource-instance_method
       def tag_resource: (
                           resource_arn: ::String,
@@ -676,12 +883,16 @@ module Aws
       interface _UpdateAccountSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AccountSettings]
         def deletion_protection: () -> Types::DeletionProtectionSettings
+        def vended_metrics: () -> Types::VendedMetricsSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_account_settings-instance_method
       def update_account_settings: (
                                      ?deletion_protection: {
                                        enabled: bool?,
                                        protection_period_in_minutes: ::Integer?
+                                     },
+                                     ?vended_metrics: {
+                                       enabled: bool?
                                      }
                                    ) -> _UpdateAccountSettingsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountSettingsResponseSuccess
@@ -775,6 +986,72 @@ module Aws
                                 ]
                               ) -> _UpdateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+
+      interface _UpdateExperimentDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExperimentDefinition]
+        def application_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def hypothesis: () -> ::String
+        def status: () -> ("ACTIVE" | "IDLE" | "ARCHIVED")
+        def configuration_profile_id: () -> ::String
+        def environment_id: () -> ::String
+        def flag_key: () -> ::String
+        def audience_rule: () -> ::String
+        def audience_description: () -> ::String
+        def launch_criteria: () -> ::String
+        def treatments: () -> ::Array[Types::Treatment]
+        def control: () -> Types::Treatment
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def kms_key_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_experiment_definition-instance_method
+      def update_experiment_definition: (
+                                          application_identifier: ::String,
+                                          experiment_definition_identifier: ::String,
+                                          ?treatments: Array[
+                                            Params::treatment_input
+                                          ],
+                                          ?control: Params::treatment_input,
+                                          ?hypothesis: ::String,
+                                          ?audience_rule: ::String,
+                                          ?audience_description: ::String,
+                                          ?launch_criteria: ::String
+                                        ) -> _UpdateExperimentDefinitionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExperimentDefinitionResponseSuccess
+
+      interface _UpdateExperimentRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExperimentRun]
+        def application_id: () -> ::String
+        def experiment_definition_id: () -> ::String
+        def run: () -> ::Integer
+        def description: () -> ::String
+        def status: () -> ("RUNNING" | "DONE")
+        def exposure_percentage: () -> ::Float
+        def treatment_overrides: () -> Types::TreatmentOverrides
+        def result: () -> Types::ExperimentRunResult
+        def started_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def experiment_definition_snapshot: () -> Types::ExperimentDefinitionSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_experiment_run-instance_method
+      def update_experiment_run: (
+                                   application_identifier: ::String,
+                                   experiment_definition_identifier: ::String,
+                                   run: ::Integer,
+                                   ?description: ::String,
+                                   ?exposure_percentage: ::Float,
+                                   ?treatment_overrides: {
+                                     inline: Hash[::String, ::String]?
+                                   },
+                                   ?deployment_parameters: {
+                                     dynamic_extension_parameters: Hash[::String, ::String]?,
+                                     tags: Hash[::String, ::String]?
+                                   }
+                                 ) -> _UpdateExperimentRunResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExperimentRunResponseSuccess
 
       interface _UpdateExtensionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Extension]

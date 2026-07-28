@@ -166,6 +166,10 @@ module Aws
                                            }
                                          ]?
                                        },
+                                       ?node_lifecycle_actions: {
+                                         stages: Params::node_lifecycle_stages,
+                                         script_caching_policy: ("CACHE_ONCE" | "REFRESH_ON_REBOOT")?
+                                       },
                                        ?client_token: ::String,
                                        ?tags: Hash[::String, ::String]
                                      ) -> _CreateComputeNodeGroupResponseSuccess
@@ -314,6 +318,10 @@ module Aws
         def node_id: () -> ::String
         def shared_secret: () -> ::String
         def endpoints: () -> ::Array[Types::Endpoint]
+        def cluster_name: () -> ::String
+        def compute_node_group_id: () -> ::String
+        def compute_node_group_name: () -> ::String
+        def node_lifecycle_actions: () -> Types::NodeLifecycleActions
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#register_compute_node_group_instance-instance_method
       def register_compute_node_group_instance: (
@@ -377,6 +385,9 @@ module Aws
                               slurm_rest: {
                                 mode: ("STANDARD" | "NONE")?
                               }?
+                            },
+                            ?scheduler: {
+                              version: ::String
                             }
                           ) -> _UpdateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
@@ -412,6 +423,10 @@ module Aws
                                              parameter_value: ::String
                                            }
                                          ]?
+                                       },
+                                       ?node_lifecycle_actions: {
+                                         stages: Params::node_lifecycle_stages,
+                                         script_caching_policy: ("CACHE_ONCE" | "REFRESH_ON_REBOOT")?
                                        },
                                        ?client_token: ::String
                                      ) -> _UpdateComputeNodeGroupResponseSuccess

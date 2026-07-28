@@ -2301,7 +2301,7 @@ module Aws::RDS
     #   Indicates whether the DB instance has a dedicated log volume (DLV)
     #   enabled.
     # @option options [String] :engine_lifecycle_support
-    #   The life cycle type for this DB instance.
+    #   The lifecycle type for this DB instance.
     #
     #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
     #   which enrolls your DB instance into Amazon RDS Extended Support. At
@@ -2314,8 +2314,8 @@ module Aws::RDS
     #    </note>
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
-    #   Amazon Aurora DB instances, the life cycle type is managed by the DB
-    #   cluster.
+    #   Amazon Aurora DB instances, the engine lifecycle support is managed by
+    #   the DB cluster.
     #
     #   You can use this setting to enroll your DB instance into Amazon RDS
     #   Extended Support. With RDS Extended Support, you can run the selected
@@ -3328,6 +3328,7 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     engine_lifecycle_support: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -4442,6 +4443,28 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    # @option options [String] :engine_lifecycle_support
+    #   The lifecycle type for this DB instance.
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
+    #   Amazon Aurora DB instances, the engine lifecycle support is managed by
+    #   the DB cluster.
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support or to opt out. With RDS Extended Support, you can run
+    #   the selected major engine version on your DB instance past the end of
+    #   standard support for that engine version. For more information, see
+    #   [Amazon RDS Extended Support with Amazon RDS][1] in the *Amazon RDS
+    #   User Guide*.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -5220,7 +5243,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     # @option options [String] :engine_lifecycle_support
-    #   The life cycle type for this DB instance.
+    #   The lifecycle type for this DB instance.
     #
     #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
     #   which enrolls your DB instance into Amazon RDS Extended Support. At
@@ -5240,8 +5263,8 @@ module Aws::RDS
     #   Extended Support with Amazon RDS][1] in the *Amazon RDS User Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
-    #   Amazon Aurora DB instances, the life cycle type is managed by the DB
-    #   cluster.
+    #   Amazon Aurora DB instances, the engine lifecycle support is managed by
+    #   the DB cluster.
     #
     #   Valid Values: `open-source-rds-extended-support |
     #   open-source-rds-extended-support-disabled`

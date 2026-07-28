@@ -159,6 +159,7 @@ module Aws::ObservabilityAdmin
     RuleName = Shapes::StringShape.new(name: 'RuleName')
     SSEAlgorithm = Shapes::StringShape.new(name: 'SSEAlgorithm')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SignalType = Shapes::StringShape.new(name: 'SignalType')
     SingleHeader = Shapes::StructureShape.new(name: 'SingleHeader')
     SingleHeaderNameString = Shapes::StringShape.new(name: 'SingleHeaderNameString')
     Sinks = Shapes::ListShape.new(name: 'Sinks')
@@ -759,6 +760,7 @@ module Aws::ObservabilityAdmin
 
     TestTelemetryPipelineInput.add_member(:records, Shapes::ShapeRef.new(shape: Records, required: true, location_name: "Records"))
     TestTelemetryPipelineInput.add_member(:configuration, Shapes::ShapeRef.new(shape: TelemetryPipelineConfiguration, required: true, location_name: "Configuration"))
+    TestTelemetryPipelineInput.add_member(:signal_type, Shapes::ShapeRef.new(shape: SignalType, location_name: "SignalType"))
     TestTelemetryPipelineInput.struct_class = Types::TestTelemetryPipelineInput
 
     TestTelemetryPipelineOutput.add_member(:results, Shapes::ShapeRef.new(shape: PipelineOutputs, location_name: "Results"))

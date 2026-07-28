@@ -460,7 +460,6 @@ module Aws::RTBFabric
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor active_links_count: ::Integer
       attr_accessor total_links_count: ::Integer
-      attr_accessor inbound_links_count: ::Integer
       attr_accessor links_requested_count: ::Integer
       attr_accessor gateway_type: ("EXTERNAL" | "INTERNAL")
       attr_accessor external_inbound_endpoint: ::String

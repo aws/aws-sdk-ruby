@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2026-07-24)
+------------------
+
+* Feature - Endpoint test standardizations
+
+1.170.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.169.0 (2026-06-05)
 ------------------
 

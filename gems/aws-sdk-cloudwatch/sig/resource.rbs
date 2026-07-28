@@ -89,7 +89,7 @@ module Aws
       def alarms: (
                     ?alarm_names: Array[::String],
                     ?alarm_name_prefix: ::String,
-                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
+                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")],
                     ?children_of_alarm_name: ::String,
                     ?parents_of_alarm_name: ::String,
                     ?state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA"),
@@ -104,7 +104,7 @@ module Aws
       def composite_alarms: (
                               ?alarm_names: Array[::String],
                               ?alarm_name_prefix: ::String,
-                              ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
+                              ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")],
                               ?children_of_alarm_name: ::String,
                               ?parents_of_alarm_name: ::String,
                               ?state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA"),

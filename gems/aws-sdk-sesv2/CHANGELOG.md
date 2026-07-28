@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2026-07-22)
+------------------
+
+* Feature - Launching DEED and MREP in US GOV
+
+1.104.0 (2026-07-20)
+------------------
+
+* Feature - Amazon SES introduces three new Pricing Plans (Essentials, Pro, Enterprise), which bundle SES features under one pricing umbrella.  The new PutAccountPricingAttributes API lets the user set the account's plan, while current plan retrievalif done through the new PricingAttributes field on GetAccount.
+
+1.103.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.102.0 (2026-05-29)
 ------------------
 

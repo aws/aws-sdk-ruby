@@ -803,14 +803,14 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
-    # The `CreateScraper` operation creates a scraper to collect metrics. A
-    # scraper pulls metrics from Prometheus-compatible sources and sends
-    # them to your Amazon Managed Service for Prometheus workspace. You can
+    # Creates a scraper to collect metrics from Prometheus-compatible
+    # sources. The scraper sends the collected metrics to Amazon Managed
+    # Service for Prometheus workspaces or CloudWatch datasets. You can
     # configure scrapers to collect metrics from Amazon EKS clusters, Amazon
     # MSK clusters, or from VPC-based sources that support DNS-based service
-    # discovery. Scrapers are flexible, and can be configured to control
-    # what metrics are collected, the frequency of collection, what
-    # transformations are applied to the metrics, and more.
+    # discovery. Scrapers are flexible. You can configure a scraper to
+    # control which metrics to collect, the frequency of collection, which
+    # transformations to apply to the metrics, and more.
     #
     # An IAM role will be created for you that Amazon Managed Service for
     # Prometheus uses to access the metrics in your source. You must
@@ -857,8 +857,9 @@ module Aws::PrometheusService
     #   will collect metrics.
     #
     # @option params [required, Types::Destination] :destination
-    #   The Amazon Managed Service for Prometheus workspace to send metrics
-    #   to.
+    #   The destination where the scraper sends the collected metrics. Valid
+    #   destinations are Amazon Managed Service for Prometheus workspaces and
+    #   CloudWatch datasets.
     #
     # @option params [Types::RoleConfiguration] :role_configuration
     #   Use this structure to enable cross-account access, so that you can use
@@ -985,6 +986,9 @@ module Aws::PrometheusService
     #     destination: { # required
     #       amp_configuration: {
     #         workspace_arn: "WorkspaceArn", # required
+    #       },
+    #       cloud_watch_configuration: {
+    #         dataset_arn: "CloudWatchDatasetArn", # required
     #       },
     #     },
     #     role_configuration: {
@@ -1734,6 +1738,7 @@ module Aws::PrometheusService
     #   resp.scraper.source.vpc_configuration.subnet_ids #=> Array
     #   resp.scraper.source.vpc_configuration.subnet_ids[0] #=> String
     #   resp.scraper.destination.amp_configuration.workspace_arn #=> String
+    #   resp.scraper.destination.cloud_watch_configuration.dataset_arn #=> String
     #   resp.scraper.role_configuration.source_role_arn #=> String
     #   resp.scraper.role_configuration.target_role_arn #=> String
     #
@@ -2226,6 +2231,7 @@ module Aws::PrometheusService
     #   resp.scrapers[0].source.vpc_configuration.subnet_ids #=> Array
     #   resp.scrapers[0].source.vpc_configuration.subnet_ids[0] #=> String
     #   resp.scrapers[0].destination.amp_configuration.workspace_arn #=> String
+    #   resp.scrapers[0].destination.cloud_watch_configuration.dataset_arn #=> String
     #   resp.scrapers[0].role_configuration.source_role_arn #=> String
     #   resp.scrapers[0].role_configuration.target_role_arn #=> String
     #   resp.next_token #=> String
@@ -2823,8 +2829,9 @@ module Aws::PrometheusService
     #   [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html
     #
     # @option params [Types::Destination] :destination
-    #   The new Amazon Managed Service for Prometheus workspace to send
-    #   metrics to.
+    #   The new destination where the scraper sends metrics. Valid
+    #   destinations are Amazon Managed Service for Prometheus workspaces and
+    #   CloudWatch datasets.
     #
     # @option params [Types::RoleConfiguration] :role_configuration
     #   Use this structure to enable cross-account access, so that you can use
@@ -2884,6 +2891,9 @@ module Aws::PrometheusService
     #     destination: {
     #       amp_configuration: {
     #         workspace_arn: "WorkspaceArn", # required
+    #       },
+    #       cloud_watch_configuration: {
+    #         dataset_arn: "CloudWatchDatasetArn", # required
     #       },
     #     },
     #     role_configuration: {
@@ -3094,7 +3104,7 @@ module Aws::PrometheusService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

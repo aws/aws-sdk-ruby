@@ -1,0 +1,79 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListSupportPermitRequestsSuccess",
+    "operationName" : "ListSupportPermitRequests",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "ap-northeast-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListActionsSuccess",
+    "operationName" : "ListActions",
+    "input" : {
+      "service" : "myservice"
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "ap-northeast-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetActionFailure",
+    "operationName" : "GetAction",
+    "input" : {
+      "action" : "myservice:NonExistentAction"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "ap-northeast-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListSupportPermitsSuccess",
+    "operationName" : "ListSupportPermits",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "ap-northeast-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetSupportPermitFailure",
+    "operationName" : "GetSupportPermit",
+    "input" : {
+      "supportPermitIdentifier" : "non-existent-permit-id"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "ap-northeast-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

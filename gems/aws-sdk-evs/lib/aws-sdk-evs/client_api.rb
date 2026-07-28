@@ -172,6 +172,7 @@ module Aws::Evs
     AssociateEipToVlanResponse.struct_class = Types::AssociateEipToVlanResponse
 
     Check.add_member(:type, Shapes::ShapeRef.new(shape: CheckType, location_name: "type"))
+    Check.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Check.add_member(:result, Shapes::ShapeRef.new(shape: CheckResult, location_name: "result"))
     Check.add_member(:impaired_since, Shapes::ShapeRef.new(shape: Timestamp, location_name: "impairedSince"))
     Check.struct_class = Types::Check
@@ -243,12 +244,12 @@ module Aws::Evs
     CreateEnvironmentRequest.add_member(:service_access_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "serviceAccessSubnetId"))
     CreateEnvironmentRequest.add_member(:vcf_version, Shapes::ShapeRef.new(shape: VcfVersion, required: true, location_name: "vcfVersion"))
     CreateEnvironmentRequest.add_member(:terms_accepted, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "termsAccepted"))
-    CreateEnvironmentRequest.add_member(:license_info, Shapes::ShapeRef.new(shape: LicenseInfoList, required: true, location_name: "licenseInfo"))
     CreateEnvironmentRequest.add_member(:initial_vlans, Shapes::ShapeRef.new(shape: InitialVlans, required: true, location_name: "initialVlans"))
-    CreateEnvironmentRequest.add_member(:hosts, Shapes::ShapeRef.new(shape: HostInfoForCreateList, required: true, location_name: "hosts"))
-    CreateEnvironmentRequest.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: ConnectivityInfo, required: true, location_name: "connectivityInfo"))
-    CreateEnvironmentRequest.add_member(:vcf_hostnames, Shapes::ShapeRef.new(shape: VcfHostnames, required: true, location_name: "vcfHostnames"))
-    CreateEnvironmentRequest.add_member(:site_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "siteId"))
+    CreateEnvironmentRequest.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: ConnectivityInfo, location_name: "connectivityInfo"))
+    CreateEnvironmentRequest.add_member(:license_info, Shapes::ShapeRef.new(shape: LicenseInfoList, location_name: "licenseInfo"))
+    CreateEnvironmentRequest.add_member(:hosts, Shapes::ShapeRef.new(shape: HostInfoForCreateList, location_name: "hosts"))
+    CreateEnvironmentRequest.add_member(:vcf_hostnames, Shapes::ShapeRef.new(shape: VcfHostnames, location_name: "vcfHostnames"))
+    CreateEnvironmentRequest.add_member(:site_id, Shapes::ShapeRef.new(shape: String, location_name: "siteId"))
     CreateEnvironmentRequest.struct_class = Types::CreateEnvironmentRequest
 
     CreateEnvironmentResponse.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "environment"))

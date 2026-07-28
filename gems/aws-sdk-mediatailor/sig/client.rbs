@@ -589,7 +589,9 @@ module Aws
         def personalization_threshold_seconds: () -> ::Integer
         def playback_configuration_arn: () -> ::String
         def playback_endpoint_prefix: () -> ::String
+        def dual_stack_playback_endpoint_prefix: () -> ::String
         def session_initialization_endpoint_prefix: () -> ::String
+        def dual_stack_session_initialization_endpoint_prefix: () -> ::String
         def slate_ad_url: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def transcode_profile_name: () -> ::String
@@ -597,6 +599,8 @@ module Aws
         def ad_conditioning_configuration: () -> Types::AdConditioningConfiguration
         def ad_decision_server_configuration: () -> Types::AdDecisionServerConfiguration
         def function_mapping: () -> ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
+        def ads_personalization_timeouts: () -> Types::AdsPersonalizationTimeouts
+        def ads_personalization_concurrency: () -> Types::AdsPersonalizationConcurrency
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#get_playback_configuration-instance_method
       def get_playback_configuration: (
@@ -806,7 +810,9 @@ module Aws
         def personalization_threshold_seconds: () -> ::Integer
         def playback_configuration_arn: () -> ::String
         def playback_endpoint_prefix: () -> ::String
+        def dual_stack_playback_endpoint_prefix: () -> ::String
         def session_initialization_endpoint_prefix: () -> ::String
+        def dual_stack_session_initialization_endpoint_prefix: () -> ::String
         def slate_ad_url: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def transcode_profile_name: () -> ::String
@@ -814,6 +820,8 @@ module Aws
         def ad_conditioning_configuration: () -> Types::AdConditioningConfiguration
         def ad_decision_server_configuration: () -> Types::AdDecisionServerConfiguration
         def function_mapping: () -> ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
+        def ads_personalization_timeouts: () -> Types::AdsPersonalizationTimeouts
+        def ads_personalization_concurrency: () -> Types::AdsPersonalizationConcurrency
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#put_playback_configuration-instance_method
       def put_playback_configuration: (
@@ -863,7 +871,18 @@ module Aws
                                             compress_request: ("NONE" | "GZIP")?
                                           }?
                                         },
-                                        ?function_mapping: Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
+                                        ?function_mapping: Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String],
+                                        ?ads_personalization_timeouts: {
+                                          ads_request_timeout_milliseconds: ::Integer?,
+                                          live_maximum_ads_personalization_time_milliseconds: ::Integer?,
+                                          vod_maximum_ads_personalization_time_milliseconds: ::Integer?,
+                                          prefetch_ads_request_timeout_milliseconds: ::Integer?,
+                                          prefetch_maximum_ads_personalization_time_milliseconds: ::Integer?
+                                        },
+                                        ?ads_personalization_concurrency: {
+                                          max_concurrent_ads_requests: ::Integer?,
+                                          enable_vod_vast_parallelization: bool?
+                                        }
                                       ) -> _PutPlaybackConfigurationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPlaybackConfigurationResponseSuccess
 

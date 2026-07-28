@@ -31,11 +31,29 @@ module Aws::GeoPlaces
     #   latitude\].
     #   @return [Array<Float>]
     #
+    # @!attribute [rw] type
+    #   The type of access point, indicating its intended use. Only applies
+    #   to results of type place.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary
+    #   Set to `true` for the primary access position when the place has
+    #   more than one access point.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] label
+    #   A short textual description of the access point, such as `"North
+    #   Entrance"`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/AccessPoint AWS API Documentation
     #
     class AccessPoint < Struct.new(
-      :position)
-      SENSITIVE = [:position]
+      :position,
+      :type,
+      :primary,
+      :label)
+      SENSITIVE = [:position, :primary, :label]
       include Aws::Structure
     end
 
@@ -366,6 +384,29 @@ module Aws::GeoPlaces
       include Aws::Structure
     end
 
+    # The official administrative names for an address component, returned
+    # when `AddressNamesMode` is set to `Administrative`.
+    #
+    # @!attribute [rw] names
+    #   A list of translation names for the administrative address
+    #   component, including name variants and translations in available
+    #   languages.
+    #   @return [Array<Types::TranslationName>]
+    #
+    # @!attribute [rw] preference
+    #   Indicates the preference level of the administrative name. Valid
+    #   values are `Primary` and `Alternative`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/AdminNames AWS API Documentation
+    #
+    class AdminNames < Struct.new(
+      :names,
+      :preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes how the parts of the response element matched the input
     # query by returning the sections of the response which matched to input
     # query terms.
@@ -561,7 +602,9 @@ module Aws::GeoPlaces
     #   partial district or locality information may be returned under a
     #   single postal code result entry. If it's populated with the value
     #   `EnumerateSpannedLocalities`, all cities in that postal code are
-    #   returned.
+    #   returned. If it's populated with the value
+    #   `EnumerateSpannedDistricts`, all combinations of the postal code
+    #   with the corresponding district and city names are returned.
     #   @return [String]
     #
     # @!attribute [rw] additional_features
@@ -577,7 +620,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
     #   @return [String]
     #
     # @!attribute [rw] political_view
@@ -706,7 +749,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
     #   @return [String]
     #
     # @!attribute [rw] political_view
@@ -721,6 +764,11 @@ module Aws::GeoPlaces
     #   query that match the found title.
     #   @return [Types::AutocompleteHighlights]
     #
+    # @!attribute [rw] estimated_point_address
+    #   If `true`, indicates that the coordinates of the position and access
+    #   points of the point address are estimated.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/AutocompleteResultItem AWS API Documentation
     #
     class AutocompleteResultItem < Struct.new(
@@ -731,8 +779,9 @@ module Aws::GeoPlaces
       :distance,
       :language,
       :political_view,
-      :highlights)
-      SENSITIVE = [:place_id, :place_type, :title, :distance, :political_view]
+      :highlights,
+      :estimated_point_address)
+      SENSITIVE = [:place_id, :place_type, :title, :distance, :political_view, :estimated_point_address]
       include Aws::Structure
     end
 
@@ -909,6 +958,33 @@ module Aws::GeoPlaces
       include Aws::Structure
     end
 
+    # A reference to a third-party supplier's identifier for a place,
+    # enabling correlation of places across external systems.
+    #
+    # @!attribute [rw] source
+    #   The name of the third-party data supplier (for example, `Yelp` or
+    #   `TripAdvisor`).
+    #   @return [String]
+    #
+    # @!attribute [rw] source_place_id
+    #   The place identifier assigned by the third-party supplier.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_categories
+    #   The list of place category identifiers this supplier reference
+    #   relates to.
+    #   @return [Array<Types::Category>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/CrossReference AWS API Documentation
+    #
+    class CrossReference < Struct.new(
+      :source,
+      :source_place_id,
+      :source_categories)
+      SENSITIVE = [:source, :source_place_id]
+      include Aws::Structure
+    end
+
     # The `Circle` that all results must be in.
     #
     # @!attribute [rw] center
@@ -1077,6 +1153,11 @@ module Aws::GeoPlaces
     #    </note>
     #   @return [Array<Types::ParsedQuerySecondaryAddressComponent>]
     #
+    # @!attribute [rw] other_components
+    #   Additional information extracted from the query that does not
+    #   correspond to standard address components.
+    #   @return [Array<Types::ParsedQueryComponent>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GeocodeParsedQueryAddressComponents AWS API Documentation
     #
     class GeocodeParsedQueryAddressComponents < Struct.new(
@@ -1092,7 +1173,8 @@ module Aws::GeoPlaces
       :street,
       :address_number,
       :building,
-      :secondary_address_components)
+      :secondary_address_components,
+      :other_components)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1197,7 +1279,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
     #   @return [String]
     #
     # @!attribute [rw] political_view
@@ -1233,6 +1315,34 @@ module Aws::GeoPlaces
     #   key or valid SigV4 signature must be provided when making a request.
     #   @return [String]
     #
+    # @!attribute [rw] postal_code_mode
+    #   The `PostalCodeMode` affects how postal code results are returned.
+    #   If a postal code spans multiple localities and this value is empty,
+    #   partial district or locality information may be returned under a
+    #   single postal code result entry. If it's populated with the value
+    #   `EnumerateSpannedLocalities`, all cities in that postal code are
+    #   returned. If it's populated with the value
+    #   `EnumerateSpannedDistricts`, all combinations of the postal code
+    #   with the corresponding district and city names are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_translations
+    #   Specifies which address components to include translations for.
+    #   Translations include all name variants and alternative names for the
+    #   requested fields in all available languages. Valid values are
+    #   `District`, `Locality`, `Region`, and `SubRegion`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] address_names_mode
+    #   Specifies how address names are returned. If not set, the service
+    #   returns normalized (official) names by default. When set to
+    #   `Matched`, address names in the response are based on the input
+    #   query rather than official names. When set to `Administrative`, the
+    #   service returns the official administrative names for address
+    #   components. `Administrative` currently applies only to addresses in
+    #   the United States.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GeocodeRequest AWS API Documentation
     #
     class GeocodeRequest < Struct.new(
@@ -1245,7 +1355,10 @@ module Aws::GeoPlaces
       :language,
       :political_view,
       :intended_use,
-      :key)
+      :key,
+      :postal_code_mode,
+      :address_translations,
+      :address_names_mode)
       SENSITIVE = [:query_text, :bias_position, :political_view, :key]
       include Aws::Structure
     end
@@ -1371,6 +1484,16 @@ module Aws::GeoPlaces
     #    </note>
     #   @return [Array<Types::RelatedPlace>]
     #
+    # @!attribute [rw] translations
+    #   All name translations and alternative names for the requested
+    #   address fields in all available languages.
+    #   @return [Types::TranslationDetails]
+    #
+    # @!attribute [rw] estimated_point_address
+    #   If `true`, indicates that the coordinates of the position and access
+    #   points of the point address are estimated.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GeocodeResultItem AWS API Documentation
     #
     class GeocodeResultItem < Struct.new(
@@ -1392,8 +1515,10 @@ module Aws::GeoPlaces
       :parsed_query,
       :intersections,
       :main_address,
-      :secondary_addresses)
-      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
+      :secondary_addresses,
+      :translations,
+      :estimated_point_address)
+      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view, :estimated_point_address]
       include Aws::Structure
     end
 
@@ -1422,7 +1547,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
@@ -1464,6 +1589,13 @@ module Aws::GeoPlaces
     #   key or valid SigV4 signature must be provided when making a request.
     #   @return [String]
     #
+    # @!attribute [rw] address_names_mode
+    #   Specifies how address names are returned. When set to
+    #   `Administrative`, the service returns the official administrative
+    #   names for address components. `Administrative` currently applies
+    #   only to addresses in the United States.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GetPlaceRequest AWS API Documentation
     #
     class GetPlaceRequest < Struct.new(
@@ -1472,7 +1604,8 @@ module Aws::GeoPlaces
       :language,
       :political_view,
       :intended_use,
-      :key)
+      :key,
+      :address_names_mode)
       SENSITIVE = [:place_id, :political_view, :key]
       include Aws::Structure
     end
@@ -1650,6 +1783,21 @@ module Aws::GeoPlaces
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::RelatedPlace>]
     #
+    # @!attribute [rw] place_attributes
+    #   A list of place attributes for the result, such as whether the
+    #   business offers drive-through service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] estimated_point_address
+    #   If `true`, indicates that the coordinates of the position and access
+    #   points of the point address are estimated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cross_references
+    #   The list of supplier references available for this place. Requires
+    #   the `CrossReferences` additional feature to be enabled.
+    #   @return [Array<Types::CrossReference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GetPlaceResponse AWS API Documentation
     #
     class GetPlaceResponse < Struct.new(
@@ -1673,8 +1821,11 @@ module Aws::GeoPlaces
       :political_view,
       :phonemes,
       :main_address,
-      :secondary_addresses)
-      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :map_view, :political_view]
+      :secondary_addresses,
+      :place_attributes,
+      :estimated_point_address,
+      :cross_references)
+      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :map_view, :political_view, :place_attributes, :estimated_point_address]
       include Aws::Structure
     end
 
@@ -1954,7 +2105,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
     #   @return [String]
     #
     # @!attribute [rw] preferred
@@ -2207,7 +2358,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
@@ -2254,6 +2405,13 @@ module Aws::GeoPlaces
     #   degrees, and West is `270` degrees.
     #   @return [Float]
     #
+    # @!attribute [rw] address_names_mode
+    #   Specifies how address names are returned. When set to
+    #   `Administrative`, the service returns the official administrative
+    #   names for address components. `Administrative` currently applies
+    #   only to addresses in the United States.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/ReverseGeocodeRequest AWS API Documentation
     #
     class ReverseGeocodeRequest < Struct.new(
@@ -2266,7 +2424,8 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key,
-      :heading)
+      :heading,
+      :address_names_mode)
       SENSITIVE = [:query_position, :query_radius, :political_view, :key, :heading]
       include Aws::Structure
     end
@@ -2401,6 +2560,15 @@ module Aws::GeoPlaces
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::Intersection>]
     #
+    # @!attribute [rw] main_address
+    #   The main address corresponding to a place of type Secondary Address.
+    #   @return [Types::RelatedPlace]
+    #
+    # @!attribute [rw] estimated_point_address
+    #   If `true`, indicates that the coordinates of the position and access
+    #   points of the point address are estimated.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/ReverseGeocodeResultItem AWS API Documentation
     #
     class ReverseGeocodeResultItem < Struct.new(
@@ -2418,8 +2586,10 @@ module Aws::GeoPlaces
       :access_points,
       :time_zone,
       :political_view,
-      :intersections)
-      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
+      :intersections,
+      :main_address,
+      :estimated_point_address)
+      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view, :estimated_point_address]
       include Aws::Structure
     end
 
@@ -2520,7 +2690,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
     #   @return [String]
     #
     # @!attribute [rw] political_view
@@ -2694,6 +2864,16 @@ module Aws::GeoPlaces
     #   in various languages.
     #   @return [Types::PhonemeDetails]
     #
+    # @!attribute [rw] place_attributes
+    #   A list of place attributes for the result, such as whether the
+    #   business offers drive-through service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cross_references
+    #   The list of supplier references available for this place. Requires
+    #   the `CrossReferences` additional feature to be enabled.
+    #   @return [Array<Types::CrossReference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/SearchNearbyResultItem AWS API Documentation
     #
     class SearchNearbyResultItem < Struct.new(
@@ -2714,8 +2894,10 @@ module Aws::GeoPlaces
       :access_restrictions,
       :time_zone,
       :political_view,
-      :phonemes)
-      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
+      :phonemes,
+      :place_attributes,
+      :cross_references)
+      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view, :place_attributes]
       include Aws::Structure
     end
 
@@ -2823,7 +3005,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
@@ -2862,6 +3044,12 @@ module Aws::GeoPlaces
     #   value of `nextToken` is a unique pagination token for each page.
     #   @return [String]
     #
+    # @!attribute [rw] travel_mode
+    #   Indicates the mode of mobility used by the end user. This is used to
+    #   improve the relevance of search results. Valid values are `Car`,
+    #   `Scooter`, and `Truck`.
+    #   @return [String]
+    #
     # @!attribute [rw] key
     #   Optional: The API key to be used for authorization. Either an API
     #   key or valid SigV4 signature must be provided when making a request.
@@ -2880,6 +3068,7 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :next_token,
+      :travel_mode,
       :key)
       SENSITIVE = [:query_text, :query_id, :bias_position, :political_view, :key]
       include Aws::Structure
@@ -2971,7 +3160,12 @@ module Aws::GeoPlaces
     #   @return [Types::Contacts]
     #
     # @!attribute [rw] opening_hours
-    #   List of opening hours objects.
+    #   List of opening hours objects. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::OpeningHours>]
     #
     # @!attribute [rw] access_points
@@ -3001,6 +3195,16 @@ module Aws::GeoPlaces
     #   in various languages.
     #   @return [Types::PhonemeDetails]
     #
+    # @!attribute [rw] place_attributes
+    #   A list of place attributes for the result, such as whether the
+    #   business offers drive-through service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cross_references
+    #   The list of supplier references available for this place. Requires
+    #   the `CrossReferences` additional feature to be enabled.
+    #   @return [Array<Types::CrossReference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/SearchTextResultItem AWS API Documentation
     #
     class SearchTextResultItem < Struct.new(
@@ -3021,8 +3225,10 @@ module Aws::GeoPlaces
       :access_restrictions,
       :time_zone,
       :political_view,
-      :phonemes)
-      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
+      :phonemes,
+      :place_attributes,
+      :cross_references)
+      SENSITIVE = [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view, :place_attributes]
       include Aws::Structure
     end
 
@@ -3111,7 +3317,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/StreetComponents AWS API Documentation
@@ -3352,6 +3558,16 @@ module Aws::GeoPlaces
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Types::PhonemeDetails]
     #
+    # @!attribute [rw] place_attributes
+    #   A list of place attributes for the result, such as whether the
+    #   business offers drive-through service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cross_references
+    #   The list of supplier references available for this place. Requires
+    #   the `CrossReferences` additional feature to be enabled.
+    #   @return [Array<Types::CrossReference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/SuggestPlaceResult AWS API Documentation
     #
     class SuggestPlaceResult < Struct.new(
@@ -3368,8 +3584,10 @@ module Aws::GeoPlaces
       :access_restrictions,
       :time_zone,
       :political_view,
-      :phonemes)
-      SENSITIVE = [:place_id, :place_type, :position, :distance, :map_view, :political_view]
+      :phonemes,
+      :place_attributes,
+      :cross_references)
+      SENSITIVE = [:place_id, :place_type, :position, :distance, :map_view, :political_view, :place_attributes]
       include Aws::Structure
     end
 
@@ -3479,7 +3697,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
@@ -3501,6 +3719,12 @@ module Aws::GeoPlaces
     #   `Suggest` does not support storage of results.
     #   @return [String]
     #
+    # @!attribute [rw] travel_mode
+    #   Indicates the mode of mobility used by the end user. This is used to
+    #   improve the relevance of search results. Valid values are `Car`,
+    #   `Scooter`, and `Truck`.
+    #   @return [String]
+    #
     # @!attribute [rw] key
     #   Optional: The API key to be used for authorization. Either an API
     #   key or valid SigV4 signature must be provided when making a request.
@@ -3518,6 +3742,7 @@ module Aws::GeoPlaces
       :language,
       :political_view,
       :intended_use,
+      :travel_mode,
       :key)
       SENSITIVE = [:query_text, :bias_position, :political_view, :key]
       include Aws::Structure
@@ -3631,6 +3856,81 @@ module Aws::GeoPlaces
       :offset,
       :offset_seconds)
       SENSITIVE = [:name, :offset, :offset_seconds]
+      include Aws::Structure
+    end
+
+    # Translation details for the address, including alternative names and
+    # translations in available languages.
+    #
+    # @!attribute [rw] locality
+    #   A list of administrative names and translations for the locality
+    #   address component.
+    #   @return [Array<Types::AdminNames>]
+    #
+    # @!attribute [rw] region
+    #   A list of administrative names and translations for the region
+    #   address component.
+    #   @return [Array<Types::AdminNames>]
+    #
+    # @!attribute [rw] district
+    #   A list of administrative names and translations for the district
+    #   address component.
+    #   @return [Array<Types::AdminNames>]
+    #
+    # @!attribute [rw] sub_region
+    #   A list of administrative names and translations for the sub-region
+    #   address component.
+    #   @return [Array<Types::AdminNames>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/TranslationDetails AWS API Documentation
+    #
+    class TranslationDetails < Struct.new(
+      :locality,
+      :region,
+      :district,
+      :sub_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A translation or alternative name for an address component.
+    #
+    # @!attribute [rw] value
+    #   The translated or alternative name value.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   A [BCP 47][1] compliant language code for the translation name.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of translation name. Valid values are `Abbreviation`,
+    #   `AreaCode`, `BaseName`, `Exonym`, `Shortened`, and `Synonym`.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary
+    #   If `true`, indicates this is the primary name variant for the given
+    #   language.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] transliterated
+    #   If `true`, indicates this name is a transliterated version rather
+    #   than a native script translation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/TranslationName AWS API Documentation
+    #
+    class TranslationName < Struct.new(
+      :value,
+      :language,
+      :type,
+      :primary,
+      :transliterated)
+      SENSITIVE = [:value, :primary, :transliterated]
       include Aws::Structure
     end
 

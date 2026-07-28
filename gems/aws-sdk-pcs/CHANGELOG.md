@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2026-07-22)
+------------------
+
+* Feature - AWS PCS Node Lifecycle Actions provides a structured way to run custom scripts at defined points in a compute node's lifecycle directly through the AWS PCS compute node group API.
+
+1.51.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2026-06-29)
+------------------
+
+* Feature - Add support for in-place Slurm version upgrades on existing clusters by accepting scheduler.version in UpdateCluster.
+
 1.49.0 (2026-05-29)
 ------------------
 

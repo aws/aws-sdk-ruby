@@ -564,6 +564,9 @@ module Aws::MQ
     #
     # @option params [Array<String>] :security_groups
     #
+    # @option params [Integer] :storage_size
+    #   The broker's storage size in GB.
+    #
     # @option params [String] :storage_type
     #   The broker's storage type.
     #
@@ -628,6 +631,7 @@ module Aws::MQ
     #     },
     #     publicly_accessible: false, # required
     #     security_groups: ["__string"],
+    #     storage_size: 1,
     #     storage_type: "EBS", # accepts EBS, EFS
     #     subnet_ids: ["__string"],
     #     tags: {
@@ -917,8 +921,10 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#pending_host_instance_type #pending_host_instance_type} => String
     #   * {Types::DescribeBrokerResponse#pending_ldap_server_metadata #pending_ldap_server_metadata} => Types::LdapServerMetadataOutput
     #   * {Types::DescribeBrokerResponse#pending_security_groups #pending_security_groups} => Array&lt;String&gt;
+    #   * {Types::DescribeBrokerResponse#pending_storage_size #pending_storage_size} => Integer
     #   * {Types::DescribeBrokerResponse#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DescribeBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
+    #   * {Types::DescribeBrokerResponse#storage_size #storage_size} => Integer
     #   * {Types::DescribeBrokerResponse#storage_type #storage_type} => String
     #   * {Types::DescribeBrokerResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -1000,9 +1006,11 @@ module Aws::MQ
     #   resp.pending_ldap_server_metadata.user_search_subtree #=> Boolean
     #   resp.pending_security_groups #=> Array
     #   resp.pending_security_groups[0] #=> String
+    #   resp.pending_storage_size #=> Integer
     #   resp.publicly_accessible #=> Boolean
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
+    #   resp.storage_size #=> Integer
     #   resp.storage_type #=> String, one of "EBS", "EFS"
     #   resp.subnet_ids #=> Array
     #   resp.subnet_ids[0] #=> String
@@ -1583,6 +1591,9 @@ module Aws::MQ
     #
     # @option params [Array<String>] :security_groups
     #
+    # @option params [Integer] :storage_size
+    #   The broker's storage size in GB.
+    #
     # @option params [String] :data_replication_mode
     #   Specifies whether a broker is a part of a data replication pair.
     #
@@ -1603,6 +1614,7 @@ module Aws::MQ
     #   * {Types::UpdateBrokerResponse#data_replication_mode #data_replication_mode} => String
     #   * {Types::UpdateBrokerResponse#pending_data_replication_metadata #pending_data_replication_metadata} => Types::DataReplicationMetadataOutput
     #   * {Types::UpdateBrokerResponse#pending_data_replication_mode #pending_data_replication_mode} => String
+    #   * {Types::UpdateBrokerResponse#storage_size #storage_size} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1640,6 +1652,7 @@ module Aws::MQ
     #     },
     #     resource_share_arns: ["__string"],
     #     security_groups: ["__string"],
+    #     storage_size: 1,
     #     data_replication_mode: "NONE", # accepts NONE, CRDR
     #   })
     #
@@ -1680,6 +1693,7 @@ module Aws::MQ
     #   resp.pending_data_replication_metadata.data_replication_counterpart.region #=> String
     #   resp.pending_data_replication_metadata.data_replication_role #=> String
     #   resp.pending_data_replication_mode #=> String, one of "NONE", "CRDR"
+    #   resp.storage_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBroker AWS API Documentation
     #
@@ -1792,7 +1806,7 @@ module Aws::MQ
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

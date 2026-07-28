@@ -683,6 +683,15 @@ module Aws::Odb
     #   The configuration of the encryption key to use for the Autonomous
     #   Database.
     #
+    # @option params [String] :admin_password_source
+    #   The source of the admin password for the Autonomous Database. When set
+    #   to `CUSTOMER_MANAGED_AWS_SECRET`, the admin password is retrieved from
+    #   an Amazon Web Services Secrets Manager secret.
+    #
+    # @option params [Types::AdminPasswordSourceConfigurationInput] :admin_password_source_configuration
+    #   The configuration of the admin password source for the Autonomous
+    #   Database.
+    #
     # @option params [String] :client_token
     #   A client-provided token to ensure the idempotency of the request.
     #
@@ -808,6 +817,14 @@ module Aws::Odb
     #         kms_key_id: "KmsKeyIdOrArn",
     #       },
     #     },
+    #     admin_password_source: "CUSTOMER_MANAGED_AWS_SECRET", # accepts CUSTOMER_MANAGED_AWS_SECRET, API_REQUEST_PARAMETER
+    #     admin_password_source_configuration: {
+    #       customer_managed_aws_secret: {
+    #         secret_id: "SecretIdOrArn",
+    #         iam_role_arn: "RoleArn",
+    #         external_id_type: "database_ocid", # accepts database_ocid, compartment_ocid, tenant_ocid
+    #       },
+    #     },
     #     client_token: "CreateAutonomousDatabaseInputClientTokenString",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -897,8 +914,17 @@ module Aws::Odb
     #   The type of wallet to create, either a regional wallet or an instance
     #   wallet.
     #
-    # @option params [required, String] :password
+    # @option params [String] :password
     #   The password to encrypt the keys inside the wallet.
+    #
+    # @option params [String] :password_source
+    #   The source of the password for encrypting the wallet. When set to
+    #   `CUSTOMER_MANAGED_AWS_SECRET`, the password is retrieved from an
+    #   Amazon Web Services Secrets Manager secret.
+    #
+    # @option params [Types::WalletPasswordSourceConfigurationInput] :password_source_configuration
+    #   The configuration of the password source for the Autonomous Database
+    #   wallet.
     #
     # @option params [String] :client_token
     #   A client-provided token to ensure the idempotency of the request.
@@ -915,7 +941,15 @@ module Aws::Odb
     #   resp = client.create_autonomous_database_wallet({
     #     autonomous_database_id: "ResourceIdOrArn", # required
     #     wallet_type: "REGIONAL", # accepts REGIONAL, INSTANCE
-    #     password: "CreateAutonomousDatabaseWalletInputPasswordString", # required
+    #     password: "CreateAutonomousDatabaseWalletInputPasswordString",
+    #     password_source: "CUSTOMER_MANAGED_AWS_SECRET", # accepts CUSTOMER_MANAGED_AWS_SECRET, API_REQUEST_PARAMETER
+    #     password_source_configuration: {
+    #       customer_managed_aws_secret: {
+    #         secret_id: "SecretIdOrArn",
+    #         iam_role_arn: "RoleArn",
+    #         external_id_type: "database_ocid", # accepts database_ocid, compartment_ocid, tenant_ocid
+    #       },
+    #     },
     #     client_token: "CreateAutonomousDatabaseWalletInputClientTokenString",
     #   })
     #
@@ -2031,6 +2065,10 @@ module Aws::Odb
     #   resp.autonomous_database.time_until_reconnect_clone_enabled #=> Time
     #   resp.autonomous_database.next_long_term_backup_time_stamp #=> Time
     #   resp.autonomous_database.time_undeleted #=> Time
+    #   resp.autonomous_database.admin_password_source_summary.admin_password_source #=> String, one of "CUSTOMER_MANAGED_AWS_SECRET", "API_REQUEST_PARAMETER"
+    #   resp.autonomous_database.admin_password_source_summary.admin_password_source_configuration.customer_managed_aws_secret.iam_role_arn #=> String
+    #   resp.autonomous_database.admin_password_source_summary.admin_password_source_configuration.customer_managed_aws_secret.secret_id #=> String
+    #   resp.autonomous_database.admin_password_source_summary.admin_password_source_configuration.customer_managed_aws_secret.external_id_type #=> String, one of "database_ocid", "compartment_ocid", "tenant_ocid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetAutonomousDatabase AWS API Documentation
     #
@@ -2104,6 +2142,10 @@ module Aws::Odb
     #
     #   resp.autonomous_database_wallet_details.status #=> String, one of "ACTIVE", "UPDATING"
     #   resp.autonomous_database_wallet_details.time_rotated #=> Time
+    #   resp.autonomous_database_wallet_details.password_source_summary.password_source #=> String, one of "CUSTOMER_MANAGED_AWS_SECRET", "API_REQUEST_PARAMETER"
+    #   resp.autonomous_database_wallet_details.password_source_summary.password_source_configuration.customer_managed_aws_secret.iam_role_arn #=> String
+    #   resp.autonomous_database_wallet_details.password_source_summary.password_source_configuration.customer_managed_aws_secret.secret_id #=> String
+    #   resp.autonomous_database_wallet_details.password_source_summary.password_source_configuration.customer_managed_aws_secret.external_id_type #=> String, one of "database_ocid", "compartment_ocid", "tenant_ocid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetAutonomousDatabaseWalletDetails AWS API Documentation
     #
@@ -2564,7 +2606,9 @@ module Aws::Odb
     #   resp.oci_identity_domain.account_setup_cloud_formation_url #=> String
     #   resp.autonomous_database_oci_integration_iam_roles #=> Array
     #   resp.autonomous_database_oci_integration_iam_roles[0].iam_role_arn #=> String
-    #   resp.autonomous_database_oci_integration_iam_roles[0].aws_integration #=> String, one of "KmsTde"
+    #   resp.autonomous_database_oci_integration_iam_roles[0].aws_integration #=> String, one of "KmsTde", "SecretsManager"
+    #   resp.autonomous_database_oci_integration_iam_roles[0].status #=> String, one of "PROVISIONING", "AVAILABLE", "PROVISION_FAILED", "TERMINATING", "TERMINATE_FAILED"
+    #   resp.autonomous_database_oci_integration_iam_roles[0].status_reason #=> String
     #   resp.linked_oci_tenancy_id #=> String
     #   resp.linked_oci_compartment_id #=> String
     #   resp.subscription_errors #=> Array
@@ -2708,12 +2752,18 @@ module Aws::Odb
     #   The Oracle Cloud Infrastructure (OCI) identity domain configuration
     #   for service initialization.
     #
+    # @option params [String] :autonomous_database_oci_aws_secrets_manager_integration
+    #   Specifies whether to enable or disable the OCI service-account role
+    #   for Amazon Web Services Secrets Manager integration with Autonomous
+    #   Database.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.initialize_service({
     #     oci_identity_domain: false,
+    #     autonomous_database_oci_aws_secrets_manager_integration: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/InitializeService AWS API Documentation
@@ -3049,6 +3099,10 @@ module Aws::Odb
     #   resp.autonomous_database_clones[0].time_until_reconnect_clone_enabled #=> Time
     #   resp.autonomous_database_clones[0].next_long_term_backup_time_stamp #=> Time
     #   resp.autonomous_database_clones[0].time_undeleted #=> Time
+    #   resp.autonomous_database_clones[0].admin_password_source_summary.admin_password_source #=> String, one of "CUSTOMER_MANAGED_AWS_SECRET", "API_REQUEST_PARAMETER"
+    #   resp.autonomous_database_clones[0].admin_password_source_summary.admin_password_source_configuration.customer_managed_aws_secret.iam_role_arn #=> String
+    #   resp.autonomous_database_clones[0].admin_password_source_summary.admin_password_source_configuration.customer_managed_aws_secret.secret_id #=> String
+    #   resp.autonomous_database_clones[0].admin_password_source_summary.admin_password_source_configuration.customer_managed_aws_secret.external_id_type #=> String, one of "database_ocid", "compartment_ocid", "tenant_ocid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListAutonomousDatabaseClones AWS API Documentation
     #
@@ -3364,6 +3418,10 @@ module Aws::Odb
     #   resp.autonomous_databases[0].time_until_reconnect_clone_enabled #=> Time
     #   resp.autonomous_databases[0].next_long_term_backup_time_stamp #=> Time
     #   resp.autonomous_databases[0].time_undeleted #=> Time
+    #   resp.autonomous_databases[0].admin_password_source_summary.admin_password_source #=> String, one of "CUSTOMER_MANAGED_AWS_SECRET", "API_REQUEST_PARAMETER"
+    #   resp.autonomous_databases[0].admin_password_source_summary.admin_password_source_configuration.customer_managed_aws_secret.iam_role_arn #=> String
+    #   resp.autonomous_databases[0].admin_password_source_summary.admin_password_source_configuration.customer_managed_aws_secret.secret_id #=> String
+    #   resp.autonomous_databases[0].admin_password_source_summary.admin_password_source_configuration.customer_managed_aws_secret.external_id_type #=> String, one of "database_ocid", "compartment_ocid", "tenant_ocid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListAutonomousDatabases AWS API Documentation
     #
@@ -4793,6 +4851,15 @@ module Aws::Odb
     #   The configuration of the encryption key to use for the Autonomous
     #   Database.
     #
+    # @option params [String] :admin_password_source
+    #   The source of the admin password for the Autonomous Database. When set
+    #   to `CUSTOMER_MANAGED_AWS_SECRET`, the admin password is retrieved from
+    #   an Amazon Web Services Secrets Manager secret.
+    #
+    # @option params [Types::AdminPasswordSourceConfigurationInput] :admin_password_source_configuration
+    #   The configuration of the admin password source for the Autonomous
+    #   Database.
+    #
     # @return [Types::UpdateAutonomousDatabaseOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAutonomousDatabaseOutput#autonomous_database_id #autonomous_database_id} => String
@@ -4881,6 +4948,14 @@ module Aws::Odb
     #         iam_role_arn: "RoleArn",
     #         external_id_type: "database_ocid", # accepts database_ocid, compartment_ocid, tenant_ocid
     #         kms_key_id: "KmsKeyIdOrArn",
+    #       },
+    #     },
+    #     admin_password_source: "CUSTOMER_MANAGED_AWS_SECRET", # accepts CUSTOMER_MANAGED_AWS_SECRET, API_REQUEST_PARAMETER
+    #     admin_password_source_configuration: {
+    #       customer_managed_aws_secret: {
+    #         secret_id: "SecretIdOrArn",
+    #         iam_role_arn: "RoleArn",
+    #         external_id_type: "database_ocid", # accepts database_ocid, compartment_ocid, tenant_ocid
     #       },
     #     },
     #   })
@@ -5162,7 +5237,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

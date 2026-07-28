@@ -2116,8 +2116,6 @@ module Aws::EMR
     #   resp.session.monitoring_configuration.s3_logging_configuration.log_types["XmlString"] #=> Array
     #   resp.session.monitoring_configuration.s3_logging_configuration.log_types["XmlString"][0] #=> String
     #   resp.session.session_idle_timeout_in_minutes #=> Integer
-    #   resp.session.certificate_authority.certificate_arn #=> String
-    #   resp.session.certificate_authority.certificate_data #=> String
     #   resp.session.server_url #=> String
     #   resp.session.tags #=> Array
     #   resp.session.tags[0].key #=> String
@@ -2880,8 +2878,6 @@ module Aws::EMR
     #   resp.sessions[0].monitoring_configuration.s3_logging_configuration.log_types["XmlString"] #=> Array
     #   resp.sessions[0].monitoring_configuration.s3_logging_configuration.log_types["XmlString"][0] #=> String
     #   resp.sessions[0].session_idle_timeout_in_minutes #=> Integer
-    #   resp.sessions[0].certificate_authority.certificate_arn #=> String
-    #   resp.sessions[0].certificate_authority.certificate_data #=> String
     #   resp.sessions[0].server_url #=> String
     #   resp.sessions[0].tags #=> Array
     #   resp.sessions[0].tags[0].key #=> String
@@ -4942,7 +4938,7 @@ module Aws::EMR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

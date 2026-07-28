@@ -2362,6 +2362,16 @@ module Aws::SESV2
     #     identity by replicating signing attributes from a parent identity
     #     in US West (Oregon) region using Deterministic Easy-DKIM (DEED).
     #
+    #   * `AWS_SES_US_GOV_EAST_1` – Indicates that DKIM was configured for
+    #     the identity by replicating signing attributes from a parent
+    #     identity in AWS GovCloud (US-East) region using Deterministic
+    #     Easy-DKIM (DEED).
+    #
+    #   * `AWS_SES_US_GOV_WEST_1` – Indicates that DKIM was configured for
+    #     the identity by replicating signing attributes from a parent
+    #     identity in AWS GovCloud (US-West) region using Deterministic
+    #     Easy-DKIM (DEED).
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
@@ -2546,6 +2556,14 @@ module Aws::SESV2
     #   * `AWS_SES_US_WEST_2` – Configure DKIM for the identity by
     #     replicating from a parent identity in US West (Oregon) region
     #     using Deterministic Easy-DKIM (DEED).
+    #
+    #   * `AWS_SES_US_GOV_EAST_1` – Configure DKIM for the identity by
+    #     replicating from a parent identity in AWS GovCloud (US-East)
+    #     region using Deterministic Easy-DKIM (DEED).
+    #
+    #   * `AWS_SES_US_GOV_WEST_1` – Configure DKIM for the identity by
+    #     replicating from a parent identity in AWS GovCloud (US-West)
+    #     region using Deterministic Easy-DKIM (DEED).
     #
     #
     #
@@ -3429,6 +3447,12 @@ module Aws::SESV2
     #   The VDM attributes that apply to your Amazon SES account.
     #   @return [Types::VdmAttributes]
     #
+    # @!attribute [rw] pricing_attributes
+    #   The pricing attributes that apply to your Amazon SES account,
+    #   including the currently active pricing plan and any scheduled
+    #   change.
+    #   @return [Types::PricingAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccountResponse AWS API Documentation
     #
     class GetAccountResponse < Struct.new(
@@ -3439,7 +3463,8 @@ module Aws::SESV2
       :sending_enabled,
       :suppression_attributes,
       :details,
-      :vdm_attributes)
+      :vdm_attributes,
+      :pricing_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6560,6 +6585,30 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # The pricing attributes that apply to your Amazon SES account,
+    # including the currently active pricing plan and any scheduled change
+    # for the next billing cycle.
+    #
+    # @!attribute [rw] current_plan
+    #   The pricing plan that is currently active on your Amazon SES
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_plan
+    #   The pricing plan that will become active at the start of the next
+    #   billing cycle, if a scheduled change has been requested. This field
+    #   is empty when no scheduled change is pending.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PricingAttributes AWS API Documentation
+    #
+    class PricingAttributes < Struct.new(
+      :current_plan,
+      :next_plan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to enable or disable the automatic IP address warm-up
     # feature.
     #
@@ -6642,6 +6691,40 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountDetailsResponse AWS API Documentation
     #
     class PutAccountDetailsResponse < Aws::EmptyStructure; end
+
+    # A request to set the pricing plan for your Amazon SES account.
+    #
+    # @!attribute [rw] plan
+    #   The pricing plan to apply to your Amazon SES account. Can be one of
+    #   the following:
+    #
+    #   * `NONE` – No pricing plan is applied; billing follows per-feature
+    #     pricing.
+    #
+    #   * `ESSENTIALS` – Baseline Amazon SES capabilities and select premium
+    #     features.
+    #
+    #   * `PRO` – Includes everything in `ESSENTIALS`, plus additional
+    #     premium features for growing senders.
+    #
+    #   * `ENTERPRISE` – Includes everything in `PRO`, plus features
+    #     intended for large-scale senders.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountPricingAttributesRequest AWS API Documentation
+    #
+    class PutAccountPricingAttributesRequest < Struct.new(
+      :plan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error response if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountPricingAttributesResponse AWS API Documentation
+    #
+    class PutAccountPricingAttributesResponse < Aws::EmptyStructure; end
 
     # A request to change the ability of your account to send email.
     #

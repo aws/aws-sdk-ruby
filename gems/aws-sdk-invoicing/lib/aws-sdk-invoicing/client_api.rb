@@ -124,6 +124,8 @@ module Aws::Invoicing
     ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
     RuleAccountIdList = Shapes::ListShape.new(name: 'RuleAccountIdList')
     SellerOfRecords = Shapes::ListShape.new(name: 'SellerOfRecords')
+    SendProcurementPortalValidationRequest = Shapes::StructureShape.new(name: 'SendProcurementPortalValidationRequest')
+    SendProcurementPortalValidationResponse = Shapes::StructureShape.new(name: 'SendProcurementPortalValidationResponse')
     SensitiveBasicStringWithoutSpace = Shapes::StringShape.new(name: 'SensitiveBasicStringWithoutSpace')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StringWithoutNewLine = Shapes::StringShape.new(name: 'StringWithoutNewLine')
@@ -153,6 +155,8 @@ module Aws::Invoicing
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VerifyProcurementPortalValidationRequest = Shapes::StructureShape.new(name: 'VerifyProcurementPortalValidationRequest')
+    VerifyProcurementPortalValidationResponse = Shapes::StructureShape.new(name: 'VerifyProcurementPortalValidationResponse')
     Year = Shapes::IntegerShape.new(name: 'Year')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: BasicString, location_name: "message"))
@@ -526,6 +530,13 @@ module Aws::Invoicing
 
     SellerOfRecords.member = Shapes::ShapeRef.new(shape: BasicStringWithoutSpace)
 
+    SendProcurementPortalValidationRequest.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    SendProcurementPortalValidationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    SendProcurementPortalValidationRequest.struct_class = Types::SendProcurementPortalValidationRequest
+
+    SendProcurementPortalValidationResponse.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    SendProcurementPortalValidationResponse.struct_class = Types::SendProcurementPortalValidationResponse
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: BasicString, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
@@ -612,6 +623,14 @@ module Aws::Invoicing
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    VerifyProcurementPortalValidationRequest.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    VerifyProcurementPortalValidationRequest.add_member(:code, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "Code"))
+    VerifyProcurementPortalValidationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    VerifyProcurementPortalValidationRequest.struct_class = Types::VerifyProcurementPortalValidationRequest
+
+    VerifyProcurementPortalValidationResponse.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    VerifyProcurementPortalValidationResponse.struct_class = Types::VerifyProcurementPortalValidationResponse
 
 
     # @api private
@@ -826,6 +845,19 @@ module Aws::Invoicing
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:send_procurement_portal_validation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendProcurementPortalValidation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendProcurementPortalValidationRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendProcurementPortalValidationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -877,6 +909,19 @@ module Aws::Invoicing
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:verify_procurement_portal_validation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "VerifyProcurementPortalValidation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: VerifyProcurementPortalValidationRequest)
+        o.output = Shapes::ShapeRef.new(shape: VerifyProcurementPortalValidationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)

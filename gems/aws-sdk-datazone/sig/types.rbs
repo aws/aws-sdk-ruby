@@ -608,6 +608,7 @@ module Aws::DataZone
       attr_accessor spark_emr_properties: Types::SparkEmrPropertiesInput
       attr_accessor spark_glue_properties: Types::SparkGluePropertiesInput
       attr_accessor s3_properties: Types::S3PropertiesInput
+      attr_accessor snowflake_properties: Types::SnowflakePropertiesInput
       attr_accessor amazon_q_properties: Types::AmazonQPropertiesInput
       attr_accessor mlflow_properties: Types::MlflowPropertiesInput
       attr_accessor workflows_mwaa_properties: Types::WorkflowsMwaaPropertiesInput
@@ -632,6 +633,8 @@ module Aws::DataZone
       class SparkGlueProperties < ConnectionPropertiesInput
       end
       class S3Properties < ConnectionPropertiesInput
+      end
+      class SnowflakeProperties < ConnectionPropertiesInput
       end
       class AmazonQProperties < ConnectionPropertiesInput
       end
@@ -658,6 +661,7 @@ module Aws::DataZone
       attr_accessor spark_emr_properties: Types::SparkEmrPropertiesOutput
       attr_accessor spark_glue_properties: Types::SparkGluePropertiesOutput
       attr_accessor s3_properties: Types::S3PropertiesOutput
+      attr_accessor snowflake_properties: Types::SnowflakePropertiesOutput
       attr_accessor amazon_q_properties: Types::AmazonQPropertiesOutput
       attr_accessor mlflow_properties: Types::MlflowPropertiesOutput
       attr_accessor workflows_mwaa_properties: Types::WorkflowsMwaaPropertiesOutput
@@ -683,6 +687,8 @@ module Aws::DataZone
       end
       class S3Properties < ConnectionPropertiesOutput
       end
+      class SnowflakeProperties < ConnectionPropertiesOutput
+      end
       class AmazonQProperties < ConnectionPropertiesOutput
       end
       class MlflowProperties < ConnectionPropertiesOutput
@@ -706,6 +712,7 @@ module Aws::DataZone
       attr_accessor redshift_properties: Types::RedshiftPropertiesPatch
       attr_accessor spark_emr_properties: Types::SparkEmrPropertiesPatch
       attr_accessor s3_properties: Types::S3PropertiesPatch
+      attr_accessor snowflake_properties: Types::SnowflakePropertiesPatch
       attr_accessor amazon_q_properties: Types::AmazonQPropertiesPatch
       attr_accessor mlflow_properties: Types::MlflowPropertiesPatch
       attr_accessor lakehouse_properties: Types::LakehousePropertiesPatch
@@ -724,6 +731,8 @@ module Aws::DataZone
       class SparkEmrProperties < ConnectionPropertiesPatch
       end
       class S3Properties < ConnectionPropertiesPatch
+      end
+      class SnowflakeProperties < ConnectionPropertiesPatch
       end
       class AmazonQProperties < ConnectionPropertiesPatch
       end
@@ -749,6 +758,27 @@ module Aws::DataZone
       attr_accessor props: Types::ConnectionPropertiesOutput
       attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
+      SENSITIVE: []
+    end
+
+    class ConnectivityProperties
+      attr_accessor connection_properties: ::Hash[::String, ::String]
+      attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor validate_credentials: bool
+      attr_accessor validate_for_compute_environments: ::Array[("SPARK" | "ATHENA" | "PYTHON")]
+      attr_accessor spark_properties: ::Hash[::String, ::String]
+      attr_accessor athena_properties: ::Hash[::String, ::String]
+      attr_accessor python_properties: ::Hash[::String, ::String]
+      attr_accessor authentication_configuration: Types::AuthenticationConfigurationInput
+      SENSITIVE: []
+    end
+
+    class ConnectivityPropertiesPatch
+      attr_accessor description: ::String
+      attr_accessor connection_properties: ::Hash[::String, ::String]
+      attr_accessor authentication_configuration: Types::AuthenticationConfigurationPatch
       SENSITIVE: []
     end
 
@@ -1346,7 +1376,7 @@ module Aws::DataZone
       attr_accessor owning_project_id: ::String
       attr_accessor domain_id: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
-      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -1360,6 +1390,7 @@ module Aws::DataZone
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor error: Types::NotebookError
+      attr_accessor git_metadata: Types::GitMetadata
       SENSITIVE: [:name, :description, :parameters]
     end
 
@@ -3056,7 +3087,7 @@ module Aws::DataZone
       attr_accessor owning_project_id: ::String
       attr_accessor domain_id: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
-      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -3070,6 +3101,7 @@ module Aws::DataZone
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor error: Types::NotebookError
+      attr_accessor git_metadata: Types::GitMetadata
       SENSITIVE: [:name, :description, :parameters]
     end
 
@@ -3306,6 +3338,17 @@ module Aws::DataZone
       attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
       attr_accessor details: Types::UserProfileDetails
       SENSITIVE: []
+    end
+
+    class GitMetadata
+      attr_accessor connection_id: ::String
+      attr_accessor repository: ::String
+      attr_accessor branch: ::String
+      attr_accessor commit_hash: ::String
+      attr_accessor file_name: ::String
+      attr_accessor committed_at: ::Time
+      attr_accessor commit_message: ::String
+      SENSITIVE: [:repository, :branch, :commit_message]
     end
 
     class GlossaryItem
@@ -3545,6 +3588,12 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class IdentityMapping
+      attr_accessor username_attribute: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
     class Import
       attr_accessor name: ::String
       attr_accessor revision: ::String
@@ -3725,6 +3774,21 @@ module Aws::DataZone
       attr_accessor total_queries_processed: ::Integer
       attr_accessor num_queries_failed: ::Integer
       attr_accessor error_messages: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LineageSyncInput
+      attr_accessor timezone: ("UTC" | "AFRICA_JOHANNESBURG" | "AMERICA_MONTREAL" | "AMERICA_SAO_PAULO" | "ASIA_BAHRAIN" | "ASIA_BANGKOK" | "ASIA_CALCUTTA" | "ASIA_DUBAI" | "ASIA_HONG_KONG" | "ASIA_JAKARTA" | "ASIA_KUALA_LUMPUR" | "ASIA_SEOUL" | "ASIA_SHANGHAI" | "ASIA_SINGAPORE" | "ASIA_TAIPEI" | "ASIA_TOKYO" | "AUSTRALIA_MELBOURNE" | "AUSTRALIA_SYDNEY" | "CANADA_CENTRAL" | "CET" | "CST6CDT" | "ETC_GMT" | "ETC_GMT0" | "ETC_GMT_ADD_0" | "ETC_GMT_ADD_1" | "ETC_GMT_ADD_10" | "ETC_GMT_ADD_11" | "ETC_GMT_ADD_12" | "ETC_GMT_ADD_2" | "ETC_GMT_ADD_3" | "ETC_GMT_ADD_4" | "ETC_GMT_ADD_5" | "ETC_GMT_ADD_6" | "ETC_GMT_ADD_7" | "ETC_GMT_ADD_8" | "ETC_GMT_ADD_9" | "ETC_GMT_NEG_0" | "ETC_GMT_NEG_1" | "ETC_GMT_NEG_10" | "ETC_GMT_NEG_11" | "ETC_GMT_NEG_12" | "ETC_GMT_NEG_13" | "ETC_GMT_NEG_14" | "ETC_GMT_NEG_2" | "ETC_GMT_NEG_3" | "ETC_GMT_NEG_4" | "ETC_GMT_NEG_5" | "ETC_GMT_NEG_6" | "ETC_GMT_NEG_7" | "ETC_GMT_NEG_8" | "ETC_GMT_NEG_9" | "EUROPE_DUBLIN" | "EUROPE_LONDON" | "EUROPE_PARIS" | "EUROPE_STOCKHOLM" | "EUROPE_ZURICH" | "ISRAEL" | "MEXICO_GENERAL" | "MST7MDT" | "PACIFIC_AUCKLAND" | "US_CENTRAL" | "US_EASTERN" | "US_MOUNTAIN" | "US_PACIFIC")
+      attr_accessor enabled: bool
+      attr_accessor schedule: ::String
+      SENSITIVE: []
+    end
+
+    class LineageSyncOutput
+      attr_accessor lineage_job_id: ::String
+      attr_accessor timezone: ("UTC" | "AFRICA_JOHANNESBURG" | "AMERICA_MONTREAL" | "AMERICA_SAO_PAULO" | "ASIA_BAHRAIN" | "ASIA_BANGKOK" | "ASIA_CALCUTTA" | "ASIA_DUBAI" | "ASIA_HONG_KONG" | "ASIA_JAKARTA" | "ASIA_KUALA_LUMPUR" | "ASIA_SEOUL" | "ASIA_SHANGHAI" | "ASIA_SINGAPORE" | "ASIA_TAIPEI" | "ASIA_TOKYO" | "AUSTRALIA_MELBOURNE" | "AUSTRALIA_SYDNEY" | "CANADA_CENTRAL" | "CET" | "CST6CDT" | "ETC_GMT" | "ETC_GMT0" | "ETC_GMT_ADD_0" | "ETC_GMT_ADD_1" | "ETC_GMT_ADD_10" | "ETC_GMT_ADD_11" | "ETC_GMT_ADD_12" | "ETC_GMT_ADD_2" | "ETC_GMT_ADD_3" | "ETC_GMT_ADD_4" | "ETC_GMT_ADD_5" | "ETC_GMT_ADD_6" | "ETC_GMT_ADD_7" | "ETC_GMT_ADD_8" | "ETC_GMT_ADD_9" | "ETC_GMT_NEG_0" | "ETC_GMT_NEG_1" | "ETC_GMT_NEG_10" | "ETC_GMT_NEG_11" | "ETC_GMT_NEG_12" | "ETC_GMT_NEG_13" | "ETC_GMT_NEG_14" | "ETC_GMT_NEG_2" | "ETC_GMT_NEG_3" | "ETC_GMT_NEG_4" | "ETC_GMT_NEG_5" | "ETC_GMT_NEG_6" | "ETC_GMT_NEG_7" | "ETC_GMT_NEG_8" | "ETC_GMT_NEG_9" | "EUROPE_DUBLIN" | "EUROPE_LONDON" | "EUROPE_PARIS" | "EUROPE_STOCKHOLM" | "EUROPE_ZURICH" | "ISRAEL" | "MEXICO_GENERAL" | "MST7MDT" | "PACIFIC_AUCKLAND" | "US_CENTRAL" | "US_EASTERN" | "US_MOUNTAIN" | "US_PACIFIC")
+      attr_accessor enabled: bool
+      attr_accessor schedule: ::String
       SENSITIVE: []
     end
 
@@ -4089,7 +4153,7 @@ module Aws::DataZone
       attr_accessor max_results: ::Integer
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       attr_accessor sort_by: ("CREATED_AT" | "UPDATED_AT")
-      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -4561,7 +4625,7 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor owning_project_id: ::String
       attr_accessor domain_id: ::String
-      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -5659,6 +5723,30 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class SnowflakePropertiesInput
+      attr_accessor connectivity_properties: Types::ConnectivityProperties
+      attr_accessor snowflake_role: ::String
+      attr_accessor identity_mapping: Types::IdentityMapping
+      attr_accessor lineage_sync: Types::LineageSyncInput
+      SENSITIVE: []
+    end
+
+    class SnowflakePropertiesOutput
+      attr_accessor snowflake_role: ::String
+      attr_accessor identity_mapping: Types::IdentityMapping
+      attr_accessor lineage_sync: Types::LineageSyncOutput
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "READY" | "UPDATING" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class SnowflakePropertiesPatch
+      attr_accessor connectivity_properties_patch: Types::ConnectivityPropertiesPatch
+      attr_accessor snowflake_role: ::String
+      attr_accessor lineage_sync: Types::LineageSyncInput
+      SENSITIVE: []
+    end
+
     class SourceLocation
       attr_accessor s3: ::String
       attr_accessor unknown: untyped
@@ -5829,7 +5917,7 @@ module Aws::DataZone
 
     class StartNotebookImportOutput
       attr_accessor notebook_id: ::String
-      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
       attr_accessor domain_id: ::String
       attr_accessor owning_project_id: ::String
       attr_accessor name: ::String
@@ -5879,6 +5967,32 @@ module Aws::DataZone
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time
       SENSITIVE: [:parameters]
+    end
+
+    class StartNotebookSyncInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor owning_project_identifier: ::String
+      attr_accessor source_location: Types::SourceLocation
+      attr_accessor git_metadata: Types::GitMetadata
+      attr_accessor notebook_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class StartNotebookSyncOutput
+      attr_accessor notebook_id: ::String
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor domain_id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor source_location: Types::SourceLocation
+      attr_accessor git_metadata: Types::GitMetadata
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      SENSITIVE: [:name, :description]
     end
 
     class StopNotebookRunInput
@@ -6554,7 +6668,7 @@ module Aws::DataZone
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
       attr_accessor description: ::String
-      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
       attr_accessor name: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
       attr_accessor metadata: ::Hash[::String, ::String]
@@ -6570,7 +6684,7 @@ module Aws::DataZone
       attr_accessor owning_project_id: ::String
       attr_accessor domain_id: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
-      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -6584,6 +6698,7 @@ module Aws::DataZone
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor error: Types::NotebookError
+      attr_accessor git_metadata: Types::GitMetadata
       SENSITIVE: [:name, :description, :parameters]
     end
 

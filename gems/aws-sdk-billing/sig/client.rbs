@@ -133,6 +133,25 @@ module Aws
                                      ) -> _DisassociateSourceViewsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSourceViewsResponseSuccess
 
+      interface _GetBillingPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBillingPreferencesResponse]
+        def billing_preferences: () -> ::Array[Types::BillingPreferenceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#get_billing_preferences-instance_method
+      def get_billing_preferences: (
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer,
+                                     features: Array[("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS")],
+                                     ?filters: Array[
+                                       {
+                                         name: ("PREFERENCE_KEY")?,
+                                         value: Array[::String]?
+                                       }
+                                     ]
+                                   ) -> _GetBillingPreferencesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillingPreferencesResponseSuccess
+
       interface _GetBillingViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBillingViewResponse]
         def billing_view: () -> Types::BillingViewElement
@@ -142,6 +161,37 @@ module Aws
                               arn: ::String
                             ) -> _GetBillingViewResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillingViewResponseSuccess
+
+      interface _GetCreditAllocationHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCreditAllocationHistoryResponse]
+        def credit_allocation_history_list: () -> ::Array[Types::CreditAllocationHistoryEntry]
+        def partial_results: () -> bool
+        def failed_months: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#get_credit_allocation_history-instance_method
+      def get_credit_allocation_history: (
+                                           account_id: ::String,
+                                           ?credit_id: ::Integer,
+                                           start_date: ::Time,
+                                           end_date: ::Time,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _GetCreditAllocationHistoryResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCreditAllocationHistoryResponseSuccess
+
+      interface _GetCreditsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCreditsResponse]
+        def credits: () -> ::Array[Types::CreditData]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#get_credits-instance_method
+      def get_credits: (
+                         account_id: ::String,
+                         start_date: ::Time,
+                         ?end_date: ::Time,
+                         ?payer_account_flag: bool
+                       ) -> _GetCreditsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCreditsResponseSuccess
 
       interface _GetResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
@@ -203,6 +253,15 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _RedeemCreditsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RedeemCreditsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#redeem_credits-instance_method
+      def redeem_credits: (
+                            promo_code: ::String
+                          ) -> _RedeemCreditsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RedeemCreditsResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -227,6 +286,21 @@ module Aws
                             resource_tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateBillingPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBillingPreferencesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#update_billing_preferences-instance_method
+      def update_billing_preferences: (
+                                        feature: ("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS"),
+                                        billing_preferences_per_key: Array[
+                                          {
+                                            key: ::String,
+                                            value: ("ENABLED" | "DISABLED")
+                                          }
+                                        ]
+                                      ) -> _UpdateBillingPreferencesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBillingPreferencesResponseSuccess
 
       interface _UpdateBillingViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBillingViewResponse]

@@ -54,7 +54,7 @@ module Aws::DocDBElastic
   autoload :EndpointProvider, 'aws-sdk-docdbelastic/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-docdbelastic/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

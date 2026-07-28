@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.155.0 (2026-07-07)
+------------------
+
+* Feature - Added support for connecting AWS Config to third-party cloud service providers. New APIs include PutConnector, GetConnector, DeleteConnector, and ListConnectors for managing connectors, and PutThirdPartyServiceLinkedConfigurationRecorder for creating third-party service-linked recorders.
+
+1.154.0 (2026-07-02)
+------------------
+
+* Feature - AWS Config now supports tag-on-create for organization-managed Config rules and conformance packs through the PutOrganizationConfigRule and PutOrganizationConformancePack APIs.
+
 1.153.0 (2026-06-04)
 ------------------
 

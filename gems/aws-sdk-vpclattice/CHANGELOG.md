@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2026-06-29)
+------------------
+
+* Feature - Amazon VPC Lattice now supports mutable idle timeout configuration on VPC Lattice Services
+
 1.50.0 (2026-06-03)
 ------------------
 

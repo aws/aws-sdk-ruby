@@ -413,6 +413,8 @@ module Aws::SESV2
     PolicyMap = Shapes::MapShape.new(name: 'PolicyMap')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PoolName = Shapes::StringShape.new(name: 'PoolName')
+    PricingAttributes = Shapes::StructureShape.new(name: 'PricingAttributes')
+    PricingPlan = Shapes::StringShape.new(name: 'PricingPlan')
     PrimaryNameServer = Shapes::StringShape.new(name: 'PrimaryNameServer')
     PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
     ProcessedRecordsCount = Shapes::IntegerShape.new(name: 'ProcessedRecordsCount')
@@ -420,6 +422,8 @@ module Aws::SESV2
     PutAccountDedicatedIpWarmupAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesResponse')
     PutAccountDetailsRequest = Shapes::StructureShape.new(name: 'PutAccountDetailsRequest')
     PutAccountDetailsResponse = Shapes::StructureShape.new(name: 'PutAccountDetailsResponse')
+    PutAccountPricingAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountPricingAttributesRequest')
+    PutAccountPricingAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountPricingAttributesResponse')
     PutAccountSendingAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountSendingAttributesRequest')
     PutAccountSendingAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountSendingAttributesResponse')
     PutAccountSuppressionAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountSuppressionAttributesRequest')
@@ -1164,6 +1168,7 @@ module Aws::SESV2
     GetAccountResponse.add_member(:suppression_attributes, Shapes::ShapeRef.new(shape: SuppressionAttributes, location_name: "SuppressionAttributes"))
     GetAccountResponse.add_member(:details, Shapes::ShapeRef.new(shape: AccountDetails, location_name: "Details"))
     GetAccountResponse.add_member(:vdm_attributes, Shapes::ShapeRef.new(shape: VdmAttributes, location_name: "VdmAttributes"))
+    GetAccountResponse.add_member(:pricing_attributes, Shapes::ShapeRef.new(shape: PricingAttributes, location_name: "PricingAttributes"))
     GetAccountResponse.struct_class = Types::GetAccountResponse
 
     GetBlacklistReportsRequest.add_member(:blacklist_item_names, Shapes::ShapeRef.new(shape: BlacklistItemNames, required: true, location: "querystring", location_name: "BlacklistItemNames"))
@@ -1743,6 +1748,10 @@ module Aws::SESV2
     PolicyMap.key = Shapes::ShapeRef.new(shape: PolicyName)
     PolicyMap.value = Shapes::ShapeRef.new(shape: Policy)
 
+    PricingAttributes.add_member(:current_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "CurrentPlan"))
+    PricingAttributes.add_member(:next_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "NextPlan"))
+    PricingAttributes.struct_class = Types::PricingAttributes
+
     PutAccountDedicatedIpWarmupAttributesRequest.add_member(:auto_warmup_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "AutoWarmupEnabled"))
     PutAccountDedicatedIpWarmupAttributesRequest.struct_class = Types::PutAccountDedicatedIpWarmupAttributesRequest
 
@@ -1757,6 +1766,11 @@ module Aws::SESV2
     PutAccountDetailsRequest.struct_class = Types::PutAccountDetailsRequest
 
     PutAccountDetailsResponse.struct_class = Types::PutAccountDetailsResponse
+
+    PutAccountPricingAttributesRequest.add_member(:plan, Shapes::ShapeRef.new(shape: PricingPlan, required: true, location_name: "Plan"))
+    PutAccountPricingAttributesRequest.struct_class = Types::PutAccountPricingAttributesRequest
+
+    PutAccountPricingAttributesResponse.struct_class = Types::PutAccountPricingAttributesResponse
 
     PutAccountSendingAttributesRequest.add_member(:sending_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled"))
     PutAccountSendingAttributesRequest.struct_class = Types::PutAccountSendingAttributesRequest
@@ -3222,6 +3236,17 @@ module Aws::SESV2
         o.output = Shapes::ShapeRef.new(shape: PutAccountDetailsResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_account_pricing_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountPricingAttributes"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/email/account/pricing-attributes"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountPricingAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountPricingAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 

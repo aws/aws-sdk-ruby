@@ -2686,7 +2686,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html
     #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9183,7 +9183,12 @@ module Aws::ElastiCache
     #
     #   If you perform a `ModifyCacheCluster` before a pending modification is
     #   applied, the pending modification is replaced by the newer
-    #   modification.
+    #   modification. However, a pending node-count increase on Memcached
+    #   clusters cannot be superseded by a request to add fewer nodes. To
+    #   change a pending node addition, first cancel it by setting
+    #   `NumCacheNodes` equal to the current number of nodes in the cluster,
+    #   then submit the new request. See the `NumCacheNodes` parameter for
+    #   details on node scaling behavior.
     #
     #   Valid values: `true` \| `false`
     #
@@ -9985,7 +9990,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html
     #
     # @return [Types::ModifyReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11568,7 +11573,7 @@ module Aws::ElastiCache
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

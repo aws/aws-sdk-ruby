@@ -42,6 +42,7 @@ module Aws::SSM
   # * {AutomationExecutionNotFoundException}
   # * {AutomationStepNotFoundException}
   # * {ComplianceTypeCountLimitExceededException}
+  # * {ConflictException}
   # * {CustomSchemaCountLimitExceededException}
   # * {DocumentAlreadyExists}
   # * {DocumentLimitExceeded}
@@ -373,6 +374,21 @@ module Aws::SSM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SSM::Types::ComplianceTypeCountLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

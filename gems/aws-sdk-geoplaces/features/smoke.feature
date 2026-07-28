@@ -32,14 +32,14 @@ Feature: Smoke tests for GeoPlaces
     Then I expect an error was not raised
 
   @geoplaces @smoke
-  Scenario: SearchTextSuccess
+  Scenario: ReverseGeocodeSuccess
     Given I create a 'Aws::GeoPlaces' client with config:
       """
 {"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'search_text' with params:
+    When I call the operation 'reverse_geocode' with params:
       """
-{"query_text":"Taj Mahal","bias_position":[78.0421,27.1753]}
+{"query_position":[2.2945,48.85824]}
       """
     Then I expect an error was not raised
 
@@ -68,13 +68,13 @@ Feature: Smoke tests for GeoPlaces
     Then I expect an error was not raised
 
   @geoplaces @smoke
-  Scenario: ReverseGeocodeSuccess
+  Scenario: SearchTextSuccess
     Given I create a 'Aws::GeoPlaces' client with config:
       """
 {"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'reverse_geocode' with params:
+    When I call the operation 'search_text' with params:
       """
-{"query_position":[2.2945,48.85824]}
+{"query_text":"Taj Mahal","bias_position":[78.0421,27.1753]}
       """
     Then I expect an error was not raised

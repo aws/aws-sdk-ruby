@@ -84,7 +84,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#add_tags_to_resource-instance_method
       def add_tags_to_resource: (
-                                  resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association"),
+                                  resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association" | "CloudConnector"),
                                   resource_id: ::String,
                                   tags: Array[
                                     {
@@ -269,6 +269,26 @@ module Aws
                                       ?association_dispatch_assume_role: ::String
                                     ) -> _CreateAssociationBatchResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssociationBatchResponseSuccess
+
+      interface _CreateCloudConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudConnectorResult]
+        def cloud_connector_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#create_cloud_connector-instance_method
+      def create_cloud_connector: (
+                                    display_name: ::String,
+                                    role_arn: ::String,
+                                    ?description: ::String,
+                                    configuration: Params::cloud_connector_configuration,
+                                    config_connector_arn: ::String,
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      }
+                                    ]
+                                  ) -> _CreateCloudConnectorResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudConnectorResponseSuccess
 
       interface _CreateDocumentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDocumentResult]
@@ -475,6 +495,16 @@ module Aws
                                 ?association_id: ::String
                               ) -> _DeleteAssociationResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssociationResponseSuccess
+
+      interface _DeleteCloudConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCloudConnectorResult]
+        def cloud_connector_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_cloud_connector-instance_method
+      def delete_cloud_connector: (
+                                    cloud_connector_id: ::String
+                                  ) -> _DeleteCloudConnectorResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCloudConnectorResponseSuccess
 
       interface _DeleteDocumentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDocumentResult]
@@ -1275,6 +1305,23 @@ module Aws
                               ) -> _GetCalendarStateResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCalendarStateResponseSuccess
 
+      interface _GetCloudConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudConnectorResult]
+        def cloud_connector_arn: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def role_arn: () -> ::String
+        def configuration: () -> Types::CloudConnectorConfiguration
+        def config_connector_arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_cloud_connector-instance_method
+      def get_cloud_connector: (
+                                 cloud_connector_id: ::String
+                               ) -> _GetCloudConnectorResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudConnectorResponseSuccess
+
       interface _GetCommandInvocationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCommandInvocationResult]
         def command_id: () -> ::String
@@ -1767,7 +1814,7 @@ module Aws
       def list_associations: (
                                ?association_filter_list: Array[
                                  {
-                                   key: ("InstanceId" | "Name" | "AssociationId" | "AssociationStatusName" | "LastExecutedBefore" | "LastExecutedAfter" | "AssociationName" | "ResourceGroupName"),
+                                   key: ("InstanceId" | "Name" | "AssociationId" | "AssociationStatusName" | "LastExecutedBefore" | "LastExecutedAfter" | "AssociationName" | "ResourceGroupName" | "CloudConnectorId"),
                                    value: ::String
                                  }
                                ],
@@ -1775,6 +1822,24 @@ module Aws
                                ?next_token: ::String
                              ) -> _ListAssociationsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociationsResponseSuccess
+
+      interface _ListCloudConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCloudConnectorsResult]
+        def cloud_connectors: () -> ::Array[Types::CloudConnectorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_cloud_connectors-instance_method
+      def list_cloud_connectors: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?filters: Array[
+                                     {
+                                       filter_key: ("SubscriptionId" | "TenantId")?,
+                                       filter_values: Array[::String]?
+                                     }
+                                   ]
+                                 ) -> _ListCloudConnectorsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCloudConnectorsResponseSuccess
 
       interface _ListCommandInvocationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCommandInvocationsResult]
@@ -1947,7 +2012,7 @@ module Aws
                         ?sync_name: ::String,
                         ?filters: Array[
                           {
-                            key: ("AgentType" | "AgentVersion" | "ComputerName" | "InstanceId" | "InstanceStatus" | "IpAddress" | "ManagedStatus" | "PlatformName" | "PlatformType" | "PlatformVersion" | "ResourceType" | "OrganizationalUnitId" | "OrganizationalUnitPath" | "Region" | "AccountId"),
+                            key: ("AgentType" | "AgentVersion" | "ComputerName" | "InstanceId" | "InstanceStatus" | "IpAddress" | "ManagedStatus" | "PlatformName" | "PlatformType" | "PlatformVersion" | "ResourceType" | "OrganizationalUnitId" | "OrganizationalUnitPath" | "Region" | "AccountId" | "SourceType" | "SourceId" | "SourceLocation" | "AvailabilityZone" | "AvailabilityZoneId"),
                             values: Array[::String],
                             type: ("Equal" | "NotEqual" | "BeginWith")?
                           }
@@ -1967,7 +2032,7 @@ module Aws
                                 ?sync_name: ::String,
                                 ?filters: Array[
                                   {
-                                    key: ("AgentType" | "AgentVersion" | "ComputerName" | "InstanceId" | "InstanceStatus" | "IpAddress" | "ManagedStatus" | "PlatformName" | "PlatformType" | "PlatformVersion" | "ResourceType" | "OrganizationalUnitId" | "OrganizationalUnitPath" | "Region" | "AccountId"),
+                                    key: ("AgentType" | "AgentVersion" | "ComputerName" | "InstanceId" | "InstanceStatus" | "IpAddress" | "ManagedStatus" | "PlatformName" | "PlatformType" | "PlatformVersion" | "ResourceType" | "OrganizationalUnitId" | "OrganizationalUnitPath" | "Region" | "AccountId" | "SourceType" | "SourceId" | "SourceLocation" | "AvailabilityZone" | "AvailabilityZoneId"),
                                     values: Array[::String],
                                     type: ("Equal" | "NotEqual" | "BeginWith")?
                                   }
@@ -1976,7 +2041,7 @@ module Aws
                                   {
                                     aggregator_type: ("Count"),
                                     type_name: ("Instance"),
-                                    attribute_name: ("AgentVersion" | "PlatformName" | "PlatformType" | "PlatformVersion" | "Region" | "ResourceType"),
+                                    attribute_name: ("AgentVersion" | "PlatformName" | "PlatformType" | "PlatformVersion" | "Region" | "ResourceType" | "SourceType" | "AvailabilityZone"),
                                     aggregators: untyped?
                                   }
                                 ],
@@ -2080,7 +2145,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_tags_for_resource-instance_method
       def list_tags_for_resource: (
-                                    resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association"),
+                                    resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association" | "CloudConnector"),
                                     resource_id: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
@@ -2278,7 +2343,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#remove_tags_from_resource-instance_method
       def remove_tags_from_resource: (
-                                       resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association"),
+                                       resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association" | "CloudConnector"),
                                        resource_id: ::String,
                                        tag_keys: Array[::String]
                                      ) -> _RemoveTagsFromResourceResponseSuccess
@@ -2632,6 +2697,19 @@ module Aws
                                      ) -> _UpdateAssociationStatusResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssociationStatusResponseSuccess
 
+      interface _UpdateCloudConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloudConnectorResult]
+        def cloud_connector_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_cloud_connector-instance_method
+      def update_cloud_connector: (
+                                    cloud_connector_id: ::String,
+                                    ?display_name: ::String,
+                                    ?configuration: Params::cloud_connector_configuration,
+                                    ?description: ::String
+                                  ) -> _UpdateCloudConnectorResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudConnectorResponseSuccess
+
       interface _UpdateDocumentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDocumentResult]
         def document_description: () -> Types::DocumentDescription
@@ -2929,6 +3007,19 @@ module Aws
                                     setting_value: ::String
                                   ) -> _UpdateServiceSettingResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceSettingResponseSuccess
+
+      interface _ValidateCloudConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateCloudConnectorResult]
+        def validation_findings: () -> ::Array[Types::ValidationFinding]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#validate_cloud_connector-instance_method
+      def validate_cloud_connector: (
+                                      cloud_connector_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ValidateCloudConnectorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateCloudConnectorResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#wait_until-instance_method
       def wait_until: (:command_executed waiter_name, 

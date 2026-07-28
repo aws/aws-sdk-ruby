@@ -538,6 +538,45 @@ module Aws
                                ) -> _CreateAgentStatusResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentStatusResponseSuccess
 
+      interface _CreateAttachedFileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAttachedFileResponse]
+        def file_arn: () -> ::String
+        def file_id: () -> ::String
+        def creation_time: () -> ::String
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_attached_file-instance_method
+      def create_attached_file: (
+                                  ?client_token: ::String,
+                                  instance_id: ::String,
+                                  file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING"),
+                                  file_source_uri: ::String,
+                                  associated_resource_arn: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateAttachedFileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAttachedFileResponseSuccess
+
+      interface _CreateAuthCodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAuthCodeResponse]
+        def auth_code: () -> ::String
+        def session_id: () -> ::String
+        def entity_type: () -> ("CUSTOMER_PROFILE")
+        def entity_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_auth_code-instance_method
+      def create_auth_code: (
+                              instance_id: ::String,
+                              scope: {
+                                security_profile_ids: Array[::String]?,
+                                entity_type: ("CUSTOMER_PROFILE"),
+                                entity_id: ::String?,
+                                domain_name: ::String?
+                              },
+                              ?max_session_duration_minutes: ::Integer,
+                              session_inactivity_duration_minutes: ::Integer
+                            ) -> _CreateAuthCodeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAuthCodeResponseSuccess
+
       interface _CreateContactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactResponse]
         def contact_id: () -> ::String
@@ -1301,6 +1340,17 @@ module Aws
                                 ) -> _DeleteAttachedFileResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAttachedFileResponseSuccess
 
+      interface _DeleteContactDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactDataResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_contact_data-instance_method
+      def delete_contact_data: (
+                                 instance_id: ::String,
+                                 contact_id: ::String,
+                                 contact_fields: Array[("CUSTOMER_ENDPOINT" | "ADDITIONAL_EMAIL_RECIPIENTS" | "EMAIL_SUBJECT")]
+                               ) -> _DeleteContactDataResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactDataResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_contact_evaluation-instance_method
       def delete_contact_evaluation: (
                                        instance_id: ::String,
@@ -1499,6 +1549,16 @@ module Aws
                                      security_profile_id: ::String
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_session-instance_method
+      def delete_session: (
+                            instance_id: ::String,
+                            session_id: ::String
+                          ) -> _DeleteSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSessionResponseSuccess
 
       interface _DeleteTaskTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTaskTemplateResponse]
@@ -2239,7 +2299,7 @@ module Aws
         def file_name: () -> ::String
         def file_size_in_bytes: () -> ::Integer
         def associated_resource_arn: () -> ::String
-        def file_use_case_type: () -> ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT")
+        def file_use_case_type: () -> ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
         def created_by: () -> Types::CreatedByInfo
         def download_url_metadata: () -> Types::DownloadUrlMetadata
         def tags: () -> ::Hash[::String, ::String]
@@ -2369,10 +2429,10 @@ module Aws
 
       interface _GetFederationTokenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFederationTokenResponse]
+        def user_id: () -> ::String
+        def user_arn: () -> ::String
         def credentials: () -> Types::Credentials
         def sign_in_url: () -> ::String
-        def user_arn: () -> ::String
-        def user_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#get_federation_token-instance_method
       def get_federation_token: (
@@ -4072,6 +4132,47 @@ module Aws
                                    ) -> _SearchRoutingProfilesResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRoutingProfilesResponseSuccess
 
+      interface _SearchRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchRulesResponse]
+        def rules: () -> ::Array[Types::RuleSearchSummary]
+        def approximate_total_count: () -> ::Integer
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_rules-instance_method
+      def search_rules: (
+                          instance_id: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?search_criteria: Params::rules_search_criteria,
+                          ?search_filter: {
+                            attribute_filter: {
+                              or_conditions: Array[
+                                {
+                                  tag_conditions: Array[
+                                    {
+                                      tag_key: ::String?,
+                                      tag_value: ::String?
+                                    }
+                                  ]?
+                                }
+                              ]?,
+                              and_condition: {
+                                tag_conditions: Array[
+                                  {
+                                    tag_key: ::String?,
+                                    tag_value: ::String?
+                                  }
+                                ]?
+                              }?,
+                              tag_condition: {
+                                tag_key: ::String?,
+                                tag_value: ::String?
+                              }?
+                            }?
+                          }
+                        ) -> _SearchRulesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRulesResponseSuccess
+
       interface _SearchSecurityProfilesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchSecurityProfilesResponse]
         def security_profiles: () -> ::Array[Types::SecurityProfileSearchSummary]
@@ -4288,6 +4389,40 @@ module Aws
                                ) -> _SendOutboundEmailResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendOutboundEmailResponseSuccess
 
+      interface _SendOutboundWebNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendOutboundWebNotificationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#send_outbound_web_notification-instance_method
+      def send_outbound_web_notification: (
+                                            instance_id: ::String,
+                                            ?client_token: ::String,
+                                            browser_id: ::String,
+                                            session_id: ::String,
+                                            expires_at: ::Time,
+                                            source: {
+                                              source_campaign: {
+                                                campaign_id: ::String?,
+                                                outbound_request_id: ::String?
+                                              }
+                                            },
+                                            destination: {
+                                              widget_id: ::String,
+                                              profile_id: ::String
+                                            },
+                                            content: {
+                                              type: ("WIDGET_VIEW" | "WIDGET_ACTION"),
+                                              view_arn: ::String?,
+                                              attributes: {
+                                                recommender_config: {
+                                                  domain_name: ::String,
+                                                  recommender_name: ::String,
+                                                  context: Hash[::String, ::String]?
+                                                }?
+                                              }?
+                                            }
+                                          ) -> _SendOutboundWebNotificationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendOutboundWebNotificationResponseSuccess
+
       interface _StartAttachedFileUploadResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartAttachedFileUploadResponse]
         def file_arn: () -> ::String
@@ -4304,7 +4439,7 @@ module Aws
                                         file_name: ::String,
                                         file_size_in_bytes: ::Integer,
                                         ?url_expiry_in_seconds: ::Integer,
-                                        file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT"),
+                                        file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING"),
                                         associated_resource_arn: ::String,
                                         ?created_by: {
                                           connect_user_arn: ::String?,
@@ -4349,6 +4484,40 @@ module Aws
                                 ?disconnect_on_customer_exit: Array[("AGENT")]
                               ) -> _StartChatContactResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartChatContactResponseSuccess
+
+      interface _StartContactConversationalAnalyticsJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartContactConversationalAnalyticsJobResponse]
+        def instance_id: () -> ::String
+        def contact_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#start_contact_conversational_analytics_job-instance_method
+      def start_contact_conversational_analytics_job: (
+                                                        instance_id: ::String,
+                                                        contact_id: ::String,
+                                                        analytics_modes: Array[("PostContact" | "RealTime" | "ContactLens" | "AutomatedInteraction")],
+                                                        analytics_configuration: {
+                                                          language_configuration: {
+                                                            language_locale: ::String?
+                                                          },
+                                                          redaction_configuration: {
+                                                            behavior: ("Enable" | "Disable"),
+                                                            policy: ("None" | "RedactedOnly" | "RedactedAndOriginal"),
+                                                            entities: Array[::String]?,
+                                                            mask_mode: ("PII" | "EntityType")?
+                                                          },
+                                                          sentiment_configuration: {
+                                                            behavior: ("Enable" | "Disable")
+                                                          },
+                                                          summary_configuration: {
+                                                            summary_modes: Array[("PostContact" | "AutomatedInteraction" | "ContactChain")]
+                                                          },
+                                                          rules_configuration: {
+                                                            behavior: ("Enable" | "Disable")?
+                                                          }
+                                                        },
+                                                        ?client_token: ::String
+                                                      ) -> _StartContactConversationalAnalyticsJobResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartContactConversationalAnalyticsJobResponseSuccess
 
       interface _StartContactEvaluationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartContactEvaluationResponse]

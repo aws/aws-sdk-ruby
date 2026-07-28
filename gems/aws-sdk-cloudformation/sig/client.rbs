@@ -199,7 +199,12 @@ module Aws
                                ?include_nested_stacks: bool,
                                ?on_stack_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE"),
                                ?import_existing_resources: bool,
-                               ?deployment_mode: ("REVERT_DRIFT")
+                               ?deployment_mode: ("REVERT_DRIFT"),
+                               ?deployment_config: {
+                                 mode: ("STANDARD" | "EXPRESS")?,
+                                 disable_rollback: bool?
+                               },
+                               ?disable_validation: bool
                              ) -> _CreateChangeSetResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChangeSetResponseSuccess
 
@@ -269,7 +274,12 @@ module Aws
                           ],
                           ?client_request_token: ::String,
                           ?enable_termination_protection: bool,
-                          ?retain_except_on_create: bool
+                          ?retain_except_on_create: bool,
+                          ?deployment_config: {
+                            mode: ("STANDARD" | "EXPRESS")?,
+                            disable_rollback: bool?
+                          },
+                          ?disable_validation: bool
                         ) -> _CreateStackResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackResponseSuccess
 
@@ -415,7 +425,11 @@ module Aws
                           ?retain_resources: Array[::String],
                           ?role_arn: ::String,
                           ?client_request_token: ::String,
-                          ?deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK")
+                          ?deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK"),
+                          ?deployment_config: {
+                            mode: ("STANDARD" | "EXPRESS")?,
+                            disable_rollback: bool?
+                          }
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -499,6 +513,7 @@ module Aws
         def on_stack_failure: () -> ("DO_NOTHING" | "ROLLBACK" | "DELETE")
         def import_existing_resources: () -> bool
         def deployment_mode: () -> ("REVERT_DRIFT")
+        def deployment_config: () -> Types::DeploymentConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_change_set-instance_method
       def describe_change_set: (
@@ -1349,7 +1364,11 @@ module Aws
                             stack_name: ::String,
                             ?role_arn: ::String,
                             ?client_request_token: ::String,
-                            ?retain_except_on_create: bool
+                            ?retain_except_on_create: bool,
+                            ?deployment_config: {
+                              mode: ("STANDARD" | "EXPRESS")?,
+                              disable_rollback: bool?
+                            }
                           ) -> _RollbackStackResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RollbackStackResponseSuccess
 
@@ -1504,7 +1523,12 @@ module Aws
                           ],
                           ?disable_rollback: bool,
                           ?client_request_token: ::String,
-                          ?retain_except_on_create: bool
+                          ?retain_except_on_create: bool,
+                          ?deployment_config: {
+                            mode: ("STANDARD" | "EXPRESS")?,
+                            disable_rollback: bool?
+                          },
+                          ?disable_validation: bool
                         ) -> _UpdateStackResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStackResponseSuccess
 

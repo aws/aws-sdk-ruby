@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2026-07-22)
+------------------
+
+* Feature - Add CloudWatch dataset destinations for Amazon Managed Service for Prometheus collectors.
+
+1.75.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.74.0 (2026-06-10)
 ------------------
 

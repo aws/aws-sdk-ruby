@@ -1,0 +1,302 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SupportAuthZ
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActionSet
+      attr_accessor all_actions: Types::Unit
+      attr_accessor actions: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AllActions < ActionSet
+      end
+      class Actions < ActionSet
+      end
+      class Unknown < ActionSet
+      end
+    end
+
+    class ActionSummary
+      attr_accessor action: ::String
+      attr_accessor service: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class Condition
+      attr_accessor allow_after: ::Time
+      attr_accessor allow_before: ::Time
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AllowAfter < Condition
+      end
+      class AllowBefore < Condition
+      end
+      class Unknown < Condition
+      end
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSupportPermitInput
+      attr_accessor permit: Types::Permit
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor signing_key_info: Types::SigningKeyInfo
+      attr_accessor support_case_display_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSupportPermitOutput
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor permit: Types::Permit
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETING")
+      attr_accessor signing_key_info: Types::SigningKeyInfo
+      attr_accessor created_at: ::Time
+      attr_accessor support_case_display_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteSupportPermitInput
+      attr_accessor support_permit_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSupportPermitOutput
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor permit: Types::Permit
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETING")
+      attr_accessor signing_key_info: Types::SigningKeyInfo
+      attr_accessor created_at: ::Time
+      attr_accessor support_case_display_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetActionInput
+      attr_accessor action: ::String
+      SENSITIVE: []
+    end
+
+    class GetActionOutput
+      attr_accessor action: ::String
+      attr_accessor service: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class GetSupportPermitInput
+      attr_accessor support_permit_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetSupportPermitOutput
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor permit: Types::Permit
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETING")
+      attr_accessor signing_key_info: Types::SigningKeyInfo
+      attr_accessor created_at: ::Time
+      attr_accessor support_case_display_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListActionsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor service: ::String
+      SENSITIVE: []
+    end
+
+    class ListActionsOutput
+      attr_accessor action_summaries: ::Array[Types::ActionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSupportPermitRequestsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor support_case_display_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListSupportPermitRequestsOutput
+      attr_accessor support_permit_requests: ::Array[Types::SupportPermitRequest]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSupportPermitsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor support_permit_statuses: ::Array[("ACTIVE" | "INACTIVE" | "DELETING")]
+      SENSITIVE: []
+    end
+
+    class ListSupportPermitsOutput
+      attr_accessor support_permits: ::Array[Types::SupportPermitSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Permit
+      attr_accessor actions: Types::ActionSet
+      attr_accessor resources: Types::ResourceSet
+      attr_accessor conditions: ::Array[Types::Condition]
+      SENSITIVE: []
+    end
+
+    class RejectSupportPermitRequestInput
+      attr_accessor request_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RejectSupportPermitRequestOutput
+      attr_accessor request_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceSet
+      attr_accessor all_resources_in_region: Types::Unit
+      attr_accessor resources: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AllResourcesInRegion < ResourceSet
+      end
+      class Resources < ResourceSet
+      end
+      class Unknown < ResourceSet
+      end
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class SigningKeyInfo
+      attr_accessor kms_key: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class KmsKey < SigningKeyInfo
+      end
+      class Unknown < SigningKeyInfo
+      end
+    end
+
+    class SupportPermitRequest
+      attr_accessor request_arn: ::String
+      attr_accessor permit: Types::Permit
+      attr_accessor support_case_display_id: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELLED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SupportPermitSummary
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor permit: Types::Permit
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETING")
+      attr_accessor signing_key_info: Types::SigningKeyInfo
+      attr_accessor created_at: ::Time
+      attr_accessor support_case_display_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Unit < Aws::EmptyStructure
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor path: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

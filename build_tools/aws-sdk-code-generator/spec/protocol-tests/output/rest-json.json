@@ -969,6 +969,33 @@
                 }
             },
             {
+                "id": "RestJsonFooErrorUsingXAmznErrorTypeWithUriAndDifferentNamespace",
+                "description": "Because namespace and URL are ignored, an unrecognized namespace should not make a difference.",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/GreetingWithErrors",
+                        "responseCode": 200
+                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "X-Amzn-Errortype": "aws.different.namespace#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+                    }
+                }
+            },
+            {
                 "id": "RestJsonFooErrorUsingCode",
                 "description": "This example uses the 'code' property in the output rather than X-Amzn-Errortype. Some services do this though it's preferable to send the X-Amzn-Errortype. Client implementations must first check for the X-Amzn-Errortype and then check for a top-level 'code' property.\n\nFor example service see Amazon S3 Glacier.",
                 "given": {

@@ -235,6 +235,24 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class CancelUpdateRequest
+      attr_accessor name: ::String
+      attr_accessor update_id: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelUpdateResponse
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
+    class Cancellation
+      attr_accessor status: ("InProgress" | "Failed" | "Successful")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
     class Capability
       attr_accessor capability_name: ::String
       attr_accessor arn: ::String
@@ -993,7 +1011,7 @@ module Aws::EKS
     class Insight
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor category: ("UPGRADE_READINESS" | "MISCONFIGURATION")
+      attr_accessor category: ("UPGRADE_READINESS" | "MISCONFIGURATION" | "ROLLBACK_READINESS")
       attr_accessor kubernetes_version: ::String
       attr_accessor last_refresh_time: ::Time
       attr_accessor last_transition_time: ::Time
@@ -1028,7 +1046,7 @@ module Aws::EKS
     class InsightSummary
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor category: ("UPGRADE_READINESS" | "MISCONFIGURATION")
+      attr_accessor category: ("UPGRADE_READINESS" | "MISCONFIGURATION" | "ROLLBACK_READINESS")
       attr_accessor kubernetes_version: ::String
       attr_accessor last_refresh_time: ::Time
       attr_accessor last_transition_time: ::Time
@@ -1038,7 +1056,7 @@ module Aws::EKS
     end
 
     class InsightsFilter
-      attr_accessor categories: ::Array[("UPGRADE_READINESS" | "MISCONFIGURATION")]
+      attr_accessor categories: ::Array[("UPGRADE_READINESS" | "MISCONFIGURATION" | "ROLLBACK_READINESS")]
       attr_accessor kubernetes_versions: ::Array[::String]
       attr_accessor statuses: ::Array[("PASSING" | "WARNING" | "ERROR" | "UNKNOWN")]
       SENSITIVE: []
@@ -1542,6 +1560,11 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class RollbackConfig
+      attr_accessor timeout_minutes: ::Integer
+      SENSITIVE: []
+    end
+
     class ServerException
       attr_accessor cluster_name: ::String
       attr_accessor nodegroup_name: ::String
@@ -1625,10 +1648,11 @@ module Aws::EKS
     class Update
       attr_accessor id: ::String
       attr_accessor status: ("InProgress" | "Failed" | "Cancelled" | "Successful")
-      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate" | "UpgradePolicyUpdate" | "ZonalShiftConfigUpdate" | "AutoModeUpdate" | "RemoteNetworkConfigUpdate" | "DeletionProtectionUpdate" | "CapabilityUpdate" | "ControlPlaneScalingConfigUpdate" | "VendedLogsUpdate" | "ControlPlaneEgressUpdate")
+      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate" | "UpgradePolicyUpdate" | "ZonalShiftConfigUpdate" | "AutoModeUpdate" | "RemoteNetworkConfigUpdate" | "DeletionProtectionUpdate" | "CapabilityUpdate" | "ControlPlaneScalingConfigUpdate" | "VendedLogsUpdate" | "ControlPlaneEgressUpdate" | "VersionRollback")
       attr_accessor params: ::Array[Types::UpdateParam]
       attr_accessor created_at: ::Time
       attr_accessor errors: ::Array[Types::ErrorDetail]
+      attr_accessor cancellation: Types::Cancellation
       SENSITIVE: []
     end
 
@@ -1721,6 +1745,7 @@ module Aws::EKS
       attr_accessor version: ::String
       attr_accessor client_request_token: ::String
       attr_accessor force: bool
+      attr_accessor rollback_config: Types::RollbackConfig
       SENSITIVE: []
     end
 

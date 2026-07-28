@@ -734,5 +734,142 @@ module Aws::SESV2
       end
     end
 
+    context "Gov IPv4 only: us-gov-west-1 primary, dualstack and FIPS disabled" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "ses", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://abc123.456def.endpoints.email.us-gov.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: false, use_fips: false, region: "us-gov-west-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Gov IPv4 only: us-gov-east-1, dualstack and FIPS disabled (proves both gov regions resolve identically)" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "ses", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://abc123.456def.endpoints.email.us-gov.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: false, use_fips: false, region: "us-gov-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Gov dualstack: us-gov-west-1, dualstack enabled, FIPS disabled (no global. prefix; api.aws not global.api.aws)" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "ses", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://abc123.456def.endpoints.email.us-gov.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: true, use_fips: false, region: "us-gov-west-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Gov FIPS: us-gov-west-1, FIPS enabled, dualstack disabled — FIPS not supported with multi-region endpoints" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS is not supported with multi-region endpoints"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: false, use_fips: true, region: "us-gov-west-1"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Gov FIPS+dualstack: us-gov-west-1, both FIPS and dualstack enabled — FIPS check precedes dualstack branch selection" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS is not supported with multi-region endpoints"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: true, use_fips: true, region: "us-gov-west-1"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Gov custom SDK endpoint: us-gov-west-1, EndpointId set, custom Endpoint — passes through unchanged with SigV4a" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "ses", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: false, use_fips: false, region: "us-gov-west-1", endpoint: "https://example.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "China IPv4 regression: cn-north-1, dualstack disabled — endpoint uses aws-cn dnsSuffix (amazonaws.com.cn)" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "ses", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://abc123.456def.endpoints.email.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: false, use_fips: false, region: "cn-north-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "China dualstack regression: cn-north-1, dualstack enabled — uses global. prefix with aws-cn dualStackDnsSuffix (api.amazonwebservices.com.cn)" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "ses", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://abc123.456def.endpoints.email.global.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: true, use_fips: false, region: "cn-north-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Gov custom SDK endpoint with FIPS: FIPS guard sits above the SDK passthrough, so error wins" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS is not supported with multi-region endpoints"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: false, use_fips: true, region: "us-gov-west-1", endpoint: "https://example.com"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Gov dualstack OSU (us-gov-east-1) matches PDT dualstack output (us-gov.api.aws, no global. prefix)" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "ses", "name" => "sigv4a", "signingRegionSet" => ["*"]}]}, "url" => "https://abc123.456def.endpoints.email.us-gov.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: true, use_fips: false, region: "us-gov-east-1"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
   end
 end

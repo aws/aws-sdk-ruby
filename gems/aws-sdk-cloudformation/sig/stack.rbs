@@ -51,6 +51,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#disable_rollback-instance_method
       def disable_rollback: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#deployment_config-instance_method
+      def deployment_config: () -> Types::DeploymentConfig
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#notification_arns-instance_method
       def notification_arns: () -> ::Array[::String]
 
@@ -157,7 +160,12 @@ module Aws
                     ],
                     ?client_request_token: ::String,
                     ?enable_termination_protection: bool,
-                    ?retain_except_on_create: bool
+                    ?retain_except_on_create: bool,
+                    ?deployment_config: {
+                      mode: ("STANDARD" | "EXPRESS")?,
+                      disable_rollback: bool?
+                    },
+                    ?disable_validation: bool
                   ) -> Types::CreateStackOutput
                 | (?Hash[Symbol, untyped]) -> Types::CreateStackOutput
 
@@ -166,7 +174,11 @@ module Aws
                     ?retain_resources: Array[::String],
                     ?role_arn: ::String,
                     ?client_request_token: ::String,
-                    ?deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK")
+                    ?deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK"),
+                    ?deployment_config: {
+                      mode: ("STANDARD" | "EXPRESS")?,
+                      disable_rollback: bool?
+                    }
                   ) -> ::Aws::EmptyStructure
                 | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
 
@@ -208,7 +220,12 @@ module Aws
                     ],
                     ?disable_rollback: bool,
                     ?client_request_token: ::String,
-                    ?retain_except_on_create: bool
+                    ?retain_except_on_create: bool,
+                    ?deployment_config: {
+                      mode: ("STANDARD" | "EXPRESS")?,
+                      disable_rollback: bool?
+                    },
+                    ?disable_validation: bool
                   ) -> Types::UpdateStackOutput
                 | (?Hash[Symbol, untyped]) -> Types::UpdateStackOutput
 

@@ -37,6 +37,30 @@ module Aws::Artifact
       include Aws::Structure
     end
 
+    # Citation information for AI-generated responses.
+    #
+    # @!attribute [rw] source_label
+    #   Label identifying the compliance source.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_content
+    #   Content text from the compliance source.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_link
+    #   Link to the compliance source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/Citation AWS API Documentation
+    #
+    class Citation < Struct.new(
+      :source_label,
+      :source_content,
+      :source_link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request to create/modify content would result in a conflict.
     #
     # @!attribute [rw] message
@@ -56,6 +80,60 @@ module Aws::Artifact
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Title of the inquiry.
+    #   @return [String]
+    #
+    # @!attribute [rw] inquiry_content
+    #   Content for creating a compliance inquiry - either a single query or
+    #   file content.
+    #   @return [Types::InquiryContent]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency token for the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_mode
+    #   Support mode for inquiry processing. Only supported for file upload
+    #   mode. Defaults to AI\_ONLY if not specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to associate with the compliance inquiry resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/CreateComplianceInquiryRequest AWS API Documentation
+    #
+    class CreateComplianceInquiryRequest < Struct.new(
+      :name,
+      :inquiry_content,
+      :client_token,
+      :support_mode,
+      :tags)
+      SENSITIVE = [:name, :inquiry_content]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compliance_inquiry_summary
+    #   Summary information about the created compliance inquiry.
+    #   @return [Types::InquirySummary]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the compliance inquiry resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/CreateComplianceInquiryResponse AWS API Documentation
+    #
+    class CreateComplianceInquiryResponse < Struct.new(
+      :compliance_inquiry_summary,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -135,6 +213,45 @@ module Aws::Artifact
       include Aws::Structure
     end
 
+    # @!attribute [rw] compliance_inquiry_id
+    #   Unique resource ID for the compliance inquiry.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_identifiers
+    #   List of query identifiers to include in the export.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] include_citations
+    #   When true, include citations in the exported document.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ExportComplianceInquiryRequest AWS API Documentation
+    #
+    class ExportComplianceInquiryRequest < Struct.new(
+      :compliance_inquiry_id,
+      :query_identifiers,
+      :include_citations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_presigned_url
+    #   Presigned S3 URL to access the exported compliance inquiry report.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the compliance inquiry resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ExportComplianceInquiryResponse AWS API Documentation
+    #
+    class ExportComplianceInquiryResponse < Struct.new(
+      :document_presigned_url,
+      :tags)
+      SENSITIVE = [:document_presigned_url]
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/GetAccountSettingsRequest AWS API Documentation
@@ -149,6 +266,35 @@ module Aws::Artifact
     #
     class GetAccountSettingsResponse < Struct.new(
       :account_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compliance_inquiry_id
+    #   Unique resource ID for the compliance inquiry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/GetComplianceInquiryMetadataRequest AWS API Documentation
+    #
+    class GetComplianceInquiryMetadataRequest < Struct.new(
+      :compliance_inquiry_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compliance_inquiry_detail
+    #   Detailed information about the compliance inquiry.
+    #   @return [Types::InquiryDetail]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the compliance inquiry resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/GetComplianceInquiryMetadataResponse AWS API Documentation
+    #
+    class GetComplianceInquiryMetadataResponse < Struct.new(
+      :compliance_inquiry_detail,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -250,6 +396,152 @@ module Aws::Artifact
       include Aws::Structure
     end
 
+    # Content for creating a compliance inquiry - either a single query or
+    # file content.
+    #
+    # @note InquiryContent is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] query
+    #   Single text query for AI-generated answer.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_content
+    #   File content with multiple questions.
+    #   @return [Types::InquiryFileContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/InquiryContent AWS API Documentation
+    #
+    class InquiryContent < Struct.new(
+      :query,
+      :file_content,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Query < InquiryContent; end
+      class FileContent < InquiryContent; end
+      class Unknown < InquiryContent; end
+    end
+
+    # Detailed information about a compliance inquiry.
+    #
+    # @!attribute [rw] arn
+    #   ARN of the compliance inquiry resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Title of the inquiry.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   Unique resource ID for the compliance inquiry.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Current processing status of the inquiry.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Status message providing additional context.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_source
+    #   Type of inquiry content (text or file).
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp indicating when the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   Timestamp indicating when the resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] support_mode
+    #   Support mode for this inquiry. AI\_ONLY provides AI-generated
+    #   responses. FULL\_SUPPORT includes human expert review.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/InquiryDetail AWS API Documentation
+    #
+    class InquiryDetail < Struct.new(
+      :arn,
+      :name,
+      :id,
+      :status,
+      :status_message,
+      :input_source,
+      :created_at,
+      :updated_at,
+      :support_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # File content structure for compliance inquiry uploads.
+    #
+    # @!attribute [rw] file_sections
+    #   List of file sections/sheets to process.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] content
+    #   Binary content of the uploaded file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/InquiryFileContent AWS API Documentation
+    #
+    class InquiryFileContent < Struct.new(
+      :file_sections,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a compliance inquiry.
+    #
+    # @!attribute [rw] arn
+    #   ARN of the compliance inquiry resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Title of the inquiry.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   Unique resource ID for the compliance inquiry.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Current processing status of the inquiry.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Status message providing additional context.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_source
+    #   Type of inquiry content (text or file).
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp indicating when the resource was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/InquirySummary AWS API Documentation
+    #
+    class InquirySummary < Struct.new(
+      :arn,
+      :name,
+      :id,
+      :status,
+      :status_message,
+      :input_source,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An unknown server exception has occurred.
     #
     # @!attribute [rw] message
@@ -264,6 +556,79 @@ module Aws::Artifact
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   Maximum number of resources to return in the paginated response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next page of resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListComplianceInquiriesRequest AWS API Documentation
+    #
+    class ListComplianceInquiriesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compliance_inquiries
+    #   List of compliance inquiry resources.
+    #   @return [Array<Types::InquirySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next page of resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListComplianceInquiriesResponse AWS API Documentation
+    #
+    class ListComplianceInquiriesResponse < Struct.new(
+      :compliance_inquiries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compliance_inquiry_id
+    #   Unique resource ID for the compliance inquiry.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of resources to return in the paginated response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next page of resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListComplianceInquiryQueriesRequest AWS API Documentation
+    #
+    class ListComplianceInquiryQueriesRequest < Struct.new(
+      :compliance_inquiry_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queries
+    #   List of compliance query summaries.
+    #   @return [Array<Types::QuerySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next page of resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListComplianceInquiryQueriesResponse AWS API Documentation
+    #
+    class ListComplianceInquiryQueriesResponse < Struct.new(
+      :queries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -375,6 +740,30 @@ module Aws::Artifact
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] notification_subscription_status
     #   Desired notification subscription status.
     #   @return [String]
@@ -395,6 +784,123 @@ module Aws::Artifact
     #
     class PutAccountSettingsResponse < Struct.new(
       :account_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compliance_inquiry_id
+    #   The unique identifier for the compliance inquiry.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_identifier
+    #   The sequential identifier of the query to provide feedback on.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rating
+    #   The rating for the feedback. Valid values are THUMBS\_UP and
+    #   THUMBS\_DOWN.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_revision_id
+    #   The response revision ID. Use this value to prevent submitting
+    #   feedback on a stale response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reason_codes
+    #   The reason codes that describe why you rated the response. Valid
+    #   values are OTHER, PARTIAL\_RESPONSE, and IRRELEVANT\_RESPONSE.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] comment
+    #   An optional comment for the feedback.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/PutComplianceInquiryFeedbackRequest AWS API Documentation
+    #
+    class PutComplianceInquiryFeedbackRequest < Struct.new(
+      :compliance_inquiry_id,
+      :query_identifier,
+      :rating,
+      :response_revision_id,
+      :reason_codes,
+      :comment,
+      :client_token)
+      SENSITIVE = [:comment]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] submitted_at
+    #   The timestamp when the feedback was submitted.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/PutComplianceInquiryFeedbackResponse AWS API Documentation
+    #
+    class PutComplianceInquiryFeedbackResponse < Struct.new(
+      :submitted_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a single query within a compliance inquiry.
+    #
+    # @!attribute [rw] query_identifier
+    #   Sequential identifier of the query within the inquiry.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query
+    #   The actual query text.
+    #   @return [String]
+    #
+    # @!attribute [rw] response
+    #   Generated response to the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] review_type
+    #   Type of review for the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] citations
+    #   Supporting citations for the response.
+    #   @return [Array<Types::Citation>]
+    #
+    # @!attribute [rw] status
+    #   Current processing status of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Descriptive status message.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp when the query was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_response_versions
+    #   Ordered list of response version history entries, oldest first.
+    #   @return [Array<Types::ResponseVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/QuerySummary AWS API Documentation
+    #
+    class QuerySummary < Struct.new(
+      :query_identifier,
+      :query,
+      :response,
+      :review_type,
+      :citations,
+      :status,
+      :status_message,
+      :created_at,
+      :updated_response_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -615,6 +1121,25 @@ module Aws::Artifact
       include Aws::Structure
     end
 
+    # A versioned snapshot of a response edit.
+    #
+    # @!attribute [rw] response_text
+    #   The response text for this version.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   ISO 8601 timestamp of when this edit was made.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ResponseVersion AWS API Documentation
+    #
+    class ResponseVersion < Struct.new(
+      :response_text,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request would cause a service quota to be exceeded.
     #
     # @!attribute [rw] message
@@ -648,6 +1173,27 @@ module Aws::Artifact
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to add to the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -675,6 +1221,27 @@ module Aws::Artifact
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   Tag keys to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Request fails to satisfy the constraints specified by an AWS service.
     #

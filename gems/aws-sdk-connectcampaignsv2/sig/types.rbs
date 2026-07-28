@@ -58,6 +58,11 @@ module Aws::ConnectCampaignsV2
       SENSITIVE: []
     end
 
+    class ChannelContext
+      attr_accessor web_notification_context: Types::WebNotificationContext
+      SENSITIVE: []
+    end
+
     class ChannelSubtypeConfig
       attr_accessor telephony: Types::TelephonyChannelSubtypeConfig
       attr_accessor sms: Types::SmsChannelSubtypeConfig
@@ -149,7 +154,7 @@ module Aws::ConnectCampaignsV2
 
     class CustomerProfilesIntegrationConfig
       attr_accessor domain_arn: ::String
-      attr_accessor object_type_names: ::Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration" | "Campaign-WhatsApp"), ::String]
+      attr_accessor object_type_names: ::Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration" | "Campaign-WhatsApp" | "Campaign-WebNotification"), ::String]
       SENSITIVE: []
     end
 
@@ -160,7 +165,7 @@ module Aws::ConnectCampaignsV2
 
     class CustomerProfilesIntegrationSummary
       attr_accessor domain_arn: ::String
-      attr_accessor object_type_names: ::Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration" | "Campaign-WhatsApp"), ::String]
+      attr_accessor object_type_names: ::Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration" | "Campaign-WhatsApp" | "Campaign-WebNotification"), ::String]
       SENSITIVE: []
     end
 
@@ -267,6 +272,12 @@ module Aws::ConnectCampaignsV2
 
     class EventTrigger
       attr_accessor customer_profiles_domain_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EventTriggerContext
+      attr_accessor source_event: ::String
+      attr_accessor channel_context: Types::ChannelContext
       SENSITIVE: []
     end
 
@@ -533,6 +544,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor client_token: ::String
       attr_accessor profile_id: ::String
       attr_accessor expiration_time: ::Time
+      attr_accessor event_trigger_context: Types::EventTriggerContext
       SENSITIVE: []
     end
 
@@ -850,6 +862,12 @@ module Aws::ConnectCampaignsV2
     class ValidationException
       attr_accessor message: ::String
       attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class WebNotificationContext
+      attr_accessor session_id: ::String
+      attr_accessor browser_id: ::String
       SENSITIVE: []
     end
 

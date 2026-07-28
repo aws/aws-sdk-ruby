@@ -16,7 +16,7 @@ module Aws
         def wait: (
                     ?alarm_names: Array[::String],
                     ?alarm_name_prefix: ::String,
-                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
+                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")],
                     ?children_of_alarm_name: ::String,
                     ?parents_of_alarm_name: ::String,
                     ?state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA"),
@@ -44,7 +44,25 @@ module Aws
         def wait: (
                     ?alarm_names: Array[::String],
                     ?alarm_name_prefix: ::String,
-                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
+                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")],
+                    ?children_of_alarm_name: ::String,
+                    ?parents_of_alarm_name: ::String,
+                    ?state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA"),
+                    ?action_prefix: ::String,
+                    ?max_records: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeAlarmsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeAlarmsResponseSuccess
+      end
+
+      class LogAlarmExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?alarm_names: Array[::String],
+                    ?alarm_name_prefix: ::String,
+                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")],
                     ?children_of_alarm_name: ::String,
                     ?parents_of_alarm_name: ::String,
                     ?state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA"),

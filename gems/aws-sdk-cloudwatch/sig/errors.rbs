@@ -55,6 +55,9 @@ module Aws
       class MissingRequiredParameterException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ResourceConflict < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ResourceNotFound < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

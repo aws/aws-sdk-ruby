@@ -16,7 +16,7 @@ module Aws::Account
     end
 
     class AcceptPrimaryEmailUpdateResponse
-      attr_accessor status: ("PENDING" | "ACCEPTED")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "COMPLETED" | "FAILED")
       SENSITIVE: []
     end
 
@@ -130,6 +130,17 @@ module Aws::Account
       SENSITIVE: [:primary_email]
     end
 
+    class GetPrimaryEmailUpdateStatusRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrimaryEmailUpdateStatusResponse
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "COMPLETED" | "FAILED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class GetRegionOptStatusRequest
       attr_accessor account_id: ::String
       attr_accessor region_name: ::String
@@ -209,7 +220,7 @@ module Aws::Account
     end
 
     class StartPrimaryEmailUpdateResponse
-      attr_accessor status: ("PENDING" | "ACCEPTED")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "COMPLETED" | "FAILED")
       SENSITIVE: []
     end
 

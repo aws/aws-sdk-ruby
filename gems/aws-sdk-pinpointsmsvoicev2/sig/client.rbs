@@ -157,7 +157,7 @@ module Aws
       def create_event_destination: (
                                       configuration_set_name: ::String,
                                       event_destination_name: ::String,
-                                      matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")],
+                                      matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED" | "RCS_ALL" | "RCS_QUEUED" | "RCS_SENT" | "RCS_DELIVERED" | "RCS_READ" | "RCS_FAILED" | "RCS_TTL_EXPIRED" | "RCS_PROTECT_BLOCKED" | "RCS_FALLEN_BACK_TO_SMS")],
                                       ?cloud_watch_logs_destination: {
                                         iam_role_arn: ::String,
                                         log_group_arn: ::String
@@ -296,6 +296,10 @@ module Aws
         def two_way_channel_arn: () -> ::String
         def two_way_channel_role: () -> ::String
         def two_way_enabled: () -> bool
+        def two_way_media_s3_bucket_name: () -> ::String
+        def two_way_media_s3_key_prefix: () -> ::String
+        def two_way_media_s3_role: () -> ::String
+        def two_way_rcs_events_enabled: () -> ::Array[::String]
         def tags: () -> ::Array[Types::Tag]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#create_rcs_agent-instance_method
@@ -623,12 +627,22 @@ module Aws
         def two_way_channel_arn: () -> ::String
         def two_way_channel_role: () -> ::String
         def two_way_enabled: () -> bool
+        def two_way_rcs_events_enabled: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#delete_rcs_agent-instance_method
       def delete_rcs_agent: (
                               rcs_agent_id: ::String
                             ) -> _DeleteRcsAgentResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRcsAgentResponseSuccess
+
+      interface _DeleteRcsMessageSpendLimitOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRcsMessageSpendLimitOverrideResult]
+        def monthly_limit: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#delete_rcs_message_spend_limit_override-instance_method
+      def delete_rcs_message_spend_limit_override: (
+                                                   ) -> _DeleteRcsMessageSpendLimitOverrideResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRcsMessageSpendLimitOverrideResponseSuccess
 
       interface _DeleteRegistrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRegistrationResult]
@@ -1596,6 +1610,78 @@ module Aws
                                      ) -> _SendNotifyVoiceMessageResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendNotifyVoiceMessageResponseSuccess
 
+      interface _SendRcsMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendRcsMessageResult]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#send_rcs_message-instance_method
+      def send_rcs_message: (
+                              destination_phone_number: ::String,
+                              origination_identity: ::String,
+                              ?rcs_message_content: {
+                                content: {
+                                  text_message: {
+                                    body: ::String
+                                  }?,
+                                  file_message: {
+                                    file_url: ::String,
+                                    thumbnail_url: ::String?
+                                  }?,
+                                  rich_card: {
+                                    card_orientation: ::String,
+                                    thumbnail_image_alignment: ::String?,
+                                    card_content: {
+                                      title: ::String?,
+                                      description: ::String?,
+                                      media: {
+                                        file_url: ::String,
+                                        thumbnail_url: ::String?,
+                                        height: ::String?
+                                      }?,
+                                      suggestions: Array[
+                                        Params::rcs_suggested_action
+                                      ]?
+                                    }
+                                  }?,
+                                  carousel: {
+                                    card_width: ::String,
+                                    card_contents: Array[
+                                      {
+                                        title: ::String?,
+                                        description: ::String?,
+                                        media: {
+                                          file_url: ::String,
+                                          thumbnail_url: ::String?,
+                                          height: ::String?
+                                        }?,
+                                        suggestions: Array[
+                                          Params::rcs_suggested_action
+                                        ]?
+                                      }
+                                    ]
+                                  }?
+                                },
+                                suggestions: Array[
+                                  Params::rcs_suggested_action
+                                ]?
+                              },
+                              ?time_to_live: ::Integer,
+                              ?message_traffic_type: ::String,
+                              ?fallback_configuration: {
+                                channel: ("SMS" | "MMS"),
+                                message_body: ::String?,
+                                media_urls: Array[::String]?,
+                                origination_identity: ::String?
+                              },
+                              ?protect_configuration_id: ::String,
+                              ?configuration_set_name: ::String,
+                              ?max_price: ::String,
+                              ?dry_run: bool,
+                              ?context: Hash[::String, ::String],
+                              ?message_feedback_enabled: bool
+                            ) -> _SendRcsMessageResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendRcsMessageResponseSuccess
+
       interface _SendTextMessageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SendTextMessageResult]
         def message_id: () -> ::String
@@ -1709,6 +1795,16 @@ module Aws
                                                    ) -> _SetNotifyMessageSpendLimitOverrideResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetNotifyMessageSpendLimitOverrideResponseSuccess
 
+      interface _SetRcsMessageSpendLimitOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetRcsMessageSpendLimitOverrideResult]
+        def monthly_limit: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#set_rcs_message_spend_limit_override-instance_method
+      def set_rcs_message_spend_limit_override: (
+                                                  monthly_limit: ::Integer
+                                                ) -> _SetRcsMessageSpendLimitOverrideResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetRcsMessageSpendLimitOverrideResponseSuccess
+
       interface _SetTextMessageSpendLimitOverrideResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetTextMessageSpendLimitOverrideResult]
         def monthly_limit: () -> ::Integer
@@ -1781,7 +1877,7 @@ module Aws
                                       configuration_set_name: ::String,
                                       event_destination_name: ::String,
                                       ?enabled: bool,
-                                      ?matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")],
+                                      ?matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED" | "RCS_ALL" | "RCS_QUEUED" | "RCS_SENT" | "RCS_DELIVERED" | "RCS_READ" | "RCS_FAILED" | "RCS_TTL_EXPIRED" | "RCS_PROTECT_BLOCKED" | "RCS_FALLEN_BACK_TO_SMS")],
                                       ?cloud_watch_logs_destination: {
                                         iam_role_arn: ::String,
                                         log_group_arn: ::String
@@ -1930,6 +2026,10 @@ module Aws
         def two_way_channel_arn: () -> ::String
         def two_way_channel_role: () -> ::String
         def two_way_enabled: () -> bool
+        def two_way_media_s3_bucket_name: () -> ::String
+        def two_way_media_s3_key_prefix: () -> ::String
+        def two_way_media_s3_role: () -> ::String
+        def two_way_rcs_events_enabled: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#update_rcs_agent-instance_method
       def update_rcs_agent: (
@@ -1939,7 +2039,11 @@ module Aws
                               ?self_managed_opt_outs_enabled: bool,
                               ?two_way_channel_arn: ::String,
                               ?two_way_channel_role: ::String,
-                              ?two_way_enabled: bool
+                              ?two_way_enabled: bool,
+                              ?two_way_media_s3_bucket_name: ::String,
+                              ?two_way_media_s3_key_prefix: ::String,
+                              ?two_way_media_s3_role: ::String,
+                              ?two_way_rcs_events_enabled: Array[::String]
                             ) -> _UpdateRcsAgentResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRcsAgentResponseSuccess
 

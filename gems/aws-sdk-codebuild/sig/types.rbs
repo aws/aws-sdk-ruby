@@ -970,6 +970,7 @@ module Aws::CodeBuild
       attr_accessor registry_credential: Types::RegistryCredential
       attr_accessor image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")
       attr_accessor docker_server: Types::DockerServer
+      attr_accessor host_kernel: ("LINUX_KERNEL_4" | "LINUX_KERNEL_6" | "LINUX_KERNEL_LATEST")
       SENSITIVE: []
     end
 
@@ -1306,6 +1307,7 @@ module Aws::CodeBuild
       attr_accessor debug_session_enabled: bool
       attr_accessor fleet_override: Types::ProjectFleet
       attr_accessor auto_retry_limit_override: ::Integer
+      attr_accessor host_kernel_override: ("LINUX_KERNEL_4" | "LINUX_KERNEL_6" | "LINUX_KERNEL_LATEST")
       SENSITIVE: []
     end
 

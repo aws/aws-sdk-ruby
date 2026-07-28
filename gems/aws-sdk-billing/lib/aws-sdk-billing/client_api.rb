@@ -16,9 +16,23 @@ module Aws::Billing
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AccountName = Shapes::StringShape.new(name: 'AccountName')
     ActiveTimeRange = Shapes::StructureShape.new(name: 'ActiveTimeRange')
+    Amount = Shapes::StructureShape.new(name: 'Amount')
+    ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
     AssociateSourceViewsRequest = Shapes::StructureShape.new(name: 'AssociateSourceViewsRequest')
     AssociateSourceViewsResponse = Shapes::StructureShape.new(name: 'AssociateSourceViewsResponse')
+    BillingFeature = Shapes::StringShape.new(name: 'BillingFeature')
+    BillingFeatureFilter = Shapes::StructureShape.new(name: 'BillingFeatureFilter')
+    BillingFeatureFilterName = Shapes::StringShape.new(name: 'BillingFeatureFilterName')
+    BillingFeatureFilterValue = Shapes::StringShape.new(name: 'BillingFeatureFilterValue')
+    BillingFeatureFilterValues = Shapes::ListShape.new(name: 'BillingFeatureFilterValues')
+    BillingMonth = Shapes::StringShape.new(name: 'BillingMonth')
+    BillingPeriod = Shapes::StructureShape.new(name: 'BillingPeriod')
+    BillingPreferenceForKey = Shapes::StructureShape.new(name: 'BillingPreferenceForKey')
+    BillingPreferenceSummary = Shapes::StructureShape.new(name: 'BillingPreferenceSummary')
+    BillingPreferences = Shapes::ListShape.new(name: 'BillingPreferences')
+    BillingPreferencesPerKey = Shapes::ListShape.new(name: 'BillingPreferencesPerKey')
     BillingViewArn = Shapes::StringShape.new(name: 'BillingViewArn')
     BillingViewArnList = Shapes::ListShape.new(name: 'BillingViewArnList')
     BillingViewDescription = Shapes::StringShape.new(name: 'BillingViewDescription')
@@ -35,6 +49,7 @@ module Aws::Billing
     BillingViewType = Shapes::StringShape.new(name: 'BillingViewType')
     BillingViewTypeList = Shapes::ListShape.new(name: 'BillingViewTypeList')
     BillingViewsMaxResults = Shapes::IntegerShape.new(name: 'BillingViewsMaxResults')
+    BillingYear = Shapes::IntegerShape.new(name: 'BillingYear')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -42,6 +57,15 @@ module Aws::Billing
     CostCategoryValues = Shapes::StructureShape.new(name: 'CostCategoryValues')
     CreateBillingViewRequest = Shapes::StructureShape.new(name: 'CreateBillingViewRequest')
     CreateBillingViewResponse = Shapes::StructureShape.new(name: 'CreateBillingViewResponse')
+    CreditAllocationHistoryEntry = Shapes::StructureShape.new(name: 'CreditAllocationHistoryEntry')
+    CreditAllocationHistoryList = Shapes::ListShape.new(name: 'CreditAllocationHistoryList')
+    CreditData = Shapes::StructureShape.new(name: 'CreditData')
+    CreditDataList = Shapes::ListShape.new(name: 'CreditDataList')
+    CreditId = Shapes::StringShape.new(name: 'CreditId')
+    CreditSharingType = Shapes::StringShape.new(name: 'CreditSharingType')
+    CreditStatus = Shapes::StringShape.new(name: 'CreditStatus')
+    CurrencyAmount = Shapes::StringShape.new(name: 'CurrencyAmount')
+    CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
     DeleteBillingViewRequest = Shapes::StructureShape.new(name: 'DeleteBillingViewRequest')
     DeleteBillingViewResponse = Shapes::StructureShape.new(name: 'DeleteBillingViewResponse')
     Dimension = Shapes::StringShape.new(name: 'Dimension')
@@ -50,9 +74,20 @@ module Aws::Billing
     DisassociateSourceViewsResponse = Shapes::StructureShape.new(name: 'DisassociateSourceViewsResponse')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Expression = Shapes::StructureShape.new(name: 'Expression')
+    FailedMonthsList = Shapes::ListShape.new(name: 'FailedMonthsList')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
+    GetBillingPreferencesRequest = Shapes::StructureShape.new(name: 'GetBillingPreferencesRequest')
+    GetBillingPreferencesRequestFeaturesList = Shapes::ListShape.new(name: 'GetBillingPreferencesRequestFeaturesList')
+    GetBillingPreferencesRequestFiltersList = Shapes::ListShape.new(name: 'GetBillingPreferencesRequestFiltersList')
+    GetBillingPreferencesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'GetBillingPreferencesRequestMaxResultsInteger')
+    GetBillingPreferencesResponse = Shapes::StructureShape.new(name: 'GetBillingPreferencesResponse')
     GetBillingViewRequest = Shapes::StructureShape.new(name: 'GetBillingViewRequest')
     GetBillingViewResponse = Shapes::StructureShape.new(name: 'GetBillingViewResponse')
+    GetCreditAllocationHistoryRequest = Shapes::StructureShape.new(name: 'GetCreditAllocationHistoryRequest')
+    GetCreditAllocationHistoryRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'GetCreditAllocationHistoryRequestMaxResultsInteger')
+    GetCreditAllocationHistoryResponse = Shapes::StructureShape.new(name: 'GetCreditAllocationHistoryResponse')
+    GetCreditsRequest = Shapes::StructureShape.new(name: 'GetCreditsRequest')
+    GetCreditsResponse = Shapes::StructureShape.new(name: 'GetCreditsResponse')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -63,9 +98,20 @@ module Aws::Billing
     ListSourceViewsForBillingViewResponse = Shapes::StructureShape.new(name: 'ListSourceViewsForBillingViewResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
+    Month = Shapes::IntegerShape.new(name: 'Month')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
+    PreferenceKey = Shapes::StringShape.new(name: 'PreferenceKey')
+    PreferenceValue = Shapes::StringShape.new(name: 'PreferenceValue')
+    ProductName = Shapes::StringShape.new(name: 'ProductName')
+    ProductNames = Shapes::ListShape.new(name: 'ProductNames')
+    PromoCode = Shapes::StringShape.new(name: 'PromoCode')
+    PurchaseType = Shapes::StringShape.new(name: 'PurchaseType')
+    PurchaseTypeApplications = Shapes::ListShape.new(name: 'PurchaseTypeApplications')
     QuotaCode = Shapes::StringShape.new(name: 'QuotaCode')
+    RedeemCreditsRequest = Shapes::StructureShape.new(name: 'RedeemCreditsRequest')
+    RedeemCreditsResponse = Shapes::StructureShape.new(name: 'RedeemCreditsResponse')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -79,6 +125,8 @@ module Aws::Billing
     SearchValue = Shapes::StringShape.new(name: 'SearchValue')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ShareableAccountIds = Shapes::ListShape.new(name: 'ShareableAccountIds')
+    String = Shapes::StringShape.new(name: 'String')
     StringSearch = Shapes::StructureShape.new(name: 'StringSearch')
     StringSearches = Shapes::ListShape.new(name: 'StringSearches')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -90,6 +138,8 @@ module Aws::Billing
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateBillingPreferencesRequest = Shapes::StructureShape.new(name: 'UpdateBillingPreferencesRequest')
+    UpdateBillingPreferencesResponse = Shapes::StructureShape.new(name: 'UpdateBillingPreferencesResponse')
     UpdateBillingViewRequest = Shapes::StructureShape.new(name: 'UpdateBillingViewRequest')
     UpdateBillingViewResponse = Shapes::StructureShape.new(name: 'UpdateBillingViewResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -106,12 +156,42 @@ module Aws::Billing
     ActiveTimeRange.add_member(:active_before_inclusive, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "activeBeforeInclusive"))
     ActiveTimeRange.struct_class = Types::ActiveTimeRange
 
+    Amount.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "currencyCode"))
+    Amount.add_member(:currency_amount, Shapes::ShapeRef.new(shape: CurrencyAmount, required: true, location_name: "currencyAmount"))
+    Amount.struct_class = Types::Amount
+
     AssociateSourceViewsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: BillingViewArn, required: true, location_name: "arn"))
     AssociateSourceViewsRequest.add_member(:source_views, Shapes::ShapeRef.new(shape: BillingViewSourceViewsList, required: true, location_name: "sourceViews"))
     AssociateSourceViewsRequest.struct_class = Types::AssociateSourceViewsRequest
 
     AssociateSourceViewsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: BillingViewArn, required: true, location_name: "arn"))
     AssociateSourceViewsResponse.struct_class = Types::AssociateSourceViewsResponse
+
+    BillingFeatureFilter.add_member(:name, Shapes::ShapeRef.new(shape: BillingFeatureFilterName, location_name: "name"))
+    BillingFeatureFilter.add_member(:value, Shapes::ShapeRef.new(shape: BillingFeatureFilterValues, location_name: "value"))
+    BillingFeatureFilter.struct_class = Types::BillingFeatureFilter
+
+    BillingFeatureFilterValues.member = Shapes::ShapeRef.new(shape: BillingFeatureFilterValue)
+
+    BillingPeriod.add_member(:year, Shapes::ShapeRef.new(shape: BillingYear, required: true, location_name: "year"))
+    BillingPeriod.add_member(:month, Shapes::ShapeRef.new(shape: Month, required: true, location_name: "month"))
+    BillingPeriod.struct_class = Types::BillingPeriod
+
+    BillingPreferenceForKey.add_member(:key, Shapes::ShapeRef.new(shape: PreferenceKey, required: true, location_name: "key"))
+    BillingPreferenceForKey.add_member(:value, Shapes::ShapeRef.new(shape: PreferenceValue, required: true, location_name: "value"))
+    BillingPreferenceForKey.struct_class = Types::BillingPreferenceForKey
+
+    BillingPreferenceSummary.add_member(:feature, Shapes::ShapeRef.new(shape: BillingFeature, required: true, location_name: "feature"))
+    BillingPreferenceSummary.add_member(:key, Shapes::ShapeRef.new(shape: PreferenceKey, required: true, location_name: "key"))
+    BillingPreferenceSummary.add_member(:value, Shapes::ShapeRef.new(shape: PreferenceValue, required: true, location_name: "value"))
+    BillingPreferenceSummary.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, location_name: "accountName"))
+    BillingPreferenceSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    BillingPreferenceSummary.add_member(:billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "billingPeriod"))
+    BillingPreferenceSummary.struct_class = Types::BillingPreferenceSummary
+
+    BillingPreferences.member = Shapes::ShapeRef.new(shape: BillingPreferenceSummary)
+
+    BillingPreferencesPerKey.member = Shapes::ShapeRef.new(shape: BillingPreferenceForKey)
 
     BillingViewArnList.member = Shapes::ShapeRef.new(shape: BillingViewArn)
 
@@ -175,6 +255,41 @@ module Aws::Billing
     CreateBillingViewResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     CreateBillingViewResponse.struct_class = Types::CreateBillingViewResponse
 
+    CreditAllocationHistoryEntry.add_member(:credit_id, Shapes::ShapeRef.new(shape: CreditId, required: true, location_name: "creditId"))
+    CreditAllocationHistoryEntry.add_member(:credit_amount, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "creditAmount"))
+    CreditAllocationHistoryEntry.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CreditAllocationHistoryEntry.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    CreditAllocationHistoryEntry.add_member(:applied_service_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "appliedServiceName"))
+    CreditAllocationHistoryEntry.add_member(:billing_month, Shapes::ShapeRef.new(shape: BillingMonth, required: true, location_name: "billingMonth"))
+    CreditAllocationHistoryEntry.add_member(:is_estimated_bill, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isEstimatedBill"))
+    CreditAllocationHistoryEntry.struct_class = Types::CreditAllocationHistoryEntry
+
+    CreditAllocationHistoryList.member = Shapes::ShapeRef.new(shape: CreditAllocationHistoryEntry)
+
+    CreditData.add_member(:credit_id, Shapes::ShapeRef.new(shape: CreditId, required: true, location_name: "creditId"))
+    CreditData.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    CreditData.add_member(:credit_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "creditType"))
+    CreditData.add_member(:initial_amount, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "initialAmount"))
+    CreditData.add_member(:remaining_amount, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "remainingAmount"))
+    CreditData.add_member(:estimated_amount, Shapes::ShapeRef.new(shape: Amount, location_name: "estimatedAmount"))
+    CreditData.add_member(:applicable_product_names, Shapes::ShapeRef.new(shape: ProductNames, location_name: "applicableProductNames"))
+    CreditData.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
+    CreditData.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
+    CreditData.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endDate"))
+    CreditData.add_member(:exhaust_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "exhaustDate"))
+    CreditData.add_member(:application_type, Shapes::ShapeRef.new(shape: ApplicationType, location_name: "applicationType"))
+    CreditData.add_member(:shareable_accounts, Shapes::ShapeRef.new(shape: ShareableAccountIds, location_name: "shareableAccounts"))
+    CreditData.add_member(:account_has_credit_sharing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "accountHasCreditSharingEnabled"))
+    CreditData.add_member(:credit_console_visibility, Shapes::ShapeRef.new(shape: String, location_name: "creditConsoleVisibility"))
+    CreditData.add_member(:credit_sharing_type, Shapes::ShapeRef.new(shape: CreditSharingType, location_name: "creditSharingType"))
+    CreditData.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: String, location_name: "costCategoryArn"))
+    CreditData.add_member(:rule_name, Shapes::ShapeRef.new(shape: String, location_name: "ruleName"))
+    CreditData.add_member(:credit_status, Shapes::ShapeRef.new(shape: CreditStatus, location_name: "creditStatus"))
+    CreditData.add_member(:purchase_type_applications, Shapes::ShapeRef.new(shape: PurchaseTypeApplications, location_name: "purchaseTypeApplications"))
+    CreditData.struct_class = Types::CreditData
+
+    CreditDataList.member = Shapes::ShapeRef.new(shape: CreditData)
+
     DeleteBillingViewRequest.add_member(:arn, Shapes::ShapeRef.new(shape: BillingViewArn, required: true, location_name: "arn"))
     DeleteBillingViewRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
     DeleteBillingViewRequest.struct_class = Types::DeleteBillingViewRequest
@@ -199,11 +314,50 @@ module Aws::Billing
     Expression.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, location_name: "timeRange"))
     Expression.struct_class = Types::Expression
 
+    FailedMonthsList.member = Shapes::ShapeRef.new(shape: BillingMonth)
+
+    GetBillingPreferencesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    GetBillingPreferencesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetBillingPreferencesRequestMaxResultsInteger, location_name: "maxResults"))
+    GetBillingPreferencesRequest.add_member(:features, Shapes::ShapeRef.new(shape: GetBillingPreferencesRequestFeaturesList, required: true, location_name: "features"))
+    GetBillingPreferencesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: GetBillingPreferencesRequestFiltersList, location_name: "filters"))
+    GetBillingPreferencesRequest.struct_class = Types::GetBillingPreferencesRequest
+
+    GetBillingPreferencesRequestFeaturesList.member = Shapes::ShapeRef.new(shape: BillingFeature)
+
+    GetBillingPreferencesRequestFiltersList.member = Shapes::ShapeRef.new(shape: BillingFeatureFilter)
+
+    GetBillingPreferencesResponse.add_member(:billing_preferences, Shapes::ShapeRef.new(shape: BillingPreferences, required: true, location_name: "billingPreferences"))
+    GetBillingPreferencesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    GetBillingPreferencesResponse.struct_class = Types::GetBillingPreferencesResponse
+
     GetBillingViewRequest.add_member(:arn, Shapes::ShapeRef.new(shape: BillingViewArn, required: true, location_name: "arn"))
     GetBillingViewRequest.struct_class = Types::GetBillingViewRequest
 
     GetBillingViewResponse.add_member(:billing_view, Shapes::ShapeRef.new(shape: BillingViewElement, required: true, location_name: "billingView"))
     GetBillingViewResponse.struct_class = Types::GetBillingViewResponse
+
+    GetCreditAllocationHistoryRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    GetCreditAllocationHistoryRequest.add_member(:credit_id, Shapes::ShapeRef.new(shape: Long, location_name: "creditId"))
+    GetCreditAllocationHistoryRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
+    GetCreditAllocationHistoryRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDate"))
+    GetCreditAllocationHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    GetCreditAllocationHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetCreditAllocationHistoryRequestMaxResultsInteger, location_name: "maxResults"))
+    GetCreditAllocationHistoryRequest.struct_class = Types::GetCreditAllocationHistoryRequest
+
+    GetCreditAllocationHistoryResponse.add_member(:credit_allocation_history_list, Shapes::ShapeRef.new(shape: CreditAllocationHistoryList, location_name: "creditAllocationHistoryList"))
+    GetCreditAllocationHistoryResponse.add_member(:partial_results, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "partialResults"))
+    GetCreditAllocationHistoryResponse.add_member(:failed_months, Shapes::ShapeRef.new(shape: FailedMonthsList, location_name: "failedMonths"))
+    GetCreditAllocationHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    GetCreditAllocationHistoryResponse.struct_class = Types::GetCreditAllocationHistoryResponse
+
+    GetCreditsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "accountId"))
+    GetCreditsRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
+    GetCreditsRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endDate"))
+    GetCreditsRequest.add_member(:payer_account_flag, Shapes::ShapeRef.new(shape: Boolean, location_name: "payerAccountFlag"))
+    GetCreditsRequest.struct_class = Types::GetCreditsRequest
+
+    GetCreditsResponse.add_member(:credits, Shapes::ShapeRef.new(shape: CreditDataList, location_name: "credits"))
+    GetCreditsResponse.struct_class = Types::GetCreditsResponse
 
     GetResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
@@ -244,6 +398,15 @@ module Aws::Billing
     ListTagsForResourceResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "resourceTags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ProductNames.member = Shapes::ShapeRef.new(shape: ProductName)
+
+    PurchaseTypeApplications.member = Shapes::ShapeRef.new(shape: PurchaseType)
+
+    RedeemCreditsRequest.add_member(:promo_code, Shapes::ShapeRef.new(shape: PromoCode, required: true, location_name: "promoCode"))
+    RedeemCreditsRequest.struct_class = Types::RedeemCreditsRequest
+
+    RedeemCreditsResponse.struct_class = Types::RedeemCreditsResponse
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
@@ -263,6 +426,8 @@ module Aws::Billing
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "serviceCode"))
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    ShareableAccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
 
     StringSearch.add_member(:search_option, Shapes::ShapeRef.new(shape: SearchOption, required: true, location_name: "searchOption"))
     StringSearch.add_member(:search_value, Shapes::ShapeRef.new(shape: SearchValue, required: true, location_name: "searchValue"))
@@ -292,6 +457,12 @@ module Aws::Billing
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateBillingPreferencesRequest.add_member(:feature, Shapes::ShapeRef.new(shape: BillingFeature, required: true, location_name: "feature"))
+    UpdateBillingPreferencesRequest.add_member(:billing_preferences_per_key, Shapes::ShapeRef.new(shape: BillingPreferencesPerKey, required: true, location_name: "billingPreferencesPerKey"))
+    UpdateBillingPreferencesRequest.struct_class = Types::UpdateBillingPreferencesRequest
+
+    UpdateBillingPreferencesResponse.struct_class = Types::UpdateBillingPreferencesResponse
 
     UpdateBillingViewRequest.add_member(:arn, Shapes::ShapeRef.new(shape: BillingViewArn, required: true, location_name: "arn"))
     UpdateBillingViewRequest.add_member(:name, Shapes::ShapeRef.new(shape: BillingViewName, location_name: "name"))
@@ -397,6 +568,18 @@ module Aws::Billing
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_billing_preferences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBillingPreferences"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBillingPreferencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBillingPreferencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_billing_view, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBillingView"
         o.http_method = "POST"
@@ -405,6 +588,36 @@ module Aws::Billing
         o.output = Shapes::ShapeRef.new(shape: GetBillingViewResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_credit_allocation_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCreditAllocationHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCreditAllocationHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCreditAllocationHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_credits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCredits"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCreditsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCreditsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -473,6 +686,18 @@ module Aws::Billing
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:redeem_credits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RedeemCredits"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RedeemCreditsRequest)
+        o.output = Shapes::ShapeRef.new(shape: RedeemCreditsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -494,6 +719,18 @@ module Aws::Billing
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_billing_preferences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBillingPreferences"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBillingPreferencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBillingPreferencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

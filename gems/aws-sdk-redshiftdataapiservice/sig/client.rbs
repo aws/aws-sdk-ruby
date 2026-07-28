@@ -90,6 +90,9 @@ module Aws
         def secret_arn: () -> ::String
         def workgroup_name: () -> ::String
         def session_id: () -> ::String
+        def status: () -> ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED")
+        def redshift_pid: () -> ::Integer
+        def has_result_set: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#batch_execute_statement-instance_method
       def batch_execute_statement: (
@@ -110,7 +113,9 @@ module Aws
                                      ?client_token: ::String,
                                      ?result_format: ("JSON" | "CSV"),
                                      ?session_keep_alive_seconds: ::Integer,
-                                     ?session_id: ::String
+                                     ?session_id: ::String,
+                                     ?execution_mode: ("TRANSACTION" | "AUTO_COMMIT"),
+                                     ?wait_time_seconds: ::Integer
                                    ) -> _BatchExecuteStatementResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchExecuteStatementResponseSuccess
 
@@ -146,10 +151,12 @@ module Aws
         def workgroup_name: () -> ::String
         def result_format: () -> ("JSON" | "CSV")
         def session_id: () -> ::String
+        def execution_mode: () -> ("TRANSACTION" | "AUTO_COMMIT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#describe_statement-instance_method
       def describe_statement: (
-                                id: ::String
+                                id: ::String,
+                                ?wait_time_seconds: ::Integer
                               ) -> _DescribeStatementResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStatementResponseSuccess
 
@@ -185,6 +192,9 @@ module Aws
         def secret_arn: () -> ::String
         def workgroup_name: () -> ::String
         def session_id: () -> ::String
+        def status: () -> ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED")
+        def redshift_pid: () -> ::Integer
+        def has_result_set: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#execute_statement-instance_method
       def execute_statement: (
@@ -205,7 +215,8 @@ module Aws
                                ?client_token: ::String,
                                ?result_format: ("JSON" | "CSV"),
                                ?session_keep_alive_seconds: ::Integer,
-                               ?session_id: ::String
+                               ?session_id: ::String,
+                               ?wait_time_seconds: ::Integer
                              ) -> _ExecuteStatementResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteStatementResponseSuccess
 
@@ -219,7 +230,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#get_statement_result-instance_method
       def get_statement_result: (
                                   id: ::String,
-                                  ?next_token: ::String
+                                  ?next_token: ::String,
+                                  ?wait_time_seconds: ::Integer
                                 ) -> _GetStatementResultResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStatementResultResponseSuccess
 
@@ -234,7 +246,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#get_statement_result_v2-instance_method
       def get_statement_result_v2: (
                                      id: ::String,
-                                     ?next_token: ::String
+                                     ?next_token: ::String,
+                                     ?wait_time_seconds: ::Integer
                                    ) -> _GetStatementResultV2ResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStatementResultV2ResponseSuccess
 
@@ -273,6 +286,24 @@ module Aws
                           ?workgroup_name: ::String
                         ) -> _ListSchemasResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchemasResponseSuccess
+
+      interface _ListSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionsResponse]
+        def sessions: () -> ::Array[Types::SessionData]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#list_sessions-instance_method
+      def list_sessions: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?session_id: ::String,
+                           ?status: ("AVAILABLE" | "BUSY" | "CLOSED"),
+                           ?role_level: bool,
+                           ?cluster_identifier: ::String,
+                           ?workgroup_name: ::String,
+                           ?database: ::String
+                         ) -> _ListSessionsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
 
       interface _ListStatementsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStatementsResponse]

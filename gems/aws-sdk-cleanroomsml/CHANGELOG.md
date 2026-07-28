@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2026-07-27)
+------------------
+
+* Feature - This release adds support for the CR.8X worker type for SQL (32 vCPU)
+
+1.49.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.48.0 (2026-05-26)
 ------------------
 

@@ -180,11 +180,7 @@ module Aws
                                 subnet_ids: Array[::String]
                               }?
                             },
-                            destination: {
-                              amp_configuration: {
-                                workspace_arn: ::String
-                              }?
-                            },
+                            destination: Params::destination,
                             ?role_configuration: {
                               source_role_arn: ::String?,
                               target_role_arn: ::String?
@@ -587,11 +583,7 @@ module Aws
                             ?scrape_configuration: {
                               configuration_blob: ::String?
                             },
-                            ?destination: {
-                              amp_configuration: {
-                                workspace_arn: ::String
-                              }?
-                            },
+                            ?destination: Params::destination,
                             ?role_configuration: {
                               source_role_arn: ::String?,
                               target_role_arn: ::String?

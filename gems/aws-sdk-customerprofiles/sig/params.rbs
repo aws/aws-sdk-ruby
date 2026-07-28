@@ -235,7 +235,16 @@ module Aws
         min_provisioned_tps: ::Integer?
       }?,
       included_columns: Hash[::String, Array[::String]]?,
-      excluded_columns: Hash[::String, Array[::String]]?
+      excluded_columns: Hash[::String, Array[::String]]?,
+      diversity_config: {
+        diversity_columns: Array[
+          {
+            name: ::String,
+            cap_type: ("PERCENTAGE" | "VALUE"),
+            target: ::String
+          }
+        ]?
+      }?
     }
 
       type group = {

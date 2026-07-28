@@ -932,6 +932,16 @@ module Aws
                                        ) -> _GetScheduledQueryHistoryResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScheduledQueryHistoryResponseSuccess
 
+      interface _GetStorageTierPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStorageTierPolicyResponse]
+        def storage_tier: () -> ("STANDARD" | "INTELLIGENT_TIERING")
+        def last_updated_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_storage_tier_policy-instance_method
+      def get_storage_tier_policy: (
+                                   ) -> _GetStorageTierPolicyResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStorageTierPolicyResponseSuccess
+
       interface _GetTransformerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTransformerResponse]
         def log_group_identifier: () -> ::String
@@ -1332,6 +1342,17 @@ module Aws
                                   retention_in_days: ::Integer
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutStorageTierPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutStorageTierPolicyResponse]
+        def storage_tier: () -> ("STANDARD" | "INTELLIGENT_TIERING")
+        def last_updated_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_storage_tier_policy-instance_method
+      def put_storage_tier_policy: (
+                                     storage_tier: ("STANDARD" | "INTELLIGENT_TIERING")
+                                   ) -> _PutStorageTierPolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutStorageTierPolicyResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_subscription_filter-instance_method
       def put_subscription_filter: (

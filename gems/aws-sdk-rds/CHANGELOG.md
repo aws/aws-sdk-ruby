@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.319.0 (2026-07-17)
+------------------
+
+* Feature - Adds the AssociatedRoles parameter to CreateDBCluster, RestoreDBClusterFromSnapshot, RestoreDBClusterToPointInTime, and RestoreDBClusterFromS3, letting customers associate IAM roles with an Aurora DB cluster at create or restore time instead of calling AddRoleToDBCluster afterward.
+
+1.318.0 (2026-07-15)
+------------------
+
+* Feature - Adds support for modifying EngineLifecycleSupport on DB instances and DB clusters through ModifyDBInstance and ModifyDBCluster.
+
+1.317.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.316.0 (2026-06-15)
 ------------------
 

@@ -61,6 +61,7 @@ module Aws
                       ?use_fips_endpoint: bool,
                       ?validate_params: bool,
                       ?endpoint_provider: untyped,
+                      ?service_type: string,
                       ?http_proxy: String,
                       ?http_open_timeout: (Float | Integer),
                       ?http_read_timeout: (Float | Integer),
@@ -91,11 +92,140 @@ module Aws
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _CreateAcmeDomainValidationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAcmeDomainValidationResponse]
+        def acme_domain_validation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#create_acme_domain_validation-instance_method
+      def create_acme_domain_validation: (
+                                           ?idempotency_token: ::String,
+                                           acme_endpoint_arn: ::String,
+                                           domain_name: ::String,
+                                           prevalidation_options: Params::prevalidation_options,
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             }
+                                           ]
+                                         ) -> _CreateAcmeDomainValidationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAcmeDomainValidationResponseSuccess
+
+      interface _CreateAcmeEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAcmeEndpointResponse]
+        def acme_endpoint_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#create_acme_endpoint-instance_method
+      def create_acme_endpoint: (
+                                  ?idempotency_token: ::String,
+                                  authorization_behavior: ("PRE_APPROVED"),
+                                  ?contact: ("REQUIRED" | "NOT_REQUIRED"),
+                                  certificate_authority: {
+                                    public_certificate_authority: {
+                                      allowed_key_algorithms: Array[("RSA_2048" | "EC_prime256v1" | "EC_secp384r1")]?
+                                    }?
+                                  },
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    }
+                                  ],
+                                  ?certificate_tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    }
+                                  ]
+                                ) -> _CreateAcmeEndpointResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAcmeEndpointResponseSuccess
+
+      interface _CreateAcmeExternalAccountBindingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAcmeExternalAccountBindingResponse]
+        def external_account_binding: () -> Types::AcmeExternalAccountBinding
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#create_acme_external_account_binding-instance_method
+      def create_acme_external_account_binding: (
+                                                  ?idempotency_token: ::String,
+                                                  acme_endpoint_arn: ::String,
+                                                  role_arn: ::String,
+                                                  ?expiration: {
+                                                    value: ::Integer,
+                                                    type: ("MINUTES" | "HOURS" | "DAYS")
+                                                  },
+                                                  ?tags: Array[
+                                                    {
+                                                      key: ::String,
+                                                      value: ::String?
+                                                    }
+                                                  ]
+                                                ) -> _CreateAcmeExternalAccountBindingResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAcmeExternalAccountBindingResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#delete_acme_domain_validation-instance_method
+      def delete_acme_domain_validation: (
+                                           acme_domain_validation_arn: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#delete_acme_endpoint-instance_method
+      def delete_acme_endpoint: (
+                                  acme_endpoint_arn: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#delete_acme_external_account_binding-instance_method
+      def delete_acme_external_account_binding: (
+                                                  acme_external_account_binding_arn: ::String
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#delete_certificate-instance_method
       def delete_certificate: (
                                 certificate_arn: ::String
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAcmeAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAcmeAccountResponse]
+        def acme_account: () -> Types::AcmeAccount
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#describe_acme_account-instance_method
+      def describe_acme_account: (
+                                   acme_endpoint_arn: ::String,
+                                   account_url: ::String
+                                 ) -> _DescribeAcmeAccountResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAcmeAccountResponseSuccess
+
+      interface _DescribeAcmeDomainValidationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAcmeDomainValidationResponse]
+        def acme_domain_validation: () -> Types::AcmeDomainValidation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#describe_acme_domain_validation-instance_method
+      def describe_acme_domain_validation: (
+                                             acme_domain_validation_arn: ::String
+                                           ) -> _DescribeAcmeDomainValidationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAcmeDomainValidationResponseSuccess
+
+      interface _DescribeAcmeEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAcmeEndpointResponse]
+        def acme_endpoint: () -> Types::AcmeEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#describe_acme_endpoint-instance_method
+      def describe_acme_endpoint: (
+                                    acme_endpoint_arn: ::String
+                                  ) -> _DescribeAcmeEndpointResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAcmeEndpointResponseSuccess
+
+      interface _DescribeAcmeExternalAccountBindingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAcmeExternalAccountBindingResponse]
+        def external_account_binding: () -> Types::AcmeExternalAccountBinding
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#describe_acme_external_account_binding-instance_method
+      def describe_acme_external_account_binding: (
+                                                    acme_external_account_binding_arn: ::String
+                                                  ) -> _DescribeAcmeExternalAccountBindingResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAcmeExternalAccountBindingResponseSuccess
 
       interface _DescribeCertificateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCertificateResponse]
@@ -128,6 +258,17 @@ module Aws
       def get_account_configuration: () -> _GetAccountConfigurationResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountConfigurationResponseSuccess
 
+      interface _GetAcmeExternalAccountBindingCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAcmeExternalAccountBindingCredentialsResponse]
+        def key_id: () -> ::String
+        def mac_key: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#get_acme_external_account_binding_credentials-instance_method
+      def get_acme_external_account_binding_credentials: (
+                                                           acme_external_account_binding_arn: ::String
+                                                         ) -> _GetAcmeExternalAccountBindingCredentialsResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAcmeExternalAccountBindingCredentialsResponseSuccess
+
       interface _GetCertificateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCertificateResponse]
         def certificate: () -> ::String
@@ -158,6 +299,57 @@ module Aws
                               ) -> _ImportCertificateResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCertificateResponseSuccess
 
+      interface _ListAcmeAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAcmeAccountsResponse]
+        def acme_accounts: () -> ::Array[Types::AcmeAccountSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#list_acme_accounts-instance_method
+      def list_acme_accounts: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                acme_endpoint_arn: ::String
+                              ) -> _ListAcmeAccountsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAcmeAccountsResponseSuccess
+
+      interface _ListAcmeDomainValidationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAcmeDomainValidationsResponse]
+        def acme_domain_validations: () -> ::Array[Types::AcmeDomainValidationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#list_acme_domain_validations-instance_method
+      def list_acme_domain_validations: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer,
+                                          acme_endpoint_arn: ::String
+                                        ) -> _ListAcmeDomainValidationsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAcmeDomainValidationsResponseSuccess
+
+      interface _ListAcmeEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAcmeEndpointsResponse]
+        def acme_endpoints: () -> ::Array[Types::AcmeEndpointSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#list_acme_endpoints-instance_method
+      def list_acme_endpoints: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListAcmeEndpointsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAcmeEndpointsResponseSuccess
+
+      interface _ListAcmeExternalAccountBindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAcmeExternalAccountBindingsResponse]
+        def external_account_bindings: () -> ::Array[Types::AcmeExternalAccountBindingSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#list_acme_external_account_bindings-instance_method
+      def list_acme_external_account_bindings: (
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer,
+                                                 acme_endpoint_arn: ::String
+                                               ) -> _ListAcmeExternalAccountBindingsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAcmeExternalAccountBindingsResponseSuccess
+
       interface _ListCertificatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCertificatesResponse]
         def next_token: () -> ::String
@@ -166,6 +358,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#list_certificates-instance_method
       def list_certificates: (
                                ?certificate_statuses: Array[("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")],
+                               ?certificate_key_pair_origins: Array[("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")],
                                ?includes: {
                                  extended_key_usage: Array[("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")]?,
                                  key_usage: Array[("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")]?,
@@ -189,6 +382,16 @@ module Aws
                                        certificate_arn: ::String
                                      ) -> _ListTagsForCertificateResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForCertificateResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#put_account_configuration-instance_method
       def put_account_configuration: (
@@ -257,6 +460,19 @@ module Aws
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#revoke_acme_account-instance_method
+      def revoke_acme_account: (
+                                 acme_endpoint_arn: ::String,
+                                 account_url: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#revoke_acme_external_account_binding-instance_method
+      def revoke_acme_external_account_binding: (
+                                                  acme_external_account_binding_arn: ::String
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _RevokeCertificateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RevokeCertificateResponse]
         def certificate_arn: () -> ::String
@@ -278,10 +494,49 @@ module Aws
                                  ?filter_statement: Params::certificate_filter_statement,
                                  ?max_results: ::Integer,
                                  ?next_token: ::String,
-                                 ?sort_by: ("CREATED_AT" | "NOT_AFTER" | "STATUS" | "RENEWAL_STATUS" | "EXPORTED" | "IN_USE" | "NOT_BEFORE" | "KEY_ALGORITHM" | "TYPE" | "CERTIFICATE_ARN" | "COMMON_NAME" | "REVOKED_AT" | "RENEWAL_ELIGIBILITY" | "ISSUED_AT" | "MANAGED_BY" | "EXPORT_OPTION" | "VALIDATION_METHOD" | "IMPORTED_AT"),
+                                 ?sort_by: ("CREATED_AT" | "NOT_AFTER" | "STATUS" | "RENEWAL_STATUS" | "EXPORTED" | "IN_USE" | "NOT_BEFORE" | "KEY_ALGORITHM" | "TYPE" | "CERTIFICATE_ARN" | "COMMON_NAME" | "REVOKED_AT" | "RENEWAL_ELIGIBILITY" | "ISSUED_AT" | "MANAGED_BY" | "EXPORT_OPTION" | "VALIDATION_METHOD" | "IMPORTED_AT" | "ACME_ENDPOINT_ARN" | "ACME_ACCOUNT_ID" | "CERTIFICATE_KEY_PAIR_ORIGIN"),
                                  ?sort_order: ("ASCENDING" | "DESCENDING")
                                ) -> _SearchCertificatesResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchCertificatesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            }
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#update_acme_domain_validation-instance_method
+      def update_acme_domain_validation: (
+                                           acme_domain_validation_arn: ::String,
+                                           ?prevalidation_options: Params::prevalidation_options
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#update_acme_endpoint-instance_method
+      def update_acme_endpoint: (
+                                  acme_endpoint_arn: ::String,
+                                  ?authorization_behavior: ("PRE_APPROVED"),
+                                  ?contact: ("REQUIRED" | "NOT_REQUIRED"),
+                                  ?certificate_authority: {
+                                    public_certificate_authority: {
+                                      allowed_key_algorithms: Array[("RSA_2048" | "EC_prime256v1" | "EC_secp384r1")]?
+                                    }?
+                                  }
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#update_certificate_options-instance_method
       def update_certificate_options: (
@@ -294,7 +549,23 @@ module Aws
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#wait_until-instance_method
-      def wait_until: (:certificate_validated waiter_name, 
+      def wait_until: (:acme_domain_validation_deleted waiter_name, 
+                    acme_domain_validation_arn: ::String
+                  ) -> Client::_DescribeAcmeDomainValidationResponseSuccess
+                    | (:acme_domain_validation_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAcmeDomainValidationResponseSuccess
+                    | (:acme_domain_validation_validated waiter_name, 
+                    acme_domain_validation_arn: ::String
+                  ) -> Client::_DescribeAcmeDomainValidationResponseSuccess
+                    | (:acme_domain_validation_validated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAcmeDomainValidationResponseSuccess
+                    | (:acme_endpoint_active waiter_name, 
+                    acme_endpoint_arn: ::String
+                  ) -> Client::_DescribeAcmeEndpointResponseSuccess
+                    | (:acme_endpoint_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAcmeEndpointResponseSuccess
+                    | (:acme_endpoint_deleted waiter_name, 
+                    acme_endpoint_arn: ::String
+                  ) -> Client::_DescribeAcmeEndpointResponseSuccess
+                    | (:acme_endpoint_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAcmeEndpointResponseSuccess
+                    | (:certificate_validated waiter_name, 
                     certificate_arn: ::String
                   ) -> Client::_DescribeCertificateResponseSuccess
                     | (:certificate_validated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeCertificateResponseSuccess

@@ -844,8 +844,8 @@ module Aws::EntityResolution
     # processing job. The workflow name must be unique. To modify an
     # existing workflow, use `UpdateMatchingWorkflow`.
     #
-    # For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    # incremental processing is not supported.
+    # For workflows where `resolutionType` is `PROVIDER`, incremental
+    # processing is not supported.
     #
     # @option params [required, String] :workflow_name
     #   The name of the workflow. There can't be multiple `MatchingWorkflows`
@@ -871,8 +871,8 @@ module Aws::EntityResolution
     #   contains only the `incrementalRunType` field, which appears as
     #   "Automatic" in the console.
     #
-    #   For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    #   incremental processing is not supported.
+    #   For workflows where `resolutionType` is `PROVIDER`, incremental
+    #   processing is not supported.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
@@ -945,6 +945,7 @@ module Aws::EntityResolution
     #           enable_transitive_matching: false,
     #         },
     #       },
+    #       enable_real_time_matching: false,
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
     #         provider_configuration: {
@@ -992,6 +993,7 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.rule_condition_properties.rules[0].rule_name #=> String
     #   resp.resolution_techniques.rule_condition_properties.rules[0].condition #=> String
     #   resp.resolution_techniques.rule_condition_properties.matching_config.enable_transitive_matching #=> Boolean
+    #   resp.resolution_techniques.enable_real_time_matching #=> Boolean
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.incremental_run_config.incremental_run_type #=> String, one of "IMMEDIATE"
@@ -1268,6 +1270,10 @@ module Aws::EntityResolution
     #   Generates new match IDs without checking existing matches, with
     #   updates processed asynchronously. Provides fastest response time but
     #   should only be used for records known to be unique.
+    #
+    #   <note markdown="1"> Advanced matching workflows don't support the `processingType` field.
+    #
+    #    </note>
     #
     # @return [Types::GenerateMatchIdOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1652,6 +1658,7 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.rule_condition_properties.rules[0].rule_name #=> String
     #   resp.resolution_techniques.rule_condition_properties.rules[0].condition #=> String
     #   resp.resolution_techniques.rule_condition_properties.matching_config.enable_transitive_matching #=> Boolean
+    #   resp.resolution_techniques.enable_real_time_matching #=> Boolean
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.created_at #=> Time
@@ -2587,8 +2594,8 @@ module Aws::EntityResolution
     # Updates an existing matching workflow. The workflow must already exist
     # for this operation to succeed.
     #
-    # For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    # incremental processing is not supported.
+    # For workflows where `resolutionType` is `PROVIDER`, incremental
+    # processing is not supported.
     #
     # @option params [required, String] :workflow_name
     #   The name of the workflow to be retrieved.
@@ -2613,8 +2620,8 @@ module Aws::EntityResolution
     #   contains only the `incrementalRunType` field, which appears as
     #   "Automatic" in the console.
     #
-    #   For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    #   incremental processing is not supported.
+    #   For workflows where `resolutionType` is `PROVIDER`, incremental
+    #   processing is not supported.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
@@ -2683,6 +2690,7 @@ module Aws::EntityResolution
     #           enable_transitive_matching: false,
     #         },
     #       },
+    #       enable_real_time_matching: false,
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
     #         provider_configuration: {
@@ -2726,6 +2734,7 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.rule_condition_properties.rules[0].rule_name #=> String
     #   resp.resolution_techniques.rule_condition_properties.rules[0].condition #=> String
     #   resp.resolution_techniques.rule_condition_properties.matching_config.enable_transitive_matching #=> Boolean
+    #   resp.resolution_techniques.enable_real_time_matching #=> Boolean
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.incremental_run_config.incremental_run_type #=> String, one of "IMMEDIATE"
@@ -2824,7 +2833,7 @@ module Aws::EntityResolution
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

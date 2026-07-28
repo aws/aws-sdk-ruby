@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2026-07-14)
+------------------
+
+* Feature - Fast recovery of EC2 based drs workloads by skipping the conversion step
+
+1.67.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.66.0 (2026-05-29)
 ------------------
 

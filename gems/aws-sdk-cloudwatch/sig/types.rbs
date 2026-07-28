@@ -19,7 +19,7 @@ module Aws::CloudWatch
     class AlarmHistoryItem
       attr_accessor alarm_name: ::String
       attr_accessor alarm_contributor_id: ::String
-      attr_accessor alarm_type: ("CompositeAlarm" | "MetricAlarm")
+      attr_accessor alarm_type: ("CompositeAlarm" | "MetricAlarm" | "LogAlarm")
       attr_accessor timestamp: ::Time
       attr_accessor history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action" | "AlarmContributorStateUpdate" | "AlarmContributorAction")
       attr_accessor history_summary: ::String
@@ -45,6 +45,7 @@ module Aws::CloudWatch
     end
 
     class AnomalyDetector
+      attr_accessor anomaly_detector_id: ::String
       attr_accessor namespace: ::String
       attr_accessor metric_name: ::String
       attr_accessor dimensions: ::Array[Types::Dimension]
@@ -151,6 +152,7 @@ module Aws::CloudWatch
     end
 
     class DeleteAnomalyDetectorInput
+      attr_accessor anomaly_detector_id: ::String
       attr_accessor namespace: ::String
       attr_accessor metric_name: ::String
       attr_accessor dimensions: ::Array[Types::Dimension]
@@ -204,7 +206,7 @@ module Aws::CloudWatch
     class DescribeAlarmHistoryInput
       attr_accessor alarm_name: ::String
       attr_accessor alarm_contributor_id: ::String
-      attr_accessor alarm_types: ::Array[("CompositeAlarm" | "MetricAlarm")]
+      attr_accessor alarm_types: ::Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")]
       attr_accessor history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action" | "AlarmContributorStateUpdate" | "AlarmContributorAction")
       attr_accessor start_date: ::Time
       attr_accessor end_date: ::Time
@@ -239,7 +241,7 @@ module Aws::CloudWatch
     class DescribeAlarmsInput
       attr_accessor alarm_names: ::Array[::String]
       attr_accessor alarm_name_prefix: ::String
-      attr_accessor alarm_types: ::Array[("CompositeAlarm" | "MetricAlarm")]
+      attr_accessor alarm_types: ::Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")]
       attr_accessor children_of_alarm_name: ::String
       attr_accessor parents_of_alarm_name: ::String
       attr_accessor state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
@@ -252,11 +254,13 @@ module Aws::CloudWatch
     class DescribeAlarmsOutput
       attr_accessor composite_alarms: ::Array[Types::CompositeAlarm]
       attr_accessor metric_alarms: ::Array[Types::MetricAlarm]
+      attr_accessor log_alarms: ::Array[Types::LogAlarm]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class DescribeAnomalyDetectorsInput
+      attr_accessor anomaly_detector_ids: ::Array[::String]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor namespace: ::String
@@ -354,6 +358,20 @@ module Aws::CloudWatch
       class PromQlCriteria < EvaluationCriteria
       end
       class Unknown < EvaluationCriteria
+      end
+    end
+
+    class EvaluationWindow
+      attr_accessor wall_clock_window: Types::WallClockWindow
+      attr_accessor sliding_window: Types::SlidingWindow
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class WallClockWindow < EvaluationWindow
+      end
+      class SlidingWindow < EvaluationWindow
+      end
+      class Unknown < EvaluationWindow
       end
     end
 
@@ -665,6 +683,32 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class LogAlarm
+      attr_accessor alarm_name: ::String
+      attr_accessor alarm_arn: ::String
+      attr_accessor alarm_description: ::String
+      attr_accessor alarm_configuration_updated_timestamp: ::Time
+      attr_accessor actions_enabled: bool
+      attr_accessor ok_actions: ::Array[::String]
+      attr_accessor alarm_actions: ::Array[::String]
+      attr_accessor insufficient_data_actions: ::Array[::String]
+      attr_accessor state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+      attr_accessor state_reason: ::String
+      attr_accessor state_reason_data: ::String
+      attr_accessor state_updated_timestamp: ::Time
+      attr_accessor scheduled_query_configuration: Types::ScheduledQueryConfiguration
+      attr_accessor query_results_to_evaluate: ::Integer
+      attr_accessor query_results_to_alarm: ::Integer
+      attr_accessor threshold: ::Float
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold" | "LessThanLowerOrGreaterThanUpperThreshold" | "LessThanLowerThreshold" | "GreaterThanUpperThreshold")
+      attr_accessor treat_missing_data: ::String
+      attr_accessor state_transitioned_timestamp: ::Time
+      attr_accessor evaluation_state: ("PARTIAL_DATA" | "EVALUATION_FAILURE" | "EVALUATION_ERROR")
+      attr_accessor action_log_line_count: ::Integer
+      attr_accessor action_log_line_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class ManagedRule
       attr_accessor template_name: ::String
       attr_accessor resource_arn: ::String
@@ -728,6 +772,7 @@ module Aws::CloudWatch
       attr_accessor threshold_metric_id: ::String
       attr_accessor evaluation_state: ("PARTIAL_DATA" | "EVALUATION_FAILURE" | "EVALUATION_ERROR")
       attr_accessor state_transitioned_timestamp: ::Time
+      attr_accessor evaluation_window: Types::EvaluationWindow
       attr_accessor evaluation_criteria: Types::EvaluationCriteria
       attr_accessor evaluation_interval: ::Integer
       SENSITIVE: []
@@ -855,7 +900,9 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
-    class PutAnomalyDetectorOutput < Aws::EmptyStructure
+    class PutAnomalyDetectorOutput
+      attr_accessor anomaly_detector_id: ::String
+      SENSITIVE: []
     end
 
     class PutCompositeAlarmInput
@@ -897,6 +944,25 @@ module Aws::CloudWatch
     class PutInsightRuleOutput < Aws::EmptyStructure
     end
 
+    class PutLogAlarmInput
+      attr_accessor alarm_name: ::String
+      attr_accessor alarm_description: ::String
+      attr_accessor scheduled_query_configuration: Types::ScheduledQueryConfiguration
+      attr_accessor action_log_line_count: ::Integer
+      attr_accessor action_log_line_role_arn: ::String
+      attr_accessor actions_enabled: bool
+      attr_accessor ok_actions: ::Array[::String]
+      attr_accessor alarm_actions: ::Array[::String]
+      attr_accessor insufficient_data_actions: ::Array[::String]
+      attr_accessor query_results_to_evaluate: ::Integer
+      attr_accessor query_results_to_alarm: ::Integer
+      attr_accessor threshold: ::Float
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold" | "LessThanLowerOrGreaterThanUpperThreshold" | "LessThanLowerThreshold" | "GreaterThanUpperThreshold")
+      attr_accessor treat_missing_data: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class PutManagedInsightRulesInput
       attr_accessor managed_rules: ::Array[Types::ManagedRule]
       SENSITIVE: []
@@ -930,6 +996,7 @@ module Aws::CloudWatch
       attr_accessor metrics: ::Array[Types::MetricDataQuery]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor threshold_metric_id: ::String
+      attr_accessor evaluation_window: Types::EvaluationWindow
       attr_accessor evaluation_criteria: Types::EvaluationCriteria
       attr_accessor evaluation_interval: ::Integer
       SENSITIVE: []
@@ -967,6 +1034,11 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class ResourceConflict
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ResourceNotFound
       attr_accessor message: ::String
       SENSITIVE: []
@@ -990,6 +1062,24 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class ScheduleConfiguration
+      attr_accessor schedule_expression: ::String
+      attr_accessor start_time_offset: ::Integer
+      attr_accessor end_time_offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScheduledQueryConfiguration
+      attr_accessor query_string: ::String
+      attr_accessor log_group_identifiers: ::Array[::String]
+      attr_accessor query_arn: ::String
+      attr_accessor scheduled_query_role_arn: ::String
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration
+      attr_accessor aggregation_expression: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class SetAlarmStateInput
       attr_accessor alarm_name: ::String
       attr_accessor state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
@@ -1005,6 +1095,9 @@ module Aws::CloudWatch
       attr_accessor dimensions: ::Array[Types::Dimension]
       attr_accessor stat: ::String
       SENSITIVE: []
+    end
+
+    class SlidingWindow < Aws::EmptyStructure
     end
 
     class StartMetricStreamsInput
@@ -1065,6 +1158,11 @@ module Aws::CloudWatch
     end
 
     class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class WallClockWindow
+      attr_accessor timezone: ::String
+      SENSITIVE: []
     end
   end
 end

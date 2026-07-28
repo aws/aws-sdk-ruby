@@ -106,6 +106,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#delete_anomaly_detector-instance_method
       def delete_anomaly_detector: (
+                                     ?anomaly_detector_id: ::String,
                                      ?namespace: ::String,
                                      ?metric_name: ::String,
                                      ?dimensions: Array[
@@ -169,7 +170,7 @@ module Aws
       def describe_alarm_history: (
                                     ?alarm_name: ::String,
                                     ?alarm_contributor_id: ::String,
-                                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
+                                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")],
                                     ?history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action" | "AlarmContributorStateUpdate" | "AlarmContributorAction"),
                                     ?start_date: ::Time,
                                     ?end_date: ::Time,
@@ -183,13 +184,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAlarmsOutput]
         def composite_alarms: () -> ::Array[Types::CompositeAlarm]
         def metric_alarms: () -> ::Array[Types::MetricAlarm]
+        def log_alarms: () -> ::Array[Types::LogAlarm]
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#describe_alarms-instance_method
       def describe_alarms: (
                              ?alarm_names: Array[::String],
                              ?alarm_name_prefix: ::String,
-                             ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
+                             ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")],
                              ?children_of_alarm_name: ::String,
                              ?parents_of_alarm_name: ::String,
                              ?state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA"),
@@ -227,6 +229,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#describe_anomaly_detectors-instance_method
       def describe_anomaly_detectors: (
+                                        ?anomaly_detector_ids: Array[::String],
                                         ?next_token: ::String,
                                         ?max_results: ::Integer,
                                         ?namespace: ::String,
@@ -556,6 +559,7 @@ module Aws
 
       interface _PutAnomalyDetectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAnomalyDetectorOutput]
+        def anomaly_detector_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#put_anomaly_detector-instance_method
       def put_anomaly_detector: (
@@ -641,6 +645,48 @@ module Aws
                             ) -> _PutInsightRuleResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInsightRuleResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#put_log_alarm-instance_method
+      def put_log_alarm: (
+                           alarm_name: ::String,
+                           ?alarm_description: ::String,
+                           scheduled_query_configuration: {
+                             query_string: ::String,
+                             log_group_identifiers: Array[::String]?,
+                             query_arn: ::String?,
+                             scheduled_query_role_arn: ::String,
+                             schedule_configuration: {
+                               schedule_expression: ::String,
+                               start_time_offset: ::Integer,
+                               end_time_offset: ::Integer?
+                             },
+                             aggregation_expression: ::String,
+                             tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               }
+                             ]?
+                           },
+                           ?action_log_line_count: ::Integer,
+                           ?action_log_line_role_arn: ::String,
+                           ?actions_enabled: bool,
+                           ?ok_actions: Array[::String],
+                           ?alarm_actions: Array[::String],
+                           ?insufficient_data_actions: Array[::String],
+                           query_results_to_evaluate: ::Integer,
+                           query_results_to_alarm: ::Integer,
+                           threshold: ::Float,
+                           comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold" | "LessThanLowerOrGreaterThanUpperThreshold" | "LessThanLowerThreshold" | "GreaterThanUpperThreshold"),
+                           ?treat_missing_data: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             }
+                           ]
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _PutManagedInsightRulesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutManagedInsightRulesOutput]
         def failures: () -> ::Array[Types::PartialFailure]
@@ -698,6 +744,13 @@ module Aws
                                 }
                               ],
                               ?threshold_metric_id: ::String,
+                              ?evaluation_window: {
+                                wall_clock_window: {
+                                  timezone: ::String?
+                                }?,
+                                sliding_window: {
+                                }?
+                              },
                               ?evaluation_criteria: {
                                 prom_ql_criteria: {
                                   query: ::String,
@@ -845,7 +898,7 @@ module Aws
       def wait_until: (:alarm_exists waiter_name, 
                     ?alarm_names: Array[::String],
                     ?alarm_name_prefix: ::String,
-                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
+                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")],
                     ?children_of_alarm_name: ::String,
                     ?parents_of_alarm_name: ::String,
                     ?state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA"),
@@ -861,7 +914,7 @@ module Aws
                     | (:composite_alarm_exists waiter_name, 
                     ?alarm_names: Array[::String],
                     ?alarm_name_prefix: ::String,
-                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
+                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")],
                     ?children_of_alarm_name: ::String,
                     ?parents_of_alarm_name: ::String,
                     ?state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA"),
@@ -870,6 +923,18 @@ module Aws
                     ?next_token: ::String
                   ) -> Client::_DescribeAlarmsResponseSuccess
                     | (:composite_alarm_exists waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAlarmsResponseSuccess
+                    | (:log_alarm_exists waiter_name, 
+                    ?alarm_names: Array[::String],
+                    ?alarm_name_prefix: ::String,
+                    ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm" | "LogAlarm")],
+                    ?children_of_alarm_name: ::String,
+                    ?parents_of_alarm_name: ::String,
+                    ?state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA"),
+                    ?action_prefix: ::String,
+                    ?max_records: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeAlarmsResponseSuccess
+                    | (:log_alarm_exists waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAlarmsResponseSuccess
     end
   end
 end

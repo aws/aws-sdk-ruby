@@ -803,7 +803,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp = client.create_event_destination({
     #     configuration_set_name: "ConfigurationSetNameOrArn", # required
     #     event_destination_name: "EventDestinationName", # required
-    #     matching_event_types: ["ALL"], # required, accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, TEXT_PROTECT_BLOCKED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED, MEDIA_ALL, MEDIA_PENDING, MEDIA_QUEUED, MEDIA_SUCCESSFUL, MEDIA_DELIVERED, MEDIA_INVALID, MEDIA_INVALID_MESSAGE, MEDIA_UNREACHABLE, MEDIA_CARRIER_UNREACHABLE, MEDIA_BLOCKED, MEDIA_CARRIER_BLOCKED, MEDIA_SPAM, MEDIA_UNKNOWN, MEDIA_TTL_EXPIRED, MEDIA_FILE_INACCESSIBLE, MEDIA_FILE_TYPE_UNSUPPORTED, MEDIA_FILE_SIZE_EXCEEDED
+    #     matching_event_types: ["ALL"], # required, accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, TEXT_PROTECT_BLOCKED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED, MEDIA_ALL, MEDIA_PENDING, MEDIA_QUEUED, MEDIA_SUCCESSFUL, MEDIA_DELIVERED, MEDIA_INVALID, MEDIA_INVALID_MESSAGE, MEDIA_UNREACHABLE, MEDIA_CARRIER_UNREACHABLE, MEDIA_BLOCKED, MEDIA_CARRIER_BLOCKED, MEDIA_SPAM, MEDIA_UNKNOWN, MEDIA_TTL_EXPIRED, MEDIA_FILE_INACCESSIBLE, MEDIA_FILE_TYPE_UNSUPPORTED, MEDIA_FILE_SIZE_EXCEEDED, RCS_ALL, RCS_QUEUED, RCS_SENT, RCS_DELIVERED, RCS_READ, RCS_FAILED, RCS_TTL_EXPIRED, RCS_PROTECT_BLOCKED, RCS_FALLEN_BACK_TO_SMS
     #     cloud_watch_logs_destination: {
     #       iam_role_arn: "IamRoleArn", # required
     #       log_group_arn: "LogGroupArn", # required
@@ -825,7 +825,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destination.event_destination_name #=> String
     #   resp.event_destination.enabled #=> Boolean
     #   resp.event_destination.matching_event_types #=> Array
-    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
+    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED", "RCS_ALL", "RCS_QUEUED", "RCS_SENT", "RCS_DELIVERED", "RCS_READ", "RCS_FAILED", "RCS_TTL_EXPIRED", "RCS_PROTECT_BLOCKED", "RCS_FALLEN_BACK_TO_SMS"
     #   resp.event_destination.cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destination.cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destination.kinesis_firehose_destination.iam_role_arn #=> String
@@ -1299,6 +1299,10 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::CreateRcsAgentResult#two_way_channel_arn #two_way_channel_arn} => String
     #   * {Types::CreateRcsAgentResult#two_way_channel_role #two_way_channel_role} => String
     #   * {Types::CreateRcsAgentResult#two_way_enabled #two_way_enabled} => Boolean
+    #   * {Types::CreateRcsAgentResult#two_way_media_s3_bucket_name #two_way_media_s3_bucket_name} => String
+    #   * {Types::CreateRcsAgentResult#two_way_media_s3_key_prefix #two_way_media_s3_key_prefix} => String
+    #   * {Types::CreateRcsAgentResult#two_way_media_s3_role #two_way_media_s3_role} => String
+    #   * {Types::CreateRcsAgentResult#two_way_rcs_events_enabled #two_way_rcs_events_enabled} => Array&lt;String&gt;
     #   * {Types::CreateRcsAgentResult#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
@@ -1327,6 +1331,11 @@ module Aws::PinpointSMSVoiceV2
     #   resp.two_way_channel_arn #=> String
     #   resp.two_way_channel_role #=> String
     #   resp.two_way_enabled #=> Boolean
+    #   resp.two_way_media_s3_bucket_name #=> String
+    #   resp.two_way_media_s3_key_prefix #=> String
+    #   resp.two_way_media_s3_role #=> String
+    #   resp.two_way_rcs_events_enabled #=> Array
+    #   resp.two_way_rcs_events_enabled[0] #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1699,7 +1708,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destinations[0].event_destination_name #=> String
     #   resp.event_destinations[0].enabled #=> Boolean
     #   resp.event_destinations[0].matching_event_types #=> Array
-    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
+    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED", "RCS_ALL", "RCS_QUEUED", "RCS_SENT", "RCS_DELIVERED", "RCS_READ", "RCS_FAILED", "RCS_TTL_EXPIRED", "RCS_PROTECT_BLOCKED", "RCS_FALLEN_BACK_TO_SMS"
     #   resp.event_destinations[0].cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destinations[0].cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destinations[0].kinesis_firehose_destination.iam_role_arn #=> String
@@ -1837,7 +1846,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destination.event_destination_name #=> String
     #   resp.event_destination.enabled #=> Boolean
     #   resp.event_destination.matching_event_types #=> Array
-    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
+    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED", "RCS_ALL", "RCS_QUEUED", "RCS_SENT", "RCS_DELIVERED", "RCS_READ", "RCS_FAILED", "RCS_TTL_EXPIRED", "RCS_PROTECT_BLOCKED", "RCS_FALLEN_BACK_TO_SMS"
     #   resp.event_destination.cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destination.cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destination.kinesis_firehose_destination.iam_role_arn #=> String
@@ -2317,6 +2326,7 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::DeleteRcsAgentResult#two_way_channel_arn #two_way_channel_arn} => String
     #   * {Types::DeleteRcsAgentResult#two_way_channel_role #two_way_channel_role} => String
     #   * {Types::DeleteRcsAgentResult#two_way_enabled #two_way_enabled} => Boolean
+    #   * {Types::DeleteRcsAgentResult#two_way_rcs_events_enabled #two_way_rcs_events_enabled} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2336,6 +2346,8 @@ module Aws::PinpointSMSVoiceV2
     #   resp.two_way_channel_arn #=> String
     #   resp.two_way_channel_role #=> String
     #   resp.two_way_enabled #=> Boolean
+    #   resp.two_way_rcs_events_enabled #=> Array
+    #   resp.two_way_rcs_events_enabled[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRcsAgent AWS API Documentation
     #
@@ -2343,6 +2355,27 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def delete_rcs_agent(params = {}, options = {})
       req = build_request(:delete_rcs_agent, params)
+      req.send_request(options)
+    end
+
+    # Deletes an account-level monthly spending limit override for sending
+    # RCS messages. Deleting a spend limit override sets the `EnforcedLimit`
+    # to equal the `MaxLimit`, which is set by Amazon Web Services.
+    #
+    # @return [Types::DeleteRcsMessageSpendLimitOverrideResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRcsMessageSpendLimitOverrideResult#monthly_limit #monthly_limit} => Integer
+    #
+    # @example Response structure
+    #
+    #   resp.monthly_limit #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRcsMessageSpendLimitOverride AWS API Documentation
+    #
+    # @overload delete_rcs_message_spend_limit_override(params = {})
+    # @param [Hash] params ({})
+    def delete_rcs_message_spend_limit_override(params = {}, options = {})
+      req = build_request(:delete_rcs_message_spend_limit_override, params)
       req.send_request(options)
     end
 
@@ -2752,7 +2785,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.configuration_sets[0].event_destinations[0].event_destination_name #=> String
     #   resp.configuration_sets[0].event_destinations[0].enabled #=> Boolean
     #   resp.configuration_sets[0].event_destinations[0].matching_event_types #=> Array
-    #   resp.configuration_sets[0].event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
+    #   resp.configuration_sets[0].event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED", "RCS_ALL", "RCS_QUEUED", "RCS_SENT", "RCS_DELIVERED", "RCS_READ", "RCS_FAILED", "RCS_TTL_EXPIRED", "RCS_PROTECT_BLOCKED", "RCS_FALLEN_BACK_TO_SMS"
     #   resp.configuration_sets[0].event_destinations[0].cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.configuration_sets[0].event_destinations[0].cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.configuration_sets[0].event_destinations[0].kinesis_firehose_destination.iam_role_arn #=> String
@@ -3636,6 +3669,11 @@ module Aws::PinpointSMSVoiceV2
     #   resp.rcs_agents[0].two_way_channel_role #=> String
     #   resp.rcs_agents[0].two_way_enabled #=> Boolean
     #   resp.rcs_agents[0].pool_id #=> String
+    #   resp.rcs_agents[0].two_way_media_s3_bucket_name #=> String
+    #   resp.rcs_agents[0].two_way_media_s3_key_prefix #=> String
+    #   resp.rcs_agents[0].two_way_media_s3_role #=> String
+    #   resp.rcs_agents[0].two_way_rcs_events_enabled #=> Array
+    #   resp.rcs_agents[0].two_way_rcs_events_enabled[0] #=> String
     #   resp.rcs_agents[0].testing_agent.status #=> String, one of "CREATED", "PENDING", "ACTIVE"
     #   resp.rcs_agents[0].testing_agent.testing_agent_id #=> String
     #   resp.rcs_agents[0].testing_agent.registration_id #=> String
@@ -4227,7 +4265,7 @@ module Aws::PinpointSMSVoiceV2
     # @example Response structure
     #
     #   resp.spend_limits #=> Array
-    #   resp.spend_limits[0].name #=> String, one of "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT", "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT", "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT", "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT"
+    #   resp.spend_limits[0].name #=> String, one of "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT", "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT", "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT", "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT", "RCS_MESSAGE_MONTHLY_SPEND_LIMIT"
     #   resp.spend_limits[0].enforced_limit #=> Integer
     #   resp.spend_limits[0].max_limit #=> Integer
     #   resp.spend_limits[0].overridden #=> Boolean
@@ -5452,7 +5490,10 @@ module Aws::PinpointSMSVoiceV2
     # Request a new sender ID that doesn't require registration.
     #
     # @option params [required, String] :sender_id
-    #   The sender ID string to request.
+    #   The sender ID string to request. The sender ID can be 1-11
+    #   alphanumeric characters including letters (A-Z, a-z), numbers (0-9),
+    #   or hyphens (-). The sender ID must contain at least one letter and
+    #   cannot start or end with a hyphen.
     #
     # @option params [required, String] :iso_country_code
     #   The two-character code, in ISO 3166-1 alpha-2 format, for the country
@@ -5910,6 +5951,258 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Creates a new RCS message and sends it to a recipient's phone number.
+    # RCS messages support rich content including text, files, rich cards,
+    # and carousels with interactive suggested actions.
+    #
+    # @option params [required, String] :destination_phone_number
+    #   The destination phone number in E.164 format.
+    #
+    # @option params [required, String] :origination_identity
+    #   The origination identity of the message. This can be either the
+    #   RcsAgentId, RcsAgentArn, PoolId, or PoolArn.
+    #
+    # @option params [Types::RcsMessageContent] :rcs_message_content
+    #   The content of the RCS message. Contains the message content (text,
+    #   file, rich card, or carousel) and optional message-level suggested
+    #   actions.
+    #
+    # @option params [Integer] :time_to_live
+    #   The duration in seconds that the RCS message is valid for delivery. If
+    #   the message cannot be delivered within this duration, it is considered
+    #   expired. Valid values are 1 to 172800 (48 hours). If a
+    #   FallbackConfiguration is provided, the fallback is triggered when the
+    #   duration expires without delivery confirmation.
+    #
+    # @option params [String] :message_traffic_type
+    #   The traffic type of the RCS message. Valid values are AUTHENTICATION,
+    #   TRANSACTION, PROMOTION, SERVICE\_REQUEST, and ACKNOWLEDGEMENT. This
+    #   field is reserved for future use.
+    #
+    # @option params [Types::RcsFallbackConfiguration] :fallback_configuration
+    #   Configuration for SMS or MMS fallback when RCS delivery fails. If
+    #   provided, the service sends a fallback message via the specified
+    #   channel when the RCS message fails or the TimeToLive expires.
+    #
+    # @option params [String] :protect_configuration_id
+    #   The unique identifier of the protect configuration to use.
+    #
+    # @option params [String] :configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #
+    # @option params [String] :max_price
+    #   The maximum amount that you want to spend, in US dollars, per each RCS
+    #   message.
+    #
+    # @option params [Boolean] :dry_run
+    #   When set to true, the message is checked and validated, but isn't
+    #   sent to the end recipient.
+    #
+    # @option params [Hash<String,String>] :context
+    #   You can specify custom data in this field. If you do, that data is
+    #   logged to the event destination.
+    #
+    # @option params [Boolean] :message_feedback_enabled
+    #   Set to true to enable message feedback for the message. When a user
+    #   receives the message you need to update the message status using
+    #   PutMessageFeedback.
+    #
+    # @return [Types::SendRcsMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendRcsMessageResult#message_id #message_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_rcs_message({
+    #     destination_phone_number: "PhoneNumber", # required
+    #     origination_identity: "RcsMessageOriginationIdentity", # required
+    #     rcs_message_content: {
+    #       content: { # required
+    #         text_message: {
+    #           body: "RcsTextBody", # required
+    #         },
+    #         file_message: {
+    #           file_url: "RcsMediaUrl", # required
+    #           thumbnail_url: "RcsMediaUrl",
+    #         },
+    #         rich_card: {
+    #           card_orientation: "RcsStandaloneCardCardOrientationString", # required
+    #           thumbnail_image_alignment: "RcsStandaloneCardThumbnailImageAlignmentString",
+    #           card_content: { # required
+    #             title: "RcsCardTitle",
+    #             description: "RcsCardDescription",
+    #             media: {
+    #               file_url: "RcsMediaUrl", # required
+    #               thumbnail_url: "RcsMediaUrl",
+    #               height: "RcsCardMediaHeightString",
+    #             },
+    #             suggestions: [
+    #               {
+    #                 reply: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                 },
+    #                 open_url: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                   url: "RcsOpenUrlValue", # required
+    #                   application: "RcsOpenUrlActionApplicationString",
+    #                   webview_view_mode: "RcsOpenUrlActionWebviewViewModeString",
+    #                 },
+    #                 dial_phone: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                   phone_number: "PhoneNumber", # required
+    #                 },
+    #                 show_location: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                   latitude: 1.0, # required
+    #                   longitude: 1.0, # required
+    #                   label: "RcsLocationLabel",
+    #                 },
+    #                 request_location: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                 },
+    #                 create_calendar_event: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                   title: "RcsCalendarEventTitle", # required
+    #                   start_time: Time.now, # required
+    #                   end_time: Time.now, # required
+    #                   description: "RcsCalendarEventDescription",
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         carousel: {
+    #           card_width: "RcsCarouselCardWidthString", # required
+    #           card_contents: [ # required
+    #             {
+    #               title: "RcsCardTitle",
+    #               description: "RcsCardDescription",
+    #               media: {
+    #                 file_url: "RcsMediaUrl", # required
+    #                 thumbnail_url: "RcsMediaUrl",
+    #                 height: "RcsCarouselCardMediaHeightString",
+    #               },
+    #               suggestions: [
+    #                 {
+    #                   reply: {
+    #                     text: "RcsSuggestedActionText", # required
+    #                     postback_data: "RcsPostbackData", # required
+    #                   },
+    #                   open_url: {
+    #                     text: "RcsSuggestedActionText", # required
+    #                     postback_data: "RcsPostbackData", # required
+    #                     url: "RcsOpenUrlValue", # required
+    #                     application: "RcsOpenUrlActionApplicationString",
+    #                     webview_view_mode: "RcsOpenUrlActionWebviewViewModeString",
+    #                   },
+    #                   dial_phone: {
+    #                     text: "RcsSuggestedActionText", # required
+    #                     postback_data: "RcsPostbackData", # required
+    #                     phone_number: "PhoneNumber", # required
+    #                   },
+    #                   show_location: {
+    #                     text: "RcsSuggestedActionText", # required
+    #                     postback_data: "RcsPostbackData", # required
+    #                     latitude: 1.0, # required
+    #                     longitude: 1.0, # required
+    #                     label: "RcsLocationLabel",
+    #                   },
+    #                   request_location: {
+    #                     text: "RcsSuggestedActionText", # required
+    #                     postback_data: "RcsPostbackData", # required
+    #                   },
+    #                   create_calendar_event: {
+    #                     text: "RcsSuggestedActionText", # required
+    #                     postback_data: "RcsPostbackData", # required
+    #                     title: "RcsCalendarEventTitle", # required
+    #                     start_time: Time.now, # required
+    #                     end_time: Time.now, # required
+    #                     description: "RcsCalendarEventDescription",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       suggestions: [
+    #         {
+    #           reply: {
+    #             text: "RcsSuggestedActionText", # required
+    #             postback_data: "RcsPostbackData", # required
+    #           },
+    #           open_url: {
+    #             text: "RcsSuggestedActionText", # required
+    #             postback_data: "RcsPostbackData", # required
+    #             url: "RcsOpenUrlValue", # required
+    #             application: "RcsOpenUrlActionApplicationString",
+    #             webview_view_mode: "RcsOpenUrlActionWebviewViewModeString",
+    #           },
+    #           dial_phone: {
+    #             text: "RcsSuggestedActionText", # required
+    #             postback_data: "RcsPostbackData", # required
+    #             phone_number: "PhoneNumber", # required
+    #           },
+    #           show_location: {
+    #             text: "RcsSuggestedActionText", # required
+    #             postback_data: "RcsPostbackData", # required
+    #             latitude: 1.0, # required
+    #             longitude: 1.0, # required
+    #             label: "RcsLocationLabel",
+    #           },
+    #           request_location: {
+    #             text: "RcsSuggestedActionText", # required
+    #             postback_data: "RcsPostbackData", # required
+    #           },
+    #           create_calendar_event: {
+    #             text: "RcsSuggestedActionText", # required
+    #             postback_data: "RcsPostbackData", # required
+    #             title: "RcsCalendarEventTitle", # required
+    #             start_time: Time.now, # required
+    #             end_time: Time.now, # required
+    #             description: "RcsCalendarEventDescription",
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     time_to_live: 1,
+    #     message_traffic_type: "RcsMessageTrafficType",
+    #     fallback_configuration: {
+    #       channel: "SMS", # required, accepts SMS, MMS
+    #       message_body: "RcsFallbackMessageBody",
+    #       media_urls: ["MediaUrlValue"],
+    #       origination_identity: "RcsFallbackOriginationIdentity",
+    #     },
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn",
+    #     configuration_set_name: "ConfigurationSetNameOrArn",
+    #     max_price: "MaxPrice",
+    #     dry_run: false,
+    #     context: {
+    #       "ContextKey" => "ContextValue",
+    #     },
+    #     message_feedback_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendRcsMessage AWS API Documentation
+    #
+    # @overload send_rcs_message(params = {})
+    # @param [Hash] params ({})
+    def send_rcs_message(params = {}, options = {})
+      req = build_request(:send_rcs_message, params)
+      req.send_request(options)
+    end
+
     # Creates a new text message and sends it to a recipient's phone
     # number. SendTextMessage only sends an SMS message to one recipient
     # each time it is invoked.
@@ -5930,8 +6223,8 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [String] :origination_identity
     #   The origination identity of the message. This can be either the
-    #   PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn,
-    #   PoolId, or PoolArn.
+    #   PhoneNumber, PhoneNumberId, PhoneNumberArn, RcsAgentId, RcsAgentArn,
+    #   SenderId, SenderIdArn, PoolId, or PoolArn.
     #
     #   If you are using a shared End User Messaging SMS resource then you
     #   must use the full Amazon Resource Name(ARN).
@@ -6393,6 +6686,36 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Sets an account level monthly spend limit override for sending RCS
+    # messages. The requested spend limit must be less than or equal to the
+    # `MaxLimit`, which is set by Amazon Web Services.
+    #
+    # @option params [required, Integer] :monthly_limit
+    #   The new monthly limit to enforce on RCS message spending.
+    #
+    # @return [Types::SetRcsMessageSpendLimitOverrideResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetRcsMessageSpendLimitOverrideResult#monthly_limit #monthly_limit} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_rcs_message_spend_limit_override({
+    #     monthly_limit: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monthly_limit #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetRcsMessageSpendLimitOverride AWS API Documentation
+    #
+    # @overload set_rcs_message_spend_limit_override(params = {})
+    # @param [Hash] params ({})
+    def set_rcs_message_spend_limit_override(params = {}, options = {})
+      req = build_request(:set_rcs_message_spend_limit_override, params)
+      req.send_request(options)
+    end
+
     # Sets an account level monthly spend limit override for sending text
     # messages. The requested spend limit must be less than or equal to the
     # `MaxLimit`, which is set by Amazon Web Services.
@@ -6629,7 +6952,7 @@ module Aws::PinpointSMSVoiceV2
     #     configuration_set_name: "ConfigurationSetNameOrArn", # required
     #     event_destination_name: "EventDestinationName", # required
     #     enabled: false,
-    #     matching_event_types: ["ALL"], # accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, TEXT_PROTECT_BLOCKED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED, MEDIA_ALL, MEDIA_PENDING, MEDIA_QUEUED, MEDIA_SUCCESSFUL, MEDIA_DELIVERED, MEDIA_INVALID, MEDIA_INVALID_MESSAGE, MEDIA_UNREACHABLE, MEDIA_CARRIER_UNREACHABLE, MEDIA_BLOCKED, MEDIA_CARRIER_BLOCKED, MEDIA_SPAM, MEDIA_UNKNOWN, MEDIA_TTL_EXPIRED, MEDIA_FILE_INACCESSIBLE, MEDIA_FILE_TYPE_UNSUPPORTED, MEDIA_FILE_SIZE_EXCEEDED
+    #     matching_event_types: ["ALL"], # accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, TEXT_PROTECT_BLOCKED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED, MEDIA_ALL, MEDIA_PENDING, MEDIA_QUEUED, MEDIA_SUCCESSFUL, MEDIA_DELIVERED, MEDIA_INVALID, MEDIA_INVALID_MESSAGE, MEDIA_UNREACHABLE, MEDIA_CARRIER_UNREACHABLE, MEDIA_BLOCKED, MEDIA_CARRIER_BLOCKED, MEDIA_SPAM, MEDIA_UNKNOWN, MEDIA_TTL_EXPIRED, MEDIA_FILE_INACCESSIBLE, MEDIA_FILE_TYPE_UNSUPPORTED, MEDIA_FILE_SIZE_EXCEEDED, RCS_ALL, RCS_QUEUED, RCS_SENT, RCS_DELIVERED, RCS_READ, RCS_FAILED, RCS_TTL_EXPIRED, RCS_PROTECT_BLOCKED, RCS_FALLEN_BACK_TO_SMS
     #     cloud_watch_logs_destination: {
     #       iam_role_arn: "IamRoleArn", # required
     #       log_group_arn: "LogGroupArn", # required
@@ -6650,7 +6973,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destination.event_destination_name #=> String
     #   resp.event_destination.enabled #=> Boolean
     #   resp.event_destination.matching_event_types #=> Array
-    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
+    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED", "RCS_ALL", "RCS_QUEUED", "RCS_SENT", "RCS_DELIVERED", "RCS_READ", "RCS_FAILED", "RCS_TTL_EXPIRED", "RCS_PROTECT_BLOCKED", "RCS_FALLEN_BACK_TO_SMS"
     #   resp.event_destination.cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destination.cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destination.kinesis_firehose_destination.iam_role_arn #=> String
@@ -6676,12 +6999,17 @@ module Aws::PinpointSMSVoiceV2
     #   DescribeNotifyConfigurations operation.
     #
     # @option params [String] :default_template_id
-    #   The template ID to set as the default, or the special value
-    #   UNSET\_DEFAULT\_TEMPLATE to clear the current default template.
+    #   The default template identifier to associate with the notify
+    #   configuration. If specified, this template is used when sending
+    #   messages without an explicit template identifier. Pass the special
+    #   value `UNSET_DEFAULT_TEMPLATE` to clear the current default template
+    #   from the notify configuration.
     #
     # @option params [String] :pool_id
-    #   The pool ID or ARN to associate, or the special value
-    #   UNSET\_DEFAULT\_POOL\_FOR\_NOTIFY to clear the current default pool.
+    #   The pool identifier or Amazon Resource Name (ARN) to associate with
+    #   the notify configuration. Pass the special value
+    #   `UNSET_DEFAULT_POOL_FOR_NOTIFY` to clear the current default pool from
+    #   the notify configuration.
     #
     # @option params [Array<String>] :enabled_countries
     #   An array of two-character ISO country codes, in ISO 3166-1 alpha-2
@@ -7136,6 +7464,29 @@ module Aws::PinpointSMSVoiceV2
     #   By default this is set to false. When set to true you can receive
     #   incoming text messages from your end recipients.
     #
+    # @option params [String] :two_way_media_s3_bucket_name
+    #   The name of the S3 bucket where inbound RCS media files are stored.
+    #   Two-way messaging must be enabled on the agent. To remove the media
+    #   configuration, pass the sentinel value `UNSET_RCS_MEDIA_CONFIGURATION`
+    #   for both this field and TwoWayMediaS3Role.
+    #
+    # @option params [String] :two_way_media_s3_key_prefix
+    #   The key prefix used for inbound RCS media objects in the S3 bucket.
+    #
+    # @option params [String] :two_way_media_s3_role
+    #   The ARN of the IAM role used to write inbound RCS media files to the
+    #   S3 bucket. The role must have `s3:PutObject` permission on the bucket
+    #   and a trust policy allowing `sms-voice.amazonaws.com` to assume it. To
+    #   remove the media configuration, pass the sentinel value
+    #   `UNSET_RCS_MEDIA_CONFIGURATION` for both this field and
+    #   TwoWayMediaS3BucketName.
+    #
+    # @option params [Array<String>] :two_way_rcs_events_enabled
+    #   The list of RCS event types to enable for two-way messaging. Pass an
+    #   empty list to disable all event types. The special value `ALL` enables
+    #   all current and future event types and must be the sole element if
+    #   used.
+    #
     # @return [Types::UpdateRcsAgentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRcsAgentResult#rcs_agent_arn #rcs_agent_arn} => String
@@ -7148,6 +7499,10 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::UpdateRcsAgentResult#two_way_channel_arn #two_way_channel_arn} => String
     #   * {Types::UpdateRcsAgentResult#two_way_channel_role #two_way_channel_role} => String
     #   * {Types::UpdateRcsAgentResult#two_way_enabled #two_way_enabled} => Boolean
+    #   * {Types::UpdateRcsAgentResult#two_way_media_s3_bucket_name #two_way_media_s3_bucket_name} => String
+    #   * {Types::UpdateRcsAgentResult#two_way_media_s3_key_prefix #two_way_media_s3_key_prefix} => String
+    #   * {Types::UpdateRcsAgentResult#two_way_media_s3_role #two_way_media_s3_role} => String
+    #   * {Types::UpdateRcsAgentResult#two_way_rcs_events_enabled #two_way_rcs_events_enabled} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7159,6 +7514,10 @@ module Aws::PinpointSMSVoiceV2
     #     two_way_channel_arn: "TwoWayChannelArn",
     #     two_way_channel_role: "IamRoleArn",
     #     two_way_enabled: false,
+    #     two_way_media_s3_bucket_name: "TwoWayMediaS3BucketNameOrUnset",
+    #     two_way_media_s3_key_prefix: "TwoWayMediaS3KeyPrefix",
+    #     two_way_media_s3_role: "IamRoleArnOrUnset",
+    #     two_way_rcs_events_enabled: ["RcsEventType"],
     #   })
     #
     # @example Response structure
@@ -7173,6 +7532,11 @@ module Aws::PinpointSMSVoiceV2
     #   resp.two_way_channel_arn #=> String
     #   resp.two_way_channel_role #=> String
     #   resp.two_way_enabled #=> Boolean
+    #   resp.two_way_media_s3_bucket_name #=> String
+    #   resp.two_way_media_s3_key_prefix #=> String
+    #   resp.two_way_media_s3_role #=> String
+    #   resp.two_way_rcs_events_enabled #=> Array
+    #   resp.two_way_rcs_events_enabled[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateRcsAgent AWS API Documentation
     #
@@ -7297,7 +7661,7 @@ module Aws::PinpointSMSVoiceV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

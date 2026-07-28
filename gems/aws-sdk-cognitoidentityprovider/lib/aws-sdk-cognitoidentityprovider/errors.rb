@@ -60,6 +60,7 @@ module Aws::CognitoIdentityProvider
   # * {RefreshTokenReuseException}
   # * {ResourceNotFoundException}
   # * {ScopeDoesNotExistException}
+  # * {ServiceQuotaExceededException}
   # * {SoftwareTokenMFANotFoundException}
   # * {TermsExistsException}
   # * {TierChangeNotAllowedException}
@@ -582,6 +583,21 @@ module Aws::CognitoIdentityProvider
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CognitoIdentityProvider::Types::ScopeDoesNotExistException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CognitoIdentityProvider::Types::ServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

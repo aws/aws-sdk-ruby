@@ -110,6 +110,13 @@ module Aws
                          }
                        ],
                        ?threshold_metric_id: ::String,
+                       ?evaluation_window: {
+                         wall_clock_window: {
+                           timezone: ::String?
+                         }?,
+                         sliding_window: {
+                         }?
+                       },
                        ?evaluation_criteria: {
                          prom_ql_criteria: {
                            query: ::String,

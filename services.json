@@ -635,12 +635,6 @@
   "IoTDeviceAdvisor": {
     "models": "iotdeviceadvisor/2020-09-18"
   },
-  "IoTEvents": {
-    "models": "iotevents/2018-07-27"
-  },
-  "IoTEventsData": {
-    "models": "iotevents-data/2018-10-23"
-  },
   "IoTFleetWise": {
     "models": "iotfleetwise/2021-06-17"
   },
@@ -938,9 +932,6 @@
   "PI": {
     "models": "pi/2018-02-27"
   },
-  "Panorama": {
-    "models": "panorama/2019-07-24"
-  },
   "PartnerCentralAccount": {
     "models": "partnercentral-account/2025-04-04"
   },
@@ -949,6 +940,9 @@
   },
   "PartnerCentralChannel": {
     "models": "partnercentral-channel/2024-03-18"
+  },
+  "PartnerCentralRevenueMeasurement": {
+    "models": "partnercentral-revenue-measurement/2022-07-26"
   },
   "PartnerCentralSelling": {
     "models": "partnercentral-selling/2022-07-26"
@@ -1268,9 +1262,6 @@
     "models": "signin/2023-01-01",
     "gemName": "aws-sdk-core"
   },
-  "SimSpaceWeaver": {
-    "models": "simspaceweaver/2022-10-28"
-  },
   "SimpleDB": {
     "models": "sdb/2009-04-15",
     "legacyEndpoints": true
@@ -1304,6 +1295,9 @@
   },
   "SupportApp": {
     "models": "support-app/2021-08-20"
+  },
+  "SupportAuthZ": {
+    "models": "supportauthz/2026-06-30"
   },
   "Sustainability": {
     "models": "sustainability/2018-05-10"

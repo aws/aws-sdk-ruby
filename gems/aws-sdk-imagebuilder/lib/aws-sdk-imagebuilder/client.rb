@@ -1190,7 +1190,12 @@ module Aws::Imagebuilder
     #   that grants Image Builder access to perform workflow actions.
     #
     # @option params [Types::PipelineLoggingConfiguration] :logging_configuration
-    #   Define logging configuration for the image build process.
+    #   Specifies the logging configuration for the image pipeline. Use this
+    #   to define custom CloudWatch Logs log groups for your pipeline
+    #   execution logs and image build logs. The service manages log groups
+    #   with names starting with `/aws/imagebuilder/` using the service-linked
+    #   role. For custom log group names outside of this prefix, you must also
+    #   provide an `executionRole`.
     #
     # @return [Types::CreateImagePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1336,6 +1341,17 @@ module Aws::Imagebuilder
     #   Tags that are applied to the AMI that Image Builder creates during the
     #   Build phase prior to image distribution.
     #
+    # @option params [Array<String>] :ami_watermarks
+    #   The AMI watermark names to attach to the output AMI from this recipe.
+    #   AMI watermarks are lineage markers. They automatically propagate to
+    #   derivative AMIs when the source AMI is copied or distributed across
+    #   Regions or accounts.
+    #
+    #   <note markdown="1"> AMI watermarks are supported only for image recipes. AMIs with
+    #   watermarks cannot be made public.
+    #
+    #    </note>
+    #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
     #   the request. For more information, see [Ensuring idempotency][1] in
@@ -1403,6 +1419,7 @@ module Aws::Imagebuilder
     #     ami_tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     ami_watermarks: ["AmiWatermarkName"],
     #     client_token: "ClientToken", # required
     #   })
     #
@@ -2097,18 +2114,25 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # DistributeImage distributes existing AMIs to additional regions and
-    # accounts without rebuilding the image.
+    # Distributes an existing AMI to target Regions and accounts without
+    # running the full image build process. This operation only runs the
+    # distribution phase on an image that has already been built.
     #
     # @option params [required, String] :source_image
-    #   The source image Amazon Resource Name (ARN) to distribute.
+    #   The source image to distribute. Specify an AMI identifier, SSM
+    #   parameter path, or Image Builder image Amazon Resource Name (ARN).
+    #   When you specify an Image Builder image Amazon Resource Name (ARN),
+    #   the image must be in the `AVAILABLE` state.
     #
     # @option params [required, String] :distribution_configuration_arn
-    #   The Amazon Resource Name (ARN) of the distribution configuration to
-    #   use.
+    #   The Amazon Resource Name (ARN) of the distribution configuration. The
+    #   configuration defines target Regions, accounts, and AMI settings. The
+    #   distribution configuration must be in the same Region as this
+    #   operation.
     #
     # @option params [required, String] :execution_role
-    #   The IAM role to use for the distribution.
+    #   The name or Amazon Resource Name (ARN) of the IAM role that Image
+    #   Builder assumes to distribute the image.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to apply to the distributed image.
@@ -2503,6 +2527,8 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.additional_instance_configuration.user_data_override #=> String
     #   resp.image.image_recipe.ami_tags #=> Hash
     #   resp.image.image_recipe.ami_tags["TagKey"] #=> String
+    #   resp.image.image_recipe.ami_watermarks #=> Array
+    #   resp.image.image_recipe.ami_watermarks[0] #=> String
     #   resp.image.container_recipe.arn #=> String
     #   resp.image.container_recipe.container_type #=> String, one of "DOCKER"
     #   resp.image.container_recipe.name #=> String
@@ -2827,6 +2853,8 @@ module Aws::Imagebuilder
     #   resp.image_recipe.additional_instance_configuration.user_data_override #=> String
     #   resp.image_recipe.ami_tags #=> Hash
     #   resp.image_recipe.ami_tags["TagKey"] #=> String
+    #   resp.image_recipe.ami_watermarks #=> Array
+    #   resp.image_recipe.ami_watermarks[0] #=> String
     #   resp.latest_version_references.latest_version_arn #=> String
     #   resp.latest_version_references.latest_major_version_arn #=> String
     #   resp.latest_version_references.latest_minor_version_arn #=> String
@@ -5333,15 +5361,20 @@ module Aws::Imagebuilder
     #   Uniquely identifies the workflow step that sent the step action.
     #
     # @option params [required, String] :image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image build version to send
-    #   action for.
+    #   The Amazon Resource Name (ARN) of the image build version associated
+    #   with the workflow step execution. This value must match the image that
+    #   owns the waiting step. If the ARN does not correspond to the image
+    #   running the workflow, then the request fails with a validation error.
     #
     # @option params [required, String] :action
-    #   The action for the image creation process to take while a workflow
-    #   `WaitForAction` step waits for an asynchronous action to complete.
+    #   The action to perform on the paused workflow step. The workflow step
+    #   must be in a waiting state to accept an action. The request fails if
+    #   the step has already timed out or been actioned.
     #
     # @option params [String] :reason
-    #   The reason why this action is sent.
+    #   The reason for the action. This value is stored with the step
+    #   execution record and is accessible in subsequent workflow steps via
+    #   step output references.
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -5443,26 +5476,38 @@ module Aws::Imagebuilder
     # specified image resources.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the Image Builder resource that is
-    #   updated. The state update might also impact associated resources.
+    #   The Amazon Resource Name (ARN) of the image build version to update.
+    #   The image must be in one of these terminal states: `AVAILABLE`,
+    #   `DEPRECATED`, `DISABLED`, `FAILED`, or `CANCELLED`. Images with
+    #   `FAILED` or `CANCELLED` status can transition only to `DELETED`.
     #
     # @option params [required, Types::ResourceState] :state
-    #   Indicates the lifecycle action to take for this request.
+    #   Specifies the lifecycle action to take for this request. For AMI-based
+    #   images, valid values are `AVAILABLE`, `DEPRECATED`, `DISABLED`, and
+    #   `DELETED`. For container-based images, only `DELETED` is supported.
     #
     # @option params [String] :execution_role
     #   The name or Amazon Resource Name (ARN) of the IAM role that’s used to
     #   update image state.
     #
     # @option params [Types::ResourceStateUpdateIncludeResources] :include_resources
-    #   A list of image resources to update state for.
+    #   Specifies which image resources to include in the state update. When
+    #   specified, the lifecycle action applies to underlying resources. These
+    #   resources include AMIs, snapshots, and containers in addition to the
+    #   Image Builder image resource. Requires `executionRole` to also be
+    #   specified. To delete an image and its underlying resources, you must
+    #   specify `includeResources`. To delete only the Image Builder image
+    #   record without affecting underlying resources, use the `DeleteImage`
+    #   API instead.
     #
     # @option params [Types::ResourceStateUpdateExclusionRules] :exclusion_rules
     #   Skip action on the image resource and associated resources if
     #   specified exclusion rules are met.
     #
     # @option params [Time,DateTime,Date,Integer,String] :update_at
-    #   The timestamp that indicates when resources are updated by a lifecycle
-    #   action.
+    #   Specifies the timestamp when the state transition takes effect. Use
+    #   this parameter only when the target status is `DEPRECATED`. The value
+    #   must be a future time.
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -6123,7 +6168,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

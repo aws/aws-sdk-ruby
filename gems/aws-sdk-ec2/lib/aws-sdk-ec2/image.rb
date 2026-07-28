@@ -264,6 +264,13 @@ module Aws::EC2
       data[:free_tier_eligible]
     end
 
+    # The name of the public Systems Manager parameter that resolves to this
+    # AMI, under the `aws/service/` namespace.
+    # @return [String]
+    def public_ssm_parameter_name
+      data[:public_ssm_parameter_name]
+    end
+
     # The watermarks attached to the AMI.
     # @return [Array<Types::ImageWatermark>]
     def image_watermarks

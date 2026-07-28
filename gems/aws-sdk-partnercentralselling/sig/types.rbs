@@ -82,7 +82,7 @@ module Aws::PartnerCentralSelling
     class AssociateOpportunityRequest
       attr_accessor catalog: ::String
       attr_accessor opportunity_identifier: ::String
-      attr_accessor related_entity_type: ("Solutions" | "AwsProducts" | "AwsMarketplaceOffers" | "AwsMarketplaceOfferSets")
+      attr_accessor related_entity_type: ("Solutions" | "AwsProducts" | "AwsMarketplaceOffers" | "AwsMarketplaceOfferSets" | "AwsMarketplaceSolutions" | "AwsMarketplaceProducts")
       attr_accessor related_entity_identifier: ::String
       SENSITIVE: []
     end
@@ -119,6 +119,8 @@ module Aws::PartnerCentralSelling
     class AwsOpportunityRelatedEntities
       attr_accessor aws_products: ::Array[::String]
       attr_accessor solutions: ::Array[::String]
+      attr_accessor aws_marketplace_solutions: ::Array[::String]
+      attr_accessor aws_marketplace_products: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -337,7 +339,7 @@ module Aws::PartnerCentralSelling
     class DisassociateOpportunityRequest
       attr_accessor catalog: ::String
       attr_accessor opportunity_identifier: ::String
-      attr_accessor related_entity_type: ("Solutions" | "AwsProducts" | "AwsMarketplaceOffers" | "AwsMarketplaceOfferSets")
+      attr_accessor related_entity_type: ("Solutions" | "AwsProducts" | "AwsMarketplaceOffers" | "AwsMarketplaceOfferSets" | "AwsMarketplaceSolutions" | "AwsMarketplaceProducts")
       attr_accessor related_entity_identifier: ::String
       SENSITIVE: []
     end
@@ -997,6 +999,7 @@ module Aws::PartnerCentralSelling
       attr_accessor status: ::Array[("Active" | "Inactive" | "Draft")]
       attr_accessor identifier: ::Array[::String]
       attr_accessor category: ::Array[::String]
+      attr_accessor aws_marketplace_solution_arn: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1256,6 +1259,8 @@ module Aws::PartnerCentralSelling
       attr_accessor aws_marketplace_offer_sets: ::Array[::String]
       attr_accessor solutions: ::Array[::String]
       attr_accessor aws_products: ::Array[::String]
+      attr_accessor aws_marketplace_solutions: ::Array[::String]
+      attr_accessor aws_marketplace_products: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1326,6 +1331,7 @@ module Aws::PartnerCentralSelling
       attr_accessor status: ("Active" | "Inactive" | "Draft")
       attr_accessor category: ::String
       attr_accessor created_date: ::Time
+      attr_accessor aws_marketplace_solution_arn: ::String
       SENSITIVE: []
     end
 

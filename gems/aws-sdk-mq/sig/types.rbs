@@ -134,6 +134,7 @@ module Aws::MQ
       attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
       attr_accessor publicly_accessible: bool
       attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_size: ::Integer
       attr_accessor storage_type: ("EBS" | "EFS")
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -163,6 +164,7 @@ module Aws::MQ
       attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
       attr_accessor publicly_accessible: bool
       attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_size: ::Integer
       attr_accessor storage_type: ("EBS" | "EFS")
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -358,8 +360,10 @@ module Aws::MQ
       attr_accessor pending_host_instance_type: ::String
       attr_accessor pending_ldap_server_metadata: Types::LdapServerMetadataOutput
       attr_accessor pending_security_groups: ::Array[::String]
+      attr_accessor pending_storage_size: ::Integer
       attr_accessor publicly_accessible: bool
       attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_size: ::Integer
       attr_accessor storage_type: ("EBS" | "EFS")
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -396,8 +400,10 @@ module Aws::MQ
       attr_accessor pending_host_instance_type: ::String
       attr_accessor pending_ldap_server_metadata: Types::LdapServerMetadataOutput
       attr_accessor pending_security_groups: ::Array[::String]
+      attr_accessor pending_storage_size: ::Integer
       attr_accessor publicly_accessible: bool
       attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_size: ::Integer
       attr_accessor storage_type: ("EBS" | "EFS")
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -761,6 +767,7 @@ module Aws::MQ
       attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
       attr_accessor resource_share_arns: ::Array[::String]
       attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_size: ::Integer
       SENSITIVE: []
     end
 
@@ -780,6 +787,7 @@ module Aws::MQ
       attr_accessor pending_data_replication_mode: ("NONE" | "CRDR")
       attr_accessor resource_share_arns: ::Array[::String]
       attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_size: ::Integer
       SENSITIVE: []
     end
 
@@ -795,6 +803,7 @@ module Aws::MQ
       attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
       attr_accessor resource_share_arns: ::Array[::String]
       attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_size: ::Integer
       attr_accessor data_replication_mode: ("NONE" | "CRDR")
       SENSITIVE: []
     end
@@ -815,6 +824,7 @@ module Aws::MQ
       attr_accessor data_replication_mode: ("NONE" | "CRDR")
       attr_accessor pending_data_replication_metadata: Types::DataReplicationMetadataOutput
       attr_accessor pending_data_replication_mode: ("NONE" | "CRDR")
+      attr_accessor storage_size: ::Integer
       SENSITIVE: []
     end
 

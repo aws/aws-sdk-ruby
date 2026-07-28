@@ -259,6 +259,7 @@ module Aws::MQ
     CreateBrokerInput.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
     CreateBrokerInput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "publiclyAccessible"))
     CreateBrokerInput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    CreateBrokerInput.add_member(:storage_size, Shapes::ShapeRef.new(shape: __integer, location_name: "storageSize"))
     CreateBrokerInput.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
     CreateBrokerInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
     CreateBrokerInput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -284,6 +285,7 @@ module Aws::MQ
     CreateBrokerRequest.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
     CreateBrokerRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "publiclyAccessible"))
     CreateBrokerRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    CreateBrokerRequest.add_member(:storage_size, Shapes::ShapeRef.new(shape: __integer, location_name: "storageSize"))
     CreateBrokerRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
     CreateBrokerRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
     CreateBrokerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -431,8 +433,10 @@ module Aws::MQ
     DescribeBrokerOutput.add_member(:pending_host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "pendingHostInstanceType"))
     DescribeBrokerOutput.add_member(:pending_ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataOutput, location_name: "pendingLdapServerMetadata"))
     DescribeBrokerOutput.add_member(:pending_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "pendingSecurityGroups"))
+    DescribeBrokerOutput.add_member(:pending_storage_size, Shapes::ShapeRef.new(shape: __integer, location_name: "pendingStorageSize"))
     DescribeBrokerOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "publiclyAccessible"))
     DescribeBrokerOutput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    DescribeBrokerOutput.add_member(:storage_size, Shapes::ShapeRef.new(shape: __integer, location_name: "storageSize"))
     DescribeBrokerOutput.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
     DescribeBrokerOutput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
     DescribeBrokerOutput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -465,8 +469,10 @@ module Aws::MQ
     DescribeBrokerResponse.add_member(:pending_host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "pendingHostInstanceType"))
     DescribeBrokerResponse.add_member(:pending_ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataOutput, location_name: "pendingLdapServerMetadata"))
     DescribeBrokerResponse.add_member(:pending_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "pendingSecurityGroups"))
+    DescribeBrokerResponse.add_member(:pending_storage_size, Shapes::ShapeRef.new(shape: __integer, location_name: "pendingStorageSize"))
     DescribeBrokerResponse.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     DescribeBrokerResponse.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    DescribeBrokerResponse.add_member(:storage_size, Shapes::ShapeRef.new(shape: __integer, location_name: "storageSize"))
     DescribeBrokerResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
     DescribeBrokerResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
     DescribeBrokerResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -733,6 +739,7 @@ module Aws::MQ
     UpdateBrokerInput.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
     UpdateBrokerInput.add_member(:resource_share_arns, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "resourceShareArns"))
     UpdateBrokerInput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    UpdateBrokerInput.add_member(:storage_size, Shapes::ShapeRef.new(shape: __integer, location_name: "storageSize"))
     UpdateBrokerInput.struct_class = Types::UpdateBrokerInput
 
     UpdateBrokerOutput.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
@@ -750,6 +757,7 @@ module Aws::MQ
     UpdateBrokerOutput.add_member(:pending_data_replication_mode, Shapes::ShapeRef.new(shape: DataReplicationMode, location_name: "pendingDataReplicationMode"))
     UpdateBrokerOutput.add_member(:resource_share_arns, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "resourceShareArns"))
     UpdateBrokerOutput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    UpdateBrokerOutput.add_member(:storage_size, Shapes::ShapeRef.new(shape: __integer, location_name: "storageSize"))
     UpdateBrokerOutput.struct_class = Types::UpdateBrokerOutput
 
     UpdateBrokerRequest.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
@@ -763,6 +771,7 @@ module Aws::MQ
     UpdateBrokerRequest.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
     UpdateBrokerRequest.add_member(:resource_share_arns, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "resourceShareArns"))
     UpdateBrokerRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    UpdateBrokerRequest.add_member(:storage_size, Shapes::ShapeRef.new(shape: __integer, location_name: "storageSize"))
     UpdateBrokerRequest.add_member(:data_replication_mode, Shapes::ShapeRef.new(shape: DataReplicationMode, location_name: "dataReplicationMode"))
     UpdateBrokerRequest.struct_class = Types::UpdateBrokerRequest
 
@@ -781,6 +790,7 @@ module Aws::MQ
     UpdateBrokerResponse.add_member(:data_replication_mode, Shapes::ShapeRef.new(shape: DataReplicationMode, location_name: "dataReplicationMode"))
     UpdateBrokerResponse.add_member(:pending_data_replication_metadata, Shapes::ShapeRef.new(shape: DataReplicationMetadataOutput, location_name: "pendingDataReplicationMetadata"))
     UpdateBrokerResponse.add_member(:pending_data_replication_mode, Shapes::ShapeRef.new(shape: DataReplicationMode, location_name: "pendingDataReplicationMode"))
+    UpdateBrokerResponse.add_member(:storage_size, Shapes::ShapeRef.new(shape: __integer, location_name: "storageSize"))
     UpdateBrokerResponse.struct_class = Types::UpdateBrokerResponse
 
     UpdateConfigurationInput.add_member(:data, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "data"))

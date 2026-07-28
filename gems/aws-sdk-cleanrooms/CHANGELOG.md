@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2026-07-27)
+------------------
+
+* Feature - This release adds support for the CR.8X worker type for SQL (32 vCPU)
+
+1.76.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2026-06-30)
+------------------
+
+* Feature - Adds support for intermediate tables in AWS Clean Rooms collaborations.
+
 1.74.0 (2026-05-26)
 ------------------
 

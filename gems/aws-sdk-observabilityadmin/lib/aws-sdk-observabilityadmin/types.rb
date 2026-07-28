@@ -2580,11 +2580,17 @@ module Aws::ObservabilityAdmin
     #   The pipeline configuration to test with the provided sample records.
     #   @return [Types::TelemetryPipelineConfiguration]
     #
+    # @!attribute [rw] signal_type
+    #   The type of telemetry signal to test. If not specified, defaults to
+    #   log processing.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TestTelemetryPipelineInput AWS API Documentation
     #
     class TestTelemetryPipelineInput < Struct.new(
       :records,
-      :configuration)
+      :configuration,
+      :signal_type)
       SENSITIVE = []
       include Aws::Structure
     end

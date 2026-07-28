@@ -518,6 +518,24 @@ module Aws
                               ) -> _CreateIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResponseSuccess
 
+      interface _CreateQev2IdcApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQev2IdcApplicationResult]
+        def qev_2_idc_application: () -> Types::Qev2IdcApplication
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_qev_2_idc_application-instance_method
+      def create_qev_2_idc_application: (
+                                          idc_instance_arn: ::String,
+                                          qev_2_idc_application_name: ::String,
+                                          idc_display_name: ::String,
+                                          ?tags: Array[
+                                            {
+                                              key: ::String?,
+                                              value: ::String?
+                                            }
+                                          ]
+                                        ) -> _CreateQev2IdcApplicationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQev2IdcApplicationResponseSuccess
+
       interface _CreateRedshiftIdcApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRedshiftIdcApplicationResult]
         def redshift_idc_application: () -> Types::RedshiftIdcApplication
@@ -802,6 +820,12 @@ module Aws
                             partner_name: ::String
                           ) -> _DeletePartnerResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePartnerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_qev_2_idc_application-instance_method
+      def delete_qev_2_idc_application: (
+                                          qev_2_idc_application_arn: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_redshift_idc_application-instance_method
       def delete_redshift_idc_application: (
@@ -1289,6 +1313,19 @@ module Aws
                                ?partner_name: ::String
                              ) -> _DescribePartnersResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePartnersResponseSuccess
+
+      interface _DescribeQev2IdcApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeQev2IdcApplicationsResult]
+        def qev_2_idc_applications: () -> ::Array[Types::Qev2IdcApplication]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_qev_2_idc_applications-instance_method
+      def describe_qev_2_idc_applications: (
+                                             ?qev_2_idc_application_arn: ::String,
+                                             ?max_records: ::Integer,
+                                             ?marker: ::String
+                                           ) -> _DescribeQev2IdcApplicationsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeQev2IdcApplicationsResponseSuccess
 
       interface _DescribeRedshiftIdcApplicationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRedshiftIdcApplicationsResult]
@@ -1902,6 +1939,17 @@ module Aws
                                             ?dry_run: bool
                                           ) -> _ModifyLakehouseConfigurationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyLakehouseConfigurationResponseSuccess
+
+      interface _ModifyQev2IdcApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyQev2IdcApplicationResult]
+        def qev_2_idc_application: () -> Types::Qev2IdcApplication
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_qev_2_idc_application-instance_method
+      def modify_qev_2_idc_application: (
+                                          qev_2_idc_application_arn: ::String,
+                                          ?idc_display_name: ::String
+                                        ) -> _ModifyQev2IdcApplicationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyQev2IdcApplicationResponseSuccess
 
       interface _ModifyRedshiftIdcApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyRedshiftIdcApplicationResult]

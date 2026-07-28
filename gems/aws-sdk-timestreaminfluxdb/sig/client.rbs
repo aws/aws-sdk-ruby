@@ -329,7 +329,9 @@ module Aws
                                            hard_delete_default_duration: {
                                              duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
-                                           }?
+                                           }?,
+                                           plugin_repository_url: ::String?,
+                                           plugin_repository_secret_arn: ::String?
                                          }?,
                                          influx_d_bv_3_enterprise: {
                                            query_file_limit: ::Integer?,
@@ -413,6 +415,8 @@ module Aws
                                              duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
                                            }?,
+                                           plugin_repository_url: ::String?,
+                                           plugin_repository_secret_arn: ::String?,
                                            ingest_query_instances: ::Integer,
                                            query_only_instances: ::Integer,
                                            dedicated_compactor: bool,

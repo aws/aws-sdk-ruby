@@ -18,6 +18,10 @@ module Aws::Odb
     AcceptMarketplaceRegistrationOutput = Shapes::StructureShape.new(name: 'AcceptMarketplaceRegistrationOutput')
     Access = Shapes::StringShape.new(name: 'Access')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AdminPasswordSource = Shapes::StringShape.new(name: 'AdminPasswordSource')
+    AdminPasswordSourceConfiguration = Shapes::UnionShape.new(name: 'AdminPasswordSourceConfiguration')
+    AdminPasswordSourceConfigurationInput = Shapes::UnionShape.new(name: 'AdminPasswordSourceConfigurationInput')
+    AdminPasswordSourceSummary = Shapes::StructureShape.new(name: 'AdminPasswordSourceSummary')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateIamRoleToResourceInput = Shapes::StructureShape.new(name: 'AssociateIamRoleToResourceInput')
     AssociateIamRoleToResourceInputResourceArnString = Shapes::StringShape.new(name: 'AssociateIamRoleToResourceInputResourceArnString')
@@ -135,6 +139,8 @@ module Aws::Odb
     CustomerContact = Shapes::StructureShape.new(name: 'CustomerContact')
     CustomerContactEmailString = Shapes::StringShape.new(name: 'CustomerContactEmailString')
     CustomerContacts = Shapes::ListShape.new(name: 'CustomerContacts')
+    CustomerManagedAwsSecretConfiguration = Shapes::StructureShape.new(name: 'CustomerManagedAwsSecretConfiguration')
+    CustomerManagedAwsSecretConfigurationInput = Shapes::StructureShape.new(name: 'CustomerManagedAwsSecretConfigurationInput')
     DataCollectionOptions = Shapes::StructureShape.new(name: 'DataCollectionOptions')
     DataGuardRole = Shapes::StringShape.new(name: 'DataGuardRole')
     DataSafeStatus = Shapes::StringShape.new(name: 'DataSafeStatus')
@@ -334,6 +340,7 @@ module Aws::Odb
     OciEncryptionKeyConfigurationVaultIdString = Shapes::StringShape.new(name: 'OciEncryptionKeyConfigurationVaultIdString')
     OciIamRole = Shapes::StructureShape.new(name: 'OciIamRole')
     OciIamRoleList = Shapes::ListShape.new(name: 'OciIamRoleList')
+    OciIamRoleStatus = Shapes::StringShape.new(name: 'OciIamRoleStatus')
     OciIdentityDomain = Shapes::StructureShape.new(name: 'OciIdentityDomain')
     OciOnboardingStatus = Shapes::StringShape.new(name: 'OciOnboardingStatus')
     OdbNetwork = Shapes::StructureShape.new(name: 'OdbNetwork')
@@ -394,6 +401,7 @@ module Aws::Odb
     S3Access = Shapes::StructureShape.new(name: 'S3Access')
     ScheduledOperationDetails = Shapes::StructureShape.new(name: 'ScheduledOperationDetails')
     ScheduledOperationDetailsList = Shapes::ListShape.new(name: 'ScheduledOperationDetailsList')
+    SecretIdOrArn = Shapes::StringShape.new(name: 'SecretIdOrArn')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     SensitiveStringList = Shapes::ListShape.new(name: 'SensitiveStringList')
     ServiceNetworkEndpoint = Shapes::StructureShape.new(name: 'ServiceNetworkEndpoint')
@@ -460,6 +468,10 @@ module Aws::Odb
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     VpcEndpointType = Shapes::StringShape.new(name: 'VpcEndpointType')
+    WalletPasswordSource = Shapes::StringShape.new(name: 'WalletPasswordSource')
+    WalletPasswordSourceConfiguration = Shapes::UnionShape.new(name: 'WalletPasswordSourceConfiguration')
+    WalletPasswordSourceConfigurationInput = Shapes::UnionShape.new(name: 'WalletPasswordSourceConfigurationInput')
+    WalletPasswordSourceSummary = Shapes::StructureShape.new(name: 'WalletPasswordSourceSummary')
     WalletType = Shapes::StringShape.new(name: 'WalletType')
     WeeksOfMonth = Shapes::ListShape.new(name: 'WeeksOfMonth')
     ZeroEtlAccess = Shapes::StructureShape.new(name: 'ZeroEtlAccess')
@@ -472,6 +484,22 @@ module Aws::Odb
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AdminPasswordSourceConfiguration.add_member(:customer_managed_aws_secret, Shapes::ShapeRef.new(shape: CustomerManagedAwsSecretConfiguration, location_name: "customerManagedAwsSecret"))
+    AdminPasswordSourceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AdminPasswordSourceConfiguration.add_member_subclass(:customer_managed_aws_secret, Types::AdminPasswordSourceConfiguration::CustomerManagedAwsSecret)
+    AdminPasswordSourceConfiguration.add_member_subclass(:unknown, Types::AdminPasswordSourceConfiguration::Unknown)
+    AdminPasswordSourceConfiguration.struct_class = Types::AdminPasswordSourceConfiguration
+
+    AdminPasswordSourceConfigurationInput.add_member(:customer_managed_aws_secret, Shapes::ShapeRef.new(shape: CustomerManagedAwsSecretConfigurationInput, location_name: "customerManagedAwsSecret"))
+    AdminPasswordSourceConfigurationInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AdminPasswordSourceConfigurationInput.add_member_subclass(:customer_managed_aws_secret, Types::AdminPasswordSourceConfigurationInput::CustomerManagedAwsSecret)
+    AdminPasswordSourceConfigurationInput.add_member_subclass(:unknown, Types::AdminPasswordSourceConfigurationInput::Unknown)
+    AdminPasswordSourceConfigurationInput.struct_class = Types::AdminPasswordSourceConfigurationInput
+
+    AdminPasswordSourceSummary.add_member(:admin_password_source, Shapes::ShapeRef.new(shape: AdminPasswordSource, location_name: "adminPasswordSource"))
+    AdminPasswordSourceSummary.add_member(:admin_password_source_configuration, Shapes::ShapeRef.new(shape: AdminPasswordSourceConfiguration, location_name: "adminPasswordSourceConfiguration"))
+    AdminPasswordSourceSummary.struct_class = Types::AdminPasswordSourceSummary
 
     AssociateIamRoleToResourceInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "iamRoleArn"))
     AssociateIamRoleToResourceInput.add_member(:aws_integration, Shapes::ShapeRef.new(shape: SupportedAwsIntegration, required: true, location_name: "awsIntegration"))
@@ -583,6 +611,7 @@ module Aws::Odb
     AutonomousDatabase.add_member(:time_until_reconnect_clone_enabled, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timeUntilReconnectCloneEnabled"))
     AutonomousDatabase.add_member(:next_long_term_backup_time_stamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextLongTermBackupTimeStamp"))
     AutonomousDatabase.add_member(:time_undeleted, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timeUndeleted"))
+    AutonomousDatabase.add_member(:admin_password_source_summary, Shapes::ShapeRef.new(shape: AdminPasswordSourceSummary, location_name: "adminPasswordSourceSummary"))
     AutonomousDatabase.struct_class = Types::AutonomousDatabase
 
     AutonomousDatabaseApex.add_member(:apex_version, Shapes::ShapeRef.new(shape: String, location_name: "apexVersion"))
@@ -762,6 +791,7 @@ module Aws::Odb
     AutonomousDatabaseSummary.add_member(:time_until_reconnect_clone_enabled, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timeUntilReconnectCloneEnabled"))
     AutonomousDatabaseSummary.add_member(:next_long_term_backup_time_stamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextLongTermBackupTimeStamp"))
     AutonomousDatabaseSummary.add_member(:time_undeleted, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timeUndeleted"))
+    AutonomousDatabaseSummary.add_member(:admin_password_source_summary, Shapes::ShapeRef.new(shape: AdminPasswordSourceSummary, location_name: "adminPasswordSourceSummary"))
     AutonomousDatabaseSummary.struct_class = Types::AutonomousDatabaseSummary
 
     AutonomousDatabaseVersionList.member = Shapes::ShapeRef.new(shape: AutonomousDatabaseVersionSummary)
@@ -773,6 +803,7 @@ module Aws::Odb
 
     AutonomousDatabaseWalletDetails.add_member(:status, Shapes::ShapeRef.new(shape: AutonomousDatabaseWalletStatus, location_name: "status"))
     AutonomousDatabaseWalletDetails.add_member(:time_rotated, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timeRotated"))
+    AutonomousDatabaseWalletDetails.add_member(:password_source_summary, Shapes::ShapeRef.new(shape: WalletPasswordSourceSummary, location_name: "passwordSourceSummary"))
     AutonomousDatabaseWalletDetails.struct_class = Types::AutonomousDatabaseWalletDetails
 
     AutonomousVirtualMachineList.member = Shapes::ShapeRef.new(shape: AutonomousVirtualMachineSummary)
@@ -1165,6 +1196,8 @@ module Aws::Odb
     CreateAutonomousDatabaseInput.add_member(:source_configuration, Shapes::ShapeRef.new(shape: SourceConfiguration, location_name: "sourceConfiguration"))
     CreateAutonomousDatabaseInput.add_member(:encryption_key_provider, Shapes::ShapeRef.new(shape: EncryptionKeyProviderInput, location_name: "encryptionKeyProvider"))
     CreateAutonomousDatabaseInput.add_member(:encryption_key_configuration, Shapes::ShapeRef.new(shape: EncryptionKeyConfigurationInput, location_name: "encryptionKeyConfiguration"))
+    CreateAutonomousDatabaseInput.add_member(:admin_password_source, Shapes::ShapeRef.new(shape: AdminPasswordSource, location_name: "adminPasswordSource"))
+    CreateAutonomousDatabaseInput.add_member(:admin_password_source_configuration, Shapes::ShapeRef.new(shape: AdminPasswordSourceConfigurationInput, location_name: "adminPasswordSourceConfiguration"))
     CreateAutonomousDatabaseInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateAutonomousDatabaseInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAutonomousDatabaseInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateAutonomousDatabaseInput.struct_class = Types::CreateAutonomousDatabaseInput
@@ -1177,7 +1210,9 @@ module Aws::Odb
 
     CreateAutonomousDatabaseWalletInput.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "autonomousDatabaseId"))
     CreateAutonomousDatabaseWalletInput.add_member(:wallet_type, Shapes::ShapeRef.new(shape: WalletType, location_name: "walletType"))
-    CreateAutonomousDatabaseWalletInput.add_member(:password, Shapes::ShapeRef.new(shape: CreateAutonomousDatabaseWalletInputPasswordString, required: true, location_name: "password"))
+    CreateAutonomousDatabaseWalletInput.add_member(:password, Shapes::ShapeRef.new(shape: CreateAutonomousDatabaseWalletInputPasswordString, location_name: "password"))
+    CreateAutonomousDatabaseWalletInput.add_member(:password_source, Shapes::ShapeRef.new(shape: WalletPasswordSource, location_name: "passwordSource"))
+    CreateAutonomousDatabaseWalletInput.add_member(:password_source_configuration, Shapes::ShapeRef.new(shape: WalletPasswordSourceConfigurationInput, location_name: "passwordSourceConfiguration"))
     CreateAutonomousDatabaseWalletInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateAutonomousDatabaseWalletInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAutonomousDatabaseWalletInput.struct_class = Types::CreateAutonomousDatabaseWalletInput
 
@@ -1317,6 +1352,16 @@ module Aws::Odb
     CustomerContact.struct_class = Types::CustomerContact
 
     CustomerContacts.member = Shapes::ShapeRef.new(shape: CustomerContact)
+
+    CustomerManagedAwsSecretConfiguration.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRoleArn"))
+    CustomerManagedAwsSecretConfiguration.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdOrArn, location_name: "secretId"))
+    CustomerManagedAwsSecretConfiguration.add_member(:external_id_type, Shapes::ShapeRef.new(shape: ExternalIdType, location_name: "externalIdType"))
+    CustomerManagedAwsSecretConfiguration.struct_class = Types::CustomerManagedAwsSecretConfiguration
+
+    CustomerManagedAwsSecretConfigurationInput.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdOrArn, location_name: "secretId"))
+    CustomerManagedAwsSecretConfigurationInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRoleArn"))
+    CustomerManagedAwsSecretConfigurationInput.add_member(:external_id_type, Shapes::ShapeRef.new(shape: ExternalIdType, location_name: "externalIdType"))
+    CustomerManagedAwsSecretConfigurationInput.struct_class = Types::CustomerManagedAwsSecretConfigurationInput
 
     DataCollectionOptions.add_member(:is_diagnostics_events_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isDiagnosticsEventsEnabled"))
     DataCollectionOptions.add_member(:is_health_monitoring_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isHealthMonitoringEnabled"))
@@ -1696,6 +1741,7 @@ module Aws::Odb
     IamRoleList.member = Shapes::ShapeRef.new(shape: IamRole)
 
     InitializeServiceInput.add_member(:oci_identity_domain, Shapes::ShapeRef.new(shape: Boolean, location_name: "ociIdentityDomain"))
+    InitializeServiceInput.add_member(:autonomous_database_oci_aws_secrets_manager_integration, Shapes::ShapeRef.new(shape: Access, location_name: "autonomousDatabaseOciAwsSecretsManagerIntegration"))
     InitializeServiceInput.struct_class = Types::InitializeServiceInput
 
     InitializeServiceOutput.struct_class = Types::InitializeServiceOutput
@@ -1923,6 +1969,8 @@ module Aws::Odb
 
     OciIamRole.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRoleArn"))
     OciIamRole.add_member(:aws_integration, Shapes::ShapeRef.new(shape: OciAwsIntegration, location_name: "awsIntegration"))
+    OciIamRole.add_member(:status, Shapes::ShapeRef.new(shape: OciIamRoleStatus, location_name: "status"))
+    OciIamRole.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     OciIamRole.struct_class = Types::OciIamRole
 
     OciIamRoleList.member = Shapes::ShapeRef.new(shape: OciIamRole)
@@ -2276,6 +2324,8 @@ module Aws::Odb
     UpdateAutonomousDatabaseInput.add_member(:time_of_auto_refresh_start, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timeOfAutoRefreshStart"))
     UpdateAutonomousDatabaseInput.add_member(:encryption_key_provider, Shapes::ShapeRef.new(shape: EncryptionKeyProviderInput, location_name: "encryptionKeyProvider"))
     UpdateAutonomousDatabaseInput.add_member(:encryption_key_configuration, Shapes::ShapeRef.new(shape: EncryptionKeyConfigurationInput, location_name: "encryptionKeyConfiguration"))
+    UpdateAutonomousDatabaseInput.add_member(:admin_password_source, Shapes::ShapeRef.new(shape: AdminPasswordSource, location_name: "adminPasswordSource"))
+    UpdateAutonomousDatabaseInput.add_member(:admin_password_source_configuration, Shapes::ShapeRef.new(shape: AdminPasswordSourceConfigurationInput, location_name: "adminPasswordSourceConfiguration"))
     UpdateAutonomousDatabaseInput.struct_class = Types::UpdateAutonomousDatabaseInput
 
     UpdateAutonomousDatabaseOutput.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "autonomousDatabaseId"))
@@ -2337,6 +2387,22 @@ module Aws::Odb
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    WalletPasswordSourceConfiguration.add_member(:customer_managed_aws_secret, Shapes::ShapeRef.new(shape: CustomerManagedAwsSecretConfiguration, location_name: "customerManagedAwsSecret"))
+    WalletPasswordSourceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    WalletPasswordSourceConfiguration.add_member_subclass(:customer_managed_aws_secret, Types::WalletPasswordSourceConfiguration::CustomerManagedAwsSecret)
+    WalletPasswordSourceConfiguration.add_member_subclass(:unknown, Types::WalletPasswordSourceConfiguration::Unknown)
+    WalletPasswordSourceConfiguration.struct_class = Types::WalletPasswordSourceConfiguration
+
+    WalletPasswordSourceConfigurationInput.add_member(:customer_managed_aws_secret, Shapes::ShapeRef.new(shape: CustomerManagedAwsSecretConfigurationInput, location_name: "customerManagedAwsSecret"))
+    WalletPasswordSourceConfigurationInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    WalletPasswordSourceConfigurationInput.add_member_subclass(:customer_managed_aws_secret, Types::WalletPasswordSourceConfigurationInput::CustomerManagedAwsSecret)
+    WalletPasswordSourceConfigurationInput.add_member_subclass(:unknown, Types::WalletPasswordSourceConfigurationInput::Unknown)
+    WalletPasswordSourceConfigurationInput.struct_class = Types::WalletPasswordSourceConfigurationInput
+
+    WalletPasswordSourceSummary.add_member(:password_source, Shapes::ShapeRef.new(shape: WalletPasswordSource, location_name: "passwordSource"))
+    WalletPasswordSourceSummary.add_member(:password_source_configuration, Shapes::ShapeRef.new(shape: WalletPasswordSourceConfiguration, location_name: "passwordSourceConfiguration"))
+    WalletPasswordSourceSummary.struct_class = Types::WalletPasswordSourceSummary
 
     WeeksOfMonth.member = Shapes::ShapeRef.new(shape: Integer)
 

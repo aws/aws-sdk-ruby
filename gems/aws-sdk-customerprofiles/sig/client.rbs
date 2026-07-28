@@ -995,6 +995,10 @@ module Aws
                                          ?max_results: ::Integer,
                                          ?metadata_config: {
                                            metadata_columns: Array[::String]?
+                                         },
+                                         ?diversity_config: {
+                                           enabled: bool,
+                                           values: Hash[::String, ::Integer]?
                                          }
                                        ) -> _GetProfileRecommendationsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileRecommendationsResponseSuccess
@@ -1011,6 +1015,7 @@ module Aws
         def created_at: () -> ::Time
         def failure_reason: () -> ::String
         def latest_recommender_update: () -> Types::RecommenderUpdate
+        def active_recommender_version_name: () -> ::String
         def training_metrics: () -> ::Array[Types::TrainingMetrics]
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -1943,7 +1948,8 @@ module Aws
                                 domain_name: ::String,
                                 recommender_name: ::String,
                                 ?description: ::String,
-                                ?recommender_config: Params::recommender_config
+                                ?recommender_config: Params::recommender_config,
+                                ?recommender_version_name: ::String
                               ) -> _UpdateRecommenderResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecommenderResponseSuccess
     end

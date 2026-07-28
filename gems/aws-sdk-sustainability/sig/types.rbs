@@ -33,6 +33,14 @@ module Aws::Sustainability
       SENSITIVE: []
     end
 
+    class EstimatedWaterAllocation
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor dimensions_values: ::Hash[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE"), ::String]
+      attr_accessor model_version: ::String
+      attr_accessor allocation_values: ::Hash[("TOTAL_WATER_WITHDRAWALS"), Types::WaterAllocation]
+      SENSITIVE: []
+    end
+
     class FilterExpression
       attr_accessor dimensions: ::Hash[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE"), ::Array[::String]]
       SENSITIVE: []
@@ -70,6 +78,37 @@ module Aws::Sustainability
       SENSITIVE: []
     end
 
+    class GetEstimatedWaterAllocationDimensionValuesRequest
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor dimensions: ::Array[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEstimatedWaterAllocationDimensionValuesResponse
+      attr_accessor results: ::Array[Types::DimensionEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEstimatedWaterAllocationRequest
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor group_by: ::Array[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE")]
+      attr_accessor filter_by: Types::FilterExpression
+      attr_accessor allocation_types: ::Array[("TOTAL_WATER_WITHDRAWALS")]
+      attr_accessor granularity: ("YEARLY_CALENDAR" | "YEARLY_FISCAL" | "QUARTERLY_CALENDAR" | "QUARTERLY_FISCAL" | "MONTHLY")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEstimatedWaterAllocationResponse
+      attr_accessor results: ::Array[Types::EstimatedWaterAllocation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class GranularityConfiguration
       attr_accessor fiscal_year_start_month: ::Integer
       SENSITIVE: []
@@ -93,6 +132,12 @@ module Aws::Sustainability
 
     class ValidationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WaterAllocation
+      attr_accessor value: ::Float
+      attr_accessor unit: ("m3")
       SENSITIVE: []
     end
   end

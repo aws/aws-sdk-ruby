@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2026-06-29)
+------------------
+
+* Feature - Amazon EVS introduces a VMware Cloud Foundation (VCF) self-deployed mode, along with new connectors to VCF components such as the Operations and SDDC managers to monitor coverage and usage.
+
 1.21.0 (2026-05-26)
 ------------------
 

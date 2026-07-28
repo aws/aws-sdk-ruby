@@ -622,6 +622,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].environment.docker_server.security_group_ids[0] #=> String
     #   resp.build_batches[0].environment.docker_server.status.status #=> String
     #   resp.build_batches[0].environment.docker_server.status.message #=> String
+    #   resp.build_batches[0].environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.build_batches[0].service_role #=> String
     #   resp.build_batches[0].log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batches[0].log_config.cloud_watch_logs.group_name #=> String
@@ -806,6 +807,7 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.docker_server.security_group_ids[0] #=> String
     #   resp.builds[0].environment.docker_server.status.status #=> String
     #   resp.builds[0].environment.docker_server.status.message #=> String
+    #   resp.builds[0].environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.builds[0].service_role #=> String
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
@@ -1094,6 +1096,7 @@ module Aws::CodeBuild
     #   resp.projects[0].environment.docker_server.security_group_ids[0] #=> String
     #   resp.projects[0].environment.docker_server.status.status #=> String
     #   resp.projects[0].environment.docker_server.status.message #=> String
+    #   resp.projects[0].environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.projects[0].service_role #=> String
     #   resp.projects[0].timeout_in_minutes #=> Integer
     #   resp.projects[0].queued_timeout_in_minutes #=> Integer
@@ -1352,6 +1355,7 @@ module Aws::CodeBuild
     #   resp.sandboxes[0].environment.docker_server.security_group_ids[0] #=> String
     #   resp.sandboxes[0].environment.docker_server.status.status #=> String
     #   resp.sandboxes[0].environment.docker_server.status.message #=> String
+    #   resp.sandboxes[0].environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.sandboxes[0].file_system_locations #=> Array
     #   resp.sandboxes[0].file_system_locations[0].type #=> String, one of "EFS"
     #   resp.sandboxes[0].file_system_locations[0].location #=> String
@@ -2000,6 +2004,7 @@ module Aws::CodeBuild
     #           message: "String",
     #         },
     #       },
+    #       host_kernel: "LINUX_KERNEL_4", # accepts LINUX_KERNEL_4, LINUX_KERNEL_6, LINUX_KERNEL_LATEST
     #     },
     #     service_role: "NonEmptyString", # required
     #     timeout_in_minutes: 1,
@@ -2137,6 +2142,7 @@ module Aws::CodeBuild
     #   resp.project.environment.docker_server.security_group_ids[0] #=> String
     #   resp.project.environment.docker_server.status.status #=> String
     #   resp.project.environment.docker_server.status.message #=> String
+    #   resp.project.environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.queued_timeout_in_minutes #=> Integer
@@ -4027,6 +4033,7 @@ module Aws::CodeBuild
     #   resp.build.environment.docker_server.security_group_ids[0] #=> String
     #   resp.build.environment.docker_server.status.status #=> String
     #   resp.build.environment.docker_server.status.message #=> String
+    #   resp.build.environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -4200,6 +4207,7 @@ module Aws::CodeBuild
     #   resp.build_batch.environment.docker_server.security_group_ids[0] #=> String
     #   resp.build_batch.environment.docker_server.status.status #=> String
     #   resp.build_batch.environment.docker_server.status.message #=> String
+    #   resp.build_batch.environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.build_batch.service_role #=> String
     #   resp.build_batch.log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.cloud_watch_logs.group_name #=> String
@@ -4534,6 +4542,10 @@ module Aws::CodeBuild
     #   will call the `RetryBuild` API to automatically retry your build for
     #   up to 2 additional times.
     #
+    # @option params [String] :host_kernel_override
+    #   The host operating system kernel for this build that overrides the one
+    #   specified in the build project.
+    #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBuildOutput#build #build} => Types::Build
@@ -4660,6 +4672,7 @@ module Aws::CodeBuild
     #       fleet_arn: "String",
     #     },
     #     auto_retry_limit_override: 1,
+    #     host_kernel_override: "LINUX_KERNEL_4", # accepts LINUX_KERNEL_4, LINUX_KERNEL_6, LINUX_KERNEL_LATEST
     #   })
     #
     # @example Response structure
@@ -4754,6 +4767,7 @@ module Aws::CodeBuild
     #   resp.build.environment.docker_server.security_group_ids[0] #=> String
     #   resp.build.environment.docker_server.status.status #=> String
     #   resp.build.environment.docker_server.status.message #=> String
+    #   resp.build.environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -5247,6 +5261,7 @@ module Aws::CodeBuild
     #   resp.build_batch.environment.docker_server.security_group_ids[0] #=> String
     #   resp.build_batch.environment.docker_server.status.status #=> String
     #   resp.build_batch.environment.docker_server.status.message #=> String
+    #   resp.build_batch.environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.build_batch.service_role #=> String
     #   resp.build_batch.log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.cloud_watch_logs.group_name #=> String
@@ -5460,6 +5475,7 @@ module Aws::CodeBuild
     #   resp.sandbox.environment.docker_server.security_group_ids[0] #=> String
     #   resp.sandbox.environment.docker_server.status.status #=> String
     #   resp.sandbox.environment.docker_server.status.message #=> String
+    #   resp.sandbox.environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.sandbox.file_system_locations #=> Array
     #   resp.sandbox.file_system_locations[0].type #=> String, one of "EFS"
     #   resp.sandbox.file_system_locations[0].location #=> String
@@ -5659,6 +5675,7 @@ module Aws::CodeBuild
     #   resp.build.environment.docker_server.security_group_ids[0] #=> String
     #   resp.build.environment.docker_server.status.status #=> String
     #   resp.build.environment.docker_server.status.message #=> String
+    #   resp.build.environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -5819,6 +5836,7 @@ module Aws::CodeBuild
     #   resp.build_batch.environment.docker_server.security_group_ids[0] #=> String
     #   resp.build_batch.environment.docker_server.status.status #=> String
     #   resp.build_batch.environment.docker_server.status.message #=> String
+    #   resp.build_batch.environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.build_batch.service_role #=> String
     #   resp.build_batch.log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.cloud_watch_logs.group_name #=> String
@@ -5968,6 +5986,7 @@ module Aws::CodeBuild
     #   resp.sandbox.environment.docker_server.security_group_ids[0] #=> String
     #   resp.sandbox.environment.docker_server.status.status #=> String
     #   resp.sandbox.environment.docker_server.status.message #=> String
+    #   resp.sandbox.environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.sandbox.file_system_locations #=> Array
     #   resp.sandbox.file_system_locations[0].type #=> String, one of "EFS"
     #   resp.sandbox.file_system_locations[0].location #=> String
@@ -6617,6 +6636,7 @@ module Aws::CodeBuild
     #           message: "String",
     #         },
     #       },
+    #       host_kernel: "LINUX_KERNEL_4", # accepts LINUX_KERNEL_4, LINUX_KERNEL_6, LINUX_KERNEL_LATEST
     #     },
     #     service_role: "NonEmptyString",
     #     timeout_in_minutes: 1,
@@ -6754,6 +6774,7 @@ module Aws::CodeBuild
     #   resp.project.environment.docker_server.security_group_ids[0] #=> String
     #   resp.project.environment.docker_server.status.status #=> String
     #   resp.project.environment.docker_server.status.message #=> String
+    #   resp.project.environment.host_kernel #=> String, one of "LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.queued_timeout_in_minutes #=> Integer
@@ -7112,7 +7133,7 @@ module Aws::CodeBuild
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.175.0'
+      context[:gem_version] = '1.177.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

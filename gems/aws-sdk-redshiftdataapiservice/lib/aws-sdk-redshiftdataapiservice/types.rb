@@ -37,6 +37,20 @@ module Aws::RedshiftDataAPIService
       include Aws::Structure
     end
 
+    # The number of active requests with `WaitTimeSeconds` for the same SQL
+    # statement exceeds the limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ActiveWaitingRequestsExceededException AWS API Documentation
+    #
+    class ActiveWaitingRequestsExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An SQL statement encountered an environmental error while running.
     #
     # @!attribute [rw] message
@@ -56,11 +70,12 @@ module Aws::RedshiftDataAPIService
     end
 
     # @!attribute [rw] sqls
-    #   One or more SQL statements to run. The SQL statements are run as a
-    #   single transaction. They run serially in the order of the array.
-    #   Subsequent SQL statements don't start until the previous statement
-    #   in the array completes. If any SQL statement fails, then because
-    #   they are run as one transaction, all work is rolled back.
+    #   One or more SQL statements to run. The SQL statements run serially
+    #   in the order of the array. Subsequent SQL statements don't start
+    #   until the previous statement in the array completes. By default, the
+    #   SQL statements are run as a single transaction. If any SQL statement
+    #   fails, all work is rolled back. To change this behavior, see the
+    #   `ExecutionMode` parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cluster_identifier
@@ -98,8 +113,10 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The parameters for the SQL statements. The parameters are shared
-    #   across all SQL statements in the batch.
+    #   The parameters for the SQL statements. The parameters are available
+    #   to all SQL statements in the batch. Each statement can reference any
+    #   subset of the provided parameters. Each provided parameter must be
+    #   referenced by at least one SQL statement in the batch.
     #   @return [Array<Types::SqlParameter>]
     #
     # @!attribute [rw] workgroup_name
@@ -133,6 +150,21 @@ module Aws::RedshiftDataAPIService
     #   The session identifier of the query.
     #   @return [String]
     #
+    # @!attribute [rw] execution_mode
+    #   Determines how the SQL statements in the batch are run. If set to
+    #   `TRANSACTION` (the default), all SQL statements are run as a single
+    #   transaction and they are committed or rolled back together. If set
+    #   to `AUTO_COMMIT`, each SQL statement is committed individually, and
+    #   a failure of one statement does not affect the others.
+    #   @return [String]
+    #
+    # @!attribute [rw] wait_time_seconds
+    #   The number of seconds to wait for all SQL statements in the batch to
+    #   complete execution before returning the response. If the SQL
+    #   statements do not complete within the specified time, the response
+    #   returns the current status. The maximum value is 30 seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/BatchExecuteStatementInput AWS API Documentation
     #
     class BatchExecuteStatementInput < Struct.new(
@@ -148,7 +180,9 @@ module Aws::RedshiftDataAPIService
       :client_token,
       :result_format,
       :session_keep_alive_seconds,
-      :session_id)
+      :session_id,
+      :execution_mode,
+      :wait_time_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -194,6 +228,33 @@ module Aws::RedshiftDataAPIService
     #   The session identifier of the query.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the SQL statement. Status values are defined as
+    #   follows:
+    #
+    #   * ABORTED - The query run was stopped by the user.
+    #
+    #   * FAILED - The query run failed.
+    #
+    #   * FINISHED - The query has finished running.
+    #
+    #   * PICKED - The query has been chosen to be run.
+    #
+    #   * STARTED - The query run has started.
+    #
+    #   * SUBMITTED - The query was submitted, but not yet processed.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_pid
+    #   The process identifier from Amazon Redshift.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] has_result_set
+    #   A value that indicates whether the statement has a result set. The
+    #   result set can be empty. The value is true for an empty result set.
+    #   The value is true if any substatement returns a result set.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/BatchExecuteStatementOutput AWS API Documentation
     #
     class BatchExecuteStatementOutput < Struct.new(
@@ -205,7 +266,10 @@ module Aws::RedshiftDataAPIService
       :database,
       :secret_arn,
       :workgroup_name,
-      :session_id)
+      :session_id,
+      :status,
+      :redshift_pid,
+      :has_result_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -337,10 +401,17 @@ module Aws::RedshiftDataAPIService
     #   `ExecuteStatement`, and `ListStatements`.
     #   @return [String]
     #
+    # @!attribute [rw] wait_time_seconds
+    #   The number of seconds to wait for the SQL statement to complete
+    #   execution before returning the description. The maximum value is 30
+    #   seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeStatementRequest AWS API Documentation
     #
     class DescribeStatementRequest < Struct.new(
-      :id)
+      :id,
+      :wait_time_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -459,6 +530,12 @@ module Aws::RedshiftDataAPIService
     #   The session identifier of the query.
     #   @return [String]
     #
+    # @!attribute [rw] execution_mode
+    #   The execution mode of the batch request. `TRANSACTION` indicates all
+    #   SQL statements are run as a single transaction. `AUTO_COMMIT`
+    #   indicates each SQL statement is committed individually.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeStatementResponse AWS API Documentation
     #
     class DescribeStatementResponse < Struct.new(
@@ -482,7 +559,8 @@ module Aws::RedshiftDataAPIService
       :sub_statements,
       :workgroup_name,
       :result_format,
-      :session_id)
+      :session_id,
+      :execution_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -686,6 +764,13 @@ module Aws::RedshiftDataAPIService
     #   The session identifier of the query.
     #   @return [String]
     #
+    # @!attribute [rw] wait_time_seconds
+    #   The number of seconds to wait for the SQL statement to complete
+    #   execution before returning the response. If the SQL statement does
+    #   not complete within the specified time, the response returns the
+    #   current status. The maximum value is 30 seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ExecuteStatementInput AWS API Documentation
     #
     class ExecuteStatementInput < Struct.new(
@@ -701,7 +786,8 @@ module Aws::RedshiftDataAPIService
       :client_token,
       :result_format,
       :session_keep_alive_seconds,
-      :session_id)
+      :session_id,
+      :wait_time_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -746,6 +832,32 @@ module Aws::RedshiftDataAPIService
     #   The session identifier of the query.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the SQL statement. Status values are defined as
+    #   follows:
+    #
+    #   * ABORTED - The query run was stopped by the user.
+    #
+    #   * FAILED - The query run failed.
+    #
+    #   * FINISHED - The query has finished running.
+    #
+    #   * PICKED - The query has been chosen to be run.
+    #
+    #   * STARTED - The query run has started.
+    #
+    #   * SUBMITTED - The query was submitted, but not yet processed.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_pid
+    #   The process identifier from Amazon Redshift.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] has_result_set
+    #   A value that indicates whether the statement has a result set. The
+    #   result set can be empty. The value is true for an empty result set.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ExecuteStatementOutput AWS API Documentation
     #
     class ExecuteStatementOutput < Struct.new(
@@ -757,7 +869,10 @@ module Aws::RedshiftDataAPIService
       :database,
       :secret_arn,
       :workgroup_name,
-      :session_id)
+      :session_id,
+      :status,
+      :redshift_pid,
+      :has_result_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -832,11 +947,18 @@ module Aws::RedshiftDataAPIService
     #   records have been retrieved for the request.
     #   @return [String]
     #
+    # @!attribute [rw] wait_time_seconds
+    #   The number of seconds to wait for the SQL statement to complete
+    #   execution before returning the result. The maximum value is 30
+    #   seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/GetStatementResultRequest AWS API Documentation
     #
     class GetStatementResultRequest < Struct.new(
       :id,
-      :next_token)
+      :next_token,
+      :wait_time_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -894,11 +1016,18 @@ module Aws::RedshiftDataAPIService
     #   records have been retrieved for the request.
     #   @return [String]
     #
+    # @!attribute [rw] wait_time_seconds
+    #   The number of seconds to wait for the SQL statement to complete
+    #   execution before returning the result. The maximum value is 30
+    #   seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/GetStatementResultV2Request AWS API Documentation
     #
     class GetStatementResultV2Request < Struct.new(
       :id,
-      :next_token)
+      :next_token,
+      :wait_time_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1129,6 +1258,102 @@ module Aws::RedshiftDataAPIService
     #
     class ListSchemasResponse < Struct.new(
       :schemas,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned NextToken value in the next NextToken parameter and
+    #   retrying the command. If the NextToken field is empty, all response
+    #   records have been retrieved for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of sessions to return in the response. If more
+    #   sessions exist than fit in one response, the operation returns
+    #   `NextToken` to paginate the results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of a specific session to return metadata for. This
+    #   value is a universally unique identifier (UUID) generated by Amazon
+    #   Redshift Data API. When you provide `SessionId`, you can't specify
+    #   `Status`, `ClusterIdentifier`, `WorkgroupName`, or `Database`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the sessions to list. If no status is specified,
+    #   sessions with a status of `AVAILABLE` or `BUSY` are returned. Status
+    #   values are defined as follows:
+    #
+    #   * AVAILABLE – The session is open and ready to run a SQL statement.
+    #
+    #   * BUSY – The session is currently running a SQL statement.
+    #
+    #   * CLOSED – The session is closed and can no longer run SQL
+    #     statements.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_level
+    #   Specifies whether to return all sessions created by the caller's
+    #   IAM role, including sessions from previous IAM sessions. If false,
+    #   only sessions created in the current IAM session are returned. The
+    #   default is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier. Only sessions on this cluster are returned.
+    #   When providing `ClusterIdentifier`, then `WorkgroupName` can't be
+    #   specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name or Amazon Resource Name (ARN). Only
+    #   sessions on this workgroup are returned. When providing
+    #   `WorkgroupName`, then `ClusterIdentifier` can't be specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database. Only sessions connected to this database
+    #   are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListSessionsRequest AWS API Documentation
+    #
+    class ListSessionsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :session_id,
+      :status,
+      :role_level,
+      :cluster_identifier,
+      :workgroup_name,
+      :database)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sessions
+    #   The sessions that match the request.
+    #   @return [Array<Types::SessionData>]
+    #
+    # @!attribute [rw] next_token
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned NextToken value in the next NextToken parameter and
+    #   retrying the command. If the NextToken field is empty, all response
+    #   records have been retrieved for the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListSessionsResponse AWS API Documentation
+    #
+    class ListSessionsResponse < Struct.new(
+      :sessions,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1400,6 +1625,88 @@ module Aws::RedshiftDataAPIService
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the metadata for a session returned by `ListSessions`,
+    # including its status, compute target, database connection, and
+    # lifecycle timestamps.
+    #
+    # @!attribute [rw] session_id
+    #   The session identifier. This value is a universally unique
+    #   identifier (UUID) generated by Amazon Redshift Data API.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the session. Status values are defined as follows:
+    #
+    #   * AVAILABLE – The session is open and ready to run a SQL statement.
+    #
+    #   * BUSY – The session is currently running a SQL statement.
+    #
+    #   * CLOSED – The session is closed and can no longer run SQL
+    #     statements.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time (UTC) when the session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time (UTC) that the session metadata was last updated.
+    #   An example is the time the status last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] database
+    #   The name of the database that the session is connected to.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_user
+    #   The database user name.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier. This element is not returned when connecting
+    #   to a serverless workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   element is not returned when connecting to a provisioned cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_alive_seconds
+    #   The number of seconds that the session is kept alive after a query
+    #   finishes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_ttl
+    #   The date and time (UTC) when the session is set to expire and be
+    #   closed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] current_statement_id
+    #   The identifier of the SQL statement currently running in the
+    #   session. This value is a universally unique identifier (UUID)
+    #   generated by Amazon Redshift Data API. This element is returned only
+    #   when the session status is `BUSY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/SessionData AWS API Documentation
+    #
+    class SessionData < Struct.new(
+      :session_id,
+      :status,
+      :created_at,
+      :updated_at,
+      :database,
+      :db_user,
+      :cluster_identifier,
+      :workgroup_name,
+      :session_alive_seconds,
+      :session_ttl,
+      :current_statement_id)
       SENSITIVE = []
       include Aws::Structure
     end

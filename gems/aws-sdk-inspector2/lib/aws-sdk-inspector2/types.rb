@@ -200,6 +200,21 @@ module Aws::Inspector2
     #   on code repositories.
     #   @return [Types::CodeRepositoryAggregation]
     #
+    # @!attribute [rw] vm_instance_aggregation
+    #   An object that contains details about an aggregation request based
+    #   on virtual machine (VM) instances.
+    #   @return [Types::VmInstanceAggregation]
+    #
+    # @!attribute [rw] container_image_aggregation
+    #   An object that contains details about an aggregation request based
+    #   on container images.
+    #   @return [Types::ContainerImageAggregation]
+    #
+    # @!attribute [rw] serverless_function_aggregation
+    #   An object that contains details about an aggregation request based
+    #   on serverless functions.
+    #   @return [Types::ServerlessFunctionAggregation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AggregationRequest AWS API Documentation
     #
     class AggregationRequest < Struct.new(
@@ -215,6 +230,9 @@ module Aws::Inspector2
       :lambda_layer_aggregation,
       :lambda_function_aggregation,
       :code_repository_aggregation,
+      :vm_instance_aggregation,
+      :container_image_aggregation,
+      :serverless_function_aggregation,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -232,6 +250,9 @@ module Aws::Inspector2
       class LambdaLayerAggregation < AggregationRequest; end
       class LambdaFunctionAggregation < AggregationRequest; end
       class CodeRepositoryAggregation < AggregationRequest; end
+      class VmInstanceAggregation < AggregationRequest; end
+      class ContainerImageAggregation < AggregationRequest; end
+      class ServerlessFunctionAggregation < AggregationRequest; end
       class Unknown < AggregationRequest; end
     end
 
@@ -298,6 +319,21 @@ module Aws::Inspector2
     #   on code repositories.
     #   @return [Types::CodeRepositoryAggregationResponse]
     #
+    # @!attribute [rw] vm_instance_aggregation
+    #   An object that contains details about an aggregation response based
+    #   on VM instances.
+    #   @return [Types::VmInstanceAggregationResponse]
+    #
+    # @!attribute [rw] container_image_aggregation
+    #   An object that contains details about an aggregation response based
+    #   on container images.
+    #   @return [Types::ContainerImageAggregationResponse]
+    #
+    # @!attribute [rw] serverless_function_aggregation
+    #   An object that contains details about an aggregation response based
+    #   on serverless functions.
+    #   @return [Types::ServerlessFunctionAggregationResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AggregationResponse AWS API Documentation
     #
     class AggregationResponse < Struct.new(
@@ -313,6 +349,9 @@ module Aws::Inspector2
       :lambda_layer_aggregation,
       :lambda_function_aggregation,
       :code_repository_aggregation,
+      :vm_instance_aggregation,
+      :container_image_aggregation,
+      :serverless_function_aggregation,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -330,6 +369,9 @@ module Aws::Inspector2
       class LambdaLayerAggregation < AggregationResponse; end
       class LambdaFunctionAggregation < AggregationResponse; end
       class CodeRepositoryAggregation < AggregationResponse; end
+      class VmInstanceAggregation < AggregationResponse; end
+      class ContainerImageAggregation < AggregationResponse; end
+      class ServerlessFunctionAggregation < AggregationResponse; end
       class Unknown < AggregationResponse; end
     end
 
@@ -368,6 +410,45 @@ module Aws::Inspector2
     #   The Amazon Web Services account ID for the AMI.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_provider
+    #   The cloud service provider associated with this Amazon Machine Image
+    #   (AMI) aggregation. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_partition
+    #   The cloud infrastructure partition associated with this AMI
+    #   aggregation. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_region
+    #   The cloud Region associated with this AMI aggregation. The value
+    #   format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_org_id
+    #   The cloud organization ID for the AMI aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_account_id
+    #   The cloud account ID for the AMI aggregation.
+    #   @return [String]
+    #
     # @!attribute [rw] severity_counts
     #   An object that contains the count of matched findings per severity.
     #   @return [Types::SeverityCounts]
@@ -381,6 +462,11 @@ module Aws::Inspector2
     class AmiAggregationResponse < Struct.new(
       :ami,
       :account_id,
+      :cloud_provider,
+      :cloud_partition,
+      :cloud_region,
+      :cloud_org_id,
+      :cloud_account_id,
       :severity_counts,
       :affected_instances)
       SENSITIVE = []
@@ -506,6 +592,27 @@ module Aws::Inspector2
       :lambda,
       :lambda_code,
       :code_repository)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that matches connectors by the ARN of the associated Amazon
+    # Web Services Config connector.
+    #
+    # @!attribute [rw] comparison
+    #   The comparison operator for the Amazon Web Services Config connector
+    #   ARN filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The Amazon Web Services Config connector ARN value to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AwsConfigConnectorArnFilter AWS API Documentation
+    #
+    class AwsConfigConnectorArnFilter < Struct.new(
+      :comparison,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -872,6 +979,118 @@ module Aws::Inspector2
       :package_type,
       :architectures,
       :last_modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Azure-specific configuration details for creating a connector,
+    # including the Amazon Web Services Config connector association, scan
+    # scope, and regions to scan.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector to associate
+    #   with this connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration that defines which Azure resources to scan.
+    #   @return [Types::AzureScopeConfigurationInput]
+    #
+    # @!attribute [rw] azure_regions
+    #   The Azure regions to scan.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_install_vm_scanner
+    #   Specifies whether to automatically install the VM scanner on
+    #   connected Azure resources. Defaults to `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AzureProviderDetailCreate AWS API Documentation
+    #
+    class AzureProviderDetailCreate < Struct.new(
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :azure_regions,
+      :auto_install_vm_scanner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Azure-specific configuration details for updating a connector,
+    # including the scan scope and regions to scan.
+    #
+    # @!attribute [rw] azure_regions
+    #   The updated Azure regions to scan.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The updated scope configuration that defines which Azure resources
+    #   to scan.
+    #   @return [Types::AzureScopeConfigurationInput]
+    #
+    # @!attribute [rw] auto_install_vm_scanner
+    #   Specifies whether to automatically install the VM scanner on
+    #   connected Azure resources.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AzureProviderDetailUpdate AWS API Documentation
+    #
+    class AzureProviderDetailUpdate < Struct.new(
+      :azure_regions,
+      :scope_configuration,
+      :auto_install_vm_scanner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope of Azure resources that Amazon Inspector scans, defined
+    # separately for VM, container image, and serverless scanning. Returned
+    # as part of a connector's configuration.
+    #
+    # @!attribute [rw] vm_scanning
+    #   The scope configuration for VM scanning.
+    #   @return [Types::ScopeConfiguration]
+    #
+    # @!attribute [rw] container_image_scanning
+    #   The scope configuration for container image scanning.
+    #   @return [Types::ScopeConfiguration]
+    #
+    # @!attribute [rw] serverless_scanning
+    #   The scope configuration for serverless scanning.
+    #   @return [Types::ScopeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AzureScopeConfiguration AWS API Documentation
+    #
+    class AzureScopeConfiguration < Struct.new(
+      :vm_scanning,
+      :container_image_scanning,
+      :serverless_scanning)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope of Azure resources to scan, defined separately for VM,
+    # container image, and serverless scanning. Provide this when you create
+    # or update an Azure connector.
+    #
+    # @!attribute [rw] vm_scanning
+    #   The scope configuration input for VM scanning.
+    #   @return [Types::ScopeConfigurationInput]
+    #
+    # @!attribute [rw] container_image_scanning
+    #   The scope configuration input for container image scanning.
+    #   @return [Types::ScopeConfigurationInput]
+    #
+    # @!attribute [rw] serverless_scanning
+    #   The scope configuration input for serverless scanning.
+    #   @return [Types::ScopeConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AzureScopeConfigurationInput AWS API Documentation
+    #
+    class AzureScopeConfigurationInput < Struct.new(
+      :vm_scanning,
+      :container_image_scanning,
+      :serverless_scanning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2187,10 +2406,6 @@ module Aws::Inspector2
     #   The timestamp when the code security integration was last updated.
     #   @return [Time]
     #
-    # @!attribute [rw] tags
-    #   The tags associated with the code security integration.
-    #   @return [Hash<String,String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeSecurityIntegrationSummary AWS API Documentation
     #
     class CodeSecurityIntegrationSummary < Struct.new(
@@ -2200,8 +2415,7 @@ module Aws::Inspector2
       :status,
       :status_reason,
       :created_on,
-      :last_update_on,
-      :tags)
+      :last_update_on)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2309,10 +2523,6 @@ module Aws::Inspector2
     #   Inspector.
     #   @return [Types::ScopeSettings]
     #
-    # @!attribute [rw] tags
-    #   The tags associated with the scan configuration.
-    #   @return [Hash<String,String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeSecurityScanConfigurationSummary AWS API Documentation
     #
     class CodeSecurityScanConfigurationSummary < Struct.new(
@@ -2323,8 +2533,7 @@ module Aws::Inspector2
       :frequency_expression,
       :continuous_integration_scan_supported_events,
       :rule_set_categories,
-      :scope_settings,
-      :tags)
+      :scope_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2515,6 +2724,546 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Describes a connector that links an external cloud provider to Amazon
+    # Inspector for vulnerability scanning.
+    #
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The cloud provider for the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector, which indicates whether the
+    #   connector is active and scanning resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status_reason
+    #   Additional information about the current enablement status of the
+    #   connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] health
+    #   The health of the connector, which indicates whether Amazon
+    #   Inspector can reach and scan the connected resources.
+    #   @return [Types::ConnectorHealth]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the connector was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the connector was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] azure_regions
+    #   The Azure regions configured for the connector.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector associated with
+    #   this connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The Azure scope configuration for the connector.
+    #   @return [Types::AzureScopeConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the connector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] auto_install_vm_scanner
+    #   Specifies whether the VM scanner is automatically installed on
+    #   connected resources.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Connector AWS API Documentation
+    #
+    class Connector < Struct.new(
+      :connector_arn,
+      :name,
+      :description,
+      :provider,
+      :enablement_status,
+      :enablement_status_reason,
+      :health,
+      :created_at,
+      :updated_at,
+      :azure_regions,
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :tags,
+      :auto_install_vm_scanner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that matches connectors by connector ARN.
+    #
+    # @!attribute [rw] comparison
+    #   The comparison operator for the connector ARN filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The connector ARN value to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ConnectorArnFilter AWS API Documentation
+    #
+    class ConnectorArnFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container image scanning settings for a connector, including how
+    # long pushed and pulled images continue to be rescanned for
+    # vulnerabilities.
+    #
+    # @!attribute [rw] push_duration
+    #   The amount of time after a container image is pushed to a repository
+    #   during which Amazon Inspector continues to rescan the image for
+    #   vulnerabilities. Valid values are `LIFETIME`, `DAYS_3`, `DAYS_7`,
+    #   `DAYS_14`, `DAYS_30`, `DAYS_60`, `DAYS_90`, and `DAYS_180`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pull_duration
+    #   The amount of time after a container image is last pulled from a
+    #   repository during which Amazon Inspector continues to rescan the
+    #   image for vulnerabilities. Valid values are `DAYS_3`, `DAYS_7`,
+    #   `DAYS_14`, `DAYS_30`, `DAYS_60`, `DAYS_90`, and `DAYS_180`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ConnectorContainerImageScanConfiguration AWS API Documentation
+    #
+    class ConnectorContainerImageScanConfiguration < Struct.new(
+      :push_duration,
+      :pull_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the filter criteria for narrowing the results returned by a
+    # `ListConnectors` request. You can filter by connector ARN, Amazon Web
+    # Services account ID, Amazon Web Services Config connector ARN,
+    # connector type, or cloud provider.
+    #
+    # @!attribute [rw] connector_arns
+    #   Filter by connector ARNs.
+    #   @return [Array<Types::ConnectorArnFilter>]
+    #
+    # @!attribute [rw] accounts
+    #   Filter by Amazon Web Services account IDs.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] aws_config_connector_arns
+    #   Filter by Amazon Web Services Config connector ARNs.
+    #   @return [Array<Types::AwsConfigConnectorArnFilter>]
+    #
+    # @!attribute [rw] connector_type
+    #   Filter by connector type.
+    #   @return [Array<Types::ConnectorTypeFilter>]
+    #
+    # @!attribute [rw] provider
+    #   Filter by cloud provider.
+    #   @return [Array<Types::ProviderFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ConnectorFilterCriteria AWS API Documentation
+    #
+    class ConnectorFilterCriteria < Struct.new(
+      :connector_arns,
+      :accounts,
+      :aws_config_connector_arns,
+      :connector_type,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The health and connectivity status of a connector, including the last
+    # time the status was checked and any diagnostic message. Returned as
+    # part of the `Connector` structure.
+    #
+    # @!attribute [rw] connector_status
+    #   The health status of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_checked_at
+    #   The date and time when the connector health was last checked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] message
+    #   A message providing additional details about the connector health
+    #   status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ConnectorHealth AWS API Documentation
+    #
+    class ConnectorHealth < Struct.new(
+      :connector_status,
+      :last_checked_at,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scan settings that Amazon Inspector applies to resources
+    # discovered through a connector.
+    #
+    # @!attribute [rw] container_image_scanning
+    #   The container image scanning configuration, including push and pull
+    #   duration settings.
+    #   @return [Types::ConnectorContainerImageScanConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ConnectorScanConfiguration AWS API Documentation
+    #
+    class ConnectorScanConfiguration < Struct.new(
+      :container_image_scanning)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a scan configuration and the connectors it applies to.
+    # Returned in the results of a `ListConnectorScanConfigurations`
+    # request.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_arns
+    #   The list of connector ARNs associated with this Amazon Web Services
+    #   Config connector.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scan_configuration
+    #   The scan configuration settings.
+    #   @return [Types::ConnectorScanConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ConnectorScanConfigurationItem AWS API Documentation
+    #
+    class ConnectorScanConfigurationItem < Struct.new(
+      :aws_config_connector_arn,
+      :connector_arns,
+      :scan_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that matches connectors by connector type.
+    #
+    # @!attribute [rw] comparison
+    #   The comparison operator for the connector type filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The connector type value to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ConnectorTypeFilter AWS API Documentation
+    #
+    class ConnectorTypeFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An aggregation of information about container images.
+    #
+    # @!attribute [rw] resource_ids
+    #   The resource IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] image_digests
+    #   The image digests to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] repositories
+    #   The image repositories to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] registries
+    #   The image registries to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] architectures
+    #   The image architectures to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] image_tags
+    #   The image tags to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_providers
+    #   The cloud providers to aggregate findings for. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_partitions
+    #   The cloud partitions to aggregate findings for. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_regions
+    #   The cloud regions to aggregate findings for. The value format
+    #   depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_org_ids
+    #   The cloud organization IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_account_ids
+    #   The cloud account IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] last_in_use_at
+    #   The last in-use timestamps to aggregate findings for.
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] in_use_count
+    #   The in-use counts to aggregate findings for.
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] sort_order
+    #   The order to sort results by. Valid values are `ASC` and `DESC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The value to sort results by. Specify a field name from the
+    #   aggregation response, such as `CRITICAL`, `HIGH`, or `ALL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ContainerImageAggregation AWS API Documentation
+    #
+    class ContainerImageAggregation < Struct.new(
+      :resource_ids,
+      :image_digests,
+      :repositories,
+      :registries,
+      :architectures,
+      :image_tags,
+      :cloud_providers,
+      :cloud_partitions,
+      :cloud_regions,
+      :cloud_org_ids,
+      :cloud_account_ids,
+      :last_in_use_at,
+      :in_use_count,
+      :sort_order,
+      :sort_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A response that contains the results of a container image aggregation.
+    #
+    # @!attribute [rw] resource_id
+    #   The resource ID for the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_provider
+    #   The cloud service provider associated with this container image
+    #   aggregation. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_account_id
+    #   The cloud account ID for the container image aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_partition
+    #   The cloud infrastructure partition associated with this container
+    #   image aggregation. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_region
+    #   The cloud Region associated with this container image aggregation.
+    #   The value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_org_id
+    #   The cloud organization ID for the container image aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_digest
+    #   The image digest for the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository
+    #   The repository for the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry
+    #   The registry for the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] architecture
+    #   The architecture of the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_tags
+    #   The image tags attached to the container image.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID associated with the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_counts
+    #   An object that contains the counts of aggregated finding per
+    #   severity.
+    #   @return [Types::SeverityCounts]
+    #
+    # @!attribute [rw] last_in_use_at
+    #   The last time the container image was in use.
+    #   @return [Time]
+    #
+    # @!attribute [rw] in_use_count
+    #   The number of times the container image is in use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] exploit_available_active_findings_count
+    #   The number of active findings with an exploit available for the
+    #   container image.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fix_available_active_findings_count
+    #   The number of active findings with a fix available for the container
+    #   image.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ContainerImageAggregationResponse AWS API Documentation
+    #
+    class ContainerImageAggregationResponse < Struct.new(
+      :resource_id,
+      :cloud_provider,
+      :cloud_account_id,
+      :cloud_partition,
+      :cloud_region,
+      :cloud_org_id,
+      :image_digest,
+      :repository,
+      :registry,
+      :architecture,
+      :image_tags,
+      :account_id,
+      :severity_counts,
+      :last_in_use_at,
+      :in_use_count,
+      :exploit_available_active_findings_count,
+      :fix_available_active_findings_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a container image associated with a covered
+    # resource.
+    #
+    # @!attribute [rw] image_tags
+    #   The tags attached to the container image.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] image_pulled_at
+    #   The date and time the container image was pulled.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_in_use_at
+    #   The last time the container image was in use.
+    #   @return [Time]
+    #
+    # @!attribute [rw] in_use_count
+    #   The number of times the container image is in use.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ContainerImageMetadata AWS API Documentation
+    #
+    class ContainerImageMetadata < Struct.new(
+      :image_tags,
+      :image_pulled_at,
+      :last_in_use_at,
+      :in_use_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a container registry associated with a covered
+    # resource.
+    #
+    # @!attribute [rw] name
+    #   The name of the container registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ContainerRegistryMetadata AWS API Documentation
+    #
+    class ContainerRegistryMetadata < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a container repository associated with a
+    # covered resource.
+    #
+    # @!attribute [rw] name
+    #   The name of the container repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_frequency
+    #   The scan frequency for the container repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ContainerRepositoryMetadata AWS API Documentation
+    #
+    class ContainerRepositoryMetadata < Struct.new(
+      :name,
+      :scan_frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration settings for continuous integration scans that run
     # automatically when code changes are made.
     #
@@ -2678,6 +3427,50 @@ module Aws::Inspector2
     #   scanned commit.
     #   @return [Array<Types::CoverageStringFilter>]
     #
+    # @!attribute [rw] cloud_provider
+    #   The cloud provider to filter coverage results by.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] cloud_provider_account_id
+    #   The cloud provider account ID to filter coverage results by.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] cloud_provider_region
+    #   The cloud provider region to filter coverage results by.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] cloud_vm_instance_tags
+    #   The cloud VM instance tags to filter coverage results by.
+    #   @return [Array<Types::CoverageMapFilter>]
+    #
+    # @!attribute [rw] cloud_container_image_tags
+    #   The cloud container image tags to filter coverage results by.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] cloud_container_repository_name
+    #   The cloud container repository name to filter coverage results by.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] cloud_container_registry_name
+    #   The cloud container registry name to filter coverage results by.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] cloud_serverless_function_name
+    #   The cloud serverless function name to filter coverage results by.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] cloud_serverless_function_runtime
+    #   The cloud serverless function runtime to filter coverage results by.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] cloud_serverless_function_tags
+    #   The cloud serverless function tags to filter coverage results by.
+    #   @return [Array<Types::CoverageMapFilter>]
+    #
+    # @!attribute [rw] cloud_provider_org_id
+    #   The cloud provider organization ID to filter coverage results by.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CoverageFilterCriteria AWS API Documentation
     #
     class CoverageFilterCriteria < Struct.new(
@@ -2701,7 +3494,18 @@ module Aws::Inspector2
       :code_repository_project_name,
       :code_repository_provider_type,
       :code_repository_provider_type_visibility,
-      :last_scanned_commit_id)
+      :last_scanned_commit_id,
+      :cloud_provider,
+      :cloud_provider_account_id,
+      :cloud_provider_region,
+      :cloud_vm_instance_tags,
+      :cloud_container_image_tags,
+      :cloud_container_repository_name,
+      :cloud_container_registry_name,
+      :cloud_serverless_function_name,
+      :cloud_serverless_function_runtime,
+      :cloud_serverless_function_tags,
+      :cloud_provider_org_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2803,6 +3607,26 @@ module Aws::Inspector2
     #   The scan method that is applied to the instance.
     #   @return [String]
     #
+    # @!attribute [rw] provider
+    #   The cloud provider of the covered resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_account_id
+    #   The cloud provider account ID of the covered resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_org_id
+    #   The cloud provider organization ID of the covered resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_region
+    #   The cloud provider region of the covered resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_partition
+    #   The cloud provider partition of the covered resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CoveredResource AWS API Documentation
     #
     class CoveredResource < Struct.new(
@@ -2813,7 +3637,12 @@ module Aws::Inspector2
       :scan_status,
       :resource_metadata,
       :last_scanned_at,
-      :scan_mode)
+      :scan_mode,
+      :provider,
+      :provider_account_id,
+      :provider_org_id,
+      :provider_region,
+      :provider_partition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2980,6 +3809,61 @@ module Aws::Inspector2
     #
     class CreateCodeSecurityScanConfigurationResponse < Struct.new(
       :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If this token matches
+    #   a previous request, the service ignores the request but does not
+    #   return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The cloud provider for the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_detail
+    #   The provider-specific configuration details for the connector.
+    #   @return [Types::ProviderDetailCreate]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the connector.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateConnectorRequest AWS API Documentation
+    #
+    class CreateConnectorRequest < Struct.new(
+      :client_token,
+      :name,
+      :provider,
+      :description,
+      :provider_detail,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the created connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateConnectorResponse AWS API Documentation
+    #
+    class CreateConnectorResponse < Struct.new(
+      :connector_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3449,6 +4333,22 @@ module Aws::Inspector2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteConnectorRequest AWS API Documentation
+    #
+    class DeleteConnectorRequest < Struct.new(
+      :connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteConnectorResponse AWS API Documentation
+    #
+    class DeleteConnectorResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] arn
     #   The Amazon Resource Number (ARN) of the filter to be deleted.
@@ -4498,6 +5398,82 @@ module Aws::Inspector2
     #   (such as GitHub, GitLab, etc.).
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] cloud_provider
+    #   Filter criteria for the cloud provider.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_provider_region
+    #   Filter criteria for the cloud provider region.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_provider_account_id
+    #   Filter criteria for the cloud provider account ID.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_provider_org_id
+    #   Filter criteria for the cloud provider organization ID.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_vm_image_reference
+    #   Filter criteria for the image reference of a VM instance.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_vm_network_id
+    #   Filter criteria for the network ID of a VM instance.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_vm_subnet_ids
+    #   Filter criteria for the subnet IDs of a VM instance.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_image_repository_name
+    #   Filter criteria for the repository name of a container image.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_image_registry
+    #   Filter criteria for the registry of a container image.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_image_digest
+    #   Filter criteria for the digest of a container image.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_image_tags
+    #   Filter criteria for the tags of a container image.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_image_pushed_at
+    #   Filter criteria for when a container image was pushed.
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] cloud_image_architecture
+    #   Filter criteria for the architecture of a container image.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_image_last_in_use_at
+    #   Filter criteria for the last time a container image was in use.
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] cloud_image_in_use_count
+    #   Filter criteria for the in-use count of a container image.
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] cloud_serverless_function_name
+    #   Filter criteria for the name of a serverless function.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_serverless_function_runtime
+    #   Filter criteria for the runtime of a serverless function.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_serverless_function_last_modified_at
+    #   Filter criteria for when a serverless function was last modified.
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] cloud_serverless_function_execution_role
+    #   Filter criteria for the execution role of a serverless function.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/FilterCriteria AWS API Documentation
     #
     class FilterCriteria < Struct.new(
@@ -4546,7 +5522,26 @@ module Aws::Inspector2
       :code_vulnerability_file_path,
       :epss_score,
       :code_repository_project_name,
-      :code_repository_provider_type)
+      :code_repository_provider_type,
+      :cloud_provider,
+      :cloud_provider_region,
+      :cloud_provider_account_id,
+      :cloud_provider_org_id,
+      :cloud_vm_image_reference,
+      :cloud_vm_network_id,
+      :cloud_vm_subnet_ids,
+      :cloud_image_repository_name,
+      :cloud_image_registry,
+      :cloud_image_digest,
+      :cloud_image_tags,
+      :cloud_image_pushed_at,
+      :cloud_image_architecture,
+      :cloud_image_last_in_use_at,
+      :cloud_image_in_use_count,
+      :cloud_serverless_function_name,
+      :cloud_serverless_function_runtime,
+      :cloud_serverless_function_last_modified_at,
+      :cloud_serverless_function_execution_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4831,13 +5826,57 @@ module Aws::Inspector2
     #   Details about the number of fixes.
     #   @return [Integer]
     #
+    # @!attribute [rw] cloud_provider
+    #   The cloud service provider associated with this finding type
+    #   aggregation. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_account_id
+    #   The cloud account ID for the finding type aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_org_id
+    #   The cloud organization ID for the finding type aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_region
+    #   The cloud Region associated with this finding type aggregation. The
+    #   value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_partition
+    #   The cloud infrastructure partition associated with this finding type
+    #   aggregation. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/FindingTypeAggregationResponse AWS API Documentation
     #
     class FindingTypeAggregationResponse < Struct.new(
       :account_id,
       :severity_counts,
       :exploit_available_count,
-      :fix_available_count)
+      :fix_available_count,
+      :cloud_provider,
+      :cloud_account_id,
+      :cloud_org_id,
+      :cloud_region,
+      :cloud_partition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4884,13 +5923,18 @@ module Aws::Inspector2
     #   The order to sort results by.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_provider
+    #   The cloud provider associated with the free trial information.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/FreeTrialInfo AWS API Documentation
     #
     class FreeTrialInfo < Struct.new(
       :type,
       :start,
       :end,
-      :status)
+      :status,
+      :cloud_provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5117,15 +6161,15 @@ module Aws::Inspector2
     #   The timestamp when the code security integration was last updated.
     #   @return [Time]
     #
-    # @!attribute [rw] tags
-    #   The tags associated with the code security integration.
-    #   @return [Hash<String,String>]
-    #
     # @!attribute [rw] authorization_url
     #   The URL used to authorize the integration with the repository
     #   provider. This is only returned if reauthorization is required to
     #   fix a connection issue. Otherwise, it is null.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the code security integration.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCodeSecurityIntegrationResponse AWS API Documentation
     #
@@ -5137,8 +6181,8 @@ module Aws::Inspector2
       :status_reason,
       :created_on,
       :last_update_on,
-      :tags,
-      :authorization_url)
+      :authorization_url,
+      :tags)
       SENSITIVE = [:authorization_url]
       include Aws::Structure
     end
@@ -5271,11 +6315,20 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # @api private
+    # @!attribute [rw] account_id
+    #   The 12-digit Amazon Web Services account ID of the member account
+    #   whose scan configuration you want to retrieve. When specified, you
+    #   must be the delegated administrator for this member account. If not
+    #   specified, the operation returns your own configuration.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetConfigurationRequest AWS API Documentation
     #
-    class GetConfigurationRequest < Aws::EmptyStructure; end
+    class GetConfigurationRequest < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] ecr_configuration
     #   Specifies how the ECR automated re-scan duration is currently
@@ -5510,6 +6563,65 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Contains details about a container image involved in a finding.
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository the container image resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry
+    #   The registry for the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_tags
+    #   The image tags attached to the container image.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] image_digest
+    #   The image digest of the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] pushed_at
+    #   The date and time the container image was pushed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] architecture
+    #   The architecture of the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] author
+    #   The author of the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] in_use_count
+    #   The number of times the container image is in use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_in_use_at
+    #   The last time the container image was in use.
+    #   @return [Time]
+    #
+    # @!attribute [rw] platform
+    #   The platform of the container image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Image AWS API Documentation
+    #
+    class Image < Struct.new(
+      :repository_name,
+      :registry,
+      :image_tags,
+      :image_digest,
+      :pushed_at,
+      :architecture,
+      :author,
+      :in_use_count,
+      :last_in_use_at,
+      :platform)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details that define an aggregation based on container image
     # layers.
     #
@@ -5526,6 +6638,43 @@ module Aws::Inspector2
     #   The hashes associated with the layers.
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] cloud_providers
+    #   The cloud providers to aggregate findings for. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_account_ids
+    #   The cloud account IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_org_ids
+    #   The cloud organization IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_regions
+    #   The cloud regions to aggregate findings for. The value format
+    #   depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_partitions
+    #   The cloud partitions to aggregate findings for. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @!attribute [rw] sort_order
     #   The order to sort results by.
     #   @return [String]
@@ -5540,6 +6689,11 @@ module Aws::Inspector2
       :repositories,
       :resource_ids,
       :layer_hashes,
+      :cloud_providers,
+      :cloud_account_ids,
+      :cloud_org_ids,
+      :cloud_regions,
+      :cloud_partitions,
       :sort_order,
       :sort_by)
       SENSITIVE = []
@@ -5566,6 +6720,45 @@ module Aws::Inspector2
     #   image hosting the layer image.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_provider
+    #   The cloud service provider associated with this image layer
+    #   aggregation. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_account_id
+    #   The cloud account ID for the image layer aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_org_id
+    #   The cloud organization ID for the image layer aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_region
+    #   The cloud Region associated with this image layer aggregation. The
+    #   value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_partition
+    #   The cloud infrastructure partition associated with this image layer
+    #   aggregation. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [String]
+    #
     # @!attribute [rw] severity_counts
     #   An object that represents the count of matched findings per
     #   severity.
@@ -5578,6 +6771,11 @@ module Aws::Inspector2
       :resource_id,
       :layer_hash,
       :account_id,
+      :cloud_provider,
+      :cloud_account_id,
+      :cloud_org_id,
+      :cloud_region,
+      :cloud_partition,
       :severity_counts)
       SENSITIVE = []
       include Aws::Structure
@@ -6338,6 +7536,97 @@ module Aws::Inspector2
       :configurations,
       :next_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_config_connector_arns
+    #   The list of Amazon Web Services Config connector ARNs to filter
+    #   results.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   range is 1 to 50. To retrieve the remaining results, make another
+    #   request with the `nextToken` value returned from this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results. Set this value to null for
+    #   the first request. For subsequent calls, use the `nextToken` value
+    #   returned from the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListConnectorScanConfigurationsRequest AWS API Documentation
+    #
+    class ListConnectorScanConfigurationsRequest < Struct.new(
+      :aws_config_connector_arns,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_configurations
+    #   A list of scan configuration items.
+    #   @return [Array<Types::ConnectorScanConfigurationItem>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token. If this value is not null, there are additional
+    #   results available. Use this token in the `nextToken` parameter of a
+    #   subsequent request to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListConnectorScanConfigurationsResponse AWS API Documentation
+    #
+    class ListConnectorScanConfigurationsResponse < Struct.new(
+      :scan_configurations,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another request with the
+    #   `nextToken` value returned from this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results. Set this value to null for
+    #   the first request. For subsequent calls, use the `nextToken` value
+    #   returned from the previous request.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_criteria
+    #   The filter criteria to apply to the list of connectors.
+    #   @return [Types::ConnectorFilterCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListConnectorsRequest AWS API Documentation
+    #
+    class ListConnectorsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filter_criteria)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of connectors.
+    #   @return [Array<Types::Connector>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token. If this value is not null, there are additional
+    #   results available. Use this token in the `nextToken` parameter of a
+    #   subsequent request to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListConnectorsResponse AWS API Documentation
+    #
+    class ListConnectorsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = [:next_token]
       include Aws::Structure
     end
 
@@ -7301,6 +8590,67 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The provider-specific configuration details for creating a connector.
+    #
+    # @note ProviderDetailCreate is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] azure
+    #   The Azure-specific details for creating a connector.
+    #   @return [Types::AzureProviderDetailCreate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ProviderDetailCreate AWS API Documentation
+    #
+    class ProviderDetailCreate < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < ProviderDetailCreate; end
+      class Unknown < ProviderDetailCreate; end
+    end
+
+    # The provider-specific configuration details for updating a connector.
+    #
+    # @note ProviderDetailUpdate is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] azure
+    #   The Azure-specific details for updating a connector.
+    #   @return [Types::AzureProviderDetailUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ProviderDetailUpdate AWS API Documentation
+    #
+    class ProviderDetailUpdate < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < ProviderDetailUpdate; end
+      class Unknown < ProviderDetailUpdate; end
+    end
+
+    # A filter that matches connectors by cloud provider.
+    #
+    # @!attribute [rw] comparison
+    #   The comparison operator for the provider filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The cloud provider value to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ProviderFilter AWS API Documentation
+    #
+    class ProviderFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the recommended course of action to remediate the
     # finding.
     #
@@ -7372,6 +8722,45 @@ module Aws::Inspector2
     #   findings.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_provider
+    #   The cloud service provider associated with this repository
+    #   aggregation. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_partition
+    #   The cloud infrastructure partition associated with this repository
+    #   aggregation. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_region
+    #   The cloud Region associated with this repository aggregation. The
+    #   value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_org_id
+    #   The cloud organization ID for the repository aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_account_id
+    #   The cloud account ID for the repository aggregation.
+    #   @return [String]
+    #
     # @!attribute [rw] severity_counts
     #   An object that represent the count of matched findings per severity.
     #   @return [Types::SeverityCounts]
@@ -7385,6 +8774,11 @@ module Aws::Inspector2
     class RepositoryAggregationResponse < Struct.new(
       :repository,
       :account_id,
+      :cloud_provider,
+      :cloud_partition,
+      :cloud_region,
+      :cloud_org_id,
+      :cloud_account_id,
       :severity_counts,
       :affected_images)
       SENSITIVE = []
@@ -7439,6 +8833,18 @@ module Aws::Inspector2
     #   finding.
     #   @return [Types::ResourceDetails]
     #
+    # @!attribute [rw] provider
+    #   The cloud provider of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_account_id
+    #   The cloud provider account ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_org_id
+    #   The cloud provider organization ID of the resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Resource AWS API Documentation
     #
     class Resource < Struct.new(
@@ -7447,7 +8853,10 @@ module Aws::Inspector2
       :partition,
       :region,
       :tags,
-      :details)
+      :details,
+      :provider,
+      :provider_account_id,
+      :provider_org_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7474,13 +8883,31 @@ module Aws::Inspector2
     #   finding.
     #   @return [Types::CodeRepositoryDetails]
     #
+    # @!attribute [rw] vm
+    #   An object that contains details about a VM instance involved in the
+    #   finding.
+    #   @return [Types::Vm]
+    #
+    # @!attribute [rw] image
+    #   An object that contains details about a container image involved in
+    #   the finding.
+    #   @return [Types::Image]
+    #
+    # @!attribute [rw] serverless_function
+    #   An object that contains details about a serverless function involved
+    #   in the finding.
+    #   @return [Types::ServerlessFunction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
       :aws_ec2_instance,
       :aws_ecr_container_image,
       :aws_lambda_function,
-      :code_repository)
+      :code_repository,
+      :vm,
+      :image,
+      :serverless_function)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7602,6 +9029,27 @@ module Aws::Inspector2
     #   resource.
     #   @return [Types::CodeRepositoryMetadata]
     #
+    # @!attribute [rw] vm_instance
+    #   The VM instance metadata associated with a covered resource.
+    #   @return [Types::VmInstanceMetadata]
+    #
+    # @!attribute [rw] container_image
+    #   The container image metadata associated with a covered resource.
+    #   @return [Types::ContainerImageMetadata]
+    #
+    # @!attribute [rw] container_repository
+    #   The container repository metadata associated with a covered
+    #   resource.
+    #   @return [Types::ContainerRepositoryMetadata]
+    #
+    # @!attribute [rw] container_registry
+    #   The container registry metadata associated with a covered resource.
+    #   @return [Types::ContainerRegistryMetadata]
+    #
+    # @!attribute [rw] serverless_function
+    #   The serverless function metadata associated with a covered resource.
+    #   @return [Types::ServerlessFunctionMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceScanMetadata AWS API Documentation
     #
     class ResourceScanMetadata < Struct.new(
@@ -7609,7 +9057,12 @@ module Aws::Inspector2
       :ecr_image,
       :ec2,
       :lambda_function,
-      :code_repository)
+      :code_repository,
+      :vm_instance,
+      :container_image,
+      :container_repository,
+      :container_registry,
+      :serverless_function)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7896,6 +9349,64 @@ module Aws::Inspector2
       class Unknown < Schedule; end
     end
 
+    # The scope of resources that Amazon Inspector scans for a single
+    # scanning type, including the scope level, the targeted resources, and
+    # the current state.
+    #
+    # @!attribute [rw] scope_type
+    #   The type of scope. Valid values are `TENANT`, which scans all
+    #   resources in the Azure tenant, and `SUBSCRIPTION`, which scans only
+    #   the resources in the specified Azure subscriptions.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_values
+    #   The list of scope values. For subscription-level scope, these are
+    #   Azure subscription IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the scope configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason for the current state of the scope configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ScopeConfiguration AWS API Documentation
+    #
+    class ScopeConfiguration < Struct.new(
+      :scope_type,
+      :scope_values,
+      :state,
+      :state_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope of resources to scan for a single scanning type. Provide
+    # this as part of an `AzureScopeConfigurationInput` when you create or
+    # update a connector.
+    #
+    # @!attribute [rw] scope_type
+    #   The type of scope. Valid values are `TENANT`, which scans all
+    #   resources in the Azure tenant, and `SUBSCRIPTION`, which scans only
+    #   the resources in the specified Azure subscriptions.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_values
+    #   The list of scope values. For subscription-level scope, these are
+    #   Azure subscription IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ScopeConfigurationInput AWS API Documentation
+    #
+    class ScopeConfigurationInput < Struct.new(
+      :scope_type,
+      :scope_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the scope of repositories to be included in code security
     # scans.
     #
@@ -8014,6 +9525,284 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SendCisSessionTelemetryResponse AWS API Documentation
     #
     class SendCisSessionTelemetryResponse < Aws::EmptyStructure; end
+
+    # Contains details about a serverless function involved in a finding.
+    #
+    # @!attribute [rw] serverless_function_name
+    #   The name of the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime
+    #   The runtime of the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_digest
+    #   The code digest of the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date and time the serverless function was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] network_id
+    #   The network ID associated with the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnet IDs associated with the serverless function.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The security group IDs associated with the serverless function.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] execution_role
+    #   The execution role of the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   The package type of the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] architectures
+    #   The architectures of the serverless function.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] layers
+    #   The layers of the serverless function.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ServerlessFunction AWS API Documentation
+    #
+    class ServerlessFunction < Struct.new(
+      :serverless_function_name,
+      :runtime,
+      :version,
+      :code_digest,
+      :last_modified_at,
+      :network_id,
+      :subnet_ids,
+      :security_group_ids,
+      :execution_role,
+      :package_type,
+      :architectures,
+      :layers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An aggregation of information about serverless functions.
+    #
+    # @!attribute [rw] resource_ids
+    #   The resource IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] function_names
+    #   The function names to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] runtimes
+    #   The runtimes to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] function_tags
+    #   The function tags to aggregate findings for.
+    #   @return [Array<Types::MapFilter>]
+    #
+    # @!attribute [rw] cloud_providers
+    #   The cloud providers to aggregate findings for. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_partitions
+    #   The cloud partitions to aggregate findings for. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_regions
+    #   The cloud regions to aggregate findings for. The value format
+    #   depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_org_ids
+    #   The cloud organization IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_account_ids
+    #   The cloud account IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] sort_order
+    #   The order to sort results by. Valid values are `ASC` and `DESC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The value to sort results by. Specify a field name from the
+    #   aggregation response, such as `CRITICAL`, `HIGH`, or `ALL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ServerlessFunctionAggregation AWS API Documentation
+    #
+    class ServerlessFunctionAggregation < Struct.new(
+      :resource_ids,
+      :function_names,
+      :runtimes,
+      :function_tags,
+      :cloud_providers,
+      :cloud_partitions,
+      :cloud_regions,
+      :cloud_org_ids,
+      :cloud_account_ids,
+      :sort_order,
+      :sort_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A response that contains the results of a serverless function
+    # aggregation.
+    #
+    # @!attribute [rw] resource_id
+    #   The resource ID for the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_provider
+    #   The cloud service provider associated with this serverless function
+    #   aggregation. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_account_id
+    #   The cloud account ID for the serverless function aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_partition
+    #   The cloud infrastructure partition associated with this serverless
+    #   function aggregation. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_region
+    #   The cloud Region associated with this serverless function
+    #   aggregation. The value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_org_id
+    #   The cloud organization ID for the serverless function aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_name
+    #   The name of the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime
+    #   The runtime of the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags attached to the serverless function.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID associated with the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_counts
+    #   An object that contains the counts of aggregated finding per
+    #   severity.
+    #   @return [Types::SeverityCounts]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date and time the serverless function was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] exploit_available_active_findings_count
+    #   The number of active findings with an exploit available for the
+    #   serverless function.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fix_available_active_findings_count
+    #   The number of active findings with a fix available for the
+    #   serverless function.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ServerlessFunctionAggregationResponse AWS API Documentation
+    #
+    class ServerlessFunctionAggregationResponse < Struct.new(
+      :resource_id,
+      :cloud_provider,
+      :cloud_account_id,
+      :cloud_partition,
+      :cloud_region,
+      :cloud_org_id,
+      :function_name,
+      :runtime,
+      :tags,
+      :account_id,
+      :severity_counts,
+      :last_modified_at,
+      :exploit_available_active_findings_count,
+      :fix_available_active_findings_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a serverless function associated with a
+    # covered resource.
+    #
+    # @!attribute [rw] serverless_function_name
+    #   The name of the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime
+    #   The runtime of the serverless function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_tags
+    #   The tags associated with the serverless function.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ServerlessFunctionMetadata AWS API Documentation
+    #
+    class ServerlessFunctionMetadata < Struct.new(
+      :serverless_function_name,
+      :runtime,
+      :function_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # You have exceeded your service quota. To perform the requested action,
     # remove some of the relevant resources, or use Service Quotas to
@@ -8502,6 +10291,10 @@ module Aws::Inspector2
     #   The resource type to aggregate on.
     #   @return [String]
     #
+    # @!attribute [rw] finding_type
+    #   The type of finding to aggregate on.
+    #   @return [String]
+    #
     # @!attribute [rw] sort_order
     #   The order to sort results by.
     #   @return [String]
@@ -8510,19 +10303,15 @@ module Aws::Inspector2
     #   The value to sort results by.
     #   @return [String]
     #
-    # @!attribute [rw] finding_type
-    #   The type of finding to aggregate on.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/TitleAggregation AWS API Documentation
     #
     class TitleAggregation < Struct.new(
       :titles,
       :vulnerability_ids,
       :resource_type,
+      :finding_type,
       :sort_order,
-      :sort_by,
-      :finding_type)
+      :sort_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8709,6 +10498,45 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The per-scan-type inheritance reset settings for the
+    # `UpdateConfiguration` operation. Each member is independently
+    # optional. Including a member in this structure resets that scan
+    # type's configuration to inherit from the delegated administrator.
+    #
+    # @!attribute [rw] ec2_configuration
+    #   The inheritance mode for Amazon EC2 scan configuration. Set to
+    #   `INHERIT_FROM_ADMIN` to reset the member account's Amazon EC2 scan
+    #   configuration to inherit from the delegated administrator. If
+    #   omitted, the member account's existing Amazon EC2 scan
+    #   configuration is not changed.
+    #   @return [String]
+    #
+    # @!attribute [rw] ecr_configuration
+    #   The inheritance mode for Amazon ECR scan configuration. Set to
+    #   `INHERIT_FROM_ADMIN` to reset the member account's Amazon ECR scan
+    #   configuration to inherit from the delegated administrator. If
+    #   omitted, the member account's existing Amazon ECR scan
+    #   configuration is not changed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConfigurationInheritance AWS API Documentation
+    #
+    class UpdateConfigurationInheritance < Struct.new(
+      :ec2_configuration,
+      :ecr_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The 12-digit Amazon Web Services account ID of the member account
+    #   whose scan configuration you want to update. When specified, you
+    #   must be the delegated administrator for this member account. If not
+    #   specified, the operation updates your own configuration and
+    #   propagates changes to any member accounts that have not been
+    #   individually configured.
+    #   @return [String]
+    #
     # @!attribute [rw] ecr_configuration
     #   Specifies how the ECR automated re-scan will be updated for your
     #   environment.
@@ -8719,11 +10547,23 @@ module Aws::Inspector2
     #   environment.
     #   @return [Types::Ec2Configuration]
     #
+    # @!attribute [rw] update_configuration_inheritance
+    #   Specifies which scan-type configurations to reset to the delegated
+    #   administrator's inherited values for the targeted member account.
+    #   Each member of this structure is independently optional. When
+    #   specified, `ec2Configuration` and `ecrConfiguration` must be absent,
+    #   and `accountId` must also be present. Only `INHERIT_FROM_ADMIN` is
+    #   valid for each member. If not specified, the operation uses the
+    #   `ec2Configuration` and `ecrConfiguration` parameters instead.
+    #   @return [Types::UpdateConfigurationInheritance]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConfigurationRequest AWS API Documentation
     #
     class UpdateConfigurationRequest < Struct.new(
+      :account_id,
       :ecr_configuration,
-      :ec2_configuration)
+      :ec2_configuration,
+      :update_configuration_inheritance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8731,6 +10571,62 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConfigurationResponse AWS API Documentation
     #
     class UpdateConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_detail
+    #   The updated provider-specific configuration details for the
+    #   connector.
+    #   @return [Types::ProviderDetailUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConnectorRequest AWS API Documentation
+    #
+    class UpdateConnectorRequest < Struct.new(
+      :connector_arn,
+      :description,
+      :provider_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the updated connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConnectorResponse AWS API Documentation
+    #
+    class UpdateConnectorResponse < Struct.new(
+      :connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_configuration
+    #   The scan configuration settings to apply.
+    #   @return [Types::ConnectorScanConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConnectorScanConfigurationRequest AWS API Documentation
+    #
+    class UpdateConnectorScanConfigurationRequest < Struct.new(
+      :aws_config_connector_arn,
+      :scan_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConnectorScanConfigurationResponse AWS API Documentation
+    #
+    class UpdateConnectorScanConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] activate_deep_inspection
     #   Specify `TRUE` to activate Amazon Inspector deep inspection in your
@@ -8992,13 +10888,18 @@ module Aws::Inspector2
     #   The currency type used when calculating usage data.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_provider
+    #   The cloud provider associated with the usage information.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Usage AWS API Documentation
     #
     class Usage < Struct.new(
       :type,
       :total,
       :estimated_monthly_cost,
-      :currency)
+      :currency,
+      :cloud_provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9085,6 +10986,290 @@ module Aws::Inspector2
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a VM instance involved in a finding.
+    #
+    # @!attribute [rw] type
+    #   The type of the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_name
+    #   The name of the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_image_reference
+    #   The image reference of the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_v4_addresses
+    #   The IPv4 addresses of the VM instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ip_v6_addresses
+    #   The IPv6 addresses of the VM instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] network_id
+    #   The network ID associated with the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnet IDs of the VM instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The security group IDs associated with the VM instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] launched_at
+    #   The date and time the VM instance was launched.
+    #   @return [Time]
+    #
+    # @!attribute [rw] platform
+    #   The platform of the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role
+    #   The execution role of the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The key name associated with the VM instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Vm AWS API Documentation
+    #
+    class Vm < Struct.new(
+      :type,
+      :vm_name,
+      :vm_image_reference,
+      :ip_v4_addresses,
+      :ip_v6_addresses,
+      :network_id,
+      :subnet_ids,
+      :security_group_ids,
+      :launched_at,
+      :platform,
+      :execution_role,
+      :key_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An aggregation of information about VM instances.
+    #
+    # @!attribute [rw] resource_ids
+    #   The resource IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] operating_systems
+    #   The operating systems to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] instance_tags
+    #   The instance tags to aggregate findings for.
+    #   @return [Array<Types::MapFilter>]
+    #
+    # @!attribute [rw] vm_image_references
+    #   The VM image references to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_providers
+    #   The cloud providers to aggregate findings for. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_partitions
+    #   The cloud partitions to aggregate findings for. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_regions
+    #   The cloud regions to aggregate findings for. The value format
+    #   depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_org_ids
+    #   The cloud organization IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] cloud_account_ids
+    #   The cloud account IDs to aggregate findings for.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] sort_order
+    #   The order to sort results by. Valid values are `ASC` and `DESC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The value to sort results by. Specify a field name from the
+    #   aggregation response, such as `CRITICAL`, `HIGH`, `ALL`, or
+    #   `NETWORK_FINDINGS`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/VmInstanceAggregation AWS API Documentation
+    #
+    class VmInstanceAggregation < Struct.new(
+      :resource_ids,
+      :operating_systems,
+      :instance_tags,
+      :vm_image_references,
+      :cloud_providers,
+      :cloud_partitions,
+      :cloud_regions,
+      :cloud_org_ids,
+      :cloud_account_ids,
+      :sort_order,
+      :sort_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A response that contains the results of a VM instance aggregation.
+    #
+    # @!attribute [rw] resource_id
+    #   The resource ID for the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_provider
+    #   The cloud service provider associated with this VM instance
+    #   aggregation. Valid values:
+    #
+    #   * `AWS` – Findings from Amazon Web Services resources.
+    #
+    #   * `AZURE` – Findings from Microsoft Azure resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_account_id
+    #   The cloud account ID for the VM instance aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_partition
+    #   The cloud infrastructure partition associated with this VM instance
+    #   aggregation. Valid values:
+    #
+    #   * `aws` – Amazon Web Services commercial Regions.
+    #
+    #   * `aws-cn` – Amazon Web Services China Regions.
+    #
+    #   * `aws-us-gov` – Amazon Web Services GovCloud (US) Regions.
+    #
+    #   * `AzureCloud` – Azure commercial Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_region
+    #   The cloud Region associated with this VM instance aggregation. The
+    #   value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_org_id
+    #   The cloud organization ID for the VM instance aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_image_reference
+    #   The VM image reference for the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system of the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags attached to the VM instance.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID associated with the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_counts
+    #   An object that contains the counts of aggregated finding per
+    #   severity.
+    #   @return [Types::SeverityCounts]
+    #
+    # @!attribute [rw] network_findings
+    #   The number of network findings for the VM instance. This field
+    #   applies only to Amazon Web Services resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] exploit_available_active_findings_count
+    #   The number of active findings with an exploit available for the VM
+    #   instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fix_available_active_findings_count
+    #   The number of active findings with a fix available for the VM
+    #   instance.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/VmInstanceAggregationResponse AWS API Documentation
+    #
+    class VmInstanceAggregationResponse < Struct.new(
+      :resource_id,
+      :cloud_provider,
+      :cloud_account_id,
+      :cloud_partition,
+      :cloud_region,
+      :cloud_org_id,
+      :vm_image_reference,
+      :operating_system,
+      :tags,
+      :account_id,
+      :severity_counts,
+      :network_findings,
+      :exploit_available_active_findings_count,
+      :fix_available_active_findings_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a virtual machine (VM) instance associated
+    # with a covered resource.
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the VM instance.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] platform
+    #   The platform of the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] inventory_hash
+    #   The inventory hash of the VM instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_image_reference
+    #   The image reference of the VM instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/VmInstanceMetadata AWS API Documentation
+    #
+    class VmInstanceMetadata < Struct.new(
+      :tags,
+      :platform,
+      :inventory_hash,
+      :vm_image_reference)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -49,7 +49,7 @@ module Aws::CloudWatch
     #   alarms = cloud_watch.alarms({
     #     alarm_names: ["AlarmName"],
     #     alarm_name_prefix: "AlarmNamePrefix",
-    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
+    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm, LogAlarm
     #     children_of_alarm_name: "AlarmName",
     #     parents_of_alarm_name: "AlarmName",
     #     state_value: "OK", # accepts OK, ALARM, INSUFFICIENT_DATA
@@ -66,16 +66,19 @@ module Aws::CloudWatch
     #   If this parameter is specified, you cannot specify `AlarmNames`.
     # @option options [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
-    #   metric alarms or composite alarms. If you omit this parameter, only
-    #   metric alarms are returned, even if composite alarms exist in the
-    #   account.
+    #   metric alarms, composite alarms, or log alarms. If you omit this
+    #   parameter, only metric alarms are returned, even if composite alarms
+    #   or log alarms exist in the account.
     #
     #   For example, if you omit this parameter or specify `MetricAlarms`, the
     #   operation returns only a list of metric alarms. It does not return any
-    #   composite alarms, even if composite alarms exist in the account.
+    #   composite alarms or log alarms, even if they exist in the account.
     #
     #   If you specify `CompositeAlarms`, the operation returns only a list of
-    #   composite alarms, and does not return any metric alarms.
+    #   composite alarms, and does not return any metric alarms or log alarms.
+    #
+    #   If you specify `LogAlarms`, the operation returns only a list of log
+    #   alarms, and does not return any metric alarms or composite alarms.
     # @option options [String] :children_of_alarm_name
     #   If you use this parameter and specify the name of a composite alarm,
     #   the operation returns information about the "children" alarms of the
@@ -157,7 +160,7 @@ module Aws::CloudWatch
     #   composite_alarms = cloud_watch.composite_alarms({
     #     alarm_names: ["AlarmName"],
     #     alarm_name_prefix: "AlarmNamePrefix",
-    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
+    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm, LogAlarm
     #     children_of_alarm_name: "AlarmName",
     #     parents_of_alarm_name: "AlarmName",
     #     state_value: "OK", # accepts OK, ALARM, INSUFFICIENT_DATA
@@ -174,16 +177,19 @@ module Aws::CloudWatch
     #   If this parameter is specified, you cannot specify `AlarmNames`.
     # @option options [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
-    #   metric alarms or composite alarms. If you omit this parameter, only
-    #   metric alarms are returned, even if composite alarms exist in the
-    #   account.
+    #   metric alarms, composite alarms, or log alarms. If you omit this
+    #   parameter, only metric alarms are returned, even if composite alarms
+    #   or log alarms exist in the account.
     #
     #   For example, if you omit this parameter or specify `MetricAlarms`, the
     #   operation returns only a list of metric alarms. It does not return any
-    #   composite alarms, even if composite alarms exist in the account.
+    #   composite alarms or log alarms, even if they exist in the account.
     #
     #   If you specify `CompositeAlarms`, the operation returns only a list of
-    #   composite alarms, and does not return any metric alarms.
+    #   composite alarms, and does not return any metric alarms or log alarms.
+    #
+    #   If you specify `LogAlarms`, the operation returns only a list of log
+    #   alarms, and does not return any metric alarms or composite alarms.
     # @option options [String] :children_of_alarm_name
     #   If you use this parameter and specify the name of a composite alarm,
     #   the operation returns information about the "children" alarms of the

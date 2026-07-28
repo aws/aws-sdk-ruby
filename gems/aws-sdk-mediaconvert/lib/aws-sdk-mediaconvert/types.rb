@@ -3495,8 +3495,8 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] format
     #   The format of your media file. For example: MP4, QuickTime (MOV),
-    #   Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, or MPEG-PS. Note that
-    #   this will be blank if your media file has a format that the
+    #   Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, or MP3. Note
+    #   that this will be blank if your media file has a format that the
     #   MediaConvert Probe operation does not recognize.
     #   @return [String]
     #
@@ -4747,6 +4747,41 @@ module Aws::MediaConvert
     class DolbyVisionLevel6Metadata < Struct.new(
       :max_cll,
       :max_fall)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for integer-second duration normalization. When this
+    # preprocessor is present, the output duration will be adjusted to an
+    # exact integer-second boundary. If the input is within the trim
+    # threshold of an integer second, trailing frames are dropped. If within
+    # the compression threshold and less than 500ms over the previous
+    # integer second, the output is sped up slightly. Otherwise, black
+    # frames are padded to the next integer second.
+    #
+    # @!attribute [rw] integer_duration_maximum_compression_denominator
+    #   Required. Denominator of the maximum allowed compression ratio.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] integer_duration_maximum_compression_numerator
+    #   Required. Numerator of the maximum allowed compression ratio,
+    #   defined as overrun divided by target duration. For example,
+    #   numerator 5 with denominator 100 means max 5% compression. Set to 0
+    #   to disable compression entirely (only trim or pad will be used).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] integer_duration_trim_threshold_milliseconds
+    #   Maximum number of fractional milliseconds past an integer second
+    #   that qualify for the trim path (frame dropping). Default is 0
+    #   (trimming disabled).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DurationControl AWS API Documentation
+    #
+    class DurationControl < Struct.new(
+      :integer_duration_maximum_compression_denominator,
+      :integer_duration_maximum_compression_numerator,
+      :integer_duration_trim_threshold_milliseconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6525,6 +6560,12 @@ module Aws::MediaConvert
     #   or CAVLC.
     #   @return [String]
     #
+    # @!attribute [rw] explicit_weighted_prediction
+    #   Enable or disable explicit weighted prediction for the H.264
+    #   encoder. Weighted prediction improves compression efficiency for
+    #   content with fading or brightness changes between frames.
+    #   @return [String]
+    #
     # @!attribute [rw] field_encoding
     #   The video encoding method for your MPEG-4 AVC output. Keep the
     #   default value, PAFF, to have MediaConvert use PAFF encoding for
@@ -6967,6 +7008,7 @@ module Aws::MediaConvert
       :dynamic_sub_gop,
       :end_of_stream_markers,
       :entropy_encoding,
+      :explicit_weighted_prediction,
       :field_encoding,
       :flicker_adaptive_quantization,
       :framerate_control,
@@ -15728,6 +15770,14 @@ module Aws::MediaConvert
     #   output.
     #   @return [Types::DolbyVision]
     #
+    # @!attribute [rw] duration_control
+    #   Enable integer-second duration normalization. When enabled, the
+    #   output duration is adjusted to land on an exact integer-second
+    #   boundary. The adjustment method (trim, compress, or pad) is chosen
+    #   automatically based on how far the input duration is from the
+    #   nearest integer second.
+    #   @return [Types::DurationControl]
+    #
     # @!attribute [rw] hdr_10_plus
     #   Enable HDR10+ analysis and metadata injection. Compatible with HEVC
     #   only.
@@ -15765,6 +15815,7 @@ module Aws::MediaConvert
       :color_corrector,
       :deinterlacer,
       :dolby_vision,
+      :duration_control,
       :hdr_10_plus,
       :image_inserter,
       :noise_reducer,

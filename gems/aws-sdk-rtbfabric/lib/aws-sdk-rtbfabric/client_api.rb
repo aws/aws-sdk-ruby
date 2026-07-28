@@ -596,7 +596,6 @@ module Aws::RTBFabric
     GetResponderGatewayResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetResponderGatewayResponse.add_member(:active_links_count, Shapes::ShapeRef.new(shape: Integer, location_name: "activeLinksCount"))
     GetResponderGatewayResponse.add_member(:total_links_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalLinksCount"))
-    GetResponderGatewayResponse.add_member(:inbound_links_count, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "inboundLinksCount", metadata: {"deprecatedMessage" => "Use linksRequestedCount instead", "deprecatedSince" => "2026-05-11"}))
     GetResponderGatewayResponse.add_member(:links_requested_count, Shapes::ShapeRef.new(shape: Integer, location_name: "linksRequestedCount"))
     GetResponderGatewayResponse.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "gatewayType"))
     GetResponderGatewayResponse.add_member(:external_inbound_endpoint, Shapes::ShapeRef.new(shape: DomainName, location_name: "externalInboundEndpoint"))

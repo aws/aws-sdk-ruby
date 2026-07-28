@@ -218,6 +218,7 @@ module Aws::Drs
     RecoveryInstanceProperties = Shapes::StructureShape.new(name: 'RecoveryInstanceProperties')
     RecoveryInstancesForTerminationRequest = Shapes::ListShape.new(name: 'RecoveryInstancesForTerminationRequest')
     RecoveryLifeCycle = Shapes::StructureShape.new(name: 'RecoveryLifeCycle')
+    RecoveryMode = Shapes::StringShape.new(name: 'RecoveryMode')
     RecoveryResult = Shapes::StringShape.new(name: 'RecoveryResult')
     RecoverySnapshot = Shapes::StructureShape.new(name: 'RecoverySnapshot')
     RecoverySnapshotID = Shapes::StringShape.new(name: 'RecoverySnapshotID')
@@ -367,6 +368,7 @@ module Aws::Drs
     CreateLaunchConfigurationTemplateRequest.add_member(:export_bucket_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "exportBucketArn"))
     CreateLaunchConfigurationTemplateRequest.add_member(:post_launch_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "postLaunchEnabled"))
     CreateLaunchConfigurationTemplateRequest.add_member(:launch_into_source_instance, Shapes::ShapeRef.new(shape: Boolean, location_name: "launchIntoSourceInstance"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:recovery_mode, Shapes::ShapeRef.new(shape: RecoveryMode, location_name: "recoveryMode"))
     CreateLaunchConfigurationTemplateRequest.struct_class = Types::CreateLaunchConfigurationTemplateRequest
 
     CreateLaunchConfigurationTemplateResponse.add_member(:launch_configuration_template, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplate, location_name: "launchConfigurationTemplate"))
@@ -711,6 +713,7 @@ module Aws::Drs
     LaunchConfiguration.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
     LaunchConfiguration.add_member(:post_launch_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "postLaunchEnabled"))
     LaunchConfiguration.add_member(:launch_into_instance_properties, Shapes::ShapeRef.new(shape: LaunchIntoInstanceProperties, location_name: "launchIntoInstanceProperties"))
+    LaunchConfiguration.add_member(:recovery_mode, Shapes::ShapeRef.new(shape: RecoveryMode, location_name: "recoveryMode"))
     LaunchConfiguration.struct_class = Types::LaunchConfiguration
 
     LaunchConfigurationTemplate.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, location_name: "launchConfigurationTemplateID"))
@@ -724,6 +727,7 @@ module Aws::Drs
     LaunchConfigurationTemplate.add_member(:export_bucket_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "exportBucketArn"))
     LaunchConfigurationTemplate.add_member(:post_launch_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "postLaunchEnabled"))
     LaunchConfigurationTemplate.add_member(:launch_into_source_instance, Shapes::ShapeRef.new(shape: Boolean, location_name: "launchIntoSourceInstance"))
+    LaunchConfigurationTemplate.add_member(:recovery_mode, Shapes::ShapeRef.new(shape: RecoveryMode, location_name: "recoveryMode"))
     LaunchConfigurationTemplate.struct_class = Types::LaunchConfigurationTemplate
 
     LaunchConfigurationTemplateIDs.member = Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID)
@@ -1213,6 +1217,7 @@ module Aws::Drs
     UpdateLaunchConfigurationRequest.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
     UpdateLaunchConfigurationRequest.add_member(:post_launch_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "postLaunchEnabled"))
     UpdateLaunchConfigurationRequest.add_member(:launch_into_instance_properties, Shapes::ShapeRef.new(shape: LaunchIntoInstanceProperties, location_name: "launchIntoInstanceProperties"))
+    UpdateLaunchConfigurationRequest.add_member(:recovery_mode, Shapes::ShapeRef.new(shape: RecoveryMode, location_name: "recoveryMode"))
     UpdateLaunchConfigurationRequest.struct_class = Types::UpdateLaunchConfigurationRequest
 
     UpdateLaunchConfigurationTemplateRequest.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
@@ -1224,6 +1229,7 @@ module Aws::Drs
     UpdateLaunchConfigurationTemplateRequest.add_member(:export_bucket_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "exportBucketArn"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:post_launch_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "postLaunchEnabled"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:launch_into_source_instance, Shapes::ShapeRef.new(shape: Boolean, location_name: "launchIntoSourceInstance"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:recovery_mode, Shapes::ShapeRef.new(shape: RecoveryMode, location_name: "recoveryMode"))
     UpdateLaunchConfigurationTemplateRequest.struct_class = Types::UpdateLaunchConfigurationTemplateRequest
 
     UpdateLaunchConfigurationTemplateResponse.add_member(:launch_configuration_template, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplate, location_name: "launchConfigurationTemplate"))

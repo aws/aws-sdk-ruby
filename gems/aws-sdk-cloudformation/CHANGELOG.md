@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.155.0 (2026-06-30)
+------------------
+
+* Feature - AWS CloudFormation adds a DeploymentConfig parameter to enable Express mode, which completes stack operations as soon as resource configuration is applied. Also adds a DisableValidation parameter to skip pre-deployment validation, which now runs automatically on CreateStack and UpdateStak.
+
 1.154.0 (2026-06-04)
 ------------------
 

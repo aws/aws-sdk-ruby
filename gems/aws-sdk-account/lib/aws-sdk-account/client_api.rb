@@ -47,6 +47,8 @@ module Aws::Account
     GetGovCloudAccountInformationResponse = Shapes::StructureShape.new(name: 'GetGovCloudAccountInformationResponse')
     GetPrimaryEmailRequest = Shapes::StructureShape.new(name: 'GetPrimaryEmailRequest')
     GetPrimaryEmailResponse = Shapes::StructureShape.new(name: 'GetPrimaryEmailResponse')
+    GetPrimaryEmailUpdateStatusRequest = Shapes::StructureShape.new(name: 'GetPrimaryEmailUpdateStatusRequest')
+    GetPrimaryEmailUpdateStatusResponse = Shapes::StructureShape.new(name: 'GetPrimaryEmailUpdateStatusResponse')
     GetRegionOptStatusRequest = Shapes::StructureShape.new(name: 'GetRegionOptStatusRequest')
     GetRegionOptStatusResponse = Shapes::StructureShape.new(name: 'GetRegionOptStatusResponse')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -75,6 +77,7 @@ module Aws::Account
     StartPrimaryEmailUpdateResponse = Shapes::StructureShape.new(name: 'StartPrimaryEmailUpdateResponse')
     StateOrRegion = Shapes::StringShape.new(name: 'StateOrRegion')
     String = Shapes::StringShape.new(name: 'String')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Title = Shapes::StringShape.new(name: 'Title')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -166,6 +169,13 @@ module Aws::Account
 
     GetPrimaryEmailResponse.add_member(:primary_email, Shapes::ShapeRef.new(shape: PrimaryEmailAddress, location_name: "PrimaryEmail"))
     GetPrimaryEmailResponse.struct_class = Types::GetPrimaryEmailResponse
+
+    GetPrimaryEmailUpdateStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    GetPrimaryEmailUpdateStatusRequest.struct_class = Types::GetPrimaryEmailUpdateStatusRequest
+
+    GetPrimaryEmailUpdateStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: PrimaryEmailUpdateStatus, required: true, location_name: "Status"))
+    GetPrimaryEmailUpdateStatusResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    GetPrimaryEmailUpdateStatusResponse.struct_class = Types::GetPrimaryEmailUpdateStatusResponse
 
     GetRegionOptStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     GetRegionOptStatusRequest.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
@@ -373,6 +383,19 @@ module Aws::Account
         o.http_request_uri = "/getPrimaryEmail"
         o.input = Shapes::ShapeRef.new(shape: GetPrimaryEmailRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPrimaryEmailResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_primary_email_update_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPrimaryEmailUpdateStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/getPrimaryEmailUpdateStatus"
+        o.input = Shapes::ShapeRef.new(shape: GetPrimaryEmailUpdateStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPrimaryEmailUpdateStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

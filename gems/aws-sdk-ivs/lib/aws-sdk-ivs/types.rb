@@ -10,6 +10,8 @@
 module Aws::IVS
   module Types
 
+    # User does not have sufficient access to perform this action.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -76,6 +78,11 @@ module Aws::IVS
     #   [1]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
     #   @return [Array<Types::MediaTailorPlaybackConfiguration>]
     #
+    # @!attribute [rw] post_roll_configuration
+    #   Configuration for the post-roll ad break to use for this ad
+    #   configuration.
+    #   @return [Types::PostRollConfiguration]
+    #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
     #   `string:string (key:value)`. See [Best practices and strategies][1]
@@ -95,6 +102,7 @@ module Aws::IVS
       :arn,
       :name,
       :media_tailor_playback_configurations,
+      :post_roll_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -121,6 +129,11 @@ module Aws::IVS
     #   [1]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
     #   @return [Array<Types::MediaTailorPlaybackConfiguration>]
     #
+    # @!attribute [rw] post_roll_configuration
+    #   Configuration for the post-roll ad break to use for this ad
+    #   configuration.
+    #   @return [Types::PostRollConfiguration]
+    #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
     #   `string:string (key:value)`. See [Best practices and strategies][1]
@@ -140,6 +153,7 @@ module Aws::IVS
       :arn,
       :name,
       :media_tailor_playback_configurations,
+      :post_roll_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -660,6 +674,8 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # The stream is offline for the given channel ARN.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -795,6 +811,8 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Updating or deleting a resource can cause an inconsistent state.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -854,6 +872,12 @@ module Aws::IVS
     #   [1]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
     #   @return [Array<Types::MediaTailorPlaybackConfiguration>]
     #
+    # @!attribute [rw] post_roll_configuration
+    #   Configuration for the post-roll ad break to use for this ad
+    #   configuration. Default: disabled (`enabled` set to false,
+    #   `durationSeconds` set to 15).
+    #   @return [Types::PostRollConfiguration]
+    #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   See [Best practices and strategies][1] in *Tagging Amazon Web
@@ -872,6 +896,7 @@ module Aws::IVS
     class CreateAdConfigurationRequest < Struct.new(
       :name,
       :media_tailor_playback_configurations,
+      :post_roll_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1596,6 +1621,8 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Unexpected error during processing of request.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -2041,6 +2068,8 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Your account is pending verification.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -2283,6 +2312,26 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Configuration for the post-roll ad break to use for this ad
+    # configuration.
+    #
+    # @!attribute [rw] duration_seconds
+    #   Duration of the post-roll ad break, in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled
+    #   Whether the post-roll ad configuration is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PostRollConfiguration AWS API Documentation
+    #
+    class PostRollConfiguration < Struct.new(
+      :duration_seconds,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_arn
     #   ARN of the channel into which metadata is inserted. This channel
     #   must have an active stream.
@@ -2446,6 +2495,8 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Request references a resource which does not exist.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -2505,6 +2556,8 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Request would cause a service quota to be exceeded.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -2549,6 +2602,8 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # The service is temporarily unavailable.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -3028,6 +3083,8 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # The stream is temporarily unavailable.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -3103,6 +3160,8 @@ module Aws::IVS
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Request was denied due to request throttling.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -3257,12 +3316,18 @@ module Aws::IVS
     #   [1]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
     #   @return [Array<Types::MediaTailorPlaybackConfiguration>]
     #
+    # @!attribute [rw] post_roll_configuration
+    #   Configuration for the post-roll ad break to use for this ad
+    #   configuration.
+    #   @return [Types::PostRollConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateAdConfigurationRequest AWS API Documentation
     #
     class UpdateAdConfigurationRequest < Struct.new(
       :arn,
       :name,
-      :media_tailor_playback_configurations)
+      :media_tailor_playback_configurations,
+      :post_roll_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3440,6 +3505,9 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # The input fails to satisfy the constraints specified by an Amazon Web
+    # Services service.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #

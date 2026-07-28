@@ -885,6 +885,7 @@ module Aws::EntityResolution
     ResolutionTechniques.add_member(:resolution_type, Shapes::ShapeRef.new(shape: ResolutionType, required: true, location_name: "resolutionType"))
     ResolutionTechniques.add_member(:rule_based_properties, Shapes::ShapeRef.new(shape: RuleBasedProperties, location_name: "ruleBasedProperties"))
     ResolutionTechniques.add_member(:rule_condition_properties, Shapes::ShapeRef.new(shape: RuleConditionProperties, location_name: "ruleConditionProperties"))
+    ResolutionTechniques.add_member(:enable_real_time_matching, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableRealTimeMatching"))
     ResolutionTechniques.add_member(:provider_properties, Shapes::ShapeRef.new(shape: ProviderProperties, location_name: "providerProperties"))
     ResolutionTechniques.struct_class = Types::ResolutionTechniques
 

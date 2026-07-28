@@ -60,6 +60,8 @@ module Aws
       end
       class MaxNumberOfConformancePacksExceededException < ::Aws::Errors::ServiceError
       end
+      class MaxNumberOfConnectorsExceededException < ::Aws::Errors::ServiceError
+      end
       class MaxNumberOfDeliveryChannelsExceededException < ::Aws::Errors::ServiceError
       end
       class MaxNumberOfOrganizationConfigRulesExceededException < ::Aws::Errors::ServiceError

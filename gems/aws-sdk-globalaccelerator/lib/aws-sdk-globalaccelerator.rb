@@ -54,7 +54,7 @@ module Aws::GlobalAccelerator
   autoload :EndpointProvider, 'aws-sdk-globalaccelerator/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-globalaccelerator/endpoints'
 
-  GEM_VERSION = '1.93.0'
+  GEM_VERSION = '1.94.0'
 
 end
 

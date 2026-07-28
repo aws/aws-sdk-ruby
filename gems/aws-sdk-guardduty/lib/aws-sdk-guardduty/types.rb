@@ -729,6 +729,70 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about a Bedrock guardrail associated with a
+    # finding.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Bedrock guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the Bedrock guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/BedrockGuardrail AWS API Documentation
+    #
+    class BedrockGuardrail < Struct.new(
+      :arn,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the Bedrock guardrail that was involved in
+    # a finding.
+    #
+    # @!attribute [rw] guardrail_arn
+    #   The ARN of the Bedrock guardrail. This field is deprecated. Use the
+    #   `guardrails` list instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_version
+    #   The version of the Bedrock guardrail. This field is deprecated. Use
+    #   the `guardrails` list instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrails
+    #   The list of Bedrock guardrails associated with the finding.
+    #   @return [Array<Types::BedrockGuardrail>]
+    #
+    # @!attribute [rw] guardrail_action
+    #   Indicates whether the guardrail intervened or not.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_source
+    #   Indicates whether the guardrail was applied on the input or output
+    #   of the model invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_policy_filters
+    #   The list of content policy filters that matched during the guardrail
+    #   evaluation.
+    #   @return [Array<Types::ContentPolicyFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/BedrockGuardrailDetails AWS API Documentation
+    #
+    class BedrockGuardrailDetails < Struct.new(
+      :guardrail_arn,
+      :guardrail_version,
+      :guardrails,
+      :guardrail_action,
+      :guardrail_source,
+      :content_policy_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information on how the bucker owner's S3 Block Public Access
     # settings are being applied to the S3 bucket. See [S3 Block Public
     # Access][1] for more information.
@@ -1104,6 +1168,31 @@ module Aws::GuardDuty
     class ContainerInstanceDetails < Struct.new(
       :covered_container_instances,
       :compatible_container_instances)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a content policy filter that matched during
+    # a guardrail evaluation.
+    #
+    # @!attribute [rw] type
+    #   The type of content that was filtered by the guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence level that the content matched the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action taken by the guardrail filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ContentPolicyFilter AWS API Documentation
+    #
+    class ContentPolicyFilter < Struct.new(
+      :type,
+      :confidence,
+      :action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5707,6 +5796,25 @@ module Aws::GuardDuty
     #   The tags of the filter resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] created_at
+    #   The timestamp when the filter was created. This field is not
+    #   available for filters that were created before the lifecycle
+    #   metadata feature was enabled (legacy filters).
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the filter was last updated. For legacy filters,
+    #   this field is present only after the filter has been updated at
+    #   least once since the lifecycle metadata feature was enabled.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version of the filter. Every time the filter is updated, the
+    #   version increments by 1. This field is not available for legacy
+    #   filters that were created before the lifecycle metadata feature was
+    #   enabled.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilterResponse AWS API Documentation
     #
     class GetFilterResponse < Struct.new(
@@ -5715,7 +5823,10 @@ module Aws::GuardDuty
       :action,
       :rank,
       :finding_criteria,
-      :tags)
+      :tags,
+      :created_at,
+      :updated_at,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9215,6 +9326,20 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the AI model involved in a finding.
+    #
+    # @!attribute [rw] model_id
+    #   The identifier of the AI model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ModelDetail AWS API Documentation
+    #
+    class ModelDetail < Struct.new(
+      :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the network connection.
     #
     # @!attribute [rw] direction
@@ -9421,10 +9546,15 @@ module Aws::GuardDuty
     #   The text that was unusual.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] number
+    #   The numeric values that were unusual.
+    #   @return [Array<Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Observations AWS API Documentation
     #
     class Observations < Struct.new(
-      :text)
+      :text,
+      :number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10446,11 +10576,18 @@ module Aws::GuardDuty
     #   The name of the backup vault containing the recovery point.
     #   @return [String]
     #
+    # @!attribute [rw] continuous_scan_details
+    #   Contains information about the time range within the continuous
+    #   backup in Amazon Web Services Backup that was scanned for a
+    #   point-in-time recovery resource.
+    #   @return [Types::ScanConfigurationContinuousScanDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RecoveryPointDetails AWS API Documentation
     #
     class RecoveryPointDetails < Struct.new(
       :recovery_point_arn,
-      :backup_vault_name)
+      :backup_vault_name,
+      :continuous_scan_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10610,6 +10747,15 @@ module Aws::GuardDuty
     #   Contains details about the backup recovery point that was scanned.
     #   @return [Types::RecoveryPointDetails]
     #
+    # @!attribute [rw] bedrock_guardrail_details
+    #   Contains information about the Bedrock guardrail that was involved
+    #   in a finding.
+    #   @return [Types::BedrockGuardrailDetails]
+    #
+    # @!attribute [rw] model_details
+    #   Contains information about the AI models involved in a finding.
+    #   @return [Array<Types::ModelDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource AWS API Documentation
     #
     class Resource < Struct.new(
@@ -10628,7 +10774,9 @@ module Aws::GuardDuty
       :rds_db_user_details,
       :ebs_snapshot_details,
       :ec2_image_details,
-      :recovery_point_details)
+      :recovery_point_details,
+      :bedrock_guardrail_details,
+      :model_details)
       SENSITIVE = []
       include Aws::Structure
     end

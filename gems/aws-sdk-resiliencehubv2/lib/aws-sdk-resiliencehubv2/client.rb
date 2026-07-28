@@ -819,6 +819,8 @@ module Aws::Resiliencehubv2
     #   resp.service.permission_model.cross_account_roles[0].external_id #=> String
     #   resp.service.dependency_discovery.status #=> String, one of "ENABLED", "INITIALIZING", "DISABLED"
     #   resp.service.dependency_discovery.updated_at #=> Time
+    #   resp.service.dependency_discovery.eligible_resource_count #=> Integer
+    #   resp.service.dependency_discovery.message #=> String
     #   resp.service.effective_policy_values.availability_slo.value #=> Float
     #   resp.service.effective_policy_values.availability_slo.policy_name #=> String
     #   resp.service.effective_policy_values.availability_slo.source #=> String, one of "SELF", "CROSS_ACCOUNT"
@@ -846,6 +848,7 @@ module Aws::Resiliencehubv2
     #   resp.service.achievability.availability_slo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.achievability.multi_az_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.achievability.multi_region_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
+    #   resp.service.achievability.data_recovery_time_between_backups #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.report_configuration.report_outputs #=> Array
     #   resp.service.report_configuration.report_outputs[0].s3.bucket_path #=> String
     #   resp.service.report_configuration.report_outputs[0].s3.bucket_owner #=> String
@@ -1475,6 +1478,8 @@ module Aws::Resiliencehubv2
     #   resp.service.permission_model.cross_account_roles[0].external_id #=> String
     #   resp.service.dependency_discovery.status #=> String, one of "ENABLED", "INITIALIZING", "DISABLED"
     #   resp.service.dependency_discovery.updated_at #=> Time
+    #   resp.service.dependency_discovery.eligible_resource_count #=> Integer
+    #   resp.service.dependency_discovery.message #=> String
     #   resp.service.effective_policy_values.availability_slo.value #=> Float
     #   resp.service.effective_policy_values.availability_slo.policy_name #=> String
     #   resp.service.effective_policy_values.availability_slo.source #=> String, one of "SELF", "CROSS_ACCOUNT"
@@ -1502,6 +1507,7 @@ module Aws::Resiliencehubv2
     #   resp.service.achievability.availability_slo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.achievability.multi_az_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.achievability.multi_region_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
+    #   resp.service.achievability.data_recovery_time_between_backups #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.report_configuration.report_outputs #=> Array
     #   resp.service.report_configuration.report_outputs[0].s3.bucket_path #=> String
     #   resp.service.report_configuration.report_outputs[0].s3.bucket_owner #=> String
@@ -1686,6 +1692,8 @@ module Aws::Resiliencehubv2
     #   resp.service.permission_model.cross_account_roles[0].external_id #=> String
     #   resp.service.dependency_discovery.status #=> String, one of "ENABLED", "INITIALIZING", "DISABLED"
     #   resp.service.dependency_discovery.updated_at #=> Time
+    #   resp.service.dependency_discovery.eligible_resource_count #=> Integer
+    #   resp.service.dependency_discovery.message #=> String
     #   resp.service.effective_policy_values.availability_slo.value #=> Float
     #   resp.service.effective_policy_values.availability_slo.policy_name #=> String
     #   resp.service.effective_policy_values.availability_slo.source #=> String, one of "SELF", "CROSS_ACCOUNT"
@@ -1713,6 +1721,7 @@ module Aws::Resiliencehubv2
     #   resp.service.achievability.availability_slo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.achievability.multi_az_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.achievability.multi_region_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
+    #   resp.service.achievability.data_recovery_time_between_backups #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.report_configuration.report_outputs #=> Array
     #   resp.service.report_configuration.report_outputs[0].s3.bucket_path #=> String
     #   resp.service.report_configuration.report_outputs[0].s3.bucket_owner #=> String
@@ -1944,6 +1953,23 @@ module Aws::Resiliencehubv2
     # @option params [required, String] :service_arn
     #   ARN identifier.
     #
+    # @option params [Array<String>] :assessment_statuses
+    #   Specifies the assessment statuses to include in the results.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :started_after
+    #   Specifies that only assessments that started at or after this
+    #   timestamp appear in the results.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :ended_before
+    #   Specifies that only assessments that ended at or before this timestamp
+    #   appear in the results.
+    #
+    # @option params [String] :sort_by
+    #   The field to use for sorting failure mode assessments.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for results.
+    #
     # @option params [Integer] :max_results
     #   Pagination page size.
     #
@@ -1961,6 +1987,11 @@ module Aws::Resiliencehubv2
     #
     #   resp = client.list_failure_mode_assessments({
     #     service_arn: "Arn", # required
+    #     assessment_statuses: ["NOT_STARTED"], # accepts NOT_STARTED, PENDING, IN_PROGRESS, FAILED, SUCCESS
+    #     started_after: Time.now,
+    #     ended_before: Time.now,
+    #     sort_by: "STARTED_AT", # accepts STARTED_AT
+    #     sort_order: "ASC", # accepts ASC, DESC
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -1971,7 +2002,7 @@ module Aws::Resiliencehubv2
     #   resp.assessment_summaries[0].assessment_id #=> String
     #   resp.assessment_summaries[0].service_arn #=> String
     #   resp.assessment_summaries[0].assessment_status #=> String, one of "NOT_STARTED", "PENDING", "IN_PROGRESS", "FAILED", "SUCCESS"
-    #   resp.assessment_summaries[0].assessment_step #=> String, one of "TOPOLOGY_ENHANCEMENT", "SERVICE_FUNCTION_GENERATION", "RESILIENCE_ASSESSMENT"
+    #   resp.assessment_summaries[0].assessment_step #=> String, one of "TOPOLOGY_GENERATION", "INPUT_VALIDATION", "DESIGN_ANALYSIS", "TOPOLOGY_ENHANCEMENT", "SERVICE_FUNCTION_GENERATION", "POLICY_VALIDATION", "RESILIENCE_ASSESSMENT", "FAILURE_MODE_FINDINGS_CONSOLIDATION", "FAILURE_MODE_FINDINGS_ENRICHMENT"
     #   resp.assessment_summaries[0].total_findings #=> Integer
     #   resp.assessment_summaries[0].started_at #=> Time
     #   resp.assessment_summaries[0].ended_at #=> Time
@@ -1983,6 +2014,7 @@ module Aws::Resiliencehubv2
     #   resp.assessment_summaries[0].achievability.availability_slo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.assessment_summaries[0].achievability.multi_az_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.assessment_summaries[0].achievability.multi_region_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
+    #   resp.assessment_summaries[0].achievability.data_recovery_time_between_backups #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.next_token #=> String
     #
     #
@@ -2235,6 +2267,13 @@ module Aws::Resiliencehubv2
     # @option params [String] :aws_region
     #   Filter resources by AWS Region.
     #
+    # @option params [Array<String>] :resource_types
+    #   The CloudFormation resource types to include in the response.
+    #
+    # @option params [Boolean] :billable
+    #   Specifies whether to filter non-billable resources. When true (the
+    #   default), the operation returns only billable resources.
+    #
     # @option params [Integer] :max_results
     #   Pagination page size.
     #
@@ -2255,6 +2294,8 @@ module Aws::Resiliencehubv2
     #     service_arn: "Arn", # required
     #     service_function_id: "EntityId",
     #     aws_region: "AwsRegion",
+    #     resource_types: ["ResourceTypeFilter"],
+    #     billable: false,
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -2468,6 +2509,10 @@ module Aws::Resiliencehubv2
     #   resp.service_topology_edge_summaries #=> Array
     #   resp.service_topology_edge_summaries[0].source_resource_identifier #=> String
     #   resp.service_topology_edge_summaries[0].destination_resource_identifier #=> String
+    #   resp.service_topology_edge_summaries[0].source_region #=> String
+    #   resp.service_topology_edge_summaries[0].destination_region #=> String
+    #   resp.service_topology_edge_summaries[0].source_account #=> String
+    #   resp.service_topology_edge_summaries[0].destination_account #=> String
     #   resp.service_topology_edge_summaries[0].properties #=> Array
     #   resp.service_topology_edge_summaries[0].properties[0].topology_type #=> String, one of "CONTAINMENT", "DATA_FLOW", "OBSERVABILITY", "PERMISSIONS"
     #   resp.service_topology_edge_summaries[0].properties[0].label #=> String
@@ -2546,9 +2591,12 @@ module Aws::Resiliencehubv2
     #   resp.service_summaries[0].resolved_findings_count #=> Integer
     #   resp.service_summaries[0].dependency_discovery.status #=> String, one of "ENABLED", "INITIALIZING", "DISABLED"
     #   resp.service_summaries[0].dependency_discovery.updated_at #=> Time
+    #   resp.service_summaries[0].dependency_discovery.eligible_resource_count #=> Integer
+    #   resp.service_summaries[0].dependency_discovery.message #=> String
     #   resp.service_summaries[0].achievability.availability_slo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service_summaries[0].achievability.multi_az_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service_summaries[0].achievability.multi_region_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
+    #   resp.service_summaries[0].achievability.data_recovery_time_between_backups #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service_summaries[0].organization_id #=> String
     #   resp.service_summaries[0].ou_id #=> String
     #   resp.service_summaries[0].account_id #=> String
@@ -2779,7 +2827,7 @@ module Aws::Resiliencehubv2
       req.send_request(options)
     end
 
-    # Start a failure mode assessment.
+    # Starts a failure mode assessment.
     #
     # @option params [required, String] :service_arn
     #   ARN identifier.
@@ -3189,6 +3237,8 @@ module Aws::Resiliencehubv2
     #   resp.service.permission_model.cross_account_roles[0].external_id #=> String
     #   resp.service.dependency_discovery.status #=> String, one of "ENABLED", "INITIALIZING", "DISABLED"
     #   resp.service.dependency_discovery.updated_at #=> Time
+    #   resp.service.dependency_discovery.eligible_resource_count #=> Integer
+    #   resp.service.dependency_discovery.message #=> String
     #   resp.service.effective_policy_values.availability_slo.value #=> Float
     #   resp.service.effective_policy_values.availability_slo.policy_name #=> String
     #   resp.service.effective_policy_values.availability_slo.source #=> String, one of "SELF", "CROSS_ACCOUNT"
@@ -3216,6 +3266,7 @@ module Aws::Resiliencehubv2
     #   resp.service.achievability.availability_slo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.achievability.multi_az_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.achievability.multi_region_rto_rpo #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
+    #   resp.service.achievability.data_recovery_time_between_backups #=> String, one of "ACHIEVABLE", "NOT_ACHIEVABLE"
     #   resp.service.report_configuration.report_outputs #=> Array
     #   resp.service.report_configuration.report_outputs[0].s3.bucket_path #=> String
     #   resp.service.report_configuration.report_outputs[0].s3.bucket_owner #=> String
@@ -3413,7 +3464,7 @@ module Aws::Resiliencehubv2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resiliencehubv2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

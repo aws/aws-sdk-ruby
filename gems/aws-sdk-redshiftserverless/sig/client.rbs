@@ -739,6 +739,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#restore_from_recovery_point-instance_method
       def restore_from_recovery_point: (
+                                         ?maintain_integration: bool,
                                          namespace_name: ::String,
                                          recovery_point_id: ::String,
                                          workgroup_name: ::String
@@ -754,6 +755,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#restore_from_snapshot-instance_method
       def restore_from_snapshot: (
                                    ?admin_password_secret_kms_key_id: ::String,
+                                   ?maintain_integration: bool,
                                    ?manage_admin_password: bool,
                                    namespace_name: ::String,
                                    ?owner_account: ::String,

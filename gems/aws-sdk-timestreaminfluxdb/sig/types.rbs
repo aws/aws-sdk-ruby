@@ -390,6 +390,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor retention_check_interval: Types::Duration
       attr_accessor delete_grace_period: Types::Duration
       attr_accessor hard_delete_default_duration: Types::Duration
+      attr_accessor plugin_repository_url: ::String
+      attr_accessor plugin_repository_secret_arn: ::String
       SENSITIVE: []
     end
 
@@ -433,6 +435,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor retention_check_interval: Types::Duration
       attr_accessor delete_grace_period: Types::Duration
       attr_accessor hard_delete_default_duration: Types::Duration
+      attr_accessor plugin_repository_url: ::String
+      attr_accessor plugin_repository_secret_arn: ::String
       attr_accessor ingest_query_instances: ::Integer
       attr_accessor query_only_instances: ::Integer
       attr_accessor dedicated_compactor: bool

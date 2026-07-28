@@ -75,6 +75,7 @@ module Aws::Drs
       attr_accessor export_bucket_arn: ::String
       attr_accessor post_launch_enabled: bool
       attr_accessor launch_into_source_instance: bool
+      attr_accessor recovery_mode: ("FAST" | "OPTIMAL")
       SENSITIVE: [:tags]
     end
 
@@ -515,6 +516,7 @@ module Aws::Drs
       attr_accessor licensing: Types::Licensing
       attr_accessor post_launch_enabled: bool
       attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties
+      attr_accessor recovery_mode: ("FAST" | "OPTIMAL")
       SENSITIVE: []
     end
 
@@ -530,6 +532,7 @@ module Aws::Drs
       attr_accessor export_bucket_arn: ::String
       attr_accessor post_launch_enabled: bool
       attr_accessor launch_into_source_instance: bool
+      attr_accessor recovery_mode: ("FAST" | "OPTIMAL")
       SENSITIVE: [:tags]
     end
 
@@ -1115,6 +1118,7 @@ module Aws::Drs
       attr_accessor licensing: Types::Licensing
       attr_accessor post_launch_enabled: bool
       attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties
+      attr_accessor recovery_mode: ("FAST" | "OPTIMAL")
       SENSITIVE: []
     end
 
@@ -1128,6 +1132,7 @@ module Aws::Drs
       attr_accessor export_bucket_arn: ::String
       attr_accessor post_launch_enabled: bool
       attr_accessor launch_into_source_instance: bool
+      attr_accessor recovery_mode: ("FAST" | "OPTIMAL")
       SENSITIVE: []
     end
 

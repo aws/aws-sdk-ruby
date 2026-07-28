@@ -50,7 +50,7 @@ module Aws
       type user_pool_policy_type = {
       password_policy: Params::password_policy_type?,
       sign_in_policy: {
-        allowed_first_auth_factors: Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN")]?
+        allowed_first_auth_factors: Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN" | "SOFTWARE_TOKEN")]?
       }?
     }
 
@@ -91,6 +91,23 @@ module Aws
       email_message_by_link: ::String?,
       email_subject_by_link: ::String?,
       default_email_option: ("CONFIRM_WITH_LINK" | "CONFIRM_WITH_CODE")?
+    }
+
+      type eums_sms_configuration_type = {
+      caller_arn: ::String,
+      external_id: ::String?,
+      origination_identity: ::String?,
+      configuration_set_name: ::String?,
+      in_entity_id: ::String?,
+      in_template_id: ::String?,
+      region: ::String?
+    }
+
+      type sms_configuration_type = {
+      sns_caller_arn: ::String?,
+      external_id: ::String?,
+      sns_region: ::String?,
+      eums_sms: Params::eums_sms_configuration_type?
     }
 
       type admin_create_user_config_type = {

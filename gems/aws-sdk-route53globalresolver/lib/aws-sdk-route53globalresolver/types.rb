@@ -3626,7 +3626,10 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   Amazon Resource Name (ARN) of the DNS view.
+    #   The Amazon Resource Name (ARN) of the DNS view to list hosted zone
+    #   associations for. This parameter is optional; if you omit it, all
+    #   hosted zone associations in your Amazon Web Services account are
+    #   returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListHostedZoneAssociationsInput AWS API Documentation
@@ -3696,6 +3699,45 @@ module Aws::Route53GlobalResolver
     class ListManagedFirewallDomainListsOutput < Struct.new(
       :next_token,
       :managed_firewall_domain_lists)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token used for large sets of results that can't be
+    #   returned in a single response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListSharedDNSViewsInput AWS API Documentation
+    #
+    class ListSharedDNSViewsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A pagination token used for large sets of results that can't be
+    #   returned in a single response. Provide this token in the next call
+    #   to get the results not returned in this call.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_views
+    #   An array of information about the DNS views shared with your Amazon
+    #   Web Services account, including the Amazon Web Services account that
+    #   owns each DNS view.
+    #   @return [Array<Types::SharedDNSViewSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListSharedDNSViewsOutput AWS API Documentation
+    #
+    class ListSharedDNSViewsOutput < Struct.new(
+      :next_token,
+      :dns_views)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3809,6 +3851,83 @@ module Aws::Route53GlobalResolver
       :resource_type,
       :service_code,
       :quota_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a DNS view that has been shared with your
+    # Amazon Web Services account through Amazon Web Services RAM.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the DNS view.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the DNS view.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The unique string that identifies the request and ensures
+    #   idempotency.
+    #   @return [String]
+    #
+    # @!attribute [rw] dnssec_validation
+    #   Whether DNSSEC validation is enabled for the DNS view.
+    #   @return [String]
+    #
+    # @!attribute [rw] edns_client_subnet
+    #   Whether EDNS Client Subnet injection is enabled for the DNS view.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_rules_fail_open
+    #   Whether firewall rules fail open when they cannot be evaluated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the DNS view.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the DNS view.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_resolver_id
+    #   The ID of the global resolver that the DNS view is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the DNS view was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the DNS view was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the DNS view.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The ID of the Amazon Web Services account that owns the DNS view and
+    #   shared it with your Amazon Web Services account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/SharedDNSViewSummary AWS API Documentation
+    #
+    class SharedDNSViewSummary < Struct.new(
+      :id,
+      :arn,
+      :client_token,
+      :dnssec_validation,
+      :edns_client_subnet,
+      :firewall_rules_fail_open,
+      :name,
+      :description,
+      :global_resolver_id,
+      :created_at,
+      :updated_at,
+      :status,
+      :owner_account_id)
       SENSITIVE = []
       include Aws::Structure
     end

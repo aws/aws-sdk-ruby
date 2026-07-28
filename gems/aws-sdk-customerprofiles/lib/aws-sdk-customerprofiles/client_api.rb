@@ -162,6 +162,14 @@ module Aws::CustomerProfiles
     DetectedProfileObjectTypes = Shapes::ListShape.new(name: 'DetectedProfileObjectTypes')
     Dimension = Shapes::UnionShape.new(name: 'Dimension')
     DimensionList = Shapes::ListShape.new(name: 'DimensionList')
+    DiversityCapType = Shapes::StringShape.new(name: 'DiversityCapType')
+    DiversityCapValue = Shapes::IntegerShape.new(name: 'DiversityCapValue')
+    DiversityColumn = Shapes::StructureShape.new(name: 'DiversityColumn')
+    DiversityColumnsList = Shapes::ListShape.new(name: 'DiversityColumnsList')
+    DiversityConfig = Shapes::StructureShape.new(name: 'DiversityConfig')
+    DiversityPlaceholderName = Shapes::StringShape.new(name: 'DiversityPlaceholderName')
+    DiversityTargetExpression = Shapes::StringShape.new(name: 'DiversityTargetExpression')
+    DiversityValuesMap = Shapes::MapShape.new(name: 'DiversityValuesMap')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainObjectTypeField = Shapes::StructureShape.new(name: 'DomainObjectTypeField')
     DomainObjectTypeFieldName = Shapes::StringShape.new(name: 'DomainObjectTypeFieldName')
@@ -444,6 +452,7 @@ module Aws::CustomerProfiles
     Readiness = Shapes::StructureShape.new(name: 'Readiness')
     ReadinessStatus = Shapes::StringShape.new(name: 'ReadinessStatus')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
+    RecommendationDiversityConfig = Shapes::StructureShape.new(name: 'RecommendationDiversityConfig')
     Recommendations = Shapes::ListShape.new(name: 'Recommendations')
     RecommenderConfig = Shapes::StructureShape.new(name: 'RecommenderConfig')
     RecommenderConfigTrainingFrequencyInteger = Shapes::IntegerShape.new(name: 'RecommenderConfigTrainingFrequencyInteger')
@@ -473,6 +482,7 @@ module Aws::CustomerProfiles
     RecommenderSummary = Shapes::StructureShape.new(name: 'RecommenderSummary')
     RecommenderSummaryList = Shapes::ListShape.new(name: 'RecommenderSummaryList')
     RecommenderUpdate = Shapes::StructureShape.new(name: 'RecommenderUpdate')
+    RecommenderVersionName = Shapes::StringShape.new(name: 'RecommenderVersionName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResultsSummary = Shapes::StructureShape.new(name: 'ResultsSummary')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -1266,6 +1276,19 @@ module Aws::CustomerProfiles
 
     DimensionList.member = Shapes::ShapeRef.new(shape: Dimension)
 
+    DiversityColumn.add_member(:name, Shapes::ShapeRef.new(shape: text, required: true, location_name: "Name"))
+    DiversityColumn.add_member(:cap_type, Shapes::ShapeRef.new(shape: DiversityCapType, required: true, location_name: "CapType"))
+    DiversityColumn.add_member(:target, Shapes::ShapeRef.new(shape: DiversityTargetExpression, required: true, location_name: "Target"))
+    DiversityColumn.struct_class = Types::DiversityColumn
+
+    DiversityColumnsList.member = Shapes::ShapeRef.new(shape: DiversityColumn)
+
+    DiversityConfig.add_member(:diversity_columns, Shapes::ShapeRef.new(shape: DiversityColumnsList, location_name: "DiversityColumns"))
+    DiversityConfig.struct_class = Types::DiversityConfig
+
+    DiversityValuesMap.key = Shapes::ShapeRef.new(shape: DiversityPlaceholderName)
+    DiversityValuesMap.value = Shapes::ShapeRef.new(shape: DiversityCapValue)
+
     DomainList.member = Shapes::ShapeRef.new(shape: ListDomainItem)
 
     DomainObjectTypeField.add_member(:source, Shapes::ShapeRef.new(shape: text, required: true, location_name: "Source"))
@@ -1671,6 +1694,7 @@ module Aws::CustomerProfiles
     GetProfileRecommendationsRequest.add_member(:candidate_ids, Shapes::ShapeRef.new(shape: CandidateIdList, location_name: "CandidateIds"))
     GetProfileRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize500, location_name: "MaxResults"))
     GetProfileRecommendationsRequest.add_member(:metadata_config, Shapes::ShapeRef.new(shape: MetadataConfig, location_name: "MetadataConfig"))
+    GetProfileRecommendationsRequest.add_member(:diversity_config, Shapes::ShapeRef.new(shape: RecommendationDiversityConfig, location_name: "DiversityConfig"))
     GetProfileRecommendationsRequest.struct_class = Types::GetProfileRecommendationsRequest
 
     GetProfileRecommendationsResponse.add_member(:recommendations, Shapes::ShapeRef.new(shape: Recommendations, location_name: "Recommendations"))
@@ -1705,6 +1729,7 @@ module Aws::CustomerProfiles
     GetRecommenderResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
     GetRecommenderResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
     GetRecommenderResponse.add_member(:latest_recommender_update, Shapes::ShapeRef.new(shape: RecommenderUpdate, location_name: "LatestRecommenderUpdate"))
+    GetRecommenderResponse.add_member(:active_recommender_version_name, Shapes::ShapeRef.new(shape: RecommenderVersionName, location_name: "ActiveRecommenderVersionName"))
     GetRecommenderResponse.add_member(:training_metrics, Shapes::ShapeRef.new(shape: TrainingMetricsList, location_name: "TrainingMetrics"))
     GetRecommenderResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetRecommenderResponse.struct_class = Types::GetRecommenderResponse
@@ -2517,6 +2542,10 @@ module Aws::CustomerProfiles
     Recommendation.add_member(:score, Shapes::ShapeRef.new(shape: Double0To1, location_name: "Score"))
     Recommendation.struct_class = Types::Recommendation
 
+    RecommendationDiversityConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, required: true, location_name: "Enabled"))
+    RecommendationDiversityConfig.add_member(:values, Shapes::ShapeRef.new(shape: DiversityValuesMap, location_name: "Values"))
+    RecommendationDiversityConfig.struct_class = Types::RecommendationDiversityConfig
+
     Recommendations.member = Shapes::ShapeRef.new(shape: Recommendation)
 
     RecommenderConfig.add_member(:events_config, Shapes::ShapeRef.new(shape: EventsConfig, location_name: "EventsConfig"))
@@ -2524,6 +2553,7 @@ module Aws::CustomerProfiles
     RecommenderConfig.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfig, location_name: "InferenceConfig"))
     RecommenderConfig.add_member(:included_columns, Shapes::ShapeRef.new(shape: IncludedColumns, location_name: "IncludedColumns"))
     RecommenderConfig.add_member(:excluded_columns, Shapes::ShapeRef.new(shape: IncludedColumns, location_name: "ExcludedColumns"))
+    RecommenderConfig.add_member(:diversity_config, Shapes::ShapeRef.new(shape: DiversityConfig, location_name: "DiversityConfig"))
     RecommenderConfig.struct_class = Types::RecommenderConfig
 
     RecommenderContext.key = Shapes::ShapeRef.new(shape: ContextKey)
@@ -2602,6 +2632,7 @@ module Aws::CustomerProfiles
     RecommenderUpdate.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
     RecommenderUpdate.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
     RecommenderUpdate.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
+    RecommenderUpdate.add_member(:recommender_version_name, Shapes::ShapeRef.new(shape: RecommenderVersionName, location_name: "RecommenderVersionName"))
     RecommenderUpdate.struct_class = Types::RecommenderUpdate
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
@@ -2783,6 +2814,7 @@ module Aws::CustomerProfiles
 
     TrainingMetrics.add_member(:time, Shapes::ShapeRef.new(shape: timestamp, location_name: "Time"))
     TrainingMetrics.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
+    TrainingMetrics.add_member(:recommender_version_name, Shapes::ShapeRef.new(shape: RecommenderVersionName, location_name: "RecommenderVersionName"))
     TrainingMetrics.struct_class = Types::TrainingMetrics
 
     TrainingMetricsList.member = Shapes::ShapeRef.new(shape: TrainingMetrics)
@@ -2935,6 +2967,7 @@ module Aws::CustomerProfiles
     UpdateRecommenderRequest.add_member(:recommender_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "RecommenderName"))
     UpdateRecommenderRequest.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
     UpdateRecommenderRequest.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, location_name: "RecommenderConfig"))
+    UpdateRecommenderRequest.add_member(:recommender_version_name, Shapes::ShapeRef.new(shape: RecommenderVersionName, location_name: "RecommenderVersionName"))
     UpdateRecommenderRequest.struct_class = Types::UpdateRecommenderRequest
 
     UpdateRecommenderResponse.add_member(:recommender_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "RecommenderName"))

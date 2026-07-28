@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2026-07-08)
+------------------
+
+* Feature - Added AddressNamesMode, AddressNameTranslations, MobilityMode, PostalCodeMode, SecondaryAddresses, and DriveThrough features across Places V2 APIs to support address name formatting,  multilingual translations, travel-aware search, multi-city postal codes, and unit-level address resolution.
+
 1.25.0 (2026-05-22)
 ------------------
 

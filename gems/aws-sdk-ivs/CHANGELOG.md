@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2026-07-09)
+------------------
+
+* Feature - adds support for AWS IVS ad configuration APIs to allow for a postRollConfiguration object on the ad configuration resource
+
 1.90.0 (2026-06-04)
 ------------------
 

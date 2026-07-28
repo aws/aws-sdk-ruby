@@ -34,6 +34,23 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The access control settings for a knowledge base. Use this structure
+    # to enable or disable document-level access control lists (ACLs) that
+    # filter query results based on the permissions from the source data
+    # connector.
+    #
+    # @!attribute [rw] is_acl_enabled
+    #   Specifies whether ACLs are enabled for the knowledge base.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccessControlConfiguration AWS API Documentation
+    #
+    class AccessControlConfiguration < Struct.new(
+      :is_acl_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You don't have access to this item. The provided credentials
     # couldn't be validated. You might not be authorized to carry out the
     # request. Make sure that your account is authorized to use the Amazon
@@ -5748,6 +5765,29 @@ module Aws::QuickSight
     #   The ability to perform Extension-related actions.
     #   @return [String]
     #
+    # @!attribute [rw] use_browser_extension
+    #   The ability to use Amazon Quick through the browser extension for
+    #   Chrome, Firefox, and Edge.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_word_add_in_extension
+    #   The ability to use Amazon Quick through the Microsoft Word add-in.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_outlook_add_in_extension
+    #   The ability to use Amazon Quick through the Microsoft Outlook
+    #   add-in.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_excel_add_in_extension
+    #   The ability to use Amazon Quick through the Microsoft Excel add-in.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_powerpoint_add_in_extension
+    #   The ability to use Amazon Quick through the Microsoft PowerPoint
+    #   add-in.
+    #   @return [String]
+    #
     # @!attribute [rw] manage_shared_folders
     #   The ability to create, update, delete and view shared folders (both
     #   restricted and unrestricted), ability to add any asset to shared
@@ -5767,6 +5807,26 @@ module Aws::QuickSight
     #
     # @!attribute [rw] scenario
     #   The ability to perform Scenario-related actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger
+    #   The ability to manage trigger-related settings for flows and
+    #   automations.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_trigger
+    #   The ability to create, view, edit, delete, and run schedule triggers
+    #   for flows and automations.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_email_trigger
+    #   The ability to create, view, edit, delete, and run inbound email
+    #   triggers for flows and automations.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_event_trigger
+    #   The ability to create, view, edit, delete, and run Quick event
+    #   triggers for flows and automations.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Capabilities AWS API Documentation
@@ -5996,10 +6056,19 @@ module Aws::QuickSight
       :research,
       :self_upgrade_user_role,
       :extension,
+      :use_browser_extension,
+      :use_word_add_in_extension,
+      :use_outlook_add_in_extension,
+      :use_excel_add_in_extension,
+      :use_powerpoint_add_in_extension,
       :manage_shared_folders,
       :generate_analyses,
       :story,
-      :scenario)
+      :scenario,
+      :trigger,
+      :schedule_trigger,
+      :inbound_email_trigger,
+      :quick_event_trigger)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8459,6 +8528,14 @@ module Aws::QuickSight
     #   A set of actions to include in the custom permissions profile.
     #   @return [Types::Capabilities]
     #
+    # @!attribute [rw] governance
+    #   The governance configuration for the custom permissions profile.
+    #   When governance controls are defined for a category, any
+    #   capabilities in that category not explicitly set to `ALLOW` in
+    #   `Capabilities` are denied. Even newly added capabilities in the
+    #   category are implicitly disabled when Amazon Quick releases them.
+    #   @return [Types::Governance]
+    #
     # @!attribute [rw] tags
     #   The tags to associate with the custom permissions profile.
     #   @return [Array<Types::Tag>]
@@ -8469,6 +8546,7 @@ module Aws::QuickSight
       :aws_account_id,
       :custom_permissions_name,
       :capabilities,
+      :governance,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -9430,6 +9508,113 @@ module Aws::QuickSight
       :arn,
       :ingestion_id,
       :ingestion_status,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_arn
+    #   The Amazon Resource Name (ARN) of the data source for the knowledge
+    #   base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_configuration
+    #   The configuration settings for a knowledge base.
+    #   @return [Types::KnowledgeBaseConfiguration]
+    #
+    # @!attribute [rw] description
+    #   A description for the knowledge base. If you don't specify a
+    #   description, the knowledge base is created without one.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   A list of resource permissions on the knowledge base. Each entry
+    #   grants a specified Amazon QuickSight principal either owner or
+    #   viewer access. If you don't specify permissions, only the primary
+    #   owner (if provided) receives owner access.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] media_extraction_configuration
+    #   The configuration for media extraction from knowledge base
+    #   documents.
+    #   @return [Types::MediaExtractionConfiguration]
+    #
+    # @!attribute [rw] access_control_configuration
+    #   The access control configuration for the knowledge base. If you
+    #   don't specify this parameter, document-level ACLs are disabled.
+    #   @return [Types::AccessControlConfiguration]
+    #
+    # @!attribute [rw] primary_owner_arn
+    #   The Amazon Resource Name (ARN) of the primary owner for the
+    #   knowledge base. The specified user is always granted owner access,
+    #   regardless of what is specified in the `Permissions` field. If you
+    #   don't specify a primary owner, the knowledge base is created
+    #   without one.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the knowledge base. If you don't specify
+    #   tags, the knowledge base is created without tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateKnowledgeBaseRequest AWS API Documentation
+    #
+    class CreateKnowledgeBaseRequest < Struct.new(
+      :aws_account_id,
+      :knowledge_base_id,
+      :name,
+      :data_source_arn,
+      :knowledge_base_configuration,
+      :description,
+      :permissions,
+      :media_extraction_configuration,
+      :access_control_configuration,
+      :primary_owner_arn,
+      :tags)
+      SENSITIVE = [:knowledge_base_configuration]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_status
+    #   The creation status of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateKnowledgeBaseResponse AWS API Documentation
+    #
+    class CreateKnowledgeBaseResponse < Struct.new(
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :creation_status,
       :request_id,
       :status)
       SENSITIVE = []
@@ -10839,12 +11024,20 @@ module Aws::QuickSight
     #   A set of actions in the custom permissions profile.
     #   @return [Types::Capabilities]
     #
+    # @!attribute [rw] governance
+    #   The governance configuration for the custom permissions profile.
+    #   When you enable governance for a category, Amazon Quick denies
+    #   access to any current or new capability in that category unless you
+    #   explicitly set that capability to `ALLOW` in `Capabilities`.
+    #   @return [Types::Governance]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomPermissions AWS API Documentation
     #
     class CustomPermissions < Struct.new(
       :arn,
       :custom_permissions_name,
-      :capabilities)
+      :capabilities,
+      :governance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13046,6 +13239,21 @@ module Aws::QuickSight
     #   data source in Amazon Secrets Manager.
     #   @return [String]
     #
+    # @!attribute [rw] credential_status
+    #   The credential verification status of the data source. Valid values
+    #   include:
+    #
+    #   * `CONNECTED` – Credential validation succeeded.
+    #
+    #   * `AUTH_FAILED` – Credential validation failed.
+    #
+    #   * `NOT_VERIFIED` – Credential validation has not been performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_credential_verified_at
+    #   The time that the credentials were last verified.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSource AWS API Documentation
     #
     class DataSource < Struct.new(
@@ -13061,7 +13269,9 @@ module Aws::QuickSight
       :vpc_connection_properties,
       :ssl_properties,
       :error_info,
-      :secret_arn)
+      :secret_arn,
+      :credential_status,
+      :last_credential_verified_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13270,6 +13480,22 @@ module Aws::QuickSight
     #   The parameters for Amazon Q Business.
     #   @return [Types::QBusinessParameters]
     #
+    # @!attribute [rw] share_point_parameters
+    #   The parameters for a SharePoint data source.
+    #   @return [Types::SharePointParameters]
+    #
+    # @!attribute [rw] google_drive_parameters
+    #   The parameters for a Google Drive data source.
+    #   @return [Types::GoogleDriveParameters]
+    #
+    # @!attribute [rw] one_drive_parameters
+    #   The parameters for an OneDrive data source.
+    #   @return [Types::OneDriveParameters]
+    #
+    # @!attribute [rw] fmkb_parameters
+    #   The parameters for a fully managed knowledge base data source.
+    #   @return [Types::FMKBParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceParameters AWS API Documentation
     #
     class DataSourceParameters < Struct.new(
@@ -13305,7 +13531,11 @@ module Aws::QuickSight
       :custom_connection_parameters,
       :web_crawler_parameters,
       :confluence_parameters,
-      :q_business_parameters)
+      :q_business_parameters,
+      :share_point_parameters,
+      :google_drive_parameters,
+      :one_drive_parameters,
+      :fmkb_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20243,6 +20473,28 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The connection parameters for a fully managed knowledge base data
+    # source. Provide these parameters in the `DataSourceParameters` object
+    # when you create or update a data source that uses a fully managed
+    # knowledge base.
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Bedrock knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_data_source_ids
+    #   The IDs of the linked data sources.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FMKBParameters AWS API Documentation
+    #
+    class FMKBParameters < Struct.new(
+      :knowledge_base_arn,
+      :linked_data_source_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An entry that appears when a `KeyRegistration` update to Quick Sight
     # fails.
     #
@@ -20532,6 +20784,39 @@ module Aws::QuickSight
       :label,
       :visibility,
       :tooltip_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A physical table type that contains the schema and upload settings for
+    # a file-based data source.
+    #
+    # @!attribute [rw] data_source_arn
+    #   The Amazon Resource Name (ARN) for the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_settings
+    #   Information about the format for the source file.
+    #   @return [Types::UploadSettings]
+    #
+    # @!attribute [rw] sheet_index
+    #   The zero-based index of the sheet to use within the file. For files
+    #   that contain multiple sheets, this identifies which sheet to read.
+    #   Files that contain a single sheet, or that have no concept of
+    #   sheets, use sheet 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input_columns
+    #   The column schema of the file.
+    #   @return [Array<Types::InputColumn>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FileSource AWS API Documentation
+    #
+    class FileSource < Struct.new(
+      :data_source_arn,
+      :upload_settings,
+      :sheet_index,
+      :input_columns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24457,6 +24742,47 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The connection parameters for a Google Drive data source. Provide
+    # these parameters in the `DataSourceParameters` object when you create
+    # or update a data source that uses Google Drive.
+    #
+    # @!attribute [rw] auth_type
+    #   The authentication type for the Google Drive data source. Valid
+    #   values include:
+    #
+    #   * `SERVICE_ACCOUNT` – Server-to-server authentication using a Google
+    #     service account key.
+    #
+    #   * `THREE_LEGGED_OAUTH` – Interactive OAuth that requires user
+    #     consent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GoogleDriveParameters AWS API Documentation
+    #
+    class GoogleDriveParameters < Struct.new(
+      :auth_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the governance configuration for a custom permissions
+    # profile. When governance controls are defined for a category, any
+    # capabilities in that category not explicitly set to `ALLOW` in
+    # `Capabilities` are denied. Even newly added capabilities in the
+    # category are implicitly disabled when Amazon Quick releases them.
+    #
+    # @!attribute [rw] default_category_effects
+    #   A map of `DefaultCategoryEffects`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Governance AWS API Documentation
+    #
+    class Governance < Struct.new(
+      :default_category_effects)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Determines the gradient color settings.
     #
     # @!attribute [rw] stops
@@ -26715,6 +27041,10 @@ module Aws::QuickSight
     #   The media extraction configuration for the knowledge base.
     #   @return [Types::MediaExtractionConfiguration]
     #
+    # @!attribute [rw] access_control_configuration
+    #   The access control configuration for the knowledge base.
+    #   @return [Types::AccessControlConfiguration]
+    #
     # @!attribute [rw] type
     #   The type of the knowledge base.
     #   @return [String]
@@ -26732,7 +27062,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] is_email_notification_opted_for_ingestion_failures
-    #   Indicates whether email notifications are enabled for ingestion
+    #   Specifies whether email notifications are enabled for ingestion
     #   failures.
     #   @return [Boolean]
     #
@@ -26774,6 +27104,7 @@ module Aws::QuickSight
       :data_source_arn,
       :knowledge_base_configuration,
       :media_extraction_configuration,
+      :access_control_configuration,
       :type,
       :created_at,
       :updated_at,
@@ -26796,16 +27127,10 @@ module Aws::QuickSight
     #   The template configuration for the knowledge base.
     #   @return [Types::KbTemplateConfiguration]
     #
-    # @!attribute [rw] event_enabled
-    #   Indicates whether event notifications are enabled for the knowledge
-    #   base.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KnowledgeBaseConfiguration AWS API Documentation
     #
     class KnowledgeBaseConfiguration < Struct.new(
-      :template_configuration,
-      :event_enabled)
+      :template_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31488,6 +31813,39 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The connection parameters for an OneDrive data source. Provide these
+    # parameters in the `DataSourceParameters` object when you create or
+    # update a data source that uses OneDrive.
+    #
+    # @!attribute [rw] tenant_id
+    #   The tenant ID for the OneDrive data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the OneDrive data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The authentication type for the OneDrive data source. Valid values
+    #   include:
+    #
+    #   * `TWO_LEGGED_OAUTH` – Server-to-server authentication using client
+    #     credentials that do not require user interaction.
+    #
+    #   * `THREE_LEGGED_OAUTH` – Interactive OAuth that requires user
+    #     consent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OneDriveParameters AWS API Documentation
+    #
+    class OneDriveParameters < Struct.new(
+      :tenant_id,
+      :client_id,
+      :auth_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters for Oracle.
     #
     # @!attribute [rw] host
@@ -32396,12 +32754,16 @@ module Aws::QuickSight
     #   @return [Types::CustomSql]
     #
     # @!attribute [rw] s3_source
-    #   A physical table type for as S3 data source.
+    #   A physical table type for an S3 data source.
     #   @return [Types::S3Source]
     #
     # @!attribute [rw] saa_s_table
     #   A physical table type for Software-as-a-Service (SaaS) sources.
     #   @return [Types::SaaSTable]
+    #
+    # @!attribute [rw] file_source
+    #   A physical table type for a file data source.
+    #   @return [Types::FileSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PhysicalTable AWS API Documentation
     #
@@ -32409,7 +32771,8 @@ module Aws::QuickSight
       :relational_table,
       :custom_sql,
       :s3_source,
-      :saa_s_table)
+      :saa_s_table,
+      :file_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37974,6 +38337,44 @@ module Aws::QuickSight
     #
     class ShapeConditionalFormat < Struct.new(
       :background_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connection parameters for a SharePoint data source. Provide these
+    # parameters in the `DataSourceParameters` object when you create or
+    # update a data source that uses SharePoint.
+    #
+    # @!attribute [rw] share_point_domain
+    #   The SharePoint domain for the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_id
+    #   The tenant ID for the SharePoint data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the SharePoint data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The authentication type for the SharePoint data source. Valid values
+    #   include:
+    #
+    #   * `TWO_LEGGED_OAUTH` – Server-to-server authentication using client
+    #     credentials that do not require user interaction.
+    #
+    #   * `THREE_LEGGED_OAUTH` – Interactive OAuth that requires user
+    #     consent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SharePointParameters AWS API Documentation
+    #
+    class SharePointParameters < Struct.new(
+      :share_point_domain,
+      :tenant_id,
+      :client_id,
+      :auth_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45364,12 +45765,21 @@ module Aws::QuickSight
     #   A set of actions to include in the custom permissions profile.
     #   @return [Types::Capabilities]
     #
+    # @!attribute [rw] governance
+    #   The governance configuration for the custom permissions profile. The
+    #   `UpdateCustomPermissions` operation replaces all existing
+    #   `Capabilities` and `Governance` values. If you omit this parameter,
+    #   Amazon Quick removes governance from the profile and the existing
+    #   custom permission behavior applies.
+    #   @return [Types::Governance]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateCustomPermissionsRequest AWS API Documentation
     #
     class UpdateCustomPermissionsRequest < Struct.new(
       :aws_account_id,
       :custom_permissions_name,
-      :capabilities)
+      :capabilities,
+      :governance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46757,6 +47167,86 @@ module Aws::QuickSight
       :knowledge_base_arn,
       :knowledge_base_id,
       :permissions,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the knowledge base. If you don't specify a name, the
+    #   existing name is retained.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the knowledge base. If you don't specify a
+    #   description, the existing description is retained.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_configuration
+    #   The configuration settings for a knowledge base.
+    #   @return [Types::KnowledgeBaseConfiguration]
+    #
+    # @!attribute [rw] media_extraction_configuration
+    #   The configuration for media extraction from knowledge base
+    #   documents.
+    #   @return [Types::MediaExtractionConfiguration]
+    #
+    # @!attribute [rw] is_email_notification_opted_for_ingestion_failures
+    #   Specifies whether email notifications are enabled for ingestion
+    #   failures.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] access_control_configuration
+    #   The access control configuration for the knowledge base. If you
+    #   don't specify this parameter, the existing setting is retained.
+    #   @return [Types::AccessControlConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateKnowledgeBaseRequest AWS API Documentation
+    #
+    class UpdateKnowledgeBaseRequest < Struct.new(
+      :aws_account_id,
+      :knowledge_base_id,
+      :name,
+      :description,
+      :knowledge_base_configuration,
+      :media_extraction_configuration,
+      :is_email_notification_opted_for_ingestion_failures,
+      :access_control_configuration)
+      SENSITIVE = [:knowledge_base_configuration]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateKnowledgeBaseResponse AWS API Documentation
+    #
+    class UpdateKnowledgeBaseResponse < Struct.new(
+      :knowledge_base_arn,
+      :knowledge_base_id,
       :request_id,
       :status)
       SENSITIVE = []

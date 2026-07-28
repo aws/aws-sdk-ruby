@@ -127,6 +127,12 @@ module Aws::RDS
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     with_express_configuration: false,
+    #     associated_roles: [
+    #       {
+    #         role_arn: "IAMRoleArn", # required
+    #         feature_name: "String",
+    #       },
+    #     ],
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -960,7 +966,7 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     # @option options [String] :engine_lifecycle_support
-    #   The life cycle type for this DB cluster.
+    #   The lifecycle type for this DB cluster.
     #
     #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
     #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
@@ -1024,6 +1030,14 @@ module Aws::RDS
     #   of this API.
     #
     #   Valid for Cluster Type: Aurora DB clusters
+    # @option options [Array<Types::DBClusterAssociatedRole>] :associated_roles
+    #   A list of Amazon Web Services Identity and Access Management (IAM)
+    #   roles to associate with the DB cluster. Each role grants the DB
+    #   cluster permission to access other Amazon Web Services on your behalf.
+    #   For each role, specify a role ARN and, optionally, the feature name
+    #   (such as `s3Import`, `s3Export`, or `Lambda`).
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2446,7 +2460,7 @@ module Aws::RDS
     #   Indicates whether the DB instance has a dedicated log volume (DLV)
     #   enabled.
     # @option options [String] :engine_lifecycle_support
-    #   The life cycle type for this DB instance.
+    #   The lifecycle type for this DB instance.
     #
     #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
     #   which enrolls your DB instance into Amazon RDS Extended Support. At
@@ -2459,8 +2473,8 @@ module Aws::RDS
     #    </note>
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
-    #   Amazon Aurora DB instances, the life cycle type is managed by the DB
-    #   cluster.
+    #   Amazon Aurora DB instances, the engine lifecycle support is managed by
+    #   the DB cluster.
     #
     #   You can use this setting to enroll your DB instance into Amazon RDS
     #   Extended Support. With RDS Extended Support, you can run the selected

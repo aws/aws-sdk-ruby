@@ -623,7 +623,8 @@ module Aws::CloudWatch
     # operation. However, this total can include no more than one composite
     # alarm. For example, you could delete 99 metric alarms and one
     # composite alarms with one operation, but you can't delete two
-    # composite alarms with one operation.
+    # composite alarms with one operation. Log alarms cannot be batch
+    # deleted.
     #
     # If you specify any incorrect alarm names, the alarms you specify with
     # correct names are still deleted. Other syntax errors might result in
@@ -683,6 +684,11 @@ module Aws::CloudWatch
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Anomaly_Detection_Alarm.html#Delete_Anomaly_Detection_Model
     #
+    # @option params [String] :anomaly_detector_id
+    #   Specifies the unique identifier of the anomaly detector to delete. If
+    #   you specify this parameter, you do not need to specify a metric to
+    #   identify the detector.
+    #
     # @option params [String] :namespace
     #   The namespace associated with the anomaly detection model to delete.
     #
@@ -741,6 +747,7 @@ module Aws::CloudWatch
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_anomaly_detector({
+    #     anomaly_detector_id: "AnomalyDetectorId",
     #     namespace: "Namespace",
     #     metric_name: "MetricName",
     #     dimensions: [
@@ -952,8 +959,8 @@ module Aws::CloudWatch
     #
     # @option params [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
-    #   metric alarms or composite alarms. If you omit this parameter, only
-    #   metric alarms are returned.
+    #   metric alarms, composite alarms, or log alarms. If you omit this
+    #   parameter, only metric alarms are returned.
     #
     # @option params [String] :history_item_type
     #   The type of alarm histories to retrieve.
@@ -989,7 +996,7 @@ module Aws::CloudWatch
     #   resp = client.describe_alarm_history({
     #     alarm_name: "AlarmName",
     #     alarm_contributor_id: "ContributorId",
-    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
+    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm, LogAlarm
     #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action, AlarmContributorStateUpdate, AlarmContributorAction
     #     start_date: Time.now,
     #     end_date: Time.now,
@@ -1003,7 +1010,7 @@ module Aws::CloudWatch
     #   resp.alarm_history_items #=> Array
     #   resp.alarm_history_items[0].alarm_name #=> String
     #   resp.alarm_history_items[0].alarm_contributor_id #=> String
-    #   resp.alarm_history_items[0].alarm_type #=> String, one of "CompositeAlarm", "MetricAlarm"
+    #   resp.alarm_history_items[0].alarm_type #=> String, one of "CompositeAlarm", "MetricAlarm", "LogAlarm"
     #   resp.alarm_history_items[0].timestamp #=> Time
     #   resp.alarm_history_items[0].history_item_type #=> String, one of "ConfigurationUpdate", "StateUpdate", "Action", "AlarmContributorStateUpdate", "AlarmContributorAction"
     #   resp.alarm_history_items[0].history_summary #=> String
@@ -1043,16 +1050,19 @@ module Aws::CloudWatch
     #
     # @option params [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
-    #   metric alarms or composite alarms. If you omit this parameter, only
-    #   metric alarms are returned, even if composite alarms exist in the
-    #   account.
+    #   metric alarms, composite alarms, or log alarms. If you omit this
+    #   parameter, only metric alarms are returned, even if composite alarms
+    #   or log alarms exist in the account.
     #
     #   For example, if you omit this parameter or specify `MetricAlarms`, the
     #   operation returns only a list of metric alarms. It does not return any
-    #   composite alarms, even if composite alarms exist in the account.
+    #   composite alarms or log alarms, even if they exist in the account.
     #
     #   If you specify `CompositeAlarms`, the operation returns only a list of
-    #   composite alarms, and does not return any metric alarms.
+    #   composite alarms, and does not return any metric alarms or log alarms.
+    #
+    #   If you specify `LogAlarms`, the operation returns only a list of log
+    #   alarms, and does not return any metric alarms or composite alarms.
     #
     # @option params [String] :children_of_alarm_name
     #   If you use this parameter and specify the name of a composite alarm,
@@ -1115,6 +1125,7 @@ module Aws::CloudWatch
     #
     #   * {Types::DescribeAlarmsOutput#composite_alarms #composite_alarms} => Array&lt;Types::CompositeAlarm&gt;
     #   * {Types::DescribeAlarmsOutput#metric_alarms #metric_alarms} => Array&lt;Types::MetricAlarm&gt;
+    #   * {Types::DescribeAlarmsOutput#log_alarms #log_alarms} => Array&lt;Types::LogAlarm&gt;
     #   * {Types::DescribeAlarmsOutput#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -1124,7 +1135,7 @@ module Aws::CloudWatch
     #   resp = client.describe_alarms({
     #     alarm_names: ["AlarmName"],
     #     alarm_name_prefix: "AlarmNamePrefix",
-    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
+    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm, LogAlarm
     #     children_of_alarm_name: "AlarmName",
     #     parents_of_alarm_name: "AlarmName",
     #     state_value: "OK", # accepts OK, ALARM, INSUFFICIENT_DATA
@@ -1207,10 +1218,48 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].threshold_metric_id #=> String
     #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"
     #   resp.metric_alarms[0].state_transitioned_timestamp #=> Time
+    #   resp.metric_alarms[0].evaluation_window.wall_clock_window.timezone #=> String
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.query #=> String
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.pending_period #=> Integer
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.recovery_period #=> Integer
     #   resp.metric_alarms[0].evaluation_interval #=> Integer
+    #   resp.log_alarms #=> Array
+    #   resp.log_alarms[0].alarm_name #=> String
+    #   resp.log_alarms[0].alarm_arn #=> String
+    #   resp.log_alarms[0].alarm_description #=> String
+    #   resp.log_alarms[0].alarm_configuration_updated_timestamp #=> Time
+    #   resp.log_alarms[0].actions_enabled #=> Boolean
+    #   resp.log_alarms[0].ok_actions #=> Array
+    #   resp.log_alarms[0].ok_actions[0] #=> String
+    #   resp.log_alarms[0].alarm_actions #=> Array
+    #   resp.log_alarms[0].alarm_actions[0] #=> String
+    #   resp.log_alarms[0].insufficient_data_actions #=> Array
+    #   resp.log_alarms[0].insufficient_data_actions[0] #=> String
+    #   resp.log_alarms[0].state_value #=> String, one of "OK", "ALARM", "INSUFFICIENT_DATA"
+    #   resp.log_alarms[0].state_reason #=> String
+    #   resp.log_alarms[0].state_reason_data #=> String
+    #   resp.log_alarms[0].state_updated_timestamp #=> Time
+    #   resp.log_alarms[0].scheduled_query_configuration.query_string #=> String
+    #   resp.log_alarms[0].scheduled_query_configuration.log_group_identifiers #=> Array
+    #   resp.log_alarms[0].scheduled_query_configuration.log_group_identifiers[0] #=> String
+    #   resp.log_alarms[0].scheduled_query_configuration.query_arn #=> String
+    #   resp.log_alarms[0].scheduled_query_configuration.scheduled_query_role_arn #=> String
+    #   resp.log_alarms[0].scheduled_query_configuration.schedule_configuration.schedule_expression #=> String
+    #   resp.log_alarms[0].scheduled_query_configuration.schedule_configuration.start_time_offset #=> Integer
+    #   resp.log_alarms[0].scheduled_query_configuration.schedule_configuration.end_time_offset #=> Integer
+    #   resp.log_alarms[0].scheduled_query_configuration.aggregation_expression #=> String
+    #   resp.log_alarms[0].scheduled_query_configuration.tags #=> Array
+    #   resp.log_alarms[0].scheduled_query_configuration.tags[0].key #=> String
+    #   resp.log_alarms[0].scheduled_query_configuration.tags[0].value #=> String
+    #   resp.log_alarms[0].query_results_to_evaluate #=> Integer
+    #   resp.log_alarms[0].query_results_to_alarm #=> Integer
+    #   resp.log_alarms[0].threshold #=> Float
+    #   resp.log_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold", "LessThanLowerOrGreaterThanUpperThreshold", "LessThanLowerThreshold", "GreaterThanUpperThreshold"
+    #   resp.log_alarms[0].treat_missing_data #=> String
+    #   resp.log_alarms[0].state_transitioned_timestamp #=> Time
+    #   resp.log_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"
+    #   resp.log_alarms[0].action_log_line_count #=> Integer
+    #   resp.log_alarms[0].action_log_line_role_arn #=> String
     #   resp.next_token #=> String
     #
     #
@@ -1218,6 +1267,7 @@ module Aws::CloudWatch
     #
     #   * alarm_exists
     #   * composite_alarm_exists
+    #   * log_alarm_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms AWS API Documentation
     #
@@ -1333,6 +1383,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].threshold_metric_id #=> String
     #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"
     #   resp.metric_alarms[0].state_transitioned_timestamp #=> Time
+    #   resp.metric_alarms[0].evaluation_window.wall_clock_window.timezone #=> String
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.query #=> String
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.pending_period #=> Integer
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.recovery_period #=> Integer
@@ -1354,6 +1405,12 @@ module Aws::CloudWatch
     # For metric math anomaly detectors, you can list them by adding
     # `METRIC_MATH` to the `AnomalyDetectorTypes` array. This will return
     # all metric math anomaly detectors in your account.
+    #
+    # @option params [Array<String>] :anomaly_detector_ids
+    #   Specifies the unique identifiers of the anomaly detectors to describe.
+    #   You can specify up to 50 identifiers. If you specify this parameter,
+    #   you cannot also specify the `Namespace`, `MetricName`, `Dimensions`,
+    #   or `AnomalyDetectorTypes` metric filters.
     #
     # @option params [String] :next_token
     #   Use the token returned by the previous operation to request the next
@@ -1397,6 +1454,7 @@ module Aws::CloudWatch
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_anomaly_detectors({
+    #     anomaly_detector_ids: ["AnomalyDetectorId"],
     #     next_token: "NextToken",
     #     max_results: 1,
     #     namespace: "Namespace",
@@ -1413,6 +1471,7 @@ module Aws::CloudWatch
     # @example Response structure
     #
     #   resp.anomaly_detectors #=> Array
+    #   resp.anomaly_detectors[0].anomaly_detector_id #=> String
     #   resp.anomaly_detectors[0].namespace #=> String
     #   resp.anomaly_detectors[0].metric_name #=> String
     #   resp.anomaly_detectors[0].dimensions #=> Array
@@ -2527,7 +2586,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Metric-Widget-Structure.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Widget-Structure.html
     #
     # @option params [String] :output_format
     #   The format of the resulting image. Only PNG images are supported.
@@ -3174,7 +3233,9 @@ module Aws::CloudWatch
     #   Instead, specify the metric math anomaly detector attributes as part
     #   of the property `MetricMathAnomalyDetector`.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::PutAnomalyDetectorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAnomalyDetectorOutput#anomaly_detector_id #anomaly_detector_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3240,6 +3301,10 @@ module Aws::CloudWatch
     #       ],
     #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_detector_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutAnomalyDetector AWS API Documentation
     #
@@ -3573,7 +3638,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs to associate with the dashboard. You can
@@ -3717,6 +3782,222 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def put_insight_rule(params = {}, options = {})
       req = build_request(:put_insight_rule, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a log alarm. A log alarm evaluates the results of a
+    # CloudWatch Logs scheduled query against the configured threshold and
+    # comparison operator to determine its state.
+    #
+    # When you create a log alarm, the operation creates a service-managed
+    # CloudWatch Logs scheduled query that runs the query string you provide
+    # on the schedule you configure. Each scheduled query execution returns
+    # one or more aggregated values determined by the
+    # `AggregationExpression`, and each aggregated value is compared against
+    # the alarm `Threshold` to determine the alarm state. The alarm uses
+    # M-out-of-N evaluation: if `QueryResultsToAlarm` out of the most recent
+    # `QueryResultsToEvaluate` query results breach the threshold, the alarm
+    # transitions to `ALARM`.
+    #
+    # Log alarms support the alarm states (`OK`, `ALARM`,
+    # `INSUFFICIENT_DATA`). Configure transition actions using `OKActions`,
+    # `AlarmActions`, and `InsufficientDataActions`.
+    #
+    # If you call this operation with the name of an existing log alarm, the
+    # operation replaces the previous configuration of that alarm.
+    #
+    # **Permissions**
+    #
+    # To create or update a log alarm, you must have the
+    # `cloudwatch:PutLogAlarm` permission. The IAM role specified in
+    # `ScheduledQueryRoleARN` must grant the CloudWatch Alarms service
+    # permission to execute scheduled queries on the specified log groups.
+    # If you set `ActionLogLineCount`, the role specified in
+    # `ActionLogLineRoleArn` must grant permission to retrieve log events
+    # for inclusion in alarm notifications.
+    #
+    # @option params [required, String] :alarm_name
+    #   The name for the alarm. This name must be unique within the Amazon Web
+    #   Services account and Region.
+    #
+    # @option params [String] :alarm_description
+    #   The description for the alarm.
+    #
+    # @option params [required, Types::ScheduledQueryConfiguration] :scheduled_query_configuration
+    #   The configuration of the underlying CloudWatch Logs scheduled query
+    #   that this alarm evaluates, including the query string, log groups,
+    #   schedule, and aggregation expression.
+    #
+    # @option params [Integer] :action_log_line_count
+    #   The number of log lines from the most recent scheduled query execution
+    #   to include in alarm action notifications. Valid range is 0 through 50.
+    #   The default is 0, which means no log lines are included.
+    #
+    # @option params [String] :action_log_line_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that CloudWatch assumes
+    #   to retrieve log events for inclusion in alarm action notifications.
+    #   Required when `ActionLogLineCount` is greater than 0.
+    #
+    # @option params [Boolean] :actions_enabled
+    #   Indicates whether actions should be executed during any changes to the
+    #   alarm state. The default is `true`.
+    #
+    # @option params [Array<String>] :ok_actions
+    #   The actions to execute when this alarm transitions to the `OK` state
+    #   from any other state. Each action is specified as an Amazon Resource
+    #   Name (ARN).
+    #
+    #   Valid Values:
+    #
+    #   **Amazon SNS actions:**
+    #
+    #   `arn:aws:sns:region:account-id:sns-topic-name `
+    #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
+    #
+    # @option params [Array<String>] :alarm_actions
+    #   The actions to execute when this alarm transitions to the `ALARM`
+    #   state from any other state. Each action is specified as an Amazon
+    #   Resource Name (ARN).
+    #
+    #   Valid Values:
+    #
+    #   **Amazon SNS actions:**
+    #
+    #   `arn:aws:sns:region:account-id:sns-topic-name `
+    #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
+    #
+    #   **Systems Manager actions:**
+    #
+    #   `arn:aws:ssm:region:account-id:opsitem:severity `
+    #
+    # @option params [Array<String>] :insufficient_data_actions
+    #   The actions to execute when this alarm transitions to the
+    #   `INSUFFICIENT_DATA` state from any other state. Each action is
+    #   specified as an Amazon Resource Name (ARN).
+    #
+    #   Valid Values:
+    #
+    #   **Amazon SNS actions:**
+    #
+    #   `arn:aws:sns:region:account-id:sns-topic-name `
+    #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
+    #
+    # @option params [required, Integer] :query_results_to_evaluate
+    #   The number of most recent scheduled query results to evaluate against
+    #   the threshold (the N in M-of-N evaluation). Valid range is 1 through
+    #   100.
+    #
+    # @option params [required, Integer] :query_results_to_alarm
+    #   The number of query results, out of the most recent
+    #   `QueryResultsToEvaluate` results, that must breach the threshold to
+    #   trigger the alarm to transition to `ALARM` (the M in M-of-N
+    #   evaluation). Must be less than or equal to `QueryResultsToEvaluate`.
+    #
+    # @option params [required, Float] :threshold
+    #   The value to compare with the aggregated query result.
+    #
+    # @option params [required, String] :comparison_operator
+    #   The arithmetic operation to use when comparing the aggregated query
+    #   result and the threshold. The aggregated query result is used as the
+    #   first operand. Valid values are `GreaterThanThreshold`,
+    #   `GreaterThanOrEqualToThreshold`, `LessThanThreshold`, and
+    #   `LessThanOrEqualToThreshold`.
+    #
+    # @option params [String] :treat_missing_data
+    #   Sets how this alarm is to handle missing data points. Valid values are
+    #   `breaching`, `notBreaching`, `ignore`, and `missing`. If this
+    #   parameter is omitted, the default behavior of `missing` is used.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to associate with the alarm. You can use
+    #   tags to categorize and manage your alarms.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_log_alarm({
+    #     alarm_name: "AlarmName", # required
+    #     alarm_description: "AlarmDescription",
+    #     scheduled_query_configuration: { # required
+    #       query_string: "QueryString", # required
+    #       log_group_identifiers: ["AmazonResourceName"],
+    #       query_arn: "AmazonResourceName",
+    #       scheduled_query_role_arn: "AmazonResourceName", # required
+    #       schedule_configuration: { # required
+    #         schedule_expression: "ScheduleExpression", # required
+    #         start_time_offset: 1, # required
+    #         end_time_offset: 1,
+    #       },
+    #       aggregation_expression: "AggregationExpression", # required
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue", # required
+    #         },
+    #       ],
+    #     },
+    #     action_log_line_count: 1,
+    #     action_log_line_role_arn: "ActionLogLineRoleArn",
+    #     actions_enabled: false,
+    #     ok_actions: ["ResourceName"],
+    #     alarm_actions: ["ResourceName"],
+    #     insufficient_data_actions: ["ResourceName"],
+    #     query_results_to_evaluate: 1, # required
+    #     query_results_to_alarm: 1, # required
+    #     threshold: 1.0, # required
+    #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold, LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, GreaterThanUpperThreshold
+    #     treat_missing_data: "TreatMissingData",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutLogAlarm AWS API Documentation
+    #
+    # @overload put_log_alarm(params = {})
+    # @param [Hash] params ({})
+    def put_log_alarm(params = {}, options = {})
+      req = build_request(:put_log_alarm, params)
       req.send_request(options)
     end
 
@@ -4262,6 +4543,27 @@ module Aws::CloudWatch
     #   If your alarm uses this parameter, it cannot have Auto Scaling
     #   actions.
     #
+    # @option params [Types::EvaluationWindow] :evaluation_window
+    #   The evaluation window that the alarm uses to select the range of
+    #   metric data that it evaluates. Specify either a sliding window or a
+    #   wall clock window. If you omit this parameter, the alarm uses a
+    #   sliding window.
+    #
+    #   A sliding window advances each time the alarm is evaluated, forming a
+    #   rolling time window. A wall clock window aligns the evaluated range to
+    #   fixed clock boundaries, such as the top of the hour or the start of
+    #   the day.
+    #
+    #   You can use `EvaluationWindow` with any type of metric alarm except
+    #   alarms that are based on a PromQL query.
+    #
+    #   For more information, see [Alarm evaluation windows][1] in the
+    #   *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html
+    #
     # @option params [Types::EvaluationCriteria] :evaluation_criteria
     #   The evaluation criteria for the alarm. For each `PutMetricAlarm`
     #   operation, you must specify either `MetricName`, a `Metrics` array, or
@@ -4347,6 +4649,13 @@ module Aws::CloudWatch
     #       },
     #     ],
     #     threshold_metric_id: "MetricId",
+    #     evaluation_window: {
+    #       wall_clock_window: {
+    #         timezone: "Timezone",
+    #       },
+    #       sliding_window: {
+    #       },
+    #     },
     #     evaluation_criteria: {
     #       prom_ql_criteria: {
     #         query: "Query", # required
@@ -5061,7 +5370,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.140.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -5132,6 +5441,7 @@ module Aws::CloudWatch
     # | alarm_exists           | {Client#describe_alarms}     | 5        | 40            |
     # | alarm_mute_rule_exists | {Client#get_alarm_mute_rule} | 5        | 40            |
     # | composite_alarm_exists | {Client#describe_alarms}     | 5        | 40            |
+    # | log_alarm_exists       | {Client#describe_alarms}     | 5        | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -5184,7 +5494,8 @@ module Aws::CloudWatch
       {
         alarm_exists: Waiters::AlarmExists,
         alarm_mute_rule_exists: Waiters::AlarmMuteRuleExists,
-        composite_alarm_exists: Waiters::CompositeAlarmExists
+        composite_alarm_exists: Waiters::CompositeAlarmExists,
+        log_alarm_exists: Waiters::LogAlarmExists
       }
     end
 

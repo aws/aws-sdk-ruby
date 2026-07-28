@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2026-07-21)
+------------------
+
+* Feature - Amazon Redshift - Added support for managing Query Editor V2 IAM Identity Center applications via new CreateQev2IdcApplication, DescribeQev2IdcApplications, ModifyQev2IdcApplication, and DeleteQev2IdcApplication API operations.
+
+1.163.0 (2026-07-16)
+------------------
+
+* Feature - Amazon Redshift - Added support for rg.large and rg.12xlarge node types in CreateCluster, ModifyCluster, and ResizeCluster API operations.
+
+1.162.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.161.0 (2026-06-02)
 ------------------
 

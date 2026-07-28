@@ -15,7 +15,10 @@ module Aws::GeoPlaces
 
     class AccessPoint
       attr_accessor position: ::Array[::Float]
-      SENSITIVE: [:position]
+      attr_accessor type: ("Delivery" | "Emergency" | "Entrance" | "Loading" | "Other" | "Parking" | "Taxi")
+      attr_accessor primary: bool
+      attr_accessor label: ::String
+      SENSITIVE: [:position, :primary, :label]
     end
 
     class AccessRestriction
@@ -74,6 +77,12 @@ module Aws::GeoPlaces
       SENSITIVE: []
     end
 
+    class AdminNames
+      attr_accessor names: ::Array[Types::TranslationName]
+      attr_accessor preference: ("Alternative" | "Primary")
+      SENSITIVE: []
+    end
+
     class AutocompleteAddressHighlights
       attr_accessor label: ::Array[Types::Highlight]
       attr_accessor country: Types::CountryHighlights
@@ -96,7 +105,7 @@ module Aws::GeoPlaces
       attr_accessor bounding_box: ::Array[::Float]
       attr_accessor circle: Types::FilterCircle
       attr_accessor include_countries: ::Array[::String]
-      attr_accessor include_place_types: ::Array[("Locality" | "PostalCode")]
+      attr_accessor include_place_types: ::Array[("Locality" | "PostalCode" | "Street" | "Intersection" | "PointAddress" | "InterpolatedAddress" | "Country" | "Region")]
       SENSITIVE: [:bounding_box, :circle]
     end
 
@@ -111,7 +120,7 @@ module Aws::GeoPlaces
       attr_accessor max_results: ::Integer
       attr_accessor bias_position: ::Array[::Float]
       attr_accessor filter: Types::AutocompleteFilter
-      attr_accessor postal_code_mode: ("MergeAllSpannedLocalities" | "EnumerateSpannedLocalities")
+      attr_accessor postal_code_mode: ("MergeAllSpannedLocalities" | "EnumerateSpannedLocalities" | "EnumerateSpannedDistricts")
       attr_accessor additional_features: ::Array[("Core")]
       attr_accessor language: ::String
       attr_accessor political_view: ::String
@@ -135,7 +144,8 @@ module Aws::GeoPlaces
       attr_accessor language: ::String
       attr_accessor political_view: ::String
       attr_accessor highlights: Types::AutocompleteHighlights
-      SENSITIVE: [:place_id, :place_type, :title, :distance, :political_view]
+      attr_accessor estimated_point_address: bool
+      SENSITIVE: [:place_id, :place_type, :title, :distance, :political_view, :estimated_point_address]
     end
 
     class BusinessChain
@@ -186,6 +196,13 @@ module Aws::GeoPlaces
       SENSITIVE: []
     end
 
+    class CrossReference
+      attr_accessor source: ::String
+      attr_accessor source_place_id: ::String
+      attr_accessor source_categories: ::Array[Types::Category]
+      SENSITIVE: [:source, :source_place_id]
+    end
+
     class FilterCircle
       attr_accessor center: ::Array[::Float]
       attr_accessor radius: ::Integer
@@ -201,7 +218,7 @@ module Aws::GeoPlaces
 
     class GeocodeFilter
       attr_accessor include_countries: ::Array[::String]
-      attr_accessor include_place_types: ::Array[("Locality" | "PostalCode" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress")]
+      attr_accessor include_place_types: ::Array[("Locality" | "PostalCode" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "PointOfInterest" | "Country" | "Region")]
       SENSITIVE: []
     end
 
@@ -225,6 +242,7 @@ module Aws::GeoPlaces
       attr_accessor address_number: ::Array[Types::ParsedQueryComponent]
       attr_accessor building: ::Array[Types::ParsedQueryComponent]
       attr_accessor secondary_address_components: ::Array[Types::ParsedQuerySecondaryAddressComponent]
+      attr_accessor other_components: ::Array[Types::ParsedQueryComponent]
       SENSITIVE: []
     end
 
@@ -251,6 +269,9 @@ module Aws::GeoPlaces
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse" | "Storage")
       attr_accessor key: ::String
+      attr_accessor postal_code_mode: ("MergeAllSpannedLocalities" | "EnumerateSpannedLocalities" | "EnumerateSpannedDistricts")
+      attr_accessor address_translations: ::Array[("District" | "Locality" | "Region" | "SubRegion")]
+      attr_accessor address_names_mode: ("Matched" | "Administrative")
       SENSITIVE: [:query_text, :bias_position, :political_view, :key]
     end
 
@@ -280,16 +301,19 @@ module Aws::GeoPlaces
       attr_accessor intersections: ::Array[Types::Intersection]
       attr_accessor main_address: Types::RelatedPlace
       attr_accessor secondary_addresses: ::Array[Types::RelatedPlace]
-      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
+      attr_accessor translations: Types::TranslationDetails
+      attr_accessor estimated_point_address: bool
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view, :estimated_point_address]
     end
 
     class GetPlaceRequest
       attr_accessor place_id: ::String
-      attr_accessor additional_features: ::Array[("TimeZone" | "Phonemes" | "Access" | "Contact" | "SecondaryAddresses")]
+      attr_accessor additional_features: ::Array[("TimeZone" | "Phonemes" | "Access" | "Contact" | "SecondaryAddresses" | "CrossReferences")]
       attr_accessor language: ::String
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse" | "Storage")
       attr_accessor key: ::String
+      attr_accessor address_names_mode: ("Administrative")
       SENSITIVE: [:place_id, :political_view, :key]
     end
 
@@ -315,7 +339,10 @@ module Aws::GeoPlaces
       attr_accessor phonemes: Types::PhonemeDetails
       attr_accessor main_address: Types::RelatedPlace
       attr_accessor secondary_addresses: ::Array[Types::RelatedPlace]
-      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :map_view, :political_view]
+      attr_accessor place_attributes: ::Array[("DriveThrough")]
+      attr_accessor estimated_point_address: bool
+      attr_accessor cross_references: ::Array[Types::CrossReference]
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :map_view, :political_view, :estimated_point_address]
     end
 
     class Highlight
@@ -433,7 +460,7 @@ module Aws::GeoPlaces
     end
 
     class ReverseGeocodeFilter
-      attr_accessor include_place_types: ::Array[("Locality" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress")]
+      attr_accessor include_place_types: ::Array[("Locality" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "PointOfInterest")]
       SENSITIVE: []
     end
 
@@ -448,6 +475,7 @@ module Aws::GeoPlaces
       attr_accessor intended_use: ("SingleUse" | "Storage")
       attr_accessor key: ::String
       attr_accessor heading: ::Float
+      attr_accessor address_names_mode: ("Administrative")
       SENSITIVE: [:query_position, :query_radius, :political_view, :key, :heading]
     end
 
@@ -473,7 +501,9 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone
       attr_accessor political_view: ::String
       attr_accessor intersections: ::Array[Types::Intersection]
-      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
+      attr_accessor main_address: Types::RelatedPlace
+      attr_accessor estimated_point_address: bool
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view, :estimated_point_address]
     end
 
     class SearchNearbyFilter
@@ -493,7 +523,7 @@ module Aws::GeoPlaces
       attr_accessor query_radius: ::Integer
       attr_accessor max_results: ::Integer
       attr_accessor filter: Types::SearchNearbyFilter
-      attr_accessor additional_features: ::Array[("TimeZone" | "Phonemes" | "Access" | "Contact")]
+      attr_accessor additional_features: ::Array[("TimeZone" | "Phonemes" | "Access" | "Contact" | "CrossReferences")]
       attr_accessor language: ::String
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse" | "Storage")
@@ -528,6 +558,8 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone
       attr_accessor political_view: ::String
       attr_accessor phonemes: Types::PhonemeDetails
+      attr_accessor place_attributes: ::Array[("DriveThrough")]
+      attr_accessor cross_references: ::Array[Types::CrossReference]
       SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
     end
 
@@ -544,11 +576,12 @@ module Aws::GeoPlaces
       attr_accessor max_results: ::Integer
       attr_accessor bias_position: ::Array[::Float]
       attr_accessor filter: Types::SearchTextFilter
-      attr_accessor additional_features: ::Array[("TimeZone" | "Phonemes" | "Access" | "Contact")]
+      attr_accessor additional_features: ::Array[("TimeZone" | "Phonemes" | "Access" | "Contact" | "CrossReferences")]
       attr_accessor language: ::String
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse" | "Storage")
       attr_accessor next_token: ::String
+      attr_accessor travel_mode: ("Car" | "Scooter" | "Truck")
       attr_accessor key: ::String
       SENSITIVE: [:query_text, :query_id, :bias_position, :political_view, :key]
     end
@@ -579,6 +612,8 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone
       attr_accessor political_view: ::String
       attr_accessor phonemes: Types::PhonemeDetails
+      attr_accessor place_attributes: ::Array[("DriveThrough")]
+      attr_accessor cross_references: ::Array[Types::CrossReference]
       SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
     end
 
@@ -650,6 +685,8 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone
       attr_accessor political_view: ::String
       attr_accessor phonemes: Types::PhonemeDetails
+      attr_accessor place_attributes: ::Array[("DriveThrough")]
+      attr_accessor cross_references: ::Array[Types::CrossReference]
       SENSITIVE: [:place_id, :place_type, :position, :distance, :map_view, :political_view]
     end
 
@@ -665,10 +702,11 @@ module Aws::GeoPlaces
       attr_accessor max_query_refinements: ::Integer
       attr_accessor bias_position: ::Array[::Float]
       attr_accessor filter: Types::SuggestFilter
-      attr_accessor additional_features: ::Array[("Core" | "TimeZone" | "Phonemes" | "Access")]
+      attr_accessor additional_features: ::Array[("Core" | "TimeZone" | "Phonemes" | "Access" | "CrossReferences")]
       attr_accessor language: ::String
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse")
+      attr_accessor travel_mode: ("Car" | "Scooter" | "Truck")
       attr_accessor key: ::String
       SENSITIVE: [:query_text, :bias_position, :political_view, :key]
     end
@@ -699,6 +737,23 @@ module Aws::GeoPlaces
       attr_accessor offset: ::String
       attr_accessor offset_seconds: ::Integer
       SENSITIVE: [:name, :offset, :offset_seconds]
+    end
+
+    class TranslationDetails
+      attr_accessor locality: ::Array[Types::AdminNames]
+      attr_accessor region: ::Array[Types::AdminNames]
+      attr_accessor district: ::Array[Types::AdminNames]
+      attr_accessor sub_region: ::Array[Types::AdminNames]
+      SENSITIVE: []
+    end
+
+    class TranslationName
+      attr_accessor value: ::String
+      attr_accessor language: ::String
+      attr_accessor type: ("Abbreviation" | "AreaCode" | "BaseName" | "Exonym" | "Shortened" | "Synonym")
+      attr_accessor primary: bool
+      attr_accessor transliterated: bool
+      SENSITIVE: [:value, :primary, :transliterated]
     end
 
     class UspsZip

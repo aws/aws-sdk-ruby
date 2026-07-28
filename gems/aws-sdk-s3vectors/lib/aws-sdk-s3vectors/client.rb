@@ -1610,7 +1610,7 @@ module Aws::S3Vectors
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3vectors'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

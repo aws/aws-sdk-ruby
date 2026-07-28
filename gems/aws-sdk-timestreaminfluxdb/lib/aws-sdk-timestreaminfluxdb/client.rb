@@ -1014,6 +1014,8 @@ module Aws::TimestreamInfluxDB
     #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
+    #         plugin_repository_url: "String",
+    #         plugin_repository_secret_arn: "PluginRepositorySecretArn",
     #       },
     #       influx_d_bv_3_enterprise: {
     #         query_file_limit: 1,
@@ -1097,6 +1099,8 @@ module Aws::TimestreamInfluxDB
     #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
+    #         plugin_repository_url: "String",
+    #         plugin_repository_secret_arn: "PluginRepositorySecretArn",
     #         ingest_query_instances: 1, # required
     #         query_only_instances: 1, # required
     #         dedicated_compactor: false, # required
@@ -1233,6 +1237,8 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_3_core.delete_grace_period.value #=> Integer
     #   resp.parameters.influx_d_bv_3_core.hard_delete_default_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_3_core.hard_delete_default_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.plugin_repository_url #=> String
+    #   resp.parameters.influx_d_bv_3_core.plugin_repository_secret_arn #=> String
     #   resp.parameters.influx_d_bv_3_enterprise.query_file_limit #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.query_log_size #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.log_filter #=> String
@@ -1286,6 +1292,8 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_3_enterprise.delete_grace_period.value #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.hard_delete_default_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_3_enterprise.hard_delete_default_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.plugin_repository_url #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.plugin_repository_secret_arn #=> String
     #   resp.parameters.influx_d_bv_3_enterprise.ingest_query_instances #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.query_only_instances #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.dedicated_compactor #=> Boolean
@@ -1704,6 +1712,8 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_3_core.delete_grace_period.value #=> Integer
     #   resp.parameters.influx_d_bv_3_core.hard_delete_default_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_3_core.hard_delete_default_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.plugin_repository_url #=> String
+    #   resp.parameters.influx_d_bv_3_core.plugin_repository_secret_arn #=> String
     #   resp.parameters.influx_d_bv_3_enterprise.query_file_limit #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.query_log_size #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.log_filter #=> String
@@ -1757,6 +1767,8 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_3_enterprise.delete_grace_period.value #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.hard_delete_default_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_3_enterprise.hard_delete_default_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.plugin_repository_url #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.plugin_repository_secret_arn #=> String
     #   resp.parameters.influx_d_bv_3_enterprise.ingest_query_instances #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.query_only_instances #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.dedicated_compactor #=> Boolean
@@ -2405,7 +2417,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

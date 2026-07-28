@@ -2460,6 +2460,11 @@ module Aws::ECS
     #       deployment_circuit_breaker: {
     #         enable: false, # required
     #         rollback: false, # required
+    #         reset_on_healthy_task: false,
+    #         threshold_configuration: {
+    #           type: "COUNT", # required, accepts COUNT, BOUNDED_PERCENT, UNBOUNDED_PERCENT
+    #           value: 1, # required
+    #         },
     #       },
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
@@ -2657,6 +2662,9 @@ module Aws::ECS
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.reset_on_healthy_task #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.threshold_configuration.type #=> String, one of "COUNT", "BOUNDED_PERCENT", "UNBOUNDED_PERCENT"
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.threshold_configuration.value #=> Integer
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.deployment_configuration.alarms.alarm_names #=> Array
@@ -3896,6 +3904,9 @@ module Aws::ECS
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.reset_on_healthy_task #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.threshold_configuration.type #=> String, one of "COUNT", "BOUNDED_PERCENT", "UNBOUNDED_PERCENT"
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.threshold_configuration.value #=> Integer
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.deployment_configuration.alarms.alarm_names #=> Array
@@ -6112,8 +6123,13 @@ module Aws::ECS
     #         cluster_arn: "arn:aws:ecs:us-west-2:123456789012:cluster/example", 
     #         deployment_configuration: {
     #           deployment_circuit_breaker: {
-    #             enable: false, 
-    #             rollback: false, 
+    #             enable: true, 
+    #             reset_on_healthy_task: true, 
+    #             rollback: true, 
+    #             threshold_configuration: {
+    #               type: "BOUNDED_PERCENT", 
+    #               value: 50, 
+    #             }, 
     #           }, 
     #           maximum_percent: 200, 
     #           minimum_healthy_percent: 100, 
@@ -6153,8 +6169,13 @@ module Aws::ECS
     #         cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/MyCluster", 
     #         deployment_configuration: {
     #           deployment_circuit_breaker: {
-    #             enable: false, 
-    #             rollback: false, 
+    #             enable: true, 
+    #             reset_on_healthy_task: true, 
+    #             rollback: true, 
+    #             threshold_configuration: {
+    #               type: "BOUNDED_PERCENT", 
+    #               value: 50, 
+    #             }, 
     #           }, 
     #           lifecycle_hooks: [
     #             {
@@ -6238,6 +6259,9 @@ module Aws::ECS
     #   resp.service_deployments[0].lifecycle_hook_details[0].timeout_action #=> String, one of "ROLLBACK", "CONTINUE"
     #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
+    #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.reset_on_healthy_task #=> Boolean
+    #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.threshold_configuration.type #=> String, one of "COUNT", "BOUNDED_PERCENT", "UNBOUNDED_PERCENT"
+    #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.threshold_configuration.value #=> Integer
     #   resp.service_deployments[0].deployment_configuration.maximum_percent #=> Integer
     #   resp.service_deployments[0].deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service_deployments[0].deployment_configuration.alarms.alarm_names #=> Array
@@ -6557,6 +6581,7 @@ module Aws::ECS
     #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].status_reason #=> String
     #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].updated_at #=> Time
     #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].log_group_name #=> String
+    #   resp.service_revisions[0].overrides.runtime_platform.cpu_architecture #=> String
     #   resp.service_revisions[0].monitoring.metric_configurations #=> Array
     #   resp.service_revisions[0].monitoring.metric_configurations[0].metric_names #=> Array
     #   resp.service_revisions[0].monitoring.metric_configurations[0].metric_names[0] #=> String
@@ -6758,6 +6783,9 @@ module Aws::ECS
     #   resp.services[0].task_definition #=> String
     #   resp.services[0].deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.services[0].deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
+    #   resp.services[0].deployment_configuration.deployment_circuit_breaker.reset_on_healthy_task #=> Boolean
+    #   resp.services[0].deployment_configuration.deployment_circuit_breaker.threshold_configuration.type #=> String, one of "COUNT", "BOUNDED_PERCENT", "UNBOUNDED_PERCENT"
+    #   resp.services[0].deployment_configuration.deployment_circuit_breaker.threshold_configuration.value #=> Integer
     #   resp.services[0].deployment_configuration.maximum_percent #=> Integer
     #   resp.services[0].deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.services[0].deployment_configuration.alarms.alarm_names #=> Array
@@ -14648,7 +14676,8 @@ module Aws::ECS
     #   task definition must also have `FARGATE` compatibility.
     #
     #   If you provide a task definition ARN, you cannot also specify
-    #   `primaryContainer`, `taskRoleArn`, `cpu`, or `memory`.
+    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`, or
+    #   `memory`.
     #
     # @return [Types::UpdateExpressGatewayServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -15324,6 +15353,11 @@ module Aws::ECS
     #       deployment_circuit_breaker: {
     #         enable: false, # required
     #         rollback: false, # required
+    #         reset_on_healthy_task: false,
+    #         threshold_configuration: {
+    #           type: "COUNT", # required, accepts COUNT, BOUNDED_PERCENT, UNBOUNDED_PERCENT
+    #           value: 1, # required
+    #         },
     #       },
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
@@ -15539,6 +15573,9 @@ module Aws::ECS
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.reset_on_healthy_task #=> Boolean
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.threshold_configuration.type #=> String, one of "COUNT", "BOUNDED_PERCENT", "UNBOUNDED_PERCENT"
+    #   resp.service.deployment_configuration.deployment_circuit_breaker.threshold_configuration.value #=> Integer
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.deployment_configuration.alarms.alarm_names #=> Array
@@ -16210,7 +16247,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.238.0'
+      context[:gem_version] = '1.242.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

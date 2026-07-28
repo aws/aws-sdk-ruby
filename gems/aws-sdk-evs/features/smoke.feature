@@ -8,12 +8,12 @@
 Feature: Smoke tests for Evs
 
   @evs @smoke
-  Scenario: ListEnvironmentVlans_ResourceNotFoundException
+  Scenario: ListEnvironmentHosts_ResourceNotFoundException
     Given I create a 'Aws::Evs' client with config:
       """
 {"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_environment_vlans' with params:
+    When I call the operation 'list_environment_hosts' with params:
       """
 {"environment_id":"env-a1B2c3D4e5"}
       """
@@ -32,12 +32,12 @@ Feature: Smoke tests for Evs
     Then I expect a 'Aws::Evs::Errors::ResourceNotFoundException' was raised
 
   @evs @smoke
-  Scenario: ListEnvironmentHosts_ResourceNotFoundException
+  Scenario: ListEnvironmentVlans_ResourceNotFoundException
     Given I create a 'Aws::Evs' client with config:
       """
 {"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_environment_hosts' with params:
+    When I call the operation 'list_environment_vlans' with params:
       """
 {"environment_id":"env-a1B2c3D4e5"}
       """

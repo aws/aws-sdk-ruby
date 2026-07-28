@@ -59,6 +59,13 @@ module Aws::GuardDuty
     AutoscalingAutoScalingGroup = Shapes::StructureShape.new(name: 'AutoscalingAutoScalingGroup')
     AwsApiCallAction = Shapes::StructureShape.new(name: 'AwsApiCallAction')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BedrockGuardrail = Shapes::StructureShape.new(name: 'BedrockGuardrail')
+    BedrockGuardrailArnString = Shapes::StringShape.new(name: 'BedrockGuardrailArnString')
+    BedrockGuardrailDetails = Shapes::StructureShape.new(name: 'BedrockGuardrailDetails')
+    BedrockGuardrailDetailsGuardrailArnString = Shapes::StringShape.new(name: 'BedrockGuardrailDetailsGuardrailArnString')
+    BedrockGuardrailDetailsGuardrailVersionString = Shapes::StringShape.new(name: 'BedrockGuardrailDetailsGuardrailVersionString')
+    BedrockGuardrailVersionString = Shapes::StringShape.new(name: 'BedrockGuardrailVersionString')
+    BedrockGuardrails = Shapes::ListShape.new(name: 'BedrockGuardrails')
     Behavior = Shapes::MapShape.new(name: 'Behavior')
     BlockPublicAccess = Shapes::StructureShape.new(name: 'BlockPublicAccess')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -73,6 +80,7 @@ module Aws::GuardDuty
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     Confidence = Shapes::StringShape.new(name: 'Confidence')
+    ConfidenceLevel = Shapes::StringShape.new(name: 'ConfidenceLevel')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Container = Shapes::StructureShape.new(name: 'Container')
     ContainerFindingResource = Shapes::StructureShape.new(name: 'ContainerFindingResource')
@@ -81,6 +89,10 @@ module Aws::GuardDuty
     ContainerUid = Shapes::StringShape.new(name: 'ContainerUid')
     ContainerUids = Shapes::ListShape.new(name: 'ContainerUids')
     Containers = Shapes::ListShape.new(name: 'Containers')
+    ContentPolicyFilter = Shapes::StructureShape.new(name: 'ContentPolicyFilter')
+    ContentPolicyFilterAction = Shapes::StringShape.new(name: 'ContentPolicyFilterAction')
+    ContentPolicyFilterType = Shapes::StringShape.new(name: 'ContentPolicyFilterType')
+    ContentPolicyFilters = Shapes::ListShape.new(name: 'ContentPolicyFilters')
     ContinuousScanDetails = Shapes::StructureShape.new(name: 'ContinuousScanDetails')
     CountByCoverageStatus = Shapes::MapShape.new(name: 'CountByCoverageStatus')
     CountByResourceType = Shapes::MapShape.new(name: 'CountByResourceType')
@@ -241,6 +253,7 @@ module Aws::GuardDuty
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterNames = Shapes::ListShape.new(name: 'FilterNames')
     FilterRank = Shapes::IntegerShape.new(name: 'FilterRank')
+    FilterVersion = Shapes::IntegerShape.new(name: 'FilterVersion')
     Finding = Shapes::StructureShape.new(name: 'Finding')
     FindingCriteria = Shapes::StructureShape.new(name: 'FindingCriteria')
     FindingId = Shapes::StringShape.new(name: 'FindingId')
@@ -310,6 +323,8 @@ module Aws::GuardDuty
     GroupedBySeverity = Shapes::ListShape.new(name: 'GroupedBySeverity')
     Groups = Shapes::ListShape.new(name: 'Groups')
     GuardDutyArn = Shapes::StringShape.new(name: 'GuardDutyArn')
+    GuardrailAction = Shapes::StringShape.new(name: 'GuardrailAction')
+    GuardrailSource = Shapes::StringShape.new(name: 'GuardrailSource')
     HighestSeverityThreatDetails = Shapes::StructureShape.new(name: 'HighestSeverityThreatDetails')
     HostPath = Shapes::StructureShape.new(name: 'HostPath')
     IamInstanceProfile = Shapes::StructureShape.new(name: 'IamInstanceProfile')
@@ -451,6 +466,9 @@ module Aws::GuardDuty
     Members = Shapes::ListShape.new(name: 'Members')
     MemoryRegionsList = Shapes::ListShape.new(name: 'MemoryRegionsList')
     MfaStatus = Shapes::StringShape.new(name: 'MfaStatus')
+    ModelDetail = Shapes::StructureShape.new(name: 'ModelDetail')
+    ModelDetailModelIdString = Shapes::StringShape.new(name: 'ModelDetailModelIdString')
+    ModelDetails = Shapes::ListShape.new(name: 'ModelDetails')
     Name = Shapes::StringShape.new(name: 'Name')
     Neq = Shapes::ListShape.new(name: 'Neq')
     NetworkConnection = Shapes::StructureShape.new(name: 'NetworkConnection')
@@ -467,6 +485,7 @@ module Aws::GuardDuty
     NotEquals = Shapes::ListShape.new(name: 'NotEquals')
     NotMatch = Shapes::StringShape.new(name: 'NotMatch')
     NotMatches = Shapes::ListShape.new(name: 'NotMatches')
+    ObservationNumbers = Shapes::ListShape.new(name: 'ObservationNumbers')
     ObservationTexts = Shapes::ListShape.new(name: 'ObservationTexts')
     Observations = Shapes::StructureShape.new(name: 'Observations')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
@@ -872,6 +891,20 @@ module Aws::GuardDuty
     BadRequestException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     BadRequestException.struct_class = Types::BadRequestException
 
+    BedrockGuardrail.add_member(:arn, Shapes::ShapeRef.new(shape: BedrockGuardrailArnString, location_name: "arn"))
+    BedrockGuardrail.add_member(:version, Shapes::ShapeRef.new(shape: BedrockGuardrailVersionString, location_name: "version"))
+    BedrockGuardrail.struct_class = Types::BedrockGuardrail
+
+    BedrockGuardrailDetails.add_member(:guardrail_arn, Shapes::ShapeRef.new(shape: BedrockGuardrailDetailsGuardrailArnString, deprecated: true, location_name: "guardrailArn", metadata: {"deprecatedMessage" => "Use guardrails list instead", "deprecatedSince" => "2026-07-13"}))
+    BedrockGuardrailDetails.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: BedrockGuardrailDetailsGuardrailVersionString, deprecated: true, location_name: "guardrailVersion", metadata: {"deprecatedMessage" => "Use guardrails list instead", "deprecatedSince" => "2026-07-13"}))
+    BedrockGuardrailDetails.add_member(:guardrails, Shapes::ShapeRef.new(shape: BedrockGuardrails, location_name: "guardrails"))
+    BedrockGuardrailDetails.add_member(:guardrail_action, Shapes::ShapeRef.new(shape: GuardrailAction, location_name: "guardrailAction"))
+    BedrockGuardrailDetails.add_member(:guardrail_source, Shapes::ShapeRef.new(shape: GuardrailSource, location_name: "guardrailSource"))
+    BedrockGuardrailDetails.add_member(:content_policy_filters, Shapes::ShapeRef.new(shape: ContentPolicyFilters, location_name: "contentPolicyFilters"))
+    BedrockGuardrailDetails.struct_class = Types::BedrockGuardrailDetails
+
+    BedrockGuardrails.member = Shapes::ShapeRef.new(shape: BedrockGuardrail)
+
     Behavior.key = Shapes::ShapeRef.new(shape: String)
     Behavior.value = Shapes::ShapeRef.new(shape: AnomalyUnusualBehaviorFeature)
 
@@ -944,6 +977,13 @@ module Aws::GuardDuty
     ContainerUids.member = Shapes::ShapeRef.new(shape: ContainerUid)
 
     Containers.member = Shapes::ShapeRef.new(shape: Container)
+
+    ContentPolicyFilter.add_member(:type, Shapes::ShapeRef.new(shape: ContentPolicyFilterType, location_name: "type"))
+    ContentPolicyFilter.add_member(:confidence, Shapes::ShapeRef.new(shape: ConfidenceLevel, location_name: "confidence"))
+    ContentPolicyFilter.add_member(:action, Shapes::ShapeRef.new(shape: ContentPolicyFilterAction, location_name: "action"))
+    ContentPolicyFilter.struct_class = Types::ContentPolicyFilter
+
+    ContentPolicyFilters.member = Shapes::ShapeRef.new(shape: ContentPolicyFilter)
 
     ContinuousScanDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     ContinuousScanDetails.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
@@ -1601,6 +1641,9 @@ module Aws::GuardDuty
     GetFilterResponse.add_member(:rank, Shapes::ShapeRef.new(shape: FilterRank, location_name: "rank"))
     GetFilterResponse.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, required: true, location_name: "findingCriteria"))
     GetFilterResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetFilterResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetFilterResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetFilterResponse.add_member(:version, Shapes::ShapeRef.new(shape: FilterVersion, location_name: "version"))
     GetFilterResponse.struct_class = Types::GetFilterResponse
 
     GetFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "DetectorId"))
@@ -2299,6 +2342,11 @@ module Aws::GuardDuty
 
     MemoryRegionsList.member = Shapes::ShapeRef.new(shape: String)
 
+    ModelDetail.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelDetailModelIdString, location_name: "modelId"))
+    ModelDetail.struct_class = Types::ModelDetail
+
+    ModelDetails.member = Shapes::ShapeRef.new(shape: ModelDetail)
+
     Neq.member = Shapes::ShapeRef.new(shape: String)
 
     NetworkConnection.add_member(:direction, Shapes::ShapeRef.new(shape: NetworkDirection, required: true, location_name: "direction"))
@@ -2349,9 +2397,12 @@ module Aws::GuardDuty
 
     NotMatches.member = Shapes::ShapeRef.new(shape: NotMatch)
 
+    ObservationNumbers.member = Shapes::ShapeRef.new(shape: Long)
+
     ObservationTexts.member = Shapes::ShapeRef.new(shape: String)
 
     Observations.add_member(:text, Shapes::ShapeRef.new(shape: ObservationTexts, location_name: "text"))
+    Observations.add_member(:number, Shapes::ShapeRef.new(shape: ObservationNumbers, location_name: "number"))
     Observations.struct_class = Types::Observations
 
     Organization.add_member(:asn, Shapes::ShapeRef.new(shape: String, location_name: "asn"))
@@ -2550,6 +2601,7 @@ module Aws::GuardDuty
 
     RecoveryPointDetails.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "recoveryPointArn"))
     RecoveryPointDetails.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: String, location_name: "backupVaultName"))
+    RecoveryPointDetails.add_member(:continuous_scan_details, Shapes::ShapeRef.new(shape: ScanConfigurationContinuousScanDetails, location_name: "continuousScanDetails"))
     RecoveryPointDetails.struct_class = Types::RecoveryPointDetails
 
     RelatedFilePathsList.member = Shapes::ShapeRef.new(shape: String)
@@ -2586,6 +2638,8 @@ module Aws::GuardDuty
     Resource.add_member(:ebs_snapshot_details, Shapes::ShapeRef.new(shape: EbsSnapshotDetails, location_name: "ebsSnapshotDetails"))
     Resource.add_member(:ec2_image_details, Shapes::ShapeRef.new(shape: Ec2ImageDetails, location_name: "ec2ImageDetails"))
     Resource.add_member(:recovery_point_details, Shapes::ShapeRef.new(shape: RecoveryPointDetails, location_name: "recoveryPointDetails"))
+    Resource.add_member(:bedrock_guardrail_details, Shapes::ShapeRef.new(shape: BedrockGuardrailDetails, location_name: "bedrockGuardrailDetails"))
+    Resource.add_member(:model_details, Shapes::ShapeRef.new(shape: ModelDetails, location_name: "modelDetails"))
     Resource.struct_class = Types::Resource
 
     ResourceData.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "s3Bucket"))

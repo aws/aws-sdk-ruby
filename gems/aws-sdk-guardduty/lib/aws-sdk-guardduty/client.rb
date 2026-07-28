@@ -678,7 +678,7 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, RUNTIME_MONITORING
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, RUNTIME_MONITORING, AI_PROTECTION, AI_ANALYST
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
@@ -3354,7 +3354,7 @@ module Aws::GuardDuty
     #   resp.data_sources.kubernetes.audit_logs.auto_enable #=> Boolean
     #   resp.data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.auto_enable #=> Boolean
     #   resp.features #=> Array
-    #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING"
+    #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING", "AI_PROTECTION"
     #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.features[0].additional_configuration #=> Array
     #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
@@ -3785,7 +3785,7 @@ module Aws::GuardDuty
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.features #=> Array
-    #   resp.features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING"
+    #   resp.features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING", "AI_PROTECTION", "AI_ANALYST"
     #   resp.features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].updated_at #=> Time
     #   resp.features[0].additional_configuration #=> Array
@@ -3825,6 +3825,9 @@ module Aws::GuardDuty
     #   * {Types::GetFilterResponse#rank #rank} => Integer
     #   * {Types::GetFilterResponse#finding_criteria #finding_criteria} => Types::FindingCriteria
     #   * {Types::GetFilterResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetFilterResponse#created_at #created_at} => Time
+    #   * {Types::GetFilterResponse#updated_at #updated_at} => Time
+    #   * {Types::GetFilterResponse#version #version} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -3862,6 +3865,9 @@ module Aws::GuardDuty
     #   resp.finding_criteria.criterion["String"].not_matches[0] #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilter AWS API Documentation
     #
@@ -4127,6 +4133,21 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.ec2_image_details.image_arn #=> String
     #   resp.findings[0].resource.recovery_point_details.recovery_point_arn #=> String
     #   resp.findings[0].resource.recovery_point_details.backup_vault_name #=> String
+    #   resp.findings[0].resource.recovery_point_details.continuous_scan_details.start_time #=> Time
+    #   resp.findings[0].resource.recovery_point_details.continuous_scan_details.end_time #=> Time
+    #   resp.findings[0].resource.bedrock_guardrail_details.guardrail_arn #=> String
+    #   resp.findings[0].resource.bedrock_guardrail_details.guardrail_version #=> String
+    #   resp.findings[0].resource.bedrock_guardrail_details.guardrails #=> Array
+    #   resp.findings[0].resource.bedrock_guardrail_details.guardrails[0].arn #=> String
+    #   resp.findings[0].resource.bedrock_guardrail_details.guardrails[0].version #=> String
+    #   resp.findings[0].resource.bedrock_guardrail_details.guardrail_action #=> String, one of "GUARDRAIL_INTERVENED", "NONE"
+    #   resp.findings[0].resource.bedrock_guardrail_details.guardrail_source #=> String, one of "INPUT", "OUTPUT"
+    #   resp.findings[0].resource.bedrock_guardrail_details.content_policy_filters #=> Array
+    #   resp.findings[0].resource.bedrock_guardrail_details.content_policy_filters[0].type #=> String, one of "PROMPT_ATTACK", "JAILBREAK", "HATE", "INSULTS", "SEXUAL", "VIOLENCE", "MISCONDUCT"
+    #   resp.findings[0].resource.bedrock_guardrail_details.content_policy_filters[0].confidence #=> String, one of "HIGH", "MEDIUM", "LOW", "NONE"
+    #   resp.findings[0].resource.bedrock_guardrail_details.content_policy_filters[0].action #=> String, one of "BLOCKED", "NONE"
+    #   resp.findings[0].resource.model_details #=> Array
+    #   resp.findings[0].resource.model_details[0].model_id #=> String
     #   resp.findings[0].schema_version #=> String
     #   resp.findings[0].service.action.action_type #=> String
     #   resp.findings[0].service.action.aws_api_call_action.api #=> String
@@ -4383,16 +4404,20 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.anomaly.profiles #=> Hash
     #   resp.findings[0].service.detection.anomaly.profiles["String"] #=> Hash
     #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"] #=> Array
-    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].profile_type #=> String, one of "FREQUENCY"
-    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].profile_subtype #=> String, one of "FREQUENT", "INFREQUENT", "UNSEEN", "RARE"
+    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].profile_type #=> String, one of "FREQUENCY", "VOLUME"
+    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].profile_subtype #=> String, one of "FREQUENT", "INFREQUENT", "UNSEEN", "RARE", "COUNT", "AVERAGE"
     #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].observations.text #=> Array
     #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].observations.text[0] #=> String
+    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].observations.number #=> Array
+    #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"][0].observations.number[0] #=> Integer
     #   resp.findings[0].service.detection.anomaly.unusual.behavior #=> Hash
     #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"] #=> Hash
-    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].profile_type #=> String, one of "FREQUENCY"
-    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].profile_subtype #=> String, one of "FREQUENT", "INFREQUENT", "UNSEEN", "RARE"
+    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].profile_type #=> String, one of "FREQUENCY", "VOLUME"
+    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].profile_subtype #=> String, one of "FREQUENT", "INFREQUENT", "UNSEEN", "RARE", "COUNT", "AVERAGE"
     #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].observations.text #=> Array
     #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].observations.text[0] #=> String
+    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].observations.number #=> Array
+    #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].observations.number[0] #=> Integer
     #   resp.findings[0].service.detection.sequence.uid #=> String
     #   resp.findings[0].service.detection.sequence.description #=> String
     #   resp.findings[0].service.detection.sequence.actors #=> Array
@@ -5134,7 +5159,7 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.reason #=> String
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.service_role #=> String
     #   resp.member_data_source_configurations[0].features #=> Array
-    #   resp.member_data_source_configurations[0].features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING"
+    #   resp.member_data_source_configurations[0].features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING", "AI_PROTECTION"
     #   resp.member_data_source_configurations[0].features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].updated_at #=> Time
     #   resp.member_data_source_configurations[0].features[0].additional_configuration #=> Array
@@ -5227,7 +5252,7 @@ module Aws::GuardDuty
     #   resp.organization_details.organization_statistics.active_accounts_count #=> Integer
     #   resp.organization_details.organization_statistics.enabled_accounts_count #=> Integer
     #   resp.organization_details.organization_statistics.count_by_feature #=> Array
-    #   resp.organization_details.organization_statistics.count_by_feature[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING"
+    #   resp.organization_details.organization_statistics.count_by_feature[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING", "AI_PROTECTION"
     #   resp.organization_details.organization_statistics.count_by_feature[0].enabled_accounts_count #=> Integer
     #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration #=> Array
     #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
@@ -5281,7 +5306,7 @@ module Aws::GuardDuty
     #   resp.accounts[0].data_sources.kubernetes.audit_logs.free_trial_days_remaining #=> Integer
     #   resp.accounts[0].data_sources.malware_protection.scan_ec2_instance_with_findings.free_trial_days_remaining #=> Integer
     #   resp.accounts[0].features #=> Array
-    #   resp.accounts[0].features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING"
+    #   resp.accounts[0].features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "AI_PROTECTION"
     #   resp.accounts[0].features[0].free_trial_days_remaining #=> Integer
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
@@ -5515,7 +5540,7 @@ module Aws::GuardDuty
     #       account_ids: ["AccountId"],
     #       data_sources: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
     #       resources: ["String"],
-    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, EC2_RUNTIME_MONITORING, FARGATE_RUNTIME_MONITORING, RDS_DBI_PROTECTION_PROVISIONED, RDS_DBI_PROTECTION_SERVERLESS
+    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, EC2_RUNTIME_MONITORING, FARGATE_RUNTIME_MONITORING, RDS_DBI_PROTECTION_PROVISIONED, RDS_DBI_PROTECTION_SERVERLESS, AI_PROTECTION
     #     },
     #     unit: "String",
     #     max_results: 1,
@@ -5529,7 +5554,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.sum_by_account[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_account[0].total.unit #=> String
     #   resp.usage_statistics.top_accounts_by_feature #=> Array
-    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS"
+    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS", "AI_PROTECTION"
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts #=> Array
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].account_id #=> String
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].total.amount #=> String
@@ -5547,7 +5572,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.top_resources[0].total.amount #=> String
     #   resp.usage_statistics.top_resources[0].total.unit #=> String
     #   resp.usage_statistics.sum_by_feature #=> Array
-    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS"
+    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS", "AI_PROTECTION"
     #   resp.usage_statistics.sum_by_feature[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_feature[0].total.unit #=> String
     #   resp.next_token #=> String
@@ -7098,7 +7123,7 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, RUNTIME_MONITORING
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, RUNTIME_MONITORING, AI_PROTECTION, AI_ANALYST
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
@@ -8793,7 +8818,7 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, RUNTIME_MONITORING
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, RUNTIME_MONITORING, AI_PROTECTION
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
@@ -8923,7 +8948,7 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, RUNTIME_MONITORING
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, RUNTIME_MONITORING, AI_PROTECTION
     #         auto_enable: "NEW", # accepts NEW, NONE, ALL
     #         additional_configuration: [
     #           {
@@ -9178,7 +9203,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.158.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

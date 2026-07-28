@@ -26,6 +26,9 @@ module Aws
       class ContactNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ContactNotTerminatedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class DestinationNotAllowedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

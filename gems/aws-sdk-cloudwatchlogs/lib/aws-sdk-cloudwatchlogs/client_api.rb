@@ -302,6 +302,8 @@ module Aws::CloudWatchLogs
     GetScheduledQueryHistoryResponse = Shapes::StructureShape.new(name: 'GetScheduledQueryHistoryResponse')
     GetScheduledQueryRequest = Shapes::StructureShape.new(name: 'GetScheduledQueryRequest')
     GetScheduledQueryResponse = Shapes::StructureShape.new(name: 'GetScheduledQueryResponse')
+    GetStorageTierPolicyRequest = Shapes::StructureShape.new(name: 'GetStorageTierPolicyRequest')
+    GetStorageTierPolicyResponse = Shapes::StructureShape.new(name: 'GetStorageTierPolicyResponse')
     GetTransformerRequest = Shapes::StructureShape.new(name: 'GetTransformerRequest')
     GetTransformerResponse = Shapes::StructureShape.new(name: 'GetTransformerResponse')
     Grok = Shapes::StructureShape.new(name: 'Grok')
@@ -523,6 +525,8 @@ module Aws::CloudWatchLogs
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PutRetentionPolicyRequest = Shapes::StructureShape.new(name: 'PutRetentionPolicyRequest')
+    PutStorageTierPolicyRequest = Shapes::StructureShape.new(name: 'PutStorageTierPolicyRequest')
+    PutStorageTierPolicyResponse = Shapes::StructureShape.new(name: 'PutStorageTierPolicyResponse')
     PutSubscriptionFilterRequest = Shapes::StructureShape.new(name: 'PutSubscriptionFilterRequest')
     PutSyslogConfigurationRequest = Shapes::StructureShape.new(name: 'PutSyslogConfigurationRequest')
     PutTransformerRequest = Shapes::StructureShape.new(name: 'PutTransformerRequest')
@@ -625,6 +629,7 @@ module Aws::CloudWatchLogs
     StatsValue = Shapes::FloatShape.new(name: 'StatsValue')
     StopQueryRequest = Shapes::StructureShape.new(name: 'StopQueryRequest')
     StopQueryResponse = Shapes::StructureShape.new(name: 'StopQueryResponse')
+    StorageTier = Shapes::StringShape.new(name: 'StorageTier')
     StoredBytes = Shapes::IntegerShape.new(name: 'StoredBytes')
     String = Shapes::StringShape.new(name: 'String')
     SubscriptionFilter = Shapes::StructureShape.new(name: 'SubscriptionFilter')
@@ -1573,6 +1578,12 @@ module Aws::CloudWatchLogs
     GetScheduledQueryResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
     GetScheduledQueryResponse.struct_class = Types::GetScheduledQueryResponse
 
+    GetStorageTierPolicyRequest.struct_class = Types::GetStorageTierPolicyRequest
+
+    GetStorageTierPolicyResponse.add_member(:storage_tier, Shapes::ShapeRef.new(shape: StorageTier, location_name: "storageTier"))
+    GetStorageTierPolicyResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
+    GetStorageTierPolicyResponse.struct_class = Types::GetStorageTierPolicyResponse
+
     GetTransformerRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, required: true, location_name: "logGroupIdentifier"))
     GetTransformerRequest.struct_class = Types::GetTransformerRequest
 
@@ -2209,6 +2220,13 @@ module Aws::CloudWatchLogs
     PutRetentionPolicyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     PutRetentionPolicyRequest.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: Days, required: true, location_name: "retentionInDays"))
     PutRetentionPolicyRequest.struct_class = Types::PutRetentionPolicyRequest
+
+    PutStorageTierPolicyRequest.add_member(:storage_tier, Shapes::ShapeRef.new(shape: StorageTier, required: true, location_name: "storageTier"))
+    PutStorageTierPolicyRequest.struct_class = Types::PutStorageTierPolicyRequest
+
+    PutStorageTierPolicyResponse.add_member(:storage_tier, Shapes::ShapeRef.new(shape: StorageTier, location_name: "storageTier"))
+    PutStorageTierPolicyResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
+    PutStorageTierPolicyResponse.struct_class = Types::PutStorageTierPolicyResponse
 
     PutSubscriptionFilterRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     PutSubscriptionFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "filterName"))
@@ -3613,6 +3631,19 @@ module Aws::CloudWatchLogs
         )
       end)
 
+      api.add_operation(:get_storage_tier_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStorageTierPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetStorageTierPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetStorageTierPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_transformer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTransformer"
         o.http_method = "POST"
@@ -3992,6 +4023,19 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:put_storage_tier_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutStorageTierPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutStorageTierPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutStorageTierPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:put_subscription_filter, Seahorse::Model::Operation.new.tap do |o|

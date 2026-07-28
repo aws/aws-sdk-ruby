@@ -2793,8 +2793,10 @@ module Aws::Route53GlobalResolver
       req.send_request(options)
     end
 
-    # Lists all hosted zone associations for a Route 53 Global Resolver
-    # resource with pagination support.
+    # Lists hosted zone associations with pagination support. Specify a DNS
+    # view through the `resourceArn` parameter to list the hosted zone
+    # associations for that DNS view, or omit it to list all hosted zone
+    # associations in your Amazon Web Services account.
     #
     # Route 53 Global Resolver is a global service that supports resolvers
     # in multiple Amazon Web Services Regions but you must specify the US
@@ -2809,8 +2811,11 @@ module Aws::Route53GlobalResolver
     #   A pagination token used for large sets of results that can't be
     #   returned in a single response.
     #
-    # @option params [required, String] :resource_arn
-    #   Amazon Resource Name (ARN) of the DNS view.
+    # @option params [String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DNS view to list hosted zone
+    #   associations for. This parameter is optional; if you omit it, all
+    #   hosted zone associations in your Amazon Web Services account are
+    #   returned.
     #
     # @return [Types::ListHostedZoneAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2824,7 +2829,7 @@ module Aws::Route53GlobalResolver
     #   resp = client.list_hosted_zone_associations({
     #     max_results: 1,
     #     next_token: "String",
-    #     resource_arn: "ResourceArn", # required
+    #     resource_arn: "ResourceArn",
     #   })
     #
     # @example Response structure
@@ -2899,6 +2904,64 @@ module Aws::Route53GlobalResolver
     # @param [Hash] params ({})
     def list_managed_firewall_domain_lists(params = {}, options = {})
       req = build_request(:list_managed_firewall_domain_lists, params)
+      req.send_request(options)
+    end
+
+    # Lists the DNS views that have been shared with your Amazon Web
+    # Services account through Amazon Web Services Resource Access Manager
+    # (Amazon Web Services RAM), with pagination support.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to retrieve in a single call.
+    #
+    # @option params [String] :next_token
+    #   A pagination token used for large sets of results that can't be
+    #   returned in a single response.
+    #
+    # @return [Types::ListSharedDNSViewsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSharedDNSViewsOutput#next_token #next_token} => String
+    #   * {Types::ListSharedDNSViewsOutput#dns_views #dns_views} => Array&lt;Types::SharedDNSViewSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_shared_dns_views({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.dns_views #=> Array
+    #   resp.dns_views[0].id #=> String
+    #   resp.dns_views[0].arn #=> String
+    #   resp.dns_views[0].client_token #=> String
+    #   resp.dns_views[0].dnssec_validation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.dns_views[0].edns_client_subnet #=> String, one of "ENABLED", "DISABLED"
+    #   resp.dns_views[0].firewall_rules_fail_open #=> String, one of "ENABLED", "DISABLED"
+    #   resp.dns_views[0].name #=> String
+    #   resp.dns_views[0].description #=> String
+    #   resp.dns_views[0].global_resolver_id #=> String
+    #   resp.dns_views[0].created_at #=> Time
+    #   resp.dns_views[0].updated_at #=> Time
+    #   resp.dns_views[0].status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "ENABLING", "DISABLING", "DISABLED", "DELETING"
+    #   resp.dns_views[0].owner_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListSharedDNSViews AWS API Documentation
+    #
+    # @overload list_shared_dns_views(params = {})
+    # @param [Hash] params ({})
+    def list_shared_dns_views(params = {}, options = {})
+      req = build_request(:list_shared_dns_views, params)
       req.send_request(options)
     end
 
@@ -3522,7 +3585,7 @@ module Aws::Route53GlobalResolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53globalresolver'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

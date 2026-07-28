@@ -858,6 +858,7 @@ module Aws::RedshiftServerless
     ResourcePolicy.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
     ResourcePolicy.struct_class = Types::ResourcePolicy
 
+    RestoreFromRecoveryPointRequest.add_member(:maintain_integration, Shapes::ShapeRef.new(shape: Boolean, location_name: "maintainIntegration"))
     RestoreFromRecoveryPointRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
     RestoreFromRecoveryPointRequest.add_member(:recovery_point_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recoveryPointId"))
     RestoreFromRecoveryPointRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
@@ -868,6 +869,7 @@ module Aws::RedshiftServerless
     RestoreFromRecoveryPointResponse.struct_class = Types::RestoreFromRecoveryPointResponse
 
     RestoreFromSnapshotRequest.add_member(:admin_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "adminPasswordSecretKmsKeyId"))
+    RestoreFromSnapshotRequest.add_member(:maintain_integration, Shapes::ShapeRef.new(shape: Boolean, location_name: "maintainIntegration"))
     RestoreFromSnapshotRequest.add_member(:manage_admin_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "manageAdminPassword"))
     RestoreFromSnapshotRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
     RestoreFromSnapshotRequest.add_member(:owner_account, Shapes::ShapeRef.new(shape: String, location_name: "ownerAccount"))

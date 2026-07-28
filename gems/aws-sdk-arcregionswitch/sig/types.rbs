@@ -117,6 +117,13 @@ module Aws::ARCRegionswitch
     class CancelPlanExecutionResponse < Aws::EmptyStructure
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
     class CreatePlanRequest
       attr_accessor description: ::String
       attr_accessor workflows: ::Array[Types::Workflow]
@@ -715,6 +722,7 @@ module Aws::ARCRegionswitch
       attr_accessor comment: ::String
       attr_accessor latest_version: ::String
       attr_accessor recovery_execution_id: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 

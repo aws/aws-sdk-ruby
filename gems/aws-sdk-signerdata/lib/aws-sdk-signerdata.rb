@@ -55,7 +55,7 @@ module Aws::SignerData
   autoload :EndpointProvider, 'aws-sdk-signerdata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-signerdata/endpoints'
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end
 

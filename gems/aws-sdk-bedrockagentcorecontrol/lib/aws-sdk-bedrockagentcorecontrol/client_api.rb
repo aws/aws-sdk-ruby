@@ -22,6 +22,7 @@ module Aws::BedrockAgentCoreControl
     AddDatasetExamplesRequest = Shapes::StructureShape.new(name: 'AddDatasetExamplesRequest')
     AddDatasetExamplesResponse = Shapes::StructureShape.new(name: 'AddDatasetExamplesResponse')
     AdditionalModelRequestFields = Shapes::DocumentShape.new(name: 'AdditionalModelRequestFields', document: true)
+    AdvertisedScopeMappingType = Shapes::MapShape.new(name: 'AdvertisedScopeMappingType')
     AgentCardDefinition = Shapes::StructureShape.new(name: 'AgentCardDefinition')
     AgentEndpointDescription = Shapes::StringShape.new(name: 'AgentEndpointDescription')
     AgentManagedRuntimeType = Shapes::StringShape.new(name: 'AgentManagedRuntimeType')
@@ -165,6 +166,7 @@ module Aws::BedrockAgentCoreControl
     ConnectorParameterOverrides = Shapes::ListShape.new(name: 'ConnectorParameterOverrides')
     ConnectorSource = Shapes::StructureShape.new(name: 'ConnectorSource')
     ConnectorTargetConfiguration = Shapes::StructureShape.new(name: 'ConnectorTargetConfiguration')
+    ConnectorVersion = Shapes::StringShape.new(name: 'ConnectorVersion')
     ConsolidationConfiguration = Shapes::UnionShape.new(name: 'ConsolidationConfiguration')
     ContainerConfiguration = Shapes::StructureShape.new(name: 'ContainerConfiguration')
     Content = Shapes::UnionShape.new(name: 'Content')
@@ -348,6 +350,8 @@ module Aws::BedrockAgentCoreControl
     DraftStatus = Shapes::StringShape.new(name: 'DraftStatus')
     EfsAccessPointArn = Shapes::StringShape.new(name: 'EfsAccessPointArn')
     EfsAccessPointConfiguration = Shapes::StructureShape.new(name: 'EfsAccessPointConfiguration')
+    EfsConfiguration = Shapes::StructureShape.new(name: 'EfsConfiguration')
+    EfsFileSystemArn = Shapes::StringShape.new(name: 'EfsFileSystemArn')
     EnabledConnectors = Shapes::ListShape.new(name: 'EnabledConnectors')
     EncryptionFailure = Shapes::StructureShape.new(name: 'EncryptionFailure')
     EndpointIpAddressType = Shapes::StringShape.new(name: 'EndpointIpAddressType')
@@ -968,6 +972,8 @@ module Aws::BedrockAgentCoreControl
     S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
     S3FilesAccessPointArn = Shapes::StringShape.new(name: 'S3FilesAccessPointArn')
     S3FilesAccessPointConfiguration = Shapes::StructureShape.new(name: 'S3FilesAccessPointConfiguration')
+    S3FilesConfiguration = Shapes::StructureShape.new(name: 'S3FilesConfiguration')
+    S3FilesFileSystemArn = Shapes::StringShape.new(name: 'S3FilesFileSystemArn')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3LocationBucketString = Shapes::StringShape.new(name: 'S3LocationBucketString')
     S3LocationPrefixString = Shapes::StringShape.new(name: 'S3LocationPrefixString')
@@ -1111,6 +1117,8 @@ module Aws::BedrockAgentCoreControl
     ToolSchema = Shapes::UnionShape.new(name: 'ToolSchema')
     ToolSecretArn = Shapes::StringShape.new(name: 'ToolSecretArn')
     ToolsDefinition = Shapes::StructureShape.new(name: 'ToolsDefinition')
+    ToolsFileSystemConfiguration = Shapes::UnionShape.new(name: 'ToolsFileSystemConfiguration')
+    ToolsFileSystemConfigurations = Shapes::ListShape.new(name: 'ToolsFileSystemConfigurations')
     TopK = Shapes::IntegerShape.new(name: 'TopK')
     TopP = Shapes::FloatShape.new(name: 'TopP')
     TrafficSplitEntries = Shapes::ListShape.new(name: 'TrafficSplitEntries')
@@ -1261,6 +1269,9 @@ module Aws::BedrockAgentCoreControl
     AddDatasetExamplesResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     AddDatasetExamplesResponse.add_member(:example_ids, Shapes::ShapeRef.new(shape: ExampleIdList, required: true, location_name: "exampleIds"))
     AddDatasetExamplesResponse.struct_class = Types::AddDatasetExamplesResponse
+
+    AdvertisedScopeMappingType.key = Shapes::ShapeRef.new(shape: AllowedScopeType)
+    AdvertisedScopeMappingType.value = Shapes::ShapeRef.new(shape: AllowedScopeType)
 
     AgentCardDefinition.add_member(:schema_version, Shapes::ShapeRef.new(shape: SchemaVersion, location_name: "schemaVersion"))
     AgentCardDefinition.add_member(:inline_content, Shapes::ShapeRef.new(shape: InlineContent, location_name: "inlineContent"))
@@ -1609,6 +1620,7 @@ module Aws::BedrockAgentCoreControl
     ConnectorParameterOverrides.member = Shapes::ShapeRef.new(shape: ConnectorParameterOverride)
 
     ConnectorSource.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "connectorId"))
+    ConnectorSource.add_member(:version, Shapes::ShapeRef.new(shape: ConnectorVersion, location_name: "version"))
     ConnectorSource.struct_class = Types::ConnectorSource
 
     ConnectorTargetConfiguration.add_member(:source, Shapes::ShapeRef.new(shape: ConnectorSource, required: true, location_name: "source"))
@@ -1709,6 +1721,7 @@ module Aws::BedrockAgentCoreControl
     CreateBrowserRequest.add_member(:browser_signing, Shapes::ShapeRef.new(shape: BrowserSigningConfigInput, location_name: "browserSigning"))
     CreateBrowserRequest.add_member(:enterprise_policies, Shapes::ShapeRef.new(shape: BrowserEnterprisePolicies, location_name: "enterprisePolicies"))
     CreateBrowserRequest.add_member(:certificates, Shapes::ShapeRef.new(shape: Certificates, location_name: "certificates"))
+    CreateBrowserRequest.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: ToolsFileSystemConfigurations, location_name: "filesystemConfigurations"))
     CreateBrowserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateBrowserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateBrowserRequest.struct_class = Types::CreateBrowserRequest
@@ -1724,6 +1737,7 @@ module Aws::BedrockAgentCoreControl
     CreateCodeInterpreterRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "executionRoleArn"))
     CreateCodeInterpreterRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: CodeInterpreterNetworkConfiguration, required: true, location_name: "networkConfiguration"))
     CreateCodeInterpreterRequest.add_member(:certificates, Shapes::ShapeRef.new(shape: Certificates, location_name: "certificates"))
+    CreateCodeInterpreterRequest.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: ToolsFileSystemConfigurations, location_name: "filesystemConfigurations"))
     CreateCodeInterpreterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateCodeInterpreterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateCodeInterpreterRequest.struct_class = Types::CreateCodeInterpreterRequest
@@ -2189,6 +2203,7 @@ module Aws::BedrockAgentCoreControl
     CustomJWTAuthorizerConfiguration.add_member(:allowed_audience, Shapes::ShapeRef.new(shape: AllowedAudienceList, location_name: "allowedAudience"))
     CustomJWTAuthorizerConfiguration.add_member(:allowed_clients, Shapes::ShapeRef.new(shape: AllowedClientsList, location_name: "allowedClients"))
     CustomJWTAuthorizerConfiguration.add_member(:allowed_scopes, Shapes::ShapeRef.new(shape: AllowedScopesType, location_name: "allowedScopes"))
+    CustomJWTAuthorizerConfiguration.add_member(:advertised_scope_mapping, Shapes::ShapeRef.new(shape: AdvertisedScopeMappingType, location_name: "advertisedScopeMapping"))
     CustomJWTAuthorizerConfiguration.add_member(:custom_claims, Shapes::ShapeRef.new(shape: CustomClaimValidationsType, location_name: "customClaims"))
     CustomJWTAuthorizerConfiguration.add_member(:private_endpoint, Shapes::ShapeRef.new(shape: PrivateEndpoint, location_name: "privateEndpoint"))
     CustomJWTAuthorizerConfiguration.add_member(:private_endpoint_overrides, Shapes::ShapeRef.new(shape: PrivateEndpointOverrides, location_name: "privateEndpointOverrides"))
@@ -2525,6 +2540,11 @@ module Aws::BedrockAgentCoreControl
     EfsAccessPointConfiguration.add_member(:mount_path, Shapes::ShapeRef.new(shape: MountPath, required: true, location_name: "mountPath"))
     EfsAccessPointConfiguration.struct_class = Types::EfsAccessPointConfiguration
 
+    EfsConfiguration.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: EfsAccessPointArn, required: true, location_name: "accessPointArn"))
+    EfsConfiguration.add_member(:mount_path, Shapes::ShapeRef.new(shape: MountPath, required: true, location_name: "mountPath"))
+    EfsConfiguration.add_member(:file_system_arn, Shapes::ShapeRef.new(shape: EfsFileSystemArn, required: true, location_name: "fileSystemArn"))
+    EfsConfiguration.struct_class = Types::EfsConfiguration
+
     EnabledConnectors.member = Shapes::ShapeRef.new(shape: String)
 
     EncryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -2824,6 +2844,7 @@ module Aws::BedrockAgentCoreControl
     GetBrowserResponse.add_member(:browser_signing, Shapes::ShapeRef.new(shape: BrowserSigningConfigOutput, location_name: "browserSigning"))
     GetBrowserResponse.add_member(:enterprise_policies, Shapes::ShapeRef.new(shape: BrowserEnterprisePolicies, location_name: "enterprisePolicies"))
     GetBrowserResponse.add_member(:certificates, Shapes::ShapeRef.new(shape: Certificates, location_name: "certificates"))
+    GetBrowserResponse.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: ToolsFileSystemConfigurations, location_name: "filesystemConfigurations"))
     GetBrowserResponse.add_member(:status, Shapes::ShapeRef.new(shape: BrowserStatus, required: true, location_name: "status"))
     GetBrowserResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     GetBrowserResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
@@ -2841,6 +2862,7 @@ module Aws::BedrockAgentCoreControl
     GetCodeInterpreterResponse.add_member(:network_configuration, Shapes::ShapeRef.new(shape: CodeInterpreterNetworkConfiguration, required: true, location_name: "networkConfiguration"))
     GetCodeInterpreterResponse.add_member(:status, Shapes::ShapeRef.new(shape: CodeInterpreterStatus, required: true, location_name: "status"))
     GetCodeInterpreterResponse.add_member(:certificates, Shapes::ShapeRef.new(shape: Certificates, location_name: "certificates"))
+    GetCodeInterpreterResponse.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: ToolsFileSystemConfigurations, location_name: "filesystemConfigurations"))
     GetCodeInterpreterResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     GetCodeInterpreterResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetCodeInterpreterResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
@@ -3377,6 +3399,7 @@ module Aws::BedrockAgentCoreControl
     HarnessGeminiModelConfig.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
     HarnessGeminiModelConfig.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
     HarnessGeminiModelConfig.add_member(:top_k, Shapes::ShapeRef.new(shape: TopK, location_name: "topK"))
+    HarnessGeminiModelConfig.add_member(:additional_params, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParams"))
     HarnessGeminiModelConfig.struct_class = Types::HarnessGeminiModelConfig
 
     HarnessInlineFunctionConfig.add_member(:description, Shapes::ShapeRef.new(shape: HarnessInlineFunctionDescription, required: true, location_name: "description"))
@@ -4696,6 +4719,11 @@ module Aws::BedrockAgentCoreControl
     S3FilesAccessPointConfiguration.add_member(:mount_path, Shapes::ShapeRef.new(shape: MountPath, required: true, location_name: "mountPath"))
     S3FilesAccessPointConfiguration.struct_class = Types::S3FilesAccessPointConfiguration
 
+    S3FilesConfiguration.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3FilesAccessPointArn, required: true, location_name: "accessPointArn"))
+    S3FilesConfiguration.add_member(:mount_path, Shapes::ShapeRef.new(shape: MountPath, required: true, location_name: "mountPath"))
+    S3FilesConfiguration.add_member(:file_system_arn, Shapes::ShapeRef.new(shape: S3FilesFileSystemArn, required: true, location_name: "fileSystemArn"))
+    S3FilesConfiguration.struct_class = Types::S3FilesConfiguration
+
     S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: S3LocationBucketString, required: true, location_name: "bucket"))
     S3Location.add_member(:prefix, Shapes::ShapeRef.new(shape: S3LocationPrefixString, required: true, location_name: "prefix"))
     S3Location.add_member(:version_id, Shapes::ShapeRef.new(shape: S3LocationVersionIdString, location_name: "versionId"))
@@ -5049,6 +5077,16 @@ module Aws::BedrockAgentCoreControl
     ToolsDefinition.add_member(:protocol_version, Shapes::ShapeRef.new(shape: SchemaVersion, location_name: "protocolVersion"))
     ToolsDefinition.add_member(:inline_content, Shapes::ShapeRef.new(shape: InlineContent, location_name: "inlineContent"))
     ToolsDefinition.struct_class = Types::ToolsDefinition
+
+    ToolsFileSystemConfiguration.add_member(:s3_files_configuration, Shapes::ShapeRef.new(shape: S3FilesConfiguration, location_name: "s3FilesConfiguration"))
+    ToolsFileSystemConfiguration.add_member(:efs_configuration, Shapes::ShapeRef.new(shape: EfsConfiguration, location_name: "efsConfiguration"))
+    ToolsFileSystemConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ToolsFileSystemConfiguration.add_member_subclass(:s3_files_configuration, Types::ToolsFileSystemConfiguration::S3FilesConfiguration)
+    ToolsFileSystemConfiguration.add_member_subclass(:efs_configuration, Types::ToolsFileSystemConfiguration::EfsConfiguration)
+    ToolsFileSystemConfiguration.add_member_subclass(:unknown, Types::ToolsFileSystemConfiguration::Unknown)
+    ToolsFileSystemConfiguration.struct_class = Types::ToolsFileSystemConfiguration
+
+    ToolsFileSystemConfigurations.member = Shapes::ShapeRef.new(shape: ToolsFileSystemConfiguration)
 
     TrafficSplitEntries.member = Shapes::ShapeRef.new(shape: TrafficSplitEntry)
 
@@ -7958,6 +7996,7 @@ module Aws::BedrockAgentCoreControl
         o.http_request_uri = "/policy-engines/{policyEngineId}/policies/{policyId}"
         o.input = Shapes::ShapeRef.new(shape: UpdatePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

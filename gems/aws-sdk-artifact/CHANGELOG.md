@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2026-07-24)
+------------------
+
+* Feature - Added the PutComplianceInquiryFeedback API, enabling customers to submit feedback on compliance inquiry responses. Customers can rate responses as helpful or not helpful and provide optional reason codes and comments.
+
+1.40.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2026-07-01)
+------------------
+
+* Feature - Add support for Assurance Assistant APIs for managing compliance inquiries along with tagging features.
+
 1.38.0 (2026-05-28)
 ------------------
 

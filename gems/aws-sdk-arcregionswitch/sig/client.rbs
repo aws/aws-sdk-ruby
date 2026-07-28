@@ -318,7 +318,8 @@ module Aws
                                   ?mode: ("graceful" | "ungraceful"),
                                   ?comment: ::String,
                                   ?latest_version: ::String,
-                                  ?recovery_execution_id: ::String
+                                  ?recovery_execution_id: ::String,
+                                  ?client_token: ::String
                                 ) -> _StartPlanExecutionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPlanExecutionResponseSuccess
 

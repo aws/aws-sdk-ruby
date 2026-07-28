@@ -51,6 +51,11 @@ module Aws::PartnerCentralSelling
     AwsMarketplaceOfferIdentifiers = Shapes::ListShape.new(name: 'AwsMarketplaceOfferIdentifiers')
     AwsMarketplaceOfferSetIdentifier = Shapes::StringShape.new(name: 'AwsMarketplaceOfferSetIdentifier')
     AwsMarketplaceOfferSetIdentifiers = Shapes::ListShape.new(name: 'AwsMarketplaceOfferSetIdentifiers')
+    AwsMarketplaceProductArn = Shapes::StringShape.new(name: 'AwsMarketplaceProductArn')
+    AwsMarketplaceProductIdentifiers = Shapes::ListShape.new(name: 'AwsMarketplaceProductIdentifiers')
+    AwsMarketplaceSolutionArn = Shapes::StringShape.new(name: 'AwsMarketplaceSolutionArn')
+    AwsMarketplaceSolutionIdentifier = Shapes::StringShape.new(name: 'AwsMarketplaceSolutionIdentifier')
+    AwsMarketplaceSolutionIdentifiers = Shapes::ListShape.new(name: 'AwsMarketplaceSolutionIdentifiers')
     AwsMaturity = Shapes::StringShape.new(name: 'AwsMaturity')
     AwsMemberBusinessTitle = Shapes::StringShape.new(name: 'AwsMemberBusinessTitle')
     AwsOpportunityCustomer = Shapes::StructureShape.new(name: 'AwsOpportunityCustomer')
@@ -263,6 +268,7 @@ module Aws::PartnerCentralSelling
     ListResourceSnapshotsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListResourceSnapshotsRequestMaxResultsInteger')
     ListResourceSnapshotsResponse = Shapes::StructureShape.new(name: 'ListResourceSnapshotsResponse')
     ListSolutionsRequest = Shapes::StructureShape.new(name: 'ListSolutionsRequest')
+    ListSolutionsRequestAwsMarketplaceSolutionArnList = Shapes::ListShape.new(name: 'ListSolutionsRequestAwsMarketplaceSolutionArnList')
     ListSolutionsRequestCategoryList = Shapes::ListShape.new(name: 'ListSolutionsRequestCategoryList')
     ListSolutionsRequestIdentifierList = Shapes::ListShape.new(name: 'ListSolutionsRequestIdentifierList')
     ListSolutionsRequestStatusList = Shapes::ListShape.new(name: 'ListSolutionsRequestStatusList')
@@ -509,6 +515,10 @@ module Aws::PartnerCentralSelling
 
     AwsMarketplaceOfferSetIdentifiers.member = Shapes::ShapeRef.new(shape: AwsMarketplaceOfferSetIdentifier)
 
+    AwsMarketplaceProductIdentifiers.member = Shapes::ShapeRef.new(shape: AwsMarketplaceProductArn)
+
+    AwsMarketplaceSolutionIdentifiers.member = Shapes::ShapeRef.new(shape: AwsMarketplaceSolutionIdentifier)
+
     AwsOpportunityCustomer.add_member(:contacts, Shapes::ShapeRef.new(shape: CustomerContactsList, location_name: "Contacts"))
     AwsOpportunityCustomer.struct_class = Types::AwsOpportunityCustomer
 
@@ -534,6 +544,8 @@ module Aws::PartnerCentralSelling
 
     AwsOpportunityRelatedEntities.add_member(:aws_products, Shapes::ShapeRef.new(shape: AwsProductIdentifiers, location_name: "AwsProducts"))
     AwsOpportunityRelatedEntities.add_member(:solutions, Shapes::ShapeRef.new(shape: SolutionIdentifiers, location_name: "Solutions"))
+    AwsOpportunityRelatedEntities.add_member(:aws_marketplace_solutions, Shapes::ShapeRef.new(shape: AwsMarketplaceSolutionIdentifiers, location_name: "AwsMarketplaceSolutions"))
+    AwsOpportunityRelatedEntities.add_member(:aws_marketplace_products, Shapes::ShapeRef.new(shape: AwsMarketplaceProductIdentifiers, location_name: "AwsMarketplaceProducts"))
     AwsOpportunityRelatedEntities.struct_class = Types::AwsOpportunityRelatedEntities
 
     AwsOpportunitySummaryFullView.add_member(:related_opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "RelatedOpportunityId"))
@@ -1281,7 +1293,10 @@ module Aws::PartnerCentralSelling
     ListSolutionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ListSolutionsRequestStatusList, location_name: "Status"))
     ListSolutionsRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ListSolutionsRequestIdentifierList, location_name: "Identifier"))
     ListSolutionsRequest.add_member(:category, Shapes::ShapeRef.new(shape: ListSolutionsRequestCategoryList, location_name: "Category"))
+    ListSolutionsRequest.add_member(:aws_marketplace_solution_arn, Shapes::ShapeRef.new(shape: ListSolutionsRequestAwsMarketplaceSolutionArnList, location_name: "AwsMarketplaceSolutionArn"))
     ListSolutionsRequest.struct_class = Types::ListSolutionsRequest
+
+    ListSolutionsRequestAwsMarketplaceSolutionArnList.member = Shapes::ShapeRef.new(shape: AwsMarketplaceSolutionArn)
 
     ListSolutionsRequestCategoryList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1494,6 +1509,8 @@ module Aws::PartnerCentralSelling
     RelatedEntityIdentifiers.add_member(:aws_marketplace_offer_sets, Shapes::ShapeRef.new(shape: AwsMarketplaceOfferSetIdentifiers, location_name: "AwsMarketplaceOfferSets"))
     RelatedEntityIdentifiers.add_member(:solutions, Shapes::ShapeRef.new(shape: SolutionIdentifiers, location_name: "Solutions"))
     RelatedEntityIdentifiers.add_member(:aws_products, Shapes::ShapeRef.new(shape: AwsProductIdentifiers, location_name: "AwsProducts"))
+    RelatedEntityIdentifiers.add_member(:aws_marketplace_solutions, Shapes::ShapeRef.new(shape: AwsMarketplaceSolutionIdentifiers, location_name: "AwsMarketplaceSolutions"))
+    RelatedEntityIdentifiers.add_member(:aws_marketplace_products, Shapes::ShapeRef.new(shape: AwsMarketplaceProductIdentifiers, location_name: "AwsMarketplaceProducts"))
     RelatedEntityIdentifiers.struct_class = Types::RelatedEntityIdentifiers
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1552,6 +1569,7 @@ module Aws::PartnerCentralSelling
     SolutionBase.add_member(:status, Shapes::ShapeRef.new(shape: SolutionStatus, required: true, location_name: "Status"))
     SolutionBase.add_member(:category, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Category"))
     SolutionBase.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreatedDate"))
+    SolutionBase.add_member(:aws_marketplace_solution_arn, Shapes::ShapeRef.new(shape: AwsMarketplaceSolutionArn, location_name: "AwsMarketplaceSolutionArn"))
     SolutionBase.struct_class = Types::SolutionBase
 
     SolutionIdentifiers.member = Shapes::ShapeRef.new(shape: SolutionIdentifier)

@@ -23,6 +23,8 @@ module Aws::Imagebuilder
     AmiDistributionConfiguration = Shapes::StructureShape.new(name: 'AmiDistributionConfiguration')
     AmiList = Shapes::ListShape.new(name: 'AmiList')
     AmiNameString = Shapes::StringShape.new(name: 'AmiNameString')
+    AmiWatermarkName = Shapes::StringShape.new(name: 'AmiWatermarkName')
+    AmiWatermarksList = Shapes::ListShape.new(name: 'AmiWatermarksList')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AutoDisableFailureCount = Shapes::IntegerShape.new(name: 'AutoDisableFailureCount')
     AutoDisablePolicy = Shapes::StructureShape.new(name: 'AutoDisablePolicy')
@@ -525,6 +527,8 @@ module Aws::Imagebuilder
 
     AmiList.member = Shapes::ShapeRef.new(shape: Ami)
 
+    AmiWatermarksList.member = Shapes::ShapeRef.new(shape: AmiWatermarkName)
+
     AutoDisablePolicy.add_member(:failure_count, Shapes::ShapeRef.new(shape: AutoDisableFailureCount, required: true, location_name: "failureCount"))
     AutoDisablePolicy.struct_class = Types::AutoDisablePolicy
 
@@ -763,6 +767,7 @@ module Aws::Imagebuilder
     CreateImageRecipeRequest.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "workingDirectory"))
     CreateImageRecipeRequest.add_member(:additional_instance_configuration, Shapes::ShapeRef.new(shape: AdditionalInstanceConfiguration, location_name: "additionalInstanceConfiguration"))
     CreateImageRecipeRequest.add_member(:ami_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "amiTags"))
+    CreateImageRecipeRequest.add_member(:ami_watermarks, Shapes::ShapeRef.new(shape: AmiWatermarksList, location_name: "amiWatermarks"))
     CreateImageRecipeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateImageRecipeRequest.struct_class = Types::CreateImageRecipeRequest
 
@@ -1263,6 +1268,7 @@ module Aws::Imagebuilder
     ImageRecipe.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "workingDirectory"))
     ImageRecipe.add_member(:additional_instance_configuration, Shapes::ShapeRef.new(shape: AdditionalInstanceConfiguration, location_name: "additionalInstanceConfiguration"))
     ImageRecipe.add_member(:ami_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "amiTags"))
+    ImageRecipe.add_member(:ami_watermarks, Shapes::ShapeRef.new(shape: AmiWatermarksList, location_name: "amiWatermarks"))
     ImageRecipe.struct_class = Types::ImageRecipe
 
     ImageRecipeSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))

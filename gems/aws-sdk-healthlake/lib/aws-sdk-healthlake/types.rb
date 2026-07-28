@@ -14,6 +14,7 @@ module Aws::HealthLake
     # operation.
     #
     # @!attribute [rw] message
+    #   A general-purpose string value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/AccessDeniedException AWS API Documentation
@@ -21,6 +22,74 @@ module Aws::HealthLake
     class AccessDeniedException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a message sent to the agent during chat-based profile
+    # customization.
+    #
+    # @!attribute [rw] body
+    #   The text of your message to the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of input message, which determines how the agent processes
+    #   your request. Valid values:
+    #
+    #   * `normal`: A regular message to the agent.
+    #
+    #   * `confirmation_response`: A response to a confirmation request from
+    #     the agent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/AgentInputMessage AWS API Documentation
+    #
+    class AgentInputMessage < Struct.new(
+      :body,
+      :type)
+      SENSITIVE = [:body]
+      include Aws::Structure
+    end
+
+    # The agent message does not fit within the current conversation
+    # context. Start a new conversation or provide a message that relates to
+    # the current profile customization session.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/AgentMessageOutOfContextException AWS API Documentation
+    #
+    class AgentMessageOutOfContextException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a response message from the agent during chat-based profile
+    # customization.
+    #
+    # @!attribute [rw] body
+    #   The text of the agent's response.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of output message, which indicates how to interpret the
+    #   agent's response.
+    #   @return [String]
+    #
+    # @!attribute [rw] options_list
+    #   A list of selectable options presented when the response type is
+    #   `options`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/AgentOutputMessage AWS API Documentation
+    #
+    class AgentOutputMessage < Struct.new(
+      :body,
+      :type,
+      :options_list)
+      SENSITIVE = [:body, :options_list]
       include Aws::Structure
     end
 
@@ -42,6 +111,7 @@ module Aws::HealthLake
     # cannot be performed.
     #
     # @!attribute [rw] message
+    #   A general-purpose string value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ConflictException AWS API Documentation
@@ -50,6 +120,164 @@ module Aws::HealthLake
       :message)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The specified conversation identifier does not exist. Verify the
+    # conversation ID or omit it to start a new conversation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ConversationNotFoundException AWS API Documentation
+    #
+    class ConversationNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for the `CreateDataTransformationProfile`
+    # operation.
+    #
+    # @!attribute [rw] source_format
+    #   The source data format that this profile converts from (Consolidated
+    #   Clinical Document Architecture (C-CDA) or Comma-separated values
+    #   (CSV)).
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source for the initial profile content. Specify a built-in
+    #   starter profile, an existing profile version to clone, raw profile
+    #   content for CI/CD workflows, or a sample data file in Amazon S3.
+    #   @return [Types::CreateDataTransformationProfileSource]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS Key Management Service (AWS KMS) key identifier used to
+    #   encrypt the profile content at rest.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_description
+    #   A human-readable description of the profile's purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   A name for the data transformation profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with the profile at creation time.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateDataTransformationProfileRequest AWS API Documentation
+    #
+    class CreateDataTransformationProfileRequest < Struct.new(
+      :source_format,
+      :source,
+      :kms_key_id,
+      :profile_description,
+      :profile_name,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the `CreateDataTransformationProfile` operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the created profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the newly created profile. The starting
+    #   version is always 0, which indicates the profile is in DRAFT state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_format
+    #   The source data format of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_format
+    #   The target output format. Always `FHIR_R4`.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   The name of the created profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the profile was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateDataTransformationProfileResponse AWS API Documentation
+    #
+    class CreateDataTransformationProfileResponse < Struct.new(
+      :profile_id,
+      :version,
+      :source_format,
+      :target_format,
+      :profile_name,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source for initial content when creating a data transformation
+    # profile. Specify exactly one variant: a built-in starter profile, an
+    # existing profile version to clone, raw profile content, or a sample
+    # data file.
+    #
+    # @note CreateDataTransformationProfileSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] starter_profile
+    #   Creates the profile from a built-in starter profile. Valid only when
+    #   the source format is Consolidated Clinical Document Architecture
+    #   (C-CDA).
+    #   @return [Types::StarterProfileSource]
+    #
+    # @!attribute [rw] existing_versioned_profile_id
+    #   Creates the profile by cloning an existing profile at a specific
+    #   version.
+    #   @return [Types::ExistingVersionedProfileSource]
+    #
+    # @!attribute [rw] profile_mapping
+    #   Creates the profile from raw profile content that you provide
+    #   directly. Use this variant for continuous integration and continuous
+    #   delivery (CI/CD) workflows.
+    #   @return [Types::ProfileMappingSource]
+    #
+    # @!attribute [rw] sample_data
+    #   Creates the profile from a sample data file stored in Amazon S3.
+    #   Valid only when the source format is Comma-separated values (CSV).
+    #   @return [Types::SampleDataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateDataTransformationProfileSource AWS API Documentation
+    #
+    class CreateDataTransformationProfileSource < Struct.new(
+      :starter_profile,
+      :existing_versioned_profile_id,
+      :profile_mapping,
+      :sample_data,
+      :unknown)
+      SENSITIVE = [:profile_mapping]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class StarterProfile < CreateDataTransformationProfileSource; end
+      class ExistingVersionedProfileId < CreateDataTransformationProfileSource; end
+      class ProfileMapping < CreateDataTransformationProfileSource; end
+      class SampleData < CreateDataTransformationProfileSource; end
+      class Unknown < CreateDataTransformationProfileSource; end
     end
 
     # @!attribute [rw] datastore_name
@@ -139,6 +367,119 @@ module Aws::HealthLake
       :datastore_arn,
       :datastore_status,
       :datastore_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a data transformation profile. To
+    # retrieve profile content, call `GetDataTransformationProfile`.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The latest version number of the profile.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_format
+    #   The source data format that this profile converts from.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_format
+    #   The target output format of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   The name of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_description
+    #   A description of the profile's purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the profile was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DataTransformationProfileSummary AWS API Documentation
+    #
+    class DataTransformationProfileSummary < Struct.new(
+      :profile_id,
+      :version,
+      :source_format,
+      :target_format,
+      :profile_name,
+      :profile_description,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a specific version of a data
+    # transformation profile. To retrieve profile content, call
+    # `GetDataTransformationProfile`.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_format
+    #   The source data format that this profile converts from.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_format
+    #   The target output format of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   The name of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_description
+    #   A description of what changed in this version.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when this version was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DataTransformationProfileVersionSummary AWS API Documentation
+    #
+    class DataTransformationProfileVersionSummary < Struct.new(
+      :profile_id,
+      :version,
+      :source_format,
+      :target_format,
+      :profile_name,
+      :change_description,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 output configuration for a data transformation job,
+    # including the output location and encryption settings.
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI where AWS HealthLake writes the converted output
+    #   files.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS Key Management Service (AWS KMS) key identifier used to
+    #   encrypt the transformation job output written to Amazon S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DataTransformationS3Configuration AWS API Documentation
+    #
+    class DataTransformationS3Configuration < Struct.new(
+      :s3_uri,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -257,6 +598,45 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
+    # The request parameters for the `DeleteDataTransformationProfile`
+    # operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DeleteDataTransformationProfileRequest AWS API Documentation
+    #
+    class DeleteDataTransformationProfileRequest < Struct.new(
+      :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the `DeleteDataTransformationProfile` operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the deleted profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   The name of the deleted profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_time
+    #   The timestamp when the profile was deleted.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DeleteDataTransformationProfileResponse AWS API Documentation
+    #
+    class DeleteDataTransformationProfileResponse < Struct.new(
+      :profile_id,
+      :profile_name,
+      :deletion_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] datastore_id
     #   The AWS-generated identifier for the data store to be deleted.
     #   @return [String]
@@ -293,6 +673,36 @@ module Aws::HealthLake
       :datastore_arn,
       :datastore_status,
       :datastore_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for the `DescribeDataTransformationJob`
+    # operation.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the data transformation job to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeDataTransformationJobRequest AWS API Documentation
+    #
+    class DescribeDataTransformationJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the `DescribeDataTransformationJob` operation.
+    #
+    # @!attribute [rw] transformation_job_properties
+    #   The properties of the data transformation job, including status,
+    #   configuration, and progress information.
+    #   @return [Types::TransformationJobProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeDataTransformationJobResponse AWS API Documentation
+    #
+    class DescribeDataTransformationJobResponse < Struct.new(
+      :transformation_job_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -400,6 +810,26 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
+    # Identifies an existing data transformation profile and version to
+    # clone when creating a new profile.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the existing profile to clone from.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the existing profile to clone from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ExistingVersionedProfileSource AWS API Documentation
+    #
+    class ExistingVersionedProfileSource < Struct.new(
+      :profile_id,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The properties of a FHIR export job.
     #
     # @!attribute [rw] job_id
@@ -454,6 +884,96 @@ module Aws::HealthLake
       :data_access_role_arn,
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dependent service failed to fulfill the request.
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/FailedDependencyException AWS API Documentation
+    #
+    class FailedDependencyException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for the `GetDataTransformationProfile`
+    # operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_version
+    #   The version number to retrieve. Specify 0 to retrieve the DRAFT
+    #   version. If you omit this parameter, the service returns the latest
+    #   published version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/GetDataTransformationProfileRequest AWS API Documentation
+    #
+    class GetDataTransformationProfileRequest < Struct.new(
+      :profile_id,
+      :profile_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the `GetDataTransformationProfile` operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the retrieved profile.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_format
+    #   The source data format of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_format
+    #   The target output format of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_mapping
+    #   The profile content as a map of file paths to content strings.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] profile_name
+    #   The name of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_description
+    #   The description of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_description
+    #   A description of what changed in this version.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when this version was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/GetDataTransformationProfileResponse AWS API Documentation
+    #
+    class GetDataTransformationProfileResponse < Struct.new(
+      :profile_id,
+      :version,
+      :source_format,
+      :target_format,
+      :profile_mapping,
+      :profile_name,
+      :profile_description,
+      :change_description,
+      :last_updated_at)
+      SENSITIVE = [:profile_mapping]
       include Aws::Structure
     end
 
@@ -632,6 +1152,7 @@ module Aws::HealthLake
     # An unknown internal error occurred in the service.
     #
     # @!attribute [rw] message
+    #   A general-purpose string value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/InternalServerException AWS API Documentation
@@ -673,9 +1194,52 @@ module Aws::HealthLake
     #   due to customer error.
     #   @return [Integer]
     #
+    # @!attribute [rw] total_number_of_scanned_non_fhir_files
+    #   The number of non-FHIR files scanned from the S3 input bucket.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_size_of_scanned_non_fhir_files_in_mb
+    #   The size (in MB) of non-FHIR files scanned from the S3 input bucket.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_number_of_imported_non_fhir_files
+    #   The number of non-FHIR files imported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_number_of_non_fhir_resources_scanned
+    #   The number of non-FHIR resources scanned from the S3 input bucket.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_number_of_non_fhir_resources_imported
+    #   The number of non-FHIR resources imported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_number_of_non_fhir_resources_with_customer_error
+    #   The number of non-FHIR resources that failed due to customer error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_number_of_non_fhir_files_read_with_customer_error
+    #   The number of non-FHIR files that failed to be read from the S3
+    #   input bucket due to customer error.
+    #   @return [Integer]
+    #
     # @!attribute [rw] throughput
     #   The transaction rate the import job is processed at.
     #   @return [Float]
+    #
+    # @!attribute [rw] total_files_converted
+    #   Number of CCDA files successfully transformed during the import's
+    #   transformation phase. Populated only for import jobs that use the
+    #   two-Step-Function (transformation + ingestion) flow; null for legacy
+    #   single-SF imports and for pure FHIR imports that skip
+    #   transformation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_resources_generated
+    #   Number of FHIR resources produced by the transformation phase.
+    #   Populated only for import jobs that use the two-Step-Function flow;
+    #   null for legacy single-SF imports and for pure FHIR imports.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/JobProgressReport AWS API Documentation
     #
@@ -687,7 +1251,16 @@ module Aws::HealthLake
       :total_number_of_resources_imported,
       :total_number_of_resources_with_customer_error,
       :total_number_of_files_read_with_customer_error,
-      :throughput)
+      :total_number_of_scanned_non_fhir_files,
+      :total_size_of_scanned_non_fhir_files_in_mb,
+      :total_number_of_imported_non_fhir_files,
+      :total_number_of_non_fhir_resources_scanned,
+      :total_number_of_non_fhir_resources_imported,
+      :total_number_of_non_fhir_resources_with_customer_error,
+      :total_number_of_non_fhir_files_read_with_customer_error,
+      :throughput,
+      :total_files_converted,
+      :total_resources_generated)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -710,6 +1283,164 @@ module Aws::HealthLake
     class KmsEncryptionConfig < Struct.new(
       :cmk_type,
       :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for the `ListDataTransformationJobs` operation.
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of jobs to return per page. If you don't specify
+    #   a value, the service returns up to 100 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous response. Pass this value to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Filters the results to include only jobs with the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   Filters the results to include only jobs with the specified name.
+    #   @return [String]
+    #
+    # @!attribute [rw] submitted_after
+    #   Filters the results to include only jobs submitted at or after this
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submitted_before
+    #   Filters the results to include only jobs submitted at or before this
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListDataTransformationJobsRequest AWS API Documentation
+    #
+    class ListDataTransformationJobsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :job_status,
+      :job_name,
+      :submitted_after,
+      :submitted_before)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the `ListDataTransformationJobs` operation.
+    #
+    # @!attribute [rw] items
+    #   The list of data transformation job summaries.
+    #   @return [Array<Types::TransformationJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in the next request. If this value is
+    #   `null`, there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListDataTransformationJobsResponse AWS API Documentation
+    #
+    class ListDataTransformationJobsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for the `ListDataTransformationProfileVersions`
+    # operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile whose versions to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of profile versions to return per page. If you
+    #   don't specify a value, the service returns up to 100 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous response. Pass this value to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListDataTransformationProfileVersionsRequest AWS API Documentation
+    #
+    class ListDataTransformationProfileVersionsRequest < Struct.new(
+      :profile_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the `ListDataTransformationProfileVersions`
+    # operation.
+    #
+    # @!attribute [rw] items
+    #   The list of data transformation profile version summaries.
+    #   @return [Array<Types::DataTransformationProfileVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in the next request. If this value is
+    #   `null`, there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListDataTransformationProfileVersionsResponse AWS API Documentation
+    #
+    class ListDataTransformationProfileVersionsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for the `ListDataTransformationProfiles`
+    # operation.
+    #
+    # @!attribute [rw] source_format
+    #   Filters the results by source data format.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of profiles to return per page. If you don't
+    #   specify a value, the service returns up to 100 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous response. Pass this value to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListDataTransformationProfilesRequest AWS API Documentation
+    #
+    class ListDataTransformationProfilesRequest < Struct.new(
+      :source_format,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the `ListDataTransformationProfiles` operation.
+    #
+    # @!attribute [rw] items
+    #   The list of data transformation profile summaries.
+    #   @return [Array<Types::DataTransformationProfileSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in the next request. If this value is
+    #   `null`, there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListDataTransformationProfilesResponse AWS API Documentation
+    #
+    class ListDataTransformationProfilesResponse < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -923,6 +1654,20 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
+    # The requested operation is not yet available. Check the service
+    # documentation for a list of supported operations.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/NotImplementedOperationException AWS API Documentation
+    #
+    class NotImplementedOperationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The output data configuration supplied when the export job was
     # created.
     #
@@ -977,9 +1722,98 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
+    # Contains raw content to use as the source when creating a data
+    # transformation profile directly from a mapping.
+    #
+    # @!attribute [rw] profile_mapping
+    #   The content as a map of file paths to profile strings.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ProfileMappingSource AWS API Documentation
+    #
+    class ProfileMappingSource < Struct.new(
+      :profile_mapping)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for the `PublishDataTransformationProfile`
+    # operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile to publish.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_format
+    #   The source data format of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_existing_version
+    #   The version number of a previously published version to republish as
+    #   the new latest version. Use this parameter for rollback scenarios.
+    #   If you omit this parameter, the service publishes the current DRAFT
+    #   version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] change_description
+    #   A description of what changed or why this version is being
+    #   published.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/PublishDataTransformationProfileRequest AWS API Documentation
+    #
+    class PublishDataTransformationProfileRequest < Struct.new(
+      :profile_id,
+      :source_format,
+      :from_existing_version,
+      :change_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the `PublishDataTransformationProfile` operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the published profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The new version number that was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_format
+    #   The source data format of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_format
+    #   The target output format of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   The name of the published profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the profile was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/PublishDataTransformationProfileResponse AWS API Documentation
+    #
+    class PublishDataTransformationProfileResponse < Struct.new(
+      :profile_id,
+      :version,
+      :source_format,
+      :target_format,
+      :profile_name,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested data store was not found.
     #
     # @!attribute [rw] message
+    #   A general-purpose string value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ResourceNotFoundException AWS API Documentation
@@ -1012,6 +1846,36 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
+    # Identifies a sample data file in Amazon S3 to use as the source when
+    # creating a data transformation profile. Valid only when the source
+    # format is Comma-separated values (CSV).
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI of the sample data file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/SampleDataSource AWS API Documentation
+    #
+    class SampleDataSource < Struct.new(
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request exceeds the service quota.
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The server-side encryption key configuration for a customer-provided
     # encryption key.
     #
@@ -1024,6 +1888,87 @@ module Aws::HealthLake
     #
     class SseConfiguration < Struct.new(
       :kms_encryption_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for the `StartDataTransformationJob` operation.
+    #
+    # @!attribute [rw] input_data_config
+    #   The Amazon S3 location and format of the source files to transform.
+    #   @return [Types::TransformationInputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   The Amazon S3 output location and AWS Key Management Service (AWS
+    #   KMS) encryption configuration.
+    #   @return [Types::TransformationOutputDataConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that AWS HealthLake assumes to read from and
+    #   write to the specified Amazon S3 locations.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request but does not return an
+    #   error.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   A descriptive name for the data transformation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the data transformation profile to use for
+    #   conversion.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift_detection_enabled
+    #   Specifies whether drift detection is enabled for this job. When
+    #   enabled, AWS HealthLake writes a drift report to the output Amazon
+    #   S3 location alongside the converted files.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] provenance_enabled
+    #   Specifies whether FHIR R4 Provenance resource generation is enabled
+    #   for this transformation job. When provenance is enabled, the service
+    #   also generates related DocumentReference and Device resources. If
+    #   you don't specify a value, the default is `true`. To disable
+    #   provenance output, set this parameter to `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartDataTransformationJobRequest AWS API Documentation
+    #
+    class StartDataTransformationJobRequest < Struct.new(
+      :input_data_config,
+      :output_data_config,
+      :data_access_role_arn,
+      :client_token,
+      :job_name,
+      :profile_id,
+      :drift_detection_enabled,
+      :provenance_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the `StartDataTransformationJob` operation.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier assigned to the data transformation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The initial status of the data transformation job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartDataTransformationJobResponse AWS API Documentation
+    #
+    class StartDataTransformationJobResponse < Struct.new(
+      :job_id,
+      :job_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1120,6 +2065,18 @@ module Aws::HealthLake
     #   The validation level of the import job.
     #   @return [String]
     #
+    # @!attribute [rw] profile_id
+    #   A bounded-length string value.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_format
+    #   A bounded-length string value.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift_detection_enabled
+    #   A boolean value.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRImportJobRequest AWS API Documentation
     #
     class StartFHIRImportJobRequest < Struct.new(
@@ -1129,7 +2086,10 @@ module Aws::HealthLake
       :datastore_id,
       :data_access_role_arn,
       :client_token,
-      :validation_level)
+      :validation_level,
+      :profile_id,
+      :input_format,
+      :drift_detection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1152,6 +2112,22 @@ module Aws::HealthLake
       :job_id,
       :job_status,
       :datastore_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a built-in starter profile to use as the source when
+    # creating a data transformation profile. Valid only when the source
+    # format is Consolidated Clinical Document Architecture (C-CDA).
+    #
+    # @!attribute [rw] starter_profile_name
+    #   The name of the built-in starter profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StarterProfileSource AWS API Documentation
+    #
+    class StarterProfileSource < Struct.new(
+      :starter_profile_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1203,11 +2179,245 @@ module Aws::HealthLake
     # given API.
     #
     # @!attribute [rw] message
+    #   A general-purpose string value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 location and source format configuration for input data
+    # in a transformation job.
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI of the input data to transform.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_format
+    #   The format of the source data files (C-CDA or CSV).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/TransformationInputDataConfig AWS API Documentation
+    #
+    class TransformationInputDataConfig < Struct.new(
+      :s3_uri,
+      :source_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains progress metrics for a data transformation job, including
+    # counts of files scanned, converted, and failed.
+    #
+    # @!attribute [rw] total_files_scanned
+    #   The total number of source files scanned by the job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_files_converted
+    #   The total number of source files successfully converted.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_files_failed
+    #   The total number of source files that failed conversion.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_resources_generated
+    #   The total number of FHIR R4 resources generated across all converted
+    #   files.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/TransformationJobProgressReport AWS API Documentation
+    #
+    class TransformationJobProgressReport < Struct.new(
+      :total_files_scanned,
+      :total_files_converted,
+      :total_files_failed,
+      :total_resources_generated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the properties of a data transformation job, including its
+    # status, configuration, and progress information. You retrieve this
+    # structure by calling `DescribeDataTransformationJob`.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the data transformation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the data transformation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   The Amazon S3 location and format of the source files for this job.
+    #   @return [Types::TransformationInputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   The Amazon S3 location and encryption configuration for the
+    #   converted output.
+    #   @return [Types::TransformationOutputDataConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants AWS HealthLake access to the
+    #   specified Amazon S3 locations. AWS HealthLake assumes this role to
+    #   read input files and write output files.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The timestamp when the job was submitted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the data transformation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the data transformation profile used for
+    #   this job.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   The name of the data transformation profile used for this job.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_version
+    #   The version number of the data transformation profile used for this
+    #   job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp when the job completed or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] drift_detection_enabled
+    #   Specifies whether drift detection is enabled for this job. When
+    #   enabled, AWS HealthLake writes a drift report to the output Amazon
+    #   S3 location alongside the converted files.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] provenance_enabled
+    #   Specifies whether FHIR R4 Provenance resource generation is enabled
+    #   for this transformation job. When provenance is enabled, the service
+    #   also generates related DocumentReference and Device resources.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] message
+    #   An informational message about the job, such as an error description
+    #   if the job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_progress_report
+    #   The progress report for the data transformation job, including
+    #   counts of files processed and resources generated.
+    #   @return [Types::TransformationJobProgressReport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/TransformationJobProperties AWS API Documentation
+    #
+    class TransformationJobProperties < Struct.new(
+      :job_id,
+      :job_status,
+      :input_data_config,
+      :output_data_config,
+      :data_access_role_arn,
+      :submit_time,
+      :job_name,
+      :profile_id,
+      :profile_name,
+      :profile_version,
+      :end_time,
+      :drift_detection_enabled,
+      :provenance_enabled,
+      :message,
+      :job_progress_report)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a data transformation job. To
+    # retrieve full job details, call `DescribeDataTransformationJob`.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The timestamp when the job was submitted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp when the job completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_format
+    #   The source data format for this job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/TransformationJobSummary AWS API Documentation
+    #
+    class TransformationJobSummary < Struct.new(
+      :job_id,
+      :job_status,
+      :submit_time,
+      :job_name,
+      :end_time,
+      :source_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 output location and encryption configuration for a
+    # transformation job.
+    #
+    # @!attribute [rw] s3_configuration
+    #   The Amazon S3 output location and AWS Key Management Service (AWS
+    #   KMS) encryption configuration.
+    #   @return [Types::DataTransformationS3Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/TransformationOutputDataConfig AWS API Documentation
+    #
+    class TransformationOutputDataConfig < Struct.new(
+      :s3_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You are not authorized to make this request. Verify that your AWS
+    # credentials are valid and that you have the required permissions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The content type in your request is not supported. Use a supported
+    # content type for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UnsupportedMIMETypeException AWS API Documentation
+    #
+    class UnsupportedMIMETypeException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -1235,6 +2445,66 @@ module Aws::HealthLake
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # The request parameters for the `UpdateDataTransformationProfile`
+    # operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_mapping
+    #   The new profile content for the DRAFT version. This is a full
+    #   replacement of all profile files.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] change_description
+    #   A description of what changed in this update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UpdateDataTransformationProfileRequest AWS API Documentation
+    #
+    class UpdateDataTransformationProfileRequest < Struct.new(
+      :profile_id,
+      :profile_mapping,
+      :change_description)
+      SENSITIVE = [:profile_mapping]
+      include Aws::Structure
+    end
+
+    # The response from the `UpdateDataTransformationProfile` operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the updated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_format
+    #   The source data format of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_format
+    #   The target output format of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   The name of the updated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the profile was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UpdateDataTransformationProfileResponse AWS API Documentation
+    #
+    class UpdateDataTransformationProfileResponse < Struct.new(
+      :profile_id,
+      :source_format,
+      :target_format,
+      :profile_name,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] datastore_id
     #   The data store identifier.
     #   @return [String]
@@ -1243,14 +2513,14 @@ module Aws::HealthLake
     #   The data store name.
     #   @return [String]
     #
+    # @!attribute [rw] analytics_configuration
+    #   The analytics configuration for the data store.
+    #   @return [Types::AnalyticsConfiguration]
+    #
     # @!attribute [rw] nlp_configuration
     #   The natural language processing (NLP) configuration for the data
     #   store.
     #   @return [Types::NlpConfiguration]
-    #
-    # @!attribute [rw] analytics_configuration
-    #   The analytics configuration for the data store.
-    #   @return [Types::AnalyticsConfiguration]
     #
     # @!attribute [rw] profile_configuration
     #   The profile configuration for the data store.
@@ -1265,8 +2535,8 @@ module Aws::HealthLake
     class UpdateFHIRDatastoreRequest < Struct.new(
       :datastore_id,
       :datastore_name,
-      :nlp_configuration,
       :analytics_configuration,
+      :nlp_configuration,
       :profile_configuration,
       :identity_provider_configuration)
       SENSITIVE = []
@@ -1285,9 +2555,60 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
+    # The request parameters for the `UpdateProfileWithAgent` operation.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile to update via the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_format
+    #   The source data format for the transformation.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_message
+    #   The message to send to the agent.
+    #   @return [Types::AgentInputMessage]
+    #
+    # @!attribute [rw] conversation_id
+    #   The conversation identifier for multi-turn interactions. Omit to
+    #   start a new conversation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UpdateProfileWithAgentRequest AWS API Documentation
+    #
+    class UpdateProfileWithAgentRequest < Struct.new(
+      :profile_id,
+      :source_format,
+      :input_message,
+      :conversation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from the `UpdateProfileWithAgent` operation.
+    #
+    # @!attribute [rw] agent_response
+    #   The response message from the agent.
+    #   @return [Types::AgentOutputMessage]
+    #
+    # @!attribute [rw] conversation_id
+    #   The conversation identifier to use for follow-up messages in this
+    #   conversation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UpdateProfileWithAgentResponse AWS API Documentation
+    #
+    class UpdateProfileWithAgentResponse < Struct.new(
+      :agent_response,
+      :conversation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The user input parameter was invalid.
     #
     # @!attribute [rw] message
+    #   A general-purpose string value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ValidationException AWS API Documentation

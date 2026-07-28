@@ -1,0 +1,252 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SupportAuthZ
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateSupportPermitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSupportPermitOutput]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def permit: () -> Types::Permit
+        def status: () -> ("ACTIVE" | "INACTIVE" | "DELETING")
+        def signing_key_info: () -> Types::SigningKeyInfo
+        def created_at: () -> ::Time
+        def support_case_display_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#create_support_permit-instance_method
+      def create_support_permit: (
+                                   permit: {
+                                     actions: {
+                                       all_actions: {
+                                       }?,
+                                       actions: Array[::String]?
+                                     },
+                                     resources: {
+                                       all_resources_in_region: {
+                                       }?,
+                                       resources: Array[::String]?
+                                     },
+                                     conditions: Array[
+                                       {
+                                         allow_after: ::Time?,
+                                         allow_before: ::Time?
+                                       }
+                                     ]?
+                                   },
+                                   name: ::String,
+                                   ?description: ::String,
+                                   signing_key_info: {
+                                     kms_key: ::String?
+                                   },
+                                   ?support_case_display_id: ::String,
+                                   ?client_token: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateSupportPermitResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSupportPermitResponseSuccess
+
+      interface _DeleteSupportPermitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSupportPermitOutput]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def permit: () -> Types::Permit
+        def status: () -> ("ACTIVE" | "INACTIVE" | "DELETING")
+        def signing_key_info: () -> Types::SigningKeyInfo
+        def created_at: () -> ::Time
+        def support_case_display_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#delete_support_permit-instance_method
+      def delete_support_permit: (
+                                   support_permit_identifier: ::String
+                                 ) -> _DeleteSupportPermitResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSupportPermitResponseSuccess
+
+      interface _GetActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetActionOutput]
+        def action: () -> ::String
+        def service: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#get_action-instance_method
+      def get_action: (
+                        action: ::String
+                      ) -> _GetActionResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetActionResponseSuccess
+
+      interface _GetSupportPermitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSupportPermitOutput]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def permit: () -> Types::Permit
+        def status: () -> ("ACTIVE" | "INACTIVE" | "DELETING")
+        def signing_key_info: () -> Types::SigningKeyInfo
+        def created_at: () -> ::Time
+        def support_case_display_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#get_support_permit-instance_method
+      def get_support_permit: (
+                                support_permit_identifier: ::String
+                              ) -> _GetSupportPermitResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSupportPermitResponseSuccess
+
+      interface _ListActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActionsOutput]
+        def action_summaries: () -> ::Array[Types::ActionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#list_actions-instance_method
+      def list_actions: (
+                          ?next_token: ::String,
+                          ?max_results: ::Integer,
+                          service: ::String
+                        ) -> _ListActionsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActionsResponseSuccess
+
+      interface _ListSupportPermitRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSupportPermitRequestsOutput]
+        def support_permit_requests: () -> ::Array[Types::SupportPermitRequest]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#list_support_permit_requests-instance_method
+      def list_support_permit_requests: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer,
+                                          ?support_case_display_id: ::String
+                                        ) -> _ListSupportPermitRequestsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSupportPermitRequestsResponseSuccess
+
+      interface _ListSupportPermitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSupportPermitsOutput]
+        def support_permits: () -> ::Array[Types::SupportPermitSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#list_support_permits-instance_method
+      def list_support_permits: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?support_permit_statuses: Array[("ACTIVE" | "INACTIVE" | "DELETING")]
+                                ) -> _ListSupportPermitsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSupportPermitsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RejectSupportPermitRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectSupportPermitRequestOutput]
+        def request_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#reject_support_permit_request-instance_method
+      def reject_support_permit_request: (
+                                           request_arn: ::String
+                                         ) -> _RejectSupportPermitRequestResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectSupportPermitRequestResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportAuthZ/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

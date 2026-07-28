@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.107.0 (2026-06-30)
+------------------
+
+* Feature - AWS Certificate Manager now supports the Automatic Certificate Management Environment (ACME) protocol to issue public certificates. ACME is an industry-standard protocol for automating certificate lifecycle on customer-managed infrastructure such as on-premises servers and Kubernetes clusters.
+
 1.106.0 (2026-06-12)
 ------------------
 

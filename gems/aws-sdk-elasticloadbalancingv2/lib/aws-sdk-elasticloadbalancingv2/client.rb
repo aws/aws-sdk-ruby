@@ -1273,19 +1273,21 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Creates a rule for the specified listener. The listener must be
-    # associated with an Application Load Balancer.
+    # associated with an Application Load Balancer or a dual-stack Network
+    # Load Balancer.
     #
-    # Each rule consists of a priority, one or more actions, one or more
-    # conditions, and up to two optional transforms. Rules are evaluated in
-    # priority order, from the lowest value to the highest value. When the
-    # conditions for a rule are met, its actions are performed. If the
-    # conditions for no rules are met, the actions for the default rule are
-    # performed. For more information, see [Listener rules][1] in the
-    # *Application Load Balancers Guide*.
+    # Each rule consists of a priority, one or more actions, and one or more
+    # conditions. Rules are evaluated in priority order, from the lowest
+    # value to the highest value. When the conditions for a rule are met,
+    # its actions are performed. If the conditions for no rules are met, the
+    # actions for the default rule are performed. For more information, see
+    # [Listener rules][1] in the *Application Load Balancers Guide* or
+    # [Listener rules][2] in the *Network Load Balancers Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html#listener-rules
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -1361,6 +1363,55 @@ module Aws::ElasticLoadBalancingV2
     #     ], 
     #   }
     #
+    # @example Example: To create a listener rule that routes IPv4 traffic on a Network Load Balancer
+    #
+    #   # This example creates a rule on a dual-stack Network Load Balancer that routes IPv4 source traffic to an IPv4 target
+    #   # group.
+    #
+    #   resp = client.create_rule({
+    #     actions: [
+    #       {
+    #         target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-ipv4-targets/1234567890abcdef", 
+    #         type: "forward", 
+    #       }, 
+    #     ], 
+    #     conditions: [
+    #       {
+    #         field: "source-ip", 
+    #         source_ip_config: {
+    #           ip_address_type: "ipv4", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     listener_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/net/my-nlb/1234567890abcdef/1234567890abcdef", 
+    #     priority: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-ipv4-targets/1234567890abcdef", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         conditions: [
+    #           {
+    #             field: "source-ip", 
+    #             source_ip_config: {
+    #               ip_address_type: "ipv4", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         is_default: false, 
+    #         priority: "10", 
+    #         rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/net/my-nlb/1234567890abcdef/1234567890abcdef/1234567890abcdef", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_rule({
@@ -1395,6 +1446,7 @@ module Aws::ElasticLoadBalancingV2
     #         },
     #         source_ip_config: {
     #           values: ["StringValue"],
+    #           ip_address_type: "ipv4", # accepts ipv4, ipv6
     #         },
     #         regex_values: ["StringValue"],
     #       },
@@ -1529,6 +1581,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.ip_address_type #=> String, one of "ipv4", "ipv6"
     #   resp.rules[0].conditions[0].regex_values #=> Array
     #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
@@ -2795,6 +2848,72 @@ module Aws::ElasticLoadBalancingV2
     #     ], 
     #   }
     #
+    # @example Example: To describe rules for a Network Load Balancer listener
+    #
+    #   # This example describes the rules for the specified Network Load Balancer listener, including rules that route based on
+    #   # source IP address type.
+    #
+    #   resp = client.describe_rules({
+    #     listener_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/net/my-nlb/1234567890abcdef/1234567890abcdef", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-ipv4-targets/1234567890abcdef", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         conditions: [
+    #           {
+    #             field: "source-ip", 
+    #             source_ip_config: {
+    #               ip_address_type: "ipv4", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         is_default: false, 
+    #         priority: "10", 
+    #         rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/net/my-nlb/1234567890abcdef/1234567890abcdef/aabbccdd11223344", 
+    #       }, 
+    #       {
+    #         actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-ipv6-targets/abcdef1234567890", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         conditions: [
+    #           {
+    #             field: "source-ip", 
+    #             source_ip_config: {
+    #               ip_address_type: "ipv6", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         is_default: false, 
+    #         priority: "20", 
+    #         rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/net/my-nlb/1234567890abcdef/1234567890abcdef/eeff00112233aabb", 
+    #       }, 
+    #       {
+    #         actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-ipv4-targets/1234567890abcdef", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         conditions: [
+    #         ], 
+    #         is_default: true, 
+    #         priority: "default", 
+    #         rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/net/my-nlb/1234567890abcdef/1234567890abcdef/default", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_rules({
@@ -2833,6 +2952,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.ip_address_type #=> String, one of "ipv4", "ipv6"
     #   resp.rules[0].conditions[0].regex_values #=> Array
     #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
@@ -4387,6 +4507,45 @@ module Aws::ElasticLoadBalancingV2
     #     ], 
     #   }
     #
+    # @example Example: To modify a Network Load Balancer listener rule
+    #
+    #   # This example modifies an NLB listener rule to forward traffic to a different target group.
+    #
+    #   resp = client.modify_rule({
+    #     actions: [
+    #       {
+    #         target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-ipv4-targets/1234567890abcdef", 
+    #         type: "forward", 
+    #       }, 
+    #     ], 
+    #     rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/net/my-nlb/1234567890abcdef/1234567890abcdef/1234567890abcdef", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-ipv4-targets/1234567890abcdef", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         conditions: [
+    #           {
+    #             field: "source-ip", 
+    #             source_ip_config: {
+    #               ip_address_type: "ipv4", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         is_default: false, 
+    #         priority: "10", 
+    #         rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/net/my-nlb/1234567890abcdef/1234567890abcdef/1234567890abcdef", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_rule({
@@ -4421,6 +4580,7 @@ module Aws::ElasticLoadBalancingV2
     #         },
     #         source_ip_config: {
     #           values: ["StringValue"],
+    #           ip_address_type: "ipv4", # accepts ipv4, ipv6
     #         },
     #         regex_values: ["StringValue"],
     #       },
@@ -4549,6 +4709,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.ip_address_type #=> String, one of "ipv4", "ipv6"
     #   resp.rules[0].conditions[0].regex_values #=> Array
     #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
@@ -5226,6 +5387,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.ip_address_type #=> String, one of "ipv4", "ipv6"
     #   resp.rules[0].conditions[0].regex_values #=> Array
     #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
@@ -5528,7 +5690,7 @@ module Aws::ElasticLoadBalancingV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

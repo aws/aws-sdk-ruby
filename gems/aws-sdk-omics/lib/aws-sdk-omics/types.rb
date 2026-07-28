@@ -4223,6 +4223,10 @@ module Aws::Omics
     #   Details about the container image that this task uses.
     #   @return [Types::ImageDetails]
     #
+    # @!attribute [rw] uuid
+    #   The universally unique identifier (UUID) for the workflow task.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunTaskResponse AWS API Documentation
     #
     class GetRunTaskResponse < Struct.new(
@@ -4241,7 +4245,8 @@ module Aws::Omics
       :gpus,
       :instance_type,
       :failure_reason,
-      :image_details)
+      :image_details,
+      :uuid)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8746,6 +8751,10 @@ module Aws::Omics
     #   The instance type for a task.
     #   @return [String]
     #
+    # @!attribute [rw] uuid
+    #   The universally unique identifier (UUID) for the workflow task.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/TaskListItem AWS API Documentation
     #
     class TaskListItem < Struct.new(
@@ -8760,7 +8769,8 @@ module Aws::Omics
       :start_time,
       :stop_time,
       :gpus,
-      :instance_type)
+      :instance_type,
+      :uuid)
       SENSITIVE = []
       include Aws::Structure
     end

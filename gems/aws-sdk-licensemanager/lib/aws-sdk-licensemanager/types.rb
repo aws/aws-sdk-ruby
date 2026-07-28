@@ -1014,6 +1014,12 @@ module Aws::LicenseManager
     #   Current version of the license.
     #   @return [String]
     #
+    # @!attribute [rw] reset_usage
+    #   Specifies whether to reset the license usage for the new license
+    #   version. If you don't specify a value, the license usage is not
+    #   reset.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseVersionRequest AWS API Documentation
     #
     class CreateLicenseVersionRequest < Struct.new(
@@ -1028,7 +1034,8 @@ module Aws::LicenseManager
       :consumption_configuration,
       :status,
       :client_token,
-      :source_version)
+      :source_version,
+      :reset_usage)
       SENSITIVE = []
       include Aws::Structure
     end

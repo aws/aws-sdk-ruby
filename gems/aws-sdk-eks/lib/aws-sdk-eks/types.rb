@@ -952,6 +952,66 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the Amazon EKS cluster associated with the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_id
+    #   The ID of the update to cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CancelUpdateRequest AWS API Documentation
+    #
+    class CancelUpdateRequest < Struct.new(
+      :name,
+      :update_id,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   The full description of the specified update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CancelUpdateResponse AWS API Documentation
+    #
+    class CancelUpdateResponse < Struct.new(
+      :update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the latest cancellation of an update to an
+    # Amazon EKS cluster.
+    #
+    # @!attribute [rw] status
+    #   The current status of the cancellation. Valid values are
+    #   `InProgress`, `Failed`, and `Successful`.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A message providing additional details about the cancellation, such
+    #   as the reason for the cancellation or failure details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cancellation AWS API Documentation
+    #
+    class Cancellation < Struct.new(
+      :status,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a managed capability in an Amazon EKS cluster.
     # This includes all configuration, status, and health information for
     # the capability.
@@ -7417,6 +7477,24 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The rollback configuration for the cluster version rollback.
+    #
+    # @!attribute [rw] timeout_minutes
+    #   The length of time in minutes to wait before cancelling the update.
+    #   Timeout is a minimum-bound property, meaning the timeout occurs no
+    #   sooner than the time you specify, but can occur shortly thereafter.
+    #   This value can be between 120 (2 hours) and 10080 (7 days). Default:
+    #   `720` (12 hours) if not specified.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RollbackConfig AWS API Documentation
+    #
+    class RollbackConfig < Struct.new(
+      :timeout_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # These errors are usually caused by a server-side issue.
     #
     # @!attribute [rw] cluster_name
@@ -7707,6 +7785,11 @@ module Aws::EKS
     #   Any errors associated with a `Failed` update.
     #   @return [Array<Types::ErrorDetail>]
     #
+    # @!attribute [rw] cancellation
+    #   The latest cancellation information for the update. This field is
+    #   present only if any cancellation is attempted for the update.
+    #   @return [Types::Cancellation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Update AWS API Documentation
     #
     class Update < Struct.new(
@@ -7715,7 +7798,8 @@ module Aws::EKS
       :type,
       :params,
       :created_at,
-      :errors)
+      :errors,
+      :cancellation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8185,9 +8269,13 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] force
-    #   Set this value to `true` to override upgrade-blocking readiness
-    #   checks when updating a cluster.
+    #   Set this value to `true` to override upgrade-blocking or
+    #   rollback-blocking readiness checks when updating a cluster.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] rollback_config
+    #   The rollback configuration for the cluster version rollback.
+    #   @return [Types::RollbackConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterVersionRequest AWS API Documentation
     #
@@ -8195,7 +8283,8 @@ module Aws::EKS
       :name,
       :version,
       :client_request_token,
-      :force)
+      :force,
+      :rollback_config)
       SENSITIVE = []
       include Aws::Structure
     end

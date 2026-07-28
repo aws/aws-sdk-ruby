@@ -153,6 +153,7 @@ module Aws::CodeBuild
     GetResourcePolicyOutput = Shapes::StructureShape.new(name: 'GetResourcePolicyOutput')
     GitCloneDepth = Shapes::IntegerShape.new(name: 'GitCloneDepth')
     GitSubmodulesConfig = Shapes::StructureShape.new(name: 'GitSubmodulesConfig')
+    HostKernel = Shapes::StringShape.new(name: 'HostKernel')
     Identifiers = Shapes::ListShape.new(name: 'Identifiers')
     ImagePullCredentialsType = Shapes::StringShape.new(name: 'ImagePullCredentialsType')
     ImageVersions = Shapes::ListShape.new(name: 'ImageVersions')
@@ -1129,6 +1130,7 @@ module Aws::CodeBuild
     ProjectEnvironment.add_member(:registry_credential, Shapes::ShapeRef.new(shape: RegistryCredential, location_name: "registryCredential"))
     ProjectEnvironment.add_member(:image_pull_credentials_type, Shapes::ShapeRef.new(shape: ImagePullCredentialsType, location_name: "imagePullCredentialsType"))
     ProjectEnvironment.add_member(:docker_server, Shapes::ShapeRef.new(shape: DockerServer, location_name: "dockerServer"))
+    ProjectEnvironment.add_member(:host_kernel, Shapes::ShapeRef.new(shape: HostKernel, location_name: "hostKernel"))
     ProjectEnvironment.struct_class = Types::ProjectEnvironment
 
     ProjectFileSystemLocation.add_member(:type, Shapes::ShapeRef.new(shape: FileSystemType, location_name: "type"))
@@ -1432,6 +1434,7 @@ module Aws::CodeBuild
     StartBuildInput.add_member(:debug_session_enabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "debugSessionEnabled"))
     StartBuildInput.add_member(:fleet_override, Shapes::ShapeRef.new(shape: ProjectFleet, location_name: "fleetOverride"))
     StartBuildInput.add_member(:auto_retry_limit_override, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "autoRetryLimitOverride"))
+    StartBuildInput.add_member(:host_kernel_override, Shapes::ShapeRef.new(shape: HostKernel, location_name: "hostKernelOverride"))
     StartBuildInput.struct_class = Types::StartBuildInput
 
     StartBuildOutput.add_member(:build, Shapes::ShapeRef.new(shape: Build, location_name: "build"))

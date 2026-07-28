@@ -111,6 +111,9 @@ module Aws
       class ScopeDoesNotExistException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class SoftwareTokenMFANotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

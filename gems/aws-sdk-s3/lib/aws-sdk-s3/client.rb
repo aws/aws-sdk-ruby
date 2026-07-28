@@ -22242,8 +22242,6 @@ module Aws::S3
     # : * To use the `UpdateObjectEncryption` operation, you must have the
     #     following permissions:
     #
-    #     * `s3:PutObject`
-    #
     #     * `s3:UpdateObjectEncryption`
     #
     #     * `kms:Encrypt`
@@ -24104,7 +24102,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.226.0'
+      context[:gem_version] = '1.228.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

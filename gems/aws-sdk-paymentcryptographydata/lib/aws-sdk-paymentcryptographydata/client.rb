@@ -988,6 +988,11 @@ module Aws::PaymentCryptographyData
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #       },
+    #       union_pay: {
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
+    #       },
     #     },
     #   })
     #
@@ -1193,7 +1198,7 @@ module Aws::PaymentCryptographyData
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
-    #         session_key_derivation_mode: "EMV_COMMON_SESSION_KEY", # required, accepts EMV_COMMON_SESSION_KEY, EMV2000, AMEX, MASTERCARD_SESSION_KEY, VISA
+    #         session_key_derivation_mode: "EMV_COMMON_SESSION_KEY", # required, accepts EMV_COMMON_SESSION_KEY, EMV2000, AMEX, MASTERCARD_SESSION_KEY, VISA, UNION_PAY
     #         session_key_derivation_value: { # required
     #           application_cryptogram: "ApplicationCryptogramType",
     #           application_transaction_counter: "HexLengthEquals4",
@@ -2177,6 +2182,11 @@ module Aws::PaymentCryptographyData
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #       },
+    #       union_pay: {
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
+    #       },
     #     },
     #     auth_response_attributes: {
     #       arpc_method_1: {
@@ -2391,7 +2401,7 @@ module Aws::PaymentCryptographyData
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
-    #         session_key_derivation_mode: "EMV_COMMON_SESSION_KEY", # required, accepts EMV_COMMON_SESSION_KEY, EMV2000, AMEX, MASTERCARD_SESSION_KEY, VISA
+    #         session_key_derivation_mode: "EMV_COMMON_SESSION_KEY", # required, accepts EMV_COMMON_SESSION_KEY, EMV2000, AMEX, MASTERCARD_SESSION_KEY, VISA, UNION_PAY
     #         session_key_derivation_value: { # required
     #           application_cryptogram: "ApplicationCryptogramType",
     #           application_transaction_counter: "HexLengthEquals4",
@@ -2586,7 +2596,7 @@ module Aws::PaymentCryptographyData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

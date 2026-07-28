@@ -43,7 +43,8 @@ module Aws
         scte_in_segments: ("NONE" | "ALL" | "MATCHES_FILTER")?,
         custom_ad_types: Array[("PROGRAM" | "CHAPTER" | "UNSCHEDULED_EVENT" | "ALTERNATE_CONTENT_OPPORTUNITY" | "NETWORK")]?
       }?,
-      encryption: Params::encryption?
+      encryption: Params::encryption?,
+      output_timestamp_mode: ("PASSTHROUGH" | "REBASED_TO_CHANNEL_START")?
     }
 
       type filter_configuration = {

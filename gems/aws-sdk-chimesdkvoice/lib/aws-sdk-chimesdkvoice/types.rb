@@ -528,11 +528,15 @@ module Aws::ChimeSDKVoice
     #   Lists the Voice Connectors that inbound calls are routed to.
     #   @return [Array<Types::VoiceConnectorItem>]
     #
+    # @!attribute [rw] call_distribution_type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceConnectorGroupRequest AWS API Documentation
     #
     class CreateVoiceConnectorGroupRequest < Struct.new(
       :name,
-      :voice_connector_items)
+      :voice_connector_items,
+      :call_distribution_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -582,6 +586,11 @@ module Aws::ChimeSDKVoice
     #     start with Connect telephony and IVR for immediate modernization
     #     ahead of agent migration.
     #
+    #     <note markdown="1"> This integration is a gated feature. Please reach out to your
+    #     account team to discuss this feature with a Connect Specialist.
+    #
+    #      </note>
+    #
     #   * `CONNECT_ANALYTICS_CONNECTOR` - Enables enterprises to integrate
     #     Connect Customer with other voice systems for real-time and
     #     post-call analytics. They can use Connect Customer Contact Lens
@@ -599,8 +608,7 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     #
     # @!attribute [rw] network_type
-    #   The type of network for the Voice Connector. Either IPv4 only or
-    #   dual-stack (IPv4 and IPv6).
+    #   The type of network for the Voice Connector.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceConnectorRequest AWS API Documentation
@@ -2228,6 +2236,9 @@ module Aws::ChimeSDKVoice
     #   The phone number, in E.164 format.
     #   @return [String]
     #
+    # @!attribute [rw] phone_number_arn
+    #   @return [String]
+    #
     # @!attribute [rw] country
     #   The phone number's country. Format: ISO 3166-1 alpha-2.
     #   @return [String]
@@ -2285,6 +2296,7 @@ module Aws::ChimeSDKVoice
     class PhoneNumber < Struct.new(
       :phone_number_id,
       :e164_phone_number,
+      :phone_number_arn,
       :country,
       :type,
       :product_type,
@@ -2452,7 +2464,7 @@ module Aws::ChimeSDKVoice
     #   The Firm Order Commitment (FOC) date for phone number porting
     #   orders. This field is null if a phone number order is not a porting
     #   order.
-    #   @return [Time]
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/PhoneNumberOrder AWS API Documentation
     #
@@ -3847,12 +3859,16 @@ module Aws::ChimeSDKVoice
     #   group.
     #   @return [Array<Types::VoiceConnectorItem>]
     #
+    # @!attribute [rw] call_distribution_type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdateVoiceConnectorGroupRequest AWS API Documentation
     #
     class UpdateVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id,
       :name,
-      :voice_connector_items)
+      :voice_connector_items,
+      :call_distribution_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4093,8 +4109,7 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     #
     # @!attribute [rw] network_type
-    #   The type of network of the Voice Connector. Either IPv4 only or
-    #   dual-stack (IPv4 and IPv6).
+    #   The type of network for the Voice Connector.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/VoiceConnector AWS API Documentation
@@ -4145,6 +4160,9 @@ module Aws::ChimeSDKVoice
     #   The ARN of the Voice Connector group.
     #   @return [String]
     #
+    # @!attribute [rw] call_distribution_type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/VoiceConnectorGroup AWS API Documentation
     #
     class VoiceConnectorGroup < Struct.new(
@@ -4153,7 +4171,8 @@ module Aws::ChimeSDKVoice
       :voice_connector_items,
       :created_timestamp,
       :updated_timestamp,
-      :voice_connector_group_arn)
+      :voice_connector_group_arn,
+      :call_distribution_type)
       SENSITIVE = []
       include Aws::Structure
     end

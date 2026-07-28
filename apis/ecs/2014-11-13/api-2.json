@@ -2897,7 +2897,9 @@
       ],
       "members":{
         "enable":{"shape":"Boolean"},
-        "rollback":{"shape":"Boolean"}
+        "rollback":{"shape":"Boolean"},
+        "resetOnHealthyTask":{"shape":"BoxedBoolean"},
+        "thresholdConfiguration":{"shape":"ThresholdConfiguration"}
       }
     },
     "DeploymentConfiguration":{
@@ -5215,6 +5217,12 @@
         "operatingSystemFamily":{"shape":"OSFamily"}
       }
     },
+    "RuntimePlatformOverride":{
+      "type":"structure",
+      "members":{
+        "cpuArchitecture":{"shape":"String"}
+      }
+    },
     "S3FilesVolumeConfiguration":{
       "type":"structure",
       "required":["fileSystemArn"],
@@ -5637,6 +5645,7 @@
         "vpcLatticeConfigurations":{"shape":"VpcLatticeConfigurations"},
         "resolvedConfiguration":{"shape":"ResolvedConfiguration"},
         "ecsManagedResources":{"shape":"ECSManagedResources"},
+        "overrides":{"shape":"ServiceRevisionOverrides"},
         "monitoring":{"shape":"MonitoringConfiguration"}
       }
     },
@@ -5650,6 +5659,12 @@
     "ServiceRevisionLoadBalancers":{
       "type":"list",
       "member":{"shape":"ServiceRevisionLoadBalancer"}
+    },
+    "ServiceRevisionOverrides":{
+      "type":"structure",
+      "members":{
+        "runtimePlatform":{"shape":"RuntimePlatformOverride"}
+      }
     },
     "ServiceRevisionSummary":{
       "type":"structure",
@@ -6213,6 +6228,25 @@
     "Tasks":{
       "type":"list",
       "member":{"shape":"Task"}
+    },
+    "ThresholdConfiguration":{
+      "type":"structure",
+      "required":[
+        "type",
+        "value"
+      ],
+      "members":{
+        "type":{"shape":"ThresholdType"},
+        "value":{"shape":"Integer"}
+      }
+    },
+    "ThresholdType":{
+      "type":"string",
+      "enum":[
+        "COUNT",
+        "BOUNDED_PERCENT",
+        "UNBOUNDED_PERCENT"
+      ]
     },
     "TimeoutConfiguration":{
       "type":"structure",

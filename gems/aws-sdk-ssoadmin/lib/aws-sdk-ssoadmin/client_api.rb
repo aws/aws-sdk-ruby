@@ -825,6 +825,8 @@ module Aws::SSOAdmin
     InstanceMetadata.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
     InstanceMetadata.add_member(:status, Shapes::ShapeRef.new(shape: InstanceStatus, location_name: "Status"))
     InstanceMetadata.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
+    InstanceMetadata.add_member(:primary_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "PrimaryRegion"))
+    InstanceMetadata.add_member(:regions, Shapes::ShapeRef.new(shape: RegionMetadataList, location_name: "Regions"))
     InstanceMetadata.struct_class = Types::InstanceMetadata
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: InternalFailureMessage, location_name: "Message"))

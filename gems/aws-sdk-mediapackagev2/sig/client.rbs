@@ -105,6 +105,7 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def input_switch_configuration: () -> Types::InputSwitchConfiguration
         def output_header_configuration: () -> Types::OutputHeaderConfiguration
+        def output_locking_mode: () -> ("EPOCH_LOCKED" | "NON_EPOCH_LOCKED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#create_channel-instance_method
       def create_channel: (
@@ -120,6 +121,7 @@ module Aws
                             ?output_header_configuration: {
                               publish_mqcs: bool?
                             },
+                            ?output_locking_mode: ("EPOCH_LOCKED" | "NON_EPOCH_LOCKED"),
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
@@ -318,6 +320,7 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def input_switch_configuration: () -> Types::InputSwitchConfiguration
         def output_header_configuration: () -> Types::OutputHeaderConfiguration
+        def output_locking_mode: () -> ("EPOCH_LOCKED" | "NON_EPOCH_LOCKED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_channel-instance_method
       def get_channel: (
@@ -579,6 +582,7 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def input_switch_configuration: () -> Types::InputSwitchConfiguration
         def output_header_configuration: () -> Types::OutputHeaderConfiguration
+        def output_locking_mode: () -> ("EPOCH_LOCKED" | "NON_EPOCH_LOCKED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#update_channel-instance_method
       def update_channel: (

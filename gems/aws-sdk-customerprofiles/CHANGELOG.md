@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2026-07-02)
+------------------
+
+* Feature - Amazon Connect Customer Profiles adds support for diversityConfig to recommenderConfig which can be used for diversifying the recommendations. This release also includes model versioning support which helps customer to rollback trained models.
+
 1.90.0 (2026-05-28)
 ------------------
 

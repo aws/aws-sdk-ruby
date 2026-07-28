@@ -11,30 +11,36 @@ module Aws::ACM
   # Endpoint parameters used to influence endpoints per request.
   #
   # @!attribute region
-  #   The AWS region used to dispatch the request.
+  #   The AWS region to send requests to.
   #
   #   @return [string]
   #
-  # @!attribute use_dual_stack
-  #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
+  # @!attribute endpoint
+  #   Override the endpoint used to send requests.
   #
-  #   @return [boolean]
+  #   @return [string]
   #
   # @!attribute use_fips
-  #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
+  #   Use FIPS endpoints.
   #
   #   @return [boolean]
   #
-  # @!attribute endpoint
-  #   Override the endpoint used to send this request
+  # @!attribute use_dual_stack
+  #   Use dual-stack endpoints.
+  #
+  #   @return [boolean]
+  #
+  # @!attribute service_type
+  #   The service type: ACM or ACM-ACME. Injected via @staticContextParams.
   #
   #   @return [string]
   #
   EndpointParameters = Struct.new(
     :region,
-    :use_dual_stack,
-    :use_fips,
     :endpoint,
+    :use_fips,
+    :use_dual_stack,
+    :service_type,
   ) do
     include Aws::Structure
 
@@ -42,27 +48,36 @@ module Aws::ACM
     class << self
       PARAM_MAP = {
         'Region' => :region,
-        'UseDualStack' => :use_dual_stack,
-        'UseFIPS' => :use_fips,
         'Endpoint' => :endpoint,
+        'UseFIPS' => :use_fips,
+        'UseDualStack' => :use_dual_stack,
+        'ServiceType' => :service_type,
       }.freeze
     end
 
     def initialize(options = {})
       self[:region] = options[:region]
-      self[:use_dual_stack] = options[:use_dual_stack]
-      self[:use_dual_stack] = false if self[:use_dual_stack].nil?
+      if self[:region].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :region"
+      end
+      self[:endpoint] = options[:endpoint]
       self[:use_fips] = options[:use_fips]
       self[:use_fips] = false if self[:use_fips].nil?
-      self[:endpoint] = options[:endpoint]
+      self[:use_dual_stack] = options[:use_dual_stack]
+      self[:use_dual_stack] = false if self[:use_dual_stack].nil?
+      self[:service_type] = options[:service_type]
+      if self[:service_type].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :service_type"
+      end
     end
 
     def self.create(config, options={})
       new({
         region: config.region,
-        use_dual_stack: config.use_dualstack_endpoint,
-        use_fips: config.use_fips_endpoint,
         endpoint: (config.endpoint.to_s unless config.regional_endpoint),
+        use_fips: config.use_fips_endpoint,
+        use_dual_stack: config.use_dualstack_endpoint,
+        service_type: config.service_type,
       }.merge(options))
     end
   end

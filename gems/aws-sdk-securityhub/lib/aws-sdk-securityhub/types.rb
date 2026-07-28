@@ -10,6 +10,107 @@
 module Aws::SecurityHub
   module Types
 
+    # Contains information about self-hosted AI resources and their host
+    # resources. The fields that are present depend on the role of the
+    # resource.
+    #
+    # On a self-hosted AI resource (a resource with a `SelfHosted::AI::`
+    # resource type, such as `SelfHosted::AI::Model` or
+    # `SelfHosted::AI::Agent`), the `HostResourceGuid` and
+    # `HostResourceType` fields link the resource to its host. The
+    # `CanonicalId` field identifies what the resource is, enabling
+    # aggregation of identical resources across multiple hosts.
+    #
+    # On a host resource (such as an Amazon EC2 instance), the
+    # `SelfHostedAI*ResourceCount` fields contain the count for each
+    # `ResourceSubCategory` and the total count of self-hosted AI resources
+    # detected on the host.
+    #
+    # @!attribute [rw] host_resource_guid
+    #   The identifier of the host resource that hosts the self-hosted AI
+    #   resource. Present only on self-hosted AI resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_resource_type
+    #   The `ResourceType` of the host resource that hosts the self-hosted
+    #   AI resource, such as `AWS::EC2::Instance`. Present only on
+    #   self-hosted AI resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] canonical_id
+    #   The canonical identifier for the AI resource, independent of where
+    #   it is deployed. Multiple occurrences of the same resource on
+    #   different hosts share the same `CanonicalId`. For model resources,
+    #   the value follows the format `model/<purl>`, such as
+    #   `model/pkg:huggingface/meta-llama/llama-3-8b`. Present only on
+    #   self-hosted AI resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_hosted_ai_model_resource_count
+    #   The number of self-hosted AI resources of `ResourceSubCategory`
+    #   `Model` detected on the host resource. Present only on host
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] self_hosted_ai_agent_resource_count
+    #   The number of self-hosted AI resources of `ResourceSubCategory`
+    #   `Agent` detected on the host resource. Present only on host
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] self_hosted_ai_model_serving_resource_count
+    #   The number of self-hosted AI resources of `ResourceSubCategory`
+    #   `ModelServing` detected on the host resource. Present only on host
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] self_hosted_ai_external_endpoint_resource_count
+    #   The number of self-hosted AI resources of `ResourceSubCategory`
+    #   `ExternalEndpoint` detected on the host resource. Present only on
+    #   host resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] self_hosted_ai_development_resource_count
+    #   The number of self-hosted AI resources of `ResourceSubCategory`
+    #   `Development` detected on the host resource. Present only on host
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] self_hosted_ai_agent_framework_resource_count
+    #   The number of self-hosted AI resources of `ResourceSubCategory`
+    #   `AgentFramework` detected on the host resource. Present only on host
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] self_hosted_ai_agent_tools_and_identity_resource_count
+    #   The number of self-hosted AI resources of `ResourceSubCategory`
+    #   `AgentToolsAndIdentity` detected on the host resource. Present only
+    #   on host resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] self_hosted_total_ai_resource_count
+    #   The total number of all self-hosted AI resources detected on the
+    #   host resource. Present only on host resources.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AIDetails AWS API Documentation
+    #
+    class AIDetails < Struct.new(
+      :host_resource_guid,
+      :host_resource_type,
+      :canonical_id,
+      :self_hosted_ai_model_resource_count,
+      :self_hosted_ai_agent_resource_count,
+      :self_hosted_ai_model_serving_resource_count,
+      :self_hosted_ai_external_endpoint_resource_count,
+      :self_hosted_ai_development_resource_count,
+      :self_hosted_ai_agent_framework_resource_count,
+      :self_hosted_ai_agent_tools_and_identity_resource_count,
+      :self_hosted_total_ai_resource_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] administrator_id
     #   The account ID of the Security Hub CSPM administrator account that
     #   sent the invitation.
@@ -1142,6 +1243,22 @@ module Aws::SecurityHub
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] resource_provider
+    #   The cloud provider that the resource belongs to. Valid values are
+    #   `AWS` and `Azure`.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   The unique identifier of the account that owns the resource that the
+    #   finding applies to, for example, Azure Subscription Id or Amazon Web
+    #   Services Account Id
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_owner_org_id
+    #   The unique identifier of the organization that owns the resource
+    #   that the finding applies to, for example, Azure Tenant Id
+    #   @return [Array<Types::StringFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesFindingFilters AWS API Documentation
     #
     class AutomationRulesFindingFilters < Struct.new(
@@ -1182,7 +1299,10 @@ module Aws::SecurityHub
       :user_defined_fields,
       :resource_application_arn,
       :resource_application_name,
-      :aws_account_name)
+      :aws_account_name,
+      :resource_provider,
+      :resource_owner_account_id,
+      :resource_owner_org_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19964,6 +20084,22 @@ module Aws::SecurityHub
     #   The ARN of the application that is related to a finding.
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] resource_owner_account_id
+    #   The unique identifier of the account that owns the resource that the
+    #   finding applies to, for example, Azure Subscription Id or Amazon Web
+    #   Services Account Id
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_owner_org_id
+    #   The unique identifier of the organization that owns the resource
+    #   that the finding applies to, for example, Azure Tenant Id
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_provider
+    #   The cloud provider that the resource belongs to. Valid values are
+    #   `AWS` and `Azure`.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFindingFilters AWS API Documentation
     #
     class AwsSecurityFindingFilters < Struct.new(
@@ -20070,7 +20206,10 @@ module Aws::SecurityHub
       :compliance_security_control_parameters_value,
       :aws_account_name,
       :resource_application_name,
-      :resource_application_arn)
+      :resource_application_arn,
+      :resource_owner_account_id,
+      :resource_owner_org_id,
+      :resource_provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21663,6 +21802,99 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The detailed Azure configuration for a connector.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the multi-cloud configuration connector used to establish
+    #   the connection to Azure.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration that defines which Azure resources are
+    #   monitored.
+    #   @return [Types::AzureScopeConfiguration]
+    #
+    # @!attribute [rw] azure_regions
+    #   The list of Azure regions being monitored.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AzureDetail AWS API Documentation
+    #
+    class AzureDetail < Struct.new(
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :azure_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for connecting to an Azure environment.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the multi-cloud configuration connector used to establish
+    #   the connection to Azure.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration that defines which Azure resources are
+    #   monitored.
+    #   @return [Types::AzureScopeConfiguration]
+    #
+    # @!attribute [rw] azure_regions
+    #   The list of Azure regions to monitor.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AzureProviderConfiguration AWS API Documentation
+    #
+    class AzureProviderConfiguration < Struct.new(
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :azure_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope configuration for an Azure connector, defining the tenant or
+    # subscription scope.
+    #
+    # @!attribute [rw] scope_type
+    #   The type of scope. Valid values are `tenant` and `subscription`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_values
+    #   The list of scope values, such as subscription IDs, when the scope
+    #   type is `subscription`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AzureScopeConfiguration AWS API Documentation
+    #
+    class AzureScopeConfiguration < Struct.new(
+      :scope_type,
+      :scope_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for updating an Azure connector's scope and
+    # regions.
+    #
+    # @!attribute [rw] scope_configuration
+    #   The updated scope configuration.
+    #   @return [Types::AzureScopeConfiguration]
+    #
+    # @!attribute [rw] azure_regions
+    #   The updated list of Azure regions to monitor.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AzureUpdateConfiguration AWS API Documentation
+    #
+    class AzureUpdateConfiguration < Struct.new(
+      :scope_configuration,
+      :azure_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] automation_rules_arns
     #   A list of Amazon Resource Names (ARNs) for the rules that are to be
     #   deleted.
@@ -22887,6 +23119,15 @@ module Aws::SecurityHub
     #   ISO 8601 UTC timestamp for the time create the connectorV2.
     #   @return [Time]
     #
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status_reason
+    #   The reason for the current enablement status. Provides additional
+    #   context when the connector is in a failed state.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConnectorSummary AWS API Documentation
     #
     class ConnectorSummary < Struct.new(
@@ -22895,7 +23136,9 @@ module Aws::SecurityHub
       :name,
       :description,
       :provider_summary,
-      :created_at)
+      :created_at,
+      :enablement_status,
+      :enablement_status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23310,6 +23553,69 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] name
+    #   The name of the connector. Must be unique within the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The configuration for the cloud provider to connect to. Currently
+    #   supports Azure.
+    #   @return [Types::CspmProviderConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the connector resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier used to ensure idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConnectorRequest AWS API Documentation
+    #
+    class CreateConnectorRequest < Struct.new(
+      :name,
+      :description,
+      :provider,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_id
+    #   The unique identifier of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_status
+    #   The connectivity status of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConnectorResponse AWS API Documentation
+    #
+    class CreateConnectorResponse < Struct.new(
+      :connector_arn,
+      :connector_id,
+      :connector_status,
+      :enablement_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
     #   The unique name of the connectorV2.
     #   @return [String]
     #
@@ -23366,13 +23672,18 @@ module Aws::SecurityHub
     #   The current status of the connectorV2.
     #   @return [String]
     #
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector after creation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConnectorV2Response AWS API Documentation
     #
     class CreateConnectorV2Response < Struct.new(
       :connector_arn,
       :connector_id,
       :auth_url,
-      :connector_status)
+      :connector_status,
+      :enablement_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23600,6 +23911,177 @@ module Aws::SecurityHub
 
       class OcsfFindingCriteria < Criteria; end
       class Unknown < Criteria; end
+    end
+
+    # A summary of a CSPM connector.
+    #
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_id
+    #   The unique identifier of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_summary
+    #   A summary of the cloud provider configuration for the connector.
+    #   @return [Types::CspmProviderSummary]
+    #
+    # @!attribute [rw] created_at
+    #   The ISO 8601 UTC timestamp indicating when the connector was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The service principal that created the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmConnectorSummary AWS API Documentation
+    #
+    class CspmConnectorSummary < Struct.new(
+      :connector_arn,
+      :connector_id,
+      :name,
+      :description,
+      :provider_summary,
+      :created_at,
+      :created_by,
+      :enablement_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the operational status and health of a CSPM
+    # connector.
+    #
+    # @!attribute [rw] connector_status
+    #   The connectivity status of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing the reason for the current connector status.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_checked_at
+    #   The ISO 8601 UTC timestamp indicating when the health status was
+    #   last checked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] issues
+    #   A list of health issues associated with the connector.
+    #   @return [Array<Types::HealthIssue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmHealthCheck AWS API Documentation
+    #
+    class CspmHealthCheck < Struct.new(
+      :connector_status,
+      :message,
+      :last_checked_at,
+      :issues)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cloud provider configuration for creating a connector. This is a
+    # union type that currently supports Azure.
+    #
+    # @note CspmProviderConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] azure
+    #   The Azure provider configuration.
+    #   @return [Types::AzureProviderConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmProviderConfiguration AWS API Documentation
+    #
+    class CspmProviderConfiguration < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < CspmProviderConfiguration; end
+      class Unknown < CspmProviderConfiguration; end
+    end
+
+    # The detailed cloud provider configuration for a connector. This is a
+    # union type that currently supports Azure.
+    #
+    # @note CspmProviderDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CspmProviderDetail corresponding to the set member.
+    #
+    # @!attribute [rw] azure
+    #   The Azure provider detail.
+    #   @return [Types::AzureDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmProviderDetail AWS API Documentation
+    #
+    class CspmProviderDetail < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < CspmProviderDetail; end
+      class Unknown < CspmProviderDetail; end
+    end
+
+    # A summary of the cloud provider configuration for a connector.
+    #
+    # @!attribute [rw] provider_name
+    #   The name of the cloud provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_status
+    #   The connectivity status of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_configuration
+    #   The provider configuration details.
+    #   @return [Types::CspmProviderDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmProviderSummary AWS API Documentation
+    #
+    class CspmProviderSummary < Struct.new(
+      :provider_name,
+      :connector_status,
+      :provider_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cloud provider configuration for updating a connector. This is a
+    # union type that currently supports Azure.
+    #
+    # @note CspmProviderUpdateConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] azure
+    #   The Azure update configuration.
+    #   @return [Types::AzureUpdateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmProviderUpdateConfiguration AWS API Documentation
+    #
+    class CspmProviderUpdateConfiguration < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < CspmProviderUpdateConfiguration; end
+      class Unknown < CspmProviderUpdateConfiguration; end
     end
 
     # The list of detected instances of sensitive data.
@@ -23875,6 +24357,30 @@ module Aws::SecurityHub
     class DeleteConfigurationPolicyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] connector_id
+    #   The unique identifier of the connector to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConnectorRequest AWS API Documentation
+    #
+    class DeleteConnectorRequest < Struct.new(
+      :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector after the delete request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConnectorResponse AWS API Documentation
+    #
+    class DeleteConnectorResponse < Struct.new(
+      :enablement_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
     #   @return [String]
     #
@@ -23886,9 +24392,17 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector after deletion.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConnectorV2Response AWS API Documentation
     #
-    class DeleteConnectorV2Response < Aws::EmptyStructure; end
+    class DeleteConnectorV2Response < Struct.new(
+      :enablement_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator to delete. To obtain the ARN, use
@@ -24261,11 +24775,17 @@ module Aws::SecurityHub
     #   The date and time when the service was enabled in the account.
     #   @return [String]
     #
+    # @!attribute [rw] features
+    #   A map of opt-in features and their current status and metadata for
+    #   the account in the current Region.
+    #   @return [Hash<String,Types::FeatureDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeSecurityHubV2Response AWS API Documentation
     #
     class DescribeSecurityHubV2Response < Struct.new(
       :hub_v2_arn,
-      :subscribed_at)
+      :subscribed_at,
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24331,11 +24851,18 @@ module Aws::SecurityHub
     #   The maximum number of standards to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] providers
+    #   A list of cloud providers to filter the standards by. For example,
+    #   specify `Azure` to return only standards that evaluate Azure
+    #   resources.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsRequest AWS API Documentation
     #
     class DescribeStandardsRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24419,6 +24946,22 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccountResponse AWS API Documentation
     #
     class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] feature_name
+    #   The name of the feature to disable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubFeatureV2Request AWS API Documentation
+    #
+    class DisableSecurityHubFeatureV2Request < Struct.new(
+      :feature_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubFeatureV2Response AWS API Documentation
+    #
+    class DisableSecurityHubFeatureV2Response < Aws::EmptyStructure; end
 
     # @api private
     #
@@ -24596,6 +25139,22 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] feature_name
+    #   The name of the feature to enable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubFeatureV2Request AWS API Documentation
+    #
+    class EnableSecurityHubFeatureV2Request < Struct.new(
+      :feature_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubFeatureV2Response AWS API Documentation
+    #
+    class EnableSecurityHubFeatureV2Response < Aws::EmptyStructure; end
+
     # @!attribute [rw] tags
     #   The tags to add to the hub resource when you enable Security Hub
     #   CSPM.
@@ -24723,6 +25282,26 @@ module Aws::SecurityHub
     #
     class ExternalIntegrationConfiguration < Struct.new(
       :connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the status and metadata for an opt-in feature.
+    #
+    # @!attribute [rw] feature_status
+    #   The current enablement status of the feature. Valid values:
+    #   `ENABLED` \| `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the feature status was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FeatureDetail AWS API Documentation
+    #
+    class FeatureDetail < Struct.new(
+      :feature_status,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25126,7 +25705,55 @@ module Aws::SecurityHub
     # A filter for string-based fields in findings trend data.
     #
     # @!attribute [rw] field_name
-    #   The name of the findings field to filter on.
+    #   The name of the findings field to filter on. You can specify one of
+    #   the following fields.
+    #
+    #   * `account_id` – The Amazon Web Services account ID associated with
+    #     the finding.
+    #
+    #   * `region` – The Amazon Web Services Region associated with the
+    #     finding.
+    #
+    #   * `finding_types` – The finding types associated with the finding.
+    #
+    #   * `finding_status` – The status of the finding.
+    #
+    #   * `finding_cve_ids` – The Common Vulnerabilities and Exposures (CVE)
+    #     identifiers associated with the finding.
+    #
+    #   * `finding_compliance_status` – The compliance status of the
+    #     finding.
+    #
+    #   * `finding_control_id` – The identifier of the security control
+    #     associated with the finding.
+    #
+    #   * `finding_class_name` – The finding class, such as `Compliance
+    #     Finding`.
+    #
+    #   * `finding_provider` – The name of the product that generated the
+    #     finding.
+    #
+    #   * `finding_activity_name` – The activity name associated with the
+    #     finding.
+    #
+    #   * `resource_cloud_providers` – The cloud providers of the resources
+    #     that the finding is associated with. Valid values are `AWS` and
+    #     `Azure`.
+    #
+    #   * `resource_regions` – The Regions of the associated resources. For
+    #     an Amazon Web Services resource, this is the Amazon Web Services
+    #     Region. For an Azure resource, this is the Azure Region, such as
+    #     `eastus`.
+    #
+    #   * `resource_owner_ids` – The identifiers of the accounts that own
+    #     the associated resources. For an Amazon Web Services resource,
+    #     this is the Amazon Web Services account ID. For an Azure resource,
+    #     this is the Azure subscription ID.
+    #
+    #   * `resource_owner_organization_ids` – The identifiers of the
+    #     organizations that own the associated resources. For an Amazon Web
+    #     Services resource, this is the Amazon Web Services organization
+    #     ID. For an Azure resource, this is the Azure tenant ID.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -25563,6 +26190,78 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] connector_id
+    #   The unique identifier of the connector to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConnectorRequest AWS API Documentation
+    #
+    class GetConnectorRequest < Struct.new(
+      :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_id
+    #   The unique identifier of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The ISO 8601 UTC timestamp indicating when the connector was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The ISO 8601 UTC timestamp indicating when the connector was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] health
+    #   The health status of the connector, including connectivity status
+    #   and last check time.
+    #   @return [Types::CspmHealthCheck]
+    #
+    # @!attribute [rw] provider_detail
+    #   The cloud provider configuration details for the connector.
+    #   @return [Types::CspmProviderDetail]
+    #
+    # @!attribute [rw] created_by
+    #   The service principal that created the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConnectorResponse AWS API Documentation
+    #
+    class GetConnectorResponse < Struct.new(
+      :connector_arn,
+      :connector_id,
+      :name,
+      :description,
+      :created_at,
+      :last_updated_at,
+      :health,
+      :provider_detail,
+      :created_by,
+      :enablement_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
     #   @return [String]
     #
@@ -25611,6 +26310,15 @@ module Aws::SecurityHub
     #   The third-party provider detail for a service configuration.
     #   @return [Types::ProviderDetail]
     #
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status_reason
+    #   The reason for the current enablement status. Provides additional
+    #   context when the connector is in a failed state.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConnectorV2Response AWS API Documentation
     #
     class GetConnectorV2Response < Struct.new(
@@ -25622,7 +26330,9 @@ module Aws::SecurityHub
       :created_at,
       :last_updated_at,
       :health,
-      :provider_detail)
+      :provider_detail,
+      :enablement_status,
+      :enablement_status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25646,12 +26356,19 @@ module Aws::SecurityHub
     #   The maximum number of results to return in the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] providers
+    #   A list of cloud providers to filter the enabled standards by. For
+    #   example, specify `Azure` to return only enabled standards that
+    #   evaluate Azure resources.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandardsRequest AWS API Documentation
     #
     class GetEnabledStandardsRequest < Struct.new(
       :standards_subscription_arns,
       :next_token,
-      :max_results)
+      :max_results,
+      :providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26542,12 +27259,37 @@ module Aws::SecurityHub
     #   connectorV2.
     #   @return [Time]
     #
+    # @!attribute [rw] issues
+    #   A list of health issues associated with the connector, including
+    #   error codes and messages.
+    #   @return [Array<Types::HealthIssue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/HealthCheck AWS API Documentation
     #
     class HealthCheck < Struct.new(
       :connector_status,
       :message,
-      :last_checked_at)
+      :last_checked_at,
+      :issues)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a specific health issue detected for a connector.
+    #
+    # @!attribute [rw] code
+    #   The error code that identifies the type of health issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message that describes the health issue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/HealthIssue AWS API Documentation
+    #
+    class HealthIssue < Struct.new(
+      :code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27321,6 +28063,56 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] next_token
+    #   The pagination token to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provider_name
+    #   The name of the cloud provider to filter connectors by.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_status
+    #   The connectivity status to filter connectors by.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   The enablement status to filter connectors by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConnectorsRequest AWS API Documentation
+    #
+    class ListConnectorsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :provider_name,
+      :connector_status,
+      :enablement_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results. If
+    #   there are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] connectors
+    #   An array of connector summaries.
+    #   @return [Array<Types::CspmConnectorSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConnectorsResponse AWS API Documentation
+    #
+    class ListConnectorsResponse < Struct.new(
+      :next_token,
+      :connectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
     #   The pagination token per the Amazon Web Services Pagination standard
     #   @return [String]
     #
@@ -27336,13 +28128,18 @@ module Aws::SecurityHub
     #   The status for the connectorV2.
     #   @return [String]
     #
+    # @!attribute [rw] enablement_status
+    #   The enablement status to filter connectors by.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConnectorsV2Request AWS API Documentation
     #
     class ListConnectorsV2Request < Struct.new(
       :next_token,
       :max_results,
       :provider_name,
-      :connector_status)
+      :connector_status,
+      :enablement_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27608,12 +28405,19 @@ module Aws::SecurityHub
     #   standard are returned.
     #   @return [Integer]
     #
+    # @!attribute [rw] providers
+    #   A list of cloud providers to filter the security control definitions
+    #   by. For example, specify `Azure` to return only controls that
+    #   evaluate Azure resources.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitionsRequest AWS API Documentation
     #
     class ListSecurityControlDefinitionsRequest < Struct.new(
       :standards_arn,
       :next_token,
-      :max_results)
+      :max_results,
+      :providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29255,11 +30059,17 @@ module Aws::SecurityHub
     #   ServiceNow ITSM.
     #   @return [Types::ServiceNowProviderConfiguration]
     #
+    # @!attribute [rw] azure
+    #   The configuration settings required to establish a CSPM integration
+    #   with Microsoft Azure.
+    #   @return [Types::AzureProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderConfiguration AWS API Documentation
     #
     class ProviderConfiguration < Struct.new(
       :jira_cloud,
       :service_now,
+      :azure,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -29267,6 +30077,7 @@ module Aws::SecurityHub
 
       class JiraCloud < ProviderConfiguration; end
       class ServiceNow < ProviderConfiguration; end
+      class Azure < ProviderConfiguration; end
       class Unknown < ProviderConfiguration; end
     end
 
@@ -29282,11 +30093,16 @@ module Aws::SecurityHub
     #   Details about a ServiceNow ITSM integration.
     #   @return [Types::ServiceNowDetail]
     #
+    # @!attribute [rw] azure
+    #   Details about a Microsoft Azure CSPM integration.
+    #   @return [Types::AzureDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderDetail AWS API Documentation
     #
     class ProviderDetail < Struct.new(
       :jira_cloud,
       :service_now,
+      :azure,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -29294,6 +30110,7 @@ module Aws::SecurityHub
 
       class JiraCloud < ProviderDetail; end
       class ServiceNow < ProviderDetail; end
+      class Azure < ProviderDetail; end
       class Unknown < ProviderDetail; end
     end
 
@@ -29307,11 +30124,16 @@ module Aws::SecurityHub
     #   The status for the connectorV2.
     #   @return [String]
     #
+    # @!attribute [rw] provider_configuration
+    #   The third-party provider detail for a service configuration.
+    #   @return [Types::ProviderDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderSummary AWS API Documentation
     #
     class ProviderSummary < Struct.new(
       :provider_name,
-      :connector_status)
+      :connector_status,
+      :provider_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29331,11 +30153,17 @@ module Aws::SecurityHub
     #   integration.
     #   @return [Types::ServiceNowUpdateConfiguration]
     #
+    # @!attribute [rw] azure
+    #   The parameters required to update the configuration for a Microsoft
+    #   Azure CSPM integration.
+    #   @return [Types::AzureUpdateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderUpdateConfiguration AWS API Documentation
     #
     class ProviderUpdateConfiguration < Struct.new(
       :jira_cloud,
       :service_now,
+      :azure,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -29343,6 +30171,7 @@ module Aws::SecurityHub
 
       class JiraCloud < ProviderUpdateConfiguration; end
       class ServiceNow < ProviderUpdateConfiguration; end
+      class Azure < ProviderUpdateConfiguration; end
       class Unknown < ProviderUpdateConfiguration; end
     end
 
@@ -29567,6 +30396,16 @@ module Aws::SecurityHub
     #   Length Constraints: Minimum length of 1. Maximum length of 16.
     #   @return [String]
     #
+    # @!attribute [rw] provider
+    #   The cloud provider that the resource belongs to. Valid values are
+    #   `AWS` and `Azure`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   Information about the account and organization that own the
+    #   resource.
+    #   @return [Types::ResourceOwner]
+    #
     # @!attribute [rw] resource_role
     #   Identifies the role of the resource in the finding. A resource is
     #   either the actor or target of the finding activity,
@@ -29607,6 +30446,8 @@ module Aws::SecurityHub
       :id,
       :partition,
       :region,
+      :provider,
+      :owner,
       :resource_role,
       :tags,
       :data_classification,
@@ -30112,6 +30953,10 @@ module Aws::SecurityHub
     #   through Amazon Inspector.
     #   @return [Types::CodeRepositoryDetails]
     #
+    # @!attribute [rw] azure_resource
+    #   Details about an Azure resource that is related to a finding.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -30214,7 +31059,8 @@ module Aws::SecurityHub
       :aws_msk_cluster,
       :aws_s3_access_point,
       :aws_ec2_client_vpn_endpoint,
-      :code_repository)
+      :code_repository,
+      :azure_resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30288,6 +31134,23 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Additional details about a resource that are specific to its category.
+    # For AI/ML resources and their host resources, this structure contains
+    # `AIDetails`.
+    #
+    # @!attribute [rw] ai_details
+    #   Details that are specific to self-hosted AI resources and their host
+    #   resources.
+    #   @return [Types::AIDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceInfo AWS API Documentation
+    #
+    class ResourceInfo < Struct.new(
+      :ai_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was rejected because we can't find the specified
     # resource.
     #
@@ -30306,6 +31169,60 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about the owner of a resource, including the account and
+    # organization that the resource belongs to.
+    #
+    # @!attribute [rw] account
+    #   Information about the account that owns the resource, for example,
+    #   an Azure Subscription or Amazon Web Services Account.
+    #   @return [Types::ResourceOwnerAccount]
+    #
+    # @!attribute [rw] org
+    #   Information about the organization that owns the resource, for
+    #   example, an Azure Tenant.
+    #   @return [Types::ResourceOwnerOrg]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceOwner AWS API Documentation
+    #
+    class ResourceOwner < Struct.new(
+      :account,
+      :org)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the account that owns a resource, for example, an
+    # Azure Subscription or Amazon Web Services Account.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the account that owns the resource, for
+    #   example, Azure Subscription Id or Amazon Web Services Account Id.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceOwnerAccount AWS API Documentation
+    #
+    class ResourceOwnerAccount < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the organization that owns a resource, for example,
+    # an Azure Tenant.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the organization that owns the resource,
+    #   for example, Azure Tenant Id.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceOwnerOrg AWS API Documentation
+    #
+    class ResourceOwnerOrg < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides comprehensive details about an Amazon Web Services resource
     # and its associated security findings.
     #
@@ -30318,11 +31235,49 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The Amazon Web Services account that owns the resource.
+    #   The Amazon Web Services account that recorded the resource data in
+    #   Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_name
+    #   The name of the Amazon Web Services account that's associated with
+    #   the resource.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Amazon Web Services Region where the resource is located.
+    #   The Amazon Web Services Region that recorded the resource data in
+    #   Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_provider
+    #   The cloud provider where the resource exists. Valid values are `AWS`
+    #   and `Azure`. This field is always included.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   The identifier of the cloud account that owns the resource. For
+    #   Amazon Web Services resources, this is the Amazon Web Services
+    #   account ID. For Azure resources, this is the Azure subscription ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_org_id
+    #   The identifier of the cloud organization that owns the resource. For
+    #   Amazon Web Services resources, this is the Organizations ID. For
+    #   Azure resources, this is the Azure tenant ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_cloud_partition
+    #   The cloud partition where the resource exists. For Amazon Web
+    #   Services, valid values include `aws`, `aws-cn`, and `aws-us-gov`.
+    #   This field isn't returned for cloud providers that don't use
+    #   partitions.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   The native cloud region where the resource is located. For Amazon
+    #   Web Services, this is an Amazon Web Services Region (for example,
+    #   `us-east-1`). For Azure resources, this is the Azure region (for
+    #   example, `westus2`). This field is always included.
     #   @return [String]
     #
     # @!attribute [rw] resource_category
@@ -30357,13 +31312,38 @@ module Aws::SecurityHub
     #   The configuration details of a resource.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] resource_sub_category
+    #   The AI/ML sub-grouping of the resource. Present only when
+    #   `ResourceCategory` is `AI/ML`.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_type
+    #   Specifies how the resource was discovered. If the value is
+    #   `Managed`, the resource is natively provided by a cloud service
+    #   provider. If the value is `SelfHosted`, the resource is hosted on
+    #   customer-managed infrastructure, such as a compute instance or
+    #   container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_info
+    #   Additional resource-type-specific details. For self-hosted AI
+    #   resources and their host resources, contains an `AIDetails`
+    #   structure.
+    #   @return [Types::ResourceInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceResult AWS API Documentation
     #
     class ResourceResult < Struct.new(
       :resource_guid,
       :resource_id,
       :account_id,
+      :account_name,
       :region,
+      :resource_provider,
+      :resource_owner_account_id,
+      :resource_owner_org_id,
+      :resource_cloud_partition,
+      :resource_region,
       :resource_category,
       :resource_type,
       :resource_name,
@@ -30371,7 +31351,10 @@ module Aws::SecurityHub
       :resource_detail_capture_time_dt,
       :findings_summary,
       :resource_tags,
-      :resource_config)
+      :resource_config,
+      :resource_sub_category,
+      :discovery_type,
+      :resource_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30700,8 +31683,34 @@ module Aws::SecurityHub
     # resource type or account ID.
     #
     # @!attribute [rw] field_name
-    #   The name of the resources field to filter on, such as resourceType,
-    #   accountId, or region.
+    #   The name of the resources field to filter on. You can specify one of
+    #   the following fields.
+    #
+    #   * `account_id` – The Amazon Web Services account ID that owns the
+    #     resource.
+    #
+    #   * `region` – The Amazon Web Services Region of the resource.
+    #
+    #   * `resource_type` – The type of the resource.
+    #
+    #   * `resource_category` – The category of the resource.
+    #
+    #   * `resource_cloud_provider` – The cloud provider of the resource.
+    #     Valid values are `AWS` and `Azure`.
+    #
+    #   * `resource_region` – The Region of the resource. For an Amazon Web
+    #     Services resource, this is the Amazon Web Services Region. For an
+    #     Azure resource, this is the Azure Region, such as `eastus`.
+    #
+    #   * `resource_owner_id` – The identifier of the account that owns the
+    #     resource. For an Amazon Web Services resource, this is the Amazon
+    #     Web Services account ID. For an Azure resource, this is the Azure
+    #     subscription ID.
+    #
+    #   * `resource_owner_organization_id` – The identifier of the
+    #     organization that owns the resource. For an Amazon Web Services
+    #     resource, this is the Amazon Web Services organization ID. For an
+    #     Azure resource, this is the Azure tenant ID.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -31356,6 +32365,11 @@ module Aws::SecurityHub
     #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
     #   @return [String]
     #
+    # @!attribute [rw] provider
+    #   The cloud provider whose resources the security control evaluates.
+    #   For example, `AWS` or `Azure`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControl AWS API Documentation
     #
     class SecurityControl < Struct.new(
@@ -31368,7 +32382,8 @@ module Aws::SecurityHub
       :security_control_status,
       :update_status,
       :parameters,
-      :last_update_reason)
+      :last_update_reason,
+      :provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31453,6 +32468,11 @@ module Aws::SecurityHub
     #   excluded for a control that doesn't support custom parameters.
     #   @return [Hash<String,Types::ParameterDefinition>]
     #
+    # @!attribute [rw] provider
+    #   The cloud provider whose resources the security control evaluates.
+    #   For example, `AWS` or `Azure`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlDefinition AWS API Documentation
     #
     class SecurityControlDefinition < Struct.new(
@@ -31463,7 +32483,8 @@ module Aws::SecurityHub
       :severity_rating,
       :current_region_availability,
       :customizable_properties,
-      :parameter_definitions)
+      :parameter_definitions,
+      :provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32182,6 +33203,11 @@ module Aws::SecurityHub
     #   `EnableDefaultStandards` is set to `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] provider
+    #   The cloud provider whose resources the standard evaluates. For
+    #   example, `AWS` or `Azure`.
+    #   @return [String]
+    #
     # @!attribute [rw] standards_managed_by
     #   Provides details about the management of a standard.
     #   @return [Types::StandardsManagedBy]
@@ -32193,6 +33219,7 @@ module Aws::SecurityHub
       :name,
       :description,
       :enabled_by_default,
+      :provider,
       :standards_managed_by)
       SENSITIVE = []
       include Aws::Structure
@@ -32562,6 +33589,11 @@ module Aws::SecurityHub
     #   The reason for the current status.
     #   @return [Types::StandardsStatusReason]
     #
+    # @!attribute [rw] provider
+    #   The cloud provider whose resources the standard evaluates. For
+    #   example, `AWS` or `Azure`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsSubscription AWS API Documentation
     #
     class StandardsSubscription < Struct.new(
@@ -32570,7 +33602,8 @@ module Aws::SecurityHub
       :standards_input,
       :standards_status,
       :standards_controls_updatable,
-      :standards_status_reason)
+      :standards_status_reason,
+      :provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33657,6 +34690,45 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] connector_id
+    #   The unique identifier of the connector to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The updated cloud provider configuration for the connector.
+    #   @return [Types::CspmProviderUpdateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConnectorRequest AWS API Documentation
+    #
+    class UpdateConnectorRequest < Struct.new(
+      :connector_id,
+      :description,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_status
+    #   The connectivity status of the connector after the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector after the update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConnectorResponse AWS API Documentation
+    #
+    class UpdateConnectorResponse < Struct.new(
+      :connector_status,
+      :enablement_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
     #   @return [String]
     #
@@ -33678,9 +34750,22 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] connector_status
+    #   The status of the connector after the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   The enablement status of the connector after the update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConnectorV2Response AWS API Documentation
     #
-    class UpdateConnectorV2Response < Aws::EmptyStructure; end
+    class UpdateConnectorV2Response < Struct.new(
+      :connector_status,
+      :enablement_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator. To obtain the ARN, use

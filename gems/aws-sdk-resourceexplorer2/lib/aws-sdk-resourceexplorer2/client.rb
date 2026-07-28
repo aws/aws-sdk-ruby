@@ -1221,6 +1221,9 @@ module Aws::ResourceExplorer2
     #   resp.view.included_properties[0].name #=> String
     #   resp.view.streaming_access_for_service #=> String
     #   resp.view.scope_type #=> String
+    #   resp.view.service_linked_recorder.service_principal #=> String
+    #   resp.view.service_linked_recorder.recorder_name #=> String
+    #   resp.view.service_linked_recorder.recorder_type #=> String, one of "AWS", "THIRD_PARTY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetServiceView AWS API Documentation
     #
@@ -1567,6 +1570,7 @@ module Aws::ResourceExplorer2
     #   resp.resources[0].region #=> String
     #   resp.resources[0].resource_type #=> String
     #   resp.resources[0].service #=> String
+    #   resp.resources[0].cfn_resource_type #=> String
     #   resp.resources[0].last_reported_at #=> Time
     #   resp.resources[0].properties #=> Array
     #   resp.resources[0].properties[0].name #=> String
@@ -1767,6 +1771,8 @@ module Aws::ResourceExplorer2
     #   resp.resource_types #=> Array
     #   resp.resource_types[0].service #=> String
     #   resp.resource_types[0].resource_type #=> String
+    #   resp.resource_types[0].cfn_resource_types #=> Array
+    #   resp.resource_types[0].cfn_resource_types[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListSupportedResourceTypes AWS API Documentation
@@ -1983,6 +1989,7 @@ module Aws::ResourceExplorer2
     #   resp.resources[0].region #=> String
     #   resp.resources[0].resource_type #=> String
     #   resp.resources[0].service #=> String
+    #   resp.resources[0].cfn_resource_type #=> String
     #   resp.resources[0].last_reported_at #=> Time
     #   resp.resources[0].properties #=> Array
     #   resp.resources[0].properties[0].name #=> String
@@ -2268,7 +2275,7 @@ module Aws::ResourceExplorer2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resourceexplorer2'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

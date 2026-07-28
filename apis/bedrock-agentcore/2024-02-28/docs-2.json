@@ -1134,6 +1134,7 @@
       "base": null,
       "refs": {
         "HarnessBedrockModelConfig$additionalParams": "<p>Provider-specific parameters passed through to the model provider unchanged.</p>",
+        "HarnessGeminiModelConfig$additionalParams": "<p>Provider-specific parameters passed through to the Gemini model provider unchanged.</p>",
         "HarnessLiteLlmModelConfig$additionalParams": "<p>Provider-specific parameters passed through to the model provider unchanged.</p>",
         "HarnessOpenAiModelConfig$additionalParams": "<p>Provider-specific parameters passed through to the model provider unchanged.</p>"
       }
@@ -1173,6 +1174,24 @@
     "DuplicateIdException": {
       "base": "<p> An exception thrown when attempting to create a resource with an identifier that already exists.</p>",
       "refs": {}
+    },
+    "EfsAccessPointArn": {
+      "base": null,
+      "refs": {
+        "EfsConfiguration$accessPointArn": "<p>The Amazon Resource Name (ARN) of the Amazon Elastic File System (Amazon EFS) access point to mount.</p>"
+      }
+    },
+    "EfsConfiguration": {
+      "base": "<p>The configuration for mounting an Amazon Elastic File System (Amazon EFS) access point that you own into a session.</p>",
+      "refs": {
+        "ToolsFileSystemConfiguration$efsConfiguration": "<p>The configuration for mounting your own Amazon Elastic File System (Amazon EFS) access point into the session.</p>"
+      }
+    },
+    "EfsFileSystemArn": {
+      "base": "<p>The Amazon Resource Name (ARN) of an Amazon Elastic File System (Amazon EFS) file system. The access points you specify must belong to this file system.</p>",
+      "refs": {
+        "EfsConfiguration$fileSystemArn": "<p>The Amazon Resource Name (ARN) of the Amazon Elastic File System (Amazon EFS) file system that owns the access point.</p>"
+      }
     },
     "Email": {
       "base": "<p>Email address with validation for standard email format.</p>",
@@ -2163,6 +2182,12 @@
         "HarnessToolResultBlock$content": "<p>The content of the tool result.</p>"
       }
     },
+    "HarnessToolResultMetadataBlockDelta": {
+      "base": "<p>Delta payload for a tool result metadata.</p>",
+      "refs": {
+        "HarnessContentBlockDelta$toolResultMetadata": "<p>A tool result metadata delta.</p>"
+      }
+    },
     "HarnessToolType": {
       "base": null,
       "refs": {
@@ -2534,10 +2559,34 @@
       "base": null,
       "refs": {}
     },
+    "InvokeHarnessRequestBaggageString": {
+      "base": null,
+      "refs": {
+        "InvokeHarnessRequest$baggage": "<p>W3C Baggage header for user-defined context propagation. Format: key1=value1,key2=value2</p>"
+      }
+    },
     "InvokeHarnessRequestRuntimeSessionIdString": {
       "base": null,
       "refs": {
         "InvokeHarnessRequest$runtimeSessionId": "<p>The session ID for the invocation. Use the same session ID across requests to continue a conversation.</p>"
+      }
+    },
+    "InvokeHarnessRequestTraceIdString": {
+      "base": null,
+      "refs": {
+        "InvokeHarnessRequest$traceId": "<p>Trace ID for maintaining observability through the operation.</p>"
+      }
+    },
+    "InvokeHarnessRequestTraceParentString": {
+      "base": null,
+      "refs": {
+        "InvokeHarnessRequest$traceParent": "<p>W3C trace context parent header containing version, trace ID, parent span ID, and trace flags.</p>"
+      }
+    },
+    "InvokeHarnessRequestTraceStateString": {
+      "base": null,
+      "refs": {
+        "InvokeHarnessRequest$traceState": "<p>W3C trace context state header for vendor-specific trace information.</p>"
       }
     },
     "InvokeHarnessResponse": {
@@ -3103,6 +3152,13 @@
         "HarnessGeminiModelConfig$modelId": "<p>The Gemini model ID.</p>",
         "HarnessLiteLlmModelConfig$modelId": "<p>The LiteLLM model identifier (e.g., \"anthropic/claude-3-sonnet\").</p>",
         "HarnessOpenAiModelConfig$modelId": "<p>The OpenAI model ID.</p>"
+      }
+    },
+    "MountPath": {
+      "base": null,
+      "refs": {
+        "EfsConfiguration$mountPath": "<p>The absolute path within the session at which the access point is mounted, for example <code>/mnt/efs</code>. Each mount path must be unique across all file system configurations in the session.</p>",
+        "S3FilesConfiguration$mountPath": "<p>The absolute path within the session at which the access point is mounted, for example <code>/mnt/s3data</code>. Each mount path must be unique across all file system configurations in the session.</p>"
       }
     },
     "MouseButton": {
@@ -3966,6 +4022,24 @@
         "InvokeHarnessStreamOutput$runtimeClientError": "<p>An error returned by the runtime container during agent execution.</p>"
       }
     },
+    "S3FilesAccessPointArn": {
+      "base": null,
+      "refs": {
+        "S3FilesConfiguration$accessPointArn": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Storage Service (Amazon S3) Files access point to mount.</p>"
+      }
+    },
+    "S3FilesConfiguration": {
+      "base": "<p>The configuration for mounting an Amazon Simple Storage Service (Amazon S3) Files access point that you own into a session.</p>",
+      "refs": {
+        "ToolsFileSystemConfiguration$s3FilesConfiguration": "<p>The configuration for mounting your own Amazon Simple Storage Service (Amazon S3) Files access point into the session.</p>"
+      }
+    },
+    "S3FilesFileSystemArn": {
+      "base": "<p>The Amazon Resource Name (ARN) of an Amazon Simple Storage Service (Amazon S3) Files file system. The access points you specify must belong to this file system.</p>",
+      "refs": {
+        "S3FilesConfiguration$fileSystemArn": "<p>The Amazon Resource Name (ARN) of the Amazon Simple Storage Service (Amazon S3) Files file system that owns the access point.</p>"
+      }
+    },
     "S3Location": {
       "base": "<p>The Amazon S3 location configuration of a resource.</p>",
       "refs": {
@@ -4123,6 +4197,7 @@
         "HarnessSystemContentBlock$text": "<p>The text content of the system prompt block.</p>",
         "HarnessToolResultBlockDelta$text": "<p>A text tool result delta.</p>",
         "HarnessToolResultContentBlock$text": "<p>Text content.</p>",
+        "HarnessToolResultMetadataBlockDelta$metadata": "<p>The partial JSON-string fragment of the tool result metadata.</p>",
         "HarnessToolUseBlockDelta$input": "<p>The partial JSON input for the tool call.</p>"
       }
     },
@@ -4596,6 +4671,8 @@
       "refs": {
         "InvokeAgentRuntimeRequest$mcpSessionId": "<p>The identifier of the MCP session.</p>",
         "InvokeAgentRuntimeRequest$mcpProtocolVersion": "<p>The version of the MCP protocol being used.</p>",
+        "InvokeAgentRuntimeRequest$mcpMethod": "<p>The MCP method being invoked. For example, <code>tools/call</code>, <code>resources/read</code>, or <code>prompts/get</code>.</p>",
+        "InvokeAgentRuntimeRequest$mcpName": "<p>The name of the MCP resource, tool, or prompt being accessed. The value depends on the method:</p> <ul> <li> <p> <code>tools/call</code> – The tool name.</p> </li> <li> <p> <code>resources/read</code> – The resource URI.</p> </li> <li> <p> <code>prompts/get</code> – The prompt name.</p> </li> </ul>",
         "InvokeAgentRuntimeRequest$runtimeUserId": "<p>The identifier of the runtime user.</p>"
       }
     },
@@ -4899,6 +4976,21 @@
       "base": "<p> The MCP tools definition with a protocol version and inline content. The <code>protocolVersion</code> identifies the MCP protocol version that the tools conform to. This differs from <code>schemaVersion</code> in the server definition, which identifies the server configuration schema format.</p>",
       "refs": {
         "McpDescriptor$tools": "<p> The MCP tools definition that describes the available tools.</p>"
+      }
+    },
+    "ToolsFileSystemConfiguration": {
+      "base": "<p>Specifies a file system to mount into the session by providing exactly one of the following:</p> <ul> <li> <p> <code>s3FilesConfiguration</code> - Mounts an Amazon Simple Storage Service (Amazon S3) Files access point.</p> </li> <li> <p> <code>efsConfiguration</code> - Mounts an Amazon Elastic File System (Amazon EFS) access point.</p> </li> </ul>",
+      "refs": {
+        "ToolsFileSystemConfigurations$member": null
+      }
+    },
+    "ToolsFileSystemConfigurations": {
+      "base": "<p>The file system configurations to mount into the session. Each configuration maps an access point to a path inside the session. You can specify up to 4 configurations. The maximum is 2 Amazon Simple Storage Service (Amazon S3) Files access points and 2 Amazon Elastic File System (Amazon EFS) access points.</p>",
+      "refs": {
+        "GetBrowserSessionResponse$filesystemConfigurations": "<p>The file system configurations for the browser session. Each entry describes an access point and its mount path.</p>",
+        "GetCodeInterpreterSessionResponse$filesystemConfigurations": "<p>The file system configurations for the code interpreter session. Each entry describes an access point and its mount path.</p>",
+        "StartBrowserSessionRequest$filesystemConfigurations": "<p>The file system configurations to mount into the browser session. Use these configurations to mount your own Amazon Simple Storage Service (Amazon S3) Files or Amazon Elastic File System (Amazon EFS) access points. Your session can then read and write your data. If you don't specify this field, no additional file systems are mounted.</p>",
+        "StartCodeInterpreterSessionRequest$filesystemConfigurations": "<p>The file system configurations to mount into the code interpreter session. Use these configurations to mount your own Amazon Simple Storage Service (Amazon S3) Files or Amazon Elastic File System (Amazon EFS) access points. Your session can then read and write your data. If you don't specify this field, no additional file systems are mounted.</p>"
       }
     },
     "TopK": {

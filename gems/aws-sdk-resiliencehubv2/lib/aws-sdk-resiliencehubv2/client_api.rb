@@ -30,7 +30,9 @@ module Aws::Resiliencehubv2
     AssertionUpdatedMetadata = Shapes::StructureShape.new(name: 'AssertionUpdatedMetadata')
     AssessmentCost = Shapes::StructureShape.new(name: 'AssessmentCost')
     AssessmentErrorCode = Shapes::StringShape.new(name: 'AssessmentErrorCode')
+    AssessmentSortField = Shapes::StringShape.new(name: 'AssessmentSortField')
     AssessmentStatus = Shapes::StringShape.new(name: 'AssessmentStatus')
+    AssessmentStatusList = Shapes::ListShape.new(name: 'AssessmentStatusList')
     AssessmentStep = Shapes::StringShape.new(name: 'AssessmentStep')
     AssessmentSummary = Shapes::StructureShape.new(name: 'AssessmentSummary')
     AssessmentSummaryList = Shapes::ListShape.new(name: 'AssessmentSummaryList')
@@ -85,6 +87,8 @@ module Aws::Resiliencehubv2
     DeleteUserJourneyResponse = Shapes::StructureShape.new(name: 'DeleteUserJourneyResponse')
     DependencyCriticality = Shapes::StringShape.new(name: 'DependencyCriticality')
     DependencyDiscoveryConfig = Shapes::StructureShape.new(name: 'DependencyDiscoveryConfig')
+    DependencyDiscoveryConfigEligibleResourceCountInteger = Shapes::IntegerShape.new(name: 'DependencyDiscoveryConfigEligibleResourceCountInteger')
+    DependencyDiscoveryConfigMessageString = Shapes::StringShape.new(name: 'DependencyDiscoveryConfigMessageString')
     DependencyDiscoveryInput = Shapes::StringShape.new(name: 'DependencyDiscoveryInput')
     DependencyDiscoveryStatus = Shapes::StringShape.new(name: 'DependencyDiscoveryStatus')
     DependencySummary = Shapes::StructureShape.new(name: 'DependencySummary')
@@ -214,6 +218,8 @@ module Aws::Resiliencehubv2
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
     ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
     ResourceTagValuesList = Shapes::ListShape.new(name: 'ResourceTagValuesList')
+    ResourceTypeFilter = Shapes::StringShape.new(name: 'ResourceTypeFilter')
+    ResourceTypeFilterList = Shapes::ListShape.new(name: 'ResourceTypeFilterList')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     S3BucketPath = Shapes::StringShape.new(name: 'S3BucketPath')
     S3ReportOutput = Shapes::StructureShape.new(name: 'S3ReportOutput')
@@ -258,6 +264,7 @@ module Aws::Resiliencehubv2
     ServiceTopologyEdgeSummaryList = Shapes::ListShape.new(name: 'ServiceTopologyEdgeSummaryList')
     ServiceWorkflowUpdatedMetadata = Shapes::StructureShape.new(name: 'ServiceWorkflowUpdatedMetadata')
     SloSource = Shapes::StructureShape.new(name: 'SloSource')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartFailureModeAssessmentRequest = Shapes::StructureShape.new(name: 'StartFailureModeAssessmentRequest')
     StartFailureModeAssessmentResponse = Shapes::StructureShape.new(name: 'StartFailureModeAssessmentResponse')
     String = Shapes::StringShape.new(name: 'String')
@@ -332,6 +339,7 @@ module Aws::Resiliencehubv2
     Achievability.add_member(:availability_slo, Shapes::ShapeRef.new(shape: AchievabilityStatus, location_name: "availabilitySlo"))
     Achievability.add_member(:multi_az_rto_rpo, Shapes::ShapeRef.new(shape: AchievabilityStatus, location_name: "multiAzRtoRpo"))
     Achievability.add_member(:multi_region_rto_rpo, Shapes::ShapeRef.new(shape: AchievabilityStatus, location_name: "multiRegionRtoRpo"))
+    Achievability.add_member(:data_recovery_time_between_backups, Shapes::ShapeRef.new(shape: AchievabilityStatus, location_name: "dataRecoveryTimeBetweenBackups"))
     Achievability.struct_class = Types::Achievability
 
     ArnList.member = Shapes::ShapeRef.new(shape: Arn)
@@ -361,6 +369,8 @@ module Aws::Resiliencehubv2
     AssessmentCost.add_member(:amount, Shapes::ShapeRef.new(shape: Double, location_name: "amount"))
     AssessmentCost.add_member(:currency, Shapes::ShapeRef.new(shape: CostCurrency, location_name: "currency"))
     AssessmentCost.struct_class = Types::AssessmentCost
+
+    AssessmentStatusList.member = Shapes::ShapeRef.new(shape: AssessmentStatus)
 
     AssessmentSummary.add_member(:assessment_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assessmentId"))
     AssessmentSummary.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "serviceArn"))
@@ -555,6 +565,8 @@ module Aws::Resiliencehubv2
 
     DependencyDiscoveryConfig.add_member(:status, Shapes::ShapeRef.new(shape: DependencyDiscoveryStatus, required: true, location_name: "status"))
     DependencyDiscoveryConfig.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    DependencyDiscoveryConfig.add_member(:eligible_resource_count, Shapes::ShapeRef.new(shape: DependencyDiscoveryConfigEligibleResourceCountInteger, location_name: "eligibleResourceCount"))
+    DependencyDiscoveryConfig.add_member(:message, Shapes::ShapeRef.new(shape: DependencyDiscoveryConfigMessageString, location_name: "message"))
     DependencyDiscoveryConfig.struct_class = Types::DependencyDiscoveryConfig
 
     DependencySummary.add_member(:dependency_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "dependencyId"))
@@ -743,6 +755,11 @@ module Aws::Resiliencehubv2
     ListDependenciesResponse.struct_class = Types::ListDependenciesResponse
 
     ListFailureModeAssessmentsRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "serviceArn"))
+    ListFailureModeAssessmentsRequest.add_member(:assessment_statuses, Shapes::ShapeRef.new(shape: AssessmentStatusList, location: "querystring", location_name: "assessmentStatuses"))
+    ListFailureModeAssessmentsRequest.add_member(:started_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "startedAfter"))
+    ListFailureModeAssessmentsRequest.add_member(:ended_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "endedBefore"))
+    ListFailureModeAssessmentsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: AssessmentSortField, location: "querystring", location_name: "sortBy"))
+    ListFailureModeAssessmentsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
     ListFailureModeAssessmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListFailureModeAssessmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListFailureModeAssessmentsRequest.struct_class = Types::ListFailureModeAssessmentsRequest
@@ -794,6 +811,8 @@ module Aws::Resiliencehubv2
     ListResourcesRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "serviceArn"))
     ListResourcesRequest.add_member(:service_function_id, Shapes::ShapeRef.new(shape: EntityId, location: "querystring", location_name: "serviceFunctionId"))
     ListResourcesRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location: "querystring", location_name: "awsRegion"))
+    ListResourcesRequest.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeFilterList, location: "querystring", location_name: "resourceTypes"))
+    ListResourcesRequest.add_member(:billable, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "billable"))
     ListResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListResourcesRequest.struct_class = Types::ListResourcesRequest
@@ -1010,6 +1029,8 @@ module Aws::Resiliencehubv2
 
     ResourceTagValuesList.member = Shapes::ShapeRef.new(shape: TagValue)
 
+    ResourceTypeFilterList.member = Shapes::ShapeRef.new(shape: ResourceTypeFilter)
+
     ResourceTypeList.member = Shapes::ShapeRef.new(shape: String)
 
     S3ReportOutput.add_member(:s3_object_key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "s3ObjectKey"))
@@ -1222,6 +1243,10 @@ module Aws::Resiliencehubv2
 
     ServiceTopologyEdgeSummary.add_member(:source_resource_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sourceResourceIdentifier"))
     ServiceTopologyEdgeSummary.add_member(:destination_resource_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationResourceIdentifier"))
+    ServiceTopologyEdgeSummary.add_member(:source_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "sourceRegion"))
+    ServiceTopologyEdgeSummary.add_member(:destination_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "destinationRegion"))
+    ServiceTopologyEdgeSummary.add_member(:source_account, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "sourceAccount"))
+    ServiceTopologyEdgeSummary.add_member(:destination_account, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "destinationAccount"))
     ServiceTopologyEdgeSummary.add_member(:properties, Shapes::ShapeRef.new(shape: EdgePropertyList, location_name: "properties"))
     ServiceTopologyEdgeSummary.struct_class = Types::ServiceTopologyEdgeSummary
 

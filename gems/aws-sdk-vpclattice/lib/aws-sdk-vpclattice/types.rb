@@ -1187,6 +1187,15 @@ module Aws::VPCLattice
     #     used, auth is enabled and an auth policy is required.
     #   @return [String]
     #
+    # @!attribute [rw] idle_timeout_seconds
+    #   The amount of time, in seconds, that a connection can remain idle
+    #   (no data sent) before VPC Lattice closes it. The valid range is 60
+    #   to 600 seconds. If you don't specify a value, the default is 60
+    #   seconds. This setting does not change the maximum connection
+    #   duration of 10 minutes; connections are still closed when they reach
+    #   that limit.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceRequest AWS API Documentation
     #
     class CreateServiceRequest < Struct.new(
@@ -1195,7 +1204,8 @@ module Aws::VPCLattice
       :tags,
       :custom_domain_name,
       :certificate_arn,
-      :auth_type)
+      :auth_type,
+      :idle_timeout_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1229,6 +1239,11 @@ module Aws::VPCLattice
     #   The type of IAM policy.
     #   @return [String]
     #
+    # @!attribute [rw] idle_timeout_seconds
+    #   The amount of time, in seconds, that a connection can remain idle
+    #   before VPC Lattice closes it.
+    #   @return [Integer]
+    #
     # @!attribute [rw] dns_entry
     #   The public DNS name of the service.
     #   @return [Types::DnsEntry]
@@ -1243,6 +1258,7 @@ module Aws::VPCLattice
       :certificate_arn,
       :status,
       :auth_type,
+      :idle_timeout_seconds,
       :dns_entry)
       SENSITIVE = []
       include Aws::Structure
@@ -2371,11 +2387,12 @@ module Aws::VPCLattice
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_managed
-    #   Indicates whether the resource gateway is managed by an AWS service.
+    #   Indicates whether the resource gateway is managed by an Amazon Web
+    #   Services service.
     #   @return [Boolean]
     #
     # @!attribute [rw] managed_by
-    #   The AWS service that manages the resource gateway.
+    #   The Amazon Web Services service that manages the resource gateway.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
@@ -2958,6 +2975,11 @@ module Aws::VPCLattice
     #   The type of IAM policy.
     #   @return [String]
     #
+    # @!attribute [rw] idle_timeout_seconds
+    #   The amount of time, in seconds, that a connection can remain idle
+    #   before VPC Lattice closes it.
+    #   @return [Integer]
+    #
     # @!attribute [rw] failure_code
     #   The failure code.
     #   @return [String]
@@ -2979,6 +3001,7 @@ module Aws::VPCLattice
       :certificate_arn,
       :status,
       :auth_type,
+      :idle_timeout_seconds,
       :failure_code,
       :failure_message)
       SENSITIVE = []
@@ -5964,12 +5987,22 @@ module Aws::VPCLattice
     #     used, auth is enabled and an auth policy is required.
     #   @return [String]
     #
+    # @!attribute [rw] idle_timeout_seconds
+    #   The amount of time, in seconds, that a connection can remain idle
+    #   (no data sent) before VPC Lattice closes it. The valid range is 60
+    #   to 600 seconds. If you don't specify a value, the default is 60
+    #   seconds. This setting does not change the maximum connection
+    #   duration of 10 minutes; connections are still closed when they reach
+    #   that limit.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateServiceRequest AWS API Documentation
     #
     class UpdateServiceRequest < Struct.new(
       :service_identifier,
       :certificate_arn,
-      :auth_type)
+      :auth_type,
+      :idle_timeout_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5998,6 +6031,11 @@ module Aws::VPCLattice
     #   The type of IAM policy.
     #   @return [String]
     #
+    # @!attribute [rw] idle_timeout_seconds
+    #   The amount of time, in seconds, that a connection can remain idle
+    #   before VPC Lattice closes it.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateServiceResponse AWS API Documentation
     #
     class UpdateServiceResponse < Struct.new(
@@ -6006,7 +6044,8 @@ module Aws::VPCLattice
       :name,
       :custom_domain_name,
       :certificate_arn,
-      :auth_type)
+      :auth_type,
+      :idle_timeout_seconds)
       SENSITIVE = []
       include Aws::Structure
     end

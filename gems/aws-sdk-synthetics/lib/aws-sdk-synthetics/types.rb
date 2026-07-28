@@ -37,11 +37,19 @@ module Aws::Synthetics
     #   connectivity.
     #   @return [Types::VpcConfigInput]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer-managed AWS Key
+    #   Management Service (AWS KMS) key used to encrypt the canary
+    #   replica's AWS Lambda function environment variables at rest. If you
+    #   don't specify a value, the service uses an AWS-managed key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/AddReplicaLocationInput AWS API Documentation
     #
     class AddReplicaLocationInput < Struct.new(
       :location,
-      :vpc_config)
+      :vpc_config,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -344,6 +352,13 @@ module Aws::Synthetics
     #   canary uploads to Amazon S3.
     #   @return [Types::ArtifactConfigOutput]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer-managed AWS Key
+    #   Management Service (AWS KMS) key used to encrypt the canary's AWS
+    #   Lambda function environment variables at rest. If you don't specify
+    #   a value, the service uses an AWS-managed key.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run_config
     #   Returns the dry run configurations for a canary.
     #   @return [Types::DryRunConfigOutput]
@@ -373,6 +388,7 @@ module Aws::Synthetics
       :multi_location_config,
       :tags,
       :artifact_config,
+      :kms_key_arn,
       :dry_run_config)
       SENSITIVE = []
       include Aws::Structure
@@ -1154,6 +1170,13 @@ module Aws::Synthetics
     #   canary uploads to Amazon S3.
     #   @return [Types::ArtifactConfigInput]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer-managed AWS Key
+    #   Management Service (AWS KMS) key used to encrypt the canary's AWS
+    #   Lambda function environment variables at rest. If you don't specify
+    #   a value, the service uses an AWS-managed key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CreateCanaryRequest AWS API Documentation
     #
     class CreateCanaryRequest < Struct.new(
@@ -1172,7 +1195,8 @@ module Aws::Synthetics
       :browser_configs,
       :add_replica_locations,
       :tags,
-      :artifact_config)
+      :artifact_config,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2704,6 +2728,15 @@ module Aws::Synthetics
     #   cannot remove the primary location.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer-managed AWS Key
+    #   Management Service (AWS KMS) key used to encrypt the canary's AWS
+    #   Lambda function environment variables at rest. If you don't specify
+    #   a value, the service uses an AWS-managed key. If you omit this
+    #   parameter, the service retains the existing value. To revert to the
+    #   AWS-managed key, set this parameter to an empty string.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/UpdateCanaryRequest AWS API Documentation
     #
     class UpdateCanaryRequest < Struct.new(
@@ -2724,7 +2757,8 @@ module Aws::Synthetics
       :visual_references,
       :browser_configs,
       :add_replica_locations,
-      :remove_replica_locations)
+      :remove_replica_locations,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end

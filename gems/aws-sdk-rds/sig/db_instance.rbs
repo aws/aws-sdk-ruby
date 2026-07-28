@@ -596,7 +596,8 @@ module Aws
                         ]?
                       }
                     ],
-                    ?master_user_authentication_type: ("password" | "iam-db-auth")
+                    ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                    ?engine_lifecycle_support: ::String
                   ) -> DBInstance
                 | (?Hash[Symbol, untyped]) -> DBInstance
 

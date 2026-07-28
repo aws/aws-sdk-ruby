@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2026-06-30)
+------------------
+
+* Feature - AWS IAM Identity Center now returns PrimaryRegion and Regions in the ListInstances response, providing information about replicated instances.
+
 1.74.0 (2026-05-21)
 ------------------
 

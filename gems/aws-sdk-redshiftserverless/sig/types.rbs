@@ -794,6 +794,7 @@ module Aws::RedshiftServerless
     end
 
     class RestoreFromRecoveryPointRequest
+      attr_accessor maintain_integration: bool
       attr_accessor namespace_name: ::String
       attr_accessor recovery_point_id: ::String
       attr_accessor workgroup_name: ::String
@@ -808,6 +809,7 @@ module Aws::RedshiftServerless
 
     class RestoreFromSnapshotRequest
       attr_accessor admin_password_secret_kms_key_id: ::String
+      attr_accessor maintain_integration: bool
       attr_accessor manage_admin_password: bool
       attr_accessor namespace_name: ::String
       attr_accessor owner_account: ::String

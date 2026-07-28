@@ -1,0 +1,24 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppConfig
+    module Params
+      type flag_value = {
+      enabled: bool,
+      attribute_values: Hash[::String, untyped]?
+    }
+
+      type treatment_input = {
+      weight: ::Float,
+      description: ::String?,
+      flag_value: Params::flag_value
+    }
+
+    end
+  end
+end

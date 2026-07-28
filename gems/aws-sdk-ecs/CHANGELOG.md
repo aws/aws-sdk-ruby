@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.242.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.241.0 (2026-07-08)
+------------------
+
+* Feature - Amazon ECS now automatically detects the correct CPU architecture for Express Mode services.
+
+1.240.0 (2026-06-30)
+------------------
+
+* Feature - Updated threshold configuration documentation.
+
+1.239.0 (2026-06-29)
+------------------
+
+* Feature - Amazon ECS now supports customizable deployment circuit breaker configurations. Customers can now define the failure threshold or control the failure counting mechanism.
+
 1.238.0 (2026-06-18)
 ------------------
 

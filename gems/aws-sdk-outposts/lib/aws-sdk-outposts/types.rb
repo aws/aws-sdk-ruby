@@ -30,7 +30,8 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] contact_phone_number
-    #   The phone number of the contact.
+    #   The phone number of the contact, including the country code (for
+    #   example, `+12065550100`).
     #   @return [String]
     #
     # @!attribute [rw] address_line_1

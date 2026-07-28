@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2026-07-27)
+------------------
+
+* Feature - With this launch, you can now set concurrent job limits on a virtual cluster, giving you fine-grained control over how many job runs execute at once and how many can wait in queue.
+
+1.75.0 (2026-07-21)
+------------------
+
+* Feature - Added support for the DeleteSecurityConfiguration API, which allows customers to delete security configurations in Amazon EMR on EKS. Also added authenticationConfiguration in securityConfigurationdata structure.
+
+1.74.0 (2026-07-14)
+------------------
+
+* Feature - Introduced 5 new fields across 3 APIs as part of Spark Connect server launch for EMR on EKS. The fields added are sessionIdleTimeoutInMinutes, sessionEnabled, endpointToken, authProxyUrl and encryptionKeyArn.
+
+1.73.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.72.0 (2026-05-22)
 ------------------
 

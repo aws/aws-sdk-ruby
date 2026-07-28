@@ -21,6 +21,34 @@ module Aws::Odb
       SENSITIVE: []
     end
 
+    class AdminPasswordSourceConfiguration
+      attr_accessor customer_managed_aws_secret: Types::CustomerManagedAwsSecretConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomerManagedAwsSecret < AdminPasswordSourceConfiguration
+      end
+      class Unknown < AdminPasswordSourceConfiguration
+      end
+    end
+
+    class AdminPasswordSourceConfigurationInput
+      attr_accessor customer_managed_aws_secret: Types::CustomerManagedAwsSecretConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomerManagedAwsSecret < AdminPasswordSourceConfigurationInput
+      end
+      class Unknown < AdminPasswordSourceConfigurationInput
+      end
+    end
+
+    class AdminPasswordSourceSummary
+      attr_accessor admin_password_source: ("CUSTOMER_MANAGED_AWS_SECRET" | "API_REQUEST_PARAMETER")
+      attr_accessor admin_password_source_configuration: Types::AdminPasswordSourceConfiguration
+      SENSITIVE: []
+    end
+
     class AssociateIamRoleToResourceInput
       attr_accessor iam_role_arn: ::String
       attr_accessor aws_integration: ("KmsTde")
@@ -135,6 +163,7 @@ module Aws::Odb
       attr_accessor time_until_reconnect_clone_enabled: ::Time
       attr_accessor next_long_term_backup_time_stamp: ::Time
       attr_accessor time_undeleted: ::Time
+      attr_accessor admin_password_source_summary: Types::AdminPasswordSourceSummary
       SENSITIVE: []
     end
 
@@ -322,6 +351,7 @@ module Aws::Odb
       attr_accessor time_until_reconnect_clone_enabled: ::Time
       attr_accessor next_long_term_backup_time_stamp: ::Time
       attr_accessor time_undeleted: ::Time
+      attr_accessor admin_password_source_summary: Types::AdminPasswordSourceSummary
       SENSITIVE: []
     end
 
@@ -335,6 +365,7 @@ module Aws::Odb
     class AutonomousDatabaseWalletDetails
       attr_accessor status: ("ACTIVE" | "UPDATING")
       attr_accessor time_rotated: ::Time
+      attr_accessor password_source_summary: Types::WalletPasswordSourceSummary
       SENSITIVE: []
     end
 
@@ -749,6 +780,8 @@ module Aws::Odb
       attr_accessor source_configuration: Types::SourceConfiguration
       attr_accessor encryption_key_provider: ("ORACLE_MANAGED" | "AWS_KMS")
       attr_accessor encryption_key_configuration: Types::EncryptionKeyConfigurationInput
+      attr_accessor admin_password_source: ("CUSTOMER_MANAGED_AWS_SECRET" | "API_REQUEST_PARAMETER")
+      attr_accessor admin_password_source_configuration: Types::AdminPasswordSourceConfigurationInput
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:admin_password]
@@ -766,6 +799,8 @@ module Aws::Odb
       attr_accessor autonomous_database_id: ::String
       attr_accessor wallet_type: ("REGIONAL" | "INSTANCE")
       attr_accessor password: ::String
+      attr_accessor password_source: ("CUSTOMER_MANAGED_AWS_SECRET" | "API_REQUEST_PARAMETER")
+      attr_accessor password_source_configuration: Types::WalletPasswordSourceConfigurationInput
       attr_accessor client_token: ::String
       SENSITIVE: [:password]
     end
@@ -931,6 +966,20 @@ module Aws::Odb
     class CustomerContact
       attr_accessor email: ::String
       SENSITIVE: [:email]
+    end
+
+    class CustomerManagedAwsSecretConfiguration
+      attr_accessor iam_role_arn: ::String
+      attr_accessor secret_id: ::String
+      attr_accessor external_id_type: ("database_ocid" | "compartment_ocid" | "tenant_ocid")
+      SENSITIVE: []
+    end
+
+    class CustomerManagedAwsSecretConfigurationInput
+      attr_accessor secret_id: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor external_id_type: ("database_ocid" | "compartment_ocid" | "tenant_ocid")
+      SENSITIVE: []
     end
 
     class DataCollectionOptions
@@ -1412,6 +1461,7 @@ module Aws::Odb
 
     class InitializeServiceInput
       attr_accessor oci_identity_domain: bool
+      attr_accessor autonomous_database_oci_aws_secrets_manager_integration: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1725,7 +1775,9 @@ module Aws::Odb
 
     class OciIamRole
       attr_accessor iam_role_arn: ::String
-      attr_accessor aws_integration: ("KmsTde")
+      attr_accessor aws_integration: ("KmsTde" | "SecretsManager")
+      attr_accessor status: ("PROVISIONING" | "AVAILABLE" | "PROVISION_FAILED" | "TERMINATING" | "TERMINATE_FAILED")
+      attr_accessor status_reason: ::String
       SENSITIVE: []
     end
 
@@ -2145,6 +2197,8 @@ module Aws::Odb
       attr_accessor time_of_auto_refresh_start: ::Time
       attr_accessor encryption_key_provider: ("ORACLE_MANAGED" | "AWS_KMS")
       attr_accessor encryption_key_configuration: Types::EncryptionKeyConfigurationInput
+      attr_accessor admin_password_source: ("CUSTOMER_MANAGED_AWS_SECRET" | "API_REQUEST_PARAMETER")
+      attr_accessor admin_password_source_configuration: Types::AdminPasswordSourceConfigurationInput
       SENSITIVE: [:admin_password]
     end
 
@@ -2221,6 +2275,34 @@ module Aws::Odb
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WalletPasswordSourceConfiguration
+      attr_accessor customer_managed_aws_secret: Types::CustomerManagedAwsSecretConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomerManagedAwsSecret < WalletPasswordSourceConfiguration
+      end
+      class Unknown < WalletPasswordSourceConfiguration
+      end
+    end
+
+    class WalletPasswordSourceConfigurationInput
+      attr_accessor customer_managed_aws_secret: Types::CustomerManagedAwsSecretConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomerManagedAwsSecret < WalletPasswordSourceConfigurationInput
+      end
+      class Unknown < WalletPasswordSourceConfigurationInput
+      end
+    end
+
+    class WalletPasswordSourceSummary
+      attr_accessor password_source: ("CUSTOMER_MANAGED_AWS_SECRET" | "API_REQUEST_PARAMETER")
+      attr_accessor password_source_configuration: Types::WalletPasswordSourceConfiguration
       SENSITIVE: []
     end
 

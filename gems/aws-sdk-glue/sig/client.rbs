@@ -208,6 +208,17 @@ module Aws
                                          ) -> _BatchGetDataQualityResultResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDataQualityResultResponseSuccess
 
+      interface _BatchGetDataQualityRulesetEvaluationRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDataQualityRulesetEvaluationRunResponse]
+        def runs: () -> ::Array[Types::DataQualityRulesetEvaluationRun]
+        def runs_not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#batch_get_data_quality_ruleset_evaluation_run-instance_method
+      def batch_get_data_quality_ruleset_evaluation_run: (
+                                                           run_ids: Array[::String]
+                                                         ) -> _BatchGetDataQualityRulesetEvaluationRunResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDataQualityRulesetEvaluationRunResponseSuccess
+
       interface _BatchGetDevEndpointsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDevEndpointsResponse]
         def dev_endpoints: () -> ::Array[Types::DevEndpoint]
@@ -1973,6 +1984,7 @@ module Aws
         def recommended_ruleset: () -> ::String
         def created_ruleset_name: () -> ::String
         def data_quality_security_configuration: () -> ::String
+        def additional_run_options: () -> Types::DataQualityRuleRecommendationRunAdditionalRunOptions
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_quality_rule_recommendation_run-instance_method
       def get_data_quality_rule_recommendation_run: (
@@ -3102,7 +3114,8 @@ module Aws
                                                           started_after: ::Time?
                                                         },
                                                         ?next_token: ::String,
-                                                        ?max_results: ::Integer
+                                                        ?max_results: ::Integer,
+                                                        ?tags: Hash[::String, ::String]
                                                       ) -> _ListDataQualityRuleRecommendationRunsResponseSuccess
                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataQualityRuleRecommendationRunsResponseSuccess
 
@@ -3953,7 +3966,10 @@ module Aws
                                                         ?timeout: ::Integer,
                                                         ?created_ruleset_name: ::String,
                                                         ?data_quality_security_configuration: ::String,
-                                                        ?client_token: ::String
+                                                        ?client_token: ::String,
+                                                        ?additional_run_options: {
+                                                          custom_log_group_prefix: ::String?
+                                                        }
                                                       ) -> _StartDataQualityRuleRecommendationRunResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataQualityRuleRecommendationRunResponseSuccess
 
@@ -3972,7 +3988,55 @@ module Aws
                                                          cloud_watch_metrics_enabled: bool?,
                                                          results_s3_prefix: ::String?,
                                                          composite_rule_evaluation_method: ("COLUMN" | "ROW")?,
-                                                         custom_log_group_prefix: ::String?
+                                                         custom_log_group_prefix: ::String?,
+                                                         row_level_results: {
+                                                           max_rows_to_write: ::Integer?,
+                                                           result_type: ("ALL" | "PASSED_ONLY" | "FAILED_ONLY")?,
+                                                           catalog_table_config: {
+                                                             database_name: ::String?,
+                                                             table_name: ::String?,
+                                                             s3_location: ::String?,
+                                                             catalog_id: ::String?
+                                                           }?
+                                                         }?,
+                                                         profiling_results: {
+                                                           write_profiling_results_enabled: bool?,
+                                                           catalog_table_config: {
+                                                             database_name: ::String?,
+                                                             table_name: ::String?,
+                                                             s3_location: ::String?,
+                                                             catalog_id: ::String?
+                                                           }?,
+                                                           distribution_results: {
+                                                             write_distribution_results_enabled: bool?,
+                                                             catalog_table_config: {
+                                                               database_name: ::String?,
+                                                               table_name: ::String?,
+                                                               s3_location: ::String?,
+                                                               catalog_id: ::String?
+                                                             }?
+                                                           }?
+                                                         }?,
+                                                         observation_scope: ("ALL" | "NONE")?,
+                                                         observation_mode: ("SCHEDULED" | "FIXED")?,
+                                                         data_quality_rule_results: {
+                                                           write_data_quality_rule_results_enabled: bool?,
+                                                           catalog_table_config: {
+                                                             database_name: ::String?,
+                                                             table_name: ::String?,
+                                                             s3_location: ::String?,
+                                                             catalog_id: ::String?
+                                                           }?
+                                                         }?,
+                                                         observation_results: {
+                                                           write_observation_results_enabled: bool?,
+                                                           catalog_table_config: {
+                                                             database_name: ::String?,
+                                                             table_name: ::String?,
+                                                             s3_location: ::String?,
+                                                             catalog_id: ::String?
+                                                           }?
+                                                         }?
                                                        },
                                                        ruleset_names: Array[::String],
                                                        ?additional_data_sources: Hash[::String, Params::data_source]
@@ -4195,6 +4259,22 @@ module Aws
                             tags_to_remove: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#update_asset-instance_method
+      def update_asset: (
+                          identifier: ::String,
+                          ?name: ::String,
+                          ?description: ::String,
+                          ?client_token: ::String
+                        ) -> _UpdateAssetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetResponseSuccess
 
       interface _UpdateBlueprintResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBlueprintResponse]

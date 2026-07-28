@@ -1094,6 +1094,12 @@ module Aws::Glue
     #   resp.results[0].analyzer_results[0].evaluation_message #=> String
     #   resp.results[0].analyzer_results[0].evaluated_metrics #=> Hash
     #   resp.results[0].analyzer_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.results[0].analyzer_results[0].evaluated_distributions #=> Hash
+    #   resp.results[0].analyzer_results[0].evaluated_distributions["NameString"].bin_edges #=> Array
+    #   resp.results[0].analyzer_results[0].evaluated_distributions["NameString"].bin_edges[0] #=> String
+    #   resp.results[0].analyzer_results[0].evaluated_distributions["NameString"].count #=> Array
+    #   resp.results[0].analyzer_results[0].evaluated_distributions["NameString"].count[0] #=> Integer
+    #   resp.results[0].analyzer_results[0].evaluated_distributions["NameString"].data_type #=> String
     #   resp.results[0].observations #=> Array
     #   resp.results[0].observations[0].description #=> String
     #   resp.results[0].observations[0].metric_based_observation.metric_name #=> String
@@ -1119,6 +1125,110 @@ module Aws::Glue
     # @param [Hash] params ({})
     def batch_get_data_quality_result(params = {}, options = {})
       req = build_request(:batch_get_data_quality_result, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of multiple evaluation runs in a single request.
+    #
+    # @option params [required, Array<String>] :run_ids
+    #   A list of unique run identifiers for the evaluation runs to retrieve.
+    #
+    # @return [Types::BatchGetDataQualityRulesetEvaluationRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetDataQualityRulesetEvaluationRunResponse#runs #runs} => Array&lt;Types::DataQualityRulesetEvaluationRun&gt;
+    #   * {Types::BatchGetDataQualityRulesetEvaluationRunResponse#runs_not_found #runs_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_data_quality_ruleset_evaluation_run({
+    #     run_ids: ["HashString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.runs #=> Array
+    #   resp.runs[0].run_id #=> String
+    #   resp.runs[0].data_source.glue_table.database_name #=> String
+    #   resp.runs[0].data_source.glue_table.table_name #=> String
+    #   resp.runs[0].data_source.glue_table.catalog_id #=> String
+    #   resp.runs[0].data_source.glue_table.connection_name #=> String
+    #   resp.runs[0].data_source.glue_table.additional_options #=> Hash
+    #   resp.runs[0].data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.runs[0].data_source.data_quality_glue_table.database_name #=> String
+    #   resp.runs[0].data_source.data_quality_glue_table.table_name #=> String
+    #   resp.runs[0].data_source.data_quality_glue_table.catalog_id #=> String
+    #   resp.runs[0].data_source.data_quality_glue_table.connection_name #=> String
+    #   resp.runs[0].data_source.data_quality_glue_table.additional_options #=> Hash
+    #   resp.runs[0].data_source.data_quality_glue_table.additional_options["NameString"] #=> String
+    #   resp.runs[0].data_source.data_quality_glue_table.pre_processing_query #=> String
+    #   resp.runs[0].role #=> String
+    #   resp.runs[0].number_of_workers #=> Integer
+    #   resp.runs[0].timeout #=> Integer
+    #   resp.runs[0].additional_run_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.runs[0].additional_run_options.results_s3_prefix #=> String
+    #   resp.runs[0].additional_run_options.composite_rule_evaluation_method #=> String, one of "COLUMN", "ROW"
+    #   resp.runs[0].additional_run_options.custom_log_group_prefix #=> String
+    #   resp.runs[0].additional_run_options.row_level_results.max_rows_to_write #=> Integer
+    #   resp.runs[0].additional_run_options.row_level_results.result_type #=> String, one of "ALL", "PASSED_ONLY", "FAILED_ONLY"
+    #   resp.runs[0].additional_run_options.row_level_results.catalog_table_config.database_name #=> String
+    #   resp.runs[0].additional_run_options.row_level_results.catalog_table_config.table_name #=> String
+    #   resp.runs[0].additional_run_options.row_level_results.catalog_table_config.s3_location #=> String
+    #   resp.runs[0].additional_run_options.row_level_results.catalog_table_config.catalog_id #=> String
+    #   resp.runs[0].additional_run_options.profiling_results.write_profiling_results_enabled #=> Boolean
+    #   resp.runs[0].additional_run_options.profiling_results.catalog_table_config.database_name #=> String
+    #   resp.runs[0].additional_run_options.profiling_results.catalog_table_config.table_name #=> String
+    #   resp.runs[0].additional_run_options.profiling_results.catalog_table_config.s3_location #=> String
+    #   resp.runs[0].additional_run_options.profiling_results.catalog_table_config.catalog_id #=> String
+    #   resp.runs[0].additional_run_options.profiling_results.distribution_results.write_distribution_results_enabled #=> Boolean
+    #   resp.runs[0].additional_run_options.profiling_results.distribution_results.catalog_table_config.database_name #=> String
+    #   resp.runs[0].additional_run_options.profiling_results.distribution_results.catalog_table_config.table_name #=> String
+    #   resp.runs[0].additional_run_options.profiling_results.distribution_results.catalog_table_config.s3_location #=> String
+    #   resp.runs[0].additional_run_options.profiling_results.distribution_results.catalog_table_config.catalog_id #=> String
+    #   resp.runs[0].additional_run_options.observation_scope #=> String, one of "ALL", "NONE"
+    #   resp.runs[0].additional_run_options.observation_mode #=> String, one of "SCHEDULED", "FIXED"
+    #   resp.runs[0].additional_run_options.data_quality_rule_results.write_data_quality_rule_results_enabled #=> Boolean
+    #   resp.runs[0].additional_run_options.data_quality_rule_results.catalog_table_config.database_name #=> String
+    #   resp.runs[0].additional_run_options.data_quality_rule_results.catalog_table_config.table_name #=> String
+    #   resp.runs[0].additional_run_options.data_quality_rule_results.catalog_table_config.s3_location #=> String
+    #   resp.runs[0].additional_run_options.data_quality_rule_results.catalog_table_config.catalog_id #=> String
+    #   resp.runs[0].additional_run_options.observation_results.write_observation_results_enabled #=> Boolean
+    #   resp.runs[0].additional_run_options.observation_results.catalog_table_config.database_name #=> String
+    #   resp.runs[0].additional_run_options.observation_results.catalog_table_config.table_name #=> String
+    #   resp.runs[0].additional_run_options.observation_results.catalog_table_config.s3_location #=> String
+    #   resp.runs[0].additional_run_options.observation_results.catalog_table_config.catalog_id #=> String
+    #   resp.runs[0].status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.runs[0].error_string #=> String
+    #   resp.runs[0].started_on #=> Time
+    #   resp.runs[0].last_modified_on #=> Time
+    #   resp.runs[0].completed_on #=> Time
+    #   resp.runs[0].execution_time #=> Integer
+    #   resp.runs[0].ruleset_names #=> Array
+    #   resp.runs[0].ruleset_names[0] #=> String
+    #   resp.runs[0].result_ids #=> Array
+    #   resp.runs[0].result_ids[0] #=> String
+    #   resp.runs[0].additional_data_sources #=> Hash
+    #   resp.runs[0].additional_data_sources["NameString"].glue_table.database_name #=> String
+    #   resp.runs[0].additional_data_sources["NameString"].glue_table.table_name #=> String
+    #   resp.runs[0].additional_data_sources["NameString"].glue_table.catalog_id #=> String
+    #   resp.runs[0].additional_data_sources["NameString"].glue_table.connection_name #=> String
+    #   resp.runs[0].additional_data_sources["NameString"].glue_table.additional_options #=> Hash
+    #   resp.runs[0].additional_data_sources["NameString"].glue_table.additional_options["NameString"] #=> String
+    #   resp.runs[0].additional_data_sources["NameString"].data_quality_glue_table.database_name #=> String
+    #   resp.runs[0].additional_data_sources["NameString"].data_quality_glue_table.table_name #=> String
+    #   resp.runs[0].additional_data_sources["NameString"].data_quality_glue_table.catalog_id #=> String
+    #   resp.runs[0].additional_data_sources["NameString"].data_quality_glue_table.connection_name #=> String
+    #   resp.runs[0].additional_data_sources["NameString"].data_quality_glue_table.additional_options #=> Hash
+    #   resp.runs[0].additional_data_sources["NameString"].data_quality_glue_table.additional_options["NameString"] #=> String
+    #   resp.runs[0].additional_data_sources["NameString"].data_quality_glue_table.pre_processing_query #=> String
+    #   resp.runs_not_found #=> Array
+    #   resp.runs_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityRulesetEvaluationRun AWS API Documentation
+    #
+    # @overload batch_get_data_quality_ruleset_evaluation_run(params = {})
+    # @param [Hash] params ({})
+    def batch_get_data_quality_ruleset_evaluation_run(params = {}, options = {})
+      req = build_request(:batch_get_data_quality_ruleset_evaluation_run, params)
       req.send_request(options)
     end
 
@@ -8486,6 +8596,12 @@ module Aws::Glue
     #   resp.analyzer_results[0].evaluation_message #=> String
     #   resp.analyzer_results[0].evaluated_metrics #=> Hash
     #   resp.analyzer_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.analyzer_results[0].evaluated_distributions #=> Hash
+    #   resp.analyzer_results[0].evaluated_distributions["NameString"].bin_edges #=> Array
+    #   resp.analyzer_results[0].evaluated_distributions["NameString"].bin_edges[0] #=> String
+    #   resp.analyzer_results[0].evaluated_distributions["NameString"].count #=> Array
+    #   resp.analyzer_results[0].evaluated_distributions["NameString"].count[0] #=> Integer
+    #   resp.analyzer_results[0].evaluated_distributions["NameString"].data_type #=> String
     #   resp.observations #=> Array
     #   resp.observations[0].description #=> String
     #   resp.observations[0].metric_based_observation.metric_name #=> String
@@ -8533,6 +8649,7 @@ module Aws::Glue
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#recommended_ruleset #recommended_ruleset} => String
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#created_ruleset_name #created_ruleset_name} => String
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#data_quality_security_configuration #data_quality_security_configuration} => String
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#additional_run_options #additional_run_options} => Types::DataQualityRuleRecommendationRunAdditionalRunOptions
     #
     # @example Request syntax with placeholder values
     #
@@ -8568,6 +8685,7 @@ module Aws::Glue
     #   resp.recommended_ruleset #=> String
     #   resp.created_ruleset_name #=> String
     #   resp.data_quality_security_configuration #=> String
+    #   resp.additional_run_options.custom_log_group_prefix #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRun AWS API Documentation
     #
@@ -8675,6 +8793,34 @@ module Aws::Glue
     #   resp.additional_run_options.results_s3_prefix #=> String
     #   resp.additional_run_options.composite_rule_evaluation_method #=> String, one of "COLUMN", "ROW"
     #   resp.additional_run_options.custom_log_group_prefix #=> String
+    #   resp.additional_run_options.row_level_results.max_rows_to_write #=> Integer
+    #   resp.additional_run_options.row_level_results.result_type #=> String, one of "ALL", "PASSED_ONLY", "FAILED_ONLY"
+    #   resp.additional_run_options.row_level_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.row_level_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.row_level_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.row_level_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.profiling_results.write_profiling_results_enabled #=> Boolean
+    #   resp.additional_run_options.profiling_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.profiling_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.profiling_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.profiling_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.write_distribution_results_enabled #=> Boolean
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.observation_scope #=> String, one of "ALL", "NONE"
+    #   resp.additional_run_options.observation_mode #=> String, one of "SCHEDULED", "FIXED"
+    #   resp.additional_run_options.data_quality_rule_results.write_data_quality_rule_results_enabled #=> Boolean
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.observation_results.write_observation_results_enabled #=> Boolean
+    #   resp.additional_run_options.observation_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.observation_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.observation_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.observation_results.catalog_table_config.catalog_id #=> String
     #   resp.status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.error_string #=> String
     #   resp.started_on #=> Time
@@ -13958,6 +14104,9 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pair tags to filter recommendation runs.
+    #
     # @return [Types::ListDataQualityRuleRecommendationRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDataQualityRuleRecommendationRunsResponse#runs #runs} => Array&lt;Types::DataQualityRuleRecommendationRunDescription&gt;
@@ -13995,6 +14144,9 @@ module Aws::Glue
     #     },
     #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -14016,6 +14168,7 @@ module Aws::Glue
     #   resp.runs[0].data_source.data_quality_glue_table.additional_options #=> Hash
     #   resp.runs[0].data_source.data_quality_glue_table.additional_options["NameString"] #=> String
     #   resp.runs[0].data_source.data_quality_glue_table.pre_processing_query #=> String
+    #   resp.runs[0].created_ruleset_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRuleRecommendationRuns AWS API Documentation
@@ -14275,6 +14428,11 @@ module Aws::Glue
     #   resp.statistics[0].run_identifier.job_run_id #=> String
     #   resp.statistics[0].statistic_name #=> String
     #   resp.statistics[0].double_value #=> Float
+    #   resp.statistics[0].distribution_value.bin_edges #=> Array
+    #   resp.statistics[0].distribution_value.bin_edges[0] #=> String
+    #   resp.statistics[0].distribution_value.count #=> Array
+    #   resp.statistics[0].distribution_value.count[0] #=> Integer
+    #   resp.statistics[0].distribution_value.data_type #=> String
     #   resp.statistics[0].evaluation_level #=> String, one of "Dataset", "Column", "Multicolumn"
     #   resp.statistics[0].columns_referenced #=> Array
     #   resp.statistics[0].columns_referenced[0] #=> String
@@ -15579,8 +15737,8 @@ module Aws::Glue
     #     iterable_form_name: "IterableFormName",
     #     item_identifier: "ItemIdentifier",
     #     attachment_name: "AttachmentName", # required
-    #     content: "MetadataFormContent", # required
-    #     form_type_id: "MetadataFormTypeIdentifier", # required
+    #     content: "FormContent", # required
+    #     form_type_id: "FormTypeId", # required
     #     client_token: "HashString",
     #   })
     #
@@ -17247,6 +17405,9 @@ module Aws::Glue
     #   as a UUID) to avoid creating or starting multiple instances of the
     #   same resource.
     #
+    # @option params [Types::DataQualityRuleRecommendationRunAdditionalRunOptions] :additional_run_options
+    #   Additional run options you can specify for a recommendation run.
+    #
     # @return [Types::StartDataQualityRuleRecommendationRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDataQualityRuleRecommendationRunResponse#run_id #run_id} => String
@@ -17281,6 +17442,9 @@ module Aws::Glue
     #     created_ruleset_name: "NameString",
     #     data_quality_security_configuration: "NameString",
     #     client_token: "HashString",
+    #     additional_run_options: {
+    #       custom_log_group_prefix: "GenericString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -17367,6 +17531,54 @@ module Aws::Glue
     #       results_s3_prefix: "UriString",
     #       composite_rule_evaluation_method: "COLUMN", # accepts COLUMN, ROW
     #       custom_log_group_prefix: "GenericString",
+    #       row_level_results: {
+    #         max_rows_to_write: 1,
+    #         result_type: "ALL", # accepts ALL, PASSED_ONLY, FAILED_ONLY
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #       },
+    #       profiling_results: {
+    #         write_profiling_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #         distribution_results: {
+    #           write_distribution_results_enabled: false,
+    #           catalog_table_config: {
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             s3_location: "UriString",
+    #             catalog_id: "NameString",
+    #           },
+    #         },
+    #       },
+    #       observation_scope: "ALL", # accepts ALL, NONE
+    #       observation_mode: "SCHEDULED", # accepts SCHEDULED, FIXED
+    #       data_quality_rule_results: {
+    #         write_data_quality_rule_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #       },
+    #       observation_results: {
+    #         write_observation_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #       },
     #     },
     #     ruleset_names: ["NameString"], # required
     #     additional_data_sources: {
@@ -18298,6 +18510,57 @@ module Aws::Glue
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the name and description of an existing asset in Glue Data
+    # Catalog. Only the fields that you provide are updated.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the asset to update.
+    #
+    # @option params [String] :name
+    #   The new name of the asset.
+    #
+    # @option params [String] :description
+    #   The new description of the asset.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAssetResponse#id #id} => String
+    #   * {Types::UpdateAssetResponse#name #name} => String
+    #   * {Types::UpdateAssetResponse#description #description} => String
+    #   * {Types::UpdateAssetResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_asset({
+    #     identifier: "AssetId", # required
+    #     name: "AssetName",
+    #     description: "AssetDescription",
+    #     client_token: "HashString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateAsset AWS API Documentation
+    #
+    # @overload update_asset(params = {})
+    # @param [Hash] params ({})
+    def update_asset(params = {}, options = {})
+      req = build_request(:update_asset, params)
       req.send_request(options)
     end
 
@@ -20579,7 +20842,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.263.0'
+      context[:gem_version] = '1.266.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -584,6 +584,24 @@ module Aws::MediaPackageV2
     #   Elemental MediaPackage includes in responses to the CDN. This setting
     #   is valid only when `InputType` is `CMAF`.
     #
+    # @option params [String] :output_locking_mode
+    #   The output locking mode for the channel. This setting is only valid
+    #   when `InputType` is `CMAF`. This value is immutable after channel
+    #   creation. If you don't specify a value, the default is
+    #   `EPOCH_LOCKED`.
+    #
+    #   The allowed values are:
+    #
+    #   * `EPOCH_LOCKED` - The channel uses epoch-locked behavior with
+    #     deterministic sequence numbering and fixed segment boundaries
+    #     aligned to epoch time. This mode supports cross-region
+    #     synchronization and failover.
+    #
+    #   * `NON_EPOCH_LOCKED` - The channel uses non-epoch-locked behavior with
+    #     duration-based segment combining and monotonically increasing
+    #     sequence numbers starting from 0. This mode does not support
+    #     cross-region synchronization or failover.
+    #
     # @option params [Hash<String,String>] :tags
     #   A comma-separated list of tag key:value pairs that you define. For
     #   example:
@@ -606,6 +624,7 @@ module Aws::MediaPackageV2
     #   * {Types::CreateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateChannelResponse#input_switch_configuration #input_switch_configuration} => Types::InputSwitchConfiguration
     #   * {Types::CreateChannelResponse#output_header_configuration #output_header_configuration} => Types::OutputHeaderConfiguration
+    #   * {Types::CreateChannelResponse#output_locking_mode #output_locking_mode} => String
     #
     #
     # @example Example: Creating a Channel
@@ -647,6 +666,39 @@ module Aws::MediaPackageV2
     #     }, 
     #   }
     #
+    # @example Example: Creating a CMAF Channel with non-epoch-locked output locking mode
+    #
+    #   resp = client.create_channel({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleCmafChannel", 
+    #     description: "Non-epoch-locked CMAF channel", 
+    #     input_type: "CMAF", 
+    #     output_locking_mode: "NON_EPOCH_LOCKED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleCmafChannel", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleCmafChannel", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Non-epoch-locked CMAF channel", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     ingest_endpoints: [
+    #       {
+    #         id: "1", 
+    #         url: "https://abcde-1.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel", 
+    #       }, 
+    #       {
+    #         id: "2", 
+    #         url: "https://abcde-2.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel", 
+    #       }, 
+    #     ], 
+    #     input_type: "CMAF", 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     output_locking_mode: "NON_EPOCH_LOCKED", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_channel({
@@ -662,6 +714,7 @@ module Aws::MediaPackageV2
     #     output_header_configuration: {
     #       publish_mqcs: false,
     #     },
+    #     output_locking_mode: "EPOCH_LOCKED", # accepts EPOCH_LOCKED, NON_EPOCH_LOCKED
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -685,6 +738,7 @@ module Aws::MediaPackageV2
     #   resp.input_switch_configuration.mqcs_input_switching #=> Boolean
     #   resp.input_switch_configuration.preferred_input #=> Integer
     #   resp.output_header_configuration.publish_mqcs #=> Boolean
+    #   resp.output_locking_mode #=> String, one of "EPOCH_LOCKED", "NON_EPOCH_LOCKED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateChannel AWS API Documentation
     #
@@ -1511,6 +1565,7 @@ module Aws::MediaPackageV2
     #         }, 
     #       }, 
     #       include_iframe_only_streams: true, 
+    #       output_timestamp_mode: "REBASED_TO_CHANNEL_START", 
     #       scte: {
     #         scte_filter: [
     #           "SPLICE_INSERT", 
@@ -1731,6 +1786,7 @@ module Aws::MediaPackageV2
     #         }, 
     #       }, 
     #       include_iframe_only_streams: true, 
+    #       output_timestamp_mode: "REBASED_TO_CHANNEL_START", 
     #       scte: {
     #         scte_filter: [
     #           "SPLICE_INSERT", 
@@ -1895,6 +1951,7 @@ module Aws::MediaPackageV2
     #           certificate_arn: "SpekeKeyProviderCertificateArnString",
     #         },
     #       },
+    #       output_timestamp_mode: "PASSTHROUGH", # accepts PASSTHROUGH, REBASED_TO_CHANNEL_START
     #     },
     #     client_token: "IdempotencyToken",
     #     description: "ResourceDescription",
@@ -2074,6 +2131,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.segment.output_timestamp_mode #=> String, one of "PASSTHROUGH", "REBASED_TO_CHANNEL_START"
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
@@ -2437,6 +2495,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetChannelResponse#input_switch_configuration #input_switch_configuration} => Types::InputSwitchConfiguration
     #   * {Types::GetChannelResponse#output_header_configuration #output_header_configuration} => Types::OutputHeaderConfiguration
+    #   * {Types::GetChannelResponse#output_locking_mode #output_locking_mode} => String
     #
     #
     # @example Example: Getting a Channel
@@ -2472,6 +2531,40 @@ module Aws::MediaPackageV2
     #     }, 
     #   }
     #
+    # @example Example: Getting a CMAF Channel with non-epoch-locked output locking mode
+    #
+    #   resp = client.get_channel({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleCmafChannel", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleCmafChannel", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleCmafChannel", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Non-epoch-locked CMAF channel", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     ingest_endpoints: [
+    #       {
+    #         id: "1", 
+    #         url: "https://abcde-1.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel", 
+    #       }, 
+    #       {
+    #         id: "2", 
+    #         url: "https://abcde-2.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel", 
+    #       }, 
+    #     ], 
+    #     input_type: "CMAF", 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     output_locking_mode: "NON_EPOCH_LOCKED", 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_channel({
@@ -2498,6 +2591,7 @@ module Aws::MediaPackageV2
     #   resp.input_switch_configuration.mqcs_input_switching #=> Boolean
     #   resp.input_switch_configuration.preferred_input #=> Integer
     #   resp.output_header_configuration.publish_mqcs #=> Boolean
+    #   resp.output_locking_mode #=> String, one of "EPOCH_LOCKED", "NON_EPOCH_LOCKED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetChannel AWS API Documentation
     #
@@ -3037,6 +3131,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.segment.output_timestamp_mode #=> String, one of "PASSTHROUGH", "REBASED_TO_CHANNEL_START"
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.reset_at #=> Time
@@ -3355,6 +3450,7 @@ module Aws::MediaPackageV2
     #   resp.items[0].modified_at #=> Time
     #   resp.items[0].description #=> String
     #   resp.items[0].input_type #=> String, one of "HLS", "CMAF"
+    #   resp.items[0].output_locking_mode #=> String, one of "EPOCH_LOCKED", "NON_EPOCH_LOCKED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListChannels AWS API Documentation
@@ -4408,6 +4504,7 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::UpdateChannelResponse#input_switch_configuration #input_switch_configuration} => Types::InputSwitchConfiguration
     #   * {Types::UpdateChannelResponse#output_header_configuration #output_header_configuration} => Types::OutputHeaderConfiguration
+    #   * {Types::UpdateChannelResponse#output_locking_mode #output_locking_mode} => String
     #
     #
     # @example Example: Updating a Channel
@@ -4438,6 +4535,41 @@ module Aws::MediaPackageV2
     #     ], 
     #     input_type: "HLS", 
     #     modified_at: Time.parse("2022-10-18T10:36:00.00Z"), 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
+    #
+    # @example Example: Updating a CMAF Channel with non-epoch-locked output locking mode
+    #
+    #   resp = client.update_channel({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleCmafChannel", 
+    #     description: "Updated non-epoch-locked CMAF channel", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleCmafChannel", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleCmafChannel", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Updated non-epoch-locked CMAF channel", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     ingest_endpoints: [
+    #       {
+    #         id: "1", 
+    #         url: "https://abcde-1.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel", 
+    #       }, 
+    #       {
+    #         id: "2", 
+    #         url: "https://abcde-2.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel", 
+    #       }, 
+    #     ], 
+    #     input_type: "CMAF", 
+    #     modified_at: Time.parse("2022-10-18T10:36:00.00Z"), 
+    #     output_locking_mode: "NON_EPOCH_LOCKED", 
     #     tags: {
     #       "key1" => "value1", 
     #       "key2" => "value2", 
@@ -4478,6 +4610,7 @@ module Aws::MediaPackageV2
     #   resp.input_switch_configuration.mqcs_input_switching #=> Boolean
     #   resp.input_switch_configuration.preferred_input #=> Integer
     #   resp.output_header_configuration.publish_mqcs #=> Boolean
+    #   resp.output_locking_mode #=> String, one of "EPOCH_LOCKED", "NON_EPOCH_LOCKED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateChannel AWS API Documentation
     #
@@ -5020,6 +5153,7 @@ module Aws::MediaPackageV2
     #           certificate_arn: "SpekeKeyProviderCertificateArnString",
     #         },
     #       },
+    #       output_timestamp_mode: "PASSTHROUGH", # accepts PASSTHROUGH, REBASED_TO_CHANNEL_START
     #     },
     #     description: "ResourceDescription",
     #     startover_window_seconds: 1,
@@ -5196,6 +5330,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.segment.output_timestamp_mode #=> String, one of "PASSTHROUGH", "REBASED_TO_CHANNEL_START"
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
@@ -5325,7 +5460,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

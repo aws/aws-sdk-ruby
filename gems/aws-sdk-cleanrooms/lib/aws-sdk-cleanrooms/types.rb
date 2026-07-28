@@ -407,6 +407,16 @@ module Aws::CleanRooms
     #   The differential privacy configuration.
     #   @return [Types::DifferentialPrivacyConfiguration]
     #
+    # @!attribute [rw] allowed_result_receivers
+    #   The list of Amazon Web Services account IDs that are allowed to
+    #   receive results from queries run on the configured table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_additional_analyses
+    #   The list of allowed additional analyses for the custom analysis
+    #   rule.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisRuleCustom AWS API Documentation
     #
     class AnalysisRuleCustom < Struct.new(
@@ -414,7 +424,9 @@ module Aws::CleanRooms
       :allowed_analysis_providers,
       :additional_analyses,
       :disallowed_output_columns,
-      :differential_privacy)
+      :differential_privacy,
+      :allowed_result_receivers,
+      :allowed_additional_analyses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1273,6 +1285,42 @@ module Aws::CleanRooms
       class Member < ChangeSpecification; end
       class Collaboration < ChangeSpecification; end
       class Unknown < ChangeSpecification; end
+    end
+
+    # Contains information about a child resource of a given resource in a
+    # collaboration.
+    #
+    # @!attribute [rw] resource_id
+    #   The unique identifier of the child resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the child resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the child resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The Amazon Web Services account ID of the member who owns the child
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_status
+    #   The current status of the child resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ChildResource AWS API Documentation
+    #
+    class ChildResource < Struct.new(
+      :resource_id,
+      :resource_type,
+      :resource_name,
+      :owner_account_id,
+      :resource_status)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The multi-party data share environment. The collaboration contains
@@ -2268,6 +2316,46 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Contains column lineage information that traces a disallowed output
+    # column back to its source in a base table.
+    #
+    # @!attribute [rw] column
+    #   The name of the column in the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_column
+    #   The name of the column in the source table.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_name
+    #   The name of the source table.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_id
+    #   The unique identifier of the source table.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The type of the source table.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account_id
+    #   The Amazon Web Services account ID of the owner of the source table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ColumnLineageEntry AWS API Documentation
+    #
+    class ColumnLineageEntry < Struct.new(
+      :column,
+      :source_column,
+      :source_name,
+      :source_id,
+      :source_type,
+      :source_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of the compute resources for an analysis with the
     # Spark analytics engine.
     #
@@ -2703,6 +2791,11 @@ module Aws::CleanRooms
     #   The time the configured table association was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] child_resources
+    #   The child resources that depend on this configured table
+    #   association.
+    #   @return [Array<Types::ChildResource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAssociation AWS API Documentation
     #
     class ConfiguredTableAssociation < Struct.new(
@@ -2717,7 +2810,8 @@ module Aws::CleanRooms
       :description,
       :analysis_rule_types,
       :create_time,
-      :update_time)
+      :update_time,
+      :child_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2903,6 +2997,21 @@ module Aws::CleanRooms
       class Aggregation < ConfiguredTableAssociationAnalysisRulePolicyV1; end
       class Custom < ConfiguredTableAssociationAnalysisRulePolicyV1; end
       class Unknown < ConfiguredTableAssociationAnalysisRulePolicyV1; end
+    end
+
+    # Contains the schema type properties for a configured table
+    # association.
+    #
+    # @!attribute [rw] configured_table_association_id
+    #   The unique identifier of the configured table association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAssociationSchemaTypeProperties AWS API Documentation
+    #
+    class ConfiguredTableAssociationSchemaTypeProperties < Struct.new(
+      :configured_table_association_id)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The configured table association summary for the objects listed by the
@@ -3870,6 +3979,110 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] intermediate_table_identifier
+    #   The unique identifier of the intermediate table for which to create
+    #   the analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The type of analysis rule to create. Currently, only `CUSTOM` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_policy
+    #   The analysis rule policy to apply to the intermediate table.
+    #   @return [Types::IntermediateTableAnalysisRulePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateIntermediateTableAnalysisRuleInput AWS API Documentation
+    #
+    class CreateIntermediateTableAnalysisRuleInput < Struct.new(
+      :membership_identifier,
+      :intermediate_table_identifier,
+      :analysis_rule_type,
+      :analysis_rule_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_rule
+    #   The analysis rule that was created for the intermediate table.
+    #   @return [Types::IntermediateTableAnalysisRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateIntermediateTableAnalysisRuleOutput AWS API Documentation
+    #
+    class CreateIntermediateTableAnalysisRuleOutput < Struct.new(
+      :analysis_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership where the intermediate table
+    #   is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name for the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] population_analysis_configuration
+    #   The configuration that defines the analysis used to populate the
+    #   intermediate table. This configuration contains the SQL query or
+    #   analysis template reference.
+    #   @return [Types::PopulationAnalysisConfiguration]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer-managed KMS key used
+    #   to encrypt the intermediate table data.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_in_days
+    #   The number of days to retain populated data versions. Minimum value
+    #   of 1, maximum value of 365.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateIntermediateTableInput AWS API Documentation
+    #
+    class CreateIntermediateTableInput < Struct.new(
+      :membership_identifier,
+      :name,
+      :description,
+      :population_analysis_configuration,
+      :kms_key_arn,
+      :retention_in_days,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] intermediate_table
+    #   The intermediate table that was created.
+    #   @return [Types::IntermediateTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateIntermediateTableOutput AWS API Documentation
+    #
+    class CreateIntermediateTableOutput < Struct.new(
+      :intermediate_table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] collaboration_identifier
     #   The unique ID for the associated collaboration.
     #   @return [String]
@@ -4253,6 +4466,57 @@ module Aws::CleanRooms
     #
     class DeleteIdNamespaceAssociationOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] intermediate_table_identifier
+    #   The unique identifier of the intermediate table from which to delete
+    #   the analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The type of analysis rule to delete. Currently, only `CUSTOM` is
+    #   supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteIntermediateTableAnalysisRuleInput AWS API Documentation
+    #
+    class DeleteIntermediateTableAnalysisRuleInput < Struct.new(
+      :membership_identifier,
+      :intermediate_table_identifier,
+      :analysis_rule_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteIntermediateTableAnalysisRuleOutput AWS API Documentation
+    #
+    class DeleteIntermediateTableAnalysisRuleOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] intermediate_table_identifier
+    #   The unique identifier of the intermediate table to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteIntermediateTableInput AWS API Documentation
+    #
+    class DeleteIntermediateTableInput < Struct.new(
+      :membership_identifier,
+      :intermediate_table_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteIntermediateTableOutput AWS API Documentation
+    #
+    class DeleteIntermediateTableOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] collaboration_identifier
     #   The unique identifier for the associated collaboration.
     #   @return [String]
@@ -4585,6 +4849,34 @@ module Aws::CleanRooms
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the
+    #   intermediate table to disallow.
+    #   @return [String]
+    #
+    # @!attribute [rw] intermediate_table_name
+    #   The name of the intermediate table to disallow.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_descendants
+    #   Specifies whether to cascade the disallow action to descendant
+    #   intermediate tables. Default is `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DisallowIntermediateTableInput AWS API Documentation
+    #
+    class DisallowIntermediateTableInput < Struct.new(
+      :membership_identifier,
+      :intermediate_table_name,
+      :include_descendants)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DisallowIntermediateTableOutput AWS API Documentation
+    #
+    class DisallowIntermediateTableOutput < Aws::EmptyStructure; end
 
     # A structure that defines the level of detail included in error
     # messages returned by PySpark jobs. This configuration allows you to
@@ -5034,6 +5326,73 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] intermediate_table_identifier
+    #   The unique identifier of the intermediate table for which to
+    #   retrieve the analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The type of analysis rule to retrieve. Currently, only `CUSTOM` is
+    #   supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetIntermediateTableAnalysisRuleInput AWS API Documentation
+    #
+    class GetIntermediateTableAnalysisRuleInput < Struct.new(
+      :membership_identifier,
+      :intermediate_table_identifier,
+      :analysis_rule_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_rule
+    #   The analysis rule for the intermediate table.
+    #   @return [Types::IntermediateTableAnalysisRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetIntermediateTableAnalysisRuleOutput AWS API Documentation
+    #
+    class GetIntermediateTableAnalysisRuleOutput < Struct.new(
+      :analysis_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] intermediate_table_identifier
+    #   The unique identifier of the intermediate table to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetIntermediateTableInput AWS API Documentation
+    #
+    class GetIntermediateTableInput < Struct.new(
+      :intermediate_table_identifier,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] intermediate_table
+    #   The intermediate table retrieved.
+    #   @return [Types::IntermediateTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetIntermediateTableOutput AWS API Documentation
+    #
+    class GetIntermediateTableOutput < Struct.new(
+      :intermediate_table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
     #   The identifier for a membership resource.
     #   @return [String]
     #
@@ -5330,6 +5689,10 @@ module Aws::CleanRooms
     #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
     #   @return [String]
     #
+    # @!attribute [rw] child_resources
+    #   The child resources that depend on this ID mapping table.
+    #   @return [Array<Types::ChildResource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdMappingTable AWS API Documentation
     #
     class IdMappingTable < Struct.new(
@@ -5345,7 +5708,8 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       :input_reference_properties,
-      :kms_key_arn)
+      :kms_key_arn,
+      :child_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5415,10 +5779,15 @@ module Aws::CleanRooms
     #   mapping table.
     #   @return [Array<Types::IdMappingTableInputSource>]
     #
+    # @!attribute [rw] id_mapping_table_id
+    #   The unique identifier of the ID mapping table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdMappingTableSchemaTypeProperties AWS API Documentation
     #
     class IdMappingTableSchemaTypeProperties < Struct.new(
-      :id_mapping_table_input_source)
+      :id_mapping_table_input_source,
+      :id_mapping_table_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5707,6 +6076,796 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Contains the inherited additional analyses constraint and its sources
+    # from parent tables.
+    #
+    # @!attribute [rw] value
+    #   The effective additional analyses setting inherited from parent
+    #   tables.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The list of parent tables that contribute to this inherited
+    #   constraint.
+    #   @return [Array<Types::InheritedAdditionalAnalysesSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/InheritedAdditionalAnalyses AWS API Documentation
+    #
+    class InheritedAdditionalAnalyses < Struct.new(
+      :value,
+      :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a parent table that contributes an
+    # additional analyses constraint.
+    #
+    # @!attribute [rw] name
+    #   The name of the parent table.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the parent table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the parent table.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The additional analyses setting defined on the parent table.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account_id
+    #   The Amazon Web Services account ID of the member who owns the parent
+    #   table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/InheritedAdditionalAnalysesSource AWS API Documentation
+    #
+    class InheritedAdditionalAnalysesSource < Struct.new(
+      :name,
+      :id,
+      :type,
+      :value,
+      :source_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the inherited allowed additional analyses constraint and its
+    # sources from parent tables.
+    #
+    # @!attribute [rw] value
+    #   The effective list of allowed additional analyses inherited from
+    #   parent tables.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sources
+    #   The list of parent tables that contribute to this inherited
+    #   constraint.
+    #   @return [Array<Types::InheritedAllowedAdditionalAnalysesSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/InheritedAllowedAdditionalAnalyses AWS API Documentation
+    #
+    class InheritedAllowedAdditionalAnalyses < Struct.new(
+      :value,
+      :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a parent table that contributes an allowed
+    # additional analyses constraint.
+    #
+    # @!attribute [rw] name
+    #   The name of the parent table.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the parent table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the parent table.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The allowed additional analyses defined on the parent table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_account_id
+    #   The Amazon Web Services account ID of the member who owns the parent
+    #   table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/InheritedAllowedAdditionalAnalysesSource AWS API Documentation
+    #
+    class InheritedAllowedAdditionalAnalysesSource < Struct.new(
+      :name,
+      :id,
+      :type,
+      :value,
+      :source_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the inherited allowed result receivers constraint and its
+    # sources from parent tables.
+    #
+    # @!attribute [rw] value
+    #   The effective list of Amazon Web Services account IDs allowed to
+    #   receive results, inherited from parent tables.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sources
+    #   The list of parent tables that contribute to this inherited
+    #   constraint.
+    #   @return [Array<Types::InheritedAllowedResultReceiversSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/InheritedAllowedResultReceivers AWS API Documentation
+    #
+    class InheritedAllowedResultReceivers < Struct.new(
+      :value,
+      :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a parent table that contributes an allowed
+    # result receivers constraint.
+    #
+    # @!attribute [rw] name
+    #   The name of the parent table.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the parent table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the parent table.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The allowed result receiver account IDs defined on the parent table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_account_id
+    #   The Amazon Web Services account ID of the member who owns the parent
+    #   table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/InheritedAllowedResultReceiversSource AWS API Documentation
+    #
+    class InheritedAllowedResultReceiversSource < Struct.new(
+      :name,
+      :id,
+      :type,
+      :value,
+      :source_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the inherited disallowed output columns constraint and the
+    # column lineage tracing each column to its source.
+    #
+    # @!attribute [rw] value
+    #   The list of column names that are disallowed from appearing in query
+    #   output, inherited from parent tables.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] column_lineage
+    #   The lineage information that traces each disallowed output column
+    #   back to its source in a parent table.
+    #   @return [Array<Types::ColumnLineageEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/InheritedDisallowedOutputColumns AWS API Documentation
+    #
+    class InheritedDisallowedOutputColumns < Struct.new(
+      :value,
+      :column_lineage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details of an intermediate table in Clean Rooms. An
+    # intermediate table stores a query definition and its materialized
+    # results within a collaboration.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The Amazon Resource Name (ARN) of the collaboration that contains
+    #   the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] child_resources
+    #   The child resources that depend on this intermediate table.
+    #   @return [Array<Types::ChildResource>]
+    #
+    # @!attribute [rw] create_time
+    #   The time the intermediate table was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time the intermediate table was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   intermediate table data.
+    #   @return [String]
+    #
+    # @!attribute [rw] population_analysis_configuration
+    #   The analysis configuration that defines the query used to populate
+    #   the intermediate table.
+    #   @return [Types::PopulationAnalysisConfiguration]
+    #
+    # @!attribute [rw] retention_in_days
+    #   The number of days that populated data is retained before expiring.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] table_dependencies
+    #   The list of base tables that this intermediate table depends on.
+    #   @return [Array<Types::IntermediateTableDependency>]
+    #
+    # @!attribute [rw] intermediate_table_version
+    #   The details of the currently active version of the intermediate
+    #   table.
+    #   @return [Types::IntermediateTableActiveVersion]
+    #
+    # @!attribute [rw] analysis_rule_types
+    #   The types of analysis rules associated with the intermediate table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schema
+    #   The schema of the intermediate table, containing column definitions.
+    #   Available after the table has been successfully populated.
+    #   @return [Types::IntermediateTableSchema]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTable AWS API Documentation
+    #
+    class IntermediateTable < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :description,
+      :membership_arn,
+      :membership_id,
+      :collaboration_arn,
+      :collaboration_id,
+      :child_resources,
+      :create_time,
+      :update_time,
+      :status,
+      :status_reason,
+      :kms_key_arn,
+      :population_analysis_configuration,
+      :retention_in_days,
+      :table_dependencies,
+      :intermediate_table_version,
+      :analysis_rule_types,
+      :schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details of the currently active version of an
+    # intermediate table.
+    #
+    # @!attribute [rw] version_id
+    #   The unique identifier of the active version.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The identifier of the protected query that created this version.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_type
+    #   The type of analysis that created this version.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt this
+    #   version's data.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The runtime parameters that were used when populating this version.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] inherited_constraints
+    #   The privacy constraints inherited from parent tables at the time
+    #   this version was populated.
+    #   @return [Types::IntermediateTableInheritedConstraints]
+    #
+    # @!attribute [rw] expiration_time
+    #   The time when this version expires based on the retention period.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableActiveVersion AWS API Documentation
+    #
+    class IntermediateTableActiveVersion < Struct.new(
+      :version_id,
+      :analysis_id,
+      :analysis_type,
+      :kms_key_arn,
+      :parameters,
+      :inherited_constraints,
+      :expiration_time)
+      SENSITIVE = [:parameters]
+      include Aws::Structure
+    end
+
+    # Contains the details of an analysis rule for an intermediate table.
+    #
+    # @!attribute [rw] intermediate_table_identifier
+    #   The unique identifier of the intermediate table associated with this
+    #   analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] intermediate_table_arn
+    #   The Amazon Resource Name (ARN) of the intermediate table associated
+    #   with this analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_policy
+    #   The policy of the analysis rule.
+    #   @return [Types::IntermediateTableAnalysisRulePolicy]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The type of the analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time the analysis rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time the analysis rule was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableAnalysisRule AWS API Documentation
+    #
+    class IntermediateTableAnalysisRule < Struct.new(
+      :intermediate_table_identifier,
+      :intermediate_table_arn,
+      :analysis_rule_policy,
+      :analysis_rule_type,
+      :create_time,
+      :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the custom analysis rule configuration for an intermediate
+    # table.
+    #
+    # @!attribute [rw] allowed_analyses
+    #   The list of allowed analyses that can be performed on the
+    #   intermediate table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_analyses
+    #   The setting that controls whether additional analyses are allowed on
+    #   the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_additional_analyses
+    #   The list of allowed additional analyses for the intermediate table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_analysis_providers
+    #   The list of Amazon Web Services account IDs for the allowed analysis
+    #   providers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_result_receivers
+    #   The list of Amazon Web Services account IDs that are allowed to
+    #   receive results from queries run on the intermediate table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] differential_privacy
+    #   Specifies the unique identifier for your users.
+    #   @return [Types::DifferentialPrivacyConfiguration]
+    #
+    # @!attribute [rw] disallowed_output_columns
+    #   The list of columns that are not allowed in the query output.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableAnalysisRuleCustom AWS API Documentation
+    #
+    class IntermediateTableAnalysisRuleCustom < Struct.new(
+      :allowed_analyses,
+      :additional_analyses,
+      :allowed_additional_analyses,
+      :allowed_analysis_providers,
+      :allowed_result_receivers,
+      :differential_privacy,
+      :disallowed_output_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the policy for an intermediate table analysis rule.
+    #
+    # @note IntermediateTableAnalysisRulePolicy is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note IntermediateTableAnalysisRulePolicy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IntermediateTableAnalysisRulePolicy corresponding to the set member.
+    #
+    # @!attribute [rw] v1
+    #   The version 1 policy for the analysis rule.
+    #   @return [Types::IntermediateTableAnalysisRulePolicyV1]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableAnalysisRulePolicy AWS API Documentation
+    #
+    class IntermediateTableAnalysisRulePolicy < Struct.new(
+      :v1,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class V1 < IntermediateTableAnalysisRulePolicy; end
+      class Unknown < IntermediateTableAnalysisRulePolicy; end
+    end
+
+    # Contains the version 1 policy for an intermediate table analysis rule.
+    #
+    # @note IntermediateTableAnalysisRulePolicyV1 is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note IntermediateTableAnalysisRulePolicyV1 is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IntermediateTableAnalysisRulePolicyV1 corresponding to the set member.
+    #
+    # @!attribute [rw] custom
+    #   The custom analysis rule policy.
+    #   @return [Types::IntermediateTableAnalysisRuleCustom]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableAnalysisRulePolicyV1 AWS API Documentation
+    #
+    class IntermediateTableAnalysisRulePolicyV1 < Struct.new(
+      :custom,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Custom < IntermediateTableAnalysisRulePolicyV1; end
+      class Unknown < IntermediateTableAnalysisRulePolicyV1; end
+    end
+
+    # Contains the name and type of a column in an intermediate table.
+    #
+    # @!attribute [rw] name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableColumn AWS API Documentation
+    #
+    class IntermediateTableColumn < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The compute configuration for an intermediate table population
+    # operation.
+    #
+    # @note IntermediateTableComputeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] query_compute_configuration
+    #   The configuration of the compute resources for workers running an
+    #   analysis with the Clean Rooms SQL analytics engine.
+    #   @return [Types::WorkerComputeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableComputeConfiguration AWS API Documentation
+    #
+    class IntermediateTableComputeConfiguration < Struct.new(
+      :query_compute_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class QueryComputeConfiguration < IntermediateTableComputeConfiguration; end
+      class Unknown < IntermediateTableComputeConfiguration; end
+    end
+
+    # Contains information about a base table that an intermediate table
+    # depends on.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the dependency table.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the dependency table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the dependency table.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_type
+    #   Whether the dependency is direct or indirect. A direct dependency is
+    #   a table explicitly referenced in the stored query, while an indirect
+    #   dependency is referenced through another intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The Amazon Web Services account ID of the member who owns the
+    #   dependency table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableDependency AWS API Documentation
+    #
+    class IntermediateTableDependency < Struct.new(
+      :id,
+      :name,
+      :type,
+      :parent_type,
+      :creator_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the privacy constraints inherited from parent tables for an
+    # intermediate table version.
+    #
+    # @!attribute [rw] additional_analyses
+    #   The inherited additional analyses constraint.
+    #   @return [Types::InheritedAdditionalAnalyses]
+    #
+    # @!attribute [rw] allowed_additional_analyses
+    #   The inherited allowed additional analyses constraint.
+    #   @return [Types::InheritedAllowedAdditionalAnalyses]
+    #
+    # @!attribute [rw] allowed_result_receivers
+    #   The inherited allowed result receivers constraint.
+    #   @return [Types::InheritedAllowedResultReceivers]
+    #
+    # @!attribute [rw] disallowed_output_columns
+    #   The inherited disallowed output columns constraint.
+    #   @return [Types::InheritedDisallowedOutputColumns]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableInheritedConstraints AWS API Documentation
+    #
+    class IntermediateTableInheritedConstraints < Struct.new(
+      :additional_analyses,
+      :allowed_additional_analyses,
+      :allowed_result_receivers,
+      :disallowed_output_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the output configuration of an intermediate table when a
+    # protected query populates it.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the intermediate table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableOutputConfiguration AWS API Documentation
+    #
+    class IntermediateTableOutputConfiguration < Struct.new(
+      :id,
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the schema definition of an intermediate table.
+    #
+    # @!attribute [rw] columns
+    #   The list of columns in the intermediate table schema.
+    #   @return [Array<Types::Column>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableSchema AWS API Documentation
+    #
+    class IntermediateTableSchema < Struct.new(
+      :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the schema type properties for an intermediate table.
+    #
+    # @!attribute [rw] intermediate_table_id
+    #   The unique identifier of the intermediate table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableSchemaTypeProperties AWS API Documentation
+    #
+    class IntermediateTableSchemaTypeProperties < Struct.new(
+      :intermediate_table_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an intermediate table.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The Amazon Resource Name (ARN) of the collaboration that contains
+    #   the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time the intermediate table was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time the intermediate table was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_in_days
+    #   The number of days that populated data is retained before expiring.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] analysis_rule_types
+    #   The types of analysis rules associated with the intermediate table.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableSummary AWS API Documentation
+    #
+    class IntermediateTableSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :description,
+      :membership_arn,
+      :membership_id,
+      :collaboration_arn,
+      :collaboration_id,
+      :create_time,
+      :update_time,
+      :status,
+      :retention_in_days,
+      :analysis_rule_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a version of an intermediate table.
+    #
+    # @!attribute [rw] version_id
+    #   The unique identifier of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_id
+    #   The unique identifier of the intermediate table that this version
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time the version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] analysis_id
+    #   The identifier of the protected query that created this version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_type
+    #   The type of analysis that created this version.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt this
+    #   version's data.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The time when this version expires based on the retention period.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableVersionSummary AWS API Documentation
+    #
+    class IntermediateTableVersionSummary < Struct.new(
+      :version_id,
+      :table_id,
+      :create_time,
+      :analysis_id,
+      :status,
+      :analysis_type,
+      :kms_key_arn,
+      :expiration_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Unexpected error during processing of request.
     #
     # @!attribute [rw] message
@@ -5730,9 +6889,8 @@ module Aws::CleanRooms
     #   or has not configured the collaboration member to pay for query and
     #   job compute costs (`FALSE`).
     #
-    #   Exactly one member can be configured to pay for query and job
-    #   compute costs. An error is returned if the collaboration creator
-    #   sets a `TRUE` value for more than one member in the collaboration.
+    #   One or more members can be configured as payer candidates for query
+    #   and job compute costs.
     #
     #   An error is returned if the collaboration creator sets a `FALSE`
     #   value for the member who can run queries and jobs.
@@ -6308,6 +7466,98 @@ module Aws::CleanRooms
     class ListIdNamespaceAssociationsOutput < Struct.new(
       :next_token,
       :id_namespace_association_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] intermediate_table_identifier
+    #   The unique identifier of the intermediate table for which to list
+    #   versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListIntermediateTableVersionsInput AWS API Documentation
+    #
+    class ListIntermediateTableVersionsInput < Struct.new(
+      :membership_identifier,
+      :intermediate_table_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] intermediate_table_version_summaries
+    #   The list of intermediate table version summaries.
+    #   @return [Array<Types::IntermediateTableVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListIntermediateTableVersionsOutput AWS API Documentation
+    #
+    class ListIntermediateTableVersionsOutput < Struct.new(
+      :intermediate_table_version_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership for which to list
+    #   intermediate tables.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListIntermediateTablesInput AWS API Documentation
+    #
+    class ListIntermediateTablesInput < Struct.new(
+      :membership_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] intermediate_table_summaries
+    #   The list of intermediate table summaries.
+    #   @return [Array<Types::IntermediateTableSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListIntermediateTablesOutput AWS API Documentation
+    #
+    class ListIntermediateTablesOutput < Struct.new(
+      :intermediate_table_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7016,7 +8266,8 @@ module Aws::CleanRooms
     #   job compute costs (`TRUE`) or has not accepted to pay for query and
     #   job compute costs (`FALSE`).
     #
-    #   There is only one member who pays for queries and jobs.
+    #   There can be one or more members who are designated as payer
+    #   candidates for queries and jobs.
     #
     #   An error message is returned for the following reasons:
     #
@@ -7367,14 +8618,12 @@ module Aws::CleanRooms
     #   has not configured the collaboration member to pay for model
     #   inference costs (`FALSE`).
     #
-    #   Exactly one member can be configured to pay for model inference
-    #   costs. An error is returned if the collaboration creator sets a
-    #   `TRUE` value for more than one member in the collaboration.
+    #   One or more members can be configured as payer candidates for model
+    #   inference costs.
     #
     #   If the collaboration creator hasn't specified anyone as the member
     #   paying for model inference costs, then the member who can query is
-    #   the default payer. An error is returned if the collaboration creator
-    #   sets a `FALSE` value for the member who can query.
+    #   the default payer.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ModelInferencePaymentConfig AWS API Documentation
@@ -7394,14 +8643,12 @@ module Aws::CleanRooms
     #   not configured the collaboration member to pay for model training
     #   costs (`FALSE`).
     #
-    #   Exactly one member can be configured to pay for model training
-    #   costs. An error is returned if the collaboration creator sets a
-    #   `TRUE` value for more than one member in the collaboration.
+    #   One or more members can be configured as payer candidates for model
+    #   training costs.
     #
     #   If the collaboration creator hasn't specified anyone as the member
     #   paying for model training costs, then the member who can query is
-    #   the default payer. An error is returned if the collaboration creator
-    #   sets a `FALSE` value for the member who can query.
+    #   the default payer.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ModelTrainingPaymentConfig AWS API Documentation
@@ -7491,6 +8738,111 @@ module Aws::CleanRooms
     #
     class PopulateIdMappingTableOutput < Struct.new(
       :id_mapping_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] intermediate_table_identifier
+    #   The unique identifier of the intermediate table to populate.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The runtime parameter values that override the defaults in the
+    #   stored query.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration for the population query execution.
+    #   @return [Types::IntermediateTableComputeConfiguration]
+    #
+    # @!attribute [rw] analysis_payer_account_id
+    #   The account ID of the member that pays for the analysis compute
+    #   costs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulateIntermediateTableInput AWS API Documentation
+    #
+    class PopulateIntermediateTableInput < Struct.new(
+      :intermediate_table_identifier,
+      :membership_identifier,
+      :parameters,
+      :compute_configuration,
+      :analysis_payer_account_id)
+      SENSITIVE = [:parameters]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_id
+    #   The identifier for the protected query execution. Use this value
+    #   with `GetProtectedQuery` to track the population progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_type
+    #   The type of analysis performed to populate the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The unique identifier of the version created by this population
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulateIntermediateTableOutput AWS API Documentation
+    #
+    class PopulateIntermediateTableOutput < Struct.new(
+      :analysis_id,
+      :analysis_type,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration that defines the analysis used to populate
+    # an intermediate table.
+    #
+    # @note PopulationAnalysisConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PopulationAnalysisConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PopulationAnalysisConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] sql_parameters
+    #   The SQL parameters for the population analysis, including the query
+    #   string or analysis template ARN.
+    #   @return [Types::PopulationAnalysisSqlParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulationAnalysisConfiguration AWS API Documentation
+    #
+    class PopulationAnalysisConfiguration < Struct.new(
+      :sql_parameters,
+      :unknown)
+      SENSITIVE = [:sql_parameters]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SqlParameters < PopulationAnalysisConfiguration; end
+      class Unknown < PopulationAnalysisConfiguration; end
+    end
+
+    # Contains the SQL parameters used to populate an intermediate table.
+    #
+    # @!attribute [rw] query_string
+    #   The SQL query string used to populate the intermediate table.
+    #   Maximum length of 500,000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_template_arn
+    #   The Amazon Resource Name (ARN) of the analysis template to use for
+    #   populating the intermediate table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulationAnalysisSqlParameters AWS API Documentation
+    #
+    class PopulationAnalysisSqlParameters < Struct.new(
+      :query_string,
+      :analysis_template_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8643,12 +9995,18 @@ module Aws::CleanRooms
     #   output type.
     #   @return [Types::ProtectedQueryDistributeOutputConfiguration]
     #
+    # @!attribute [rw] intermediate_table
+    #   The intermediate table output configuration, present when the
+    #   protected query was triggered by a populate operation.
+    #   @return [Types::IntermediateTableOutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryOutputConfiguration AWS API Documentation
     #
     class ProtectedQueryOutputConfiguration < Struct.new(
       :s3,
       :member,
       :distribute,
+      :intermediate_table,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -8657,6 +10015,7 @@ module Aws::CleanRooms
       class S3 < ProtectedQueryOutputConfiguration; end
       class Member < ProtectedQueryOutputConfiguration; end
       class Distribute < ProtectedQueryOutputConfiguration; end
+      class IntermediateTable < ProtectedQueryOutputConfiguration; end
       class Unknown < ProtectedQueryOutputConfiguration; end
     end
 
@@ -8755,7 +10114,7 @@ module Aws::CleanRooms
       :query_string,
       :analysis_template_arn,
       :parameters)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -8825,6 +10184,11 @@ module Aws::CleanRooms
     #   The account ID of the member that pays for the query compute costs.
     #   @return [String]
     #
+    # @!attribute [rw] intermediate_table_configuration
+    #   The intermediate table configuration, present when the protected
+    #   query was triggered by a populate operation.
+    #   @return [Types::IntermediateTableOutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQuerySummary AWS API Documentation
     #
     class ProtectedQuerySummary < Struct.new(
@@ -8834,7 +10198,8 @@ module Aws::CleanRooms
       :create_time,
       :status,
       :receiver_configurations,
-      :query_compute_payer_account_id)
+      :query_compute_payer_account_id,
+      :intermediate_table_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8849,14 +10214,12 @@ module Aws::CleanRooms
     #   not configured the collaboration member to pay for query compute
     #   costs (`FALSE`).
     #
-    #   Exactly one member can be configured to pay for query compute costs.
-    #   An error is returned if the collaboration creator sets a `TRUE`
-    #   value for more than one member in the collaboration.
+    #   One or more members can be configured as payer candidates for query
+    #   compute costs.
     #
     #   If the collaboration creator hasn't specified anyone as the member
     #   paying for query compute costs, then the member who can query is the
-    #   default payer. An error is returned if the collaboration creator
-    #   sets a `FALSE` value for the member who can query.
+    #   default payer.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/QueryComputePaymentConfig AWS API Documentation
@@ -9233,16 +10596,28 @@ module Aws::CleanRooms
     #   The ID mapping table for the schema type properties.
     #   @return [Types::IdMappingTableSchemaTypeProperties]
     #
+    # @!attribute [rw] intermediate_table
+    #   The schema type properties for an intermediate table.
+    #   @return [Types::IntermediateTableSchemaTypeProperties]
+    #
+    # @!attribute [rw] configured_table_association
+    #   The schema type properties for a configured table association.
+    #   @return [Types::ConfiguredTableAssociationSchemaTypeProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SchemaTypeProperties AWS API Documentation
     #
     class SchemaTypeProperties < Struct.new(
       :id_mapping_table,
+      :intermediate_table,
+      :configured_table_association,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class IdMappingTable < SchemaTypeProperties; end
+      class IntermediateTable < SchemaTypeProperties; end
+      class ConfiguredTableAssociation < SchemaTypeProperties; end
       class Unknown < SchemaTypeProperties; end
     end
 
@@ -10056,6 +11431,95 @@ module Aws::CleanRooms
     #
     class UpdateIdNamespaceAssociationOutput < Struct.new(
       :id_namespace_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] intermediate_table_identifier
+    #   The unique identifier of the intermediate table for which to update
+    #   the analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The type of analysis rule to update. Currently, only `CUSTOM` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_policy
+    #   The updated analysis rule policy for the intermediate table.
+    #   @return [Types::IntermediateTableAnalysisRulePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateIntermediateTableAnalysisRuleInput AWS API Documentation
+    #
+    class UpdateIntermediateTableAnalysisRuleInput < Struct.new(
+      :membership_identifier,
+      :intermediate_table_identifier,
+      :analysis_rule_type,
+      :analysis_rule_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_rule
+    #   The updated analysis rule for the intermediate table.
+    #   @return [Types::IntermediateTableAnalysisRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateIntermediateTableAnalysisRuleOutput AWS API Documentation
+    #
+    class UpdateIntermediateTableAnalysisRuleOutput < Struct.new(
+      :analysis_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] intermediate_table_identifier
+    #   The unique identifier of the intermediate table to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the
+    #   intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the intermediate table.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer-managed KMS key to
+    #   use for encrypting future population data.
+    #   @return [String]
+    #
+    # @!attribute [rw] columns
+    #   The list of columns with updated type definitions. Only the type of
+    #   existing columns can be updated.
+    #   @return [Array<Types::IntermediateTableColumn>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateIntermediateTableInput AWS API Documentation
+    #
+    class UpdateIntermediateTableInput < Struct.new(
+      :intermediate_table_identifier,
+      :membership_identifier,
+      :description,
+      :kms_key_arn,
+      :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] intermediate_table
+    #   The updated intermediate table.
+    #   @return [Types::IntermediateTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateIntermediateTableOutput AWS API Documentation
+    #
+    class UpdateIntermediateTableOutput < Struct.new(
+      :intermediate_table)
       SENSITIVE = []
       include Aws::Structure
     end

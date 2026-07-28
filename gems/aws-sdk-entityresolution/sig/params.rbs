@@ -100,6 +100,7 @@ module Aws
       resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER"),
       rule_based_properties: Params::rule_based_properties?,
       rule_condition_properties: Params::rule_condition_properties?,
+      enable_real_time_matching: bool?,
       provider_properties: Params::provider_properties?
     }
 

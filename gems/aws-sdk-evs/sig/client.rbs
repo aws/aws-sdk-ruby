@@ -121,14 +121,8 @@ module Aws
                                 },
                                 vpc_id: ::String,
                                 service_access_subnet_id: ::String,
-                                vcf_version: ("VCF-5.2.1" | "VCF-5.2.2"),
+                                vcf_version: ("VCF-5.2.1" | "VCF-5.2.2" | "SELF_DEPLOYED"),
                                 terms_accepted: bool,
-                                license_info: Array[
-                                  {
-                                    solution_key: ::String,
-                                    vsan_key: ::String
-                                  }
-                                ],
                                 initial_vlans: {
                                   vmk_management: {
                                     cidr: ::String
@@ -163,7 +157,16 @@ module Aws
                                   is_hcx_public: bool?,
                                   hcx_network_acl_id: ::String?
                                 },
-                                hosts: Array[
+                                ?connectivity_info: {
+                                  private_route_server_peerings: Array[::String]
+                                },
+                                ?license_info: Array[
+                                  {
+                                    solution_key: ::String,
+                                    vsan_key: ::String
+                                  }
+                                ],
+                                ?hosts: Array[
                                   {
                                     host_name: ::String,
                                     key_name: ::String,
@@ -172,10 +175,7 @@ module Aws
                                     dedicated_host_id: ::String?
                                   }
                                 ],
-                                connectivity_info: {
-                                  private_route_server_peerings: Array[::String]
-                                },
-                                vcf_hostnames: {
+                                ?vcf_hostnames: {
                                   v_center: ::String,
                                   nsx: ::String,
                                   nsx_manager_1: ::String,
@@ -186,7 +186,7 @@ module Aws
                                   sddc_manager: ::String,
                                   cloud_builder: ::String
                                 },
-                                site_id: ::String
+                                ?site_id: ::String
                               ) -> _CreateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
 
@@ -198,7 +198,7 @@ module Aws
       def create_environment_connector: (
                                           ?client_token: ::String,
                                           environment_id: ::String,
-                                          type: ("VCENTER"),
+                                          type: ("OPERATIONS_MANAGER" | "SDDC_MANAGER" | "VCENTER"),
                                           appliance_fqdn: ::String,
                                           secret_identifier: ::String
                                         ) -> _CreateEnvironmentConnectorResponseSuccess

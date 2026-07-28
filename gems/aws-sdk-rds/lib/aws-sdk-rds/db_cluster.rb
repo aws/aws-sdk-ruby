@@ -1054,6 +1054,12 @@ module Aws::RDS
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     with_express_configuration: false,
+    #     associated_roles: [
+    #       {
+    #         role_arn: "IAMRoleArn", # required
+    #         feature_name: "String",
+    #       },
+    #     ],
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1871,7 +1877,7 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     # @option options [String] :engine_lifecycle_support
-    #   The life cycle type for this DB cluster.
+    #   The lifecycle type for this DB cluster.
     #
     #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
     #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
@@ -1935,6 +1941,14 @@ module Aws::RDS
     #   of this API.
     #
     #   Valid for Cluster Type: Aurora DB clusters
+    # @option options [Array<Types::DBClusterAssociatedRole>] :associated_roles
+    #   A list of Amazon Web Services Identity and Access Management (IAM)
+    #   roles to associate with the DB cluster. Each role grants the DB
+    #   cluster permission to access other Amazon Web Services on your behalf.
+    #   For each role, specify a role ARN and, optionally, the feature name
+    #   (such as `s3Import`, `s3Export`, or `Lambda`).
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2138,6 +2152,7 @@ module Aws::RDS
     #     enable_limitless_database: false,
     #     ca_certificate_identifier: "String",
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     engine_lifecycle_support: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -2822,6 +2837,30 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    # @option options [String] :engine_lifecycle_support
+    #   The lifecycle type for this DB cluster.
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support or to opt out. With RDS Extended Support, you can run
+    #   the selected major engine version on your DB cluster past the end of
+    #   standard support for that engine version. For more information, see
+    #   the following sections:
+    #
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora][1]
+    #     in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in the
+    #     *Amazon RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -2907,6 +2946,12 @@ module Aws::RDS
     #     ],
     #     enable_vpc_networking: false,
     #     enable_internet_access_gateway: false,
+    #     associated_roles: [
+    #       {
+    #         role_arn: "IAMRoleArn", # required
+    #         feature_name: "String",
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -3362,7 +3407,7 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
     # @option options [String] :engine_lifecycle_support
-    #   The life cycle type for this DB cluster.
+    #   The lifecycle type for this DB cluster.
     #
     #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
     #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
@@ -3427,6 +3472,15 @@ module Aws::RDS
     #   `EnableIAMDatabaseAuthentication`.
     #
     #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    # @option options [Array<Types::DBClusterAssociatedRole>] :associated_roles
+    #   A list of Amazon Web Services Identity and Access Management (IAM)
+    #   roles to associate with the DB cluster when it's restored to a point
+    #   in time. Each role grants the DB cluster permission to access other
+    #   Amazon Web Services on your behalf. For each role, specify a role ARN
+    #   and, optionally, the feature name (such as `s3Import`, `s3Export`, or
+    #   `Lambda`).
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

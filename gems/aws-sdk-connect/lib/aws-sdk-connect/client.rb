@@ -973,8 +973,9 @@ module Aws::Connect
     end
 
     # Associates a set of hours of operations with another hours of
-    # operation. Refer to Administrator Guide [ here ][1] for more
-    # information on inheriting overrides from parent hours of operation(s).
+    # operation. For more information about inheriting overrides from parent
+    # hours of operation, see [Hours of operation overrides][1] in the
+    # Administrator Guide.
     #
     #
     #
@@ -2049,7 +2050,7 @@ module Aws::Connect
     #   resp.files[0].file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED"
     #   resp.files[0].created_by.connect_user_arn #=> String
     #   resp.files[0].created_by.aws_identity_arn #=> String
-    #   resp.files[0].file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT"
+    #   resp.files[0].file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING"
     #   resp.files[0].associated_resource_arn #=> String
     #   resp.files[0].tags #=> Hash
     #   resp.files[0].tags["TagKey"] #=> String
@@ -2509,6 +2510,162 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_agent_status(params = {}, options = {})
       req = build_request(:create_agent_status, params)
+      req.send_request(options)
+    end
+
+    # Creates an attached file for a completed voice contact by copying a
+    # recording from a source S3 URI into Connect Customer managed storage.
+    # Use this API to attach voice recordings to contacts for downstream
+    # processing such as conversational analytics.
+    #
+    # The `AssociatedResourceArn` must be the ARN of a completed voice
+    # contact, `FileUseCaseType` must be set to `VOICE_RECORDING`, and
+    # `FileSourceUri` must be a valid S3 URI.
+    #
+    # <note markdown="1"> For example, you can call `CreateContact`, then `CreateAttachedFile`,
+    # then `StartContactConversationalAnalyticsJob` to create a contact,
+    # attach a recording, and run post-call analytics.
+    #
+    #  </note>
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :file_use_case_type
+    #   The use case for the file.
+    #
+    #   Only `VOICE_RECORDING` is supported.
+    #
+    # @option params [required, String] :file_source_uri
+    #   The S3 URI of the file to be attached. Only S3 source URIs are
+    #   supported.
+    #
+    # @option params [required, String] :associated_resource_arn
+    #   The ARN of the completed voice contact to attach the file to. Only
+    #   voice contacts with Telephony subtype are supported.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, `{ "Tags": {"key1":"value1", "key2":"value2"} }`.
+    #
+    # @return [Types::CreateAttachedFileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAttachedFileResponse#file_arn #file_arn} => String
+    #   * {Types::CreateAttachedFileResponse#file_id #file_id} => String
+    #   * {Types::CreateAttachedFileResponse#creation_time #creation_time} => String
+    #   * {Types::CreateAttachedFileResponse#file_status #file_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_attached_file({
+    #     client_token: "ClientToken",
+    #     instance_id: "InstanceId", # required
+    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT, VOICE_RECORDING
+    #     file_source_uri: "FileSourceUri", # required
+    #     associated_resource_arn: "ARN", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_arn #=> String
+    #   resp.file_id #=> String
+    #   resp.creation_time #=> String
+    #   resp.file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAttachedFile AWS API Documentation
+    #
+    # @overload create_attached_file(params = {})
+    # @param [Hash] params ({})
+    def create_attached_file(params = {}, options = {})
+      req = build_request(:create_attached_file, params)
+      req.send_request(options)
+    end
+
+    # Creates an authorization code for the specified Connect Customer
+    # instance. The authorization code can be used to establish a session
+    # with scoped permissions defined by the specified scope parameters.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Types::AuthScope] :scope
+    #   The scope for the authorization code. Defines the permissions and
+    #   access boundaries for the session.
+    #
+    # @option params [Integer] :max_session_duration_minutes
+    #   The maximum duration of the session, in minutes. Minimum value of 1440
+    #   (24 hours). Maximum value of 43200 (30 days). If no value is provided,
+    #   the session will expire after 400 days.
+    #
+    # @option params [required, Integer] :session_inactivity_duration_minutes
+    #   The duration of inactivity, in minutes, after which the session
+    #   expires. Minimum value of 1440 (24 hours). Maximum value of 20160 (14
+    #   days).
+    #
+    # @return [Types::CreateAuthCodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAuthCodeResponse#auth_code #auth_code} => String
+    #   * {Types::CreateAuthCodeResponse#session_id #session_id} => String
+    #   * {Types::CreateAuthCodeResponse#entity_type #entity_type} => String
+    #   * {Types::CreateAuthCodeResponse#entity_id #entity_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_auth_code({
+    #     instance_id: "InstanceId", # required
+    #     scope: { # required
+    #       security_profile_ids: ["SecurityProfileId"],
+    #       entity_type: "CUSTOMER_PROFILE", # required, accepts CUSTOMER_PROFILE
+    #       entity_id: "EntityId",
+    #       domain_name: "CustomerProfilesDomainName",
+    #     },
+    #     max_session_duration_minutes: 1,
+    #     session_inactivity_duration_minutes: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.auth_code #=> String
+    #   resp.session_id #=> String
+    #   resp.entity_type #=> String, one of "CUSTOMER_PROFILE"
+    #   resp.entity_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAuthCode AWS API Documentation
+    #
+    # @overload create_auth_code(params = {})
+    # @param [Hash] params ({})
+    def create_auth_code(params = {}, options = {})
+      req = build_request(:create_auth_code, params)
       req.send_request(options)
     end
 
@@ -3609,7 +3766,7 @@ module Aws::Connect
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -3702,7 +3859,7 @@ module Aws::Connect
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
     #
     # @return [Types::CreateHoursOfOperationOverrideResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6161,6 +6318,57 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes the specified fields containing personally identifiable
+    # information (PII) from a contact in the specified Connect Customer
+    # instance. This operation redacts PII (such as customer endpoints,
+    # additional email recipients, and the email subject) from the contact
+    # and its associated contact trace record (CTR). The contact must be in
+    # a terminated state.
+    #
+    # This operation performs a hard deletion of the specified PII and
+    # cannot be undone. There is no retention period; after the data is
+    # deleted, it cannot be recovered. Only fields that Connect Customer
+    # identifies and stores as PII are removed. Any PII that you place in
+    # fields outside the scope of this operation remains your responsibility
+    # to remove.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact. PII can be deleted only from a contact
+    #   that has been disconnected (is in a terminated state).
+    #
+    # @option params [required, Array<String>] :contact_fields
+    #   The categories of PII to redact from the contact. Valid values are
+    #   `CUSTOMER_ENDPOINT`, `ADDITIONAL_EMAIL_RECIPIENTS`, and
+    #   `EMAIL_SUBJECT`. `ADDITIONAL_EMAIL_RECIPIENTS` and `EMAIL_SUBJECT` are
+    #   supported only for contacts in the email channel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_contact_data({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     contact_fields: ["CUSTOMER_ENDPOINT"], # required, accepts CUSTOMER_ENDPOINT, ADDITIONAL_EMAIL_RECIPIENTS, EMAIL_SUBJECT
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactData AWS API Documentation
+    #
+    # @overload delete_contact_data(params = {})
+    # @param [Hash] params ({})
+    def delete_contact_data(params = {}, options = {})
+      req = build_request(:delete_contact_data, params)
+      req.send_request(options)
+    end
+
     # Deletes a contact evaluation in the specified Connect Customer
     # instance.
     #
@@ -6955,6 +7163,37 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_security_profile(params = {}, options = {})
       req = build_request(:delete_security_profile, params)
+      req.send_request(options)
+    end
+
+    # Deletes a session for the specified Connect Customer instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :session_id
+    #   The identifier of the session to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_session({
+    #     instance_id: "InstanceId", # required
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteSession AWS API Documentation
+    #
+    # @overload delete_session(params = {})
+    # @param [Hash] params ({})
+    def delete_session(params = {}, options = {})
+      req = build_request(:delete_session, params)
       req.send_request(options)
     end
 
@@ -9180,6 +9419,8 @@ module Aws::Connect
     #   resp.rule.rule_arn #=> String
     #   resp.rule.trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnEmailAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate", "OnSlaBreach", "OnAlertUpdate", "OnSchedulePublish", "OnScheduleUpdate", "OnScheduleTimeOffRequestActivity"
     #   resp.rule.trigger_event_source.integration_association_id #=> String
+    #   resp.rule.rule_capability_tiers #=> Array
+    #   resp.rule.rule_capability_tiers[0] #=> String, one of "GenerativeAI"
     #   resp.rule.function #=> String
     #   resp.rule.actions #=> Array
     #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION"
@@ -10124,8 +10365,9 @@ module Aws::Connect
     end
 
     # Disassociates a set of hours of operations with another hours of
-    # operation. Refer to Administrator Guide [ here ][1] for more
-    # information on inheriting overrides from parent hours of operation(s).
+    # operation. For more information about inheriting overrides from parent
+    # hours of operation, see [Hours of operation overrides][1] in the
+    # Administrator Guide.
     #
     #
     #
@@ -10914,7 +11156,7 @@ module Aws::Connect
     #   resp.file_name #=> String
     #   resp.file_size_in_bytes #=> Integer
     #   resp.associated_resource_arn #=> String
-    #   resp.file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT"
+    #   resp.file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING"
     #   resp.created_by.connect_user_arn #=> String
     #   resp.created_by.aws_identity_arn #=> String
     #   resp.download_url_metadata.url #=> String
@@ -11673,10 +11915,10 @@ module Aws::Connect
     #
     # @return [Types::GetFederationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetFederationTokenResponse#user_id #user_id} => String
+    #   * {Types::GetFederationTokenResponse#user_arn #user_arn} => String
     #   * {Types::GetFederationTokenResponse#credentials #credentials} => Types::Credentials
     #   * {Types::GetFederationTokenResponse#sign_in_url #sign_in_url} => String
-    #   * {Types::GetFederationTokenResponse#user_arn #user_arn} => String
-    #   * {Types::GetFederationTokenResponse#user_id #user_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -11686,13 +11928,13 @@ module Aws::Connect
     #
     # @example Response structure
     #
+    #   resp.user_id #=> String
+    #   resp.user_arn #=> String
     #   resp.credentials.access_token #=> String
     #   resp.credentials.access_token_expiration #=> Time
     #   resp.credentials.refresh_token #=> String
     #   resp.credentials.refresh_token_expiration #=> Time
     #   resp.sign_in_url #=> String
-    #   resp.user_arn #=> String
-    #   resp.user_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationToken AWS API Documentation
     #
@@ -12265,24 +12507,25 @@ module Aws::Connect
     #   `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
     #   `ANSWERING_MACHINE_DETECTION_STATUS` \| `BOT_ALIAS` \| `BOT_ID` \|
-    #   `BOT_INTENT_NAME` \| `BOT_LOCALE` \| `BOT_VERSION` \| `CAMPAIGN` \|
-    #   `CAMPAIGN_DELIVERY_EVENT_TYPE` \| `CAMPAIGN_EXCLUDED_EVENT_TYPE` \|
-    #   `CASE_STATUS` \| `CASE_TEMPLATE_ARN` \| `CHANNEL` \|
-    #   `contact/segmentAttributes/connect:Subtype` \|
+    #   `BOT_INTENT_NAME` \| `BOT_LOCALE` \| `BOT_VERSION` \| `BROWSER_NAME`
+    #   \| `CAMPAIGN` \| `CAMPAIGN_DELIVERY_EVENT_TYPE` \|
+    #   `CAMPAIGN_EXCLUDED_EVENT_TYPE` \| `CASE_STATUS` \| `CASE_TEMPLATE_ARN`
+    #   \| `CHANNEL` \| `contact/segmentAttributes/connect:Subtype` \|
     #   `contact/segmentAttributes/connect:ValidationTestType` \|
-    #   `DISCONNECT_REASON` \| `EVALUATION_FORM` \| `EVALUATION_QUESTION` \|
-    #   `EVALUATION_SECTION` \| `EVALUATION_SOURCE` \| `EVALUATOR_ID` \|
-    #   `FEATURE` \| `FLOW_ACTION_ID` \| `FLOW_TYPE` \|
-    #   `FLOWS_MODULE_RESOURCE_ID` \| `FLOWS_NEXT_RESOURCE_ID` \|
-    #   `FLOWS_NEXT_RESOURCE_QUEUE_ID` \| `FLOWS_OUTCOME_TYPE` \|
-    #   `FLOWS_RESOURCE_ID` \| `FORM_VERSION` \| `INITIATING_FLOW` \|
-    #   `INITIATION_METHOD` \| `INVOKING_RESOURCE_PUBLISHED_TIMESTAMP` \|
-    #   `INVOKING_RESOURCE_TYPE` \| `KNOWLEDGE_BASE_NAME` \|
-    #   `PARENT_FLOWS_RESOURCE_ID` \| `Q_CONNECT_ENABLED` \| `QUEUE` \|
-    #   `RESOURCE_PUBLISHED_TIMESTAMP` \| `ROUTING_PROFILE` \|
-    #   `ROUTING_STEP_EXPRESSION` \| `SESSION_ID` \| `TEST_CASE` \|
-    #   `TEST_CASE_EXECUTION_FAILURE_REASON` \| `TEST_CASE_EXECUTION_RESULT`
-    #   \| `TEST_CASE_EXECUTION_STATE`
+    #   `DEVICE_MODEL` \| `DEVICE_TYPE` \| `DISCONNECT_REASON` \|
+    #   `EVALUATION_FORM` \| `EVALUATION_QUESTION` \| `EVALUATION_SECTION` \|
+    #   `EVALUATION_SOURCE` \| `EVALUATOR_ID` \| `FEATURE` \| `FLOW_ACTION_ID`
+    #   \| `FLOW_TYPE` \| `FLOWS_MODULE_RESOURCE_ID` \|
+    #   `FLOWS_NEXT_RESOURCE_ID` \| `FLOWS_NEXT_RESOURCE_QUEUE_ID` \|
+    #   `FLOWS_OUTCOME_TYPE` \| `FLOWS_RESOURCE_ID` \| `FORM_VERSION` \|
+    #   `INITIATING_FLOW` \| `INITIATION_METHOD` \|
+    #   `INVOKING_RESOURCE_PUBLISHED_TIMESTAMP` \| `INVOKING_RESOURCE_TYPE` \|
+    #   `KNOWLEDGE_BASE_NAME` \| `PARENT_FLOWS_RESOURCE_ID` \|
+    #   `Q_CONNECT_ENABLED` \| `QUEUE` \| `RESOURCE_PUBLISHED_TIMESTAMP` \|
+    #   `ROUTING_PROFILE` \| `ROUTING_STEP_EXPRESSION` \| `SESSION_ID` \|
+    #   `TEST_CASE` \| `TEST_CASE_EXECUTION_FAILURE_REASON` \|
+    #   `TEST_CASE_EXECUTION_RESULT` \| `TEST_CASE_EXECUTION_STATE` \|
+    #   `WEB_NOTIFICATION_TYPE`
     #
     #   <note markdown="1"> The following filter keys correspond to Connect Customer resources and
     #   are used for authorizing requests. A `GetMetricDataV2` request
@@ -12360,10 +12603,11 @@ module Aws::Connect
     #   `AGENT_HIERARCHY_LEVEL_THREE` \| `AGENT_HIERARCHY_LEVEL_FOUR` \|
     #   `AGENT_HIERARCHY_LEVEL_FIVE` \| `ANSWERING_MACHINE_DETECTION_STATUS`
     #   \| `BOT_ID` \| `BOT_ALIAS` \| `BOT_VERSION` \| `BOT_LOCALE` \|
-    #   `BOT_INTENT_NAME` \| `CAMPAIGN` \| `CAMPAIGN_DELIVERY_EVENT_TYPE` \|
-    #   `CAMPAIGN_EXCLUDED_EVENT_TYPE` \| `CAMPAIGN_EXECUTION_TIMESTAMP` \|
-    #   `CASE_TEMPLATE_ARN` \| `CASE_STATUS` \| `CHANNEL` \|
-    #   `contact/segmentAttributes/connect:Subtype` \| `DISCONNECT_REASON` \|
+    #   `BOT_INTENT_NAME` \| `BROWSER_NAME` \| `CAMPAIGN` \|
+    #   `CAMPAIGN_DELIVERY_EVENT_TYPE` \| `CAMPAIGN_EXCLUDED_EVENT_TYPE` \|
+    #   `CAMPAIGN_EXECUTION_TIMESTAMP` \| `CASE_TEMPLATE_ARN` \| `CASE_STATUS`
+    #   \| `CHANNEL` \| `contact/segmentAttributes/connect:Subtype` \|
+    #   `DEVICE_MODEL` \| `DEVICE_TYPE` \| `DISCONNECT_REASON` \|
     #   `EVALUATION_FORM` \| `EVALUATION_SECTION` \| `EVALUATION_QUESTION` \|
     #   `EVALUATION_SOURCE` \| `EVALUATOR_ID` \| `FLOWS_RESOURCE_ID` \|
     #   `FLOWS_MODULE_RESOURCE_ID` \| `FLOW_ACTION_ID` \| `FLOW_TYPE` \|
@@ -12374,6 +12618,7 @@ module Aws::Connect
     #   `RESOURCE_PUBLISHED_TIMESTAMP` \| `ROUTING_PROFILE` \|
     #   `ROUTING_STEP_EXPRESSION` \| `SESSION_ID` \| `TEST_CASE` \|
     #   `TEST_CASE_EXECUTION_FAILURE_REASON` \| `TEST_CASE_INVOCATION_METHOD`
+    #   \| `WEB_NOTIFICATION_TYPE`
     #
     #   <note markdown="1"> `AI_AGENT_NAME_VERSION`, `AI_PROMPT_NAME_VERSION`, and
     #   `KNOWLEDGE_ARTICLE_NAME` are valid groupings but not valid filters.
@@ -13454,14 +13699,16 @@ module Aws::Connect
     #
     #   CAMPAIGN\_INTERACTIONS
     #
-    #   : This metric is available only for outbound campaigns using the email
-    #     delivery mode.
+    #   : This metric is available only for outbound campaigns using the
+    #     email, WhatsApp, and web notification delivery modes.
     #
     #     Unit: Count
     #
     #     Valid metric filter key: CAMPAIGN\_INTERACTION\_EVENT\_TYPE
     #
-    #     Valid groupings and filters: Campaign
+    #     Valid groupings and filters: Browser Name, Campaign, Channel,
+    #     contact/segmentAttributes/connect:Subtype, Device Model, Device
+    #     Type, Web Notification Type
     #
     #     UI name: [Campaign interactions][93]
     #
@@ -13718,17 +13965,18 @@ module Aws::Connect
     #     `CAMPAIGN_DELIVERY_EVENT_TYPE`, `DISCONNECT_REASON`
     #
     #     Valid groupings and filters: Agent, Answering Machine Detection
-    #     Status, Campaign, Campaign Delivery EventType, Channel,
-    #     contact/segmentAttributes/connect:Subtype, Disconnect Reason, Queue,
-    #     Routing Profile
+    #     Status, Browser Name, Campaign, Campaign Delivery EventType,
+    #     Channel, contact/segmentAttributes/connect:Subtype, Device Model,
+    #     Device Type, Disconnect Reason, Queue, Routing Profile, Web
+    #     Notification Type
     #
     #     UI name: [Delivery attempts][116]
     #
     #     <note markdown="1"> Campaign Delivery EventType filter and grouping are only available
-    #     for SMS and Email campaign delivery modes. Agent, Queue, Routing
-    #     Profile, Answering Machine Detection Status and Disconnect Reason
-    #     are only available for agent assisted voice and automated voice
-    #     delivery modes.
+    #     for SMS, Email, WhatsApp, and web notification campaign delivery
+    #     modes. Agent, Queue, Routing Profile, Answering Machine Detection
+    #     Status and Disconnect Reason are only available for agent assisted
+    #     voice and automated voice delivery modes.
     #
     #      </note>
     #
@@ -13744,17 +13992,18 @@ module Aws::Connect
     #     `CAMPAIGN_DELIVERY_EVENT_TYPE`, `DISCONNECT_REASON`
     #
     #     Valid groupings and filters: Agent, Answering Machine Detection
-    #     Status, Campaign, Channel,
-    #     contact/segmentAttributes/connect:Subtype, Disconnect Reason, Queue,
-    #     Routing Profile
+    #     Status, Browser Name, Campaign, Channel,
+    #     contact/segmentAttributes/connect:Subtype, Device Model, Device
+    #     Type, Disconnect Reason, Queue, Routing Profile, Web Notification
+    #     Type
     #
     #     UI name: [Delivery attempt disposition rate][117]
     #
     #     <note markdown="1"> Campaign Delivery Event Type filter and grouping are only available
-    #     for SMS and Email campaign delivery modes. Agent, Queue, Routing
-    #     Profile, Answering Machine Detection Status and Disconnect Reason
-    #     are only available for agent assisted voice and automated voice
-    #     delivery modes.
+    #     for SMS, Email, WhatsApp, and web notification campaign delivery
+    #     modes. Agent, Queue, Routing Profile, Answering Machine Detection
+    #     Status and Disconnect Reason are only available for agent assisted
+    #     voice and automated voice delivery modes.
     #
     #      </note>
     #
@@ -15286,7 +15535,7 @@ module Aws::Connect
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -17862,6 +18111,8 @@ module Aws::Connect
     #   resp.rule_summary_list[0].rule_arn #=> String
     #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnEmailAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate", "OnSlaBreach", "OnAlertUpdate", "OnSchedulePublish", "OnScheduleUpdate", "OnScheduleTimeOffRequestActivity"
     #   resp.rule_summary_list[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
+    #   resp.rule_summary_list[0].rule_capability_tiers #=> Array
+    #   resp.rule_summary_list[0].rule_capability_tiers[0] #=> String, one of "GenerativeAI"
     #   resp.rule_summary_list[0].action_summaries #=> Array
     #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION"
     #   resp.rule_summary_list[0].created_time #=> Time
@@ -21720,6 +21971,163 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Searches rules in an Connect Customer instance, with optional
+    # filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Types::RulesSearchCriteria] :search_criteria
+    #   The search criteria to be used to return rules.
+    #
+    # @option params [Types::RulesSearchFilter] :search_filter
+    #   Filters to be applied to search results, such as tag-based filters.
+    #
+    # @return [Types::SearchRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchRulesResponse#rules #rules} => Array&lt;Types::RuleSearchSummary&gt;
+    #   * {Types::SearchRulesResponse#approximate_total_count #approximate_total_count} => Integer
+    #   * {Types::SearchRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: SearchRules
+    #
+    #   # Searches for published rules in an Amazon Connect instance.
+    #
+    #   resp = client.search_rules({
+    #     instance_id: "12345678-1234-1234-1234-123456789012", 
+    #     max_results: 10, 
+    #     search_criteria: {
+    #       string_condition: {
+    #         comparison_type: "EXACT", 
+    #         field_name: "PublishStatus", 
+    #         value: "PUBLISHED", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     approximate_total_count: 1, 
+    #     rules: [
+    #       {
+    #         action_summaries: [
+    #           {
+    #             action_type: "CREATE_TASK", 
+    #           }, 
+    #         ], 
+    #         created_time: Time.parse("2026-01-15T10:00:00Z"), 
+    #         last_updated_by: "arn:aws:connect:us-west-2:123456789012:instance/12345678-1234-1234-1234-123456789012/agent/agent-id", 
+    #         last_updated_time: Time.parse("2026-03-20T14:30:00Z"), 
+    #         name: "MyRule", 
+    #         publish_status: "PUBLISHED", 
+    #         rule_arn: "arn:aws:connect:us-west-2:123456789012:instance/12345678-1234-1234-1234-123456789012/rule/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", 
+    #         rule_capability_tiers: [
+    #         ], 
+    #         rule_id: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", 
+    #         trigger_event_source: {
+    #           event_source_name: "OnPostCallAnalysisAvailable", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_rules({
+    #     instance_id: "InstanceId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken2500",
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive RulesSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive RulesSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #     search_filter: {
+    #       attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         },
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rules #=> Array
+    #   resp.rules[0].name #=> String
+    #   resp.rules[0].rule_id #=> String
+    #   resp.rules[0].rule_arn #=> String
+    #   resp.rules[0].trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnEmailAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate", "OnSlaBreach", "OnAlertUpdate", "OnSchedulePublish", "OnScheduleUpdate", "OnScheduleTimeOffRequestActivity"
+    #   resp.rules[0].trigger_event_source.integration_association_id #=> String
+    #   resp.rules[0].action_summaries #=> Array
+    #   resp.rules[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION"
+    #   resp.rules[0].rule_capability_tiers #=> Array
+    #   resp.rules[0].rule_capability_tiers[0] #=> String, one of "GenerativeAI"
+    #   resp.rules[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
+    #   resp.rules[0].created_time #=> Time
+    #   resp.rules[0].last_updated_time #=> Time
+    #   resp.rules[0].last_updated_by #=> String
+    #   resp.rules[0].tags #=> Hash
+    #   resp.rules[0].tags["TagKey"] #=> String
+    #   resp.approximate_total_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchRules AWS API Documentation
+    #
+    # @overload search_rules(params = {})
+    # @param [Hash] params ({})
+    def search_rules(params = {}, options = {})
+      req = build_request(:search_rules, params)
+      req.send_request(options)
+    end
+
     # Searches security profiles in an Connect Customer instance, with
     # optional filtering.
     #
@@ -22883,6 +23291,111 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Sends an outbound web notification to a customer's web browser for
+    # outbound campaigns. For more information about outbound campaigns, see
+    # [Set up Connect Customer outbound campaigns][1].
+    #
+    # <note markdown="1"> Only the Connect Customer outbound campaigns service principal is
+    # allowed to assume a role in your account and call this API.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-outbound-campaigns.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, String] :browser_id
+    #   A unique identifier for the customer's web browser instance to which
+    #   the notification is being sent.
+    #
+    # @option params [required, String] :session_id
+    #   A unique identifier for the customer's web session to which the
+    #   notification is being sent.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :expires_at
+    #   The timestamp, in Unix epoch time format, at which the web
+    #   notification expires. After this time, the notification is no longer
+    #   delivered to the customer's browser.
+    #
+    # @option params [required, Types::WebNotificationSource] :source
+    #   The source of the web notification. A `SourceCampaign` object
+    #   identifies the campaign and outbound request that triggered this
+    #   notification.
+    #
+    # @option params [required, Types::WidgetDestination] :destination
+    #   The destination for the web notification, specifying the communication
+    #   widget that delivers the notification and the customer profile of the
+    #   recipient.
+    #
+    # @option params [required, Types::WebNotificationContent] :content
+    #   The content of the web notification, including the notification type,
+    #   the view to render, and any optional attributes used to populate it.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_outbound_web_notification({
+    #     instance_id: "InstanceId", # required
+    #     client_token: "ClientToken",
+    #     browser_id: "WebBrowserId", # required
+    #     session_id: "WebSessionId", # required
+    #     expires_at: Time.now, # required
+    #     source: { # required
+    #       source_campaign: { # required
+    #         campaign_id: "CampaignId",
+    #         outbound_request_id: "OutboundRequestId",
+    #       },
+    #     },
+    #     destination: { # required
+    #       widget_id: "WidgetId", # required
+    #       profile_id: "CustomerProfileId", # required
+    #     },
+    #     content: { # required
+    #       type: "WIDGET_VIEW", # required, accepts WIDGET_VIEW, WIDGET_ACTION
+    #       view_arn: "ViewArn",
+    #       attributes: {
+    #         recommender_config: {
+    #           domain_name: "PersonalizeDomainName", # required
+    #           recommender_name: "RecommenderName", # required
+    #           context: {
+    #             "RecommenderContextKey" => "RecommenderContextValue",
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SendOutboundWebNotification AWS API Documentation
+    #
+    # @overload send_outbound_web_notification(params = {})
+    # @param [Hash] params ({})
+    def send_outbound_web_notification(params = {}, options = {})
+      req = build_request(:send_outbound_web_notification, params)
+      req.send_request(options)
+    end
+
     # Provides a pre-signed Amazon S3 URL in response for uploading your
     # content.
     #
@@ -22962,7 +23475,7 @@ module Aws::Connect
     #     file_name: "FileName", # required
     #     file_size_in_bytes: 1, # required
     #     url_expiry_in_seconds: 1,
-    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT
+    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT, VOICE_RECORDING
     #     associated_resource_arn: "ARN", # required
     #     created_by: {
     #       connect_user_arn: "ARN",
@@ -23222,6 +23735,98 @@ module Aws::Connect
     # @param [Hash] params ({})
     def start_chat_contact(params = {}, options = {})
       req = build_request(:start_chat_contact, params)
+      req.send_request(options)
+    end
+
+    # Starts a Contact Lens post-call analytics job for the specified
+    # contact. This API runs Conversational Analytics post-contact analysis
+    # on a voice recording that is already attached to the contact,
+    # generating transcription, sentiment analysis, redaction, and
+    # summarization results based on the provided configuration.
+    #
+    # A voice recording must already be attached to the contact before
+    # calling this API. Use `CreateAttachedFile` to attach a recording from
+    # an S3 source URI.
+    #
+    # <note markdown="1"> For example, you can call `CreateContact`, then `CreateAttachedFile`,
+    # then `StartContactConversationalAnalyticsJob` to create a contact,
+    # attach a recording, and run post-call analytics.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Connect Customer.
+    #
+    # @option params [required, Array<String>] :analytics_modes
+    #   The analytics modes to run for the contact. Valid values:
+    #   `PostContact`.
+    #
+    # @option params [required, Types::AnalyticsConfiguration] :analytics_configuration
+    #   The configuration for the conversational analytics job.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::StartContactConversationalAnalyticsJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartContactConversationalAnalyticsJobResponse#instance_id #instance_id} => String
+    #   * {Types::StartContactConversationalAnalyticsJobResponse#contact_id #contact_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_contact_conversational_analytics_job({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     analytics_modes: ["PostContact"], # required, accepts PostContact, RealTime, ContactLens, AutomatedInteraction
+    #     analytics_configuration: { # required
+    #       language_configuration: { # required
+    #         language_locale: "LanguageLocale",
+    #       },
+    #       redaction_configuration: { # required
+    #         behavior: "Enable", # required, accepts Enable, Disable
+    #         policy: "None", # required, accepts None, RedactedOnly, RedactedAndOriginal
+    #         entities: ["Entity"],
+    #         mask_mode: "PII", # accepts PII, EntityType
+    #       },
+    #       sentiment_configuration: { # required
+    #         behavior: "Enable", # required, accepts Enable, Disable
+    #       },
+    #       summary_configuration: { # required
+    #         summary_modes: ["PostContact"], # required, accepts PostContact, AutomatedInteraction, ContactChain
+    #       },
+    #       rules_configuration: { # required
+    #         behavior: "Enable", # accepts Enable, Disable
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.contact_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactConversationalAnalyticsJob AWS API Documentation
+    #
+    # @overload start_contact_conversational_analytics_job(params = {})
+    # @param [Hash] params ({})
+    def start_contact_conversational_analytics_job(params = {}, options = {})
+      req = build_request(:start_contact_conversational_analytics_job, params)
       req.send_request(options)
     end
 
@@ -26941,7 +27546,7 @@ module Aws::Connect
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -29556,7 +30161,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.260.0'
+      context[:gem_version] = '1.265.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -16,7 +16,7 @@ module Aws
       s3_output_configurations: {
         output_type: ("CUSTOM" | "ATHENA" | "REDSHIFT"),
         format: ("TEXT_OR_CSV" | "PARQUET"),
-        compression: ("GZIP" | "PARQUET"),
+        compression: ("GZIP" | "PARQUET" | "ZIP"),
         overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
       }
     }

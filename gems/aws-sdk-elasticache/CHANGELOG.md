@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2026-06-29)
+------------------
+
+* Feature - Updated documentation for the ApplyImmediately parameter in ModifyCacheCluster and ModifyReplicationGroup to clarify modification behavior.
+
 1.146.0 (2026-06-02)
 ------------------
 

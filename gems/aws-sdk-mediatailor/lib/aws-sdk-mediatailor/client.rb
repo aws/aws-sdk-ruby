@@ -720,6 +720,7 @@ module Aws::MediaTailor
     #   resp.outputs[0].hls_playlist_settings.ad_markup_type[0] #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.outputs[0].manifest_name #=> String
     #   resp.outputs[0].playback_url #=> String
+    #   resp.outputs[0].dual_stack_playback_url #=> String
     #   resp.outputs[0].source_group #=> String
     #   resp.playback_mode #=> String
     #   resp.tags #=> Hash
@@ -1722,6 +1723,7 @@ module Aws::MediaTailor
     #   resp.outputs[0].hls_playlist_settings.ad_markup_type[0] #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.outputs[0].manifest_name #=> String
     #   resp.outputs[0].playback_url #=> String
+    #   resp.outputs[0].dual_stack_playback_url #=> String
     #   resp.outputs[0].source_group #=> String
     #   resp.playback_mode #=> String
     #   resp.tags #=> Hash
@@ -2211,7 +2213,9 @@ module Aws::MediaTailor
     #   * {Types::GetPlaybackConfigurationResponse#personalization_threshold_seconds #personalization_threshold_seconds} => Integer
     #   * {Types::GetPlaybackConfigurationResponse#playback_configuration_arn #playback_configuration_arn} => String
     #   * {Types::GetPlaybackConfigurationResponse#playback_endpoint_prefix #playback_endpoint_prefix} => String
+    #   * {Types::GetPlaybackConfigurationResponse#dual_stack_playback_endpoint_prefix #dual_stack_playback_endpoint_prefix} => String
     #   * {Types::GetPlaybackConfigurationResponse#session_initialization_endpoint_prefix #session_initialization_endpoint_prefix} => String
+    #   * {Types::GetPlaybackConfigurationResponse#dual_stack_session_initialization_endpoint_prefix #dual_stack_session_initialization_endpoint_prefix} => String
     #   * {Types::GetPlaybackConfigurationResponse#slate_ad_url #slate_ad_url} => String
     #   * {Types::GetPlaybackConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetPlaybackConfigurationResponse#transcode_profile_name #transcode_profile_name} => String
@@ -2219,6 +2223,8 @@ module Aws::MediaTailor
     #   * {Types::GetPlaybackConfigurationResponse#ad_conditioning_configuration #ad_conditioning_configuration} => Types::AdConditioningConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#ad_decision_server_configuration #ad_decision_server_configuration} => Types::AdDecisionServerConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#function_mapping #function_mapping} => Hash&lt;String,String&gt;
+    #   * {Types::GetPlaybackConfigurationResponse#ads_personalization_timeouts #ads_personalization_timeouts} => Types::AdsPersonalizationTimeouts
+    #   * {Types::GetPlaybackConfigurationResponse#ads_personalization_concurrency #ads_personalization_concurrency} => Types::AdsPersonalizationConcurrency
     #
     # @example Request syntax with placeholder values
     #
@@ -2240,9 +2246,11 @@ module Aws::MediaTailor
     #   resp.configuration_aliases["__string"] #=> Hash
     #   resp.configuration_aliases["__string"]["__string"] #=> String
     #   resp.dash_configuration.manifest_endpoint_prefix #=> String
+    #   resp.dash_configuration.dual_stack_manifest_endpoint_prefix #=> String
     #   resp.dash_configuration.mpd_location #=> String
     #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
+    #   resp.hls_configuration.dual_stack_manifest_endpoint_prefix #=> String
     #   resp.insertion_mode #=> String, one of "STITCHED_ONLY", "PLAYER_SELECT"
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
@@ -2262,7 +2270,9 @@ module Aws::MediaTailor
     #   resp.personalization_threshold_seconds #=> Integer
     #   resp.playback_configuration_arn #=> String
     #   resp.playback_endpoint_prefix #=> String
+    #   resp.dual_stack_playback_endpoint_prefix #=> String
     #   resp.session_initialization_endpoint_prefix #=> String
+    #   resp.dual_stack_session_initialization_endpoint_prefix #=> String
     #   resp.slate_ad_url #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -2276,6 +2286,13 @@ module Aws::MediaTailor
     #   resp.ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
     #   resp.function_mapping #=> Hash
     #   resp.function_mapping["EventName"] #=> String
+    #   resp.ads_personalization_timeouts.ads_request_timeout_milliseconds #=> Integer
+    #   resp.ads_personalization_timeouts.live_maximum_ads_personalization_time_milliseconds #=> Integer
+    #   resp.ads_personalization_timeouts.vod_maximum_ads_personalization_time_milliseconds #=> Integer
+    #   resp.ads_personalization_timeouts.prefetch_ads_request_timeout_milliseconds #=> Integer
+    #   resp.ads_personalization_timeouts.prefetch_maximum_ads_personalization_time_milliseconds #=> Integer
+    #   resp.ads_personalization_concurrency.max_concurrent_ads_requests #=> Integer
+    #   resp.ads_personalization_concurrency.enable_vod_vast_parallelization #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPlaybackConfiguration AWS API Documentation
     #
@@ -2496,6 +2513,7 @@ module Aws::MediaTailor
     #   resp.items[0].outputs[0].hls_playlist_settings.ad_markup_type[0] #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.items[0].outputs[0].manifest_name #=> String
     #   resp.items[0].outputs[0].playback_url #=> String
+    #   resp.items[0].outputs[0].dual_stack_playback_url #=> String
     #   resp.items[0].outputs[0].source_group #=> String
     #   resp.items[0].playback_mode #=> String
     #   resp.items[0].tags #=> Hash
@@ -2732,9 +2750,11 @@ module Aws::MediaTailor
     #   resp.items[0].configuration_aliases["__string"] #=> Hash
     #   resp.items[0].configuration_aliases["__string"]["__string"] #=> String
     #   resp.items[0].dash_configuration.manifest_endpoint_prefix #=> String
+    #   resp.items[0].dash_configuration.dual_stack_manifest_endpoint_prefix #=> String
     #   resp.items[0].dash_configuration.mpd_location #=> String
     #   resp.items[0].dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.items[0].hls_configuration.manifest_endpoint_prefix #=> String
+    #   resp.items[0].hls_configuration.dual_stack_manifest_endpoint_prefix #=> String
     #   resp.items[0].insertion_mode #=> String, one of "STITCHED_ONLY", "PLAYER_SELECT"
     #   resp.items[0].live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.items[0].live_pre_roll_configuration.max_duration_seconds #=> Integer
@@ -2754,7 +2774,9 @@ module Aws::MediaTailor
     #   resp.items[0].personalization_threshold_seconds #=> Integer
     #   resp.items[0].playback_configuration_arn #=> String
     #   resp.items[0].playback_endpoint_prefix #=> String
+    #   resp.items[0].dual_stack_playback_endpoint_prefix #=> String
     #   resp.items[0].session_initialization_endpoint_prefix #=> String
+    #   resp.items[0].dual_stack_session_initialization_endpoint_prefix #=> String
     #   resp.items[0].slate_ad_url #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["__string"] #=> String
@@ -2768,6 +2790,13 @@ module Aws::MediaTailor
     #   resp.items[0].ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
     #   resp.items[0].function_mapping #=> Hash
     #   resp.items[0].function_mapping["EventName"] #=> String
+    #   resp.items[0].ads_personalization_timeouts.ads_request_timeout_milliseconds #=> Integer
+    #   resp.items[0].ads_personalization_timeouts.live_maximum_ads_personalization_time_milliseconds #=> Integer
+    #   resp.items[0].ads_personalization_timeouts.vod_maximum_ads_personalization_time_milliseconds #=> Integer
+    #   resp.items[0].ads_personalization_timeouts.prefetch_ads_request_timeout_milliseconds #=> Integer
+    #   resp.items[0].ads_personalization_timeouts.prefetch_maximum_ads_personalization_time_milliseconds #=> Integer
+    #   resp.items[0].ads_personalization_concurrency.max_concurrent_ads_requests #=> Integer
+    #   resp.items[0].ads_personalization_concurrency.enable_vod_vast_parallelization #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurations AWS API Documentation
@@ -3367,6 +3396,17 @@ module Aws::MediaTailor
     #
     #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
     #
+    # @option params [Types::AdsPersonalizationTimeouts] :ads_personalization_timeouts
+    #   The timeout settings for ad decision server interactions. These
+    #   settings control how long MediaTailor waits for ADS responses and the
+    #   total time budget for ad personalization across live, VOD, and
+    #   prefetch workflows.
+    #
+    # @option params [Types::AdsPersonalizationConcurrency] :ads_personalization_concurrency
+    #   The concurrency settings for ad decision server interactions. These
+    #   settings control how many simultaneous ADS requests MediaTailor makes
+    #   per manifest request.
+    #
     # @return [Types::PutPlaybackConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutPlaybackConfigurationResponse#ad_decision_server_url #ad_decision_server_url} => String
@@ -3384,7 +3424,9 @@ module Aws::MediaTailor
     #   * {Types::PutPlaybackConfigurationResponse#personalization_threshold_seconds #personalization_threshold_seconds} => Integer
     #   * {Types::PutPlaybackConfigurationResponse#playback_configuration_arn #playback_configuration_arn} => String
     #   * {Types::PutPlaybackConfigurationResponse#playback_endpoint_prefix #playback_endpoint_prefix} => String
+    #   * {Types::PutPlaybackConfigurationResponse#dual_stack_playback_endpoint_prefix #dual_stack_playback_endpoint_prefix} => String
     #   * {Types::PutPlaybackConfigurationResponse#session_initialization_endpoint_prefix #session_initialization_endpoint_prefix} => String
+    #   * {Types::PutPlaybackConfigurationResponse#dual_stack_session_initialization_endpoint_prefix #dual_stack_session_initialization_endpoint_prefix} => String
     #   * {Types::PutPlaybackConfigurationResponse#slate_ad_url #slate_ad_url} => String
     #   * {Types::PutPlaybackConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::PutPlaybackConfigurationResponse#transcode_profile_name #transcode_profile_name} => String
@@ -3392,6 +3434,8 @@ module Aws::MediaTailor
     #   * {Types::PutPlaybackConfigurationResponse#ad_conditioning_configuration #ad_conditioning_configuration} => Types::AdConditioningConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#ad_decision_server_configuration #ad_decision_server_configuration} => Types::AdDecisionServerConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#function_mapping #function_mapping} => Hash&lt;String,String&gt;
+    #   * {Types::PutPlaybackConfigurationResponse#ads_personalization_timeouts #ads_personalization_timeouts} => Types::AdsPersonalizationTimeouts
+    #   * {Types::PutPlaybackConfigurationResponse#ads_personalization_concurrency #ads_personalization_concurrency} => Types::AdsPersonalizationConcurrency
     #
     # @example Request syntax with placeholder values
     #
@@ -3453,6 +3497,17 @@ module Aws::MediaTailor
     #     function_mapping: {
     #       "PRE_SESSION_INITIALIZATION" => "__string",
     #     },
+    #     ads_personalization_timeouts: {
+    #       ads_request_timeout_milliseconds: 1,
+    #       live_maximum_ads_personalization_time_milliseconds: 1,
+    #       vod_maximum_ads_personalization_time_milliseconds: 1,
+    #       prefetch_ads_request_timeout_milliseconds: 1,
+    #       prefetch_maximum_ads_personalization_time_milliseconds: 1,
+    #     },
+    #     ads_personalization_concurrency: {
+    #       max_concurrent_ads_requests: 1,
+    #       enable_vod_vast_parallelization: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3469,9 +3524,11 @@ module Aws::MediaTailor
     #   resp.configuration_aliases["__string"] #=> Hash
     #   resp.configuration_aliases["__string"]["__string"] #=> String
     #   resp.dash_configuration.manifest_endpoint_prefix #=> String
+    #   resp.dash_configuration.dual_stack_manifest_endpoint_prefix #=> String
     #   resp.dash_configuration.mpd_location #=> String
     #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
+    #   resp.hls_configuration.dual_stack_manifest_endpoint_prefix #=> String
     #   resp.insertion_mode #=> String, one of "STITCHED_ONLY", "PLAYER_SELECT"
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
@@ -3491,7 +3548,9 @@ module Aws::MediaTailor
     #   resp.personalization_threshold_seconds #=> Integer
     #   resp.playback_configuration_arn #=> String
     #   resp.playback_endpoint_prefix #=> String
+    #   resp.dual_stack_playback_endpoint_prefix #=> String
     #   resp.session_initialization_endpoint_prefix #=> String
+    #   resp.dual_stack_session_initialization_endpoint_prefix #=> String
     #   resp.slate_ad_url #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -3505,6 +3564,13 @@ module Aws::MediaTailor
     #   resp.ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
     #   resp.function_mapping #=> Hash
     #   resp.function_mapping["EventName"] #=> String
+    #   resp.ads_personalization_timeouts.ads_request_timeout_milliseconds #=> Integer
+    #   resp.ads_personalization_timeouts.live_maximum_ads_personalization_time_milliseconds #=> Integer
+    #   resp.ads_personalization_timeouts.vod_maximum_ads_personalization_time_milliseconds #=> Integer
+    #   resp.ads_personalization_timeouts.prefetch_ads_request_timeout_milliseconds #=> Integer
+    #   resp.ads_personalization_timeouts.prefetch_maximum_ads_personalization_time_milliseconds #=> Integer
+    #   resp.ads_personalization_concurrency.max_concurrent_ads_requests #=> Integer
+    #   resp.ads_personalization_concurrency.enable_vod_vast_parallelization #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfiguration AWS API Documentation
     #
@@ -3727,6 +3793,7 @@ module Aws::MediaTailor
     #   resp.outputs[0].hls_playlist_settings.ad_markup_type[0] #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.outputs[0].manifest_name #=> String
     #   resp.outputs[0].playback_url #=> String
+    #   resp.outputs[0].dual_stack_playback_url #=> String
     #   resp.outputs[0].source_group #=> String
     #   resp.playback_mode #=> String
     #   resp.tags #=> Hash
@@ -4188,7 +4255,7 @@ module Aws::MediaTailor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

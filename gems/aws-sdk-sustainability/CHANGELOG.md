@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2026-07-16)
+------------------
+
+* Feature - Adds support for retrieving estimated water allocation data.
+
+1.4.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.3.0 (2026-06-04)
 ------------------
 

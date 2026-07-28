@@ -88,6 +88,24 @@
       ],
       "idempotent":true
     },
+    "CreateStreamSessionAdminShell":{
+      "name":"CreateStreamSessionAdminShell",
+      "http":{
+        "method":"POST",
+        "requestUri":"/streamgroups/{Identifier}/streamsessions/{StreamSessionIdentifier}/access",
+        "responseCode":200
+      },
+      "input":{"shape":"CreateStreamSessionAdminShellInput"},
+      "output":{"shape":"CreateStreamSessionAdminShellOutput"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ValidationException"},
+        {"shape":"StreamSessionAccessNotReadyException"}
+      ]
+    },
     "CreateStreamSessionConnection":{
       "name":"CreateStreamSessionConnection",
       "http":{
@@ -674,6 +692,33 @@
         "AssociatedApplications":{"shape":"ArnList"}
       }
     },
+    "CreateStreamSessionAdminShellInput":{
+      "type":"structure",
+      "required":[
+        "Identifier",
+        "StreamSessionIdentifier"
+      ],
+      "members":{
+        "Identifier":{
+          "shape":"Identifier",
+          "location":"uri",
+          "locationName":"Identifier"
+        },
+        "StreamSessionIdentifier":{
+          "shape":"Identifier",
+          "location":"uri",
+          "locationName":"StreamSessionIdentifier"
+        }
+      }
+    },
+    "CreateStreamSessionAdminShellOutput":{
+      "type":"structure",
+      "members":{
+        "SessionId":{"shape":"SessionId"},
+        "StreamUrl":{"shape":"StreamUrl"},
+        "TokenValue":{"shape":"TokenValue"}
+      }
+    },
     "CreateStreamSessionConnectionInput":{
       "type":"structure",
       "required":[
@@ -762,6 +807,12 @@
         "ApplicationArns":{"shape":"ArnList"}
       }
     },
+    "DisplayConfiguration":{
+      "type":"structure",
+      "members":{
+        "Resolution":{"shape":"Resolution"}
+      }
+    },
     "EnvironmentVariables":{
       "type":"map",
       "key":{"shape":"EnvironmentVariablesKeyString"},
@@ -777,7 +828,7 @@
     },
     "EnvironmentVariablesValueString":{
       "type":"string",
-      "max":1024,
+      "max":4096,
       "min":0
     },
     "ExecutablePath":{
@@ -951,8 +1002,17 @@
         "LastUpdatedAt":{"shape":"Timestamp"},
         "CreatedAt":{"shape":"Timestamp"},
         "ApplicationArn":{"shape":"Arn"},
-        "ExportFilesMetadata":{"shape":"ExportFilesMetadata"}
+        "ExportFilesMetadata":{"shape":"ExportFilesMetadata"},
+        "RoleArn":{"shape":"IamRoleArn"},
+        "DisplayConfiguration":{"shape":"DisplayConfiguration"}
       }
+    },
+    "IamRoleArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"arn:aws[a-zA-Z-]*:iam::\\d{12}:role/.+",
+      "sensitive":true
     },
     "Id":{
       "type":"string",
@@ -1254,6 +1314,29 @@
       "type":"list",
       "member":{"shape":"ReplicationStatus"}
     },
+    "Resolution":{
+      "type":"structure",
+      "required":[
+        "Width",
+        "Height"
+      ],
+      "members":{
+        "Width":{"shape":"ResolutionWidth"},
+        "Height":{"shape":"ResolutionHeight"}
+      }
+    },
+    "ResolutionHeight":{
+      "type":"integer",
+      "box":true,
+      "max":4096,
+      "min":320
+    },
+    "ResolutionWidth":{
+      "type":"integer",
+      "box":true,
+      "max":4096,
+      "min":320
+    },
     "ResourceNotFoundException":{
       "type":"structure",
       "required":["Message"],
@@ -1302,6 +1385,11 @@
       },
       "exception":true
     },
+    "SessionId":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "SessionLengthSeconds":{
       "type":"integer",
       "box":true,
@@ -1345,7 +1433,9 @@
         "SessionLengthSeconds":{"shape":"SessionLengthSeconds"},
         "AdditionalLaunchArgs":{"shape":"GameLaunchArgList"},
         "AdditionalEnvironmentVariables":{"shape":"EnvironmentVariables"},
-        "PerformanceStatsConfiguration":{"shape":"PerformanceStatsConfiguration"}
+        "PerformanceStatsConfiguration":{"shape":"PerformanceStatsConfiguration"},
+        "RoleArn":{"shape":"IamRoleArn"},
+        "DisplayConfiguration":{"shape":"DisplayConfiguration"}
       }
     },
     "StartStreamSessionOutput":{
@@ -1371,7 +1461,9 @@
         "LastUpdatedAt":{"shape":"Timestamp"},
         "CreatedAt":{"shape":"Timestamp"},
         "ApplicationArn":{"shape":"Arn"},
-        "ExportFilesMetadata":{"shape":"ExportFilesMetadata"}
+        "ExportFilesMetadata":{"shape":"ExportFilesMetadata"},
+        "RoleArn":{"shape":"IamRoleArn"},
+        "DisplayConfiguration":{"shape":"DisplayConfiguration"}
       }
     },
     "StreamClass":{
@@ -1443,6 +1535,19 @@
       "type":"list",
       "member":{"shape":"StreamGroupSummary"}
     },
+    "StreamSessionAccessNotReadyException":{
+      "type":"structure",
+      "required":["Message"],
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "error":{
+        "httpStatusCode":409,
+        "senderFault":true
+      },
+      "exception":true,
+      "retryable":{"throttling":false}
+    },
     "StreamSessionStatus":{
       "type":"string",
       "enum":[
@@ -1463,6 +1568,7 @@
         "invalidSignalRequest",
         "placementTimeout",
         "applicationLogS3DestinationError",
+        "assumeRoleFailed",
         "applicationExit",
         "connectionTimeout",
         "reconnectionTimeout",
@@ -1483,13 +1589,15 @@
         "CreatedAt":{"shape":"Timestamp"},
         "ApplicationArn":{"shape":"Arn"},
         "ExportFilesMetadata":{"shape":"ExportFilesMetadata"},
-        "Location":{"shape":"LocationName"}
+        "Location":{"shape":"LocationName"},
+        "RoleArn":{"shape":"IamRoleArn"}
       }
     },
     "StreamSessionSummaryList":{
       "type":"list",
       "member":{"shape":"StreamSessionSummary"}
     },
+    "StreamUrl":{"type":"string"},
     "String":{"type":"string"},
     "TagKey":{
       "type":"string",
@@ -1571,6 +1679,12 @@
       "retryable":{"throttling":true}
     },
     "Timestamp":{"type":"timestamp"},
+    "TokenValue":{
+      "type":"string",
+      "max":1024,
+      "min":0,
+      "sensitive":true
+    },
     "UntagResourceRequest":{
       "type":"structure",
       "required":[

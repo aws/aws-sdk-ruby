@@ -1032,6 +1032,9 @@ module Aws::MarketplaceCatalog
     #             before_value: "DateTimeISO8601",
     #           },
     #         },
+    #         reseller_role: {
+    #           value_list: ["ChannelPartner"], # accepts ChannelPartner, Distributor
+    #         },
     #       },
     #       machine_learning_product_filters: {
     #         entity_id: {
@@ -1156,6 +1159,7 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].resale_authorization_summary.offer_extended_status #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.created_date #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.availability_end_date #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.reseller_role #=> String, one of "ChannelPartner", "Distributor"
     #   resp.entity_summary_list[0].machine_learning_product_summary.product_title #=> String
     #   resp.entity_summary_list[0].machine_learning_product_summary.visibility #=> String, one of "Limited", "Public", "Restricted", "Draft"
     #   resp.entity_summary_list[0].offer_set_summary.name #=> String
@@ -1447,7 +1451,7 @@ module Aws::MarketplaceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

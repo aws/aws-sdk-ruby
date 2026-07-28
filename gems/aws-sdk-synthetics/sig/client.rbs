@@ -136,7 +136,8 @@ module Aws
                                encryption_mode: ("SSE_S3" | "SSE_KMS")?,
                                kms_key_arn: ::String?
                              }?
-                           }
+                           },
+                           ?kms_key_arn: ::String
                          ) -> _CreateCanaryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCanaryResponseSuccess
 
@@ -436,7 +437,8 @@ module Aws
                            ?add_replica_locations: Array[
                              Params::add_replica_location_input
                            ],
-                           ?remove_replica_locations: Array[::String]
+                           ?remove_replica_locations: Array[::String],
+                           ?kms_key_arn: ::String
                          ) -> _UpdateCanaryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCanaryResponseSuccess
     end

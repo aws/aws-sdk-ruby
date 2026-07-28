@@ -54,7 +54,7 @@ module Aws::SagemakerJobRuntime
   autoload :EndpointProvider, 'aws-sdk-sagemakerjobruntime/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sagemakerjobruntime/endpoints'
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end
 

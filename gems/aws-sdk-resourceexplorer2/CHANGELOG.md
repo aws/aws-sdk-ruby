@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2026-06-29)
+------------------
+
+* Feature - Added CFN resource type fields for Search and ListSupportedResourceTypes responses. Added SLRec field for ServiceView
+
 1.52.0 (2026-05-27)
 ------------------
 

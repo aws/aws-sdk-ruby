@@ -3307,6 +3307,14 @@ module Aws::RedshiftServerless
 
     # Restore the data from a recovery point.
     #
+    # @option params [Boolean] :maintain_integration
+    #   If `true`, maintain existing data sharing, zero-ETL and S3 event
+    #   integrations when restoring. Otherwise, integrations will not be
+    #   maintained after the restore operation. Integrations are only
+    #   maintained when restored to the same serverless namespace.
+    #
+    #   Default: true
+    #
     # @option params [required, String] :namespace_name
     #   The name of the namespace to restore data into.
     #
@@ -3324,6 +3332,7 @@ module Aws::RedshiftServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.restore_from_recovery_point({
+    #     maintain_integration: false,
     #     namespace_name: "NamespaceName", # required
     #     recovery_point_id: "String", # required
     #     workgroup_name: "WorkgroupName", # required
@@ -3365,6 +3374,14 @@ module Aws::RedshiftServerless
     #   The ID of the Key Management Service (KMS) key used to encrypt and
     #   store the namespace's admin credentials secret.
     #
+    # @option params [Boolean] :maintain_integration
+    #   If `true`, maintain existing data sharing, zero-ETL and S3 event
+    #   integrations when restoring. Otherwise, integrations will not be
+    #   maintained after the restore operation. Integrations are only
+    #   maintained when restored to the same serverless namespace.
+    #
+    #   Default: true
+    #
     # @option params [Boolean] :manage_admin_password
     #   If `true`, Amazon Redshift uses Secrets Manager to manage the restored
     #   snapshot's admin credentials. If `MmanageAdminPassword` is false or
@@ -3402,6 +3419,7 @@ module Aws::RedshiftServerless
     #
     #   resp = client.restore_from_snapshot({
     #     admin_password_secret_kms_key_id: "KmsKeyId",
+    #     maintain_integration: false,
     #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
     #     owner_account: "String",
@@ -4387,7 +4405,7 @@ module Aws::RedshiftServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

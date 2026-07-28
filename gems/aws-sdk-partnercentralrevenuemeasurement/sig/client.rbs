@@ -1,0 +1,466 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PartnerCentralRevenueMeasurement
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateMarketplaceRevenueShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMarketplaceRevenueShareOutput]
+        def product_id: () -> ::String
+        def arn: () -> ::String
+        def catalog: () -> ("AWS" | "Sandbox")
+        def product_code: () -> ::String
+        def product_name: () -> ::String
+        def created_date: () -> ::Time
+        def last_modified_date: () -> ::Time
+        def revision: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#create_marketplace_revenue_share-instance_method
+      def create_marketplace_revenue_share: (
+                                              catalog: ("AWS" | "Sandbox"),
+                                              ?client_token: ::String,
+                                              product_id: ::String,
+                                              ?tags: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                }
+                                              ]
+                                            ) -> _CreateMarketplaceRevenueShareResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMarketplaceRevenueShareResponseSuccess
+
+      interface _CreateMarketplaceRevenueShareAllocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMarketplaceRevenueShareAllocationOutput]
+        def marketplace_revenue_share_allocation_id: () -> ::String
+        def product_id: () -> ::String
+        def product_name: () -> ::String
+        def arn: () -> ::String
+        def effective_from: () -> ::String
+        def effective_until: () -> ::String
+        def revenue_share_percent: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE")
+        def created_date: () -> ::Time
+        def last_modified_date: () -> ::Time
+        def latest_marketplace_revenue_share_revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#create_marketplace_revenue_share_allocation-instance_method
+      def create_marketplace_revenue_share_allocation: (
+                                                         catalog: ("AWS" | "Sandbox"),
+                                                         product_id: ::String,
+                                                         ?client_token: ::String,
+                                                         effective_from: ::String,
+                                                         ?effective_until: ::String,
+                                                         revenue_share_percent: ::String
+                                                       ) -> _CreateMarketplaceRevenueShareAllocationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMarketplaceRevenueShareAllocationResponseSuccess
+
+      interface _CreateRevenueAttributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRevenueAttributionOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def tenancy_model: () -> ("MULTI_TENANT" | "SINGLE_TENANT")
+        def marketplace_product: () -> Types::MarketplaceProductSummary
+        def revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#create_revenue_attribution-instance_method
+      def create_revenue_attribution: (
+                                        catalog: ("AWS" | "Sandbox"),
+                                        ?client_token: ::String,
+                                        name: ::String,
+                                        ?description: ::String,
+                                        tenancy_model: ("MULTI_TENANT" | "SINGLE_TENANT"),
+                                        ?product_identifier: ::String,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          }
+                                        ]
+                                      ) -> _CreateRevenueAttributionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRevenueAttributionResponseSuccess
+
+      interface _GetMarketplaceRevenueShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMarketplaceRevenueShareOutput]
+        def product_id: () -> ::String
+        def arn: () -> ::String
+        def catalog: () -> ("AWS" | "Sandbox")
+        def product_code: () -> ::String
+        def product_name: () -> ::String
+        def created_date: () -> ::Time
+        def last_modified_date: () -> ::Time
+        def revision: () -> ::Integer
+        def latest_revision: () -> ::Integer
+        def total_active_marketplace_revenue_share_allocation_count: () -> ::Integer
+        def total_marketplace_revenue_share_allocation_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#get_marketplace_revenue_share-instance_method
+      def get_marketplace_revenue_share: (
+                                           catalog: ("AWS" | "Sandbox"),
+                                           product_id: ::String,
+                                           ?revision: ::Integer
+                                         ) -> _GetMarketplaceRevenueShareResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMarketplaceRevenueShareResponseSuccess
+
+      interface _GetMarketplaceRevenueShareAllocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMarketplaceRevenueShareAllocationOutput]
+        def marketplace_revenue_share_allocation_id: () -> ::String
+        def product_id: () -> ::String
+        def product_name: () -> ::String
+        def arn: () -> ::String
+        def effective_from: () -> ::String
+        def effective_until: () -> ::String
+        def revenue_share_percent: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE")
+        def created_date: () -> ::Time
+        def last_modified_date: () -> ::Time
+        def latest_marketplace_revenue_share_revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#get_marketplace_revenue_share_allocation-instance_method
+      def get_marketplace_revenue_share_allocation: (
+                                                      catalog: ("AWS" | "Sandbox"),
+                                                      product_id: ::String,
+                                                      marketplace_revenue_share_allocation_id: ::String,
+                                                      ?marketplace_revenue_share_revision: ::String
+                                                    ) -> _GetMarketplaceRevenueShareAllocationResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMarketplaceRevenueShareAllocationResponseSuccess
+
+      interface _GetRevenueAttributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRevenueAttributionOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def catalog: () -> ("AWS" | "Sandbox")
+        def name: () -> ::String
+        def description: () -> ::String
+        def tenancy_model: () -> ("MULTI_TENANT" | "SINGLE_TENANT")
+        def marketplace_product: () -> Types::MarketplaceProductSummary
+        def created_date: () -> ::Time
+        def last_modified_date: () -> ::Time
+        def revision: () -> ::String
+        def latest_revision: () -> ::String
+        def effective_from: () -> ::String
+        def effective_until: () -> ::String
+        def total_active_revenue_attribution_allocation_count: () -> ::Integer
+        def total_revenue_attribution_allocation_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#get_revenue_attribution-instance_method
+      def get_revenue_attribution: (
+                                     catalog: ("AWS" | "Sandbox"),
+                                     identifier: ::String,
+                                     ?revision: ::String
+                                   ) -> _GetRevenueAttributionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRevenueAttributionResponseSuccess
+
+      interface _GetRevenueAttributionAllocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRevenueAttributionAllocationOutput]
+        def revenue_attribution_allocation_id: () -> ::String
+        def revenue_attribution_identifier: () -> ::String
+        def entity_type: () -> ("OFFER" | "OPPORTUNITY")
+        def entity_identifier: () -> ::String
+        def entity_name: () -> ::String
+        def customer_aws_account_id: () -> ::String
+        def revenue_share_percent: () -> ::String
+        def effective_from: () -> ::String
+        def effective_until: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE")
+        def created_date: () -> ::Time
+        def last_modified_date: () -> ::Time
+        def revenue_attribution_revision: () -> ::String
+        def revenue_attribution_latest_revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#get_revenue_attribution_allocation-instance_method
+      def get_revenue_attribution_allocation: (
+                                                catalog: ("AWS" | "Sandbox"),
+                                                revenue_attribution_identifier: ::String,
+                                                revenue_attribution_allocation_id: ::String,
+                                                ?revenue_attribution_revision: ::String
+                                              ) -> _GetRevenueAttributionAllocationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRevenueAttributionAllocationResponseSuccess
+
+      interface _GetRevenueAttributionAllocationsTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRevenueAttributionAllocationsTaskOutput]
+        def task_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETE" | "FAILED")
+        def catalog: () -> ("AWS" | "Sandbox")
+        def revenue_attribution_arn: () -> ::String
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def total_revenue_attribution_allocation_records: () -> ::Integer
+        def description: () -> ::String
+        def revenue_attribution_latest_revision: () -> ::String
+        def error_detail_list: () -> ::Array[Types::RevenueAttributionAllocationErrorDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#get_revenue_attribution_allocations_task-instance_method
+      def get_revenue_attribution_allocations_task: (
+                                                      catalog: ("AWS" | "Sandbox"),
+                                                      revenue_attribution_identifier: ::String
+                                                    ) -> _GetRevenueAttributionAllocationsTaskResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRevenueAttributionAllocationsTaskResponseSuccess
+
+      interface _ListMarketplaceRevenueShareAllocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMarketplaceRevenueShareAllocationsOutput]
+        def marketplace_revenue_share_allocation_summaries: () -> ::Array[Types::MarketplaceRevenueShareAllocationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#list_marketplace_revenue_share_allocations-instance_method
+      def list_marketplace_revenue_share_allocations: (
+                                                        catalog: ("AWS" | "Sandbox"),
+                                                        product_id: ::String,
+                                                        ?status: ("ACTIVE" | "INACTIVE"),
+                                                        ?after_effective_from: ::String,
+                                                        ?before_effective_from: ::String,
+                                                        ?sort_by: ("EffectiveFrom"),
+                                                        ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                                        ?max_results: ::Integer,
+                                                        ?next_token: ::String,
+                                                        ?marketplace_revenue_share_revision: ::String
+                                                      ) -> _ListMarketplaceRevenueShareAllocationsResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMarketplaceRevenueShareAllocationsResponseSuccess
+
+      interface _ListMarketplaceRevenueSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMarketplaceRevenueSharesOutput]
+        def marketplace_revenue_share_summaries: () -> ::Array[Types::MarketplaceRevenueShareSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#list_marketplace_revenue_shares-instance_method
+      def list_marketplace_revenue_shares: (
+                                             catalog: ("AWS" | "Sandbox"),
+                                             ?product_ids: Array[::String],
+                                             ?product_codes: Array[::String],
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String,
+                                             ?sort_by: ("LastModifiedDate"),
+                                             ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                             ?created_after: ::Time,
+                                             ?created_before: ::Time
+                                           ) -> _ListMarketplaceRevenueSharesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMarketplaceRevenueSharesResponseSuccess
+
+      interface _ListRevenueAttributionAllocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRevenueAttributionAllocationsOutput]
+        def revenue_attribution_allocation_summaries: () -> ::Array[Types::RevenueAttributionAllocationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#list_revenue_attribution_allocations-instance_method
+      def list_revenue_attribution_allocations: (
+                                                  catalog: ("AWS" | "Sandbox"),
+                                                  revenue_attribution_identifier: ::String,
+                                                  ?entity_type_filters: Array[("OFFER" | "OPPORTUNITY")],
+                                                  ?entity_identifier_filters: Array[::String],
+                                                  ?customer_aws_account_id_filters: Array[::String],
+                                                  ?status_filter: ("ACTIVE" | "INACTIVE"),
+                                                  ?after_effective_from: ::String,
+                                                  ?before_effective_from: ::String,
+                                                  ?after_effective_until: ::String,
+                                                  ?before_effective_until: ::String,
+                                                  ?sort_by: ("EffectiveFrom"),
+                                                  ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                                  ?revenue_attribution_revision: ::String,
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _ListRevenueAttributionAllocationsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRevenueAttributionAllocationsResponseSuccess
+
+      interface _ListRevenueAttributionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRevenueAttributionsOutput]
+        def revenue_attribution_summaries: () -> ::Array[Types::AttributionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#list_revenue_attributions-instance_method
+      def list_revenue_attributions: (
+                                       catalog: ("AWS" | "Sandbox"),
+                                       ?identifiers: Array[::String],
+                                       ?created_after: ::Time,
+                                       ?created_before: ::Time,
+                                       ?sort_by: ("LastModifiedDate"),
+                                       ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListRevenueAttributionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRevenueAttributionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartRevenueAttributionAllocationsTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRevenueAttributionAllocationsTaskOutput]
+        def task_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETE" | "FAILED")
+        def catalog: () -> ("AWS" | "Sandbox")
+        def revenue_attribution_arn: () -> ::String
+        def started_at: () -> ::Time
+        def total_revenue_attribution_allocation_records: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#start_revenue_attribution_allocations_task-instance_method
+      def start_revenue_attribution_allocations_task: (
+                                                        catalog: ("AWS" | "Sandbox"),
+                                                        revenue_attribution_identifier: ::String,
+                                                        revenue_attribution_revision: ::String,
+                                                        revenue_share_allocations: Array[
+                                                          {
+                                                            action: ("CREATE" | "UPDATE"),
+                                                            revenue_attribution_allocation_id: ::String?,
+                                                            entity_type: ("OFFER" | "OPPORTUNITY"),
+                                                            entity_identifier: ::String,
+                                                            customer_aws_account_id: ::String,
+                                                            revenue_share_percent: ::String,
+                                                            effective_from: ::String,
+                                                            effective_until: ::String,
+                                                            status: ("ACTIVE" | "INACTIVE")?
+                                                          }
+                                                        ],
+                                                        ?client_token: ::String,
+                                                        ?description: ::String
+                                                      ) -> _StartRevenueAttributionAllocationsTaskResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRevenueAttributionAllocationsTaskResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            }
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateMarketplaceRevenueShareAllocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMarketplaceRevenueShareAllocationOutput]
+        def marketplace_revenue_share_allocation_id: () -> ::String
+        def product_id: () -> ::String
+        def product_name: () -> ::String
+        def arn: () -> ::String
+        def effective_from: () -> ::String
+        def effective_until: () -> ::String
+        def revenue_share_percent: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE")
+        def created_date: () -> ::Time
+        def last_modified_date: () -> ::Time
+        def latest_marketplace_revenue_share_revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#update_marketplace_revenue_share_allocation-instance_method
+      def update_marketplace_revenue_share_allocation: (
+                                                         catalog: ("AWS" | "Sandbox"),
+                                                         product_id: ::String,
+                                                         marketplace_revenue_share_allocation_id: ::String,
+                                                         marketplace_revenue_share_revision: ::String,
+                                                         ?client_token: ::String,
+                                                         ?effective_from: ::String,
+                                                         ?effective_until: ::String,
+                                                         ?revenue_share_percent: ::String,
+                                                         ?status: ("ACTIVE" | "INACTIVE")
+                                                       ) -> _UpdateMarketplaceRevenueShareAllocationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMarketplaceRevenueShareAllocationResponseSuccess
+
+      interface _UpdateRevenueAttributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRevenueAttributionOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def last_modified_date: () -> ::Time
+        def latest_revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralRevenueMeasurement/Client.html#update_revenue_attribution-instance_method
+      def update_revenue_attribution: (
+                                        catalog: ("AWS" | "Sandbox"),
+                                        identifier: ::String,
+                                        ?client_token: ::String,
+                                        ?description: ::String,
+                                        revision: ::String
+                                      ) -> _UpdateRevenueAttributionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRevenueAttributionResponseSuccess
+    end
+  end
+end
+

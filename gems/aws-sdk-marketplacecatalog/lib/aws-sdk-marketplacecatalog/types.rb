@@ -2465,6 +2465,10 @@ module Aws::MarketplaceCatalog
     #   Allows filtering on the `LastModifiedDate` of a ResaleAuthorization.
     #   @return [Types::ResaleAuthorizationLastModifiedDateFilter]
     #
+    # @!attribute [rw] reseller_role
+    #   Allows filtering on the `ResellerRole` of a ResaleAuthorization.
+    #   @return [Types::ResaleAuthorizationResellerRoleFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ResaleAuthorizationFilters AWS API Documentation
     #
     class ResaleAuthorizationFilters < Struct.new(
@@ -2480,7 +2484,8 @@ module Aws::MarketplaceCatalog
       :reseller_legal_name,
       :status,
       :offer_extended_status,
-      :last_modified_date)
+      :last_modified_date,
+      :reseller_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2687,6 +2692,21 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # Allows filtering on the `ResellerRole` of a ResaleAuthorization.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `ResellerRole` of a ResaleAuthorization with
+    #   list input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ResaleAuthorizationResellerRoleFilter AWS API Documentation
+    #
+    class ResaleAuthorizationResellerRoleFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Allows to sort ResaleAuthorization.
     #
     # @!attribute [rw] sort_by
@@ -2767,6 +2787,10 @@ module Aws::MarketplaceCatalog
     #   The availability end date of the ResaleAuthorization.
     #   @return [String]
     #
+    # @!attribute [rw] reseller_role
+    #   The reseller role of the ResaleAuthorization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ResaleAuthorizationSummary AWS API Documentation
     #
     class ResaleAuthorizationSummary < Struct.new(
@@ -2780,7 +2804,8 @@ module Aws::MarketplaceCatalog
       :status,
       :offer_extended_status,
       :created_date,
-      :availability_end_date)
+      :availability_end_date,
+      :reseller_role)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -32,6 +32,7 @@ module Aws::Connect
   # * {ConflictException}
   # * {ContactFlowNotPublishedException}
   # * {ContactNotFoundException}
+  # * {ContactNotTerminatedException}
   # * {DestinationNotAllowedException}
   # * {DuplicateResourceException}
   # * {IdempotencyException}
@@ -127,6 +128,21 @@ module Aws::Connect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Connect::Types::ContactNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ContactNotTerminatedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::ContactNotTerminatedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

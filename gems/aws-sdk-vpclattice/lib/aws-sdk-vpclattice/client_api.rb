@@ -149,6 +149,7 @@ module Aws::VPCLattice
     HttpMatch = Shapes::StructureShape.new(name: 'HttpMatch')
     HttpMethod = Shapes::StringShape.new(name: 'HttpMethod')
     HttpStatusCode = Shapes::IntegerShape.new(name: 'HttpStatusCode')
+    IdleTimeoutSeconds = Shapes::IntegerShape.new(name: 'IdleTimeoutSeconds')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
@@ -584,6 +585,7 @@ module Aws::VPCLattice
     CreateServiceRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: ServiceCustomDomainName, location_name: "customDomainName"))
     CreateServiceRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
     CreateServiceRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "authType"))
+    CreateServiceRequest.add_member(:idle_timeout_seconds, Shapes::ShapeRef.new(shape: IdleTimeoutSeconds, location_name: "idleTimeoutSeconds"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
     CreateServiceResponse.add_member(:id, Shapes::ShapeRef.new(shape: ServiceId, location_name: "id"))
@@ -593,6 +595,7 @@ module Aws::VPCLattice
     CreateServiceResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
     CreateServiceResponse.add_member(:status, Shapes::ShapeRef.new(shape: ServiceStatus, location_name: "status"))
     CreateServiceResponse.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "authType"))
+    CreateServiceResponse.add_member(:idle_timeout_seconds, Shapes::ShapeRef.new(shape: IdleTimeoutSeconds, location_name: "idleTimeoutSeconds"))
     CreateServiceResponse.add_member(:dns_entry, Shapes::ShapeRef.new(shape: DnsEntry, location_name: "dnsEntry"))
     CreateServiceResponse.struct_class = Types::CreateServiceResponse
 
@@ -962,6 +965,7 @@ module Aws::VPCLattice
     GetServiceResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
     GetServiceResponse.add_member(:status, Shapes::ShapeRef.new(shape: ServiceStatus, location_name: "status"))
     GetServiceResponse.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "authType"))
+    GetServiceResponse.add_member(:idle_timeout_seconds, Shapes::ShapeRef.new(shape: IdleTimeoutSeconds, location_name: "idleTimeoutSeconds"))
     GetServiceResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "failureCode"))
     GetServiceResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: FailureMessage, location_name: "failureMessage"))
     GetServiceResponse.struct_class = Types::GetServiceResponse
@@ -1638,6 +1642,7 @@ module Aws::VPCLattice
     UpdateServiceRequest.add_member(:service_identifier, Shapes::ShapeRef.new(shape: ServiceIdentifier, required: true, location: "uri", location_name: "serviceIdentifier"))
     UpdateServiceRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
     UpdateServiceRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "authType"))
+    UpdateServiceRequest.add_member(:idle_timeout_seconds, Shapes::ShapeRef.new(shape: IdleTimeoutSeconds, location_name: "idleTimeoutSeconds"))
     UpdateServiceRequest.struct_class = Types::UpdateServiceRequest
 
     UpdateServiceResponse.add_member(:id, Shapes::ShapeRef.new(shape: ServiceId, location_name: "id"))
@@ -1646,6 +1651,7 @@ module Aws::VPCLattice
     UpdateServiceResponse.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: ServiceCustomDomainName, location_name: "customDomainName"))
     UpdateServiceResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
     UpdateServiceResponse.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "authType"))
+    UpdateServiceResponse.add_member(:idle_timeout_seconds, Shapes::ShapeRef.new(shape: IdleTimeoutSeconds, location_name: "idleTimeoutSeconds"))
     UpdateServiceResponse.struct_class = Types::UpdateServiceResponse
 
     UpdateTargetGroupRequest.add_member(:target_group_identifier, Shapes::ShapeRef.new(shape: TargetGroupIdentifier, required: true, location: "uri", location_name: "targetGroupIdentifier"))

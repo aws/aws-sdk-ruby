@@ -1031,6 +1031,10 @@ module Aws::Lambda
     #   The tag propagation configuration for the capacity provider. Specifies
     #   tags to apply to managed resources at launch.
     #
+    # @option params [Types::CapacityProviderTelemetryConfig] :telemetry_config
+    #   The telemetry configuration for the capacity provider. Specifies
+    #   logging settings for managed resources.
+    #
     # @return [Types::CreateCapacityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCapacityProviderResponse#capacity_provider #capacity_provider} => Types::CapacityProvider
@@ -1071,6 +1075,12 @@ module Aws::Lambda
     #         "TagKey" => "TagValue",
     #       },
     #     },
+    #     telemetry_config: {
+    #       logging_config: {
+    #         system_log_level: "DEBUG", # accepts DEBUG, INFO, WARN
+    #         log_group: "LogGroup",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1098,6 +1108,8 @@ module Aws::Lambda
     #   resp.capacity_provider.propagate_tags.mode #=> String, one of "None", "Explicit"
     #   resp.capacity_provider.propagate_tags.explicit_tags #=> Hash
     #   resp.capacity_provider.propagate_tags.explicit_tags["TagKey"] #=> String
+    #   resp.capacity_provider.telemetry_config.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.capacity_provider.telemetry_config.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateCapacityProvider AWS API Documentation
     #
@@ -2106,7 +2118,7 @@ module Aws::Lambda
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, nodejs22.x, nodejs24.x, java8, java8.al2, java11, java17, java21, java25, python2.7, python3.6, python3.7, python3.8, python3.9, python3.10, python3.11, python3.12, python3.13, python3.14, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, dotnet10, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, ruby3.2, ruby3.3, ruby3.4, ruby4.0, provided, provided.al2, provided.al2023
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, nodejs22.x, nodejs24.x, java8, java8.al2, java11, java17, java21, java25, python2.7, python3.6, python3.7, python3.8, python3.9, python3.10, python3.11, python3.12, python3.13, python3.14, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, dotnet10, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, ruby3.2, ruby3.3, ruby3.4, ruby4.0, provided, provided.al2, provided.al2023, java8.al2023, java11.al2023, java17.al2023
     #     role: "RoleArn", # required
     #     handler: "Handler",
     #     code: { # required
@@ -2114,6 +2126,7 @@ module Aws::Lambda
     #       s3_bucket: "S3Bucket",
     #       s3_key: "S3Key",
     #       s3_object_version: "S3ObjectVersion",
+    #       s3_object_storage_mode: "COPY", # accepts COPY, REFERENCE
     #       image_uri: "String",
     #       source_kms_key_arn: "KMSKeyArn",
     #     },
@@ -2180,6 +2193,7 @@ module Aws::Lambda
     #       },
     #     },
     #     durable_config: {
+    #       kms_key_arn: "KMSKeyArn",
     #       retention_period_in_days: 1,
     #       execution_timeout: 1,
     #     },
@@ -2189,7 +2203,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2221,10 +2235,10 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed", "Deactivating", "Deactivated", "ActiveNonInvocable", "Deleting"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions", "DependencyError"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DependencyError"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
@@ -2255,6 +2269,7 @@ module Aws::Lambda
     #   resp.capacity_provider_config.lambda_managed_instances_capacity_provider_config.per_execution_environment_max_concurrency #=> Integer
     #   resp.capacity_provider_config.lambda_managed_instances_capacity_provider_config.execution_environment_memory_gi_b_per_v_cpu #=> Float
     #   resp.config_sha_256 #=> String
+    #   resp.durable_config.kms_key_arn #=> String
     #   resp.durable_config.retention_period_in_days #=> Integer
     #   resp.durable_config.execution_timeout #=> Integer
     #
@@ -2467,6 +2482,8 @@ module Aws::Lambda
     #   resp.capacity_provider.propagate_tags.mode #=> String, one of "None", "Explicit"
     #   resp.capacity_provider.propagate_tags.explicit_tags #=> Hash
     #   resp.capacity_provider.propagate_tags.explicit_tags["TagKey"] #=> String
+    #   resp.capacity_provider.telemetry_config.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.capacity_provider.telemetry_config.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteCapacityProvider AWS API Documentation
     #
@@ -3155,6 +3172,8 @@ module Aws::Lambda
     #   resp.capacity_provider.propagate_tags.mode #=> String, one of "None", "Explicit"
     #   resp.capacity_provider.propagate_tags.explicit_tags #=> Hash
     #   resp.capacity_provider.propagate_tags.explicit_tags["TagKey"] #=> String
+    #   resp.capacity_provider.telemetry_config.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.capacity_provider.telemetry_config.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetCapacityProvider AWS API Documentation
     #
@@ -3211,6 +3230,12 @@ module Aws::Lambda
     # @option params [required, String] :durable_execution_arn
     #   The Amazon Resource Name (ARN) of the durable execution.
     #
+    # @option params [Boolean] :include_execution_data
+    #   Specifies whether to include execution data such as input payload,
+    #   result, and error information in the response. Set to `false` for a
+    #   more compact response that includes only execution metadata. The
+    #   default value is set to `true`.
+    #
     # @return [Types::GetDurableExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDurableExecutionResponse#durable_execution_arn #durable_execution_arn} => String
@@ -3224,11 +3249,14 @@ module Aws::Lambda
     #   * {Types::GetDurableExecutionResponse#end_timestamp #end_timestamp} => Time
     #   * {Types::GetDurableExecutionResponse#version #version} => String
     #   * {Types::GetDurableExecutionResponse#trace_header #trace_header} => Types::TraceHeader
+    #   * {Types::GetDurableExecutionResponse#execution_data_included #execution_data_included} => Boolean
+    #   * {Types::GetDurableExecutionResponse#durable_config #durable_config} => Types::DurableConfig
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_durable_execution({
     #     durable_execution_arn: "DurableExecutionArn", # required
+    #     include_execution_data: false,
     #   })
     #
     # @example Response structure
@@ -3248,6 +3276,10 @@ module Aws::Lambda
     #   resp.end_timestamp #=> Time
     #   resp.version #=> String
     #   resp.trace_header.x_amzn_trace_id #=> String
+    #   resp.execution_data_included #=> Boolean
+    #   resp.durable_config.kms_key_arn #=> String
+    #   resp.durable_config.retention_period_in_days #=> Integer
+    #   resp.durable_config.execution_timeout #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetDurableExecution AWS API Documentation
     #
@@ -3784,7 +3816,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -3816,10 +3848,10 @@ module Aws::Lambda
     #   resp.configuration.layers[0].signing_job_arn #=> String
     #   resp.configuration.state #=> String, one of "Pending", "Active", "Inactive", "Failed", "Deactivating", "Deactivated", "ActiveNonInvocable", "Deleting"
     #   resp.configuration.state_reason #=> String
-    #   resp.configuration.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions"
+    #   resp.configuration.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions", "DependencyError"
     #   resp.configuration.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.configuration.last_update_status_reason #=> String
-    #   resp.configuration.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl"
+    #   resp.configuration.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DependencyError"
     #   resp.configuration.file_system_configs #=> Array
     #   resp.configuration.file_system_configs[0].arn #=> String
     #   resp.configuration.file_system_configs[0].local_mount_path #=> String
@@ -3850,13 +3882,19 @@ module Aws::Lambda
     #   resp.configuration.capacity_provider_config.lambda_managed_instances_capacity_provider_config.per_execution_environment_max_concurrency #=> Integer
     #   resp.configuration.capacity_provider_config.lambda_managed_instances_capacity_provider_config.execution_environment_memory_gi_b_per_v_cpu #=> Float
     #   resp.configuration.config_sha_256 #=> String
+    #   resp.configuration.durable_config.kms_key_arn #=> String
     #   resp.configuration.durable_config.retention_period_in_days #=> Integer
     #   resp.configuration.durable_config.execution_timeout #=> Integer
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.code.image_uri #=> String
     #   resp.code.resolved_image_uri #=> String
+    #   resp.code.resolved_s3_object.s3_bucket #=> String
+    #   resp.code.resolved_s3_object.s3_key #=> String
+    #   resp.code.resolved_s3_object.s3_object_version #=> String
     #   resp.code.source_kms_key_arn #=> String
+    #   resp.code.error.error_code #=> String
+    #   resp.code.error.message #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.tags_error.error_code #=> String
@@ -4102,7 +4140,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -4134,10 +4172,10 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed", "Deactivating", "Deactivated", "ActiveNonInvocable", "Deleting"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions", "DependencyError"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DependencyError"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
@@ -4168,6 +4206,7 @@ module Aws::Lambda
     #   resp.capacity_provider_config.lambda_managed_instances_capacity_provider_config.per_execution_environment_max_concurrency #=> Integer
     #   resp.capacity_provider_config.lambda_managed_instances_capacity_provider_config.execution_environment_memory_gi_b_per_v_cpu #=> Float
     #   resp.config_sha_256 #=> String
+    #   resp.durable_config.kms_key_arn #=> String
     #   resp.durable_config.retention_period_in_days #=> Integer
     #   resp.durable_config.execution_timeout #=> Integer
     #
@@ -4477,6 +4516,9 @@ module Aws::Lambda
     #   resp.content.code_size #=> Integer
     #   resp.content.signing_profile_version_arn #=> String
     #   resp.content.signing_job_arn #=> String
+    #   resp.content.resolved_s3_object.s3_bucket #=> String
+    #   resp.content.resolved_s3_object.s3_key #=> String
+    #   resp.content.resolved_s3_object.s3_object_version #=> String
     #   resp.layer_arn #=> String
     #   resp.layer_version_arn #=> String
     #   resp.description #=> String
@@ -4485,7 +4527,7 @@ module Aws::Lambda
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersion AWS API Documentation
@@ -4558,6 +4600,9 @@ module Aws::Lambda
     #   resp.content.code_size #=> Integer
     #   resp.content.signing_profile_version_arn #=> String
     #   resp.content.signing_job_arn #=> String
+    #   resp.content.resolved_s3_object.s3_bucket #=> String
+    #   resp.content.resolved_s3_object.s3_key #=> String
+    #   resp.content.resolved_s3_object.s3_object_version #=> String
     #   resp.layer_arn #=> String
     #   resp.layer_version_arn #=> String
     #   resp.description #=> String
@@ -4566,7 +4611,7 @@ module Aws::Lambda
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionByArn AWS API Documentation
@@ -4941,9 +4986,18 @@ module Aws::Lambda
     #   only.
     #
     # @option params [String] :durable_execution_name
-    #   Optional unique name for the durable execution. When you start your
-    #   special function, you can give it a unique name to identify this
-    #   specific execution. It's like giving a nickname to a task.
+    #   A unique name for the durable execution. If you invoke a durable
+    #   function using a name that already exists with the same payload,
+    #   Lambda returns the existing execution instead of creating a duplicate.
+    #   If the payload differs, Lambda returns a
+    #   `DurableExecutionAlreadyStartedException` error.
+    #
+    #   If not specified, Lambda generates a unique identifier automatically.
+    #   For more information, see [Execution names][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-execution-idempotency.html#durable-idempotency-execution-names
     #
     # @option params [String, StringIO, File] :payload
     #   The JSON that you want to provide to your Lambda function as input.
@@ -5142,17 +5196,6 @@ module Aws::Lambda
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
     #
-    # @option params [String] :invocation_type
-    #   Use one of the following options:
-    #
-    #   * `RequestResponse` (default) – Invoke the function synchronously.
-    #     Keep the connection open until the function returns a response or
-    #     times out. The API operation response includes the function response
-    #     and additional data.
-    #
-    #   * `DryRun` – Validate parameter values and verify that the IAM user or
-    #     role has permission to invoke the function.
-    #
     # @option params [String] :log_type
     #   Set to `Tail` to include the execution log in the response. Applies to
     #   synchronously invoked functions only.
@@ -5173,6 +5216,17 @@ module Aws::Lambda
     #
     # @option params [String] :tenant_id
     #   The identifier of the tenant in a multi-tenant Lambda function.
+    #
+    # @option params [String] :invocation_type
+    #   Use one of the following options:
+    #
+    #   * `RequestResponse` (default) – Invoke the function synchronously.
+    #     Keep the connection open until the function returns a response or
+    #     times out. The API operation response includes the function response
+    #     and additional data.
+    #
+    #   * `DryRun` – Validate parameter values and verify that the IAM user or
+    #     role has permission to invoke the function.
     #
     # @return [Types::InvokeWithResponseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5283,12 +5337,12 @@ module Aws::Lambda
     #
     #   resp = client.invoke_with_response_stream({
     #     function_name: "NamespacedFunctionName", # required
-    #     invocation_type: "RequestResponse", # accepts RequestResponse, DryRun
     #     log_type: "None", # accepts None, Tail
     #     client_context: "String",
     #     qualifier: "NumericLatestPublishedOrAliasQualifier",
     #     payload: "data",
     #     tenant_id: "TenantId",
+    #     invocation_type: "RequestResponse", # accepts RequestResponse, DryRun
     #   })
     #
     # @example Response structure
@@ -5492,6 +5546,8 @@ module Aws::Lambda
     #   resp.capacity_providers[0].propagate_tags.mode #=> String, one of "None", "Explicit"
     #   resp.capacity_providers[0].propagate_tags.explicit_tags #=> Hash
     #   resp.capacity_providers[0].propagate_tags.explicit_tags["TagKey"] #=> String
+    #   resp.capacity_providers[0].telemetry_config.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.capacity_providers[0].telemetry_config.logging_config.log_group #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListCapacityProviders AWS API Documentation
@@ -5625,6 +5681,7 @@ module Aws::Lambda
     #   resp.durable_executions[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "STOPPED"
     #   resp.durable_executions[0].start_timestamp #=> Time
     #   resp.durable_executions[0].end_timestamp #=> Time
+    #   resp.durable_executions[0].kms_key_arn #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListDurableExecutionsByFunction AWS API Documentation
@@ -6128,7 +6185,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -6160,10 +6217,10 @@ module Aws::Lambda
     #   resp.functions[0].layers[0].signing_job_arn #=> String
     #   resp.functions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed", "Deactivating", "Deactivated", "ActiveNonInvocable", "Deleting"
     #   resp.functions[0].state_reason #=> String
-    #   resp.functions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions"
+    #   resp.functions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions", "DependencyError"
     #   resp.functions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.functions[0].last_update_status_reason #=> String
-    #   resp.functions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl"
+    #   resp.functions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DependencyError"
     #   resp.functions[0].file_system_configs #=> Array
     #   resp.functions[0].file_system_configs[0].arn #=> String
     #   resp.functions[0].file_system_configs[0].local_mount_path #=> String
@@ -6194,6 +6251,7 @@ module Aws::Lambda
     #   resp.functions[0].capacity_provider_config.lambda_managed_instances_capacity_provider_config.per_execution_environment_max_concurrency #=> Integer
     #   resp.functions[0].capacity_provider_config.lambda_managed_instances_capacity_provider_config.execution_environment_memory_gi_b_per_v_cpu #=> Float
     #   resp.functions[0].config_sha_256 #=> String
+    #   resp.functions[0].durable_config.kms_key_arn #=> String
     #   resp.functions[0].durable_config.retention_period_in_days #=> Integer
     #   resp.functions[0].durable_config.execution_timeout #=> Integer
     #
@@ -6335,7 +6393,7 @@ module Aws::Lambda
     #
     #   resp = client.list_layer_versions({
     #     compatible_architecture: "x86_64", # accepts x86_64, arm64
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, nodejs22.x, nodejs24.x, java8, java8.al2, java11, java17, java21, java25, python2.7, python3.6, python3.7, python3.8, python3.9, python3.10, python3.11, python3.12, python3.13, python3.14, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, dotnet10, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, ruby3.2, ruby3.3, ruby3.4, ruby4.0, provided, provided.al2, provided.al2023
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, nodejs22.x, nodejs24.x, java8, java8.al2, java11, java17, java21, java25, python2.7, python3.6, python3.7, python3.8, python3.9, python3.10, python3.11, python3.12, python3.13, python3.14, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, dotnet10, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, ruby3.2, ruby3.3, ruby3.4, ruby4.0, provided, provided.al2, provided.al2023, java8.al2023, java11.al2023, java17.al2023
     #     layer_name: "LayerName", # required
     #     marker: "String",
     #     max_items: 1,
@@ -6352,7 +6410,7 @@ module Aws::Lambda
     #   resp.layer_versions[0].compatible_architectures #=> Array
     #   resp.layer_versions[0].compatible_architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.layer_versions[0].compatible_runtimes #=> Array
-    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.layer_versions[0].license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersions AWS API Documentation
@@ -6443,7 +6501,7 @@ module Aws::Lambda
     #
     #   resp = client.list_layers({
     #     compatible_architecture: "x86_64", # accepts x86_64, arm64
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, nodejs22.x, nodejs24.x, java8, java8.al2, java11, java17, java21, java25, python2.7, python3.6, python3.7, python3.8, python3.9, python3.10, python3.11, python3.12, python3.13, python3.14, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, dotnet10, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, ruby3.2, ruby3.3, ruby3.4, ruby4.0, provided, provided.al2, provided.al2023
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, nodejs22.x, nodejs24.x, java8, java8.al2, java11, java17, java21, java25, python2.7, python3.6, python3.7, python3.8, python3.9, python3.10, python3.11, python3.12, python3.13, python3.14, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, dotnet10, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, ruby3.2, ruby3.3, ruby3.4, ruby4.0, provided, provided.al2, provided.al2023, java8.al2023, java11.al2023, java17.al2023
     #     marker: "String",
     #     max_items: 1,
     #   })
@@ -6461,7 +6519,7 @@ module Aws::Lambda
     #   resp.layers[0].latest_matching_version.compatible_architectures #=> Array
     #   resp.layers[0].latest_matching_version.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.layers[0].latest_matching_version.compatible_runtimes #=> Array
-    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.layers[0].latest_matching_version.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayers AWS API Documentation
@@ -6743,7 +6801,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -6775,10 +6833,10 @@ module Aws::Lambda
     #   resp.versions[0].layers[0].signing_job_arn #=> String
     #   resp.versions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed", "Deactivating", "Deactivated", "ActiveNonInvocable", "Deleting"
     #   resp.versions[0].state_reason #=> String
-    #   resp.versions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions"
+    #   resp.versions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions", "DependencyError"
     #   resp.versions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.versions[0].last_update_status_reason #=> String
-    #   resp.versions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl"
+    #   resp.versions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DependencyError"
     #   resp.versions[0].file_system_configs #=> Array
     #   resp.versions[0].file_system_configs[0].arn #=> String
     #   resp.versions[0].file_system_configs[0].local_mount_path #=> String
@@ -6809,6 +6867,7 @@ module Aws::Lambda
     #   resp.versions[0].capacity_provider_config.lambda_managed_instances_capacity_provider_config.per_execution_environment_max_concurrency #=> Integer
     #   resp.versions[0].capacity_provider_config.lambda_managed_instances_capacity_provider_config.execution_environment_memory_gi_b_per_v_cpu #=> Float
     #   resp.versions[0].config_sha_256 #=> String
+    #   resp.versions[0].durable_config.kms_key_arn #=> String
     #   resp.versions[0].durable_config.retention_period_in_days #=> Integer
     #   resp.versions[0].durable_config.execution_timeout #=> Integer
     #
@@ -6934,10 +6993,11 @@ module Aws::Lambda
     #       s3_bucket: "S3Bucket",
     #       s3_key: "S3Key",
     #       s3_object_version: "S3ObjectVersion",
+    #       s3_object_storage_mode: "COPY", # accepts COPY, REFERENCE
     #       zip_file: "data",
     #     },
     #     compatible_architectures: ["x86_64"], # accepts x86_64, arm64
-    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, nodejs22.x, nodejs24.x, java8, java8.al2, java11, java17, java21, java25, python2.7, python3.6, python3.7, python3.8, python3.9, python3.10, python3.11, python3.12, python3.13, python3.14, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, dotnet10, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, ruby3.2, ruby3.3, ruby3.4, ruby4.0, provided, provided.al2, provided.al2023
+    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, nodejs22.x, nodejs24.x, java8, java8.al2, java11, java17, java21, java25, python2.7, python3.6, python3.7, python3.8, python3.9, python3.10, python3.11, python3.12, python3.13, python3.14, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, dotnet10, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, ruby3.2, ruby3.3, ruby3.4, ruby4.0, provided, provided.al2, provided.al2023, java8.al2023, java11.al2023, java17.al2023
     #     license_info: "LicenseInfo",
     #   })
     #
@@ -6948,6 +7008,9 @@ module Aws::Lambda
     #   resp.content.code_size #=> Integer
     #   resp.content.signing_profile_version_arn #=> String
     #   resp.content.signing_job_arn #=> String
+    #   resp.content.resolved_s3_object.s3_bucket #=> String
+    #   resp.content.resolved_s3_object.s3_key #=> String
+    #   resp.content.resolved_s3_object.s3_object_version #=> String
     #   resp.layer_arn #=> String
     #   resp.layer_version_arn #=> String
     #   resp.description #=> String
@@ -6956,7 +7019,7 @@ module Aws::Lambda
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersion AWS API Documentation
@@ -7115,7 +7178,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -7147,10 +7210,10 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed", "Deactivating", "Deactivated", "ActiveNonInvocable", "Deleting"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions", "DependencyError"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DependencyError"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
@@ -7181,6 +7244,7 @@ module Aws::Lambda
     #   resp.capacity_provider_config.lambda_managed_instances_capacity_provider_config.per_execution_environment_max_concurrency #=> Integer
     #   resp.capacity_provider_config.lambda_managed_instances_capacity_provider_config.execution_environment_memory_gi_b_per_v_cpu #=> Float
     #   resp.config_sha_256 #=> String
+    #   resp.durable_config.kms_key_arn #=> String
     #   resp.durable_config.retention_period_in_days #=> Integer
     #   resp.durable_config.execution_timeout #=> Integer
     #
@@ -8229,6 +8293,9 @@ module Aws::Lambda
     #   Configuration for tag propagation to managed resources launched by the
     #   capacity provider.
     #
+    # @option params [Types::CapacityProviderTelemetryConfig] :telemetry_config
+    #   The updated telemetry configuration for the capacity provider.
+    #
     # @return [Types::UpdateCapacityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateCapacityProviderResponse#capacity_provider #capacity_provider} => Types::CapacityProvider
@@ -8251,6 +8318,12 @@ module Aws::Lambda
     #       mode: "None", # accepts None, Explicit
     #       explicit_tags: {
     #         "TagKey" => "TagValue",
+    #       },
+    #     },
+    #     telemetry_config: {
+    #       logging_config: {
+    #         system_log_level: "DEBUG", # accepts DEBUG, INFO, WARN
+    #         log_group: "LogGroup",
     #       },
     #     },
     #   })
@@ -8280,6 +8353,8 @@ module Aws::Lambda
     #   resp.capacity_provider.propagate_tags.mode #=> String, one of "None", "Explicit"
     #   resp.capacity_provider.propagate_tags.explicit_tags #=> Hash
     #   resp.capacity_provider.propagate_tags.explicit_tags["TagKey"] #=> String
+    #   resp.capacity_provider.telemetry_config.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
+    #   resp.capacity_provider.telemetry_config.logging_config.log_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateCapacityProvider AWS API Documentation
     #
@@ -8883,6 +8958,12 @@ module Aws::Lambda
     #   For versioned objects, the version of the deployment package object to
     #   use.
     #
+    # @option params [String] :s3_object_storage_mode
+    #   Specifies how the deployment package is stored. Use `COPY` (default)
+    #   to upload a copy of your deployment package to Lambda. Use `REFERENCE`
+    #   to have Lambda reference the deployment package from the specified
+    #   Amazon S3 bucket.
+    #
     # @option params [String] :image_uri
     #   URI of a container image in the Amazon ECR registry. Do not use for a
     #   function defined with a .zip file archive.
@@ -8998,6 +9079,7 @@ module Aws::Lambda
     #     s3_bucket: "S3Bucket",
     #     s3_key: "S3Key",
     #     s3_object_version: "S3ObjectVersion",
+    #     s3_object_storage_mode: "COPY", # accepts COPY, REFERENCE
     #     image_uri: "String",
     #     architectures: ["x86_64"], # accepts x86_64, arm64
     #     publish: false,
@@ -9011,7 +9093,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -9043,10 +9125,10 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed", "Deactivating", "Deactivated", "ActiveNonInvocable", "Deleting"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions", "DependencyError"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DependencyError"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
@@ -9077,6 +9159,7 @@ module Aws::Lambda
     #   resp.capacity_provider_config.lambda_managed_instances_capacity_provider_config.per_execution_environment_max_concurrency #=> Integer
     #   resp.capacity_provider_config.lambda_managed_instances_capacity_provider_config.execution_environment_memory_gi_b_per_v_cpu #=> Float
     #   resp.config_sha_256 #=> String
+    #   resp.durable_config.kms_key_arn #=> String
     #   resp.durable_config.retention_period_in_days #=> Integer
     #   resp.durable_config.execution_timeout #=> Integer
     #
@@ -9295,9 +9378,15 @@ module Aws::Lambda
     #   for Lambda functions.
     #
     # @option params [Types::DurableConfig] :durable_config
-    #   Configuration settings for durable functions. Allows updating
-    #   execution timeout and retention period for functions with durability
-    #   enabled.
+    #   Configuration settings for [durable functions][1], including execution
+    #   timeout, retention period for execution history, and an optional ARN
+    #   of the Key Management Service (KMS) customer managed key that is used
+    #   to encrypt your durable execution's payload data, including input,
+    #   output, and error payloads.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9400,7 +9489,7 @@ module Aws::Lambda
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, nodejs22.x, nodejs24.x, java8, java8.al2, java11, java17, java21, java25, python2.7, python3.6, python3.7, python3.8, python3.9, python3.10, python3.11, python3.12, python3.13, python3.14, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, dotnet10, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, ruby3.2, ruby3.3, ruby3.4, ruby4.0, provided, provided.al2, provided.al2023
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, nodejs18.x, nodejs20.x, nodejs22.x, nodejs24.x, java8, java8.al2, java11, java17, java21, java25, python2.7, python3.6, python3.7, python3.8, python3.9, python3.10, python3.11, python3.12, python3.13, python3.14, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, dotnet10, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, ruby3.2, ruby3.3, ruby3.4, ruby4.0, provided, provided.al2, provided.al2023, java8.al2023, java11.al2023, java17.al2023
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -9441,6 +9530,7 @@ module Aws::Lambda
     #       },
     #     },
     #     durable_config: {
+    #       kms_key_arn: "KMSKeyArn",
     #       retention_period_in_days: 1,
     #       execution_timeout: 1,
     #     },
@@ -9450,7 +9540,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "nodejs18.x", "nodejs20.x", "nodejs22.x", "nodejs24.x", "java8", "java8.al2", "java11", "java17", "java21", "java25", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "python3.10", "python3.11", "python3.12", "python3.13", "python3.14", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "dotnet10", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "ruby3.2", "ruby3.3", "ruby3.4", "ruby4.0", "provided", "provided.al2", "provided.al2023", "java8.al2023", "java11.al2023", "java17.al2023"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -9482,10 +9572,10 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed", "Deactivating", "Deactivated", "ActiveNonInvocable", "Deleting"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DrainingDurableExecutions", "DependencyError"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError", "ServiceQuotaExceededException", "VcpuLimitExceeded", "CapacityProviderScalingLimitExceeded", "InsufficientCapacity", "EC2RequestLimitExceeded", "FunctionError.InitTimeout", "FunctionError.RuntimeInitError", "FunctionError.ExtensionInitError", "FunctionError.InvalidEntryPoint", "FunctionError.InvalidWorkingDirectory", "FunctionError.PermissionDenied", "FunctionError.TooManyExtensions", "FunctionError.InitResourceExhausted", "DisallowedByVpcEncryptionControl", "DependencyError"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
@@ -9516,6 +9606,7 @@ module Aws::Lambda
     #   resp.capacity_provider_config.lambda_managed_instances_capacity_provider_config.per_execution_environment_max_concurrency #=> Integer
     #   resp.capacity_provider_config.lambda_managed_instances_capacity_provider_config.execution_environment_memory_gi_b_per_v_cpu #=> Float
     #   resp.config_sha_256 #=> String
+    #   resp.durable_config.kms_key_arn #=> String
     #   resp.durable_config.retention_period_in_days #=> Integer
     #   resp.durable_config.execution_timeout #=> Integer
     #
@@ -9781,7 +9872,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.185.0'
+      context[:gem_version] = '1.191.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

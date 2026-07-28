@@ -55,7 +55,7 @@ module Aws::ApplicationSignals
   autoload :EndpointProvider, 'aws-sdk-applicationsignals/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationsignals/endpoints'
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end
 

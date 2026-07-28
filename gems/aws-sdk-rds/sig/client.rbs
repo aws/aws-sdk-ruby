@@ -463,6 +463,12 @@ module Aws
                                ],
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
                                ?with_express_configuration: bool,
+                               ?associated_roles: Array[
+                                 {
+                                   role_arn: ::String,
+                                   feature_name: ::String?
+                                 }
+                               ],
                                ?source_region: ::String
                              ) -> _CreateDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterResponseSuccess
@@ -2402,7 +2408,8 @@ module Aws
                                ?aws_backup_recovery_point_arn: ::String,
                                ?enable_limitless_database: bool,
                                ?ca_certificate_identifier: ::String,
-                               ?master_user_authentication_type: ("password" | "iam-db-auth")
+                               ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                               ?engine_lifecycle_support: ::String
                              ) -> _ModifyDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBClusterResponseSuccess
 
@@ -2551,7 +2558,8 @@ module Aws
                                     ]?
                                   }
                                 ],
-                                ?master_user_authentication_type: ("password" | "iam-db-auth")
+                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                                ?engine_lifecycle_support: ::String
                               ) -> _ModifyDBInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBInstanceResponseSuccess
 
@@ -3039,6 +3047,12 @@ module Aws
                                               }
                                             ]?
                                           }
+                                        ],
+                                        ?associated_roles: Array[
+                                          {
+                                            role_arn: ::String,
+                                            feature_name: ::String?
+                                          }
                                         ]
                                       ) -> _RestoreDBClusterFromS3ResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromS3ResponseSuccess
@@ -3111,7 +3125,13 @@ module Aws
                                                 }
                                               ],
                                               ?enable_vpc_networking: bool,
-                                              ?enable_internet_access_gateway: bool
+                                              ?enable_internet_access_gateway: bool,
+                                              ?associated_roles: Array[
+                                                {
+                                                  role_arn: ::String,
+                                                  feature_name: ::String?
+                                                }
+                                              ]
                                             ) -> _RestoreDBClusterFromSnapshotResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromSnapshotResponseSuccess
 
@@ -3183,7 +3203,13 @@ module Aws
                                                    }
                                                  ],
                                                  ?enable_vpc_networking: bool,
-                                                 ?enable_internet_access_gateway: bool
+                                                 ?enable_internet_access_gateway: bool,
+                                                 ?associated_roles: Array[
+                                                   {
+                                                     role_arn: ::String,
+                                                     feature_name: ::String?
+                                                   }
+                                                 ]
                                                ) -> _RestoreDBClusterToPointInTimeResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterToPointInTimeResponseSuccess
 

@@ -2119,6 +2119,16 @@ module Aws::OpenSearchService
     #   Maximum suspension duration: 3 days.
     #   @return [Types::AutomatedSnapshotPauseRequestOptions]
     #
+    # @!attribute [rw] use_case
+    #   The primary use case for the domain. For valid values, see
+    #   `DomainUseCase`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_mode
+    #   The engine mode for the domain. For valid values and requirements,
+    #   see `EngineMode`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomainRequest AWS API Documentation
     #
     class CreateDomainRequest < Struct.new(
@@ -2144,7 +2154,9 @@ module Aws::OpenSearchService
       :software_update_options,
       :aiml_options,
       :deployment_strategy_options,
-      :automated_snapshot_pause_options)
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4003,6 +4015,14 @@ module Aws::OpenSearchService
     #   Specifies `AutomatedSnapshotPauseOptions` for the domain.
     #   @return [Types::AutomatedSnapshotPauseOptionsStatus]
     #
+    # @!attribute [rw] use_case
+    #   The use case configured for the domain.
+    #   @return [Types::UseCaseStatus]
+    #
+    # @!attribute [rw] engine_mode
+    #   The engine mode configured for the domain.
+    #   @return [Types::EngineModeStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainConfig AWS API Documentation
     #
     class DomainConfig < Struct.new(
@@ -4028,7 +4048,9 @@ module Aws::OpenSearchService
       :modifying_properties,
       :aiml_options,
       :deployment_strategy_options,
-      :automated_snapshot_pause_options)
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4493,6 +4515,14 @@ module Aws::OpenSearchService
     #   options.
     #   @return [Types::AutomatedSnapshotPauseOptions]
     #
+    # @!attribute [rw] use_case
+    #   The primary use case for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_mode
+    #   The engine mode for the domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainStatus AWS API Documentation
     #
     class DomainStatus < Struct.new(
@@ -4531,7 +4561,9 @@ module Aws::OpenSearchService
       :modifying_properties,
       :aiml_options,
       :deployment_strategy_options,
-      :automated_snapshot_pause_options)
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4728,6 +4760,25 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # The status of the engine mode for the domain.
+    #
+    # @!attribute [rw] options
+    #   The engine mode configured for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the engine mode for the domain.
+    #   @return [Types::OptionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/EngineModeStatus AWS API Documentation
+    #
+    class EngineModeStatus < Struct.new(
+      :options,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the active domain environment.
     #
     # @!attribute [rw] availability_zone_information
@@ -4758,6 +4809,35 @@ module Aws::OpenSearchService
     class ErrorDetails < Struct.new(
       :error_type,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options to filter the scope of saved objects to export during a
+    # migration.
+    #
+    # @!attribute [rw] types
+    #   A list of saved object types to include in the migration. Valid
+    #   values include `dashboard`, `visualization`, `index-pattern`,
+    #   `search`, and `query`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] objects
+    #   A list of specific saved objects to include in the migration,
+    #   identified by type and ID.
+    #   @return [Array<Types::SavedObjectIdentifier>]
+    #
+    # @!attribute [rw] include_references_deep
+    #   Specifies whether to include all objects referenced by the exported
+    #   objects, recursively.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ExportOptions AWS API Documentation
+    #
+    class ExportOptions < Struct.new(
+      :types,
+      :objects,
+      :include_references_deep)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5176,6 +5256,74 @@ module Aws::OpenSearchService
     #
     class GetIndexResponse < Struct.new(
       :index_schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migration_id
+    #   The unique identifier of the migration job to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetMigrationRequest AWS API Documentation
+    #
+    class GetMigrationRequest < Struct.new(
+      :migration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migration_id
+    #   The unique identifier of the migration job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the migration job. Valid values are `PENDING`,
+    #   `IN_PROGRESS`, `SUCCEEDED`, and `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier of the OpenSearch application associated with
+    #   the migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source configuration for the migration, including the data
+    #   source ARN.
+    #   @return [Types::MigrationSource]
+    #
+    # @!attribute [rw] exported_count
+    #   The number of saved objects exported from the source data source.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] imported_count
+    #   The number of saved objects successfully imported into the target
+    #   workspace.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error
+    #   Error details if the migration failed or completed with errors.
+    #   @return [Types::MigrationError]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the migration job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the migration job was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetMigrationResponse AWS API Documentation
+    #
+    class GetMigrationResponse < Struct.new(
+      :migration_id,
+      :status,
+      :application_id,
+      :source,
+      :exported_count,
+      :imported_count,
+      :error,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5744,6 +5892,74 @@ module Aws::OpenSearchService
     class InsightEntity < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the entity for which to submit insight feedback. An entity
+    # represents an Amazon OpenSearch Service domain.
+    #
+    # @!attribute [rw] type
+    #   The type of the entity. Possible values are `DomainName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the entity, such as a domain name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InsightFeedbackEntity AWS API Documentation
+    #
+    class InsightFeedbackEntity < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `InsightFeedback` operation.
+    #
+    # @!attribute [rw] entity
+    #   The entity for which to submit insight feedback. Specifies the type
+    #   and value of the entity, such as a domain name.
+    #   @return [Types::InsightFeedbackEntity]
+    #
+    # @!attribute [rw] insight_id
+    #   The unique identifier of the insight for which to submit feedback.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbs
+    #   The thumbs up or thumbs down feedback for the insight. Possible
+    #   values are `Up` and `Down`.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback_text
+    #   Optional text feedback providing additional details about the
+    #   insight. Maximum length is 1000 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InsightFeedbackRequest AWS API Documentation
+    #
+    class InsightFeedbackRequest < Struct.new(
+      :entity,
+      :insight_id,
+      :thumbs,
+      :feedback_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of an `InsightFeedback` request. Contains the status of the
+    # feedback submission.
+    #
+    # @!attribute [rw] status
+    #   The status of the feedback submission. Possible values are `SUCCESS`
+    #   and `ERROR`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InsightFeedbackResponse AWS API Documentation
+    #
+    class InsightFeedbackResponse < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6460,6 +6676,54 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_id
+    #   The unique identifier of the OpenSearch application to list
+    #   migrations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Filters the results by migration status. Valid values are `PENDING`,
+    #   `IN_PROGRESS`, `SUCCEEDED`, and `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous call to retrieve the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListMigrationsRequest AWS API Documentation
+    #
+    class ListMigrationsRequest < Struct.new(
+      :application_id,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migrations
+    #   A list of migration job summaries for the specified application.
+    #   @return [Array<Types::MigrationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in a subsequent call to retrieve the
+    #   next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListMigrationsResponse AWS API Documentation
+    #
+    class ListMigrationsResponse < Struct.new(
+      :migrations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the request parameters to the `ListPackagesForDomain`
     # operation.
     #
@@ -6831,6 +7095,167 @@ module Aws::OpenSearchService
       :master_user_name,
       :master_user_password)
       SENSITIVE = [:master_user_name, :master_user_password]
+      include Aws::Structure
+    end
+
+    # Contains error details for a migration that failed or completed with
+    # errors.
+    #
+    # @!attribute [rw] code
+    #   The error code identifying the type of failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/MigrationError AWS API Documentation
+    #
+    class MigrationError < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration options for a saved objects migration job.
+    #
+    # @!attribute [rw] source
+    #   The data source from which to export saved objects.
+    #   @return [Types::MigrationSource]
+    #
+    # @!attribute [rw] workspace
+    #   The target workspace configuration for importing saved objects. You
+    #   can specify an existing workspace or request creation of a new
+    #   workspace.
+    #   @return [Types::MigrationWorkspace]
+    #
+    # @!attribute [rw] export_options
+    #   Options to filter the scope of saved objects to export from the
+    #   source.
+    #   @return [Types::ExportOptions]
+    #
+    # @!attribute [rw] conflict_resolution
+    #   The strategy for resolving conflicts when saved objects already
+    #   exist in the target workspace. Valid values are `CREATE_NEW_COPIES`,
+    #   which creates new objects with unique IDs, and `overwrite`, which
+    #   replaces existing objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/MigrationOptions AWS API Documentation
+    #
+    class MigrationOptions < Struct.new(
+      :source,
+      :workspace,
+      :export_options,
+      :conflict_resolution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source configuration for a migration, specifying the data source
+    # from which to export saved objects.
+    #
+    # @!attribute [rw] datasource_arn
+    #   The Amazon Resource Name (ARN) of the data source to migrate saved
+    #   objects from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/MigrationSource AWS API Documentation
+    #
+    class MigrationSource < Struct.new(
+      :datasource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a migration job, including its status and progress.
+    #
+    # @!attribute [rw] migration_id
+    #   The unique identifier of the migration job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the migration job.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier of the OpenSearch application associated with
+    #   the migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source configuration for the migration.
+    #   @return [Types::MigrationSource]
+    #
+    # @!attribute [rw] exported_count
+    #   The number of saved objects exported from the source data source.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] imported_count
+    #   The number of saved objects successfully imported into the target
+    #   workspace.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error
+    #   Error details if the migration failed or completed with errors.
+    #   @return [Types::MigrationError]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the migration job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the migration job was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/MigrationSummary AWS API Documentation
+    #
+    class MigrationSummary < Struct.new(
+      :migration_id,
+      :status,
+      :application_id,
+      :source,
+      :exported_count,
+      :imported_count,
+      :error,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target workspace configuration for a migration. You can specify an
+    # existing workspace by ID or request creation of a new workspace.
+    #
+    # @!attribute [rw] workspace_id
+    #   The unique identifier of an existing workspace to use as the
+    #   migration target. Specify either this parameter or
+    #   `createWorkspace`.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_workspace
+    #   Specifies whether to create a new workspace as the migration target.
+    #   If `true`, you must also specify `name`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the new workspace to create. Required when
+    #   `createWorkspace` is `true`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the new workspace to create.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/MigrationWorkspace AWS API Documentation
+    #
+    class MigrationWorkspace < Struct.new(
+      :workspace_id,
+      :create_workspace,
+      :name,
+      :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8112,6 +8537,26 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Identifies a specific saved object by its type and unique identifier.
+    #
+    # @!attribute [rw] type
+    #   The type of the saved object, such as `dashboard`, `visualization`,
+    #   `index-pattern`, `search`, or `query`.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the saved object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/SavedObjectIdentifier AWS API Documentation
+    #
+    class SavedObjectIdentifier < Struct.new(
+      :type,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a scheduled configuration change for an OpenSearch
     # Service domain. This actions can be a [service software update][1] or
     # a [blue/green Auto-Tune enhancement][2].
@@ -8460,6 +8905,52 @@ module Aws::OpenSearchService
     #
     class StartDomainMaintenanceResponse < Struct.new(
       :maintenance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   The unique identifier of the OpenSearch application to migrate saved
+    #   objects into.
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_options
+    #   The configuration options for the migration, including the source
+    #   data source, target workspace, export filters, and conflict
+    #   resolution strategy.
+    #   @return [Types::MigrationOptions]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon OpenSearch Service ignores the request but does not
+    #   return an error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartMigrationRequest AWS API Documentation
+    #
+    class StartMigrationRequest < Struct.new(
+      :application_id,
+      :migration_options,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migration_id
+    #   The unique identifier of the migration job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The initial status of the migration job. The status is `PENDING`
+    #   when a migration is first created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartMigrationResponse AWS API Documentation
+    #
+    class StartMigrationResponse < Struct.new(
+      :migration_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8959,6 +9450,16 @@ module Aws::OpenSearchService
     #   Maximum suspension duration: 3 days.
     #   @return [Types::AutomatedSnapshotPauseRequestOptions]
     #
+    # @!attribute [rw] use_case
+    #   The primary use case for the domain. For valid values, see
+    #   `DomainUseCase`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_mode
+    #   The engine mode for the domain. The engine mode can't be changed
+    #   after the domain is created. For valid values, see `EngineMode`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigRequest AWS API Documentation
     #
     class UpdateDomainConfigRequest < Struct.new(
@@ -8984,7 +9485,9 @@ module Aws::OpenSearchService
       :software_update_options,
       :aiml_options,
       :deployment_strategy_options,
-      :automated_snapshot_pause_options)
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9410,6 +9913,25 @@ module Aws::OpenSearchService
       :upgrade_step_status,
       :issues,
       :progress_percent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the use case for the domain.
+    #
+    # @!attribute [rw] options
+    #   The use case configured for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the use case for the domain.
+    #   @return [Types::OptionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UseCaseStatus AWS API Documentation
+    #
+    class UseCaseStatus < Struct.new(
+      :options,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -513,6 +513,7 @@ module Aws::LicenseManager
     CreateLicenseVersionRequest.add_member(:status, Shapes::ShapeRef.new(shape: LicenseStatus, required: true, location_name: "Status"))
     CreateLicenseVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
     CreateLicenseVersionRequest.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "SourceVersion"))
+    CreateLicenseVersionRequest.add_member(:reset_usage, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetUsage"))
     CreateLicenseVersionRequest.struct_class = Types::CreateLicenseVersionRequest
 
     CreateLicenseVersionResponse.add_member(:license_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn"))

@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:artifact)
 # structure.
 #
 #     artifact = Aws::Artifact::Client.new
-#     resp = artifact.get_account_settings(params)
+#     resp = artifact.create_compliance_inquiry(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::Artifact
   autoload :EndpointProvider, 'aws-sdk-artifact/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-artifact/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.41.0'
 
 end
 

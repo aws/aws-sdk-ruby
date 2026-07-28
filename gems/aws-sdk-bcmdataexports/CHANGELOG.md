@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2026-07-27)
+------------------
+
+* Feature - With this release, customers can configure their data exports to deliver CSV reports in ZIP compressed format.
+
+1.40.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.39.0 (2026-05-26)
 ------------------
 

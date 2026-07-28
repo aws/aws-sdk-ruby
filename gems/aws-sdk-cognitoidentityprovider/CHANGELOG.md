@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2026-07-24)
+------------------
+
+* Feature - Amazon Cognito user pools now support the AdminGetUserAuthFactors operation, which lets administrators retrieve the configured authentication factors (such as password, SMS, email, and TOTP) available for a specific user in a user pool.
+
+1.148.0 (2026-07-17)
+------------------
+
+* Feature - Amazon Cognito user pools now support sending SMS via AWS End User Messaging. A new EumsSms object in SmsConfigurationType lets you deliver MFA and verification texts through AWS End User Messaging, alongside the existing Amazon SNS option.
+
+1.147.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.146.0 (2026-07-02)
+------------------
+
+* Feature - Add support for provisioned limit management, enabling customers to view and update their provisioned API rate limits for Amazon Cognito User Pools programmatically through the new GetProvisionedLimit and UpdateProvisionedLimit APIs.
+
 1.145.0 (2026-06-18)
 ------------------
 

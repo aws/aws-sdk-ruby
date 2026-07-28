@@ -15,6 +15,11 @@ module Aws
 
         def wait: (
                     service_arn: ::String,
+                    ?assessment_statuses: Array[("NOT_STARTED" | "PENDING" | "IN_PROGRESS" | "FAILED" | "SUCCESS")],
+                    ?started_after: ::Time,
+                    ?ended_before: ::Time,
+                    ?sort_by: ("STARTED_AT"),
+                    ?sort_order: ("ASC" | "DESC"),
                     ?max_results: ::Integer,
                     ?next_token: ::String
                   ) -> Client::_ListFailureModeAssessmentsResponseSuccess

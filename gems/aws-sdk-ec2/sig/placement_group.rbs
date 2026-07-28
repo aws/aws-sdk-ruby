@@ -22,7 +22,7 @@ module Aws
       def state: () -> ("pending" | "available" | "deleting" | "deleted")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#strategy-instance_method
-      def strategy: () -> ("cluster" | "spread" | "partition")
+      def strategy: () -> ("cluster" | "spread" | "partition" | "precision-time")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#partition_count-instance_method
       def partition_count: () -> ::Integer
@@ -44,6 +44,9 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#operator-instance_method
       def operator: () -> Types::OperatorResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#parent_group_id-instance_method
+      def parent_group_id: () -> ::String
 
       def client: () -> Client
 

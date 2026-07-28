@@ -46,6 +46,8 @@ module Aws::CognitoIdentityProvider
     AdminForgetDeviceRequest = Shapes::StructureShape.new(name: 'AdminForgetDeviceRequest')
     AdminGetDeviceRequest = Shapes::StructureShape.new(name: 'AdminGetDeviceRequest')
     AdminGetDeviceResponse = Shapes::StructureShape.new(name: 'AdminGetDeviceResponse')
+    AdminGetUserAuthFactorsRequest = Shapes::StructureShape.new(name: 'AdminGetUserAuthFactorsRequest')
+    AdminGetUserAuthFactorsResponse = Shapes::StructureShape.new(name: 'AdminGetUserAuthFactorsResponse')
     AdminGetUserRequest = Shapes::StructureShape.new(name: 'AdminGetUserRequest')
     AdminGetUserResponse = Shapes::StructureShape.new(name: 'AdminGetUserResponse')
     AdminInitiateAuthRequest = Shapes::StructureShape.new(name: 'AdminInitiateAuthRequest')
@@ -258,6 +260,7 @@ module Aws::CognitoIdentityProvider
     EnableSoftwareTokenMFAException = Shapes::StructureShape.new(name: 'EnableSoftwareTokenMFAException')
     EncryptionKeyArnType = Shapes::StringShape.new(name: 'EncryptionKeyArnType')
     EncryptionKeyType = Shapes::StringShape.new(name: 'EncryptionKeyType')
+    EumsSmsConfigurationType = Shapes::StructureShape.new(name: 'EumsSmsConfigurationType')
     EventContextDataType = Shapes::StructureShape.new(name: 'EventContextDataType')
     EventFeedbackType = Shapes::StructureShape.new(name: 'EventFeedbackType')
     EventFilterType = Shapes::StringShape.new(name: 'EventFilterType')
@@ -291,6 +294,8 @@ module Aws::CognitoIdentityProvider
     GetIdentityProviderByIdentifierResponse = Shapes::StructureShape.new(name: 'GetIdentityProviderByIdentifierResponse')
     GetLogDeliveryConfigurationRequest = Shapes::StructureShape.new(name: 'GetLogDeliveryConfigurationRequest')
     GetLogDeliveryConfigurationResponse = Shapes::StructureShape.new(name: 'GetLogDeliveryConfigurationResponse')
+    GetProvisionedLimitRequest = Shapes::StructureShape.new(name: 'GetProvisionedLimitRequest')
+    GetProvisionedLimitResponse = Shapes::StructureShape.new(name: 'GetProvisionedLimitResponse')
     GetSigningCertificateRequest = Shapes::StructureShape.new(name: 'GetSigningCertificateRequest')
     GetSigningCertificateResponse = Shapes::StructureShape.new(name: 'GetSigningCertificateResponse')
     GetTokensFromRefreshTokenRequest = Shapes::StructureShape.new(name: 'GetTokensFromRefreshTokenRequest')
@@ -343,7 +348,10 @@ module Aws::CognitoIdentityProvider
     KeyConfigurationType = Shapes::StructureShape.new(name: 'KeyConfigurationType')
     LambdaConfigType = Shapes::StructureShape.new(name: 'LambdaConfigType')
     LanguageIdType = Shapes::StringShape.new(name: 'LanguageIdType')
+    LimitClass = Shapes::StringShape.new(name: 'LimitClass')
+    LimitDefinitionType = Shapes::StructureShape.new(name: 'LimitDefinitionType')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    LimitType = Shapes::StructureShape.new(name: 'LimitType')
     LinkUrlType = Shapes::StringShape.new(name: 'LinkUrlType')
     LinksType = Shapes::MapShape.new(name: 'LinksType')
     ListDevicesRequest = Shapes::StructureShape.new(name: 'ListDevicesRequest')
@@ -401,8 +409,10 @@ module Aws::CognitoIdentityProvider
     OAuthFlowType = Shapes::StringShape.new(name: 'OAuthFlowType')
     OAuthFlowsType = Shapes::ListShape.new(name: 'OAuthFlowsType')
     OperationNotEnabledException = Shapes::StructureShape.new(name: 'OperationNotEnabledException')
+    OptionalArnType = Shapes::StringShape.new(name: 'OptionalArnType')
     PaginationKey = Shapes::StringShape.new(name: 'PaginationKey')
     PaginationKeyType = Shapes::StringShape.new(name: 'PaginationKeyType')
+    PasswordHashingAlgorithmType = Shapes::StringShape.new(name: 'PasswordHashingAlgorithmType')
     PasswordHistoryPolicyViolationException = Shapes::StructureShape.new(name: 'PasswordHistoryPolicyViolationException')
     PasswordHistorySizeType = Shapes::IntegerShape.new(name: 'PasswordHistorySizeType')
     PasswordPolicyMinLengthType = Shapes::IntegerShape.new(name: 'PasswordPolicyMinLengthType')
@@ -475,6 +485,7 @@ module Aws::CognitoIdentityProvider
     SecretCodeType = Shapes::StringShape.new(name: 'SecretCodeType')
     SecretHashType = Shapes::StringShape.new(name: 'SecretHashType')
     SecurityPolicyType = Shapes::StringShape.new(name: 'SecurityPolicyType')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionType = Shapes::StringShape.new(name: 'SessionType')
     SetLogDeliveryConfigurationRequest = Shapes::StructureShape.new(name: 'SetLogDeliveryConfigurationRequest')
     SetLogDeliveryConfigurationResponse = Shapes::StructureShape.new(name: 'SetLogDeliveryConfigurationResponse')
@@ -508,6 +519,7 @@ module Aws::CognitoIdentityProvider
     StopUserImportJobRequest = Shapes::StructureShape.new(name: 'StopUserImportJobRequest')
     StopUserImportJobResponse = Shapes::StructureShape.new(name: 'StopUserImportJobResponse')
     StringAttributeConstraintsType = Shapes::StructureShape.new(name: 'StringAttributeConstraintsType')
+    StringToStringMapType = Shapes::MapShape.new(name: 'StringToStringMapType')
     StringType = Shapes::StringShape.new(name: 'StringType')
     SupportedIdentityProvidersListType = Shapes::ListShape.new(name: 'SupportedIdentityProvidersListType')
     TagKeysType = Shapes::StringShape.new(name: 'TagKeysType')
@@ -548,6 +560,8 @@ module Aws::CognitoIdentityProvider
     UpdateIdentityProviderResponse = Shapes::StructureShape.new(name: 'UpdateIdentityProviderResponse')
     UpdateManagedLoginBrandingRequest = Shapes::StructureShape.new(name: 'UpdateManagedLoginBrandingRequest')
     UpdateManagedLoginBrandingResponse = Shapes::StructureShape.new(name: 'UpdateManagedLoginBrandingResponse')
+    UpdateProvisionedLimitRequest = Shapes::StructureShape.new(name: 'UpdateProvisionedLimitRequest')
+    UpdateProvisionedLimitResponse = Shapes::StructureShape.new(name: 'UpdateProvisionedLimitResponse')
     UpdateReplicaStatusType = Shapes::StringShape.new(name: 'UpdateReplicaStatusType')
     UpdateResourceServerRequest = Shapes::StructureShape.new(name: 'UpdateResourceServerRequest')
     UpdateResourceServerResponse = Shapes::StructureShape.new(name: 'UpdateResourceServerResponse')
@@ -735,6 +749,16 @@ module Aws::CognitoIdentityProvider
 
     AdminGetDeviceResponse.add_member(:device, Shapes::ShapeRef.new(shape: DeviceType, required: true, location_name: "Device"))
     AdminGetDeviceResponse.struct_class = Types::AdminGetDeviceResponse
+
+    AdminGetUserAuthFactorsRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    AdminGetUserAuthFactorsRequest.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
+    AdminGetUserAuthFactorsRequest.struct_class = Types::AdminGetUserAuthFactorsRequest
+
+    AdminGetUserAuthFactorsResponse.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
+    AdminGetUserAuthFactorsResponse.add_member(:preferred_mfa_setting, Shapes::ShapeRef.new(shape: StringType, location_name: "PreferredMfaSetting"))
+    AdminGetUserAuthFactorsResponse.add_member(:user_mfa_setting_list, Shapes::ShapeRef.new(shape: UserMFASettingListType, location_name: "UserMFASettingList"))
+    AdminGetUserAuthFactorsResponse.add_member(:configured_user_auth_factors, Shapes::ShapeRef.new(shape: ConfiguredUserAuthFactorsListType, location_name: "ConfiguredUserAuthFactors"))
+    AdminGetUserAuthFactorsResponse.struct_class = Types::AdminGetUserAuthFactorsResponse
 
     AdminGetUserRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     AdminGetUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
@@ -1128,6 +1152,7 @@ module Aws::CognitoIdentityProvider
     CreateUserImportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: UserImportJobNameType, required: true, location_name: "JobName"))
     CreateUserImportJobRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     CreateUserImportJobRequest.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "CloudWatchLogsRoleArn"))
+    CreateUserImportJobRequest.add_member(:password_hashing_algorithm, Shapes::ShapeRef.new(shape: PasswordHashingAlgorithmType, location_name: "PasswordHashingAlgorithm"))
     CreateUserImportJobRequest.struct_class = Types::CreateUserImportJobRequest
 
     CreateUserImportJobResponse.add_member(:user_import_job, Shapes::ShapeRef.new(shape: UserImportJobType, location_name: "UserImportJob"))
@@ -1414,6 +1439,15 @@ module Aws::CognitoIdentityProvider
     EnableSoftwareTokenMFAException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     EnableSoftwareTokenMFAException.struct_class = Types::EnableSoftwareTokenMFAException
 
+    EumsSmsConfigurationType.add_member(:caller_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "CallerArn"))
+    EumsSmsConfigurationType.add_member(:external_id, Shapes::ShapeRef.new(shape: StringType, location_name: "ExternalId"))
+    EumsSmsConfigurationType.add_member(:origination_identity, Shapes::ShapeRef.new(shape: StringType, location_name: "OriginationIdentity"))
+    EumsSmsConfigurationType.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: StringType, location_name: "ConfigurationSetName"))
+    EumsSmsConfigurationType.add_member(:in_entity_id, Shapes::ShapeRef.new(shape: StringType, location_name: "InEntityId"))
+    EumsSmsConfigurationType.add_member(:in_template_id, Shapes::ShapeRef.new(shape: StringType, location_name: "InTemplateId"))
+    EumsSmsConfigurationType.add_member(:region, Shapes::ShapeRef.new(shape: RegionCodeType, location_name: "Region"))
+    EumsSmsConfigurationType.struct_class = Types::EumsSmsConfigurationType
+
     EventContextDataType.add_member(:ip_address, Shapes::ShapeRef.new(shape: StringType, location_name: "IpAddress"))
     EventContextDataType.add_member(:device_name, Shapes::ShapeRef.new(shape: StringType, location_name: "DeviceName"))
     EventContextDataType.add_member(:timezone, Shapes::ShapeRef.new(shape: StringType, location_name: "Timezone"))
@@ -1499,6 +1533,12 @@ module Aws::CognitoIdentityProvider
 
     GetLogDeliveryConfigurationResponse.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationType, location_name: "LogDeliveryConfiguration"))
     GetLogDeliveryConfigurationResponse.struct_class = Types::GetLogDeliveryConfigurationResponse
+
+    GetProvisionedLimitRequest.add_member(:limit_definition, Shapes::ShapeRef.new(shape: LimitDefinitionType, required: true, location_name: "LimitDefinition"))
+    GetProvisionedLimitRequest.struct_class = Types::GetProvisionedLimitRequest
+
+    GetProvisionedLimitResponse.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, required: true, location_name: "Limit"))
+    GetProvisionedLimitResponse.struct_class = Types::GetProvisionedLimitResponse
 
     GetSigningCertificateRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     GetSigningCertificateRequest.struct_class = Types::GetSigningCertificateRequest
@@ -1672,8 +1712,17 @@ module Aws::CognitoIdentityProvider
     LambdaConfigType.add_member(:inbound_federation, Shapes::ShapeRef.new(shape: InboundFederationLambdaType, location_name: "InboundFederation"))
     LambdaConfigType.struct_class = Types::LambdaConfigType
 
+    LimitDefinitionType.add_member(:limit_class, Shapes::ShapeRef.new(shape: LimitClass, required: true, location_name: "LimitClass"))
+    LimitDefinitionType.add_member(:attributes, Shapes::ShapeRef.new(shape: StringToStringMapType, required: true, location_name: "Attributes"))
+    LimitDefinitionType.struct_class = Types::LimitDefinitionType
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    LimitType.add_member(:limit_definition, Shapes::ShapeRef.new(shape: LimitDefinitionType, required: true, location_name: "LimitDefinition"))
+    LimitType.add_member(:provisioned_limit_value, Shapes::ShapeRef.new(shape: IntegerType, required: true, location_name: "ProvisionedLimitValue"))
+    LimitType.add_member(:free_limit_value, Shapes::ShapeRef.new(shape: IntegerType, required: true, location_name: "FreeLimitValue"))
+    LimitType.struct_class = Types::LimitType
 
     LinksType.key = Shapes::ShapeRef.new(shape: LanguageIdType)
     LinksType.value = Shapes::ShapeRef.new(shape: LinkUrlType)
@@ -2017,6 +2066,9 @@ module Aws::CognitoIdentityProvider
 
     SearchedAttributeNamesListType.member = Shapes::ShapeRef.new(shape: AttributeNameType)
 
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
     SetLogDeliveryConfigurationRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     SetLogDeliveryConfigurationRequest.add_member(:log_configurations, Shapes::ShapeRef.new(shape: LogConfigurationListType, required: true, location_name: "LogConfigurations"))
     SetLogDeliveryConfigurationRequest.struct_class = Types::SetLogDeliveryConfigurationRequest
@@ -2095,9 +2147,10 @@ module Aws::CognitoIdentityProvider
 
     SkippedIPRangeListType.member = Shapes::ShapeRef.new(shape: StringType)
 
-    SmsConfigurationType.add_member(:sns_caller_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "SnsCallerArn"))
+    SmsConfigurationType.add_member(:sns_caller_arn, Shapes::ShapeRef.new(shape: OptionalArnType, location_name: "SnsCallerArn"))
     SmsConfigurationType.add_member(:external_id, Shapes::ShapeRef.new(shape: StringType, location_name: "ExternalId"))
     SmsConfigurationType.add_member(:sns_region, Shapes::ShapeRef.new(shape: RegionCodeType, location_name: "SnsRegion"))
+    SmsConfigurationType.add_member(:eums_sms, Shapes::ShapeRef.new(shape: EumsSmsConfigurationType, location_name: "EumsSms"))
     SmsConfigurationType.struct_class = Types::SmsConfigurationType
 
     SmsMfaConfigType.add_member(:sms_authentication_message, Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
@@ -2137,6 +2190,9 @@ module Aws::CognitoIdentityProvider
     StringAttributeConstraintsType.add_member(:min_length, Shapes::ShapeRef.new(shape: StringType, location_name: "MinLength"))
     StringAttributeConstraintsType.add_member(:max_length, Shapes::ShapeRef.new(shape: StringType, location_name: "MaxLength"))
     StringAttributeConstraintsType.struct_class = Types::StringAttributeConstraintsType
+
+    StringToStringMapType.key = Shapes::ShapeRef.new(shape: StringType)
+    StringToStringMapType.value = Shapes::ShapeRef.new(shape: StringType)
 
     SupportedIdentityProvidersListType.member = Shapes::ShapeRef.new(shape: ProviderNameType)
 
@@ -2261,6 +2317,13 @@ module Aws::CognitoIdentityProvider
 
     UpdateManagedLoginBrandingResponse.add_member(:managed_login_branding, Shapes::ShapeRef.new(shape: ManagedLoginBrandingType, location_name: "ManagedLoginBranding"))
     UpdateManagedLoginBrandingResponse.struct_class = Types::UpdateManagedLoginBrandingResponse
+
+    UpdateProvisionedLimitRequest.add_member(:limit_definition, Shapes::ShapeRef.new(shape: LimitDefinitionType, required: true, location_name: "LimitDefinition"))
+    UpdateProvisionedLimitRequest.add_member(:requested_limit_value, Shapes::ShapeRef.new(shape: IntegerType, required: true, location_name: "RequestedLimitValue"))
+    UpdateProvisionedLimitRequest.struct_class = Types::UpdateProvisionedLimitRequest
+
+    UpdateProvisionedLimitResponse.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, required: true, location_name: "Limit"))
+    UpdateProvisionedLimitResponse.struct_class = Types::UpdateProvisionedLimitResponse
 
     UpdateResourceServerRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     UpdateResourceServerRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceServerIdentifierType, required: true, location_name: "Identifier"))
@@ -2388,6 +2451,7 @@ module Aws::CognitoIdentityProvider
     UserImportJobType.add_member(:skipped_users, Shapes::ShapeRef.new(shape: LongType, location_name: "SkippedUsers"))
     UserImportJobType.add_member(:failed_users, Shapes::ShapeRef.new(shape: LongType, location_name: "FailedUsers"))
     UserImportJobType.add_member(:completion_message, Shapes::ShapeRef.new(shape: CompletionMessageType, location_name: "CompletionMessage"))
+    UserImportJobType.add_member(:password_hashing_algorithm, Shapes::ShapeRef.new(shape: PasswordHashingAlgorithmType, location_name: "PasswordHashingAlgorithm"))
     UserImportJobType.struct_class = Types::UserImportJobType
 
     UserImportJobsListType.member = Shapes::ShapeRef.new(shape: UserImportJobType)
@@ -2829,6 +2893,21 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:admin_get_user_auth_factors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AdminGetUserAuthFactors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AdminGetUserAuthFactorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: AdminGetUserAuthFactorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
@@ -3892,6 +3971,19 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_provisioned_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProvisionedLimit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetProvisionedLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetProvisionedLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:get_signing_certificate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSigningCertificate"
         o.http_method = "POST"
@@ -4677,6 +4769,20 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:update_provisioned_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProvisionedLimit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProvisionedLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProvisionedLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 

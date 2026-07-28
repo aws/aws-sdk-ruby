@@ -473,6 +473,7 @@ module Aws::BedrockAgentCoreControl
 
     class ConnectorSource
       attr_accessor connector_id: ::String
+      attr_accessor version: ::String
       SENSITIVE: []
     end
 
@@ -607,6 +608,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor browser_signing: Types::BrowserSigningConfigInput
       attr_accessor enterprise_policies: ::Array[Types::BrowserEnterprisePolicy]
       attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor filesystem_configurations: ::Array[Types::ToolsFileSystemConfiguration]
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
@@ -626,6 +628,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor execution_role_arn: ::String
       attr_accessor network_configuration: Types::CodeInterpreterNetworkConfiguration
       attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor filesystem_configurations: ::Array[Types::ToolsFileSystemConfiguration]
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
@@ -1227,6 +1230,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor allowed_audience: ::Array[::String]
       attr_accessor allowed_clients: ::Array[::String]
       attr_accessor allowed_scopes: ::Array[::String]
+      attr_accessor advertised_scope_mapping: ::Hash[::String, ::String]
       attr_accessor custom_claims: ::Array[Types::CustomClaimValidationType]
       attr_accessor private_endpoint: Types::PrivateEndpoint
       attr_accessor private_endpoint_overrides: ::Array[Types::PrivateEndpointOverride]
@@ -1694,6 +1698,13 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class EfsConfiguration
+      attr_accessor access_point_arn: ::String
+      attr_accessor mount_path: ::String
+      attr_accessor file_system_arn: ::String
+      SENSITIVE: []
+    end
+
     class EncryptionFailure
       attr_accessor message: ::String
       SENSITIVE: []
@@ -2070,6 +2081,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor browser_signing: Types::BrowserSigningConfigOutput
       attr_accessor enterprise_policies: ::Array[Types::BrowserEnterprisePolicy]
       attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor filesystem_configurations: ::Array[Types::ToolsFileSystemConfiguration]
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
       attr_accessor failure_reason: ::String
       attr_accessor created_at: ::Time
@@ -2091,6 +2103,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor network_configuration: Types::CodeInterpreterNetworkConfiguration
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
       attr_accessor certificates: ::Array[Types::Certificate]
+      attr_accessor filesystem_configurations: ::Array[Types::ToolsFileSystemConfiguration]
       attr_accessor failure_reason: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
@@ -2775,6 +2788,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor temperature: ::Float
       attr_accessor top_p: ::Float
       attr_accessor top_k: ::Integer
+      attr_accessor additional_params: untyped
       SENSITIVE: []
     end
 
@@ -4562,6 +4576,13 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class S3FilesConfiguration
+      attr_accessor access_point_arn: ::String
+      attr_accessor mount_path: ::String
+      attr_accessor file_system_arn: ::String
+      SENSITIVE: []
+    end
+
     class S3Location
       attr_accessor bucket: ::String
       attr_accessor prefix: ::String
@@ -5030,6 +5051,20 @@ module Aws::BedrockAgentCoreControl
       attr_accessor protocol_version: ::String
       attr_accessor inline_content: ::String
       SENSITIVE: []
+    end
+
+    class ToolsFileSystemConfiguration
+      attr_accessor s3_files_configuration: Types::S3FilesConfiguration
+      attr_accessor efs_configuration: Types::EfsConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3FilesConfiguration < ToolsFileSystemConfiguration
+      end
+      class EfsConfiguration < ToolsFileSystemConfiguration
+      end
+      class Unknown < ToolsFileSystemConfiguration
+      end
     end
 
     class TrafficSplitEntry

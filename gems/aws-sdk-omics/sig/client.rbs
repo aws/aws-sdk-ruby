@@ -996,6 +996,7 @@ module Aws
         def instance_type: () -> ::String
         def failure_reason: () -> ::String
         def image_details: () -> Types::ImageDetails
+        def uuid: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_run_task-instance_method
       def get_run_task: (

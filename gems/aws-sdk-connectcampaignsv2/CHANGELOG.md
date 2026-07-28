@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2026-06-29)
+------------------
+
+* Feature - Adding new attributes to PutProfileOutboundRequest API that will create an outbound request call for the customer's Web Notification outbound campaign.
+
 1.28.0 (2026-05-29)
 ------------------
 

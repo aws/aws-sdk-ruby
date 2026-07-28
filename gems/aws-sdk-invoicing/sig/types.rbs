@@ -368,9 +368,9 @@ module Aws::Invoicing
       attr_accessor einvoice_delivery_preference: Types::EinvoiceDeliveryPreference
       attr_accessor purchase_order_retrieval_enabled: bool
       attr_accessor contacts: ::Array[Types::Contact]
-      attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
       attr_accessor einvoice_delivery_preference_status_reason: ::String
-      attr_accessor purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
       attr_accessor purchase_order_retrieval_preference_status_reason: ::String
       attr_accessor version: ::Integer
       attr_accessor create_date: ::Time
@@ -395,9 +395,9 @@ module Aws::Invoicing
       attr_accessor selector: Types::ProcurementPortalPreferenceSelector
       attr_accessor einvoice_delivery_enabled: bool
       attr_accessor purchase_order_retrieval_enabled: bool
-      attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
       attr_accessor einvoice_delivery_preference_status_reason: ::String
-      attr_accessor purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
       attr_accessor purchase_order_retrieval_preference_status_reason: ::String
       attr_accessor version: ::Integer
       attr_accessor create_date: ::Time
@@ -452,6 +452,17 @@ module Aws::Invoicing
     class ResourceTag
       attr_accessor key: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SendProcurementPortalValidationRequest
+      attr_accessor procurement_portal_preference_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class SendProcurementPortalValidationResponse
+      attr_accessor procurement_portal_preference_arn: ::String
       SENSITIVE: []
     end
 
@@ -541,9 +552,9 @@ module Aws::Invoicing
 
     class UpdateProcurementPortalPreferenceStatusRequest
       attr_accessor procurement_portal_preference_arn: ::String
-      attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
       attr_accessor einvoice_delivery_preference_status_reason: ::String
-      attr_accessor purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
       attr_accessor purchase_order_retrieval_preference_status_reason: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -565,6 +576,18 @@ module Aws::Invoicing
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyProcurementPortalValidationRequest
+      attr_accessor procurement_portal_preference_arn: ::String
+      attr_accessor code: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyProcurementPortalValidationResponse
+      attr_accessor procurement_portal_preference_arn: ::String
       SENSITIVE: []
     end
   end

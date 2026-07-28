@@ -149,6 +149,10 @@ module Aws
                                          playback_configuration_arn: ::String?
                                        }
                                      ],
+                                     ?post_roll_configuration: {
+                                       duration_seconds: ::Integer,
+                                       enabled: bool
+                                     },
                                      ?tags: Hash[::String, ::String]
                                    ) -> _CreateAdConfigurationResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAdConfigurationResponseSuccess
@@ -548,7 +552,11 @@ module Aws
                                        {
                                          playback_configuration_arn: ::String?
                                        }
-                                     ]
+                                     ],
+                                     ?post_roll_configuration: {
+                                       duration_seconds: ::Integer,
+                                       enabled: bool
+                                     }
                                    ) -> _UpdateAdConfigurationResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAdConfigurationResponseSuccess
 

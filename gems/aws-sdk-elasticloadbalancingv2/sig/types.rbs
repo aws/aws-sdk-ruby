@@ -1049,6 +1049,7 @@ module Aws::ElasticLoadBalancingV2
 
     class SourceIpConditionConfig
       attr_accessor values: ::Array[::String]
+      attr_accessor ip_address_type: ("ipv4" | "ipv6")
       SENSITIVE: []
     end
 

@@ -66,6 +66,10 @@ module Aws::EKS
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
+    CancelUpdateRequest = Shapes::StructureShape.new(name: 'CancelUpdateRequest')
+    CancelUpdateResponse = Shapes::StructureShape.new(name: 'CancelUpdateResponse')
+    Cancellation = Shapes::StructureShape.new(name: 'Cancellation')
+    CancellationStatus = Shapes::StringShape.new(name: 'CancellationStatus')
     Capability = Shapes::StructureShape.new(name: 'Capability')
     CapabilityConfigurationRequest = Shapes::StructureShape.new(name: 'CapabilityConfigurationRequest')
     CapabilityConfigurationResponse = Shapes::StructureShape.new(name: 'CapabilityConfigurationResponse')
@@ -320,6 +324,7 @@ module Aws::EKS
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePropagationDelayException = Shapes::StructureShape.new(name: 'ResourcePropagationDelayException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RollbackConfig = Shapes::StructureShape.new(name: 'RollbackConfig')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SpreadLevel = Shapes::StringShape.new(name: 'SpreadLevel')
@@ -584,6 +589,18 @@ module Aws::EKS
 
     BlockStorage.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enabled"))
     BlockStorage.struct_class = Types::BlockStorage
+
+    CancelUpdateRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    CancelUpdateRequest.add_member(:update_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "updateId"))
+    CancelUpdateRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
+    CancelUpdateRequest.struct_class = Types::CancelUpdateRequest
+
+    CancelUpdateResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
+    CancelUpdateResponse.struct_class = Types::CancelUpdateResponse
+
+    Cancellation.add_member(:status, Shapes::ShapeRef.new(shape: CancellationStatus, location_name: "status"))
+    Cancellation.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    Cancellation.struct_class = Types::Cancellation
 
     Capability.add_member(:capability_name, Shapes::ShapeRef.new(shape: String, location_name: "capabilityName"))
     Capability.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
@@ -1597,6 +1614,9 @@ module Aws::EKS
     ResourcePropagationDelayException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourcePropagationDelayException.struct_class = Types::ResourcePropagationDelayException
 
+    RollbackConfig.add_member(:timeout_minutes, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "timeoutMinutes"))
+    RollbackConfig.struct_class = Types::RollbackConfig
+
     ServerException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     ServerException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     ServerException.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
@@ -1666,6 +1686,7 @@ module Aws::EKS
     Update.add_member(:params, Shapes::ShapeRef.new(shape: UpdateParams, location_name: "params"))
     Update.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     Update.add_member(:errors, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errors"))
+    Update.add_member(:cancellation, Shapes::ShapeRef.new(shape: Cancellation, location_name: "cancellation"))
     Update.struct_class = Types::Update
 
     UpdateAccessConfigRequest.add_member(:authentication_mode, Shapes::ShapeRef.new(shape: AuthenticationMode, location_name: "authenticationMode"))
@@ -1734,6 +1755,7 @@ module Aws::EKS
     UpdateClusterVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "version"))
     UpdateClusterVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateClusterVersionRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
+    UpdateClusterVersionRequest.add_member(:rollback_config, Shapes::ShapeRef.new(shape: RollbackConfig, location_name: "rollbackConfig"))
     UpdateClusterVersionRequest.struct_class = Types::UpdateClusterVersionRequest
 
     UpdateClusterVersionResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -1911,6 +1933,22 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:cancel_update, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelUpdate"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/updates/{updateId}/cancel-update"
+        o.input = Shapes::ShapeRef.new(shape: CancelUpdateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelUpdateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:create_access_entry, Seahorse::Model::Operation.new.tap do |o|

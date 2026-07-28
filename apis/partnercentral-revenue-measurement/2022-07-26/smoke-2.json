@@ -1,0 +1,173 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListRevenueAttributionsFailure",
+    "operationName" : "ListRevenueAttributions",
+    "input" : {
+      "Catalog" : "AWS",
+      "MaxResults" : 1
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetRevenueAttributionFailure",
+    "operationName" : "GetRevenueAttribution",
+    "input" : {
+      "Catalog" : "AWS",
+      "Identifier" : "ra-0a1b2c3d4e5f6"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "TagResourceFailureRevenueAttribution",
+    "operationName" : "TagResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/revenue-attribution/ra-0a1b2c3d4e5f6",
+      "tags" : [ {
+        "Key" : "TestKey",
+        "Value" : "TestValue"
+      } ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "TagResourceFailureMarketplaceRevenueShare",
+    "operationName" : "TagResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/prod-0a1b2c3d4e5f6",
+      "tags" : [ {
+        "Key" : "TestKey",
+        "Value" : "TestValue"
+      } ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UntagResourceFailureRevenueAttribution",
+    "operationName" : "UntagResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/revenue-attribution/ra-0a1b2c3d4e5f6",
+      "tagKeys" : [ "TestKey" ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UntagResourceFailureMarketplaceRevenueShare",
+    "operationName" : "UntagResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/prod-0a1b2c3d4e5f6",
+      "tagKeys" : [ "TestKey" ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "CreateRevenueAttributionFailure",
+    "operationName" : "CreateRevenueAttribution",
+    "input" : {
+      "Catalog" : "AWS",
+      "ClientToken" : "test-token",
+      "Name" : "TestAttribution",
+      "TenancyModel" : "MULTI_TENANT"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListTagsForResourceFailureRevenueAttribution",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/revenue-attribution/ra-0a1b2c3d4e5f6"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListTagsForResourceFailureMarketplaceRevenueShare",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/prod-0a1b2c3d4e5f6"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UpdateRevenueAttributionFailure",
+    "operationName" : "UpdateRevenueAttribution",
+    "input" : {
+      "Catalog" : "AWS",
+      "ClientToken" : "test-token",
+      "Identifier" : "ra-0a1b2c3d4e5f6",
+      "Revision" : "1",
+      "Description" : "test"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

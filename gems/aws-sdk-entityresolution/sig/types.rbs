@@ -782,6 +782,7 @@ module Aws::EntityResolution
       attr_accessor resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER")
       attr_accessor rule_based_properties: Types::RuleBasedProperties
       attr_accessor rule_condition_properties: Types::RuleConditionProperties
+      attr_accessor enable_real_time_matching: bool
       attr_accessor provider_properties: Types::ProviderProperties
       SENSITIVE: []
     end

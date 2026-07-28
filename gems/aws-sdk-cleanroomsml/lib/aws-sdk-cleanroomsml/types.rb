@@ -5033,7 +5033,7 @@ module Aws::CleanRoomsML
       :query_string,
       :analysis_template_arn,
       :parameters)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 

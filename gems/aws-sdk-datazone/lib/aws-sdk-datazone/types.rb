@@ -2101,6 +2101,11 @@ module Aws::DataZone
     #   The Amazon S3 properties of a connection.
     #   @return [Types::S3PropertiesInput]
     #
+    # @!attribute [rw] snowflake_properties
+    #   The Snowflake-specific connection properties to use when creating
+    #   the connection.
+    #   @return [Types::SnowflakePropertiesInput]
+    #
     # @!attribute [rw] amazon_q_properties
     #   The Amazon Q properties of the connection.
     #   @return [Types::AmazonQPropertiesInput]
@@ -2136,6 +2141,7 @@ module Aws::DataZone
       :spark_emr_properties,
       :spark_glue_properties,
       :s3_properties,
+      :snowflake_properties,
       :amazon_q_properties,
       :mlflow_properties,
       :workflows_mwaa_properties,
@@ -2155,6 +2161,7 @@ module Aws::DataZone
       class SparkEmrProperties < ConnectionPropertiesInput; end
       class SparkGlueProperties < ConnectionPropertiesInput; end
       class S3Properties < ConnectionPropertiesInput; end
+      class SnowflakeProperties < ConnectionPropertiesInput; end
       class AmazonQProperties < ConnectionPropertiesInput; end
       class MlflowProperties < ConnectionPropertiesInput; end
       class WorkflowsMwaaProperties < ConnectionPropertiesInput; end
@@ -2200,6 +2207,11 @@ module Aws::DataZone
     #   The Amazon S3 properties of a connection.
     #   @return [Types::S3PropertiesOutput]
     #
+    # @!attribute [rw] snowflake_properties
+    #   The Snowflake-specific connection properties for an existing
+    #   connection.
+    #   @return [Types::SnowflakePropertiesOutput]
+    #
     # @!attribute [rw] amazon_q_properties
     #   The Amazon Q properties of the connection.
     #   @return [Types::AmazonQPropertiesOutput]
@@ -2235,6 +2247,7 @@ module Aws::DataZone
       :spark_emr_properties,
       :spark_glue_properties,
       :s3_properties,
+      :snowflake_properties,
       :amazon_q_properties,
       :mlflow_properties,
       :workflows_mwaa_properties,
@@ -2254,6 +2267,7 @@ module Aws::DataZone
       class SparkEmrProperties < ConnectionPropertiesOutput; end
       class SparkGlueProperties < ConnectionPropertiesOutput; end
       class S3Properties < ConnectionPropertiesOutput; end
+      class SnowflakeProperties < ConnectionPropertiesOutput; end
       class AmazonQProperties < ConnectionPropertiesOutput; end
       class MlflowProperties < ConnectionPropertiesOutput; end
       class WorkflowsMwaaProperties < ConnectionPropertiesOutput; end
@@ -2292,6 +2306,10 @@ module Aws::DataZone
     #   The Amazon S3 properties of a connection properties patch.
     #   @return [Types::S3PropertiesPatch]
     #
+    # @!attribute [rw] snowflake_properties
+    #   The Snowflake-specific connection properties to update.
+    #   @return [Types::SnowflakePropertiesPatch]
+    #
     # @!attribute [rw] amazon_q_properties
     #   The Amazon Q properties of the connection.
     #   @return [Types::AmazonQPropertiesPatch]
@@ -2317,6 +2335,7 @@ module Aws::DataZone
       :redshift_properties,
       :spark_emr_properties,
       :s3_properties,
+      :snowflake_properties,
       :amazon_q_properties,
       :mlflow_properties,
       :lakehouse_properties,
@@ -2332,6 +2351,7 @@ module Aws::DataZone
       class RedshiftProperties < ConnectionPropertiesPatch; end
       class SparkEmrProperties < ConnectionPropertiesPatch; end
       class S3Properties < ConnectionPropertiesPatch; end
+      class SnowflakeProperties < ConnectionPropertiesPatch; end
       class AmazonQProperties < ConnectionPropertiesPatch; end
       class MlflowProperties < ConnectionPropertiesPatch; end
       class LakehouseProperties < ConnectionPropertiesPatch; end
@@ -2399,6 +2419,97 @@ module Aws::DataZone
       :props,
       :type,
       :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the network and authentication settings for a connection,
+    # including connection credentials, physical network requirements, and
+    # compute-environment validation options.
+    #
+    # @!attribute [rw] connection_properties
+    #   The connection properties for this configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] physical_connection_requirements
+    #   The physical network requirements for the connection, such as the
+    #   subnet, security group, and VPC settings needed to reach the data
+    #   source.
+    #   @return [Types::PhysicalConnectionRequirements]
+    #
+    # @!attribute [rw] name
+    #   The name of the connectivity configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the connectivity configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] validate_credentials
+    #   Specifies whether to validate credentials for the connectivity
+    #   configuration. Defaults to true if not specified.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] validate_for_compute_environments
+    #   The compute environments to use when validating connectivity. The
+    #   service validates that the connection is reachable from each
+    #   specified environment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] spark_properties
+    #   The Spark properties for this configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] athena_properties
+    #   The Athena properties for this configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] python_properties
+    #   The Python properties for this configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   The authentication settings for this configuration.
+    #   @return [Types::AuthenticationConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectivityProperties AWS API Documentation
+    #
+    class ConnectivityProperties < Struct.new(
+      :connection_properties,
+      :physical_connection_requirements,
+      :name,
+      :description,
+      :validate_credentials,
+      :validate_for_compute_environments,
+      :spark_properties,
+      :athena_properties,
+      :python_properties,
+      :authentication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the connectivity settings to update on an existing
+    # connection. Include only the fields you want to change.
+    #
+    # @!attribute [rw] description
+    #   A description of the connectivity properties update.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_properties
+    #   The connection properties to update.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   The authentication settings to update.
+    #   @return [Types::AuthenticationConfigurationPatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectivityPropertiesPatch AWS API Documentation
+    #
+    class ConnectivityPropertiesPatch < Struct.new(
+      :description,
+      :connection_properties,
+      :authentication_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4118,6 +4229,11 @@ module Aws::DataZone
     #
     # @!attribute [rw] environment_blueprint_identifier
     #   The ID of the blueprint with which the environment is being created.
+    #
+    #   <note markdown="1"> This parameter is only valid for V1 domains. If provided for a V2
+    #   domain, the service returns a ValidationException.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] deployment_order
@@ -4993,6 +5109,10 @@ module Aws::DataZone
     #   The error details if the notebook creation failed.
     #   @return [Types::NotebookError]
     #
+    # @!attribute [rw] git_metadata
+    #   The Git metadata associated with the notebook.
+    #   @return [Types::GitMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateNotebookOutput AWS API Documentation
     #
     class CreateNotebookOutput < Struct.new(
@@ -5014,7 +5134,8 @@ module Aws::DataZone
       :metadata,
       :parameters,
       :environment_configuration,
-      :error)
+      :error,
+      :git_metadata)
       SENSITIVE = [:name, :description, :metadata, :parameters]
       include Aws::Structure
     end
@@ -11322,6 +11443,10 @@ module Aws::DataZone
     #   The error details if the notebook is in a failed state.
     #   @return [Types::NotebookError]
     #
+    # @!attribute [rw] git_metadata
+    #   The Git metadata associated with the notebook.
+    #   @return [Types::GitMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetNotebookOutput AWS API Documentation
     #
     class GetNotebookOutput < Struct.new(
@@ -11343,7 +11468,8 @@ module Aws::DataZone
       :metadata,
       :parameters,
       :environment_configuration,
-      :error)
+      :error,
+      :git_metadata)
       SENSITIVE = [:name, :description, :metadata, :parameters]
       include Aws::Structure
     end
@@ -12290,6 +12416,52 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The Git metadata for a notebook sync operation in Amazon SageMaker
+    # Unified Studio. Contains information about the Git repository, branch,
+    # and commit associated with the notebook.
+    #
+    # @!attribute [rw] connection_id
+    #   The identifier of the Git connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository
+    #   The name of the Git repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch
+    #   The name of the Git branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_hash
+    #   The commit hash in the Git repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_name
+    #   The name of the file in the Git repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] committed_at
+    #   The timestamp of when the commit was made.
+    #   @return [Time]
+    #
+    # @!attribute [rw] commit_message
+    #   The commit message associated with the Git commit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GitMetadata AWS API Documentation
+    #
+    class GitMetadata < Struct.new(
+      :connection_id,
+      :repository,
+      :branch,
+      :commit_hash,
+      :file_name,
+      :committed_at,
+      :commit_message)
+      SENSITIVE = [:repository, :branch, :commit_message]
+      include Aws::Structure
+    end
+
     # The details of a business glossary.
     #
     # @!attribute [rw] domain_id
@@ -13133,6 +13305,27 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # Contains the configuration for mapping user identities to Snowflake
+    # users, including the username attribute and optional prefix applied
+    # during the mapping.
+    #
+    # @!attribute [rw] username_attribute
+    #   The username attribute used for the identity mapping.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix used for the identity mapping.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/IdentityMapping AWS API Documentation
+    #
+    class IdentityMapping < Struct.new(
+      :username_attribute,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of the import of the metadata form type.
     #
     # @!attribute [rw] name
@@ -13780,6 +13973,62 @@ module Aws::DataZone
       :total_queries_processed,
       :num_queries_failed,
       :error_messages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the settings for configuring lineage sync on a Snowflake
+    # connection, including the schedule, timezone, and enabled state.
+    #
+    # @!attribute [rw] timezone
+    #   The timezone of the lineage sync schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether lineage sync is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule of the lineage sync.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/LineageSyncInput AWS API Documentation
+    #
+    class LineageSyncInput < Struct.new(
+      :timezone,
+      :enabled,
+      :schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the current state of lineage sync for a Snowflake connection,
+    # including the schedule, timezone, enabled state, and the ID of the
+    # associated lineage job.
+    #
+    # @!attribute [rw] lineage_job_id
+    #   The ID of the lineage sync job.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The timezone of the lineage sync schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether lineage sync is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule of the lineage sync.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/LineageSyncOutput AWS API Documentation
+    #
+    class LineageSyncOutput < Struct.new(
+      :lineage_job_id,
+      :timezone,
+      :enabled,
+      :schedule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20611,6 +20860,99 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # Contains the Snowflake-specific settings required when creating or
+    # updating a connection, including the Snowflake role, identity mapping,
+    # and lineage sync configuration.
+    #
+    # @!attribute [rw] connectivity_properties
+    #   The connectivity properties of the Snowflake connection.
+    #   @return [Types::ConnectivityProperties]
+    #
+    # @!attribute [rw] snowflake_role
+    #   The Snowflake role used to access Snowflake resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_mapping
+    #   The identity mapping configuration for the Snowflake connection.
+    #   @return [Types::IdentityMapping]
+    #
+    # @!attribute [rw] lineage_sync
+    #   The lineage sync configuration for the Snowflake connection.
+    #   @return [Types::LineageSyncInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SnowflakePropertiesInput AWS API Documentation
+    #
+    class SnowflakePropertiesInput < Struct.new(
+      :connectivity_properties,
+      :snowflake_role,
+      :identity_mapping,
+      :lineage_sync)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the Snowflake-specific settings returned for an existing
+    # connection, including the current role, identity mapping, lineage sync
+    # state, and connection status.
+    #
+    # @!attribute [rw] snowflake_role
+    #   The Snowflake role used to access Snowflake resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_mapping
+    #   The identity mapping configuration for the Snowflake connection.
+    #   @return [Types::IdentityMapping]
+    #
+    # @!attribute [rw] lineage_sync
+    #   The lineage sync configuration for the Snowflake connection.
+    #   @return [Types::LineageSyncOutput]
+    #
+    # @!attribute [rw] status
+    #   The status of the Snowflake connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message returned if the Snowflake connection failed to
+    #   establish or validate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SnowflakePropertiesOutput AWS API Documentation
+    #
+    class SnowflakePropertiesOutput < Struct.new(
+      :snowflake_role,
+      :identity_mapping,
+      :lineage_sync,
+      :status,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the Snowflake-specific settings to update on an existing
+    # connection. Include only the fields you want to change.
+    #
+    # @!attribute [rw] connectivity_properties_patch
+    #   The connectivity properties patch of the Snowflake connection.
+    #   @return [Types::ConnectivityPropertiesPatch]
+    #
+    # @!attribute [rw] snowflake_role
+    #   The Snowflake role used to access Snowflake resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] lineage_sync
+    #   The lineage sync configuration for the Snowflake connection.
+    #   @return [Types::LineageSyncInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SnowflakePropertiesPatch AWS API Documentation
+    #
+    class SnowflakePropertiesPatch < Struct.new(
+      :connectivity_properties_patch,
+      :snowflake_role,
+      :lineage_sync)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The source location for a notebook import in Amazon SageMaker Unified
     # Studio.
     #
@@ -21539,6 +21881,119 @@ module Aws::DataZone
       :started_at,
       :completed_at)
       SENSITIVE = [:metadata, :parameters]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which to sync the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_identifier
+    #   The identifier of the project that will own the synced notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location
+    #   The source location of the notebook to sync. This specifies the
+    #   Amazon Simple Storage Service URI of the notebook file.
+    #   @return [Types::SourceLocation]
+    #
+    # @!attribute [rw] git_metadata
+    #   The Git metadata for the notebook sync, including repository,
+    #   branch, and commit information.
+    #   @return [Types::GitMetadata]
+    #
+    # @!attribute [rw] notebook_id
+    #   The identifier of an existing notebook to sync. If not specified, a
+    #   new notebook is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the notebook. The name must be between 1 and 256
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartNotebookSyncInput AWS API Documentation
+    #
+    class StartNotebookSyncInput < Struct.new(
+      :domain_identifier,
+      :owning_project_identifier,
+      :source_location,
+      :git_metadata,
+      :notebook_id,
+      :name,
+      :description,
+      :client_token)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_id
+    #   The identifier of the synced notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the notebook sync.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The identifier of the project that owns the synced notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location
+    #   The source location from which the notebook was synced.
+    #   @return [Types::SourceLocation]
+    #
+    # @!attribute [rw] git_metadata
+    #   The Git metadata associated with the synced notebook.
+    #   @return [Types::GitMetadata]
+    #
+    # @!attribute [rw] name
+    #   The name of the synced notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the synced notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the notebook sync was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user who started the notebook sync.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartNotebookSyncOutput AWS API Documentation
+    #
+    class StartNotebookSyncOutput < Struct.new(
+      :notebook_id,
+      :status,
+      :domain_id,
+      :owning_project_id,
+      :source_location,
+      :git_metadata,
+      :name,
+      :description,
+      :created_at,
+      :created_by)
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -24253,6 +24708,10 @@ module Aws::DataZone
     #   The error details if the notebook is in a failed state.
     #   @return [Types::NotebookError]
     #
+    # @!attribute [rw] git_metadata
+    #   The Git metadata associated with the notebook.
+    #   @return [Types::GitMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateNotebookOutput AWS API Documentation
     #
     class UpdateNotebookOutput < Struct.new(
@@ -24274,7 +24733,8 @@ module Aws::DataZone
       :metadata,
       :parameters,
       :environment_configuration,
-      :error)
+      :error,
+      :git_metadata)
       SENSITIVE = [:name, :description, :metadata, :parameters]
       include Aws::Structure
     end

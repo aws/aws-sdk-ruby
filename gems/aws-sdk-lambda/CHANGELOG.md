@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.191.0 (2026-07-14)
+------------------
+
+* Feature - AWS Lambda now returns a new DependencyError value in StateReasonCode and LastUpdateStatusReasonCode to provide more actionable information when a function reaches a failed state due to an error from an upstream dependency or service.
+
+1.190.0 (2026-07-13)
+------------------
+
+* Feature - Add Java 8, 11 and 17 on AL2023 (java8.al2023, java11.al2023, java17.al2023) support to AWS Lambda.
+
+1.189.0 (2026-07-10)
+------------------
+
+* Feature - Added TelemetryConfig support for Managed Instances Capacity Provider, enabling customers to configure system log level and custom log group for managed instance logging.
+
+1.188.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.187.0 (2026-07-07)
+------------------
+
+* Feature - AWS Lambda Durable Functions now supports customer managed KMS keys. This allows customers to configure a KMS key in Durable Config to have all their durable execution data encrypted.
+
+1.186.0 (2026-06-29)
+------------------
+
+* Feature - Lambda now supports self-managed S3 buckets for Lambda code storage giving you the option for Lambda to reference a copy of your source code from your own S3 buckets. This allows you to maintain a single copy of your source code and manage your own code storage limits.
+
 1.185.0 (2026-06-22)
 ------------------
 

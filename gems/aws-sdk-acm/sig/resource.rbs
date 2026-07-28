@@ -61,6 +61,7 @@ module Aws
                         ?use_fips_endpoint: bool,
                         ?validate_params: bool,
                         ?endpoint_provider: untyped,
+                        ?service_type: string,
                         ?http_proxy: String,
                         ?http_open_timeout: (Float | Integer),
                         ?http_read_timeout: (Float | Integer),

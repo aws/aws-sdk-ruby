@@ -1782,6 +1782,15 @@ module Aws::CustomerProfiles
     #       excluded_columns: {
     #         "String" => ["text"],
     #       },
+    #       diversity_config: {
+    #         diversity_columns: [
+    #           {
+    #             name: "text", # required
+    #             cap_type: "PERCENTAGE", # required, accepts PERCENTAGE, VALUE
+    #             target: "DiversityTargetExpression", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     description: "sensitiveText",
     #     recommender_schema_name: "name",
@@ -4115,6 +4124,11 @@ module Aws::CustomerProfiles
     #   response. Use this to specify which metadata columns to return
     #   alongside recommended items.
     #
+    # @option params [Types::RecommendationDiversityConfig] :diversity_config
+    #   Runtime diversity configuration for this request. Enables
+    #   diversity-aware recommendations and optionally supplies values for
+    #   placeholder-based diversity caps configured on the recommender.
+    #
     # @return [Types::GetProfileRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetProfileRecommendationsResponse#recommendations #recommendations} => Array&lt;Types::Recommendation&gt;
@@ -4150,6 +4164,12 @@ module Aws::CustomerProfiles
     #     max_results: 1,
     #     metadata_config: {
     #       metadata_columns: ["MetadataColumnName"],
+    #     },
+    #     diversity_config: {
+    #       enabled: false, # required
+    #       values: {
+    #         "DiversityPlaceholderName" => 1,
+    #       },
     #     },
     #   })
     #
@@ -4204,6 +4224,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetRecommenderResponse#created_at #created_at} => Time
     #   * {Types::GetRecommenderResponse#failure_reason #failure_reason} => String
     #   * {Types::GetRecommenderResponse#latest_recommender_update #latest_recommender_update} => Types::RecommenderUpdate
+    #   * {Types::GetRecommenderResponse#active_recommender_version_name #active_recommender_version_name} => String
     #   * {Types::GetRecommenderResponse#training_metrics #training_metrics} => Array&lt;Types::TrainingMetrics&gt;
     #   * {Types::GetRecommenderResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -4232,6 +4253,10 @@ module Aws::CustomerProfiles
     #   resp.recommender_config.excluded_columns #=> Hash
     #   resp.recommender_config.excluded_columns["String"] #=> Array
     #   resp.recommender_config.excluded_columns["String"][0] #=> String
+    #   resp.recommender_config.diversity_config.diversity_columns #=> Array
+    #   resp.recommender_config.diversity_config.diversity_columns[0].name #=> String
+    #   resp.recommender_config.diversity_config.diversity_columns[0].cap_type #=> String, one of "PERCENTAGE", "VALUE"
+    #   resp.recommender_config.diversity_config.diversity_columns[0].target #=> String
     #   resp.description #=> String
     #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
     #   resp.last_updated_at #=> Time
@@ -4249,14 +4274,21 @@ module Aws::CustomerProfiles
     #   resp.latest_recommender_update.recommender_config.excluded_columns #=> Hash
     #   resp.latest_recommender_update.recommender_config.excluded_columns["String"] #=> Array
     #   resp.latest_recommender_update.recommender_config.excluded_columns["String"][0] #=> String
+    #   resp.latest_recommender_update.recommender_config.diversity_config.diversity_columns #=> Array
+    #   resp.latest_recommender_update.recommender_config.diversity_config.diversity_columns[0].name #=> String
+    #   resp.latest_recommender_update.recommender_config.diversity_config.diversity_columns[0].cap_type #=> String, one of "PERCENTAGE", "VALUE"
+    #   resp.latest_recommender_update.recommender_config.diversity_config.diversity_columns[0].target #=> String
     #   resp.latest_recommender_update.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
     #   resp.latest_recommender_update.created_at #=> Time
     #   resp.latest_recommender_update.last_updated_at #=> Time
     #   resp.latest_recommender_update.failure_reason #=> String
+    #   resp.latest_recommender_update.recommender_version_name #=> String
+    #   resp.active_recommender_version_name #=> String
     #   resp.training_metrics #=> Array
     #   resp.training_metrics[0].time #=> Time
     #   resp.training_metrics[0].metrics #=> Hash
     #   resp.training_metrics[0].metrics["TrainingMetricName"] #=> Float
+    #   resp.training_metrics[0].recommender_version_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -6073,6 +6105,10 @@ module Aws::CustomerProfiles
     #   resp.recommenders[0].recommender_config.excluded_columns #=> Hash
     #   resp.recommenders[0].recommender_config.excluded_columns["String"] #=> Array
     #   resp.recommenders[0].recommender_config.excluded_columns["String"][0] #=> String
+    #   resp.recommenders[0].recommender_config.diversity_config.diversity_columns #=> Array
+    #   resp.recommenders[0].recommender_config.diversity_config.diversity_columns[0].name #=> String
+    #   resp.recommenders[0].recommender_config.diversity_config.diversity_columns[0].cap_type #=> String, one of "PERCENTAGE", "VALUE"
+    #   resp.recommenders[0].recommender_config.diversity_config.diversity_columns[0].target #=> String
     #   resp.recommenders[0].created_at #=> Time
     #   resp.recommenders[0].description #=> String
     #   resp.recommenders[0].status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
@@ -6092,10 +6128,15 @@ module Aws::CustomerProfiles
     #   resp.recommenders[0].latest_recommender_update.recommender_config.excluded_columns #=> Hash
     #   resp.recommenders[0].latest_recommender_update.recommender_config.excluded_columns["String"] #=> Array
     #   resp.recommenders[0].latest_recommender_update.recommender_config.excluded_columns["String"][0] #=> String
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.diversity_config.diversity_columns #=> Array
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.diversity_config.diversity_columns[0].name #=> String
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.diversity_config.diversity_columns[0].cap_type #=> String, one of "PERCENTAGE", "VALUE"
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.diversity_config.diversity_columns[0].target #=> String
     #   resp.recommenders[0].latest_recommender_update.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
     #   resp.recommenders[0].latest_recommender_update.created_at #=> Time
     #   resp.recommenders[0].latest_recommender_update.last_updated_at #=> Time
     #   resp.recommenders[0].latest_recommender_update.failure_reason #=> String
+    #   resp.recommenders[0].latest_recommender_update.recommender_version_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRecommenders AWS API Documentation
     #
@@ -7957,6 +7998,10 @@ module Aws::CustomerProfiles
     #   The new configuration settings to apply to the recommender, including
     #   updated parameters and settings that define its behavior.
     #
+    # @option params [String] :recommender_version_name
+    #   The name of a specific recommender version to activate as part of this
+    #   update (for example, to roll back to a previously trained version).
+    #
     # @return [Types::UpdateRecommenderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRecommenderResponse#recommender_name #recommender_name} => String
@@ -7987,7 +8032,17 @@ module Aws::CustomerProfiles
     #       excluded_columns: {
     #         "String" => ["text"],
     #       },
+    #       diversity_config: {
+    #         diversity_columns: [
+    #           {
+    #             name: "text", # required
+    #             cap_type: "PERCENTAGE", # required, accepts PERCENTAGE, VALUE
+    #             target: "DiversityTargetExpression", # required
+    #           },
+    #         ],
+    #       },
     #     },
+    #     recommender_version_name: "RecommenderVersionName",
     #   })
     #
     # @example Response structure
@@ -8021,7 +8076,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

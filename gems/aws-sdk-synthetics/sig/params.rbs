@@ -29,7 +29,8 @@ module Aws
         subnet_ids: Array[::String]?,
         security_group_ids: Array[::String]?,
         ipv_6_allowed_for_dual_stack: bool?
-      }?
+      }?,
+      kms_key_arn: ::String?
     }
 
       type visual_reference_input = {

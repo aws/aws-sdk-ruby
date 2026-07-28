@@ -31,11 +31,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "SearchTextSuccess",
-    "operationName" : "SearchText",
+    "id" : "ReverseGeocodeSuccess",
+    "operationName" : "ReverseGeocode",
     "input" : {
-      "QueryText" : "Taj Mahal",
-      "BiasPosition" : [ 78.0421, 27.1753 ]
+      "QueryPosition" : [ 2.2945, 48.85824 ]
     },
     "expectation" : {
       "success" : { }
@@ -78,10 +77,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ReverseGeocodeSuccess",
-    "operationName" : "ReverseGeocode",
+    "id" : "SearchTextSuccess",
+    "operationName" : "SearchText",
     "input" : {
-      "QueryPosition" : [ 2.2945, 48.85824 ]
+      "QueryText" : "Taj Mahal",
+      "BiasPosition" : [ 78.0421, 27.1753 ]
     },
     "expectation" : {
       "success" : { }

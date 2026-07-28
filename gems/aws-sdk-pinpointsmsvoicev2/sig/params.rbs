@@ -1,0 +1,53 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PinpointSMSVoiceV2
+    module Params
+      type rcs_create_calendar_event_action = {
+      text: ::String,
+      postback_data: ::String,
+      title: ::String,
+      start_time: ::Time,
+      end_time: ::Time,
+      description: ::String?
+    }
+
+      type rcs_suggested_action = {
+      reply: {
+        text: ::String,
+        postback_data: ::String
+      }?,
+      open_url: {
+        text: ::String,
+        postback_data: ::String,
+        url: ::String,
+        application: ::String?,
+        webview_view_mode: ::String?
+      }?,
+      dial_phone: {
+        text: ::String,
+        postback_data: ::String,
+        phone_number: ::String
+      }?,
+      show_location: {
+        text: ::String,
+        postback_data: ::String,
+        latitude: ::Float,
+        longitude: ::Float,
+        label: ::String?
+      }?,
+      request_location: {
+        text: ::String,
+        postback_data: ::String
+      }?,
+      create_calendar_event: Params::rcs_create_calendar_event_action?
+    }
+
+    end
+  end
+end

@@ -809,6 +809,67 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool where you want to get information about the
+    #   user's authentication factors.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The name of the user that you want to query or modify. The value of
+    #   this parameter is typically your user's username, but it can be any
+    #   of their alias attributes. If `username` isn't an alias attribute
+    #   in your user pool, this value must be the `sub` of a local user or
+    #   the username of a user from a third-party IdP.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserAuthFactorsRequest AWS API Documentation
+    #
+    class AdminGetUserAuthFactorsRequest < Struct.new(
+      :user_pool_id,
+      :username)
+      SENSITIVE = [:username]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] username
+    #   The name of the user who is eligible for the authentication factors
+    #   in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_mfa_setting
+    #   The challenge method that Amazon Cognito returns to the user in
+    #   response to sign-in requests. Users can prefer SMS message, email
+    #   message, or TOTP MFA.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_mfa_setting_list
+    #   The MFA options that are activated for the user. The possible values
+    #   in this list are `SMS_MFA`, `EMAIL_OTP`, and `SOFTWARE_TOKEN_MFA`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] configured_user_auth_factors
+    #   The authentication types that are available to the user with
+    #   `USER_AUTH` sign-in, for example `["PASSWORD", "WEB_AUTHN"]`.
+    #
+    #   `PASSWORD` can only be used as a first authentication factor.
+    #   `SOFTWARE_TOKEN` can only be used as an MFA factor. `EMAIL_OTP`,
+    #   `SMS_OTP`, and `WEB_AUTHN` can be used as either a first
+    #   authentication factor or an MFA factor. `WEB_AUTHN` is available as
+    #   an MFA factor only when passkey MFA is enabled at the user pool
+    #   level.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserAuthFactorsResponse AWS API Documentation
+    #
+    class AdminGetUserAuthFactorsResponse < Struct.new(
+      :username,
+      :preferred_mfa_setting,
+      :user_mfa_setting_list,
+      :configured_user_auth_factors)
+      SENSITIVE = [:username]
+      include Aws::Structure
+    end
+
     # Represents the request to get the specified user as an administrator.
     #
     # @!attribute [rw] user_pool_id
@@ -4052,12 +4113,20 @@ module Aws::CognitoIdentityProvider
     #   role.
     #   @return [String]
     #
+    # @!attribute [rw] password_hashing_algorithm
+    #   The password hashing algorithm used to generate the hashes in the
+    #   CSV file for this import job.
+    #
+    #   Valid values: `BCRYPT` \| `SCRYPT` \| `ARGON2ID` \| `PBKDF2_SHA256`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserImportJobRequest AWS API Documentation
     #
     class CreateUserImportJobRequest < Struct.new(
       :job_name,
       :user_pool_id,
-      :cloud_watch_logs_role_arn)
+      :cloud_watch_logs_role_arn,
+      :password_hashing_algorithm)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4535,9 +4604,19 @@ module Aws::CognitoIdentityProvider
     #   Managed login requires that your user pool be configured for any
     #   [feature plan][1] other than `Lite`.
     #
+    #   A `ManagedLoginVersion` value of `2` does not activate managed login
+    #   pages for your app client. When you create an app client
+    #   programmatically, your app client has no branding style. To use
+    #   managed login, create a branding style using the
+    #   [CreateManagedLoginBranding][2] operation. When you use the console,
+    #   Amazon Cognito assigns a default branding style automatically. When
+    #   you use the API or an SDK, you must create a branding style
+    #   yourself.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html
+    #   [2]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateManagedLoginBranding.html
     #   @return [Integer]
     #
     # @!attribute [rw] custom_domain_config
@@ -4753,6 +4832,23 @@ module Aws::CognitoIdentityProvider
     #   automatically prompt users to set up MFA. Amazon Cognito generates
     #   MFA prompts in API responses and in managed login for users who have
     #   chosen and configured a preferred MFA factor.
+    #
+    #   The `CreateUserPool` operation supports only SMS MFA configuration.
+    #   If you set `MfaConfiguration` to either of these values, include an
+    #   `SmsConfiguration` in the same request:
+    #
+    #   * `ON` – Requires MFA for all users
+    #
+    #   * `OPTIONAL` – Makes MFA optional for each user
+    #
+    #   If you omit `SmsConfiguration`, the operation returns an
+    #   `InvalidParameterException`. To configure TOTP or email MFA, use the
+    #   [SetUserPoolMfaConfig][1] operation. You can also use
+    #   `SetUserPoolMfaConfig` to add MFA factors later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
     #   @return [String]
     #
     # @!attribute [rw] user_attribute_update_settings
@@ -4962,17 +5058,33 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] security_policy
     #   The security policy for the custom domain. Defines the minimum TLS
-    #   version and cipher suites that CloudFront uses when communicating
-    #   with viewers (clients). Valid values are as follows:
+    #   version and cipher suites that Amazon CloudFront supports when
+    #   communicating with clients. For specific guidance, see [Supported
+    #   protocols and ciphers between viewers and CloudFront][1]. Valid
+    #   values are as follows:
     #
-    #   * `TLS_V1`: Supports TLS 1.0 and later. Provides the broadest client
-    #     compatibility.
+    #   * `TLS_V1_3_2025` (strictest): A post-quantum-ready policy requiring
+    #     TLS 1.3. It provides the strongest security posture and is ideal
+    #     for workloads where all clients and browsers are updated to the
+    #     latest versions. [Supported protocols and ciphers for
+    #     TLSv1.3\_2025][1].
     #
-    #   * `TLS_V1_2_2021`: Supports TLS 1.2 and later with 2021 cipher
-    #     suites. Recommended minimum for most use cases.
+    #   * `TLS_V1_2_2021` (recommended): A post-quantum-ready policy which
+    #     prefers TLS 1.3 but allows fallback to TLS 1.2 to accommodate
+    #     older clients. It is the recommended minimum for typical
+    #     commercial-grade consumer applications. [Supported protocols and
+    #     ciphers for TLSv1.2\_2021][1].
     #
-    #   * `TLS_V1_3_2025`: Supports TLS 1.3 and later with 2025 cipher
-    #     suites. Provides the strongest security posture.
+    #   * `TLS_V1` (strongly discouraged): Permits fallback to TLS 1.0. It
+    #     offers the broadest compatibility, including support for legacy
+    #     clients that are more than a decade old. This compatibility comes
+    #     at the expense of allowing TLS versions and cryptographic
+    #     algorithms that are no longer considered safe for commercial use.
+    #     [Supported protocols and ciphers for TLSv1][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CustomDomainConfigType AWS API Documentation
@@ -6082,6 +6194,99 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # The configuration that Amazon Cognito uses to send SMS messages
+    # through Amazon Web Services End User Messaging SMS. Provide this
+    # structure in the `EumsSms` member of `SmsConfigurationType` to use
+    # Amazon Web Services End User Messaging SMS instead of Amazon SNS.
+    #
+    # @!attribute [rw] caller_arn
+    #   The ARN of the IAM role that Amazon Cognito assumes to send SMS
+    #   messages through Amazon Web Services End User Messaging SMS. The
+    #   role must grant permission to call the `sms-voice:SendTextMessage`
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID that Amazon Cognito includes when it assumes the
+    #   `CallerArn` role. Use this value as a condition in the role trust
+    #   policy to prevent the confused deputy problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] origination_identity
+    #   The origination identity that Amazon Web Services End User Messaging
+    #   SMS uses to send messages to your users. This value can be one of
+    #   the following:
+    #
+    #   * A phone number – A long code, toll-free number, or short code that
+    #     is assigned to your account.
+    #
+    #   * A sender ID – An alphabetic name that identifies the message
+    #     sender in supported countries.
+    #
+    #   * A phone pool – A group of phone numbers that Amazon Web Services
+    #     End User Messaging SMS selects from when it sends messages.
+    #
+    #   You can provide an E.164 phone number or the ARN of the phone
+    #   number, sender ID, or phone pool. Amazon Web Services End User
+    #   Messaging SMS evaluates IAM authorization with the value that you
+    #   provide. If the permissions policy of your `CallerArn` role scopes
+    #   the `sms-voice:SendTextMessage` resource to a specific ARN, provide
+    #   that same ARN. If the formats do not match, requests fail with an
+    #   `InvalidSmsRoleAccessPolicyException`.
+    #
+    #   Depending on the destination country, you must provide an
+    #   origination identity. For country-specific requirements, see
+    #   [Supported countries and regions for SMS messaging][1] in the Amazon
+    #   Web Services End User Messaging SMS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the Amazon Web Services End User Messaging SMS
+    #   configuration set that Amazon Cognito applies to messages, for
+    #   logging and event destinations. If you omit this member, Amazon
+    #   Cognito sends messages without applying a configuration set.
+    #   @return [String]
+    #
+    # @!attribute [rw] in_entity_id
+    #   The principal entity ID required by India's Distributed Ledger
+    #   Technology (DLT) regulations for SMS messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] in_template_id
+    #   The registered template ID for the message template required by
+    #   India's DLT regulations for SMS messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the Amazon Web Services End User
+    #   Messaging SMS resources that Amazon Cognito uses to send messages.
+    #   Amazon Web Services End User Messaging SMS must be available in your
+    #   user pool's Region.
+    #
+    #   If you omit this parameter, Amazon Cognito uses the same Region as
+    #   your user pool. You can also set this parameter to your user pool's
+    #   Region explicitly. Amazon Cognito rejects any other value with an
+    #   `InvalidParameterException`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EumsSmsConfigurationType AWS API Documentation
+    #
+    class EumsSmsConfigurationType < Struct.new(
+      :caller_arn,
+      :external_id,
+      :origination_identity,
+      :configuration_set_name,
+      :in_entity_id,
+      :in_template_id,
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The context data that your application submitted in an authentication
     # request with threat protection, as displayed in an
     # `AdminListUserAuthEvents` response.
@@ -6566,6 +6771,31 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @!attribute [rw] limit_definition
+    #   The limit to retrieve. Specify the limit class and the attributes
+    #   that identify the limit.
+    #   @return [Types::LimitDefinitionType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetProvisionedLimitRequest AWS API Documentation
+    #
+    class GetProvisionedLimitRequest < Struct.new(
+      :limit_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] limit
+    #   The provisioned and default limit values for the requested limit.
+    #   @return [Types::LimitType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetProvisionedLimitResponse AWS API Documentation
+    #
+    class GetProvisionedLimitResponse < Struct.new(
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request to get a signing certificate from Amazon Cognito.
     #
     # @!attribute [rw] user_pool_id
@@ -6833,6 +7063,13 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] configured_user_auth_factors
     #   The authentication types that are available to the user with
     #   `USER_AUTH` sign-in, for example `["PASSWORD", "WEB_AUTHN"]`.
+    #
+    #   `PASSWORD` can only be used as a first authentication factor.
+    #   `SOFTWARE_TOKEN` can only be used as an MFA factor. `EMAIL_OTP`,
+    #   `SMS_OTP`, and `WEB_AUTHN` can be used as either a first
+    #   authentication factor or an MFA factor. `WEB_AUTHN` is available as
+    #   an MFA factor only when passkey MFA is enabled at the user pool
+    #   level.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAuthFactorsResponse AWS API Documentation
@@ -8081,6 +8318,28 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # The class and attributes that identify a specific limit at the account
+    # level.
+    #
+    # @!attribute [rw] limit_class
+    #   The class of the limit. For API rate limits, this is `API_CATEGORY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The attributes that identify the specific limit. For API rate
+    #   limits, specify the `Category` key with a value like
+    #   `UserAuthentication` or `UserCreation`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LimitDefinitionType AWS API Documentation
+    #
+    class LimitDefinitionType < Struct.new(
+      :limit_class,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when a user exceeds the limit for a requested
     # Amazon Web Services resource.
     #
@@ -8093,6 +8352,33 @@ module Aws::CognitoIdentityProvider
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The limit definition and current limit values for a provisioned limit.
+    #
+    # @!attribute [rw] limit_definition
+    #   The definition that identifies this limit, including the class and
+    #   attributes.
+    #   @return [Types::LimitDefinitionType]
+    #
+    # @!attribute [rw] provisioned_limit_value
+    #   The provisioned limit value, in requests per second (RPS). This is
+    #   the rate that Amazon Cognito currently enforces for your account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] free_limit_value
+    #   The default (free) limit value, in requests per second (RPS). This
+    #   is the rate included at no additional cost.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LimitType AWS API Documentation
+    #
+    class LimitType < Struct.new(
+      :limit_definition,
+      :provisioned_limit_value,
+      :free_limit_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10525,6 +10811,20 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # The request exceeded your account's service quota. To increase your
+    # limit, use or submit a Service Quotas increase request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_pool_id
     #   The ID of the user pool where you want to configure logging.
     #   @return [String]
@@ -10882,6 +11182,11 @@ module Aws::CognitoIdentityProvider
     #   You can permit users to start authentication with a standard
     #   username and password, or with other one-time password and hardware
     #   factors.
+    #
+    #   <note markdown="1"> `SOFTWARE_TOKEN` is not currently supported as a first auth factor.
+    #   Do not include this value in `AllowedFirstAuthFactors`.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignInPolicyType AWS API Documentation
@@ -11124,12 +11429,22 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
     #   @return [String]
     #
+    # @!attribute [rw] eums_sms
+    #   The configuration for sending SMS messages through Amazon Web
+    #   Services End User Messaging SMS, as an alternative to Amazon SNS. In
+    #   a user pool, provide either the Amazon SNS configuration
+    #   (`SnsCallerArn`) or this configuration, but not both. In Amazon Web
+    #   Services Regions where Amazon SNS is not available, this
+    #   configuration is required.
+    #   @return [Types::EumsSmsConfigurationType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SmsConfigurationType AWS API Documentation
     #
     class SmsConfigurationType < Struct.new(
       :sns_caller_arn,
       :external_id,
-      :sns_region)
+      :sns_region,
+      :eums_sms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12137,6 +12452,36 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateManagedLoginBrandingResponse < Struct.new(
       :managed_login_branding)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] limit_definition
+    #   The limit to update. Specify the limit class and the attributes that
+    #   identify the limit.
+    #   @return [Types::LimitDefinitionType]
+    #
+    # @!attribute [rw] requested_limit_value
+    #   The provisioned rate to set, in requests per second (RPS).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateProvisionedLimitRequest AWS API Documentation
+    #
+    class UpdateProvisionedLimitRequest < Struct.new(
+      :limit_definition,
+      :requested_limit_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] limit
+    #   The updated provisioned and default limit values.
+    #   @return [Types::LimitType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateProvisionedLimitResponse AWS API Documentation
+    #
+    class UpdateProvisionedLimitResponse < Struct.new(
+      :limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13300,6 +13645,13 @@ module Aws::CognitoIdentityProvider
     #   The message returned when the user import job is completed.
     #   @return [String]
     #
+    # @!attribute [rw] password_hashing_algorithm
+    #   The password hashing algorithm used to generate the hashes in the
+    #   CSV file for this import job.
+    #
+    #   Valid values: `BCRYPT` \| `SCRYPT` \| `ARGON2ID` \| `PBKDF2_SHA256`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserImportJobType AWS API Documentation
     #
     class UserImportJobType < Struct.new(
@@ -13315,7 +13667,8 @@ module Aws::CognitoIdentityProvider
       :imported_users,
       :skipped_users,
       :failed_users,
-      :completion_message)
+      :completion_message,
+      :password_hashing_algorithm)
       SENSITIVE = []
       include Aws::Structure
     end

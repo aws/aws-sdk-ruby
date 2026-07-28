@@ -807,7 +807,8 @@ module Aws
                          ?fleet_override: {
                            fleet_arn: ::String?
                          },
-                         ?auto_retry_limit_override: ::Integer
+                         ?auto_retry_limit_override: ::Integer,
+                         ?host_kernel_override: ("LINUX_KERNEL_4" | "LINUX_KERNEL_6" | "LINUX_KERNEL_LATEST")
                        ) -> _StartBuildResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBuildResponseSuccess
 

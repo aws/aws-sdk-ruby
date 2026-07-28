@@ -1255,6 +1255,23 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # The default session parameters for the multicast group.
+    #
+    # @!attribute [rw] dl_dr
+    #   Downlink data rate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dl_freq
+    #   Downlink frequency.
+    #   @return [Integer]
+    #
+    class DefaultSessionParametersMulticast < Struct.new(
+      :dl_dr,
+      :dl_freq)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the resource to delete.
     #   @return [String]
@@ -4515,10 +4532,15 @@ module Aws::IoTWireless
     #   interval between each message.
     #   @return [Types::ParticipatingGatewaysMulticast]
     #
+    # @!attribute [rw] default_session_parameters
+    #   The default session parameters for the multicast group.
+    #   @return [Types::DefaultSessionParametersMulticast]
+    #
     class LoRaWANMulticast < Struct.new(
       :rf_region,
       :dl_class,
-      :participating_gateways)
+      :participating_gateways,
+      :default_session_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4550,12 +4572,17 @@ module Aws::IoTWireless
     #   interval between each message.
     #   @return [Types::ParticipatingGatewaysMulticast]
     #
+    # @!attribute [rw] default_session_parameters
+    #   The default session parameters for the multicast group.
+    #   @return [Types::DefaultSessionParametersMulticast]
+    #
     class LoRaWANMulticastGet < Struct.new(
       :rf_region,
       :dl_class,
       :number_of_devices_requested,
       :number_of_devices_in_group,
-      :participating_gateways)
+      :participating_gateways,
+      :default_session_parameters)
       SENSITIVE = []
       include Aws::Structure
     end

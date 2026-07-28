@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.380.0 (2026-07-27)
+------------------
+
+* Feature - This release adds LoRA adapters, training plans, and new instance types to SageMaker inference optimization. CreateAIRecommendationJob accepts optional AdapterSource and CreateOptimizationJob accepts optional TrainingPlanArns and the ml.g7e and ml.p6-b200 families.
+
+1.379.0 (2026-07-23)
+------------------
+
+* Feature - Release support for c6a, m6a, m6g, m7g, m8g instance types for SageMaker HyperPod
+
+1.378.0 (2026-07-16)
+------------------
+
+* Feature - Release support for g7 instance type for SageMaker inference endpoints.
+
+1.377.0 (2026-07-10)
+------------------
+
+* Feature - Release support for g4d, c6g, c7g, c8g instance types for SageMaker HyperPod
+
+1.376.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.375.0 (2026-06-18)
 ------------------
 

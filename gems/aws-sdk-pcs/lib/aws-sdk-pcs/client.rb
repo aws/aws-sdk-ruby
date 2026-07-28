@@ -721,6 +721,12 @@ module Aws::PCS
     # @option params [Types::ComputeNodeGroupSlurmConfigurationRequest] :slurm_configuration
     #   Additional options related to the Slurm scheduler.
     #
+    # @option params [Types::NodeLifecycleActionsRequest] :node_lifecycle_actions
+    #   The lifecycle actions to run on compute nodes in the compute node
+    #   group. Use lifecycle actions to run custom scripts at defined stages
+    #   of a compute node's lifecycle, such as when a compute node finishes
+    #   bootstrapping or becomes ready to accept jobs.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -775,6 +781,37 @@ module Aws::PCS
     #         },
     #       ],
     #     },
+    #     node_lifecycle_actions: {
+    #       stages: { # required
+    #         node_bootstrapped: [
+    #           {
+    #             name: "NodeLifecycleScriptNameString", # required
+    #             script_source: { # required
+    #               script_location: "ScriptSourceScriptLocationString", # required
+    #               s3_version_id: "ScriptSourceS3VersionIdString",
+    #               checksum: "ScriptSourceChecksumString",
+    #             },
+    #             arguments: ["NodeLifecycleScriptArgument"],
+    #             on_error: "TERMINATE", # accepts TERMINATE, STOP_SEQUENCE, CONTINUE
+    #             execution_policy: "FIRST_BOOT_ONLY", # accepts FIRST_BOOT_ONLY, EVERY_BOOT
+    #           },
+    #         ],
+    #         node_ready: [
+    #           {
+    #             name: "NodeLifecycleScriptNameString", # required
+    #             script_source: { # required
+    #               script_location: "ScriptSourceScriptLocationString", # required
+    #               s3_version_id: "ScriptSourceS3VersionIdString",
+    #               checksum: "ScriptSourceChecksumString",
+    #             },
+    #             arguments: ["NodeLifecycleScriptArgument"],
+    #             on_error: "TERMINATE", # accepts TERMINATE, STOP_SEQUENCE, CONTINUE
+    #             execution_policy: "FIRST_BOOT_ONLY", # accepts FIRST_BOOT_ONLY, EVERY_BOOT
+    #           },
+    #         ],
+    #       },
+    #       script_caching_policy: "CACHE_ONCE", # accepts CACHE_ONCE, REFRESH_ON_REBOOT
+    #     },
     #     client_token: "SBClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -806,6 +843,25 @@ module Aws::PCS
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings #=> Array
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].name #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.script_location #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.s3_version_id #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.checksum #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].arguments #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].arguments[0] #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].name #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].script_source.script_location #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].script_source.s3_version_id #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].script_source.checksum #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].arguments #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].arguments[0] #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
+    #   resp.compute_node_group.node_lifecycle_actions.script_caching_policy #=> String, one of "CACHE_ONCE", "REFRESH_ON_REBOOT"
     #   resp.compute_node_group.error_info #=> Array
     #   resp.compute_node_group.error_info[0].code #=> String
     #   resp.compute_node_group.error_info[0].message #=> String
@@ -1140,6 +1196,25 @@ module Aws::PCS
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings #=> Array
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].name #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.script_location #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.s3_version_id #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.checksum #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].arguments #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].arguments[0] #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].name #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].script_source.script_location #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].script_source.s3_version_id #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].script_source.checksum #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].arguments #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].arguments[0] #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
+    #   resp.compute_node_group.node_lifecycle_actions.script_caching_policy #=> String, one of "CACHE_ONCE", "REFRESH_ON_REBOOT"
     #   resp.compute_node_group.error_info #=> Array
     #   resp.compute_node_group.error_info[0].code #=> String
     #   resp.compute_node_group.error_info[0].message #=> String
@@ -1406,6 +1481,10 @@ module Aws::PCS
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#node_id #node_id} => String
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#shared_secret #shared_secret} => String
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
+    #   * {Types::RegisterComputeNodeGroupInstanceResponse#cluster_name #cluster_name} => String
+    #   * {Types::RegisterComputeNodeGroupInstanceResponse#compute_node_group_id #compute_node_group_id} => String
+    #   * {Types::RegisterComputeNodeGroupInstanceResponse#compute_node_group_name #compute_node_group_name} => String
+    #   * {Types::RegisterComputeNodeGroupInstanceResponse#node_lifecycle_actions #node_lifecycle_actions} => Types::NodeLifecycleActions
     #
     # @example Request syntax with placeholder values
     #
@@ -1424,6 +1503,28 @@ module Aws::PCS
     #   resp.endpoints[0].public_ip_address #=> String
     #   resp.endpoints[0].ipv6_address #=> String
     #   resp.endpoints[0].port #=> String
+    #   resp.cluster_name #=> String
+    #   resp.compute_node_group_id #=> String
+    #   resp.compute_node_group_name #=> String
+    #   resp.node_lifecycle_actions.stages.node_bootstrapped #=> Array
+    #   resp.node_lifecycle_actions.stages.node_bootstrapped[0].name #=> String
+    #   resp.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.script_location #=> String
+    #   resp.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.s3_version_id #=> String
+    #   resp.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.checksum #=> String
+    #   resp.node_lifecycle_actions.stages.node_bootstrapped[0].arguments #=> Array
+    #   resp.node_lifecycle_actions.stages.node_bootstrapped[0].arguments[0] #=> String
+    #   resp.node_lifecycle_actions.stages.node_bootstrapped[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
+    #   resp.node_lifecycle_actions.stages.node_bootstrapped[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
+    #   resp.node_lifecycle_actions.stages.node_ready #=> Array
+    #   resp.node_lifecycle_actions.stages.node_ready[0].name #=> String
+    #   resp.node_lifecycle_actions.stages.node_ready[0].script_source.script_location #=> String
+    #   resp.node_lifecycle_actions.stages.node_ready[0].script_source.s3_version_id #=> String
+    #   resp.node_lifecycle_actions.stages.node_ready[0].script_source.checksum #=> String
+    #   resp.node_lifecycle_actions.stages.node_ready[0].arguments #=> Array
+    #   resp.node_lifecycle_actions.stages.node_ready[0].arguments[0] #=> String
+    #   resp.node_lifecycle_actions.stages.node_ready[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
+    #   resp.node_lifecycle_actions.stages.node_ready[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
+    #   resp.node_lifecycle_actions.script_caching_policy #=> String, one of "CACHE_ONCE", "REFRESH_ON_REBOOT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/RegisterComputeNodeGroupInstance AWS API Documentation
     #
@@ -1495,15 +1596,21 @@ module Aws::PCS
       req.send_request(options)
     end
 
-    # Updates a cluster configuration. You can modify Slurm scheduler
-    # settings, accounting configuration, and security groups for an
-    # existing cluster.
+    # Updates a cluster configuration. You can update the scheduler version,
+    # modify scheduler settings, and update accounting configuration for an
+    # existing cluster. For more information about updating the scheduler
+    # version, see [Updating the scheduler version on a cluster][1] in the
+    # *PCS User Guide*.
     #
     # <note markdown="1"> You can only update clusters that are in `ACTIVE`, `UPDATE_FAILED`, or
     # `SUSPENDED` state. All associated resources (queues and compute node
     # groups) must be in `ACTIVE` state before you can update the cluster.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
     #
     # @option params [required, String] :cluster_identifier
     #   The name or ID of the cluster to update.
@@ -1522,6 +1629,15 @@ module Aws::PCS
     #
     # @option params [Types::UpdateClusterSlurmConfigurationRequest] :slurm_configuration
     #   Additional options related to the Slurm scheduler.
+    #
+    # @option params [Types::UpdateSchedulerRequest] :scheduler
+    #   The scheduler configuration to update for the cluster. Use this to
+    #   update the scheduler version. For more information, see [Updating the
+    #   scheduler version on a cluster][1] in the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
     #
     # @return [Types::UpdateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1559,6 +1675,9 @@ module Aws::PCS
     #       slurm_rest: {
     #         mode: "STANDARD", # accepts STANDARD, NONE
     #       },
+    #     },
+    #     scheduler: {
+    #       version: "String", # required
     #     },
     #   })
     #
@@ -1681,6 +1800,12 @@ module Aws::PCS
     # @option params [Types::UpdateComputeNodeGroupSlurmConfigurationRequest] :slurm_configuration
     #   Additional options related to the Slurm scheduler.
     #
+    # @option params [Types::UpdateNodeLifecycleActionsRequest] :node_lifecycle_actions
+    #   The lifecycle actions to run on compute nodes in the compute node
+    #   group. Use lifecycle actions to run custom scripts at defined stages
+    #   of a compute node's lifecycle, such as when a compute node finishes
+    #   bootstrapping or becomes ready to accept jobs.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -1726,6 +1851,37 @@ module Aws::PCS
     #         },
     #       ],
     #     },
+    #     node_lifecycle_actions: {
+    #       stages: { # required
+    #         node_bootstrapped: [
+    #           {
+    #             name: "NodeLifecycleScriptNameString", # required
+    #             script_source: { # required
+    #               script_location: "ScriptSourceScriptLocationString", # required
+    #               s3_version_id: "ScriptSourceS3VersionIdString",
+    #               checksum: "ScriptSourceChecksumString",
+    #             },
+    #             arguments: ["NodeLifecycleScriptArgument"],
+    #             on_error: "TERMINATE", # accepts TERMINATE, STOP_SEQUENCE, CONTINUE
+    #             execution_policy: "FIRST_BOOT_ONLY", # accepts FIRST_BOOT_ONLY, EVERY_BOOT
+    #           },
+    #         ],
+    #         node_ready: [
+    #           {
+    #             name: "NodeLifecycleScriptNameString", # required
+    #             script_source: { # required
+    #               script_location: "ScriptSourceScriptLocationString", # required
+    #               s3_version_id: "ScriptSourceS3VersionIdString",
+    #               checksum: "ScriptSourceChecksumString",
+    #             },
+    #             arguments: ["NodeLifecycleScriptArgument"],
+    #             on_error: "TERMINATE", # accepts TERMINATE, STOP_SEQUENCE, CONTINUE
+    #             execution_policy: "FIRST_BOOT_ONLY", # accepts FIRST_BOOT_ONLY, EVERY_BOOT
+    #           },
+    #         ],
+    #       },
+    #       script_caching_policy: "CACHE_ONCE", # accepts CACHE_ONCE, REFRESH_ON_REBOOT
+    #     },
     #     client_token: "SBClientToken",
     #   })
     #
@@ -1754,6 +1910,25 @@ module Aws::PCS
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings #=> Array
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].name #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.script_location #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.s3_version_id #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.checksum #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].arguments #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].arguments[0] #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].name #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].script_source.script_location #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].script_source.s3_version_id #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].script_source.checksum #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].arguments #=> Array
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].arguments[0] #=> String
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
+    #   resp.compute_node_group.node_lifecycle_actions.stages.node_ready[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
+    #   resp.compute_node_group.node_lifecycle_actions.script_caching_policy #=> String, one of "CACHE_ONCE", "REFRESH_ON_REBOOT"
     #   resp.compute_node_group.error_info #=> Array
     #   resp.compute_node_group.error_info[0].code #=> String
     #   resp.compute_node_group.error_info[0].message #=> String
@@ -1865,7 +2040,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

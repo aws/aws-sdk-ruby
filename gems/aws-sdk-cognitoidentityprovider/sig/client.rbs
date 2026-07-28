@@ -241,6 +241,20 @@ module Aws
                           ) -> _AdminGetUserResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AdminGetUserResponseSuccess
 
+      interface _AdminGetUserAuthFactorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AdminGetUserAuthFactorsResponse]
+        def username: () -> ::String
+        def preferred_mfa_setting: () -> ::String
+        def user_mfa_setting_list: () -> ::Array[::String]
+        def configured_user_auth_factors: () -> ::Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN" | "SOFTWARE_TOKEN")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#admin_get_user_auth_factors-instance_method
+      def admin_get_user_auth_factors: (
+                                         user_pool_id: ::String,
+                                         username: ::String
+                                       ) -> _AdminGetUserAuthFactorsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AdminGetUserAuthFactorsResponseSuccess
+
       interface _AdminInitiateAuthResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AdminInitiateAuthResponse]
         def challenge_name: () -> ("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "SELECT_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED" | "SMS_OTP" | "PASSWORD" | "WEB_AUTHN" | "PASSWORD_SRP")
@@ -657,7 +671,8 @@ module Aws
       def create_user_import_job: (
                                     job_name: ::String,
                                     user_pool_id: ::String,
-                                    cloud_watch_logs_role_arn: ::String
+                                    cloud_watch_logs_role_arn: ::String,
+                                    ?password_hashing_algorithm: ("BCRYPT" | "SCRYPT" | "ARGON2ID" | "PBKDF2_SHA256")
                                   ) -> _CreateUserImportJobResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserImportJobResponseSuccess
 
@@ -694,11 +709,7 @@ module Aws
                                 from: ::String?,
                                 configuration_set: ::String?
                               },
-                              ?sms_configuration: {
-                                sns_caller_arn: ::String,
-                                external_id: ::String?,
-                                sns_region: ::String?
-                              },
+                              ?sms_configuration: Params::sms_configuration_type,
                               ?user_pool_tags: Hash[::String, ::String],
                               ?admin_create_user_config: Params::admin_create_user_config_type,
                               ?schema: Array[
@@ -1111,6 +1122,19 @@ module Aws
                                           ) -> _GetLogDeliveryConfigurationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogDeliveryConfigurationResponseSuccess
 
+      interface _GetProvisionedLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProvisionedLimitResponse]
+        def limit: () -> Types::LimitType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#get_provisioned_limit-instance_method
+      def get_provisioned_limit: (
+                                   limit_definition: {
+                                     limit_class: ("API_CATEGORY"),
+                                     attributes: Hash[::String, ::String]
+                                   }
+                                 ) -> _GetProvisionedLimitResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProvisionedLimitResponseSuccess
+
       interface _GetSigningCertificateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSigningCertificateResponse]
         def certificate: () -> ::String
@@ -1177,7 +1201,7 @@ module Aws
         def username: () -> ::String
         def preferred_mfa_setting: () -> ::String
         def user_mfa_setting_list: () -> ::Array[::String]
-        def configured_user_auth_factors: () -> ::Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN")]
+        def configured_user_auth_factors: () -> ::Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN" | "SOFTWARE_TOKEN")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#get_user_auth_factors-instance_method
       def get_user_auth_factors: (
@@ -1600,11 +1624,7 @@ module Aws
                                       user_pool_id: ::String,
                                       ?sms_mfa_configuration: {
                                         sms_authentication_message: ::String?,
-                                        sms_configuration: {
-                                          sns_caller_arn: ::String,
-                                          external_id: ::String?,
-                                          sns_region: ::String?
-                                        }?
+                                        sms_configuration: Params::sms_configuration_type?
                                       },
                                       ?software_token_mfa_configuration: {
                                         enabled: bool?
@@ -1800,6 +1820,20 @@ module Aws
                                          ) -> _UpdateManagedLoginBrandingResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateManagedLoginBrandingResponseSuccess
 
+      interface _UpdateProvisionedLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProvisionedLimitResponse]
+        def limit: () -> Types::LimitType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#update_provisioned_limit-instance_method
+      def update_provisioned_limit: (
+                                      limit_definition: {
+                                        limit_class: ("API_CATEGORY"),
+                                        attributes: Hash[::String, ::String]
+                                      },
+                                      requested_limit_value: ::Integer
+                                    ) -> _UpdateProvisionedLimitResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProvisionedLimitResponseSuccess
+
       interface _UpdateResourceServerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceServerResponse]
         def resource_server: () -> Types::ResourceServerType
@@ -1880,11 +1914,7 @@ module Aws
                                 from: ::String?,
                                 configuration_set: ::String?
                               },
-                              ?sms_configuration: {
-                                sns_caller_arn: ::String,
-                                external_id: ::String?,
-                                sns_region: ::String?
-                              },
+                              ?sms_configuration: Params::sms_configuration_type,
                               ?user_pool_tags: Hash[::String, ::String],
                               ?admin_create_user_config: Params::admin_create_user_config_type,
                               ?user_pool_add_ons: {

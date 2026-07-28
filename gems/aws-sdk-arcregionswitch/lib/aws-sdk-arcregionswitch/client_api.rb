@@ -43,6 +43,7 @@ module Aws::ARCRegionswitch
     AuroraServerlessScalingConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'AuroraServerlessScalingConfigurationTimeoutMinutesInteger')
     CancelPlanExecutionRequest = Shapes::StructureShape.new(name: 'CancelPlanExecutionRequest')
     CancelPlanExecutionResponse = Shapes::StructureShape.new(name: 'CancelPlanExecutionResponse')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreatePlanRequest = Shapes::StructureShape.new(name: 'CreatePlanRequest')
     CreatePlanRequestRecoveryTimeObjectiveMinutesInteger = Shapes::IntegerShape.new(name: 'CreatePlanRequestRecoveryTimeObjectiveMinutesInteger')
     CreatePlanResponse = Shapes::StructureShape.new(name: 'CreatePlanResponse')
@@ -217,6 +218,7 @@ module Aws::ARCRegionswitch
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceList = Shapes::ListShape.new(name: 'ServiceList')
     StartPlanExecutionRequest = Shapes::StructureShape.new(name: 'StartPlanExecutionRequest')
+    StartPlanExecutionRequestClientTokenString = Shapes::StringShape.new(name: 'StartPlanExecutionRequestClientTokenString')
     StartPlanExecutionResponse = Shapes::StructureShape.new(name: 'StartPlanExecutionResponse')
     Step = Shapes::StructureShape.new(name: 'Step')
     StepName = Shapes::StringShape.new(name: 'StepName')
@@ -346,6 +348,11 @@ module Aws::ARCRegionswitch
     CancelPlanExecutionRequest.struct_class = Types::CancelPlanExecutionRequest
 
     CancelPlanExecutionResponse.struct_class = Types::CancelPlanExecutionResponse
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreatePlanRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreatePlanRequest.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowList, required: true, location_name: "workflows"))
@@ -827,6 +834,7 @@ module Aws::ARCRegionswitch
     StartPlanExecutionRequest.add_member(:comment, Shapes::ShapeRef.new(shape: ExecutionComment, location_name: "comment"))
     StartPlanExecutionRequest.add_member(:latest_version, Shapes::ShapeRef.new(shape: String, location_name: "latestVersion"))
     StartPlanExecutionRequest.add_member(:recovery_execution_id, Shapes::ShapeRef.new(shape: RecoveryExecutionId, location_name: "recoveryExecutionId"))
+    StartPlanExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartPlanExecutionRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartPlanExecutionRequest.struct_class = Types::StartPlanExecutionRequest
 
     StartPlanExecutionResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "executionId"))
@@ -1150,6 +1158,7 @@ module Aws::ARCRegionswitch
         o.errors << Shapes::ShapeRef.new(shape: IllegalStateException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

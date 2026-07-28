@@ -157,6 +157,8 @@ module Aws::DataZone
     CloudFormationProperties = Shapes::StructureShape.new(name: 'CloudFormationProperties')
     ColumnFilterConfiguration = Shapes::StructureShape.new(name: 'ColumnFilterConfiguration')
     ColumnNameList = Shapes::ListShape.new(name: 'ColumnNameList')
+    CommitHash = Shapes::StringShape.new(name: 'CommitHash')
+    CommitMessage = Shapes::StringShape.new(name: 'CommitMessage')
     CompletedAt = Shapes::TimestampShape.new(name: 'CompletedAt')
     ComputeConfig = Shapes::StructureShape.new(name: 'ComputeConfig')
     ComputeEnvironments = Shapes::StringShape.new(name: 'ComputeEnvironments')
@@ -184,6 +186,11 @@ module Aws::DataZone
     ConnectionSummaries = Shapes::ListShape.new(name: 'ConnectionSummaries')
     ConnectionSummary = Shapes::StructureShape.new(name: 'ConnectionSummary')
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
+    ConnectivityProperties = Shapes::StructureShape.new(name: 'ConnectivityProperties')
+    ConnectivityPropertiesDescriptionString = Shapes::StringShape.new(name: 'ConnectivityPropertiesDescriptionString')
+    ConnectivityPropertiesNameString = Shapes::StringShape.new(name: 'ConnectivityPropertiesNameString')
+    ConnectivityPropertiesPatch = Shapes::StructureShape.new(name: 'ConnectivityPropertiesPatch')
+    ConnectivityPropertiesPatchDescriptionString = Shapes::StringShape.new(name: 'ConnectivityPropertiesPatchDescriptionString')
     CreateAccountPoolInput = Shapes::StructureShape.new(name: 'CreateAccountPoolInput')
     CreateAccountPoolOutput = Shapes::StructureShape.new(name: 'CreateAccountPoolOutput')
     CreateAssetFilterInput = Shapes::StructureShape.new(name: 'CreateAssetFilterInput')
@@ -452,6 +459,7 @@ module Aws::DataZone
     FailureCause = Shapes::StructureShape.new(name: 'FailureCause')
     FailureReasons = Shapes::ListShape.new(name: 'FailureReasons')
     FileFormat = Shapes::StringShape.new(name: 'FileFormat')
+    FileName = Shapes::StringShape.new(name: 'FileName')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterClause = Shapes::UnionShape.new(name: 'FilterClause')
     FilterExpression = Shapes::StructureShape.new(name: 'FilterExpression')
@@ -565,6 +573,10 @@ module Aws::DataZone
     GetUserProfileInput = Shapes::StructureShape.new(name: 'GetUserProfileInput')
     GetUserProfileInputSessionNameString = Shapes::StringShape.new(name: 'GetUserProfileInputSessionNameString')
     GetUserProfileOutput = Shapes::StructureShape.new(name: 'GetUserProfileOutput')
+    GitBranch = Shapes::StringShape.new(name: 'GitBranch')
+    GitConnectionId = Shapes::StringShape.new(name: 'GitConnectionId')
+    GitMetadata = Shapes::StructureShape.new(name: 'GitMetadata')
+    GitRepository = Shapes::StringShape.new(name: 'GitRepository')
     GlobalParameterMap = Shapes::MapShape.new(name: 'GlobalParameterMap')
     GlossaryDescription = Shapes::StringShape.new(name: 'GlossaryDescription')
     GlossaryId = Shapes::StringShape.new(name: 'GlossaryId')
@@ -638,6 +650,7 @@ module Aws::DataZone
     IamPropertiesPatch = Shapes::StructureShape.new(name: 'IamPropertiesPatch')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IamUserProfileDetails = Shapes::StructureShape.new(name: 'IamUserProfileDetails')
+    IdentityMapping = Shapes::StructureShape.new(name: 'IdentityMapping')
     Import = Shapes::StructureShape.new(name: 'Import')
     ImportList = Shapes::ListShape.new(name: 'ImportList')
     InExpression = Shapes::StructureShape.new(name: 'InExpression')
@@ -685,7 +698,10 @@ module Aws::DataZone
     LineageNodeTypeItem = Shapes::StructureShape.new(name: 'LineageNodeTypeItem')
     LineageRunDetails = Shapes::StructureShape.new(name: 'LineageRunDetails')
     LineageSqlQueryRunDetails = Shapes::StructureShape.new(name: 'LineageSqlQueryRunDetails')
+    LineageSyncInput = Shapes::StructureShape.new(name: 'LineageSyncInput')
+    LineageSyncOutput = Shapes::StructureShape.new(name: 'LineageSyncOutput')
     LineageSyncSchedule = Shapes::StructureShape.new(name: 'LineageSyncSchedule')
+    LineageSyncScheduleCronString = Shapes::StringShape.new(name: 'LineageSyncScheduleCronString')
     LineageSyncScheduleScheduleString = Shapes::StringShape.new(name: 'LineageSyncScheduleScheduleString')
     ListAccountPoolsInput = Shapes::StructureShape.new(name: 'ListAccountPoolsInput')
     ListAccountPoolsOutput = Shapes::StructureShape.new(name: 'ListAccountPoolsOutput')
@@ -1075,6 +1091,10 @@ module Aws::DataZone
     SingleSignOn = Shapes::StructureShape.new(name: 'SingleSignOn')
     SingleSignOnIdcInstanceArnString = Shapes::StringShape.new(name: 'SingleSignOnIdcInstanceArnString')
     Smithy = Shapes::StringShape.new(name: 'Smithy')
+    SnowflakePropertiesInput = Shapes::StructureShape.new(name: 'SnowflakePropertiesInput')
+    SnowflakePropertiesOutput = Shapes::StructureShape.new(name: 'SnowflakePropertiesOutput')
+    SnowflakePropertiesPatch = Shapes::StructureShape.new(name: 'SnowflakePropertiesPatch')
+    SnowflakeRole = Shapes::StringShape.new(name: 'SnowflakeRole')
     SortFieldAccountPool = Shapes::StringShape.new(name: 'SortFieldAccountPool')
     SortFieldConnection = Shapes::StringShape.new(name: 'SortFieldConnection')
     SortFieldProject = Shapes::StringShape.new(name: 'SortFieldProject')
@@ -1120,6 +1140,8 @@ module Aws::DataZone
     StartNotebookImportOutput = Shapes::StructureShape.new(name: 'StartNotebookImportOutput')
     StartNotebookRunInput = Shapes::StructureShape.new(name: 'StartNotebookRunInput')
     StartNotebookRunOutput = Shapes::StructureShape.new(name: 'StartNotebookRunOutput')
+    StartNotebookSyncInput = Shapes::StructureShape.new(name: 'StartNotebookSyncInput')
+    StartNotebookSyncOutput = Shapes::StructureShape.new(name: 'StartNotebookSyncOutput')
     Status = Shapes::StringShape.new(name: 'Status')
     StopNotebookRunInput = Shapes::StructureShape.new(name: 'StopNotebookRunInput')
     StopNotebookRunOutput = Shapes::StructureShape.new(name: 'StopNotebookRunOutput')
@@ -1801,6 +1823,7 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member(:spark_emr_properties, Shapes::ShapeRef.new(shape: SparkEmrPropertiesInput, location_name: "sparkEmrProperties"))
     ConnectionPropertiesInput.add_member(:spark_glue_properties, Shapes::ShapeRef.new(shape: SparkGluePropertiesInput, location_name: "sparkGlueProperties"))
     ConnectionPropertiesInput.add_member(:s3_properties, Shapes::ShapeRef.new(shape: S3PropertiesInput, location_name: "s3Properties"))
+    ConnectionPropertiesInput.add_member(:snowflake_properties, Shapes::ShapeRef.new(shape: SnowflakePropertiesInput, location_name: "snowflakeProperties"))
     ConnectionPropertiesInput.add_member(:amazon_q_properties, Shapes::ShapeRef.new(shape: AmazonQPropertiesInput, location_name: "amazonQProperties"))
     ConnectionPropertiesInput.add_member(:mlflow_properties, Shapes::ShapeRef.new(shape: MlflowPropertiesInput, location_name: "mlflowProperties"))
     ConnectionPropertiesInput.add_member(:workflows_mwaa_properties, Shapes::ShapeRef.new(shape: WorkflowsMwaaPropertiesInput, location_name: "workflowsMwaaProperties"))
@@ -1816,6 +1839,7 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member_subclass(:spark_emr_properties, Types::ConnectionPropertiesInput::SparkEmrProperties)
     ConnectionPropertiesInput.add_member_subclass(:spark_glue_properties, Types::ConnectionPropertiesInput::SparkGlueProperties)
     ConnectionPropertiesInput.add_member_subclass(:s3_properties, Types::ConnectionPropertiesInput::S3Properties)
+    ConnectionPropertiesInput.add_member_subclass(:snowflake_properties, Types::ConnectionPropertiesInput::SnowflakeProperties)
     ConnectionPropertiesInput.add_member_subclass(:amazon_q_properties, Types::ConnectionPropertiesInput::AmazonQProperties)
     ConnectionPropertiesInput.add_member_subclass(:mlflow_properties, Types::ConnectionPropertiesInput::MlflowProperties)
     ConnectionPropertiesInput.add_member_subclass(:workflows_mwaa_properties, Types::ConnectionPropertiesInput::WorkflowsMwaaProperties)
@@ -1833,6 +1857,7 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member(:spark_emr_properties, Shapes::ShapeRef.new(shape: SparkEmrPropertiesOutput, location_name: "sparkEmrProperties"))
     ConnectionPropertiesOutput.add_member(:spark_glue_properties, Shapes::ShapeRef.new(shape: SparkGluePropertiesOutput, location_name: "sparkGlueProperties"))
     ConnectionPropertiesOutput.add_member(:s3_properties, Shapes::ShapeRef.new(shape: S3PropertiesOutput, location_name: "s3Properties"))
+    ConnectionPropertiesOutput.add_member(:snowflake_properties, Shapes::ShapeRef.new(shape: SnowflakePropertiesOutput, location_name: "snowflakeProperties"))
     ConnectionPropertiesOutput.add_member(:amazon_q_properties, Shapes::ShapeRef.new(shape: AmazonQPropertiesOutput, location_name: "amazonQProperties"))
     ConnectionPropertiesOutput.add_member(:mlflow_properties, Shapes::ShapeRef.new(shape: MlflowPropertiesOutput, location_name: "mlflowProperties"))
     ConnectionPropertiesOutput.add_member(:workflows_mwaa_properties, Shapes::ShapeRef.new(shape: WorkflowsMwaaPropertiesOutput, location_name: "workflowsMwaaProperties"))
@@ -1848,6 +1873,7 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member_subclass(:spark_emr_properties, Types::ConnectionPropertiesOutput::SparkEmrProperties)
     ConnectionPropertiesOutput.add_member_subclass(:spark_glue_properties, Types::ConnectionPropertiesOutput::SparkGlueProperties)
     ConnectionPropertiesOutput.add_member_subclass(:s3_properties, Types::ConnectionPropertiesOutput::S3Properties)
+    ConnectionPropertiesOutput.add_member_subclass(:snowflake_properties, Types::ConnectionPropertiesOutput::SnowflakeProperties)
     ConnectionPropertiesOutput.add_member_subclass(:amazon_q_properties, Types::ConnectionPropertiesOutput::AmazonQProperties)
     ConnectionPropertiesOutput.add_member_subclass(:mlflow_properties, Types::ConnectionPropertiesOutput::MlflowProperties)
     ConnectionPropertiesOutput.add_member_subclass(:workflows_mwaa_properties, Types::ConnectionPropertiesOutput::WorkflowsMwaaProperties)
@@ -1863,6 +1889,7 @@ module Aws::DataZone
     ConnectionPropertiesPatch.add_member(:redshift_properties, Shapes::ShapeRef.new(shape: RedshiftPropertiesPatch, location_name: "redshiftProperties"))
     ConnectionPropertiesPatch.add_member(:spark_emr_properties, Shapes::ShapeRef.new(shape: SparkEmrPropertiesPatch, location_name: "sparkEmrProperties"))
     ConnectionPropertiesPatch.add_member(:s3_properties, Shapes::ShapeRef.new(shape: S3PropertiesPatch, location_name: "s3Properties"))
+    ConnectionPropertiesPatch.add_member(:snowflake_properties, Shapes::ShapeRef.new(shape: SnowflakePropertiesPatch, location_name: "snowflakeProperties"))
     ConnectionPropertiesPatch.add_member(:amazon_q_properties, Shapes::ShapeRef.new(shape: AmazonQPropertiesPatch, location_name: "amazonQProperties"))
     ConnectionPropertiesPatch.add_member(:mlflow_properties, Shapes::ShapeRef.new(shape: MlflowPropertiesPatch, location_name: "mlflowProperties"))
     ConnectionPropertiesPatch.add_member(:lakehouse_properties, Shapes::ShapeRef.new(shape: LakehousePropertiesPatch, location_name: "lakehouseProperties"))
@@ -1874,6 +1901,7 @@ module Aws::DataZone
     ConnectionPropertiesPatch.add_member_subclass(:redshift_properties, Types::ConnectionPropertiesPatch::RedshiftProperties)
     ConnectionPropertiesPatch.add_member_subclass(:spark_emr_properties, Types::ConnectionPropertiesPatch::SparkEmrProperties)
     ConnectionPropertiesPatch.add_member_subclass(:s3_properties, Types::ConnectionPropertiesPatch::S3Properties)
+    ConnectionPropertiesPatch.add_member_subclass(:snowflake_properties, Types::ConnectionPropertiesPatch::SnowflakeProperties)
     ConnectionPropertiesPatch.add_member_subclass(:amazon_q_properties, Types::ConnectionPropertiesPatch::AmazonQProperties)
     ConnectionPropertiesPatch.add_member_subclass(:mlflow_properties, Types::ConnectionPropertiesPatch::MlflowProperties)
     ConnectionPropertiesPatch.add_member_subclass(:lakehouse_properties, Types::ConnectionPropertiesPatch::LakehouseProperties)
@@ -1895,6 +1923,23 @@ module Aws::DataZone
     ConnectionSummary.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionType, required: true, location_name: "type"))
     ConnectionSummary.add_member(:scope, Shapes::ShapeRef.new(shape: ConnectionScope, location_name: "scope"))
     ConnectionSummary.struct_class = Types::ConnectionSummary
+
+    ConnectivityProperties.add_member(:connection_properties, Shapes::ShapeRef.new(shape: ConnectionProperties, location_name: "connectionProperties"))
+    ConnectivityProperties.add_member(:physical_connection_requirements, Shapes::ShapeRef.new(shape: PhysicalConnectionRequirements, location_name: "physicalConnectionRequirements"))
+    ConnectivityProperties.add_member(:name, Shapes::ShapeRef.new(shape: ConnectivityPropertiesNameString, location_name: "name"))
+    ConnectivityProperties.add_member(:description, Shapes::ShapeRef.new(shape: ConnectivityPropertiesDescriptionString, location_name: "description"))
+    ConnectivityProperties.add_member(:validate_credentials, Shapes::ShapeRef.new(shape: Boolean, location_name: "validateCredentials"))
+    ConnectivityProperties.add_member(:validate_for_compute_environments, Shapes::ShapeRef.new(shape: ComputeEnvironmentsList, location_name: "validateForComputeEnvironments"))
+    ConnectivityProperties.add_member(:spark_properties, Shapes::ShapeRef.new(shape: PropertyMap, location_name: "sparkProperties"))
+    ConnectivityProperties.add_member(:athena_properties, Shapes::ShapeRef.new(shape: PropertyMap, location_name: "athenaProperties"))
+    ConnectivityProperties.add_member(:python_properties, Shapes::ShapeRef.new(shape: PropertyMap, location_name: "pythonProperties"))
+    ConnectivityProperties.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: AuthenticationConfigurationInput, location_name: "authenticationConfiguration"))
+    ConnectivityProperties.struct_class = Types::ConnectivityProperties
+
+    ConnectivityPropertiesPatch.add_member(:description, Shapes::ShapeRef.new(shape: ConnectivityPropertiesPatchDescriptionString, location_name: "description"))
+    ConnectivityPropertiesPatch.add_member(:connection_properties, Shapes::ShapeRef.new(shape: ConnectionProperties, location_name: "connectionProperties"))
+    ConnectivityPropertiesPatch.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: AuthenticationConfigurationPatch, location_name: "authenticationConfiguration"))
+    ConnectivityPropertiesPatch.struct_class = Types::ConnectivityPropertiesPatch
 
     CreateAccountPoolInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateAccountPoolInput.add_member(:name, Shapes::ShapeRef.new(shape: AccountPoolName, required: true, location_name: "name"))
@@ -2415,6 +2460,7 @@ module Aws::DataZone
     CreateNotebookOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
     CreateNotebookOutput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
     CreateNotebookOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookError, location_name: "error"))
+    CreateNotebookOutput.add_member(:git_metadata, Shapes::ShapeRef.new(shape: GitMetadata, location_name: "gitMetadata"))
     CreateNotebookOutput.struct_class = Types::CreateNotebookOutput
 
     CreateProjectFromProjectProfilePolicyGrantDetail.add_member(:include_child_domain_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeChildDomainUnits"))
@@ -3837,6 +3883,7 @@ module Aws::DataZone
     GetNotebookOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
     GetNotebookOutput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
     GetNotebookOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookError, location_name: "error"))
+    GetNotebookOutput.add_member(:git_metadata, Shapes::ShapeRef.new(shape: GitMetadata, location_name: "gitMetadata"))
     GetNotebookOutput.struct_class = Types::GetNotebookOutput
 
     GetNotebookRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -4038,6 +4085,15 @@ module Aws::DataZone
     GetUserProfileOutput.add_member(:details, Shapes::ShapeRef.new(shape: UserProfileDetails, location_name: "details"))
     GetUserProfileOutput.struct_class = Types::GetUserProfileOutput
 
+    GitMetadata.add_member(:connection_id, Shapes::ShapeRef.new(shape: GitConnectionId, required: true, location_name: "connectionId"))
+    GitMetadata.add_member(:repository, Shapes::ShapeRef.new(shape: GitRepository, required: true, location_name: "repository"))
+    GitMetadata.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranch, required: true, location_name: "branch"))
+    GitMetadata.add_member(:commit_hash, Shapes::ShapeRef.new(shape: CommitHash, required: true, location_name: "commitHash"))
+    GitMetadata.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, location_name: "fileName"))
+    GitMetadata.add_member(:committed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "committedAt"))
+    GitMetadata.add_member(:commit_message, Shapes::ShapeRef.new(shape: CommitMessage, location_name: "commitMessage"))
+    GitMetadata.struct_class = Types::GitMetadata
+
     GlobalParameterMap.key = Shapes::ShapeRef.new(shape: String)
     GlobalParameterMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -4223,6 +4279,10 @@ module Aws::DataZone
     IamUserProfileDetails.add_member(:group_profile_id, Shapes::ShapeRef.new(shape: String, location_name: "groupProfileId"))
     IamUserProfileDetails.struct_class = Types::IamUserProfileDetails
 
+    IdentityMapping.add_member(:username_attribute, Shapes::ShapeRef.new(shape: String, required: true, location_name: "usernameAttribute"))
+    IdentityMapping.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
+    IdentityMapping.struct_class = Types::IdentityMapping
+
     Import.add_member(:name, Shapes::ShapeRef.new(shape: FormTypeName, required: true, location_name: "name"))
     Import.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "revision"))
     Import.struct_class = Types::Import
@@ -4370,6 +4430,17 @@ module Aws::DataZone
     LineageSqlQueryRunDetails.add_member(:num_queries_failed, Shapes::ShapeRef.new(shape: Integer, location_name: "numQueriesFailed"))
     LineageSqlQueryRunDetails.add_member(:error_messages, Shapes::ShapeRef.new(shape: FailedQueryProcessingErrorMessages, location_name: "errorMessages"))
     LineageSqlQueryRunDetails.struct_class = Types::LineageSqlQueryRunDetails
+
+    LineageSyncInput.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "timezone"))
+    LineageSyncInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    LineageSyncInput.add_member(:schedule, Shapes::ShapeRef.new(shape: LineageSyncScheduleCronString, location_name: "schedule"))
+    LineageSyncInput.struct_class = Types::LineageSyncInput
+
+    LineageSyncOutput.add_member(:lineage_job_id, Shapes::ShapeRef.new(shape: String, location_name: "lineageJobId"))
+    LineageSyncOutput.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "timezone"))
+    LineageSyncOutput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    LineageSyncOutput.add_member(:schedule, Shapes::ShapeRef.new(shape: LineageSyncScheduleCronString, location_name: "schedule"))
+    LineageSyncOutput.struct_class = Types::LineageSyncOutput
 
     LineageSyncSchedule.add_member(:schedule, Shapes::ShapeRef.new(shape: LineageSyncScheduleScheduleString, location_name: "schedule"))
     LineageSyncSchedule.struct_class = Types::LineageSyncSchedule
@@ -5873,6 +5944,24 @@ module Aws::DataZone
     SingleSignOn.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: SingleSignOnIdcInstanceArnString, location_name: "idcInstanceArn"))
     SingleSignOn.struct_class = Types::SingleSignOn
 
+    SnowflakePropertiesInput.add_member(:connectivity_properties, Shapes::ShapeRef.new(shape: ConnectivityProperties, location_name: "connectivityProperties"))
+    SnowflakePropertiesInput.add_member(:snowflake_role, Shapes::ShapeRef.new(shape: SnowflakeRole, required: true, location_name: "snowflakeRole"))
+    SnowflakePropertiesInput.add_member(:identity_mapping, Shapes::ShapeRef.new(shape: IdentityMapping, required: true, location_name: "identityMapping"))
+    SnowflakePropertiesInput.add_member(:lineage_sync, Shapes::ShapeRef.new(shape: LineageSyncInput, location_name: "lineageSync"))
+    SnowflakePropertiesInput.struct_class = Types::SnowflakePropertiesInput
+
+    SnowflakePropertiesOutput.add_member(:snowflake_role, Shapes::ShapeRef.new(shape: SnowflakeRole, required: true, location_name: "snowflakeRole"))
+    SnowflakePropertiesOutput.add_member(:identity_mapping, Shapes::ShapeRef.new(shape: IdentityMapping, required: true, location_name: "identityMapping"))
+    SnowflakePropertiesOutput.add_member(:lineage_sync, Shapes::ShapeRef.new(shape: LineageSyncOutput, required: true, location_name: "lineageSync"))
+    SnowflakePropertiesOutput.add_member(:status, Shapes::ShapeRef.new(shape: ConnectionStatus, required: true, location_name: "status"))
+    SnowflakePropertiesOutput.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    SnowflakePropertiesOutput.struct_class = Types::SnowflakePropertiesOutput
+
+    SnowflakePropertiesPatch.add_member(:connectivity_properties_patch, Shapes::ShapeRef.new(shape: ConnectivityPropertiesPatch, location_name: "connectivityPropertiesPatch"))
+    SnowflakePropertiesPatch.add_member(:snowflake_role, Shapes::ShapeRef.new(shape: SnowflakeRole, location_name: "snowflakeRole"))
+    SnowflakePropertiesPatch.add_member(:lineage_sync, Shapes::ShapeRef.new(shape: LineageSyncInput, location_name: "lineageSync"))
+    SnowflakePropertiesPatch.struct_class = Types::SnowflakePropertiesPatch
+
     SourceLocation.add_member(:s3, Shapes::ShapeRef.new(shape: S3SourceLocation, location_name: "s3"))
     SourceLocation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SourceLocation.add_member_subclass(:s3, Types::SourceLocation::S3)
@@ -6055,6 +6144,28 @@ module Aws::DataZone
     StartNotebookRunOutput.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
     StartNotebookRunOutput.add_member(:completed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completedAt"))
     StartNotebookRunOutput.struct_class = Types::StartNotebookRunOutput
+
+    StartNotebookSyncInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    StartNotebookSyncInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectIdentifier"))
+    StartNotebookSyncInput.add_member(:source_location, Shapes::ShapeRef.new(shape: SourceLocation, required: true, location_name: "sourceLocation"))
+    StartNotebookSyncInput.add_member(:git_metadata, Shapes::ShapeRef.new(shape: GitMetadata, location_name: "gitMetadata"))
+    StartNotebookSyncInput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, location_name: "notebookId"))
+    StartNotebookSyncInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, location_name: "name"))
+    StartNotebookSyncInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartNotebookSyncInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartNotebookSyncInput.struct_class = Types::StartNotebookSyncInput
+
+    StartNotebookSyncOutput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, location_name: "notebookId"))
+    StartNotebookSyncOutput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, location_name: "status"))
+    StartNotebookSyncOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "domainId"))
+    StartNotebookSyncOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "owningProjectId"))
+    StartNotebookSyncOutput.add_member(:source_location, Shapes::ShapeRef.new(shape: SourceLocation, location_name: "sourceLocation"))
+    StartNotebookSyncOutput.add_member(:git_metadata, Shapes::ShapeRef.new(shape: GitMetadata, location_name: "gitMetadata"))
+    StartNotebookSyncOutput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, location_name: "name"))
+    StartNotebookSyncOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartNotebookSyncOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    StartNotebookSyncOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    StartNotebookSyncOutput.struct_class = Types::StartNotebookSyncOutput
 
     StopNotebookRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     StopNotebookRunInput.add_member(:identifier, Shapes::ShapeRef.new(shape: NotebookRunId, required: true, location: "uri", location_name: "identifier"))
@@ -6664,6 +6775,7 @@ module Aws::DataZone
     UpdateNotebookOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
     UpdateNotebookOutput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
     UpdateNotebookOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookError, location_name: "error"))
+    UpdateNotebookOutput.add_member(:git_metadata, Shapes::ShapeRef.new(shape: GitMetadata, location_name: "gitMetadata"))
     UpdateNotebookOutput.struct_class = Types::UpdateNotebookOutput
 
     UpdateProjectInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -9551,6 +9663,22 @@ module Aws::DataZone
         o.http_request_uri = "/v2/domains/{domainIdentifier}/notebook-runs"
         o.input = Shapes::ShapeRef.new(shape: StartNotebookRunInput)
         o.output = Shapes::ShapeRef.new(shape: StartNotebookRunOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:start_notebook_sync, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartNotebookSync"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/notebook-syncs"
+        o.input = Shapes::ShapeRef.new(shape: StartNotebookSyncInput)
+        o.output = Shapes::ShapeRef.new(shape: StartNotebookSyncOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

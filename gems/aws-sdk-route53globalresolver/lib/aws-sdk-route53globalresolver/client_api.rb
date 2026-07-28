@@ -20,6 +20,7 @@ module Aws::Route53GlobalResolver
     AccessTokenItem = Shapes::StructureShape.new(name: 'AccessTokenItem')
     AccessTokenValue = Shapes::StringShape.new(name: 'AccessTokenValue')
     AccessTokens = Shapes::ListShape.new(name: 'AccessTokens')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
     AssociateHostedZoneInput = Shapes::StructureShape.new(name: 'AssociateHostedZoneInput')
     AssociateHostedZoneOutput = Shapes::StructureShape.new(name: 'AssociateHostedZoneOutput')
     BatchCreateFirewallRuleInput = Shapes::StructureShape.new(name: 'BatchCreateFirewallRuleInput')
@@ -150,6 +151,8 @@ module Aws::Route53GlobalResolver
     ListHostedZoneAssociationsOutput = Shapes::StructureShape.new(name: 'ListHostedZoneAssociationsOutput')
     ListManagedFirewallDomainListsInput = Shapes::StructureShape.new(name: 'ListManagedFirewallDomainListsInput')
     ListManagedFirewallDomainListsOutput = Shapes::StructureShape.new(name: 'ListManagedFirewallDomainListsOutput')
+    ListSharedDNSViewsInput = Shapes::StructureShape.new(name: 'ListSharedDNSViewsInput')
+    ListSharedDNSViewsOutput = Shapes::StructureShape.new(name: 'ListSharedDNSViewsOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ManagedFirewallDomainLists = Shapes::ListShape.new(name: 'ManagedFirewallDomainLists')
@@ -164,6 +167,8 @@ module Aws::Route53GlobalResolver
     ResourceNameShort = Shapes::StringShape.new(name: 'ResourceNameShort')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SharedDNSViewSummary = Shapes::StructureShape.new(name: 'SharedDNSViewSummary')
+    SharedDNSViews = Shapes::ListShape.new(name: 'SharedDNSViews')
     Sni = Shapes::StringShape.new(name: 'Sni')
     String = Shapes::StringShape.new(name: 'String')
     Strings = Shapes::ListShape.new(name: 'Strings')
@@ -947,7 +952,7 @@ module Aws::Route53GlobalResolver
 
     ListHostedZoneAssociationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "max_results"))
     ListHostedZoneAssociationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next_token"))
-    ListHostedZoneAssociationsInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListHostedZoneAssociationsInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location: "querystring", location_name: "resourceArn"))
     ListHostedZoneAssociationsInput.struct_class = Types::ListHostedZoneAssociationsInput
 
     ListHostedZoneAssociationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -962,6 +967,14 @@ module Aws::Route53GlobalResolver
     ListManagedFirewallDomainListsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListManagedFirewallDomainListsOutput.add_member(:managed_firewall_domain_lists, Shapes::ShapeRef.new(shape: ManagedFirewallDomainLists, required: true, location_name: "managedFirewallDomainLists"))
     ListManagedFirewallDomainListsOutput.struct_class = Types::ListManagedFirewallDomainListsOutput
+
+    ListSharedDNSViewsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "max_results"))
+    ListSharedDNSViewsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next_token"))
+    ListSharedDNSViewsInput.struct_class = Types::ListSharedDNSViewsInput
+
+    ListSharedDNSViewsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSharedDNSViewsOutput.add_member(:dns_views, Shapes::ShapeRef.new(shape: SharedDNSViews, required: true, location_name: "dnsViews"))
+    ListSharedDNSViewsOutput.struct_class = Types::ListSharedDNSViewsOutput
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -990,6 +1003,23 @@ module Aws::Route53GlobalResolver
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SharedDNSViewSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
+    SharedDNSViewSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
+    SharedDNSViewSummary.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken"))
+    SharedDNSViewSummary.add_member(:dnssec_validation, Shapes::ShapeRef.new(shape: DnsSecValidationType, required: true, location_name: "dnssecValidation"))
+    SharedDNSViewSummary.add_member(:edns_client_subnet, Shapes::ShapeRef.new(shape: EdnsClientSubnetType, required: true, location_name: "ednsClientSubnet"))
+    SharedDNSViewSummary.add_member(:firewall_rules_fail_open, Shapes::ShapeRef.new(shape: FirewallRulesFailOpenType, required: true, location_name: "firewallRulesFailOpen"))
+    SharedDNSViewSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    SharedDNSViewSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    SharedDNSViewSummary.add_member(:global_resolver_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "globalResolverId"))
+    SharedDNSViewSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
+    SharedDNSViewSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
+    SharedDNSViewSummary.add_member(:status, Shapes::ShapeRef.new(shape: ProfileResourceStatus, required: true, location_name: "status"))
+    SharedDNSViewSummary.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "ownerAccountId"))
+    SharedDNSViewSummary.struct_class = Types::SharedDNSViewSummary
+
+    SharedDNSViews.member = Shapes::ShapeRef.new(shape: SharedDNSViewSummary)
 
     Strings.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1697,7 +1727,7 @@ module Aws::Route53GlobalResolver
       api.add_operation(:list_hosted_zone_associations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListHostedZoneAssociations"
         o.http_method = "GET"
-        o.http_request_uri = "/hosted-zone-associations/resource-arn/{resourceArn+}"
+        o.http_request_uri = "/hosted-zone-associations"
         o.input = Shapes::ShapeRef.new(shape: ListHostedZoneAssociationsInput)
         o.output = Shapes::ShapeRef.new(shape: ListHostedZoneAssociationsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1719,6 +1749,24 @@ module Aws::Route53GlobalResolver
         o.http_request_uri = "/list-managed-firewall-domain-lists/{managedFirewallDomainListType}"
         o.input = Shapes::ShapeRef.new(shape: ListManagedFirewallDomainListsInput)
         o.output = Shapes::ShapeRef.new(shape: ListManagedFirewallDomainListsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_shared_dns_views, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSharedDNSViews"
+        o.http_method = "GET"
+        o.http_request_uri = "/shared-dns-views"
+        o.input = Shapes::ShapeRef.new(shape: ListSharedDNSViewsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSharedDNSViewsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

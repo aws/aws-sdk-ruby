@@ -17,9 +17,32 @@ module Aws::ACM
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AcmCertificateMetadata = Shapes::StructureShape.new(name: 'AcmCertificateMetadata')
     AcmCertificateMetadataFilter = Shapes::UnionShape.new(name: 'AcmCertificateMetadataFilter')
+    AcmeAccount = Shapes::StructureShape.new(name: 'AcmeAccount')
+    AcmeAccountId = Shapes::StringShape.new(name: 'AcmeAccountId')
+    AcmeAccountList = Shapes::ListShape.new(name: 'AcmeAccountList')
+    AcmeAccountStatus = Shapes::StringShape.new(name: 'AcmeAccountStatus')
+    AcmeAccountSummary = Shapes::StructureShape.new(name: 'AcmeAccountSummary')
+    AcmeAuthorizationBehavior = Shapes::StringShape.new(name: 'AcmeAuthorizationBehavior')
+    AcmeContact = Shapes::StringShape.new(name: 'AcmeContact')
+    AcmeDomainValidation = Shapes::StructureShape.new(name: 'AcmeDomainValidation')
+    AcmeDomainValidationArn = Shapes::StringShape.new(name: 'AcmeDomainValidationArn')
+    AcmeDomainValidationFailureReason = Shapes::StringShape.new(name: 'AcmeDomainValidationFailureReason')
+    AcmeDomainValidationList = Shapes::ListShape.new(name: 'AcmeDomainValidationList')
+    AcmeDomainValidationStatus = Shapes::StringShape.new(name: 'AcmeDomainValidationStatus')
+    AcmeDomainValidationSummary = Shapes::StructureShape.new(name: 'AcmeDomainValidationSummary')
+    AcmeEndpoint = Shapes::StructureShape.new(name: 'AcmeEndpoint')
+    AcmeEndpointArn = Shapes::StringShape.new(name: 'AcmeEndpointArn')
+    AcmeEndpointList = Shapes::ListShape.new(name: 'AcmeEndpointList')
+    AcmeEndpointStatus = Shapes::StringShape.new(name: 'AcmeEndpointStatus')
+    AcmeEndpointSummary = Shapes::StructureShape.new(name: 'AcmeEndpointSummary')
+    AcmeExternalAccountBinding = Shapes::StructureShape.new(name: 'AcmeExternalAccountBinding')
+    AcmeExternalAccountBindingArn = Shapes::StringShape.new(name: 'AcmeExternalAccountBindingArn')
+    AcmeExternalAccountBindingList = Shapes::ListShape.new(name: 'AcmeExternalAccountBindingList')
+    AcmeExternalAccountBindingSummary = Shapes::StructureShape.new(name: 'AcmeExternalAccountBindingSummary')
     AddTagsToCertificateRequest = Shapes::StructureShape.new(name: 'AddTagsToCertificateRequest')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AvailabilityErrorMessage = Shapes::StringShape.new(name: 'AvailabilityErrorMessage')
+    CertificateAuthority = Shapes::UnionShape.new(name: 'CertificateAuthority')
     CertificateBody = Shapes::StringShape.new(name: 'CertificateBody')
     CertificateBodyBlob = Shapes::BlobShape.new(name: 'CertificateBodyBlob')
     CertificateChain = Shapes::StringShape.new(name: 'CertificateChain')
@@ -29,6 +52,8 @@ module Aws::ACM
     CertificateFilter = Shapes::UnionShape.new(name: 'CertificateFilter')
     CertificateFilterStatement = Shapes::UnionShape.new(name: 'CertificateFilterStatement')
     CertificateFilterStatementList = Shapes::ListShape.new(name: 'CertificateFilterStatementList')
+    CertificateKeyPairOrigin = Shapes::StringShape.new(name: 'CertificateKeyPairOrigin')
+    CertificateKeyPairOrigins = Shapes::ListShape.new(name: 'CertificateKeyPairOrigins')
     CertificateManagedBy = Shapes::StringShape.new(name: 'CertificateManagedBy')
     CertificateMetadata = Shapes::UnionShape.new(name: 'CertificateMetadata')
     CertificateOptions = Shapes::StructureShape.new(name: 'CertificateOptions')
@@ -43,23 +68,48 @@ module Aws::ACM
     CommonNameFilter = Shapes::StructureShape.new(name: 'CommonNameFilter')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContactList = Shapes::ListShape.new(name: 'ContactList')
     CoralAvailabilityThrottledResource = Shapes::StringShape.new(name: 'CoralAvailabilityThrottledResource')
     CoralAvailabilityThrottlingReason = Shapes::StringShape.new(name: 'CoralAvailabilityThrottlingReason')
+    CreateAcmeDomainValidationRequest = Shapes::StructureShape.new(name: 'CreateAcmeDomainValidationRequest')
+    CreateAcmeDomainValidationResponse = Shapes::StructureShape.new(name: 'CreateAcmeDomainValidationResponse')
+    CreateAcmeEndpointRequest = Shapes::StructureShape.new(name: 'CreateAcmeEndpointRequest')
+    CreateAcmeEndpointResponse = Shapes::StructureShape.new(name: 'CreateAcmeEndpointResponse')
+    CreateAcmeExternalAccountBindingRequest = Shapes::StructureShape.new(name: 'CreateAcmeExternalAccountBindingRequest')
+    CreateAcmeExternalAccountBindingResponse = Shapes::StructureShape.new(name: 'CreateAcmeExternalAccountBindingResponse')
     CustomAttribute = Shapes::StructureShape.new(name: 'CustomAttribute')
     CustomAttributeList = Shapes::ListShape.new(name: 'CustomAttributeList')
+    DeleteAcmeDomainValidationRequest = Shapes::StructureShape.new(name: 'DeleteAcmeDomainValidationRequest')
+    DeleteAcmeEndpointRequest = Shapes::StructureShape.new(name: 'DeleteAcmeEndpointRequest')
+    DeleteAcmeExternalAccountBindingRequest = Shapes::StructureShape.new(name: 'DeleteAcmeExternalAccountBindingRequest')
     DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
+    DescribeAcmeAccountRequest = Shapes::StructureShape.new(name: 'DescribeAcmeAccountRequest')
+    DescribeAcmeAccountResponse = Shapes::StructureShape.new(name: 'DescribeAcmeAccountResponse')
+    DescribeAcmeDomainValidationRequest = Shapes::StructureShape.new(name: 'DescribeAcmeDomainValidationRequest')
+    DescribeAcmeDomainValidationResponse = Shapes::StructureShape.new(name: 'DescribeAcmeDomainValidationResponse')
+    DescribeAcmeEndpointRequest = Shapes::StructureShape.new(name: 'DescribeAcmeEndpointRequest')
+    DescribeAcmeEndpointResponse = Shapes::StructureShape.new(name: 'DescribeAcmeEndpointResponse')
+    DescribeAcmeExternalAccountBindingRequest = Shapes::StructureShape.new(name: 'DescribeAcmeExternalAccountBindingRequest')
+    DescribeAcmeExternalAccountBindingResponse = Shapes::StructureShape.new(name: 'DescribeAcmeExternalAccountBindingResponse')
     DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
     DescribeCertificateResponse = Shapes::StructureShape.new(name: 'DescribeCertificateResponse')
     DistinguishedName = Shapes::StructureShape.new(name: 'DistinguishedName')
     DnsNameFilter = Shapes::StructureShape.new(name: 'DnsNameFilter')
+    DnsPrevalidationDetails = Shapes::StructureShape.new(name: 'DnsPrevalidationDetails')
+    DnsPrevalidationOptions = Shapes::StructureShape.new(name: 'DnsPrevalidationOptions')
     DomainComponentList = Shapes::ListShape.new(name: 'DomainComponentList')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
+    DomainName = Shapes::StringShape.new(name: 'DomainName')
     DomainNameString = Shapes::StringShape.new(name: 'DomainNameString')
+    DomainScope = Shapes::StructureShape.new(name: 'DomainScope')
+    DomainScopeOption = Shapes::StringShape.new(name: 'DomainScopeOption')
     DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
     DomainValidation = Shapes::StructureShape.new(name: 'DomainValidation')
     DomainValidationList = Shapes::ListShape.new(name: 'DomainValidationList')
     DomainValidationOption = Shapes::StructureShape.new(name: 'DomainValidationOption')
     DomainValidationOptionList = Shapes::ListShape.new(name: 'DomainValidationOptionList')
+    Expiration = Shapes::StructureShape.new(name: 'Expiration')
+    ExpirationValueLong = Shapes::IntegerShape.new(name: 'ExpirationValueLong')
     ExpiryEventsConfiguration = Shapes::StructureShape.new(name: 'ExpiryEventsConfiguration')
     ExportCertificateRequest = Shapes::StructureShape.new(name: 'ExportCertificateRequest')
     ExportCertificateResponse = Shapes::StructureShape.new(name: 'ExportCertificateResponse')
@@ -68,19 +118,24 @@ module Aws::ACM
     ExtendedKeyUsageList = Shapes::ListShape.new(name: 'ExtendedKeyUsageList')
     ExtendedKeyUsageName = Shapes::StringShape.new(name: 'ExtendedKeyUsageName')
     ExtendedKeyUsageNames = Shapes::ListShape.new(name: 'ExtendedKeyUsageNames')
+    FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FilterString = Shapes::StringShape.new(name: 'FilterString')
     Filters = Shapes::StructureShape.new(name: 'Filters')
     GeneralName = Shapes::UnionShape.new(name: 'GeneralName')
     GeneralNameList = Shapes::ListShape.new(name: 'GeneralNameList')
     GetAccountConfigurationResponse = Shapes::StructureShape.new(name: 'GetAccountConfigurationResponse')
+    GetAcmeExternalAccountBindingCredentialsRequest = Shapes::StructureShape.new(name: 'GetAcmeExternalAccountBindingCredentialsRequest')
+    GetAcmeExternalAccountBindingCredentialsResponse = Shapes::StructureShape.new(name: 'GetAcmeExternalAccountBindingCredentialsResponse')
     GetCertificateRequest = Shapes::StructureShape.new(name: 'GetCertificateRequest')
     GetCertificateResponse = Shapes::StructureShape.new(name: 'GetCertificateResponse')
+    HostedZoneId = Shapes::StringShape.new(name: 'HostedZoneId')
     HttpRedirect = Shapes::StructureShape.new(name: 'HttpRedirect')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     ImportCertificateRequest = Shapes::StructureShape.new(name: 'ImportCertificateRequest')
     ImportCertificateResponse = Shapes::StructureShape.new(name: 'ImportCertificateResponse')
     InUseList = Shapes::ListShape.new(name: 'InUseList')
+    InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidArgsException = Shapes::StructureShape.new(name: 'InvalidArgsException')
     InvalidArnException = Shapes::StructureShape.new(name: 'InvalidArnException')
     InvalidDomainValidationOptionsException = Shapes::StructureShape.new(name: 'InvalidDomainValidationOptionsException')
@@ -95,10 +150,25 @@ module Aws::ACM
     KeyUsageName = Shapes::StringShape.new(name: 'KeyUsageName')
     KeyUsageNames = Shapes::ListShape.new(name: 'KeyUsageNames')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListAcmeAccountsRequest = Shapes::StructureShape.new(name: 'ListAcmeAccountsRequest')
+    ListAcmeAccountsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAcmeAccountsRequestMaxResultsInteger')
+    ListAcmeAccountsResponse = Shapes::StructureShape.new(name: 'ListAcmeAccountsResponse')
+    ListAcmeDomainValidationsRequest = Shapes::StructureShape.new(name: 'ListAcmeDomainValidationsRequest')
+    ListAcmeDomainValidationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAcmeDomainValidationsRequestMaxResultsInteger')
+    ListAcmeDomainValidationsResponse = Shapes::StructureShape.new(name: 'ListAcmeDomainValidationsResponse')
+    ListAcmeEndpointsRequest = Shapes::StructureShape.new(name: 'ListAcmeEndpointsRequest')
+    ListAcmeEndpointsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAcmeEndpointsRequestMaxResultsInteger')
+    ListAcmeEndpointsResponse = Shapes::StructureShape.new(name: 'ListAcmeEndpointsResponse')
+    ListAcmeExternalAccountBindingsRequest = Shapes::StructureShape.new(name: 'ListAcmeExternalAccountBindingsRequest')
+    ListAcmeExternalAccountBindingsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAcmeExternalAccountBindingsRequestMaxResultsInteger')
+    ListAcmeExternalAccountBindingsResponse = Shapes::StructureShape.new(name: 'ListAcmeExternalAccountBindingsResponse')
     ListCertificatesRequest = Shapes::StructureShape.new(name: 'ListCertificatesRequest')
     ListCertificatesResponse = Shapes::StructureShape.new(name: 'ListCertificatesResponse')
     ListTagsForCertificateRequest = Shapes::StructureShape.new(name: 'ListTagsForCertificateRequest')
     ListTagsForCertificateResponse = Shapes::StructureShape.new(name: 'ListTagsForCertificateResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    MacKey = Shapes::StringShape.new(name: 'MacKey')
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
@@ -106,8 +176,14 @@ module Aws::ACM
     PassphraseBlob = Shapes::BlobShape.new(name: 'PassphraseBlob')
     PcaArn = Shapes::StringShape.new(name: 'PcaArn')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
+    PrevalidationDetails = Shapes::UnionShape.new(name: 'PrevalidationDetails')
+    PrevalidationOptions = Shapes::UnionShape.new(name: 'PrevalidationOptions')
+    PrevalidationType = Shapes::StringShape.new(name: 'PrevalidationType')
     PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
     PrivateKeyBlob = Shapes::BlobShape.new(name: 'PrivateKeyBlob')
+    PublicCertificateAuthority = Shapes::StructureShape.new(name: 'PublicCertificateAuthority')
+    PublicKeyAlgorithm = Shapes::StringShape.new(name: 'PublicKeyAlgorithm')
+    PublicKeyAlgorithmList = Shapes::ListShape.new(name: 'PublicKeyAlgorithmList')
     PutAccountConfigurationRequest = Shapes::StructureShape.new(name: 'PutAccountConfigurationRequest')
     RecordType = Shapes::StringShape.new(name: 'RecordType')
     RemoveTagsFromCertificateRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromCertificateRequest')
@@ -123,8 +199,11 @@ module Aws::ACM
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceRecord = Shapes::StructureShape.new(name: 'ResourceRecord')
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
+    RevokeAcmeAccountRequest = Shapes::StructureShape.new(name: 'RevokeAcmeAccountRequest')
+    RevokeAcmeExternalAccountBindingRequest = Shapes::StructureShape.new(name: 'RevokeAcmeExternalAccountBindingRequest')
     RevokeCertificateRequest = Shapes::StructureShape.new(name: 'RevokeCertificateRequest')
     RevokeCertificateResponse = Shapes::StructureShape.new(name: 'RevokeCertificateResponse')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     SearchCertificatesRequest = Shapes::StructureShape.new(name: 'SearchCertificatesRequest')
     SearchCertificatesResponse = Shapes::StructureShape.new(name: 'SearchCertificatesResponse')
     SearchCertificatesSortBy = Shapes::StringShape.new(name: 'SearchCertificatesSortBy')
@@ -132,6 +211,7 @@ module Aws::ACM
     SearchMaxResults = Shapes::IntegerShape.new(name: 'SearchMaxResults')
     SerialNumber = Shapes::StringShape.new(name: 'SerialNumber')
     ServiceErrorMessage = Shapes::StringShape.new(name: 'ServiceErrorMessage')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SortBy = Shapes::StringShape.new(name: 'SortBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     String = Shapes::StringShape.new(name: 'String')
@@ -140,14 +220,21 @@ module Aws::ACM
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagPolicyException = Shapes::StructureShape.new(name: 'TagPolicyException')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     ThrottlingReason = Shapes::StructureShape.new(name: 'ThrottlingReason')
     ThrottlingReasonList = Shapes::ListShape.new(name: 'ThrottlingReasonList')
+    TimeType = Shapes::StringShape.new(name: 'TimeType')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampRange = Shapes::StructureShape.new(name: 'TimestampRange')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UpdateAcmeDomainValidationRequest = Shapes::StructureShape.new(name: 'UpdateAcmeDomainValidationRequest')
+    UpdateAcmeEndpointRequest = Shapes::StructureShape.new(name: 'UpdateAcmeEndpointRequest')
     UpdateCertificateOptionsRequest = Shapes::StructureShape.new(name: 'UpdateCertificateOptionsRequest')
     ValidationEmailList = Shapes::ListShape.new(name: 'ValidationEmailList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -172,6 +259,9 @@ module Aws::ACM
     AcmCertificateMetadata.add_member(:export_option, Shapes::ShapeRef.new(shape: CertificateExport, location_name: "ExportOption"))
     AcmCertificateMetadata.add_member(:managed_by, Shapes::ShapeRef.new(shape: CertificateManagedBy, location_name: "ManagedBy"))
     AcmCertificateMetadata.add_member(:validation_method, Shapes::ShapeRef.new(shape: ValidationMethod, location_name: "ValidationMethod"))
+    AcmCertificateMetadata.add_member(:certificate_key_pair_origin, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigin, location_name: "CertificateKeyPairOrigin"))
+    AcmCertificateMetadata.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AcmeEndpointArn"))
+    AcmCertificateMetadata.add_member(:acme_account_id, Shapes::ShapeRef.new(shape: AcmeAccountId, location_name: "AcmeAccountId"))
     AcmCertificateMetadata.struct_class = Types::AcmCertificateMetadata
 
     AcmCertificateMetadataFilter.add_member(:status, Shapes::ShapeRef.new(shape: CertificateStatus, location_name: "Status"))
@@ -182,6 +272,9 @@ module Aws::ACM
     AcmCertificateMetadataFilter.add_member(:export_option, Shapes::ShapeRef.new(shape: CertificateExport, location_name: "ExportOption"))
     AcmCertificateMetadataFilter.add_member(:managed_by, Shapes::ShapeRef.new(shape: CertificateManagedBy, location_name: "ManagedBy"))
     AcmCertificateMetadataFilter.add_member(:validation_method, Shapes::ShapeRef.new(shape: ValidationMethod, location_name: "ValidationMethod"))
+    AcmCertificateMetadataFilter.add_member(:certificate_key_pair_origin, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigin, location_name: "CertificateKeyPairOrigin"))
+    AcmCertificateMetadataFilter.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AcmeEndpointArn"))
+    AcmCertificateMetadataFilter.add_member(:acme_account_id, Shapes::ShapeRef.new(shape: AcmeAccountId, location_name: "AcmeAccountId"))
     AcmCertificateMetadataFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AcmCertificateMetadataFilter.add_member_subclass(:status, Types::AcmCertificateMetadataFilter::Status)
     AcmCertificateMetadataFilter.add_member_subclass(:renewal_status, Types::AcmCertificateMetadataFilter::RenewalStatus)
@@ -191,12 +284,111 @@ module Aws::ACM
     AcmCertificateMetadataFilter.add_member_subclass(:export_option, Types::AcmCertificateMetadataFilter::ExportOption)
     AcmCertificateMetadataFilter.add_member_subclass(:managed_by, Types::AcmCertificateMetadataFilter::ManagedBy)
     AcmCertificateMetadataFilter.add_member_subclass(:validation_method, Types::AcmCertificateMetadataFilter::ValidationMethod)
+    AcmCertificateMetadataFilter.add_member_subclass(:certificate_key_pair_origin, Types::AcmCertificateMetadataFilter::CertificateKeyPairOrigin)
+    AcmCertificateMetadataFilter.add_member_subclass(:acme_endpoint_arn, Types::AcmCertificateMetadataFilter::AcmeEndpointArn)
+    AcmCertificateMetadataFilter.add_member_subclass(:acme_account_id, Types::AcmCertificateMetadataFilter::AcmeAccountId)
     AcmCertificateMetadataFilter.add_member_subclass(:unknown, Types::AcmCertificateMetadataFilter::Unknown)
     AcmCertificateMetadataFilter.struct_class = Types::AcmCertificateMetadataFilter
+
+    AcmeAccount.add_member(:account_url, Shapes::ShapeRef.new(shape: String, location_name: "AccountUrl"))
+    AcmeAccount.add_member(:public_key_thumbprint, Shapes::ShapeRef.new(shape: String, location_name: "PublicKeyThumbprint"))
+    AcmeAccount.add_member(:status, Shapes::ShapeRef.new(shape: AcmeAccountStatus, location_name: "Status"))
+    AcmeAccount.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    AcmeAccount.add_member(:acme_external_account_binding_arn, Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingArn, location_name: "AcmeExternalAccountBindingArn"))
+    AcmeAccount.add_member(:contacts, Shapes::ShapeRef.new(shape: ContactList, location_name: "Contacts"))
+    AcmeAccount.struct_class = Types::AcmeAccount
+
+    AcmeAccountList.member = Shapes::ShapeRef.new(shape: AcmeAccountSummary)
+
+    AcmeAccountSummary.add_member(:account_url, Shapes::ShapeRef.new(shape: String, location_name: "AccountUrl"))
+    AcmeAccountSummary.add_member(:public_key_thumbprint, Shapes::ShapeRef.new(shape: String, location_name: "PublicKeyThumbprint"))
+    AcmeAccountSummary.add_member(:status, Shapes::ShapeRef.new(shape: AcmeAccountStatus, location_name: "Status"))
+    AcmeAccountSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    AcmeAccountSummary.add_member(:acme_external_account_binding_arn, Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingArn, location_name: "AcmeExternalAccountBindingArn"))
+    AcmeAccountSummary.add_member(:contacts, Shapes::ShapeRef.new(shape: ContactList, location_name: "Contacts"))
+    AcmeAccountSummary.struct_class = Types::AcmeAccountSummary
+
+    AcmeDomainValidation.add_member(:acme_domain_validation_arn, Shapes::ShapeRef.new(shape: AcmeDomainValidationArn, location_name: "AcmeDomainValidationArn"))
+    AcmeDomainValidation.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, location_name: "AcmeEndpointArn"))
+    AcmeDomainValidation.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    AcmeDomainValidation.add_member(:prevalidation_type, Shapes::ShapeRef.new(shape: PrevalidationType, location_name: "PrevalidationType"))
+    AcmeDomainValidation.add_member(:prevalidation_details, Shapes::ShapeRef.new(shape: PrevalidationDetails, location_name: "PrevalidationDetails"))
+    AcmeDomainValidation.add_member(:status, Shapes::ShapeRef.new(shape: AcmeDomainValidationStatus, location_name: "Status"))
+    AcmeDomainValidation.add_member(:failure_details, Shapes::ShapeRef.new(shape: FailureDetails, location_name: "FailureDetails"))
+    AcmeDomainValidation.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    AcmeDomainValidation.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    AcmeDomainValidation.struct_class = Types::AcmeDomainValidation
+
+    AcmeDomainValidationList.member = Shapes::ShapeRef.new(shape: AcmeDomainValidationSummary)
+
+    AcmeDomainValidationSummary.add_member(:acme_domain_validation_arn, Shapes::ShapeRef.new(shape: AcmeDomainValidationArn, location_name: "AcmeDomainValidationArn"))
+    AcmeDomainValidationSummary.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, location_name: "AcmeEndpointArn"))
+    AcmeDomainValidationSummary.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    AcmeDomainValidationSummary.add_member(:prevalidation_type, Shapes::ShapeRef.new(shape: PrevalidationType, location_name: "PrevalidationType"))
+    AcmeDomainValidationSummary.add_member(:prevalidation_details, Shapes::ShapeRef.new(shape: PrevalidationDetails, location_name: "PrevalidationDetails"))
+    AcmeDomainValidationSummary.add_member(:status, Shapes::ShapeRef.new(shape: AcmeDomainValidationStatus, location_name: "Status"))
+    AcmeDomainValidationSummary.add_member(:failure_details, Shapes::ShapeRef.new(shape: FailureDetails, location_name: "FailureDetails"))
+    AcmeDomainValidationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    AcmeDomainValidationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    AcmeDomainValidationSummary.struct_class = Types::AcmeDomainValidationSummary
+
+    AcmeEndpoint.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, location_name: "AcmeEndpointArn"))
+    AcmeEndpoint.add_member(:endpoint_url, Shapes::ShapeRef.new(shape: String, location_name: "EndpointUrl"))
+    AcmeEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: AcmeEndpointStatus, location_name: "Status"))
+    AcmeEndpoint.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
+    AcmeEndpoint.add_member(:authorization_behavior, Shapes::ShapeRef.new(shape: AcmeAuthorizationBehavior, location_name: "AuthorizationBehavior"))
+    AcmeEndpoint.add_member(:contact, Shapes::ShapeRef.new(shape: AcmeContact, location_name: "Contact"))
+    AcmeEndpoint.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: CertificateAuthority, location_name: "CertificateAuthority"))
+    AcmeEndpoint.add_member(:certificate_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "CertificateTags"))
+    AcmeEndpoint.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    AcmeEndpoint.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    AcmeEndpoint.struct_class = Types::AcmeEndpoint
+
+    AcmeEndpointList.member = Shapes::ShapeRef.new(shape: AcmeEndpointSummary)
+
+    AcmeEndpointSummary.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, location_name: "AcmeEndpointArn"))
+    AcmeEndpointSummary.add_member(:endpoint_url, Shapes::ShapeRef.new(shape: String, location_name: "EndpointUrl"))
+    AcmeEndpointSummary.add_member(:status, Shapes::ShapeRef.new(shape: AcmeEndpointStatus, location_name: "Status"))
+    AcmeEndpointSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
+    AcmeEndpointSummary.add_member(:authorization_behavior, Shapes::ShapeRef.new(shape: AcmeAuthorizationBehavior, location_name: "AuthorizationBehavior"))
+    AcmeEndpointSummary.add_member(:contact, Shapes::ShapeRef.new(shape: AcmeContact, location_name: "Contact"))
+    AcmeEndpointSummary.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: CertificateAuthority, location_name: "CertificateAuthority"))
+    AcmeEndpointSummary.add_member(:certificate_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "CertificateTags"))
+    AcmeEndpointSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    AcmeEndpointSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    AcmeEndpointSummary.struct_class = Types::AcmeEndpointSummary
+
+    AcmeExternalAccountBinding.add_member(:acme_external_account_binding_arn, Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingArn, location_name: "AcmeExternalAccountBindingArn"))
+    AcmeExternalAccountBinding.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, location_name: "AcmeEndpointArn"))
+    AcmeExternalAccountBinding.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    AcmeExternalAccountBinding.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
+    AcmeExternalAccountBinding.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedAt"))
+    AcmeExternalAccountBinding.add_member(:last_used_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUsedAt"))
+    AcmeExternalAccountBinding.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    AcmeExternalAccountBinding.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    AcmeExternalAccountBinding.struct_class = Types::AcmeExternalAccountBinding
+
+    AcmeExternalAccountBindingList.member = Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingSummary)
+
+    AcmeExternalAccountBindingSummary.add_member(:acme_external_account_binding_arn, Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingArn, location_name: "AcmeExternalAccountBindingArn"))
+    AcmeExternalAccountBindingSummary.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, location_name: "AcmeEndpointArn"))
+    AcmeExternalAccountBindingSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    AcmeExternalAccountBindingSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
+    AcmeExternalAccountBindingSummary.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedAt"))
+    AcmeExternalAccountBindingSummary.add_member(:last_used_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUsedAt"))
+    AcmeExternalAccountBindingSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    AcmeExternalAccountBindingSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    AcmeExternalAccountBindingSummary.struct_class = Types::AcmeExternalAccountBindingSummary
 
     AddTagsToCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     AddTagsToCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     AddTagsToCertificateRequest.struct_class = Types::AddTagsToCertificateRequest
+
+    CertificateAuthority.add_member(:public_certificate_authority, Shapes::ShapeRef.new(shape: PublicCertificateAuthority, location_name: "PublicCertificateAuthority"))
+    CertificateAuthority.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CertificateAuthority.add_member_subclass(:public_certificate_authority, Types::CertificateAuthority::PublicCertificateAuthority)
+    CertificateAuthority.add_member_subclass(:unknown, Types::CertificateAuthority::Unknown)
+    CertificateAuthority.struct_class = Types::CertificateAuthority
 
     CertificateDetail.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
     CertificateDetail.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainNameString, location_name: "DomainName"))
@@ -225,6 +417,9 @@ module Aws::ACM
     CertificateDetail.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
     CertificateDetail.add_member(:renewal_eligibility, Shapes::ShapeRef.new(shape: RenewalEligibility, location_name: "RenewalEligibility"))
     CertificateDetail.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, location_name: "Options"))
+    CertificateDetail.add_member(:certificate_key_pair_origin, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigin, location_name: "CertificateKeyPairOrigin"))
+    CertificateDetail.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AcmeEndpointArn"))
+    CertificateDetail.add_member(:acme_account_id, Shapes::ShapeRef.new(shape: AcmeAccountId, location_name: "AcmeAccountId"))
     CertificateDetail.struct_class = Types::CertificateDetail
 
     CertificateFilter.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
@@ -250,6 +445,8 @@ module Aws::ACM
     CertificateFilterStatement.struct_class = Types::CertificateFilterStatement
 
     CertificateFilterStatementList.member = Shapes::ShapeRef.new(shape: CertificateFilterStatement)
+
+    CertificateKeyPairOrigins.member = Shapes::ShapeRef.new(shape: CertificateKeyPairOrigin)
 
     CertificateMetadata.add_member(:acm_certificate_metadata, Shapes::ShapeRef.new(shape: AcmCertificateMetadata, location_name: "AcmCertificateMetadata"))
     CertificateMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -290,6 +487,7 @@ module Aws::ACM
     CertificateSummary.add_member(:imported_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "ImportedAt"))
     CertificateSummary.add_member(:revoked_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "RevokedAt"))
     CertificateSummary.add_member(:managed_by, Shapes::ShapeRef.new(shape: CertificateManagedBy, location_name: "ManagedBy"))
+    CertificateSummary.add_member(:certificate_key_pair_origin, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigin, location_name: "CertificateKeyPairOrigin"))
     CertificateSummary.struct_class = Types::CertificateSummary
 
     CertificateSummaryList.member = Shapes::ShapeRef.new(shape: CertificateSummary)
@@ -301,14 +499,81 @@ module Aws::ACM
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    ContactList.member = Shapes::ShapeRef.new(shape: String)
+
+    CreateAcmeDomainValidationRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: String, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
+    CreateAcmeDomainValidationRequest.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, required: true, location_name: "AcmeEndpointArn"))
+    CreateAcmeDomainValidationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    CreateAcmeDomainValidationRequest.add_member(:prevalidation_options, Shapes::ShapeRef.new(shape: PrevalidationOptions, required: true, location_name: "PrevalidationOptions"))
+    CreateAcmeDomainValidationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAcmeDomainValidationRequest.struct_class = Types::CreateAcmeDomainValidationRequest
+
+    CreateAcmeDomainValidationResponse.add_member(:acme_domain_validation_arn, Shapes::ShapeRef.new(shape: AcmeDomainValidationArn, required: true, location_name: "AcmeDomainValidationArn"))
+    CreateAcmeDomainValidationResponse.struct_class = Types::CreateAcmeDomainValidationResponse
+
+    CreateAcmeEndpointRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: String, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
+    CreateAcmeEndpointRequest.add_member(:authorization_behavior, Shapes::ShapeRef.new(shape: AcmeAuthorizationBehavior, required: true, location_name: "AuthorizationBehavior"))
+    CreateAcmeEndpointRequest.add_member(:contact, Shapes::ShapeRef.new(shape: AcmeContact, location_name: "Contact"))
+    CreateAcmeEndpointRequest.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: CertificateAuthority, required: true, location_name: "CertificateAuthority"))
+    CreateAcmeEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAcmeEndpointRequest.add_member(:certificate_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "CertificateTags"))
+    CreateAcmeEndpointRequest.struct_class = Types::CreateAcmeEndpointRequest
+
+    CreateAcmeEndpointResponse.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, location_name: "AcmeEndpointArn"))
+    CreateAcmeEndpointResponse.struct_class = Types::CreateAcmeEndpointResponse
+
+    CreateAcmeExternalAccountBindingRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: String, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
+    CreateAcmeExternalAccountBindingRequest.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, required: true, location_name: "AcmeEndpointArn"))
+    CreateAcmeExternalAccountBindingRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateAcmeExternalAccountBindingRequest.add_member(:expiration, Shapes::ShapeRef.new(shape: Expiration, location_name: "Expiration"))
+    CreateAcmeExternalAccountBindingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAcmeExternalAccountBindingRequest.struct_class = Types::CreateAcmeExternalAccountBindingRequest
+
+    CreateAcmeExternalAccountBindingResponse.add_member(:external_account_binding, Shapes::ShapeRef.new(shape: AcmeExternalAccountBinding, location_name: "ExternalAccountBinding"))
+    CreateAcmeExternalAccountBindingResponse.struct_class = Types::CreateAcmeExternalAccountBindingResponse
+
     CustomAttribute.add_member(:object_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ObjectIdentifier"))
     CustomAttribute.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     CustomAttribute.struct_class = Types::CustomAttribute
 
     CustomAttributeList.member = Shapes::ShapeRef.new(shape: CustomAttribute)
 
+    DeleteAcmeDomainValidationRequest.add_member(:acme_domain_validation_arn, Shapes::ShapeRef.new(shape: AcmeDomainValidationArn, required: true, location_name: "AcmeDomainValidationArn"))
+    DeleteAcmeDomainValidationRequest.struct_class = Types::DeleteAcmeDomainValidationRequest
+
+    DeleteAcmeEndpointRequest.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, required: true, location_name: "AcmeEndpointArn"))
+    DeleteAcmeEndpointRequest.struct_class = Types::DeleteAcmeEndpointRequest
+
+    DeleteAcmeExternalAccountBindingRequest.add_member(:acme_external_account_binding_arn, Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingArn, required: true, location_name: "AcmeExternalAccountBindingArn"))
+    DeleteAcmeExternalAccountBindingRequest.struct_class = Types::DeleteAcmeExternalAccountBindingRequest
+
     DeleteCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     DeleteCertificateRequest.struct_class = Types::DeleteCertificateRequest
+
+    DescribeAcmeAccountRequest.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, required: true, location_name: "AcmeEndpointArn"))
+    DescribeAcmeAccountRequest.add_member(:account_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AccountUrl"))
+    DescribeAcmeAccountRequest.struct_class = Types::DescribeAcmeAccountRequest
+
+    DescribeAcmeAccountResponse.add_member(:acme_account, Shapes::ShapeRef.new(shape: AcmeAccount, location_name: "AcmeAccount"))
+    DescribeAcmeAccountResponse.struct_class = Types::DescribeAcmeAccountResponse
+
+    DescribeAcmeDomainValidationRequest.add_member(:acme_domain_validation_arn, Shapes::ShapeRef.new(shape: AcmeDomainValidationArn, required: true, location_name: "AcmeDomainValidationArn"))
+    DescribeAcmeDomainValidationRequest.struct_class = Types::DescribeAcmeDomainValidationRequest
+
+    DescribeAcmeDomainValidationResponse.add_member(:acme_domain_validation, Shapes::ShapeRef.new(shape: AcmeDomainValidation, location_name: "AcmeDomainValidation"))
+    DescribeAcmeDomainValidationResponse.struct_class = Types::DescribeAcmeDomainValidationResponse
+
+    DescribeAcmeEndpointRequest.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, required: true, location_name: "AcmeEndpointArn"))
+    DescribeAcmeEndpointRequest.struct_class = Types::DescribeAcmeEndpointRequest
+
+    DescribeAcmeEndpointResponse.add_member(:acme_endpoint, Shapes::ShapeRef.new(shape: AcmeEndpoint, location_name: "AcmeEndpoint"))
+    DescribeAcmeEndpointResponse.struct_class = Types::DescribeAcmeEndpointResponse
+
+    DescribeAcmeExternalAccountBindingRequest.add_member(:acme_external_account_binding_arn, Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingArn, required: true, location_name: "AcmeExternalAccountBindingArn"))
+    DescribeAcmeExternalAccountBindingRequest.struct_class = Types::DescribeAcmeExternalAccountBindingRequest
+
+    DescribeAcmeExternalAccountBindingResponse.add_member(:external_account_binding, Shapes::ShapeRef.new(shape: AcmeExternalAccountBinding, location_name: "ExternalAccountBinding"))
+    DescribeAcmeExternalAccountBindingResponse.struct_class = Types::DescribeAcmeExternalAccountBindingResponse
 
     DescribeCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     DescribeCertificateRequest.struct_class = Types::DescribeCertificateRequest
@@ -338,9 +603,23 @@ module Aws::ACM
     DnsNameFilter.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
     DnsNameFilter.struct_class = Types::DnsNameFilter
 
+    DnsPrevalidationDetails.add_member(:domain_scope, Shapes::ShapeRef.new(shape: DomainScope, location_name: "DomainScope"))
+    DnsPrevalidationDetails.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: HostedZoneId, location_name: "HostedZoneId"))
+    DnsPrevalidationDetails.add_member(:resource_record, Shapes::ShapeRef.new(shape: ResourceRecord, location_name: "ResourceRecord"))
+    DnsPrevalidationDetails.struct_class = Types::DnsPrevalidationDetails
+
+    DnsPrevalidationOptions.add_member(:domain_scope, Shapes::ShapeRef.new(shape: DomainScope, location_name: "DomainScope"))
+    DnsPrevalidationOptions.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: HostedZoneId, location_name: "HostedZoneId"))
+    DnsPrevalidationOptions.struct_class = Types::DnsPrevalidationOptions
+
     DomainComponentList.member = Shapes::ShapeRef.new(shape: String)
 
     DomainList.member = Shapes::ShapeRef.new(shape: DomainNameString)
+
+    DomainScope.add_member(:exact_domain, Shapes::ShapeRef.new(shape: DomainScopeOption, location_name: "ExactDomain"))
+    DomainScope.add_member(:subdomains, Shapes::ShapeRef.new(shape: DomainScopeOption, location_name: "Subdomains"))
+    DomainScope.add_member(:wildcards, Shapes::ShapeRef.new(shape: DomainScopeOption, location_name: "Wildcards"))
+    DomainScope.struct_class = Types::DomainScope
 
     DomainValidation.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "DomainName"))
     DomainValidation.add_member(:validation_emails, Shapes::ShapeRef.new(shape: ValidationEmailList, location_name: "ValidationEmails"))
@@ -358,6 +637,10 @@ module Aws::ACM
     DomainValidationOption.struct_class = Types::DomainValidationOption
 
     DomainValidationOptionList.member = Shapes::ShapeRef.new(shape: DomainValidationOption)
+
+    Expiration.add_member(:value, Shapes::ShapeRef.new(shape: ExpirationValueLong, required: true, location_name: "Value"))
+    Expiration.add_member(:type, Shapes::ShapeRef.new(shape: TimeType, required: true, location_name: "Type"))
+    Expiration.struct_class = Types::Expiration
 
     ExpiryEventsConfiguration.add_member(:days_before_expiry, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "DaysBeforeExpiry"))
     ExpiryEventsConfiguration.struct_class = Types::ExpiryEventsConfiguration
@@ -380,6 +663,10 @@ module Aws::ACM
     ExtendedKeyUsageList.member = Shapes::ShapeRef.new(shape: ExtendedKeyUsage)
 
     ExtendedKeyUsageNames.member = Shapes::ShapeRef.new(shape: ExtendedKeyUsageName)
+
+    FailureDetails.add_member(:reason, Shapes::ShapeRef.new(shape: AcmeDomainValidationFailureReason, location_name: "Reason"))
+    FailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    FailureDetails.struct_class = Types::FailureDetails
 
     Filters.add_member(:extended_key_usage, Shapes::ShapeRef.new(shape: ExtendedKeyUsageFilterList, location_name: "extendedKeyUsage"))
     Filters.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsageFilterList, location_name: "keyUsage"))
@@ -411,6 +698,13 @@ module Aws::ACM
     GetAccountConfigurationResponse.add_member(:expiry_events, Shapes::ShapeRef.new(shape: ExpiryEventsConfiguration, location_name: "ExpiryEvents"))
     GetAccountConfigurationResponse.struct_class = Types::GetAccountConfigurationResponse
 
+    GetAcmeExternalAccountBindingCredentialsRequest.add_member(:acme_external_account_binding_arn, Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingArn, required: true, location_name: "AcmeExternalAccountBindingArn"))
+    GetAcmeExternalAccountBindingCredentialsRequest.struct_class = Types::GetAcmeExternalAccountBindingCredentialsRequest
+
+    GetAcmeExternalAccountBindingCredentialsResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: String, location_name: "KeyId"))
+    GetAcmeExternalAccountBindingCredentialsResponse.add_member(:mac_key, Shapes::ShapeRef.new(shape: MacKey, location_name: "MacKey"))
+    GetAcmeExternalAccountBindingCredentialsResponse.struct_class = Types::GetAcmeExternalAccountBindingCredentialsResponse
+
     GetCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     GetCertificateRequest.struct_class = Types::GetCertificateRequest
 
@@ -433,6 +727,9 @@ module Aws::ACM
     ImportCertificateResponse.struct_class = Types::ImportCertificateResponse
 
     InUseList.member = Shapes::ShapeRef.new(shape: String)
+
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InternalServerException.struct_class = Types::InternalServerException
 
     InvalidArgsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidArgsException.struct_class = Types::InvalidArgsException
@@ -466,7 +763,43 @@ module Aws::ACM
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListAcmeAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAcmeAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAcmeAccountsRequestMaxResultsInteger, location_name: "MaxResults"))
+    ListAcmeAccountsRequest.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, required: true, location_name: "AcmeEndpointArn"))
+    ListAcmeAccountsRequest.struct_class = Types::ListAcmeAccountsRequest
+
+    ListAcmeAccountsResponse.add_member(:acme_accounts, Shapes::ShapeRef.new(shape: AcmeAccountList, location_name: "AcmeAccounts"))
+    ListAcmeAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAcmeAccountsResponse.struct_class = Types::ListAcmeAccountsResponse
+
+    ListAcmeDomainValidationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAcmeDomainValidationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAcmeDomainValidationsRequestMaxResultsInteger, location_name: "MaxResults"))
+    ListAcmeDomainValidationsRequest.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, required: true, location_name: "AcmeEndpointArn"))
+    ListAcmeDomainValidationsRequest.struct_class = Types::ListAcmeDomainValidationsRequest
+
+    ListAcmeDomainValidationsResponse.add_member(:acme_domain_validations, Shapes::ShapeRef.new(shape: AcmeDomainValidationList, location_name: "AcmeDomainValidations"))
+    ListAcmeDomainValidationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAcmeDomainValidationsResponse.struct_class = Types::ListAcmeDomainValidationsResponse
+
+    ListAcmeEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAcmeEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAcmeEndpointsRequestMaxResultsInteger, location_name: "MaxResults"))
+    ListAcmeEndpointsRequest.struct_class = Types::ListAcmeEndpointsRequest
+
+    ListAcmeEndpointsResponse.add_member(:acme_endpoints, Shapes::ShapeRef.new(shape: AcmeEndpointList, location_name: "AcmeEndpoints"))
+    ListAcmeEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAcmeEndpointsResponse.struct_class = Types::ListAcmeEndpointsResponse
+
+    ListAcmeExternalAccountBindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAcmeExternalAccountBindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAcmeExternalAccountBindingsRequestMaxResultsInteger, location_name: "MaxResults"))
+    ListAcmeExternalAccountBindingsRequest.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, required: true, location_name: "AcmeEndpointArn"))
+    ListAcmeExternalAccountBindingsRequest.struct_class = Types::ListAcmeExternalAccountBindingsRequest
+
+    ListAcmeExternalAccountBindingsResponse.add_member(:external_account_bindings, Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingList, location_name: "ExternalAccountBindings"))
+    ListAcmeExternalAccountBindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAcmeExternalAccountBindingsResponse.struct_class = Types::ListAcmeExternalAccountBindingsResponse
+
     ListCertificatesRequest.add_member(:certificate_statuses, Shapes::ShapeRef.new(shape: CertificateStatuses, location_name: "CertificateStatuses"))
+    ListCertificatesRequest.add_member(:certificate_key_pair_origins, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigins, location_name: "CertificateKeyPairOrigins"))
     ListCertificatesRequest.add_member(:includes, Shapes::ShapeRef.new(shape: Filters, location_name: "Includes"))
     ListCertificatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCertificatesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location_name: "MaxItems"))
@@ -484,9 +817,32 @@ module Aws::ACM
     ListTagsForCertificateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForCertificateResponse.struct_class = Types::ListTagsForCertificateResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     OtherName.add_member(:object_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ObjectIdentifier"))
     OtherName.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     OtherName.struct_class = Types::OtherName
+
+    PrevalidationDetails.add_member(:dns_prevalidation, Shapes::ShapeRef.new(shape: DnsPrevalidationDetails, location_name: "DnsPrevalidation"))
+    PrevalidationDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PrevalidationDetails.add_member_subclass(:dns_prevalidation, Types::PrevalidationDetails::DnsPrevalidation)
+    PrevalidationDetails.add_member_subclass(:unknown, Types::PrevalidationDetails::Unknown)
+    PrevalidationDetails.struct_class = Types::PrevalidationDetails
+
+    PrevalidationOptions.add_member(:dns_prevalidation, Shapes::ShapeRef.new(shape: DnsPrevalidationOptions, location_name: "DnsPrevalidation"))
+    PrevalidationOptions.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PrevalidationOptions.add_member_subclass(:dns_prevalidation, Types::PrevalidationOptions::DnsPrevalidation)
+    PrevalidationOptions.add_member_subclass(:unknown, Types::PrevalidationOptions::Unknown)
+    PrevalidationOptions.struct_class = Types::PrevalidationOptions
+
+    PublicCertificateAuthority.add_member(:allowed_key_algorithms, Shapes::ShapeRef.new(shape: PublicKeyAlgorithmList, location_name: "AllowedKeyAlgorithms"))
+    PublicCertificateAuthority.struct_class = Types::PublicCertificateAuthority
+
+    PublicKeyAlgorithmList.member = Shapes::ShapeRef.new(shape: PublicKeyAlgorithm)
 
     PutAccountConfigurationRequest.add_member(:expiry_events, Shapes::ShapeRef.new(shape: ExpiryEventsConfiguration, location_name: "ExpiryEvents"))
     PutAccountConfigurationRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken"))
@@ -539,6 +895,13 @@ module Aws::ACM
     ResourceRecord.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
     ResourceRecord.struct_class = Types::ResourceRecord
 
+    RevokeAcmeAccountRequest.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, required: true, location_name: "AcmeEndpointArn"))
+    RevokeAcmeAccountRequest.add_member(:account_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AccountUrl"))
+    RevokeAcmeAccountRequest.struct_class = Types::RevokeAcmeAccountRequest
+
+    RevokeAcmeExternalAccountBindingRequest.add_member(:acme_external_account_binding_arn, Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingArn, required: true, location_name: "AcmeExternalAccountBindingArn"))
+    RevokeAcmeExternalAccountBindingRequest.struct_class = Types::RevokeAcmeExternalAccountBindingRequest
+
     RevokeCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     RevokeCertificateRequest.add_member(:revocation_reason, Shapes::ShapeRef.new(shape: RevocationReason, required: true, location_name: "RevocationReason"))
     RevokeCertificateRequest.struct_class = Types::RevokeCertificateRequest
@@ -557,6 +920,9 @@ module Aws::ACM
     SearchCertificatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     SearchCertificatesResponse.struct_class = Types::SearchCertificatesResponse
 
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
     SubjectAlternativeNameFilter.add_member(:dns_name, Shapes::ShapeRef.new(shape: DnsNameFilter, location_name: "DnsName"))
     SubjectAlternativeNameFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SubjectAlternativeNameFilter.add_member_subclass(:dns_name, Types::SubjectAlternativeNameFilter::DnsName)
@@ -573,10 +939,16 @@ module Aws::ACM
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
     TagPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TagPolicyException.struct_class = Types::TagPolicyException
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: AvailabilityErrorMessage, location_name: "message"))
     ThrottlingException.add_member(:throttling_reasons, Shapes::ShapeRef.new(shape: ThrottlingReasonList, location_name: "throttlingReasons"))
@@ -594,6 +966,20 @@ module Aws::ACM
 
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UpdateAcmeDomainValidationRequest.add_member(:acme_domain_validation_arn, Shapes::ShapeRef.new(shape: AcmeDomainValidationArn, required: true, location_name: "AcmeDomainValidationArn"))
+    UpdateAcmeDomainValidationRequest.add_member(:prevalidation_options, Shapes::ShapeRef.new(shape: PrevalidationOptions, location_name: "PrevalidationOptions"))
+    UpdateAcmeDomainValidationRequest.struct_class = Types::UpdateAcmeDomainValidationRequest
+
+    UpdateAcmeEndpointRequest.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: AcmeEndpointArn, required: true, location_name: "AcmeEndpointArn"))
+    UpdateAcmeEndpointRequest.add_member(:authorization_behavior, Shapes::ShapeRef.new(shape: AcmeAuthorizationBehavior, location_name: "AuthorizationBehavior"))
+    UpdateAcmeEndpointRequest.add_member(:contact, Shapes::ShapeRef.new(shape: AcmeContact, location_name: "Contact"))
+    UpdateAcmeEndpointRequest.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: CertificateAuthority, location_name: "CertificateAuthority"))
+    UpdateAcmeEndpointRequest.struct_class = Types::UpdateAcmeEndpointRequest
 
     UpdateCertificateOptionsRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     UpdateCertificateOptionsRequest.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, required: true, location_name: "Options"))
@@ -667,9 +1053,92 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_acme_domain_validation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAcmeDomainValidation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAcmeDomainValidationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAcmeDomainValidationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_acme_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAcmeEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAcmeEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAcmeEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_acme_external_account_binding, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAcmeExternalAccountBinding"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAcmeExternalAccountBindingRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAcmeExternalAccountBindingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_acme_domain_validation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAcmeDomainValidation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAcmeDomainValidationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_acme_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAcmeEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAcmeEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_acme_external_account_binding, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAcmeExternalAccountBinding"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAcmeExternalAccountBindingRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -680,10 +1149,63 @@ module Aws::ACM
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_acme_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAcmeAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAcmeAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAcmeAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_acme_domain_validation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAcmeDomainValidation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAcmeDomainValidationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAcmeDomainValidationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_acme_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAcmeEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAcmeEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAcmeEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_acme_external_account_binding, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAcmeExternalAccountBinding"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAcmeExternalAccountBindingRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAcmeExternalAccountBindingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -693,6 +1215,7 @@ module Aws::ACM
         o.input = Shapes::ShapeRef.new(shape: DescribeCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -703,9 +1226,10 @@ module Aws::ACM
         o.input = Shapes::ShapeRef.new(shape: ExportCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: ExportCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: RequestInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_account_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -714,8 +1238,21 @@ module Aws::ACM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: GetAccountConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_acme_external_account_binding_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAcmeExternalAccountBindingCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAcmeExternalAccountBindingCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAcmeExternalAccountBindingCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -726,6 +1263,7 @@ module Aws::ACM
         o.output = Shapes::ShapeRef.new(shape: GetCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: RequestInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -742,7 +1280,83 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:list_acme_accounts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAcmeAccounts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAcmeAccountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAcmeAccountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_acme_domain_validations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAcmeDomainValidations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAcmeDomainValidationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAcmeDomainValidationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_acme_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAcmeEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAcmeEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAcmeEndpointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_acme_external_account_bindings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAcmeExternalAccountBindings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAcmeExternalAccountBindingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAcmeExternalAccountBindingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -751,8 +1365,8 @@ module Aws::ACM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListCertificatesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCertificatesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgsException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -768,6 +1382,17 @@ module Aws::ACM
         o.input = Shapes::ShapeRef.new(shape: ListTagsForCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -777,10 +1402,10 @@ module Aws::ACM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutAccountConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:remove_tags_from_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -792,9 +1417,10 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:renew_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -805,6 +1431,7 @@ module Aws::ACM
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: RequestInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -831,8 +1458,37 @@ module Aws::ACM
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDomainValidationOptionsException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:revoke_acme_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeAcmeAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RevokeAcmeAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:revoke_acme_external_account_binding, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeAcmeExternalAccountBinding"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RevokeAcmeExternalAccountBindingRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:revoke_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -843,10 +1499,11 @@ module Aws::ACM
         o.output = Shapes::ShapeRef.new(shape: RevokeCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:search_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -855,15 +1512,64 @@ module Aws::ACM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SearchCertificatesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchCertificatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_acme_domain_validation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAcmeDomainValidation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAcmeDomainValidationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_acme_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAcmeEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAcmeEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_certificate_options, Seahorse::Model::Operation.new.tap do |o|
@@ -874,6 +1580,7 @@ module Aws::ACM
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

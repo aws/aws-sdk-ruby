@@ -1113,6 +1113,7 @@ module Aws::Omics
       attr_accessor instance_type: ::String
       attr_accessor failure_reason: ::String
       attr_accessor image_details: Types::ImageDetails
+      attr_accessor uuid: ::String
       SENSITIVE: []
     end
 
@@ -2334,6 +2335,7 @@ module Aws::Omics
       attr_accessor stop_time: ::Time
       attr_accessor gpus: ::Integer
       attr_accessor instance_type: ::String
+      attr_accessor uuid: ::String
       SENSITIVE: []
     end
 

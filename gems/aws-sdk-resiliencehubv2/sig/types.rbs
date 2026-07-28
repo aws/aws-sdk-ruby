@@ -17,6 +17,7 @@ module Aws::Resiliencehubv2
       attr_accessor availability_slo: ("ACHIEVABLE" | "NOT_ACHIEVABLE")
       attr_accessor multi_az_rto_rpo: ("ACHIEVABLE" | "NOT_ACHIEVABLE")
       attr_accessor multi_region_rto_rpo: ("ACHIEVABLE" | "NOT_ACHIEVABLE")
+      attr_accessor data_recovery_time_between_backups: ("ACHIEVABLE" | "NOT_ACHIEVABLE")
       SENSITIVE: []
     end
 
@@ -58,7 +59,7 @@ module Aws::Resiliencehubv2
       attr_accessor assessment_id: ::String
       attr_accessor service_arn: ::String
       attr_accessor assessment_status: ("NOT_STARTED" | "PENDING" | "IN_PROGRESS" | "FAILED" | "SUCCESS")
-      attr_accessor assessment_step: ("TOPOLOGY_ENHANCEMENT" | "SERVICE_FUNCTION_GENERATION" | "RESILIENCE_ASSESSMENT")
+      attr_accessor assessment_step: ("TOPOLOGY_GENERATION" | "INPUT_VALIDATION" | "DESIGN_ANALYSIS" | "TOPOLOGY_ENHANCEMENT" | "SERVICE_FUNCTION_GENERATION" | "POLICY_VALIDATION" | "RESILIENCE_ASSESSMENT" | "FAILURE_MODE_FINDINGS_CONSOLIDATION" | "FAILURE_MODE_FINDINGS_ENRICHMENT")
       attr_accessor total_findings: ::Integer
       attr_accessor started_at: ::Time
       attr_accessor ended_at: ::Time
@@ -322,6 +323,8 @@ module Aws::Resiliencehubv2
     class DependencyDiscoveryConfig
       attr_accessor status: ("ENABLED" | "INITIALIZING" | "DISABLED")
       attr_accessor updated_at: ::Time
+      attr_accessor eligible_resource_count: ::Integer
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -560,6 +563,11 @@ module Aws::Resiliencehubv2
 
     class ListFailureModeAssessmentsRequest
       attr_accessor service_arn: ::String
+      attr_accessor assessment_statuses: ::Array[("NOT_STARTED" | "PENDING" | "IN_PROGRESS" | "FAILED" | "SUCCESS")]
+      attr_accessor started_after: ::Time
+      attr_accessor ended_before: ::Time
+      attr_accessor sort_by: ("STARTED_AT")
+      attr_accessor sort_order: ("ASC" | "DESC")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -631,6 +639,8 @@ module Aws::Resiliencehubv2
       attr_accessor service_arn: ::String
       attr_accessor service_function_id: ::String
       attr_accessor aws_region: ::String
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor billable: bool
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -1183,6 +1193,10 @@ module Aws::Resiliencehubv2
     class ServiceTopologyEdgeSummary
       attr_accessor source_resource_identifier: ::String
       attr_accessor destination_resource_identifier: ::String
+      attr_accessor source_region: ::String
+      attr_accessor destination_region: ::String
+      attr_accessor source_account: ::String
+      attr_accessor destination_account: ::String
       attr_accessor properties: ::Array[Types::EdgePropertySummary]
       SENSITIVE: []
     end

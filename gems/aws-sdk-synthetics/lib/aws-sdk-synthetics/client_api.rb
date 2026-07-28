@@ -187,6 +187,7 @@ module Aws::Synthetics
 
     AddReplicaLocationInput.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "Location"))
     AddReplicaLocationInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigInput, location_name: "VpcConfig"))
+    AddReplicaLocationInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     AddReplicaLocationInput.struct_class = Types::AddReplicaLocationInput
 
     AddReplicaLocations.member = Shapes::ShapeRef.new(shape: AddReplicaLocationInput)
@@ -247,6 +248,7 @@ module Aws::Synthetics
     Canary.add_member(:multi_location_config, Shapes::ShapeRef.new(shape: MultiLocationConfig, location_name: "MultiLocationConfig"))
     Canary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Canary.add_member(:artifact_config, Shapes::ShapeRef.new(shape: ArtifactConfigOutput, location_name: "ArtifactConfig"))
+    Canary.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     Canary.add_member(:dry_run_config, Shapes::ShapeRef.new(shape: DryRunConfigOutput, location_name: "DryRunConfig"))
     Canary.struct_class = Types::Canary
 
@@ -350,6 +352,7 @@ module Aws::Synthetics
     CreateCanaryRequest.add_member(:add_replica_locations, Shapes::ShapeRef.new(shape: AddReplicaLocations, location_name: "AddReplicaLocations"))
     CreateCanaryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateCanaryRequest.add_member(:artifact_config, Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: "ArtifactConfig"))
+    CreateCanaryRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     CreateCanaryRequest.struct_class = Types::CreateCanaryRequest
 
     CreateCanaryResponse.add_member(:canary, Shapes::ShapeRef.new(shape: Canary, location_name: "Canary"))
@@ -633,6 +636,7 @@ module Aws::Synthetics
     UpdateCanaryRequest.add_member(:browser_configs, Shapes::ShapeRef.new(shape: BrowserConfigs, location_name: "BrowserConfigs"))
     UpdateCanaryRequest.add_member(:add_replica_locations, Shapes::ShapeRef.new(shape: AddReplicaLocations, location_name: "AddReplicaLocations"))
     UpdateCanaryRequest.add_member(:remove_replica_locations, Shapes::ShapeRef.new(shape: RemoveReplicaLocations, location_name: "RemoveReplicaLocations"))
+    UpdateCanaryRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     UpdateCanaryRequest.struct_class = Types::UpdateCanaryRequest
 
     UpdateCanaryResponse.struct_class = Types::UpdateCanaryResponse

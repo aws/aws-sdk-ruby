@@ -55,6 +55,10 @@ module Aws::EC2
     AccountAttributeValue = Shapes::StructureShape.new(name: 'AccountAttributeValue')
     AccountAttributeValueList = Shapes::ListShape.new(name: 'AccountAttributeValueList')
     AccountID = Shapes::StringShape.new(name: 'AccountID')
+    AccountVpcEncryptionControl = Shapes::StructureShape.new(name: 'AccountVpcEncryptionControl')
+    AccountVpcEncryptionControlExclusions = Shapes::StructureShape.new(name: 'AccountVpcEncryptionControlExclusions')
+    AccountVpcEncryptionControlMode = Shapes::StringShape.new(name: 'AccountVpcEncryptionControlMode')
+    AccountVpcEncryptionControlState = Shapes::StringShape.new(name: 'AccountVpcEncryptionControlState')
     ActiveInstance = Shapes::StructureShape.new(name: 'ActiveInstance')
     ActiveInstanceSet = Shapes::ListShape.new(name: 'ActiveInstanceSet')
     ActiveVpnTunnelStatus = Shapes::StructureShape.new(name: 'ActiveVpnTunnelStatus')
@@ -104,6 +108,7 @@ module Aws::EC2
     AllowsMultipleInstanceTypes = Shapes::StringShape.new(name: 'AllowsMultipleInstanceTypes')
     AlternatePathHint = Shapes::StructureShape.new(name: 'AlternatePathHint')
     AlternatePathHintList = Shapes::ListShape.new(name: 'AlternatePathHintList')
+    AmdSevSnp = Shapes::StringShape.new(name: 'AmdSevSnp')
     AmdSevSnpSpecification = Shapes::StringShape.new(name: 'AmdSevSnpSpecification')
     AnalysisAclRule = Shapes::StructureShape.new(name: 'AnalysisAclRule')
     AnalysisComponent = Shapes::StructureShape.new(name: 'AnalysisComponent')
@@ -980,6 +985,8 @@ module Aws::EC2
     DeregisterTransitGatewayMulticastGroupSourcesResult = Shapes::StructureShape.new(name: 'DeregisterTransitGatewayMulticastGroupSourcesResult')
     DescribeAccountAttributesRequest = Shapes::StructureShape.new(name: 'DescribeAccountAttributesRequest')
     DescribeAccountAttributesResult = Shapes::StructureShape.new(name: 'DescribeAccountAttributesResult')
+    DescribeAccountVpcEncryptionControlRequest = Shapes::StructureShape.new(name: 'DescribeAccountVpcEncryptionControlRequest')
+    DescribeAccountVpcEncryptionControlResult = Shapes::StructureShape.new(name: 'DescribeAccountVpcEncryptionControlResult')
     DescribeAddressTransfersMaxResults = Shapes::IntegerShape.new(name: 'DescribeAddressTransfersMaxResults')
     DescribeAddressTransfersRequest = Shapes::StructureShape.new(name: 'DescribeAddressTransfersRequest')
     DescribeAddressTransfersResult = Shapes::StructureShape.new(name: 'DescribeAddressTransfersResult')
@@ -1756,9 +1763,13 @@ module Aws::EC2
     FleetEbsBlockDeviceRequest = Shapes::StructureShape.new(name: 'FleetEbsBlockDeviceRequest')
     FleetEventType = Shapes::StringShape.new(name: 'FleetEventType')
     FleetExcessCapacityTerminationPolicy = Shapes::StringShape.new(name: 'FleetExcessCapacityTerminationPolicy')
+    FleetHttpTokensState = Shapes::StringShape.new(name: 'FleetHttpTokensState')
+    FleetIamInstanceProfileSpecificationRequest = Shapes::StructureShape.new(name: 'FleetIamInstanceProfileSpecificationRequest')
     FleetId = Shapes::StringShape.new(name: 'FleetId')
     FleetIdSet = Shapes::ListShape.new(name: 'FleetIdSet')
     FleetInstanceMatchCriteria = Shapes::StringShape.new(name: 'FleetInstanceMatchCriteria')
+    FleetInstanceMetadataEndpointState = Shapes::StringShape.new(name: 'FleetInstanceMetadataEndpointState')
+    FleetInstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'FleetInstanceMetadataOptionsRequest')
     FleetLaunchTemplateConfig = Shapes::StructureShape.new(name: 'FleetLaunchTemplateConfig')
     FleetLaunchTemplateConfigList = Shapes::ListShape.new(name: 'FleetLaunchTemplateConfigList')
     FleetLaunchTemplateConfigListRequest = Shapes::ListShape.new(name: 'FleetLaunchTemplateConfigListRequest')
@@ -1983,6 +1994,8 @@ module Aws::EC2
     HistoryRecordSet = Shapes::ListShape.new(name: 'HistoryRecordSet')
     HistoryRecords = Shapes::ListShape.new(name: 'HistoryRecords')
     Host = Shapes::StructureShape.new(name: 'Host')
+    HostCpuOptions = Shapes::StructureShape.new(name: 'HostCpuOptions')
+    HostCpuOptionsRequest = Shapes::StructureShape.new(name: 'HostCpuOptionsRequest')
     HostInstance = Shapes::StructureShape.new(name: 'HostInstance')
     HostInstanceList = Shapes::ListShape.new(name: 'HostInstanceList')
     HostList = Shapes::ListShape.new(name: 'HostList')
@@ -2668,6 +2681,8 @@ module Aws::EC2
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
     MetricValueSet = Shapes::ListShape.new(name: 'MetricValueSet')
     MillisecondDateTime = Shapes::TimestampShape.new(name: 'MillisecondDateTime')
+    ModifyAccountVpcEncryptionControlRequest = Shapes::StructureShape.new(name: 'ModifyAccountVpcEncryptionControlRequest')
+    ModifyAccountVpcEncryptionControlResult = Shapes::StructureShape.new(name: 'ModifyAccountVpcEncryptionControlResult')
     ModifyAddressAttributeRequest = Shapes::StructureShape.new(name: 'ModifyAddressAttributeRequest')
     ModifyAddressAttributeResult = Shapes::StructureShape.new(name: 'ModifyAddressAttributeResult')
     ModifyAvailabilityZoneGroupRequest = Shapes::StructureShape.new(name: 'ModifyAvailabilityZoneGroupRequest')
@@ -2812,6 +2827,8 @@ module Aws::EC2
     ModifyVpcEncryptionControlResult = Shapes::StructureShape.new(name: 'ModifyVpcEncryptionControlResult')
     ModifyVpcEndpointConnectionNotificationRequest = Shapes::StructureShape.new(name: 'ModifyVpcEndpointConnectionNotificationRequest')
     ModifyVpcEndpointConnectionNotificationResult = Shapes::StructureShape.new(name: 'ModifyVpcEndpointConnectionNotificationResult')
+    ModifyVpcEndpointPayerResponsibilityRequest = Shapes::StructureShape.new(name: 'ModifyVpcEndpointPayerResponsibilityRequest')
+    ModifyVpcEndpointPayerResponsibilityResult = Shapes::StructureShape.new(name: 'ModifyVpcEndpointPayerResponsibilityResult')
     ModifyVpcEndpointRequest = Shapes::StructureShape.new(name: 'ModifyVpcEndpointRequest')
     ModifyVpcEndpointResult = Shapes::StructureShape.new(name: 'ModifyVpcEndpointResult')
     ModifyVpcEndpointServiceConfigurationRequest = Shapes::StructureShape.new(name: 'ModifyVpcEndpointServiceConfigurationRequest')
@@ -2977,6 +2994,10 @@ module Aws::EC2
     PathStatement = Shapes::StructureShape.new(name: 'PathStatement')
     PathStatementRequest = Shapes::StructureShape.new(name: 'PathStatementRequest')
     PayerResponsibility = Shapes::StringShape.new(name: 'PayerResponsibility')
+    PayerResponsibilityEntry = Shapes::StructureShape.new(name: 'PayerResponsibilityEntry')
+    PayerResponsibilityScope = Shapes::StringShape.new(name: 'PayerResponsibilityScope')
+    PayerResponsibilitySet = Shapes::ListShape.new(name: 'PayerResponsibilitySet')
+    PayerResponsibilityType = Shapes::StringShape.new(name: 'PayerResponsibilityType')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
     PciId = Shapes::StructureShape.new(name: 'PciId')
     PeakBandwidthInGbps = Shapes::FloatShape.new(name: 'PeakBandwidthInGbps')
@@ -4188,6 +4209,23 @@ module Aws::EC2
 
     AccountAttributeValueList.member = Shapes::ShapeRef.new(shape: AccountAttributeValue, location_name: "item")
 
+    AccountVpcEncryptionControl.add_member(:state, Shapes::ShapeRef.new(shape: AccountVpcEncryptionControlState, location_name: "state"))
+    AccountVpcEncryptionControl.add_member(:mode, Shapes::ShapeRef.new(shape: AccountVpcEncryptionControlMode, location_name: "mode"))
+    AccountVpcEncryptionControl.add_member(:exclusions, Shapes::ShapeRef.new(shape: AccountVpcEncryptionControlExclusions, location_name: "exclusions"))
+    AccountVpcEncryptionControl.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
+    AccountVpcEncryptionControl.add_member(:last_update_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lastUpdateTimestamp"))
+    AccountVpcEncryptionControl.struct_class = Types::AccountVpcEncryptionControl
+
+    AccountVpcEncryptionControlExclusions.add_member(:internet_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "internetGateway"))
+    AccountVpcEncryptionControlExclusions.add_member(:egress_only_internet_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "egressOnlyInternetGateway"))
+    AccountVpcEncryptionControlExclusions.add_member(:nat_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "natGateway"))
+    AccountVpcEncryptionControlExclusions.add_member(:virtual_private_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "virtualPrivateGateway"))
+    AccountVpcEncryptionControlExclusions.add_member(:vpc_peering, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "vpcPeering"))
+    AccountVpcEncryptionControlExclusions.add_member(:lambda, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "lambda"))
+    AccountVpcEncryptionControlExclusions.add_member(:vpc_lattice, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "vpcLattice"))
+    AccountVpcEncryptionControlExclusions.add_member(:elastic_file_system, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "elasticFileSystem"))
+    AccountVpcEncryptionControlExclusions.struct_class = Types::AccountVpcEncryptionControlExclusions
+
     ActiveInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     ActiveInstance.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     ActiveInstance.add_member(:spot_instance_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotInstanceRequestId"))
@@ -4317,6 +4355,7 @@ module Aws::EC2
     AllocateHostsRequest.add_member(:host_maintenance, Shapes::ShapeRef.new(shape: HostMaintenance, location_name: "HostMaintenance"))
     AllocateHostsRequest.add_member(:asset_ids, Shapes::ShapeRef.new(shape: AssetIdList, location_name: "AssetId"))
     AllocateHostsRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
+    AllocateHostsRequest.add_member(:cpu_options, Shapes::ShapeRef.new(shape: HostCpuOptionsRequest, location_name: "CpuOptions"))
     AllocateHostsRequest.add_member(:auto_placement, Shapes::ShapeRef.new(shape: AutoPlacement, location_name: "autoPlacement"))
     AllocateHostsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     AllocateHostsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
@@ -5986,6 +6025,9 @@ module Aws::EC2
     CreateFleetInstance.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdsSet, location_name: "instanceIds"))
     CreateFleetInstance.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     CreateFleetInstance.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformValues, location_name: "platform"))
+    CreateFleetInstance.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    CreateFleetInstance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "availabilityZone"))
+    CreateFleetInstance.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
     CreateFleetInstance.struct_class = Types::CreateFleetInstance
 
     CreateFleetInstancesSet.member = Shapes::ShapeRef.new(shape: CreateFleetInstance, location_name: "item")
@@ -6451,6 +6493,7 @@ module Aws::EC2
     CreatePlacementGroupRequest.add_member(:spread_level, Shapes::ShapeRef.new(shape: SpreadLevel, location_name: "SpreadLevel"))
     CreatePlacementGroupRequest.add_member(:linked_group_id, Shapes::ShapeRef.new(shape: PlacementGroupId, location_name: "LinkedGroupId"))
     CreatePlacementGroupRequest.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorRequest, location_name: "Operator"))
+    CreatePlacementGroupRequest.add_member(:parent_group_id, Shapes::ShapeRef.new(shape: PlacementGroupId, location_name: "ParentGroupId"))
     CreatePlacementGroupRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreatePlacementGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     CreatePlacementGroupRequest.add_member(:strategy, Shapes::ShapeRef.new(shape: PlacementStrategy, location_name: "strategy"))
@@ -6475,6 +6518,7 @@ module Aws::EC2
     CreateReplaceRootVolumeTaskRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "ImageId"))
     CreateReplaceRootVolumeTaskRequest.add_member(:delete_replaced_root_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteReplacedRootVolume"))
     CreateReplaceRootVolumeTaskRequest.add_member(:volume_initialization_rate, Shapes::ShapeRef.new(shape: Long, location_name: "VolumeInitializationRate"))
+    CreateReplaceRootVolumeTaskRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
     CreateReplaceRootVolumeTaskRequest.struct_class = Types::CreateReplaceRootVolumeTaskRequest
 
     CreateReplaceRootVolumeTaskResult.add_member(:replace_root_volume_task, Shapes::ShapeRef.new(shape: ReplaceRootVolumeTask, location_name: "replaceRootVolumeTask"))
@@ -7991,6 +8035,12 @@ module Aws::EC2
 
     DescribeAccountAttributesResult.add_member(:account_attributes, Shapes::ShapeRef.new(shape: AccountAttributeList, location_name: "accountAttributeSet"))
     DescribeAccountAttributesResult.struct_class = Types::DescribeAccountAttributesResult
+
+    DescribeAccountVpcEncryptionControlRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeAccountVpcEncryptionControlRequest.struct_class = Types::DescribeAccountVpcEncryptionControlRequest
+
+    DescribeAccountVpcEncryptionControlResult.add_member(:account_vpc_encryption_control, Shapes::ShapeRef.new(shape: AccountVpcEncryptionControl, location_name: "accountVpcEncryptionControl"))
+    DescribeAccountVpcEncryptionControlResult.struct_class = Types::DescribeAccountVpcEncryptionControlResult
 
     DescribeAddressTransfersRequest.add_member(:allocation_ids, Shapes::ShapeRef.new(shape: AllocationIdList, location_name: "AllocationId"))
     DescribeAddressTransfersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -9867,6 +9917,7 @@ module Aws::EC2
     DescribeVolumesModificationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeVolumesModificationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeVolumesModificationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeVolumesModificationsRequest.add_member(:include_managed_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeManagedResources"))
     DescribeVolumesModificationsRequest.struct_class = Types::DescribeVolumesModificationsRequest
 
     DescribeVolumesModificationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -11248,7 +11299,16 @@ module Aws::EC2
     FleetEbsBlockDeviceRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     FleetEbsBlockDeviceRequest.struct_class = Types::FleetEbsBlockDeviceRequest
 
+    FleetIamInstanceProfileSpecificationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
+    FleetIamInstanceProfileSpecificationRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    FleetIamInstanceProfileSpecificationRequest.struct_class = Types::FleetIamInstanceProfileSpecificationRequest
+
     FleetIdSet.member = Shapes::ShapeRef.new(shape: FleetId)
+
+    FleetInstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: FleetHttpTokensState, location_name: "HttpTokens"))
+    FleetInstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
+    FleetInstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: FleetInstanceMetadataEndpointState, location_name: "HttpEndpoint"))
+    FleetInstanceMetadataOptionsRequest.struct_class = Types::FleetInstanceMetadataOptionsRequest
 
     FleetLaunchTemplateConfig.add_member(:launch_template_specification, Shapes::ShapeRef.new(shape: FleetLaunchTemplateSpecification, location_name: "launchTemplateSpecification"))
     FleetLaunchTemplateConfig.add_member(:overrides, Shapes::ShapeRef.new(shape: FleetLaunchTemplateOverridesList, location_name: "overrides"))
@@ -11286,7 +11346,10 @@ module Aws::EC2
     FleetLaunchTemplateOverridesRequest.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "WeightedCapacity"))
     FleetLaunchTemplateOverridesRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Double, location_name: "Priority"))
     FleetLaunchTemplateOverridesRequest.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "Placement"))
+    FleetLaunchTemplateOverridesRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: String, location_name: "KeyName"))
     FleetLaunchTemplateOverridesRequest.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: FleetBlockDeviceMappingRequestList, location_name: "BlockDeviceMapping"))
+    FleetLaunchTemplateOverridesRequest.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: FleetIamInstanceProfileSpecificationRequest, location_name: "IamInstanceProfile"))
+    FleetLaunchTemplateOverridesRequest.add_member(:metadata_options, Shapes::ShapeRef.new(shape: FleetInstanceMetadataOptionsRequest, location_name: "MetadataOptions"))
     FleetLaunchTemplateOverridesRequest.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "InstanceRequirements"))
     FleetLaunchTemplateOverridesRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "ImageId"))
     FleetLaunchTemplateOverridesRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
@@ -11300,6 +11363,7 @@ module Aws::EC2
     FleetLaunchTemplateSpecificationRequest.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: LaunchTemplateId, location_name: "LaunchTemplateId"))
     FleetLaunchTemplateSpecificationRequest.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: LaunchTemplateName, location_name: "LaunchTemplateName"))
     FleetLaunchTemplateSpecificationRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    FleetLaunchTemplateSpecificationRequest.add_member(:launch_template_specification_user_data, Shapes::ShapeRef.new(shape: SensitiveUserData, location_name: "LaunchTemplateSpecificationUserData"))
     FleetLaunchTemplateSpecificationRequest.struct_class = Types::FleetLaunchTemplateSpecificationRequest
 
     FleetSet.member = Shapes::ShapeRef.new(shape: FleetData, location_name: "item")
@@ -12195,7 +12259,14 @@ module Aws::EC2
     Host.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     Host.add_member(:host_maintenance, Shapes::ShapeRef.new(shape: HostMaintenance, location_name: "hostMaintenance"))
     Host.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, location_name: "assetId"))
+    Host.add_member(:cpu_options, Shapes::ShapeRef.new(shape: HostCpuOptions, location_name: "cpuOptions"))
     Host.struct_class = Types::Host
+
+    HostCpuOptions.add_member(:amd_sev_snp, Shapes::ShapeRef.new(shape: AmdSevSnp, location_name: "amdSevSnp"))
+    HostCpuOptions.struct_class = Types::HostCpuOptions
+
+    HostCpuOptionsRequest.add_member(:amd_sev_snp, Shapes::ShapeRef.new(shape: AmdSevSnp, location_name: "AmdSevSnp"))
+    HostCpuOptionsRequest.struct_class = Types::HostCpuOptionsRequest
 
     HostInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     HostInstance.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
@@ -12307,6 +12378,7 @@ module Aws::EC2
     Image.add_member(:source_image_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceImageId"))
     Image.add_member(:source_image_region, Shapes::ShapeRef.new(shape: String, location_name: "sourceImageRegion"))
     Image.add_member(:free_tier_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "freeTierEligible"))
+    Image.add_member(:public_ssm_parameter_name, Shapes::ShapeRef.new(shape: String, location_name: "publicSsmParameterName"))
     Image.add_member(:image_watermarks, Shapes::ShapeRef.new(shape: ImageWatermarkList, location_name: "imageWatermarkSet"))
     Image.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     Image.add_member(:image_location, Shapes::ShapeRef.new(shape: String, location_name: "imageLocation"))
@@ -14532,6 +14604,21 @@ module Aws::EC2
 
     MetricValueSet.member = Shapes::ShapeRef.new(shape: MetricValue, location_name: "item")
 
+    ModifyAccountVpcEncryptionControlRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AccountVpcEncryptionControlMode, location_name: "Mode"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:internet_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "InternetGateway"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:egress_only_internet_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "EgressOnlyInternetGateway"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:nat_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "NatGateway"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:virtual_private_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VirtualPrivateGateway"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:vpc_peering, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VpcPeering"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:lambda, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "Lambda"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:vpc_lattice, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VpcLattice"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:elastic_file_system, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "ElasticFileSystem"))
+    ModifyAccountVpcEncryptionControlRequest.struct_class = Types::ModifyAccountVpcEncryptionControlRequest
+
+    ModifyAccountVpcEncryptionControlResult.add_member(:account_vpc_encryption_control, Shapes::ShapeRef.new(shape: AccountVpcEncryptionControl, location_name: "accountVpcEncryptionControl"))
+    ModifyAccountVpcEncryptionControlResult.struct_class = Types::ModifyAccountVpcEncryptionControlResult
+
     ModifyAddressAttributeRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
     ModifyAddressAttributeRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainName"))
     ModifyAddressAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -15340,6 +15427,17 @@ module Aws::EC2
     ModifyVpcEndpointConnectionNotificationResult.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyVpcEndpointConnectionNotificationResult.struct_class = Types::ModifyVpcEndpointConnectionNotificationResult
 
+    ModifyVpcEndpointPayerResponsibilityRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyVpcEndpointPayerResponsibilityRequest.add_member(:service_id, Shapes::ShapeRef.new(shape: VpcEndpointServiceId, location_name: "ServiceId"))
+    ModifyVpcEndpointPayerResponsibilityRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, required: true, location_name: "VpcEndpointId"))
+    ModifyVpcEndpointPayerResponsibilityRequest.add_member(:payer_responsibility, Shapes::ShapeRef.new(shape: PayerResponsibilityType, required: true, location_name: "PayerResponsibility"))
+    ModifyVpcEndpointPayerResponsibilityRequest.add_member(:scope, Shapes::ShapeRef.new(shape: PayerResponsibilityScope, required: true, location_name: "Scope"))
+    ModifyVpcEndpointPayerResponsibilityRequest.struct_class = Types::ModifyVpcEndpointPayerResponsibilityRequest
+
+    ModifyVpcEndpointPayerResponsibilityResult.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointId"))
+    ModifyVpcEndpointPayerResponsibilityResult.add_member(:payer_responsibilities, Shapes::ShapeRef.new(shape: PayerResponsibilitySet, location_name: "payerResponsibilitySet"))
+    ModifyVpcEndpointPayerResponsibilityResult.struct_class = Types::ModifyVpcEndpointPayerResponsibilityResult
+
     ModifyVpcEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyVpcEndpointRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, required: true, location_name: "VpcEndpointId"))
     ModifyVpcEndpointRequest.add_member(:reset_policy, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetPolicy"))
@@ -15986,6 +16084,12 @@ module Aws::EC2
     PathStatementRequest.add_member(:resource_statement, Shapes::ShapeRef.new(shape: ResourceStatementRequest, location_name: "ResourceStatement"))
     PathStatementRequest.struct_class = Types::PathStatementRequest
 
+    PayerResponsibilityEntry.add_member(:scope, Shapes::ShapeRef.new(shape: PayerResponsibilityScope, location_name: "scope"))
+    PayerResponsibilityEntry.add_member(:payer_responsibility_type, Shapes::ShapeRef.new(shape: PayerResponsibilityType, location_name: "payerResponsibilityType"))
+    PayerResponsibilityEntry.struct_class = Types::PayerResponsibilityEntry
+
+    PayerResponsibilitySet.member = Shapes::ShapeRef.new(shape: PayerResponsibilityEntry, location_name: "item")
+
     PciId.add_member(:device_id, Shapes::ShapeRef.new(shape: String, location_name: "DeviceId"))
     PciId.add_member(:vendor_id, Shapes::ShapeRef.new(shape: String, location_name: "VendorId"))
     PciId.add_member(:subsystem_id, Shapes::ShapeRef.new(shape: String, location_name: "SubsystemId"))
@@ -16104,6 +16208,7 @@ module Aws::EC2
     PlacementGroup.add_member(:spread_level, Shapes::ShapeRef.new(shape: SpreadLevel, location_name: "spreadLevel"))
     PlacementGroup.add_member(:linked_group_id, Shapes::ShapeRef.new(shape: PlacementGroupId, location_name: "linkedGroupId"))
     PlacementGroup.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
+    PlacementGroup.add_member(:parent_group_id, Shapes::ShapeRef.new(shape: PlacementGroupId, location_name: "parentGroupId"))
     PlacementGroup.struct_class = Types::PlacementGroup
 
     PlacementGroupIdStringList.member = Shapes::ShapeRef.new(shape: PlacementGroupId, location_name: "GroupId")
@@ -19451,6 +19556,7 @@ module Aws::EC2
     VolumeModification.add_member(:progress, Shapes::ShapeRef.new(shape: Long, location_name: "progress"))
     VolumeModification.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
     VolumeModification.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "endTime"))
+    VolumeModification.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     VolumeModification.struct_class = Types::VolumeModification
 
     VolumeModificationList.member = Shapes::ShapeRef.new(shape: VolumeModification, location_name: "item")
@@ -19658,6 +19764,7 @@ module Aws::EC2
     VpcEndpoint.add_member(:service_network_arn, Shapes::ShapeRef.new(shape: ServiceNetworkArn, location_name: "serviceNetworkArn"))
     VpcEndpoint.add_member(:resource_configuration_arn, Shapes::ShapeRef.new(shape: ResourceConfigurationArn, location_name: "resourceConfigurationArn"))
     VpcEndpoint.add_member(:service_region, Shapes::ShapeRef.new(shape: String, location_name: "serviceRegion"))
+    VpcEndpoint.add_member(:payer_responsibilities, Shapes::ShapeRef.new(shape: PayerResponsibilitySet, location_name: "payerResponsibilitySet"))
     VpcEndpoint.struct_class = Types::VpcEndpoint
 
     VpcEndpointAssociation.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
@@ -19688,6 +19795,7 @@ module Aws::EC2
     VpcEndpointConnection.add_member(:vpc_endpoint_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointConnectionId"))
     VpcEndpointConnection.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     VpcEndpointConnection.add_member(:vpc_endpoint_region, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointRegion"))
+    VpcEndpointConnection.add_member(:payer_responsibilities, Shapes::ShapeRef.new(shape: PayerResponsibilitySet, location_name: "payerResponsibilitySet"))
     VpcEndpointConnection.struct_class = Types::VpcEndpointConnection
 
     VpcEndpointConnectionSet.member = Shapes::ShapeRef.new(shape: VpcEndpointConnection, location_name: "item")
@@ -22061,6 +22169,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAccountAttributesResult)
+      end)
+
+      api.add_operation(:describe_account_vpc_encryption_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountVpcEncryptionControl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountVpcEncryptionControlRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountVpcEncryptionControlResult)
       end)
 
       api.add_operation(:describe_address_transfers, Seahorse::Model::Operation.new.tap do |o|
@@ -25778,6 +25894,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: LockSnapshotResult)
       end)
 
+      api.add_operation(:modify_account_vpc_encryption_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyAccountVpcEncryptionControl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyAccountVpcEncryptionControlRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyAccountVpcEncryptionControlResult)
+      end)
+
       api.add_operation(:modify_address_attribute, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyAddressAttribute"
         o.http_method = "POST"
@@ -26336,6 +26460,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyVpcEndpointConnectionNotificationRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyVpcEndpointConnectionNotificationResult)
+      end)
+
+      api.add_operation(:modify_vpc_endpoint_payer_responsibility, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyVpcEndpointPayerResponsibility"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyVpcEndpointPayerResponsibilityRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyVpcEndpointPayerResponsibilityResult)
       end)
 
       api.add_operation(:modify_vpc_endpoint_service_configuration, Seahorse::Model::Operation.new.tap do |o|

@@ -33,6 +33,8 @@ module Aws::PrometheusService
     AnomalyDetectorSummaryList = Shapes::ListShape.new(name: 'AnomalyDetectorSummaryList')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CloudWatchConfiguration = Shapes::StructureShape.new(name: 'CloudWatchConfiguration')
+    CloudWatchDatasetArn = Shapes::StringShape.new(name: 'CloudWatchDatasetArn')
     CloudWatchLogDestination = Shapes::StructureShape.new(name: 'CloudWatchLogDestination')
     ClusterArn = Shapes::StringShape.new(name: 'ClusterArn')
     ComponentConfig = Shapes::StructureShape.new(name: 'ComponentConfig')
@@ -284,6 +286,9 @@ module Aws::PrometheusService
 
     AnomalyDetectorSummaryList.member = Shapes::ShapeRef.new(shape: AnomalyDetectorSummary)
 
+    CloudWatchConfiguration.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: CloudWatchDatasetArn, required: true, location_name: "datasetArn"))
+    CloudWatchConfiguration.struct_class = Types::CloudWatchConfiguration
+
     CloudWatchLogDestination.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
     CloudWatchLogDestination.struct_class = Types::CloudWatchLogDestination
 
@@ -491,8 +496,10 @@ module Aws::PrometheusService
     DescribeWorkspaceResponse.struct_class = Types::DescribeWorkspaceResponse
 
     Destination.add_member(:amp_configuration, Shapes::ShapeRef.new(shape: AmpConfiguration, location_name: "ampConfiguration"))
+    Destination.add_member(:cloud_watch_configuration, Shapes::ShapeRef.new(shape: CloudWatchConfiguration, location_name: "cloudWatchConfiguration"))
     Destination.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Destination.add_member_subclass(:amp_configuration, Types::Destination::AmpConfiguration)
+    Destination.add_member_subclass(:cloud_watch_configuration, Types::Destination::CloudWatchConfiguration)
     Destination.add_member_subclass(:unknown, Types::Destination::Unknown)
     Destination.struct_class = Types::Destination
 

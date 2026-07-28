@@ -157,6 +157,45 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class ContainerAssociationSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerAttribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerMonitoringConfiguration
+      attr_accessor cluster_arn: ::String
+      attr_accessor attribute_filters: ::Array[Types::ContainerAttribute]
+      SENSITIVE: []
+    end
+
+    class CreateContainerAssociationRequest
+      attr_accessor container_association_name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("ECS" | "EKS")
+      attr_accessor container_monitoring_configurations: ::Array[Types::ContainerMonitoringConfiguration]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateContainerAssociationResponse
+      attr_accessor container_association_name: ::String
+      attr_accessor container_association_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("ECS" | "EKS")
+      attr_accessor container_monitoring_configurations: ::Array[Types::ContainerMonitoringConfiguration]
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
     class CreateFirewallPolicyRequest
       attr_accessor firewall_policy_name: ::String
       attr_accessor firewall_policy: Types::FirewallPolicy
@@ -331,6 +370,19 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class DeleteContainerAssociationRequest
+      attr_accessor container_association_name: ::String
+      attr_accessor container_association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContainerAssociationResponse
+      attr_accessor container_association_name: ::String
+      attr_accessor container_association_arn: ::String
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING")
+      SENSITIVE: []
+    end
+
     class DeleteFirewallPolicyRequest
       attr_accessor firewall_policy_name: ::String
       attr_accessor firewall_policy_arn: ::String
@@ -454,6 +506,26 @@ module Aws::NetworkFirewall
     class DeleteVpcEndpointAssociationResponse
       attr_accessor vpc_endpoint_association: Types::VpcEndpointAssociation
       attr_accessor vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus
+      SENSITIVE: []
+    end
+
+    class DescribeContainerAssociationRequest
+      attr_accessor container_association_name: ::String
+      attr_accessor container_association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContainerAssociationResponse
+      attr_accessor container_association_name: ::String
+      attr_accessor container_association_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("ECS" | "EKS")
+      attr_accessor container_monitoring_configurations: ::Array[Types::ContainerMonitoringConfiguration]
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING")
+      attr_accessor resolved_cidr_count: ::Integer
+      attr_accessor last_updated_time: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor update_token: ::String
       SENSITIVE: []
     end
 
@@ -955,6 +1027,18 @@ module Aws::NetworkFirewall
 
     class ListAnalysisReportsResponse
       attr_accessor analysis_reports: ::Array[Types::AnalysisReport]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContainerAssociationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContainerAssociationsResponse
+      attr_accessor container_associations: ::Array[Types::ContainerAssociationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1670,6 +1754,29 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor availability_zone_change_protection: bool
+      SENSITIVE: []
+    end
+
+    class UpdateContainerAssociationRequest
+      attr_accessor container_association_name: ::String
+      attr_accessor container_association_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("ECS" | "EKS")
+      attr_accessor container_monitoring_configurations: ::Array[Types::ContainerMonitoringConfiguration]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContainerAssociationResponse
+      attr_accessor container_association_name: ::String
+      attr_accessor container_association_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("ECS" | "EKS")
+      attr_accessor container_monitoring_configurations: ::Array[Types::ContainerMonitoringConfiguration]
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor update_token: ::String
       SENSITIVE: []
     end
 

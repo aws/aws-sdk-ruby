@@ -541,24 +541,14 @@ module Aws::Cloud9
     #
     #   <b>AMI aliases </b>
     #
-    #   * Amazon Linux 2: `amazonlinux-2-x86_64`
-    #
     #   * Amazon Linux 2023 (recommended): `amazonlinux-2023-x86_64`
-    #
-    #   * Ubuntu 18.04: `ubuntu-18.04-x86_64`
     #
     #   * Ubuntu 22.04: `ubuntu-22.04-x86_64`
     #
     #   **SSM paths**
     #
-    #   * Amazon Linux 2:
-    #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64`
-    #
     #   * Amazon Linux 2023 (recommended):
     #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2023-x86_64`
-    #
-    #   * Ubuntu 18.04:
-    #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64`
     #
     #   * Ubuntu 22.04:
     #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-22.04-x86_64`
@@ -1443,7 +1433,7 @@ module Aws::Cloud9
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

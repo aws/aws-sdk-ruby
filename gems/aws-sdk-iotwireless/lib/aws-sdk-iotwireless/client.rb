@@ -1027,6 +1027,10 @@ module Aws::IoTWireless
     #         gateway_list: ["WirelessGatewayId"],
     #         transmission_interval: 1,
     #       },
+    #       default_session_parameters: {
+    #         dl_dr: 1,
+    #         dl_freq: 1,
+    #       },
     #     },
     #     tags: [
     #       {
@@ -2341,6 +2345,8 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.participating_gateways.gateway_list #=> Array
     #   resp.lo_ra_wan.participating_gateways.gateway_list[0] #=> String
     #   resp.lo_ra_wan.participating_gateways.transmission_interval #=> Integer
+    #   resp.lo_ra_wan.default_session_parameters.dl_dr #=> Integer
+    #   resp.lo_ra_wan.default_session_parameters.dl_freq #=> Integer
     #   resp.created_at #=> Time
     #
     # @overload get_multicast_group(params = {})
@@ -5041,6 +5047,10 @@ module Aws::IoTWireless
     #         gateway_list: ["WirelessGatewayId"],
     #         transmission_interval: 1,
     #       },
+    #       default_session_parameters: {
+    #         dl_dr: 1,
+    #         dl_freq: 1,
+    #       },
     #     },
     #   })
     #
@@ -5472,7 +5482,7 @@ module Aws::IoTWireless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

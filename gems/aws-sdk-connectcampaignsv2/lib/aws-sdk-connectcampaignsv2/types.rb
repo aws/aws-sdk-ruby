@@ -198,6 +198,20 @@ module Aws::ConnectCampaignsV2
       include Aws::Structure
     end
 
+    # Additional metadata related to the event trigger context
+    #
+    # @!attribute [rw] web_notification_context
+    #   Context metadata for the web notification type channel
+    #   @return [Types::WebNotificationContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/ChannelContext AWS API Documentation
+    #
+    class ChannelContext < Struct.new(
+      :web_notification_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Campaign Channel Subtype config
     #
     # @!attribute [rw] telephony
@@ -855,6 +869,25 @@ module Aws::ConnectCampaignsV2
     #
     class EventTrigger < Struct.new(
       :customer_profiles_domain_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Event trigger context data
+    #
+    # @!attribute [rw] source_event
+    #   Source event object for event triggers
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_context
+    #   Additional metadata related to the event trigger context
+    #   @return [Types::ChannelContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/EventTriggerContext AWS API Documentation
+    #
+    class EventTriggerContext < Struct.new(
+      :source_event,
+      :channel_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1618,12 +1651,17 @@ module Aws::ConnectCampaignsV2
     #   Timestamp with no UTC offset or timezone
     #   @return [Time]
     #
+    # @!attribute [rw] event_trigger_context
+    #   Event trigger context data
+    #   @return [Types::EventTriggerContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/ProfileOutboundRequest AWS API Documentation
     #
     class ProfileOutboundRequest < Struct.new(
       :client_token,
       :profile_id,
-      :expiration_time)
+      :expiration_time,
+      :event_trigger_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2592,6 +2630,25 @@ module Aws::ConnectCampaignsV2
     class ValidationException < Struct.new(
       :message,
       :x_amz_error_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Context metadata for the web notification type channel
+    #
+    # @!attribute [rw] session_id
+    #   Session Id for web notification event trigger
+    #   @return [String]
+    #
+    # @!attribute [rw] browser_id
+    #   Browser Id for web notification event trigger
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/WebNotificationContext AWS API Documentation
+    #
+    class WebNotificationContext < Struct.new(
+      :session_id,
+      :browser_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1179,6 +1179,16 @@ module Aws::CloudFormation
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/drift-aware-change-sets.html
     #
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    #
+    # @option params [Boolean] :disable_validation
+    #   Set to `true` to disable pre-deployment validations in changeset or
+    #   stack operations.
+    #
+    #   Default: `false`
+    #
     # @return [Types::CreateChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChangeSetOutput#id #id} => String
@@ -1235,6 +1245,11 @@ module Aws::CloudFormation
     #     on_stack_failure: "DO_NOTHING", # accepts DO_NOTHING, ROLLBACK, DELETE
     #     import_existing_resources: false,
     #     deployment_mode: "REVERT_DRIFT", # accepts REVERT_DRIFT
+    #     deployment_config: {
+    #       mode: "STANDARD", # accepts STANDARD, EXPRESS
+    #       disable_rollback: false,
+    #     },
+    #     disable_validation: false,
     #   })
     #
     # @example Response structure
@@ -1619,6 +1634,16 @@ module Aws::CloudFormation
     #
     #   Default: `false`
     #
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    #
+    # @option params [Boolean] :disable_validation
+    #   Set to `true` to disable pre-deployment validations in changeset or
+    #   stack operations.
+    #
+    #   Default: `false`
+    #
     # @return [Types::CreateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackOutput#stack_id #stack_id} => String
@@ -1665,6 +1690,11 @@ module Aws::CloudFormation
     #     client_request_token: "ClientRequestToken",
     #     enable_termination_protection: false,
     #     retain_except_on_create: false,
+    #     deployment_config: {
+    #       mode: "STANDARD", # accepts STANDARD, EXPRESS
+    #       disable_rollback: false,
+    #     },
+    #     disable_validation: false,
     #   })
     #
     # @example Response structure
@@ -2396,6 +2426,10 @@ module Aws::CloudFormation
     #   * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
     #     `DELETE_FAILED` state due to resource deletion failure.
     #
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2406,6 +2440,10 @@ module Aws::CloudFormation
     #     role_arn: "RoleARN",
     #     client_request_token: "ClientRequestToken",
     #     deletion_mode: "STANDARD", # accepts STANDARD, FORCE_DELETE_STACK
+    #     deployment_config: {
+    #       mode: "STANDARD", # accepts STANDARD, EXPRESS
+    #       disable_rollback: false,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStack AWS API Documentation
@@ -2757,6 +2795,7 @@ module Aws::CloudFormation
     #   * {Types::DescribeChangeSetOutput#on_stack_failure #on_stack_failure} => String
     #   * {Types::DescribeChangeSetOutput#import_existing_resources #import_existing_resources} => Boolean
     #   * {Types::DescribeChangeSetOutput#deployment_mode #deployment_mode} => String
+    #   * {Types::DescribeChangeSetOutput#deployment_config #deployment_config} => Types::DeploymentConfig
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2841,6 +2880,8 @@ module Aws::CloudFormation
     #   resp.on_stack_failure #=> String, one of "DO_NOTHING", "ROLLBACK", "DELETE"
     #   resp.import_existing_resources #=> Boolean
     #   resp.deployment_mode #=> String, one of "REVERT_DRIFT"
+    #   resp.deployment_config.mode #=> String, one of "STANDARD", "EXPRESS"
+    #   resp.deployment_config.disable_rollback #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2951,7 +2992,9 @@ module Aws::CloudFormation
     #  </note>
     #
     # @option params [String] :stack_name
-    #   The name or unique stack ID for which you want to retrieve events.
+    #   The name or unique stack ID for which you want to retrieve events. If
+    #   you specified the name of a change set, specify the stack name or ID
+    #   (ARN) of the change set you want to describe.
     #
     # @option params [String] :change_set_name
     #   The name or Amazon Resource Name (ARN) of the change set for which you
@@ -4153,6 +4196,8 @@ module Aws::CloudFormation
     #   resp.stacks[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS", "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
     #   resp.stacks[0].stack_status_reason #=> String
     #   resp.stacks[0].disable_rollback #=> Boolean
+    #   resp.stacks[0].deployment_config.mode #=> String, one of "STANDARD", "EXPRESS"
+    #   resp.stacks[0].deployment_config.disable_rollback #=> Boolean
     #   resp.stacks[0].notification_arns #=> Array
     #   resp.stacks[0].notification_arns[0] #=> String
     #   resp.stacks[0].timeout_in_minutes #=> Integer
@@ -7437,6 +7482,10 @@ module Aws::CloudFormation
     #
     #   Default: `false`
     #
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    #
     # @return [Types::RollbackStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RollbackStackOutput#stack_id #stack_id} => String
@@ -7449,6 +7498,10 @@ module Aws::CloudFormation
     #     role_arn: "RoleARN",
     #     client_request_token: "ClientRequestToken",
     #     retain_except_on_create: false,
+    #     deployment_config: {
+    #       mode: "STANDARD", # accepts STANDARD, EXPRESS
+    #       disable_rollback: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -8340,6 +8393,16 @@ module Aws::CloudFormation
     #
     #   Default: `false`
     #
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   The deployment configuration for this stack operation, including the
+    #   deployment mode.
+    #
+    # @option params [Boolean] :disable_validation
+    #   Set to `true` to disable pre-deployment validations in changeset or
+    #   stack operations.
+    #
+    #   Default: `false`
+    #
     # @return [Types::UpdateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackOutput#stack_id #stack_id} => String
@@ -8386,6 +8449,11 @@ module Aws::CloudFormation
     #     disable_rollback: false,
     #     client_request_token: "ClientRequestToken",
     #     retain_except_on_create: false,
+    #     deployment_config: {
+    #       mode: "STANDARD", # accepts STANDARD, EXPRESS
+    #       disable_rollback: false,
+    #     },
+    #     disable_validation: false,
     #   })
     #
     # @example Response structure
@@ -9123,7 +9191,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.154.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

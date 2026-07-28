@@ -162,6 +162,20 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class AdminGetUserAuthFactorsRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminGetUserAuthFactorsResponse
+      attr_accessor username: ::String
+      attr_accessor preferred_mfa_setting: ::String
+      attr_accessor user_mfa_setting_list: ::Array[::String]
+      attr_accessor configured_user_auth_factors: ::Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN" | "SOFTWARE_TOKEN")]
+      SENSITIVE: [:username]
+    end
+
     class AdminGetUserRequest
       attr_accessor user_pool_id: ::String
       attr_accessor username: ::String
@@ -640,6 +654,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor job_name: ::String
       attr_accessor user_pool_id: ::String
       attr_accessor cloud_watch_logs_role_arn: ::String
+      attr_accessor password_hashing_algorithm: ("BCRYPT" | "SCRYPT" | "ARGON2ID" | "PBKDF2_SHA256")
       SENSITIVE: []
     end
 
@@ -1037,6 +1052,17 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class EumsSmsConfigurationType
+      attr_accessor caller_arn: ::String
+      attr_accessor external_id: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor in_entity_id: ::String
+      attr_accessor in_template_id: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
     class EventContextDataType
       attr_accessor ip_address: ::String
       attr_accessor device_name: ::String
@@ -1161,6 +1187,16 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class GetProvisionedLimitRequest
+      attr_accessor limit_definition: Types::LimitDefinitionType
+      SENSITIVE: []
+    end
+
+    class GetProvisionedLimitResponse
+      attr_accessor limit: Types::LimitType
+      SENSITIVE: []
+    end
+
     class GetSigningCertificateRequest
       attr_accessor user_pool_id: ::String
       SENSITIVE: []
@@ -1217,7 +1253,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor username: ::String
       attr_accessor preferred_mfa_setting: ::String
       attr_accessor user_mfa_setting_list: ::Array[::String]
-      attr_accessor configured_user_auth_factors: ::Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN")]
+      attr_accessor configured_user_auth_factors: ::Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN" | "SOFTWARE_TOKEN")]
       SENSITIVE: [:username]
     end
 
@@ -1398,8 +1434,21 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class LimitDefinitionType
+      attr_accessor limit_class: ("API_CATEGORY")
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class LimitExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitType
+      attr_accessor limit_definition: Types::LimitDefinitionType
+      attr_accessor provisioned_limit_value: ::Integer
+      attr_accessor free_limit_value: ::Integer
       SENSITIVE: []
     end
 
@@ -1846,6 +1895,11 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class SetLogDeliveryConfigurationRequest
       attr_accessor user_pool_id: ::String
       attr_accessor log_configurations: ::Array[Types::LogConfigurationType]
@@ -1925,7 +1979,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class SignInPolicyType
-      attr_accessor allowed_first_auth_factors: ::Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN")]
+      attr_accessor allowed_first_auth_factors: ::Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN" | "SOFTWARE_TOKEN")]
       SENSITIVE: []
     end
 
@@ -1954,6 +2008,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor sns_caller_arn: ::String
       attr_accessor external_id: ::String
       attr_accessor sns_region: ::String
+      attr_accessor eums_sms: Types::EumsSmsConfigurationType
       SENSITIVE: []
     end
 
@@ -2189,6 +2244,17 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class UpdateProvisionedLimitRequest
+      attr_accessor limit_definition: Types::LimitDefinitionType
+      attr_accessor requested_limit_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateProvisionedLimitResponse
+      attr_accessor limit: Types::LimitType
+      SENSITIVE: []
+    end
+
     class UpdateResourceServerRequest
       attr_accessor user_pool_id: ::String
       attr_accessor identifier: ::String
@@ -2349,6 +2415,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor skipped_users: ::Integer
       attr_accessor failed_users: ::Integer
       attr_accessor completion_message: ::String
+      attr_accessor password_hashing_algorithm: ("BCRYPT" | "SCRYPT" | "ARGON2ID" | "PBKDF2_SHA256")
       SENSITIVE: []
     end
 

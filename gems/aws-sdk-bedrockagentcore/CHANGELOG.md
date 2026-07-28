@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2026-07-23)
+------------------
+
+* Feature - Adds support for the Bring Your Own Storage(BYOS) feature in AgentCore Browser and Code Interpreter. Enables mounting S3Files and EFS File Systems via Access points.
+
+1.44.0 (2026-07-20)
+------------------
+
+* Feature - Add W3C trace context headers (traceparent, tracestate, baggage) and X-Amzn-Trace-Id to InvokeHarness request for end-to-end observability propagation. Add toolResultMetadata to the streaming content block delta for MCP tool result meta delivery without oversized SSE frames.
+
+1.43.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.42.0 (2026-06-22)
 ------------------
 

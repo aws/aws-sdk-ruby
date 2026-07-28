@@ -1,0 +1,34 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PCS
+    module Params
+      type node_lifecycle_stages = {
+      node_bootstrapped: Array[
+        Params::node_lifecycle_script
+      ]?,
+      node_ready: Array[
+        Params::node_lifecycle_script
+      ]?
+    }
+
+      type node_lifecycle_script = {
+      name: ::String,
+      script_source: {
+        script_location: ::String,
+        s3_version_id: ::String?,
+        checksum: ::String?
+      },
+      arguments: Array[::String]?,
+      on_error: ("TERMINATE" | "STOP_SEQUENCE" | "CONTINUE")?,
+      execution_policy: ("FIRST_BOOT_ONLY" | "EVERY_BOOT")?
+    }
+
+    end
+  end
+end

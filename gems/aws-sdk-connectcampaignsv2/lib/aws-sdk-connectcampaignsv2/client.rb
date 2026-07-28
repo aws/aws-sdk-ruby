@@ -1539,6 +1539,15 @@ module Aws::ConnectCampaignsV2
     #         client_token: "ClientToken", # required
     #         profile_id: "ProfileId", # required
     #         expiration_time: Time.now,
+    #         event_trigger_context: {
+    #           source_event: "SourceEvent",
+    #           channel_context: {
+    #             web_notification_context: {
+    #               session_id: "SessionId",
+    #               browser_id: "BrowserId",
+    #             },
+    #           },
+    #         },
     #       },
     #     ],
     #   })
@@ -2132,7 +2141,7 @@ module Aws::ConnectCampaignsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcampaignsv2'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

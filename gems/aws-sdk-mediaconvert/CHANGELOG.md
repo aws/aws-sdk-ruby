@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.190.0 (2026-07-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.189.0 (2026-07-01)
+------------------
+
+* Feature - Adds support for integer-second duration normalization and the option to disable explicit weighted prediction.
+
 1.188.0 (2026-06-05)
 ------------------
 

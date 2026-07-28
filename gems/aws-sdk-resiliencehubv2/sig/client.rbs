@@ -469,6 +469,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_failure_mode_assessments-instance_method
       def list_failure_mode_assessments: (
                                            service_arn: ::String,
+                                           ?assessment_statuses: Array[("NOT_STARTED" | "PENDING" | "IN_PROGRESS" | "FAILED" | "SUCCESS")],
+                                           ?started_after: ::Time,
+                                           ?ended_before: ::Time,
+                                           ?sort_by: ("STARTED_AT"),
+                                           ?sort_order: ("ASC" | "DESC"),
                                            ?max_results: ::Integer,
                                            ?next_token: ::String
                                          ) -> _ListFailureModeAssessmentsResponseSuccess
@@ -541,6 +546,8 @@ module Aws
                             service_arn: ::String,
                             ?service_function_id: ::String,
                             ?aws_region: ::String,
+                            ?resource_types: Array[::String],
+                            ?billable: bool,
                             ?max_results: ::Integer,
                             ?next_token: ::String
                           ) -> _ListResourcesResponseSuccess
@@ -837,6 +844,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#wait_until-instance_method
       def wait_until: (:failure_mode_assessment_success waiter_name, 
                     service_arn: ::String,
+                    ?assessment_statuses: Array[("NOT_STARTED" | "PENDING" | "IN_PROGRESS" | "FAILED" | "SUCCESS")],
+                    ?started_after: ::Time,
+                    ?ended_before: ::Time,
+                    ?sort_by: ("STARTED_AT"),
+                    ?sort_order: ("ASC" | "DESC"),
                     ?max_results: ::Integer,
                     ?next_token: ::String
                   ) -> Client::_ListFailureModeAssessmentsResponseSuccess

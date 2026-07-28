@@ -14,6 +14,10 @@ module Aws
       participating_gateways: {
         gateway_list: Array[::String]?,
         transmission_interval: ::Integer?
+      }?,
+      default_session_parameters: {
+        dl_dr: ::Integer?,
+        dl_freq: ::Integer?
       }?
     }
 
