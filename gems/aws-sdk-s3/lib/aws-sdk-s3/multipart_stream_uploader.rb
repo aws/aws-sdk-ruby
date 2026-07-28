@@ -126,8 +126,11 @@ module Aws
             temp_io
           end
         else
+          # Read into a single right-sized buffer. IO.copy_stream into a StringIO grows
+          # the backing string geometrically (an 8MB buffer for a 5MB part) and discards
+          # the intermediates, fragmenting the heap across concurrent parts.
           data = read_pipe.read(@part_size)
-          data.nil? || data.empty? ? nil : StringIO.new(data)
+          data.nil? ? nil : StringIO.new(data)
         end
       end
 

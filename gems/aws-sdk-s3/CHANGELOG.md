@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Bound memory usage in `upload_stream` when the source produces data faster than parts can be uploaded.
+
 1.226.0 (2026-06-16)
 ------------------
 

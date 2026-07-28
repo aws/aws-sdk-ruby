@@ -154,30 +154,39 @@ module Aws
         end
 
         context 'when source outpaces upload' do
-          let(:num_threads) { 4 }
-          let(:executor) { DefaultExecutor.new(max_threads: num_threads) }
+          let(:num_threads) { 2 }
+          let(:executor) { DefaultExecutor.new(max_threads: num_threads, max_queue: num_threads) }
           let(:subject) { MultipartStreamUploader.new(client: client, executor: executor, part_size: 1024 * 1024) }
 
-          it 'bounds concurrent in-flight parts to the thread count' do
+          it 'bounds the number of parts buffered ahead of the upload' do
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
             mutex = Mutex.new
-            in_flight = 0
-            peak_in_flight = 0
-            allow(client).to receive(:upload_part) do |_part|
+            buffered = 0
+            peak_buffered = 0
+            # count parts read off the pipe but not yet uploaded
+            allow(subject).to receive(:read_to_part_body).and_wrap_original do |original, *args|
+              body = original.call(*args)
               mutex.synchronize do
-                in_flight += 1
-                peak_in_flight = in_flight if in_flight > peak_in_flight
+                if body
+                  buffered += 1
+                  peak_buffered = buffered if buffered > peak_buffered
+                end
               end
+              body
+            end
+            allow(client).to receive(:upload_part) do |_part|
               sleep(0.05)
-              mutex.synchronize { in_flight -= 1 }
+              mutex.synchronize { buffered -= 1 }
             end.and_return(double(:upload_part, etag: 'etag'))
 
             subject.upload(params) do |write_stream|
-              20.times { write_stream << one_mb }
+              30.times { write_stream << one_mb }
             end
 
-            expect(peak_in_flight).to be <= num_threads
+            # at most max_queue queued + max_threads in flight + 1 being read.
+            # without a bounded queue all 30 parts are read into memory up front.
+            expect(peak_buffered).to be <= (num_threads * 2) + 1
           end
 
           it 'completes all parts under backpressure' do

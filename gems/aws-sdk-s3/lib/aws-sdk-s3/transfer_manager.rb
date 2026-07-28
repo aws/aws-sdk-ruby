@@ -491,6 +491,9 @@ module Aws
       # @option options [Integer] :thread_count (10)
       #   The number of parallel multipart uploads. Only used when no custom executor is provided (creates
       #   {DefaultExecutor} with the given thread count). An additional thread is used internally for task coordination.
+      #   This also bounds how many parts are buffered ahead of the upload, limiting memory usage to roughly
+      #   `2 * :thread_count * :part_size`. When a custom `:executor` is provided, it is responsible for applying
+      #   its own backpressure.
       #
       # @option options [Boolean] :tempfile (false)
       #   Normally read data is stored in memory when building the parts in order to complete the underlying
@@ -511,7 +514,10 @@ module Aws
       # @see Client#upload_part
       def upload_stream(bucket:, key:, **options, &block)
         upload_opts = options.merge(bucket: bucket, key: key)
-        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
+        thread_count = upload_opts.delete(:thread_count) || DefaultExecutor::DEFAULT_MAX_THREADS
+        # A bounded queue prevents the source from reading ahead without limit when it
+        # produces data faster than parts can be uploaded.
+        executor = @executor || DefaultExecutor.new(max_threads: thread_count, max_queue: thread_count)
         uploader = MultipartStreamUploader.new(
           client: @client,
           executor: executor,

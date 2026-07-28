@@ -29,7 +29,10 @@ module Aws
           custom_thread_count = 20
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
-          expect(DefaultExecutor).to receive(:new).with(max_threads: custom_thread_count).and_call_original
+          expect(DefaultExecutor)
+            .to receive(:new)
+            .with(max_threads: custom_thread_count, max_queue: custom_thread_count)
+            .and_call_original
           subject.upload_stream(thread_count: custom_thread_count) { |_write_stream| }
         end
 

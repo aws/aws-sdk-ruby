@@ -11,8 +11,10 @@ module Aws
 
       def initialize(options = {})
         @max_threads = options[:max_threads] || DEFAULT_MAX_THREADS
+        @max_queue = options[:max_queue] || 0
         @state = RUNNING
-        @queue = SizedQueue.new(@max_threads)
+        # A bounded queue applies backpressure to producers when full. 0 means unbounded.
+        @queue = @max_queue.zero? ? Queue.new : SizedQueue.new(@max_queue)
         @pool = []
         @mutex = Mutex.new
       end
@@ -27,8 +29,13 @@ module Aws
 
           ensure_worker_available
         end
-        @queue << [args, block]
+        # Pushed outside the mutex because a bounded queue blocks the caller when
+        # full and holding the lock while parked would deadlock #shutdown and #kill.
+        @queue.push([args, block])
         true
+      rescue ClosedQueueError
+        # shutdown or kill happened while parked on a full queue
+        raise 'Executor has been shutdown and is no longer accepting tasks'
       end
 
       # Immediately terminates all worker threads and clears pending tasks.
@@ -38,6 +45,7 @@ module Aws
       def kill
         @mutex.synchronize do
           @state = SHUTDOWN
+          @queue.close # wakes any producer parked on a full queue
           @pool.each(&:kill)
           @pool.clear
           @queue.clear
@@ -56,7 +64,9 @@ module Aws
           return true if @state == SHUTDOWN
 
           @state = SHUTTING_DOWN
-          @pool.size.times { @queue << :shutdown }
+          # Closing wakes parked producers and lets workers drain remaining tasks
+          # before exiting without pushing sentinels onto a queue that may be full.
+          @queue.close
         end
 
         if timeout
@@ -91,8 +101,6 @@ module Aws
       def spawn_worker
         Thread.new do
           while (job = @queue.shift)
-            break if job == :shutdown
-
             args, block = job
             block.call(*args)
           end
