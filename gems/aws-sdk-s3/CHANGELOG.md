@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Return a decryption error for a malformed material description.
+* Issue - S3 Encryption Client, encryptionV2 and encryptionV3, returns a decryption error for a malformed material description.
 
 1.228.1 (2026-07-23)
 ------------------
