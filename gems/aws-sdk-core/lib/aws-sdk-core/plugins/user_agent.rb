@@ -211,7 +211,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
 
               frameworks[match[:name]] = match[:version]
             end
-            frameworks.map { |n, v| "lib/#{n}##{v}" }.join(' ')
+            frameworks.map { |n, v| "lib/#{n}##{v}" }.join(' ') unless frameworks.empty?
           end
 
           def metric_metadata

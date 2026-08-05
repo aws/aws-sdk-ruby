@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Issue - Fix double space bug in frameworks section of user-agent header.
 
 3.254.0 (2026-07-09)
 ------------------
