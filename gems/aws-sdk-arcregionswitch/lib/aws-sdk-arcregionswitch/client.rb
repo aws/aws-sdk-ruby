@@ -13,13 +13,13 @@ require 'smithy-client/plugins/net_http'
 require 'smithy-client/plugins/pageable_response'
 require 'smithy-client/plugins/param_converter'
 require 'smithy-client/plugins/param_validator'
+require 'smithy-client/plugins/protocol'
 require 'smithy-client/plugins/raise_response_errors'
 require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/transfer_encoding'
-require 'smithy-client/plugins/rpc_v2_cbor'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
@@ -27,9 +27,10 @@ require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
-require 'aws-sdk-core/plugins/json_rpc_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
+require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:arcregionswitch)
 
@@ -53,13 +54,13 @@ module Aws::ARCRegionswitch
     add_plugin(Smithy::Client::Plugins::PageableResponse)
     add_plugin(Smithy::Client::Plugins::ParamConverter)
     add_plugin(Smithy::Client::Plugins::ParamValidator)
+    add_plugin(Smithy::Client::Plugins::Protocol)
     add_plugin(Smithy::Client::Plugins::RaiseResponseErrors)
     add_plugin(Smithy::Client::Plugins::RequestCompression)
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::TransferEncoding)
-    add_plugin(Smithy::Client::Plugins::RpcV2Cbor)
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
@@ -67,7 +68,6 @@ module Aws::ARCRegionswitch
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
     add_plugin(Aws::Core::Plugins::StubResponses)
-    add_plugin(Aws::Core::Plugins::JsonRpcProtocol)
     add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
 
@@ -170,6 +170,9 @@ module Aws::ARCRegionswitch
     # @option options [String] :profile (default)
     #  Used when loading credentials from the shared config file and credentials file
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
+    # @option options [Symbol, Object] :protocol
+    #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -2241,6 +2244,14 @@ module Aws::ARCRegionswitch
       # @api private
       def errors_module
         Errors
+      end
+
+      # @api private
+      def protocols
+        {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
+          json_rpc: Aws::Core::JsonRpc
+        }
       end
     end
   end

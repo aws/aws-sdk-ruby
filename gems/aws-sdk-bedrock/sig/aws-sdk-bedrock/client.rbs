@@ -37,6 +37,7 @@ module Aws::Bedrock
       ?logger: Logger,
       ?max_attempts: Integer,
       ?profile: String,
+      ?protocol: Symbol | Object,
       ?raise_response_errors: bool,
       ?region: String,
       ?request_min_compression_size_bytes: Integer,

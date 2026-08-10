@@ -13,6 +13,7 @@ require 'smithy-client/plugins/net_http'
 require 'smithy-client/plugins/pageable_response'
 require 'smithy-client/plugins/param_converter'
 require 'smithy-client/plugins/param_validator'
+require 'smithy-client/plugins/protocol'
 require 'smithy-client/plugins/raise_response_errors'
 require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
@@ -26,10 +27,10 @@ require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
-require 'aws-sdk-core/plugins/query_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-neptune/plugins/cross_region_copying'
+require 'aws-sdk-core/aws_query'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:neptune)
 
@@ -53,6 +54,7 @@ module Aws::Neptune
     add_plugin(Smithy::Client::Plugins::PageableResponse)
     add_plugin(Smithy::Client::Plugins::ParamConverter)
     add_plugin(Smithy::Client::Plugins::ParamValidator)
+    add_plugin(Smithy::Client::Plugins::Protocol)
     add_plugin(Smithy::Client::Plugins::RaiseResponseErrors)
     add_plugin(Smithy::Client::Plugins::RequestCompression)
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
@@ -66,7 +68,6 @@ module Aws::Neptune
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
     add_plugin(Aws::Core::Plugins::StubResponses)
-    add_plugin(Aws::Core::Plugins::QueryProtocol)
     add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Neptune::Plugins::CrossRegionCopying)
@@ -170,6 +171,9 @@ module Aws::Neptune
     # @option options [String] :profile (default)
     #  Used when loading credentials from the shared config file and credentials file
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
+    # @option options [Symbol, Object] :protocol
+    #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
+    #  Supported protocols: +:aws_query+ (defaults to +:aws_query+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -6921,6 +6925,13 @@ module Aws::Neptune
       # @api private
       def errors_module
         Errors
+      end
+
+      # @api private
+      def protocols
+        {
+          aws_query: Aws::Core::AwsQuery
+        }
       end
     end
   end
