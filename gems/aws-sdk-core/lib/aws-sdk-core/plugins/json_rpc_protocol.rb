@@ -6,6 +6,9 @@ module Aws
   module Core
     module Plugins
       # @api private
+      # TODO: Remove once all services are regenerated onto the protocol-object
+      # model (Aws::Core::JsonRpc). Superseded by the generic
+      # Smithy::Client::Plugins::Protocol.
       class JsonRpcProtocol < Smithy::Client::Plugin
         option(:protocol) do |config|
           traits = config.service.traits

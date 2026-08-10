@@ -26,7 +26,7 @@ module Aws
         end
         data = Smithy::Client::ParamConverter.new(operation.output).convert(data)
         Smithy::Client::ParamValidator.new(operation.output, validate_required: false).validate!(data, context: 'stub')
-        @config.stubber.stub_data(@config, operation, data)
+        @config.protocol.stub_data(@config, operation, data)
       end
     end
   end

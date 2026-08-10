@@ -8,6 +8,9 @@ module Aws
     # @api private
     module Rest
       # @api private
+      # TODO: Remove once all services are regenerated onto the protocol-object
+      # model. Only the old RestJson/RestXml protocol plugins use this handler;
+      # the new Rest::Protocol mixin does its own orchestration.
       class Handler < Smithy::Client::Handler
         def call(context)
           Request::Builder.new(codec(context.config)).apply(context)

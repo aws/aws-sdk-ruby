@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
-require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/ec2_protocol'
-require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/json_rpc_protocol'
-require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/query_protocol'
-require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/rest_json_protocol'
-require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/rest_xml_protocol'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/aws_query'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/ec2_query'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/json_rpc'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/rest_json'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/rest_xml'
 
 module BuildTools
   module Welds
-    # Adds a supported protocol plugin to the client if the service has the trait, prioritized by a list.
+    # Adds a supported protocol to the client if the service has the trait, prioritized by a list.
+    # TODO: once we optimize RpcVCbor implementation in smithy ruby, we should include that.
     class Protocols < Smithy::Weld
       PROTOCOL_PRIORITY = %w[
         aws.protocols#awsJson1_1
@@ -31,18 +32,18 @@ module BuildTools
         false
       end
 
-      def add_plugins
+      def add_protocols
         case @protocol
         when 'aws.protocols#awsJson1_1', 'aws.protocols#awsJson1_0'
-          { Aws::Core::Plugins::JsonRpcProtocol => { require_path: 'aws-sdk-core/plugins/json_rpc_protocol' } }
-        when 'aws.protocols#awsQuery'
-          { Aws::Core::Plugins::QueryProtocol => { require_path: 'aws-sdk-core/plugins/query_protocol' } }
-        when 'aws.protocols#ec2Query'
-          { Aws::Core::Plugins::Ec2Protocol => { require_path: 'aws-sdk-core/plugins/ec2_protocol' } }
+          { json_rpc: { class_name: Aws::Core::JsonRpc, require_path: 'aws-sdk-core/json_rpc' } }
         when 'aws.protocols#restJson1'
-          { Aws::Core::Plugins::RestJsonProtocol => { require_path: 'aws-sdk-core/plugins/rest_json_protocol' } }
+          { rest_json: { class_name: Aws::Core::RestJson, require_path: 'aws-sdk-core/rest_json' } }
         when 'aws.protocols#restXml'
-          { Aws::Core::Plugins::RestXmlProtocol => { require_path: 'aws-sdk-core/plugins/rest_xml_protocol' } }
+          { rest_xml: { class_name: Aws::Core::RestXml, require_path: 'aws-sdk-core/rest_xml' } }
+        when 'aws.protocols#awsQuery'
+          { aws_query: { class_name: Aws::Core::AwsQuery, require_path: 'aws-sdk-core/aws_query' } }
+        when 'aws.protocols#ec2Query'
+          { ec2_query: { class_name: Aws::Core::Ec2Query, require_path: 'aws-sdk-core/ec2_query' } }
         else {}
         end
       end

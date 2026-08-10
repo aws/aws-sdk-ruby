@@ -2,7 +2,10 @@
 
 module Aws
   module DynamoDB
-    class Client # rubocop:disable Style/Documentation
+    # Stubbing overrides for the :simple_attributes feature.
+    # The protocol's stub_data serializes modeled shapes only; simple_attributes are
+    # plain Ruby, so we marshal them to a modeled shape first.
+    class Client
       def stub_data(operation_name, data = {})
         if config.simple_attributes
           rules = config.service.operation(operation_name).output
@@ -26,7 +29,7 @@ module Aws
         end
         data = Smithy::Client::ParamConverter.new(operation.output).convert(data)
         Smithy::Client::ParamValidator.new(operation.output, validate_required: false).validate!(data, context: 'stub')
-        @config.stubber.stub_data(@config, operation, data)
+        @config.protocol.stub_data(@config, operation, data)
       end
     end
   end

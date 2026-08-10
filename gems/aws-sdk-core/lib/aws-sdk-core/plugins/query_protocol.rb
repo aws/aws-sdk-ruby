@@ -6,6 +6,9 @@ module Aws
   module Core
     module Plugins
       # @api private
+      # TODO: Remove once all services are regenerated onto the protocol-object
+      # model (Aws::Core::AwsQuery). Superseded by the generic
+      # Smithy::Client::Plugins::Protocol.
       class QueryProtocol < Smithy::Client::Plugin
         option(:protocol, default: 'aws.protocols#awsQuery')
         option(:query_codec) { Core::Query::Codec.new }
