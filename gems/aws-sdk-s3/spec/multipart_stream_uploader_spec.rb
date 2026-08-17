@@ -153,6 +153,32 @@ module Aws
           end.to raise_error(S3::MultipartUploadError, /failed to abort multipart upload: network-error/)
         end
 
+        it 'aborts without hanging when the executor rejects a task mid-stream' do
+          client.stub_responses(:create_multipart_upload, upload_id: 'MultipartUploadId')
+          client.stub_responses(:upload_part, etag: 'etag')
+          executor = DefaultExecutor.new
+          calls = 0
+          # Simulate a concurrent shutdown closing the queue: the second post is
+          # rejected the way DefaultExecutor#post now raises on a closed queue.
+          allow(executor).to receive(:post).and_wrap_original do |original, *args, &blk|
+            calls += 1
+            raise 'Executor has been shutdown and is no longer accepting tasks' if calls == 2
+
+            original.call(*args, &blk)
+          end
+          uploader = MultipartStreamUploader.new(client: client, executor: executor, part_size: 5 * 1024 * 1024)
+
+          expect(client).to receive(:abort_multipart_upload)
+            .with(params.merge(upload_id: 'MultipartUploadId')).and_call_original
+          expect do
+            uploader.upload(params) do |write_stream|
+              15.times { write_stream << one_mb }
+            rescue Errno::EPIPE
+              # producer stops writing once the read end is closed
+            end
+          end.to raise_error(S3::MultipartUploadError)
+        end
+
         context 'when source outpaces upload' do
           let(:num_threads) { 2 }
           let(:executor) { DefaultExecutor.new(max_threads: num_threads, max_queue: num_threads) }

@@ -149,21 +149,32 @@ module Aws
         while (part = pending.shift)
           break if abort_upload
 
-          upload_attempts += 1
-          @executor.post(part) do |p|
-            Thread.current[:net_http_override_body_stream_chunk] = @http_chunk_size if @http_chunk_size
-            update_progress(progress, p)
-            resp = @client.upload_part(p)
-            completed_part = { etag: resp.etag, part_number: p[:part_number] }
-            apply_part_checksum(resp, completed_part)
-            completed.push(completed_part)
+          begin
+            @executor.post(part) do |p|
+              Thread.current[:net_http_override_body_stream_chunk] = @http_chunk_size if @http_chunk_size
+              update_progress(progress, p)
+              resp = @client.upload_part(p)
+              completed_part = { etag: resp.etag, part_number: p[:part_number] }
+              apply_part_checksum(resp, completed_part)
+              completed.push(completed_part)
+            rescue StandardError => e
+              abort_upload = true
+              errors << e
+            ensure
+              p[:body].close
+              Thread.current[:net_http_override_body_stream_chunk] = nil if @http_chunk_size
+              completion_queue << :done
+            end
+            # Count only successfully queued parts; a failed post never runs the
+            # block, so it never pushes :done and must not be waited on below.
+            upload_attempts += 1
           rescue StandardError => e
+            # The executor rejected the task (e.g. shut down mid-upload). Record
+            # it so the abort ceremony runs instead of the error escaping and
+            # leaving the multipart upload orphaned on S3.
             abort_upload = true
             errors << e
-          ensure
-            p[:body].close
-            Thread.current[:net_http_override_body_stream_chunk] = nil if @http_chunk_size
-            completion_queue << :done
+            break
           end
         end
 

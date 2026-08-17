@@ -13,8 +13,7 @@ module Aws
         @max_threads = options[:max_threads] || DEFAULT_MAX_THREADS
         @max_queue = options[:max_queue] || 0
         @state = RUNNING
-        # A bounded queue applies backpressure to producers when full. 0 means unbounded.
-        @queue = @max_queue.zero? ? Queue.new : SizedQueue.new(@max_queue)
+        @queue = @max_queue.zero? ? Queue.new : SizedQueue.new(@max_queue) # 0 is unbounded
         @pool = []
         @mutex = Mutex.new
       end

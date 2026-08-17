@@ -145,20 +145,34 @@ module Aws
           end
           break unless part_body || current_part_num == 1
 
-          queued_parts += 1
-          @executor.post(part_body, current_part_num, options) do |body, num, opts|
-            part = opts.merge(body: body, part_number: num)
-            resp = @client.upload_part(part)
-            completed_part = create_completed_part(resp, part)
-            completed.push(completed_part)
+          begin
+            @executor.post(part_body, current_part_num, options) do |body, num, opts|
+              part = opts.merge(body: body, part_number: num)
+              resp = @client.upload_part(part)
+              completed_part = create_completed_part(resp, part)
+              completed.push(completed_part)
+            rescue StandardError => e
+              mutex.synchronize do
+                errors.push(e)
+                read_pipe.close_read unless read_pipe.closed?
+              end
+            ensure
+              clear_body(body)
+              completion_queue << :done
+            end
+            # Count only successfully queued parts; a failed post never runs the
+            # block, so it never pushes :done and must not be waited on below.
+            queued_parts += 1
           rescue StandardError => e
+            # The executor rejected the task (e.g. shut down mid-stream). Record
+            # the error and close the read end so the producer block stops writing
+            # instead of blocking forever on a full pipe, letting the abort run.
             mutex.synchronize do
               errors.push(e)
               read_pipe.close_read unless read_pipe.closed?
             end
-          ensure
-            clear_body(body)
-            completion_queue << :done
+            clear_body(part_body)
+            break
           end
         end
         queued_parts.times { completion_queue.pop }
