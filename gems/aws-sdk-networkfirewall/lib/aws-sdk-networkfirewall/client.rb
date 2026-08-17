@@ -846,17 +846,10 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Creates a container association for Network Firewall. A container
-    # association links container clusters (ECS or EKS) to Network Firewall,
-    # enabling dynamic IP resolution for firewall rules based on container
-    # attributes.
-    #
-    # To manage a container association's tags, use the standard Amazon Web
-    # Services resource tagging operations, ListTagsForResource,
-    # TagResource, and UntagResource.
-    #
-    # To retrieve information about container associations, use
-    # ListContainerAssociations and DescribeContainerAssociation.
+    # Creates a Network Firewall container association. The association
+    # monitors container lifecycle events in your Amazon ECS or Amazon EKS
+    # clusters and resolves running container addresses for use in firewall
+    # rules.
     #
     # @option params [required, String] :container_association_name
     #   The descriptive name of the container association. You can't change
@@ -866,13 +859,17 @@ module Aws::NetworkFirewall
     #   A description of the container association.
     #
     # @option params [required, String] :type
-    #   The type of container orchestration platform for the clusters in this
-    #   association. Valid values are `ECS` and `EKS`. You can't change the
-    #   type after creation.
+    #   The type of containers to monitor. You can't change the container
+    #   type after creation. Valid values:
+    #
+    #   * `ECS` - Amazon Elastic Container Service
+    #
+    #   * `EKS` - Amazon Elastic Kubernetes Service
     #
     # @option params [required, Array<Types::ContainerMonitoringConfiguration>] :container_monitoring_configurations
-    #   The list of container monitoring configurations that define which
-    #   clusters and container attributes to monitor.
+    #   The monitoring configurations for the container association. Each
+    #   configuration specifies an Amazon ECS or Amazon EKS cluster to monitor
+    #   and optional attribute filters to narrow which containers are tracked.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The key:value pairs to associate with the resource.
@@ -924,7 +921,7 @@ module Aws::NetworkFirewall
     #   resp.container_monitoring_configurations[0].attribute_filters #=> Array
     #   resp.container_monitoring_configurations[0].attribute_filters[0].key #=> String
     #   resp.container_monitoring_configurations[0].attribute_filters[0].value #=> String
-    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "UPDATING"
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1060,6 +1057,40 @@ module Aws::NetworkFirewall
     #
     #   Default value: `FALSE`
     #
+    # @option params [Array<Types::NatGatewayMapping>] :nat_gateway_mappings
+    #   The NAT gateways that the firewall uses to proxy traffic when
+    #   `NoSourcePreservation` is `TRUE`. Network Firewall attaches the
+    #   firewall to each NAT gateway that you specify, so that egress traffic
+    #   is proxied through the NAT gateway.
+    #
+    # @option params [Types::ProxySettings] :proxy_settings
+    #   The listener configuration for a proxy mode firewall, used when
+    #   `NoSourcePreservation` is `TRUE`. This specifies the ports and
+    #   protocols on which the firewall's proxy listens for traffic.
+    #
+    # @option params [Boolean] :no_source_preservation
+    #   Optional. Indicates whether the firewall operates in proxy mode, in
+    #   which the source IP address of the traffic is not preserved. When set
+    #   to `TRUE`, the firewall proxies traffic through a NAT gateway and the
+    #   traffic reaching the destination uses the NAT gateway's IP address as
+    #   the source.
+    #
+    #   When you set this to `TRUE`, you must specify `NatGatewayMappings` and
+    #   `VpcEndpoint` instead of a top-level `VpcId` and `SubnetMappings`.
+    #
+    #   You can't change this setting after you create the firewall.
+    #
+    #   Default value: `FALSE`
+    #
+    # @option params [Types::VpcEndpoint] :vpc_endpoint
+    #   The VPC and subnets for the firewall endpoint, used when
+    #   `NoSourcePreservation` is `TRUE`. Network Firewall creates the
+    #   firewall endpoint in the subnets that you specify here.
+    #
+    #   For proxy mode firewalls, provide the firewall's VPC and endpoint
+    #   subnets through this parameter instead of the top-level `VpcId` and
+    #   `SubnetMappings`.
+    #
     # @return [Types::CreateFirewallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFirewallResponse#firewall #firewall} => Types::Firewall
@@ -1099,6 +1130,29 @@ module Aws::NetworkFirewall
     #       },
     #     ],
     #     availability_zone_change_protection: false,
+    #     nat_gateway_mappings: [
+    #       {
+    #         nat_gateway_id: "NatGatewayId", # required
+    #       },
+    #     ],
+    #     proxy_settings: {
+    #       listener_properties: [ # required
+    #         {
+    #           port: 1,
+    #           type: "HTTP", # accepts HTTP, HTTPS
+    #         },
+    #       ],
+    #     },
+    #     no_source_preservation: false,
+    #     vpc_endpoint: {
+    #       vpc_id: "VpcId", # required
+    #       subnet_mappings: [ # required
+    #         {
+    #           subnet_id: "CollectionMember_String", # required
+    #           ip_address_type: "DUALSTACK", # accepts DUALSTACK, IPV4, IPV6
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1128,6 +1182,16 @@ module Aws::NetworkFirewall
     #   resp.firewall.availability_zone_mappings #=> Array
     #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
     #   resp.firewall.availability_zone_change_protection #=> Boolean
+    #   resp.firewall.nat_gateway_mappings #=> Array
+    #   resp.firewall.nat_gateway_mappings[0].nat_gateway_id #=> String
+    #   resp.firewall.proxy_settings.listener_properties #=> Array
+    #   resp.firewall.proxy_settings.listener_properties[0].port #=> Integer
+    #   resp.firewall.proxy_settings.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
+    #   resp.firewall.no_source_preservation #=> Boolean
+    #   resp.firewall.vpc_endpoint.vpc_id #=> String
+    #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
+    #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
+    #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
@@ -1135,9 +1199,15 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.dns_name #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED", "NOT_SUBSCRIBED", "DEPRECATED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments #=> Array
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].nat_gateway_id #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].status #=> String, one of "CREATING", "READY", "UPDATING", "FAILED", "DELETING"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].status_message #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].dns_name #=> String
     #   resp.firewall_status.capacity_usage_summary.cid_rs.available_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references #=> Hash
@@ -2318,6 +2388,7 @@ module Aws::NetworkFirewall
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.dns_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateVpcEndpointAssociation AWS API Documentation
     #
@@ -2328,18 +2399,20 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Deletes the specified container association. When you delete a
-    # container association, Network Firewall stops monitoring the
-    # associated container clusters and removes the resolved IP addresses
-    # from firewall rules.
+    # Deletes a container association. The resource transitions to a
+    # `DELETING` state. Deletion is asynchronous - Network Firewall returns
+    # immediately while cleanup proceeds in the background. You can't
+    # delete a container association while a rule group references it.
     #
     # @option params [String] :container_association_name
-    #   The descriptive name of the container association. You must specify
-    #   the ARN or the name, and you can specify both.
+    #   The descriptive name of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [String] :container_association_arn
-    #   The Amazon Resource Name (ARN) of the container association. You must
-    #   specify the ARN or the name, and you can specify both.
+    #   The Amazon Resource Name (ARN) of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #
     # @return [Types::DeleteContainerAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2358,7 +2431,7 @@ module Aws::NetworkFirewall
     #
     #   resp.container_association_name #=> String
     #   resp.container_association_arn #=> String
-    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteContainerAssociation AWS API Documentation
     #
@@ -2435,6 +2508,16 @@ module Aws::NetworkFirewall
     #   resp.firewall.availability_zone_mappings #=> Array
     #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
     #   resp.firewall.availability_zone_change_protection #=> Boolean
+    #   resp.firewall.nat_gateway_mappings #=> Array
+    #   resp.firewall.nat_gateway_mappings[0].nat_gateway_id #=> String
+    #   resp.firewall.proxy_settings.listener_properties #=> Array
+    #   resp.firewall.proxy_settings.listener_properties[0].port #=> Integer
+    #   resp.firewall.proxy_settings.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
+    #   resp.firewall.no_source_preservation #=> Boolean
+    #   resp.firewall.vpc_endpoint.vpc_id #=> String
+    #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
+    #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
+    #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
@@ -2442,9 +2525,15 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.dns_name #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED", "NOT_SUBSCRIBED", "DEPRECATED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments #=> Array
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].nat_gateway_id #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].status #=> String, one of "CREATING", "READY", "UPDATING", "FAILED", "DELETING"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].status_message #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].dns_name #=> String
     #   resp.firewall_status.capacity_usage_summary.cid_rs.available_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references #=> Hash
@@ -2949,6 +3038,7 @@ module Aws::NetworkFirewall
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.dns_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteVpcEndpointAssociation AWS API Documentation
     #
@@ -2959,15 +3049,17 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Returns the properties of a container association.
+    # Retrieves the configuration and status of a container association.
     #
     # @option params [String] :container_association_name
-    #   The descriptive name of the container association. You must specify
-    #   the ARN or the name, and you can specify both.
+    #   The descriptive name of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [String] :container_association_arn
-    #   The Amazon Resource Name (ARN) of the container association. You must
-    #   specify the ARN or the name, and you can specify both.
+    #   The Amazon Resource Name (ARN) of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #
     # @return [Types::DescribeContainerAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3000,7 +3092,7 @@ module Aws::NetworkFirewall
     #   resp.container_monitoring_configurations[0].attribute_filters #=> Array
     #   resp.container_monitoring_configurations[0].attribute_filters[0].key #=> String
     #   resp.container_monitoring_configurations[0].attribute_filters[0].value #=> String
-    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "UPDATING"
     #   resp.resolved_cidr_count #=> Integer
     #   resp.last_updated_time #=> Time
     #   resp.tags #=> Array
@@ -3071,6 +3163,16 @@ module Aws::NetworkFirewall
     #   resp.firewall.availability_zone_mappings #=> Array
     #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
     #   resp.firewall.availability_zone_change_protection #=> Boolean
+    #   resp.firewall.nat_gateway_mappings #=> Array
+    #   resp.firewall.nat_gateway_mappings[0].nat_gateway_id #=> String
+    #   resp.firewall.proxy_settings.listener_properties #=> Array
+    #   resp.firewall.proxy_settings.listener_properties[0].port #=> Integer
+    #   resp.firewall.proxy_settings.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
+    #   resp.firewall.no_source_preservation #=> Boolean
+    #   resp.firewall.vpc_endpoint.vpc_id #=> String
+    #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
+    #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
+    #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
@@ -3078,9 +3180,15 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.dns_name #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED", "NOT_SUBSCRIBED", "DEPRECATED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments #=> Array
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].nat_gateway_id #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].status #=> String, one of "CREATING", "READY", "UPDATING", "FAILED", "DELETING"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].status_message #=> String
+    #   resp.firewall_status.sync_states["AvailabilityZone"].nat_gateway_attachments[0].dns_name #=> String
     #   resp.firewall_status.capacity_usage_summary.cid_rs.available_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.ip_set_references #=> Hash
@@ -3988,6 +4096,7 @@ module Aws::NetworkFirewall
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.dns_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeVpcEndpointAssociation AWS API Documentation
     #
@@ -4376,8 +4485,9 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Retrieves the metadata for the container associations that you have
-    # defined. You can optionally page through results.
+    # Lists the container associations in your account and Region. Use the
+    # `NextToken` parameter in subsequent requests to retrieve additional
+    # results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of objects that you want Network Firewall to return
@@ -5594,43 +5704,54 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Updates the properties of an existing container association. Use this
-    # to modify the container monitoring configurations or description.
+    # Updates the monitoring configurations and description of a container
+    # association. You can't change the container type after creation.
+    # Provide an update token to enable optimistic concurrency control.
     #
     # @option params [String] :container_association_name
-    #   The descriptive name of the container association. You must specify
-    #   the ARN or the name, and you can specify both.
+    #   The descriptive name of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [String] :container_association_arn
-    #   The Amazon Resource Name (ARN) of the container association. You must
-    #   specify the ARN or the name, and you can specify both.
+    #   The Amazon Resource Name (ARN) of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [String] :description
-    #   A description of the container association.
+    #   A description of the container association. When omitted, the existing
+    #   description remains unchanged. To clear the description, pass an empty
+    #   string.
     #
     # @option params [required, String] :type
-    #   The type of container orchestration platform. This must match the type
-    #   specified when the container association was created.
+    #   The container type. This value must match the existing type and can't
+    #   be changed. Valid values:
+    #
+    #   * `ECS` - Amazon Elastic Container Service
+    #
+    #   * `EKS` - Amazon Elastic Kubernetes Service
     #
     # @option params [required, Array<Types::ContainerMonitoringConfiguration>] :container_monitoring_configurations
-    #   The updated list of container monitoring configurations that define
-    #   which clusters and container attributes to monitor.
+    #   The updated monitoring configurations for the container association.
+    #   Each configuration specifies an Amazon ECS or Amazon EKS cluster to
+    #   monitor and optional attribute filters.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The key:value pairs associated with the resource.
+    #   The key:value pairs to associate with the resource.
     #
     # @option params [required, String] :update_token
     #   A token used for optimistic locking. Network Firewall returns a token
     #   to your requests that access the container association. The token
     #   marks the state of the container association resource at the time of
-    #   the request. To make an update to the container association, provide
-    #   the token in your request. Network Firewall uses the token to ensure
-    #   that the container association hasn't changed since you last
-    #   retrieved it. If it has changed, the operation fails with an
-    #   `InvalidTokenException`. If this happens, retrieve the container
-    #   association again to get a current copy of it with a new token.
-    #   Reapply your changes as needed, then try the operation again using the
-    #   new token.
+    #   the request.
+    #
+    #   To make changes to the container association, you provide the token in
+    #   your request. Network Firewall uses the token to ensure that the
+    #   container association hasn't changed since you last retrieved it. If
+    #   it has changed, the operation fails with an `InvalidTokenException`.
+    #   If this happens, retrieve the container association again to get a
+    #   current copy of it with a current token. Reapply your changes as
+    #   needed, then try the operation again using the new token.
     #
     # @return [Types::UpdateContainerAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5681,7 +5802,7 @@ module Aws::NetworkFirewall
     #   resp.container_monitoring_configurations[0].attribute_filters #=> Array
     #   resp.container_monitoring_configurations[0].attribute_filters[0].key #=> String
     #   resp.container_monitoring_configurations[0].attribute_filters[0].value #=> String
-    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "UPDATING"
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -6739,6 +6860,87 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Modifies the proxy listener configuration of a proxy mode firewall.
+    # Proxy mode firewalls are created with `NoSourcePreservation` set to
+    # `TRUE`. Use this operation to change the ports and protocols on which
+    # the firewall's proxy listens for traffic.
+    #
+    # @option params [String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :firewall_name
+    #   The descriptive name of the firewall. You can't change the name of a
+    #   firewall after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of the
+    #   request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs your
+    #   updates regardless of whether the firewall has changed since you last
+    #   retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If this
+    #   happens, retrieve the firewall again to get a current copy of it with
+    #   a new token. Reapply your changes as needed, then try the operation
+    #   again using the new token.
+    #
+    # @option params [Types::ProxySettings] :proxy_settings
+    #   The proxy listener configuration to set on the firewall. This
+    #   specifies the ports and protocols on which the firewall's proxy
+    #   listens for traffic.
+    #
+    # @return [Types::UpdateProxySettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProxySettingsResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::UpdateProxySettingsResponse#firewall_name #firewall_name} => String
+    #   * {Types::UpdateProxySettingsResponse#update_token #update_token} => String
+    #   * {Types::UpdateProxySettingsResponse#proxy_settings #proxy_settings} => Types::ProxySettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_proxy_settings({
+    #     firewall_arn: "ResourceArn",
+    #     firewall_name: "ResourceName",
+    #     update_token: "UpdateToken",
+    #     proxy_settings: {
+    #       listener_properties: [ # required
+    #         {
+    #           port: 1,
+    #           type: "HTTP", # accepts HTTP, HTTPS
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_arn #=> String
+    #   resp.firewall_name #=> String
+    #   resp.update_token #=> String
+    #   resp.proxy_settings.listener_properties #=> Array
+    #   resp.proxy_settings.listener_properties[0].port #=> Integer
+    #   resp.proxy_settings.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxySettings AWS API Documentation
+    #
+    # @overload update_proxy_settings(params = {})
+    # @param [Hash] params ({})
+    def update_proxy_settings(params = {}, options = {})
+      req = build_request(:update_proxy_settings, params)
+      req.send_request(options)
+    end
+
     # Updates the rule settings for the specified rule group. You use a rule
     # group by reference in one or more firewall policies. When you modify a
     # rule group, you modify all firewall policies that use the rule group.
@@ -7262,7 +7464,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

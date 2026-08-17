@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2026-08-17)
+------------------
+
+* Feature - Documentation update for the ECR PutReplicationConfiguration API to increase the replication rule limit from 10 to 25
+
 1.131.0 (2026-07-09)
 ------------------
 

@@ -967,14 +967,14 @@ module Aws::MarketplaceDiscovery
     #   * {Types::GetOfferOutput#offer_id #offer_id} => String
     #   * {Types::GetOfferOutput#catalog #catalog} => String
     #   * {Types::GetOfferOutput#offer_name #offer_name} => String
-    #   * {Types::GetOfferOutput#agreement_proposal_id #agreement_proposal_id} => String
     #   * {Types::GetOfferOutput#expiration_time #expiration_time} => Time
     #   * {Types::GetOfferOutput#available_from_time #available_from_time} => Time
     #   * {Types::GetOfferOutput#seller_of_record #seller_of_record} => Types::SellerInformation
+    #   * {Types::GetOfferOutput#associated_entities #associated_entities} => Array&lt;Types::OfferAssociatedEntity&gt;
+    #   * {Types::GetOfferOutput#agreement_proposal_id #agreement_proposal_id} => String
     #   * {Types::GetOfferOutput#replacement_agreement_id #replacement_agreement_id} => String
     #   * {Types::GetOfferOutput#pricing_model #pricing_model} => Types::PricingModel
     #   * {Types::GetOfferOutput#badges #badges} => Array&lt;Types::PurchaseOptionBadge&gt;
-    #   * {Types::GetOfferOutput#associated_entities #associated_entities} => Array&lt;Types::OfferAssociatedEntity&gt;
     #
     #
     # @example Example: Invoke GetOffer for Contract Pricing offer
@@ -1160,17 +1160,10 @@ module Aws::MarketplaceDiscovery
     #   resp.offer_id #=> String
     #   resp.catalog #=> String
     #   resp.offer_name #=> String
-    #   resp.agreement_proposal_id #=> String
     #   resp.expiration_time #=> Time
     #   resp.available_from_time #=> Time
     #   resp.seller_of_record.seller_profile_id #=> String
     #   resp.seller_of_record.display_name #=> String
-    #   resp.replacement_agreement_id #=> String
-    #   resp.pricing_model.pricing_model_type #=> String, one of "USAGE", "CONTRACT", "BYOL", "FREE"
-    #   resp.pricing_model.display_name #=> String
-    #   resp.badges #=> Array
-    #   resp.badges[0].display_name #=> String
-    #   resp.badges[0].badge_type #=> String, one of "PRIVATE_PRICING", "FUTURE_DATED", "REPLACEMENT_OFFER"
     #   resp.associated_entities #=> Array
     #   resp.associated_entities[0].product.product_id #=> String
     #   resp.associated_entities[0].product.product_name #=> String
@@ -1179,6 +1172,13 @@ module Aws::MarketplaceDiscovery
     #   resp.associated_entities[0].offer_set.offer_set_id #=> String
     #   resp.associated_entities[0].offer_set.seller_of_record.seller_profile_id #=> String
     #   resp.associated_entities[0].offer_set.seller_of_record.display_name #=> String
+    #   resp.agreement_proposal_id #=> String
+    #   resp.replacement_agreement_id #=> String
+    #   resp.pricing_model.pricing_model_type #=> String, one of "USAGE", "CONTRACT", "BYOL", "FREE"
+    #   resp.pricing_model.display_name #=> String
+    #   resp.badges #=> Array
+    #   resp.badges[0].display_name #=> String
+    #   resp.badges[0].badge_type #=> String, one of "PRIVATE_PRICING", "FUTURE_DATED", "REPLACEMENT_OFFER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOffer AWS API Documentation
     #
@@ -1736,6 +1736,25 @@ module Aws::MarketplaceDiscovery
     #     ], 
     #   }
     #
+    # @example Example: GetOfferTerms for net payment term
+    #
+    #   resp = client.get_offer_terms({
+    #     offer_id: "offer-sampleNetPaymentId", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     offer_terms: [
+    #       {
+    #         net_payment_term: {
+    #           type: "NetPaymentTerm", 
+    #           id: "term-netpay-001", 
+    #           payment_due_period: "P30D", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_offer_terms({
@@ -1748,9 +1767,9 @@ module Aws::MarketplaceDiscovery
     #
     #   resp.offer_terms #=> Array
     #   resp.offer_terms[0].byol_pricing_term.id #=> String
-    #   resp.offer_terms[0].byol_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].byol_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].configurable_upfront_pricing_term.id #=> String
-    #   resp.offer_terms[0].configurable_upfront_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].configurable_upfront_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].configurable_upfront_pricing_term.currency_code #=> String
     #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards #=> Array
     #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards[0].selector.type #=> String, one of "Duration"
@@ -1768,7 +1787,7 @@ module Aws::MarketplaceDiscovery
     #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].unit #=> String
     #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].price #=> String
     #   resp.offer_terms[0].fixed_upfront_pricing_term.id #=> String
-    #   resp.offer_terms[0].fixed_upfront_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].fixed_upfront_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].fixed_upfront_pricing_term.currency_code #=> String
     #   resp.offer_terms[0].fixed_upfront_pricing_term.duration #=> String
     #   resp.offer_terms[0].fixed_upfront_pricing_term.price #=> String
@@ -1783,7 +1802,7 @@ module Aws::MarketplaceDiscovery
     #   resp.offer_terms[0].fixed_upfront_pricing_term.grants[0].unit #=> String
     #   resp.offer_terms[0].fixed_upfront_pricing_term.grants[0].max_quantity #=> Integer
     #   resp.offer_terms[0].free_trial_pricing_term.id #=> String
-    #   resp.offer_terms[0].free_trial_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].free_trial_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].free_trial_pricing_term.duration #=> String
     #   resp.offer_terms[0].free_trial_pricing_term.grants #=> Array
     #   resp.offer_terms[0].free_trial_pricing_term.grants[0].dimension_key #=> String
@@ -1796,29 +1815,29 @@ module Aws::MarketplaceDiscovery
     #   resp.offer_terms[0].free_trial_pricing_term.grants[0].unit #=> String
     #   resp.offer_terms[0].free_trial_pricing_term.grants[0].max_quantity #=> Integer
     #   resp.offer_terms[0].legal_term.id #=> String
-    #   resp.offer_terms[0].legal_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].legal_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].legal_term.documents #=> Array
     #   resp.offer_terms[0].legal_term.documents[0].type #=> String, one of "CustomEula", "CustomDsa", "EnterpriseEula", "StandardEula", "StandardDsa"
     #   resp.offer_terms[0].legal_term.documents[0].url #=> String
     #   resp.offer_terms[0].legal_term.documents[0].version #=> String
     #   resp.offer_terms[0].payment_schedule_term.id #=> String
-    #   resp.offer_terms[0].payment_schedule_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].payment_schedule_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].payment_schedule_term.currency_code #=> String
     #   resp.offer_terms[0].payment_schedule_term.schedule #=> Array
     #   resp.offer_terms[0].payment_schedule_term.schedule[0].charge_date #=> Time
     #   resp.offer_terms[0].payment_schedule_term.schedule[0].charge_amount #=> String
     #   resp.offer_terms[0].recurring_payment_term.id #=> String
-    #   resp.offer_terms[0].recurring_payment_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].recurring_payment_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].recurring_payment_term.currency_code #=> String
     #   resp.offer_terms[0].recurring_payment_term.billing_period #=> String, one of "Monthly"
     #   resp.offer_terms[0].recurring_payment_term.price #=> String
     #   resp.offer_terms[0].renewal_term.id #=> String
-    #   resp.offer_terms[0].renewal_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].renewal_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].support_term.id #=> String
-    #   resp.offer_terms[0].support_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].support_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].support_term.refund_policy #=> String
     #   resp.offer_terms[0].usage_based_pricing_term.id #=> String
-    #   resp.offer_terms[0].usage_based_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].usage_based_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].usage_based_pricing_term.currency_code #=> String
     #   resp.offer_terms[0].usage_based_pricing_term.rate_cards #=> Array
     #   resp.offer_terms[0].usage_based_pricing_term.rate_cards[0].rate_card #=> Array
@@ -1832,14 +1851,17 @@ module Aws::MarketplaceDiscovery
     #   resp.offer_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].unit #=> String
     #   resp.offer_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].price #=> String
     #   resp.offer_terms[0].validity_term.id #=> String
-    #   resp.offer_terms[0].validity_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].validity_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].validity_term.agreement_duration #=> String
     #   resp.offer_terms[0].validity_term.agreement_end_date #=> Time
     #   resp.offer_terms[0].validity_term.agreement_start_date #=> Time
     #   resp.offer_terms[0].variable_payment_term.id #=> String
-    #   resp.offer_terms[0].variable_payment_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm"
+    #   resp.offer_terms[0].variable_payment_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].variable_payment_term.currency_code #=> String
     #   resp.offer_terms[0].variable_payment_term.max_total_charge_amount #=> String
+    #   resp.offer_terms[0].net_payment_term.id #=> String
+    #   resp.offer_terms[0].net_payment_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
+    #   resp.offer_terms[0].net_payment_term.payment_due_period #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferTerms AWS API Documentation
@@ -1863,10 +1885,10 @@ module Aws::MarketplaceDiscovery
     #   * {Types::GetProductOutput#product_id #product_id} => String
     #   * {Types::GetProductOutput#catalog #catalog} => String
     #   * {Types::GetProductOutput#product_name #product_name} => String
+    #   * {Types::GetProductOutput#manufacturer #manufacturer} => Types::SellerInformation
     #   * {Types::GetProductOutput#deployed_on_aws #deployed_on_aws} => String
     #   * {Types::GetProductOutput#short_description #short_description} => String
     #   * {Types::GetProductOutput#long_description #long_description} => String
-    #   * {Types::GetProductOutput#manufacturer #manufacturer} => Types::SellerInformation
     #   * {Types::GetProductOutput#logo_thumbnail_url #logo_thumbnail_url} => String
     #   * {Types::GetProductOutput#fulfillment_option_summaries #fulfillment_option_summaries} => Array&lt;Types::FulfillmentOptionSummary&gt;
     #   * {Types::GetProductOutput#categories #categories} => Array&lt;Types::Category&gt;
@@ -2110,11 +2132,11 @@ module Aws::MarketplaceDiscovery
     #   resp.product_id #=> String
     #   resp.catalog #=> String
     #   resp.product_name #=> String
+    #   resp.manufacturer.seller_profile_id #=> String
+    #   resp.manufacturer.display_name #=> String
     #   resp.deployed_on_aws #=> String, one of "DEPLOYED", "NOT_DEPLOYED", "NOT_APPLICABLE"
     #   resp.short_description #=> String
     #   resp.long_description #=> String
-    #   resp.manufacturer.seller_profile_id #=> String
-    #   resp.manufacturer.display_name #=> String
     #   resp.logo_thumbnail_url #=> String
     #   resp.fulfillment_option_summaries #=> Array
     #   resp.fulfillment_option_summaries[0].fulfillment_option_type #=> String, one of "AMAZON_MACHINE_IMAGE", "API", "CLOUDFORMATION_TEMPLATE", "CONTAINER", "HELM", "EKS_ADD_ON", "EC2_IMAGE_BUILDER_COMPONENT", "DATA_EXCHANGE", "PROFESSIONAL_SERVICES", "SAAS", "SAGEMAKER_ALGORITHM", "SAGEMAKER_MODEL"
@@ -3227,15 +3249,15 @@ module Aws::MarketplaceDiscovery
     #   resp.listing_summaries[0].listing_name #=> String
     #   resp.listing_summaries[0].publisher.seller_profile_id #=> String
     #   resp.listing_summaries[0].publisher.display_name #=> String
+    #   resp.listing_summaries[0].fulfillment_option_summaries #=> Array
+    #   resp.listing_summaries[0].fulfillment_option_summaries[0].fulfillment_option_type #=> String, one of "AMAZON_MACHINE_IMAGE", "API", "CLOUDFORMATION_TEMPLATE", "CONTAINER", "HELM", "EKS_ADD_ON", "EC2_IMAGE_BUILDER_COMPONENT", "DATA_EXCHANGE", "PROFESSIONAL_SERVICES", "SAAS", "SAGEMAKER_ALGORITHM", "SAGEMAKER_MODEL"
+    #   resp.listing_summaries[0].fulfillment_option_summaries[0].display_name #=> String
     #   resp.listing_summaries[0].catalog #=> String
     #   resp.listing_summaries[0].short_description #=> String
     #   resp.listing_summaries[0].logo_thumbnail_url #=> String
     #   resp.listing_summaries[0].categories #=> Array
     #   resp.listing_summaries[0].categories[0].category_id #=> String
     #   resp.listing_summaries[0].categories[0].display_name #=> String
-    #   resp.listing_summaries[0].fulfillment_option_summaries #=> Array
-    #   resp.listing_summaries[0].fulfillment_option_summaries[0].fulfillment_option_type #=> String, one of "AMAZON_MACHINE_IMAGE", "API", "CLOUDFORMATION_TEMPLATE", "CONTAINER", "HELM", "EKS_ADD_ON", "EC2_IMAGE_BUILDER_COMPONENT", "DATA_EXCHANGE", "PROFESSIONAL_SERVICES", "SAAS", "SAGEMAKER_ALGORITHM", "SAGEMAKER_MODEL"
-    #   resp.listing_summaries[0].fulfillment_option_summaries[0].display_name #=> String
     #   resp.listing_summaries[0].badges #=> Array
     #   resp.listing_summaries[0].badges[0].display_name #=> String
     #   resp.listing_summaries[0].badges[0].badge_type #=> String, one of "AWS_FREE_TIER", "FREE_TRIAL", "DEPLOYED_ON_AWS", "QUICK_LAUNCH", "MULTI_PRODUCT"
@@ -3285,7 +3307,7 @@ module Aws::MarketplaceDiscovery
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacediscovery'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

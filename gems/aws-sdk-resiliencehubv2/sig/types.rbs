@@ -133,7 +133,7 @@ module Aws::Resiliencehubv2
 
     class CreateReportRequest
       attr_accessor service_arn: ::String
-      attr_accessor report_type: ("FAILURE_MODE")
+      attr_accessor report_type: ("FAILURE_MODE" | "TESTING")
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -203,6 +203,21 @@ module Aws::Resiliencehubv2
 
     class CreateSystemResponse
       attr_accessor system: Types::System
+      SENSITIVE: []
+    end
+
+    class CreateTestRequest
+      attr_accessor service_arn: ::String
+      attr_accessor test_template_arn: ::String
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor stop_conditions: ::Array[Types::StopCondition]
+      attr_accessor role_name: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class CreateTestResponse
+      attr_accessor test: Types::Test
       SENSITIVE: []
     end
 
@@ -309,6 +324,27 @@ module Aws::Resiliencehubv2
       SENSITIVE: []
     end
 
+    class DeleteTestRequest
+      attr_accessor test_id: ::String
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTestResponse
+      attr_accessor test_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTestSourcesRequest
+      attr_accessor test_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor test_sources: ::Array[Types::TestSourceInput]
+      SENSITIVE: []
+    end
+
+    class DeleteTestSourcesResponse < Aws::EmptyStructure
+    end
+
     class DeleteUserJourneyRequest
       attr_accessor system_arn: ::String
       attr_accessor user_journey_id: ::String
@@ -379,6 +415,12 @@ module Aws::Resiliencehubv2
       attr_accessor principal_id: ::String
       attr_accessor account_id: ::String
       attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentDetails
+      attr_accessor experiment_arn: ::String
+      attr_accessor details: ::String
       SENSITIVE: []
     end
 
@@ -457,6 +499,38 @@ module Aws::Resiliencehubv2
 
     class GetSystemResponse
       attr_accessor system: Types::System
+      SENSITIVE: []
+    end
+
+    class GetTestRequest
+      attr_accessor test_id: ::String
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTestResponse
+      attr_accessor test: Types::Test
+      SENSITIVE: []
+    end
+
+    class GetTestRunRequest
+      attr_accessor test_run_id: ::String
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTestRunResponse
+      attr_accessor test_run: Types::TestRun
+      SENSITIVE: []
+    end
+
+    class GetTestTemplateRequest
+      attr_accessor test_template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTestTemplateResponse
+      attr_accessor test_template: Types::TestTemplate
       SENSITIVE: []
     end
 
@@ -623,7 +697,8 @@ module Aws::Resiliencehubv2
 
     class ListReportsRequest
       attr_accessor service_arn: ::String
-      attr_accessor report_type: ("FAILURE_MODE")
+      attr_accessor report_type: ("FAILURE_MODE" | "TESTING")
+      attr_accessor test_run_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -631,6 +706,20 @@ module Aws::Resiliencehubv2
 
     class ListReportsResponse
       attr_accessor report_generation_results: ::Array[Types::ReportGenerationResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResolvedTestRunTargetResourcesRequest
+      attr_accessor test_run_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResolvedTestRunTargetResourcesResponse
+      attr_accessor resolved_target_resources: ::Array[Types::ResolvedTargetResource]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -752,6 +841,87 @@ module Aws::Resiliencehubv2
       SENSITIVE: [:tags]
     end
 
+    class ListTestRunEventsRequest
+      attr_accessor test_run_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestRunEventsResponse
+      attr_accessor events: ::Array[Types::TestRunEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestRunSourcesRequest
+      attr_accessor test_run_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor type: ("SUCCESS_CRITERIA" | "OBSERVABILITY")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestRunSourcesResponse
+      attr_accessor test_run_sources: ::Array[Types::TestRunSourceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestRunsRequest
+      attr_accessor service_arn: ::String
+      attr_accessor test_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestRunsResponse
+      attr_accessor test_runs: ::Array[Types::TestRunSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestSourcesRequest
+      attr_accessor test_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor type: ("SUCCESS_CRITERIA" | "OBSERVABILITY")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestSourcesResponse
+      attr_accessor test_sources: ::Array[Types::TestSourceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestTemplatesRequest < Aws::EmptyStructure
+    end
+
+    class ListTestTemplatesResponse
+      attr_accessor test_templates: ::Array[Types::TestTemplateSummary]
+      SENSITIVE: []
+    end
+
+    class ListTestsRequest
+      attr_accessor service_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestsResponse
+      attr_accessor tests: ::Array[Types::TestSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListUserJourneysRequest
       attr_accessor system_arn: ::String
       attr_accessor max_results: ::Integer
@@ -762,6 +932,13 @@ module Aws::Resiliencehubv2
     class ListUserJourneysResponse
       attr_accessor user_journey_summaries: ::Array[Types::UserJourneySummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoggingConfiguration
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor log_schema_version: ::String
       SENSITIVE: []
     end
 
@@ -776,6 +953,20 @@ module Aws::Resiliencehubv2
       attr_accessor rto_in_minutes: ::Integer
       attr_accessor rpo_in_minutes: ::Integer
       attr_accessor disaster_recovery_approach: ("ACTIVE_ACTIVE" | "HOT_STANDBY" | "WARM_STANDBY" | "PILOT_LIGHT" | "BACKUP_AND_RESTORE")
+      SENSITIVE: []
+    end
+
+    class ObservabilityAlarmInput
+      attr_accessor alarm_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ObservabilityAlarmSummary
+      attr_accessor alarm_arn: ::String
+      attr_accessor alarm_name: ::String
+      attr_accessor region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor created_at: ::Time
       SENSITIVE: []
     end
 
@@ -819,6 +1010,16 @@ module Aws::Resiliencehubv2
       SENSITIVE: []
     end
 
+    class PutTestSourcesRequest
+      attr_accessor test_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor test_sources: ::Array[Types::TestSourceInput]
+      SENSITIVE: []
+    end
+
+    class PutTestSourcesResponse < Aws::EmptyStructure
+    end
+
     class QueryDataPoint
       attr_accessor timestamp: ::Time
       attr_accessor query_count: ::Integer
@@ -834,10 +1035,12 @@ module Aws::Resiliencehubv2
     end
 
     class ReportGenerationResult
-      attr_accessor report_type: ("FAILURE_MODE")
+      attr_accessor report_type: ("FAILURE_MODE" | "TESTING")
       attr_accessor status: ("PENDING" | "SUCCEEDED" | "FAILED")
       attr_accessor service_arn: ::String
       attr_accessor assessment_id: ::String
+      attr_accessor test_run_id: ::String
+      attr_accessor test_template_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor report_output: Types::ReportOutput
       SENSITIVE: []
@@ -866,6 +1069,13 @@ module Aws::Resiliencehubv2
       end
       class Unknown < ReportOutputConfiguration
       end
+    end
+
+    class ResolvedTargetResource
+      attr_accessor resource_type: ::String
+      attr_accessor target_name: ::String
+      attr_accessor target_information: ::Hash[::String, ::String]
+      SENSITIVE: []
     end
 
     class Resource
@@ -1228,9 +1438,54 @@ module Aws::Resiliencehubv2
       SENSITIVE: []
     end
 
+    class StartTestRunRequest
+      attr_accessor test_id: ::String
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartTestRunResponse
+      attr_accessor test_run_id: ::String
+      attr_accessor status: ("INITIALIZING" | "RUNNING" | "STOPPING" | "PASSED" | "FAILED" | "STOPPED" | "ERROR")
+      attr_accessor experiment_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StopCondition
+      attr_accessor source: ("aws:cloudwatch:alarm" | "none")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class StopTestRunRequest
+      attr_accessor test_run_id: ::String
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopTestRunResponse
+      attr_accessor test_run_id: ::String
+      attr_accessor status: ("INITIALIZING" | "RUNNING" | "STOPPING" | "PASSED" | "FAILED" | "STOPPED" | "ERROR")
+      SENSITIVE: []
+    end
+
     class StringChange
       attr_accessor old_value: ::String
       attr_accessor new_value: ::String
+      SENSITIVE: []
+    end
+
+    class SuccessCriteriaAlarmInput
+      attr_accessor alarm_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SuccessCriteriaAlarmSummary
+      attr_accessor alarm_arn: ::String
+      attr_accessor alarm_name: ::String
+      attr_accessor region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor created_at: ::Time
       SENSITIVE: []
     end
 
@@ -1381,6 +1636,187 @@ module Aws::Resiliencehubv2
       SENSITIVE: []
     end
 
+    class Test
+      attr_accessor test_id: ::String
+      attr_accessor test_template_arn: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor actions: ::Array[Types::TestAction]
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor stop_conditions: ::Array[Types::StopCondition]
+      attr_accessor role_name: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor total_test_runs: ::Integer
+      attr_accessor successful_test_runs: ::Integer
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TestAction
+      attr_accessor action_id: ::String
+      attr_accessor description: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class TestRun
+      attr_accessor test_run_id: ::String
+      attr_accessor test_id: ::String
+      attr_accessor status: ("INITIALIZING" | "RUNNING" | "STOPPING" | "PASSED" | "FAILED" | "STOPPED" | "ERROR")
+      attr_accessor service_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor experiments: ::Array[Types::ExperimentDetails]
+      attr_accessor event_count: ::Integer
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor error_message: ::String
+      attr_accessor stop_conditions: ::Array[Types::StopCondition]
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor role_name: ::String
+      attr_accessor test_template_arn: ::String
+      attr_accessor report_configuration: Types::TestRunReportConfiguration
+      attr_accessor policy: Types::TestRunPolicySnapshot
+      attr_accessor report_output: Types::ReportGenerationResult
+      attr_accessor region_switch_plan_arn: ::String
+      attr_accessor region_switch_execution_id: ::String
+      attr_accessor permission_model: Types::PermissionModel
+      attr_accessor regions: ::Array[::String]
+      attr_accessor account_targeting: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class TestRunEvent
+      attr_accessor event_id: ::String
+      attr_accessor event_type: ::String
+      attr_accessor message: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TestRunObservabilityAlarmSummary
+      attr_accessor alarm_arn: ::String
+      attr_accessor alarm_name: ::String
+      attr_accessor region: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class TestRunPolicySnapshot
+      attr_accessor policy_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor availability_slo: Types::AvailabilitySlo
+      attr_accessor multi_az: Types::MultiAzTargets
+      attr_accessor multi_region: Types::MultiRegionTargets
+      attr_accessor data_recovery: Types::DataRecoveryTargets
+      SENSITIVE: []
+    end
+
+    class TestRunReportConfiguration
+      attr_accessor report_output: ::Array[Types::ReportOutputConfiguration]
+      SENSITIVE: []
+    end
+
+    class TestRunSourceSummary
+      attr_accessor success_criteria_alarm: Types::TestRunSuccessCriteriaAlarmSummary
+      attr_accessor observability_alarm: Types::TestRunObservabilityAlarmSummary
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SuccessCriteriaAlarm < TestRunSourceSummary
+      end
+      class ObservabilityAlarm < TestRunSourceSummary
+      end
+      class Unknown < TestRunSourceSummary
+      end
+    end
+
+    class TestRunSuccessCriteriaAlarmSummary
+      attr_accessor alarm_arn: ::String
+      attr_accessor alarm_name: ::String
+      attr_accessor region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor outcome: ("PASSED" | "FAILED" | "ERROR")
+      attr_accessor outcome_reason: ::String
+      SENSITIVE: []
+    end
+
+    class TestRunSummary
+      attr_accessor test_run_id: ::String
+      attr_accessor status: ("INITIALIZING" | "RUNNING" | "STOPPING" | "PASSED" | "FAILED" | "STOPPED" | "ERROR")
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor test_template_arn: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor account_targeting: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class TestSourceInput
+      attr_accessor success_criteria_alarm: Types::SuccessCriteriaAlarmInput
+      attr_accessor observability_alarm: Types::ObservabilityAlarmInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SuccessCriteriaAlarm < TestSourceInput
+      end
+      class ObservabilityAlarm < TestSourceInput
+      end
+      class Unknown < TestSourceInput
+      end
+    end
+
+    class TestSourceSummary
+      attr_accessor success_criteria_alarm: Types::SuccessCriteriaAlarmSummary
+      attr_accessor observability_alarm: Types::ObservabilityAlarmSummary
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SuccessCriteriaAlarm < TestSourceSummary
+      end
+      class ObservabilityAlarm < TestSourceSummary
+      end
+      class Unknown < TestSourceSummary
+      end
+    end
+
+    class TestSummary
+      attr_accessor test_id: ::String
+      attr_accessor test_template_arn: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor total_test_runs: ::Integer
+      attr_accessor successful_test_runs: ::Integer
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TestTemplate
+      attr_accessor test_template_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Array[Types::TestTemplateParameter]
+      attr_accessor actions: ::Array[Types::TestAction]
+      SENSITIVE: []
+    end
+
+    class TestTemplateParameter
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("STRING" | "STRING_LIST" | "INTEGER")
+      attr_accessor required: bool
+      attr_accessor default_value: ::String
+      attr_accessor max_values: ::Integer
+      SENSITIVE: []
+    end
+
+    class TestTemplateSummary
+      attr_accessor test_template_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
     class TestingRecommendation
       attr_accessor suggested_changes: ::Array[::String]
       SENSITIVE: []
@@ -1500,6 +1936,21 @@ module Aws::Resiliencehubv2
 
     class UpdateSystemResponse
       attr_accessor system: Types::System
+      SENSITIVE: []
+    end
+
+    class UpdateTestRequest
+      attr_accessor test_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor stop_conditions: ::Array[Types::StopCondition]
+      attr_accessor role_name: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class UpdateTestResponse
+      attr_accessor test: Types::Test
       SENSITIVE: []
     end
 

@@ -216,6 +216,7 @@ module Aws::CodeCommit
   # * {TipsDivergenceExceededException}
   # * {TitleRequiredException}
   # * {TooManyTagsException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -2108,6 +2109,16 @@ module Aws::CodeCommit
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodeCommit::Types::TooManyTagsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeCommit::Types::ValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

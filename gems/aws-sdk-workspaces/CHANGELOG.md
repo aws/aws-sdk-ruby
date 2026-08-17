@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2026-08-04)
+------------------
+
+* Feature - Added ClientExperiencePolicy to ClientProperties object for ModifyClientProperties and DescribeClientProperties APIs.
+
 1.162.0 (2026-07-09)
 ------------------
 

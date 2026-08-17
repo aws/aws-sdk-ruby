@@ -31,6 +31,8 @@ module Aws::AutoScaling
   #    * This error class is not used. `ActiveInstanceRefreshNotFound` is used during parsing instead.
   # * {AlreadyExistsFault}
   #    * This error class is not used. `AlreadyExists` is used during parsing instead.
+  # * {IdempotentCallInProgressFault}
+  #    * This error class is not used. `IdempotentCallInProgress` is used during parsing instead.
   # * {IdempotentParameterMismatchError}
   #    * This error class is not used. `IdempotentParameterMismatch` is used during parsing instead.
   # * {InstanceRefreshInProgressFault}
@@ -78,6 +80,23 @@ module Aws::AutoScaling
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::AutoScaling::Types::AlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `IdempotentCallInProgress` instead.
+    class IdempotentCallInProgressFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AutoScaling::Types::IdempotentCallInProgressFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -812,7 +812,14 @@ module Aws::DataSync
     #   The NameNode that manages the HDFS namespace. The NameNode performs
     #   operations such as opening, closing, and renaming files and
     #   directories. The NameNode contains the information to map blocks of
-    #   data to the DataNodes. You can use only one NameNode.
+    #   data to the DataNodes.
+    #
+    #   The number of NameNodes you can specify depends on the task mode:
+    #
+    #   * **Enhanced mode** – You can specify multiple NameNodes for HDFS
+    #     High Availability (HA) configurations.
+    #
+    #   * **Basic mode** – You can specify only one NameNode.
     #   @return [Array<Types::HdfsNameNode>]
     #
     # @!attribute [rw] block_size
@@ -4419,10 +4426,15 @@ module Aws::DataSync
     #
     #   * `NONE` - Ignores `Atime`.
     #
-    #   <note markdown="1"> If `Atime` is set to `BEST_EFFORT`, `Mtime` must be set to
+    #   <note markdown="1"> The following applies only to Basic mode tasks:
+    #
+    #    If `Atime` is set to `BEST_EFFORT`, `Mtime` must be set to
     #   `PRESERVE`.
     #
     #    If `Atime` is set to `NONE`, `Mtime` must also be `NONE`.
+    #
+    #    Enhanced mode tasks support configuring `Atime` independently of
+    #   `Mtime`.
     #
     #    </note>
     #   @return [String]
@@ -4438,10 +4450,14 @@ module Aws::DataSync
     #
     #   * `NONE` - Ignores `Mtime`.
     #
-    #   <note markdown="1"> If `Mtime` is set to `PRESERVE`, `Atime` must be set to
+    #   <note markdown="1"> The following applies only to Basic mode tasks:
+    #
+    #    If `Mtime` is set to `PRESERVE`, `Atime` must be set to
     #   `BEST_EFFORT`.
     #
     #    If `Mtime` is set to `NONE`, `Atime` must also be set to `NONE`.
+    #
+    #    Enhanced mode tasks don't support `Mtime` set to `NONE`.
     #
     #    </note>
     #   @return [String]
@@ -6210,7 +6226,14 @@ module Aws::DataSync
     #   The NameNode that manages the HDFS namespace. The NameNode performs
     #   operations such as opening, closing, and renaming files and
     #   directories. The NameNode contains the information to map blocks of
-    #   data to the DataNodes. You can use only one NameNode.
+    #   data to the DataNodes.
+    #
+    #   The number of NameNodes you can specify depends on the task mode:
+    #
+    #   * Enhanced mode – You can specify multiple NameNodes for HDFS High
+    #     Availability (HA) configurations.
+    #
+    #   * Basic mode – You can specify only one NameNode.
     #   @return [Array<Types::HdfsNameNode>]
     #
     # @!attribute [rw] block_size

@@ -1385,7 +1385,19 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Creates a pool of WorkSpaces.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_name
     #   The name of the pool.
@@ -2144,6 +2156,7 @@ module Aws::WorkSpaces
     #   resp.client_properties_list[0].resource_id #=> String
     #   resp.client_properties_list[0].client_properties.reconnect_enabled #=> String, one of "ENABLED", "DISABLED"
     #   resp.client_properties_list[0].client_properties.log_upload_enabled #=> String, one of "ENABLED", "DISABLED"
+    #   resp.client_properties_list[0].client_properties.client_experience_policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientProperties AWS API Documentation
     #
@@ -2988,8 +3001,20 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Retrieves a list that describes the streaming sessions for a specified
     # pool.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_id
     #   The identifier of the pool.
@@ -3043,7 +3068,19 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Describes the specified WorkSpaces Pools.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [Array<String>] :pool_ids
     #   The identifier of the WorkSpaces Pools.
@@ -3837,6 +3874,7 @@ module Aws::WorkSpaces
     #     client_properties: { # required
     #       reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
     #       log_upload_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #       client_experience_policy: "ClientExperiencePolicy",
     #     },
     #   })
     #
@@ -4519,10 +4557,22 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Starts the specified pool.
     #
     # You cannot start a pool unless it has a running mode of `AutoStop` and
     # a state of `STOPPED`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_id
     #   The identifier of the pool.
@@ -4583,11 +4633,23 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Stops the specified pool.
     #
     # You cannot stop a WorkSpace pool unless it has a running mode of
     # `AutoStop` and a state of `AVAILABLE`, `IMPAIRED`, `UNHEALTHY`, or
     # `ERROR`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_id
     #   The identifier of the pool.
@@ -4678,7 +4740,19 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Terminates the specified pool.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_id
     #   The identifier of the pool.
@@ -4700,7 +4774,19 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Terminates the pool session.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :session_id
     #   The identifier of the pool session.
@@ -4947,7 +5033,19 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Updates the specified pool.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_id
     #   The identifier of the specified pool to update.
@@ -5052,7 +5150,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.163.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

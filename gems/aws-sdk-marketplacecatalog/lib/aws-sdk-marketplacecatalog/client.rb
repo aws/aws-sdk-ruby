@@ -955,6 +955,15 @@ module Aws::MarketplaceCatalog
     #         offer_set_id: {
     #           value_list: ["OfferSetIdString"],
     #         },
+    #         target_agreement_id: {
+    #           value_list: ["OfferTargetAgreementIdString"],
+    #         },
+    #         target_agreement_intent: {
+    #           value_list: ["Renew"], # accepts Renew
+    #         },
+    #         created_by_source: {
+    #           value_list: ["Seller"], # accepts Seller, AwsMarketplace
+    #         },
     #       },
     #       container_product_filters: {
     #         entity_id: {
@@ -1098,7 +1107,7 @@ module Aws::MarketplaceCatalog
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       offer_sort: {
-    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ResaleAuthorizationId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate, OfferSetId
+    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ResaleAuthorizationId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate, OfferSetId, TargetAgreementId, TargetAgreementIntent, CreatedBySource
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       container_product_sort: {
@@ -1148,6 +1157,9 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].offer_summary.targeting #=> Array
     #   resp.entity_summary_list[0].offer_summary.targeting[0] #=> String, one of "BuyerAccounts", "ParticipatingPrograms", "CountryCodes", "None"
     #   resp.entity_summary_list[0].offer_summary.offer_set_id #=> String
+    #   resp.entity_summary_list[0].offer_summary.target_agreement_id #=> String
+    #   resp.entity_summary_list[0].offer_summary.target_agreement_intent #=> String, one of "Renew"
+    #   resp.entity_summary_list[0].offer_summary.created_by_source #=> String, one of "Seller", "AwsMarketplace"
     #   resp.entity_summary_list[0].resale_authorization_summary.name #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.product_id #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.product_name #=> String
@@ -1451,7 +1463,7 @@ module Aws::MarketplaceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

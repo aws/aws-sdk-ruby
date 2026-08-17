@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2026-08-07)
+------------------
+
+* Feature - StreamNameOutputMode - a new optional field on MediaPackageV2 OriginEndpoints that lets customers choose whether egress manifests use numeric stream indices (default) or encoder-assigned stream names from the input
+
 1.69.0 (2026-07-23)
 ------------------
 

@@ -432,9 +432,9 @@ module Aws::SageMaker
 
     # The per-recommendation LoRA adapter details. Contains both the model
     # package ARNs and Amazon S3 URIs for each adapter, regardless of which
-    # form was originally supplied in the request. When the customer
-    # supplies only Amazon S3 URIs, Amazon SageMaker AI creates model
-    # packages on their behalf.
+    # form was originally supplied in the request. When you supply only
+    # Amazon S3 URIs, Amazon SageMaker AI creates model packages on your
+    # behalf.
     #
     # @!attribute [rw] model_package_arns
     #   The list of LoRA adapters with their model package ARNs.
@@ -515,12 +515,10 @@ module Aws::SageMaker
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] min_cpu_memory_required_in_mb
-    #   The minimum host (CPU) memory, in MiB, to reserve per model copy
-    #   when deploying the recommendation as an Inference Component. This
-    #   value maps to the base Inference Component's
-    #   `ComputeResourceRequirements$MinMemoryRequiredInMb` and is sized so
-    #   that `CopyCountPerInstance` copies co-place within the instance's
-    #   allocatable host memory.
+    #   The minimum host (CPU) memory, in MiB, to reserve for each model
+    #   copy when deploying the recommendation as an Inference Component.
+    #   This value maps to the Inference Component's
+    #   `ComputeResourceRequirements$MinMemoryRequiredInMb` field.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AIRecommendationDeploymentConfiguration AWS API Documentation
@@ -13485,7 +13483,7 @@ module Aws::SageMaker
     #   When you use reserved capacity from a training plan, the
     #   optimization job runs on that reserved capacity instead of on-demand
     #   capacity. If you omit this field, the job uses on-demand capacity.
-    #   Currently, you can specify at most one training plan.
+    #   You can specify at most one training plan.
     #
     #   For more information about how to reserve GPU capacity for your
     #   optimization jobs using Amazon SageMaker Training Plans, see
@@ -17363,8 +17361,8 @@ module Aws::SageMaker
     #   @return [Types::AIRecommendationComputeSpec]
     #
     # @!attribute [rw] adapter_source
-    #   The LoRA adapter source that was specified when the recommendation
-    #   job was created. This field is absent when the job was created
+    #   The LoRA adapter source that you specified when you created the
+    #   recommendation job. This field is absent when you created the job
     #   without LoRA adapters.
     #   @return [Types::AIAdapterSource]
     #
@@ -46191,6 +46189,44 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration for prefix-aware routing on a SageMaker real-time
+    # inference endpoint. Specify `PrefixLength` and `ConcurrencyThreshold`
+    # to control routing behavior.
+    #
+    # @!attribute [rw] prefix_length
+    #   The maximum length of the prefix used for routing decisions.
+    #   Required when `RoutingStrategy` is `PREFIX_AWARE`.
+    #
+    #   * For the SageMaker Runtime `InvokeEndpoint` and
+    #     `InvokeEndpointWithResponseStream` APIs, this value specifies the
+    #     number of bytes from the beginning of the request body.
+    #
+    #   * For OpenAI-compatible API, this value specifies the number of
+    #     characters from the text content of the messages array.
+    #
+    #   The endpoint routes requests that share the same prefix to the same
+    #   instance. Set this value to cover shared content (such as system
+    #   prompts) plus enough unique content to distribute workloads across
+    #   instances.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] concurrency_threshold
+    #   The maximum number of in-flight requests on the target instance
+    #   before the endpoint routes to another instance. Required when
+    #   `RoutingStrategy` is `PREFIX_AWARE`. When in-flight requests on the
+    #   prefix-selected instance reach this threshold, the endpoint routes
+    #   the request to an instance with more available capacity.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PrefixAwareRoutingConfig AWS API Documentation
+    #
+    class PrefixAwareRoutingConfig < Struct.new(
+      :prefix_length,
+      :concurrency_threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for accessing hub content through presigned URLs,
     # including license agreement acceptance and URL validation settings.
     #
@@ -47191,12 +47227,24 @@ module Aws::SageMaker
     #
     #   * `RANDOM`: The endpoint routes each request to a randomly chosen
     #     instance.
+    #
+    #   * `PREFIX_AWARE`: The endpoint routes requests that share the same
+    #     prompt prefix to the same instance. When the number of in-flight
+    #     requests on the selected instance reaches the configured
+    #     threshold, the endpoint routes the request to an instance with
+    #     more available capacity.
     #   @return [String]
+    #
+    # @!attribute [rw] prefix_aware_routing_config
+    #   The configuration for prefix-aware routing. Specify this parameter
+    #   only when you set `RoutingStrategy` to `PREFIX_AWARE`.
+    #   @return [Types::PrefixAwareRoutingConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantRoutingConfig AWS API Documentation
     #
     class ProductionVariantRoutingConfig < Struct.new(
-      :routing_strategy)
+      :routing_strategy,
+      :prefix_aware_routing_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51107,6 +51155,33 @@ module Aws::SageMaker
     #   reward prompt.
     #   @return [String]
     #
+    # @!attribute [rw] sequence_length
+    #   The maximum sequence length, in tokens, that the customization job
+    #   supports. SageMaker uses this value to select a training
+    #   configuration for the base model that you specify. The parameter
+    #   supports the following values:
+    #
+    #   * `1K`
+    #
+    #   * `2K`
+    #
+    #   * `4K`
+    #
+    #   * `8K`
+    #
+    #   * `16K`
+    #
+    #   * `32K`
+    #
+    #   * `64K`
+    #
+    #   * `128K`
+    #
+    #   If you don't specify a value, SageMaker selects a training
+    #   configuration based on the other values that you specify. The
+    #   selection is not restricted to a particular sequence length.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ServerlessJobConfig AWS API Documentation
     #
     class ServerlessJobConfig < Struct.new(
@@ -51116,7 +51191,8 @@ module Aws::SageMaker
       :customization_technique,
       :peft,
       :evaluation_type,
-      :evaluator_arn)
+      :evaluator_arn,
+      :sequence_length)
       SENSITIVE = []
       include Aws::Structure
     end

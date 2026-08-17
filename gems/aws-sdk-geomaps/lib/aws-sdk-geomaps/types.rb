@@ -849,6 +849,74 @@ module Aws::GeoMaps
     #   styles.
     #   @return [String]
     #
+    # @!attribute [rw] poi_density
+    #   Controls how densely points of interest are rendered on the map. The
+    #   density value controls the zoom level at which each category of
+    #   points of interest appears, and how quickly less prominent points of
+    #   interest are revealed as you zoom in. Denser values display more
+    #   points of interest at lower zoom levels.
+    #
+    #   Use `Off` to hide all points of interest. When you omit this
+    #   parameter, the map renders at `Default` density.
+    #
+    #   <note markdown="1"> The difference between density values is most noticeable at
+    #   mid-range zoom levels. At high zoom levels, all density values
+    #   converge on displaying every available point of interest.
+    #
+    #    </note>
+    #
+    #   This parameter is valid only for the `Standard` and `Hybrid` map
+    #   styles. In `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers, this parameter is valid only for the
+    #   `Standard` map style.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #   @return [String]
+    #
+    # @!attribute [rw] poi_categories
+    #   Renders only the specified categories of points of interest. When
+    #   you omit this parameter, the map renders all categories.
+    #
+    #   The following categories are currently supported:
+    #
+    #   * `FoodAndDrink`
+    #
+    #   * `Entertainment`
+    #
+    #   * `SightsAndMuseums`
+    #
+    #   * `Transportation`
+    #
+    #   * `Accommodations`
+    #
+    #   * `LeisureAndOutdoor`
+    #
+    #   * `Shopping`
+    #
+    #   * `BusinessAndServices`
+    #
+    #   * `FacilitiesAndBuildings`
+    #
+    #   Specify each category as a separate `poi-categories` query
+    #   parameter. Duplicate values are rejected.
+    #
+    #   <note markdown="1"> This parameter has no effect when `poi-density` is set to `Off`,
+    #   which hides all points of interest regardless of category.
+    #
+    #    </note>
+    #
+    #   This parameter is valid only for the `Standard` and `Hybrid` map
+    #   styles. In `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers, this parameter is valid only for the
+    #   `Standard` map style.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] key
     #   Optional: The API key to be used for authorization. Either an API
     #   key or valid SigV4 signature must be provided when making a request.
@@ -865,6 +933,8 @@ module Aws::GeoMaps
       :traffic,
       :travel_modes,
       :buildings,
+      :poi_density,
+      :poi_categories,
       :key)
       SENSITIVE = [:political_view, :key]
       include Aws::Structure

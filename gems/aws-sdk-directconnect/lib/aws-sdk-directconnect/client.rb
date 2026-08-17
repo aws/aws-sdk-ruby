@@ -4675,6 +4675,80 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Lists the routes for the specified virtual interface.
+    #
+    # Use the `routeDirection` filter to control which routes are returned:
+    #
+    # * `accepted`: routes received from the customer network over the
+    #   virtual interface.
+    #
+    # * `advertised`: routes advertised to the customer network over the
+    #   virtual interface.
+    #
+    # @option params [String] :virtual_interface_id
+    #   The ID of the virtual interface.
+    #
+    # @option params [Types::RouteFilters] :filters
+    #   The filters to apply to the routes returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListVirtualInterfaceRoutesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVirtualInterfaceRoutesResponse#virtual_interface_id #virtual_interface_id} => String
+    #   * {Types::ListVirtualInterfaceRoutesResponse#routes #routes} => Array&lt;Types::Route&gt;
+    #   * {Types::ListVirtualInterfaceRoutesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_virtual_interface_routes({
+    #     virtual_interface_id: "VirtualInterfaceId",
+    #     filters: {
+    #       route_direction: "accepted", # accepts accepted, advertised
+    #       address_family: "ipv4", # accepts ipv4, ipv6
+    #       cidrs: ["RouteFilterCidrString"],
+    #       as_path: [1],
+    #       communities: ["CommunityEntry"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface_id #=> String
+    #   resp.routes #=> Array
+    #   resp.routes[0].cidr #=> String
+    #   resp.routes[0].route_direction #=> String, one of "accepted", "advertised"
+    #   resp.routes[0].address_family #=> String, one of "ipv4", "ipv6"
+    #   resp.routes[0].as_path #=> Array
+    #   resp.routes[0].as_path[0].path_type #=> String, one of "seq", "set"
+    #   resp.routes[0].as_path[0].path #=> Array
+    #   resp.routes[0].as_path[0].path[0] #=> Integer
+    #   resp.routes[0].communities #=> Array
+    #   resp.routes[0].communities[0] #=> String
+    #   resp.routes[0].aws_logical_device_id #=> String
+    #   resp.routes[0].route_installed_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListVirtualInterfaceRoutes AWS API Documentation
+    #
+    # @overload list_virtual_interface_routes(params = {})
+    # @param [Hash] params ({})
+    def list_virtual_interface_routes(params = {}, options = {})
+      req = build_request(:list_virtual_interface_routes, params)
+      req.send_request(options)
+    end
+
     # Lists the virtual interface failover test history.
     #
     # @option params [String] :test_id
@@ -5401,7 +5475,7 @@ module Aws::DirectConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

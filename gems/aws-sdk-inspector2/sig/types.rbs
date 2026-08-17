@@ -2419,6 +2419,17 @@ module Aws::Inspector2
       attr_accessor ecr_image_tags: ::Array[Types::ResourceStringFilter]
       attr_accessor ec2_instance_tags: ::Array[Types::ResourceMapFilter]
       attr_accessor lambda_function_tags: ::Array[Types::ResourceMapFilter]
+      attr_accessor cloud_provider: ::Array[Types::ResourceStringFilter]
+      attr_accessor cloud_provider_account_id: ::Array[Types::ResourceStringFilter]
+      attr_accessor cloud_provider_org_id: ::Array[Types::ResourceStringFilter]
+      attr_accessor cloud_provider_region: ::Array[Types::ResourceStringFilter]
+      attr_accessor cloud_vm_instance_tags: ::Array[Types::ResourceMapFilter]
+      attr_accessor cloud_container_image_tags: ::Array[Types::ResourceStringFilter]
+      attr_accessor cloud_container_repository_name: ::Array[Types::ResourceStringFilter]
+      attr_accessor cloud_container_registry_name: ::Array[Types::ResourceStringFilter]
+      attr_accessor cloud_serverless_function_name: ::Array[Types::ResourceStringFilter]
+      attr_accessor cloud_serverless_function_runtime: ::Array[Types::ResourceStringFilter]
+      attr_accessor cloud_serverless_function_tags: ::Array[Types::ResourceMapFilter]
       SENSITIVE: []
     end
 

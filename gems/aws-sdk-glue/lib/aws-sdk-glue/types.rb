@@ -512,6 +512,17 @@ module Aws::Glue
     #   The unique identifier of the asset to associate glossary terms with.
     #   @return [String]
     #
+    # @!attribute [rw] iterable_form_name
+    #   The name of the iterable form. When specified along with
+    #   `itemIdentifier`, the glossary terms are associated with an item
+    #   within the iterable form rather than the asset itself.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier
+    #   The identifier of the item within the iterable form. Required when
+    #   `iterableFormName` is specified.
+    #   @return [String]
+    #
     # @!attribute [rw] glossary_term_identifiers
     #   The list of glossary term identifiers to associate with the asset.
     #   @return [Array<String>]
@@ -528,6 +539,8 @@ module Aws::Glue
     #
     class AssociateGlossaryTermsRequest < Struct.new(
       :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
       :glossary_term_identifiers,
       :client_token)
       SENSITIVE = []
@@ -538,6 +551,14 @@ module Aws::Glue
     #   The unique identifier of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] iterable_form_name
+    #   The name of the iterable form, if the association targets an item.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier
+    #   The identifier of the item within the iterable form, if applicable.
+    #   @return [String]
+    #
     # @!attribute [rw] glossary_terms
     #   The glossary terms now associated with the asset.
     #   @return [Array<String>]
@@ -546,6 +567,8 @@ module Aws::Glue
     #
     class AssociateGlossaryTermsResponse < Struct.new(
       :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
       :glossary_terms)
       SENSITIVE = []
       include Aws::Structure
@@ -1823,6 +1846,33 @@ module Aws::Glue
     #
     class BatchUpdatePartitionResponse < Struct.new(
       :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that defines how BETWEEN range filter operations are
+    # translated into REST API request parameters.
+    #
+    # @!attribute [rw] low_bound_key
+    #   The parameter name used for the lower bound value in a BETWEEN
+    #   filter operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] high_bound_key
+    #   The parameter name used for the upper bound value in a BETWEEN
+    #   filter operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   A template string for constructing the BETWEEN filter expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BetweenConfiguration AWS API Documentation
+    #
+    class BetweenConfiguration < Struct.new(
+      :low_bound_key,
+      :high_bound_key,
+      :template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5024,6 +5074,13 @@ module Aws::Glue
     #   The data type of this property
     #   @return [String]
     #
+    # @!attribute [rw] format
+    #   A format template for the property value that defines how the value
+    #   should be formatted before sending it in API requests. Use `{value}`
+    #   as a placeholder for the actual property value (for example, `SSWS
+    #   {value}`).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectorProperty AWS API Documentation
     #
     class ConnectorProperty < Struct.new(
@@ -5033,7 +5090,8 @@ module Aws::Glue
       :default_value,
       :allowed_values,
       :property_location,
-      :property_type)
+      :property_type,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9771,10 +9829,20 @@ module Aws::Glue
     #   The unique identifier of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] iterable_form_name
+    #   The name of the iterable form, if the deletion targets an item.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier
+    #   The identifier of the item within the iterable form, if applicable.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAttachmentResponse AWS API Documentation
     #
     class DeleteAttachmentResponse < Struct.new(
-      :asset_identifier)
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11419,6 +11487,17 @@ module Aws::Glue
     #   from.
     #   @return [String]
     #
+    # @!attribute [rw] iterable_form_name
+    #   The name of the iterable form. When specified along with
+    #   `itemIdentifier`, the glossary terms are disassociated from an item
+    #   within the iterable form rather than the asset itself.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier
+    #   The identifier of the item within the iterable form. Required when
+    #   `iterableFormName` is specified.
+    #   @return [String]
+    #
     # @!attribute [rw] glossary_term_identifiers
     #   The list of glossary term identifiers to disassociate from the
     #   asset.
@@ -11436,6 +11515,8 @@ module Aws::Glue
     #
     class DisassociateGlossaryTermsRequest < Struct.new(
       :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
       :glossary_term_identifiers,
       :client_token)
       SENSITIVE = []
@@ -11446,6 +11527,15 @@ module Aws::Glue
     #   The unique identifier of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] iterable_form_name
+    #   The name of the iterable form, if the disassociation targets an
+    #   item.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier
+    #   The identifier of the item within the iterable form, if applicable.
+    #   @return [String]
+    #
     # @!attribute [rw] glossary_terms
     #   The remaining glossary terms associated with the asset.
     #   @return [Array<String>]
@@ -11454,6 +11544,8 @@ module Aws::Glue
     #
     class DisassociateGlossaryTermsResponse < Struct.new(
       :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
       :glossary_terms)
       SENSITIVE = []
       include Aws::Structure
@@ -12149,6 +12241,26 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The encryption configuration for exported data catalog metadata.
+    #
+    # @!attribute [rw] sse_algorithm
+    #   The server-side encryption algorithm used for the exported data.
+    #   Valid values are `AES256` and `aws:kms`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the KMS key used to encrypt the exported data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ExportEncryptionConfiguration AWS API Documentation
+    #
+    class ExportEncryptionConfiguration < Struct.new(
+      :sse_algorithm,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies configuration properties for an exporting labels task run.
     #
     # @!attribute [rw] output_s3_path
@@ -12453,11 +12565,48 @@ module Aws::Glue
     #   The data type of the field.
     #   @return [String]
     #
+    # @!attribute [rw] response_date_format
+    #   The format pattern for parsing date values from API responses.
+    #   Required when the API uses a non-ISO-8601 format. Accepts Java
+    #   `DateTimeFormatter` patterns (for example, `EEE, d MMM yyyy HH:mm:ss
+    #   Z`), `EPOCH_SECONDS` for Unix epoch seconds, or `EPOCH_MILLIS` for
+    #   Unix epoch milliseconds.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_partitionable
+    #   Indicates whether this field can be used for partitioning queries to
+    #   the data source.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_nullable
+    #   Indicates whether this field can contain null values.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_queryable
+    #   Indicates whether this field can be used in filter predicates when
+    #   querying data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_orderable
+    #   Indicates whether this field can be used for ordering results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filter_overrides
+    #   Per-field overrides for filter behavior, allowing customization of
+    #   how filters are applied to this specific field.
+    #   @return [Types::FilterOverrides]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FieldDefinition AWS API Documentation
     #
     class FieldDefinition < Struct.new(
       :name,
-      :field_data_type)
+      :field_data_type,
+      :response_date_format,
+      :is_partitionable,
+      :is_nullable,
+      :is_queryable,
+      :is_orderable,
+      :filter_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12527,6 +12676,59 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Configuration that defines how filter predicates are applied to REST
+    # API requests, supporting both query parameter and filter string
+    # strategies.
+    #
+    # @!attribute [rw] filter_mode
+    #   The strategy for applying filters to requests. Use `QUERY_PARAMS` to
+    #   pass filters as individual query parameters, or `FILTER_STRING` to
+    #   construct a single filter expression string.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator_mappings
+    #   A map of logical filter operators to their API-specific string
+    #   representations. Supported operator keys are: `EQUAL_TO`,
+    #   `NOT_EQUAL_TO`, `LESS_THAN`, `GREATER_THAN`,
+    #   `LESS_THAN_OR_EQUAL_TO`, `GREATER_THAN_OR_EQUAL_TO`, `CONTAINS`,
+    #   `BETWEEN`, `AND`, and `OR`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] date_time_format
+    #   The global date and time format for filter expressions. Accepts Java
+    #   `DateTimeFormatter` patterns (for example, `EEE, d MMM yyyy HH:mm:ss
+    #   Z`), `EPOCH_SECONDS` for Unix epoch seconds, or `EPOCH_MILLIS` for
+    #   Unix epoch milliseconds. If not specified, values are passed as-is
+    #   in ISO-8601 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] strip_quotes
+    #   Indicates whether surrounding double quotes should be stripped from
+    #   filter values before processing.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] between_configuration
+    #   Configuration for handling BETWEEN range filter operations.
+    #   @return [Types::BetweenConfiguration]
+    #
+    # @!attribute [rw] filter_string_configuration
+    #   Configuration for constructing filter expressions when `FilterMode`
+    #   is set to `FILTER_STRING`.
+    #   @return [Types::FilterStringConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FilterConfiguration AWS API Documentation
+    #
+    class FilterConfiguration < Struct.new(
+      :filter_mode,
+      :operator_mappings,
+      :date_time_format,
+      :strip_quotes,
+      :between_configuration,
+      :filter_string_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a filter expression.
     #
     # @!attribute [rw] operation
@@ -12547,6 +12749,75 @@ module Aws::Glue
       :operation,
       :negated,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that defines per-field overrides for filter behavior,
+    # allowing individual fields to customize how filter operations are
+    # applied.
+    #
+    # @!attribute [rw] field_name
+    #   An override for the field name to use in filter expressions, if
+    #   different from the schema field name.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator_mappings
+    #   A map of logical filter operators to their field-specific API
+    #   representations, overriding the global operator mappings. Supported
+    #   operator keys are: `EQUAL_TO`, `NOT_EQUAL_TO`, `LESS_THAN`,
+    #   `GREATER_THAN`, `LESS_THAN_OR_EQUAL_TO`, `GREATER_THAN_OR_EQUAL_TO`,
+    #   `CONTAINS`, `BETWEEN`, `AND`, and `OR`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] between_configuration
+    #   Field-specific configuration for handling BETWEEN range filter
+    #   operations.
+    #   @return [Types::BetweenConfiguration]
+    #
+    # @!attribute [rw] date_time_format
+    #   The date and time format for filter expressions on this field,
+    #   overriding the global `DateTimeFormat`. Accepts Java
+    #   `DateTimeFormatter` patterns (for example, `EEE, d MMM yyyy HH:mm:ss
+    #   Z`), `EPOCH_SECONDS` for Unix epoch seconds, or `EPOCH_MILLIS` for
+    #   Unix epoch milliseconds.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FilterOverrides AWS API Documentation
+    #
+    class FilterOverrides < Struct.new(
+      :field_name,
+      :operator_mappings,
+      :between_configuration,
+      :date_time_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for constructing filter expression strings when using
+    # the `FILTER_STRING` filter mode.
+    #
+    # @!attribute [rw] query_parameter_name
+    #   The query parameter name used to send the constructed filter
+    #   expression string in API requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_string_values
+    #   Indicates whether string and date values should be wrapped with a
+    #   quote character in the filter expression.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quote_character
+    #   The character used to quote values when `QuoteStringValues` is true.
+    #   Defaults to double quotes if not specified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FilterStringConfiguration AWS API Documentation
+    #
+    class FilterStringConfiguration < Struct.new(
+      :query_parameter_name,
+      :quote_string_values,
+      :quote_character)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12773,6 +13044,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The asset metadata returned by the `GetAsset` operation.
+    #
     # @!attribute [rw] id
     #   The unique identifier of the asset.
     #   @return [String]
@@ -13670,6 +13943,54 @@ module Aws::Glue
     #
     class GetDataCatalogEncryptionSettingsResponse < Struct.new(
       :data_catalog_encryption_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogExportConfigurationInput AWS API Documentation
+    #
+    class GetDataCatalogExportConfigurationInput < Aws::EmptyStructure; end
+
+    # The export configuration returned by the
+    # `GetDataCatalogExportConfiguration` operation.
+    #
+    # @!attribute [rw] export_setting
+    #   The export setting for the data catalog. Valid values are `ENABLED`
+    #   and `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the export. Valid values are `ENABLING`,
+    #   `ENABLED`, `DISABLING`, `DISABLED`, and `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the exported data.
+    #   @return [Types::ExportEncryptionConfiguration]
+    #
+    # @!attribute [rw] s3_table_bucket_arn
+    #   The ARN of the S3 Tables bucket where catalog metadata is exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the export configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the export configuration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogExportConfigurationOutput AWS API Documentation
+    #
+    class GetDataCatalogExportConfigurationOutput < Struct.new(
+      :export_setting,
+      :status,
+      :encryption_configuration,
+      :s3_table_bucket_arn,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21868,7 +22189,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the table for which statistics is generated.
+    #   The name of the materialized view.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -22704,6 +23025,7 @@ module Aws::Glue
     # Exception thrown when stopping a task that is not in running state.
     #
     # @!attribute [rw] message
+    #   A message describing the problem.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MaterializedViewRefreshTaskNotRunningException AWS API Documentation
@@ -22730,7 +23052,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the table for which statistics is generated.
+    #   The name of the materialized view.
     #   @return [String]
     #
     # @!attribute [rw] catalog_id
@@ -22739,7 +23061,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The IAM role that the service assumes to generate statistics.
+    #   The IAM role that the service assumes to run the materialized view
+    #   refresh task.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -22804,6 +23127,7 @@ module Aws::Glue
     # Exception thrown when a task is already in running state.
     #
     # @!attribute [rw] message
+    #   A message describing the problem.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MaterializedViewRefreshTaskRunningException AWS API Documentation
@@ -22817,6 +23141,7 @@ module Aws::Glue
     # Exception thrown when a task is already in stopping state.
     #
     # @!attribute [rw] message
+    #   A message describing the problem.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MaterializedViewRefreshTaskStoppingException AWS API Documentation
@@ -24502,6 +24827,55 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogEncryptionSettingsResponse AWS API Documentation
     #
     class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] export_setting
+    #   The export setting for the data catalog. Specify `ENABLED` to start
+    #   exporting catalog metadata to S3 Tables, or `DISABLED` to stop
+    #   exporting. This field is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the exported data. If not
+    #   specified, the default encryption settings are used.
+    #   @return [Types::ExportEncryptionConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogExportConfigurationInput AWS API Documentation
+    #
+    class PutDataCatalogExportConfigurationInput < Struct.new(
+      :export_setting,
+      :encryption_configuration,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The export configuration returned by the
+    # `PutDataCatalogExportConfiguration` operation.
+    #
+    # @!attribute [rw] export_setting
+    #   The export setting for the data catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the exported data.
+    #   @return [Types::ExportEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogExportConfigurationOutput AWS API Documentation
+    #
+    class PutDataCatalogExportConfigurationOutput < Struct.new(
+      :export_setting,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] profile_id
     #   The ID of the data quality monitoring profile to annotate.
@@ -27342,6 +27716,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The search results returned by the `SearchAssets` operation.
+    #
     # @!attribute [rw] items
     #   The list of assets matching the search criteria.
     #   @return [Array<Types::SearchResultItem>]
@@ -28212,6 +28588,12 @@ module Aws::Glue
     #   supporting both cursor-based and offset-based pagination strategies.
     #   @return [Types::PaginationConfiguration]
     #
+    # @!attribute [rw] filter_configuration
+    #   Configuration for applying filter pushdown to REST API requests,
+    #   defining how filter predicates are translated into query parameters
+    #   or filter strings.
+    #   @return [Types::FilterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SourceConfiguration AWS API Documentation
     #
     class SourceConfiguration < Struct.new(
@@ -28219,7 +28601,8 @@ module Aws::Glue
       :request_path,
       :request_parameters,
       :response_configuration,
-      :pagination_configuration)
+      :pagination_configuration,
+      :filter_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29175,8 +29558,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the table to generate run the materialized view refresh
-    #   task.
+    #   The name of the materialized view to run the refresh task for.
     #   @return [String]
     #
     # @!attribute [rw] full_refresh
@@ -29629,7 +30011,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the table to generate statistics.
+    #   The name of the materialized view.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopMaterializedViewRefreshTaskRunRequest AWS API Documentation

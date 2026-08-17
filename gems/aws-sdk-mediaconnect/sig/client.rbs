@@ -327,6 +327,9 @@ module Aws
                                   ?availability_zone: ::String,
                                   ?maintenance_configuration: Params::maintenance_configuration,
                                   ?tags: Hash[::String, ::String],
+                                  ?fabric_configuration: {
+                                    recovery_latency_mode: ("BALANCED" | "LOW_LATENCY")
+                                  },
                                   ?client_token: ::String
                                 ) -> _CreateRouterOutputResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRouterOutputResponseSuccess
@@ -1234,7 +1237,10 @@ module Aws
                                   ?maximum_bitrate: ::Integer,
                                   ?routing_scope: ("REGIONAL" | "GLOBAL"),
                                   ?tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20"),
-                                  ?maintenance_configuration: Params::maintenance_configuration
+                                  ?maintenance_configuration: Params::maintenance_configuration,
+                                  ?fabric_configuration: {
+                                    recovery_latency_mode: ("BALANCED" | "LOW_LATENCY")
+                                  }
                                 ) -> _UpdateRouterOutputResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRouterOutputResponseSuccess
 

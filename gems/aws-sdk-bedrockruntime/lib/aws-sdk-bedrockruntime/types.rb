@@ -737,6 +737,20 @@ module Aws::BedrockRuntime
     #   Search result to include in the message.
     #   @return [Types::SearchResultBlock]
     #
+    # @!attribute [rw] tool_addition
+    #   A content block for adding a tool to the available tool set
+    #   mid-conversation. Each block references a single tool via its `tool`
+    #   field. Use within a `system` role message to make a tool available
+    #   without re-sending the full tool configuration.
+    #   @return [Types::ToolAdditionBlock]
+    #
+    # @!attribute [rw] tool_removal
+    #   A content block for removing a tool from the available tool set
+    #   mid-conversation. Each block references a single tool via its `tool`
+    #   field. Use within a `system` role message to remove a tool without
+    #   re-sending the full tool configuration.
+    #   @return [Types::ToolRemovalBlock]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ContentBlock AWS API Documentation
     #
     class ContentBlock < Struct.new(
@@ -752,6 +766,8 @@ module Aws::BedrockRuntime
       :reasoning_content,
       :citations_content,
       :search_result,
+      :tool_addition,
+      :tool_removal,
       :unknown)
       SENSITIVE = [:reasoning_content]
       include Aws::Structure
@@ -769,6 +785,8 @@ module Aws::BedrockRuntime
       class ReasoningContent < ContentBlock; end
       class CitationsContent < ContentBlock; end
       class SearchResult < ContentBlock; end
+      class ToolAddition < ContentBlock; end
+      class ToolRemoval < ContentBlock; end
       class Unknown < ContentBlock; end
     end
 
@@ -4279,10 +4297,24 @@ module Aws::BedrockRuntime
     #   Structured output parameters to control the model's text response.
     #   @return [Types::OutputFormat]
     #
+    # @!attribute [rw] effort
+    #   The effort level for the model to use when generating a response.
+    #   Higher effort levels allow the model to spend more time reasoning
+    #   before responding. Supported values are `low`, `medium`, `high`,
+    #   `xhigh`, and `max`.
+    #
+    #   <note markdown="1"> When extended thinking is disabled, the effort level is capped at
+    #   `high`. Use effort `high` or below, or enable thinking to use higher
+    #   effort levels.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/OutputConfig AWS API Documentation
     #
     class OutputConfig < Struct.new(
-      :text_format)
+      :text_format,
+      :effort)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4914,6 +4946,23 @@ module Aws::BedrockRuntime
       class Unknown < Tool; end
     end
 
+    # A content block for adding a tool to the available tool set
+    # mid-conversation. Each block references a single tool via its `tool`
+    # field. Use within a `system` role message to make a tool available
+    # without re-sending the full tool configuration.
+    #
+    # @!attribute [rw] tool
+    #   A reference to the tool to add to the available tool set.
+    #   @return [Types::ToolReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolAdditionBlock AWS API Documentation
+    #
+    class ToolAdditionBlock < Struct.new(
+      :tool)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Determines which tools the model should request in a call to
     # `Converse` or `ConverseStream`. For more information, see [Call a tool
     # with the Converse API][1] in the Amazon Bedrock User Guide.
@@ -5010,6 +5059,51 @@ module Aws::BedrockRuntime
 
       class Json < ToolInputSchema; end
       class Unknown < ToolInputSchema; end
+    end
+
+    # A reference to a tool in the tool configuration. Used with
+    # `ToolAdditionBlock` and `ToolRemovalBlock` to identify which tool to
+    # add or remove mid-conversation.
+    #
+    # @!attribute [rw] type
+    #   The type of tool reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the tool. Must match the name of a tool declared in the
+    #   top-level tool configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the MCP server that provides the tool. Required when
+    #   referencing an MCP tool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolReference AWS API Documentation
+    #
+    class ToolReference < Struct.new(
+      :type,
+      :name,
+      :server_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A content block for removing a tool from the available tool set
+    # mid-conversation. Each block references a single tool via its `tool`
+    # field. Use within a `system` role message to remove a tool without
+    # re-sending the full tool configuration.
+    #
+    # @!attribute [rw] tool
+    #   A reference to the tool to remove from the available tool set.
+    #   @return [Types::ToolReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolRemovalBlock AWS API Documentation
+    #
+    class ToolRemovalBlock < Struct.new(
+      :tool)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # A tool result block that contains the results for a tool request that

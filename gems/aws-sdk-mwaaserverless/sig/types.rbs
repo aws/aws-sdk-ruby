@@ -13,6 +13,17 @@ module Aws::MWAAServerless
       SENSITIVE: []
     end
 
+    class Code
+      attr_accessor s3_location: Types::S3Location
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3Location < Code
+      end
+      class Unknown < Code
+      end
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -24,6 +35,7 @@ module Aws::MWAAServerless
       attr_accessor name: ::String
       attr_accessor client_token: ::String
       attr_accessor definition_s3_location: Types::DefinitionS3Location
+      attr_accessor code: Types::Code
       attr_accessor role_arn: ::String
       attr_accessor description: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
@@ -115,6 +127,8 @@ module Aws::MWAAServerless
       attr_accessor engine_version: ::Integer
       attr_accessor workflow_status: ("READY" | "DELETING")
       attr_accessor definition_s3_location: Types::DefinitionS3Location
+      attr_accessor code: Types::Code
+      attr_accessor code_snapshotted_at: ::Time
       attr_accessor schedule_configuration: Types::ScheduleConfiguration
       attr_accessor role_arn: ::String
       attr_accessor network_configuration: Types::NetworkConfiguration
@@ -239,6 +253,13 @@ module Aws::MWAAServerless
       SENSITIVE: []
     end
 
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor object_key: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
     class ScheduleConfiguration
       attr_accessor cron_expression: ::String
       SENSITIVE: []
@@ -322,6 +343,7 @@ module Aws::MWAAServerless
     class UpdateWorkflowRequest
       attr_accessor workflow_arn: ::String
       attr_accessor definition_s3_location: Types::DefinitionS3Location
+      attr_accessor code: Types::Code
       attr_accessor role_arn: ::String
       attr_accessor description: ::String
       attr_accessor logging_configuration: Types::LoggingConfiguration

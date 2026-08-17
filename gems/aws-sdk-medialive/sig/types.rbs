@@ -2600,6 +2600,7 @@ module Aws::MediaLive
       attr_accessor stream_name: ::String
       attr_accessor url: ::String
       attr_accessor username: ::String
+      attr_accessor virtual_source_address: ::String
       SENSITIVE: []
     end
 

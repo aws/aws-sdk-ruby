@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.191.0 (2026-08-03)
+------------------
+
+* Feature - Updates Kantar server URL validation to accept Fifty5Blue domain. Adds support for output to S3 Glacier Instant Retrieval.
+
 1.190.0 (2026-07-09)
 ------------------
 

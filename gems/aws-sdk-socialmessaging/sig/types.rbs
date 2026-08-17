@@ -31,6 +31,16 @@ module Aws::SocialMessaging
       SENSITIVE: []
     end
 
+    class CreateWhatsAppDatasetInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWhatsAppDatasetOutput
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateWhatsAppFlowInput
       attr_accessor id: ::String
       attr_accessor flow_name: ::String
@@ -275,6 +285,7 @@ module Aws::SocialMessaging
       attr_accessor waba_name: ::String
       attr_accessor event_destinations: ::Array[Types::WhatsAppBusinessAccountEventDestination]
       attr_accessor marketing_messages_onboarding_status: ::String
+      attr_accessor dataset_id: ::String
       attr_accessor phone_numbers: ::Array[Types::WhatsAppPhoneNumberSummary]
       SENSITIVE: []
     end
@@ -296,6 +307,7 @@ module Aws::SocialMessaging
       attr_accessor waba_name: ::String
       attr_accessor event_destinations: ::Array[Types::WhatsAppBusinessAccountEventDestination]
       attr_accessor marketing_messages_onboarding_status: ::String
+      attr_accessor dataset_id: ::String
       SENSITIVE: []
     end
 
@@ -496,6 +508,18 @@ module Aws::SocialMessaging
     class S3PresignedUrl
       attr_accessor url: ::String
       attr_accessor headers: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SendWhatsAppConversionEventInput
+      attr_accessor id: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor event_data: ::String
+      SENSITIVE: [:event_data]
+    end
+
+    class SendWhatsAppConversionEventOutput
+      attr_accessor request_id: ::String
       SENSITIVE: []
     end
 

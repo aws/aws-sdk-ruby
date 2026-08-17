@@ -176,6 +176,15 @@
       "input":{"shape":"AssociateAddressRequest"},
       "output":{"shape":"AssociateAddressResult"}
     },
+    "AssociateApplicationStatusCheck":{
+      "name":"AssociateApplicationStatusCheck",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateApplicationStatusCheckRequest"},
+      "output":{"shape":"AssociateApplicationStatusCheckResult"}
+    },
     "AssociateCapacityReservationBillingOwner":{
       "name":"AssociateCapacityReservationBillingOwner",
       "http":{
@@ -426,6 +435,15 @@
       "input":{"shape":"AuthorizeSecurityGroupIngressRequest"},
       "output":{"shape":"AuthorizeSecurityGroupIngressResult"}
     },
+    "BatchModifyIpamRoutingPolicyRegistrations":{
+      "name":"BatchModifyIpamRoutingPolicyRegistrations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchModifyIpamRoutingPolicyRegistrationsRequest"},
+      "output":{"shape":"BatchModifyIpamRoutingPolicyRegistrationsResult"}
+    },
     "BundleInstance":{
       "name":"BundleInstance",
       "http":{
@@ -576,6 +594,15 @@
       },
       "input":{"shape":"CopyVolumesRequest"},
       "output":{"shape":"CopyVolumesResult"}
+    },
+    "CreateApplicationStatusCheck":{
+      "name":"CreateApplicationStatusCheck",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateApplicationStatusCheckRequest"},
+      "output":{"shape":"CreateApplicationStatusCheckResult"}
     },
     "CreateCapacityManagerDataExport":{
       "name":"CreateCapacityManagerDataExport",
@@ -829,6 +856,15 @@
       "input":{"shape":"CreateIpamExternalResourceVerificationTokenRequest"},
       "output":{"shape":"CreateIpamExternalResourceVerificationTokenResult"}
     },
+    "CreateIpamInternetRegistryAssociation":{
+      "name":"CreateIpamInternetRegistryAssociation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateIpamInternetRegistryAssociationRequest"},
+      "output":{"shape":"CreateIpamInternetRegistryAssociationResult"}
+    },
     "CreateIpamPolicy":{
       "name":"CreateIpamPolicy",
       "http":{
@@ -873,6 +909,15 @@
       },
       "input":{"shape":"CreateIpamResourceDiscoveryRequest"},
       "output":{"shape":"CreateIpamResourceDiscoveryResult"}
+    },
+    "CreateIpamRoutingPolicyRegistration":{
+      "name":"CreateIpamRoutingPolicyRegistration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateIpamRoutingPolicyRegistrationRequest"},
+      "output":{"shape":"CreateIpamRoutingPolicyRegistrationResult"}
     },
     "CreateIpamScope":{
       "name":"CreateIpamScope",
@@ -1331,6 +1376,15 @@
       "input":{"shape":"CreateTransitGatewayPolicyTableRequest"},
       "output":{"shape":"CreateTransitGatewayPolicyTableResult"}
     },
+    "CreateTransitGatewayPolicyTableEntry":{
+      "name":"CreateTransitGatewayPolicyTableEntry",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateTransitGatewayPolicyTableEntryRequest"},
+      "output":{"shape":"CreateTransitGatewayPolicyTableEntryResult"}
+    },
     "CreateTransitGatewayPrefixListReference":{
       "name":"CreateTransitGatewayPrefixListReference",
       "http":{
@@ -1519,6 +1573,15 @@
       "input":{"shape":"CreateVpnGatewayRequest"},
       "output":{"shape":"CreateVpnGatewayResult"}
     },
+    "DeleteApplicationStatusCheck":{
+      "name":"DeleteApplicationStatusCheck",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteApplicationStatusCheckRequest"},
+      "output":{"shape":"DeleteApplicationStatusCheckResult"}
+    },
     "DeleteCapacityManagerDataExport":{
       "name":"DeleteCapacityManagerDataExport",
       "http":{
@@ -1678,6 +1741,15 @@
       "input":{"shape":"DeleteIpamExternalResourceVerificationTokenRequest"},
       "output":{"shape":"DeleteIpamExternalResourceVerificationTokenResult"}
     },
+    "DeleteIpamInternetRegistryAssociation":{
+      "name":"DeleteIpamInternetRegistryAssociation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteIpamInternetRegistryAssociationRequest"},
+      "output":{"shape":"DeleteIpamInternetRegistryAssociationResult"}
+    },
     "DeleteIpamPolicy":{
       "name":"DeleteIpamPolicy",
       "http":{
@@ -1722,6 +1794,15 @@
       },
       "input":{"shape":"DeleteIpamResourceDiscoveryRequest"},
       "output":{"shape":"DeleteIpamResourceDiscoveryResult"}
+    },
+    "DeleteIpamRoutingPolicyRegistration":{
+      "name":"DeleteIpamRoutingPolicyRegistration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteIpamRoutingPolicyRegistrationRequest"},
+      "output":{"shape":"DeleteIpamRoutingPolicyRegistrationResult"}
     },
     "DeleteIpamScope":{
       "name":"DeleteIpamScope",
@@ -2154,6 +2235,15 @@
       "input":{"shape":"DeleteTransitGatewayPolicyTableRequest"},
       "output":{"shape":"DeleteTransitGatewayPolicyTableResult"}
     },
+    "DeleteTransitGatewayPolicyTableEntry":{
+      "name":"DeleteTransitGatewayPolicyTableEntry",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTransitGatewayPolicyTableEntryRequest"},
+      "output":{"shape":"DeleteTransitGatewayPolicyTableEntryResult"}
+    },
     "DeleteTransitGatewayPrefixListReference":{
       "name":"DeleteTransitGatewayPrefixListReference",
       "http":{
@@ -2463,6 +2553,33 @@
       },
       "input":{"shape":"DescribeAggregateIdFormatRequest"},
       "output":{"shape":"DescribeAggregateIdFormatResult"}
+    },
+    "DescribeApplicationStatus":{
+      "name":"DescribeApplicationStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeApplicationStatusRequest"},
+      "output":{"shape":"DescribeApplicationStatusResult"}
+    },
+    "DescribeApplicationStatusCheckAssociations":{
+      "name":"DescribeApplicationStatusCheckAssociations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeApplicationStatusCheckAssociationsRequest"},
+      "output":{"shape":"DescribeApplicationStatusCheckAssociationsResult"}
+    },
+    "DescribeApplicationStatusChecks":{
+      "name":"DescribeApplicationStatusChecks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeApplicationStatusChecksRequest"},
+      "output":{"shape":"DescribeApplicationStatusChecksResult"}
     },
     "DescribeAvailabilityZones":{
       "name":"DescribeAvailabilityZones",
@@ -3075,6 +3192,15 @@
       },
       "input":{"shape":"DescribeIpamExternalResourceVerificationTokensRequest"},
       "output":{"shape":"DescribeIpamExternalResourceVerificationTokensResult"}
+    },
+    "DescribeIpamInternetRegistryAssociations":{
+      "name":"DescribeIpamInternetRegistryAssociations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeIpamInternetRegistryAssociationsRequest"},
+      "output":{"shape":"DescribeIpamInternetRegistryAssociationsResult"}
     },
     "DescribeIpamPolicies":{
       "name":"DescribeIpamPolicies",
@@ -4180,6 +4306,15 @@
       "input":{"shape":"DisableAllowedImagesSettingsRequest"},
       "output":{"shape":"DisableAllowedImagesSettingsResult"}
     },
+    "DisableApplicationStatusCheckSuppression":{
+      "name":"DisableApplicationStatusCheckSuppression",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisableApplicationStatusCheckSuppressionRequest"},
+      "output":{"shape":"DisableApplicationStatusCheckSuppressionResult"}
+    },
     "DisableAwsNetworkPerformanceMetricSubscription":{
       "name":"DisableAwsNetworkPerformanceMetricSubscription",
       "http":{
@@ -4358,6 +4493,15 @@
       },
       "input":{"shape":"DisassociateAddressRequest"}
     },
+    "DisassociateApplicationStatusCheck":{
+      "name":"DisassociateApplicationStatusCheck",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateApplicationStatusCheckRequest"},
+      "output":{"shape":"DisassociateApplicationStatusCheckResult"}
+    },
     "DisassociateCapacityReservationBillingOwner":{
       "name":"DisassociateCapacityReservationBillingOwner",
       "http":{
@@ -4528,6 +4672,15 @@
       "input":{"shape":"EnableAllowedImagesSettingsRequest"},
       "output":{"shape":"EnableAllowedImagesSettingsResult"}
     },
+    "EnableApplicationStatusCheckSuppression":{
+      "name":"EnableApplicationStatusCheckSuppression",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"EnableApplicationStatusCheckSuppressionRequest"},
+      "output":{"shape":"EnableApplicationStatusCheckSuppressionResult"}
+    },
     "EnableAwsNetworkPerformanceMetricSubscription":{
       "name":"EnableAwsNetworkPerformanceMetricSubscription",
       "http":{
@@ -4617,6 +4770,15 @@
       },
       "input":{"shape":"EnableInstanceSqlHaStandbyDetectionsRequest"},
       "output":{"shape":"EnableInstanceSqlHaStandbyDetectionsResult"}
+    },
+    "EnableIpamInternetRegistryAssociation":{
+      "name":"EnableIpamInternetRegistryAssociation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"EnableIpamInternetRegistryAssociationRequest"},
+      "output":{"shape":"EnableIpamInternetRegistryAssociationResult"}
     },
     "EnableIpamOrganizationAdminAccount":{
       "name":"EnableIpamOrganizationAdminAccount",
@@ -5039,6 +5201,33 @@
       "input":{"shape":"GetIpamDiscoveredResourceCidrsRequest"},
       "output":{"shape":"GetIpamDiscoveredResourceCidrsResult"}
     },
+    "GetIpamDiscoveredRoutes":{
+      "name":"GetIpamDiscoveredRoutes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetIpamDiscoveredRoutesRequest"},
+      "output":{"shape":"GetIpamDiscoveredRoutesResult"}
+    },
+    "GetIpamInternetRegistryAssociationAsns":{
+      "name":"GetIpamInternetRegistryAssociationAsns",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetIpamInternetRegistryAssociationAsnsRequest"},
+      "output":{"shape":"GetIpamInternetRegistryAssociationAsnsResult"}
+    },
+    "GetIpamInternetRegistryAssociationCidrs":{
+      "name":"GetIpamInternetRegistryAssociationCidrs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetIpamInternetRegistryAssociationCidrsRequest"},
+      "output":{"shape":"GetIpamInternetRegistryAssociationCidrsResult"}
+    },
     "GetIpamPolicyAllocationRules":{
       "name":"GetIpamPolicyAllocationRules",
       "http":{
@@ -5110,6 +5299,42 @@
       },
       "input":{"shape":"GetIpamResourceCidrsRequest"},
       "output":{"shape":"GetIpamResourceCidrsResult"}
+    },
+    "GetIpamRouteOriginAuthorizations":{
+      "name":"GetIpamRouteOriginAuthorizations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetIpamRouteOriginAuthorizationsRequest"},
+      "output":{"shape":"GetIpamRouteOriginAuthorizationsResult"}
+    },
+    "GetIpamRouteProtectionFindings":{
+      "name":"GetIpamRouteProtectionFindings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetIpamRouteProtectionFindingsRequest"},
+      "output":{"shape":"GetIpamRouteProtectionFindingsResult"}
+    },
+    "GetIpamRoutingPolicyRegistrationDeltas":{
+      "name":"GetIpamRoutingPolicyRegistrationDeltas",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetIpamRoutingPolicyRegistrationDeltasRequest"},
+      "output":{"shape":"GetIpamRoutingPolicyRegistrationDeltasResult"}
+    },
+    "GetIpamRoutingPolicyRegistrations":{
+      "name":"GetIpamRoutingPolicyRegistrations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetIpamRoutingPolicyRegistrationsRequest"},
+      "output":{"shape":"GetIpamRoutingPolicyRegistrationsResult"}
     },
     "GetLaunchTemplateData":{
       "name":"GetLaunchTemplateData",
@@ -5498,6 +5723,15 @@
       "input":{"shape":"ModifyAddressAttributeRequest"},
       "output":{"shape":"ModifyAddressAttributeResult"}
     },
+    "ModifyApplicationStatusCheck":{
+      "name":"ModifyApplicationStatusCheck",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyApplicationStatusCheckRequest"},
+      "output":{"shape":"ModifyApplicationStatusCheckResult"}
+    },
     "ModifyAvailabilityZoneGroup":{
       "name":"ModifyAvailabilityZoneGroup",
       "http":{
@@ -5782,6 +6016,15 @@
       "input":{"shape":"ModifyIpamResourceDiscoveryRequest"},
       "output":{"shape":"ModifyIpamResourceDiscoveryResult"}
     },
+    "ModifyIpamRoutingPolicyRegistration":{
+      "name":"ModifyIpamRoutingPolicyRegistration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyIpamRoutingPolicyRegistrationRequest"},
+      "output":{"shape":"ModifyIpamRoutingPolicyRegistrationResult"}
+    },
     "ModifyIpamScope":{
       "name":"ModifyIpamScope",
       "http":{
@@ -5958,6 +6201,15 @@
       },
       "input":{"shape":"ModifyTransitGatewayMeteringPolicyRequest"},
       "output":{"shape":"ModifyTransitGatewayMeteringPolicyResult"}
+    },
+    "ModifyTransitGatewayPolicyTableEntry":{
+      "name":"ModifyTransitGatewayPolicyTableEntry",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyTransitGatewayPolicyTableEntryRequest"},
+      "output":{"shape":"ModifyTransitGatewayPolicyTableEntryResult"}
     },
     "ModifyTransitGatewayPrefixListReference":{
       "name":"ModifyTransitGatewayPrefixListReference",
@@ -7778,6 +8030,13 @@
         "host"
       ]
     },
+    "AggregationStatusEnum":{
+      "type":"string",
+      "enum":[
+        "included",
+        "excluded"
+      ]
+    },
     "AllocateAddressRequest":{
       "type":"structure",
       "members":{
@@ -8284,6 +8543,263 @@
         "disable"
       ]
     },
+    "ApplicationStatus":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"ApplicationStatusEnum",
+          "locationName":"status"
+        },
+        "StatusTimeStamp":{
+          "shape":"MillisecondDateTime",
+          "locationName":"statusTimeStamp"
+        },
+        "StatusSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"statusSince"
+        },
+        "ResumeAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"resumeAt"
+        },
+        "Details":{
+          "shape":"ApplicationStatusDetailSet",
+          "locationName":"detailSet"
+        }
+      }
+    },
+    "ApplicationStatusCheckAssociationObject":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusCheckId":{
+          "shape":"ApplicationStatusCheckId",
+          "locationName":"applicationStatusCheckId"
+        },
+        "AssociationType":{
+          "shape":"AssociationTypeEnum",
+          "locationName":"associationType"
+        },
+        "Key":{
+          "shape":"String",
+          "locationName":"key"
+        },
+        "Value":{
+          "shape":"String",
+          "locationName":"value"
+        }
+      }
+    },
+    "ApplicationStatusCheckAssociationSet":{
+      "type":"list",
+      "member":{
+        "shape":"ApplicationStatusCheckAssociationObject",
+        "locationName":"item"
+      }
+    },
+    "ApplicationStatusCheckEnum":{
+      "type":"string",
+      "enum":[
+        "passed",
+        "failed",
+        "initializing",
+        "insufficient-data",
+        "not-applicable"
+      ]
+    },
+    "ApplicationStatusCheckId":{"type":"string"},
+    "ApplicationStatusCheckIdList":{
+      "type":"list",
+      "member":{
+        "shape":"ApplicationStatusCheckId",
+        "locationName":"item"
+      }
+    },
+    "ApplicationStatusCheckResponseObject":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusCheckId":{
+          "shape":"ApplicationStatusCheckId",
+          "locationName":"applicationStatusCheckId"
+        },
+        "Aggregation":{
+          "shape":"AggregationStatusEnum",
+          "locationName":"aggregation"
+        },
+        "HealthCheckPaths":{
+          "shape":"HealthCheckPathResponseList",
+          "locationName":"healthCheckPathSet"
+        },
+        "Protocol":{
+          "shape":"NetworkProtocolEnum",
+          "locationName":"protocol"
+        },
+        "Port":{
+          "shape":"Integer",
+          "locationName":"port"
+        },
+        "Path":{
+          "shape":"String",
+          "locationName":"path"
+        },
+        "DeviceIndex":{
+          "shape":"Integer",
+          "locationName":"deviceIndex"
+        },
+        "IpVersion":{
+          "shape":"IpVersionEnum",
+          "locationName":"ipVersion"
+        },
+        "IpScope":{
+          "shape":"IpScopeEnum",
+          "locationName":"ipScope"
+        },
+        "Interval":{
+          "shape":"Integer",
+          "locationName":"interval"
+        },
+        "Timeout":{
+          "shape":"Integer",
+          "locationName":"timeout"
+        },
+        "FailureThreshold":{
+          "shape":"Integer",
+          "locationName":"failureThreshold"
+        },
+        "SuccessThreshold":{
+          "shape":"Integer",
+          "locationName":"successThreshold"
+        },
+        "StatusCodeMatcher":{
+          "shape":"String",
+          "locationName":"statusCodeMatcher"
+        },
+        "InitializationGracePeriodSeconds":{
+          "shape":"InitializationGracePeriodSeconds",
+          "locationName":"initializationGracePeriodSeconds"
+        },
+        "LastUpdatedAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"lastUpdatedAt"
+        },
+        "TargetTagAssociations":{
+          "shape":"CustomKeyValuePairResponseSet",
+          "locationName":"targetTagAssociationSet"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
+        },
+        "CreationTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"creationTime"
+        },
+        "ModifyTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"modifyTime"
+        },
+        "DeletionTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"deletionTime"
+        }
+      }
+    },
+    "ApplicationStatusCheckResponseSet":{
+      "type":"list",
+      "member":{
+        "shape":"ApplicationStatusCheckResponseObject",
+        "locationName":"item"
+      }
+    },
+    "ApplicationStatusDetail":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusCheckId":{
+          "shape":"ApplicationStatusCheckId",
+          "locationName":"applicationStatusCheckId"
+        },
+        "CheckUpdateTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"checkUpdateTime"
+        },
+        "Aggregation":{
+          "shape":"AggregationStatusEnum",
+          "locationName":"aggregation"
+        },
+        "Status":{
+          "shape":"ApplicationStatusCheckEnum",
+          "locationName":"status"
+        },
+        "StatusTimeStamp":{
+          "shape":"MillisecondDateTime",
+          "locationName":"statusTimeStamp"
+        },
+        "StatusSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"statusSince"
+        },
+        "Reason":{
+          "shape":"ApplicationStatusReason",
+          "locationName":"reason"
+        }
+      }
+    },
+    "ApplicationStatusDetailSet":{
+      "type":"list",
+      "member":{
+        "shape":"ApplicationStatusDetail",
+        "locationName":"item"
+      }
+    },
+    "ApplicationStatusEnum":{
+      "type":"string",
+      "enum":[
+        "ok",
+        "impaired",
+        "initializing",
+        "insufficient-data",
+        "not-applicable",
+        "suppressed"
+      ]
+    },
+    "ApplicationStatusReason":{
+      "type":"structure",
+      "members":{
+        "Code":{
+          "shape":"String",
+          "locationName":"code"
+        },
+        "StatusCode":{
+          "shape":"Integer",
+          "locationName":"statusCode"
+        },
+        "Protocol":{
+          "shape":"String",
+          "locationName":"protocol"
+        }
+      }
+    },
+    "ApplicationStatusSummary":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"SummaryStatus",
+          "locationName":"status"
+        },
+        "ImpairedSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"impairedSince"
+        }
+      }
+    },
+    "ApplicationStatusesResponseType":{
+      "type":"structure",
+      "members":{
+        "Instances":{
+          "shape":"InstanceApplicationStatusSet",
+          "locationName":"instanceSet"
+        }
+      }
+    },
     "ApplyCancellationCharges":{
       "type":"string",
       "enum":["commitment-wind-down"]
@@ -8412,6 +8928,13 @@
       "members":{
         "Message":{"shape":"String"},
         "Signature":{"shape":"String"}
+      }
+    },
+    "AsnList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
       }
     },
     "AsnState":{
@@ -8586,6 +9109,39 @@
         "AssociationId":{
           "shape":"String",
           "locationName":"associationId"
+        }
+      }
+    },
+    "AssociateApplicationStatusCheckRequest":{
+      "type":"structure",
+      "required":["ApplicationStatusCheckId"],
+      "members":{
+        "ApplicationStatusCheckId":{"shape":"ApplicationStatusCheckId"},
+        "TargetTagAssociations":{
+          "shape":"CustomKeyValuePairRequestSet",
+          "locationName":"TargetTagAssociation"
+        },
+        "InstanceIds":{
+          "shape":"InstanceIdList",
+          "locationName":"InstanceId"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "AssociateApplicationStatusCheckResult":{
+      "type":"structure",
+      "members":{
+        "SuccessfulResults":{
+          "shape":"SuccessfulAssociationResponseSet",
+          "locationName":"successfulResultSet"
+        },
+        "UnsuccessfulResults":{
+          "shape":"UnsuccessfulAssociationResponseSet",
+          "locationName":"unsuccessfulResultSet"
         }
       }
     },
@@ -9133,6 +9689,13 @@
         "association-failed",
         "disassociating",
         "disassociated"
+      ]
+    },
+    "AssociationTypeEnum":{
+      "type":"string",
+      "enum":[
+        "tag",
+        "instance-id"
       ]
     },
     "AthenaIntegration":{
@@ -9887,6 +10450,32 @@
       }
     },
     "BaselineThroughputInMBps":{"type":"double"},
+    "BatchModifyIpamRoutingPolicyRegistrationsRequest":{
+      "type":"structure",
+      "required":[
+        "IpamInternetRegistryAssociationId",
+        "DeltaJson"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"},
+        "DeltaJson":{"shape":"String"},
+        "Force":{"shape":"BoxedBoolean"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "BatchModifyIpamRoutingPolicyRegistrationsResult":{
+      "type":"structure",
+      "members":{
+        "IpamRoutingPolicyRegistrationDelta":{
+          "shape":"IpamRoutingPolicyRegistrationDelta",
+          "locationName":"ipamRoutingPolicyRegistrationDelta"
+        }
+      }
+    },
     "BatchState":{
       "type":"string",
       "enum":[
@@ -10198,6 +10787,14 @@
         "AdvertisementType":{
           "shape":"String",
           "locationName":"advertisementType"
+        },
+        "PoolId":{
+          "shape":"String",
+          "locationName":"poolId"
+        },
+        "IpamPoolId":{
+          "shape":"IpamPoolId",
+          "locationName":"ipamPoolId"
         }
       }
     },
@@ -11910,6 +12507,13 @@
       }
     },
     "CertificateId":{"type":"string"},
+    "ChronologicalOrder":{
+      "type":"string",
+      "enum":[
+        "forward",
+        "reverse"
+      ]
+    },
     "CidrAuthorizationContext":{
       "type":"structure",
       "required":[
@@ -13160,6 +13764,50 @@
         }
       }
     },
+    "CreateApplicationStatusCheckRequest":{
+      "type":"structure",
+      "required":[
+        "Protocol",
+        "Port"
+      ],
+      "members":{
+        "HealthCheckPaths":{
+          "shape":"HealthCheckPathRequestList",
+          "locationName":"HealthCheckPath"
+        },
+        "Aggregation":{"shape":"AggregationStatusEnum"},
+        "Protocol":{"shape":"NetworkProtocolEnum"},
+        "Port":{"shape":"PortNumber"},
+        "Path":{"shape":"String"},
+        "DeviceIndex":{"shape":"Integer"},
+        "IpVersion":{"shape":"IpVersionEnum"},
+        "IpScope":{"shape":"IpScopeEnum"},
+        "Interval":{"shape":"Integer"},
+        "Timeout":{"shape":"Integer"},
+        "FailureThreshold":{"shape":"Integer"},
+        "SuccessThreshold":{"shape":"Integer"},
+        "StatusCodeMatcher":{"shape":"String"},
+        "InitializationGracePeriodSeconds":{"shape":"InitializationGracePeriodSeconds"},
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "CreateApplicationStatusCheckResult":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusCheck":{
+          "shape":"ApplicationStatusCheckResponseObject",
+          "locationName":"applicationStatusCheck"
+        }
+      }
+    },
     "CreateCapacityManagerDataExportRequest":{
       "type":"structure",
       "required":[
@@ -14139,6 +14787,38 @@
         }
       }
     },
+    "CreateIpamInternetRegistryAssociationRequest":{
+      "type":"structure",
+      "required":[
+        "IpamId",
+        "Rir",
+        "OrganizationHandle"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamId":{"shape":"IpamId"},
+        "Rir":{"shape":"Rir"},
+        "OrganizationHandle":{"shape":"String"},
+        "Description":{"shape":"String"},
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateIpamInternetRegistryAssociationResult":{
+      "type":"structure",
+      "members":{
+        "IpamInternetRegistryAssociation":{
+          "shape":"IpamInternetRegistryAssociation",
+          "locationName":"ipamInternetRegistryAssociation"
+        }
+      }
+    },
     "CreateIpamPolicyRequest":{
       "type":"structure",
       "required":["IpamId"],
@@ -14332,6 +15012,40 @@
         "Ipam":{
           "shape":"Ipam",
           "locationName":"ipam"
+        }
+      }
+    },
+    "CreateIpamRoutingPolicyRegistrationRequest":{
+      "type":"structure",
+      "required":[
+        "IpamInternetRegistryAssociationId",
+        "Cidr",
+        "Asns"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"},
+        "Cidr":{"shape":"String"},
+        "Asns":{
+          "shape":"AsnList",
+          "locationName":"Asn"
+        },
+        "PermitMoreSpecificAnnouncements":{"shape":"BoxedBoolean"},
+        "MaxLength":{"shape":"IpamRoutingPolicyRegistrationMaxLength"},
+        "Description":{"shape":"String"},
+        "Force":{"shape":"BoxedBoolean"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateIpamRoutingPolicyRegistrationResult":{
+      "type":"structure",
+      "members":{
+        "IpamRoutingPolicyRegistrationDelta":{
+          "shape":"IpamRoutingPolicyRegistrationDelta",
+          "locationName":"ipamRoutingPolicyRegistrationDelta"
         }
       }
     },
@@ -15903,6 +16617,30 @@
         }
       }
     },
+    "CreateTransitGatewayPolicyTableEntryRequest":{
+      "type":"structure",
+      "required":[
+        "TransitGatewayPolicyTableId",
+        "PolicyRuleNumber",
+        "TargetRouteTableId"
+      ],
+      "members":{
+        "TransitGatewayPolicyTableId":{"shape":"TransitGatewayPolicyTableId"},
+        "PolicyRuleNumber":{"shape":"String"},
+        "PolicyRule":{"shape":"TransitGatewayRequestPolicyRule"},
+        "TargetRouteTableId":{"shape":"TransitGatewayRouteTableId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "CreateTransitGatewayPolicyTableEntryResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayPolicyTableEntry":{
+          "shape":"TransitGatewayPolicyTableEntry",
+          "locationName":"transitGatewayPolicyTableEntry"
+        }
+      }
+    },
     "CreateTransitGatewayPolicyTableRequest":{
       "type":"structure",
       "required":["TransitGatewayId"],
@@ -16742,6 +17480,40 @@
       "enum":["USD"]
     },
     "CurrentGenerationFlag":{"type":"boolean"},
+    "CustomKeyValuePairRequestSet":{
+      "type":"list",
+      "member":{
+        "shape":"CustomTagKeyValueRequestPair",
+        "locationName":"item"
+      }
+    },
+    "CustomKeyValuePairResponseSet":{
+      "type":"list",
+      "member":{
+        "shape":"CustomTagKeyValueResponsePair",
+        "locationName":"item"
+      }
+    },
+    "CustomTagKeyValueRequestPair":{
+      "type":"structure",
+      "members":{
+        "Key":{"shape":"String"},
+        "Value":{"shape":"String"}
+      }
+    },
+    "CustomTagKeyValueResponsePair":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"String",
+          "locationName":"key"
+        },
+        "Value":{
+          "shape":"String",
+          "locationName":"value"
+        }
+      }
+    },
     "CustomerGateway":{
       "type":"structure",
       "members":{
@@ -17000,6 +17772,27 @@
     "DefaultUdpStreamTimeout":{"type":"integer"},
     "DefaultUdpTimeout":{"type":"integer"},
     "DefaultingDhcpOptionsId":{"type":"string"},
+    "DeleteApplicationStatusCheckRequest":{
+      "type":"structure",
+      "required":["ApplicationStatusCheckId"],
+      "members":{
+        "ApplicationStatusCheckId":{"shape":"ApplicationStatusCheckId"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DeleteApplicationStatusCheckResult":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusCheck":{
+          "shape":"ApplicationStatusCheckResponseObject",
+          "locationName":"applicationStatusCheck"
+        }
+      }
+    },
     "DeleteCapacityManagerDataExportRequest":{
       "type":"structure",
       "required":["CapacityManagerDataExportId"],
@@ -17364,6 +18157,23 @@
         }
       }
     },
+    "DeleteIpamInternetRegistryAssociationRequest":{
+      "type":"structure",
+      "required":["IpamInternetRegistryAssociationId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"}
+      }
+    },
+    "DeleteIpamInternetRegistryAssociationResult":{
+      "type":"structure",
+      "members":{
+        "IpamInternetRegistryAssociation":{
+          "shape":"IpamInternetRegistryAssociation",
+          "locationName":"ipamInternetRegistryAssociation"
+        }
+      }
+    },
     "DeleteIpamPolicyRequest":{
       "type":"structure",
       "required":["IpamPolicyId"],
@@ -17465,6 +18275,32 @@
         "Ipam":{
           "shape":"Ipam",
           "locationName":"ipam"
+        }
+      }
+    },
+    "DeleteIpamRoutingPolicyRegistrationRequest":{
+      "type":"structure",
+      "required":[
+        "IpamInternetRegistryAssociationId",
+        "Cidr"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"},
+        "Cidr":{"shape":"String"},
+        "Force":{"shape":"BoxedBoolean"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "DeleteIpamRoutingPolicyRegistrationResult":{
+      "type":"structure",
+      "members":{
+        "IpamRoutingPolicyRegistrationDelta":{
+          "shape":"IpamRoutingPolicyRegistrationDelta",
+          "locationName":"ipamRoutingPolicyRegistrationDelta"
         }
       }
     },
@@ -18407,6 +19243,27 @@
         }
       }
     },
+    "DeleteTransitGatewayPolicyTableEntryRequest":{
+      "type":"structure",
+      "required":[
+        "TransitGatewayPolicyTableId",
+        "PolicyRuleNumber"
+      ],
+      "members":{
+        "TransitGatewayPolicyTableId":{"shape":"TransitGatewayPolicyTableId"},
+        "PolicyRuleNumber":{"shape":"String"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DeleteTransitGatewayPolicyTableEntryResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayPolicyTableEntry":{
+          "shape":"TransitGatewayPolicyTableEntry",
+          "locationName":"transitGatewayPolicyTableEntry"
+        }
+      }
+    },
     "DeleteTransitGatewayPolicyTableRequest":{
       "type":"structure",
       "required":["TransitGatewayPolicyTableId"],
@@ -19137,6 +19994,113 @@
         "Statuses":{
           "shape":"IdFormatList",
           "locationName":"statusSet"
+        }
+      }
+    },
+    "DescribeApplicationStatusCheckAssociationsMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":5
+    },
+    "DescribeApplicationStatusCheckAssociationsRequest":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusCheckIds":{
+          "shape":"ApplicationStatusCheckIdList",
+          "locationName":"ApplicationStatusCheckId"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "MaxResults":{"shape":"DescribeApplicationStatusCheckAssociationsMaxResults"},
+        "NextToken":{"shape":"String"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DescribeApplicationStatusCheckAssociationsResult":{
+      "type":"structure",
+      "members":{
+        "Associations":{
+          "shape":"ApplicationStatusCheckAssociationSet",
+          "locationName":"associationSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
+        }
+      }
+    },
+    "DescribeApplicationStatusChecksMaxResults":{
+      "type":"integer",
+      "max":100,
+      "min":5
+    },
+    "DescribeApplicationStatusChecksRequest":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusCheckIds":{
+          "shape":"ApplicationStatusCheckIdList",
+          "locationName":"ApplicationStatusCheckId"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "MaxResults":{"shape":"DescribeApplicationStatusChecksMaxResults"},
+        "NextToken":{"shape":"String"},
+        "IncludeAll":{"shape":"Boolean"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DescribeApplicationStatusChecksResult":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusChecks":{
+          "shape":"ApplicationStatusCheckResponseSet",
+          "locationName":"applicationStatusCheckSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeApplicationStatusMaxResults":{
+      "type":"integer",
+      "max":100,
+      "min":1
+    },
+    "DescribeApplicationStatusRequest":{
+      "type":"structure",
+      "members":{
+        "InstanceIds":{
+          "shape":"InstanceIdList",
+          "locationName":"InstanceId"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "MaxResults":{"shape":"DescribeApplicationStatusMaxResults"},
+        "NextToken":{"shape":"String"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DescribeApplicationStatusResult":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatuses":{
+          "shape":"ApplicationStatusesResponseType",
+          "locationName":"applicationStatusesResponseType"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },
@@ -21430,6 +22394,35 @@
         "IpamExternalResourceVerificationTokens":{
           "shape":"IpamExternalResourceVerificationTokenSet",
           "locationName":"ipamExternalResourceVerificationTokenSet"
+        }
+      }
+    },
+    "DescribeIpamInternetRegistryAssociationsRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationIds":{
+          "shape":"ValueStringList",
+          "locationName":"IpamInternetRegistryAssociationId"
+        },
+        "MaxResults":{"shape":"IpamMaxResults"},
+        "NextToken":{"shape":"NextToken"},
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        }
+      }
+    },
+    "DescribeIpamInternetRegistryAssociationsResult":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "locationName":"nextToken"
+        },
+        "IpamInternetRegistryAssociations":{
+          "shape":"IpamInternetRegistryAssociationSet",
+          "locationName":"ipamInternetRegistryAssociationSet"
         }
       }
     },
@@ -25388,6 +26381,33 @@
         }
       }
     },
+    "DisableApplicationStatusCheckSuppressionRequest":{
+      "type":"structure",
+      "members":{
+        "InstanceIds":{
+          "shape":"InstanceIdList",
+          "locationName":"InstanceId"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DisableApplicationStatusCheckSuppressionResult":{
+      "type":"structure",
+      "members":{
+        "SuccessfulResults":{
+          "shape":"SuccessfulSuppressionResponseSet",
+          "locationName":"successfulResultSet"
+        },
+        "UnsuccessfulResults":{
+          "shape":"UnsuccessfulSuppressionResponseSet",
+          "locationName":"unsuccessfulResultSet"
+        }
+      }
+    },
     "DisableAwsNetworkPerformanceMetricSubscriptionRequest":{
       "type":"structure",
       "members":{
@@ -25893,6 +26913,39 @@
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
+        }
+      }
+    },
+    "DisassociateApplicationStatusCheckRequest":{
+      "type":"structure",
+      "required":["ApplicationStatusCheckId"],
+      "members":{
+        "ApplicationStatusCheckId":{"shape":"ApplicationStatusCheckId"},
+        "TargetTagAssociations":{
+          "shape":"CustomKeyValuePairRequestSet",
+          "locationName":"TargetTagAssociation"
+        },
+        "InstanceIds":{
+          "shape":"InstanceIdList",
+          "locationName":"InstanceId"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DisassociateApplicationStatusCheckResult":{
+      "type":"structure",
+      "members":{
+        "SuccessfulResults":{
+          "shape":"SuccessfulAssociationResponseSet",
+          "locationName":"successfulResultSet"
+        },
+        "UnsuccessfulResults":{
+          "shape":"UnsuccessfulAssociationResponseSet",
+          "locationName":"unsuccessfulResultSet"
         }
       }
     },
@@ -27197,6 +28250,34 @@
         }
       }
     },
+    "EnableApplicationStatusCheckSuppressionRequest":{
+      "type":"structure",
+      "members":{
+        "InstanceIds":{
+          "shape":"InstanceIdList",
+          "locationName":"InstanceId"
+        },
+        "DurationSeconds":{"shape":"BoxedInteger"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "EnableApplicationStatusCheckSuppressionResult":{
+      "type":"structure",
+      "members":{
+        "SuccessfulResults":{
+          "shape":"SuccessfulSuppressionResponseSet",
+          "locationName":"successfulResultSet"
+        },
+        "UnsuccessfulResults":{
+          "shape":"UnsuccessfulSuppressionResponseSet",
+          "locationName":"unsuccessfulResultSet"
+        }
+      }
+    },
     "EnableAwsNetworkPerformanceMetricSubscriptionRequest":{
       "type":"structure",
       "members":{
@@ -27548,6 +28629,39 @@
         "Instances":{
           "shape":"RegisteredInstanceList",
           "locationName":"instanceSet"
+        }
+      }
+    },
+    "EnableIpamInternetRegistryAssociationRequest":{
+      "type":"structure",
+      "required":[
+        "IpamInternetRegistryAssociationId",
+        "RpkiVersion",
+        "ServiceUri",
+        "ChildHandle",
+        "ParentHandle",
+        "ParentBpkiTa"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"},
+        "RpkiVersion":{"shape":"String"},
+        "ServiceUri":{"shape":"String"},
+        "ChildHandle":{"shape":"String"},
+        "ParentHandle":{"shape":"String"},
+        "ParentBpkiTa":{"shape":"String"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "EnableIpamInternetRegistryAssociationResult":{
+      "type":"structure",
+      "members":{
+        "IpamInternetRegistryAssociation":{
+          "shape":"IpamInternetRegistryAssociation",
+          "locationName":"ipamInternetRegistryAssociation"
         }
       }
     },
@@ -30281,7 +31395,7 @@
           "locationName":"instanceId"
         },
         "UefiData":{
-          "shape":"String",
+          "shape":"SensitiveString",
           "locationName":"uefiData"
         }
       }
@@ -30410,6 +31524,91 @@
         "NextToken":{
           "shape":"NextToken",
           "locationName":"nextToken"
+        }
+      }
+    },
+    "GetIpamDiscoveredRoutesRequest":{
+      "type":"structure",
+      "required":[
+        "IpamResourceDiscoveryId",
+        "ResourceRegion"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamResourceDiscoveryId":{"shape":"IpamResourceDiscoveryId"},
+        "ResourceRegion":{"shape":"String"},
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"IpamMaxResults"}
+      }
+    },
+    "GetIpamDiscoveredRoutesResult":{
+      "type":"structure",
+      "members":{
+        "IpamDiscoveredRoutes":{
+          "shape":"IpamDiscoveredRouteSet",
+          "locationName":"ipamDiscoveredRouteSet"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "GetIpamInternetRegistryAssociationAsnsRequest":{
+      "type":"structure",
+      "required":["IpamInternetRegistryAssociationId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"},
+        "MaxResults":{"shape":"IpamMaxResults"},
+        "NextToken":{"shape":"NextToken"},
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        }
+      }
+    },
+    "GetIpamInternetRegistryAssociationAsnsResult":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "locationName":"nextToken"
+        },
+        "IpamInternetRegistryAssociationAsns":{
+          "shape":"IpamInternetRegistryAssociationAsnSet",
+          "locationName":"ipamInternetRegistryAssociationAsnSet"
+        }
+      }
+    },
+    "GetIpamInternetRegistryAssociationCidrsRequest":{
+      "type":"structure",
+      "required":["IpamInternetRegistryAssociationId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"},
+        "MaxResults":{"shape":"IpamMaxResults"},
+        "NextToken":{"shape":"NextToken"},
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        }
+      }
+    },
+    "GetIpamInternetRegistryAssociationCidrsResult":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "locationName":"nextToken"
+        },
+        "IpamInternetRegistryAssociationCidrs":{
+          "shape":"IpamInternetRegistryAssociationCidrSet",
+          "locationName":"ipamInternetRegistryAssociationCidrSet"
         }
       }
     },
@@ -30643,6 +31842,112 @@
         "IpamResourceCidrs":{
           "shape":"IpamResourceCidrSet",
           "locationName":"ipamResourceCidrSet"
+        }
+      }
+    },
+    "GetIpamRouteOriginAuthorizationsRequest":{
+      "type":"structure",
+      "required":["IpamInternetRegistryAssociationId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"},
+        "Cidr":{"shape":"String"},
+        "MaxResults":{"shape":"IpamMaxResults"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "GetIpamRouteOriginAuthorizationsResult":{
+      "type":"structure",
+      "members":{
+        "IpamRouteOriginAuthorizations":{
+          "shape":"IpamRouteOriginAuthorizationInfoSet",
+          "locationName":"ipamRouteOriginAuthorizationSet"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "GetIpamRouteProtectionFindingsRequest":{
+      "type":"structure",
+      "required":["IpamId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamId":{"shape":"IpamId"},
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"IpamMaxResults"}
+      }
+    },
+    "GetIpamRouteProtectionFindingsResult":{
+      "type":"structure",
+      "members":{
+        "IpamId":{
+          "shape":"IpamId",
+          "locationName":"ipamId"
+        },
+        "RouteProtectionFindings":{
+          "shape":"IpamRouteProtectionFindingSet",
+          "locationName":"routeProtectionFindingSet"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "GetIpamRoutingPolicyRegistrationDeltasRequest":{
+      "type":"structure",
+      "required":["IpamInternetRegistryAssociationId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"},
+        "DeltaId":{"shape":"String"},
+        "StartTime":{"shape":"MillisecondDateTime"},
+        "EndTime":{"shape":"MillisecondDateTime"},
+        "ChronologicalOrder":{"shape":"ChronologicalOrder"},
+        "MaxResults":{"shape":"IpamMaxResults"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "GetIpamRoutingPolicyRegistrationDeltasResult":{
+      "type":"structure",
+      "members":{
+        "IpamRoutingPolicyRegistrationDeltas":{
+          "shape":"IpamRoutingPolicyRegistrationDeltaSet",
+          "locationName":"ipamRoutingPolicyRegistrationDeltaSet"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "GetIpamRoutingPolicyRegistrationsRequest":{
+      "type":"structure",
+      "required":["IpamInternetRegistryAssociationId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"},
+        "Cidr":{"shape":"String"},
+        "MaxResults":{"shape":"IpamMaxResults"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "GetIpamRoutingPolicyRegistrationsResult":{
+      "type":"structure",
+      "members":{
+        "IpamRoutingPolicyRegistrations":{
+          "shape":"IpamRoutingPolicyRegistrationSet",
+          "locationName":"ipamRoutingPolicyRegistrationSet"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "locationName":"nextToken"
         }
       }
     },
@@ -31021,7 +32326,8 @@
         "InstanceRequirementsWithMetadata":{"shape":"InstanceRequirementsWithMetadataRequest"},
         "DryRun":{"shape":"Boolean"},
         "MaxResults":{"shape":"SpotPlacementScoresMaxResults"},
-        "NextToken":{"shape":"String"}
+        "NextToken":{"shape":"String"},
+        "IncludeLocalZones":{"shape":"Boolean"}
       }
     },
     "GetSpotPlacementScoresResult":{
@@ -31201,6 +32507,10 @@
         "TransitGatewayPolicyTableEntries":{
           "shape":"TransitGatewayPolicyTableEntryList",
           "locationName":"transitGatewayPolicyTableEntries"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },
@@ -31625,6 +32935,97 @@
         "standby",
         "invalid"
       ]
+    },
+    "HealthCheckPathDestinationRequestObject":{
+      "type":"structure",
+      "members":{
+        "SubnetId":{"shape":"SubnetId"},
+        "SecurityGroupId":{"shape":"SecurityGroupId"}
+      }
+    },
+    "HealthCheckPathDestinationRequestSet":{
+      "type":"list",
+      "member":{
+        "shape":"HealthCheckPathDestinationRequestObject",
+        "locationName":"item"
+      }
+    },
+    "HealthCheckPathDestinationResponseList":{
+      "type":"list",
+      "member":{
+        "shape":"HealthCheckPathDestinationResponseObject",
+        "locationName":"item"
+      }
+    },
+    "HealthCheckPathDestinationResponseObject":{
+      "type":"structure",
+      "members":{
+        "SubnetId":{
+          "shape":"String",
+          "locationName":"subnetId"
+        },
+        "SecurityGroupId":{
+          "shape":"String",
+          "locationName":"securityGroupId"
+        }
+      }
+    },
+    "HealthCheckPathRequestList":{
+      "type":"list",
+      "member":{
+        "shape":"HealthCheckPathRequestObject",
+        "locationName":"item"
+      }
+    },
+    "HealthCheckPathRequestObject":{
+      "type":"structure",
+      "members":{
+        "Source":{"shape":"HealthCheckPathSourceRequestObject"},
+        "Destinations":{
+          "shape":"HealthCheckPathDestinationRequestSet",
+          "locationName":"Destination"
+        }
+      }
+    },
+    "HealthCheckPathResponseList":{
+      "type":"list",
+      "member":{
+        "shape":"HealthCheckPathResponseObject",
+        "locationName":"item"
+      }
+    },
+    "HealthCheckPathResponseObject":{
+      "type":"structure",
+      "members":{
+        "Source":{
+          "shape":"HealthCheckPathSourceResponseObject",
+          "locationName":"source"
+        },
+        "Destinations":{
+          "shape":"HealthCheckPathDestinationResponseList",
+          "locationName":"destinationSet"
+        }
+      }
+    },
+    "HealthCheckPathSourceRequestObject":{
+      "type":"structure",
+      "members":{
+        "SubnetId":{"shape":"SubnetId"},
+        "SecurityGroupId":{"shape":"SecurityGroupId"}
+      }
+    },
+    "HealthCheckPathSourceResponseObject":{
+      "type":"structure",
+      "members":{
+        "SubnetId":{
+          "shape":"String",
+          "locationName":"subnetId"
+        },
+        "SecurityGroupId":{
+          "shape":"String",
+          "locationName":"securityGroupId"
+        }
+      }
     },
     "HibernationFlag":{"type":"boolean"},
     "HibernationOptions":{
@@ -33639,6 +35040,11 @@
         "ingestion-failed"
       ]
     },
+    "InitializationGracePeriodSeconds":{
+      "type":"integer",
+      "max":600,
+      "min":-1
+    },
     "InitializationStatusDetails":{
       "type":"structure",
       "members":{
@@ -33918,6 +35324,38 @@
           "shape":"String",
           "locationName":"ipAddress"
         }
+      }
+    },
+    "InstanceApplicationStatus":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "locationName":"instanceId"
+        },
+        "AvailabilityZone":{
+          "shape":"String",
+          "locationName":"availabilityZone"
+        },
+        "AvailabilityZoneId":{
+          "shape":"String",
+          "locationName":"availabilityZoneId"
+        },
+        "ApplicationStatus":{
+          "shape":"ApplicationStatus",
+          "locationName":"applicationStatus"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
+        }
+      }
+    },
+    "InstanceApplicationStatusSet":{
+      "type":"list",
+      "member":{
+        "shape":"InstanceApplicationStatus",
+        "locationName":"item"
       }
     },
     "InstanceAttachmentEnaSrdSpecification":{
@@ -35477,6 +36915,10 @@
         "AttachedEbsStatus":{
           "shape":"EbsStatusSummary",
           "locationName":"attachedEbsStatus"
+        },
+        "ApplicationStatus":{
+          "shape":"ApplicationStatusSummary",
+          "locationName":"applicationStatus"
         }
       }
     },
@@ -37530,12 +38972,23 @@
         "locationName":"item"
       }
     },
+    "IpScopeEnum":{
+      "type":"string",
+      "enum":["private"]
+    },
     "IpSource":{
       "type":"string",
       "enum":[
         "amazon",
         "byoip",
         "none"
+      ]
+    },
+    "IpVersionEnum":{
+      "type":"string",
+      "enum":[
+        "ipv4",
+        "ipv6"
       ]
     },
     "Ipam":{
@@ -37691,6 +39144,28 @@
       "enum":[
         "active",
         "not-found"
+      ]
+    },
+    "IpamByoipAdvertisementType":{
+      "type":"string",
+      "enum":[
+        "regional",
+        "global"
+      ]
+    },
+    "IpamByoipCidrState":{
+      "type":"string",
+      "enum":[
+        "advertised",
+        "deprovisioned",
+        "failed-deprovision",
+        "failed-provision",
+        "pending-advertising",
+        "pending-deprovision",
+        "pending-provision",
+        "pending-withdrawal",
+        "provisioned",
+        "provisioned-not-publicly-advertisable"
       ]
     },
     "IpamCidrAuthorizationContext":{
@@ -37901,6 +39376,62 @@
         "locationName":"item"
       }
     },
+    "IpamDiscoveredRoute":{
+      "type":"structure",
+      "members":{
+        "IpamResourceDiscoveryId":{
+          "shape":"IpamResourceDiscoveryId",
+          "locationName":"ipamResourceDiscoveryId"
+        },
+        "ResourceRegion":{
+          "shape":"String",
+          "locationName":"resourceRegion"
+        },
+        "ResourceOwnerId":{
+          "shape":"String",
+          "locationName":"resourceOwnerId"
+        },
+        "Cidr":{
+          "shape":"String",
+          "locationName":"cidr"
+        },
+        "Asn":{
+          "shape":"String",
+          "locationName":"asn"
+        },
+        "State":{
+          "shape":"IpamByoipCidrState",
+          "locationName":"state"
+        },
+        "AdvertisementType":{
+          "shape":"IpamByoipAdvertisementType",
+          "locationName":"advertisementType"
+        },
+        "NetworkBorderGroup":{
+          "shape":"String",
+          "locationName":"networkBorderGroup"
+        },
+        "PoolId":{
+          "shape":"String",
+          "locationName":"poolId"
+        },
+        "IpamPoolId":{
+          "shape":"String",
+          "locationName":"ipamPoolId"
+        },
+        "SampleTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"sampleTime"
+        }
+      }
+    },
+    "IpamDiscoveredRouteSet":{
+      "type":"list",
+      "member":{
+        "shape":"IpamDiscoveredRoute",
+        "locationName":"item"
+      }
+    },
     "IpamDiscoveryFailureCode":{
       "type":"string",
       "enum":[
@@ -37991,6 +39522,117 @@
       ]
     },
     "IpamId":{"type":"string"},
+    "IpamInternetRegistryAssociation":{
+      "type":"structure",
+      "members":{
+        "OwnerId":{
+          "shape":"String",
+          "locationName":"ownerId"
+        },
+        "IpamInternetRegistryAssociationId":{
+          "shape":"IpamInternetRegistryAssociationId",
+          "locationName":"ipamInternetRegistryAssociationId"
+        },
+        "IpamInternetRegistryAssociationArn":{
+          "shape":"ResourceArn",
+          "locationName":"ipamInternetRegistryAssociationArn"
+        },
+        "IpamId":{
+          "shape":"IpamId",
+          "locationName":"ipamId"
+        },
+        "IpamRegion":{
+          "shape":"String",
+          "locationName":"ipamRegion"
+        },
+        "Rir":{
+          "shape":"Rir",
+          "locationName":"rir"
+        },
+        "OrganizationHandle":{
+          "shape":"String",
+          "locationName":"organizationHandle"
+        },
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
+        },
+        "State":{
+          "shape":"IpamInternetRegistryAssociationState",
+          "locationName":"state"
+        },
+        "ChildRequestXml":{
+          "shape":"String",
+          "locationName":"childRequestXml"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
+        }
+      }
+    },
+    "IpamInternetRegistryAssociationAsn":{
+      "type":"structure",
+      "members":{
+        "Asn":{
+          "shape":"String",
+          "locationName":"asn"
+        },
+        "LastObservedAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"lastObservedAt"
+        }
+      }
+    },
+    "IpamInternetRegistryAssociationAsnSet":{
+      "type":"list",
+      "member":{
+        "shape":"IpamInternetRegistryAssociationAsn",
+        "locationName":"item"
+      }
+    },
+    "IpamInternetRegistryAssociationCidr":{
+      "type":"structure",
+      "members":{
+        "Cidr":{
+          "shape":"String",
+          "locationName":"cidr"
+        },
+        "LastObservedAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"lastObservedAt"
+        }
+      }
+    },
+    "IpamInternetRegistryAssociationCidrSet":{
+      "type":"list",
+      "member":{
+        "shape":"IpamInternetRegistryAssociationCidr",
+        "locationName":"item"
+      }
+    },
+    "IpamInternetRegistryAssociationId":{"type":"string"},
+    "IpamInternetRegistryAssociationSet":{
+      "type":"list",
+      "member":{
+        "shape":"IpamInternetRegistryAssociation",
+        "locationName":"item"
+      }
+    },
+    "IpamInternetRegistryAssociationState":{
+      "type":"string",
+      "enum":[
+        "pending-enable",
+        "create-in-progress",
+        "create-failed",
+        "enable-in-progress",
+        "enable-complete",
+        "enable-failed",
+        "delete-in-progress",
+        "delete-complete",
+        "delete-failed"
+      ]
+    },
     "IpamManagementState":{
       "type":"string",
       "enum":[
@@ -39194,6 +40836,269 @@
         "ipv6-pool",
         "eni",
         "anycast-ip-list"
+      ]
+    },
+    "IpamRouteOriginAuthorization":{
+      "type":"structure",
+      "members":{
+        "Asn":{
+          "shape":"String",
+          "locationName":"asn"
+        },
+        "Prefix":{
+          "shape":"String",
+          "locationName":"prefix"
+        },
+        "MaxLength":{
+          "shape":"Integer",
+          "locationName":"maxLength"
+        },
+        "Match":{
+          "shape":"Boolean",
+          "locationName":"match"
+        },
+        "Expiration":{
+          "shape":"MillisecondDateTime",
+          "locationName":"expiration"
+        }
+      }
+    },
+    "IpamRouteOriginAuthorizationInfo":{
+      "type":"structure",
+      "members":{
+        "Cidr":{
+          "shape":"String",
+          "locationName":"cidr"
+        },
+        "Asn":{
+          "shape":"String",
+          "locationName":"asn"
+        },
+        "MaxLength":{
+          "shape":"Integer",
+          "locationName":"maxLength"
+        }
+      }
+    },
+    "IpamRouteOriginAuthorizationInfoSet":{
+      "type":"list",
+      "member":{
+        "shape":"IpamRouteOriginAuthorizationInfo",
+        "locationName":"item"
+      }
+    },
+    "IpamRouteOriginAuthorizationSet":{
+      "type":"list",
+      "member":{
+        "shape":"IpamRouteOriginAuthorization",
+        "locationName":"item"
+      }
+    },
+    "IpamRouteOverlap":{
+      "type":"structure",
+      "members":{
+        "Prefix":{
+          "shape":"String",
+          "locationName":"prefix"
+        },
+        "Asn":{
+          "shape":"String",
+          "locationName":"asn"
+        },
+        "DetectedAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"detectedAt"
+        }
+      }
+    },
+    "IpamRouteOverlapSet":{
+      "type":"list",
+      "member":{
+        "shape":"IpamRouteOverlap",
+        "locationName":"item"
+      },
+      "max":100,
+      "min":0
+    },
+    "IpamRouteProtectionFinding":{
+      "type":"structure",
+      "members":{
+        "ResourceOwnerId":{
+          "shape":"String",
+          "locationName":"resourceOwnerId"
+        },
+        "ResourceRegion":{
+          "shape":"String",
+          "locationName":"resourceRegion"
+        },
+        "IpamPoolId":{
+          "shape":"IpamPoolId",
+          "locationName":"ipamPoolId"
+        },
+        "Cidr":{
+          "shape":"String",
+          "locationName":"cidr"
+        },
+        "State":{
+          "shape":"IpamByoipCidrState",
+          "locationName":"state"
+        },
+        "AdvertisementType":{
+          "shape":"IpamByoipAdvertisementType",
+          "locationName":"advertisementType"
+        },
+        "NetworkBorderGroup":{
+          "shape":"String",
+          "locationName":"networkBorderGroup"
+        },
+        "PoolId":{
+          "shape":"String",
+          "locationName":"poolId"
+        },
+        "Asn":{
+          "shape":"String",
+          "locationName":"asn"
+        },
+        "RpkiStatus":{
+          "shape":"IpamRpkiStatus",
+          "locationName":"rpkiStatus"
+        },
+        "RpkiStrength":{
+          "shape":"IpamRpkiStrength",
+          "locationName":"rpkiStrength"
+        },
+        "Roas":{
+          "shape":"IpamRouteOriginAuthorizationSet",
+          "locationName":"roaSet"
+        },
+        "RouteOverlaps":{
+          "shape":"IpamRouteOverlapSet",
+          "locationName":"routeOverlapSet"
+        },
+        "SampleTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"sampleTime"
+        },
+        "RoaSampleTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"roaSampleTime"
+        }
+      }
+    },
+    "IpamRouteProtectionFindingSet":{
+      "type":"list",
+      "member":{
+        "shape":"IpamRouteProtectionFinding",
+        "locationName":"item"
+      }
+    },
+    "IpamRoutingPolicyRegistration":{
+      "type":"structure",
+      "members":{
+        "Cidr":{
+          "shape":"String",
+          "locationName":"cidr"
+        },
+        "Asns":{
+          "shape":"AsnList",
+          "locationName":"asnSet"
+        },
+        "PermitMoreSpecificAnnouncements":{
+          "shape":"BoxedBoolean",
+          "locationName":"permitMoreSpecificAnnouncements"
+        },
+        "MaxLength":{
+          "shape":"IpamRoutingPolicyRegistrationMaxLength",
+          "locationName":"maxLength"
+        },
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
+        },
+        "LatestDeltaId":{
+          "shape":"String",
+          "locationName":"latestDeltaId"
+        },
+        "State":{
+          "shape":"IpamRoutingPolicyRegistrationState",
+          "locationName":"state"
+        }
+      }
+    },
+    "IpamRoutingPolicyRegistrationDelta":{
+      "type":"structure",
+      "members":{
+        "DeltaId":{
+          "shape":"String",
+          "locationName":"deltaId"
+        },
+        "DeltaJson":{
+          "shape":"String",
+          "locationName":"deltaJson"
+        },
+        "State":{
+          "shape":"IpamRoutingPolicyRegistrationDeltaState",
+          "locationName":"state"
+        },
+        "StateMessage":{
+          "shape":"String",
+          "locationName":"stateMessage"
+        }
+      }
+    },
+    "IpamRoutingPolicyRegistrationDeltaSet":{
+      "type":"list",
+      "member":{
+        "shape":"IpamRoutingPolicyRegistrationDelta",
+        "locationName":"item"
+      }
+    },
+    "IpamRoutingPolicyRegistrationDeltaState":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "published",
+        "failed"
+      ]
+    },
+    "IpamRoutingPolicyRegistrationMaxLength":{
+      "type":"integer",
+      "max":48,
+      "min":0
+    },
+    "IpamRoutingPolicyRegistrationSet":{
+      "type":"list",
+      "member":{
+        "shape":"IpamRoutingPolicyRegistration",
+        "locationName":"item"
+      }
+    },
+    "IpamRoutingPolicyRegistrationState":{
+      "type":"string",
+      "enum":[
+        "pending-activate",
+        "activate-failed",
+        "create-in-progress",
+        "create-complete",
+        "update-in-progress",
+        "update-complete",
+        "delete-in-progress",
+        "delete-complete"
+      ]
+    },
+    "IpamRpkiStatus":{
+      "type":"string",
+      "enum":[
+        "valid",
+        "invalid",
+        "unknown"
+      ]
+    },
+    "IpamRpkiStrength":{
+      "type":"string",
+      "enum":[
+        "strict",
+        "permissive"
       ]
     },
     "IpamScope":{
@@ -42167,6 +44072,44 @@
         }
       }
     },
+    "ModifyApplicationStatusCheckRequest":{
+      "type":"structure",
+      "required":["ApplicationStatusCheckId"],
+      "members":{
+        "ApplicationStatusCheckId":{"shape":"ApplicationStatusCheckId"},
+        "Aggregation":{"shape":"AggregationStatusEnum"},
+        "HealthCheckPaths":{
+          "shape":"HealthCheckPathRequestList",
+          "locationName":"HealthCheckPath"
+        },
+        "Protocol":{"shape":"NetworkProtocolEnum"},
+        "Port":{"shape":"PortNumber"},
+        "Path":{"shape":"String"},
+        "DeviceIndex":{"shape":"Integer"},
+        "IpVersion":{"shape":"IpVersionEnum"},
+        "IpScope":{"shape":"IpScopeEnum"},
+        "Interval":{"shape":"Integer"},
+        "Timeout":{"shape":"Integer"},
+        "FailureThreshold":{"shape":"Integer"},
+        "SuccessThreshold":{"shape":"Integer"},
+        "StatusCodeMatcher":{"shape":"String"},
+        "InitializationGracePeriodSeconds":{"shape":"InitializationGracePeriodSeconds"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyApplicationStatusCheckResult":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusCheck":{
+          "shape":"ApplicationStatusCheckResponseObject",
+          "locationName":"applicationStatusCheck"
+        }
+      }
+    },
     "ModifyAvailabilityZoneGroupRequest":{
       "type":"structure",
       "required":[
@@ -43041,6 +44984,40 @@
         }
       }
     },
+    "ModifyIpamRoutingPolicyRegistrationRequest":{
+      "type":"structure",
+      "required":[
+        "IpamInternetRegistryAssociationId",
+        "Cidr",
+        "Asns"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamInternetRegistryAssociationId":{"shape":"IpamInternetRegistryAssociationId"},
+        "Cidr":{"shape":"String"},
+        "Asns":{
+          "shape":"AsnList",
+          "locationName":"Asn"
+        },
+        "PermitMoreSpecificAnnouncements":{"shape":"BoxedBoolean"},
+        "MaxLength":{"shape":"IpamRoutingPolicyRegistrationMaxLength"},
+        "Description":{"shape":"String"},
+        "Force":{"shape":"BoxedBoolean"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "ModifyIpamRoutingPolicyRegistrationResult":{
+      "type":"structure",
+      "members":{
+        "IpamRoutingPolicyRegistrationDelta":{
+          "shape":"IpamRoutingPolicyRegistrationDelta",
+          "locationName":"ipamRoutingPolicyRegistrationDelta"
+        }
+      }
+    },
     "ModifyIpamScopeRequest":{
       "type":"structure",
       "required":["IpamScopeId"],
@@ -43525,6 +45502,29 @@
         "PropagationDefaultRouteTableId":{"shape":"TransitGatewayRouteTableId"},
         "AmazonSideAsn":{"shape":"Long"},
         "EncryptionSupport":{"shape":"EncryptionSupportOptionValue"}
+      }
+    },
+    "ModifyTransitGatewayPolicyTableEntryRequest":{
+      "type":"structure",
+      "required":[
+        "TransitGatewayPolicyTableId",
+        "PolicyRuleNumber"
+      ],
+      "members":{
+        "TransitGatewayPolicyTableId":{"shape":"TransitGatewayPolicyTableId"},
+        "PolicyRuleNumber":{"shape":"String"},
+        "PolicyRule":{"shape":"TransitGatewayRequestPolicyRule"},
+        "TargetRouteTableId":{"shape":"TransitGatewayRouteTableId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyTransitGatewayPolicyTableEntryResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayPolicyTableEntry":{
+          "shape":"TransitGatewayPolicyTableEntry",
+          "locationName":"transitGatewayPolicyTableEntry"
+        }
       }
     },
     "ModifyTransitGatewayPrefixListReferenceRequest":{
@@ -45801,6 +47801,13 @@
       }
     },
     "NetworkPerformance":{"type":"string"},
+    "NetworkProtocolEnum":{
+      "type":"string",
+      "enum":[
+        "http",
+        "https"
+      ]
+    },
     "NeuronDeviceCoreCount":{"type":"integer"},
     "NeuronDeviceCoreInfo":{
       "type":"structure",
@@ -46908,6 +48915,11 @@
       "type":"integer",
       "max":65535,
       "min":0
+    },
+    "PortNumber":{
+      "type":"integer",
+      "max":65535,
+      "min":1
     },
     "PortRange":{
       "type":"structure",
@@ -49943,13 +51955,15 @@
         "ipam-prefix-list-resolver",
         "ipam-policy",
         "ipam-prefix-list-resolver-target",
+        "ipam-internet-registry-association",
         "secondary-interface",
         "secondary-network",
         "secondary-subnet",
         "capacity-manager-data-export",
         "vpn-concentrator",
         "ipam-pool-allocation",
-        "capacity-reservation-cancellation-quote"
+        "capacity-reservation-cancellation-quote",
+        "application-status-check"
       ]
     },
     "ResourceTypeOption":{
@@ -50521,6 +52535,15 @@
         "shape":"RevokedSecurityGroupRule",
         "locationName":"item"
       }
+    },
+    "Rir":{
+      "type":"string",
+      "enum":[
+        "ripe",
+        "apnic",
+        "arin",
+        "lacnic"
+      ]
     },
     "RoleId":{"type":"string"},
     "RootDeviceType":{
@@ -52640,6 +54663,7 @@
       "type":"string",
       "sensitive":true
     },
+    "SensitiveString":{"type":"string"},
     "SensitiveUrl":{
       "type":"string",
       "sensitive":true
@@ -54721,6 +56745,30 @@
         "locationName":"item"
       }
     },
+    "SuccessfulAssociationResponseObject":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusCheckId":{
+          "shape":"ApplicationStatusCheckId",
+          "locationName":"applicationStatusCheckId"
+        },
+        "AssociationType":{
+          "shape":"String",
+          "locationName":"associationType"
+        },
+        "AssociationValue":{
+          "shape":"String",
+          "locationName":"associationValue"
+        }
+      }
+    },
+    "SuccessfulAssociationResponseSet":{
+      "type":"list",
+      "member":{
+        "shape":"SuccessfulAssociationResponseObject",
+        "locationName":"item"
+      }
+    },
     "SuccessfulInstanceCreditSpecificationItem":{
       "type":"structure",
       "members":{
@@ -54750,6 +56798,30 @@
       "type":"list",
       "member":{
         "shape":"SuccessfulQueuedPurchaseDeletion",
+        "locationName":"item"
+      }
+    },
+    "SuccessfulSuppressionResponseObject":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "locationName":"instanceId"
+        },
+        "SuppressAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"suppressAt"
+        },
+        "ResumeAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"resumeAt"
+        }
+      }
+    },
+    "SuccessfulSuppressionResponseSet":{
+      "type":"list",
+      "member":{
+        "shape":"SuccessfulSuppressionResponseObject",
         "locationName":"item"
       }
     },
@@ -55742,6 +57814,10 @@
           "shape":"String",
           "locationName":"transitGatewayRouteTableId"
         },
+        "TransitGatewayPolicyTableId":{
+          "shape":"String",
+          "locationName":"transitGatewayPolicyTableId"
+        },
         "State":{
           "shape":"TransitGatewayAssociationState",
           "locationName":"state"
@@ -56730,6 +58806,10 @@
         "TargetRouteTableId":{
           "shape":"TransitGatewayRouteTableId",
           "locationName":"targetRouteTableId"
+        },
+        "State":{
+          "shape":"TransitGatewayPolicyTableEntryState",
+          "locationName":"state"
         }
       }
     },
@@ -56739,6 +58819,13 @@
         "shape":"TransitGatewayPolicyTableEntry",
         "locationName":"item"
       }
+    },
+    "TransitGatewayPolicyTableEntryState":{
+      "type":"string",
+      "enum":[
+        "active",
+        "deleted"
+      ]
     },
     "TransitGatewayPolicyTableId":{"type":"string"},
     "TransitGatewayPolicyTableIdStringList":{
@@ -56876,6 +58963,24 @@
         "SecurityGroupReferencingSupport":{"shape":"SecurityGroupReferencingSupportValue"},
         "MulticastSupport":{"shape":"MulticastSupportValue"},
         "TransitGatewayCidrBlocks":{"shape":"TransitGatewayCidrBlockStringList"}
+      }
+    },
+    "TransitGatewayRequestPolicyRule":{
+      "type":"structure",
+      "members":{
+        "SourceCidrBlock":{"shape":"String"},
+        "SourcePortRange":{"shape":"String"},
+        "DestinationCidrBlock":{"shape":"String"},
+        "DestinationPortRange":{"shape":"String"},
+        "Protocol":{"shape":"String"},
+        "MetaData":{"shape":"TransitGatewayRequestPolicyRuleMetaData"}
+      }
+    },
+    "TransitGatewayRequestPolicyRuleMetaData":{
+      "type":"structure",
+      "members":{
+        "MetaDataKey":{"shape":"String"},
+        "MetaDataValue":{"shape":"String"}
       }
     },
     "TransitGatewayRoute":{
@@ -57569,6 +59674,34 @@
         }
       }
     },
+    "UnsuccessfulAssociationResponseObject":{
+      "type":"structure",
+      "members":{
+        "ApplicationStatusCheckId":{
+          "shape":"ApplicationStatusCheckId",
+          "locationName":"applicationStatusCheckId"
+        },
+        "AssociationType":{
+          "shape":"String",
+          "locationName":"associationType"
+        },
+        "AssociationValue":{
+          "shape":"String",
+          "locationName":"associationValue"
+        },
+        "Reason":{
+          "shape":"String",
+          "locationName":"reason"
+        }
+      }
+    },
+    "UnsuccessfulAssociationResponseSet":{
+      "type":"list",
+      "member":{
+        "shape":"UnsuccessfulAssociationResponseObject",
+        "locationName":"item"
+      }
+    },
     "UnsuccessfulInstanceCreditSpecificationErrorCode":{
       "type":"string",
       "enum":[
@@ -57648,6 +59781,34 @@
       "type":"list",
       "member":{
         "shape":"UnsuccessfulItem",
+        "locationName":"item"
+      }
+    },
+    "UnsuccessfulSuppressionResponseObject":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "locationName":"instanceId"
+        },
+        "SuppressAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"suppressAt"
+        },
+        "ResumeAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"resumeAt"
+        },
+        "Reason":{
+          "shape":"String",
+          "locationName":"reason"
+        }
+      }
+    },
+    "UnsuccessfulSuppressionResponseSet":{
+      "type":"list",
+      "member":{
+        "shape":"UnsuccessfulSuppressionResponseObject",
         "locationName":"item"
       }
     },

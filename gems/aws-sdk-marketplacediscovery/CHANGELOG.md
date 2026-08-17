@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2026-08-06)
+------------------
+
+* Feature - GetOfferTerms now returns netPaymentTerm in offerTerms, specifying payment due period after invoice date. The paymentDuePeriod field uses ISO 8601 duration format (e.g., "P30D" for net 30 days). This is a backward-compatible addition. See API documentation for full structure and examples.
+
 1.5.0 (2026-07-09)
 ------------------
 

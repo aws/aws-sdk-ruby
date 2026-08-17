@@ -2821,6 +2821,17 @@ module Aws::Inspector2
     ResourceFilterCriteria.add_member(:ecr_image_tags, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "ecrImageTags"))
     ResourceFilterCriteria.add_member(:ec2_instance_tags, Shapes::ShapeRef.new(shape: ResourceMapFilterList, location_name: "ec2InstanceTags"))
     ResourceFilterCriteria.add_member(:lambda_function_tags, Shapes::ShapeRef.new(shape: ResourceMapFilterList, location_name: "lambdaFunctionTags"))
+    ResourceFilterCriteria.add_member(:cloud_provider, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "cloudProvider"))
+    ResourceFilterCriteria.add_member(:cloud_provider_account_id, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "cloudProviderAccountId"))
+    ResourceFilterCriteria.add_member(:cloud_provider_org_id, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "cloudProviderOrgId"))
+    ResourceFilterCriteria.add_member(:cloud_provider_region, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "cloudProviderRegion"))
+    ResourceFilterCriteria.add_member(:cloud_vm_instance_tags, Shapes::ShapeRef.new(shape: ResourceMapFilterList, location_name: "cloudVmInstanceTags"))
+    ResourceFilterCriteria.add_member(:cloud_container_image_tags, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "cloudContainerImageTags"))
+    ResourceFilterCriteria.add_member(:cloud_container_repository_name, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "cloudContainerRepositoryName"))
+    ResourceFilterCriteria.add_member(:cloud_container_registry_name, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "cloudContainerRegistryName"))
+    ResourceFilterCriteria.add_member(:cloud_serverless_function_name, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "cloudServerlessFunctionName"))
+    ResourceFilterCriteria.add_member(:cloud_serverless_function_runtime, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "cloudServerlessFunctionRuntime"))
+    ResourceFilterCriteria.add_member(:cloud_serverless_function_tags, Shapes::ShapeRef.new(shape: ResourceMapFilterList, location_name: "cloudServerlessFunctionTags"))
     ResourceFilterCriteria.struct_class = Types::ResourceFilterCriteria
 
     ResourceIdFilterList.member = Shapes::ShapeRef.new(shape: CisStringFilter)

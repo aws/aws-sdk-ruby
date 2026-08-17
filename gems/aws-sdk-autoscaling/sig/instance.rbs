@@ -96,6 +96,8 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#terminate-instance_method
       def terminate: (
+                       ?instance_ids: Array[::String],
+                       ?auto_scaling_group_name: ::String,
                        should_decrement_desired_capacity: bool
                      ) -> Activity
                    | (?Hash[Symbol, untyped]) -> Activity

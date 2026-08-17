@@ -1344,14 +1344,15 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Creates a lookup table by uploading CSV data. You can use lookup
-    # tables to enrich log data in CloudWatch Logs Insights queries with
-    # reference data such as user details, application names, or error
-    # descriptions.
+    # Creates a lookup table by uploading CSV data or from CloudWatch Logs
+    # query results. You can use lookup tables to enrich log data in
+    # CloudWatch Logs queries with reference data such as user details,
+    # application names, or error descriptions.
     #
-    # The table name must be unique within your account and Region. The CSV
-    # content must include a header row with column names, use UTF-8
-    # encoding, and not exceed 10 MB.
+    # The table name must be unique within your account and Region. You must
+    # specify either `tableBody` or `queryId`, but not both. If you use
+    # `tableBody`, the CSV content must include a header row with column
+    # names, use UTF-8 encoding, and not exceed 10 MB.
     #
     # @option params [required, String] :lookup_table_name
     #   The name of the lookup table. The name must be unique within your
@@ -1362,10 +1363,19 @@ module Aws::CloudWatchLogs
     #   A description of the lookup table. The description can be up to 1024
     #   characters long.
     #
-    # @option params [required, String] :table_body
+    # @option params [String] :table_body
     #   The CSV content of the lookup table. The first row must be a header
     #   row with column names. The content must use UTF-8 encoding and not
     #   exceed 10 MB.
+    #
+    #   You must specify either `tableBody` or `queryId`, but not both.
+    #
+    # @option params [String] :query_id
+    #   The ID of a completed or cancelled CloudWatch Logs query whose results
+    #   populate the lookup table. A cancelled query populates the table with
+    #   the partial results that were available when the query was stopped.
+    #
+    #   You must specify either `tableBody` or `queryId`, but not both.
     #
     # @option params [String] :kms_key_id
     #   The ARN of the KMS key to use to encrypt the lookup table data. If you
@@ -1387,7 +1397,8 @@ module Aws::CloudWatchLogs
     #   resp = client.create_lookup_table({
     #     lookup_table_name: "LookupTableName", # required
     #     description: "LookupTableDescription",
-    #     table_body: "TableBody", # required
+    #     table_body: "TableBody",
+    #     query_id: "QueryId",
     #     kms_key_id: "KmsKeyId",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1454,8 +1465,10 @@ module Aws::CloudWatchLogs
     #   time window relative to the execution time over which the query runs.
     #
     # @option params [Types::DestinationConfiguration] :destination_configuration
-    #   Configuration for where to deliver query results. Currently supports
-    #   Amazon S3 destinations for storing query output.
+    #   Configuration for where to deliver query results. Supports Amazon S3
+    #   destinations for storing query output and lookup table destinations
+    #   for automatically refreshing lookup tables with query results. You can
+    #   configure one or both destination types.
     #
     # @option params [Integer] :schedule_start_time
     #   The start time for the scheduled query in Unix epoch format. The query
@@ -1497,11 +1510,20 @@ module Aws::CloudWatchLogs
     #     start_time_offset: 1,
     #     end_time_offset: 1,
     #     destination_configuration: {
-    #       s3_configuration: { # required
+    #       s3_configuration: {
     #         destination_identifier: "S3Uri", # required
     #         role_arn: "RoleArn", # required
     #         owner_account_id: "AccountId",
     #         kms_key_id: "KmsKeyId",
+    #       },
+    #       lookup_table_configuration: {
+    #         table_name: "LookupTableName", # required
+    #         role_arn: "RoleArn", # required
+    #         description: "LookupTableDescription",
+    #         kms_key_id: "KmsKeyId",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       },
     #     },
     #     schedule_start_time: 1,
@@ -2642,9 +2664,13 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Returns a list of custom and default field indexes which are
-    # discovered in log data. For more information about field index
-    # policies, see [PutIndexPolicy][1].
+    # Returns a list of field indexes discovered in log data. By default,
+    # the response includes the `DEFAULT`, `CUSTOM`, and `INACTIVE` index
+    # categories. To return indexes from other categories, use the
+    # `indexCategories` parameter.
+    #
+    # For more information about field index policies, see
+    # [PutIndexPolicy][1].
     #
     #
     #
@@ -2653,6 +2679,38 @@ module Aws::CloudWatchLogs
     # @option params [required, Array<String>] :log_group_identifiers
     #   An array containing the names or ARNs of the log groups that you want
     #   to retrieve field indexes for.
+    #
+    # @option params [Array<String>] :index_categories
+    #   The index categories to return. The following values are supported:
+    #
+    #   * `DEFAULT`: Fields that CloudWatch Logs indexes by default. Examples
+    #     include `@logStream` and `@data_format`.
+    #
+    #   * `CUSTOM`: Fields that you added manually to the field index policy.
+    #     CloudWatch Logs always indexes these fields. These fields count
+    #     toward the quota of 20 fields for each log group.
+    #
+    #   * `AUTO`: Fields that CloudWatch Logs indexes automatically based on
+    #     your query patterns and usage. These fields do not count toward the
+    #     field index quota. CloudWatch Logs might update these fields based
+    #     on changes in your query patterns. To keep a field indexed
+    #     permanently, add it to an account-level or log-group level field
+    #     index policy.
+    #
+    #   * `INACTIVE`: Fields that CloudWatch Logs indexed before but does not
+    #     index now. This happens if you remove a field from the field index
+    #     policy or if CloudWatch Logs automatically selects a different field
+    #     based on your queries.
+    #
+    #   If you omit this parameter, the response includes the `DEFAULT`,
+    #   `CUSTOM`, and `INACTIVE` categories.
+    #
+    #   For more information about automatically indexed fields and using the
+    #   `AUTO` category, see [Automatically indexed fields][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Automatic.html
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. The token expires after
@@ -2667,6 +2725,7 @@ module Aws::CloudWatchLogs
     #
     #   resp = client.describe_field_indexes({
     #     log_group_identifiers: ["LogGroupIdentifier"], # required
+    #     index_categories: ["DEFAULT"], # accepts DEFAULT, CUSTOM, AUTO, INACTIVE
     #     next_token: "NextToken",
     #   })
     #
@@ -2679,6 +2738,7 @@ module Aws::CloudWatchLogs
     #   resp.field_indexes[0].first_event_time #=> Integer
     #   resp.field_indexes[0].last_event_time #=> Integer
     #   resp.field_indexes[0].type #=> String, one of "FACET", "FIELD_INDEX"
+    #   resp.field_indexes[0].index_category #=> String, one of "DEFAULT", "CUSTOM", "AUTO", "INACTIVE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeFieldIndexes AWS API Documentation
@@ -3716,6 +3776,11 @@ module Aws::CloudWatchLogs
     #   after `Jan 1, 1970 00:00:00 UTC`. Events with a timestamp before this
     #   time are not returned.
     #
+    #   <note markdown="1"> Set `startTime` explicitly to reduce the chances of empty pages in the
+    #   response.
+    #
+    #    </note>
+    #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
     #   after `Jan 1, 1970 00:00:00 UTC`. Events with a timestamp later than
@@ -4214,6 +4279,11 @@ module Aws::CloudWatchLogs
     #   after `Jan 1, 1970 00:00:00 UTC`. Events with a timestamp equal to
     #   this time or later than this time are included. Events with a
     #   timestamp earlier than this time are not included.
+    #
+    #   <note markdown="1"> Set `startTime` explicitly to reduce the chances of empty pages in the
+    #   response.
+    #
+    #    </note>
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
@@ -4830,6 +4900,12 @@ module Aws::CloudWatchLogs
     #   resp.destination_configuration.s3_configuration.role_arn #=> String
     #   resp.destination_configuration.s3_configuration.owner_account_id #=> String
     #   resp.destination_configuration.s3_configuration.kms_key_id #=> String
+    #   resp.destination_configuration.lookup_table_configuration.table_name #=> String
+    #   resp.destination_configuration.lookup_table_configuration.role_arn #=> String
+    #   resp.destination_configuration.lookup_table_configuration.description #=> String
+    #   resp.destination_configuration.lookup_table_configuration.kms_key_id #=> String
+    #   resp.destination_configuration.lookup_table_configuration.tags #=> Hash
+    #   resp.destination_configuration.lookup_table_configuration.tags["TagKey"] #=> String
     #   resp.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.schedule_type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
     #   resp.last_triggered_time #=> Integer
@@ -4904,7 +4980,7 @@ module Aws::CloudWatchLogs
     #   resp.trigger_history[0].triggered_timestamp #=> Integer
     #   resp.trigger_history[0].error_message #=> String
     #   resp.trigger_history[0].destinations #=> Array
-    #   resp.trigger_history[0].destinations[0].destination_type #=> String, one of "S3"
+    #   resp.trigger_history[0].destinations[0].destination_type #=> String, one of "S3", "LOOKUP_TABLE"
     #   resp.trigger_history[0].destinations[0].destination_identifier #=> String
     #   resp.trigger_history[0].destinations[0].status #=> String, one of "IN_PROGRESS", "CLIENT_ERROR", "FAILED", "COMPLETE"
     #   resp.trigger_history[0].destinations[0].processed_identifier #=> String
@@ -4920,7 +4996,7 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Returns the storage tier policy for your account.
+    # Returns the storage tier policy for the account.
     #
     # @return [Types::GetStorageTierPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5598,6 +5674,12 @@ module Aws::CloudWatchLogs
     #   resp.scheduled_queries[0].destination_configuration.s3_configuration.role_arn #=> String
     #   resp.scheduled_queries[0].destination_configuration.s3_configuration.owner_account_id #=> String
     #   resp.scheduled_queries[0].destination_configuration.s3_configuration.kms_key_id #=> String
+    #   resp.scheduled_queries[0].destination_configuration.lookup_table_configuration.table_name #=> String
+    #   resp.scheduled_queries[0].destination_configuration.lookup_table_configuration.role_arn #=> String
+    #   resp.scheduled_queries[0].destination_configuration.lookup_table_configuration.description #=> String
+    #   resp.scheduled_queries[0].destination_configuration.lookup_table_configuration.kms_key_id #=> String
+    #   resp.scheduled_queries[0].destination_configuration.lookup_table_configuration.tags #=> Hash
+    #   resp.scheduled_queries[0].destination_configuration.lookup_table_configuration.tags["TagKey"] #=> String
     #   resp.scheduled_queries[0].creation_time #=> Integer
     #   resp.scheduled_queries[0].last_updated_time #=> Integer
     #
@@ -6808,6 +6890,10 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :log_type
     #   Defines the type of log that the source is sending.
     #
+    #   * For Application Load Balancer, the valid values are
+    #     `ALB_ACCESS_LOGS`, `ALB_CONNECTION_LOGS`, and
+    #     `ALB_HEALTH_CHECK_LOGS`.
+    #
     #   * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS`
     #     and `EVENT_LOGS`.
     #
@@ -7830,14 +7916,15 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Sets the storage tier policy for your account. When you set the
-    # storage tier to `INTELLIGENT_TIERING`, CloudWatch Logs automatically
-    # moves your log data between storage tiers based on access patterns to
-    # optimize costs.
+    # Sets the storage tier policy for the account. When you set the storage
+    # tier to `INTELLIGENT_TIERING`, the service automatically moves log
+    # data to the most cost-effective storage tier based on access
+    # frequency.
     #
     # @option params [required, String] :storage_tier
-    #   The storage tier to set for the account. Valid values are `STANDARD`
-    #   and `INTELLIGENT_TIERING`.
+    #   The storage tier to set for the account. Use `INTELLIGENT_TIERING` to
+    #   automatically optimize storage costs by moving log data to the
+    #   appropriate tier based on access frequency.
     #
     # @return [Types::PutStorageTierPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7985,9 +8072,9 @@ module Aws::CloudWatchLogs
     #
     # @option params [Array<String>] :emit_system_fields
     #   A list of system fields to include in the log events sent to the
-    #   subscription destination. Valid values are `@aws.account` and
-    #   `@aws.region`. These fields provide source information for centralized
-    #   log data in the forwarded payload.
+    #   subscription destination. Valid values are `@aws.account`,
+    #   `@aws.region`, and `@source.log`. These fields provide source
+    #   information for centralized log data in the forwarded payload.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9354,12 +9441,13 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Updates an existing lookup table by replacing all of its CSV content.
-    # After the update completes, queries that use this table will use the
-    # new data.
+    # Updates an existing lookup table by replacing all of its content with
+    # new CSV data or CloudWatch Logs query results. After the update
+    # completes, queries that use this table use the new data.
     #
-    # This is a full replacement operation. All existing content is replaced
-    # with the new CSV data.
+    # This is a full replacement operation. All existing content is
+    # replaced. You must specify either `tableBody` or `queryId`, but not
+    # both.
     #
     # @option params [required, String] :lookup_table_arn
     #   The ARN of the lookup table to update.
@@ -9367,10 +9455,20 @@ module Aws::CloudWatchLogs
     # @option params [String] :description
     #   An updated description of the lookup table.
     #
-    # @option params [required, String] :table_body
+    # @option params [String] :table_body
     #   The new CSV content to replace the existing data. The first row must
     #   be a header row with column names. The content must use UTF-8 encoding
     #   and not exceed 10 MB.
+    #
+    #   You must specify either `tableBody` or `queryId`, but not both.
+    #
+    # @option params [String] :query_id
+    #   The ID of a completed or cancelled CloudWatch Logs query whose results
+    #   replace the lookup table content. A cancelled query replaces the
+    #   content with the partial results that were available when the query
+    #   was stopped.
+    #
+    #   You must specify either `tableBody` or `queryId`, but not both.
     #
     # @option params [String] :kms_key_id
     #   The ARN of the KMS key to use to encrypt the lookup table data. You
@@ -9388,7 +9486,8 @@ module Aws::CloudWatchLogs
     #   resp = client.update_lookup_table({
     #     lookup_table_arn: "Arn", # required
     #     description: "LookupTableDescription",
-    #     table_body: "TableBody", # required
+    #     table_body: "TableBody",
+    #     query_id: "QueryId",
     #     kms_key_id: "KmsKeyId",
     #   })
     #
@@ -9492,11 +9591,20 @@ module Aws::CloudWatchLogs
     #     start_time_offset: 1,
     #     end_time_offset: 1,
     #     destination_configuration: {
-    #       s3_configuration: { # required
+    #       s3_configuration: {
     #         destination_identifier: "S3Uri", # required
     #         role_arn: "RoleArn", # required
     #         owner_account_id: "AccountId",
     #         kms_key_id: "KmsKeyId",
+    #       },
+    #       lookup_table_configuration: {
+    #         table_name: "LookupTableName", # required
+    #         role_arn: "RoleArn", # required
+    #         description: "LookupTableDescription",
+    #         kms_key_id: "KmsKeyId",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       },
     #     },
     #     schedule_start_time: 1,
@@ -9522,6 +9630,12 @@ module Aws::CloudWatchLogs
     #   resp.destination_configuration.s3_configuration.role_arn #=> String
     #   resp.destination_configuration.s3_configuration.owner_account_id #=> String
     #   resp.destination_configuration.s3_configuration.kms_key_id #=> String
+    #   resp.destination_configuration.lookup_table_configuration.table_name #=> String
+    #   resp.destination_configuration.lookup_table_configuration.role_arn #=> String
+    #   resp.destination_configuration.lookup_table_configuration.description #=> String
+    #   resp.destination_configuration.lookup_table_configuration.kms_key_id #=> String
+    #   resp.destination_configuration.lookup_table_configuration.tags #=> Hash
+    #   resp.destination_configuration.lookup_table_configuration.tags["TagKey"] #=> String
     #   resp.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.schedule_type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
     #   resp.last_triggered_time #=> Integer
@@ -9559,7 +9673,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.161.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

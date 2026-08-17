@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2026-08-06)
+------------------
+
+* Feature - Add support for WhatsApp Conversions APIs.
+
 1.28.0 (2026-07-09)
 ------------------
 

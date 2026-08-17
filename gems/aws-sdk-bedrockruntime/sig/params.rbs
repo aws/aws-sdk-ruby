@@ -151,7 +151,21 @@ module Aws
         redacted_content: ::String?
       }?,
       citations_content: Params::citations_content_block?,
-      search_result: Params::search_result_block?
+      search_result: Params::search_result_block?,
+      tool_addition: {
+        tool: {
+          type: ::String?,
+          name: ::String?,
+          server_name: ::String?
+        }
+      }?,
+      tool_removal: {
+        tool: {
+          type: ::String?,
+          name: ::String?,
+          server_name: ::String?
+        }
+      }?
     }
 
       type tool_result_content_block = {
@@ -261,7 +275,8 @@ module Aws
     }
 
       type output_config = {
-      text_format: Params::output_format?
+      text_format: Params::output_format?,
+      effort: ::String?
     }
 
     end

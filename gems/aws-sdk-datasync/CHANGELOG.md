@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2026-07-28)
+------------------
+
+* Feature - Adds Enhanced mode support for EFS and FSx Lustre locations without an agent, and for HDFS (TDE), Azure Blob, and object storage locations with an agent. HDFS Enhanced mode supports multiple NameNodes for High Availability. Enhanced mode agents can now be deployed on Microsoft Hyper-V.
+
 1.126.0 (2026-07-09)
 ------------------
 

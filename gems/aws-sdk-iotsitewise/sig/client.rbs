@@ -99,6 +99,34 @@ module Aws
                                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _BatchAssociateDataSegmentsToDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateDataSegmentsToDatasetResponse]
+        def dataset_id: () -> ::String
+        def dataset_version: () -> ::String
+        def failed_associations: () -> ::Array[Types::FailedDataSegmentAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#batch_associate_data_segments_to_dataset-instance_method
+      def batch_associate_data_segments_to_dataset: (
+                                                      dataset_id: ::String,
+                                                      workspace_name: ::String,
+                                                      associate_data_segment_entries: Array[
+                                                        {
+                                                          source_dataset_id: ::String,
+                                                          time_series_id: ::String,
+                                                          start_timestamp: {
+                                                            time_in_seconds: ::Integer,
+                                                            offset_in_nanos: ::Integer?
+                                                          },
+                                                          end_timestamp: {
+                                                            time_in_seconds: ::Integer,
+                                                            offset_in_nanos: ::Integer?
+                                                          }
+                                                        }
+                                                      ],
+                                                      ?client_token: ::String
+                                                    ) -> _BatchAssociateDataSegmentsToDatasetResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateDataSegmentsToDatasetResponseSuccess
+
       interface _BatchAssociateProjectAssetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateProjectAssetsResponse]
         def errors: () -> ::Array[Types::AssetErrorDetails]
@@ -110,6 +138,61 @@ module Aws
                                             ?client_token: ::String
                                           ) -> _BatchAssociateProjectAssetsResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateProjectAssetsResponseSuccess
+
+      interface _BatchDeleteDatasetDataSegmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteDatasetDataSegmentsResponse]
+        def dataset_id: () -> ::String
+        def dataset_version: () -> ::String
+        def errors: () -> ::Array[Types::FailedDataSegmentDeletion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#batch_delete_dataset_data_segments-instance_method
+      def batch_delete_dataset_data_segments: (
+                                                dataset_id: ::String,
+                                                workspace_name: ::String,
+                                                delete_data_segment_entries: Array[
+                                                  {
+                                                    time_series_id: ::String,
+                                                    start_timestamp: {
+                                                      time_in_seconds: ::Integer,
+                                                      offset_in_nanos: ::Integer?
+                                                    },
+                                                    end_timestamp: {
+                                                      time_in_seconds: ::Integer,
+                                                      offset_in_nanos: ::Integer?
+                                                    }
+                                                  }
+                                                ],
+                                                ?client_token: ::String
+                                              ) -> _BatchDeleteDatasetDataSegmentsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteDatasetDataSegmentsResponseSuccess
+
+      interface _BatchDisassociateDataSegmentsFromDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateDataSegmentsFromDatasetResponse]
+        def dataset_id: () -> ::String
+        def dataset_version: () -> ::String
+        def failed_disassociations: () -> ::Array[Types::FailedDataSegmentDisassociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#batch_disassociate_data_segments_from_dataset-instance_method
+      def batch_disassociate_data_segments_from_dataset: (
+                                                           dataset_id: ::String,
+                                                           workspace_name: ::String,
+                                                           disassociate_data_segment_entries: Array[
+                                                             {
+                                                               source_dataset_id: ::String,
+                                                               time_series_id: ::String,
+                                                               start_timestamp: {
+                                                                 time_in_seconds: ::Integer,
+                                                                 offset_in_nanos: ::Integer?
+                                                               },
+                                                               end_timestamp: {
+                                                                 time_in_seconds: ::Integer,
+                                                                 offset_in_nanos: ::Integer?
+                                                               }
+                                                             }
+                                                           ],
+                                                           ?client_token: ::String
+                                                         ) -> _BatchDisassociateDataSegmentsFromDatasetResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateDataSegmentsFromDatasetResponseSuccess
 
       interface _BatchDisassociateProjectAssetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateProjectAssetsResponse]
@@ -234,6 +317,43 @@ module Aws
                                           ) -> _BatchPutAssetPropertyValueResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutAssetPropertyValueResponseSuccess
 
+      interface _CancelEnrichmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelEnrichmentJobResponse]
+        def job_id: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#cancel_enrichment_job-instance_method
+      def cancel_enrichment_job: (
+                                   workspace_name: ::String,
+                                   job_id: ::String
+                                 ) -> _CancelEnrichmentJobResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelEnrichmentJobResponseSuccess
+
+      interface _CancelPipelineExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelPipelineExecutionResponse]
+        def state: () -> ("NOT_STARTED" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#cancel_pipeline_execution-instance_method
+      def cancel_pipeline_execution: (
+                                       workspace_name: ::String,
+                                       pipeline_name: ::String,
+                                       pipeline_execution_id: ::String,
+                                       ?reason: ::String
+                                     ) -> _CancelPipelineExecutionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelPipelineExecutionResponseSuccess
+
+      interface _CancelQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelQueryResponse]
+        def query_id: () -> ::String
+        def status: () -> ("SUBMITTED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELED" | "CANCELING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#cancel_query-instance_method
+      def cancel_query: (
+                          workspace_name: ::String,
+                          query_id: ::String
+                        ) -> _CancelQueryResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelQueryResponseSuccess
+
       interface _CreateAccessPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessPolicyResponse]
         def access_policy_id: () -> ::String
@@ -248,6 +368,25 @@ module Aws
                                   ?tags: Hash[::String, ::String]
                                 ) -> _CreateAccessPolicyResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessPolicyResponseSuccess
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def dns_subdomain: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_application-instance_method
+      def create_application: (
+                                ?client_token: ::String,
+                                idc_instance_arn: ::String,
+                                workspace_name: ::String,
+                                name: ::String,
+                                ?description: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
 
       interface _CreateAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetResponse]
@@ -313,6 +452,7 @@ module Aws
         def asset_model_composite_model_id: () -> ::String
         def asset_model_composite_model_path: () -> ::Array[Types::AssetModelCompositeModelPathSegment]
         def asset_model_status: () -> Types::AssetModelStatus
+        def asset_model_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_asset_model_composite_model-instance_method
       def create_asset_model_composite_model: (
@@ -348,24 +488,26 @@ module Aws
                                       {
                                         bucket: ::String,
                                         key: ::String,
-                                        version_id: ::String?
+                                        version_id: ::String?,
+                                        alias: ::String?,
+                                        start_time: {
+                                          time_in_seconds: ::Integer,
+                                          offset_in_nanos: ::Integer?
+                                        }?,
+                                        file_format: Params::file_format?
                                       }
                                     ],
                                     error_report_location: {
                                       bucket: ::String,
                                       prefix: ::String
                                     },
-                                    job_configuration: {
-                                      file_format: {
-                                        csv: {
-                                          column_names: Array[("ALIAS" | "ASSET_ID" | "PROPERTY_ID" | "DATA_TYPE" | "TIMESTAMP_SECONDS" | "TIMESTAMP_NANO_OFFSET" | "QUALITY" | "VALUE")]
-                                        }?,
-                                        parquet: {
-                                        }?
-                                      }
+                                    ?job_configuration: {
+                                      file_format: Params::file_format?
                                     },
                                     ?adaptive_ingestion: bool,
-                                    ?delete_files_after_import: bool
+                                    ?delete_files_after_import: bool,
+                                    ?dataset_id: ::String,
+                                    ?workspace_name: ::String
                                   ) -> _CreateBulkImportJobResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBulkImportJobResponseSuccess
 
@@ -418,11 +560,80 @@ module Aws
                             ?dataset_id: ::String,
                             dataset_name: ::String,
                             ?dataset_description: ::String,
+                            ?dataset_type: ("SESSION" | "CURATED" | "EXTERNAL"),
+                            ?dataset_config: Params::dataset_config,
+                            ?workspace_name: ::String,
+                            ?metadata: Hash[::String, ::String],
                             dataset_source: Params::dataset_source,
                             ?client_token: ::String,
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateDatasetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
+      interface _CreateDatasetExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetExportJobResponse]
+        def job_id: () -> ::String
+        def workspace_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_dataset_export_job-instance_method
+      def create_dataset_export_job: (
+                                       workspace_name: ::String,
+                                       ?client_token: ::String,
+                                       destination_s3_uri: ::String,
+                                       input: {
+                                         timeseries: Array[
+                                           {
+                                             time_series_id: ::String?,
+                                             property_alias: ::String?,
+                                             trim_settings: Params::trim_settings?,
+                                             format_settings: {
+                                               frames_per_second: ::Integer?,
+                                               width_in_pixels: ::Integer?,
+                                               height_in_pixels: ::Integer?
+                                             }?
+                                           }
+                                         ]?,
+                                         dataset: {
+                                           dataset_id: ::String,
+                                           trim_settings: Params::trim_settings?,
+                                           export_data_types: Array[("VIDEO" | "TELEMETRY" | "ANNOTATION")]?
+                                         }?
+                                       },
+                                       error_report_location: {
+                                         s3_uri: ::String
+                                       }
+                                     ) -> _CreateDatasetExportJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetExportJobResponseSuccess
+
+      interface _CreateEnrichmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnrichmentJobResponse]
+        def job_id: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELLED")
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_enrichment_job-instance_method
+      def create_enrichment_job: (
+                                   workspace_name: ::String,
+                                   job_configuration: {
+                                     event_detection: {
+                                       dataset_id: ::String,
+                                       time_series_id: ::String?,
+                                       property_alias: ::String?,
+                                       trim_settings: {
+                                         start_time: {
+                                           time_in_seconds: ::Integer,
+                                           offset_in_nanos: ::Integer?
+                                         },
+                                         end_time: {
+                                           time_in_seconds: ::Integer,
+                                           offset_in_nanos: ::Integer?
+                                         }
+                                       }
+                                     }?
+                                   },
+                                   ?client_token: ::String
+                                 ) -> _CreateEnrichmentJobResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnrichmentJobResponseSuccess
 
       interface _CreateGatewayResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateGatewayResponse]
@@ -448,6 +659,32 @@ module Aws
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateGatewayResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayResponseSuccess
+
+      interface _CreatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePipelineResponse]
+        def pipeline_name: () -> ::String
+        def pipeline_arn: () -> ::String
+        def version: () -> ::String
+        def status: () -> Types::ResourceStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_pipeline-instance_method
+      def create_pipeline: (
+                             workspace_name: ::String,
+                             pipeline_name: ::String,
+                             ?description: ::String,
+                             ?environment_variables: Hash[::String, ::String],
+                             computations: Array[
+                               {
+                                 compute_node_name: ::String,
+                                 task_name: ::String,
+                                 environment_variables: Hash[::String, ::String]?,
+                                 depends_on: Array[::String]?
+                               }
+                             ],
+                             ?tags: Hash[::String, ::String],
+                             ?client_token: ::String
+                           ) -> _CreatePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
 
       interface _CreatePortalResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreatePortalResponse]
@@ -497,6 +734,43 @@ module Aws
                           ) -> _CreateProjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
 
+      interface _CreateTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTaskResponse]
+        def task_name: () -> ::String
+        def task_arn: () -> ::String
+        def version: () -> ::String
+        def status: () -> Types::ResourceStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_task-instance_method
+      def create_task: (
+                         workspace_name: ::String,
+                         task_name: ::String,
+                         ?description: ::String,
+                         task_configuration: Params::task_configuration,
+                         ?tags: Hash[::String, ::String],
+                         ?client_token: ::String
+                       ) -> _CreateTaskResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTaskResponseSuccess
+
+      interface _CreateWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceResponse]
+        def workspace_name: () -> ::String
+        def workspace_arn: () -> ::String
+        def workspace_status: () -> Types::WorkspaceStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_workspace-instance_method
+      def create_workspace: (
+                              workspace_name: ::String,
+                              ?workspace_description: ::String,
+                              encryption_configuration: {
+                                encryption_type: ("SITEWISE_DEFAULT_ENCRYPTION" | "KMS_BASED_ENCRYPTION"),
+                                kms_key_id: ::String?
+                              },
+                              ?tags: Hash[::String, ::String],
+                              ?client_token: ::String
+                            ) -> _CreateWorkspaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceResponseSuccess
+
       interface _DeleteAccessPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessPolicyResponse]
       end
@@ -507,8 +781,19 @@ module Aws
                                 ) -> _DeleteAccessPolicyResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessPolicyResponseSuccess
 
+      interface _DeleteApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_application-instance_method
+      def delete_application: (
+                                workspace_name: ::String,
+                                id: ::String
+                              ) -> _DeleteApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
+
       interface _DeleteAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetResponse]
+        def asset_id: () -> ::String
         def asset_status: () -> Types::AssetStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_asset-instance_method
@@ -520,6 +805,7 @@ module Aws
 
       interface _DeleteAssetModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetModelResponse]
+        def asset_model_id: () -> ::String
         def asset_model_status: () -> Types::AssetModelStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_asset_model-instance_method
@@ -535,6 +821,7 @@ module Aws
       interface _DeleteAssetModelCompositeModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetModelCompositeModelResponse]
         def asset_model_status: () -> Types::AssetModelStatus
+        def asset_model_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_asset_model_composite_model-instance_method
       def delete_asset_model_composite_model: (
@@ -590,6 +877,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_dataset-instance_method
       def delete_dataset: (
                             dataset_id: ::String,
+                            ?workspace_name: ::String,
                             ?client_token: ::String
                           ) -> _DeleteDatasetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDatasetResponseSuccess
@@ -599,6 +887,17 @@ module Aws
                             gateway_id: ::String
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeletePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePipelineResponse]
+        def status: () -> Types::ResourceStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_pipeline-instance_method
+      def delete_pipeline: (
+                             workspace_name: ::String,
+                             pipeline_name: ::String
+                           ) -> _DeletePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePipelineResponseSuccess
 
       interface _DeletePortalResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePortalResponse]
@@ -621,14 +920,37 @@ module Aws
                           ) -> _DeleteProjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
 
+      interface _DeleteTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTaskResponse]
+        def status: () -> Types::ResourceStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_task-instance_method
+      def delete_task: (
+                         workspace_name: ::String,
+                         task_name: ::String
+                       ) -> _DeleteTaskResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTaskResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_time_series-instance_method
       def delete_time_series: (
                                 ?alias: ::String,
                                 ?asset_id: ::String,
                                 ?property_id: ::String,
-                                ?client_token: ::String
+                                ?client_token: ::String,
+                                ?workspace_name: ::String
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceResponse]
+        def workspace_status: () -> Types::WorkspaceStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_workspace-instance_method
+      def delete_workspace: (
+                              workspace_name: ::String,
+                              ?client_token: ::String
+                            ) -> _DeleteWorkspaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceResponseSuccess
 
       interface _DescribeAccessPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccessPolicyResponse]
@@ -660,6 +982,26 @@ module Aws
                              action_id: ::String
                            ) -> _DescribeActionResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeActionResponseSuccess
+
+      interface _DescribeApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def dns_subdomain: () -> ::String
+        def description: () -> ::String
+        def id: () -> ::String
+        def idc_application_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING")
+        def updated_at: () -> ::Time
+        def workspace_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_application-instance_method
+      def describe_application: (
+                                  workspace_name: ::String,
+                                  id: ::String
+                                ) -> _DescribeApplicationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationResponseSuccess
 
       interface _DescribeAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetResponse]
@@ -796,10 +1138,13 @@ module Aws
         def job_last_update_date: () -> ::Time
         def adaptive_ingestion: () -> bool
         def delete_files_after_import: () -> bool
+        def dataset_id: () -> ::String
+        def workspace_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_bulk_import_job-instance_method
       def describe_bulk_import_job: (
-                                      job_id: ::String
+                                      job_id: ::String,
+                                      ?workspace_name: ::String
                                     ) -> _DescribeBulkImportJobResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBulkImportJobResponseSuccess
 
@@ -861,17 +1206,42 @@ module Aws
         def dataset_arn: () -> ::String
         def dataset_name: () -> ::String
         def dataset_description: () -> ::String
+        def dataset_type: () -> ("SESSION" | "CURATED" | "EXTERNAL")
+        def dataset_config: () -> Types::DatasetConfig
+        def workspace_name: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
         def dataset_source: () -> Types::DatasetSource
         def dataset_status: () -> Types::DatasetStatus
         def dataset_creation_date: () -> ::Time
         def dataset_last_update_date: () -> ::Time
         def dataset_version: () -> ::String
+        def enrichment_status: () -> Types::DatasetEnrichment
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_dataset-instance_method
       def describe_dataset: (
-                              dataset_id: ::String
+                              dataset_id: ::String,
+                              ?workspace_name: ::String,
+                              ?dataset_version: ::String
                             ) -> _DescribeDatasetResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetResponseSuccess
+
+      interface _DescribeDatasetExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetExportJobResponse]
+        def job_id: () -> ::String
+        def workspace_name: () -> ::String
+        def status: () -> ("SUBMITTED" | "RUNNING" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+        def started_at: () -> ::Time
+        def completed_at: () -> ::Time
+        def destination_s3_uri: () -> ::String
+        def error_report_location: () -> Types::ExportErrorReportLocation
+        def input: () -> Types::ProcessingInput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_dataset_export_job-instance_method
+      def describe_dataset_export_job: (
+                                         workspace_name: ::String,
+                                         job_id: ::String
+                                       ) -> _DescribeDatasetExportJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetExportJobResponseSuccess
 
       interface _DescribeDefaultEncryptionConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDefaultEncryptionConfigurationResponse]
@@ -883,6 +1253,26 @@ module Aws
       def describe_default_encryption_configuration: (
                                                      ) -> _DescribeDefaultEncryptionConfigurationResponseSuccess
                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDefaultEncryptionConfigurationResponseSuccess
+
+      interface _DescribeEnrichmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEnrichmentJobResponse]
+        def job_id: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELLED")
+        def workspace_name: () -> ::String
+        def job_type: () -> ("EVENT_DETECTION")
+        def job_configuration: () -> Types::EnrichmentJobConfiguration
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def completed_at: () -> ::Time
+        def cancelled_at: () -> ::Time
+        def failure_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_enrichment_job-instance_method
+      def describe_enrichment_job: (
+                                     workspace_name: ::String,
+                                     job_id: ::String
+                                   ) -> _DescribeEnrichmentJobResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEnrichmentJobResponseSuccess
 
       interface _DescribeExecutionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExecutionResponse]
@@ -941,8 +1331,54 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_logging_options-instance_method
       def describe_logging_options: (
+                                      ?workspace_name: ::String
                                     ) -> _DescribeLoggingOptionsResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoggingOptionsResponseSuccess
+
+      interface _DescribePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePipelineResponse]
+        def pipeline_name: () -> ::String
+        def workspace_name: () -> ::String
+        def description: () -> ::String
+        def pipeline_arn: () -> ::String
+        def version: () -> ::String
+        def environment_variables: () -> ::Hash[::String, ::String]
+        def computations: () -> ::Array[Types::ComputeNode]
+        def status: () -> Types::ResourceStatus
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_pipeline-instance_method
+      def describe_pipeline: (
+                               workspace_name: ::String,
+                               pipeline_name: ::String,
+                               ?pipeline_version: ::String
+                             ) -> _DescribePipelineResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePipelineResponseSuccess
+
+      interface _DescribePipelineExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePipelineExecutionResponse]
+        def pipeline_execution_id: () -> ::String
+        def pipeline_name: () -> ::String
+        def workspace_name: () -> ::String
+        def pipeline_version: () -> ::String
+        def status: () -> Types::PipelineExecutionStatus
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def request_environment_variables: () -> Types::ExecutionEnvironmentVariables
+        def execution_priority: () -> ::Integer
+        def compute_node_execution_details: () -> ::Array[Types::ComputeNodeExecutionDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_pipeline_execution-instance_method
+      def describe_pipeline_execution: (
+                                         workspace_name: ::String,
+                                         pipeline_name: ::String,
+                                         pipeline_execution_id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _DescribePipelineExecutionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePipelineExecutionResponseSuccess
 
       interface _DescribePortalResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribePortalResponse]
@@ -986,6 +1422,40 @@ module Aws
                             ) -> _DescribeProjectResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProjectResponseSuccess
 
+      interface _DescribeQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeQueryResponse]
+        def query_id: () -> ::String
+        def status: () -> ("SUBMITTED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELED" | "CANCELING")
+        def submitted_at: () -> ::Time
+        def completed_at: () -> ::Time
+        def statistics: () -> Types::QueryStatistics
+        def error_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_query-instance_method
+      def describe_query: (
+                            workspace_name: ::String,
+                            query_id: ::String
+                          ) -> _DescribeQueryResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeQueryResponseSuccess
+
+      interface _DescribeSearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSearchResponse]
+        def search_id: () -> ::String
+        def workspace_name: () -> ::String
+        def status: () -> ("QUEUED" | "RUNNING" | "SUCCEEDED" | "FAILED")
+        def query_statement: () -> ::String
+        def search_type: () -> ("DEEP" | "QUICK")
+        def status_reason: () -> ::String
+        def started_at: () -> ::Time
+        def group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_search-instance_method
+      def describe_search: (
+                             workspace_name: ::String,
+                             search_id: ::String
+                           ) -> _DescribeSearchResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSearchResponseSuccess
+
       interface _DescribeStorageConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageConfigurationResponse]
         def storage_type: () -> ("SITEWISE_DEFAULT_STORAGE" | "MULTI_LAYER_STORAGE")
@@ -1003,25 +1473,63 @@ module Aws
                                           ) -> _DescribeStorageConfigurationResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageConfigurationResponseSuccess
 
+      interface _DescribeTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTaskResponse]
+        def workspace_name: () -> ::String
+        def task_name: () -> ::String
+        def description: () -> ::String
+        def task_arn: () -> ::String
+        def version: () -> ::String
+        def task_configuration: () -> Types::TaskConfiguration
+        def status: () -> Types::ResourceStatus
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_task-instance_method
+      def describe_task: (
+                           workspace_name: ::String,
+                           task_name: ::String,
+                           ?task_version: ::String
+                         ) -> _DescribeTaskResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTaskResponseSuccess
+
       interface _DescribeTimeSeriesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTimeSeriesResponse]
         def asset_id: () -> ::String
         def property_id: () -> ::String
         def alias: () -> ::String
         def time_series_id: () -> ::String
-        def data_type: () -> ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
+        def data_type: () -> ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT" | "VIDEO" | "ANNOTATION" | "JSON")
         def data_type_spec: () -> ::String
         def time_series_creation_date: () -> ::Time
         def time_series_last_update_date: () -> ::Time
         def time_series_arn: () -> ::String
+        def workspace_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_time_series-instance_method
       def describe_time_series: (
                                   ?alias: ::String,
                                   ?asset_id: ::String,
-                                  ?property_id: ::String
+                                  ?property_id: ::String,
+                                  ?workspace_name: ::String
                                 ) -> _DescribeTimeSeriesResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTimeSeriesResponseSuccess
+
+      interface _DescribeWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceResponse]
+        def workspace_arn: () -> ::String
+        def workspace_name: () -> ::String
+        def workspace_description: () -> ::String
+        def workspace_status: () -> Types::WorkspaceStatus
+        def encryption_configuration: () -> Types::WorkspaceEncryptionConfigurationInfo
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_workspace-instance_method
+      def describe_workspace: (
+                                workspace_name: ::String
+                              ) -> _DescribeWorkspaceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#disassociate_assets-instance_method
       def disassociate_assets: (
@@ -1129,6 +1637,35 @@ module Aws
                                             ) -> _GetAssetPropertyValueHistoryResponseSuccess
                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetPropertyValueHistoryResponseSuccess
 
+      interface _GetCaptureDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCaptureDataResponse]
+        def start_time: () -> Types::TimeInNanos
+        def end_time: () -> Types::TimeInNanos
+        def data_type: () -> ("VIDEO-MP4")
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#get_capture_data-instance_method
+      def get_capture_data: (
+                              workspace_name: ::String,
+                              start_time: {
+                                time_in_seconds: ::Integer,
+                                offset_in_nanos: ::Integer?
+                              },
+                              end_time: {
+                                time_in_seconds: ::Integer,
+                                offset_in_nanos: ::Integer?
+                              },
+                              ?time_series_id: ::String,
+                              ?property_alias: ::String,
+                              ?format_settings: {
+                                frames_per_second: ::Integer?,
+                                width_in_pixels: ::Integer?,
+                                height_in_pixels: ::Integer?
+                              },
+                              ?next_token: ::String
+                            ) -> _GetCaptureDataResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCaptureDataResponseSuccess
+
       interface _GetInterpolatedAssetPropertyValuesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInterpolatedAssetPropertyValuesResponse]
         def interpolated_asset_property_values: () -> ::Array[Types::InterpolatedAssetPropertyValue]
@@ -1151,6 +1688,35 @@ module Aws
                                                     ?interval_window_in_seconds: ::Integer
                                                   ) -> _GetInterpolatedAssetPropertyValuesResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInterpolatedAssetPropertyValuesResponseSuccess
+
+      interface _GetQueryResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryResultsResponse]
+        def column_info: () -> ::Array[Types::ColumnInformation]
+        def rows: () -> ::Array[::Array[::String]]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#get_query_results-instance_method
+      def get_query_results: (
+                               workspace_name: ::String,
+                               query_id: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _GetQueryResultsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryResultsResponseSuccess
+
+      interface _GetSearchResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSearchResultsResponse]
+        def search_results: () -> ::Array[Types::SearchResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#get_search_results-instance_method
+      def get_search_results: (
+                                search_id: ::String,
+                                workspace_name: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _GetSearchResultsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSearchResultsResponseSuccess
 
       interface _InvokeAssistantResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAssistantResponse]
@@ -1197,6 +1763,18 @@ module Aws
                           ?resolve_to_resource_id: ::String
                         ) -> _ListActionsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActionsResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
+        def next_token: () -> ::String
+        def applications: () -> ::Array[Types::ApplicationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
 
       interface _ListAssetModelCompositeModelsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetModelCompositeModelsResponse]
@@ -1307,7 +1885,8 @@ module Aws
       def list_bulk_import_jobs: (
                                    ?next_token: ::String,
                                    ?max_results: ::Integer,
-                                   ?filter: ("ALL" | "PENDING" | "RUNNING" | "CANCELLED" | "FAILED" | "COMPLETED_WITH_FAILURES" | "COMPLETED")
+                                   ?filter: ("ALL" | "PENDING" | "RUNNING" | "CANCELLED" | "FAILED" | "COMPLETED_WITH_FAILURES" | "COMPLETED"),
+                                   ?workspace_name: ::String
                                  ) -> _ListBulkImportJobsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBulkImportJobsResponseSuccess
 
@@ -1391,18 +1970,84 @@ module Aws
                            ) -> _ListDashboardsResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDashboardsResponseSuccess
 
+      interface _ListDatasetDataSegmentRelationshipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetDataSegmentRelationshipsResponse]
+        def data_segment_relationship_summaries: () -> ::Array[Types::DataSegmentRelationshipSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_dataset_data_segment_relationships-instance_method
+      def list_dataset_data_segment_relationships: (
+                                                     dataset_id: ::String,
+                                                     workspace_name: ::String,
+                                                     ?max_results: ::Integer,
+                                                     ?next_token: ::String
+                                                   ) -> _ListDatasetDataSegmentRelationshipsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetDataSegmentRelationshipsResponseSuccess
+
+      interface _ListDatasetDataSegmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetDataSegmentsResponse]
+        def data_segments: () -> ::Array[Types::DataSegmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_dataset_data_segments-instance_method
+      def list_dataset_data_segments: (
+                                        dataset_id: ::String,
+                                        workspace_name: ::String,
+                                        ?dataset_version: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListDatasetDataSegmentsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetDataSegmentsResponseSuccess
+
+      interface _ListDatasetExportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetExportJobsResponse]
+        def jobs: () -> ::Array[Types::ExportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_dataset_export_jobs-instance_method
+      def list_dataset_export_jobs: (
+                                      workspace_name: ::String,
+                                      ?filter: ("ALL" | "SUBMITTED" | "RUNNING" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED"),
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListDatasetExportJobsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetExportJobsResponseSuccess
+
       interface _ListDatasetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsResponse]
         def dataset_summaries: () -> ::Array[Types::DatasetSummary]
         def next_token: () -> ::String
+        def workspace_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_datasets-instance_method
       def list_datasets: (
-                           source_type: ("KENDRA"),
+                           source_type: ("KENDRA" | "SITEWISE"),
+                           ?workspace_name: ::String,
+                           ?dataset_type: ("SESSION" | "CURATED" | "EXTERNAL"),
                            ?next_token: ::String,
                            ?max_results: ::Integer
                          ) -> _ListDatasetsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
+      interface _ListEnrichmentJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnrichmentJobsResponse]
+        def jobs: () -> ::Array[Types::EnrichmentJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_enrichment_jobs-instance_method
+      def list_enrichment_jobs: (
+                                  workspace_name: ::String,
+                                  ?dataset_id: ::String,
+                                  ?property_alias: ::String,
+                                  ?time_series_id: ::String,
+                                  ?status: ("PENDING" | "RUNNING" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELLED"),
+                                  ?job_type: ("EVENT_DETECTION"),
+                                  ?start_date: ::Time,
+                                  ?end_date: ::Time,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListEnrichmentJobsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnrichmentJobsResponseSuccess
 
       interface _ListExecutionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListExecutionsResponse]
@@ -1446,6 +2091,38 @@ module Aws
                                         ) -> _ListInterfaceRelationshipsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInterfaceRelationshipsResponseSuccess
 
+      interface _ListPipelineExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelineExecutionsResponse]
+        def pipeline_execution_summaries: () -> ::Array[Types::PipelineExecutionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_pipeline_executions-instance_method
+      def list_pipeline_executions: (
+                                      workspace_name: ::String,
+                                      pipeline_name: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer,
+                                      ?state: ("NOT_STARTED" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED"),
+                                      ?start_time_after: ::Time,
+                                      ?start_time_before: ::Time,
+                                      ?end_time_after: ::Time,
+                                      ?end_time_before: ::Time
+                                    ) -> _ListPipelineExecutionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineExecutionsResponseSuccess
+
+      interface _ListPipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelinesResponse]
+        def pipeline_summaries: () -> ::Array[Types::PipelineSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_pipelines-instance_method
+      def list_pipelines: (
+                            workspace_name: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListPipelinesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelinesResponseSuccess
+
       interface _ListPortalsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPortalsResponse]
         def portal_summaries: () -> ::Array[Types::PortalSummary]
@@ -1484,6 +2161,40 @@ module Aws
                          ) -> _ListProjectsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
 
+      interface _ListQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueriesResponse]
+        def queries: () -> ::Array[Types::QuerySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_queries-instance_method
+      def list_queries: (
+                          workspace_name: ::String,
+                          ?filter: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListQueriesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueriesResponseSuccess
+
+      interface _ListSearchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSearchesResponse]
+        def search_summaries: () -> ::Array[Types::SearchSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_searches-instance_method
+      def list_searches: (
+                           workspace_name: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?list_searches_filters: {
+                             status_filter: Array[("QUEUED" | "RUNNING" | "SUCCEEDED" | "FAILED")]?,
+                             started_after: ::Time?,
+                             started_before: ::Time?,
+                             group_id_filter: Array[::String]?,
+                             search_type_filter: Array[("DEEP" | "QUICK")]?
+                           }
+                         ) -> _ListSearchesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSearchesResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def tags: () -> ::Hash[::String, ::String]
@@ -1494,10 +2205,24 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTasksResponse]
+        def task_summaries: () -> ::Array[Types::TaskSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_tasks-instance_method
+      def list_tasks: (
+                        workspace_name: ::String,
+                        ?next_token: ::String,
+                        ?max_results: ::Integer
+                      ) -> _ListTasksResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTasksResponseSuccess
+
       interface _ListTimeSeriesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTimeSeriesResponse]
         def time_series_summaries: () -> ::Array[Types::TimeSeriesSummary]
         def next_token: () -> ::String
+        def workspace_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_time_series-instance_method
       def list_time_series: (
@@ -1505,9 +2230,22 @@ module Aws
                               ?max_results: ::Integer,
                               ?asset_id: ::String,
                               ?alias_prefix: ::String,
-                              ?time_series_type: ("ASSOCIATED" | "DISASSOCIATED")
+                              ?time_series_type: ("ASSOCIATED" | "DISASSOCIATED"),
+                              ?workspace_name: ::String
                             ) -> _ListTimeSeriesResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTimeSeriesResponseSuccess
+
+      interface _ListWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspacesResponse]
+        def workspace_summaries: () -> ::Array[Types::WorkspaceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_workspaces-instance_method
+      def list_workspaces: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListWorkspacesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkspacesResponseSuccess
 
       interface _PutAssetModelInterfaceRelationshipResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAssetModelInterfaceRelationshipResponse]
@@ -1554,7 +2292,8 @@ module Aws
       def put_logging_options: (
                                  logging_options: {
                                    level: ("ERROR" | "INFO" | "OFF")
-                                 }
+                                 },
+                                 ?workspace_name: ::String
                                ) -> _PutLoggingOptionsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLoggingOptionsResponseSuccess
 
@@ -1592,6 +2331,69 @@ module Aws
                                      ) -> _PutStorageConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutStorageConfigurationResponseSuccess
 
+      interface _StartPipelineExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPipelineExecutionResponse]
+        def pipeline_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#start_pipeline_execution-instance_method
+      def start_pipeline_execution: (
+                                      workspace_name: ::String,
+                                      pipeline_name: ::String,
+                                      ?execution_environment_variable_overrides: {
+                                        global: Hash[::String, ::String]?,
+                                        compute_nodes: Hash[::String, Hash[::String, ::String]]?
+                                      },
+                                      ?execution_priority: ::Integer,
+                                      ?client_token: ::String
+                                    ) -> _StartPipelineExecutionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPipelineExecutionResponseSuccess
+
+      interface _StartQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartQueryResponse]
+        def query_id: () -> ::String
+        def status: () -> ("SUBMITTED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELED" | "CANCELING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#start_query-instance_method
+      def start_query: (
+                         ?client_token: ::String,
+                         workspace_name: ::String,
+                         query_statement: ::String
+                       ) -> _StartQueryResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryResponseSuccess
+
+      interface _StartSearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSearchResponse]
+        def search_id: () -> ::String
+        def workspace_name: () -> ::String
+        def status: () -> ("QUEUED" | "RUNNING" | "SUCCEEDED" | "FAILED")
+        def group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#start_search-instance_method
+      def start_search: (
+                          workspace_name: ::String,
+                          query_statement: ::String,
+                          ?client_token: ::String,
+                          ?search_type: ("DEEP" | "QUICK"),
+                          ?search_filters: {
+                            time_series_ids: Array[::String]?,
+                            dataset_ids: Array[::String]?,
+                            time_intervals: Array[
+                              {
+                                start_time: {
+                                  time_in_seconds: ::Integer,
+                                  offset_in_nanos: ::Integer?
+                                },
+                                end_time: {
+                                  time_in_seconds: ::Integer,
+                                  offset_in_nanos: ::Integer?
+                                }
+                              }
+                            ]?
+                          },
+                          ?group_id: ::String
+                        ) -> _StartSearchResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSearchResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -1627,6 +2429,7 @@ module Aws
 
       interface _UpdateAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetResponse]
+        def asset_id: () -> ::String
         def asset_status: () -> Types::AssetStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_asset-instance_method
@@ -1641,6 +2444,7 @@ module Aws
 
       interface _UpdateAssetModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetModelResponse]
+        def asset_model_id: () -> ::String
         def asset_model_status: () -> Types::AssetModelStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_asset_model-instance_method
@@ -1683,6 +2487,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetModelCompositeModelResponse]
         def asset_model_composite_model_path: () -> ::Array[Types::AssetModelCompositeModelPathSegment]
         def asset_model_status: () -> Types::AssetModelStatus
+        def asset_model_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_asset_model_composite_model-instance_method
       def update_asset_model_composite_model: (
@@ -1754,8 +2559,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_dataset-instance_method
       def update_dataset: (
                             dataset_id: ::String,
+                            ?workspace_name: ::String,
                             dataset_name: ::String,
                             ?dataset_description: ::String,
+                            ?dataset_config: Params::dataset_config,
+                            ?metadata: Hash[::String, ::String],
                             dataset_source: Params::dataset_source,
                             ?client_token: ::String
                           ) -> _UpdateDatasetResponseSuccess
@@ -1780,6 +2588,28 @@ module Aws
                                                      capability_configuration: ::String
                                                    ) -> _UpdateGatewayCapabilityConfigurationResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayCapabilityConfigurationResponseSuccess
+
+      interface _UpdatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePipelineResponse]
+        def version: () -> ::String
+        def status: () -> Types::ResourceStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_pipeline-instance_method
+      def update_pipeline: (
+                             workspace_name: ::String,
+                             pipeline_name: ::String,
+                             ?description: ::String,
+                             ?environment_variables: Hash[::String, ::String],
+                             ?computations: Array[
+                               {
+                                 compute_node_name: ::String,
+                                 task_name: ::String,
+                                 environment_variables: Hash[::String, ::String]?,
+                                 depends_on: Array[::String]?
+                               }
+                             ]
+                           ) -> _UpdatePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineResponseSuccess
 
       interface _UpdatePortalResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePortalResponse]
@@ -1823,6 +2653,36 @@ module Aws
                             ?client_token: ::String
                           ) -> _UpdateProjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
+
+      interface _UpdateTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTaskResponse]
+        def version: () -> ::String
+        def status: () -> Types::ResourceStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_task-instance_method
+      def update_task: (
+                         workspace_name: ::String,
+                         task_name: ::String,
+                         ?description: ::String,
+                         ?task_configuration: Params::task_configuration
+                       ) -> _UpdateTaskResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTaskResponseSuccess
+
+      interface _UpdateWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkspaceResponse]
+        def workspace_status: () -> Types::WorkspaceStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_workspace-instance_method
+      def update_workspace: (
+                              workspace_name: ::String,
+                              ?workspace_description: ::String,
+                              ?encryption_configuration: {
+                                encryption_type: ("SITEWISE_DEFAULT_ENCRYPTION" | "KMS_BASED_ENCRYPTION"),
+                                kms_key_id: ::String?
+                              },
+                              ?client_token: ::String
+                            ) -> _UpdateWorkspaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#wait_until-instance_method
       def wait_until: (:asset_active waiter_name, 

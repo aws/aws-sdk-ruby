@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.172.0 (2026-08-04)
+------------------
+
+* Feature - Vector indexes are a type of index in Amazon DynamoDB that enable similarity search on vector embedding stored in your table items. Vector indexes use approximate nearest neighbor search to find items whose vectors are most similar to a query vector that you provide.
+
 1.171.0 (2026-07-24)
 ------------------
 

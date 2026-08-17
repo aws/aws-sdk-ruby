@@ -145,6 +145,9 @@ module Aws::MarketplaceCatalog
     OfferBuyerAccountsFilterWildcard = Shapes::StringShape.new(name: 'OfferBuyerAccountsFilterWildcard')
     OfferBuyerAccountsList = Shapes::ListShape.new(name: 'OfferBuyerAccountsList')
     OfferBuyerAccountsString = Shapes::StringShape.new(name: 'OfferBuyerAccountsString')
+    OfferCreatedBySourceFilter = Shapes::StructureShape.new(name: 'OfferCreatedBySourceFilter')
+    OfferCreatedBySourceFilterValueList = Shapes::ListShape.new(name: 'OfferCreatedBySourceFilterValueList')
+    OfferCreatedBySourceString = Shapes::StringShape.new(name: 'OfferCreatedBySourceString')
     OfferEntityIdFilter = Shapes::StructureShape.new(name: 'OfferEntityIdFilter')
     OfferEntityIdFilterValueList = Shapes::ListShape.new(name: 'OfferEntityIdFilterValueList')
     OfferEntityIdString = Shapes::StringShape.new(name: 'OfferEntityIdString')
@@ -195,6 +198,12 @@ module Aws::MarketplaceCatalog
     OfferStateFilterValueList = Shapes::ListShape.new(name: 'OfferStateFilterValueList')
     OfferStateString = Shapes::StringShape.new(name: 'OfferStateString')
     OfferSummary = Shapes::StructureShape.new(name: 'OfferSummary')
+    OfferTargetAgreementIdFilter = Shapes::StructureShape.new(name: 'OfferTargetAgreementIdFilter')
+    OfferTargetAgreementIdFilterValueList = Shapes::ListShape.new(name: 'OfferTargetAgreementIdFilterValueList')
+    OfferTargetAgreementIdString = Shapes::StringShape.new(name: 'OfferTargetAgreementIdString')
+    OfferTargetAgreementIntentFilter = Shapes::StructureShape.new(name: 'OfferTargetAgreementIntentFilter')
+    OfferTargetAgreementIntentFilterValueList = Shapes::ListShape.new(name: 'OfferTargetAgreementIntentFilterValueList')
+    OfferTargetAgreementIntentString = Shapes::StringShape.new(name: 'OfferTargetAgreementIntentString')
     OfferTargetingFilter = Shapes::StructureShape.new(name: 'OfferTargetingFilter')
     OfferTargetingFilterValueList = Shapes::ListShape.new(name: 'OfferTargetingFilterValueList')
     OfferTargetingList = Shapes::ListShape.new(name: 'OfferTargetingList')
@@ -677,6 +686,11 @@ module Aws::MarketplaceCatalog
 
     OfferBuyerAccountsList.member = Shapes::ShapeRef.new(shape: OfferBuyerAccountsString)
 
+    OfferCreatedBySourceFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferCreatedBySourceFilterValueList, location_name: "ValueList"))
+    OfferCreatedBySourceFilter.struct_class = Types::OfferCreatedBySourceFilter
+
+    OfferCreatedBySourceFilterValueList.member = Shapes::ShapeRef.new(shape: OfferCreatedBySourceString)
+
     OfferEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferEntityIdFilterValueList, location_name: "ValueList"))
     OfferEntityIdFilter.struct_class = Types::OfferEntityIdFilter
 
@@ -693,6 +707,9 @@ module Aws::MarketplaceCatalog
     OfferFilters.add_member(:targeting, Shapes::ShapeRef.new(shape: OfferTargetingFilter, location_name: "Targeting"))
     OfferFilters.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: OfferLastModifiedDateFilter, location_name: "LastModifiedDate"))
     OfferFilters.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetIdFilter, location_name: "OfferSetId"))
+    OfferFilters.add_member(:target_agreement_id, Shapes::ShapeRef.new(shape: OfferTargetAgreementIdFilter, location_name: "TargetAgreementId"))
+    OfferFilters.add_member(:target_agreement_intent, Shapes::ShapeRef.new(shape: OfferTargetAgreementIntentFilter, location_name: "TargetAgreementIntent"))
+    OfferFilters.add_member(:created_by_source, Shapes::ShapeRef.new(shape: OfferCreatedBySourceFilter, location_name: "CreatedBySource"))
     OfferFilters.struct_class = Types::OfferFilters
 
     OfferLastModifiedDateFilter.add_member(:date_range, Shapes::ShapeRef.new(shape: OfferLastModifiedDateFilterDateRange, location_name: "DateRange"))
@@ -809,7 +826,20 @@ module Aws::MarketplaceCatalog
     OfferSummary.add_member(:state, Shapes::ShapeRef.new(shape: OfferStateString, location_name: "State"))
     OfferSummary.add_member(:targeting, Shapes::ShapeRef.new(shape: OfferTargetingList, location_name: "Targeting"))
     OfferSummary.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetIdString, location_name: "OfferSetId"))
+    OfferSummary.add_member(:target_agreement_id, Shapes::ShapeRef.new(shape: OfferTargetAgreementIdString, location_name: "TargetAgreementId"))
+    OfferSummary.add_member(:target_agreement_intent, Shapes::ShapeRef.new(shape: OfferTargetAgreementIntentString, location_name: "TargetAgreementIntent"))
+    OfferSummary.add_member(:created_by_source, Shapes::ShapeRef.new(shape: OfferCreatedBySourceString, location_name: "CreatedBySource"))
     OfferSummary.struct_class = Types::OfferSummary
+
+    OfferTargetAgreementIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferTargetAgreementIdFilterValueList, location_name: "ValueList"))
+    OfferTargetAgreementIdFilter.struct_class = Types::OfferTargetAgreementIdFilter
+
+    OfferTargetAgreementIdFilterValueList.member = Shapes::ShapeRef.new(shape: OfferTargetAgreementIdString)
+
+    OfferTargetAgreementIntentFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferTargetAgreementIntentFilterValueList, location_name: "ValueList"))
+    OfferTargetAgreementIntentFilter.struct_class = Types::OfferTargetAgreementIntentFilter
+
+    OfferTargetAgreementIntentFilterValueList.member = Shapes::ShapeRef.new(shape: OfferTargetAgreementIntentString)
 
     OfferTargetingFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferTargetingFilterValueList, location_name: "ValueList"))
     OfferTargetingFilter.struct_class = Types::OfferTargetingFilter

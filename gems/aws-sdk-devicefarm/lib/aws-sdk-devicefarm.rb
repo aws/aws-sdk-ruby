@@ -54,7 +54,7 @@ module Aws::DeviceFarm
   autoload :EndpointProvider, 'aws-sdk-devicefarm/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-devicefarm/endpoints'
 
-  GEM_VERSION = '1.108.0'
+  GEM_VERSION = '1.109.0'
 
 end
 

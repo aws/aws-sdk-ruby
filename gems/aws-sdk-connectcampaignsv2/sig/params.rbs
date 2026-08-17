@@ -8,13 +8,18 @@
 module Aws
   module ConnectCampaignsV2
     module Params
+      type predictive_config = {
+      bandwidth_allocation: ::Float,
+      pacing_strategies: Array[
+        Params::pacing_strategy
+      ]?
+    }
+
       type telephony_outbound_mode = {
       progressive: {
         bandwidth_allocation: ::Float
       }?,
-      predictive: {
-        bandwidth_allocation: ::Float
-      }?,
+      predictive: Params::predictive_config?,
       agentless: {
       }?,
       preview: {
@@ -85,6 +90,15 @@ module Aws
       sms: Params::sms_channel_subtype_config?,
       email: Params::email_channel_subtype_config?,
       whats_app: Params::whats_app_channel_subtype_config?
+    }
+
+      type pacing_strategy = {
+      abandonment_rate: {
+        target_rate: ::Float,
+        connection_start_point: ("CONNECTED_TO_SYSTEM" | "GREETING_START" | "GREETING_END"),
+        connection_threshold_seconds: ::Integer,
+        evaluation_window: ::String
+      }?
     }
 
       type time_window = {

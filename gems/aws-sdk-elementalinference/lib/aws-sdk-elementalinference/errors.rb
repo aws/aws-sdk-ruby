@@ -29,9 +29,11 @@ module Aws::ElementalInference
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {GatewayTimedOutException}
   # * {InternalServerErrorException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
+  # * {ServiceUnavailableException}
   # * {TooManyRequestException}
   # * {ValidationException}
   #
@@ -61,6 +63,25 @@ module Aws::ElementalInference
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ElementalInference::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+    end
+
+    class GatewayTimedOutException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElementalInference::Types::GatewayTimedOutException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -121,6 +142,25 @@ module Aws::ElementalInference
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ServiceUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElementalInference::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

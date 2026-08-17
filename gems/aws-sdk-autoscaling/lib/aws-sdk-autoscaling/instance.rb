@@ -419,9 +419,17 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   activity = instance.terminate({
+    #     instance_ids: ["XmlStringMaxLen19"],
+    #     auto_scaling_group_name: "XmlStringMaxLen255",
     #     should_decrement_desired_capacity: false, # required
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<String>] :instance_ids
+    #   The IDs of the instances. You can specify up to 100 instances.
+    #
+    #   This parameter requires that you also specify `AutoScalingGroupName`.
+    # @option options [String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group. Required when using `InstanceIds`.
     # @option options [required, Boolean] :should_decrement_desired_capacity
     #   Indicates whether terminating the instance also decrements the size of
     #   the Auto Scaling group.

@@ -115,10 +115,43 @@ module Aws::ElementalInference
     #   the sports event in the source media, for example.
     #   @return [String]
     #
+    # @!attribute [rw] data_source_configuration
+    #   The data source to map onto this clipping output. This parameter is
+    #   optional. When you include this parameter, Elemental Inference reads
+    #   the event data for the fixture that you specify, and includes that
+    #   data in the event clipping metadata for this output.
+    #
+    #   If you omit this parameter, Elemental Inference doesn't map a data
+    #   source onto this output.
+    #   @return [Types::DataSourceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ClippingConfig AWS API Documentation
     #
     class ClippingConfig < Struct.new(
-      :callback_metadata)
+      :callback_metadata,
+      :data_source_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about one competitor in a fixture. It is used in
+    # the FixtureSummary that is in the SearchFixtures response.
+    #
+    # @!attribute [rw] name
+    #   The name of the competitor, as provided by the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_home
+    #   Specifies whether this competitor is the home side in the fixture.
+    #   If true, this competitor is the home side. If false, this competitor
+    #   is the away side.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/Competitor AWS API Documentation
+    #
+    class Competitor < Struct.new(
+      :name,
+      :is_home)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -213,6 +246,14 @@ module Aws::ElementalInference
     #   A user-friendly name for this feed.
     #   @return [String]
     #
+    # @!attribute [rw] access_role_arn
+    #   The ARN of an IAM role that Elemental Inference assumes to access
+    #   resources in your account on your behalf. For example, the smart
+    #   crop feature uses this role to read graphics-compositing templates
+    #   from your Amazon S3 bucket. You specify one access role for each
+    #   feed.
+    #   @return [String]
+    #
     # @!attribute [rw] outputs
     #   An array of outputs for this feed. Each output represents a specific
     #   Elemental Inference feature. For example, there is one output type
@@ -229,6 +270,7 @@ module Aws::ElementalInference
     #
     class CreateFeedRequest < Struct.new(
       :name,
+      :access_role_arn,
       :outputs,
       :tags)
       SENSITIVE = []
@@ -325,11 +367,42 @@ module Aws::ElementalInference
     # A type of OutputConfig, used when the output in a feed is for the crop
     # feature.
     #
-    # @api private
+    # @!attribute [rw] template_groups
+    #   An array of template groups for the crop output. Each template group
+    #   provides the graphics-compositing templates that Elemental Inference
+    #   applies to the cropped video. You can specify from 1 to 4 template
+    #   groups.
+    #   @return [Array<Types::TemplateGroup>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CroppingConfig AWS API Documentation
     #
-    class CroppingConfig < Aws::EmptyStructure; end
+    class CroppingConfig < Struct.new(
+      :template_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the data source configuration for a clipping output. It
+    # identifies the fixture whose event data Elemental Inference maps onto
+    # the clipping metadata. It is used in the dataSourceConfiguration
+    # property of a ClippingConfig.
+    #
+    # @!attribute [rw] fixture_id
+    #   The ID of the fixture whose event data you want Elemental Inference
+    #   to map onto this clipping output. The fixture should be the sports
+    #   event in the source media that the feed is processing.
+    #
+    #   To obtain this ID, use the SearchFixtures operation to find the
+    #   fixture, then use the fixtureId from the matching FixtureSummary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DataSourceConfiguration AWS API Documentation
+    #
+    class DataSourceConfiguration < Struct.new(
+      :fixture_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] id
     #   The ID of the dictionary to delete.
@@ -553,6 +626,73 @@ module Aws::ElementalInference
       :name,
       :association,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about one fixture. It is used in the
+    # SearchFixtures response.
+    #
+    # Elemental Inference relays the information in this structure from the
+    # data source, so that you can identify the fixture that matches your
+    # source media.
+    #
+    # @!attribute [rw] fixture_id
+    #   The ID of the fixture. Specify this ID in the clipping output of a
+    #   feed, to identify the fixture whose event data you want Elemental
+    #   Inference to map onto the clipping metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the fixture, as provided by the data source. For
+    #   example, the names of the two competing teams.
+    #   @return [String]
+    #
+    # @!attribute [rw] fixture_group
+    #   The group that the fixture belongs to, such as the competition,
+    #   league, or tournament. The data source doesn't provide this
+    #   information for every fixture.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_start
+    #   The scheduled start time of the fixture, as provided by the data
+    #   source. The actual start time might differ.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the fixture in its lifecycle, as provided by the data
+    #   source. For example, Scheduled or Completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] competitors
+    #   An array of the competitors (the teams or individuals) in the
+    #   fixture.
+    #   @return [Array<Types::Competitor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/FixtureSummary AWS API Documentation
+    #
+    class FixtureSummary < Struct.new(
+      :fixture_id,
+      :name,
+      :fixture_group,
+      :scheduled_start,
+      :status,
+      :competitors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request timed out before the service returned a response. This is
+    # a temporary condition. Retry the request. If the problem persists,
+    # contact AWS Support.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GatewayTimedOutException AWS API Documentation
+    #
+    class GatewayTimedOutException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -892,6 +1032,115 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # A filter for a fixture search. It is used in the filters array of a
+    # SearchFixtures request.
+    #
+    # @!attribute [rw] name
+    #   The dimension of the fixture to filter on. Valid values: COMPETITOR.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of values to match in the dimension that you specified in
+    #   name. You can specify up to 10 values. A fixture appears in the
+    #   results if it matches at least one of these values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/SearchFilter AWS API Documentation
+    #
+    class SearchFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sport
+    #   The sport to search for fixtures. Valid values: basketball (search
+    #   for basketball fixtures), american-football (search for
+    #   american-football fixtures).
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The first day of the search window, in UTC. The search includes
+    #   fixtures that are scheduled on this day.
+    #
+    #   Specify the date in ISO 8601 format, as `YYYY-MM-DD`. For example,
+    #   2026-03-14.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The last day of the search window, in UTC. The search includes
+    #   fixtures that are scheduled on this day. Specify the date in ISO
+    #   8601 format, as `YYYY-MM-DD`.
+    #
+    #   If you omit this parameter, Elemental Inference searches only the
+    #   day that you specified in startDate. The window from startDate
+    #   through endDate must not exceed seven days.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   An array of filters that narrow the results. Each filter applies to
+    #   one dimension of a fixture, such as the competitor. You can specify
+    #   up to 10 filters.
+    #
+    #   A fixture must satisfy every filter in the array in order to appear
+    #   in the results. Within one filter, a fixture must match at least one
+    #   of the values.
+    #   @return [Array<Types::SearchFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of fixtures to return for each API request.
+    #
+    #   The service might return fewer fixtures than the maxResults value.
+    #   When more fixtures match the search, the response also includes a
+    #   nextToken value that you can use to fetch the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a SearchFixtures request with maxResults set
+    #   at 5. The service returns the first batch of results (up to 5) and a
+    #   nextToken value. To see the next batch of results, you submit the
+    #   SearchFixtures request a second time, with the same search criteria,
+    #   and specify the nextToken value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/SearchFixturesRequest AWS API Documentation
+    #
+    class SearchFixturesRequest < Struct.new(
+      :sport,
+      :start_date,
+      :end_date,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fixtures
+    #   An array of FixtureSummary objects, one for each fixture that
+    #   matches the search. The array is empty if no fixtures match.
+    #   @return [Array<Types::FixtureSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies the next batch of results. To see the next
+    #   batch, submit the SearchFixtures request again, with the same search
+    #   criteria, and specify this value in nextToken.
+    #
+    #   This parameter is absent when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/SearchFixturesResponse AWS API Documentation
+    #
+    class SearchFixturesResponse < Struct.new(
+      :fixtures,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was rejected because it would exceed one or more service
     # quotas for your account. Review your service quotas and either delete
     # unused resources or request a quota increase.
@@ -902,6 +1151,20 @@ module Aws::ElementalInference
     # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ServiceQuotaExceededException AWS API Documentation
     #
     class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The service is temporarily unable to handle the request. Retry the
+    # request. If the problem persists, contact AWS Support.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -962,6 +1225,30 @@ module Aws::ElementalInference
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A named set of graphics-compositing templates used by the crop
+    # feature, specified in the templateGroups array of a CroppingConfig.
+    #
+    # @!attribute [rw] name
+    #   A name for the template group.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_uris
+    #   An array of Amazon S3 URIs that point to the graphics-compositing
+    #   templates for this group. You can specify 1 or 2 URIs. Each URI must
+    #   be in the form `s3://bucket-name/key`. Elemental Inference reads
+    #   these templates using the IAM role that you specify in
+    #   accessRoleArn.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/TemplateGroup AWS API Documentation
+    #
+    class TemplateGroup < Struct.new(
+      :name,
+      :template_uris)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1075,6 +1362,13 @@ module Aws::ElementalInference
     #   or a new name.
     #   @return [String]
     #
+    # @!attribute [rw] access_role_arn
+    #   The ARN of an IAM role that Elemental Inference assumes to access
+    #   resources in your account on your behalf. You can specify the
+    #   existing role (to leave it unchanged) or a new role. You specify one
+    #   access role for each feed.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   The ID of the feed to update.
     #   @return [String]
@@ -1088,6 +1382,7 @@ module Aws::ElementalInference
     #
     class UpdateFeedRequest < Struct.new(
       :name,
+      :access_role_arn,
       :id,
       :outputs)
       SENSITIVE = []

@@ -149,6 +149,8 @@ module Aws::DeviceFarm
     IdempotencyException = Shapes::StructureShape.new(name: 'IdempotencyException')
     IncompatibilityMessage = Shapes::StructureShape.new(name: 'IncompatibilityMessage')
     IncompatibilityMessages = Shapes::ListShape.new(name: 'IncompatibilityMessages')
+    InsightsType = Shapes::StringShape.new(name: 'InsightsType')
+    InsightsTypes = Shapes::ListShape.new(name: 'InsightsTypes')
     InstallToRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'InstallToRemoteAccessSessionRequest')
     InstallToRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'InstallToRemoteAccessSessionResult')
     InstanceLabels = Shapes::ListShape.new(name: 'InstanceLabels')
@@ -161,6 +163,9 @@ module Aws::DeviceFarm
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
     IosPaths = Shapes::ListShape.new(name: 'IosPaths')
     Job = Shapes::StructureShape.new(name: 'Job')
+    JobInsights = Shapes::StructureShape.new(name: 'JobInsights')
+    JobReport = Shapes::StructureShape.new(name: 'JobReport')
+    JobReportMetrics = Shapes::StructureShape.new(name: 'JobReportMetrics')
     JobTimeoutMinutes = Shapes::IntegerShape.new(name: 'JobTimeoutMinutes')
     Jobs = Shapes::ListShape.new(name: 'Jobs')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -258,6 +263,8 @@ module Aws::DeviceFarm
     RemoteAccessSessions = Shapes::ListShape.new(name: 'RemoteAccessSessions')
     RenewOfferingRequest = Shapes::StructureShape.new(name: 'RenewOfferingRequest')
     RenewOfferingResult = Shapes::StructureShape.new(name: 'RenewOfferingResult')
+    ReportMessage = Shapes::StringShape.new(name: 'ReportMessage')
+    ReportStatus = Shapes::StringShape.new(name: 'ReportStatus')
     Resolution = Shapes::StructureShape.new(name: 'Resolution')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -266,6 +273,7 @@ module Aws::DeviceFarm
     RuleOperator = Shapes::StringShape.new(name: 'RuleOperator')
     Rules = Shapes::ListShape.new(name: 'Rules')
     Run = Shapes::StructureShape.new(name: 'Run')
+    RunInsights = Shapes::StructureShape.new(name: 'RunInsights')
     Runs = Shapes::ListShape.new(name: 'Runs')
     Sample = Shapes::StructureShape.new(name: 'Sample')
     SampleType = Shapes::StringShape.new(name: 'SampleType')
@@ -316,6 +324,8 @@ module Aws::DeviceFarm
     TestGridUrlExpiresInSecondsInput = Shapes::IntegerShape.new(name: 'TestGridUrlExpiresInSecondsInput')
     TestGridVpcConfig = Shapes::StructureShape.new(name: 'TestGridVpcConfig')
     TestParameters = Shapes::MapShape.new(name: 'TestParameters')
+    TestReport = Shapes::StructureShape.new(name: 'TestReport')
+    TestReportMetrics = Shapes::StructureShape.new(name: 'TestReportMetrics')
     TestType = Shapes::StringShape.new(name: 'TestType')
     Tests = Shapes::ListShape.new(name: 'Tests')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
@@ -773,6 +783,8 @@ module Aws::DeviceFarm
 
     IncompatibilityMessages.member = Shapes::ShapeRef.new(shape: IncompatibilityMessage)
 
+    InsightsTypes.member = Shapes::ShapeRef.new(shape: InsightsType)
+
     InstallToRemoteAccessSessionRequest.add_member(:remote_access_session_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "remoteAccessSessionArn"))
     InstallToRemoteAccessSessionRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "appArn"))
     InstallToRemoteAccessSessionRequest.struct_class = Types::InstallToRemoteAccessSessionRequest
@@ -815,7 +827,29 @@ module Aws::DeviceFarm
     Job.add_member(:device_minutes, Shapes::ShapeRef.new(shape: DeviceMinutes, location_name: "deviceMinutes"))
     Job.add_member(:video_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "videoEndpoint"))
     Job.add_member(:video_capture, Shapes::ShapeRef.new(shape: VideoCapture, location_name: "videoCapture"))
+    Job.add_member(:insights, Shapes::ShapeRef.new(shape: JobInsights, location_name: "insights"))
     Job.struct_class = Types::Job
+
+    JobInsights.add_member(:status, Shapes::ShapeRef.new(shape: ReportStatus, location_name: "status"))
+    JobInsights.add_member(:test_report, Shapes::ShapeRef.new(shape: TestReport, location_name: "testReport"))
+    JobInsights.struct_class = Types::JobInsights
+
+    JobReport.add_member(:message, Shapes::ShapeRef.new(shape: ReportMessage, location_name: "message"))
+    JobReport.add_member(:metrics, Shapes::ShapeRef.new(shape: JobReportMetrics, location_name: "metrics"))
+    JobReport.add_member(:job_details_url, Shapes::ShapeRef.new(shape: SensitiveURL, location_name: "jobDetailsUrl"))
+    JobReport.struct_class = Types::JobReport
+
+    JobReportMetrics.add_member(:jobs_total, Shapes::ShapeRef.new(shape: Integer, location_name: "jobsTotal"))
+    JobReportMetrics.add_member(:jobs_passed, Shapes::ShapeRef.new(shape: Integer, location_name: "jobsPassed"))
+    JobReportMetrics.add_member(:jobs_failed, Shapes::ShapeRef.new(shape: Integer, location_name: "jobsFailed"))
+    JobReportMetrics.add_member(:jobs_skipped, Shapes::ShapeRef.new(shape: Integer, location_name: "jobsSkipped"))
+    JobReportMetrics.add_member(:jobs_errored, Shapes::ShapeRef.new(shape: Integer, location_name: "jobsErrored"))
+    JobReportMetrics.add_member(:jobs_stopped, Shapes::ShapeRef.new(shape: Integer, location_name: "jobsStopped"))
+    JobReportMetrics.add_member(:jobs_passed_percentage, Shapes::ShapeRef.new(shape: Double, location_name: "jobsPassedPercentage"))
+    JobReportMetrics.add_member(:total_job_execution_duration_seconds, Shapes::ShapeRef.new(shape: Double, location_name: "totalJobExecutionDurationSeconds"))
+    JobReportMetrics.add_member(:average_job_execution_duration_seconds, Shapes::ShapeRef.new(shape: Double, location_name: "averageJobExecutionDurationSeconds"))
+    JobReportMetrics.add_member(:median_job_execution_duration_seconds, Shapes::ShapeRef.new(shape: Double, location_name: "medianJobExecutionDurationSeconds"))
+    JobReportMetrics.struct_class = Types::JobReportMetrics
 
     Jobs.member = Shapes::ShapeRef.new(shape: Job)
 
@@ -1221,7 +1255,13 @@ module Aws::DeviceFarm
     Run.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     Run.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
     Run.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
+    Run.add_member(:insights_types, Shapes::ShapeRef.new(shape: InsightsTypes, location_name: "insightsTypes"))
+    Run.add_member(:insights, Shapes::ShapeRef.new(shape: RunInsights, location_name: "insights"))
     Run.struct_class = Types::Run
+
+    RunInsights.add_member(:status, Shapes::ShapeRef.new(shape: ReportStatus, location_name: "status"))
+    RunInsights.add_member(:job_report, Shapes::ShapeRef.new(shape: JobReport, location_name: "jobReport"))
+    RunInsights.struct_class = Types::RunInsights
 
     Runs.member = Shapes::ShapeRef.new(shape: Run)
 
@@ -1244,6 +1284,7 @@ module Aws::DeviceFarm
     ScheduleRunConfiguration.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
     ScheduleRunConfiguration.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
     ScheduleRunConfiguration.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
+    ScheduleRunConfiguration.add_member(:insights_types, Shapes::ShapeRef.new(shape: InsightsTypes, location_name: "insightsTypes"))
     ScheduleRunConfiguration.struct_class = Types::ScheduleRunConfiguration
 
     ScheduleRunRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
@@ -1383,6 +1424,22 @@ module Aws::DeviceFarm
 
     TestParameters.key = Shapes::ShapeRef.new(shape: String)
     TestParameters.value = Shapes::ShapeRef.new(shape: String)
+
+    TestReport.add_member(:message, Shapes::ShapeRef.new(shape: ReportMessage, location_name: "message"))
+    TestReport.add_member(:metrics, Shapes::ShapeRef.new(shape: TestReportMetrics, location_name: "metrics"))
+    TestReport.add_member(:test_details_url, Shapes::ShapeRef.new(shape: SensitiveURL, location_name: "testDetailsUrl"))
+    TestReport.struct_class = Types::TestReport
+
+    TestReportMetrics.add_member(:tests_total, Shapes::ShapeRef.new(shape: Integer, location_name: "testsTotal"))
+    TestReportMetrics.add_member(:tests_passed, Shapes::ShapeRef.new(shape: Integer, location_name: "testsPassed"))
+    TestReportMetrics.add_member(:tests_failed, Shapes::ShapeRef.new(shape: Integer, location_name: "testsFailed"))
+    TestReportMetrics.add_member(:tests_skipped, Shapes::ShapeRef.new(shape: Integer, location_name: "testsSkipped"))
+    TestReportMetrics.add_member(:tests_errored, Shapes::ShapeRef.new(shape: Integer, location_name: "testsErrored"))
+    TestReportMetrics.add_member(:tests_other, Shapes::ShapeRef.new(shape: Integer, location_name: "testsOther"))
+    TestReportMetrics.add_member(:tests_passed_percentage, Shapes::ShapeRef.new(shape: Double, location_name: "testsPassedPercentage"))
+    TestReportMetrics.add_member(:total_test_execution_duration_seconds, Shapes::ShapeRef.new(shape: Double, location_name: "totalTestExecutionDurationSeconds"))
+    TestReportMetrics.add_member(:median_test_execution_duration_seconds, Shapes::ShapeRef.new(shape: Double, location_name: "medianTestExecutionDurationSeconds"))
+    TestReportMetrics.struct_class = Types::TestReportMetrics
 
     Tests.member = Shapes::ShapeRef.new(shape: Test)
 

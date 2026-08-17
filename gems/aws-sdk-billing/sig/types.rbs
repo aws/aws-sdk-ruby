@@ -19,6 +19,13 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class AdditionalCharge
+      attr_accessor description: ::String
+      attr_accessor amount: ::String
+      attr_accessor charge_type: ::String
+      SENSITIVE: []
+    end
+
     class Amount
       attr_accessor currency_code: ::String
       attr_accessor currency_amount: ::String
@@ -103,10 +110,22 @@ module Aws::Billing
       SENSITIVE: [:name, :description]
     end
 
+    class ChargeAccount
+      attr_accessor account_id: ::String
+      attr_accessor charge_percentage: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ContractAccount
+      attr_accessor account_id: ::String
+      attr_accessor is_gdn: bool
       SENSITIVE: []
     end
 
@@ -195,6 +214,12 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class EnterpriseSupportTimePeriod
+      attr_accessor begin_date: ::Time
+      attr_accessor end_date: ::Time
+      SENSITIVE: []
+    end
+
     class Expression
       attr_accessor dimensions: Types::DimensionValues
       attr_accessor tags: Types::TagValues
@@ -258,6 +283,51 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class GetEnterpriseSupportChargeSummaryRequest
+      attr_accessor billing_month: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnterpriseSupportChargeSummaryResponse
+      attr_accessor payer_account_id: ::String
+      attr_accessor billing_month: ::String
+      attr_accessor billing_period_start_date: ::Time
+      attr_accessor billing_period_end_date: ::Time
+      attr_accessor is_estimated: bool
+      attr_accessor bill_date: ::Time
+      attr_accessor support_charge: ::String
+      attr_accessor total_support_charge: ::String
+      attr_accessor support_discount: ::String
+      attr_accessor total_support_eligible_spend: ::String
+      attr_accessor total_support_eligible_usage_spend: ::String
+      attr_accessor total_support_eligible_reserved_instance_spend: ::String
+      attr_accessor total_support_eligible_savings_plan_spend: ::String
+      attr_accessor support_charge_percentage: ::String
+      attr_accessor support_effective_pricing_plan: Types::PricingPlan
+      SENSITIVE: []
+    end
+
+    class GetEnterpriseSupportContractDetailsRequest
+      attr_accessor billing_month: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnterpriseSupportContractDetailsResponse
+      attr_accessor is_contract_active: bool
+      attr_accessor support_allocation_method: ::String
+      attr_accessor support_reserved_instance_amortization_start_date: ::Time
+      attr_accessor support_reserved_instance_treatment_method: ::String
+      attr_accessor support_savings_plans_amortization_start_date: ::Time
+      attr_accessor support_savings_plans_treatment_method: ::String
+      attr_accessor support_prorate_start_date: ::Time
+      attr_accessor contract_payer_account_ids: ::Array[Types::ContractAccount]
+      attr_accessor charged_payer_account_ids: ::Array[Types::ChargeAccount]
+      attr_accessor additional_support_charge: ::Array[Types::AdditionalCharge]
+      attr_accessor additional_support_eligible_usage_spend: ::Array[Types::AdditionalCharge]
+      attr_accessor pricing_plans: ::Array[Types::PricingPlan]
+      SENSITIVE: []
+    end
+
     class GetResourcePolicyRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -271,6 +341,22 @@ module Aws::Billing
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LinkedAccountCharge
+      attr_accessor account_id: ::String
+      attr_accessor payer_account_id: ::String
+      attr_accessor account_type: ::String
+      attr_accessor billable_seconds: ::Integer
+      attr_accessor total_seconds: ::Integer
+      attr_accessor total_support_eligible_spend: ::String
+      attr_accessor prorated_total_support_eligible_spend: ::String
+      attr_accessor linked_time_periods: ::Array[Types::EnterpriseSupportTimePeriod]
+      attr_accessor subscription_time_periods: ::Array[Types::EnterpriseSupportTimePeriod]
+      attr_accessor total_support_eligible_reserved_instance_spend: ::String
+      attr_accessor total_support_eligible_savings_plan_spend: ::String
+      attr_accessor support_eligible_spend_by_service: ::Array[Types::ServiceLevelAccountUsage]
       SENSITIVE: []
     end
 
@@ -288,6 +374,20 @@ module Aws::Billing
 
     class ListBillingViewsResponse
       attr_accessor billing_views: ::Array[Types::BillingViewListElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnterpriseSupportLinkedAccountChargesRequest
+      attr_accessor billing_month: ::String
+      attr_accessor account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnterpriseSupportLinkedAccountChargesResponse
+      attr_accessor linked_account: ::Array[Types::LinkedAccountCharge]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -315,6 +415,32 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class PricingPlan
+      attr_accessor pricing_plan_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor plan_discount_percent: ::String
+      attr_accessor discount_applies_to_minimum_charge: bool
+      attr_accessor minimum_charge: ::String
+      attr_accessor tiered: ::String
+      attr_accessor tiers: ::Array[Types::PricingPlanTier]
+      SENSITIVE: []
+    end
+
+    class PricingPlanTier
+      attr_accessor tier_minimum: ::String
+      attr_accessor tier_maximum: ::String
+      attr_accessor base_charge: ::String
+      attr_accessor additional_percentage_of_aggregate_charges: ::String
+      attr_accessor aggregate_charges_adjustment: ::String
+      attr_accessor incremental: bool
+      attr_accessor increment: ::String
+      attr_accessor increment_charge: ::String
+      SENSITIVE: []
+    end
+
     class RedeemCreditsRequest
       attr_accessor promo_code: ::String
       SENSITIVE: []
@@ -333,6 +459,12 @@ module Aws::Billing
     class ResourceTag
       attr_accessor key: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLevelAccountUsage
+      attr_accessor service_code: ::String
+      attr_accessor total_support_eligible_spend: ::String
       SENSITIVE: []
     end
 

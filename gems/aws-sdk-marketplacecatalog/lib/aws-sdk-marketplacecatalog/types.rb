@@ -1714,6 +1714,21 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # Allows filtering on the `CreatedBySource` of an offer.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `CreatedBySource` of an offer with list
+    #   input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferCreatedBySourceFilter AWS API Documentation
+    #
+    class OfferCreatedBySourceFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Allows filtering on the entity id of an offer.
     #
     # @!attribute [rw] value_list
@@ -1781,6 +1796,18 @@ module Aws::MarketplaceCatalog
     #   Allows filtering on the `OfferSetId` of an offer.
     #   @return [Types::OfferSetIdFilter]
     #
+    # @!attribute [rw] target_agreement_id
+    #   Allows filtering on the `TargetAgreementId` of an offer.
+    #   @return [Types::OfferTargetAgreementIdFilter]
+    #
+    # @!attribute [rw] target_agreement_intent
+    #   Allows filtering on the `TargetAgreementIntent` of an offer.
+    #   @return [Types::OfferTargetAgreementIntentFilter]
+    #
+    # @!attribute [rw] created_by_source
+    #   Allows filtering on the `CreatedBySource` of an offer.
+    #   @return [Types::OfferCreatedBySourceFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferFilters AWS API Documentation
     #
     class OfferFilters < Struct.new(
@@ -1794,7 +1821,10 @@ module Aws::MarketplaceCatalog
       :state,
       :targeting,
       :last_modified_date,
-      :offer_set_id)
+      :offer_set_id,
+      :target_agreement_id,
+      :target_agreement_intent,
+      :created_by_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2250,6 +2280,18 @@ module Aws::MarketplaceCatalog
     #   The offer set ID of the offer.
     #   @return [String]
     #
+    # @!attribute [rw] target_agreement_id
+    #   The target agreement ID of the offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_agreement_intent
+    #   The target agreement intent of the offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by_source
+    #   The creation source of the offer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSummary AWS API Documentation
     #
     class OfferSummary < Struct.new(
@@ -2261,7 +2303,40 @@ module Aws::MarketplaceCatalog
       :buyer_accounts,
       :state,
       :targeting,
-      :offer_set_id)
+      :offer_set_id,
+      :target_agreement_id,
+      :target_agreement_intent,
+      :created_by_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `TargetAgreementId` of an offer.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `TargetAgreementId` of an offer with list
+    #   input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferTargetAgreementIdFilter AWS API Documentation
+    #
+    class OfferTargetAgreementIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `TargetAgreementIntent` of an offer.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `TargetAgreementIntent` of an offer with
+    #   list input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferTargetAgreementIntentFilter AWS API Documentation
+    #
+    class OfferTargetAgreementIntentFilter < Struct.new(
+      :value_list)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,43 @@
 Unreleased Changes
 ------------------
 
+1.1281.0 (2026-08-14)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1280.0 (2026-08-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AccountAccess`.
+
+1.1279.0 (2026-08-07)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1278.0 (2026-08-06)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AgentRegistryControl`.
+
+* Feature - Added support for enumerating regions for `Aws::AgentRegistry`.
+
+1.1277.0 (2026-07-31)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1276.0 (2026-07-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PricingPlanManager`.
+
+1.1275.0 (2026-07-29)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
 1.1274.0 (2026-07-27)
 ------------------
 

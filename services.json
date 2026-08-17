@@ -26,6 +26,15 @@
   "Account": {
     "models": "account/2021-02-01"
   },
+  "AccountAccess": {
+    "models": "account-access/2018-05-10"
+  },
+  "AgentRegistry": {
+    "models": "agent-registry/2025-12-01"
+  },
+  "AgentRegistryControl": {
+    "models": "agent-registry-control/2025-12-01"
+  },
   "Amplify": {
     "models": "amplify/2017-07-25"
   },
@@ -988,6 +997,9 @@
   },
   "Pricing": {
     "models": "pricing/2017-10-15"
+  },
+  "PricingPlanManager": {
+    "models": "pricing-plan-manager/2025-08-05"
   },
   "PrometheusService": {
     "models": "amp/2020-08-01"

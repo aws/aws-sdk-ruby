@@ -17,12 +17,17 @@ module Aws::TimestreamInfluxDB
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AllocatedStorage = Shapes::IntegerShape.new(name: 'AllocatedStorage')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AutomatedBackupRetentionDays = Shapes::IntegerShape.new(name: 'AutomatedBackupRetentionDays')
+    AutomatedDbBackupType = Shapes::StringShape.new(name: 'AutomatedDbBackupType')
+    AwsCronSchedule = Shapes::StringShape.new(name: 'AwsCronSchedule')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Bucket = Shapes::StringShape.new(name: 'Bucket')
     ClusterConfiguration = Shapes::StructureShape.new(name: 'ClusterConfiguration')
     ClusterDeploymentType = Shapes::StringShape.new(name: 'ClusterDeploymentType')
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateDbBackupInput = Shapes::StructureShape.new(name: 'CreateDbBackupInput')
+    CreateDbBackupOutput = Shapes::StructureShape.new(name: 'CreateDbBackupOutput')
     CreateDbClusterInput = Shapes::StructureShape.new(name: 'CreateDbClusterInput')
     CreateDbClusterOutput = Shapes::StructureShape.new(name: 'CreateDbClusterOutput')
     CreateDbInstanceInput = Shapes::StructureShape.new(name: 'CreateDbInstanceInput')
@@ -31,6 +36,17 @@ module Aws::TimestreamInfluxDB
     CreateDbParameterGroupInputDescriptionString = Shapes::StringShape.new(name: 'CreateDbParameterGroupInputDescriptionString')
     CreateDbParameterGroupOutput = Shapes::StructureShape.new(name: 'CreateDbParameterGroupOutput')
     DataFusionRuntimeType = Shapes::StringShape.new(name: 'DataFusionRuntimeType')
+    Date = Shapes::StringShape.new(name: 'Date')
+    DbBackupConfiguration = Shapes::StructureShape.new(name: 'DbBackupConfiguration')
+    DbBackupConfigurationInputList = Shapes::ListShape.new(name: 'DbBackupConfigurationInputList')
+    DbBackupConfigurationOutput = Shapes::StructureShape.new(name: 'DbBackupConfigurationOutput')
+    DbBackupConfigurationOutputList = Shapes::ListShape.new(name: 'DbBackupConfigurationOutputList')
+    DbBackupId = Shapes::StringShape.new(name: 'DbBackupId')
+    DbBackupName = Shapes::StringShape.new(name: 'DbBackupName')
+    DbBackupStatus = Shapes::StringShape.new(name: 'DbBackupStatus')
+    DbBackupSummary = Shapes::StructureShape.new(name: 'DbBackupSummary')
+    DbBackupSummaryList = Shapes::ListShape.new(name: 'DbBackupSummaryList')
+    DbBackupType = Shapes::StringShape.new(name: 'DbBackupType')
     DbClusterId = Shapes::StringShape.new(name: 'DbClusterId')
     DbClusterName = Shapes::StringShape.new(name: 'DbClusterName')
     DbClusterSummary = Shapes::StructureShape.new(name: 'DbClusterSummary')
@@ -48,7 +64,11 @@ module Aws::TimestreamInfluxDB
     DbParameterGroupName = Shapes::StringShape.new(name: 'DbParameterGroupName')
     DbParameterGroupSummary = Shapes::StructureShape.new(name: 'DbParameterGroupSummary')
     DbParameterGroupSummaryList = Shapes::ListShape.new(name: 'DbParameterGroupSummaryList')
+    DbResourceId = Shapes::StringShape.new(name: 'DbResourceId')
+    DbResourceName = Shapes::StringShape.new(name: 'DbResourceName')
     DbStorageType = Shapes::StringShape.new(name: 'DbStorageType')
+    DeleteDbBackupInput = Shapes::StructureShape.new(name: 'DeleteDbBackupInput')
+    DeleteDbBackupOutput = Shapes::StructureShape.new(name: 'DeleteDbBackupOutput')
     DeleteDbClusterInput = Shapes::StructureShape.new(name: 'DeleteDbClusterInput')
     DeleteDbClusterOutput = Shapes::StructureShape.new(name: 'DeleteDbClusterOutput')
     DeleteDbInstanceInput = Shapes::StructureShape.new(name: 'DeleteDbInstanceInput')
@@ -59,6 +79,8 @@ module Aws::TimestreamInfluxDB
     DurationValueLong = Shapes::IntegerShape.new(name: 'DurationValueLong')
     EngineType = Shapes::StringShape.new(name: 'EngineType')
     FailoverMode = Shapes::StringShape.new(name: 'FailoverMode')
+    GetDbBackupInput = Shapes::StructureShape.new(name: 'GetDbBackupInput')
+    GetDbBackupOutput = Shapes::StructureShape.new(name: 'GetDbBackupOutput')
     GetDbClusterInput = Shapes::StructureShape.new(name: 'GetDbClusterInput')
     GetDbClusterOutput = Shapes::StructureShape.new(name: 'GetDbClusterOutput')
     GetDbInstanceInput = Shapes::StructureShape.new(name: 'GetDbInstanceInput')
@@ -133,6 +155,9 @@ module Aws::TimestreamInfluxDB
     InstanceModeList = Shapes::ListShape.new(name: 'InstanceModeList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    ListDbBackupsInput = Shapes::StructureShape.new(name: 'ListDbBackupsInput')
+    ListDbBackupsOutput = Shapes::StructureShape.new(name: 'ListDbBackupsOutput')
     ListDbClustersInput = Shapes::StructureShape.new(name: 'ListDbClustersInput')
     ListDbClustersOutput = Shapes::StructureShape.new(name: 'ListDbClustersOutput')
     ListDbInstancesForClusterInput = Shapes::StructureShape.new(name: 'ListDbInstancesForClusterInput')
@@ -165,8 +190,15 @@ module Aws::TimestreamInfluxDB
     RebootDbInstanceInput = Shapes::StructureShape.new(name: 'RebootDbInstanceInput')
     RebootDbInstanceOutput = Shapes::StructureShape.new(name: 'RebootDbInstanceOutput')
     RequestTagMap = Shapes::MapShape.new(name: 'RequestTagMap')
+    ResourceDeploymentType = Shapes::StringShape.new(name: 'ResourceDeploymentType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResponseTagMap = Shapes::MapShape.new(name: 'ResponseTagMap')
+    RestoreFromDbBackupInput = Shapes::StructureShape.new(name: 'RestoreFromDbBackupInput')
+    RestoreFromDbBackupOutput = Shapes::StructureShape.new(name: 'RestoreFromDbBackupOutput')
+    RestoreMode = Shapes::StringShape.new(name: 'RestoreMode')
+    RestoreStatus = Shapes::StringShape.new(name: 'RestoreStatus')
+    RetentionDays = Shapes::IntegerShape.new(name: 'RetentionDays')
     S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
     S3ConfigurationBucketNameString = Shapes::StringShape.new(name: 'S3ConfigurationBucketNameString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -205,6 +237,39 @@ module Aws::TimestreamInfluxDB
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateDbBackupInput.add_member(:name, Shapes::ShapeRef.new(shape: DbBackupName, required: true, location_name: "name"))
+    CreateDbBackupInput.add_member(:db_resource_id, Shapes::ShapeRef.new(shape: DbResourceId, required: true, location_name: "dbResourceId"))
+    CreateDbBackupInput.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "retentionDays"))
+    CreateDbBackupInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
+    CreateDbBackupInput.struct_class = Types::CreateDbBackupInput
+
+    CreateDbBackupOutput.add_member(:id, Shapes::ShapeRef.new(shape: DbBackupId, required: true, location_name: "id"))
+    CreateDbBackupOutput.add_member(:name, Shapes::ShapeRef.new(shape: DbBackupName, location_name: "name"))
+    CreateDbBackupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    CreateDbBackupOutput.add_member(:status, Shapes::ShapeRef.new(shape: DbBackupStatus, location_name: "status"))
+    CreateDbBackupOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CreateDbBackupOutput.add_member(:expires_after, Shapes::ShapeRef.new(shape: Date, location_name: "expiresAfter"))
+    CreateDbBackupOutput.add_member(:db_resource_id, Shapes::ShapeRef.new(shape: DbResourceId, location_name: "dbResourceId"))
+    CreateDbBackupOutput.add_member(:type, Shapes::ShapeRef.new(shape: DbBackupType, location_name: "type"))
+    CreateDbBackupOutput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
+    CreateDbBackupOutput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ResourceDeploymentType, location_name: "deploymentType"))
+    CreateDbBackupOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    CreateDbBackupOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "clusterConfiguration"))
+    CreateDbBackupOutput.add_member(:db_parameter_group_id, Shapes::ShapeRef.new(shape: DbParameterGroupId, location_name: "dbParameterGroupId"))
+    CreateDbBackupOutput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
+    CreateDbBackupOutput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
+    CreateDbBackupOutput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
+    CreateDbBackupOutput.add_member(:db_storage_type, Shapes::ShapeRef.new(shape: DbStorageType, location_name: "dbStorageType"))
+    CreateDbBackupOutput.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: AllocatedStorage, location_name: "allocatedStorage"))
+    CreateDbBackupOutput.add_member(:vpc_subnet_ids, Shapes::ShapeRef.new(shape: VpcSubnetIdList, location_name: "vpcSubnetIds"))
+    CreateDbBackupOutput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
+    CreateDbBackupOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
+    CreateDbBackupOutput.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
+    CreateDbBackupOutput.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
+    CreateDbBackupOutput.add_member(:influx_auth_parameters_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "influxAuthParametersSecretArn"))
+    CreateDbBackupOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    CreateDbBackupOutput.struct_class = Types::CreateDbBackupOutput
+
     CreateDbClusterInput.add_member(:name, Shapes::ShapeRef.new(shape: DbClusterName, required: true, location_name: "name"))
     CreateDbClusterInput.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "username"))
     CreateDbClusterInput.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "password"))
@@ -223,6 +288,8 @@ module Aws::TimestreamInfluxDB
     CreateDbClusterInput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     CreateDbClusterInput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
     CreateDbClusterInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    CreateDbClusterInput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationInputList, location_name: "dbBackupConfigurations"))
+    CreateDbClusterInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateDbClusterInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateDbClusterInput.struct_class = Types::CreateDbClusterInput
 
@@ -248,6 +315,8 @@ module Aws::TimestreamInfluxDB
     CreateDbInstanceInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateDbInstanceInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
     CreateDbInstanceInput.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
+    CreateDbInstanceInput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationInputList, location_name: "dbBackupConfigurations"))
+    CreateDbInstanceInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateDbInstanceInput.struct_class = Types::CreateDbInstanceInput
 
     CreateDbInstanceOutput.add_member(:id, Shapes::ShapeRef.new(shape: DbInstanceId, required: true, location_name: "id"))
@@ -275,6 +344,8 @@ module Aws::TimestreamInfluxDB
     CreateDbInstanceOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     CreateDbInstanceOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
     CreateDbInstanceOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
+    CreateDbInstanceOutput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationOutputList, location_name: "dbBackupConfigurations"))
+    CreateDbInstanceOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateDbInstanceOutput.struct_class = Types::CreateDbInstanceOutput
 
     CreateDbParameterGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: DbParameterGroupName, required: true, location_name: "name"))
@@ -289,6 +360,38 @@ module Aws::TimestreamInfluxDB
     CreateDbParameterGroupOutput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateDbParameterGroupOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
     CreateDbParameterGroupOutput.struct_class = Types::CreateDbParameterGroupOutput
+
+    DbBackupConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: AutomatedDbBackupType, required: true, location_name: "type"))
+    DbBackupConfiguration.add_member(:retention_days, Shapes::ShapeRef.new(shape: AutomatedBackupRetentionDays, required: true, location_name: "retentionDays"))
+    DbBackupConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    DbBackupConfiguration.add_member(:custom_schedule, Shapes::ShapeRef.new(shape: AwsCronSchedule, location_name: "customSchedule"))
+    DbBackupConfiguration.struct_class = Types::DbBackupConfiguration
+
+    DbBackupConfigurationInputList.member = Shapes::ShapeRef.new(shape: DbBackupConfiguration)
+
+    DbBackupConfigurationOutput.add_member(:type, Shapes::ShapeRef.new(shape: AutomatedDbBackupType, required: true, location_name: "type"))
+    DbBackupConfigurationOutput.add_member(:retention_days, Shapes::ShapeRef.new(shape: AutomatedBackupRetentionDays, required: true, location_name: "retentionDays"))
+    DbBackupConfigurationOutput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    DbBackupConfigurationOutput.add_member(:custom_schedule, Shapes::ShapeRef.new(shape: AwsCronSchedule, location_name: "customSchedule"))
+    DbBackupConfigurationOutput.add_member(:next_automated_backup_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextAutomatedBackupTime"))
+    DbBackupConfigurationOutput.struct_class = Types::DbBackupConfigurationOutput
+
+    DbBackupConfigurationOutputList.member = Shapes::ShapeRef.new(shape: DbBackupConfigurationOutput)
+
+    DbBackupSummary.add_member(:id, Shapes::ShapeRef.new(shape: DbBackupId, required: true, location_name: "id"))
+    DbBackupSummary.add_member(:name, Shapes::ShapeRef.new(shape: DbBackupName, location_name: "name"))
+    DbBackupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    DbBackupSummary.add_member(:status, Shapes::ShapeRef.new(shape: DbBackupStatus, location_name: "status"))
+    DbBackupSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    DbBackupSummary.add_member(:expires_after, Shapes::ShapeRef.new(shape: Date, location_name: "expiresAfter"))
+    DbBackupSummary.add_member(:db_resource_id, Shapes::ShapeRef.new(shape: DbResourceId, location_name: "dbResourceId"))
+    DbBackupSummary.add_member(:type, Shapes::ShapeRef.new(shape: DbBackupType, location_name: "type"))
+    DbBackupSummary.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
+    DbBackupSummary.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ResourceDeploymentType, location_name: "deploymentType"))
+    DbBackupSummary.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    DbBackupSummary.struct_class = Types::DbBackupSummary
+
+    DbBackupSummaryList.member = Shapes::ShapeRef.new(shape: DbBackupSummary)
 
     DbClusterSummary.add_member(:id, Shapes::ShapeRef.new(shape: DbClusterId, required: true, location_name: "id"))
     DbClusterSummary.add_member(:name, Shapes::ShapeRef.new(shape: DbClusterName, required: true, location_name: "name"))
@@ -347,13 +450,45 @@ module Aws::TimestreamInfluxDB
 
     DbParameterGroupSummaryList.member = Shapes::ShapeRef.new(shape: DbParameterGroupSummary)
 
+    DeleteDbBackupInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DbBackupId, required: true, location_name: "identifier"))
+    DeleteDbBackupInput.struct_class = Types::DeleteDbBackupInput
+
+    DeleteDbBackupOutput.add_member(:id, Shapes::ShapeRef.new(shape: DbBackupId, required: true, location_name: "id"))
+    DeleteDbBackupOutput.add_member(:name, Shapes::ShapeRef.new(shape: DbBackupName, location_name: "name"))
+    DeleteDbBackupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    DeleteDbBackupOutput.add_member(:status, Shapes::ShapeRef.new(shape: DbBackupStatus, location_name: "status"))
+    DeleteDbBackupOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    DeleteDbBackupOutput.add_member(:expires_after, Shapes::ShapeRef.new(shape: Date, location_name: "expiresAfter"))
+    DeleteDbBackupOutput.add_member(:db_resource_id, Shapes::ShapeRef.new(shape: DbResourceId, location_name: "dbResourceId"))
+    DeleteDbBackupOutput.add_member(:type, Shapes::ShapeRef.new(shape: DbBackupType, location_name: "type"))
+    DeleteDbBackupOutput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
+    DeleteDbBackupOutput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ResourceDeploymentType, location_name: "deploymentType"))
+    DeleteDbBackupOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    DeleteDbBackupOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "clusterConfiguration"))
+    DeleteDbBackupOutput.add_member(:db_parameter_group_id, Shapes::ShapeRef.new(shape: DbParameterGroupId, location_name: "dbParameterGroupId"))
+    DeleteDbBackupOutput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
+    DeleteDbBackupOutput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
+    DeleteDbBackupOutput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
+    DeleteDbBackupOutput.add_member(:db_storage_type, Shapes::ShapeRef.new(shape: DbStorageType, location_name: "dbStorageType"))
+    DeleteDbBackupOutput.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: AllocatedStorage, location_name: "allocatedStorage"))
+    DeleteDbBackupOutput.add_member(:vpc_subnet_ids, Shapes::ShapeRef.new(shape: VpcSubnetIdList, location_name: "vpcSubnetIds"))
+    DeleteDbBackupOutput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
+    DeleteDbBackupOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
+    DeleteDbBackupOutput.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
+    DeleteDbBackupOutput.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
+    DeleteDbBackupOutput.add_member(:influx_auth_parameters_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "influxAuthParametersSecretArn"))
+    DeleteDbBackupOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    DeleteDbBackupOutput.struct_class = Types::DeleteDbBackupOutput
+
     DeleteDbClusterInput.add_member(:db_cluster_id, Shapes::ShapeRef.new(shape: DbClusterId, required: true, location_name: "dbClusterId"))
+    DeleteDbClusterInput.add_member(:retain_automated_backups, Shapes::ShapeRef.new(shape: Boolean, location_name: "retainAutomatedBackups"))
     DeleteDbClusterInput.struct_class = Types::DeleteDbClusterInput
 
     DeleteDbClusterOutput.add_member(:db_cluster_status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "dbClusterStatus"))
     DeleteDbClusterOutput.struct_class = Types::DeleteDbClusterOutput
 
     DeleteDbInstanceInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DbInstanceIdentifier, required: true, location_name: "identifier"))
+    DeleteDbInstanceInput.add_member(:retain_automated_backups, Shapes::ShapeRef.new(shape: Boolean, location_name: "retainAutomatedBackups"))
     DeleteDbInstanceInput.struct_class = Types::DeleteDbInstanceInput
 
     DeleteDbInstanceOutput.add_member(:id, Shapes::ShapeRef.new(shape: DbInstanceId, required: true, location_name: "id"))
@@ -381,11 +516,43 @@ module Aws::TimestreamInfluxDB
     DeleteDbInstanceOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     DeleteDbInstanceOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
     DeleteDbInstanceOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
+    DeleteDbInstanceOutput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationOutputList, location_name: "dbBackupConfigurations"))
+    DeleteDbInstanceOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     DeleteDbInstanceOutput.struct_class = Types::DeleteDbInstanceOutput
 
     Duration.add_member(:duration_type, Shapes::ShapeRef.new(shape: DurationType, required: true, location_name: "durationType"))
     Duration.add_member(:value, Shapes::ShapeRef.new(shape: DurationValueLong, required: true, location_name: "value"))
     Duration.struct_class = Types::Duration
+
+    GetDbBackupInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DbBackupId, required: true, location_name: "identifier"))
+    GetDbBackupInput.struct_class = Types::GetDbBackupInput
+
+    GetDbBackupOutput.add_member(:id, Shapes::ShapeRef.new(shape: DbBackupId, required: true, location_name: "id"))
+    GetDbBackupOutput.add_member(:name, Shapes::ShapeRef.new(shape: DbBackupName, location_name: "name"))
+    GetDbBackupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    GetDbBackupOutput.add_member(:status, Shapes::ShapeRef.new(shape: DbBackupStatus, location_name: "status"))
+    GetDbBackupOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    GetDbBackupOutput.add_member(:expires_after, Shapes::ShapeRef.new(shape: Date, location_name: "expiresAfter"))
+    GetDbBackupOutput.add_member(:db_resource_id, Shapes::ShapeRef.new(shape: DbResourceId, location_name: "dbResourceId"))
+    GetDbBackupOutput.add_member(:type, Shapes::ShapeRef.new(shape: DbBackupType, location_name: "type"))
+    GetDbBackupOutput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
+    GetDbBackupOutput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ResourceDeploymentType, location_name: "deploymentType"))
+    GetDbBackupOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    GetDbBackupOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "clusterConfiguration"))
+    GetDbBackupOutput.add_member(:db_parameter_group_id, Shapes::ShapeRef.new(shape: DbParameterGroupId, location_name: "dbParameterGroupId"))
+    GetDbBackupOutput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
+    GetDbBackupOutput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
+    GetDbBackupOutput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
+    GetDbBackupOutput.add_member(:db_storage_type, Shapes::ShapeRef.new(shape: DbStorageType, location_name: "dbStorageType"))
+    GetDbBackupOutput.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: AllocatedStorage, location_name: "allocatedStorage"))
+    GetDbBackupOutput.add_member(:vpc_subnet_ids, Shapes::ShapeRef.new(shape: VpcSubnetIdList, location_name: "vpcSubnetIds"))
+    GetDbBackupOutput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
+    GetDbBackupOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
+    GetDbBackupOutput.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
+    GetDbBackupOutput.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
+    GetDbBackupOutput.add_member(:influx_auth_parameters_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "influxAuthParametersSecretArn"))
+    GetDbBackupOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    GetDbBackupOutput.struct_class = Types::GetDbBackupOutput
 
     GetDbClusterInput.add_member(:db_cluster_id, Shapes::ShapeRef.new(shape: DbClusterId, required: true, location_name: "dbClusterId"))
     GetDbClusterInput.struct_class = Types::GetDbClusterInput
@@ -414,6 +581,8 @@ module Aws::TimestreamInfluxDB
     GetDbClusterOutput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
     GetDbClusterOutput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     GetDbClusterOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "clusterConfiguration"))
+    GetDbClusterOutput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationOutputList, location_name: "dbBackupConfigurations"))
+    GetDbClusterOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     GetDbClusterOutput.struct_class = Types::GetDbClusterOutput
 
     GetDbInstanceInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DbInstanceIdentifier, required: true, location_name: "identifier"))
@@ -444,6 +613,8 @@ module Aws::TimestreamInfluxDB
     GetDbInstanceOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     GetDbInstanceOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
     GetDbInstanceOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
+    GetDbInstanceOutput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationOutputList, location_name: "dbBackupConfigurations"))
+    GetDbInstanceOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     GetDbInstanceOutput.struct_class = Types::GetDbInstanceOutput
 
     GetDbParameterGroupInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DbParameterGroupIdentifier, required: true, location_name: "identifier"))
@@ -596,6 +767,15 @@ module Aws::TimestreamInfluxDB
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    ListDbBackupsInput.add_member(:db_resource_id, Shapes::ShapeRef.new(shape: DbResourceId, location_name: "dbResourceId"))
+    ListDbBackupsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDbBackupsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListDbBackupsInput.struct_class = Types::ListDbBackupsInput
+
+    ListDbBackupsOutput.add_member(:items, Shapes::ShapeRef.new(shape: DbBackupSummaryList, required: true, location_name: "items"))
+    ListDbBackupsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDbBackupsOutput.struct_class = Types::ListDbBackupsOutput
+
     ListDbClustersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDbClustersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListDbClustersInput.struct_class = Types::ListDbClustersInput
@@ -697,6 +877,8 @@ module Aws::TimestreamInfluxDB
     RebootDbInstanceOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     RebootDbInstanceOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
     RebootDbInstanceOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
+    RebootDbInstanceOutput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationOutputList, location_name: "dbBackupConfigurations"))
+    RebootDbInstanceOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     RebootDbInstanceOutput.struct_class = Types::RebootDbInstanceOutput
 
     RequestTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -709,6 +891,30 @@ module Aws::TimestreamInfluxDB
 
     ResponseTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     ResponseTagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    RestoreFromDbBackupInput.add_member(:name, Shapes::ShapeRef.new(shape: DbResourceName, required: true, location_name: "name"))
+    RestoreFromDbBackupInput.add_member(:db_backup_id, Shapes::ShapeRef.new(shape: DbBackupId, required: true, location_name: "dbBackupId"))
+    RestoreFromDbBackupInput.add_member(:restore_to_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "restoreToTime"))
+    RestoreFromDbBackupInput.add_member(:restore_mode, Shapes::ShapeRef.new(shape: RestoreMode, location_name: "restoreMode"))
+    RestoreFromDbBackupInput.add_member(:vpc_subnet_ids, Shapes::ShapeRef.new(shape: VpcSubnetIdList, location_name: "vpcSubnetIds"))
+    RestoreFromDbBackupInput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
+    RestoreFromDbBackupInput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
+    RestoreFromDbBackupInput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
+    RestoreFromDbBackupInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    RestoreFromDbBackupInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
+    RestoreFromDbBackupInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
+    RestoreFromDbBackupInput.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
+    RestoreFromDbBackupInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ResourceDeploymentType, location_name: "deploymentType"))
+    RestoreFromDbBackupInput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationInputList, location_name: "dbBackupConfigurations"))
+    RestoreFromDbBackupInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    RestoreFromDbBackupInput.struct_class = Types::RestoreFromDbBackupInput
+
+    RestoreFromDbBackupOutput.add_member(:restored_db_resource_id, Shapes::ShapeRef.new(shape: DbResourceId, location_name: "restoredDbResourceId"))
+    RestoreFromDbBackupOutput.add_member(:restore_status, Shapes::ShapeRef.new(shape: RestoreStatus, location_name: "restoreStatus"))
+    RestoreFromDbBackupOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    RestoreFromDbBackupOutput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
+    RestoreFromDbBackupOutput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ResourceDeploymentType, location_name: "deploymentType"))
+    RestoreFromDbBackupOutput.struct_class = Types::RestoreFromDbBackupOutput
 
     S3Configuration.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3ConfigurationBucketNameString, required: true, location_name: "bucketName"))
     S3Configuration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
@@ -738,6 +944,7 @@ module Aws::TimestreamInfluxDB
     UpdateDbClusterInput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
     UpdateDbClusterInput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     UpdateDbClusterInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    UpdateDbClusterInput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationInputList, location_name: "dbBackupConfigurations"))
     UpdateDbClusterInput.struct_class = Types::UpdateDbClusterInput
 
     UpdateDbClusterOutput.add_member(:db_cluster_status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "dbClusterStatus"))
@@ -752,6 +959,7 @@ module Aws::TimestreamInfluxDB
     UpdateDbInstanceInput.add_member(:db_storage_type, Shapes::ShapeRef.new(shape: DbStorageType, location_name: "dbStorageType"))
     UpdateDbInstanceInput.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: AllocatedStorage, location_name: "allocatedStorage"))
     UpdateDbInstanceInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    UpdateDbInstanceInput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationInputList, location_name: "dbBackupConfigurations"))
     UpdateDbInstanceInput.struct_class = Types::UpdateDbInstanceInput
 
     UpdateDbInstanceOutput.add_member(:id, Shapes::ShapeRef.new(shape: DbInstanceId, required: true, location_name: "id"))
@@ -779,6 +987,8 @@ module Aws::TimestreamInfluxDB
     UpdateDbInstanceOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     UpdateDbInstanceOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
     UpdateDbInstanceOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
+    UpdateDbInstanceOutput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationOutputList, location_name: "dbBackupConfigurations"))
+    UpdateDbInstanceOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     UpdateDbInstanceOutput.struct_class = Types::UpdateDbInstanceOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -808,6 +1018,21 @@ module Aws::TimestreamInfluxDB
         "targetPrefix" => "AmazonTimestreamInfluxDB",
         "uid" => "timestream-influxdb-2023-01-27",
       }
+
+      api.add_operation(:create_db_backup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDbBackup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDbBackupInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateDbBackupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
 
       api.add_operation(:create_db_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDbCluster"
@@ -854,6 +1079,20 @@ module Aws::TimestreamInfluxDB
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_db_backup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDbBackup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDbBackupInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDbBackupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_db_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDbCluster"
         o.http_method = "POST"
@@ -878,6 +1117,19 @@ module Aws::TimestreamInfluxDB
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_db_backup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDbBackup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDbBackupInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDbBackupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -919,6 +1171,25 @@ module Aws::TimestreamInfluxDB
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_db_backups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDbBackups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDbBackupsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListDbBackupsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_db_clusters, Seahorse::Model::Operation.new.tap do |o|
@@ -1026,6 +1297,21 @@ module Aws::TimestreamInfluxDB
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RebootDbInstanceInput)
         o.output = Shapes::ShapeRef.new(shape: RebootDbInstanceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:restore_from_db_backup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreFromDbBackup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreFromDbBackupInput)
+        o.output = Shapes::ShapeRef.new(shape: RestoreFromDbBackupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

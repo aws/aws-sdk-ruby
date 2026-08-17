@@ -116,6 +116,414 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # Summary of an optimization profile, including its configuration,
+    # metadata, and audit information.
+    #
+    # @!attribute [rw] name
+    #   The system name of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the profile shown to users.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_overview
+    #   The business overview for this profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Well-Architected Tool Framework pillars associated with this
+    #   profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether deletion protection is enabled for the profile.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the IAM execution role used for recommendation actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_configuration
+    #   The aggregation configuration that defines which Amazon Web Services
+    #   accounts and Regions to analyze.
+    #   @return [Array<Types::AggregationConfiguration>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the optimization profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] eligible_for_scheduled_generation
+    #   Indicates whether the profile is valid for scheduled recommendation
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] eligible_for_architecture_generation
+    #   Indicates whether the profile is valid for manual architecture
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] field_errors
+    #   A map of field paths to error messages for invalid or missing input
+    #   fields.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the profile.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the profile was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AgentProfileSummary AWS API Documentation
+    #
+    class AgentProfileSummary < Struct.new(
+      :name,
+      :display_name,
+      :description,
+      :business_overview,
+      :pillars,
+      :deletion_protection,
+      :execution_role_arn,
+      :aggregation_configuration,
+      :arn,
+      :eligible_for_scheduled_generation,
+      :eligible_for_architecture_generation,
+      :field_errors,
+      :tags,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = [:display_name, :description, :business_overview]
+      include Aws::Structure
+    end
+
+    # Summary of a recommendation generation process initiated through the
+    # agent API.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile used for this
+    #   generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_completion_time
+    #   The estimated time for the generation to complete.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that started this generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the generation was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the generation was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AgentRecommendationGenerationSummary AWS API Documentation
+    #
+    class AgentRecommendationGenerationSummary < Struct.new(
+      :id,
+      :profile_arn,
+      :name,
+      :status,
+      :estimated_completion_time,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of an agent recommendation item, representing an Amazon Web
+    # Services resource or recommendation affected by the optimization
+    # recommendation.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the recommendation item.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_arn
+    #   The Amazon Resource Name (ARN) of the associated recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the recommendation item.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   Metadata containing a snapshot of the resource or recommendation at
+    #   the time of generation.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this
+    #   recommendation item.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the recommendation item was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   recommendation item.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the recommendation item was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AgentRecommendationItemSummary AWS API Documentation
+    #
+    class AgentRecommendationItemSummary < Struct.new(
+      :id,
+      :recommendation_arn,
+      :type,
+      :metadata,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The core fields for a remediation.
+    #
+    # @!attribute [rw] recommendation_arn
+    #   The ARN of the recommendation that this remediation belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The remediation method.
+    #   @return [String]
+    #
+    # @!attribute [rw] steps
+    #   The procedural steps to perform the remediation.
+    #   @return [Array<Types::RemediationStep>]
+    #
+    # @!attribute [rw] resource_links
+    #   External references associated with the steps.
+    #   @return [Array<Types::ResourceLink>]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this remediation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the remediation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   remediation.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the remediation was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AgentRecommendationRemediation AWS API Documentation
+    #
+    class AgentRecommendationRemediation < Struct.new(
+      :recommendation_arn,
+      :type,
+      :steps,
+      :resource_links,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of an agent optimization recommendation returned by list
+    # operations.
+    #
+    # @!attribute [rw] recommendation_arn
+    #   The Amazon Resource Name (ARN) of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the associated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar
+    #   The Well-Architected Tool Framework pillar that the recommendation
+    #   addresses.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] effort
+    #   The effort required to implement the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_reason
+    #   The free-text reason associated with the recommendation's most
+    #   recent status update.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact
+    #   The severity of the recommendation's impact.
+    #   @return [String]
+    #
+    # @!attribute [rw] roi
+    #   The return on investment estimate for the recommendation.
+    #   @return [Types::Roi]
+    #
+    # @!attribute [rw] number_of_resources
+    #   The number of Amazon Web Services resources this recommendation
+    #   affects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aws_services
+    #   The Amazon Web Services services that the recommendation applies to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] business_units
+    #   The business units that own the affected resources.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] applications
+    #   The applications that the recommendation targets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the recommendation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the recommendation was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AgentRecommendationSummary AWS API Documentation
+    #
+    class AgentRecommendationSummary < Struct.new(
+      :recommendation_arn,
+      :profile_arn,
+      :title,
+      :description,
+      :type,
+      :pillar,
+      :priority,
+      :effort,
+      :status,
+      :state,
+      :update_reason,
+      :impact,
+      :roi,
+      :number_of_resources,
+      :aws_services,
+      :business_units,
+      :applications,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = [:title, :description, :update_reason]
+      include Aws::Structure
+    end
+
+    # Configuration settings that define the scope of Amazon Web Services
+    # resources to analyze for optimization recommendations.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID to analyze.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   A list of Amazon Web Services Regions to include in the analysis.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] access_role_arn
+    #   The ARN of an IAM role to assume for resource analysis in this
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AggregationConfiguration AWS API Documentation
+    #
+    class AggregationConfiguration < Struct.new(
+      :account_id,
+      :regions,
+      :access_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An answer of the question.
     #
     # @!attribute [rw] question_id
@@ -141,8 +549,6 @@ module Aws::WellArchitected
     #   official lenses.
     #
     #   This value is only available if the question has been answered.
-    #
-    #   This value does not apply to custom lenses.
     #   @return [String]
     #
     # @!attribute [rw] helpful_resource_url
@@ -405,7 +811,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the check was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CheckDetail AWS API Documentation
@@ -447,7 +853,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the check summary was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] lens_arn
@@ -619,6 +1025,8 @@ module Aws::WellArchitected
 
     # The choice level improvement plan.
     #
+    # This value is only applicable to custom lenses.
+    #
     # @!attribute [rw] choice_id
     #   The ID of a choice.
     #   @return [String]
@@ -632,8 +1040,6 @@ module Aws::WellArchitected
     #   official lenses.
     #
     #   This value is only available if the question has been answered.
-    #
-    #   This value does not apply to custom lenses.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ChoiceImprovementPlan AWS API Documentation
@@ -725,7 +1131,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the consolidated report metric was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] lenses
@@ -748,6 +1155,423 @@ module Aws::WellArchitected
       :lenses,
       :lenses_applied_count)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Typed content structure for a context. Contains application-specific
+    # fields that describe the environment used during recommendation
+    # generation.
+    #
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services account IDs associated with this application
+    #   context.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   The Amazon Web Services Regions where this application operates.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aws_services
+    #   The Amazon Web Services services used by this application.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_types
+    #   The Amazon Web Services resource types relevant to this application.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_tags
+    #   Resource tags used to scope this application context.
+    #   @return [Array<Types::ContextResourceTag>]
+    #
+    # @!attribute [rw] application_overview
+    #   A free-form overview of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] industry
+    #   The industry vertical for this application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_type
+    #   The type of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] criticality
+    #   The business criticality of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] architecture_overview
+    #   A free-form description of the application architecture.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_context
+    #   Additional context not captured by other fields.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ContextContent AWS API Documentation
+    #
+    class ContextContent < Struct.new(
+      :account_ids,
+      :regions,
+      :aws_services,
+      :resource_types,
+      :resource_tags,
+      :application_overview,
+      :industry,
+      :application_type,
+      :criticality,
+      :architecture_overview,
+      :additional_context)
+      SENSITIVE = [:application_overview, :industry, :architecture_overview, :additional_context]
+      include Aws::Structure
+    end
+
+    # A key-value pair representing a resource tag used to scope context
+    # content.
+    #
+    # @!attribute [rw] key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ContextResourceTag AWS API Documentation
+    #
+    class ContextResourceTag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a context associated with a profile, representing
+    # application or environment information used during recommendation
+    # generation.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the context.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the associated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the context.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_type
+    #   The type of the context.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The typed content of the context, containing application-specific
+    #   fields such as account IDs, Regions, services, and resource types.
+    #   @return [Types::ContextContent]
+    #
+    # @!attribute [rw] application_type
+    #   The type of application described by this context.
+    #   @return [String]
+    #
+    # @!attribute [rw] criticality
+    #   The business criticality of the application described by this
+    #   context.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this context.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the context was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   context.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the context was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ContextSummary AWS API Documentation
+    #
+    class ContextSummary < Struct.new(
+      :id,
+      :profile_arn,
+      :title,
+      :context_type,
+      :content,
+      :application_type,
+      :criticality,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = [:title]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile to associate the
+    #   context with.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the context.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_type
+    #   The type of the context.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The typed content of the context. The structure contains
+    #   application-specific fields such as account IDs, Regions, services,
+    #   and resource types.
+    #   @return [Types::ContextContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentContextRequest AWS API Documentation
+    #
+    class CreateAgentContextRequest < Struct.new(
+      :client_token,
+      :profile_arn,
+      :title,
+      :context_type,
+      :content)
+      SENSITIVE = [:title]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context
+    #   The created context summary.
+    #   @return [Types::ContextSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentContextResponse AWS API Documentation
+    #
+    class CreateAgentContextResponse < Struct.new(
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile to associate the goal
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Well-Architected Tool Framework pillars to associate with this
+    #   goal.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] title
+    #   The title of the goal.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the goal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentGoalRequest AWS API Documentation
+    #
+    class CreateAgentGoalRequest < Struct.new(
+      :client_token,
+      :profile_arn,
+      :pillars,
+      :title,
+      :description)
+      SENSITIVE = [:title, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] goal
+    #   The created goal summary.
+    #   @return [Types::GoalSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentGoalResponse AWS API Documentation
+    #
+    class CreateAgentGoalResponse < Struct.new(
+      :goal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The system name of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the profile shown to users.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_overview
+    #   The business overview for this profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Well-Architected Tool Framework pillars to associate with this
+    #   profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether deletion protection is enabled for the profile.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the IAM execution role used for recommendation actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_configuration
+    #   The aggregation configuration that defines which Amazon Web Services
+    #   accounts and Regions to analyze.
+    #   @return [Array<Types::AggregationConfiguration>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with the profile.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentProfileRequest AWS API Documentation
+    #
+    class CreateAgentProfileRequest < Struct.new(
+      :name,
+      :display_name,
+      :description,
+      :business_overview,
+      :pillars,
+      :deletion_protection,
+      :execution_role_arn,
+      :aggregation_configuration,
+      :client_token,
+      :tags)
+      SENSITIVE = [:display_name, :description, :business_overview]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The system name of the created profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the created profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the created profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_overview
+    #   The business overview of the created profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Well-Architected Tool Framework pillars associated with the
+    #   created profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether deletion protection is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the IAM execution role.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_configuration
+    #   The aggregation configuration.
+    #   @return [Array<Types::AggregationConfiguration>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the created profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] eligible_for_scheduled_generation
+    #   Indicates whether the profile is valid for scheduled recommendation
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] eligible_for_architecture_generation
+    #   Indicates whether the profile is valid for manual architecture
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] field_errors
+    #   A map of field paths to error messages for invalid or missing input
+    #   fields.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the created profile.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the profile was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentProfileResponse AWS API Documentation
+    #
+    class CreateAgentProfileResponse < Struct.new(
+      :name,
+      :display_name,
+      :description,
+      :business_overview,
+      :pillars,
+      :deletion_protection,
+      :execution_role_arn,
+      :aggregation_configuration,
+      :arn,
+      :eligible_for_scheduled_generation,
+      :eligible_for_architecture_generation,
+      :field_errors,
+      :tags,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = [:display_name, :description, :business_overview]
       include Aws::Structure
     end
 
@@ -1468,6 +2292,94 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # A benefit on a different pillar from acting on the recommendation.
+    #
+    # @!attribute [rw] pillar
+    #   The pillar that would be positively impacted.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short phrase describing the outcome.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of what changes and why it matters.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact
+    #   The severity of the benefit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CrossPillarBenefit AWS API Documentation
+    #
+    class CrossPillarBenefit < Struct.new(
+      :pillar,
+      :title,
+      :description,
+      :impact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the
+    #   context.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the context to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentContextRequest AWS API Documentation
+    #
+    class DeleteAgentContextRequest < Struct.new(
+      :profile_arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentContextResponse AWS API Documentation
+    #
+    class DeleteAgentContextResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the goal.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the goal to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentGoalRequest AWS API Documentation
+    #
+    class DeleteAgentGoalRequest < Struct.new(
+      :profile_arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentGoalResponse AWS API Documentation
+    #
+    class DeleteAgentGoalResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentProfileRequest AWS API Documentation
+    #
+    class DeleteAgentProfileRequest < Struct.new(
+      :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentProfileResponse AWS API Documentation
+    #
+    class DeleteAgentProfileResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -1810,6 +2722,25 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # Details about an error that occurred during recommendation generation.
+    #
+    # @!attribute [rw] code
+    #   The status code identifying the type of error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ErrorDetails AWS API Documentation
+    #
+    class ErrorDetails < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -1847,6 +2778,464 @@ module Aws::WellArchitected
     class ExportLensOutput < Struct.new(
       :lens_json)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the
+    #   context.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the context to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentContextRequest AWS API Documentation
+    #
+    class GetAgentContextRequest < Struct.new(
+      :profile_arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context
+    #   The retrieved context summary.
+    #   @return [Types::ContextSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentContextResponse AWS API Documentation
+    #
+    class GetAgentContextResponse < Struct.new(
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the goal.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the goal to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentGoalRequest AWS API Documentation
+    #
+    class GetAgentGoalRequest < Struct.new(
+      :profile_arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] goal
+    #   The retrieved goal summary.
+    #   @return [Types::GoalSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentGoalResponse AWS API Documentation
+    #
+    class GetAgentGoalResponse < Struct.new(
+      :goal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the optimization profile to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentProfileRequest AWS API Documentation
+    #
+    class GetAgentProfileRequest < Struct.new(
+      :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The system name of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_overview
+    #   The business overview of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Well-Architected Tool Framework pillars associated with the
+    #   profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether deletion protection is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the IAM execution role.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_configuration
+    #   The aggregation configuration.
+    #   @return [Array<Types::AggregationConfiguration>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] eligible_for_scheduled_generation
+    #   Indicates whether the profile is valid for scheduled recommendation
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] eligible_for_architecture_generation
+    #   Indicates whether the profile is valid for manual architecture
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] field_errors
+    #   A map of field paths to error messages for invalid or missing input
+    #   fields.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the profile.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the profile was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentProfileResponse AWS API Documentation
+    #
+    class GetAgentProfileResponse < Struct.new(
+      :name,
+      :display_name,
+      :description,
+      :business_overview,
+      :pillars,
+      :deletion_protection,
+      :execution_role_arn,
+      :aggregation_configuration,
+      :arn,
+      :eligible_for_scheduled_generation,
+      :eligible_for_architecture_generation,
+      :field_errors,
+      :tags,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = [:display_name, :description, :business_overview]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The ARN of the optimization profile associated with this generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_id
+    #   The unique identifier of the recommendation generation to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentRecommendationGenerationRequest AWS API Documentation
+    #
+    class GetAgentRecommendationGenerationRequest < Struct.new(
+      :profile_arn,
+      :generation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The unique identifier of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile used for this
+    #   generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_completion_time
+    #   The estimated time for the generation to complete.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that started this generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the generation was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the generation was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] additional_context
+    #   Additional context information provided to guide the recommendation
+    #   generation process.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] scope
+    #   The scope configuration that defines which pillars and goals to
+    #   focus on during generation.
+    #   @return [Types::Scope]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp when the recommendation generation process started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the recommendation generation process completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] progress
+    #   Current progress information including steps completed and
+    #   completion percentage.
+    #   @return [Types::Progress]
+    #
+    # @!attribute [rw] error_details
+    #   Details about the error if the generation status is ERROR.
+    #   @return [Types::ErrorDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentRecommendationGenerationResponse AWS API Documentation
+    #
+    class GetAgentRecommendationGenerationResponse < Struct.new(
+      :id,
+      :profile_arn,
+      :name,
+      :status,
+      :estimated_completion_time,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at,
+      :additional_context,
+      :scope,
+      :started_at,
+      :ended_at,
+      :progress,
+      :error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendation_arn
+    #   The Amazon Resource Name (ARN) of the recommendation to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_type
+    #   Optional filter on remediation type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentRecommendationRequest AWS API Documentation
+    #
+    class GetAgentRecommendationRequest < Struct.new(
+      :recommendation_arn,
+      :remediation_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendation_arn
+    #   The Amazon Resource Name (ARN) of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the associated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar
+    #   The Well-Architected Tool Framework pillar that the recommendation
+    #   addresses.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] effort
+    #   The effort required to implement the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_reason
+    #   The free-text reason associated with the recommendation's most
+    #   recent status update.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact
+    #   The severity of the recommendation's impact.
+    #   @return [String]
+    #
+    # @!attribute [rw] roi
+    #   The return on investment estimate for the recommendation.
+    #   @return [Types::Roi]
+    #
+    # @!attribute [rw] number_of_resources
+    #   The number of Amazon Web Services resources this recommendation
+    #   affects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aws_services
+    #   The Amazon Web Services services that the recommendation applies to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] business_units
+    #   The business units that own the affected resources.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] applications
+    #   The applications that the recommendation targets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] impact_details
+    #   Detailed impact information for the recommendation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] insights
+    #   A list of insights about the recommendation.
+    #   @return [Array<Types::Insight>]
+    #
+    # @!attribute [rw] highlights
+    #   Highlights describing what was detected.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remediation_summary
+    #   A high-level summary of the recommended remediation.
+    #   @return [Types::RemediationSummary]
+    #
+    # @!attribute [rw] cross_pillar_benefits
+    #   Cross-pillar benefits of acting on the recommendation.
+    #   @return [Array<Types::CrossPillarBenefit>]
+    #
+    # @!attribute [rw] trade_offs
+    #   Trade-offs of acting on the recommendation.
+    #   @return [Array<Types::TradeOff>]
+    #
+    # @!attribute [rw] sources
+    #   Sources that generated this recommendation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] goals
+    #   Goals that this recommendation targets.
+    #   @return [Array<Types::RecommendationGoal>]
+    #
+    # @!attribute [rw] tags
+    #   A set of key-value pairs associated with the recommendation, used
+    #   for cost allocation and access control.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the recommendation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the recommendation was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] remediations
+    #   A list of remediations for the recommendation.
+    #   @return [Array<Types::AgentRecommendationRemediation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentRecommendationResponse AWS API Documentation
+    #
+    class GetAgentRecommendationResponse < Struct.new(
+      :recommendation_arn,
+      :profile_arn,
+      :title,
+      :description,
+      :type,
+      :pillar,
+      :priority,
+      :effort,
+      :status,
+      :state,
+      :update_reason,
+      :impact,
+      :roi,
+      :number_of_resources,
+      :aws_services,
+      :business_units,
+      :applications,
+      :impact_details,
+      :insights,
+      :highlights,
+      :remediation_summary,
+      :cross_pillar_benefits,
+      :trade_offs,
+      :sources,
+      :goals,
+      :tags,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at,
+      :remediations)
+      SENSITIVE = [:title, :description, :update_reason]
       include Aws::Structure
     end
 
@@ -2526,6 +3915,61 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # Summary of an optimization goal associated with a profile.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the goal.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the associated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Well-Architected Tool Framework pillars associated with this
+    #   goal.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] title
+    #   The title of the goal.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the goal.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this goal.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the goal was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this goal.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the goal was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GoalSummary AWS API Documentation
+    #
+    class GoalSummary < Struct.new(
+      :id,
+      :profile_arn,
+      :pillars,
+      :title,
+      :description,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = [:title, :description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -2620,12 +4064,12 @@ module Aws::WellArchitected
     #   official lenses.
     #
     #   This value is only available if the question has been answered.
-    #
-    #   This value does not apply to custom lenses.
     #   @return [String]
     #
     # @!attribute [rw] improvement_plans
     #   The improvement plan details.
+    #
+    #   This value is only applicable to custom lenses.
     #   @return [Array<Types::ChoiceImprovementPlan>]
     #
     # @!attribute [rw] jira_configuration
@@ -2642,6 +4086,25 @@ module Aws::WellArchitected
       :improvement_plan_url,
       :improvement_plans,
       :jira_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An insight describing a usage pattern and the signals detected.
+    #
+    # @!attribute [rw] usage_pattern
+    #   A description of the usage pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] signals_detected
+    #   A description of the signals detected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Insight AWS API Documentation
+    #
+    class Insight < Struct.new(
+      :usage_pattern,
+      :signals_detected)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2667,7 +4130,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] last_synced_time
-    #   The date and time recorded.
+    #   The date and time when the Jira configuration was last synced.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/JiraConfiguration AWS API Documentation
@@ -2804,7 +4267,7 @@ module Aws::WellArchitected
     #   @return [Types::JiraSelectedQuestionConfiguration]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the lens review was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] notes
@@ -2926,7 +4389,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the lens review was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] risk_counts
@@ -3024,11 +4487,11 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time recorded.
+    #   The date and time when the lens was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the lens was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] lens_version
@@ -3125,6 +4588,277 @@ module Aws::WellArchitected
       :latest_lens_version,
       :resource_arn,
       :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile to list contexts for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentContextsRequest AWS API Documentation
+    #
+    class ListAgentContextsRequest < Struct.new(
+      :profile_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of context summaries associated with the profile.
+    #   @return [Array<Types::ContextSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentContextsResponse AWS API Documentation
+    #
+    class ListAgentContextsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the optimization profile to list
+    #   goals for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of goals to return in a single response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentGoalsRequest AWS API Documentation
+    #
+    class ListAgentGoalsRequest < Struct.new(
+      :profile_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of goal summaries associated with the profile.
+    #   @return [Array<Types::GoalSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next set of results, if
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentGoalsResponse AWS API Documentation
+    #
+    class ListAgentGoalsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of profiles to return in a single call. Default
+    #   is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentProfilesRequest AWS API Documentation
+    #
+    class ListAgentProfilesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of profile summaries.
+    #   @return [Array<Types::AgentProfileSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next set of results, if
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentProfilesResponse AWS API Documentation
+    #
+    class ListAgentProfilesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the optimization profile to list
+    #   generation processes for.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_type
+    #   Optional filter by recommendation type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of generation processes to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentRecommendationGenerationsRequest AWS API Documentation
+    #
+    class ListAgentRecommendationGenerationsRequest < Struct.new(
+      :profile_arn,
+      :recommendation_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of recommendation generation summaries.
+    #   @return [Array<Types::AgentRecommendationGenerationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next set of results, if
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentRecommendationGenerationsResponse AWS API Documentation
+    #
+    class ListAgentRecommendationGenerationsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendation_arn
+    #   The Amazon Resource Name (ARN) of the recommendation to list items
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Optional filter to return only recommendation items of the specified
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of recommendation items to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentRecommendationItemsRequest AWS API Documentation
+    #
+    class ListAgentRecommendationItemsRequest < Struct.new(
+      :recommendation_arn,
+      :type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of recommendation items with their detailed metadata and
+    #   configuration information.
+    #   @return [Array<Types::AgentRecommendationItemSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next set of results, if
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentRecommendationItemsResponse AWS API Documentation
+    #
+    class ListAgentRecommendationItemsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the optimization profile to list
+    #   recommendations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of recommendations to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Optional filter to return only recommendations with the specified
+    #   state (OPEN or CLOSED).
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar
+    #   Optional filter to return only recommendations for the specified
+    #   pillar.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentRecommendationsRequest AWS API Documentation
+    #
+    class ListAgentRecommendationsRequest < Struct.new(
+      :profile_arn,
+      :max_results,
+      :next_token,
+      :state,
+      :pillar)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of recommendation summaries.
+    #   @return [Array<Types::AgentRecommendationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next set of results, if
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentRecommendationsResponse AWS API Documentation
+    #
+    class ListAgentRecommendationsResponse < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4276,7 +6010,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] recorded_at
-    #   The date and time recorded.
+    #   The date and time when the milestone was recorded.
     #   @return [Time]
     #
     # @!attribute [rw] workload
@@ -4309,7 +6043,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] recorded_at
-    #   The date and time recorded.
+    #   The date and time when the milestone was recorded.
     #   @return [Time]
     #
     # @!attribute [rw] workload_summary
@@ -4373,6 +6107,27 @@ module Aws::WellArchitected
       :pillar_name,
       :difference_status,
       :question_differences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Item configuration for a specific Well-Architected Tool Framework
+    # pillar.
+    #
+    # @!attribute [rw] pillar
+    #   The pillar this item configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] ids
+    #   A list of item IDs to process for this pillar, such as best practice
+    #   IDs, Amazon Web Services service names, or resource ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PillarItem AWS API Documentation
+    #
+    class PillarItem < Struct.new(
+      :pillar,
+      :ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4472,11 +6227,11 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time recorded.
+    #   The date and time when the profile was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the profile was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] share_invitation_id
@@ -4694,11 +6449,11 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time recorded.
+    #   The date and time when the profile was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the profile was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileSummary AWS API Documentation
@@ -4726,11 +6481,11 @@ module Aws::WellArchitected
     #   @return [Array<Types::ProfileTemplateQuestion>]
     #
     # @!attribute [rw] created_at
-    #   The date and time recorded.
+    #   The date and time when the profile template was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the profile template was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileTemplate AWS API Documentation
@@ -4807,6 +6562,62 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # Progress information for a recommendation generation process.
+    #
+    # @!attribute [rw] steps_completed
+    #   The number of generation steps that have been completed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_steps
+    #   The total number of steps in the generation process.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] completion_percentage
+    #   The completion percentage of the generation process (0-100).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Progress AWS API Documentation
+    #
+    class Progress < Struct.new(
+      :steps_completed,
+      :total_steps,
+      :completion_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendation_arn
+    #   The Amazon Resource Name (ARN) of the recommendation to provide
+    #   feedback for.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of feedback being provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback_category
+    #   Optional category classifying the nature of the feedback.
+    #   @return [String]
+    #
+    # @!attribute [rw] comments
+    #   Optional comments providing additional context about the feedback.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PutAgentRecommendationFeedbackRequest AWS API Documentation
+    #
+    class PutAgentRecommendationFeedbackRequest < Struct.new(
+      :recommendation_arn,
+      :type,
+      :feedback_category,
+      :comments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PutAgentRecommendationFeedbackResponse AWS API Documentation
+    #
+    class PutAgentRecommendationFeedbackResponse < Aws::EmptyStructure; end
+
     # A question difference return object.
     #
     # @!attribute [rw] question_id
@@ -4852,6 +6663,78 @@ module Aws::WellArchitected
       :question_id,
       :risk,
       :best_practices)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a goal associated with a recommendation.
+    #
+    # @!attribute [rw] title
+    #   The title of the goal associated with the recommendation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/RecommendationGoal AWS API Documentation
+    #
+    class RecommendationGoal < Struct.new(
+      :title)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One step within a remediation procedure.
+    #
+    # @!attribute [rw] title
+    #   An optional short label for the step.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content describing the step, which can include code examples and
+    #   verification checklists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/RemediationStep AWS API Documentation
+    #
+    class RemediationStep < Struct.new(
+      :title,
+      :content)
+      SENSITIVE = [:title, :content]
+      include Aws::Structure
+    end
+
+    # A high-level remediation summary returned in the detail response.
+    #
+    # @!attribute [rw] recommendation
+    #   A short imperative statement of the recommended action.
+    #   @return [String]
+    #
+    # @!attribute [rw] steps
+    #   High-level steps to implement the fix.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/RemediationSummary AWS API Documentation
+    #
+    class RemediationSummary < Struct.new(
+      :recommendation,
+      :steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An external reference associated with remediation steps.
+    #
+    # @!attribute [rw] url
+    #   The URL of the external reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   An optional human-readable title for the link.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ResourceLink AWS API Documentation
+    #
+    class ResourceLink < Struct.new(
+      :url,
+      :title)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4907,7 +6790,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the review template was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] template_arn
@@ -4973,8 +6856,6 @@ module Aws::WellArchitected
     #   official lenses.
     #
     #   This value is only available if the question has been answered.
-    #
-    #   This value does not apply to custom lenses.
     #   @return [String]
     #
     # @!attribute [rw] helpful_resource_url
@@ -5153,7 +7034,8 @@ module Aws::WellArchitected
     #   @return [Array<Types::ReviewTemplatePillarReviewSummary>]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the review template lens review was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] notes
@@ -5239,7 +7121,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the review template was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] template_arn
@@ -5264,6 +7146,52 @@ module Aws::WellArchitected
       :template_arn,
       :template_name,
       :update_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A return-on-investment estimate with context.
+    #
+    # @!attribute [rw] estimate
+    #   A short statistic or key metric. Optional when there is no
+    #   quantifiable figure.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   A sentence providing context for the estimate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Roi AWS API Documentation
+    #
+    class Roi < Struct.new(
+      :estimate,
+      :detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the scope for recommendation generation, specifying which
+    # pillars and goals to focus on.
+    #
+    # @!attribute [rw] pillars
+    #   The Well-Architected Tool Framework pillars to include in the
+    #   generation scope.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] goal_ids
+    #   Specific goal IDs to focus on during recommendation generation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] items
+    #   Optional per-pillar item filtering configuration.
+    #   @return [Array<Types::PillarItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Scope AWS API Documentation
+    #
+    class Scope < Struct.new(
+      :pillars,
+      :goal_ids,
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5460,6 +7388,116 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the optimization profile to use
+    #   for generating recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] types
+    #   The types of recommendations to generate.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   An optional name for this generation process to help identify it in
+    #   lists and logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_context
+    #   Optional additional context to guide the recommendation generation,
+    #   such as specific business requirements or constraints.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] scope
+    #   Scope configuration to focus the generation on specific pillars or
+    #   goals.
+    #   @return [Types::Scope]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/StartAgentRecommendationGenerationRequest AWS API Documentation
+    #
+    class StartAgentRecommendationGenerationRequest < Struct.new(
+      :profile_arn,
+      :types,
+      :name,
+      :additional_context,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The unique identifier of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile used for this
+    #   generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommendation generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_completion_time
+    #   The estimated time for the generation to complete.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that started this generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the generation was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the generation was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/StartAgentRecommendationGenerationResponse AWS API Documentation
+    #
+    class StartAgentRecommendationGenerationResponse < Struct.new(
+      :id,
+      :profile_arn,
+      :name,
+      :status,
+      :estimated_completion_time,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value pair associated with a resource for cost allocation and
+    # access control.
+    #
+    # @!attribute [rw] key
+    #   The key of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] workload_arn
     #   The ARN for the workload.
     #   @return [String]
@@ -5536,6 +7574,47 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # A negative trade-off from acting on the recommendation.
+    #
+    # @!attribute [rw] pillar
+    #   The pillar that could be negatively impacted.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short phrase describing what is lost or degraded.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the specific risk and the condition that triggers
+    #   it.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk
+    #   The risk rating for the trade-off.
+    #   @return [String]
+    #
+    # @!attribute [rw] mitigation
+    #   A specific action to mitigate the trade-off and when to take it.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_explanation
+    #   An optional explanation providing additional context for the risk
+    #   rating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/TradeOff AWS API Documentation
+    #
+    class TradeOff < Struct.new(
+      :pillar,
+      :title,
+      :description,
+      :risk,
+      :mitigation,
+      :risk_explanation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] workload_arn
     #   The ARN for the workload.
     #   @return [String]
@@ -5557,6 +7636,292 @@ module Aws::WellArchitected
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UntagResourceOutput AWS API Documentation
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the
+    #   context.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the context to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The updated title of the context.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The updated typed content of the context. The structure contains
+    #   application-specific fields such as account IDs, Regions, services,
+    #   and resource types.
+    #   @return [Types::ContextContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentContextRequest AWS API Documentation
+    #
+    class UpdateAgentContextRequest < Struct.new(
+      :client_token,
+      :profile_arn,
+      :id,
+      :title,
+      :content)
+      SENSITIVE = [:title]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context
+    #   The updated context summary.
+    #   @return [Types::ContextSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentContextResponse AWS API Documentation
+    #
+    class UpdateAgentContextResponse < Struct.new(
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the goal to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the goal to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The updated pillars for the goal. Pillars define the optimization
+    #   focus areas such as cost, performance, resilience, and operational
+    #   excellence.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] title
+    #   The updated title for the goal. Maximum length of 1000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the goal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentGoalRequest AWS API Documentation
+    #
+    class UpdateAgentGoalRequest < Struct.new(
+      :client_token,
+      :profile_arn,
+      :id,
+      :pillars,
+      :title,
+      :description)
+      SENSITIVE = [:title, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] goal
+    #   The updated goal summary.
+    #   @return [Types::GoalSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentGoalResponse AWS API Documentation
+    #
+    class UpdateAgentGoalResponse < Struct.new(
+      :goal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The updated display name of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The updated ARN of the IAM execution role.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_configuration
+    #   The updated aggregation configuration.
+    #   @return [Array<Types::AggregationConfiguration>]
+    #
+    # @!attribute [rw] business_overview
+    #   The updated business overview for the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The updated Well-Architected Tool Framework pillars for the profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether deletion protection is enabled for the profile.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentProfileRequest AWS API Documentation
+    #
+    class UpdateAgentProfileRequest < Struct.new(
+      :client_token,
+      :profile_arn,
+      :display_name,
+      :description,
+      :execution_role_arn,
+      :aggregation_configuration,
+      :business_overview,
+      :pillars,
+      :deletion_protection)
+      SENSITIVE = [:display_name, :description, :business_overview]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The system name of the updated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the updated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the updated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_overview
+    #   The business overview of the updated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Well-Architected Tool Framework pillars associated with the
+    #   updated profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether deletion protection is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the IAM execution role.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_configuration
+    #   The aggregation configuration.
+    #   @return [Array<Types::AggregationConfiguration>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the updated profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] eligible_for_scheduled_generation
+    #   Indicates whether the profile is valid for scheduled recommendation
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] eligible_for_architecture_generation
+    #   Indicates whether the profile is valid for manual architecture
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] field_errors
+    #   A map of field paths to error messages for invalid or missing input
+    #   fields.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the updated profile.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the profile was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentProfileResponse AWS API Documentation
+    #
+    class UpdateAgentProfileResponse < Struct.new(
+      :name,
+      :display_name,
+      :description,
+      :business_overview,
+      :pillars,
+      :deletion_protection,
+      :execution_role_arn,
+      :aggregation_configuration,
+      :arn,
+      :eligible_for_scheduled_generation,
+      :eligible_for_architecture_generation,
+      :field_errors,
+      :tags,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = [:display_name, :description, :business_overview]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendation_arn
+    #   The Amazon Resource Name (ARN) of the recommendation to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The new status to assign to the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_reason
+    #   A free-text reason explaining this status update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentRecommendationStatusRequest AWS API Documentation
+    #
+    class UpdateAgentRecommendationStatusRequest < Struct.new(
+      :recommendation_arn,
+      :status,
+      :update_reason)
+      SENSITIVE = [:update_reason]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentRecommendationStatusResponse AWS API Documentation
+    #
+    class UpdateAgentRecommendationStatusResponse < Aws::EmptyStructure; end
 
     # Input to update answer.
     #
@@ -6533,7 +8898,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the workload was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] account_ids
@@ -6562,7 +8927,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] review_restriction_date
-    #   The date and time recorded.
+    #   The review restriction date for the workload.
     #   @return [Time]
     #
     # @!attribute [rw] is_review_owner_update_acknowledged
@@ -6944,7 +9309,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The date and time recorded.
+    #   The date and time when the workload was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] lenses

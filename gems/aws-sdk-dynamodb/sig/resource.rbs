@@ -205,7 +205,27 @@ module Aws
                             max_write_request_units: ::Integer?
                           },
                           ?global_table_source_arn: ::String,
-                          ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
+                          ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES"),
+                          ?vector_indexes: Array[
+                            {
+                              index_name: ::String,
+                              vector_attribute: {
+                                attribute_name: ::String
+                              },
+                              search_schema: Array[
+                                {
+                                  attribute_name: ::String,
+                                  search_schema_element_type: ("HASH" | "INLINE_FILTER")
+                                }
+                              ]?,
+                              projection: {
+                                projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                                non_key_attributes: Array[::String]?
+                              },
+                              dimensions: ::Integer,
+                              distance_function: ("COSINE" | "DOT_PRODUCT" | "EUCLIDEAN")
+                            }
+                          ]
                         ) -> Table
                       | (?Hash[Symbol, untyped]) -> Table
 

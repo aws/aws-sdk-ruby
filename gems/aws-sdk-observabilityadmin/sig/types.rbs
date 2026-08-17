@@ -67,6 +67,8 @@ module Aws::ObservabilityAdmin
       attr_accessor last_update_time_stamp: ::Integer
       attr_accessor rule_health: ("Healthy" | "Unhealthy" | "Provisioning")
       attr_accessor failure_reason: ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
+      attr_accessor tag_propagation_status: ("Healthy" | "Unhealthy")
+      attr_accessor tag_propagation_failure_reason: ("RoleNotAssumable" | "RoleLacksPermissions")
       attr_accessor destination_account_id: ::String
       attr_accessor destination_region: ::String
       SENSITIVE: []
@@ -197,6 +199,7 @@ module Aws::ObservabilityAdmin
       attr_accessor logs_encryption_configuration: Types::LogsEncryptionConfiguration
       attr_accessor backup_configuration: Types::LogsBackupConfiguration
       attr_accessor log_group_name_configuration: Types::LogGroupNameConfiguration
+      attr_accessor tag_propagation_configuration: Types::TagPropagationConfiguration
       SENSITIVE: []
     end
 
@@ -246,6 +249,8 @@ module Aws::ObservabilityAdmin
       attr_accessor last_update_time_stamp: ::Integer
       attr_accessor rule_health: ("Healthy" | "Unhealthy" | "Provisioning")
       attr_accessor failure_reason: ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
+      attr_accessor tag_propagation_status: ("Healthy" | "Unhealthy")
+      attr_accessor tag_propagation_failure_reason: ("RoleNotAssumable" | "RoleLacksPermissions")
       attr_accessor centralization_rule: Types::CentralizationRule
       SENSITIVE: []
     end
@@ -489,6 +494,7 @@ module Aws::ObservabilityAdmin
       attr_accessor encryption_strategy: ("CUSTOMER_MANAGED" | "AWS_OWNED")
       attr_accessor kms_key_arn: ::String
       attr_accessor encryption_conflict_resolution_strategy: ("ALLOW" | "SKIP")
+      attr_accessor encryption_scope: ("ENCRYPTED_SOURCE_ONLY" | "NEW_DESTINATION_LOG_GROUPS")
       SENSITIVE: []
     end
 
@@ -589,6 +595,12 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class TagPropagationConfiguration
+      attr_accessor destination_role_arn: ::String
+      attr_accessor tag_conflict_resolution_strategy: ("IN_SYNC" | "ADD_ONLY" | "UPDATE_SYNC")
+      SENSITIVE: []
+    end
+
     class TagResourceInput
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -616,6 +628,7 @@ module Aws::ObservabilityAdmin
       attr_accessor waf_logging_parameters: Types::WAFLoggingParameters
       attr_accessor log_delivery_parameters: Types::LogDeliveryParameters
       attr_accessor msk_monitoring_parameters: Types::MskMonitoringParameters
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 

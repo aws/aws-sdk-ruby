@@ -102,6 +102,7 @@ module Aws::MarketplaceDiscovery
     ListingSummaryAssociatedEntityList = Shapes::ListShape.new(name: 'ListingSummaryAssociatedEntityList')
     ListingSummaryList = Shapes::ListShape.new(name: 'ListingSummaryList')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NetPaymentTerm = Shapes::StructureShape.new(name: 'NetPaymentTerm')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonNegativeCount = Shapes::IntegerShape.new(name: 'NonNegativeCount')
@@ -434,14 +435,14 @@ module Aws::MarketplaceDiscovery
     GetOfferOutput.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, required: true, location_name: "offerId"))
     GetOfferOutput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
     GetOfferOutput.add_member(:offer_name, Shapes::ShapeRef.new(shape: NullableString, location_name: "offerName"))
-    GetOfferOutput.add_member(:agreement_proposal_id, Shapes::ShapeRef.new(shape: AgreementResourceId, required: true, location_name: "agreementProposalId"))
     GetOfferOutput.add_member(:expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationTime"))
     GetOfferOutput.add_member(:available_from_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "availableFromTime"))
     GetOfferOutput.add_member(:seller_of_record, Shapes::ShapeRef.new(shape: SellerInformation, required: true, location_name: "sellerOfRecord"))
+    GetOfferOutput.add_member(:associated_entities, Shapes::ShapeRef.new(shape: OfferAssociatedEntityList, required: true, location_name: "associatedEntities"))
+    GetOfferOutput.add_member(:agreement_proposal_id, Shapes::ShapeRef.new(shape: AgreementResourceId, required: true, location_name: "agreementProposalId"))
     GetOfferOutput.add_member(:replacement_agreement_id, Shapes::ShapeRef.new(shape: AgreementResourceId, location_name: "replacementAgreementId"))
     GetOfferOutput.add_member(:pricing_model, Shapes::ShapeRef.new(shape: PricingModel, required: true, location_name: "pricingModel"))
     GetOfferOutput.add_member(:badges, Shapes::ShapeRef.new(shape: PurchaseOptionBadgeList, required: true, location_name: "badges"))
-    GetOfferOutput.add_member(:associated_entities, Shapes::ShapeRef.new(shape: OfferAssociatedEntityList, required: true, location_name: "associatedEntities"))
     GetOfferOutput.struct_class = Types::GetOfferOutput
 
     GetOfferSetInput.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetId, required: true, location_name: "offerSetId"))
@@ -473,10 +474,10 @@ module Aws::MarketplaceDiscovery
     GetProductOutput.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, required: true, location_name: "productId"))
     GetProductOutput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
     GetProductOutput.add_member(:product_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "productName"))
+    GetProductOutput.add_member(:manufacturer, Shapes::ShapeRef.new(shape: SellerInformation, required: true, location_name: "manufacturer"))
     GetProductOutput.add_member(:deployed_on_aws, Shapes::ShapeRef.new(shape: DeployedOnAwsStatus, required: true, location_name: "deployedOnAws"))
     GetProductOutput.add_member(:short_description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "shortDescription"))
     GetProductOutput.add_member(:long_description, Shapes::ShapeRef.new(shape: GetProductOutputLongDescriptionString, required: true, location_name: "longDescription"))
-    GetProductOutput.add_member(:manufacturer, Shapes::ShapeRef.new(shape: SellerInformation, required: true, location_name: "manufacturer"))
     GetProductOutput.add_member(:logo_thumbnail_url, Shapes::ShapeRef.new(shape: URL, required: true, location_name: "logoThumbnailUrl"))
     GetProductOutput.add_member(:fulfillment_option_summaries, Shapes::ShapeRef.new(shape: FulfillmentOptionSummaryList, required: true, location_name: "fulfillmentOptionSummaries"))
     GetProductOutput.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryList, required: true, location_name: "categories"))
@@ -564,11 +565,11 @@ module Aws::MarketplaceDiscovery
     ListingSummary.add_member(:listing_id, Shapes::ShapeRef.new(shape: ListingId, required: true, location_name: "listingId"))
     ListingSummary.add_member(:listing_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "listingName"))
     ListingSummary.add_member(:publisher, Shapes::ShapeRef.new(shape: SellerInformation, required: true, location_name: "publisher"))
+    ListingSummary.add_member(:fulfillment_option_summaries, Shapes::ShapeRef.new(shape: FulfillmentOptionSummaryList, required: true, location_name: "fulfillmentOptionSummaries"))
     ListingSummary.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
     ListingSummary.add_member(:short_description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "shortDescription"))
     ListingSummary.add_member(:logo_thumbnail_url, Shapes::ShapeRef.new(shape: URL, required: true, location_name: "logoThumbnailUrl"))
     ListingSummary.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryList, required: true, location_name: "categories"))
-    ListingSummary.add_member(:fulfillment_option_summaries, Shapes::ShapeRef.new(shape: FulfillmentOptionSummaryList, required: true, location_name: "fulfillmentOptionSummaries"))
     ListingSummary.add_member(:badges, Shapes::ShapeRef.new(shape: ListingBadgeList, required: true, location_name: "badges"))
     ListingSummary.add_member(:review_summary, Shapes::ShapeRef.new(shape: ReviewSummary, required: true, location_name: "reviewSummary"))
     ListingSummary.add_member(:pricing_models, Shapes::ShapeRef.new(shape: PricingModelList, required: true, location_name: "pricingModels"))
@@ -582,6 +583,11 @@ module Aws::MarketplaceDiscovery
     ListingSummaryAssociatedEntityList.member = Shapes::ShapeRef.new(shape: ListingSummaryAssociatedEntity)
 
     ListingSummaryList.member = Shapes::ShapeRef.new(shape: ListingSummary)
+
+    NetPaymentTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, required: true, location_name: "id"))
+    NetPaymentTerm.add_member(:type, Shapes::ShapeRef.new(shape: TermType, required: true, location_name: "type"))
+    NetPaymentTerm.add_member(:payment_due_period, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "paymentDuePeriod"))
+    NetPaymentTerm.struct_class = Types::NetPaymentTerm
 
     OfferAssociatedEntity.add_member(:product, Shapes::ShapeRef.new(shape: ProductInformation, required: true, location_name: "product"))
     OfferAssociatedEntity.add_member(:offer_set, Shapes::ShapeRef.new(shape: OfferSetInformation, location_name: "offerSet"))
@@ -616,6 +622,7 @@ module Aws::MarketplaceDiscovery
     OfferTerm.add_member(:usage_based_pricing_term, Shapes::ShapeRef.new(shape: UsageBasedPricingTerm, location_name: "usageBasedPricingTerm"))
     OfferTerm.add_member(:validity_term, Shapes::ShapeRef.new(shape: ValidityTerm, location_name: "validityTerm"))
     OfferTerm.add_member(:variable_payment_term, Shapes::ShapeRef.new(shape: VariablePaymentTerm, location_name: "variablePaymentTerm"))
+    OfferTerm.add_member(:net_payment_term, Shapes::ShapeRef.new(shape: NetPaymentTerm, location_name: "netPaymentTerm"))
     OfferTerm.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     OfferTerm.add_member_subclass(:byol_pricing_term, Types::OfferTerm::ByolPricingTerm)
     OfferTerm.add_member_subclass(:configurable_upfront_pricing_term, Types::OfferTerm::ConfigurableUpfrontPricingTerm)
@@ -629,6 +636,7 @@ module Aws::MarketplaceDiscovery
     OfferTerm.add_member_subclass(:usage_based_pricing_term, Types::OfferTerm::UsageBasedPricingTerm)
     OfferTerm.add_member_subclass(:validity_term, Types::OfferTerm::ValidityTerm)
     OfferTerm.add_member_subclass(:variable_payment_term, Types::OfferTerm::VariablePaymentTerm)
+    OfferTerm.add_member_subclass(:net_payment_term, Types::OfferTerm::NetPaymentTerm)
     OfferTerm.add_member_subclass(:unknown, Types::OfferTerm::Unknown)
     OfferTerm.struct_class = Types::OfferTerm
 

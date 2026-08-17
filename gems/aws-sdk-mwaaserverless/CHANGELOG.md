@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2026-08-14)
+------------------
+
+* Feature - Adds support for Consuming code for MWAA Serverless
+
 1.9.0 (2026-07-09)
 ------------------
 

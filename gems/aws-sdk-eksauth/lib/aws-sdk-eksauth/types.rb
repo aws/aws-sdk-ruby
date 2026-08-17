@@ -38,11 +38,29 @@ module Aws::EKSAuth
     #   The token of the Kubernetes service account for the pod.
     #   @return [String]
     #
+    # @!attribute [rw] eks_node_name
+    #   The Kubernetes node name of the worker node where the pod is
+    #   running.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon EC2 instance ID of the worker node where the pod is
+    #   running.
+    #   @return [String]
+    #
+    # @!attribute [rw] zone
+    #   The Availability Zone ID of the worker node where the pod is
+    #   running.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-auth-2023-11-26/AssumeRoleForPodIdentityRequest AWS API Documentation
     #
     class AssumeRoleForPodIdentityRequest < Struct.new(
       :cluster_name,
-      :token)
+      :token,
+      :eks_node_name,
+      :instance_id,
+      :zone)
       SENSITIVE = [:token]
       include Aws::Structure
     end

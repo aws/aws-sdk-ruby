@@ -1370,6 +1370,9 @@ module Aws::MarketplaceAgreement
     #   resp.accepted_terms[0].variable_payment_term.max_total_charge_amount #=> String
     #   resp.accepted_terms[0].variable_payment_term.configuration.payment_request_approval_strategy #=> String, one of "AUTO_APPROVE_ON_EXPIRATION", "WAIT_FOR_APPROVAL"
     #   resp.accepted_terms[0].variable_payment_term.configuration.expiration_duration #=> String
+    #   resp.accepted_terms[0].net_payment_term.type #=> String
+    #   resp.accepted_terms[0].net_payment_term.id #=> String
+    #   resp.accepted_terms[0].net_payment_term.payment_due_period #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementTerms AWS API Documentation
@@ -2503,7 +2506,7 @@ module Aws::MarketplaceAgreement
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplaceagreement'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -861,6 +861,31 @@ module Aws::RDS
       data[:storage_volume_status]
     end
 
+    # The status of an in-progress storage operation on the DB instance.
+    # This field appears only while a storage operation is in progress. It
+    # isn't present when no storage operation is active. Possible values:
+    #
+    # * `Initializing` - The volume is initializing from a snapshot, such as
+    #   during a snapshot restore, point-in-time restore, read replica
+    #   creation, or blue/green deployment. Performance can be lower than
+    #   provisioned until initialization completes.
+    #
+    # * `Optimizing` - The volume is optimizing following a storage scaling
+    #   or modification operation.
+    # @return [String]
+    def storage_operation_status
+      data[:storage_operation_status]
+    end
+
+    # The percentage of the in-progress storage operation on the DB instance
+    # that has completed, from `0` to `100`. This field appears only while a
+    # storage operation is in progress. It isn't present when no storage
+    # operation is active.
+    # @return [Integer]
+    def storage_operation_percent_progress
+      data[:storage_operation_percent_progress]
+    end
+
     # @!endgroup
 
     # @return [Client]

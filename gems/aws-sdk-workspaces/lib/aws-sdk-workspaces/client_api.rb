@@ -83,6 +83,7 @@ module Aws::WorkSpaces
     ClientDeviceType = Shapes::StringShape.new(name: 'ClientDeviceType')
     ClientDeviceTypeList = Shapes::ListShape.new(name: 'ClientDeviceTypeList')
     ClientEmail = Shapes::StringShape.new(name: 'ClientEmail')
+    ClientExperiencePolicy = Shapes::StringShape.new(name: 'ClientExperiencePolicy')
     ClientLocale = Shapes::StringShape.new(name: 'ClientLocale')
     ClientLoginMessage = Shapes::StringShape.new(name: 'ClientLoginMessage')
     ClientProperties = Shapes::StructureShape.new(name: 'ClientProperties')
@@ -691,6 +692,7 @@ module Aws::WorkSpaces
 
     ClientProperties.add_member(:reconnect_enabled, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "ReconnectEnabled"))
     ClientProperties.add_member(:log_upload_enabled, Shapes::ShapeRef.new(shape: LogUploadEnum, location_name: "LogUploadEnabled"))
+    ClientProperties.add_member(:client_experience_policy, Shapes::ShapeRef.new(shape: ClientExperiencePolicy, location_name: "ClientExperiencePolicy"))
     ClientProperties.struct_class = Types::ClientProperties
 
     ClientPropertiesList.member = Shapes::ShapeRef.new(shape: ClientPropertiesResult)

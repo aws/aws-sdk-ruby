@@ -41,6 +41,8 @@ module Aws::GameLiftStreams
     CreateStreamSessionAdminShellOutput = Shapes::StructureShape.new(name: 'CreateStreamSessionAdminShellOutput')
     CreateStreamSessionConnectionInput = Shapes::StructureShape.new(name: 'CreateStreamSessionConnectionInput')
     CreateStreamSessionConnectionOutput = Shapes::StructureShape.new(name: 'CreateStreamSessionConnectionOutput')
+    CreateStreamUrlInput = Shapes::StructureShape.new(name: 'CreateStreamUrlInput')
+    CreateStreamUrlOutput = Shapes::StructureShape.new(name: 'CreateStreamUrlOutput')
     DefaultApplication = Shapes::StructureShape.new(name: 'DefaultApplication')
     DeleteApplicationInput = Shapes::StructureShape.new(name: 'DeleteApplicationInput')
     DeleteStreamGroupInput = Shapes::StructureShape.new(name: 'DeleteStreamGroupInput')
@@ -67,6 +69,8 @@ module Aws::GameLiftStreams
     GetStreamGroupOutput = Shapes::StructureShape.new(name: 'GetStreamGroupOutput')
     GetStreamSessionInput = Shapes::StructureShape.new(name: 'GetStreamSessionInput')
     GetStreamSessionOutput = Shapes::StructureShape.new(name: 'GetStreamSessionOutput')
+    GetStreamUrlInput = Shapes::StructureShape.new(name: 'GetStreamUrlInput')
+    GetStreamUrlOutput = Shapes::StructureShape.new(name: 'GetStreamUrlOutput')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     Id = Shapes::StringShape.new(name: 'Id')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
@@ -74,6 +78,8 @@ module Aws::GameLiftStreams
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     Ipv4CidrBlock = Shapes::StringShape.new(name: 'Ipv4CidrBlock')
     Ipv4CidrBlockList = Shapes::ListShape.new(name: 'Ipv4CidrBlockList')
+    ListApplicationShaderCachesInput = Shapes::StructureShape.new(name: 'ListApplicationShaderCachesInput')
+    ListApplicationShaderCachesOutput = Shapes::StructureShape.new(name: 'ListApplicationShaderCachesOutput')
     ListApplicationsInput = Shapes::StructureShape.new(name: 'ListApplicationsInput')
     ListApplicationsOutput = Shapes::StructureShape.new(name: 'ListApplicationsOutput')
     ListStreamGroupsInput = Shapes::StructureShape.new(name: 'ListStreamGroupsInput')
@@ -82,6 +88,8 @@ module Aws::GameLiftStreams
     ListStreamSessionsByAccountOutput = Shapes::StructureShape.new(name: 'ListStreamSessionsByAccountOutput')
     ListStreamSessionsInput = Shapes::StructureShape.new(name: 'ListStreamSessionsInput')
     ListStreamSessionsOutput = Shapes::StructureShape.new(name: 'ListStreamSessionsOutput')
+    ListStreamUrlsInput = Shapes::StructureShape.new(name: 'ListStreamUrlsInput')
+    ListStreamUrlsOutput = Shapes::StructureShape.new(name: 'ListStreamUrlsOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LocationConfiguration = Shapes::StructureShape.new(name: 'LocationConfiguration')
@@ -91,6 +99,7 @@ module Aws::GameLiftStreams
     LocationState = Shapes::StructureShape.new(name: 'LocationState')
     LocationStates = Shapes::ListShape.new(name: 'LocationStates')
     LocationsList = Shapes::ListShape.new(name: 'LocationsList')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumCapacity = Shapes::IntegerShape.new(name: 'MaximumCapacity')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -98,6 +107,7 @@ module Aws::GameLiftStreams
     OutputUri = Shapes::StringShape.new(name: 'OutputUri')
     PerformanceStatsConfiguration = Shapes::StructureShape.new(name: 'PerformanceStatsConfiguration')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
+    RemainingUses = Shapes::IntegerShape.new(name: 'RemainingUses')
     RemoveStreamGroupLocationsInput = Shapes::StructureShape.new(name: 'RemoveStreamGroupLocationsInput')
     ReplicationStatus = Shapes::StructureShape.new(name: 'ReplicationStatus')
     ReplicationStatusType = Shapes::StringShape.new(name: 'ReplicationStatusType')
@@ -106,12 +116,17 @@ module Aws::GameLiftStreams
     ResolutionHeight = Shapes::IntegerShape.new(name: 'ResolutionHeight')
     ResolutionWidth = Shapes::IntegerShape.new(name: 'ResolutionWidth')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RevocationMode = Shapes::StringShape.new(name: 'RevocationMode')
+    RevokeStreamUrlInput = Shapes::StructureShape.new(name: 'RevokeStreamUrlInput')
     RuntimeEnvironment = Shapes::StructureShape.new(name: 'RuntimeEnvironment')
     RuntimeEnvironmentType = Shapes::StringShape.new(name: 'RuntimeEnvironmentType')
     RuntimeEnvironmentVersion = Shapes::StringShape.new(name: 'RuntimeEnvironmentVersion')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     SessionLengthSeconds = Shapes::IntegerShape.new(name: 'SessionLengthSeconds')
+    ShaderCacheStatus = Shapes::StringShape.new(name: 'ShaderCacheStatus')
+    ShaderCacheSummary = Shapes::StructureShape.new(name: 'ShaderCacheSummary')
+    ShaderCacheSummaryList = Shapes::ListShape.new(name: 'ShaderCacheSummaryList')
     SignalRequest = Shapes::StringShape.new(name: 'SignalRequest')
     SignalResponse = Shapes::StringShape.new(name: 'SignalResponse')
     StartStreamSessionInput = Shapes::StructureShape.new(name: 'StartStreamSessionInput')
@@ -125,9 +140,14 @@ module Aws::GameLiftStreams
     StreamSessionAccessNotReadyException = Shapes::StructureShape.new(name: 'StreamSessionAccessNotReadyException')
     StreamSessionStatus = Shapes::StringShape.new(name: 'StreamSessionStatus')
     StreamSessionStatusReason = Shapes::StringShape.new(name: 'StreamSessionStatusReason')
+    StreamSessionStreamUrl = Shapes::StringShape.new(name: 'StreamSessionStreamUrl')
     StreamSessionSummary = Shapes::StructureShape.new(name: 'StreamSessionSummary')
     StreamSessionSummaryList = Shapes::ListShape.new(name: 'StreamSessionSummaryList')
     StreamUrl = Shapes::StringShape.new(name: 'StreamUrl')
+    StreamUrlStatus = Shapes::StringShape.new(name: 'StreamUrlStatus')
+    StreamUrlStatusReason = Shapes::StringShape.new(name: 'StreamUrlStatusReason')
+    StreamUrlSummary = Shapes::StructureShape.new(name: 'StreamUrlSummary')
+    StreamUrlSummaryList = Shapes::ListShape.new(name: 'StreamUrlSummaryList')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -146,6 +166,8 @@ module Aws::GameLiftStreams
     UpdateApplicationOutput = Shapes::StructureShape.new(name: 'UpdateApplicationOutput')
     UpdateStreamGroupInput = Shapes::StructureShape.new(name: 'UpdateStreamGroupInput')
     UpdateStreamGroupOutput = Shapes::StructureShape.new(name: 'UpdateStreamGroupOutput')
+    UrlExpiresAfterMinutes = Shapes::IntegerShape.new(name: 'UrlExpiresAfterMinutes')
+    UsageLimit = Shapes::IntegerShape.new(name: 'UsageLimit')
     UserId = Shapes::StringShape.new(name: 'UserId')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
@@ -254,6 +276,42 @@ module Aws::GameLiftStreams
     CreateStreamSessionConnectionOutput.add_member(:signal_response, Shapes::ShapeRef.new(shape: SignalResponse, location_name: "SignalResponse"))
     CreateStreamSessionConnectionOutput.struct_class = Types::CreateStreamSessionConnectionOutput
 
+    CreateStreamUrlInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    CreateStreamUrlInput.add_member(:application_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ApplicationIdentifier"))
+    CreateStreamUrlInput.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "Protocol"))
+    CreateStreamUrlInput.add_member(:url_expires_after_minutes, Shapes::ShapeRef.new(shape: UrlExpiresAfterMinutes, required: true, location_name: "UrlExpiresAfterMinutes"))
+    CreateStreamUrlInput.add_member(:usage_limit, Shapes::ShapeRef.new(shape: UsageLimit, location_name: "UsageLimit"))
+    CreateStreamUrlInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateStreamUrlInput.add_member(:locations, Shapes::ShapeRef.new(shape: LocationList, required: true, location_name: "Locations"))
+    CreateStreamUrlInput.add_member(:session_length_seconds, Shapes::ShapeRef.new(shape: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
+    CreateStreamUrlInput.add_member(:additional_launch_args, Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
+    CreateStreamUrlInput.add_member(:additional_environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
+    CreateStreamUrlInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    CreateStreamUrlInput.add_member(:display_configuration, Shapes::ShapeRef.new(shape: DisplayConfiguration, location_name: "DisplayConfiguration"))
+    CreateStreamUrlInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateStreamUrlInput.struct_class = Types::CreateStreamUrlInput
+
+    CreateStreamUrlOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    CreateStreamUrlOutput.add_member(:stream_url_id, Shapes::ShapeRef.new(shape: Id, location_name: "StreamUrlId"))
+    CreateStreamUrlOutput.add_member(:stream_url, Shapes::ShapeRef.new(shape: StreamSessionStreamUrl, location_name: "StreamUrl"))
+    CreateStreamUrlOutput.add_member(:status, Shapes::ShapeRef.new(shape: StreamUrlStatus, location_name: "Status"))
+    CreateStreamUrlOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: StreamUrlStatusReason, location_name: "StatusReason"))
+    CreateStreamUrlOutput.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
+    CreateStreamUrlOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    CreateStreamUrlOutput.add_member(:usage_limit, Shapes::ShapeRef.new(shape: UsageLimit, location_name: "UsageLimit"))
+    CreateStreamUrlOutput.add_member(:remaining_uses, Shapes::ShapeRef.new(shape: RemainingUses, location_name: "RemainingUses"))
+    CreateStreamUrlOutput.add_member(:stream_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "StreamGroupArn"))
+    CreateStreamUrlOutput.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
+    CreateStreamUrlOutput.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
+    CreateStreamUrlOutput.add_member(:locations, Shapes::ShapeRef.new(shape: LocationList, location_name: "Locations"))
+    CreateStreamUrlOutput.add_member(:session_length_seconds, Shapes::ShapeRef.new(shape: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
+    CreateStreamUrlOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateStreamUrlOutput.add_member(:additional_launch_args, Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
+    CreateStreamUrlOutput.add_member(:additional_environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
+    CreateStreamUrlOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    CreateStreamUrlOutput.add_member(:display_configuration, Shapes::ShapeRef.new(shape: DisplayConfiguration, location_name: "DisplayConfiguration"))
+    CreateStreamUrlOutput.struct_class = Types::CreateStreamUrlOutput
+
     DefaultApplication.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
     DefaultApplication.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DefaultApplication.struct_class = Types::DefaultApplication
@@ -359,12 +417,44 @@ module Aws::GameLiftStreams
     GetStreamSessionOutput.add_member(:display_configuration, Shapes::ShapeRef.new(shape: DisplayConfiguration, location_name: "DisplayConfiguration"))
     GetStreamSessionOutput.struct_class = Types::GetStreamSessionOutput
 
+    GetStreamUrlInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    GetStreamUrlInput.add_member(:stream_url_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "StreamUrlIdentifier"))
+    GetStreamUrlInput.struct_class = Types::GetStreamUrlInput
+
+    GetStreamUrlOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    GetStreamUrlOutput.add_member(:stream_url_id, Shapes::ShapeRef.new(shape: Id, location_name: "StreamUrlId"))
+    GetStreamUrlOutput.add_member(:stream_url, Shapes::ShapeRef.new(shape: StreamSessionStreamUrl, location_name: "StreamUrl"))
+    GetStreamUrlOutput.add_member(:status, Shapes::ShapeRef.new(shape: StreamUrlStatus, location_name: "Status"))
+    GetStreamUrlOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: StreamUrlStatusReason, location_name: "StatusReason"))
+    GetStreamUrlOutput.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
+    GetStreamUrlOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    GetStreamUrlOutput.add_member(:usage_limit, Shapes::ShapeRef.new(shape: UsageLimit, location_name: "UsageLimit"))
+    GetStreamUrlOutput.add_member(:remaining_uses, Shapes::ShapeRef.new(shape: RemainingUses, location_name: "RemainingUses"))
+    GetStreamUrlOutput.add_member(:stream_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "StreamGroupArn"))
+    GetStreamUrlOutput.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
+    GetStreamUrlOutput.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
+    GetStreamUrlOutput.add_member(:locations, Shapes::ShapeRef.new(shape: LocationList, location_name: "Locations"))
+    GetStreamUrlOutput.add_member(:session_length_seconds, Shapes::ShapeRef.new(shape: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
+    GetStreamUrlOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    GetStreamUrlOutput.add_member(:additional_launch_args, Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
+    GetStreamUrlOutput.add_member(:additional_environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
+    GetStreamUrlOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    GetStreamUrlOutput.add_member(:display_configuration, Shapes::ShapeRef.new(shape: DisplayConfiguration, location_name: "DisplayConfiguration"))
+    GetStreamUrlOutput.add_member(:stream_sessions, Shapes::ShapeRef.new(shape: StreamSessionSummaryList, location_name: "StreamSessions"))
+    GetStreamUrlOutput.struct_class = Types::GetStreamUrlOutput
+
     Identifiers.member = Shapes::ShapeRef.new(shape: Identifier)
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
     Ipv4CidrBlockList.member = Shapes::ShapeRef.new(shape: Ipv4CidrBlock)
+
+    ListApplicationShaderCachesInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    ListApplicationShaderCachesInput.struct_class = Types::ListApplicationShaderCachesInput
+
+    ListApplicationShaderCachesOutput.add_member(:items, Shapes::ShapeRef.new(shape: ShaderCacheSummaryList, location_name: "Items"))
+    ListApplicationShaderCachesOutput.struct_class = Types::ListApplicationShaderCachesOutput
 
     ListApplicationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListApplicationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
@@ -402,6 +492,16 @@ module Aws::GameLiftStreams
     ListStreamSessionsOutput.add_member(:items, Shapes::ShapeRef.new(shape: StreamSessionSummaryList, location_name: "Items"))
     ListStreamSessionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListStreamSessionsOutput.struct_class = Types::ListStreamSessionsOutput
+
+    ListStreamUrlsInput.add_member(:status, Shapes::ShapeRef.new(shape: StreamUrlStatus, location: "querystring", location_name: "Status"))
+    ListStreamUrlsInput.add_member(:stream_group_identifier, Shapes::ShapeRef.new(shape: Identifier, location: "querystring", location_name: "StreamGroupIdentifier"))
+    ListStreamUrlsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListStreamUrlsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListStreamUrlsInput.struct_class = Types::ListStreamUrlsInput
+
+    ListStreamUrlsOutput.add_member(:items, Shapes::ShapeRef.new(shape: StreamUrlSummaryList, location_name: "Items"))
+    ListStreamUrlsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStreamUrlsOutput.struct_class = Types::ListStreamUrlsOutput
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -458,12 +558,27 @@ module Aws::GameLiftStreams
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RevokeStreamUrlInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    RevokeStreamUrlInput.add_member(:stream_url_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "StreamUrlIdentifier"))
+    RevokeStreamUrlInput.add_member(:revocation_mode, Shapes::ShapeRef.new(shape: RevocationMode, location_name: "RevocationMode"))
+    RevokeStreamUrlInput.struct_class = Types::RevokeStreamUrlInput
+
     RuntimeEnvironment.add_member(:type, Shapes::ShapeRef.new(shape: RuntimeEnvironmentType, required: true, location_name: "Type"))
     RuntimeEnvironment.add_member(:version, Shapes::ShapeRef.new(shape: RuntimeEnvironmentVersion, required: true, location_name: "Version"))
     RuntimeEnvironment.struct_class = Types::RuntimeEnvironment
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    ShaderCacheSummary.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Identifier"))
+    ShaderCacheSummary.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ApplicationArn"))
+    ShaderCacheSummary.add_member(:status, Shapes::ShapeRef.new(shape: ShaderCacheStatus, location_name: "Status"))
+    ShaderCacheSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
+    ShaderCacheSummary.add_member(:storage_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "StorageBytes"))
+    ShaderCacheSummary.add_member(:associated_stream_groups, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedStreamGroups"))
+    ShaderCacheSummary.struct_class = Types::ShaderCacheSummary
+
+    ShaderCacheSummaryList.member = Shapes::ShapeRef.new(shape: ShaderCacheSummary)
 
     StartStreamSessionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartStreamSessionInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -537,6 +652,23 @@ module Aws::GameLiftStreams
     StreamSessionSummary.struct_class = Types::StreamSessionSummary
 
     StreamSessionSummaryList.member = Shapes::ShapeRef.new(shape: StreamSessionSummary)
+
+    StreamUrlSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    StreamUrlSummary.add_member(:stream_url_id, Shapes::ShapeRef.new(shape: Id, location_name: "StreamUrlId"))
+    StreamUrlSummary.add_member(:stream_url, Shapes::ShapeRef.new(shape: StreamSessionStreamUrl, location_name: "StreamUrl"))
+    StreamUrlSummary.add_member(:status, Shapes::ShapeRef.new(shape: StreamUrlStatus, location_name: "Status"))
+    StreamUrlSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: StreamUrlStatusReason, location_name: "StatusReason"))
+    StreamUrlSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
+    StreamUrlSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    StreamUrlSummary.add_member(:usage_limit, Shapes::ShapeRef.new(shape: UsageLimit, location_name: "UsageLimit"))
+    StreamUrlSummary.add_member(:remaining_uses, Shapes::ShapeRef.new(shape: RemainingUses, location_name: "RemainingUses"))
+    StreamUrlSummary.add_member(:stream_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "StreamGroupArn"))
+    StreamUrlSummary.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
+    StreamUrlSummary.add_member(:session_length_seconds, Shapes::ShapeRef.new(shape: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
+    StreamUrlSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    StreamUrlSummary.struct_class = Types::StreamUrlSummary
+
+    StreamUrlSummaryList.member = Shapes::ShapeRef.new(shape: StreamUrlSummary)
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -721,6 +853,21 @@ module Aws::GameLiftStreams
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:create_stream_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStreamUrl"
+        o.http_method = "POST"
+        o.http_request_uri = "/streamgroups/{Identifier}/streamurls"
+        o.input = Shapes::ShapeRef.new(shape: CreateStreamUrlInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateStreamUrlOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteApplication"
         o.http_method = "DELETE"
@@ -814,6 +961,32 @@ module Aws::GameLiftStreams
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_stream_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStreamUrl"
+        o.http_method = "GET"
+        o.http_request_uri = "/streamgroups/{Identifier}/streamurls/{StreamUrlIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetStreamUrlInput)
+        o.output = Shapes::ShapeRef.new(shape: GetStreamUrlOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:list_application_shader_caches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApplicationShaderCaches"
+        o.http_method = "GET"
+        o.http_request_uri = "/applications/{Identifier}/shadercaches"
+        o.input = Shapes::ShapeRef.new(shape: ListApplicationShaderCachesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListApplicationShaderCachesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:list_applications, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListApplications"
         o.http_method = "GET"
@@ -887,6 +1060,24 @@ module Aws::GameLiftStreams
         )
       end)
 
+      api.add_operation(:list_stream_urls, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStreamUrls"
+        o.http_method = "GET"
+        o.http_request_uri = "/streamurls"
+        o.input = Shapes::ShapeRef.new(shape: ListStreamUrlsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStreamUrlsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -904,6 +1095,19 @@ module Aws::GameLiftStreams
         o.http_method = "DELETE"
         o.http_request_uri = "/streamgroups/{Identifier}/locations"
         o.input = Shapes::ShapeRef.new(shape: RemoveStreamGroupLocationsInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:revoke_stream_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeStreamUrl"
+        o.http_method = "POST"
+        o.http_request_uri = "/streamgroups/{Identifier}/streamurls/{StreamUrlIdentifier}/revoke"
+        o.input = Shapes::ShapeRef.new(shape: RevokeStreamUrlInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

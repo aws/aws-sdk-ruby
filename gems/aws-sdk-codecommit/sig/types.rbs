@@ -586,6 +586,23 @@ module Aws::CodeCommit
       SENSITIVE: []
     end
 
+    class DiffChange
+      attr_accessor type: ("CONTEXT" | "ADD" | "DELETE")
+      attr_accessor before_line_number: ::Integer
+      attr_accessor after_line_number: ::Integer
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class DiffHunk
+      attr_accessor before_start_line: ::Integer
+      attr_accessor before_line_count: ::Integer
+      attr_accessor after_start_line: ::Integer
+      attr_accessor after_line_count: ::Integer
+      attr_accessor changes: ::Array[Types::DiffChange]
+      SENSITIVE: []
+    end
+
     class Difference
       attr_accessor before_blob: Types::BlobMetadata
       attr_accessor after_blob: Types::BlobMetadata
@@ -729,6 +746,26 @@ module Aws::CodeCommit
 
     class GetApprovalRuleTemplateOutput
       attr_accessor approval_rule_template: Types::ApprovalRuleTemplate
+      SENSITIVE: []
+    end
+
+    class GetBlobDifferencesInput
+      attr_accessor repository_name: ::String
+      attr_accessor after_blob_id: ::String
+      attr_accessor before_blob_id: ::String
+      attr_accessor context_lines: ::Integer
+      attr_accessor ignore_whitespace: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBlobDifferencesOutput
+      attr_accessor hunks: ::Array[Types::DiffHunk]
+      attr_accessor is_binary: bool
+      attr_accessor before_blob_size: ::Integer
+      attr_accessor after_blob_size: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -2072,6 +2109,9 @@ module Aws::CodeCommit
       attr_accessor email: ::String
       attr_accessor date: ::String
       SENSITIVE: []
+    end
+
+    class ValidationException < Aws::EmptyStructure
     end
   end
 end

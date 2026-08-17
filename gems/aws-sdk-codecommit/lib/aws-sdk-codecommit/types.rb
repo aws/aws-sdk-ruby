@@ -2225,6 +2225,90 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # A single line-level entry in a diff hunk. Each `DiffChange` describes
+    # one line and its change type: unchanged context, an addition in the
+    # after blob, or a deletion from the before blob.
+    #
+    # @!attribute [rw] type
+    #   The type of change for this line. Possible values:
+    #
+    #   * `CONTEXT` – Unchanged line included for surrounding context.
+    #
+    #   * `ADD` – Line added in the after blob.
+    #
+    #   * `DELETE` – Line removed from the before blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_line_number
+    #   The 1-based line number in the before blob. This field is omitted
+    #   for `ADD` lines.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] after_line_number
+    #   The 1-based line number in the after blob. This field is omitted for
+    #   `DELETE` lines.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] content
+    #   The text content of the line, without the trailing newline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DiffChange AWS API Documentation
+    #
+    class DiffChange < Struct.new(
+      :type,
+      :before_line_number,
+      :after_line_number,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A contiguous run of changed lines from a blob diff, together with any
+    # surrounding unchanged context lines. Hunks are returned in order from
+    # the start of the file to the end. Adjacent or overlapping hunks are
+    # merged into a single hunk in the response.
+    #
+    # @!attribute [rw] before_start_line
+    #   The 1-based line number in the before blob where this hunk begins.
+    #   When the hunk consists entirely of additions, `beforeLineCount` is
+    #   `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] before_line_count
+    #   The number of lines from the before blob covered by this hunk,
+    #   including any context lines.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] after_start_line
+    #   The 1-based line number in the after blob where this hunk begins.
+    #   When the hunk consists entirely of deletions, `afterLineCount` is
+    #   `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] after_line_count
+    #   The number of lines from the after blob covered by this hunk,
+    #   including any context lines.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] changes
+    #   An ordered list of line-level changes that make up this hunk. Each
+    #   entry indicates whether the line is unchanged context, an addition,
+    #   or a deletion.
+    #   @return [Array<Types::DiffChange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DiffHunk AWS API Documentation
+    #
+    class DiffHunk < Struct.new(
+      :before_start_line,
+      :before_line_count,
+      :after_start_line,
+      :after_line_count,
+      :changes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returns information about a set of differences for a commit specifier.
     #
     # @!attribute [rw] before_blob
@@ -2673,6 +2757,103 @@ module Aws::CodeCommit
     #
     class GetApprovalRuleTemplateOutput < Struct.new(
       :approval_rule_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the blobs to compare.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_blob_id
+    #   The ID of the "after" (destination) blob in the diff. Typically
+    #   the value of `afterBlob.blobId` from a `Difference` object returned
+    #   by GetDifferences.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_blob_id
+    #   The ID of the "before" (source) blob in the diff. Typically the
+    #   value of `beforeBlob.blobId` from a `Difference` object returned by
+    #   GetDifferences.
+    #
+    #   If you do not specify a value, the operation returns a diff against
+    #   an empty before-state. This is equivalent to treating the file as
+    #   newly added.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_lines
+    #   The number of unchanged lines of context to include before and after
+    #   each block of changes in a hunk. Valid values are 0 through 20.
+    #   Defaults to `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ignore_whitespace
+    #   Specifies whether to ignore whitespace-only changes when computing
+    #   the diff. When `true`, the operation treats lines that differ only
+    #   in whitespace as unchanged. Defaults to `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of `DiffHunk` entries to return in a single
+    #   response page. Defaults to `100`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that returns the next batch of results when
+    #   present in a request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlobDifferencesInput AWS API Documentation
+    #
+    class GetBlobDifferencesInput < Struct.new(
+      :repository_name,
+      :after_blob_id,
+      :before_blob_id,
+      :context_lines,
+      :ignore_whitespace,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hunks
+    #   An ordered list of diff hunks. Each hunk represents a contiguous run
+    #   of changed and adjacent context lines. The list is empty when the
+    #   blobs are identical or when the content is binary. The list is also
+    #   empty when a paginated request has already returned all hunks in
+    #   earlier pages, in which case `NextToken` is also `null`.
+    #   @return [Array<Types::DiffHunk>]
+    #
+    # @!attribute [rw] is_binary
+    #   Specifies whether the operation treated the diff content as binary.
+    #   When `true`, the operation does not compute a line-level diff and
+    #   `hunks` is empty.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] before_blob_size
+    #   The size, in bytes, of the blob identified by `beforeBlobId`.
+    #   Returns `0` when you do not specify `beforeBlobId`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] after_blob_size
+    #   The size, in bytes, of the blob identified by `afterBlobId`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used in a request to return the
+    #   next batch of `DiffHunk` entries. `null` when the response contains
+    #   the final page of the diff.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlobDifferencesOutput AWS API Documentation
+    #
+    class GetBlobDifferencesOutput < Struct.new(
+      :hunks,
+      :is_binary,
+      :before_blob_size,
+      :after_blob_size,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7229,6 +7410,12 @@ module Aws::CodeCommit
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The specified input is either not valid, or it could not be validated.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ValidationException AWS API Documentation
+    #
+    class ValidationException < Aws::EmptyStructure; end
 
   end
 end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2026-08-12)
+------------------
+
+* Feature - Improved validation of Kinesis stream ARN format to ensure only valid ARN characters are accepted
+
+1.31.0 (2026-08-04)
+------------------
+
+* Feature - UpdateCluster now checks the RemovePeerCluster permission on the specific cluster being removed, not a wildcard and docs now clarify how to set kmsEncryptionKey so the cluster uses the AWS-owned key.
+
 1.30.0 (2026-07-09)
 ------------------
 

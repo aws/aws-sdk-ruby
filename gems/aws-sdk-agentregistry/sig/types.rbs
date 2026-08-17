@@ -1,0 +1,206 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AgentRegistry
+  module Types
+
+    class A2aAgentCardDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      attr_accessor source: Types::DescriptorSource
+      SENSITIVE: [:data]
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AgentSkillsAdditionalData
+      attr_accessor skill_md: Types::AgentSkillsMdDescriptor
+      SENSITIVE: []
+    end
+
+    class AgentSkillsDefinitionDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      attr_accessor additional_data: Types::AgentSkillsAdditionalData
+      SENSITIVE: [:data]
+    end
+
+    class AgentSkillsMdDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      attr_accessor source: Types::DescriptorSource
+      SENSITIVE: [:data]
+    end
+
+    class BatchGetDiscoverableRegistryRecordError
+      attr_accessor registry_id: ::String
+      attr_accessor record_id: ::String
+      attr_accessor error_code: ("RESOURCE_NOT_FOUND" | "ACCESS_DENIED" | "INTERNAL_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetDiscoverableRegistryRecordRequest
+      attr_accessor entries: ::Array[Types::RegistryRecordsEntry]
+      SENSITIVE: []
+    end
+
+    class BatchGetDiscoverableRegistryRecordResponse
+      attr_accessor registry_records: ::Array[Types::RegistryRecordSummary]
+      attr_accessor errors: ::Array[Types::BatchGetDiscoverableRegistryRecordError]
+      SENSITIVE: []
+    end
+
+    class CustomDescriptor
+      attr_accessor data: ::String
+      SENSITIVE: [:data]
+    end
+
+    class DescriptorSource
+      attr_accessor from_url: Types::DescriptorSourceFromUrl
+      SENSITIVE: []
+    end
+
+    class DescriptorSourceFromUrl
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class Descriptors
+      attr_accessor mcp_server: Types::McpServerDescriptor
+      attr_accessor a2a_agent_card: Types::A2aAgentCardDescriptor
+      attr_accessor agent_skills_definition: Types::AgentSkillsDefinitionDescriptor
+      attr_accessor custom: Types::CustomDescriptor
+      SENSITIVE: []
+    end
+
+    class DiscoverableRegistryRecordSummary
+      attr_accessor registry_arn: ::String
+      attr_accessor record_arn: ::String
+      attr_accessor record_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor record_version: ::String
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoverableRegistryRecordsRequest
+      attr_accessor registry_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::RegistryRecordFilter]
+      SENSITIVE: []
+    end
+
+    class ListDiscoverableRegistryRecordsResponse
+      attr_accessor registry_records: ::Array[Types::DiscoverableRegistryRecordSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class McpServerAdditionalData
+      attr_accessor tools: Types::McpToolsDescriptor
+      SENSITIVE: []
+    end
+
+    class McpServerDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      attr_accessor additional_data: Types::McpServerAdditionalData
+      attr_accessor source: Types::DescriptorSource
+      SENSITIVE: [:data]
+    end
+
+    class McpToolsDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      SENSITIVE: [:data]
+    end
+
+    class RegistryRecordFilter
+      attr_accessor name: ("recordType" | "descriptorType")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegistryRecordSummary
+      attr_accessor registry_arn: ::String
+      attr_accessor record_arn: ::String
+      attr_accessor record_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor descriptors: Types::Descriptors
+      attr_accessor record_version: ::String
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class RegistryRecordsEntry
+      attr_accessor registry_id: ::String
+      attr_accessor record_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SearchDiscoverableRegistryRecordsRequest
+      attr_accessor search_query: ::String
+      attr_accessor registry_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: untyped
+      SENSITIVE: [:search_query, :filters]
+    end
+
+    class SearchDiscoverableRegistryRecordsResponse
+      attr_accessor registry_records: ::Array[Types::RegistryRecordSummary]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CannotParse" | "FieldValidationFailed" | "IdempotentParameterMismatchException" | "EventInOtherSession" | "ResourceConflict")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

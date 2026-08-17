@@ -16,24 +16,6 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetTileSuccess",
-    "operationName" : "GetTile",
-    "input" : {
-      "Tileset" : "vector.basemap",
-      "X" : "5190",
-      "Y" : "11218",
-      "Z" : "15"
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "GetSpritesSuccess",
     "operationName" : "GetSprites",
     "input" : {
@@ -41,22 +23,6 @@
       "ColorScheme" : "Light",
       "Variant" : "Default",
       "FileName" : "sprites.json"
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetGlyphsSuccess",
-    "operationName" : "GetGlyphs",
-    "input" : {
-      "FontStack" : "Amazon Ember Regular",
-      "FontUnicodeRange" : "0-255.pbf"
     },
     "expectation" : {
       "success" : { }
@@ -77,6 +43,40 @@
       "Center" : "-123.144847,49.303609",
       "Style" : "Satellite",
       "Zoom" : 10.0
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetTileSuccess",
+    "operationName" : "GetTile",
+    "input" : {
+      "Tileset" : "vector.basemap",
+      "X" : "5190",
+      "Y" : "11218",
+      "Z" : "15"
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetGlyphsSuccess",
+    "operationName" : "GetGlyphs",
+    "input" : {
+      "FontStack" : "Amazon Ember Regular",
+      "FontUnicodeRange" : "0-255.pbf"
     },
     "expectation" : {
       "success" : { }

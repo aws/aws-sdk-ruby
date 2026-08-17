@@ -89,6 +89,30 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] recovery_plan_execution_arn
+    #   The ARN of the Recovery Plan execution to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CancelRecoveryPlanExecutionRequest AWS API Documentation
+    #
+    class CancelRecoveryPlanExecutionRequest < Struct.new(
+      :recovery_plan_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution
+    #   The cancelled Recovery Plan execution.
+    #   @return [Types::RecoveryPlanExecution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CancelRecoveryPlanExecutionResponse AWS API Documentation
+    #
+    class CancelRecoveryPlanExecutionResponse < Struct.new(
+      :recovery_plan_execution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request could not be completed due to a conflict with the current
     # state of the target resource.
     #
@@ -256,6 +280,96 @@ module Aws::Drs
     #
     class CreateLaunchConfigurationTemplateResponse < Struct.new(
       :launch_configuration_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of a Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique string provided to ensure request idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the Recovery Plan.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateRecoveryPlanRequest AWS API Documentation
+    #
+    class CreateRecoveryPlanRequest < Struct.new(
+      :name,
+      :description,
+      :client_token,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan
+    #   A Recovery Plan resource.
+    #   @return [Types::RecoveryPlan]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateRecoveryPlanResponse AWS API Documentation
+    #
+    class CreateRecoveryPlanResponse < Struct.new(
+      :recovery_plan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan to add the step to.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_name
+    #   The name of a Recovery Plan Step.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_order
+    #   The order of a step within a Recovery Plan (1-based).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] configuration
+    #   Type-specific configuration for a recovery plan step. Exactly one
+    #   member must be set.
+    #   @return [Types::RecoveryPlanStepConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique string provided to ensure request idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateRecoveryPlanStepRequest AWS API Documentation
+    #
+    class CreateRecoveryPlanStepRequest < Struct.new(
+      :recovery_plan_arn,
+      :step_name,
+      :step_order,
+      :configuration,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_step
+    #   A Recovery Plan Step resource.
+    #   @return [Types::RecoveryPlanStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateRecoveryPlanStepResponse AWS API Documentation
+    #
+    class CreateRecoveryPlanStepResponse < Struct.new(
+      :recovery_plan_step)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -607,6 +721,78 @@ module Aws::Drs
     #
     class DeleteRecoveryInstanceRequest < Struct.new(
       :recovery_instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution_arn
+    #   The ARN of the Recovery Plan execution to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryPlanExecutionRequest AWS API Documentation
+    #
+    class DeleteRecoveryPlanExecutionRequest < Struct.new(
+      :recovery_plan_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution_arn
+    #   The ARN of the deleted Recovery Plan execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryPlanExecutionResponse AWS API Documentation
+    #
+    class DeleteRecoveryPlanExecutionResponse < Struct.new(
+      :recovery_plan_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryPlanRequest AWS API Documentation
+    #
+    class DeleteRecoveryPlanRequest < Struct.new(
+      :recovery_plan_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the deleted Recovery Plan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryPlanResponse AWS API Documentation
+    #
+    class DeleteRecoveryPlanResponse < Struct.new(
+      :recovery_plan_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_step_arn
+    #   The ARN of the Recovery Plan step to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryPlanStepRequest AWS API Documentation
+    #
+    class DeleteRecoveryPlanStepRequest < Struct.new(
+      :recovery_plan_step_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_step_arn
+    #   The ARN of the deleted Recovery Plan step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryPlanStepResponse AWS API Documentation
+    #
+    class DeleteRecoveryPlanStepResponse < Struct.new(
+      :recovery_plan_step_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1146,6 +1332,25 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # Error details for a failed operation.
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ErrorDetail AWS API Documentation
+    #
+    class ErrorDetail < Struct.new(
+      :message,
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Properties of resource related to a job event.
     #
     # @note EventResourceData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EventResourceData corresponding to the set member.
@@ -1165,6 +1370,20 @@ module Aws::Drs
 
       class SourceNetworkData < EventResourceData; end
       class Unknown < EventResourceData; end
+    end
+
+    # Configuration for a `SERVER` type execution step.
+    #
+    # @!attribute [rw] servers
+    #   The list of servers in this execution step.
+    #   @return [Array<Types::RecoveryPlanExecutionServer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ExecutionServerStepConfiguration AWS API Documentation
+    #
+    class ExecutionServerStepConfiguration < Struct.new(
+      :servers)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] source_network_id
@@ -1250,6 +1469,102 @@ module Aws::Drs
     #
     class GetLaunchConfigurationRequest < Struct.new(
       :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution_arn
+    #   The ARN of the Recovery Plan execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanExecutionRequest AWS API Documentation
+    #
+    class GetRecoveryPlanExecutionRequest < Struct.new(
+      :recovery_plan_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution
+    #   The Recovery Plan execution details.
+    #   @return [Types::RecoveryPlanExecution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanExecutionResponse AWS API Documentation
+    #
+    class GetRecoveryPlanExecutionResponse < Struct.new(
+      :recovery_plan_execution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution_step_arn
+    #   The ARN of the execution step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanExecutionStepRequest AWS API Documentation
+    #
+    class GetRecoveryPlanExecutionStepRequest < Struct.new(
+      :recovery_plan_execution_step_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution_step
+    #   A Recovery Plan Execution Step resource.
+    #   @return [Types::RecoveryPlanExecutionStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanExecutionStepResponse AWS API Documentation
+    #
+    class GetRecoveryPlanExecutionStepResponse < Struct.new(
+      :recovery_plan_execution_step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanRequest AWS API Documentation
+    #
+    class GetRecoveryPlanRequest < Struct.new(
+      :recovery_plan_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan
+    #   A Recovery Plan resource.
+    #   @return [Types::RecoveryPlan]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanResponse AWS API Documentation
+    #
+    class GetRecoveryPlanResponse < Struct.new(
+      :recovery_plan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_step_arn
+    #   The ARN of the Recovery Plan step to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanStepRequest AWS API Documentation
+    #
+    class GetRecoveryPlanStepRequest < Struct.new(
+      :recovery_plan_step_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_step
+    #   A Recovery Plan Step resource.
+    #   @return [Types::RecoveryPlanStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanStepResponse AWS API Documentation
+    #
+    class GetRecoveryPlanStepResponse < Struct.new(
+      :recovery_plan_step)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1938,6 +2253,181 @@ module Aws::Drs
     #
     class ListLaunchActionsResponse < Struct.new(
       :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing Recovery Plan execution steps.
+    #
+    # @!attribute [rw] status
+    #   Filter by execution step status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlanExecutionStepsFilter AWS API Documentation
+    #
+    class ListRecoveryPlanExecutionStepsFilter < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution_arn
+    #   The ARN of the Recovery Plan execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Filters for listing execution steps.
+    #   @return [Types::ListRecoveryPlanExecutionStepsFilter]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlanExecutionStepsRequest AWS API Documentation
+    #
+    class ListRecoveryPlanExecutionStepsRequest < Struct.new(
+      :recovery_plan_execution_arn,
+      :filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution_steps
+    #   The list of execution steps.
+    #   @return [Array<Types::RecoveryPlanExecutionStepSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlanExecutionStepsResponse AWS API Documentation
+    #
+    class ListRecoveryPlanExecutionStepsResponse < Struct.new(
+      :recovery_plan_execution_steps,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_arn
+    #   Filter executions by Recovery Plan ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Filter executions by status.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlanExecutionsRequest AWS API Documentation
+    #
+    class ListRecoveryPlanExecutionsRequest < Struct.new(
+      :recovery_plan_arn,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_executions
+    #   The list of Recovery Plan executions.
+    #   @return [Array<Types::RecoveryPlanExecutionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlanExecutionsResponse AWS API Documentation
+    #
+    class ListRecoveryPlanExecutionsResponse < Struct.new(
+      :recovery_plan_executions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlanStepsRequest AWS API Documentation
+    #
+    class ListRecoveryPlanStepsRequest < Struct.new(
+      :recovery_plan_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_steps
+    #   The list of Recovery Plan steps.
+    #   @return [Array<Types::RecoveryPlanStep>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlanStepsResponse AWS API Documentation
+    #
+    class ListRecoveryPlanStepsResponse < Struct.new(
+      :recovery_plan_steps,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlansRequest AWS API Documentation
+    #
+    class ListRecoveryPlansRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plans
+    #   The list of Recovery Plans.
+    #   @return [Array<Types::RecoveryPlanSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlansResponse AWS API Documentation
+    #
+    class ListRecoveryPlansResponse < Struct.new(
+      :recovery_plans,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2689,6 +3179,433 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # A Recovery Plan resource.
+    #
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the Recovery Plan was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the Recovery Plan was last updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the Recovery Plan.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlan AWS API Documentation
+    #
+    class RecoveryPlan < Struct.new(
+      :recovery_plan_arn,
+      :name,
+      :description,
+      :status,
+      :created_at,
+      :updated_at,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # A Recovery Plan execution.
+    #
+    # @!attribute [rw] recovery_plan_execution_arn
+    #   The ARN of the Recovery Plan execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan being executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The execution mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The execution status.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp when the execution started.
+    #   @return [String]
+    #
+    # @!attribute [rw] completed_at
+    #   The timestamp when the execution completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_detail
+    #   Error details if the execution failed.
+    #   @return [Types::ErrorDetail]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the Recovery Plan execution.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanExecution AWS API Documentation
+    #
+    class RecoveryPlanExecution < Struct.new(
+      :recovery_plan_execution_arn,
+      :recovery_plan_arn,
+      :mode,
+      :status,
+      :started_at,
+      :completed_at,
+      :error_detail,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # A server within a recovery plan execution step, enriched with
+    # execution state.
+    #
+    # @!attribute [rw] server_arn
+    #   The ARN of the source server.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact_level
+    #   Defaults to CRITICAL if not specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The DRS recovery job ID. Populated when recovery is initiated for
+    #   this server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanExecutionServer AWS API Documentation
+    #
+    class RecoveryPlanExecutionServer < Struct.new(
+      :server_arn,
+      :impact_level,
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A source server with a specific recovery snapshot for plan execution.
+    #
+    # @!attribute [rw] source_server_id
+    #   The ID of the source server.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_snapshot_id
+    #   The ID of the recovery snapshot to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanExecutionSourceServer AWS API Documentation
+    #
+    class RecoveryPlanExecutionSourceServer < Struct.new(
+      :source_server_id,
+      :recovery_snapshot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A Recovery Plan Execution Step resource.
+    #
+    # @!attribute [rw] recovery_plan_execution_step_arn
+    #   The ARN of the execution step.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_index
+    #   The order of a step within a Recovery Plan (1-based).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the execution step.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_name
+    #   The name of a Recovery Plan Step.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Type-specific configuration for an execution step response. Mirrors
+    #   RecoveryPlanStepConfiguration but uses execution-enriched server
+    #   shapes.
+    #   @return [Types::RecoveryPlanExecutionStepConfiguration]
+    #
+    # @!attribute [rw] error_detail
+    #   Error details if the step failed.
+    #   @return [Types::ErrorDetail]
+    #
+    # @!attribute [rw] attempt
+    #   The number of times this step has been attempted.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the execution step was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the execution step was last updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanExecutionStep AWS API Documentation
+    #
+    class RecoveryPlanExecutionStep < Struct.new(
+      :recovery_plan_execution_step_arn,
+      :step_index,
+      :status,
+      :step_name,
+      :configuration,
+      :error_detail,
+      :attempt,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Type-specific configuration for an execution step response. Mirrors
+    # RecoveryPlanStepConfiguration but uses execution-enriched server
+    # shapes.
+    #
+    # @note RecoveryPlanExecutionStepConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RecoveryPlanExecutionStepConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] execution_server_step_configuration
+    #   Configuration for a SERVER type step (with execution state like
+    #   jobID).
+    #   @return [Types::ExecutionServerStepConfiguration]
+    #
+    # @!attribute [rw] wait_step_configuration
+    #   Configuration for a WAIT type step.
+    #   @return [Types::WaitStepConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanExecutionStepConfiguration AWS API Documentation
+    #
+    class RecoveryPlanExecutionStepConfiguration < Struct.new(
+      :execution_server_step_configuration,
+      :wait_step_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ExecutionServerStepConfiguration < RecoveryPlanExecutionStepConfiguration; end
+      class WaitStepConfiguration < RecoveryPlanExecutionStepConfiguration; end
+      class Unknown < RecoveryPlanExecutionStepConfiguration; end
+    end
+
+    # Summary information about a Recovery Plan execution step.
+    #
+    # @!attribute [rw] recovery_plan_execution_step_arn
+    #   The ARN of the execution step.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_name
+    #   The name of a Recovery Plan Step.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_index
+    #   The order of a step within a Recovery Plan (1-based).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the execution step.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Type-specific configuration for an execution step response. Mirrors
+    #   RecoveryPlanStepConfiguration but uses execution-enriched server
+    #   shapes.
+    #   @return [Types::RecoveryPlanExecutionStepConfiguration]
+    #
+    # @!attribute [rw] error_detail
+    #   Error details if the step failed.
+    #   @return [Types::ErrorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanExecutionStepSummary AWS API Documentation
+    #
+    class RecoveryPlanExecutionStepSummary < Struct.new(
+      :recovery_plan_execution_step_arn,
+      :step_name,
+      :step_index,
+      :status,
+      :configuration,
+      :error_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a Recovery Plan execution.
+    #
+    # @!attribute [rw] recovery_plan_execution_arn
+    #   The ARN of the Recovery Plan execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The execution mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The execution status.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp when the execution started.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_detail
+    #   Error details if the execution failed.
+    #   @return [Types::ErrorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanExecutionSummary AWS API Documentation
+    #
+    class RecoveryPlanExecutionSummary < Struct.new(
+      :recovery_plan_execution_arn,
+      :recovery_plan_arn,
+      :mode,
+      :status,
+      :started_at,
+      :error_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A server associated with a Recovery Plan Step.
+    #
+    # @!attribute [rw] server_arn
+    #   The ARN of the source server.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact_level
+    #   Defaults to CRITICAL if not specified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanServer AWS API Documentation
+    #
+    class RecoveryPlanServer < Struct.new(
+      :server_arn,
+      :impact_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A Recovery Plan Step resource.
+    #
+    # @!attribute [rw] recovery_plan_step_arn
+    #   The ARN of the Recovery Plan step.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_order
+    #   The order of a step within a Recovery Plan (1-based).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] step_name
+    #   The name of a Recovery Plan Step.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Type-specific configuration for a recovery plan step. Exactly one
+    #   member must be set.
+    #   @return [Types::RecoveryPlanStepConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the step was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the step was last updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanStep AWS API Documentation
+    #
+    class RecoveryPlanStep < Struct.new(
+      :recovery_plan_step_arn,
+      :step_order,
+      :step_name,
+      :configuration,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Type-specific configuration for a recovery plan step. Exactly one
+    # member must be set.
+    #
+    # @note RecoveryPlanStepConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RecoveryPlanStepConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RecoveryPlanStepConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] server_step_configuration
+    #   Configuration for a SERVER type step.
+    #   @return [Types::ServerStepConfiguration]
+    #
+    # @!attribute [rw] wait_step_configuration
+    #   Configuration for a WAIT type step.
+    #   @return [Types::WaitStepConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanStepConfiguration AWS API Documentation
+    #
+    class RecoveryPlanStepConfiguration < Struct.new(
+      :server_step_configuration,
+      :wait_step_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ServerStepConfiguration < RecoveryPlanStepConfiguration; end
+      class WaitStepConfiguration < RecoveryPlanStepConfiguration; end
+      class Unknown < RecoveryPlanStepConfiguration; end
+    end
+
+    # Summary information about a Recovery Plan.
+    #
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the Recovery Plan was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the Recovery Plan was last updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryPlanSummary AWS API Documentation
+    #
+    class RecoveryPlanSummary < Struct.new(
+      :recovery_plan_arn,
+      :name,
+      :status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A snapshot of a Source Server used during recovery.
     #
     # @!attribute [rw] snapshot_id
@@ -2719,6 +3636,35 @@ module Aws::Drs
       :expected_timestamp,
       :timestamp,
       :ebs_snapshots)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] ordered_step_arns
+    #   Ordered list of all step ARNs representing the desired sequence.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ReorderRecoveryPlanStepsRequest AWS API Documentation
+    #
+    class ReorderRecoveryPlanStepsRequest < Struct.new(
+      :recovery_plan_arn,
+      :ordered_step_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_steps
+    #   The steps with updated order.
+    #   @return [Array<Types::RecoveryPlanStep>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ReorderRecoveryPlanStepsResponse AWS API Documentation
+    #
+    class ReorderRecoveryPlanStepsResponse < Struct.new(
+      :recovery_plan_steps)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3016,6 +3962,30 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] recovery_plan_execution_step_arn
+    #   The ARN of the execution step to retry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RetryRecoveryPlanExecutionStepRequest AWS API Documentation
+    #
+    class RetryRecoveryPlanExecutionStepRequest < Struct.new(
+      :recovery_plan_execution_step_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution_step
+    #   A Recovery Plan Execution Step resource.
+    #   @return [Types::RecoveryPlanExecutionStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RetryRecoveryPlanExecutionStepResponse AWS API Documentation
+    #
+    class RetryRecoveryPlanExecutionStepResponse < Struct.new(
+      :recovery_plan_execution_step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] recovery_instance_id
     #   The ID of the Recovery Instance that we want to reverse the
     #   replication for.
@@ -3037,6 +4007,20 @@ module Aws::Drs
     #
     class ReverseReplicationResponse < Struct.new(
       :reversed_direction_source_server_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a `SERVER` type step.
+    #
+    # @!attribute [rw] servers
+    #   The list of servers to recover in this step.
+    #   @return [Array<Types::RecoveryPlanServer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ServerStepConfiguration AWS API Documentation
+    #
+    class ServerStepConfiguration < Struct.new(
+      :servers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3436,6 +4420,54 @@ module Aws::Drs
     #
     class StartFailbackLaunchResponse < Struct.new(
       :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan to execute.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The execution mode (`DRILL` or `RECOVERY`).
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique string provided to ensure request idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_servers
+    #   Optional list of source servers with specific recovery snapshots. If
+    #   not provided, the latest snapshot is used for each server.
+    #   @return [Array<Types::RecoveryPlanExecutionSourceServer>]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the Recovery Plan execution.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartRecoveryPlanExecutionRequest AWS API Documentation
+    #
+    class StartRecoveryPlanExecutionRequest < Struct.new(
+      :recovery_plan_arn,
+      :mode,
+      :client_token,
+      :source_servers,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution
+    #   The started Recovery Plan execution.
+    #   @return [Types::RecoveryPlanExecution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartRecoveryPlanExecutionResponse AWS API Documentation
+    #
+    class StartRecoveryPlanExecutionResponse < Struct.new(
+      :recovery_plan_execution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3931,6 +4963,117 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] recovery_plan_execution_step_arn
+    #   The ARN of the execution step to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Only SKIPPED is accepted. Step must be in NOT\_STARTED or FAILED
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] servers
+    #   Full replacement of the server list. Only allowed when the step is
+    #   in NOT\_STARTED status (Server type steps only).
+    #   @return [Array<Types::RecoveryPlanServer>]
+    #
+    # @!attribute [rw] wait_duration_minutes
+    #   Updated wait duration. Only allowed when the step is in NOT\_STARTED
+    #   status (Wait type steps only).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateRecoveryPlanExecutionStepRequest AWS API Documentation
+    #
+    class UpdateRecoveryPlanExecutionStepRequest < Struct.new(
+      :recovery_plan_execution_step_arn,
+      :status,
+      :servers,
+      :wait_duration_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_execution_step
+    #   A Recovery Plan Execution Step resource.
+    #   @return [Types::RecoveryPlanExecutionStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateRecoveryPlanExecutionStepResponse AWS API Documentation
+    #
+    class UpdateRecoveryPlanExecutionStepResponse < Struct.new(
+      :recovery_plan_execution_step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_arn
+    #   The ARN of the Recovery Plan to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a Recovery Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a Recovery Plan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateRecoveryPlanRequest AWS API Documentation
+    #
+    class UpdateRecoveryPlanRequest < Struct.new(
+      :recovery_plan_arn,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan
+    #   A Recovery Plan resource.
+    #   @return [Types::RecoveryPlan]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateRecoveryPlanResponse AWS API Documentation
+    #
+    class UpdateRecoveryPlanResponse < Struct.new(
+      :recovery_plan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_step_arn
+    #   The ARN of the Recovery Plan step to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_name
+    #   The name of a Recovery Plan Step.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Type-specific configuration for a recovery plan step. Exactly one
+    #   member must be set.
+    #   @return [Types::RecoveryPlanStepConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateRecoveryPlanStepRequest AWS API Documentation
+    #
+    class UpdateRecoveryPlanStepRequest < Struct.new(
+      :recovery_plan_step_arn,
+      :step_name,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_plan_step
+    #   A Recovery Plan Step resource.
+    #   @return [Types::RecoveryPlanStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateRecoveryPlanStepResponse AWS API Documentation
+    #
+    class UpdateRecoveryPlanStepResponse < Struct.new(
+      :recovery_plan_step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_server_id
     #   The ID of the Source Server for this Replication Configuration.
     #   @return [String]
@@ -4180,6 +5323,20 @@ module Aws::Drs
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a `WAIT` type step.
+    #
+    # @!attribute [rw] wait_duration_minutes
+    #   The wait duration in minutes for a Wait type step.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/WaitStepConfiguration AWS API Documentation
+    #
+    class WaitStepConfiguration < Struct.new(
+      :wait_duration_minutes)
       SENSITIVE = []
       include Aws::Structure
     end

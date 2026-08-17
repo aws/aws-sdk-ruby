@@ -4960,6 +4960,12 @@
         "ml.g6e.16xlarge",
         "ml.g6e.24xlarge",
         "ml.g6e.48xlarge",
+        "ml.g7.2xlarge",
+        "ml.g7.4xlarge",
+        "ml.g7.8xlarge",
+        "ml.g7.12xlarge",
+        "ml.g7.24xlarge",
+        "ml.g7.48xlarge",
         "ml.g7e.2xlarge",
         "ml.g7e.4xlarge",
         "ml.g7e.8xlarge",
@@ -5836,6 +5842,12 @@
         "ml.r6id.24xlarge",
         "ml.r6id.32xlarge",
         "ml.p5.4xlarge",
+        "ml.g7.2xlarge",
+        "ml.g7.4xlarge",
+        "ml.g7.8xlarge",
+        "ml.g7.12xlarge",
+        "ml.g7.24xlarge",
+        "ml.g7.48xlarge",
         "ml.g7e.2xlarge",
         "ml.g7e.4xlarge",
         "ml.g7e.8xlarge",
@@ -8647,7 +8659,13 @@
         "ml.m8g.12xlarge",
         "ml.m8g.16xlarge",
         "ml.m8g.24xlarge",
-        "ml.m8g.48xlarge"
+        "ml.m8g.48xlarge",
+        "ml.g7.2xlarge",
+        "ml.g7.4xlarge",
+        "ml.g7.8xlarge",
+        "ml.g7.12xlarge",
+        "ml.g7.24xlarge",
+        "ml.g7.48xlarge"
       ]
     },
     "ClusterInstanceTypeDetail":{
@@ -24197,7 +24215,9 @@
         "Stopped",
         "Failed",
         "Deleting",
-        "Updating"
+        "Updating",
+        "PendingMaintenance",
+        "InMaintenance"
       ]
     },
     "NotebookInstanceSummary":{
@@ -25283,6 +25303,25 @@
         "LowerPriority"
       ]
     },
+    "PrefixAwareRoutingConcurrencyThreshold":{
+      "type":"integer",
+      "box":true,
+      "max":1024,
+      "min":1
+    },
+    "PrefixAwareRoutingConfig":{
+      "type":"structure",
+      "members":{
+        "PrefixLength":{"shape":"PrefixAwareRoutingPrefixLength"},
+        "ConcurrencyThreshold":{"shape":"PrefixAwareRoutingConcurrencyThreshold"}
+      }
+    },
+    "PrefixAwareRoutingPrefixLength":{
+      "type":"integer",
+      "box":true,
+      "max":65536,
+      "min":1024
+    },
     "PresignedDomainUrl":{"type":"string"},
     "PresignedUrlAccessConfig":{
       "type":"structure",
@@ -25331,11 +25370,7 @@
     },
     "ProcessingClusterConfig":{
       "type":"structure",
-      "required":[
-        "InstanceCount",
-        "InstanceType",
-        "VolumeSizeInGB"
-      ],
+      "required":["VolumeSizeInGB"],
       "members":{
         "InstanceCount":{"shape":"ProcessingInstanceCount"},
         "InstanceType":{"shape":"ProcessingInstanceType"},
@@ -25523,7 +25558,13 @@
         "ml.g7e.8xlarge",
         "ml.g7e.12xlarge",
         "ml.g7e.24xlarge",
-        "ml.g7e.48xlarge"
+        "ml.g7e.48xlarge",
+        "ml.g7.2xlarge",
+        "ml.g7.4xlarge",
+        "ml.g7.8xlarge",
+        "ml.g7.12xlarge",
+        "ml.g7.24xlarge",
+        "ml.g7.48xlarge"
       ]
     },
     "ProcessingJob":{
@@ -26137,7 +26178,8 @@
       "type":"structure",
       "required":["RoutingStrategy"],
       "members":{
-        "RoutingStrategy":{"shape":"RoutingStrategy"}
+        "RoutingStrategy":{"shape":"RoutingStrategy"},
+        "PrefixAwareRoutingConfig":{"shape":"PrefixAwareRoutingConfig"}
       }
     },
     "ProductionVariantSSMAccess":{
@@ -27511,7 +27553,8 @@
       "type":"string",
       "enum":[
         "LEAST_OUTSTANDING_REQUESTS",
-        "RANDOM"
+        "RANDOM",
+        "PREFIX_AWARE"
       ]
     },
     "RuleConfigurationName":{
@@ -28025,6 +28068,12 @@
         "PipelineExecutionArn":{"shape":"PipelineExecutionArn"}
       }
     },
+    "SequenceLength":{
+      "type":"string",
+      "max":50,
+      "min":1,
+      "pattern":"\\d+K"
+    },
     "ServerlessJobBaseModelArn":{
       "type":"string",
       "max":2048,
@@ -28047,7 +28096,8 @@
         "CustomizationTechnique":{"shape":"CustomizationTechnique"},
         "Peft":{"shape":"Peft"},
         "EvaluationType":{"shape":"EvaluationType"},
-        "EvaluatorArn":{"shape":"EvaluatorArn"}
+        "EvaluatorArn":{"shape":"EvaluatorArn"},
+        "SequenceLength":{"shape":"SequenceLength"}
       }
     },
     "ServerlessJobType":{
@@ -29861,7 +29911,13 @@
         "ml.g7e.8xlarge",
         "ml.g7e.12xlarge",
         "ml.g7e.24xlarge",
-        "ml.g7e.48xlarge"
+        "ml.g7e.48xlarge",
+        "ml.g7.2xlarge",
+        "ml.g7.4xlarge",
+        "ml.g7.8xlarge",
+        "ml.g7.12xlarge",
+        "ml.g7.24xlarge",
+        "ml.g7.48xlarge"
       ]
     },
     "TrainingInstanceTypes":{

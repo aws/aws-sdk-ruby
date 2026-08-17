@@ -88,14 +88,24 @@ module Aws::SecurityAgent
     #   A description of the actor.
     #   @return [String]
     #
+    # @!attribute [rw] enable_email_mfa
+    #   Whether email-based MFA is enabled for this actor.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] mfa_forwarding_address
+    #   Server-generated email forwarding address for receiving MFA codes.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Actor AWS API Documentation
     #
     class Actor < Struct.new(
       :identifier,
       :uris,
       :authentication,
-      :description)
-      SENSITIVE = []
+      :description,
+      :enable_email_mfa,
+      :mfa_forwarding_address)
+      SENSITIVE = [:mfa_forwarding_address]
       include Aws::Structure
     end
 
@@ -1564,6 +1574,13 @@ module Aws::SecurityAgent
     #   and DISABLED.
     #   @return [String]
     #
+    # @!attribute [rw] max_task_hours
+    #   The maximum number of billable task hours allowed for jobs started
+    #   from this code review. If a job reaches the configured limit, it is
+    #   gracefully stopped. If not set, jobs run to completion with no
+    #   budget cap.
+    #   @return [Float]
+    #
     # @!attribute [rw] created_at
     #   The date and time the code review was created, in UTC format.
     #   @return [Time]
@@ -1583,6 +1600,7 @@ module Aws::SecurityAgent
       :log_config,
       :code_remediation_strategy,
       :validation_mode,
+      :max_task_hours,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -1651,6 +1669,12 @@ module Aws::SecurityAgent
     #   The code remediation strategy for the code review job.
     #   @return [String]
     #
+    # @!attribute [rw] max_task_hours
+    #   The maximum number of billable task hours allowed for this code
+    #   review job. If the cumulative task hours reach this limit, the job
+    #   is gracefully stopped.
+    #   @return [Float]
+    #
     # @!attribute [rw] created_at
     #   The date and time the code review job was created, in UTC format.
     #   @return [Time]
@@ -1677,6 +1701,7 @@ module Aws::SecurityAgent
       :error_information,
       :integrated_repositories,
       :code_remediation_strategy,
+      :max_task_hours,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -2224,6 +2249,12 @@ module Aws::SecurityAgent
     #   and DISABLED.
     #   @return [String]
     #
+    # @!attribute [rw] max_task_hours
+    #   The maximum number of billable task hours allowed for jobs started
+    #   from this code review. Must be a positive number. If not set, jobs
+    #   run to completion with no budget cap.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateCodeReviewInput AWS API Documentation
     #
     class CreateCodeReviewInput < Struct.new(
@@ -2233,7 +2264,8 @@ module Aws::SecurityAgent
       :service_role,
       :log_config,
       :code_remediation_strategy,
-      :validation_mode)
+      :validation_mode,
+      :max_task_hours)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2281,6 +2313,11 @@ module Aws::SecurityAgent
     #   The validation mode for the code review.
     #   @return [String]
     #
+    # @!attribute [rw] max_task_hours
+    #   The maximum number of billable task hours configured for jobs
+    #   started from this code review. Null if no budget cap is set.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateCodeReviewOutput AWS API Documentation
     #
     class CreateCodeReviewOutput < Struct.new(
@@ -2293,7 +2330,8 @@ module Aws::SecurityAgent
       :log_config,
       :agent_space_id,
       :code_remediation_strategy,
-      :validation_mode)
+      :validation_mode,
+      :max_task_hours)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2437,6 +2475,12 @@ module Aws::SecurityAgent
     #   include FINDING\_PERSONALIZATION and LOGIN\_OPTIMIZATION.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_task_hours
+    #   The maximum number of billable task hours allowed for jobs started
+    #   from this pentest. Must be a positive number. If not set, jobs run
+    #   to completion with no budget cap.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentestInput AWS API Documentation
     #
     class CreatePentestInput < Struct.new(
@@ -2449,7 +2493,8 @@ module Aws::SecurityAgent
       :vpc_config,
       :network_traffic_config,
       :code_remediation_strategy,
-      :disable_managed_skills)
+      :disable_managed_skills,
+      :max_task_hours)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3749,6 +3794,16 @@ module Aws::SecurityAgent
     #   finding was adjusted based on customer preferences.
     #   @return [String]
     #
+    # @!attribute [rw] revalidation_job_ids
+    #   The list of pentest job identifiers for revalidation jobs that
+    #   retested this finding.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] original_finding_id
+    #   The identifier of the original finding that this revalidation
+    #   finding was produced from.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The date and time the finding was created, in UTC format.
     #   @return [Time]
@@ -3783,6 +3838,8 @@ module Aws::SecurityAgent
       :code_locations,
       :verification_script,
       :alignment_rationale,
+      :revalidation_job_ids,
+      :original_finding_id,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -4479,11 +4536,16 @@ module Aws::SecurityAgent
     #   The provider-specific resource identifier for the repository.
     #   @return [String]
     #
+    # @!attribute [rw] branch
+    #   An optional override for the repository branch.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegratedRepository AWS API Documentation
     #
     class IntegratedRepository < Struct.new(
       :integration_id,
-      :provider_resource_id)
+      :provider_resource_id,
+      :branch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6104,6 +6166,13 @@ module Aws::SecurityAgent
     #   include FINDING\_PERSONALIZATION and LOGIN\_OPTIMIZATION.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_task_hours
+    #   The maximum number of billable task hours allowed for jobs started
+    #   from this pentest. If a job reaches the configured limit, it is
+    #   gracefully stopped. If not set, jobs run to completion with no
+    #   budget cap.
+    #   @return [Float]
+    #
     # @!attribute [rw] created_at
     #   The date and time the pentest was created, in UTC format.
     #   @return [Time]
@@ -6127,6 +6196,7 @@ module Aws::SecurityAgent
       :code_remediation_strategy,
       :clean_up_strategy,
       :disable_managed_skills,
+      :max_task_hours,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -6231,6 +6301,21 @@ module Aws::SecurityAgent
     #   include FINDING\_PERSONALIZATION and LOGIN\_OPTIMIZATION.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_task_hours
+    #   The maximum number of billable task hours allowed for this pentest
+    #   job. If the cumulative task hours reach this limit, the job is
+    #   gracefully stopped.
+    #   @return [Float]
+    #
+    # @!attribute [rw] job_type
+    #   The type of the pentest job. Valid values are FULL and REVALIDATION.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_finding_ids
+    #   The list of finding identifiers selected for revalidation. Present
+    #   only when jobType is REVALIDATION.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] created_at
     #   The date and time the pentest job was created, in UTC format.
     #   @return [Time]
@@ -6265,6 +6350,9 @@ module Aws::SecurityAgent
       :code_remediation_strategy,
       :clean_up_strategy,
       :disable_managed_skills,
+      :max_task_hours,
+      :job_type,
+      :selected_finding_ids,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -6908,11 +6996,25 @@ module Aws::SecurityAgent
     #   The unique identifier of the pentest to start a job for.
     #   @return [String]
     #
+    # @!attribute [rw] job_type
+    #   The type of pentest job to start. Valid values are FULL and
+    #   REVALIDATION. When set to REVALIDATION, the selectedFindingIds
+    #   parameter is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_finding_ids
+    #   The list of finding identifiers to revalidate. Required when jobType
+    #   is REVALIDATION. Each finding must belong to the same agent space
+    #   and pentest.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StartPentestJobInput AWS API Documentation
     #
     class StartPentestJobInput < Struct.new(
       :agent_space_id,
-      :pentest_id)
+      :pentest_id,
+      :job_type,
+      :selected_finding_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8144,6 +8246,11 @@ module Aws::SecurityAgent
     #   SIMULATED and DISABLED.
     #   @return [String]
     #
+    # @!attribute [rw] max_task_hours
+    #   The updated maximum number of billable task hours allowed for jobs
+    #   started from this code review.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateCodeReviewInput AWS API Documentation
     #
     class UpdateCodeReviewInput < Struct.new(
@@ -8154,7 +8261,8 @@ module Aws::SecurityAgent
       :service_role,
       :log_config,
       :code_remediation_strategy,
-      :validation_mode)
+      :validation_mode,
+      :max_task_hours)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8202,6 +8310,11 @@ module Aws::SecurityAgent
     #   The validation mode for the code review.
     #   @return [String]
     #
+    # @!attribute [rw] max_task_hours
+    #   The maximum number of billable task hours configured for jobs
+    #   started from this code review. Null if no budget cap is set.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateCodeReviewOutput AWS API Documentation
     #
     class UpdateCodeReviewOutput < Struct.new(
@@ -8214,7 +8327,8 @@ module Aws::SecurityAgent
       :log_config,
       :agent_space_id,
       :code_remediation_strategy,
-      :validation_mode)
+      :validation_mode,
+      :max_task_hours)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8363,6 +8477,11 @@ module Aws::SecurityAgent
     #   LOGIN\_OPTIMIZATION.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_task_hours
+    #   The updated maximum number of billable task hours allowed for jobs
+    #   started from this pentest.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentestInput AWS API Documentation
     #
     class UpdatePentestInput < Struct.new(
@@ -8376,7 +8495,8 @@ module Aws::SecurityAgent
       :vpc_config,
       :network_traffic_config,
       :code_remediation_strategy,
-      :disable_managed_skills)
+      :disable_managed_skills,
+      :max_task_hours)
       SENSITIVE = []
       include Aws::Structure
     end

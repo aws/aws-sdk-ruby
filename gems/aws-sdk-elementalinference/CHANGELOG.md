@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2026-08-10)
+------------------
+
+* Feature - Added support for the SearchFixtures API and DataSourceConfiguration, enabling customers to map fixture event data onto clipping outputs for improved feature accuracy.
+
+1.8.0 (2026-07-31)
+------------------
+
+* Feature - AWS Elemental Inference now supports graphic composition on cropped video outputs, enabling branded graphics and other visual elements to be overlaid as part of the inference workflow.
+
 1.7.0 (2026-07-09)
 ------------------
 

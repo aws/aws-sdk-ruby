@@ -130,6 +130,8 @@ module Aws::Glue
 
     class AssociateGlossaryTermsRequest
       attr_accessor asset_identifier: ::String
+      attr_accessor iterable_form_name: ::String
+      attr_accessor item_identifier: ::String
       attr_accessor glossary_term_identifiers: ::Array[::String]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -137,6 +139,8 @@ module Aws::Glue
 
     class AssociateGlossaryTermsResponse
       attr_accessor asset_identifier: ::String
+      attr_accessor iterable_form_name: ::String
+      attr_accessor item_identifier: ::String
       attr_accessor glossary_terms: ::Array[::String]
       SENSITIVE: []
     end
@@ -514,6 +518,13 @@ module Aws::Glue
 
     class BatchUpdatePartitionResponse
       attr_accessor errors: ::Array[Types::BatchUpdatePartitionFailureEntry]
+      SENSITIVE: []
+    end
+
+    class BetweenConfiguration
+      attr_accessor low_bound_key: ::String
+      attr_accessor high_bound_key: ::String
+      attr_accessor template: ::String
       SENSITIVE: []
     end
 
@@ -1201,6 +1212,7 @@ module Aws::Glue
       attr_accessor allowed_values: ::Array[::String]
       attr_accessor property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")
       attr_accessor property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+      attr_accessor format: ::String
       SENSITIVE: []
     end
 
@@ -2273,6 +2285,8 @@ module Aws::Glue
 
     class DeleteAttachmentResponse
       attr_accessor asset_identifier: ::String
+      attr_accessor iterable_form_name: ::String
+      attr_accessor item_identifier: ::String
       SENSITIVE: []
     end
 
@@ -2784,6 +2798,8 @@ module Aws::Glue
 
     class DisassociateGlossaryTermsRequest
       attr_accessor asset_identifier: ::String
+      attr_accessor iterable_form_name: ::String
+      attr_accessor item_identifier: ::String
       attr_accessor glossary_term_identifiers: ::Array[::String]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -2791,6 +2807,8 @@ module Aws::Glue
 
     class DisassociateGlossaryTermsResponse
       attr_accessor asset_identifier: ::String
+      attr_accessor iterable_form_name: ::String
+      attr_accessor item_identifier: ::String
       attr_accessor glossary_terms: ::Array[::String]
       SENSITIVE: []
     end
@@ -2974,6 +2992,12 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ExportEncryptionConfiguration
+      attr_accessor sse_algorithm: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
     class ExportLabelsTaskRunProperties
       attr_accessor output_s3_path: ::String
       SENSITIVE: []
@@ -3051,6 +3075,12 @@ module Aws::Glue
     class FieldDefinition
       attr_accessor name: ::String
       attr_accessor field_data_type: ("INT" | "SMALLINT" | "BIGINT" | "FLOAT" | "LONG" | "DATE" | "BOOLEAN" | "MAP" | "ARRAY" | "STRING" | "TIMESTAMP" | "DECIMAL" | "BYTE" | "SHORT" | "DOUBLE" | "STRUCT" | "BINARY" | "UNION")
+      attr_accessor response_date_format: ::String
+      attr_accessor is_partitionable: bool
+      attr_accessor is_nullable: bool
+      attr_accessor is_queryable: bool
+      attr_accessor is_orderable: bool
+      attr_accessor filter_overrides: Types::FilterOverrides
       SENSITIVE: []
     end
 
@@ -3070,10 +3100,35 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class FilterConfiguration
+      attr_accessor filter_mode: ("QUERY_PARAMS" | "FILTER_STRING")
+      attr_accessor operator_mappings: ::Hash[::String, ::String]
+      attr_accessor date_time_format: ::String
+      attr_accessor strip_quotes: bool
+      attr_accessor between_configuration: Types::BetweenConfiguration
+      attr_accessor filter_string_configuration: Types::FilterStringConfiguration
+      SENSITIVE: []
+    end
+
     class FilterExpression
       attr_accessor operation: ("EQ" | "LT" | "GT" | "LTE" | "GTE" | "REGEX" | "ISNULL")
       attr_accessor negated: bool
       attr_accessor values: ::Array[Types::FilterValue]
+      SENSITIVE: []
+    end
+
+    class FilterOverrides
+      attr_accessor field_name: ::String
+      attr_accessor operator_mappings: ::Hash[::String, ::String]
+      attr_accessor between_configuration: Types::BetweenConfiguration
+      attr_accessor date_time_format: ::String
+      SENSITIVE: []
+    end
+
+    class FilterStringConfiguration
+      attr_accessor query_parameter_name: ::String
+      attr_accessor quote_string_values: bool
+      attr_accessor quote_character: ::String
       SENSITIVE: []
     end
 
@@ -3404,6 +3459,19 @@ module Aws::Glue
 
     class GetDataCatalogEncryptionSettingsResponse
       attr_accessor data_catalog_encryption_settings: Types::DataCatalogEncryptionSettings
+      SENSITIVE: []
+    end
+
+    class GetDataCatalogExportConfigurationInput < Aws::EmptyStructure
+    end
+
+    class GetDataCatalogExportConfigurationOutput
+      attr_accessor export_setting: ("ENABLED" | "DISABLED")
+      attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
+      attr_accessor s3_table_bucket_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -6035,6 +6103,19 @@ module Aws::Glue
     class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure
     end
 
+    class PutDataCatalogExportConfigurationInput
+      attr_accessor export_setting: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutDataCatalogExportConfigurationOutput
+      attr_accessor export_setting: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
+      SENSITIVE: []
+    end
+
     class PutDataQualityProfileAnnotationRequest
       attr_accessor profile_id: ::String
       attr_accessor inclusion_annotation: ("INCLUDE" | "EXCLUDE")
@@ -6981,6 +7062,7 @@ module Aws::Glue
       attr_accessor request_parameters: ::Array[Types::ConnectorProperty]
       attr_accessor response_configuration: Types::ResponseConfiguration
       attr_accessor pagination_configuration: Types::PaginationConfiguration
+      attr_accessor filter_configuration: Types::FilterConfiguration
       SENSITIVE: []
     end
 

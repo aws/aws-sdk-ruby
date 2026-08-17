@@ -183,6 +183,100 @@ module Aws
                                 ) -> _CreateConfigurationResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationResponseSuccess
 
+      interface _CreateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
+        def channel_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#create_channel-instance_method
+      def create_channel: (
+                            channel_name: ::String,
+                            cluster_arn: ::String,
+                            ?encryption_configuration: {
+                              kms_key_arn: ::String
+                            },
+                            ?iceberg_destination_configuration: {
+                              append_only: bool,
+                              catalog: {
+                                catalog_arn: ::String?,
+                                warehouse_location: ::String?
+                              }?,
+                              data_freshness_in_seconds: ::Integer?,
+                              dead_letter_queue_s3: {
+                                bucket_arn: ::String,
+                                error_output_prefix: ::String?,
+                                expected_bucket_owner: ::String?
+                              },
+                              destination_table_list: Array[
+                                {
+                                  destination_database_name: ::String?,
+                                  destination_table_name: ::String?,
+                                  partition_spec: {
+                                    partition_strategy: ("TIME_HOUR"),
+                                    source_list: Array[
+                                      {
+                                        source_name: ::String?
+                                      }
+                                    ]?
+                                  }?
+                                }
+                              ],
+                              schema_evolution: {
+                                enable_schema_evolution: bool?
+                              },
+                              service_execution_role_arn: ::String,
+                              table_creation: {
+                                enable_table_creation: bool?
+                              },
+                              compression_type: ("ZSTD" | "SNAPPY")?
+                            },
+                            ?logging_info: {
+                              cloud_watch_logs: {
+                                enabled: bool,
+                                log_group: ::String?
+                              }?,
+                              firehose: {
+                                delivery_stream: ::String?,
+                                enabled: bool
+                              }?,
+                              s3: {
+                                bucket: ::String?,
+                                enabled: bool,
+                                prefix: ::String?
+                              }?
+                            },
+                            ?s3_destination_configuration: {
+                              data_freshness_in_seconds: ::Integer?,
+                              dead_letter_queue_s3: {
+                                bucket_arn: ::String,
+                                error_output_prefix: ::String?,
+                                expected_bucket_owner: ::String?
+                              },
+                              service_execution_role_arn: ::String,
+                              storage: {
+                                bucket_arn: ::String,
+                                compression_type: ("NONE" | "GZIP" | "ZSTD"),
+                                output_prefix: ::String?,
+                                output_key_template: ::String?,
+                                storage_class: ("STANDARD" | "INTELLIGENT_TIERING" | "GLACIER_IR"),
+                                expected_bucket_owner: ::String?
+                              }
+                            },
+                            ?tags: Hash[::String, ::String],
+                            topic_configuration_list: Array[
+                              {
+                                record_converter: {
+                                  value_converter: ("BYTE_ARRAY" | "JSON" | "JSON_SCHEMA_GSR" | "STRING")
+                                },
+                                record_schema: {
+                                  gsr_arn: ::String
+                                }?,
+                                topic_arn: ::String
+                              }
+                            ]
+                          ) -> _CreateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
+
       interface _CreateReplicatorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateReplicatorResponse]
         def replicator_arn: () -> ::String
@@ -306,6 +400,18 @@ module Aws
                           ) -> _DeleteClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
 
+      interface _DeleteChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChannelResponse]
+        def channel_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#delete_channel-instance_method
+      def delete_channel: (
+                            channel_arn: ::String,
+                            cluster_arn: ::String
+                          ) -> _DeleteChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChannelResponseSuccess
+
       interface _DeleteConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationResponse]
         def arn: () -> ::String
@@ -392,6 +498,29 @@ module Aws
                                            cluster_operation_arn: ::String
                                          ) -> _DescribeClusterOperationV2ResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterOperationV2ResponseSuccess
+
+      interface _DescribeChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelResponse]
+        def channel_arn: () -> ::String
+        def channel_name: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def iceberg_destination_configuration: () -> Types::IcebergDestinationConfiguration
+        def s3_destination_configuration: () -> Types::S3DestinationConfiguration
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED" | "SUSPENDING" | "SUSPENDED")
+        def destination_type: () -> ("ICEBERG" | "S3")
+        def creation_time: () -> ::Time
+        def topic_configuration_list: () -> ::Array[Types::TopicConfiguration]
+        def logging_info: () -> Types::ChannelLoggingInfo
+        def state_info: () -> Types::ChannelStateInfo
+        def cluster_operation_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_channel-instance_method
+      def describe_channel: (
+                              channel_arn: ::String,
+                              cluster_arn: ::String
+                            ) -> _DescribeChannelResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelResponseSuccess
 
       interface _DescribeConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConfigurationResponse]
@@ -539,6 +668,20 @@ module Aws
                                            ?cluster_arn: ::String
                                          ) -> _GetCompatibleKafkaVersionsResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCompatibleKafkaVersionsResponseSuccess
+
+      interface _ListChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsResponse]
+        def channels: () -> ::Array[Types::ChannelInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_channels-instance_method
+      def list_channels: (
+                           cluster_arn: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?topic_name_filter: ::String
+                         ) -> _ListChannelsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
 
       interface _ListClusterOperationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterOperationsResponse]
@@ -846,6 +989,24 @@ module Aws
                                   server_properties: ::String
                                 ) -> _UpdateConfigurationResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationResponseSuccess
+
+      interface _UpdateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelResponse]
+        def channel_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_channel-instance_method
+      def update_channel: (
+                            channel_arn: ::String,
+                            cluster_arn: ::String,
+                            ?iceberg_destination_update: {
+                              data_freshness_in_seconds: ::Integer
+                            },
+                            ?s3_destination_update: {
+                              data_freshness_in_seconds: ::Integer
+                            }
+                          ) -> _UpdateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
 
       interface _UpdateClusterConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterConfigurationResponse]

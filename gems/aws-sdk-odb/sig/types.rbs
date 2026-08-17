@@ -59,6 +59,20 @@ module Aws::Odb
     class AssociateIamRoleToResourceOutput < Aws::EmptyStructure
     end
 
+    class AssociateVirtualMachinesToExadbVmClusterInput
+      attr_accessor exadb_vm_cluster_id: ::String
+      attr_accessor desired_node_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AssociateVirtualMachinesToExadbVmClusterOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor exadb_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
     class AutonomousDatabase
       attr_accessor autonomous_database_id: ::String
       attr_accessor autonomous_database_arn: ::String
@@ -896,6 +910,62 @@ module Aws::Odb
       SENSITIVE: []
     end
 
+    class CreateExadbVmClusterInput
+      attr_accessor display_name: ::String
+      attr_accessor enabled_ecpu_count: ::Integer
+      attr_accessor exascale_db_storage_vault_id: ::String
+      attr_accessor grid_image_id: ::String
+      attr_accessor hostname: ::String
+      attr_accessor node_count: ::Integer
+      attr_accessor odb_network_id: ::String
+      attr_accessor shape: ::String
+      attr_accessor ssh_public_keys: ::Array[::String]
+      attr_accessor total_ecpu_count: ::Integer
+      attr_accessor vm_file_system_storage_total_size_in_g_bs: ::Integer
+      attr_accessor cluster_name: ::String
+      attr_accessor data_collection_options: Types::DataCollectionOptions
+      attr_accessor license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED")
+      attr_accessor scan_listener_port_tcp: ::Integer
+      attr_accessor scan_listener_port_tcp_ssl: ::Integer
+      attr_accessor shape_attribute: ("SMART_STORAGE" | "BLOCK_STORAGE")
+      attr_accessor system_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor time_zone: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExadbVmClusterOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor exadb_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExascaleDbStorageVaultInput
+      attr_accessor display_name: ::String
+      attr_accessor high_capacity_database_storage_total_size_in_g_bs: ::Integer
+      attr_accessor additional_flash_cache_in_percent: ::Integer
+      attr_accessor autoscale_limit_in_g_bs: ::Integer
+      attr_accessor availability_zone_id: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor description: ::String
+      attr_accessor is_autoscale_enabled: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor time_zone: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExascaleDbStorageVaultOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor exascale_db_storage_vault_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateOdbNetworkInput
       attr_accessor display_name: ::String
       attr_accessor availability_zone: ::String
@@ -1181,6 +1251,7 @@ module Aws::Odb
       attr_accessor runtime_minimum_core_count: ::Integer
       attr_accessor shape_family: ::String
       attr_accessor shape_type: ("AMD" | "INTEL" | "INTEL_FLEX_X9" | "AMPERE_FLEX_A1")
+      attr_accessor shape_attributes: ::Array[("SMART_STORAGE" | "BLOCK_STORAGE")]
       attr_accessor name: ::String
       attr_accessor compute_model: ("ECPU" | "OCPU")
       attr_accessor are_server_types_supported: bool
@@ -1227,6 +1298,22 @@ module Aws::Odb
     class DeleteCloudVmClusterOutput < Aws::EmptyStructure
     end
 
+    class DeleteExadbVmClusterInput
+      attr_accessor exadb_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExadbVmClusterOutput < Aws::EmptyStructure
+    end
+
+    class DeleteExascaleDbStorageVaultInput
+      attr_accessor exascale_db_storage_vault_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExascaleDbStorageVaultOutput < Aws::EmptyStructure
+    end
+
     class DeleteOdbNetworkInput
       attr_accessor odb_network_id: ::String
       attr_accessor delete_associated_resources: bool
@@ -1252,6 +1339,20 @@ module Aws::Odb
     end
 
     class DisassociateIamRoleFromResourceOutput < Aws::EmptyStructure
+    end
+
+    class DisassociateVirtualMachinesFromExadbVmClusterInput
+      attr_accessor exadb_vm_cluster_id: ::String
+      attr_accessor db_node_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateVirtualMachinesFromExadbVmClusterOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor exadb_vm_cluster_id: ::String
+      SENSITIVE: []
     end
 
     class DisasterRecoveryConfiguration
@@ -1301,6 +1402,165 @@ module Aws::Odb
       attr_accessor lifecycle_details: ::String
       attr_accessor lifecycle_state: ("BOOTSTRAPPING" | "DISABLED" | "ENABLED" | "FAILED" | "UPDATING")
       attr_accessor objective: ("AUTO" | "BALANCED" | "BASIC" | "HIGH_THROUGHPUT" | "LOW_LATENCY")
+      SENSITIVE: []
+    end
+
+    class ExadbVmCluster
+      attr_accessor exadb_vm_cluster_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor data_collection_options: Types::DataCollectionOptions
+      attr_accessor display_name: ::String
+      attr_accessor domain: ::String
+      attr_accessor enabled_ecpu_count: ::Integer
+      attr_accessor exadb_vm_cluster_arn: ::String
+      attr_accessor exascale_db_storage_vault_arn: ::String
+      attr_accessor exascale_db_storage_vault_id: ::String
+      attr_accessor gi_version: ::String
+      attr_accessor grid_image_id: ::String
+      attr_accessor grid_image_type: ("RELEASE_UPDATE" | "CUSTOM_IMAGE")
+      attr_accessor hostname: ::String
+      attr_accessor iam_roles: ::Array[Types::IamRole]
+      attr_accessor iorm_config_cache: Types::ExadataIormConfig
+      attr_accessor last_update_history_entry_id: ::String
+      attr_accessor license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED")
+      attr_accessor listener_port: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor node_count: ::Integer
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor oci_url: ::String
+      attr_accessor odb_network_arn: ::String
+      attr_accessor odb_network_id: ::String
+      attr_accessor percent_progress: ::Float
+      attr_accessor scan_dns_name: ::String
+      attr_accessor scan_dns_record_id: ::String
+      attr_accessor scan_ip_ids: ::Array[::String]
+      attr_accessor scan_listener_port_tcp: ::Integer
+      attr_accessor scan_listener_port_tcp_ssl: ::Integer
+      attr_accessor shape: ::String
+      attr_accessor shape_attribute: ("SMART_STORAGE" | "BLOCK_STORAGE")
+      attr_accessor snapshot_file_system_storage: Types::ExadbVmClusterStorageDetails
+      attr_accessor ssh_public_keys: ::Array[::String]
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor system_version: ::String
+      attr_accessor time_zone: ::String
+      attr_accessor total_ecpu_count: ::Integer
+      attr_accessor total_file_system_storage: Types::ExadbVmClusterStorageDetails
+      attr_accessor vip_ids: ::Array[::String]
+      attr_accessor vm_file_system_storage: Types::ExadbVmClusterStorageDetails
+      SENSITIVE: []
+    end
+
+    class ExadbVmClusterStorageDetails
+      attr_accessor total_size_in_g_bs: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExadbVmClusterSummary
+      attr_accessor exadb_vm_cluster_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor data_collection_options: Types::DataCollectionOptions
+      attr_accessor display_name: ::String
+      attr_accessor domain: ::String
+      attr_accessor enabled_ecpu_count: ::Integer
+      attr_accessor exadb_vm_cluster_arn: ::String
+      attr_accessor exascale_db_storage_vault_arn: ::String
+      attr_accessor exascale_db_storage_vault_id: ::String
+      attr_accessor gi_version: ::String
+      attr_accessor grid_image_id: ::String
+      attr_accessor grid_image_type: ("RELEASE_UPDATE" | "CUSTOM_IMAGE")
+      attr_accessor hostname: ::String
+      attr_accessor iam_roles: ::Array[Types::IamRole]
+      attr_accessor iorm_config_cache: Types::ExadataIormConfig
+      attr_accessor last_update_history_entry_id: ::String
+      attr_accessor license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED")
+      attr_accessor listener_port: ::Integer
+      attr_accessor memory_size_in_g_bs: ::Integer
+      attr_accessor node_count: ::Integer
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor oci_url: ::String
+      attr_accessor odb_network_arn: ::String
+      attr_accessor odb_network_id: ::String
+      attr_accessor percent_progress: ::Float
+      attr_accessor scan_dns_name: ::String
+      attr_accessor scan_dns_record_id: ::String
+      attr_accessor scan_ip_ids: ::Array[::String]
+      attr_accessor scan_listener_port_tcp: ::Integer
+      attr_accessor scan_listener_port_tcp_ssl: ::Integer
+      attr_accessor shape: ::String
+      attr_accessor shape_attribute: ("SMART_STORAGE" | "BLOCK_STORAGE")
+      attr_accessor snapshot_file_system_storage: Types::ExadbVmClusterStorageDetails
+      attr_accessor ssh_public_keys: ::Array[::String]
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor system_version: ::String
+      attr_accessor time_zone: ::String
+      attr_accessor total_ecpu_count: ::Integer
+      attr_accessor total_file_system_storage: Types::ExadbVmClusterStorageDetails
+      attr_accessor vip_ids: ::Array[::String]
+      attr_accessor vm_file_system_storage: Types::ExadbVmClusterStorageDetails
+      SENSITIVE: []
+    end
+
+    class ExascaleDbStorageDetails
+      attr_accessor available_size_in_g_bs: ::Integer
+      attr_accessor total_size_in_g_bs: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExascaleDbStorageVault
+      attr_accessor exascale_db_storage_vault_id: ::String
+      attr_accessor additional_flash_cache_in_percent: ::Integer
+      attr_accessor attached_shape_attributes: ::Array[("SMART_STORAGE" | "BLOCK_STORAGE")]
+      attr_accessor autoscale_limit_in_g_bs: ::Integer
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor vm_cluster_arns: ::Array[::String]
+      attr_accessor vm_cluster_count: ::Integer
+      attr_accessor vm_cluster_ids: ::Array[::String]
+      attr_accessor exascale_db_storage_vault_arn: ::String
+      attr_accessor high_capacity_database_storage: Types::ExascaleDbStorageDetails
+      attr_accessor is_autoscale_enabled: bool
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor oci_url: ::String
+      attr_accessor percent_progress: ::Float
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor time_zone: ::String
+      SENSITIVE: []
+    end
+
+    class ExascaleDbStorageVaultSummary
+      attr_accessor exascale_db_storage_vault_id: ::String
+      attr_accessor additional_flash_cache_in_percent: ::Integer
+      attr_accessor attached_shape_attributes: ::Array[("SMART_STORAGE" | "BLOCK_STORAGE")]
+      attr_accessor autoscale_limit_in_g_bs: ::Integer
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor vm_cluster_arns: ::Array[::String]
+      attr_accessor vm_cluster_count: ::Integer
+      attr_accessor vm_cluster_ids: ::Array[::String]
+      attr_accessor exascale_db_storage_vault_arn: ::String
+      attr_accessor high_capacity_database_storage: Types::ExascaleDbStorageDetails
+      attr_accessor is_autoscale_enabled: bool
+      attr_accessor ocid: ::String
+      attr_accessor oci_resource_anchor_name: ::String
+      attr_accessor oci_url: ::String
+      attr_accessor percent_progress: ::Float
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor time_zone: ::String
       SENSITIVE: []
     end
 
@@ -1391,6 +1651,7 @@ module Aws::Odb
 
     class GetDbNodeInput
       attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor exadb_vm_cluster_id: ::String
       attr_accessor db_node_id: ::String
       SENSITIVE: []
     end
@@ -1408,6 +1669,26 @@ module Aws::Odb
 
     class GetDbServerOutput
       attr_accessor db_server: Types::DbServer
+      SENSITIVE: []
+    end
+
+    class GetExadbVmClusterInput
+      attr_accessor exadb_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetExadbVmClusterOutput
+      attr_accessor exadb_vm_cluster: Types::ExadbVmCluster
+      SENSITIVE: []
+    end
+
+    class GetExascaleDbStorageVaultInput
+      attr_accessor exascale_db_storage_vault_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetExascaleDbStorageVaultOutput
+      attr_accessor exascale_db_storage_vault: Types::ExascaleDbStorageVault
       SENSITIVE: []
     end
 
@@ -1443,6 +1724,12 @@ module Aws::Odb
 
     class GetOdbPeeringConnectionOutput
       attr_accessor odb_peering_connection: Types::OdbPeeringConnection
+      SENSITIVE: []
+    end
+
+    class GiMinorVersionSummary
+      attr_accessor version: ::String
+      attr_accessor grid_image_id: ::String
       SENSITIVE: []
     end
 
@@ -1616,6 +1903,7 @@ module Aws::Odb
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor exadb_vm_cluster_id: ::String
       SENSITIVE: []
     end
 
@@ -1643,12 +1931,54 @@ module Aws::Odb
       attr_accessor next_token: ::String
       attr_accessor availability_zone: ::String
       attr_accessor availability_zone_id: ::String
+      attr_accessor shape_family: ::String
       SENSITIVE: []
     end
 
     class ListDbSystemShapesOutput
       attr_accessor next_token: ::String
       attr_accessor db_system_shapes: ::Array[Types::DbSystemShapeSummary]
+      SENSITIVE: []
+    end
+
+    class ListExadbVmClustersInput
+      attr_accessor exascale_db_storage_vault_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExadbVmClustersOutput
+      attr_accessor next_token: ::String
+      attr_accessor exadb_vm_clusters: ::Array[Types::ExadbVmClusterSummary]
+      SENSITIVE: []
+    end
+
+    class ListExascaleDbStorageVaultsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExascaleDbStorageVaultsOutput
+      attr_accessor next_token: ::String
+      attr_accessor exascale_db_storage_vaults: ::Array[Types::ExascaleDbStorageVaultSummary]
+      SENSITIVE: []
+    end
+
+    class ListGiMinorVersionsInput
+      attr_accessor gi_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor shape_family: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListGiMinorVersionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor gi_minor_versions: ::Array[Types::GiMinorVersionSummary]
       SENSITIVE: []
     end
 
@@ -1907,6 +2237,7 @@ module Aws::Odb
 
     class RebootDbNodeInput
       attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor exadb_vm_cluster_id: ::String
       attr_accessor db_node_id: ::String
       SENSITIVE: []
     end
@@ -2039,6 +2370,7 @@ module Aws::Odb
 
     class StartDbNodeInput
       attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor exadb_vm_cluster_id: ::String
       attr_accessor db_node_id: ::String
       SENSITIVE: []
     end
@@ -2065,6 +2397,7 @@ module Aws::Odb
 
     class StopDbNodeInput
       attr_accessor cloud_vm_cluster_id: ::String
+      attr_accessor exadb_vm_cluster_id: ::String
       attr_accessor db_node_id: ::String
       SENSITIVE: []
     end
@@ -2221,6 +2554,48 @@ module Aws::Odb
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
       attr_accessor status_reason: ::String
       attr_accessor cloud_exadata_infrastructure_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateExadbVmClusterInput
+      attr_accessor exadb_vm_cluster_id: ::String
+      attr_accessor data_collection_options: Types::DataCollectionOptions
+      attr_accessor display_name: ::String
+      attr_accessor enabled_ecpu_count: ::Integer
+      attr_accessor grid_image_id: ::String
+      attr_accessor license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED")
+      attr_accessor ssh_public_keys: ::Array[::String]
+      attr_accessor system_version: ::String
+      attr_accessor total_ecpu_count: ::Integer
+      attr_accessor update_action: ("ROLLING_APPLY" | "NON_ROLLING_APPLY" | "PRECHECK" | "ROLLBACK")
+      attr_accessor vm_file_system_storage_total_size_in_g_bs: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateExadbVmClusterOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor exadb_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateExascaleDbStorageVaultInput
+      attr_accessor exascale_db_storage_vault_id: ::String
+      attr_accessor additional_flash_cache_in_percent: ::Integer
+      attr_accessor autoscale_limit_in_g_bs: ::Integer
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor high_capacity_database_storage_total_size_in_g_bs: ::Integer
+      attr_accessor is_autoscale_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateExascaleDbStorageVaultOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor exascale_db_storage_vault_id: ::String
       SENSITIVE: []
     end
 

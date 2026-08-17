@@ -3714,10 +3714,13 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] s3_object_storage_mode
-    #   Specifies how the deployment package is stored. Use `COPY` (default)
-    #   to upload a copy of your deployment package to Lambda. Use
-    #   `REFERENCE` to have Lambda reference the deployment package from the
-    #   specified Amazon S3 bucket.
+    #   Specifies how the deployment package is stored. Valid values:
+    #
+    #   * `COPY` (default) – Uploads a copy of your deployment package to
+    #     Lambda.
+    #
+    #   * `REFERENCE` – Lambda references the deployment package from the
+    #     specified Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] image_uri
@@ -3805,15 +3808,17 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Details about an error related to retrieving a function's deployment
-    # package.
+    # Contains details about an error that occurred when Lambda attempted to
+    # retrieve a function's deployment package.
     #
     # @!attribute [rw] error_code
-    #   The error code for the failed retrieval.
+    #   The error code that identifies why Lambda failed to retrieve the
+    #   deployment package.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   A description of the error.
+    #   The human-readable message that describes why Lambda failed to
+    #   retrieve the deployment package.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocationError AWS API Documentation
@@ -6238,7 +6243,12 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] s3_object_storage_mode
-    #   The storage mode for a function's deployment package.
+    #   Specifies how the layer archive is stored. Valid values:
+    #
+    #   * `COPY` (default) – Uploads a copy of your layer archive to Lambda.
+    #
+    #   * `REFERENCE` – Lambda references the layer archive from the
+    #     specified Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] zip_file
@@ -6287,8 +6297,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] resolved_s3_object
-    #   Details about the resolved Amazon S3 object that contains a
-    #   function's deployment package.
+    #   The resolved Amazon S3 object that contains the layer archive.
     #   @return [Types::ResolvedS3Object]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionContentOutput AWS API Documentation
@@ -9825,10 +9834,13 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] s3_object_storage_mode
-    #   Specifies how the deployment package is stored. Use `COPY` (default)
-    #   to upload a copy of your deployment package to Lambda. Use
-    #   `REFERENCE` to have Lambda reference the deployment package from the
-    #   specified Amazon S3 bucket.
+    #   Specifies how the deployment package is stored. Valid values:
+    #
+    #   * `COPY` (default) – Uploads a copy of your deployment package to
+    #     Lambda.
+    #
+    #   * `REFERENCE` – Lambda references the deployment package from the
+    #     specified Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] image_uri

@@ -3602,9 +3602,22 @@
                     },
                     "renamedStructureValue": {
                         "shape": "RenamedGreeting"
+                    },
+                    "unionValue": {
+                        "shape": "NestedUnion"
                     }
                 },
                 "documentation": "<p>A union with a representative set of types for members.</p>",
+                "union": true
+            },
+            "NestedUnion": {
+                "type": "structure",
+                "members": {
+                    "stringValue": {
+                        "shape": "String"
+                    }
+                },
+                "documentation": "<p>A union used to test unions nested inside unions.</p>",
                 "union": true
             },
             "RenamedGreeting": {
@@ -3914,6 +3927,37 @@
                         "Content-Type": "application/json"
                     },
                     "body": "{\n    \"contents\": {\n        \"structureValue\": {\n            \"hi\": \"hello\"\n        }\n    }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializeNestedUnionValue",
+                "description": "Deserializes a nested union value",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/JsonUnions",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "result": {
+                    "contents": {
+                        "unionValue": {
+                            "stringValue": "foo"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"unionValue\": {\n            \"stringValue\": \"foo\"\n        }\n    }\n}"
                 }
             },
             {

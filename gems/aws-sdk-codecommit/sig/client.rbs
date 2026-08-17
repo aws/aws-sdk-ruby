@@ -434,6 +434,26 @@ module Aws
                     ) -> _GetBlobResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlobResponseSuccess
 
+      interface _GetBlobDifferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBlobDifferencesOutput]
+        def hunks: () -> ::Array[Types::DiffHunk]
+        def is_binary: () -> bool
+        def before_blob_size: () -> ::Integer
+        def after_blob_size: () -> ::Integer
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCommit/Client.html#get_blob_differences-instance_method
+      def get_blob_differences: (
+                                  repository_name: ::String,
+                                  after_blob_id: ::String,
+                                  ?before_blob_id: ::String,
+                                  ?context_lines: ::Integer,
+                                  ?ignore_whitespace: bool,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _GetBlobDifferencesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlobDifferencesResponseSuccess
+
       interface _GetBranchResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBranchOutput]
         def branch: () -> Types::BranchInfo

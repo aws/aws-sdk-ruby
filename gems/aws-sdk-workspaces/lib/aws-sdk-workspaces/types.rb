@@ -546,11 +546,19 @@ module Aws::WorkSpaces
     #   the specified directory.
     #   @return [String]
     #
+    # @!attribute [rw] client_experience_policy
+    #   The client experience policy that determines which client experience
+    #   the user sees. Administrators can set this policy to control the
+    #   client experience for users in a directory. Valid values include
+    #   `FORCE_CLASSIC`, `FORCE_UI_2026`, and `USER_CHOICE`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ClientProperties AWS API Documentation
     #
     class ClientProperties < Struct.new(
       :reconnect_enabled,
-      :log_upload_enabled)
+      :log_upload_enabled,
+      :client_experience_policy)
       SENSITIVE = []
       include Aws::Structure
     end

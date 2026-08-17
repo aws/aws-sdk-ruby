@@ -388,6 +388,38 @@ module Aws
       }
     }
 
+      type metric_calculation = {
+      calculation_components: Array[
+        Params::calculation_component
+      ],
+      calculation: ::String
+    }
+
+      type calculation_component = {
+      alias: ::String,
+      metric_name: ::String?,
+      metric_id: ::String?,
+      metric_filters: Array[
+        Params::metric_filter
+      ]?
+    }
+
+      type metric_filter = {
+      metric_filter_key: ::String,
+      negate: bool?,
+      number_condition: {
+        comparison: ("LESSER" | "LESSER_OR_EQUAL" | "GREATER" | "GREATER_OR_EQUAL"),
+        values: Array[::Float]
+      }?,
+      string_condition: {
+        comparison: ("MATCHES_ANY" | "MATCHES_NONE"),
+        values: Array[::String]
+      }?,
+      boolean_condition: {
+        comparison: ("IS_TRUE" | "IS_FALSE")
+      }?
+    }
+
       type quick_connect_config = {
       quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW"),
       user_config: {
@@ -469,7 +501,7 @@ module Aws
     }
 
       type rule_action = {
-      action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION"),
+      action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION"),
       task_action: Params::task_action_definition?,
       event_bridge_action: {
         name: ::String
@@ -484,6 +516,13 @@ module Aws
       }?,
       submit_auto_evaluation_action: {
         evaluation_form_id: ::String
+      }?,
+      extract_information_action: {
+        rules_extraction_definitions: Array[
+          {
+            identifier: ::String
+          }
+        ]
       }?
     }
 
@@ -1131,6 +1170,48 @@ module Aws
         field_name: ::String?,
         value: ::String?,
         comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type metric_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          boolean_condition: {
+            field_name: ::String?,
+            comparison_type: ("IS_TRUE" | "IS_FALSE")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          boolean_condition: {
+            field_name: ::String?,
+            comparison_type: ("IS_TRUE" | "IS_FALSE")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?,
+      boolean_condition: {
+        field_name: ::String?,
+        comparison_type: ("IS_TRUE" | "IS_FALSE")?
       }?
     }
 

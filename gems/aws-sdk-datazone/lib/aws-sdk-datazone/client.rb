@@ -642,6 +642,7 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.scope_name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
     #   resp.subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -1143,6 +1144,7 @@ module Aws::DataZone
     #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids #=> Array
     #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids[0] #=> String
     #   resp.subscribed_listing.item.asset_listing.asset_scope.status #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.scope_name #=> String
     #   resp.subscribed_listing.item.asset_listing.asset_scope.error_message #=> String
     #   resp.subscribed_listing.item.asset_listing.permissions.s3 #=> Array
     #   resp.subscribed_listing.item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -2159,6 +2161,11 @@ module Aws::DataZone
     #         subnet_ids: ["SubnetId"], # required
     #         security_group_id: "SecurityGroupId",
     #       },
+    #       git_properties: {
+    #         code_connection_arn: "GitPropertiesInputCodeConnectionArnString", # required
+    #         repository_id: "GitPropertiesInputRepositoryIdString", # required
+    #         default_branch: "GitPropertiesInputDefaultBranchString", # required
+    #       },
     #     },
     #     enable_trusted_identity_propagation: false,
     #     scope: "DOMAIN", # accepts DOMAIN, PROJECT
@@ -2186,7 +2193,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.name #=> String
     #   resp.physical_endpoints[0].glue_connection.description #=> String
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
     #   resp.physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -2307,7 +2314,12 @@ module Aws::DataZone
     #   resp.props.vpc_properties.security_group_id #=> String
     #   resp.props.vpc_properties.glue_connection_names #=> Array
     #   resp.props.vpc_properties.glue_connection_names[0] #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC"
+    #   resp.props.git_properties.code_connection_arn #=> String
+    #   resp.props.git_properties.repository_id #=> String
+    #   resp.props.git_properties.default_branch #=> String
+    #   resp.props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.props.git_properties.error_message #=> String
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
     #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateConnection AWS API Documentation
@@ -4436,6 +4448,7 @@ module Aws::DataZone
     #   resp.assets[0].asset_scope.filter_ids #=> Array
     #   resp.assets[0].asset_scope.filter_ids[0] #=> String
     #   resp.assets[0].asset_scope.status #=> String
+    #   resp.assets[0].asset_scope.scope_name #=> String
     #   resp.assets[0].asset_scope.error_message #=> String
     #   resp.assets[0].permissions.s3 #=> Array
     #   resp.assets[0].permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -4590,6 +4603,7 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.scope_name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
     #   resp.subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -5772,6 +5786,7 @@ module Aws::DataZone
     #   resp.assets[0].asset_scope.filter_ids #=> Array
     #   resp.assets[0].asset_scope.filter_ids[0] #=> String
     #   resp.assets[0].asset_scope.status #=> String
+    #   resp.assets[0].asset_scope.scope_name #=> String
     #   resp.assets[0].asset_scope.error_message #=> String
     #   resp.assets[0].permissions.s3 #=> Array
     #   resp.assets[0].permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -6368,7 +6383,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.name #=> String
     #   resp.physical_endpoints[0].glue_connection.description #=> String
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
     #   resp.physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -6489,7 +6504,12 @@ module Aws::DataZone
     #   resp.props.vpc_properties.security_group_id #=> String
     #   resp.props.vpc_properties.glue_connection_names #=> Array
     #   resp.props.vpc_properties.glue_connection_names[0] #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC"
+    #   resp.props.git_properties.code_connection_arn #=> String
+    #   resp.props.git_properties.repository_id #=> String
+    #   resp.props.git_properties.default_branch #=> String
+    #   resp.props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.props.git_properties.error_message #=> String
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
     #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetConnection AWS API Documentation
@@ -8466,6 +8486,7 @@ module Aws::DataZone
     #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids #=> Array
     #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids[0] #=> String
     #   resp.subscribed_listing.item.asset_listing.asset_scope.status #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.scope_name #=> String
     #   resp.subscribed_listing.item.asset_listing.asset_scope.error_message #=> String
     #   resp.subscribed_listing.item.asset_listing.permissions.s3 #=> Array
     #   resp.subscribed_listing.item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -8550,6 +8571,7 @@ module Aws::DataZone
     #   resp.assets[0].asset_scope.filter_ids #=> Array
     #   resp.assets[0].asset_scope.filter_ids[0] #=> String
     #   resp.assets[0].asset_scope.status #=> String
+    #   resp.assets[0].asset_scope.scope_name #=> String
     #   resp.assets[0].asset_scope.error_message #=> String
     #   resp.assets[0].permissions.s3 #=> Array
     #   resp.assets[0].permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -8638,6 +8660,7 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.scope_name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
     #   resp.subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -9188,7 +9211,7 @@ module Aws::DataZone
     #     name: "ConnectionName",
     #     environment_identifier: "EnvironmentId",
     #     project_identifier: "ProjectId",
-    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA, AMAZON_Q, MLFLOW, VPC
+    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA, AMAZON_Q, MLFLOW, VPC, GIT
     #     scope: "DOMAIN", # accepts DOMAIN, PROJECT
     #   })
     #
@@ -9214,7 +9237,7 @@ module Aws::DataZone
     #   resp.items[0].physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.name #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.description #=> String
-    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC"
+    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
     #   resp.items[0].physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.items[0].physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -9335,7 +9358,12 @@ module Aws::DataZone
     #   resp.items[0].props.vpc_properties.security_group_id #=> String
     #   resp.items[0].props.vpc_properties.glue_connection_names #=> Array
     #   resp.items[0].props.vpc_properties.glue_connection_names[0] #=> String
-    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC"
+    #   resp.items[0].props.git_properties.code_connection_arn #=> String
+    #   resp.items[0].props.git_properties.repository_id #=> String
+    #   resp.items[0].props.git_properties.default_branch #=> String
+    #   resp.items[0].props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.items[0].props.git_properties.error_message #=> String
+    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
     #   resp.items[0].scope #=> String, one of "DOMAIN", "PROJECT"
     #   resp.next_token #=> String
     #
@@ -11294,6 +11322,7 @@ module Aws::DataZone
     #   resp.items[0].assets[0].asset_scope.filter_ids #=> Array
     #   resp.items[0].assets[0].asset_scope.filter_ids[0] #=> String
     #   resp.items[0].assets[0].asset_scope.status #=> String
+    #   resp.items[0].assets[0].asset_scope.scope_name #=> String
     #   resp.items[0].assets[0].asset_scope.error_message #=> String
     #   resp.items[0].assets[0].permissions.s3 #=> Array
     #   resp.items[0].assets[0].permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -11428,6 +11457,7 @@ module Aws::DataZone
     #   resp.items[0].subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
     #   resp.items[0].subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
     #   resp.items[0].subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
+    #   resp.items[0].subscribed_listings[0].item.asset_listing.asset_scope.scope_name #=> String
     #   resp.items[0].subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
     #   resp.items[0].subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
     #   resp.items[0].subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -11669,6 +11699,7 @@ module Aws::DataZone
     #   resp.items[0].subscribed_listing.item.asset_listing.asset_scope.filter_ids #=> Array
     #   resp.items[0].subscribed_listing.item.asset_listing.asset_scope.filter_ids[0] #=> String
     #   resp.items[0].subscribed_listing.item.asset_listing.asset_scope.status #=> String
+    #   resp.items[0].subscribed_listing.item.asset_listing.asset_scope.scope_name #=> String
     #   resp.items[0].subscribed_listing.item.asset_listing.asset_scope.error_message #=> String
     #   resp.items[0].subscribed_listing.item.asset_listing.permissions.s3 #=> Array
     #   resp.items[0].subscribed_listing.item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -12371,6 +12402,7 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.scope_name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
     #   resp.subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -12604,6 +12636,7 @@ module Aws::DataZone
     #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids #=> Array
     #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids[0] #=> String
     #   resp.subscribed_listing.item.asset_listing.asset_scope.status #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.scope_name #=> String
     #   resp.subscribed_listing.item.asset_listing.asset_scope.error_message #=> String
     #   resp.subscribed_listing.item.asset_listing.permissions.s3 #=> Array
     #   resp.subscribed_listing.item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -14492,6 +14525,10 @@ module Aws::DataZone
     #         subnet_ids: ["SubnetId"],
     #         security_group_id: "SecurityGroupId",
     #       },
+    #       git_properties: {
+    #         code_connection_arn: "GitPropertiesPatchCodeConnectionArnString",
+    #         default_branch: "GitPropertiesPatchDefaultBranchString",
+    #       },
     #     },
     #   })
     #
@@ -14517,7 +14554,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.name #=> String
     #   resp.physical_endpoints[0].glue_connection.description #=> String
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
     #   resp.physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -14638,7 +14675,12 @@ module Aws::DataZone
     #   resp.props.vpc_properties.security_group_id #=> String
     #   resp.props.vpc_properties.glue_connection_names #=> Array
     #   resp.props.vpc_properties.glue_connection_names[0] #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC"
+    #   resp.props.git_properties.code_connection_arn #=> String
+    #   resp.props.git_properties.repository_id #=> String
+    #   resp.props.git_properties.default_branch #=> String
+    #   resp.props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.props.git_properties.error_message #=> String
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
     #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateConnection AWS API Documentation
@@ -16275,6 +16317,7 @@ module Aws::DataZone
     #   resp.assets[0].asset_scope.filter_ids #=> Array
     #   resp.assets[0].asset_scope.filter_ids[0] #=> String
     #   resp.assets[0].asset_scope.status #=> String
+    #   resp.assets[0].asset_scope.scope_name #=> String
     #   resp.assets[0].asset_scope.error_message #=> String
     #   resp.assets[0].permissions.s3 #=> Array
     #   resp.assets[0].permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -16366,6 +16409,7 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.scope_name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
     #   resp.subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
@@ -16590,7 +16634,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

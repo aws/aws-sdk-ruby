@@ -99,6 +99,13 @@ module Aws
           }
         ]
       }?,
+      aggregation_thresholds: Array[
+        Params::aggregation_threshold
+      ]?,
+      comparison_controls: {
+        allowed_literal_comparison_columns: Array[::String],
+        allowed_column_comparison_columns: Array[::String]
+      }?,
       allowed_result_receivers: Array[::String]?,
       allowed_additional_analyses: Array[::String]?
     }
@@ -116,6 +123,19 @@ module Aws
 
       type configured_table_analysis_rule_policy = {
       v1: Params::configured_table_analysis_rule_policy_v1?
+    }
+
+      type aggregation_threshold = {
+      identity_columns: Array[::String],
+      minimum_identity_count: ::Integer,
+      type: ("COUNT_DISTINCT"),
+      output_column_thresholds: Array[
+        {
+          output_column_name: ::String,
+          minimum_identity_count: ::Integer
+        }
+      ]?,
+      allowed_aggregate_expression_type: ("COLUMNS_ONLY" | "ANY_EXPRESSION")
     }
 
       type configured_table_association_analysis_rule_policy_v1 = {
@@ -150,7 +170,14 @@ module Aws
           }
         ]
       }?,
-      disallowed_output_columns: Array[::String]?
+      disallowed_output_columns: Array[::String]?,
+      aggregation_thresholds: Array[
+        Params::aggregation_threshold
+      ]?,
+      comparison_controls: {
+        allowed_literal_comparison_columns: Array[::String],
+        allowed_column_comparison_columns: Array[::String]
+      }?
     }
 
       type intermediate_table_analysis_rule_policy_v1 = {

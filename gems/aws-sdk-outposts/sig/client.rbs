@@ -396,7 +396,7 @@ module Aws
                                   ?asset_id_filter: Array[::String],
                                   ?instance_type_filter: Array[::String],
                                   ?account_id_filter: Array[::String],
-                                  ?aws_service_filter: Array[("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")],
+                                  ?aws_service_filter: Array[("AWS" | "EC2" | "EKS" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")],
                                   ?max_results: ::Integer,
                                   ?next_token: ::String
                                 ) -> _ListAssetInstancesResponseSuccess
@@ -569,7 +569,7 @@ module Aws
                                  ?instances_to_exclude: {
                                    instances: Array[::String]?,
                                    account_ids: Array[::String]?,
-                                   services: Array[("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")]?
+                                   services: Array[("AWS" | "EC2" | "EKS" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")]?
                                  },
                                  ?dry_run: bool,
                                  ?task_action_on_blocking_instances: ("WAIT_FOR_EVACUATION" | "FAIL_TASK")

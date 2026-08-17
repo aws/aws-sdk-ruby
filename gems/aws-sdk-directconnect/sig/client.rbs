@@ -1244,6 +1244,27 @@ module Aws
                                     ) -> _DisassociateMacSecKeyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMacSecKeyResponseSuccess
 
+      interface _ListVirtualInterfaceRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualInterfaceRoutesResponse]
+        def virtual_interface_id: () -> ::String
+        def routes: () -> ::Array[Types::Route]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#list_virtual_interface_routes-instance_method
+      def list_virtual_interface_routes: (
+                                           ?virtual_interface_id: ::String,
+                                           ?filters: {
+                                             route_direction: ("accepted" | "advertised")?,
+                                             address_family: ("ipv4" | "ipv6")?,
+                                             cidrs: Array[::String]?,
+                                             as_path: Array[::Integer]?,
+                                             communities: Array[::String]?
+                                           },
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListVirtualInterfaceRoutesResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualInterfaceRoutesResponseSuccess
+
       interface _ListVirtualInterfaceTestHistoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualInterfaceTestHistoryResponse]
         def virtual_interface_test_history: () -> ::Array[Types::VirtualInterfaceTestHistory]

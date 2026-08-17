@@ -408,6 +408,7 @@ module Aws
         def agent_space_id: () -> ::String
         def code_remediation_strategy: () -> ("AUTOMATIC" | "DISABLED")
         def validation_mode: () -> ("DISABLED" | "SIMULATED")
+        def max_task_hours: () -> ::Float
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_code_review-instance_method
       def create_code_review: (
@@ -420,7 +421,8 @@ module Aws
                                   log_stream: ::String?
                                 },
                                 ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
-                                ?validation_mode: ("DISABLED" | "SIMULATED")
+                                ?validation_mode: ("DISABLED" | "SIMULATED"),
+                                ?max_task_hours: ::Float
                               ) -> _CreateCodeReviewResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeReviewResponseSuccess
 
@@ -512,7 +514,8 @@ module Aws
                             },
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
-                            ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
+                            ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
+                            ?max_task_hours: ::Float
                           ) -> _CreatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePentestResponseSuccess
 
@@ -1248,7 +1251,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#start_pentest_job-instance_method
       def start_pentest_job: (
                                agent_space_id: ::String,
-                               pentest_id: ::String
+                               pentest_id: ::String,
+                               ?job_type: ("FULL" | "REVALIDATION"),
+                               ?selected_finding_ids: Array[::String]
                              ) -> _StartPentestJobResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPentestJobResponseSuccess
 
@@ -1368,6 +1373,7 @@ module Aws
         def agent_space_id: () -> ::String
         def code_remediation_strategy: () -> ("AUTOMATIC" | "DISABLED")
         def validation_mode: () -> ("DISABLED" | "SIMULATED")
+        def max_task_hours: () -> ::Float
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_code_review-instance_method
       def update_code_review: (
@@ -1381,7 +1387,8 @@ module Aws
                                   log_stream: ::String?
                                 },
                                 ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
-                                ?validation_mode: ("DISABLED" | "SIMULATED")
+                                ?validation_mode: ("DISABLED" | "SIMULATED"),
+                                ?max_task_hours: ::Float
                               ) -> _UpdateCodeReviewResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCodeReviewResponseSuccess
 
@@ -1489,7 +1496,8 @@ module Aws
                             },
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
-                            ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
+                            ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
+                            ?max_task_hours: ::Float
                           ) -> _UpdatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePentestResponseSuccess
 

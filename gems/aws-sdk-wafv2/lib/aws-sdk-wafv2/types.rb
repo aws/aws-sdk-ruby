@@ -809,6 +809,15 @@ module Aws::WAFV2
     #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
+    # @!attribute [rw] pre_parse_text_transformations
+    #   Pre-parse text transformations normalize the raw query string before
+    #   WAF parses it into individual query arguments. They are applied
+    #   before the standard text transformations. Pre-parse text
+    #   transformations are only supported when `FieldToMatch` is
+    #   `SingleQueryArgument` or `AllQueryArguments`. You can specify up to
+    #   10 pre-parse text transformations per rule statement.
+    #   @return [Array<Types::PreParseTextTransformation>]
+    #
     # @!attribute [rw] positional_constraint
     #   The area within the portion of the web request that you want WAF to
     #   search for `SearchString`. Valid values include the following:
@@ -858,6 +867,7 @@ module Aws::WAFV2
       :search_string,
       :field_to_match,
       :text_transformations,
+      :pre_parse_text_transformations,
       :positional_constraint)
       SENSITIVE = []
       include Aws::Structure
@@ -7445,6 +7455,32 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # A pre-parse text transformation that normalizes the raw query string
+    # before WAF parses it into individual query arguments. Pre-parse text
+    # transformations are only supported when `FieldToMatch` is
+    # `SingleQueryArgument` or `AllQueryArguments`.
+    #
+    # @!attribute [rw] priority
+    #   Sets the relative processing order for the pre-parse text
+    #   transformations that you define. WAF processes all transformations,
+    #   from lowest priority value to highest, before inspecting the
+    #   transformed content.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The type of pre-parse text transformation to apply to the raw query
+    #   string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PreParseTextTransformation AWS API Documentation
+    #
+    class PreParseTextTransformation < Struct.new(
+      :priority,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The price per request for a payment network, specifying the amount and
     # cryptocurrency.
     #
@@ -8308,7 +8344,13 @@ module Aws::WAFV2
     # rule group `AWSManagedRulesAntiDDoSRuleSet`.
     #
     # @!attribute [rw] regex_string
-    #   The string representing the regular expression.
+    #   The string representing the regular expression. WAF enforces a quota
+    #   on the maximum number of characters in a regex pattern. For the
+    #   current limit, see [WAF quotas][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Regex AWS API Documentation
@@ -8323,7 +8365,13 @@ module Aws::WAFV2
     # against a single regular expression.
     #
     # @!attribute [rw] regex_string
-    #   The string representing the regular expression.
+    #   The string representing the regular expression. WAF enforces a quota
+    #   on the maximum number of characters in a regex pattern. For the
+    #   current limit, see [WAF quotas][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
     #   @return [String]
     #
     # @!attribute [rw] field_to_match
@@ -8342,12 +8390,22 @@ module Aws::WAFV2
     #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
+    # @!attribute [rw] pre_parse_text_transformations
+    #   Pre-parse text transformations normalize the raw query string before
+    #   WAF parses it into individual query arguments. They are applied
+    #   before the standard text transformations. Pre-parse text
+    #   transformations are only supported when `FieldToMatch` is
+    #   `SingleQueryArgument` or `AllQueryArguments`. You can specify up to
+    #   10 pre-parse text transformations per rule statement.
+    #   @return [Array<Types::PreParseTextTransformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexMatchStatement AWS API Documentation
     #
     class RegexMatchStatement < Struct.new(
       :regex_string,
       :field_to_match,
-      :text_transformations)
+      :text_transformations,
+      :pre_parse_text_transformations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8426,12 +8484,22 @@ module Aws::WAFV2
     #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
+    # @!attribute [rw] pre_parse_text_transformations
+    #   Pre-parse text transformations normalize the raw query string before
+    #   WAF parses it into individual query arguments. They are applied
+    #   before the standard text transformations. Pre-parse text
+    #   transformations are only supported when `FieldToMatch` is
+    #   `SingleQueryArgument` or `AllQueryArguments`. You can specify up to
+    #   10 pre-parse text transformations per rule statement.
+    #   @return [Array<Types::PreParseTextTransformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexPatternSetReferenceStatement AWS API Documentation
     #
     class RegexPatternSetReferenceStatement < Struct.new(
       :arn,
       :field_to_match,
-      :text_transformations)
+      :text_transformations,
+      :pre_parse_text_transformations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9884,13 +9952,23 @@ module Aws::WAFV2
     #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
+    # @!attribute [rw] pre_parse_text_transformations
+    #   Pre-parse text transformations normalize the raw query string before
+    #   WAF parses it into individual query arguments. They are applied
+    #   before the standard text transformations. Pre-parse text
+    #   transformations are only supported when `FieldToMatch` is
+    #   `SingleQueryArgument` or `AllQueryArguments`. You can specify up to
+    #   10 pre-parse text transformations per rule statement.
+    #   @return [Array<Types::PreParseTextTransformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SizeConstraintStatement AWS API Documentation
     #
     class SizeConstraintStatement < Struct.new(
       :field_to_match,
       :comparison_operator,
       :size,
-      :text_transformations)
+      :text_transformations,
+      :pre_parse_text_transformations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9979,6 +10057,15 @@ module Aws::WAFV2
     #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
+    # @!attribute [rw] pre_parse_text_transformations
+    #   Pre-parse text transformations normalize the raw query string before
+    #   WAF parses it into individual query arguments. They are applied
+    #   before the standard text transformations. Pre-parse text
+    #   transformations are only supported when `FieldToMatch` is
+    #   `SingleQueryArgument` or `AllQueryArguments`. You can specify up to
+    #   10 pre-parse text transformations per rule statement.
+    #   @return [Array<Types::PreParseTextTransformation>]
+    #
     # @!attribute [rw] sensitivity_level
     #   The sensitivity that you want WAF to use to inspect for SQL
     #   injection attacks.
@@ -10005,6 +10092,7 @@ module Aws::WAFV2
     class SqliMatchStatement < Struct.new(
       :field_to_match,
       :text_transformations,
+      :pre_parse_text_transformations,
       :sensitivity_level)
       SENSITIVE = []
       include Aws::Structure
@@ -11695,8 +11783,9 @@ module Aws::WAFV2
     # one or more Amazon Web Services resources to protect. The resource
     # types include Amazon CloudFront distribution, Amazon API Gateway REST
     # API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito
-    # user pool, App Runner service, Amplify application, and Amazon Web
-    # Services Verified Access instance.
+    # user pool, App Runner service, Amplify application, Amazon Web
+    # Services Verified Access instance, and Amazon Bedrock AgentCore
+    # Gateway.
     #
     # @!attribute [rw] name
     #   The name of the web ACL. You cannot change the name of a web ACL
@@ -12010,11 +12099,21 @@ module Aws::WAFV2
     #   and then uses the transformed component contents.
     #   @return [Array<Types::TextTransformation>]
     #
+    # @!attribute [rw] pre_parse_text_transformations
+    #   Pre-parse text transformations normalize the raw query string before
+    #   WAF parses it into individual query arguments. They are applied
+    #   before the standard text transformations. Pre-parse text
+    #   transformations are only supported when `FieldToMatch` is
+    #   `SingleQueryArgument` or `AllQueryArguments`. You can specify up to
+    #   10 pre-parse text transformations per rule statement.
+    #   @return [Array<Types::PreParseTextTransformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/XssMatchStatement AWS API Documentation
     #
     class XssMatchStatement < Struct.new(
       :field_to_match,
-      :text_transformations)
+      :text_transformations,
+      :pre_parse_text_transformations)
       SENSITIVE = []
       include Aws::Structure
     end

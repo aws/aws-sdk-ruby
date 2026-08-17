@@ -80,7 +80,7 @@ module Aws
       id: ::String?,
       external_id: ::String?,
       name: ::String,
-      data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
+      data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT" | "VIDEO" | "ANNOTATION" | "JSON"),
       data_type_spec: ::String?,
       unit: ::String?,
       type: Params::property_type
@@ -100,6 +100,18 @@ module Aws
       type expression_variable = {
       name: ::String,
       value: Params::variable_value
+    }
+
+      type file_format = {
+      csv: {
+        column_names: Array[("ALIAS" | "ASSET_ID" | "PROPERTY_ID" | "DATA_TYPE" | "TIMESTAMP_SECONDS" | "TIMESTAMP_NANO_OFFSET" | "QUALITY" | "VALUE")]
+      }?,
+      parquet: {
+      }?,
+      mp4: {
+      }?,
+      annotation: {
+      }?
     }
 
       type computation_model_data_binding_value = {
@@ -126,9 +138,24 @@ module Aws
       ]?
     }
 
+      type session_config = {
+      session_start_timestamp: {
+        time_in_seconds: ::Integer,
+        offset_in_nanos: ::Integer?
+      },
+      session_end_timestamp: {
+        time_in_seconds: ::Integer,
+        offset_in_nanos: ::Integer?
+      }
+    }
+
+      type dataset_config = {
+      session: Params::session_config?
+    }
+
       type dataset_source = {
-      source_type: ("KENDRA"),
-      source_format: ("KNOWLEDGE_BASE"),
+      source_type: ("KENDRA" | "SITEWISE"),
+      source_format: ("KNOWLEDGE_BASE" | "TIMESERIES"),
       source_detail: {
         kendra: {
           knowledge_base_arn: ::String,
@@ -137,11 +164,36 @@ module Aws
       }?
     }
 
+      type trim_settings = {
+      start_time: {
+        time_in_seconds: ::Integer,
+        offset_in_nanos: ::Integer?
+      },
+      end_time: {
+        time_in_seconds: ::Integer,
+        offset_in_nanos: ::Integer?
+      }
+    }
+
+      type container_task_configuration = {
+      ecr_uri: ::String,
+      task_execution_role: ::String,
+      processing_type: ("GENERIC_COMPUTE_PROCESSING" | "HARDWARE_ACCELERATED_PROCESSING"),
+      processing_unit: ("UNITS_2" | "UNITS_4" | "UNITS_8" | "UNITS_12" | "UNITS_16" | "UNITS_24" | "UNITS_32" | "UNITS_36" | "UNITS_48" | "UNITS_60" | "UNITS_64" | "UNITS_72" | "UNITS_84" | "UNITS_96"),
+      command: Array[::String]?,
+      timeout_seconds: ::Integer?,
+      environment_variables: Hash[::String, ::String]?
+    }
+
+      type task_configuration = {
+      container_task_configuration: Params::container_task_configuration?
+    }
+
       type asset_model_property = {
       id: ::String?,
       external_id: ::String?,
       name: ::String,
-      data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
+      data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT" | "VIDEO" | "ANNOTATION" | "JSON"),
       data_type_spec: ::String?,
       unit: ::String?,
       type: Params::property_type,

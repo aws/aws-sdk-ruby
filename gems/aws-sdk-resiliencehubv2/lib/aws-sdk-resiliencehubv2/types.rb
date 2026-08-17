@@ -590,7 +590,7 @@ module Aws::Resiliencehubv2
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   The AWS Regions where the service operates.
+    #   The Regions where the service operates.
     #   @return [Array<String>]
     #
     # @!attribute [rw] permission_model
@@ -701,6 +701,55 @@ module Aws::Resiliencehubv2
     #
     class CreateSystemResponse < Struct.new(
       :system)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_arn
+    #   The ARN of the service to create the test for.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_template_arn
+    #   The ARN of the test template to configure.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_configuration
+    #   The logging configuration for the test.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @!attribute [rw] stop_conditions
+    #   The stop conditions for the test.
+    #   @return [Array<Types::StopCondition>]
+    #
+    # @!attribute [rw] role_name
+    #   The name of the IAM execution role to use when running the test.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameter values for the test.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/CreateTestRequest AWS API Documentation
+    #
+    class CreateTestRequest < Struct.new(
+      :service_arn,
+      :test_template_arn,
+      :logging_configuration,
+      :stop_conditions,
+      :role_name,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test
+    #   The created test.
+    #   @return [Types::Test]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/CreateTestResponse AWS API Documentation
+    #
+    class CreateTestResponse < Struct.new(
+      :test)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -994,6 +1043,61 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # @!attribute [rw] test_id
+    #   The identifier of the test to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DeleteTestRequest AWS API Documentation
+    #
+    class DeleteTestRequest < Struct.new(
+      :test_id,
+      :service_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_id
+    #   The identifier of the deleted test.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DeleteTestResponse AWS API Documentation
+    #
+    class DeleteTestResponse < Struct.new(
+      :test_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_id
+    #   The identifier of the test to remove sources from.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_sources
+    #   The monitoring sources to remove.
+    #   @return [Array<Types::TestSourceInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DeleteTestSourcesRequest AWS API Documentation
+    #
+    class DeleteTestSourcesRequest < Struct.new(
+      :test_id,
+      :service_arn,
+      :test_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DeleteTestSourcesResponse AWS API Documentation
+    #
+    class DeleteTestSourcesResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] system_arn
     #   ARN identifier.
     #   @return [String]
@@ -1262,6 +1366,26 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # Details about an AWS Fault Injection Service (AWS FIS) experiment run
+    # as part of a test run.
+    #
+    # @!attribute [rw] experiment_arn
+    #   The ARN of the AWS FIS experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Additional details about the experiment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ExperimentDetails AWS API Documentation
+    #
+    class ExperimentDetails < Struct.new(
+      :experiment_arn,
+      :details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details when report generation failed.
     #
     # @!attribute [rw] error_code
@@ -1511,6 +1635,88 @@ module Aws::Resiliencehubv2
     #
     class GetSystemResponse < Struct.new(
       :system)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_id
+    #   The identifier of the test to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetTestRequest AWS API Documentation
+    #
+    class GetTestRequest < Struct.new(
+      :test_id,
+      :service_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test
+    #   The requested test.
+    #   @return [Types::Test]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetTestResponse AWS API Documentation
+    #
+    class GetTestResponse < Struct.new(
+      :test)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_id
+    #   The identifier of the test run to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetTestRunRequest AWS API Documentation
+    #
+    class GetTestRunRequest < Struct.new(
+      :test_run_id,
+      :service_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run
+    #   The requested test run.
+    #   @return [Types::TestRun]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetTestRunResponse AWS API Documentation
+    #
+    class GetTestRunResponse < Struct.new(
+      :test_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_template_arn
+    #   The ARN of the test template to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetTestTemplateRequest AWS API Documentation
+    #
+    class GetTestTemplateRequest < Struct.new(
+      :test_template_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_template
+    #   The requested test template.
+    #   @return [Types::TestTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetTestTemplateResponse AWS API Documentation
+    #
+    class GetTestTemplateResponse < Struct.new(
+      :test_template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2060,6 +2266,10 @@ module Aws::Resiliencehubv2
     #   Filter reports by type.
     #   @return [String]
     #
+    # @!attribute [rw] test_run_id
+    #   The unique identifier of a test run.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   Pagination page size.
     #   @return [Integer]
@@ -2073,6 +2283,7 @@ module Aws::Resiliencehubv2
     class ListReportsRequest < Struct.new(
       :service_arn,
       :report_type,
+      :test_run_id,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -2091,6 +2302,51 @@ module Aws::Resiliencehubv2
     #
     class ListReportsResponse < Struct.new(
       :report_generation_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_id
+    #   The identifier of the test run to list resolved target resources
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListResolvedTestRunTargetResourcesRequest AWS API Documentation
+    #
+    class ListResolvedTestRunTargetResourcesRequest < Struct.new(
+      :test_run_id,
+      :service_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resolved_target_resources
+    #   The list of resolved target resources.
+    #   @return [Array<Types::ResolvedTargetResource>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListResolvedTestRunTargetResourcesResponse AWS API Documentation
+    #
+    class ListResolvedTestRunTargetResourcesResponse < Struct.new(
+      :resolved_target_resources,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2474,6 +2730,259 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # @!attribute [rw] test_run_id
+    #   The identifier of the test run to list events for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   Return events at or after this timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   Return events at or before this timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunEventsRequest AWS API Documentation
+    #
+    class ListTestRunEventsRequest < Struct.new(
+      :test_run_id,
+      :service_arn,
+      :started_at,
+      :ended_at,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events
+    #   The list of test run events.
+    #   @return [Array<Types::TestRunEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunEventsResponse AWS API Documentation
+    #
+    class ListTestRunEventsResponse < Struct.new(
+      :events,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_id
+    #   The identifier of the test run to list sources for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Filter sources by type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunSourcesRequest AWS API Documentation
+    #
+    class ListTestRunSourcesRequest < Struct.new(
+      :test_run_id,
+      :service_arn,
+      :type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_sources
+    #   The list of monitoring source snapshots.
+    #   @return [Array<Types::TestRunSourceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunSourcesResponse AWS API Documentation
+    #
+    class ListTestRunSourcesResponse < Struct.new(
+      :test_run_sources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_arn
+    #   The ARN of the service to list test runs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_id
+    #   Filter test runs by test identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunsRequest AWS API Documentation
+    #
+    class ListTestRunsRequest < Struct.new(
+      :service_arn,
+      :test_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_runs
+    #   The list of test run summaries.
+    #   @return [Array<Types::TestRunSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunsResponse AWS API Documentation
+    #
+    class ListTestRunsResponse < Struct.new(
+      :test_runs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_id
+    #   The identifier of the test to list sources for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Filter sources by type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestSourcesRequest AWS API Documentation
+    #
+    class ListTestSourcesRequest < Struct.new(
+      :test_id,
+      :service_arn,
+      :type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_sources
+    #   The list of configured monitoring sources.
+    #   @return [Array<Types::TestSourceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestSourcesResponse AWS API Documentation
+    #
+    class ListTestSourcesResponse < Struct.new(
+      :test_sources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestTemplatesRequest AWS API Documentation
+    #
+    class ListTestTemplatesRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] test_templates
+    #   The list of test template summaries.
+    #   @return [Array<Types::TestTemplateSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestTemplatesResponse AWS API Documentation
+    #
+    class ListTestTemplatesResponse < Struct.new(
+      :test_templates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_arn
+    #   The ARN of the service to list tests for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestsRequest AWS API Documentation
+    #
+    class ListTestsRequest < Struct.new(
+      :service_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tests
+    #   The list of test summaries.
+    #   @return [Array<Types::TestSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestsResponse AWS API Documentation
+    #
+    class ListTestsResponse < Struct.new(
+      :tests,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] system_arn
     #   ARN identifier.
     #   @return [String]
@@ -2509,6 +3018,30 @@ module Aws::Resiliencehubv2
     class ListUserJourneysResponse < Struct.new(
       :user_journey_summaries,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for test execution logging destinations.
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket for log delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_log_group_arn
+    #   The ARN of the CloudWatch Logs log group for log delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_schema_version
+    #   The version of the log schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/LoggingConfiguration AWS API Documentation
+    #
+    class LoggingConfiguration < Struct.new(
+      :s3_bucket_name,
+      :cloud_watch_log_group_arn,
+      :log_schema_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2561,6 +3094,54 @@ module Aws::Resiliencehubv2
       :rto_in_minutes,
       :rpo_in_minutes,
       :disaster_recovery_approach)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies an observability alarm by its ARN.
+    #
+    # @!attribute [rw] alarm_arn
+    #   The ARN of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ObservabilityAlarmInput AWS API Documentation
+    #
+    class ObservabilityAlarmInput < Struct.new(
+      :alarm_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a configured observability alarm.
+    #
+    # @!attribute [rw] alarm_arn
+    #   The ARN of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_name
+    #   The name of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Region of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the source was configured.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ObservabilityAlarmSummary AWS API Documentation
+    #
+    class ObservabilityAlarmSummary < Struct.new(
+      :alarm_arn,
+      :alarm_name,
+      :region,
+      :account_id,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2723,6 +3304,32 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # @!attribute [rw] test_id
+    #   The identifier of the test to add sources to.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_sources
+    #   The monitoring sources to add or update.
+    #   @return [Array<Types::TestSourceInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/PutTestSourcesRequest AWS API Documentation
+    #
+    class PutTestSourcesRequest < Struct.new(
+      :test_id,
+      :service_arn,
+      :test_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/PutTestSourcesResponse AWS API Documentation
+    #
+    class PutTestSourcesResponse < Aws::EmptyStructure; end
+
     # A data point in a dependency query range.
     #
     # @!attribute [rw] timestamp
@@ -2789,6 +3396,16 @@ module Aws::Resiliencehubv2
     #   Present for FAILURE\_MODE reports.
     #   @return [String]
     #
+    # @!attribute [rw] test_run_id
+    #   The unique identifier of a test run.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_template_arn
+    #   An ARN owned by the service. Accepts either a standard 12-digit
+    #   account ID or the literal "aws" for AWS-managed resources, such as
+    #   AWS-managed test templates.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the report was created.
     #   @return [Time]
@@ -2804,6 +3421,8 @@ module Aws::Resiliencehubv2
       :status,
       :service_arn,
       :assessment_id,
+      :test_run_id,
+      :test_template_arn,
       :created_at,
       :report_output)
       SENSITIVE = []
@@ -2858,6 +3477,32 @@ module Aws::Resiliencehubv2
 
       class S3 < ReportOutputConfiguration; end
       class Unknown < ReportOutputConfiguration; end
+    end
+
+    # A single AWS resource that AWS Fault Injection Service (AWS FIS)
+    # resolved as a target during a test run.
+    #
+    # @!attribute [rw] resource_type
+    #   The AWS FIS resource type the target belongs to, such as
+    #   aws:ec2:instance, aws:ecs:task, or aws:eks:pod.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_name
+    #   The name of the target in the AWS FIS experiment template.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_information
+    #   The raw target information map as returned by AWS FIS.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ResolvedTargetResource AWS API Documentation
+    #
+    class ResolvedTargetResource < Struct.new(
+      :resource_type,
+      :target_name,
+      :target_information)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Represents an AWS resource discovered by Resilience Hub.
@@ -3064,7 +3709,7 @@ module Aws::Resiliencehubv2
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   The AWS Regions where the service operates.
+    #   The Regions where the service operates.
     #   @return [Array<String>]
     #
     # @!attribute [rw] permission_model
@@ -3761,7 +4406,7 @@ module Aws::Resiliencehubv2
     #   @return [Array<Types::AssociatedSystem>]
     #
     # @!attribute [rw] regions
-    #   The AWS Regions where the service operates.
+    #   The Regions where the service operates.
     #   @return [Array<String>]
     #
     # @!attribute [rw] policy_arn
@@ -4008,6 +4653,101 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # @!attribute [rw] test_id
+    #   The identifier of the test to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/StartTestRunRequest AWS API Documentation
+    #
+    class StartTestRunRequest < Struct.new(
+      :test_id,
+      :service_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_id
+    #   The identifier of the started test run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the started test run.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_arns
+    #   The ARNs of the AWS Fault Injection Service (AWS FIS) experiments
+    #   started for the run.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/StartTestRunResponse AWS API Documentation
+    #
+    class StartTestRunResponse < Struct.new(
+      :test_run_id,
+      :status,
+      :experiment_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A CloudWatch alarm that automatically stops a test run if it breaches
+    # its threshold.
+    #
+    # @!attribute [rw] source
+    #   The source of the stop condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the stop condition, such as the ARN of the CloudWatch
+    #   alarm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/StopCondition AWS API Documentation
+    #
+    class StopCondition < Struct.new(
+      :source,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_id
+    #   The identifier of the test run to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/StopTestRunRequest AWS API Documentation
+    #
+    class StopTestRunRequest < Struct.new(
+      :test_run_id,
+      :service_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_id
+    #   The identifier of the stopped test run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the test run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/StopTestRunResponse AWS API Documentation
+    #
+    class StopTestRunResponse < Struct.new(
+      :test_run_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a change from one string value to another.
     #
     # @!attribute [rw] old_value
@@ -4023,6 +4763,54 @@ module Aws::Resiliencehubv2
     class StringChange < Struct.new(
       :old_value,
       :new_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a success criteria alarm by its ARN.
+    #
+    # @!attribute [rw] alarm_arn
+    #   The ARN of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/SuccessCriteriaAlarmInput AWS API Documentation
+    #
+    class SuccessCriteriaAlarmInput < Struct.new(
+      :alarm_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a configured success criteria alarm.
+    #
+    # @!attribute [rw] alarm_arn
+    #   The ARN of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_name
+    #   The name of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Region of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the source was configured.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/SuccessCriteriaAlarmSummary AWS API Documentation
+    #
+    class SuccessCriteriaAlarmSummary < Struct.new(
+      :alarm_arn,
+      :alarm_name,
+      :region,
+      :account_id,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4485,6 +5273,669 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # Represents a test created for a service by configuring a test
+    # template.
+    #
+    # @!attribute [rw] test_id
+    #   The unique identifier of the test.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_template_arn
+    #   The ARN of the test template the test was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the test.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   The fault actions the test runs.
+    #   @return [Array<Types::TestAction>]
+    #
+    # @!attribute [rw] logging_configuration
+    #   The logging configuration for the test.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @!attribute [rw] stop_conditions
+    #   The stop conditions for the test.
+    #   @return [Array<Types::StopCondition>]
+    #
+    # @!attribute [rw] role_name
+    #   The name of the IAM execution role used to run the test.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameter values configured for the test.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] total_test_runs
+    #   The total number of runs of the test.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] successful_test_runs
+    #   The number of successful runs of the test.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the test was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/Test AWS API Documentation
+    #
+    class Test < Struct.new(
+      :test_id,
+      :test_template_arn,
+      :service_arn,
+      :name,
+      :actions,
+      :logging_configuration,
+      :stop_conditions,
+      :role_name,
+      :parameters,
+      :total_test_runs,
+      :successful_test_runs,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a fault action that a test runs, along with the resource
+    # type it targets.
+    #
+    # @!attribute [rw] action_id
+    #   The identifier of the fault action.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the fault action.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type that the action targets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestAction AWS API Documentation
+    #
+    class TestAction < Struct.new(
+      :action_id,
+      :description,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a single run of a test. Configuration is snapshotted from
+    # the test and service at the time the run is started.
+    #
+    # @!attribute [rw] test_run_id
+    #   The unique identifier of the test run.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_id
+    #   The identifier of the test that was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the test run.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp when the test run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the test run ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] experiments
+    #   The AWS Fault Injection Service (AWS FIS) experiments run as part of
+    #   the test run.
+    #   @return [Array<Types::ExperimentDetails>]
+    #
+    # @!attribute [rw] event_count
+    #   The number of events recorded for the test run. Use
+    #   ListTestRunEvents to retrieve the details.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parameters
+    #   The parameter values used for the test run.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] error_message
+    #   A human-readable reason for test run failure. Only present when the
+    #   status is FAILED or ERROR.
+    #   @return [String]
+    #
+    # @!attribute [rw] stop_conditions
+    #   The stop conditions snapshotted from the test when the run was
+    #   started.
+    #   @return [Array<Types::StopCondition>]
+    #
+    # @!attribute [rw] logging_configuration
+    #   The logging configuration snapshotted from the test when the run was
+    #   started.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @!attribute [rw] role_name
+    #   The IAM execution role name snapshotted from the test when the run
+    #   was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_template_arn
+    #   The ARN of the test template snapshotted from the test when the run
+    #   was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_configuration
+    #   The report configuration snapshotted from the service when the run
+    #   was started.
+    #   @return [Types::TestRunReportConfiguration]
+    #
+    # @!attribute [rw] policy
+    #   The resilience policy snapshotted from the service when the run was
+    #   started.
+    #   @return [Types::TestRunPolicySnapshot]
+    #
+    # @!attribute [rw] report_output
+    #   The report generation result for the test run. Present after report
+    #   generation completes or fails.
+    #   @return [Types::ReportGenerationResult]
+    #
+    # @!attribute [rw] region_switch_plan_arn
+    #   The ARN of the ARC Region switch plan associated with the test run.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_switch_execution_id
+    #   The identifier of the ARC Region switch execution detected during
+    #   the test run.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_model
+    #   The permission model snapshotted from the service when the run was
+    #   started.
+    #   @return [Types::PermissionModel]
+    #
+    # @!attribute [rw] regions
+    #   The Regions snapshotted from the service when the run was started.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] account_targeting
+    #   Indicates whether this test run targets a single account or multiple
+    #   accounts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRun AWS API Documentation
+    #
+    class TestRun < Struct.new(
+      :test_run_id,
+      :test_id,
+      :status,
+      :service_arn,
+      :started_at,
+      :ended_at,
+      :experiments,
+      :event_count,
+      :parameters,
+      :error_message,
+      :stop_conditions,
+      :logging_configuration,
+      :role_name,
+      :test_template_arn,
+      :report_configuration,
+      :policy,
+      :report_output,
+      :region_switch_plan_arn,
+      :region_switch_execution_id,
+      :permission_model,
+      :regions,
+      :account_targeting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single event in a test run's timeline.
+    #
+    # @!attribute [rw] event_id
+    #   The unique identifier of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The type of the event, such as action\_started, action\_completed,
+    #   or rto\_recovery\_detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable description of what happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp when the event occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attributes
+    #   Machine-parseable key-value attributes for the event.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunEvent AWS API Documentation
+    #
+    class TestRunEvent < Struct.new(
+      :event_id,
+      :event_type,
+      :message,
+      :timestamp,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an observability alarm snapshot captured for
+    # a test run.
+    #
+    # @!attribute [rw] alarm_arn
+    #   The ARN of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_name
+    #   The name of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Region of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunObservabilityAlarmSummary AWS API Documentation
+    #
+    class TestRunObservabilityAlarmSummary < Struct.new(
+      :alarm_arn,
+      :alarm_name,
+      :region,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A snapshot of the resilience policy captured onto a test run from the
+    # service when the run was started.
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_slo
+    #   The availability SLO targets.
+    #   @return [Types::AvailabilitySlo]
+    #
+    # @!attribute [rw] multi_az
+    #   The multi-AZ resilience targets.
+    #   @return [Types::MultiAzTargets]
+    #
+    # @!attribute [rw] multi_region
+    #   The multi-Region resilience targets.
+    #   @return [Types::MultiRegionTargets]
+    #
+    # @!attribute [rw] data_recovery
+    #   The data recovery targets.
+    #   @return [Types::DataRecoveryTargets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunPolicySnapshot AWS API Documentation
+    #
+    class TestRunPolicySnapshot < Struct.new(
+      :policy_arn,
+      :name,
+      :availability_slo,
+      :multi_az,
+      :multi_region,
+      :data_recovery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A snapshot of the report configuration captured onto a test run from
+    # the service when the run was started.
+    #
+    # @!attribute [rw] report_output
+    #   The output destinations for generated reports.
+    #   @return [Array<Types::ReportOutputConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunReportConfiguration AWS API Documentation
+    #
+    class TestRunReportConfiguration < Struct.new(
+      :report_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A monitoring-source snapshot captured for a test run. Exactly one
+    # member is set.
+    #
+    # @note TestRunSourceSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TestRunSourceSummary corresponding to the set member.
+    #
+    # @!attribute [rw] success_criteria_alarm
+    #   A success criteria alarm snapshot captured for the test run.
+    #   @return [Types::TestRunSuccessCriteriaAlarmSummary]
+    #
+    # @!attribute [rw] observability_alarm
+    #   An observability alarm snapshot captured for the test run.
+    #   @return [Types::TestRunObservabilityAlarmSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSourceSummary AWS API Documentation
+    #
+    class TestRunSourceSummary < Struct.new(
+      :success_criteria_alarm,
+      :observability_alarm,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SuccessCriteriaAlarm < TestRunSourceSummary; end
+      class ObservabilityAlarm < TestRunSourceSummary; end
+      class Unknown < TestRunSourceSummary; end
+    end
+
+    # Summary information about a success criteria alarm snapshot captured
+    # for a test run.
+    #
+    # @!attribute [rw] alarm_arn
+    #   The ARN of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_name
+    #   The name of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Region of the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the CloudWatch alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] outcome
+    #   The evaluation outcome of the source. Absent while the source has
+    #   not yet been evaluated; set to the terminal outcome afterwards.
+    #   @return [String]
+    #
+    # @!attribute [rw] outcome_reason
+    #   A human-readable reason for the outcome.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSuccessCriteriaAlarmSummary AWS API Documentation
+    #
+    class TestRunSuccessCriteriaAlarmSummary < Struct.new(
+      :alarm_arn,
+      :alarm_name,
+      :region,
+      :account_id,
+      :outcome,
+      :outcome_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a test run.
+    #
+    # @!attribute [rw] test_run_id
+    #   The unique identifier of the test run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the test run.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp when the test run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the test run ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] test_template_arn
+    #   The ARN of the test template the test run was based on.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A human-readable reason for test run failure. Only present when the
+    #   status is FAILED or ERROR.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_targeting
+    #   Indicates whether this test run targets a single account or multiple
+    #   accounts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSummary AWS API Documentation
+    #
+    class TestRunSummary < Struct.new(
+      :test_run_id,
+      :status,
+      :started_at,
+      :ended_at,
+      :test_template_arn,
+      :service_arn,
+      :error_message,
+      :account_targeting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a monitoring source to add to or remove from a test.
+    # Exactly one member is set.
+    #
+    # @note TestSourceInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] success_criteria_alarm
+    #   A success criteria alarm that determines whether the test passes or
+    #   fails.
+    #   @return [Types::SuccessCriteriaAlarmInput]
+    #
+    # @!attribute [rw] observability_alarm
+    #   An observability alarm included for visibility only.
+    #   @return [Types::ObservabilityAlarmInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestSourceInput AWS API Documentation
+    #
+    class TestSourceInput < Struct.new(
+      :success_criteria_alarm,
+      :observability_alarm,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SuccessCriteriaAlarm < TestSourceInput; end
+      class ObservabilityAlarm < TestSourceInput; end
+      class Unknown < TestSourceInput; end
+    end
+
+    # A configured monitoring source returned by ListTestSources. Exactly
+    # one member is set.
+    #
+    # @note TestSourceSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TestSourceSummary corresponding to the set member.
+    #
+    # @!attribute [rw] success_criteria_alarm
+    #   A configured success criteria alarm.
+    #   @return [Types::SuccessCriteriaAlarmSummary]
+    #
+    # @!attribute [rw] observability_alarm
+    #   A configured observability alarm.
+    #   @return [Types::ObservabilityAlarmSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestSourceSummary AWS API Documentation
+    #
+    class TestSourceSummary < Struct.new(
+      :success_criteria_alarm,
+      :observability_alarm,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SuccessCriteriaAlarm < TestSourceSummary; end
+      class ObservabilityAlarm < TestSourceSummary; end
+      class Unknown < TestSourceSummary; end
+    end
+
+    # Contains summary information about a test.
+    #
+    # @!attribute [rw] test_id
+    #   The unique identifier of the test.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_template_arn
+    #   The ARN of the test template the test was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_test_runs
+    #   The total number of runs of the test.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] successful_test_runs
+    #   The number of successful runs of the test.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the test was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestSummary AWS API Documentation
+    #
+    class TestSummary < Struct.new(
+      :test_id,
+      :test_template_arn,
+      :service_arn,
+      :total_test_runs,
+      :successful_test_runs,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A pre-configured, AWS recommended test that defines which resilience
+    # capability to validate, the fault actions it runs, and the parameters
+    # it accepts.
+    #
+    # @!attribute [rw] test_template_arn
+    #   The ARN of the test template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the test template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the test template.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters the test template accepts.
+    #   @return [Array<Types::TestTemplateParameter>]
+    #
+    # @!attribute [rw] actions
+    #   The fault actions the test template runs.
+    #   @return [Array<Types::TestAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestTemplate AWS API Documentation
+    #
+    class TestTemplate < Struct.new(
+      :test_template_arn,
+      :name,
+      :description,
+      :parameters,
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a parameter accepted by a test template.
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Indicates whether the parameter is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_value
+    #   The default value of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_values
+    #   The maximum number of values the parameter accepts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestTemplateParameter AWS API Documentation
+    #
+    class TestTemplateParameter < Struct.new(
+      :name,
+      :description,
+      :type,
+      :required,
+      :default_value,
+      :max_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a test template.
+    #
+    # @!attribute [rw] test_template_arn
+    #   The ARN of the test template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the test template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the test template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestTemplateSummary AWS API Documentation
+    #
+    class TestTemplateSummary < Struct.new(
+      :test_template_arn,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A testing recommendation to address a finding.
     #
     # @!attribute [rw] suggested_changes
@@ -4863,6 +6314,55 @@ module Aws::Resiliencehubv2
     #
     class UpdateSystemResponse < Struct.new(
       :system)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_id
+    #   The identifier of the test to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_configuration
+    #   The updated logging configuration for the test.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @!attribute [rw] stop_conditions
+    #   The updated stop conditions for the test.
+    #   @return [Array<Types::StopCondition>]
+    #
+    # @!attribute [rw] role_name
+    #   The updated IAM execution role name.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The updated parameter values for the test.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/UpdateTestRequest AWS API Documentation
+    #
+    class UpdateTestRequest < Struct.new(
+      :test_id,
+      :service_arn,
+      :logging_configuration,
+      :stop_conditions,
+      :role_name,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test
+    #   The updated test.
+    #   @return [Types::Test]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/UpdateTestResponse AWS API Documentation
+    #
+    class UpdateTestResponse < Struct.new(
+      :test)
       SENSITIVE = []
       include Aws::Structure
     end

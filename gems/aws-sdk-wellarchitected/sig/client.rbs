@@ -92,6 +92,79 @@ module Aws
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _CreateAgentContextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentContextResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_agent_context-instance_method
+      def create_agent_context: (
+                                  ?client_token: ::String,
+                                  profile_arn: ::String,
+                                  title: ::String,
+                                  context_type: ("APPLICATION"),
+                                  content: Params::context_content
+                                ) -> _CreateAgentContextResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentContextResponseSuccess
+
+      interface _CreateAgentGoalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentGoalResponse]
+        def goal: () -> Types::GoalSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_agent_goal-instance_method
+      def create_agent_goal: (
+                               ?client_token: ::String,
+                               profile_arn: ::String,
+                               pillars: Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")],
+                               title: ::String,
+                               ?description: ::String
+                             ) -> _CreateAgentGoalResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentGoalResponseSuccess
+
+      interface _CreateAgentProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentProfileResponse]
+        def name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def business_overview: () -> ::String
+        def pillars: () -> ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+        def deletion_protection: () -> bool
+        def execution_role_arn: () -> ::String
+        def aggregation_configuration: () -> ::Array[Types::AggregationConfiguration]
+        def arn: () -> ::String
+        def eligible_for_scheduled_generation: () -> bool
+        def eligible_for_architecture_generation: () -> bool
+        def field_errors: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Array[Types::Tag]
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def last_modified_by: () -> ::String
+        def last_modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_agent_profile-instance_method
+      def create_agent_profile: (
+                                  name: ::String,
+                                  ?display_name: ::String,
+                                  ?description: ::String,
+                                  ?business_overview: ::String,
+                                  pillars: Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")],
+                                  ?deletion_protection: bool,
+                                  execution_role_arn: ::String,
+                                  aggregation_configuration: Array[
+                                    {
+                                      account_id: ::String,
+                                      regions: Array[::String],
+                                      access_role_arn: ::String
+                                    }
+                                  ],
+                                  ?client_token: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    }
+                                  ]
+                                ) -> _CreateAgentProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentProfileResponseSuccess
+
       interface _CreateLensShareResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLensShareOutput]
         def share_id: () -> ::String
@@ -243,6 +316,35 @@ module Aws
                                  ) -> _CreateWorkloadShareResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkloadShareResponseSuccess
 
+      interface _DeleteAgentContextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentContextResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_agent_context-instance_method
+      def delete_agent_context: (
+                                  profile_arn: ::String,
+                                  id: ::String
+                                ) -> _DeleteAgentContextResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentContextResponseSuccess
+
+      interface _DeleteAgentGoalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentGoalResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_agent_goal-instance_method
+      def delete_agent_goal: (
+                               profile_arn: ::String,
+                               id: ::String
+                             ) -> _DeleteAgentGoalResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentGoalResponseSuccess
+
+      interface _DeleteAgentProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_agent_profile-instance_method
+      def delete_agent_profile: (
+                                  profile_arn: ::String
+                                ) -> _DeleteAgentProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentProfileResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_lens-instance_method
       def delete_lens: (
                          lens_alias: ::String,
@@ -328,6 +430,119 @@ module Aws
                          ?lens_version: ::String
                        ) -> _ExportLensResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportLensResponseSuccess
+
+      interface _GetAgentContextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentContextResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_agent_context-instance_method
+      def get_agent_context: (
+                               profile_arn: ::String,
+                               id: ::String
+                             ) -> _GetAgentContextResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentContextResponseSuccess
+
+      interface _GetAgentGoalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentGoalResponse]
+        def goal: () -> Types::GoalSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_agent_goal-instance_method
+      def get_agent_goal: (
+                            profile_arn: ::String,
+                            id: ::String
+                          ) -> _GetAgentGoalResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentGoalResponseSuccess
+
+      interface _GetAgentProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentProfileResponse]
+        def name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def business_overview: () -> ::String
+        def pillars: () -> ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+        def deletion_protection: () -> bool
+        def execution_role_arn: () -> ::String
+        def aggregation_configuration: () -> ::Array[Types::AggregationConfiguration]
+        def arn: () -> ::String
+        def eligible_for_scheduled_generation: () -> bool
+        def eligible_for_architecture_generation: () -> bool
+        def field_errors: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Array[Types::Tag]
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def last_modified_by: () -> ::String
+        def last_modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_agent_profile-instance_method
+      def get_agent_profile: (
+                               profile_arn: ::String
+                             ) -> _GetAgentProfileResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentProfileResponseSuccess
+
+      interface _GetAgentRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentRecommendationResponse]
+        def recommendation_arn: () -> ::String
+        def profile_arn: () -> ::String
+        def title: () -> ::String
+        def description: () -> ::String
+        def type: () -> ("RESOURCE" | "ARCHITECTURE" | "APPLICATION")
+        def pillar: () -> ("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")
+        def priority: () -> ("HIGH" | "MEDIUM" | "LOW")
+        def effort: () -> ("LARGE" | "MEDIUM" | "SMALL")
+        def status: () -> ("ACTIVE" | "SUPPRESSED" | "COMPLETED")
+        def state: () -> ("OPEN" | "CLOSED")
+        def update_reason: () -> ::String
+        def impact: () -> ("HIGH" | "MEDIUM" | "LOW")
+        def roi: () -> Types::Roi
+        def number_of_resources: () -> ::Integer
+        def aws_services: () -> ::Array[::String]
+        def business_units: () -> ::Array[::String]
+        def applications: () -> ::Array[::String]
+        def impact_details: () -> ::Array[::String]
+        def insights: () -> ::Array[Types::Insight]
+        def highlights: () -> ::Array[::String]
+        def remediation_summary: () -> Types::RemediationSummary
+        def cross_pillar_benefits: () -> ::Array[Types::CrossPillarBenefit]
+        def trade_offs: () -> ::Array[Types::TradeOff]
+        def sources: () -> ::Array[("TRUSTED_ADVISOR" | "COST_EXPLORER" | "CLOUDWATCH" | "WELL_ARCHITECTED_TOOL" | "WELL_ARCHITECTED_AGENT" | "CUSTOMER_IAC")]
+        def goals: () -> ::Array[Types::RecommendationGoal]
+        def tags: () -> ::Array[Types::Tag]
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def last_modified_by: () -> ::String
+        def last_modified_at: () -> ::Time
+        def remediations: () -> ::Array[Types::AgentRecommendationRemediation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_agent_recommendation-instance_method
+      def get_agent_recommendation: (
+                                      recommendation_arn: ::String,
+                                      ?remediation_type: ("AUTO_REMEDIATION" | "CONSOLE" | "CLI" | "SDK" | "IAC" | "MCP")
+                                    ) -> _GetAgentRecommendationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentRecommendationResponseSuccess
+
+      interface _GetAgentRecommendationGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentRecommendationGenerationResponse]
+        def id: () -> ::String
+        def profile_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("QUEUED" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+        def estimated_completion_time: () -> ::Time
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def last_modified_by: () -> ::String
+        def last_modified_at: () -> ::Time
+        def additional_context: () -> untyped
+        def scope: () -> Types::Scope
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def progress: () -> Types::Progress
+        def error_details: () -> Types::ErrorDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_agent_recommendation_generation-instance_method
+      def get_agent_recommendation_generation: (
+                                                 profile_arn: ::String,
+                                                 generation_id: ::String
+                                               ) -> _GetAgentRecommendationGenerationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentRecommendationGenerationResponseSuccess
 
       interface _GetAnswerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAnswerOutput]
@@ -518,6 +733,87 @@ module Aws
                          ?tags: Hash[::String, ::String]
                        ) -> _ImportLensResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportLensResponseSuccess
+
+      interface _ListAgentContextsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentContextsResponse]
+        def items: () -> ::Array[Types::ContextSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_agent_contexts-instance_method
+      def list_agent_contexts: (
+                                 profile_arn: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListAgentContextsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentContextsResponseSuccess
+
+      interface _ListAgentGoalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentGoalsResponse]
+        def items: () -> ::Array[Types::GoalSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_agent_goals-instance_method
+      def list_agent_goals: (
+                              profile_arn: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListAgentGoalsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentGoalsResponseSuccess
+
+      interface _ListAgentProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentProfilesResponse]
+        def items: () -> ::Array[Types::AgentProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_agent_profiles-instance_method
+      def list_agent_profiles: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListAgentProfilesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentProfilesResponseSuccess
+
+      interface _ListAgentRecommendationGenerationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentRecommendationGenerationsResponse]
+        def items: () -> ::Array[Types::AgentRecommendationGenerationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_agent_recommendation_generations-instance_method
+      def list_agent_recommendation_generations: (
+                                                   profile_arn: ::String,
+                                                   ?recommendation_type: ("RESOURCE" | "ARCHITECTURE" | "APPLICATION"),
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListAgentRecommendationGenerationsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentRecommendationGenerationsResponseSuccess
+
+      interface _ListAgentRecommendationItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentRecommendationItemsResponse]
+        def items: () -> ::Array[Types::AgentRecommendationItemSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_agent_recommendation_items-instance_method
+      def list_agent_recommendation_items: (
+                                             recommendation_arn: ::String,
+                                             ?type: ("AWS_RESOURCE" | "RECOMMENDATION"),
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListAgentRecommendationItemsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentRecommendationItemsResponseSuccess
+
+      interface _ListAgentRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentRecommendationsResponse]
+        def items: () -> ::Array[Types::AgentRecommendationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_agent_recommendations-instance_method
+      def list_agent_recommendations: (
+                                        profile_arn: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?state: ("OPEN" | "CLOSED"),
+                                        ?pillar: ("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")
+                                      ) -> _ListAgentRecommendationsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentRecommendationsResponseSuccess
 
       interface _ListAnswersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAnswersOutput]
@@ -812,6 +1108,50 @@ module Aws
                           ) -> _ListWorkloadsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkloadsResponseSuccess
 
+      interface _PutAgentRecommendationFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAgentRecommendationFeedbackResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#put_agent_recommendation_feedback-instance_method
+      def put_agent_recommendation_feedback: (
+                                               recommendation_arn: ::String,
+                                               type: ("USEFUL" | "NOT_USEFUL"),
+                                               ?feedback_category: ("OTHER" | "RECOMMENDATION_NOT_RELEVANT" | "RESOURCE_NOT_IMPORTANT" | "RESOURCE_TYPE_NOT_IMPORTANT" | "RECOMMENDATION_INCORRECT"),
+                                               ?comments: ::String
+                                             ) -> _PutAgentRecommendationFeedbackResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAgentRecommendationFeedbackResponseSuccess
+
+      interface _StartAgentRecommendationGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAgentRecommendationGenerationResponse]
+        def id: () -> ::String
+        def profile_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("QUEUED" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+        def estimated_completion_time: () -> ::Time
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def last_modified_by: () -> ::String
+        def last_modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#start_agent_recommendation_generation-instance_method
+      def start_agent_recommendation_generation: (
+                                                   profile_arn: ::String,
+                                                   types: Array[("RESOURCE" | "ARCHITECTURE" | "APPLICATION")],
+                                                   ?name: ::String,
+                                                   ?additional_context: {
+                                                   },
+                                                   scope: {
+                                                     pillars: Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")],
+                                                     goal_ids: Array[::String]?,
+                                                     items: Array[
+                                                       {
+                                                         pillar: ("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE"),
+                                                         ids: Array[::String]
+                                                       }
+                                                     ]?
+                                                   }
+                                                 ) -> _StartAgentRecommendationGenerationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAgentRecommendationGenerationResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
       end
@@ -831,6 +1171,85 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAgentContextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentContextResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_agent_context-instance_method
+      def update_agent_context: (
+                                  ?client_token: ::String,
+                                  profile_arn: ::String,
+                                  id: ::String,
+                                  ?title: ::String,
+                                  ?content: Params::context_content
+                                ) -> _UpdateAgentContextResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentContextResponseSuccess
+
+      interface _UpdateAgentGoalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentGoalResponse]
+        def goal: () -> Types::GoalSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_agent_goal-instance_method
+      def update_agent_goal: (
+                               ?client_token: ::String,
+                               profile_arn: ::String,
+                               id: ::String,
+                               ?pillars: Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")],
+                               ?title: ::String,
+                               ?description: ::String
+                             ) -> _UpdateAgentGoalResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentGoalResponseSuccess
+
+      interface _UpdateAgentProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentProfileResponse]
+        def name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def business_overview: () -> ::String
+        def pillars: () -> ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+        def deletion_protection: () -> bool
+        def execution_role_arn: () -> ::String
+        def aggregation_configuration: () -> ::Array[Types::AggregationConfiguration]
+        def arn: () -> ::String
+        def eligible_for_scheduled_generation: () -> bool
+        def eligible_for_architecture_generation: () -> bool
+        def field_errors: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Array[Types::Tag]
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def last_modified_by: () -> ::String
+        def last_modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_agent_profile-instance_method
+      def update_agent_profile: (
+                                  ?client_token: ::String,
+                                  profile_arn: ::String,
+                                  ?display_name: ::String,
+                                  ?description: ::String,
+                                  ?execution_role_arn: ::String,
+                                  ?aggregation_configuration: Array[
+                                    {
+                                      account_id: ::String,
+                                      regions: Array[::String],
+                                      access_role_arn: ::String
+                                    }
+                                  ],
+                                  ?business_overview: ::String,
+                                  ?pillars: Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")],
+                                  ?deletion_protection: bool
+                                ) -> _UpdateAgentProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentProfileResponseSuccess
+
+      interface _UpdateAgentRecommendationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentRecommendationStatusResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_agent_recommendation_status-instance_method
+      def update_agent_recommendation_status: (
+                                                recommendation_arn: ::String,
+                                                status: ("ACTIVE" | "SUPPRESSED" | "COMPLETED"),
+                                                ?update_reason: ::String
+                                              ) -> _UpdateAgentRecommendationStatusResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentRecommendationStatusResponseSuccess
 
       interface _UpdateAnswerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAnswerOutput]

@@ -6716,7 +6716,7 @@ module Aws::Deadline
     #
     # @!attribute [rw] job_attachment_settings
     #   The job attachment settings.
-    #   @return [Types::JobAttachmentSettings]
+    #   @return [Types::JobDetailsJobAttachmentSettings]
     #
     # @!attribute [rw] job_run_as_user
     #   The user name and group that the job uses when run.
@@ -6791,6 +6791,26 @@ module Aws::Deadline
     #
     class JobDetailsIdentifiers < Struct.new(
       :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The job attachment settings returned to workers for a job. These are
+    # the Amazon S3 bucket name and the Amazon S3 prefix.
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The Amazon S3 bucket name.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_prefix
+    #   The root prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/JobDetailsJobAttachmentSettings AWS API Documentation
+    #
+    class JobDetailsJobAttachmentSettings < Struct.new(
+      :s3_bucket_name,
+      :root_prefix)
       SENSITIVE = []
       include Aws::Structure
     end

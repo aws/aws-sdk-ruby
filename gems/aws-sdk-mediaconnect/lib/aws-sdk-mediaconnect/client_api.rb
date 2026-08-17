@@ -155,6 +155,8 @@ module Aws::MediaConnect
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     Entitlement = Shapes::StructureShape.new(name: 'Entitlement')
     EntitlementStatus = Shapes::StringShape.new(name: 'EntitlementStatus')
+    FabricConfiguration = Shapes::StructureShape.new(name: 'FabricConfiguration')
+    FabricLatencyMode = Shapes::StringShape.new(name: 'FabricLatencyMode')
     FailoverConfig = Shapes::StructureShape.new(name: 'FailoverConfig')
     FailoverInputSourcePriorityMode = Shapes::StringShape.new(name: 'FailoverInputSourcePriorityMode')
     FailoverMode = Shapes::StringShape.new(name: 'FailoverMode')
@@ -905,6 +907,7 @@ module Aws::MediaConnect
     CreateRouterOutputRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     CreateRouterOutputRequest.add_member(:maintenance_configuration, Shapes::ShapeRef.new(shape: MaintenanceConfiguration, location_name: "maintenanceConfiguration"))
     CreateRouterOutputRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "tags"))
+    CreateRouterOutputRequest.add_member(:fabric_configuration, Shapes::ShapeRef.new(shape: FabricConfiguration, location_name: "fabricConfiguration"))
     CreateRouterOutputRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateRouterOutputRequest.struct_class = Types::CreateRouterOutputRequest
 
@@ -1063,6 +1066,9 @@ module Aws::MediaConnect
     Entitlement.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     Entitlement.add_member(:subscribers, Shapes::ShapeRef.new(shape: __listOfString, required: true, location_name: "subscribers"))
     Entitlement.struct_class = Types::Entitlement
+
+    FabricConfiguration.add_member(:recovery_latency_mode, Shapes::ShapeRef.new(shape: FabricLatencyMode, required: true, location_name: "recoveryLatencyMode"))
+    FabricConfiguration.struct_class = Types::FabricConfiguration
 
     FailoverConfig.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     FailoverConfig.add_member(:recovery_window, Shapes::ShapeRef.new(shape: Integer, location_name: "recoveryWindow"))
@@ -1981,6 +1987,7 @@ module Aws::MediaConnect
     RouterOutput.add_member(:maintenance_configuration, Shapes::ShapeRef.new(shape: MaintenanceConfiguration, required: true, location_name: "maintenanceConfiguration"))
     RouterOutput.add_member(:maintenance_schedule_type, Shapes::ShapeRef.new(shape: MaintenanceScheduleType, location_name: "maintenanceScheduleType"))
     RouterOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    RouterOutput.add_member(:fabric_configuration, Shapes::ShapeRef.new(shape: FabricConfiguration, required: true, location_name: "fabricConfiguration"))
     RouterOutput.struct_class = Types::RouterOutput
 
     RouterOutputConfiguration.add_member(:standard, Shapes::ShapeRef.new(shape: StandardRouterOutputConfiguration, location_name: "standard"))
@@ -2518,6 +2525,7 @@ module Aws::MediaConnect
     UpdateRouterOutputRequest.add_member(:routing_scope, Shapes::ShapeRef.new(shape: RoutingScope, location_name: "routingScope"))
     UpdateRouterOutputRequest.add_member(:tier, Shapes::ShapeRef.new(shape: RouterOutputTier, location_name: "tier"))
     UpdateRouterOutputRequest.add_member(:maintenance_configuration, Shapes::ShapeRef.new(shape: MaintenanceConfiguration, location_name: "maintenanceConfiguration"))
+    UpdateRouterOutputRequest.add_member(:fabric_configuration, Shapes::ShapeRef.new(shape: FabricConfiguration, location_name: "fabricConfiguration"))
     UpdateRouterOutputRequest.struct_class = Types::UpdateRouterOutputRequest
 
     UpdateRouterOutputResponse.add_member(:router_output, Shapes::ShapeRef.new(shape: RouterOutput, required: true, location_name: "routerOutput"))

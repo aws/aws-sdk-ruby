@@ -109,6 +109,37 @@ module Aws
                                        reranking_model_type: ("CUSTOM" | "MANAGED" | "NONE")?
                                      },
                                      ?generate_response: bool,
+                                     ?memory_configuration: {
+                                       memory_id: ::String,
+                                       persistence_mode: ("DEFAULT" | "NONE")?,
+                                       retrieval_configs: Array[
+                                         {
+                                           metadata_filters: Array[
+                                             {
+                                               left: {
+                                                 metadata_key: ::String?
+                                               },
+                                               operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS" | "BEFORE" | "AFTER" | "CONTAINS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS"),
+                                               right: {
+                                                 metadata_value: {
+                                                   date_time_value: ::Time?,
+                                                   number_value: ::Float?,
+                                                   string_list_value: Array[::String]?,
+                                                   string_value: ::String?
+                                                 }?
+                                               }?
+                                             }
+                                           ]?,
+                                           namespace: ::String?,
+                                           namespace_path: ::String?,
+                                           strategy_id: ::String?
+                                         }
+                                       ]?,
+                                       session_binding: {
+                                         actor_id: ::String,
+                                         session_id: ::String
+                                       }?
+                                     },
                                      messages: Array[
                                        {
                                          content: {
@@ -143,6 +174,21 @@ module Aws
                                      }
                                    ) ?{ (*untyped) -> void } -> _AgenticRetrieveStreamResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _AgenticRetrieveStreamResponseSuccess
+
+      interface _CheckIngestedDocumentAclResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckIngestedDocumentAclResponse]
+        def has_access: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#check_ingested_document_acl-instance_method
+      def check_ingested_document_acl: (
+                                         data_source_id: ::String,
+                                         document_id: ::String,
+                                         knowledge_base_id: ::String,
+                                         user_context: {
+                                           user_id: ::String
+                                         }
+                                       ) -> _CheckIngestedDocumentAclResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckIngestedDocumentAclResponseSuccess
 
       interface _CreateInvocationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateInvocationResponse]
@@ -297,6 +343,18 @@ module Aws
                                 flow_identifier: ::String
                               ) -> _GetFlowExecutionResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFlowExecutionResponseSuccess
+
+      interface _GetIngestedDocumentAclResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIngestedDocumentAclResponse]
+        def document_acl: () -> Types::DocumentAcl
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#get_ingested_document_acl-instance_method
+      def get_ingested_document_acl: (
+                                       data_source_id: ::String,
+                                       document_id: ::String,
+                                       knowledge_base_id: ::String
+                                     ) -> _GetIngestedDocumentAclResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngestedDocumentAclResponseSuccess
 
       interface _GetInvocationStepResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInvocationStepResponse]

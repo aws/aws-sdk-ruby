@@ -191,6 +191,51 @@ module Aws
                                             ) -> _CreateStreamSessionConnectionResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamSessionConnectionResponseSuccess
 
+      interface _CreateStreamUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamUrlOutput]
+        def arn: () -> ::String
+        def stream_url_id: () -> ::String
+        def stream_url: () -> ::String
+        def status: () -> ("ACTIVE" | "EXPIRED" | "REVOKED" | "LIMIT_REACHED")
+        def status_reason: () -> ("userRevoked" | "revokedAndTerminatingSessions" | "revokedAndSessionsTerminated" | "streamGroupDeleted" | "applicationDeleted")
+        def expires_at: () -> ::Time
+        def created_at: () -> ::Time
+        def usage_limit: () -> ::Integer
+        def remaining_uses: () -> ::Integer
+        def stream_group_arn: () -> ::String
+        def application_arn: () -> ::String
+        def protocol: () -> ("WebRTC")
+        def locations: () -> ::Array[::String]
+        def session_length_seconds: () -> ::Integer
+        def description: () -> ::String
+        def additional_launch_args: () -> ::Array[::String]
+        def additional_environment_variables: () -> ::Hash[::String, ::String]
+        def role_arn: () -> ::String
+        def display_configuration: () -> Types::DisplayConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#create_stream_url-instance_method
+      def create_stream_url: (
+                               identifier: ::String,
+                               application_identifier: ::String,
+                               protocol: ("WebRTC"),
+                               url_expires_after_minutes: ::Integer,
+                               ?usage_limit: ::Integer,
+                               ?description: ::String,
+                               locations: Array[::String],
+                               ?session_length_seconds: ::Integer,
+                               ?additional_launch_args: Array[::String],
+                               ?additional_environment_variables: Hash[::String, ::String],
+                               ?role_arn: ::String,
+                               ?display_configuration: {
+                                 resolution: {
+                                   width: ::Integer,
+                                   height: ::Integer
+                                 }?
+                               },
+                               ?client_token: ::String
+                             ) -> _CreateStreamUrlResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamUrlResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#delete_application-instance_method
       def delete_application: (
                                 identifier: ::String
@@ -303,6 +348,46 @@ module Aws
                               ) -> _GetStreamSessionResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamSessionResponseSuccess
 
+      interface _GetStreamUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamUrlOutput]
+        def arn: () -> ::String
+        def stream_url_id: () -> ::String
+        def stream_url: () -> ::String
+        def status: () -> ("ACTIVE" | "EXPIRED" | "REVOKED" | "LIMIT_REACHED")
+        def status_reason: () -> ("userRevoked" | "revokedAndTerminatingSessions" | "revokedAndSessionsTerminated" | "streamGroupDeleted" | "applicationDeleted")
+        def expires_at: () -> ::Time
+        def created_at: () -> ::Time
+        def usage_limit: () -> ::Integer
+        def remaining_uses: () -> ::Integer
+        def stream_group_arn: () -> ::String
+        def application_arn: () -> ::String
+        def protocol: () -> ("WebRTC")
+        def locations: () -> ::Array[::String]
+        def session_length_seconds: () -> ::Integer
+        def description: () -> ::String
+        def additional_launch_args: () -> ::Array[::String]
+        def additional_environment_variables: () -> ::Hash[::String, ::String]
+        def role_arn: () -> ::String
+        def display_configuration: () -> Types::DisplayConfiguration
+        def stream_sessions: () -> ::Array[Types::StreamSessionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#get_stream_url-instance_method
+      def get_stream_url: (
+                            identifier: ::String,
+                            stream_url_identifier: ::String
+                          ) -> _GetStreamUrlResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamUrlResponseSuccess
+
+      interface _ListApplicationShaderCachesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationShaderCachesOutput]
+        def items: () -> ::Array[Types::ShaderCacheSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#list_application_shader_caches-instance_method
+      def list_application_shader_caches: (
+                                            identifier: ::String
+                                          ) -> _ListApplicationShaderCachesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationShaderCachesResponseSuccess
+
       interface _ListApplicationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsOutput]
         def items: () -> ::Array[Types::ApplicationSummary]
@@ -356,6 +441,20 @@ module Aws
                                            ) -> _ListStreamSessionsByAccountResponseSuccess
                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamSessionsByAccountResponseSuccess
 
+      interface _ListStreamUrlsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamUrlsOutput]
+        def items: () -> ::Array[Types::StreamUrlSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#list_stream_urls-instance_method
+      def list_stream_urls: (
+                              ?status: ("ACTIVE" | "EXPIRED" | "REVOKED" | "LIMIT_REACHED"),
+                              ?stream_group_identifier: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListStreamUrlsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamUrlsResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def tags: () -> ::Hash[::String, ::String]
@@ -372,6 +471,14 @@ module Aws
                                            locations: Array[::String]
                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#revoke_stream_url-instance_method
+      def revoke_stream_url: (
+                               identifier: ::String,
+                               stream_url_identifier: ::String,
+                               ?revocation_mode: ("REVOKE_URL" | "REVOKE_AND_TERMINATE_SESSIONS")
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _StartStreamSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartStreamSessionOutput]

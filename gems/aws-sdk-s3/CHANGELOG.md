@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Issue - Bound memory usage in `upload_stream` when the source produces data faster than parts can be uploaded.
 
+1.229.0 (2026-08-06)
+------------------
+
+* Feature - AWS Backup now lets you create read-only access points for Amazon S3 recovery points, enabling you to access backup data using S3 APIs without initiating a restore.
+
+1.228.2 (2026-07-30)
+------------------
+
+* Issue - S3 Encryption Client, encryptionV2 and encryptionV3, returns a decryption error for a malformed material description.
+
 1.228.1 (2026-07-23)
 ------------------
 

@@ -471,6 +471,7 @@ module Aws::MediaConvert
       attr_accessor coded_frame_rate: Types::FrameRate
       attr_accessor color_primaries: ("ITU_709" | "UNSPECIFIED" | "RESERVED" | "ITU_470M" | "ITU_470BG" | "SMPTE_170M" | "SMPTE_240M" | "GENERIC_FILM" | "ITU_2020" | "SMPTE_428_1" | "SMPTE_431_2" | "SMPTE_EG_432_1" | "IPT" | "SMPTE_2067XYZ" | "EBU_3213_E" | "LAST")
       attr_accessor content_light_level: Types::ContentLightLevel
+      attr_accessor field_order: ::String
       attr_accessor height: ::Integer
       attr_accessor level: ::String
       attr_accessor matrix_coefficients: ("RGB" | "ITU_709" | "UNSPECIFIED" | "RESERVED" | "FCC" | "ITU_470BG" | "SMPTE_170M" | "SMPTE_240M" | "YCgCo" | "ITU_2020_NCL" | "ITU_2020_CL" | "SMPTE_2085" | "CD_NCL" | "CD_CL" | "ITU_2100ICtCp" | "IPT" | "EBU3213" | "LAST")
@@ -512,6 +513,7 @@ module Aws::MediaConvert
     end
 
     class Container
+      attr_accessor bit_rate: ::Integer
       attr_accessor duration: ::Float
       attr_accessor format: ("mp4" | "quicktime" | "matroska" | "webm" | "mxf" | "wave" | "avi" | "mpegts" | "mpegps" | "mp3")
       attr_accessor start_timecode: ::String
@@ -1800,6 +1802,7 @@ module Aws::MediaConvert
     end
 
     class MovSettings
+      attr_accessor audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")
       attr_accessor clap_atom: ("INCLUDE" | "EXCLUDE")
       attr_accessor cslg_atom: ("INCLUDE" | "EXCLUDE")
       attr_accessor mpeg_2_four_cc_control: ("XDCAM" | "MPEG")
@@ -2226,7 +2229,7 @@ module Aws::MediaConvert
     class S3DestinationSettings
       attr_accessor access_control: Types::S3DestinationAccessControl
       attr_accessor encryption: Types::S3EncryptionSettings
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "GLACIER_IR")
       SENSITIVE: []
     end
 

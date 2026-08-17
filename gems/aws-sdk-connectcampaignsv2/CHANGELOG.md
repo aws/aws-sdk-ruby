@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2026-07-31)
+------------------
+
+* Feature - Launching feature for abandonment rate pacing control for outbound campaigns.
+
 1.30.0 (2026-07-09)
 ------------------
 

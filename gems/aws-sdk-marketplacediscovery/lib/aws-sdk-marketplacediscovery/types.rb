@@ -997,11 +997,6 @@ module Aws::MarketplaceDiscovery
     #   the seller.
     #   @return [String]
     #
-    # @!attribute [rw] agreement_proposal_id
-    #   An encoded string to be passed by the acceptor of the terms when
-    #   creating an agreement.
-    #   @return [String]
-    #
     # @!attribute [rw] expiration_time
     #   The date and time until when the offer can be procured. This value
     #   is null for offers that never expire.
@@ -1014,6 +1009,15 @@ module Aws::MarketplaceDiscovery
     # @!attribute [rw] seller_of_record
     #   The entity responsible for selling the product under this offer.
     #   @return [Types::SellerInformation]
+    #
+    # @!attribute [rw] associated_entities
+    #   The products and offer sets associated with this offer.
+    #   @return [Array<Types::OfferAssociatedEntity>]
+    #
+    # @!attribute [rw] agreement_proposal_id
+    #   An encoded string to be passed by the acceptor of the terms when
+    #   creating an agreement.
+    #   @return [String]
     #
     # @!attribute [rw] replacement_agreement_id
     #   The identifier of the existing agreement that this offer would
@@ -1030,24 +1034,20 @@ module Aws::MarketplaceDiscovery
     #   pricing, future dated, or replacement offer.
     #   @return [Array<Types::PurchaseOptionBadge>]
     #
-    # @!attribute [rw] associated_entities
-    #   The products and offer sets associated with this offer.
-    #   @return [Array<Types::OfferAssociatedEntity>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferOutput AWS API Documentation
     #
     class GetOfferOutput < Struct.new(
       :offer_id,
       :catalog,
       :offer_name,
-      :agreement_proposal_id,
       :expiration_time,
       :available_from_time,
       :seller_of_record,
+      :associated_entities,
+      :agreement_proposal_id,
       :replacement_agreement_id,
       :pricing_model,
-      :badges,
-      :associated_entities)
+      :badges)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1187,6 +1187,10 @@ module Aws::MarketplaceDiscovery
     #   The human-readable display name of the product.
     #   @return [String]
     #
+    # @!attribute [rw] manufacturer
+    #   The entity who manufactured the product.
+    #   @return [Types::SellerInformation]
+    #
     # @!attribute [rw] deployed_on_aws
     #   Indicates whether the product is deployed on AWS infrastructure.
     #   @return [String]
@@ -1199,10 +1203,6 @@ module Aws::MarketplaceDiscovery
     #   A detailed description of what the product does, in paragraph
     #   format.
     #   @return [String]
-    #
-    # @!attribute [rw] manufacturer
-    #   The entity who manufactured the product.
-    #   @return [Types::SellerInformation]
     #
     # @!attribute [rw] logo_thumbnail_url
     #   The URL of the logo thumbnail image for the product.
@@ -1243,10 +1243,10 @@ module Aws::MarketplaceDiscovery
       :product_id,
       :catalog,
       :product_name,
+      :manufacturer,
       :deployed_on_aws,
       :short_description,
       :long_description,
-      :manufacturer,
       :logo_thumbnail_url,
       :fulfillment_option_summaries,
       :categories,
@@ -1588,6 +1588,10 @@ module Aws::MarketplaceDiscovery
     #   The entity who created and published the listing.
     #   @return [Types::SellerInformation]
     #
+    # @!attribute [rw] fulfillment_option_summaries
+    #   A summary of fulfillment options available for the listing.
+    #   @return [Array<Types::FulfillmentOptionSummary>]
+    #
     # @!attribute [rw] catalog
     #   The name of the catalog that the listing belongs to.
     #   @return [String]
@@ -1603,10 +1607,6 @@ module Aws::MarketplaceDiscovery
     # @!attribute [rw] categories
     #   The categories used to classify this listing into logical groups.
     #   @return [Array<Types::Category>]
-    #
-    # @!attribute [rw] fulfillment_option_summaries
-    #   A summary of fulfillment options available for the listing.
-    #   @return [Array<Types::FulfillmentOptionSummary>]
     #
     # @!attribute [rw] badges
     #   Badges indicating special attributes of the listing.
@@ -1635,11 +1635,11 @@ module Aws::MarketplaceDiscovery
       :listing_id,
       :listing_name,
       :publisher,
+      :fulfillment_option_summaries,
       :catalog,
       :short_description,
       :logo_thumbnail_url,
       :categories,
-      :fulfillment_option_summaries,
       :badges,
       :review_summary,
       :pricing_models,
@@ -1659,6 +1659,31 @@ module Aws::MarketplaceDiscovery
     #
     class ListingSummaryAssociatedEntity < Struct.new(
       :product)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a net payment term that sets how many days after the invoice
+    # date the payment is due.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the term.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The category of the term.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_due_period
+    #   The duration after invoice date by which payment is due.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/NetPaymentTerm AWS API Documentation
+    #
+    class NetPaymentTerm < Struct.new(
+      :id,
+      :type,
+      :payment_due_period)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1811,6 +1836,10 @@ module Aws::MarketplaceDiscovery
     #   Defines a variable payment term with a maximum total charge amount.
     #   @return [Types::VariablePaymentTerm]
     #
+    # @!attribute [rw] net_payment_term
+    #   A net payment term.
+    #   @return [Types::NetPaymentTerm]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/OfferTerm AWS API Documentation
     #
     class OfferTerm < Struct.new(
@@ -1826,6 +1855,7 @@ module Aws::MarketplaceDiscovery
       :usage_based_pricing_term,
       :validity_term,
       :variable_payment_term,
+      :net_payment_term,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1843,6 +1873,7 @@ module Aws::MarketplaceDiscovery
       class UsageBasedPricingTerm < OfferTerm; end
       class ValidityTerm < OfferTerm; end
       class VariablePaymentTerm < OfferTerm; end
+      class NetPaymentTerm < OfferTerm; end
       class Unknown < OfferTerm; end
     end
 

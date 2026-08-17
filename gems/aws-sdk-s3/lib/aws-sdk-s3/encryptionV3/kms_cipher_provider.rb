@@ -54,7 +54,7 @@ module Aws
             cek_alg = envelope['x-amz-c']
             encryption_context =
               if !envelope['x-amz-t'].nil?
-                Json.load(envelope['x-amz-t'])
+                extract_encryption_context(envelope['x-amz-t'])
               else
                 ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
                 ##% If the mapkey x-amz-t is not present, the default Material Description value MUST be set to an empty map (`{}`).
@@ -101,6 +101,18 @@ module Aws
         end
 
         private
+
+        # Raise a decryption error for a malformed material description.
+        def extract_encryption_context(matdesc)
+          context = Json.load(matdesc) if matdesc.is_a?(String)
+          unless context.is_a?(Hash)
+            raise Errors::DecryptionError, 'Malformed material description'
+          end
+
+          context
+        rescue Aws::Json::ParseError, EncodingError
+          raise Errors::DecryptionError, 'Malformed material description'
+        end
 
         def validate_key_wrap(key_wrap_schema)
           case key_wrap_schema

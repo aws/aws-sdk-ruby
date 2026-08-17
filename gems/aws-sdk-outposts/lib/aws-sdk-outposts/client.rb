@@ -1110,7 +1110,7 @@ module Aws::Outposts
     #   resp.instances_to_exclude.account_ids #=> Array
     #   resp.instances_to_exclude.account_ids[0] #=> String
     #   resp.instances_to_exclude.services #=> Array
-    #   resp.instances_to_exclude.services[0] #=> String, one of "AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
+    #   resp.instances_to_exclude.services[0] #=> String, one of "AWS", "EC2", "EKS", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
     #   resp.dry_run #=> Boolean
     #   resp.capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "WAITING_FOR_EVACUATION", "CANCELLATION_IN_PROGRESS", "CANCELLED"
     #   resp.failed.reason #=> String
@@ -1748,7 +1748,7 @@ module Aws::Outposts
     #     asset_id_filter: ["AssetId"],
     #     instance_type_filter: ["OutpostInstanceType"],
     #     account_id_filter: ["AccountId"],
-    #     aws_service_filter: ["AWS"], # accepts AWS, EC2, ELASTICACHE, ELB, RDS, ROUTE53
+    #     aws_service_filter: ["AWS"], # accepts AWS, EC2, EKS, ELASTICACHE, ELB, RDS, ROUTE53
     #     max_results: 1,
     #     next_token: "Token",
     #   })
@@ -1760,7 +1760,7 @@ module Aws::Outposts
     #   resp.asset_instances[0].instance_type #=> String
     #   resp.asset_instances[0].asset_id #=> String
     #   resp.asset_instances[0].account_id #=> String
-    #   resp.asset_instances[0].aws_service_name #=> String, one of "AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
+    #   resp.asset_instances[0].aws_service_name #=> String, one of "AWS", "EC2", "EKS", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListAssetInstances AWS API Documentation
@@ -1892,7 +1892,7 @@ module Aws::Outposts
     #   resp.blocking_instances #=> Array
     #   resp.blocking_instances[0].instance_id #=> String
     #   resp.blocking_instances[0].account_id #=> String
-    #   resp.blocking_instances[0].aws_service_name #=> String, one of "AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
+    #   resp.blocking_instances[0].aws_service_name #=> String, one of "AWS", "EC2", "EKS", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListBlockingInstancesForCapacityTask AWS API Documentation
@@ -2484,7 +2484,7 @@ module Aws::Outposts
     #     instances_to_exclude: {
     #       instances: ["InstanceId"],
     #       account_ids: ["AccountId"],
-    #       services: ["AWS"], # accepts AWS, EC2, ELASTICACHE, ELB, RDS, ROUTE53
+    #       services: ["AWS"], # accepts AWS, EC2, EKS, ELASTICACHE, ELB, RDS, ROUTE53
     #     },
     #     dry_run: false,
     #     task_action_on_blocking_instances: "WAIT_FOR_EVACUATION", # accepts WAIT_FOR_EVACUATION, FAIL_TASK
@@ -2504,7 +2504,7 @@ module Aws::Outposts
     #   resp.instances_to_exclude.account_ids #=> Array
     #   resp.instances_to_exclude.account_ids[0] #=> String
     #   resp.instances_to_exclude.services #=> Array
-    #   resp.instances_to_exclude.services[0] #=> String, one of "AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
+    #   resp.instances_to_exclude.services[0] #=> String, one of "AWS", "EC2", "EKS", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
     #   resp.dry_run #=> Boolean
     #   resp.capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "WAITING_FOR_EVACUATION", "CANCELLATION_IN_PROGRESS", "CANCELLED"
     #   resp.failed.reason #=> String
@@ -3182,7 +3182,7 @@ module Aws::Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

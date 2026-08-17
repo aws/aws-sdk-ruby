@@ -298,6 +298,21 @@ module Aws::Backup
       SENSITIVE: []
     end
 
+    class CreateBackupAccessPointRequest
+      attr_accessor access_point_metadata: ::Hash[::String, ::String]
+      attr_accessor access_point_policy: ::String
+      attr_accessor name: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:access_point_metadata, :tags]
+    end
+
+    class CreateBackupAccessPointResponse
+      attr_accessor access_point_arn: ::String
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "DELETING" | "DISASSOCIATED" | "DISASSOCIATING" | "EXPIRED" | "FAILED")
+      SENSITIVE: []
+    end
+
     class CreateBackupPlanInput
       attr_accessor backup_plan: Types::BackupPlanInput
       attr_accessor backup_plan_tags: ::Hash[::String, ::String]
@@ -479,6 +494,11 @@ module Aws::Backup
       SENSITIVE: []
     end
 
+    class DeleteBackupAccessPointInput
+      attr_accessor access_point_arn: ::String
+      SENSITIVE: []
+    end
+
     class DeleteBackupPlanInput
       attr_accessor backup_plan_id: ::String
       SENSITIVE: []
@@ -559,6 +579,26 @@ module Aws::Backup
       attr_accessor type: ::String
       attr_accessor context: ::String
       SENSITIVE: []
+    end
+
+    class DescribeBackupAccessPointInput
+      attr_accessor access_point_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBackupAccessPointResponse
+      attr_accessor access_point_arn: ::String
+      attr_accessor access_point_metadata: ::Hash[::String, ::String]
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor backup_vault_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "DELETING" | "DISASSOCIATED" | "DISASSOCIATING" | "EXPIRED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: [:access_point_metadata]
     end
 
     class DescribeBackupJobInput
@@ -937,7 +977,7 @@ module Aws::Backup
       attr_accessor backup_vault_name: ::String
       attr_accessor backup_vault_arn: ::String
       attr_accessor sns_topic_arn: ::String
-      attr_accessor backup_vault_events: ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED")]
+      attr_accessor backup_vault_events: ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED" | "ACCESS_POINT_AVAILABLE" | "ACCESS_POINT_CREATION_FAILED" | "ACCESS_POINT_DELETED" | "ACCESS_POINT_DELETION_FAILED" | "ACCESS_POINT_EXPIRED" | "ACCESS_POINT_DISASSOCIATED")]
       SENSITIVE: []
     end
 
@@ -1160,6 +1200,59 @@ module Aws::Backup
       attr_accessor message: ::String
       attr_accessor type: ::String
       attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessPointsMember
+      attr_accessor access_point_arn: ::String
+      attr_accessor access_point_metadata: ::Hash[::String, ::String]
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor backup_vault_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "DELETING" | "DISASSOCIATED" | "DISASSOCIATING" | "EXPIRED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: [:access_point_metadata]
+    end
+
+    class ListBackupAccessPointsByRecoveryPointRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor recovery_point_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupAccessPointsByRecoveryPointResponse
+      attr_accessor backup_access_points: ::Array[Types::ListAccessPointsMember]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupAccessPointsByResourceRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupAccessPointsByResourceResponse
+      attr_accessor backup_access_points: ::Array[Types::ListAccessPointsMember]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupAccessPointsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupAccessPointsResponse
+      attr_accessor backup_access_points: ::Array[Types::ListAccessPointsMember]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1652,7 +1745,7 @@ module Aws::Backup
     class PutBackupVaultNotificationsInput
       attr_accessor backup_vault_name: ::String
       attr_accessor sns_topic_arn: ::String
-      attr_accessor backup_vault_events: ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED")]
+      attr_accessor backup_vault_events: ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED" | "ACCESS_POINT_AVAILABLE" | "ACCESS_POINT_CREATION_FAILED" | "ACCESS_POINT_DELETED" | "ACCESS_POINT_DELETION_FAILED" | "ACCESS_POINT_EXPIRED" | "ACCESS_POINT_DISASSOCIATED")]
       SENSITIVE: []
     end
 

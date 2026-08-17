@@ -125,6 +125,16 @@ module Aws
                                                 ) -> _AssociateWhatsAppBusinessAccountResponseSuccess
                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWhatsAppBusinessAccountResponseSuccess
 
+      interface _CreateWhatsAppDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWhatsAppDatasetOutput]
+        def dataset_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#create_whats_app_dataset-instance_method
+      def create_whats_app_dataset: (
+                                      id: ::String
+                                    ) -> _CreateWhatsAppDatasetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWhatsAppDatasetResponseSuccess
+
       interface _CreateWhatsAppFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateWhatsAppFlowOutput]
         def flow_id: () -> ::String
@@ -466,6 +476,18 @@ module Aws
                                                                ]
                                                              ) -> _PutWhatsAppBusinessAccountEventDestinationsResponseSuccess
                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutWhatsAppBusinessAccountEventDestinationsResponseSuccess
+
+      interface _SendWhatsAppConversionEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendWhatsAppConversionEventOutput]
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#send_whats_app_conversion_event-instance_method
+      def send_whats_app_conversion_event: (
+                                             id: ::String,
+                                             dataset_id: ::String,
+                                             event_data: ::String
+                                           ) -> _SendWhatsAppConversionEventResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendWhatsAppConversionEventResponseSuccess
 
       interface _SendWhatsAppMessageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SendWhatsAppMessageOutput]

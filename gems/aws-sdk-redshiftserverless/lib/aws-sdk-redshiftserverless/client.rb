@@ -3871,6 +3871,10 @@ module Aws::RedshiftServerless
     #
     #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
     #
+    #   If your admin user account is locked, this operation also unlocks your
+    #   account and resets the failed-login counter. This option is available
+    #   only when account lockout security is enabled for the namespace.
+    #
     # @option params [String] :admin_username
     #   The username of the administrator for the first database created in
     #   the namespace. This parameter must be updated together with
@@ -4405,7 +4409,7 @@ module Aws::RedshiftServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

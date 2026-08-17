@@ -33,8 +33,14 @@ module Aws::CleanRooms
     AggregationConstraint = Shapes::StructureShape.new(name: 'AggregationConstraint')
     AggregationConstraintMinimumInteger = Shapes::IntegerShape.new(name: 'AggregationConstraintMinimumInteger')
     AggregationConstraints = Shapes::ListShape.new(name: 'AggregationConstraints')
+    AggregationThreshold = Shapes::StructureShape.new(name: 'AggregationThreshold')
+    AggregationThresholdIdentityColumnsList = Shapes::ListShape.new(name: 'AggregationThresholdIdentityColumnsList')
+    AggregationThresholdList = Shapes::ListShape.new(name: 'AggregationThresholdList')
+    AggregationThresholdMinimumIdentityCountInteger = Shapes::IntegerShape.new(name: 'AggregationThresholdMinimumIdentityCountInteger')
+    AggregationThresholdType = Shapes::StringShape.new(name: 'AggregationThresholdType')
     AggregationType = Shapes::StringShape.new(name: 'AggregationType')
     AllowedAdditionalAnalyses = Shapes::ListShape.new(name: 'AllowedAdditionalAnalyses')
+    AllowedAggregateExpressionType = Shapes::StringShape.new(name: 'AllowedAggregateExpressionType')
     AllowedAnalysesList = Shapes::ListShape.new(name: 'AllowedAnalysesList')
     AllowedAnalysisProviderList = Shapes::ListShape.new(name: 'AllowedAnalysisProviderList')
     AllowedColumnList = Shapes::ListShape.new(name: 'AllowedColumnList')
@@ -42,6 +48,16 @@ module Aws::CleanRooms
     AllowedResultRegions = Shapes::ListShape.new(name: 'AllowedResultRegions')
     AnalysisFormat = Shapes::StringShape.new(name: 'AnalysisFormat')
     AnalysisIdentifier = Shapes::StringShape.new(name: 'AnalysisIdentifier')
+    AnalysisLogExport = Shapes::StructureShape.new(name: 'AnalysisLogExport')
+    AnalysisLogExportError = Shapes::StructureShape.new(name: 'AnalysisLogExportError')
+    AnalysisLogExportIdentifier = Shapes::StringShape.new(name: 'AnalysisLogExportIdentifier')
+    AnalysisLogExportOutputConfiguration = Shapes::StructureShape.new(name: 'AnalysisLogExportOutputConfiguration')
+    AnalysisLogExportResultConfiguration = Shapes::StructureShape.new(name: 'AnalysisLogExportResultConfiguration')
+    AnalysisLogExportS3OutputConfiguration = Shapes::StructureShape.new(name: 'AnalysisLogExportS3OutputConfiguration')
+    AnalysisLogExportS3OutputConfigurationBucketString = Shapes::StringShape.new(name: 'AnalysisLogExportS3OutputConfigurationBucketString')
+    AnalysisLogExportStatus = Shapes::StringShape.new(name: 'AnalysisLogExportStatus')
+    AnalysisLogExportSummary = Shapes::StructureShape.new(name: 'AnalysisLogExportSummary')
+    AnalysisLogExportSummaryList = Shapes::ListShape.new(name: 'AnalysisLogExportSummaryList')
     AnalysisMethod = Shapes::StringShape.new(name: 'AnalysisMethod')
     AnalysisParameter = Shapes::StructureShape.new(name: 'AnalysisParameter')
     AnalysisParameterList = Shapes::ListShape.new(name: 'AnalysisParameterList')
@@ -170,6 +186,7 @@ module Aws::CleanRooms
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ColumnTypeString = Shapes::StringShape.new(name: 'ColumnTypeString')
     CommercialRegion = Shapes::StringShape.new(name: 'CommercialRegion')
+    ComparisonControls = Shapes::StructureShape.new(name: 'ComparisonControls')
     ComputeConfiguration = Shapes::UnionShape.new(name: 'ComputeConfiguration')
     ConfigurationDetails = Shapes::UnionShape.new(name: 'ConfigurationDetails')
     ConfiguredAudienceModelArn = Shapes::StringShape.new(name: 'ConfiguredAudienceModelArn')
@@ -309,6 +326,8 @@ module Aws::CleanRooms
     FilterableMemberStatus = Shapes::StringShape.new(name: 'FilterableMemberStatus')
     Float = Shapes::FloatShape.new(name: 'Float')
     GenericResourceName = Shapes::StringShape.new(name: 'GenericResourceName')
+    GetAnalysisLogExportInput = Shapes::StructureShape.new(name: 'GetAnalysisLogExportInput')
+    GetAnalysisLogExportOutput = Shapes::StructureShape.new(name: 'GetAnalysisLogExportOutput')
     GetAnalysisTemplateInput = Shapes::StructureShape.new(name: 'GetAnalysisTemplateInput')
     GetAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'GetAnalysisTemplateOutput')
     GetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'GetCollaborationAnalysisTemplateInput')
@@ -427,6 +446,8 @@ module Aws::CleanRooms
     JoinRequiredOption = Shapes::StringShape.new(name: 'JoinRequiredOption')
     KMSKeyArn = Shapes::StringShape.new(name: 'KMSKeyArn')
     KeyPrefix = Shapes::StringShape.new(name: 'KeyPrefix')
+    ListAnalysisLogExportsInput = Shapes::StructureShape.new(name: 'ListAnalysisLogExportsInput')
+    ListAnalysisLogExportsOutput = Shapes::StructureShape.new(name: 'ListAnalysisLogExportsOutput')
     ListAnalysisTemplatesInput = Shapes::StructureShape.new(name: 'ListAnalysisTemplatesInput')
     ListAnalysisTemplatesOutput = Shapes::StructureShape.new(name: 'ListAnalysisTemplatesOutput')
     ListCollaborationAnalysisTemplatesInput = Shapes::StructureShape.new(name: 'ListCollaborationAnalysisTemplatesInput')
@@ -473,6 +494,7 @@ module Aws::CleanRooms
     ListSchemasOutput = Shapes::StructureShape.new(name: 'ListSchemasOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    LogExportAnalysisType = Shapes::StringShape.new(name: 'LogExportAnalysisType')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MLMemberAbilities = Shapes::StructureShape.new(name: 'MLMemberAbilities')
     MLPaymentConfig = Shapes::StructureShape.new(name: 'MLPaymentConfig')
@@ -509,6 +531,9 @@ module Aws::CleanRooms
     MembershipSyntheticDataGenerationPaymentConfig = Shapes::StructureShape.new(name: 'MembershipSyntheticDataGenerationPaymentConfig')
     ModelInferencePaymentConfig = Shapes::StructureShape.new(name: 'ModelInferencePaymentConfig')
     ModelTrainingPaymentConfig = Shapes::StructureShape.new(name: 'ModelTrainingPaymentConfig')
+    OutputColumnThreshold = Shapes::StructureShape.new(name: 'OutputColumnThreshold')
+    OutputColumnThresholdList = Shapes::ListShape.new(name: 'OutputColumnThresholdList')
+    OutputColumnThresholdMinimumIdentityCountInteger = Shapes::IntegerShape.new(name: 'OutputColumnThresholdMinimumIdentityCountInteger')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParameterMap = Shapes::MapShape.new(name: 'ParameterMap')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
@@ -652,6 +677,8 @@ module Aws::CleanRooms
     SparkProperties = Shapes::MapShape.new(name: 'SparkProperties')
     SparkPropertyKey = Shapes::StringShape.new(name: 'SparkPropertyKey')
     SparkPropertyValue = Shapes::StringShape.new(name: 'SparkPropertyValue')
+    StartAnalysisLogExportInput = Shapes::StructureShape.new(name: 'StartAnalysisLogExportInput')
+    StartAnalysisLogExportOutput = Shapes::StructureShape.new(name: 'StartAnalysisLogExportOutput')
     StartProtectedJobInput = Shapes::StructureShape.new(name: 'StartProtectedJobInput')
     StartProtectedJobOutput = Shapes::StructureShape.new(name: 'StartProtectedJobOutput')
     StartProtectedQueryInput = Shapes::StructureShape.new(name: 'StartProtectedQueryInput')
@@ -768,6 +795,17 @@ module Aws::CleanRooms
 
     AggregationConstraints.member = Shapes::ShapeRef.new(shape: AggregationConstraint)
 
+    AggregationThreshold.add_member(:identity_columns, Shapes::ShapeRef.new(shape: AggregationThresholdIdentityColumnsList, required: true, location_name: "identityColumns"))
+    AggregationThreshold.add_member(:minimum_identity_count, Shapes::ShapeRef.new(shape: AggregationThresholdMinimumIdentityCountInteger, required: true, location_name: "minimumIdentityCount"))
+    AggregationThreshold.add_member(:type, Shapes::ShapeRef.new(shape: AggregationThresholdType, required: true, location_name: "type"))
+    AggregationThreshold.add_member(:output_column_thresholds, Shapes::ShapeRef.new(shape: OutputColumnThresholdList, location_name: "outputColumnThresholds"))
+    AggregationThreshold.add_member(:allowed_aggregate_expression_type, Shapes::ShapeRef.new(shape: AllowedAggregateExpressionType, required: true, location_name: "allowedAggregateExpressionType"))
+    AggregationThreshold.struct_class = Types::AggregationThreshold
+
+    AggregationThresholdIdentityColumnsList.member = Shapes::ShapeRef.new(shape: AnalysisRuleColumnName)
+
+    AggregationThresholdList.member = Shapes::ShapeRef.new(shape: AggregationThreshold)
+
     AllowedAdditionalAnalyses.member = Shapes::ShapeRef.new(shape: AdditionalAnalysesResourceArn)
 
     AllowedAnalysesList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateArnOrQueryWildcard)
@@ -779,6 +817,40 @@ module Aws::CleanRooms
     AllowedResultReceivers.member = Shapes::ShapeRef.new(shape: AccountId)
 
     AllowedResultRegions.member = Shapes::ShapeRef.new(shape: SupportedS3Region)
+
+    AnalysisLogExport.add_member(:analysis_log_export_id, Shapes::ShapeRef.new(shape: AnalysisLogExportIdentifier, required: true, location_name: "analysisLogExportId"))
+    AnalysisLogExport.add_member(:analysis_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "analysisId"))
+    AnalysisLogExport.add_member(:analysis_type, Shapes::ShapeRef.new(shape: LogExportAnalysisType, required: true, location_name: "analysisType"))
+    AnalysisLogExport.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
+    AnalysisLogExport.add_member(:status, Shapes::ShapeRef.new(shape: AnalysisLogExportStatus, required: true, location_name: "status"))
+    AnalysisLogExport.add_member(:result_configuration, Shapes::ShapeRef.new(shape: AnalysisLogExportResultConfiguration, required: true, location_name: "resultConfiguration"))
+    AnalysisLogExport.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    AnalysisLogExport.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    AnalysisLogExport.add_member(:error, Shapes::ShapeRef.new(shape: AnalysisLogExportError, location_name: "error"))
+    AnalysisLogExport.struct_class = Types::AnalysisLogExport
+
+    AnalysisLogExportError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    AnalysisLogExportError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    AnalysisLogExportError.struct_class = Types::AnalysisLogExportError
+
+    AnalysisLogExportOutputConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: AnalysisLogExportS3OutputConfiguration, required: true, location_name: "s3"))
+    AnalysisLogExportOutputConfiguration.struct_class = Types::AnalysisLogExportOutputConfiguration
+
+    AnalysisLogExportResultConfiguration.add_member(:output_configuration, Shapes::ShapeRef.new(shape: AnalysisLogExportOutputConfiguration, required: true, location_name: "outputConfiguration"))
+    AnalysisLogExportResultConfiguration.struct_class = Types::AnalysisLogExportResultConfiguration
+
+    AnalysisLogExportS3OutputConfiguration.add_member(:bucket, Shapes::ShapeRef.new(shape: AnalysisLogExportS3OutputConfigurationBucketString, required: true, location_name: "bucket"))
+    AnalysisLogExportS3OutputConfiguration.add_member(:key_prefix, Shapes::ShapeRef.new(shape: KeyPrefix, location_name: "keyPrefix"))
+    AnalysisLogExportS3OutputConfiguration.struct_class = Types::AnalysisLogExportS3OutputConfiguration
+
+    AnalysisLogExportSummary.add_member(:analysis_log_export_id, Shapes::ShapeRef.new(shape: AnalysisLogExportIdentifier, required: true, location_name: "analysisLogExportId"))
+    AnalysisLogExportSummary.add_member(:analysis_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "analysisId"))
+    AnalysisLogExportSummary.add_member(:analysis_type, Shapes::ShapeRef.new(shape: LogExportAnalysisType, required: true, location_name: "analysisType"))
+    AnalysisLogExportSummary.add_member(:status, Shapes::ShapeRef.new(shape: AnalysisLogExportStatus, required: true, location_name: "status"))
+    AnalysisLogExportSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    AnalysisLogExportSummary.struct_class = Types::AnalysisLogExportSummary
+
+    AnalysisLogExportSummaryList.member = Shapes::ShapeRef.new(shape: AnalysisLogExportSummary)
 
     AnalysisParameter.add_member(:name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "name"))
     AnalysisParameter.add_member(:type, Shapes::ShapeRef.new(shape: ParameterType, required: true, location_name: "type"))
@@ -818,6 +890,8 @@ module Aws::CleanRooms
     AnalysisRuleCustom.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: AdditionalAnalyses, location_name: "additionalAnalyses"))
     AnalysisRuleCustom.add_member(:disallowed_output_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, location_name: "disallowedOutputColumns"))
     AnalysisRuleCustom.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyConfiguration, location_name: "differentialPrivacy"))
+    AnalysisRuleCustom.add_member(:aggregation_thresholds, Shapes::ShapeRef.new(shape: AggregationThresholdList, location_name: "aggregationThresholds"))
+    AnalysisRuleCustom.add_member(:comparison_controls, Shapes::ShapeRef.new(shape: ComparisonControls, location_name: "comparisonControls"))
     AnalysisRuleCustom.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
     AnalysisRuleCustom.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
     AnalysisRuleCustom.struct_class = Types::AnalysisRuleCustom
@@ -1256,6 +1330,10 @@ module Aws::CleanRooms
 
     ColumnMappingList.member = Shapes::ShapeRef.new(shape: SyntheticDataColumnProperties)
 
+    ComparisonControls.add_member(:allowed_literal_comparison_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "allowedLiteralComparisonColumns"))
+    ComparisonControls.add_member(:allowed_column_comparison_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "allowedColumnComparisonColumns"))
+    ComparisonControls.struct_class = Types::ComparisonControls
+
     ComputeConfiguration.add_member(:worker, Shapes::ShapeRef.new(shape: WorkerComputeConfiguration, location_name: "worker"))
     ComputeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ComputeConfiguration.add_member_subclass(:worker, Types::ComputeConfiguration::Worker)
@@ -1449,6 +1527,8 @@ module Aws::CleanRooms
     ConsolidatedPolicyCustom.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: AdditionalAnalyses, location_name: "additionalAnalyses"))
     ConsolidatedPolicyCustom.add_member(:disallowed_output_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, location_name: "disallowedOutputColumns"))
     ConsolidatedPolicyCustom.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyConfiguration, location_name: "differentialPrivacy"))
+    ConsolidatedPolicyCustom.add_member(:aggregation_thresholds, Shapes::ShapeRef.new(shape: AggregationThresholdList, location_name: "aggregationThresholds"))
+    ConsolidatedPolicyCustom.add_member(:comparison_controls, Shapes::ShapeRef.new(shape: ComparisonControls, location_name: "comparisonControls"))
     ConsolidatedPolicyCustom.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
     ConsolidatedPolicyCustom.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
     ConsolidatedPolicyCustom.struct_class = Types::ConsolidatedPolicyCustom
@@ -1798,6 +1878,13 @@ module Aws::CleanRooms
     ErrorMessageConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ErrorMessageType, required: true, location_name: "type"))
     ErrorMessageConfiguration.struct_class = Types::ErrorMessageConfiguration
 
+    GetAnalysisLogExportInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    GetAnalysisLogExportInput.add_member(:analysis_log_export_identifier, Shapes::ShapeRef.new(shape: AnalysisLogExportIdentifier, required: true, location: "uri", location_name: "analysisLogExportIdentifier"))
+    GetAnalysisLogExportInput.struct_class = Types::GetAnalysisLogExportInput
+
+    GetAnalysisLogExportOutput.add_member(:analysis_log_export, Shapes::ShapeRef.new(shape: AnalysisLogExport, required: true, location_name: "analysisLogExport"))
+    GetAnalysisLogExportOutput.struct_class = Types::GetAnalysisLogExportOutput
+
     GetAnalysisTemplateInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     GetAnalysisTemplateInput.add_member(:analysis_template_identifier, Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, required: true, location: "uri", location_name: "analysisTemplateIdentifier"))
     GetAnalysisTemplateInput.struct_class = Types::GetAnalysisTemplateInput
@@ -2146,6 +2233,8 @@ module Aws::CleanRooms
     IntermediateTableAnalysisRuleCustom.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
     IntermediateTableAnalysisRuleCustom.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyConfiguration, location_name: "differentialPrivacy"))
     IntermediateTableAnalysisRuleCustom.add_member(:disallowed_output_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, location_name: "disallowedOutputColumns"))
+    IntermediateTableAnalysisRuleCustom.add_member(:aggregation_thresholds, Shapes::ShapeRef.new(shape: AggregationThresholdList, location_name: "aggregationThresholds"))
+    IntermediateTableAnalysisRuleCustom.add_member(:comparison_controls, Shapes::ShapeRef.new(shape: ComparisonControls, location_name: "comparisonControls"))
     IntermediateTableAnalysisRuleCustom.struct_class = Types::IntermediateTableAnalysisRuleCustom
 
     IntermediateTableAnalysisRulePolicy.add_member(:v1, Shapes::ShapeRef.new(shape: IntermediateTableAnalysisRulePolicyV1, location_name: "v1"))
@@ -2237,6 +2326,17 @@ module Aws::CleanRooms
     JobParameterMap.value = Shapes::ShapeRef.new(shape: JobParameterValue)
 
     JoinOperatorsList.member = Shapes::ShapeRef.new(shape: JoinOperator)
+
+    ListAnalysisLogExportsInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    ListAnalysisLogExportsInput.add_member(:analysis_identifier, Shapes::ShapeRef.new(shape: UUID, location: "querystring", location_name: "analysisIdentifier"))
+    ListAnalysisLogExportsInput.add_member(:status, Shapes::ShapeRef.new(shape: AnalysisLogExportStatus, location: "querystring", location_name: "status"))
+    ListAnalysisLogExportsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListAnalysisLogExportsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAnalysisLogExportsInput.struct_class = Types::ListAnalysisLogExportsInput
+
+    ListAnalysisLogExportsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListAnalysisLogExportsOutput.add_member(:analysis_log_exports, Shapes::ShapeRef.new(shape: AnalysisLogExportSummaryList, required: true, location_name: "analysisLogExports"))
+    ListAnalysisLogExportsOutput.struct_class = Types::ListAnalysisLogExportsOutput
 
     ListAnalysisTemplatesInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     ListAnalysisTemplatesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -2582,6 +2682,12 @@ module Aws::CleanRooms
 
     ModelTrainingPaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
     ModelTrainingPaymentConfig.struct_class = Types::ModelTrainingPaymentConfig
+
+    OutputColumnThreshold.add_member(:output_column_name, Shapes::ShapeRef.new(shape: AnalysisRuleColumnName, required: true, location_name: "outputColumnName"))
+    OutputColumnThreshold.add_member(:minimum_identity_count, Shapes::ShapeRef.new(shape: OutputColumnThresholdMinimumIdentityCountInteger, required: true, location_name: "minimumIdentityCount"))
+    OutputColumnThreshold.struct_class = Types::OutputColumnThreshold
+
+    OutputColumnThresholdList.member = Shapes::ShapeRef.new(shape: OutputColumnThreshold)
 
     ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterName)
     ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterValue)
@@ -3067,6 +3173,15 @@ module Aws::CleanRooms
 
     SparkProperties.key = Shapes::ShapeRef.new(shape: SparkPropertyKey)
     SparkProperties.value = Shapes::ShapeRef.new(shape: SparkPropertyValue)
+
+    StartAnalysisLogExportInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    StartAnalysisLogExportInput.add_member(:analysis_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "analysisId"))
+    StartAnalysisLogExportInput.add_member(:analysis_type, Shapes::ShapeRef.new(shape: LogExportAnalysisType, required: true, location_name: "analysisType"))
+    StartAnalysisLogExportInput.add_member(:result_configuration, Shapes::ShapeRef.new(shape: AnalysisLogExportResultConfiguration, required: true, location_name: "resultConfiguration"))
+    StartAnalysisLogExportInput.struct_class = Types::StartAnalysisLogExportInput
+
+    StartAnalysisLogExportOutput.add_member(:analysis_log_export, Shapes::ShapeRef.new(shape: AnalysisLogExport, required: true, location_name: "analysisLogExport"))
+    StartAnalysisLogExportOutput.struct_class = Types::StartAnalysisLogExportOutput
 
     StartProtectedJobInput.add_member(:type, Shapes::ShapeRef.new(shape: ProtectedJobType, required: true, location_name: "type"))
     StartProtectedJobInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
@@ -3777,6 +3892,19 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_analysis_log_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAnalysisLogExport"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/analysislogexports/{analysisLogExportIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetAnalysisLogExportInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAnalysisLogExportOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_analysis_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAnalysisTemplate"
         o.http_method = "GET"
@@ -4060,6 +4188,25 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_analysis_log_exports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAnalysisLogExports"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/analysislogexports"
+        o.input = Shapes::ShapeRef.new(shape: ListAnalysisLogExportsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAnalysisLogExportsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_analysis_templates, Seahorse::Model::Operation.new.tap do |o|
@@ -4530,6 +4677,20 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:start_analysis_log_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAnalysisLogExport"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/analysislogexports"
+        o.input = Shapes::ShapeRef.new(shape: StartAnalysisLogExportInput)
+        o.output = Shapes::ShapeRef.new(shape: StartAnalysisLogExportOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:start_protected_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartProtectedJob"
         o.http_method = "POST"
@@ -4652,6 +4813,7 @@ module Aws::CleanRooms
         o.input = Shapes::ShapeRef.new(shape: UpdateConfiguredTableAnalysisRuleInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateConfiguredTableAnalysisRuleOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

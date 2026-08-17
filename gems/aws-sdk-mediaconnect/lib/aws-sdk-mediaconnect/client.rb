@@ -1296,6 +1296,7 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].maintenance_schedule.window.start #=> Time
     #   resp.router_outputs[0].maintenance_schedule.window.end #=> Time
     #   resp.router_outputs[0].maintenance_schedule.window.scheduled_time #=> Time
+    #   resp.router_outputs[0].fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
@@ -2592,6 +2593,9 @@ module Aws::MediaConnect
     # @option params [Hash<String,String>] :tags
     #   Key-value pairs that can be used to tag this router output.
     #
+    # @option params [Types::FabricConfiguration] :fabric_configuration
+    #   The fabric configuration settings for the router output.
+    #
     # @option params [String] :client_token
     #   A unique identifier for the request to ensure idempotency.
     #
@@ -2691,6 +2695,9 @@ module Aws::MediaConnect
     #     tags: {
     #       "String" => "String",
     #     },
+    #     fabric_configuration: {
+    #       recovery_latency_mode: "BALANCED", # required, accepts BALANCED, LOW_LATENCY
+    #     },
     #     client_token: "ClientToken",
     #   })
     #
@@ -2751,6 +2758,7 @@ module Aws::MediaConnect
     #   resp.router_output.maintenance_schedule.window.start #=> Time
     #   resp.router_output.maintenance_schedule.window.end #=> Time
     #   resp.router_output.maintenance_schedule.window.scheduled_time #=> Time
+    #   resp.router_output.fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateRouterOutput AWS API Documentation
     #
@@ -3946,6 +3954,7 @@ module Aws::MediaConnect
     #   resp.router_output.maintenance_schedule.window.start #=> Time
     #   resp.router_output.maintenance_schedule.window.end #=> Time
     #   resp.router_output.maintenance_schedule.window.scheduled_time #=> Time
+    #   resp.router_output.fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -7211,6 +7220,12 @@ module Aws::MediaConnect
     #   The updated maintenance configuration settings for the router output,
     #   including any changes to preferred maintenance windows and schedules.
     #
+    # @option params [Types::FabricConfiguration] :fabric_configuration
+    #   The updated fabric configuration settings for the router output. You
+    #   cannot update the fabric configuration while the output has an active
+    #   route. You must unroute the output before updating the fabric
+    #   configuration.
+    #
     # @return [Types::UpdateRouterOutputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRouterOutputResponse#router_output #router_output} => Types::RouterOutput
@@ -7300,6 +7315,9 @@ module Aws::MediaConnect
     #       default: {
     #       },
     #     },
+    #     fabric_configuration: {
+    #       recovery_latency_mode: "BALANCED", # required, accepts BALANCED, LOW_LATENCY
+    #     },
     #   })
     #
     # @example Response structure
@@ -7359,6 +7377,7 @@ module Aws::MediaConnect
     #   resp.router_output.maintenance_schedule.window.start #=> Time
     #   resp.router_output.maintenance_schedule.window.end #=> Time
     #   resp.router_output.maintenance_schedule.window.scheduled_time #=> Time
+    #   resp.router_output.fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateRouterOutput AWS API Documentation
     #
@@ -7387,7 +7406,7 @@ module Aws::MediaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

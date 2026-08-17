@@ -10507,13 +10507,18 @@ module Aws::MediaLive
     #   username for destination
     #   @return [String]
     #
+    # @!attribute [rw] virtual_source_address
+    #   Specifies the source IP address for outbound multicast packets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestinationSettings AWS API Documentation
     #
     class OutputDestinationSettings < Struct.new(
       :password_param,
       :stream_name,
       :url,
-      :username)
+      :username,
+      :virtual_source_address)
       SENSITIVE = []
       include Aws::Structure
     end

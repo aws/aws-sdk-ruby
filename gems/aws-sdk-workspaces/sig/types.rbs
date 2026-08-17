@@ -166,6 +166,7 @@ module Aws::WorkSpaces
     class ClientProperties
       attr_accessor reconnect_enabled: ("ENABLED" | "DISABLED")
       attr_accessor log_upload_enabled: ("ENABLED" | "DISABLED")
+      attr_accessor client_experience_policy: ::String
       SENSITIVE: []
     end
 

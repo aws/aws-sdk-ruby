@@ -135,6 +135,46 @@ module Aws::GameLiftStreams
       SENSITIVE: [:signal_response]
     end
 
+    class CreateStreamUrlInput
+      attr_accessor identifier: ::String
+      attr_accessor application_identifier: ::String
+      attr_accessor protocol: ("WebRTC")
+      attr_accessor url_expires_after_minutes: ::Integer
+      attr_accessor usage_limit: ::Integer
+      attr_accessor description: ::String
+      attr_accessor locations: ::Array[::String]
+      attr_accessor session_length_seconds: ::Integer
+      attr_accessor additional_launch_args: ::Array[::String]
+      attr_accessor additional_environment_variables: ::Hash[::String, ::String]
+      attr_accessor role_arn: ::String
+      attr_accessor display_configuration: Types::DisplayConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: [:role_arn]
+    end
+
+    class CreateStreamUrlOutput
+      attr_accessor arn: ::String
+      attr_accessor stream_url_id: ::String
+      attr_accessor stream_url: ::String
+      attr_accessor status: ("ACTIVE" | "EXPIRED" | "REVOKED" | "LIMIT_REACHED")
+      attr_accessor status_reason: ("userRevoked" | "revokedAndTerminatingSessions" | "revokedAndSessionsTerminated" | "streamGroupDeleted" | "applicationDeleted")
+      attr_accessor expires_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor usage_limit: ::Integer
+      attr_accessor remaining_uses: ::Integer
+      attr_accessor stream_group_arn: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor protocol: ("WebRTC")
+      attr_accessor locations: ::Array[::String]
+      attr_accessor session_length_seconds: ::Integer
+      attr_accessor description: ::String
+      attr_accessor additional_launch_args: ::Array[::String]
+      attr_accessor additional_environment_variables: ::Hash[::String, ::String]
+      attr_accessor role_arn: ::String
+      attr_accessor display_configuration: Types::DisplayConfiguration
+      SENSITIVE: [:stream_url, :role_arn]
+    end
+
     class DefaultApplication
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -262,8 +302,48 @@ module Aws::GameLiftStreams
       SENSITIVE: [:signal_request, :signal_response, :role_arn]
     end
 
+    class GetStreamUrlInput
+      attr_accessor identifier: ::String
+      attr_accessor stream_url_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamUrlOutput
+      attr_accessor arn: ::String
+      attr_accessor stream_url_id: ::String
+      attr_accessor stream_url: ::String
+      attr_accessor status: ("ACTIVE" | "EXPIRED" | "REVOKED" | "LIMIT_REACHED")
+      attr_accessor status_reason: ("userRevoked" | "revokedAndTerminatingSessions" | "revokedAndSessionsTerminated" | "streamGroupDeleted" | "applicationDeleted")
+      attr_accessor expires_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor usage_limit: ::Integer
+      attr_accessor remaining_uses: ::Integer
+      attr_accessor stream_group_arn: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor protocol: ("WebRTC")
+      attr_accessor locations: ::Array[::String]
+      attr_accessor session_length_seconds: ::Integer
+      attr_accessor description: ::String
+      attr_accessor additional_launch_args: ::Array[::String]
+      attr_accessor additional_environment_variables: ::Hash[::String, ::String]
+      attr_accessor role_arn: ::String
+      attr_accessor display_configuration: Types::DisplayConfiguration
+      attr_accessor stream_sessions: ::Array[Types::StreamSessionSummary]
+      SENSITIVE: [:stream_url, :role_arn]
+    end
+
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationShaderCachesInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationShaderCachesOutput
+      attr_accessor items: ::Array[Types::ShaderCacheSummary]
       SENSITIVE: []
     end
 
@@ -316,6 +396,20 @@ module Aws::GameLiftStreams
 
     class ListStreamSessionsOutput
       attr_accessor items: ::Array[Types::StreamSessionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamUrlsInput
+      attr_accessor status: ("ACTIVE" | "EXPIRED" | "REVOKED" | "LIMIT_REACHED")
+      attr_accessor stream_group_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListStreamUrlsOutput
+      attr_accessor items: ::Array[Types::StreamUrlSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -383,6 +477,13 @@ module Aws::GameLiftStreams
       SENSITIVE: []
     end
 
+    class RevokeStreamUrlInput
+      attr_accessor identifier: ::String
+      attr_accessor stream_url_identifier: ::String
+      attr_accessor revocation_mode: ("REVOKE_URL" | "REVOKE_AND_TERMINATE_SESSIONS")
+      SENSITIVE: []
+    end
+
     class RuntimeEnvironment
       attr_accessor type: ("PROTON" | "WINDOWS" | "UBUNTU")
       attr_accessor version: ::String
@@ -391,6 +492,16 @@ module Aws::GameLiftStreams
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ShaderCacheSummary
+      attr_accessor identifier: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor status: ("INITIALIZED" | "PROCESSING" | "READY" | "DELETING" | "ERROR")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor storage_bytes: ::Integer
+      attr_accessor associated_stream_groups: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -471,6 +582,23 @@ module Aws::GameLiftStreams
       attr_accessor location: ::String
       attr_accessor role_arn: ::String
       SENSITIVE: [:role_arn]
+    end
+
+    class StreamUrlSummary
+      attr_accessor arn: ::String
+      attr_accessor stream_url_id: ::String
+      attr_accessor stream_url: ::String
+      attr_accessor status: ("ACTIVE" | "EXPIRED" | "REVOKED" | "LIMIT_REACHED")
+      attr_accessor status_reason: ("userRevoked" | "revokedAndTerminatingSessions" | "revokedAndSessionsTerminated" | "streamGroupDeleted" | "applicationDeleted")
+      attr_accessor expires_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor usage_limit: ::Integer
+      attr_accessor remaining_uses: ::Integer
+      attr_accessor stream_group_arn: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor session_length_seconds: ::Integer
+      attr_accessor description: ::String
+      SENSITIVE: [:stream_url]
     end
 
     class TagResourceRequest

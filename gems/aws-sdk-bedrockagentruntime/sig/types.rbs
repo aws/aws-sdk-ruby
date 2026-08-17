@@ -102,6 +102,7 @@ module Aws::BedrockAgentRuntime
 
     class AgenticRetrieveAction
       attr_accessor full_document_expansion: Types::AgenticRetrieveFullDocExpansionDetails
+      attr_accessor memory_retrieve: Types::AgenticRetrieveMemoryRetrieveDetails
       attr_accessor retrieve: Types::AgenticRetrieveActionDetails
       SENSITIVE: []
     end
@@ -174,6 +175,86 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class AgenticRetrieveMemoryConfiguration
+      attr_accessor memory_id: ::String
+      attr_accessor persistence_mode: ("DEFAULT" | "NONE")
+      attr_accessor retrieval_configs: ::Array[Types::AgenticRetrieveMemoryRetrievalConfig]
+      attr_accessor session_binding: Types::AgenticRetrieveMemorySessionBinding
+      SENSITIVE: []
+    end
+
+    class AgenticRetrieveMemoryMetadataFilter
+      attr_accessor left: Types::AgenticRetrieveMemoryMetadataFilterLeft
+      attr_accessor operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS" | "BEFORE" | "AFTER" | "CONTAINS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS")
+      attr_accessor right: Types::AgenticRetrieveMemoryMetadataFilterRight
+      SENSITIVE: []
+    end
+
+    class AgenticRetrieveMemoryMetadataFilterLeft
+      attr_accessor metadata_key: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MetadataKey < AgenticRetrieveMemoryMetadataFilterLeft
+      end
+      class Unknown < AgenticRetrieveMemoryMetadataFilterLeft
+      end
+    end
+
+    class AgenticRetrieveMemoryMetadataFilterRight
+      attr_accessor metadata_value: Types::AgenticRetrieveMemoryMetadataValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MetadataValue < AgenticRetrieveMemoryMetadataFilterRight
+      end
+      class Unknown < AgenticRetrieveMemoryMetadataFilterRight
+      end
+    end
+
+    class AgenticRetrieveMemoryMetadataValue
+      attr_accessor date_time_value: ::Time
+      attr_accessor number_value: ::Float
+      attr_accessor string_list_value: ::Array[::String]
+      attr_accessor string_value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DateTimeValue < AgenticRetrieveMemoryMetadataValue
+      end
+      class NumberValue < AgenticRetrieveMemoryMetadataValue
+      end
+      class StringListValue < AgenticRetrieveMemoryMetadataValue
+      end
+      class StringValue < AgenticRetrieveMemoryMetadataValue
+      end
+      class Unknown < AgenticRetrieveMemoryMetadataValue
+      end
+    end
+
+    class AgenticRetrieveMemoryRetrievalConfig
+      attr_accessor metadata_filters: ::Array[Types::AgenticRetrieveMemoryMetadataFilter]
+      attr_accessor namespace: ::String
+      attr_accessor namespace_path: ::String
+      attr_accessor strategy_id: ::String
+      SENSITIVE: []
+    end
+
+    class AgenticRetrieveMemoryRetrieveDetails
+      attr_accessor input_query: Types::AgenticRetrieveMessageContent
+      attr_accessor memory_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor namespace_path: ::String
+      attr_accessor strategy_id: ::String
+      SENSITIVE: [:input_query]
+    end
+
+    class AgenticRetrieveMemorySessionBinding
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
     class AgenticRetrieveMessage
       attr_accessor content: Types::AgenticRetrieveMessageContent
       attr_accessor role: ("user" | "assistant")
@@ -219,7 +300,7 @@ module Aws::BedrockAgentRuntime
 
     class AgenticRetrieveSourceMetadata
       attr_accessor identifier: ::String
-      attr_accessor retrieval_type: ("BedrockKnowledgeBase")
+      attr_accessor retrieval_type: ("BedrockKnowledgeBase" | "BedrockAgentCoreMemory")
       SENSITIVE: []
     end
 
@@ -231,6 +312,7 @@ module Aws::BedrockAgentRuntime
     class AgenticRetrieveStreamRequest
       attr_accessor agentic_retrieve_configuration: Types::AgenticRetrieveConfiguration
       attr_accessor generate_response: bool
+      attr_accessor memory_configuration: Types::AgenticRetrieveMemoryConfiguration
       attr_accessor messages: ::Array[Types::AgenticRetrieveMessage]
       attr_accessor next_token: ::String
       attr_accessor policy_configuration: Types::AgenticRetrievePolicyConfiguration
@@ -259,7 +341,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor retrieval_metadata: ::Array[Types::AgenticRetrieveSourceMetadata]
       attr_accessor retrieval_response: ::Array[Types::AgenticRetrieveTraceResultItem]
       attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
-      attr_accessor step: ("Planning" | "Retrieval" | "SpeculativeRetrieval" | "FullDocumentExpansion")
+      attr_accessor step: ("Planning" | "Retrieval" | "SpeculativeRetrieval" | "FullDocumentExpansion" | "SessionHistoryLoad")
       attr_accessor warnings: ::Array[Types::AgenticRetrieveWarning]
       SENSITIVE: []
     end
@@ -421,6 +503,19 @@ module Aws::BedrockAgentRuntime
       end
     end
 
+    class CheckIngestedDocumentAclRequest
+      attr_accessor data_source_id: ::String
+      attr_accessor document_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor user_context: Types::UserContext
+      SENSITIVE: [:user_context]
+    end
+
+    class CheckIngestedDocumentAclResponse
+      attr_accessor has_access: bool
+      SENSITIVE: []
+    end
+
     class Citation
       attr_accessor generated_response_part: Types::GeneratedResponsePart
       attr_accessor retrieved_references: ::Array[Types::RetrievedReference]
@@ -576,6 +671,37 @@ module Aws::BedrockAgentRuntime
       attr_accessor message: ::String
       attr_accessor resource_name: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class DocumentAcl
+      attr_accessor allow_list: Types::DocumentAclMembership
+      attr_accessor deny_list: Types::DocumentAclMembership
+      SENSITIVE: []
+    end
+
+    class DocumentAclCondition
+      attr_accessor condition_operator: ("AND" | "OR")
+      attr_accessor groups: ::Array[Types::DocumentAclGroup]
+      attr_accessor users: ::Array[Types::DocumentAclUser]
+      SENSITIVE: []
+    end
+
+    class DocumentAclGroup
+      attr_accessor id: ::String
+      attr_accessor type: ("KNOWLEDGE_BASE" | "DATA_SOURCE")
+      SENSITIVE: []
+    end
+
+    class DocumentAclMembership
+      attr_accessor conditions: ::Array[Types::DocumentAclCondition]
+      attr_accessor member_relation: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class DocumentAclUser
+      attr_accessor id: ::String
+      attr_accessor type: ("KNOWLEDGE_BASE" | "DATA_SOURCE")
       SENSITIVE: []
     end
 
@@ -1094,6 +1220,18 @@ module Aws::BedrockAgentRuntime
       attr_accessor started_at: ::Time
       attr_accessor status: ("Running" | "Succeeded" | "Failed" | "TimedOut" | "Aborted")
       SENSITIVE: []
+    end
+
+    class GetIngestedDocumentAclRequest
+      attr_accessor data_source_id: ::String
+      attr_accessor document_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIngestedDocumentAclResponse
+      attr_accessor document_acl: Types::DocumentAcl
+      SENSITIVE: [:document_acl]
     end
 
     class GetInvocationStepRequest

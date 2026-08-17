@@ -259,6 +259,11 @@ module Aws::MarketplaceAgreement
     #   strategies and expiration timelines.
     #   @return [Types::VariablePaymentTerm]
     #
+    # @!attribute [rw] net_payment_term
+    #   Defines the net payment due period for the agreement, specifying
+    #   when payment is due after an invoice is issued.
+    #   @return [Types::NetPaymentTerm]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptedTerm AWS API Documentation
     #
     class AcceptedTerm < Struct.new(
@@ -274,6 +279,7 @@ module Aws::MarketplaceAgreement
       :free_trial_pricing_term,
       :fixed_upfront_pricing_term,
       :variable_payment_term,
+      :net_payment_term,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -291,6 +297,7 @@ module Aws::MarketplaceAgreement
       class FreeTrialPricingTerm < AcceptedTerm; end
       class FixedUpfrontPricingTerm < AcceptedTerm; end
       class VariablePaymentTerm < AcceptedTerm; end
+      class NetPaymentTerm < AcceptedTerm; end
       class Unknown < AcceptedTerm; end
     end
 
@@ -2442,6 +2449,33 @@ module Aws::MarketplaceAgreement
     class ListBillingAdjustmentRequestsOutput < Struct.new(
       :next_token,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the net payment due period for the agreement, specifying when
+    # payment is due after an invoice is issued.
+    #
+    # @!attribute [rw] type
+    #   Type of the term being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the term.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_due_period
+    #   The duration after an invoice is issued within which the payment is
+    #   due. The duration is represented in the ISO 8601 format (for
+    #   example, `P30D` for 30 days or `P60D` for 60 days).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/NetPaymentTerm AWS API Documentation
+    #
+    class NetPaymentTerm < Struct.new(
+      :type,
+      :id,
+      :payment_due_period)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.320.0 (2026-07-31)
+------------------
+
+* Feature - Adds StorageOperationStatus and StorageOperationPercentProgress to DescribeDBInstances, letting you monitor RDS storage initialization and optimization progress.
+
 1.319.0 (2026-07-17)
 ------------------
 

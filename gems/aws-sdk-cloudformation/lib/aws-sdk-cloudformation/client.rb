@@ -2850,7 +2850,7 @@ module Aws::CloudFormation
     #   resp.changes[0].resource_change.resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN", "UNSUPPORTED"
     #   resp.changes[0].resource_change.resource_drift_ignored_attributes #=> Array
     #   resp.changes[0].resource_change.resource_drift_ignored_attributes[0].path #=> String
-    #   resp.changes[0].resource_change.resource_drift_ignored_attributes[0].reason #=> String, one of "MANAGED_BY_AWS", "WRITE_ONLY_PROPERTY"
+    #   resp.changes[0].resource_change.resource_drift_ignored_attributes[0].reason #=> String, one of "MANAGED_BY_AWS", "WRITE_ONLY_PROPERTY", "SENSITIVE_PROPERTY"
     #   resp.changes[0].resource_change.details #=> Array
     #   resp.changes[0].resource_change.details[0].target.attribute #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "UpdateReplacePolicy", "Tags"
     #   resp.changes[0].resource_change.details[0].target.name #=> String
@@ -9191,7 +9191,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.156.0'
+      context[:gem_version] = '1.157.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

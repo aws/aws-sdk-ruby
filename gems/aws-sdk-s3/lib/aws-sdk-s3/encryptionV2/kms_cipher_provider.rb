@@ -50,7 +50,7 @@ module Aws
         # @return [Cipher] Given an encryption envelope, returns a
         #   decryption cipher.
         def decryption_cipher(envelope, options = {})
-          encryption_context = Json.load(envelope['x-amz-matdesc'])
+          encryption_context = extract_encryption_context(envelope['x-amz-matdesc'])
           cek_alg = envelope['x-amz-cek-alg']
 
           case envelope['x-amz-wrap-alg']
@@ -114,6 +114,19 @@ module Aws
         end
 
         private
+
+        # Raise a decryption error for a malformed material description. A
+        # material description must be a JSON object.
+        def extract_encryption_context(matdesc)
+          context = Json.load(matdesc) if matdesc.is_a?(String)
+          unless context.is_a?(Hash)
+            raise Errors::DecryptionError, 'Malformed material description'
+          end
+
+          context
+        rescue Aws::Json::ParseError, EncodingError
+          raise Errors::DecryptionError, 'Malformed material description'
+        end
 
         def validate_key_wrap(key_wrap_schema)
           case key_wrap_schema

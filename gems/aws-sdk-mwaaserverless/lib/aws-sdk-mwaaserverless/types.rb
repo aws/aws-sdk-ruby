@@ -23,6 +23,31 @@ module Aws::MWAAServerless
       include Aws::Structure
     end
 
+    # Specifies the Amazon S3 location of code artifacts that workflows use
+    # during execution.
+    #
+    # @note Code is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Code is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Code corresponding to the set member.
+    #
+    # @!attribute [rw] s3_location
+    #   The Amazon S3 location of the code artifacts that your workflow
+    #   tasks use during execution.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/Code AWS API Documentation
+    #
+    class Code < Struct.new(
+      :s3_location,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3Location < Code; end
+      class Unknown < Code; end
+    end
+
     # You cannot create a resource that already exists, or the resource is
     # in a state that prevents the requested operation.
     #
@@ -75,6 +100,12 @@ module Aws::MWAAServerless
     #   that are compatible with the Amazon Managed Workflows for Apache
     #   Airflow Serverless execution environment.
     #   @return [Types::DefinitionS3Location]
+    #
+    # @!attribute [rw] code
+    #   The location of code artifacts in Amazon S3 for the workflow. The
+    #   service copies the code from this location at the time of the
+    #   request.
+    #   @return [Types::Code]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon Managed
@@ -147,6 +178,7 @@ module Aws::MWAAServerless
       :name,
       :client_token,
       :definition_s3_location,
+      :code,
       :role_arn,
       :description,
       :encryption_configuration,
@@ -495,6 +527,16 @@ module Aws::MWAAServerless
     #   The Amazon S3 location of the workflow definition file.
     #   @return [Types::DefinitionS3Location]
     #
+    # @!attribute [rw] code
+    #   The Amazon S3 location of the code artifacts provided during
+    #   workflow creation or update.
+    #   @return [Types::Code]
+    #
+    # @!attribute [rw] code_snapshotted_at
+    #   The time at which the code artifacts were copied for this workflow,
+    #   in ISO 8601 date-time format.
+    #   @return [Time]
+    #
     # @!attribute [rw] schedule_configuration
     #   The schedule configuration for the workflow, including cron
     #   expressions for automated execution. Amazon Managed Workflows for
@@ -537,6 +579,8 @@ module Aws::MWAAServerless
       :engine_version,
       :workflow_status,
       :definition_s3_location,
+      :code,
+      :code_snapshotted_at,
       :schedule_configuration,
       :role_arn,
       :network_configuration,
@@ -949,6 +993,32 @@ module Aws::MWAAServerless
       include Aws::Structure
     end
 
+    # Specifies the Amazon S3 location of code artifacts that workflows use
+    # during execution.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key
+    #   The key of the code artifact within the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of the object in Amazon S3. If not specified, the
+    #   latest version is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/S3Location AWS API Documentation
+    #
+    class S3Location < Struct.new(
+      :bucket,
+      :object_key,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration to use to schedule automated workflow execution
     # using cron expressions. Amazon Managed Workflows for Apache Airflow
     # Serverless integrates with EventBridge Scheduler to provide
@@ -1260,6 +1330,12 @@ module Aws::MWAAServerless
     #   stored.
     #   @return [Types::DefinitionS3Location]
     #
+    # @!attribute [rw] code
+    #   The location of code artifacts in Amazon S3 for the updated
+    #   workflow. The service copies the code from this location at the time
+    #   of the request.
+    #   @return [Types::Code]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon Managed
     #   Workflows for Apache Airflow Serverless assumes when it executes the
@@ -1293,6 +1369,7 @@ module Aws::MWAAServerless
     class UpdateWorkflowRequest < Struct.new(
       :workflow_arn,
       :definition_s3_location,
+      :code,
       :role_arn,
       :description,
       :logging_configuration,

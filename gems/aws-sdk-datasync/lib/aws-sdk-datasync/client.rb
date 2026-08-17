@@ -1338,7 +1338,14 @@ module Aws::DataSync
     #   The NameNode that manages the HDFS namespace. The NameNode performs
     #   operations such as opening, closing, and renaming files and
     #   directories. The NameNode contains the information to map blocks of
-    #   data to the DataNodes. You can use only one NameNode.
+    #   data to the DataNodes.
+    #
+    #   The number of NameNodes you can specify depends on the task mode:
+    #
+    #   * **Enhanced mode** – You can specify multiple NameNodes for HDFS High
+    #     Availability (HA) configurations.
+    #
+    #   * **Basic mode** – You can specify only one NameNode.
     #
     # @option params [Integer] :block_size
     #   The size of data blocks to write into the HDFS cluster. The block size
@@ -4328,7 +4335,14 @@ module Aws::DataSync
     #   The NameNode that manages the HDFS namespace. The NameNode performs
     #   operations such as opening, closing, and renaming files and
     #   directories. The NameNode contains the information to map blocks of
-    #   data to the DataNodes. You can use only one NameNode.
+    #   data to the DataNodes.
+    #
+    #   The number of NameNodes you can specify depends on the task mode:
+    #
+    #   * Enhanced mode – You can specify multiple NameNodes for HDFS High
+    #     Availability (HA) configurations.
+    #
+    #   * Basic mode – You can specify only one NameNode.
     #
     # @option params [Integer] :block_size
     #   The size of the data blocks to write into the HDFS cluster.
@@ -5152,7 +5166,7 @@ module Aws::DataSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

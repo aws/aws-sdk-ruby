@@ -8949,6 +8949,54 @@ module Aws::Inspector2
     #   criteria.
     #   @return [Array<Types::ResourceMapFilter>]
     #
+    # @!attribute [rw] cloud_provider
+    #   The cloud providers used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] cloud_provider_account_id
+    #   The cloud provider account IDs used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] cloud_provider_org_id
+    #   The cloud provider organization IDs used as resource filter
+    #   criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] cloud_provider_region
+    #   The cloud provider regions used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] cloud_vm_instance_tags
+    #   The cloud VM instance tags used as resource filter criteria.
+    #   @return [Array<Types::ResourceMapFilter>]
+    #
+    # @!attribute [rw] cloud_container_image_tags
+    #   The cloud container image tags used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] cloud_container_repository_name
+    #   The cloud container repository names used as resource filter
+    #   criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] cloud_container_registry_name
+    #   The cloud container registry names used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] cloud_serverless_function_name
+    #   The cloud serverless function names used as resource filter
+    #   criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] cloud_serverless_function_runtime
+    #   The cloud serverless function runtimes used as resource filter
+    #   criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] cloud_serverless_function_tags
+    #   The cloud serverless function tags used as resource filter criteria.
+    #   @return [Array<Types::ResourceMapFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceFilterCriteria AWS API Documentation
     #
     class ResourceFilterCriteria < Struct.new(
@@ -8959,7 +9007,18 @@ module Aws::Inspector2
       :lambda_function_name,
       :ecr_image_tags,
       :ec2_instance_tags,
-      :lambda_function_tags)
+      :lambda_function_tags,
+      :cloud_provider,
+      :cloud_provider_account_id,
+      :cloud_provider_org_id,
+      :cloud_provider_region,
+      :cloud_vm_instance_tags,
+      :cloud_container_image_tags,
+      :cloud_container_repository_name,
+      :cloud_container_registry_name,
+      :cloud_serverless_function_name,
+      :cloud_serverless_function_runtime,
+      :cloud_serverless_function_tags)
       SENSITIVE = []
       include Aws::Structure
     end

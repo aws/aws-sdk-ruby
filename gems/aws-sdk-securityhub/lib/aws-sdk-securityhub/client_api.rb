@@ -22,6 +22,8 @@ module Aws::SecurityHub
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountDetails = Shapes::StructureShape.new(name: 'AccountDetails')
     AccountDetailsList = Shapes::ListShape.new(name: 'AccountDetailsList')
+    AccountFreeTrialStatus = Shapes::StructureShape.new(name: 'AccountFreeTrialStatus')
+    AccountFreeTrialStatusList = Shapes::ListShape.new(name: 'AccountFreeTrialStatusList')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     Action = Shapes::StructureShape.new(name: 'Action')
@@ -960,6 +962,13 @@ module Aws::SecurityHub
     FirewallPolicyStatelessCustomActionsList = Shapes::ListShape.new(name: 'FirewallPolicyStatelessCustomActionsList')
     FirewallPolicyStatelessRuleGroupReferencesDetails = Shapes::StructureShape.new(name: 'FirewallPolicyStatelessRuleGroupReferencesDetails')
     FirewallPolicyStatelessRuleGroupReferencesList = Shapes::ListShape.new(name: 'FirewallPolicyStatelessRuleGroupReferencesList')
+    FreeTrialAccountId = Shapes::StringShape.new(name: 'FreeTrialAccountId')
+    FreeTrialAccountIdList = Shapes::ListShape.new(name: 'FreeTrialAccountIdList')
+    FreeTrialStatus = Shapes::StructureShape.new(name: 'FreeTrialStatus')
+    FreeTrialStatusList = Shapes::ListShape.new(name: 'FreeTrialStatusList')
+    FreeTrialStatusValue = Shapes::StringShape.new(name: 'FreeTrialStatusValue')
+    FreeTrialStatusValueList = Shapes::ListShape.new(name: 'FreeTrialStatusValueList')
+    FreeTrialType = Shapes::StringShape.new(name: 'FreeTrialType')
     GenerateRecommendedPolicyV2Request = Shapes::StructureShape.new(name: 'GenerateRecommendedPolicyV2Request')
     GenerateRecommendedPolicyV2Response = Shapes::StructureShape.new(name: 'GenerateRecommendedPolicyV2Response')
     GeneratorDetails = Shapes::StructureShape.new(name: 'GeneratorDetails')
@@ -1080,6 +1089,8 @@ module Aws::SecurityHub
     ListEnabledProductsForImportResponse = Shapes::StructureShape.new(name: 'ListEnabledProductsForImportResponse')
     ListFindingAggregatorsRequest = Shapes::StructureShape.new(name: 'ListFindingAggregatorsRequest')
     ListFindingAggregatorsResponse = Shapes::StructureShape.new(name: 'ListFindingAggregatorsResponse')
+    ListFreeTrialStatusesV2Request = Shapes::StructureShape.new(name: 'ListFreeTrialStatusesV2Request')
+    ListFreeTrialStatusesV2Response = Shapes::StructureShape.new(name: 'ListFreeTrialStatusesV2Response')
     ListInvitationsRequest = Shapes::StructureShape.new(name: 'ListInvitationsRequest')
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
@@ -1496,6 +1507,13 @@ module Aws::SecurityHub
     AccountDetails.struct_class = Types::AccountDetails
 
     AccountDetailsList.member = Shapes::ShapeRef.new(shape: AccountDetails)
+
+    AccountFreeTrialStatus.add_member(:account_id, Shapes::ShapeRef.new(shape: FreeTrialAccountId, required: true, location_name: "AccountId"))
+    AccountFreeTrialStatus.add_member(:evaluated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EvaluatedAt"))
+    AccountFreeTrialStatus.add_member(:free_trial_statuses, Shapes::ShapeRef.new(shape: FreeTrialStatusList, required: true, location_name: "FreeTrialStatuses"))
+    AccountFreeTrialStatus.struct_class = Types::AccountFreeTrialStatus
+
+    AccountFreeTrialStatusList.member = Shapes::ShapeRef.new(shape: AccountFreeTrialStatus)
 
     AccountIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -6272,6 +6290,18 @@ module Aws::SecurityHub
 
     FirewallPolicyStatelessRuleGroupReferencesList.member = Shapes::ShapeRef.new(shape: FirewallPolicyStatelessRuleGroupReferencesDetails)
 
+    FreeTrialAccountIdList.member = Shapes::ShapeRef.new(shape: FreeTrialAccountId)
+
+    FreeTrialStatus.add_member(:feature_type, Shapes::ShapeRef.new(shape: FreeTrialType, required: true, location_name: "FeatureType"))
+    FreeTrialStatus.add_member(:status, Shapes::ShapeRef.new(shape: FreeTrialStatusValue, required: true, location_name: "Status"))
+    FreeTrialStatus.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartedAt"))
+    FreeTrialStatus.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ExpiresAt"))
+    FreeTrialStatus.struct_class = Types::FreeTrialStatus
+
+    FreeTrialStatusList.member = Shapes::ShapeRef.new(shape: FreeTrialStatus)
+
+    FreeTrialStatusValueList.member = Shapes::ShapeRef.new(shape: FreeTrialStatusValue)
+
     GenerateRecommendedPolicyV2Request.add_member(:metadata_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "MetadataUid"))
     GenerateRecommendedPolicyV2Request.struct_class = Types::GenerateRecommendedPolicyV2Request
 
@@ -6758,6 +6788,16 @@ module Aws::SecurityHub
     ListFindingAggregatorsResponse.add_member(:finding_aggregators, Shapes::ShapeRef.new(shape: FindingAggregatorList, location_name: "FindingAggregators"))
     ListFindingAggregatorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFindingAggregatorsResponse.struct_class = Types::ListFindingAggregatorsResponse
+
+    ListFreeTrialStatusesV2Request.add_member(:account_ids, Shapes::ShapeRef.new(shape: FreeTrialAccountIdList, location_name: "AccountIds"))
+    ListFreeTrialStatusesV2Request.add_member(:statuses, Shapes::ShapeRef.new(shape: FreeTrialStatusValueList, location_name: "Statuses"))
+    ListFreeTrialStatusesV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListFreeTrialStatusesV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFreeTrialStatusesV2Request.struct_class = Types::ListFreeTrialStatusesV2Request
+
+    ListFreeTrialStatusesV2Response.add_member(:account_free_trial_statuses, Shapes::ShapeRef.new(shape: AccountFreeTrialStatusList, required: true, location_name: "AccountFreeTrialStatuses"))
+    ListFreeTrialStatusesV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFreeTrialStatusesV2Response.struct_class = Types::ListFreeTrialStatusesV2Response
 
     ListInvitationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CrossAccountMaxResults, location: "querystring", location_name: "MaxResults"))
     ListInvitationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
@@ -9561,6 +9601,25 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_free_trial_statuses_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFreeTrialStatusesV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/freetrial/statusv2/list"
+        o.input = Shapes::ShapeRef.new(shape: ListFreeTrialStatusesV2Request)
+        o.output = Shapes::ShapeRef.new(shape: ListFreeTrialStatusesV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

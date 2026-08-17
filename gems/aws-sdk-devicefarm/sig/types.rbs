@@ -620,6 +620,34 @@ module Aws::DeviceFarm
       attr_accessor device_minutes: Types::DeviceMinutes
       attr_accessor video_endpoint: ::String
       attr_accessor video_capture: bool
+      attr_accessor insights: Types::JobInsights
+      SENSITIVE: []
+    end
+
+    class JobInsights
+      attr_accessor status: ("PENDING" | "RUNNING" | "COMPLETED" | "SKIPPED" | "ERRORED")
+      attr_accessor test_report: Types::TestReport
+      SENSITIVE: []
+    end
+
+    class JobReport
+      attr_accessor message: ::String
+      attr_accessor metrics: Types::JobReportMetrics
+      attr_accessor job_details_url: ::String
+      SENSITIVE: [:job_details_url]
+    end
+
+    class JobReportMetrics
+      attr_accessor jobs_total: ::Integer
+      attr_accessor jobs_passed: ::Integer
+      attr_accessor jobs_failed: ::Integer
+      attr_accessor jobs_skipped: ::Integer
+      attr_accessor jobs_errored: ::Integer
+      attr_accessor jobs_stopped: ::Integer
+      attr_accessor jobs_passed_percentage: ::Float
+      attr_accessor total_job_execution_duration_seconds: ::Float
+      attr_accessor average_job_execution_duration_seconds: ::Float
+      attr_accessor median_job_execution_duration_seconds: ::Float
       SENSITIVE: []
     end
 
@@ -1139,6 +1167,14 @@ module Aws::DeviceFarm
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor execution_role_arn: ::String
       attr_accessor environment_variables: ::Array[Types::EnvironmentVariable]
+      attr_accessor insights_types: ::Array[("TEST_REPORT")]
+      attr_accessor insights: Types::RunInsights
+      SENSITIVE: []
+    end
+
+    class RunInsights
+      attr_accessor status: ("PENDING" | "RUNNING" | "COMPLETED" | "SKIPPED" | "ERRORED")
+      attr_accessor job_report: Types::JobReport
       SENSITIVE: []
     end
 
@@ -1162,6 +1198,7 @@ module Aws::DeviceFarm
       attr_accessor billing_method: ("METERED" | "UNMETERED")
       attr_accessor environment_variables: ::Array[Types::EnvironmentVariable]
       attr_accessor execution_role_arn: ::String
+      attr_accessor insights_types: ::Array[("TEST_REPORT")]
       SENSITIVE: []
     end
 
@@ -1322,6 +1359,26 @@ module Aws::DeviceFarm
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class TestReport
+      attr_accessor message: ::String
+      attr_accessor metrics: Types::TestReportMetrics
+      attr_accessor test_details_url: ::String
+      SENSITIVE: [:test_details_url]
+    end
+
+    class TestReportMetrics
+      attr_accessor tests_total: ::Integer
+      attr_accessor tests_passed: ::Integer
+      attr_accessor tests_failed: ::Integer
+      attr_accessor tests_skipped: ::Integer
+      attr_accessor tests_errored: ::Integer
+      attr_accessor tests_other: ::Integer
+      attr_accessor tests_passed_percentage: ::Float
+      attr_accessor total_test_execution_duration_seconds: ::Float
+      attr_accessor median_test_execution_duration_seconds: ::Float
       SENSITIVE: []
     end
 

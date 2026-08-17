@@ -44,6 +44,10 @@ module Aws::TrustedAdvisor
       attr_accessor aws_services: ::Array[::String]
       attr_accessor source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected" | "cost_optimization_hub")
       attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor resource_arn_queryable: bool
+      attr_accessor aws_resource_types: ::Array[::String]
+      attr_accessor check_granularity: ::String
+      attr_accessor recommendation_id: ::String
       SENSITIVE: []
     end
 
@@ -162,6 +166,23 @@ module Aws::TrustedAdvisor
       SENSITIVE: []
     end
 
+    class ListRecommendationsForResourceRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor aws_resource_arn: ::String
+      attr_accessor pillar: ("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence")
+      attr_accessor status: ("ok" | "warning" | "error")
+      attr_accessor check_arn: ::String
+      attr_accessor language: ("en" | "ja" | "zh" | "fr" | "de" | "ko" | "zh_TW" | "it" | "es" | "pt_BR" | "id")
+      SENSITIVE: []
+    end
+
+    class ListRecommendationsForResourceResponse
+      attr_accessor next_token: ::String
+      attr_accessor recommendation_for_resource_summaries: ::Array[Types::RecommendationForResourceSummary]
+      SENSITIVE: []
+    end
+
     class ListRecommendationsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -269,6 +290,18 @@ module Aws::TrustedAdvisor
     class RecommendationCostOptimizingAggregates
       attr_accessor estimated_monthly_savings: ::Float
       attr_accessor estimated_percent_monthly_savings: ::Float
+      SENSITIVE: []
+    end
+
+    class RecommendationForResourceSummary
+      attr_accessor check_arn: ::String
+      attr_accessor recommendation_arn: ::String
+      attr_accessor aws_resource_arn: ::String
+      attr_accessor status: ("ok" | "warning" | "error")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor exclusion_status: ("excluded" | "included")
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor pillars: ::Array[("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence")]
       SENSITIVE: []
     end
 

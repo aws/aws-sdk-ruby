@@ -337,6 +337,28 @@ module Aws::RDS
     #   | STORAGE-OPTIMIZATION | VOLUME-FULL`
     #   @return [String]
     #
+    # @!attribute [rw] storage_operation_status
+    #   The status of an in-progress storage operation on the additional
+    #   storage volume. This field appears only while a storage operation is
+    #   in progress. It isn't present when no storage operation is active.
+    #   Possible values:
+    #
+    #   * `Initializing` - The volume is initializing from a snapshot, such
+    #     as during a snapshot restore, point-in-time restore, read replica
+    #     creation, or blue/green deployment. Performance can be lower than
+    #     provisioned until initialization completes.
+    #
+    #   * `Optimizing` - The volume is optimizing following a storage
+    #     scaling or modification operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_operation_percent_progress
+    #   The percentage of the in-progress storage operation on the
+    #   additional storage volume that has completed, from `0` to `100`.
+    #   This field appears only while a storage operation is in progress. It
+    #   isn't present when no storage operation is active.
+    #   @return [Integer]
+    #
     # @!attribute [rw] allocated_storage
     #   The amount of storage allocated for the additional storage volume,
     #   in gibibytes (GiB). The minimum is 20 GiB. The maximum is 65,536 GiB
@@ -369,6 +391,8 @@ module Aws::RDS
     class AdditionalStorageVolumeOutput < Struct.new(
       :volume_name,
       :storage_volume_status,
+      :storage_operation_status,
+      :storage_operation_percent_progress,
       :allocated_storage,
       :iops,
       :max_allocated_storage,
@@ -10181,6 +10205,27 @@ module Aws::RDS
     #   volume is causing the instance to be in a storage-full state.
     #   @return [String]
     #
+    # @!attribute [rw] storage_operation_status
+    #   The status of an in-progress storage operation on the DB instance.
+    #   This field appears only while a storage operation is in progress. It
+    #   isn't present when no storage operation is active. Possible values:
+    #
+    #   * `Initializing` - The volume is initializing from a snapshot, such
+    #     as during a snapshot restore, point-in-time restore, read replica
+    #     creation, or blue/green deployment. Performance can be lower than
+    #     provisioned until initialization completes.
+    #
+    #   * `Optimizing` - The volume is optimizing following a storage
+    #     scaling or modification operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_operation_percent_progress
+    #   The percentage of the in-progress storage operation on the DB
+    #   instance that has completed, from `0` to `100`. This field appears
+    #   only while a storage operation is in progress. It isn't present
+    #   when no storage operation is active.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -10274,7 +10319,9 @@ module Aws::RDS
       :is_storage_config_upgrade_available,
       :engine_lifecycle_support,
       :additional_storage_volumes,
-      :storage_volume_status)
+      :storage_volume_status,
+      :storage_operation_status,
+      :storage_operation_percent_progress)
       SENSITIVE = []
       include Aws::Structure
     end

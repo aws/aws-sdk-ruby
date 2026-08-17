@@ -4330,9 +4330,22 @@
                     },
                     "renamedStructureValue": {
                         "shape": "RenamedGreeting"
+                    },
+                    "unionValue": {
+                        "shape": "NestedUnion"
                     }
                 },
                 "documentation": "<p>A union with a representative set of types for members.</p>",
+                "union": true
+            },
+            "NestedUnion": {
+                "type": "structure",
+                "members": {
+                    "stringValue": {
+                        "shape": "String"
+                    }
+                },
+                "documentation": "<p>A union used to test unions nested inside unions.</p>",
                 "union": true
             },
             "RenamedGreeting": {
@@ -4680,6 +4693,38 @@
                     "method": "PUT",
                     "uri": "/JsonUnions",
                     "body": "{\n    \"contents\": {\n        \"renamedStructureValue\": {\n            \"salutation\": \"hello!\"\n        }\n    }\n}",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    }
+                }
+            },
+            {
+                "id": "RestJsonSerializeNestedUnionValue",
+                "description": "Serializes a nested union value",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/JsonUnions",
+                        "responseCode": 200
+                    },
+                    "input": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "params": {
+                    "contents": {
+                        "unionValue": {
+                            "stringValue": "foo"
+                        }
+                    }
+                },
+                "serialized": {
+                    "method": "PUT",
+                    "uri": "/JsonUnions",
+                    "body": "{\n    \"contents\": {\n        \"unionValue\": {\n            \"stringValue\": \"foo\"\n        }\n    }\n}",
                     "headers": {
                         "Content-Type": "application/json"
                     }

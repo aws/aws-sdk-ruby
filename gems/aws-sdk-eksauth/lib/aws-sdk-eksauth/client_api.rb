@@ -39,6 +39,9 @@ module Aws::EKSAuth
 
     AssumeRoleForPodIdentityRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "clusterName"))
     AssumeRoleForPodIdentityRequest.add_member(:token, Shapes::ShapeRef.new(shape: JwtToken, required: true, location_name: "token"))
+    AssumeRoleForPodIdentityRequest.add_member(:eks_node_name, Shapes::ShapeRef.new(shape: String, location_name: "eksNodeName"))
+    AssumeRoleForPodIdentityRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    AssumeRoleForPodIdentityRequest.add_member(:zone, Shapes::ShapeRef.new(shape: String, location_name: "zone"))
     AssumeRoleForPodIdentityRequest.struct_class = Types::AssumeRoleForPodIdentityRequest
 
     AssumeRoleForPodIdentityResponse.add_member(:subject, Shapes::ShapeRef.new(shape: Subject, required: true, location_name: "subject"))
@@ -98,9 +101,10 @@ module Aws::EKSAuth
 
       api.metadata = {
         "apiVersion" => "2023-11-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "eks-auth",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon EKS Auth",
         "serviceId" => "EKS Auth",
         "signatureVersion" => "v4",

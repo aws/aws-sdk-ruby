@@ -56,7 +56,7 @@ module Aws::MarketplaceDiscovery
 
     class ByolPricingTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       SENSITIVE: []
     end
 
@@ -79,7 +79,7 @@ module Aws::MarketplaceDiscovery
 
     class ConfigurableUpfrontPricingTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor currency_code: ::String
       attr_accessor rate_cards: ::Array[Types::ConfigurableUpfrontRateCardItem]
       SENSITIVE: []
@@ -181,7 +181,7 @@ module Aws::MarketplaceDiscovery
 
     class FixedUpfrontPricingTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor currency_code: ::String
       attr_accessor duration: ::String
       attr_accessor price: ::String
@@ -191,7 +191,7 @@ module Aws::MarketplaceDiscovery
 
     class FreeTrialPricingTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor duration: ::String
       attr_accessor grants: ::Array[Types::GrantItem]
       SENSITIVE: []
@@ -285,14 +285,14 @@ module Aws::MarketplaceDiscovery
       attr_accessor offer_id: ::String
       attr_accessor catalog: ::String
       attr_accessor offer_name: ::String
-      attr_accessor agreement_proposal_id: ::String
       attr_accessor expiration_time: ::Time
       attr_accessor available_from_time: ::Time
       attr_accessor seller_of_record: Types::SellerInformation
+      attr_accessor associated_entities: ::Array[Types::OfferAssociatedEntity]
+      attr_accessor agreement_proposal_id: ::String
       attr_accessor replacement_agreement_id: ::String
       attr_accessor pricing_model: Types::PricingModel
       attr_accessor badges: ::Array[Types::PurchaseOptionBadge]
-      attr_accessor associated_entities: ::Array[Types::OfferAssociatedEntity]
       SENSITIVE: []
     end
 
@@ -336,10 +336,10 @@ module Aws::MarketplaceDiscovery
       attr_accessor product_id: ::String
       attr_accessor catalog: ::String
       attr_accessor product_name: ::String
+      attr_accessor manufacturer: Types::SellerInformation
       attr_accessor deployed_on_aws: ("DEPLOYED" | "NOT_DEPLOYED" | "NOT_APPLICABLE")
       attr_accessor short_description: ::String
       attr_accessor long_description: ::String
-      attr_accessor manufacturer: Types::SellerInformation
       attr_accessor logo_thumbnail_url: ::String
       attr_accessor fulfillment_option_summaries: ::Array[Types::FulfillmentOptionSummary]
       attr_accessor categories: ::Array[Types::Category]
@@ -386,7 +386,7 @@ module Aws::MarketplaceDiscovery
 
     class LegalTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor documents: ::Array[Types::DocumentItem]
       SENSITIVE: []
     end
@@ -441,11 +441,11 @@ module Aws::MarketplaceDiscovery
       attr_accessor listing_id: ::String
       attr_accessor listing_name: ::String
       attr_accessor publisher: Types::SellerInformation
+      attr_accessor fulfillment_option_summaries: ::Array[Types::FulfillmentOptionSummary]
       attr_accessor catalog: ::String
       attr_accessor short_description: ::String
       attr_accessor logo_thumbnail_url: ::String
       attr_accessor categories: ::Array[Types::Category]
-      attr_accessor fulfillment_option_summaries: ::Array[Types::FulfillmentOptionSummary]
       attr_accessor badges: ::Array[Types::ListingBadge]
       attr_accessor review_summary: Types::ReviewSummary
       attr_accessor pricing_models: ::Array[Types::PricingModel]
@@ -456,6 +456,13 @@ module Aws::MarketplaceDiscovery
 
     class ListingSummaryAssociatedEntity
       attr_accessor product: Types::ProductInformation
+      SENSITIVE: []
+    end
+
+    class NetPaymentTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
+      attr_accessor payment_due_period: ::String
       SENSITIVE: []
     end
 
@@ -497,6 +504,7 @@ module Aws::MarketplaceDiscovery
       attr_accessor usage_based_pricing_term: Types::UsageBasedPricingTerm
       attr_accessor validity_term: Types::ValidityTerm
       attr_accessor variable_payment_term: Types::VariablePaymentTerm
+      attr_accessor net_payment_term: Types::NetPaymentTerm
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -524,13 +532,15 @@ module Aws::MarketplaceDiscovery
       end
       class VariablePaymentTerm < OfferTerm
       end
+      class NetPaymentTerm < OfferTerm
+      end
       class Unknown < OfferTerm
       end
     end
 
     class PaymentScheduleTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor currency_code: ::String
       attr_accessor schedule: ::Array[Types::ScheduleItem]
       SENSITIVE: []
@@ -636,7 +646,7 @@ module Aws::MarketplaceDiscovery
 
     class RecurringPaymentTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor currency_code: ::String
       attr_accessor billing_period: ("Monthly")
       attr_accessor price: ::String
@@ -645,7 +655,7 @@ module Aws::MarketplaceDiscovery
 
     class RenewalTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       SENSITIVE: []
     end
 
@@ -785,7 +795,7 @@ module Aws::MarketplaceDiscovery
 
     class SupportTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor refund_policy: ::String
       SENSITIVE: []
     end
@@ -797,7 +807,7 @@ module Aws::MarketplaceDiscovery
 
     class UsageBasedPricingTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor currency_code: ::String
       attr_accessor rate_cards: ::Array[Types::UsageBasedRateCardItem]
       SENSITIVE: []
@@ -828,7 +838,7 @@ module Aws::MarketplaceDiscovery
 
     class ValidityTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor agreement_duration: ::String
       attr_accessor agreement_end_date: ::Time
       attr_accessor agreement_start_date: ::Time
@@ -837,7 +847,7 @@ module Aws::MarketplaceDiscovery
 
     class VariablePaymentTerm
       attr_accessor id: ::String
-      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor currency_code: ::String
       attr_accessor max_total_charge_amount: ::String
       SENSITIVE: []

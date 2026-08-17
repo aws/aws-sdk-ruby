@@ -694,7 +694,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -764,7 +770,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #             sensitivity_level: "LOW", # accepts LOW, HIGH
@@ -834,7 +846,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -905,7 +923,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -1060,7 +1084,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -1082,7 +1112,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -1091,7 +1121,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -1100,7 +1130,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -1108,7 +1138,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -1125,7 +1155,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -1414,7 +1444,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -1939,7 +1975,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -2009,7 +2051,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #             sensitivity_level: "LOW", # accepts LOW, HIGH
@@ -2079,7 +2127,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -2150,7 +2204,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -2305,7 +2365,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -2327,7 +2393,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -2336,7 +2402,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -2345,7 +2411,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -2353,7 +2419,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -2370,7 +2436,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -2659,7 +2725,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -2829,8 +2901,9 @@ module Aws::WAFV2
     # one or more Amazon Web Services resources to protect. The resource
     # types include Amazon CloudFront distribution, Amazon API Gateway REST
     # API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito
-    # user pool, App Runner service, Amplify application, and Amazon Web
-    # Services Verified Access instance.
+    # user pool, App Runner service, Amplify application, Amazon Web
+    # Services Verified Access instance, and Amazon Bedrock AgentCore
+    # Gateway.
     #
     # @option params [required, String] :name
     #   The name of the web ACL. You cannot change the name of a web ACL after
@@ -4535,7 +4608,10 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.pre_parse_text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.byte_match_statement.pre_parse_text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.byte_match_statement.pre_parse_text_transformations[0].type #=> String, one of "NONE", "URL_DECODE", "URL_DECODE_UNI", "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA", "REPLACE_SEMICOLONS_WITH_AMPERSANDS"
     #   resp.rule_group.rules[0].statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
@@ -4563,7 +4639,10 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.pre_parse_text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.pre_parse_text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.pre_parse_text_transformations[0].type #=> String, one of "NONE", "URL_DECODE", "URL_DECODE_UNI", "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA", "REPLACE_SEMICOLONS_WITH_AMPERSANDS"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.sensitivity_level #=> String, one of "LOW", "HIGH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
@@ -4591,7 +4670,10 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.pre_parse_text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.xss_match_statement.pre_parse_text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.xss_match_statement.pre_parse_text_transformations[0].type #=> String, one of "NONE", "URL_DECODE", "URL_DECODE_UNI", "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA", "REPLACE_SEMICOLONS_WITH_AMPERSANDS"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
@@ -4620,7 +4702,10 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.size_constraint_statement.size #=> Integer
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.pre_parse_text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.pre_parse_text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.pre_parse_text_transformations[0].type #=> String, one of "NONE", "URL_DECODE", "URL_DECODE_UNI", "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA", "REPLACE_SEMICOLONS_WITH_AMPERSANDS"
     #   resp.rule_group.rules[0].statement.geo_match_statement.country_codes #=> Array
     #   resp.rule_group.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW", "XK"
     #   resp.rule_group.rules[0].statement.geo_match_statement.forwarded_ip_config.header_name #=> String
@@ -4679,7 +4764,10 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.pre_parse_text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.pre_parse_text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.pre_parse_text_transformations[0].type #=> String, one of "NONE", "URL_DECODE", "URL_DECODE_UNI", "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA", "REPLACE_SEMICOLONS_WITH_AMPERSANDS"
     #   resp.rule_group.rules[0].statement.rate_based_statement.limit #=> Integer
     #   resp.rule_group.rules[0].statement.rate_based_statement.evaluation_window_sec #=> Integer
     #   resp.rule_group.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP", "CUSTOM_KEYS", "CONSTANT"
@@ -4690,22 +4778,22 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].header.name #=> String
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].cookie.name #=> String
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.name #=> String
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].label_namespace.namespace #=> String
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].uri_path.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].uri_path.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].uri_path.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].uri_path.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].ja4_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.and_statement.statements #=> Array
@@ -4832,7 +4920,10 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE", "REMOVE_WHITESPACE", "TRIM", "TRIM_LEFT", "TRIM_RIGHT", "REMOVE_COMMENTS_CHAR", "UPPERCASE", "CMD_LINE_WIN", "CMD_LINE_UNIX", "JS_DECODE_EXT", "SHA256"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.pre_parse_text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.regex_match_statement.pre_parse_text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.regex_match_statement.pre_parse_text_transformations[0].type #=> String, one of "NONE", "URL_DECODE", "URL_DECODE_UNI", "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA", "REPLACE_SEMICOLONS_WITH_AMPERSANDS"
     #   resp.rule_group.rules[0].statement.asn_match_statement.asn_list #=> Array
     #   resp.rule_group.rules[0].statement.asn_match_statement.asn_list[0] #=> Integer
     #   resp.rule_group.rules[0].statement.asn_match_statement.forwarded_ip_config.header_name #=> String
@@ -7153,7 +7244,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -7223,7 +7320,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #             sensitivity_level: "LOW", # accepts LOW, HIGH
@@ -7293,7 +7396,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -7364,7 +7473,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -7519,7 +7634,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -7541,7 +7662,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -7550,7 +7671,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -7559,7 +7680,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -7567,7 +7688,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -7584,7 +7705,7 @@ module Aws::WAFV2
     #                   text_transformations: [ # required
     #                     {
     #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
     #                     },
     #                   ],
     #                 },
@@ -7873,7 +7994,13 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE, REMOVE_WHITESPACE, TRIM, TRIM_LEFT, TRIM_RIGHT, REMOVE_COMMENTS_CHAR, UPPERCASE, CMD_LINE_WIN, CMD_LINE_UNIX, JS_DECODE_EXT, SHA256
+    #               },
+    #             ],
+    #             pre_parse_text_transformations: [
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, URL_DECODE, URL_DECODE_UNI, COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA, REPLACE_SEMICOLONS_WITH_AMPERSANDS
     #               },
     #             ],
     #           },
@@ -8050,8 +8177,9 @@ module Aws::WAFV2
     # one or more Amazon Web Services resources to protect. The resource
     # types include Amazon CloudFront distribution, Amazon API Gateway REST
     # API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito
-    # user pool, App Runner service, Amplify application, and Amazon Web
-    # Services Verified Access instance.
+    # user pool, App Runner service, Amplify application, Amazon Web
+    # Services Verified Access instance, and Amazon Bedrock AgentCore
+    # Gateway.
     #
     # **Temporary inconsistencies during updates**
     #
@@ -8235,1006 +8363,6 @@ module Aws::WAFV2
     #
     #   * {Types::UpdateWebACLResponse#next_lock_token #next_lock_token} => String
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_web_acl({
-    #     name: "EntityName", # required
-    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
-    #     id: "EntityId", # required
-    #     default_action: { # required
-    #       block: {
-    #         custom_response: {
-    #           response_code: 1, # required
-    #           custom_response_body_key: "EntityName",
-    #           response_headers: [
-    #             {
-    #               name: "CustomHTTPHeaderName", # required
-    #               value: "CustomHTTPHeaderValue", # required
-    #             },
-    #           ],
-    #         },
-    #       },
-    #       allow: {
-    #         custom_request_handling: {
-    #           insert_headers: [ # required
-    #             {
-    #               name: "CustomHTTPHeaderName", # required
-    #               value: "CustomHTTPHeaderValue", # required
-    #             },
-    #           ],
-    #         },
-    #       },
-    #     },
-    #     description: "EntityDescription",
-    #     rules: [
-    #       {
-    #         name: "EntityName", # required
-    #         priority: 1, # required
-    #         statement: { # required
-    #           byte_match_statement: {
-    #             search_string: "data", # required
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #               },
-    #             ],
-    #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
-    #           },
-    #           sqli_match_statement: {
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #               },
-    #             ],
-    #             sensitivity_level: "LOW", # accepts LOW, HIGH
-    #           },
-    #           xss_match_statement: {
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #               },
-    #             ],
-    #           },
-    #           size_constraint_statement: {
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
-    #             size: 1, # required
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #               },
-    #             ],
-    #           },
-    #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
-    #             forwarded_ip_config: {
-    #               header_name: "ForwardedIPHeaderName", # required
-    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #             },
-    #           },
-    #           rule_group_reference_statement: {
-    #             arn: "ResourceArn", # required
-    #             excluded_rules: [
-    #               {
-    #                 name: "EntityName", # required
-    #               },
-    #             ],
-    #             rule_action_overrides: [
-    #               {
-    #                 name: "EntityName", # required
-    #                 action_to_use: { # required
-    #                   block: {
-    #                     custom_response: {
-    #                       response_code: 1, # required
-    #                       custom_response_body_key: "EntityName",
-    #                       response_headers: [
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   allow: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   count: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   captcha: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   challenge: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   monetize: {
-    #                     price_multiplier: "PriceMultiplier",
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           ip_set_reference_statement: {
-    #             arn: "ResourceArn", # required
-    #             ip_set_forwarded_ip_config: {
-    #               header_name: "ForwardedIPHeaderName", # required
-    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               position: "FIRST", # required, accepts FIRST, LAST, ANY
-    #             },
-    #           },
-    #           regex_pattern_set_reference_statement: {
-    #             arn: "ResourceArn", # required
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #               },
-    #             ],
-    #           },
-    #           rate_based_statement: {
-    #             limit: 1, # required
-    #             evaluation_window_sec: 1,
-    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
-    #             scope_down_statement: {
-    #               # recursive Statement
-    #             },
-    #             forwarded_ip_config: {
-    #               header_name: "ForwardedIPHeaderName", # required
-    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #             },
-    #             custom_keys: [
-    #               {
-    #                 header: {
-    #                   name: "FieldToMatchData", # required
-    #                   text_transformations: [ # required
-    #                     {
-    #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #                     },
-    #                   ],
-    #                 },
-    #                 cookie: {
-    #                   name: "FieldToMatchData", # required
-    #                   text_transformations: [ # required
-    #                     {
-    #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #                     },
-    #                   ],
-    #                 },
-    #                 query_argument: {
-    #                   name: "FieldToMatchData", # required
-    #                   text_transformations: [ # required
-    #                     {
-    #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #                     },
-    #                   ],
-    #                 },
-    #                 query_string: {
-    #                   text_transformations: [ # required
-    #                     {
-    #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #                     },
-    #                   ],
-    #                 },
-    #                 http_method: {
-    #                 },
-    #                 forwarded_ip: {
-    #                 },
-    #                 ip: {
-    #                 },
-    #                 label_namespace: {
-    #                   namespace: "LabelNamespace", # required
-    #                 },
-    #                 uri_path: {
-    #                   text_transformations: [ # required
-    #                     {
-    #                       priority: 1, # required
-    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #                     },
-    #                   ],
-    #                 },
-    #                 ja3_fingerprint: {
-    #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #                 },
-    #                 ja4_fingerprint: {
-    #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #                 },
-    #                 asn: {
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           and_statement: {
-    #             statements: [ # required
-    #               {
-    #                 # recursive Statement
-    #               },
-    #             ],
-    #           },
-    #           or_statement: {
-    #             statements: [ # required
-    #               {
-    #                 # recursive Statement
-    #               },
-    #             ],
-    #           },
-    #           not_statement: {
-    #             statement: { # required
-    #               # recursive Statement
-    #             },
-    #           },
-    #           managed_rule_group_statement: {
-    #             vendor_name: "VendorName", # required
-    #             name: "EntityName", # required
-    #             version: "VersionKeyString",
-    #             excluded_rules: [
-    #               {
-    #                 name: "EntityName", # required
-    #               },
-    #             ],
-    #             scope_down_statement: {
-    #               # recursive Statement
-    #             },
-    #             managed_rule_group_configs: [
-    #               {
-    #                 login_path: "LoginPathString",
-    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
-    #                 username_field: {
-    #                   identifier: "FieldIdentifier", # required
-    #                 },
-    #                 password_field: {
-    #                   identifier: "FieldIdentifier", # required
-    #                 },
-    #                 aws_managed_rules_bot_control_rule_set: {
-    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
-    #                   enable_machine_learning: false,
-    #                 },
-    #                 aws_managed_rules_atp_rule_set: {
-    #                   login_path: "String", # required
-    #                   request_inspection: {
-    #                     payload_type: "JSON", # required, accepts JSON, FORM_ENCODED
-    #                     username_field: { # required
-    #                       identifier: "FieldIdentifier", # required
-    #                     },
-    #                     password_field: { # required
-    #                       identifier: "FieldIdentifier", # required
-    #                     },
-    #                   },
-    #                   response_inspection: {
-    #                     status_code: {
-    #                       success_codes: [1], # required
-    #                       failure_codes: [1], # required
-    #                     },
-    #                     header: {
-    #                       name: "ResponseInspectionHeaderName", # required
-    #                       success_values: ["SuccessValue"], # required
-    #                       failure_values: ["FailureValue"], # required
-    #                     },
-    #                     body_contains: {
-    #                       success_strings: ["SuccessValue"], # required
-    #                       failure_strings: ["FailureValue"], # required
-    #                     },
-    #                     json: {
-    #                       identifier: "FieldIdentifier", # required
-    #                       success_values: ["SuccessValue"], # required
-    #                       failure_values: ["FailureValue"], # required
-    #                     },
-    #                   },
-    #                   enable_regex_in_path: false,
-    #                 },
-    #                 aws_managed_rules_acfp_rule_set: {
-    #                   creation_path: "CreationPathString", # required
-    #                   registration_page_path: "RegistrationPagePathString", # required
-    #                   request_inspection: { # required
-    #                     payload_type: "JSON", # required, accepts JSON, FORM_ENCODED
-    #                     username_field: {
-    #                       identifier: "FieldIdentifier", # required
-    #                     },
-    #                     password_field: {
-    #                       identifier: "FieldIdentifier", # required
-    #                     },
-    #                     email_field: {
-    #                       identifier: "FieldIdentifier", # required
-    #                     },
-    #                     phone_number_fields: [
-    #                       {
-    #                         identifier: "FieldIdentifier", # required
-    #                       },
-    #                     ],
-    #                     address_fields: [
-    #                       {
-    #                         identifier: "FieldIdentifier", # required
-    #                       },
-    #                     ],
-    #                   },
-    #                   response_inspection: {
-    #                     status_code: {
-    #                       success_codes: [1], # required
-    #                       failure_codes: [1], # required
-    #                     },
-    #                     header: {
-    #                       name: "ResponseInspectionHeaderName", # required
-    #                       success_values: ["SuccessValue"], # required
-    #                       failure_values: ["FailureValue"], # required
-    #                     },
-    #                     body_contains: {
-    #                       success_strings: ["SuccessValue"], # required
-    #                       failure_strings: ["FailureValue"], # required
-    #                     },
-    #                     json: {
-    #                       identifier: "FieldIdentifier", # required
-    #                       success_values: ["SuccessValue"], # required
-    #                       failure_values: ["FailureValue"], # required
-    #                     },
-    #                   },
-    #                   enable_regex_in_path: false,
-    #                 },
-    #                 aws_managed_rules_anti_d_do_s_rule_set: {
-    #                   client_side_action_config: { # required
-    #                     challenge: { # required
-    #                       usage_of_action: "ENABLED", # required, accepts ENABLED, DISABLED
-    #                       sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH
-    #                       exempt_uri_regular_expressions: [
-    #                         {
-    #                           regex_string: "RegexPatternString",
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   sensitivity_to_block: "LOW", # accepts LOW, MEDIUM, HIGH
-    #                 },
-    #               },
-    #             ],
-    #             rule_action_overrides: [
-    #               {
-    #                 name: "EntityName", # required
-    #                 action_to_use: { # required
-    #                   block: {
-    #                     custom_response: {
-    #                       response_code: 1, # required
-    #                       custom_response_body_key: "EntityName",
-    #                       response_headers: [
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   allow: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   count: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   captcha: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   challenge: {
-    #                     custom_request_handling: {
-    #                       insert_headers: [ # required
-    #                         {
-    #                           name: "CustomHTTPHeaderName", # required
-    #                           value: "CustomHTTPHeaderValue", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                   monetize: {
-    #                     price_multiplier: "PriceMultiplier",
-    #                   },
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           label_match_statement: {
-    #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
-    #             key: "LabelMatchKey", # required
-    #           },
-    #           regex_match_statement: {
-    #             regex_string: "RegexPatternString", # required
-    #             field_to_match: { # required
-    #               single_header: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               single_query_argument: {
-    #                 name: "FieldToMatchData", # required
-    #               },
-    #               all_query_arguments: {
-    #               },
-    #               uri_path: {
-    #               },
-    #               query_string: {
-    #               },
-    #               body: {
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               method: {
-    #               },
-    #               json_body: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_paths: ["JsonPointerPath"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
-    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               headers: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_headers: ["FieldToMatchData"],
-    #                   excluded_headers: ["FieldToMatchData"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               cookies: {
-    #                 match_pattern: { # required
-    #                   all: {
-    #                   },
-    #                   included_cookies: ["SingleCookieName"],
-    #                   excluded_cookies: ["SingleCookieName"],
-    #                 },
-    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               header_order: {
-    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
-    #               },
-    #               ja3_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               ja4_fingerprint: {
-    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #               },
-    #               uri_fragment: {
-    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
-    #               },
-    #             },
-    #             text_transformations: [ # required
-    #               {
-    #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
-    #               },
-    #             ],
-    #           },
-    #           asn_match_statement: {
-    #             asn_list: [1], # required
-    #             forwarded_ip_config: {
-    #               header_name: "ForwardedIPHeaderName", # required
-    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
-    #             },
-    #           },
-    #         },
-    #         action: {
-    #           block: {
-    #             custom_response: {
-    #               response_code: 1, # required
-    #               custom_response_body_key: "EntityName",
-    #               response_headers: [
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           allow: {
-    #             custom_request_handling: {
-    #               insert_headers: [ # required
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           count: {
-    #             custom_request_handling: {
-    #               insert_headers: [ # required
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           captcha: {
-    #             custom_request_handling: {
-    #               insert_headers: [ # required
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           challenge: {
-    #             custom_request_handling: {
-    #               insert_headers: [ # required
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           monetize: {
-    #             price_multiplier: "PriceMultiplier",
-    #           },
-    #         },
-    #         override_action: {
-    #           count: {
-    #             custom_request_handling: {
-    #               insert_headers: [ # required
-    #                 {
-    #                   name: "CustomHTTPHeaderName", # required
-    #                   value: "CustomHTTPHeaderValue", # required
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #           none: {
-    #           },
-    #         },
-    #         rule_labels: [
-    #           {
-    #             name: "LabelName", # required
-    #           },
-    #         ],
-    #         visibility_config: { # required
-    #           sampled_requests_enabled: false, # required
-    #           cloud_watch_metrics_enabled: false, # required
-    #           metric_name: "MetricName", # required
-    #         },
-    #         captcha_config: {
-    #           immunity_time_property: {
-    #             immunity_time: 1, # required
-    #           },
-    #         },
-    #         challenge_config: {
-    #           immunity_time_property: {
-    #             immunity_time: 1, # required
-    #           },
-    #         },
-    #       },
-    #     ],
-    #     visibility_config: { # required
-    #       sampled_requests_enabled: false, # required
-    #       cloud_watch_metrics_enabled: false, # required
-    #       metric_name: "MetricName", # required
-    #     },
-    #     data_protection_config: {
-    #       data_protections: [ # required
-    #         {
-    #           field: { # required
-    #             field_type: "SINGLE_HEADER", # required, accepts SINGLE_HEADER, SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY
-    #             field_keys: ["FieldToProtectKeyName"],
-    #           },
-    #           action: "SUBSTITUTION", # required, accepts SUBSTITUTION, HASH
-    #           exclude_rule_match_details: false,
-    #           exclude_rate_based_details: false,
-    #         },
-    #       ],
-    #     },
-    #     lock_token: "LockToken", # required
-    #     custom_response_bodies: {
-    #       "EntityName" => {
-    #         content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
-    #         content: "ResponseContent", # required
-    #       },
-    #     },
-    #     captcha_config: {
-    #       immunity_time_property: {
-    #         immunity_time: 1, # required
-    #       },
-    #     },
-    #     challenge_config: {
-    #       immunity_time_property: {
-    #         immunity_time: 1, # required
-    #       },
-    #     },
-    #     token_domains: ["TokenDomain"],
-    #     association_config: {
-    #       request_body: {
-    #         "CLOUDFRONT" => {
-    #           default_size_inspection_limit: "KB_16", # required, accepts KB_16, KB_32, KB_48, KB_64
-    #         },
-    #       },
-    #     },
-    #     on_source_d_do_s_protection_config: {
-    #       alb_low_reputation_mode: "ACTIVE_UNDER_DDOS", # required, accepts ACTIVE_UNDER_DDOS, ALWAYS_ON
-    #     },
-    #     application_config: {
-    #       attributes: [
-    #         {
-    #           name: "AttributeName",
-    #           values: ["AttributeValue"],
-    #         },
-    #       ],
-    #     },
-    #     monetization_config: {
-    #       crypto_config: {
-    #         payment_networks: [ # required
-    #           {
-    #             chain: "BASE", # required, accepts BASE, SOLANA, BASE_SEPOLIA, SOLANA_DEVNET
-    #             wallet_address: "WalletAddress", # required
-    #             prices: [ # required
-    #               {
-    #                 amount: "PriceAmount", # required
-    #                 currency: "USDC", # required, accepts USDC
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       },
-    #       currency_mode: "REAL", # accepts REAL, TEST
-    #     },
-    #   })
-    #
     # @example Response structure
     #
     #   resp.next_lock_token #=> String
@@ -9266,7 +8394,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

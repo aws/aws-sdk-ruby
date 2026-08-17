@@ -20,6 +20,28 @@ module Aws
       }?
     }
 
+      type limit_entry = {
+      dimensions: Hash[::String, ::String],
+      requests: Array[
+        {
+          rate: ::Float,
+          period: ("second" | "minute")
+        }
+      ]?,
+      tokens: Array[
+        {
+          rate: ::Float,
+          period: ("second" | "minute")
+        }
+      ]?,
+      connections: Array[
+        {
+          rate: ::Float,
+          period: ("second" | "minute")
+        }
+      ]?
+    }
+
       type code_configuration = {
       code: {
         s3: {
@@ -119,6 +141,10 @@ module Aws
       efs_access_point: {
         access_point_arn: ::String,
         mount_path: ::String
+      }?,
+      capacity_provider_volume: {
+        volume_name: ::String,
+        mount_path: ::String
       }?
     }
 
@@ -163,13 +189,29 @@ module Aws
       }?
     }
 
+      type open_responses_evaluator_model_config = {
+      model_id: ::String,
+      max_output_tokens: ::Integer?,
+      temperature: ::Float?,
+      top_p: ::Float?,
+      reasoning: {
+        effort: ::String?
+      }?
+    }
+
       type evaluator_model_config = {
-      bedrock_evaluator_model_config: Params::bedrock_evaluator_model_config?
+      bedrock_evaluator_model_config: Params::bedrock_evaluator_model_config?,
+      responses_evaluator_model_config: Params::open_responses_evaluator_model_config?
     }
 
       type llm_as_a_judge_evaluator_config = {
       instructions: ::String,
       rating_scale: Params::rating_scale,
+      model_config: Params::evaluator_model_config
+    }
+
+      type derived_evaluator_config = {
+      base_evaluator_id: ::String,
       model_config: Params::evaluator_model_config
     }
 
@@ -180,7 +222,8 @@ module Aws
           lambda_arn: ::String,
           lambda_timeout_in_seconds: ::Integer?
         }?
-      }?
+      }?,
+      derived: Params::derived_evaluator_config?
     }
 
       type mcp_gateway_configuration = {
@@ -398,7 +441,13 @@ module Aws
 
       type http_target_configuration = {
       agentcore_runtime: Params::runtime_target_configuration?,
-      passthrough: Params::passthrough_target_configuration?
+      passthrough: Params::passthrough_target_configuration?,
+      connector: {
+        source: {
+          connector_id: ::String
+        },
+        parameters: Hash[::String, ::String]?
+      }?
     }
 
       type inference_provider_target_configuration = {
@@ -871,6 +920,17 @@ module Aws
       }?
     }
 
+      type private_key_jwt_config = {
+      private_key_source: {
+        kms_key_source: {
+          kms_key_arn: ::String
+        }?
+      }?,
+      signing_algorithm: ("RS256" | "PS256" | "ES256")?,
+      additional_header_claims: Hash[::String, ::String]?,
+      additional_payload_claims: Hash[::String, ::String]?
+    }
+
       type custom_oauth_2_provider_config_input = {
       oauth_discovery: Params::oauth_2_discovery,
       client_id: ::String?,
@@ -887,7 +947,8 @@ module Aws
           actor_token_scopes: Array[::String]?
         }?
       }?,
-      client_authentication_method: ("CLIENT_SECRET_BASIC" | "CLIENT_SECRET_POST" | "AWS_IAM_ID_TOKEN_JWT")?,
+      client_authentication_method: ("CLIENT_SECRET_BASIC" | "CLIENT_SECRET_POST" | "AWS_IAM_ID_TOKEN_JWT" | "PRIVATE_KEY_JWT")?,
+      private_key_jwt_config: Params::private_key_jwt_config?,
       private_endpoint: Params::private_endpoint?,
       private_endpoint_overrides: Array[
         Params::private_endpoint_override

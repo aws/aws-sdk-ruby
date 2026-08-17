@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2026-07-31)
+------------------
+
+* Feature - Removing Smithy RPC v2 CBOR support that was added in previous SDK release.
+
 1.31.0 (2026-07-23)
 ------------------
 

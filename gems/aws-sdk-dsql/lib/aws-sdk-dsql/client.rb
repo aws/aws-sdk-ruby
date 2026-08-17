@@ -1393,11 +1393,16 @@ module Aws::DSQL
     #
     # dsql:RemovePeerCluster
     #
-    # : Permission to remove peer clusters. The *dsql:RemovePeerCluster*
-    #   permission uses a wildcard ARN pattern to simplify permission
-    #   management during updates.
+    # : Permission to remove peer clusters. When you list peer clusters in
+    #   `multiRegionProperties.clusters`, you need this permission for each
+    #   current peer cluster that your list omits.
     #
-    #   Resources: `arn:aws:dsql:*:account-id:cluster/*`
+    #   Resources:
+    #
+    #   * Each removed peer cluster: exact ARN of each removed peer cluster,
+    #     in its own Region
+    #
+    #   ^
     # ^
     #
     # dsql:PutWitnessRegion
@@ -1412,15 +1417,14 @@ module Aws::DSQL
     #   **This permission is checked both in the cluster Region and in the
     #   witness Region.**
     #
-    # * The witness region specified in
+    # * The witness Region specified in
     #   `multiRegionProperties.witnessRegion` cannot be the same as the
     #   cluster's Region.
     #
-    # * When updating clusters with peer relationships, permissions are
-    #   checked for both adding and removing peers.
-    #
-    # * The `dsql:RemovePeerCluster` permission uses a wildcard ARN pattern
-    #   to simplify permission management during updates.
+    # * When you list peer clusters in `multiRegionProperties.clusters`, you
+    #   need `dsql:AddPeerCluster` for every peer cluster in your request.
+    #   You need `dsql:RemovePeerCluster` only for the peer clusters that
+    #   the update removes.
     #
     # @option params [required, String] :identifier
     #   The ID of the cluster you want to update.
@@ -1432,6 +1436,9 @@ module Aws::DSQL
     #   The KMS key that encrypts and protects the data on your cluster. You
     #   can specify the ARN, ID, or alias of an existing key or have Amazon
     #   Web Services create a default key for you.
+    #
+    #   To switch to the key owned by Amazon Web Services, specify the
+    #   reserved value `AWS_OWNED_KMS_KEY`.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1513,7 +1520,7 @@ module Aws::DSQL
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dsql'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

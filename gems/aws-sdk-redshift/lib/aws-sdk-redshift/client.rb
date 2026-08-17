@@ -9299,6 +9299,10 @@ module Aws::Redshift
     #   You can't use `MasterUserPassword` if `ManageMasterPassword` is
     #   `true`.
     #
+    #   If your admin user account is locked, this operation also unlocks your
+    #   account and resets the failed-login counter. This option is available
+    #   only when account lockout security is enabled for the cluster.
+    #
     #   <note markdown="1"> Operations never return the password, so this operation provides a way
     #   to regain access to the admin user account for a cluster if the
     #   password is lost.
@@ -13470,7 +13474,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

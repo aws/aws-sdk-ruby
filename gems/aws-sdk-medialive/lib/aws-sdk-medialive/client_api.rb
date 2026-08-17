@@ -4602,6 +4602,7 @@ module Aws::MediaLive
     OutputDestinationSettings.add_member(:stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "streamName"))
     OutputDestinationSettings.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     OutputDestinationSettings.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
+    OutputDestinationSettings.add_member(:virtual_source_address, Shapes::ShapeRef.new(shape: __string, location_name: "virtualSourceAddress"))
     OutputDestinationSettings.struct_class = Types::OutputDestinationSettings
 
     OutputGroup.add_member(:name, Shapes::ShapeRef.new(shape: __stringMax32, location_name: "name"))

@@ -56,7 +56,7 @@ module Aws::GeoMaps
 
     context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://maps.geo-fips.us-east-1.api.aws/v2"}}
+        {"endpoint" => {"url" => "https://maps.geo-fips.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -70,7 +70,7 @@ module Aws::GeoMaps
 
     context "For region us-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://maps.geo-fips.us-east-1.amazonaws.com/v2"}}
+        {"endpoint" => {"url" => "https://maps.geo-fips.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -84,7 +84,7 @@ module Aws::GeoMaps
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://maps.geo.us-east-1.api.aws/v2"}}
+        {"endpoint" => {"url" => "https://maps.geo.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -98,7 +98,7 @@ module Aws::GeoMaps
 
     context "For region us-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://maps.geo.us-east-1.amazonaws.com/v2"}}
+        {"endpoint" => {"url" => "https://maps.geo.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -308,7 +308,7 @@ module Aws::GeoMaps
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://maps.geo-fips.us-gov-west-1.api.aws/v2"}}
+        {"endpoint" => {"url" => "https://maps.geo-fips.us-gov-west-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -322,7 +322,7 @@ module Aws::GeoMaps
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://maps.geo-fips.us-gov-west-1.amazonaws.com/v2"}}
+        {"endpoint" => {"url" => "https://maps.geo-fips.us-gov-west-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -336,7 +336,7 @@ module Aws::GeoMaps
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://maps.geo.us-gov-west-1.api.aws/v2"}}
+        {"endpoint" => {"url" => "https://maps.geo.us-gov-west-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -350,7 +350,7 @@ module Aws::GeoMaps
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://maps.geo.us-gov-west-1.amazonaws.com/v2"}}
+        {"endpoint" => {"url" => "https://maps.geo.us-gov-west-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

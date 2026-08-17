@@ -66,6 +66,12 @@ module Aws::DirectConnect
       SENSITIVE: []
     end
 
+    class AsPathSegment
+      attr_accessor path_type: ("seq" | "set")
+      attr_accessor path: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
     class AssociateConnectionWithLagRequest
       attr_accessor connection_id: ::String
       attr_accessor lag_id: ::String
@@ -708,6 +714,21 @@ module Aws::DirectConnect
     class LimitExceededException < Aws::EmptyStructure
     end
 
+    class ListVirtualInterfaceRoutesRequest
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor filters: Types::RouteFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVirtualInterfaceRoutesResponse
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor routes: ::Array[Types::Route]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListVirtualInterfaceTestHistoryRequest
       attr_accessor test_id: ::String
       attr_accessor virtual_interface_id: ::String
@@ -872,8 +893,28 @@ module Aws::DirectConnect
       SENSITIVE: []
     end
 
+    class Route
+      attr_accessor cidr: ::String
+      attr_accessor route_direction: ("accepted" | "advertised")
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor as_path: ::Array[Types::AsPathSegment]
+      attr_accessor communities: ::Array[::String]
+      attr_accessor aws_logical_device_id: ::String
+      attr_accessor route_installed_at: ::Time
+      SENSITIVE: []
+    end
+
     class RouteFilterPrefix
       attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class RouteFilters
+      attr_accessor route_direction: ("accepted" | "advertised")
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor cidrs: ::Array[::String]
+      attr_accessor as_path: ::Array[::Integer]
+      attr_accessor communities: ::Array[::String]
       SENSITIVE: []
     end
 

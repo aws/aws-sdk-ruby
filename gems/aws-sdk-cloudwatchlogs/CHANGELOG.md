@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.161.0 (2026-08-06)
+------------------
+
+* Feature - This release adds index category support to the CloudWatch Logs DescribeFieldIndexes API. Customers can filter and identify DEFAULT, CUSTOM, AUTO, and INACTIVE field indexes.
+
+1.160.0 (2026-07-31)
+------------------
+
+* Feature - Amazon CloudWatch Logs now lets you create and update lookup tables directly from CloudWatch Logs query results by passing a queryId, and configure a lookup table as a scheduled query destination so it refreshes automatically with the latest query results on each run.
+
 1.159.0 (2026-07-09)
 ------------------
 

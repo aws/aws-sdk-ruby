@@ -783,14 +783,20 @@ module Aws::TrustedAdvisor
     #         }, 
     #         name: "Security Groups - Unrestricted Access", 
     #         arn: "arn:aws:trustedadvisor:::check/1iG5NDGVre", 
+    #         aws_resource_types: [
+    #           "AWS::EC2::SecurityGroup", 
+    #         ], 
     #         aws_services: [
     #           "EC2", 
     #         ], 
+    #         check_granularity: "resource", 
     #         description: "Checks security groups for rules that allow unrestricted access to a resource. Unrestricted access increases opportunities for malicious activity (hacking, denial-of-service attacks, loss of data).\n<br>\n<br>Note: This check only evaluates security groups that you create and their inbound rules for IPv4 addresses. Security groups created by AWS Directory Services are flagged as red or yellow, but they don’t pose a security risk and can be safely ignored or excluded. For more information, see the <a href=\"https://aws.amazon.com/premiumsupport/faqs/#AWS_Trusted_Advisor\" target=\"_blank\">Trusted Advisor FAQ</a>.\n<br>\n<br>\n<h4 class='headerBodyStyle'>Alert Criteria</h4>\n<br>\nRed: A security group rule has a source IP address with a /0 suffix for ports other than 25, 80, or 443.\n<br>\n<br>\n<h4 class='headerBodyStyle'>Recommended Action</h4>\n<br>\nRestrict access to only those IP addresses that require it. To restrict access to a specific IP address, set the suffix to /32 (for example, 192.0.2.10/32). Be sure to delete overly permissive rules after creating rules that are more restrictive.\n<br>\n<br>\n<h4 class='headerBodyStyle'>Additional Resources</h4>\n<br><a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\" target=\"_blank\">Amazon EC2 Security Groups</a><br>\n<a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\" target=\"_blank\">Classless Inter-Domain Routing</a> (Wikipedia)", 
     #         id: "1iG5NDGVre", 
     #         pillars: [
     #           "security", 
     #         ], 
+    #         recommendation_id: "9534ec9b-bf3a-44e8-8213-2ed68b39d9d5", 
+    #         resource_arn_queryable: true, 
     #         source: "ta_check", 
     #       }, 
     #       {
@@ -814,14 +820,19 @@ module Aws::TrustedAdvisor
     #         }, 
     #         name: "Amazon Relational Database Service (RDS) Reserved Instance Optimization", 
     #         arn: "arn:aws:trustedadvisor:::check/1qazXsw23e", 
+    #         aws_resource_types: [
+    #         ], 
     #         aws_services: [
     #           "RDS", 
     #         ], 
+    #         check_granularity: "account", 
     #         description: "Checks your usage of RDS and provides recommendations on purchase of Reserved Instances to help reduce costs incurred from using RDS On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Instance to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.<br/><br/>\r\n<h4 class='headerBodyStyle'>Alert Criteria</h4><br/>\nYellow: Optimizing the purchase of RDS Reserved Instances can help reduce costs.<br/><br/>\r\n<h4 class='headerBodyStyle'>Recommended Action</h4><br/>\r\nSee the <a href=\"http://console.aws.amazon.com/billing/home?/costexplorer#/costexplorer\" target=\"_blank\">Cost Explorer</a> page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase RDS Reserved Instances.\n<br/>\n<br/>\n<h4 class='headerBodyStyle'>Additional Resources</h4><br/>\nInformation on RDS Reserved Instances and how they can save you money can be found <a href=\"http://aws.amazon.com/rds/reserved-instances/\" target=\"_blank\">here</a>.<br>\nFor more information on this recommendation, see <a href=\"http://aws.amazon.com/premiumsupport/technology/trusted-advisor/faqs/#Reserved_Instance_Optimization_Check_Questions\" target=\"_blank\">Reserved Instance Optimization Check Questions</a> in the Trusted Advisor FAQs.<br>\nFor more detailed description of fields, see <a href=\"http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ReservationPurchaseRecommendationDetail.html#awscostmanagement-Type-ReservationPurchaseRecommendationDetail-AverageUtilization\" target=\"_blank\">Cost Explorer documentation</a>", 
     #         id: "1qazXsw23e", 
     #         pillars: [
     #           "cost_optimizing", 
     #         ], 
+    #         recommendation_id: "8b602b6f-452d-4cb2-8a9e-c7650955d9cd", 
+    #         resource_arn_queryable: false, 
     #         source: "ta_check", 
     #       }, 
     #       {
@@ -841,14 +852,19 @@ module Aws::TrustedAdvisor
     #         }, 
     #         name: "Amazon Redshift Reserved Node Optimization", 
     #         arn: "arn:aws:trustedadvisor:::check/1qw23er45t", 
+    #         aws_resource_types: [
+    #         ], 
     #         aws_services: [
     #           "Redshift", 
     #         ], 
+    #         check_granularity: "account", 
     #         description: "Checks your usage of Redshift and provides recommendations on purchase of Reserved Nodes to help reduce costs incurred from using Redshift On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Nodes to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.<br/><br/>\n<h4 class='headerBodyStyle'>Alert Criteria</h4><br/>Yellow: Optimizing the purchase of Redshift Reserved Nodes can help reduce costs.<br/><br/>\n<h4 class='headerBodyStyle'>Recommended Action</h4><br/>See the <a href=\"https://console.aws.amazon.com/billing/home?/costexplorer#/costexplorer\" target=\"_blank\">Cost Explorer</a> page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase Redshift Reserved Nodes.<br/><br/>\n<h4 class='headerBodyStyle'>Additional Resources</h4><br/>Information on Redshift Reserved Nodes and how they can save you money can be found <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html\" target=\"_blank\">here</a>.<br>\nFor more information on this recommendation, see <a href=\"http://aws.amazon.com/premiumsupport/technology/trusted-advisor/faqs/#Reserved_Instance_Optimization_Check_Questions\" target=\"_blank\">Reserved Instance Optimization Check Questions</a> in the Trusted Advisor FAQs.<br/>\nFor more detailed description of fields, see <a href=\"http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ReservationPurchaseRecommendationDetail.html#awscostmanagement-Type-ReservationPurchaseRecommendationDetail-AverageUtilization\" target=\"_blank\">Cost Explorer documentation</a>", 
     #         id: "1qw23er45t", 
     #         pillars: [
     #           "cost_optimizing", 
     #         ], 
+    #         recommendation_id: "4ecff4d4-1bc1-4c99-a5b8-0fff9ee500d6", 
+    #         resource_arn_queryable: false, 
     #         source: "ta_check", 
     #       }, 
     #     ], 
@@ -881,6 +897,11 @@ module Aws::TrustedAdvisor
     #   resp.check_summaries[0].source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"
     #   resp.check_summaries[0].metadata #=> Hash
     #   resp.check_summaries[0].metadata["String"] #=> String
+    #   resp.check_summaries[0].resource_arn_queryable #=> Boolean
+    #   resp.check_summaries[0].aws_resource_types #=> Array
+    #   resp.check_summaries[0].aws_resource_types[0] #=> String
+    #   resp.check_summaries[0].check_granularity #=> String
+    #   resp.check_summaries[0].recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListChecks AWS API Documentation
     #
@@ -1726,6 +1747,105 @@ module Aws::TrustedAdvisor
       req.send_request(options)
     end
 
+    # List all Trusted Advisor recommendations for a given AWS resource ARN.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page
+    #
+    # @option params [required, String] :aws_resource_arn
+    #   The ARN of the AWS resource to query recommendations for
+    #
+    # @option params [String] :pillar
+    #   The pillar that the recommendation belongs to
+    #
+    # @option params [String] :status
+    #   The current status of the Recommendation Resource
+    #
+    # @option params [String] :check_arn
+    #   The AWS Trusted Advisor Check ARN that relates to the Recommendation
+    #
+    # @option params [String] :language
+    #   The ISO 639-1 code for the language that you want your recommendations
+    #   to appear in.
+    #
+    # @return [Types::ListRecommendationsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecommendationsForResourceResponse#next_token #next_token} => String
+    #   * {Types::ListRecommendationsForResourceResponse#recommendation_for_resource_summaries #recommendation_for_resource_summaries} => Array&lt;Types::RecommendationForResourceSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List all Trusted Advisor Recommendations for an AWS Resource
+    #
+    #   resp = client.list_recommendations_for_resource({
+    #     aws_resource_arn: "arn:aws:ec2:us-east-1:000000000000:instance/i-0abcd1234efgh5678", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "<REDACTED>", 
+    #     recommendation_for_resource_summaries: [
+    #       {
+    #         metadata: {
+    #           "Region" => "us-east-1", 
+    #           "Resource" => "i-0abcd1234efgh5678", 
+    #           "Status" => "Yellow", 
+    #         }, 
+    #         aws_resource_arn: "arn:aws:ec2:us-east-1:000000000000:instance/i-0abcd1234efgh5678", 
+    #         check_arn: "arn:aws:trustedadvisor:::check/Qch7DwouX1", 
+    #         exclusion_status: "included", 
+    #         last_updated_at: Time.parse("2026-05-21T15:09:51.891Z"), 
+    #         pillars: [
+    #           "cost_optimizing", 
+    #         ], 
+    #         recommendation_arn: "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #         status: "warning", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recommendations_for_resource({
+    #     next_token: "ListRecommendationsForResourceRequestNextTokenString",
+    #     max_results: 1,
+    #     aws_resource_arn: "AwsResourceArn", # required
+    #     pillar: "cost_optimizing", # accepts cost_optimizing, performance, security, service_limits, fault_tolerance, operational_excellence
+    #     status: "ok", # accepts ok, warning, error
+    #     check_arn: "CheckArn",
+    #     language: "en", # accepts en, ja, zh, fr, de, ko, zh_TW, it, es, pt_BR, id
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.recommendation_for_resource_summaries #=> Array
+    #   resp.recommendation_for_resource_summaries[0].check_arn #=> String
+    #   resp.recommendation_for_resource_summaries[0].recommendation_arn #=> String
+    #   resp.recommendation_for_resource_summaries[0].aws_resource_arn #=> String
+    #   resp.recommendation_for_resource_summaries[0].status #=> String, one of "ok", "warning", "error"
+    #   resp.recommendation_for_resource_summaries[0].last_updated_at #=> Time
+    #   resp.recommendation_for_resource_summaries[0].exclusion_status #=> String, one of "excluded", "included"
+    #   resp.recommendation_for_resource_summaries[0].metadata #=> Hash
+    #   resp.recommendation_for_resource_summaries[0].metadata["String"] #=> String
+    #   resp.recommendation_for_resource_summaries[0].pillars #=> Array
+    #   resp.recommendation_for_resource_summaries[0].pillars[0] #=> String, one of "cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListRecommendationsForResource AWS API Documentation
+    #
+    # @overload list_recommendations_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_recommendations_for_resource(params = {}, options = {})
+      req = build_request(:list_recommendations_for_resource, params)
+      req.send_request(options)
+    end
+
     # Update the lifecycle of a Recommendation within an Organization. This
     # API only supports prioritized recommendations and updates global
     # priority recommendations, eliminating the need to call the API in each
@@ -1848,7 +1968,7 @@ module Aws::TrustedAdvisor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-trustedadvisor'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

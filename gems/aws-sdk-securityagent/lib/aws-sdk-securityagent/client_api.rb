@@ -256,6 +256,7 @@ module Aws::SecurityAgent
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
+    JobType = Shapes::StringShape.new(name: 'JobType')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
     LambdaFunctionArns = Shapes::ListShape.new(name: 'LambdaFunctionArns')
@@ -390,6 +391,7 @@ module Aws::SecurityAgent
     SecurityRequirementSummaryList = Shapes::ListShape.new(name: 'SecurityRequirementSummaryList')
     SelfManagedInput = Shapes::StructureShape.new(name: 'SelfManagedInput')
     SensitiveEmail = Shapes::StringShape.new(name: 'SensitiveEmail')
+    SensitiveEmailAddress = Shapes::StringShape.new(name: 'SensitiveEmailAddress')
     ServiceManagedInput = Shapes::StructureShape.new(name: 'ServiceManagedInput')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceRole = Shapes::StringShape.new(name: 'ServiceRole')
@@ -528,6 +530,8 @@ module Aws::SecurityAgent
     Actor.add_member(:uris, Shapes::ShapeRef.new(shape: UriList, location_name: "uris"))
     Actor.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "authentication"))
     Actor.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    Actor.add_member(:enable_email_mfa, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableEmailMfa"))
+    Actor.add_member(:mfa_forwarding_address, Shapes::ShapeRef.new(shape: SensitiveEmailAddress, location_name: "mfaForwardingAddress"))
     Actor.struct_class = Types::Actor
 
     ActorList.member = Shapes::ShapeRef.new(shape: Actor)
@@ -858,6 +862,7 @@ module Aws::SecurityAgent
     CodeReview.add_member(:log_config, Shapes::ShapeRef.new(shape: CloudWatchLog, location_name: "logConfig"))
     CodeReview.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
     CodeReview.add_member(:validation_mode, Shapes::ShapeRef.new(shape: ValidationMode, location_name: "validationMode"))
+    CodeReview.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     CodeReview.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     CodeReview.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     CodeReview.struct_class = Types::CodeReview
@@ -878,6 +883,7 @@ module Aws::SecurityAgent
     CodeReviewJob.add_member(:error_information, Shapes::ShapeRef.new(shape: ErrorInformation, location_name: "errorInformation"))
     CodeReviewJob.add_member(:integrated_repositories, Shapes::ShapeRef.new(shape: IntegratedRepositoryList, location_name: "integratedRepositories"))
     CodeReviewJob.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
+    CodeReviewJob.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     CodeReviewJob.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     CodeReviewJob.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     CodeReviewJob.struct_class = Types::CodeReviewJob
@@ -1005,6 +1011,7 @@ module Aws::SecurityAgent
     CreateCodeReviewInput.add_member(:log_config, Shapes::ShapeRef.new(shape: CloudWatchLog, location_name: "logConfig"))
     CreateCodeReviewInput.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
     CreateCodeReviewInput.add_member(:validation_mode, Shapes::ShapeRef.new(shape: ValidationMode, location_name: "validationMode"))
+    CreateCodeReviewInput.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     CreateCodeReviewInput.struct_class = Types::CreateCodeReviewInput
 
     CreateCodeReviewOutput.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
@@ -1017,6 +1024,7 @@ module Aws::SecurityAgent
     CreateCodeReviewOutput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, location_name: "agentSpaceId"))
     CreateCodeReviewOutput.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
     CreateCodeReviewOutput.add_member(:validation_mode, Shapes::ShapeRef.new(shape: ValidationMode, location_name: "validationMode"))
+    CreateCodeReviewOutput.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     CreateCodeReviewOutput.struct_class = Types::CreateCodeReviewOutput
 
     CreateIntegrationInput.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, required: true, location_name: "provider"))
@@ -1049,6 +1057,7 @@ module Aws::SecurityAgent
     CreatePentestInput.add_member(:network_traffic_config, Shapes::ShapeRef.new(shape: NetworkTrafficConfig, location_name: "networkTrafficConfig"))
     CreatePentestInput.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
     CreatePentestInput.add_member(:disable_managed_skills, Shapes::ShapeRef.new(shape: SkillTypeList, location_name: "disableManagedSkills"))
+    CreatePentestInput.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     CreatePentestInput.struct_class = Types::CreatePentestInput
 
     CreatePentestOutput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestId"))
@@ -1341,6 +1350,8 @@ module Aws::SecurityAgent
     Finding.add_member(:code_locations, Shapes::ShapeRef.new(shape: CodeLocationList, location_name: "codeLocations"))
     Finding.add_member(:verification_script, Shapes::ShapeRef.new(shape: VerificationScript, location_name: "verificationScript"))
     Finding.add_member(:alignment_rationale, Shapes::ShapeRef.new(shape: String, location_name: "alignmentRationale"))
+    Finding.add_member(:revalidation_job_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "revalidationJobIds"))
+    Finding.add_member(:original_finding_id, Shapes::ShapeRef.new(shape: String, location_name: "originalFindingId"))
     Finding.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     Finding.struct_class = Types::Finding
@@ -1495,6 +1506,7 @@ module Aws::SecurityAgent
 
     IntegratedRepository.add_member(:integration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "integrationId"))
     IntegratedRepository.add_member(:provider_resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "providerResourceId"))
+    IntegratedRepository.add_member(:branch, Shapes::ShapeRef.new(shape: String, location_name: "branch"))
     IntegratedRepository.struct_class = Types::IntegratedRepository
 
     IntegratedRepositoryList.member = Shapes::ShapeRef.new(shape: IntegratedRepository)
@@ -1843,6 +1855,7 @@ module Aws::SecurityAgent
     Pentest.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
     Pentest.add_member(:clean_up_strategy, Shapes::ShapeRef.new(shape: CleanUpStrategy, location_name: "cleanUpStrategy"))
     Pentest.add_member(:disable_managed_skills, Shapes::ShapeRef.new(shape: SkillTypeList, location_name: "disableManagedSkills"))
+    Pentest.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     Pentest.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     Pentest.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     Pentest.struct_class = Types::Pentest
@@ -1872,6 +1885,9 @@ module Aws::SecurityAgent
     PentestJob.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
     PentestJob.add_member(:clean_up_strategy, Shapes::ShapeRef.new(shape: CleanUpStrategy, location_name: "cleanUpStrategy"))
     PentestJob.add_member(:disable_managed_skills, Shapes::ShapeRef.new(shape: SkillTypeList, location_name: "disableManagedSkills"))
+    PentestJob.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
+    PentestJob.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
+    PentestJob.add_member(:selected_finding_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "selectedFindingIds"))
     PentestJob.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     PentestJob.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     PentestJob.struct_class = Types::PentestJob
@@ -2050,6 +2066,8 @@ module Aws::SecurityAgent
 
     StartPentestJobInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
     StartPentestJobInput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestId"))
+    StartPentestJobInput.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
+    StartPentestJobInput.add_member(:selected_finding_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "selectedFindingIds"))
     StartPentestJobInput.struct_class = Types::StartPentestJobInput
 
     StartPentestJobOutput.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
@@ -2352,6 +2370,7 @@ module Aws::SecurityAgent
     UpdateCodeReviewInput.add_member(:log_config, Shapes::ShapeRef.new(shape: CloudWatchLog, location_name: "logConfig"))
     UpdateCodeReviewInput.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
     UpdateCodeReviewInput.add_member(:validation_mode, Shapes::ShapeRef.new(shape: ValidationMode, location_name: "validationMode"))
+    UpdateCodeReviewInput.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     UpdateCodeReviewInput.struct_class = Types::UpdateCodeReviewInput
 
     UpdateCodeReviewOutput.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
@@ -2364,6 +2383,7 @@ module Aws::SecurityAgent
     UpdateCodeReviewOutput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, location_name: "agentSpaceId"))
     UpdateCodeReviewOutput.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
     UpdateCodeReviewOutput.add_member(:validation_mode, Shapes::ShapeRef.new(shape: ValidationMode, location_name: "validationMode"))
+    UpdateCodeReviewOutput.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     UpdateCodeReviewOutput.struct_class = Types::UpdateCodeReviewOutput
 
     UpdateFindingInput.add_member(:finding_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingId"))
@@ -2399,6 +2419,7 @@ module Aws::SecurityAgent
     UpdatePentestInput.add_member(:network_traffic_config, Shapes::ShapeRef.new(shape: NetworkTrafficConfig, location_name: "networkTrafficConfig"))
     UpdatePentestInput.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
     UpdatePentestInput.add_member(:disable_managed_skills, Shapes::ShapeRef.new(shape: SkillTypeList, location_name: "disableManagedSkills"))
+    UpdatePentestInput.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     UpdatePentestInput.struct_class = Types::UpdatePentestInput
 
     UpdatePentestOutput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestId"))

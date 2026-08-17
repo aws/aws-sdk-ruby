@@ -2035,7 +2035,8 @@ module Aws
       default_value: ::String?,
       allowed_values: Array[::String]?,
       property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
-      property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+      property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT"),
+      format: ::String?
     }
 
       type extracted_parameter = {
@@ -2063,6 +2064,23 @@ module Aws
       offset_configuration: Params::offset_configuration?
     }
 
+      type filter_configuration = {
+      filter_mode: ("QUERY_PARAMS" | "FILTER_STRING"),
+      operator_mappings: Hash[::String, ::String]?,
+      date_time_format: ::String?,
+      strip_quotes: bool?,
+      between_configuration: {
+        low_bound_key: ::String?,
+        high_bound_key: ::String?,
+        template: ::String?
+      }?,
+      filter_string_configuration: {
+        query_parameter_name: ::String,
+        quote_string_values: bool?,
+        quote_character: ::String?
+      }?
+    }
+
       type source_configuration = {
       request_method: ("GET" | "POST")?,
       request_path: ::String?,
@@ -2073,7 +2091,8 @@ module Aws
         result_path: ::String,
         error_path: ::String?
       }?,
-      pagination_configuration: Params::pagination_configuration?
+      pagination_configuration: Params::pagination_configuration?,
+      filter_configuration: Params::filter_configuration?
     }
 
       type search_filter_clause = {

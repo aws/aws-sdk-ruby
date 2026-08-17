@@ -25,7 +25,8 @@ module Aws
       logs_encryption_configuration: {
         encryption_strategy: ("CUSTOMER_MANAGED" | "AWS_OWNED"),
         kms_key_arn: ::String?,
-        encryption_conflict_resolution_strategy: ("ALLOW" | "SKIP")?
+        encryption_conflict_resolution_strategy: ("ALLOW" | "SKIP")?,
+        encryption_scope: ("ENCRYPTED_SOURCE_ONLY" | "NEW_DESTINATION_LOG_GROUPS")?
       }?,
       backup_configuration: {
         region: ::String,
@@ -33,6 +34,10 @@ module Aws
       }?,
       log_group_name_configuration: {
         log_group_name_pattern: ::String
+      }?,
+      tag_propagation_configuration: {
+        destination_role_arn: ::String,
+        tag_conflict_resolution_strategy: ("IN_SYNC" | "ADD_ONLY" | "UPDATE_SYNC")?
       }?
     }
 
@@ -93,7 +98,8 @@ module Aws
       }?,
       msk_monitoring_parameters: {
         enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")?
-      }?
+      }?,
+      kms_key_arn: ::String?
     }
 
       type telemetry_rule = {

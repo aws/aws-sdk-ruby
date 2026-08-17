@@ -691,16 +691,18 @@ module Aws::Resiliencehubv2
     #
     #   resp = client.create_report({
     #     service_arn: "Arn", # required
-    #     report_type: "FAILURE_MODE", # required, accepts FAILURE_MODE
+    #     report_type: "FAILURE_MODE", # required, accepts FAILURE_MODE, TESTING
     #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.report_generation_result.report_type #=> String, one of "FAILURE_MODE"
+    #   resp.report_generation_result.report_type #=> String, one of "FAILURE_MODE", "TESTING"
     #   resp.report_generation_result.status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
     #   resp.report_generation_result.service_arn #=> String
     #   resp.report_generation_result.assessment_id #=> String
+    #   resp.report_generation_result.test_run_id #=> String
+    #   resp.report_generation_result.test_template_arn #=> String
     #   resp.report_generation_result.created_at #=> Time
     #   resp.report_generation_result.report_output.s3_report_output.s3_object_key #=> String
     #   resp.report_generation_result.report_output.failed_report_output.error_code #=> String, one of "INSUFFICIENT_PERMISSIONS", "CONFIGURATION_ERROR", "INTERNAL_ERROR"
@@ -730,7 +732,7 @@ module Aws::Resiliencehubv2
     #   ARN identifier.
     #
     # @option params [required, Array<String>] :regions
-    #   The AWS Regions where the service operates.
+    #   The Regions where the service operates.
     #
     # @option params [required, Types::PermissionModel] :permission_model
     #   The permission model for the service.
@@ -1041,6 +1043,86 @@ module Aws::Resiliencehubv2
       req.send_request(options)
     end
 
+    # Creates a test for a service by configuring a test template. Each
+    # service has one test per template.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service to create the test for.
+    #
+    # @option params [required, String] :test_template_arn
+    #   The ARN of the test template to configure.
+    #
+    # @option params [Types::LoggingConfiguration] :logging_configuration
+    #   The logging configuration for the test.
+    #
+    # @option params [Array<Types::StopCondition>] :stop_conditions
+    #   The stop conditions for the test.
+    #
+    # @option params [String] :role_name
+    #   The name of the IAM execution role to use when running the test.
+    #
+    # @option params [Hash<String,Array>] :parameters
+    #   The parameter values for the test.
+    #
+    # @return [Types::CreateTestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTestResponse#test #test} => Types::Test
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_test({
+    #     service_arn: "Arn", # required
+    #     test_template_arn: "ServiceOwnedArn", # required
+    #     logging_configuration: {
+    #       s3_bucket_name: "String",
+    #       cloud_watch_log_group_arn: "Arn",
+    #       log_schema_version: "String",
+    #     },
+    #     stop_conditions: [
+    #       {
+    #         source: "aws:cloudwatch:alarm", # required, accepts aws:cloudwatch:alarm, none
+    #         value: "String", # required
+    #       },
+    #     ],
+    #     role_name: "EntityName",
+    #     parameters: {
+    #       "ParameterKey" => ["ParameterValue"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test.test_id #=> String
+    #   resp.test.test_template_arn #=> String
+    #   resp.test.service_arn #=> String
+    #   resp.test.name #=> String
+    #   resp.test.actions #=> Array
+    #   resp.test.actions[0].action_id #=> String
+    #   resp.test.actions[0].description #=> String
+    #   resp.test.actions[0].resource_type #=> String
+    #   resp.test.logging_configuration.s3_bucket_name #=> String
+    #   resp.test.logging_configuration.cloud_watch_log_group_arn #=> String
+    #   resp.test.logging_configuration.log_schema_version #=> String
+    #   resp.test.stop_conditions #=> Array
+    #   resp.test.stop_conditions[0].source #=> String, one of "aws:cloudwatch:alarm", "none"
+    #   resp.test.stop_conditions[0].value #=> String
+    #   resp.test.role_name #=> String
+    #   resp.test.parameters #=> Hash
+    #   resp.test.parameters["ParameterKey"] #=> Array
+    #   resp.test.parameters["ParameterKey"][0] #=> String
+    #   resp.test.total_test_runs #=> Integer
+    #   resp.test.successful_test_runs #=> Integer
+    #   resp.test.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/CreateTest AWS API Documentation
+    #
+    # @overload create_test(params = {})
+    # @param [Hash] params ({})
+    def create_test(params = {}, options = {})
+      req = build_request(:create_test, params)
+      req.send_request(options)
+    end
+
     # Creates a user journey within a system.
     #
     # @option params [required, String] :system_arn
@@ -1316,6 +1398,78 @@ module Aws::Resiliencehubv2
       req.send_request(options)
     end
 
+    # Deletes a test.
+    #
+    # @option params [required, String] :test_id
+    #   The identifier of the test to delete.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test belongs to.
+    #
+    # @return [Types::DeleteTestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTestResponse#test_id #test_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_test({
+    #     test_id: "TestId", # required
+    #     service_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DeleteTest AWS API Documentation
+    #
+    # @overload delete_test(params = {})
+    # @param [Hash] params ({})
+    def delete_test(params = {}, options = {})
+      req = build_request(:delete_test, params)
+      req.send_request(options)
+    end
+
+    # Removes monitoring sources from a test. The operation is transactional
+    # and idempotent — removing a source that is not attached is a no-op.
+    #
+    # @option params [required, String] :test_id
+    #   The identifier of the test to remove sources from.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test belongs to.
+    #
+    # @option params [required, Array<Types::TestSourceInput>] :test_sources
+    #   The monitoring sources to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_test_sources({
+    #     test_id: "TestId", # required
+    #     service_arn: "Arn", # required
+    #     test_sources: [ # required
+    #       {
+    #         success_criteria_alarm: {
+    #           alarm_arn: "CloudWatchAlarmArn", # required
+    #         },
+    #         observability_alarm: {
+    #           alarm_arn: "CloudWatchAlarmArn", # required
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DeleteTestSources AWS API Documentation
+    #
+    # @overload delete_test_sources(params = {})
+    # @param [Hash] params ({})
+    def delete_test_sources(params = {}, options = {})
+      req = build_request(:delete_test_sources, params)
+      req.send_request(options)
+    end
+
     # Deletes a user journey.
     #
     # @option params [required, String] :system_arn
@@ -1581,6 +1735,186 @@ module Aws::Resiliencehubv2
     # @param [Hash] params ({})
     def get_system(params = {}, options = {})
       req = build_request(:get_system, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a test by ID.
+    #
+    # @option params [required, String] :test_id
+    #   The identifier of the test to retrieve.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test belongs to.
+    #
+    # @return [Types::GetTestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTestResponse#test #test} => Types::Test
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_test({
+    #     test_id: "TestId", # required
+    #     service_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test.test_id #=> String
+    #   resp.test.test_template_arn #=> String
+    #   resp.test.service_arn #=> String
+    #   resp.test.name #=> String
+    #   resp.test.actions #=> Array
+    #   resp.test.actions[0].action_id #=> String
+    #   resp.test.actions[0].description #=> String
+    #   resp.test.actions[0].resource_type #=> String
+    #   resp.test.logging_configuration.s3_bucket_name #=> String
+    #   resp.test.logging_configuration.cloud_watch_log_group_arn #=> String
+    #   resp.test.logging_configuration.log_schema_version #=> String
+    #   resp.test.stop_conditions #=> Array
+    #   resp.test.stop_conditions[0].source #=> String, one of "aws:cloudwatch:alarm", "none"
+    #   resp.test.stop_conditions[0].value #=> String
+    #   resp.test.role_name #=> String
+    #   resp.test.parameters #=> Hash
+    #   resp.test.parameters["ParameterKey"] #=> Array
+    #   resp.test.parameters["ParameterKey"][0] #=> String
+    #   resp.test.total_test_runs #=> Integer
+    #   resp.test.successful_test_runs #=> Integer
+    #   resp.test.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetTest AWS API Documentation
+    #
+    # @overload get_test(params = {})
+    # @param [Hash] params ({})
+    def get_test(params = {}, options = {})
+      req = build_request(:get_test, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a test run by ID, including its status, results, and the
+    # configuration snapshotted when the run started.
+    #
+    # @option params [required, String] :test_run_id
+    #   The identifier of the test run to retrieve.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test run belongs to.
+    #
+    # @return [Types::GetTestRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTestRunResponse#test_run #test_run} => Types::TestRun
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_test_run({
+    #     test_run_id: "TestRunId", # required
+    #     service_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_run.test_run_id #=> String
+    #   resp.test_run.test_id #=> String
+    #   resp.test_run.status #=> String, one of "INITIALIZING", "RUNNING", "STOPPING", "PASSED", "FAILED", "STOPPED", "ERROR"
+    #   resp.test_run.service_arn #=> String
+    #   resp.test_run.started_at #=> Time
+    #   resp.test_run.ended_at #=> Time
+    #   resp.test_run.experiments #=> Array
+    #   resp.test_run.experiments[0].experiment_arn #=> String
+    #   resp.test_run.experiments[0].details #=> String
+    #   resp.test_run.event_count #=> Integer
+    #   resp.test_run.parameters #=> Hash
+    #   resp.test_run.parameters["ParameterKey"] #=> Array
+    #   resp.test_run.parameters["ParameterKey"][0] #=> String
+    #   resp.test_run.error_message #=> String
+    #   resp.test_run.stop_conditions #=> Array
+    #   resp.test_run.stop_conditions[0].source #=> String, one of "aws:cloudwatch:alarm", "none"
+    #   resp.test_run.stop_conditions[0].value #=> String
+    #   resp.test_run.logging_configuration.s3_bucket_name #=> String
+    #   resp.test_run.logging_configuration.cloud_watch_log_group_arn #=> String
+    #   resp.test_run.logging_configuration.log_schema_version #=> String
+    #   resp.test_run.role_name #=> String
+    #   resp.test_run.test_template_arn #=> String
+    #   resp.test_run.report_configuration.report_output #=> Array
+    #   resp.test_run.report_configuration.report_output[0].s3.bucket_path #=> String
+    #   resp.test_run.report_configuration.report_output[0].s3.bucket_owner #=> String
+    #   resp.test_run.policy.policy_arn #=> String
+    #   resp.test_run.policy.name #=> String
+    #   resp.test_run.policy.availability_slo.target #=> Float
+    #   resp.test_run.policy.multi_az.rto_in_minutes #=> Integer
+    #   resp.test_run.policy.multi_az.rpo_in_minutes #=> Integer
+    #   resp.test_run.policy.multi_az.disaster_recovery_approach #=> String, one of "ACTIVE_ACTIVE", "HOT_STANDBY", "WARM_STANDBY", "PILOT_LIGHT", "BACKUP_AND_RESTORE"
+    #   resp.test_run.policy.multi_region.rto_in_minutes #=> Integer
+    #   resp.test_run.policy.multi_region.rpo_in_minutes #=> Integer
+    #   resp.test_run.policy.multi_region.disaster_recovery_approach #=> String, one of "ACTIVE_ACTIVE", "HOT_STANDBY", "WARM_STANDBY", "PILOT_LIGHT", "BACKUP_AND_RESTORE"
+    #   resp.test_run.policy.data_recovery.time_between_backups_in_minutes #=> Integer
+    #   resp.test_run.report_output.report_type #=> String, one of "FAILURE_MODE", "TESTING"
+    #   resp.test_run.report_output.status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
+    #   resp.test_run.report_output.service_arn #=> String
+    #   resp.test_run.report_output.assessment_id #=> String
+    #   resp.test_run.report_output.test_run_id #=> String
+    #   resp.test_run.report_output.test_template_arn #=> String
+    #   resp.test_run.report_output.created_at #=> Time
+    #   resp.test_run.report_output.report_output.s3_report_output.s3_object_key #=> String
+    #   resp.test_run.report_output.report_output.failed_report_output.error_code #=> String, one of "INSUFFICIENT_PERMISSIONS", "CONFIGURATION_ERROR", "INTERNAL_ERROR"
+    #   resp.test_run.report_output.report_output.failed_report_output.error_message #=> String
+    #   resp.test_run.region_switch_plan_arn #=> String
+    #   resp.test_run.region_switch_execution_id #=> String
+    #   resp.test_run.permission_model.invoker_role_name #=> String
+    #   resp.test_run.permission_model.cross_account_roles #=> Array
+    #   resp.test_run.permission_model.cross_account_roles[0].cross_account_role_arn #=> String
+    #   resp.test_run.permission_model.cross_account_roles[0].external_id #=> String
+    #   resp.test_run.regions #=> Array
+    #   resp.test_run.regions[0] #=> String
+    #   resp.test_run.account_targeting #=> String, one of "SINGLE_ACCOUNT", "MULTI_ACCOUNT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetTestRun AWS API Documentation
+    #
+    # @overload get_test_run(params = {})
+    # @param [Hash] params ({})
+    def get_test_run(params = {}, options = {})
+      req = build_request(:get_test_run, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a resilience test template by ARN, including the parameters
+    # it accepts and the fault actions it runs.
+    #
+    # @option params [required, String] :test_template_arn
+    #   The ARN of the test template to retrieve.
+    #
+    # @return [Types::GetTestTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTestTemplateResponse#test_template #test_template} => Types::TestTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_test_template({
+    #     test_template_arn: "ServiceOwnedArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_template.test_template_arn #=> String
+    #   resp.test_template.name #=> String
+    #   resp.test_template.description #=> String
+    #   resp.test_template.parameters #=> Array
+    #   resp.test_template.parameters[0].name #=> String
+    #   resp.test_template.parameters[0].description #=> String
+    #   resp.test_template.parameters[0].type #=> String, one of "STRING", "STRING_LIST", "INTEGER"
+    #   resp.test_template.parameters[0].required #=> Boolean
+    #   resp.test_template.parameters[0].default_value #=> String
+    #   resp.test_template.parameters[0].max_values #=> Integer
+    #   resp.test_template.actions #=> Array
+    #   resp.test_template.actions[0].action_id #=> String
+    #   resp.test_template.actions[0].description #=> String
+    #   resp.test_template.actions[0].resource_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetTestTemplate AWS API Documentation
+    #
+    # @overload get_test_template(params = {})
+    # @param [Hash] params ({})
+    def get_test_template(params = {}, options = {})
+      req = build_request(:get_test_template, params)
       req.send_request(options)
     end
 
@@ -2207,6 +2541,9 @@ module Aws::Resiliencehubv2
     # @option params [String] :report_type
     #   Filter reports by type.
     #
+    # @option params [String] :test_run_id
+    #   The unique identifier of a test run.
+    #
     # @option params [Integer] :max_results
     #   Pagination page size.
     #
@@ -2224,7 +2561,8 @@ module Aws::Resiliencehubv2
     #
     #   resp = client.list_reports({
     #     service_arn: "Arn",
-    #     report_type: "FAILURE_MODE", # accepts FAILURE_MODE
+    #     report_type: "FAILURE_MODE", # accepts FAILURE_MODE, TESTING
+    #     test_run_id: "TestRunId",
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -2232,10 +2570,12 @@ module Aws::Resiliencehubv2
     # @example Response structure
     #
     #   resp.report_generation_results #=> Array
-    #   resp.report_generation_results[0].report_type #=> String, one of "FAILURE_MODE"
+    #   resp.report_generation_results[0].report_type #=> String, one of "FAILURE_MODE", "TESTING"
     #   resp.report_generation_results[0].status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
     #   resp.report_generation_results[0].service_arn #=> String
     #   resp.report_generation_results[0].assessment_id #=> String
+    #   resp.report_generation_results[0].test_run_id #=> String
+    #   resp.report_generation_results[0].test_template_arn #=> String
     #   resp.report_generation_results[0].created_at #=> Time
     #   resp.report_generation_results[0].report_output.s3_report_output.s3_object_key #=> String
     #   resp.report_generation_results[0].report_output.failed_report_output.error_code #=> String, one of "INSUFFICIENT_PERMISSIONS", "CONFIGURATION_ERROR", "INTERNAL_ERROR"
@@ -2253,6 +2593,55 @@ module Aws::Resiliencehubv2
     # @param [Hash] params ({})
     def list_reports(params = {}, options = {})
       req = build_request(:list_reports, params)
+      req.send_request(options)
+    end
+
+    # Lists the AWS resources that AWS Fault Injection Service (AWS FIS)
+    # resolved as targets for a test run.
+    #
+    # @option params [required, String] :test_run_id
+    #   The identifier of the test run to list resolved target resources for.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test run belongs to.
+    #
+    # @option params [Integer] :max_results
+    #   Pagination page size.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListResolvedTestRunTargetResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResolvedTestRunTargetResourcesResponse#resolved_target_resources #resolved_target_resources} => Array&lt;Types::ResolvedTargetResource&gt;
+    #   * {Types::ListResolvedTestRunTargetResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resolved_test_run_target_resources({
+    #     test_run_id: "TestRunId", # required
+    #     service_arn: "Arn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resolved_target_resources #=> Array
+    #   resp.resolved_target_resources[0].resource_type #=> String
+    #   resp.resolved_target_resources[0].target_name #=> String
+    #   resp.resolved_target_resources[0].target_information #=> Hash
+    #   resp.resolved_target_resources[0].target_information["ResolvedTargetInformationKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListResolvedTestRunTargetResources AWS API Documentation
+    #
+    # @overload list_resolved_test_run_target_resources(params = {})
+    # @param [Hash] params ({})
+    def list_resolved_test_run_target_resources(params = {}, options = {})
+      req = build_request(:list_resolved_test_run_target_resources, params)
       req.send_request(options)
     end
 
@@ -2783,6 +3172,304 @@ module Aws::Resiliencehubv2
       req.send_request(options)
     end
 
+    # Lists the events in a test run's timeline.
+    #
+    # @option params [required, String] :test_run_id
+    #   The identifier of the test run to list events for.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test run belongs to.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :started_at
+    #   Return events at or after this timestamp.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :ended_at
+    #   Return events at or before this timestamp.
+    #
+    # @option params [Integer] :max_results
+    #   Pagination page size.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListTestRunEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestRunEventsResponse#events #events} => Array&lt;Types::TestRunEvent&gt;
+    #   * {Types::ListTestRunEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_run_events({
+    #     test_run_id: "TestRunId", # required
+    #     service_arn: "Arn", # required
+    #     started_at: Time.now,
+    #     ended_at: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events #=> Array
+    #   resp.events[0].event_id #=> String
+    #   resp.events[0].event_type #=> String
+    #   resp.events[0].message #=> String
+    #   resp.events[0].timestamp #=> Time
+    #   resp.events[0].attributes #=> Hash
+    #   resp.events[0].attributes["TestRunEventAttributeKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunEvents AWS API Documentation
+    #
+    # @overload list_test_run_events(params = {})
+    # @param [Hash] params ({})
+    def list_test_run_events(params = {}, options = {})
+      req = build_request(:list_test_run_events, params)
+      req.send_request(options)
+    end
+
+    # Lists the monitoring source snapshots captured for a test run,
+    # optionally filtered by type.
+    #
+    # @option params [required, String] :test_run_id
+    #   The identifier of the test run to list sources for.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test run belongs to.
+    #
+    # @option params [String] :type
+    #   Filter sources by type.
+    #
+    # @option params [Integer] :max_results
+    #   Pagination page size.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListTestRunSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestRunSourcesResponse#test_run_sources #test_run_sources} => Array&lt;Types::TestRunSourceSummary&gt;
+    #   * {Types::ListTestRunSourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_run_sources({
+    #     test_run_id: "TestRunId", # required
+    #     service_arn: "Arn", # required
+    #     type: "SUCCESS_CRITERIA", # accepts SUCCESS_CRITERIA, OBSERVABILITY
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_run_sources #=> Array
+    #   resp.test_run_sources[0].success_criteria_alarm.alarm_arn #=> String
+    #   resp.test_run_sources[0].success_criteria_alarm.alarm_name #=> String
+    #   resp.test_run_sources[0].success_criteria_alarm.region #=> String
+    #   resp.test_run_sources[0].success_criteria_alarm.account_id #=> String
+    #   resp.test_run_sources[0].success_criteria_alarm.outcome #=> String, one of "PASSED", "FAILED", "ERROR"
+    #   resp.test_run_sources[0].success_criteria_alarm.outcome_reason #=> String
+    #   resp.test_run_sources[0].observability_alarm.alarm_arn #=> String
+    #   resp.test_run_sources[0].observability_alarm.alarm_name #=> String
+    #   resp.test_run_sources[0].observability_alarm.region #=> String
+    #   resp.test_run_sources[0].observability_alarm.account_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunSources AWS API Documentation
+    #
+    # @overload list_test_run_sources(params = {})
+    # @param [Hash] params ({})
+    def list_test_run_sources(params = {}, options = {})
+      req = build_request(:list_test_run_sources, params)
+      req.send_request(options)
+    end
+
+    # Lists the runs of a test, or all test runs for a service.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service to list test runs for.
+    #
+    # @option params [String] :test_id
+    #   Filter test runs by test identifier.
+    #
+    # @option params [Integer] :max_results
+    #   Pagination page size.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListTestRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestRunsResponse#test_runs #test_runs} => Array&lt;Types::TestRunSummary&gt;
+    #   * {Types::ListTestRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_runs({
+    #     service_arn: "Arn", # required
+    #     test_id: "TestId",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_runs #=> Array
+    #   resp.test_runs[0].test_run_id #=> String
+    #   resp.test_runs[0].status #=> String, one of "INITIALIZING", "RUNNING", "STOPPING", "PASSED", "FAILED", "STOPPED", "ERROR"
+    #   resp.test_runs[0].started_at #=> Time
+    #   resp.test_runs[0].ended_at #=> Time
+    #   resp.test_runs[0].test_template_arn #=> String
+    #   resp.test_runs[0].service_arn #=> String
+    #   resp.test_runs[0].error_message #=> String
+    #   resp.test_runs[0].account_targeting #=> String, one of "SINGLE_ACCOUNT", "MULTI_ACCOUNT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRuns AWS API Documentation
+    #
+    # @overload list_test_runs(params = {})
+    # @param [Hash] params ({})
+    def list_test_runs(params = {}, options = {})
+      req = build_request(:list_test_runs, params)
+      req.send_request(options)
+    end
+
+    # Lists the monitoring sources attached to a test, optionally filtered
+    # by type.
+    #
+    # @option params [required, String] :test_id
+    #   The identifier of the test to list sources for.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test belongs to.
+    #
+    # @option params [String] :type
+    #   Filter sources by type.
+    #
+    # @option params [Integer] :max_results
+    #   Pagination page size.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListTestSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestSourcesResponse#test_sources #test_sources} => Array&lt;Types::TestSourceSummary&gt;
+    #   * {Types::ListTestSourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_sources({
+    #     test_id: "TestId", # required
+    #     service_arn: "Arn", # required
+    #     type: "SUCCESS_CRITERIA", # accepts SUCCESS_CRITERIA, OBSERVABILITY
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_sources #=> Array
+    #   resp.test_sources[0].success_criteria_alarm.alarm_arn #=> String
+    #   resp.test_sources[0].success_criteria_alarm.alarm_name #=> String
+    #   resp.test_sources[0].success_criteria_alarm.region #=> String
+    #   resp.test_sources[0].success_criteria_alarm.account_id #=> String
+    #   resp.test_sources[0].success_criteria_alarm.created_at #=> Time
+    #   resp.test_sources[0].observability_alarm.alarm_arn #=> String
+    #   resp.test_sources[0].observability_alarm.alarm_name #=> String
+    #   resp.test_sources[0].observability_alarm.region #=> String
+    #   resp.test_sources[0].observability_alarm.account_id #=> String
+    #   resp.test_sources[0].observability_alarm.created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestSources AWS API Documentation
+    #
+    # @overload list_test_sources(params = {})
+    # @param [Hash] params ({})
+    def list_test_sources(params = {}, options = {})
+      req = build_request(:list_test_sources, params)
+      req.send_request(options)
+    end
+
+    # Lists the available resilience test templates. A test template is a
+    # pre-configured, AWS recommended test that defines which resilience
+    # capability to validate.
+    #
+    # @return [Types::ListTestTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestTemplatesResponse#test_templates #test_templates} => Array&lt;Types::TestTemplateSummary&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.test_templates #=> Array
+    #   resp.test_templates[0].test_template_arn #=> String
+    #   resp.test_templates[0].name #=> String
+    #   resp.test_templates[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestTemplates AWS API Documentation
+    #
+    # @overload list_test_templates(params = {})
+    # @param [Hash] params ({})
+    def list_test_templates(params = {}, options = {})
+      req = build_request(:list_test_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists the tests configured for a service.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service to list tests for.
+    #
+    # @option params [Integer] :max_results
+    #   Pagination page size.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListTestsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestsResponse#tests #tests} => Array&lt;Types::TestSummary&gt;
+    #   * {Types::ListTestsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tests({
+    #     service_arn: "Arn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tests #=> Array
+    #   resp.tests[0].test_id #=> String
+    #   resp.tests[0].test_template_arn #=> String
+    #   resp.tests[0].service_arn #=> String
+    #   resp.tests[0].total_test_runs #=> Integer
+    #   resp.tests[0].successful_test_runs #=> Integer
+    #   resp.tests[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTests AWS API Documentation
+    #
+    # @overload list_tests(params = {})
+    # @param [Hash] params ({})
+    def list_tests(params = {}, options = {})
+      req = build_request(:list_tests, params)
+      req.send_request(options)
+    end
+
     # Lists user journeys for a system.
     #
     # @option params [required, String] :system_arn
@@ -2827,6 +3514,47 @@ module Aws::Resiliencehubv2
       req.send_request(options)
     end
 
+    # Adds or updates the monitoring sources on a test. The operation is
+    # transactional — either every source is written or the call fails and
+    # nothing is written.
+    #
+    # @option params [required, String] :test_id
+    #   The identifier of the test to add sources to.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test belongs to.
+    #
+    # @option params [required, Array<Types::TestSourceInput>] :test_sources
+    #   The monitoring sources to add or update.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_test_sources({
+    #     test_id: "TestId", # required
+    #     service_arn: "Arn", # required
+    #     test_sources: [ # required
+    #       {
+    #         success_criteria_alarm: {
+    #           alarm_arn: "CloudWatchAlarmArn", # required
+    #         },
+    #         observability_alarm: {
+    #           alarm_arn: "CloudWatchAlarmArn", # required
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/PutTestSources AWS API Documentation
+    #
+    # @overload put_test_sources(params = {})
+    # @param [Hash] params ({})
+    def put_test_sources(params = {}, options = {})
+      req = build_request(:put_test_sources, params)
+      req.send_request(options)
+    end
+
     # Starts a failure mode assessment.
     #
     # @option params [required, String] :service_arn
@@ -2865,6 +3593,78 @@ module Aws::Resiliencehubv2
     # @param [Hash] params ({})
     def start_failure_mode_assessment(params = {}, options = {})
       req = build_request(:start_failure_mode_assessment, params)
+      req.send_request(options)
+    end
+
+    # Starts a run of a test. Each run scopes to the current resources in
+    # the service and produces a pass or fail outcome.
+    #
+    # @option params [required, String] :test_id
+    #   The identifier of the test to run.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test belongs to.
+    #
+    # @return [Types::StartTestRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTestRunResponse#test_run_id #test_run_id} => String
+    #   * {Types::StartTestRunResponse#status #status} => String
+    #   * {Types::StartTestRunResponse#experiment_arns #experiment_arns} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_test_run({
+    #     test_id: "TestId", # required
+    #     service_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_run_id #=> String
+    #   resp.status #=> String, one of "INITIALIZING", "RUNNING", "STOPPING", "PASSED", "FAILED", "STOPPED", "ERROR"
+    #   resp.experiment_arns #=> Array
+    #   resp.experiment_arns[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/StartTestRun AWS API Documentation
+    #
+    # @overload start_test_run(params = {})
+    # @param [Hash] params ({})
+    def start_test_run(params = {}, options = {})
+      req = build_request(:start_test_run, params)
+      req.send_request(options)
+    end
+
+    # Stops an in-progress test run.
+    #
+    # @option params [required, String] :test_run_id
+    #   The identifier of the test run to stop.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test run belongs to.
+    #
+    # @return [Types::StopTestRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopTestRunResponse#test_run_id #test_run_id} => String
+    #   * {Types::StopTestRunResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_test_run({
+    #     test_run_id: "TestRunId", # required
+    #     service_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_run_id #=> String
+    #   resp.status #=> String, one of "INITIALIZING", "RUNNING", "STOPPING", "PASSED", "FAILED", "STOPPED", "ERROR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/StopTestRun AWS API Documentation
+    #
+    # @overload stop_test_run(params = {})
+    # @param [Hash] params ({})
+    def stop_test_run(params = {}, options = {})
+      req = build_request(:stop_test_run, params)
       req.send_request(options)
     end
 
@@ -3397,6 +4197,85 @@ module Aws::Resiliencehubv2
       req.send_request(options)
     end
 
+    # Updates the configuration of an existing test.
+    #
+    # @option params [required, String] :test_id
+    #   The identifier of the test to update.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test belongs to.
+    #
+    # @option params [Types::LoggingConfiguration] :logging_configuration
+    #   The updated logging configuration for the test.
+    #
+    # @option params [Array<Types::StopCondition>] :stop_conditions
+    #   The updated stop conditions for the test.
+    #
+    # @option params [String] :role_name
+    #   The updated IAM execution role name.
+    #
+    # @option params [Hash<String,Array>] :parameters
+    #   The updated parameter values for the test.
+    #
+    # @return [Types::UpdateTestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTestResponse#test #test} => Types::Test
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_test({
+    #     test_id: "TestId", # required
+    #     service_arn: "Arn", # required
+    #     logging_configuration: {
+    #       s3_bucket_name: "String",
+    #       cloud_watch_log_group_arn: "Arn",
+    #       log_schema_version: "String",
+    #     },
+    #     stop_conditions: [
+    #       {
+    #         source: "aws:cloudwatch:alarm", # required, accepts aws:cloudwatch:alarm, none
+    #         value: "String", # required
+    #       },
+    #     ],
+    #     role_name: "EntityName",
+    #     parameters: {
+    #       "ParameterKey" => ["ParameterValue"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test.test_id #=> String
+    #   resp.test.test_template_arn #=> String
+    #   resp.test.service_arn #=> String
+    #   resp.test.name #=> String
+    #   resp.test.actions #=> Array
+    #   resp.test.actions[0].action_id #=> String
+    #   resp.test.actions[0].description #=> String
+    #   resp.test.actions[0].resource_type #=> String
+    #   resp.test.logging_configuration.s3_bucket_name #=> String
+    #   resp.test.logging_configuration.cloud_watch_log_group_arn #=> String
+    #   resp.test.logging_configuration.log_schema_version #=> String
+    #   resp.test.stop_conditions #=> Array
+    #   resp.test.stop_conditions[0].source #=> String, one of "aws:cloudwatch:alarm", "none"
+    #   resp.test.stop_conditions[0].value #=> String
+    #   resp.test.role_name #=> String
+    #   resp.test.parameters #=> Hash
+    #   resp.test.parameters["ParameterKey"] #=> Array
+    #   resp.test.parameters["ParameterKey"][0] #=> String
+    #   resp.test.total_test_runs #=> Integer
+    #   resp.test.successful_test_runs #=> Integer
+    #   resp.test.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/UpdateTest AWS API Documentation
+    #
+    # @overload update_test(params = {})
+    # @param [Hash] params ({})
+    def update_test(params = {}, options = {})
+      req = build_request(:update_test, params)
+      req.send_request(options)
+    end
+
     # Updates an existing user journey.
     #
     # @option params [required, String] :system_arn
@@ -3464,7 +4343,7 @@ module Aws::Resiliencehubv2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resiliencehubv2'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

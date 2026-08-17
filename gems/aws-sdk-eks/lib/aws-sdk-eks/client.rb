@@ -579,9 +579,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -665,9 +665,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -728,9 +728,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -1480,6 +1480,15 @@ module Aws::EKS
     #   The control plane scaling tier configuration. For more information,
     #   see EKS Provisioned Control Plane in the Amazon EKS User Guide.
     #
+    # @option params [Types::KubeApiServerConfigRequest] :kube_api_server_config
+    #   The Kubernetes API server configuration for the new cluster.
+    #
+    # @option params [Types::KubeSchedulerConfigRequest] :kube_scheduler_config
+    #   The Kubernetes scheduler configuration for the new cluster.
+    #
+    # @option params [Types::KubeControllerManagerConfigRequest] :kube_controller_manager_config
+    #   The Kubernetes controller manager configuration for the new cluster.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -1599,6 +1608,31 @@ module Aws::EKS
     #     control_plane_scaling_config: {
     #       tier: "standard", # accepts standard, tier-xl, tier-2xl, tier-4xl, tier-8xl
     #     },
+    #     kube_api_server_config: {
+    #       event_ttl: "String",
+    #       service_node_port_range: {
+    #         min_port: 1,
+    #         max_port: 1,
+    #       },
+    #     },
+    #     kube_scheduler_config: {
+    #       node_resources_fit: {
+    #         scoring_strategy: {
+    #           type: "LeastAllocated", # accepts LeastAllocated, MostAllocated
+    #           resources: [
+    #             {
+    #               name: "ResourceWeightName",
+    #               weight: 1,
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #     kube_controller_manager_config: {
+    #       horizontal_pod_autoscaler_controller_config: {
+    #         horizontal_pod_autoscaler_sync_period: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1674,6 +1708,14 @@ module Aws::EKS
     #   resp.cluster.storage_config.block_storage.enabled #=> Boolean
     #   resp.cluster.deletion_protection #=> Boolean
     #   resp.cluster.control_plane_scaling_config.tier #=> String, one of "standard", "tier-xl", "tier-2xl", "tier-4xl", "tier-8xl"
+    #   resp.cluster.kube_api_server_config.event_ttl #=> String
+    #   resp.cluster.kube_api_server_config.service_node_port_range.min_port #=> Integer
+    #   resp.cluster.kube_api_server_config.service_node_port_range.max_port #=> Integer
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.type #=> String, one of "LeastAllocated", "MostAllocated"
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources #=> Array
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources[0].name #=> String
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources[0].weight #=> Integer
+    #   resp.cluster.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCluster AWS API Documentation
     #
@@ -2772,6 +2814,14 @@ module Aws::EKS
     #   resp.cluster.storage_config.block_storage.enabled #=> Boolean
     #   resp.cluster.deletion_protection #=> Boolean
     #   resp.cluster.control_plane_scaling_config.tier #=> String, one of "standard", "tier-xl", "tier-2xl", "tier-4xl", "tier-8xl"
+    #   resp.cluster.kube_api_server_config.event_ttl #=> String
+    #   resp.cluster.kube_api_server_config.service_node_port_range.min_port #=> Integer
+    #   resp.cluster.kube_api_server_config.service_node_port_range.max_port #=> Integer
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.type #=> String, one of "LeastAllocated", "MostAllocated"
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources #=> Array
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources[0].name #=> String
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources[0].weight #=> Integer
+    #   resp.cluster.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCluster AWS API Documentation
     #
@@ -3128,6 +3178,14 @@ module Aws::EKS
     #   resp.cluster.storage_config.block_storage.enabled #=> Boolean
     #   resp.cluster.deletion_protection #=> Boolean
     #   resp.cluster.control_plane_scaling_config.tier #=> String, one of "standard", "tier-xl", "tier-2xl", "tier-4xl", "tier-8xl"
+    #   resp.cluster.kube_api_server_config.event_ttl #=> String
+    #   resp.cluster.kube_api_server_config.service_node_port_range.min_port #=> Integer
+    #   resp.cluster.kube_api_server_config.service_node_port_range.max_port #=> Integer
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.type #=> String, one of "LeastAllocated", "MostAllocated"
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources #=> Array
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources[0].name #=> String
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources[0].weight #=> Integer
+    #   resp.cluster.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeregisterCluster AWS API Documentation
     #
@@ -3595,6 +3653,14 @@ module Aws::EKS
     #   resp.cluster.storage_config.block_storage.enabled #=> Boolean
     #   resp.cluster.deletion_protection #=> Boolean
     #   resp.cluster.control_plane_scaling_config.tier #=> String, one of "standard", "tier-xl", "tier-2xl", "tier-4xl", "tier-8xl"
+    #   resp.cluster.kube_api_server_config.event_ttl #=> String
+    #   resp.cluster.kube_api_server_config.service_node_port_range.min_port #=> Integer
+    #   resp.cluster.kube_api_server_config.service_node_port_range.max_port #=> Integer
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.type #=> String, one of "LeastAllocated", "MostAllocated"
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources #=> Array
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources[0].name #=> String
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources[0].weight #=> Integer
+    #   resp.cluster.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3674,6 +3740,55 @@ module Aws::EKS
     #   resp.cluster_versions[0].status #=> String, one of "unsupported", "standard-support", "extended-support"
     #   resp.cluster_versions[0].version_status #=> String, one of "UNSUPPORTED", "STANDARD_SUPPORT", "EXTENDED_SUPPORT"
     #   resp.cluster_versions[0].kubernetes_patch_version #=> String
+    #   resp.cluster_versions[0].control_plane_scaling_tiers #=> Array
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].tier_name #=> String
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].api_request_concurrency #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].pod_scheduling_rate_per_second #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].cluster_database_size_gb #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_api_server_config.event_ttl.default_value #=> String
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_api_server_config.event_ttl.constraints.min #=> String
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_api_server_config.event_ttl.constraints.max #=> String
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_api_server_config.service_node_port_range.default_value.min_port #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_api_server_config.service_node_port_range.default_value.max_port #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_api_server_config.service_node_port_range.constraints.min_port.min #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_api_server_config.service_node_port_range.constraints.min_port.max #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_api_server_config.service_node_port_range.constraints.max_port.min #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_api_server_config.service_node_port_range.constraints.max_port.max #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_scheduler_config.node_resources_fit.scoring_strategy.default_value.type #=> String, one of "LeastAllocated", "MostAllocated"
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_scheduler_config.node_resources_fit.scoring_strategy.default_value.resources #=> Array
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_scheduler_config.node_resources_fit.scoring_strategy.default_value.resources[0].name #=> String
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_scheduler_config.node_resources_fit.scoring_strategy.default_value.resources[0].weight #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.scoring_strategy.allowed_values #=> Array
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.scoring_strategy.allowed_values[0] #=> String
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.resources.name.allowed_values #=> Array
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.resources.name.allowed_values[0] #=> String
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.resources.weight.min #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.resources.weight.max #=> Integer
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period.default_value #=> String
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period.constraints.min #=> String
+    #   resp.cluster_versions[0].control_plane_scaling_tiers[0].control_plane_component_config_overrides.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period.constraints.max #=> String
+    #   resp.cluster_versions[0].control_plane_component_config.kube_api_server_config.event_ttl.default_value #=> String
+    #   resp.cluster_versions[0].control_plane_component_config.kube_api_server_config.event_ttl.constraints.min #=> String
+    #   resp.cluster_versions[0].control_plane_component_config.kube_api_server_config.event_ttl.constraints.max #=> String
+    #   resp.cluster_versions[0].control_plane_component_config.kube_api_server_config.service_node_port_range.default_value.min_port #=> Integer
+    #   resp.cluster_versions[0].control_plane_component_config.kube_api_server_config.service_node_port_range.default_value.max_port #=> Integer
+    #   resp.cluster_versions[0].control_plane_component_config.kube_api_server_config.service_node_port_range.constraints.min_port.min #=> Integer
+    #   resp.cluster_versions[0].control_plane_component_config.kube_api_server_config.service_node_port_range.constraints.min_port.max #=> Integer
+    #   resp.cluster_versions[0].control_plane_component_config.kube_api_server_config.service_node_port_range.constraints.max_port.min #=> Integer
+    #   resp.cluster_versions[0].control_plane_component_config.kube_api_server_config.service_node_port_range.constraints.max_port.max #=> Integer
+    #   resp.cluster_versions[0].control_plane_component_config.kube_scheduler_config.node_resources_fit.scoring_strategy.default_value.type #=> String, one of "LeastAllocated", "MostAllocated"
+    #   resp.cluster_versions[0].control_plane_component_config.kube_scheduler_config.node_resources_fit.scoring_strategy.default_value.resources #=> Array
+    #   resp.cluster_versions[0].control_plane_component_config.kube_scheduler_config.node_resources_fit.scoring_strategy.default_value.resources[0].name #=> String
+    #   resp.cluster_versions[0].control_plane_component_config.kube_scheduler_config.node_resources_fit.scoring_strategy.default_value.resources[0].weight #=> Integer
+    #   resp.cluster_versions[0].control_plane_component_config.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.scoring_strategy.allowed_values #=> Array
+    #   resp.cluster_versions[0].control_plane_component_config.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.scoring_strategy.allowed_values[0] #=> String
+    #   resp.cluster_versions[0].control_plane_component_config.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.resources.name.allowed_values #=> Array
+    #   resp.cluster_versions[0].control_plane_component_config.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.resources.name.allowed_values[0] #=> String
+    #   resp.cluster_versions[0].control_plane_component_config.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.resources.weight.min #=> Integer
+    #   resp.cluster_versions[0].control_plane_component_config.kube_scheduler_config.node_resources_fit.scoring_strategy.constraints.resources.weight.max #=> Integer
+    #   resp.cluster_versions[0].control_plane_component_config.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period.default_value #=> String
+    #   resp.cluster_versions[0].control_plane_component_config.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period.constraints.min #=> String
+    #   resp.cluster_versions[0].control_plane_component_config.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period.constraints.max #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeClusterVersions AWS API Documentation
     #
@@ -4124,9 +4239,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -4215,9 +4330,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -5272,6 +5387,14 @@ module Aws::EKS
     #   resp.cluster.storage_config.block_storage.enabled #=> Boolean
     #   resp.cluster.deletion_protection #=> Boolean
     #   resp.cluster.control_plane_scaling_config.tier #=> String, one of "standard", "tier-xl", "tier-2xl", "tier-4xl", "tier-8xl"
+    #   resp.cluster.kube_api_server_config.event_ttl #=> String
+    #   resp.cluster.kube_api_server_config.service_node_port_range.min_port #=> Integer
+    #   resp.cluster.kube_api_server_config.service_node_port_range.max_port #=> Integer
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.type #=> String, one of "LeastAllocated", "MostAllocated"
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources #=> Array
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources[0].name #=> String
+    #   resp.cluster.kube_scheduler_config.node_resources_fit.scoring_strategy.resources[0].weight #=> Integer
+    #   resp.cluster.kube_controller_manager_config.horizontal_pod_autoscaler_controller_config.horizontal_pod_autoscaler_sync_period #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RegisterCluster AWS API Documentation
     #
@@ -5573,9 +5696,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -5684,9 +5807,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -5858,6 +5981,16 @@ module Aws::EKS
     #   The control plane scaling tier configuration. For more information,
     #   see EKS Provisioned Control Plane in the Amazon EKS User Guide.
     #
+    # @option params [Types::KubeApiServerConfigRequest] :kube_api_server_config
+    #   The Kubernetes API server configuration for the updated cluster.
+    #
+    # @option params [Types::KubeSchedulerConfigRequest] :kube_scheduler_config
+    #   The Kubernetes scheduler configuration for the updated cluster.
+    #
+    # @option params [Types::KubeControllerManagerConfigRequest] :kube_controller_manager_config
+    #   The Kubernetes controller manager configuration for the updated
+    #   cluster.
+    #
     # @return [Types::UpdateClusterConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateClusterConfigResponse#update #update} => Types::Update
@@ -5925,15 +6058,40 @@ module Aws::EKS
     #     control_plane_scaling_config: {
     #       tier: "standard", # accepts standard, tier-xl, tier-2xl, tier-4xl, tier-8xl
     #     },
+    #     kube_api_server_config: {
+    #       event_ttl: "String",
+    #       service_node_port_range: {
+    #         min_port: 1,
+    #         max_port: 1,
+    #       },
+    #     },
+    #     kube_scheduler_config: {
+    #       node_resources_fit: {
+    #         scoring_strategy: {
+    #           type: "LeastAllocated", # accepts LeastAllocated, MostAllocated
+    #           resources: [
+    #             {
+    #               name: "ResourceWeightName",
+    #               weight: 1,
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #     kube_controller_manager_config: {
+    #       horizontal_pod_autoscaler_controller_config: {
+    #         horizontal_pod_autoscaler_sync_period: "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -6012,9 +6170,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -6215,9 +6373,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -6364,9 +6522,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "CapabilityUpdate", "ControlPlaneScalingConfigUpdate", "VendedLogsUpdate", "ControlPlaneEgressUpdate", "VersionRollback", "ControlPlaneComponentConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "RoleArn", "RoleMappingsToAddOrUpdate", "RoleMappingsToRemove", "NetworkAccess", "VendedLogs", "UpdatedTier", "PreviousTier", "WarmPoolEnabled", "WarmPoolMaxGroupPreparedCapacity", "WarmPoolMinSize", "WarmPoolState", "WarmPoolReuseOnScaleIn", "ControlPlaneEgressMode", "KubeApiServerConfig", "KubeSchedulerConfig", "KubeControllerManagerConfig"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -6553,7 +6711,7 @@ module Aws::EKS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.172.0'
+      context[:gem_version] = '1.173.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

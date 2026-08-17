@@ -570,6 +570,7 @@ module Aws::HealthLake
       attr_accessor profile_id: ::String
       attr_accessor input_format: ::String
       attr_accessor drift_detection_enabled: bool
+      attr_accessor provenance_enabled: bool
       SENSITIVE: []
     end
 

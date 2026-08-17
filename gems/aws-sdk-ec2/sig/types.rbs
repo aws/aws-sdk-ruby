@@ -447,6 +447,77 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ApplicationStatus
+      attr_accessor status: ("ok" | "impaired" | "initializing" | "insufficient-data" | "not-applicable" | "suppressed")
+      attr_accessor status_time_stamp: ::Time
+      attr_accessor status_since: ::Time
+      attr_accessor resume_at: ::Time
+      attr_accessor details: ::Array[Types::ApplicationStatusDetail]
+      SENSITIVE: []
+    end
+
+    class ApplicationStatusCheckAssociationObject
+      attr_accessor application_status_check_id: ::String
+      attr_accessor association_type: ("tag" | "instance-id")
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationStatusCheckResponseObject
+      attr_accessor application_status_check_id: ::String
+      attr_accessor aggregation: ("included" | "excluded")
+      attr_accessor health_check_paths: ::Array[Types::HealthCheckPathResponseObject]
+      attr_accessor protocol: ("http" | "https")
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
+      attr_accessor device_index: ::Integer
+      attr_accessor ip_version: ("ipv4" | "ipv6")
+      attr_accessor ip_scope: ("private")
+      attr_accessor interval: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor failure_threshold: ::Integer
+      attr_accessor success_threshold: ::Integer
+      attr_accessor status_code_matcher: ::String
+      attr_accessor initialization_grace_period_seconds: ::Integer
+      attr_accessor last_updated_at: ::Time
+      attr_accessor target_tag_associations: ::Array[Types::CustomTagKeyValueResponsePair]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor creation_time: ::Time
+      attr_accessor modify_time: ::Time
+      attr_accessor deletion_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ApplicationStatusDetail
+      attr_accessor application_status_check_id: ::String
+      attr_accessor check_update_time: ::Time
+      attr_accessor aggregation: ("included" | "excluded")
+      attr_accessor status: ("passed" | "failed" | "initializing" | "insufficient-data" | "not-applicable")
+      attr_accessor status_time_stamp: ::Time
+      attr_accessor status_since: ::Time
+      attr_accessor reason: Types::ApplicationStatusReason
+      SENSITIVE: []
+    end
+
+    class ApplicationStatusReason
+      attr_accessor code: ::String
+      attr_accessor status_code: ::Integer
+      attr_accessor protocol: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationStatusSummary
+      attr_accessor status: ("ok" | "impaired" | "insufficient-data" | "not-applicable" | "initializing")
+      attr_accessor impaired_since: ::Time
+      SENSITIVE: []
+    end
+
+    class ApplicationStatusesResponseType
+      attr_accessor instances: ::Array[Types::InstanceApplicationStatus]
+      SENSITIVE: []
+    end
+
     class ApplySecurityGroupsToClientVpnTargetNetworkRequest
       attr_accessor client_vpn_endpoint_id: ::String
       attr_accessor vpc_id: ::String
@@ -539,6 +610,21 @@ module Aws::EC2
 
     class AssociateAddressResult
       attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateApplicationStatusCheckRequest
+      attr_accessor application_status_check_id: ::String
+      attr_accessor target_tag_associations: ::Array[Types::CustomTagKeyValueRequestPair]
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class AssociateApplicationStatusCheckResult
+      attr_accessor successful_results: ::Array[Types::SuccessfulAssociationResponseObject]
+      attr_accessor unsuccessful_results: ::Array[Types::UnsuccessfulAssociationResponseObject]
       SENSITIVE: []
     end
 
@@ -1060,6 +1146,20 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class BatchModifyIpamRoutingPolicyRegistrationsRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor delta_json: ::String
+      attr_accessor force: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchModifyIpamRoutingPolicyRegistrationsResult
+      attr_accessor ipam_routing_policy_registration_delta: Types::IpamRoutingPolicyRegistrationDelta
+      SENSITIVE: []
+    end
+
     class BlobAttributeValue
       attr_accessor value: ::String
       SENSITIVE: []
@@ -1132,6 +1232,8 @@ module Aws::EC2
       attr_accessor state: ("advertised" | "deprovisioned" | "failed-deprovision" | "failed-provision" | "pending-advertising" | "pending-deprovision" | "pending-provision" | "pending-withdrawal" | "provisioned" | "provisioned-not-publicly-advertisable")
       attr_accessor network_border_group: ::String
       attr_accessor advertisement_type: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor ipam_pool_id: ::String
       SENSITIVE: []
     end
 
@@ -2040,6 +2142,32 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CreateApplicationStatusCheckRequest
+      attr_accessor health_check_paths: ::Array[Types::HealthCheckPathRequestObject]
+      attr_accessor aggregation: ("included" | "excluded")
+      attr_accessor protocol: ("http" | "https")
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
+      attr_accessor device_index: ::Integer
+      attr_accessor ip_version: ("ipv4" | "ipv6")
+      attr_accessor ip_scope: ("private")
+      attr_accessor interval: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor failure_threshold: ::Integer
+      attr_accessor success_threshold: ::Integer
+      attr_accessor status_code_matcher: ::String
+      attr_accessor initialization_grace_period_seconds: ::Integer
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CreateApplicationStatusCheckResult
+      attr_accessor application_status_check: Types::ApplicationStatusCheckResponseObject
+      SENSITIVE: []
+    end
+
     class CreateCapacityManagerDataExportRequest
       attr_accessor s3_bucket_name: ::String
       attr_accessor s3_bucket_prefix: ::String
@@ -2515,6 +2643,22 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CreateIpamInternetRegistryAssociationRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_id: ::String
+      attr_accessor rir: ("ripe" | "apnic" | "arin" | "lacnic")
+      attr_accessor organization_handle: ::String
+      attr_accessor description: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIpamInternetRegistryAssociationResult
+      attr_accessor ipam_internet_registry_association: Types::IpamInternetRegistryAssociation
+      SENSITIVE: []
+    end
+
     class CreateIpamPolicyRequest
       attr_accessor dry_run: bool
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
@@ -2615,6 +2759,24 @@ module Aws::EC2
 
     class CreateIpamResult
       attr_accessor ipam: Types::Ipam
+      SENSITIVE: []
+    end
+
+    class CreateIpamRoutingPolicyRegistrationRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor cidr: ::String
+      attr_accessor asns: ::Array[::String]
+      attr_accessor permit_more_specific_announcements: bool
+      attr_accessor max_length: ::Integer
+      attr_accessor description: ::String
+      attr_accessor force: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIpamRoutingPolicyRegistrationResult
+      attr_accessor ipam_routing_policy_registration_delta: Types::IpamRoutingPolicyRegistrationDelta
       SENSITIVE: []
     end
 
@@ -3410,6 +3572,20 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CreateTransitGatewayPolicyTableEntryRequest
+      attr_accessor transit_gateway_policy_table_id: ::String
+      attr_accessor policy_rule_number: ::String
+      attr_accessor policy_rule: Types::TransitGatewayRequestPolicyRule
+      attr_accessor target_route_table_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CreateTransitGatewayPolicyTableEntryResult
+      attr_accessor transit_gateway_policy_table_entry: Types::TransitGatewayPolicyTableEntry
+      SENSITIVE: []
+    end
+
     class CreateTransitGatewayPolicyTableRequest
       attr_accessor transit_gateway_id: ::String
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
@@ -3888,6 +4064,18 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CustomTagKeyValueRequestPair
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CustomTagKeyValueResponsePair
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class CustomerGateway
       attr_accessor certificate_arn: ::String
       attr_accessor device_name: ::String
@@ -3938,6 +4126,18 @@ module Aws::EC2
       attr_accessor default_tcp_established_timeout: ::Integer
       attr_accessor default_udp_timeout: ::Integer
       attr_accessor default_udp_stream_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationStatusCheckRequest
+      attr_accessor application_status_check_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationStatusCheckResult
+      attr_accessor application_status_check: Types::ApplicationStatusCheckResponseObject
       SENSITIVE: []
     end
 
@@ -4138,6 +4338,17 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DeleteIpamInternetRegistryAssociationRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIpamInternetRegistryAssociationResult
+      attr_accessor ipam_internet_registry_association: Types::IpamInternetRegistryAssociation
+      SENSITIVE: []
+    end
+
     class DeleteIpamPolicyRequest
       attr_accessor dry_run: bool
       attr_accessor ipam_policy_id: ::String
@@ -4203,6 +4414,20 @@ module Aws::EC2
 
     class DeleteIpamResult
       attr_accessor ipam: Types::Ipam
+      SENSITIVE: []
+    end
+
+    class DeleteIpamRoutingPolicyRegistrationRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor cidr: ::String
+      attr_accessor force: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIpamRoutingPolicyRegistrationResult
+      attr_accessor ipam_routing_policy_registration_delta: Types::IpamRoutingPolicyRegistrationDelta
       SENSITIVE: []
     end
 
@@ -4723,6 +4948,18 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DeleteTransitGatewayPolicyTableEntryRequest
+      attr_accessor transit_gateway_policy_table_id: ::String
+      attr_accessor policy_rule_number: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DeleteTransitGatewayPolicyTableEntryResult
+      attr_accessor transit_gateway_policy_table_entry: Types::TransitGatewayPolicyTableEntry
+      SENSITIVE: []
+    end
+
     class DeleteTransitGatewayPolicyTableRequest
       attr_accessor transit_gateway_policy_table_id: ::String
       attr_accessor dry_run: bool
@@ -5142,6 +5379,53 @@ module Aws::EC2
     class DescribeAggregateIdFormatResult
       attr_accessor use_long_ids_aggregated: bool
       attr_accessor statuses: ::Array[Types::IdFormat]
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationStatusCheckAssociationsRequest
+      attr_accessor application_status_check_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationStatusCheckAssociationsResult
+      attr_accessor associations: ::Array[Types::ApplicationStatusCheckAssociationObject]
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationStatusChecksRequest
+      attr_accessor application_status_check_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor include_all: bool
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationStatusChecksResult
+      attr_accessor application_status_checks: ::Array[Types::ApplicationStatusCheckResponseObject]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationStatusRequest
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationStatusResult
+      attr_accessor application_statuses: Types::ApplicationStatusesResponseType
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -6180,6 +6464,21 @@ module Aws::EC2
     class DescribeIpamExternalResourceVerificationTokensResult
       attr_accessor next_token: ::String
       attr_accessor ipam_external_resource_verification_tokens: ::Array[Types::IpamExternalResourceVerificationToken]
+      SENSITIVE: []
+    end
+
+    class DescribeIpamInternetRegistryAssociationsRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class DescribeIpamInternetRegistryAssociationsResult
+      attr_accessor next_token: ::String
+      attr_accessor ipam_internet_registry_associations: ::Array[Types::IpamInternetRegistryAssociation]
       SENSITIVE: []
     end
 
@@ -8040,6 +8339,19 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DisableApplicationStatusCheckSuppressionRequest
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DisableApplicationStatusCheckSuppressionResult
+      attr_accessor successful_results: ::Array[Types::SuccessfulSuppressionResponseObject]
+      attr_accessor unsuccessful_results: ::Array[Types::UnsuccessfulSuppressionResponseObject]
+      SENSITIVE: []
+    end
+
     class DisableAwsNetworkPerformanceMetricSubscriptionRequest
       attr_accessor source: ::String
       attr_accessor destination: ::String
@@ -8299,6 +8611,21 @@ module Aws::EC2
       attr_accessor association_id: ::String
       attr_accessor public_ip: ::String
       attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DisassociateApplicationStatusCheckRequest
+      attr_accessor application_status_check_id: ::String
+      attr_accessor target_tag_associations: ::Array[Types::CustomTagKeyValueRequestPair]
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DisassociateApplicationStatusCheckResult
+      attr_accessor successful_results: ::Array[Types::SuccessfulAssociationResponseObject]
+      attr_accessor unsuccessful_results: ::Array[Types::UnsuccessfulAssociationResponseObject]
       SENSITIVE: []
     end
 
@@ -8784,6 +9111,20 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class EnableApplicationStatusCheckSuppressionRequest
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class EnableApplicationStatusCheckSuppressionResult
+      attr_accessor successful_results: ::Array[Types::SuccessfulSuppressionResponseObject]
+      attr_accessor unsuccessful_results: ::Array[Types::UnsuccessfulSuppressionResponseObject]
+      SENSITIVE: []
+    end
+
     class EnableAwsNetworkPerformanceMetricSubscriptionRequest
       attr_accessor source: ::String
       attr_accessor destination: ::String
@@ -8948,6 +9289,23 @@ module Aws::EC2
 
     class EnableInstanceSqlHaStandbyDetectionsResult
       attr_accessor instances: ::Array[Types::RegisteredInstance]
+      SENSITIVE: []
+    end
+
+    class EnableIpamInternetRegistryAssociationRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor rpki_version: ::String
+      attr_accessor service_uri: ::String
+      attr_accessor child_handle: ::String
+      attr_accessor parent_handle: ::String
+      attr_accessor parent_bpki_ta: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class EnableIpamInternetRegistryAssociationResult
+      attr_accessor ipam_internet_registry_association: Types::IpamInternetRegistryAssociation
       SENSITIVE: []
     end
 
@@ -10040,6 +10398,52 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class GetIpamDiscoveredRoutesRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_resource_discovery_id: ::String
+      attr_accessor resource_region: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetIpamDiscoveredRoutesResult
+      attr_accessor ipam_discovered_routes: ::Array[Types::IpamDiscoveredRoute]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIpamInternetRegistryAssociationAsnsRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class GetIpamInternetRegistryAssociationAsnsResult
+      attr_accessor next_token: ::String
+      attr_accessor ipam_internet_registry_association_asns: ::Array[Types::IpamInternetRegistryAssociationAsn]
+      SENSITIVE: []
+    end
+
+    class GetIpamInternetRegistryAssociationCidrsRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class GetIpamInternetRegistryAssociationCidrsResult
+      attr_accessor next_token: ::String
+      attr_accessor ipam_internet_registry_association_cidrs: ::Array[Types::IpamInternetRegistryAssociationCidr]
+      SENSITIVE: []
+    end
+
     class GetIpamPolicyAllocationRulesRequest
       attr_accessor dry_run: bool
       attr_accessor ipam_policy_id: ::String
@@ -10166,6 +10570,70 @@ module Aws::EC2
     class GetIpamResourceCidrsResult
       attr_accessor next_token: ::String
       attr_accessor ipam_resource_cidrs: ::Array[Types::IpamResourceCidr]
+      SENSITIVE: []
+    end
+
+    class GetIpamRouteOriginAuthorizationsRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor cidr: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIpamRouteOriginAuthorizationsResult
+      attr_accessor ipam_route_origin_authorizations: ::Array[Types::IpamRouteOriginAuthorizationInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIpamRouteProtectionFindingsRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_id: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetIpamRouteProtectionFindingsResult
+      attr_accessor ipam_id: ::String
+      attr_accessor route_protection_findings: ::Array[Types::IpamRouteProtectionFinding]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIpamRoutingPolicyRegistrationDeltasRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor delta_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor chronological_order: ("forward" | "reverse")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIpamRoutingPolicyRegistrationDeltasResult
+      attr_accessor ipam_routing_policy_registration_deltas: ::Array[Types::IpamRoutingPolicyRegistrationDelta]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIpamRoutingPolicyRegistrationsRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor cidr: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIpamRoutingPolicyRegistrationsResult
+      attr_accessor ipam_routing_policy_registrations: ::Array[Types::IpamRoutingPolicyRegistration]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -10365,6 +10833,7 @@ module Aws::EC2
       attr_accessor dry_run: bool
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor include_local_zones: bool
       SENSITIVE: []
     end
 
@@ -10461,6 +10930,7 @@ module Aws::EC2
 
     class GetTransitGatewayPolicyTableEntriesResult
       attr_accessor transit_gateway_policy_table_entries: ::Array[Types::TransitGatewayPolicyTableEntry]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -10630,6 +11100,42 @@ module Aws::EC2
     class GroupIdentifier
       attr_accessor group_id: ::String
       attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckPathDestinationRequestObject
+      attr_accessor subnet_id: ::String
+      attr_accessor security_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckPathDestinationResponseObject
+      attr_accessor subnet_id: ::String
+      attr_accessor security_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckPathRequestObject
+      attr_accessor source: Types::HealthCheckPathSourceRequestObject
+      attr_accessor destinations: ::Array[Types::HealthCheckPathDestinationRequestObject]
+      SENSITIVE: []
+    end
+
+    class HealthCheckPathResponseObject
+      attr_accessor source: Types::HealthCheckPathSourceResponseObject
+      attr_accessor destinations: ::Array[Types::HealthCheckPathDestinationResponseObject]
+      SENSITIVE: []
+    end
+
+    class HealthCheckPathSourceRequestObject
+      attr_accessor subnet_id: ::String
+      attr_accessor security_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckPathSourceResponseObject
+      attr_accessor subnet_id: ::String
+      attr_accessor security_group_id: ::String
       SENSITIVE: []
     end
 
@@ -11276,6 +11782,15 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class InstanceApplicationStatus
+      attr_accessor instance_id: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor application_status: Types::ApplicationStatus
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class InstanceAttachmentEnaSrdSpecification
       attr_accessor ena_srd_enabled: bool
       attr_accessor ena_srd_udp_specification: Types::InstanceAttachmentEnaSrdUdpSpecification
@@ -11746,6 +12261,7 @@ module Aws::EC2
       attr_accessor instance_status: Types::InstanceStatusSummary
       attr_accessor system_status: Types::InstanceStatusSummary
       attr_accessor attached_ebs_status: Types::EbsStatusSummary
+      attr_accessor application_status: Types::ApplicationStatusSummary
       SENSITIVE: []
     end
 
@@ -11996,6 +12512,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class IpamDiscoveredRoute
+      attr_accessor ipam_resource_discovery_id: ::String
+      attr_accessor resource_region: ::String
+      attr_accessor resource_owner_id: ::String
+      attr_accessor cidr: ::String
+      attr_accessor asn: ::String
+      attr_accessor state: ("advertised" | "deprovisioned" | "failed-deprovision" | "failed-provision" | "pending-advertising" | "pending-deprovision" | "pending-provision" | "pending-withdrawal" | "provisioned" | "provisioned-not-publicly-advertisable")
+      attr_accessor advertisement_type: ("regional" | "global")
+      attr_accessor network_border_group: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor ipam_pool_id: ::String
+      attr_accessor sample_time: ::Time
+      SENSITIVE: []
+    end
+
     class IpamDiscoveryFailureReason
       attr_accessor code: ("assume-role-failure" | "throttling-failure" | "unauthorized-failure")
       attr_accessor message: ::String
@@ -12014,6 +12545,33 @@ module Aws::EC2
       attr_accessor status: ("valid" | "expired")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor state: ("create-in-progress" | "create-complete" | "create-failed" | "delete-in-progress" | "delete-complete" | "delete-failed")
+      SENSITIVE: []
+    end
+
+    class IpamInternetRegistryAssociation
+      attr_accessor owner_id: ::String
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor ipam_internet_registry_association_arn: ::String
+      attr_accessor ipam_id: ::String
+      attr_accessor ipam_region: ::String
+      attr_accessor rir: ("ripe" | "apnic" | "arin" | "lacnic")
+      attr_accessor organization_handle: ::String
+      attr_accessor description: ::String
+      attr_accessor state: ("pending-enable" | "create-in-progress" | "create-failed" | "enable-in-progress" | "enable-complete" | "enable-failed" | "delete-in-progress" | "delete-complete" | "delete-failed")
+      attr_accessor child_request_xml: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class IpamInternetRegistryAssociationAsn
+      attr_accessor asn: ::String
+      attr_accessor last_observed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IpamInternetRegistryAssociationCidr
+      attr_accessor cidr: ::String
+      attr_accessor last_observed_at: ::Time
       SENSITIVE: []
     end
 
@@ -12283,6 +12841,67 @@ module Aws::EC2
     class IpamResourceTag
       attr_accessor key: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class IpamRouteOriginAuthorization
+      attr_accessor asn: ::String
+      attr_accessor prefix: ::String
+      attr_accessor max_length: ::Integer
+      attr_accessor match: bool
+      attr_accessor expiration: ::Time
+      SENSITIVE: []
+    end
+
+    class IpamRouteOriginAuthorizationInfo
+      attr_accessor cidr: ::String
+      attr_accessor asn: ::String
+      attr_accessor max_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class IpamRouteOverlap
+      attr_accessor prefix: ::String
+      attr_accessor asn: ::String
+      attr_accessor detected_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IpamRouteProtectionFinding
+      attr_accessor resource_owner_id: ::String
+      attr_accessor resource_region: ::String
+      attr_accessor ipam_pool_id: ::String
+      attr_accessor cidr: ::String
+      attr_accessor state: ("advertised" | "deprovisioned" | "failed-deprovision" | "failed-provision" | "pending-advertising" | "pending-deprovision" | "pending-provision" | "pending-withdrawal" | "provisioned" | "provisioned-not-publicly-advertisable")
+      attr_accessor advertisement_type: ("regional" | "global")
+      attr_accessor network_border_group: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor asn: ::String
+      attr_accessor rpki_status: ("valid" | "invalid" | "unknown")
+      attr_accessor rpki_strength: ("strict" | "permissive")
+      attr_accessor roas: ::Array[Types::IpamRouteOriginAuthorization]
+      attr_accessor route_overlaps: ::Array[Types::IpamRouteOverlap]
+      attr_accessor sample_time: ::Time
+      attr_accessor roa_sample_time: ::Time
+      SENSITIVE: []
+    end
+
+    class IpamRoutingPolicyRegistration
+      attr_accessor cidr: ::String
+      attr_accessor asns: ::Array[::String]
+      attr_accessor permit_more_specific_announcements: bool
+      attr_accessor max_length: ::Integer
+      attr_accessor description: ::String
+      attr_accessor latest_delta_id: ::String
+      attr_accessor state: ("pending-activate" | "activate-failed" | "create-in-progress" | "create-complete" | "update-in-progress" | "update-complete" | "delete-in-progress" | "delete-complete")
+      SENSITIVE: []
+    end
+
+    class IpamRoutingPolicyRegistrationDelta
+      attr_accessor delta_id: ::String
+      attr_accessor delta_json: ::String
+      attr_accessor state: ("pending" | "published" | "failed")
+      attr_accessor state_message: ::String
       SENSITIVE: []
     end
 
@@ -12790,13 +13409,13 @@ module Aws::EC2
     end
 
     class LaunchTemplateTagSpecification
-      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote")
+      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "ipam-internet-registry-association" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote" | "application-status-check")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class LaunchTemplateTagSpecificationRequest
-      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote")
+      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "ipam-internet-registry-association" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote" | "application-status-check")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -13192,6 +13811,32 @@ module Aws::EC2
 
     class ModifyAddressAttributeResult
       attr_accessor address: Types::AddressAttribute
+      SENSITIVE: []
+    end
+
+    class ModifyApplicationStatusCheckRequest
+      attr_accessor application_status_check_id: ::String
+      attr_accessor aggregation: ("included" | "excluded")
+      attr_accessor health_check_paths: ::Array[Types::HealthCheckPathRequestObject]
+      attr_accessor protocol: ("http" | "https")
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
+      attr_accessor device_index: ::Integer
+      attr_accessor ip_version: ("ipv4" | "ipv6")
+      attr_accessor ip_scope: ("private")
+      attr_accessor interval: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor failure_threshold: ::Integer
+      attr_accessor success_threshold: ::Integer
+      attr_accessor status_code_matcher: ::String
+      attr_accessor initialization_grace_period_seconds: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ModifyApplicationStatusCheckResult
+      attr_accessor application_status_check: Types::ApplicationStatusCheckResponseObject
       SENSITIVE: []
     end
 
@@ -13675,6 +14320,24 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ModifyIpamRoutingPolicyRegistrationRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_internet_registry_association_id: ::String
+      attr_accessor cidr: ::String
+      attr_accessor asns: ::Array[::String]
+      attr_accessor permit_more_specific_announcements: bool
+      attr_accessor max_length: ::Integer
+      attr_accessor description: ::String
+      attr_accessor force: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyIpamRoutingPolicyRegistrationResult
+      attr_accessor ipam_routing_policy_registration_delta: Types::IpamRoutingPolicyRegistrationDelta
+      SENSITIVE: []
+    end
+
     class ModifyIpamScopeRequest
       attr_accessor dry_run: bool
       attr_accessor ipam_scope_id: ::String
@@ -13957,6 +14620,20 @@ module Aws::EC2
       attr_accessor propagation_default_route_table_id: ::String
       attr_accessor amazon_side_asn: ::Integer
       attr_accessor encryption_support: ("enable" | "disable")
+      SENSITIVE: []
+    end
+
+    class ModifyTransitGatewayPolicyTableEntryRequest
+      attr_accessor transit_gateway_policy_table_id: ::String
+      attr_accessor policy_rule_number: ::String
+      attr_accessor policy_rule: Types::TransitGatewayRequestPolicyRule
+      attr_accessor target_route_table_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ModifyTransitGatewayPolicyTableEntryResult
+      attr_accessor transit_gateway_policy_table_entry: Types::TransitGatewayPolicyTableEntry
       SENSITIVE: []
     end
 
@@ -17266,7 +17943,7 @@ module Aws::EC2
     end
 
     class SpotFleetTagSpecification
-      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote")
+      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "ipam-internet-registry-association" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote" | "application-status-check")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -17580,6 +18257,13 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class SuccessfulAssociationResponseObject
+      attr_accessor application_status_check_id: ::String
+      attr_accessor association_type: ::String
+      attr_accessor association_value: ::String
+      SENSITIVE: []
+    end
+
     class SuccessfulInstanceCreditSpecificationItem
       attr_accessor instance_id: ::String
       SENSITIVE: []
@@ -17587,6 +18271,13 @@ module Aws::EC2
 
     class SuccessfulQueuedPurchaseDeletion
       attr_accessor reserved_instances_id: ::String
+      SENSITIVE: []
+    end
+
+    class SuccessfulSuppressionResponseObject
+      attr_accessor instance_id: ::String
+      attr_accessor suppress_at: ::Time
+      attr_accessor resume_at: ::Time
       SENSITIVE: []
     end
 
@@ -17605,7 +18296,7 @@ module Aws::EC2
     class TagDescription
       attr_accessor key: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote")
+      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "ipam-internet-registry-association" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote" | "application-status-check")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -17623,7 +18314,7 @@ module Aws::EC2
     end
 
     class TagSpecification
-      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote")
+      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "ipam-internet-registry-association" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote" | "application-status-check")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -17844,6 +18535,7 @@ module Aws::EC2
 
     class TransitGatewayAttachmentAssociation
       attr_accessor transit_gateway_route_table_id: ::String
+      attr_accessor transit_gateway_policy_table_id: ::String
       attr_accessor state: ("associating" | "associated" | "disassociating" | "disassociated")
       SENSITIVE: []
     end
@@ -18114,6 +18806,7 @@ module Aws::EC2
       attr_accessor policy_rule_number: ::String
       attr_accessor policy_rule: Types::TransitGatewayPolicyRule
       attr_accessor target_route_table_id: ::String
+      attr_accessor state: ("active" | "deleted")
       SENSITIVE: []
     end
 
@@ -18154,6 +18847,22 @@ module Aws::EC2
       attr_accessor security_group_referencing_support: ("enable" | "disable")
       attr_accessor multicast_support: ("enable" | "disable")
       attr_accessor transit_gateway_cidr_blocks: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TransitGatewayRequestPolicyRule
+      attr_accessor source_cidr_block: ::String
+      attr_accessor source_port_range: ::String
+      attr_accessor destination_cidr_block: ::String
+      attr_accessor destination_port_range: ::String
+      attr_accessor protocol: ::String
+      attr_accessor meta_data: Types::TransitGatewayRequestPolicyRuleMetaData
+      SENSITIVE: []
+    end
+
+    class TransitGatewayRequestPolicyRuleMetaData
+      attr_accessor meta_data_key: ::String
+      attr_accessor meta_data_value: ::String
       SENSITIVE: []
     end
 
@@ -18342,6 +19051,14 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class UnsuccessfulAssociationResponseObject
+      attr_accessor application_status_check_id: ::String
+      attr_accessor association_type: ::String
+      attr_accessor association_value: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
     class UnsuccessfulInstanceCreditSpecificationItem
       attr_accessor instance_id: ::String
       attr_accessor error: Types::UnsuccessfulInstanceCreditSpecificationItemError
@@ -18363,6 +19080,14 @@ module Aws::EC2
     class UnsuccessfulItemError
       attr_accessor code: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsuccessfulSuppressionResponseObject
+      attr_accessor instance_id: ::String
+      attr_accessor suppress_at: ::Time
+      attr_accessor resume_at: ::Time
+      attr_accessor reason: ::String
       SENSITIVE: []
     end
 

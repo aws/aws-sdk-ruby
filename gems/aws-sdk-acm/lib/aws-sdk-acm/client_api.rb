@@ -42,6 +42,7 @@ module Aws::ACM
     AddTagsToCertificateRequest = Shapes::StructureShape.new(name: 'AddTagsToCertificateRequest')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AvailabilityErrorMessage = Shapes::StringShape.new(name: 'AvailabilityErrorMessage')
+    CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
     CertificateAuthority = Shapes::UnionShape.new(name: 'CertificateAuthority')
     CertificateBody = Shapes::StringShape.new(name: 'CertificateBody')
     CertificateBodyBlob = Shapes::BlobShape.new(name: 'CertificateBodyBlob')
@@ -97,6 +98,7 @@ module Aws::ACM
     DnsNameFilter = Shapes::StructureShape.new(name: 'DnsNameFilter')
     DnsPrevalidationDetails = Shapes::StructureShape.new(name: 'DnsPrevalidationDetails')
     DnsPrevalidationOptions = Shapes::StructureShape.new(name: 'DnsPrevalidationOptions')
+    DnsValidationChallenge = Shapes::StructureShape.new(name: 'DnsValidationChallenge')
     DomainComponentList = Shapes::ListShape.new(name: 'DomainComponentList')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
@@ -106,8 +108,12 @@ module Aws::ACM
     DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
     DomainValidation = Shapes::StructureShape.new(name: 'DomainValidation')
     DomainValidationList = Shapes::ListShape.new(name: 'DomainValidationList')
+    DomainValidationMethodUpdateSummary = Shapes::StructureShape.new(name: 'DomainValidationMethodUpdateSummary')
     DomainValidationOption = Shapes::StructureShape.new(name: 'DomainValidationOption')
     DomainValidationOptionList = Shapes::ListShape.new(name: 'DomainValidationOptionList')
+    DomainValidationSummary = Shapes::StructureShape.new(name: 'DomainValidationSummary')
+    DomainValidationSummaryList = Shapes::ListShape.new(name: 'DomainValidationSummaryList')
+    EmailValidationChallenge = Shapes::StructureShape.new(name: 'EmailValidationChallenge')
     Expiration = Shapes::StructureShape.new(name: 'Expiration')
     ExpirationValueLong = Shapes::IntegerShape.new(name: 'ExpirationValueLong')
     ExpiryEventsConfiguration = Shapes::StructureShape.new(name: 'ExpiryEventsConfiguration')
@@ -162,6 +168,8 @@ module Aws::ACM
     ListAcmeExternalAccountBindingsRequest = Shapes::StructureShape.new(name: 'ListAcmeExternalAccountBindingsRequest')
     ListAcmeExternalAccountBindingsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAcmeExternalAccountBindingsRequestMaxResultsInteger')
     ListAcmeExternalAccountBindingsResponse = Shapes::StructureShape.new(name: 'ListAcmeExternalAccountBindingsResponse')
+    ListCertificateDomainValidationsRequest = Shapes::StructureShape.new(name: 'ListCertificateDomainValidationsRequest')
+    ListCertificateDomainValidationsResponse = Shapes::StructureShape.new(name: 'ListCertificateDomainValidationsResponse')
     ListCertificatesRequest = Shapes::StructureShape.new(name: 'ListCertificatesRequest')
     ListCertificatesResponse = Shapes::StructureShape.new(name: 'ListCertificatesResponse')
     ListTagsForCertificateRequest = Shapes::StructureShape.new(name: 'ListTagsForCertificateRequest')
@@ -236,6 +244,11 @@ module Aws::ACM
     UpdateAcmeDomainValidationRequest = Shapes::StructureShape.new(name: 'UpdateAcmeDomainValidationRequest')
     UpdateAcmeEndpointRequest = Shapes::StructureShape.new(name: 'UpdateAcmeEndpointRequest')
     UpdateCertificateOptionsRequest = Shapes::StructureShape.new(name: 'UpdateCertificateOptionsRequest')
+    UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
+    UpdateSummary = Shapes::StructureShape.new(name: 'UpdateSummary')
+    UpdateType = Shapes::StringShape.new(name: 'UpdateType')
+    ValidationChallenge = Shapes::UnionShape.new(name: 'ValidationChallenge')
+    ValidationConfiguration = Shapes::StructureShape.new(name: 'ValidationConfiguration')
     ValidationEmailList = Shapes::ListShape.new(name: 'ValidationEmailList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionMessage = Shapes::StringShape.new(name: 'ValidationExceptionMessage')
@@ -417,6 +430,7 @@ module Aws::ACM
     CertificateDetail.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
     CertificateDetail.add_member(:renewal_eligibility, Shapes::ShapeRef.new(shape: RenewalEligibility, location_name: "RenewalEligibility"))
     CertificateDetail.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, location_name: "Options"))
+    CertificateDetail.add_member(:update_summary, Shapes::ShapeRef.new(shape: UpdateSummary, location_name: "UpdateSummary"))
     CertificateDetail.add_member(:certificate_key_pair_origin, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigin, location_name: "CertificateKeyPairOrigin"))
     CertificateDetail.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AcmeEndpointArn"))
     CertificateDetail.add_member(:acme_account_id, Shapes::ShapeRef.new(shape: AcmeAccountId, location_name: "AcmeAccountId"))
@@ -456,6 +470,7 @@ module Aws::ACM
 
     CertificateOptions.add_member(:certificate_transparency_logging_preference, Shapes::ShapeRef.new(shape: CertificateTransparencyLoggingPreference, deprecated: true, location_name: "CertificateTransparencyLoggingPreference", metadata: {"deprecatedMessage" => "Certificate transparency logging opt-out is no longer available.", "deprecatedSince" => "12th June 2026"}))
     CertificateOptions.add_member(:export, Shapes::ShapeRef.new(shape: CertificateExport, location_name: "Export"))
+    CertificateOptions.add_member(:validation_method, Shapes::ShapeRef.new(shape: ValidationMethod, location_name: "ValidationMethod"))
     CertificateOptions.struct_class = Types::CertificateOptions
 
     CertificateSearchResult.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
@@ -612,6 +627,9 @@ module Aws::ACM
     DnsPrevalidationOptions.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: HostedZoneId, location_name: "HostedZoneId"))
     DnsPrevalidationOptions.struct_class = Types::DnsPrevalidationOptions
 
+    DnsValidationChallenge.add_member(:resource_record, Shapes::ShapeRef.new(shape: ResourceRecord, location_name: "ResourceRecord"))
+    DnsValidationChallenge.struct_class = Types::DnsValidationChallenge
+
     DomainComponentList.member = Shapes::ShapeRef.new(shape: String)
 
     DomainList.member = Shapes::ShapeRef.new(shape: DomainNameString)
@@ -632,11 +650,26 @@ module Aws::ACM
 
     DomainValidationList.member = Shapes::ShapeRef.new(shape: DomainValidation)
 
+    DomainValidationMethodUpdateSummary.add_member(:from, Shapes::ShapeRef.new(shape: ValidationMethod, location_name: "From"))
+    DomainValidationMethodUpdateSummary.add_member(:to, Shapes::ShapeRef.new(shape: ValidationMethod, location_name: "To"))
+    DomainValidationMethodUpdateSummary.struct_class = Types::DomainValidationMethodUpdateSummary
+
     DomainValidationOption.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "DomainName"))
     DomainValidationOption.add_member(:validation_domain, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "ValidationDomain"))
     DomainValidationOption.struct_class = Types::DomainValidationOption
 
     DomainValidationOptionList.member = Shapes::ShapeRef.new(shape: DomainValidationOption)
+
+    DomainValidationSummary.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "DomainName"))
+    DomainValidationSummary.add_member(:active_validation_configuration, Shapes::ShapeRef.new(shape: ValidationConfiguration, location_name: "ActiveValidationConfiguration"))
+    DomainValidationSummary.add_member(:requested_validation_configuration, Shapes::ShapeRef.new(shape: ValidationConfiguration, location_name: "RequestedValidationConfiguration"))
+    DomainValidationSummary.struct_class = Types::DomainValidationSummary
+
+    DomainValidationSummaryList.member = Shapes::ShapeRef.new(shape: DomainValidationSummary)
+
+    EmailValidationChallenge.add_member(:validation_emails, Shapes::ShapeRef.new(shape: ValidationEmailList, location_name: "ValidationEmails"))
+    EmailValidationChallenge.add_member(:validation_domain, Shapes::ShapeRef.new(shape: DomainNameString, location_name: "ValidationDomain"))
+    EmailValidationChallenge.struct_class = Types::EmailValidationChallenge
 
     Expiration.add_member(:value, Shapes::ShapeRef.new(shape: ExpirationValueLong, required: true, location_name: "Value"))
     Expiration.add_member(:type, Shapes::ShapeRef.new(shape: TimeType, required: true, location_name: "Type"))
@@ -797,6 +830,15 @@ module Aws::ACM
     ListAcmeExternalAccountBindingsResponse.add_member(:external_account_bindings, Shapes::ShapeRef.new(shape: AcmeExternalAccountBindingList, location_name: "ExternalAccountBindings"))
     ListAcmeExternalAccountBindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListAcmeExternalAccountBindingsResponse.struct_class = Types::ListAcmeExternalAccountBindingsResponse
+
+    ListCertificateDomainValidationsRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, required: true, location_name: "CertificateArn"))
+    ListCertificateDomainValidationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCertificateDomainValidationsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location_name: "MaxItems"))
+    ListCertificateDomainValidationsRequest.struct_class = Types::ListCertificateDomainValidationsRequest
+
+    ListCertificateDomainValidationsResponse.add_member(:domain_validation_summary_list, Shapes::ShapeRef.new(shape: DomainValidationSummaryList, location_name: "DomainValidationSummaryList"))
+    ListCertificateDomainValidationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCertificateDomainValidationsResponse.struct_class = Types::ListCertificateDomainValidationsResponse
 
     ListCertificatesRequest.add_member(:certificate_statuses, Shapes::ShapeRef.new(shape: CertificateStatuses, location_name: "CertificateStatuses"))
     ListCertificatesRequest.add_member(:certificate_key_pair_origins, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigins, location_name: "CertificateKeyPairOrigins"))
@@ -984,6 +1026,26 @@ module Aws::ACM
     UpdateCertificateOptionsRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     UpdateCertificateOptionsRequest.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, required: true, location_name: "Options"))
     UpdateCertificateOptionsRequest.struct_class = Types::UpdateCertificateOptionsRequest
+
+    UpdateSummary.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "Status"))
+    UpdateSummary.add_member(:type, Shapes::ShapeRef.new(shape: UpdateType, location_name: "Type"))
+    UpdateSummary.add_member(:domain_validation_method_update_summary, Shapes::ShapeRef.new(shape: DomainValidationMethodUpdateSummary, location_name: "DomainValidationMethodUpdateSummary"))
+    UpdateSummary.add_member(:requested_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "RequestedAt"))
+    UpdateSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "UpdatedAt"))
+    UpdateSummary.struct_class = Types::UpdateSummary
+
+    ValidationChallenge.add_member(:email_validation_challenge, Shapes::ShapeRef.new(shape: EmailValidationChallenge, location_name: "EmailValidationChallenge"))
+    ValidationChallenge.add_member(:dns_validation_challenge, Shapes::ShapeRef.new(shape: DnsValidationChallenge, location_name: "DnsValidationChallenge"))
+    ValidationChallenge.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ValidationChallenge.add_member_subclass(:email_validation_challenge, Types::ValidationChallenge::EmailValidationChallenge)
+    ValidationChallenge.add_member_subclass(:dns_validation_challenge, Types::ValidationChallenge::DnsValidationChallenge)
+    ValidationChallenge.add_member_subclass(:unknown, Types::ValidationChallenge::Unknown)
+    ValidationChallenge.struct_class = Types::ValidationChallenge
+
+    ValidationConfiguration.add_member(:validation_method, Shapes::ShapeRef.new(shape: ValidationMethod, location_name: "ValidationMethod"))
+    ValidationConfiguration.add_member(:validation_challenge, Shapes::ShapeRef.new(shape: ValidationChallenge, location_name: "ValidationChallenge"))
+    ValidationConfiguration.add_member(:validation_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "ValidationStatus"))
+    ValidationConfiguration.struct_class = Types::ValidationConfiguration
 
     ValidationEmailList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1359,6 +1421,24 @@ module Aws::ACM
         )
       end)
 
+      api.add_operation(:list_certificate_domain_validations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCertificateDomainValidations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCertificateDomainValidationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCertificateDomainValidationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_certificates, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCertificates"
         o.http_method = "POST"
@@ -1579,6 +1659,7 @@ module Aws::ACM
         o.input = Shapes::ShapeRef.new(shape: UpdateCertificateOptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)

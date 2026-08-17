@@ -190,7 +190,7 @@ module Aws
                                   members: Array[
                                     {
                                       account_id: ::String,
-                                      member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")],
+                                      member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB" | "CAN_EXPORT_QUERY_ANALYSIS_LOG")],
                                       ml_member_abilities: {
                                         custom_ml_member_abilities: Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
                                       }?,
@@ -200,7 +200,7 @@ module Aws
                                   ],
                                   name: ::String,
                                   ?description: ::String,
-                                  creator_member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")],
+                                  creator_member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB" | "CAN_EXPORT_QUERY_ANALYSIS_LOG")],
                                   ?creator_ml_member_abilities: {
                                     custom_ml_member_abilities: Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
                                   },
@@ -216,7 +216,7 @@ module Aws
                                   ?tags: Hash[::String, ::String],
                                   ?creator_payment_configuration: Params::payment_configuration,
                                   ?analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL"),
-                                  ?auto_approved_change_request_types: Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY")],
+                                  ?auto_approved_change_request_types: Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY" | "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY" | "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY")],
                                   ?allowed_result_regions: Array[("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-east-2" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1")],
                                   ?is_metrics_enabled: bool
                                 ) -> _CreateCollaborationResponseSuccess
@@ -235,7 +235,7 @@ module Aws
                                                      specification: {
                                                        member: {
                                                          account_id: ::String,
-                                                         member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")],
+                                                         member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB" | "CAN_EXPORT_QUERY_ANALYSIS_LOG")],
                                                          ml_member_abilities: {
                                                            custom_ml_member_abilities: Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
                                                          }?,
@@ -243,7 +243,7 @@ module Aws
                                                          display_name: ::String?
                                                        }?,
                                                        collaboration: {
-                                                         auto_approved_change_types: Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY")]?
+                                                         auto_approved_change_types: Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY" | "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY" | "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY")]?
                                                        }?
                                                      }
                                                    }
@@ -598,6 +598,17 @@ module Aws
                                        ) -> _DisallowIntermediateTableResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisallowIntermediateTableResponseSuccess
 
+      interface _GetAnalysisLogExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnalysisLogExportOutput]
+        def analysis_log_export: () -> Types::AnalysisLogExport
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_analysis_log_export-instance_method
+      def get_analysis_log_export: (
+                                     membership_identifier: ::String,
+                                     analysis_log_export_identifier: ::String
+                                   ) -> _GetAnalysisLogExportResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnalysisLogExportResponseSuccess
+
       interface _GetAnalysisTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAnalysisTemplateOutput]
         def analysis_template: () -> Types::AnalysisTemplate
@@ -839,6 +850,21 @@ module Aws
                                       type: ("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")
                                     ) -> _GetSchemaAnalysisRuleResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSchemaAnalysisRuleResponseSuccess
+
+      interface _ListAnalysisLogExportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnalysisLogExportsOutput]
+        def next_token: () -> ::String
+        def analysis_log_exports: () -> ::Array[Types::AnalysisLogExportSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_analysis_log_exports-instance_method
+      def list_analysis_log_exports: (
+                                       membership_identifier: ::String,
+                                       ?analysis_identifier: ::String,
+                                       ?status: ("IN_PROGRESS" | "SUCCESS" | "FAILED"),
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListAnalysisLogExportsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnalysisLogExportsResponseSuccess
 
       interface _ListAnalysisTemplatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAnalysisTemplatesOutput]
@@ -1195,6 +1221,26 @@ module Aws
                                     }
                                   ) -> _PreviewPrivacyImpactResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PreviewPrivacyImpactResponseSuccess
+
+      interface _StartAnalysisLogExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAnalysisLogExportOutput]
+        def analysis_log_export: () -> Types::AnalysisLogExport
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#start_analysis_log_export-instance_method
+      def start_analysis_log_export: (
+                                       membership_identifier: ::String,
+                                       analysis_id: ::String,
+                                       analysis_type: ("PROTECTED_QUERY"),
+                                       result_configuration: {
+                                         output_configuration: {
+                                           s3: {
+                                             bucket: ::String,
+                                             key_prefix: ::String?
+                                           }
+                                         }
+                                       }
+                                     ) -> _StartAnalysisLogExportResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAnalysisLogExportResponseSuccess
 
       interface _StartProtectedJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartProtectedJobOutput]

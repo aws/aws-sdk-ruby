@@ -1086,6 +1086,7 @@ module Aws::MediaConvert
     #           video_pid: 1,
     #         },
     #         mov_settings: {
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           clap_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           mpeg_2_four_cc_control: "XDCAM", # accepts XDCAM, MPEG
@@ -1887,6 +1888,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.transport_stream_id #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.video_pid #=> Integer
+    #   resp.preset.settings.container_settings.mov_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mov_settings.clap_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mov_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mov_settings.mpeg_2_four_cc_control #=> String, one of "XDCAM", "MPEG"
@@ -2987,6 +2989,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.transport_stream_id #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.video_pid #=> Integer
+    #   resp.preset.settings.container_settings.mov_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mov_settings.clap_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mov_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mov_settings.mpeg_2_four_cc_control #=> String, one of "XDCAM", "MPEG"
@@ -3896,6 +3899,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m3u_8_settings.timed_metadata_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.transport_stream_id #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.video_pid #=> Integer
+    #   resp.presets[0].settings.container_settings.mov_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.presets[0].settings.container_settings.mov_settings.clap_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.mov_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.mov_settings.mpeg_2_four_cc_control #=> String, one of "XDCAM", "MPEG"
@@ -4480,6 +4484,7 @@ module Aws::MediaConvert
     # @example Response structure
     #
     #   resp.probe_results #=> Array
+    #   resp.probe_results[0].container.bit_rate #=> Integer
     #   resp.probe_results[0].container.duration #=> Float
     #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm", "mxf", "wave", "avi", "mpegts", "mpegps", "mp3"
     #   resp.probe_results[0].container.start_timecode #=> String
@@ -4506,6 +4511,7 @@ module Aws::MediaConvert
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.color_primaries #=> String, one of "ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "GENERIC_FILM", "ITU_2020", "SMPTE_428_1", "SMPTE_431_2", "SMPTE_EG_432_1", "IPT", "SMPTE_2067XYZ", "EBU_3213_E", "LAST"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.content_light_level.max_content_light_level #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.content_light_level.max_frame_average_light_level #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.field_order #=> String
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.height #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.level #=> String
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.matrix_coefficients #=> String, one of "RGB", "ITU_709", "UNSPECIFIED", "RESERVED", "FCC", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "YCgCo", "ITU_2020_NCL", "ITU_2020_CL", "SMPTE_2085", "CD_NCL", "CD_CL", "ITU_2100ICtCp", "IPT", "EBU3213", "LAST"
@@ -5212,6 +5218,7 @@ module Aws::MediaConvert
     #           video_pid: 1,
     #         },
     #         mov_settings: {
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           clap_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           mpeg_2_four_cc_control: "XDCAM", # accepts XDCAM, MPEG
@@ -6010,6 +6017,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.transport_stream_id #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.video_pid #=> Integer
+    #   resp.preset.settings.container_settings.mov_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mov_settings.clap_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mov_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mov_settings.mpeg_2_four_cc_control #=> String, one of "XDCAM", "MPEG"
@@ -6523,7 +6531,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.190.0'
+      context[:gem_version] = '1.191.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

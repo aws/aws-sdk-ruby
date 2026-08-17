@@ -546,6 +546,108 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Atomically creates or updates multiple rate limits for a gateway. The
+    # operation updates existing limits with matching keys and creates new
+    # limits for new keys. If the operation fails, the service applies no
+    # changes. Retry the request after resolving the issue.
+    #
+    # @option params [required, String] :gateway_identifier
+    #   The unique identifier of the gateway.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, Array<Types::BatchPutLimitEntry>] :rate_limits
+    #   Complete set of rate limits for this gateway. Replaces all existing
+    #   limits atomically.
+    #
+    # @return [Types::BatchPutGatewayRateLimitsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchPutGatewayRateLimitsResponse#rate_limits #rate_limits} => Array&lt;Types::GatewayRateLimitDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_put_gateway_rate_limits({
+    #     gateway_identifier: "GatewayIdentifier", # required
+    #     client_token: "ClientToken",
+    #     rate_limits: [ # required
+    #       {
+    #         rate_limit_id: "GatewayRateLimitId",
+    #         description: "GatewayRateLimitDescription",
+    #         dimension_keys: ["DimensionKey"], # required
+    #         entries: [ # required
+    #           {
+    #             dimensions: { # required
+    #               "DimensionKey" => "DimensionValue",
+    #             },
+    #             requests: [
+    #               {
+    #                 rate: 1.0, # required
+    #                 period: "second", # required, accepts second, minute
+    #               },
+    #             ],
+    #             tokens: [
+    #               {
+    #                 rate: 1.0, # required
+    #                 period: "second", # required, accepts second, minute
+    #               },
+    #             ],
+    #             connections: [
+    #               {
+    #                 rate: 1.0, # required
+    #                 period: "second", # required, accepts second, minute
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rate_limits #=> Array
+    #   resp.rate_limits[0].rate_limit_id #=> String
+    #   resp.rate_limits[0].gateway_identifier #=> String
+    #   resp.rate_limits[0].description #=> String
+    #   resp.rate_limits[0].dimension_keys #=> Array
+    #   resp.rate_limits[0].dimension_keys[0] #=> String
+    #   resp.rate_limits[0].entries #=> Array
+    #   resp.rate_limits[0].entries[0].dimensions #=> Hash
+    #   resp.rate_limits[0].entries[0].dimensions["DimensionKey"] #=> String
+    #   resp.rate_limits[0].entries[0].requests #=> Array
+    #   resp.rate_limits[0].entries[0].requests[0].rate #=> Float
+    #   resp.rate_limits[0].entries[0].requests[0].period #=> String, one of "second", "minute"
+    #   resp.rate_limits[0].entries[0].tokens #=> Array
+    #   resp.rate_limits[0].entries[0].tokens[0].rate #=> Float
+    #   resp.rate_limits[0].entries[0].tokens[0].period #=> String, one of "second", "minute"
+    #   resp.rate_limits[0].entries[0].connections #=> Array
+    #   resp.rate_limits[0].entries[0].connections[0].rate #=> Float
+    #   resp.rate_limits[0].entries[0].connections[0].period #=> String, one of "second", "minute"
+    #   resp.rate_limits[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.rate_limits[0].created_at #=> Time
+    #   resp.rate_limits[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BatchPutGatewayRateLimits AWS API Documentation
+    #
+    # @overload batch_put_gateway_rate_limits(params = {})
+    # @param [Hash] params ({})
+    def batch_put_gateway_rate_limits(params = {}, options = {})
+      req = build_request(:batch_put_gateway_rate_limits, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Bedrock AgentCore Runtime.
     #
     # @option params [required, String] :agent_runtime_name
@@ -557,7 +659,7 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, String] :role_arn
     #   The IAM role ARN that provides permissions for the AgentCore Runtime.
     #
-    # @option params [required, Types::NetworkConfiguration] :network_configuration
+    # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the AgentCore Runtime.
     #
     # @option params [String] :client_token
@@ -591,6 +693,12 @@ module Aws::BedrockAgentCoreControl
     #   The filesystem configurations to mount into the AgentCore Runtime. Use
     #   filesystem configurations to provide persistent storage to your
     #   AgentCore Runtime sessions.
+    #
+    # @option params [Types::CapacityProviderConfiguration] :capacity_provider_configuration
+    #   The capacity provider configuration for the AgentCore Runtime. Use a
+    #   capacity provider to run the AgentCore Runtime on the Instances
+    #   compute type, which provisions Amazon Web Services managed compute in
+    #   your account.
     #
     # @option params [Hash<String,String>] :tags
     #   A map of tag keys and values to assign to the agent runtime. Tags
@@ -627,7 +735,7 @@ module Aws::BedrockAgentCoreControl
     #       },
     #     },
     #     role_arn: "RoleArn", # required
-    #     network_configuration: { # required
+    #     network_configuration: {
     #       network_mode: "PUBLIC", # required, accepts PUBLIC, VPC
     #       network_mode_config: {
     #         security_groups: ["SecurityGroupId"], # required
@@ -730,8 +838,15 @@ module Aws::BedrockAgentCoreControl
     #           access_point_arn: "EfsAccessPointArn", # required
     #           mount_path: "MountPath", # required
     #         },
+    #         capacity_provider_volume: {
+    #           volume_name: "CapacityProviderVolumeName", # required
+    #           mount_path: "MountPath", # required
+    #         },
     #       },
     #     ],
+    #     capacity_provider_configuration: {
+    #       capacity_provider_arn: "CapacityProviderArn", # required
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1092,6 +1207,168 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Creates a capacity provider. A capacity provider defines the Amazon
+    # EC2 infrastructure for AgentCore Runtime, including the operating
+    # system, allowed instance types, networking, and storage. It also
+    # specifies the IAM permissions that AgentCore uses to manage those
+    # instances.
+    #
+    # The capacity provider name must be unique within your account. After
+    # you create the capacity provider, it enters a `CREATING` state and
+    # transitions to `READY` when it is available for use.
+    #
+    # @option params [required, String] :name
+    #   The name of the capacity provider. The name must be unique within your
+    #   account.
+    #
+    # @option params [String] :description
+    #   An optional description of the capacity provider. If you don't
+    #   specify a description, the service creates the capacity provider
+    #   without one.
+    #
+    # @option params [required, Types::PermissionsConfiguration] :permissions_configuration
+    #   The permissions configuration for the capacity provider. This
+    #   specifies the IAM role that AgentCore uses to manage the Amazon EC2
+    #   instances on your behalf.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to associate with the capacity provider.
+    #   If you don't specify tags, the capacity provider is created with no
+    #   tags.
+    #
+    # @option params [required, Types::ComputeConfiguration] :compute_configuration
+    #   The compute configuration for the capacity provider. This defines the
+    #   Amazon EC2 compute resources used to launch instances: the operating
+    #   system, allowed instance types, networking, and storage.
+    #
+    # @return [Types::CreateCapacityProviderOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCapacityProviderOutput#capacity_provider_id #capacity_provider_id} => String
+    #   * {Types::CreateCapacityProviderOutput#capacity_provider_arn #capacity_provider_arn} => String
+    #   * {Types::CreateCapacityProviderOutput#name #name} => String
+    #   * {Types::CreateCapacityProviderOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_capacity_provider({
+    #     name: "CapacityProviderName", # required
+    #     description: "Description",
+    #     permissions_configuration: { # required
+    #       capacity_provider_operator_role_arn: "RoleArn", # required
+    #     },
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     compute_configuration: { # required
+    #       ec2_configuration: {
+    #         launch_template_source: { # required
+    #           launch_parameters: {
+    #             operating_system: "LINUX_X86_64", # required, accepts LINUX_X86_64, LINUX_ARM64
+    #             instance_requirements: { # required
+    #               allowed_instance_types: ["EC2InstanceType"], # required
+    #             },
+    #             ephemeral_volumes: [
+    #               {
+    #                 device_name: "DeviceName",
+    #                 virtual_name: "VirtualDeviceName",
+    #                 ebs: {
+    #                   volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
+    #                   iops: 1,
+    #                   throughput: 1,
+    #                   encrypted: false,
+    #                   kms_key_id: "KmsKeyId",
+    #                   snapshot_id: "EbsSnapshotId",
+    #                   volume_size: 1,
+    #                   volume_initialization_rate: 1,
+    #                   ebs_card_index: 1,
+    #                 },
+    #               },
+    #             ],
+    #             monitoring: "BASIC", # accepts BASIC, DETAILED
+    #             license_specifications: [
+    #               {
+    #                 license_configuration_arn: "LicenseConfigurationArn", # required
+    #               },
+    #             ],
+    #             capacity_reservation_specification: {
+    #               capacity_reservation_preference: "capacity-reservations-only", # accepts capacity-reservations-only, open, none
+    #               capacity_reservation_target: {
+    #                 capacity_reservation_id: "CapacityReservationId",
+    #                 capacity_reservation_resource_group_arn: "CapacityReservationResourceGroupArn",
+    #               },
+    #             },
+    #             ssh_key_name: "SSHKeyName",
+    #             instance_profile_arn: "InstanceProfileArn",
+    #             propagated_tags: {
+    #               "TagKey" => "TagValue",
+    #             },
+    #           },
+    #         },
+    #         vpc_configuration: { # required
+    #           subnets: ["SubnetId"], # required
+    #           security_groups: ["SecurityGroupId"], # required
+    #         },
+    #         volumes: [
+    #           {
+    #             ebs_configuration: {
+    #               name: "VolumeName", # required
+    #               size_gi_b: 1, # required
+    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
+    #               iops: 1,
+    #               throughput: 1,
+    #               encrypted: false,
+    #               kms_key_id: "KmsKeyId",
+    #               snapshot_id: "EbsSnapshotId",
+    #             },
+    #           },
+    #         ],
+    #         lifecycle_configuration: {
+    #           idle_instance_timeout: 1,
+    #           max_lifetime: 1,
+    #         },
+    #         root_volume: {
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
+    #           iops: 1,
+    #           throughput: 1,
+    #           encrypted: false,
+    #           kms_key_id: "KmsKeyId",
+    #           free_space_gi_b: 1,
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_provider_id #=> String
+    #   resp.capacity_provider_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateCapacityProvider AWS API Documentation
+    #
+    # @overload create_capacity_provider(params = {})
+    # @param [Hash] params ({})
+    def create_capacity_provider(params = {}, options = {})
+      req = build_request(:create_capacity_provider, params)
+      req.send_request(options)
+    end
+
     # Creates a custom code interpreter.
     #
     # @option params [required, String] :name
@@ -1360,7 +1637,7 @@ module Aws::BedrockAgentCoreControl
     #         s3_uri: "S3Uri", # required
     #       },
     #     },
-    #     schema_type: "AGENTCORE_EVALUATION_PREDEFINED_V1", # required, accepts AGENTCORE_EVALUATION_PREDEFINED_V1, AGENTCORE_EVALUATION_SIMULATED_V1
+    #     schema_type: "AGENTCORE_EVALUATION_PREDEFINED_V1", # required, accepts AGENTCORE_EVALUATION_PREDEFINED_V1, AGENTCORE_EVALUATION_SIMULATED_V1, GENERIC_EVALUATION_PREDEFINED_V1
     #     kms_key_arn: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1535,12 +1812,46 @@ module Aws::BedrockAgentCoreControl
     #             additional_model_request_fields: {
     #             },
     #           },
+    #           responses_evaluator_model_config: {
+    #             model_id: "ModelId", # required
+    #             max_output_tokens: 1,
+    #             temperature: 1.0,
+    #             top_p: 1.0,
+    #             reasoning: {
+    #               effort: "ReasoningConfigurationEffortString",
+    #             },
+    #           },
     #         },
     #       },
     #       code_based: {
     #         lambda_config: {
     #           lambda_arn: "LambdaArn", # required
     #           lambda_timeout_in_seconds: 1,
+    #         },
+    #       },
+    #       derived: {
+    #         base_evaluator_id: "EvaluatorId", # required
+    #         model_config: { # required
+    #           bedrock_evaluator_model_config: {
+    #             model_id: "ModelId", # required
+    #             inference_config: {
+    #               max_tokens: 1,
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #               stop_sequences: ["NonEmptyString"],
+    #             },
+    #             additional_model_request_fields: {
+    #             },
+    #           },
+    #           responses_evaluator_model_config: {
+    #             model_id: "ModelId", # required
+    #             max_output_tokens: 1,
+    #             temperature: 1.0,
+    #             top_p: 1.0,
+    #             reasoning: {
+    #               effort: "ReasoningConfigurationEffortString",
+    #             },
+    #           },
     #         },
     #       },
     #     },
@@ -1877,6 +2188,119 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def create_gateway(params = {}, options = {})
       req = build_request(:create_gateway, params)
+      req.send_request(options)
+    end
+
+    # Creates a rate limit for a gateway. Rate limits define throttling
+    # rules for each dimension that control request rates, token consumption
+    # rates, and concurrent connections through the gateway.
+    #
+    # @option params [required, String] :gateway_identifier
+    #   The unique identifier of the gateway to create the rate limit for.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :rate_limit_id
+    #   Optional customer-defined limit ID. If not provided, system generates
+    #   one.
+    #
+    # @option params [String] :description
+    #   Optional human-readable description for this limit.
+    #
+    # @option params [required, Array<String>] :dimension_keys
+    #   Ordered list of dimension names defining the scope of this limit.
+    #   Unique per gateway — no two limits can share the same dimensionKeys.
+    #
+    # @option params [required, Array<Types::LimitEntry>] :entries
+    #   Rule entries mapping dimension values to rate configurations.
+    #
+    # @return [Types::CreateGatewayRateLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGatewayRateLimitResponse#rate_limit_id #rate_limit_id} => String
+    #   * {Types::CreateGatewayRateLimitResponse#gateway_identifier #gateway_identifier} => String
+    #   * {Types::CreateGatewayRateLimitResponse#description #description} => String
+    #   * {Types::CreateGatewayRateLimitResponse#dimension_keys #dimension_keys} => Array&lt;String&gt;
+    #   * {Types::CreateGatewayRateLimitResponse#entries #data.entries} => Array&lt;Types::LimitEntry&gt; (This method conflicts with a method on Response, call it through the data member)
+    #   * {Types::CreateGatewayRateLimitResponse#status #status} => String
+    #   * {Types::CreateGatewayRateLimitResponse#created_at #created_at} => Time
+    #   * {Types::CreateGatewayRateLimitResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_gateway_rate_limit({
+    #     gateway_identifier: "GatewayIdentifier", # required
+    #     client_token: "ClientToken",
+    #     rate_limit_id: "GatewayRateLimitId",
+    #     description: "GatewayRateLimitDescription",
+    #     dimension_keys: ["DimensionKey"], # required
+    #     entries: [ # required
+    #       {
+    #         dimensions: { # required
+    #           "DimensionKey" => "DimensionValue",
+    #         },
+    #         requests: [
+    #           {
+    #             rate: 1.0, # required
+    #             period: "second", # required, accepts second, minute
+    #           },
+    #         ],
+    #         tokens: [
+    #           {
+    #             rate: 1.0, # required
+    #             period: "second", # required, accepts second, minute
+    #           },
+    #         ],
+    #         connections: [
+    #           {
+    #             rate: 1.0, # required
+    #             period: "second", # required, accepts second, minute
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rate_limit_id #=> String
+    #   resp.gateway_identifier #=> String
+    #   resp.description #=> String
+    #   resp.dimension_keys #=> Array
+    #   resp.dimension_keys[0] #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].dimensions #=> Hash
+    #   resp.data.entries[0].dimensions["DimensionKey"] #=> String
+    #   resp.data.entries[0].requests #=> Array
+    #   resp.data.entries[0].requests[0].rate #=> Float
+    #   resp.data.entries[0].requests[0].period #=> String, one of "second", "minute"
+    #   resp.data.entries[0].tokens #=> Array
+    #   resp.data.entries[0].tokens[0].rate #=> Float
+    #   resp.data.entries[0].tokens[0].period #=> String, one of "second", "minute"
+    #   resp.data.entries[0].connections #=> Array
+    #   resp.data.entries[0].connections[0].rate #=> Float
+    #   resp.data.entries[0].connections[0].period #=> String, one of "second", "minute"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayRateLimit AWS API Documentation
+    #
+    # @overload create_gateway_rate_limit(params = {})
+    # @param [Hash] params ({})
+    def create_gateway_rate_limit(params = {}, options = {})
+      req = build_request(:create_gateway_rate_limit, params)
       req.send_request(options)
     end
 
@@ -2255,6 +2679,14 @@ module Aws::BedrockAgentCoreControl
     #             timeout: 1,
     #           },
     #         },
+    #         connector: {
+    #           source: { # required
+    #             connector_id: "ConnectorId", # required
+    #           },
+    #           parameters: {
+    #             "ConnectorParameterName" => "ConnectorParameterValue",
+    #           },
+    #         },
     #       },
     #       inference: {
     #         connector: {
@@ -2409,6 +2841,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.http.passthrough.schema.source.inline_payload #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.identifier #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.timeout #=> Integer
+    #   resp.target_configuration.http.connector.source.connector_id #=> String
+    #   resp.target_configuration.http.connector.parameters #=> Hash
+    #   resp.target_configuration.http.connector.parameters["ConnectorParameterName"] #=> String
     #   resp.target_configuration.inference.connector.source.connector_id #=> String
     #   resp.target_configuration.inference.provider.endpoint #=> String
     #   resp.target_configuration.inference.provider.model_mapping.provider_prefix.strip #=> Boolean
@@ -2579,6 +3014,10 @@ module Aws::BedrockAgentCoreControl
     #             },
     #             efs_access_point: {
     #               access_point_arn: "EfsAccessPointArn", # required
+    #               mount_path: "MountPath", # required
+    #             },
+    #             capacity_provider_volume: {
+    #               volume_name: "CapacityProviderVolumeName", # required
     #               mount_path: "MountPath", # required
     #             },
     #           },
@@ -2897,6 +3336,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.access_point_arn #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -3592,7 +4033,21 @@ module Aws::BedrockAgentCoreControl
     #             actor_token_scopes: ["ScopeType"],
     #           },
     #         },
-    #         client_authentication_method: "CLIENT_SECRET_BASIC", # accepts CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT
+    #         client_authentication_method: "CLIENT_SECRET_BASIC", # accepts CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT
+    #         private_key_jwt_config: {
+    #           private_key_source: {
+    #             kms_key_source: {
+    #               kms_key_arn: "KmsKeyArn", # required
+    #             },
+    #           },
+    #           signing_algorithm: "RS256", # accepts RS256, PS256, ES256
+    #           additional_header_claims: {
+    #             "AdditionalClaimName" => "AdditionalClaimValue",
+    #           },
+    #           additional_payload_claims: {
+    #             "AdditionalClaimName" => "AdditionalClaimValue",
+    #           },
+    #         },
     #         private_endpoint: {
     #           self_managed_lattice_resource: {
     #             resource_configuration_identifier: "ResourceConfigurationIdentifier",
@@ -3728,6 +4183,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.grant_type #=> String, one of "TOKEN_EXCHANGE", "JWT_AUTHORIZATION_GRANT"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.subnet_ids #=> Array
@@ -3750,11 +4210,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.grant_type #=> String, one of "TOKEN_EXCHANGE", "JWT_AUTHORIZATION_GRANT"
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source.kms_key_source.kms_key_arn #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.signing_algorithm #=> String, one of "RS256", "PS256", "ES256"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims #=> Hash
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims["AdditionalClaimName"] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_payload_claims #=> Hash
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_payload_claims["AdditionalClaimName"] #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
@@ -4010,6 +4471,16 @@ module Aws::BedrockAgentCoreControl
     #   These configurations specify how the connector authenticates with the
     #   payment provider.
     #
+    # @option params [String] :provision_mode
+    #   The provision mode for creating the payment connector. If you don't
+    #   specify a value, the default is `MANUAL`.
+    #
+    #   * `MANUAL` - You provide the credential provider configurations
+    #     directly.
+    #
+    #   * `QUICK_CREATE` - The service orchestrates OAuth consent and
+    #     provisions the credential provider for you.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If you don't specify this field, a
@@ -4033,6 +4504,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreatePaymentConnectorResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialsProviderConfiguration&gt;
     #   * {Types::CreatePaymentConnectorResponse#created_at #created_at} => Time
     #   * {Types::CreatePaymentConnectorResponse#status #status} => String
+    #   * {Types::CreatePaymentConnectorResponse#authorization_url #authorization_url} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4051,6 +4523,7 @@ module Aws::BedrockAgentCoreControl
     #         },
     #       },
     #     ],
+    #     provision_mode: "MANUAL", # accepts MANUAL, QUICK_CREATE
     #     client_token: "ClientToken",
     #   })
     #
@@ -4064,7 +4537,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
     #   resp.created_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
+    #   resp.authorization_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentConnector AWS API Documentation
     #
@@ -4217,6 +4691,12 @@ module Aws::BedrockAgentCoreControl
     # @option params [Hash<String,String>] :tags
     #   A map of tag keys and values to assign to the payment manager.
     #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed KMS key to use
+    #   for encrypting sensitive payment manager data at rest. If you don't
+    #   specify a key, the data is encrypted with an Amazon Web Services owned
+    #   key.
+    #
     # @return [Types::CreatePaymentManagerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePaymentManagerResponse#payment_manager_arn #payment_manager_arn} => String
@@ -4229,6 +4709,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreatePaymentManagerResponse#created_at #created_at} => Time
     #   * {Types::CreatePaymentManagerResponse#status #status} => String
     #   * {Types::CreatePaymentManagerResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreatePaymentManagerResponse#kms_key_arn #kms_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4308,6 +4789,7 @@ module Aws::BedrockAgentCoreControl
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     kms_key_arn: "KmsKeyArn",
     #   })
     #
     # @example Response structure
@@ -4364,6 +4846,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentManager AWS API Documentation
     #
@@ -4386,9 +4869,17 @@ module Aws::BedrockAgentCoreControl
     # asynchronous operation. Use the [GetPolicy][1] operation to poll the
     # `status` field to track completion.
     #
+    # If the new policy is a temporal policy, creating it invalidates the
+    # policy engine's active temporal sessions. For more information about
+    # temporal policy sessions, see [session-based temporal policies][2].
+    # The policy engine returns an HTTP 409 `ConflictException` to in-flight
+    # sessions. To resume, you must start a new session with a new session
+    # ID.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetPolicy.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy-session-based-temporal.html
     #
     # @option params [required, String] :name
     #   The customer-assigned immutable name for the policy. Must be unique
@@ -4941,10 +5432,16 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Deletes an Amazon Bedrock AgentCore Runtime.
+    # Deletes an Amazon Bedrock AgentCore Runtime, or a single version of an
+    # AgentCore Runtime when you provide the version qualifier.
     #
     # @option params [required, String] :agent_runtime_id
     #   The unique identifier of the AgentCore Runtime to delete.
+    #
+    # @option params [String] :agent_runtime_version
+    #   The version of the AgentCore Runtime to delete. When you provide this
+    #   value, only that version is deleted. When you omit it, the entire
+    #   AgentCore Runtime and all of its versions are deleted.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the operation
@@ -4958,11 +5455,13 @@ module Aws::BedrockAgentCoreControl
     #
     #   * {Types::DeleteAgentRuntimeResponse#status #status} => String
     #   * {Types::DeleteAgentRuntimeResponse#agent_runtime_id #agent_runtime_id} => String
+    #   * {Types::DeleteAgentRuntimeResponse#agent_runtime_version #agent_runtime_version} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_agent_runtime({
     #     agent_runtime_id: "AgentRuntimeId", # required
+    #     agent_runtime_version: "AgentRuntimeVersion",
     #     client_token: "ClientToken",
     #   })
     #
@@ -4970,6 +5469,7 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
     #   resp.agent_runtime_id #=> String
+    #   resp.agent_runtime_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteAgentRuntime AWS API Documentation
     #
@@ -4980,7 +5480,7 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Deletes an AAgentCore Runtime endpoint.
+    # Deletes an AgentCore Runtime endpoint.
     #
     # @option params [required, String] :agent_runtime_id
     #   The unique identifier of the AgentCore Runtime associated with the
@@ -5128,6 +5628,53 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def delete_browser_profile(params = {}, options = {})
       req = build_request(:delete_browser_profile, params)
+      req.send_request(options)
+    end
+
+    # Deletes a capacity provider. Before you delete a capacity provider,
+    # disassociate all agent runtimes and runtime versions that reference
+    # it. If any references remain, the operation fails.
+    #
+    # @option params [required, String] :capacity_provider_id
+    #   The unique identifier of the capacity provider to delete.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::DeleteCapacityProviderOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCapacityProviderOutput#capacity_provider_id #capacity_provider_id} => String
+    #   * {Types::DeleteCapacityProviderOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_capacity_provider({
+    #     capacity_provider_id: "CapacityProviderId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_provider_id #=> String
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteCapacityProvider AWS API Documentation
+    #
+    # @overload delete_capacity_provider(params = {})
+    # @param [Hash] params ({})
+    def delete_capacity_provider(params = {}, options = {})
+      req = build_request(:delete_capacity_provider, params)
       req.send_request(options)
     end
 
@@ -5368,6 +5915,40 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Deletes a gateway rate limit.
+    #
+    # @option params [required, String] :gateway_identifier
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :rate_limit_id
+    #   The unique identifier of the rate limit to delete.
+    #
+    # @return [Types::DeleteGatewayRateLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteGatewayRateLimitResponse#rate_limit_id #rate_limit_id} => String
+    #   * {Types::DeleteGatewayRateLimitResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_gateway_rate_limit({
+    #     gateway_identifier: "GatewayIdentifier", # required
+    #     rate_limit_id: "GatewayRateLimitId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rate_limit_id #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteGatewayRateLimit AWS API Documentation
+    #
+    # @overload delete_gateway_rate_limit(params = {})
+    # @param [Hash] params ({})
+    def delete_gateway_rate_limit(params = {}, options = {})
+      req = build_request(:delete_gateway_rate_limit, params)
+      req.send_request(options)
+    end
+
     # Deletes a gateway rule.
     #
     # @option params [required, String] :gateway_identifier
@@ -5560,6 +6141,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.access_point_arn #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -5813,7 +6396,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.payment_connector_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePaymentConnector AWS API Documentation
@@ -6149,6 +6732,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#request_header_configuration #request_header_configuration} => Types::RequestHeaderConfiguration
     #   * {Types::GetAgentRuntimeResponse#metadata_configuration #metadata_configuration} => Types::RuntimeMetadataConfiguration
     #   * {Types::GetAgentRuntimeResponse#filesystem_configurations #filesystem_configurations} => Array&lt;Types::FilesystemConfiguration&gt;
+    #   * {Types::GetAgentRuntimeResponse#capacity_provider_configuration #capacity_provider_configuration} => Types::CapacityProviderConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -6239,6 +6823,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.filesystem_configurations[0].s3_files_access_point.mount_path #=> String
     #   resp.filesystem_configurations[0].efs_access_point.access_point_arn #=> String
     #   resp.filesystem_configurations[0].efs_access_point.mount_path #=> String
+    #   resp.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
+    #   resp.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.capacity_provider_configuration.capacity_provider_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -6460,6 +7047,100 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def get_browser_profile(params = {}, options = {})
       req = build_request(:get_browser_profile, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a capacity provider, including its status,
+    # permissions configuration, and compute configuration.
+    #
+    # @option params [required, String] :capacity_provider_id
+    #   The unique identifier of the capacity provider.
+    #
+    # @return [Types::GetCapacityProviderOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCapacityProviderOutput#capacity_provider_id #capacity_provider_id} => String
+    #   * {Types::GetCapacityProviderOutput#capacity_provider_arn #capacity_provider_arn} => String
+    #   * {Types::GetCapacityProviderOutput#name #name} => String
+    #   * {Types::GetCapacityProviderOutput#status #status} => String
+    #   * {Types::GetCapacityProviderOutput#description #description} => String
+    #   * {Types::GetCapacityProviderOutput#status_code #status_code} => String
+    #   * {Types::GetCapacityProviderOutput#status_reason #status_reason} => String
+    #   * {Types::GetCapacityProviderOutput#permissions_configuration #permissions_configuration} => Types::PermissionsConfiguration
+    #   * {Types::GetCapacityProviderOutput#compute_configuration #compute_configuration} => Types::ComputeConfiguration
+    #   * {Types::GetCapacityProviderOutput#created_at #created_at} => Time
+    #   * {Types::GetCapacityProviderOutput#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_capacity_provider({
+    #     capacity_provider_id: "CapacityProviderId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_provider_id #=> String
+    #   resp.capacity_provider_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
+    #   resp.description #=> String
+    #   resp.status_code #=> String, one of "VALIDATION_ERROR", "QUOTA_EXCEEDED", "THROTTLED", "INTERNAL_SERVER_EXCEPTION"
+    #   resp.status_reason #=> String
+    #   resp.permissions_configuration.capacity_provider_operator_role_arn #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.operating_system #=> String, one of "LINUX_X86_64", "LINUX_ARM64"
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.instance_requirements.allowed_instance_types #=> Array
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes #=> Array
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].device_name #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].virtual_name #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].ebs.iops #=> Integer
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].ebs.throughput #=> Integer
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].ebs.encrypted #=> Boolean
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].ebs.kms_key_id #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].ebs.snapshot_id #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].ebs.volume_size #=> Integer
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].ebs.volume_initialization_rate #=> Integer
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ephemeral_volumes[0].ebs.ebs_card_index #=> Integer
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.license_specifications #=> Array
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.license_specifications[0].license_configuration_arn #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "capacity-reservations-only", "open", "none"
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arn #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.ssh_key_name #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.instance_profile_arn #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.propagated_tags #=> Hash
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.propagated_tags["TagKey"] #=> String
+    #   resp.compute_configuration.ec2_configuration.vpc_configuration.subnets #=> Array
+    #   resp.compute_configuration.ec2_configuration.vpc_configuration.subnets[0] #=> String
+    #   resp.compute_configuration.ec2_configuration.vpc_configuration.security_groups #=> Array
+    #   resp.compute_configuration.ec2_configuration.vpc_configuration.security_groups[0] #=> String
+    #   resp.compute_configuration.ec2_configuration.volumes #=> Array
+    #   resp.compute_configuration.ec2_configuration.volumes[0].ebs_configuration.name #=> String
+    #   resp.compute_configuration.ec2_configuration.volumes[0].ebs_configuration.size_gi_b #=> Integer
+    #   resp.compute_configuration.ec2_configuration.volumes[0].ebs_configuration.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
+    #   resp.compute_configuration.ec2_configuration.volumes[0].ebs_configuration.iops #=> Integer
+    #   resp.compute_configuration.ec2_configuration.volumes[0].ebs_configuration.throughput #=> Integer
+    #   resp.compute_configuration.ec2_configuration.volumes[0].ebs_configuration.encrypted #=> Boolean
+    #   resp.compute_configuration.ec2_configuration.volumes[0].ebs_configuration.kms_key_id #=> String
+    #   resp.compute_configuration.ec2_configuration.volumes[0].ebs_configuration.snapshot_id #=> String
+    #   resp.compute_configuration.ec2_configuration.lifecycle_configuration.idle_instance_timeout #=> Integer
+    #   resp.compute_configuration.ec2_configuration.lifecycle_configuration.max_lifetime #=> Integer
+    #   resp.compute_configuration.ec2_configuration.root_volume.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
+    #   resp.compute_configuration.ec2_configuration.root_volume.iops #=> Integer
+    #   resp.compute_configuration.ec2_configuration.root_volume.throughput #=> Integer
+    #   resp.compute_configuration.ec2_configuration.root_volume.encrypted #=> Boolean
+    #   resp.compute_configuration.ec2_configuration.root_volume.kms_key_id #=> String
+    #   resp.compute_configuration.ec2_configuration.root_volume.free_space_gi_b #=> Integer
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetCapacityProvider AWS API Documentation
+    #
+    # @overload get_capacity_provider(params = {})
+    # @param [Hash] params ({})
+    def get_capacity_provider(params = {}, options = {})
+      req = build_request(:get_capacity_provider, params)
       req.send_request(options)
     end
 
@@ -6688,7 +7369,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.draft_status #=> String, one of "MODIFIED", "UNMODIFIED"
     #   resp.failure_reason #=> String
-    #   resp.schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1"
+    #   resp.schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1", "GENERIC_EVALUATION_PREDEFINED_V1"
     #   resp.kms_key_arn #=> String
     #   resp.example_count #=> Integer
     #   resp.download_url #=> String
@@ -6730,6 +7411,8 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetEvaluatorResponse#evaluator_name #evaluator_name} => String
     #   * {Types::GetEvaluatorResponse#description #description} => String
     #   * {Types::GetEvaluatorResponse#evaluator_config #evaluator_config} => Types::EvaluatorConfig
+    #   * {Types::GetEvaluatorResponse#evaluator_type #evaluator_type} => String
+    #   * {Types::GetEvaluatorResponse#provider #provider} => String
     #   * {Types::GetEvaluatorResponse#level #level} => String
     #   * {Types::GetEvaluatorResponse#status #status} => String
     #   * {Types::GetEvaluatorResponse#created_at #created_at} => Time
@@ -6764,8 +7447,27 @@ module Aws::BedrockAgentCoreControl
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config.top_p #=> Float
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config.stop_sequences #=> Array
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config.stop_sequences[0] #=> String
+    #   resp.evaluator_config.llm_as_a_judge.model_config.responses_evaluator_model_config.model_id #=> String
+    #   resp.evaluator_config.llm_as_a_judge.model_config.responses_evaluator_model_config.max_output_tokens #=> Integer
+    #   resp.evaluator_config.llm_as_a_judge.model_config.responses_evaluator_model_config.temperature #=> Float
+    #   resp.evaluator_config.llm_as_a_judge.model_config.responses_evaluator_model_config.top_p #=> Float
+    #   resp.evaluator_config.llm_as_a_judge.model_config.responses_evaluator_model_config.reasoning.effort #=> String
     #   resp.evaluator_config.code_based.lambda_config.lambda_arn #=> String
     #   resp.evaluator_config.code_based.lambda_config.lambda_timeout_in_seconds #=> Integer
+    #   resp.evaluator_config.derived.base_evaluator_id #=> String
+    #   resp.evaluator_config.derived.model_config.bedrock_evaluator_model_config.model_id #=> String
+    #   resp.evaluator_config.derived.model_config.bedrock_evaluator_model_config.inference_config.max_tokens #=> Integer
+    #   resp.evaluator_config.derived.model_config.bedrock_evaluator_model_config.inference_config.temperature #=> Float
+    #   resp.evaluator_config.derived.model_config.bedrock_evaluator_model_config.inference_config.top_p #=> Float
+    #   resp.evaluator_config.derived.model_config.bedrock_evaluator_model_config.inference_config.stop_sequences #=> Array
+    #   resp.evaluator_config.derived.model_config.bedrock_evaluator_model_config.inference_config.stop_sequences[0] #=> String
+    #   resp.evaluator_config.derived.model_config.responses_evaluator_model_config.model_id #=> String
+    #   resp.evaluator_config.derived.model_config.responses_evaluator_model_config.max_output_tokens #=> Integer
+    #   resp.evaluator_config.derived.model_config.responses_evaluator_model_config.temperature #=> Float
+    #   resp.evaluator_config.derived.model_config.responses_evaluator_model_config.top_p #=> Float
+    #   resp.evaluator_config.derived.model_config.responses_evaluator_model_config.reasoning.effort #=> String
+    #   resp.evaluator_type #=> String, one of "Builtin", "ThirdParty", "Custom", "CustomCode", "CustomDerived"
+    #   resp.provider #=> String, one of "AWS", "DeepEval", "AutoEval", "Custom"
     #   resp.level #=> String, one of "TOOL_CALL", "TRACE", "SESSION"
     #   resp.status #=> String, one of "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING"
     #   resp.created_at #=> Time
@@ -6903,6 +7605,64 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def get_gateway(params = {}, options = {})
       req = build_request(:get_gateway, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a gateway rate limit.
+    #
+    # @option params [required, String] :gateway_identifier
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :rate_limit_id
+    #   The unique identifier of the rate limit to retrieve.
+    #
+    # @return [Types::GetGatewayRateLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGatewayRateLimitResponse#rate_limit_id #rate_limit_id} => String
+    #   * {Types::GetGatewayRateLimitResponse#gateway_identifier #gateway_identifier} => String
+    #   * {Types::GetGatewayRateLimitResponse#description #description} => String
+    #   * {Types::GetGatewayRateLimitResponse#dimension_keys #dimension_keys} => Array&lt;String&gt;
+    #   * {Types::GetGatewayRateLimitResponse#entries #data.entries} => Array&lt;Types::LimitEntry&gt; (This method conflicts with a method on Response, call it through the data member)
+    #   * {Types::GetGatewayRateLimitResponse#status #status} => String
+    #   * {Types::GetGatewayRateLimitResponse#created_at #created_at} => Time
+    #   * {Types::GetGatewayRateLimitResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_gateway_rate_limit({
+    #     gateway_identifier: "GatewayIdentifier", # required
+    #     rate_limit_id: "GatewayRateLimitId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rate_limit_id #=> String
+    #   resp.gateway_identifier #=> String
+    #   resp.description #=> String
+    #   resp.dimension_keys #=> Array
+    #   resp.dimension_keys[0] #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].dimensions #=> Hash
+    #   resp.data.entries[0].dimensions["DimensionKey"] #=> String
+    #   resp.data.entries[0].requests #=> Array
+    #   resp.data.entries[0].requests[0].rate #=> Float
+    #   resp.data.entries[0].requests[0].period #=> String, one of "second", "minute"
+    #   resp.data.entries[0].tokens #=> Array
+    #   resp.data.entries[0].tokens[0].rate #=> Float
+    #   resp.data.entries[0].tokens[0].period #=> String, one of "second", "minute"
+    #   resp.data.entries[0].connections #=> Array
+    #   resp.data.entries[0].connections[0].rate #=> Float
+    #   resp.data.entries[0].connections[0].period #=> String, one of "second", "minute"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayRateLimit AWS API Documentation
+    #
+    # @overload get_gateway_rate_limit(params = {})
+    # @param [Hash] params ({})
+    def get_gateway_rate_limit(params = {}, options = {})
+      req = build_request(:get_gateway_rate_limit, params)
       req.send_request(options)
     end
 
@@ -7090,6 +7850,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.http.passthrough.schema.source.inline_payload #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.identifier #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.timeout #=> Integer
+    #   resp.target_configuration.http.connector.source.connector_id #=> String
+    #   resp.target_configuration.http.connector.parameters #=> Hash
+    #   resp.target_configuration.http.connector.parameters["ConnectorParameterName"] #=> String
     #   resp.target_configuration.inference.connector.source.connector_id #=> String
     #   resp.target_configuration.inference.provider.endpoint #=> String
     #   resp.target_configuration.inference.provider.model_mapping.provider_prefix.strip #=> Boolean
@@ -7253,6 +8016,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.access_point_arn #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -7549,6 +8314,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.grant_type #=> String, one of "TOKEN_EXCHANGE", "JWT_AUTHORIZATION_GRANT"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.subnet_ids #=> Array
@@ -7571,11 +8341,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.grant_type #=> String, one of "TOKEN_EXCHANGE", "JWT_AUTHORIZATION_GRANT"
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source.kms_key_source.kms_key_arn #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.signing_algorithm #=> String, one of "RS256", "PS256", "ES256"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims #=> Hash
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims["AdditionalClaimName"] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_payload_claims #=> Hash
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_payload_claims["AdditionalClaimName"] #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
@@ -7754,6 +8525,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetPaymentConnectorResponse#created_at #created_at} => Time
     #   * {Types::GetPaymentConnectorResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetPaymentConnectorResponse#status #status} => String
+    #   * {Types::GetPaymentConnectorResponse#authorization_url #authorization_url} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7773,7 +8545,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
+    #   resp.authorization_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentConnector AWS API Documentation
     #
@@ -7858,6 +8631,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetPaymentManagerResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetPaymentManagerResponse#status #status} => String
     #   * {Types::GetPaymentManagerResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetPaymentManagerResponse#kms_key_arn #kms_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7921,6 +8695,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentManager AWS API Documentation
     #
@@ -8650,6 +9425,59 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Lists the agent runtime versions that are associated with a capacity
+    # provider. Use this operation to identify the runtimes you must
+    # disassociate before you can delete the capacity provider. Results are
+    # paginated; use the `nextToken` parameter to retrieve additional
+    # results.
+    #
+    # @option params [required, String] :capacity_provider_id
+    #   The unique identifier of the capacity provider.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::ListAgentRuntimeVersionsByCapacityProviderOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentRuntimeVersionsByCapacityProviderOutput#agent_runtimes #agent_runtimes} => Array&lt;Types::AgentRuntimeVersionSummary&gt;
+    #   * {Types::ListAgentRuntimeVersionsByCapacityProviderOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_runtime_versions_by_capacity_provider({
+    #     capacity_provider_id: "CapacityProviderId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_runtimes #=> Array
+    #   resp.agent_runtimes[0].agent_runtime_arn #=> String
+    #   resp.agent_runtimes[0].agent_runtime_version #=> String
+    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimeVersionsByCapacityProvider AWS API Documentation
+    #
+    # @overload list_agent_runtime_versions_by_capacity_provider(params = {})
+    # @param [Hash] params ({})
+    def list_agent_runtime_versions_by_capacity_provider(params = {}, options = {})
+      req = build_request(:list_agent_runtime_versions_by_capacity_provider, params)
+      req.send_request(options)
+    end
+
     # Lists all Amazon Secure Agents in your account.
     #
     # @option params [Integer] :max_results
@@ -8831,6 +9659,57 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def list_browsers(params = {}, options = {})
       req = build_request(:list_browsers, params)
+      req.send_request(options)
+    end
+
+    # Lists the capacity providers in your account and returns summary
+    # information for each one. To retrieve the full configuration for a
+    # specific capacity provider, use `GetCapacityProvider`. Results are
+    # paginated; use the `nextToken` parameter to retrieve additional
+    # results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::ListCapacityProvidersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCapacityProvidersOutput#capacity_providers #capacity_providers} => Array&lt;Types::CapacityProviderSummary&gt;
+    #   * {Types::ListCapacityProvidersOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_capacity_providers({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_providers #=> Array
+    #   resp.capacity_providers[0].capacity_provider_id #=> String
+    #   resp.capacity_providers[0].capacity_provider_arn #=> String
+    #   resp.capacity_providers[0].name #=> String
+    #   resp.capacity_providers[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
+    #   resp.capacity_providers[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListCapacityProviders AWS API Documentation
+    #
+    # @overload list_capacity_providers(params = {})
+    # @param [Hash] params ({})
+    def list_capacity_providers(params = {}, options = {})
+      req = build_request(:list_capacity_providers, params)
       req.send_request(options)
     end
 
@@ -9126,7 +10005,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.datasets[0].description #=> String
     #   resp.datasets[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.datasets[0].draft_status #=> String, one of "MODIFIED", "UNMODIFIED"
-    #   resp.datasets[0].schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1"
+    #   resp.datasets[0].schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1", "GENERIC_EVALUATION_PREDEFINED_V1"
     #   resp.datasets[0].example_count #=> Integer
     #   resp.datasets[0].created_at #=> Time
     #   resp.datasets[0].updated_at #=> Time
@@ -9172,7 +10051,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.evaluators[0].evaluator_id #=> String
     #   resp.evaluators[0].evaluator_name #=> String
     #   resp.evaluators[0].description #=> String
-    #   resp.evaluators[0].evaluator_type #=> String, one of "Builtin", "Custom", "CustomCode"
+    #   resp.evaluators[0].evaluator_type #=> String, one of "Builtin", "ThirdParty", "Custom", "CustomCode", "CustomDerived"
+    #   resp.evaluators[0].provider #=> String, one of "AWS", "DeepEval", "AutoEval", "Custom"
     #   resp.evaluators[0].level #=> String, one of "TOOL_CALL", "TRACE", "SESSION"
     #   resp.evaluators[0].status #=> String, one of "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING"
     #   resp.evaluators[0].created_at #=> Time
@@ -9187,6 +10067,71 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def list_evaluators(params = {}, options = {})
       req = build_request(:list_evaluators, params)
+      req.send_request(options)
+    end
+
+    # Lists all rate limits for a gateway. Results are paginated. Use the
+    # `nextToken` parameter to retrieve additional results.
+    #
+    # @option params [required, String] :gateway_identifier
+    #   The unique identifier of the gateway.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. Use the value
+    #   returned in a previous `ListGatewayRateLimits` response.
+    #
+    # @return [Types::ListGatewayRateLimitsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGatewayRateLimitsResponse#rate_limits #rate_limits} => Array&lt;Types::GatewayRateLimitDetail&gt;
+    #   * {Types::ListGatewayRateLimitsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_gateway_rate_limits({
+    #     gateway_identifier: "GatewayIdentifier", # required
+    #     max_results: 1,
+    #     next_token: "GatewayRateLimitNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rate_limits #=> Array
+    #   resp.rate_limits[0].rate_limit_id #=> String
+    #   resp.rate_limits[0].gateway_identifier #=> String
+    #   resp.rate_limits[0].description #=> String
+    #   resp.rate_limits[0].dimension_keys #=> Array
+    #   resp.rate_limits[0].dimension_keys[0] #=> String
+    #   resp.rate_limits[0].entries #=> Array
+    #   resp.rate_limits[0].entries[0].dimensions #=> Hash
+    #   resp.rate_limits[0].entries[0].dimensions["DimensionKey"] #=> String
+    #   resp.rate_limits[0].entries[0].requests #=> Array
+    #   resp.rate_limits[0].entries[0].requests[0].rate #=> Float
+    #   resp.rate_limits[0].entries[0].requests[0].period #=> String, one of "second", "minute"
+    #   resp.rate_limits[0].entries[0].tokens #=> Array
+    #   resp.rate_limits[0].entries[0].tokens[0].rate #=> Float
+    #   resp.rate_limits[0].entries[0].tokens[0].period #=> String, one of "second", "minute"
+    #   resp.rate_limits[0].entries[0].connections #=> Array
+    #   resp.rate_limits[0].entries[0].connections[0].rate #=> Float
+    #   resp.rate_limits[0].entries[0].connections[0].period #=> String, one of "second", "minute"
+    #   resp.rate_limits[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.rate_limits[0].created_at #=> Time
+    #   resp.rate_limits[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListGatewayRateLimits AWS API Documentation
+    #
+    # @overload list_gateway_rate_limits(params = {})
+    # @param [Hash] params ({})
+    def list_gateway_rate_limits(params = {}, options = {})
+      req = build_request(:list_gateway_rate_limits, params)
       req.send_request(options)
     end
 
@@ -9311,7 +10256,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.items[0].last_synchronized_at #=> Time
     #   resp.items[0].authorization_data.oauth2.authorization_url #=> String
     #   resp.items[0].authorization_data.oauth2.user_id #=> String
-    #   resp.items[0].target_type #=> String, one of "OPEN_API_SCHEMA", "SMITHY_MODEL", "MCP_SERVER", "LAMBDA", "API_GATEWAY", "CONNECTOR", "AGENTCORE_RUNTIME", "PASSTHROUGH", "PROVIDER"
+    #   resp.items[0].target_type #=> String, one of "OPEN_API_SCHEMA", "SMITHY_MODEL", "MCP_SERVER", "LAMBDA", "API_GATEWAY", "CONNECTOR", "AGENTCORE_RUNTIME", "PASSTHROUGH", "PROVIDER", "HTTP_CONNECTOR"
     #   resp.items[0].listing_mode #=> String, one of "DEFAULT", "DYNAMIC"
     #   resp.next_token #=> String
     #
@@ -9693,7 +10638,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connectors[0].payment_connector_id #=> String
     #   resp.payment_connectors[0].name #=> String
     #   resp.payment_connectors[0].type #=> String, one of "CoinbaseCDP", "StripePrivy"
-    #   resp.payment_connectors[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.payment_connectors[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.payment_connectors[0].last_updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -9787,6 +10732,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_managers[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.payment_managers[0].created_at #=> Time
     #   resp.payment_managers[0].last_updated_at #=> Time
+    #   resp.payment_managers[0].kms_key_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPaymentManagers AWS API Documentation
@@ -10790,6 +11736,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.targets[0].target_configuration.http.passthrough.schema.source.inline_payload #=> String
     #   resp.targets[0].target_configuration.http.passthrough.stickiness_configuration.identifier #=> String
     #   resp.targets[0].target_configuration.http.passthrough.stickiness_configuration.timeout #=> Integer
+    #   resp.targets[0].target_configuration.http.connector.source.connector_id #=> String
+    #   resp.targets[0].target_configuration.http.connector.parameters #=> Hash
+    #   resp.targets[0].target_configuration.http.connector.parameters["ConnectorParameterName"] #=> String
     #   resp.targets[0].target_configuration.inference.connector.source.connector_id #=> String
     #   resp.targets[0].target_configuration.inference.provider.endpoint #=> String
     #   resp.targets[0].target_configuration.inference.provider.model_mapping.provider_prefix.strip #=> Boolean
@@ -10927,7 +11876,7 @@ module Aws::BedrockAgentCoreControl
     #   The updated IAM role ARN that provides permissions for the AgentCore
     #   Runtime.
     #
-    # @option params [required, Types::NetworkConfiguration] :network_configuration
+    # @option params [Types::NetworkConfiguration] :network_configuration
     #   The updated network configuration for the AgentCore Runtime.
     #
     # @option params [String] :description
@@ -10958,6 +11907,9 @@ module Aws::BedrockAgentCoreControl
     # @option params [Array<Types::FilesystemConfiguration>] :filesystem_configurations
     #   The updated filesystem configurations to mount into the AgentCore
     #   Runtime.
+    #
+    # @option params [Types::CapacityProviderConfiguration] :capacity_provider_configuration
+    #   The updated capacity provider configuration for the AgentCore Runtime.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -10997,7 +11949,7 @@ module Aws::BedrockAgentCoreControl
     #       },
     #     },
     #     role_arn: "RoleArn", # required
-    #     network_configuration: { # required
+    #     network_configuration: {
     #       network_mode: "PUBLIC", # required, accepts PUBLIC, VPC
     #       network_mode_config: {
     #         security_groups: ["SecurityGroupId"], # required
@@ -11102,8 +12054,15 @@ module Aws::BedrockAgentCoreControl
     #           access_point_arn: "EfsAccessPointArn", # required
     #           mount_path: "MountPath", # required
     #         },
+    #         capacity_provider_volume: {
+    #           volume_name: "CapacityProviderVolumeName", # required
+    #           mount_path: "MountPath", # required
+    #         },
     #       },
     #     ],
+    #     capacity_provider_configuration: {
+    #       capacity_provider_arn: "CapacityProviderArn", # required
+    #     },
     #     client_token: "ClientToken",
     #   })
     #
@@ -11245,6 +12204,67 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def update_api_key_credential_provider(params = {}, options = {})
       req = build_request(:update_api_key_credential_provider, params)
+      req.send_request(options)
+    end
+
+    # Updates a capacity provider. Only the description can be changed. To
+    # change other configuration, such as instance types, networking, or
+    # storage, create a new capacity provider.
+    #
+    # @option params [required, String] :capacity_provider_id
+    #   The unique identifier of the capacity provider to update.
+    #
+    # @option params [Types::UpdatedDescription] :description
+    #   The updated description of the capacity provider.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::UpdateCapacityProviderOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCapacityProviderOutput#capacity_provider_id #capacity_provider_id} => String
+    #   * {Types::UpdateCapacityProviderOutput#capacity_provider_arn #capacity_provider_arn} => String
+    #   * {Types::UpdateCapacityProviderOutput#name #name} => String
+    #   * {Types::UpdateCapacityProviderOutput#status #status} => String
+    #   * {Types::UpdateCapacityProviderOutput#created_at #created_at} => Time
+    #   * {Types::UpdateCapacityProviderOutput#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_capacity_provider({
+    #     capacity_provider_id: "CapacityProviderId", # required
+    #     description: {
+    #       optional_value: "Description",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_provider_id #=> String
+    #   resp.capacity_provider_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateCapacityProvider AWS API Documentation
+    #
+    # @overload update_capacity_provider(params = {})
+    # @param [Hash] params ({})
+    def update_capacity_provider(params = {}, options = {})
+      req = build_request(:update_capacity_provider, params)
       req.send_request(options)
     end
 
@@ -11556,12 +12576,46 @@ module Aws::BedrockAgentCoreControl
     #             additional_model_request_fields: {
     #             },
     #           },
+    #           responses_evaluator_model_config: {
+    #             model_id: "ModelId", # required
+    #             max_output_tokens: 1,
+    #             temperature: 1.0,
+    #             top_p: 1.0,
+    #             reasoning: {
+    #               effort: "ReasoningConfigurationEffortString",
+    #             },
+    #           },
     #         },
     #       },
     #       code_based: {
     #         lambda_config: {
     #           lambda_arn: "LambdaArn", # required
     #           lambda_timeout_in_seconds: 1,
+    #         },
+    #       },
+    #       derived: {
+    #         base_evaluator_id: "EvaluatorId", # required
+    #         model_config: { # required
+    #           bedrock_evaluator_model_config: {
+    #             model_id: "ModelId", # required
+    #             inference_config: {
+    #               max_tokens: 1,
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #               stop_sequences: ["NonEmptyString"],
+    #             },
+    #             additional_model_request_fields: {
+    #             },
+    #           },
+    #           responses_evaluator_model_config: {
+    #             model_id: "ModelId", # required
+    #             max_output_tokens: 1,
+    #             temperature: 1.0,
+    #             top_p: 1.0,
+    #             reasoning: {
+    #               effort: "ReasoningConfigurationEffortString",
+    #             },
+    #           },
     #         },
     #       },
     #     },
@@ -11879,6 +12933,98 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def update_gateway(params = {}, options = {})
       req = build_request(:update_gateway, params)
+      req.send_request(options)
+    end
+
+    # Updates the entries of a gateway rate limit. The dimension keys are
+    # immutable after creation.
+    #
+    # @option params [required, String] :gateway_identifier
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :rate_limit_id
+    #   The unique identifier of the rate limit to update.
+    #
+    # @option params [String] :description
+    #   Optional human-readable description for this limit.
+    #
+    # @option params [required, Array<Types::LimitEntry>] :entries
+    #   Updated rule entries. key and dimensionKeys are immutable and cannot
+    #   be changed.
+    #
+    # @return [Types::UpdateGatewayRateLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGatewayRateLimitResponse#rate_limit_id #rate_limit_id} => String
+    #   * {Types::UpdateGatewayRateLimitResponse#gateway_identifier #gateway_identifier} => String
+    #   * {Types::UpdateGatewayRateLimitResponse#description #description} => String
+    #   * {Types::UpdateGatewayRateLimitResponse#dimension_keys #dimension_keys} => Array&lt;String&gt;
+    #   * {Types::UpdateGatewayRateLimitResponse#entries #data.entries} => Array&lt;Types::LimitEntry&gt; (This method conflicts with a method on Response, call it through the data member)
+    #   * {Types::UpdateGatewayRateLimitResponse#status #status} => String
+    #   * {Types::UpdateGatewayRateLimitResponse#created_at #created_at} => Time
+    #   * {Types::UpdateGatewayRateLimitResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_gateway_rate_limit({
+    #     gateway_identifier: "GatewayIdentifier", # required
+    #     rate_limit_id: "GatewayRateLimitId", # required
+    #     description: "GatewayRateLimitDescription",
+    #     entries: [ # required
+    #       {
+    #         dimensions: { # required
+    #           "DimensionKey" => "DimensionValue",
+    #         },
+    #         requests: [
+    #           {
+    #             rate: 1.0, # required
+    #             period: "second", # required, accepts second, minute
+    #           },
+    #         ],
+    #         tokens: [
+    #           {
+    #             rate: 1.0, # required
+    #             period: "second", # required, accepts second, minute
+    #           },
+    #         ],
+    #         connections: [
+    #           {
+    #             rate: 1.0, # required
+    #             period: "second", # required, accepts second, minute
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rate_limit_id #=> String
+    #   resp.gateway_identifier #=> String
+    #   resp.description #=> String
+    #   resp.dimension_keys #=> Array
+    #   resp.dimension_keys[0] #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].dimensions #=> Hash
+    #   resp.data.entries[0].dimensions["DimensionKey"] #=> String
+    #   resp.data.entries[0].requests #=> Array
+    #   resp.data.entries[0].requests[0].rate #=> Float
+    #   resp.data.entries[0].requests[0].period #=> String, one of "second", "minute"
+    #   resp.data.entries[0].tokens #=> Array
+    #   resp.data.entries[0].tokens[0].rate #=> Float
+    #   resp.data.entries[0].tokens[0].period #=> String, one of "second", "minute"
+    #   resp.data.entries[0].connections #=> Array
+    #   resp.data.entries[0].connections[0].rate #=> Float
+    #   resp.data.entries[0].connections[0].period #=> String, one of "second", "minute"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayRateLimit AWS API Documentation
+    #
+    # @overload update_gateway_rate_limit(params = {})
+    # @param [Hash] params ({})
+    def update_gateway_rate_limit(params = {}, options = {})
+      req = build_request(:update_gateway_rate_limit, params)
       req.send_request(options)
     end
 
@@ -12234,6 +13380,14 @@ module Aws::BedrockAgentCoreControl
     #             timeout: 1,
     #           },
     #         },
+    #         connector: {
+    #           source: { # required
+    #             connector_id: "ConnectorId", # required
+    #           },
+    #           parameters: {
+    #             "ConnectorParameterName" => "ConnectorParameterValue",
+    #           },
+    #         },
     #       },
     #       inference: {
     #         connector: {
@@ -12388,6 +13542,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.http.passthrough.schema.source.inline_payload #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.identifier #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.timeout #=> Integer
+    #   resp.target_configuration.http.connector.source.connector_id #=> String
+    #   resp.target_configuration.http.connector.parameters #=> Hash
+    #   resp.target_configuration.http.connector.parameters["ConnectorParameterName"] #=> String
     #   resp.target_configuration.inference.connector.source.connector_id #=> String
     #   resp.target_configuration.inference.provider.endpoint #=> String
     #   resp.target_configuration.inference.provider.model_mapping.provider_prefix.strip #=> Boolean
@@ -12561,6 +13718,10 @@ module Aws::BedrockAgentCoreControl
     #             },
     #             efs_access_point: {
     #               access_point_arn: "EfsAccessPointArn", # required
+    #               mount_path: "MountPath", # required
+    #             },
+    #             capacity_provider_volume: {
+    #               volume_name: "CapacityProviderVolumeName", # required
     #               mount_path: "MountPath", # required
     #             },
     #           },
@@ -12882,6 +14043,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.access_point_arn #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -13722,7 +14885,21 @@ module Aws::BedrockAgentCoreControl
     #             actor_token_scopes: ["ScopeType"],
     #           },
     #         },
-    #         client_authentication_method: "CLIENT_SECRET_BASIC", # accepts CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT
+    #         client_authentication_method: "CLIENT_SECRET_BASIC", # accepts CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT
+    #         private_key_jwt_config: {
+    #           private_key_source: {
+    #             kms_key_source: {
+    #               kms_key_arn: "KmsKeyArn", # required
+    #             },
+    #           },
+    #           signing_algorithm: "RS256", # accepts RS256, PS256, ES256
+    #           additional_header_claims: {
+    #             "AdditionalClaimName" => "AdditionalClaimValue",
+    #           },
+    #           additional_payload_claims: {
+    #             "AdditionalClaimName" => "AdditionalClaimValue",
+    #           },
+    #         },
     #         private_endpoint: {
     #           self_managed_lattice_resource: {
     #             resource_configuration_identifier: "ResourceConfigurationIdentifier",
@@ -13856,6 +15033,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.grant_type #=> String, one of "TOKEN_EXCHANGE", "JWT_AUTHORIZATION_GRANT"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.subnet_ids #=> Array
@@ -13878,11 +15060,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.grant_type #=> String, one of "TOKEN_EXCHANGE", "JWT_AUTHORIZATION_GRANT"
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
-    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source.kms_key_source.kms_key_arn #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.signing_algorithm #=> String, one of "RS256", "PS256", "ES256"
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims #=> Hash
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims["AdditionalClaimName"] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_payload_claims #=> Hash
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_payload_claims["AdditionalClaimName"] #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
@@ -14135,6 +15318,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdatePaymentConnectorResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialsProviderConfiguration&gt;
     #   * {Types::UpdatePaymentConnectorResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdatePaymentConnectorResponse#status #status} => String
+    #   * {Types::UpdatePaymentConnectorResponse#authorization_url #authorization_url} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -14166,7 +15350,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
     #   resp.last_updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
+    #   resp.authorization_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentConnector AWS API Documentation
     #
@@ -14304,6 +15489,10 @@ module Aws::BedrockAgentCoreControl
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
+    # @option params [String] :kms_key_arn
+    #   The updated Amazon Resource Name (ARN) of the customer managed KMS key
+    #   used to encrypt sensitive payment manager data at rest.
+    #
     # @return [Types::UpdatePaymentManagerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePaymentManagerResponse#payment_manager_arn #payment_manager_arn} => String
@@ -14314,6 +15503,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdatePaymentManagerResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
     #   * {Types::UpdatePaymentManagerResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdatePaymentManagerResponse#status #status} => String
+    #   * {Types::UpdatePaymentManagerResponse#kms_key_arn #kms_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -14390,6 +15580,7 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     role_arn: "RoleArn",
     #     client_token: "ClientToken",
+    #     kms_key_arn: "KmsKeyArn",
     #   })
     #
     # @example Response structure
@@ -14402,6 +15593,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.workload_identity_details.workload_identity_arn #=> String
     #   resp.last_updated_at #=> Time
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentManager AWS API Documentation
     #
@@ -14418,6 +15610,18 @@ module Aws::BedrockAgentCoreControl
     # validated against the Cedar schema before being applied. This is an
     # asynchronous operation. Use the `GetPolicy` operation to poll the
     # `status` field to track completion.
+    #
+    # If the updated policy is a temporal policy, the policy engine
+    # invalidates all active temporal sessions. If the update adds or
+    # removes temporal operators, the policy engine also invalidates active
+    # temporal sessions. For more information about temporal policy
+    # sessions, see [session-based temporal policies][1]. The policy engine
+    # returns an HTTP 409 `ConflictException` to in-flight sessions. To
+    # resume, you must start a new session with a new session ID.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy-session-based-temporal.html
     #
     # @option params [required, String] :policy_engine_id
     #   The identifier of the policy engine that manages the policy to be
@@ -15079,7 +16283,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -444,7 +444,7 @@
       "base": "<p>The source of LoRA adapters for an AI recommendation job. This is a union type — specify exactly one of the members.</p>",
       "refs": {
         "CreateAIRecommendationJobRequest$AdapterSource": "<p>The LoRA adapter source for the recommendation job. Specify either a list of model package ARNs or Amazon S3 URIs for your LoRA adapters. When this parameter is absent, the recommendation job runs without LoRA adapter support.</p>",
-        "DescribeAIRecommendationJobResponse$AdapterSource": "<p>The LoRA adapter source that was specified when the recommendation job was created. This field is absent when the job was created without LoRA adapters.</p>"
+        "DescribeAIRecommendationJobResponse$AdapterSource": "<p>The LoRA adapter source that you specified when you created the recommendation job. This field is absent when you created the job without LoRA adapters.</p>"
       }
     },
     "AIBenchmarkEndpoint": {
@@ -648,7 +648,7 @@
       }
     },
     "AIRecommendationAdapterDetails": {
-      "base": "<p>The per-recommendation LoRA adapter details. Contains both the model package ARNs and Amazon S3 URIs for each adapter, regardless of which form was originally supplied in the request. When the customer supplies only Amazon S3 URIs, Amazon SageMaker AI creates model packages on their behalf.</p>",
+      "base": "<p>The per-recommendation LoRA adapter details. Contains both the model package ARNs and Amazon S3 URIs for each adapter, regardless of which form was originally supplied in the request. When you supply only Amazon S3 URIs, Amazon SageMaker AI creates model packages on your behalf.</p>",
       "refs": {
         "AIRecommendation$AdapterDetails": "<p>The LoRA adapter details for this recommendation. This field contains both the model package ARNs and Amazon S3 URIs for each adapter, regardless of which form was originally supplied. This field is absent when the job was created without LoRA adapters.</p>"
       }
@@ -795,7 +795,7 @@
     "AIRecommendationMinCpuMemoryRequiredInMb": {
       "base": null,
       "refs": {
-        "AIRecommendationDeploymentConfiguration$MinCpuMemoryRequiredInMb": "<p>The minimum host (CPU) memory, in MiB, to reserve per model copy when deploying the recommendation as an Inference Component. This value maps to the base Inference Component's <code>ComputeResourceRequirements$MinMemoryRequiredInMb</code> and is sized so that <code>CopyCountPerInstance</code> copies co-place within the instance's allocatable host memory.</p>"
+        "AIRecommendationDeploymentConfiguration$MinCpuMemoryRequiredInMb": "<p>The minimum host (CPU) memory, in MiB, to reserve for each model copy when deploying the recommendation as an Inference Component. This value maps to the Inference Component's <code>ComputeResourceRequirements$MinMemoryRequiredInMb</code> field.</p>"
       }
     },
     "AIRecommendationModelDetails": {
@@ -14656,7 +14656,7 @@
     "OptimizationJobTrainingPlanArns": {
       "base": "<p>Amazon Resource Names (ARNs) of the training plans whose reserved capacity backs the optimization job. Bounded to a single plan for now; the list shape allows widening to multiple plans in the future without a breaking scalar-to-list change.</p>",
       "refs": {
-        "CreateOptimizationJobRequest$TrainingPlanArns": "<p>The Amazon Resource Name (ARN) of the training plan to use for this optimization job.</p> <p>When you use reserved capacity from a training plan, the optimization job runs on that reserved capacity instead of on-demand capacity. If you omit this field, the job uses on-demand capacity. Currently, you can specify at most one training plan.</p> <p>For more information about how to reserve GPU capacity for your optimization jobs using Amazon SageMaker Training Plans, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html\">Reserve capacity with training plans</a>.</p>",
+        "CreateOptimizationJobRequest$TrainingPlanArns": "<p>The Amazon Resource Name (ARN) of the training plan to use for this optimization job.</p> <p>When you use reserved capacity from a training plan, the optimization job runs on that reserved capacity instead of on-demand capacity. If you omit this field, the job uses on-demand capacity. You can specify at most one training plan.</p> <p>For more information about how to reserve GPU capacity for your optimization jobs using Amazon SageMaker Training Plans, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html\">Reserve capacity with training plans</a>.</p>",
         "DescribeOptimizationJobResponse$TrainingPlanArns": "<p>The Amazon Resource Name (ARN) of the training plan associated with this optimization job. This field appears only when you specified a training plan when you created the job. Optimization jobs that use on-demand capacity don't return this field.</p>"
       }
     },
@@ -15355,6 +15355,24 @@
       "base": null,
       "refs": {
         "ComputeQuotaConfig$PreemptTeamTasks": "<p>Allows workloads from within an entity to preempt same-team workloads. When set to <code>LowerPriority</code>, the entity's lower priority tasks are preempted by their own higher priority tasks.</p> <p>Default is <code>LowerPriority</code>.</p>"
+      }
+    },
+    "PrefixAwareRoutingConcurrencyThreshold": {
+      "base": null,
+      "refs": {
+        "PrefixAwareRoutingConfig$ConcurrencyThreshold": "<p>The maximum number of in-flight requests on the target instance before the endpoint routes to another instance. Required when <code>RoutingStrategy</code> is <code>PREFIX_AWARE</code>. When in-flight requests on the prefix-selected instance reach this threshold, the endpoint routes the request to an instance with more available capacity.</p>"
+      }
+    },
+    "PrefixAwareRoutingConfig": {
+      "base": "<p>The configuration for prefix-aware routing on a SageMaker real-time inference endpoint. Specify <code>PrefixLength</code> and <code>ConcurrencyThreshold</code> to control routing behavior.</p>",
+      "refs": {
+        "ProductionVariantRoutingConfig$PrefixAwareRoutingConfig": "<p>The configuration for prefix-aware routing. Specify this parameter only when you set <code>RoutingStrategy</code> to <code>PREFIX_AWARE</code>.</p>"
+      }
+    },
+    "PrefixAwareRoutingPrefixLength": {
+      "base": null,
+      "refs": {
+        "PrefixAwareRoutingConfig$PrefixLength": "<p>The maximum length of the prefix used for routing decisions. Required when <code>RoutingStrategy</code> is <code>PREFIX_AWARE</code>.</p> <ul> <li> <p>For the SageMaker Runtime <code>InvokeEndpoint</code> and <code>InvokeEndpointWithResponseStream</code> APIs, this value specifies the number of bytes from the beginning of the request body.</p> </li> <li> <p>For OpenAI-compatible API, this value specifies the number of characters from the text content of the messages array.</p> </li> </ul> <p>The endpoint routes requests that share the same prefix to the same instance. Set this value to cover shared content (such as system prompts) plus enough unique content to distribute workloads across instances.</p>"
       }
     },
     "PresignedDomainUrl": {
@@ -16942,7 +16960,7 @@
     "RoutingStrategy": {
       "base": null,
       "refs": {
-        "ProductionVariantRoutingConfig$RoutingStrategy": "<p>Sets how the endpoint routes incoming traffic:</p> <ul> <li> <p> <code>LEAST_OUTSTANDING_REQUESTS</code>: The endpoint routes requests to the specific instances that have more capacity to process them.</p> </li> <li> <p> <code>RANDOM</code>: The endpoint routes each request to a randomly chosen instance.</p> </li> </ul>"
+        "ProductionVariantRoutingConfig$RoutingStrategy": "<p>Sets how the endpoint routes incoming traffic:</p> <ul> <li> <p> <code>LEAST_OUTSTANDING_REQUESTS</code>: The endpoint routes requests to the specific instances that have more capacity to process them.</p> </li> <li> <p> <code>RANDOM</code>: The endpoint routes each request to a randomly chosen instance.</p> </li> <li> <p> <code>PREFIX_AWARE</code>: The endpoint routes requests that share the same prompt prefix to the same instance. When the number of in-flight requests on the selected instance reaches the configured threshold, the endpoint routes the request to an instance with more available capacity.</p> </li> </ul>"
       }
     },
     "RuleConfigurationName": {
@@ -17426,6 +17444,12 @@
     "SendPipelineExecutionStepSuccessResponse": {
       "base": null,
       "refs": {}
+    },
+    "SequenceLength": {
+      "base": null,
+      "refs": {
+        "ServerlessJobConfig$SequenceLength": "<p> The maximum sequence length, in tokens, that the customization job supports. SageMaker uses this value to select a training configuration for the base model that you specify. The parameter supports the following values: </p> <ul> <li> <p> <code>1K</code> </p> </li> <li> <p> <code>2K</code> </p> </li> <li> <p> <code>4K</code> </p> </li> <li> <p> <code>8K</code> </p> </li> <li> <p> <code>16K</code> </p> </li> <li> <p> <code>32K</code> </p> </li> <li> <p> <code>64K</code> </p> </li> <li> <p> <code>128K</code> </p> </li> </ul> <p> If you don't specify a value, SageMaker selects a training configuration based on the other values that you specify. The selection is not restricted to a particular sequence length. </p>"
+      }
     },
     "ServerlessJobBaseModelArn": {
       "base": "<p>ServerlessJobConfig relevant fields</p>",

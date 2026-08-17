@@ -2547,6 +2547,12 @@ module Aws::DeviceFarm
     #   is set to false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] insights
+    #   The insights for the job, including the report status and test-level
+    #   metrics. This field contains data only if you specified
+    #   `insightsTypes` when you scheduled the run.
+    #   @return [Types::JobInsights]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -2564,7 +2570,112 @@ module Aws::DeviceFarm
       :instance_arn,
       :device_minutes,
       :video_endpoint,
-      :video_capture)
+      :video_capture,
+      :insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains insights for a job, including report status, and test-level
+    # aggregated metrics such as per test execution time and median test
+    # execution time.
+    #
+    # @!attribute [rw] status
+    #   The status of the insights report for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_report
+    #   The test-level aggregated report for the job.
+    #   @return [Types::TestReport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/JobInsights AWS API Documentation
+    #
+    class JobInsights < Struct.new(
+      :status,
+      :test_report)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains aggregated job-level metrics for a run.
+    #
+    # @!attribute [rw] message
+    #   A message associated with the job report.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   The aggregated job-level metrics for the run.
+    #   @return [Types::JobReportMetrics]
+    #
+    # @!attribute [rw] job_details_url
+    #   A URL to the detailed job results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/JobReport AWS API Documentation
+    #
+    class JobReport < Struct.new(
+      :message,
+      :metrics,
+      :job_details_url)
+      SENSITIVE = [:job_details_url]
+      include Aws::Structure
+    end
+
+    # Contains aggregated metrics across all jobs in a run.
+    #
+    # @!attribute [rw] jobs_total
+    #   The total number of jobs in the run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] jobs_passed
+    #   The number of jobs that passed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] jobs_failed
+    #   The number of jobs that failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] jobs_skipped
+    #   The number of jobs that were skipped.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] jobs_errored
+    #   The number of jobs that errored.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] jobs_stopped
+    #   The number of jobs that were stopped.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] jobs_passed_percentage
+    #   The percentage of jobs that passed.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_job_execution_duration_seconds
+    #   The total execution duration of all jobs in the run, in seconds.
+    #   @return [Float]
+    #
+    # @!attribute [rw] average_job_execution_duration_seconds
+    #   The average execution duration of jobs in the run, in seconds.
+    #   @return [Float]
+    #
+    # @!attribute [rw] median_job_execution_duration_seconds
+    #   The median execution duration of jobs in the run, in seconds.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/JobReportMetrics AWS API Documentation
+    #
+    class JobReportMetrics < Struct.new(
+      :jobs_total,
+      :jobs_passed,
+      :jobs_failed,
+      :jobs_skipped,
+      :jobs_errored,
+      :jobs_stopped,
+      :jobs_passed_percentage,
+      :total_job_execution_duration_seconds,
+      :average_job_execution_duration_seconds,
+      :median_job_execution_duration_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4857,6 +4968,16 @@ module Aws::DeviceFarm
     #   Environment variables associated with the run.
     #   @return [Array<Types::EnvironmentVariable>]
     #
+    # @!attribute [rw] insights_types
+    #   The types of insights requested for the run.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] insights
+    #   The insights for the run, including the report status and job-level
+    #   metrics. This field contains data only if you specified
+    #   `insightsTypes` when you scheduled the run.
+    #   @return [Types::RunInsights]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run AWS API Documentation
     #
     class Run < Struct.new(
@@ -4894,7 +5015,30 @@ module Aws::DeviceFarm
       :device_selection_result,
       :vpc_config,
       :execution_role_arn,
-      :environment_variables)
+      :environment_variables,
+      :insights_types,
+      :insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains insights for a run, including report status, and job-level
+    # aggregated metrics such as per job execution time and median job
+    # execution time.
+    #
+    # @!attribute [rw] status
+    #   The status of the insights report for the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_report
+    #   The job-level aggregated report for the run.
+    #   @return [Types::JobReport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RunInsights AWS API Documentation
+    #
+    class RunInsights < Struct.new(
+      :status,
+      :job_report)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5029,6 +5173,14 @@ module Aws::DeviceFarm
     #   An IAM role to be assumed by the test host for the run.
     #   @return [String]
     #
+    # @!attribute [rw] insights_types
+    #   The types of insights to generate for a run. Specify one or more
+    #   values to opt in to insights generation when scheduling a run.
+    #
+    #   Insights are currently supported for custom mode runs with
+    #   Instrumentation, Appium Java TestNG, and XCTest UI test types.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunConfiguration AWS API Documentation
     #
     class ScheduleRunConfiguration < Struct.new(
@@ -5043,7 +5195,8 @@ module Aws::DeviceFarm
       :auxiliary_apps,
       :billing_method,
       :environment_variables,
-      :execution_role_arn)
+      :execution_role_arn,
+      :insights_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5851,6 +6004,84 @@ module Aws::DeviceFarm
       :security_group_ids,
       :subnet_ids,
       :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains aggregated test-level metrics for a job.
+    #
+    # @!attribute [rw] message
+    #   A message associated with the test report.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   The aggregated test-level metrics for the job.
+    #   @return [Types::TestReportMetrics]
+    #
+    # @!attribute [rw] test_details_url
+    #   A URL to the detailed test results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TestReport AWS API Documentation
+    #
+    class TestReport < Struct.new(
+      :message,
+      :metrics,
+      :test_details_url)
+      SENSITIVE = [:test_details_url]
+      include Aws::Structure
+    end
+
+    # Contains aggregated metrics across all tests in a job.
+    #
+    # @!attribute [rw] tests_total
+    #   The total number of tests in the job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tests_passed
+    #   The number of tests that passed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tests_failed
+    #   The number of tests that failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tests_skipped
+    #   The number of tests that were skipped.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tests_errored
+    #   The number of tests that errored.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tests_other
+    #   The number of tests with other result types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tests_passed_percentage
+    #   The percentage of tests that passed.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_test_execution_duration_seconds
+    #   The total execution duration of all tests in the job, in seconds.
+    #   @return [Float]
+    #
+    # @!attribute [rw] median_test_execution_duration_seconds
+    #   The median execution duration of tests in the job, in seconds.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TestReportMetrics AWS API Documentation
+    #
+    class TestReportMetrics < Struct.new(
+      :tests_total,
+      :tests_passed,
+      :tests_failed,
+      :tests_skipped,
+      :tests_errored,
+      :tests_other,
+      :tests_passed_percentage,
+      :total_test_execution_duration_seconds,
+      :median_test_execution_duration_seconds)
       SENSITIVE = []
       include Aws::Structure
     end

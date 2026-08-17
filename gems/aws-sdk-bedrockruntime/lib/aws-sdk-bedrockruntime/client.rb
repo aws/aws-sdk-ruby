@@ -1157,6 +1157,20 @@ module Aws::BedrockRuntime
     #                 enabled: false, # required
     #               },
     #             },
+    #             tool_addition: {
+    #               tool: { # required
+    #                 type: "ToolReferenceTypeString",
+    #                 name: "ToolReferenceNameString",
+    #                 server_name: "ToolReferenceServerNameString",
+    #               },
+    #             },
+    #             tool_removal: {
+    #               tool: { # required
+    #                 type: "ToolReferenceTypeString",
+    #                 name: "ToolReferenceNameString",
+    #                 server_name: "ToolReferenceServerNameString",
+    #               },
+    #             },
     #           },
     #         ],
     #       },
@@ -1252,6 +1266,7 @@ module Aws::BedrockRuntime
     #           },
     #         },
     #       },
+    #       effort: "OutputConfigEffortString",
     #     },
     #   })
     #
@@ -1352,6 +1367,12 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].search_result.content #=> Array
     #   resp.output.message.content[0].search_result.content[0].text #=> String
     #   resp.output.message.content[0].search_result.citations.enabled #=> Boolean
+    #   resp.output.message.content[0].tool_addition.tool.type #=> String
+    #   resp.output.message.content[0].tool_addition.tool.name #=> String
+    #   resp.output.message.content[0].tool_addition.tool.server_name #=> String
+    #   resp.output.message.content[0].tool_removal.tool.type #=> String
+    #   resp.output.message.content[0].tool_removal.tool.name #=> String
+    #   resp.output.message.content[0].tool_removal.tool.server_name #=> String
     #   resp.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered", "malformed_model_output", "malformed_tool_use", "model_context_window_exceeded"
     #   resp.usage.input_tokens #=> Integer
     #   resp.usage.output_tokens #=> Integer
@@ -2305,6 +2326,20 @@ module Aws::BedrockRuntime
     #                 enabled: false, # required
     #               },
     #             },
+    #             tool_addition: {
+    #               tool: { # required
+    #                 type: "ToolReferenceTypeString",
+    #                 name: "ToolReferenceNameString",
+    #                 server_name: "ToolReferenceServerNameString",
+    #               },
+    #             },
+    #             tool_removal: {
+    #               tool: { # required
+    #                 type: "ToolReferenceTypeString",
+    #                 name: "ToolReferenceNameString",
+    #                 server_name: "ToolReferenceServerNameString",
+    #               },
+    #             },
     #           },
     #         ],
     #       },
@@ -2401,6 +2436,7 @@ module Aws::BedrockRuntime
     #           },
     #         },
     #       },
+    #       effort: "OutputConfigEffortString",
     #     },
     #   })
     #
@@ -3137,6 +3173,20 @@ module Aws::BedrockRuntime
     #                   ],
     #                   citations: {
     #                     enabled: false, # required
+    #                   },
+    #                 },
+    #                 tool_addition: {
+    #                   tool: { # required
+    #                     type: "ToolReferenceTypeString",
+    #                     name: "ToolReferenceNameString",
+    #                     server_name: "ToolReferenceServerNameString",
+    #                   },
+    #                 },
+    #                 tool_removal: {
+    #                   tool: { # required
+    #                     type: "ToolReferenceTypeString",
+    #                     name: "ToolReferenceNameString",
+    #                     server_name: "ToolReferenceServerNameString",
     #                   },
     #                 },
     #               },
@@ -4016,7 +4066,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

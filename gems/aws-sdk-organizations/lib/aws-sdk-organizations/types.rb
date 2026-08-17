@@ -485,6 +485,10 @@ module Aws::Organizations
     #   or your account isn't fully active. You must complete the account
     #   setup before you create an organization.
     #
+    # * ACCOUNT\_NOT\_ACTIVE\_FOR\_TRANSFER\_RESPONSIBILITY: Your account
+    #   setup isn't complete or your account isn't fully active to invite
+    #   or accept a Billing Transfer invitation.
+    #
     # * ACTIVE\_RESPONSIBILITY\_TRANSFER\_PROCESS: You cannot delete
     #   organization due to an ongoing responsibility transfer process. For
     #   example, a pending invitation or an in-progress transfer. To delete
@@ -670,8 +674,16 @@ module Aws::Organizations
     #   organization cannot accept this transfer invitation because target
     #   organization is marked for deletion.
     #
-    # * UNSUPPORTED\_PRICING: Your organization has a pricing contract that
-    #   is unsupported.
+    # * TRANSFER\_RESPONSIBILITY\_UPDATE\_NOT\_ALLOWED: You cannot update
+    #   this transfer because it is no longer active. Transfers that have
+    #   been withdrawn, declined, expired, or cancelled cannot be modified.
+    #
+    # * UNMET\_BILLING\_PREREQUISITE: Your current billing configuration is
+    #   unsupported. Contact Amazon Web Services Support for assistance.
+    #
+    # * UNSUPPORTED\_PRICING: Ineligible for Billing Transfer. Your
+    #   organization is subject to a pricing agreement with Amazon Web
+    #   Services that Billing Transfer does not support.
     #
     # * WAIT\_PERIOD\_ACTIVE: After you create an Amazon Web Services
     #   account, you must wait until at least four days after the account
@@ -2475,9 +2487,9 @@ module Aws::Organizations
     # * ORGANIZATION\_ALREADY\_HAS\_ALL\_FEATURES: The handshake request is
     #   invalid because the organization has already enabled all features.
     #
-    # * ORGANIZATION\_FROM\_DIFFERENT\_SELLER\_OF\_RECORD: The request
-    #   failed because the account is from a different marketplace than the
-    #   accounts in the organization.
+    # * ORGANIZATION\_FROM\_DIFFERENT\_SELLER\_OF\_RECORD: You can only join
+    #   an organization that operates in the same Amazon Web Services
+    #   partition as your account.
     #
     # * ORGANIZATION\_IS\_ALREADY\_PENDING\_ALL\_FEATURES\_MIGRATION: The
     #   handshake request is invalid because the organization has already
@@ -2486,6 +2498,9 @@ module Aws::Organizations
     # * ORGANIZATION\_MEMBERSHIP\_CHANGE\_RATE\_LIMIT\_EXCEEDED: You
     #   attempted to change the membership of an account too quickly after
     #   its previous change.
+    #
+    # * PAST\_DUE\_INVOICE: Your organization has an invoice that is past
+    #   due.
     #
     # * PAYMENT\_INSTRUMENT\_REQUIRED: You can't complete the operation
     #   with an account that doesn't have a payment instrument, such as a
@@ -2497,6 +2512,10 @@ module Aws::Organizations
     # * SOURCE\_AND\_TARGET\_CANNOT\_MATCH: An account can't accept a
     #   transfer invitation if it is both the sender and recipient of the
     #   invitation.
+    #
+    # * TARGET\_ACCOUNT\_VALIDATION\_FAILURE: Billing transfer is not
+    #   available for your account. Contact your billing administrator or
+    #   Amazon Web Services Support for assistance.
     #
     # * UNUSED\_PREPAYMENT\_BALANCE: Your organization has an outstanding
     #   pre-payment balance.
@@ -2582,6 +2601,12 @@ module Aws::Organizations
     #
     # @!attribute [rw] type
     #   The type of ID for the participant.
+    #
+    #   <note markdown="1"> ORGANIZATION is valid only in the response context (identifying the
+    #   inviting organization). Valid input values for the Target parameter
+    #   are ACCOUNT and EMAIL only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeParty AWS API Documentation
@@ -2685,9 +2710,9 @@ module Aws::Organizations
     #   address for the invited account owner.
     #
     # * INVALID\_END\_DATE: The selected withdrawal date doesn't meet the
-    #   terms of your partner agreement. Visit Amazon Web Services Partner
-    #   Central to view your partner agreements or contact your Amazon Web
-    #   Services Partner for help.
+    #   minimum notice period required by your partner agreement. Visit
+    #   Amazon Web Services Partner Central or contact your Amazon Web
+    #   Services Channel Partner for help.
     #
     # * INVALID\_ENUM: You specified an invalid value.
     #

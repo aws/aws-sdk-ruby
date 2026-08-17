@@ -10,6 +10,36 @@
 module Aws::ConnectCampaignsV2
   module Types
 
+    # Configuration for abandonment-rate-based dialer throttling.
+    #
+    # @!attribute [rw] target_rate
+    #   Target abandonment rate.
+    #   @return [Float]
+    #
+    # @!attribute [rw] connection_start_point
+    #   Event from which connectionThresholdSeconds is measured.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_threshold_seconds
+    #   Seconds after connectionStartPoint before a contact counts as
+    #   abandoned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] evaluation_window
+    #   Rolling window over which abandonmentRate is computed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/AbandonmentRatePacingConfig AWS API Documentation
+    #
+    class AbandonmentRatePacingConfig < Struct.new(
+      :target_rate,
+      :connection_start_point,
+      :connection_threshold_seconds,
+      :evaluation_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
@@ -1584,6 +1614,29 @@ module Aws::ConnectCampaignsV2
       include Aws::Structure
     end
 
+    # Pacing constraint the dialer may enforce.
+    #
+    # @note PacingStrategy is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PacingStrategy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PacingStrategy corresponding to the set member.
+    #
+    # @!attribute [rw] abandonment_rate
+    #   Configuration for abandonment-rate-based dialer throttling.
+    #   @return [Types::AbandonmentRatePacingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/PacingStrategy AWS API Documentation
+    #
+    class PacingStrategy < Struct.new(
+      :abandonment_rate,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AbandonmentRate < PacingStrategy; end
+      class Unknown < PacingStrategy; end
+    end
+
     # The request for PauseCampaign API.
     #
     # @!attribute [rw] id
@@ -1604,10 +1657,15 @@ module Aws::ConnectCampaignsV2
     #   The bandwidth allocation of a queue resource.
     #   @return [Float]
     #
+    # @!attribute [rw] pacing_strategies
+    #   Pacing strategies the dialer enforces simultaneously.
+    #   @return [Array<Types::PacingStrategy>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/PredictiveConfig AWS API Documentation
     #
     class PredictiveConfig < Struct.new(
-      :bandwidth_allocation)
+      :bandwidth_allocation,
+      :pacing_strategies)
       SENSITIVE = []
       include Aws::Structure
     end

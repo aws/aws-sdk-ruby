@@ -97,6 +97,21 @@ module Aws
                              ) -> _CancelLegalHoldResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelLegalHoldResponseSuccess
 
+      interface _CreateBackupAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackupAccessPointResponse]
+        def access_point_arn: () -> ::String
+        def status: () -> ("AVAILABLE" | "CREATING" | "DELETING" | "DISASSOCIATED" | "DISASSOCIATING" | "EXPIRED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_backup_access_point-instance_method
+      def create_backup_access_point: (
+                                        ?access_point_metadata: Hash[::String, ::String],
+                                        ?access_point_policy: ::String,
+                                        name: ::String,
+                                        recovery_point_arn: ::String,
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateBackupAccessPointResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackupAccessPointResponseSuccess
+
       interface _CreateBackupPlanResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackupPlanOutput]
         def backup_plan_id: () -> ::String
@@ -353,6 +368,12 @@ module Aws
                                         ) -> _CreateTieringConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTieringConfigurationResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_backup_access_point-instance_method
+      def delete_backup_access_point: (
+                                        access_point_arn: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _DeleteBackupPlanResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBackupPlanOutput]
         def backup_plan_id: () -> ::String
@@ -437,6 +458,26 @@ module Aws
                                           tiering_configuration_name: ::String
                                         ) -> _DeleteTieringConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTieringConfigurationResponseSuccess
+
+      interface _DescribeBackupAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBackupAccessPointResponse]
+        def access_point_arn: () -> ::String
+        def access_point_metadata: () -> ::Hash[::String, ::String]
+        def backup_vault_arn: () -> ::String
+        def backup_vault_name: () -> ::String
+        def creation_time: () -> ::Time
+        def name: () -> ::String
+        def recovery_point_arn: () -> ::String
+        def resource_arn: () -> ::String
+        def resource_type: () -> ::String
+        def status: () -> ("AVAILABLE" | "CREATING" | "DELETING" | "DISASSOCIATED" | "DISASSOCIATING" | "EXPIRED" | "FAILED")
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_backup_access_point-instance_method
+      def describe_backup_access_point: (
+                                          access_point_arn: ::String
+                                        ) -> _DescribeBackupAccessPointResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBackupAccessPointResponseSuccess
 
       interface _DescribeBackupJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBackupJobOutput]
@@ -798,7 +839,7 @@ module Aws
         def backup_vault_name: () -> ::String
         def backup_vault_arn: () -> ::String
         def sns_topic_arn: () -> ::String
-        def backup_vault_events: () -> ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED")]
+        def backup_vault_events: () -> ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED" | "ACCESS_POINT_AVAILABLE" | "ACCESS_POINT_CREATION_FAILED" | "ACCESS_POINT_DELETED" | "ACCESS_POINT_DELETION_FAILED" | "ACCESS_POINT_EXPIRED" | "ACCESS_POINT_DISASSOCIATED")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_backup_vault_notifications-instance_method
       def get_backup_vault_notifications: (
@@ -937,6 +978,44 @@ module Aws
                                        tiering_configuration_name: ::String
                                      ) -> _GetTieringConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTieringConfigurationResponseSuccess
+
+      interface _ListBackupAccessPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupAccessPointsResponse]
+        def backup_access_points: () -> ::Array[Types::ListAccessPointsMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_backup_access_points-instance_method
+      def list_backup_access_points: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListBackupAccessPointsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupAccessPointsResponseSuccess
+
+      interface _ListBackupAccessPointsByRecoveryPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupAccessPointsByRecoveryPointResponse]
+        def backup_access_points: () -> ::Array[Types::ListAccessPointsMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_backup_access_points_by_recovery_point-instance_method
+      def list_backup_access_points_by_recovery_point: (
+                                                         ?max_results: ::Integer,
+                                                         ?next_token: ::String,
+                                                         recovery_point_arn: ::String
+                                                       ) -> _ListBackupAccessPointsByRecoveryPointResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupAccessPointsByRecoveryPointResponseSuccess
+
+      interface _ListBackupAccessPointsByResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupAccessPointsByResourceResponse]
+        def backup_access_points: () -> ::Array[Types::ListAccessPointsMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_backup_access_points_by_resource-instance_method
+      def list_backup_access_points_by_resource: (
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String,
+                                                   resource_arn: ::String
+                                                 ) -> _ListBackupAccessPointsByResourceResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupAccessPointsByResourceResponseSuccess
 
       interface _ListBackupJobSummariesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupJobSummariesOutput]
@@ -1406,7 +1485,7 @@ module Aws
       def put_backup_vault_notifications: (
                                             backup_vault_name: ::String,
                                             sns_topic_arn: ::String,
-                                            backup_vault_events: Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED")]
+                                            backup_vault_events: Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED" | "ACCESS_POINT_AVAILABLE" | "ACCESS_POINT_CREATION_FAILED" | "ACCESS_POINT_DELETED" | "ACCESS_POINT_DELETION_FAILED" | "ACCESS_POINT_EXPIRED" | "ACCESS_POINT_DISASSOCIATED")]
                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

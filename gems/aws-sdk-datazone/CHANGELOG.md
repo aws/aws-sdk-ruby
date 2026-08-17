@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2026-08-11)
+------------------
+
+* Feature - GetSubscriptionGrant now returns materialized asset scope name for mapping Lake Formation data cell filters or Redshift views to subscription grants.
+
+1.86.0 (2026-07-31)
+------------------
+
+* Feature - Adding support for enhanced Git experience in Sagemaker Unified Studio.
+
 1.85.0 (2026-07-23)
 ------------------
 

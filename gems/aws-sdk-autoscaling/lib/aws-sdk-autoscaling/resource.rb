@@ -208,6 +208,9 @@ module Aws::AutoScaling
     #         terminate_hook_abandon: "retain", # accepts retain, terminate
     #       },
     #     },
+    #     operator: {
+    #       principal: "ManagerIdentifier", # required
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name
@@ -558,6 +561,12 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html
+    # @option options [Types::Operator] :operator
+    #   The entity that manages the Auto Scaling group. If you specify this
+    #   parameter, Amazon EC2 Auto Scaling passes the operator identity to EC2
+    #   for instance launches and only allows the designated operator to make
+    #   changes to the Auto Scaling group. All mutating API calls from
+    #   non-operator callers are rejected with an `AccessDenied` exception.
     # @return [AutoScalingGroup]
     def create_group(options = {})
       Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

@@ -2109,6 +2109,30 @@ module Aws::PartnerCentralSelling
       include Aws::Structure
     end
 
+    # Contains enrichment data for engagement invitations. You can view
+    # propensity scores, program eligibility, and lead readiness insights
+    # directly in the invitation, before you take action on the invitation.
+    #
+    # @!attribute [rw] prospecting_result_aws
+    #   The customer account data and propensity insights for the prospected
+    #   account. It includes geographic, industry, and segment
+    #   classifications, along with engagement and solution scoring.
+    #   @return [Types::InvitationProspectingResultAws]
+    #
+    # @!attribute [rw] lead_insights
+    #   The AI-generated lead readiness score for this lead. Use this score
+    #   to assess lead quality and prioritize engagement efforts.
+    #   @return [Types::LeadInsights]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/EnrichmentContext AWS API Documentation
+    #
+    class EnrichmentContext < Struct.new(
+      :prospecting_result_aws,
+      :lead_insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The expected duration of a partner's contract with the customer. Used
     # to convert Total Contract Value (TCV) to Monthly Recurring Revenue
     # (MRR) for opportunity dealsizing calculations.
@@ -2420,6 +2444,12 @@ module Aws::PartnerCentralSelling
     #   * WebsiteUrl: The website URL of the member's company.
     #   @return [Array<Types::EngagementMemberSummary>]
     #
+    # @!attribute [rw] enrichment_context
+    #   The enrichment data for the engagement associated with this
+    #   invitation. You can view propensity scores, program eligibility, and
+    #   lead readiness assessments before taking action on the invitation.
+    #   @return [Types::EnrichmentContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/GetEngagementInvitationResponse AWS API Documentation
     #
     class GetEngagementInvitationResponse < Struct.new(
@@ -2439,7 +2469,8 @@ module Aws::PartnerCentralSelling
       :payload,
       :invitation_message,
       :engagement_description,
-      :existing_members)
+      :existing_members,
+      :enrichment_context)
       SENSITIVE = [:sender_aws_account_id, :invitation_message]
       include Aws::Structure
     end
@@ -3107,6 +3138,30 @@ module Aws::PartnerCentralSelling
       include Aws::Structure
     end
 
+    # A subset of prospecting result data visible to invitation receivers.
+    # It includes customer account details and AI-generated insights.
+    #
+    # @!attribute [rw] customer
+    #   The prospected customer account details, including geographic
+    #   classification, industry segmentation, company size, and program
+    #   eligibility.
+    #   @return [Types::ProspectingResultCustomer]
+    #
+    # @!attribute [rw] insights
+    #   The AI-generated insights from the prospecting analysis, including
+    #   marketplace engagement scoring, solution fit assessments, and
+    #   solution categorization.
+    #   @return [Types::ProspectingInsights]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/InvitationProspectingResultAws AWS API Documentation
+    #
+    class InvitationProspectingResultAws < Struct.new(
+      :customer,
+      :insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a filter to retrieve opportunities based on the last modified
     # date. This filter is useful for tracking changes or updates to
     # opportunities over time.
@@ -3129,6 +3184,36 @@ module Aws::PartnerCentralSelling
       :after_last_modified_date,
       :before_last_modified_date)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The address information for a lead customer, including city, state or
+    # region, postal code, and country code.
+    #
+    # @!attribute [rw] city
+    #   The city of the lead customer's address.
+    #   @return [String]
+    #
+    # @!attribute [rw] postal_code
+    #   The postal code of the lead customer's address.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_or_region
+    #   The state or region of the lead customer's address.
+    #   @return [String]
+    #
+    # @!attribute [rw] country_code
+    #   The country code of the lead customer's address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/LeadAddress AWS API Documentation
+    #
+    class LeadAddress < Struct.new(
+      :city,
+      :postal_code,
+      :state_or_region,
+      :country_code)
+      SENSITIVE = [:country_code]
       include Aws::Structure
     end
 
@@ -3234,8 +3319,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] address
-    #   An object that contains an `Address` object's subset of fields.
-    #   @return [Types::AddressSummary]
+    #   The address information for the lead customer.
+    #   @return [Types::LeadAddress]
     #
     # @!attribute [rw] aws_maturity
     #   Indicates the customer's level of experience and adoption with AWS
@@ -5904,6 +5989,17 @@ module Aws::PartnerCentralSelling
     # execution details, customer account information, and insights that AI
     # generates from the prospecting analysis.
     #
+    # @!attribute [rw] customer
+    #   Contains details about the prospected customer account, including
+    #   geographic, industry, and segment classifications.
+    #   @return [Types::ProspectingResultCustomer]
+    #
+    # @!attribute [rw] insights
+    #   Insights that AI generates from the prospecting analysis. These
+    #   insights include engagement scores and solution fit assessments for
+    #   the prospected customer.
+    #   @return [Types::ProspectingInsights]
+    #
     # @!attribute [rw] start_time
     #   The timestamp when the prospecting result context was created. The
     #   format is ISO 8601 (UTC).
@@ -5929,27 +6025,16 @@ module Aws::PartnerCentralSelling
     #   generates this result.
     #   @return [String]
     #
-    # @!attribute [rw] customer
-    #   Contains details about the prospected customer account, including
-    #   geographic, industry, and segment classifications.
-    #   @return [Types::ProspectingResultCustomer]
-    #
-    # @!attribute [rw] insights
-    #   Insights that AI generates from the prospecting analysis. These
-    #   insights include engagement scores and solution fit assessments for
-    #   the prospected customer.
-    #   @return [Types::ProspectingInsights]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ProspectingResultAws AWS API Documentation
     #
     class ProspectingResultAws < Struct.new(
+      :customer,
+      :insights,
       :start_time,
       :end_time,
       :task_id,
       :task_arn,
-      :task_name,
-      :customer,
-      :insights)
+      :task_name)
       SENSITIVE = []
       include Aws::Structure
     end

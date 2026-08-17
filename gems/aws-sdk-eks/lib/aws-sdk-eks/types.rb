@@ -519,6 +519,20 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # A constraint specifying the allowed values for a parameter.
+    #
+    # @!attribute [rw] allowed_values
+    #   The list of allowed values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AllowedValuesConstraint AWS API Documentation
+    #
+    class AllowedValuesConstraint < Struct.new(
+      :allowed_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for integrating Argo CD with IAM Identity CenterIAM;
     # Identity Center. This allows you to use your organization's identity
     # provider for authentication to Argo CD.
@@ -1510,6 +1524,18 @@ module Aws::EKS
     #   see EKS Provisioned Control Plane in the Amazon EKS User Guide.
     #   @return [Types::ControlPlaneScalingConfig]
     #
+    # @!attribute [rw] kube_api_server_config
+    #   The Kubernetes API server configuration for the cluster.
+    #   @return [Types::KubeApiServerConfigResponse]
+    #
+    # @!attribute [rw] kube_scheduler_config
+    #   The Kubernetes scheduler configuration for the cluster.
+    #   @return [Types::KubeSchedulerConfigResponse]
+    #
+    # @!attribute [rw] kube_controller_manager_config
+    #   The Kubernetes controller manager configuration for the cluster.
+    #   @return [Types::KubeControllerManagerConfigResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -1540,7 +1566,10 @@ module Aws::EKS
       :compute_config,
       :storage_config,
       :deletion_protection,
-      :control_plane_scaling_config)
+      :control_plane_scaling_config,
+      :kube_api_server_config,
+      :kube_scheduler_config,
+      :kube_controller_manager_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1628,6 +1657,16 @@ module Aws::EKS
     #   The patch version of Kubernetes for this cluster version.
     #   @return [String]
     #
+    # @!attribute [rw] control_plane_scaling_tiers
+    #   The available provisioned control plane scaling tiers and their
+    #   capabilities for this Kubernetes version.
+    #   @return [Array<Types::ControlPlaneScalingTierInfo>]
+    #
+    # @!attribute [rw] control_plane_component_config
+    #   The default control plane component configuration and constraints
+    #   for this Kubernetes version.
+    #   @return [Types::ControlPlaneConfigInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ClusterVersionInformation AWS API Documentation
     #
     class ClusterVersionInformation < Struct.new(
@@ -1640,7 +1679,9 @@ module Aws::EKS
       :end_of_extended_support_date,
       :status,
       :version_status,
-      :kubernetes_patch_version)
+      :kubernetes_patch_version,
+      :control_plane_scaling_tiers,
+      :control_plane_component_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1791,6 +1832,31 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The control plane component configuration defaults and constraints.
+    #
+    # @!attribute [rw] kube_api_server_config
+    #   The Kubernetes API server configuration defaults and constraints.
+    #   @return [Types::KubeApiServerVersionConfig]
+    #
+    # @!attribute [rw] kube_scheduler_config
+    #   The Kubernetes scheduler configuration defaults and constraints.
+    #   @return [Types::KubeSchedulerVersionConfig]
+    #
+    # @!attribute [rw] kube_controller_manager_config
+    #   The Kubernetes controller manager configuration defaults and
+    #   constraints.
+    #   @return [Types::KubeControllerManagerVersionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ControlPlaneConfigInfo AWS API Documentation
+    #
+    class ControlPlaneConfigInfo < Struct.new(
+      :kube_api_server_config,
+      :kube_scheduler_config,
+      :kube_controller_manager_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The placement configuration for all the control plane instances of
     # your local Amazon EKS cluster on an Amazon Web Services Outpost. For
     # more information, see [Capacity considerations][1] in the *Amazon EKS
@@ -1863,6 +1929,41 @@ module Aws::EKS
     #
     class ControlPlaneScalingConfig < Struct.new(
       :tier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a provisioned control plane scaling tier.
+    #
+    # @!attribute [rw] tier_name
+    #   The name of the scaling tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_request_concurrency
+    #   The maximum API request concurrency supported by this tier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pod_scheduling_rate_per_second
+    #   The maximum pod scheduling rate per second supported by this tier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cluster_database_size_gb
+    #   The maximum cluster database size in GB supported by this tier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] control_plane_component_config_overrides
+    #   The control plane component configuration overrides specific to this
+    #   scaling tier.
+    #   @return [Types::ControlPlaneConfigInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ControlPlaneScalingTierInfo AWS API Documentation
+    #
+    class ControlPlaneScalingTierInfo < Struct.new(
+      :tier_name,
+      :api_request_concurrency,
+      :pod_scheduling_rate_per_second,
+      :cluster_database_size_gb,
+      :control_plane_component_config_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2478,6 +2579,18 @@ module Aws::EKS
     #   see EKS Provisioned Control Plane in the Amazon EKS User Guide.
     #   @return [Types::ControlPlaneScalingConfig]
     #
+    # @!attribute [rw] kube_api_server_config
+    #   The Kubernetes API server configuration for the new cluster.
+    #   @return [Types::KubeApiServerConfigRequest]
+    #
+    # @!attribute [rw] kube_scheduler_config
+    #   The Kubernetes scheduler configuration for the new cluster.
+    #   @return [Types::KubeSchedulerConfigRequest]
+    #
+    # @!attribute [rw] kube_controller_manager_config
+    #   The Kubernetes controller manager configuration for the new cluster.
+    #   @return [Types::KubeControllerManagerConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -2499,7 +2612,10 @@ module Aws::EKS
       :compute_config,
       :storage_config,
       :deletion_protection,
-      :control_plane_scaling_config)
+      :control_plane_scaling_config,
+      :kube_api_server_config,
+      :kube_scheduler_config,
+      :kube_controller_manager_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4046,6 +4162,44 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Constraints for a duration parameter.
+    #
+    # @!attribute [rw] min
+    #   The minimum allowed duration value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max
+    #   The maximum allowed duration value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DurationConstraints AWS API Documentation
+    #
+    class DurationConstraints < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A duration parameter configuration with default value and constraints.
+    #
+    # @!attribute [rw] default_value
+    #   The default value for the duration parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] constraints
+    #   The constraints for the duration parameter.
+    #   @return [Types::DurationConstraints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DurationParameterConfig AWS API Documentation
+    #
+    class DurationParameterConfig < Struct.new(
+      :default_value,
+      :constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An EKS Anywhere subscription authorizing the customer to support for
     # licensed clusters and access to EKS Anywhere Curated Packages.
     #
@@ -4419,6 +4573,52 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The horizontal pod autoscaler controller configuration for the
+    # Kubernetes controller manager.
+    #
+    # @!attribute [rw] horizontal_pod_autoscaler_sync_period
+    #   The interval between each sync of the horizontal pod autoscaler.
+    #   Valid values are single-unit durations such as `15s` or `1m`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/HorizontalPodAutoscalerControllerConfigRequest AWS API Documentation
+    #
+    class HorizontalPodAutoscalerControllerConfigRequest < Struct.new(
+      :horizontal_pod_autoscaler_sync_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The horizontal pod autoscaler controller configuration for the
+    # Kubernetes controller manager.
+    #
+    # @!attribute [rw] horizontal_pod_autoscaler_sync_period
+    #   The interval between each sync of the horizontal pod autoscaler.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/HorizontalPodAutoscalerControllerConfigResponse AWS API Documentation
+    #
+    class HorizontalPodAutoscalerControllerConfigResponse < Struct.new(
+      :horizontal_pod_autoscaler_sync_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The horizontal pod autoscaler controller version configuration.
+    #
+    # @!attribute [rw] horizontal_pod_autoscaler_sync_period
+    #   The HPA sync period configuration with default value and
+    #   constraints.
+    #   @return [Types::DurationParameterConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/HorizontalPodAutoscalerControllerVersionConfig AWS API Documentation
+    #
+    class HorizontalPodAutoscalerControllerVersionConfig < Struct.new(
+      :horizontal_pod_autoscaler_sync_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing an identity provider.
     #
     # @!attribute [rw] oidc
@@ -4703,6 +4903,26 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An integer range constraint specifying minimum and maximum allowed
+    # values.
+    #
+    # @!attribute [rw] min
+    #   The minimum allowed value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum allowed value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/IntegerRangeConstraint AWS API Documentation
+    #
+    class IntegerRangeConstraint < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified parameter is invalid. Review the available parameters
     # for the API request.
     #
@@ -4902,6 +5122,158 @@ module Aws::EKS
       :code,
       :message,
       :resource_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the Kubernetes API server on an Amazon EKS
+    # cluster.
+    #
+    # @!attribute [rw] event_ttl
+    #   The duration that Kubernetes events are retained. Valid values are
+    #   single-unit durations such as `30m` or `1h`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_node_port_range
+    #   The port range for NodePort services.
+    #   @return [Types::ServiceNodePortRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeApiServerConfigRequest AWS API Documentation
+    #
+    class KubeApiServerConfigRequest < Struct.new(
+      :event_ttl,
+      :service_node_port_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Kubernetes API server configuration for an Amazon EKS cluster.
+    #
+    # @!attribute [rw] event_ttl
+    #   The duration that Kubernetes events are retained.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_node_port_range
+    #   The port range for NodePort services.
+    #   @return [Types::ServiceNodePortRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeApiServerConfigResponse AWS API Documentation
+    #
+    class KubeApiServerConfigResponse < Struct.new(
+      :event_ttl,
+      :service_node_port_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Kubernetes API server version-specific configuration defaults and
+    # constraints.
+    #
+    # @!attribute [rw] event_ttl
+    #   The event TTL configuration with default value and constraints.
+    #   @return [Types::DurationParameterConfig]
+    #
+    # @!attribute [rw] service_node_port_range
+    #   The service node port range configuration with default value and
+    #   constraints.
+    #   @return [Types::PortRangeParameterConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeApiServerVersionConfig AWS API Documentation
+    #
+    class KubeApiServerVersionConfig < Struct.new(
+      :event_ttl,
+      :service_node_port_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the Kubernetes controller manager on an Amazon
+    # EKS cluster.
+    #
+    # @!attribute [rw] horizontal_pod_autoscaler_controller_config
+    #   The horizontal pod autoscaler controller configuration.
+    #   @return [Types::HorizontalPodAutoscalerControllerConfigRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeControllerManagerConfigRequest AWS API Documentation
+    #
+    class KubeControllerManagerConfigRequest < Struct.new(
+      :horizontal_pod_autoscaler_controller_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Kubernetes controller manager configuration for an Amazon EKS
+    # cluster.
+    #
+    # @!attribute [rw] horizontal_pod_autoscaler_controller_config
+    #   The horizontal pod autoscaler controller configuration.
+    #   @return [Types::HorizontalPodAutoscalerControllerConfigResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeControllerManagerConfigResponse AWS API Documentation
+    #
+    class KubeControllerManagerConfigResponse < Struct.new(
+      :horizontal_pod_autoscaler_controller_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Kubernetes controller manager version-specific configuration
+    # defaults and constraints.
+    #
+    # @!attribute [rw] horizontal_pod_autoscaler_controller_config
+    #   The horizontal pod autoscaler controller configuration with default
+    #   value and constraints.
+    #   @return [Types::HorizontalPodAutoscalerControllerVersionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeControllerManagerVersionConfig AWS API Documentation
+    #
+    class KubeControllerManagerVersionConfig < Struct.new(
+      :horizontal_pod_autoscaler_controller_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the Kubernetes scheduler on an Amazon EKS
+    # cluster.
+    #
+    # @!attribute [rw] node_resources_fit
+    #   The node resource fit scoring configuration for the scheduler.
+    #   @return [Types::NodeResourcesFitConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeSchedulerConfigRequest AWS API Documentation
+    #
+    class KubeSchedulerConfigRequest < Struct.new(
+      :node_resources_fit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Kubernetes scheduler configuration for an Amazon EKS cluster.
+    #
+    # @!attribute [rw] node_resources_fit
+    #   The node resource fit scoring configuration for the scheduler.
+    #   @return [Types::NodeResourcesFitConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeSchedulerConfigResponse AWS API Documentation
+    #
+    class KubeSchedulerConfigResponse < Struct.new(
+      :node_resources_fit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Kubernetes scheduler version-specific configuration defaults and
+    # constraints.
+    #
+    # @!attribute [rw] node_resources_fit
+    #   The NodeResourcesFit configuration with default value and
+    #   constraints.
+    #   @return [Types::NodeResourcesFitVersionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeSchedulerVersionConfig AWS API Documentation
+    #
+    class KubeSchedulerVersionConfig < Struct.new(
+      :node_resources_fit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6165,6 +6537,37 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The NodeResourcesFit plugin configuration for the Kubernetes
+    # scheduler.
+    #
+    # @!attribute [rw] scoring_strategy
+    #   The scoring strategy used to rank nodes during scheduling.
+    #   @return [Types::ScoringStrategy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodeResourcesFitConfig AWS API Documentation
+    #
+    class NodeResourcesFitConfig < Struct.new(
+      :scoring_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The NodeResourcesFit version configuration with default value and
+    # constraints.
+    #
+    # @!attribute [rw] scoring_strategy
+    #   The scoring strategy configuration with default value and
+    #   constraints.
+    #   @return [Types::ScoringStrategyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodeResourcesFitVersionConfig AWS API Documentation
+    #
+    class NodeResourcesFitVersionConfig < Struct.new(
+      :scoring_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing an Amazon EKS managed node group.
     #
     # @!attribute [rw] nodegroup_name
@@ -7029,6 +7432,45 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Constraints for a port range parameter.
+    #
+    # @!attribute [rw] min_port
+    #   The constraints for the minimum port value.
+    #   @return [Types::IntegerRangeConstraint]
+    #
+    # @!attribute [rw] max_port
+    #   The constraints for the maximum port value.
+    #   @return [Types::IntegerRangeConstraint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/PortRangeConstraints AWS API Documentation
+    #
+    class PortRangeConstraints < Struct.new(
+      :min_port,
+      :max_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A port range parameter configuration with default value and
+    # constraints.
+    #
+    # @!attribute [rw] default_value
+    #   The default port range value.
+    #   @return [Types::ServiceNodePortRange]
+    #
+    # @!attribute [rw] constraints
+    #   The constraints for the port range parameter.
+    #   @return [Types::PortRangeConstraints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/PortRangeParameterConfig AWS API Documentation
+    #
+    class PortRangeParameterConfig < Struct.new(
+      :default_value,
+      :constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Identifies the Key Management Service (KMS) key used to encrypt the
     # secrets.
     #
@@ -7361,6 +7803,25 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Constraints for resource weight entries.
+    #
+    # @!attribute [rw] name
+    #   The allowed values for resource names.
+    #   @return [Types::AllowedValuesConstraint]
+    #
+    # @!attribute [rw] weight
+    #   The allowed range for resource weight values.
+    #   @return [Types::IntegerRangeConstraint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ResourceConstraints AWS API Documentation
+    #
+    class ResourceConstraints < Struct.new(
+      :name,
+      :weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource is in use.
     #
     # @!attribute [rw] cluster_name
@@ -7477,6 +7938,26 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # A resource weight entry for the scheduler scoring strategy.
+    #
+    # @!attribute [rw] name
+    #   The name of the resource (for example, `cpu` or `memory`).
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The weight assigned to the resource for scoring. Must be between 1
+    #   and 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ResourceWeight AWS API Documentation
+    #
+    class ResourceWeight < Struct.new(
+      :name,
+      :weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The rollback configuration for the cluster version rollback.
     #
     # @!attribute [rw] timeout_minutes
@@ -7491,6 +7972,65 @@ module Aws::EKS
     #
     class RollbackConfig < Struct.new(
       :timeout_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scoring strategy configuration for the NodeResourcesFit scheduler
+    # plugin.
+    #
+    # @!attribute [rw] type
+    #   The scoring strategy type. Valid values are `LeastAllocated` or
+    #   `MostAllocated`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   The resource weights used for scoring nodes.
+    #   @return [Array<Types::ResourceWeight>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ScoringStrategy AWS API Documentation
+    #
+    class ScoringStrategy < Struct.new(
+      :type,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scoring strategy configuration with default value and constraints.
+    #
+    # @!attribute [rw] default_value
+    #   The default scoring strategy.
+    #   @return [Types::ScoringStrategy]
+    #
+    # @!attribute [rw] constraints
+    #   The constraints for the scoring strategy.
+    #   @return [Types::ScoringStrategyConstraints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ScoringStrategyConfig AWS API Documentation
+    #
+    class ScoringStrategyConfig < Struct.new(
+      :default_value,
+      :constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Constraints for the scoring strategy configuration.
+    #
+    # @!attribute [rw] scoring_strategy
+    #   The allowed values for the scoring strategy type.
+    #   @return [Types::AllowedValuesConstraint]
+    #
+    # @!attribute [rw] resources
+    #   The constraints for resource weights.
+    #   @return [Types::ResourceConstraints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ScoringStrategyConstraints AWS API Documentation
+    #
+    class ScoringStrategyConstraints < Struct.new(
+      :scoring_strategy,
+      :resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7525,6 +8065,25 @@ module Aws::EKS
       :addon_name,
       :subscription_id,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The port range for Kubernetes NodePort services.
+    #
+    # @!attribute [rw] min_port
+    #   The minimum port number in the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_port
+    #   The maximum port number in the range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ServiceNodePortRange AWS API Documentation
+    #
+    class ServiceNodePortRange < Struct.new(
+      :min_port,
+      :max_port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8220,6 +8779,19 @@ module Aws::EKS
     #   see EKS Provisioned Control Plane in the Amazon EKS User Guide.
     #   @return [Types::ControlPlaneScalingConfig]
     #
+    # @!attribute [rw] kube_api_server_config
+    #   The Kubernetes API server configuration for the updated cluster.
+    #   @return [Types::KubeApiServerConfigRequest]
+    #
+    # @!attribute [rw] kube_scheduler_config
+    #   The Kubernetes scheduler configuration for the updated cluster.
+    #   @return [Types::KubeSchedulerConfigRequest]
+    #
+    # @!attribute [rw] kube_controller_manager_config
+    #   The Kubernetes controller manager configuration for the updated
+    #   cluster.
+    #   @return [Types::KubeControllerManagerConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigRequest AWS API Documentation
     #
     class UpdateClusterConfigRequest < Struct.new(
@@ -8235,7 +8807,10 @@ module Aws::EKS
       :storage_config,
       :remote_network_config,
       :deletion_protection,
-      :control_plane_scaling_config)
+      :control_plane_scaling_config,
+      :kube_api_server_config,
+      :kube_scheduler_config,
+      :kube_controller_manager_config)
       SENSITIVE = []
       include Aws::Structure
     end

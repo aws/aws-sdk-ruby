@@ -161,6 +161,12 @@ module Aws::CodeCommit
     DescribePullRequestEventsInput = Shapes::StructureShape.new(name: 'DescribePullRequestEventsInput')
     DescribePullRequestEventsOutput = Shapes::StructureShape.new(name: 'DescribePullRequestEventsOutput')
     Description = Shapes::StringShape.new(name: 'Description')
+    DiffChange = Shapes::StructureShape.new(name: 'DiffChange')
+    DiffChangeList = Shapes::ListShape.new(name: 'DiffChangeList')
+    DiffChangeType = Shapes::StringShape.new(name: 'DiffChangeType')
+    DiffContext = Shapes::IntegerShape.new(name: 'DiffContext')
+    DiffHunk = Shapes::StructureShape.new(name: 'DiffHunk')
+    DiffHunkList = Shapes::ListShape.new(name: 'DiffHunkList')
     Difference = Shapes::StructureShape.new(name: 'Difference')
     DifferenceList = Shapes::ListShape.new(name: 'DifferenceList')
     DirectoryNameConflictsWithFileNameException = Shapes::StructureShape.new(name: 'DirectoryNameConflictsWithFileNameException')
@@ -207,6 +213,8 @@ module Aws::CodeCommit
     FolderList = Shapes::ListShape.new(name: 'FolderList')
     GetApprovalRuleTemplateInput = Shapes::StructureShape.new(name: 'GetApprovalRuleTemplateInput')
     GetApprovalRuleTemplateOutput = Shapes::StructureShape.new(name: 'GetApprovalRuleTemplateOutput')
+    GetBlobDifferencesInput = Shapes::StructureShape.new(name: 'GetBlobDifferencesInput')
+    GetBlobDifferencesOutput = Shapes::StructureShape.new(name: 'GetBlobDifferencesOutput')
     GetBlobInput = Shapes::StructureShape.new(name: 'GetBlobInput')
     GetBlobOutput = Shapes::StructureShape.new(name: 'GetBlobOutput')
     GetBranchInput = Shapes::StructureShape.new(name: 'GetBranchInput')
@@ -245,6 +253,7 @@ module Aws::CodeCommit
     GetRepositoryTriggersOutput = Shapes::StructureShape.new(name: 'GetRepositoryTriggersOutput')
     HunkContent = Shapes::StringShape.new(name: 'HunkContent')
     IdempotencyParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotencyParameterMismatchException')
+    IgnoreWhiteSpaces = Shapes::BooleanShape.new(name: 'IgnoreWhiteSpaces')
     InvalidActorArnException = Shapes::StructureShape.new(name: 'InvalidActorArnException')
     InvalidApprovalRuleContentException = Shapes::StructureShape.new(name: 'InvalidApprovalRuleContentException')
     InvalidApprovalRuleNameException = Shapes::StructureShape.new(name: 'InvalidApprovalRuleNameException')
@@ -321,6 +330,7 @@ module Aws::CodeCommit
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastModifiedDate = Shapes::TimestampShape.new(name: 'LastModifiedDate')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
+    LineContent = Shapes::StringShape.new(name: 'LineContent')
     LineNumber = Shapes::IntegerShape.new(name: 'LineNumber')
     ListApprovalRuleTemplatesInput = Shapes::StructureShape.new(name: 'ListApprovalRuleTemplatesInput')
     ListApprovalRuleTemplatesOutput = Shapes::StructureShape.new(name: 'ListApprovalRuleTemplatesOutput')
@@ -551,6 +561,7 @@ module Aws::CodeCommit
     UpdateRepositoryEncryptionKeyOutput = Shapes::StructureShape.new(name: 'UpdateRepositoryEncryptionKeyOutput')
     UpdateRepositoryNameInput = Shapes::StructureShape.new(name: 'UpdateRepositoryNameInput')
     UserInfo = Shapes::StructureShape.new(name: 'UserInfo')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     blob = Shapes::BlobShape.new(name: 'blob')
 
     ActorDoesNotExistException.struct_class = Types::ActorDoesNotExistException
@@ -1012,6 +1023,23 @@ module Aws::CodeCommit
     DescribePullRequestEventsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribePullRequestEventsOutput.struct_class = Types::DescribePullRequestEventsOutput
 
+    DiffChange.add_member(:type, Shapes::ShapeRef.new(shape: DiffChangeType, location_name: "type"))
+    DiffChange.add_member(:before_line_number, Shapes::ShapeRef.new(shape: LineNumber, location_name: "beforeLineNumber"))
+    DiffChange.add_member(:after_line_number, Shapes::ShapeRef.new(shape: LineNumber, location_name: "afterLineNumber"))
+    DiffChange.add_member(:content, Shapes::ShapeRef.new(shape: LineContent, location_name: "content"))
+    DiffChange.struct_class = Types::DiffChange
+
+    DiffChangeList.member = Shapes::ShapeRef.new(shape: DiffChange)
+
+    DiffHunk.add_member(:before_start_line, Shapes::ShapeRef.new(shape: LineNumber, location_name: "beforeStartLine"))
+    DiffHunk.add_member(:before_line_count, Shapes::ShapeRef.new(shape: Count, location_name: "beforeLineCount"))
+    DiffHunk.add_member(:after_start_line, Shapes::ShapeRef.new(shape: LineNumber, location_name: "afterStartLine"))
+    DiffHunk.add_member(:after_line_count, Shapes::ShapeRef.new(shape: Count, location_name: "afterLineCount"))
+    DiffHunk.add_member(:changes, Shapes::ShapeRef.new(shape: DiffChangeList, location_name: "changes"))
+    DiffHunk.struct_class = Types::DiffHunk
+
+    DiffHunkList.member = Shapes::ShapeRef.new(shape: DiffHunk)
+
     Difference.add_member(:before_blob, Shapes::ShapeRef.new(shape: BlobMetadata, location_name: "beforeBlob"))
     Difference.add_member(:after_blob, Shapes::ShapeRef.new(shape: BlobMetadata, location_name: "afterBlob"))
     Difference.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeTypeEnum, location_name: "changeType"))
@@ -1121,6 +1149,22 @@ module Aws::CodeCommit
 
     GetApprovalRuleTemplateOutput.add_member(:approval_rule_template, Shapes::ShapeRef.new(shape: ApprovalRuleTemplate, required: true, location_name: "approvalRuleTemplate"))
     GetApprovalRuleTemplateOutput.struct_class = Types::GetApprovalRuleTemplateOutput
+
+    GetBlobDifferencesInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    GetBlobDifferencesInput.add_member(:after_blob_id, Shapes::ShapeRef.new(shape: ObjectId, required: true, location_name: "afterBlobId"))
+    GetBlobDifferencesInput.add_member(:before_blob_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "beforeBlobId"))
+    GetBlobDifferencesInput.add_member(:context_lines, Shapes::ShapeRef.new(shape: DiffContext, location_name: "contextLines"))
+    GetBlobDifferencesInput.add_member(:ignore_whitespace, Shapes::ShapeRef.new(shape: IgnoreWhiteSpaces, location_name: "ignoreWhitespace"))
+    GetBlobDifferencesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
+    GetBlobDifferencesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetBlobDifferencesInput.struct_class = Types::GetBlobDifferencesInput
+
+    GetBlobDifferencesOutput.add_member(:hunks, Shapes::ShapeRef.new(shape: DiffHunkList, required: true, location_name: "hunks"))
+    GetBlobDifferencesOutput.add_member(:is_binary, Shapes::ShapeRef.new(shape: CapitalBoolean, required: true, location_name: "isBinary"))
+    GetBlobDifferencesOutput.add_member(:before_blob_size, Shapes::ShapeRef.new(shape: ObjectSize, location_name: "beforeBlobSize"))
+    GetBlobDifferencesOutput.add_member(:after_blob_size, Shapes::ShapeRef.new(shape: ObjectSize, required: true, location_name: "afterBlobSize"))
+    GetBlobDifferencesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetBlobDifferencesOutput.struct_class = Types::GetBlobDifferencesOutput
 
     GetBlobInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     GetBlobInput.add_member(:blob_id, Shapes::ShapeRef.new(shape: ObjectId, required: true, location_name: "blobId"))
@@ -2126,6 +2170,8 @@ module Aws::CodeCommit
     UserInfo.add_member(:date, Shapes::ShapeRef.new(shape: Date, location_name: "date"))
     UserInfo.struct_class = Types::UserInfo
 
+    ValidationException.struct_class = Types::ValidationException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -2712,6 +2758,35 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: FileTooLargeException)
+      end)
+
+      api.add_operation(:get_blob_differences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBlobDifferences"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBlobDifferencesInput)
+        o.output = Shapes::ShapeRef.new(shape: GetBlobDifferencesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: BlobIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidBlobIdException)
+        o.errors << Shapes::ShapeRef.new(shape: BlobIdDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: FileTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_branch, Seahorse::Model::Operation.new.tap do |o|

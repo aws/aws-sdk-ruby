@@ -1100,6 +1100,7 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].settings[0].stream_name #=> String
     #   resp.channel.destinations[0].settings[0].url #=> String
     #   resp.channel.destinations[0].settings[0].username #=> String
+    #   resp.channel.destinations[0].settings[0].virtual_source_address #=> String
     #   resp.channel.destinations[0].srt_settings #=> Array
     #   resp.channel.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channel.destinations[0].srt_settings[0].stream_id #=> String
@@ -2684,6 +2685,7 @@ module Aws::MediaLive
     #   resp.destinations[0].settings[0].stream_name #=> String
     #   resp.destinations[0].settings[0].url #=> String
     #   resp.destinations[0].settings[0].username #=> String
+    #   resp.destinations[0].settings[0].virtual_source_address #=> String
     #   resp.destinations[0].srt_settings #=> Array
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
@@ -3991,6 +3993,7 @@ module Aws::MediaLive
     #   resp.destinations[0].settings[0].stream_name #=> String
     #   resp.destinations[0].settings[0].url #=> String
     #   resp.destinations[0].settings[0].username #=> String
+    #   resp.destinations[0].settings[0].virtual_source_address #=> String
     #   resp.destinations[0].srt_settings #=> Array
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
@@ -5695,6 +5698,7 @@ module Aws::MediaLive
     #   resp.channels[0].destinations[0].settings[0].stream_name #=> String
     #   resp.channels[0].destinations[0].settings[0].url #=> String
     #   resp.channels[0].destinations[0].settings[0].username #=> String
+    #   resp.channels[0].destinations[0].settings[0].virtual_source_address #=> String
     #   resp.channels[0].destinations[0].srt_settings #=> Array
     #   resp.channels[0].destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channels[0].destinations[0].srt_settings[0].stream_id #=> String
@@ -6590,6 +6594,7 @@ module Aws::MediaLive
     #   resp.destinations[0].settings[0].stream_name #=> String
     #   resp.destinations[0].settings[0].url #=> String
     #   resp.destinations[0].settings[0].username #=> String
+    #   resp.destinations[0].settings[0].virtual_source_address #=> String
     #   resp.destinations[0].srt_settings #=> Array
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
@@ -7704,6 +7709,7 @@ module Aws::MediaLive
     #   resp.destinations[0].settings[0].stream_name #=> String
     #   resp.destinations[0].settings[0].url #=> String
     #   resp.destinations[0].settings[0].username #=> String
+    #   resp.destinations[0].settings[0].virtual_source_address #=> String
     #   resp.destinations[0].srt_settings #=> Array
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
@@ -8863,6 +8869,7 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].settings[0].stream_name #=> String
     #   resp.channel.destinations[0].settings[0].url #=> String
     #   resp.channel.destinations[0].settings[0].username #=> String
+    #   resp.channel.destinations[0].settings[0].virtual_source_address #=> String
     #   resp.channel.destinations[0].srt_settings #=> Array
     #   resp.channel.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channel.destinations[0].srt_settings[0].stream_id #=> String
@@ -9858,6 +9865,7 @@ module Aws::MediaLive
     #             stream_name: "__string",
     #             url: "__string",
     #             username: "__string",
+    #             virtual_source_address: "__string",
     #           },
     #         ],
     #         srt_settings: [
@@ -9900,6 +9908,7 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].settings[0].stream_name #=> String
     #   resp.channel.destinations[0].settings[0].url #=> String
     #   resp.channel.destinations[0].settings[0].username #=> String
+    #   resp.channel.destinations[0].settings[0].virtual_source_address #=> String
     #   resp.channel.destinations[0].srt_settings #=> Array
     #   resp.channel.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channel.destinations[0].srt_settings[0].stream_id #=> String
@@ -11546,6 +11555,7 @@ module Aws::MediaLive
     #   resp.destinations[0].settings[0].stream_name #=> String
     #   resp.destinations[0].settings[0].url #=> String
     #   resp.destinations[0].settings[0].username #=> String
+    #   resp.destinations[0].settings[0].virtual_source_address #=> String
     #   resp.destinations[0].srt_settings #=> Array
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
@@ -15831,7 +15841,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.191.0'
+      context[:gem_version] = '1.192.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

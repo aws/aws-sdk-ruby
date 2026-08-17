@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-08-07)
+------------------
+
+* Feature - Adds provenanceEnabled to StartFHIRImportJob
+
 1.68.0 (2026-07-15)
 ------------------
 

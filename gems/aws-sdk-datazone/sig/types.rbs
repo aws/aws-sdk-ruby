@@ -329,6 +329,7 @@ module Aws::DataZone
       attr_accessor asset_id: ::String
       attr_accessor filter_ids: ::Array[::String]
       attr_accessor status: ::String
+      attr_accessor scope_name: ::String
       attr_accessor error_message: ::String
       SENSITIVE: []
     end
@@ -615,6 +616,7 @@ module Aws::DataZone
       attr_accessor workflows_serverless_properties: Types::WorkflowsServerlessPropertiesInput
       attr_accessor lakehouse_properties: Types::LakehousePropertiesInput
       attr_accessor vpc_properties: Types::VpcPropertiesInput
+      attr_accessor git_properties: Types::GitPropertiesInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -648,6 +650,8 @@ module Aws::DataZone
       end
       class VpcProperties < ConnectionPropertiesInput
       end
+      class GitProperties < ConnectionPropertiesInput
+      end
       class Unknown < ConnectionPropertiesInput
       end
     end
@@ -668,6 +672,7 @@ module Aws::DataZone
       attr_accessor workflows_serverless_properties: Types::WorkflowsServerlessPropertiesOutput
       attr_accessor lakehouse_properties: Types::LakehousePropertiesOutput
       attr_accessor vpc_properties: Types::VpcPropertiesOutput
+      attr_accessor git_properties: Types::GitPropertiesOutput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -701,6 +706,8 @@ module Aws::DataZone
       end
       class VpcProperties < ConnectionPropertiesOutput
       end
+      class GitProperties < ConnectionPropertiesOutput
+      end
       class Unknown < ConnectionPropertiesOutput
       end
     end
@@ -717,6 +724,7 @@ module Aws::DataZone
       attr_accessor mlflow_properties: Types::MlflowPropertiesPatch
       attr_accessor lakehouse_properties: Types::LakehousePropertiesPatch
       attr_accessor vpc_properties: Types::VpcPropertiesPatch
+      attr_accessor git_properties: Types::GitPropertiesPatch
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -742,6 +750,8 @@ module Aws::DataZone
       end
       class VpcProperties < ConnectionPropertiesPatch
       end
+      class GitProperties < ConnectionPropertiesPatch
+      end
       class Unknown < ConnectionPropertiesPatch
       end
     end
@@ -756,7 +766,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: []
     end
@@ -962,7 +972,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:description]
     end
@@ -2578,7 +2588,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:connection_credentials, :description]
     end
@@ -3351,6 +3361,28 @@ module Aws::DataZone
       SENSITIVE: [:repository, :branch, :commit_message]
     end
 
+    class GitPropertiesInput
+      attr_accessor code_connection_arn: ::String
+      attr_accessor repository_id: ::String
+      attr_accessor default_branch: ::String
+      SENSITIVE: []
+    end
+
+    class GitPropertiesOutput
+      attr_accessor code_connection_arn: ::String
+      attr_accessor repository_id: ::String
+      attr_accessor default_branch: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "READY" | "UPDATING" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GitPropertiesPatch
+      attr_accessor code_connection_arn: ::String
+      attr_accessor default_branch: ::String
+      SENSITIVE: []
+    end
+
     class GlossaryItem
       attr_accessor domain_id: ::String
       attr_accessor id: ::String
@@ -3403,7 +3435,7 @@ module Aws::DataZone
     class GlueConnection
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC")
+      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
       attr_accessor match_criteria: ::Array[::String]
       attr_accessor connection_properties: ::Hash[::String, ::String]
       attr_accessor spark_properties: ::Hash[::String, ::String]
@@ -3865,7 +3897,7 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor environment_identifier: ::String
       attr_accessor project_identifier: ::String
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: []
     end
@@ -6400,7 +6432,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:description]
     end

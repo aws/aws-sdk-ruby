@@ -15,6 +15,7 @@ module Aws::MWAAServerless
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    Code = Shapes::UnionShape.new(name: 'Code')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateWorkflowRequest = Shapes::StructureShape.new(name: 'CreateWorkflowRequest')
     CreateWorkflowResponse = Shapes::StructureShape.new(name: 'CreateWorkflowResponse')
@@ -63,6 +64,10 @@ module Aws::MWAAServerless
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
     RunDetailSummary = Shapes::StructureShape.new(name: 'RunDetailSummary')
     RunType = Shapes::StringShape.new(name: 'RunType')
+    S3Location = Shapes::StructureShape.new(name: 'S3Location')
+    S3LocationBucketString = Shapes::StringShape.new(name: 'S3LocationBucketString')
+    S3LocationObjectKeyString = Shapes::StringShape.new(name: 'S3LocationObjectKeyString')
+    S3LocationVersionIdString = Shapes::StringShape.new(name: 'S3LocationVersionIdString')
     ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SecurityGroupString = Shapes::StringShape.new(name: 'SecurityGroupString')
@@ -112,6 +117,12 @@ module Aws::MWAAServerless
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    Code.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "S3Location"))
+    Code.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Code.add_member_subclass(:s3_location, Types::Code::S3Location)
+    Code.add_member_subclass(:unknown, Types::Code::Unknown)
+    Code.struct_class = Types::Code
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "Message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
@@ -120,6 +131,7 @@ module Aws::MWAAServerless
     CreateWorkflowRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateWorkflowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateWorkflowRequest.add_member(:definition_s3_location, Shapes::ShapeRef.new(shape: DefinitionS3Location, required: true, location_name: "DefinitionS3Location"))
+    CreateWorkflowRequest.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "Code"))
     CreateWorkflowRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleArn"))
     CreateWorkflowRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     CreateWorkflowRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
@@ -196,6 +208,8 @@ module Aws::MWAAServerless
     GetWorkflowResponse.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     GetWorkflowResponse.add_member(:workflow_status, Shapes::ShapeRef.new(shape: WorkflowStatus, location_name: "WorkflowStatus"))
     GetWorkflowResponse.add_member(:definition_s3_location, Shapes::ShapeRef.new(shape: DefinitionS3Location, location_name: "DefinitionS3Location"))
+    GetWorkflowResponse.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "Code"))
+    GetWorkflowResponse.add_member(:code_snapshotted_at, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CodeSnapshottedAt"))
     GetWorkflowResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfiguration"))
     GetWorkflowResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleArn"))
     GetWorkflowResponse.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
@@ -286,6 +300,11 @@ module Aws::MWAAServerless
     RunDetailSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "EndedAt"))
     RunDetailSummary.struct_class = Types::RunDetailSummary
 
+    S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: S3LocationBucketString, required: true, location_name: "Bucket"))
+    S3Location.add_member(:object_key, Shapes::ShapeRef.new(shape: S3LocationObjectKeyString, required: true, location_name: "ObjectKey"))
+    S3Location.add_member(:version_id, Shapes::ShapeRef.new(shape: S3LocationVersionIdString, location_name: "VersionId"))
+    S3Location.struct_class = Types::S3Location
+
     ScheduleConfiguration.add_member(:cron_expression, Shapes::ShapeRef.new(shape: String, location_name: "CronExpression"))
     ScheduleConfiguration.struct_class = Types::ScheduleConfiguration
 
@@ -359,6 +378,7 @@ module Aws::MWAAServerless
 
     UpdateWorkflowRequest.add_member(:workflow_arn, Shapes::ShapeRef.new(shape: WorkflowArn, required: true, location_name: "WorkflowArn"))
     UpdateWorkflowRequest.add_member(:definition_s3_location, Shapes::ShapeRef.new(shape: DefinitionS3Location, required: true, location_name: "DefinitionS3Location"))
+    UpdateWorkflowRequest.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "Code"))
     UpdateWorkflowRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleArn"))
     UpdateWorkflowRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     UpdateWorkflowRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))

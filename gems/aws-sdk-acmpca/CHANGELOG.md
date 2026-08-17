@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2026-08-05)
+------------------
+
+* Feature - Private Certificate Authority service now supports RSASSA-PSS signing algorithm.
+
 1.112.0 (2026-07-09)
 ------------------
 

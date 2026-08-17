@@ -708,13 +708,20 @@ module Aws::NetworkFirewall
     #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html
     #   @return [String]
     #
+    # @!attribute [rw] dns_name
+    #   The DNS name that resolves to the firewall endpoint in the subnet.
+    #   This is populated for proxy mode firewalls, where clients direct
+    #   traffic to the firewall's proxy using this name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/Attachment AWS API Documentation
     #
     class Attachment < Struct.new(
       :subnet_id,
       :endpoint_id,
       :status,
-      :status_message)
+      :status_message,
+      :dns_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -851,10 +858,9 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # High-level information about a container association, returned by the
-    # ListContainerAssociations operation. You can use this information to
-    # retrieve the full details of a container association using
-    # DescribeContainerAssociation.
+    # The metadata for a container association returned by
+    # `ListContainerAssociations`. Contains the ARN and name that you use to
+    # identify the container association in other operations.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the container association.
@@ -873,15 +879,15 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # A key-value pair that defines a container attribute filter for a
-    # container monitoring configuration.
+    # A key-value filter pair used in container association monitoring
+    # configurations to narrow which containers are tracked.
     #
     # @!attribute [rw] key
-    #   The key of the container attribute to filter on.
+    #   The attribute key to filter on.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the container attribute to filter on.
+    #   The attribute value to match.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ContainerAttribute AWS API Documentation
@@ -893,18 +899,21 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # Defines a container cluster to monitor, along with optional attribute
-    # filters that narrow the scope of monitored containers within the
-    # cluster.
+    # Contains the monitoring configuration for a single cluster in a
+    # container association. Specifies the cluster ARN and optional
+    # attribute filters to narrow which containers are tracked.
     #
     # @!attribute [rw] cluster_arn
-    #   The Amazon Resource Name (ARN) of the container cluster to monitor.
+    #   The ARN of the Amazon ECS or Amazon EKS cluster to monitor. The
+    #   cluster must be in the same Region and account as the container
+    #   association.
     #   @return [String]
     #
     # @!attribute [rw] attribute_filters
-    #   A list of key-value pairs that filter which containers within the
-    #   cluster are monitored. Only containers that match the specified
-    #   attributes are included.
+    #   Key-value pairs that filter which containers are tracked. For Amazon
+    #   EKS, you can filter by namespace and Kubernetes labels. For Amazon
+    #   ECS, you can filter by container instance attributes (EC2 launch
+    #   type only).
     #   @return [Array<Types::ContainerAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ContainerMonitoringConfiguration AWS API Documentation
@@ -926,14 +935,19 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of container orchestration platform for the clusters in
-    #   this association. Valid values are `ECS` and `EKS`. You can't
-    #   change the type after creation.
+    #   The type of containers to monitor. You can't change the container
+    #   type after creation. Valid values:
+    #
+    #   * `ECS` - Amazon Elastic Container Service
+    #
+    #   * `EKS` - Amazon Elastic Kubernetes Service
     #   @return [String]
     #
     # @!attribute [rw] container_monitoring_configurations
-    #   The list of container monitoring configurations that define which
-    #   clusters and container attributes to monitor.
+    #   The monitoring configurations for the container association. Each
+    #   configuration specifies an Amazon ECS or Amazon EKS cluster to
+    #   monitor and optional attribute filters to narrow which containers
+    #   are tracked.
     #   @return [Array<Types::ContainerMonitoringConfiguration>]
     #
     # @!attribute [rw] tags
@@ -965,32 +979,38 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of container orchestration platform. Either `ECS` or `EKS`.
+    #   The container type. Valid values:
+    #
+    #   * `ECS` - Amazon Elastic Container Service
+    #
+    #   * `EKS` - Amazon Elastic Kubernetes Service
     #   @return [String]
     #
     # @!attribute [rw] container_monitoring_configurations
-    #   The container monitoring configurations for this container
-    #   association.
+    #   The monitoring configurations for the container association.
     #   @return [Array<Types::ContainerMonitoringConfiguration>]
     #
     # @!attribute [rw] status
-    #   The current status of the container association.
+    #   The current status of the container association. For a new container
+    #   association, the status is `CREATING`.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The key:value pairs associated with the resource.
+    #   The key:value pairs to associate with the resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] update_token
     #   A token used for optimistic locking. Network Firewall returns a
     #   token to your requests that access the container association. The
     #   token marks the state of the container association resource at the
-    #   time of the request. To make an update to the container association,
-    #   provide the token in your request. Network Firewall uses the token
-    #   to ensure that the container association hasn't changed since you
-    #   last retrieved it. If it has changed, the operation fails with an
+    #   time of the request.
+    #
+    #   To make changes to the container association, you provide the token
+    #   in your request. Network Firewall uses the token to ensure that the
+    #   container association hasn't changed since you last retrieved it.
+    #   If it has changed, the operation fails with an
     #   `InvalidTokenException`. If this happens, retrieve the container
-    #   association again to get a current copy of it with a new token.
+    #   association again to get a current copy of it with a current token.
     #   Reapply your changes as needed, then try the operation again using
     #   the new token.
     #   @return [String]
@@ -1199,6 +1219,45 @@ module Aws::NetworkFirewall
     #   Default value: `FALSE`
     #   @return [Boolean]
     #
+    # @!attribute [rw] nat_gateway_mappings
+    #   The NAT gateways that the firewall uses to proxy traffic when
+    #   `NoSourcePreservation` is `TRUE`. Network Firewall attaches the
+    #   firewall to each NAT gateway that you specify, so that egress
+    #   traffic is proxied through the NAT gateway.
+    #   @return [Array<Types::NatGatewayMapping>]
+    #
+    # @!attribute [rw] proxy_settings
+    #   The listener configuration for a proxy mode firewall, used when
+    #   `NoSourcePreservation` is `TRUE`. This specifies the ports and
+    #   protocols on which the firewall's proxy listens for traffic.
+    #   @return [Types::ProxySettings]
+    #
+    # @!attribute [rw] no_source_preservation
+    #   Optional. Indicates whether the firewall operates in proxy mode, in
+    #   which the source IP address of the traffic is not preserved. When
+    #   set to `TRUE`, the firewall proxies traffic through a NAT gateway
+    #   and the traffic reaching the destination uses the NAT gateway's IP
+    #   address as the source.
+    #
+    #   When you set this to `TRUE`, you must specify `NatGatewayMappings`
+    #   and `VpcEndpoint` instead of a top-level `VpcId` and
+    #   `SubnetMappings`.
+    #
+    #   You can't change this setting after you create the firewall.
+    #
+    #   Default value: `FALSE`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_endpoint
+    #   The VPC and subnets for the firewall endpoint, used when
+    #   `NoSourcePreservation` is `TRUE`. Network Firewall creates the
+    #   firewall endpoint in the subnets that you specify here.
+    #
+    #   For proxy mode firewalls, provide the firewall's VPC and endpoint
+    #   subnets through this parameter instead of the top-level `VpcId` and
+    #   `SubnetMappings`.
+    #   @return [Types::VpcEndpoint]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallRequest AWS API Documentation
     #
     class CreateFirewallRequest < Struct.new(
@@ -1215,7 +1274,11 @@ module Aws::NetworkFirewall
       :enabled_analysis_types,
       :transit_gateway_id,
       :availability_zone_mappings,
-      :availability_zone_change_protection)
+      :availability_zone_change_protection,
+      :nat_gateway_mappings,
+      :proxy_settings,
+      :no_source_preservation,
+      :vpc_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1969,13 +2032,15 @@ module Aws::NetworkFirewall
     end
 
     # @!attribute [rw] container_association_name
-    #   The descriptive name of the container association. You must specify
-    #   the ARN or the name, and you can specify both.
+    #   The descriptive name of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
     # @!attribute [rw] container_association_arn
-    #   The Amazon Resource Name (ARN) of the container association. You
-    #   must specify the ARN or the name, and you can specify both.
+    #   The Amazon Resource Name (ARN) of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteContainerAssociationRequest AWS API Documentation
@@ -1996,7 +2061,8 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the container association.
+    #   The current status of the container association. After deletion is
+    #   initiated, the status is `DELETING`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteContainerAssociationResponse AWS API Documentation
@@ -2466,13 +2532,15 @@ module Aws::NetworkFirewall
     end
 
     # @!attribute [rw] container_association_name
-    #   The descriptive name of the container association. You must specify
-    #   the ARN or the name, and you can specify both.
+    #   The descriptive name of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
     # @!attribute [rw] container_association_arn
-    #   The Amazon Resource Name (ARN) of the container association. You
-    #   must specify the ARN or the name, and you can specify both.
+    #   The Amazon Resource Name (ARN) of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeContainerAssociationRequest AWS API Documentation
@@ -2497,12 +2565,15 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of container orchestration platform. Either `ECS` or `EKS`.
+    #   The container type. Valid values:
+    #
+    #   * `ECS` - Amazon Elastic Container Service
+    #
+    #   * `EKS` - Amazon Elastic Kubernetes Service
     #   @return [String]
     #
     # @!attribute [rw] container_monitoring_configurations
-    #   The container monitoring configurations for this container
-    #   association.
+    #   The monitoring configurations for the container association.
     #   @return [Array<Types::ContainerMonitoringConfiguration>]
     #
     # @!attribute [rw] status
@@ -2510,17 +2581,16 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] resolved_cidr_count
-    #   The number of CIDR blocks that have been resolved from the monitored
-    #   containers for this container association.
+    #   The number of CIDR blocks resolved from the monitored containers.
     #   @return [Integer]
     #
     # @!attribute [rw] last_updated_time
-    #   The last time that the container association was updated or resolved
-    #   new container IP addresses.
+    #   The most recent time that Network Firewall updated the container
+    #   association.
     #   @return [Time]
     #
     # @!attribute [rw] tags
-    #   The key:value pairs associated with the resource.
+    #   The key:value pairs to associate with the resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] update_token
@@ -2528,6 +2598,15 @@ module Aws::NetworkFirewall
     #   token to your requests that access the container association. The
     #   token marks the state of the container association resource at the
     #   time of the request.
+    #
+    #   To make changes to the container association, you provide the token
+    #   in your request. Network Firewall uses the token to ensure that the
+    #   container association hasn't changed since you last retrieved it.
+    #   If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the container
+    #   association again to get a current copy of it with a current token.
+    #   Reapply your changes as needed, then try the operation again using
+    #   the new token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeContainerAssociationResponse AWS API Documentation
@@ -4070,6 +4149,30 @@ module Aws::NetworkFirewall
     #   Availability Zones.
     #   @return [Boolean]
     #
+    # @!attribute [rw] nat_gateway_mappings
+    #   The NAT gateways that the firewall uses to proxy traffic. This is
+    #   set for proxy mode firewalls, where `NoSourcePreservation` is
+    #   `TRUE`.
+    #   @return [Array<Types::NatGatewayMapping>]
+    #
+    # @!attribute [rw] proxy_settings
+    #   The listener configuration for the firewall's proxy. This is set
+    #   for proxy mode firewalls, where `NoSourcePreservation` is `TRUE`.
+    #   @return [Types::ProxySettings]
+    #
+    # @!attribute [rw] no_source_preservation
+    #   Indicates whether the firewall operates in proxy mode, in which the
+    #   source IP address of the traffic is not preserved. When this value
+    #   is `TRUE`, the firewall proxies traffic through a NAT gateway and
+    #   uses the NAT gateway's IP address as the source for traffic
+    #   reaching the destination.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_endpoint
+    #   The VPC and subnets for the firewall endpoint. This is set for proxy
+    #   mode firewalls, where `NoSourcePreservation` is `TRUE`.
+    #   @return [Types::VpcEndpoint]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/Firewall AWS API Documentation
     #
     class Firewall < Struct.new(
@@ -4090,7 +4193,11 @@ module Aws::NetworkFirewall
       :transit_gateway_id,
       :transit_gateway_owner_account_id,
       :availability_zone_mappings,
-      :availability_zone_change_protection)
+      :availability_zone_change_protection,
+      :nat_gateway_mappings,
+      :proxy_settings,
+      :no_source_preservation,
+      :vpc_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4197,6 +4304,14 @@ module Aws::NetworkFirewall
     #   * aws:alert\_strict
     #
     #   * aws:alert\_established
+    #
+    #   * aws:drop\_established\_app\_layer
+    #
+    #   * aws:alert\_established\_app\_layer
+    #
+    #   * aws:drop\_established\_app\_layer\_to\_server
+    #
+    #   * aws:alert\_established\_app\_layer\_to\_server
     #
     #   For more information, see [Strict evaluation order][1] in the
     #   *Network Firewall Developer Guide*.
@@ -5100,7 +5215,8 @@ module Aws::NetworkFirewall
     end
 
     # @!attribute [rw] container_associations
-    #   The container association metadata objects.
+    #   The container association metadata objects for the account and
+    #   Region.
     #   @return [Array<Types::ContainerAssociationSummary>]
     #
     # @!attribute [rw] next_token
@@ -6006,6 +6122,57 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # The definition and status of the attachment between a proxy mode
+    # firewall and a NAT gateway that proxies its traffic.
+    #
+    # @!attribute [rw] nat_gateway_id
+    #   A unique identifier for the NAT gateway to use with proxy resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the NAT gateway attachment.
+    #
+    #   When this value is `READY`, the attachment is available to proxy
+    #   traffic. Otherwise, this value reflects its state, for example
+    #   `CREATING` or `DELETING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If Network Firewall encounters an issue with the NAT gateway
+    #   attachment, it populates this with an explanation of the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name that resolves to the firewall's proxy for traffic sent
+    #   through this NAT gateway attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/NatGatewayAttachment AWS API Documentation
+    #
+    class NatGatewayAttachment < Struct.new(
+      :nat_gateway_id,
+      :status,
+      :status_message,
+      :dns_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A NAT gateway that a proxy mode firewall uses to proxy traffic. This
+    # is used in CreateFirewall when `NoSourcePreservation` is `TRUE`.
+    #
+    # @!attribute [rw] nat_gateway_id
+    #   A unique identifier for the NAT gateway to use with proxy resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/NatGatewayMapping AWS API Documentation
+    #
+    class NatGatewayMapping < Struct.new(
+      :nat_gateway_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides configuration status for a single policy or rule group that
     # is used for a firewall endpoint. Network Firewall provides each
     # endpoint with the rules that are configured in the firewall policy.
@@ -6576,6 +6743,22 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # The listener configuration for a proxy mode firewall. This specifies
+    # the ports and protocols on which the firewall's proxy listens for
+    # traffic.
+    #
+    # @!attribute [rw] listener_properties
+    #   Listener properties for HTTP and HTTPS traffic.
+    #   @return [Array<Types::ListenerProperty>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ProxySettings AWS API Documentation
+    #
+    class ProxySettings < Struct.new(
+      :listener_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Stateless inspection criteria that publishes the specified metrics to
     # Amazon CloudWatch for the matching packet. This setting defines a
     # CloudWatch dimension value to be published.
@@ -7027,7 +7210,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    #   [1]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options
+    #   [1]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -7038,7 +7221,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    #   [1]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options
+    #   [1]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleOption AWS API Documentation
@@ -7136,7 +7319,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    #   [1]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html
+    #   [1]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html
     #   @return [Array<Types::StatefulRule>]
     #
     # @!attribute [rw] stateless_rules_and_custom_actions
@@ -7599,6 +7782,11 @@ module Aws::NetworkFirewall
     # Configuration settings for the handling of the stateful rule groups in
     # a firewall policy.
     #
+    # Updating any setting in `StatefulEngineOptions` may require a restart
+    # of the stateful engine in order to apply the changes. When this
+    # occurs, existing connections will be treated according to your stream
+    # exception policy configuration.
+    #
     # @!attribute [rw] rule_order
     #   Indicates how to manage the order of stateful rule evaluation for
     #   the policy. `STRICT_ORDER` is the recommended option, but
@@ -7670,7 +7858,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    # [1]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html
+    # [1]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html
     #
     # @!attribute [rw] action
     #   Defines what Network Firewall should do with the packets in a
@@ -8009,11 +8197,18 @@ module Aws::NetworkFirewall
     #   traffic.
     #   @return [Hash<String,Types::PerObjectStatus>]
     #
+    # @!attribute [rw] nat_gateway_attachments
+    #   The status of the NAT gateway attachments for a proxy mode firewall
+    #   in the Availability Zone. This reflects the attachment of the
+    #   firewall to each NAT gateway that proxies its traffic.
+    #   @return [Array<Types::NatGatewayAttachment>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/SyncState AWS API Documentation
     #
     class SyncState < Struct.new(
       :attachment,
-      :config)
+      :config,
+      :nat_gateway_attachments)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8555,43 +8750,54 @@ module Aws::NetworkFirewall
     end
 
     # @!attribute [rw] container_association_name
-    #   The descriptive name of the container association. You must specify
-    #   the ARN or the name, and you can specify both.
+    #   The descriptive name of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
     # @!attribute [rw] container_association_arn
-    #   The Amazon Resource Name (ARN) of the container association. You
-    #   must specify the ARN or the name, and you can specify both.
+    #   The Amazon Resource Name (ARN) of the container association.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the container association.
+    #   A description of the container association. When omitted, the
+    #   existing description remains unchanged. To clear the description,
+    #   pass an empty string.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of container orchestration platform. This must match the
-    #   type specified when the container association was created.
+    #   The container type. This value must match the existing type and
+    #   can't be changed. Valid values:
+    #
+    #   * `ECS` - Amazon Elastic Container Service
+    #
+    #   * `EKS` - Amazon Elastic Kubernetes Service
     #   @return [String]
     #
     # @!attribute [rw] container_monitoring_configurations
-    #   The updated list of container monitoring configurations that define
-    #   which clusters and container attributes to monitor.
+    #   The updated monitoring configurations for the container association.
+    #   Each configuration specifies an Amazon ECS or Amazon EKS cluster to
+    #   monitor and optional attribute filters.
     #   @return [Array<Types::ContainerMonitoringConfiguration>]
     #
     # @!attribute [rw] tags
-    #   The key:value pairs associated with the resource.
+    #   The key:value pairs to associate with the resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] update_token
     #   A token used for optimistic locking. Network Firewall returns a
     #   token to your requests that access the container association. The
     #   token marks the state of the container association resource at the
-    #   time of the request. To make an update to the container association,
-    #   provide the token in your request. Network Firewall uses the token
-    #   to ensure that the container association hasn't changed since you
-    #   last retrieved it. If it has changed, the operation fails with an
+    #   time of the request.
+    #
+    #   To make changes to the container association, you provide the token
+    #   in your request. Network Firewall uses the token to ensure that the
+    #   container association hasn't changed since you last retrieved it.
+    #   If it has changed, the operation fails with an
     #   `InvalidTokenException`. If this happens, retrieve the container
-    #   association again to get a current copy of it with a new token.
+    #   association again to get a current copy of it with a current token.
     #   Reapply your changes as needed, then try the operation again using
     #   the new token.
     #   @return [String]
@@ -8623,12 +8829,15 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of container orchestration platform. Either `ECS` or `EKS`.
+    #   The container type. Valid values:
+    #
+    #   * `ECS` - Amazon Elastic Container Service
+    #
+    #   * `EKS` - Amazon Elastic Kubernetes Service
     #   @return [String]
     #
     # @!attribute [rw] container_monitoring_configurations
-    #   The container monitoring configurations for this container
-    #   association.
+    #   The monitoring configurations for the container association.
     #   @return [Array<Types::ContainerMonitoringConfiguration>]
     #
     # @!attribute [rw] status
@@ -8636,7 +8845,7 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The key:value pairs associated with the resource.
+    #   The key:value pairs to associate with the resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] update_token
@@ -8644,6 +8853,15 @@ module Aws::NetworkFirewall
     #   token to your requests that access the container association. The
     #   token marks the state of the container association resource at the
     #   time of the request.
+    #
+    #   To make changes to the container association, you provide the token
+    #   in your request. Network Firewall uses the token to ensure that the
+    #   container association hasn't changed since you last retrieved it.
+    #   If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the container
+    #   association again to get a current copy of it with a current token.
+    #   Reapply your changes as needed, then try the operation again using
+    #   the new token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateContainerAssociationResponse AWS API Documentation
@@ -9771,6 +9989,100 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_name
+    #   The descriptive name of the firewall. You can't change the name of
+    #   a firewall after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of
+    #   the request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs
+    #   your updates regardless of whether the firewall has changed since
+    #   you last retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If
+    #   this happens, retrieve the firewall again to get a current copy of
+    #   it with a new token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] proxy_settings
+    #   The proxy listener configuration to set on the firewall. This
+    #   specifies the ports and protocols on which the firewall's proxy
+    #   listens for traffic.
+    #   @return [Types::ProxySettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxySettingsRequest AWS API Documentation
+    #
+    class UpdateProxySettingsRequest < Struct.new(
+      :firewall_arn,
+      :firewall_name,
+      :update_token,
+      :proxy_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_name
+    #   The descriptive name of the firewall. You can't change the name of
+    #   a firewall after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of
+    #   the request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs
+    #   your updates regardless of whether the firewall has changed since
+    #   you last retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If
+    #   this happens, retrieve the firewall again to get a current copy of
+    #   it with a new token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] proxy_settings
+    #   The updated proxy listener configuration on the firewall.
+    #   @return [Types::ProxySettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxySettingsResponse AWS API Documentation
+    #
+    class UpdateProxySettingsResponse < Struct.new(
+      :firewall_arn,
+      :firewall_name,
+      :update_token,
+      :proxy_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] update_token
     #   A token used for optimistic locking. Network Firewall returns a
     #   token to your requests that access the rule group. The token marks
@@ -10128,6 +10440,33 @@ module Aws::NetworkFirewall
     class UpdateTLSInspectionConfigurationResponse < Struct.new(
       :update_token,
       :tls_inspection_configuration_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC and subnets for a proxy mode firewall endpoint. This is used
+    # in CreateFirewall when `NoSourcePreservation` is `TRUE`, to specify
+    # where Network Firewall creates the firewall endpoint.
+    #
+    # This differs from VpcEndpointAssociation, which defines additional
+    # secondary endpoints for a firewall in other VPCs.
+    #
+    # @!attribute [rw] vpc_id
+    #   The unique identifier of the VPC where Network Firewall creates the
+    #   proxy mode firewall endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_mappings
+    #   The subnets in which Network Firewall creates the firewall endpoint
+    #   for a proxy mode firewall. Each subnet must belong to a different
+    #   Availability Zone in the VPC.
+    #   @return [Array<Types::SubnetMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/VpcEndpoint AWS API Documentation
+    #
+    class VpcEndpoint < Struct.new(
+      :vpc_id,
+      :subnet_mappings)
       SENSITIVE = []
       include Aws::Structure
     end

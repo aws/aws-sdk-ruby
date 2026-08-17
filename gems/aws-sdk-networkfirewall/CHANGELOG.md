@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2026-08-03)
+------------------
+
+* Feature - This launch allows customers to use Network Firewall as an explicit Proxy and protect their workloads against threat of data exfiltration.
+
+1.95.0 (2026-07-31)
+------------------
+
+* Feature - Doc Updates for Container Attributes
+
+1.94.0 (2026-07-30)
+------------------
+
+* Feature - Adds UPDATING field to Container Association Status
+
 1.93.0 (2026-07-09)
 ------------------
 

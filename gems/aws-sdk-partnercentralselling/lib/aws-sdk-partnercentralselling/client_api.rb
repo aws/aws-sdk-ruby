@@ -171,6 +171,7 @@ module Aws::PartnerCentralSelling
     EngagementSummaryList = Shapes::ListShape.new(name: 'EngagementSummaryList')
     EngagementTitle = Shapes::StringShape.new(name: 'EngagementTitle')
     EngagementUseCase = Shapes::StringShape.new(name: 'EngagementUseCase')
+    EnrichmentContext = Shapes::StructureShape.new(name: 'EnrichmentContext')
     EstimationUrl = Shapes::StringShape.new(name: 'EstimationUrl')
     ExpectedContractDuration = Shapes::StructureShape.new(name: 'ExpectedContractDuration')
     ExpectedContractDurationTerm = Shapes::StringShape.new(name: 'ExpectedContractDurationTerm')
@@ -200,24 +201,37 @@ module Aws::PartnerCentralSelling
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     Invitation = Shapes::StructureShape.new(name: 'Invitation')
     InvitationMessage = Shapes::StringShape.new(name: 'InvitationMessage')
+    InvitationProspectingResultAws = Shapes::StructureShape.new(name: 'InvitationProspectingResultAws')
     InvitationStatus = Shapes::StringShape.new(name: 'InvitationStatus')
     InvitationStatusList = Shapes::ListShape.new(name: 'InvitationStatusList')
     InvolvementTypeChangeReason = Shapes::StringShape.new(name: 'InvolvementTypeChangeReason')
     JobTitle = Shapes::StringShape.new(name: 'JobTitle')
     LastModifiedDate = Shapes::StructureShape.new(name: 'LastModifiedDate')
+    LeadAddress = Shapes::StructureShape.new(name: 'LeadAddress')
+    LeadAddressCityString = Shapes::StringShape.new(name: 'LeadAddressCityString')
+    LeadAddressPostalCodeString = Shapes::StringShape.new(name: 'LeadAddressPostalCodeString')
+    LeadAddressStateOrRegionString = Shapes::StringShape.new(name: 'LeadAddressStateOrRegionString')
+    LeadBusinessProblem = Shapes::StringShape.new(name: 'LeadBusinessProblem')
     LeadContact = Shapes::StructureShape.new(name: 'LeadContact')
     LeadContext = Shapes::StructureShape.new(name: 'LeadContext')
+    LeadCountryCode = Shapes::StringShape.new(name: 'LeadCountryCode')
     LeadCustomer = Shapes::StructureShape.new(name: 'LeadCustomer')
+    LeadEmail = Shapes::StringShape.new(name: 'LeadEmail')
+    LeadIndustry = Shapes::StringShape.new(name: 'LeadIndustry')
     LeadInsights = Shapes::StructureShape.new(name: 'LeadInsights')
     LeadInteraction = Shapes::StructureShape.new(name: 'LeadInteraction')
     LeadInteractionList = Shapes::ListShape.new(name: 'LeadInteractionList')
     LeadInvitationCustomer = Shapes::StructureShape.new(name: 'LeadInvitationCustomer')
     LeadInvitationInteraction = Shapes::StructureShape.new(name: 'LeadInvitationInteraction')
     LeadInvitationPayload = Shapes::StructureShape.new(name: 'LeadInvitationPayload')
+    LeadJobTitle = Shapes::StringShape.new(name: 'LeadJobTitle')
+    LeadMarketSegment = Shapes::StringShape.new(name: 'LeadMarketSegment')
+    LeadPhoneNumber = Shapes::StringShape.new(name: 'LeadPhoneNumber')
     LeadQualificationStatus = Shapes::StringShape.new(name: 'LeadQualificationStatus')
     LeadSourceId = Shapes::StringShape.new(name: 'LeadSourceId')
     LeadSourceName = Shapes::StringShape.new(name: 'LeadSourceName')
     LeadSourceType = Shapes::StringShape.new(name: 'LeadSourceType')
+    LeadWebsiteUrl = Shapes::StringShape.new(name: 'LeadWebsiteUrl')
     LifeCycle = Shapes::StructureShape.new(name: 'LifeCycle')
     LifeCycleForView = Shapes::StructureShape.new(name: 'LifeCycleForView')
     LifeCycleForViewNextStepsString = Shapes::StringShape.new(name: 'LifeCycleForViewNextStepsString')
@@ -277,7 +291,6 @@ module Aws::PartnerCentralSelling
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTasksSortBase = Shapes::StructureShape.new(name: 'ListTasksSortBase')
     ListTasksSortName = Shapes::StringShape.new(name: 'ListTasksSortName')
-    MarketSegment = Shapes::StringShape.new(name: 'MarketSegment')
     Marketing = Shapes::StructureShape.new(name: 'Marketing')
     MarketingSource = Shapes::StringShape.new(name: 'MarketingSource')
     MemberCompanyName = Shapes::StringShape.new(name: 'MemberCompanyName')
@@ -647,8 +660,8 @@ module Aws::PartnerCentralSelling
 
     CreateEngagementRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     CreateEngagementRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    CreateEngagementRequest.add_member(:title, Shapes::ShapeRef.new(shape: EngagementTitle, required: true, location_name: "Title"))
-    CreateEngagementRequest.add_member(:description, Shapes::ShapeRef.new(shape: EngagementDescription, required: true, location_name: "Description"))
+    CreateEngagementRequest.add_member(:title, Shapes::ShapeRef.new(shape: EngagementTitle, location_name: "Title"))
+    CreateEngagementRequest.add_member(:description, Shapes::ShapeRef.new(shape: EngagementDescription, location_name: "Description"))
     CreateEngagementRequest.add_member(:contexts, Shapes::ShapeRef.new(shape: EngagementContexts, location_name: "Contexts"))
     CreateEngagementRequest.struct_class = Types::CreateEngagementRequest
 
@@ -837,6 +850,10 @@ module Aws::PartnerCentralSelling
 
     EngagementSummaryList.member = Shapes::ShapeRef.new(shape: EngagementSummary)
 
+    EnrichmentContext.add_member(:prospecting_result_aws, Shapes::ShapeRef.new(shape: InvitationProspectingResultAws, location_name: "ProspectingResultAws"))
+    EnrichmentContext.add_member(:lead_insights, Shapes::ShapeRef.new(shape: LeadInsights, location_name: "LeadInsights"))
+    EnrichmentContext.struct_class = Types::EnrichmentContext
+
     ExpectedContractDuration.add_member(:term, Shapes::ShapeRef.new(shape: ExpectedContractDurationTerm, required: true, location_name: "Term"))
     ExpectedContractDuration.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
     ExpectedContractDuration.struct_class = Types::ExpectedContractDuration
@@ -890,6 +907,7 @@ module Aws::PartnerCentralSelling
     GetEngagementInvitationResponse.add_member(:invitation_message, Shapes::ShapeRef.new(shape: InvitationMessage, location_name: "InvitationMessage"))
     GetEngagementInvitationResponse.add_member(:engagement_description, Shapes::ShapeRef.new(shape: EngagementDescription, location_name: "EngagementDescription"))
     GetEngagementInvitationResponse.add_member(:existing_members, Shapes::ShapeRef.new(shape: EngagementMemberSummaries, location_name: "ExistingMembers"))
+    GetEngagementInvitationResponse.add_member(:enrichment_context, Shapes::ShapeRef.new(shape: EnrichmentContext, location_name: "EnrichmentContext"))
     GetEngagementInvitationResponse.struct_class = Types::GetEngagementInvitationResponse
 
     GetEngagementRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
@@ -996,17 +1014,27 @@ module Aws::PartnerCentralSelling
     Invitation.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, required: true, location_name: "Payload"))
     Invitation.struct_class = Types::Invitation
 
+    InvitationProspectingResultAws.add_member(:customer, Shapes::ShapeRef.new(shape: ProspectingResultCustomer, location_name: "Customer"))
+    InvitationProspectingResultAws.add_member(:insights, Shapes::ShapeRef.new(shape: ProspectingInsights, location_name: "Insights"))
+    InvitationProspectingResultAws.struct_class = Types::InvitationProspectingResultAws
+
     InvitationStatusList.member = Shapes::ShapeRef.new(shape: InvitationStatus)
 
     LastModifiedDate.add_member(:after_last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "AfterLastModifiedDate"))
     LastModifiedDate.add_member(:before_last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "BeforeLastModifiedDate"))
     LastModifiedDate.struct_class = Types::LastModifiedDate
 
-    LeadContact.add_member(:business_title, Shapes::ShapeRef.new(shape: JobTitle, required: true, location_name: "BusinessTitle"))
-    LeadContact.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "Email"))
+    LeadAddress.add_member(:city, Shapes::ShapeRef.new(shape: LeadAddressCityString, location_name: "City"))
+    LeadAddress.add_member(:postal_code, Shapes::ShapeRef.new(shape: LeadAddressPostalCodeString, location_name: "PostalCode"))
+    LeadAddress.add_member(:state_or_region, Shapes::ShapeRef.new(shape: LeadAddressStateOrRegionString, location_name: "StateOrRegion"))
+    LeadAddress.add_member(:country_code, Shapes::ShapeRef.new(shape: LeadCountryCode, location_name: "CountryCode"))
+    LeadAddress.struct_class = Types::LeadAddress
+
+    LeadContact.add_member(:business_title, Shapes::ShapeRef.new(shape: LeadJobTitle, required: true, location_name: "BusinessTitle"))
+    LeadContact.add_member(:email, Shapes::ShapeRef.new(shape: LeadEmail, required: true, location_name: "Email"))
     LeadContact.add_member(:first_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "FirstName"))
     LeadContact.add_member(:last_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "LastName"))
-    LeadContact.add_member(:phone, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "Phone"))
+    LeadContact.add_member(:phone, Shapes::ShapeRef.new(shape: LeadPhoneNumber, location_name: "Phone"))
     LeadContact.struct_class = Types::LeadContact
 
     LeadContext.add_member(:insights, Shapes::ShapeRef.new(shape: LeadInsights, location_name: "Insights"))
@@ -1015,40 +1043,40 @@ module Aws::PartnerCentralSelling
     LeadContext.add_member(:interactions, Shapes::ShapeRef.new(shape: LeadInteractionList, required: true, location_name: "Interactions"))
     LeadContext.struct_class = Types::LeadContext
 
-    LeadCustomer.add_member(:industry, Shapes::ShapeRef.new(shape: Industry, location_name: "Industry"))
+    LeadCustomer.add_member(:industry, Shapes::ShapeRef.new(shape: LeadIndustry, location_name: "Industry"))
     LeadCustomer.add_member(:company_name, Shapes::ShapeRef.new(shape: CompanyName, required: true, location_name: "CompanyName"))
-    LeadCustomer.add_member(:website_url, Shapes::ShapeRef.new(shape: CompanyWebsiteUrl, location_name: "WebsiteUrl"))
-    LeadCustomer.add_member(:address, Shapes::ShapeRef.new(shape: AddressSummary, required: true, location_name: "Address"))
+    LeadCustomer.add_member(:website_url, Shapes::ShapeRef.new(shape: LeadWebsiteUrl, location_name: "WebsiteUrl"))
+    LeadCustomer.add_member(:address, Shapes::ShapeRef.new(shape: LeadAddress, location_name: "Address"))
     LeadCustomer.add_member(:aws_maturity, Shapes::ShapeRef.new(shape: AwsMaturity, location_name: "AwsMaturity"))
-    LeadCustomer.add_member(:market_segment, Shapes::ShapeRef.new(shape: MarketSegment, location_name: "MarketSegment"))
+    LeadCustomer.add_member(:market_segment, Shapes::ShapeRef.new(shape: LeadMarketSegment, location_name: "MarketSegment"))
     LeadCustomer.struct_class = Types::LeadCustomer
 
     LeadInsights.add_member(:lead_readiness_score, Shapes::ShapeRef.new(shape: String, location_name: "LeadReadinessScore"))
     LeadInsights.struct_class = Types::LeadInsights
 
-    LeadInteraction.add_member(:source_type, Shapes::ShapeRef.new(shape: LeadSourceType, required: true, location_name: "SourceType"))
-    LeadInteraction.add_member(:source_id, Shapes::ShapeRef.new(shape: LeadSourceId, required: true, location_name: "SourceId"))
-    LeadInteraction.add_member(:source_name, Shapes::ShapeRef.new(shape: LeadSourceName, required: true, location_name: "SourceName"))
+    LeadInteraction.add_member(:source_type, Shapes::ShapeRef.new(shape: LeadSourceType, location_name: "SourceType"))
+    LeadInteraction.add_member(:source_id, Shapes::ShapeRef.new(shape: LeadSourceId, location_name: "SourceId"))
+    LeadInteraction.add_member(:source_name, Shapes::ShapeRef.new(shape: LeadSourceName, location_name: "SourceName"))
     LeadInteraction.add_member(:usecase, Shapes::ShapeRef.new(shape: EngagementUseCase, location_name: "Usecase"))
     LeadInteraction.add_member(:interaction_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "InteractionDate"))
-    LeadInteraction.add_member(:customer_action, Shapes::ShapeRef.new(shape: CustomerAction, required: true, location_name: "CustomerAction"))
-    LeadInteraction.add_member(:business_problem, Shapes::ShapeRef.new(shape: EngagementCustomerBusinessProblem, location_name: "BusinessProblem"))
+    LeadInteraction.add_member(:customer_action, Shapes::ShapeRef.new(shape: CustomerAction, location_name: "CustomerAction"))
+    LeadInteraction.add_member(:business_problem, Shapes::ShapeRef.new(shape: LeadBusinessProblem, location_name: "BusinessProblem"))
     LeadInteraction.add_member(:contact, Shapes::ShapeRef.new(shape: LeadContact, required: true, location_name: "Contact"))
     LeadInteraction.struct_class = Types::LeadInteraction
 
     LeadInteractionList.member = Shapes::ShapeRef.new(shape: LeadInteraction)
 
-    LeadInvitationCustomer.add_member(:industry, Shapes::ShapeRef.new(shape: Industry, location_name: "Industry"))
+    LeadInvitationCustomer.add_member(:industry, Shapes::ShapeRef.new(shape: LeadIndustry, location_name: "Industry"))
     LeadInvitationCustomer.add_member(:company_name, Shapes::ShapeRef.new(shape: CompanyName, required: true, location_name: "CompanyName"))
-    LeadInvitationCustomer.add_member(:website_url, Shapes::ShapeRef.new(shape: CompanyWebsiteUrl, location_name: "WebsiteUrl"))
-    LeadInvitationCustomer.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, required: true, location_name: "CountryCode"))
+    LeadInvitationCustomer.add_member(:website_url, Shapes::ShapeRef.new(shape: LeadWebsiteUrl, location_name: "WebsiteUrl"))
+    LeadInvitationCustomer.add_member(:country_code, Shapes::ShapeRef.new(shape: LeadCountryCode, location_name: "CountryCode"))
     LeadInvitationCustomer.add_member(:aws_maturity, Shapes::ShapeRef.new(shape: AwsMaturity, location_name: "AwsMaturity"))
-    LeadInvitationCustomer.add_member(:market_segment, Shapes::ShapeRef.new(shape: MarketSegment, location_name: "MarketSegment"))
+    LeadInvitationCustomer.add_member(:market_segment, Shapes::ShapeRef.new(shape: LeadMarketSegment, location_name: "MarketSegment"))
     LeadInvitationCustomer.struct_class = Types::LeadInvitationCustomer
 
-    LeadInvitationInteraction.add_member(:source_type, Shapes::ShapeRef.new(shape: LeadSourceType, required: true, location_name: "SourceType"))
-    LeadInvitationInteraction.add_member(:source_id, Shapes::ShapeRef.new(shape: LeadSourceId, required: true, location_name: "SourceId"))
-    LeadInvitationInteraction.add_member(:source_name, Shapes::ShapeRef.new(shape: LeadSourceName, required: true, location_name: "SourceName"))
+    LeadInvitationInteraction.add_member(:source_type, Shapes::ShapeRef.new(shape: LeadSourceType, location_name: "SourceType"))
+    LeadInvitationInteraction.add_member(:source_id, Shapes::ShapeRef.new(shape: LeadSourceId, location_name: "SourceId"))
+    LeadInvitationInteraction.add_member(:source_name, Shapes::ShapeRef.new(shape: LeadSourceName, location_name: "SourceName"))
     LeadInvitationInteraction.add_member(:usecase, Shapes::ShapeRef.new(shape: EngagementUseCase, location_name: "Usecase"))
     LeadInvitationInteraction.add_member(:contact_business_title, Shapes::ShapeRef.new(shape: JobTitle, required: true, location_name: "ContactBusinessTitle"))
     LeadInvitationInteraction.struct_class = Types::LeadInvitationInteraction
@@ -1440,13 +1468,13 @@ module Aws::PartnerCentralSelling
     ProspectingResult.add_member(:aws, Shapes::ShapeRef.new(shape: ProspectingResultAws, location_name: "Aws"))
     ProspectingResult.struct_class = Types::ProspectingResult
 
+    ProspectingResultAws.add_member(:customer, Shapes::ShapeRef.new(shape: ProspectingResultCustomer, location_name: "Customer"))
+    ProspectingResultAws.add_member(:insights, Shapes::ShapeRef.new(shape: ProspectingInsights, location_name: "Insights"))
     ProspectingResultAws.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
     ProspectingResultAws.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
     ProspectingResultAws.add_member(:task_id, Shapes::ShapeRef.new(shape: ProspectingTaskIdentifier, location_name: "TaskId"))
     ProspectingResultAws.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
     ProspectingResultAws.add_member(:task_name, Shapes::ShapeRef.new(shape: TaskName, location_name: "TaskName"))
-    ProspectingResultAws.add_member(:customer, Shapes::ShapeRef.new(shape: ProspectingResultCustomer, location_name: "Customer"))
-    ProspectingResultAws.add_member(:insights, Shapes::ShapeRef.new(shape: ProspectingInsights, location_name: "Insights"))
     ProspectingResultAws.struct_class = Types::ProspectingResultAws
 
     ProspectingResultCustomer.add_member(:account_name, Shapes::ShapeRef.new(shape: ProspectingAccountName, location_name: "AccountName"))

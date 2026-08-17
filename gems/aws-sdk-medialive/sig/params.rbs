@@ -39,7 +39,8 @@ module Aws
           password_param: ::String?,
           stream_name: ::String?,
           url: ::String?,
-          username: ::String?
+          username: ::String?,
+          virtual_source_address: ::String?
         }
       ]?,
       srt_settings: Array[

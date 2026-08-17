@@ -27,6 +27,10 @@ module Aws::DirectConnect
     AllocateTransitVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AllocateTransitVirtualInterfaceRequest')
     AllocateTransitVirtualInterfaceResult = Shapes::StructureShape.new(name: 'AllocateTransitVirtualInterfaceResult')
     AmazonAddress = Shapes::StringShape.new(name: 'AmazonAddress')
+    AsPathList = Shapes::ListShape.new(name: 'AsPathList')
+    AsPathSegment = Shapes::StructureShape.new(name: 'AsPathSegment')
+    AsPathSegmentList = Shapes::ListShape.new(name: 'AsPathSegmentList')
+    AsPathType = Shapes::StringShape.new(name: 'AsPathType')
     AssociateConnectionWithLagRequest = Shapes::StructureShape.new(name: 'AssociateConnectionWithLagRequest')
     AssociateHostedConnectionRequest = Shapes::StructureShape.new(name: 'AssociateHostedConnectionRequest')
     AssociateMacSecKeyRequest = Shapes::StructureShape.new(name: 'AssociateMacSecKeyRequest')
@@ -52,6 +56,8 @@ module Aws::DirectConnect
     CIDR = Shapes::StringShape.new(name: 'CIDR')
     Cak = Shapes::StringShape.new(name: 'Cak')
     Ckn = Shapes::StringShape.new(name: 'Ckn')
+    CommunityEntry = Shapes::StringShape.new(name: 'CommunityEntry')
+    CommunityList = Shapes::ListShape.new(name: 'CommunityList')
     ConfirmConnectionRequest = Shapes::StructureShape.new(name: 'ConfirmConnectionRequest')
     ConfirmConnectionResponse = Shapes::StructureShape.new(name: 'ConfirmConnectionResponse')
     ConfirmCustomerAgreementRequest = Shapes::StructureShape.new(name: 'ConfirmCustomerAgreementRequest')
@@ -172,6 +178,8 @@ module Aws::DirectConnect
     LagState = Shapes::StringShape.new(name: 'LagState')
     Lags = Shapes::StructureShape.new(name: 'Lags')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListVirtualInterfaceRoutesRequest = Shapes::StructureShape.new(name: 'ListVirtualInterfaceRoutesRequest')
+    ListVirtualInterfaceRoutesResponse = Shapes::StructureShape.new(name: 'ListVirtualInterfaceRoutesResponse')
     ListVirtualInterfaceTestHistoryRequest = Shapes::StructureShape.new(name: 'ListVirtualInterfaceTestHistoryRequest')
     ListVirtualInterfaceTestHistoryResponse = Shapes::StructureShape.new(name: 'ListVirtualInterfaceTestHistoryResponse')
     Loa = Shapes::StructureShape.new(name: 'Loa')
@@ -214,8 +222,16 @@ module Aws::DirectConnect
     ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
     ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
+    Route = Shapes::StructureShape.new(name: 'Route')
+    RouteCidr = Shapes::StringShape.new(name: 'RouteCidr')
+    RouteDirection = Shapes::StringShape.new(name: 'RouteDirection')
+    RouteFilterCidrString = Shapes::StringShape.new(name: 'RouteFilterCidrString')
+    RouteFilterCidrStringList = Shapes::ListShape.new(name: 'RouteFilterCidrStringList')
     RouteFilterPrefix = Shapes::StructureShape.new(name: 'RouteFilterPrefix')
     RouteFilterPrefixList = Shapes::ListShape.new(name: 'RouteFilterPrefixList')
+    RouteFilters = Shapes::StructureShape.new(name: 'RouteFilters')
+    RouteInstalledAt = Shapes::TimestampShape.new(name: 'RouteInstalledAt')
+    RouteList = Shapes::ListShape.new(name: 'RouteList')
     RouterConfig = Shapes::StringShape.new(name: 'RouterConfig')
     RouterType = Shapes::StructureShape.new(name: 'RouterType')
     RouterTypeIdentifier = Shapes::StringShape.new(name: 'RouterTypeIdentifier')
@@ -315,6 +331,14 @@ module Aws::DirectConnect
     AllocateTransitVirtualInterfaceResult.add_member(:virtual_interface, Shapes::ShapeRef.new(shape: VirtualInterface, location_name: "virtualInterface"))
     AllocateTransitVirtualInterfaceResult.struct_class = Types::AllocateTransitVirtualInterfaceResult
 
+    AsPathList.member = Shapes::ShapeRef.new(shape: LongAsn)
+
+    AsPathSegment.add_member(:path_type, Shapes::ShapeRef.new(shape: AsPathType, location_name: "pathType"))
+    AsPathSegment.add_member(:path, Shapes::ShapeRef.new(shape: AsPathList, location_name: "path"))
+    AsPathSegment.struct_class = Types::AsPathSegment
+
+    AsPathSegmentList.member = Shapes::ShapeRef.new(shape: AsPathSegment)
+
     AssociateConnectionWithLagRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     AssociateConnectionWithLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
     AssociateConnectionWithLagRequest.struct_class = Types::AssociateConnectionWithLagRequest
@@ -368,6 +392,8 @@ module Aws::DirectConnect
     BGPPeerIdList.member = Shapes::ShapeRef.new(shape: BGPPeerId)
 
     BGPPeerList.member = Shapes::ShapeRef.new(shape: BGPPeer)
+
+    CommunityList.member = Shapes::ShapeRef.new(shape: CommunityEntry)
 
     ConfirmConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     ConfirmConnectionRequest.struct_class = Types::ConfirmConnectionRequest
@@ -803,6 +829,17 @@ module Aws::DirectConnect
 
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListVirtualInterfaceRoutesRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
+    ListVirtualInterfaceRoutesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RouteFilters, location_name: "filters"))
+    ListVirtualInterfaceRoutesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
+    ListVirtualInterfaceRoutesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListVirtualInterfaceRoutesRequest.struct_class = Types::ListVirtualInterfaceRoutesRequest
+
+    ListVirtualInterfaceRoutesResponse.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
+    ListVirtualInterfaceRoutesResponse.add_member(:routes, Shapes::ShapeRef.new(shape: RouteList, location_name: "routes"))
+    ListVirtualInterfaceRoutesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListVirtualInterfaceRoutesResponse.struct_class = Types::ListVirtualInterfaceRoutesResponse
+
     ListVirtualInterfaceTestHistoryRequest.add_member(:test_id, Shapes::ShapeRef.new(shape: TestId, location_name: "testId"))
     ListVirtualInterfaceTestHistoryRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
     ListVirtualInterfaceTestHistoryRequest.add_member(:bgp_peers, Shapes::ShapeRef.new(shape: BGPPeerIdList, location_name: "bgpPeers"))
@@ -947,10 +984,30 @@ module Aws::DirectConnect
 
     ResourceTagList.member = Shapes::ShapeRef.new(shape: ResourceTag)
 
+    Route.add_member(:cidr, Shapes::ShapeRef.new(shape: RouteCidr, location_name: "cidr"))
+    Route.add_member(:route_direction, Shapes::ShapeRef.new(shape: RouteDirection, location_name: "routeDirection"))
+    Route.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
+    Route.add_member(:as_path, Shapes::ShapeRef.new(shape: AsPathSegmentList, location_name: "asPath"))
+    Route.add_member(:communities, Shapes::ShapeRef.new(shape: CommunityList, location_name: "communities"))
+    Route.add_member(:aws_logical_device_id, Shapes::ShapeRef.new(shape: AwsLogicalDeviceId, location_name: "awsLogicalDeviceId"))
+    Route.add_member(:route_installed_at, Shapes::ShapeRef.new(shape: RouteInstalledAt, location_name: "routeInstalledAt"))
+    Route.struct_class = Types::Route
+
+    RouteFilterCidrStringList.member = Shapes::ShapeRef.new(shape: RouteFilterCidrString)
+
     RouteFilterPrefix.add_member(:cidr, Shapes::ShapeRef.new(shape: CIDR, location_name: "cidr"))
     RouteFilterPrefix.struct_class = Types::RouteFilterPrefix
 
     RouteFilterPrefixList.member = Shapes::ShapeRef.new(shape: RouteFilterPrefix)
+
+    RouteFilters.add_member(:route_direction, Shapes::ShapeRef.new(shape: RouteDirection, location_name: "routeDirection"))
+    RouteFilters.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
+    RouteFilters.add_member(:cidrs, Shapes::ShapeRef.new(shape: RouteFilterCidrStringList, location_name: "cidrs"))
+    RouteFilters.add_member(:as_path, Shapes::ShapeRef.new(shape: AsPathList, location_name: "asPath"))
+    RouteFilters.add_member(:communities, Shapes::ShapeRef.new(shape: CommunityList, location_name: "communities"))
+    RouteFilters.struct_class = Types::RouteFilters
+
+    RouteList.member = Shapes::ShapeRef.new(shape: Route)
 
     RouterType.add_member(:vendor, Shapes::ShapeRef.new(shape: Vendor, location_name: "vendor"))
     RouterType.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
@@ -1184,9 +1241,9 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateConnectionWithLagRequest)
         o.output = Shapes::ShapeRef.new(shape: Connection)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:associate_hosted_connection, Seahorse::Model::Operation.new.tap do |o|
@@ -1663,6 +1720,16 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateMacSecKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateMacSecKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:list_virtual_interface_routes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVirtualInterfaceRoutes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListVirtualInterfaceRoutesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVirtualInterfaceRoutesResponse)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)

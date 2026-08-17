@@ -20,6 +20,7 @@ module Aws::TrustedAdvisor
     AccountRecommendationIdentifier = Shapes::StringShape.new(name: 'AccountRecommendationIdentifier')
     AccountRecommendationLifecycleSummary = Shapes::StructureShape.new(name: 'AccountRecommendationLifecycleSummary')
     AccountRecommendationLifecycleSummaryList = Shapes::ListShape.new(name: 'AccountRecommendationLifecycleSummaryList')
+    AwsResourceArn = Shapes::StringShape.new(name: 'AwsResourceArn')
     BatchUpdateRecommendationResourceExclusionRequest = Shapes::StructureShape.new(name: 'BatchUpdateRecommendationResourceExclusionRequest')
     BatchUpdateRecommendationResourceExclusionResponse = Shapes::StructureShape.new(name: 'BatchUpdateRecommendationResourceExclusionResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -60,6 +61,11 @@ module Aws::TrustedAdvisor
     ListRecommendationResourcesRequestNextTokenString = Shapes::StringShape.new(name: 'ListRecommendationResourcesRequestNextTokenString')
     ListRecommendationResourcesResponse = Shapes::StructureShape.new(name: 'ListRecommendationResourcesResponse')
     ListRecommendationResourcesResponseNextTokenString = Shapes::StringShape.new(name: 'ListRecommendationResourcesResponseNextTokenString')
+    ListRecommendationsForResourceRequest = Shapes::StructureShape.new(name: 'ListRecommendationsForResourceRequest')
+    ListRecommendationsForResourceRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRecommendationsForResourceRequestMaxResultsInteger')
+    ListRecommendationsForResourceRequestNextTokenString = Shapes::StringShape.new(name: 'ListRecommendationsForResourceRequestNextTokenString')
+    ListRecommendationsForResourceResponse = Shapes::StructureShape.new(name: 'ListRecommendationsForResourceResponse')
+    ListRecommendationsForResourceResponseNextTokenString = Shapes::StringShape.new(name: 'ListRecommendationsForResourceResponseNextTokenString')
     ListRecommendationsRequest = Shapes::StructureShape.new(name: 'ListRecommendationsRequest')
     ListRecommendationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRecommendationsRequestMaxResultsInteger')
     ListRecommendationsRequestNextTokenString = Shapes::StringShape.new(name: 'ListRecommendationsRequestNextTokenString')
@@ -77,6 +83,8 @@ module Aws::TrustedAdvisor
     RecommendationAwsService = Shapes::StringShape.new(name: 'RecommendationAwsService')
     RecommendationAwsServiceList = Shapes::ListShape.new(name: 'RecommendationAwsServiceList')
     RecommendationCostOptimizingAggregates = Shapes::StructureShape.new(name: 'RecommendationCostOptimizingAggregates')
+    RecommendationForResourceSummary = Shapes::StructureShape.new(name: 'RecommendationForResourceSummary')
+    RecommendationForResourceSummaryList = Shapes::ListShape.new(name: 'RecommendationForResourceSummaryList')
     RecommendationLanguage = Shapes::StringShape.new(name: 'RecommendationLanguage')
     RecommendationLifecycleStage = Shapes::StringShape.new(name: 'RecommendationLifecycleStage')
     RecommendationPillar = Shapes::StringShape.new(name: 'RecommendationPillar')
@@ -99,6 +107,7 @@ module Aws::TrustedAdvisor
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -140,6 +149,10 @@ module Aws::TrustedAdvisor
     CheckSummary.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, required: true, location_name: "awsServices"))
     CheckSummary.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, required: true, location_name: "source"))
     CheckSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "metadata"))
+    CheckSummary.add_member(:resource_arn_queryable, Shapes::ShapeRef.new(shape: Boolean, location_name: "resourceArnQueryable"))
+    CheckSummary.add_member(:aws_resource_types, Shapes::ShapeRef.new(shape: StringList, location_name: "awsResourceTypes"))
+    CheckSummary.add_member(:check_granularity, Shapes::ShapeRef.new(shape: String, location_name: "checkGranularity"))
+    CheckSummary.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, location_name: "recommendationId"))
     CheckSummary.struct_class = Types::CheckSummary
 
     CheckSummaryList.member = Shapes::ShapeRef.new(shape: CheckSummary)
@@ -226,6 +239,19 @@ module Aws::TrustedAdvisor
     ListRecommendationResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecommendationResourcesResponseNextTokenString, location_name: "nextToken"))
     ListRecommendationResourcesResponse.add_member(:recommendation_resource_summaries, Shapes::ShapeRef.new(shape: RecommendationResourceSummaryList, required: true, location_name: "recommendationResourceSummaries"))
     ListRecommendationResourcesResponse.struct_class = Types::ListRecommendationResourcesResponse
+
+    ListRecommendationsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecommendationsForResourceRequestNextTokenString, location: "querystring", location_name: "nextToken"))
+    ListRecommendationsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendationsForResourceRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListRecommendationsForResourceRequest.add_member(:aws_resource_arn, Shapes::ShapeRef.new(shape: AwsResourceArn, required: true, location: "uri", location_name: "awsResourceArn"))
+    ListRecommendationsForResourceRequest.add_member(:pillar, Shapes::ShapeRef.new(shape: RecommendationPillar, location: "querystring", location_name: "pillar"))
+    ListRecommendationsForResourceRequest.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location: "querystring", location_name: "status"))
+    ListRecommendationsForResourceRequest.add_member(:check_arn, Shapes::ShapeRef.new(shape: CheckArn, location: "querystring", location_name: "checkArn"))
+    ListRecommendationsForResourceRequest.add_member(:language, Shapes::ShapeRef.new(shape: RecommendationLanguage, location: "querystring", location_name: "language"))
+    ListRecommendationsForResourceRequest.struct_class = Types::ListRecommendationsForResourceRequest
+
+    ListRecommendationsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecommendationsForResourceResponseNextTokenString, location_name: "nextToken"))
+    ListRecommendationsForResourceResponse.add_member(:recommendation_for_resource_summaries, Shapes::ShapeRef.new(shape: RecommendationForResourceSummaryList, required: true, location_name: "recommendationForResourceSummaries"))
+    ListRecommendationsForResourceResponse.struct_class = Types::ListRecommendationsForResourceResponse
 
     ListRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecommendationsRequestNextTokenString, location: "querystring", location_name: "nextToken"))
     ListRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
@@ -329,6 +355,18 @@ module Aws::TrustedAdvisor
     RecommendationCostOptimizingAggregates.add_member(:estimated_percent_monthly_savings, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "estimatedPercentMonthlySavings"))
     RecommendationCostOptimizingAggregates.struct_class = Types::RecommendationCostOptimizingAggregates
 
+    RecommendationForResourceSummary.add_member(:check_arn, Shapes::ShapeRef.new(shape: CheckArn, required: true, location_name: "checkArn"))
+    RecommendationForResourceSummary.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: AccountRecommendationArn, required: true, location_name: "recommendationArn"))
+    RecommendationForResourceSummary.add_member(:aws_resource_arn, Shapes::ShapeRef.new(shape: AwsResourceArn, required: true, location_name: "awsResourceArn"))
+    RecommendationForResourceSummary.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, required: true, location_name: "status"))
+    RecommendationForResourceSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedAt"))
+    RecommendationForResourceSummary.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, required: true, location_name: "exclusionStatus"))
+    RecommendationForResourceSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "metadata"))
+    RecommendationForResourceSummary.add_member(:pillars, Shapes::ShapeRef.new(shape: RecommendationPillarList, required: true, location_name: "pillars"))
+    RecommendationForResourceSummary.struct_class = Types::RecommendationForResourceSummary
+
+    RecommendationForResourceSummaryList.member = Shapes::ShapeRef.new(shape: RecommendationForResourceSummary)
+
     RecommendationPillarList.member = Shapes::ShapeRef.new(shape: RecommendationPillar)
 
     RecommendationPillarSpecificAggregates.add_member(:cost_optimizing, Shapes::ShapeRef.new(shape: RecommendationCostOptimizingAggregates, location_name: "costOptimizing"))
@@ -380,6 +418,8 @@ module Aws::TrustedAdvisor
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
     StringMap.key = Shapes::ShapeRef.new(shape: String)
     StringMap.value = Shapes::ShapeRef.new(shape: String)
@@ -566,6 +606,24 @@ module Aws::TrustedAdvisor
         o.http_request_uri = "/v1/recommendations"
         o.input = Shapes::ShapeRef.new(shape: ListRecommendationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_recommendations_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecommendationsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/recommendations-for-resource/{awsResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListRecommendationsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRecommendationsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

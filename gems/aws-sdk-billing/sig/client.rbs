@@ -193,6 +193,51 @@ module Aws
                        ) -> _GetCreditsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCreditsResponseSuccess
 
+      interface _GetEnterpriseSupportChargeSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnterpriseSupportChargeSummaryResponse]
+        def payer_account_id: () -> ::String
+        def billing_month: () -> ::String
+        def billing_period_start_date: () -> ::Time
+        def billing_period_end_date: () -> ::Time
+        def is_estimated: () -> bool
+        def bill_date: () -> ::Time
+        def support_charge: () -> ::String
+        def total_support_charge: () -> ::String
+        def support_discount: () -> ::String
+        def total_support_eligible_spend: () -> ::String
+        def total_support_eligible_usage_spend: () -> ::String
+        def total_support_eligible_reserved_instance_spend: () -> ::String
+        def total_support_eligible_savings_plan_spend: () -> ::String
+        def support_charge_percentage: () -> ::String
+        def support_effective_pricing_plan: () -> Types::PricingPlan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#get_enterprise_support_charge_summary-instance_method
+      def get_enterprise_support_charge_summary: (
+                                                   billing_month: ::String
+                                                 ) -> _GetEnterpriseSupportChargeSummaryResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnterpriseSupportChargeSummaryResponseSuccess
+
+      interface _GetEnterpriseSupportContractDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnterpriseSupportContractDetailsResponse]
+        def is_contract_active: () -> bool
+        def support_allocation_method: () -> ::String
+        def support_reserved_instance_amortization_start_date: () -> ::Time
+        def support_reserved_instance_treatment_method: () -> ::String
+        def support_savings_plans_amortization_start_date: () -> ::Time
+        def support_savings_plans_treatment_method: () -> ::String
+        def support_prorate_start_date: () -> ::Time
+        def contract_payer_account_ids: () -> ::Array[Types::ContractAccount]
+        def charged_payer_account_ids: () -> ::Array[Types::ChargeAccount]
+        def additional_support_charge: () -> ::Array[Types::AdditionalCharge]
+        def additional_support_eligible_usage_spend: () -> ::Array[Types::AdditionalCharge]
+        def pricing_plans: () -> ::Array[Types::PricingPlan]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#get_enterprise_support_contract_details-instance_method
+      def get_enterprise_support_contract_details: (
+                                                     billing_month: ::String
+                                                   ) -> _GetEnterpriseSupportContractDetailsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnterpriseSupportContractDetailsResponseSuccess
+
       interface _GetResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
         def resource_arn: () -> ::String
@@ -229,6 +274,20 @@ module Aws
                                 ?next_token: ::String
                               ) -> _ListBillingViewsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBillingViewsResponseSuccess
+
+      interface _ListEnterpriseSupportLinkedAccountChargesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnterpriseSupportLinkedAccountChargesResponse]
+        def linked_account: () -> ::Array[Types::LinkedAccountCharge]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#list_enterprise_support_linked_account_charges-instance_method
+      def list_enterprise_support_linked_account_charges: (
+                                                            billing_month: ::String,
+                                                            ?account_id: ::String,
+                                                            ?max_results: ::Integer,
+                                                            ?next_token: ::String
+                                                          ) -> _ListEnterpriseSupportLinkedAccountChargesResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnterpriseSupportLinkedAccountChargesResponseSuccess
 
       interface _ListSourceViewsForBillingViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSourceViewsForBillingViewResponse]

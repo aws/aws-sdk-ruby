@@ -259,6 +259,9 @@ module Aws
                                          retention_triggers: {
                                            terminate_hook_abandon: ("retain" | "terminate")?
                                          }?
+                                       },
+                                       ?operator: {
+                                         principal: ::String
                                        }
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1043,10 +1046,13 @@ module Aws
       interface _TerminateInstanceInAutoScalingGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ActivityType]
         def activity: () -> Types::Activity
+        def activities: () -> ::Array[Types::Activity]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#terminate_instance_in_auto_scaling_group-instance_method
       def terminate_instance_in_auto_scaling_group: (
-                                                      instance_id: ::String,
+                                                      ?instance_id: ::String,
+                                                      ?instance_ids: Array[::String],
+                                                      ?auto_scaling_group_name: ::String,
                                                       should_decrement_desired_capacity: bool
                                                     ) -> _TerminateInstanceInAutoScalingGroupResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateInstanceInAutoScalingGroupResponseSuccess

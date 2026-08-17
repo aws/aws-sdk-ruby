@@ -86,6 +86,22 @@ module Aws
       }?
     }
 
+      type authorizer_logs = {
+      cloud_watch_logs: {
+        enabled: bool,
+        log_group: ::String?
+      }?,
+      firehose: {
+        delivery_stream: ::String?,
+        enabled: bool
+      }?,
+      s3: {
+        bucket: ::String?,
+        enabled: bool,
+        prefix: ::String?
+      }?
+    }
+
       type broker_logs = {
       cloud_watch_logs: {
         enabled: bool,
@@ -103,6 +119,7 @@ module Aws
     }
 
       type logging_info = {
+      authorizer_logs: Params::authorizer_logs?,
       broker_logs: Params::broker_logs
     }
 

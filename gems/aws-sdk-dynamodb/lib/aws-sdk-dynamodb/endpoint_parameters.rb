@@ -50,6 +50,11 @@ module Aws::DynamoDB
   #
   #   @return [stringArray]
   #
+  # @!attribute is_search_operation
+  #   Set to true for SearchVectors to route to the Search FQDN
+  #
+  #   @return [boolean]
+  #
   EndpointParameters = Struct.new(
     :region,
     :use_dual_stack,
@@ -59,6 +64,7 @@ module Aws::DynamoDB
     :account_id_endpoint_mode,
     :resource_arn,
     :resource_arn_list,
+    :is_search_operation,
   ) do
     include Aws::Structure
 
@@ -73,6 +79,7 @@ module Aws::DynamoDB
         'AccountIdEndpointMode' => :account_id_endpoint_mode,
         'ResourceArn' => :resource_arn,
         'ResourceArnList' => :resource_arn_list,
+        'IsSearchOperation' => :is_search_operation,
       }.freeze
     end
 
@@ -87,6 +94,7 @@ module Aws::DynamoDB
       self[:account_id_endpoint_mode] = options[:account_id_endpoint_mode]
       self[:resource_arn] = options[:resource_arn]
       self[:resource_arn_list] = options[:resource_arn_list]
+      self[:is_search_operation] = options[:is_search_operation]
     end
 
     def self.create(config, options={})

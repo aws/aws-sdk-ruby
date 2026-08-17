@@ -511,6 +511,86 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Creates an IAM role from the specified role template. The new role
+    # takes its configuration—including its name, path, trust policy, inline
+    # and managed policies, permissions boundary, tags, and maximum session
+    # duration—from the role template version that you specify. For more
+    # information about roles, see [IAM roles][1] in the *IAM User Guide*.
+    #
+    # If the template version defines parameters, use the
+    # `ReplacementValues` parameter to supply the values that the service
+    # substitutes into the role during creation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+    #
+    # @option params [required, String] :template_arn
+    #   The Amazon Resource Name (ARN) of the role template to create the role
+    #   from.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [Integer] :template_minor_version
+    #   The minor version of the role template to use. If you do not specify a
+    #   minor version, the service uses the template's default minor version.
+    #
+    # @option params [Hash<String,Types::ReplacementValueEntry>] :replacement_values
+    #   A map of values to substitute for the parameters that are defined in
+    #   the role template version. Each key is a parameter name from the
+    #   template, and each value is a structure that contains the replacement
+    #   values for that parameter.
+    #
+    # @return [Types::AcquireRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcquireRoleResponse#role #role} => Types::Role
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.acquire_role({
+    #     template_arn: "arnType", # required
+    #     template_minor_version: 1,
+    #     replacement_values: {
+    #       "stringType" => {
+    #         values: ["stringType"], # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role.path #=> String
+    #   resp.role.role_name #=> String
+    #   resp.role.role_id #=> String
+    #   resp.role.arn #=> String
+    #   resp.role.create_date #=> Time
+    #   resp.role.assume_role_policy_document #=> String
+    #   resp.role.description #=> String
+    #   resp.role.max_session_duration #=> Integer
+    #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
+    #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
+    #   resp.role.tags #=> Array
+    #   resp.role.tags[0].key #=> String
+    #   resp.role.tags[0].value #=> String
+    #   resp.role.role_last_used.last_used_date #=> Time
+    #   resp.role.role_last_used.region #=> String
+    #   resp.role.source_role_template.template_arn #=> String
+    #   resp.role.source_role_template.template_minor_version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AcquireRole AWS API Documentation
+    #
+    # @overload acquire_role(params = {})
+    # @param [Hash] params ({})
+    def acquire_role(params = {}, options = {})
+      req = build_request(:acquire_role, params)
+      req.send_request(options)
+    end
+
     # Adds a new client ID (also known as audience) to the list of client
     # IDs already registered for the specified IAM OpenID Connect (OIDC)
     # provider resource.
@@ -1491,6 +1571,8 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].tags[0].value #=> String
     #   resp.instance_profile.roles[0].role_last_used.last_used_date #=> Time
     #   resp.instance_profile.roles[0].role_last_used.region #=> String
+    #   resp.instance_profile.roles[0].source_role_template.template_arn #=> String
+    #   resp.instance_profile.roles[0].source_role_template.template_minor_version #=> Integer
     #   resp.instance_profile.tags #=> Array
     #   resp.instance_profile.tags[0].key #=> String
     #   resp.instance_profile.tags[0].value #=> String
@@ -2256,6 +2338,8 @@ module Aws::IAM
     #   resp.role.tags[0].value #=> String
     #   resp.role.role_last_used.last_used_date #=> Time
     #   resp.role.role_last_used.region #=> String
+    #   resp.role.source_role_template.template_arn #=> String
+    #   resp.role.source_role_template.template_minor_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRole AWS API Documentation
     #
@@ -2461,6 +2545,8 @@ module Aws::IAM
     #   resp.role.tags[0].value #=> String
     #   resp.role.role_last_used.last_used_date #=> Time
     #   resp.role.role_last_used.region #=> String
+    #   resp.role.source_role_template.template_arn #=> String
+    #   resp.role.source_role_template.template_minor_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRole AWS API Documentation
     #
@@ -5061,6 +5147,8 @@ module Aws::IAM
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].tags[0].value #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].role_last_used.last_used_date #=> Time
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].role_last_used.region #=> String
+    #   resp.role_detail_list[0].instance_profile_list[0].roles[0].source_role_template.template_arn #=> String
+    #   resp.role_detail_list[0].instance_profile_list[0].roles[0].source_role_template.template_minor_version #=> Integer
     #   resp.role_detail_list[0].instance_profile_list[0].tags #=> Array
     #   resp.role_detail_list[0].instance_profile_list[0].tags[0].key #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].tags[0].value #=> String
@@ -5163,6 +5251,37 @@ module Aws::IAM
     # @param [Hash] params ({})
     def get_account_password_policy(params = {}, options = {})
       req = build_request(:get_account_password_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the account-level properties for the caller's Amazon Web
+    # Services account. Account properties are configuration settings that
+    # control account-wide IAM features such as Role Manager.
+    #
+    # The service returns properties as key-value pairs in
+    # `Namespace/PropertyName` format. Each namespace groups related
+    # configuration settings. Use [PutAccountProperties][1] to modify these
+    # properties.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutAccountProperties.html
+    #
+    # @return [Types::GetAccountPropertiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountPropertiesResponse#properties #properties} => Hash&lt;String,String&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.properties #=> Hash
+    #   resp.properties["accountPropertyKeyType"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountProperties AWS API Documentation
+    #
+    # @overload get_account_properties(params = {})
+    # @param [Hash] params ({})
+    def get_account_properties(params = {}, options = {})
+      req = build_request(:get_account_properties, params)
       req.send_request(options)
     end
 
@@ -5318,7 +5437,10 @@ module Aws::IAM
     # request. Context keys can be evaluated by testing against a value in
     # an IAM policy. Use [GetContextKeysForPrincipalPolicy][2] to understand
     # what key names and values you must supply when you call
-    # [SimulatePrincipalPolicy][3].
+    # [SimulatePrincipalPolicy][3]. This operation doesn't return context
+    # keys referenced by service control policies (SCPs). Only context keys
+    # referenced by the identity-based policies attached to the specified
+    # entity, and any additional policies that you provide, are included.
     #
     #
     #
@@ -5805,6 +5927,8 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].tags[0].value #=> String
     #   resp.instance_profile.roles[0].role_last_used.last_used_date #=> Time
     #   resp.instance_profile.roles[0].role_last_used.region #=> String
+    #   resp.instance_profile.roles[0].source_role_template.template_arn #=> String
+    #   resp.instance_profile.roles[0].source_role_template.template_minor_version #=> Integer
     #   resp.instance_profile.tags #=> Array
     #   resp.instance_profile.tags[0].key #=> String
     #   resp.instance_profile.tags[0].value #=> String
@@ -6417,6 +6541,8 @@ module Aws::IAM
     #   resp.role.tags[0].value #=> String
     #   resp.role.role_last_used.last_used_date #=> Time
     #   resp.role.role_last_used.region #=> String
+    #   resp.role.source_role_template.template_arn #=> String
+    #   resp.role.source_role_template.template_minor_version #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6512,6 +6638,93 @@ module Aws::IAM
     # @param [Hash] params ({})
     def get_role_policy(params = {}, options = {})
       req = build_request(:get_role_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a version of the specified role template.
+    # Role templates define a reusable configuration—including role name and
+    # path patterns, trust policy, inline and managed policies, permissions
+    # boundary, tags, and maximum session duration—that you use to create
+    # IAM roles with [AcquireRole][1].
+    #
+    # If you do not specify a minor version, the service returns the
+    # template's default minor version.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+    #
+    # @option params [required, String] :template_arn
+    #   The Amazon Resource Name (ARN) of the role template whose version you
+    #   want to retrieve.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [Integer] :minor_version
+    #   The minor version of the role template to retrieve. If you do not
+    #   specify a minor version, the service returns the template's default
+    #   minor version.
+    #
+    # @return [Types::GetRoleTemplateVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRoleTemplateVersionResponse#role_template_version #role_template_version} => Types::RoleTemplateVersion
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_role_template_version({
+    #     template_arn: "arnType", # required
+    #     minor_version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_template_version.template_arn #=> String
+    #   resp.role_template_version.template_name #=> String
+    #   resp.role_template_version.template_version_id #=> String
+    #   resp.role_template_version.description #=> String
+    #   resp.role_template_version.major_version #=> Integer
+    #   resp.role_template_version.default_minor_version #=> Integer
+    #   resp.role_template_version.managed_by_type #=> String, one of "Service"
+    #   resp.role_template_version.managed_by_value #=> String
+    #   resp.role_template_version.enabled #=> Boolean
+    #   resp.role_template_version.minor_version #=> Integer
+    #   resp.role_template_version.role_name_pattern #=> String
+    #   resp.role_template_version.role_path_pattern #=> String
+    #   resp.role_template_version.role_description_pattern #=> String
+    #   resp.role_template_version.assume_role_policy_document_template #=> String
+    #   resp.role_template_version.inline_policy_templates #=> Array
+    #   resp.role_template_version.inline_policy_templates[0].policy_name #=> String
+    #   resp.role_template_version.inline_policy_templates[0].policy_document #=> String
+    #   resp.role_template_version.managed_policy_arns #=> Array
+    #   resp.role_template_version.managed_policy_arns[0] #=> String
+    #   resp.role_template_version.permission_boundary_arn #=> String
+    #   resp.role_template_version.parameters_definition #=> Array
+    #   resp.role_template_version.parameters_definition[0].name #=> String
+    #   resp.role_template_version.parameters_definition[0].type #=> String, one of "String", "StringList", "Number", "NumberList", "Arn", "ArnList"
+    #   resp.role_template_version.parameters_definition[0].sub_type #=> String
+    #   resp.role_template_version.parameters_definition[0].description #=> String
+    #   resp.role_template_version.parameters_definition[0].is_required #=> Boolean
+    #   resp.role_template_version.parameters_definition[0].default_value #=> String
+    #   resp.role_template_version.parameters_definition[0].immutable #=> Boolean
+    #   resp.role_template_version.role_tags_template #=> Array
+    #   resp.role_template_version.role_tags_template[0].key #=> String
+    #   resp.role_template_version.role_tags_template[0].value #=> String
+    #   resp.role_template_version.max_session_duration #=> Integer
+    #   resp.role_template_version.version_enabled #=> Boolean
+    #   resp.role_template_version.create_timestamp #=> Time
+    #   resp.role_template_version.update_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRoleTemplateVersion AWS API Documentation
+    #
+    # @overload get_role_template_version(params = {})
+    # @param [Hash] params ({})
+    def get_role_template_version(params = {}, options = {})
+      req = build_request(:get_role_template_version, params)
       req.send_request(options)
     end
 
@@ -8387,6 +8600,8 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].tags[0].value #=> String
     #   resp.instance_profiles[0].roles[0].role_last_used.last_used_date #=> Time
     #   resp.instance_profiles[0].roles[0].role_last_used.region #=> String
+    #   resp.instance_profiles[0].roles[0].source_role_template.template_arn #=> String
+    #   resp.instance_profiles[0].roles[0].source_role_template.template_minor_version #=> Integer
     #   resp.instance_profiles[0].tags #=> Array
     #   resp.instance_profiles[0].tags[0].key #=> String
     #   resp.instance_profiles[0].tags[0].value #=> String
@@ -8483,6 +8698,8 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].tags[0].value #=> String
     #   resp.instance_profiles[0].roles[0].role_last_used.last_used_date #=> Time
     #   resp.instance_profiles[0].roles[0].role_last_used.region #=> String
+    #   resp.instance_profiles[0].roles[0].source_role_template.template_arn #=> String
+    #   resp.instance_profiles[0].roles[0].source_role_template.template_minor_version #=> Integer
     #   resp.instance_profiles[0].tags #=> Array
     #   resp.instance_profiles[0].tags[0].key #=> String
     #   resp.instance_profiles[0].tags[0].value #=> String
@@ -9498,6 +9715,8 @@ module Aws::IAM
     #   resp.roles[0].tags[0].value #=> String
     #   resp.roles[0].role_last_used.last_used_date #=> Time
     #   resp.roles[0].role_last_used.region #=> String
+    #   resp.roles[0].source_role_template.template_arn #=> String
+    #   resp.roles[0].source_role_template.template_minor_version #=> Integer
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -10495,6 +10714,49 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Sets account-level properties for the caller's Amazon Web Services
+    # account. Account properties are configuration settings that control
+    # account-wide IAM features such as Role Manager.
+    #
+    # Specify properties as key-value pairs in `Namespace/PropertyName`
+    # format. All properties in a single request must belong to the same
+    # namespace. Use [GetAccountProperties][1] to view the current
+    # properties.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountProperties.html
+    #
+    # @option params [required, Hash<String,String>] :properties
+    #   A map of property key-value pairs to set. All keys must belong to the
+    #   same namespace.
+    #
+    #   Each key uses the format `Namespace/PropertyName`. The key must
+    #   contain exactly one `/` separating the namespace from the property
+    #   name, and cannot start or end with `/`.
+    #
+    #   The service validates each value based on the property key's expected
+    #   type. For example, boolean properties expect `true` or `false`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_properties({
+    #     properties: { # required
+    #       "accountPropertyKeyType" => "accountPropertyValueType",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutAccountProperties AWS API Documentation
+    #
+    # @overload put_account_properties(params = {})
+    # @param [Hash] params ({})
+    def put_account_properties(params = {}, options = {})
+      req = build_request(:put_account_properties, params)
+      req.send_request(options)
+    end
+
     # Adds or updates an inline policy document that is embedded in the
     # specified IAM group.
     #
@@ -11466,14 +11728,16 @@ module Aws::IAM
     # If the output is long, you can use `MaxItems` and `Marker` parameters
     # to paginate the results.
     #
-    # <note markdown="1"> The IAM policy simulator evaluates statements in the identity-based
-    # policy and the inputs that you provide during simulation. The policy
-    # simulator results can differ from your live Amazon Web Services
-    # environment. We recommend that you check your policies against your
-    # live Amazon Web Services environment after testing using the policy
-    # simulator to confirm that you have the desired results. For more
-    # information about using the policy simulator, see [Testing IAM
-    # policies with the IAM policy simulator ][3]in the *IAM User Guide*.
+    # <note markdown="1"> The IAM policy simulator evaluates statements in identity-based
+    # policies, service control policies (SCPs) including their condition
+    # keys and resource scoping, and the inputs that you provide during
+    # simulation. The policy simulator results can differ from your live
+    # Amazon Web Services environment. We recommend that you check your
+    # policies against your live Amazon Web Services environment after
+    # testing using the policy simulator to confirm that you have the
+    # desired results. For more information about using the policy
+    # simulator, see [Testing IAM policies with the IAM policy simulator
+    # ][3]in the *IAM User Guide*.
     #
     #  </note>
     #
@@ -11549,6 +11813,24 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length
     #   [3]: http://wikipedia.org/wiki/regex
+    #
+    # @option params [Array<Types::OrderedOrganizationPolicyType>] :ordered_organization_policy_input_list
+    #   An ordered list of service control policies (SCPs) to include in the
+    #   simulation. Each element represents one level of an Organizations
+    #   hierarchy, from the organization root to the account.
+    #
+    #   The simulator evaluates SCPs in the order that you provide, consistent
+    #   with how Organizations enforces SCPs. The first element must represent
+    #   the organization root, and the last element must represent the
+    #   account. Any elements between them represent organizational units
+    #   (OUs) in descending order.
+    #
+    #   Use this parameter to simulate the effect of an SCP hierarchy without
+    #   calling [SimulatePrincipalPolicy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html
     #
     # @option params [required, Array<String>] :action_names
     #   A list of names of API operations to evaluate in the simulation. Each
@@ -11636,13 +11918,13 @@ module Aws::IAM
     #   `arn:aws:iam::112233445566-ID:root`.
     #
     # @option params [String] :caller_arn
-    #   The ARN of the IAM user that you want to use as the simulated caller
-    #   of the API operations. `CallerArn` is required if you include a
-    #   `ResourcePolicy` so that the policy's `Principal` element has a value
-    #   to use in evaluating the policy.
+    #   The ARN of the IAM user, group, or role that you want to use as the
+    #   simulated caller of the API operations. `CallerArn` is required if you
+    #   include a `ResourcePolicy` so that the policy's `Principal` element
+    #   has a value to use in evaluating the policy.
     #
-    #   You can specify only the ARN of an IAM user. You cannot specify the
-    #   ARN of an assumed role, federated user, or a service principal.
+    #   You cannot specify the ARN of an assumed role, federated user, or a
+    #   service principal.
     #
     # @option params [Array<Types::ContextEntry>] :context_entries
     #   A list of context keys and corresponding values for the simulation to
@@ -11717,6 +11999,11 @@ module Aws::IAM
     #   resp = client.simulate_custom_policy({
     #     policy_input_list: ["policyDocumentType"], # required
     #     permissions_boundary_policy_input_list: ["policyDocumentType"],
+    #     ordered_organization_policy_input_list: [
+    #       {
+    #         service_control_policy_input_list: ["policyDocumentType"],
+    #       },
+    #     ],
     #     action_names: ["ActionNameType"], # required
     #     resource_arns: ["ResourceNameType"],
     #     resource_policy: "policyDocumentType",
@@ -11801,6 +12088,12 @@ module Aws::IAM
     # authorization to determine if the simulated policies allow or deny the
     # operations.
     #
+    # For cross-account simulations, `EvalDecisionDetails` returns the
+    # decision for each policy type (identity-based policy, resource-based
+    # policy, and permissions boundary). This helps you identify which
+    # policy type is responsible for an allow or deny decision when policies
+    # span multiple accounts.
+    #
     # **Note:** This operation discloses information about the permissions
     # granted to other users. If you do not want users to see other user's
     # permissions, then consider allowing them to use
@@ -11816,14 +12109,16 @@ module Aws::IAM
     # If the output is long, you can use the `MaxItems` and `Marker`
     # parameters to paginate the results.
     #
-    # <note markdown="1"> The IAM policy simulator evaluates statements in the identity-based
-    # policy and the inputs that you provide during simulation. The policy
-    # simulator results can differ from your live Amazon Web Services
-    # environment. We recommend that you check your policies against your
-    # live Amazon Web Services environment after testing using the policy
-    # simulator to confirm that you have the desired results. For more
-    # information about using the policy simulator, see [Testing IAM
-    # policies with the IAM policy simulator ][3]in the *IAM User Guide*.
+    # <note markdown="1"> The IAM policy simulator evaluates statements in identity-based
+    # policies, service control policies (SCPs) including their condition
+    # keys and resource scoping, and the inputs that you provide during
+    # simulation. The policy simulator results can differ from your live
+    # Amazon Web Services environment. We recommend that you check your
+    # policies against your live Amazon Web Services environment after
+    # testing using the policy simulator to confirm that you have the
+    # desired results. For more information about using the policy
+    # simulator, see [Testing IAM policies with the IAM policy simulator
+    # ][3]in the *IAM User Guide*.
     #
     #  </note>
     #
@@ -11911,6 +12206,27 @@ module Aws::IAM
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length
     #   [3]: http://wikipedia.org/wiki/regex
     #
+    # @option params [Array<Types::PolicyIdentifier>] :policy_exclusion_list
+    #   A list of policies to exclude from the simulation. Use this parameter
+    #   to test what the simulation result would be if a policy were removed,
+    #   without changing which policies are actually attached to the principal
+    #   identified by `PolicySourceArn`.
+    #
+    #   Each entry is a [PolicyIdentifier][1] that identifies one or more
+    #   policies to exclude by policy type, by Amazon Resource Name (ARN), or
+    #   by the name of an inline policy and the entity it is attached to.
+    #
+    #   Syntactically invalid identifiers, such as malformed ARNs or wildcards
+    #   in disallowed positions, cause the request to fail with an
+    #   `InvalidInput` error. Syntactically valid identifiers that don't
+    #   match any attached policy are ignored. Resource control policies
+    #   (RCPs) are not supported in this release; identifiers that target RCPs
+    #   are also ignored.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_PolicyIdentifier.html
+    #
     # @option params [required, Array<String>] :action_names
     #   A list of names of API operations to evaluate in the simulation. Each
     #   operation is evaluated for each resource. Each operation must include
@@ -11987,22 +12303,24 @@ module Aws::IAM
     #   `CallerArn`.
     #
     # @option params [String] :caller_arn
-    #   The ARN of the IAM user that you want to specify as the simulated
-    #   caller of the API operations. If you do not specify a `CallerArn`, it
-    #   defaults to the ARN of the user that you specify in `PolicySourceArn`,
-    #   if you specified a user. If you include both a `PolicySourceArn` (for
-    #   example, `arn:aws:iam::123456789012:user/David`) and a `CallerArn`
-    #   (for example, `arn:aws:iam::123456789012:user/Bob`), the result is
-    #   that you simulate calling the API operations as Bob, as if Bob had
-    #   David's policies.
+    #   The ARN of the IAM user, group, or role that you want to specify as
+    #   the simulated caller of the API operations. If you do not specify a
+    #   `CallerArn`, it defaults to the ARN of the user, group, or role that
+    #   you specify in `PolicySourceArn`. If you include both a
+    #   `PolicySourceArn` (for example,
+    #   `arn:aws:iam::123456789012:user/David`) and a `CallerArn` (for
+    #   example, `arn:aws:iam::123456789012:user/Bob`), the result is that you
+    #   simulate calling the API operations as Bob, as if Bob had David's
+    #   policies.
     #
-    #   You can specify only the ARN of an IAM user. You cannot specify the
-    #   ARN of an assumed role, federated user, or a service principal.
+    #   You can specify the ARN of an IAM user, group, or role. You cannot
+    #   specify the ARN of an assumed role, federated user, or a service
+    #   principal.
     #
     #   `CallerArn` is required if you include a `ResourcePolicy` and the
-    #   `PolicySourceArn` is not the ARN for an IAM user. This is required so
-    #   that the resource-based policy's `Principal` element has a value to
-    #   use in evaluating the policy.
+    #   `PolicySourceArn` is not the ARN for an IAM user, group, or role. This
+    #   is required so that the resource-based policy's `Principal` element
+    #   has a value to use in evaluating the policy.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
     #   in the *Amazon Web Services General Reference*.
@@ -12085,6 +12403,17 @@ module Aws::IAM
     #     policy_source_arn: "arnType", # required
     #     policy_input_list: ["policyDocumentType"],
     #     permissions_boundary_policy_input_list: ["policyDocumentType"],
+    #     policy_exclusion_list: [
+    #       {
+    #         policy_type: "inline", # accepts inline, aws-managed, user-managed, permission-boundary, scp, rcp
+    #         policy_arn: "arnType",
+    #         inline_policy_identifier: {
+    #           policy_name: "policyNameType", # required
+    #           attachment_type: "user", # required, accepts user, group, role
+    #           attachment_name: "AttachmentName", # required
+    #         },
+    #       },
+    #     ],
     #     action_names: ["ActionNameType"], # required
     #     resource_arns: ["ResourceNameType"],
     #     resource_policy: "policyDocumentType",
@@ -13874,6 +14203,8 @@ module Aws::IAM
     #   resp.role.tags[0].value #=> String
     #   resp.role.role_last_used.last_used_date #=> Time
     #   resp.role.role_last_used.region #=> String
+    #   resp.role.source_role_template.template_arn #=> String
+    #   resp.role.source_role_template.template_minor_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescription AWS API Documentation
     #
@@ -14726,7 +15057,7 @@ module Aws::IAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.152.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

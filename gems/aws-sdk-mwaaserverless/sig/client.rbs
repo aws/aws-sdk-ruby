@@ -98,6 +98,13 @@ module Aws
                                object_key: ::String,
                                version_id: ::String?
                              },
+                             ?code: {
+                               s3_location: {
+                                 bucket: ::String,
+                                 object_key: ::String,
+                                 version_id: ::String?
+                               }?
+                             },
                              role_arn: ::String,
                              ?description: ::String,
                              ?encryption_configuration: {
@@ -168,6 +175,8 @@ module Aws
         def engine_version: () -> ::Integer
         def workflow_status: () -> ("READY" | "DELETING")
         def definition_s3_location: () -> Types::DefinitionS3Location
+        def code: () -> Types::Code
+        def code_snapshotted_at: () -> ::Time
         def schedule_configuration: () -> Types::ScheduleConfiguration
         def role_arn: () -> ::String
         def network_configuration: () -> Types::NetworkConfiguration
@@ -324,6 +333,13 @@ module Aws
                                bucket: ::String,
                                object_key: ::String,
                                version_id: ::String?
+                             },
+                             ?code: {
+                               s3_location: {
+                                 bucket: ::String,
+                                 object_key: ::String,
+                                 version_id: ::String?
+                               }?
                              },
                              role_arn: ::String,
                              ?description: ::String,

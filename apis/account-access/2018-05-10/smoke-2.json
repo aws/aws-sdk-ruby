@@ -1,0 +1,82 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListEntitlementsWithFilters",
+    "operationName" : "ListEntitlements",
+    "input" : {
+      "applicationArn" : "arn:aws:account-access:us-east-1:123456789012:application/test-app-1234567890abcdef",
+      "filter" : {
+        "principalRole" : {
+          "account" : "123456789012",
+          "principal" : {
+            "identityCenter" : {
+              "userId" : "12345678-1234-1234-1234-123456789012"
+            }
+          }
+        }
+      },
+      "maxResults" : 10
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetApplicationUnauthorized",
+    "operationName" : "GetApplication",
+    "input" : {
+      "applicationArn" : "arn:aws:account-access:us-east-1:123456789012:application/unauthorized-app-0123"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetEntitlementUnauthorized",
+    "operationName" : "GetEntitlement",
+    "input" : {
+      "applicationArn" : "arn:aws:account-access:us-east-1:123456789012:application/test-app-1234567890abcdef",
+      "entitlementId" : "entitlement-smoke-test-id"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListApplicationsSuccess",
+    "operationName" : "ListApplications",
+    "input" : {
+      "maxResults" : 1
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

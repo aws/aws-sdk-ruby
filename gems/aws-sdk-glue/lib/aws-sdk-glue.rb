@@ -54,7 +54,7 @@ module Aws::Glue
   autoload :EndpointProvider, 'aws-sdk-glue/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-glue/endpoints'
 
-  GEM_VERSION = '1.266.0'
+  GEM_VERSION = '1.270.0'
 
 end
 

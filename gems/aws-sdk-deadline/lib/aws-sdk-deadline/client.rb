@@ -4375,7 +4375,7 @@ module Aws::Deadline
     #   resp.statistics[0].job_id #=> String
     #   resp.statistics[0].job_name #=> String
     #   resp.statistics[0].user_id #=> String
-    #   resp.statistics[0].usage_type #=> String, one of "COMPUTE", "LICENSE"
+    #   resp.statistics[0].usage_type #=> String, one of "COMPUTE", "LICENSE", "PERSISTENT_VOLUME"
     #   resp.statistics[0].license_product #=> String
     #   resp.statistics[0].instance_type #=> String
     #   resp.statistics[0].count #=> Integer
@@ -8362,7 +8362,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

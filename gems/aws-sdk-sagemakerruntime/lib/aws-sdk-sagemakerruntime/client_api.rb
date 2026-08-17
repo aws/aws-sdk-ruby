@@ -43,6 +43,7 @@ module Aws::SageMakerRuntime
     NewSessionResponseHeader = Shapes::StringShape.new(name: 'NewSessionResponseHeader')
     PartBlob = Shapes::BlobShape.new(name: 'PartBlob')
     PayloadPart = Shapes::StructureShape.new(name: 'PayloadPart')
+    PrefixAwareIdHeader = Shapes::StringShape.new(name: 'PrefixAwareIdHeader')
     RequestTTLSecondsHeader = Shapes::IntegerShape.new(name: 'RequestTTLSecondsHeader')
     ResponseStream = Shapes::StructureShape.new(name: 'ResponseStream')
     S3OutputPathExtensionHeader = Shapes::StringShape.new(name: 'S3OutputPathExtensionHeader')
@@ -96,6 +97,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointInput.add_member(:enable_explanations, Shapes::ShapeRef.new(shape: EnableExplanationsHeader, location: "header", location_name: "X-Amzn-SageMaker-Enable-Explanations"))
     InvokeEndpointInput.add_member(:inference_component_name, Shapes::ShapeRef.new(shape: InferenceComponentHeader, location: "header", location_name: "X-Amzn-SageMaker-Inference-Component"))
     InvokeEndpointInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionIdOrNewSessionConstantHeader, location: "header", location_name: "X-Amzn-SageMaker-Session-Id"))
+    InvokeEndpointInput.add_member(:prefix_aware_id, Shapes::ShapeRef.new(shape: PrefixAwareIdHeader, location: "header", location_name: "X-Amzn-SageMaker-Prefix-Aware-Id"))
     InvokeEndpointInput.struct_class = Types::InvokeEndpointInput
     InvokeEndpointInput[:payload] = :body
     InvokeEndpointInput[:payload_member] = InvokeEndpointInput.member(:body)
@@ -120,6 +122,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointWithResponseStreamInput.add_member(:inference_id, Shapes::ShapeRef.new(shape: InferenceId, location: "header", location_name: "X-Amzn-SageMaker-Inference-Id"))
     InvokeEndpointWithResponseStreamInput.add_member(:inference_component_name, Shapes::ShapeRef.new(shape: InferenceComponentHeader, location: "header", location_name: "X-Amzn-SageMaker-Inference-Component"))
     InvokeEndpointWithResponseStreamInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionIdHeader, location: "header", location_name: "X-Amzn-SageMaker-Session-Id"))
+    InvokeEndpointWithResponseStreamInput.add_member(:prefix_aware_id, Shapes::ShapeRef.new(shape: PrefixAwareIdHeader, location: "header", location_name: "X-Amzn-SageMaker-Prefix-Aware-Id"))
     InvokeEndpointWithResponseStreamInput.struct_class = Types::InvokeEndpointWithResponseStreamInput
     InvokeEndpointWithResponseStreamInput[:payload] = :body
     InvokeEndpointWithResponseStreamInput[:payload_member] = InvokeEndpointWithResponseStreamInput.member(:body)

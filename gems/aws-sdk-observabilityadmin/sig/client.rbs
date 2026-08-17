@@ -186,6 +186,8 @@ module Aws
         def last_update_time_stamp: () -> ::Integer
         def rule_health: () -> ("Healthy" | "Unhealthy" | "Provisioning")
         def failure_reason: () -> ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
+        def tag_propagation_status: () -> ("Healthy" | "Unhealthy")
+        def tag_propagation_failure_reason: () -> ("RoleNotAssumable" | "RoleLacksPermissions")
         def centralization_rule: () -> Types::CentralizationRule
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_centralization_rule_for_organization-instance_method

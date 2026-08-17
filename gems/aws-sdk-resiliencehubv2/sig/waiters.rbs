@@ -32,7 +32,8 @@ module Aws
 
         def wait: (
                     ?service_arn: ::String,
-                    ?report_type: ("FAILURE_MODE"),
+                    ?report_type: ("FAILURE_MODE" | "TESTING"),
+                    ?test_run_id: ::String,
                     ?max_results: ::Integer,
                     ?next_token: ::String
                   ) -> Client::_ListReportsResponseSuccess

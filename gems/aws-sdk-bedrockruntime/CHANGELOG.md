@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2026-07-31)
+------------------
+
+* Feature - Added support for mid-conversation tool changes in the Amazon Bedrock Converse and ConverseStream APIs
+
 1.82.0 (2026-07-09)
 ------------------
 

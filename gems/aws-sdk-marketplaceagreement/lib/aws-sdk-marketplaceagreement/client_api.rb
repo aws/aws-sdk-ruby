@@ -149,6 +149,7 @@ module Aws::MarketplaceAgreement
     ListBillingAdjustmentRequestsInput = Shapes::StructureShape.new(name: 'ListBillingAdjustmentRequestsInput')
     ListBillingAdjustmentRequestsOutput = Shapes::StructureShape.new(name: 'ListBillingAdjustmentRequestsOutput')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NetPaymentTerm = Shapes::StructureShape.new(name: 'NetPaymentTerm')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OfferId = Shapes::StringShape.new(name: 'OfferId')
     OfferSetId = Shapes::StringShape.new(name: 'OfferSetId')
@@ -276,6 +277,7 @@ module Aws::MarketplaceAgreement
     AcceptedTerm.add_member(:free_trial_pricing_term, Shapes::ShapeRef.new(shape: FreeTrialPricingTerm, location_name: "freeTrialPricingTerm"))
     AcceptedTerm.add_member(:fixed_upfront_pricing_term, Shapes::ShapeRef.new(shape: FixedUpfrontPricingTerm, location_name: "fixedUpfrontPricingTerm"))
     AcceptedTerm.add_member(:variable_payment_term, Shapes::ShapeRef.new(shape: VariablePaymentTerm, location_name: "variablePaymentTerm"))
+    AcceptedTerm.add_member(:net_payment_term, Shapes::ShapeRef.new(shape: NetPaymentTerm, location_name: "netPaymentTerm"))
     AcceptedTerm.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AcceptedTerm.add_member_subclass(:legal_term, Types::AcceptedTerm::LegalTerm)
     AcceptedTerm.add_member_subclass(:support_term, Types::AcceptedTerm::SupportTerm)
@@ -289,6 +291,7 @@ module Aws::MarketplaceAgreement
     AcceptedTerm.add_member_subclass(:free_trial_pricing_term, Types::AcceptedTerm::FreeTrialPricingTerm)
     AcceptedTerm.add_member_subclass(:fixed_upfront_pricing_term, Types::AcceptedTerm::FixedUpfrontPricingTerm)
     AcceptedTerm.add_member_subclass(:variable_payment_term, Types::AcceptedTerm::VariablePaymentTerm)
+    AcceptedTerm.add_member_subclass(:net_payment_term, Types::AcceptedTerm::NetPaymentTerm)
     AcceptedTerm.add_member_subclass(:unknown, Types::AcceptedTerm::Unknown)
     AcceptedTerm.struct_class = Types::AcceptedTerm
 
@@ -730,6 +733,11 @@ module Aws::MarketplaceAgreement
     ListBillingAdjustmentRequestsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListBillingAdjustmentRequestsOutput.add_member(:items, Shapes::ShapeRef.new(shape: BillingAdjustmentSummaryList, required: true, location_name: "items"))
     ListBillingAdjustmentRequestsOutput.struct_class = Types::ListBillingAdjustmentRequestsOutput
+
+    NetPaymentTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
+    NetPaymentTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, location_name: "id"))
+    NetPaymentTerm.add_member(:payment_due_period, Shapes::ShapeRef.new(shape: BoundedString, location_name: "paymentDuePeriod"))
+    NetPaymentTerm.struct_class = Types::NetPaymentTerm
 
     PaymentRequestSummary.add_member(:payment_request_id, Shapes::ShapeRef.new(shape: PaymentRequestId, location_name: "paymentRequestId"))
     PaymentRequestSummary.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))

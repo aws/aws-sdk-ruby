@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2026-08-13)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now supports terminating multiple instances in a single TerminateInstanceInAutoScalingGroup call via the new InstanceIds parameter, returning an Activities list. LaunchInstances now returns IdempotentCallInProgressFault for duplicate client tokens.
+
+1.164.0 (2026-08-06)
+------------------
+
+* Feature - EC2 Auto Scaling now supports being managed by other AWS services via the operator field.
+
 1.163.0 (2026-07-09)
 ------------------
 

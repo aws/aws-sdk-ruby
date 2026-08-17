@@ -227,6 +227,7 @@ module Aws::MediaPackageV2
     SpekeKeyProviderRoleArnString = Shapes::StringShape.new(name: 'SpekeKeyProviderRoleArnString')
     SpekeKeyProviderUrlString = Shapes::StringShape.new(name: 'SpekeKeyProviderUrlString')
     StartTag = Shapes::StructureShape.new(name: 'StartTag')
+    StreamNameOutputMode = Shapes::StringShape.new(name: 'StreamNameOutputMode')
     String = Shapes::StringShape.new(name: 'String')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagArn = Shapes::StringShape.new(name: 'TagArn')
@@ -437,6 +438,7 @@ module Aws::MediaPackageV2
     CreateOriginEndpointRequest.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: CreateMssManifests, location_name: "MssManifests"))
     CreateOriginEndpointRequest.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     CreateOriginEndpointRequest.add_member(:uri_separator, Shapes::ShapeRef.new(shape: UriSeparator, location_name: "UriSeparator"))
+    CreateOriginEndpointRequest.add_member(:stream_name_output_mode, Shapes::ShapeRef.new(shape: StreamNameOutputMode, location_name: "StreamNameOutputMode"))
     CreateOriginEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateOriginEndpointRequest.struct_class = Types::CreateOriginEndpointRequest
 
@@ -456,6 +458,7 @@ module Aws::MediaPackageV2
     CreateOriginEndpointResponse.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: GetMssManifests, location_name: "MssManifests"))
     CreateOriginEndpointResponse.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     CreateOriginEndpointResponse.add_member(:uri_separator, Shapes::ShapeRef.new(shape: UriSeparator, location_name: "UriSeparator"))
+    CreateOriginEndpointResponse.add_member(:stream_name_output_mode, Shapes::ShapeRef.new(shape: StreamNameOutputMode, location_name: "StreamNameOutputMode"))
     CreateOriginEndpointResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     CreateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateOriginEndpointResponse.struct_class = Types::CreateOriginEndpointResponse
@@ -736,6 +739,7 @@ module Aws::MediaPackageV2
     GetOriginEndpointResponse.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: GetMssManifests, location_name: "MssManifests"))
     GetOriginEndpointResponse.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     GetOriginEndpointResponse.add_member(:uri_separator, Shapes::ShapeRef.new(shape: UriSeparator, location_name: "UriSeparator"))
+    GetOriginEndpointResponse.add_member(:stream_name_output_mode, Shapes::ShapeRef.new(shape: StreamNameOutputMode, location_name: "StreamNameOutputMode"))
     GetOriginEndpointResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     GetOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetOriginEndpointResponse.struct_class = Types::GetOriginEndpointResponse
@@ -880,6 +884,7 @@ module Aws::MediaPackageV2
     OriginEndpointListConfiguration.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: ListMssManifests, location_name: "MssManifests"))
     OriginEndpointListConfiguration.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     OriginEndpointListConfiguration.add_member(:uri_separator, Shapes::ShapeRef.new(shape: UriSeparator, location_name: "UriSeparator"))
+    OriginEndpointListConfiguration.add_member(:stream_name_output_mode, Shapes::ShapeRef.new(shape: StreamNameOutputMode, location_name: "StreamNameOutputMode"))
     OriginEndpointListConfiguration.struct_class = Types::OriginEndpointListConfiguration
 
     OriginEndpointsList.member = Shapes::ShapeRef.new(shape: OriginEndpointListConfiguration)
@@ -1042,6 +1047,7 @@ module Aws::MediaPackageV2
     UpdateOriginEndpointRequest.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: CreateMssManifests, location_name: "MssManifests"))
     UpdateOriginEndpointRequest.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     UpdateOriginEndpointRequest.add_member(:uri_separator, Shapes::ShapeRef.new(shape: UriSeparator, location_name: "UriSeparator"))
+    UpdateOriginEndpointRequest.add_member(:stream_name_output_mode, Shapes::ShapeRef.new(shape: StreamNameOutputMode, location_name: "StreamNameOutputMode"))
     UpdateOriginEndpointRequest.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location: "header", location_name: "x-amzn-update-if-match"))
     UpdateOriginEndpointRequest.struct_class = Types::UpdateOriginEndpointRequest
 
@@ -1060,6 +1066,7 @@ module Aws::MediaPackageV2
     UpdateOriginEndpointResponse.add_member(:mss_manifests, Shapes::ShapeRef.new(shape: GetMssManifests, location_name: "MssManifests"))
     UpdateOriginEndpointResponse.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     UpdateOriginEndpointResponse.add_member(:uri_separator, Shapes::ShapeRef.new(shape: UriSeparator, location_name: "UriSeparator"))
+    UpdateOriginEndpointResponse.add_member(:stream_name_output_mode, Shapes::ShapeRef.new(shape: StreamNameOutputMode, location_name: "StreamNameOutputMode"))
     UpdateOriginEndpointResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     UpdateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     UpdateOriginEndpointResponse.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: GetDashManifests, location_name: "DashManifests"))

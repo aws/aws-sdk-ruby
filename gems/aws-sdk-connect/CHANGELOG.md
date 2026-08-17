@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.272.0 (2026-08-17)
+------------------
+
+* Feature - This release adds new APIs to create, describe, update, delete, and list extraction definitions, enabling customers to manage lifecycle of extraction definition resources. Additionally, this release adds new event sources for Rules related to ACW and new action to Extract Information.
+
+1.271.0 (2026-08-13)
+------------------
+
+* Feature - Adds the StartAssistantContact API to start chat contacts handled by an AI agent. Adds SegmentAttributes to StartWebRTCContact, and corrects its error response to now receive AccessDeniedException (previously returned as an internal server error due to a missing error declaration).
+
+1.270.0 (2026-08-11)
+------------------
+
+* Feature - Seven new APIs for managing custom metrics, including create, describe, update, and delete. Using Custom Metrics, customers of Amazon Connect Customer can tailor analytics dashboards to their needs by applying custom thresholds, filters, and calculations to one or more out of the box measurements.
+
+1.269.0 (2026-08-10)
+------------------
+
+* Feature - Added Malay language option to use AI to automatically fill evaluation forms in Malay
+
+1.268.0 (2026-08-07)
+------------------
+
+* Feature - Supports updating the task template associated with in-progress task contacts using the new UpdateContactTaskTemplate API. This enables supervisors and developers to dynamically reassign task templates without creating a new task.
+
+1.267.0 (2026-08-04)
+------------------
+
+* Feature - Amazon Connect Customer now supports up to 50 attachments per email, increased from the previous limit of 10. The individual maximum attachment size limit of 20 MB and the total email size limit of 25 MB still hold true.
+
+1.266.0 (2026-07-28)
+------------------
+
+* Feature - Documentation updates for SearchRules, AssociateRoutingProfileQueues, CreateRoutingProfile, AssociateContactWithUser CreateTaskTemplate, and UpdateTaskTemplate
+
 1.265.0 (2026-07-14)
 ------------------
 

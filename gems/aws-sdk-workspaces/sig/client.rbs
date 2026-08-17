@@ -1035,7 +1035,8 @@ module Aws
                                       resource_id: ::String,
                                       client_properties: {
                                         reconnect_enabled: ("ENABLED" | "DISABLED")?,
-                                        log_upload_enabled: ("ENABLED" | "DISABLED")?
+                                        log_upload_enabled: ("ENABLED" | "DISABLED")?,
+                                        client_experience_policy: ::String?
                                       }
                                     ) -> _ModifyClientPropertiesResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClientPropertiesResponseSuccess

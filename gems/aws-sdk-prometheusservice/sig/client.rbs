@@ -186,7 +186,14 @@ module Aws
                               target_role_arn: ::String?
                             },
                             ?client_token: ::String,
-                            ?tags: Hash[::String, ::String]
+                            ?tags: Hash[::String, ::String],
+                            ?exporters: Array[
+                              {
+                                open_search_configuration: {
+                                  domain_arn: ::String
+                                }?
+                              }
+                            ]
                           ) -> _CreateScraperResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScraperResponseSuccess
 
@@ -588,7 +595,14 @@ module Aws
                               source_role_arn: ::String?,
                               target_role_arn: ::String?
                             },
-                            ?client_token: ::String
+                            ?client_token: ::String,
+                            ?exporters: Array[
+                              {
+                                open_search_configuration: {
+                                  domain_arn: ::String
+                                }?
+                              }
+                            ]
                           ) -> _UpdateScraperResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScraperResponseSuccess
 

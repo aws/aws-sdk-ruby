@@ -371,7 +371,8 @@ module Aws::ACMPCA
     #   requests.
     #
     #   This parameter should not be confused with the `SigningAlgorithm`
-    #   parameter used to sign certificates when they are issued.
+    #   parameter of the `IssueCertificate` API action, which is used to
+    #   sign certificates when they are issued.
     #   @return [String]
     #
     # @!attribute [rw] subject
@@ -774,7 +775,7 @@ module Aws::ACMPCA
     #
     #
     #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
-    #   [2]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-policies
+    #   [2]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies
     #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #   @return [String]
     #
@@ -801,7 +802,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-bpa
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-bpa
     #   @return [String]
     #
     # @!attribute [rw] crl_distribution_point_extension_configuration
@@ -815,15 +816,14 @@ module Aws::ACMPCA
     #   Specifies whether to create a complete or partitioned CRL. This
     #   setting determines the maximum number of certificates that the
     #   certificate authority can issue and revoke. For more information,
-    #   see [Amazon Web Services Private CA
-    #   quotas](privateca/latest/userguide/pca.html#limits_pca).
+    #   see [Amazon Web Services Private CA quotas][1].
     #
     #   * `COMPLETE` - The default setting. Amazon Web Services Private CA
     #     maintains a single CRL ﬁle for all unexpired certiﬁcates issued by
     #     a CA that have been revoked for any reason. Each certiﬁcate that
     #     Amazon Web Services Private CA issues is bound to a speciﬁc CRL
     #     through its CRL distribution point (CDP) extension, deﬁned in [
-    #     RFC 5280][1].
+    #     RFC 5280][2].
     #
     #   * `PARTITIONED` - Compared to complete CRLs, partitioned CRLs
     #     dramatically increase the number of certiﬁcates your private CA
@@ -837,7 +837,8 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.9
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/pca.html#limits_pca
+    #   [2]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.9
     #   @return [String]
     #
     # @!attribute [rw] custom_path
@@ -874,7 +875,7 @@ module Aws::ACMPCA
     #   that CA unless otherwise specified through CSR or API passthrough.
     #
     #   <note markdown="1"> Only set this if you have another way to distribute the CRL
-    #   Distribution Points ffor certificates issued by your CA, such as the
+    #   Distribution Points for certificates issued by your CA, such as the
     #   Matter Distributed Compliance Ledger
     #
     #    This configuration cannot be enabled with a custom CNAME set.

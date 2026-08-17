@@ -1038,6 +1038,158 @@ module Aws::Billing
       req.send_request(options)
     end
 
+    # Returns a summary of Enterprise Support data aggregated across all
+    # accounts in the Enterprise Support profile.
+    #
+    # @option params [required, String] :billing_month
+    #   The billing month in YYYY-MM format. This must be a month in the past.
+    #
+    # @return [Types::GetEnterpriseSupportChargeSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#payer_account_id #payer_account_id} => String
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#billing_month #billing_month} => String
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#billing_period_start_date #billing_period_start_date} => Time
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#billing_period_end_date #billing_period_end_date} => Time
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#is_estimated #is_estimated} => Boolean
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#bill_date #bill_date} => Time
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#support_charge #support_charge} => String
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#total_support_charge #total_support_charge} => String
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#support_discount #support_discount} => String
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#total_support_eligible_spend #total_support_eligible_spend} => String
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#total_support_eligible_usage_spend #total_support_eligible_usage_spend} => String
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#total_support_eligible_reserved_instance_spend #total_support_eligible_reserved_instance_spend} => String
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#total_support_eligible_savings_plan_spend #total_support_eligible_savings_plan_spend} => String
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#support_charge_percentage #support_charge_percentage} => String
+    #   * {Types::GetEnterpriseSupportChargeSummaryResponse#support_effective_pricing_plan #support_effective_pricing_plan} => Types::PricingPlan
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_enterprise_support_charge_summary({
+    #     billing_month: "EnterpriseSupportBillingMonth", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payer_account_id #=> String
+    #   resp.billing_month #=> String
+    #   resp.billing_period_start_date #=> Time
+    #   resp.billing_period_end_date #=> Time
+    #   resp.is_estimated #=> Boolean
+    #   resp.bill_date #=> Time
+    #   resp.support_charge #=> String
+    #   resp.total_support_charge #=> String
+    #   resp.support_discount #=> String
+    #   resp.total_support_eligible_spend #=> String
+    #   resp.total_support_eligible_usage_spend #=> String
+    #   resp.total_support_eligible_reserved_instance_spend #=> String
+    #   resp.total_support_eligible_savings_plan_spend #=> String
+    #   resp.support_charge_percentage #=> String
+    #   resp.support_effective_pricing_plan.pricing_plan_id #=> String
+    #   resp.support_effective_pricing_plan.name #=> String
+    #   resp.support_effective_pricing_plan.description #=> String
+    #   resp.support_effective_pricing_plan.start_date #=> Time
+    #   resp.support_effective_pricing_plan.end_date #=> Time
+    #   resp.support_effective_pricing_plan.plan_discount_percent #=> String
+    #   resp.support_effective_pricing_plan.discount_applies_to_minimum_charge #=> Boolean
+    #   resp.support_effective_pricing_plan.minimum_charge #=> String
+    #   resp.support_effective_pricing_plan.tiered #=> String
+    #   resp.support_effective_pricing_plan.tiers #=> Array
+    #   resp.support_effective_pricing_plan.tiers[0].tier_minimum #=> String
+    #   resp.support_effective_pricing_plan.tiers[0].tier_maximum #=> String
+    #   resp.support_effective_pricing_plan.tiers[0].base_charge #=> String
+    #   resp.support_effective_pricing_plan.tiers[0].additional_percentage_of_aggregate_charges #=> String
+    #   resp.support_effective_pricing_plan.tiers[0].aggregate_charges_adjustment #=> String
+    #   resp.support_effective_pricing_plan.tiers[0].incremental #=> Boolean
+    #   resp.support_effective_pricing_plan.tiers[0].increment #=> String
+    #   resp.support_effective_pricing_plan.tiers[0].increment_charge #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetEnterpriseSupportChargeSummary AWS API Documentation
+    #
+    # @overload get_enterprise_support_charge_summary(params = {})
+    # @param [Hash] params ({})
+    def get_enterprise_support_charge_summary(params = {}, options = {})
+      req = build_request(:get_enterprise_support_charge_summary, params)
+      req.send_request(options)
+    end
+
+    # Returns Enterprise Support contract details.
+    #
+    # @option params [required, String] :billing_month
+    #   The billing month in YYYY-MM format. This must be a month in the past.
+    #
+    # @return [Types::GetEnterpriseSupportContractDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#is_contract_active #is_contract_active} => Boolean
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#support_allocation_method #support_allocation_method} => String
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#support_reserved_instance_amortization_start_date #support_reserved_instance_amortization_start_date} => Time
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#support_reserved_instance_treatment_method #support_reserved_instance_treatment_method} => String
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#support_savings_plans_amortization_start_date #support_savings_plans_amortization_start_date} => Time
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#support_savings_plans_treatment_method #support_savings_plans_treatment_method} => String
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#support_prorate_start_date #support_prorate_start_date} => Time
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#contract_payer_account_ids #contract_payer_account_ids} => Array&lt;Types::ContractAccount&gt;
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#charged_payer_account_ids #charged_payer_account_ids} => Array&lt;Types::ChargeAccount&gt;
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#additional_support_charge #additional_support_charge} => Array&lt;Types::AdditionalCharge&gt;
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#additional_support_eligible_usage_spend #additional_support_eligible_usage_spend} => Array&lt;Types::AdditionalCharge&gt;
+    #   * {Types::GetEnterpriseSupportContractDetailsResponse#pricing_plans #pricing_plans} => Array&lt;Types::PricingPlan&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_enterprise_support_contract_details({
+    #     billing_month: "EnterpriseSupportBillingMonth", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.is_contract_active #=> Boolean
+    #   resp.support_allocation_method #=> String
+    #   resp.support_reserved_instance_amortization_start_date #=> Time
+    #   resp.support_reserved_instance_treatment_method #=> String
+    #   resp.support_savings_plans_amortization_start_date #=> Time
+    #   resp.support_savings_plans_treatment_method #=> String
+    #   resp.support_prorate_start_date #=> Time
+    #   resp.contract_payer_account_ids #=> Array
+    #   resp.contract_payer_account_ids[0].account_id #=> String
+    #   resp.contract_payer_account_ids[0].is_gdn #=> Boolean
+    #   resp.charged_payer_account_ids #=> Array
+    #   resp.charged_payer_account_ids[0].account_id #=> String
+    #   resp.charged_payer_account_ids[0].charge_percentage #=> String
+    #   resp.additional_support_charge #=> Array
+    #   resp.additional_support_charge[0].description #=> String
+    #   resp.additional_support_charge[0].amount #=> String
+    #   resp.additional_support_charge[0].charge_type #=> String
+    #   resp.additional_support_eligible_usage_spend #=> Array
+    #   resp.additional_support_eligible_usage_spend[0].description #=> String
+    #   resp.additional_support_eligible_usage_spend[0].amount #=> String
+    #   resp.additional_support_eligible_usage_spend[0].charge_type #=> String
+    #   resp.pricing_plans #=> Array
+    #   resp.pricing_plans[0].pricing_plan_id #=> String
+    #   resp.pricing_plans[0].name #=> String
+    #   resp.pricing_plans[0].description #=> String
+    #   resp.pricing_plans[0].start_date #=> Time
+    #   resp.pricing_plans[0].end_date #=> Time
+    #   resp.pricing_plans[0].plan_discount_percent #=> String
+    #   resp.pricing_plans[0].discount_applies_to_minimum_charge #=> Boolean
+    #   resp.pricing_plans[0].minimum_charge #=> String
+    #   resp.pricing_plans[0].tiered #=> String
+    #   resp.pricing_plans[0].tiers #=> Array
+    #   resp.pricing_plans[0].tiers[0].tier_minimum #=> String
+    #   resp.pricing_plans[0].tiers[0].tier_maximum #=> String
+    #   resp.pricing_plans[0].tiers[0].base_charge #=> String
+    #   resp.pricing_plans[0].tiers[0].additional_percentage_of_aggregate_charges #=> String
+    #   resp.pricing_plans[0].tiers[0].aggregate_charges_adjustment #=> String
+    #   resp.pricing_plans[0].tiers[0].incremental #=> Boolean
+    #   resp.pricing_plans[0].tiers[0].increment #=> String
+    #   resp.pricing_plans[0].tiers[0].increment_charge #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetEnterpriseSupportContractDetails AWS API Documentation
+    #
+    # @overload get_enterprise_support_contract_details(params = {})
+    # @param [Hash] params ({})
+    def get_enterprise_support_contract_details(params = {}, options = {})
+      req = build_request(:get_enterprise_support_contract_details, params)
+      req.send_request(options)
+    end
+
     # Returns the resource-based policy document attached to the resource in
     # `JSON` format.
     #
@@ -1202,6 +1354,68 @@ module Aws::Billing
     # @param [Hash] params ({})
     def list_billing_views(params = {}, options = {})
       req = build_request(:list_billing_views, params)
+      req.send_request(options)
+    end
+
+    # Returns Support-eligible spend broken down at linked account level.
+    #
+    # @option params [required, String] :billing_month
+    #   The billing month in YYYY-MM format. This must be a month in the past.
+    #
+    # @option params [String] :account_id
+    #   An optional linked account ID to filter results to a specific account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token for the next page of results.
+    #
+    # @return [Types::ListEnterpriseSupportLinkedAccountChargesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEnterpriseSupportLinkedAccountChargesResponse#linked_account #linked_account} => Array&lt;Types::LinkedAccountCharge&gt;
+    #   * {Types::ListEnterpriseSupportLinkedAccountChargesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_enterprise_support_linked_account_charges({
+    #     billing_month: "EnterpriseSupportBillingMonth", # required
+    #     account_id: "AccountId",
+    #     max_results: 1,
+    #     next_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.linked_account #=> Array
+    #   resp.linked_account[0].account_id #=> String
+    #   resp.linked_account[0].payer_account_id #=> String
+    #   resp.linked_account[0].account_type #=> String
+    #   resp.linked_account[0].billable_seconds #=> Integer
+    #   resp.linked_account[0].total_seconds #=> Integer
+    #   resp.linked_account[0].total_support_eligible_spend #=> String
+    #   resp.linked_account[0].prorated_total_support_eligible_spend #=> String
+    #   resp.linked_account[0].linked_time_periods #=> Array
+    #   resp.linked_account[0].linked_time_periods[0].begin_date #=> Time
+    #   resp.linked_account[0].linked_time_periods[0].end_date #=> Time
+    #   resp.linked_account[0].subscription_time_periods #=> Array
+    #   resp.linked_account[0].subscription_time_periods[0].begin_date #=> Time
+    #   resp.linked_account[0].subscription_time_periods[0].end_date #=> Time
+    #   resp.linked_account[0].total_support_eligible_reserved_instance_spend #=> String
+    #   resp.linked_account[0].total_support_eligible_savings_plan_spend #=> String
+    #   resp.linked_account[0].support_eligible_spend_by_service #=> Array
+    #   resp.linked_account[0].support_eligible_spend_by_service[0].service_code #=> String
+    #   resp.linked_account[0].support_eligible_spend_by_service[0].total_support_eligible_spend #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListEnterpriseSupportLinkedAccountCharges AWS API Documentation
+    #
+    # @overload list_enterprise_support_linked_account_charges(params = {})
+    # @param [Hash] params ({})
+    def list_enterprise_support_linked_account_charges(params = {}, options = {})
+      req = build_request(:list_enterprise_support_linked_account_charges, params)
       req.send_request(options)
     end
 
@@ -1580,7 +1794,7 @@ module Aws::Billing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billing'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

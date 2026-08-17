@@ -304,6 +304,15 @@ module Aws
                                }?,
                                offer_set_id: {
                                  value_list: Array[::String]?
+                               }?,
+                               target_agreement_id: {
+                                 value_list: Array[::String]?
+                               }?,
+                               target_agreement_intent: {
+                                 value_list: Array[("Renew")]?
+                               }?,
+                               created_by_source: {
+                                 value_list: Array[("Seller" | "AwsMarketplace")]?
                                }?
                              }?,
                              container_product_filters: {
@@ -448,7 +457,7 @@ module Aws
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              offer_sort: {
-                               sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId")?,
+                               sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId" | "TargetAgreementId" | "TargetAgreementIntent" | "CreatedBySource")?,
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              container_product_sort: {

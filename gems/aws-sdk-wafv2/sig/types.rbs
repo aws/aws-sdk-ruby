@@ -123,6 +123,7 @@ module Aws::WAFV2
       attr_accessor search_string: ::String
       attr_accessor field_to_match: Types::FieldToMatch
       attr_accessor text_transformations: ::Array[Types::TextTransformation]
+      attr_accessor pre_parse_text_transformations: ::Array[Types::PreParseTextTransformation]
       attr_accessor positional_constraint: ("EXACTLY" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CONTAINS_WORD")
       SENSITIVE: []
     end
@@ -1272,6 +1273,12 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class PreParseTextTransformation
+      attr_accessor priority: ::Integer
+      attr_accessor type: ("NONE" | "URL_DECODE" | "URL_DECODE_UNI" | "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA" | "REPLACE_SEMICOLONS_WITH_AMPERSANDS")
+      SENSITIVE: []
+    end
+
     class Price
       attr_accessor amount: ::String
       attr_accessor currency: ("USDC")
@@ -1411,6 +1418,7 @@ module Aws::WAFV2
       attr_accessor regex_string: ::String
       attr_accessor field_to_match: Types::FieldToMatch
       attr_accessor text_transformations: ::Array[Types::TextTransformation]
+      attr_accessor pre_parse_text_transformations: ::Array[Types::PreParseTextTransformation]
       SENSITIVE: []
     end
 
@@ -1427,6 +1435,7 @@ module Aws::WAFV2
       attr_accessor arn: ::String
       attr_accessor field_to_match: Types::FieldToMatch
       attr_accessor text_transformations: ::Array[Types::TextTransformation]
+      attr_accessor pre_parse_text_transformations: ::Array[Types::PreParseTextTransformation]
       SENSITIVE: []
     end
 
@@ -1637,6 +1646,7 @@ module Aws::WAFV2
       attr_accessor comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT")
       attr_accessor size: ::Integer
       attr_accessor text_transformations: ::Array[Types::TextTransformation]
+      attr_accessor pre_parse_text_transformations: ::Array[Types::PreParseTextTransformation]
       SENSITIVE: []
     end
 
@@ -1656,6 +1666,7 @@ module Aws::WAFV2
     class SqliMatchStatement
       attr_accessor field_to_match: Types::FieldToMatch
       attr_accessor text_transformations: ::Array[Types::TextTransformation]
+      attr_accessor pre_parse_text_transformations: ::Array[Types::PreParseTextTransformation]
       attr_accessor sensitivity_level: ("LOW" | "HIGH")
       SENSITIVE: []
     end
@@ -1703,7 +1714,7 @@ module Aws::WAFV2
 
     class TextTransformation
       attr_accessor priority: ::Integer
-      attr_accessor type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+      attr_accessor type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE" | "REMOVE_WHITESPACE" | "TRIM" | "TRIM_LEFT" | "TRIM_RIGHT" | "REMOVE_COMMENTS_CHAR" | "UPPERCASE" | "CMD_LINE_WIN" | "CMD_LINE_UNIX" | "JS_DECODE_EXT" | "SHA256")
       SENSITIVE: []
     end
 
@@ -1877,7 +1888,7 @@ module Aws::WAFV2
 
     class WAFInvalidParameterException
       attr_accessor message: ::String
-      attr_accessor field: ("WEB_ACL" | "RULE_GROUP" | "REGEX_PATTERN_SET" | "IP_SET" | "MANAGED_RULE_SET" | "RULE" | "EXCLUDED_RULE" | "STATEMENT" | "BYTE_MATCH_STATEMENT" | "SQLI_MATCH_STATEMENT" | "XSS_MATCH_STATEMENT" | "SIZE_CONSTRAINT_STATEMENT" | "GEO_MATCH_STATEMENT" | "RATE_BASED_STATEMENT" | "RULE_GROUP_REFERENCE_STATEMENT" | "REGEX_PATTERN_REFERENCE_STATEMENT" | "IP_SET_REFERENCE_STATEMENT" | "MANAGED_RULE_SET_STATEMENT" | "LABEL_MATCH_STATEMENT" | "AND_STATEMENT" | "OR_STATEMENT" | "NOT_STATEMENT" | "IP_ADDRESS" | "IP_ADDRESS_VERSION" | "FIELD_TO_MATCH" | "TEXT_TRANSFORMATION" | "SINGLE_QUERY_ARGUMENT" | "SINGLE_HEADER" | "DEFAULT_ACTION" | "RULE_ACTION" | "ENTITY_LIMIT" | "OVERRIDE_ACTION" | "SCOPE_VALUE" | "RESOURCE_ARN" | "RESOURCE_TYPE" | "TAGS" | "TAG_KEYS" | "METRIC_NAME" | "FIREWALL_MANAGER_STATEMENT" | "FALLBACK_BEHAVIOR" | "POSITION" | "FORWARDED_IP_CONFIG" | "IP_SET_FORWARDED_IP_CONFIG" | "HEADER_NAME" | "CUSTOM_REQUEST_HANDLING" | "RESPONSE_CONTENT_TYPE" | "CUSTOM_RESPONSE" | "CUSTOM_RESPONSE_BODY" | "JSON_MATCH_PATTERN" | "JSON_MATCH_SCOPE" | "BODY_PARSING_FALLBACK_BEHAVIOR" | "LOGGING_FILTER" | "FILTER_CONDITION" | "EXPIRE_TIMESTAMP" | "CHANGE_PROPAGATION_STATUS" | "ASSOCIABLE_RESOURCE" | "LOG_DESTINATION" | "MANAGED_RULE_GROUP_CONFIG" | "PAYLOAD_TYPE" | "HEADER_MATCH_PATTERN" | "COOKIE_MATCH_PATTERN" | "MAP_MATCH_SCOPE" | "OVERSIZE_HANDLING" | "CHALLENGE_CONFIG" | "TOKEN_DOMAIN" | "ATP_RULE_SET_RESPONSE_INSPECTION" | "ASSOCIATED_RESOURCE_TYPE" | "SCOPE_DOWN" | "CUSTOM_KEYS" | "ACP_RULE_SET_RESPONSE_INSPECTION" | "DATA_PROTECTION_CONFIG" | "LOW_REPUTATION_MODE" | "MONETIZATION_CONFIG" | "WALLET_ADDRESS" | "PRICE_AMOUNT" | "PAYMENT_NETWORK")
+      attr_accessor field: ("WEB_ACL" | "RULE_GROUP" | "REGEX_PATTERN_SET" | "IP_SET" | "MANAGED_RULE_SET" | "RULE" | "EXCLUDED_RULE" | "STATEMENT" | "BYTE_MATCH_STATEMENT" | "SQLI_MATCH_STATEMENT" | "XSS_MATCH_STATEMENT" | "SIZE_CONSTRAINT_STATEMENT" | "GEO_MATCH_STATEMENT" | "RATE_BASED_STATEMENT" | "RULE_GROUP_REFERENCE_STATEMENT" | "REGEX_PATTERN_REFERENCE_STATEMENT" | "IP_SET_REFERENCE_STATEMENT" | "MANAGED_RULE_SET_STATEMENT" | "LABEL_MATCH_STATEMENT" | "AND_STATEMENT" | "OR_STATEMENT" | "NOT_STATEMENT" | "IP_ADDRESS" | "IP_ADDRESS_VERSION" | "FIELD_TO_MATCH" | "TEXT_TRANSFORMATION" | "SINGLE_QUERY_ARGUMENT" | "SINGLE_HEADER" | "DEFAULT_ACTION" | "RULE_ACTION" | "ENTITY_LIMIT" | "OVERRIDE_ACTION" | "SCOPE_VALUE" | "RESOURCE_ARN" | "RESOURCE_TYPE" | "TAGS" | "TAG_KEYS" | "METRIC_NAME" | "FIREWALL_MANAGER_STATEMENT" | "FALLBACK_BEHAVIOR" | "POSITION" | "FORWARDED_IP_CONFIG" | "IP_SET_FORWARDED_IP_CONFIG" | "HEADER_NAME" | "CUSTOM_REQUEST_HANDLING" | "RESPONSE_CONTENT_TYPE" | "CUSTOM_RESPONSE" | "CUSTOM_RESPONSE_BODY" | "JSON_MATCH_PATTERN" | "JSON_MATCH_SCOPE" | "BODY_PARSING_FALLBACK_BEHAVIOR" | "LOGGING_FILTER" | "FILTER_CONDITION" | "EXPIRE_TIMESTAMP" | "CHANGE_PROPAGATION_STATUS" | "ASSOCIABLE_RESOURCE" | "LOG_DESTINATION" | "MANAGED_RULE_GROUP_CONFIG" | "PAYLOAD_TYPE" | "HEADER_MATCH_PATTERN" | "COOKIE_MATCH_PATTERN" | "MAP_MATCH_SCOPE" | "OVERSIZE_HANDLING" | "CHALLENGE_CONFIG" | "TOKEN_DOMAIN" | "ATP_RULE_SET_RESPONSE_INSPECTION" | "ASSOCIATED_RESOURCE_TYPE" | "SCOPE_DOWN" | "CUSTOM_KEYS" | "ACP_RULE_SET_RESPONSE_INSPECTION" | "DATA_PROTECTION_CONFIG" | "LOW_REPUTATION_MODE" | "MONETIZATION_CONFIG" | "WALLET_ADDRESS" | "PRICE_AMOUNT" | "PAYMENT_NETWORK" | "PRE_PARSE_TEXT_TRANSFORMATION")
       attr_accessor parameter: ::String
       attr_accessor reason: ::String
       SENSITIVE: []
@@ -1982,6 +1993,7 @@ module Aws::WAFV2
     class XssMatchStatement
       attr_accessor field_to_match: Types::FieldToMatch
       attr_accessor text_transformations: ::Array[Types::TextTransformation]
+      attr_accessor pre_parse_text_transformations: ::Array[Types::PreParseTextTransformation]
       SENSITIVE: []
     end
   end

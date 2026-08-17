@@ -219,6 +219,23 @@ module Aws
                                 ) -> _ListRecommendationsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationsResponseSuccess
 
+      interface _ListRecommendationsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationsForResourceResponse]
+        def next_token: () -> ::String
+        def recommendation_for_resource_summaries: () -> ::Array[Types::RecommendationForResourceSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#list_recommendations_for_resource-instance_method
+      def list_recommendations_for_resource: (
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer,
+                                               aws_resource_arn: ::String,
+                                               ?pillar: ("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence"),
+                                               ?status: ("ok" | "warning" | "error"),
+                                               ?check_arn: ::String,
+                                               ?language: ("en" | "ja" | "zh" | "fr" | "de" | "ko" | "zh_TW" | "it" | "es" | "pt_BR" | "id")
+                                             ) -> _ListRecommendationsForResourceResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationsForResourceResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#update_organization_recommendation_lifecycle-instance_method
       def update_organization_recommendation_lifecycle: (
                                                           lifecycle_stage: ("pending_response" | "in_progress" | "dismissed" | "resolved"),

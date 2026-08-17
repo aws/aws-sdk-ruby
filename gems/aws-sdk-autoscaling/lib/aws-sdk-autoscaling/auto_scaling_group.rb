@@ -292,6 +292,14 @@ module Aws::AutoScaling
       data[:instance_lifecycle_policy]
     end
 
+    # The entity that manages the Auto Scaling group, if applicable. When
+    # set, only the designated operator can make changes to the group
+    # configuration.
+    # @return [Types::Operator]
+    def operator
+      data[:operator]
+    end
+
     # @!endgroup
 
     # @return [Client]

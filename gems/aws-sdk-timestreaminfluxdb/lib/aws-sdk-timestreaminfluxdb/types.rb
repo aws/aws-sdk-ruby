@@ -75,6 +75,173 @@ module Aws::TimestreamInfluxDB
     end
 
     # @!attribute [rw] name
+    #   The name of the backup. Must be unique within the account and
+    #   region.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_resource_id
+    #   The id of the DB instance or DB cluster to back up.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days to retain the backup. Valid values are 1 to 3650.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to associate with the backup.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbBackupInput AWS API Documentation
+    #
+    class CreateDbBackupInput < Struct.new(
+      :name,
+      :db_resource_id,
+      :retention_days,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Service-generated unique identifier of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-provided name of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the backup was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_after
+    #   The date after which the backup will be automatically deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_resource_id
+    #   The identifier of the DB resource that the backup was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_type
+    #   The engine type of the resource that the backup was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_type
+    #   The deployment type of the resource that the backup was created
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ARN used for encryption of the
+    #   resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_configuration
+    #   The cluster configuration of the resource at the time of backup.
+    #   @return [Types::ClusterConfiguration]
+    #
+    # @!attribute [rw] db_parameter_group_id
+    #   The identifier of the DB parameter group associated with the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_type
+    #   The DB instance type of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_delivery_configuration
+    #   The log delivery configuration of the resource at the time of
+    #   backup.
+    #   @return [Types::LogDeliveryConfiguration]
+    #
+    # @!attribute [rw] failover_mode
+    #   The failover mode of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_storage_type
+    #   The storage type of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocated_storage
+    #   The allocated storage of the resource at the time of backup, in GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vpc_subnet_ids
+    #   The VPC subnet IDs associated with the resource at the time of
+    #   backup.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   The VPC security group IDs associated with the resource at the time
+    #   of backup.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Indicates whether the resource was publicly accessible at the time
+    #   of backup.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] port
+    #   The port number of the resource at the time of backup.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_type
+    #   The network type of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] influx_auth_parameters_secret_arn
+    #   The ARN of the Secrets Manager secret containing the InfluxDB auth
+    #   parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_schedule
+    #   The maintenance schedule of the resource at the time of backup.
+    #   @return [Types::MaintenanceSchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbBackupOutput AWS API Documentation
+    #
+    class CreateDbBackupOutput < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :status,
+      :created_at,
+      :expires_after,
+      :db_resource_id,
+      :type,
+      :engine_type,
+      :deployment_type,
+      :kms_key_id,
+      :cluster_configuration,
+      :db_parameter_group_id,
+      :db_instance_type,
+      :log_delivery_configuration,
+      :failover_mode,
+      :db_storage_type,
+      :allocated_storage,
+      :vpc_subnet_ids,
+      :vpc_security_group_ids,
+      :publicly_accessible,
+      :port,
+      :network_type,
+      :influx_auth_parameters_secret_arn,
+      :maintenance_schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
     #   The name that uniquely identifies the DB cluster when interacting
     #   with the Amazon Timestream for InfluxDB API and CLI commands. This
     #   name will also be a prefix included in the endpoint. DB cluster
@@ -194,6 +361,16 @@ module Aws::TimestreamInfluxDB
     #   preferred maintenance window and timezone.
     #   @return [Types::MaintenanceSchedule]
     #
+    # @!attribute [rw] db_backup_configurations
+    #   A list of backup configurations to enable automated backups for the
+    #   DB cluster.
+    #   @return [Array<Types::DbBackupConfiguration>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key identifier to use for encryption of
+    #   the DB cluster. Can be a key ID, key ARN, alias name, or alias ARN.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of key-value pairs to associate with the DB instance.
     #   @return [Hash<String,String>]
@@ -219,6 +396,8 @@ module Aws::TimestreamInfluxDB
       :failover_mode,
       :log_delivery_configuration,
       :maintenance_schedule,
+      :db_backup_configurations,
+      :kms_key_id,
       :tags)
       SENSITIVE = [:username, :password]
       include Aws::Structure
@@ -359,6 +538,16 @@ module Aws::TimestreamInfluxDB
     #   DUAL, which can communicate over both IPv4 and IPv6 protocols.
     #   @return [String]
     #
+    # @!attribute [rw] db_backup_configurations
+    #   A list of backup configurations to enable automated backups for the
+    #   DB instance.
+    #   @return [Array<Types::DbBackupConfiguration>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key identifier to use for encryption of
+    #   the DB instance. Can be a key ID, key ARN, alias name, or alias ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbInstanceInput AWS API Documentation
     #
     class CreateDbInstanceInput < Struct.new(
@@ -379,7 +568,9 @@ module Aws::TimestreamInfluxDB
       :maintenance_schedule,
       :tags,
       :port,
-      :network_type)
+      :network_type,
+      :db_backup_configurations,
+      :kms_key_id)
       SENSITIVE = [:username, :password]
       include Aws::Structure
     end
@@ -500,6 +691,15 @@ module Aws::TimestreamInfluxDB
     #   instance.
     #   @return [Time]
     #
+    # @!attribute [rw] db_backup_configurations
+    #   The backup configurations for the DB instance.
+    #   @return [Array<Types::DbBackupConfigurationOutput>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ARN used for encryption of the DB
+    #   instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbInstanceOutput AWS API Documentation
     #
     class CreateDbInstanceOutput < Struct.new(
@@ -527,7 +727,9 @@ module Aws::TimestreamInfluxDB
       :instance_modes,
       :maintenance_schedule,
       :last_maintenance_time,
-      :next_maintenance_time)
+      :next_maintenance_time,
+      :db_backup_configurations,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -590,6 +792,141 @@ module Aws::TimestreamInfluxDB
       :arn,
       :description,
       :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for an automated backup schedule.
+    #
+    # @!attribute [rw] type
+    #   The type of automated backup schedule. Valid values are HOURLY,
+    #   DAILY, WEEKLY, MONTHLY, CUSTOM\_SCHEDULE, and CONTINUOUS.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days to retain automated backups. Valid values are 1
+    #   to 365.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether this backup configuration is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] custom_schedule
+    #   A custom cron schedule expression for the backup. Required when type
+    #   is CUSTOM\_SCHEDULE.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DbBackupConfiguration AWS API Documentation
+    #
+    class DbBackupConfiguration < Struct.new(
+      :type,
+      :retention_days,
+      :enabled,
+      :custom_schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration and status for an automated backup
+    # schedule.
+    #
+    # @!attribute [rw] type
+    #   The type of automated backup schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days automated backups are retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether this backup configuration is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] custom_schedule
+    #   The custom cron schedule expression for the backup, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_automated_backup_time
+    #   The next scheduled time for an automated backup to be taken.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DbBackupConfigurationOutput AWS API Documentation
+    #
+    class DbBackupConfigurationOutput < Struct.new(
+      :type,
+      :retention_days,
+      :enabled,
+      :custom_schedule,
+      :next_automated_backup_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a summary of a Timestream for InfluxDB backup.
+    #
+    # @!attribute [rw] id
+    #   Service-generated unique identifier of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-provided name of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the backup. Valid values are IN\_PROGRESS, COMPLETED,
+    #   FAILED, DELETING, and DELETED.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the backup was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_after
+    #   The date after which the backup will be automatically deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_resource_id
+    #   The identifier of the DB resource that the backup was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of backup. Valid values are HOURLY, DAILY, WEEKLY, MONTHLY,
+    #   CUSTOM\_SCHEDULE, ON\_DEMAND, and CONTINUOUS.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_type
+    #   The engine type of the resource that the backup was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_type
+    #   The deployment type of the resource that the backup was created
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ARN used for encryption of the
+    #   resource at the time of backup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DbBackupSummary AWS API Documentation
+    #
+    class DbBackupSummary < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :status,
+      :created_at,
+      :expires_after,
+      :db_resource_id,
+      :type,
+      :engine_type,
+      :deployment_type,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -852,14 +1189,172 @@ module Aws::TimestreamInfluxDB
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The identifier of the backup to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbBackupInput AWS API Documentation
+    #
+    class DeleteDbBackupInput < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Service-generated unique identifier of the deleted backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-provided name of the deleted backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the deleted backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the backup was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_after
+    #   The date after which the backup was set to be automatically deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_resource_id
+    #   The identifier of the DB resource that the backup was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_type
+    #   The engine type of the resource that the backup was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_type
+    #   The deployment type of the resource that the backup was created
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ARN used for encryption of the
+    #   resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_configuration
+    #   The cluster configuration of the resource at the time of backup.
+    #   @return [Types::ClusterConfiguration]
+    #
+    # @!attribute [rw] db_parameter_group_id
+    #   The identifier of the DB parameter group associated with the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_type
+    #   The DB instance type of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_delivery_configuration
+    #   The log delivery configuration of the resource at the time of
+    #   backup.
+    #   @return [Types::LogDeliveryConfiguration]
+    #
+    # @!attribute [rw] failover_mode
+    #   The failover mode of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_storage_type
+    #   The storage type of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocated_storage
+    #   The allocated storage of the resource at the time of backup, in GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vpc_subnet_ids
+    #   The VPC subnet IDs associated with the resource at the time of
+    #   backup.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   The VPC security group IDs associated with the resource at the time
+    #   of backup.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Indicates whether the resource was publicly accessible at the time
+    #   of backup.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] port
+    #   The port number of the resource at the time of backup.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_type
+    #   The network type of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] influx_auth_parameters_secret_arn
+    #   The ARN of the Secrets Manager secret containing the InfluxDB auth
+    #   parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_schedule
+    #   The maintenance schedule of the resource at the time of backup.
+    #   @return [Types::MaintenanceSchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbBackupOutput AWS API Documentation
+    #
+    class DeleteDbBackupOutput < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :status,
+      :created_at,
+      :expires_after,
+      :db_resource_id,
+      :type,
+      :engine_type,
+      :deployment_type,
+      :kms_key_id,
+      :cluster_configuration,
+      :db_parameter_group_id,
+      :db_instance_type,
+      :log_delivery_configuration,
+      :failover_mode,
+      :db_storage_type,
+      :allocated_storage,
+      :vpc_subnet_ids,
+      :vpc_security_group_ids,
+      :publicly_accessible,
+      :port,
+      :network_type,
+      :influx_auth_parameters_secret_arn,
+      :maintenance_schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_cluster_id
     #   Service-generated unique identifier of the DB cluster.
     #   @return [String]
     #
+    # @!attribute [rw] retain_automated_backups
+    #   Specifies whether to retain automated backups after the DB cluster
+    #   is deleted. If set to true, automated backups are not deleted and
+    #   can be restored later.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbClusterInput AWS API Documentation
     #
     class DeleteDbClusterInput < Struct.new(
-      :db_cluster_id)
+      :db_cluster_id,
+      :retain_automated_backups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -880,10 +1375,17 @@ module Aws::TimestreamInfluxDB
     #   The id of the DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] retain_automated_backups
+    #   Specifies whether to retain automated backups after the DB instance
+    #   is deleted. If set to true, automated backups are not deleted and
+    #   can be restored later.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbInstanceInput AWS API Documentation
     #
     class DeleteDbInstanceInput < Struct.new(
-      :identifier)
+      :identifier,
+      :retain_automated_backups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1003,6 +1505,16 @@ module Aws::TimestreamInfluxDB
     #   instance.
     #   @return [Time]
     #
+    # @!attribute [rw] db_backup_configurations
+    #   The backup configurations that were associated with the deleted DB
+    #   instance.
+    #   @return [Array<Types::DbBackupConfigurationOutput>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ARN that was used for encryption of
+    #   the deleted DB instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbInstanceOutput AWS API Documentation
     #
     class DeleteDbInstanceOutput < Struct.new(
@@ -1030,7 +1542,9 @@ module Aws::TimestreamInfluxDB
       :instance_modes,
       :maintenance_schedule,
       :last_maintenance_time,
-      :next_maintenance_time)
+      :next_maintenance_time,
+      :db_backup_configurations,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1050,6 +1564,157 @@ module Aws::TimestreamInfluxDB
     class Duration < Struct.new(
       :duration_type,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The identifier of the backup to retrieve information for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbBackupInput AWS API Documentation
+    #
+    class GetDbBackupInput < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Service-generated unique identifier of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-provided name of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the backup was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_after
+    #   The date after which the backup will be automatically deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_resource_id
+    #   The identifier of the DB resource that the backup was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_type
+    #   The engine type of the resource that the backup was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_type
+    #   The deployment type of the resource that the backup was created
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ARN used for encryption of the
+    #   resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_configuration
+    #   The cluster configuration of the resource at the time of backup.
+    #   @return [Types::ClusterConfiguration]
+    #
+    # @!attribute [rw] db_parameter_group_id
+    #   The identifier of the DB parameter group associated with the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_type
+    #   The DB instance type of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_delivery_configuration
+    #   The log delivery configuration of the resource at the time of
+    #   backup.
+    #   @return [Types::LogDeliveryConfiguration]
+    #
+    # @!attribute [rw] failover_mode
+    #   The failover mode of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_storage_type
+    #   The storage type of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocated_storage
+    #   The allocated storage of the resource at the time of backup, in GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vpc_subnet_ids
+    #   The VPC subnet IDs associated with the resource at the time of
+    #   backup.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   The VPC security group IDs associated with the resource at the time
+    #   of backup.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Indicates whether the resource was publicly accessible at the time
+    #   of backup.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] port
+    #   The port number of the resource at the time of backup.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_type
+    #   The network type of the resource at the time of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] influx_auth_parameters_secret_arn
+    #   The ARN of the Secrets Manager secret containing the InfluxDB auth
+    #   parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_schedule
+    #   The maintenance schedule of the resource at the time of backup.
+    #   @return [Types::MaintenanceSchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbBackupOutput AWS API Documentation
+    #
+    class GetDbBackupOutput < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :status,
+      :created_at,
+      :expires_after,
+      :db_resource_id,
+      :type,
+      :engine_type,
+      :deployment_type,
+      :kms_key_id,
+      :cluster_configuration,
+      :db_parameter_group_id,
+      :db_instance_type,
+      :log_delivery_configuration,
+      :failover_mode,
+      :db_storage_type,
+      :allocated_storage,
+      :vpc_subnet_ids,
+      :vpc_security_group_ids,
+      :publicly_accessible,
+      :port,
+      :network_type,
+      :influx_auth_parameters_secret_arn,
+      :maintenance_schedule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1175,6 +1840,15 @@ module Aws::TimestreamInfluxDB
     #   Configuration for node modes in the DbCluster.
     #   @return [Types::ClusterConfiguration]
     #
+    # @!attribute [rw] db_backup_configurations
+    #   The backup configurations for the DB cluster.
+    #   @return [Array<Types::DbBackupConfigurationOutput>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ARN used for encryption of the DB
+    #   cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbClusterOutput AWS API Documentation
     #
     class GetDbClusterOutput < Struct.new(
@@ -1201,7 +1875,9 @@ module Aws::TimestreamInfluxDB
       :vpc_subnet_ids,
       :vpc_security_group_ids,
       :failover_mode,
-      :cluster_configuration)
+      :cluster_configuration,
+      :db_backup_configurations,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1333,6 +2009,15 @@ module Aws::TimestreamInfluxDB
     #   instance.
     #   @return [Time]
     #
+    # @!attribute [rw] db_backup_configurations
+    #   The backup configurations for the DB instance.
+    #   @return [Array<Types::DbBackupConfigurationOutput>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ARN used for encryption of the DB
+    #   instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbInstanceOutput AWS API Documentation
     #
     class GetDbInstanceOutput < Struct.new(
@@ -1360,7 +2045,9 @@ module Aws::TimestreamInfluxDB
       :instance_modes,
       :maintenance_schedule,
       :last_maintenance_time,
-      :next_maintenance_time)
+      :next_maintenance_time,
+      :db_backup_configurations,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1531,9 +2218,9 @@ module Aws::TimestreamInfluxDB
     #   @return [Integer]
     #
     # @!attribute [rw] query_max_memory_bytes
-    #   Maximum number of queries allowed in execution queue. When queue
-    #   limit is reached, new queries are rejected. Setting to 0 allows an
-    #   unlimited number of queries in the queue.
+    #   Maximum total bytes of memory allowed for all running queries. When
+    #   this limit is reached, new queries are rejected. Setting to 0 allows
+    #   unlimited memory usage.
     #
     #   Default: 0
     #   @return [Integer]
@@ -2455,6 +3142,52 @@ module Aws::TimestreamInfluxDB
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_resource_id
+    #   The identifier of the DB instance or DB cluster to list backups for.
+    #   If not specified, returns all backups in the account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token. To resume pagination, provide the nextToken
+    #   value as an argument of a subsequent API invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in the output. If the total
+    #   number of items available is more than the value specified, a
+    #   nextToken is provided in the output. To resume pagination, provide
+    #   the nextToken value as an argument of a subsequent API invocation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/ListDbBackupsInput AWS API Documentation
+    #
+    class ListDbBackupsInput < Struct.new(
+      :db_resource_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of Timestream for InfluxDB backup summaries.
+    #   @return [Array<Types::DbBackupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token from a previous call of the operation. When this value is
+    #   provided, the service returns results from where the previous
+    #   response left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/ListDbBackupsOutput AWS API Documentation
+    #
+    class ListDbBackupsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The pagination token. To resume pagination, provide the nextToken
     #   value as an argument of a subsequent API invocation.
@@ -2909,6 +3642,15 @@ module Aws::TimestreamInfluxDB
     #   instance.
     #   @return [Time]
     #
+    # @!attribute [rw] db_backup_configurations
+    #   The backup configurations for the DB instance.
+    #   @return [Array<Types::DbBackupConfigurationOutput>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ARN used for encryption of the DB
+    #   instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbInstanceOutput AWS API Documentation
     #
     class RebootDbInstanceOutput < Struct.new(
@@ -2936,7 +3678,9 @@ module Aws::TimestreamInfluxDB
       :instance_modes,
       :maintenance_schedule,
       :last_maintenance_time,
-      :next_maintenance_time)
+      :next_maintenance_time,
+      :db_backup_configurations,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2962,6 +3706,137 @@ module Aws::TimestreamInfluxDB
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the new resource to create from the restore. If
+    #   restoring to an existing resource, the name must match the existing
+    #   resource name.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_backup_id
+    #   The identifier of the backup to restore from.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_to_time
+    #   The point in time to restore to, for continuous backups. Must be
+    #   within the backup's retention window.
+    #   @return [Time]
+    #
+    # @!attribute [rw] restore_mode
+    #   Specifies whether to restore to a new resource or replace the
+    #   existing resource. Valid values are NEW\_RESOURCE (default) and
+    #   REPLACE\_EXISTING.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_subnet_ids
+    #   A list of VPC subnet IDs for the restored resource. If not
+    #   specified, the restored resource uses the same subnets as the
+    #   backup.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   A list of VPC security group IDs for the restored resource. If not
+    #   specified, the restored resource uses the same security groups as
+    #   the backup.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Specifies whether the restored resource is publicly accessible.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] log_delivery_configuration
+    #   Configuration for sending InfluxDB engine logs to the specified S3
+    #   bucket for the restored resource.
+    #   @return [Types::LogDeliveryConfiguration]
+    #
+    # @!attribute [rw] maintenance_schedule
+    #   The maintenance schedule for the restored resource.
+    #   @return [Types::MaintenanceSchedule]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to associate with the restored resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] port
+    #   The port number on which the restored InfluxDB resource accepts
+    #   connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_type
+    #   Specifies the network type of the restored resource. Valid values
+    #   are IPV4 and DUAL.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_type
+    #   Specifies the deployment type of the restored resource. Valid values
+    #   are SINGLE\_AZ, WITH\_MULTIAZ\_STANDBY, and
+    #   MULTI\_NODE\_READ\_REPLICAS.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_backup_configurations
+    #   A list of backup configurations to apply to the restored resource.
+    #   @return [Array<Types::DbBackupConfiguration>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key identifier to use for encryption of
+    #   the restored resource. Can be a key ID, key ARN, alias name, or
+    #   alias ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RestoreFromDbBackupInput AWS API Documentation
+    #
+    class RestoreFromDbBackupInput < Struct.new(
+      :name,
+      :db_backup_id,
+      :restore_to_time,
+      :restore_mode,
+      :vpc_subnet_ids,
+      :vpc_security_group_ids,
+      :publicly_accessible,
+      :log_delivery_configuration,
+      :maintenance_schedule,
+      :tags,
+      :port,
+      :network_type,
+      :deployment_type,
+      :db_backup_configurations,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restored_db_resource_id
+    #   The identifier of the restored DB resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_status
+    #   The status of the restore operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the restored resource. Valid values are DB\_INSTANCE and
+    #   DB\_CLUSTER.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_type
+    #   The engine type of the restored resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_type
+    #   The deployment type of the restored resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RestoreFromDbBackupOutput AWS API Documentation
+    #
+    class RestoreFromDbBackupOutput < Struct.new(
+      :restored_db_resource_id,
+      :restore_status,
+      :resource_type,
+      :engine_type,
+      :deployment_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3079,6 +3954,10 @@ module Aws::TimestreamInfluxDB
     #   preferred maintenance window and timezone.
     #   @return [Types::MaintenanceSchedule]
     #
+    # @!attribute [rw] db_backup_configurations
+    #   A list of backup configurations to update for the DB cluster.
+    #   @return [Array<Types::DbBackupConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbClusterInput AWS API Documentation
     #
     class UpdateDbClusterInput < Struct.new(
@@ -3088,7 +3967,8 @@ module Aws::TimestreamInfluxDB
       :port,
       :db_instance_type,
       :failover_mode,
-      :maintenance_schedule)
+      :maintenance_schedule,
+      :db_backup_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3158,6 +4038,10 @@ module Aws::TimestreamInfluxDB
     #   the preferred maintenance window and timezone.
     #   @return [Types::MaintenanceSchedule]
     #
+    # @!attribute [rw] db_backup_configurations
+    #   A list of backup configurations to update for the DB instance.
+    #   @return [Array<Types::DbBackupConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstanceInput AWS API Documentation
     #
     class UpdateDbInstanceInput < Struct.new(
@@ -3169,7 +4053,8 @@ module Aws::TimestreamInfluxDB
       :deployment_type,
       :db_storage_type,
       :allocated_storage,
-      :maintenance_schedule)
+      :maintenance_schedule,
+      :db_backup_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3289,6 +4174,15 @@ module Aws::TimestreamInfluxDB
     #   instance.
     #   @return [Time]
     #
+    # @!attribute [rw] db_backup_configurations
+    #   The backup configurations for the DB instance.
+    #   @return [Array<Types::DbBackupConfigurationOutput>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ARN used for encryption of the DB
+    #   instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstanceOutput AWS API Documentation
     #
     class UpdateDbInstanceOutput < Struct.new(
@@ -3316,7 +4210,9 @@ module Aws::TimestreamInfluxDB
       :instance_modes,
       :maintenance_schedule,
       :last_maintenance_time,
-      :next_maintenance_time)
+      :next_maintenance_time,
+      :db_backup_configurations,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1334,6 +1334,348 @@ module Aws::GameLiftStreams
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
+    #   the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
+    #
+    #   The stream session runs in this stream group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] application_identifier
+    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
+    #   the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #   Example ID: `a-9ZY8X7Wv6`.
+    #
+    #   This application must be associated with the stream group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The data transport protocol for the stream session. Amazon GameLift
+    #   Streams supports `WebRTC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_expires_after_minutes
+    #   The number of minutes after creation that the stream URL remains
+    #   valid. After this period, the status of the stream URL changes to
+    #   `EXPIRED` and it can no longer start stream sessions. The minimum is
+    #   1 minute. For the maximum, see [Regions, quotas, and limitations][1]
+    #   in the *Amazon GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] usage_limit
+    #   The maximum number of times the stream URL can start a stream
+    #   session. Each successful use reduces the remaining uses by one. The
+    #   minimum is 1, and the default is 1. For the maximum, see [Regions,
+    #   quotas, and limitations][1] in the *Amazon GameLift Streams
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A descriptive label for the stream URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] locations
+    #   A list of locations, in order of preference, where Amazon GameLift
+    #   Streams can place the stream session. Specify each location by its
+    #   Amazon Web Services Region code, for example `us-east-1`. For a
+    #   complete list of locations that Amazon GameLift Streams supports,
+    #   refer to [Regions, quotas, and limitations][1] in the *Amazon
+    #   GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] session_length_seconds
+    #   The maximum length of time, in seconds, that a stream session
+    #   started from this stream URL can run. Valid values are 1-86400
+    #   seconds (1 second to 24 hours). The default is 43200 seconds (12
+    #   hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_launch_args
+    #   A list of CLI arguments that are sent to the streaming server when a
+    #   stream session launches. You can use this to configure the
+    #   application or stream session details. You can also provide custom
+    #   arguments that Amazon GameLift Streams passes to your game client.
+    #
+    #   `AdditionalEnvironmentVariables` and `AdditionalLaunchArgs` have
+    #   similar purposes. `AdditionalEnvironmentVariables` passes data using
+    #   environment variables; while `AdditionalLaunchArgs` passes data
+    #   using command-line arguments.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_environment_variables
+    #   A set of options that you can use to control the stream session
+    #   runtime environment, expressed as a set of key-value pairs. You can
+    #   use this to configure the application or stream session details. You
+    #   can also provide custom environment variables that Amazon GameLift
+    #   Streams passes to your game client.
+    #
+    #   <note markdown="1"> If you want to debug your application with environment variables, we
+    #   recommend that you do so in a local environment outside of Amazon
+    #   GameLift Streams. For more information, refer to the Compatibility
+    #   Guidance in the troubleshooting section of the Developer Guide.
+    #
+    #    </note>
+    #
+    #   `AdditionalEnvironmentVariables` and `AdditionalLaunchArgs` have
+    #   similar purposes. `AdditionalEnvironmentVariables` passes data using
+    #   environment variables; while `AdditionalLaunchArgs` passes data
+    #   using command-line arguments.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that Amazon GameLift
+    #   Streams assumes during stream sessions started from this stream URL.
+    #   For more information, see [Provide AWS credentials to your streaming
+    #   application][1] in the *Amazon GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/session-credentials.html
+    #   @return [String]
+    #
+    # @!attribute [rw] display_configuration
+    #   The display settings, such as resolution, for stream sessions
+    #   started from this stream URL.
+    #   @return [Types::DisplayConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure this
+    #   request is idempotent. If you retry a request with the same
+    #   `ClientToken`, Amazon GameLift Streams returns the original response
+    #   without performing the operation again.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/CreateStreamUrlInput AWS API Documentation
+    #
+    class CreateStreamUrlInput < Struct.new(
+      :identifier,
+      :application_identifier,
+      :protocol,
+      :url_expires_after_minutes,
+      :usage_limit,
+      :description,
+      :locations,
+      :session_length_seconds,
+      :additional_launch_args,
+      :additional_environment_variables,
+      :role_arn,
+      :display_configuration,
+      :client_token)
+      SENSITIVE = [:role_arn]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The [Amazon Resource Name (ARN)][1] that uniquely identifies the
+    #   stream URL across all Amazon Web Services Regions. Format is
+    #   `arn:aws:gameliftstreams:[AWS Region]:[AWS
+    #   account]:streamurl/[stream group resource ID]/[stream URL resource
+    #   ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url_id
+    #   The unique identifier for the stream URL resource, for example
+    #   `su-1AB2C3De4`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   The shareable stream URL. Distribute this URL to end users so that
+    #   they can start and play a stream session in a hosted web player.
+    #   Treat the stream URL as a secret. Anyone who has it can start a
+    #   stream session until the stream URL expires, is revoked, or reaches
+    #   its usage limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the stream URL. Possible statuses include the
+    #   following:
+    #
+    #   * `ACTIVE`: The stream URL is valid and can start stream sessions.
+    #
+    #   * `EXPIRED`: The stream URL has passed its expiration time and can
+    #     no longer start stream sessions.
+    #
+    #   * `REVOKED`: The stream URL was revoked and can no longer start
+    #     stream sessions.
+    #
+    #   * `LIMIT_REACHED`: The stream URL has been used the maximum number
+    #     of times and can no longer start stream sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about why the stream URL is in its current
+    #   status. Amazon GameLift Streams populates this value when the status
+    #   is `REVOKED`. Possible values include the following:
+    #
+    #   * `userRevoked`: You revoked the stream URL.
+    #
+    #   * `revokedAndTerminatingSessions`: You revoked the stream URL and
+    #     Amazon GameLift Streams is ending its running stream sessions.
+    #
+    #   * `revokedAndSessionsTerminated`: You revoked the stream URL and its
+    #     running stream sessions have ended.
+    #
+    #   * `streamGroupDeleted`: The stream group was deleted, which revoked
+    #     the stream URL.
+    #
+    #   * `applicationDeleted`: The application was deleted, which revoked
+    #     the stream URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The date and time when the stream URL expires and stops accepting
+    #   new stream sessions. Timestamps are expressed using in ISO8601
+    #   format, such as: `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   A timestamp that indicates when this resource was created.
+    #   Timestamps are expressed using in ISO8601 format, such as:
+    #   `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] usage_limit
+    #   The maximum number of times the stream URL can start a stream
+    #   session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] remaining_uses
+    #   The number of times the stream URL can still be used to start a
+    #   stream session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_group_arn
+    #   The stream group that runs the stream sessions.
+    #
+    #   This value is an [Amazon Resource Name (ARN)][1] that uniquely
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The application that runs in the stream sessions.
+    #
+    #   This value is an [Amazon Resource Name (ARN)][1] that uniquely
+    #   identifies the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The data transport protocol used for stream sessions started from
+    #   this stream URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] locations
+    #   The list of locations, in order of preference, where Amazon GameLift
+    #   Streams places the stream session. For a complete list of locations
+    #   that Amazon GameLift Streams supports, refer to [Regions, quotas,
+    #   and limitations][1] in the *Amazon GameLift Streams Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] session_length_seconds
+    #   The maximum length of time, in seconds, that a stream session
+    #   started from this stream URL can run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The descriptive label for the stream URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_launch_args
+    #   The command-line arguments passed to the application when a stream
+    #   session starts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_environment_variables
+    #   The environment variables made available to the application when a
+    #   stream session starts.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that Amazon GameLift
+    #   Streams assumes during stream sessions started from this stream URL.
+    #   For more information, see [Provide AWS credentials to your streaming
+    #   application][1] in the *Amazon GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/session-credentials.html
+    #   @return [String]
+    #
+    # @!attribute [rw] display_configuration
+    #   The display settings, such as resolution, for stream sessions
+    #   started from this stream URL.
+    #   @return [Types::DisplayConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/CreateStreamUrlOutput AWS API Documentation
+    #
+    class CreateStreamUrlOutput < Struct.new(
+      :arn,
+      :stream_url_id,
+      :stream_url,
+      :status,
+      :status_reason,
+      :expires_at,
+      :created_at,
+      :usage_limit,
+      :remaining_uses,
+      :stream_group_arn,
+      :application_arn,
+      :protocol,
+      :locations,
+      :session_length_seconds,
+      :description,
+      :additional_launch_args,
+      :additional_environment_variables,
+      :role_arn,
+      :display_configuration)
+      SENSITIVE = [:stream_url, :role_arn]
+      include Aws::Structure
+    end
+
     # Represents the default Amazon GameLift Streams application that a
     # stream group hosts.
     #
@@ -2426,6 +2768,226 @@ module Aws::GameLiftStreams
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
+    #   the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
+    #
+    #   This is the stream group that owns the stream URL.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url_identifier
+    #   The unique identifier of the stream URL. Specify a stream URL ID or
+    #   Amazon Resource Name (ARN). Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamurl/sg-1AB2C3De4/su-1AB2C3De4`.
+    #   Example ID: `su-1AB2C3De4`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/GetStreamUrlInput AWS API Documentation
+    #
+    class GetStreamUrlInput < Struct.new(
+      :identifier,
+      :stream_url_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The [Amazon Resource Name (ARN)][1] that uniquely identifies the
+    #   stream URL across all Amazon Web Services Regions. Format is
+    #   `arn:aws:gameliftstreams:[AWS Region]:[AWS
+    #   account]:streamurl/[stream group resource ID]/[stream URL resource
+    #   ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url_id
+    #   The unique identifier for the stream URL resource, for example
+    #   `su-1AB2C3De4`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   The shareable stream URL. Distribute this URL to end users so that
+    #   they can start and play a stream session in a hosted web player.
+    #   Treat the stream URL as a secret. Anyone who has it can start a
+    #   stream session until the stream URL expires, is revoked, or reaches
+    #   its usage limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the stream URL. Possible statuses include the
+    #   following:
+    #
+    #   * `ACTIVE`: The stream URL is valid and can start stream sessions.
+    #
+    #   * `EXPIRED`: The stream URL has passed its expiration time and can
+    #     no longer start stream sessions.
+    #
+    #   * `REVOKED`: The stream URL was revoked and can no longer start
+    #     stream sessions.
+    #
+    #   * `LIMIT_REACHED`: The stream URL has been used the maximum number
+    #     of times and can no longer start stream sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about why the stream URL is in its current
+    #   status. Amazon GameLift Streams populates this value when the status
+    #   is `REVOKED`. Possible values include the following:
+    #
+    #   * `userRevoked`: You revoked the stream URL.
+    #
+    #   * `revokedAndTerminatingSessions`: You revoked the stream URL and
+    #     Amazon GameLift Streams is ending its running stream sessions.
+    #
+    #   * `revokedAndSessionsTerminated`: You revoked the stream URL and its
+    #     running stream sessions have ended.
+    #
+    #   * `streamGroupDeleted`: The stream group was deleted, which revoked
+    #     the stream URL.
+    #
+    #   * `applicationDeleted`: The application was deleted, which revoked
+    #     the stream URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The date and time when the stream URL expires and stops accepting
+    #   new stream sessions. Timestamps are expressed using in ISO8601
+    #   format, such as: `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   A timestamp that indicates when this resource was created.
+    #   Timestamps are expressed using in ISO8601 format, such as:
+    #   `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] usage_limit
+    #   The maximum number of times the stream URL can start a stream
+    #   session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] remaining_uses
+    #   The number of times the stream URL can still be used to start a
+    #   stream session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_group_arn
+    #   The stream group that runs the stream sessions.
+    #
+    #   This value is an [Amazon Resource Name (ARN)][1] that uniquely
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The application that runs in the stream sessions.
+    #
+    #   This value is an [Amazon Resource Name (ARN)][1] that uniquely
+    #   identifies the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The data transport protocol used for stream sessions started from
+    #   this stream URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] locations
+    #   The list of locations, in order of preference, where Amazon GameLift
+    #   Streams places the stream session. For a complete list of locations
+    #   that Amazon GameLift Streams supports, refer to [Regions, quotas,
+    #   and limitations][1] in the *Amazon GameLift Streams Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] session_length_seconds
+    #   The maximum length of time, in seconds, that a stream session
+    #   started from this stream URL can run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The descriptive label for the stream URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_launch_args
+    #   The command-line arguments passed to the application when a stream
+    #   session starts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_environment_variables
+    #   The environment variables made available to the application when a
+    #   stream session starts.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that Amazon GameLift
+    #   Streams assumes during stream sessions started from this stream URL.
+    #   For more information, see [Provide AWS credentials to your streaming
+    #   application][1] in the *Amazon GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/session-credentials.html
+    #   @return [String]
+    #
+    # @!attribute [rw] display_configuration
+    #   The display settings, such as resolution, for stream sessions
+    #   started from this stream URL.
+    #   @return [Types::DisplayConfiguration]
+    #
+    # @!attribute [rw] stream_sessions
+    #   A list of the stream sessions that have been started through this
+    #   stream URL.
+    #   @return [Array<Types::StreamSessionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/GetStreamUrlOutput AWS API Documentation
+    #
+    class GetStreamUrlOutput < Struct.new(
+      :arn,
+      :stream_url_id,
+      :stream_url,
+      :status,
+      :status_reason,
+      :expires_at,
+      :created_at,
+      :usage_limit,
+      :remaining_uses,
+      :stream_group_arn,
+      :application_arn,
+      :protocol,
+      :locations,
+      :session_length_seconds,
+      :description,
+      :additional_launch_args,
+      :additional_environment_variables,
+      :role_arn,
+      :display_configuration,
+      :stream_sessions)
+      SENSITIVE = [:stream_url, :role_arn]
+      include Aws::Structure
+    end
+
     # The service encountered an internal error and is unable to complete
     # the request.
     #
@@ -2437,6 +2999,39 @@ module Aws::GameLiftStreams
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
+    #   the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #   Example ID: `a-9ZY8X7Wv6`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/ListApplicationShaderCachesInput AWS API Documentation
+    #
+    class ListApplicationShaderCachesInput < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A collection of shader cache metadata for the specified Amazon
+    #   GameLift Streams application. Each item includes the shader cache
+    #   status, associated stream groups, and storage size.
+    #   @return [Array<Types::ShaderCacheSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/ListApplicationShaderCachesOutput AWS API Documentation
+    #
+    class ListApplicationShaderCachesOutput < Struct.new(
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2654,6 +3249,79 @@ module Aws::GameLiftStreams
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/ListStreamSessionsOutput AWS API Documentation
     #
     class ListStreamSessionsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   Filters the list to stream URLs with the specified status.
+    #
+    #   * `ACTIVE`: The stream URL is valid and can start stream sessions.
+    #
+    #   * `EXPIRED`: The stream URL has passed its expiration time and can
+    #     no longer start stream sessions.
+    #
+    #   * `REVOKED`: The stream URL was revoked and can no longer start
+    #     stream sessions.
+    #
+    #   * `LIMIT_REACHED`: The stream URL has been used the maximum number
+    #     of times and can no longer start stream sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_group_identifier
+    #   Filters the list to stream URLs that belong to the specified stream
+    #   group.
+    #
+    #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token that marks the start of the next set of results. Use this
+    #   token when you retrieve results as sequential pages. To get the
+    #   first page of results, omit a token value. To get the remaining
+    #   pages, provide the token returned with the previous result set.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page. Valid values are
+    #   1-100. The default is 25.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/ListStreamUrlsInput AWS API Documentation
+    #
+    class ListStreamUrlsInput < Struct.new(
+      :status,
+      :stream_group_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A collection of stream URL summaries. Each summary includes the
+    #   identity, status, and usage of the stream URL, but not its full
+    #   configuration.
+    #   @return [Array<Types::StreamUrlSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that marks the start of the next sequential page of results.
+    #   If an operation doesn't return a token, you've reached the end of
+    #   the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/ListStreamUrlsOutput AWS API Documentation
+    #
+    class ListStreamUrlsOutput < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -3019,6 +3687,48 @@ module Aws::GameLiftStreams
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
+    #   the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
+    #
+    #   This is the stream group that owns the stream URL.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url_identifier
+    #   The unique identifier of the stream URL to revoke. Specify a stream
+    #   URL ID or Amazon Resource Name (ARN). Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamurl/sg-1AB2C3De4/su-1AB2C3De4`.
+    #   Example ID: `su-1AB2C3De4`.
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_mode
+    #   Controls what happens to running stream sessions when you revoke the
+    #   stream URL. If you do not specify a value, the default is
+    #   `REVOKE_URL`. Possible values include the following:
+    #
+    #   * `REVOKE_URL`: Stops the stream URL from starting new stream
+    #     sessions. Running sessions continue until they end.
+    #
+    #   * `REVOKE_AND_TERMINATE_SESSIONS`: Stops new stream sessions and
+    #     ends any running stream sessions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/RevokeStreamUrlInput AWS API Documentation
+    #
+    class RevokeStreamUrlInput < Struct.new(
+      :identifier,
+      :stream_url_identifier,
+      :revocation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration settings that identify the operating system for an
     # application resource. This can also include a compatibility layer and
     # other drivers.
@@ -3072,6 +3782,84 @@ module Aws::GameLiftStreams
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a shader cache associated with an Amazon GameLift Streams
+    # application.
+    #
+    # @!attribute [rw] identifier
+    #   A unique identifier for the shader cache, formatted as a
+    #   32-character hexadecimal string. Format is
+    #   `1271e693c50b940e228582f1ccdd4e27`.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   An [Amazon Resource Name (ARN)][1] that uniquely identifies the
+    #   application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the shader cache. Possible statuses include
+    #   the following:
+    #
+    #   * `INITIALIZED`: Amazon GameLift Streams received the request and is
+    #     preparing the shader cache.
+    #
+    #   * `PROCESSING`: Amazon GameLift Streams is replicating the shader
+    #     cache to the streaming locations in the associated stream groups.
+    #
+    #   * `READY`: The shader cache is replicated and available for use in
+    #     stream sessions.
+    #
+    #   * `DELETING`: Amazon GameLift Streams is deleting the shader cache.
+    #
+    #   * `ERROR`: An error occurred during shader cache processing. Create
+    #     a new shader cache to try again.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   A timestamp that indicates when this resource was last updated.
+    #   Timestamps are expressed using in ISO8601 format, such as:
+    #   `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] storage_bytes
+    #   The total storage used by all compiled shader files in this shader
+    #   cache, in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] associated_stream_groups
+    #   The stream groups compatible with this shader cache. Compatibility
+    #   is based on GPU type and GPU driver version. For more information on
+    #   shader cache compatibility, see [Shader caches][1] in the *Amazon
+    #   GameLift Streams Developer Guide*.
+    #
+    #   This value is a set of [Amazon Resource Names (ARNs)][2] that
+    #   uniquely identify stream group resources. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/shader-caches.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/ShaderCacheSummary AWS API Documentation
+    #
+    class ShaderCacheSummary < Struct.new(
+      :identifier,
+      :application_arn,
+      :status,
+      :last_updated_at,
+      :storage_bytes,
+      :associated_stream_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4017,6 +4805,150 @@ module Aws::GameLiftStreams
       :location,
       :role_arn)
       SENSITIVE = [:role_arn]
+      include Aws::Structure
+    end
+
+    # Describes a stream URL. This is a summary view that omits the full
+    # configuration, such as launch arguments and display settings. To
+    # retrieve the complete configuration, call [GetStreamUrl][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamUrl.html
+    #
+    # @!attribute [rw] arn
+    #   The [Amazon Resource Name (ARN)][1] that uniquely identifies the
+    #   stream URL across all Amazon Web Services Regions. Format is
+    #   `arn:aws:gameliftstreams:[AWS Region]:[AWS
+    #   account]:streamurl/[stream group resource ID]/[stream URL resource
+    #   ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url_id
+    #   The unique identifier for the stream URL resource, for example
+    #   `su-1AB2C3De4`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   The shareable stream URL. Distribute this URL to end users so that
+    #   they can start and play a stream session in a hosted web player.
+    #   Treat the stream URL as a secret. Anyone who has it can start a
+    #   stream session until the stream URL expires, is revoked, or reaches
+    #   its usage limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the stream URL. Possible statuses include the
+    #   following:
+    #
+    #   * `ACTIVE`: The stream URL is valid and can start stream sessions.
+    #
+    #   * `EXPIRED`: The stream URL has passed its expiration time and can
+    #     no longer start stream sessions.
+    #
+    #   * `REVOKED`: The stream URL was revoked and can no longer start
+    #     stream sessions.
+    #
+    #   * `LIMIT_REACHED`: The stream URL has been used the maximum number
+    #     of times and can no longer start stream sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about why the stream URL is in its current
+    #   status. Amazon GameLift Streams populates this value when the status
+    #   is `REVOKED`. Possible values include the following:
+    #
+    #   * `userRevoked`: You revoked the stream URL.
+    #
+    #   * `revokedAndTerminatingSessions`: You revoked the stream URL and
+    #     Amazon GameLift Streams is ending its running stream sessions.
+    #
+    #   * `revokedAndSessionsTerminated`: You revoked the stream URL and its
+    #     running stream sessions have ended.
+    #
+    #   * `streamGroupDeleted`: The stream group was deleted, which revoked
+    #     the stream URL.
+    #
+    #   * `applicationDeleted`: The application was deleted, which revoked
+    #     the stream URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The date and time when the stream URL expires and stops accepting
+    #   new stream sessions. Timestamps are expressed using in ISO8601
+    #   format, such as: `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   A timestamp that indicates when this resource was created.
+    #   Timestamps are expressed using in ISO8601 format, such as:
+    #   `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] usage_limit
+    #   The maximum number of times the stream URL can start a stream
+    #   session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] remaining_uses
+    #   The number of times the stream URL can still be used to start a
+    #   stream session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_group_arn
+    #   The stream group that runs the stream sessions.
+    #
+    #   This value is an [Amazon Resource Name (ARN)][1] that uniquely
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The application that runs in the stream sessions.
+    #
+    #   This value is an [Amazon Resource Name (ARN)][1] that uniquely
+    #   identifies the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] session_length_seconds
+    #   The maximum length of time, in seconds, that a stream session
+    #   started from this stream URL can run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The descriptive label for the stream URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/StreamUrlSummary AWS API Documentation
+    #
+    class StreamUrlSummary < Struct.new(
+      :arn,
+      :stream_url_id,
+      :stream_url,
+      :status,
+      :status_reason,
+      :expires_at,
+      :created_at,
+      :usage_limit,
+      :remaining_uses,
+      :stream_group_arn,
+      :application_arn,
+      :session_length_seconds,
+      :description)
+      SENSITIVE = [:stream_url]
       include Aws::Structure
     end
 

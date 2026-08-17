@@ -143,6 +143,24 @@ module Aws
                                               ) -> _BatchDeleteTopicReviewedAnswerResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteTopicReviewedAnswerResponseSuccess
 
+      interface _BatchDescribeUserLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDescribeUserLimitsResponse]
+        def user_limits: () -> ::Array[Types::UserLimits]
+        def errors: () -> ::Array[Types::BatchDescribeUserLimitsError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#batch_describe_user_limits-instance_method
+      def batch_describe_user_limits: (
+                                        account_id: ::String,
+                                        ?users: Array[
+                                          {
+                                            user_name: ::String,
+                                            namespace: ::String
+                                          }
+                                        ],
+                                        ?resource_types: Array[("INDEX_STORAGE" | "AGENT_HOURS")]
+                                      ) -> _BatchDescribeUserLimitsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDescribeUserLimitsResponseSuccess
+
       interface _CancelIngestionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelIngestionResponse]
         def arn: () -> ::String
@@ -305,6 +323,25 @@ module Aws
                              ?folder_arns: Array[::String]
                            ) -> _CreateAnalysisResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnalysisResponseSuccess
+
+      interface _CreateApprovalPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApprovalPolicyResponse]
+        def policy: () -> Types::ApprovalPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_approval_policy-instance_method
+      def create_approval_policy: (
+                                    policy_id: ::String,
+                                    name: ::String,
+                                    ?description: ::String,
+                                    actions: Array[("SHARE")],
+                                    asset_types: Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE")],
+                                    applicable_to: {
+                                      type: ("GROUP"),
+                                      group_arns: Array[::String]?
+                                    },
+                                    approval_groups: Array[::String]
+                                  ) -> _CreateApprovalPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApprovalPolicyResponseSuccess
 
       interface _CreateBrandResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateBrandResponse]
@@ -512,6 +549,30 @@ module Aws
                               ) -> _CreateDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceResponseSuccess
 
+      interface _CreateDlpSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDlpSettingResponse]
+        def arn: () -> ::String
+        def dlp_setting_id: () -> ::String
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_dlp_setting-instance_method
+      def create_dlp_setting: (
+                                aws_account_id: ::String,
+                                dlp_setting_id: ::String,
+                                name: ::String,
+                                provider_type: ("MICROSOFT_PURVIEW"),
+                                provider_config: Params::provider_config,
+                                provider_outage_action: ("ALLOW" | "WARN" | "BLOCK"),
+                                enabled: bool,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  }
+                                ]
+                              ) -> _CreateDlpSettingResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDlpSettingResponseSuccess
+
       interface _CreateFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFlowResponse]
         def arn: () -> ::String
@@ -689,6 +750,24 @@ module Aws
                                    ]
                                  ) -> _CreateKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKnowledgeBaseResponseSuccess
+
+      interface _CreateLimitsProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLimitsProfileResponse]
+        def arn: () -> ::String
+        def profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_limits_profile-instance_method
+      def create_limits_profile: (
+                                   account_id: ::String,
+                                   profile_name: ::String,
+                                   ?description: ::String,
+                                   resource_limits: Hash[("INDEX_STORAGE" | "AGENT_HOURS"), {
+                                       max_value: ::Integer,
+                                       unit: ("MB" | "GB" | "HOURS" | "DAYS")
+                                     }],
+                                   client_token: ::String
+                                 ) -> _CreateLimitsProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLimitsProfileResponseSuccess
 
       interface _CreateNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateNamespaceResponse]
@@ -931,6 +1010,31 @@ module Aws
                                          ) -> _CreateTopicRefreshScheduleResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTopicRefreshScheduleResponseSuccess
 
+      interface _CreateTopicV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTopicV2Response]
+        def arn: () -> ::String
+        def topic_id: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_topic_v2-instance_method
+      def create_topic_v2: (
+                             aws_account_id: ::String,
+                             topic_id: ::String,
+                             topic: Params::topic_v2_details,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               }
+                             ],
+                             ?folder_arns: Array[::String],
+                             ?custom_instructions: {
+                               custom_instructions_string: ::String
+                             }
+                           ) -> _CreateTopicV2ResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTopicV2ResponseSuccess
+
       interface _CreateVPCConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateVPCConnectionResponse]
         def arn: () -> ::String
@@ -1034,6 +1138,15 @@ module Aws
                            ) -> _DeleteAnalysisResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnalysisResponseSuccess
 
+      interface _DeleteApprovalPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApprovalPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_approval_policy-instance_method
+      def delete_approval_policy: (
+                                    policy_id: ::String
+                                  ) -> _DeleteApprovalPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApprovalPolicyResponseSuccess
+
       interface _DeleteBrandResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBrandResponse]
         def request_id: () -> ::String
@@ -1134,6 +1247,19 @@ module Aws
                                                    ?namespace: ::String
                                                  ) -> _DeleteDefaultQBusinessApplicationResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDefaultQBusinessApplicationResponseSuccess
+
+      interface _DeleteDlpSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDlpSettingResponse]
+        def arn: () -> ::String
+        def dlp_setting_id: () -> ::String
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_dlp_setting-instance_method
+      def delete_dlp_setting: (
+                                aws_account_id: ::String,
+                                dlp_setting_id: ::String
+                              ) -> _DeleteDlpSettingResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDlpSettingResponseSuccess
 
       interface _DeleteFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFlowResponse]
@@ -1241,6 +1367,17 @@ module Aws
                                    knowledge_base_id: ::String
                                  ) -> _DeleteKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKnowledgeBaseResponseSuccess
+
+      interface _DeleteLimitsProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLimitsProfileResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_limits_profile-instance_method
+      def delete_limits_profile: (
+                                   profile_id: ::String,
+                                   account_id: ::String
+                                 ) -> _DeleteLimitsProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLimitsProfileResponseSuccess
 
       interface _DeleteNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNamespaceResponse]
@@ -1414,6 +1551,20 @@ module Aws
                                            dataset_id: ::String
                                          ) -> _DeleteTopicRefreshScheduleResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTopicRefreshScheduleResponseSuccess
+
+      interface _DeleteTopicV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTopicV2Response]
+        def arn: () -> ::String
+        def topic_id: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_topic_v2-instance_method
+      def delete_topic_v2: (
+                             aws_account_id: ::String,
+                             topic_id: ::String
+                           ) -> _DeleteTopicV2ResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTopicV2ResponseSuccess
 
       interface _DeleteUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserResponse]
@@ -1622,6 +1773,16 @@ module Aws
                                            analysis_id: ::String
                                          ) -> _DescribeAnalysisPermissionsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAnalysisPermissionsResponseSuccess
+
+      interface _DescribeApprovalPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApprovalPolicyResponse]
+        def policy: () -> Types::ApprovalPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_approval_policy-instance_method
+      def describe_approval_policy: (
+                                      policy_id: ::String
+                                    ) -> _DescribeApprovalPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApprovalPolicyResponseSuccess
 
       interface _DescribeAssetBundleExportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetBundleExportJobResponse]
@@ -1938,6 +2099,18 @@ module Aws
                                                    ) -> _DescribeDefaultQBusinessApplicationResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDefaultQBusinessApplicationResponseSuccess
 
+      interface _DescribeDlpSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDlpSettingResponse]
+        def dlp_setting: () -> Types::DlpSettingDetails
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_dlp_setting-instance_method
+      def describe_dlp_setting: (
+                                  aws_account_id: ::String,
+                                  dlp_setting_id: ::String
+                                ) -> _DescribeDlpSettingResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDlpSettingResponseSuccess
+
       interface _DescribeFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlowResponse]
         def flow: () -> Types::FlowDetail
@@ -2118,6 +2291,17 @@ module Aws
                                                  knowledge_base_id: ::String
                                                ) -> _DescribeKnowledgeBasePermissionsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeKnowledgeBasePermissionsResponseSuccess
+
+      interface _DescribeLimitsProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLimitsProfileResponse]
+        def profile: () -> Types::LimitsProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_limits_profile-instance_method
+      def describe_limits_profile: (
+                                     profile_id: ::String,
+                                     account_id: ::String
+                                   ) -> _DescribeLimitsProfileResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLimitsProfileResponseSuccess
 
       interface _DescribeNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNamespaceResponse]
@@ -2380,6 +2564,21 @@ module Aws
                                       ) -> _DescribeTopicPermissionsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTopicPermissionsResponseSuccess
 
+      interface _DescribeTopicPermissionsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTopicPermissionsV2Response]
+        def topic_id: () -> ::String
+        def topic_arn: () -> ::String
+        def permissions: () -> ::Array[Types::ResourcePermission]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_topic_permissions_v2-instance_method
+      def describe_topic_permissions_v2: (
+                                           aws_account_id: ::String,
+                                           topic_id: ::String
+                                         ) -> _DescribeTopicPermissionsV2ResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTopicPermissionsV2ResponseSuccess
+
       interface _DescribeTopicRefreshResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTopicRefreshResponse]
         def refresh_details: () -> Types::TopicRefreshDetails
@@ -2410,6 +2609,22 @@ module Aws
                                              dataset_id: ::String
                                            ) -> _DescribeTopicRefreshScheduleResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTopicRefreshScheduleResponseSuccess
+
+      interface _DescribeTopicV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTopicV2Response]
+        def arn: () -> ::String
+        def topic_id: () -> ::String
+        def topic: () -> Types::TopicV2Details
+        def custom_instructions: () -> Types::CustomInstructions
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_topic_v2-instance_method
+      def describe_topic_v2: (
+                               aws_account_id: ::String,
+                               topic_id: ::String
+                             ) -> _DescribeTopicV2ResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTopicV2ResponseSuccess
 
       interface _DescribeUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUserResponse]
@@ -2652,6 +2867,18 @@ module Aws
                          ) -> _ListAnalysesResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnalysesResponseSuccess
 
+      interface _ListApprovalPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApprovalPoliciesResponse]
+        def policies: () -> ::Array[Types::ApprovalPolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_approval_policies-instance_method
+      def list_approval_policies: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListApprovalPoliciesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApprovalPoliciesResponseSuccess
+
       interface _ListAssetBundleExportJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetBundleExportJobsResponse]
         def asset_bundle_export_job_summary_list: () -> ::Array[Types::AssetBundleExportJobSummary]
@@ -2770,6 +2997,20 @@ module Aws
                                ?max_results: ::Integer
                              ) -> _ListDataSourcesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
+
+      interface _ListDlpSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDlpSettingsResponse]
+        def dlp_setting_summaries: () -> ::Array[Types::DlpSettingSummary]
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_dlp_settings-instance_method
+      def list_dlp_settings: (
+                               aws_account_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListDlpSettingsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDlpSettingsResponseSuccess
 
       interface _ListFlowsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowsOutput]
@@ -2945,6 +3186,20 @@ module Aws
                                   ?next_token: ::String
                                 ) -> _ListKnowledgeBasesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKnowledgeBasesResponseSuccess
+
+      interface _ListLimitsProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLimitsProfilesResponse]
+        def profiles: () -> ::Array[Types::LimitsProfile]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_limits_profiles-instance_method
+      def list_limits_profiles: (
+                                  account_id: ::String,
+                                  ?resource_type: ("INDEX_STORAGE" | "AGENT_HOURS"),
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListLimitsProfilesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLimitsProfilesResponseSuccess
 
       interface _ListNamespacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListNamespacesResponse]
@@ -3203,6 +3458,21 @@ module Aws
                          ?max_results: ::Integer
                        ) -> _ListTopicsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTopicsResponseSuccess
+
+      interface _ListTopicsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTopicsV2Response]
+        def topic_summary_list: () -> ::Array[Types::TopicV2Summary]
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_topics_v2-instance_method
+      def list_topics_v2: (
+                            aws_account_id: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListTopicsV2ResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTopicsV2ResponseSuccess
 
       interface _ListUserGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListUserGroupsResponse]
@@ -3625,6 +3895,28 @@ module Aws
                          ) -> _SearchTopicsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTopicsResponseSuccess
 
+      interface _SearchTopicsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchTopicsV2Response]
+        def topic_summary_list: () -> ::Array[Types::TopicV2Summary]
+        def next_token: () -> ::String
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#search_topics_v2-instance_method
+      def search_topics_v2: (
+                              aws_account_id: ::String,
+                              filters: Array[
+                                {
+                                  operator: ("StringEquals" | "StringLike"),
+                                  name: ("QUICKSIGHT_USER" | "QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER" | "QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "TOPIC_NAME"),
+                                  value: ::String
+                                }
+                              ],
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _SearchTopicsV2ResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTopicsV2ResponseSuccess
+
       interface _StartAssetBundleExportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartAssetBundleExportJobResponse]
         def arn: () -> ::String
@@ -3689,6 +3981,12 @@ module Aws
                                                {
                                                  arn: ::String,
                                                  properties: Array[("Name" | "ParentFolderArn")]
+                                               }
+                                             ]?,
+                                             topics_v2: Array[
+                                               {
+                                                 arn: ::String,
+                                                 properties: Array[("Name" | "Description")]
                                                }
                                              ]?
                                            },
@@ -3789,6 +4087,13 @@ module Aws
                                                  name: ::String?,
                                                  parent_folder_arn: ::String?
                                                }
+                                             ]?,
+                                             topics_v2: Array[
+                                               {
+                                                 topic_id: ::String,
+                                                 name: ::String?,
+                                                 description: ::String?
+                                               }
                                              ]?
                                            },
                                            ?failure_action: ("DO_NOTHING" | "ROLLBACK"),
@@ -3851,6 +4156,15 @@ module Aws
                                                    principals: Array[::String],
                                                    actions: Array[::String]
                                                  }?
+                                               }
+                                             ]?,
+                                             topics_v2: Array[
+                                               {
+                                                 topic_ids: Array[::String],
+                                                 permissions: {
+                                                   principals: Array[::String],
+                                                   actions: Array[::String]
+                                                 }
                                                }
                                              ]?
                                            },
@@ -3924,6 +4238,17 @@ module Aws
                                              folders: Array[
                                                {
                                                  folder_ids: Array[::String],
+                                                 tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String
+                                                   }
+                                                 ]
+                                               }
+                                             ]?,
+                                             topics_v2: Array[
+                                               {
+                                                 topic_ids: Array[::String],
                                                  tags: Array[
                                                    {
                                                      key: ::String,
@@ -4262,6 +4587,25 @@ module Aws
                                                         ) -> _UpdateApplicationWithTokenExchangeGrantResponseSuccess
                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationWithTokenExchangeGrantResponseSuccess
 
+      interface _UpdateApprovalPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApprovalPolicyResponse]
+        def policy: () -> Types::ApprovalPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_approval_policy-instance_method
+      def update_approval_policy: (
+                                    policy_id: ::String,
+                                    ?name: ::String,
+                                    ?description: ::String,
+                                    ?actions: Array[("SHARE")],
+                                    ?asset_types: Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE")],
+                                    ?applicable_to: {
+                                      type: ("GROUP"),
+                                      group_arns: Array[::String]?
+                                    },
+                                    ?approval_groups: Array[::String]
+                                  ) -> _UpdateApprovalPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApprovalPolicyResponseSuccess
+
       interface _UpdateBrandResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrandResponse]
         def request_id: () -> ::String
@@ -4579,6 +4923,24 @@ module Aws
                                                  ) -> _UpdateDefaultQBusinessApplicationResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDefaultQBusinessApplicationResponseSuccess
 
+      interface _UpdateDlpSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDlpSettingResponse]
+        def arn: () -> ::String
+        def dlp_setting_id: () -> ::String
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_dlp_setting-instance_method
+      def update_dlp_setting: (
+                                aws_account_id: ::String,
+                                dlp_setting_id: ::String,
+                                ?name: ::String,
+                                ?provider_type: ("MICROSOFT_PURVIEW"),
+                                ?provider_config: Params::provider_config,
+                                ?provider_outage_action: ("ALLOW" | "WARN" | "BLOCK"),
+                                ?enabled: bool
+                              ) -> _UpdateDlpSettingResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDlpSettingResponseSuccess
+
       interface _UpdateFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowResponse]
         def arn: () -> ::String
@@ -4803,6 +5165,23 @@ module Aws
                                                ]
                                              ) -> _UpdateKnowledgeBasePermissionsResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBasePermissionsResponseSuccess
+
+      interface _UpdateLimitsProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLimitsProfileResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_limits_profile-instance_method
+      def update_limits_profile: (
+                                   profile_id: ::String,
+                                   account_id: ::String,
+                                   ?profile_name: ::String,
+                                   ?description: ::String,
+                                   ?resource_limits: Hash[("INDEX_STORAGE" | "AGENT_HOURS"), {
+                                       max_value: ::Integer,
+                                       unit: ("MB" | "GB" | "HOURS" | "DAYS")
+                                     }]
+                                 ) -> _UpdateLimitsProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLimitsProfileResponseSuccess
 
       interface _UpdateOAuthClientApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOAuthClientApplicationResponse]
@@ -5180,6 +5559,33 @@ module Aws
                                     ) -> _UpdateTopicPermissionsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTopicPermissionsResponseSuccess
 
+      interface _UpdateTopicPermissionsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTopicPermissionsV2Response]
+        def topic_id: () -> ::String
+        def topic_arn: () -> ::String
+        def permissions: () -> ::Array[Types::ResourcePermission]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_topic_permissions_v2-instance_method
+      def update_topic_permissions_v2: (
+                                         aws_account_id: ::String,
+                                         topic_id: ::String,
+                                         ?grant_permissions: Array[
+                                           {
+                                             principal: ::String,
+                                             actions: Array[::String]
+                                           }
+                                         ],
+                                         ?revoke_permissions: Array[
+                                           {
+                                             principal: ::String,
+                                             actions: Array[::String]
+                                           }
+                                         ]
+                                       ) -> _UpdateTopicPermissionsV2ResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTopicPermissionsV2ResponseSuccess
+
       interface _UpdateTopicRefreshScheduleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTopicRefreshScheduleResponse]
         def topic_id: () -> ::String
@@ -5196,6 +5602,25 @@ module Aws
                                            refresh_schedule: Params::topic_refresh_schedule
                                          ) -> _UpdateTopicRefreshScheduleResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTopicRefreshScheduleResponseSuccess
+
+      interface _UpdateTopicV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTopicV2Response]
+        def arn: () -> ::String
+        def topic_id: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_topic_v2-instance_method
+      def update_topic_v2: (
+                             aws_account_id: ::String,
+                             topic_id: ::String,
+                             topic: Params::topic_v2_details,
+                             ?custom_instructions: {
+                               custom_instructions_string: ::String
+                             },
+                             ?publish_option: ("DRAFT" | "PUBLISH")
+                           ) -> _UpdateTopicV2ResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTopicV2ResponseSuccess
 
       interface _UpdateUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]

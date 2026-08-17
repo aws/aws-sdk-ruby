@@ -791,7 +791,7 @@ module Aws::Outposts
       :operating_address,
       :shipping_address,
       :rack_physical_properties)
-      SENSITIVE = []
+      SENSITIVE = [:operating_address, :shipping_address]
       include Aws::Structure
     end
 
@@ -1408,7 +1408,7 @@ module Aws::Outposts
       :site_id,
       :address_type,
       :address)
-      SENSITIVE = []
+      SENSITIVE = [:address]
       include Aws::Structure
     end
 
@@ -3498,7 +3498,7 @@ module Aws::Outposts
       :site_id,
       :address_type,
       :address)
-      SENSITIVE = []
+      SENSITIVE = [:address]
       include Aws::Structure
     end
 
@@ -3515,7 +3515,7 @@ module Aws::Outposts
     class UpdateSiteAddressOutput < Struct.new(
       :address_type,
       :address)
-      SENSITIVE = []
+      SENSITIVE = [:address]
       include Aws::Structure
     end
 

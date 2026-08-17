@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2026-07-31)
+------------------
+
+* Feature - Adds the "EKS" value to the AWSServiceName enum and marks the Address field as sensitive.
+
 1.107.0 (2026-07-09)
 ------------------
 

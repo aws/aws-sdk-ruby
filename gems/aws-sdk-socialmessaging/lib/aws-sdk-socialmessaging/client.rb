@@ -560,6 +560,36 @@ module Aws::SocialMessaging
       req.send_request(options)
     end
 
+    # Creates a Meta Conversions API dataset for a WhatsApp Business
+    # Account.
+    #
+    # @option params [required, String] :id
+    #   The ID of the WhatsApp Business Account to create a dataset for,
+    #   formatted as `waba-01234567890123456789012345678901`.
+    #
+    # @return [Types::CreateWhatsAppDatasetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWhatsAppDatasetOutput#dataset_id #dataset_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_whats_app_dataset({
+    #     id: "LinkedWhatsAppBusinessAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppDataset AWS API Documentation
+    #
+    # @overload create_whats_app_dataset(params = {})
+    # @param [Hash] params ({})
+    def create_whats_app_dataset(params = {}, options = {})
+      req = build_request(:create_whats_app_dataset, params)
+      req.send_request(options)
+    end
+
     # Creates a new WhatsApp Flow. Flows enable businesses to create rich,
     # interactive forms and experiences that users can complete without
     # leaving WhatsApp. The Flow is created in DRAFT status. If `publish` is
@@ -964,6 +994,7 @@ module Aws::SocialMessaging
     #   resp.account.event_destinations[0].event_destination_arn #=> String
     #   resp.account.event_destinations[0].role_arn #=> String
     #   resp.account.marketing_messages_onboarding_status #=> String
+    #   resp.account.dataset_id #=> String
     #   resp.account.phone_numbers #=> Array
     #   resp.account.phone_numbers[0].arn #=> String
     #   resp.account.phone_numbers[0].phone_number #=> String
@@ -1284,6 +1315,7 @@ module Aws::SocialMessaging
     #   resp.linked_accounts[0].event_destinations[0].event_destination_arn #=> String
     #   resp.linked_accounts[0].event_destinations[0].role_arn #=> String
     #   resp.linked_accounts[0].marketing_messages_onboarding_status #=> String
+    #   resp.linked_accounts[0].dataset_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/ListLinkedWhatsAppBusinessAccounts AWS API Documentation
@@ -1672,6 +1704,49 @@ module Aws::SocialMessaging
       req.send_request(options)
     end
 
+    # Sends a conversion event to Meta's Conversions API for the specified
+    # WhatsApp Business Account dataset.
+    #
+    # @option params [required, String] :id
+    #   The ID of the WhatsApp Business Account associated with the dataset,
+    #   formatted as `waba-01234567890123456789012345678901`.
+    #
+    # @option params [required, String] :dataset_id
+    #   The Meta-generated dataset ID to send the event to.
+    #
+    # @option params [required, String, StringIO, File] :event_data
+    #   The raw Meta Conversions API event payload as a JSON blob. See
+    #   [Meta's server event parameters][1] for the supported format.
+    #
+    #
+    #
+    #   [1]: https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event
+    #
+    # @return [Types::SendWhatsAppConversionEventOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendWhatsAppConversionEventOutput#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_whats_app_conversion_event({
+    #     id: "LinkedWhatsAppBusinessAccountId", # required
+    #     dataset_id: "WhatsAppDatasetId", # required
+    #     event_data: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/SendWhatsAppConversionEvent AWS API Documentation
+    #
+    # @overload send_whats_app_conversion_event(params = {})
+    # @param [Hash] params ({})
+    def send_whats_app_conversion_event(params = {}, options = {})
+      req = build_request(:send_whats_app_conversion_event, params)
+      req.send_request(options)
+    end
+
     # Send a WhatsApp message. For examples of sending a message using the
     # Amazon Web Services CLI, see [Sending messages][1] in the <i>
     # <i>Amazon Web Services End User Messaging Social User Guide</i> </i>.
@@ -1960,7 +2035,7 @@ module Aws::SocialMessaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-socialmessaging'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -42,7 +42,7 @@ module Aws::Outposts
       attr_accessor instance_type: ::String
       attr_accessor asset_id: ::String
       attr_accessor account_id: ::String
-      attr_accessor aws_service_name: ("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")
+      attr_accessor aws_service_name: ("AWS" | "EC2" | "EKS" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")
       SENSITIVE: []
     end
 
@@ -60,7 +60,7 @@ module Aws::Outposts
     class BlockingInstance
       attr_accessor instance_id: ::String
       attr_accessor account_id: ::String
-      attr_accessor aws_service_name: ("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")
+      attr_accessor aws_service_name: ("AWS" | "EC2" | "EKS" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")
       SENSITIVE: []
     end
 
@@ -216,7 +216,7 @@ module Aws::Outposts
       attr_accessor operating_address: Types::Address
       attr_accessor shipping_address: Types::Address
       attr_accessor rack_physical_properties: Types::RackPhysicalProperties
-      SENSITIVE: []
+      SENSITIVE: [:operating_address, :shipping_address]
     end
 
     class CreateSiteOutput
@@ -411,7 +411,7 @@ module Aws::Outposts
       attr_accessor site_id: ::String
       attr_accessor address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
       attr_accessor address: Types::Address
-      SENSITIVE: []
+      SENSITIVE: [:address]
     end
 
     class GetSiteInput
@@ -439,7 +439,7 @@ module Aws::Outposts
     class InstancesToExclude
       attr_accessor instances: ::Array[::String]
       attr_accessor account_ids: ::Array[::String]
-      attr_accessor services: ::Array[("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")]
+      attr_accessor services: ::Array[("AWS" | "EC2" | "EKS" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")]
       SENSITIVE: []
     end
 
@@ -477,7 +477,7 @@ module Aws::Outposts
       attr_accessor asset_id_filter: ::Array[::String]
       attr_accessor instance_type_filter: ::Array[::String]
       attr_accessor account_id_filter: ::Array[::String]
-      attr_accessor aws_service_filter: ::Array[("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")]
+      attr_accessor aws_service_filter: ::Array[("AWS" | "EC2" | "EKS" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -946,13 +946,13 @@ module Aws::Outposts
       attr_accessor site_id: ::String
       attr_accessor address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
       attr_accessor address: Types::Address
-      SENSITIVE: []
+      SENSITIVE: [:address]
     end
 
     class UpdateSiteAddressOutput
       attr_accessor address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
       attr_accessor address: Types::Address
-      SENSITIVE: []
+      SENSITIVE: [:address]
     end
 
     class UpdateSiteInput

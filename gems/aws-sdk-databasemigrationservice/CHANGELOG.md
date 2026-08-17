@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2026-07-29)
+------------------
+
+* Feature - Updated documentation for various DMS Schema Conversion operations
+
 1.148.0 (2026-07-09)
 ------------------
 

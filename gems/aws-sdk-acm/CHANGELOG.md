@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2026-08-13)
+------------------
+
+* Feature - This change allows customers to update their existing email-validated certificates to use the DNS validation method.
+
 1.108.0 (2026-07-09)
 ------------------
 

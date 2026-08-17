@@ -330,6 +330,10 @@ module Aws::WAFV2
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PopulationSize = Shapes::IntegerShape.new(name: 'PopulationSize')
     PositionalConstraint = Shapes::StringShape.new(name: 'PositionalConstraint')
+    PreParseTextTransformation = Shapes::StructureShape.new(name: 'PreParseTextTransformation')
+    PreParseTextTransformationPriority = Shapes::IntegerShape.new(name: 'PreParseTextTransformationPriority')
+    PreParseTextTransformationType = Shapes::StringShape.new(name: 'PreParseTextTransformationType')
+    PreParseTextTransformations = Shapes::ListShape.new(name: 'PreParseTextTransformations')
     Price = Shapes::StructureShape.new(name: 'Price')
     PriceAmount = Shapes::StringShape.new(name: 'PriceAmount')
     PriceMultiplier = Shapes::StringShape.new(name: 'PriceMultiplier')
@@ -613,6 +617,7 @@ module Aws::WAFV2
     ByteMatchStatement.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, required: true, location_name: "SearchString"))
     ByteMatchStatement.add_member(:field_to_match, Shapes::ShapeRef.new(shape: FieldToMatch, required: true, location_name: "FieldToMatch"))
     ByteMatchStatement.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    ByteMatchStatement.add_member(:pre_parse_text_transformations, Shapes::ShapeRef.new(shape: PreParseTextTransformations, location_name: "PreParseTextTransformations"))
     ByteMatchStatement.add_member(:positional_constraint, Shapes::ShapeRef.new(shape: PositionalConstraint, required: true, location_name: "PositionalConstraint"))
     ByteMatchStatement.struct_class = Types::ByteMatchStatement
 
@@ -1494,6 +1499,12 @@ module Aws::WAFV2
 
     PhoneNumberFields.member = Shapes::ShapeRef.new(shape: PhoneNumberField)
 
+    PreParseTextTransformation.add_member(:priority, Shapes::ShapeRef.new(shape: PreParseTextTransformationPriority, required: true, location_name: "Priority"))
+    PreParseTextTransformation.add_member(:type, Shapes::ShapeRef.new(shape: PreParseTextTransformationType, required: true, location_name: "Type"))
+    PreParseTextTransformation.struct_class = Types::PreParseTextTransformation
+
+    PreParseTextTransformations.member = Shapes::ShapeRef.new(shape: PreParseTextTransformation)
+
     Price.add_member(:amount, Shapes::ShapeRef.new(shape: PriceAmount, required: true, location_name: "Amount"))
     Price.add_member(:currency, Shapes::ShapeRef.new(shape: CryptoCurrency, required: true, location_name: "Currency"))
     Price.struct_class = Types::Price
@@ -1599,6 +1610,7 @@ module Aws::WAFV2
     RegexMatchStatement.add_member(:regex_string, Shapes::ShapeRef.new(shape: RegexPatternString, required: true, location_name: "RegexString"))
     RegexMatchStatement.add_member(:field_to_match, Shapes::ShapeRef.new(shape: FieldToMatch, required: true, location_name: "FieldToMatch"))
     RegexMatchStatement.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    RegexMatchStatement.add_member(:pre_parse_text_transformations, Shapes::ShapeRef.new(shape: PreParseTextTransformations, location_name: "PreParseTextTransformations"))
     RegexMatchStatement.struct_class = Types::RegexMatchStatement
 
     RegexPatternSet.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
@@ -1611,6 +1623,7 @@ module Aws::WAFV2
     RegexPatternSetReferenceStatement.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ARN"))
     RegexPatternSetReferenceStatement.add_member(:field_to_match, Shapes::ShapeRef.new(shape: FieldToMatch, required: true, location_name: "FieldToMatch"))
     RegexPatternSetReferenceStatement.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    RegexPatternSetReferenceStatement.add_member(:pre_parse_text_transformations, Shapes::ShapeRef.new(shape: PreParseTextTransformations, location_name: "PreParseTextTransformations"))
     RegexPatternSetReferenceStatement.struct_class = Types::RegexPatternSetReferenceStatement
 
     RegexPatternSetSummaries.member = Shapes::ShapeRef.new(shape: RegexPatternSetSummary)
@@ -1814,6 +1827,7 @@ module Aws::WAFV2
     SizeConstraintStatement.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
     SizeConstraintStatement.add_member(:size, Shapes::ShapeRef.new(shape: Size, required: true, location_name: "Size"))
     SizeConstraintStatement.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    SizeConstraintStatement.add_member(:pre_parse_text_transformations, Shapes::ShapeRef.new(shape: PreParseTextTransformations, location_name: "PreParseTextTransformations"))
     SizeConstraintStatement.struct_class = Types::SizeConstraintStatement
 
     SourceStatistics.add_member(:source_name, Shapes::ShapeRef.new(shape: FilterString, required: true, location_name: "SourceName"))
@@ -1831,6 +1845,7 @@ module Aws::WAFV2
 
     SqliMatchStatement.add_member(:field_to_match, Shapes::ShapeRef.new(shape: FieldToMatch, required: true, location_name: "FieldToMatch"))
     SqliMatchStatement.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    SqliMatchStatement.add_member(:pre_parse_text_transformations, Shapes::ShapeRef.new(shape: PreParseTextTransformations, location_name: "PreParseTextTransformations"))
     SqliMatchStatement.add_member(:sensitivity_level, Shapes::ShapeRef.new(shape: SensitivityLevel, location_name: "SensitivityLevel"))
     SqliMatchStatement.struct_class = Types::SqliMatchStatement
 
@@ -2081,6 +2096,7 @@ module Aws::WAFV2
 
     XssMatchStatement.add_member(:field_to_match, Shapes::ShapeRef.new(shape: FieldToMatch, required: true, location_name: "FieldToMatch"))
     XssMatchStatement.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    XssMatchStatement.add_member(:pre_parse_text_transformations, Shapes::ShapeRef.new(shape: PreParseTextTransformations, location_name: "PreParseTextTransformations"))
     XssMatchStatement.struct_class = Types::XssMatchStatement
 
 

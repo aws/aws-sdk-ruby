@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2026-08-17)
+------------------
+
+* Feature - Add new Transfer Responsibility error codes and document related CloudTrail events for accepting and terminating a Transfer Responsibility.
+
+1.146.0 (2026-08-11)
+------------------
+
+* Feature - Documentation update for AWS Organizations that clarifies valid input values for the HandshakePartyType parameter in the InviteAccountToOrganization. API ORGANIZATION is valid in responses only. valid input values are ACCOUNT and EMAIL
+
+1.145.0 (2026-08-04)
+------------------
+
+* Feature - Improved accuracy of CloudTrail event documentation for AWS Organizations membership operations.
+
 1.144.0 (2026-07-20)
 ------------------
 

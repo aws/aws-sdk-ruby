@@ -221,6 +221,7 @@ module Aws
         def mss_manifests: () -> ::Array[Types::GetMssManifestConfiguration]
         def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration
         def uri_separator: () -> ("UNDERSCORE" | "HYPHEN")
+        def stream_name_output_mode: () -> ("INDEX" | "PASSTHROUGH_NAME")
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -250,6 +251,7 @@ module Aws
                                       endpoint_error_conditions: Array[("STALE_MANIFEST" | "INCOMPLETE_MANIFEST" | "MISSING_DRM_KEY" | "SLATE_INPUT")]?
                                     },
                                     ?uri_separator: ("UNDERSCORE" | "HYPHEN"),
+                                    ?stream_name_output_mode: ("INDEX" | "PASSTHROUGH_NAME"),
                                     ?tags: Hash[::String, ::String]
                                   ) -> _CreateOriginEndpointResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOriginEndpointResponseSuccess
@@ -405,6 +407,7 @@ module Aws
         def mss_manifests: () -> ::Array[Types::GetMssManifestConfiguration]
         def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration
         def uri_separator: () -> ("UNDERSCORE" | "HYPHEN")
+        def stream_name_output_mode: () -> ("INDEX" | "PASSTHROUGH_NAME")
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -636,6 +639,7 @@ module Aws
         def mss_manifests: () -> ::Array[Types::GetMssManifestConfiguration]
         def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration
         def uri_separator: () -> ("UNDERSCORE" | "HYPHEN")
+        def stream_name_output_mode: () -> ("INDEX" | "PASSTHROUGH_NAME")
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
@@ -665,6 +669,7 @@ module Aws
                                       endpoint_error_conditions: Array[("STALE_MANIFEST" | "INCOMPLETE_MANIFEST" | "MISSING_DRM_KEY" | "SLATE_INPUT")]?
                                     },
                                     ?uri_separator: ("UNDERSCORE" | "HYPHEN"),
+                                    ?stream_name_output_mode: ("INDEX" | "PASSTHROUGH_NAME"),
                                     ?etag: ::String
                                   ) -> _UpdateOriginEndpointResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOriginEndpointResponseSuccess

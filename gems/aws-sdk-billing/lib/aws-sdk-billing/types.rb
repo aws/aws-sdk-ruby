@@ -42,6 +42,30 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # An additional charge applied to an Enterprise Support contract.
+    #
+    # @!attribute [rw] description
+    #   A description of the additional charge.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The charge amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_type
+    #   The type of additional charge.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AdditionalCharge AWS API Documentation
+    #
+    class AdditionalCharge < Struct.new(
+      :description,
+      :amount,
+      :charge_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A monetary amount with a currency code. Used throughout the Billing
     # API to represent credit balances, allocations, and adjustments.
     #
@@ -360,6 +384,27 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # An account that is charged all or a portion of the total Support
+    # charge and the percentage of the charge allocated to it.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_percentage
+    #   The percentage of the total Support charge allocated to this
+    #   account. This is 0.0 when supportAllocationMethod = Proportional.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ChargeAccount AWS API Documentation
+    #
+    class ChargeAccount < Struct.new(
+      :account_id,
+      :charge_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested operation would cause a conflict with the current state
     # of a service resource associated with the request. Resolve the
     # conflict before retrying this request.
@@ -381,6 +426,26 @@ module Aws::Billing
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An account that is covered by the Enterprise Support contract.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_gdn
+    #   When true, Support charges are calculated on charges before private
+    #   discounts. When false, they are calculated after private discounts.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ContractAccount AWS API Documentation
+    #
+    class ContractAccount < Struct.new(
+      :account_id,
+      :is_gdn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -726,6 +791,25 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # A time period for Enterprise Support billing.
+    #
+    # @!attribute [rw] begin_date
+    #   The begin date of the time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the time period.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/EnterpriseSupportTimePeriod AWS API Documentation
+    #
+    class EnterpriseSupportTimePeriod < Struct.new(
+      :begin_date,
+      :end_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # See [Expression][1]. Billing view only supports `LINKED_ACCOUNT`,
     # `Tags`, and `CostCategories`.
     #
@@ -957,6 +1041,229 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # The request structure for GetEnterpriseSupportChargeSummary.
+    #
+    # @!attribute [rw] billing_month
+    #   The billing month in YYYY-MM format. This must be a month in the
+    #   past.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetEnterpriseSupportChargeSummaryRequest AWS API Documentation
+    #
+    class GetEnterpriseSupportChargeSummaryRequest < Struct.new(
+      :billing_month)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response structure for GetEnterpriseSupportChargeSummary.
+    #
+    # @!attribute [rw] payer_account_id
+    #   The payer account ID that is authorized to view Enterprise Support
+    #   data for all accounts in its Support profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_month
+    #   The billing month in YYYY-MM format. This must be a month in the
+    #   past.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_period_start_date
+    #   The start date of the billing period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] billing_period_end_date
+    #   The end date of the billing period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] is_estimated
+    #   When true, the Support charge amount is estimated. When false, the
+    #   Support charge amount is finalized.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] bill_date
+    #   The date the bill was generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] support_charge
+    #   The Support charge amount for the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_support_charge
+    #   The total Support charge amount for all accounts in the Support
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_discount
+    #   The support discount amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_support_eligible_spend
+    #   The total Support-eligible Spend from all accounts in the Support
+    #   profile. This includes eligible spend from usage of Amazon Web
+    #   Services, Reserved Instances, and Savings Plans.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_support_eligible_usage_spend
+    #   The total Support-eligible spend from usage of Amazon Web Services
+    #   from all accounts in the Support profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_support_eligible_reserved_instance_spend
+    #   The total Support-eligible Reserved Instance spend from all accounts
+    #   in the Support profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_support_eligible_savings_plan_spend
+    #   The total Support-eligible Savings Plan spend from all accounts in
+    #   the Support profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_charge_percentage
+    #   The percentage applied to the total Support-eligible spend to
+    #   calculate the total Support charge across all accounts in the
+    #   Support profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_effective_pricing_plan
+    #   The effective pricing plan used for the support charge calculation.
+    #   @return [Types::PricingPlan]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetEnterpriseSupportChargeSummaryResponse AWS API Documentation
+    #
+    class GetEnterpriseSupportChargeSummaryResponse < Struct.new(
+      :payer_account_id,
+      :billing_month,
+      :billing_period_start_date,
+      :billing_period_end_date,
+      :is_estimated,
+      :bill_date,
+      :support_charge,
+      :total_support_charge,
+      :support_discount,
+      :total_support_eligible_spend,
+      :total_support_eligible_usage_spend,
+      :total_support_eligible_reserved_instance_spend,
+      :total_support_eligible_savings_plan_spend,
+      :support_charge_percentage,
+      :support_effective_pricing_plan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request structure for GetEnterpriseSupportContractDetails.
+    #
+    # @!attribute [rw] billing_month
+    #   The billing month in YYYY-MM format. This must be a month in the
+    #   past.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetEnterpriseSupportContractDetailsRequest AWS API Documentation
+    #
+    class GetEnterpriseSupportContractDetailsRequest < Struct.new(
+      :billing_month)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response structure for GetEnterpriseSupportContractDetails.
+    #
+    # @!attribute [rw] is_contract_active
+    #   When true, the Enterprise Support contract is active. When false,
+    #   the Enterprise Support Contract is inactive.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] support_allocation_method
+    #   The method used to distribute the total Support charge amount across
+    #   each account in the Support profile. Valid values: Proportional,
+    #   Fixed\_Percentage. Proportional means support charges are
+    #   distributed to each account in proportion to its eligible Spend.
+    #   Fixed\_Percentage means support charges are distributed across
+    #   accounts according to pre-configured percentages from the contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_reserved_instance_amortization_start_date
+    #   When supportReservedInstanceTreatmentMethod = AmortizedCustom, only
+    #   amortized fees for Reserved Instances purchased on or after this
+    #   date are included in the calculation. This field is Null for all
+    #   other treatment methods.
+    #   @return [Time]
+    #
+    # @!attribute [rw] support_reserved_instance_treatment_method
+    #   The method used to include Reserved Instance (RI) fees in the
+    #   Enterprise Support charge calculation. Valid values: None (RI fees
+    #   excluded from Support-eligible spend), Upfront (full upfront RI fees
+    #   included in month of purchase), Amortized (RI fees spread over
+    #   commitment term for RIs purchased on or after Support subscription
+    #   start date), AmortizedCustom (same as Amortized but only for RIs
+    #   purchased on or after a specified custom start date), AmortizedAll
+    #   (RI fees amortized for all active RIs including those purchased
+    #   before Support subscription started).
+    #   @return [String]
+    #
+    # @!attribute [rw] support_savings_plans_amortization_start_date
+    #   This is applicable when supportSavingsPlansTreatmentMethod =
+    #   Amortized and is Null for all other methods. It shows the start date
+    #   from which Savings Plan fees are included in Support Eligible Spend.
+    #   @return [Time]
+    #
+    # @!attribute [rw] support_savings_plans_treatment_method
+    #   The method used to include Savings Plans fees in Enterprise Support
+    #   charge calculations. Valid values: None (Savings Plan fees excluded
+    #   from Support-eligible spend), Upfront (full upfront Savings Plan
+    #   fees included in month of purchase), Amortized (Savings Plan fees
+    #   spread over commitment term for Savings Plans purchased on or after
+    #   Support subscription start date), AmortizedCustom (same as Amortized
+    #   but only for Savings Plans purchased on or after a specified custom
+    #   start date), AmortizedAll (Savings Plan fees amortized for all
+    #   active Savings Plans including those purchased before Support
+    #   subscription started).
+    #   @return [String]
+    #
+    # @!attribute [rw] support_prorate_start_date
+    #   The start date for accounts subscribed or unsubscribed to Support
+    #   billing during the billing month.
+    #   @return [Time]
+    #
+    # @!attribute [rw] contract_payer_account_ids
+    #   The list of accounts covered by the Enterprise Support contract.
+    #   @return [Array<Types::ContractAccount>]
+    #
+    # @!attribute [rw] charged_payer_account_ids
+    #   The list of payer accounts and their charge allocation percentages.
+    #   @return [Array<Types::ChargeAccount>]
+    #
+    # @!attribute [rw] additional_support_charge
+    #   Any Additional support charges applied to the contract.
+    #   @return [Array<Types::AdditionalCharge>]
+    #
+    # @!attribute [rw] additional_support_eligible_usage_spend
+    #   Any Additional support-eligible usage spend charges.
+    #   @return [Array<Types::AdditionalCharge>]
+    #
+    # @!attribute [rw] pricing_plans
+    #   The pricing plans associated with this Enterprise Support contract.
+    #   @return [Array<Types::PricingPlan>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetEnterpriseSupportContractDetailsResponse AWS API Documentation
+    #
+    class GetEnterpriseSupportContractDetailsResponse < Struct.new(
+      :is_contract_active,
+      :support_allocation_method,
+      :support_reserved_instance_amortization_start_date,
+      :support_reserved_instance_treatment_method,
+      :support_savings_plans_amortization_start_date,
+      :support_savings_plans_treatment_method,
+      :support_prorate_start_date,
+      :contract_payer_account_ids,
+      :charged_payer_account_ids,
+      :additional_support_charge,
+      :additional_support_eligible_usage_spend,
+      :pricing_plans)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the billing view resource to which
     #   the policy is attached to.
@@ -999,6 +1306,78 @@ module Aws::Billing
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enterprise Support charges for a linked account.
+    #
+    # @!attribute [rw] account_id
+    #   The linked account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] payer_account_id
+    #   The payer account ID that is authorized to view Enterprise Support
+    #   data for all accounts in its Support profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_type
+    #   The type of account.
+    #   @return [String]
+    #
+    # @!attribute [rw] billable_seconds
+    #   The number of billable seconds in the billing period based on when
+    #   the account was subscribed to Enterprise Support.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_seconds
+    #   The total number of seconds in the billing period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_support_eligible_spend
+    #   The total support-eligible spend for this account.
+    #   @return [String]
+    #
+    # @!attribute [rw] prorated_total_support_eligible_spend
+    #   The prorated total support-eligible spend based on when the account
+    #   was subscribed to Enterprise Support.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_time_periods
+    #   The time periods during which this account was linked.
+    #   @return [Array<Types::EnterpriseSupportTimePeriod>]
+    #
+    # @!attribute [rw] subscription_time_periods
+    #   The subscription time periods for this account.
+    #   @return [Array<Types::EnterpriseSupportTimePeriod>]
+    #
+    # @!attribute [rw] total_support_eligible_reserved_instance_spend
+    #   The total support-eligible Reserved Instance spend for this account.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_support_eligible_savings_plan_spend
+    #   The total support-eligible Savings Plan spend for this account.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_eligible_spend_by_service
+    #   The support-eligible spend broken down by service.
+    #   @return [Array<Types::ServiceLevelAccountUsage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/LinkedAccountCharge AWS API Documentation
+    #
+    class LinkedAccountCharge < Struct.new(
+      :account_id,
+      :payer_account_id,
+      :account_type,
+      :billable_seconds,
+      :total_seconds,
+      :total_support_eligible_spend,
+      :prorated_total_support_eligible_spend,
+      :linked_time_periods,
+      :subscription_time_periods,
+      :total_support_eligible_reserved_instance_spend,
+      :total_support_eligible_savings_plan_spend,
+      :support_eligible_spend_by_service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1077,6 +1456,56 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # The request structure for ListEnterpriseSupportLinkedAccountCharges.
+    #
+    # @!attribute [rw] billing_month
+    #   The billing month in YYYY-MM format. This must be a month in the
+    #   past.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   An optional linked account ID to filter results to a specific
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListEnterpriseSupportLinkedAccountChargesRequest AWS API Documentation
+    #
+    class ListEnterpriseSupportLinkedAccountChargesRequest < Struct.new(
+      :billing_month,
+      :account_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response structure for ListEnterpriseSupportLinkedAccountCharges.
+    #
+    # @!attribute [rw] linked_account
+    #   The list of Enterprise Support charges per linked account.
+    #   @return [Array<Types::LinkedAccountCharge>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListEnterpriseSupportLinkedAccountChargesResponse AWS API Documentation
+    #
+    class ListEnterpriseSupportLinkedAccountChargesResponse < Struct.new(
+      :linked_account,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) that can be used to uniquely identify
     #   the billing view.
@@ -1144,6 +1573,114 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # A pricing plan for Enterprise Support billing.
+    #
+    # @!attribute [rw] pricing_plan_id
+    #   The unique identifier for the pricing plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the pricing plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the pricing plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The start date of the pricing plan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the pricing plan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] plan_discount_percent
+    #   The discount percentage applied by this pricing plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] discount_applies_to_minimum_charge
+    #   Whether the discount applies to the minimum Support charge.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] minimum_charge
+    #   The minimum Support charge amount for this pricing plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] tiered
+    #   Whether the pricing plan uses tiered pricing.
+    #   @return [String]
+    #
+    # @!attribute [rw] tiers
+    #   The pricing tiers within this plan.
+    #   @return [Array<Types::PricingPlanTier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/PricingPlan AWS API Documentation
+    #
+    class PricingPlan < Struct.new(
+      :pricing_plan_id,
+      :name,
+      :description,
+      :start_date,
+      :end_date,
+      :plan_discount_percent,
+      :discount_applies_to_minimum_charge,
+      :minimum_charge,
+      :tiered,
+      :tiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tier within an Enterprise Support pricing plan.
+    #
+    # @!attribute [rw] tier_minimum
+    #   The minimum spend threshold for this tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] tier_maximum
+    #   The maximum spend threshold for this tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_charge
+    #   The base charge for this tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_percentage_of_aggregate_charges
+    #   The additional percentage applied to aggregate charges in this tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregate_charges_adjustment
+    #   The adjustment applied to aggregate charges.
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental
+    #   Whether the tier charges are calculated incrementally.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] increment
+    #   The increment amount for incremental tier calculations.
+    #   @return [String]
+    #
+    # @!attribute [rw] increment_charge
+    #   The charge per increment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/PricingPlanTier AWS API Documentation
+    #
+    class PricingPlanTier < Struct.new(
+      :tier_minimum,
+      :tier_maximum,
+      :base_charge,
+      :additional_percentage_of_aggregate_charges,
+      :aggregate_charges_adjustment,
+      :incremental,
+      :increment,
+      :increment_charge)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] promo_code
     #   The promotional credit code to redeem.
     #   @return [String]
@@ -1198,6 +1735,25 @@ module Aws::Billing
     class ResourceTag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Service-level usage details by account.
+    #
+    # @!attribute [rw] service_code
+    #   The service code for which to return Support-eligible spend data.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_support_eligible_spend
+    #   The total support-eligible spend for the service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ServiceLevelAccountUsage AWS API Documentation
+    #
+    class ServiceLevelAccountUsage < Struct.new(
+      :service_code,
+      :total_support_eligible_spend)
       SENSITIVE = []
       include Aws::Structure
     end

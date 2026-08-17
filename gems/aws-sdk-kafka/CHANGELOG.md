@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2026-08-06)
+------------------
+
+* Feature - MSK Clusters can now deliver authorizer logs alongside broker logs to the destinations defined by you
+
+1.117.0 (2026-07-30)
+------------------
+
+* Feature - Amazon MSK Express brokers now support streaming tables for Apache Iceberg, continuously materializing Apache Kafka topics as Iceberg tables in Amazon S3 Tables. Express brokers also now support data delivery to Amazon S3 general purpose buckets.
+
 1.116.0 (2026-07-09)
 ------------------
 

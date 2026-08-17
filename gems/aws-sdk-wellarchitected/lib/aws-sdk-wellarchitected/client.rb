@@ -543,6 +543,286 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Creates a context associated with an optimization profile. Contexts
+    # provide application and environment information used during
+    # recommendation generation.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile to associate the context
+    #   with.
+    #
+    # @option params [required, String] :title
+    #   The title of the context.
+    #
+    # @option params [required, String] :context_type
+    #   The type of the context.
+    #
+    # @option params [required, Types::ContextContent] :content
+    #   The typed content of the context. The structure contains
+    #   application-specific fields such as account IDs, Regions, services,
+    #   and resource types.
+    #
+    # @return [Types::CreateAgentContextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAgentContextResponse#context #context} => Types::ContextSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_agent_context({
+    #     client_token: "CreateAgentContextRequestClientTokenString",
+    #     profile_arn: "AgentProfileArn", # required
+    #     title: "CreateAgentContextRequestTitleString", # required
+    #     context_type: "APPLICATION", # required, accepts APPLICATION
+    #     content: { # required
+    #       account_ids: ["ContextContentAccountIdsListMemberString"],
+    #       regions: ["ContextContentRegionsListMemberString"],
+    #       aws_services: ["ContextContentAwsServicesListMemberString"],
+    #       resource_types: ["ContextContentResourceTypesListMemberString"],
+    #       resource_tags: [
+    #         {
+    #           key: "ContextResourceTagKeyString", # required
+    #           value: "ContextResourceTagValueString", # required
+    #         },
+    #       ],
+    #       application_overview: "ContextContentApplicationOverviewString",
+    #       industry: "ContextContentIndustryString",
+    #       application_type: "SAS", # accepts SAS, DESKTOP_APPLICATION, OTHER
+    #       criticality: "MISSION_CRITICAL", # accepts MISSION_CRITICAL, BUSINESS_CRITICAL, NON_CRITICAL, TEST_DEVELOPMENT
+    #       architecture_overview: "ContextContentArchitectureOverviewString",
+    #       additional_context: "ContextContentAdditionalContextString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context.id #=> String
+    #   resp.context.profile_arn #=> String
+    #   resp.context.title #=> String
+    #   resp.context.context_type #=> String, one of "APPLICATION"
+    #   resp.context.content.account_ids #=> Array
+    #   resp.context.content.account_ids[0] #=> String
+    #   resp.context.content.regions #=> Array
+    #   resp.context.content.regions[0] #=> String
+    #   resp.context.content.aws_services #=> Array
+    #   resp.context.content.aws_services[0] #=> String
+    #   resp.context.content.resource_types #=> Array
+    #   resp.context.content.resource_types[0] #=> String
+    #   resp.context.content.resource_tags #=> Array
+    #   resp.context.content.resource_tags[0].key #=> String
+    #   resp.context.content.resource_tags[0].value #=> String
+    #   resp.context.content.application_overview #=> String
+    #   resp.context.content.industry #=> String
+    #   resp.context.content.application_type #=> String, one of "SAS", "DESKTOP_APPLICATION", "OTHER"
+    #   resp.context.content.criticality #=> String, one of "MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"
+    #   resp.context.content.architecture_overview #=> String
+    #   resp.context.content.additional_context #=> String
+    #   resp.context.application_type #=> String, one of "SAS", "DESKTOP_APPLICATION", "OTHER"
+    #   resp.context.criticality #=> String, one of "MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"
+    #   resp.context.created_by #=> String
+    #   resp.context.created_at #=> Time
+    #   resp.context.last_modified_by #=> String
+    #   resp.context.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentContext AWS API Documentation
+    #
+    # @overload create_agent_context(params = {})
+    # @param [Hash] params ({})
+    def create_agent_context(params = {}, options = {})
+      req = build_request(:create_agent_context, params)
+      req.send_request(options)
+    end
+
+    # Creates an optimization goal associated with a profile. Goals define
+    # specific targets and objectives for the optimization process.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile to associate the goal
+    #   with.
+    #
+    # @option params [required, Array<String>] :pillars
+    #   The Well-Architected Tool Framework pillars to associate with this
+    #   goal.
+    #
+    # @option params [required, String] :title
+    #   The title of the goal.
+    #
+    # @option params [String] :description
+    #   A description of the goal.
+    #
+    # @return [Types::CreateAgentGoalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAgentGoalResponse#goal #goal} => Types::GoalSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_agent_goal({
+    #     client_token: "CreateAgentGoalRequestClientTokenString",
+    #     profile_arn: "AgentProfileArn", # required
+    #     pillars: ["COST_OPTIMIZATION"], # required, accepts COST_OPTIMIZATION, SECURITY, RESILIENCE, PERFORMANCE, OPERATIONAL_EXCELLENCE
+    #     title: "CreateAgentGoalRequestTitleString", # required
+    #     description: "CreateAgentGoalRequestDescriptionString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.goal.id #=> String
+    #   resp.goal.profile_arn #=> String
+    #   resp.goal.pillars #=> Array
+    #   resp.goal.pillars[0] #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.goal.title #=> String
+    #   resp.goal.description #=> String
+    #   resp.goal.created_by #=> String
+    #   resp.goal.created_at #=> Time
+    #   resp.goal.last_modified_by #=> String
+    #   resp.goal.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentGoal AWS API Documentation
+    #
+    # @overload create_agent_goal(params = {})
+    # @param [Hash] params ({})
+    def create_agent_goal(params = {}, options = {})
+      req = build_request(:create_agent_goal, params)
+      req.send_request(options)
+    end
+
+    # Creates an optimization profile that defines the scope and
+    # configuration for generating recommendations. A profile specifies the
+    # execution role, target pillars, and aggregation settings for analyzing
+    # your Amazon Web Services resources.
+    #
+    # @option params [required, String] :name
+    #   The system name of the profile.
+    #
+    # @option params [String] :display_name
+    #   The display name of the profile shown to users.
+    #
+    # @option params [String] :description
+    #   A description of the profile.
+    #
+    # @option params [String] :business_overview
+    #   The business overview for this profile.
+    #
+    # @option params [required, Array<String>] :pillars
+    #   The Well-Architected Tool Framework pillars to associate with this
+    #   profile.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates whether deletion protection is enabled for the profile.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The ARN of the IAM execution role used for recommendation actions.
+    #
+    # @option params [required, Array<Types::AggregationConfiguration>] :aggregation_configuration
+    #   The aggregation configuration that defines which Amazon Web Services
+    #   accounts and Regions to analyze.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with the profile.
+    #
+    # @return [Types::CreateAgentProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAgentProfileResponse#name #name} => String
+    #   * {Types::CreateAgentProfileResponse#display_name #display_name} => String
+    #   * {Types::CreateAgentProfileResponse#description #description} => String
+    #   * {Types::CreateAgentProfileResponse#business_overview #business_overview} => String
+    #   * {Types::CreateAgentProfileResponse#pillars #pillars} => Array&lt;String&gt;
+    #   * {Types::CreateAgentProfileResponse#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::CreateAgentProfileResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::CreateAgentProfileResponse#aggregation_configuration #aggregation_configuration} => Array&lt;Types::AggregationConfiguration&gt;
+    #   * {Types::CreateAgentProfileResponse#arn #arn} => String
+    #   * {Types::CreateAgentProfileResponse#eligible_for_scheduled_generation #eligible_for_scheduled_generation} => Boolean
+    #   * {Types::CreateAgentProfileResponse#eligible_for_architecture_generation #eligible_for_architecture_generation} => Boolean
+    #   * {Types::CreateAgentProfileResponse#field_errors #field_errors} => Hash&lt;String,String&gt;
+    #   * {Types::CreateAgentProfileResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::CreateAgentProfileResponse#created_by #created_by} => String
+    #   * {Types::CreateAgentProfileResponse#created_at #created_at} => Time
+    #   * {Types::CreateAgentProfileResponse#last_modified_by #last_modified_by} => String
+    #   * {Types::CreateAgentProfileResponse#last_modified_at #last_modified_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_agent_profile({
+    #     name: "CreateAgentProfileRequestNameString", # required
+    #     display_name: "CreateAgentProfileRequestDisplayNameString",
+    #     description: "CreateAgentProfileRequestDescriptionString",
+    #     business_overview: "CreateAgentProfileRequestBusinessOverviewString",
+    #     pillars: ["COST_OPTIMIZATION"], # required, accepts COST_OPTIMIZATION, SECURITY, RESILIENCE, PERFORMANCE, OPERATIONAL_EXCELLENCE
+    #     deletion_protection: false,
+    #     execution_role_arn: "RoleArn", # required
+    #     aggregation_configuration: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         regions: ["Region"], # required
+    #         access_role_arn: "RoleArn", # required
+    #       },
+    #     ],
+    #     client_token: "CreateAgentProfileRequestClientTokenString",
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.display_name #=> String
+    #   resp.description #=> String
+    #   resp.business_overview #=> String
+    #   resp.pillars #=> Array
+    #   resp.pillars[0] #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.deletion_protection #=> Boolean
+    #   resp.execution_role_arn #=> String
+    #   resp.aggregation_configuration #=> Array
+    #   resp.aggregation_configuration[0].account_id #=> String
+    #   resp.aggregation_configuration[0].regions #=> Array
+    #   resp.aggregation_configuration[0].regions[0] #=> String
+    #   resp.aggregation_configuration[0].access_role_arn #=> String
+    #   resp.arn #=> String
+    #   resp.eligible_for_scheduled_generation #=> Boolean
+    #   resp.eligible_for_architecture_generation #=> Boolean
+    #   resp.field_errors #=> Hash
+    #   resp.field_errors["FieldErrorPath"] #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_modified_by #=> String
+    #   resp.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentProfile AWS API Documentation
+    #
+    # @overload create_agent_profile(params = {})
+    # @param [Hash] params ({})
+    def create_agent_profile(params = {}, options = {})
+      req = build_request(:create_agent_profile, params)
+      req.send_request(options)
+    end
+
     # Create a lens share.
     #
     # The owner of a lens can share it with other Amazon Web Services
@@ -1345,6 +1625,81 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Deletes a context associated with a profile.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the context.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the context to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_agent_context({
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentContext AWS API Documentation
+    #
+    # @overload delete_agent_context(params = {})
+    # @param [Hash] params ({})
+    def delete_agent_context(params = {}, options = {})
+      req = build_request(:delete_agent_context, params)
+      req.send_request(options)
+    end
+
+    # Deletes an optimization goal from a profile.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the goal.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the goal to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_agent_goal({
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentGoal AWS API Documentation
+    #
+    # @overload delete_agent_goal(params = {})
+    # @param [Hash] params ({})
+    def delete_agent_goal(params = {}, options = {})
+      req = build_request(:delete_agent_goal, params)
+      req.send_request(options)
+    end
+
+    # Deletes an optimization profile and its associated configuration. This
+    # action cannot be undone.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_agent_profile({
+    #     profile_arn: "AgentProfileArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentProfile AWS API Documentation
+    #
+    # @overload delete_agent_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_agent_profile(params = {}, options = {})
+      req = build_request(:delete_agent_profile, params)
+      req.send_request(options)
+    end
+
     # Delete an existing lens.
     #
     # Only the owner of a lens can delete it. After the lens is deleted,
@@ -1891,6 +2246,379 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def export_lens(params = {}, options = {})
       req = build_request(:export_lens, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific context associated
+    # with a profile.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the context.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the context to retrieve.
+    #
+    # @return [Types::GetAgentContextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentContextResponse#context #context} => Types::ContextSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_context({
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context.id #=> String
+    #   resp.context.profile_arn #=> String
+    #   resp.context.title #=> String
+    #   resp.context.context_type #=> String, one of "APPLICATION"
+    #   resp.context.content.account_ids #=> Array
+    #   resp.context.content.account_ids[0] #=> String
+    #   resp.context.content.regions #=> Array
+    #   resp.context.content.regions[0] #=> String
+    #   resp.context.content.aws_services #=> Array
+    #   resp.context.content.aws_services[0] #=> String
+    #   resp.context.content.resource_types #=> Array
+    #   resp.context.content.resource_types[0] #=> String
+    #   resp.context.content.resource_tags #=> Array
+    #   resp.context.content.resource_tags[0].key #=> String
+    #   resp.context.content.resource_tags[0].value #=> String
+    #   resp.context.content.application_overview #=> String
+    #   resp.context.content.industry #=> String
+    #   resp.context.content.application_type #=> String, one of "SAS", "DESKTOP_APPLICATION", "OTHER"
+    #   resp.context.content.criticality #=> String, one of "MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"
+    #   resp.context.content.architecture_overview #=> String
+    #   resp.context.content.additional_context #=> String
+    #   resp.context.application_type #=> String, one of "SAS", "DESKTOP_APPLICATION", "OTHER"
+    #   resp.context.criticality #=> String, one of "MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"
+    #   resp.context.created_by #=> String
+    #   resp.context.created_at #=> Time
+    #   resp.context.last_modified_by #=> String
+    #   resp.context.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentContext AWS API Documentation
+    #
+    # @overload get_agent_context(params = {})
+    # @param [Hash] params ({})
+    def get_agent_context(params = {}, options = {})
+      req = build_request(:get_agent_context, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific optimization goal.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the goal.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the goal to retrieve.
+    #
+    # @return [Types::GetAgentGoalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentGoalResponse#goal #goal} => Types::GoalSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_goal({
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.goal.id #=> String
+    #   resp.goal.profile_arn #=> String
+    #   resp.goal.pillars #=> Array
+    #   resp.goal.pillars[0] #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.goal.title #=> String
+    #   resp.goal.description #=> String
+    #   resp.goal.created_by #=> String
+    #   resp.goal.created_at #=> Time
+    #   resp.goal.last_modified_by #=> String
+    #   resp.goal.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentGoal AWS API Documentation
+    #
+    # @overload get_agent_goal(params = {})
+    # @param [Hash] params ({})
+    def get_agent_goal(params = {}, options = {})
+      req = build_request(:get_agent_goal, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about an optimization profile,
+    # including its configuration and metadata.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the optimization profile to
+    #   retrieve.
+    #
+    # @return [Types::GetAgentProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentProfileResponse#name #name} => String
+    #   * {Types::GetAgentProfileResponse#display_name #display_name} => String
+    #   * {Types::GetAgentProfileResponse#description #description} => String
+    #   * {Types::GetAgentProfileResponse#business_overview #business_overview} => String
+    #   * {Types::GetAgentProfileResponse#pillars #pillars} => Array&lt;String&gt;
+    #   * {Types::GetAgentProfileResponse#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::GetAgentProfileResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::GetAgentProfileResponse#aggregation_configuration #aggregation_configuration} => Array&lt;Types::AggregationConfiguration&gt;
+    #   * {Types::GetAgentProfileResponse#arn #arn} => String
+    #   * {Types::GetAgentProfileResponse#eligible_for_scheduled_generation #eligible_for_scheduled_generation} => Boolean
+    #   * {Types::GetAgentProfileResponse#eligible_for_architecture_generation #eligible_for_architecture_generation} => Boolean
+    #   * {Types::GetAgentProfileResponse#field_errors #field_errors} => Hash&lt;String,String&gt;
+    #   * {Types::GetAgentProfileResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::GetAgentProfileResponse#created_by #created_by} => String
+    #   * {Types::GetAgentProfileResponse#created_at #created_at} => Time
+    #   * {Types::GetAgentProfileResponse#last_modified_by #last_modified_by} => String
+    #   * {Types::GetAgentProfileResponse#last_modified_at #last_modified_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_profile({
+    #     profile_arn: "AgentProfileArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.display_name #=> String
+    #   resp.description #=> String
+    #   resp.business_overview #=> String
+    #   resp.pillars #=> Array
+    #   resp.pillars[0] #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.deletion_protection #=> Boolean
+    #   resp.execution_role_arn #=> String
+    #   resp.aggregation_configuration #=> Array
+    #   resp.aggregation_configuration[0].account_id #=> String
+    #   resp.aggregation_configuration[0].regions #=> Array
+    #   resp.aggregation_configuration[0].regions[0] #=> String
+    #   resp.aggregation_configuration[0].access_role_arn #=> String
+    #   resp.arn #=> String
+    #   resp.eligible_for_scheduled_generation #=> Boolean
+    #   resp.eligible_for_architecture_generation #=> Boolean
+    #   resp.field_errors #=> Hash
+    #   resp.field_errors["FieldErrorPath"] #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_modified_by #=> String
+    #   resp.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentProfile AWS API Documentation
+    #
+    # @overload get_agent_profile(params = {})
+    # @param [Hash] params ({})
+    def get_agent_profile(params = {}, options = {})
+      req = build_request(:get_agent_profile, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific optimization
+    # recommendation, including its impact analysis, content, and
+    # implementation guidance.
+    #
+    # @option params [required, String] :recommendation_arn
+    #   The Amazon Resource Name (ARN) of the recommendation to retrieve.
+    #
+    # @option params [String] :remediation_type
+    #   Optional filter on remediation type.
+    #
+    # @return [Types::GetAgentRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentRecommendationResponse#recommendation_arn #recommendation_arn} => String
+    #   * {Types::GetAgentRecommendationResponse#profile_arn #profile_arn} => String
+    #   * {Types::GetAgentRecommendationResponse#title #title} => String
+    #   * {Types::GetAgentRecommendationResponse#description #description} => String
+    #   * {Types::GetAgentRecommendationResponse#type #type} => String
+    #   * {Types::GetAgentRecommendationResponse#pillar #pillar} => String
+    #   * {Types::GetAgentRecommendationResponse#priority #priority} => String
+    #   * {Types::GetAgentRecommendationResponse#effort #effort} => String
+    #   * {Types::GetAgentRecommendationResponse#status #status} => String
+    #   * {Types::GetAgentRecommendationResponse#state #state} => String
+    #   * {Types::GetAgentRecommendationResponse#update_reason #update_reason} => String
+    #   * {Types::GetAgentRecommendationResponse#impact #impact} => String
+    #   * {Types::GetAgentRecommendationResponse#roi #roi} => Types::Roi
+    #   * {Types::GetAgentRecommendationResponse#number_of_resources #number_of_resources} => Integer
+    #   * {Types::GetAgentRecommendationResponse#aws_services #aws_services} => Array&lt;String&gt;
+    #   * {Types::GetAgentRecommendationResponse#business_units #business_units} => Array&lt;String&gt;
+    #   * {Types::GetAgentRecommendationResponse#applications #applications} => Array&lt;String&gt;
+    #   * {Types::GetAgentRecommendationResponse#impact_details #impact_details} => Array&lt;String&gt;
+    #   * {Types::GetAgentRecommendationResponse#insights #insights} => Array&lt;Types::Insight&gt;
+    #   * {Types::GetAgentRecommendationResponse#highlights #highlights} => Array&lt;String&gt;
+    #   * {Types::GetAgentRecommendationResponse#remediation_summary #remediation_summary} => Types::RemediationSummary
+    #   * {Types::GetAgentRecommendationResponse#cross_pillar_benefits #cross_pillar_benefits} => Array&lt;Types::CrossPillarBenefit&gt;
+    #   * {Types::GetAgentRecommendationResponse#trade_offs #trade_offs} => Array&lt;Types::TradeOff&gt;
+    #   * {Types::GetAgentRecommendationResponse#sources #sources} => Array&lt;String&gt;
+    #   * {Types::GetAgentRecommendationResponse#goals #goals} => Array&lt;Types::RecommendationGoal&gt;
+    #   * {Types::GetAgentRecommendationResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::GetAgentRecommendationResponse#created_by #created_by} => String
+    #   * {Types::GetAgentRecommendationResponse#created_at #created_at} => Time
+    #   * {Types::GetAgentRecommendationResponse#last_modified_by #last_modified_by} => String
+    #   * {Types::GetAgentRecommendationResponse#last_modified_at #last_modified_at} => Time
+    #   * {Types::GetAgentRecommendationResponse#remediations #remediations} => Array&lt;Types::AgentRecommendationRemediation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_recommendation({
+    #     recommendation_arn: "AgentRecommendationArn", # required
+    #     remediation_type: "AUTO_REMEDIATION", # accepts AUTO_REMEDIATION, CONSOLE, CLI, SDK, IAC, MCP
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommendation_arn #=> String
+    #   resp.profile_arn #=> String
+    #   resp.title #=> String
+    #   resp.description #=> String
+    #   resp.type #=> String, one of "RESOURCE", "ARCHITECTURE", "APPLICATION"
+    #   resp.pillar #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.priority #=> String, one of "HIGH", "MEDIUM", "LOW"
+    #   resp.effort #=> String, one of "LARGE", "MEDIUM", "SMALL"
+    #   resp.status #=> String, one of "ACTIVE", "SUPPRESSED", "COMPLETED"
+    #   resp.state #=> String, one of "OPEN", "CLOSED"
+    #   resp.update_reason #=> String
+    #   resp.impact #=> String, one of "HIGH", "MEDIUM", "LOW"
+    #   resp.roi.estimate #=> String
+    #   resp.roi.detail #=> String
+    #   resp.number_of_resources #=> Integer
+    #   resp.aws_services #=> Array
+    #   resp.aws_services[0] #=> String
+    #   resp.business_units #=> Array
+    #   resp.business_units[0] #=> String
+    #   resp.applications #=> Array
+    #   resp.applications[0] #=> String
+    #   resp.impact_details #=> Array
+    #   resp.impact_details[0] #=> String
+    #   resp.insights #=> Array
+    #   resp.insights[0].usage_pattern #=> String
+    #   resp.insights[0].signals_detected #=> String
+    #   resp.highlights #=> Array
+    #   resp.highlights[0] #=> String
+    #   resp.remediation_summary.recommendation #=> String
+    #   resp.remediation_summary.steps #=> Array
+    #   resp.remediation_summary.steps[0] #=> String
+    #   resp.cross_pillar_benefits #=> Array
+    #   resp.cross_pillar_benefits[0].pillar #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.cross_pillar_benefits[0].title #=> String
+    #   resp.cross_pillar_benefits[0].description #=> String
+    #   resp.cross_pillar_benefits[0].impact #=> String, one of "HIGH", "MEDIUM", "LOW"
+    #   resp.trade_offs #=> Array
+    #   resp.trade_offs[0].pillar #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.trade_offs[0].title #=> String
+    #   resp.trade_offs[0].description #=> String
+    #   resp.trade_offs[0].risk #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.trade_offs[0].mitigation #=> String
+    #   resp.trade_offs[0].risk_explanation #=> String
+    #   resp.sources #=> Array
+    #   resp.sources[0] #=> String, one of "TRUSTED_ADVISOR", "COST_EXPLORER", "CLOUDWATCH", "WELL_ARCHITECTED_TOOL", "WELL_ARCHITECTED_AGENT", "CUSTOMER_IAC"
+    #   resp.goals #=> Array
+    #   resp.goals[0].title #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_modified_by #=> String
+    #   resp.last_modified_at #=> Time
+    #   resp.remediations #=> Array
+    #   resp.remediations[0].recommendation_arn #=> String
+    #   resp.remediations[0].type #=> String, one of "AUTO_REMEDIATION", "CONSOLE", "CLI", "SDK", "IAC", "MCP"
+    #   resp.remediations[0].steps #=> Array
+    #   resp.remediations[0].steps[0].title #=> String
+    #   resp.remediations[0].steps[0].content #=> String
+    #   resp.remediations[0].resource_links #=> Array
+    #   resp.remediations[0].resource_links[0].url #=> String
+    #   resp.remediations[0].resource_links[0].title #=> String
+    #   resp.remediations[0].created_by #=> String
+    #   resp.remediations[0].created_at #=> Time
+    #   resp.remediations[0].last_modified_by #=> String
+    #   resp.remediations[0].last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentRecommendation AWS API Documentation
+    #
+    # @overload get_agent_recommendation(params = {})
+    # @param [Hash] params ({})
+    def get_agent_recommendation(params = {}, options = {})
+      req = build_request(:get_agent_recommendation, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a recommendation generation process,
+    # including its status, progress, and results. Recommendation generation
+    # is asynchronous: poll this operation until status reaches a terminal
+    # value of COMPLETED (results are ready) or ERROR (see errorDetails).
+    # Intermediate values are QUEUED and IN\_PROGRESS.
+    #
+    # @option params [required, String] :profile_arn
+    #   The ARN of the optimization profile associated with this generation.
+    #
+    # @option params [required, String] :generation_id
+    #   The unique identifier of the recommendation generation to retrieve.
+    #
+    # @return [Types::GetAgentRecommendationGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentRecommendationGenerationResponse#id #id} => String
+    #   * {Types::GetAgentRecommendationGenerationResponse#profile_arn #profile_arn} => String
+    #   * {Types::GetAgentRecommendationGenerationResponse#name #name} => String
+    #   * {Types::GetAgentRecommendationGenerationResponse#status #status} => String
+    #   * {Types::GetAgentRecommendationGenerationResponse#estimated_completion_time #estimated_completion_time} => Time
+    #   * {Types::GetAgentRecommendationGenerationResponse#created_by #created_by} => String
+    #   * {Types::GetAgentRecommendationGenerationResponse#created_at #created_at} => Time
+    #   * {Types::GetAgentRecommendationGenerationResponse#last_modified_by #last_modified_by} => String
+    #   * {Types::GetAgentRecommendationGenerationResponse#last_modified_at #last_modified_at} => Time
+    #   * {Types::GetAgentRecommendationGenerationResponse#additional_context #additional_context} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::GetAgentRecommendationGenerationResponse#scope #scope} => Types::Scope
+    #   * {Types::GetAgentRecommendationGenerationResponse#started_at #started_at} => Time
+    #   * {Types::GetAgentRecommendationGenerationResponse#ended_at #ended_at} => Time
+    #   * {Types::GetAgentRecommendationGenerationResponse#progress #progress} => Types::Progress
+    #   * {Types::GetAgentRecommendationGenerationResponse#error_details #error_details} => Types::ErrorDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_recommendation_generation({
+    #     profile_arn: "AgentProfileArn", # required
+    #     generation_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.profile_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "QUEUED", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.estimated_completion_time #=> Time
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_modified_by #=> String
+    #   resp.last_modified_at #=> Time
+    #   resp.scope.pillars #=> Array
+    #   resp.scope.pillars[0] #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.scope.goal_ids #=> Array
+    #   resp.scope.goal_ids[0] #=> String
+    #   resp.scope.items #=> Array
+    #   resp.scope.items[0].pillar #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.scope.items[0].ids #=> Array
+    #   resp.scope.items[0].ids[0] #=> String
+    #   resp.started_at #=> Time
+    #   resp.ended_at #=> Time
+    #   resp.progress.steps_completed #=> Integer
+    #   resp.progress.total_steps #=> Integer
+    #   resp.progress.completion_percentage #=> Float
+    #   resp.error_details.code #=> String
+    #   resp.error_details.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentRecommendationGeneration AWS API Documentation
+    #
+    # @overload get_agent_recommendation_generation(params = {})
+    # @param [Hash] params ({})
+    def get_agent_recommendation_generation(params = {}, options = {})
+      req = build_request(:get_agent_recommendation_generation, params)
       req.send_request(options)
     end
 
@@ -2855,6 +3583,381 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def import_lens(params = {}, options = {})
       req = build_request(:import_lens, params)
+      req.send_request(options)
+    end
+
+    # Lists contexts associated with a profile.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile to list contexts for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for this request.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next set of results.
+    #
+    # @return [Types::ListAgentContextsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentContextsResponse#items #items} => Array&lt;Types::ContextSummary&gt;
+    #   * {Types::ListAgentContextsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_contexts({
+    #     profile_arn: "AgentProfileArn", # required
+    #     max_results: 1,
+    #     next_token: "ListAgentContextsRequestNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].profile_arn #=> String
+    #   resp.items[0].title #=> String
+    #   resp.items[0].context_type #=> String, one of "APPLICATION"
+    #   resp.items[0].content.account_ids #=> Array
+    #   resp.items[0].content.account_ids[0] #=> String
+    #   resp.items[0].content.regions #=> Array
+    #   resp.items[0].content.regions[0] #=> String
+    #   resp.items[0].content.aws_services #=> Array
+    #   resp.items[0].content.aws_services[0] #=> String
+    #   resp.items[0].content.resource_types #=> Array
+    #   resp.items[0].content.resource_types[0] #=> String
+    #   resp.items[0].content.resource_tags #=> Array
+    #   resp.items[0].content.resource_tags[0].key #=> String
+    #   resp.items[0].content.resource_tags[0].value #=> String
+    #   resp.items[0].content.application_overview #=> String
+    #   resp.items[0].content.industry #=> String
+    #   resp.items[0].content.application_type #=> String, one of "SAS", "DESKTOP_APPLICATION", "OTHER"
+    #   resp.items[0].content.criticality #=> String, one of "MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"
+    #   resp.items[0].content.architecture_overview #=> String
+    #   resp.items[0].content.additional_context #=> String
+    #   resp.items[0].application_type #=> String, one of "SAS", "DESKTOP_APPLICATION", "OTHER"
+    #   resp.items[0].criticality #=> String, one of "MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_modified_by #=> String
+    #   resp.items[0].last_modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentContexts AWS API Documentation
+    #
+    # @overload list_agent_contexts(params = {})
+    # @param [Hash] params ({})
+    def list_agent_contexts(params = {}, options = {})
+      req = build_request(:list_agent_contexts, params)
+      req.send_request(options)
+    end
+
+    # Lists optimization goals associated with a specified profile. Goals
+    # define specific targets and objectives for the optimization process.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the optimization profile to list
+    #   goals for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of goals to return in a single response.
+    #
+    # @option params [String] :next_token
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
+    #
+    # @return [Types::ListAgentGoalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentGoalsResponse#items #items} => Array&lt;Types::GoalSummary&gt;
+    #   * {Types::ListAgentGoalsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_goals({
+    #     profile_arn: "AgentProfileArn", # required
+    #     max_results: 1,
+    #     next_token: "ListAgentGoalsRequestNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].profile_arn #=> String
+    #   resp.items[0].pillars #=> Array
+    #   resp.items[0].pillars[0] #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.items[0].title #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_modified_by #=> String
+    #   resp.items[0].last_modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentGoals AWS API Documentation
+    #
+    # @overload list_agent_goals(params = {})
+    # @param [Hash] params ({})
+    def list_agent_goals(params = {}, options = {})
+      req = build_request(:list_agent_goals, params)
+      req.send_request(options)
+    end
+
+    # Lists optimization profiles in your account. Profiles define the scope
+    # and configuration for generating optimization recommendations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of profiles to return in a single call. Default is
+    #   100.
+    #
+    # @option params [String] :next_token
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
+    #
+    # @return [Types::ListAgentProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentProfilesResponse#items #items} => Array&lt;Types::AgentProfileSummary&gt;
+    #   * {Types::ListAgentProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_profiles({
+    #     max_results: 1,
+    #     next_token: "ListAgentProfilesRequestNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].name #=> String
+    #   resp.items[0].display_name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].business_overview #=> String
+    #   resp.items[0].pillars #=> Array
+    #   resp.items[0].pillars[0] #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.items[0].deletion_protection #=> Boolean
+    #   resp.items[0].execution_role_arn #=> String
+    #   resp.items[0].aggregation_configuration #=> Array
+    #   resp.items[0].aggregation_configuration[0].account_id #=> String
+    #   resp.items[0].aggregation_configuration[0].regions #=> Array
+    #   resp.items[0].aggregation_configuration[0].regions[0] #=> String
+    #   resp.items[0].aggregation_configuration[0].access_role_arn #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].eligible_for_scheduled_generation #=> Boolean
+    #   resp.items[0].eligible_for_architecture_generation #=> Boolean
+    #   resp.items[0].field_errors #=> Hash
+    #   resp.items[0].field_errors["FieldErrorPath"] #=> String
+    #   resp.items[0].tags #=> Array
+    #   resp.items[0].tags[0].key #=> String
+    #   resp.items[0].tags[0].value #=> String
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_modified_by #=> String
+    #   resp.items[0].last_modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentProfiles AWS API Documentation
+    #
+    # @overload list_agent_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_agent_profiles(params = {}, options = {})
+      req = build_request(:list_agent_profiles, params)
+      req.send_request(options)
+    end
+
+    # Lists recommendation generation processes for a specified profile.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the optimization profile to list
+    #   generation processes for.
+    #
+    # @option params [String] :recommendation_type
+    #   Optional filter by recommendation type.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of generation processes to return in a single
+    #   response.
+    #
+    # @option params [String] :next_token
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
+    #
+    # @return [Types::ListAgentRecommendationGenerationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentRecommendationGenerationsResponse#items #items} => Array&lt;Types::AgentRecommendationGenerationSummary&gt;
+    #   * {Types::ListAgentRecommendationGenerationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_recommendation_generations({
+    #     profile_arn: "AgentProfileArn", # required
+    #     recommendation_type: "RESOURCE", # accepts RESOURCE, ARCHITECTURE, APPLICATION
+    #     max_results: 1,
+    #     next_token: "ListAgentRecommendationGenerationsRequestNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].profile_arn #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].status #=> String, one of "QUEUED", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.items[0].estimated_completion_time #=> Time
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_modified_by #=> String
+    #   resp.items[0].last_modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentRecommendationGenerations AWS API Documentation
+    #
+    # @overload list_agent_recommendation_generations(params = {})
+    # @param [Hash] params ({})
+    def list_agent_recommendation_generations(params = {}, options = {})
+      req = build_request(:list_agent_recommendation_generations, params)
+      req.send_request(options)
+    end
+
+    # Lists recommendation items for a specific recommendation.
+    # Recommendation items provide detailed information about individual
+    # optimization opportunities.
+    #
+    # @option params [required, String] :recommendation_arn
+    #   The Amazon Resource Name (ARN) of the recommendation to list items
+    #   for.
+    #
+    # @option params [String] :type
+    #   Optional filter to return only recommendation items of the specified
+    #   type.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of recommendation items to return in a single
+    #   response.
+    #
+    # @option params [String] :next_token
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
+    #
+    # @return [Types::ListAgentRecommendationItemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentRecommendationItemsResponse#items #items} => Array&lt;Types::AgentRecommendationItemSummary&gt;
+    #   * {Types::ListAgentRecommendationItemsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_recommendation_items({
+    #     recommendation_arn: "AgentRecommendationArn", # required
+    #     type: "AWS_RESOURCE", # accepts AWS_RESOURCE, RECOMMENDATION
+    #     max_results: 1,
+    #     next_token: "ListAgentRecommendationItemsRequestNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].recommendation_arn #=> String
+    #   resp.items[0].type #=> String, one of "AWS_RESOURCE", "RECOMMENDATION"
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_modified_by #=> String
+    #   resp.items[0].last_modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentRecommendationItems AWS API Documentation
+    #
+    # @overload list_agent_recommendation_items(params = {})
+    # @param [Hash] params ({})
+    def list_agent_recommendation_items(params = {}, options = {})
+      req = build_request(:list_agent_recommendation_items, params)
+      req.send_request(options)
+    end
+
+    # Lists active optimization recommendations for a specified profile with
+    # optional filtering by state.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the optimization profile to list
+    #   recommendations for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of recommendations to return in a single response.
+    #
+    # @option params [String] :next_token
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
+    #
+    # @option params [String] :state
+    #   Optional filter to return only recommendations with the specified
+    #   state (OPEN or CLOSED).
+    #
+    # @option params [String] :pillar
+    #   Optional filter to return only recommendations for the specified
+    #   pillar.
+    #
+    # @return [Types::ListAgentRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentRecommendationsResponse#items #items} => Array&lt;Types::AgentRecommendationSummary&gt;
+    #   * {Types::ListAgentRecommendationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_recommendations({
+    #     profile_arn: "AgentProfileArn", # required
+    #     max_results: 1,
+    #     next_token: "ListAgentRecommendationsRequestNextTokenString",
+    #     state: "OPEN", # accepts OPEN, CLOSED
+    #     pillar: "COST_OPTIMIZATION", # accepts COST_OPTIMIZATION, SECURITY, RESILIENCE, PERFORMANCE, OPERATIONAL_EXCELLENCE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].recommendation_arn #=> String
+    #   resp.items[0].profile_arn #=> String
+    #   resp.items[0].title #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].type #=> String, one of "RESOURCE", "ARCHITECTURE", "APPLICATION"
+    #   resp.items[0].pillar #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.items[0].priority #=> String, one of "HIGH", "MEDIUM", "LOW"
+    #   resp.items[0].effort #=> String, one of "LARGE", "MEDIUM", "SMALL"
+    #   resp.items[0].status #=> String, one of "ACTIVE", "SUPPRESSED", "COMPLETED"
+    #   resp.items[0].state #=> String, one of "OPEN", "CLOSED"
+    #   resp.items[0].update_reason #=> String
+    #   resp.items[0].impact #=> String, one of "HIGH", "MEDIUM", "LOW"
+    #   resp.items[0].roi.estimate #=> String
+    #   resp.items[0].roi.detail #=> String
+    #   resp.items[0].number_of_resources #=> Integer
+    #   resp.items[0].aws_services #=> Array
+    #   resp.items[0].aws_services[0] #=> String
+    #   resp.items[0].business_units #=> Array
+    #   resp.items[0].business_units[0] #=> String
+    #   resp.items[0].applications #=> Array
+    #   resp.items[0].applications[0] #=> String
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_modified_by #=> String
+    #   resp.items[0].last_modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentRecommendations AWS API Documentation
+    #
+    # @overload list_agent_recommendations(params = {})
+    # @param [Hash] params ({})
+    def list_agent_recommendations(params = {}, options = {})
+      req = build_request(:list_agent_recommendations, params)
       req.send_request(options)
     end
 
@@ -4074,6 +5177,125 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Submits user feedback on a recommendation to help improve future
+    # optimization suggestions and track implementation outcomes.
+    #
+    # @option params [required, String] :recommendation_arn
+    #   The Amazon Resource Name (ARN) of the recommendation to provide
+    #   feedback for.
+    #
+    # @option params [required, String] :type
+    #   The type of feedback being provided.
+    #
+    # @option params [String] :feedback_category
+    #   Optional category classifying the nature of the feedback.
+    #
+    # @option params [String] :comments
+    #   Optional comments providing additional context about the feedback.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_agent_recommendation_feedback({
+    #     recommendation_arn: "AgentRecommendationArn", # required
+    #     type: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
+    #     feedback_category: "OTHER", # accepts OTHER, RECOMMENDATION_NOT_RELEVANT, RESOURCE_NOT_IMPORTANT, RESOURCE_TYPE_NOT_IMPORTANT, RECOMMENDATION_INCORRECT
+    #     comments: "PutAgentRecommendationFeedbackRequestCommentsString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PutAgentRecommendationFeedback AWS API Documentation
+    #
+    # @overload put_agent_recommendation_feedback(params = {})
+    # @param [Hash] params ({})
+    def put_agent_recommendation_feedback(params = {}, options = {})
+      req = build_request(:put_agent_recommendation_feedback, params)
+      req.send_request(options)
+    end
+
+    # Initiates a new recommendation generation process for the specified
+    # optimization profile. This asynchronous operation analyzes your Amazon
+    # Web Services resources and generates optimization recommendations
+    # based on the configured pillars and scope. Use
+    # GetAgentRecommendationGeneration to check status.
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the optimization profile to use for
+    #   generating recommendations.
+    #
+    # @option params [required, Array<String>] :types
+    #   The types of recommendations to generate.
+    #
+    # @option params [String] :name
+    #   An optional name for this generation process to help identify it in
+    #   lists and logs.
+    #
+    # @option params [Hash,Array,String,Numeric,Boolean] :additional_context
+    #   Optional additional context to guide the recommendation generation,
+    #   such as specific business requirements or constraints.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    # @option params [required, Types::Scope] :scope
+    #   Scope configuration to focus the generation on specific pillars or
+    #   goals.
+    #
+    # @return [Types::StartAgentRecommendationGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAgentRecommendationGenerationResponse#id #id} => String
+    #   * {Types::StartAgentRecommendationGenerationResponse#profile_arn #profile_arn} => String
+    #   * {Types::StartAgentRecommendationGenerationResponse#name #name} => String
+    #   * {Types::StartAgentRecommendationGenerationResponse#status #status} => String
+    #   * {Types::StartAgentRecommendationGenerationResponse#estimated_completion_time #estimated_completion_time} => Time
+    #   * {Types::StartAgentRecommendationGenerationResponse#created_by #created_by} => String
+    #   * {Types::StartAgentRecommendationGenerationResponse#created_at #created_at} => Time
+    #   * {Types::StartAgentRecommendationGenerationResponse#last_modified_by #last_modified_by} => String
+    #   * {Types::StartAgentRecommendationGenerationResponse#last_modified_at #last_modified_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_agent_recommendation_generation({
+    #     profile_arn: "AgentProfileArn", # required
+    #     types: ["RESOURCE"], # required, accepts RESOURCE, ARCHITECTURE, APPLICATION
+    #     name: "StartAgentRecommendationGenerationRequestNameString",
+    #     additional_context: {
+    #     },
+    #     scope: { # required
+    #       pillars: ["COST_OPTIMIZATION"], # required, accepts COST_OPTIMIZATION, SECURITY, RESILIENCE, PERFORMANCE, OPERATIONAL_EXCELLENCE
+    #       goal_ids: ["UUID"],
+    #       items: [
+    #         {
+    #           pillar: "COST_OPTIMIZATION", # required, accepts COST_OPTIMIZATION, SECURITY, RESILIENCE, PERFORMANCE, OPERATIONAL_EXCELLENCE
+    #           ids: ["ItemId"], # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.profile_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "QUEUED", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.estimated_completion_time #=> Time
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_modified_by #=> String
+    #   resp.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/StartAgentRecommendationGeneration AWS API Documentation
+    #
+    # @overload start_agent_recommendation_generation(params = {})
+    # @param [Hash] params ({})
+    def start_agent_recommendation_generation(params = {}, options = {})
+      req = build_request(:start_agent_recommendation_generation, params)
+      req.send_request(options)
+    end
+
     # Adds one or more tags to the specified resource.
     #
     # <note markdown="1"> The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a
@@ -4141,6 +5363,306 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing context associated with a profile.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the context.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the context to update.
+    #
+    # @option params [String] :title
+    #   The updated title of the context.
+    #
+    # @option params [Types::ContextContent] :content
+    #   The updated typed content of the context. The structure contains
+    #   application-specific fields such as account IDs, Regions, services,
+    #   and resource types.
+    #
+    # @return [Types::UpdateAgentContextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAgentContextResponse#context #context} => Types::ContextSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_agent_context({
+    #     client_token: "UpdateAgentContextRequestClientTokenString",
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #     title: "UpdateAgentContextRequestTitleString",
+    #     content: {
+    #       account_ids: ["ContextContentAccountIdsListMemberString"],
+    #       regions: ["ContextContentRegionsListMemberString"],
+    #       aws_services: ["ContextContentAwsServicesListMemberString"],
+    #       resource_types: ["ContextContentResourceTypesListMemberString"],
+    #       resource_tags: [
+    #         {
+    #           key: "ContextResourceTagKeyString", # required
+    #           value: "ContextResourceTagValueString", # required
+    #         },
+    #       ],
+    #       application_overview: "ContextContentApplicationOverviewString",
+    #       industry: "ContextContentIndustryString",
+    #       application_type: "SAS", # accepts SAS, DESKTOP_APPLICATION, OTHER
+    #       criticality: "MISSION_CRITICAL", # accepts MISSION_CRITICAL, BUSINESS_CRITICAL, NON_CRITICAL, TEST_DEVELOPMENT
+    #       architecture_overview: "ContextContentArchitectureOverviewString",
+    #       additional_context: "ContextContentAdditionalContextString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context.id #=> String
+    #   resp.context.profile_arn #=> String
+    #   resp.context.title #=> String
+    #   resp.context.context_type #=> String, one of "APPLICATION"
+    #   resp.context.content.account_ids #=> Array
+    #   resp.context.content.account_ids[0] #=> String
+    #   resp.context.content.regions #=> Array
+    #   resp.context.content.regions[0] #=> String
+    #   resp.context.content.aws_services #=> Array
+    #   resp.context.content.aws_services[0] #=> String
+    #   resp.context.content.resource_types #=> Array
+    #   resp.context.content.resource_types[0] #=> String
+    #   resp.context.content.resource_tags #=> Array
+    #   resp.context.content.resource_tags[0].key #=> String
+    #   resp.context.content.resource_tags[0].value #=> String
+    #   resp.context.content.application_overview #=> String
+    #   resp.context.content.industry #=> String
+    #   resp.context.content.application_type #=> String, one of "SAS", "DESKTOP_APPLICATION", "OTHER"
+    #   resp.context.content.criticality #=> String, one of "MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"
+    #   resp.context.content.architecture_overview #=> String
+    #   resp.context.content.additional_context #=> String
+    #   resp.context.application_type #=> String, one of "SAS", "DESKTOP_APPLICATION", "OTHER"
+    #   resp.context.criticality #=> String, one of "MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"
+    #   resp.context.created_by #=> String
+    #   resp.context.created_at #=> Time
+    #   resp.context.last_modified_by #=> String
+    #   resp.context.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentContext AWS API Documentation
+    #
+    # @overload update_agent_context(params = {})
+    # @param [Hash] params ({})
+    def update_agent_context(params = {}, options = {})
+      req = build_request(:update_agent_context, params)
+      req.send_request(options)
+    end
+
+    # Updates the pillars and title of an existing goal associated with a
+    # profile.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile containing the goal to
+    #   update.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the goal to update.
+    #
+    # @option params [Array<String>] :pillars
+    #   The updated pillars for the goal. Pillars define the optimization
+    #   focus areas such as cost, performance, resilience, and operational
+    #   excellence.
+    #
+    # @option params [String] :title
+    #   The updated title for the goal. Maximum length of 1000 characters.
+    #
+    # @option params [String] :description
+    #   A description of the goal.
+    #
+    # @return [Types::UpdateAgentGoalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAgentGoalResponse#goal #goal} => Types::GoalSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_agent_goal({
+    #     client_token: "UpdateAgentGoalRequestClientTokenString",
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #     pillars: ["COST_OPTIMIZATION"], # accepts COST_OPTIMIZATION, SECURITY, RESILIENCE, PERFORMANCE, OPERATIONAL_EXCELLENCE
+    #     title: "UpdateAgentGoalRequestTitleString",
+    #     description: "UpdateAgentGoalRequestDescriptionString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.goal.id #=> String
+    #   resp.goal.profile_arn #=> String
+    #   resp.goal.pillars #=> Array
+    #   resp.goal.pillars[0] #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.goal.title #=> String
+    #   resp.goal.description #=> String
+    #   resp.goal.created_by #=> String
+    #   resp.goal.created_at #=> Time
+    #   resp.goal.last_modified_by #=> String
+    #   resp.goal.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentGoal AWS API Documentation
+    #
+    # @overload update_agent_goal(params = {})
+    # @param [Hash] params ({})
+    def update_agent_goal(params = {}, options = {})
+      req = build_request(:update_agent_goal, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing optimization profile's configuration, including
+    # its pillars, execution role, and aggregation settings.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile to update.
+    #
+    # @option params [String] :display_name
+    #   The updated display name of the profile.
+    #
+    # @option params [String] :description
+    #   The updated description of the profile.
+    #
+    # @option params [String] :execution_role_arn
+    #   The updated ARN of the IAM execution role.
+    #
+    # @option params [Array<Types::AggregationConfiguration>] :aggregation_configuration
+    #   The updated aggregation configuration.
+    #
+    # @option params [String] :business_overview
+    #   The updated business overview for the profile.
+    #
+    # @option params [Array<String>] :pillars
+    #   The updated Well-Architected Tool Framework pillars for the profile.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Indicates whether deletion protection is enabled for the profile.
+    #
+    # @return [Types::UpdateAgentProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAgentProfileResponse#name #name} => String
+    #   * {Types::UpdateAgentProfileResponse#display_name #display_name} => String
+    #   * {Types::UpdateAgentProfileResponse#description #description} => String
+    #   * {Types::UpdateAgentProfileResponse#business_overview #business_overview} => String
+    #   * {Types::UpdateAgentProfileResponse#pillars #pillars} => Array&lt;String&gt;
+    #   * {Types::UpdateAgentProfileResponse#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::UpdateAgentProfileResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::UpdateAgentProfileResponse#aggregation_configuration #aggregation_configuration} => Array&lt;Types::AggregationConfiguration&gt;
+    #   * {Types::UpdateAgentProfileResponse#arn #arn} => String
+    #   * {Types::UpdateAgentProfileResponse#eligible_for_scheduled_generation #eligible_for_scheduled_generation} => Boolean
+    #   * {Types::UpdateAgentProfileResponse#eligible_for_architecture_generation #eligible_for_architecture_generation} => Boolean
+    #   * {Types::UpdateAgentProfileResponse#field_errors #field_errors} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateAgentProfileResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::UpdateAgentProfileResponse#created_by #created_by} => String
+    #   * {Types::UpdateAgentProfileResponse#created_at #created_at} => Time
+    #   * {Types::UpdateAgentProfileResponse#last_modified_by #last_modified_by} => String
+    #   * {Types::UpdateAgentProfileResponse#last_modified_at #last_modified_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_agent_profile({
+    #     client_token: "UpdateAgentProfileRequestClientTokenString",
+    #     profile_arn: "AgentProfileArn", # required
+    #     display_name: "UpdateAgentProfileRequestDisplayNameString",
+    #     description: "UpdateAgentProfileRequestDescriptionString",
+    #     execution_role_arn: "RoleArn",
+    #     aggregation_configuration: [
+    #       {
+    #         account_id: "AccountId", # required
+    #         regions: ["Region"], # required
+    #         access_role_arn: "RoleArn", # required
+    #       },
+    #     ],
+    #     business_overview: "UpdateAgentProfileRequestBusinessOverviewString",
+    #     pillars: ["COST_OPTIMIZATION"], # accepts COST_OPTIMIZATION, SECURITY, RESILIENCE, PERFORMANCE, OPERATIONAL_EXCELLENCE
+    #     deletion_protection: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.display_name #=> String
+    #   resp.description #=> String
+    #   resp.business_overview #=> String
+    #   resp.pillars #=> Array
+    #   resp.pillars[0] #=> String, one of "COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"
+    #   resp.deletion_protection #=> Boolean
+    #   resp.execution_role_arn #=> String
+    #   resp.aggregation_configuration #=> Array
+    #   resp.aggregation_configuration[0].account_id #=> String
+    #   resp.aggregation_configuration[0].regions #=> Array
+    #   resp.aggregation_configuration[0].regions[0] #=> String
+    #   resp.aggregation_configuration[0].access_role_arn #=> String
+    #   resp.arn #=> String
+    #   resp.eligible_for_scheduled_generation #=> Boolean
+    #   resp.eligible_for_architecture_generation #=> Boolean
+    #   resp.field_errors #=> Hash
+    #   resp.field_errors["FieldErrorPath"] #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_modified_by #=> String
+    #   resp.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentProfile AWS API Documentation
+    #
+    # @overload update_agent_profile(params = {})
+    # @param [Hash] params ({})
+    def update_agent_profile(params = {}, options = {})
+      req = build_request(:update_agent_profile, params)
+      req.send_request(options)
+    end
+
+    # Updates the status of a recommendation to track its progress through
+    # the implementation lifecycle.
+    #
+    # @option params [required, String] :recommendation_arn
+    #   The Amazon Resource Name (ARN) of the recommendation to update.
+    #
+    # @option params [required, String] :status
+    #   The new status to assign to the recommendation.
+    #
+    # @option params [String] :update_reason
+    #   A free-text reason explaining this status update.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_agent_recommendation_status({
+    #     recommendation_arn: "AgentRecommendationArn", # required
+    #     status: "ACTIVE", # required, accepts ACTIVE, SUPPRESSED, COMPLETED
+    #     update_reason: "UpdateAgentRecommendationStatusRequestUpdateReasonString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentRecommendationStatus AWS API Documentation
+    #
+    # @overload update_agent_recommendation_status(params = {})
+    # @param [Hash] params ({})
+    def update_agent_recommendation_status(params = {}, options = {})
+      req = build_request(:update_agent_recommendation_status, params)
       req.send_request(options)
     end
 
@@ -5248,7 +6770,7 @@ module Aws::WellArchitected
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

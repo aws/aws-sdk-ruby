@@ -307,6 +307,12 @@
         "LogsEncryptionConfiguration$EncryptionConflictResolutionStrategy": "<p>Conflict resolution strategy for centralization if the encryption strategy is set to CUSTOMER_MANAGED and the destination log group is encrypted with an AWS_OWNED KMS Key. ALLOW lets centralization go through while SKIP prevents centralization into the destination log group.</p>"
       }
     },
+    "EncryptionScope": {
+      "base": "<p>Determines which newly created destination log groups are encrypted with the configured KMS key.</p>",
+      "refs": {
+        "LogsEncryptionConfiguration$EncryptionScope": "<p>Determines which newly created destination log groups are encrypted with the configured <code>KmsKeyArn</code> when <code>EncryptionStrategy</code> is <code>CUSTOMER_MANAGED</code>.</p> <p>If you set this to <code>ENCRYPTED_SOURCE_ONLY</code> (the default), only destination log groups whose source log group is encrypted with a customer managed KMS key use the configured <code>KmsKeyArn</code>. Destination log groups derived from Amazon Web Services owned encrypted source log groups remain Amazon Web Services owned encrypted.</p> <p>If you set this to <code>NEW_DESTINATION_LOG_GROUPS</code>, every new destination log group created by this rule uses the configured <code>KmsKeyArn</code>, regardless of the source log group's encryption posture.</p> <p>This field is not valid when <code>EncryptionStrategy</code> is <code>AWS_OWNED</code>.</p>"
+      }
+    },
     "EncryptionStrategy": {
       "base": null,
       "refs": {
@@ -415,6 +421,12 @@
       "base": null,
       "refs": {}
     },
+    "IamRoleArn": {
+      "base": null,
+      "refs": {
+        "TagPropagationConfiguration$DestinationRoleArn": "<p>The ARN of a customer-managed IAM role in the destination account. The service assumes this role to propagate tags to destination log groups. You must have <code>iam:PassRole</code> permission on this role.</p>"
+      }
+    },
     "Integer": {
       "base": null,
       "refs": {
@@ -455,6 +467,12 @@
       "refs": {
         "GetTelemetryRuleForOrganizationOutput$IsReplicated": "<p> Indicates whether this organization telemetry rule is a replica that was created in this region through multi-region fan-out from the home region. Replicated rules cannot be directly updated or deleted in the spoke region. To modify a replicated rule, make changes in the home region. </p>",
         "GetTelemetryRuleOutput$IsReplicated": "<p> Indicates whether this telemetry rule is a replica that was created in this region through multi-region fan-out from the home region. Replicated rules cannot be directly updated or deleted in the spoke region. To modify a replicated rule, make changes in the home region. </p>"
+      }
+    },
+    "KmsKeyArn": {
+      "base": null,
+      "refs": {
+        "TelemetryDestinationConfiguration$KmsKeyArn": "<p> The Amazon Resource Name (ARN) of the customer-managed Amazon Web Services KMS key used to encrypt the log groups created during telemetry rule remediation. </p>"
       }
     },
     "LabelNameCondition": {
@@ -582,9 +600,9 @@
       "refs": {}
     },
     "LogDeliveryParameters": {
-      "base": "<p>Configuration parameters for Amazon Bedrock AgentCore logging, including <code>logType</code> settings.</p>",
+      "base": "<p>The configuration parameters for log delivery, including <code>logType</code> settings. Applies to resource types that support configurable log delivery, such as Amazon Bedrock Knowledge Bases and Elastic Load Balancing Application Load Balancers.</p>",
       "refs": {
-        "TelemetryDestinationConfiguration$LogDeliveryParameters": "<p>Configuration parameters specific to Amazon Bedrock AgentCore logging when Amazon Bedrock AgentCore is the resource type.</p>"
+        "TelemetryDestinationConfiguration$LogDeliveryParameters": "<p>The configuration parameters for log delivery when the resource type supports configurable log types, such as Amazon Bedrock Knowledge Bases or Elastic Load Balancing Application Load Balancers.</p>"
       }
     },
     "LogGroupNameConfiguration": {
@@ -600,7 +618,7 @@
       }
     },
     "LogType": {
-      "base": null,
+      "base": "<p>The following log types are supported for log delivery configuration:</p> <ul> <li> <p>APPLICATION_LOGS – Application-level logs.</p> </li> <li> <p>USAGE_LOGS – Resource usage logs.</p> </li> <li> <p>SECURITY_FINDING_LOGS – Security finding logs.</p> </li> <li> <p>ACCESS_LOGS – Access logs (such as Elastic Load Balancing access logs).</p> </li> <li> <p>CONNECTION_LOGS – Connection logs.</p> </li> <li> <p>S3_SERVER_ACCESS_LOGS – Amazon S3 server access logs.</p> </li> </ul>",
       "refs": {
         "LogTypes$member": null
       }
@@ -608,7 +626,7 @@
     "LogTypes": {
       "base": null,
       "refs": {
-        "LogDeliveryParameters$LogTypes": "<p>The type of log that the source is sending.</p>"
+        "LogDeliveryParameters$LogTypes": "<p>The types of logs to collect from the resource.</p>"
       }
     },
     "LoggingFilter": {
@@ -624,7 +642,7 @@
       }
     },
     "LogsEncryptionConfiguration": {
-      "base": "<p>Configuration for encrypting centralized log groups. This configuration is only applied to destination log groups for which the corresponding source log groups are encrypted using Customer Managed KMS Keys.</p>",
+      "base": "<p>Configuration for encrypting centralized destination log groups. By default, this configuration applies only to destination log groups whose corresponding source log groups are encrypted using customer managed KMS keys. To encrypt all destination log groups created by the rule, set <code>EncryptionScope</code> to <code>NEW_DESTINATION_LOG_GROUPS</code>.</p>",
       "refs": {
         "DestinationLogsConfiguration$LogsEncryptionConfiguration": "<p>The encryption configuration for centralization destination log groups.</p>"
       }
@@ -863,7 +881,7 @@
       "refs": {
         "ResourceTypes$member": null,
         "TelemetryConfiguration$ResourceType": "<p> The type of resource, for example <code>Amazon Web Services::EC2::Instance</code>, or <code>Amazon Web Services::EKS::Cluster</code>, etc. </p>",
-        "TelemetryRule$ResourceType": "<p> The type of Amazon Web Services resource to configure telemetry for (e.g., \"AWS::EC2::VPC\", \"AWS::EKS::Cluster\", \"AWS::WAFv2::WebACL\"). </p>",
+        "TelemetryRule$ResourceType": "<p> The type of Amazon Web Services resource to configure telemetry for (for example, <code>AWS::EC2::VPC</code>, <code>AWS::EKS::Cluster</code>, <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code>, or <code>AWS::Bedrock::KnowledgeBase</code>). </p>",
         "TelemetryRuleSummary$ResourceType": "<p> The type of Amazon Web Services resource the rule applies to. </p>"
       }
     },
@@ -1069,6 +1087,12 @@
         "AdvancedFieldSelector$NotEndsWith": "<p> Matches if the field value does not end with the specified value. </p>"
       }
     },
+    "TagConflictResolutionStrategy": {
+      "base": "<p>The strategy for resolving tag conflicts between source and destination log groups.</p> <ul> <li> <p> <code>ADD_ONLY</code> – Only adds new tags from the source without modifying existing destination tags.</p> </li> <li> <p> <code>UPDATE_SYNC</code> – Adds new tags and updates existing tags from the source. Does not remove destination tags that are absent from the source.</p> </li> <li> <p> <code>IN_SYNC</code> – Keeps destination tags fully synchronized with source tags, including removing destination tags that do not exist on the source.</p> </li> </ul>",
+      "refs": {
+        "TagPropagationConfiguration$TagConflictResolutionStrategy": "<p>The strategy for resolving conflicts when a tag key exists on both the source and destination log groups. If not specified, defaults to <code>UPDATE_SYNC</code>.</p> <ul> <li> <p> <code>ADD_ONLY</code> – Only adds new tags from the source without modifying existing destination tags.</p> </li> <li> <p> <code>UPDATE_SYNC</code> – Adds new tags and updates existing tags from the source. Does not remove destination tags that are absent from the source.</p> </li> <li> <p> <code>IN_SYNC</code> – Keeps destination tags fully synchronized with source tags, including removing destination tags that do not exist on the source.</p> </li> </ul>"
+      }
+    },
     "TagKey": {
       "base": null,
       "refs": {
@@ -1102,6 +1126,26 @@
         "TelemetryConfiguration$ResourceTags": "<p> Tags associated with the resource, for example <code>{ Name: \"ExampleInstance\", Environment: \"Development\" }</code>. </p>",
         "TelemetryPipeline$Tags": "<p>The key-value pairs associated with the telemetry pipeline resource.</p>",
         "TelemetryPipelineSummary$Tags": "<p>The key-value pairs associated with the telemetry pipeline resource.</p>"
+      }
+    },
+    "TagPropagationConfiguration": {
+      "base": "<p>Specifies configuration for propagating resource tags from source log groups to centralized destination log groups. The service uses a customer-managed IAM role in the destination account to add, update, and remove tags on destination log groups.</p>",
+      "refs": {
+        "DestinationLogsConfiguration$TagPropagationConfiguration": "<p>Specifies the tag propagation configuration for this centralization rule. When present, <code>LogGroupNameConfiguration</code> must use a <code>LogGroupNamePattern</code> that contains <code>${source.logGroup}</code>, <code>${source.accountId}</code>, and <code>${source.region}</code>.</p>"
+      }
+    },
+    "TagPropagationFailureReason": {
+      "base": "<p>The reason tag propagation is unhealthy for a centralization rule.</p> <ul> <li> <p> <code>RoleNotAssumable</code> – The service cannot assume the destination role due to a trust policy or external ID misconfiguration.</p> </li> <li> <p> <code>RoleLacksPermissions</code> – The role was assumed successfully but the tag API call was denied by the role's permissions policy.</p> </li> </ul>",
+      "refs": {
+        "CentralizationRuleSummary$TagPropagationFailureReason": "<p>The reason tag propagation is unhealthy for this rule. Only present when <code>TagPropagationStatus</code> is <code>Unhealthy</code>.</p>",
+        "GetCentralizationRuleForOrganizationOutput$TagPropagationFailureReason": "<p>The reason tag propagation is unhealthy for this rule. Only present when <code>TagPropagationStatus</code> is <code>Unhealthy</code>.</p>"
+      }
+    },
+    "TagPropagationStatus": {
+      "base": "<p>The health status of tag propagation for a centralization rule. This status is independent of the overall <code>RuleHealth</code> for log delivery.</p>",
+      "refs": {
+        "CentralizationRuleSummary$TagPropagationStatus": "<p>The health status of tag propagation for this rule. This status is independent of the overall <code>RuleHealth</code> for log delivery. Returns <code>Healthy</code> when the most recent tag-propagation attempt succeeded, or <code>Unhealthy</code> when the most recent attempt failed.</p>",
+        "GetCentralizationRuleForOrganizationOutput$TagPropagationStatus": "<p>The health status of tag propagation for this rule. This status is independent of the overall <code>RuleHealth</code> for log delivery. Returns <code>Healthy</code> when the most recent tag-propagation attempt succeeded, or <code>Unhealthy</code> when the most recent attempt failed.</p>"
       }
     },
     "TagResourceInput": {

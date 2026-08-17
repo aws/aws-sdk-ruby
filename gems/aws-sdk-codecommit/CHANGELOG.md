@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2026-08-13)
+------------------
+
+* Feature - Added the GetBlobDifferences API operation, which returns line-level diffs between two blob versions without requiring a local clone. Returns structured hunks with context, additions, and deletions. Supports pagination for large diffs.
+
 1.102.0 (2026-07-09)
 ------------------
 

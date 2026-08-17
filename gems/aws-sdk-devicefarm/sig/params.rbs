@@ -40,7 +40,8 @@ module Aws
           value: ::String
         }
       ]?,
-      execution_role_arn: ::String?
+      execution_role_arn: ::String?,
+      insights_types: Array[("TEST_REPORT")]?
     }
 
     end

@@ -4659,7 +4659,7 @@ module Aws::ECS
     #   resp.container_instance.tags[0].value #=> String
     #   resp.container_instance.health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details #=> Array
-    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON"
+    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON", "AGENT_CONNECTIVITY"
     #   resp.container_instance.health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details[0].status_reason #=> String
     #   resp.container_instance.health_status.details[0].last_updated #=> Time
@@ -5477,7 +5477,7 @@ module Aws::ECS
     #   resp.container_instances[0].tags[0].value #=> String
     #   resp.container_instances[0].health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instances[0].health_status.details #=> Array
-    #   resp.container_instances[0].health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON"
+    #   resp.container_instances[0].health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON", "AGENT_CONNECTIVITY"
     #   resp.container_instances[0].health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instances[0].health_status.details[0].status_reason #=> String
     #   resp.container_instances[0].health_status.details[0].last_updated #=> Time
@@ -7609,7 +7609,7 @@ module Aws::ECS
     #   resp.tasks[0].pull_stopped_at #=> Time
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].started_by #=> String
-    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice"
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice", "InfrastructureHealth"
     #   resp.tasks[0].stopped_at #=> Time
     #   resp.tasks[0].stopped_reason #=> String
     #   resp.tasks[0].stopping_at #=> Time
@@ -10443,7 +10443,7 @@ module Aws::ECS
     #   resp.container_instance.tags[0].value #=> String
     #   resp.container_instance.health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details #=> Array
-    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON"
+    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON", "AGENT_CONNECTIVITY"
     #   resp.container_instance.health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details[0].status_reason #=> String
     #   resp.container_instance.health_status.details[0].last_updated #=> Time
@@ -12194,7 +12194,7 @@ module Aws::ECS
     #   resp.tasks[0].pull_stopped_at #=> Time
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].started_by #=> String
-    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice"
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice", "InfrastructureHealth"
     #   resp.tasks[0].stopped_at #=> Time
     #   resp.tasks[0].stopped_reason #=> String
     #   resp.tasks[0].stopping_at #=> Time
@@ -12629,7 +12629,7 @@ module Aws::ECS
     #   resp.tasks[0].pull_stopped_at #=> Time
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].started_by #=> String
-    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice"
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice", "InfrastructureHealth"
     #   resp.tasks[0].stopped_at #=> Time
     #   resp.tasks[0].stopped_reason #=> String
     #   resp.tasks[0].stopping_at #=> Time
@@ -12938,7 +12938,7 @@ module Aws::ECS
     #   resp.task.pull_stopped_at #=> Time
     #   resp.task.started_at #=> Time
     #   resp.task.started_by #=> String
-    #   resp.task.stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice"
+    #   resp.task.stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice", "InfrastructureHealth"
     #   resp.task.stopped_at #=> Time
     #   resp.task.stopped_reason #=> String
     #   resp.task.stopping_at #=> Time
@@ -14147,7 +14147,7 @@ module Aws::ECS
     #   resp.container_instance.tags[0].value #=> String
     #   resp.container_instance.health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details #=> Array
-    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON"
+    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON", "AGENT_CONNECTIVITY"
     #   resp.container_instance.health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details[0].status_reason #=> String
     #   resp.container_instance.health_status.details[0].last_updated #=> Time
@@ -14475,7 +14475,7 @@ module Aws::ECS
     #   resp.container_instances[0].tags[0].value #=> String
     #   resp.container_instances[0].health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instances[0].health_status.details #=> Array
-    #   resp.container_instances[0].health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON"
+    #   resp.container_instances[0].health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON", "AGENT_CONNECTIVITY"
     #   resp.container_instances[0].health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instances[0].health_status.details[0].status_reason #=> String
     #   resp.container_instances[0].health_status.details[0].last_updated #=> Time
@@ -16247,7 +16247,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.242.0'
+      context[:gem_version] = '1.243.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

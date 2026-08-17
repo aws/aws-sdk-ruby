@@ -59,6 +59,7 @@ module Aws::SageMakerRuntime
       attr_accessor enable_explanations: ::String
       attr_accessor inference_component_name: ::String
       attr_accessor session_id: ::String
+      attr_accessor prefix_aware_id: ::String
       SENSITIVE: [:body, :custom_attributes]
     end
 
@@ -83,6 +84,7 @@ module Aws::SageMakerRuntime
       attr_accessor inference_id: ::String
       attr_accessor inference_component_name: ::String
       attr_accessor session_id: ::String
+      attr_accessor prefix_aware_id: ::String
       SENSITIVE: [:body, :custom_attributes]
     end
 

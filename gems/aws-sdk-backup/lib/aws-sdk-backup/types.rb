@@ -1162,6 +1162,8 @@ module Aws::Backup
     #
     # @!attribute [rw] number_of_recovery_points
     #   The number of recovery points that are stored in a backup vault.
+    #   Recovery point count value displayed in the console can be an
+    #   approximation.
     #   @return [Integer]
     #
     # @!attribute [rw] locked
@@ -1828,6 +1830,85 @@ module Aws::Backup
       :count,
       :start_time,
       :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_point_metadata
+    #   Metadata for the backup access point. For continuous (point-in-time)
+    #   recovery points, you must include an `AccessPointInTime` timestamp
+    #   (in format `2021-11-27T03:30:27Z`). The access point provides access
+    #   to the content present in the backup at that specific time. You can
+    #   specify any time within the continuous backup's retention period,
+    #   up to the latest restorable time. For snapshot recovery points, do
+    #   not include `AccessPointInTime`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] access_point_policy
+    #   An optional resource-based policy, in JSON format, to apply to the
+    #   underlying Amazon S3 access point. The policy controls how backup
+    #   data can be accessed through the access point. If you do not specify
+    #   a policy, access is governed by the caller's IAM permissions. For
+    #   more information, see [Configuring IAM policies for using access
+    #   points][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the backup access point. This name is shared with the
+    #   Amazon S3 access point namespace. It must be unique within your
+    #   account and Region and cannot conflict with an existing Amazon S3
+    #   access point. For more information about access point naming, see
+    #   [Access points naming rules, restrictions, and limitations][1] in
+    #   the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-restrictions-limitations-naming-rules.html
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point for which to
+    #   create the backup access point. The recovery point must be an Amazon
+    #   S3 recovery point in the `AVAILABLE`, `STOPPED`, or `COMPLETED`
+    #   state.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the backup access point.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupAccessPointRequest AWS API Documentation
+    #
+    class CreateBackupAccessPointRequest < Struct.new(
+      :access_point_metadata,
+      :access_point_policy,
+      :name,
+      :recovery_point_arn,
+      :tags)
+      SENSITIVE = [:access_point_metadata, :tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_point_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the created
+    #   backup access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the backup access point. A newly created
+    #   backup access point begins in the `CREATING` state and becomes
+    #   usable when it reaches `AVAILABLE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupAccessPointResponse AWS API Documentation
+    #
+    class CreateBackupAccessPointResponse < Struct.new(
+      :access_point_arn,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2645,6 +2726,18 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] access_point_arn
+    #   The Amazon Resource Name (ARN) of the backup access point to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupAccessPointInput AWS API Documentation
+    #
+    class DeleteBackupAccessPointInput < Struct.new(
+      :access_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] backup_plan_id
     #   Uniquely identifies a backup plan.
     #   @return [String]
@@ -2880,6 +2973,97 @@ module Aws::Backup
       :type,
       :context)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_point_arn
+    #   The Amazon Resource Name (ARN) of the backup access point to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupAccessPointInput AWS API Documentation
+    #
+    class DescribeBackupAccessPointInput < Struct.new(
+      :access_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_point_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the backup
+    #   access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_point_metadata
+    #   Metadata for the backup access point. After the backup access point
+    #   reaches the `AVAILABLE` status, this map contains `S3AccessPointArn`
+    #   and `S3AccessPointAlias`, which you use with standard Amazon S3 read
+    #   APIs to access the backup data. For continuous recovery points, this
+    #   map also contains `AccessPointInTime` (in format
+    #   `2021-11-27T03:30:27Z`). The access point provides access to the
+    #   content present in the backup at that specific time.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] backup_vault_arn
+    #   The Amazon Resource Name (ARN) of the backup vault that contains the
+    #   recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault that contains the recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the backup access point was created, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `CreationTime` is accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the backup access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point that the backup
+    #   access point provides access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that was backed up,
+    #   such as an Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of Amazon Web Services resource associated with the
+    #   recovery point. For example, `S3` for Amazon Simple Storage Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the backup access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message that provides additional detail about the status of the
+    #   backup access point, such as the reason a creation or deletion
+    #   attempt failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupAccessPointResponse AWS API Documentation
+    #
+    class DescribeBackupAccessPointResponse < Struct.new(
+      :access_point_arn,
+      :access_point_metadata,
+      :backup_vault_arn,
+      :backup_vault_name,
+      :creation_time,
+      :name,
+      :recovery_point_arn,
+      :resource_arn,
+      :resource_type,
+      :status,
+      :status_message)
+      SENSITIVE = [:access_point_metadata]
       include Aws::Structure
     end
 
@@ -5651,6 +5835,221 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # Contains metadata about a backup access point.
+    #
+    # @!attribute [rw] access_point_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the backup
+    #   access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_point_metadata
+    #   Metadata for the backup access point. After the backup access point
+    #   reaches the `AVAILABLE` status, this map contains `S3AccessPointArn`
+    #   and `S3AccessPointAlias`, which you use with standard Amazon S3 read
+    #   APIs to access the backup data. For continuous recovery points, this
+    #   map also contains `AccessPointInTime` (in format
+    #   `2021-11-27T03:30:27Z`). The access point provides access to the
+    #   content present in the backup at that specific time.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] backup_vault_arn
+    #   The Amazon Resource Name (ARN) of the backup vault that contains the
+    #   recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault that contains the recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the backup access point was created, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `CreationTime` is accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the backup access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point that the backup
+    #   access point provides access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that was backed up,
+    #   such as an Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of Amazon Web Services resource associated with the
+    #   recovery point. For example, `S3` for Amazon Simple Storage Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the backup access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message that provides additional detail about the status of the
+    #   backup access point, such as the reason a creation or deletion
+    #   attempt failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListAccessPointsMember AWS API Documentation
+    #
+    class ListAccessPointsMember < Struct.new(
+      :access_point_arn,
+      :access_point_metadata,
+      :backup_vault_arn,
+      :backup_vault_name,
+      :creation_time,
+      :name,
+      :recovery_point_arn,
+      :resource_arn,
+      :resource_type,
+      :status,
+      :status_message)
+      SENSITIVE = [:access_point_metadata]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of items to be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point whose backup
+    #   access points you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupAccessPointsByRecoveryPointRequest AWS API Documentation
+    #
+    class ListBackupAccessPointsByRecoveryPointRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :recovery_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_access_points
+    #   A list of backup access points, each containing metadata such as its
+    #   name, ARN, status, and associated recovery point.
+    #   @return [Array<Types::ListAccessPointsMember>]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupAccessPointsByRecoveryPointResponse AWS API Documentation
+    #
+    class ListBackupAccessPointsByRecoveryPointResponse < Struct.new(
+      :backup_access_points,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of items to be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource whose backup access
+    #   points you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupAccessPointsByResourceRequest AWS API Documentation
+    #
+    class ListBackupAccessPointsByResourceRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_access_points
+    #   A list of backup access points, each containing metadata such as its
+    #   name, ARN, status, and associated recovery point.
+    #   @return [Array<Types::ListAccessPointsMember>]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupAccessPointsByResourceResponse AWS API Documentation
+    #
+    class ListBackupAccessPointsByResourceResponse < Struct.new(
+      :backup_access_points,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of items to be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupAccessPointsRequest AWS API Documentation
+    #
+    class ListBackupAccessPointsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_access_points
+    #   A list of backup access points, each containing metadata such as its
+    #   name, ARN, status, and associated recovery point.
+    #   @return [Array<Types::ListAccessPointsMember>]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupAccessPointsResponse AWS API Documentation
+    #
+    class ListBackupAccessPointsResponse < Struct.new(
+      :backup_access_points,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_id
     #   Returns the job count for the specified account.
     #
@@ -6934,7 +7333,8 @@ module Aws::Backup
     #   associated with the selected resources that are managed by Backup.
     #
     #   If this is set to `FALSE`, the response will contain all recovery
-    #   points associated with the selected resource.
+    #   points associated with the selected resource, except for EBS
+    #   snapshots copied within the same Region and account.
     #
     #   Type: Boolean
     #   @return [Boolean]

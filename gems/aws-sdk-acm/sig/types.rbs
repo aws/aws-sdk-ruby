@@ -217,6 +217,7 @@ module Aws::ACM
       attr_accessor certificate_authority_arn: ::String
       attr_accessor renewal_eligibility: ("ELIGIBLE" | "INELIGIBLE")
       attr_accessor options: Types::CertificateOptions
+      attr_accessor update_summary: Types::UpdateSummary
       attr_accessor certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")
       attr_accessor acme_endpoint_arn: ::String
       attr_accessor acme_account_id: ::String
@@ -274,6 +275,7 @@ module Aws::ACM
     class CertificateOptions
       attr_accessor certificate_transparency_logging_preference: ("ENABLED" | "DISABLED")
       attr_accessor export: ("ENABLED" | "DISABLED")
+      attr_accessor validation_method: ("EMAIL" | "DNS" | "HTTP")
       SENSITIVE: []
     end
 
@@ -479,6 +481,11 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class DnsValidationChallenge
+      attr_accessor resource_record: Types::ResourceRecord
+      SENSITIVE: []
+    end
+
     class DomainScope
       attr_accessor exact_domain: ("ENABLED" | "DISABLED")
       attr_accessor subdomains: ("ENABLED" | "DISABLED")
@@ -497,8 +504,27 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class DomainValidationMethodUpdateSummary
+      attr_accessor from: ("EMAIL" | "DNS" | "HTTP")
+      attr_accessor to: ("EMAIL" | "DNS" | "HTTP")
+      SENSITIVE: []
+    end
+
     class DomainValidationOption
       attr_accessor domain_name: ::String
+      attr_accessor validation_domain: ::String
+      SENSITIVE: []
+    end
+
+    class DomainValidationSummary
+      attr_accessor domain_name: ::String
+      attr_accessor active_validation_configuration: Types::ValidationConfiguration
+      attr_accessor requested_validation_configuration: Types::ValidationConfiguration
+      SENSITIVE: []
+    end
+
+    class EmailValidationChallenge
+      attr_accessor validation_emails: ::Array[::String]
       attr_accessor validation_domain: ::String
       SENSITIVE: []
     end
@@ -716,6 +742,19 @@ module Aws::ACM
 
     class ListAcmeExternalAccountBindingsResponse
       attr_accessor external_account_bindings: ::Array[Types::AcmeExternalAccountBindingSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCertificateDomainValidationsRequest
+      attr_accessor certificate_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCertificateDomainValidationsResponse
+      attr_accessor domain_validation_summary_list: ::Array[Types::DomainValidationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -990,6 +1029,36 @@ module Aws::ACM
     class UpdateCertificateOptionsRequest
       attr_accessor certificate_arn: ::String
       attr_accessor options: Types::CertificateOptions
+      SENSITIVE: []
+    end
+
+    class UpdateSummary
+      attr_accessor status: ("PENDING_DOMAIN_VALIDATION" | "SUCCESS" | "FAILED")
+      attr_accessor type: ("DOMAIN_VALIDATION_METHOD")
+      attr_accessor domain_validation_method_update_summary: Types::DomainValidationMethodUpdateSummary
+      attr_accessor requested_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ValidationChallenge
+      attr_accessor email_validation_challenge: Types::EmailValidationChallenge
+      attr_accessor dns_validation_challenge: Types::DnsValidationChallenge
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EmailValidationChallenge < ValidationChallenge
+      end
+      class DnsValidationChallenge < ValidationChallenge
+      end
+      class Unknown < ValidationChallenge
+      end
+    end
+
+    class ValidationConfiguration
+      attr_accessor validation_method: ("EMAIL" | "DNS" | "HTTP")
+      attr_accessor validation_challenge: Types::ValidationChallenge
+      attr_accessor validation_status: ("PENDING_VALIDATION" | "SUCCESS" | "FAILED")
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.192.0 (2026-08-10)
+------------------
+
+* Feature - Added VirtualSourceAddress to multicast output destinations for MediaLive Anywhere channels. Specifies the source IP address for outbound multicast packets when downstream networks enforce source-IP filtering.
+
 1.191.0 (2026-07-09)
 ------------------
 

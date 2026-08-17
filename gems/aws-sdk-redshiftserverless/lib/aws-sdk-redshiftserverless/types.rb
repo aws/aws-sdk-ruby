@@ -3827,6 +3827,11 @@ module Aws::RedshiftServerless
     #   `adminUsername`.
     #
     #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
+    #
+    #   If your admin user account is locked, this operation also unlocks
+    #   your account and resets the failed-login counter. This option is
+    #   available only when account lockout security is enabled for the
+    #   namespace.
     #   @return [String]
     #
     # @!attribute [rw] admin_username

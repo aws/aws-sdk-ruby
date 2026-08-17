@@ -54,7 +54,7 @@ module Aws::MediaConvert
   autoload :EndpointProvider, 'aws-sdk-mediaconvert/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediaconvert/endpoints'
 
-  GEM_VERSION = '1.190.0'
+  GEM_VERSION = '1.191.0'
 
 end
 

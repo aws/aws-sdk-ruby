@@ -537,6 +537,89 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Creates a backup access point for an Amazon S3 recovery point. A
+    # backup access point provides on-demand, read-only access to the backup
+    # data in a recovery point through an Amazon S3 access point, without
+    # initiating a restore.
+    #
+    # While a backup access point is active for a recovery point, Backup
+    # pauses lifecycle transitions and blocks deletion of that recovery
+    # point.
+    #
+    # @option params [Hash<String,String>] :access_point_metadata
+    #   Metadata for the backup access point. For continuous (point-in-time)
+    #   recovery points, you must include an `AccessPointInTime` timestamp (in
+    #   format `2021-11-27T03:30:27Z`). The access point provides access to
+    #   the content present in the backup at that specific time. You can
+    #   specify any time within the continuous backup's retention period, up
+    #   to the latest restorable time. For snapshot recovery points, do not
+    #   include `AccessPointInTime`.
+    #
+    # @option params [String] :access_point_policy
+    #   An optional resource-based policy, in JSON format, to apply to the
+    #   underlying Amazon S3 access point. The policy controls how backup data
+    #   can be accessed through the access point. If you do not specify a
+    #   policy, access is governed by the caller's IAM permissions. For more
+    #   information, see [Configuring IAM policies for using access points][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html
+    #
+    # @option params [required, String] :name
+    #   The name of the backup access point. This name is shared with the
+    #   Amazon S3 access point namespace. It must be unique within your
+    #   account and Region and cannot conflict with an existing Amazon S3
+    #   access point. For more information about access point naming, see
+    #   [Access points naming rules, restrictions, and limitations][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-restrictions-limitations-naming-rules.html
+    #
+    # @option params [required, String] :recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point for which to
+    #   create the backup access point. The recovery point must be an Amazon
+    #   S3 recovery point in the `AVAILABLE`, `STOPPED`, or `COMPLETED` state.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the backup access point.
+    #
+    # @return [Types::CreateBackupAccessPointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBackupAccessPointResponse#access_point_arn #access_point_arn} => String
+    #   * {Types::CreateBackupAccessPointResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_backup_access_point({
+    #     access_point_metadata: {
+    #       "AccessPointMetadataMapKeyString" => "AccessPointMetadataMapValueString",
+    #     },
+    #     access_point_policy: "AccessPointPolicy",
+    #     name: "AccessPointName", # required
+    #     recovery_point_arn: "RecoveryPointArn", # required
+    #     tags: {
+    #       "TagMapKeyString" => "TagMapValueString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_point_arn #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "DISASSOCIATED", "DISASSOCIATING", "EXPIRED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupAccessPoint AWS API Documentation
+    #
+    # @overload create_backup_access_point(params = {})
+    # @param [Hash] params ({})
+    def create_backup_access_point(params = {}, options = {})
+      req = build_request(:create_backup_access_point, params)
+      req.send_request(options)
+    end
+
     # Creates a backup plan using a backup plan name and backup rules. A
     # backup plan is a document that contains information that Backup uses
     # to schedule tasks that create recovery points for resources.
@@ -1451,6 +1534,33 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Deletes a backup access point. This deletes the underlying Amazon S3
+    # access point and, if no other backup access points remain for the
+    # recovery point, resumes lifecycle transitions for that recovery point.
+    #
+    # Always delete backup access points using this operation rather than
+    # deleting the underlying Amazon S3 access point directly.
+    #
+    # @option params [required, String] :access_point_arn
+    #   The Amazon Resource Name (ARN) of the backup access point to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_backup_access_point({
+    #     access_point_arn: "AccessPointArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupAccessPoint AWS API Documentation
+    #
+    # @overload delete_backup_access_point(params = {})
+    # @param [Hash] params ({})
+    def delete_backup_access_point(params = {}, options = {})
+      req = build_request(:delete_backup_access_point, params)
+      req.send_request(options)
+    end
+
     # Deletes a backup plan. A backup plan can only be deleted after all
     # associated selections of resources have been deleted. Deleting a
     # backup plan deletes the current version of a backup plan. Previous
@@ -1795,6 +1905,60 @@ module Aws::Backup
     # @param [Hash] params ({})
     def delete_tiering_configuration(params = {}, options = {})
       req = build_request(:delete_tiering_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns metadata about a backup access point, including its status and
+    # the details of the underlying Amazon S3 access point.
+    #
+    # After a backup access point reaches the `AVAILABLE` status, use this
+    # operation to retrieve the Amazon S3 access point ARN and alias that
+    # you need to read the backup data.
+    #
+    # @option params [required, String] :access_point_arn
+    #   The Amazon Resource Name (ARN) of the backup access point to describe.
+    #
+    # @return [Types::DescribeBackupAccessPointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBackupAccessPointResponse#access_point_arn #access_point_arn} => String
+    #   * {Types::DescribeBackupAccessPointResponse#access_point_metadata #access_point_metadata} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeBackupAccessPointResponse#backup_vault_arn #backup_vault_arn} => String
+    #   * {Types::DescribeBackupAccessPointResponse#backup_vault_name #backup_vault_name} => String
+    #   * {Types::DescribeBackupAccessPointResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeBackupAccessPointResponse#name #name} => String
+    #   * {Types::DescribeBackupAccessPointResponse#recovery_point_arn #recovery_point_arn} => String
+    #   * {Types::DescribeBackupAccessPointResponse#resource_arn #resource_arn} => String
+    #   * {Types::DescribeBackupAccessPointResponse#resource_type #resource_type} => String
+    #   * {Types::DescribeBackupAccessPointResponse#status #status} => String
+    #   * {Types::DescribeBackupAccessPointResponse#status_message #status_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_backup_access_point({
+    #     access_point_arn: "AccessPointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_point_arn #=> String
+    #   resp.access_point_metadata #=> Hash
+    #   resp.access_point_metadata["AccessPointMetadataMapKeyString"] #=> String
+    #   resp.backup_vault_arn #=> String
+    #   resp.backup_vault_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.name #=> String
+    #   resp.recovery_point_arn #=> String
+    #   resp.resource_arn #=> String
+    #   resp.resource_type #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "DISASSOCIATED", "DISASSOCIATING", "EXPIRED", "FAILED"
+    #   resp.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupAccessPoint AWS API Documentation
+    #
+    # @overload describe_backup_access_point(params = {})
+    # @param [Hash] params ({})
+    def describe_backup_access_point(params = {}, options = {})
+      req = build_request(:describe_backup_access_point, params)
       req.send_request(options)
     end
 
@@ -3015,7 +3179,7 @@ module Aws::Backup
     #   resp.backup_vault_arn #=> String
     #   resp.sns_topic_arn #=> String
     #   resp.backup_vault_events #=> Array
-    #   resp.backup_vault_events[0] #=> String, one of "BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_SUCCESSFUL", "BACKUP_JOB_FAILED", "BACKUP_JOB_EXPIRED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RESTORE_JOB_SUCCESSFUL", "RESTORE_JOB_FAILED", "COPY_JOB_STARTED", "COPY_JOB_SUCCESSFUL", "COPY_JOB_FAILED", "RECOVERY_POINT_MODIFIED", "BACKUP_PLAN_CREATED", "BACKUP_PLAN_MODIFIED", "S3_BACKUP_OBJECT_FAILED", "S3_RESTORE_OBJECT_FAILED", "CONTINUOUS_BACKUP_INTERRUPTED", "RECOVERY_POINT_INDEX_COMPLETED", "RECOVERY_POINT_INDEX_DELETED", "RECOVERY_POINT_INDEXING_FAILED", "EKS_RESTORE_OBJECT_FAILED", "EKS_RESTORE_OBJECT_SKIPPED", "EKS_BACKUP_OBJECT_FAILED"
+    #   resp.backup_vault_events[0] #=> String, one of "BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_SUCCESSFUL", "BACKUP_JOB_FAILED", "BACKUP_JOB_EXPIRED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RESTORE_JOB_SUCCESSFUL", "RESTORE_JOB_FAILED", "COPY_JOB_STARTED", "COPY_JOB_SUCCESSFUL", "COPY_JOB_FAILED", "RECOVERY_POINT_MODIFIED", "BACKUP_PLAN_CREATED", "BACKUP_PLAN_MODIFIED", "S3_BACKUP_OBJECT_FAILED", "S3_RESTORE_OBJECT_FAILED", "CONTINUOUS_BACKUP_INTERRUPTED", "RECOVERY_POINT_INDEX_COMPLETED", "RECOVERY_POINT_INDEX_DELETED", "RECOVERY_POINT_INDEXING_FAILED", "EKS_RESTORE_OBJECT_FAILED", "EKS_RESTORE_OBJECT_SKIPPED", "EKS_BACKUP_OBJECT_FAILED", "ACCESS_POINT_AVAILABLE", "ACCESS_POINT_CREATION_FAILED", "ACCESS_POINT_DELETED", "ACCESS_POINT_DELETION_FAILED", "ACCESS_POINT_EXPIRED", "ACCESS_POINT_DISASSOCIATED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupVaultNotifications AWS API Documentation
     #
@@ -3463,6 +3627,174 @@ module Aws::Backup
     # @param [Hash] params ({})
     def get_tiering_configuration(params = {}, options = {})
       req = build_request(:get_tiering_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the backup access points in your account and Region.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to be returned.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned items. For example,
+    #   if a request is made to return `MaxResults` number of items,
+    #   `NextToken` allows you to return more items in your list starting at
+    #   the location pointed to by the next token.
+    #
+    # @return [Types::ListBackupAccessPointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBackupAccessPointsResponse#backup_access_points #backup_access_points} => Array&lt;Types::ListAccessPointsMember&gt;
+    #   * {Types::ListBackupAccessPointsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_backup_access_points({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_access_points #=> Array
+    #   resp.backup_access_points[0].access_point_arn #=> String
+    #   resp.backup_access_points[0].access_point_metadata #=> Hash
+    #   resp.backup_access_points[0].access_point_metadata["AccessPointMetadataMapKeyString"] #=> String
+    #   resp.backup_access_points[0].backup_vault_arn #=> String
+    #   resp.backup_access_points[0].backup_vault_name #=> String
+    #   resp.backup_access_points[0].creation_time #=> Time
+    #   resp.backup_access_points[0].name #=> String
+    #   resp.backup_access_points[0].recovery_point_arn #=> String
+    #   resp.backup_access_points[0].resource_arn #=> String
+    #   resp.backup_access_points[0].resource_type #=> String
+    #   resp.backup_access_points[0].status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "DISASSOCIATED", "DISASSOCIATING", "EXPIRED", "FAILED"
+    #   resp.backup_access_points[0].status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupAccessPoints AWS API Documentation
+    #
+    # @overload list_backup_access_points(params = {})
+    # @param [Hash] params ({})
+    def list_backup_access_points(params = {}, options = {})
+      req = build_request(:list_backup_access_points, params)
+      req.send_request(options)
+    end
+
+    # Returns the backup access points associated with the specified
+    # recovery point.
+    #
+    # If you own the recovery point and have shared it with other accounts,
+    # the response includes backup access points created by those accounts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to be returned.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned items. For example,
+    #   if a request is made to return `MaxResults` number of items,
+    #   `NextToken` allows you to return more items in your list starting at
+    #   the location pointed to by the next token.
+    #
+    # @option params [required, String] :recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point whose backup
+    #   access points you want to list.
+    #
+    # @return [Types::ListBackupAccessPointsByRecoveryPointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBackupAccessPointsByRecoveryPointResponse#backup_access_points #backup_access_points} => Array&lt;Types::ListAccessPointsMember&gt;
+    #   * {Types::ListBackupAccessPointsByRecoveryPointResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_backup_access_points_by_recovery_point({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     recovery_point_arn: "RecoveryPointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_access_points #=> Array
+    #   resp.backup_access_points[0].access_point_arn #=> String
+    #   resp.backup_access_points[0].access_point_metadata #=> Hash
+    #   resp.backup_access_points[0].access_point_metadata["AccessPointMetadataMapKeyString"] #=> String
+    #   resp.backup_access_points[0].backup_vault_arn #=> String
+    #   resp.backup_access_points[0].backup_vault_name #=> String
+    #   resp.backup_access_points[0].creation_time #=> Time
+    #   resp.backup_access_points[0].name #=> String
+    #   resp.backup_access_points[0].recovery_point_arn #=> String
+    #   resp.backup_access_points[0].resource_arn #=> String
+    #   resp.backup_access_points[0].resource_type #=> String
+    #   resp.backup_access_points[0].status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "DISASSOCIATED", "DISASSOCIATING", "EXPIRED", "FAILED"
+    #   resp.backup_access_points[0].status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupAccessPointsByRecoveryPoint AWS API Documentation
+    #
+    # @overload list_backup_access_points_by_recovery_point(params = {})
+    # @param [Hash] params ({})
+    def list_backup_access_points_by_recovery_point(params = {}, options = {})
+      req = build_request(:list_backup_access_points_by_recovery_point, params)
+      req.send_request(options)
+    end
+
+    # Returns the backup access points associated with the specified
+    # resource, such as an Amazon S3 bucket.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to be returned.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned items. For example,
+    #   if a request is made to return `MaxResults` number of items,
+    #   `NextToken` allows you to return more items in your list starting at
+    #   the location pointed to by the next token.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource whose backup access
+    #   points you want to list.
+    #
+    # @return [Types::ListBackupAccessPointsByResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBackupAccessPointsByResourceResponse#backup_access_points #backup_access_points} => Array&lt;Types::ListAccessPointsMember&gt;
+    #   * {Types::ListBackupAccessPointsByResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_backup_access_points_by_resource({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_access_points #=> Array
+    #   resp.backup_access_points[0].access_point_arn #=> String
+    #   resp.backup_access_points[0].access_point_metadata #=> Hash
+    #   resp.backup_access_points[0].access_point_metadata["AccessPointMetadataMapKeyString"] #=> String
+    #   resp.backup_access_points[0].backup_vault_arn #=> String
+    #   resp.backup_access_points[0].backup_vault_name #=> String
+    #   resp.backup_access_points[0].creation_time #=> Time
+    #   resp.backup_access_points[0].name #=> String
+    #   resp.backup_access_points[0].recovery_point_arn #=> String
+    #   resp.backup_access_points[0].resource_arn #=> String
+    #   resp.backup_access_points[0].resource_type #=> String
+    #   resp.backup_access_points[0].status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "DISASSOCIATED", "DISASSOCIATING", "EXPIRED", "FAILED"
+    #   resp.backup_access_points[0].status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupAccessPointsByResource AWS API Documentation
+    #
+    # @overload list_backup_access_points_by_resource(params = {})
+    # @param [Hash] params ({})
+    def list_backup_access_points_by_resource(params = {}, options = {})
+      req = build_request(:list_backup_access_points_by_resource, params)
       req.send_request(options)
     end
 
@@ -4558,9 +4890,14 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns an array of resources successfully backed up by Backup,
-    # including the time the resource was saved, an Amazon Resource Name
-    # (ARN) of the resource, and a resource type.
+    # Returns an array of resources with recovery points created by Backup
+    # (regardless of the recovery point's [status][1]), including the time
+    # the resource was saved, an Amazon Resource Name (ARN) of the resource,
+    # and a resource type.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeRecoveryPoint.html#Backup-DescribeRecoveryPoint-response-Status
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
@@ -4902,7 +5239,8 @@ module Aws::Backup
     #   associated with the selected resources that are managed by Backup.
     #
     #   If this is set to `FALSE`, the response will contain all recovery
-    #   points associated with the selected resource.
+    #   points associated with the selected resource, except for EBS snapshots
+    #   copied within the same Region and account.
     #
     #   Type: Boolean
     #
@@ -6097,7 +6435,7 @@ module Aws::Backup
     #   resp = client.put_backup_vault_notifications({
     #     backup_vault_name: "BackupVaultName", # required
     #     sns_topic_arn: "ARN", # required
-    #     backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED, S3_BACKUP_OBJECT_FAILED, S3_RESTORE_OBJECT_FAILED, CONTINUOUS_BACKUP_INTERRUPTED, RECOVERY_POINT_INDEX_COMPLETED, RECOVERY_POINT_INDEX_DELETED, RECOVERY_POINT_INDEXING_FAILED, EKS_RESTORE_OBJECT_FAILED, EKS_RESTORE_OBJECT_SKIPPED, EKS_BACKUP_OBJECT_FAILED
+    #     backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED, S3_BACKUP_OBJECT_FAILED, S3_RESTORE_OBJECT_FAILED, CONTINUOUS_BACKUP_INTERRUPTED, RECOVERY_POINT_INDEX_COMPLETED, RECOVERY_POINT_INDEX_DELETED, RECOVERY_POINT_INDEXING_FAILED, EKS_RESTORE_OBJECT_FAILED, EKS_RESTORE_OBJECT_SKIPPED, EKS_BACKUP_OBJECT_FAILED, ACCESS_POINT_AVAILABLE, ACCESS_POINT_CREATION_FAILED, ACCESS_POINT_DELETED, ACCESS_POINT_DELETION_FAILED, ACCESS_POINT_EXPIRED, ACCESS_POINT_DISASSOCIATED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultNotifications AWS API Documentation
@@ -7532,7 +7870,7 @@ module Aws::Backup
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

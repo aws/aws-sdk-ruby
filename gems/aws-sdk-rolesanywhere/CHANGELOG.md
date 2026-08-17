@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2026-07-28)
+------------------
+
+* Feature - Increases certificate string length for trust anchor source data to support new adjustable trust anchor limits.
+
 1.54.0 (2026-07-09)
 ------------------
 

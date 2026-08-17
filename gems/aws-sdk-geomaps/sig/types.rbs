@@ -85,6 +85,8 @@ module Aws::GeoMaps
       attr_accessor traffic: ("All" | "Congestion")
       attr_accessor travel_modes: ::Array[("Transit" | "Truck")]
       attr_accessor buildings: ("Buildings3D")
+      attr_accessor poi_density: ("Off" | "VerySparse" | "Sparse" | "Default" | "Dense" | "VeryDense")
+      attr_accessor poi_categories: ::Array[("FoodAndDrink" | "Entertainment" | "SightsAndMuseums" | "Transportation" | "Accommodations" | "LeisureAndOutdoor" | "Shopping" | "BusinessAndServices" | "FacilitiesAndBuildings")]
       attr_accessor key: ::String
       SENSITIVE: [:political_view, :key]
     end

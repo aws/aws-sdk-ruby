@@ -158,6 +158,8 @@ module Aws
                                   ?traffic: ("All" | "Congestion"),
                                   ?travel_modes: Array[("Transit" | "Truck")],
                                   ?buildings: ("Buildings3D"),
+                                  ?poi_density: ("Off" | "VerySparse" | "Sparse" | "Default" | "Dense" | "VeryDense"),
+                                  ?poi_categories: Array[("FoodAndDrink" | "Entertainment" | "SightsAndMuseums" | "Transportation" | "Accommodations" | "LeisureAndOutdoor" | "Shopping" | "BusinessAndServices" | "FacilitiesAndBuildings")],
                                   ?key: ::String
                                 ) ?{ (*untyped) -> void } -> _GetStyleDescriptorResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetStyleDescriptorResponseSuccess

@@ -442,6 +442,7 @@ module Aws::MediaConnect
       attr_accessor availability_zone: ::String
       attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor fabric_configuration: Types::FabricConfiguration
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -678,6 +679,11 @@ module Aws::MediaConnect
       attr_accessor entitlement_status: ("ENABLED" | "DISABLED")
       attr_accessor name: ::String
       attr_accessor subscribers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FabricConfiguration
+      attr_accessor recovery_latency_mode: ("BALANCED" | "LOW_LATENCY")
       SENSITIVE: []
     end
 
@@ -1940,6 +1946,7 @@ module Aws::MediaConnect
       attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
       attr_accessor maintenance_schedule_type: ("WINDOW")
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor fabric_configuration: Types::FabricConfiguration
       SENSITIVE: []
     end
 
@@ -2657,6 +2664,7 @@ module Aws::MediaConnect
       attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
       attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20")
       attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
+      attr_accessor fabric_configuration: Types::FabricConfiguration
       SENSITIVE: []
     end
 

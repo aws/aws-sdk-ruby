@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.243.0 (2026-08-05)
+------------------
+
+* Feature - New enum values added for Agent Connectivity issues
+
 1.242.0 (2026-07-09)
 ------------------
 

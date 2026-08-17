@@ -1620,6 +1620,10 @@ module Aws::MediaConnect
     #   Key-value pairs that can be used to tag this router output.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] fabric_configuration
+    #   The fabric configuration settings for the router output.
+    #   @return [Types::FabricConfiguration]
+    #
     # @!attribute [rw] client_token
     #   A unique identifier for the request to ensure idempotency.
     #
@@ -1639,6 +1643,7 @@ module Aws::MediaConnect
       :availability_zone,
       :maintenance_configuration,
       :tags,
+      :fabric_configuration,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2409,6 +2414,26 @@ module Aws::MediaConnect
       :entitlement_status,
       :name,
       :subscribers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The fabric configuration settings for the router output.
+    #
+    # @!attribute [rw] recovery_latency_mode
+    #   The recovery latency mode for the router fabric connection. Valid
+    #   values include the following:
+    #
+    #   * `BALANCED` (default) – Optimizes for stream quality.
+    #
+    #   * `LOW_LATENCY` – Reduces latency at the potential cost of stream
+    #     quality under adverse network conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FabricConfiguration AWS API Documentation
+    #
+    class FabricConfiguration < Struct.new(
+      :recovery_latency_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6880,6 +6905,10 @@ module Aws::MediaConnect
     #   The current maintenance schedule details for this router output.
     #   @return [Types::MaintenanceSchedule]
     #
+    # @!attribute [rw] fabric_configuration
+    #   The fabric configuration settings for the router output.
+    #   @return [Types::FabricConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutput AWS API Documentation
     #
     class RouterOutput < Struct.new(
@@ -6905,7 +6934,8 @@ module Aws::MediaConnect
       :maintenance_type,
       :maintenance_configuration,
       :maintenance_schedule_type,
-      :maintenance_schedule)
+      :maintenance_schedule,
+      :fabric_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9605,6 +9635,13 @@ module Aws::MediaConnect
     #   schedules.
     #   @return [Types::MaintenanceConfiguration]
     #
+    # @!attribute [rw] fabric_configuration
+    #   The updated fabric configuration settings for the router output. You
+    #   cannot update the fabric configuration while the output has an
+    #   active route. You must unroute the output before updating the fabric
+    #   configuration.
+    #   @return [Types::FabricConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateRouterOutputRequest AWS API Documentation
     #
     class UpdateRouterOutputRequest < Struct.new(
@@ -9614,7 +9651,8 @@ module Aws::MediaConnect
       :maximum_bitrate,
       :routing_scope,
       :tier,
-      :maintenance_configuration)
+      :maintenance_configuration,
+      :fabric_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

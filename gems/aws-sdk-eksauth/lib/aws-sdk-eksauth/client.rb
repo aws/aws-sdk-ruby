@@ -488,6 +488,16 @@ module Aws::EKSAuth
     # @option params [required, String] :token
     #   The token of the Kubernetes service account for the pod.
     #
+    # @option params [String] :eks_node_name
+    #   The Kubernetes node name of the worker node where the pod is running.
+    #
+    # @option params [String] :instance_id
+    #   The Amazon EC2 instance ID of the worker node where the pod is
+    #   running.
+    #
+    # @option params [String] :zone
+    #   The Availability Zone ID of the worker node where the pod is running.
+    #
     # @return [Types::AssumeRoleForPodIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssumeRoleForPodIdentityResponse#subject #subject} => Types::Subject
@@ -501,6 +511,9 @@ module Aws::EKSAuth
     #   resp = client.assume_role_for_pod_identity({
     #     cluster_name: "ClusterName", # required
     #     token: "JwtToken", # required
+    #     eks_node_name: "String",
+    #     instance_id: "String",
+    #     zone: "String",
     #   })
     #
     # @example Response structure
@@ -544,7 +557,7 @@ module Aws::EKSAuth
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eksauth'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

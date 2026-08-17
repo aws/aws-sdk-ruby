@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2026-07-31)
+------------------
+
+* Feature - Amazon Managed Service for Prometheus adds support for an Amazon OpenSearch Service exporter for managed collectors.
+
 1.76.0 (2026-07-22)
 ------------------
 

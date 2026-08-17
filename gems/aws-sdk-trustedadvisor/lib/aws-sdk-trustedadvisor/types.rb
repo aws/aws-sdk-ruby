@@ -140,6 +140,25 @@ module Aws::TrustedAdvisor
     #   The column headings for the metadata returned in the resource
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] resource_arn_queryable
+    #   Indicates whether this check is supported by the
+    #   ListRecommendationsForResource API.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] aws_resource_types
+    #   The AWS resource types that this check evaluates (for example,
+    #   AWS::EC2::Instance).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] check_granularity
+    #   The granularity level at which the check operates: resource,
+    #   account, or account\_region.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_id
+    #   The recommendation identifier associated with the check.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/CheckSummary AWS API Documentation
     #
     class CheckSummary < Struct.new(
@@ -150,7 +169,11 @@ module Aws::TrustedAdvisor
       :pillars,
       :aws_services,
       :source,
-      :metadata)
+      :metadata,
+      :resource_arn_queryable,
+      :aws_resource_types,
+      :check_granularity,
+      :recommendation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -545,6 +568,71 @@ module Aws::TrustedAdvisor
     class ListRecommendationResourcesResponse < Struct.new(
       :next_token,
       :recommendation_resource_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aws_resource_arn
+    #   The ARN of the AWS resource to query recommendations for
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar
+    #   The pillar that the recommendation belongs to
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Recommendation Resource
+    #   @return [String]
+    #
+    # @!attribute [rw] check_arn
+    #   The AWS Trusted Advisor Check ARN that relates to the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The ISO 639-1 code for the language that you want your
+    #   recommendations to appear in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListRecommendationsForResourceRequest AWS API Documentation
+    #
+    class ListRecommendationsForResourceRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :aws_resource_arn,
+      :pillar,
+      :status,
+      :check_arn,
+      :language)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_for_resource_summaries
+    #   List of Trusted Advisor recommendations associated with the given
+    #   AWS resource
+    #   @return [Array<Types::RecommendationForResourceSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListRecommendationsForResourceResponse AWS API Documentation
+    #
+    class ListRecommendationsForResourceResponse < Struct.new(
+      :next_token,
+      :recommendation_for_resource_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1039,6 +1127,55 @@ module Aws::TrustedAdvisor
     class RecommendationCostOptimizingAggregates < Struct.new(
       :estimated_monthly_savings,
       :estimated_percent_monthly_savings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a Recommendation for a specific AWS Resource
+    #
+    # @!attribute [rw] check_arn
+    #   The Check ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_arn
+    #   The Recommendation ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_resource_arn
+    #   The AWS Resource ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   When the recommendation was last updated
+    #   @return [Time]
+    #
+    # @!attribute [rw] exclusion_status
+    #   The exclusion status of the recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   Metadata associated with the recommendation
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] pillars
+    #   The Pillars that the Recommendation is optimizing
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/RecommendationForResourceSummary AWS API Documentation
+    #
+    class RecommendationForResourceSummary < Struct.new(
+      :check_arn,
+      :recommendation_arn,
+      :aws_resource_arn,
+      :status,
+      :last_updated_at,
+      :exclusion_status,
+      :metadata,
+      :pillars)
       SENSITIVE = []
       include Aws::Structure
     end

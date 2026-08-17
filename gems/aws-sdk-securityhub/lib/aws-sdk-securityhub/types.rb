@@ -194,6 +194,35 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The free trial status of each Security Hub feature for an account.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account identifier that the free trial
+    #   statuses apply to.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluated_at
+    #   The date and time at which Security Hub evaluated the free trial
+    #   statuses for this account. Every status in `FreeTrialStatuses`
+    #   reflects this point in time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] free_trial_statuses
+    #   An array of free trial statuses, one for each feature that has a
+    #   free trial period for the account. The array is empty if the account
+    #   has no free trial to report.
+    #   @return [Array<Types::FreeTrialStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AccountFreeTrialStatus AWS API Documentation
+    #
+    class AccountFreeTrialStatus < Struct.new(
+      :account_id,
+      :evaluated_at,
+      :free_trial_statuses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides details about one of the following actions that affects or
     # that was taken on a resource:
     #
@@ -25866,6 +25895,49 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The free trial period for a Security Hub feature, and whether the
+    # trial is currently active.
+    #
+    # @!attribute [rw] feature_type
+    #   The feature that the free trial period applies to. Valid values:
+    #
+    #   * `SECURITY_HUB_V2` specifies Security Hub.
+    #
+    #   * `SECURITY_HUB_V2_MULTI_CLOUD_AZURE` specifies Security Hub
+    #     coverage for Microsoft Azure resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Whether the free trial period is currently active. Valid values:
+    #
+    #   * `ACTIVE` specifies that the free trial period is ongoing.
+    #
+    #   * `INACTIVE` specifies that the free trial period has ended, or that
+    #     it never started.
+    #
+    #   To determine whether a trial has expired, compare `ExpiresAt` to the
+    #   current time.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time at which the free trial period began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_at
+    #   The date and time at which the free trial period ends.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FreeTrialStatus AWS API Documentation
+    #
+    class FreeTrialStatus < Struct.new(
+      :feature_type,
+      :status,
+      :started_at,
+      :expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] metadata_uid
     #   The unique identifier (ID) of Security Hub OCSF findings found under
     #   the `metadata.uid` field of the finding.
@@ -28238,6 +28310,59 @@ module Aws::SecurityHub
     #
     class ListFindingAggregatorsResponse < Struct.new(
       :finding_aggregators,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services account identifiers to list free trial
+    #   status for. You can specify accounts other than your own only if you
+    #   are a delegated Security Hub administrator.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] statuses
+    #   The free trial statuses to filter the results by. Valid values:
+    #
+    #   * `ACTIVE` returns only features with an ongoing free trial period.
+    #
+    #   * `INACTIVE` returns only features whose free trial period has
+    #     ended, or that never started.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. If you don't specify a
+    #   value, Security Hub returns up to 100 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListFreeTrialStatusesV2Request AWS API Documentation
+    #
+    class ListFreeTrialStatusesV2Request < Struct.new(
+      :account_ids,
+      :statuses,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_free_trial_statuses
+    #   An array of free trial statuses, one for each account in scope.
+    #   @return [Array<Types::AccountFreeTrialStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results. If
+    #   there are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListFreeTrialStatusesV2Response AWS API Documentation
+    #
+    class ListFreeTrialStatusesV2Response < Struct.new(
+      :account_free_trial_statuses,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

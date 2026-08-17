@@ -377,6 +377,74 @@ module Aws
                                       key: ::String,
                                       value: ::String?
                                     }
+                                  ]?,
+                                  cloud_provider: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    }
+                                  ]?,
+                                  cloud_provider_account_id: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    }
+                                  ]?,
+                                  cloud_provider_org_id: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    }
+                                  ]?,
+                                  cloud_provider_region: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    }
+                                  ]?,
+                                  cloud_vm_instance_tags: Array[
+                                    {
+                                      comparison: ("EQUALS"),
+                                      key: ::String,
+                                      value: ::String?
+                                    }
+                                  ]?,
+                                  cloud_container_image_tags: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    }
+                                  ]?,
+                                  cloud_container_repository_name: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    }
+                                  ]?,
+                                  cloud_container_registry_name: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    }
+                                  ]?,
+                                  cloud_serverless_function_name: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    }
+                                  ]?,
+                                  cloud_serverless_function_runtime: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    }
+                                  ]?,
+                                  cloud_serverless_function_tags: Array[
+                                    {
+                                      comparison: ("EQUALS"),
+                                      key: ::String,
+                                      value: ::String?
+                                    }
                                   ]?
                                 },
                                 report_format: ("CYCLONEDX_1_4" | "SPDX_2_3"),

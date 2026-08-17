@@ -270,7 +270,7 @@ module Aws
         kms_encryption_context: ::String?,
         kms_key_arn: ::String?
       }?,
-      storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE")?
+      storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "GLACIER_IR")?
     }
 
       type destination_settings = {
@@ -685,6 +685,15 @@ module Aws
       video_pid: ::Integer?
     }
 
+      type mov_settings = {
+      audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+      clap_atom: ("INCLUDE" | "EXCLUDE")?,
+      cslg_atom: ("INCLUDE" | "EXCLUDE")?,
+      mpeg_2_four_cc_control: ("XDCAM" | "MPEG")?,
+      padding_control: ("OMNEON" | "NONE")?,
+      reference: ("SELF_CONTAINED" | "EXTERNAL")?
+    }
+
       type mp_4_settings = {
       audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
       c2pa_manifest: ("INCLUDE" | "EXCLUDE")?,
@@ -732,13 +741,7 @@ module Aws
       }?,
       m2ts_settings: Params::m2ts_settings?,
       m3u_8_settings: Params::m3u_8_settings?,
-      mov_settings: {
-        clap_atom: ("INCLUDE" | "EXCLUDE")?,
-        cslg_atom: ("INCLUDE" | "EXCLUDE")?,
-        mpeg_2_four_cc_control: ("XDCAM" | "MPEG")?,
-        padding_control: ("OMNEON" | "NONE")?,
-        reference: ("SELF_CONTAINED" | "EXTERNAL")?
-      }?,
+      mov_settings: Params::mov_settings?,
       mp_4_settings: Params::mp_4_settings?,
       mpd_settings: Params::mpd_settings?,
       mxf_settings: Params::mxf_settings?

@@ -1,0 +1,98 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AgentRegistryControl
+    module Params
+      type managed_vpc_resource = {
+      vpc_identifier: ::String,
+      subnet_ids: Array[::String],
+      endpoint_ip_address_type: ("IPV4" | "IPV6"),
+      security_group_ids: Array[::String]?,
+      tags: Hash[::String, ::String]?,
+      routing_domain: ::String?
+    }
+
+      type private_endpoint = {
+      self_managed_lattice_resource: {
+        resource_configuration_identifier: ::String?
+      }?,
+      managed_vpc_resource: Params::managed_vpc_resource?
+    }
+
+      type custom_jwt_authorizer_configuration = {
+      discovery_url: ::String,
+      allowed_audience: Array[::String]?,
+      allowed_clients: Array[::String]?,
+      allowed_scopes: Array[::String]?,
+      custom_claims: Array[
+        Params::custom_claim_validation_type
+      ]?,
+      private_endpoint: Params::private_endpoint?,
+      private_endpoint_overrides: Array[
+        Params::private_endpoint_override
+      ]?
+    }
+
+      type authorizer_configuration = {
+      custom_jwt_authorizer: Params::custom_jwt_authorizer_configuration?
+    }
+
+      type custom_claim_validation_type = {
+      inbound_token_claim_name: ::String,
+      inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
+      authorizing_claim_match_value: {
+        claim_match_value: {
+          match_value_string: ::String?,
+          match_value_string_list: Array[::String]?
+        },
+        claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
+      }
+    }
+
+      type private_endpoint_override = {
+      domain: ::String,
+      private_endpoint: Params::private_endpoint
+    }
+
+      type descriptor_source_from_url = {
+      url: ::String,
+      credential_provider_configurations: Array[
+        Params::registry_record_credential_provider_configuration
+      ]?
+    }
+
+      type descriptor_source = {
+      from_url: Params::descriptor_source_from_url?
+    }
+
+      type registry_record_credential_provider_union = {
+      oauth_credential_provider: {
+        provider_arn: ::String,
+        grant_type: ("CLIENT_CREDENTIALS")?,
+        scopes: Array[::String]?,
+        custom_parameters: Hash[::String, ::String]?
+      }?,
+      iam_credential_provider: {
+        role_arn: ::String?,
+        service: ::String?,
+        region: ::String?
+      }?
+    }
+
+      type registry_record_credential_provider_configuration = {
+      credential_provider_type: ("OAUTH" | "IAM"),
+      credential_provider: Params::registry_record_credential_provider_union
+    }
+
+      type updated_descriptor_source = {
+      optional_value: Params::descriptor_source?
+    }
+
+    end
+  end
+end

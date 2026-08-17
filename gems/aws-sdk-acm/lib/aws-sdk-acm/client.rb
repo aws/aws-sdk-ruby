@@ -1156,6 +1156,13 @@ module Aws::ACM
     #   resp.certificate.renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
     #   resp.certificate.options.certificate_transparency_logging_preference #=> String, one of "ENABLED", "DISABLED"
     #   resp.certificate.options.export #=> String, one of "ENABLED", "DISABLED"
+    #   resp.certificate.options.validation_method #=> String, one of "EMAIL", "DNS", "HTTP"
+    #   resp.certificate.update_summary.status #=> String, one of "PENDING_DOMAIN_VALIDATION", "SUCCESS", "FAILED"
+    #   resp.certificate.update_summary.type #=> String, one of "DOMAIN_VALIDATION_METHOD"
+    #   resp.certificate.update_summary.domain_validation_method_update_summary.from #=> String, one of "EMAIL", "DNS", "HTTP"
+    #   resp.certificate.update_summary.domain_validation_method_update_summary.to #=> String, one of "EMAIL", "DNS", "HTTP"
+    #   resp.certificate.update_summary.requested_at #=> Time
+    #   resp.certificate.update_summary.updated_at #=> Time
     #   resp.certificate.certificate_key_pair_origin #=> String, one of "AWS_MANAGED", "ACME", "CUSTOMER_PROVIDED"
     #   resp.certificate.acme_endpoint_arn #=> String
     #   resp.certificate.acme_account_id #=> String
@@ -1665,6 +1672,72 @@ module Aws::ACM
     # @param [Hash] params ({})
     def list_acme_external_account_bindings(params = {}, options = {})
       req = build_request(:list_acme_external_account_bindings, params)
+      req.send_request(options)
+    end
+
+    # Returns per-domain validation summaries for an ACM certificate. Each
+    # summary includes the domain name, the active validation configuration,
+    # and the requested validation configuration when a validation method
+    # migration is in progress. You can use the results to monitor the
+    # progress of an email-to-DNS validation migration and to retrieve the
+    # CNAME records required for DNS validation.
+    #
+    # @option params [required, String] :certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate for which to list
+    #   domain validation summaries.
+    #
+    # @option params [String] :next_token
+    #   A token returned by a previous call to
+    #   `ListCertificateDomainValidations`. If the number of results exceeds
+    #   `MaxItems`, use this token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of domain validation summaries to return. If you
+    #   don't specify a value, the default is 1000.
+    #
+    # @return [Types::ListCertificateDomainValidationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCertificateDomainValidationsResponse#domain_validation_summary_list #domain_validation_summary_list} => Array&lt;Types::DomainValidationSummary&gt;
+    #   * {Types::ListCertificateDomainValidationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_certificate_domain_validations({
+    #     certificate_arn: "CertificateArn", # required
+    #     next_token: "NextToken",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_validation_summary_list #=> Array
+    #   resp.domain_validation_summary_list[0].domain_name #=> String
+    #   resp.domain_validation_summary_list[0].active_validation_configuration.validation_method #=> String, one of "EMAIL", "DNS", "HTTP"
+    #   resp.domain_validation_summary_list[0].active_validation_configuration.validation_challenge.email_validation_challenge.validation_emails #=> Array
+    #   resp.domain_validation_summary_list[0].active_validation_configuration.validation_challenge.email_validation_challenge.validation_emails[0] #=> String
+    #   resp.domain_validation_summary_list[0].active_validation_configuration.validation_challenge.email_validation_challenge.validation_domain #=> String
+    #   resp.domain_validation_summary_list[0].active_validation_configuration.validation_challenge.dns_validation_challenge.resource_record.name #=> String
+    #   resp.domain_validation_summary_list[0].active_validation_configuration.validation_challenge.dns_validation_challenge.resource_record.type #=> String, one of "CNAME"
+    #   resp.domain_validation_summary_list[0].active_validation_configuration.validation_challenge.dns_validation_challenge.resource_record.value #=> String
+    #   resp.domain_validation_summary_list[0].active_validation_configuration.validation_status #=> String, one of "PENDING_VALIDATION", "SUCCESS", "FAILED"
+    #   resp.domain_validation_summary_list[0].requested_validation_configuration.validation_method #=> String, one of "EMAIL", "DNS", "HTTP"
+    #   resp.domain_validation_summary_list[0].requested_validation_configuration.validation_challenge.email_validation_challenge.validation_emails #=> Array
+    #   resp.domain_validation_summary_list[0].requested_validation_configuration.validation_challenge.email_validation_challenge.validation_emails[0] #=> String
+    #   resp.domain_validation_summary_list[0].requested_validation_configuration.validation_challenge.email_validation_challenge.validation_domain #=> String
+    #   resp.domain_validation_summary_list[0].requested_validation_configuration.validation_challenge.dns_validation_challenge.resource_record.name #=> String
+    #   resp.domain_validation_summary_list[0].requested_validation_configuration.validation_challenge.dns_validation_challenge.resource_record.type #=> String, one of "CNAME"
+    #   resp.domain_validation_summary_list[0].requested_validation_configuration.validation_challenge.dns_validation_challenge.resource_record.value #=> String
+    #   resp.domain_validation_summary_list[0].requested_validation_configuration.validation_status #=> String, one of "PENDING_VALIDATION", "SUCCESS", "FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificateDomainValidations AWS API Documentation
+    #
+    # @overload list_certificate_domain_validations(params = {})
+    # @param [Hash] params ({})
+    def list_certificate_domain_validations(params = {}, options = {})
+      req = build_request(:list_certificate_domain_validations, params)
       req.send_request(options)
     end
 
@@ -2192,6 +2265,7 @@ module Aws::ACM
     #     options: {
     #       certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
     #       export: "ENABLED", # accepts ENABLED, DISABLED
+    #       validation_method: "EMAIL", # accepts EMAIL, DNS, HTTP
     #     },
     #     certificate_authority_arn: "PcaArn",
     #     tags: [
@@ -2742,15 +2816,15 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Updates a certificate. You can use this function to specify whether to
-    # export your certificate. Certificate transparency logging opt-out is
-    # no longer available. For more information, see [Certificate
-    # Transparency Logging][1] and [Certificate Manager Exportable Managed
+    # Updates certificate options. You can use this operation to change the
+    # domain validation method or specify whether to export your
+    # certificate. For more information, see [Migrate from email to DNS
+    # validation][1] and [Certificate Manager Exportable Managed
     # Certificates][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/email-to-dns-migration.html
     # [2]: https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html
     #
     # @option params [required, String] :certificate_arn
@@ -2761,14 +2835,13 @@ module Aws::ACM
     #
     # @option params [required, Types::CertificateOptions] :options
     #   Use to update the options for your certificate. Currently, you can
-    #   specify whether to export your certificate. Certificate transparency
-    #   logging opt-out is no longer available. All public certificates are
-    #   recorded in a certificate transparency log. For more information, see
-    #   [Certificate Transparency Logging][1].
+    #   change the domain validation method or specify whether to export your
+    #   certificate. For more information about migrating from email to DNS
+    #   validation, see [Migrate from email to DNS validation][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/email-to-dns-migration.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2779,6 +2852,7 @@ module Aws::ACM
     #     options: { # required
     #       certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
     #       export: "ENABLED", # accepts ENABLED, DISABLED
+    #       validation_method: "EMAIL", # accepts EMAIL, DNS, HTTP
     #     },
     #   })
     #
@@ -2809,7 +2883,7 @@ module Aws::ACM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

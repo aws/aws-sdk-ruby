@@ -79,10 +79,47 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateDbBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDbBackupOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+        def created_at: () -> ::Time
+        def expires_after: () -> ::String
+        def db_resource_id: () -> ::String
+        def type: () -> ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "ON_DEMAND" | "CONTINUOUS")
+        def engine_type: () -> ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
+        def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
+        def kms_key_id: () -> ::String
+        def cluster_configuration: () -> Types::ClusterConfiguration
+        def db_parameter_group_id: () -> ::String
+        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
+        def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
+        def failover_mode: () -> ("AUTOMATIC" | "NO_FAILOVER")
+        def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+        def allocated_storage: () -> ::Integer
+        def vpc_subnet_ids: () -> ::Array[::String]
+        def vpc_security_group_ids: () -> ::Array[::String]
+        def publicly_accessible: () -> bool
+        def port: () -> ::Integer
+        def network_type: () -> ("IPV4" | "DUAL")
+        def influx_auth_parameters_secret_arn: () -> ::String
+        def maintenance_schedule: () -> Types::MaintenanceSchedule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#create_db_backup-instance_method
+      def create_db_backup: (
+                              name: ::String,
+                              db_resource_id: ::String,
+                              ?retention_days: ::Integer,
+                              ?tags: Hash[::String, ::String]
+                            ) -> _CreateDbBackupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDbBackupResponseSuccess
+
       interface _CreateDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDbClusterOutput]
         def db_cluster_id: () -> ::String
-        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#create_db_cluster-instance_method
       def create_db_cluster: (
@@ -112,6 +149,15 @@ module Aws
                                  timezone: ::String,
                                  preferred_maintenance_window: ::String
                                },
+                               ?db_backup_configurations: Array[
+                                 {
+                                   type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "CONTINUOUS"),
+                                   retention_days: ::Integer,
+                                   enabled: bool,
+                                   custom_schedule: ::String?
+                                 }
+                               ],
+                               ?kms_key_id: ::String,
                                ?tags: Hash[::String, ::String]
                              ) -> _CreateDbClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDbClusterResponseSuccess
@@ -121,7 +167,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -143,6 +189,8 @@ module Aws
         def maintenance_schedule: () -> Types::MaintenanceSchedule
         def last_maintenance_time: () -> ::Time
         def next_maintenance_time: () -> ::Time
+        def db_backup_configurations: () -> ::Array[Types::DbBackupConfigurationOutput]
+        def kms_key_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#create_db_instance-instance_method
       def create_db_instance: (
@@ -171,7 +219,16 @@ module Aws
                                 },
                                 ?tags: Hash[::String, ::String],
                                 ?port: ::Integer,
-                                ?network_type: ("IPV4" | "DUAL")
+                                ?network_type: ("IPV4" | "DUAL"),
+                                ?db_backup_configurations: Array[
+                                  {
+                                    type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "CONTINUOUS"),
+                                    retention_days: ::Integer,
+                                    enabled: bool,
+                                    custom_schedule: ::String?
+                                  }
+                                ],
+                                ?kms_key_id: ::String
                               ) -> _CreateDbInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDbInstanceResponseSuccess
 
@@ -451,13 +508,48 @@ module Aws
                                      ) -> _CreateDbParameterGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDbParameterGroupResponseSuccess
 
+      interface _DeleteDbBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDbBackupOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+        def created_at: () -> ::Time
+        def expires_after: () -> ::String
+        def db_resource_id: () -> ::String
+        def type: () -> ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "ON_DEMAND" | "CONTINUOUS")
+        def engine_type: () -> ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
+        def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
+        def kms_key_id: () -> ::String
+        def cluster_configuration: () -> Types::ClusterConfiguration
+        def db_parameter_group_id: () -> ::String
+        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
+        def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
+        def failover_mode: () -> ("AUTOMATIC" | "NO_FAILOVER")
+        def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+        def allocated_storage: () -> ::Integer
+        def vpc_subnet_ids: () -> ::Array[::String]
+        def vpc_security_group_ids: () -> ::Array[::String]
+        def publicly_accessible: () -> bool
+        def port: () -> ::Integer
+        def network_type: () -> ("IPV4" | "DUAL")
+        def influx_auth_parameters_secret_arn: () -> ::String
+        def maintenance_schedule: () -> Types::MaintenanceSchedule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#delete_db_backup-instance_method
+      def delete_db_backup: (
+                              identifier: ::String
+                            ) -> _DeleteDbBackupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDbBackupResponseSuccess
+
       interface _DeleteDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDbClusterOutput]
-        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#delete_db_cluster-instance_method
       def delete_db_cluster: (
-                               db_cluster_id: ::String
+                               db_cluster_id: ::String,
+                               ?retain_automated_backups: bool
                              ) -> _DeleteDbClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDbClusterResponseSuccess
 
@@ -466,7 +558,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -488,19 +580,56 @@ module Aws
         def maintenance_schedule: () -> Types::MaintenanceSchedule
         def last_maintenance_time: () -> ::Time
         def next_maintenance_time: () -> ::Time
+        def db_backup_configurations: () -> ::Array[Types::DbBackupConfigurationOutput]
+        def kms_key_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#delete_db_instance-instance_method
       def delete_db_instance: (
-                                identifier: ::String
+                                identifier: ::String,
+                                ?retain_automated_backups: bool
                               ) -> _DeleteDbInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDbInstanceResponseSuccess
+
+      interface _GetDbBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDbBackupOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+        def created_at: () -> ::Time
+        def expires_after: () -> ::String
+        def db_resource_id: () -> ::String
+        def type: () -> ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "ON_DEMAND" | "CONTINUOUS")
+        def engine_type: () -> ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
+        def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
+        def kms_key_id: () -> ::String
+        def cluster_configuration: () -> Types::ClusterConfiguration
+        def db_parameter_group_id: () -> ::String
+        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
+        def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
+        def failover_mode: () -> ("AUTOMATIC" | "NO_FAILOVER")
+        def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+        def allocated_storage: () -> ::Integer
+        def vpc_subnet_ids: () -> ::Array[::String]
+        def vpc_security_group_ids: () -> ::Array[::String]
+        def publicly_accessible: () -> bool
+        def port: () -> ::Integer
+        def network_type: () -> ("IPV4" | "DUAL")
+        def influx_auth_parameters_secret_arn: () -> ::String
+        def maintenance_schedule: () -> Types::MaintenanceSchedule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#get_db_backup-instance_method
+      def get_db_backup: (
+                           identifier: ::String
+                         ) -> _GetDbBackupResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDbBackupResponseSuccess
 
       interface _GetDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDbClusterOutput]
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
         def endpoint: () -> ::String
         def reader_endpoint: () -> ::String
         def port: () -> ::Integer
@@ -521,6 +650,8 @@ module Aws
         def vpc_security_group_ids: () -> ::Array[::String]
         def failover_mode: () -> ("AUTOMATIC" | "NO_FAILOVER")
         def cluster_configuration: () -> Types::ClusterConfiguration
+        def db_backup_configurations: () -> ::Array[Types::DbBackupConfigurationOutput]
+        def kms_key_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#get_db_cluster-instance_method
       def get_db_cluster: (
@@ -533,7 +664,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -555,6 +686,8 @@ module Aws
         def maintenance_schedule: () -> Types::MaintenanceSchedule
         def last_maintenance_time: () -> ::Time
         def next_maintenance_time: () -> ::Time
+        def db_backup_configurations: () -> ::Array[Types::DbBackupConfigurationOutput]
+        def kms_key_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#get_db_instance-instance_method
       def get_db_instance: (
@@ -575,6 +708,19 @@ module Aws
                                     identifier: ::String
                                   ) -> _GetDbParameterGroupResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDbParameterGroupResponseSuccess
+
+      interface _ListDbBackupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDbBackupsOutput]
+        def items: () -> ::Array[Types::DbBackupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#list_db_backups-instance_method
+      def list_db_backups: (
+                             ?db_resource_id: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListDbBackupsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDbBackupsResponseSuccess
 
       interface _ListDbClustersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDbClustersOutput]
@@ -637,7 +783,7 @@ module Aws
 
       interface _RebootDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RebootDbClusterOutput]
-        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#reboot_db_cluster-instance_method
       def reboot_db_cluster: (
@@ -651,7 +797,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -673,12 +819,57 @@ module Aws
         def maintenance_schedule: () -> Types::MaintenanceSchedule
         def last_maintenance_time: () -> ::Time
         def next_maintenance_time: () -> ::Time
+        def db_backup_configurations: () -> ::Array[Types::DbBackupConfigurationOutput]
+        def kms_key_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#reboot_db_instance-instance_method
       def reboot_db_instance: (
                                 identifier: ::String
                               ) -> _RebootDbInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootDbInstanceResponseSuccess
+
+      interface _RestoreFromDbBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreFromDbBackupOutput]
+        def restored_db_resource_id: () -> ::String
+        def restore_status: () -> ("RESTORING")
+        def resource_type: () -> ("DB_INSTANCE" | "DB_CLUSTER")
+        def engine_type: () -> ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
+        def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#restore_from_db_backup-instance_method
+      def restore_from_db_backup: (
+                                    name: ::String,
+                                    db_backup_id: ::String,
+                                    ?restore_to_time: ::Time,
+                                    ?restore_mode: ("NEW_RESOURCE" | "REPLACE_EXISTING"),
+                                    ?vpc_subnet_ids: Array[::String],
+                                    ?vpc_security_group_ids: Array[::String],
+                                    ?publicly_accessible: bool,
+                                    ?log_delivery_configuration: {
+                                      s3_configuration: {
+                                        bucket_name: ::String,
+                                        enabled: bool
+                                      }
+                                    },
+                                    ?maintenance_schedule: {
+                                      timezone: ::String,
+                                      preferred_maintenance_window: ::String
+                                    },
+                                    ?tags: Hash[::String, ::String],
+                                    ?port: ::Integer,
+                                    ?network_type: ("IPV4" | "DUAL"),
+                                    ?deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS"),
+                                    ?db_backup_configurations: Array[
+                                      {
+                                        type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "CONTINUOUS"),
+                                        retention_days: ::Integer,
+                                        enabled: bool,
+                                        custom_schedule: ::String?
+                                      }
+                                    ],
+                                    ?kms_key_id: ::String
+                                  ) -> _RestoreFromDbBackupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreFromDbBackupResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#tag_resource-instance_method
       def tag_resource: (
@@ -696,7 +887,7 @@ module Aws
 
       interface _UpdateDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDbClusterOutput]
-        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#update_db_cluster-instance_method
       def update_db_cluster: (
@@ -714,7 +905,15 @@ module Aws
                                ?maintenance_schedule: {
                                  timezone: ::String,
                                  preferred_maintenance_window: ::String
-                               }
+                               },
+                               ?db_backup_configurations: Array[
+                                 {
+                                   type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "CONTINUOUS"),
+                                   retention_days: ::Integer,
+                                   enabled: bool,
+                                   custom_schedule: ::String?
+                                 }
+                               ]
                              ) -> _UpdateDbClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDbClusterResponseSuccess
 
@@ -723,7 +922,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -745,6 +944,8 @@ module Aws
         def maintenance_schedule: () -> Types::MaintenanceSchedule
         def last_maintenance_time: () -> ::Time
         def next_maintenance_time: () -> ::Time
+        def db_backup_configurations: () -> ::Array[Types::DbBackupConfigurationOutput]
+        def kms_key_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#update_db_instance-instance_method
       def update_db_instance: (
@@ -764,7 +965,15 @@ module Aws
                                 ?maintenance_schedule: {
                                   timezone: ::String,
                                   preferred_maintenance_window: ::String
-                                }
+                                },
+                                ?db_backup_configurations: Array[
+                                  {
+                                    type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "CONTINUOUS"),
+                                    retention_days: ::Integer,
+                                    enabled: bool,
+                                    custom_schedule: ::String?
+                                  }
+                                ]
                               ) -> _UpdateDbInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDbInstanceResponseSuccess
     end

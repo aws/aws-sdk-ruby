@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2026-08-14)
+------------------
+
+* Feature - Amazon Redshift now unlocks a locked admin user account and resets the failed-login counter when you update the admin password using the ModifyCluster API. This option is available only when account lockout security is enabled.
+
 1.164.0 (2026-07-21)
 ------------------
 

@@ -55,7 +55,7 @@ module Aws::Billing
   autoload :EndpointProvider, 'aws-sdk-billing/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-billing/endpoints'
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end
 

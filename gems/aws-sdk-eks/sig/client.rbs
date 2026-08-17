@@ -303,6 +303,19 @@ module Aws
                             ?deletion_protection: bool,
                             ?control_plane_scaling_config: {
                               tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl" | "tier-8xl")?
+                            },
+                            ?kube_api_server_config: {
+                              event_ttl: ::String?,
+                              service_node_port_range: {
+                                min_port: ::Integer?,
+                                max_port: ::Integer?
+                              }?
+                            },
+                            ?kube_scheduler_config: Params::kube_scheduler_config_request,
+                            ?kube_controller_manager_config: {
+                              horizontal_pod_autoscaler_controller_config: {
+                                horizontal_pod_autoscaler_sync_period: ::String?
+                              }?
                             }
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
@@ -1097,6 +1110,19 @@ module Aws
                                    ?deletion_protection: bool,
                                    ?control_plane_scaling_config: {
                                      tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl" | "tier-8xl")?
+                                   },
+                                   ?kube_api_server_config: {
+                                     event_ttl: ::String?,
+                                     service_node_port_range: {
+                                       min_port: ::Integer?,
+                                       max_port: ::Integer?
+                                     }?
+                                   },
+                                   ?kube_scheduler_config: Params::kube_scheduler_config_request,
+                                   ?kube_controller_manager_config: {
+                                     horizontal_pod_autoscaler_controller_config: {
+                                       horizontal_pod_autoscaler_sync_period: ::String?
+                                     }?
                                    }
                                  ) -> _UpdateClusterConfigResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterConfigResponseSuccess
