@@ -13,5 +13,5 @@ Gem::Specification.new do |spec|
   spec.files = Dir['lib/**/*.rb'] + Dir['templates/**/*.mustache', 'templates/license.txt']
 
   spec.add_dependency('kramdown')
-  spec.add_dependency('mustache')
+  spec.add_dependency('mustache', '< 1.1.3')
 end
