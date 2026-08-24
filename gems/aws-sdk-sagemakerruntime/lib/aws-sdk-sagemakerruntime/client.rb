@@ -631,6 +631,17 @@ module Aws::SageMakerRuntime
     #   any subsequent request where you specify that session ID, SageMaker AI
     #   routes the request to the same instance that supports the session.
     #
+    # @option params [String] :prefix_aware_id
+    #   An optional, stable identifier that serves as a routing hint for
+    #   prefix-aware routing. The service routes requests with the same prefix
+    #   and the same identifier to the same instance. If requests from
+    #   different applications might have the same prompt prefix, set a
+    #   different identifier for each application to differentiate their
+    #   routing decisions.
+    #
+    #   Applies only to endpoints configured with a `RoutingStrategy` of
+    #   `PREFIX_AWARE`.
+    #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeEndpointOutput#body #body} => String
@@ -655,6 +666,7 @@ module Aws::SageMakerRuntime
     #     enable_explanations: "EnableExplanationsHeader",
     #     inference_component_name: "InferenceComponentHeader",
     #     session_id: "SessionIdOrNewSessionConstantHeader",
+    #     prefix_aware_id: "PrefixAwareIdHeader",
     #   })
     #
     # @example Response structure
@@ -941,6 +953,17 @@ module Aws::SageMakerRuntime
     #   that request provides the session ID for the `NewSessionId` response
     #   parameter.
     #
+    # @option params [String] :prefix_aware_id
+    #   An optional, stable identifier that serves as a routing hint for
+    #   prefix-aware routing. The service routes requests with the same prefix
+    #   and the same identifier to the same instance. If requests from
+    #   different applications might have the same prompt prefix, set a
+    #   different identifier for each application to differentiate their
+    #   routing decisions.
+    #
+    #   Applies only to endpoints configured with a `RoutingStrategy` of
+    #   `PREFIX_AWARE`.
+    #
     # @return [Types::InvokeEndpointWithResponseStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeEndpointWithResponseStreamOutput#body #body} => Types::ResponseStream
@@ -1068,6 +1091,7 @@ module Aws::SageMakerRuntime
     #     inference_id: "InferenceId",
     #     inference_component_name: "InferenceComponentHeader",
     #     session_id: "SessionIdHeader",
+    #     prefix_aware_id: "PrefixAwareIdHeader",
     #   })
     #
     # @example Response structure
@@ -1135,7 +1159,7 @@ module Aws::SageMakerRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

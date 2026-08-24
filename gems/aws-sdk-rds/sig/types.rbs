@@ -64,6 +64,8 @@ module Aws::RDS
     class AdditionalStorageVolumeOutput
       attr_accessor volume_name: ::String
       attr_accessor storage_volume_status: ::String
+      attr_accessor storage_operation_status: ::String
+      attr_accessor storage_operation_percent_progress: ::Integer
       attr_accessor allocated_storage: ::Integer
       attr_accessor iops: ::Integer
       attr_accessor max_allocated_storage: ::Integer
@@ -1284,6 +1286,8 @@ module Aws::RDS
       attr_accessor engine_lifecycle_support: ::String
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolumeOutput]
       attr_accessor storage_volume_status: ::String
+      attr_accessor storage_operation_status: ::String
+      attr_accessor storage_operation_percent_progress: ::Integer
       SENSITIVE: []
     end
 

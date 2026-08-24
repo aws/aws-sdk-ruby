@@ -14,6 +14,8 @@ module Aws::MarketplaceCatalog
 
     include Seahorse::Model
 
+    AMISecurityFilters = Shapes::StructureShape.new(name: 'AMISecurityFilters')
+    AMISecuritySummary = Shapes::StructureShape.new(name: 'AMISecuritySummary')
     ARN = Shapes::StringShape.new(name: 'ARN')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AmiProductEntityIdFilter = Shapes::StructureShape.new(name: 'AmiProductEntityIdFilter')
@@ -31,6 +33,12 @@ module Aws::MarketplaceCatalog
     AmiProductVisibilityFilter = Shapes::StructureShape.new(name: 'AmiProductVisibilityFilter')
     AmiProductVisibilityFilterValueList = Shapes::ListShape.new(name: 'AmiProductVisibilityFilterValueList')
     AmiProductVisibilityString = Shapes::StringShape.new(name: 'AmiProductVisibilityString')
+    AssessmentIdentifier = Shapes::StringShape.new(name: 'AssessmentIdentifier')
+    AssessmentResult = Shapes::StringShape.new(name: 'AssessmentResult')
+    AssessmentSummary = Shapes::StructureShape.new(name: 'AssessmentSummary')
+    AssessmentSummaryList = Shapes::ListShape.new(name: 'AssessmentSummaryList')
+    AssessmentTargetFilter = Shapes::StructureShape.new(name: 'AssessmentTargetFilter')
+    AssessmentTargetSummary = Shapes::StructureShape.new(name: 'AssessmentTargetSummary')
     BatchDescribeEntitiesRequest = Shapes::StructureShape.new(name: 'BatchDescribeEntitiesRequest')
     BatchDescribeEntitiesResponse = Shapes::StructureShape.new(name: 'BatchDescribeEntitiesResponse')
     BatchDescribeErrorCodeString = Shapes::StringShape.new(name: 'BatchDescribeErrorCodeString')
@@ -64,6 +72,13 @@ module Aws::MarketplaceCatalog
     ContainerProductVisibilityFilter = Shapes::StructureShape.new(name: 'ContainerProductVisibilityFilter')
     ContainerProductVisibilityFilterValueList = Shapes::ListShape.new(name: 'ContainerProductVisibilityFilterValueList')
     ContainerProductVisibilityString = Shapes::StringShape.new(name: 'ContainerProductVisibilityString')
+    ContainerSecurityFilters = Shapes::StructureShape.new(name: 'ContainerSecurityFilters')
+    ContainerSecuritySummary = Shapes::StructureShape.new(name: 'ContainerSecuritySummary')
+    ControlAssessment = Shapes::StructureShape.new(name: 'ControlAssessment')
+    ControlAssessmentList = Shapes::ListShape.new(name: 'ControlAssessmentList')
+    ControlAssessmentResult = Shapes::StringShape.new(name: 'ControlAssessmentResult')
+    ControlError = Shapes::StructureShape.new(name: 'ControlError')
+    ControlErrorList = Shapes::ListShape.new(name: 'ControlErrorList')
     DataProductEntityIdFilter = Shapes::StructureShape.new(name: 'DataProductEntityIdFilter')
     DataProductEntityIdFilterValueList = Shapes::ListShape.new(name: 'DataProductEntityIdFilterValueList')
     DataProductEntityIdString = Shapes::StringShape.new(name: 'DataProductEntityIdString')
@@ -82,6 +97,9 @@ module Aws::MarketplaceCatalog
     DateTimeISO8601 = Shapes::StringShape.new(name: 'DateTimeISO8601')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
+    DescribeAssessmentMaxResultInteger = Shapes::IntegerShape.new(name: 'DescribeAssessmentMaxResultInteger')
+    DescribeAssessmentRequest = Shapes::StructureShape.new(name: 'DescribeAssessmentRequest')
+    DescribeAssessmentResponse = Shapes::StructureShape.new(name: 'DescribeAssessmentResponse')
     DescribeChangeSetRequest = Shapes::StructureShape.new(name: 'DescribeChangeSetRequest')
     DescribeChangeSetResponse = Shapes::StructureShape.new(name: 'DescribeChangeSetResponse')
     DescribeEntityRequest = Shapes::StructureShape.new(name: 'DescribeEntityRequest')
@@ -98,16 +116,24 @@ module Aws::MarketplaceCatalog
     EntityType = Shapes::StringShape.new(name: 'EntityType')
     EntityTypeFilters = Shapes::UnionShape.new(name: 'EntityTypeFilters')
     EntityTypeSort = Shapes::UnionShape.new(name: 'EntityTypeSort')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorCodeString = Shapes::StringShape.new(name: 'ErrorCodeString')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorDetailList = Shapes::ListShape.new(name: 'ErrorDetailList')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorScope = Shapes::StructureShape.new(name: 'ErrorScope')
+    ErrorScopeList = Shapes::ListShape.new(name: 'ErrorScopeList')
     Errors = Shapes::MapShape.new(name: 'Errors')
     ExceptionMessageContent = Shapes::StringShape.new(name: 'ExceptionMessageContent')
     FailureCode = Shapes::StringShape.new(name: 'FailureCode')
+    FieldName = Shapes::StringShape.new(name: 'FieldName')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterValueContent = Shapes::StringShape.new(name: 'FilterValueContent')
+    FrameworkFilters = Shapes::UnionShape.new(name: 'FrameworkFilters')
+    FrameworkId = Shapes::StringShape.new(name: 'FrameworkId')
+    FrameworkSummary = Shapes::UnionShape.new(name: 'FrameworkSummary')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
@@ -115,6 +141,9 @@ module Aws::MarketplaceCatalog
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     Json = Shapes::StringShape.new(name: 'Json')
     JsonDocumentType = Shapes::DocumentShape.new(name: 'JsonDocumentType', document: true)
+    ListAssessmentsMaxResultInteger = Shapes::IntegerShape.new(name: 'ListAssessmentsMaxResultInteger')
+    ListAssessmentsRequest = Shapes::StructureShape.new(name: 'ListAssessmentsRequest')
+    ListAssessmentsResponse = Shapes::StructureShape.new(name: 'ListAssessmentsResponse')
     ListChangeSetsMaxResultInteger = Shapes::IntegerShape.new(name: 'ListChangeSetsMaxResultInteger')
     ListChangeSetsRequest = Shapes::StructureShape.new(name: 'ListChangeSetsRequest')
     ListChangeSetsResponse = Shapes::StructureShape.new(name: 'ListChangeSetsResponse')
@@ -145,6 +174,9 @@ module Aws::MarketplaceCatalog
     OfferBuyerAccountsFilterWildcard = Shapes::StringShape.new(name: 'OfferBuyerAccountsFilterWildcard')
     OfferBuyerAccountsList = Shapes::ListShape.new(name: 'OfferBuyerAccountsList')
     OfferBuyerAccountsString = Shapes::StringShape.new(name: 'OfferBuyerAccountsString')
+    OfferCreatedBySourceFilter = Shapes::StructureShape.new(name: 'OfferCreatedBySourceFilter')
+    OfferCreatedBySourceFilterValueList = Shapes::ListShape.new(name: 'OfferCreatedBySourceFilterValueList')
+    OfferCreatedBySourceString = Shapes::StringShape.new(name: 'OfferCreatedBySourceString')
     OfferEntityIdFilter = Shapes::StructureShape.new(name: 'OfferEntityIdFilter')
     OfferEntityIdFilterValueList = Shapes::ListShape.new(name: 'OfferEntityIdFilterValueList')
     OfferEntityIdString = Shapes::StringShape.new(name: 'OfferEntityIdString')
@@ -195,6 +227,12 @@ module Aws::MarketplaceCatalog
     OfferStateFilterValueList = Shapes::ListShape.new(name: 'OfferStateFilterValueList')
     OfferStateString = Shapes::StringShape.new(name: 'OfferStateString')
     OfferSummary = Shapes::StructureShape.new(name: 'OfferSummary')
+    OfferTargetAgreementIdFilter = Shapes::StructureShape.new(name: 'OfferTargetAgreementIdFilter')
+    OfferTargetAgreementIdFilterValueList = Shapes::ListShape.new(name: 'OfferTargetAgreementIdFilterValueList')
+    OfferTargetAgreementIdString = Shapes::StringShape.new(name: 'OfferTargetAgreementIdString')
+    OfferTargetAgreementIntentFilter = Shapes::StructureShape.new(name: 'OfferTargetAgreementIntentFilter')
+    OfferTargetAgreementIntentFilterValueList = Shapes::ListShape.new(name: 'OfferTargetAgreementIntentFilterValueList')
+    OfferTargetAgreementIntentString = Shapes::StringShape.new(name: 'OfferTargetAgreementIntentString')
     OfferTargetingFilter = Shapes::StructureShape.new(name: 'OfferTargetingFilter')
     OfferTargetingFilterValueList = Shapes::ListShape.new(name: 'OfferTargetingFilterValueList')
     OfferTargetingList = Shapes::ListShape.new(name: 'OfferTargetingList')
@@ -277,6 +315,8 @@ module Aws::MarketplaceCatalog
     SaaSProductVisibilityFilter = Shapes::StructureShape.new(name: 'SaaSProductVisibilityFilter')
     SaaSProductVisibilityFilterValueList = Shapes::ListShape.new(name: 'SaaSProductVisibilityFilterValueList')
     SaaSProductVisibilityString = Shapes::StringShape.new(name: 'SaaSProductVisibilityString')
+    ScopeName = Shapes::StringShape.new(name: 'ScopeName')
+    ScopeValue = Shapes::StringShape.new(name: 'ScopeValue')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Sort = Shapes::StructureShape.new(name: 'Sort')
     SortBy = Shapes::StringShape.new(name: 'SortBy')
@@ -294,8 +334,18 @@ module Aws::MarketplaceCatalog
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
+    ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
+    ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     ValueList = Shapes::ListShape.new(name: 'ValueList')
+    VersionedFrameworkId = Shapes::StringShape.new(name: 'VersionedFrameworkId')
     VisibilityValue = Shapes::StringShape.new(name: 'VisibilityValue')
+
+    AMISecurityFilters.add_member(:delivery_option_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DeliveryOptionId"))
+    AMISecurityFilters.struct_class = Types::AMISecurityFilters
+
+    AMISecuritySummary.add_member(:delivery_option_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DeliveryOptionId"))
+    AMISecuritySummary.struct_class = Types::AMISecuritySummary
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -336,6 +386,26 @@ module Aws::MarketplaceCatalog
     AmiProductVisibilityFilter.struct_class = Types::AmiProductVisibilityFilter
 
     AmiProductVisibilityFilterValueList.member = Shapes::ShapeRef.new(shape: AmiProductVisibilityString)
+
+    AssessmentSummary.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AssessmentArn"))
+    AssessmentSummary.add_member(:assessment_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "AssessmentId"))
+    AssessmentSummary.add_member(:framework_id, Shapes::ShapeRef.new(shape: VersionedFrameworkId, location_name: "FrameworkId"))
+    AssessmentSummary.add_member(:assessment_target_summary, Shapes::ShapeRef.new(shape: AssessmentTargetSummary, location_name: "AssessmentTargetSummary"))
+    AssessmentSummary.add_member(:framework_summary, Shapes::ShapeRef.new(shape: FrameworkSummary, location_name: "FrameworkSummary"))
+    AssessmentSummary.add_member(:assessment_result, Shapes::ShapeRef.new(shape: AssessmentResult, location_name: "AssessmentResult"))
+    AssessmentSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "CreatedAt"))
+    AssessmentSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "ExpiresAt"))
+    AssessmentSummary.struct_class = Types::AssessmentSummary
+
+    AssessmentSummaryList.member = Shapes::ShapeRef.new(shape: AssessmentSummary)
+
+    AssessmentTargetFilter.add_member(:entity_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "EntityId"))
+    AssessmentTargetFilter.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
+    AssessmentTargetFilter.struct_class = Types::AssessmentTargetFilter
+
+    AssessmentTargetSummary.add_member(:entity_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "EntityId"))
+    AssessmentTargetSummary.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
+    AssessmentTargetSummary.struct_class = Types::AssessmentTargetSummary
 
     BatchDescribeEntitiesRequest.add_member(:entity_request_list, Shapes::ShapeRef.new(shape: EntityRequestList, required: true, location_name: "EntityRequestList"))
     BatchDescribeEntitiesRequest.struct_class = Types::BatchDescribeEntitiesRequest
@@ -423,6 +493,26 @@ module Aws::MarketplaceCatalog
 
     ContainerProductVisibilityFilterValueList.member = Shapes::ShapeRef.new(shape: ContainerProductVisibilityString)
 
+    ContainerSecurityFilters.add_member(:delivery_option_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DeliveryOptionId"))
+    ContainerSecurityFilters.struct_class = Types::ContainerSecurityFilters
+
+    ContainerSecuritySummary.add_member(:delivery_option_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DeliveryOptionId"))
+    ContainerSecuritySummary.struct_class = Types::ContainerSecuritySummary
+
+    ControlAssessment.add_member(:control_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ControlId"))
+    ControlAssessment.add_member(:control_assessment_result, Shapes::ShapeRef.new(shape: ControlAssessmentResult, location_name: "ControlAssessmentResult"))
+    ControlAssessment.add_member(:errors, Shapes::ShapeRef.new(shape: ControlErrorList, location_name: "Errors"))
+    ControlAssessment.struct_class = Types::ControlAssessment
+
+    ControlAssessmentList.member = Shapes::ShapeRef.new(shape: ControlAssessment)
+
+    ControlError.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    ControlError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ControlError.add_member(:scope, Shapes::ShapeRef.new(shape: ErrorScopeList, location_name: "Scope"))
+    ControlError.struct_class = Types::ControlError
+
+    ControlErrorList.member = Shapes::ShapeRef.new(shape: ControlError)
+
     DataProductEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: DataProductEntityIdFilterValueList, location_name: "ValueList"))
     DataProductEntityIdFilter.struct_class = Types::DataProductEntityIdFilter
 
@@ -464,6 +554,24 @@ module Aws::MarketplaceCatalog
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
 
     DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
+    DescribeAssessmentRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
+    DescribeAssessmentRequest.add_member(:assessment_identifier, Shapes::ShapeRef.new(shape: AssessmentIdentifier, required: true, location_name: "AssessmentIdentifier"))
+    DescribeAssessmentRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeAssessmentMaxResultInteger, location_name: "MaxResults"))
+    DescribeAssessmentRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAssessmentRequest.struct_class = Types::DescribeAssessmentRequest
+
+    DescribeAssessmentResponse.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AssessmentArn"))
+    DescribeAssessmentResponse.add_member(:assessment_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "AssessmentId"))
+    DescribeAssessmentResponse.add_member(:framework_id, Shapes::ShapeRef.new(shape: VersionedFrameworkId, location_name: "FrameworkId"))
+    DescribeAssessmentResponse.add_member(:assessment_target_summary, Shapes::ShapeRef.new(shape: AssessmentTargetSummary, location_name: "AssessmentTargetSummary"))
+    DescribeAssessmentResponse.add_member(:framework_summary, Shapes::ShapeRef.new(shape: FrameworkSummary, location_name: "FrameworkSummary"))
+    DescribeAssessmentResponse.add_member(:assessment_result, Shapes::ShapeRef.new(shape: AssessmentResult, location_name: "AssessmentResult"))
+    DescribeAssessmentResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "CreatedAt"))
+    DescribeAssessmentResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "ExpiresAt"))
+    DescribeAssessmentResponse.add_member(:control_assessments, Shapes::ShapeRef.new(shape: ControlAssessmentList, location_name: "ControlAssessments"))
+    DescribeAssessmentResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAssessmentResponse.struct_class = Types::DescribeAssessmentResponse
 
     DescribeChangeSetRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location: "querystring", location_name: "catalog"))
     DescribeChangeSetRequest.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "querystring", location_name: "changeSetId"))
@@ -577,6 +685,12 @@ module Aws::MarketplaceCatalog
 
     ErrorDetailList.member = Shapes::ShapeRef.new(shape: ErrorDetail)
 
+    ErrorScope.add_member(:name, Shapes::ShapeRef.new(shape: ScopeName, location_name: "Name"))
+    ErrorScope.add_member(:value, Shapes::ShapeRef.new(shape: ScopeValue, location_name: "Value"))
+    ErrorScope.struct_class = Types::ErrorScope
+
+    ErrorScopeList.member = Shapes::ShapeRef.new(shape: ErrorScope)
+
     Errors.key = Shapes::ShapeRef.new(shape: EntityId)
     Errors.value = Shapes::ShapeRef.new(shape: BatchDescribeErrorDetail)
 
@@ -586,6 +700,22 @@ module Aws::MarketplaceCatalog
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
+    FrameworkFilters.add_member(:ami_security_filters, Shapes::ShapeRef.new(shape: AMISecurityFilters, location_name: "AMISecurityFilters"))
+    FrameworkFilters.add_member(:container_security_filters, Shapes::ShapeRef.new(shape: ContainerSecurityFilters, location_name: "ContainerSecurityFilters"))
+    FrameworkFilters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FrameworkFilters.add_member_subclass(:ami_security_filters, Types::FrameworkFilters::AmiSecurityFilters)
+    FrameworkFilters.add_member_subclass(:container_security_filters, Types::FrameworkFilters::ContainerSecurityFilters)
+    FrameworkFilters.add_member_subclass(:unknown, Types::FrameworkFilters::Unknown)
+    FrameworkFilters.struct_class = Types::FrameworkFilters
+
+    FrameworkSummary.add_member(:ami_security_summary, Shapes::ShapeRef.new(shape: AMISecuritySummary, location_name: "AMISecuritySummary"))
+    FrameworkSummary.add_member(:container_security_summary, Shapes::ShapeRef.new(shape: ContainerSecuritySummary, location_name: "ContainerSecuritySummary"))
+    FrameworkSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FrameworkSummary.add_member_subclass(:ami_security_summary, Types::FrameworkSummary::AmiSecuritySummary)
+    FrameworkSummary.add_member_subclass(:container_security_summary, Types::FrameworkSummary::ContainerSecuritySummary)
+    FrameworkSummary.add_member_subclass(:unknown, Types::FrameworkSummary::Unknown)
+    FrameworkSummary.struct_class = Types::FrameworkSummary
+
     GetResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location: "querystring", location_name: "resourceArn"))
     GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
 
@@ -594,6 +724,18 @@ module Aws::MarketplaceCatalog
 
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     InternalServiceException.struct_class = Types::InternalServiceException
+
+    ListAssessmentsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
+    ListAssessmentsRequest.add_member(:framework_id, Shapes::ShapeRef.new(shape: FrameworkId, location_name: "FrameworkId"))
+    ListAssessmentsRequest.add_member(:assessment_target_filter, Shapes::ShapeRef.new(shape: AssessmentTargetFilter, location_name: "AssessmentTargetFilter"))
+    ListAssessmentsRequest.add_member(:framework_filters, Shapes::ShapeRef.new(shape: FrameworkFilters, location_name: "FrameworkFilters"))
+    ListAssessmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAssessmentsMaxResultInteger, location_name: "MaxResults"))
+    ListAssessmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAssessmentsRequest.struct_class = Types::ListAssessmentsRequest
+
+    ListAssessmentsResponse.add_member(:assessment_summary_list, Shapes::ShapeRef.new(shape: AssessmentSummaryList, location_name: "AssessmentSummaryList"))
+    ListAssessmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAssessmentsResponse.struct_class = Types::ListAssessmentsResponse
 
     ListChangeSetsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
     ListChangeSetsRequest.add_member(:filter_list, Shapes::ShapeRef.new(shape: FilterList, location_name: "FilterList"))
@@ -677,6 +819,11 @@ module Aws::MarketplaceCatalog
 
     OfferBuyerAccountsList.member = Shapes::ShapeRef.new(shape: OfferBuyerAccountsString)
 
+    OfferCreatedBySourceFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferCreatedBySourceFilterValueList, location_name: "ValueList"))
+    OfferCreatedBySourceFilter.struct_class = Types::OfferCreatedBySourceFilter
+
+    OfferCreatedBySourceFilterValueList.member = Shapes::ShapeRef.new(shape: OfferCreatedBySourceString)
+
     OfferEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferEntityIdFilterValueList, location_name: "ValueList"))
     OfferEntityIdFilter.struct_class = Types::OfferEntityIdFilter
 
@@ -693,6 +840,9 @@ module Aws::MarketplaceCatalog
     OfferFilters.add_member(:targeting, Shapes::ShapeRef.new(shape: OfferTargetingFilter, location_name: "Targeting"))
     OfferFilters.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: OfferLastModifiedDateFilter, location_name: "LastModifiedDate"))
     OfferFilters.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetIdFilter, location_name: "OfferSetId"))
+    OfferFilters.add_member(:target_agreement_id, Shapes::ShapeRef.new(shape: OfferTargetAgreementIdFilter, location_name: "TargetAgreementId"))
+    OfferFilters.add_member(:target_agreement_intent, Shapes::ShapeRef.new(shape: OfferTargetAgreementIntentFilter, location_name: "TargetAgreementIntent"))
+    OfferFilters.add_member(:created_by_source, Shapes::ShapeRef.new(shape: OfferCreatedBySourceFilter, location_name: "CreatedBySource"))
     OfferFilters.struct_class = Types::OfferFilters
 
     OfferLastModifiedDateFilter.add_member(:date_range, Shapes::ShapeRef.new(shape: OfferLastModifiedDateFilterDateRange, location_name: "DateRange"))
@@ -809,7 +959,20 @@ module Aws::MarketplaceCatalog
     OfferSummary.add_member(:state, Shapes::ShapeRef.new(shape: OfferStateString, location_name: "State"))
     OfferSummary.add_member(:targeting, Shapes::ShapeRef.new(shape: OfferTargetingList, location_name: "Targeting"))
     OfferSummary.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetIdString, location_name: "OfferSetId"))
+    OfferSummary.add_member(:target_agreement_id, Shapes::ShapeRef.new(shape: OfferTargetAgreementIdString, location_name: "TargetAgreementId"))
+    OfferSummary.add_member(:target_agreement_intent, Shapes::ShapeRef.new(shape: OfferTargetAgreementIntentString, location_name: "TargetAgreementIntent"))
+    OfferSummary.add_member(:created_by_source, Shapes::ShapeRef.new(shape: OfferCreatedBySourceString, location_name: "CreatedBySource"))
     OfferSummary.struct_class = Types::OfferSummary
+
+    OfferTargetAgreementIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferTargetAgreementIdFilterValueList, location_name: "ValueList"))
+    OfferTargetAgreementIdFilter.struct_class = Types::OfferTargetAgreementIdFilter
+
+    OfferTargetAgreementIdFilterValueList.member = Shapes::ShapeRef.new(shape: OfferTargetAgreementIdString)
+
+    OfferTargetAgreementIntentFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferTargetAgreementIntentFilterValueList, location_name: "ValueList"))
+    OfferTargetAgreementIntentFilter.struct_class = Types::OfferTargetAgreementIntentFilter
+
+    OfferTargetAgreementIntentFilterValueList.member = Shapes::ShapeRef.new(shape: OfferTargetAgreementIntentString)
 
     OfferTargetingFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferTargetingFilterValueList, location_name: "ValueList"))
     OfferTargetingFilter.struct_class = Types::OfferTargetingFilter
@@ -1040,7 +1203,18 @@ module Aws::MarketplaceCatalog
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
+    ValidationException.add_member(:validation_exception_field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "ValidationExceptionFieldList"))
     ValidationException.struct_class = Types::ValidationException
+
+    ValidationExceptionField.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
+    ValidationExceptionField.add_member(:entity_type, Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
+    ValidationExceptionField.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "EntityId"))
+    ValidationExceptionField.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeType, location_name: "ChangeType"))
+    ValidationExceptionField.add_member(:field, Shapes::ShapeRef.new(shape: FieldName, location_name: "Field"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
+    ValidationExceptionField.struct_class = Types::ValidationExceptionField
+
+    ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
     ValueList.member = Shapes::ShapeRef.new(shape: FilterValueContent)
 
@@ -1104,6 +1278,25 @@ module Aws::MarketplaceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:describe_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAssessment"
+        o.http_method = "POST"
+        o.http_request_uri = "/DescribeAssessment"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAssessmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_change_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeChangeSet"
         o.http_method = "GET"
@@ -1142,6 +1335,24 @@ module Aws::MarketplaceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_assessments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssessments"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListAssessments"
+        o.input = Shapes::ShapeRef.new(shape: ListAssessmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAssessmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_change_sets, Seahorse::Model::Operation.new.tap do |o|

@@ -481,6 +481,102 @@ module Aws::TimestreamInfluxDB
 
     # @!group API Operations
 
+    # Creates a new on-demand backup of a Timestream for InfluxDB resource.
+    #
+    # @option params [required, String] :name
+    #   The name of the backup. Must be unique within the account and region.
+    #
+    # @option params [required, String] :db_resource_id
+    #   The id of the DB instance or DB cluster to back up.
+    #
+    # @option params [Integer] :retention_days
+    #   The number of days to retain the backup. Valid values are 1 to 3650.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to associate with the backup.
+    #
+    # @return [Types::CreateDbBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDbBackupOutput#id #id} => String
+    #   * {Types::CreateDbBackupOutput#name #name} => String
+    #   * {Types::CreateDbBackupOutput#arn #arn} => String
+    #   * {Types::CreateDbBackupOutput#status #status} => String
+    #   * {Types::CreateDbBackupOutput#created_at #created_at} => Time
+    #   * {Types::CreateDbBackupOutput#expires_after #expires_after} => String
+    #   * {Types::CreateDbBackupOutput#db_resource_id #db_resource_id} => String
+    #   * {Types::CreateDbBackupOutput#type #type} => String
+    #   * {Types::CreateDbBackupOutput#engine_type #engine_type} => String
+    #   * {Types::CreateDbBackupOutput#deployment_type #deployment_type} => String
+    #   * {Types::CreateDbBackupOutput#kms_key_id #kms_key_id} => String
+    #   * {Types::CreateDbBackupOutput#cluster_configuration #cluster_configuration} => Types::ClusterConfiguration
+    #   * {Types::CreateDbBackupOutput#db_parameter_group_id #db_parameter_group_id} => String
+    #   * {Types::CreateDbBackupOutput#db_instance_type #db_instance_type} => String
+    #   * {Types::CreateDbBackupOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
+    #   * {Types::CreateDbBackupOutput#failover_mode #failover_mode} => String
+    #   * {Types::CreateDbBackupOutput#db_storage_type #db_storage_type} => String
+    #   * {Types::CreateDbBackupOutput#allocated_storage #allocated_storage} => Integer
+    #   * {Types::CreateDbBackupOutput#vpc_subnet_ids #vpc_subnet_ids} => Array&lt;String&gt;
+    #   * {Types::CreateDbBackupOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
+    #   * {Types::CreateDbBackupOutput#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::CreateDbBackupOutput#port #port} => Integer
+    #   * {Types::CreateDbBackupOutput#network_type #network_type} => String
+    #   * {Types::CreateDbBackupOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
+    #   * {Types::CreateDbBackupOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_db_backup({
+    #     name: "DbBackupName", # required
+    #     db_resource_id: "DbResourceId", # required
+    #     retention_days: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "DELETING", "DELETED"
+    #   resp.created_at #=> Time
+    #   resp.expires_after #=> String
+    #   resp.db_resource_id #=> String
+    #   resp.type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "ON_DEMAND", "CONTINUOUS"
+    #   resp.engine_type #=> String, one of "INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"
+    #   resp.deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"
+    #   resp.kms_key_id #=> String
+    #   resp.cluster_configuration.ingest_query_instances #=> Integer
+    #   resp.cluster_configuration.query_only_instances #=> Integer
+    #   resp.cluster_configuration.dedicated_compactor #=> Boolean
+    #   resp.db_parameter_group_id #=> String
+    #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
+    #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
+    #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
+    #   resp.failover_mode #=> String, one of "AUTOMATIC", "NO_FAILOVER"
+    #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
+    #   resp.allocated_storage #=> Integer
+    #   resp.vpc_subnet_ids #=> Array
+    #   resp.vpc_subnet_ids[0] #=> String
+    #   resp.vpc_security_group_ids #=> Array
+    #   resp.vpc_security_group_ids[0] #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.port #=> Integer
+    #   resp.network_type #=> String, one of "IPV4", "DUAL"
+    #   resp.influx_auth_parameters_secret_arn #=> String
+    #   resp.maintenance_schedule.timezone #=> String
+    #   resp.maintenance_schedule.preferred_maintenance_window #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbBackup AWS API Documentation
+    #
+    # @overload create_db_backup(params = {})
+    # @param [Hash] params ({})
+    def create_db_backup(params = {}, options = {})
+      req = build_request(:create_db_backup, params)
+      req.send_request(options)
+    end
+
     # Creates a new Timestream for InfluxDB cluster.
     #
     # @option params [required, String] :name
@@ -583,6 +679,14 @@ module Aws::TimestreamInfluxDB
     #   Specifies the maintenance schedule for the DB cluster, including the
     #   preferred maintenance window and timezone.
     #
+    # @option params [Array<Types::DbBackupConfiguration>] :db_backup_configurations
+    #   A list of backup configurations to enable automated backups for the DB
+    #   cluster.
+    #
+    # @option params [String] :kms_key_id
+    #   The Amazon Web Services KMS key identifier to use for encryption of
+    #   the DB cluster. Can be a key ID, key ARN, alias name, or alias ARN.
+    #
     # @option params [Hash<String,String>] :tags
     #   A list of key-value pairs to associate with the DB instance.
     #
@@ -620,6 +724,15 @@ module Aws::TimestreamInfluxDB
     #       timezone: "IanaTimezone", # required
     #       preferred_maintenance_window: "MaintenanceWindow", # required
     #     },
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY", # required, accepts HOURLY, DAILY, WEEKLY, MONTHLY, CUSTOM_SCHEDULE, CONTINUOUS
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #       },
+    #     ],
+    #     kms_key_id: "KmsKeyId",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -628,7 +741,7 @@ module Aws::TimestreamInfluxDB
     # @example Response structure
     #
     #   resp.db_cluster_id #=> String
-    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbCluster AWS API Documentation
     #
@@ -739,6 +852,14 @@ module Aws::TimestreamInfluxDB
     #   instance is IPV4, which can communicate over IPv4 protocol only, or
     #   DUAL, which can communicate over both IPv4 and IPv6 protocols.
     #
+    # @option params [Array<Types::DbBackupConfiguration>] :db_backup_configurations
+    #   A list of backup configurations to enable automated backups for the DB
+    #   instance.
+    #
+    # @option params [String] :kms_key_id
+    #   The Amazon Web Services KMS key identifier to use for encryption of
+    #   the DB instance. Can be a key ID, key ARN, alias name, or alias ARN.
+    #
     # @return [Types::CreateDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDbInstanceOutput#id #id} => String
@@ -766,6 +887,8 @@ module Aws::TimestreamInfluxDB
     #   * {Types::CreateDbInstanceOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
     #   * {Types::CreateDbInstanceOutput#last_maintenance_time #last_maintenance_time} => Time
     #   * {Types::CreateDbInstanceOutput#next_maintenance_time #next_maintenance_time} => Time
+    #   * {Types::CreateDbInstanceOutput#db_backup_configurations #db_backup_configurations} => Array&lt;Types::DbBackupConfigurationOutput&gt;
+    #   * {Types::CreateDbInstanceOutput#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -798,6 +921,15 @@ module Aws::TimestreamInfluxDB
     #     },
     #     port: 1,
     #     network_type: "IPV4", # accepts IPV4, DUAL
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY", # required, accepts HOURLY, DAILY, WEEKLY, MONTHLY, CUSTOM_SCHEDULE, CONTINUOUS
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #       },
+    #     ],
+    #     kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -805,7 +937,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -832,6 +964,13 @@ module Aws::TimestreamInfluxDB
     #   resp.maintenance_schedule.preferred_maintenance_window #=> String
     #   resp.last_maintenance_time #=> Time
     #   resp.next_maintenance_time #=> Time
+    #   resp.db_backup_configurations #=> Array
+    #   resp.db_backup_configurations[0].type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"
+    #   resp.db_backup_configurations[0].retention_days #=> Integer
+    #   resp.db_backup_configurations[0].enabled #=> Boolean
+    #   resp.db_backup_configurations[0].custom_schedule #=> String
+    #   resp.db_backup_configurations[0].next_automated_backup_time #=> Time
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbInstance AWS API Documentation
     #
@@ -1322,10 +1461,97 @@ module Aws::TimestreamInfluxDB
       req.send_request(options)
     end
 
+    # Deletes a Timestream for InfluxDB backup.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the backup to delete.
+    #
+    # @return [Types::DeleteDbBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDbBackupOutput#id #id} => String
+    #   * {Types::DeleteDbBackupOutput#name #name} => String
+    #   * {Types::DeleteDbBackupOutput#arn #arn} => String
+    #   * {Types::DeleteDbBackupOutput#status #status} => String
+    #   * {Types::DeleteDbBackupOutput#created_at #created_at} => Time
+    #   * {Types::DeleteDbBackupOutput#expires_after #expires_after} => String
+    #   * {Types::DeleteDbBackupOutput#db_resource_id #db_resource_id} => String
+    #   * {Types::DeleteDbBackupOutput#type #type} => String
+    #   * {Types::DeleteDbBackupOutput#engine_type #engine_type} => String
+    #   * {Types::DeleteDbBackupOutput#deployment_type #deployment_type} => String
+    #   * {Types::DeleteDbBackupOutput#kms_key_id #kms_key_id} => String
+    #   * {Types::DeleteDbBackupOutput#cluster_configuration #cluster_configuration} => Types::ClusterConfiguration
+    #   * {Types::DeleteDbBackupOutput#db_parameter_group_id #db_parameter_group_id} => String
+    #   * {Types::DeleteDbBackupOutput#db_instance_type #db_instance_type} => String
+    #   * {Types::DeleteDbBackupOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
+    #   * {Types::DeleteDbBackupOutput#failover_mode #failover_mode} => String
+    #   * {Types::DeleteDbBackupOutput#db_storage_type #db_storage_type} => String
+    #   * {Types::DeleteDbBackupOutput#allocated_storage #allocated_storage} => Integer
+    #   * {Types::DeleteDbBackupOutput#vpc_subnet_ids #vpc_subnet_ids} => Array&lt;String&gt;
+    #   * {Types::DeleteDbBackupOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
+    #   * {Types::DeleteDbBackupOutput#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::DeleteDbBackupOutput#port #port} => Integer
+    #   * {Types::DeleteDbBackupOutput#network_type #network_type} => String
+    #   * {Types::DeleteDbBackupOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
+    #   * {Types::DeleteDbBackupOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_db_backup({
+    #     identifier: "DbBackupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "DELETING", "DELETED"
+    #   resp.created_at #=> Time
+    #   resp.expires_after #=> String
+    #   resp.db_resource_id #=> String
+    #   resp.type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "ON_DEMAND", "CONTINUOUS"
+    #   resp.engine_type #=> String, one of "INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"
+    #   resp.deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"
+    #   resp.kms_key_id #=> String
+    #   resp.cluster_configuration.ingest_query_instances #=> Integer
+    #   resp.cluster_configuration.query_only_instances #=> Integer
+    #   resp.cluster_configuration.dedicated_compactor #=> Boolean
+    #   resp.db_parameter_group_id #=> String
+    #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
+    #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
+    #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
+    #   resp.failover_mode #=> String, one of "AUTOMATIC", "NO_FAILOVER"
+    #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
+    #   resp.allocated_storage #=> Integer
+    #   resp.vpc_subnet_ids #=> Array
+    #   resp.vpc_subnet_ids[0] #=> String
+    #   resp.vpc_security_group_ids #=> Array
+    #   resp.vpc_security_group_ids[0] #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.port #=> Integer
+    #   resp.network_type #=> String, one of "IPV4", "DUAL"
+    #   resp.influx_auth_parameters_secret_arn #=> String
+    #   resp.maintenance_schedule.timezone #=> String
+    #   resp.maintenance_schedule.preferred_maintenance_window #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbBackup AWS API Documentation
+    #
+    # @overload delete_db_backup(params = {})
+    # @param [Hash] params ({})
+    def delete_db_backup(params = {}, options = {})
+      req = build_request(:delete_db_backup, params)
+      req.send_request(options)
+    end
+
     # Deletes a Timestream for InfluxDB cluster.
     #
     # @option params [required, String] :db_cluster_id
     #   Service-generated unique identifier of the DB cluster.
+    #
+    # @option params [Boolean] :retain_automated_backups
+    #   Specifies whether to retain automated backups after the DB cluster is
+    #   deleted. If set to true, automated backups are not deleted and can be
+    #   restored later.
     #
     # @return [Types::DeleteDbClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1335,11 +1561,12 @@ module Aws::TimestreamInfluxDB
     #
     #   resp = client.delete_db_cluster({
     #     db_cluster_id: "DbClusterId", # required
+    #     retain_automated_backups: false,
     #   })
     #
     # @example Response structure
     #
-    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbCluster AWS API Documentation
     #
@@ -1354,6 +1581,11 @@ module Aws::TimestreamInfluxDB
     #
     # @option params [required, String] :identifier
     #   The id of the DB instance.
+    #
+    # @option params [Boolean] :retain_automated_backups
+    #   Specifies whether to retain automated backups after the DB instance is
+    #   deleted. If set to true, automated backups are not deleted and can be
+    #   restored later.
     #
     # @return [Types::DeleteDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1382,11 +1614,14 @@ module Aws::TimestreamInfluxDB
     #   * {Types::DeleteDbInstanceOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
     #   * {Types::DeleteDbInstanceOutput#last_maintenance_time #last_maintenance_time} => Time
     #   * {Types::DeleteDbInstanceOutput#next_maintenance_time #next_maintenance_time} => Time
+    #   * {Types::DeleteDbInstanceOutput#db_backup_configurations #db_backup_configurations} => Array&lt;Types::DbBackupConfigurationOutput&gt;
+    #   * {Types::DeleteDbInstanceOutput#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_instance({
     #     identifier: "DbInstanceIdentifier", # required
+    #     retain_automated_backups: false,
     #   })
     #
     # @example Response structure
@@ -1394,7 +1629,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -1421,6 +1656,13 @@ module Aws::TimestreamInfluxDB
     #   resp.maintenance_schedule.preferred_maintenance_window #=> String
     #   resp.last_maintenance_time #=> Time
     #   resp.next_maintenance_time #=> Time
+    #   resp.db_backup_configurations #=> Array
+    #   resp.db_backup_configurations[0].type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"
+    #   resp.db_backup_configurations[0].retention_days #=> Integer
+    #   resp.db_backup_configurations[0].enabled #=> Boolean
+    #   resp.db_backup_configurations[0].custom_schedule #=> String
+    #   resp.db_backup_configurations[0].next_automated_backup_time #=> Time
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbInstance AWS API Documentation
     #
@@ -1428,6 +1670,88 @@ module Aws::TimestreamInfluxDB
     # @param [Hash] params ({})
     def delete_db_instance(params = {}, options = {})
       req = build_request(:delete_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specific Timestream for InfluxDB backup.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the backup to retrieve information for.
+    #
+    # @return [Types::GetDbBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDbBackupOutput#id #id} => String
+    #   * {Types::GetDbBackupOutput#name #name} => String
+    #   * {Types::GetDbBackupOutput#arn #arn} => String
+    #   * {Types::GetDbBackupOutput#status #status} => String
+    #   * {Types::GetDbBackupOutput#created_at #created_at} => Time
+    #   * {Types::GetDbBackupOutput#expires_after #expires_after} => String
+    #   * {Types::GetDbBackupOutput#db_resource_id #db_resource_id} => String
+    #   * {Types::GetDbBackupOutput#type #type} => String
+    #   * {Types::GetDbBackupOutput#engine_type #engine_type} => String
+    #   * {Types::GetDbBackupOutput#deployment_type #deployment_type} => String
+    #   * {Types::GetDbBackupOutput#kms_key_id #kms_key_id} => String
+    #   * {Types::GetDbBackupOutput#cluster_configuration #cluster_configuration} => Types::ClusterConfiguration
+    #   * {Types::GetDbBackupOutput#db_parameter_group_id #db_parameter_group_id} => String
+    #   * {Types::GetDbBackupOutput#db_instance_type #db_instance_type} => String
+    #   * {Types::GetDbBackupOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
+    #   * {Types::GetDbBackupOutput#failover_mode #failover_mode} => String
+    #   * {Types::GetDbBackupOutput#db_storage_type #db_storage_type} => String
+    #   * {Types::GetDbBackupOutput#allocated_storage #allocated_storage} => Integer
+    #   * {Types::GetDbBackupOutput#vpc_subnet_ids #vpc_subnet_ids} => Array&lt;String&gt;
+    #   * {Types::GetDbBackupOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
+    #   * {Types::GetDbBackupOutput#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::GetDbBackupOutput#port #port} => Integer
+    #   * {Types::GetDbBackupOutput#network_type #network_type} => String
+    #   * {Types::GetDbBackupOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
+    #   * {Types::GetDbBackupOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_db_backup({
+    #     identifier: "DbBackupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "DELETING", "DELETED"
+    #   resp.created_at #=> Time
+    #   resp.expires_after #=> String
+    #   resp.db_resource_id #=> String
+    #   resp.type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "ON_DEMAND", "CONTINUOUS"
+    #   resp.engine_type #=> String, one of "INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"
+    #   resp.deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"
+    #   resp.kms_key_id #=> String
+    #   resp.cluster_configuration.ingest_query_instances #=> Integer
+    #   resp.cluster_configuration.query_only_instances #=> Integer
+    #   resp.cluster_configuration.dedicated_compactor #=> Boolean
+    #   resp.db_parameter_group_id #=> String
+    #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
+    #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
+    #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
+    #   resp.failover_mode #=> String, one of "AUTOMATIC", "NO_FAILOVER"
+    #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
+    #   resp.allocated_storage #=> Integer
+    #   resp.vpc_subnet_ids #=> Array
+    #   resp.vpc_subnet_ids[0] #=> String
+    #   resp.vpc_security_group_ids #=> Array
+    #   resp.vpc_security_group_ids[0] #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.port #=> Integer
+    #   resp.network_type #=> String, one of "IPV4", "DUAL"
+    #   resp.influx_auth_parameters_secret_arn #=> String
+    #   resp.maintenance_schedule.timezone #=> String
+    #   resp.maintenance_schedule.preferred_maintenance_window #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbBackup AWS API Documentation
+    #
+    # @overload get_db_backup(params = {})
+    # @param [Hash] params ({})
+    def get_db_backup(params = {}, options = {})
+      req = build_request(:get_db_backup, params)
       req.send_request(options)
     end
 
@@ -1462,6 +1786,8 @@ module Aws::TimestreamInfluxDB
     #   * {Types::GetDbClusterOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
     #   * {Types::GetDbClusterOutput#failover_mode #failover_mode} => String
     #   * {Types::GetDbClusterOutput#cluster_configuration #cluster_configuration} => Types::ClusterConfiguration
+    #   * {Types::GetDbClusterOutput#db_backup_configurations #db_backup_configurations} => Array&lt;Types::DbBackupConfigurationOutput&gt;
+    #   * {Types::GetDbClusterOutput#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1474,7 +1800,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"
     #   resp.endpoint #=> String
     #   resp.reader_endpoint #=> String
     #   resp.port #=> Integer
@@ -1501,6 +1827,13 @@ module Aws::TimestreamInfluxDB
     #   resp.cluster_configuration.ingest_query_instances #=> Integer
     #   resp.cluster_configuration.query_only_instances #=> Integer
     #   resp.cluster_configuration.dedicated_compactor #=> Boolean
+    #   resp.db_backup_configurations #=> Array
+    #   resp.db_backup_configurations[0].type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"
+    #   resp.db_backup_configurations[0].retention_days #=> Integer
+    #   resp.db_backup_configurations[0].enabled #=> Boolean
+    #   resp.db_backup_configurations[0].custom_schedule #=> String
+    #   resp.db_backup_configurations[0].next_automated_backup_time #=> Time
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbCluster AWS API Documentation
     #
@@ -1543,6 +1876,8 @@ module Aws::TimestreamInfluxDB
     #   * {Types::GetDbInstanceOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
     #   * {Types::GetDbInstanceOutput#last_maintenance_time #last_maintenance_time} => Time
     #   * {Types::GetDbInstanceOutput#next_maintenance_time #next_maintenance_time} => Time
+    #   * {Types::GetDbInstanceOutput#db_backup_configurations #db_backup_configurations} => Array&lt;Types::DbBackupConfigurationOutput&gt;
+    #   * {Types::GetDbInstanceOutput#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1555,7 +1890,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -1582,6 +1917,13 @@ module Aws::TimestreamInfluxDB
     #   resp.maintenance_schedule.preferred_maintenance_window #=> String
     #   resp.last_maintenance_time #=> Time
     #   resp.next_maintenance_time #=> Time
+    #   resp.db_backup_configurations #=> Array
+    #   resp.db_backup_configurations[0].type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"
+    #   resp.db_backup_configurations[0].retention_days #=> Integer
+    #   resp.db_backup_configurations[0].enabled #=> Boolean
+    #   resp.db_backup_configurations[0].custom_schedule #=> String
+    #   resp.db_backup_configurations[0].next_automated_backup_time #=> Time
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbInstance AWS API Documentation
     #
@@ -1797,6 +2139,62 @@ module Aws::TimestreamInfluxDB
       req.send_request(options)
     end
 
+    # Returns a list of Timestream for InfluxDB backups.
+    #
+    # @option params [String] :db_resource_id
+    #   The identifier of the DB instance or DB cluster to list backups for.
+    #   If not specified, returns all backups in the account and region.
+    #
+    # @option params [String] :next_token
+    #   The pagination token. To resume pagination, provide the nextToken
+    #   value as an argument of a subsequent API invocation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the output. If the total
+    #   number of items available is more than the value specified, a
+    #   nextToken is provided in the output. To resume pagination, provide the
+    #   nextToken value as an argument of a subsequent API invocation.
+    #
+    # @return [Types::ListDbBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDbBackupsOutput#items #items} => Array&lt;Types::DbBackupSummary&gt;
+    #   * {Types::ListDbBackupsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_db_backups({
+    #     db_resource_id: "DbResourceId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "DELETING", "DELETED"
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].expires_after #=> String
+    #   resp.items[0].db_resource_id #=> String
+    #   resp.items[0].type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "ON_DEMAND", "CONTINUOUS"
+    #   resp.items[0].engine_type #=> String, one of "INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"
+    #   resp.items[0].deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"
+    #   resp.items[0].kms_key_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/ListDbBackups AWS API Documentation
+    #
+    # @overload list_db_backups(params = {})
+    # @param [Hash] params ({})
+    def list_db_backups(params = {}, options = {})
+      req = build_request(:list_db_backups, params)
+      req.send_request(options)
+    end
+
     # Returns a list of Timestream for InfluxDB DB clusters.
     #
     # @option params [String] :next_token
@@ -1829,7 +2227,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
+    #   resp.items[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"
     #   resp.items[0].endpoint #=> String
     #   resp.items[0].reader_endpoint #=> String
     #   resp.items[0].port #=> Integer
@@ -1882,7 +2280,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
+    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"
     #   resp.items[0].endpoint #=> String
     #   resp.items[0].port #=> Integer
     #   resp.items[0].network_type #=> String, one of "IPV4", "DUAL"
@@ -1937,7 +2335,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
+    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"
     #   resp.items[0].endpoint #=> String
     #   resp.items[0].port #=> Integer
     #   resp.items[0].network_type #=> String, one of "IPV4", "DUAL"
@@ -2054,7 +2452,7 @@ module Aws::TimestreamInfluxDB
     #
     # @example Response structure
     #
-    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbCluster AWS API Documentation
     #
@@ -2097,6 +2495,8 @@ module Aws::TimestreamInfluxDB
     #   * {Types::RebootDbInstanceOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
     #   * {Types::RebootDbInstanceOutput#last_maintenance_time #last_maintenance_time} => Time
     #   * {Types::RebootDbInstanceOutput#next_maintenance_time #next_maintenance_time} => Time
+    #   * {Types::RebootDbInstanceOutput#db_backup_configurations #db_backup_configurations} => Array&lt;Types::DbBackupConfigurationOutput&gt;
+    #   * {Types::RebootDbInstanceOutput#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2109,7 +2509,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -2136,6 +2536,13 @@ module Aws::TimestreamInfluxDB
     #   resp.maintenance_schedule.preferred_maintenance_window #=> String
     #   resp.last_maintenance_time #=> Time
     #   resp.next_maintenance_time #=> Time
+    #   resp.db_backup_configurations #=> Array
+    #   resp.db_backup_configurations[0].type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"
+    #   resp.db_backup_configurations[0].retention_days #=> Integer
+    #   resp.db_backup_configurations[0].enabled #=> Boolean
+    #   resp.db_backup_configurations[0].custom_schedule #=> String
+    #   resp.db_backup_configurations[0].next_automated_backup_time #=> Time
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbInstance AWS API Documentation
     #
@@ -2143,6 +2550,132 @@ module Aws::TimestreamInfluxDB
     # @param [Hash] params ({})
     def reboot_db_instance(params = {}, options = {})
       req = build_request(:reboot_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Restores a Timestream for InfluxDB resource from a backup. By default,
+    # a new resource is created. You can optionally restore to the same
+    # resource using the REPLACE\_EXISTING restore mode.
+    #
+    # @option params [required, String] :name
+    #   The name of the new resource to create from the restore. If restoring
+    #   to an existing resource, the name must match the existing resource
+    #   name.
+    #
+    # @option params [required, String] :db_backup_id
+    #   The identifier of the backup to restore from.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :restore_to_time
+    #   The point in time to restore to, for continuous backups. Must be
+    #   within the backup's retention window.
+    #
+    # @option params [String] :restore_mode
+    #   Specifies whether to restore to a new resource or replace the existing
+    #   resource. Valid values are NEW\_RESOURCE (default) and
+    #   REPLACE\_EXISTING.
+    #
+    # @option params [Array<String>] :vpc_subnet_ids
+    #   A list of VPC subnet IDs for the restored resource. If not specified,
+    #   the restored resource uses the same subnets as the backup.
+    #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   A list of VPC security group IDs for the restored resource. If not
+    #   specified, the restored resource uses the same security groups as the
+    #   backup.
+    #
+    # @option params [Boolean] :publicly_accessible
+    #   Specifies whether the restored resource is publicly accessible.
+    #
+    # @option params [Types::LogDeliveryConfiguration] :log_delivery_configuration
+    #   Configuration for sending InfluxDB engine logs to the specified S3
+    #   bucket for the restored resource.
+    #
+    # @option params [Types::MaintenanceSchedule] :maintenance_schedule
+    #   The maintenance schedule for the restored resource.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to associate with the restored resource.
+    #
+    # @option params [Integer] :port
+    #   The port number on which the restored InfluxDB resource accepts
+    #   connections.
+    #
+    # @option params [String] :network_type
+    #   Specifies the network type of the restored resource. Valid values are
+    #   IPV4 and DUAL.
+    #
+    # @option params [String] :deployment_type
+    #   Specifies the deployment type of the restored resource. Valid values
+    #   are SINGLE\_AZ, WITH\_MULTIAZ\_STANDBY, and
+    #   MULTI\_NODE\_READ\_REPLICAS.
+    #
+    # @option params [Array<Types::DbBackupConfiguration>] :db_backup_configurations
+    #   A list of backup configurations to apply to the restored resource.
+    #
+    # @option params [String] :kms_key_id
+    #   The Amazon Web Services KMS key identifier to use for encryption of
+    #   the restored resource. Can be a key ID, key ARN, alias name, or alias
+    #   ARN.
+    #
+    # @return [Types::RestoreFromDbBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreFromDbBackupOutput#restored_db_resource_id #restored_db_resource_id} => String
+    #   * {Types::RestoreFromDbBackupOutput#restore_status #restore_status} => String
+    #   * {Types::RestoreFromDbBackupOutput#resource_type #resource_type} => String
+    #   * {Types::RestoreFromDbBackupOutput#engine_type #engine_type} => String
+    #   * {Types::RestoreFromDbBackupOutput#deployment_type #deployment_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_from_db_backup({
+    #     name: "DbResourceName", # required
+    #     db_backup_id: "DbBackupId", # required
+    #     restore_to_time: Time.now,
+    #     restore_mode: "NEW_RESOURCE", # accepts NEW_RESOURCE, REPLACE_EXISTING
+    #     vpc_subnet_ids: ["VpcSubnetId"],
+    #     vpc_security_group_ids: ["VpcSecurityGroupId"],
+    #     publicly_accessible: false,
+    #     log_delivery_configuration: {
+    #       s3_configuration: { # required
+    #         bucket_name: "S3ConfigurationBucketNameString", # required
+    #         enabled: false, # required
+    #       },
+    #     },
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     port: 1,
+    #     network_type: "IPV4", # accepts IPV4, DUAL
+    #     deployment_type: "SINGLE_AZ", # accepts SINGLE_AZ, WITH_MULTIAZ_STANDBY, MULTI_NODE_READ_REPLICAS
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY", # required, accepts HOURLY, DAILY, WEEKLY, MONTHLY, CUSTOM_SCHEDULE, CONTINUOUS
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #       },
+    #     ],
+    #     kms_key_id: "KmsKeyId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restored_db_resource_id #=> String
+    #   resp.restore_status #=> String, one of "RESTORING"
+    #   resp.resource_type #=> String, one of "DB_INSTANCE", "DB_CLUSTER"
+    #   resp.engine_type #=> String, one of "INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"
+    #   resp.deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RestoreFromDbBackup AWS API Documentation
+    #
+    # @overload restore_from_db_backup(params = {})
+    # @param [Hash] params ({})
+    def restore_from_db_backup(params = {}, options = {})
+      req = build_request(:restore_from_db_backup, params)
       req.send_request(options)
     end
 
@@ -2225,6 +2758,9 @@ module Aws::TimestreamInfluxDB
     #   Specifies the maintenance schedule for the DB cluster, including the
     #   preferred maintenance window and timezone.
     #
+    # @option params [Array<Types::DbBackupConfiguration>] :db_backup_configurations
+    #   A list of backup configurations to update for the DB cluster.
+    #
     # @return [Types::UpdateDbClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDbClusterOutput#db_cluster_status #db_cluster_status} => String
@@ -2247,11 +2783,19 @@ module Aws::TimestreamInfluxDB
     #       timezone: "IanaTimezone", # required
     #       preferred_maintenance_window: "MaintenanceWindow", # required
     #     },
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY", # required, accepts HOURLY, DAILY, WEEKLY, MONTHLY, CUSTOM_SCHEDULE, CONTINUOUS
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
-    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbCluster AWS API Documentation
     #
@@ -2307,6 +2851,9 @@ module Aws::TimestreamInfluxDB
     #   Specifies the maintenance schedule for the DB instance, including the
     #   preferred maintenance window and timezone.
     #
+    # @option params [Array<Types::DbBackupConfiguration>] :db_backup_configurations
+    #   A list of backup configurations to update for the DB instance.
+    #
     # @return [Types::UpdateDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDbInstanceOutput#id #id} => String
@@ -2334,6 +2881,8 @@ module Aws::TimestreamInfluxDB
     #   * {Types::UpdateDbInstanceOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
     #   * {Types::UpdateDbInstanceOutput#last_maintenance_time #last_maintenance_time} => Time
     #   * {Types::UpdateDbInstanceOutput#next_maintenance_time #next_maintenance_time} => Time
+    #   * {Types::UpdateDbInstanceOutput#db_backup_configurations #db_backup_configurations} => Array&lt;Types::DbBackupConfigurationOutput&gt;
+    #   * {Types::UpdateDbInstanceOutput#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2355,6 +2904,14 @@ module Aws::TimestreamInfluxDB
     #       timezone: "IanaTimezone", # required
     #       preferred_maintenance_window: "MaintenanceWindow", # required
     #     },
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY", # required, accepts HOURLY, DAILY, WEEKLY, MONTHLY, CUSTOM_SCHEDULE, CONTINUOUS
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2362,7 +2919,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -2389,6 +2946,13 @@ module Aws::TimestreamInfluxDB
     #   resp.maintenance_schedule.preferred_maintenance_window #=> String
     #   resp.last_maintenance_time #=> Time
     #   resp.next_maintenance_time #=> Time
+    #   resp.db_backup_configurations #=> Array
+    #   resp.db_backup_configurations[0].type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"
+    #   resp.db_backup_configurations[0].retention_days #=> Integer
+    #   resp.db_backup_configurations[0].enabled #=> Boolean
+    #   resp.db_backup_configurations[0].custom_schedule #=> String
+    #   resp.db_backup_configurations[0].next_automated_backup_time #=> Time
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstance AWS API Documentation
     #
@@ -2417,7 +2981,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

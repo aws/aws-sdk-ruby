@@ -55,7 +55,7 @@ module Aws::Resiliencehubv2
   autoload :EndpointProvider, 'aws-sdk-resiliencehubv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-resiliencehubv2/endpoints'
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end
 

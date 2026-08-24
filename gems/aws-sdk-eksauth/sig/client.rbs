@@ -89,7 +89,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKSAuth/Client.html#assume_role_for_pod_identity-instance_method
       def assume_role_for_pod_identity: (
                                           cluster_name: ::String,
-                                          token: ::String
+                                          token: ::String,
+                                          ?eks_node_name: ::String,
+                                          ?instance_id: ::String,
+                                          ?zone: ::String
                                         ) -> _AssumeRoleForPodIdentityResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssumeRoleForPodIdentityResponseSuccess
     end

@@ -1401,7 +1401,8 @@
         "auxiliaryApps":{"shape":"AuxiliaryAppArnList"},
         "billingMethod":{"shape":"BillingMethod"},
         "vpceConfigurationArns":{"shape":"AmazonResourceNames"},
-        "deviceProxy":{"shape":"DeviceProxy"}
+        "deviceProxy":{"shape":"DeviceProxy"},
+        "parameters":{"shape":"RemoteAccessParameters"}
       }
     },
     "CreateRemoteAccessSessionRequest":{
@@ -2175,6 +2176,16 @@
       "type":"list",
       "member":{"shape":"IncompatibilityMessage"}
     },
+    "InsightsType":{
+      "type":"string",
+      "enum":["TEST_REPORT"]
+    },
+    "InsightsTypes":{
+      "type":"list",
+      "member":{"shape":"InsightsType"},
+      "max":5,
+      "min":1
+    },
     "InstallToRemoteAccessSessionRequest":{
       "type":"structure",
       "required":[
@@ -2267,7 +2278,38 @@
         "instanceArn":{"shape":"AmazonResourceName"},
         "deviceMinutes":{"shape":"DeviceMinutes"},
         "videoEndpoint":{"shape":"String"},
-        "videoCapture":{"shape":"VideoCapture"}
+        "videoCapture":{"shape":"VideoCapture"},
+        "insights":{"shape":"JobInsights"}
+      }
+    },
+    "JobInsights":{
+      "type":"structure",
+      "members":{
+        "status":{"shape":"ReportStatus"},
+        "testReport":{"shape":"TestReport"}
+      }
+    },
+    "JobReport":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ReportMessage"},
+        "metrics":{"shape":"JobReportMetrics"},
+        "jobDetailsUrl":{"shape":"SensitiveURL"}
+      }
+    },
+    "JobReportMetrics":{
+      "type":"structure",
+      "members":{
+        "jobsTotal":{"shape":"Integer"},
+        "jobsPassed":{"shape":"Integer"},
+        "jobsFailed":{"shape":"Integer"},
+        "jobsSkipped":{"shape":"Integer"},
+        "jobsErrored":{"shape":"Integer"},
+        "jobsStopped":{"shape":"Integer"},
+        "jobsPassedPercentage":{"shape":"Double"},
+        "totalJobExecutionDurationSeconds":{"shape":"Double"},
+        "averageJobExecutionDurationSeconds":{"shape":"Double"},
+        "medianJobExecutionDurationSeconds":{"shape":"Double"}
       }
     },
     "JobTimeoutMinutes":{"type":"integer"},
@@ -2917,6 +2959,25 @@
         "interactiveEndpoint":{"shape":"SensitiveURL"}
       }
     },
+    "RemoteAccessParameterKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9:_]+"
+    },
+    "RemoteAccessParameterValue":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_.]+"
+    },
+    "RemoteAccessParameters":{
+      "type":"map",
+      "key":{"shape":"RemoteAccessParameterKey"},
+      "value":{"shape":"RemoteAccessParameterValue"},
+      "max":3,
+      "min":1
+    },
     "RemoteAccessSession":{
       "type":"structure",
       "members":{
@@ -2972,6 +3033,21 @@
       "members":{
         "offeringTransaction":{"shape":"OfferingTransaction"}
       }
+    },
+    "ReportMessage":{
+      "type":"string",
+      "max":4096,
+      "min":0
+    },
+    "ReportStatus":{
+      "type":"string",
+      "enum":[
+        "PENDING",
+        "RUNNING",
+        "COMPLETED",
+        "SKIPPED",
+        "ERRORED"
+      ]
     },
     "Resolution":{
       "type":"structure",
@@ -3060,7 +3136,16 @@
         "deviceSelectionResult":{"shape":"DeviceSelectionResult"},
         "vpcConfig":{"shape":"VpcConfig"},
         "executionRoleArn":{"shape":"AmazonRoleResourceName"},
-        "environmentVariables":{"shape":"EnvironmentVariables"}
+        "environmentVariables":{"shape":"EnvironmentVariables"},
+        "insightsTypes":{"shape":"InsightsTypes"},
+        "insights":{"shape":"RunInsights"}
+      }
+    },
+    "RunInsights":{
+      "type":"structure",
+      "members":{
+        "status":{"shape":"ReportStatus"},
+        "jobReport":{"shape":"JobReport"}
       }
     },
     "Runs":{
@@ -3115,7 +3200,8 @@
         "auxiliaryApps":{"shape":"AmazonResourceNames"},
         "billingMethod":{"shape":"BillingMethod"},
         "environmentVariables":{"shape":"EnvironmentVariables"},
-        "executionRoleArn":{"shape":"AmazonRoleResourceName"}
+        "executionRoleArn":{"shape":"AmazonRoleResourceName"},
+        "insightsTypes":{"shape":"InsightsTypes"}
       }
     },
     "ScheduleRunRequest":{
@@ -3437,6 +3523,28 @@
       "type":"map",
       "key":{"shape":"String"},
       "value":{"shape":"String"}
+    },
+    "TestReport":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ReportMessage"},
+        "metrics":{"shape":"TestReportMetrics"},
+        "testDetailsUrl":{"shape":"SensitiveURL"}
+      }
+    },
+    "TestReportMetrics":{
+      "type":"structure",
+      "members":{
+        "testsTotal":{"shape":"Integer"},
+        "testsPassed":{"shape":"Integer"},
+        "testsFailed":{"shape":"Integer"},
+        "testsSkipped":{"shape":"Integer"},
+        "testsErrored":{"shape":"Integer"},
+        "testsOther":{"shape":"Integer"},
+        "testsPassedPercentage":{"shape":"Double"},
+        "totalTestExecutionDurationSeconds":{"shape":"Double"},
+        "medianTestExecutionDurationSeconds":{"shape":"Double"}
+      }
     },
     "TestType":{
       "type":"string",

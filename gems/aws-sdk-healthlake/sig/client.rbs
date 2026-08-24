@@ -438,7 +438,8 @@ module Aws
                                    ?validation_level: ("strict" | "structure-only" | "minimal"),
                                    ?profile_id: ::String,
                                    ?input_format: ::String,
-                                   ?drift_detection_enabled: bool
+                                   ?drift_detection_enabled: bool,
+                                   ?provenance_enabled: bool
                                  ) -> _StartFHIRImportJobResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFHIRImportJobResponseSuccess
 

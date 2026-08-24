@@ -291,6 +291,54 @@ module Aws::IAM
     #
     class AccountNotManagementOrDelegatedAdministratorException < Aws::EmptyStructure; end
 
+    # @!attribute [rw] template_arn
+    #   The Amazon Resource Name (ARN) of the role template to create the
+    #   role from.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] template_minor_version
+    #   The minor version of the role template to use. If you do not specify
+    #   a minor version, the service uses the template's default minor
+    #   version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replacement_values
+    #   A map of values to substitute for the parameters that are defined in
+    #   the role template version. Each key is a parameter name from the
+    #   template, and each value is a structure that contains the
+    #   replacement values for that parameter.
+    #   @return [Hash<String,Types::ReplacementValueEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AcquireRoleRequest AWS API Documentation
+    #
+    class AcquireRoleRequest < Struct.new(
+      :template_arn,
+      :template_minor_version,
+      :replacement_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role
+    #   A structure that contains details about the IAM role that was
+    #   created.
+    #   @return [Types::Role]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AcquireRoleResponse AWS API Documentation
+    #
+    class AcquireRoleResponse < Struct.new(
+      :role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC)
     #   provider resource to add the client ID to. You can get a list of
@@ -3350,13 +3398,40 @@ module Aws::IAM
     # This data type is used by the return parameter of `
     # SimulateCustomPolicy ` and ` SimulatePrincipalPolicy `.
     #
+    # The simulator now returns a single `EvaluationResult` per action,
+    # regardless of how many resource ARNs are provided. Previously,
+    # simulating one action against N resources returned N evaluation
+    # results, each containing the same aggregate decision. The top-level
+    # fields (`EvalDecision`, `MatchedStatements`, `MissingContextValues`,
+    # `EvalDecisionDetails`) now represent the *aggregate* decision across
+    # all requested resources. The top-level `EvalDecision` reflects the
+    # most restrictive decision across all resources (for example, if any
+    # resource produces `explicitDeny`, the top-level decision is
+    # `explicitDeny`).
+    #
+    #  To see the decision for each individual resource, use
+    # `ResourceSpecificResults`. If your application parses evaluation
+    # results per resource ARN, update your code to read per-resource
+    # decisions from `ResourceSpecificResults` rather than from the
+    # top-level result.
+    #
     # @!attribute [rw] eval_action_name
     #   The name of the API operation tested on the indicated resource.
     #   @return [String]
     #
     # @!attribute [rw] eval_resource_name
-    #   The ARN of the resource that the indicated API operation was tested
-    #   on.
+    #   The ARN template for the simulated resource type (for example,
+    #   `arn:${Partition}:s3:::${BucketName}/${KeyName}`), or `*` if no ARN
+    #   format is defined for the action. This is not a specific
+    #   customer-provided resource ARN. To find the decision for a specific
+    #   resource, use `ResourceSpecificResults`.
+    #
+    #   <note markdown="1"> If you previously relied on `EvalResourceName` to identify which
+    #   specific resource a result applies to, you must now use the
+    #   `EvalResourceName` field within individual entries in
+    #   `ResourceSpecificResults` instead.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] eval_decision
@@ -3370,6 +3445,14 @@ module Aws::IAM
     #   that operation, then the explicit deny overrides any allow. In
     #   addition, the deny statement is the only entry included in the
     #   result.
+    #
+    #   In the top-level result, this field contains the union of matched
+    #   statements across all requested resources. Only statements that
+    #   contributed to the reported decision are included. For per-resource
+    #   matched statements, see `ResourceSpecificResults`. This field
+    #   doesn't include statements from service control policies (SCPs).
+    #   Only statements from identity-based and resource-based policies
+    #   appear here.
     #   @return [Array<Types::Statement>]
     #
     # @!attribute [rw] missing_context_values
@@ -3383,6 +3466,12 @@ module Aws::IAM
     #   [GetContextKeysForCustomPolicy][1] or
     #   [GetContextKeysForPrincipalPolicy][2].
     #
+    #   In the top-level result, this field contains the deduplicated set of
+    #   missing context values across all requested resources. This field
+    #   doesn't include context keys referenced by service control policies
+    #   (SCPs). Only context keys referenced by identity-based and
+    #   resource-based policies appear here.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html
@@ -3393,6 +3482,10 @@ module Aws::IAM
     #   A structure that details how Organizations and its service control
     #   policies affect the results of the simulation. Only applies if the
     #   simulated user's account is part of an organization.
+    #
+    #   For resources that don't support organization-level evaluation,
+    #   this field is omitted from the top-level result. For per-resource
+    #   details, see `ResourceSpecificResults`.
     #   @return [Types::OrganizationsDecisionDetail]
     #
     # @!attribute [rw] permissions_boundary_decision_detail
@@ -3406,6 +3499,9 @@ module Aws::IAM
     #   decision. This parameter is populated for only cross-account
     #   simulations. It contains a brief summary of how each policy type
     #   contributes to the final evaluation decision.
+    #
+    #   In the top-level result, this map reports the most restrictive
+    #   decision per policy type across all requested resources.
     #
     #   If the simulation evaluates policies within the same account and
     #   includes a resource ARN, then the parameter is present but the
@@ -3752,6 +3848,25 @@ module Aws::IAM
     #
     class GetAccountPasswordPolicyResponse < Struct.new(
       :password_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPropertiesRequest AWS API Documentation
+    #
+    class GetAccountPropertiesRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] properties
+    #   A map of account property key-value pairs. Keys are in the format
+    #   `Namespace/PropertyName`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPropertiesResponse AWS API Documentation
+    #
+    class GetAccountPropertiesResponse < Struct.new(
+      :properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4768,6 +4883,46 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] template_arn
+    #   The Amazon Resource Name (ARN) of the role template whose version
+    #   you want to retrieve.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] minor_version
+    #   The minor version of the role template to retrieve. If you do not
+    #   specify a minor version, the service returns the template's default
+    #   minor version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRoleTemplateVersionRequest AWS API Documentation
+    #
+    class GetRoleTemplateVersionRequest < Struct.new(
+      :template_arn,
+      :minor_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role_template_version
+    #   A structure that contains details about the requested role template
+    #   version.
+    #   @return [Types::RoleTemplateVersion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRoleTemplateVersionResponse AWS API Documentation
+    #
+    class GetRoleTemplateVersionResponse < Struct.new(
+      :role_template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] saml_provider_arn
     #   The Amazon Resource Name (ARN) of the SAML provider resource object
     #   in IAM to get information about.
@@ -5490,6 +5645,58 @@ module Aws::IAM
       :create_date,
       :group_policy_list,
       :attached_managed_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an inline policy template that the service embeds in roles
+    # that you create from a role template.
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the inline policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The inline policy document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InlinePolicy AWS API Documentation
+    #
+    class InlinePolicy < Struct.new(
+      :policy_name,
+      :policy_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies one or more inline policies that are embedded in IAM users,
+    # groups, or roles, by the name of the policy together with the type and
+    # name of the entity that it is attached to. Wildcard characters in the
+    # entity name can match multiple entities, so a single identifier can
+    # select more than one attached inline policy.
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the inline policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_type
+    #   The type of IAM entity that the inline policy is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_name
+    #   The name of the IAM user, group, or role that the inline policy is
+    #   attached to. Wildcard characters are supported to match multiple
+    #   entities: use at most one `*` (matches any sequence of characters,
+    #   including none), and any number of `?` (each matches exactly one
+    #   character).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InlinePolicyIdentifierType AWS API Documentation
+    #
+    class InlinePolicyIdentifierType < Struct.new(
+      :policy_name,
+      :attachment_type,
+      :attachment_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8770,6 +8977,20 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because the resulting role name conflicts
+    # with an existing role in the account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/NameConflictException AWS API Documentation
+    #
+    class NameConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was rejected because it referenced a resource entity that
     # does not exist. The error message describes the resource.
     #
@@ -8821,6 +9042,33 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Represents one level of an Organizations hierarchy—the organization
+    # root, an organizational unit (OU), or an account—together with the
+    # service control policies (SCPs) that apply at that level. Each element
+    # in the list represents one level of the hierarchy, ordered from the
+    # organization root down to the account.
+    #
+    # For more information about SCPs, see [Service control policies
+    # (SCPs)][1] in the *Organizations User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
+    #
+    # @!attribute [rw] service_control_policy_input_list
+    #   A list of SCP documents that apply at this level of the
+    #   Organizations hierarchy. Each document is specified as a string
+    #   containing the complete, valid JSON text of an SCP.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OrderedOrganizationPolicyType AWS API Documentation
+    #
+    class OrderedOrganizationPolicyType < Struct.new(
+      :service_control_policy_input_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was rejected because no organization is associated with
     # your account.
     #
@@ -8853,6 +9101,60 @@ module Aws::IAM
     #
     class OrganizationsDecisionDetail < Struct.new(
       :allowed_by_organizations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a parameter that a role template accepts. You supply values
+    # for these parameters when you create a role with [AcquireRole][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the parameter. Valid values are `String`,
+    #   `StringList`, `Number`, `NumberList`, `Arn`, and `ArnList`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_type
+    #   An optional subtype that further constrains the values that are
+    #   allowed for the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_required
+    #   Specifies whether you must supply a value for the parameter when you
+    #   create a role from the template.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_value
+    #   The value that the service uses for the parameter when you do not
+    #   supply one.
+    #   @return [String]
+    #
+    # @!attribute [rw] immutable
+    #   Specifies whether you can change the parameter value after you
+    #   create the role.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ParameterDefinition AWS API Documentation
+    #
+    class ParameterDefinition < Struct.new(
+      :name,
+      :type,
+      :sub_type,
+      :description,
+      :is_required,
+      :default_value,
+      :immutable)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9277,6 +9579,57 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Identifies one or more policies as a union type. Specify exactly one
+    # of `PolicyType`, `PolicyArn`, or `InlinePolicyIdentifier` to identify
+    # policies by their type, by Amazon Resource Name (ARN), or by the name
+    # of an inline policy and the entity it is attached to.
+    #
+    # @note PolicyIdentifier is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] policy_type
+    #   The policy type to identify. All policies of the specified type are
+    #   matched.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services managed
+    #   policy or a customer managed policy that is attached to an IAM user,
+    #   group, or role. Wildcard characters are supported in the resource
+    #   name portion of the ARN to match multiple managed policies: use at
+    #   most one `*` (matches any sequence of characters, including none),
+    #   and any number of `?` (each matches exactly one character).
+    #
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] inline_policy_identifier
+    #   An inline policy identifier consisting of a policy name and the
+    #   entity it is attached to. Wildcard characters (`*` and `?`) in the
+    #   entity name can match multiple entities.
+    #   @return [Types::InlinePolicyIdentifierType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyIdentifier AWS API Documentation
+    #
+    class PolicyIdentifier < Struct.new(
+      :policy_type,
+      :policy_arn,
+      :inline_policy_identifier,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PolicyType < PolicyIdentifier; end
+      class PolicyArn < PolicyIdentifier; end
+      class InlinePolicyIdentifier < PolicyIdentifier; end
+      class Unknown < PolicyIdentifier; end
+    end
+
     # The request failed because Amazon Web Services service role policies
     # can only be attached to the service-linked role for that service.
     #
@@ -9486,6 +9839,31 @@ module Aws::IAM
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] properties
+    #   A map of property key-value pairs to set. All keys must belong to
+    #   the same namespace.
+    #
+    #   Each key uses the format `Namespace/PropertyName`. The key must
+    #   contain exactly one `/` separating the namespace from the property
+    #   name, and cannot start or end with `/`.
+    #
+    #   The service validates each value based on the property key's
+    #   expected type. For example, boolean properties expect `true` or
+    #   `false`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutAccountPropertiesRequest AWS API Documentation
+    #
+    class PutAccountPropertiesRequest < Struct.new(
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutAccountPropertiesResponse AWS API Documentation
+    #
+    class PutAccountPropertiesResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] group_name
     #   The name of the group to associate the policy with.
@@ -9859,6 +10237,21 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Contains the list of replacement values for a single template
+    # parameter used when creating a role from a role template.
+    #
+    # @!attribute [rw] values
+    #   The list of replacement values for the template parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ReplacementValueEntry AWS API Documentation
+    #
+    class ReplacementValueEntry < Struct.new(
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request failed because the maximum number of concurrent requests
     # for this account are already running.
     #
@@ -10143,6 +10536,16 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
     #   @return [Types::RoleLastUsed]
     #
+    # @!attribute [rw] source_role_template
+    #   Contains information about the role template that this role was
+    #   created from. This member is present only for roles created with
+    #   [AcquireRole][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+    #   @return [Types::SourceRoleTemplate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role AWS API Documentation
     #
     class Role < Struct.new(
@@ -10156,7 +10559,8 @@ module Aws::IAM
       :max_session_duration,
       :permissions_boundary,
       :tags,
-      :role_last_used)
+      :role_last_used,
+      :source_role_template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10329,6 +10733,219 @@ module Aws::IAM
     class RoleLastUsed < Struct.new(
       :last_used_date,
       :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because someone modified the role template
+    # while the service was creating the role. Wait a few minutes and try
+    # the request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleModifiedException AWS API Documentation
+    #
+    class RoleModifiedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified role template is
+    # disabled. A disabled role template cannot be used to create new roles.
+    # Contact your administrator to enable the role template, or use a
+    # different role template.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleTemplateDisabledException AWS API Documentation
+    #
+    class RoleTemplateDisabledException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a version of an IAM role template,
+    # including the configuration that is used to create roles with
+    # [AcquireRole][1]. This structure is returned as a response element by
+    # the [GetRoleTemplateVersion][2] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRoleTemplateVersion.html
+    #
+    # @!attribute [rw] template_arn
+    #   The Amazon Resource Name (ARN) that identifies the role template.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The friendly name that identifies the role template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_version_id
+    #   The identifier of the role template version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the role template.
+    #   @return [String]
+    #
+    # @!attribute [rw] major_version
+    #   The major version number of the role template.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_minor_version
+    #   The minor version that the service uses by default when you create a
+    #   role from this template without specifying a minor version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] managed_by_type
+    #   Indicates that the role template is managed by an Amazon Web
+    #   Services service.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_by_value
+    #   The identifier of the Amazon Web Services service that manages the
+    #   role template.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether the role template is enabled. When a template is
+    #   disabled, you cannot create roles from it.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] minor_version
+    #   The minor version number of this role template version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] role_name_pattern
+    #   The pattern that is used to generate the name of a role that is
+    #   created from this template. The pattern can include `@{parameter}`
+    #   placeholders that are replaced with the values you supply in the
+    #   `ReplacementValues` parameter of [AcquireRole][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+    #   @return [String]
+    #
+    # @!attribute [rw] role_path_pattern
+    #   The pattern that is used to generate the path of a role that is
+    #   created from this template.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_description_pattern
+    #   The pattern that is used to generate the description of a role that
+    #   is created from this template.
+    #   @return [String]
+    #
+    # @!attribute [rw] assume_role_policy_document_template
+    #   The trust policy template that grants an entity permission to assume
+    #   roles that you create from this template.
+    #   @return [String]
+    #
+    # @!attribute [rw] inline_policy_templates
+    #   A list of inline policy templates that the service embeds in roles
+    #   that you create from this template.
+    #   @return [Array<Types::InlinePolicy>]
+    #
+    # @!attribute [rw] managed_policy_arns
+    #   A list of the ARNs of the managed policies that the service attaches
+    #   to roles that you create from this template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] permission_boundary_arn
+    #   The ARN of the policy that sets the permissions boundary for roles
+    #   that you create from this template.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters_definition
+    #   A list of the parameters that are defined for this role template
+    #   version. You supply values for these parameters when you create a
+    #   role with [AcquireRole][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+    #   @return [Array<Types::ParameterDefinition>]
+    #
+    # @!attribute [rw] role_tags_template
+    #   A list of tag templates that are applied to roles that are created
+    #   from this template.
+    #   @return [Array<Types::TagTemplate>]
+    #
+    # @!attribute [rw] max_session_duration
+    #   The maximum session duration (in seconds) for roles that are created
+    #   from this template.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version_enabled
+    #   Specifies whether this specific minor version of the role template
+    #   is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] create_timestamp
+    #   The date and time, in [ISO 8601 date-time format][1], when the role
+    #   template version was created.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_timestamp
+    #   The date and time, in [ISO 8601 date-time format][1], when the role
+    #   template version was last updated.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleTemplateVersion AWS API Documentation
+    #
+    class RoleTemplateVersion < Struct.new(
+      :template_arn,
+      :template_name,
+      :template_version_id,
+      :description,
+      :major_version,
+      :default_minor_version,
+      :managed_by_type,
+      :managed_by_value,
+      :enabled,
+      :minor_version,
+      :role_name_pattern,
+      :role_path_pattern,
+      :role_description_pattern,
+      :assume_role_policy_document_template,
+      :inline_policy_templates,
+      :managed_policy_arns,
+      :permission_boundary_arn,
+      :parameters_definition,
+      :role_tags_template,
+      :max_session_duration,
+      :version_enabled,
+      :create_timestamp,
+      :update_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11092,6 +11709,25 @@ module Aws::IAM
     #   [3]: http://wikipedia.org/wiki/regex
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ordered_organization_policy_input_list
+    #   An ordered list of service control policies (SCPs) to include in the
+    #   simulation. Each element represents one level of an Organizations
+    #   hierarchy, from the organization root to the account.
+    #
+    #   The simulator evaluates SCPs in the order that you provide,
+    #   consistent with how Organizations enforces SCPs. The first element
+    #   must represent the organization root, and the last element must
+    #   represent the account. Any elements between them represent
+    #   organizational units (OUs) in descending order.
+    #
+    #   Use this parameter to simulate the effect of an SCP hierarchy
+    #   without calling [SimulatePrincipalPolicy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html
+    #   @return [Array<Types::OrderedOrganizationPolicyType>]
+    #
     # @!attribute [rw] action_names
     #   A list of names of API operations to evaluate in the simulation.
     #   Each operation is evaluated against each resource. Each operation
@@ -11184,13 +11820,13 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] caller_arn
-    #   The ARN of the IAM user that you want to use as the simulated caller
-    #   of the API operations. `CallerArn` is required if you include a
-    #   `ResourcePolicy` so that the policy's `Principal` element has a
-    #   value to use in evaluating the policy.
+    #   The ARN of the IAM user, group, or role that you want to use as the
+    #   simulated caller of the API operations. `CallerArn` is required if
+    #   you include a `ResourcePolicy` so that the policy's `Principal`
+    #   element has a value to use in evaluating the policy.
     #
-    #   You can specify only the ARN of an IAM user. You cannot specify the
-    #   ARN of an assumed role, federated user, or a service principal.
+    #   You cannot specify the ARN of an assumed role, federated user, or a
+    #   service principal.
     #   @return [String]
     #
     # @!attribute [rw] context_entries
@@ -11265,6 +11901,7 @@ module Aws::IAM
     class SimulateCustomPolicyRequest < Struct.new(
       :policy_input_list,
       :permissions_boundary_policy_input_list,
+      :ordered_organization_policy_input_list,
       :action_names,
       :resource_arns,
       :resource_policy,
@@ -11398,6 +12035,28 @@ module Aws::IAM
     #   [3]: http://wikipedia.org/wiki/regex
     #   @return [Array<String>]
     #
+    # @!attribute [rw] policy_exclusion_list
+    #   A list of policies to exclude from the simulation. Use this
+    #   parameter to test what the simulation result would be if a policy
+    #   were removed, without changing which policies are actually attached
+    #   to the principal identified by `PolicySourceArn`.
+    #
+    #   Each entry is a [PolicyIdentifier][1] that identifies one or more
+    #   policies to exclude by policy type, by Amazon Resource Name (ARN),
+    #   or by the name of an inline policy and the entity it is attached to.
+    #
+    #   Syntactically invalid identifiers, such as malformed ARNs or
+    #   wildcards in disallowed positions, cause the request to fail with an
+    #   `InvalidInput` error. Syntactically valid identifiers that don't
+    #   match any attached policy are ignored. Resource control policies
+    #   (RCPs) are not supported in this release; identifiers that target
+    #   RCPs are also ignored.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_PolicyIdentifier.html
+    #   @return [Array<Types::PolicyIdentifier>]
+    #
     # @!attribute [rw] action_names
     #   A list of names of API operations to evaluate in the simulation.
     #   Each operation is evaluated for each resource. Each operation must
@@ -11480,23 +12139,24 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] caller_arn
-    #   The ARN of the IAM user that you want to specify as the simulated
-    #   caller of the API operations. If you do not specify a `CallerArn`,
-    #   it defaults to the ARN of the user that you specify in
-    #   `PolicySourceArn`, if you specified a user. If you include both a
+    #   The ARN of the IAM user, group, or role that you want to specify as
+    #   the simulated caller of the API operations. If you do not specify a
+    #   `CallerArn`, it defaults to the ARN of the user, group, or role that
+    #   you specify in `PolicySourceArn`. If you include both a
     #   `PolicySourceArn` (for example,
     #   `arn:aws:iam::123456789012:user/David`) and a `CallerArn` (for
     #   example, `arn:aws:iam::123456789012:user/Bob`), the result is that
     #   you simulate calling the API operations as Bob, as if Bob had
     #   David's policies.
     #
-    #   You can specify only the ARN of an IAM user. You cannot specify the
-    #   ARN of an assumed role, federated user, or a service principal.
+    #   You can specify the ARN of an IAM user, group, or role. You cannot
+    #   specify the ARN of an assumed role, federated user, or a service
+    #   principal.
     #
     #   `CallerArn` is required if you include a `ResourcePolicy` and the
-    #   `PolicySourceArn` is not the ARN for an IAM user. This is required
-    #   so that the resource-based policy's `Principal` element has a value
-    #   to use in evaluating the policy.
+    #   `PolicySourceArn` is not the ARN for an IAM user, group, or role.
+    #   This is required so that the resource-based policy's `Principal`
+    #   element has a value to use in evaluating the policy.
     #
     #   For more information about ARNs, see [Amazon Resource Names
     #   (ARNs)][1] in the *Amazon Web Services General Reference*.
@@ -11579,6 +12239,7 @@ module Aws::IAM
       :policy_source_arn,
       :policy_input_list,
       :permissions_boundary_policy_input_list,
+      :policy_exclusion_list,
       :action_names,
       :resource_arns,
       :resource_policy,
@@ -11588,6 +12249,28 @@ module Aws::IAM
       :resource_handling_option,
       :max_items,
       :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the role template that a role was created
+    # from.
+    #
+    # @!attribute [rw] template_arn
+    #   The Amazon Resource Name (ARN) of the role template that the role
+    #   was created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_minor_version
+    #   The minor version of the role template that was used to create the
+    #   role.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SourceRoleTemplate AWS API Documentation
+    #
+    class SourceRoleTemplate < Struct.new(
+      :template_arn,
+      :template_minor_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11852,6 +12535,28 @@ module Aws::IAM
     class TagServerCertificateRequest < Struct.new(
       :server_certificate_name,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a tag that is applied to roles that are created from a role
+    # template. The key and value can include `@{parameter}` placeholders
+    # that are replaced with template parameter values when the role is
+    # created.
+    #
+    # @!attribute [rw] key
+    #   The key name of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value associated with the tag key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagTemplate AWS API Documentation
+    #
+    class TagTemplate < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

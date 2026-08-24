@@ -1,0 +1,203 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PricingPlanManager
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PricingPlanManager/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ApprovePaidSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApprovePaidSubscriptionOutput]
+        def subscription: () -> Types::Subscription
+        def e_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PricingPlanManager/Client.html#approve_paid_subscription-instance_method
+      def approve_paid_subscription: (
+                                       arn: ::String,
+                                       if_match: ::String,
+                                       ?client_token: ::String
+                                     ) -> _ApprovePaidSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApprovePaidSubscriptionResponseSuccess
+
+      interface _AssociateResourcesToSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateResourcesToSubscriptionOutput]
+        def subscription: () -> Types::Subscription
+        def e_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PricingPlanManager/Client.html#associate_resources_to_subscription-instance_method
+      def associate_resources_to_subscription: (
+                                                 arn: ::String,
+                                                 resource_arns: Array[::String],
+                                                 if_match: ::String,
+                                                 ?client_token: ::String
+                                               ) -> _AssociateResourcesToSubscriptionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateResourcesToSubscriptionResponseSuccess
+
+      interface _CancelSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelSubscriptionOutput]
+        def subscription: () -> Types::Subscription
+        def e_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PricingPlanManager/Client.html#cancel_subscription-instance_method
+      def cancel_subscription: (
+                                 arn: ::String,
+                                 if_match: ::String,
+                                 ?client_token: ::String
+                               ) -> _CancelSubscriptionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelSubscriptionResponseSuccess
+
+      interface _CancelSubscriptionChangeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelSubscriptionChangeOutput]
+        def subscription: () -> Types::Subscription
+        def e_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PricingPlanManager/Client.html#cancel_subscription_change-instance_method
+      def cancel_subscription_change: (
+                                        arn: ::String,
+                                        if_match: ::String,
+                                        ?client_token: ::String
+                                      ) -> _CancelSubscriptionChangeResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelSubscriptionChangeResponseSuccess
+
+      interface _CreateSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriptionOutput]
+        def subscription: () -> Types::Subscription
+        def e_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PricingPlanManager/Client.html#create_subscription-instance_method
+      def create_subscription: (
+                                 plan_family: ::String,
+                                 plan_tier: ::String,
+                                 ?usage_level: ::String,
+                                 resource_arns: Array[::String],
+                                 ?approval_mode: ("MANUAL" | "IMMEDIATE"),
+                                 ?client_token: ::String
+                               ) -> _CreateSubscriptionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionResponseSuccess
+
+      interface _DisassociateResourcesFromSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateResourcesFromSubscriptionOutput]
+        def subscription: () -> Types::Subscription
+        def e_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PricingPlanManager/Client.html#disassociate_resources_from_subscription-instance_method
+      def disassociate_resources_from_subscription: (
+                                                      arn: ::String,
+                                                      resource_arns: Array[::String],
+                                                      if_match: ::String,
+                                                      ?client_token: ::String
+                                                    ) -> _DisassociateResourcesFromSubscriptionResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateResourcesFromSubscriptionResponseSuccess
+
+      interface _GetSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionOutput]
+        def subscription: () -> Types::Subscription
+        def e_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PricingPlanManager/Client.html#get_subscription-instance_method
+      def get_subscription: (
+                              arn: ::String
+                            ) -> _GetSubscriptionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionResponseSuccess
+
+      interface _ListSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionsOutput]
+        def subscription_summaries: () -> ::Array[Types::SubscriptionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PricingPlanManager/Client.html#list_subscriptions-instance_method
+      def list_subscriptions: (
+                                ?next_token: ::String
+                              ) -> _ListSubscriptionsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionsResponseSuccess
+
+      interface _UpdateSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriptionOutput]
+        def subscription: () -> Types::Subscription
+        def e_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PricingPlanManager/Client.html#update_subscription-instance_method
+      def update_subscription: (
+                                 arn: ::String,
+                                 plan_tier: ::String,
+                                 ?usage_level: ::String,
+                                 if_match: ::String,
+                                 ?client_token: ::String
+                               ) -> _UpdateSubscriptionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriptionResponseSuccess
+    end
+  end
+end
+

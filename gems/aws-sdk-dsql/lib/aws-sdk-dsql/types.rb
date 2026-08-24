@@ -1101,6 +1101,9 @@ module Aws::DSQL
     #   The KMS key that encrypts and protects the data on your cluster. You
     #   can specify the ARN, ID, or alias of an existing key or have Amazon
     #   Web Services create a default key for you.
+    #
+    #   To switch to the key owned by Amazon Web Services, specify the
+    #   reserved value `AWS_OWNED_KMS_KEY`.
     #   @return [String]
     #
     # @!attribute [rw] client_token

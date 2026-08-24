@@ -576,6 +576,17 @@ module Aws::DataZone
     GitBranch = Shapes::StringShape.new(name: 'GitBranch')
     GitConnectionId = Shapes::StringShape.new(name: 'GitConnectionId')
     GitMetadata = Shapes::StructureShape.new(name: 'GitMetadata')
+    GitPropertiesInput = Shapes::StructureShape.new(name: 'GitPropertiesInput')
+    GitPropertiesInputCodeConnectionArnString = Shapes::StringShape.new(name: 'GitPropertiesInputCodeConnectionArnString')
+    GitPropertiesInputDefaultBranchString = Shapes::StringShape.new(name: 'GitPropertiesInputDefaultBranchString')
+    GitPropertiesInputRepositoryIdString = Shapes::StringShape.new(name: 'GitPropertiesInputRepositoryIdString')
+    GitPropertiesOutput = Shapes::StructureShape.new(name: 'GitPropertiesOutput')
+    GitPropertiesOutputCodeConnectionArnString = Shapes::StringShape.new(name: 'GitPropertiesOutputCodeConnectionArnString')
+    GitPropertiesOutputDefaultBranchString = Shapes::StringShape.new(name: 'GitPropertiesOutputDefaultBranchString')
+    GitPropertiesOutputRepositoryIdString = Shapes::StringShape.new(name: 'GitPropertiesOutputRepositoryIdString')
+    GitPropertiesPatch = Shapes::StructureShape.new(name: 'GitPropertiesPatch')
+    GitPropertiesPatchCodeConnectionArnString = Shapes::StringShape.new(name: 'GitPropertiesPatchCodeConnectionArnString')
+    GitPropertiesPatchDefaultBranchString = Shapes::StringShape.new(name: 'GitPropertiesPatchDefaultBranchString')
     GitRepository = Shapes::StringShape.new(name: 'GitRepository')
     GlobalParameterMap = Shapes::MapShape.new(name: 'GlobalParameterMap')
     GlossaryDescription = Shapes::StringShape.new(name: 'GlossaryDescription')
@@ -1593,6 +1604,7 @@ module Aws::DataZone
     AssetScope.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
     AssetScope.add_member(:filter_ids, Shapes::ShapeRef.new(shape: FilterIds, required: true, location_name: "filterIds"))
     AssetScope.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "status"))
+    AssetScope.add_member(:scope_name, Shapes::ShapeRef.new(shape: String, location_name: "scopeName"))
     AssetScope.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
     AssetScope.struct_class = Types::AssetScope
 
@@ -1830,6 +1842,7 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member(:workflows_serverless_properties, Shapes::ShapeRef.new(shape: WorkflowsServerlessPropertiesInput, location_name: "workflowsServerlessProperties"))
     ConnectionPropertiesInput.add_member(:lakehouse_properties, Shapes::ShapeRef.new(shape: LakehousePropertiesInput, location_name: "lakehouseProperties"))
     ConnectionPropertiesInput.add_member(:vpc_properties, Shapes::ShapeRef.new(shape: VpcPropertiesInput, location_name: "vpcProperties"))
+    ConnectionPropertiesInput.add_member(:git_properties, Shapes::ShapeRef.new(shape: GitPropertiesInput, location_name: "gitProperties"))
     ConnectionPropertiesInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConnectionPropertiesInput.add_member_subclass(:athena_properties, Types::ConnectionPropertiesInput::AthenaProperties)
     ConnectionPropertiesInput.add_member_subclass(:glue_properties, Types::ConnectionPropertiesInput::GlueProperties)
@@ -1846,6 +1859,7 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member_subclass(:workflows_serverless_properties, Types::ConnectionPropertiesInput::WorkflowsServerlessProperties)
     ConnectionPropertiesInput.add_member_subclass(:lakehouse_properties, Types::ConnectionPropertiesInput::LakehouseProperties)
     ConnectionPropertiesInput.add_member_subclass(:vpc_properties, Types::ConnectionPropertiesInput::VpcProperties)
+    ConnectionPropertiesInput.add_member_subclass(:git_properties, Types::ConnectionPropertiesInput::GitProperties)
     ConnectionPropertiesInput.add_member_subclass(:unknown, Types::ConnectionPropertiesInput::Unknown)
     ConnectionPropertiesInput.struct_class = Types::ConnectionPropertiesInput
 
@@ -1864,6 +1878,7 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member(:workflows_serverless_properties, Shapes::ShapeRef.new(shape: WorkflowsServerlessPropertiesOutput, location_name: "workflowsServerlessProperties"))
     ConnectionPropertiesOutput.add_member(:lakehouse_properties, Shapes::ShapeRef.new(shape: LakehousePropertiesOutput, location_name: "lakehouseProperties"))
     ConnectionPropertiesOutput.add_member(:vpc_properties, Shapes::ShapeRef.new(shape: VpcPropertiesOutput, location_name: "vpcProperties"))
+    ConnectionPropertiesOutput.add_member(:git_properties, Shapes::ShapeRef.new(shape: GitPropertiesOutput, location_name: "gitProperties"))
     ConnectionPropertiesOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConnectionPropertiesOutput.add_member_subclass(:athena_properties, Types::ConnectionPropertiesOutput::AthenaProperties)
     ConnectionPropertiesOutput.add_member_subclass(:glue_properties, Types::ConnectionPropertiesOutput::GlueProperties)
@@ -1880,6 +1895,7 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member_subclass(:workflows_serverless_properties, Types::ConnectionPropertiesOutput::WorkflowsServerlessProperties)
     ConnectionPropertiesOutput.add_member_subclass(:lakehouse_properties, Types::ConnectionPropertiesOutput::LakehouseProperties)
     ConnectionPropertiesOutput.add_member_subclass(:vpc_properties, Types::ConnectionPropertiesOutput::VpcProperties)
+    ConnectionPropertiesOutput.add_member_subclass(:git_properties, Types::ConnectionPropertiesOutput::GitProperties)
     ConnectionPropertiesOutput.add_member_subclass(:unknown, Types::ConnectionPropertiesOutput::Unknown)
     ConnectionPropertiesOutput.struct_class = Types::ConnectionPropertiesOutput
 
@@ -1894,6 +1910,7 @@ module Aws::DataZone
     ConnectionPropertiesPatch.add_member(:mlflow_properties, Shapes::ShapeRef.new(shape: MlflowPropertiesPatch, location_name: "mlflowProperties"))
     ConnectionPropertiesPatch.add_member(:lakehouse_properties, Shapes::ShapeRef.new(shape: LakehousePropertiesPatch, location_name: "lakehouseProperties"))
     ConnectionPropertiesPatch.add_member(:vpc_properties, Shapes::ShapeRef.new(shape: VpcPropertiesPatch, location_name: "vpcProperties"))
+    ConnectionPropertiesPatch.add_member(:git_properties, Shapes::ShapeRef.new(shape: GitPropertiesPatch, location_name: "gitProperties"))
     ConnectionPropertiesPatch.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConnectionPropertiesPatch.add_member_subclass(:athena_properties, Types::ConnectionPropertiesPatch::AthenaProperties)
     ConnectionPropertiesPatch.add_member_subclass(:glue_properties, Types::ConnectionPropertiesPatch::GlueProperties)
@@ -1906,6 +1923,7 @@ module Aws::DataZone
     ConnectionPropertiesPatch.add_member_subclass(:mlflow_properties, Types::ConnectionPropertiesPatch::MlflowProperties)
     ConnectionPropertiesPatch.add_member_subclass(:lakehouse_properties, Types::ConnectionPropertiesPatch::LakehouseProperties)
     ConnectionPropertiesPatch.add_member_subclass(:vpc_properties, Types::ConnectionPropertiesPatch::VpcProperties)
+    ConnectionPropertiesPatch.add_member_subclass(:git_properties, Types::ConnectionPropertiesPatch::GitProperties)
     ConnectionPropertiesPatch.add_member_subclass(:unknown, Types::ConnectionPropertiesPatch::Unknown)
     ConnectionPropertiesPatch.struct_class = Types::ConnectionPropertiesPatch
 
@@ -4093,6 +4111,22 @@ module Aws::DataZone
     GitMetadata.add_member(:committed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "committedAt"))
     GitMetadata.add_member(:commit_message, Shapes::ShapeRef.new(shape: CommitMessage, location_name: "commitMessage"))
     GitMetadata.struct_class = Types::GitMetadata
+
+    GitPropertiesInput.add_member(:code_connection_arn, Shapes::ShapeRef.new(shape: GitPropertiesInputCodeConnectionArnString, required: true, location_name: "codeConnectionArn"))
+    GitPropertiesInput.add_member(:repository_id, Shapes::ShapeRef.new(shape: GitPropertiesInputRepositoryIdString, required: true, location_name: "repositoryId"))
+    GitPropertiesInput.add_member(:default_branch, Shapes::ShapeRef.new(shape: GitPropertiesInputDefaultBranchString, required: true, location_name: "defaultBranch"))
+    GitPropertiesInput.struct_class = Types::GitPropertiesInput
+
+    GitPropertiesOutput.add_member(:code_connection_arn, Shapes::ShapeRef.new(shape: GitPropertiesOutputCodeConnectionArnString, required: true, location_name: "codeConnectionArn"))
+    GitPropertiesOutput.add_member(:repository_id, Shapes::ShapeRef.new(shape: GitPropertiesOutputRepositoryIdString, required: true, location_name: "repositoryId"))
+    GitPropertiesOutput.add_member(:default_branch, Shapes::ShapeRef.new(shape: GitPropertiesOutputDefaultBranchString, required: true, location_name: "defaultBranch"))
+    GitPropertiesOutput.add_member(:status, Shapes::ShapeRef.new(shape: ConnectionStatus, location_name: "status"))
+    GitPropertiesOutput.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    GitPropertiesOutput.struct_class = Types::GitPropertiesOutput
+
+    GitPropertiesPatch.add_member(:code_connection_arn, Shapes::ShapeRef.new(shape: GitPropertiesPatchCodeConnectionArnString, location_name: "codeConnectionArn"))
+    GitPropertiesPatch.add_member(:default_branch, Shapes::ShapeRef.new(shape: GitPropertiesPatchDefaultBranchString, location_name: "defaultBranch"))
+    GitPropertiesPatch.struct_class = Types::GitPropertiesPatch
 
     GlobalParameterMap.key = Shapes::ShapeRef.new(shape: String)
     GlobalParameterMap.value = Shapes::ShapeRef.new(shape: String)

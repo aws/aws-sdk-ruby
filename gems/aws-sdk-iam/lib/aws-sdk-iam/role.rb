@@ -143,6 +143,18 @@ module Aws::IAM
       data[:role_last_used]
     end
 
+    # Contains information about the role template that this role was
+    # created from. This member is present only for roles created with
+    # [AcquireRole][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+    # @return [Types::SourceRoleTemplate]
+    def source_role_template
+      data[:source_role_template]
+    end
+
     # @!endgroup
 
     # @return [Client]

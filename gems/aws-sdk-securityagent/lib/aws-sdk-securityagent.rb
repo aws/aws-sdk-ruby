@@ -55,7 +55,7 @@ module Aws::SecurityAgent
   autoload :EndpointProvider, 'aws-sdk-securityagent/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-securityagent/endpoints'
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.12.0'
 
 end
 

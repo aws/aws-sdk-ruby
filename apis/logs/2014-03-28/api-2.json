@@ -2245,14 +2245,12 @@
     },
     "CreateLookupTableRequest":{
       "type":"structure",
-      "required":[
-        "lookupTableName",
-        "tableBody"
-      ],
+      "required":["lookupTableName"],
       "members":{
         "lookupTableName":{"shape":"LookupTableName"},
         "description":{"shape":"LookupTableDescription"},
         "tableBody":{"shape":"TableBody"},
+        "queryId":{"shape":"QueryId"},
         "kmsKeyId":{"shape":"KmsKeyId"},
         "tags":{"shape":"Tags"}
       }
@@ -2857,6 +2855,7 @@
       "required":["logGroupIdentifiers"],
       "members":{
         "logGroupIdentifiers":{"shape":"DescribeFieldIndexesLogGroupIdentifiers"},
+        "indexCategories":{"shape":"IndexCategories"},
         "nextToken":{"shape":"NextToken"}
       }
     },
@@ -3103,9 +3102,9 @@
     },
     "DestinationConfiguration":{
       "type":"structure",
-      "required":["s3Configuration"],
       "members":{
-        "s3Configuration":{"shape":"S3Configuration"}
+        "s3Configuration":{"shape":"S3Configuration"},
+        "lookupTableConfiguration":{"shape":"LookupTableConfiguration"}
       }
     },
     "DestinationField":{
@@ -3384,7 +3383,8 @@
         "lastScanTime":{"shape":"Timestamp"},
         "firstEventTime":{"shape":"Timestamp"},
         "lastEventTime":{"shape":"Timestamp"},
-        "type":{"shape":"IndexType"}
+        "type":{"shape":"IndexType"},
+        "indexCategory":{"shape":"IndexCategory"}
       }
     },
     "FieldIndexName":{
@@ -3914,6 +3914,20 @@
       "member":{"shape":"ImportStatus"}
     },
     "IncludeLinkedAccounts":{"type":"boolean"},
+    "IndexCategories":{
+      "type":"list",
+      "member":{"shape":"IndexCategory"},
+      "max":4
+    },
+    "IndexCategory":{
+      "type":"string",
+      "enum":[
+        "DEFAULT",
+        "CUSTOM",
+        "AUTO",
+        "INACTIVE"
+      ]
+    },
     "IndexPolicies":{
       "type":"list",
       "member":{"shape":"IndexPolicy"}
@@ -4562,6 +4576,20 @@
         "sizeBytes":{"shape":"StoredBytes"},
         "lastUpdatedTime":{"shape":"Timestamp"},
         "kmsKeyId":{"shape":"KmsKeyId"}
+      }
+    },
+    "LookupTableConfiguration":{
+      "type":"structure",
+      "required":[
+        "tableName",
+        "roleArn"
+      ],
+      "members":{
+        "tableName":{"shape":"LookupTableName"},
+        "roleArn":{"shape":"RoleArn"},
+        "description":{"shape":"LookupTableDescription"},
+        "kmsKeyId":{"shape":"KmsKeyId"},
+        "tags":{"shape":"Tags"}
       }
     },
     "LookupTableDescription":{
@@ -5789,7 +5817,10 @@
     },
     "ScheduledQueryDestinationType":{
       "type":"string",
-      "enum":["S3"]
+      "enum":[
+        "S3",
+        "LOOKUP_TABLE"
+      ]
     },
     "ScheduledQueryIdentifier":{
       "type":"string",
@@ -6477,14 +6508,12 @@
     },
     "UpdateLookupTableRequest":{
       "type":"structure",
-      "required":[
-        "lookupTableArn",
-        "tableBody"
-      ],
+      "required":["lookupTableArn"],
       "members":{
         "lookupTableArn":{"shape":"Arn"},
         "description":{"shape":"LookupTableDescription"},
         "tableBody":{"shape":"TableBody"},
+        "queryId":{"shape":"QueryId"},
         "kmsKeyId":{"shape":"KmsKeyId"}
       }
     },

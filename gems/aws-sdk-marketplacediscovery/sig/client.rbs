@@ -112,14 +112,14 @@ module Aws
         def offer_id: () -> ::String
         def catalog: () -> ::String
         def offer_name: () -> ::String
-        def agreement_proposal_id: () -> ::String
         def expiration_time: () -> ::Time
         def available_from_time: () -> ::Time
         def seller_of_record: () -> Types::SellerInformation
+        def associated_entities: () -> ::Array[Types::OfferAssociatedEntity]
+        def agreement_proposal_id: () -> ::String
         def replacement_agreement_id: () -> ::String
         def pricing_model: () -> Types::PricingModel
         def badges: () -> ::Array[Types::PurchaseOptionBadge]
-        def associated_entities: () -> ::Array[Types::OfferAssociatedEntity]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#get_offer-instance_method
       def get_offer: (
@@ -163,10 +163,10 @@ module Aws
         def product_id: () -> ::String
         def catalog: () -> ::String
         def product_name: () -> ::String
+        def manufacturer: () -> Types::SellerInformation
         def deployed_on_aws: () -> ("DEPLOYED" | "NOT_DEPLOYED" | "NOT_APPLICABLE")
         def short_description: () -> ::String
         def long_description: () -> ::String
-        def manufacturer: () -> Types::SellerInformation
         def logo_thumbnail_url: () -> ::String
         def fulfillment_option_summaries: () -> ::Array[Types::FulfillmentOptionSummary]
         def categories: () -> ::Array[Types::Category]

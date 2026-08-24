@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2026-08-12)
+------------------
+
+* Feature - Adds support for Oracle Exadata on Exascale Infrastructure (ExaDB-XS) resources including storage vaults and VM clusters.
+
 1.26.0 (2026-07-24)
 ------------------
 

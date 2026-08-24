@@ -365,6 +365,7 @@ module Aws::Deadline
     JobDetailsEntity = Shapes::StructureShape.new(name: 'JobDetailsEntity')
     JobDetailsError = Shapes::StructureShape.new(name: 'JobDetailsError')
     JobDetailsIdentifiers = Shapes::StructureShape.new(name: 'JobDetailsIdentifiers')
+    JobDetailsJobAttachmentSettings = Shapes::StructureShape.new(name: 'JobDetailsJobAttachmentSettings')
     JobEntity = Shapes::UnionShape.new(name: 'JobEntity')
     JobEntityErrorCode = Shapes::StringShape.new(name: 'JobEntityErrorCode')
     JobEntityIdentifiers = Shapes::ListShape.new(name: 'JobEntityIdentifiers')
@@ -2225,7 +2226,7 @@ module Aws::Deadline
     JobAttachmentSettings.struct_class = Types::JobAttachmentSettings
 
     JobDetailsEntity.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
-    JobDetailsEntity.add_member(:job_attachment_settings, Shapes::ShapeRef.new(shape: JobAttachmentSettings, location_name: "jobAttachmentSettings"))
+    JobDetailsEntity.add_member(:job_attachment_settings, Shapes::ShapeRef.new(shape: JobDetailsJobAttachmentSettings, location_name: "jobAttachmentSettings"))
     JobDetailsEntity.add_member(:job_run_as_user, Shapes::ShapeRef.new(shape: JobRunAsUser, location_name: "jobRunAsUser"))
     JobDetailsEntity.add_member(:log_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "logGroupName"))
     JobDetailsEntity.add_member(:queue_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "queueRoleArn"))
@@ -2241,6 +2242,10 @@ module Aws::Deadline
 
     JobDetailsIdentifiers.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
     JobDetailsIdentifiers.struct_class = Types::JobDetailsIdentifiers
+
+    JobDetailsJobAttachmentSettings.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "s3BucketName"))
+    JobDetailsJobAttachmentSettings.add_member(:root_prefix, Shapes::ShapeRef.new(shape: S3Prefix, required: true, location_name: "rootPrefix"))
+    JobDetailsJobAttachmentSettings.struct_class = Types::JobDetailsJobAttachmentSettings
 
     JobEntity.add_member(:job_details, Shapes::ShapeRef.new(shape: JobDetailsEntity, location_name: "jobDetails"))
     JobEntity.add_member(:job_attachment_details, Shapes::ShapeRef.new(shape: JobAttachmentDetailsEntity, location_name: "jobAttachmentDetails"))

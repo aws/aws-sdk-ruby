@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2026-08-12)
+------------------
+
+* Feature - Introduced role manager, an IAM capability that automatically sets up the IAM roles your AWS services need. When you set up a supported service in the console, role manager creates a role for you or reuses an existing one from an AWS-managed template.
+
+1.151.0 (2026-08-04)
+------------------
+
+* Feature - Updating endpoint generation logic
+
+1.150.0 (2026-07-30)
+------------------
+
+* Feature - Improved IAM Policy Simulator accuracy. Simulator now evaluates SCP conditions and resource scoping, returns explicitDeny for explicit SCP denials, and reports accurate cross-account decisions.
+
 1.149.0 (2026-07-09)
 ------------------
 

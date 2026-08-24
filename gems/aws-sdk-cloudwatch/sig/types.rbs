@@ -706,6 +706,7 @@ module Aws::CloudWatch
       attr_accessor evaluation_state: ("PARTIAL_DATA" | "EVALUATION_FAILURE" | "EVALUATION_ERROR")
       attr_accessor action_log_line_count: ::Integer
       attr_accessor action_log_line_role_arn: ::String
+      attr_accessor warm_up_configuration: Types::WarmUpConfiguration
       SENSITIVE: []
     end
 
@@ -773,6 +774,7 @@ module Aws::CloudWatch
       attr_accessor evaluation_state: ("PARTIAL_DATA" | "EVALUATION_FAILURE" | "EVALUATION_ERROR")
       attr_accessor state_transitioned_timestamp: ::Time
       attr_accessor evaluation_window: Types::EvaluationWindow
+      attr_accessor warm_up_configuration: Types::WarmUpConfiguration
       attr_accessor evaluation_criteria: Types::EvaluationCriteria
       attr_accessor evaluation_interval: ::Integer
       SENSITIVE: []
@@ -960,6 +962,7 @@ module Aws::CloudWatch
       attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold" | "LessThanLowerOrGreaterThanUpperThreshold" | "LessThanLowerThreshold" | "GreaterThanUpperThreshold")
       attr_accessor treat_missing_data: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor warm_up_configuration: Types::WarmUpConfiguration
       SENSITIVE: []
     end
 
@@ -997,6 +1000,7 @@ module Aws::CloudWatch
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor threshold_metric_id: ::String
       attr_accessor evaluation_window: Types::EvaluationWindow
+      attr_accessor warm_up_configuration: Types::WarmUpConfiguration
       attr_accessor evaluation_criteria: Types::EvaluationCriteria
       attr_accessor evaluation_interval: ::Integer
       SENSITIVE: []
@@ -1162,6 +1166,12 @@ module Aws::CloudWatch
 
     class WallClockWindow
       attr_accessor timezone: ::String
+      SENSITIVE: []
+    end
+
+    class WarmUpConfiguration
+      attr_accessor warm_up_period_duration_in_minutes: ::Integer
+      attr_accessor only_start_evaluating_after_warm_up_period_ends: bool
       SENSITIVE: []
     end
   end

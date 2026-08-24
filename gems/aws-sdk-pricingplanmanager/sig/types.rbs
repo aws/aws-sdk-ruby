@@ -1,0 +1,206 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PricingPlanManager
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApprovePaidSubscriptionInput
+      attr_accessor arn: ::String
+      attr_accessor if_match: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ApprovePaidSubscriptionOutput
+      attr_accessor subscription: Types::Subscription
+      attr_accessor e_tag: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateResourcesToSubscriptionInput
+      attr_accessor arn: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor if_match: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateResourcesToSubscriptionOutput
+      attr_accessor subscription: Types::Subscription
+      attr_accessor e_tag: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSubscriptionChangeInput
+      attr_accessor arn: ::String
+      attr_accessor if_match: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSubscriptionChangeOutput
+      attr_accessor subscription: Types::Subscription
+      attr_accessor e_tag: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSubscriptionInput
+      attr_accessor arn: ::String
+      attr_accessor if_match: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSubscriptionOutput
+      attr_accessor subscription: Types::Subscription
+      attr_accessor e_tag: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionInput
+      attr_accessor plan_family: ::String
+      attr_accessor plan_tier: ::String
+      attr_accessor usage_level: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor approval_mode: ("MANUAL" | "IMMEDIATE")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionOutput
+      attr_accessor subscription: Types::Subscription
+      attr_accessor e_tag: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourcesFromSubscriptionInput
+      attr_accessor arn: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor if_match: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourcesFromSubscriptionOutput
+      attr_accessor subscription: Types::Subscription
+      attr_accessor e_tag: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionOutput
+      attr_accessor subscription: Types::Subscription
+      attr_accessor e_tag: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionsInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionsOutput
+      attr_accessor subscription_summaries: ::Array[Types::SubscriptionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduledChange
+      attr_accessor change_type: ("DOWNGRADE" | "CANCELLATION")
+      attr_accessor effective_date: ::Time
+      attr_accessor plan_tier: ::String
+      attr_accessor usage_level: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Subscription
+      attr_accessor arn: ::String
+      attr_accessor plan_family: ::String
+      attr_accessor plan_tier: ::String
+      attr_accessor usage_level: ::String
+      attr_accessor scheduled_change: Types::ScheduledChange
+      attr_accessor status: ("PENDING_APPROVAL" | "ACTIVE" | "SYNC_IN_PROGRESS" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SubscriptionSummary
+      attr_accessor arn: ::String
+      attr_accessor plan_family: ::String
+      attr_accessor plan_tier: ::String
+      attr_accessor usage_level: ::String
+      attr_accessor scheduled_change: Types::ScheduledChange
+      attr_accessor status: ("PENDING_APPROVAL" | "ACTIVE" | "SYNC_IN_PROGRESS" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor e_tag: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriptionInput
+      attr_accessor arn: ::String
+      attr_accessor plan_tier: ::String
+      attr_accessor usage_level: ::String
+      attr_accessor if_match: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriptionOutput
+      attr_accessor subscription: Types::Subscription
+      attr_accessor e_tag: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

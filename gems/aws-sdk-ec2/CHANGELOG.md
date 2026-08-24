@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.638.0 (2026-08-20)
+------------------
+
+* Feature - EC2 marks UEFI instance metadata field as sensitive.
+
+1.637.0 (2026-08-18)
+------------------
+
+* Feature - Doc release for CreateImage support for instances with local snapshots in Outpost
+
+1.636.0 (2026-08-07)
+------------------
+
+* Feature - This release adds support for BGP route protection in Amazon VPC IP Address Manager (IPAM), including route discovery, RPKI route protection findings, and delegated RPKI (Internet Registry Associations, routing policy registrations, and ROA management) for BYOIP prefixes.
+
+1.635.0 (2026-08-06)
+------------------
+
+* Feature - Adds a new optional IncludeLocalZones parameter to the Spot Placement Score API that defaults to false. When set to true, the Spot Placement Score API will consider the relevant Local Zones with Spot capacity when computing the Spot Placement Score.
+
+1.634.0 (2026-08-04)
+------------------
+
+* Feature - Amazon EC2 now supports Application Status Checks, a new status check that monitors your application's health through configurable HTTP(S) paths and ports, so you can detect and automatically respond to application-level impairments.
+
 1.633.0 (2026-07-29)
 ------------------
 

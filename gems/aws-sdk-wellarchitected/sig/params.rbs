@@ -1,0 +1,32 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WellArchitected
+    module Params
+      type context_content = {
+      account_ids: Array[::String]?,
+      regions: Array[::String]?,
+      aws_services: Array[::String]?,
+      resource_types: Array[::String]?,
+      resource_tags: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?,
+      application_overview: ::String?,
+      industry: ::String?,
+      application_type: ("SAS" | "DESKTOP_APPLICATION" | "OTHER")?,
+      criticality: ("MISSION_CRITICAL" | "BUSINESS_CRITICAL" | "NON_CRITICAL" | "TEST_DEVELOPMENT")?,
+      architecture_overview: ::String?,
+      additional_context: ::String?
+    }
+
+    end
+  end
+end

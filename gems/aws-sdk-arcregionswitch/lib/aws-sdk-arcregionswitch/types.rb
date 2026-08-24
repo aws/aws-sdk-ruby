@@ -972,6 +972,10 @@ module Aws::ARCRegionswitch
     #   A Neptune global database execution block.
     #   @return [Types::NeptuneGlobalDatabaseConfiguration]
     #
+    # @!attribute [rw] rds_switchover_read_replica_config
+    #   An Amazon RDS switchover read replica execution block.
+    #   @return [Types::RdsSwitchoverReadReplicaConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ExecutionBlockConfiguration AWS API Documentation
     #
     class ExecutionBlockConfiguration < Struct.new(
@@ -992,6 +996,7 @@ module Aws::ARCRegionswitch
       :aurora_serverless_scaling_config,
       :aurora_provisioned_scaling_config,
       :neptune_global_database_config,
+      :rds_switchover_read_replica_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1014,6 +1019,7 @@ module Aws::ARCRegionswitch
       class AuroraServerlessScalingConfig < ExecutionBlockConfiguration; end
       class AuroraProvisionedScalingConfig < ExecutionBlockConfiguration; end
       class NeptuneGlobalDatabaseConfig < ExecutionBlockConfiguration; end
+      class RdsSwitchoverReadReplicaConfig < ExecutionBlockConfiguration; end
       class Unknown < ExecutionBlockConfiguration; end
     end
 
@@ -2176,6 +2182,57 @@ module Aws::ARCRegionswitch
       :cross_account_role,
       :external_id,
       :db_instance_arn_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for switching over an Amazon RDS read replica to become
+    # the new primary database instance during a Region switch.
+    #
+    # @!attribute [rw] timeout_minutes
+    #   The timeout value specified for the configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cross_account_role
+    #   The cross-account role for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID (secret key) for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_arn_map
+    #   A map of database instance ARNs for each Region in the plan.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] ungraceful
+    #   The ungraceful execution settings for the configuration.
+    #   @return [Types::RdsUngraceful]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/RdsSwitchoverReadReplicaConfiguration AWS API Documentation
+    #
+    class RdsSwitchoverReadReplicaConfiguration < Struct.new(
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :db_instance_arn_map,
+      :ungraceful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The ungraceful execution settings for an Amazon RDS switchover read
+    # replica execution block.
+    #
+    # @!attribute [rw] ungraceful
+    #   The ungraceful behavior to perform if switching to ungraceful
+    #   execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/RdsUngraceful AWS API Documentation
+    #
+    class RdsUngraceful < Struct.new(
+      :ungraceful)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -86,6 +86,8 @@ module Aws::PrometheusService
     DescribeWorkspaceResponse = Shapes::StructureShape.new(name: 'DescribeWorkspaceResponse')
     Destination = Shapes::UnionShape.new(name: 'Destination')
     EksConfiguration = Shapes::StructureShape.new(name: 'EksConfiguration')
+    ExporterConfiguration = Shapes::UnionShape.new(name: 'ExporterConfiguration')
+    ExporterList = Shapes::ListShape.new(name: 'ExporterList')
     FilterKey = Shapes::StringShape.new(name: 'FilterKey')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
@@ -128,6 +130,8 @@ module Aws::PrometheusService
     LoggingDestinations = Shapes::ListShape.new(name: 'LoggingDestinations')
     LoggingFilter = Shapes::StructureShape.new(name: 'LoggingFilter')
     LoggingFilterQspThresholdLong = Shapes::IntegerShape.new(name: 'LoggingFilterQspThresholdLong')
+    OpenSearchDomainArn = Shapes::StringShape.new(name: 'OpenSearchDomainArn')
+    OpenSearchExporterConfiguration = Shapes::StructureShape.new(name: 'OpenSearchExporterConfiguration')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PrometheusMetricLabelKey = Shapes::StringShape.new(name: 'PrometheusMetricLabelKey')
     PrometheusMetricLabelMap = Shapes::MapShape.new(name: 'PrometheusMetricLabelMap')
@@ -363,6 +367,7 @@ module Aws::PrometheusService
     CreateScraperRequest.add_member(:role_configuration, Shapes::ShapeRef.new(shape: RoleConfiguration, location_name: "roleConfiguration"))
     CreateScraperRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateScraperRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateScraperRequest.add_member(:exporters, Shapes::ShapeRef.new(shape: ExporterList, location_name: "exporters"))
     CreateScraperRequest.struct_class = Types::CreateScraperRequest
 
     CreateScraperResponse.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location_name: "scraperId"))
@@ -508,6 +513,14 @@ module Aws::PrometheusService
     EksConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "subnetIds"))
     EksConfiguration.struct_class = Types::EksConfiguration
 
+    ExporterConfiguration.add_member(:open_search_configuration, Shapes::ShapeRef.new(shape: OpenSearchExporterConfiguration, location_name: "openSearchConfiguration"))
+    ExporterConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ExporterConfiguration.add_member_subclass(:open_search_configuration, Types::ExporterConfiguration::OpenSearchConfiguration)
+    ExporterConfiguration.add_member_subclass(:unknown, Types::ExporterConfiguration::Unknown)
+    ExporterConfiguration.struct_class = Types::ExporterConfiguration
+
+    ExporterList.member = Shapes::ShapeRef.new(shape: ExporterConfiguration)
+
     FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
 
     GetDefaultScraperConfigurationRequest.struct_class = Types::GetDefaultScraperConfigurationRequest
@@ -602,6 +615,9 @@ module Aws::PrometheusService
 
     LoggingFilter.add_member(:qsp_threshold, Shapes::ShapeRef.new(shape: LoggingFilterQspThresholdLong, required: true, location_name: "qspThreshold"))
     LoggingFilter.struct_class = Types::LoggingFilter
+
+    OpenSearchExporterConfiguration.add_member(:domain_arn, Shapes::ShapeRef.new(shape: OpenSearchDomainArn, required: true, location_name: "domainArn"))
+    OpenSearchExporterConfiguration.struct_class = Types::OpenSearchExporterConfiguration
 
     PrometheusMetricLabelMap.key = Shapes::ShapeRef.new(shape: PrometheusMetricLabelKey)
     PrometheusMetricLabelMap.value = Shapes::ShapeRef.new(shape: PrometheusMetricLabelValue)
@@ -726,6 +742,7 @@ module Aws::PrometheusService
     ScraperDescription.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
     ScraperDescription.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "destination"))
     ScraperDescription.add_member(:role_configuration, Shapes::ShapeRef.new(shape: RoleConfiguration, location_name: "roleConfiguration"))
+    ScraperDescription.add_member(:exporters, Shapes::ShapeRef.new(shape: ExporterList, location_name: "exporters"))
     ScraperDescription.struct_class = Types::ScraperDescription
 
     ScraperFilters.key = Shapes::ShapeRef.new(shape: FilterKey)
@@ -756,6 +773,7 @@ module Aws::PrometheusService
     ScraperSummary.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
     ScraperSummary.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "destination"))
     ScraperSummary.add_member(:role_configuration, Shapes::ShapeRef.new(shape: RoleConfiguration, location_name: "roleConfiguration"))
+    ScraperSummary.add_member(:exporters, Shapes::ShapeRef.new(shape: ExporterList, location_name: "exporters"))
     ScraperSummary.struct_class = Types::ScraperSummary
 
     ScraperSummaryList.member = Shapes::ShapeRef.new(shape: ScraperSummary)
@@ -835,6 +853,7 @@ module Aws::PrometheusService
     UpdateScraperRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, location_name: "destination"))
     UpdateScraperRequest.add_member(:role_configuration, Shapes::ShapeRef.new(shape: RoleConfiguration, location_name: "roleConfiguration"))
     UpdateScraperRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateScraperRequest.add_member(:exporters, Shapes::ShapeRef.new(shape: ExporterList, location_name: "exporters"))
     UpdateScraperRequest.struct_class = Types::UpdateScraperRequest
 
     UpdateScraperResponse.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location_name: "scraperId"))

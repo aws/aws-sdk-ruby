@@ -611,6 +611,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #   * {Types::Connection#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #   * {Types::Connection#partner_interconnect_mac_sec_capable #partner_interconnect_mac_sec_capable} => Boolean
+    #   * {Types::Connection#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -657,6 +661,10 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
     #   resp.partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect AWS API Documentation
     #
@@ -729,6 +737,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #   * {Types::Connection#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #   * {Types::Connection#partner_interconnect_mac_sec_capable #partner_interconnect_mac_sec_capable} => Boolean
+    #   * {Types::Connection#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -781,6 +793,10 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
     #   resp.partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection AWS API Documentation
     #
@@ -839,6 +855,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_4 #prefix_pool_allocated_count_ipv_4} => Integer
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_6 #prefix_pool_allocated_count_ipv_6} => Integer
     #   * {Types::VirtualInterface#rate_limit #rate_limit} => String
     #
     # @example Request syntax with placeholder values
@@ -909,6 +927,8 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.site_link_enabled #=> Boolean
+    #   resp.prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.rate_limit #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterface AWS API Documentation
@@ -977,6 +997,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_4 #prefix_pool_allocated_count_ipv_4} => Integer
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_6 #prefix_pool_allocated_count_ipv_6} => Integer
     #   * {Types::VirtualInterface#rate_limit #rate_limit} => String
     #
     # @example Request syntax with placeholder values
@@ -1051,6 +1073,8 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.site_link_enabled #=> Boolean
+    #   resp.prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.rate_limit #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterface AWS API Documentation
@@ -1157,6 +1181,8 @@ module Aws::DirectConnect
     #   resp.virtual_interface.tags[0].key #=> String
     #   resp.virtual_interface.tags[0].value #=> String
     #   resp.virtual_interface.site_link_enabled #=> Boolean
+    #   resp.virtual_interface.prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.virtual_interface.prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.virtual_interface.rate_limit #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateTransitVirtualInterface AWS API Documentation
@@ -1220,6 +1246,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #   * {Types::Connection#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #   * {Types::Connection#partner_interconnect_mac_sec_capable #partner_interconnect_mac_sec_capable} => Boolean
+    #   * {Types::Connection#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1263,6 +1293,10 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
     #   resp.partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag AWS API Documentation
     #
@@ -1316,6 +1350,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #   * {Types::Connection#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #   * {Types::Connection#partner_interconnect_mac_sec_capable #partner_interconnect_mac_sec_capable} => Boolean
+    #   * {Types::Connection#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1359,6 +1397,10 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
     #   resp.partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection AWS API Documentation
     #
@@ -1505,6 +1547,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_4 #prefix_pool_allocated_count_ipv_4} => Integer
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_6 #prefix_pool_allocated_count_ipv_6} => Integer
     #   * {Types::VirtualInterface#rate_limit #rate_limit} => String
     #
     # @example Request syntax with placeholder values
@@ -1557,6 +1601,8 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.site_link_enabled #=> Boolean
+    #   resp.prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.rate_limit #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterface AWS API Documentation
@@ -1838,6 +1884,8 @@ module Aws::DirectConnect
     #   resp.virtual_interface.tags[0].key #=> String
     #   resp.virtual_interface.tags[0].value #=> String
     #   resp.virtual_interface.site_link_enabled #=> Boolean
+    #   resp.virtual_interface.prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.virtual_interface.prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.virtual_interface.rate_limit #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer AWS API Documentation
@@ -1921,6 +1969,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #   * {Types::Connection#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #   * {Types::Connection#partner_interconnect_mac_sec_capable #partner_interconnect_mac_sec_capable} => Boolean
+    #   * {Types::Connection#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1974,6 +2026,10 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
     #   resp.partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection AWS API Documentation
     #
@@ -2031,6 +2087,7 @@ module Aws::DirectConnect
     #   resp.direct_connect_gateway.owner_account #=> String
     #   resp.direct_connect_gateway.direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.direct_connect_gateway.state_change_error #=> String
+    #   resp.direct_connect_gateway.total_prefix_pool_allocations #=> Integer
     #   resp.direct_connect_gateway.tags #=> Array
     #   resp.direct_connect_gateway.tags[0].key #=> String
     #   resp.direct_connect_gateway.tags[0].value #=> String
@@ -2403,6 +2460,10 @@ module Aws::DirectConnect
     #   * {Types::Lag#mac_sec_capable #mac_sec_capable} => Boolean
     #   * {Types::Lag#encryption_mode #encryption_mode} => String
     #   * {Types::Lag#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
+    #   * {Types::Lag#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Lag#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Lag#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Lag#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #   * {Types::Lag#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #
     # @example Request syntax with placeholder values
@@ -2477,6 +2538,10 @@ module Aws::DirectConnect
     #   resp.connections[0].rate_limiter_status.remaining #=> Integer
     #   resp.connections[0].rate_limiter_status.total_bandwidth #=> String
     #   resp.connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.connections[0].prefix_pool_size_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -2491,6 +2556,10 @@ module Aws::DirectConnect
     #   resp.mac_sec_keys[0].ckn #=> String
     #   resp.mac_sec_keys[0].state #=> String
     #   resp.mac_sec_keys[0].start_on #=> String
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.rate_limiter_status.max_allowed #=> Integer
     #   resp.rate_limiter_status.in_use #=> Integer
     #   resp.rate_limiter_status.remaining #=> Integer
@@ -2558,6 +2627,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_4 #prefix_pool_allocated_count_ipv_4} => Integer
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_6 #prefix_pool_allocated_count_ipv_6} => Integer
     #   * {Types::VirtualInterface#rate_limit #rate_limit} => String
     #
     # @example Request syntax with placeholder values
@@ -2583,6 +2654,8 @@ module Aws::DirectConnect
     #         },
     #       ],
     #       enable_site_link: false,
+    #       prefix_pool_allocated_count_ipv_4: 1,
+    #       prefix_pool_allocated_count_ipv_6: 1,
     #       rate_limit: "RateLimit",
     #     },
     #   })
@@ -2630,6 +2703,8 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.site_link_enabled #=> Boolean
+    #   resp.prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.rate_limit #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterface AWS API Documentation
@@ -2685,6 +2760,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_4 #prefix_pool_allocated_count_ipv_4} => Integer
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_6 #prefix_pool_allocated_count_ipv_6} => Integer
     #   * {Types::VirtualInterface#rate_limit #rate_limit} => String
     #
     # @example Request syntax with placeholder values
@@ -2758,6 +2835,8 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.site_link_enabled #=> Boolean
+    #   resp.prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.rate_limit #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterface AWS API Documentation
@@ -2823,6 +2902,8 @@ module Aws::DirectConnect
     #         },
     #       ],
     #       enable_site_link: false,
+    #       prefix_pool_allocated_count_ipv_4: 1,
+    #       prefix_pool_allocated_count_ipv_6: 1,
     #       rate_limit: "RateLimit",
     #     },
     #   })
@@ -2870,6 +2951,8 @@ module Aws::DirectConnect
     #   resp.virtual_interface.tags[0].key #=> String
     #   resp.virtual_interface.tags[0].value #=> String
     #   resp.virtual_interface.site_link_enabled #=> Boolean
+    #   resp.virtual_interface.prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.virtual_interface.prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.virtual_interface.rate_limit #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateTransitVirtualInterface AWS API Documentation
@@ -2993,6 +3076,8 @@ module Aws::DirectConnect
     #   resp.virtual_interface.tags[0].key #=> String
     #   resp.virtual_interface.tags[0].value #=> String
     #   resp.virtual_interface.site_link_enabled #=> Boolean
+    #   resp.virtual_interface.prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.virtual_interface.prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.virtual_interface.rate_limit #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeer AWS API Documentation
@@ -3040,6 +3125,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #   * {Types::Connection#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #   * {Types::Connection#partner_interconnect_mac_sec_capable #partner_interconnect_mac_sec_capable} => Boolean
+    #   * {Types::Connection#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -3082,6 +3171,10 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
     #   resp.partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection AWS API Documentation
     #
@@ -3118,6 +3211,7 @@ module Aws::DirectConnect
     #   resp.direct_connect_gateway.owner_account #=> String
     #   resp.direct_connect_gateway.direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.direct_connect_gateway.state_change_error #=> String
+    #   resp.direct_connect_gateway.total_prefix_pool_allocations #=> Integer
     #   resp.direct_connect_gateway.tags #=> Array
     #   resp.direct_connect_gateway.tags[0].key #=> String
     #   resp.direct_connect_gateway.tags[0].value #=> String
@@ -3290,6 +3384,10 @@ module Aws::DirectConnect
     #   * {Types::Lag#mac_sec_capable #mac_sec_capable} => Boolean
     #   * {Types::Lag#encryption_mode #encryption_mode} => String
     #   * {Types::Lag#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
+    #   * {Types::Lag#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Lag#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Lag#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Lag#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #   * {Types::Lag#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #
     # @example Request syntax with placeholder values
@@ -3346,6 +3444,10 @@ module Aws::DirectConnect
     #   resp.connections[0].rate_limiter_status.remaining #=> Integer
     #   resp.connections[0].rate_limiter_status.total_bandwidth #=> String
     #   resp.connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.connections[0].prefix_pool_size_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -3360,6 +3462,10 @@ module Aws::DirectConnect
     #   resp.mac_sec_keys[0].ckn #=> String
     #   resp.mac_sec_keys[0].state #=> String
     #   resp.mac_sec_keys[0].start_on #=> String
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.rate_limiter_status.max_allowed #=> Integer
     #   resp.rate_limiter_status.in_use #=> Integer
     #   resp.rate_limiter_status.remaining #=> Integer
@@ -3523,6 +3629,10 @@ module Aws::DirectConnect
     #   resp.connections[0].rate_limiter_status.remaining #=> Integer
     #   resp.connections[0].rate_limiter_status.total_bandwidth #=> String
     #   resp.connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.connections[0].prefix_pool_size_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
@@ -3595,6 +3705,10 @@ module Aws::DirectConnect
     #   resp.connections[0].rate_limiter_status.remaining #=> Integer
     #   resp.connections[0].rate_limiter_status.total_bandwidth #=> String
     #   resp.connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.connections[0].prefix_pool_size_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
@@ -3903,6 +4017,7 @@ module Aws::DirectConnect
     #   resp.direct_connect_gateways[0].owner_account #=> String
     #   resp.direct_connect_gateways[0].direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.direct_connect_gateways[0].state_change_error #=> String
+    #   resp.direct_connect_gateways[0].total_prefix_pool_allocations #=> Integer
     #   resp.direct_connect_gateways[0].tags #=> Array
     #   resp.direct_connect_gateways[0].tags[0].key #=> String
     #   resp.direct_connect_gateways[0].tags[0].value #=> String
@@ -3987,6 +4102,10 @@ module Aws::DirectConnect
     #   resp.connections[0].rate_limiter_status.remaining #=> Integer
     #   resp.connections[0].rate_limiter_status.total_bandwidth #=> String
     #   resp.connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.connections[0].prefix_pool_size_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections AWS API Documentation
@@ -4200,6 +4319,10 @@ module Aws::DirectConnect
     #   resp.lags[0].connections[0].rate_limiter_status.remaining #=> Integer
     #   resp.lags[0].connections[0].rate_limiter_status.total_bandwidth #=> String
     #   resp.lags[0].connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.lags[0].connections[0].prefix_pool_size_ipv_4 #=> Integer
+    #   resp.lags[0].connections[0].prefix_pool_size_ipv_6 #=> Integer
+    #   resp.lags[0].connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.lags[0].connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.lags[0].allows_hosted_connections #=> Boolean
     #   resp.lags[0].jumbo_frame_capable #=> Boolean
     #   resp.lags[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -4214,6 +4337,10 @@ module Aws::DirectConnect
     #   resp.lags[0].mac_sec_keys[0].ckn #=> String
     #   resp.lags[0].mac_sec_keys[0].state #=> String
     #   resp.lags[0].mac_sec_keys[0].start_on #=> String
+    #   resp.lags[0].prefix_pool_size_ipv_4 #=> Integer
+    #   resp.lags[0].prefix_pool_size_ipv_6 #=> Integer
+    #   resp.lags[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.lags[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.lags[0].rate_limiter_status.max_allowed #=> Integer
     #   resp.lags[0].rate_limiter_status.in_use #=> Integer
     #   resp.lags[0].rate_limiter_status.remaining #=> Integer
@@ -4517,6 +4644,8 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].tags[0].key #=> String
     #   resp.virtual_interfaces[0].tags[0].value #=> String
     #   resp.virtual_interfaces[0].site_link_enabled #=> Boolean
+    #   resp.virtual_interfaces[0].prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.virtual_interfaces[0].prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.virtual_interfaces[0].rate_limit #=> String
     #   resp.next_token #=> String
     #
@@ -4575,6 +4704,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #   * {Types::Connection#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #   * {Types::Connection#partner_interconnect_mac_sec_capable #partner_interconnect_mac_sec_capable} => Boolean
+    #   * {Types::Connection#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -4618,6 +4751,10 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
     #   resp.partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag AWS API Documentation
     #
@@ -4672,6 +4809,80 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def disassociate_mac_sec_key(params = {}, options = {})
       req = build_request(:disassociate_mac_sec_key, params)
+      req.send_request(options)
+    end
+
+    # Lists the routes for the specified virtual interface.
+    #
+    # Use the `routeDirection` filter to control which routes are returned:
+    #
+    # * `accepted`: routes received from the customer network over the
+    #   virtual interface.
+    #
+    # * `advertised`: routes advertised to the customer network over the
+    #   virtual interface.
+    #
+    # @option params [String] :virtual_interface_id
+    #   The ID of the virtual interface.
+    #
+    # @option params [Types::RouteFilters] :filters
+    #   The filters to apply to the routes returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListVirtualInterfaceRoutesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVirtualInterfaceRoutesResponse#virtual_interface_id #virtual_interface_id} => String
+    #   * {Types::ListVirtualInterfaceRoutesResponse#routes #routes} => Array&lt;Types::Route&gt;
+    #   * {Types::ListVirtualInterfaceRoutesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_virtual_interface_routes({
+    #     virtual_interface_id: "VirtualInterfaceId",
+    #     filters: {
+    #       route_direction: "accepted", # accepts accepted, advertised
+    #       address_family: "ipv4", # accepts ipv4, ipv6
+    #       cidrs: ["RouteFilterCidrString"],
+    #       as_path: [1],
+    #       communities: ["CommunityEntry"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface_id #=> String
+    #   resp.routes #=> Array
+    #   resp.routes[0].cidr #=> String
+    #   resp.routes[0].route_direction #=> String, one of "accepted", "advertised"
+    #   resp.routes[0].address_family #=> String, one of "ipv4", "ipv6"
+    #   resp.routes[0].as_path #=> Array
+    #   resp.routes[0].as_path[0].path_type #=> String, one of "seq", "set"
+    #   resp.routes[0].as_path[0].path #=> Array
+    #   resp.routes[0].as_path[0].path[0] #=> Integer
+    #   resp.routes[0].communities #=> Array
+    #   resp.routes[0].communities[0] #=> String
+    #   resp.routes[0].aws_logical_device_id #=> String
+    #   resp.routes[0].route_installed_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListVirtualInterfaceRoutes AWS API Documentation
+    #
+    # @overload list_virtual_interface_routes(params = {})
+    # @param [Hash] params ({})
+    def list_virtual_interface_routes(params = {}, options = {})
+      req = build_request(:list_virtual_interface_routes, params)
       req.send_request(options)
     end
 
@@ -4952,6 +5163,10 @@ module Aws::DirectConnect
     #   * {Types::Connection#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
     #   * {Types::Connection#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #   * {Types::Connection#partner_interconnect_mac_sec_capable #partner_interconnect_mac_sec_capable} => Boolean
+    #   * {Types::Connection#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -4996,6 +5211,10 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
     #   resp.partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateConnection AWS API Documentation
     #
@@ -5033,6 +5252,7 @@ module Aws::DirectConnect
     #   resp.direct_connect_gateway.owner_account #=> String
     #   resp.direct_connect_gateway.direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.direct_connect_gateway.state_change_error #=> String
+    #   resp.direct_connect_gateway.total_prefix_pool_allocations #=> Integer
     #   resp.direct_connect_gateway.tags #=> Array
     #   resp.direct_connect_gateway.tags[0].key #=> String
     #   resp.direct_connect_gateway.tags[0].value #=> String
@@ -5171,6 +5391,10 @@ module Aws::DirectConnect
     #   * {Types::Lag#mac_sec_capable #mac_sec_capable} => Boolean
     #   * {Types::Lag#encryption_mode #encryption_mode} => String
     #   * {Types::Lag#mac_sec_keys #mac_sec_keys} => Array&lt;Types::MacSecKey&gt;
+    #   * {Types::Lag#prefix_pool_size_ipv_4 #prefix_pool_size_ipv_4} => Integer
+    #   * {Types::Lag#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
+    #   * {Types::Lag#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
+    #   * {Types::Lag#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #   * {Types::Lag#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
     #
     # @example Request syntax with placeholder values
@@ -5230,6 +5454,10 @@ module Aws::DirectConnect
     #   resp.connections[0].rate_limiter_status.remaining #=> Integer
     #   resp.connections[0].rate_limiter_status.total_bandwidth #=> String
     #   resp.connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.connections[0].prefix_pool_size_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -5244,6 +5472,10 @@ module Aws::DirectConnect
     #   resp.mac_sec_keys[0].ckn #=> String
     #   resp.mac_sec_keys[0].state #=> String
     #   resp.mac_sec_keys[0].start_on #=> String
+    #   resp.prefix_pool_size_ipv_4 #=> Integer
+    #   resp.prefix_pool_size_ipv_6 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
     #   resp.rate_limiter_status.max_allowed #=> Integer
     #   resp.rate_limiter_status.in_use #=> Integer
     #   resp.rate_limiter_status.remaining #=> Integer
@@ -5283,6 +5515,14 @@ module Aws::DirectConnect
     # @option params [String] :virtual_interface_name
     #   The name of the virtual private interface.
     #
+    # @option params [Integer] :prefix_pool_allocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes to allocate to the virtual
+    #   interface. Not applicable to public virtual interfaces.
+    #
+    # @option params [Integer] :prefix_pool_allocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes to allocate to the virtual
+    #   interface. Not applicable to public virtual interfaces.
+    #
     # @option params [String] :rate_limit
     #   The rate limit (bandwidth allocation) to apply to the virtual
     #   interface. Use this to update the bandwidth allocation on an existing
@@ -5317,6 +5557,8 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_4 #prefix_pool_allocated_count_ipv_4} => Integer
+    #   * {Types::VirtualInterface#prefix_pool_allocated_count_ipv_6 #prefix_pool_allocated_count_ipv_6} => Integer
     #   * {Types::VirtualInterface#rate_limit #rate_limit} => String
     #
     # @example Request syntax with placeholder values
@@ -5326,6 +5568,8 @@ module Aws::DirectConnect
     #     mtu: 1,
     #     enable_site_link: false,
     #     virtual_interface_name: "VirtualInterfaceName",
+    #     prefix_pool_allocated_count_ipv_4: 1,
+    #     prefix_pool_allocated_count_ipv_6: 1,
     #     rate_limit: "RateLimit",
     #   })
     #
@@ -5372,6 +5616,8 @@ module Aws::DirectConnect
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.site_link_enabled #=> Boolean
+    #   resp.prefix_pool_allocated_count_ipv_4 #=> Integer
+    #   resp.prefix_pool_allocated_count_ipv_6 #=> Integer
     #   resp.rate_limit #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateVirtualInterfaceAttributes AWS API Documentation
@@ -5401,7 +5647,7 @@ module Aws::DirectConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

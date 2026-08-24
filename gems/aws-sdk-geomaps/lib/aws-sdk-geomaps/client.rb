@@ -758,22 +758,17 @@ module Aws::GeoMaps
       req.send_request(options, &block)
     end
 
-    # <note markdown="1"> This operation is not supported in
-    # `ap-southeast-1` and
-    # `ap-southeast-5` regions for [GrabMaps][1] customers.
-    #
-    #  </note>
-    #
-    #  `GetStaticMap` provides high-quality static map images with
+    # `GetStaticMap` provides high-quality static map images with
     # customizable options. You can modify the map's appearance and overlay
     # additional information. It's an ideal solution for applications
-    # requiring tailored static map snapshots.
+    # requiring tailored static map snapshots. Not supported in
+    # `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    # customers.
     #
-    #  For more information, see the following topics in the *Amazon
-    # Location
+    # For more information, see the following topics in the *Amazon Location
     # Service Developer Guide*:
     #
-    #  * [Static maps][2]
+    # * [Static maps][2]
     #
     # * [Customize static maps][3]
     #
@@ -1292,6 +1287,72 @@ module Aws::GeoMaps
     #   `Buildings3D` is valid only for the `Standard` and `Monochrome` map
     #   styles.
     #
+    # @option params [String] :poi_density
+    #   Controls how densely points of interest are rendered on the map. The
+    #   density value controls the zoom level at which each category of points
+    #   of interest appears, and how quickly less prominent points of interest
+    #   are revealed as you zoom in. Denser values display more points of
+    #   interest at lower zoom levels.
+    #
+    #   Use `Off` to hide all points of interest. When you omit this
+    #   parameter, the map renders at `Default` density.
+    #
+    #   <note markdown="1"> The difference between density values is most noticeable at mid-range
+    #   zoom levels. At high zoom levels, all density values converge on
+    #   displaying every available point of interest.
+    #
+    #    </note>
+    #
+    #   This parameter is valid only for the `Standard` and `Hybrid` map
+    #   styles. In `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers, this parameter is valid only for the
+    #   `Standard` map style.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #
+    # @option params [Array<String>] :poi_categories
+    #   Renders only the specified categories of points of interest. When you
+    #   omit this parameter, the map renders all categories.
+    #
+    #   The following categories are currently supported:
+    #
+    #   * `FoodAndDrink`
+    #
+    #   * `Entertainment`
+    #
+    #   * `SightsAndMuseums`
+    #
+    #   * `Transportation`
+    #
+    #   * `Accommodations`
+    #
+    #   * `LeisureAndOutdoor`
+    #
+    #   * `Shopping`
+    #
+    #   * `BusinessAndServices`
+    #
+    #   * `FacilitiesAndBuildings`
+    #
+    #   Specify each category as a separate `poi-categories` query parameter.
+    #   Duplicate values are rejected.
+    #
+    #   <note markdown="1"> This parameter has no effect when `poi-density` is set to `Off`, which
+    #   hides all points of interest regardless of category.
+    #
+    #    </note>
+    #
+    #   This parameter is valid only for the `Standard` and `Hybrid` map
+    #   styles. In `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers, this parameter is valid only for the
+    #   `Standard` map style.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
     #   or valid SigV4 signature must be provided when making a request.
@@ -1314,6 +1375,8 @@ module Aws::GeoMaps
     #     traffic: "All", # accepts All, Congestion
     #     travel_modes: ["Transit"], # accepts Transit, Truck
     #     buildings: "Buildings3D", # accepts Buildings3D
+    #     poi_density: "Off", # accepts Off, VerySparse, Sparse, Default, Dense, VeryDense
+    #     poi_categories: ["FoodAndDrink"], # accepts FoodAndDrink, Entertainment, SightsAndMuseums, Transportation, Accommodations, LeisureAndOutdoor, Shopping, BusinessAndServices, FacilitiesAndBuildings
     #     key: "ApiKey",
     #   })
     #
@@ -1432,7 +1495,7 @@ module Aws::GeoMaps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-geomaps'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

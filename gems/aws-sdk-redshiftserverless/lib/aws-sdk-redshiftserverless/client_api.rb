@@ -165,6 +165,7 @@ module Aws::RedshiftServerless
     ListWorkgroupsRequest = Shapes::StructureShape.new(name: 'ListWorkgroupsRequest')
     ListWorkgroupsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkgroupsRequestMaxResultsInteger')
     ListWorkgroupsResponse = Shapes::StructureShape.new(name: 'ListWorkgroupsResponse')
+    LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     LogExport = Shapes::StringShape.new(name: 'LogExport')
     LogExportList = Shapes::ListShape.new(name: 'LogExportList')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -209,6 +210,12 @@ module Aws::RedshiftServerless
     RestoreTableFromRecoveryPointResponse = Shapes::StructureShape.new(name: 'RestoreTableFromRecoveryPointResponse')
     RestoreTableFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreTableFromSnapshotRequest')
     RestoreTableFromSnapshotResponse = Shapes::StructureShape.new(name: 'RestoreTableFromSnapshotResponse')
+    S3TableAction = Shapes::StringShape.new(name: 'S3TableAction')
+    S3TableGranularity = Shapes::StringShape.new(name: 'S3TableGranularity')
+    S3TableLastIngestionTimeMap = Shapes::MapShape.new(name: 'S3TableLastIngestionTimeMap')
+    S3TableName = Shapes::StringShape.new(name: 'S3TableName')
+    S3TableNameList = Shapes::ListShape.new(name: 'S3TableNameList')
+    S3TablePublishStatus = Shapes::StructureShape.new(name: 'S3TablePublishStatus')
     Schedule = Shapes::UnionShape.new(name: 'Schedule')
     ScheduledActionAssociation = Shapes::StructureShape.new(name: 'ScheduledActionAssociation')
     ScheduledActionName = Shapes::StringShape.new(name: 'ScheduledActionName')
@@ -792,6 +799,7 @@ module Aws::RedshiftServerless
     Namespace.add_member(:namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "namespaceArn"))
     Namespace.add_member(:namespace_id, Shapes::ShapeRef.new(shape: String, location_name: "namespaceId"))
     Namespace.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "namespaceName"))
+    Namespace.add_member(:s3_table_publish_status, Shapes::ShapeRef.new(shape: S3TablePublishStatus, location_name: "s3TablePublishStatus"))
     Namespace.add_member(:status, Shapes::ShapeRef.new(shape: NamespaceStatus, location_name: "status"))
     Namespace.struct_class = Types::Namespace
 
@@ -912,6 +920,18 @@ module Aws::RedshiftServerless
 
     RestoreTableFromSnapshotResponse.add_member(:table_restore_status, Shapes::ShapeRef.new(shape: TableRestoreStatus, location_name: "tableRestoreStatus"))
     RestoreTableFromSnapshotResponse.struct_class = Types::RestoreTableFromSnapshotResponse
+
+    S3TableLastIngestionTimeMap.key = Shapes::ShapeRef.new(shape: String)
+    S3TableLastIngestionTimeMap.value = Shapes::ShapeRef.new(shape: String)
+
+    S3TableNameList.member = Shapes::ShapeRef.new(shape: S3TableName)
+
+    S3TablePublishStatus.add_member(:enabled_all, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabledAll"))
+    S3TablePublishStatus.add_member(:last_ingestion_times, Shapes::ShapeRef.new(shape: S3TableLastIngestionTimeMap, location_name: "lastIngestionTimes"))
+    S3TablePublishStatus.add_member(:s3_table_granularity, Shapes::ShapeRef.new(shape: S3TableGranularity, location_name: "s3TableGranularity"))
+    S3TablePublishStatus.add_member(:s3_table_namespace, Shapes::ShapeRef.new(shape: String, location_name: "s3TableNamespace"))
+    S3TablePublishStatus.add_member(:s3_tables, Shapes::ShapeRef.new(shape: S3TableNameList, location_name: "s3Tables"))
+    S3TablePublishStatus.struct_class = Types::S3TablePublishStatus
 
     Schedule.add_member(:at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "at"))
     Schedule.add_member(:cron, Shapes::ShapeRef.new(shape: String, location_name: "cron"))
@@ -1082,9 +1102,14 @@ module Aws::RedshiftServerless
     UpdateNamespaceRequest.add_member(:default_iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "defaultIamRoleArn"))
     UpdateNamespaceRequest.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleArnList, location_name: "iamRoles"))
     UpdateNamespaceRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    UpdateNamespaceRequest.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, location_name: "logDestinationType"))
     UpdateNamespaceRequest.add_member(:log_exports, Shapes::ShapeRef.new(shape: LogExportList, location_name: "logExports"))
     UpdateNamespaceRequest.add_member(:manage_admin_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "manageAdminPassword"))
     UpdateNamespaceRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
+    UpdateNamespaceRequest.add_member(:s3_table_action, Shapes::ShapeRef.new(shape: S3TableAction, location_name: "s3TableAction"))
+    UpdateNamespaceRequest.add_member(:s3_table_granularity, Shapes::ShapeRef.new(shape: S3TableGranularity, location_name: "s3TableGranularity"))
+    UpdateNamespaceRequest.add_member(:s3_table_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "s3TableKmsKeyId"))
+    UpdateNamespaceRequest.add_member(:s3_table_names, Shapes::ShapeRef.new(shape: S3TableNameList, location_name: "s3TableNames"))
     UpdateNamespaceRequest.struct_class = Types::UpdateNamespaceRequest
 
     UpdateNamespaceResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "namespace"))

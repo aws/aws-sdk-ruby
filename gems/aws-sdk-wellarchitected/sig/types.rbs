@@ -37,6 +37,96 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class AgentProfileSummary
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor business_overview: ::String
+      attr_accessor pillars: ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+      attr_accessor deletion_protection: bool
+      attr_accessor execution_role_arn: ::String
+      attr_accessor aggregation_configuration: ::Array[Types::AggregationConfiguration]
+      attr_accessor arn: ::String
+      attr_accessor eligible_for_scheduled_generation: bool
+      attr_accessor eligible_for_architecture_generation: bool
+      attr_accessor field_errors: ::Hash[::String, ::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: [:display_name, :description, :business_overview]
+    end
+
+    class AgentRecommendationGenerationSummary
+      attr_accessor id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      attr_accessor estimated_completion_time: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AgentRecommendationItemSummary
+      attr_accessor id: ::String
+      attr_accessor recommendation_arn: ::String
+      attr_accessor type: ("AWS_RESOURCE" | "RECOMMENDATION")
+      attr_accessor metadata: untyped
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AgentRecommendationRemediation
+      attr_accessor recommendation_arn: ::String
+      attr_accessor type: ("AUTO_REMEDIATION" | "CONSOLE" | "CLI" | "SDK" | "IAC" | "MCP")
+      attr_accessor steps: ::Array[Types::RemediationStep]
+      attr_accessor resource_links: ::Array[Types::ResourceLink]
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AgentRecommendationSummary
+      attr_accessor recommendation_arn: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("RESOURCE" | "ARCHITECTURE" | "APPLICATION")
+      attr_accessor pillar: ("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")
+      attr_accessor priority: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor effort: ("LARGE" | "MEDIUM" | "SMALL")
+      attr_accessor status: ("ACTIVE" | "SUPPRESSED" | "COMPLETED")
+      attr_accessor state: ("OPEN" | "CLOSED")
+      attr_accessor update_reason: ::String
+      attr_accessor impact: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor roi: Types::Roi
+      attr_accessor number_of_resources: ::Integer
+      attr_accessor aws_services: ::Array[::String]
+      attr_accessor business_units: ::Array[::String]
+      attr_accessor applications: ::Array[::String]
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: [:title, :description, :update_reason]
+    end
+
+    class AggregationConfiguration
+      attr_accessor account_id: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor access_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class Answer
       attr_accessor question_id: ::String
       attr_accessor pillar_id: ::String
@@ -185,6 +275,105 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class ContextContent
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      attr_accessor aws_services: ::Array[::String]
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor resource_tags: ::Array[Types::ContextResourceTag]
+      attr_accessor application_overview: ::String
+      attr_accessor industry: ::String
+      attr_accessor application_type: ("SAS" | "DESKTOP_APPLICATION" | "OTHER")
+      attr_accessor criticality: ("MISSION_CRITICAL" | "BUSINESS_CRITICAL" | "NON_CRITICAL" | "TEST_DEVELOPMENT")
+      attr_accessor architecture_overview: ::String
+      attr_accessor additional_context: ::String
+      SENSITIVE: [:application_overview, :industry, :architecture_overview, :additional_context]
+    end
+
+    class ContextResourceTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ContextSummary
+      attr_accessor id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor title: ::String
+      attr_accessor context_type: ("APPLICATION")
+      attr_accessor content: Types::ContextContent
+      attr_accessor application_type: ("SAS" | "DESKTOP_APPLICATION" | "OTHER")
+      attr_accessor criticality: ("MISSION_CRITICAL" | "BUSINESS_CRITICAL" | "NON_CRITICAL" | "TEST_DEVELOPMENT")
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: [:title]
+    end
+
+    class CreateAgentContextRequest
+      attr_accessor client_token: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor title: ::String
+      attr_accessor context_type: ("APPLICATION")
+      attr_accessor content: Types::ContextContent
+      SENSITIVE: [:title]
+    end
+
+    class CreateAgentContextResponse
+      attr_accessor context: Types::ContextSummary
+      SENSITIVE: []
+    end
+
+    class CreateAgentGoalRequest
+      attr_accessor client_token: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor pillars: ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:title, :description]
+    end
+
+    class CreateAgentGoalResponse
+      attr_accessor goal: Types::GoalSummary
+      SENSITIVE: []
+    end
+
+    class CreateAgentProfileRequest
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor business_overview: ::String
+      attr_accessor pillars: ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+      attr_accessor deletion_protection: bool
+      attr_accessor execution_role_arn: ::String
+      attr_accessor aggregation_configuration: ::Array[Types::AggregationConfiguration]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:display_name, :description, :business_overview]
+    end
+
+    class CreateAgentProfileResponse
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor business_overview: ::String
+      attr_accessor pillars: ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+      attr_accessor deletion_protection: bool
+      attr_accessor execution_role_arn: ::String
+      attr_accessor aggregation_configuration: ::Array[Types::AggregationConfiguration]
+      attr_accessor arn: ::String
+      attr_accessor eligible_for_scheduled_generation: bool
+      attr_accessor eligible_for_architecture_generation: bool
+      attr_accessor field_errors: ::Hash[::String, ::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: [:display_name, :description, :business_overview]
+    end
+
     class CreateLensShareInput
       attr_accessor lens_alias: ::String
       attr_accessor shared_with: ::String
@@ -324,6 +513,40 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class CrossPillarBenefit
+      attr_accessor pillar: ("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor impact: ("HIGH" | "MEDIUM" | "LOW")
+      SENSITIVE: []
+    end
+
+    class DeleteAgentContextRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAgentContextResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAgentGoalRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAgentGoalResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAgentProfileRequest
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAgentProfileResponse < Aws::EmptyStructure
+    end
+
     class DeleteLensInput
       attr_accessor lens_alias: ::String
       attr_accessor client_request_token: ::String
@@ -389,6 +612,12 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class ErrorDetails
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ExportLensInput
       attr_accessor lens_alias: ::String
       attr_accessor lens_version: ::String
@@ -398,6 +627,120 @@ module Aws::WellArchitected
     class ExportLensOutput
       attr_accessor lens_json: ::String
       SENSITIVE: []
+    end
+
+    class GetAgentContextRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentContextResponse
+      attr_accessor context: Types::ContextSummary
+      SENSITIVE: []
+    end
+
+    class GetAgentGoalRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentGoalResponse
+      attr_accessor goal: Types::GoalSummary
+      SENSITIVE: []
+    end
+
+    class GetAgentProfileRequest
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentProfileResponse
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor business_overview: ::String
+      attr_accessor pillars: ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+      attr_accessor deletion_protection: bool
+      attr_accessor execution_role_arn: ::String
+      attr_accessor aggregation_configuration: ::Array[Types::AggregationConfiguration]
+      attr_accessor arn: ::String
+      attr_accessor eligible_for_scheduled_generation: bool
+      attr_accessor eligible_for_architecture_generation: bool
+      attr_accessor field_errors: ::Hash[::String, ::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: [:display_name, :description, :business_overview]
+    end
+
+    class GetAgentRecommendationGenerationRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor generation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentRecommendationGenerationResponse
+      attr_accessor id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      attr_accessor estimated_completion_time: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor additional_context: untyped
+      attr_accessor scope: Types::Scope
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor progress: Types::Progress
+      attr_accessor error_details: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class GetAgentRecommendationRequest
+      attr_accessor recommendation_arn: ::String
+      attr_accessor remediation_type: ("AUTO_REMEDIATION" | "CONSOLE" | "CLI" | "SDK" | "IAC" | "MCP")
+      SENSITIVE: []
+    end
+
+    class GetAgentRecommendationResponse
+      attr_accessor recommendation_arn: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("RESOURCE" | "ARCHITECTURE" | "APPLICATION")
+      attr_accessor pillar: ("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")
+      attr_accessor priority: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor effort: ("LARGE" | "MEDIUM" | "SMALL")
+      attr_accessor status: ("ACTIVE" | "SUPPRESSED" | "COMPLETED")
+      attr_accessor state: ("OPEN" | "CLOSED")
+      attr_accessor update_reason: ::String
+      attr_accessor impact: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor roi: Types::Roi
+      attr_accessor number_of_resources: ::Integer
+      attr_accessor aws_services: ::Array[::String]
+      attr_accessor business_units: ::Array[::String]
+      attr_accessor applications: ::Array[::String]
+      attr_accessor impact_details: ::Array[::String]
+      attr_accessor insights: ::Array[Types::Insight]
+      attr_accessor highlights: ::Array[::String]
+      attr_accessor remediation_summary: Types::RemediationSummary
+      attr_accessor cross_pillar_benefits: ::Array[Types::CrossPillarBenefit]
+      attr_accessor trade_offs: ::Array[Types::TradeOff]
+      attr_accessor sources: ::Array[("TRUSTED_ADVISOR" | "COST_EXPLORER" | "CLOUDWATCH" | "WELL_ARCHITECTED_TOOL" | "WELL_ARCHITECTED_AGENT" | "CUSTOMER_IAC")]
+      attr_accessor goals: ::Array[Types::RecommendationGoal]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor remediations: ::Array[Types::AgentRecommendationRemediation]
+      SENSITIVE: [:title, :description, :update_reason]
     end
 
     class GetAnswerInput
@@ -572,6 +915,19 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class GoalSummary
+      attr_accessor id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor pillars: ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: [:title, :description]
+    end
+
     class ImportLensInput
       attr_accessor lens_alias: ::String
       attr_accessor json_string: ::String
@@ -594,6 +950,12 @@ module Aws::WellArchitected
       attr_accessor improvement_plan_url: ::String
       attr_accessor improvement_plans: ::Array[Types::ChoiceImprovementPlan]
       attr_accessor jira_configuration: Types::JiraConfiguration
+      SENSITIVE: []
+    end
+
+    class Insight
+      attr_accessor usage_pattern: ::String
+      attr_accessor signals_detected: ::String
       SENSITIVE: []
     end
 
@@ -699,6 +1061,87 @@ module Aws::WellArchitected
       attr_accessor latest_lens_version: ::String
       attr_accessor resource_arn: ::String
       attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentContextsRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentContextsResponse
+      attr_accessor items: ::Array[Types::ContextSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentGoalsRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentGoalsResponse
+      attr_accessor items: ::Array[Types::GoalSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentProfilesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentProfilesResponse
+      attr_accessor items: ::Array[Types::AgentProfileSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRecommendationGenerationsRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor recommendation_type: ("RESOURCE" | "ARCHITECTURE" | "APPLICATION")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRecommendationGenerationsResponse
+      attr_accessor items: ::Array[Types::AgentRecommendationGenerationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRecommendationItemsRequest
+      attr_accessor recommendation_arn: ::String
+      attr_accessor type: ("AWS_RESOURCE" | "RECOMMENDATION")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRecommendationItemsResponse
+      attr_accessor items: ::Array[Types::AgentRecommendationItemSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRecommendationsRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state: ("OPEN" | "CLOSED")
+      attr_accessor pillar: ("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")
+      SENSITIVE: []
+    end
+
+    class ListAgentRecommendationsResponse
+      attr_accessor items: ::Array[Types::AgentRecommendationSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1025,6 +1468,12 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class PillarItem
+      attr_accessor pillar: ("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")
+      attr_accessor ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class PillarMetric
       attr_accessor pillar_id: ::String
       attr_accessor risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
@@ -1134,6 +1583,24 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class Progress
+      attr_accessor steps_completed: ::Integer
+      attr_accessor total_steps: ::Integer
+      attr_accessor completion_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class PutAgentRecommendationFeedbackRequest
+      attr_accessor recommendation_arn: ::String
+      attr_accessor type: ("USEFUL" | "NOT_USEFUL")
+      attr_accessor feedback_category: ("OTHER" | "RECOMMENDATION_NOT_RELEVANT" | "RESOURCE_NOT_IMPORTANT" | "RESOURCE_TYPE_NOT_IMPORTANT" | "RECOMMENDATION_INCORRECT")
+      attr_accessor comments: ::String
+      SENSITIVE: []
+    end
+
+    class PutAgentRecommendationFeedbackResponse < Aws::EmptyStructure
+    end
+
     class QuestionDifference
       attr_accessor question_id: ::String
       attr_accessor question_title: ::String
@@ -1145,6 +1612,29 @@ module Aws::WellArchitected
       attr_accessor question_id: ::String
       attr_accessor risk: ("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE")
       attr_accessor best_practices: ::Array[Types::BestPractice]
+      SENSITIVE: []
+    end
+
+    class RecommendationGoal
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class RemediationStep
+      attr_accessor title: ::String
+      attr_accessor content: ::String
+      SENSITIVE: [:title, :content]
+    end
+
+    class RemediationSummary
+      attr_accessor recommendation: ::String
+      attr_accessor steps: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceLink
+      attr_accessor url: ::String
+      attr_accessor title: ::String
       SENSITIVE: []
     end
 
@@ -1235,6 +1725,19 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class Roi
+      attr_accessor estimate: ::String
+      attr_accessor detail: ::String
+      SENSITIVE: []
+    end
+
+    class Scope
+      attr_accessor pillars: ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+      attr_accessor goal_ids: ::Array[::String]
+      attr_accessor items: ::Array[Types::PillarItem]
+      SENSITIVE: []
+    end
+
     class SelectedPillar
       attr_accessor pillar_id: ::String
       attr_accessor selected_question_ids: ::Array[::String]
@@ -1278,6 +1781,34 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class StartAgentRecommendationGenerationRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor types: ::Array[("RESOURCE" | "ARCHITECTURE" | "APPLICATION")]
+      attr_accessor name: ::String
+      attr_accessor additional_context: untyped
+      attr_accessor scope: Types::Scope
+      SENSITIVE: []
+    end
+
+    class StartAgentRecommendationGenerationResponse
+      attr_accessor id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      attr_accessor estimated_completion_time: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class TagResourceInput
       attr_accessor workload_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -1302,6 +1833,16 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class TradeOff
+      attr_accessor pillar: ("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor risk: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor mitigation: ::String
+      attr_accessor risk_explanation: ::String
+      SENSITIVE: []
+    end
+
     class UntagResourceInput
       attr_accessor workload_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -1309,6 +1850,79 @@ module Aws::WellArchitected
     end
 
     class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateAgentContextRequest
+      attr_accessor client_token: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor title: ::String
+      attr_accessor content: Types::ContextContent
+      SENSITIVE: [:title]
+    end
+
+    class UpdateAgentContextResponse
+      attr_accessor context: Types::ContextSummary
+      SENSITIVE: []
+    end
+
+    class UpdateAgentGoalRequest
+      attr_accessor client_token: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor pillars: ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:title, :description]
+    end
+
+    class UpdateAgentGoalResponse
+      attr_accessor goal: Types::GoalSummary
+      SENSITIVE: []
+    end
+
+    class UpdateAgentProfileRequest
+      attr_accessor client_token: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor aggregation_configuration: ::Array[Types::AggregationConfiguration]
+      attr_accessor business_overview: ::String
+      attr_accessor pillars: ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+      attr_accessor deletion_protection: bool
+      SENSITIVE: [:display_name, :description, :business_overview]
+    end
+
+    class UpdateAgentProfileResponse
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor business_overview: ::String
+      attr_accessor pillars: ::Array[("COST_OPTIMIZATION" | "SECURITY" | "RESILIENCE" | "PERFORMANCE" | "OPERATIONAL_EXCELLENCE")]
+      attr_accessor deletion_protection: bool
+      attr_accessor execution_role_arn: ::String
+      attr_accessor aggregation_configuration: ::Array[Types::AggregationConfiguration]
+      attr_accessor arn: ::String
+      attr_accessor eligible_for_scheduled_generation: bool
+      attr_accessor eligible_for_architecture_generation: bool
+      attr_accessor field_errors: ::Hash[::String, ::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: [:display_name, :description, :business_overview]
+    end
+
+    class UpdateAgentRecommendationStatusRequest
+      attr_accessor recommendation_arn: ::String
+      attr_accessor status: ("ACTIVE" | "SUPPRESSED" | "COMPLETED")
+      attr_accessor update_reason: ::String
+      SENSITIVE: [:update_reason]
+    end
+
+    class UpdateAgentRecommendationStatusResponse < Aws::EmptyStructure
     end
 
     class UpdateAnswerInput

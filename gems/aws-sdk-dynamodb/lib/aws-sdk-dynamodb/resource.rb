@@ -335,6 +335,26 @@ module Aws::DynamoDB
     #     },
     #     global_table_source_arn: "TableArn",
     #     global_table_settings_replication_mode: "ENABLED", # accepts ENABLED, DISABLED, ENABLED_WITH_OVERRIDES
+    #     vector_indexes: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         vector_attribute: { # required
+    #           attribute_name: "VectorAttributeName", # required
+    #         },
+    #         search_schema: [
+    #           {
+    #             attribute_name: "AttributeName", # required
+    #             search_schema_element_type: "HASH", # required, accepts HASH, INLINE_FILTER
+    #           },
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #           non_key_attributes: ["NonKeyAttributeName"],
+    #         },
+    #         dimensions: 1, # required
+    #         distance_function: "COSINE", # required, accepts COSINE, DOT_PRODUCT, EUCLIDEAN
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::AttributeDefinition>] :attribute_definitions
@@ -579,6 +599,31 @@ module Aws::DynamoDB
     #   multi-account global tables, this parameter is required and the only
     #   supported value is ENABLED. For same-account global tables, this
     #   parameter is set to ENABLED\_WITH\_OVERRIDES.
+    # @option options [Array<Types::VectorIndex>] :vector_indexes
+    #   One or more vector indexes to be created on the table. Each vector
+    #   index enables similarity search on a vector attribute. Each element in
+    #   the list consists of:
+    #
+    #   * `IndexName` - The name of the vector index. Must be unique within
+    #     the table.
+    #
+    #   * `VectorAttribute` - The attribute that contains vector embeddings.
+    #     If multiple vector indexes reference the same attribute, they must
+    #     all use the same number of dimensions.
+    #
+    #   * `Dimensions` - The number of dimensions in each vector.
+    #
+    #   * `DistanceFunction` - The distance function used to calculate
+    #     similarity. Valid values: `COSINE`, `EUCLIDEAN`, `DOT_PRODUCT`.
+    #
+    #   * `Projection` - Specifies attributes that are copied (projected) from
+    #     the table into the vector index. The total number of projected
+    #     non-key attributes is shared across the vector attribute (counts as
+    #     1) and `INLINE_FILTER` search schema elements (each counts as 1).
+    #     `HASH` search schema elements do not count toward this limit.
+    #
+    #   * `SearchSchema` - (Optional) Defines the partition key (`HASH`) and
+    #     inline filter (`INLINE_FILTER`) attributes for the vector index.
     # @return [Table]
     def create_table(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

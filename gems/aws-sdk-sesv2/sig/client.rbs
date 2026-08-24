@@ -1463,7 +1463,13 @@ module Aws
                              ],
                              ?configuration_set_name: ::String,
                              ?endpoint_id: ::String,
-                             ?tenant_name: ::String
+                             ?tenant_name: ::String,
+                             ?configuration_overrides: {
+                               tracking: {
+                                 open_tracking_enabled: ("ENABLED" | "DISABLED")?,
+                                 click_tracking_enabled: ("ENABLED" | "DISABLED")?
+                               }?
+                             }
                            ) -> _SendBulkEmailResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendBulkEmailResponseSuccess
 
@@ -1508,6 +1514,12 @@ module Aws
                         ?list_management_options: {
                           contact_list_name: ::String,
                           topic_name: ::String?
+                        },
+                        ?configuration_overrides: {
+                          tracking: {
+                            open_tracking_enabled: ("ENABLED" | "DISABLED")?,
+                            click_tracking_enabled: ("ENABLED" | "DISABLED")?
+                          }?
                         }
                       ) -> _SendEmailResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendEmailResponseSuccess

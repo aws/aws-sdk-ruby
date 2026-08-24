@@ -5166,6 +5166,20 @@ module Aws
                                     ) -> _ListFindingAggregatorsResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingAggregatorsResponseSuccess
 
+      interface _ListFreeTrialStatusesV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFreeTrialStatusesV2Response]
+        def account_free_trial_statuses: () -> ::Array[Types::AccountFreeTrialStatus]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#list_free_trial_statuses_v2-instance_method
+      def list_free_trial_statuses_v2: (
+                                         ?account_ids: Array[::String],
+                                         ?statuses: Array[("ACTIVE" | "INACTIVE")],
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListFreeTrialStatusesV2ResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFreeTrialStatusesV2ResponseSuccess
+
       interface _ListInvitationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInvitationsResponse]
         def invitations: () -> ::Array[Types::Invitation]

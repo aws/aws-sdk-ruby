@@ -1378,7 +1378,7 @@ module Aws::ECS
     end
 
     class InstanceHealthCheckResult
-      attr_accessor type: ("CONTAINER_RUNTIME" | "ACCELERATED_COMPUTE" | "DAEMON")
+      attr_accessor type: ("CONTAINER_RUNTIME" | "ACCELERATED_COMPUTE" | "DAEMON" | "AGENT_CONNECTIVITY")
       attr_accessor status: ("OK" | "IMPAIRED" | "INSUFFICIENT_DATA" | "INITIALIZING")
       attr_accessor status_reason: ::String
       attr_accessor last_updated: ::Time
@@ -2648,7 +2648,7 @@ module Aws::ECS
       attr_accessor pull_stopped_at: ::Time
       attr_accessor started_at: ::Time
       attr_accessor started_by: ::String
-      attr_accessor stop_code: ("TaskFailedToStart" | "EssentialContainerExited" | "UserInitiated" | "ServiceSchedulerInitiated" | "SpotInterruption" | "TerminationNotice")
+      attr_accessor stop_code: ("TaskFailedToStart" | "EssentialContainerExited" | "UserInitiated" | "ServiceSchedulerInitiated" | "SpotInterruption" | "TerminationNotice" | "InfrastructureHealth")
       attr_accessor stopped_at: ::Time
       attr_accessor stopped_reason: ::String
       attr_accessor stopping_at: ::Time

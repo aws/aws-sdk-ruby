@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2026-08-04)
+------------------
+
+* Feature - Partners can now create leads with only 5 required fields and free-text values for all other fields, reducing import friction. Engagement invitations now include enrichment data (propensity scores, lead readiness) directly in the response.
+
 1.38.0 (2026-07-09)
 ------------------
 

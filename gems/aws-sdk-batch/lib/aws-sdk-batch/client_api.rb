@@ -36,6 +36,7 @@ module Aws::Batch
     CancelJobResponse = Shapes::StructureShape.new(name: 'CancelJobResponse')
     CapacityLimit = Shapes::StructureShape.new(name: 'CapacityLimit')
     CapacityLimits = Shapes::ListShape.new(name: 'CapacityLimits')
+    CapacityReservationRequest = Shapes::StructureShape.new(name: 'CapacityReservationRequest')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ComputeEnvironmentDetail = Shapes::StructureShape.new(name: 'ComputeEnvironmentDetail')
@@ -51,6 +52,7 @@ module Aws::Batch
     ConsumableResourceSummary = Shapes::StructureShape.new(name: 'ConsumableResourceSummary')
     ConsumableResourceSummaryList = Shapes::ListShape.new(name: 'ConsumableResourceSummaryList')
     ContainerDetail = Shapes::StructureShape.new(name: 'ContainerDetail')
+    ContainerInsights = Shapes::StringShape.new(name: 'ContainerInsights')
     ContainerOverrides = Shapes::StructureShape.new(name: 'ContainerOverrides')
     ContainerProperties = Shapes::StructureShape.new(name: 'ContainerProperties')
     ContainerSummary = Shapes::StructureShape.new(name: 'ContainerSummary')
@@ -112,6 +114,7 @@ module Aws::Batch
     EcsProperties = Shapes::StructureShape.new(name: 'EcsProperties')
     EcsPropertiesDetail = Shapes::StructureShape.new(name: 'EcsPropertiesDetail')
     EcsPropertiesOverride = Shapes::StructureShape.new(name: 'EcsPropertiesOverride')
+    EcsSettings = Shapes::StructureShape.new(name: 'EcsSettings')
     EcsTaskDetails = Shapes::StructureShape.new(name: 'EcsTaskDetails')
     EcsTaskProperties = Shapes::StructureShape.new(name: 'EcsTaskProperties')
     EksAnnotationsMap = Shapes::MapShape.new(name: 'EksAnnotationsMap')
@@ -177,6 +180,10 @@ module Aws::Batch
     ImagePullSecret = Shapes::StructureShape.new(name: 'ImagePullSecret')
     ImagePullSecrets = Shapes::ListShape.new(name: 'ImagePullSecrets')
     ImageType = Shapes::StringShape.new(name: 'ImageType')
+    InfrastructureOptimization = Shapes::StructureShape.new(name: 'InfrastructureOptimization')
+    InstanceLaunchTemplate = Shapes::StructureShape.new(name: 'InstanceLaunchTemplate')
+    InstanceLaunchTemplateUpdate = Shapes::StructureShape.new(name: 'InstanceLaunchTemplateUpdate')
+    InstanceRequirementsRequest = Shapes::StructureShape.new(name: 'InstanceRequirementsRequest')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     JQState = Shapes::StringShape.new(name: 'JQState')
     JQStatus = Shapes::StringShape.new(name: 'JQStatus')
@@ -240,6 +247,10 @@ module Aws::Batch
     LogConfigurationOptionsMap = Shapes::MapShape.new(name: 'LogConfigurationOptionsMap')
     LogDriver = Shapes::StringShape.new(name: 'LogDriver')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    ManagedInstancesLocalStorageConfiguration = Shapes::StructureShape.new(name: 'ManagedInstancesLocalStorageConfiguration')
+    ManagedInstancesNetworkConfiguration = Shapes::StructureShape.new(name: 'ManagedInstancesNetworkConfiguration')
+    ManagedInstancesProvider = Shapes::StructureShape.new(name: 'ManagedInstancesProvider')
+    ManagedInstancesStorageConfiguration = Shapes::StructureShape.new(name: 'ManagedInstancesStorageConfiguration')
     MountPoint = Shapes::StructureShape.new(name: 'MountPoint')
     MountPoints = Shapes::ListShape.new(name: 'MountPoints')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
@@ -360,6 +371,7 @@ module Aws::Batch
     UpdateConsumableResourceResponse = Shapes::StructureShape.new(name: 'UpdateConsumableResourceResponse')
     UpdateJobQueueRequest = Shapes::StructureShape.new(name: 'UpdateJobQueueRequest')
     UpdateJobQueueResponse = Shapes::StructureShape.new(name: 'UpdateJobQueueResponse')
+    UpdateManagedInstancesProviderConfiguration = Shapes::StructureShape.new(name: 'UpdateManagedInstancesProviderConfiguration')
     UpdatePolicy = Shapes::StructureShape.new(name: 'UpdatePolicy')
     UpdateQuotaShareRequest = Shapes::StructureShape.new(name: 'UpdateQuotaShareRequest')
     UpdateQuotaShareResponse = Shapes::StructureShape.new(name: 'UpdateQuotaShareResponse')
@@ -432,6 +444,10 @@ module Aws::Batch
 
     CapacityLimits.member = Shapes::ShapeRef.new(shape: CapacityLimit)
 
+    CapacityReservationRequest.add_member(:reservation_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "reservationGroupArn"))
+    CapacityReservationRequest.add_member(:reservation_preference, Shapes::ShapeRef.new(shape: String, location_name: "reservationPreference"))
+    CapacityReservationRequest.struct_class = Types::CapacityReservationRequest
+
     ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ClientException.struct_class = Types::ClientException
 
@@ -451,6 +467,7 @@ module Aws::Batch
     ComputeEnvironmentDetail.add_member(:container_orchestration_type, Shapes::ShapeRef.new(shape: OrchestrationType, location_name: "containerOrchestrationType"))
     ComputeEnvironmentDetail.add_member(:uuid, Shapes::ShapeRef.new(shape: String, location_name: "uuid"))
     ComputeEnvironmentDetail.add_member(:context, Shapes::ShapeRef.new(shape: String, location_name: "context"))
+    ComputeEnvironmentDetail.add_member(:ecs_settings, Shapes::ShapeRef.new(shape: EcsSettings, location_name: "ecsSettings"))
     ComputeEnvironmentDetail.struct_class = Types::ComputeEnvironmentDetail
 
     ComputeEnvironmentDetailList.member = Shapes::ShapeRef.new(shape: ComputeEnvironmentDetail)
@@ -479,6 +496,8 @@ module Aws::Batch
     ComputeResource.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
     ComputeResource.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2ConfigurationList, location_name: "ec2Configuration"))
     ComputeResource.add_member(:scaling_policy, Shapes::ShapeRef.new(shape: ComputeScalingPolicy, location_name: "scalingPolicy"))
+    ComputeResource.add_member(:managed_instances_provider, Shapes::ShapeRef.new(shape: ManagedInstancesProvider, location_name: "managedInstancesProvider"))
+    ComputeResource.add_member(:capacity_tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "capacityTags"))
     ComputeResource.struct_class = Types::ComputeResource
 
     ComputeResourceUpdate.add_member(:minv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "minvCpus"))
@@ -499,6 +518,8 @@ module Aws::Batch
     ComputeResourceUpdate.add_member(:type, Shapes::ShapeRef.new(shape: CRType, location_name: "type"))
     ComputeResourceUpdate.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     ComputeResourceUpdate.add_member(:scaling_policy, Shapes::ShapeRef.new(shape: ComputeScalingPolicy, location_name: "scalingPolicy"))
+    ComputeResourceUpdate.add_member(:managed_instances_provider, Shapes::ShapeRef.new(shape: UpdateManagedInstancesProviderConfiguration, location_name: "managedInstancesProvider"))
+    ComputeResourceUpdate.add_member(:capacity_tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "capacityTags"))
     ComputeResourceUpdate.struct_class = Types::ComputeResourceUpdate
 
     ComputeScalingPolicy.add_member(:min_scale_down_delay_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "minScaleDownDelayMinutes"))
@@ -601,6 +622,7 @@ module Aws::Batch
     CreateComputeEnvironmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     CreateComputeEnvironmentRequest.add_member(:eks_configuration, Shapes::ShapeRef.new(shape: EksConfiguration, location_name: "eksConfiguration"))
     CreateComputeEnvironmentRequest.add_member(:context, Shapes::ShapeRef.new(shape: String, location_name: "context"))
+    CreateComputeEnvironmentRequest.add_member(:ecs_settings, Shapes::ShapeRef.new(shape: EcsSettings, location_name: "ecsSettings"))
     CreateComputeEnvironmentRequest.struct_class = Types::CreateComputeEnvironmentRequest
 
     CreateComputeEnvironmentResponse.add_member(:compute_environment_name, Shapes::ShapeRef.new(shape: String, location_name: "computeEnvironmentName"))
@@ -844,6 +866,9 @@ module Aws::Batch
     EcsPropertiesOverride.add_member(:task_properties, Shapes::ShapeRef.new(shape: ListTaskPropertiesOverride, location_name: "taskProperties"))
     EcsPropertiesOverride.struct_class = Types::EcsPropertiesOverride
 
+    EcsSettings.add_member(:container_insights, Shapes::ShapeRef.new(shape: ContainerInsights, location_name: "containerInsights"))
+    EcsSettings.struct_class = Types::EcsSettings
+
     EcsTaskDetails.add_member(:containers, Shapes::ShapeRef.new(shape: ListTaskContainerDetails, location_name: "containers"))
     EcsTaskDetails.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
     EcsTaskDetails.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
@@ -857,6 +882,7 @@ module Aws::Batch
     EcsTaskDetails.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     EcsTaskDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
     EcsTaskDetails.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
+    EcsTaskDetails.add_member(:network_mode, Shapes::ShapeRef.new(shape: String, location_name: "networkMode"))
     EcsTaskDetails.struct_class = Types::EcsTaskDetails
 
     EcsTaskProperties.add_member(:containers, Shapes::ShapeRef.new(shape: ListTaskContainerProperties, required: true, location_name: "containers"))
@@ -870,6 +896,7 @@ module Aws::Batch
     EcsTaskProperties.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     EcsTaskProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
     EcsTaskProperties.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
+    EcsTaskProperties.add_member(:network_mode, Shapes::ShapeRef.new(shape: String, location_name: "networkMode"))
     EcsTaskProperties.struct_class = Types::EcsTaskProperties
 
     EksAnnotationsMap.key = Shapes::ShapeRef.new(shape: String)
@@ -1122,6 +1149,34 @@ module Aws::Batch
     ImagePullSecret.struct_class = Types::ImagePullSecret
 
     ImagePullSecrets.member = Shapes::ShapeRef.new(shape: ImagePullSecret)
+
+    InfrastructureOptimization.add_member(:scale_in_after, Shapes::ShapeRef.new(shape: Integer, location_name: "scaleInAfter"))
+    InfrastructureOptimization.struct_class = Types::InfrastructureOptimization
+
+    InstanceLaunchTemplate.add_member(:ec2_instance_profile_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ec2InstanceProfileArn"))
+    InstanceLaunchTemplate.add_member(:network_configuration, Shapes::ShapeRef.new(shape: ManagedInstancesNetworkConfiguration, required: true, location_name: "networkConfiguration"))
+    InstanceLaunchTemplate.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "instanceRequirements"))
+    InstanceLaunchTemplate.add_member(:capacity_option_type, Shapes::ShapeRef.new(shape: String, location_name: "capacityOptionType"))
+    InstanceLaunchTemplate.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: ManagedInstancesStorageConfiguration, location_name: "storageConfiguration"))
+    InstanceLaunchTemplate.add_member(:monitoring, Shapes::ShapeRef.new(shape: String, location_name: "monitoring"))
+    InstanceLaunchTemplate.add_member(:fips_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "fipsEnabled"))
+    InstanceLaunchTemplate.add_member(:capacity_reservations, Shapes::ShapeRef.new(shape: CapacityReservationRequest, location_name: "capacityReservations"))
+    InstanceLaunchTemplate.add_member(:instance_metadata_tags_propagation, Shapes::ShapeRef.new(shape: Boolean, location_name: "instanceMetadataTagsPropagation"))
+    InstanceLaunchTemplate.add_member(:local_storage_configuration, Shapes::ShapeRef.new(shape: ManagedInstancesLocalStorageConfiguration, location_name: "localStorageConfiguration"))
+    InstanceLaunchTemplate.struct_class = Types::InstanceLaunchTemplate
+
+    InstanceLaunchTemplateUpdate.add_member(:ec2_instance_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "ec2InstanceProfileArn"))
+    InstanceLaunchTemplateUpdate.add_member(:network_configuration, Shapes::ShapeRef.new(shape: ManagedInstancesNetworkConfiguration, location_name: "networkConfiguration"))
+    InstanceLaunchTemplateUpdate.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "instanceRequirements"))
+    InstanceLaunchTemplateUpdate.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: ManagedInstancesStorageConfiguration, location_name: "storageConfiguration"))
+    InstanceLaunchTemplateUpdate.add_member(:monitoring, Shapes::ShapeRef.new(shape: String, location_name: "monitoring"))
+    InstanceLaunchTemplateUpdate.add_member(:capacity_reservations, Shapes::ShapeRef.new(shape: CapacityReservationRequest, location_name: "capacityReservations"))
+    InstanceLaunchTemplateUpdate.add_member(:instance_metadata_tags_propagation, Shapes::ShapeRef.new(shape: Boolean, location_name: "instanceMetadataTagsPropagation"))
+    InstanceLaunchTemplateUpdate.add_member(:local_storage_configuration, Shapes::ShapeRef.new(shape: ManagedInstancesLocalStorageConfiguration, location_name: "localStorageConfiguration"))
+    InstanceLaunchTemplateUpdate.struct_class = Types::InstanceLaunchTemplateUpdate
+
+    InstanceRequirementsRequest.add_member(:allowed_instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "allowedInstanceTypes"))
+    InstanceRequirementsRequest.struct_class = Types::InstanceRequirementsRequest
 
     JobCapacityUsageSummary.add_member(:capacity_unit, Shapes::ShapeRef.new(shape: String, location_name: "capacityUnit"))
     JobCapacityUsageSummary.add_member(:quantity, Shapes::ShapeRef.new(shape: Double, location_name: "quantity"))
@@ -1382,6 +1437,22 @@ module Aws::Batch
 
     LogConfigurationOptionsMap.key = Shapes::ShapeRef.new(shape: String)
     LogConfigurationOptionsMap.value = Shapes::ShapeRef.new(shape: String)
+
+    ManagedInstancesLocalStorageConfiguration.add_member(:use_local_storage, Shapes::ShapeRef.new(shape: Boolean, location_name: "useLocalStorage"))
+    ManagedInstancesLocalStorageConfiguration.struct_class = Types::ManagedInstancesLocalStorageConfiguration
+
+    ManagedInstancesNetworkConfiguration.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
+    ManagedInstancesNetworkConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "securityGroups"))
+    ManagedInstancesNetworkConfiguration.struct_class = Types::ManagedInstancesNetworkConfiguration
+
+    ManagedInstancesProvider.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: String, location_name: "propagateTags"))
+    ManagedInstancesProvider.add_member(:infrastructure_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "infrastructureRoleArn"))
+    ManagedInstancesProvider.add_member(:instance_launch_template, Shapes::ShapeRef.new(shape: InstanceLaunchTemplate, required: true, location_name: "instanceLaunchTemplate"))
+    ManagedInstancesProvider.add_member(:infrastructure_optimization, Shapes::ShapeRef.new(shape: InfrastructureOptimization, location_name: "infrastructureOptimization"))
+    ManagedInstancesProvider.struct_class = Types::ManagedInstancesProvider
+
+    ManagedInstancesStorageConfiguration.add_member(:storage_size_gi_b, Shapes::ShapeRef.new(shape: Integer, location_name: "storageSizeGiB"))
+    ManagedInstancesStorageConfiguration.struct_class = Types::ManagedInstancesStorageConfiguration
 
     MountPoint.add_member(:container_path, Shapes::ShapeRef.new(shape: String, location_name: "containerPath"))
     MountPoint.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "readOnly"))
@@ -1817,6 +1888,7 @@ module Aws::Batch
     UpdateComputeEnvironmentRequest.add_member(:service_role, Shapes::ShapeRef.new(shape: String, location_name: "serviceRole"))
     UpdateComputeEnvironmentRequest.add_member(:update_policy, Shapes::ShapeRef.new(shape: UpdatePolicy, location_name: "updatePolicy"))
     UpdateComputeEnvironmentRequest.add_member(:context, Shapes::ShapeRef.new(shape: String, location_name: "context"))
+    UpdateComputeEnvironmentRequest.add_member(:ecs_settings, Shapes::ShapeRef.new(shape: EcsSettings, location_name: "ecsSettings"))
     UpdateComputeEnvironmentRequest.struct_class = Types::UpdateComputeEnvironmentRequest
 
     UpdateComputeEnvironmentResponse.add_member(:compute_environment_name, Shapes::ShapeRef.new(shape: String, location_name: "computeEnvironmentName"))
@@ -1846,6 +1918,12 @@ module Aws::Batch
     UpdateJobQueueResponse.add_member(:job_queue_name, Shapes::ShapeRef.new(shape: String, location_name: "jobQueueName"))
     UpdateJobQueueResponse.add_member(:job_queue_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobQueueArn"))
     UpdateJobQueueResponse.struct_class = Types::UpdateJobQueueResponse
+
+    UpdateManagedInstancesProviderConfiguration.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: String, location_name: "propagateTags"))
+    UpdateManagedInstancesProviderConfiguration.add_member(:infrastructure_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "infrastructureRoleArn"))
+    UpdateManagedInstancesProviderConfiguration.add_member(:instance_launch_template, Shapes::ShapeRef.new(shape: InstanceLaunchTemplateUpdate, location_name: "instanceLaunchTemplate"))
+    UpdateManagedInstancesProviderConfiguration.add_member(:infrastructure_optimization, Shapes::ShapeRef.new(shape: InfrastructureOptimization, location_name: "infrastructureOptimization"))
+    UpdateManagedInstancesProviderConfiguration.struct_class = Types::UpdateManagedInstancesProviderConfiguration
 
     UpdatePolicy.add_member(:terminate_jobs_on_update, Shapes::ShapeRef.new(shape: Boolean, location_name: "terminateJobsOnUpdate"))
     UpdatePolicy.add_member(:job_execution_timeout_minutes, Shapes::ShapeRef.new(shape: JobExecutionTimeoutMinutes, location_name: "jobExecutionTimeoutMinutes"))

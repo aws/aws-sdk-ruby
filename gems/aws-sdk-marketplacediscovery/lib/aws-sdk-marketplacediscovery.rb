@@ -55,7 +55,7 @@ module Aws::MarketplaceDiscovery
   autoload :EndpointProvider, 'aws-sdk-marketplacediscovery/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplacediscovery/endpoints'
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.6.0'
 
 end
 

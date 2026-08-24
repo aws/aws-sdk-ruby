@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2026-08-04)
+------------------
+
+* Feature - Adding Azure SBOM export capability.
+
 1.80.0 (2026-07-21)
 ------------------
 

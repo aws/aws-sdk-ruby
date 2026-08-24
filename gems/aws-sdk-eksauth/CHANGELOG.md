@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2026-08-03)
+------------------
+
+* Feature - Added eksNodeName, instanceId, and zone optional parameters to the AssumeRoleForPodIdentity API.
+
 1.36.0 (2026-07-09)
 ------------------
 

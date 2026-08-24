@@ -521,6 +521,7 @@ module Aws::ObservabilityAdmin
     #             encryption_strategy: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, AWS_OWNED
     #             kms_key_arn: "ResourceArn",
     #             encryption_conflict_resolution_strategy: "ALLOW", # accepts ALLOW, SKIP
+    #             encryption_scope: "ENCRYPTED_SOURCE_ONLY", # accepts ENCRYPTED_SOURCE_ONLY, NEW_DESTINATION_LOG_GROUPS
     #           },
     #           backup_configuration: {
     #             region: "Region", # required
@@ -528,6 +529,10 @@ module Aws::ObservabilityAdmin
     #           },
     #           log_group_name_configuration: {
     #             log_group_name_pattern: "LogGroupNamePattern", # required
+    #           },
+    #           tag_propagation_configuration: {
+    #             destination_role_arn: "IamRoleArn", # required
+    #             tag_conflict_resolution_strategy: "IN_SYNC", # accepts IN_SYNC, ADD_ONLY, UPDATE_SYNC
     #           },
     #         },
     #         destination_metrics_configuration: {
@@ -753,6 +758,7 @@ module Aws::ObservabilityAdmin
     #         msk_monitoring_parameters: {
     #           enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #         },
+    #         kms_key_arn: "KmsKeyArn",
     #       },
     #       scope: "String",
     #       selection_criteria: "String",
@@ -876,6 +882,7 @@ module Aws::ObservabilityAdmin
     #         msk_monitoring_parameters: {
     #           enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #         },
+    #         kms_key_arn: "KmsKeyArn",
     #       },
     #       scope: "String",
     #       selection_criteria: "String",
@@ -1041,6 +1048,8 @@ module Aws::ObservabilityAdmin
     #   * {Types::GetCentralizationRuleForOrganizationOutput#last_update_time_stamp #last_update_time_stamp} => Integer
     #   * {Types::GetCentralizationRuleForOrganizationOutput#rule_health #rule_health} => String
     #   * {Types::GetCentralizationRuleForOrganizationOutput#failure_reason #failure_reason} => String
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#tag_propagation_status #tag_propagation_status} => String
+    #   * {Types::GetCentralizationRuleForOrganizationOutput#tag_propagation_failure_reason #tag_propagation_failure_reason} => String
     #   * {Types::GetCentralizationRuleForOrganizationOutput#centralization_rule #centralization_rule} => Types::CentralizationRule
     #
     # @example Request syntax with placeholder values
@@ -1059,6 +1068,8 @@ module Aws::ObservabilityAdmin
     #   resp.last_update_time_stamp #=> Integer
     #   resp.rule_health #=> String, one of "Healthy", "Unhealthy", "Provisioning"
     #   resp.failure_reason #=> String, one of "TRUSTED_ACCESS_NOT_ENABLED", "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION", "INTERNAL_SERVER_ERROR"
+    #   resp.tag_propagation_status #=> String, one of "Healthy", "Unhealthy"
+    #   resp.tag_propagation_failure_reason #=> String, one of "RoleNotAssumable", "RoleLacksPermissions"
     #   resp.centralization_rule.source.regions #=> Array
     #   resp.centralization_rule.source.regions[0] #=> String
     #   resp.centralization_rule.source.scope #=> String
@@ -1071,9 +1082,12 @@ module Aws::ObservabilityAdmin
     #   resp.centralization_rule.destination.destination_logs_configuration.logs_encryption_configuration.encryption_strategy #=> String, one of "CUSTOMER_MANAGED", "AWS_OWNED"
     #   resp.centralization_rule.destination.destination_logs_configuration.logs_encryption_configuration.kms_key_arn #=> String
     #   resp.centralization_rule.destination.destination_logs_configuration.logs_encryption_configuration.encryption_conflict_resolution_strategy #=> String, one of "ALLOW", "SKIP"
+    #   resp.centralization_rule.destination.destination_logs_configuration.logs_encryption_configuration.encryption_scope #=> String, one of "ENCRYPTED_SOURCE_ONLY", "NEW_DESTINATION_LOG_GROUPS"
     #   resp.centralization_rule.destination.destination_logs_configuration.backup_configuration.region #=> String
     #   resp.centralization_rule.destination.destination_logs_configuration.backup_configuration.kms_key_arn #=> String
     #   resp.centralization_rule.destination.destination_logs_configuration.log_group_name_configuration.log_group_name_pattern #=> String
+    #   resp.centralization_rule.destination.destination_logs_configuration.tag_propagation_configuration.destination_role_arn #=> String
+    #   resp.centralization_rule.destination.destination_logs_configuration.tag_propagation_configuration.tag_conflict_resolution_strategy #=> String, one of "IN_SYNC", "ADD_ONLY", "UPDATE_SYNC"
     #   resp.centralization_rule.destination.destination_metrics_configuration.backup_configuration.region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetCentralizationRuleForOrganization AWS API Documentation
@@ -1321,6 +1335,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types #=> Array
     #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS", "SECURITY_FINDING_LOGS", "ACCESS_LOGS", "CONNECTION_LOGS", "S3_SERVER_ACCESS_LOGS", "ALB_ACCESS_LOGS", "ALB_CONNECTION_LOGS", "ALB_HEALTH_CHECK_LOGS"
     #   resp.telemetry_rule.destination_configuration.msk_monitoring_parameters.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
+    #   resp.telemetry_rule.destination_configuration.kms_key_arn #=> String
     #   resp.telemetry_rule.scope #=> String
     #   resp.telemetry_rule.selection_criteria #=> String
     #   resp.telemetry_rule.allow_field_updates #=> Boolean
@@ -1419,6 +1434,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types #=> Array
     #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS", "SECURITY_FINDING_LOGS", "ACCESS_LOGS", "CONNECTION_LOGS", "S3_SERVER_ACCESS_LOGS", "ALB_ACCESS_LOGS", "ALB_CONNECTION_LOGS", "ALB_HEALTH_CHECK_LOGS"
     #   resp.telemetry_rule.destination_configuration.msk_monitoring_parameters.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
+    #   resp.telemetry_rule.destination_configuration.kms_key_arn #=> String
     #   resp.telemetry_rule.scope #=> String
     #   resp.telemetry_rule.selection_criteria #=> String
     #   resp.telemetry_rule.allow_field_updates #=> Boolean
@@ -1489,6 +1505,8 @@ module Aws::ObservabilityAdmin
     #   resp.centralization_rule_summaries[0].last_update_time_stamp #=> Integer
     #   resp.centralization_rule_summaries[0].rule_health #=> String, one of "Healthy", "Unhealthy", "Provisioning"
     #   resp.centralization_rule_summaries[0].failure_reason #=> String, one of "TRUSTED_ACCESS_NOT_ENABLED", "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION", "INTERNAL_SERVER_ERROR"
+    #   resp.centralization_rule_summaries[0].tag_propagation_status #=> String, one of "Healthy", "Unhealthy"
+    #   resp.centralization_rule_summaries[0].tag_propagation_failure_reason #=> String, one of "RoleNotAssumable", "RoleLacksPermissions"
     #   resp.centralization_rule_summaries[0].destination_account_id #=> String
     #   resp.centralization_rule_summaries[0].destination_region #=> String
     #   resp.next_token #=> String
@@ -2213,6 +2231,7 @@ module Aws::ObservabilityAdmin
     #             encryption_strategy: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, AWS_OWNED
     #             kms_key_arn: "ResourceArn",
     #             encryption_conflict_resolution_strategy: "ALLOW", # accepts ALLOW, SKIP
+    #             encryption_scope: "ENCRYPTED_SOURCE_ONLY", # accepts ENCRYPTED_SOURCE_ONLY, NEW_DESTINATION_LOG_GROUPS
     #           },
     #           backup_configuration: {
     #             region: "Region", # required
@@ -2220,6 +2239,10 @@ module Aws::ObservabilityAdmin
     #           },
     #           log_group_name_configuration: {
     #             log_group_name_pattern: "LogGroupNamePattern", # required
+    #           },
+    #           tag_propagation_configuration: {
+    #             destination_role_arn: "IamRoleArn", # required
+    #             tag_conflict_resolution_strategy: "IN_SYNC", # accepts IN_SYNC, ADD_ONLY, UPDATE_SYNC
     #           },
     #         },
     #         destination_metrics_configuration: {
@@ -2434,6 +2457,7 @@ module Aws::ObservabilityAdmin
     #         msk_monitoring_parameters: {
     #           enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #         },
+    #         kms_key_arn: "KmsKeyArn",
     #       },
     #       scope: "String",
     #       selection_criteria: "String",
@@ -2551,6 +2575,7 @@ module Aws::ObservabilityAdmin
     #         msk_monitoring_parameters: {
     #           enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #         },
+    #         kms_key_arn: "KmsKeyArn",
     #       },
     #       scope: "String",
     #       selection_criteria: "String",
@@ -2627,7 +2652,7 @@ module Aws::ObservabilityAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-observabilityadmin'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

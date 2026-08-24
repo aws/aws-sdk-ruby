@@ -364,6 +364,15 @@ module Aws::Kinesis
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [String] :account_id_endpoint_mode
+    #     The account ID endpoint mode to use. This can be one of the following values:
+    #     * `preferred` - The default behavior. Use the account ID endpoint if
+    #       available, otherwise use the standard endpoint.
+    #     * `disabled` - Never use the account ID endpoint. Only use the standard
+    #       endpoint.
+    #     * `required` - Always use the account ID endpoint. If the account ID
+    #       cannot be retrieved from credentials, an error is raised.
+    #
     #   @option options [Aws::Kinesis::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to
     #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
@@ -747,7 +756,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

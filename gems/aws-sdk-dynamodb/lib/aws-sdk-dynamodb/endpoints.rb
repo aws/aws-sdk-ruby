@@ -345,6 +345,16 @@ module Aws::DynamoDB
       end
     end
 
+    class SearchVectors
+      def self.build(context)
+        Aws::DynamoDB::EndpointParameters.create(
+          context.config,
+          resource_arn: context.params[:table_name],
+          is_search_operation: true,
+        )
+      end
+    end
+
     class TagResource
       def self.build(context)
         Aws::DynamoDB::EndpointParameters.create(
@@ -539,6 +549,8 @@ module Aws::DynamoDB
         RestoreTableToPointInTime.build(context)
       when :scan
         Scan.build(context)
+      when :search_vectors
+        SearchVectors.build(context)
       when :tag_resource
         TagResource.build(context)
       when :transact_get_items

@@ -579,6 +579,7 @@ module Aws::BedrockAgentCore
     #     records: [ # required
     #       {
     #         memory_record_id: "MemoryRecordId", # required
+    #         namespace: "Namespace",
     #       },
     #     ],
     #   })
@@ -634,6 +635,7 @@ module Aws::BedrockAgentCore
     #           text: "MemoryContentTextString",
     #         },
     #         namespaces: ["Namespace"],
+    #         source_namespaces: ["Namespace"],
     #         memory_strategy_id: "MemoryStrategyId",
     #         metadata: {
     #           "MetadataKey" => {
@@ -849,8 +851,8 @@ module Aws::BedrockAgentCore
     #   time is used.
     #
     # @option params [required, Array<Types::PayloadType>] :payload
-    #   The content payload of the event. This can include conversational data
-    #   or binary content.
+    #   The content payload of the event. This can include conversational
+    #   data, JSON data, or binary content.
     #
     # @option params [Types::Branch] :branch
     #   The branch information for this event. Branches allow for organizing
@@ -873,6 +875,11 @@ module Aws::BedrockAgentCore
     #   long-term memory extraction. If not specified, the event is processed
     #   for extraction as usual.
     #
+    # @option params [Types::ExtractionConfig] :extraction_config
+    #   The extraction configuration for long-term memory records. Use this
+    #   parameter to specify namespace variable keys and their values for
+    #   namespace substitution during extraction.
+    #
     # @return [Types::CreateEventOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventOutput#event #event} => Types::Event
@@ -894,6 +901,10 @@ module Aws::BedrockAgentCore
     #         },
     #         blob: {
     #         },
+    #         json: {
+    #           content: { # required
+    #           },
+    #         },
     #       },
     #     ],
     #     branch: {
@@ -907,6 +918,11 @@ module Aws::BedrockAgentCore
     #       },
     #     },
     #     extraction_mode: "SKIP", # accepts SKIP
+    #     extraction_config: {
+    #       namespace_variables: {
+    #         "NamespaceVariableName" => "NamespaceVariableValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1064,7 +1080,7 @@ module Aws::BedrockAgentCore
     #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.wallet_address #=> String
     #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.redirect_url #=> String
     #   resp.payment_instrument.created_at #=> Time
-    #   resp.payment_instrument.status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED"
+    #   resp.payment_instrument.status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED", "BLOCKED"
     #   resp.payment_instrument.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreatePaymentInstrument AWS API Documentation
@@ -1208,6 +1224,47 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Deletes a session associated with a capacity provider in Amazon
+    # Bedrock AgentCore and makes the session unavailable for further use.
+    # To delete a capacity provider session, specify both the capacity
+    # provider identifier and the session ID. After you delete a session,
+    # you cannot restart it.
+    #
+    # @option params [required, String] :capacity_provider_id
+    #   The unique identifier of the capacity provider associated with the
+    #   session.
+    #
+    # @option params [required, String] :session_id
+    #   The unique identifier of the capacity provider session to delete.
+    #
+    # @return [Types::DeleteCapacityProviderSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCapacityProviderSessionResponse#capacity_provider_arn #capacity_provider_arn} => String
+    #   * {Types::DeleteCapacityProviderSessionResponse#session_id #session_id} => String
+    #   * {Types::DeleteCapacityProviderSessionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_capacity_provider_session({
+    #     capacity_provider_id: "CapacityProviderId", # required
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_provider_arn #=> String
+    #   resp.session_id #=> String
+    #   resp.status #=> String, one of "Provisioning", "Deprovisioning", "Active", "Deleting", "Deleted", "Stopped"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeleteCapacityProviderSession AWS API Documentation
+    #
+    # @overload delete_capacity_provider_session(params = {})
+    # @param [Hash] params ({})
+    def delete_capacity_provider_session(params = {}, options = {})
+      req = build_request(:delete_capacity_provider_session, params)
+      req.send_request(options)
+    end
+
     # Deletes an event from an AgentCore Memory resource. When you delete an
     # event, it is permanently removed.
     #
@@ -1266,6 +1323,10 @@ module Aws::BedrockAgentCore
     # @option params [required, String] :memory_record_id
     #   The identifier of the memory record to delete.
     #
+    # @option params [String] :namespace
+    #   The namespace of the memory record to delete. This value is used for
+    #   IAM condition key authorization.
+    #
     # @return [Types::DeleteMemoryRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteMemoryRecordOutput#memory_record_id #memory_record_id} => String
@@ -1275,6 +1336,7 @@ module Aws::BedrockAgentCore
     #   resp = client.delete_memory_record({
     #     memory_id: "MemoryId", # required
     #     memory_record_id: "MemoryRecordId", # required
+    #     namespace: "Namespace",
     #   })
     #
     # @example Response structure
@@ -1323,7 +1385,7 @@ module Aws::BedrockAgentCore
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED"
+    #   resp.status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED", "BLOCKED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeletePaymentInstrument AWS API Documentation
     #
@@ -2013,6 +2075,10 @@ module Aws::BedrockAgentCore
     # @option params [required, String] :memory_record_id
     #   The identifier of the memory record to retrieve.
     #
+    # @option params [String] :namespace
+    #   The namespace of the memory record to retrieve. This value is used for
+    #   IAM condition key authorization.
+    #
     # @return [Types::GetMemoryRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMemoryRecordOutput#memory_record #memory_record} => Types::MemoryRecord
@@ -2022,6 +2088,7 @@ module Aws::BedrockAgentCore
     #   resp = client.get_memory_record({
     #     memory_id: "MemoryId", # required
     #     memory_record_id: "MemoryRecordId", # required
+    #     namespace: "Namespace",
     #   })
     #
     # @example Response structure
@@ -2115,7 +2182,7 @@ module Aws::BedrockAgentCore
     #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.wallet_address #=> String
     #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.redirect_url #=> String
     #   resp.payment_instrument.created_at #=> Time
-    #   resp.payment_instrument.status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED"
+    #   resp.payment_instrument.status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED", "BLOCKED"
     #   resp.payment_instrument.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentInstrument AWS API Documentation
@@ -2288,6 +2355,9 @@ module Aws::BedrockAgentCore
     #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.cloudwatch_logs.rule.filters[0].value.double_value #=> Float
     #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.cloudwatch_logs.rule.filters[0].value.boolean_value #=> Boolean
     #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.batch_evaluation.batch_evaluation_arn #=> String
+    #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.online_evaluation.online_evaluation_config_arn #=> String
+    #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.online_evaluation.start_time #=> Time
+    #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.online_evaluation.end_time #=> Time
     #   resp.recommendation_config.system_prompt_recommendation_config.evaluation_config.evaluators #=> Array
     #   resp.recommendation_config.system_prompt_recommendation_config.evaluation_config.evaluators[0].evaluator_arn #=> String
     #   resp.recommendation_config.tool_description_recommendation_config.tool_description.tool_description_text.tools #=> Array
@@ -2312,6 +2382,9 @@ module Aws::BedrockAgentCore
     #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.cloudwatch_logs.rule.filters[0].value.double_value #=> Float
     #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.cloudwatch_logs.rule.filters[0].value.boolean_value #=> Boolean
     #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.batch_evaluation.batch_evaluation_arn #=> String
+    #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.online_evaluation.online_evaluation_config_arn #=> String
+    #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.online_evaluation.start_time #=> Time
+    #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.online_evaluation.end_time #=> Time
     #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "DELETING"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
@@ -4643,7 +4716,7 @@ module Aws::BedrockAgentCore
     #   resp.payment_instruments[0].payment_connector_id #=> String
     #   resp.payment_instruments[0].user_id #=> String
     #   resp.payment_instruments[0].payment_instrument_type #=> String, one of "EMBEDDED_CRYPTO_WALLET"
-    #   resp.payment_instruments[0].status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED"
+    #   resp.payment_instruments[0].status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED", "BLOCKED"
     #   resp.payment_instruments[0].created_at #=> Time
     #   resp.payment_instruments[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -4882,12 +4955,18 @@ module Aws::BedrockAgentCore
     #     payment_manager_arn: "PaymentManagerArn", # required
     #     payment_session_id: "PaymentSessionId", # required
     #     payment_instrument_id: "PaymentInstrumentId", # required
-    #     payment_type: "CRYPTO_X402", # required, accepts CRYPTO_X402
+    #     payment_type: "CRYPTO_X402", # required, accepts CRYPTO_X402, MPP
     #     payment_input: { # required
     #       crypto_x402: {
     #         version: "String", # required
     #         payload: { # required
     #         },
+    #         permit2_allowance_limit: "Permit2AllowanceLimit",
+    #       },
+    #       mpp: {
+    #         version: "Version", # required
+    #         www_authenticate_headers: ["WwwAuthenticateHeader"], # required
+    #         buyer_pays_gas_fees: false,
     #       },
     #     },
     #     client_token: "ClientToken",
@@ -4899,9 +4978,12 @@ module Aws::BedrockAgentCore
     #   resp.payment_manager_arn #=> String
     #   resp.payment_session_id #=> String
     #   resp.payment_instrument_id #=> String
-    #   resp.payment_type #=> String, one of "CRYPTO_X402"
+    #   resp.payment_type #=> String, one of "CRYPTO_X402", "MPP"
     #   resp.status #=> String, one of "PROOF_GENERATED"
     #   resp.payment_output.crypto_x402.version #=> String
+    #   resp.payment_output.mpp.version #=> String
+    #   resp.payment_output.mpp.selected_payment_id #=> String
+    #   resp.payment_output.mpp.payment_credential #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -5808,6 +5890,11 @@ module Aws::BedrockAgentCore
     #           batch_evaluation: {
     #             batch_evaluation_arn: "BatchEvaluationArn", # required
     #           },
+    #           online_evaluation: {
+    #             online_evaluation_config_arn: "OnlineEvaluationConfigArn", # required
+    #             start_time: Time.now, # required
+    #             end_time: Time.now, # required
+    #           },
     #         },
     #         evaluation_config: {
     #           evaluators: [ # required
@@ -5867,6 +5954,11 @@ module Aws::BedrockAgentCore
     #           batch_evaluation: {
     #             batch_evaluation_arn: "BatchEvaluationArn", # required
     #           },
+    #           online_evaluation: {
+    #             online_evaluation_config_arn: "OnlineEvaluationConfigArn", # required
+    #             start_time: Time.now, # required
+    #             end_time: Time.now, # required
+    #           },
     #         },
     #       },
     #     },
@@ -5902,6 +5994,9 @@ module Aws::BedrockAgentCore
     #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.cloudwatch_logs.rule.filters[0].value.double_value #=> Float
     #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.cloudwatch_logs.rule.filters[0].value.boolean_value #=> Boolean
     #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.batch_evaluation.batch_evaluation_arn #=> String
+    #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.online_evaluation.online_evaluation_config_arn #=> String
+    #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.online_evaluation.start_time #=> Time
+    #   resp.recommendation_config.system_prompt_recommendation_config.agent_traces.online_evaluation.end_time #=> Time
     #   resp.recommendation_config.system_prompt_recommendation_config.evaluation_config.evaluators #=> Array
     #   resp.recommendation_config.system_prompt_recommendation_config.evaluation_config.evaluators[0].evaluator_arn #=> String
     #   resp.recommendation_config.tool_description_recommendation_config.tool_description.tool_description_text.tools #=> Array
@@ -5926,6 +6021,9 @@ module Aws::BedrockAgentCore
     #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.cloudwatch_logs.rule.filters[0].value.double_value #=> Float
     #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.cloudwatch_logs.rule.filters[0].value.boolean_value #=> Boolean
     #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.batch_evaluation.batch_evaluation_arn #=> String
+    #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.online_evaluation.online_evaluation_config_arn #=> String
+    #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.online_evaluation.start_time #=> Time
+    #   resp.recommendation_config.tool_description_recommendation_config.agent_traces.online_evaluation.end_time #=> Time
     #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "DELETING"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
@@ -6343,7 +6441,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

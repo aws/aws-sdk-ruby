@@ -187,7 +187,8 @@ module Aws
       volumes: Array[
         Params::volume
       ]?,
-      enable_execute_command: bool?
+      enable_execute_command: bool?,
+      network_mode: ::String?
     }
 
       type task_container_properties = {

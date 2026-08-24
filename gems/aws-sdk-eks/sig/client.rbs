@@ -78,6 +78,19 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _ActivateCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateCertificateAuthorityResponse]
+        def update: () -> Types::Update
+        def certificate_authority: () -> Types::CertificateAuthoritySummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#activate_certificate_authority-instance_method
+      def activate_certificate_authority: (
+                                            cluster_name: ::String,
+                                            certificate_authority_id: ::String,
+                                            ?client_request_token: ::String
+                                          ) -> _ActivateCertificateAuthorityResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateCertificateAuthorityResponseSuccess
+
       interface _AssociateAccessPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateAccessPolicyResponse]
         def cluster_name: () -> ::String
@@ -231,6 +244,18 @@ module Aws
                              ) -> _CreateCapabilityResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCapabilityResponseSuccess
 
+      interface _CreateCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCertificateAuthorityResponse]
+        def update: () -> Types::Update
+        def certificate_authority: () -> Types::CertificateAuthoritySummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#create_certificate_authority-instance_method
+      def create_certificate_authority: (
+                                          cluster_name: ::String,
+                                          ?client_request_token: ::String
+                                        ) -> _CreateCertificateAuthorityResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCertificateAuthorityResponseSuccess
+
       interface _CreateClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResponse]
         def cluster: () -> Types::Cluster
@@ -303,6 +328,19 @@ module Aws
                             ?deletion_protection: bool,
                             ?control_plane_scaling_config: {
                               tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl" | "tier-8xl")?
+                            },
+                            ?kube_api_server_config: {
+                              event_ttl: ::String?,
+                              service_node_port_range: {
+                                min_port: ::Integer?,
+                                max_port: ::Integer?
+                              }?
+                            },
+                            ?kube_scheduler_config: Params::kube_scheduler_config_request,
+                            ?kube_controller_manager_config: {
+                              horizontal_pod_autoscaler_controller_config: {
+                                horizontal_pod_autoscaler_sync_period: ::String?
+                              }?
                             }
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
@@ -454,6 +492,19 @@ module Aws
                              ) -> _DeleteCapabilityResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCapabilityResponseSuccess
 
+      interface _DeleteCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCertificateAuthorityResponse]
+        def update: () -> Types::Update
+        def certificate_authority: () -> Types::CertificateAuthoritySummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#delete_certificate_authority-instance_method
+      def delete_certificate_authority: (
+                                          cluster_name: ::String,
+                                          certificate_authority_id: ::String,
+                                          ?client_request_token: ::String
+                                        ) -> _DeleteCertificateAuthorityResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCertificateAuthorityResponseSuccess
+
       interface _DeleteClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResponse]
         def cluster: () -> Types::Cluster
@@ -580,6 +631,17 @@ module Aws
                                  capability_name: ::String
                                ) -> _DescribeCapabilityResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCapabilityResponseSuccess
+
+      interface _DescribeCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCertificateAuthorityResponse]
+        def certificate_authority: () -> Types::CertificateAuthority
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_certificate_authority-instance_method
+      def describe_certificate_authority: (
+                                            cluster_name: ::String,
+                                            certificate_authority_id: ::String
+                                          ) -> _DescribeCertificateAuthorityResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCertificateAuthorityResponseSuccess
 
       interface _DescribeClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterResponse]
@@ -797,6 +859,19 @@ module Aws
                                ?max_results: ::Integer
                              ) -> _ListCapabilitiesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCapabilitiesResponseSuccess
+
+      interface _ListCertificateAuthoritiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCertificateAuthoritiesResponse]
+        def certificate_authorities: () -> ::Array[Types::CertificateAuthoritySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_certificate_authorities-instance_method
+      def list_certificate_authorities: (
+                                          cluster_name: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListCertificateAuthoritiesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCertificateAuthoritiesResponseSuccess
 
       interface _ListClustersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersResponse]
@@ -1097,6 +1172,19 @@ module Aws
                                    ?deletion_protection: bool,
                                    ?control_plane_scaling_config: {
                                      tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl" | "tier-8xl")?
+                                   },
+                                   ?kube_api_server_config: {
+                                     event_ttl: ::String?,
+                                     service_node_port_range: {
+                                       min_port: ::Integer?,
+                                       max_port: ::Integer?
+                                     }?
+                                   },
+                                   ?kube_scheduler_config: Params::kube_scheduler_config_request,
+                                   ?kube_controller_manager_config: {
+                                     horizontal_pod_autoscaler_controller_config: {
+                                       horizontal_pod_autoscaler_sync_period: ::String?
+                                     }?
                                    }
                                  ) -> _UpdateClusterConfigResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterConfigResponseSuccess
@@ -1226,6 +1314,14 @@ module Aws
                     addon_name: ::String
                   ) -> Client::_DescribeAddonResponseSuccess
                     | (:addon_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAddonResponseSuccess
+                    | (:certificate_authority_update_complete waiter_name, 
+                    name: ::String,
+                    update_id: ::String,
+                    ?nodegroup_name: ::String,
+                    ?addon_name: ::String,
+                    ?capability_name: ::String
+                  ) -> Client::_DescribeUpdateResponseSuccess
+                    | (:certificate_authority_update_complete waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeUpdateResponseSuccess
                     | (:cluster_active waiter_name, 
                     name: ::String
                   ) -> Client::_DescribeClusterResponseSuccess

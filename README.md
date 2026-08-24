@@ -488,6 +488,9 @@ RubyGems.org page under "LINKS" section.
 | AWSMarketplace Metering                               | Aws::MarketplaceMetering                 | aws-sdk-marketplacemetering                 | 2016-01-14  |
 | AWSServerlessApplicationRepository                    | Aws::ServerlessApplicationRepository     | aws-sdk-serverlessapplicationrepository     | 2017-09-08  |
 | Access Analyzer                                       | Aws::AccessAnalyzer                      | aws-sdk-accessanalyzer                      | 2019-11-01  |
+| Account Access                                        | Aws::AccountAccess                       | aws-sdk-accountaccess                       | 2018-05-10  |
+| Agent Registry                                        | Aws::AgentRegistry                       | aws-sdk-agentregistry                       | 2025-12-01  |
+| Agent Registry Control                                | Aws::AgentRegistryControl                | aws-sdk-agentregistrycontrol                | 2025-12-01  |
 | Agents for Amazon Bedrock                             | Aws::BedrockAgent                        | aws-sdk-bedrockagent                        | 2023-06-05  |
 | Agents for Amazon Bedrock Runtime                     | Aws::BedrockAgentRuntime                 | aws-sdk-bedrockagentruntime                 | 2023-07-26  |
 | Amazon API Gateway                                    | Aws::APIGateway                          | aws-sdk-apigateway                          | 2015-07-09  |
@@ -715,6 +718,7 @@ RubyGems.org page under "LINKS" section.
 | Payment Cryptography Control Plane                    | Aws::PaymentCryptography                 | aws-sdk-paymentcryptography                 | 2021-09-14  |
 | Payment Cryptography Data Plane                       | Aws::PaymentCryptographyData             | aws-sdk-paymentcryptographydata             | 2022-02-03  |
 | PcaConnectorAd                                        | Aws::PcaConnectorAd                      | aws-sdk-pcaconnectorad                      | 2018-05-10  |
+| PricingPlanManager                                    | Aws::PricingPlanManager                  | aws-sdk-pricingplanmanager                  | 2025-08-05  |
 | Private CA Connector for SCEP                         | Aws::PcaConnectorScep                    | aws-sdk-pcaconnectorscep                    | 2018-05-10  |
 | QApps                                                 | Aws::QApps                               | aws-sdk-qapps                               | 2023-11-27  |
 | QBusiness                                             | Aws::QBusiness                           | aws-sdk-qbusiness                           | 2023-11-27  |

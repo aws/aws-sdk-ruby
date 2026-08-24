@@ -2077,6 +2077,10 @@ module Aws::HealthLake
     #   A boolean value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] provenance_enabled
+    #   Specifies whether to enable provenance for the import job.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRImportJobRequest AWS API Documentation
     #
     class StartFHIRImportJobRequest < Struct.new(
@@ -2089,7 +2093,8 @@ module Aws::HealthLake
       :validation_level,
       :profile_id,
       :input_format,
-      :drift_detection_enabled)
+      :drift_detection_enabled,
+      :provenance_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

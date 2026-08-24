@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2026-08-14)
+------------------
+
+* Feature - CloudWatch Logs centralization rules now support tag propagation. You can configure a TagPropagationConfiguration on your centralization rule to automatically sync resource tags from source to destination log groups, with configurable conflict resolution strategies.
+
+1.36.0 (2026-08-03)
+------------------
+
+* Feature - Launch CMK support for Telemetry Enablement Organization and Account Rules.
+
 1.35.0 (2026-07-22)
 ------------------
 

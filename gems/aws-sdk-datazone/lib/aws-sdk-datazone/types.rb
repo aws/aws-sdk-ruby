@@ -1175,6 +1175,10 @@ module Aws::DataZone
     #   The status of the asset scope.
     #   @return [String]
     #
+    # @!attribute [rw] scope_name
+    #   The name of the materialized asset scope.
+    #   @return [String]
+    #
     # @!attribute [rw] error_message
     #   The error message of the asset scope.
     #   @return [String]
@@ -1185,6 +1189,7 @@ module Aws::DataZone
       :asset_id,
       :filter_ids,
       :status,
+      :scope_name,
       :error_message)
       SENSITIVE = []
       include Aws::Structure
@@ -2130,6 +2135,10 @@ module Aws::DataZone
     #   The VPC properties of a connection.
     #   @return [Types::VpcPropertiesInput]
     #
+    # @!attribute [rw] git_properties
+    #   The Git properties of a connection.
+    #   @return [Types::GitPropertiesInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesInput AWS API Documentation
     #
     class ConnectionPropertiesInput < Struct.new(
@@ -2148,6 +2157,7 @@ module Aws::DataZone
       :workflows_serverless_properties,
       :lakehouse_properties,
       :vpc_properties,
+      :git_properties,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2168,6 +2178,7 @@ module Aws::DataZone
       class WorkflowsServerlessProperties < ConnectionPropertiesInput; end
       class LakehouseProperties < ConnectionPropertiesInput; end
       class VpcProperties < ConnectionPropertiesInput; end
+      class GitProperties < ConnectionPropertiesInput; end
       class Unknown < ConnectionPropertiesInput; end
     end
 
@@ -2236,6 +2247,10 @@ module Aws::DataZone
     #   The VPC properties of a connection.
     #   @return [Types::VpcPropertiesOutput]
     #
+    # @!attribute [rw] git_properties
+    #   The Git properties of a connection.
+    #   @return [Types::GitPropertiesOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesOutput AWS API Documentation
     #
     class ConnectionPropertiesOutput < Struct.new(
@@ -2254,6 +2269,7 @@ module Aws::DataZone
       :workflows_serverless_properties,
       :lakehouse_properties,
       :vpc_properties,
+      :git_properties,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2274,6 +2290,7 @@ module Aws::DataZone
       class WorkflowsServerlessProperties < ConnectionPropertiesOutput; end
       class LakehouseProperties < ConnectionPropertiesOutput; end
       class VpcProperties < ConnectionPropertiesOutput; end
+      class GitProperties < ConnectionPropertiesOutput; end
       class Unknown < ConnectionPropertiesOutput; end
     end
 
@@ -2326,6 +2343,10 @@ module Aws::DataZone
     #   The VPC properties of a connection properties patch.
     #   @return [Types::VpcPropertiesPatch]
     #
+    # @!attribute [rw] git_properties
+    #   The Git properties of a connection properties patch.
+    #   @return [Types::GitPropertiesPatch]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesPatch AWS API Documentation
     #
     class ConnectionPropertiesPatch < Struct.new(
@@ -2340,6 +2361,7 @@ module Aws::DataZone
       :mlflow_properties,
       :lakehouse_properties,
       :vpc_properties,
+      :git_properties,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2356,6 +2378,7 @@ module Aws::DataZone
       class MlflowProperties < ConnectionPropertiesPatch; end
       class LakehouseProperties < ConnectionPropertiesPatch; end
       class VpcProperties < ConnectionPropertiesPatch; end
+      class GitProperties < ConnectionPropertiesPatch; end
       class Unknown < ConnectionPropertiesPatch; end
     end
 
@@ -12459,6 +12482,93 @@ module Aws::DataZone
       :committed_at,
       :commit_message)
       SENSITIVE = [:repository, :branch, :commit_message]
+      include Aws::Structure
+    end
+
+    # Contains the Git connection properties that you specify when creating
+    # a Git connection.
+    #
+    # @!attribute [rw] code_connection_arn
+    #   The ARN of the CodeConnections connection used to connect to the Git
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_id
+    #   The ID of the Git repository. This is the owner and repository name,
+    #   for example, owner/repo-name.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_branch
+    #   The default branch of the Git repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GitPropertiesInput AWS API Documentation
+    #
+    class GitPropertiesInput < Struct.new(
+      :code_connection_arn,
+      :repository_id,
+      :default_branch)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of a Git connection returned by get and list
+    # operations, including connection status and any error details.
+    #
+    # @!attribute [rw] code_connection_arn
+    #   The ARN of the CodeConnections connection used to connect to the Git
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_id
+    #   The ID of the Git repository. This is the owner and repository name,
+    #   for example, owner/repo-name.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_branch
+    #   The default branch of the Git repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Git connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that describes why the Git connection failed. This
+    #   member is populated when the connection status is CREATE\_FAILED or
+    #   UPDATE\_FAILED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GitPropertiesOutput AWS API Documentation
+    #
+    class GitPropertiesOutput < Struct.new(
+      :code_connection_arn,
+      :repository_id,
+      :default_branch,
+      :status,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties used to update an existing Git connection, such as the
+    # CodeConnections ARN or the default branch.
+    #
+    # @!attribute [rw] code_connection_arn
+    #   The ARN of the CodeConnections connection used to connect to the Git
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_branch
+    #   The default branch of the Git repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GitPropertiesPatch AWS API Documentation
+    #
+    class GitPropertiesPatch < Struct.new(
+      :code_connection_arn,
+      :default_branch)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -541,6 +541,44 @@ module Aws::Drs
       req.send_request(options)
     end
 
+    # Cancels an in-progress Recovery Plan execution. Remaining steps are
+    # skipped.
+    #
+    # @option params [required, String] :recovery_plan_execution_arn
+    #   The ARN of the Recovery Plan execution to cancel.
+    #
+    # @return [Types::CancelRecoveryPlanExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelRecoveryPlanExecutionResponse#recovery_plan_execution #recovery_plan_execution} => Types::RecoveryPlanExecution
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_recovery_plan_execution({
+    #     recovery_plan_execution_arn: "StrictDRSARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_execution.recovery_plan_execution_arn #=> String
+    #   resp.recovery_plan_execution.recovery_plan_arn #=> String
+    #   resp.recovery_plan_execution.mode #=> String, one of "DRILL", "RECOVERY"
+    #   resp.recovery_plan_execution.status #=> String, one of "CREATED", "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.recovery_plan_execution.started_at #=> String
+    #   resp.recovery_plan_execution.completed_at #=> String
+    #   resp.recovery_plan_execution.error_detail.message #=> String
+    #   resp.recovery_plan_execution.error_detail.code #=> String
+    #   resp.recovery_plan_execution.tags #=> Hash
+    #   resp.recovery_plan_execution.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CancelRecoveryPlanExecution AWS API Documentation
+    #
+    # @overload cancel_recovery_plan_execution(params = {})
+    # @param [Hash] params ({})
+    def cancel_recovery_plan_execution(params = {}, options = {})
+      req = build_request(:cancel_recovery_plan_execution, params)
+      req.send_request(options)
+    end
+
     # Create an extended source server in the target Account based on the
     # source server in staging account.
     #
@@ -721,6 +759,128 @@ module Aws::Drs
     # @param [Hash] params ({})
     def create_launch_configuration_template(params = {}, options = {})
       req = build_request(:create_launch_configuration_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a Recovery Plan to orchestrate multi-server disaster recovery.
+    #
+    # @option params [required, String] :name
+    #   The name of a Recovery Plan.
+    #
+    # @option params [String] :description
+    #   The description of a Recovery Plan.
+    #
+    # @option params [String] :client_token
+    #   A unique string provided to ensure request idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to the Recovery Plan.
+    #
+    # @return [Types::CreateRecoveryPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRecoveryPlanResponse#recovery_plan #recovery_plan} => Types::RecoveryPlan
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_recovery_plan({
+    #     name: "RecoveryPlanName", # required
+    #     description: "RecoveryPlanDescription",
+    #     client_token: "ClientIdempotencyToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan.recovery_plan_arn #=> String
+    #   resp.recovery_plan.name #=> String
+    #   resp.recovery_plan.description #=> String
+    #   resp.recovery_plan.status #=> String, one of "ACTIVE", "INVALID"
+    #   resp.recovery_plan.created_at #=> String
+    #   resp.recovery_plan.updated_at #=> String
+    #   resp.recovery_plan.tags #=> Hash
+    #   resp.recovery_plan.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateRecoveryPlan AWS API Documentation
+    #
+    # @overload create_recovery_plan(params = {})
+    # @param [Hash] params ({})
+    def create_recovery_plan(params = {}, options = {})
+      req = build_request(:create_recovery_plan, params)
+      req.send_request(options)
+    end
+
+    # Creates a step in a Recovery Plan. A step is either `SERVER` type
+    # (servers to recover in parallel) or `WAIT` type (timed pause between
+    # steps).
+    #
+    # @option params [required, String] :recovery_plan_arn
+    #   The ARN of the Recovery Plan to add the step to.
+    #
+    # @option params [required, String] :step_name
+    #   The name of a Recovery Plan Step.
+    #
+    # @option params [Integer] :step_order
+    #   The order of a step within a Recovery Plan (1-based).
+    #
+    # @option params [required, Types::RecoveryPlanStepConfiguration] :configuration
+    #   Type-specific configuration for a recovery plan step. Exactly one
+    #   member must be set.
+    #
+    # @option params [String] :client_token
+    #   A unique string provided to ensure request idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateRecoveryPlanStepResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRecoveryPlanStepResponse#recovery_plan_step #recovery_plan_step} => Types::RecoveryPlanStep
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_recovery_plan_step({
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #     step_name: "RecoveryPlanStepName", # required
+    #     step_order: 1,
+    #     configuration: { # required
+    #       server_step_configuration: {
+    #         servers: [ # required
+    #           {
+    #             server_arn: "SourceServerARN", # required
+    #             impact_level: "CRITICAL", # accepts CRITICAL, OPTIONAL
+    #           },
+    #         ],
+    #       },
+    #       wait_step_configuration: {
+    #         wait_duration_minutes: 1, # required
+    #       },
+    #     },
+    #     client_token: "ClientIdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_step.recovery_plan_step_arn #=> String
+    #   resp.recovery_plan_step.step_order #=> Integer
+    #   resp.recovery_plan_step.step_name #=> String
+    #   resp.recovery_plan_step.configuration.server_step_configuration.servers #=> Array
+    #   resp.recovery_plan_step.configuration.server_step_configuration.servers[0].server_arn #=> String
+    #   resp.recovery_plan_step.configuration.server_step_configuration.servers[0].impact_level #=> String, one of "CRITICAL", "OPTIONAL"
+    #   resp.recovery_plan_step.configuration.wait_step_configuration.wait_duration_minutes #=> Integer
+    #   resp.recovery_plan_step.created_at #=> String
+    #   resp.recovery_plan_step.updated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateRecoveryPlanStep AWS API Documentation
+    #
+    # @overload create_recovery_plan_step(params = {})
+    # @param [Hash] params ({})
+    def create_recovery_plan_step(params = {}, options = {})
+      req = build_request(:create_recovery_plan_step, params)
       req.send_request(options)
     end
 
@@ -1008,6 +1168,92 @@ module Aws::Drs
     # @param [Hash] params ({})
     def delete_recovery_instance(params = {}, options = {})
       req = build_request(:delete_recovery_instance, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Recovery Plan. Cannot delete a plan that has an execution in
+    # a non-terminal status (`CREATED`, `IN_PROGRESS`).
+    #
+    # @option params [required, String] :recovery_plan_arn
+    #   The ARN of the Recovery Plan to delete.
+    #
+    # @return [Types::DeleteRecoveryPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRecoveryPlanResponse#recovery_plan_arn #recovery_plan_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_recovery_plan({
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryPlan AWS API Documentation
+    #
+    # @overload delete_recovery_plan(params = {})
+    # @param [Hash] params ({})
+    def delete_recovery_plan(params = {}, options = {})
+      req = build_request(:delete_recovery_plan, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Recovery Plan execution record. Must be in a terminal
+    # status.
+    #
+    # @option params [required, String] :recovery_plan_execution_arn
+    #   The ARN of the Recovery Plan execution to delete.
+    #
+    # @return [Types::DeleteRecoveryPlanExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRecoveryPlanExecutionResponse#recovery_plan_execution_arn #recovery_plan_execution_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_recovery_plan_execution({
+    #     recovery_plan_execution_arn: "StrictDRSARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_execution_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryPlanExecution AWS API Documentation
+    #
+    # @overload delete_recovery_plan_execution(params = {})
+    # @param [Hash] params ({})
+    def delete_recovery_plan_execution(params = {}, options = {})
+      req = build_request(:delete_recovery_plan_execution, params)
+      req.send_request(options)
+    end
+
+    # Deletes a step from a Recovery Plan.
+    #
+    # @option params [required, String] :recovery_plan_step_arn
+    #   The ARN of the Recovery Plan step to delete.
+    #
+    # @return [Types::DeleteRecoveryPlanStepResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRecoveryPlanStepResponse#recovery_plan_step_arn #recovery_plan_step_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_recovery_plan_step({
+    #     recovery_plan_step_arn: "StrictDRSARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_step_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteRecoveryPlanStep AWS API Documentation
+    #
+    # @overload delete_recovery_plan_step(params = {})
+    # @param [Hash] params ({})
+    def delete_recovery_plan_step(params = {}, options = {})
+      req = build_request(:delete_recovery_plan_step, params)
       req.send_request(options)
     end
 
@@ -1945,6 +2191,155 @@ module Aws::Drs
       req.send_request(options)
     end
 
+    # Gets a Recovery Plan by ARN.
+    #
+    # @option params [required, String] :recovery_plan_arn
+    #   The ARN of the Recovery Plan to retrieve.
+    #
+    # @return [Types::GetRecoveryPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRecoveryPlanResponse#recovery_plan #recovery_plan} => Types::RecoveryPlan
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_recovery_plan({
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan.recovery_plan_arn #=> String
+    #   resp.recovery_plan.name #=> String
+    #   resp.recovery_plan.description #=> String
+    #   resp.recovery_plan.status #=> String, one of "ACTIVE", "INVALID"
+    #   resp.recovery_plan.created_at #=> String
+    #   resp.recovery_plan.updated_at #=> String
+    #   resp.recovery_plan.tags #=> Hash
+    #   resp.recovery_plan.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlan AWS API Documentation
+    #
+    # @overload get_recovery_plan(params = {})
+    # @param [Hash] params ({})
+    def get_recovery_plan(params = {}, options = {})
+      req = build_request(:get_recovery_plan, params)
+      req.send_request(options)
+    end
+
+    # Gets the details of a Recovery Plan execution.
+    #
+    # @option params [required, String] :recovery_plan_execution_arn
+    #   The ARN of the Recovery Plan execution.
+    #
+    # @return [Types::GetRecoveryPlanExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRecoveryPlanExecutionResponse#recovery_plan_execution #recovery_plan_execution} => Types::RecoveryPlanExecution
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_recovery_plan_execution({
+    #     recovery_plan_execution_arn: "StrictDRSARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_execution.recovery_plan_execution_arn #=> String
+    #   resp.recovery_plan_execution.recovery_plan_arn #=> String
+    #   resp.recovery_plan_execution.mode #=> String, one of "DRILL", "RECOVERY"
+    #   resp.recovery_plan_execution.status #=> String, one of "CREATED", "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.recovery_plan_execution.started_at #=> String
+    #   resp.recovery_plan_execution.completed_at #=> String
+    #   resp.recovery_plan_execution.error_detail.message #=> String
+    #   resp.recovery_plan_execution.error_detail.code #=> String
+    #   resp.recovery_plan_execution.tags #=> Hash
+    #   resp.recovery_plan_execution.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanExecution AWS API Documentation
+    #
+    # @overload get_recovery_plan_execution(params = {})
+    # @param [Hash] params ({})
+    def get_recovery_plan_execution(params = {}, options = {})
+      req = build_request(:get_recovery_plan_execution, params)
+      req.send_request(options)
+    end
+
+    # Gets the details of a step within a Recovery Plan execution.
+    #
+    # @option params [required, String] :recovery_plan_execution_step_arn
+    #   The ARN of the execution step.
+    #
+    # @return [Types::GetRecoveryPlanExecutionStepResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRecoveryPlanExecutionStepResponse#recovery_plan_execution_step #recovery_plan_execution_step} => Types::RecoveryPlanExecutionStep
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_recovery_plan_execution_step({
+    #     recovery_plan_execution_step_arn: "StrictDRSARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_execution_step.recovery_plan_execution_step_arn #=> String
+    #   resp.recovery_plan_execution_step.step_index #=> Integer
+    #   resp.recovery_plan_execution_step.status #=> String, one of "NOT_STARTED", "EXECUTING", "WAITING", "COMPLETED", "FAILED", "TIMED_OUT", "SKIPPED"
+    #   resp.recovery_plan_execution_step.step_name #=> String
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers #=> Array
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers[0].server_arn #=> String
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers[0].impact_level #=> String, one of "CRITICAL", "OPTIONAL"
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers[0].job_id #=> String
+    #   resp.recovery_plan_execution_step.configuration.wait_step_configuration.wait_duration_minutes #=> Integer
+    #   resp.recovery_plan_execution_step.error_detail.message #=> String
+    #   resp.recovery_plan_execution_step.error_detail.code #=> String
+    #   resp.recovery_plan_execution_step.attempt #=> Integer
+    #   resp.recovery_plan_execution_step.created_at #=> String
+    #   resp.recovery_plan_execution_step.updated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanExecutionStep AWS API Documentation
+    #
+    # @overload get_recovery_plan_execution_step(params = {})
+    # @param [Hash] params ({})
+    def get_recovery_plan_execution_step(params = {}, options = {})
+      req = build_request(:get_recovery_plan_execution_step, params)
+      req.send_request(options)
+    end
+
+    # Gets a Recovery Plan step by ARN.
+    #
+    # @option params [required, String] :recovery_plan_step_arn
+    #   The ARN of the Recovery Plan step to retrieve.
+    #
+    # @return [Types::GetRecoveryPlanStepResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRecoveryPlanStepResponse#recovery_plan_step #recovery_plan_step} => Types::RecoveryPlanStep
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_recovery_plan_step({
+    #     recovery_plan_step_arn: "StrictDRSARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_step.recovery_plan_step_arn #=> String
+    #   resp.recovery_plan_step.step_order #=> Integer
+    #   resp.recovery_plan_step.step_name #=> String
+    #   resp.recovery_plan_step.configuration.server_step_configuration.servers #=> Array
+    #   resp.recovery_plan_step.configuration.server_step_configuration.servers[0].server_arn #=> String
+    #   resp.recovery_plan_step.configuration.server_step_configuration.servers[0].impact_level #=> String, one of "CRITICAL", "OPTIONAL"
+    #   resp.recovery_plan_step.configuration.wait_step_configuration.wait_duration_minutes #=> Integer
+    #   resp.recovery_plan_step.created_at #=> String
+    #   resp.recovery_plan_step.updated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetRecoveryPlanStep AWS API Documentation
+    #
+    # @overload get_recovery_plan_step(params = {})
+    # @param [Hash] params ({})
+    def get_recovery_plan_step(params = {}, options = {})
+      req = build_request(:get_recovery_plan_step, params)
+      req.send_request(options)
+    end
+
     # Gets a ReplicationConfiguration, filtered by Source Server ID.
     #
     # @option params [required, String] :source_server_id
@@ -2141,6 +2536,205 @@ module Aws::Drs
       req.send_request(options)
     end
 
+    # Lists all steps within a Recovery Plan execution.
+    #
+    # @option params [required, String] :recovery_plan_execution_arn
+    #   The ARN of the Recovery Plan execution.
+    #
+    # @option params [Types::ListRecoveryPlanExecutionStepsFilter] :filter
+    #   Filters for listing execution steps.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListRecoveryPlanExecutionStepsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecoveryPlanExecutionStepsResponse#recovery_plan_execution_steps #recovery_plan_execution_steps} => Array&lt;Types::RecoveryPlanExecutionStepSummary&gt;
+    #   * {Types::ListRecoveryPlanExecutionStepsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recovery_plan_execution_steps({
+    #     recovery_plan_execution_arn: "StrictDRSARN", # required
+    #     filter: {
+    #       status: "NOT_STARTED", # accepts NOT_STARTED, EXECUTING, WAITING, COMPLETED, FAILED, TIMED_OUT, SKIPPED
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_execution_steps #=> Array
+    #   resp.recovery_plan_execution_steps[0].recovery_plan_execution_step_arn #=> String
+    #   resp.recovery_plan_execution_steps[0].step_name #=> String
+    #   resp.recovery_plan_execution_steps[0].step_index #=> Integer
+    #   resp.recovery_plan_execution_steps[0].status #=> String, one of "NOT_STARTED", "EXECUTING", "WAITING", "COMPLETED", "FAILED", "TIMED_OUT", "SKIPPED"
+    #   resp.recovery_plan_execution_steps[0].configuration.execution_server_step_configuration.servers #=> Array
+    #   resp.recovery_plan_execution_steps[0].configuration.execution_server_step_configuration.servers[0].server_arn #=> String
+    #   resp.recovery_plan_execution_steps[0].configuration.execution_server_step_configuration.servers[0].impact_level #=> String, one of "CRITICAL", "OPTIONAL"
+    #   resp.recovery_plan_execution_steps[0].configuration.execution_server_step_configuration.servers[0].job_id #=> String
+    #   resp.recovery_plan_execution_steps[0].configuration.wait_step_configuration.wait_duration_minutes #=> Integer
+    #   resp.recovery_plan_execution_steps[0].error_detail.message #=> String
+    #   resp.recovery_plan_execution_steps[0].error_detail.code #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlanExecutionSteps AWS API Documentation
+    #
+    # @overload list_recovery_plan_execution_steps(params = {})
+    # @param [Hash] params ({})
+    def list_recovery_plan_execution_steps(params = {}, options = {})
+      req = build_request(:list_recovery_plan_execution_steps, params)
+      req.send_request(options)
+    end
+
+    # Lists executions of Recovery Plans, optionally filtered by plan or
+    # status.
+    #
+    # @option params [String] :recovery_plan_arn
+    #   Filter executions by Recovery Plan ARN.
+    #
+    # @option params [String] :status
+    #   Filter executions by status.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListRecoveryPlanExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecoveryPlanExecutionsResponse#recovery_plan_executions #recovery_plan_executions} => Array&lt;Types::RecoveryPlanExecutionSummary&gt;
+    #   * {Types::ListRecoveryPlanExecutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recovery_plan_executions({
+    #     recovery_plan_arn: "StrictDRSARN",
+    #     status: "CREATED", # accepts CREATED, IN_PROGRESS, COMPLETED, FAILED, CANCELLING, CANCELLED
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_executions #=> Array
+    #   resp.recovery_plan_executions[0].recovery_plan_execution_arn #=> String
+    #   resp.recovery_plan_executions[0].recovery_plan_arn #=> String
+    #   resp.recovery_plan_executions[0].mode #=> String, one of "DRILL", "RECOVERY"
+    #   resp.recovery_plan_executions[0].status #=> String, one of "CREATED", "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.recovery_plan_executions[0].started_at #=> String
+    #   resp.recovery_plan_executions[0].error_detail.message #=> String
+    #   resp.recovery_plan_executions[0].error_detail.code #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlanExecutions AWS API Documentation
+    #
+    # @overload list_recovery_plan_executions(params = {})
+    # @param [Hash] params ({})
+    def list_recovery_plan_executions(params = {}, options = {})
+      req = build_request(:list_recovery_plan_executions, params)
+      req.send_request(options)
+    end
+
+    # Lists all steps in a Recovery Plan.
+    #
+    # @option params [required, String] :recovery_plan_arn
+    #   The ARN of the Recovery Plan.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListRecoveryPlanStepsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecoveryPlanStepsResponse#recovery_plan_steps #recovery_plan_steps} => Array&lt;Types::RecoveryPlanStep&gt;
+    #   * {Types::ListRecoveryPlanStepsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recovery_plan_steps({
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_steps #=> Array
+    #   resp.recovery_plan_steps[0].recovery_plan_step_arn #=> String
+    #   resp.recovery_plan_steps[0].step_order #=> Integer
+    #   resp.recovery_plan_steps[0].step_name #=> String
+    #   resp.recovery_plan_steps[0].configuration.server_step_configuration.servers #=> Array
+    #   resp.recovery_plan_steps[0].configuration.server_step_configuration.servers[0].server_arn #=> String
+    #   resp.recovery_plan_steps[0].configuration.server_step_configuration.servers[0].impact_level #=> String, one of "CRITICAL", "OPTIONAL"
+    #   resp.recovery_plan_steps[0].configuration.wait_step_configuration.wait_duration_minutes #=> Integer
+    #   resp.recovery_plan_steps[0].created_at #=> String
+    #   resp.recovery_plan_steps[0].updated_at #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlanSteps AWS API Documentation
+    #
+    # @overload list_recovery_plan_steps(params = {})
+    # @param [Hash] params ({})
+    def list_recovery_plan_steps(params = {}, options = {})
+      req = build_request(:list_recovery_plan_steps, params)
+      req.send_request(options)
+    end
+
+    # Lists all Recovery Plans in the account.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListRecoveryPlansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecoveryPlansResponse#recovery_plans #recovery_plans} => Array&lt;Types::RecoveryPlanSummary&gt;
+    #   * {Types::ListRecoveryPlansResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recovery_plans({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plans #=> Array
+    #   resp.recovery_plans[0].recovery_plan_arn #=> String
+    #   resp.recovery_plans[0].name #=> String
+    #   resp.recovery_plans[0].status #=> String, one of "ACTIVE", "INVALID"
+    #   resp.recovery_plans[0].created_at #=> String
+    #   resp.recovery_plans[0].updated_at #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListRecoveryPlans AWS API Documentation
+    #
+    # @overload list_recovery_plans(params = {})
+    # @param [Hash] params ({})
+    def list_recovery_plans(params = {}, options = {})
+      req = build_request(:list_recovery_plans, params)
+      req.send_request(options)
+    end
+
     # Returns an array of staging accounts for existing extended source
     # servers.
     #
@@ -2305,6 +2899,48 @@ module Aws::Drs
       req.send_request(options)
     end
 
+    # Reorders steps in a Recovery Plan. Accepts a complete ordered list of
+    # step ARNs.
+    #
+    # @option params [required, String] :recovery_plan_arn
+    #   The ARN of the Recovery Plan.
+    #
+    # @option params [required, Array<String>] :ordered_step_arns
+    #   Ordered list of all step ARNs representing the desired sequence.
+    #
+    # @return [Types::ReorderRecoveryPlanStepsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReorderRecoveryPlanStepsResponse#recovery_plan_steps #recovery_plan_steps} => Array&lt;Types::RecoveryPlanStep&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reorder_recovery_plan_steps({
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #     ordered_step_arns: ["StrictDRSARN"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_steps #=> Array
+    #   resp.recovery_plan_steps[0].recovery_plan_step_arn #=> String
+    #   resp.recovery_plan_steps[0].step_order #=> Integer
+    #   resp.recovery_plan_steps[0].step_name #=> String
+    #   resp.recovery_plan_steps[0].configuration.server_step_configuration.servers #=> Array
+    #   resp.recovery_plan_steps[0].configuration.server_step_configuration.servers[0].server_arn #=> String
+    #   resp.recovery_plan_steps[0].configuration.server_step_configuration.servers[0].impact_level #=> String, one of "CRITICAL", "OPTIONAL"
+    #   resp.recovery_plan_steps[0].configuration.wait_step_configuration.wait_duration_minutes #=> Integer
+    #   resp.recovery_plan_steps[0].created_at #=> String
+    #   resp.recovery_plan_steps[0].updated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ReorderRecoveryPlanSteps AWS API Documentation
+    #
+    # @overload reorder_recovery_plan_steps(params = {})
+    # @param [Hash] params ({})
+    def reorder_recovery_plan_steps(params = {}, options = {})
+      req = build_request(:reorder_recovery_plan_steps, params)
+      req.send_request(options)
+    end
+
     # WARNING: RetryDataReplication is deprecated. Causes the data
     # replication initiation sequence to begin immediately upon next
     # Handshake for the specified Source Server ID, regardless of when the
@@ -2411,6 +3047,47 @@ module Aws::Drs
     # @param [Hash] params ({})
     def retry_data_replication(params = {}, options = {})
       req = build_request(:retry_data_replication, params)
+      req.send_request(options)
+    end
+
+    # Retries a failed `SERVER` type execution step.
+    #
+    # @option params [required, String] :recovery_plan_execution_step_arn
+    #   The ARN of the execution step to retry.
+    #
+    # @return [Types::RetryRecoveryPlanExecutionStepResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RetryRecoveryPlanExecutionStepResponse#recovery_plan_execution_step #recovery_plan_execution_step} => Types::RecoveryPlanExecutionStep
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.retry_recovery_plan_execution_step({
+    #     recovery_plan_execution_step_arn: "StrictDRSARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_execution_step.recovery_plan_execution_step_arn #=> String
+    #   resp.recovery_plan_execution_step.step_index #=> Integer
+    #   resp.recovery_plan_execution_step.status #=> String, one of "NOT_STARTED", "EXECUTING", "WAITING", "COMPLETED", "FAILED", "TIMED_OUT", "SKIPPED"
+    #   resp.recovery_plan_execution_step.step_name #=> String
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers #=> Array
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers[0].server_arn #=> String
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers[0].impact_level #=> String, one of "CRITICAL", "OPTIONAL"
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers[0].job_id #=> String
+    #   resp.recovery_plan_execution_step.configuration.wait_step_configuration.wait_duration_minutes #=> Integer
+    #   resp.recovery_plan_execution_step.error_detail.message #=> String
+    #   resp.recovery_plan_execution_step.error_detail.code #=> String
+    #   resp.recovery_plan_execution_step.attempt #=> Integer
+    #   resp.recovery_plan_execution_step.created_at #=> String
+    #   resp.recovery_plan_execution_step.updated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RetryRecoveryPlanExecutionStep AWS API Documentation
+    #
+    # @overload retry_recovery_plan_execution_step(params = {})
+    # @param [Hash] params ({})
+    def retry_recovery_plan_execution_step(params = {}, options = {})
+      req = build_request(:retry_recovery_plan_execution_step, params)
       req.send_request(options)
     end
 
@@ -2593,6 +3270,72 @@ module Aws::Drs
     # @param [Hash] params ({})
     def start_recovery(params = {}, options = {})
       req = build_request(:start_recovery, params)
+      req.send_request(options)
+    end
+
+    # Starts executing a Recovery Plan in `DRILL` or `RECOVERY` mode. A plan
+    # cannot have more than one execution in a non-terminal status at a
+    # time.
+    #
+    # @option params [required, String] :recovery_plan_arn
+    #   The ARN of the Recovery Plan to execute.
+    #
+    # @option params [required, String] :mode
+    #   The execution mode (`DRILL` or `RECOVERY`).
+    #
+    # @option params [String] :client_token
+    #   A unique string provided to ensure request idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::RecoveryPlanExecutionSourceServer>] :source_servers
+    #   Optional list of source servers with specific recovery snapshots. If
+    #   not provided, the latest snapshot is used for each server.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to the Recovery Plan execution.
+    #
+    # @return [Types::StartRecoveryPlanExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartRecoveryPlanExecutionResponse#recovery_plan_execution #recovery_plan_execution} => Types::RecoveryPlanExecution
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_recovery_plan_execution({
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #     mode: "DRILL", # required, accepts DRILL, RECOVERY
+    #     client_token: "ClientIdempotencyToken",
+    #     source_servers: [
+    #       {
+    #         source_server_id: "SourceServerID", # required
+    #         recovery_snapshot_id: "RecoverySnapshotID", # required
+    #       },
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_execution.recovery_plan_execution_arn #=> String
+    #   resp.recovery_plan_execution.recovery_plan_arn #=> String
+    #   resp.recovery_plan_execution.mode #=> String, one of "DRILL", "RECOVERY"
+    #   resp.recovery_plan_execution.status #=> String, one of "CREATED", "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.recovery_plan_execution.started_at #=> String
+    #   resp.recovery_plan_execution.completed_at #=> String
+    #   resp.recovery_plan_execution.error_detail.message #=> String
+    #   resp.recovery_plan_execution.error_detail.code #=> String
+    #   resp.recovery_plan_execution.tags #=> Hash
+    #   resp.recovery_plan_execution.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartRecoveryPlanExecution AWS API Documentation
+    #
+    # @overload start_recovery_plan_execution(params = {})
+    # @param [Hash] params ({})
+    def start_recovery_plan_execution(params = {}, options = {})
+      req = build_request(:start_recovery_plan_execution, params)
       req.send_request(options)
     end
 
@@ -3308,6 +4051,170 @@ module Aws::Drs
       req.send_request(options)
     end
 
+    # Updates a Recovery Plan's name or description.
+    #
+    # @option params [required, String] :recovery_plan_arn
+    #   The ARN of the Recovery Plan to update.
+    #
+    # @option params [String] :name
+    #   The name of a Recovery Plan.
+    #
+    # @option params [String] :description
+    #   The description of a Recovery Plan.
+    #
+    # @return [Types::UpdateRecoveryPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRecoveryPlanResponse#recovery_plan #recovery_plan} => Types::RecoveryPlan
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_recovery_plan({
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #     name: "RecoveryPlanName",
+    #     description: "RecoveryPlanDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan.recovery_plan_arn #=> String
+    #   resp.recovery_plan.name #=> String
+    #   resp.recovery_plan.description #=> String
+    #   resp.recovery_plan.status #=> String, one of "ACTIVE", "INVALID"
+    #   resp.recovery_plan.created_at #=> String
+    #   resp.recovery_plan.updated_at #=> String
+    #   resp.recovery_plan.tags #=> Hash
+    #   resp.recovery_plan.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateRecoveryPlan AWS API Documentation
+    #
+    # @overload update_recovery_plan(params = {})
+    # @param [Hash] params ({})
+    def update_recovery_plan(params = {}, options = {})
+      req = build_request(:update_recovery_plan, params)
+      req.send_request(options)
+    end
+
+    # Updates an execution step. Supports two actions: (1) skip a step that
+    # is in `NOT_STARTED` or `FAILED` status; (2) update the wait duration
+    # of a `WAIT` type step that is in `NOT_STARTED` status.
+    #
+    # @option params [required, String] :recovery_plan_execution_step_arn
+    #   The ARN of the execution step to update.
+    #
+    # @option params [String] :status
+    #   Only SKIPPED is accepted. Step must be in NOT\_STARTED or FAILED
+    #   status.
+    #
+    # @option params [Array<Types::RecoveryPlanServer>] :servers
+    #   Full replacement of the server list. Only allowed when the step is in
+    #   NOT\_STARTED status (Server type steps only).
+    #
+    # @option params [Integer] :wait_duration_minutes
+    #   Updated wait duration. Only allowed when the step is in NOT\_STARTED
+    #   status (Wait type steps only).
+    #
+    # @return [Types::UpdateRecoveryPlanExecutionStepResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRecoveryPlanExecutionStepResponse#recovery_plan_execution_step #recovery_plan_execution_step} => Types::RecoveryPlanExecutionStep
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_recovery_plan_execution_step({
+    #     recovery_plan_execution_step_arn: "StrictDRSARN", # required
+    #     status: "NOT_STARTED", # accepts NOT_STARTED, EXECUTING, WAITING, COMPLETED, FAILED, TIMED_OUT, SKIPPED
+    #     servers: [
+    #       {
+    #         server_arn: "SourceServerARN", # required
+    #         impact_level: "CRITICAL", # accepts CRITICAL, OPTIONAL
+    #       },
+    #     ],
+    #     wait_duration_minutes: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_execution_step.recovery_plan_execution_step_arn #=> String
+    #   resp.recovery_plan_execution_step.step_index #=> Integer
+    #   resp.recovery_plan_execution_step.status #=> String, one of "NOT_STARTED", "EXECUTING", "WAITING", "COMPLETED", "FAILED", "TIMED_OUT", "SKIPPED"
+    #   resp.recovery_plan_execution_step.step_name #=> String
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers #=> Array
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers[0].server_arn #=> String
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers[0].impact_level #=> String, one of "CRITICAL", "OPTIONAL"
+    #   resp.recovery_plan_execution_step.configuration.execution_server_step_configuration.servers[0].job_id #=> String
+    #   resp.recovery_plan_execution_step.configuration.wait_step_configuration.wait_duration_minutes #=> Integer
+    #   resp.recovery_plan_execution_step.error_detail.message #=> String
+    #   resp.recovery_plan_execution_step.error_detail.code #=> String
+    #   resp.recovery_plan_execution_step.attempt #=> Integer
+    #   resp.recovery_plan_execution_step.created_at #=> String
+    #   resp.recovery_plan_execution_step.updated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateRecoveryPlanExecutionStep AWS API Documentation
+    #
+    # @overload update_recovery_plan_execution_step(params = {})
+    # @param [Hash] params ({})
+    def update_recovery_plan_execution_step(params = {}, options = {})
+      req = build_request(:update_recovery_plan_execution_step, params)
+      req.send_request(options)
+    end
+
+    # Updates a Recovery Plan step's name or configuration. Step type is
+    # immutable.
+    #
+    # @option params [required, String] :recovery_plan_step_arn
+    #   The ARN of the Recovery Plan step to update.
+    #
+    # @option params [String] :step_name
+    #   The name of a Recovery Plan Step.
+    #
+    # @option params [Types::RecoveryPlanStepConfiguration] :configuration
+    #   Type-specific configuration for a recovery plan step. Exactly one
+    #   member must be set.
+    #
+    # @return [Types::UpdateRecoveryPlanStepResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRecoveryPlanStepResponse#recovery_plan_step #recovery_plan_step} => Types::RecoveryPlanStep
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_recovery_plan_step({
+    #     recovery_plan_step_arn: "StrictDRSARN", # required
+    #     step_name: "RecoveryPlanStepName",
+    #     configuration: {
+    #       server_step_configuration: {
+    #         servers: [ # required
+    #           {
+    #             server_arn: "SourceServerARN", # required
+    #             impact_level: "CRITICAL", # accepts CRITICAL, OPTIONAL
+    #           },
+    #         ],
+    #       },
+    #       wait_step_configuration: {
+    #         wait_duration_minutes: 1, # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_plan_step.recovery_plan_step_arn #=> String
+    #   resp.recovery_plan_step.step_order #=> Integer
+    #   resp.recovery_plan_step.step_name #=> String
+    #   resp.recovery_plan_step.configuration.server_step_configuration.servers #=> Array
+    #   resp.recovery_plan_step.configuration.server_step_configuration.servers[0].server_arn #=> String
+    #   resp.recovery_plan_step.configuration.server_step_configuration.servers[0].impact_level #=> String, one of "CRITICAL", "OPTIONAL"
+    #   resp.recovery_plan_step.configuration.wait_step_configuration.wait_duration_minutes #=> Integer
+    #   resp.recovery_plan_step.created_at #=> String
+    #   resp.recovery_plan_step.updated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateRecoveryPlanStep AWS API Documentation
+    #
+    # @overload update_recovery_plan_step(params = {})
+    # @param [Hash] params ({})
+    def update_recovery_plan_step(params = {}, options = {})
+      req = build_request(:update_recovery_plan_step, params)
+      req.send_request(options)
+    end
+
     # Allows you to update a ReplicationConfiguration by Source Server ID.
     #
     # @option params [required, String] :source_server_id
@@ -3648,7 +4555,7 @@ module Aws::Drs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

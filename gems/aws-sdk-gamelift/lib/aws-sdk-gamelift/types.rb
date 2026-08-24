@@ -398,7 +398,7 @@ module Aws::GameLift
       :game_server_id,
       :game_server_data,
       :filter_option)
-      SENSITIVE = []
+      SENSITIVE = [:game_server_data]
       include Aws::Structure
     end
 
@@ -2796,7 +2796,7 @@ module Aws::GameLift
       :idempotency_token,
       :game_session_data,
       :location)
-      SENSITIVE = []
+      SENSITIVE = [:game_session_data]
       include Aws::Structure
     end
 
@@ -2898,7 +2898,7 @@ module Aws::GameLift
       :custom_event_data,
       :notification_target,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:custom_event_data]
       include Aws::Structure
     end
 
@@ -3123,7 +3123,7 @@ module Aws::GameLift
       :backfill_mode,
       :flex_match_mode,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:custom_event_data, :game_session_data]
       include Aws::Structure
     end
 
@@ -3213,7 +3213,7 @@ module Aws::GameLift
       :game_session_id,
       :player_id,
       :player_data)
-      SENSITIVE = [:player_id]
+      SENSITIVE = [:player_id, :player_data]
       include Aws::Structure
     end
 
@@ -3257,7 +3257,7 @@ module Aws::GameLift
       :game_session_id,
       :player_ids,
       :player_data_map)
-      SENSITIVE = [:player_ids]
+      SENSITIVE = [:player_ids, :player_data_map]
       include Aws::Structure
     end
 
@@ -5473,7 +5473,7 @@ module Aws::GameLift
     class DesiredPlayerSession < Struct.new(
       :player_id,
       :player_data)
-      SENSITIVE = [:player_id]
+      SENSITIVE = [:player_id, :player_data]
       include Aws::Structure
     end
 
@@ -6448,7 +6448,7 @@ module Aws::GameLift
     class GameProperty < Struct.new(
       :key,
       :value)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -6549,7 +6549,7 @@ module Aws::GameLift
       :registration_time,
       :last_claim_time,
       :last_health_check_time)
-      SENSITIVE = []
+      SENSITIVE = [:game_server_data]
       include Aws::Structure
     end
 
@@ -7280,7 +7280,7 @@ module Aws::GameLift
       :location,
       :compute_name,
       :player_gateway_status)
-      SENSITIVE = [:ip_address, :port]
+      SENSITIVE = [:ip_address, :port, :game_session_data, :matchmaker_data]
       include Aws::Structure
     end
 
@@ -7686,7 +7686,7 @@ module Aws::GameLift
       :matchmaker_data,
       :priority_configuration_override,
       :player_gateway_status)
-      SENSITIVE = [:ip_address, :port]
+      SENSITIVE = [:ip_address, :port, :game_session_data, :matchmaker_data]
       include Aws::Structure
     end
 
@@ -7779,7 +7779,7 @@ module Aws::GameLift
       :priority_configuration,
       :custom_event_data,
       :notification_target)
-      SENSITIVE = []
+      SENSITIVE = [:custom_event_data]
       include Aws::Structure
     end
 
@@ -9662,7 +9662,7 @@ module Aws::GameLift
       :game_session_data,
       :backfill_mode,
       :flex_match_mode)
-      SENSITIVE = []
+      SENSITIVE = [:custom_event_data, :game_session_data]
       include Aws::Structure
     end
 
@@ -10310,7 +10310,7 @@ module Aws::GameLift
       :dns_name,
       :port,
       :player_data)
-      SENSITIVE = [:player_id, :ip_address, :port]
+      SENSITIVE = [:player_id, :ip_address, :port, :player_data]
       include Aws::Structure
     end
 
@@ -10664,7 +10664,7 @@ module Aws::GameLift
       :instance_id,
       :connection_info,
       :game_server_data)
-      SENSITIVE = []
+      SENSITIVE = [:game_server_data]
       include Aws::Structure
     end
 
@@ -11534,7 +11534,7 @@ module Aws::GameLift
       :desired_player_sessions,
       :game_session_data,
       :priority_configuration_override)
-      SENSITIVE = []
+      SENSITIVE = [:game_session_data]
       include Aws::Structure
     end
 
@@ -13079,7 +13079,7 @@ module Aws::GameLift
       :game_server_data,
       :utilization_status,
       :health_check)
-      SENSITIVE = []
+      SENSITIVE = [:game_server_data]
       include Aws::Structure
     end
 
@@ -13256,7 +13256,7 @@ module Aws::GameLift
       :priority_configuration,
       :custom_event_data,
       :notification_target)
-      SENSITIVE = []
+      SENSITIVE = [:custom_event_data]
       include Aws::Structure
     end
 
@@ -13428,7 +13428,7 @@ module Aws::GameLift
       :game_session_data,
       :backfill_mode,
       :flex_match_mode)
-      SENSITIVE = []
+      SENSITIVE = [:custom_event_data, :game_session_data]
       include Aws::Structure
     end
 

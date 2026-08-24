@@ -23,6 +23,23 @@ The endpoint provider used to resolve endpoints. Any object that responds to
         Aws::Kinesis::EndpointProvider.new
       end
 
+      option(
+        :account_id_endpoint_mode,
+        doc_type: 'String',
+        docstring: <<~DOCS) do |cfg|
+The account ID endpoint mode to use. This can be one of the following values:
+* `preferred` - The default behavior. Use the account ID endpoint if
+  available, otherwise use the standard endpoint.
+* `disabled` - Never use the account ID endpoint. Only use the standard
+  endpoint.
+* `required` - Always use the account ID endpoint. If the account ID
+  cannot be retrieved from credentials, an error is raised.
+        DOCS
+        value = ENV['AWS_ACCOUNT_ID_ENDPOINT_MODE']
+        value ||= Aws.shared_config.account_id_endpoint_mode(profile: cfg.profile)
+        value || 'preferred'
+      end
+
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
@@ -50,6 +67,14 @@ The endpoint provider used to resolve endpoints. Any object that responds to
           metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
           if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
             metrics << 'SIGV4A_SIGNING'
+          end
+          case context.config.account_id_endpoint_mode
+          when 'preferred'
+            metrics << 'ACCOUNT_ID_MODE_PREFERRED'
+          when 'disabled'
+            metrics << 'ACCOUNT_ID_MODE_DISABLED'
+          when 'required'
+            metrics << 'ACCOUNT_ID_MODE_REQUIRED'
           end
           if context.config.credentials&.credentials&.account_id
             metrics << 'RESOLVED_ACCOUNT_ID'

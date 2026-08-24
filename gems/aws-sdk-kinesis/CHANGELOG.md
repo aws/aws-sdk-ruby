@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2026-08-21)
+------------------
+
+* Feature - Generate account endpoint for Kinesis Data Streams requests when the account ID is available
+
 1.103.0 (2026-07-09)
 ------------------
 

@@ -693,6 +693,19 @@ module Aws::CleanRooms
     #   resp.analysis_rules[0].policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rules[0].policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rules[0].policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rules[0].policy.v1.custom.aggregation_thresholds #=> Array
+    #   resp.analysis_rules[0].policy.v1.custom.aggregation_thresholds[0].identity_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.custom.aggregation_thresholds[0].identity_columns[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.custom.aggregation_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rules[0].policy.v1.custom.aggregation_thresholds[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rules[0].policy.v1.custom.aggregation_thresholds[0].output_column_thresholds #=> Array
+    #   resp.analysis_rules[0].policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].output_column_name #=> String
+    #   resp.analysis_rules[0].policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rules[0].policy.v1.custom.aggregation_thresholds[0].allowed_aggregate_expression_type #=> String, one of "COLUMNS_ONLY", "ANY_EXPRESSION"
+    #   resp.analysis_rules[0].policy.v1.custom.comparison_controls.allowed_literal_comparison_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.custom.comparison_controls.allowed_literal_comparison_columns[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.custom.comparison_controls.allowed_column_comparison_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.custom.comparison_controls.allowed_column_comparison_columns[0] #=> String
     #   resp.analysis_rules[0].policy.v1.custom.allowed_result_receivers #=> Array
     #   resp.analysis_rules[0].policy.v1.custom.allowed_result_receivers[0] #=> String
     #   resp.analysis_rules[0].policy.v1.custom.allowed_additional_analyses #=> Array
@@ -758,6 +771,19 @@ module Aws::CleanRooms
     #   resp.analysis_rules[0].consolidated_policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rules[0].consolidated_policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rules[0].consolidated_policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.aggregation_thresholds #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.aggregation_thresholds[0].identity_columns #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.aggregation_thresholds[0].identity_columns[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.aggregation_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.aggregation_thresholds[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].output_column_name #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.aggregation_thresholds[0].allowed_aggregate_expression_type #=> String, one of "COLUMNS_ONLY", "ANY_EXPRESSION"
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.comparison_controls.allowed_literal_comparison_columns #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.comparison_controls.allowed_literal_comparison_columns[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.comparison_controls.allowed_column_comparison_columns #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.comparison_controls.allowed_column_comparison_columns[0] #=> String
     #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_result_receivers #=> Array
     #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_result_receivers[0] #=> String
     #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_additional_analyses #=> Array
@@ -1024,7 +1050,7 @@ module Aws::CleanRooms
     #     members: [ # required
     #       {
     #         account_id: "AccountId", # required
-    #         member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS, CAN_RUN_JOB
+    #         member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS, CAN_RUN_JOB, CAN_EXPORT_QUERY_ANALYSIS_LOG
     #         ml_member_abilities: {
     #           custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT"], # required, accepts CAN_RECEIVE_MODEL_OUTPUT, CAN_RECEIVE_INFERENCE_OUTPUT
     #         },
@@ -1052,7 +1078,7 @@ module Aws::CleanRooms
     #     ],
     #     name: "CollaborationName", # required
     #     description: "CollaborationDescription",
-    #     creator_member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS, CAN_RUN_JOB
+    #     creator_member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS, CAN_RUN_JOB, CAN_EXPORT_QUERY_ANALYSIS_LOG
     #     creator_ml_member_abilities: {
     #       custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT"], # required, accepts CAN_RECEIVE_MODEL_OUTPUT, CAN_RECEIVE_INFERENCE_OUTPUT
     #     },
@@ -1088,7 +1114,7 @@ module Aws::CleanRooms
     #       },
     #     },
     #     analytics_engine: "SPARK", # accepts SPARK, CLEAN_ROOMS_SQL
-    #     auto_approved_change_request_types: ["ADD_MEMBER"], # accepts ADD_MEMBER, GRANT_RECEIVE_RESULTS_ABILITY, REVOKE_RECEIVE_RESULTS_ABILITY
+    #     auto_approved_change_request_types: ["ADD_MEMBER"], # accepts ADD_MEMBER, GRANT_RECEIVE_RESULTS_ABILITY, REVOKE_RECEIVE_RESULTS_ABILITY, GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY, REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY
     #     allowed_result_regions: ["us-west-1"], # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-east-2, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1
     #     is_metrics_enabled: false,
     #   })
@@ -1114,7 +1140,7 @@ module Aws::CleanRooms
     #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
-    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
+    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration.allowed_result_regions #=> Array
     #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #   resp.collaboration.is_metrics_enabled #=> Boolean
@@ -1155,7 +1181,7 @@ module Aws::CleanRooms
     #         specification: { # required
     #           member: {
     #             account_id: "AccountId", # required
-    #             member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS, CAN_RUN_JOB
+    #             member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS, CAN_RUN_JOB, CAN_EXPORT_QUERY_ANALYSIS_LOG
     #             ml_member_abilities: {
     #               custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT"], # required, accepts CAN_RECEIVE_MODEL_OUTPUT, CAN_RECEIVE_INFERENCE_OUTPUT
     #             },
@@ -1181,7 +1207,7 @@ module Aws::CleanRooms
     #             display_name: "DisplayName",
     #           },
     #           collaboration: {
-    #             auto_approved_change_types: ["ADD_MEMBER"], # accepts ADD_MEMBER, GRANT_RECEIVE_RESULTS_ABILITY, REVOKE_RECEIVE_RESULTS_ABILITY
+    #             auto_approved_change_types: ["ADD_MEMBER"], # accepts ADD_MEMBER, GRANT_RECEIVE_RESULTS_ABILITY, REVOKE_RECEIVE_RESULTS_ABILITY, GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY, REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY
     #           },
     #         },
     #       },
@@ -1200,7 +1226,7 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request.changes[0].specification_type #=> String, one of "MEMBER", "COLLABORATION"
     #   resp.collaboration_change_request.changes[0].specification.member.account_id #=> String
     #   resp.collaboration_change_request.changes[0].specification.member.member_abilities #=> Array
-    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"
     #   resp.collaboration_change_request.changes[0].specification.member.ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.collaboration_change_request.changes[0].specification.member.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.collaboration_change_request.changes[0].specification.member.payment_configuration.query_compute.is_responsible #=> Boolean
@@ -1210,9 +1236,9 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request.changes[0].specification.member.payment_configuration.job_compute.is_responsible #=> Boolean
     #   resp.collaboration_change_request.changes[0].specification.member.display_name #=> String
     #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types #=> Array
-    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
+    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration_change_request.changes[0].types #=> Array
-    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"
+    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration_change_request.approvals #=> Hash
     #   resp.collaboration_change_request.approvals["AccountId"].status #=> String, one of "APPROVED", "DENIED", "PENDING"
     #
@@ -1491,6 +1517,24 @@ module Aws::CleanRooms
     #               },
     #             ],
     #           },
+    #           aggregation_thresholds: [
+    #             {
+    #               identity_columns: ["AnalysisRuleColumnName"], # required
+    #               minimum_identity_count: 1, # required
+    #               type: "COUNT_DISTINCT", # required, accepts COUNT_DISTINCT
+    #               output_column_thresholds: [
+    #                 {
+    #                   output_column_name: "AnalysisRuleColumnName", # required
+    #                   minimum_identity_count: 1, # required
+    #                 },
+    #               ],
+    #               allowed_aggregate_expression_type: "COLUMNS_ONLY", # required, accepts COLUMNS_ONLY, ANY_EXPRESSION
+    #             },
+    #           ],
+    #           comparison_controls: {
+    #             allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #           },
     #           allowed_result_receivers: ["AccountId"],
     #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
     #         },
@@ -1536,6 +1580,19 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].identity_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].identity_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].output_column_name #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].allowed_aggregate_expression_type #=> String, one of "COLUMNS_ONLY", "ANY_EXPRESSION"
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_literal_comparison_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_literal_comparison_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_column_comparison_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_column_comparison_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_additional_analyses #=> Array
@@ -1860,11 +1917,9 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
-    # Creates an intermediate table in a membership. An intermediate table
-    # stores a query definition that you can execute later using
-    # `PopulateIntermediateTable` to materialize cached results. The
-    # intermediate table is owned by the member with the CAN\_QUERY ability.
-    # This operation does not execute the stored query.
+    # Creates an intermediate table in a membership. The intermediate table
+    # is owned by the member with the CAN\_QUERY ability. To populate the
+    # table with results, use `PopulateIntermediateTable`.
     #
     # @option params [required, String] :membership_identifier
     #   The unique identifier of the membership where the intermediate table
@@ -1878,16 +1933,14 @@ module Aws::CleanRooms
     #
     # @option params [required, Types::PopulationAnalysisConfiguration] :population_analysis_configuration
     #   The configuration that defines the analysis used to populate the
-    #   intermediate table. This configuration contains the SQL query or
-    #   analysis template reference.
+    #   intermediate table.
     #
     # @option params [String] :kms_key_arn
     #   The Amazon Resource Name (ARN) of the customer-managed KMS key used to
     #   encrypt the intermediate table data.
     #
     # @option params [Integer] :retention_in_days
-    #   The number of days to retain populated data versions. Minimum value of
-    #   1, maximum value of 365.
+    #   The number of days to retain populated data versions.
     #
     # @option params [Hash<String,String>] :tags
     #   An optional label that you can assign to a resource when you create
@@ -2005,10 +2058,8 @@ module Aws::CleanRooms
     end
 
     # Creates an analysis rule for an intermediate table. Only the CUSTOM
-    # analysis rule type is supported. The service automatically determines
-    # whether the rule is first-party or multi-party restricted based on the
-    # intermediate table's inherited constraints. Only the intermediate
-    # table owner can call this operation.
+    # analysis rule type is supported. Only the intermediate table owner can
+    # call this operation.
     #
     # @option params [required, String] :membership_identifier
     #   The unique identifier of the membership that contains the intermediate
@@ -2051,6 +2102,24 @@ module Aws::CleanRooms
     #             ],
     #           },
     #           disallowed_output_columns: ["AnalysisRuleColumnName"],
+    #           aggregation_thresholds: [
+    #             {
+    #               identity_columns: ["AnalysisRuleColumnName"], # required
+    #               minimum_identity_count: 1, # required
+    #               type: "COUNT_DISTINCT", # required, accepts COUNT_DISTINCT
+    #               output_column_thresholds: [
+    #                 {
+    #                   output_column_name: "AnalysisRuleColumnName", # required
+    #                   minimum_identity_count: 1, # required
+    #                 },
+    #               ],
+    #               allowed_aggregate_expression_type: "COLUMNS_ONLY", # required, accepts COLUMNS_ONLY, ANY_EXPRESSION
+    #             },
+    #           ],
+    #           comparison_controls: {
+    #             allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #           },
     #         },
     #       },
     #     },
@@ -2073,6 +2142,19 @@ module Aws::CleanRooms
     #   resp.analysis_rule.analysis_rule_policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rule.analysis_rule_policy.v1.custom.disallowed_output_columns #=> Array
     #   resp.analysis_rule.analysis_rule_policy.v1.custom.disallowed_output_columns[0] #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].identity_columns #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].identity_columns[0] #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].output_column_name #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].allowed_aggregate_expression_type #=> String, one of "COLUMNS_ONLY", "ANY_EXPRESSION"
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_literal_comparison_columns #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_literal_comparison_columns[0] #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_column_comparison_columns #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_column_comparison_columns[0] #=> String
     #   resp.analysis_rule.analysis_rule_type #=> String, one of "CUSTOM"
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
@@ -2213,7 +2295,7 @@ module Aws::CleanRooms
     #   resp.membership.update_time #=> Time
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
-    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
@@ -2578,9 +2660,7 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
-    # Deletes an intermediate table. When you delete the table, the service
-    # marks it as DELETED, removes its analysis rule and schema, and
-    # triggers storage cleanup. This operation is idempotent. Only the
+    # Deletes an intermediate table. The delete is idempotent. Only the
     # intermediate table owner can call this operation.
     #
     # @option params [required, String] :membership_identifier
@@ -2724,10 +2804,10 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
-    # Invalidates a specific intermediate table that references the
+    # Marks an intermediate table as invalid when it references the
     # caller's base table. The data provider (base table owner) calls this
-    # operation, not the intermediate table owner. By default, invalidation
-    # cascades to descendant intermediate tables.
+    # operation, not the intermediate table owner. By default, the operation
+    # also marks all descendant intermediate tables as invalid.
     #
     # @option params [required, String] :membership_identifier
     #   The unique identifier of the membership that contains the intermediate
@@ -2756,6 +2836,53 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def disallow_intermediate_table(params = {}, options = {})
       req = build_request(:disallow_intermediate_table, params)
+      req.send_request(options)
+    end
+
+    # Returns information about an analysis log export, including its
+    # current status and, if the export failed, the reason for the failure.
+    #
+    # Poll this operation until the `status` is `SUCCESS` or `FAILED`. An
+    # export can't be canceled after it starts.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for the membership that the analysis log export
+    #   belongs to. Currently accepts the membership ID.
+    #
+    # @option params [required, String] :analysis_log_export_identifier
+    #   The unique identifier of the analysis log export to retrieve.
+    #
+    # @return [Types::GetAnalysisLogExportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAnalysisLogExportOutput#analysis_log_export #analysis_log_export} => Types::AnalysisLogExport
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_analysis_log_export({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     analysis_log_export_identifier: "AnalysisLogExportIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_log_export.analysis_log_export_id #=> String
+    #   resp.analysis_log_export.analysis_id #=> String
+    #   resp.analysis_log_export.analysis_type #=> String, one of "PROTECTED_QUERY"
+    #   resp.analysis_log_export.membership_id #=> String
+    #   resp.analysis_log_export.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.analysis_log_export.result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.analysis_log_export.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.analysis_log_export.create_time #=> Time
+    #   resp.analysis_log_export.update_time #=> Time
+    #   resp.analysis_log_export.error.code #=> String
+    #   resp.analysis_log_export.error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetAnalysisLogExport AWS API Documentation
+    #
+    # @overload get_analysis_log_export(params = {})
+    # @param [Hash] params ({})
+    def get_analysis_log_export(params = {}, options = {})
+      req = build_request(:get_analysis_log_export, params)
       req.send_request(options)
     end
 
@@ -2865,7 +2992,7 @@ module Aws::CleanRooms
     #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
-    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
+    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration.allowed_result_regions #=> Array
     #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #   resp.collaboration.is_metrics_enabled #=> Boolean
@@ -2983,7 +3110,7 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request.changes[0].specification_type #=> String, one of "MEMBER", "COLLABORATION"
     #   resp.collaboration_change_request.changes[0].specification.member.account_id #=> String
     #   resp.collaboration_change_request.changes[0].specification.member.member_abilities #=> Array
-    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"
     #   resp.collaboration_change_request.changes[0].specification.member.ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.collaboration_change_request.changes[0].specification.member.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.collaboration_change_request.changes[0].specification.member.payment_configuration.query_compute.is_responsible #=> Boolean
@@ -2993,9 +3120,9 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request.changes[0].specification.member.payment_configuration.job_compute.is_responsible #=> Boolean
     #   resp.collaboration_change_request.changes[0].specification.member.display_name #=> String
     #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types #=> Array
-    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
+    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration_change_request.changes[0].types #=> Array
-    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"
+    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration_change_request.approvals #=> Hash
     #   resp.collaboration_change_request.approvals["AccountId"].status #=> String, one of "APPROVED", "DENIED", "PENDING"
     #
@@ -3308,6 +3435,19 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].identity_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].identity_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].output_column_name #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].allowed_aggregate_expression_type #=> String, one of "COLUMNS_ONLY", "ANY_EXPRESSION"
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_literal_comparison_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_literal_comparison_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_column_comparison_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_column_comparison_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_additional_analyses #=> Array
@@ -3687,6 +3827,19 @@ module Aws::CleanRooms
     #   resp.analysis_rule.analysis_rule_policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rule.analysis_rule_policy.v1.custom.disallowed_output_columns #=> Array
     #   resp.analysis_rule.analysis_rule_policy.v1.custom.disallowed_output_columns[0] #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].identity_columns #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].identity_columns[0] #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].output_column_name #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].allowed_aggregate_expression_type #=> String, one of "COLUMNS_ONLY", "ANY_EXPRESSION"
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_literal_comparison_columns #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_literal_comparison_columns[0] #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_column_comparison_columns #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_column_comparison_columns[0] #=> String
     #   resp.analysis_rule.analysis_rule_type #=> String, one of "CUSTOM"
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
@@ -3728,7 +3881,7 @@ module Aws::CleanRooms
     #   resp.membership.update_time #=> Time
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
-    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
@@ -4070,6 +4223,19 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].identity_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].identity_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].output_column_name #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].allowed_aggregate_expression_type #=> String, one of "COLUMNS_ONLY", "ANY_EXPRESSION"
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_literal_comparison_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_literal_comparison_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_column_comparison_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_column_comparison_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_additional_analyses #=> Array
@@ -4135,6 +4301,19 @@ module Aws::CleanRooms
     #   resp.analysis_rule.consolidated_policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rule.consolidated_policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rule.consolidated_policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.custom.aggregation_thresholds #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.aggregation_thresholds[0].identity_columns #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.aggregation_thresholds[0].identity_columns[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.custom.aggregation_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.consolidated_policy.v1.custom.aggregation_thresholds[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.consolidated_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].output_column_name #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.consolidated_policy.v1.custom.aggregation_thresholds[0].allowed_aggregate_expression_type #=> String, one of "COLUMNS_ONLY", "ANY_EXPRESSION"
+    #   resp.analysis_rule.consolidated_policy.v1.custom.comparison_controls.allowed_literal_comparison_columns #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.comparison_controls.allowed_literal_comparison_columns[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.custom.comparison_controls.allowed_column_comparison_columns #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.comparison_controls.allowed_column_comparison_columns[0] #=> String
     #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_result_receivers #=> Array
     #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_result_receivers[0] #=> String
     #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_additional_analyses #=> Array
@@ -4146,6 +4325,66 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def get_schema_analysis_rule(params = {}, options = {})
       req = build_request(:get_schema_analysis_rule, params)
+      req.send_request(options)
+    end
+
+    # Lists analysis log exports, sorted by the most recent export. Results
+    # are paginated. Use the `nextToken` parameter to retrieve additional
+    # results.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for the membership to list analysis log exports
+    #   for. Currently accepts the membership ID.
+    #
+    # @option params [String] :analysis_identifier
+    #   A filter on the unique identifier of the protected query that the
+    #   analysis logs were exported for.
+    #
+    # @option params [String] :status
+    #   A filter on the status of the analysis log export.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value has
+    #   not been met.
+    #
+    # @return [Types::ListAnalysisLogExportsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnalysisLogExportsOutput#next_token #next_token} => String
+    #   * {Types::ListAnalysisLogExportsOutput#analysis_log_exports #analysis_log_exports} => Array&lt;Types::AnalysisLogExportSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_analysis_log_exports({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     analysis_identifier: "UUID",
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESS, FAILED
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.analysis_log_exports #=> Array
+    #   resp.analysis_log_exports[0].analysis_log_export_id #=> String
+    #   resp.analysis_log_exports[0].analysis_id #=> String
+    #   resp.analysis_log_exports[0].analysis_type #=> String, one of "PROTECTED_QUERY"
+    #   resp.analysis_log_exports[0].status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.analysis_log_exports[0].create_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListAnalysisLogExports AWS API Documentation
+    #
+    # @overload list_analysis_log_exports(params = {})
+    # @param [Hash] params ({})
+    def list_analysis_log_exports(params = {}, options = {})
+      req = build_request(:list_analysis_log_exports, params)
       req.send_request(options)
     end
 
@@ -4303,7 +4542,7 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request_summaries[0].changes[0].specification_type #=> String, one of "MEMBER", "COLLABORATION"
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.account_id #=> String
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.member_abilities #=> Array
-    #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.payment_configuration.query_compute.is_responsible #=> Boolean
@@ -4313,9 +4552,9 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.payment_configuration.job_compute.is_responsible #=> Boolean
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.display_name #=> String
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.collaboration.auto_approved_change_types #=> Array
-    #   resp.collaboration_change_request_summaries[0].changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
+    #   resp.collaboration_change_request_summaries[0].changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration_change_request_summaries[0].changes[0].types #=> Array
-    #   resp.collaboration_change_request_summaries[0].changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"
+    #   resp.collaboration_change_request_summaries[0].changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration_change_request_summaries[0].approvals #=> Hash
     #   resp.collaboration_change_request_summaries[0].approvals["AccountId"].status #=> String, one of "APPROVED", "DENIED", "PENDING"
     #   resp.next_token #=> String
@@ -5048,7 +5287,7 @@ module Aws::CleanRooms
     #   resp.member_summaries[0].status #=> String, one of "INVITED", "ACTIVE", "LEFT", "REMOVED"
     #   resp.member_summaries[0].display_name #=> String
     #   resp.member_summaries[0].abilities #=> Array
-    #   resp.member_summaries[0].abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.member_summaries[0].abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"
     #   resp.member_summaries[0].ml_abilities.custom_ml_member_abilities #=> Array
     #   resp.member_summaries[0].ml_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.member_summaries[0].create_time #=> Time
@@ -5114,7 +5353,7 @@ module Aws::CleanRooms
     #   resp.membership_summaries[0].update_time #=> Time
     #   resp.membership_summaries[0].status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership_summaries[0].member_abilities #=> Array
-    #   resp.membership_summaries[0].member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.membership_summaries[0].member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"
     #   resp.membership_summaries[0].ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.membership_summaries[0].ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
@@ -5532,10 +5771,9 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
-    # Executes the stored query of an intermediate table to materialize data
-    # into managed storage. With this operation, you can perform initial
-    # population and subsequent refreshes. Each call creates a new version.
-    # The returned analysis ID can be tracked using `GetProtectedQuery`.
+    # Runs the stored query of an intermediate table and makes the results
+    # available for querying. Each call creates a new version. Use
+    # `GetProtectedQuery` with the returned analysis ID to track progress.
     # Only the intermediate table owner can call this operation.
     #
     # @option params [required, String] :intermediate_table_identifier
@@ -5636,6 +5874,107 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def preview_privacy_impact(params = {}, options = {})
       req = build_request(:preview_privacy_impact, params)
+      req.send_request(options)
+    end
+
+    # Starts an export of the Apache Spark logs for a protected query to an
+    # Amazon S3 bucket that you own. Use the exported logs to diagnose a
+    # query that failed or that ran more slowly than you expected.
+    #
+    # Clean Rooms exports a redacted copy of the Spark logs instead of the
+    # raw logs. Analyze the exported logs with the tooling of your choice,
+    # such as Spark History Server. For details about what the exported logs
+    # contain, see
+    # [https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs-contents.html][1].
+    #
+    # The export runs asynchronously and returns with a `status` of
+    # `IN_PROGRESS`. Call `GetAnalysisLogExport` to poll for the final
+    # status.
+    #
+    # To use this operation, you must have the
+    # `CAN_EXPORT_QUERY_ANALYSIS_LOG` ability for your membership. You must
+    # also be the query runner or the query payer. Having the ability alone
+    # is not sufficient.
+    #
+    #  The query must have reached a terminal state, and it must have
+    # reached
+    # the execution stage. A query that failed validation or that was
+    # canceled before it started produces no Spark logs.
+    #
+    #  Log export isn't supported for queries that use differential
+    # privacy,
+    # and isn't supported for PySpark jobs.
+    #
+    #  The destination bucket must be in the same Amazon Web Services Region
+    # as the collaboration. Cross-Region export isn't supported.
+    #
+    # For more information, see
+    # [https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs.html][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs-contents.html
+    # [2]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs.html
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for the membership to export the analysis logs
+    #   for. Currently accepts a membership ID.
+    #
+    # @option params [required, String] :analysis_id
+    #   The unique identifier of the protected query that you want to export
+    #   the analysis logs for.
+    #
+    # @option params [required, String] :analysis_type
+    #   The type of analysis that the logs are exported for. Currently, only
+    #   `PROTECTED_QUERY` is supported.
+    #
+    # @option params [required, Types::AnalysisLogExportResultConfiguration] :result_configuration
+    #   The details needed to write the exported analysis logs.
+    #
+    #   You don't need to create an IAM role for log export. Clean Rooms
+    #   writes the exported logs using your own identity, so Clean Rooms
+    #   writes the exported logs only where your existing permissions allow.
+    #
+    # @return [Types::StartAnalysisLogExportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAnalysisLogExportOutput#analysis_log_export #analysis_log_export} => Types::AnalysisLogExport
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_analysis_log_export({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     analysis_id: "UUID", # required
+    #     analysis_type: "PROTECTED_QUERY", # required, accepts PROTECTED_QUERY
+    #     result_configuration: { # required
+    #       output_configuration: { # required
+    #         s3: { # required
+    #           bucket: "AnalysisLogExportS3OutputConfigurationBucketString", # required
+    #           key_prefix: "KeyPrefix",
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_log_export.analysis_log_export_id #=> String
+    #   resp.analysis_log_export.analysis_id #=> String
+    #   resp.analysis_log_export.analysis_type #=> String, one of "PROTECTED_QUERY"
+    #   resp.analysis_log_export.membership_id #=> String
+    #   resp.analysis_log_export.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.analysis_log_export.result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.analysis_log_export.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.analysis_log_export.create_time #=> Time
+    #   resp.analysis_log_export.update_time #=> Time
+    #   resp.analysis_log_export.error.code #=> String
+    #   resp.analysis_log_export.error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/StartAnalysisLogExport AWS API Documentation
+    #
+    # @overload start_analysis_log_export(params = {})
+    # @param [Hash] params ({})
+    def start_analysis_log_export(params = {}, options = {})
+      req = build_request(:start_analysis_log_export, params)
       req.send_request(options)
     end
 
@@ -6056,7 +6395,7 @@ module Aws::CleanRooms
     #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
-    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
+    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration.allowed_result_regions #=> Array
     #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #   resp.collaboration.is_metrics_enabled #=> Boolean
@@ -6119,7 +6458,7 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request.changes[0].specification_type #=> String, one of "MEMBER", "COLLABORATION"
     #   resp.collaboration_change_request.changes[0].specification.member.account_id #=> String
     #   resp.collaboration_change_request.changes[0].specification.member.member_abilities #=> Array
-    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"
     #   resp.collaboration_change_request.changes[0].specification.member.ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.collaboration_change_request.changes[0].specification.member.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.collaboration_change_request.changes[0].specification.member.payment_configuration.query_compute.is_responsible #=> Boolean
@@ -6129,9 +6468,9 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request.changes[0].specification.member.payment_configuration.job_compute.is_responsible #=> Boolean
     #   resp.collaboration_change_request.changes[0].specification.member.display_name #=> String
     #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types #=> Array
-    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
+    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration_change_request.changes[0].types #=> Array
-    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"
+    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
     #   resp.collaboration_change_request.approvals #=> Hash
     #   resp.collaboration_change_request.approvals["AccountId"].status #=> String, one of "APPROVED", "DENIED", "PENDING"
     #
@@ -6381,6 +6720,24 @@ module Aws::CleanRooms
     #               },
     #             ],
     #           },
+    #           aggregation_thresholds: [
+    #             {
+    #               identity_columns: ["AnalysisRuleColumnName"], # required
+    #               minimum_identity_count: 1, # required
+    #               type: "COUNT_DISTINCT", # required, accepts COUNT_DISTINCT
+    #               output_column_thresholds: [
+    #                 {
+    #                   output_column_name: "AnalysisRuleColumnName", # required
+    #                   minimum_identity_count: 1, # required
+    #                 },
+    #               ],
+    #               allowed_aggregate_expression_type: "COLUMNS_ONLY", # required, accepts COLUMNS_ONLY, ANY_EXPRESSION
+    #             },
+    #           ],
+    #           comparison_controls: {
+    #             allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #           },
     #           allowed_result_receivers: ["AccountId"],
     #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
     #         },
@@ -6426,6 +6783,19 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].identity_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].identity_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds #=> Array
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].output_column_name #=> String
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.policy.v1.custom.aggregation_thresholds[0].allowed_aggregate_expression_type #=> String, one of "COLUMNS_ONLY", "ANY_EXPRESSION"
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_literal_comparison_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_literal_comparison_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_column_comparison_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.comparison_controls.allowed_column_comparison_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_additional_analyses #=> Array
@@ -6873,6 +7243,24 @@ module Aws::CleanRooms
     #             ],
     #           },
     #           disallowed_output_columns: ["AnalysisRuleColumnName"],
+    #           aggregation_thresholds: [
+    #             {
+    #               identity_columns: ["AnalysisRuleColumnName"], # required
+    #               minimum_identity_count: 1, # required
+    #               type: "COUNT_DISTINCT", # required, accepts COUNT_DISTINCT
+    #               output_column_thresholds: [
+    #                 {
+    #                   output_column_name: "AnalysisRuleColumnName", # required
+    #                   minimum_identity_count: 1, # required
+    #                 },
+    #               ],
+    #               allowed_aggregate_expression_type: "COLUMNS_ONLY", # required, accepts COLUMNS_ONLY, ANY_EXPRESSION
+    #             },
+    #           ],
+    #           comparison_controls: {
+    #             allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #           },
     #         },
     #       },
     #     },
@@ -6895,6 +7283,19 @@ module Aws::CleanRooms
     #   resp.analysis_rule.analysis_rule_policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rule.analysis_rule_policy.v1.custom.disallowed_output_columns #=> Array
     #   resp.analysis_rule.analysis_rule_policy.v1.custom.disallowed_output_columns[0] #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].identity_columns #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].identity_columns[0] #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].output_column_name #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].output_column_thresholds[0].minimum_identity_count #=> Integer
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.aggregation_thresholds[0].allowed_aggregate_expression_type #=> String, one of "COLUMNS_ONLY", "ANY_EXPRESSION"
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_literal_comparison_columns #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_literal_comparison_columns[0] #=> String
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_column_comparison_columns #=> Array
+    #   resp.analysis_rule.analysis_rule_policy.v1.custom.comparison_controls.allowed_column_comparison_columns[0] #=> String
     #   resp.analysis_rule.analysis_rule_type #=> String, one of "CUSTOM"
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
@@ -7003,7 +7404,7 @@ module Aws::CleanRooms
     #   resp.membership.update_time #=> Time
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
-    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
@@ -7263,7 +7664,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

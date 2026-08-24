@@ -223,6 +223,28 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # A segment of an autonomous system (AS) path.
+    #
+    # @!attribute [rw] path_type
+    #   The type of the AS path segment.
+    #
+    #   The valid values are `seq` (an ordered `AS_SEQUENCE`) and `set` (an
+    #   unordered `AS_SET`).
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The autonomous system (AS) numbers in the segment.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AsPathSegment AWS API Documentation
+    #
+    class AsPathSegment < Struct.new(
+      :path_type,
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] connection_id
     #   The ID of the connection.
     #   @return [String]
@@ -933,6 +955,30 @@ module Aws::DirectConnect
     #   MAC Security (MACsec).
     #   @return [Boolean]
     #
+    # @!attribute [rw] prefix_pool_size_ipv_4
+    #   The total number of inbound IPv4 route prefixes you can allocate
+    #   across the virtual interfaces on the connection. Not applicable to
+    #   hosted connections or interconnects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_size_ipv_6
+    #   The total number of inbound IPv6 route prefixes you can allocate
+    #   across the virtual interfaces on the connection. Not applicable to
+    #   hosted connections or interconnects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_unallocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes in the connection prefix
+    #   pool not yet allocated to a virtual interface. Not applicable to
+    #   hosted connections or interconnects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_unallocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes in the connection prefix
+    #   pool not yet allocated to a virtual interface. Not applicable to
+    #   hosted connections or interconnects.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection AWS API Documentation
     #
     class Connection < Struct.new(
@@ -959,7 +1005,11 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :rate_limiter_status,
-      :partner_interconnect_mac_sec_capable)
+      :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv_4,
+      :prefix_pool_size_ipv_6,
+      :prefix_pool_unallocated_count_ipv_4,
+      :prefix_pool_unallocated_count_ipv_6)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2292,6 +2342,12 @@ module Aws::DirectConnect
     #   The error message if the state of an object failed to advance.
     #   @return [String]
     #
+    # @!attribute [rw] total_prefix_pool_allocations
+    #   The total number of inbound route prefixes allocated to the
+    #   attachments on the Direct Connect gateway. The count combines the
+    #   IPv4 and IPv6 address families.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tags
     #   Information about a tag.
     #   @return [Array<Types::Tag>]
@@ -2305,6 +2361,7 @@ module Aws::DirectConnect
       :owner_account,
       :direct_connect_gateway_state,
       :state_change_error,
+      :total_prefix_pool_allocations,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2860,6 +2917,30 @@ module Aws::DirectConnect
     #   The MAC Security (MACsec) security keys associated with the LAG.
     #   @return [Array<Types::MacSecKey>]
     #
+    # @!attribute [rw] prefix_pool_size_ipv_4
+    #   The total number of inbound IPv4 route prefixes you can allocate
+    #   across the virtual interfaces on the LAG. Not applicable to LAGs
+    #   that are interconnects and support hosted connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_size_ipv_6
+    #   The total number of inbound IPv6 route prefixes you can allocate
+    #   across the virtual interfaces on the LAG. Not applicable to LAGs
+    #   that are interconnects and support hosted connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_unallocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes in the LAG prefix pool not
+    #   yet allocated to a virtual interface. Not applicable to LAGs that
+    #   are interconnects and support hosted connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_unallocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes in the LAG prefix pool not
+    #   yet allocated to a virtual interface. Not applicable to LAGs that
+    #   are interconnects and support hosted connections.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_limiter_status
     #   The rate limiter status for the LAG, including how many rate
     #   limiters are in use and the maximum allowed.
@@ -2889,6 +2970,10 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :encryption_mode,
       :mac_sec_keys,
+      :prefix_pool_size_ipv_4,
+      :prefix_pool_size_ipv_6,
+      :prefix_pool_unallocated_count_ipv_4,
+      :prefix_pool_unallocated_count_ipv_6,
       :rate_limiter_status)
       SENSITIVE = []
       include Aws::Structure
@@ -2919,6 +3004,61 @@ module Aws::DirectConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/LimitExceededException AWS API Documentation
     #
     class LimitExceededException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the routes returned.
+    #   @return [Types::RouteFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListVirtualInterfaceRoutesRequest AWS API Documentation
+    #
+    class ListVirtualInterfaceRoutesRequest < Struct.new(
+      :virtual_interface_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   The routes for the virtual interface.
+    #   @return [Array<Types::Route>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListVirtualInterfaceRoutesResponse AWS API Documentation
+    #
+    class ListVirtualInterfaceRoutesResponse < Struct.new(
+      :virtual_interface_id,
+      :routes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] test_id
     #   The ID of the virtual interface failover test.
@@ -3239,6 +3379,16 @@ module Aws::DirectConnect
     #   Indicates whether to enable or disable SiteLink.
     #   @return [Boolean]
     #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes to allocate to the virtual
+    #   interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes to allocate to the virtual
+    #   interface.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_limit
     #   The rate limit (bandwidth allocation) to apply to the virtual
     #   interface. The rate limit restricts the maximum bandwidth that the
@@ -3261,6 +3411,8 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :tags,
       :enable_site_link,
+      :prefix_pool_allocated_count_ipv_4,
+      :prefix_pool_allocated_count_ipv_6,
       :rate_limit)
       SENSITIVE = []
       include Aws::Structure
@@ -3676,6 +3828,16 @@ module Aws::DirectConnect
     #   Indicates whether to enable or disable SiteLink.
     #   @return [Boolean]
     #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes to allocate to the virtual
+    #   interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes to allocate to the virtual
+    #   interface.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_limit
     #   The rate limit (bandwidth allocation) to apply to the virtual
     #   interface. The rate limit restricts the maximum bandwidth that the
@@ -3697,6 +3859,8 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :tags,
       :enable_site_link,
+      :prefix_pool_allocated_count_ipv_4,
+      :prefix_pool_allocated_count_ipv_6,
       :rate_limit)
       SENSITIVE = []
       include Aws::Structure
@@ -3861,6 +4025,58 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # Information about a route for a virtual interface.
+    #
+    # @!attribute [rw] cidr
+    #   The CIDR (prefix) of the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_direction
+    #   The direction of the route.
+    #
+    #   The valid values are `accepted` (received from the customer network)
+    #   and `advertised` (advertised to the customer network).
+    #   @return [String]
+    #
+    # @!attribute [rw] address_family
+    #   The address family of the route.
+    #
+    #   The valid values are `ipv4` and `ipv6`.
+    #   @return [String]
+    #
+    # @!attribute [rw] as_path
+    #   The autonomous system (AS) path of the route.
+    #   @return [Array<Types::AsPathSegment>]
+    #
+    # @!attribute [rw] communities
+    #   The BGP communities associated with the route.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aws_logical_device_id
+    #   The Direct Connect endpoint that terminates the logical connection.
+    #   This device might be different than the device that terminates the
+    #   physical connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_installed_at
+    #   The time when the route was installed. The value is displayed in UTC
+    #   format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Route AWS API Documentation
+    #
+    class Route < Struct.new(
+      :cidr,
+      :route_direction,
+      :address_family,
+      :as_path,
+      :communities,
+      :aws_logical_device_id,
+      :route_installed_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a route filter prefix that a customer can advertise
     # through Border Gateway Protocol (BGP) over a public virtual interface.
     #
@@ -3873,6 +4089,49 @@ module Aws::DirectConnect
     #
     class RouteFilterPrefix < Struct.new(
       :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filters used to limit the routes returned by
+    # ListVirtualInterfaceRoutes.
+    #
+    # @!attribute [rw] route_direction
+    #   The direction of the routes to return.
+    #
+    #   The valid values are `accepted` (routes received from the customer
+    #   network) and `advertised` (routes advertised to the customer
+    #   network).
+    #   @return [String]
+    #
+    # @!attribute [rw] address_family
+    #   The address family of the routes to return.
+    #
+    #   The valid values are `ipv4` and `ipv6`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidrs
+    #   The CIDRs (prefixes) used to filter the routes. You can specify up
+    #   to 10 CIDRs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] as_path
+    #   The autonomous system (AS) numbers used to filter the routes by
+    #   their AS path.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] communities
+    #   The BGP communities used to filter the routes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/RouteFilters AWS API Documentation
+    #
+    class RouteFilters < Struct.new(
+      :route_direction,
+      :address_family,
+      :cidrs,
+      :as_path,
+      :communities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4191,6 +4450,16 @@ module Aws::DirectConnect
     #   The name of the virtual private interface.
     #   @return [String]
     #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes to allocate to the virtual
+    #   interface. Not applicable to public virtual interfaces.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes to allocate to the virtual
+    #   interface. Not applicable to public virtual interfaces.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_limit
     #   The rate limit (bandwidth allocation) to apply to the virtual
     #   interface. Use this to update the bandwidth allocation on an
@@ -4204,6 +4473,8 @@ module Aws::DirectConnect
       :mtu,
       :enable_site_link,
       :virtual_interface_name,
+      :prefix_pool_allocated_count_ipv_4,
+      :prefix_pool_allocated_count_ipv_6,
       :rate_limit)
       SENSITIVE = []
       include Aws::Structure
@@ -4446,6 +4717,16 @@ module Aws::DirectConnect
     #   Indicates whether SiteLink is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes allocated to the virtual
+    #   interface. Not applicable to public virtual interfaces.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes allocated to the virtual
+    #   interface. Not applicable to public virtual interfaces.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_limit
     #   The rate limit (bandwidth allocation) applied to the virtual
     #   interface. The value must be one of the supported bandwidth values
@@ -4494,6 +4775,8 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
+      :prefix_pool_allocated_count_ipv_4,
+      :prefix_pool_allocated_count_ipv_6,
       :rate_limit)
       SENSITIVE = []
       include Aws::Structure

@@ -251,6 +251,9 @@ module Aws
                             retention_triggers: {
                               terminate_hook_abandon: ("retain" | "terminate")?
                             }?
+                          },
+                          ?operator: {
+                            principal: ::String
                           }
                         ) -> AutoScalingGroup
                       | (?Hash[Symbol, untyped]) -> AutoScalingGroup

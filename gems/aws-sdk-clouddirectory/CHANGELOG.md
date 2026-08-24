@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2026-08-11)
+------------------
+
+* Feature - Added an end-of-support notice to Amazon Cloud Directory public CLI reference documentation.
+
 1.92.0 (2026-07-09)
 ------------------
 

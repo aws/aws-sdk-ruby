@@ -94,6 +94,13 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:name]
     end
 
+    class AgentRuntimeVersionSummary
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor agent_runtime_version: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      SENSITIVE: []
+    end
+
     class AgentSkillsDescriptor
       attr_accessor skill_md: Types::SkillMdDefinition
       attr_accessor skill_definition: Types::SkillDefinition
@@ -210,6 +217,26 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class BatchPutGatewayRateLimitsRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor rate_limits: ::Array[Types::BatchPutLimitEntry]
+      SENSITIVE: []
+    end
+
+    class BatchPutGatewayRateLimitsResponse
+      attr_accessor rate_limits: ::Array[Types::GatewayRateLimitDetail]
+      SENSITIVE: []
+    end
+
+    class BatchPutLimitEntry
+      attr_accessor rate_limit_id: ::String
+      attr_accessor description: ::String
+      attr_accessor dimension_keys: ::Array[::String]
+      attr_accessor entries: ::Array[Types::LimitEntry]
+      SENSITIVE: []
+    end
+
     class BedrockEvaluatorModelConfig
       attr_accessor model_id: ::String
       attr_accessor inference_config: Types::InferenceConfiguration
@@ -262,6 +289,38 @@ module Aws::BedrockAgentCoreControl
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       SENSITIVE: [:description]
+    end
+
+    class CapacityProviderConfiguration
+      attr_accessor capacity_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityProviderSummary
+      attr_accessor capacity_provider_id: ::String
+      attr_accessor capacity_provider_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CapacityProviderVolumeConfiguration
+      attr_accessor volume_name: ::String
+      attr_accessor mount_path: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityReservationSpecification
+      attr_accessor capacity_reservation_preference: ("capacity-reservations-only" | "open" | "none")
+      attr_accessor capacity_reservation_target: Types::CapacityReservationTarget
+      SENSITIVE: []
+    end
+
+    class CapacityReservationTarget
+      attr_accessor capacity_reservation_id: ::String
+      attr_accessor capacity_reservation_resource_group_arn: ::String
+      SENSITIVE: []
     end
 
     class CategoricalScaleDefinition
@@ -392,6 +451,17 @@ module Aws::BedrockAgentCoreControl
     class ComponentConfiguration
       attr_accessor configuration: untyped
       SENSITIVE: []
+    end
+
+    class ComputeConfiguration
+      attr_accessor ec2_configuration: Types::Ec2Configuration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Ec2Configuration < ComputeConfiguration
+      end
+      class Unknown < ComputeConfiguration
+      end
     end
 
     class ConcurrentModificationException
@@ -551,6 +621,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor lifecycle_configuration: Types::LifecycleConfiguration
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
+      attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description, :environment_variables]
     end
@@ -622,6 +693,24 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class CreateCapacityProviderInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor permissions_configuration: Types::PermissionsConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor compute_configuration: Types::ComputeConfiguration
+      SENSITIVE: [:description]
+    end
+
+    class CreateCapacityProviderOutput
+      attr_accessor capacity_provider_id: ::String
+      attr_accessor capacity_provider_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
     class CreateCodeInterpreterRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -668,7 +757,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor dataset_name: ::String
       attr_accessor description: ::String
       attr_accessor source: Types::DataSourceType
-      attr_accessor schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1")
+      attr_accessor schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "THIRD_PARTY_EVALUATION_V1")
       attr_accessor kms_key_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -713,6 +802,28 @@ module Aws::BedrockAgentCoreControl
       attr_accessor evaluator_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor status: ("ACTIVE" | "CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class CreateGatewayRateLimitRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor rate_limit_id: ::String
+      attr_accessor description: ::String
+      attr_accessor dimension_keys: ::Array[::String]
+      attr_accessor entries: ::Array[Types::LimitEntry]
+      SENSITIVE: []
+    end
+
+    class CreateGatewayRateLimitResponse
+      attr_accessor rate_limit_id: ::String
+      attr_accessor gateway_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor dimension_keys: ::Array[::String]
+      attr_accessor entries: ::Array[Types::LimitEntry]
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -865,6 +976,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor event_expiry_duration: ::Integer
       attr_accessor memory_strategies: ::Array[Types::MemoryStrategyInput]
       attr_accessor indexed_keys: ::Array[Types::IndexedKey]
+      attr_accessor namespace_keys: ::Array[Types::NamespaceKeyEntry]
       attr_accessor stream_delivery_resources: Types::StreamDeliveryResources
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
@@ -927,6 +1039,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor description: ::String
       attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
+      attr_accessor provision_mode: ("MANUAL" | "QUICK_CREATE")
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -938,7 +1051,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
       attr_accessor created_at: ::Time
-      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
+      attr_accessor authorization_url: ::String
       SENSITIVE: []
     end
 
@@ -966,6 +1080,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor role_arn: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -980,6 +1095,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor created_at: ::Time
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -1332,7 +1448,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor description: ::String
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       attr_accessor draft_status: ("MODIFIED" | "UNMODIFIED")
-      attr_accessor schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1")
+      attr_accessor schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "THIRD_PARTY_EVALUATION_V1")
       attr_accessor example_count: ::Integer
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -1367,6 +1483,7 @@ module Aws::BedrockAgentCoreControl
 
     class DeleteAgentRuntimeRequest
       attr_accessor agent_runtime_id: ::String
+      attr_accessor agent_runtime_version: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -1374,6 +1491,7 @@ module Aws::BedrockAgentCoreControl
     class DeleteAgentRuntimeResponse
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
       attr_accessor agent_runtime_id: ::String
+      attr_accessor agent_runtime_version: ::String
       SENSITIVE: []
     end
 
@@ -1410,6 +1528,18 @@ module Aws::BedrockAgentCoreControl
       attr_accessor browser_id: ::String
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
       attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteCapacityProviderInput
+      attr_accessor capacity_provider_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCapacityProviderOutput
+      attr_accessor capacity_provider_id: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -1477,6 +1607,18 @@ module Aws::BedrockAgentCoreControl
       attr_accessor evaluator_arn: ::String
       attr_accessor evaluator_id: ::String
       attr_accessor status: ("ACTIVE" | "CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayRateLimitRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor rate_limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayRateLimitResponse
+      attr_accessor rate_limit_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
       SENSITIVE: []
     end
 
@@ -1587,7 +1729,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeletePaymentConnectorResponse
-      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
       attr_accessor payment_connector_id: ::String
       SENSITIVE: []
     end
@@ -1686,11 +1828,38 @@ module Aws::BedrockAgentCoreControl
     class DeleteWorkloadIdentityResponse < Aws::EmptyStructure
     end
 
+    class DerivedEvaluatorConfig
+      attr_accessor base_evaluator_id: ::String
+      attr_accessor model_config: Types::EvaluatorModelConfig
+      SENSITIVE: []
+    end
+
     class Descriptors
       attr_accessor mcp: Types::McpDescriptor
       attr_accessor a2a: Types::A2aDescriptor
       attr_accessor custom: Types::CustomDescriptor
       attr_accessor agent_skills: Types::AgentSkillsDescriptor
+      SENSITIVE: []
+    end
+
+    class EbsVolumeConfiguration
+      attr_accessor name: ::String
+      attr_accessor size_gi_b: ::Integer
+      attr_accessor volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class Ec2Configuration
+      attr_accessor launch_template_source: Types::LaunchTemplateSource
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor volumes: ::Array[Types::VolumeConfiguration]
+      attr_accessor lifecycle_configuration: Types::InstanceLifecycleConfiguration
+      attr_accessor root_volume: Types::RootVolumeConfiguration
       SENSITIVE: []
     end
 
@@ -1709,6 +1878,26 @@ module Aws::BedrockAgentCoreControl
 
     class EncryptionFailure
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EphemeralBlockDeviceMapping
+      attr_accessor device_name: ::String
+      attr_accessor virtual_name: ::String
+      attr_accessor ebs: Types::EphemeralEBSVolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class EphemeralEBSVolumeConfiguration
+      attr_accessor volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor volume_size: ::Integer
+      attr_accessor volume_initialization_rate: ::Integer
+      attr_accessor ebs_card_index: ::Integer
       SENSITIVE: []
     end
 
@@ -1788,6 +1977,7 @@ module Aws::BedrockAgentCoreControl
     class EvaluatorConfig
       attr_accessor llm_as_a_judge: Types::LlmAsAJudgeEvaluatorConfig
       attr_accessor code_based: Types::CodeBasedEvaluatorConfig
+      attr_accessor derived: Types::DerivedEvaluatorConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1795,16 +1985,21 @@ module Aws::BedrockAgentCoreControl
       end
       class CodeBased < EvaluatorConfig
       end
+      class Derived < EvaluatorConfig
+      end
       class Unknown < EvaluatorConfig
       end
     end
 
     class EvaluatorModelConfig
       attr_accessor bedrock_evaluator_model_config: Types::BedrockEvaluatorModelConfig
+      attr_accessor responses_evaluator_model_config: Types::OpenResponsesEvaluatorModelConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class BedrockEvaluatorModelConfig < EvaluatorModelConfig
+      end
+      class ResponsesEvaluatorModelConfig < EvaluatorModelConfig
       end
       class Unknown < EvaluatorModelConfig
       end
@@ -1826,7 +2021,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor evaluator_id: ::String
       attr_accessor evaluator_name: ::String
       attr_accessor description: ::String
-      attr_accessor evaluator_type: ("Builtin" | "Custom" | "CustomCode")
+      attr_accessor evaluator_type: ("Builtin" | "ThirdParty" | "Custom" | "CustomCode" | "CustomDerived")
+      attr_accessor provider: ("AWS" | "DeepEval" | "AutoEval" | "Custom")
       attr_accessor level: ("TOOL_CALL" | "TRACE" | "SESSION")
       attr_accessor status: ("ACTIVE" | "CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
       attr_accessor created_at: ::Time
@@ -1862,6 +2058,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor session_storage: Types::SessionStorageConfiguration
       attr_accessor s3_files_access_point: Types::S3FilesAccessPointConfiguration
       attr_accessor efs_access_point: Types::EfsAccessPointConfiguration
+      attr_accessor capacity_provider_volume: Types::CapacityProviderVolumeConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1870,6 +2067,8 @@ module Aws::BedrockAgentCoreControl
       class S3FilesAccessPoint < FilesystemConfiguration
       end
       class EfsAccessPoint < FilesystemConfiguration
+      end
+      class CapacityProviderVolume < FilesystemConfiguration
       end
       class Unknown < FilesystemConfiguration
       end
@@ -1933,6 +2132,18 @@ module Aws::BedrockAgentCoreControl
       end
       class Unknown < GatewayProtocolConfiguration
       end
+    end
+
+    class GatewayRateLimitDetail
+      attr_accessor rate_limit_id: ::String
+      attr_accessor gateway_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor dimension_keys: ::Array[::String]
+      attr_accessor entries: ::Array[Types::LimitEntry]
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class GatewayRuleDetail
@@ -2029,6 +2240,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor request_header_configuration: Types::RequestHeaderConfiguration
       attr_accessor metadata_configuration: Types::RuntimeMetadataConfiguration
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
+      attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -2086,6 +2298,26 @@ module Aws::BedrockAgentCoreControl
       attr_accessor filesystem_configurations: ::Array[Types::ToolsFileSystemConfiguration]
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
       attr_accessor failure_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class GetCapacityProviderInput
+      attr_accessor capacity_provider_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCapacityProviderOutput
+      attr_accessor capacity_provider_id: ::String
+      attr_accessor capacity_provider_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
+      attr_accessor description: ::String
+      attr_accessor status_code: ("VALIDATION_ERROR" | "QUOTA_EXCEEDED" | "THROTTLED" | "INTERNAL_SERVER_EXCEPTION")
+      attr_accessor status_reason: ::String
+      attr_accessor permissions_configuration: Types::PermissionsConfiguration
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       SENSITIVE: [:description]
@@ -2167,7 +2399,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       attr_accessor draft_status: ("MODIFIED" | "UNMODIFIED")
       attr_accessor failure_reason: ::String
-      attr_accessor schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1")
+      attr_accessor schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "THIRD_PARTY_EVALUATION_V1")
       attr_accessor kms_key_arn: ::String
       attr_accessor example_count: ::Integer
       attr_accessor download_url: ::String
@@ -2190,6 +2422,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor evaluator_name: ::String
       attr_accessor description: ::String
       attr_accessor evaluator_config: Types::EvaluatorConfig
+      attr_accessor evaluator_type: ("Builtin" | "ThirdParty" | "Custom" | "CustomCode" | "CustomDerived")
+      attr_accessor provider: ("AWS" | "DeepEval" | "AutoEval" | "Custom")
       attr_accessor level: ("TOOL_CALL" | "TRACE" | "SESSION")
       attr_accessor status: ("ACTIVE" | "CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
       attr_accessor created_at: ::Time
@@ -2197,6 +2431,24 @@ module Aws::BedrockAgentCoreControl
       attr_accessor locked_for_modification: bool
       attr_accessor kms_key_arn: ::String
       SENSITIVE: [:description]
+    end
+
+    class GetGatewayRateLimitRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor rate_limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGatewayRateLimitResponse
+      attr_accessor rate_limit_id: ::String
+      attr_accessor gateway_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor dimension_keys: ::Array[::String]
+      attr_accessor entries: ::Array[Types::LimitEntry]
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class GetGatewayRequest
@@ -2369,7 +2621,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
-      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
+      attr_accessor authorization_url: ::String
       SENSITIVE: []
     end
 
@@ -2407,6 +2660,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor last_updated_at: ::Time
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -3022,15 +3276,29 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class HttpConnectorSource
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class HttpConnectorTargetConfiguration
+      attr_accessor source: Types::HttpConnectorSource
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class HttpTargetConfiguration
       attr_accessor agentcore_runtime: Types::RuntimeTargetConfiguration
       attr_accessor passthrough: Types::PassthroughTargetConfiguration
+      attr_accessor connector: Types::HttpConnectorTargetConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class AgentcoreRuntime < HttpTargetConfiguration
       end
       class Passthrough < HttpTargetConfiguration
+      end
+      class Connector < HttpTargetConfiguration
       end
       class Unknown < HttpTargetConfiguration
       end
@@ -3127,6 +3395,17 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class InstanceLifecycleConfiguration
+      attr_accessor idle_instance_timeout: ::Integer
+      attr_accessor max_lifetime: ::Integer
+      SENSITIVE: []
+    end
+
+    class InstanceRequirements
+      attr_accessor allowed_instance_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class InterceptorConfiguration
       attr_accessor lambda: Types::LambdaInterceptorConfiguration
       attr_accessor unknown: untyped
@@ -3210,9 +3489,46 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class LaunchParameters
+      attr_accessor operating_system: ("LINUX_X86_64" | "LINUX_ARM64")
+      attr_accessor instance_requirements: Types::InstanceRequirements
+      attr_accessor ephemeral_volumes: ::Array[Types::EphemeralBlockDeviceMapping]
+      attr_accessor monitoring: ("BASIC" | "DETAILED")
+      attr_accessor license_specifications: ::Array[Types::LicenseSpecification]
+      attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification
+      attr_accessor ssh_key_name: ::String
+      attr_accessor instance_profile_arn: ::String
+      attr_accessor propagated_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LaunchTemplateSource
+      attr_accessor launch_parameters: Types::LaunchParameters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class LaunchParameters < LaunchTemplateSource
+      end
+      class Unknown < LaunchTemplateSource
+      end
+    end
+
+    class LicenseSpecification
+      attr_accessor license_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
     class LifecycleConfiguration
       attr_accessor idle_runtime_session_timeout: ::Integer
       attr_accessor max_lifetime: ::Integer
+      SENSITIVE: []
+    end
+
+    class LimitEntry
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor requests: ::Array[Types::RateConfig]
+      attr_accessor tokens: ::Array[Types::RateConfig]
+      attr_accessor connections: ::Array[Types::RateConfig]
       SENSITIVE: []
     end
 
@@ -3239,6 +3555,19 @@ module Aws::BedrockAgentCoreControl
 
     class ListAgentRuntimeEndpointsResponse
       attr_accessor runtime_endpoints: ::Array[Types::AgentRuntimeEndpoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRuntimeVersionsByCapacityProviderInput
+      attr_accessor capacity_provider_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentRuntimeVersionsByCapacityProviderOutput
+      attr_accessor agent_runtimes: ::Array[Types::AgentRuntimeVersionSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -3302,6 +3631,18 @@ module Aws::BedrockAgentCoreControl
 
     class ListBrowsersResponse
       attr_accessor browser_summaries: ::Array[Types::BrowserSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCapacityProvidersInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCapacityProvidersOutput
+      attr_accessor capacity_providers: ::Array[Types::CapacityProviderSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -3395,6 +3736,19 @@ module Aws::BedrockAgentCoreControl
 
     class ListEvaluatorsResponse
       attr_accessor evaluators: ::Array[Types::EvaluatorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayRateLimitsRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayRateLimitsResponse
+      attr_accessor rate_limits: ::Array[Types::GatewayRateLimitDetail]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -3827,6 +4181,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor updated_at: ::Time
       attr_accessor strategies: ::Array[Types::MemoryStrategy]
       attr_accessor indexed_keys: ::Array[Types::IndexedKey]
+      attr_accessor namespace_keys: ::Array[Types::NamespaceKeyEntry]
       attr_accessor stream_delivery_resources: Types::StreamDeliveryResources
       attr_accessor managed_by_resource_arn: ::String
       SENSITIVE: [:description]
@@ -4009,6 +4364,18 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class NamespaceKeyEntry
+      attr_accessor key: ::String
+      attr_accessor validation: Types::NamespaceKeyValidation
+      SENSITIVE: []
+    end
+
+    class NamespaceKeyValidation
+      attr_accessor allowed_values: ::Array[::String]
+      attr_accessor regex_pattern: ::String
+      SENSITIVE: []
+    end
+
     class NetworkConfiguration
       attr_accessor network_mode: ("PUBLIC" | "VPC")
       attr_accessor network_mode_config: Types::VpcConfig
@@ -4166,6 +4533,15 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:description]
     end
 
+    class OpenResponsesEvaluatorModelConfig
+      attr_accessor model_id: ::String
+      attr_accessor max_output_tokens: ::Integer
+      attr_accessor temperature: ::Float
+      attr_accessor top_p: ::Float
+      attr_accessor reasoning: Types::ReasoningConfiguration
+      SENSITIVE: []
+    end
+
     class OutputConfig
       attr_accessor cloud_watch_config: Types::CloudWatchOutputConfig
       SENSITIVE: []
@@ -4176,6 +4552,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor protocol_type: ("MCP" | "A2A" | "INFERENCE" | "CUSTOM")
       attr_accessor schema: Types::HttpApiSchemaConfiguration
       attr_accessor stickiness_configuration: Types::StickinessConfiguration
+      attr_accessor static_query_parameters: ::Hash[::String, ::String]
+      attr_accessor static_query_parameter_conflict_resolution: ("CLIENT_OVERRIDE" | "STATIC_OVERRIDE")
       SENSITIVE: []
     end
 
@@ -4183,7 +4561,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor payment_connector_id: ::String
       attr_accessor name: ::String
       attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
-      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
     end
@@ -4212,6 +4590,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -4241,6 +4620,11 @@ module Aws::BedrockAgentCoreControl
       end
       class Unknown < PaymentProviderConfigurationOutput
       end
+    end
+
+    class PermissionsConfiguration
+      attr_accessor capacity_provider_operator_role_arn: ::String
+      SENSITIVE: []
     end
 
     class Policy
@@ -4418,6 +4802,12 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class RateConfig
+      attr_accessor rate: ::Float
+      attr_accessor period: ("second" | "minute")
+      SENSITIVE: []
+    end
+
     class RatingScale
       attr_accessor numerical: ::Array[Types::NumericalScaleDefinition]
       attr_accessor categorical: ::Array[Types::CategoricalScaleDefinition]
@@ -4430,6 +4820,11 @@ module Aws::BedrockAgentCoreControl
       end
       class Unknown < RatingScale
       end
+    end
+
+    class ReasoningConfiguration
+      attr_accessor effort: ::String
+      SENSITIVE: []
     end
 
     class RecordingConfig
@@ -4554,6 +4949,21 @@ module Aws::BedrockAgentCoreControl
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetryableConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RootVolumeConfiguration
+      attr_accessor volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor free_space_gi_b: ::Integer
       SENSITIVE: []
     end
 
@@ -4835,6 +5245,7 @@ module Aws::BedrockAgentCoreControl
     class StickinessConfiguration
       attr_accessor identifier: ::String
       attr_accessor timeout: ::Integer
+      attr_accessor composite_identifier: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -4915,6 +5326,13 @@ module Aws::BedrockAgentCoreControl
       attr_accessor record_id: ::String
       attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
       attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SubscriptionRequiredException
+      attr_accessor message: ::String
+      attr_accessor subscription_url: ::String
+      attr_accessor product_name: ::String
       SENSITIVE: []
     end
 
@@ -5001,7 +5419,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor resource_priority: ::Integer
       attr_accessor last_synchronized_at: ::Time
       attr_accessor authorization_data: Types::AuthorizationData
-      attr_accessor target_type: ("OPEN_API_SCHEMA" | "SMITHY_MODEL" | "MCP_SERVER" | "LAMBDA" | "API_GATEWAY" | "CONNECTOR" | "AGENTCORE_RUNTIME" | "PASSTHROUGH" | "PROVIDER")
+      attr_accessor target_type: ("OPEN_API_SCHEMA" | "SMITHY_MODEL" | "MCP_SERVER" | "LAMBDA" | "API_GATEWAY" | "CONNECTOR" | "AGENTCORE_RUNTIME" | "PASSTHROUGH" | "PROVIDER" | "HTTP_CONNECTOR")
       attr_accessor listing_mode: ("DEFAULT" | "DYNAMIC")
       SENSITIVE: [:name, :description]
     end
@@ -5186,6 +5604,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor metadata_configuration: Types::RuntimeMetadataConfiguration
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
+      attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor client_token: ::String
       SENSITIVE: [:description, :environment_variables]
     end
@@ -5217,6 +5636,23 @@ module Aws::BedrockAgentCoreControl
       attr_accessor credential_provider_arn: ::String
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateCapacityProviderInput
+      attr_accessor capacity_provider_id: ::String
+      attr_accessor description: Types::UpdatedDescription
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCapacityProviderOutput
+      attr_accessor capacity_provider_id: ::String
+      attr_accessor capacity_provider_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -5287,6 +5723,26 @@ module Aws::BedrockAgentCoreControl
       attr_accessor evaluator_id: ::String
       attr_accessor updated_at: ::Time
       attr_accessor status: ("ACTIVE" | "CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayRateLimitRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor rate_limit_id: ::String
+      attr_accessor description: ::String
+      attr_accessor entries: ::Array[Types::LimitEntry]
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayRateLimitResponse
+      attr_accessor rate_limit_id: ::String
+      attr_accessor gateway_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor dimension_keys: ::Array[::String]
+      attr_accessor entries: ::Array[Types::LimitEntry]
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -5438,6 +5894,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor memory_execution_role_arn: ::String
       attr_accessor memory_strategies: Types::ModifyMemoryStrategies
       attr_accessor add_indexed_keys: ::Array[Types::IndexedKey]
+      attr_accessor namespace_keys: ::Array[Types::NamespaceKeyEntry]
       attr_accessor stream_delivery_resources: Types::StreamDeliveryResources
       SENSITIVE: [:description]
     end
@@ -5510,7 +5967,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
       attr_accessor last_updated_at: ::Time
-      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
+      attr_accessor authorization_url: ::String
       SENSITIVE: []
     end
 
@@ -5538,6 +5996,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
       attr_accessor role_arn: ::String
       attr_accessor client_token: ::String
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -5550,6 +6009,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
       attr_accessor last_updated_at: ::Time
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -5876,10 +6336,27 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class VolumeConfiguration
+      attr_accessor ebs_configuration: Types::EbsVolumeConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EbsConfiguration < VolumeConfiguration
+      end
+      class Unknown < VolumeConfiguration
+      end
+    end
+
     class VpcConfig
       attr_accessor security_groups: ::Array[::String]
       attr_accessor subnets: ::Array[::String]
       attr_accessor require_service_s3_endpoint: bool
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
       SENSITIVE: []
     end
 

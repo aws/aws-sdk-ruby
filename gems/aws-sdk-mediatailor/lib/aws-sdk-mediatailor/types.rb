@@ -197,10 +197,16 @@ module Aws::MediaTailor
     #   server.
     #   @return [Types::HttpRequest]
     #
+    # @!attribute [rw] vast_response
+    #   The settings that control how MediaTailor processes VAST responses
+    #   from the ad decision server.
+    #   @return [Types::VastResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AdDecisionServerConfiguration AWS API Documentation
     #
     class AdDecisionServerConfiguration < Struct.new(
-      :http_request)
+      :http_request,
+      :vast_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -708,6 +714,63 @@ module Aws::MediaTailor
     class ClipRange < Struct.new(
       :end_offset_millis,
       :start_offset_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a `CONCURRENT_EXECUTOR` function. A
+    # `CONCURRENT_EXECUTOR` runs a set of child functions in parallel, up to
+    # a maximum concurrency, and combines their output when all functions
+    # complete. For more information about functions, see [Working with
+    # functions][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html
+    #
+    # @!attribute [rw] runtime
+    #   The expression language used to evaluate expressions in the function
+    #   configuration. Set this to `JSONata`.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   A map of output bindings that controls which bindings the executor
+    #   commits to the session state after all child functions complete.
+    #   Each key is a namespaced output path, and each value is an
+    #   expression that MediaTailor evaluates against the combined results
+    #   of the child functions.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] function_list
+    #   The list of child functions that MediaTailor runs in parallel. Each
+    #   entry specifies a child function to execute and an optional run
+    #   condition expression that controls whether the function runs.
+    #   @return [Array<Types::FunctionRef>]
+    #
+    # @!attribute [rw] timeout_milliseconds
+    #   The maximum time, in milliseconds, for all child functions to
+    #   complete. This timeout covers every function in the list, including
+    #   any HTTP calls the child functions make. If the executor exceeds
+    #   this timeout, MediaTailor discards all output from the executor and
+    #   proceeds with default behavior.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of child functions that MediaTailor runs
+    #   simultaneously. When the list contains more functions than
+    #   `MaxConcurrency`, MediaTailor starts additional functions as running
+    #   ones complete, so that no more than `MaxConcurrency` functions run
+    #   at the same time.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConcurrentExecutorConfiguration AWS API Documentation
+    #
+    class ConcurrentExecutorConfiguration < Struct.new(
+      :runtime,
+      :output,
+      :function_list,
+      :timeout_milliseconds,
+      :max_concurrency)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2323,6 +2386,10 @@ module Aws::MediaTailor
     #   The configuration for a `CUSTOM_OUTPUT` function.
     #   @return [Types::CustomOutputConfiguration]
     #
+    # @!attribute [rw] concurrent_executor_configuration
+    #   The configuration for a `CONCURRENT_EXECUTOR` function.
+    #   @return [Types::ConcurrentExecutorConfiguration]
+    #
     # @!attribute [rw] sequential_executor_configuration
     #   The configuration for a `SEQUENTIAL_EXECUTOR` function.
     #   @return [Types::SequentialExecutorConfiguration]
@@ -2350,6 +2417,7 @@ module Aws::MediaTailor
       :description,
       :http_request_configuration,
       :custom_output_configuration,
+      :concurrent_executor_configuration,
       :sequential_executor_configuration,
       :tags,
       :arn)
@@ -2372,11 +2440,17 @@ module Aws::MediaTailor
     #   The identifier of the child function to execute in this step.
     #   @return [String]
     #
+    # @!attribute [rw] alias
+    #   An optional alternate name for the function within the executor. If
+    #   omitted, MediaTailor uses the function identifier.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/FunctionRef AWS API Documentation
     #
     class FunctionRef < Struct.new(
       :run_condition,
-      :function_id)
+      :function_id,
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2507,6 +2581,10 @@ module Aws::MediaTailor
     #   The configuration for a `CUSTOM_OUTPUT` function.
     #   @return [Types::CustomOutputConfiguration]
     #
+    # @!attribute [rw] concurrent_executor_configuration
+    #   The configuration for a `CONCURRENT_EXECUTOR` function.
+    #   @return [Types::ConcurrentExecutorConfiguration]
+    #
     # @!attribute [rw] sequential_executor_configuration
     #   The configuration for a `SEQUENTIAL_EXECUTOR` function.
     #   @return [Types::SequentialExecutorConfiguration]
@@ -2534,6 +2612,7 @@ module Aws::MediaTailor
       :description,
       :http_request_configuration,
       :custom_output_configuration,
+      :concurrent_executor_configuration,
       :sequential_executor_configuration,
       :tags,
       :arn)
@@ -3635,11 +3714,18 @@ module Aws::MediaTailor
     #   returns.
     #   @return [Integer]
     #
+    # @!attribute [rw] ad_decision_server_configuration
+    #   The configuration for the ad decision server (ADS) for live pre-roll
+    #   ads. The configuration contains settings that control how
+    #   MediaTailor processes VAST responses for pre-roll ad breaks.
+    #   @return [Types::PreRollAdDecisionServerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/LivePreRollConfiguration AWS API Documentation
     #
     class LivePreRollConfiguration < Struct.new(
       :ad_decision_server_url,
-      :max_duration_seconds)
+      :max_duration_seconds,
+      :ad_decision_server_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4048,6 +4134,43 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The ad decision server configuration for live pre-roll ads. It
+    # contains settings that control how MediaTailor processes VAST
+    # responses for pre-roll ad breaks.
+    #
+    # @!attribute [rw] vast_response
+    #   The settings that control how MediaTailor processes VAST responses
+    #   for live pre-roll ad breaks.
+    #   @return [Types::PreRollVastResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PreRollAdDecisionServerConfiguration AWS API Documentation
+    #
+    class PreRollAdDecisionServerConfiguration < Struct.new(
+      :vast_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings that control how MediaTailor processes VAST responses
+    # from the ad decision server for live pre-roll ad breaks.
+    #
+    # @!attribute [rw] ad_sequencing_mode
+    #   The ad sequencing mode for live pre-roll ads. `FOLLOW_AD_SEQUENCE`
+    #   inserts sequenced ads in increasing order and uses standalone ads
+    #   only as replacements when a sequenced ad fails. `IGNORE_AD_SEQUENCE`
+    #   inserts ads in the order they appear in the VAST response,
+    #   regardless of sequence attributes. The default behavior is
+    #   `IGNORE_AD_SEQUENCE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PreRollVastResponse AWS API Documentation
+    #
+    class PreRollVastResponse < Struct.new(
+      :ad_sequencing_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # For single prefetch, describes how and when that MediaTailor places
     # prefetched ads into upcoming ad breaks.
     #
@@ -4294,6 +4417,13 @@ module Aws::MediaTailor
     #   `CUSTOM_OUTPUT`.
     #   @return [Types::CustomOutputConfiguration]
     #
+    # @!attribute [rw] concurrent_executor_configuration
+    #   The configuration for a `CONCURRENT_EXECUTOR` function. Specifies
+    #   the list of child functions to run in parallel, the maximum
+    #   concurrency, an optional output block, and a timeout. Required when
+    #   `FunctionType` is `CONCURRENT_EXECUTOR`.
+    #   @return [Types::ConcurrentExecutorConfiguration]
+    #
     # @!attribute [rw] sequential_executor_configuration
     #   The configuration for a `SEQUENTIAL_EXECUTOR` function. Specifies
     #   the ordered list of child functions to execute, an optional output
@@ -4320,6 +4450,7 @@ module Aws::MediaTailor
       :description,
       :http_request_configuration,
       :custom_output_configuration,
+      :concurrent_executor_configuration,
       :sequential_executor_configuration,
       :tags)
       SENSITIVE = []
@@ -4348,6 +4479,10 @@ module Aws::MediaTailor
     #   The configuration for a `CUSTOM_OUTPUT` function.
     #   @return [Types::CustomOutputConfiguration]
     #
+    # @!attribute [rw] concurrent_executor_configuration
+    #   The configuration for a `CONCURRENT_EXECUTOR` function.
+    #   @return [Types::ConcurrentExecutorConfiguration]
+    #
     # @!attribute [rw] sequential_executor_configuration
     #   The configuration for a `SEQUENTIAL_EXECUTOR` function.
     #   @return [Types::SequentialExecutorConfiguration]
@@ -4375,6 +4510,7 @@ module Aws::MediaTailor
       :description,
       :http_request_configuration,
       :custom_output_configuration,
+      :concurrent_executor_configuration,
       :sequential_executor_configuration,
       :tags,
       :arn)
@@ -6130,6 +6266,30 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       :vod_source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings that control how MediaTailor processes VAST responses
+    # from the ad decision server.
+    #
+    # @!attribute [rw] ad_sequencing_mode
+    #   The ad sequencing mode that controls how MediaTailor handles
+    #   sequenced and standalone ads in VAST responses. `FOLLOW_AD_SEQUENCE`
+    #   inserts sequenced ads in increasing order for both live and VOD
+    #   workflows, using standalone ads only as replacements when a
+    #   sequenced ad fails. `FOLLOW_AD_SEQUENCE_ONLY_LIVE` enables ad
+    #   sequencing for live workflows only. `FOLLOW_AD_SEQUENCE_ONLY_VOD`
+    #   enables ad sequencing for VOD workflows only. `IGNORE_AD_SEQUENCE`
+    #   inserts ads in the order they appear in the VAST response,
+    #   regardless of sequence attributes. The default behavior is
+    #   `IGNORE_AD_SEQUENCE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/VastResponse AWS API Documentation
+    #
+    class VastResponse < Struct.new(
+      :ad_sequencing_mode)
       SENSITIVE = []
       include Aws::Structure
     end

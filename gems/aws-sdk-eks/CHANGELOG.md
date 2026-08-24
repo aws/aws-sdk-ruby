@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.174.0 (2026-08-19)
+------------------
+
+* Feature - Adds support for EKS cluster certificate authorities (CA)
+
+1.173.0 (2026-08-11)
+------------------
+
+* Feature - This feature would give customers the ability to selectively tune certain configurations of Kubernetes control plane components in an Amazon EKS cluster.
+
 1.172.0 (2026-07-09)
 ------------------
 

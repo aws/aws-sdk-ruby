@@ -66,6 +66,7 @@ module Aws::SESV2
     ComplaintFeedbackType = Shapes::StringShape.new(name: 'ComplaintFeedbackType')
     ComplaintSubType = Shapes::StringShape.new(name: 'ComplaintSubType')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConfigurationOverrides = Shapes::StructureShape.new(name: 'ConfigurationOverrides')
     ConfigurationSetName = Shapes::StringShape.new(name: 'ConfigurationSetName')
     ConfigurationSetNameList = Shapes::ListShape.new(name: 'ConfigurationSetNameList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -572,6 +573,7 @@ module Aws::SESV2
     TopicPreference = Shapes::StructureShape.new(name: 'TopicPreference')
     TopicPreferenceList = Shapes::ListShape.new(name: 'TopicPreferenceList')
     Topics = Shapes::ListShape.new(name: 'Topics')
+    TrackingConfigurationOverrides = Shapes::StructureShape.new(name: 'TrackingConfigurationOverrides')
     TrackingOptions = Shapes::StructureShape.new(name: 'TrackingOptions')
     UnsubscribeAll = Shapes::BooleanShape.new(name: 'UnsubscribeAll')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -710,6 +712,9 @@ module Aws::SESV2
     Complaint.struct_class = Types::Complaint
 
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConfigurationOverrides.add_member(:tracking, Shapes::ShapeRef.new(shape: TrackingConfigurationOverrides, location_name: "Tracking"))
+    ConfigurationOverrides.struct_class = Types::ConfigurationOverrides
 
     ConfigurationSetNameList.member = Shapes::ShapeRef.new(shape: ConfigurationSetName)
 
@@ -1986,6 +1991,7 @@ module Aws::SESV2
     SendBulkEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
     SendBulkEmailRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam" => {"name" => "EndpointId"}}))
     SendBulkEmailRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, location_name: "TenantName"))
+    SendBulkEmailRequest.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "ConfigurationOverrides"))
     SendBulkEmailRequest.struct_class = Types::SendBulkEmailRequest
 
     SendBulkEmailResponse.add_member(:bulk_email_entry_results, Shapes::ShapeRef.new(shape: BulkEmailEntryResultList, required: true, location_name: "BulkEmailEntryResults"))
@@ -2011,6 +2017,7 @@ module Aws::SESV2
     SendEmailRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam" => {"name" => "EndpointId"}}))
     SendEmailRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, location_name: "TenantName"))
     SendEmailRequest.add_member(:list_management_options, Shapes::ShapeRef.new(shape: ListManagementOptions, location_name: "ListManagementOptions"))
+    SendEmailRequest.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "ConfigurationOverrides"))
     SendEmailRequest.struct_class = Types::SendEmailRequest
 
     SendEmailResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: OutboundMessageId, location_name: "MessageId"))
@@ -2156,6 +2163,10 @@ module Aws::SESV2
     TopicPreferenceList.member = Shapes::ShapeRef.new(shape: TopicPreference)
 
     Topics.member = Shapes::ShapeRef.new(shape: Topic)
+
+    TrackingConfigurationOverrides.add_member(:open_tracking_enabled, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "OpenTrackingEnabled"))
+    TrackingConfigurationOverrides.add_member(:click_tracking_enabled, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "ClickTrackingEnabled"))
+    TrackingConfigurationOverrides.struct_class = Types::TrackingConfigurationOverrides
 
     TrackingOptions.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, required: true, location_name: "CustomRedirectDomain"))
     TrackingOptions.add_member(:https_policy, Shapes::ShapeRef.new(shape: HttpsPolicy, location_name: "HttpsPolicy"))

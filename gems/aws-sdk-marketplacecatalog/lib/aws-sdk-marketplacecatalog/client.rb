@@ -580,6 +580,87 @@ module Aws::MarketplaceCatalog
       req.send_request(options)
     end
 
+    # Returns the metadata and detailed results of a single assessment,
+    # including the framework that was evaluated, the overall assessment
+    # result, and a paginated list of individual control evaluation results.
+    #
+    # To list available assessments before describing one, use the
+    # `ListAssessments` action.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #
+    # @option params [required, String] :assessment_identifier
+    #   The unique identifier of the assessment to describe. You can provide
+    #   either the assessment ID (for example, `assessment-12345`) or the full
+    #   assessment ARN (for example,
+    #   `arn:aws:aws-marketplace:us-east-1::AWSMarketplace/Assessment/assessment-12345`).
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the upper limit of `ControlAssessment` elements returned on
+    #   a single page. If a value isn't provided, the default value is 50.
+    #   Valid values range from 1 to 100.
+    #
+    # @option params [String] :next_token
+    #   The value of the next token, if it exists. `null` if there are no more
+    #   results.
+    #
+    # @return [Types::DescribeAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssessmentResponse#assessment_arn #assessment_arn} => String
+    #   * {Types::DescribeAssessmentResponse#assessment_id #assessment_id} => String
+    #   * {Types::DescribeAssessmentResponse#framework_id #framework_id} => String
+    #   * {Types::DescribeAssessmentResponse#assessment_target_summary #assessment_target_summary} => Types::AssessmentTargetSummary
+    #   * {Types::DescribeAssessmentResponse#framework_summary #framework_summary} => Types::FrameworkSummary
+    #   * {Types::DescribeAssessmentResponse#assessment_result #assessment_result} => String
+    #   * {Types::DescribeAssessmentResponse#created_at #created_at} => String
+    #   * {Types::DescribeAssessmentResponse#expires_at #expires_at} => String
+    #   * {Types::DescribeAssessmentResponse#control_assessments #control_assessments} => Array&lt;Types::ControlAssessment&gt;
+    #   * {Types::DescribeAssessmentResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_assessment({
+    #     catalog: "Catalog", # required
+    #     assessment_identifier: "AssessmentIdentifier", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessment_arn #=> String
+    #   resp.assessment_id #=> String
+    #   resp.framework_id #=> String
+    #   resp.assessment_target_summary.entity_id #=> String
+    #   resp.assessment_target_summary.change_set_id #=> String
+    #   resp.framework_summary.ami_security_summary.delivery_option_id #=> String
+    #   resp.framework_summary.container_security_summary.delivery_option_id #=> String
+    #   resp.assessment_result #=> String, one of "PASS", "FAIL"
+    #   resp.created_at #=> String
+    #   resp.expires_at #=> String
+    #   resp.control_assessments #=> Array
+    #   resp.control_assessments[0].control_id #=> String
+    #   resp.control_assessments[0].control_assessment_result #=> String, one of "PASS", "FAIL", "NOT_EXECUTED", "EXEMPTION_PASS"
+    #   resp.control_assessments[0].errors #=> Array
+    #   resp.control_assessments[0].errors[0].code #=> String
+    #   resp.control_assessments[0].errors[0].message #=> String
+    #   resp.control_assessments[0].errors[0].scope #=> Array
+    #   resp.control_assessments[0].errors[0].scope[0].name #=> String
+    #   resp.control_assessments[0].errors[0].scope[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DescribeAssessment AWS API Documentation
+    #
+    # @overload describe_assessment(params = {})
+    # @param [Hash] params ({})
+    def describe_assessment(params = {}, options = {})
+      req = build_request(:describe_assessment, params)
+      req.send_request(options)
+    end
+
     # Provides information about a given change set.
     #
     # @option params [required, String] :catalog
@@ -709,6 +790,95 @@ module Aws::MarketplaceCatalog
     # @param [Hash] params ({})
     def get_resource_policy(params = {}, options = {})
       req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of assessments associated with an entity or
+    # change set in AWS Marketplace. An *assessment* is the result of
+    # evaluating a product or change set against a framework, such as AMI
+    # Security or Container Security.
+    #
+    # Use the `AssessmentTargetFilter` to scope results to a specific entity
+    # or change set, and use `FrameworkFilters` to scope results to a single
+    # framework. To retrieve detailed control-level results for an
+    # individual assessment, use the `DescribeAssessment` action.
+    #
+    # Results are sorted by assessment creation time in descending order.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #
+    # @option params [String] :framework_id
+    #   The unique identifier of a framework. When specified, only assessments
+    #   performed against this framework are returned. For example,
+    #   `AMISecurity`.
+    #
+    # @option params [Types::AssessmentTargetFilter] :assessment_target_filter
+    #   Filters the list of assessments to those performed against a specific
+    #   entity or change set.
+    #
+    # @option params [Types::FrameworkFilters] :framework_filters
+    #   Framework-specific filters. Set exactly one member to filter results
+    #   to assessments performed against that framework.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the upper limit of the elements on a single page. If a value
+    #   isn't provided, the default value is 20. Valid values range from 1 to
+    #   100.
+    #
+    # @option params [String] :next_token
+    #   The value of the next token, if it exists. `null` if there are no more
+    #   results.
+    #
+    # @return [Types::ListAssessmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssessmentsResponse#assessment_summary_list #assessment_summary_list} => Array&lt;Types::AssessmentSummary&gt;
+    #   * {Types::ListAssessmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_assessments({
+    #     catalog: "Catalog", # required
+    #     framework_id: "FrameworkId",
+    #     assessment_target_filter: {
+    #       entity_id: "ResourceId",
+    #       change_set_id: "ResourceId",
+    #     },
+    #     framework_filters: {
+    #       ami_security_filters: {
+    #         delivery_option_id: "ResourceId",
+    #       },
+    #       container_security_filters: {
+    #         delivery_option_id: "ResourceId",
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessment_summary_list #=> Array
+    #   resp.assessment_summary_list[0].assessment_arn #=> String
+    #   resp.assessment_summary_list[0].assessment_id #=> String
+    #   resp.assessment_summary_list[0].framework_id #=> String
+    #   resp.assessment_summary_list[0].assessment_target_summary.entity_id #=> String
+    #   resp.assessment_summary_list[0].assessment_target_summary.change_set_id #=> String
+    #   resp.assessment_summary_list[0].framework_summary.ami_security_summary.delivery_option_id #=> String
+    #   resp.assessment_summary_list[0].framework_summary.container_security_summary.delivery_option_id #=> String
+    #   resp.assessment_summary_list[0].assessment_result #=> String, one of "PASS", "FAIL"
+    #   resp.assessment_summary_list[0].created_at #=> String
+    #   resp.assessment_summary_list[0].expires_at #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListAssessments AWS API Documentation
+    #
+    # @overload list_assessments(params = {})
+    # @param [Hash] params ({})
+    def list_assessments(params = {}, options = {})
+      req = build_request(:list_assessments, params)
       req.send_request(options)
     end
 
@@ -955,6 +1125,15 @@ module Aws::MarketplaceCatalog
     #         offer_set_id: {
     #           value_list: ["OfferSetIdString"],
     #         },
+    #         target_agreement_id: {
+    #           value_list: ["OfferTargetAgreementIdString"],
+    #         },
+    #         target_agreement_intent: {
+    #           value_list: ["Renew"], # accepts Renew
+    #         },
+    #         created_by_source: {
+    #           value_list: ["Seller"], # accepts Seller, AwsMarketplace
+    #         },
     #       },
     #       container_product_filters: {
     #         entity_id: {
@@ -1098,7 +1277,7 @@ module Aws::MarketplaceCatalog
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       offer_sort: {
-    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ResaleAuthorizationId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate, OfferSetId
+    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ResaleAuthorizationId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate, OfferSetId, TargetAgreementId, TargetAgreementIntent, CreatedBySource
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       container_product_sort: {
@@ -1148,6 +1327,9 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].offer_summary.targeting #=> Array
     #   resp.entity_summary_list[0].offer_summary.targeting[0] #=> String, one of "BuyerAccounts", "ParticipatingPrograms", "CountryCodes", "None"
     #   resp.entity_summary_list[0].offer_summary.offer_set_id #=> String
+    #   resp.entity_summary_list[0].offer_summary.target_agreement_id #=> String
+    #   resp.entity_summary_list[0].offer_summary.target_agreement_intent #=> String, one of "Renew"
+    #   resp.entity_summary_list[0].offer_summary.created_by_source #=> String, one of "Seller", "AwsMarketplace"
     #   resp.entity_summary_list[0].resale_authorization_summary.name #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.product_id #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.product_name #=> String
@@ -1451,7 +1633,7 @@ module Aws::MarketplaceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

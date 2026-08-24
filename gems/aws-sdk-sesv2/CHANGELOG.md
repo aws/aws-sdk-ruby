@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2026-08-20)
+------------------
+
+* Feature - Amazon SES now supports per-message tracking overrides. You can use the new ConfigurationOverrides parameter in SendEmail and SendBulkEmail to enable or disable open and click tracking for individual messages without changing your account-level or configuration set settings.
+
 1.105.0 (2026-07-22)
 ------------------
 

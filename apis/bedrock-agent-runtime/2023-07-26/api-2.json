@@ -35,6 +35,23 @@
         {"shape":"ServiceQuotaExceededException"}
       ]
     },
+    "CheckIngestedDocumentAcl":{
+      "name":"CheckIngestedDocumentAcl",
+      "http":{
+        "method":"POST",
+        "requestUri":"/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/check-ingested-document-acl",
+        "responseCode":200
+      },
+      "input":{"shape":"CheckIngestedDocumentAclRequest"},
+      "output":{"shape":"CheckIngestedDocumentAclResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
     "CreateInvocation":{
       "name":"CreateInvocation",
       "http":{
@@ -219,6 +236,23 @@
       },
       "input":{"shape":"GetFlowExecutionRequest"},
       "output":{"shape":"GetFlowExecutionResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "GetIngestedDocumentAcl":{
+      "name":"GetIngestedDocumentAcl",
+      "http":{
+        "method":"POST",
+        "requestUri":"/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/get-ingested-document-acl",
+        "responseCode":200
+      },
+      "input":{"shape":"GetIngestedDocumentAclRequest"},
+      "output":{"shape":"GetIngestedDocumentAclResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"},
@@ -829,6 +863,24 @@
       "type":"string",
       "sensitive":true
     },
+    "AgentCoreMemoryActorId":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9][a-zA-Z0-9\\-_/]*(?::[a-zA-Z0-9\\-_/]+)*[a-zA-Z0-9\\-_/]*$"
+    },
+    "AgentCoreMemoryId":{
+      "type":"string",
+      "max":111,
+      "min":12,
+      "pattern":"^[a-zA-Z][a-zA-Z0-9\\-_]{0,99}-[a-zA-Z0-9]{10}$"
+    },
+    "AgentCoreMemorySessionId":{
+      "type":"string",
+      "max":100,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
+    },
     "AgentId":{
       "type":"string",
       "max":10,
@@ -849,6 +901,7 @@
       "type":"structure",
       "members":{
         "fullDocumentExpansion":{"shape":"AgenticRetrieveFullDocExpansionDetails"},
+        "memoryRetrieve":{"shape":"AgenticRetrieveMemoryRetrieveDetails"},
         "retrieve":{"shape":"AgenticRetrieveActionDetails"}
       }
     },
@@ -988,6 +1041,138 @@
         "version":{"shape":"String"}
       }
     },
+    "AgenticRetrieveMemoryConfiguration":{
+      "type":"structure",
+      "required":["memoryId"],
+      "members":{
+        "memoryId":{"shape":"AgentCoreMemoryId"},
+        "persistenceMode":{"shape":"AgenticRetrieveMemoryPersistenceMode"},
+        "retrievalConfigs":{"shape":"AgenticRetrieveMemoryRetrievalConfigList"},
+        "sessionBinding":{"shape":"AgenticRetrieveMemorySessionBinding"}
+      }
+    },
+    "AgenticRetrieveMemoryMetadataFilter":{
+      "type":"structure",
+      "required":[
+        "left",
+        "operator"
+      ],
+      "members":{
+        "left":{"shape":"AgenticRetrieveMemoryMetadataFilterLeft"},
+        "operator":{"shape":"AgenticRetrieveMemoryMetadataFilterOperator"},
+        "right":{"shape":"AgenticRetrieveMemoryMetadataFilterRight"}
+      }
+    },
+    "AgenticRetrieveMemoryMetadataFilterLeft":{
+      "type":"structure",
+      "members":{
+        "metadataKey":{"shape":"AgenticRetrieveMemoryMetadataKey"}
+      },
+      "union":true
+    },
+    "AgenticRetrieveMemoryMetadataFilterList":{
+      "type":"list",
+      "member":{"shape":"AgenticRetrieveMemoryMetadataFilter"}
+    },
+    "AgenticRetrieveMemoryMetadataFilterOperator":{
+      "type":"string",
+      "enum":[
+        "EQUALS_TO",
+        "EXISTS",
+        "NOT_EXISTS",
+        "BEFORE",
+        "AFTER",
+        "CONTAINS",
+        "GREATER_THAN",
+        "GREATER_THAN_OR_EQUALS",
+        "LESS_THAN",
+        "LESS_THAN_OR_EQUALS"
+      ]
+    },
+    "AgenticRetrieveMemoryMetadataFilterRight":{
+      "type":"structure",
+      "members":{
+        "metadataValue":{"shape":"AgenticRetrieveMemoryMetadataValue"}
+      },
+      "union":true
+    },
+    "AgenticRetrieveMemoryMetadataKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9\\s._:/=+@-]*$"
+    },
+    "AgenticRetrieveMemoryMetadataStringList":{
+      "type":"list",
+      "member":{"shape":"AgenticRetrieveMemoryMetadataStringListItem"}
+    },
+    "AgenticRetrieveMemoryMetadataStringListItem":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9\\s._:/=+@-]*$"
+    },
+    "AgenticRetrieveMemoryMetadataStringValue":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9\\s._:/=+@-]*$"
+    },
+    "AgenticRetrieveMemoryMetadataValue":{
+      "type":"structure",
+      "members":{
+        "dateTimeValue":{"shape":"Timestamp"},
+        "numberValue":{"shape":"Double"},
+        "stringListValue":{"shape":"AgenticRetrieveMemoryMetadataStringList"},
+        "stringValue":{"shape":"AgenticRetrieveMemoryMetadataStringValue"}
+      },
+      "union":true
+    },
+    "AgenticRetrieveMemoryPersistenceMode":{
+      "type":"string",
+      "enum":[
+        "DEFAULT",
+        "NONE"
+      ]
+    },
+    "AgenticRetrieveMemoryRetrievalConfig":{
+      "type":"structure",
+      "members":{
+        "metadataFilters":{"shape":"AgenticRetrieveMemoryMetadataFilterList"},
+        "namespace":{"shape":"MemoryNamespace"},
+        "namespacePath":{"shape":"MemoryNamespace"},
+        "strategyId":{"shape":"MemoryStrategyId"}
+      }
+    },
+    "AgenticRetrieveMemoryRetrievalConfigList":{
+      "type":"list",
+      "member":{"shape":"AgenticRetrieveMemoryRetrievalConfig"}
+    },
+    "AgenticRetrieveMemoryRetrieveDetails":{
+      "type":"structure",
+      "required":[
+        "inputQuery",
+        "memoryId"
+      ],
+      "members":{
+        "inputQuery":{"shape":"AgenticRetrieveMessageContent"},
+        "memoryId":{"shape":"String"},
+        "namespace":{"shape":"String"},
+        "namespacePath":{"shape":"String"},
+        "strategyId":{"shape":"String"}
+      }
+    },
+    "AgenticRetrieveMemorySessionBinding":{
+      "type":"structure",
+      "required":[
+        "actorId",
+        "sessionId"
+      ],
+      "members":{
+        "actorId":{"shape":"AgentCoreMemoryActorId"},
+        "sessionId":{"shape":"AgentCoreMemorySessionId"}
+      }
+    },
     "AgenticRetrieveMessage":{
       "type":"structure",
       "required":[
@@ -1107,7 +1292,8 @@
         "Planning",
         "Retrieval",
         "SpeculativeRetrieval",
-        "FullDocumentExpansion"
+        "FullDocumentExpansion",
+        "SessionHistoryLoad"
       ]
     },
     "AgenticRetrieveStreamRequest":{
@@ -1120,6 +1306,7 @@
       "members":{
         "agenticRetrieveConfiguration":{"shape":"AgenticRetrieveConfiguration"},
         "generateResponse":{"shape":"Boolean"},
+        "memoryConfiguration":{"shape":"AgenticRetrieveMemoryConfiguration"},
         "messages":{"shape":"AgenticRetrieveStreamRequestMessagesList"},
         "nextToken":{"shape":"NextToken"},
         "policyConfiguration":{"shape":"AgenticRetrievePolicyConfiguration"},
@@ -1209,7 +1396,10 @@
     },
     "AgenticRetrieveType":{
       "type":"string",
-      "enum":["BedrockKnowledgeBase"]
+      "enum":[
+        "BedrockKnowledgeBase",
+        "BedrockAgentCoreMemory"
+      ]
     },
     "AgenticRetrieveWarning":{
       "type":"structure",
@@ -1462,6 +1652,36 @@
     "CallerChain":{
       "type":"list",
       "member":{"shape":"Caller"}
+    },
+    "CheckIngestedDocumentAclRequest":{
+      "type":"structure",
+      "required":[
+        "dataSourceId",
+        "documentId",
+        "knowledgeBaseId",
+        "userContext"
+      ],
+      "members":{
+        "dataSourceId":{
+          "shape":"DataSourceId",
+          "location":"uri",
+          "locationName":"dataSourceId"
+        },
+        "documentId":{"shape":"DocumentId"},
+        "knowledgeBaseId":{
+          "shape":"KnowledgeBaseIdentifier",
+          "location":"uri",
+          "locationName":"knowledgeBaseId"
+        },
+        "userContext":{"shape":"UserContext"}
+      }
+    },
+    "CheckIngestedDocumentAclResponse":{
+      "type":"structure",
+      "required":["hasAccess"],
+      "members":{
+        "hasAccess":{"shape":"Boolean"}
+      }
     },
     "Citation":{
       "type":"structure",
@@ -1779,6 +1999,95 @@
       "type":"structure",
       "members":{},
       "document":true
+    },
+    "DocumentAcl":{
+      "type":"structure",
+      "members":{
+        "allowList":{"shape":"DocumentAclMembership"},
+        "denyList":{"shape":"DocumentAclMembership"}
+      },
+      "sensitive":true
+    },
+    "DocumentAclCondition":{
+      "type":"structure",
+      "members":{
+        "conditionOperator":{"shape":"DocumentAclMemberRelation"},
+        "groups":{"shape":"DocumentAclConditionGroupsList"},
+        "users":{"shape":"DocumentAclConditionUsersList"}
+      }
+    },
+    "DocumentAclConditionGroupsList":{
+      "type":"list",
+      "member":{"shape":"DocumentAclGroup"},
+      "max":3000,
+      "min":0
+    },
+    "DocumentAclConditionUsersList":{
+      "type":"list",
+      "member":{"shape":"DocumentAclUser"},
+      "max":3000,
+      "min":0
+    },
+    "DocumentAclGroup":{
+      "type":"structure",
+      "required":[
+        "id",
+        "type"
+      ],
+      "members":{
+        "id":{"shape":"DocumentAclGroupIdString"},
+        "type":{"shape":"DocumentAclMembershipType"}
+      }
+    },
+    "DocumentAclGroupIdString":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"^\\P{C}*$"
+    },
+    "DocumentAclMemberRelation":{
+      "type":"string",
+      "enum":[
+        "AND",
+        "OR"
+      ]
+    },
+    "DocumentAclMembership":{
+      "type":"structure",
+      "members":{
+        "conditions":{"shape":"DocumentAclMembershipConditionsList"},
+        "memberRelation":{"shape":"DocumentAclMemberRelation"}
+      }
+    },
+    "DocumentAclMembershipConditionsList":{
+      "type":"list",
+      "member":{"shape":"DocumentAclCondition"},
+      "max":100,
+      "min":0
+    },
+    "DocumentAclMembershipType":{
+      "type":"string",
+      "enum":[
+        "KNOWLEDGE_BASE",
+        "DATA_SOURCE"
+      ]
+    },
+    "DocumentAclUser":{
+      "type":"structure",
+      "required":[
+        "id",
+        "type"
+      ],
+      "members":{
+        "id":{"shape":"DocumentAclUserIdString"},
+        "type":{"shape":"DocumentAclMembershipType"}
+      }
+    },
+    "DocumentAclUserIdString":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"^\\P{C}*$"
     },
     "DocumentId":{
       "type":"string",
@@ -2860,6 +3169,34 @@
         "flowVersion":{"shape":"Version"},
         "startedAt":{"shape":"DateTimestamp"},
         "status":{"shape":"FlowExecutionStatus"}
+      }
+    },
+    "GetIngestedDocumentAclRequest":{
+      "type":"structure",
+      "required":[
+        "dataSourceId",
+        "documentId",
+        "knowledgeBaseId"
+      ],
+      "members":{
+        "dataSourceId":{
+          "shape":"DataSourceId",
+          "location":"uri",
+          "locationName":"dataSourceId"
+        },
+        "documentId":{"shape":"DocumentId"},
+        "knowledgeBaseId":{
+          "shape":"KnowledgeBaseIdentifier",
+          "location":"uri",
+          "locationName":"knowledgeBaseId"
+        }
+      }
+    },
+    "GetIngestedDocumentAclResponse":{
+      "type":"structure",
+      "required":["documentAcl"],
+      "members":{
+        "documentAcl":{"shape":"DocumentAcl"}
       }
     },
     "GetInvocationStepRequest":{
@@ -4171,6 +4508,12 @@
       "min":2,
       "pattern":"^[0-9a-zA-Z._:-]+$"
     },
+    "MemoryNamespace":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9/*][a-zA-Z0-9\\-_/*]*(?::[a-zA-Z0-9\\-_/*]+)*[a-zA-Z0-9\\-_/*]*$"
+    },
     "MemorySessionSummary":{
       "type":"structure",
       "members":{
@@ -4180,6 +4523,12 @@
         "sessionStartTime":{"shape":"DateTimestamp"},
         "summaryText":{"shape":"SummaryText"}
       }
+    },
+    "MemoryStrategyId":{
+      "type":"string",
+      "max":100,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
     },
     "MemoryType":{
       "type":"string",
@@ -6037,6 +6386,7 @@
       },
       "exception":true
     },
+    "Timestamp":{"type":"timestamp"},
     "TopK":{
       "type":"integer",
       "box":true,

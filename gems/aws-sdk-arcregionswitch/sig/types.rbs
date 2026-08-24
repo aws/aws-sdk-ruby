@@ -260,6 +260,7 @@ module Aws::ARCRegionswitch
       attr_accessor aurora_serverless_scaling_config: Types::AuroraServerlessScalingConfiguration
       attr_accessor aurora_provisioned_scaling_config: Types::AuroraProvisionedScalingConfiguration
       attr_accessor neptune_global_database_config: Types::NeptuneGlobalDatabaseConfiguration
+      attr_accessor rds_switchover_read_replica_config: Types::RdsSwitchoverReadReplicaConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -297,6 +298,8 @@ module Aws::ARCRegionswitch
       end
       class NeptuneGlobalDatabaseConfig < ExecutionBlockConfiguration
       end
+      class RdsSwitchoverReadReplicaConfig < ExecutionBlockConfiguration
+      end
       class Unknown < ExecutionBlockConfiguration
       end
     end
@@ -305,7 +308,7 @@ module Aws::ARCRegionswitch
       attr_accessor timestamp: ::Time
       attr_accessor type: ("unknown" | "executionPending" | "executionStarted" | "executionSucceeded" | "executionFailed" | "executionPausing" | "executionPaused" | "executionCanceling" | "executionCanceled" | "executionPendingApproval" | "executionBehaviorChangedToUngraceful" | "executionBehaviorChangedToGraceful" | "executionPendingChildPlanManualApproval" | "executionSuccessMonitoringApplicationHealth" | "stepStarted" | "stepUpdate" | "stepSucceeded" | "stepFailed" | "stepSkipped" | "stepPausedByError" | "stepPausedByOperator" | "stepCanceled" | "stepPendingApproval" | "stepExecutionBehaviorChangedToUngraceful" | "stepPendingApplicationHealthMonitor" | "planEvaluationWarning")
       attr_accessor step_name: ::String
-      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping" | "AuroraServerlessScaling" | "AuroraProvisionedScaling" | "NeptuneGlobalDatabase")
+      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping" | "AuroraServerlessScaling" | "AuroraProvisionedScaling" | "NeptuneGlobalDatabase" | "RdsSwitchoverReadReplica")
       attr_accessor resources: ::Array[::String]
       attr_accessor error: ::String
       attr_accessor description: ::String
@@ -617,6 +620,20 @@ module Aws::ARCRegionswitch
       SENSITIVE: []
     end
 
+    class RdsSwitchoverReadReplicaConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor db_instance_arn_map: ::Hash[::String, ::String]
+      attr_accessor ungraceful: Types::RdsUngraceful
+      SENSITIVE: []
+    end
+
+    class RdsUngraceful
+      attr_accessor ungraceful: ("promoteReadReplica")
+      SENSITIVE: []
+    end
+
     class RegionSwitchPlanConfiguration
       attr_accessor cross_account_role: ::String
       attr_accessor external_id: ::String
@@ -739,7 +756,7 @@ module Aws::ARCRegionswitch
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor execution_block_configuration: Types::ExecutionBlockConfiguration
-      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping" | "AuroraServerlessScaling" | "AuroraProvisionedScaling" | "NeptuneGlobalDatabase")
+      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping" | "AuroraServerlessScaling" | "AuroraProvisionedScaling" | "NeptuneGlobalDatabase" | "RdsSwitchoverReadReplica")
       SENSITIVE: []
     end
 

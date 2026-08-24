@@ -39,7 +39,8 @@ module Aws
           password_param: ::String?,
           stream_name: ::String?,
           url: ::String?,
-          username: ::String?
+          username: ::String?,
+          virtual_source_address: ::String?
         }
       ]?,
       srt_settings: Array[
@@ -207,6 +208,11 @@ module Aws
       }?,
       nielsen_distribution_type: ("FINAL_DISTRIBUTOR" | "PROGRAM_CONTENT")?,
       nielsen_naes_ii_nw_settings: {
+        check_digit_string: ::String,
+        sid: ::Float,
+        timezone: ("AMERICA_PUERTO_RICO" | "US_ALASKA" | "US_ARIZONA" | "US_CENTRAL" | "US_EASTERN" | "US_HAWAII" | "US_MOUNTAIN" | "US_PACIFIC" | "US_SAMOA" | "UTC")?
+      }?,
+      nielsen_nw_only_settings: {
         check_digit_string: ::String,
         sid: ::Float,
         timezone: ("AMERICA_PUERTO_RICO" | "US_ALASKA" | "US_ARIZONA" | "US_CENTRAL" | "US_EASTERN" | "US_HAWAII" | "US_MOUNTAIN" | "US_PACIFIC" | "US_SAMOA" | "UTC")?
@@ -566,7 +572,7 @@ module Aws
       id_3_behavior: ("DISABLED" | "ENABLED")?,
       klv_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
       nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
-      scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION")?,
+      scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION" | "SCTE_35_WITHOUT_IDR")?,
       segment_length: ::Integer?,
       segment_length_units: ("MILLISECONDS" | "SECONDS")?,
       timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")?,
@@ -628,7 +634,7 @@ module Aws
         destination_ref_id: ::String?
       },
       nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
-      scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION")?,
+      scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION" | "SCTE_35_WITHOUT_IDR")?,
       segment_length: ::Integer?,
       segment_length_units: ("MILLISECONDS" | "SECONDS")?,
       send_delay_ms: ::Integer?,
@@ -737,7 +743,7 @@ module Aws
       program_num: ::Integer?,
       rate_mode: ("CBR" | "VBR")?,
       scte_27_pids: ::String?,
-      scte_35_control: ("NONE" | "PASSTHROUGH")?,
+      scte_35_control: ("NONE" | "PASSTHROUGH" | "SCTE_35_WITHOUT_IDR")?,
       scte_35_pid: ::String?,
       scte_35_preroll_pullup_milliseconds: ::Float?,
       segmentation_markers: ("EBP" | "EBP_LEGACY" | "NONE" | "PSI_SEGSTART" | "RAI_ADAPT" | "RAI_SEGSTART")?,
@@ -840,7 +846,7 @@ module Aws
       nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
       pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")?,
       pcr_period: ::Integer?,
-      scte_35_control: ("NONE" | "PASSTHROUGH")?,
+      scte_35_control: ("NONE" | "PASSTHROUGH" | "SCTE_35_WITHOUT_IDR")?,
       scte_35_preroll_pullup_milliseconds: ::Float?
     }
 
@@ -1183,7 +1189,19 @@ module Aws
       respond_to_afd: ("NONE" | "PASSTHROUGH" | "RESPOND")?,
       scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "SMART_CROP")?,
       sharpness: ::Integer?,
-      width: ::Integer?
+      width: ::Integer?,
+      crop_rectangle: {
+        height: ::Integer,
+        width: ::Integer,
+        x: ::Integer,
+        y: ::Integer
+      }?,
+      output_position_rectangle: {
+        height: ::Integer,
+        width: ::Integer,
+        x: ::Integer,
+        y: ::Integer
+      }?
     }
 
       type automatic_input_failover_settings = {

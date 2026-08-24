@@ -623,6 +623,29 @@ module Aws::SESV2
     #
     class ConcurrentModificationException < Aws::EmptyStructure; end
 
+    # An object that overrides settings for a single email sending request.
+    # An override applies only to the message or messages in the request
+    # that contains it. It doesn't change your account-level settings, and
+    # it doesn't change the configuration set that the request uses.
+    #
+    # A setting that you don't override keeps the value that would
+    # otherwise apply to the message. Depending on the setting, that value
+    # comes from the configuration set that the message uses, from your
+    # account-level settings, or from the Amazon SES default.
+    #
+    # @!attribute [rw] tracking
+    #   An object that overrides the open and click tracking settings that
+    #   would otherwise apply to the message.
+    #   @return [Types::TrackingConfigurationOverrides]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ConfigurationOverrides AWS API Documentation
+    #
+    class ConfigurationOverrides < Struct.new(
+      :tracking)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # If there is already an ongoing account details update under review.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ConflictException AWS API Documentation
@@ -6586,8 +6609,7 @@ module Aws::SESV2
     end
 
     # The pricing attributes that apply to your Amazon SES account,
-    # including the currently active pricing plan and any scheduled change
-    # for the next billing cycle.
+    # including the currently active pricing plan and any scheduled change.
     #
     # @!attribute [rw] current_plan
     #   The pricing plan that is currently active on your Amazon SES
@@ -6596,7 +6618,7 @@ module Aws::SESV2
     #
     # @!attribute [rw] next_plan
     #   The pricing plan that will become active at the start of the next
-    #   billing cycle, if a scheduled change has been requested. This field
+    #   monthly cycle, if a scheduled change has been requested. This field
     #   is empty when no scheduled change is pending.
     #   @return [String]
     #
@@ -6695,20 +6717,21 @@ module Aws::SESV2
     # A request to set the pricing plan for your Amazon SES account.
     #
     # @!attribute [rw] plan
-    #   The pricing plan to apply to your Amazon SES account. Can be one of
-    #   the following:
+    #   The pricing plan to apply to your Amazon SES account. For details
+    #   about each plan, see [Amazon SES Pricing][1]. Can be one of the
+    #   following:
     #
-    #   * `NONE` – No pricing plan is applied; billing follows per-feature
-    #     pricing.
+    #   * `NONE`
     #
-    #   * `ESSENTIALS` – Baseline Amazon SES capabilities and select premium
-    #     features.
+    #   * `ESSENTIALS`
     #
-    #   * `PRO` – Includes everything in `ESSENTIALS`, plus additional
-    #     premium features for growing senders.
+    #   * `PRO`
     #
-    #   * `ENTERPRISE` – Includes everything in `PRO`, plus features
-    #     intended for large-scale senders.
+    #   * `ENTERPRISE`
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/ses/pricing/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountPricingAttributesRequest AWS API Documentation
@@ -7985,6 +8008,13 @@ module Aws::SESV2
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] configuration_overrides
+    #   An object that overrides, for the messages in this request only,
+    #   settings that would otherwise apply to them. The overrides apply to
+    #   every message in the request. Each setting that you don't override
+    #   keeps the value that already applies.
+    #   @return [Types::ConfigurationOverrides]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SendBulkEmailRequest AWS API Documentation
     #
     class SendBulkEmailRequest < Struct.new(
@@ -7998,7 +8028,8 @@ module Aws::SESV2
       :bulk_email_entries,
       :configuration_set_name,
       :endpoint_id,
-      :tenant_name)
+      :tenant_name,
+      :configuration_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8167,6 +8198,12 @@ module Aws::SESV2
     #   which will be used when a contact chooses to unsubscribe.
     #   @return [Types::ListManagementOptions]
     #
+    # @!attribute [rw] configuration_overrides
+    #   An object that overrides, for this message only, settings that would
+    #   otherwise apply to it. Each setting that you don't override keeps
+    #   the value that already applies.
+    #   @return [Types::ConfigurationOverrides]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SendEmailRequest AWS API Documentation
     #
     class SendEmailRequest < Struct.new(
@@ -8181,7 +8218,8 @@ module Aws::SESV2
       :configuration_set_name,
       :endpoint_id,
       :tenant_name,
-      :list_management_options)
+      :list_management_options,
+      :configuration_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8964,6 +9002,80 @@ module Aws::SESV2
     class TopicPreference < Struct.new(
       :topic_name,
       :subscription_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that overrides, for a single email sending request, the
+    # engagement tracking settings that would otherwise apply. Use these
+    # overrides to turn open tracking or click tracking on or off for an
+    # individual message, for example to suppress tracking in a
+    # transactional message that you send from an account or a configuration
+    # set that has tracking enabled.
+    #
+    # Without an override, engagement tracking is determined by your
+    # account-level `EngagementMetrics` setting, which you configure using
+    # the `PutAccountVdmAttributes` operation, by the `EngagementMetrics`
+    # setting of the configuration set that the message uses, which you
+    # configure using the `PutConfigurationSetVdmOptions` operation, and by
+    # whether that configuration set has an event destination whose
+    # `MatchingEventTypes` include the `OPEN` or `CLICK` event types.
+    #
+    # For more information about tracking open and click events, see the
+    # [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/event-publishing.html
+    #
+    # @!attribute [rw] open_tracking_enabled
+    #   Specifies whether Amazon SES tracks when the recipient opens this
+    #   message. Can be one of the following:
+    #
+    #   * `ENABLED` – Amazon SES tracks opens for this message, even when
+    #     your account-level and configuration set settings don't enable
+    #     open tracking.
+    #
+    #   * `DISABLED` – Amazon SES doesn't track opens for this message,
+    #     even when your account-level or configuration set settings enable
+    #     open tracking. Amazon SES doesn't add the tracking image to the
+    #     message.
+    #
+    #   If you don't specify this value, Amazon SES uses the open tracking
+    #   setting that would otherwise apply to the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] click_tracking_enabled
+    #   Specifies whether Amazon SES tracks when the recipient clicks a link
+    #   in this message. Can be one of the following:
+    #
+    #   * `ENABLED` – Amazon SES tracks clicks for this message, even when
+    #     your account-level and configuration set settings don't enable
+    #     click tracking.
+    #
+    #   * `DISABLED` – Amazon SES doesn't track clicks for this message,
+    #     even when your account-level or configuration set settings enable
+    #     click tracking. Amazon SES doesn't rewrite the links in the
+    #     message.
+    #
+    #   If you don't specify this value, Amazon SES uses the click tracking
+    #   setting that would otherwise apply to the message.
+    #
+    #   <note markdown="1"> Enabling open or click tracking with an override doesn't create an
+    #   event destination. Amazon SES records the resulting open and click
+    #   events in VDM, where you can review them using VDM metrics and
+    #   Message Insights. To also receive these events at a destination that
+    #   you own, the configuration set that the message uses must have an
+    #   event destination that publishes open and click events.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/TrackingConfigurationOverrides AWS API Documentation
+    #
+    class TrackingConfigurationOverrides < Struct.new(
+      :open_tracking_enabled,
+      :click_tracking_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

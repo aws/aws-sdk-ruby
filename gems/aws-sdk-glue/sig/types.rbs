@@ -130,6 +130,8 @@ module Aws::Glue
 
     class AssociateGlossaryTermsRequest
       attr_accessor asset_identifier: ::String
+      attr_accessor iterable_form_name: ::String
+      attr_accessor item_identifier: ::String
       attr_accessor glossary_term_identifiers: ::Array[::String]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -137,6 +139,8 @@ module Aws::Glue
 
     class AssociateGlossaryTermsResponse
       attr_accessor asset_identifier: ::String
+      attr_accessor iterable_form_name: ::String
+      attr_accessor item_identifier: ::String
       attr_accessor glossary_terms: ::Array[::String]
       SENSITIVE: []
     end
@@ -2281,6 +2285,8 @@ module Aws::Glue
 
     class DeleteAttachmentResponse
       attr_accessor asset_identifier: ::String
+      attr_accessor iterable_form_name: ::String
+      attr_accessor item_identifier: ::String
       SENSITIVE: []
     end
 
@@ -2792,6 +2798,8 @@ module Aws::Glue
 
     class DisassociateGlossaryTermsRequest
       attr_accessor asset_identifier: ::String
+      attr_accessor iterable_form_name: ::String
+      attr_accessor item_identifier: ::String
       attr_accessor glossary_term_identifiers: ::Array[::String]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -2799,6 +2807,8 @@ module Aws::Glue
 
     class DisassociateGlossaryTermsResponse
       attr_accessor asset_identifier: ::String
+      attr_accessor iterable_form_name: ::String
+      attr_accessor item_identifier: ::String
       attr_accessor glossary_terms: ::Array[::String]
       SENSITIVE: []
     end
@@ -2979,6 +2989,12 @@ module Aws::Glue
 
     class ExecutionProperty
       attr_accessor max_concurrent_runs: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExportEncryptionConfiguration
+      attr_accessor sse_algorithm: ::String
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -3443,6 +3459,19 @@ module Aws::Glue
 
     class GetDataCatalogEncryptionSettingsResponse
       attr_accessor data_catalog_encryption_settings: Types::DataCatalogEncryptionSettings
+      SENSITIVE: []
+    end
+
+    class GetDataCatalogExportConfigurationInput < Aws::EmptyStructure
+    end
+
+    class GetDataCatalogExportConfigurationOutput
+      attr_accessor export_setting: ("ENABLED" | "DISABLED")
+      attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
+      attr_accessor s3_table_bucket_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -6072,6 +6101,19 @@ module Aws::Glue
     end
 
     class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure
+    end
+
+    class PutDataCatalogExportConfigurationInput
+      attr_accessor export_setting: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutDataCatalogExportConfigurationOutput
+      attr_accessor export_setting: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration
+      SENSITIVE: []
     end
 
     class PutDataQualityProfileAnnotationRequest

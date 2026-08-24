@@ -1676,6 +1676,9 @@ module Aws::HealthLake
     # @option params [Boolean] :drift_detection_enabled
     #   A boolean value.
     #
+    # @option params [Boolean] :provenance_enabled
+    #   Specifies whether to enable provenance for the import job.
+    #
     # @return [Types::StartFHIRImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartFHIRImportJobResponse#job_id #job_id} => String
@@ -1702,6 +1705,7 @@ module Aws::HealthLake
     #     profile_id: "BoundedLengthString",
     #     input_format: "BoundedLengthString",
     #     drift_detection_enabled: false,
+    #     provenance_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1976,7 +1980,7 @@ module Aws::HealthLake
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

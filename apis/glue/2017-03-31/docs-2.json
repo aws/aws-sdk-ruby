@@ -127,6 +127,7 @@
     "GetCustomEntityType": "<p>Retrieves the details of a custom pattern by specifying its name.</p>",
     "GetDashboardUrl": "<p>Retrieves the URL for the Spark monitoring dashboard for a Glue resource.</p>",
     "GetDataCatalogEncryptionSettings": "<p>Retrieves the security configuration for a specified catalog.</p>",
+    "GetDataCatalogExportConfiguration": "<p>Retrieves the current export configuration for the Glue Data Catalog. The export configuration controls whether catalog metadata is exported to S3 Tables.</p>",
     "GetDataQualityModel": "<p>Retrieve the training status of the model along with more information (CompletedOn, StartedOn, FailureReason).</p>",
     "GetDataQualityModelResult": "<p>Retrieve a statistic's predictions for a given Profile ID.</p>",
     "GetDataQualityResult": "<p>Retrieves the result of a data quality rule evaluation.</p>",
@@ -228,6 +229,7 @@
     "PutAssetType": "<p>Creates or updates an asset type in Glue Data Catalog. An asset type defines the structure of assets by specifying which forms they include. If an asset type with the given name already exists, it is updated.</p>",
     "PutAttachment": "<p>Attaches a form to an asset or an iterable form item in Glue Data Catalog. If an attachment with the same name already exists, it is overwritten.</p>",
     "PutDataCatalogEncryptionSettings": "<p>Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.</p>",
+    "PutDataCatalogExportConfiguration": "<p>Creates or updates the export configuration for the Glue Data Catalog. Use this operation to enable or disable the export of catalog metadata to S3 Tables.</p>",
     "PutDataQualityProfileAnnotation": "<p>Annotate all datapoints for a Profile.</p>",
     "PutFormType": "<p>Creates or updates a form type in Glue Data Catalog. A form type defines the schema for structured metadata that can be attached to assets.</p>",
     "PutResourcePolicy": "<p>Sets the Data Catalog resource policy for access control.</p>",
@@ -254,14 +256,14 @@
     "StartJobRun": "<p>Starts a job run using a job definition.</p>",
     "StartMLEvaluationTaskRun": "<p>Starts a task to estimate the quality of the transform. </p> <p>When you provide label sets as examples of truth, Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality.</p> <p>Returns a unique identifier for the run. You can call <code>GetMLTaskRun</code> to get more information about the stats of the <code>EvaluationTaskRun</code>.</p>",
     "StartMLLabelingSetGenerationTaskRun": "<p>Starts the active learning workflow for your machine learning transform to improve the transform's quality by generating label sets and adding labels.</p> <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue will have generated a \"labeling set\" or a set of questions for humans to answer.</p> <p>In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” </p> <p>After the labeling process is finished, you can upload your labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.</p> <p>Note: The role used to write the generated labeling set to the <code>OutputS3Path</code> is the role associated with the Machine Learning Transform, specified in the <code>CreateMLTransform</code> API.</p>",
-    "StartMaterializedViewRefreshTaskRun": "<p>Starts a materialized view refresh task run, for a specified table and columns.</p>",
+    "StartMaterializedViewRefreshTaskRun": "<p>Starts a materialized view refresh task run for a specified materialized view.</p>",
     "StartTrigger": "<p>Starts an existing trigger. See <a href=\"https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html\">Triggering Jobs</a> for information about how different types of trigger are started.</p>",
     "StartWorkflowRun": "<p>Starts a new run of the specified workflow.</p>",
     "StopColumnStatisticsTaskRun": "<p>Stops a task run for the specified table.</p>",
     "StopColumnStatisticsTaskRunSchedule": "<p>Stops a column statistics task run schedule.</p>",
     "StopCrawler": "<p>If the specified crawler is running, stops the crawl.</p>",
     "StopCrawlerSchedule": "<p>Sets the schedule state of the specified crawler to <code>NOT_SCHEDULED</code>, but does not stop the crawler if it is already running.</p>",
-    "StopMaterializedViewRefreshTaskRun": "<p>Stops a materialized view refresh task run, for a specified table and columns.</p>",
+    "StopMaterializedViewRefreshTaskRun": "<p>Stops a materialized view refresh task run for a specified materialized view.</p>",
     "StopSession": "<p>Stops the session.</p>",
     "StopTrigger": "<p>Stops a specified trigger.</p>",
     "StopWorkflowRun": "<p>Stops the execution of the specified workflow run.</p>",
@@ -2847,6 +2849,7 @@
       "base": null,
       "refs": {
         "GetAssetOutput$CreatedAt": "<p>The timestamp at which the asset was created.</p>",
+        "GetDataCatalogExportConfigurationOutput$CreatedAt": "<p>The timestamp at which the export configuration was created.</p>",
         "PutAssetResponse$CreatedAt": "<p>The timestamp at which the asset was created.</p>"
       }
     },
@@ -4612,10 +4615,32 @@
         "PutResourcePolicyRequest$PolicyExistsCondition": "<p>A value of <code>MUST_EXIST</code> is used to update a policy. A value of <code>NOT_EXIST</code> is used to create a new policy. If a value of <code>NONE</code> or a null value is used, the call does not depend on the existence of a policy.</p>"
       }
     },
+    "ExportEncryptionConfiguration": {
+      "base": "<p>The encryption configuration for exported data catalog metadata.</p>",
+      "refs": {
+        "GetDataCatalogExportConfigurationOutput$EncryptionConfiguration": "<p>The encryption configuration for the exported data.</p>",
+        "PutDataCatalogExportConfigurationInput$EncryptionConfiguration": "<p>The encryption configuration for the exported data. If not specified, the default encryption settings are used.</p>",
+        "PutDataCatalogExportConfigurationOutput$EncryptionConfiguration": "<p>The encryption configuration for the exported data.</p>"
+      }
+    },
     "ExportLabelsTaskRunProperties": {
       "base": "<p>Specifies configuration properties for an exporting labels task run.</p>",
       "refs": {
         "TaskRunProperties$ExportLabelsTaskRunProperties": "<p>The configuration properties for an exporting labels task run.</p>"
+      }
+    },
+    "ExportSetting": {
+      "base": "<p>The export setting for the data catalog.</p>",
+      "refs": {
+        "GetDataCatalogExportConfigurationOutput$ExportSetting": "<p>The export setting for the data catalog. Valid values are <code>ENABLED</code> and <code>DISABLED</code>.</p>",
+        "PutDataCatalogExportConfigurationInput$ExportSetting": "<p>The export setting for the data catalog. Specify <code>ENABLED</code> to start exporting catalog metadata to S3 Tables, or <code>DISABLED</code> to stop exporting. This field is required.</p>",
+        "PutDataCatalogExportConfigurationOutput$ExportSetting": "<p>The export setting for the data catalog.</p>"
+      }
+    },
+    "ExportStatus": {
+      "base": "<p>The current status of the data catalog export.</p>",
+      "refs": {
+        "GetDataCatalogExportConfigurationOutput$Status": "<p>The current status of the export. Valid values are <code>ENABLING</code>, <code>ENABLED</code>, <code>DISABLING</code>, <code>DISABLED</code>, and <code>FAILED</code>.</p>"
       }
     },
     "ExtendedString": {
@@ -5127,7 +5152,7 @@
       "refs": {}
     },
     "GetAssetOutput": {
-      "base": null,
+      "base": "<p>The asset metadata returned by the <code>GetAsset</code> operation.</p>",
       "refs": {}
     },
     "GetAssetTypeRequest": {
@@ -5317,6 +5342,14 @@
     },
     "GetDataCatalogEncryptionSettingsResponse": {
       "base": null,
+      "refs": {}
+    },
+    "GetDataCatalogExportConfigurationInput": {
+      "base": null,
+      "refs": {}
+    },
+    "GetDataCatalogExportConfigurationOutput": {
+      "base": "<p>The export configuration returned by the <code>GetDataCatalogExportConfiguration</code> operation.</p>",
       "refs": {}
     },
     "GetDataQualityModelRequest": {
@@ -6245,6 +6278,7 @@
         "PutAssetRequest$ClientToken": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
         "PutAssetTypeRequest$ClientToken": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
         "PutAttachmentRequest$ClientToken": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+        "PutDataCatalogExportConfigurationInput$ClientToken": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
         "PutDataQualityProfileAnnotationRequest$ProfileId": "<p>The ID of the data quality monitoring profile to annotate.</p>",
         "PutFormTypeRequest$ClientToken": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
         "PutResourcePolicyRequest$PolicyHashCondition": "<p>The hash value returned when the previous policy was set using <code>PutResourcePolicy</code>. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.</p>",
@@ -6988,7 +7022,12 @@
     "ItemIdentifier": {
       "base": null,
       "refs": {
+        "AssociateGlossaryTermsRequest$ItemIdentifier": "<p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>",
+        "AssociateGlossaryTermsResponse$ItemIdentifier": "<p>The identifier of the item within the iterable form, if applicable.</p>",
         "DeleteAttachmentRequest$ItemIdentifier": "<p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>",
+        "DeleteAttachmentResponse$ItemIdentifier": "<p>The identifier of the item within the iterable form, if applicable.</p>",
+        "DisassociateGlossaryTermsRequest$ItemIdentifier": "<p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>",
+        "DisassociateGlossaryTermsResponse$ItemIdentifier": "<p>The identifier of the item within the iterable form, if applicable.</p>",
         "ItemError$ItemIdentifier": "<p>The identifier of the item that caused the error.</p>",
         "ItemIdentifierList$member": null,
         "PutAttachmentRequest$ItemIdentifier": "<p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>",
@@ -7053,8 +7092,13 @@
     "IterableFormName": {
       "base": null,
       "refs": {
+        "AssociateGlossaryTermsRequest$IterableFormName": "<p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the glossary terms are associated with an item within the iterable form rather than the asset itself.</p>",
+        "AssociateGlossaryTermsResponse$IterableFormName": "<p>The name of the iterable form, if the association targets an item.</p>",
         "BatchGetIterableFormsRequest$IterableFormName": "<p>The name of the iterable form to retrieve items from.</p>",
         "DeleteAttachmentRequest$IterableFormName": "<p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the attachment is deleted from an item within the iterable form rather than from the asset itself.</p>",
+        "DeleteAttachmentResponse$IterableFormName": "<p>The name of the iterable form, if the deletion targets an item.</p>",
+        "DisassociateGlossaryTermsRequest$IterableFormName": "<p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the glossary terms are disassociated from an item within the iterable form rather than the asset itself.</p>",
+        "DisassociateGlossaryTermsResponse$IterableFormName": "<p>The name of the iterable form, if the disassociation targets an item.</p>",
         "ListIterableFormsRequest$IterableFormName": "<p>The name of the iterable form to list items from.</p>",
         "PutAttachmentRequest$IterableFormName": "<p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the attachment targets an item within the iterable form rather than the asset itself.</p>",
         "PutAttachmentResponse$IterableFormName": "<p>The name of the iterable form, if the attachment targets an item.</p>"
@@ -7328,6 +7372,12 @@
         "DataQualityEncryption$KmsKeyArn": "<p>The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.</p>",
         "JobBookmarksEncryption$KmsKeyArn": "<p>The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.</p>",
         "S3Encryption$KmsKeyArn": "<p>The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.</p>"
+      }
+    },
+    "KmsKeyArnString": {
+      "base": null,
+      "refs": {
+        "ExportEncryptionConfiguration$KmsKeyArn": "<p>The ARN of the KMS key used to encrypt the exported data.</p>"
       }
     },
     "LabelCount": {
@@ -7981,9 +8031,9 @@
         "InvalidInputException$Message": "<p>A message describing the problem.</p>",
         "InvalidStateException$Message": "<p>A message describing the problem.</p>",
         "MLTransformNotReadyException$Message": "<p>A message describing the problem.</p>",
-        "MaterializedViewRefreshTaskNotRunningException$Message": null,
-        "MaterializedViewRefreshTaskRunningException$Message": null,
-        "MaterializedViewRefreshTaskStoppingException$Message": null,
+        "MaterializedViewRefreshTaskNotRunningException$Message": "<p>A message describing the problem.</p>",
+        "MaterializedViewRefreshTaskRunningException$Message": "<p>A message describing the problem.</p>",
+        "MaterializedViewRefreshTaskStoppingException$Message": "<p>A message describing the problem.</p>",
         "NoScheduleException$Message": "<p>A message describing the problem.</p>",
         "OperationNotSupportedException$Message": "<p>A message describing the problem.</p>",
         "OperationTimeoutException$Message": "<p>A message describing the problem.</p>",
@@ -8405,7 +8455,7 @@
         "ListEntitiesRequest$ConnectionName": "<p>A name for the connection that has required credentials to query any connection type.</p>",
         "ListMaterializedViewRefreshTaskRunsRequest$CatalogId": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>",
         "ListMaterializedViewRefreshTaskRunsRequest$DatabaseName": "<p>The database where the table resides.</p>",
-        "ListMaterializedViewRefreshTaskRunsRequest$TableName": "<p>The name of the table for which statistics is generated.</p>",
+        "ListMaterializedViewRefreshTaskRunsRequest$TableName": "<p>The name of the materialized view.</p>",
         "ListStatementsRequest$SessionId": "<p>The Session ID of the statements.</p>",
         "ListTableOptimizerRunsRequest$DatabaseName": "<p>The name of the database in the catalog in which the table resides.</p>",
         "ListTableOptimizerRunsRequest$TableName": "<p>The name of the table.</p>",
@@ -8460,7 +8510,7 @@
         "StartJobRunRequest$SecurityConfiguration": "<p>The name of the <code>SecurityConfiguration</code> structure to be used with this job run.</p>",
         "StartMaterializedViewRefreshTaskRunRequest$CatalogId": "<p>The ID of the Data Catalog where the table reside. If none is supplied, the account ID is used by default.</p>",
         "StartMaterializedViewRefreshTaskRunRequest$DatabaseName": "<p>The name of the database where the table resides.</p>",
-        "StartMaterializedViewRefreshTaskRunRequest$TableName": "<p>The name of the table to generate run the materialized view refresh task.</p>",
+        "StartMaterializedViewRefreshTaskRunRequest$TableName": "<p>The name of the materialized view to run the refresh task for.</p>",
         "StartTriggerRequest$Name": "<p>The name of the trigger to start.</p>",
         "StartTriggerResponse$Name": "<p>The name of the trigger that was started.</p>",
         "StartWorkflowRunRequest$Name": "<p>The name of the workflow to start.</p>",
@@ -8472,7 +8522,7 @@
         "StopCrawlerScheduleRequest$CrawlerName": "<p>Name of the crawler whose schedule state to set.</p>",
         "StopMaterializedViewRefreshTaskRunRequest$CatalogId": "<p>The ID of the Data Catalog where the table reside. If none is supplied, the account ID is used by default.</p>",
         "StopMaterializedViewRefreshTaskRunRequest$DatabaseName": "<p>The name of the database where the table resides.</p>",
-        "StopMaterializedViewRefreshTaskRunRequest$TableName": "<p>The name of the table to generate statistics.</p>",
+        "StopMaterializedViewRefreshTaskRunRequest$TableName": "<p>The name of the materialized view.</p>",
         "StopSessionRequest$Id": "<p>The ID of the session to be stopped.</p>",
         "StopSessionResponse$Id": "<p>Returns the Id of the stopped session.</p>",
         "StopTriggerRequest$Name": "<p>The name of the trigger to stop.</p>",
@@ -9842,6 +9892,14 @@
       "base": null,
       "refs": {}
     },
+    "PutDataCatalogExportConfigurationInput": {
+      "base": null,
+      "refs": {}
+    },
+    "PutDataCatalogExportConfigurationOutput": {
+      "base": "<p>The export configuration returned by the <code>PutDataCatalogExportConfiguration</code> operation.</p>",
+      "refs": {}
+    },
     "PutDataQualityProfileAnnotationRequest": {
       "base": null,
       "refs": {}
@@ -10227,7 +10285,7 @@
         "ColumnStatisticsTaskSettings$Role": "<p>The role used for running the column statistics.</p>",
         "Crawler$Role": "<p>The Amazon Resource Name (ARN) of an IAM role that's used to access customer resources, such as Amazon Simple Storage Service (Amazon S3) data.</p>",
         "CreateCrawlerRequest$Role": "<p>The IAM role or Amazon Resource Name (ARN) of an IAM role used by the new crawler to access customer resources.</p>",
-        "MaterializedViewRefreshTaskRun$Role": "<p>The IAM role that the service assumes to generate statistics.</p>",
+        "MaterializedViewRefreshTaskRun$Role": "<p>The IAM role that the service assumes to run the materialized view refresh task.</p>",
         "UpdateCrawlerRequest$Role": "<p>The IAM role or Amazon Resource Name (ARN) of an IAM role that is used by the new crawler to access customer resources.</p>"
       }
     },
@@ -10479,6 +10537,12 @@
       "refs": {
         "GovernedCatalogSource$AdditionalOptions": "<p>Specifies additional connection options.</p>",
         "S3CatalogSource$AdditionalOptions": "<p>Specifies additional connection options.</p>"
+      }
+    },
+    "S3TableBucketArn": {
+      "base": null,
+      "refs": {
+        "GetDataCatalogExportConfigurationOutput$S3TableBucketArn": "<p>The ARN of the S3 Tables bucket where catalog metadata is exported.</p>"
       }
     },
     "S3Target": {
@@ -10758,7 +10822,7 @@
       "refs": {}
     },
     "SearchAssetsOutput": {
-      "base": null,
+      "base": "<p>The search results returned by the <code>SearchAssets</code> operation.</p>",
       "refs": {}
     },
     "SearchAttribute": {
@@ -11186,6 +11250,12 @@
       "refs": {
         "JDBCConnectorSource$Query": "<p>The table or SQL query to get the data from. You can specify either <code>ConnectionTable</code> or <code>query</code>, but not both.</p>",
         "SparkSQL$SqlQuery": "<p>A SQL query that must use Spark SQL syntax and return a single data set.</p>"
+      }
+    },
+    "SseAlgorithm": {
+      "base": null,
+      "refs": {
+        "ExportEncryptionConfiguration$SseAlgorithm": "<p>The server-side encryption algorithm used for the exported data. Valid values are <code>AES256</code> and <code>aws:kms</code>.</p>"
       }
     },
     "StartBlueprintRunRequest": {
@@ -11721,7 +11791,7 @@
         "ColumnStatisticsTaskSettings$TableName": "<p>The name of the table for which to generate column statistics.</p>",
         "MappingEntry$SourceTable": "<p>The name of the source table.</p>",
         "MappingEntry$TargetTable": "<p>The target table.</p>",
-        "MaterializedViewRefreshTaskRun$TableName": "<p>The name of the table for which statistics is generated.</p>"
+        "MaterializedViewRefreshTaskRun$TableName": "<p>The name of the materialized view.</p>"
       }
     },
     "TableOptimizer": {
@@ -12830,6 +12900,7 @@
       "base": null,
       "refs": {
         "GetAssetOutput$UpdatedAt": "<p>The timestamp at which the asset was last updated.</p>",
+        "GetDataCatalogExportConfigurationOutput$UpdatedAt": "<p>The timestamp at which the export configuration was last updated.</p>",
         "SearchResultItem$UpdatedAt": "<p>The timestamp at which the matched asset was last updated.</p>",
         "UpdateAssetResponse$UpdatedAt": "<p>The timestamp at which the asset was last updated.</p>"
       }

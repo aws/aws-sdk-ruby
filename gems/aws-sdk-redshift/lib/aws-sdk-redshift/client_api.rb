@@ -409,6 +409,7 @@ module Aws::Redshift
     ListRecommendationsResult = Shapes::StructureShape.new(name: 'ListRecommendationsResult')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
+    LoggingPublishStatus = Shapes::StructureShape.new(name: 'LoggingPublishStatus')
     LoggingStatus = Shapes::StructureShape.new(name: 'LoggingStatus')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
@@ -564,6 +565,8 @@ module Aws::Redshift
     S3AccessGrantsScopeUnion = Shapes::UnionShape.new(name: 'S3AccessGrantsScopeUnion')
     S3AccessGrantsServiceIntegrations = Shapes::ListShape.new(name: 'S3AccessGrantsServiceIntegrations')
     S3KeyPrefixValue = Shapes::StringShape.new(name: 'S3KeyPrefixValue')
+    S3TableLastIngestionTimeMap = Shapes::MapShape.new(name: 'S3TableLastIngestionTimeMap')
+    S3TablePublishStatus = Shapes::StructureShape.new(name: 'S3TablePublishStatus')
     SNSInvalidTopicFault = Shapes::StructureShape.new(name: 'SNSInvalidTopicFault', error: {"code" => "SNSInvalidTopic", "httpStatusCode" => 400, "senderFault" => true})
     SNSNoAuthorizationFault = Shapes::StructureShape.new(name: 'SNSNoAuthorizationFault', error: {"code" => "SNSNoAuthorization", "httpStatusCode" => 400, "senderFault" => true})
     SNSTopicArnNotFoundFault = Shapes::StructureShape.new(name: 'SNSTopicArnNotFoundFault', error: {"code" => "SNSTopicArnNotFound", "httpStatusCode" => 404, "senderFault" => true})
@@ -887,6 +890,7 @@ module Aws::Redshift
     Cluster.add_member(:lakehouse_registration_status, Shapes::ShapeRef.new(shape: String, location_name: "LakehouseRegistrationStatus"))
     Cluster.add_member(:catalog_arn, Shapes::ShapeRef.new(shape: String, location_name: "CatalogArn"))
     Cluster.add_member(:extra_compute_for_automatic_optimization, Shapes::ShapeRef.new(shape: String, location_name: "ExtraComputeForAutomaticOptimization"))
+    Cluster.add_member(:logging_publish_status, Shapes::ShapeRef.new(shape: LoggingPublishStatus, location_name: "LoggingPublishStatus"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -1741,6 +1745,8 @@ module Aws::Redshift
     DescribeUsageLimitsMessage.struct_class = Types::DescribeUsageLimitsMessage
 
     DisableLoggingMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    DisableLoggingMessage.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, location_name: "LogDestinationType"))
+    DisableLoggingMessage.add_member(:log_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "LogExports"))
     DisableLoggingMessage.struct_class = Types::DisableLoggingMessage
 
     DisableSnapshotCopyMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
@@ -1774,6 +1780,8 @@ module Aws::Redshift
     EnableLoggingMessage.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefixValue, location_name: "S3KeyPrefix"))
     EnableLoggingMessage.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, location_name: "LogDestinationType"))
     EnableLoggingMessage.add_member(:log_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "LogExports"))
+    EnableLoggingMessage.add_member(:s3_table_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "S3TableKmsKeyId"))
+    EnableLoggingMessage.add_member(:s3_table_granularity, Shapes::ShapeRef.new(shape: String, location_name: "S3TableGranularity"))
     EnableLoggingMessage.struct_class = Types::EnableLoggingMessage
 
     EnableSnapshotCopyMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
@@ -2164,6 +2172,9 @@ module Aws::Redshift
 
     LogTypeList.member = Shapes::ShapeRef.new(shape: String)
 
+    LoggingPublishStatus.add_member(:s3_tables, Shapes::ShapeRef.new(shape: S3TablePublishStatus, location_name: "S3Tables"))
+    LoggingPublishStatus.struct_class = Types::LoggingPublishStatus
+
     LoggingStatus.add_member(:logging_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "LoggingEnabled"))
     LoggingStatus.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
     LoggingStatus.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefixValue, location_name: "S3KeyPrefix"))
@@ -2172,6 +2183,7 @@ module Aws::Redshift
     LoggingStatus.add_member(:last_failure_message, Shapes::ShapeRef.new(shape: String, location_name: "LastFailureMessage"))
     LoggingStatus.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, location_name: "LogDestinationType"))
     LoggingStatus.add_member(:log_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "LogExports"))
+    LoggingStatus.add_member(:s3_tables, Shapes::ShapeRef.new(shape: S3TablePublishStatus, location_name: "S3Tables"))
     LoggingStatus.struct_class = Types::LoggingStatus
 
     MaintenanceTrack.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
@@ -2831,6 +2843,16 @@ module Aws::Redshift
     S3AccessGrantsScopeUnion.struct_class = Types::S3AccessGrantsScopeUnion
 
     S3AccessGrantsServiceIntegrations.member = Shapes::ShapeRef.new(shape: S3AccessGrantsScopeUnion)
+
+    S3TableLastIngestionTimeMap.key = Shapes::ShapeRef.new(shape: String)
+    S3TableLastIngestionTimeMap.value = Shapes::ShapeRef.new(shape: String)
+
+    S3TablePublishStatus.add_member(:s3_tables, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "S3Tables"))
+    S3TablePublishStatus.add_member(:s3_table_namespace, Shapes::ShapeRef.new(shape: String, location_name: "S3TableNamespace"))
+    S3TablePublishStatus.add_member(:s3_table_granularity, Shapes::ShapeRef.new(shape: String, location_name: "S3TableGranularity"))
+    S3TablePublishStatus.add_member(:enabled_all, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnabledAll"))
+    S3TablePublishStatus.add_member(:last_ingestion_times, Shapes::ShapeRef.new(shape: S3TableLastIngestionTimeMap, location_name: "LastIngestionTimes"))
+    S3TablePublishStatus.struct_class = Types::S3TablePublishStatus
 
     SNSInvalidTopicFault.struct_class = Types::SNSInvalidTopicFault
 

@@ -531,6 +531,16 @@ module Aws::ConnectCampaignsV2
     #           },
     #           predictive: {
     #             bandwidth_allocation: 1.0, # required
+    #             pacing_strategies: [
+    #               {
+    #                 abandonment_rate: {
+    #                   target_rate: 1.0, # required
+    #                   connection_start_point: "CONNECTED_TO_SYSTEM", # required, accepts CONNECTED_TO_SYSTEM, GREETING_START, GREETING_END
+    #                   connection_threshold_seconds: 1, # required
+    #                   evaluation_window: "EvaluationWindow", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           agentless: {
     #           },
@@ -965,6 +975,11 @@ module Aws::ConnectCampaignsV2
     #   resp.campaign.channel_subtype_config.telephony.connect_queue_id #=> String
     #   resp.campaign.channel_subtype_config.telephony.outbound_mode.progressive.bandwidth_allocation #=> Float
     #   resp.campaign.channel_subtype_config.telephony.outbound_mode.predictive.bandwidth_allocation #=> Float
+    #   resp.campaign.channel_subtype_config.telephony.outbound_mode.predictive.pacing_strategies #=> Array
+    #   resp.campaign.channel_subtype_config.telephony.outbound_mode.predictive.pacing_strategies[0].abandonment_rate.target_rate #=> Float
+    #   resp.campaign.channel_subtype_config.telephony.outbound_mode.predictive.pacing_strategies[0].abandonment_rate.connection_start_point #=> String, one of "CONNECTED_TO_SYSTEM", "GREETING_START", "GREETING_END"
+    #   resp.campaign.channel_subtype_config.telephony.outbound_mode.predictive.pacing_strategies[0].abandonment_rate.connection_threshold_seconds #=> Integer
+    #   resp.campaign.channel_subtype_config.telephony.outbound_mode.predictive.pacing_strategies[0].abandonment_rate.evaluation_window #=> String
     #   resp.campaign.channel_subtype_config.telephony.outbound_mode.preview.bandwidth_allocation #=> Float
     #   resp.campaign.channel_subtype_config.telephony.outbound_mode.preview.timeout_config.duration_in_seconds #=> Integer
     #   resp.campaign.channel_subtype_config.telephony.outbound_mode.preview.agent_actions #=> Array
@@ -1757,6 +1772,16 @@ module Aws::ConnectCampaignsV2
     #           },
     #           predictive: {
     #             bandwidth_allocation: 1.0, # required
+    #             pacing_strategies: [
+    #               {
+    #                 abandonment_rate: {
+    #                   target_rate: 1.0, # required
+    #                   connection_start_point: "CONNECTED_TO_SYSTEM", # required, accepts CONNECTED_TO_SYSTEM, GREETING_START, GREETING_END
+    #                   connection_threshold_seconds: 1, # required
+    #                   evaluation_window: "EvaluationWindow", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           agentless: {
     #           },
@@ -2141,7 +2166,7 @@ module Aws::ConnectCampaignsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcampaignsv2'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -599,6 +599,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity[0].vector_indexes #=> Hash
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchExecuteStatement AWS API Documentation
     #
@@ -883,6 +886,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity[0].vector_indexes #=> Hash
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItem AWS API Documentation
     #
@@ -921,13 +927,12 @@ module Aws::DynamoDB
     # request with those unprocessed items until all items have been
     # processed.
     #
-    # For tables and indexes with provisioned capacity, if none of the items
-    # can be processed due to insufficient provisioned throughput on all of
-    # the tables in the request, then `BatchWriteItem` returns a
-    # `ProvisionedThroughputExceededException`. For all tables and indexes,
-    # if none of the items can be processed due to other throttling
-    # scenarios (such as exceeding partition level limits), then
-    # `BatchWriteItem` returns a `ThrottlingException`.
+    # If `BatchWriteItem` cannot process any items due to throttling (for
+    # example, insufficient provisioned throughput on the tables in the
+    # request, or partition-level or account-level limits), it returns a
+    # `ProvisionedThroughputExceededException` or a `ThrottlingException`.
+    # Both indicate that the request was throttled; check the
+    # `ThrottlingReason` field in the returned exception for details.
     #
     # If DynamoDB returns any unprocessed items, you should retry the batch
     # operation on those items. However, *we strongly recommend that you use
@@ -1149,6 +1154,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity[0].vector_indexes #=> Hash
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItem AWS API Documentation
     #
@@ -1627,6 +1635,32 @@ module Aws::DynamoDB
     #   supported value is ENABLED. For same-account global tables, this
     #   parameter is set to ENABLED\_WITH\_OVERRIDES.
     #
+    # @option params [Array<Types::VectorIndex>] :vector_indexes
+    #   One or more vector indexes to be created on the table. Each vector
+    #   index enables similarity search on a vector attribute. Each element in
+    #   the list consists of:
+    #
+    #   * `IndexName` - The name of the vector index. Must be unique within
+    #     the table.
+    #
+    #   * `VectorAttribute` - The attribute that contains vector embeddings.
+    #     If multiple vector indexes reference the same attribute, they must
+    #     all use the same number of dimensions.
+    #
+    #   * `Dimensions` - The number of dimensions in each vector.
+    #
+    #   * `DistanceFunction` - The distance function used to calculate
+    #     similarity. Valid values: `COSINE`, `EUCLIDEAN`, `DOT_PRODUCT`.
+    #
+    #   * `Projection` - Specifies attributes that are copied (projected) from
+    #     the table into the vector index. The total number of projected
+    #     non-key attributes is shared across the vector attribute (counts as
+    #     1) and `INLINE_FILTER` search schema elements (each counts as 1).
+    #     `HASH` search schema elements do not count toward this limit.
+    #
+    #   * `SearchSchema` - (Optional) Defines the partition key (`HASH`) and
+    #     inline filter (`INLINE_FILTER`) attributes for the vector index.
+    #
     # @return [Types::CreateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableOutput#table_description #table_description} => Types::TableDescription
@@ -1790,6 +1824,26 @@ module Aws::DynamoDB
     #     },
     #     global_table_source_arn: "TableArn",
     #     global_table_settings_replication_mode: "ENABLED", # accepts ENABLED, DISABLED, ENABLED_WITH_OVERRIDES
+    #     vector_indexes: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         vector_attribute: { # required
+    #           attribute_name: "VectorAttributeName", # required
+    #         },
+    #         search_schema: [
+    #           {
+    #             attribute_name: "AttributeName", # required
+    #             search_schema_element_type: "HASH", # required, accepts HASH, INLINE_FILTER
+    #           },
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #           non_key_attributes: ["NonKeyAttributeName"],
+    #         },
+    #         dimensions: 1, # required
+    #         distance_function: "COSINE", # required, accepts COSINE, DOT_PRODUCT, EUCLIDEAN
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1900,6 +1954,22 @@ module Aws::DynamoDB
     #   resp.table_description.warm_throughput.write_units_per_second #=> Integer
     #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
+    #   resp.table_description.vector_indexes #=> Array
+    #   resp.table_description.vector_indexes[0].index_name #=> String
+    #   resp.table_description.vector_indexes[0].search_schema #=> Array
+    #   resp.table_description.vector_indexes[0].search_schema[0].attribute_name #=> String
+    #   resp.table_description.vector_indexes[0].search_schema[0].search_schema_element_type #=> String, one of "HASH", "INLINE_FILTER"
+    #   resp.table_description.vector_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.table_description.vector_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.table_description.vector_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.table_description.vector_indexes[0].vector_attribute.attribute_name #=> String
+    #   resp.table_description.vector_indexes[0].dimensions #=> Integer
+    #   resp.table_description.vector_indexes[0].distance_function #=> String, one of "COSINE", "DOT_PRODUCT", "EUCLIDEAN"
+    #   resp.table_description.vector_indexes[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.vector_indexes[0].backfilling #=> Boolean
+    #   resp.table_description.vector_indexes[0].index_size_bytes #=> Integer
+    #   resp.table_description.vector_indexes[0].item_count #=> Integer
+    #   resp.table_description.vector_indexes[0].index_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable AWS API Documentation
     #
@@ -1978,6 +2048,17 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
     #   resp.backup_description.source_table_feature_details.sse_description.inaccessible_encryption_date_time #=> Time
+    #   resp.backup_description.source_table_feature_details.vector_indexes #=> Array
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].index_name #=> String
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].vector_attribute.attribute_name #=> String
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].search_schema #=> Array
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].search_schema[0].attribute_name #=> String
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].search_schema[0].search_schema_element_type #=> String, one of "HASH", "INLINE_FILTER"
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].dimensions #=> Integer
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].distance_function #=> String, one of "COSINE", "DOT_PRODUCT", "EUCLIDEAN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackup AWS API Documentation
     #
@@ -2260,6 +2341,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity.vector_indexes #=> Hash
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #   resp.item_collection_metrics.item_collection_key #=> Hash
     #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
@@ -2509,6 +2593,22 @@ module Aws::DynamoDB
     #   resp.table_description.warm_throughput.write_units_per_second #=> Integer
     #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
+    #   resp.table_description.vector_indexes #=> Array
+    #   resp.table_description.vector_indexes[0].index_name #=> String
+    #   resp.table_description.vector_indexes[0].search_schema #=> Array
+    #   resp.table_description.vector_indexes[0].search_schema[0].attribute_name #=> String
+    #   resp.table_description.vector_indexes[0].search_schema[0].search_schema_element_type #=> String, one of "HASH", "INLINE_FILTER"
+    #   resp.table_description.vector_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.table_description.vector_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.table_description.vector_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.table_description.vector_indexes[0].vector_attribute.attribute_name #=> String
+    #   resp.table_description.vector_indexes[0].dimensions #=> Integer
+    #   resp.table_description.vector_indexes[0].distance_function #=> String, one of "COSINE", "DOT_PRODUCT", "EUCLIDEAN"
+    #   resp.table_description.vector_indexes[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.vector_indexes[0].backfilling #=> Boolean
+    #   resp.table_description.vector_indexes[0].index_size_bytes #=> Integer
+    #   resp.table_description.vector_indexes[0].item_count #=> Integer
+    #   resp.table_description.vector_indexes[0].index_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable AWS API Documentation
     #
@@ -2588,6 +2688,17 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
     #   resp.backup_description.source_table_feature_details.sse_description.inaccessible_encryption_date_time #=> Time
+    #   resp.backup_description.source_table_feature_details.vector_indexes #=> Array
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].index_name #=> String
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].vector_attribute.attribute_name #=> String
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].search_schema #=> Array
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].search_schema[0].attribute_name #=> String
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].search_schema[0].search_schema_element_type #=> String, one of "HASH", "INLINE_FILTER"
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].dimensions #=> Integer
+    #   resp.backup_description.source_table_feature_details.vector_indexes[0].distance_function #=> String, one of "COSINE", "DOT_PRODUCT", "EUCLIDEAN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackup AWS API Documentation
     #
@@ -3016,6 +3127,17 @@ module Aws::DynamoDB
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].warm_throughput.write_units_per_second #=> Integer
+    #   resp.import_table_description.table_creation_parameters.vector_indexes #=> Array
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].index_name #=> String
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].vector_attribute.attribute_name #=> String
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].search_schema #=> Array
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].search_schema[0].attribute_name #=> String
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].search_schema[0].search_schema_element_type #=> String, one of "HASH", "INLINE_FILTER"
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].dimensions #=> Integer
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].distance_function #=> String, one of "COSINE", "DOT_PRODUCT", "EUCLIDEAN"
     #   resp.import_table_description.start_time #=> Time
     #   resp.import_table_description.end_time #=> Time
     #   resp.import_table_description.processed_size_bytes #=> Integer
@@ -3367,6 +3489,22 @@ module Aws::DynamoDB
     #   resp.table.warm_throughput.write_units_per_second #=> Integer
     #   resp.table.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
+    #   resp.table.vector_indexes #=> Array
+    #   resp.table.vector_indexes[0].index_name #=> String
+    #   resp.table.vector_indexes[0].search_schema #=> Array
+    #   resp.table.vector_indexes[0].search_schema[0].attribute_name #=> String
+    #   resp.table.vector_indexes[0].search_schema[0].search_schema_element_type #=> String, one of "HASH", "INLINE_FILTER"
+    #   resp.table.vector_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.table.vector_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.table.vector_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.table.vector_indexes[0].vector_attribute.attribute_name #=> String
+    #   resp.table.vector_indexes[0].dimensions #=> Integer
+    #   resp.table.vector_indexes[0].distance_function #=> String, one of "COSINE", "DOT_PRODUCT", "EUCLIDEAN"
+    #   resp.table.vector_indexes[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table.vector_indexes[0].backfilling #=> Boolean
+    #   resp.table.vector_indexes[0].index_size_bytes #=> Integer
+    #   resp.table.vector_indexes[0].item_count #=> Integer
+    #   resp.table.vector_indexes[0].index_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3697,6 +3835,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity.vector_indexes #=> Hash
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #   resp.last_evaluated_key #=> Hash
     #   resp.last_evaluated_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
@@ -3784,6 +3925,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity[0].vector_indexes #=> Hash
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteTransaction AWS API Documentation
     #
@@ -4110,6 +4254,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity.vector_indexes #=> Hash
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItem AWS API Documentation
     #
@@ -4300,6 +4447,26 @@ module Aws::DynamoDB
     #           },
     #         },
     #       ],
+    #       vector_indexes: [
+    #         {
+    #           index_name: "IndexName", # required
+    #           vector_attribute: { # required
+    #             attribute_name: "VectorAttributeName", # required
+    #           },
+    #           search_schema: [
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               search_schema_element_type: "HASH", # required, accepts HASH, INLINE_FILTER
+    #             },
+    #           ],
+    #           projection: { # required
+    #             projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #             non_key_attributes: ["NonKeyAttributeName"],
+    #           },
+    #           dimensions: 1, # required
+    #           distance_function: "COSINE", # required, accepts COSINE, DOT_PRODUCT, EUCLIDEAN
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -4349,6 +4516,17 @@ module Aws::DynamoDB
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].warm_throughput.read_units_per_second #=> Integer
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].warm_throughput.write_units_per_second #=> Integer
+    #   resp.import_table_description.table_creation_parameters.vector_indexes #=> Array
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].index_name #=> String
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].vector_attribute.attribute_name #=> String
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].search_schema #=> Array
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].search_schema[0].attribute_name #=> String
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].search_schema[0].search_schema_element_type #=> String, one of "HASH", "INLINE_FILTER"
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].dimensions #=> Integer
+    #   resp.import_table_description.table_creation_parameters.vector_indexes[0].distance_function #=> String, one of "COSINE", "DOT_PRODUCT", "EUCLIDEAN"
     #   resp.import_table_description.start_time #=> Time
     #   resp.import_table_description.end_time #=> Time
     #   resp.import_table_description.processed_size_bytes #=> Integer
@@ -4838,6 +5016,19 @@ module Aws::DynamoDB
     #   data types for those attributes must match those of the schema in the
     #   table's attribute definition.
     #
+    #   If the table has vector indexes, the following validations apply to
+    #   write operations. A violation of any of these constraints results in a
+    #   `ValidationException`:
+    #
+    #   * The vector attribute must be a list of numbers with dimensions
+    #     matching the index configuration.
+    #
+    #   * Vector values must fit in 32-bit IEEE-754 floating point format
+    #     (f32).
+    #
+    #   * Partition key and inline filter attributes defined in the search
+    #     schema must have data types matching the index schema definition.
+    #
     #   Empty String and Binary attribute values are allowed. Attribute values
     #   of type String and Binary must have a length greater than zero if the
     #   attribute is used as a key attribute for a table or index.
@@ -5099,6 +5290,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity.vector_indexes #=> Hash
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #   resp.item_collection_metrics.item_collection_key #=> Hash
     #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
@@ -5742,6 +5936,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity.vector_indexes #=> Hash
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Query AWS API Documentation
     #
@@ -5802,6 +5999,12 @@ module Aws::DynamoDB
     #
     # @option params [Types::SSESpecification] :sse_specification_override
     #   The new server-side encryption settings for the restored table.
+    #
+    # @option params [Array<Types::VectorIndex>] :vector_index_override
+    #   The vector indexes for the restored table. If not specified, all
+    #   vector indexes from the backup are restored. The indexes provided must
+    #   match existing vector indexes from the backup. You can choose to
+    #   exclude some or all of the vector indexes at the time of restore.
     #
     # @return [Types::RestoreTableFromBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5868,6 +6071,26 @@ module Aws::DynamoDB
     #       sse_type: "AES256", # accepts AES256, KMS
     #       kms_master_key_id: "KMSMasterKeyId",
     #     },
+    #     vector_index_override: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         vector_attribute: { # required
+    #           attribute_name: "VectorAttributeName", # required
+    #         },
+    #         search_schema: [
+    #           {
+    #             attribute_name: "AttributeName", # required
+    #             search_schema_element_type: "HASH", # required, accepts HASH, INLINE_FILTER
+    #           },
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #           non_key_attributes: ["NonKeyAttributeName"],
+    #         },
+    #         dimensions: 1, # required
+    #         distance_function: "COSINE", # required, accepts COSINE, DOT_PRODUCT, EUCLIDEAN
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5978,6 +6201,22 @@ module Aws::DynamoDB
     #   resp.table_description.warm_throughput.write_units_per_second #=> Integer
     #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
+    #   resp.table_description.vector_indexes #=> Array
+    #   resp.table_description.vector_indexes[0].index_name #=> String
+    #   resp.table_description.vector_indexes[0].search_schema #=> Array
+    #   resp.table_description.vector_indexes[0].search_schema[0].attribute_name #=> String
+    #   resp.table_description.vector_indexes[0].search_schema[0].search_schema_element_type #=> String, one of "HASH", "INLINE_FILTER"
+    #   resp.table_description.vector_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.table_description.vector_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.table_description.vector_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.table_description.vector_indexes[0].vector_attribute.attribute_name #=> String
+    #   resp.table_description.vector_indexes[0].dimensions #=> Integer
+    #   resp.table_description.vector_indexes[0].distance_function #=> String, one of "COSINE", "DOT_PRODUCT", "EUCLIDEAN"
+    #   resp.table_description.vector_indexes[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.vector_indexes[0].backfilling #=> Boolean
+    #   resp.table_description.vector_indexes[0].index_size_bytes #=> Integer
+    #   resp.table_description.vector_indexes[0].item_count #=> Integer
+    #   resp.table_description.vector_indexes[0].index_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup AWS API Documentation
     #
@@ -6055,6 +6294,12 @@ module Aws::DynamoDB
     #   provided should match existing secondary indexes. You can choose to
     #   exclude some or all of the indexes at the time of restore.
     #
+    #   The `WarmThroughput` setting is not supported on global secondary
+    #   indexes when you use `RestoreTableToPointInTime`. Although
+    #   `WarmThroughput` appears in the shared index definition, including it
+    #   in a `GlobalSecondaryIndexOverride` entry causes the request to fail
+    #   with a validation error.
+    #
     # @option params [Array<Types::LocalSecondaryIndex>] :local_secondary_index_override
     #   List of local secondary indexes for the restored table. The indexes
     #   provided should match existing secondary indexes. You can choose to
@@ -6070,6 +6315,13 @@ module Aws::DynamoDB
     #
     # @option params [Types::SSESpecification] :sse_specification_override
     #   The new server-side encryption settings for the restored table.
+    #
+    # @option params [Array<Types::VectorIndex>] :vector_index_override
+    #   The vector indexes for the restored table. If not specified, all
+    #   vector indexes from the source table are restored. The indexes
+    #   provided must match existing vector indexes from the source table. You
+    #   can choose to exclude some or all of the vector indexes at the time of
+    #   restore.
     #
     # @return [Types::RestoreTableToPointInTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6139,6 +6391,26 @@ module Aws::DynamoDB
     #       sse_type: "AES256", # accepts AES256, KMS
     #       kms_master_key_id: "KMSMasterKeyId",
     #     },
+    #     vector_index_override: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         vector_attribute: { # required
+    #           attribute_name: "VectorAttributeName", # required
+    #         },
+    #         search_schema: [
+    #           {
+    #             attribute_name: "AttributeName", # required
+    #             search_schema_element_type: "HASH", # required, accepts HASH, INLINE_FILTER
+    #           },
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #           non_key_attributes: ["NonKeyAttributeName"],
+    #         },
+    #         dimensions: 1, # required
+    #         distance_function: "COSINE", # required, accepts COSINE, DOT_PRODUCT, EUCLIDEAN
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6249,6 +6521,22 @@ module Aws::DynamoDB
     #   resp.table_description.warm_throughput.write_units_per_second #=> Integer
     #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
+    #   resp.table_description.vector_indexes #=> Array
+    #   resp.table_description.vector_indexes[0].index_name #=> String
+    #   resp.table_description.vector_indexes[0].search_schema #=> Array
+    #   resp.table_description.vector_indexes[0].search_schema[0].attribute_name #=> String
+    #   resp.table_description.vector_indexes[0].search_schema[0].search_schema_element_type #=> String, one of "HASH", "INLINE_FILTER"
+    #   resp.table_description.vector_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.table_description.vector_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.table_description.vector_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.table_description.vector_indexes[0].vector_attribute.attribute_name #=> String
+    #   resp.table_description.vector_indexes[0].dimensions #=> Integer
+    #   resp.table_description.vector_indexes[0].distance_function #=> String, one of "COSINE", "DOT_PRODUCT", "EUCLIDEAN"
+    #   resp.table_description.vector_indexes[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.vector_indexes[0].backfilling #=> Boolean
+    #   resp.table_description.vector_indexes[0].index_size_bytes #=> Integer
+    #   resp.table_description.vector_indexes[0].item_count #=> Integer
+    #   resp.table_description.vector_indexes[0].index_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTime AWS API Documentation
     #
@@ -6717,6 +7005,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity.vector_indexes #=> Hash
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Scan AWS API Documentation
     #
@@ -6724,6 +7015,182 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def scan(params = {}, options = {})
       req = build_request(:scan, params)
+      req.send_request(options)
+    end
+
+    # Performs a vector similarity search on a vector index associated with
+    # an Amazon DynamoDB table, and returns the most similar items sorted by
+    # similarity score based on the distance function configured for the
+    # index.
+    #
+    # Score interpretation depends on the distance function:
+    #
+    # * `COSINE` - Returns the items with the *k smallest* scores. Scores
+    #   range from 0 (identical) to 2 (opposite). Lower scores indicate
+    #   higher similarity.
+    #
+    # * `EUCLIDEAN` - Returns the items with the *k smallest* scores. Scores
+    #   represent the Euclidean distance between vectors. Lower scores
+    #   indicate higher similarity.
+    #
+    # * `DOT_PRODUCT` - Returns the items with the *k highest* scores.
+    #   Higher scores indicate higher similarity.
+    #
+    # @option params [required, String] :table_name
+    #   The name or Amazon Resource Name (ARN) of the table containing the
+    #   vector index.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the vector index to search. The index must be in the
+    #   `ACTIVE` state.
+    #
+    # @option params [String] :return_consumed_capacity
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
+    #
+    #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
+    #     for the operation, together with `ConsumedCapacity` for each table
+    #     and secondary index that was accessed.
+    #
+    #     Note that some operations, such as `GetItem` and `BatchGetItem`, do
+    #     not access any indexes at all. In these cases, specifying `INDEXES`
+    #     will only return `ConsumedCapacity` information for table(s).
+    #
+    #   * `TOTAL` - The response includes only the aggregate
+    #     `ConsumedCapacity` for the operation.
+    #
+    #   * `NONE` - No `ConsumedCapacity` details are included in the response.
+    #
+    # @option params [Hash<String,String>] :expression_attribute_names
+    #   One or more substitution tokens for attribute names in an expression.
+    #   Use the `#` character in an expression to dereference an attribute
+    #   name.
+    #
+    # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
+    #   One or more values that can be substituted in an expression. Use the
+    #   `:` character in an expression to dereference an attribute value.
+    #
+    # @option params [String] :projection_expression
+    #   A string that identifies one or more attributes to retrieve from the
+    #   index. Separate attribute names with commas. If not specified, the
+    #   operation returns all attributes projected into the vector index.
+    #
+    #   Only attributes projected into the vector index can be retrieved.
+    #
+    # @option params [required, Array<Types::AttributeValue>] :search_vector
+    #   The search vector to compare against the indexed vectors. Each element
+    #   is a 32-bit IEEE-754 floating point number, provided in DynamoDB list
+    #   format.
+    #
+    #   The number of dimensions must match the number of dimensions
+    #   configured for the vector index.
+    #
+    # @option params [String] :search_condition_expression
+    #   A condition expression used to filter the vector search results. The
+    #   expression can reference attributes defined in the vector index search
+    #   schema, including `HASH` and `INLINE_FILTER` key elements.
+    #
+    #   Only the equality operator (`=`) is supported for `HASH` attributes.
+    #   Comparison and range operators are supported for `INLINE_FILTER`
+    #   attributes. Only top-level attributes from the search schema can be
+    #   referenced.
+    #
+    # @option params [required, Integer] :top_k
+    #   The number of most similar results to return.
+    #
+    # @return [Types::SearchVectorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchVectorsOutput#consumed_capacity #consumed_capacity} => Types::VectorCapacity
+    #   * {Types::SearchVectorsOutput#search_results #search_results} => Array&lt;Types::SearchResultItem&gt;
+    #
+    #
+    # @example Example: To search for similar vectors
+    #
+    #   # This example searches the Products table for the top 3 items most similar to a provided vector, using the
+    #   # 'cosine-product-idx' vector index. The SearchConditionExpression filters results to the 'Electronics' category. The
+    #   # operation returns only the ProductName and Price attributes.
+    #
+    #   resp = client.search_vectors({
+    #     expression_attribute_values: {
+    #       ":cat" => "Electronics", 
+    #     }, 
+    #     index_name: "cosine-product-idx", 
+    #     projection_expression: "ProductName, Price", 
+    #     return_consumed_capacity: "INDEXES", 
+    #     search_condition_expression: "Category = :cat", 
+    #     search_vector: [
+    #       "0.12", 
+    #       "0.85", 
+    #       "0.44", 
+    #       "0.67", 
+    #     ], 
+    #     table_name: "Products", 
+    #     top_k: 3, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     consumed_capacity: {
+    #       vector_search_request_bytes: 1024, 
+    #     }, 
+    #     search_results: [
+    #       {
+    #         item: {
+    #           "Price" => "79.99", 
+    #           "ProductName" => "Wireless Headphones", 
+    #         }, 
+    #         score: 0.95, 
+    #       }, 
+    #       {
+    #         item: {
+    #           "Price" => "49.99", 
+    #           "ProductName" => "Bluetooth Speaker", 
+    #         }, 
+    #         score: 0.87, 
+    #       }, 
+    #       {
+    #         item: {
+    #           "Price" => "34.99", 
+    #           "ProductName" => "USB-C Hub", 
+    #         }, 
+    #         score: 0.82, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_vectors({
+    #     table_name: "TableArn", # required
+    #     index_name: "IndexName", # required
+    #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+    #     expression_attribute_names: {
+    #       "ExpressionAttributeNameVariable" => "AttributeName",
+    #     },
+    #     expression_attribute_values: {
+    #       "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     },
+    #     projection_expression: "ProjectionExpression",
+    #     search_vector: ["value"], # required, value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     search_condition_expression: "String",
+    #     top_k: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.consumed_capacity.vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity.vector_write_request_bytes #=> Float
+    #   resp.search_results #=> Array
+    #   resp.search_results[0].item #=> Hash
+    #   resp.search_results[0].item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.search_results[0].score #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SearchVectors AWS API Documentation
+    #
+    # @overload search_vectors(params = {})
+    # @param [Hash] params ({})
+    def search_vectors(params = {}, options = {})
+      req = build_request(:search_vectors, params)
       req.send_request(options)
     end
 
@@ -6855,6 +7322,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity[0].vector_indexes #=> Hash
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #   resp.responses #=> Array
     #   resp.responses[0].item #=> Hash
     #   resp.responses[0].item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -7074,6 +7544,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity[0].vector_indexes #=> Hash
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity[0].vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #   resp.item_collection_metrics #=> Hash
     #   resp.item_collection_metrics["TableArn"] #=> Array
     #   resp.item_collection_metrics["TableArn"][0].item_collection_key #=> Hash
@@ -7955,6 +8428,9 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity.vector_indexes #=> Hash
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_search_request_bytes #=> Float
+    #   resp.consumed_capacity.vector_indexes["IndexName"].vector_write_request_bytes #=> Float
     #   resp.item_collection_metrics.item_collection_key #=> Hash
     #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
@@ -8180,6 +8656,14 @@ module Aws::DynamoDB
     #     Settings replication needs to be defined to ENABLED again in order
     #     to create a Multi-Account Global Table using this table.
     #
+    # @option params [Array<Types::VectorIndexUpdate>] :vector_index_updates
+    #   A list of vector indexes to be added to or removed from the table. You
+    #   can add or remove one vector index for each `UpdateTable` operation.
+    #
+    #   To add a vector index, specify `IndexName`, `VectorAttribute`,
+    #   `Dimensions`, `DistanceFunction`, and `Projection`. To remove a vector
+    #   index, specify only the `IndexName`.
+    #
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
@@ -8378,6 +8862,31 @@ module Aws::DynamoDB
     #       write_units_per_second: 1,
     #     },
     #     global_table_settings_replication_mode: "ENABLED", # accepts ENABLED, DISABLED, ENABLED_WITH_OVERRIDES
+    #     vector_index_updates: [
+    #       {
+    #         create: {
+    #           index_name: "IndexName", # required
+    #           vector_attribute: { # required
+    #             attribute_name: "VectorAttributeName", # required
+    #           },
+    #           search_schema: [
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               search_schema_element_type: "HASH", # required, accepts HASH, INLINE_FILTER
+    #             },
+    #           ],
+    #           projection: { # required
+    #             projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+    #             non_key_attributes: ["NonKeyAttributeName"],
+    #           },
+    #           dimensions: 1, # required
+    #           distance_function: "COSINE", # required, accepts COSINE, DOT_PRODUCT, EUCLIDEAN
+    #         },
+    #         delete: {
+    #           index_name: "IndexName", # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8488,6 +8997,22 @@ module Aws::DynamoDB
     #   resp.table_description.warm_throughput.write_units_per_second #=> Integer
     #   resp.table_description.warm_throughput.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"
     #   resp.table_description.multi_region_consistency #=> String, one of "EVENTUAL", "STRONG"
+    #   resp.table_description.vector_indexes #=> Array
+    #   resp.table_description.vector_indexes[0].index_name #=> String
+    #   resp.table_description.vector_indexes[0].search_schema #=> Array
+    #   resp.table_description.vector_indexes[0].search_schema[0].attribute_name #=> String
+    #   resp.table_description.vector_indexes[0].search_schema[0].search_schema_element_type #=> String, one of "HASH", "INLINE_FILTER"
+    #   resp.table_description.vector_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.table_description.vector_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.table_description.vector_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.table_description.vector_indexes[0].vector_attribute.attribute_name #=> String
+    #   resp.table_description.vector_indexes[0].dimensions #=> Integer
+    #   resp.table_description.vector_indexes[0].distance_function #=> String, one of "COSINE", "DOT_PRODUCT", "EUCLIDEAN"
+    #   resp.table_description.vector_indexes[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.vector_indexes[0].backfilling #=> Boolean
+    #   resp.table_description.vector_indexes[0].index_size_bytes #=> Integer
+    #   resp.table_description.vector_indexes[0].item_count #=> Integer
+    #   resp.table_description.vector_indexes[0].index_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable AWS API Documentation
     #
@@ -8752,7 +9277,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.171.0'
+      context[:gem_version] = '1.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

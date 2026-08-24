@@ -19,6 +19,15 @@ module Aws
       ]
     }
 
+      type test_source_input = {
+      success_criteria_alarm: {
+        alarm_arn: ::String
+      }?,
+      observability_alarm: {
+        alarm_arn: ::String
+      }?
+    }
+
     end
   end
 end

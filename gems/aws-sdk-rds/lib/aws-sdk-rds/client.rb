@@ -6442,12 +6442,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -7510,12 +7514,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -10616,12 +10624,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -14361,12 +14373,16 @@ module Aws::RDS
     #   resp.db_instances[0].additional_storage_volumes #=> Array
     #   resp.db_instances[0].additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instances[0].additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instances[0].additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instances[0].additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instances[0].additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instances[0].additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instances[0].additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instances[0].additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instances[0].additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instances[0].storage_volume_status #=> String
+    #   resp.db_instances[0].storage_operation_status #=> String
+    #   resp.db_instances[0].storage_operation_percent_progress #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -22970,12 +22986,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -24968,12 +24988,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -25724,12 +25748,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -30241,12 +30269,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -31114,12 +31146,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -32237,12 +32273,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -32884,12 +32924,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -33771,12 +33815,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -34409,12 +34457,16 @@ module Aws::RDS
     #   resp.db_instance.additional_storage_volumes #=> Array
     #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.storage_volume_status #=> String
+    #   resp.db_instance.storage_operation_status #=> String
+    #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -34443,7 +34495,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.319.0'
+      context[:gem_version] = '1.320.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

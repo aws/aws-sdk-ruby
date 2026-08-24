@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2026-07-31)
+------------------
+
+* Feature - Adding support for new testing capability in AWS Resilience Hub.
+
 1.2.0 (2026-07-09)
 ------------------
 

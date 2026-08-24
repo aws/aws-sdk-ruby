@@ -1462,7 +1462,7 @@ module Aws::CloudFormation
 
     class ResourceDriftIgnoredAttribute
       attr_accessor path: ::String
-      attr_accessor reason: ("MANAGED_BY_AWS" | "WRITE_ONLY_PROPERTY")
+      attr_accessor reason: ("MANAGED_BY_AWS" | "WRITE_ONLY_PROPERTY" | "SENSITIVE_PROPERTY")
       SENSITIVE: []
     end
 

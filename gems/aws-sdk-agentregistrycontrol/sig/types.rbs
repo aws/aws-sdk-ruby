@@ -1,0 +1,678 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AgentRegistryControl
+  module Types
+
+    class A2aAgentCardDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      attr_accessor source: Types::DescriptorSource
+      SENSITIVE: [:data]
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AgentSkillsAdditionalData
+      attr_accessor skill_md: Types::AgentSkillsMdDescriptor
+      SENSITIVE: []
+    end
+
+    class AgentSkillsDefinitionDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      attr_accessor additional_data: Types::AgentSkillsAdditionalData
+      SENSITIVE: [:data]
+    end
+
+    class AgentSkillsMdDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      attr_accessor source: Types::DescriptorSource
+      SENSITIVE: [:data]
+    end
+
+    class ApprovalConfiguration
+      attr_accessor auto_approval_rules: ::Array[("APPROVE_ALL")]
+      SENSITIVE: []
+    end
+
+    class AuthorizerConfiguration
+      attr_accessor custom_jwt_authorizer: Types::CustomJWTAuthorizerConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomJwtAuthorizer < AuthorizerConfiguration
+      end
+      class Unknown < AuthorizerConfiguration
+      end
+    end
+
+    class AuthorizingClaimMatchValueType
+      attr_accessor claim_match_value: Types::ClaimMatchValueType
+      attr_accessor claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
+      SENSITIVE: []
+    end
+
+    class ClaimMatchValueType
+      attr_accessor match_value_string: ::String
+      attr_accessor match_value_string_list: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MatchValueString < ClaimMatchValueType
+      end
+      class MatchValueStringList < ClaimMatchValueType
+      end
+      class Unknown < ClaimMatchValueType
+      end
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRegistryRecordRequest
+      attr_accessor registry_id: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor descriptors: Types::Descriptors
+      attr_accessor record_version: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
+    class CreateRegistryRecordResponse
+      attr_accessor record_arn: ::String
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateRegistryRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor discovery_configuration: Types::DiscoveryConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor approval_configuration: Types::ApprovalConfiguration
+      SENSITIVE: [:description]
+    end
+
+    class CreateRegistryResponse
+      attr_accessor registry_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomClaimValidationType
+      attr_accessor inbound_token_claim_name: ::String
+      attr_accessor inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY")
+      attr_accessor authorizing_claim_match_value: Types::AuthorizingClaimMatchValueType
+      SENSITIVE: []
+    end
+
+    class CustomDescriptor
+      attr_accessor data: ::String
+      SENSITIVE: [:data]
+    end
+
+    class CustomJWTAuthorizerConfiguration
+      attr_accessor discovery_url: ::String
+      attr_accessor allowed_audience: ::Array[::String]
+      attr_accessor allowed_clients: ::Array[::String]
+      attr_accessor allowed_scopes: ::Array[::String]
+      attr_accessor custom_claims: ::Array[Types::CustomClaimValidationType]
+      attr_accessor private_endpoint: Types::PrivateEndpoint
+      attr_accessor private_endpoint_overrides: ::Array[Types::PrivateEndpointOverride]
+      SENSITIVE: []
+    end
+
+    class DeleteRegistryRecordRequest
+      attr_accessor registry_id: ::String
+      attr_accessor record_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegistryRecordResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRegistryRequest
+      attr_accessor registry_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegistryResponse
+      attr_accessor status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class DescriptorSource
+      attr_accessor from_url: Types::DescriptorSourceFromUrl
+      SENSITIVE: []
+    end
+
+    class DescriptorSourceFromUrl
+      attr_accessor url: ::String
+      attr_accessor credential_provider_configurations: ::Array[Types::RegistryRecordCredentialProviderConfiguration]
+      SENSITIVE: []
+    end
+
+    class Descriptors
+      attr_accessor mcp_server: Types::McpServerDescriptor
+      attr_accessor a2a_agent_card: Types::A2aAgentCardDescriptor
+      attr_accessor agent_skills_definition: Types::AgentSkillsDefinitionDescriptor
+      attr_accessor custom: Types::CustomDescriptor
+      SENSITIVE: []
+    end
+
+    class DiscoveryConfiguration
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
+      SENSITIVE: []
+    end
+
+    class GetRegistryRecordRequest
+      attr_accessor registry_id: ::String
+      attr_accessor record_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRegistryRecordResponse
+      attr_accessor registry_arn: ::String
+      attr_accessor record_arn: ::String
+      attr_accessor record_id: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor descriptors: Types::Descriptors
+      attr_accessor record_version: ::String
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status_reason: ::String
+      SENSITIVE: [:description]
+    end
+
+    class GetRegistryRequest
+      attr_accessor registry_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRegistryResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor registry_id: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor discovery_configuration: Types::DiscoveryConfiguration
+      attr_accessor approval_configuration: Types::ApprovalConfiguration
+      attr_accessor status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegistriesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::RegistryFilter]
+      SENSITIVE: []
+    end
+
+    class ListRegistriesResponse
+      attr_accessor registries: ::Array[Types::RegistrySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegistryRecordsRequest
+      attr_accessor registry_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::RegistryRecordFilter]
+      SENSITIVE: []
+    end
+
+    class ListRegistryRecordsResponse
+      attr_accessor registry_records: ::Array[Types::RegistryRecordSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ManagedVpcResource
+      attr_accessor vpc_identifier: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor endpoint_ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor routing_domain: ::String
+      SENSITIVE: []
+    end
+
+    class McpServerAdditionalData
+      attr_accessor tools: Types::McpToolsDescriptor
+      SENSITIVE: []
+    end
+
+    class McpServerDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      attr_accessor additional_data: Types::McpServerAdditionalData
+      attr_accessor source: Types::DescriptorSource
+      SENSITIVE: [:data]
+    end
+
+    class McpToolsDescriptor
+      attr_accessor data: ::String
+      attr_accessor data_schema_version: ::String
+      SENSITIVE: [:data]
+    end
+
+    class PrivateEndpoint
+      attr_accessor self_managed_lattice_resource: Types::SelfManagedLatticeResource
+      attr_accessor managed_vpc_resource: Types::ManagedVpcResource
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SelfManagedLatticeResource < PrivateEndpoint
+      end
+      class ManagedVpcResource < PrivateEndpoint
+      end
+      class Unknown < PrivateEndpoint
+      end
+    end
+
+    class PrivateEndpointOverride
+      attr_accessor domain: ::String
+      attr_accessor private_endpoint: Types::PrivateEndpoint
+      SENSITIVE: []
+    end
+
+    class RegistryFilter
+      attr_accessor name: ("status" | "discoveryConfiguration.authorizerType")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegistryRecordCredentialProviderConfiguration
+      attr_accessor credential_provider_type: ("OAUTH" | "IAM")
+      attr_accessor credential_provider: Types::RegistryRecordCredentialProviderUnion
+      SENSITIVE: []
+    end
+
+    class RegistryRecordCredentialProviderUnion
+      attr_accessor oauth_credential_provider: Types::RegistryRecordOAuthCredentialProvider
+      attr_accessor iam_credential_provider: Types::RegistryRecordIamCredentialProvider
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OauthCredentialProvider < RegistryRecordCredentialProviderUnion
+      end
+      class IamCredentialProvider < RegistryRecordCredentialProviderUnion
+      end
+      class Unknown < RegistryRecordCredentialProviderUnion
+      end
+    end
+
+    class RegistryRecordFilter
+      attr_accessor name: ("name" | "status" | "recordType")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegistryRecordIamCredentialProvider
+      attr_accessor role_arn: ::String
+      attr_accessor service: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class RegistryRecordOAuthCredentialProvider
+      attr_accessor provider_arn: ::String
+      attr_accessor grant_type: ("CLIENT_CREDENTIALS")
+      attr_accessor scopes: ::Array[::String]
+      attr_accessor custom_parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegistryRecordSummary
+      attr_accessor registry_arn: ::String
+      attr_accessor record_arn: ::String
+      attr_accessor record_id: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor record_version: ::String
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class RegistrySummary
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor registry_id: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor discovery_configuration: Types::DiscoveryConfiguration
+      attr_accessor status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SelfManagedLatticeResource
+      attr_accessor resource_configuration_identifier: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ResourceConfigurationIdentifier < SelfManagedLatticeResource
+      end
+      class Unknown < SelfManagedLatticeResource
+      end
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitRegistryRecordForApprovalRequest
+      attr_accessor registry_id: ::String
+      attr_accessor record_id: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitRegistryRecordForApprovalResponse
+      attr_accessor registry_arn: ::String
+      attr_accessor record_arn: ::String
+      attr_accessor record_id: ::String
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRegistryRecordRequest
+      attr_accessor registry_id: ::String
+      attr_accessor record_id: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: Types::UpdatedDisplayName
+      attr_accessor description: Types::UpdatedDescription
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor descriptors: Types::UpdatedDescriptors
+      attr_accessor record_version: ::String
+      attr_accessor trigger_synchronization: bool
+      SENSITIVE: []
+    end
+
+    class UpdateRegistryRecordResponse
+      attr_accessor registry_arn: ::String
+      attr_accessor record_arn: ::String
+      attr_accessor record_id: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor descriptors: Types::Descriptors
+      attr_accessor record_version: ::String
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status_reason: ::String
+      SENSITIVE: [:description]
+    end
+
+    class UpdateRegistryRecordStatusRequest
+      attr_accessor registry_id: ::String
+      attr_accessor record_id: ::String
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRegistryRecordStatusResponse
+      attr_accessor registry_arn: ::String
+      attr_accessor record_arn: ::String
+      attr_accessor record_id: ::String
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateRegistryRequest
+      attr_accessor registry_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: Types::UpdatedDescription
+      attr_accessor discovery_configuration: Types::UpdatedDiscoveryConfiguration
+      attr_accessor approval_configuration: Types::UpdatedApprovalConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateRegistryResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor registry_id: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor discovery_configuration: Types::DiscoveryConfiguration
+      attr_accessor approval_configuration: Types::ApprovalConfiguration
+      attr_accessor status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class UpdatedA2aAgentCardDescriptor
+      attr_accessor optional_value: Types::UpdatedA2aAgentCardDescriptorFields
+      SENSITIVE: []
+    end
+
+    class UpdatedA2aAgentCardDescriptorFields
+      attr_accessor data: Types::UpdatedDescriptorData
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion
+      attr_accessor source: Types::UpdatedDescriptorSource
+      SENSITIVE: []
+    end
+
+    class UpdatedAgentSkillsAdditionalData
+      attr_accessor optional_value: Types::UpdatedAgentSkillsAdditionalDataFields
+      SENSITIVE: []
+    end
+
+    class UpdatedAgentSkillsAdditionalDataFields
+      attr_accessor skill_md: Types::UpdatedAgentSkillsMdDescriptor
+      SENSITIVE: []
+    end
+
+    class UpdatedAgentSkillsDefinitionDescriptor
+      attr_accessor optional_value: Types::UpdatedAgentSkillsDefinitionDescriptorFields
+      SENSITIVE: []
+    end
+
+    class UpdatedAgentSkillsDefinitionDescriptorFields
+      attr_accessor data: Types::UpdatedDescriptorData
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion
+      attr_accessor additional_data: Types::UpdatedAgentSkillsAdditionalData
+      SENSITIVE: []
+    end
+
+    class UpdatedAgentSkillsMdDescriptor
+      attr_accessor optional_value: Types::UpdatedAgentSkillsMdDescriptorFields
+      SENSITIVE: []
+    end
+
+    class UpdatedAgentSkillsMdDescriptorFields
+      attr_accessor data: Types::UpdatedDescriptorData
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion
+      attr_accessor source: Types::UpdatedDescriptorSource
+      SENSITIVE: []
+    end
+
+    class UpdatedApprovalConfiguration
+      attr_accessor optional_value: Types::ApprovalConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdatedAuthorizerConfiguration
+      attr_accessor optional_value: Types::AuthorizerConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdatedCustomDescriptor
+      attr_accessor optional_value: Types::UpdatedCustomDescriptorFields
+      SENSITIVE: []
+    end
+
+    class UpdatedCustomDescriptorFields
+      attr_accessor data: Types::UpdatedDescriptorData
+      SENSITIVE: []
+    end
+
+    class UpdatedDataSchemaVersion
+      attr_accessor optional_value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatedDescription
+      attr_accessor optional_value: ::String
+      SENSITIVE: [:optional_value]
+    end
+
+    class UpdatedDescriptorData
+      attr_accessor optional_value: ::String
+      SENSITIVE: [:optional_value]
+    end
+
+    class UpdatedDescriptorSource
+      attr_accessor optional_value: Types::DescriptorSource
+      SENSITIVE: []
+    end
+
+    class UpdatedDescriptors
+      attr_accessor optional_value: Types::UpdatedDescriptorsFields
+      SENSITIVE: []
+    end
+
+    class UpdatedDescriptorsFields
+      attr_accessor mcp_server: Types::UpdatedMcpServerDescriptor
+      attr_accessor a2a_agent_card: Types::UpdatedA2aAgentCardDescriptor
+      attr_accessor agent_skills_definition: Types::UpdatedAgentSkillsDefinitionDescriptor
+      attr_accessor custom: Types::UpdatedCustomDescriptor
+      SENSITIVE: []
+    end
+
+    class UpdatedDiscoveryConfiguration
+      attr_accessor authorizer_configuration: Types::UpdatedAuthorizerConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdatedDisplayName
+      attr_accessor optional_value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatedMcpServerAdditionalData
+      attr_accessor optional_value: Types::UpdatedMcpServerAdditionalDataFields
+      SENSITIVE: []
+    end
+
+    class UpdatedMcpServerAdditionalDataFields
+      attr_accessor tools: Types::UpdatedMcpToolsDescriptor
+      SENSITIVE: []
+    end
+
+    class UpdatedMcpServerDescriptor
+      attr_accessor optional_value: Types::UpdatedMcpServerDescriptorFields
+      SENSITIVE: []
+    end
+
+    class UpdatedMcpServerDescriptorFields
+      attr_accessor data: Types::UpdatedDescriptorData
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion
+      attr_accessor source: Types::UpdatedDescriptorSource
+      attr_accessor additional_data: Types::UpdatedMcpServerAdditionalData
+      SENSITIVE: []
+    end
+
+    class UpdatedMcpToolsDescriptor
+      attr_accessor optional_value: Types::UpdatedMcpToolsDescriptorFields
+      SENSITIVE: []
+    end
+
+    class UpdatedMcpToolsDescriptorFields
+      attr_accessor data: Types::UpdatedDescriptorData
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CannotParse" | "FieldValidationFailed" | "IdempotentParameterMismatchException" | "EventInOtherSession" | "ResourceConflict")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

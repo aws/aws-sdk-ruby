@@ -30,6 +30,22 @@ module Aws
       ]?
     }
 
+      type node_resources_fit_config = {
+      scoring_strategy: {
+        type: ("LeastAllocated" | "MostAllocated")?,
+        resources: Array[
+          {
+            name: ::String?,
+            weight: ::Integer?
+          }
+        ]?
+      }?
+    }
+
+      type kube_scheduler_config_request = {
+      node_resources_fit: Params::node_resources_fit_config?
+    }
+
       type node_repair_config = {
       enabled: bool?,
       max_unhealthy_node_threshold_count: ::Integer?,

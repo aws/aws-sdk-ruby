@@ -540,7 +540,10 @@
       "enum":[
         "pcm",
         "ogg-opus",
-        "flac"
+        "flac",
+        "g711-alaw",
+        "g711-ulaw",
+        "g729"
       ]
     },
     "MediaSampleRateHertz":{
@@ -1529,6 +1532,11 @@
           "shape":"SessionResumeWindow",
           "location":"header",
           "locationName":"x-amzn-transcribe-session-resume-window"
+        },
+        "TranscriptFormat":{
+          "shape":"TranscriptFormat",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-transcript-format"
         }
       },
       "payload":"AudioStream"
@@ -1656,6 +1664,11 @@
           "shape":"SessionResumeWindow",
           "location":"header",
           "locationName":"x-amzn-transcribe-session-resume-window"
+        },
+        "TranscriptFormat":{
+          "shape":"TranscriptFormat",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-transcript-format"
         }
       },
       "payload":"TranscriptResultStream"
@@ -1688,6 +1701,13 @@
         "Transcript":{"shape":"Transcript"}
       },
       "event":true
+    },
+    "TranscriptFormat":{
+      "type":"string",
+      "enum":[
+        "spoken",
+        "written"
+      ]
     },
     "TranscriptResultStream":{
       "type":"structure",

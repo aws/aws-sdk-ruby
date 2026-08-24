@@ -802,6 +802,24 @@
       ],
       "idempotent":true
     },
+    "CreateExtractionDefinition":{
+      "name":"CreateExtractionDefinition",
+      "http":{
+        "method":"POST",
+        "requestUri":"/extraction-definitions/{InstanceId}"
+      },
+      "input":{"shape":"CreateExtractionDefinitionRequest"},
+      "output":{"shape":"CreateExtractionDefinitionResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceConflictException"},
+        {"shape":"ServiceQuotaExceededException"}
+      ]
+    },
     "CreateHoursOfOperation":{
       "name":"CreateHoursOfOperation",
       "http":{
@@ -870,6 +888,26 @@
         {"shape":"InvalidRequestException"},
         {"shape":"ThrottlingException"}
       ]
+    },
+    "CreateMetric":{
+      "name":"CreateMetric",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/metrics/definitions/{InstanceId}"
+      },
+      "input":{"shape":"CreateMetricRequest"},
+      "output":{"shape":"CreateMetricResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"DuplicateResourceException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ],
+      "idempotent":true
     },
     "CreateNotification":{
       "name":"CreateNotification",
@@ -1494,6 +1532,22 @@
       ],
       "idempotent":true
     },
+    "DeleteExtractionDefinition":{
+      "name":"DeleteExtractionDefinition",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/extraction-definitions/{InstanceId}/{ExtractionDefinitionId}"
+      },
+      "input":{"shape":"DeleteExtractionDefinitionRequest"},
+      "output":{"shape":"DeleteExtractionDefinitionResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
     "DeleteHoursOfOperation":{
       "name":"DeleteHoursOfOperation",
       "http":{
@@ -1549,6 +1603,24 @@
         {"shape":"InternalServiceException"},
         {"shape":"InvalidRequestException"},
         {"shape":"ThrottlingException"}
+      ]
+    },
+    "DeleteMetric":{
+      "name":"DeleteMetric",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/metrics/definitions/{InstanceId}/{MetricId}"
+      },
+      "input":{"shape":"DeleteMetricRequest"},
+      "output":{"shape":"DeleteMetricResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
       ]
     },
     "DeleteNotification":{
@@ -2106,6 +2178,22 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "DescribeExtractionDefinition":{
+      "name":"DescribeExtractionDefinition",
+      "http":{
+        "method":"GET",
+        "requestUri":"/extraction-definitions/{InstanceId}/{ExtractionDefinitionId}"
+      },
+      "input":{"shape":"DescribeExtractionDefinitionRequest"},
+      "output":{"shape":"DescribeExtractionDefinitionResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
     "DescribeHoursOfOperation":{
       "name":"DescribeHoursOfOperation",
       "http":{
@@ -2183,6 +2271,24 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ThrottlingException"}
       ]
+    },
+    "DescribeMetric":{
+      "name":"DescribeMetric",
+      "http":{
+        "method":"GET",
+        "requestUri":"/metrics/definitions/{InstanceId}/{MetricId}"
+      },
+      "input":{"shape":"DescribeMetricRequest"},
+      "output":{"shape":"DescribeMetricResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ],
+      "readonly":true
     },
     "DescribeNotification":{
       "name":"DescribeNotification",
@@ -3439,6 +3545,22 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "ListExtractionDefinitions":{
+      "name":"ListExtractionDefinitions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/extraction-definitions/{InstanceId}"
+      },
+      "input":{"shape":"ListExtractionDefinitionsRequest"},
+      "output":{"shape":"ListExtractionDefinitionsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "ListFlowAssociations":{
       "name":"ListFlowAssociations",
       "http":{
@@ -3579,6 +3701,24 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ThrottlingException"}
       ]
+    },
+    "ListMetrics":{
+      "name":"ListMetrics",
+      "http":{
+        "method":"GET",
+        "requestUri":"/metrics/definitions/{InstanceId}"
+      },
+      "input":{"shape":"ListMetricsRequest"},
+      "output":{"shape":"ListMetricsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ],
+      "readonly":true
     },
     "ListNotifications":{
       "name":"ListNotifications",
@@ -4465,6 +4605,23 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "SearchMetrics":{
+      "name":"SearchMetrics",
+      "http":{
+        "method":"POST",
+        "requestUri":"/search-metrics"
+      },
+      "input":{"shape":"SearchMetricsRequest"},
+      "output":{"shape":"SearchMetricsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
     "SearchNotifications":{
       "name":"SearchNotifications",
       "http":{
@@ -4777,6 +4934,24 @@
         {"shape":"AccessDeniedException"}
       ]
     },
+    "StartAssistantContact":{
+      "name":"StartAssistantContact",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/contact/assistant"
+      },
+      "input":{"shape":"StartAssistantContactRequest"},
+      "output":{"shape":"StartAssistantContactResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"LimitExceededException"}
+      ]
+    },
     "StartAttachedFileUpload":{
       "name":"StartAttachedFileUpload",
       "http":{
@@ -5049,7 +5224,8 @@
         {"shape":"InvalidRequestException"},
         {"shape":"InvalidParameterException"},
         {"shape":"LimitExceededException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"}
       ]
     },
     "StopContact":{
@@ -5487,6 +5663,24 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "UpdateContactTaskTemplate":{
+      "name":"UpdateContactTaskTemplate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/contact/task-template"
+      },
+      "input":{"shape":"UpdateContactTaskTemplateRequest"},
+      "output":{"shape":"UpdateContactTaskTemplateResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"PropertyValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"LimitExceededException"}
+      ]
+    },
     "UpdateDataTableAttribute":{
       "name":"UpdateDataTableAttribute",
       "http":{
@@ -5580,6 +5774,23 @@
       ],
       "idempotent":true
     },
+    "UpdateExtractionDefinition":{
+      "name":"UpdateExtractionDefinition",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/extraction-definitions/{InstanceId}/{ExtractionDefinitionId}"
+      },
+      "input":{"shape":"UpdateExtractionDefinitionRequest"},
+      "output":{"shape":"UpdateExtractionDefinitionResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceConflictException"}
+      ]
+    },
     "UpdateHoursOfOperation":{
       "name":"UpdateHoursOfOperation",
       "http":{
@@ -5642,6 +5853,43 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ThrottlingException"}
       ]
+    },
+    "UpdateMetricContent":{
+      "name":"UpdateMetricContent",
+      "http":{
+        "method":"POST",
+        "requestUri":"/metrics/definitions/{InstanceId}/{MetricId}/content"
+      },
+      "input":{"shape":"UpdateMetricContentRequest"},
+      "output":{"shape":"UpdateMetricContentResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ],
+      "idempotent":true
+    },
+    "UpdateMetricMetadata":{
+      "name":"UpdateMetricMetadata",
+      "http":{
+        "method":"POST",
+        "requestUri":"/metrics/definitions/{InstanceId}/{MetricId}/metadata"
+      },
+      "input":{"shape":"UpdateMetricMetadataRequest"},
+      "output":{"shape":"UpdateMetricMetadataResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"DuplicateResourceException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ],
+      "idempotent":true
     },
     "UpdateNotificationContent":{
       "name":"UpdateNotificationContent",
@@ -6351,7 +6599,8 @@
         "UPDATE_CASE",
         "ASSIGN_SLA",
         "END_ASSOCIATED_TASKS",
-        "SUBMIT_AUTO_EVALUATION"
+        "SUBMIT_AUTO_EVALUATION",
+        "EXTRACT_INFORMATION"
       ]
     },
     "ActivateEvaluationFormRequest":{
@@ -6670,7 +6919,8 @@
     "AiAgentId":{
       "type":"string",
       "max":128,
-      "min":0
+      "min":0,
+      "pattern":"[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$|^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}"
     },
     "AiAgentInfo":{
       "type":"structure",
@@ -6678,6 +6928,13 @@
         "AiUseCase":{"shape":"AiUseCase"},
         "AiAgentVersionId":{"shape":"AiAgentVersionId"},
         "AiAgentEscalated":{"shape":"Boolean"}
+      }
+    },
+    "AiAgentInput":{
+      "type":"structure",
+      "required":["AiAgentId"],
+      "members":{
+        "AiAgentId":{"shape":"AiAgentId"}
       }
     },
     "AiAgentSearchCriteria":{
@@ -7729,6 +7986,24 @@
         "TargetSection":{"shape":"ReferenceId"}
       }
     },
+    "AvailableFilter":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"FilterId"},
+        "Type":{"shape":"AvailableFilterType"}
+      }
+    },
+    "AvailableFilterList":{
+      "type":"list",
+      "member":{"shape":"AvailableFilter"}
+    },
+    "AvailableFilterType":{
+      "type":"string",
+      "enum":[
+        "METRIC_LEVEL",
+        "RESOURCE_LEVEL"
+      ]
+    },
     "AvailableNumberSummary":{
       "type":"structure",
       "members":{
@@ -8187,6 +8462,27 @@
       "max":128,
       "min":1
     },
+    "CalculationComponent":{
+      "type":"structure",
+      "required":["Alias"],
+      "members":{
+        "Alias":{"shape":"ComponentAlias"},
+        "MetricName":{"shape":"MetricName"},
+        "MetricId":{"shape":"MetricId"},
+        "MetricFilters":{"shape":"MetricFilterList"}
+      }
+    },
+    "CalculationComponentList":{
+      "type":"list",
+      "member":{"shape":"CalculationComponent"},
+      "max":5,
+      "min":1
+    },
+    "CalculationExpression":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
     "Campaign":{
       "type":"structure",
       "members":{
@@ -8431,6 +8727,11 @@
     "CompleteAttachedFileUploadResponse":{
       "type":"structure",
       "members":{}
+    },
+    "ComponentAlias":{
+      "type":"string",
+      "max":128,
+      "min":1
     },
     "Concurrency":{
       "type":"integer",
@@ -9651,6 +9952,40 @@
         "EvaluationFormArn":{"shape":"ARN"}
       }
     },
+    "CreateExtractionDefinitionRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "Name",
+        "ExtractionConfiguration"
+      ],
+      "members":{
+        "ClientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        },
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "Name":{"shape":"ExtractionDefinitionName"},
+        "ExtractionConfiguration":{"shape":"ExtractionConfiguration"},
+        "Display":{"shape":"ExtractionDefinitionDisplay"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "CreateExtractionDefinitionResponse":{
+      "type":"structure",
+      "required":[
+        "ExtractionDefinitionArn",
+        "ExtractionDefinitionId"
+      ],
+      "members":{
+        "ExtractionDefinitionArn":{"shape":"ARN"},
+        "ExtractionDefinitionId":{"shape":"ExtractionDefinitionId"}
+      }
+    },
     "CreateHoursOfOperationOverrideRequest":{
       "type":"structure",
       "required":[
@@ -9769,6 +10104,44 @@
       "members":{
         "IntegrationAssociationId":{"shape":"IntegrationAssociationId"},
         "IntegrationAssociationArn":{"shape":"ARN"}
+      }
+    },
+    "CreateMetricRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "Name",
+        "MetricCalculation",
+        "Unit"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "Name":{"shape":"MetricName"},
+        "MetricCalculation":{"shape":"MetricCalculation"},
+        "Unit":{"shape":"MetricUnit"},
+        "Status":{"shape":"MetricStatus"},
+        "ClientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        },
+        "Description":{"shape":"MetricDescription"},
+        "PositiveTrendIndicator":{"shape":"TrendIndicator"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "CreateMetricResponse":{
+      "type":"structure",
+      "required":[
+        "MetricArn",
+        "MetricId"
+      ],
+      "members":{
+        "MetricArn":{"shape":"ARN"},
+        "MetricId":{"shape":"MetricId"}
       }
     },
     "CreateNotificationRequest":{
@@ -10968,6 +11341,11 @@
         "ComparisonType":{"shape":"DecimalComparisonType"}
       }
     },
+    "DefaultStat":{
+      "type":"string",
+      "max":50,
+      "min":1
+    },
     "DefaultVocabulary":{
       "type":"structure",
       "required":[
@@ -11301,6 +11679,29 @@
         }
       }
     },
+    "DeleteExtractionDefinitionRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "ExtractionDefinitionId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "ExtractionDefinitionId":{
+          "shape":"ExtractionDefinitionId",
+          "location":"uri",
+          "locationName":"ExtractionDefinitionId"
+        }
+      }
+    },
+    "DeleteExtractionDefinitionResponse":{
+      "type":"structure",
+      "members":{}
+    },
     "DeleteHoursOfOperationOverrideRequest":{
       "type":"structure",
       "required":[
@@ -11380,6 +11781,29 @@
           "locationName":"IntegrationAssociationId"
         }
       }
+    },
+    "DeleteMetricRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "MetricId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "MetricId":{
+          "shape":"MetricId",
+          "location":"uri",
+          "locationName":"MetricId"
+        }
+      }
+    },
+    "DeleteMetricResponse":{
+      "type":"structure",
+      "members":{}
     },
     "DeleteNotificationRequest":{
       "type":"structure",
@@ -12214,6 +12638,32 @@
         "EvaluationForm":{"shape":"EvaluationForm"}
       }
     },
+    "DescribeExtractionDefinitionRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "ExtractionDefinitionId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "ExtractionDefinitionId":{
+          "shape":"ExtractionDefinitionId",
+          "location":"uri",
+          "locationName":"ExtractionDefinitionId"
+        }
+      }
+    },
+    "DescribeExtractionDefinitionResponse":{
+      "type":"structure",
+      "required":["ExtractionDefinition"],
+      "members":{
+        "ExtractionDefinition":{"shape":"ExtractionDefinition"}
+      }
+    },
     "DescribeHoursOfOperationOverrideRequest":{
       "type":"structure",
       "required":[
@@ -12342,6 +12792,32 @@
       "type":"structure",
       "members":{
         "StorageConfig":{"shape":"InstanceStorageConfig"}
+      }
+    },
+    "DescribeMetricRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "MetricId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "MetricId":{
+          "shape":"MetricId",
+          "location":"uri",
+          "locationName":"MetricId"
+        }
+      }
+    },
+    "DescribeMetricResponse":{
+      "type":"structure",
+      "required":["Metric"],
+      "members":{
+        "Metric":{"shape":"MetricDefinition"}
       }
     },
     "DescribeNotificationRequest":{
@@ -13507,7 +13983,7 @@
     "EmailAttachments":{
       "type":"list",
       "member":{"shape":"EmailAttachment"},
-      "max":10,
+      "max":50,
       "min":1,
       "sensitive":true
     },
@@ -14025,7 +14501,8 @@
         "pt-BR",
         "ja-JP",
         "ko-KR",
-        "zh-CN"
+        "zh-CN",
+        "ms-MY"
       ]
     },
     "EvaluationFormLanguageConfiguration":{
@@ -14898,6 +15375,8 @@
         "OnRealTimeCallAnalysisAvailable",
         "OnRealTimeChatAnalysisAvailable",
         "OnPostChatAnalysisAvailable",
+        "OnAfterCallWorkAvailable",
+        "OnAfterChatWorkAvailable",
         "OnEmailAnalysisAvailable",
         "OnZendeskTicketCreate",
         "OnZendeskTicketStatusUpdate",
@@ -14970,6 +15449,100 @@
       "members":{
         "Enabled":{"shape":"Boolean"}
       }
+    },
+    "ExtractInformationActionDefinition":{
+      "type":"structure",
+      "required":["RulesExtractionDefinitions"],
+      "members":{
+        "RulesExtractionDefinitions":{"shape":"RulesExtractionDefinitionIdentifierList"}
+      }
+    },
+    "ExtractionConfiguration":{
+      "type":"structure",
+      "required":["PromptHint"],
+      "members":{
+        "PromptHint":{"shape":"ExtractionDefinitionPromptHint"},
+        "NotFoundBehavior":{"shape":"ExtractionDefinitionNotFoundBehavior"}
+      }
+    },
+    "ExtractionDefinition":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "ExtractionDefinitionId",
+        "ExtractionDefinitionArn",
+        "ExtractionConfiguration",
+        "CreatedTime",
+        "LastUpdatedTime",
+        "LastUpdatedBy"
+      ],
+      "members":{
+        "Name":{"shape":"ExtractionDefinitionName"},
+        "ExtractionDefinitionId":{"shape":"ExtractionDefinitionId"},
+        "ExtractionDefinitionArn":{"shape":"ARN"},
+        "ExtractionConfiguration":{"shape":"ExtractionConfiguration"},
+        "Display":{"shape":"ExtractionDefinitionDisplay"},
+        "CreatedTime":{"shape":"Timestamp"},
+        "LastUpdatedTime":{"shape":"Timestamp"},
+        "LastUpdatedBy":{"shape":"ARN"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "ExtractionDefinitionDisplay":{
+      "type":"structure",
+      "members":{
+        "Label":{"shape":"ExtractionDefinitionDisplayLabel"}
+      }
+    },
+    "ExtractionDefinitionDisplayLabel":{
+      "type":"string",
+      "max":25
+    },
+    "ExtractionDefinitionId":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "ExtractionDefinitionName":{
+      "type":"string",
+      "max":200,
+      "min":1
+    },
+    "ExtractionDefinitionNotFoundBehavior":{
+      "type":"structure",
+      "required":["Behavior"],
+      "members":{
+        "Behavior":{"shape":"NotFoundBehaviorType"},
+        "DefaultValue":{"shape":"NotFoundDefaultValue"}
+      }
+    },
+    "ExtractionDefinitionPromptHint":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "ExtractionDefinitionSummary":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "ExtractionDefinitionId",
+        "ExtractionDefinitionArn",
+        "CreatedTime",
+        "LastUpdatedTime",
+        "LastUpdatedBy"
+      ],
+      "members":{
+        "Name":{"shape":"ExtractionDefinitionName"},
+        "ExtractionDefinitionId":{"shape":"ExtractionDefinitionId"},
+        "ExtractionDefinitionArn":{"shape":"ARN"},
+        "CreatedTime":{"shape":"Timestamp"},
+        "LastUpdatedTime":{"shape":"Timestamp"},
+        "LastUpdatedBy":{"shape":"ARN"}
+      }
+    },
+    "ExtractionDefinitionSummaryList":{
+      "type":"list",
+      "member":{"shape":"ExtractionDefinitionSummary"}
     },
     "FailedBatchAssociationSummary":{
       "type":"structure",
@@ -15098,6 +15671,11 @@
         "ATTACHMENT",
         "VOICE_RECORDING"
       ]
+    },
+    "FilterId":{
+      "type":"string",
+      "max":100,
+      "min":1
     },
     "FilterV2":{
       "type":"structure",
@@ -17491,6 +18069,36 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListExtractionDefinitionsRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "MaxResults":{
+          "shape":"MaxResult100",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListExtractionDefinitionsResponse":{
+      "type":"structure",
+      "required":["ExtractionDefinitionSummaryList"],
+      "members":{
+        "ExtractionDefinitionSummaryList":{"shape":"ExtractionDefinitionSummaryList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "ListFlowAssociationResourceType":{
       "type":"string",
       "enum":[
@@ -17785,6 +18393,40 @@
       "type":"structure",
       "members":{
         "LexBots":{"shape":"LexBotsList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListMetricsRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "Type":{
+          "shape":"MetricType",
+          "location":"querystring",
+          "locationName":"type"
+        },
+        "MaxResults":{
+          "shape":"MaxResult100",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListMetricsResponse":{
+      "type":"structure",
+      "required":["MetricSummaryList"],
+      "members":{
+        "MetricSummaryList":{"shape":"MetricSummaryList"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -19235,6 +19877,29 @@
       "max":2000,
       "min":1
     },
+    "MetricCalculation":{
+      "type":"structure",
+      "required":[
+        "CalculationComponents",
+        "Calculation"
+      ],
+      "members":{
+        "CalculationComponents":{"shape":"CalculationComponentList"},
+        "Calculation":{"shape":"CalculationExpression"}
+      }
+    },
+    "MetricCategory":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "MetricCreationMethod":{
+      "type":"string",
+      "enum":[
+        "SERVICE_LEVEL_BUILDER",
+        "METRIC_BUILDER"
+      ]
+    },
     "MetricDataCollectionsV2":{
       "type":"list",
       "member":{"shape":"MetricDataV2"}
@@ -19248,6 +19913,129 @@
           "box":true
         }
       }
+    },
+    "MetricDefinition":{
+      "type":"structure",
+      "required":[
+        "Arn",
+        "Id",
+        "Name",
+        "Type",
+        "Unit",
+        "Groupings",
+        "Filters",
+        "Category",
+        "SupportsPreaggregateCalculation",
+        "SupportsCustomCalculation"
+      ],
+      "members":{
+        "Arn":{"shape":"ARN"},
+        "Id":{"shape":"MetricId"},
+        "Name":{"shape":"MetricName"},
+        "Description":{"shape":"MetricDescription"},
+        "MetricCalculation":{"shape":"MetricCalculation"},
+        "CreationMethod":{"shape":"MetricCreationMethod"},
+        "Status":{"shape":"MetricStatus"},
+        "Type":{"shape":"MetricType"},
+        "Unit":{"shape":"MetricUnit"},
+        "PositiveTrendIndicator":{"shape":"TrendIndicator"},
+        "Groupings":{"shape":"MetricGroupingList"},
+        "Filters":{"shape":"AvailableFilterList"},
+        "EffectiveTime":{"shape":"Timestamp"},
+        "RefreshRate":{"shape":"RefreshRate"},
+        "Category":{"shape":"MetricCategory"},
+        "SupportedStats":{"shape":"SupportedStatsList"},
+        "DefaultStat":{"shape":"DefaultStat"},
+        "SupportsPreaggregateCalculation":{"shape":"SupportsPreaggregateCalculation"},
+        "SupportsCustomCalculation":{"shape":"SupportsCustomCalculation"},
+        "PrimaryEventSource":{"shape":"PrimaryEventSource"},
+        "PrimaryEventSourceEffectiveTimestampType":{"shape":"PrimaryEventSourceEffectiveTimestampType"},
+        "CreatedTime":{"shape":"Timestamp"},
+        "CreatedUser":{"shape":"CreatedByInfo"},
+        "LastModifiedRegion":{"shape":"RegionName"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "LastModifiedUser":{"shape":"CreatedByInfo"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "MetricDescription":{
+      "type":"string",
+      "max":500,
+      "min":0
+    },
+    "MetricFilter":{
+      "type":"structure",
+      "required":["MetricFilterKey"],
+      "members":{
+        "MetricFilterKey":{"shape":"MetricFilterKey"},
+        "Negate":{"shape":"Boolean"},
+        "NumberCondition":{"shape":"MetricFilterNumberCondition"},
+        "StringCondition":{"shape":"MetricFilterStringCondition"},
+        "BooleanCondition":{"shape":"MetricFilterBooleanCondition"}
+      }
+    },
+    "MetricFilterBooleanCondition":{
+      "type":"structure",
+      "required":["Comparison"],
+      "members":{
+        "Comparison":{"shape":"MetricFilterBooleanConditionComparison"}
+      }
+    },
+    "MetricFilterBooleanConditionComparison":{
+      "type":"string",
+      "enum":[
+        "IS_TRUE",
+        "IS_FALSE"
+      ]
+    },
+    "MetricFilterKey":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "MetricFilterList":{
+      "type":"list",
+      "member":{"shape":"MetricFilter"},
+      "max":5,
+      "min":0
+    },
+    "MetricFilterNumberCondition":{
+      "type":"structure",
+      "required":[
+        "Comparison",
+        "Values"
+      ],
+      "members":{
+        "Comparison":{"shape":"MetricFilterNumberConditionComparison"},
+        "Values":{"shape":"NumberValueList"}
+      }
+    },
+    "MetricFilterNumberConditionComparison":{
+      "type":"string",
+      "enum":[
+        "LESSER",
+        "LESSER_OR_EQUAL",
+        "GREATER",
+        "GREATER_OR_EQUAL"
+      ]
+    },
+    "MetricFilterStringCondition":{
+      "type":"structure",
+      "required":[
+        "Comparison",
+        "Values"
+      ],
+      "members":{
+        "Comparison":{"shape":"MetricFilterStringConditionComparison"},
+        "Values":{"shape":"StringValueList"}
+      }
+    },
+    "MetricFilterStringConditionComparison":{
+      "type":"string",
+      "enum":[
+        "MATCHES_ANY",
+        "MATCHES_NONE"
+      ]
     },
     "MetricFilterV2":{
       "type":"structure",
@@ -19268,6 +20056,10 @@
       "member":{"shape":"MetricFilterV2"},
       "max":2
     },
+    "MetricGroupingList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "MetricId":{
       "type":"string",
       "max":150,
@@ -19281,6 +20073,11 @@
         "EndTime":{"shape":"Timestamp"}
       }
     },
+    "MetricName":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "MetricNameV2":{"type":"string"},
     "MetricResultV2":{
       "type":"structure",
@@ -19293,6 +20090,75 @@
     "MetricResultsV2":{
       "type":"list",
       "member":{"shape":"MetricResultV2"}
+    },
+    "MetricSearchConditionList":{
+      "type":"list",
+      "member":{"shape":"MetricSearchCriteria"}
+    },
+    "MetricSearchCriteria":{
+      "type":"structure",
+      "members":{
+        "OrConditions":{"shape":"MetricSearchConditionList"},
+        "AndConditions":{"shape":"MetricSearchConditionList"},
+        "StringCondition":{"shape":"StringCondition"},
+        "BooleanCondition":{"shape":"BooleanCondition"}
+      }
+    },
+    "MetricSearchFilter":{
+      "type":"structure",
+      "members":{
+        "TagFilter":{"shape":"ControlPlaneTagFilter"}
+      }
+    },
+    "MetricSearchSummaryList":{
+      "type":"list",
+      "member":{"shape":"MetricDefinition"}
+    },
+    "MetricStatus":{
+      "type":"string",
+      "enum":[
+        "PUBLISHED",
+        "SAVED"
+      ]
+    },
+    "MetricSummary":{
+      "type":"structure",
+      "required":[
+        "Arn",
+        "Id",
+        "Name",
+        "Status",
+        "Type"
+      ],
+      "members":{
+        "Arn":{"shape":"ARN"},
+        "Id":{"shape":"MetricId"},
+        "Name":{"shape":"MetricName"},
+        "Status":{"shape":"MetricStatus"},
+        "Type":{"shape":"MetricType"},
+        "LastModifiedRegion":{"shape":"RegionName"},
+        "LastModifiedTime":{"shape":"Timestamp"}
+      }
+    },
+    "MetricSummaryList":{
+      "type":"list",
+      "member":{"shape":"MetricSummary"}
+    },
+    "MetricType":{
+      "type":"string",
+      "enum":[
+        "AWS_MANAGED",
+        "CUSTOMER_MANAGED"
+      ]
+    },
+    "MetricUnit":{
+      "type":"string",
+      "enum":[
+        "INTEGER",
+        "DOUBLE",
+        "PERCENT",
+        "SECONDS"
+      ]
     },
     "MetricV2":{
       "type":"structure",
@@ -19456,6 +20322,17 @@
       "max":2500,
       "min":1
     },
+    "NotFoundBehaviorType":{
+      "type":"string",
+      "enum":[
+        "USE_DEFAULT_VALUE",
+        "OMIT"
+      ]
+    },
+    "NotFoundDefaultValue":{
+      "type":"string",
+      "max":1024
+    },
     "Notification":{
       "type":"structure",
       "required":[
@@ -19609,6 +20486,12 @@
         "Name":{"shape":"ReferenceKey"},
         "Value":{"shape":"ReferenceValue"}
       }
+    },
+    "NumberValueList":{
+      "type":"list",
+      "member":{"shape":"Double"},
+      "max":10,
+      "min":1
     },
     "NumericQuestionPropertyAutomationLabel":{
       "type":"string",
@@ -20644,6 +21527,16 @@
       "member":{"shape":"PrimaryAttributeValue"},
       "max":5
     },
+    "PrimaryEventSource":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "PrimaryEventSourceEffectiveTimestampType":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
     "PrimaryValue":{
       "type":"structure",
       "required":[
@@ -20816,7 +21709,8 @@
         "REFERENCED_RESOURCE_NOT_FOUND",
         "RESOURCE_NAME_ALREADY_EXISTS",
         "REQUIRED_PROPERTY_MISSING",
-        "NOT_SUPPORTED"
+        "NOT_SUPPORTED",
+        "TYPE_MISMATCH"
       ]
     },
     "PutUserStatusRequest":{
@@ -21663,6 +22557,7 @@
       "max":4096,
       "min":0
     },
+    "RefreshRate":{"type":"long"},
     "RefreshTokenDuration":{
       "type":"integer",
       "box":true,
@@ -22157,7 +23052,8 @@
         "UpdateCaseAction":{"shape":"UpdateCaseActionDefinition"},
         "AssignSlaAction":{"shape":"AssignSlaActionDefinition"},
         "EndAssociatedTasksAction":{"shape":"EndAssociatedTasksActionDefinition"},
-        "SubmitAutoEvaluationAction":{"shape":"SubmitAutoEvaluationActionDefinition"}
+        "SubmitAutoEvaluationAction":{"shape":"SubmitAutoEvaluationActionDefinition"},
+        "ExtractInformationAction":{"shape":"ExtractInformationActionDefinition"}
       }
     },
     "RuleActions":{
@@ -22281,6 +23177,22 @@
       "members":{
         "Behavior":{"shape":"Behavior"}
       }
+    },
+    "RulesExtractionDefinitionId":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "RulesExtractionDefinitionIdentifier":{
+      "type":"structure",
+      "required":["Identifier"],
+      "members":{
+        "Identifier":{"shape":"RulesExtractionDefinitionId"}
+      }
+    },
+    "RulesExtractionDefinitionIdentifierList":{
+      "type":"list",
+      "member":{"shape":"RulesExtractionDefinitionIdentifier"}
     },
     "RulesSearchConditionList":{
       "type":"list",
@@ -22655,6 +23567,28 @@
       "members":{
         "HoursOfOperations":{"shape":"HoursOfOperationList"},
         "NextToken":{"shape":"NextToken2500"},
+        "ApproximateTotalCount":{"shape":"ApproximateTotalCount"}
+      }
+    },
+    "SearchMetricsRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{"shape":"InstanceId"},
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{
+          "shape":"MaxResult100",
+          "box":true
+        },
+        "SearchFilter":{"shape":"MetricSearchFilter"},
+        "SearchCriteria":{"shape":"MetricSearchCriteria"}
+      }
+    },
+    "SearchMetricsResponse":{
+      "type":"structure",
+      "members":{
+        "Metrics":{"shape":"MetricSearchSummaryList"},
+        "NextToken":{"shape":"NextToken"},
         "ApproximateTotalCount":{"shape":"ApproximateTotalCount"}
       }
     },
@@ -23563,6 +24497,36 @@
         "CASES"
       ]
     },
+    "StartAssistantContactRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "AiAgent",
+        "ParticipantDetails"
+      ],
+      "members":{
+        "InstanceId":{"shape":"InstanceId"},
+        "AiAgent":{"shape":"AiAgentInput"},
+        "ParticipantDetails":{"shape":"ParticipantDetails"},
+        "InitialMessage":{"shape":"ChatMessage"},
+        "Attributes":{"shape":"Attributes"},
+        "ClientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        },
+        "PersistentChat":{"shape":"PersistentChat"},
+        "RelatedContactId":{"shape":"ContactId"}
+      }
+    },
+    "StartAssistantContactResponse":{
+      "type":"structure",
+      "members":{
+        "ContactId":{"shape":"ContactId"},
+        "ParticipantId":{"shape":"ParticipantId"},
+        "ParticipantToken":{"shape":"ParticipantToken"},
+        "ContinuedFromContactId":{"shape":"ContactId"}
+      }
+    },
     "StartAttachedFileUploadRequest":{
       "type":"structure",
       "required":[
@@ -24032,7 +24996,8 @@
         "ParticipantDetails":{"shape":"ParticipantDetails"},
         "RelatedContactId":{"shape":"ContactId"},
         "References":{"shape":"ContactReferences"},
-        "Description":{"shape":"Description"}
+        "Description":{"shape":"Description"},
+        "SegmentAttributes":{"shape":"SegmentAttributes"}
       }
     },
     "StartWebRTCContactResponse":{
@@ -24217,6 +25182,12 @@
         "Value":{"shape":"ReferenceValue"}
       }
     },
+    "StringValueList":{
+      "type":"list",
+      "member":{"shape":"String"},
+      "max":10,
+      "min":1
+    },
     "Subject":{
       "type":"string",
       "max":200,
@@ -24323,6 +25294,12 @@
       "type":"list",
       "member":{"shape":"SupportedMessagingContentType"}
     },
+    "SupportedStatsList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "SupportsCustomCalculation":{"type":"boolean"},
+    "SupportsPreaggregateCalculation":{"type":"boolean"},
     "SuspendContactRecordingRequest":{
       "type":"structure",
       "required":[
@@ -24991,6 +25968,14 @@
         "ContactArn":{"shape":"ARN"}
       }
     },
+    "TrendIndicator":{
+      "type":"string",
+      "enum":[
+        "POSITIVE",
+        "NEGATIVE",
+        "NEUTRAL"
+      ]
+    },
     "URI":{
       "type":"string",
       "max":2000,
@@ -25457,6 +26442,23 @@
       "type":"structure",
       "members":{}
     },
+    "UpdateContactTaskTemplateRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "TaskTemplateId",
+        "ContactId"
+      ],
+      "members":{
+        "InstanceId":{"shape":"InstanceId"},
+        "TaskTemplateId":{"shape":"TaskTemplateId"},
+        "ContactId":{"shape":"ContactId"}
+      }
+    },
+    "UpdateContactTaskTemplateResponse":{
+      "type":"structure",
+      "members":{}
+    },
     "UpdateDataTableAttributeRequest":{
       "type":"structure",
       "required":[
@@ -25647,6 +26649,38 @@
         "EvaluationFormVersion":{"shape":"VersionNumber"}
       }
     },
+    "UpdateExtractionDefinitionRequest":{
+      "type":"structure",
+      "required":[
+        "ExtractionDefinitionId",
+        "InstanceId",
+        "Name",
+        "ExtractionConfiguration"
+      ],
+      "members":{
+        "ClientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        },
+        "ExtractionDefinitionId":{
+          "shape":"ExtractionDefinitionId",
+          "location":"uri",
+          "locationName":"ExtractionDefinitionId"
+        },
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "Name":{"shape":"ExtractionDefinitionName"},
+        "ExtractionConfiguration":{"shape":"ExtractionConfiguration"},
+        "Display":{"shape":"ExtractionDefinitionDisplay"}
+      }
+    },
+    "UpdateExtractionDefinitionResponse":{
+      "type":"structure",
+      "members":{}
+    },
     "UpdateHoursOfOperationDescription":{
       "type":"string",
       "max":250,
@@ -25762,6 +26796,57 @@
           "idempotencyToken":true
         }
       }
+    },
+    "UpdateMetricContentRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "MetricId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "MetricId":{
+          "shape":"MetricId",
+          "location":"uri",
+          "locationName":"MetricId"
+        },
+        "MetricCalculation":{"shape":"MetricCalculation"},
+        "Unit":{"shape":"MetricUnit"},
+        "PositiveTrendIndicator":{"shape":"TrendIndicator"}
+      }
+    },
+    "UpdateMetricContentResponse":{
+      "type":"structure",
+      "members":{}
+    },
+    "UpdateMetricMetadataRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "MetricId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "MetricId":{
+          "shape":"MetricId",
+          "location":"uri",
+          "locationName":"MetricId"
+        },
+        "Name":{"shape":"MetricName"},
+        "Description":{"shape":"MetricDescription"}
+      }
+    },
+    "UpdateMetricMetadataResponse":{
+      "type":"structure",
+      "members":{}
     },
     "UpdateNotificationContentRequest":{
       "type":"structure",

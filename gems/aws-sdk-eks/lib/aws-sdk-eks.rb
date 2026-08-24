@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:eks)
 # structure.
 #
 #     eks = Aws::EKS::Client.new
-#     resp = eks.associate_access_policy(params)
+#     resp = eks.activate_certificate_authority(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::EKS
   autoload :EndpointProvider, 'aws-sdk-eks/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-eks/endpoints'
 
-  GEM_VERSION = '1.172.0'
+  GEM_VERSION = '1.174.0'
 
 end
 

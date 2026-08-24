@@ -50,6 +50,18 @@ module Aws::IAM
     class AccountNotManagementOrDelegatedAdministratorException < Aws::EmptyStructure
     end
 
+    class AcquireRoleRequest
+      attr_accessor template_arn: ::String
+      attr_accessor template_minor_version: ::Integer
+      attr_accessor replacement_values: ::Hash[::String, Types::ReplacementValueEntry]
+      SENSITIVE: []
+    end
+
+    class AcquireRoleResponse
+      attr_accessor role: Types::Role
+      SENSITIVE: []
+    end
+
     class AddClientIDToOpenIDConnectProviderRequest
       attr_accessor open_id_connect_provider_arn: ::String
       attr_accessor client_id: ::String
@@ -690,6 +702,14 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class GetAccountPropertiesRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountPropertiesResponse
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class GetAccountSummaryResponse
       attr_accessor summary_map: ::Hash[("Users" | "UsersQuota" | "Groups" | "GroupsQuota" | "ServerCertificates" | "ServerCertificatesQuota" | "UserPolicySizeQuota" | "GroupPolicySizeQuota" | "GroupsPerUserQuota" | "SigningCertificatesPerUserQuota" | "AccessKeysPerUserQuota" | "MFADevices" | "MFADevicesInUse" | "AccountMFAEnabled" | "AccountAccessKeysPresent" | "AccountPasswordPresent" | "AccountSigningCertificatesPresent" | "AttachedPoliciesPerGroupQuota" | "AttachedPoliciesPerRoleQuota" | "AttachedPoliciesPerUserQuota" | "Policies" | "PoliciesQuota" | "PolicySizeQuota" | "PolicyVersionsInUse" | "PolicyVersionsInUseQuota" | "VersionsPerPolicyQuota" | "GlobalEndpointTokenVersion" | "AssumeRolePolicySizeQuota" | "InstanceProfiles" | "InstanceProfilesQuota" | "Providers" | "RolePolicySizeQuota" | "Roles" | "RolesQuota"), ::Integer]
       SENSITIVE: []
@@ -891,6 +911,17 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class GetRoleTemplateVersionRequest
+      attr_accessor template_arn: ::String
+      attr_accessor minor_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRoleTemplateVersionResponse
+      attr_accessor role_template_version: Types::RoleTemplateVersion
+      SENSITIVE: []
+    end
+
     class GetSAMLProviderRequest
       attr_accessor saml_provider_arn: ::String
       SENSITIVE: []
@@ -1018,6 +1049,19 @@ module Aws::IAM
       attr_accessor create_date: ::Time
       attr_accessor group_policy_list: ::Array[Types::PolicyDetail]
       attr_accessor attached_managed_policies: ::Array[Types::AttachedPolicy]
+      SENSITIVE: []
+    end
+
+    class InlinePolicy
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class InlinePolicyIdentifierType
+      attr_accessor policy_name: ::String
+      attr_accessor attachment_type: ("user" | "group" | "role")
+      attr_accessor attachment_name: ::String
       SENSITIVE: []
     end
 
@@ -1612,6 +1656,11 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class NameConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class NoSuchEntityException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1627,6 +1676,11 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class OrderedOrganizationPolicyType
+      attr_accessor service_control_policy_input_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class OrganizationNotFoundException < Aws::EmptyStructure
     end
 
@@ -1635,6 +1689,17 @@ module Aws::IAM
 
     class OrganizationsDecisionDetail
       attr_accessor allowed_by_organizations: bool
+      SENSITIVE: []
+    end
+
+    class ParameterDefinition
+      attr_accessor name: ::String
+      attr_accessor type: ("String" | "StringList" | "Number" | "NumberList" | "Arn" | "ArnList")
+      attr_accessor sub_type: ::String
+      attr_accessor description: ::String
+      attr_accessor is_required: bool
+      attr_accessor default_value: ::String
+      attr_accessor immutable: bool
       SENSITIVE: []
     end
 
@@ -1704,6 +1769,23 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class PolicyIdentifier
+      attr_accessor policy_type: ("inline" | "aws-managed" | "user-managed" | "permission-boundary" | "scp" | "rcp")
+      attr_accessor policy_arn: ::String
+      attr_accessor inline_policy_identifier: Types::InlinePolicyIdentifierType
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PolicyType < PolicyIdentifier
+      end
+      class PolicyArn < PolicyIdentifier
+      end
+      class InlinePolicyIdentifier < PolicyIdentifier
+      end
+      class Unknown < PolicyIdentifier
+      end
+    end
+
     class PolicyNotAttachableException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1740,6 +1822,14 @@ module Aws::IAM
       attr_accessor line: ::Integer
       attr_accessor column: ::Integer
       SENSITIVE: []
+    end
+
+    class PutAccountPropertiesRequest
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutAccountPropertiesResponse < Aws::EmptyStructure
     end
 
     class PutGroupPolicyRequest
@@ -1799,6 +1889,11 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class ReplacementValueEntry
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ReportGenerationLimitExceededException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1845,6 +1940,7 @@ module Aws::IAM
       attr_accessor permissions_boundary: Types::AttachedPermissionsBoundary
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor role_last_used: Types::RoleLastUsed
+      attr_accessor source_role_template: Types::SourceRoleTemplate
       SENSITIVE: []
     end
 
@@ -1867,6 +1963,43 @@ module Aws::IAM
     class RoleLastUsed
       attr_accessor last_used_date: ::Time
       attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class RoleModifiedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RoleTemplateDisabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RoleTemplateVersion
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_version_id: ::String
+      attr_accessor description: ::String
+      attr_accessor major_version: ::Integer
+      attr_accessor default_minor_version: ::Integer
+      attr_accessor managed_by_type: ("Service")
+      attr_accessor managed_by_value: ::String
+      attr_accessor enabled: bool
+      attr_accessor minor_version: ::Integer
+      attr_accessor role_name_pattern: ::String
+      attr_accessor role_path_pattern: ::String
+      attr_accessor role_description_pattern: ::String
+      attr_accessor assume_role_policy_document_template: ::String
+      attr_accessor inline_policy_templates: ::Array[Types::InlinePolicy]
+      attr_accessor managed_policy_arns: ::Array[::String]
+      attr_accessor permission_boundary_arn: ::String
+      attr_accessor parameters_definition: ::Array[Types::ParameterDefinition]
+      attr_accessor role_tags_template: ::Array[Types::TagTemplate]
+      attr_accessor max_session_duration: ::Integer
+      attr_accessor version_enabled: bool
+      attr_accessor create_timestamp: ::Time
+      attr_accessor update_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -2003,6 +2136,7 @@ module Aws::IAM
     class SimulateCustomPolicyRequest
       attr_accessor policy_input_list: ::Array[::String]
       attr_accessor permissions_boundary_policy_input_list: ::Array[::String]
+      attr_accessor ordered_organization_policy_input_list: ::Array[Types::OrderedOrganizationPolicyType]
       attr_accessor action_names: ::Array[::String]
       attr_accessor resource_arns: ::Array[::String]
       attr_accessor resource_policy: ::String
@@ -2026,6 +2160,7 @@ module Aws::IAM
       attr_accessor policy_source_arn: ::String
       attr_accessor policy_input_list: ::Array[::String]
       attr_accessor permissions_boundary_policy_input_list: ::Array[::String]
+      attr_accessor policy_exclusion_list: ::Array[Types::PolicyIdentifier]
       attr_accessor action_names: ::Array[::String]
       attr_accessor resource_arns: ::Array[::String]
       attr_accessor resource_policy: ::String
@@ -2035,6 +2170,12 @@ module Aws::IAM
       attr_accessor resource_handling_option: ::String
       attr_accessor max_items: ::Integer
       attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class SourceRoleTemplate
+      attr_accessor template_arn: ::String
+      attr_accessor template_minor_version: ::Integer
       SENSITIVE: []
     end
 
@@ -2091,6 +2232,12 @@ module Aws::IAM
     class TagServerCertificateRequest
       attr_accessor server_certificate_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagTemplate
+      attr_accessor key: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 

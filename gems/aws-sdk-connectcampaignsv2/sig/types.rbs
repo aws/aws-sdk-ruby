@@ -8,6 +8,14 @@
 module Aws::ConnectCampaignsV2
   module Types
 
+    class AbandonmentRatePacingConfig
+      attr_accessor target_rate: ::Float
+      attr_accessor connection_start_point: ("CONNECTED_TO_SYSTEM" | "GREETING_START" | "GREETING_END")
+      attr_accessor connection_threshold_seconds: ::Integer
+      attr_accessor evaluation_window: ::String
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       attr_accessor x_amz_error_type: ::String
@@ -523,6 +531,17 @@ module Aws::ConnectCampaignsV2
       SENSITIVE: []
     end
 
+    class PacingStrategy
+      attr_accessor abandonment_rate: Types::AbandonmentRatePacingConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AbandonmentRate < PacingStrategy
+      end
+      class Unknown < PacingStrategy
+      end
+    end
+
     class PauseCampaignRequest
       attr_accessor id: ::String
       SENSITIVE: []
@@ -530,6 +549,7 @@ module Aws::ConnectCampaignsV2
 
     class PredictiveConfig
       attr_accessor bandwidth_allocation: ::Float
+      attr_accessor pacing_strategies: ::Array[Types::PacingStrategy]
       SENSITIVE: []
     end
 

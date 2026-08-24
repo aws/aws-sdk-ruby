@@ -192,6 +192,7 @@ module Aws::PrometheusService
       attr_accessor role_configuration: Types::RoleConfiguration
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor exporters: ::Array[Types::ExporterConfiguration]
       SENSITIVE: []
     end
 
@@ -412,6 +413,17 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class ExporterConfiguration
+      attr_accessor open_search_configuration: Types::OpenSearchExporterConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OpenSearchConfiguration < ExporterConfiguration
+      end
+      class Unknown < ExporterConfiguration
+      end
+    end
+
     class GetDefaultScraperConfigurationRequest < Aws::EmptyStructure
     end
 
@@ -538,6 +550,11 @@ module Aws::PrometheusService
 
     class LoggingFilter
       attr_accessor qsp_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class OpenSearchExporterConfiguration
+      attr_accessor domain_arn: ::String
       SENSITIVE: []
     end
 
@@ -697,6 +714,7 @@ module Aws::PrometheusService
       attr_accessor source: Types::Source
       attr_accessor destination: Types::Destination
       attr_accessor role_configuration: Types::RoleConfiguration
+      attr_accessor exporters: ::Array[Types::ExporterConfiguration]
       SENSITIVE: []
     end
 
@@ -735,6 +753,7 @@ module Aws::PrometheusService
       attr_accessor source: Types::Source
       attr_accessor destination: Types::Destination
       attr_accessor role_configuration: Types::RoleConfiguration
+      attr_accessor exporters: ::Array[Types::ExporterConfiguration]
       SENSITIVE: []
     end
 
@@ -830,6 +849,7 @@ module Aws::PrometheusService
       attr_accessor destination: Types::Destination
       attr_accessor role_configuration: Types::RoleConfiguration
       attr_accessor client_token: ::String
+      attr_accessor exporters: ::Array[Types::ExporterConfiguration]
       SENSITIVE: []
     end
 

@@ -126,6 +126,7 @@ module Aws::NetworkFirewall
       attr_accessor endpoint_id: ::String
       attr_accessor status: ("CREATING" | "DELETING" | "FAILED" | "ERROR" | "SCALING" | "READY")
       attr_accessor status_message: ::String
+      attr_accessor dns_name: ::String
       SENSITIVE: []
     end
 
@@ -190,7 +191,7 @@ module Aws::NetworkFirewall
       attr_accessor description: ::String
       attr_accessor type: ("ECS" | "EKS")
       attr_accessor container_monitoring_configurations: ::Array[Types::ContainerMonitoringConfiguration]
-      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING")
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "UPDATING")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor update_token: ::String
       SENSITIVE: []
@@ -227,6 +228,10 @@ module Aws::NetworkFirewall
       attr_accessor transit_gateway_id: ::String
       attr_accessor availability_zone_mappings: ::Array[Types::AvailabilityZoneMapping]
       attr_accessor availability_zone_change_protection: bool
+      attr_accessor nat_gateway_mappings: ::Array[Types::NatGatewayMapping]
+      attr_accessor proxy_settings: Types::ProxySettings
+      attr_accessor no_source_preservation: bool
+      attr_accessor vpc_endpoint: Types::VpcEndpoint
       SENSITIVE: []
     end
 
@@ -379,7 +384,7 @@ module Aws::NetworkFirewall
     class DeleteContainerAssociationResponse
       attr_accessor container_association_name: ::String
       attr_accessor container_association_arn: ::String
-      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING")
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "UPDATING")
       SENSITIVE: []
     end
 
@@ -521,7 +526,7 @@ module Aws::NetworkFirewall
       attr_accessor description: ::String
       attr_accessor type: ("ECS" | "EKS")
       attr_accessor container_monitoring_configurations: ::Array[Types::ContainerMonitoringConfiguration]
-      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING")
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "UPDATING")
       attr_accessor resolved_cidr_count: ::Integer
       attr_accessor last_updated_time: ::Time
       attr_accessor tags: ::Array[Types::Tag]
@@ -837,6 +842,10 @@ module Aws::NetworkFirewall
       attr_accessor transit_gateway_owner_account_id: ::String
       attr_accessor availability_zone_mappings: ::Array[Types::AvailabilityZoneMapping]
       attr_accessor availability_zone_change_protection: bool
+      attr_accessor nat_gateway_mappings: ::Array[Types::NatGatewayMapping]
+      attr_accessor proxy_settings: Types::ProxySettings
+      attr_accessor no_source_preservation: bool
+      attr_accessor vpc_endpoint: Types::VpcEndpoint
       SENSITIVE: []
     end
 
@@ -1239,6 +1248,19 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class NatGatewayAttachment
+      attr_accessor nat_gateway_id: ::String
+      attr_accessor status: ("CREATING" | "READY" | "UPDATING" | "FAILED" | "DELETING")
+      attr_accessor status_message: ::String
+      attr_accessor dns_name: ::String
+      SENSITIVE: []
+    end
+
+    class NatGatewayMapping
+      attr_accessor nat_gateway_id: ::String
+      SENSITIVE: []
+    end
+
     class PerObjectStatus
       attr_accessor sync_status: ("PENDING" | "IN_SYNC" | "CAPACITY_CONSTRAINED" | "NOT_SUBSCRIBED" | "DEPRECATED")
       attr_accessor update_token: ::String
@@ -1379,6 +1401,11 @@ module Aws::NetworkFirewall
       attr_accessor pre_dns: ::Array[Types::ProxyRule]
       attr_accessor pre_request: ::Array[Types::ProxyRule]
       attr_accessor post_response: ::Array[Types::ProxyRule]
+      SENSITIVE: []
+    end
+
+    class ProxySettings
+      attr_accessor listener_properties: ::Array[Types::ListenerProperty]
       SENSITIVE: []
     end
 
@@ -1640,6 +1667,7 @@ module Aws::NetworkFirewall
     class SyncState
       attr_accessor attachment: Types::Attachment
       attr_accessor config: ::Hash[::String, Types::PerObjectStatus]
+      attr_accessor nat_gateway_attachments: ::Array[Types::NatGatewayAttachment]
       SENSITIVE: []
     end
 
@@ -1774,7 +1802,7 @@ module Aws::NetworkFirewall
       attr_accessor description: ::String
       attr_accessor type: ("ECS" | "EKS")
       attr_accessor container_monitoring_configurations: ::Array[Types::ContainerMonitoringConfiguration]
-      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING")
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "UPDATING")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor update_token: ::String
       SENSITIVE: []
@@ -1975,6 +2003,22 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class UpdateProxySettingsRequest
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor update_token: ::String
+      attr_accessor proxy_settings: Types::ProxySettings
+      SENSITIVE: []
+    end
+
+    class UpdateProxySettingsResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor update_token: ::String
+      attr_accessor proxy_settings: Types::ProxySettings
+      SENSITIVE: []
+    end
+
     class UpdateRuleGroupRequest
       attr_accessor update_token: ::String
       attr_accessor rule_group_arn: ::String
@@ -2026,6 +2070,12 @@ module Aws::NetworkFirewall
     class UpdateTLSInspectionConfigurationResponse
       attr_accessor update_token: ::String
       attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse
+      SENSITIVE: []
+    end
+
+    class VpcEndpoint
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
       SENSITIVE: []
     end
 

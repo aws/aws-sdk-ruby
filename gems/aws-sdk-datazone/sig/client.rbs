@@ -497,7 +497,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
         def scope: () -> ("DOMAIN" | "PROJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_connection-instance_method
@@ -649,6 +649,11 @@ module Aws
                                    vpc_id: ::String,
                                    subnet_ids: Array[::String],
                                    security_group_id: ::String?
+                                 }?,
+                                 git_properties: {
+                                   code_connection_arn: ::String,
+                                   repository_id: ::String,
+                                   default_branch: ::String
                                  }?
                                },
                                ?enable_trusted_identity_propagation: bool,
@@ -1877,7 +1882,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
         def scope: () -> ("DOMAIN" | "PROJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_connection-instance_method
@@ -2715,7 +2720,7 @@ module Aws
                               ?name: ::String,
                               ?environment_identifier: ::String,
                               ?project_identifier: ::String,
-                              ?type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC"),
+                              ?type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT"),
                               ?scope: ("DOMAIN" | "PROJECT")
                             ) -> _ListConnectionsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionsResponseSuccess
@@ -3852,7 +3857,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
         def scope: () -> ("DOMAIN" | "PROJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_connection-instance_method
@@ -3963,6 +3968,10 @@ module Aws
                                    vpc_id: ::String?,
                                    subnet_ids: Array[::String]?,
                                    security_group_id: ::String?
+                                 }?,
+                                 git_properties: {
+                                   code_connection_arn: ::String?,
+                                   default_branch: ::String?
                                  }?
                                }
                              ) -> _UpdateConnectionResponseSuccess

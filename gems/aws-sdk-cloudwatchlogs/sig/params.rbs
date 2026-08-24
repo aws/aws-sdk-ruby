@@ -14,7 +14,14 @@ module Aws
         role_arn: ::String,
         owner_account_id: ::String?,
         kms_key_id: ::String?
-      }
+      }?,
+      lookup_table_configuration: {
+        table_name: ::String,
+        role_arn: ::String,
+        description: ::String?,
+        kms_key_id: ::String?,
+        tags: Hash[::String, ::String]?
+      }?
     }
 
       type date_time_converter = {

@@ -2349,6 +2349,74 @@ module Aws::Inspector2
     #           value: "NonEmptyString",
     #         },
     #       ],
+    #       cloud_provider: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       cloud_provider_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       cloud_provider_org_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       cloud_provider_region: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       cloud_vm_instance_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString",
+    #         },
+    #       ],
+    #       cloud_container_image_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       cloud_container_repository_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       cloud_container_registry_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       cloud_serverless_function_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       cloud_serverless_function_runtime: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       cloud_serverless_function_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString",
+    #         },
+    #       ],
     #     },
     #     report_format: "CYCLONEDX_1_4", # required, accepts CYCLONEDX_1_4, SPDX_2_3
     #     s3_destination: { # required
@@ -3615,6 +3683,41 @@ module Aws::Inspector2
     #   resp.filter_criteria.lambda_function_tags[0].comparison #=> String, one of "EQUALS"
     #   resp.filter_criteria.lambda_function_tags[0].key #=> String
     #   resp.filter_criteria.lambda_function_tags[0].value #=> String
+    #   resp.filter_criteria.cloud_provider #=> Array
+    #   resp.filter_criteria.cloud_provider[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.cloud_provider[0].value #=> String
+    #   resp.filter_criteria.cloud_provider_account_id #=> Array
+    #   resp.filter_criteria.cloud_provider_account_id[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.cloud_provider_account_id[0].value #=> String
+    #   resp.filter_criteria.cloud_provider_org_id #=> Array
+    #   resp.filter_criteria.cloud_provider_org_id[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.cloud_provider_org_id[0].value #=> String
+    #   resp.filter_criteria.cloud_provider_region #=> Array
+    #   resp.filter_criteria.cloud_provider_region[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.cloud_provider_region[0].value #=> String
+    #   resp.filter_criteria.cloud_vm_instance_tags #=> Array
+    #   resp.filter_criteria.cloud_vm_instance_tags[0].comparison #=> String, one of "EQUALS"
+    #   resp.filter_criteria.cloud_vm_instance_tags[0].key #=> String
+    #   resp.filter_criteria.cloud_vm_instance_tags[0].value #=> String
+    #   resp.filter_criteria.cloud_container_image_tags #=> Array
+    #   resp.filter_criteria.cloud_container_image_tags[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.cloud_container_image_tags[0].value #=> String
+    #   resp.filter_criteria.cloud_container_repository_name #=> Array
+    #   resp.filter_criteria.cloud_container_repository_name[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.cloud_container_repository_name[0].value #=> String
+    #   resp.filter_criteria.cloud_container_registry_name #=> Array
+    #   resp.filter_criteria.cloud_container_registry_name[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.cloud_container_registry_name[0].value #=> String
+    #   resp.filter_criteria.cloud_serverless_function_name #=> Array
+    #   resp.filter_criteria.cloud_serverless_function_name[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.cloud_serverless_function_name[0].value #=> String
+    #   resp.filter_criteria.cloud_serverless_function_runtime #=> Array
+    #   resp.filter_criteria.cloud_serverless_function_runtime[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.cloud_serverless_function_runtime[0].value #=> String
+    #   resp.filter_criteria.cloud_serverless_function_tags #=> Array
+    #   resp.filter_criteria.cloud_serverless_function_tags[0].comparison #=> String, one of "EQUALS"
+    #   resp.filter_criteria.cloud_serverless_function_tags[0].key #=> String
+    #   resp.filter_criteria.cloud_serverless_function_tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetSbomExport AWS API Documentation
     #
@@ -8446,7 +8549,7 @@ module Aws::Inspector2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

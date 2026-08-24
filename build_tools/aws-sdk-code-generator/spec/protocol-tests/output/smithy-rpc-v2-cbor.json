@@ -1560,6 +1560,127 @@
         ]
     },
     {
+        "description": "Test cases for RpcV2CborUnions operation",
+        "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
+            "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
+        },
+        "shapes": {
+            "RpcV2CborNestedUnion": {
+                "type": "structure",
+                "members": {
+                    "stringValue": {
+                        "shape": "String"
+                    }
+                },
+                "union": true
+            },
+            "RpcV2CborUnion": {
+                "type": "structure",
+                "members": {
+                    "stringValue": {
+                        "shape": "String"
+                    },
+                    "unionValue": {
+                        "shape": "RpcV2CborNestedUnion"
+                    }
+                },
+                "union": true
+            },
+            "RpcV2CborUnionInputOutput": {
+                "type": "structure",
+                "members": {
+                    "contents": {
+                        "shape": "RpcV2CborUnion"
+                    },
+                    "otherValue": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "RpcV2CborDeserializesUnionValue",
+                "description": "Deserializes a tagged union followed by another structure member",
+                "given": {
+                    "name": "RpcV2CborUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "RpcV2CborUnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "result": {
+                    "contents": {
+                        "stringValue": "foo"
+                    },
+                    "otherValue": "bar"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
+                        "Content-Type": "application/cbor"
+                    },
+                    "body": "omhjb250ZW50c6Frc3RyaW5nVmFsdWVjZm9vam90aGVyVmFsdWVjYmFy"
+                }
+            },
+            {
+                "id": "RpcV2CborDeserializesNestedUnionValue",
+                "description": "Deserializes a nested union followed by another structure member",
+                "given": {
+                    "name": "RpcV2CborUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "RpcV2CborUnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "result": {
+                    "contents": {
+                        "unionValue": {
+                            "stringValue": "foo"
+                        }
+                    },
+                    "otherValue": "bar"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
+                        "Content-Type": "application/cbor"
+                    },
+                    "body": "omhjb250ZW50c6FqdW5pb25WYWx1ZaFrc3RyaW5nVmFsdWVjZm9vam90aGVyVmFsdWVjYmFy"
+                }
+            }
+        ]
+    },
+    {
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
             "apiVersion": "2020-07-14",

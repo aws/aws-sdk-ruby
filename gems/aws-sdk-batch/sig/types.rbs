@@ -79,6 +79,12 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class CapacityReservationRequest
+      attr_accessor reservation_group_arn: ::String
+      attr_accessor reservation_preference: ::String
+      SENSITIVE: []
+    end
+
     class ClientException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -101,6 +107,7 @@ module Aws::Batch
       attr_accessor container_orchestration_type: ("ECS" | "EKS")
       attr_accessor uuid: ::String
       attr_accessor context: ::String
+      attr_accessor ecs_settings: Types::EcsSettings
       SENSITIVE: []
     end
 
@@ -111,7 +118,7 @@ module Aws::Batch
     end
 
     class ComputeResource
-      attr_accessor type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT")
+      attr_accessor type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT" | "ECS_MANAGED_INSTANCES")
       attr_accessor allocation_strategy: ("BEST_FIT" | "BEST_FIT_PROGRESSIVE" | "BEST_FIT_PROGRESSIVE_ORDERED" | "SPOT_CAPACITY_OPTIMIZED" | "SPOT_PRICE_CAPACITY_OPTIMIZED" | "SPOT_CAPACITY_OPTIMIZED_PRIORITIZED")
       attr_accessor minv_cpus: ::Integer
       attr_accessor maxv_cpus: ::Integer
@@ -129,6 +136,8 @@ module Aws::Batch
       attr_accessor launch_template: Types::LaunchTemplateSpecification
       attr_accessor ec2_configuration: ::Array[Types::Ec2Configuration]
       attr_accessor scaling_policy: Types::ComputeScalingPolicy
+      attr_accessor managed_instances_provider: Types::ManagedInstancesProvider
+      attr_accessor capacity_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -148,9 +157,11 @@ module Aws::Batch
       attr_accessor launch_template: Types::LaunchTemplateSpecification
       attr_accessor ec2_configuration: ::Array[Types::Ec2Configuration]
       attr_accessor update_to_latest_image_version: bool
-      attr_accessor type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT")
+      attr_accessor type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT" | "ECS_MANAGED_INSTANCES")
       attr_accessor image_id: ::String
       attr_accessor scaling_policy: Types::ComputeScalingPolicy
+      attr_accessor managed_instances_provider: Types::UpdateManagedInstancesProviderConfiguration
+      attr_accessor capacity_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -267,6 +278,7 @@ module Aws::Batch
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor eks_configuration: Types::EksConfiguration
       attr_accessor context: ::String
+      attr_accessor ecs_settings: Types::EcsSettings
       SENSITIVE: []
     end
 
@@ -297,7 +309,7 @@ module Aws::Batch
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
       attr_accessor service_environment_order: ::Array[Types::ServiceEnvironmentOrder]
-      attr_accessor job_queue_type: ("EKS" | "ECS" | "ECS_FARGATE" | "SAGEMAKER_TRAINING")
+      attr_accessor job_queue_type: ("EKS" | "ECS" | "ECS_FARGATE" | "SAGEMAKER_TRAINING" | "ECS_MANAGED_INSTANCES")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
       SENSITIVE: []
@@ -598,6 +610,11 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class EcsSettings
+      attr_accessor container_insights: ("ENABLED" | "ENHANCED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class EcsTaskDetails
       attr_accessor containers: ::Array[Types::TaskContainerDetails]
       attr_accessor container_instance_arn: ::String
@@ -612,6 +629,7 @@ module Aws::Batch
       attr_accessor runtime_platform: Types::RuntimePlatform
       attr_accessor volumes: ::Array[Types::Volume]
       attr_accessor enable_execute_command: bool
+      attr_accessor network_mode: ::String
       SENSITIVE: []
     end
 
@@ -627,6 +645,7 @@ module Aws::Batch
       attr_accessor runtime_platform: Types::RuntimePlatform
       attr_accessor volumes: ::Array[Types::Volume]
       attr_accessor enable_execute_command: bool
+      attr_accessor network_mode: ::String
       SENSITIVE: []
     end
 
@@ -909,6 +928,42 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class InfrastructureOptimization
+      attr_accessor scale_in_after: ::Integer
+      SENSITIVE: []
+    end
+
+    class InstanceLaunchTemplate
+      attr_accessor ec2_instance_profile_arn: ::String
+      attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration
+      attr_accessor instance_requirements: Types::InstanceRequirementsRequest
+      attr_accessor capacity_option_type: ::String
+      attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration
+      attr_accessor monitoring: ::String
+      attr_accessor fips_enabled: bool
+      attr_accessor capacity_reservations: Types::CapacityReservationRequest
+      attr_accessor instance_metadata_tags_propagation: bool
+      attr_accessor local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration
+      SENSITIVE: []
+    end
+
+    class InstanceLaunchTemplateUpdate
+      attr_accessor ec2_instance_profile_arn: ::String
+      attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration
+      attr_accessor instance_requirements: Types::InstanceRequirementsRequest
+      attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration
+      attr_accessor monitoring: ::String
+      attr_accessor capacity_reservations: Types::CapacityReservationRequest
+      attr_accessor instance_metadata_tags_propagation: bool
+      attr_accessor local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration
+      SENSITIVE: []
+    end
+
+    class InstanceRequirementsRequest
+      attr_accessor allowed_instance_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class JobCapacityUsageSummary
       attr_accessor capacity_unit: ::String
       attr_accessor quantity: ::Float
@@ -929,7 +984,7 @@ module Aws::Batch
       attr_accessor node_properties: Types::NodeProperties
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor propagate_tags: bool
-      attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE")]
+      attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE" | "MANAGED_INSTANCES")]
       attr_accessor ecs_properties: Types::EcsProperties
       attr_accessor eks_properties: Types::EksProperties
       attr_accessor container_orchestration_type: ("ECS" | "EKS")
@@ -967,7 +1022,7 @@ module Aws::Batch
       attr_accessor timeout: Types::JobTimeout
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor propagate_tags: bool
-      attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE")]
+      attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE" | "MANAGED_INSTANCES")]
       attr_accessor eks_properties: Types::EksPropertiesDetail
       attr_accessor eks_attempts: ::Array[Types::EksAttemptDetail]
       attr_accessor ecs_properties: Types::EcsPropertiesDetail
@@ -987,7 +1042,7 @@ module Aws::Batch
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
       attr_accessor service_environment_order: ::Array[Types::ServiceEnvironmentOrder]
-      attr_accessor job_queue_type: ("EKS" | "ECS" | "ECS_FARGATE" | "SAGEMAKER_TRAINING")
+      attr_accessor job_queue_type: ("EKS" | "ECS" | "ECS_FARGATE" | "SAGEMAKER_TRAINING" | "ECS_MANAGED_INSTANCES")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
       SENSITIVE: []
@@ -1186,6 +1241,30 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class ManagedInstancesLocalStorageConfiguration
+      attr_accessor use_local_storage: bool
+      SENSITIVE: []
+    end
+
+    class ManagedInstancesNetworkConfiguration
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ManagedInstancesProvider
+      attr_accessor propagate_tags: ::String
+      attr_accessor infrastructure_role_arn: ::String
+      attr_accessor instance_launch_template: Types::InstanceLaunchTemplate
+      attr_accessor infrastructure_optimization: Types::InfrastructureOptimization
+      SENSITIVE: []
+    end
+
+    class ManagedInstancesStorageConfiguration
+      attr_accessor storage_size_gi_b: ::Integer
+      SENSITIVE: []
+    end
+
     class MountPoint
       attr_accessor container_path: ::String
       attr_accessor read_only: bool
@@ -1327,7 +1406,7 @@ module Aws::Batch
       attr_accessor propagate_tags: bool
       attr_accessor timeout: Types::JobTimeout
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE")]
+      attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE" | "MANAGED_INSTANCES")]
       attr_accessor eks_properties: Types::EksProperties
       attr_accessor ecs_properties: Types::EcsProperties
       attr_accessor consumable_resource_properties: Types::ConsumableResourceProperties
@@ -1678,6 +1757,7 @@ module Aws::Batch
       attr_accessor service_role: ::String
       attr_accessor update_policy: Types::UpdatePolicy
       attr_accessor context: ::String
+      attr_accessor ecs_settings: Types::EcsSettings
       SENSITIVE: []
     end
 
@@ -1716,6 +1796,14 @@ module Aws::Batch
     class UpdateJobQueueResponse
       attr_accessor job_queue_name: ::String
       attr_accessor job_queue_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateManagedInstancesProviderConfiguration
+      attr_accessor propagate_tags: ::String
+      attr_accessor infrastructure_role_arn: ::String
+      attr_accessor instance_launch_template: Types::InstanceLaunchTemplateUpdate
+      attr_accessor infrastructure_optimization: Types::InfrastructureOptimization
       SENSITIVE: []
     end
 

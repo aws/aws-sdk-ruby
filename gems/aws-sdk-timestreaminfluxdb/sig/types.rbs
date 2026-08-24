@@ -27,6 +27,43 @@ module Aws::TimestreamInfluxDB
       SENSITIVE: []
     end
 
+    class CreateDbBackupInput
+      attr_accessor name: ::String
+      attr_accessor db_resource_id: ::String
+      attr_accessor retention_days: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDbBackupOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor expires_after: ::String
+      attr_accessor db_resource_id: ::String
+      attr_accessor type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "ON_DEMAND" | "CONTINUOUS")
+      attr_accessor engine_type: ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
+      attr_accessor kms_key_id: ::String
+      attr_accessor cluster_configuration: Types::ClusterConfiguration
+      attr_accessor db_parameter_group_id: ::String
+      attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
+      attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor port: ::Integer
+      attr_accessor network_type: ("IPV4" | "DUAL")
+      attr_accessor influx_auth_parameters_secret_arn: ::String
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      SENSITIVE: []
+    end
+
     class CreateDbClusterInput
       attr_accessor name: ::String
       attr_accessor username: ::String
@@ -46,13 +83,15 @@ module Aws::TimestreamInfluxDB
       attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfiguration]
+      attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:username, :password]
     end
 
     class CreateDbClusterOutput
       attr_accessor db_cluster_id: ::String
-      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
       SENSITIVE: []
     end
 
@@ -75,6 +114,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfiguration]
+      attr_accessor kms_key_id: ::String
       SENSITIVE: [:username, :password]
     end
 
@@ -82,7 +123,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -104,6 +145,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       attr_accessor last_maintenance_time: ::Time
       attr_accessor next_maintenance_time: ::Time
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfigurationOutput]
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -124,11 +167,43 @@ module Aws::TimestreamInfluxDB
       SENSITIVE: []
     end
 
+    class DbBackupConfiguration
+      attr_accessor type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "CONTINUOUS")
+      attr_accessor retention_days: ::Integer
+      attr_accessor enabled: bool
+      attr_accessor custom_schedule: ::String
+      SENSITIVE: []
+    end
+
+    class DbBackupConfigurationOutput
+      attr_accessor type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "CONTINUOUS")
+      attr_accessor retention_days: ::Integer
+      attr_accessor enabled: bool
+      attr_accessor custom_schedule: ::String
+      attr_accessor next_automated_backup_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DbBackupSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor expires_after: ::String
+      attr_accessor db_resource_id: ::String
+      attr_accessor type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "ON_DEMAND" | "CONTINUOUS")
+      attr_accessor engine_type: ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
     class DbClusterSummary
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor reader_endpoint: ::String
       attr_accessor port: ::Integer
@@ -145,7 +220,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -162,7 +237,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -181,18 +256,54 @@ module Aws::TimestreamInfluxDB
       SENSITIVE: []
     end
 
+    class DeleteDbBackupInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDbBackupOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor expires_after: ::String
+      attr_accessor db_resource_id: ::String
+      attr_accessor type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "ON_DEMAND" | "CONTINUOUS")
+      attr_accessor engine_type: ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
+      attr_accessor kms_key_id: ::String
+      attr_accessor cluster_configuration: Types::ClusterConfiguration
+      attr_accessor db_parameter_group_id: ::String
+      attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
+      attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor port: ::Integer
+      attr_accessor network_type: ("IPV4" | "DUAL")
+      attr_accessor influx_auth_parameters_secret_arn: ::String
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      SENSITIVE: []
+    end
+
     class DeleteDbClusterInput
       attr_accessor db_cluster_id: ::String
+      attr_accessor retain_automated_backups: bool
       SENSITIVE: []
     end
 
     class DeleteDbClusterOutput
-      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
       SENSITIVE: []
     end
 
     class DeleteDbInstanceInput
       attr_accessor identifier: ::String
+      attr_accessor retain_automated_backups: bool
       SENSITIVE: []
     end
 
@@ -200,7 +311,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -222,12 +333,48 @@ module Aws::TimestreamInfluxDB
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       attr_accessor last_maintenance_time: ::Time
       attr_accessor next_maintenance_time: ::Time
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfigurationOutput]
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
     class Duration
       attr_accessor duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days")
       attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDbBackupInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDbBackupOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor expires_after: ::String
+      attr_accessor db_resource_id: ::String
+      attr_accessor type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "CUSTOM_SCHEDULE" | "ON_DEMAND" | "CONTINUOUS")
+      attr_accessor engine_type: ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
+      attr_accessor kms_key_id: ::String
+      attr_accessor cluster_configuration: Types::ClusterConfiguration
+      attr_accessor db_parameter_group_id: ::String
+      attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
+      attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor port: ::Integer
+      attr_accessor network_type: ("IPV4" | "DUAL")
+      attr_accessor influx_auth_parameters_secret_arn: ::String
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       SENSITIVE: []
     end
 
@@ -240,7 +387,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor reader_endpoint: ::String
       attr_accessor port: ::Integer
@@ -261,6 +408,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor vpc_security_group_ids: ::Array[::String]
       attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
       attr_accessor cluster_configuration: Types::ClusterConfiguration
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfigurationOutput]
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -273,7 +422,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -295,6 +444,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       attr_accessor last_maintenance_time: ::Time
       attr_accessor next_maintenance_time: ::Time
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfigurationOutput]
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -458,6 +609,19 @@ module Aws::TimestreamInfluxDB
       SENSITIVE: []
     end
 
+    class ListDbBackupsInput
+      attr_accessor db_resource_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDbBackupsOutput
+      attr_accessor items: ::Array[Types::DbBackupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDbClustersInput
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -566,7 +730,7 @@ module Aws::TimestreamInfluxDB
     end
 
     class RebootDbClusterOutput
-      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
       SENSITIVE: []
     end
 
@@ -579,7 +743,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -601,6 +765,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       attr_accessor last_maintenance_time: ::Time
       attr_accessor next_maintenance_time: ::Time
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfigurationOutput]
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -608,6 +774,34 @@ module Aws::TimestreamInfluxDB
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreFromDbBackupInput
+      attr_accessor name: ::String
+      attr_accessor db_backup_id: ::String
+      attr_accessor restore_to_time: ::Time
+      attr_accessor restore_mode: ("NEW_RESOURCE" | "REPLACE_EXISTING")
+      attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor port: ::Integer
+      attr_accessor network_type: ("IPV4" | "DUAL")
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfiguration]
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreFromDbBackupOutput
+      attr_accessor restored_db_resource_id: ::String
+      attr_accessor restore_status: ("RESTORING")
+      attr_accessor resource_type: ("DB_INSTANCE" | "DB_CLUSTER")
+      attr_accessor engine_type: ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
       SENSITIVE: []
     end
 
@@ -648,11 +842,12 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
       attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfiguration]
       SENSITIVE: []
     end
 
     class UpdateDbClusterOutput
-      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE" | "RESTORING" | "RESTORE_FAILED")
       SENSITIVE: []
     end
 
@@ -666,6 +861,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
       attr_accessor allocated_storage: ::Integer
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfiguration]
       SENSITIVE: []
     end
 
@@ -673,7 +869,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED" | "RESTORING" | "RESTORE_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -695,6 +891,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       attr_accessor last_maintenance_time: ::Time
       attr_accessor next_maintenance_time: ::Time
+      attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfigurationOutput]
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 

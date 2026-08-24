@@ -26,6 +26,9 @@ module Aws::Odb
     AssociateIamRoleToResourceInput = Shapes::StructureShape.new(name: 'AssociateIamRoleToResourceInput')
     AssociateIamRoleToResourceInputResourceArnString = Shapes::StringShape.new(name: 'AssociateIamRoleToResourceInputResourceArnString')
     AssociateIamRoleToResourceOutput = Shapes::StructureShape.new(name: 'AssociateIamRoleToResourceOutput')
+    AssociateVirtualMachinesToExadbVmClusterInput = Shapes::StructureShape.new(name: 'AssociateVirtualMachinesToExadbVmClusterInput')
+    AssociateVirtualMachinesToExadbVmClusterInputDesiredNodeCountInteger = Shapes::IntegerShape.new(name: 'AssociateVirtualMachinesToExadbVmClusterInputDesiredNodeCountInteger')
+    AssociateVirtualMachinesToExadbVmClusterOutput = Shapes::StructureShape.new(name: 'AssociateVirtualMachinesToExadbVmClusterOutput')
     AutonomousDatabase = Shapes::StructureShape.new(name: 'AutonomousDatabase')
     AutonomousDatabaseApex = Shapes::StructureShape.new(name: 'AutonomousDatabaseApex')
     AutonomousDatabaseBackup = Shapes::StructureShape.new(name: 'AutonomousDatabaseBackup')
@@ -120,6 +123,29 @@ module Aws::Odb
     CreateCloudVmClusterInputSystemVersionString = Shapes::StringShape.new(name: 'CreateCloudVmClusterInputSystemVersionString')
     CreateCloudVmClusterInputTimeZoneString = Shapes::StringShape.new(name: 'CreateCloudVmClusterInputTimeZoneString')
     CreateCloudVmClusterOutput = Shapes::StructureShape.new(name: 'CreateCloudVmClusterOutput')
+    CreateExadbVmClusterInput = Shapes::StructureShape.new(name: 'CreateExadbVmClusterInput')
+    CreateExadbVmClusterInputClientTokenString = Shapes::StringShape.new(name: 'CreateExadbVmClusterInputClientTokenString')
+    CreateExadbVmClusterInputEnabledEcpuCountInteger = Shapes::IntegerShape.new(name: 'CreateExadbVmClusterInputEnabledEcpuCountInteger')
+    CreateExadbVmClusterInputGridImageIdString = Shapes::StringShape.new(name: 'CreateExadbVmClusterInputGridImageIdString')
+    CreateExadbVmClusterInputNodeCountInteger = Shapes::IntegerShape.new(name: 'CreateExadbVmClusterInputNodeCountInteger')
+    CreateExadbVmClusterInputScanListenerPortTcpInteger = Shapes::IntegerShape.new(name: 'CreateExadbVmClusterInputScanListenerPortTcpInteger')
+    CreateExadbVmClusterInputScanListenerPortTcpSslInteger = Shapes::IntegerShape.new(name: 'CreateExadbVmClusterInputScanListenerPortTcpSslInteger')
+    CreateExadbVmClusterInputShapeString = Shapes::StringShape.new(name: 'CreateExadbVmClusterInputShapeString')
+    CreateExadbVmClusterInputSystemVersionString = Shapes::StringShape.new(name: 'CreateExadbVmClusterInputSystemVersionString')
+    CreateExadbVmClusterInputTimeZoneString = Shapes::StringShape.new(name: 'CreateExadbVmClusterInputTimeZoneString')
+    CreateExadbVmClusterInputTotalEcpuCountInteger = Shapes::IntegerShape.new(name: 'CreateExadbVmClusterInputTotalEcpuCountInteger')
+    CreateExadbVmClusterInputVmFileSystemStorageTotalSizeInGBsInteger = Shapes::IntegerShape.new(name: 'CreateExadbVmClusterInputVmFileSystemStorageTotalSizeInGBsInteger')
+    CreateExadbVmClusterOutput = Shapes::StructureShape.new(name: 'CreateExadbVmClusterOutput')
+    CreateExascaleDbStorageVaultInput = Shapes::StructureShape.new(name: 'CreateExascaleDbStorageVaultInput')
+    CreateExascaleDbStorageVaultInputAdditionalFlashCacheInPercentInteger = Shapes::IntegerShape.new(name: 'CreateExascaleDbStorageVaultInputAdditionalFlashCacheInPercentInteger')
+    CreateExascaleDbStorageVaultInputAutoscaleLimitInGBsInteger = Shapes::IntegerShape.new(name: 'CreateExascaleDbStorageVaultInputAutoscaleLimitInGBsInteger')
+    CreateExascaleDbStorageVaultInputAvailabilityZoneIdString = Shapes::StringShape.new(name: 'CreateExascaleDbStorageVaultInputAvailabilityZoneIdString')
+    CreateExascaleDbStorageVaultInputAvailabilityZoneString = Shapes::StringShape.new(name: 'CreateExascaleDbStorageVaultInputAvailabilityZoneString')
+    CreateExascaleDbStorageVaultInputClientTokenString = Shapes::StringShape.new(name: 'CreateExascaleDbStorageVaultInputClientTokenString')
+    CreateExascaleDbStorageVaultInputDescriptionString = Shapes::StringShape.new(name: 'CreateExascaleDbStorageVaultInputDescriptionString')
+    CreateExascaleDbStorageVaultInputHighCapacityDatabaseStorageTotalSizeInGBsInteger = Shapes::IntegerShape.new(name: 'CreateExascaleDbStorageVaultInputHighCapacityDatabaseStorageTotalSizeInGBsInteger')
+    CreateExascaleDbStorageVaultInputTimeZoneString = Shapes::StringShape.new(name: 'CreateExascaleDbStorageVaultInputTimeZoneString')
+    CreateExascaleDbStorageVaultOutput = Shapes::StructureShape.new(name: 'CreateExascaleDbStorageVaultOutput')
     CreateOdbNetworkInput = Shapes::StructureShape.new(name: 'CreateOdbNetworkInput')
     CreateOdbNetworkInputAvailabilityZoneIdString = Shapes::StringShape.new(name: 'CreateOdbNetworkInputAvailabilityZoneIdString')
     CreateOdbNetworkInputAvailabilityZoneString = Shapes::StringShape.new(name: 'CreateOdbNetworkInputAvailabilityZoneString')
@@ -182,6 +208,10 @@ module Aws::Odb
     DeleteCloudExadataInfrastructureOutput = Shapes::StructureShape.new(name: 'DeleteCloudExadataInfrastructureOutput')
     DeleteCloudVmClusterInput = Shapes::StructureShape.new(name: 'DeleteCloudVmClusterInput')
     DeleteCloudVmClusterOutput = Shapes::StructureShape.new(name: 'DeleteCloudVmClusterOutput')
+    DeleteExadbVmClusterInput = Shapes::StructureShape.new(name: 'DeleteExadbVmClusterInput')
+    DeleteExadbVmClusterOutput = Shapes::StructureShape.new(name: 'DeleteExadbVmClusterOutput')
+    DeleteExascaleDbStorageVaultInput = Shapes::StructureShape.new(name: 'DeleteExascaleDbStorageVaultInput')
+    DeleteExascaleDbStorageVaultOutput = Shapes::StructureShape.new(name: 'DeleteExascaleDbStorageVaultOutput')
     DeleteOdbNetworkInput = Shapes::StructureShape.new(name: 'DeleteOdbNetworkInput')
     DeleteOdbNetworkOutput = Shapes::StructureShape.new(name: 'DeleteOdbNetworkOutput')
     DeleteOdbPeeringConnectionInput = Shapes::StructureShape.new(name: 'DeleteOdbPeeringConnectionInput')
@@ -189,6 +219,8 @@ module Aws::Odb
     DisassociateIamRoleFromResourceInput = Shapes::StructureShape.new(name: 'DisassociateIamRoleFromResourceInput')
     DisassociateIamRoleFromResourceInputResourceArnString = Shapes::StringShape.new(name: 'DisassociateIamRoleFromResourceInputResourceArnString')
     DisassociateIamRoleFromResourceOutput = Shapes::StructureShape.new(name: 'DisassociateIamRoleFromResourceOutput')
+    DisassociateVirtualMachinesFromExadbVmClusterInput = Shapes::StructureShape.new(name: 'DisassociateVirtualMachinesFromExadbVmClusterInput')
+    DisassociateVirtualMachinesFromExadbVmClusterOutput = Shapes::StructureShape.new(name: 'DisassociateVirtualMachinesFromExadbVmClusterOutput')
     DisasterRecoveryConfiguration = Shapes::StructureShape.new(name: 'DisasterRecoveryConfiguration')
     DisasterRecoveryType = Shapes::StringShape.new(name: 'DisasterRecoveryType')
     DiskRedundancy = Shapes::StringShape.new(name: 'DiskRedundancy')
@@ -199,6 +231,14 @@ module Aws::Odb
     EncryptionKeyProviderInput = Shapes::StringShape.new(name: 'EncryptionKeyProviderInput')
     EncryptionSummary = Shapes::StructureShape.new(name: 'EncryptionSummary')
     ExadataIormConfig = Shapes::StructureShape.new(name: 'ExadataIormConfig')
+    ExadbVmCluster = Shapes::StructureShape.new(name: 'ExadbVmCluster')
+    ExadbVmClusterList = Shapes::ListShape.new(name: 'ExadbVmClusterList')
+    ExadbVmClusterStorageDetails = Shapes::StructureShape.new(name: 'ExadbVmClusterStorageDetails')
+    ExadbVmClusterSummary = Shapes::StructureShape.new(name: 'ExadbVmClusterSummary')
+    ExascaleDbStorageDetails = Shapes::StructureShape.new(name: 'ExascaleDbStorageDetails')
+    ExascaleDbStorageVault = Shapes::StructureShape.new(name: 'ExascaleDbStorageVault')
+    ExascaleDbStorageVaultList = Shapes::ListShape.new(name: 'ExascaleDbStorageVaultList')
+    ExascaleDbStorageVaultSummary = Shapes::StructureShape.new(name: 'ExascaleDbStorageVaultSummary')
     ExternalIdType = Shapes::StringShape.new(name: 'ExternalIdType')
     FailoverAutonomousDatabaseInput = Shapes::StructureShape.new(name: 'FailoverAutonomousDatabaseInput')
     FailoverAutonomousDatabaseOutput = Shapes::StructureShape.new(name: 'FailoverAutonomousDatabaseOutput')
@@ -221,14 +261,21 @@ module Aws::Odb
     GetDbNodeOutput = Shapes::StructureShape.new(name: 'GetDbNodeOutput')
     GetDbServerInput = Shapes::StructureShape.new(name: 'GetDbServerInput')
     GetDbServerOutput = Shapes::StructureShape.new(name: 'GetDbServerOutput')
+    GetExadbVmClusterInput = Shapes::StructureShape.new(name: 'GetExadbVmClusterInput')
+    GetExadbVmClusterOutput = Shapes::StructureShape.new(name: 'GetExadbVmClusterOutput')
+    GetExascaleDbStorageVaultInput = Shapes::StructureShape.new(name: 'GetExascaleDbStorageVaultInput')
+    GetExascaleDbStorageVaultOutput = Shapes::StructureShape.new(name: 'GetExascaleDbStorageVaultOutput')
     GetOciOnboardingStatusInput = Shapes::StructureShape.new(name: 'GetOciOnboardingStatusInput')
     GetOciOnboardingStatusOutput = Shapes::StructureShape.new(name: 'GetOciOnboardingStatusOutput')
     GetOdbNetworkInput = Shapes::StructureShape.new(name: 'GetOdbNetworkInput')
     GetOdbNetworkOutput = Shapes::StructureShape.new(name: 'GetOdbNetworkOutput')
     GetOdbPeeringConnectionInput = Shapes::StructureShape.new(name: 'GetOdbPeeringConnectionInput')
     GetOdbPeeringConnectionOutput = Shapes::StructureShape.new(name: 'GetOdbPeeringConnectionOutput')
+    GiMinorVersionList = Shapes::ListShape.new(name: 'GiMinorVersionList')
+    GiMinorVersionSummary = Shapes::StructureShape.new(name: 'GiMinorVersionSummary')
     GiVersionList = Shapes::ListShape.new(name: 'GiVersionList')
     GiVersionSummary = Shapes::StructureShape.new(name: 'GiVersionSummary')
+    GridImageType = Shapes::StringShape.new(name: 'GridImageType')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
     HoursOfDay = Shapes::ListShape.new(name: 'HoursOfDay')
     IamRole = Shapes::StructureShape.new(name: 'IamRole')
@@ -296,7 +343,24 @@ module Aws::Odb
     ListDbSystemShapesInputAvailabilityZoneString = Shapes::StringShape.new(name: 'ListDbSystemShapesInputAvailabilityZoneString')
     ListDbSystemShapesInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDbSystemShapesInputMaxResultsInteger')
     ListDbSystemShapesInputNextTokenString = Shapes::StringShape.new(name: 'ListDbSystemShapesInputNextTokenString')
+    ListDbSystemShapesInputShapeFamilyString = Shapes::StringShape.new(name: 'ListDbSystemShapesInputShapeFamilyString')
     ListDbSystemShapesOutput = Shapes::StructureShape.new(name: 'ListDbSystemShapesOutput')
+    ListExadbVmClustersInput = Shapes::StructureShape.new(name: 'ListExadbVmClustersInput')
+    ListExadbVmClustersInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListExadbVmClustersInputMaxResultsInteger')
+    ListExadbVmClustersInputNextTokenString = Shapes::StringShape.new(name: 'ListExadbVmClustersInputNextTokenString')
+    ListExadbVmClustersOutput = Shapes::StructureShape.new(name: 'ListExadbVmClustersOutput')
+    ListExascaleDbStorageVaultsInput = Shapes::StructureShape.new(name: 'ListExascaleDbStorageVaultsInput')
+    ListExascaleDbStorageVaultsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListExascaleDbStorageVaultsInputMaxResultsInteger')
+    ListExascaleDbStorageVaultsInputNextTokenString = Shapes::StringShape.new(name: 'ListExascaleDbStorageVaultsInputNextTokenString')
+    ListExascaleDbStorageVaultsOutput = Shapes::StructureShape.new(name: 'ListExascaleDbStorageVaultsOutput')
+    ListGiMinorVersionsInput = Shapes::StructureShape.new(name: 'ListGiMinorVersionsInput')
+    ListGiMinorVersionsInputAvailabilityZoneIdString = Shapes::StringShape.new(name: 'ListGiMinorVersionsInputAvailabilityZoneIdString')
+    ListGiMinorVersionsInputAvailabilityZoneString = Shapes::StringShape.new(name: 'ListGiMinorVersionsInputAvailabilityZoneString')
+    ListGiMinorVersionsInputGiVersionString = Shapes::StringShape.new(name: 'ListGiMinorVersionsInputGiVersionString')
+    ListGiMinorVersionsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListGiMinorVersionsInputMaxResultsInteger')
+    ListGiMinorVersionsInputNextTokenString = Shapes::StringShape.new(name: 'ListGiMinorVersionsInputNextTokenString')
+    ListGiMinorVersionsInputShapeFamilyString = Shapes::StringShape.new(name: 'ListGiMinorVersionsInputShapeFamilyString')
+    ListGiMinorVersionsOutput = Shapes::StructureShape.new(name: 'ListGiMinorVersionsOutput')
     ListGiVersionsInput = Shapes::StructureShape.new(name: 'ListGiVersionsInput')
     ListGiVersionsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListGiVersionsInputMaxResultsInteger')
     ListGiVersionsInputNextTokenString = Shapes::StringShape.new(name: 'ListGiVersionsInputNextTokenString')
@@ -386,6 +450,7 @@ module Aws::Odb
     RepeatCadence = Shapes::StringShape.new(name: 'RepeatCadence')
     RequestTagMap = Shapes::MapShape.new(name: 'RequestTagMap')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+    ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceDisplayName = Shapes::StringShape.new(name: 'ResourceDisplayName')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceIdList = Shapes::ListShape.new(name: 'ResourceIdList')
@@ -406,6 +471,8 @@ module Aws::Odb
     SensitiveStringList = Shapes::ListShape.new(name: 'SensitiveStringList')
     ServiceNetworkEndpoint = Shapes::StructureShape.new(name: 'ServiceNetworkEndpoint')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ShapeAttribute = Shapes::StringShape.new(name: 'ShapeAttribute')
+    ShapeAttributeList = Shapes::ListShape.new(name: 'ShapeAttributeList')
     ShapeType = Shapes::StringShape.new(name: 'ShapeType')
     ShrinkAutonomousDatabaseInput = Shapes::StructureShape.new(name: 'ShrinkAutonomousDatabaseInput')
     ShrinkAutonomousDatabaseOutput = Shapes::StructureShape.new(name: 'ShrinkAutonomousDatabaseOutput')
@@ -440,6 +507,7 @@ module Aws::Odb
     TransportableTablespace = Shapes::StructureShape.new(name: 'TransportableTablespace')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAction = Shapes::StringShape.new(name: 'UpdateAction')
     UpdateAutonomousDatabaseBackupInput = Shapes::StructureShape.new(name: 'UpdateAutonomousDatabaseBackupInput')
     UpdateAutonomousDatabaseBackupInputRetentionPeriodInDaysInteger = Shapes::IntegerShape.new(name: 'UpdateAutonomousDatabaseBackupInputRetentionPeriodInDaysInteger')
     UpdateAutonomousDatabaseBackupOutput = Shapes::StructureShape.new(name: 'UpdateAutonomousDatabaseBackupOutput')
@@ -459,6 +527,19 @@ module Aws::Odb
     UpdateAutonomousDatabaseOutput = Shapes::StructureShape.new(name: 'UpdateAutonomousDatabaseOutput')
     UpdateCloudExadataInfrastructureInput = Shapes::StructureShape.new(name: 'UpdateCloudExadataInfrastructureInput')
     UpdateCloudExadataInfrastructureOutput = Shapes::StructureShape.new(name: 'UpdateCloudExadataInfrastructureOutput')
+    UpdateExadbVmClusterInput = Shapes::StructureShape.new(name: 'UpdateExadbVmClusterInput')
+    UpdateExadbVmClusterInputEnabledEcpuCountInteger = Shapes::IntegerShape.new(name: 'UpdateExadbVmClusterInputEnabledEcpuCountInteger')
+    UpdateExadbVmClusterInputGridImageIdString = Shapes::StringShape.new(name: 'UpdateExadbVmClusterInputGridImageIdString')
+    UpdateExadbVmClusterInputSystemVersionString = Shapes::StringShape.new(name: 'UpdateExadbVmClusterInputSystemVersionString')
+    UpdateExadbVmClusterInputTotalEcpuCountInteger = Shapes::IntegerShape.new(name: 'UpdateExadbVmClusterInputTotalEcpuCountInteger')
+    UpdateExadbVmClusterInputVmFileSystemStorageTotalSizeInGBsInteger = Shapes::IntegerShape.new(name: 'UpdateExadbVmClusterInputVmFileSystemStorageTotalSizeInGBsInteger')
+    UpdateExadbVmClusterOutput = Shapes::StructureShape.new(name: 'UpdateExadbVmClusterOutput')
+    UpdateExascaleDbStorageVaultInput = Shapes::StructureShape.new(name: 'UpdateExascaleDbStorageVaultInput')
+    UpdateExascaleDbStorageVaultInputAdditionalFlashCacheInPercentInteger = Shapes::IntegerShape.new(name: 'UpdateExascaleDbStorageVaultInputAdditionalFlashCacheInPercentInteger')
+    UpdateExascaleDbStorageVaultInputAutoscaleLimitInGBsInteger = Shapes::IntegerShape.new(name: 'UpdateExascaleDbStorageVaultInputAutoscaleLimitInGBsInteger')
+    UpdateExascaleDbStorageVaultInputDescriptionString = Shapes::StringShape.new(name: 'UpdateExascaleDbStorageVaultInputDescriptionString')
+    UpdateExascaleDbStorageVaultInputHighCapacityDatabaseStorageTotalSizeInGBsInteger = Shapes::IntegerShape.new(name: 'UpdateExascaleDbStorageVaultInputHighCapacityDatabaseStorageTotalSizeInGBsInteger')
+    UpdateExascaleDbStorageVaultOutput = Shapes::StructureShape.new(name: 'UpdateExascaleDbStorageVaultOutput')
     UpdateOdbNetworkInput = Shapes::StructureShape.new(name: 'UpdateOdbNetworkInput')
     UpdateOdbNetworkOutput = Shapes::StructureShape.new(name: 'UpdateOdbNetworkOutput')
     UpdateOdbPeeringConnectionInput = Shapes::StructureShape.new(name: 'UpdateOdbPeeringConnectionInput')
@@ -507,6 +588,16 @@ module Aws::Odb
     AssociateIamRoleToResourceInput.struct_class = Types::AssociateIamRoleToResourceInput
 
     AssociateIamRoleToResourceOutput.struct_class = Types::AssociateIamRoleToResourceOutput
+
+    AssociateVirtualMachinesToExadbVmClusterInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exadbVmClusterId"))
+    AssociateVirtualMachinesToExadbVmClusterInput.add_member(:desired_node_count, Shapes::ShapeRef.new(shape: AssociateVirtualMachinesToExadbVmClusterInputDesiredNodeCountInteger, required: true, location_name: "desiredNodeCount"))
+    AssociateVirtualMachinesToExadbVmClusterInput.struct_class = Types::AssociateVirtualMachinesToExadbVmClusterInput
+
+    AssociateVirtualMachinesToExadbVmClusterOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    AssociateVirtualMachinesToExadbVmClusterOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    AssociateVirtualMachinesToExadbVmClusterOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    AssociateVirtualMachinesToExadbVmClusterOutput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "exadbVmClusterId"))
+    AssociateVirtualMachinesToExadbVmClusterOutput.struct_class = Types::AssociateVirtualMachinesToExadbVmClusterOutput
 
     AutonomousDatabase.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "autonomousDatabaseId"))
     AutonomousDatabase.add_member(:autonomous_database_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "autonomousDatabaseArn"))
@@ -1293,6 +1384,54 @@ module Aws::Odb
     CreateCloudVmClusterOutput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudVmClusterId"))
     CreateCloudVmClusterOutput.struct_class = Types::CreateCloudVmClusterOutput
 
+    CreateExadbVmClusterInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, required: true, location_name: "displayName"))
+    CreateExadbVmClusterInput.add_member(:enabled_ecpu_count, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputEnabledEcpuCountInteger, required: true, location_name: "enabledEcpuCount"))
+    CreateExadbVmClusterInput.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exascaleDbStorageVaultId"))
+    CreateExadbVmClusterInput.add_member(:grid_image_id, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputGridImageIdString, required: true, location_name: "gridImageId"))
+    CreateExadbVmClusterInput.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, required: true, location_name: "hostname"))
+    CreateExadbVmClusterInput.add_member(:node_count, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputNodeCountInteger, required: true, location_name: "nodeCount"))
+    CreateExadbVmClusterInput.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "odbNetworkId"))
+    CreateExadbVmClusterInput.add_member(:shape, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputShapeString, required: true, location_name: "shape"))
+    CreateExadbVmClusterInput.add_member(:ssh_public_keys, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "sshPublicKeys"))
+    CreateExadbVmClusterInput.add_member(:total_ecpu_count, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputTotalEcpuCountInteger, required: true, location_name: "totalEcpuCount"))
+    CreateExadbVmClusterInput.add_member(:vm_file_system_storage_total_size_in_g_bs, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputVmFileSystemStorageTotalSizeInGBsInteger, required: true, location_name: "vmFileSystemStorageTotalSizeInGBs"))
+    CreateExadbVmClusterInput.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, location_name: "clusterName"))
+    CreateExadbVmClusterInput.add_member(:data_collection_options, Shapes::ShapeRef.new(shape: DataCollectionOptions, location_name: "dataCollectionOptions"))
+    CreateExadbVmClusterInput.add_member(:license_model, Shapes::ShapeRef.new(shape: LicenseModel, location_name: "licenseModel"))
+    CreateExadbVmClusterInput.add_member(:scan_listener_port_tcp, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputScanListenerPortTcpInteger, location_name: "scanListenerPortTcp"))
+    CreateExadbVmClusterInput.add_member(:scan_listener_port_tcp_ssl, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputScanListenerPortTcpSslInteger, location_name: "scanListenerPortTcpSsl"))
+    CreateExadbVmClusterInput.add_member(:shape_attribute, Shapes::ShapeRef.new(shape: ShapeAttribute, location_name: "shapeAttribute"))
+    CreateExadbVmClusterInput.add_member(:system_version, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputSystemVersionString, location_name: "systemVersion"))
+    CreateExadbVmClusterInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
+    CreateExadbVmClusterInput.add_member(:time_zone, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputTimeZoneString, location_name: "timeZone"))
+    CreateExadbVmClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateExadbVmClusterInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateExadbVmClusterInput.struct_class = Types::CreateExadbVmClusterInput
+
+    CreateExadbVmClusterOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    CreateExadbVmClusterOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    CreateExadbVmClusterOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    CreateExadbVmClusterOutput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "exadbVmClusterId"))
+    CreateExadbVmClusterOutput.struct_class = Types::CreateExadbVmClusterOutput
+
+    CreateExascaleDbStorageVaultInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, required: true, location_name: "displayName"))
+    CreateExascaleDbStorageVaultInput.add_member(:high_capacity_database_storage_total_size_in_g_bs, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputHighCapacityDatabaseStorageTotalSizeInGBsInteger, required: true, location_name: "highCapacityDatabaseStorageTotalSizeInGBs"))
+    CreateExascaleDbStorageVaultInput.add_member(:additional_flash_cache_in_percent, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputAdditionalFlashCacheInPercentInteger, location_name: "additionalFlashCacheInPercent"))
+    CreateExascaleDbStorageVaultInput.add_member(:autoscale_limit_in_g_bs, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputAutoscaleLimitInGBsInteger, location_name: "autoscaleLimitInGBs"))
+    CreateExascaleDbStorageVaultInput.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputAvailabilityZoneIdString, location_name: "availabilityZoneId"))
+    CreateExascaleDbStorageVaultInput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputAvailabilityZoneString, location_name: "availabilityZone"))
+    CreateExascaleDbStorageVaultInput.add_member(:description, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputDescriptionString, location_name: "description"))
+    CreateExascaleDbStorageVaultInput.add_member(:is_autoscale_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAutoscaleEnabled"))
+    CreateExascaleDbStorageVaultInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
+    CreateExascaleDbStorageVaultInput.add_member(:time_zone, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputTimeZoneString, location_name: "timeZone"))
+    CreateExascaleDbStorageVaultInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateExascaleDbStorageVaultInput.struct_class = Types::CreateExascaleDbStorageVaultInput
+
+    CreateExascaleDbStorageVaultOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    CreateExascaleDbStorageVaultOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    CreateExascaleDbStorageVaultOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    CreateExascaleDbStorageVaultOutput.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "exascaleDbStorageVaultId"))
+    CreateExascaleDbStorageVaultOutput.struct_class = Types::CreateExascaleDbStorageVaultOutput
+
     CreateOdbNetworkInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, required: true, location_name: "displayName"))
     CreateOdbNetworkInput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: CreateOdbNetworkInputAvailabilityZoneString, location_name: "availabilityZone"))
     CreateOdbNetworkInput.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: CreateOdbNetworkInputAvailabilityZoneIdString, location_name: "availabilityZoneId"))
@@ -1554,6 +1693,7 @@ module Aws::Odb
     DbSystemShapeSummary.add_member(:runtime_minimum_core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runtimeMinimumCoreCount"))
     DbSystemShapeSummary.add_member(:shape_family, Shapes::ShapeRef.new(shape: String, location_name: "shapeFamily"))
     DbSystemShapeSummary.add_member(:shape_type, Shapes::ShapeRef.new(shape: ShapeType, location_name: "shapeType"))
+    DbSystemShapeSummary.add_member(:shape_attributes, Shapes::ShapeRef.new(shape: ShapeAttributeList, location_name: "shapeAttributes"))
     DbSystemShapeSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     DbSystemShapeSummary.add_member(:compute_model, Shapes::ShapeRef.new(shape: ComputeModel, location_name: "computeModel"))
     DbSystemShapeSummary.add_member(:are_server_types_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "areServerTypesSupported"))
@@ -1584,6 +1724,16 @@ module Aws::Odb
 
     DeleteCloudVmClusterOutput.struct_class = Types::DeleteCloudVmClusterOutput
 
+    DeleteExadbVmClusterInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exadbVmClusterId"))
+    DeleteExadbVmClusterInput.struct_class = Types::DeleteExadbVmClusterInput
+
+    DeleteExadbVmClusterOutput.struct_class = Types::DeleteExadbVmClusterOutput
+
+    DeleteExascaleDbStorageVaultInput.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exascaleDbStorageVaultId"))
+    DeleteExascaleDbStorageVaultInput.struct_class = Types::DeleteExascaleDbStorageVaultInput
+
+    DeleteExascaleDbStorageVaultOutput.struct_class = Types::DeleteExascaleDbStorageVaultOutput
+
     DeleteOdbNetworkInput.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "odbNetworkId"))
     DeleteOdbNetworkInput.add_member(:delete_associated_resources, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "deleteAssociatedResources"))
     DeleteOdbNetworkInput.struct_class = Types::DeleteOdbNetworkInput
@@ -1601,6 +1751,16 @@ module Aws::Odb
     DisassociateIamRoleFromResourceInput.struct_class = Types::DisassociateIamRoleFromResourceInput
 
     DisassociateIamRoleFromResourceOutput.struct_class = Types::DisassociateIamRoleFromResourceOutput
+
+    DisassociateVirtualMachinesFromExadbVmClusterInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exadbVmClusterId"))
+    DisassociateVirtualMachinesFromExadbVmClusterInput.add_member(:db_node_ids, Shapes::ShapeRef.new(shape: ResourceIdList, required: true, location_name: "dbNodeIds"))
+    DisassociateVirtualMachinesFromExadbVmClusterInput.struct_class = Types::DisassociateVirtualMachinesFromExadbVmClusterInput
+
+    DisassociateVirtualMachinesFromExadbVmClusterOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    DisassociateVirtualMachinesFromExadbVmClusterOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    DisassociateVirtualMachinesFromExadbVmClusterOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    DisassociateVirtualMachinesFromExadbVmClusterOutput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "exadbVmClusterId"))
+    DisassociateVirtualMachinesFromExadbVmClusterOutput.struct_class = Types::DisassociateVirtualMachinesFromExadbVmClusterOutput
 
     DisasterRecoveryConfiguration.add_member(:disaster_recovery_type, Shapes::ShapeRef.new(shape: DisasterRecoveryType, location_name: "disasterRecoveryType"))
     DisasterRecoveryConfiguration.add_member(:is_replicate_automatic_backups, Shapes::ShapeRef.new(shape: Boolean, location_name: "isReplicateAutomaticBackups"))
@@ -1633,6 +1793,157 @@ module Aws::Odb
     ExadataIormConfig.add_member(:lifecycle_state, Shapes::ShapeRef.new(shape: IormLifecycleState, location_name: "lifecycleState"))
     ExadataIormConfig.add_member(:objective, Shapes::ShapeRef.new(shape: Objective, location_name: "objective"))
     ExadataIormConfig.struct_class = Types::ExadataIormConfig
+
+    ExadbVmCluster.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exadbVmClusterId"))
+    ExadbVmCluster.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, location_name: "clusterName"))
+    ExadbVmCluster.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    ExadbVmCluster.add_member(:data_collection_options, Shapes::ShapeRef.new(shape: DataCollectionOptions, location_name: "dataCollectionOptions"))
+    ExadbVmCluster.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    ExadbVmCluster.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
+    ExadbVmCluster.add_member(:enabled_ecpu_count, Shapes::ShapeRef.new(shape: Integer, location_name: "enabledEcpuCount"))
+    ExadbVmCluster.add_member(:exadb_vm_cluster_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "exadbVmClusterArn"))
+    ExadbVmCluster.add_member(:exascale_db_storage_vault_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "exascaleDbStorageVaultArn"))
+    ExadbVmCluster.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "exascaleDbStorageVaultId"))
+    ExadbVmCluster.add_member(:gi_version, Shapes::ShapeRef.new(shape: String, location_name: "giVersion"))
+    ExadbVmCluster.add_member(:grid_image_id, Shapes::ShapeRef.new(shape: String, location_name: "gridImageId"))
+    ExadbVmCluster.add_member(:grid_image_type, Shapes::ShapeRef.new(shape: GridImageType, location_name: "gridImageType"))
+    ExadbVmCluster.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "hostname"))
+    ExadbVmCluster.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleList, location_name: "iamRoles"))
+    ExadbVmCluster.add_member(:iorm_config_cache, Shapes::ShapeRef.new(shape: ExadataIormConfig, location_name: "iormConfigCache"))
+    ExadbVmCluster.add_member(:last_update_history_entry_id, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdateHistoryEntryId"))
+    ExadbVmCluster.add_member(:license_model, Shapes::ShapeRef.new(shape: LicenseModel, location_name: "licenseModel"))
+    ExadbVmCluster.add_member(:listener_port, Shapes::ShapeRef.new(shape: Integer, location_name: "listenerPort"))
+    ExadbVmCluster.add_member(:memory_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "memorySizeInGBs"))
+    ExadbVmCluster.add_member(:node_count, Shapes::ShapeRef.new(shape: Integer, location_name: "nodeCount"))
+    ExadbVmCluster.add_member(:ocid, Shapes::ShapeRef.new(shape: String, location_name: "ocid"))
+    ExadbVmCluster.add_member(:oci_resource_anchor_name, Shapes::ShapeRef.new(shape: String, location_name: "ociResourceAnchorName"))
+    ExadbVmCluster.add_member(:oci_url, Shapes::ShapeRef.new(shape: String, location_name: "ociUrl"))
+    ExadbVmCluster.add_member(:odb_network_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "odbNetworkArn"))
+    ExadbVmCluster.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "odbNetworkId"))
+    ExadbVmCluster.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
+    ExadbVmCluster.add_member(:scan_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "scanDnsName"))
+    ExadbVmCluster.add_member(:scan_dns_record_id, Shapes::ShapeRef.new(shape: String, location_name: "scanDnsRecordId"))
+    ExadbVmCluster.add_member(:scan_ip_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "scanIpIds"))
+    ExadbVmCluster.add_member(:scan_listener_port_tcp, Shapes::ShapeRef.new(shape: Integer, location_name: "scanListenerPortTcp"))
+    ExadbVmCluster.add_member(:scan_listener_port_tcp_ssl, Shapes::ShapeRef.new(shape: Integer, location_name: "scanListenerPortTcpSsl"))
+    ExadbVmCluster.add_member(:shape, Shapes::ShapeRef.new(shape: String, location_name: "shape"))
+    ExadbVmCluster.add_member(:shape_attribute, Shapes::ShapeRef.new(shape: ShapeAttribute, location_name: "shapeAttribute"))
+    ExadbVmCluster.add_member(:snapshot_file_system_storage, Shapes::ShapeRef.new(shape: ExadbVmClusterStorageDetails, location_name: "snapshotFileSystemStorage"))
+    ExadbVmCluster.add_member(:ssh_public_keys, Shapes::ShapeRef.new(shape: StringList, location_name: "sshPublicKeys"))
+    ExadbVmCluster.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    ExadbVmCluster.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    ExadbVmCluster.add_member(:system_version, Shapes::ShapeRef.new(shape: String, location_name: "systemVersion"))
+    ExadbVmCluster.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "timeZone"))
+    ExadbVmCluster.add_member(:total_ecpu_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalEcpuCount"))
+    ExadbVmCluster.add_member(:total_file_system_storage, Shapes::ShapeRef.new(shape: ExadbVmClusterStorageDetails, location_name: "totalFileSystemStorage"))
+    ExadbVmCluster.add_member(:vip_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "vipIds"))
+    ExadbVmCluster.add_member(:vm_file_system_storage, Shapes::ShapeRef.new(shape: ExadbVmClusterStorageDetails, location_name: "vmFileSystemStorage"))
+    ExadbVmCluster.struct_class = Types::ExadbVmCluster
+
+    ExadbVmClusterList.member = Shapes::ShapeRef.new(shape: ExadbVmClusterSummary)
+
+    ExadbVmClusterStorageDetails.add_member(:total_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "totalSizeInGBs"))
+    ExadbVmClusterStorageDetails.struct_class = Types::ExadbVmClusterStorageDetails
+
+    ExadbVmClusterSummary.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exadbVmClusterId"))
+    ExadbVmClusterSummary.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, location_name: "clusterName"))
+    ExadbVmClusterSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    ExadbVmClusterSummary.add_member(:data_collection_options, Shapes::ShapeRef.new(shape: DataCollectionOptions, location_name: "dataCollectionOptions"))
+    ExadbVmClusterSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    ExadbVmClusterSummary.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
+    ExadbVmClusterSummary.add_member(:enabled_ecpu_count, Shapes::ShapeRef.new(shape: Integer, location_name: "enabledEcpuCount"))
+    ExadbVmClusterSummary.add_member(:exadb_vm_cluster_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "exadbVmClusterArn"))
+    ExadbVmClusterSummary.add_member(:exascale_db_storage_vault_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "exascaleDbStorageVaultArn"))
+    ExadbVmClusterSummary.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "exascaleDbStorageVaultId"))
+    ExadbVmClusterSummary.add_member(:gi_version, Shapes::ShapeRef.new(shape: String, location_name: "giVersion"))
+    ExadbVmClusterSummary.add_member(:grid_image_id, Shapes::ShapeRef.new(shape: String, location_name: "gridImageId"))
+    ExadbVmClusterSummary.add_member(:grid_image_type, Shapes::ShapeRef.new(shape: GridImageType, location_name: "gridImageType"))
+    ExadbVmClusterSummary.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "hostname"))
+    ExadbVmClusterSummary.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleList, location_name: "iamRoles"))
+    ExadbVmClusterSummary.add_member(:iorm_config_cache, Shapes::ShapeRef.new(shape: ExadataIormConfig, location_name: "iormConfigCache"))
+    ExadbVmClusterSummary.add_member(:last_update_history_entry_id, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdateHistoryEntryId"))
+    ExadbVmClusterSummary.add_member(:license_model, Shapes::ShapeRef.new(shape: LicenseModel, location_name: "licenseModel"))
+    ExadbVmClusterSummary.add_member(:listener_port, Shapes::ShapeRef.new(shape: Integer, location_name: "listenerPort"))
+    ExadbVmClusterSummary.add_member(:memory_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "memorySizeInGBs"))
+    ExadbVmClusterSummary.add_member(:node_count, Shapes::ShapeRef.new(shape: Integer, location_name: "nodeCount"))
+    ExadbVmClusterSummary.add_member(:ocid, Shapes::ShapeRef.new(shape: String, location_name: "ocid"))
+    ExadbVmClusterSummary.add_member(:oci_resource_anchor_name, Shapes::ShapeRef.new(shape: String, location_name: "ociResourceAnchorName"))
+    ExadbVmClusterSummary.add_member(:oci_url, Shapes::ShapeRef.new(shape: String, location_name: "ociUrl"))
+    ExadbVmClusterSummary.add_member(:odb_network_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "odbNetworkArn"))
+    ExadbVmClusterSummary.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "odbNetworkId"))
+    ExadbVmClusterSummary.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
+    ExadbVmClusterSummary.add_member(:scan_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "scanDnsName"))
+    ExadbVmClusterSummary.add_member(:scan_dns_record_id, Shapes::ShapeRef.new(shape: String, location_name: "scanDnsRecordId"))
+    ExadbVmClusterSummary.add_member(:scan_ip_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "scanIpIds"))
+    ExadbVmClusterSummary.add_member(:scan_listener_port_tcp, Shapes::ShapeRef.new(shape: Integer, location_name: "scanListenerPortTcp"))
+    ExadbVmClusterSummary.add_member(:scan_listener_port_tcp_ssl, Shapes::ShapeRef.new(shape: Integer, location_name: "scanListenerPortTcpSsl"))
+    ExadbVmClusterSummary.add_member(:shape, Shapes::ShapeRef.new(shape: String, location_name: "shape"))
+    ExadbVmClusterSummary.add_member(:shape_attribute, Shapes::ShapeRef.new(shape: ShapeAttribute, location_name: "shapeAttribute"))
+    ExadbVmClusterSummary.add_member(:snapshot_file_system_storage, Shapes::ShapeRef.new(shape: ExadbVmClusterStorageDetails, location_name: "snapshotFileSystemStorage"))
+    ExadbVmClusterSummary.add_member(:ssh_public_keys, Shapes::ShapeRef.new(shape: StringList, location_name: "sshPublicKeys"))
+    ExadbVmClusterSummary.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    ExadbVmClusterSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    ExadbVmClusterSummary.add_member(:system_version, Shapes::ShapeRef.new(shape: String, location_name: "systemVersion"))
+    ExadbVmClusterSummary.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "timeZone"))
+    ExadbVmClusterSummary.add_member(:total_ecpu_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalEcpuCount"))
+    ExadbVmClusterSummary.add_member(:total_file_system_storage, Shapes::ShapeRef.new(shape: ExadbVmClusterStorageDetails, location_name: "totalFileSystemStorage"))
+    ExadbVmClusterSummary.add_member(:vip_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "vipIds"))
+    ExadbVmClusterSummary.add_member(:vm_file_system_storage, Shapes::ShapeRef.new(shape: ExadbVmClusterStorageDetails, location_name: "vmFileSystemStorage"))
+    ExadbVmClusterSummary.struct_class = Types::ExadbVmClusterSummary
+
+    ExascaleDbStorageDetails.add_member(:available_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "availableSizeInGBs"))
+    ExascaleDbStorageDetails.add_member(:total_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "totalSizeInGBs"))
+    ExascaleDbStorageDetails.struct_class = Types::ExascaleDbStorageDetails
+
+    ExascaleDbStorageVault.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exascaleDbStorageVaultId"))
+    ExascaleDbStorageVault.add_member(:additional_flash_cache_in_percent, Shapes::ShapeRef.new(shape: Integer, location_name: "additionalFlashCacheInPercent"))
+    ExascaleDbStorageVault.add_member(:attached_shape_attributes, Shapes::ShapeRef.new(shape: ShapeAttributeList, location_name: "attachedShapeAttributes"))
+    ExascaleDbStorageVault.add_member(:autoscale_limit_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "autoscaleLimitInGBs"))
+    ExascaleDbStorageVault.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    ExascaleDbStorageVault.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
+    ExascaleDbStorageVault.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    ExascaleDbStorageVault.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ExascaleDbStorageVault.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    ExascaleDbStorageVault.add_member(:vm_cluster_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "vmClusterArns"))
+    ExascaleDbStorageVault.add_member(:vm_cluster_count, Shapes::ShapeRef.new(shape: Integer, location_name: "vmClusterCount"))
+    ExascaleDbStorageVault.add_member(:vm_cluster_ids, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "vmClusterIds"))
+    ExascaleDbStorageVault.add_member(:exascale_db_storage_vault_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "exascaleDbStorageVaultArn"))
+    ExascaleDbStorageVault.add_member(:high_capacity_database_storage, Shapes::ShapeRef.new(shape: ExascaleDbStorageDetails, location_name: "highCapacityDatabaseStorage"))
+    ExascaleDbStorageVault.add_member(:is_autoscale_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAutoscaleEnabled"))
+    ExascaleDbStorageVault.add_member(:ocid, Shapes::ShapeRef.new(shape: String, location_name: "ocid"))
+    ExascaleDbStorageVault.add_member(:oci_resource_anchor_name, Shapes::ShapeRef.new(shape: String, location_name: "ociResourceAnchorName"))
+    ExascaleDbStorageVault.add_member(:oci_url, Shapes::ShapeRef.new(shape: String, location_name: "ociUrl"))
+    ExascaleDbStorageVault.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
+    ExascaleDbStorageVault.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    ExascaleDbStorageVault.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    ExascaleDbStorageVault.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "timeZone"))
+    ExascaleDbStorageVault.struct_class = Types::ExascaleDbStorageVault
+
+    ExascaleDbStorageVaultList.member = Shapes::ShapeRef.new(shape: ExascaleDbStorageVaultSummary)
+
+    ExascaleDbStorageVaultSummary.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exascaleDbStorageVaultId"))
+    ExascaleDbStorageVaultSummary.add_member(:additional_flash_cache_in_percent, Shapes::ShapeRef.new(shape: Integer, location_name: "additionalFlashCacheInPercent"))
+    ExascaleDbStorageVaultSummary.add_member(:attached_shape_attributes, Shapes::ShapeRef.new(shape: ShapeAttributeList, location_name: "attachedShapeAttributes"))
+    ExascaleDbStorageVaultSummary.add_member(:autoscale_limit_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "autoscaleLimitInGBs"))
+    ExascaleDbStorageVaultSummary.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    ExascaleDbStorageVaultSummary.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
+    ExascaleDbStorageVaultSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    ExascaleDbStorageVaultSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ExascaleDbStorageVaultSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    ExascaleDbStorageVaultSummary.add_member(:vm_cluster_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "vmClusterArns"))
+    ExascaleDbStorageVaultSummary.add_member(:vm_cluster_count, Shapes::ShapeRef.new(shape: Integer, location_name: "vmClusterCount"))
+    ExascaleDbStorageVaultSummary.add_member(:vm_cluster_ids, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "vmClusterIds"))
+    ExascaleDbStorageVaultSummary.add_member(:exascale_db_storage_vault_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "exascaleDbStorageVaultArn"))
+    ExascaleDbStorageVaultSummary.add_member(:high_capacity_database_storage, Shapes::ShapeRef.new(shape: ExascaleDbStorageDetails, location_name: "highCapacityDatabaseStorage"))
+    ExascaleDbStorageVaultSummary.add_member(:is_autoscale_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAutoscaleEnabled"))
+    ExascaleDbStorageVaultSummary.add_member(:ocid, Shapes::ShapeRef.new(shape: String, location_name: "ocid"))
+    ExascaleDbStorageVaultSummary.add_member(:oci_resource_anchor_name, Shapes::ShapeRef.new(shape: String, location_name: "ociResourceAnchorName"))
+    ExascaleDbStorageVaultSummary.add_member(:oci_url, Shapes::ShapeRef.new(shape: String, location_name: "ociUrl"))
+    ExascaleDbStorageVaultSummary.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
+    ExascaleDbStorageVaultSummary.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    ExascaleDbStorageVaultSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    ExascaleDbStorageVaultSummary.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "timeZone"))
+    ExascaleDbStorageVaultSummary.struct_class = Types::ExascaleDbStorageVaultSummary
 
     FailoverAutonomousDatabaseInput.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "autonomousDatabaseId"))
     FailoverAutonomousDatabaseInput.add_member(:peer_db_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "peerDbArn"))
@@ -1687,7 +1998,8 @@ module Aws::Odb
     GetCloudVmClusterOutput.add_member(:cloud_vm_cluster, Shapes::ShapeRef.new(shape: CloudVmCluster, location_name: "cloudVmCluster"))
     GetCloudVmClusterOutput.struct_class = Types::GetCloudVmClusterOutput
 
-    GetDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
+    GetDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "cloudVmClusterId"))
+    GetDbNodeInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "exadbVmClusterId"))
     GetDbNodeInput.add_member(:db_node_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dbNodeId"))
     GetDbNodeInput.struct_class = Types::GetDbNodeInput
 
@@ -1700,6 +2012,18 @@ module Aws::Odb
 
     GetDbServerOutput.add_member(:db_server, Shapes::ShapeRef.new(shape: DbServer, location_name: "dbServer"))
     GetDbServerOutput.struct_class = Types::GetDbServerOutput
+
+    GetExadbVmClusterInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exadbVmClusterId"))
+    GetExadbVmClusterInput.struct_class = Types::GetExadbVmClusterInput
+
+    GetExadbVmClusterOutput.add_member(:exadb_vm_cluster, Shapes::ShapeRef.new(shape: ExadbVmCluster, required: true, location_name: "exadbVmCluster"))
+    GetExadbVmClusterOutput.struct_class = Types::GetExadbVmClusterOutput
+
+    GetExascaleDbStorageVaultInput.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exascaleDbStorageVaultId"))
+    GetExascaleDbStorageVaultInput.struct_class = Types::GetExascaleDbStorageVaultInput
+
+    GetExascaleDbStorageVaultOutput.add_member(:exascale_db_storage_vault, Shapes::ShapeRef.new(shape: ExascaleDbStorageVault, required: true, location_name: "exascaleDbStorageVault"))
+    GetExascaleDbStorageVaultOutput.struct_class = Types::GetExascaleDbStorageVaultOutput
 
     GetOciOnboardingStatusInput.struct_class = Types::GetOciOnboardingStatusInput
 
@@ -1724,6 +2048,12 @@ module Aws::Odb
 
     GetOdbPeeringConnectionOutput.add_member(:odb_peering_connection, Shapes::ShapeRef.new(shape: OdbPeeringConnection, location_name: "odbPeeringConnection"))
     GetOdbPeeringConnectionOutput.struct_class = Types::GetOdbPeeringConnectionOutput
+
+    GiMinorVersionList.member = Shapes::ShapeRef.new(shape: GiMinorVersionSummary)
+
+    GiMinorVersionSummary.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "version"))
+    GiMinorVersionSummary.add_member(:grid_image_id, Shapes::ShapeRef.new(shape: String, location_name: "gridImageId"))
+    GiMinorVersionSummary.struct_class = Types::GiMinorVersionSummary
 
     GiVersionList.member = Shapes::ShapeRef.new(shape: GiVersionSummary)
 
@@ -1850,7 +2180,8 @@ module Aws::Odb
 
     ListDbNodesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDbNodesInputMaxResultsInteger, location_name: "maxResults"))
     ListDbNodesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListDbNodesInputNextTokenString, location_name: "nextToken"))
-    ListDbNodesInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
+    ListDbNodesInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "cloudVmClusterId"))
+    ListDbNodesInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "exadbVmClusterId"))
     ListDbNodesInput.struct_class = Types::ListDbNodesInput
 
     ListDbNodesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -1870,11 +2201,41 @@ module Aws::Odb
     ListDbSystemShapesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListDbSystemShapesInputNextTokenString, location_name: "nextToken"))
     ListDbSystemShapesInput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: ListDbSystemShapesInputAvailabilityZoneString, location_name: "availabilityZone"))
     ListDbSystemShapesInput.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: ListDbSystemShapesInputAvailabilityZoneIdString, location_name: "availabilityZoneId"))
+    ListDbSystemShapesInput.add_member(:shape_family, Shapes::ShapeRef.new(shape: ListDbSystemShapesInputShapeFamilyString, location_name: "shapeFamily"))
     ListDbSystemShapesInput.struct_class = Types::ListDbSystemShapesInput
 
     ListDbSystemShapesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListDbSystemShapesOutput.add_member(:db_system_shapes, Shapes::ShapeRef.new(shape: DbSystemShapeList, required: true, location_name: "dbSystemShapes"))
     ListDbSystemShapesOutput.struct_class = Types::ListDbSystemShapesOutput
+
+    ListExadbVmClustersInput.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "exascaleDbStorageVaultId"))
+    ListExadbVmClustersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListExadbVmClustersInputMaxResultsInteger, location_name: "maxResults"))
+    ListExadbVmClustersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListExadbVmClustersInputNextTokenString, location_name: "nextToken"))
+    ListExadbVmClustersInput.struct_class = Types::ListExadbVmClustersInput
+
+    ListExadbVmClustersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListExadbVmClustersOutput.add_member(:exadb_vm_clusters, Shapes::ShapeRef.new(shape: ExadbVmClusterList, required: true, location_name: "exadbVmClusters"))
+    ListExadbVmClustersOutput.struct_class = Types::ListExadbVmClustersOutput
+
+    ListExascaleDbStorageVaultsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListExascaleDbStorageVaultsInputMaxResultsInteger, location_name: "maxResults"))
+    ListExascaleDbStorageVaultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListExascaleDbStorageVaultsInputNextTokenString, location_name: "nextToken"))
+    ListExascaleDbStorageVaultsInput.struct_class = Types::ListExascaleDbStorageVaultsInput
+
+    ListExascaleDbStorageVaultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListExascaleDbStorageVaultsOutput.add_member(:exascale_db_storage_vaults, Shapes::ShapeRef.new(shape: ExascaleDbStorageVaultList, required: true, location_name: "exascaleDbStorageVaults"))
+    ListExascaleDbStorageVaultsOutput.struct_class = Types::ListExascaleDbStorageVaultsOutput
+
+    ListGiMinorVersionsInput.add_member(:gi_version, Shapes::ShapeRef.new(shape: ListGiMinorVersionsInputGiVersionString, required: true, location_name: "giVersion"))
+    ListGiMinorVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListGiMinorVersionsInputMaxResultsInteger, location_name: "maxResults"))
+    ListGiMinorVersionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListGiMinorVersionsInputNextTokenString, location_name: "nextToken"))
+    ListGiMinorVersionsInput.add_member(:shape_family, Shapes::ShapeRef.new(shape: ListGiMinorVersionsInputShapeFamilyString, location_name: "shapeFamily"))
+    ListGiMinorVersionsInput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: ListGiMinorVersionsInputAvailabilityZoneString, location_name: "availabilityZone"))
+    ListGiMinorVersionsInput.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: ListGiMinorVersionsInputAvailabilityZoneIdString, location_name: "availabilityZoneId"))
+    ListGiMinorVersionsInput.struct_class = Types::ListGiMinorVersionsInput
+
+    ListGiMinorVersionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListGiMinorVersionsOutput.add_member(:gi_minor_versions, Shapes::ShapeRef.new(shape: GiMinorVersionList, required: true, location_name: "giMinorVersions"))
+    ListGiMinorVersionsOutput.struct_class = Types::ListGiMinorVersionsOutput
 
     ListGiVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListGiVersionsInputMaxResultsInteger, location_name: "maxResults"))
     ListGiVersionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListGiVersionsInputNextTokenString, location_name: "nextToken"))
@@ -2089,7 +2450,8 @@ module Aws::Odb
     RebootAutonomousDatabaseOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     RebootAutonomousDatabaseOutput.struct_class = Types::RebootAutonomousDatabaseOutput
 
-    RebootDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
+    RebootDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "cloudVmClusterId"))
+    RebootDbNodeInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "exadbVmClusterId"))
     RebootDbNodeInput.add_member(:db_node_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dbNodeId"))
     RebootDbNodeInput.struct_class = Types::RebootDbNodeInput
 
@@ -2100,6 +2462,8 @@ module Aws::Odb
 
     RequestTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     RequestTagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
 
     ResourceIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
 
@@ -2159,6 +2523,8 @@ module Aws::Odb
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    ShapeAttributeList.member = Shapes::ShapeRef.new(shape: ShapeAttribute)
+
     ShrinkAutonomousDatabaseInput.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "autonomousDatabaseId"))
     ShrinkAutonomousDatabaseInput.struct_class = Types::ShrinkAutonomousDatabaseInput
 
@@ -2193,7 +2559,8 @@ module Aws::Odb
     StartAutonomousDatabaseOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     StartAutonomousDatabaseOutput.struct_class = Types::StartAutonomousDatabaseOutput
 
-    StartDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
+    StartDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "cloudVmClusterId"))
+    StartDbNodeInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "exadbVmClusterId"))
     StartDbNodeInput.add_member(:db_node_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dbNodeId"))
     StartDbNodeInput.struct_class = Types::StartDbNodeInput
 
@@ -2211,7 +2578,8 @@ module Aws::Odb
     StopAutonomousDatabaseOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     StopAutonomousDatabaseOutput.struct_class = Types::StopAutonomousDatabaseOutput
 
-    StopDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
+    StopDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "cloudVmClusterId"))
+    StopDbNodeInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "exadbVmClusterId"))
     StopDbNodeInput.add_member(:db_node_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dbNodeId"))
     StopDbNodeInput.struct_class = Types::StopDbNodeInput
 
@@ -2344,6 +2712,40 @@ module Aws::Odb
     UpdateCloudExadataInfrastructureOutput.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudExadataInfrastructureId"))
     UpdateCloudExadataInfrastructureOutput.struct_class = Types::UpdateCloudExadataInfrastructureOutput
 
+    UpdateExadbVmClusterInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exadbVmClusterId"))
+    UpdateExadbVmClusterInput.add_member(:data_collection_options, Shapes::ShapeRef.new(shape: DataCollectionOptions, location_name: "dataCollectionOptions"))
+    UpdateExadbVmClusterInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    UpdateExadbVmClusterInput.add_member(:enabled_ecpu_count, Shapes::ShapeRef.new(shape: UpdateExadbVmClusterInputEnabledEcpuCountInteger, location_name: "enabledEcpuCount"))
+    UpdateExadbVmClusterInput.add_member(:grid_image_id, Shapes::ShapeRef.new(shape: UpdateExadbVmClusterInputGridImageIdString, location_name: "gridImageId"))
+    UpdateExadbVmClusterInput.add_member(:license_model, Shapes::ShapeRef.new(shape: LicenseModel, location_name: "licenseModel"))
+    UpdateExadbVmClusterInput.add_member(:ssh_public_keys, Shapes::ShapeRef.new(shape: StringList, location_name: "sshPublicKeys"))
+    UpdateExadbVmClusterInput.add_member(:system_version, Shapes::ShapeRef.new(shape: UpdateExadbVmClusterInputSystemVersionString, location_name: "systemVersion"))
+    UpdateExadbVmClusterInput.add_member(:total_ecpu_count, Shapes::ShapeRef.new(shape: UpdateExadbVmClusterInputTotalEcpuCountInteger, location_name: "totalEcpuCount"))
+    UpdateExadbVmClusterInput.add_member(:update_action, Shapes::ShapeRef.new(shape: UpdateAction, location_name: "updateAction"))
+    UpdateExadbVmClusterInput.add_member(:vm_file_system_storage_total_size_in_g_bs, Shapes::ShapeRef.new(shape: UpdateExadbVmClusterInputVmFileSystemStorageTotalSizeInGBsInteger, location_name: "vmFileSystemStorageTotalSizeInGBs"))
+    UpdateExadbVmClusterInput.struct_class = Types::UpdateExadbVmClusterInput
+
+    UpdateExadbVmClusterOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    UpdateExadbVmClusterOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    UpdateExadbVmClusterOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    UpdateExadbVmClusterOutput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "exadbVmClusterId"))
+    UpdateExadbVmClusterOutput.struct_class = Types::UpdateExadbVmClusterOutput
+
+    UpdateExascaleDbStorageVaultInput.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exascaleDbStorageVaultId"))
+    UpdateExascaleDbStorageVaultInput.add_member(:additional_flash_cache_in_percent, Shapes::ShapeRef.new(shape: UpdateExascaleDbStorageVaultInputAdditionalFlashCacheInPercentInteger, location_name: "additionalFlashCacheInPercent"))
+    UpdateExascaleDbStorageVaultInput.add_member(:autoscale_limit_in_g_bs, Shapes::ShapeRef.new(shape: UpdateExascaleDbStorageVaultInputAutoscaleLimitInGBsInteger, location_name: "autoscaleLimitInGBs"))
+    UpdateExascaleDbStorageVaultInput.add_member(:description, Shapes::ShapeRef.new(shape: UpdateExascaleDbStorageVaultInputDescriptionString, location_name: "description"))
+    UpdateExascaleDbStorageVaultInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    UpdateExascaleDbStorageVaultInput.add_member(:high_capacity_database_storage_total_size_in_g_bs, Shapes::ShapeRef.new(shape: UpdateExascaleDbStorageVaultInputHighCapacityDatabaseStorageTotalSizeInGBsInteger, location_name: "highCapacityDatabaseStorageTotalSizeInGBs"))
+    UpdateExascaleDbStorageVaultInput.add_member(:is_autoscale_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAutoscaleEnabled"))
+    UpdateExascaleDbStorageVaultInput.struct_class = Types::UpdateExascaleDbStorageVaultInput
+
+    UpdateExascaleDbStorageVaultOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    UpdateExascaleDbStorageVaultOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    UpdateExascaleDbStorageVaultOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    UpdateExascaleDbStorageVaultOutput.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "exascaleDbStorageVaultId"))
+    UpdateExascaleDbStorageVaultOutput.struct_class = Types::UpdateExascaleDbStorageVaultOutput
+
     UpdateOdbNetworkInput.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "odbNetworkId"))
     UpdateOdbNetworkInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
     UpdateOdbNetworkInput.add_member(:peered_cidrs_to_be_added, Shapes::ShapeRef.new(shape: StringList, location_name: "peeredCidrsToBeAdded"))
@@ -2458,6 +2860,21 @@ module Aws::Odb
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:associate_virtual_machines_to_exadb_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateVirtualMachinesToExadbVmCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateVirtualMachinesToExadbVmClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: AssociateVirtualMachinesToExadbVmClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:create_autonomous_database, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAutonomousDatabase"
         o.http_method = "POST"
@@ -2543,6 +2960,35 @@ module Aws::Odb
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:create_exadb_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateExadbVmCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateExadbVmClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateExadbVmClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:create_exascale_db_storage_vault, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateExascaleDbStorageVault"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:create_odb_network, Seahorse::Model::Operation.new.tap do |o|
@@ -2641,6 +3087,34 @@ module Aws::Odb
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:delete_exadb_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteExadbVmCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteExadbVmClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteExadbVmClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_exascale_db_storage_vault, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteExascaleDbStorageVault"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteExascaleDbStorageVaultInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteExascaleDbStorageVaultOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_odb_network, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteOdbNetwork"
         o.http_method = "POST"
@@ -2673,6 +3147,20 @@ module Aws::Odb
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateIamRoleFromResourceInput)
         o.output = Shapes::ShapeRef.new(shape: DisassociateIamRoleFromResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:disassociate_virtual_machines_from_exadb_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateVirtualMachinesFromExadbVmCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateVirtualMachinesFromExadbVmClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateVirtualMachinesFromExadbVmClusterOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -2805,6 +3293,32 @@ module Aws::Odb
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetDbServerInput)
         o.output = Shapes::ShapeRef.new(shape: GetDbServerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_exadb_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExadbVmCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetExadbVmClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: GetExadbVmClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_exascale_db_storage_vault, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExascaleDbStorageVault"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetExascaleDbStorageVaultInput)
+        o.output = Shapes::ShapeRef.new(shape: GetExascaleDbStorageVaultOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -3104,6 +3618,61 @@ module Aws::Odb
         )
       end)
 
+      api.add_operation(:list_exadb_vm_clusters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExadbVmClusters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListExadbVmClustersInput)
+        o.output = Shapes::ShapeRef.new(shape: ListExadbVmClustersOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_exascale_db_storage_vaults, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExascaleDbStorageVaults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListExascaleDbStorageVaultsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListExascaleDbStorageVaultsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_gi_minor_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGiMinorVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGiMinorVersionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListGiMinorVersionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_gi_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListGiVersions"
         o.http_method = "POST"
@@ -3363,6 +3932,34 @@ module Aws::Odb
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateCloudExadataInfrastructureInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateCloudExadataInfrastructureOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_exadb_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateExadbVmCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateExadbVmClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateExadbVmClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_exascale_db_storage_vault, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateExascaleDbStorageVault"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateExascaleDbStorageVaultInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateExascaleDbStorageVaultOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

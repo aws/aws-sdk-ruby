@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.386.0 (2026-08-20)
+------------------
+
+* Feature - Added IAM Identity Center (IdC) support to CreatePartnerApp and UpdatePartnerApp APIs. Added Customer Managed Key (CMK) support to CreateMlflowApp and DescribeMlflowApp.
+
+1.385.0 (2026-08-14)
+------------------
+
+* Feature - Release support for g7.2xlarge, g7.4xlarge, g7.8xlarge, g7.12xlarge, g7.24xlarge, and g7.48xlarge instance types for SageMaker HyperPod
+
+1.384.0 (2026-08-10)
+------------------
+
+* Feature - Added PREFIX AWARE routing strategy and PrefixAwareRoutingConfig to CreateEndpointConfig. Configure PrefixLength and ConcurrencyThreshold to route requests that share the same prompt prefix to the same instance.
+
+1.383.0 (2026-08-07)
+------------------
+
+* Feature - Amazon SageMaker adds maintenance lifecycle statuses for Notebook Instances
+
+1.382.0 (2026-08-06)
+------------------
+
+* Feature - Releases new Model Customization SequenceLength parameter for Training and g7 instance types for Training and Processing.
+
+1.381.0 (2026-07-30)
+------------------
+
+* Feature - Adds support for g7 family instance types for SageMaker Studio JupyterLab and CodeEditor apps for IAD (us-east-1), PDX (us-west-2), CMH (us-east-2).
+
 1.380.0 (2026-07-27)
 ------------------
 

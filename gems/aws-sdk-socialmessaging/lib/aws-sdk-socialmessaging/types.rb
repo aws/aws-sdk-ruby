@@ -78,6 +78,31 @@ module Aws::SocialMessaging
     end
 
     # @!attribute [rw] id
+    #   The ID of the WhatsApp Business Account to create a dataset for,
+    #   formatted as `waba-01234567890123456789012345678901`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppDatasetInput AWS API Documentation
+    #
+    class CreateWhatsAppDatasetInput < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_id
+    #   The Meta-generated dataset ID, a numeric string of 10 to 20 digits.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppDatasetOutput AWS API Documentation
+    #
+    class CreateWhatsAppDatasetOutput < Struct.new(
+      :dataset_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
     #   The ID of the WhatsApp Business Account to associate with this Flow.
     #   @return [String]
     #
@@ -897,6 +922,13 @@ module Aws::SocialMessaging
     #   Account is onboarded for Meta's Marketing Messages API.
     #   @return [String]
     #
+    # @!attribute [rw] dataset_id
+    #   The Meta Conversions API dataset ID associated with this WhatsApp
+    #   Business Account. This value is a numeric string of 10 to 20 digits.
+    #   This field is not present when no dataset has been created for this
+    #   account.
+    #   @return [String]
+    #
     # @!attribute [rw] phone_numbers
     #   The phone numbers associated with the Linked WhatsApp Business
     #   Account.
@@ -913,6 +945,7 @@ module Aws::SocialMessaging
       :waba_name,
       :event_destinations,
       :marketing_messages_onboarding_status,
+      :dataset_id,
       :phone_numbers)
       SENSITIVE = []
       include Aws::Structure
@@ -985,6 +1018,13 @@ module Aws::SocialMessaging
     #   Account is onboarded for Meta's Marketing Messages API.
     #   @return [String]
     #
+    # @!attribute [rw] dataset_id
+    #   The Meta Conversions API dataset ID associated with this WhatsApp
+    #   Business Account. This value is a numeric string of 10 to 20 digits.
+    #   This field is not present when no dataset has been created for this
+    #   account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/LinkedWhatsAppBusinessAccountSummary AWS API Documentation
     #
     class LinkedWhatsAppBusinessAccountSummary < Struct.new(
@@ -995,7 +1035,8 @@ module Aws::SocialMessaging
       :link_date,
       :waba_name,
       :event_destinations,
-      :marketing_messages_onboarding_status)
+      :marketing_messages_onboarding_status,
+      :dataset_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1691,6 +1732,46 @@ module Aws::SocialMessaging
     class S3PresignedUrl < Struct.new(
       :url,
       :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the WhatsApp Business Account associated with the dataset,
+    #   formatted as `waba-01234567890123456789012345678901`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_id
+    #   The Meta-generated dataset ID to send the event to.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_data
+    #   The raw Meta Conversions API event payload as a JSON blob. See
+    #   [Meta's server event parameters][1] for the supported format.
+    #
+    #
+    #
+    #   [1]: https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/SendWhatsAppConversionEventInput AWS API Documentation
+    #
+    class SendWhatsAppConversionEventInput < Struct.new(
+      :id,
+      :dataset_id,
+      :event_data)
+      SENSITIVE = [:event_data]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The unique identifier for the conversion event request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/SendWhatsAppConversionEventOutput AWS API Documentation
+    #
+    class SendWhatsAppConversionEventOutput < Struct.new(
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -36,6 +36,16 @@ module Aws::Drs
       SENSITIVE: []
     end
 
+    class CancelRecoveryPlanExecutionRequest
+      attr_accessor recovery_plan_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelRecoveryPlanExecutionResponse
+      attr_accessor recovery_plan_execution: Types::RecoveryPlanExecution
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor code: ::String
@@ -81,6 +91,33 @@ module Aws::Drs
 
     class CreateLaunchConfigurationTemplateResponse
       attr_accessor launch_configuration_template: Types::LaunchConfigurationTemplate
+      SENSITIVE: []
+    end
+
+    class CreateRecoveryPlanRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateRecoveryPlanResponse
+      attr_accessor recovery_plan: Types::RecoveryPlan
+      SENSITIVE: []
+    end
+
+    class CreateRecoveryPlanStepRequest
+      attr_accessor recovery_plan_arn: ::String
+      attr_accessor step_name: ::String
+      attr_accessor step_order: ::Integer
+      attr_accessor configuration: Types::RecoveryPlanStepConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRecoveryPlanStepResponse
+      attr_accessor recovery_plan_step: Types::RecoveryPlanStep
       SENSITIVE: []
     end
 
@@ -185,6 +222,36 @@ module Aws::Drs
 
     class DeleteRecoveryInstanceRequest
       attr_accessor recovery_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecoveryPlanExecutionRequest
+      attr_accessor recovery_plan_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecoveryPlanExecutionResponse
+      attr_accessor recovery_plan_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecoveryPlanRequest
+      attr_accessor recovery_plan_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecoveryPlanResponse
+      attr_accessor recovery_plan_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecoveryPlanStepRequest
+      attr_accessor recovery_plan_step_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecoveryPlanStepResponse
+      attr_accessor recovery_plan_step_arn: ::String
       SENSITIVE: []
     end
 
@@ -367,6 +434,12 @@ module Aws::Drs
       SENSITIVE: []
     end
 
+    class ErrorDetail
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
     class EventResourceData
       attr_accessor source_network_data: Types::SourceNetworkData
       attr_accessor unknown: untyped
@@ -376,6 +449,11 @@ module Aws::Drs
       end
       class Unknown < EventResourceData
       end
+    end
+
+    class ExecutionServerStepConfiguration
+      attr_accessor servers: ::Array[Types::RecoveryPlanExecutionServer]
+      SENSITIVE: []
     end
 
     class ExportSourceNetworkCfnTemplateRequest
@@ -404,6 +482,46 @@ module Aws::Drs
 
     class GetLaunchConfigurationRequest
       attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPlanExecutionRequest
+      attr_accessor recovery_plan_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPlanExecutionResponse
+      attr_accessor recovery_plan_execution: Types::RecoveryPlanExecution
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPlanExecutionStepRequest
+      attr_accessor recovery_plan_execution_step_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPlanExecutionStepResponse
+      attr_accessor recovery_plan_execution_step: Types::RecoveryPlanExecutionStep
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPlanRequest
+      attr_accessor recovery_plan_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPlanResponse
+      attr_accessor recovery_plan: Types::RecoveryPlan
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPlanStepRequest
+      attr_accessor recovery_plan_step_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPlanStepResponse
+      attr_accessor recovery_plan_step: Types::RecoveryPlanStep
       SENSITIVE: []
     end
 
@@ -591,6 +709,64 @@ module Aws::Drs
 
     class ListLaunchActionsResponse
       attr_accessor items: ::Array[Types::LaunchAction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPlanExecutionStepsFilter
+      attr_accessor status: ("NOT_STARTED" | "EXECUTING" | "WAITING" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "SKIPPED")
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPlanExecutionStepsRequest
+      attr_accessor recovery_plan_execution_arn: ::String
+      attr_accessor filter: Types::ListRecoveryPlanExecutionStepsFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPlanExecutionStepsResponse
+      attr_accessor recovery_plan_execution_steps: ::Array[Types::RecoveryPlanExecutionStepSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPlanExecutionsRequest
+      attr_accessor recovery_plan_arn: ::String
+      attr_accessor status: ("CREATED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPlanExecutionsResponse
+      attr_accessor recovery_plan_executions: ::Array[Types::RecoveryPlanExecutionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPlanStepsRequest
+      attr_accessor recovery_plan_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPlanStepsResponse
+      attr_accessor recovery_plan_steps: ::Array[Types::RecoveryPlanStep]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPlansRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPlansResponse
+      attr_accessor recovery_plans: ::Array[Types::RecoveryPlanSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -798,12 +974,145 @@ module Aws::Drs
       SENSITIVE: []
     end
 
+    class RecoveryPlan
+      attr_accessor recovery_plan_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "INVALID")
+      attr_accessor created_at: ::String
+      attr_accessor updated_at: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class RecoveryPlanExecution
+      attr_accessor recovery_plan_execution_arn: ::String
+      attr_accessor recovery_plan_arn: ::String
+      attr_accessor mode: ("DRILL" | "RECOVERY")
+      attr_accessor status: ("CREATED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor started_at: ::String
+      attr_accessor completed_at: ::String
+      attr_accessor error_detail: Types::ErrorDetail
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class RecoveryPlanExecutionServer
+      attr_accessor server_arn: ::String
+      attr_accessor impact_level: ("CRITICAL" | "OPTIONAL")
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryPlanExecutionSourceServer
+      attr_accessor source_server_id: ::String
+      attr_accessor recovery_snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryPlanExecutionStep
+      attr_accessor recovery_plan_execution_step_arn: ::String
+      attr_accessor step_index: ::Integer
+      attr_accessor status: ("NOT_STARTED" | "EXECUTING" | "WAITING" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "SKIPPED")
+      attr_accessor step_name: ::String
+      attr_accessor configuration: Types::RecoveryPlanExecutionStepConfiguration
+      attr_accessor error_detail: Types::ErrorDetail
+      attr_accessor attempt: ::Integer
+      attr_accessor created_at: ::String
+      attr_accessor updated_at: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryPlanExecutionStepConfiguration
+      attr_accessor execution_server_step_configuration: Types::ExecutionServerStepConfiguration
+      attr_accessor wait_step_configuration: Types::WaitStepConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ExecutionServerStepConfiguration < RecoveryPlanExecutionStepConfiguration
+      end
+      class WaitStepConfiguration < RecoveryPlanExecutionStepConfiguration
+      end
+      class Unknown < RecoveryPlanExecutionStepConfiguration
+      end
+    end
+
+    class RecoveryPlanExecutionStepSummary
+      attr_accessor recovery_plan_execution_step_arn: ::String
+      attr_accessor step_name: ::String
+      attr_accessor step_index: ::Integer
+      attr_accessor status: ("NOT_STARTED" | "EXECUTING" | "WAITING" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "SKIPPED")
+      attr_accessor configuration: Types::RecoveryPlanExecutionStepConfiguration
+      attr_accessor error_detail: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class RecoveryPlanExecutionSummary
+      attr_accessor recovery_plan_execution_arn: ::String
+      attr_accessor recovery_plan_arn: ::String
+      attr_accessor mode: ("DRILL" | "RECOVERY")
+      attr_accessor status: ("CREATED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor started_at: ::String
+      attr_accessor error_detail: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class RecoveryPlanServer
+      attr_accessor server_arn: ::String
+      attr_accessor impact_level: ("CRITICAL" | "OPTIONAL")
+      SENSITIVE: []
+    end
+
+    class RecoveryPlanStep
+      attr_accessor recovery_plan_step_arn: ::String
+      attr_accessor step_order: ::Integer
+      attr_accessor step_name: ::String
+      attr_accessor configuration: Types::RecoveryPlanStepConfiguration
+      attr_accessor created_at: ::String
+      attr_accessor updated_at: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryPlanStepConfiguration
+      attr_accessor server_step_configuration: Types::ServerStepConfiguration
+      attr_accessor wait_step_configuration: Types::WaitStepConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ServerStepConfiguration < RecoveryPlanStepConfiguration
+      end
+      class WaitStepConfiguration < RecoveryPlanStepConfiguration
+      end
+      class Unknown < RecoveryPlanStepConfiguration
+      end
+    end
+
+    class RecoveryPlanSummary
+      attr_accessor recovery_plan_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "INVALID")
+      attr_accessor created_at: ::String
+      attr_accessor updated_at: ::String
+      SENSITIVE: []
+    end
+
     class RecoverySnapshot
       attr_accessor snapshot_id: ::String
       attr_accessor source_server_id: ::String
       attr_accessor expected_timestamp: ::String
       attr_accessor timestamp: ::String
       attr_accessor ebs_snapshots: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReorderRecoveryPlanStepsRequest
+      attr_accessor recovery_plan_arn: ::String
+      attr_accessor ordered_step_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReorderRecoveryPlanStepsResponse
+      attr_accessor recovery_plan_steps: ::Array[Types::RecoveryPlanStep]
       SENSITIVE: []
     end
 
@@ -874,6 +1183,16 @@ module Aws::Drs
       SENSITIVE: []
     end
 
+    class RetryRecoveryPlanExecutionStepRequest
+      attr_accessor recovery_plan_execution_step_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RetryRecoveryPlanExecutionStepResponse
+      attr_accessor recovery_plan_execution_step: Types::RecoveryPlanExecutionStep
+      SENSITIVE: []
+    end
+
     class ReverseReplicationRequest
       attr_accessor recovery_instance_id: ::String
       SENSITIVE: []
@@ -881,6 +1200,11 @@ module Aws::Drs
 
     class ReverseReplicationResponse
       attr_accessor reversed_direction_source_server_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServerStepConfiguration
+      attr_accessor servers: ::Array[Types::RecoveryPlanServer]
       SENSITIVE: []
     end
 
@@ -979,6 +1303,20 @@ module Aws::Drs
 
     class StartFailbackLaunchResponse
       attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class StartRecoveryPlanExecutionRequest
+      attr_accessor recovery_plan_arn: ::String
+      attr_accessor mode: ("DRILL" | "RECOVERY")
+      attr_accessor client_token: ::String
+      attr_accessor source_servers: ::Array[Types::RecoveryPlanExecutionSourceServer]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class StartRecoveryPlanExecutionResponse
+      attr_accessor recovery_plan_execution: Types::RecoveryPlanExecution
       SENSITIVE: []
     end
 
@@ -1141,6 +1479,43 @@ module Aws::Drs
       SENSITIVE: []
     end
 
+    class UpdateRecoveryPlanExecutionStepRequest
+      attr_accessor recovery_plan_execution_step_arn: ::String
+      attr_accessor status: ("NOT_STARTED" | "EXECUTING" | "WAITING" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "SKIPPED")
+      attr_accessor servers: ::Array[Types::RecoveryPlanServer]
+      attr_accessor wait_duration_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateRecoveryPlanExecutionStepResponse
+      attr_accessor recovery_plan_execution_step: Types::RecoveryPlanExecutionStep
+      SENSITIVE: []
+    end
+
+    class UpdateRecoveryPlanRequest
+      attr_accessor recovery_plan_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRecoveryPlanResponse
+      attr_accessor recovery_plan: Types::RecoveryPlan
+      SENSITIVE: []
+    end
+
+    class UpdateRecoveryPlanStepRequest
+      attr_accessor recovery_plan_step_arn: ::String
+      attr_accessor step_name: ::String
+      attr_accessor configuration: Types::RecoveryPlanStepConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateRecoveryPlanStepResponse
+      attr_accessor recovery_plan_step: Types::RecoveryPlanStep
+      SENSITIVE: []
+    end
+
     class UpdateReplicationConfigurationRequest
       attr_accessor source_server_id: ::String
       attr_accessor name: ::String
@@ -1195,6 +1570,11 @@ module Aws::Drs
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WaitStepConfiguration
+      attr_accessor wait_duration_minutes: ::Integer
       SENSITIVE: []
     end
   end

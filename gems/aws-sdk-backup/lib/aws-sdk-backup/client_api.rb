@@ -15,6 +15,13 @@ module Aws::Backup
     include Seahorse::Model
 
     ARN = Shapes::StringShape.new(name: 'ARN')
+    AccessPointArn = Shapes::StringShape.new(name: 'AccessPointArn')
+    AccessPointMetadataMap = Shapes::MapShape.new(name: 'AccessPointMetadataMap')
+    AccessPointMetadataMapKeyString = Shapes::StringShape.new(name: 'AccessPointMetadataMapKeyString')
+    AccessPointMetadataMapValueString = Shapes::StringShape.new(name: 'AccessPointMetadataMapValueString')
+    AccessPointName = Shapes::StringShape.new(name: 'AccessPointName')
+    AccessPointPolicy = Shapes::StringShape.new(name: 'AccessPointPolicy')
+    AccessPointStatus = Shapes::StringShape.new(name: 'AccessPointStatus')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AdvancedBackupSetting = Shapes::StructureShape.new(name: 'AdvancedBackupSetting')
     AdvancedBackupSettings = Shapes::ListShape.new(name: 'AdvancedBackupSettings')
@@ -22,6 +29,7 @@ module Aws::Backup
     AggregationPeriod = Shapes::StringShape.new(name: 'AggregationPeriod')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     AssociateBackupVaultMpaApprovalTeamInput = Shapes::StructureShape.new(name: 'AssociateBackupVaultMpaApprovalTeamInput')
+    BackupAccessPoints = Shapes::ListShape.new(name: 'BackupAccessPoints')
     BackupJob = Shapes::StructureShape.new(name: 'BackupJob')
     BackupJobChildJobsInState = Shapes::MapShape.new(name: 'BackupJobChildJobsInState')
     BackupJobState = Shapes::StringShape.new(name: 'BackupJobState')
@@ -49,6 +57,7 @@ module Aws::Backup
     BackupSelectionName = Shapes::StringShape.new(name: 'BackupSelectionName')
     BackupSelectionsList = Shapes::ListShape.new(name: 'BackupSelectionsList')
     BackupSelectionsListMember = Shapes::StructureShape.new(name: 'BackupSelectionsListMember')
+    BackupVaultArn = Shapes::StringShape.new(name: 'BackupVaultArn')
     BackupVaultEvent = Shapes::StringShape.new(name: 'BackupVaultEvent')
     BackupVaultEvents = Shapes::ListShape.new(name: 'BackupVaultEvents')
     BackupVaultList = Shapes::ListShape.new(name: 'BackupVaultList')
@@ -81,6 +90,8 @@ module Aws::Backup
     CopyJobSummary = Shapes::StructureShape.new(name: 'CopyJobSummary')
     CopyJobSummaryList = Shapes::ListShape.new(name: 'CopyJobSummaryList')
     CopyJobsList = Shapes::ListShape.new(name: 'CopyJobsList')
+    CreateBackupAccessPointRequest = Shapes::StructureShape.new(name: 'CreateBackupAccessPointRequest')
+    CreateBackupAccessPointResponse = Shapes::StructureShape.new(name: 'CreateBackupAccessPointResponse')
     CreateBackupPlanInput = Shapes::StructureShape.new(name: 'CreateBackupPlanInput')
     CreateBackupPlanOutput = Shapes::StructureShape.new(name: 'CreateBackupPlanOutput')
     CreateBackupSelectionInput = Shapes::StructureShape.new(name: 'CreateBackupSelectionInput')
@@ -106,6 +117,7 @@ module Aws::Backup
     CreatorRequestId = Shapes::StringShape.new(name: 'CreatorRequestId')
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
     DateRange = Shapes::StructureShape.new(name: 'DateRange')
+    DeleteBackupAccessPointInput = Shapes::StructureShape.new(name: 'DeleteBackupAccessPointInput')
     DeleteBackupPlanInput = Shapes::StructureShape.new(name: 'DeleteBackupPlanInput')
     DeleteBackupPlanOutput = Shapes::StructureShape.new(name: 'DeleteBackupPlanOutput')
     DeleteBackupSelectionInput = Shapes::StructureShape.new(name: 'DeleteBackupSelectionInput')
@@ -121,6 +133,8 @@ module Aws::Backup
     DeleteTieringConfigurationInput = Shapes::StructureShape.new(name: 'DeleteTieringConfigurationInput')
     DeleteTieringConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteTieringConfigurationOutput')
     DependencyFailureException = Shapes::StructureShape.new(name: 'DependencyFailureException')
+    DescribeBackupAccessPointInput = Shapes::StructureShape.new(name: 'DescribeBackupAccessPointInput')
+    DescribeBackupAccessPointResponse = Shapes::StructureShape.new(name: 'DescribeBackupAccessPointResponse')
     DescribeBackupJobInput = Shapes::StructureShape.new(name: 'DescribeBackupJobInput')
     DescribeBackupJobOutput = Shapes::StructureShape.new(name: 'DescribeBackupJobOutput')
     DescribeBackupVaultInput = Shapes::StructureShape.new(name: 'DescribeBackupVaultInput')
@@ -214,6 +228,16 @@ module Aws::Backup
     Lifecycle = Shapes::StructureShape.new(name: 'Lifecycle')
     LifecycleDeleteAfterEvent = Shapes::StringShape.new(name: 'LifecycleDeleteAfterEvent')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListAccessPointsMember = Shapes::StructureShape.new(name: 'ListAccessPointsMember')
+    ListBackupAccessPointsByRecoveryPointRequest = Shapes::StructureShape.new(name: 'ListBackupAccessPointsByRecoveryPointRequest')
+    ListBackupAccessPointsByRecoveryPointRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListBackupAccessPointsByRecoveryPointRequestMaxResultsInteger')
+    ListBackupAccessPointsByRecoveryPointResponse = Shapes::StructureShape.new(name: 'ListBackupAccessPointsByRecoveryPointResponse')
+    ListBackupAccessPointsByResourceRequest = Shapes::StructureShape.new(name: 'ListBackupAccessPointsByResourceRequest')
+    ListBackupAccessPointsByResourceRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListBackupAccessPointsByResourceRequestMaxResultsInteger')
+    ListBackupAccessPointsByResourceResponse = Shapes::StructureShape.new(name: 'ListBackupAccessPointsByResourceResponse')
+    ListBackupAccessPointsRequest = Shapes::StructureShape.new(name: 'ListBackupAccessPointsRequest')
+    ListBackupAccessPointsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListBackupAccessPointsRequestMaxResultsInteger')
+    ListBackupAccessPointsResponse = Shapes::StructureShape.new(name: 'ListBackupAccessPointsResponse')
     ListBackupJobSummariesInput = Shapes::StructureShape.new(name: 'ListBackupJobSummariesInput')
     ListBackupJobSummariesOutput = Shapes::StructureShape.new(name: 'ListBackupJobSummariesOutput')
     ListBackupJobsInput = Shapes::StructureShape.new(name: 'ListBackupJobsInput')
@@ -297,6 +321,7 @@ module Aws::Backup
     PutBackupVaultLockConfigurationInput = Shapes::StructureShape.new(name: 'PutBackupVaultLockConfigurationInput')
     PutBackupVaultNotificationsInput = Shapes::StructureShape.new(name: 'PutBackupVaultNotificationsInput')
     PutRestoreValidationResultInput = Shapes::StructureShape.new(name: 'PutRestoreValidationResultInput')
+    RecoveryPointArn = Shapes::StringShape.new(name: 'RecoveryPointArn')
     RecoveryPointByBackupVault = Shapes::StructureShape.new(name: 'RecoveryPointByBackupVault')
     RecoveryPointByBackupVaultList = Shapes::ListShape.new(name: 'RecoveryPointByBackupVaultList')
     RecoveryPointByResource = Shapes::StructureShape.new(name: 'RecoveryPointByResource')
@@ -318,6 +343,7 @@ module Aws::Backup
     ReportPlanName = Shapes::StringShape.new(name: 'ReportPlanName')
     ReportSetting = Shapes::StructureShape.new(name: 'ReportSetting')
     RequesterComment = Shapes::StringShape.new(name: 'RequesterComment')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceIdentifiers = Shapes::ListShape.new(name: 'ResourceIdentifiers')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -395,6 +421,9 @@ module Aws::Backup
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagMapKeyString = Shapes::StringShape.new(name: 'TagMapKeyString')
+    TagMapValueString = Shapes::StringShape.new(name: 'TagMapValueString')
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
@@ -438,6 +467,9 @@ module Aws::Backup
     stringMap = Shapes::MapShape.new(name: 'stringMap')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
+    AccessPointMetadataMap.key = Shapes::ShapeRef.new(shape: AccessPointMetadataMapKeyString)
+    AccessPointMetadataMap.value = Shapes::ShapeRef.new(shape: AccessPointMetadataMapValueString)
+
     AdvancedBackupSetting.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     AdvancedBackupSetting.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
     AdvancedBackupSetting.struct_class = Types::AdvancedBackupSetting
@@ -461,6 +493,8 @@ module Aws::Backup
     AssociateBackupVaultMpaApprovalTeamInput.add_member(:mpa_approval_team_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "MpaApprovalTeamArn"))
     AssociateBackupVaultMpaApprovalTeamInput.add_member(:requester_comment, Shapes::ShapeRef.new(shape: RequesterComment, location_name: "RequesterComment"))
     AssociateBackupVaultMpaApprovalTeamInput.struct_class = Types::AssociateBackupVaultMpaApprovalTeamInput
+
+    BackupAccessPoints.member = Shapes::ShapeRef.new(shape: ListAccessPointsMember)
 
     BackupJob.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     BackupJob.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupJobId"))
@@ -718,6 +752,17 @@ module Aws::Backup
 
     CopyJobsList.member = Shapes::ShapeRef.new(shape: CopyJob)
 
+    CreateBackupAccessPointRequest.add_member(:access_point_metadata, Shapes::ShapeRef.new(shape: AccessPointMetadataMap, location_name: "AccessPointMetadata"))
+    CreateBackupAccessPointRequest.add_member(:access_point_policy, Shapes::ShapeRef.new(shape: AccessPointPolicy, location_name: "AccessPointPolicy"))
+    CreateBackupAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "Name"))
+    CreateBackupAccessPointRequest.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: RecoveryPointArn, required: true, location_name: "RecoveryPointArn"))
+    CreateBackupAccessPointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateBackupAccessPointRequest.struct_class = Types::CreateBackupAccessPointRequest
+
+    CreateBackupAccessPointResponse.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: AccessPointArn, required: true, location_name: "AccessPointArn"))
+    CreateBackupAccessPointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AccessPointStatus, required: true, location_name: "Status"))
+    CreateBackupAccessPointResponse.struct_class = Types::CreateBackupAccessPointResponse
+
     CreateBackupPlanInput.add_member(:backup_plan, Shapes::ShapeRef.new(shape: BackupPlanInput, required: true, location_name: "BackupPlan"))
     CreateBackupPlanInput.add_member(:backup_plan_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "BackupPlanTags"))
     CreateBackupPlanInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
@@ -853,6 +898,9 @@ module Aws::Backup
     DateRange.add_member(:to_date, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "ToDate"))
     DateRange.struct_class = Types::DateRange
 
+    DeleteBackupAccessPointInput.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: AccessPointArn, required: true, location: "uri", location_name: "AccessPointArn"))
+    DeleteBackupAccessPointInput.struct_class = Types::DeleteBackupAccessPointInput
+
     DeleteBackupPlanInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
     DeleteBackupPlanInput.struct_class = Types::DeleteBackupPlanInput
 
@@ -905,6 +953,22 @@ module Aws::Backup
     DependencyFailureException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
     DependencyFailureException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     DependencyFailureException.struct_class = Types::DependencyFailureException
+
+    DescribeBackupAccessPointInput.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: AccessPointArn, required: true, location: "uri", location_name: "AccessPointArn"))
+    DescribeBackupAccessPointInput.struct_class = Types::DescribeBackupAccessPointInput
+
+    DescribeBackupAccessPointResponse.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: AccessPointArn, required: true, location_name: "AccessPointArn"))
+    DescribeBackupAccessPointResponse.add_member(:access_point_metadata, Shapes::ShapeRef.new(shape: AccessPointMetadataMap, location_name: "AccessPointMetadata"))
+    DescribeBackupAccessPointResponse.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: BackupVaultArn, location_name: "BackupVaultArn"))
+    DescribeBackupAccessPointResponse.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location_name: "BackupVaultName"))
+    DescribeBackupAccessPointResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    DescribeBackupAccessPointResponse.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "Name"))
+    DescribeBackupAccessPointResponse.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: RecoveryPointArn, required: true, location_name: "RecoveryPointArn"))
+    DescribeBackupAccessPointResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    DescribeBackupAccessPointResponse.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
+    DescribeBackupAccessPointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AccessPointStatus, required: true, location_name: "Status"))
+    DescribeBackupAccessPointResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    DescribeBackupAccessPointResponse.struct_class = Types::DescribeBackupAccessPointResponse
 
     DescribeBackupJobInput.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupJobId"))
     DescribeBackupJobInput.struct_class = Types::DescribeBackupJobInput
@@ -1380,6 +1444,45 @@ module Aws::Backup
     LimitExceededException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
     LimitExceededException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListAccessPointsMember.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: AccessPointArn, required: true, location_name: "AccessPointArn"))
+    ListAccessPointsMember.add_member(:access_point_metadata, Shapes::ShapeRef.new(shape: AccessPointMetadataMap, required: true, location_name: "AccessPointMetadata"))
+    ListAccessPointsMember.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: BackupVaultArn, location_name: "BackupVaultArn"))
+    ListAccessPointsMember.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location_name: "BackupVaultName"))
+    ListAccessPointsMember.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    ListAccessPointsMember.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "Name"))
+    ListAccessPointsMember.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: RecoveryPointArn, required: true, location_name: "RecoveryPointArn"))
+    ListAccessPointsMember.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    ListAccessPointsMember.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
+    ListAccessPointsMember.add_member(:status, Shapes::ShapeRef.new(shape: AccessPointStatus, required: true, location_name: "Status"))
+    ListAccessPointsMember.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    ListAccessPointsMember.struct_class = Types::ListAccessPointsMember
+
+    ListBackupAccessPointsByRecoveryPointRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListBackupAccessPointsByRecoveryPointRequestMaxResultsInteger, location: "querystring", location_name: "MaxResults"))
+    ListBackupAccessPointsByRecoveryPointRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
+    ListBackupAccessPointsByRecoveryPointRequest.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: RecoveryPointArn, required: true, location: "uri", location_name: "RecoveryPointArn"))
+    ListBackupAccessPointsByRecoveryPointRequest.struct_class = Types::ListBackupAccessPointsByRecoveryPointRequest
+
+    ListBackupAccessPointsByRecoveryPointResponse.add_member(:backup_access_points, Shapes::ShapeRef.new(shape: BackupAccessPoints, required: true, location_name: "BackupAccessPoints"))
+    ListBackupAccessPointsByRecoveryPointResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListBackupAccessPointsByRecoveryPointResponse.struct_class = Types::ListBackupAccessPointsByRecoveryPointResponse
+
+    ListBackupAccessPointsByResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListBackupAccessPointsByResourceRequestMaxResultsInteger, location: "querystring", location_name: "MaxResults"))
+    ListBackupAccessPointsByResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
+    ListBackupAccessPointsByResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    ListBackupAccessPointsByResourceRequest.struct_class = Types::ListBackupAccessPointsByResourceRequest
+
+    ListBackupAccessPointsByResourceResponse.add_member(:backup_access_points, Shapes::ShapeRef.new(shape: BackupAccessPoints, required: true, location_name: "BackupAccessPoints"))
+    ListBackupAccessPointsByResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListBackupAccessPointsByResourceResponse.struct_class = Types::ListBackupAccessPointsByResourceResponse
+
+    ListBackupAccessPointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListBackupAccessPointsRequestMaxResultsInteger, location: "querystring", location_name: "MaxResults"))
+    ListBackupAccessPointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
+    ListBackupAccessPointsRequest.struct_class = Types::ListBackupAccessPointsRequest
+
+    ListBackupAccessPointsResponse.add_member(:backup_access_points, Shapes::ShapeRef.new(shape: BackupAccessPoints, required: true, location_name: "BackupAccessPoints"))
+    ListBackupAccessPointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListBackupAccessPointsResponse.struct_class = Types::ListBackupAccessPointsResponse
 
     ListBackupJobSummariesInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "AccountId"))
     ListBackupJobSummariesInput.add_member(:state, Shapes::ShapeRef.new(shape: BackupJobStatus, location: "querystring", location_name: "State"))
@@ -2197,6 +2300,9 @@ module Aws::Backup
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: string)
 
+    TagMap.key = Shapes::ShapeRef.new(shape: TagMapKeyString)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagMapValueString)
+
     TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     TagResourceInput.struct_class = Types::TagResourceInput
@@ -2384,6 +2490,22 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:create_backup_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBackupAccessPoint"
+        o.http_method = "PUT"
+        o.http_request_uri = "/backup-access-point/create"
+        o.input = Shapes::ShapeRef.new(shape: CreateBackupAccessPointRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBackupAccessPointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:create_backup_plan, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateBackupPlan"
         o.http_method = "PUT"
@@ -2532,6 +2654,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:delete_backup_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBackupAccessPoint"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/backup-access-point/delete/{AccessPointArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBackupAccessPointInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:delete_backup_plan, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBackupPlan"
         o.http_method = "DELETE"
@@ -2676,6 +2811,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_backup_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBackupAccessPoint"
+        o.http_method = "GET"
+        o.http_request_uri = "/backup-access-point/{AccessPointArn}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBackupAccessPointInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBackupAccessPointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -3055,6 +3203,54 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:list_backup_access_points, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBackupAccessPoints"
+        o.http_method = "GET"
+        o.http_request_uri = "/backup-access-point"
+        o.input = Shapes::ShapeRef.new(shape: ListBackupAccessPointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBackupAccessPointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_backup_access_points_by_recovery_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBackupAccessPointsByRecoveryPoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/backup-access-point/recovery-point/{RecoveryPointArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListBackupAccessPointsByRecoveryPointRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBackupAccessPointsByRecoveryPointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_backup_access_points_by_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBackupAccessPointsByResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/backup-access-point/resource/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListBackupAccessPointsByResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBackupAccessPointsByResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_backup_job_summaries, Seahorse::Model::Operation.new.tap do |o|

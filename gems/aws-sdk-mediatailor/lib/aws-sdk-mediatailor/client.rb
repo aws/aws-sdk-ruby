@@ -2138,6 +2138,7 @@ module Aws::MediaTailor
     #   * {Types::GetFunctionResponse#description #description} => String
     #   * {Types::GetFunctionResponse#http_request_configuration #http_request_configuration} => Types::HttpRequestConfiguration
     #   * {Types::GetFunctionResponse#custom_output_configuration #custom_output_configuration} => Types::CustomOutputConfiguration
+    #   * {Types::GetFunctionResponse#concurrent_executor_configuration #concurrent_executor_configuration} => Types::ConcurrentExecutorConfiguration
     #   * {Types::GetFunctionResponse#sequential_executor_configuration #sequential_executor_configuration} => Types::SequentialExecutorConfiguration
     #   * {Types::GetFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetFunctionResponse#arn #arn} => String
@@ -2151,7 +2152,7 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.function_id #=> String
-    #   resp.function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "SEQUENTIAL_EXECUTOR"
+    #   resp.function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR"
     #   resp.description #=> String
     #   resp.http_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.http_request_configuration.output #=> Hash
@@ -2165,12 +2166,22 @@ module Aws::MediaTailor
     #   resp.custom_output_configuration.runtime #=> String, one of "JSONATA"
     #   resp.custom_output_configuration.output #=> Hash
     #   resp.custom_output_configuration.output["__string"] #=> String
+    #   resp.concurrent_executor_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.concurrent_executor_configuration.output #=> Hash
+    #   resp.concurrent_executor_configuration.output["__string"] #=> String
+    #   resp.concurrent_executor_configuration.function_list #=> Array
+    #   resp.concurrent_executor_configuration.function_list[0].run_condition #=> String
+    #   resp.concurrent_executor_configuration.function_list[0].function_id #=> String
+    #   resp.concurrent_executor_configuration.function_list[0].alias #=> String
+    #   resp.concurrent_executor_configuration.timeout_milliseconds #=> Integer
+    #   resp.concurrent_executor_configuration.max_concurrency #=> Integer
     #   resp.sequential_executor_configuration.runtime #=> String, one of "JSONATA"
     #   resp.sequential_executor_configuration.output #=> Hash
     #   resp.sequential_executor_configuration.output["__string"] #=> String
     #   resp.sequential_executor_configuration.function_list #=> Array
     #   resp.sequential_executor_configuration.function_list[0].run_condition #=> String
     #   resp.sequential_executor_configuration.function_list[0].function_id #=> String
+    #   resp.sequential_executor_configuration.function_list[0].alias #=> String
     #   resp.sequential_executor_configuration.timeout_milliseconds #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -2254,6 +2265,7 @@ module Aws::MediaTailor
     #   resp.insertion_mode #=> String, one of "STITCHED_ONLY", "PLAYER_SELECT"
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
+    #   resp.live_pre_roll_configuration.ad_decision_server_configuration.vast_response.ad_sequencing_mode #=> String, one of "FOLLOW_AD_SEQUENCE", "IGNORE_AD_SEQUENCE"
     #   resp.log_configuration.percent_enabled #=> Integer
     #   resp.log_configuration.enabled_logging_strategies #=> Array
     #   resp.log_configuration.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
@@ -2284,6 +2296,7 @@ module Aws::MediaTailor
     #   resp.ad_decision_server_configuration.http_request.headers #=> Hash
     #   resp.ad_decision_server_configuration.http_request.headers["__string"] #=> String
     #   resp.ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
+    #   resp.ad_decision_server_configuration.vast_response.ad_sequencing_mode #=> String, one of "FOLLOW_AD_SEQUENCE", "IGNORE_AD_SEQUENCE", "FOLLOW_AD_SEQUENCE_ONLY_LIVE", "FOLLOW_AD_SEQUENCE_ONLY_VOD"
     #   resp.function_mapping #=> Hash
     #   resp.function_mapping["EventName"] #=> String
     #   resp.ads_personalization_timeouts.ads_request_timeout_milliseconds #=> Integer
@@ -2583,7 +2596,7 @@ module Aws::MediaTailor
     #
     #   resp.items #=> Array
     #   resp.items[0].function_id #=> String
-    #   resp.items[0].function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "SEQUENTIAL_EXECUTOR"
+    #   resp.items[0].function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR"
     #   resp.items[0].description #=> String
     #   resp.items[0].http_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.items[0].http_request_configuration.output #=> Hash
@@ -2597,12 +2610,22 @@ module Aws::MediaTailor
     #   resp.items[0].custom_output_configuration.runtime #=> String, one of "JSONATA"
     #   resp.items[0].custom_output_configuration.output #=> Hash
     #   resp.items[0].custom_output_configuration.output["__string"] #=> String
+    #   resp.items[0].concurrent_executor_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.items[0].concurrent_executor_configuration.output #=> Hash
+    #   resp.items[0].concurrent_executor_configuration.output["__string"] #=> String
+    #   resp.items[0].concurrent_executor_configuration.function_list #=> Array
+    #   resp.items[0].concurrent_executor_configuration.function_list[0].run_condition #=> String
+    #   resp.items[0].concurrent_executor_configuration.function_list[0].function_id #=> String
+    #   resp.items[0].concurrent_executor_configuration.function_list[0].alias #=> String
+    #   resp.items[0].concurrent_executor_configuration.timeout_milliseconds #=> Integer
+    #   resp.items[0].concurrent_executor_configuration.max_concurrency #=> Integer
     #   resp.items[0].sequential_executor_configuration.runtime #=> String, one of "JSONATA"
     #   resp.items[0].sequential_executor_configuration.output #=> Hash
     #   resp.items[0].sequential_executor_configuration.output["__string"] #=> String
     #   resp.items[0].sequential_executor_configuration.function_list #=> Array
     #   resp.items[0].sequential_executor_configuration.function_list[0].run_condition #=> String
     #   resp.items[0].sequential_executor_configuration.function_list[0].function_id #=> String
+    #   resp.items[0].sequential_executor_configuration.function_list[0].alias #=> String
     #   resp.items[0].sequential_executor_configuration.timeout_milliseconds #=> Integer
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["__string"] #=> String
@@ -2758,6 +2781,7 @@ module Aws::MediaTailor
     #   resp.items[0].insertion_mode #=> String, one of "STITCHED_ONLY", "PLAYER_SELECT"
     #   resp.items[0].live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.items[0].live_pre_roll_configuration.max_duration_seconds #=> Integer
+    #   resp.items[0].live_pre_roll_configuration.ad_decision_server_configuration.vast_response.ad_sequencing_mode #=> String, one of "FOLLOW_AD_SEQUENCE", "IGNORE_AD_SEQUENCE"
     #   resp.items[0].log_configuration.percent_enabled #=> Integer
     #   resp.items[0].log_configuration.enabled_logging_strategies #=> Array
     #   resp.items[0].log_configuration.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
@@ -2788,6 +2812,7 @@ module Aws::MediaTailor
     #   resp.items[0].ad_decision_server_configuration.http_request.headers #=> Hash
     #   resp.items[0].ad_decision_server_configuration.http_request.headers["__string"] #=> String
     #   resp.items[0].ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
+    #   resp.items[0].ad_decision_server_configuration.vast_response.ad_sequencing_mode #=> String, one of "FOLLOW_AD_SEQUENCE", "IGNORE_AD_SEQUENCE", "FOLLOW_AD_SEQUENCE_ONLY_LIVE", "FOLLOW_AD_SEQUENCE_ONLY_VOD"
     #   resp.items[0].function_mapping #=> Hash
     #   resp.items[0].function_mapping["EventName"] #=> String
     #   resp.items[0].ads_personalization_timeouts.ads_request_timeout_milliseconds #=> Integer
@@ -3157,6 +3182,12 @@ module Aws::MediaTailor
     #   runtime and output expressions. Required when `FunctionType` is
     #   `CUSTOM_OUTPUT`.
     #
+    # @option params [Types::ConcurrentExecutorConfiguration] :concurrent_executor_configuration
+    #   The configuration for a `CONCURRENT_EXECUTOR` function. Specifies the
+    #   list of child functions to run in parallel, the maximum concurrency,
+    #   an optional output block, and a timeout. Required when `FunctionType`
+    #   is `CONCURRENT_EXECUTOR`.
+    #
     # @option params [Types::SequentialExecutorConfiguration] :sequential_executor_configuration
     #   The configuration for a `SEQUENTIAL_EXECUTOR` function. Specifies the
     #   ordered list of child functions to execute, an optional output block,
@@ -3179,6 +3210,7 @@ module Aws::MediaTailor
     #   * {Types::PutFunctionResponse#description #description} => String
     #   * {Types::PutFunctionResponse#http_request_configuration #http_request_configuration} => Types::HttpRequestConfiguration
     #   * {Types::PutFunctionResponse#custom_output_configuration #custom_output_configuration} => Types::CustomOutputConfiguration
+    #   * {Types::PutFunctionResponse#concurrent_executor_configuration #concurrent_executor_configuration} => Types::ConcurrentExecutorConfiguration
     #   * {Types::PutFunctionResponse#sequential_executor_configuration #sequential_executor_configuration} => Types::SequentialExecutorConfiguration
     #   * {Types::PutFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::PutFunctionResponse#arn #arn} => String
@@ -3187,7 +3219,7 @@ module Aws::MediaTailor
     #
     #   resp = client.put_function({
     #     function_id: "__string", # required
-    #     function_type: "HTTP_REQUEST", # required, accepts HTTP_REQUEST, CUSTOM_OUTPUT, SEQUENTIAL_EXECUTOR
+    #     function_type: "HTTP_REQUEST", # required, accepts HTTP_REQUEST, CUSTOM_OUTPUT, CONCURRENT_EXECUTOR, SEQUENTIAL_EXECUTOR
     #     description: "__string",
     #     http_request_configuration: {
     #       runtime: "JSONATA", # required, accepts JSONATA
@@ -3208,6 +3240,21 @@ module Aws::MediaTailor
     #         "__string" => "__string",
     #       },
     #     },
+    #     concurrent_executor_configuration: {
+    #       runtime: "JSONATA", # required, accepts JSONATA
+    #       output: { # required
+    #         "__string" => "__string",
+    #       },
+    #       function_list: [ # required
+    #         {
+    #           run_condition: "__string",
+    #           function_id: "__string",
+    #           alias: "__string",
+    #         },
+    #       ],
+    #       timeout_milliseconds: 1, # required
+    #       max_concurrency: 1, # required
+    #     },
     #     sequential_executor_configuration: {
     #       runtime: "JSONATA", # required, accepts JSONATA
     #       output: {
@@ -3217,6 +3264,7 @@ module Aws::MediaTailor
     #         {
     #           run_condition: "__string",
     #           function_id: "__string",
+    #           alias: "__string",
     #         },
     #       ],
     #       timeout_milliseconds: 1, # required
@@ -3229,7 +3277,7 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.function_id #=> String
-    #   resp.function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "SEQUENTIAL_EXECUTOR"
+    #   resp.function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR"
     #   resp.description #=> String
     #   resp.http_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.http_request_configuration.output #=> Hash
@@ -3243,12 +3291,22 @@ module Aws::MediaTailor
     #   resp.custom_output_configuration.runtime #=> String, one of "JSONATA"
     #   resp.custom_output_configuration.output #=> Hash
     #   resp.custom_output_configuration.output["__string"] #=> String
+    #   resp.concurrent_executor_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.concurrent_executor_configuration.output #=> Hash
+    #   resp.concurrent_executor_configuration.output["__string"] #=> String
+    #   resp.concurrent_executor_configuration.function_list #=> Array
+    #   resp.concurrent_executor_configuration.function_list[0].run_condition #=> String
+    #   resp.concurrent_executor_configuration.function_list[0].function_id #=> String
+    #   resp.concurrent_executor_configuration.function_list[0].alias #=> String
+    #   resp.concurrent_executor_configuration.timeout_milliseconds #=> Integer
+    #   resp.concurrent_executor_configuration.max_concurrency #=> Integer
     #   resp.sequential_executor_configuration.runtime #=> String, one of "JSONATA"
     #   resp.sequential_executor_configuration.output #=> Hash
     #   resp.sequential_executor_configuration.output["__string"] #=> String
     #   resp.sequential_executor_configuration.function_list #=> Array
     #   resp.sequential_executor_configuration.function_list[0].run_condition #=> String
     #   resp.sequential_executor_configuration.function_list[0].function_id #=> String
+    #   resp.sequential_executor_configuration.function_list[0].alias #=> String
     #   resp.sequential_executor_configuration.timeout_milliseconds #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -3467,6 +3525,11 @@ module Aws::MediaTailor
     #     live_pre_roll_configuration: {
     #       ad_decision_server_url: "__string",
     #       max_duration_seconds: 1,
+    #       ad_decision_server_configuration: {
+    #         vast_response: {
+    #           ad_sequencing_mode: "FOLLOW_AD_SEQUENCE", # accepts FOLLOW_AD_SEQUENCE, IGNORE_AD_SEQUENCE
+    #         },
+    #       },
     #     },
     #     manifest_processing_rules: {
     #       ad_marker_passthrough: {
@@ -3492,6 +3555,9 @@ module Aws::MediaTailor
     #           "__string" => "__string",
     #         },
     #         compress_request: "NONE", # accepts NONE, GZIP
+    #       },
+    #       vast_response: {
+    #         ad_sequencing_mode: "FOLLOW_AD_SEQUENCE", # accepts FOLLOW_AD_SEQUENCE, IGNORE_AD_SEQUENCE, FOLLOW_AD_SEQUENCE_ONLY_LIVE, FOLLOW_AD_SEQUENCE_ONLY_VOD
     #       },
     #     },
     #     function_mapping: {
@@ -3532,6 +3598,7 @@ module Aws::MediaTailor
     #   resp.insertion_mode #=> String, one of "STITCHED_ONLY", "PLAYER_SELECT"
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
+    #   resp.live_pre_roll_configuration.ad_decision_server_configuration.vast_response.ad_sequencing_mode #=> String, one of "FOLLOW_AD_SEQUENCE", "IGNORE_AD_SEQUENCE"
     #   resp.log_configuration.percent_enabled #=> Integer
     #   resp.log_configuration.enabled_logging_strategies #=> Array
     #   resp.log_configuration.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
@@ -3562,6 +3629,7 @@ module Aws::MediaTailor
     #   resp.ad_decision_server_configuration.http_request.headers #=> Hash
     #   resp.ad_decision_server_configuration.http_request.headers["__string"] #=> String
     #   resp.ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
+    #   resp.ad_decision_server_configuration.vast_response.ad_sequencing_mode #=> String, one of "FOLLOW_AD_SEQUENCE", "IGNORE_AD_SEQUENCE", "FOLLOW_AD_SEQUENCE_ONLY_LIVE", "FOLLOW_AD_SEQUENCE_ONLY_VOD"
     #   resp.function_mapping #=> Hash
     #   resp.function_mapping["EventName"] #=> String
     #   resp.ads_personalization_timeouts.ads_request_timeout_milliseconds #=> Integer
@@ -4255,7 +4323,7 @@ module Aws::MediaTailor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

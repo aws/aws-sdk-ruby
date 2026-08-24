@@ -4153,6 +4153,7 @@
           "ap-southeast-5" : { },
           "ap-southeast-7" : { },
           "ca-central-1" : { },
+          "ca-west-1" : { },
           "eu-central-1" : { },
           "eu-north-1" : { },
           "eu-west-1" : { },
@@ -17921,6 +17922,7 @@
           "eu-south-2" : { },
           "eu-west-1" : { },
           "eu-west-2" : { },
+          "eu-west-3" : { },
           "sa-east-1" : { },
           "us-east-1" : { },
           "us-east-2" : { },
@@ -27603,6 +27605,7 @@
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
           "ap-southeast-4" : { },
+          "ap-southeast-5" : { },
           "ca-central-1" : { },
           "ca-west-1" : { },
           "eu-central-1" : { },
@@ -30249,6 +30252,12 @@
         }
       },
       "redshift-serverless" : {
+        "endpoints" : {
+          "cn-north-1" : { },
+          "cn-northwest-1" : { }
+        }
+      },
+      "resource-explorer-2" : {
         "endpoints" : {
           "cn-north-1" : { },
           "cn-northwest-1" : { }
@@ -34366,6 +34375,12 @@
         },
         "isRegionalized" : false,
         "partitionEndpoint" : "aws-us-gov-global"
+      },
+      "osis" : {
+        "endpoints" : {
+          "us-gov-east-1" : { },
+          "us-gov-west-1" : { }
+        }
       },
       "outposts" : {
         "endpoints" : {

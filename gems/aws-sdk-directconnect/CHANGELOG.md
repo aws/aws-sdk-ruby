@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2026-08-20)
+------------------
+
+* Feature - This release adds custom route prefix pool allocations for Direct Connect. You can set IPv4 and IPv6 route prefix counts on private and transit virtual interfaces, and view pool size and unallocated counts on connections and LAGs, plus direct connect gateway attachment prefix allocation totals.
+
+1.114.0 (2026-08-03)
+------------------
+
+* Feature - Added route visibility support for AWS Direct Connect, allowing customers to call ListVirtualInterfaceRoutes to view the BGP routes including AS path and BGP communities advertised over their virtual interfaces.
+
 1.113.0 (2026-07-09)
 ------------------
 

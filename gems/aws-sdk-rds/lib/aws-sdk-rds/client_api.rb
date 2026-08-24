@@ -848,6 +848,8 @@ module Aws::RDS
 
     AdditionalStorageVolumeOutput.add_member(:volume_name, Shapes::ShapeRef.new(shape: String, location_name: "VolumeName"))
     AdditionalStorageVolumeOutput.add_member(:storage_volume_status, Shapes::ShapeRef.new(shape: String, location_name: "StorageVolumeStatus"))
+    AdditionalStorageVolumeOutput.add_member(:storage_operation_status, Shapes::ShapeRef.new(shape: String, location_name: "StorageOperationStatus"))
+    AdditionalStorageVolumeOutput.add_member(:storage_operation_percent_progress, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageOperationPercentProgress"))
     AdditionalStorageVolumeOutput.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: Integer, location_name: "AllocatedStorage"))
     AdditionalStorageVolumeOutput.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IOPS"))
     AdditionalStorageVolumeOutput.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
@@ -1907,6 +1909,8 @@ module Aws::RDS
     DBInstance.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     DBInstance.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesOutputList, location_name: "AdditionalStorageVolumes"))
     DBInstance.add_member(:storage_volume_status, Shapes::ShapeRef.new(shape: String, location_name: "StorageVolumeStatus"))
+    DBInstance.add_member(:storage_operation_status, Shapes::ShapeRef.new(shape: String, location_name: "StorageOperationStatus"))
+    DBInstance.add_member(:storage_operation_percent_progress, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageOperationPercentProgress"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault

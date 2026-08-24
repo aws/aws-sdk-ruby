@@ -1159,6 +1159,17 @@ module Aws::CloudWatchLogs
     #   The CSV content of the lookup table. The first row must be a header
     #   row with column names. The content must use UTF-8 encoding and not
     #   exceed 10 MB.
+    #
+    #   You must specify either `tableBody` or `queryId`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The ID of a completed or cancelled CloudWatch Logs query whose
+    #   results populate the lookup table. A cancelled query populates the
+    #   table with the partial results that were available when the query
+    #   was stopped.
+    #
+    #   You must specify either `tableBody` or `queryId`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -1179,6 +1190,7 @@ module Aws::CloudWatchLogs
       :lookup_table_name,
       :description,
       :table_body,
+      :query_id,
       :kms_key_id,
       :tags)
       SENSITIVE = []
@@ -1255,8 +1267,10 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] destination_configuration
-    #   Configuration for where to deliver query results. Currently supports
-    #   Amazon S3 destinations for storing query output.
+    #   Configuration for where to deliver query results. Supports Amazon S3
+    #   destinations for storing query output and lookup table destinations
+    #   for automatically refreshing lookup tables with query results. You
+    #   can configure one or both destination types.
     #   @return [Types::DestinationConfiguration]
     #
     # @!attribute [rw] schedule_start_time
@@ -2476,6 +2490,39 @@ module Aws::CloudWatchLogs
     #   want to retrieve field indexes for.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] index_categories
+    #   The index categories to return. The following values are supported:
+    #
+    #   * `DEFAULT`: Fields that CloudWatch Logs indexes by default.
+    #     Examples include `@logStream` and `@data_format`.
+    #
+    #   * `CUSTOM`: Fields that you added manually to the field index
+    #     policy. CloudWatch Logs always indexes these fields. These fields
+    #     count toward the quota of 20 fields for each log group.
+    #
+    #   * `AUTO`: Fields that CloudWatch Logs indexes automatically based on
+    #     your query patterns and usage. These fields do not count toward
+    #     the field index quota. CloudWatch Logs might update these fields
+    #     based on changes in your query patterns. To keep a field indexed
+    #     permanently, add it to an account-level or log-group level field
+    #     index policy.
+    #
+    #   * `INACTIVE`: Fields that CloudWatch Logs indexed before but does
+    #     not index now. This happens if you remove a field from the field
+    #     index policy or if CloudWatch Logs automatically selects a
+    #     different field based on your queries.
+    #
+    #   If you omit this parameter, the response includes the `DEFAULT`,
+    #   `CUSTOM`, and `INACTIVE` categories.
+    #
+    #   For more information about automatically indexed fields and using
+    #   the `AUTO` category, see [Automatically indexed fields][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Automatic.html
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. The token expires
     #   after 24 hours.
@@ -2485,6 +2532,7 @@ module Aws::CloudWatchLogs
     #
     class DescribeFieldIndexesRequest < Struct.new(
       :log_group_identifiers,
+      :index_categories,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3238,10 +3286,17 @@ module Aws::CloudWatchLogs
     #   Configuration for delivering query results to Amazon S3.
     #   @return [Types::S3Configuration]
     #
+    # @!attribute [rw] lookup_table_configuration
+    #   Configuration for delivering query results to a lookup table. The
+    #   query results automatically populate or refresh the specified lookup
+    #   table on each scheduled execution.
+    #   @return [Types::LookupTableConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DestinationConfiguration AWS API Documentation
     #
     class DestinationConfiguration < Struct.new(
-      :s3_configuration)
+      :s3_configuration,
+      :lookup_table_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3489,6 +3544,36 @@ module Aws::CloudWatchLogs
     #   field is indexed and can be queried.
     #   @return [String]
     #
+    # @!attribute [rw] index_category
+    #   The category of the field index:
+    #
+    #   * `DEFAULT`: Fields that CloudWatch Logs indexes by default.
+    #     Examples include `@logStream` and `@data_format`.
+    #
+    #   * `CUSTOM`: Fields that you added manually to the field index
+    #     policy. CloudWatch Logs always indexes these fields. These fields
+    #     count toward the quota of 20 fields for each log group.
+    #
+    #   * `AUTO`: Fields that CloudWatch Logs indexes automatically based on
+    #     your query patterns and usage. These fields do not count toward
+    #     the field index quota. CloudWatch Logs might update these fields
+    #     based on changes in your query patterns. To keep a field indexed
+    #     permanently, add it to an account-level or log-group level field
+    #     index policy.
+    #
+    #   * `INACTIVE`: Fields that CloudWatch Logs indexed before but does
+    #     not index now. This happens if you remove a field from the field
+    #     index policy or if CloudWatch Logs automatically selects a
+    #     different field based on your queries.
+    #
+    #   For more information about automatically indexed fields, see
+    #   [Automatically indexed fields][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Automatic.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FieldIndex AWS API Documentation
     #
     class FieldIndex < Struct.new(
@@ -3497,7 +3582,8 @@ module Aws::CloudWatchLogs
       :last_scan_time,
       :first_event_time,
       :last_event_time,
-      :type)
+      :type,
+      :index_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3562,6 +3648,11 @@ module Aws::CloudWatchLogs
     #   The start of the time range, expressed as the number of milliseconds
     #   after `Jan 1, 1970 00:00:00 UTC`. Events with a timestamp before
     #   this time are not returned.
+    #
+    #   <note markdown="1"> Set `startTime` explicitly to reduce the chances of empty pages in
+    #   the response.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
@@ -4012,6 +4103,11 @@ module Aws::CloudWatchLogs
     #   after `Jan 1, 1970 00:00:00 UTC`. Events with a timestamp equal to
     #   this time or later than this time are included. Events with a
     #   timestamp earlier than this time are not included.
+    #
+    #   <note markdown="1"> Set `startTime` explicitly to reduce the chances of empty pages in
+    #   the response.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
@@ -4607,7 +4703,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] last_updated_time
     #   The time when the storage tier policy was last updated, expressed as
-    #   the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+    #   the number of milliseconds after `January 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetStorageTierPolicyResponse AWS API Documentation
@@ -6201,6 +6297,47 @@ module Aws::CloudWatchLogs
       :size_bytes,
       :last_updated_time,
       :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a lookup table destination. Use it to automatically
+    # refresh a lookup table with query results on a schedule.
+    #
+    # @!attribute [rw] table_name
+    #   The name of the lookup table to create or update with query results.
+    #   The name can contain only alphanumeric characters and underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that grants permissions to create or update
+    #   the lookup table with query results.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the lookup table.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN of the KMS key to use to encrypt the lookup table data. If
+    #   you don't specify a key, the data is encrypted with an Amazon Web
+    #   Services-owned key.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Key-value pairs to associate with the lookup table for resource
+    #   management and cost allocation. The service applies tags only during
+    #   initial table creation.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LookupTableConfiguration AWS API Documentation
+    #
+    class LookupTableConfiguration < Struct.new(
+      :table_name,
+      :role_arn,
+      :description,
+      :kms_key_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7984,6 +8121,10 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_type
     #   Defines the type of log that the source is sending.
     #
+    #   * For Application Load Balancer, the valid values are
+    #     `ALB_ACCESS_LOGS`, `ALB_CONNECTION_LOGS`, and
+    #     `ALB_HEALTH_CHECK_LOGS`.
+    #
     #   * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS`
     #     and `EVENT_LOGS`.
     #
@@ -8671,8 +8812,9 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] storage_tier
-    #   The storage tier to set for the account. Valid values are `STANDARD`
-    #   and `INTELLIGENT_TIERING`.
+    #   The storage tier to set for the account. Use `INTELLIGENT_TIERING`
+    #   to automatically optimize storage costs by moving log data to the
+    #   appropriate tier based on access frequency.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutStorageTierPolicyRequest AWS API Documentation
@@ -8684,12 +8826,12 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] storage_tier
-    #   The storage tier that was set.
+    #   The storage tier for the account.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_time
     #   The time when the storage tier policy was last updated, expressed as
-    #   the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+    #   the number of milliseconds after `January 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutStorageTierPolicyResponse AWS API Documentation
@@ -8787,9 +8929,9 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] emit_system_fields
     #   A list of system fields to include in the log events sent to the
-    #   subscription destination. Valid values are `@aws.account` and
-    #   `@aws.region`. These fields provide source information for
-    #   centralized log data in the forwarded payload.
+    #   subscription destination. Valid values are `@aws.account`,
+    #   `@aws.region`, and `@source.log`. These fields provide source
+    #   information for centralized log data in the forwarded payload.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilterRequest AWS API Documentation
@@ -10596,6 +10738,17 @@ module Aws::CloudWatchLogs
     #   The new CSV content to replace the existing data. The first row must
     #   be a header row with column names. The content must use UTF-8
     #   encoding and not exceed 10 MB.
+    #
+    #   You must specify either `tableBody` or `queryId`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The ID of a completed or cancelled CloudWatch Logs query whose
+    #   results replace the lookup table content. A cancelled query replaces
+    #   the content with the partial results that were available when the
+    #   query was stopped.
+    #
+    #   You must specify either `tableBody` or `queryId`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -10611,6 +10764,7 @@ module Aws::CloudWatchLogs
       :lookup_table_arn,
       :description,
       :table_body,
+      :query_id,
       :kms_key_id)
       SENSITIVE = []
       include Aws::Structure

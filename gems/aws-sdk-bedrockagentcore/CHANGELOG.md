@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2026-08-21)
+------------------
+
+* Feature - Increase spans count from 1k to 20k
+
+1.49.0 (2026-08-19)
+------------------
+
+* Feature - AgentCore Memory now supports Flexible Namespaces and Non-Conversational Payloads in CreateEvent API
+
+1.48.0 (2026-08-14)
+------------------
+
+* Feature - Add support for the Machine Payments Protocol (MPP) and x402 upto scheme payments protocol in Amazon Bedrock AgentCore Payments. Customers can now pay for MPP-gated resources and also pay services which requires upto scheme in x402
+
+1.47.0 (2026-08-11)
+------------------
+
+* Feature - Adding online eval arn as input for recommendation API
+
+1.46.0 (2026-08-06)
+------------------
+
+* Feature - Add support for capacity provider sessions in Amazon Bedrock AgentCore. Customers can now delete an active session running on a runtime instance launched through their capacity provider.
+
 1.45.0 (2026-07-23)
 ------------------
 

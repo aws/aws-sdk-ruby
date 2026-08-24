@@ -2116,7 +2116,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
     #   @return [Array<Types::MetricStreamStatisticsConfiguration>]
     #
     # @!attribute [rw] include_linked_accounts_metrics
@@ -3052,6 +3052,20 @@ module Aws::CloudWatch
     #   notifications. Set when `ActionLogLineCount` is greater than 0.
     #   @return [String]
     #
+    # @!attribute [rw] warm_up_configuration
+    #   The warm-up configuration for the alarm. A warm-up period delays
+    #   alarm evaluation after you create or update the alarm. During the
+    #   warm-up period, the alarm stays in `INSUFFICIENT_DATA` and does not
+    #   perform alarm actions.
+    #
+    #   For more information, see [Alarm warm-up periods][1] in the *Amazon
+    #   CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+    #   @return [Types::WarmUpConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/LogAlarm AWS API Documentation
     #
     class LogAlarm < Struct.new(
@@ -3076,7 +3090,8 @@ module Aws::CloudWatch
       :state_transitioned_timestamp,
       :evaluation_state,
       :action_log_line_count,
-      :action_log_line_role_arn)
+      :action_log_line_role_arn,
+      :warm_up_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3401,6 +3416,20 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html
     #   @return [Types::EvaluationWindow]
     #
+    # @!attribute [rw] warm_up_configuration
+    #   The warm-up configuration for the alarm. A warm-up period delays
+    #   alarm evaluation after you create or update the alarm. During the
+    #   warm-up period, the alarm stays in `INSUFFICIENT_DATA` and does not
+    #   perform alarm actions.
+    #
+    #   For more information, see [Alarm warm-up periods][1] in the *Amazon
+    #   CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+    #   @return [Types::WarmUpConfiguration]
+    #
     # @!attribute [rw] evaluation_criteria
     #   The evaluation criteria for the alarm.
     #   @return [Types::EvaluationCriteria]
@@ -3442,6 +3471,7 @@ module Aws::CloudWatch
       :evaluation_state,
       :state_transitioned_timestamp,
       :evaluation_window,
+      :warm_up_configuration,
       :evaluation_criteria,
       :evaluation_interval)
       SENSITIVE = []
@@ -3937,7 +3967,7 @@ module Aws::CloudWatch
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
     #
     # @!attribute [rw] include_metrics
     #   An array of metric name and namespace pairs that stream the
@@ -3966,7 +3996,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricStreamStatisticsConfiguration AWS API Documentation
@@ -4737,6 +4767,20 @@ module Aws::CloudWatch
     #   tags to categorize and manage your alarms.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] warm_up_configuration
+    #   The warm-up configuration for the alarm. A warm-up period delays
+    #   alarm evaluation after you create or update the alarm. The warm-up
+    #   period reduces alarm noise from missing data while a new resource or
+    #   service starts publishing data.
+    #
+    #   For more information, see [Alarm warm-up periods][1] in the *Amazon
+    #   CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+    #   @return [Types::WarmUpConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutLogAlarmInput AWS API Documentation
     #
     class PutLogAlarmInput < Struct.new(
@@ -4754,7 +4798,8 @@ module Aws::CloudWatch
       :threshold,
       :comparison_operator,
       :treat_missing_data,
-      :tags)
+      :tags,
+      :warm_up_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5259,6 +5304,20 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html
     #   @return [Types::EvaluationWindow]
     #
+    # @!attribute [rw] warm_up_configuration
+    #   The warm-up configuration for the alarm. A warm-up period delays
+    #   alarm evaluation after you create or update the alarm. The warm-up
+    #   period reduces alarm noise from missing data while a new resource or
+    #   service starts publishing metrics.
+    #
+    #   For more information, see [Alarm warm-up periods][1] in the *Amazon
+    #   CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+    #   @return [Types::WarmUpConfiguration]
+    #
     # @!attribute [rw] evaluation_criteria
     #   The evaluation criteria for the alarm. For each `PutMetricAlarm`
     #   operation, you must specify either `MetricName`, a `Metrics` array,
@@ -5311,6 +5370,7 @@ module Aws::CloudWatch
       :tags,
       :threshold_metric_id,
       :evaluation_window,
+      :warm_up_configuration,
       :evaluation_criteria,
       :evaluation_interval)
       SENSITIVE = []
@@ -5495,7 +5555,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
     #   @return [Array<Types::MetricStreamStatisticsConfiguration>]
     #
     # @!attribute [rw] include_linked_accounts_metrics
@@ -6129,6 +6189,43 @@ module Aws::CloudWatch
     #
     class WallClockWindow < Struct.new(
       :timezone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings that define the warm-up behavior for an
+    # alarm. Use these settings to delay alarm evaluation after you create
+    # or update the alarm, which reduces alarm noise while a new resource or
+    # service starts publishing data.
+    #
+    # During the warm-up period, the alarm stays in `INSUFFICIENT_DATA` and
+    # does not perform alarm actions.
+    #
+    # @!attribute [rw] warm_up_period_duration_in_minutes
+    #   The length of the warm-up period, in minutes. After you create or
+    #   update the alarm, the alarm stays in `INSUFFICIENT_DATA` for this
+    #   duration. During this time, the alarm does not perform alarm
+    #   actions.
+    #
+    #   You can change this value at any time, including after the warm-up
+    #   period ends. If you change it after the warm-up period ends, the new
+    #   value does not restart the warm-up period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] only_start_evaluating_after_warm_up_period_ends
+    #   Specifies whether the alarm waits for the full warm-up period before
+    #   it starts to evaluate. The default is `false`. If `true`, the alarm
+    #   waits the entire `WarmUpPeriodDurationInMinutes` before it starts to
+    #   evaluate, even if metric data arrives earlier. If `false`, the alarm
+    #   ends the warm-up period early. Evaluation begins as soon as the
+    #   alarm has enough metric data to fill its evaluation window.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/WarmUpConfiguration AWS API Documentation
+    #
+    class WarmUpConfiguration < Struct.new(
+      :warm_up_period_duration_in_minutes,
+      :only_start_evaluating_after_warm_up_period_ends)
       SENSITIVE = []
       include Aws::Structure
     end

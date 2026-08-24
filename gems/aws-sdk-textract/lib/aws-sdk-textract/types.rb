@@ -218,6 +218,21 @@ module Aws::Textract
     # @!attribute [rw] human_loop_config
     #   Sets the configuration for the human in the loop workflow for
     #   analyzing documents.
+    #
+    #   <note markdown="1"> Amazon Textract uses Amazon Augmented AI (A2I) to run the human
+    #   review workflows that you specify in `HumanLoopConfig`. A2I entered
+    #   maintenance mode in July 2026 and no longer accepts new customers.
+    #   If your account is not an existing A2I customer, requests fail with
+    #   an `InvalidParameterException`. For more information, see [AWS
+    #   service availability][1]. If you're an existing A2I customer but
+    #   receive this error, contact AWS Support and request assistance from
+    #   the A2I team.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/about-aws/whats-new/2026/06/aws-service-availability/
     #   @return [Types::HumanLoopConfig]
     #
     # @!attribute [rw] queries_config
@@ -383,7 +398,11 @@ module Aws::Textract
     end
 
     # Amazon Textract isn't able to read the document. For more information
-    # on the document limits in Amazon Textract, see limits.
+    # on the document limits in Amazon Textract, see [Hard limits][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/limits.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/BadDocumentException AWS API Documentation
     #
@@ -1316,8 +1335,8 @@ module Aws::Textract
     #   @return [Array<Types::Point>]
     #
     # @!attribute [rw] rotation_angle
-    #   Provides a numerical value corresponding to the rotation of the
-    #   text.
+    #   Provides a numerical value corresponding to the rotation of the WORD
+    #   block. Possible values are 0, 90, 180, and 270.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Geometry AWS API Documentation
@@ -1892,6 +1911,20 @@ module Aws::Textract
     # Sets up the human review workflow the document will be sent to if one
     # of the conditions is met. You can also set certain attributes of the
     # image before review.
+    #
+    # <note markdown="1"> Amazon Textract uses Amazon Augmented AI (A2I) to run the human review
+    # workflows that you specify in `HumanLoopConfig`. A2I entered
+    # maintenance mode in July 2026 and no longer accepts new customers. If
+    # your account is not an existing A2I customer, requests fail with an
+    # `InvalidParameterException`. For more information, see [AWS service
+    # availability][1]. If you're an existing A2I customer but receive this
+    # error, contact AWS Support and request assistance from the A2I team.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/about-aws/whats-new/2026/06/aws-service-availability/
     #
     # @!attribute [rw] human_loop_name
     #   The name of the human workflow used for this image. This should be

@@ -8,6 +8,16 @@
 module Aws::MarketplaceCatalog
   module Types
 
+    class AMISecurityFilters
+      attr_accessor delivery_option_id: ::String
+      SENSITIVE: []
+    end
+
+    class AMISecuritySummary
+      attr_accessor delivery_option_id: ::String
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -57,6 +67,30 @@ module Aws::MarketplaceCatalog
 
     class AmiProductVisibilityFilter
       attr_accessor value_list: ::Array[("Limited" | "Public" | "Restricted" | "Draft")]
+      SENSITIVE: []
+    end
+
+    class AssessmentSummary
+      attr_accessor assessment_arn: ::String
+      attr_accessor assessment_id: ::String
+      attr_accessor framework_id: ::String
+      attr_accessor assessment_target_summary: Types::AssessmentTargetSummary
+      attr_accessor framework_summary: Types::FrameworkSummary
+      attr_accessor assessment_result: ("PASS" | "FAIL")
+      attr_accessor created_at: ::String
+      attr_accessor expires_at: ::String
+      SENSITIVE: []
+    end
+
+    class AssessmentTargetFilter
+      attr_accessor entity_id: ::String
+      attr_accessor change_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssessmentTargetSummary
+      attr_accessor entity_id: ::String
+      attr_accessor change_set_id: ::String
       SENSITIVE: []
     end
 
@@ -168,6 +202,30 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class ContainerSecurityFilters
+      attr_accessor delivery_option_id: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerSecuritySummary
+      attr_accessor delivery_option_id: ::String
+      SENSITIVE: []
+    end
+
+    class ControlAssessment
+      attr_accessor control_id: ::String
+      attr_accessor control_assessment_result: ("PASS" | "FAIL" | "NOT_EXECUTED" | "EXEMPTION_PASS")
+      attr_accessor errors: ::Array[Types::ControlError]
+      SENSITIVE: []
+    end
+
+    class ControlError
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor scope: ::Array[Types::ErrorScope]
+      SENSITIVE: []
+    end
+
     class DataProductEntityIdFilter
       attr_accessor value_list: ::Array[::String]
       SENSITIVE: []
@@ -221,6 +279,28 @@ module Aws::MarketplaceCatalog
     end
 
     class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAssessmentRequest
+      attr_accessor catalog: ::String
+      attr_accessor assessment_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssessmentResponse
+      attr_accessor assessment_arn: ::String
+      attr_accessor assessment_id: ::String
+      attr_accessor framework_id: ::String
+      attr_accessor assessment_target_summary: Types::AssessmentTargetSummary
+      attr_accessor framework_summary: Types::FrameworkSummary
+      attr_accessor assessment_result: ("PASS" | "FAIL")
+      attr_accessor created_at: ::String
+      attr_accessor expires_at: ::String
+      attr_accessor control_assessments: ::Array[Types::ControlAssessment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
     end
 
     class DescribeChangeSetRequest
@@ -368,10 +448,44 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class ErrorScope
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class Filter
       attr_accessor name: ::String
       attr_accessor value_list: ::Array[::String]
       SENSITIVE: []
+    end
+
+    class FrameworkFilters
+      attr_accessor ami_security_filters: Types::AMISecurityFilters
+      attr_accessor container_security_filters: Types::ContainerSecurityFilters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AmiSecurityFilters < FrameworkFilters
+      end
+      class ContainerSecurityFilters < FrameworkFilters
+      end
+      class Unknown < FrameworkFilters
+      end
+    end
+
+    class FrameworkSummary
+      attr_accessor ami_security_summary: Types::AMISecuritySummary
+      attr_accessor container_security_summary: Types::ContainerSecuritySummary
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AmiSecuritySummary < FrameworkSummary
+      end
+      class ContainerSecuritySummary < FrameworkSummary
+      end
+      class Unknown < FrameworkSummary
+      end
     end
 
     class GetResourcePolicyRequest
@@ -386,6 +500,22 @@ module Aws::MarketplaceCatalog
 
     class InternalServiceException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentsRequest
+      attr_accessor catalog: ::String
+      attr_accessor framework_id: ::String
+      attr_accessor assessment_target_filter: Types::AssessmentTargetFilter
+      attr_accessor framework_filters: Types::FrameworkFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentsResponse
+      attr_accessor assessment_summary_list: ::Array[Types::AssessmentSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -497,6 +627,11 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class OfferCreatedBySourceFilter
+      attr_accessor value_list: ::Array[("Seller" | "AwsMarketplace")]
+      SENSITIVE: []
+    end
+
     class OfferEntityIdFilter
       attr_accessor value_list: ::Array[::String]
       SENSITIVE: []
@@ -514,6 +649,9 @@ module Aws::MarketplaceCatalog
       attr_accessor targeting: Types::OfferTargetingFilter
       attr_accessor last_modified_date: Types::OfferLastModifiedDateFilter
       attr_accessor offer_set_id: Types::OfferSetIdFilter
+      attr_accessor target_agreement_id: Types::OfferTargetAgreementIdFilter
+      attr_accessor target_agreement_intent: Types::OfferTargetAgreementIntentFilter
+      attr_accessor created_by_source: Types::OfferCreatedBySourceFilter
       SENSITIVE: []
     end
 
@@ -634,7 +772,7 @@ module Aws::MarketplaceCatalog
     end
 
     class OfferSort
-      attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId")
+      attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId" | "TargetAgreementId" | "TargetAgreementIntent" | "CreatedBySource")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       SENSITIVE: []
     end
@@ -654,6 +792,19 @@ module Aws::MarketplaceCatalog
       attr_accessor state: ("Draft" | "Released")
       attr_accessor targeting: ::Array[("BuyerAccounts" | "ParticipatingPrograms" | "CountryCodes" | "None")]
       attr_accessor offer_set_id: ::String
+      attr_accessor target_agreement_id: ::String
+      attr_accessor target_agreement_intent: ("Renew")
+      attr_accessor created_by_source: ("Seller" | "AwsMarketplace")
+      SENSITIVE: []
+    end
+
+    class OfferTargetAgreementIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OfferTargetAgreementIntentFilter
+      attr_accessor value_list: ::Array[("Renew")]
       SENSITIVE: []
     end
 
@@ -927,6 +1078,17 @@ module Aws::MarketplaceCatalog
     end
 
     class ValidationException
+      attr_accessor message: ::String
+      attr_accessor validation_exception_field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor reason: ("UnknownOperation" | "CannotParse" | "FieldValidationFailed" | "Other")
+      attr_accessor entity_type: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor change_type: ::String
+      attr_accessor field: ::String
       attr_accessor message: ::String
       SENSITIVE: []
     end

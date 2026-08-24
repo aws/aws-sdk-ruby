@@ -2461,6 +2461,29 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Lambda resource you want to
+    #   delete the policy from. You can use a qualified or an unqualified
+    #   ARN. The value must be a complete ARN, and the operation does not
+    #   accept wildcard characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID that the existing policy must match for the deletion
+    #   to proceed. If the revision ID doesn't match, the operation fails
+    #   with a `PreconditionFailedException` error. To retrieve the current
+    #   revision ID, use the GetResourcePolicy operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A configuration object that specifies the destination of an event
     # after Lambda processes it. For more information, see [Adding a
     # destination][1].
@@ -3714,10 +3737,13 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] s3_object_storage_mode
-    #   Specifies how the deployment package is stored. Use `COPY` (default)
-    #   to upload a copy of your deployment package to Lambda. Use
-    #   `REFERENCE` to have Lambda reference the deployment package from the
-    #   specified Amazon S3 bucket.
+    #   Specifies how the deployment package is stored. Valid values:
+    #
+    #   * `COPY` (default) – Uploads a copy of your deployment package to
+    #     Lambda.
+    #
+    #   * `REFERENCE` – Lambda references the deployment package from the
+    #     specified Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] image_uri
@@ -3805,15 +3831,17 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Details about an error related to retrieving a function's deployment
-    # package.
+    # Contains details about an error that occurred when Lambda attempted to
+    # retrieve a function's deployment package.
     #
     # @!attribute [rw] error_code
-    #   The error code for the failed retrieval.
+    #   The error code that identifies why Lambda failed to retrieve the
+    #   deployment package.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   A description of the error.
+    #   The human-readable message that describes why Lambda failed to
+    #   retrieve the deployment package.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocationError AWS API Documentation
@@ -5346,6 +5374,41 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Lambda resource you want to
+    #   retrieve the policy for. You can use a qualified or an unqualified
+    #   ARN. The value must be a complete ARN, and the operation does not
+    #   accept wildcard characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource-based policy attached to the Lambda resource you
+    #   specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the policy. Pass this value as the `RevisionId`
+    #   in a PutResourcePolicy or DeleteResourcePolicy request. Doing so
+    #   ensures the operation acts on the expected version of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] function_name
     #   The name or ARN of the Lambda function.
     #
@@ -6238,7 +6301,12 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] s3_object_storage_mode
-    #   The storage mode for a function's deployment package.
+    #   Specifies how the layer archive is stored. Valid values:
+    #
+    #   * `COPY` (default) – Uploads a copy of your layer archive to Lambda.
+    #
+    #   * `REFERENCE` – Lambda references the layer archive from the
+    #     specified Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] zip_file
@@ -6287,8 +6355,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] resolved_s3_object
-    #   Details about the resolved Amazon S3 object that contains a
-    #   function's deployment package.
+    #   The resolved Amazon S3 object that contains the layer archive.
     #   @return [Types::ResolvedS3Object]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionContentOutput AWS API Documentation
@@ -7698,10 +7765,10 @@ module Aws::Lambda
     #
     # @!attribute [rw] maximum_pollers
     #   The maximum number of event pollers this event source can scale up
-    #   to. For Amazon SQS events source mappings, default is 200, and
-    #   minimum value allowed is 2. For Amazon MSK and self-managed Apache
-    #   Kafka event source mappings, default is 200, and minimum value
-    #   allowed is 1.
+    #   to. For Amazon SQS event source mappings, the accepted range is
+    #   between 2 and 10,000, with a default of 200. For Amazon MSK and
+    #   self-managed Apache Kafka event source mappings, the accepted range
+    #   is between 1 and 2,000, with a default of 200.
     #   @return [Integer]
     #
     # @!attribute [rw] poller_group_name
@@ -7724,15 +7791,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The resource-based policy you tried to add to the Lambda function
-    # would grant public access to it, and your account's
-    # `BlockPublicAccess` setting prevents public access. For more
-    # information about blocking public access to Lambda functions, see
-    # [Block public access to Lambda resources][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#access-control-block-public-access
+    # The resource-based policy you tried to add to the Lambda resource
+    # would grant public access to it, which isn't allowed.
     #
     # @!attribute [rw] type
     #   The exception type.
@@ -8280,6 +8340,61 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Lambda resource you want to
+    #   add the policy to. You can use a qualified or an unqualified ARN.
+    #   The value must be a complete ARN, and the operation does not accept
+    #   wildcard characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy document you want to add to your Lambda resource. This is
+    #   formatted as a JSON string.
+    #
+    #   For more information, see [Working with resource-based policies in
+    #   Lambda][1] in the *Lambda Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID that the existing policy must match for the
+    #   replacement to proceed. If the revision ID doesn't match, the
+    #   operation fails with a `PreconditionFailedException` error. To
+    #   retrieve the current revision ID, use the GetResourcePolicy
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource-based policy that Lambda adds to the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the policy that Lambda adds to your Lambda
+    #   resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9825,10 +9940,13 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] s3_object_storage_mode
-    #   Specifies how the deployment package is stored. Use `COPY` (default)
-    #   to upload a copy of your deployment package to Lambda. Use
-    #   `REFERENCE` to have Lambda reference the deployment package from the
-    #   specified Amazon S3 bucket.
+    #   Specifies how the deployment package is stored. Valid values:
+    #
+    #   * `COPY` (default) – Uploads a copy of your deployment package to
+    #     Lambda.
+    #
+    #   * `REFERENCE` – Lambda references the deployment package from the
+    #     specified Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] image_uri

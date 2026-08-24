@@ -1296,6 +1296,7 @@ module Aws::WorkSpaces
     #             mode: "ENABLED_AUTO", # required, accepts ENABLED_AUTO, DISABLED, INHERITED
     #             preferred_protocol: "TCP", # accepts TCP, NONE, INHERITED
     #           },
+    #           nested_virtualization_enabled: false,
     #         },
     #         tags: [
     #           {
@@ -1328,6 +1329,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
     #   resp.failed_requests[0].workspace_request.workspace_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED", "INHERITED"
     #   resp.failed_requests[0].workspace_request.workspace_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE", "INHERITED"
+    #   resp.failed_requests[0].workspace_request.workspace_properties.nested_virtualization_enabled #=> Boolean
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
@@ -1361,8 +1363,9 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
     #   resp.pending_requests[0].workspace_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED", "INHERITED"
     #   resp.pending_requests[0].workspace_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE", "INHERITED"
+    #   resp.pending_requests[0].workspace_properties.nested_virtualization_enabled #=> Boolean
     #   resp.pending_requests[0].modification_states #=> Array
-    #   resp.pending_requests[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE", "PROTOCOL"
+    #   resp.pending_requests[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE", "PROTOCOL", "NESTED_VIRTUALIZATION"
     #   resp.pending_requests[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.pending_requests[0].related_workspaces #=> Array
     #   resp.pending_requests[0].related_workspaces[0].workspace_id #=> String
@@ -1385,7 +1388,19 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Creates a pool of WorkSpaces.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_name
     #   The name of the pool.
@@ -2144,6 +2159,7 @@ module Aws::WorkSpaces
     #   resp.client_properties_list[0].resource_id #=> String
     #   resp.client_properties_list[0].client_properties.reconnect_enabled #=> String, one of "ENABLED", "DISABLED"
     #   resp.client_properties_list[0].client_properties.log_upload_enabled #=> String, one of "ENABLED", "DISABLED"
+    #   resp.client_properties_list[0].client_properties.client_experience_policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientProperties AWS API Documentation
     #
@@ -2923,8 +2939,9 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
     #   resp.workspaces[0].workspace_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED", "INHERITED"
     #   resp.workspaces[0].workspace_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE", "INHERITED"
+    #   resp.workspaces[0].workspace_properties.nested_virtualization_enabled #=> Boolean
     #   resp.workspaces[0].modification_states #=> Array
-    #   resp.workspaces[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE", "PROTOCOL"
+    #   resp.workspaces[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE", "PROTOCOL", "NESTED_VIRTUALIZATION"
     #   resp.workspaces[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.workspaces[0].related_workspaces #=> Array
     #   resp.workspaces[0].related_workspaces[0].workspace_id #=> String
@@ -2988,8 +3005,20 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Retrieves a list that describes the streaming sessions for a specified
     # pool.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_id
     #   The identifier of the pool.
@@ -3043,7 +3072,19 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Describes the specified WorkSpaces Pools.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [Array<String>] :pool_ids
     #   The identifier of the WorkSpaces Pools.
@@ -3711,6 +3752,12 @@ module Aws::WorkSpaces
     # For available migration scenarios, details about what happens during
     # migration, and best practices, see [Migrate a WorkSpace][1].
     #
+    # <note markdown="1"> If the source WorkSpace has nested virtualization enabled and the
+    # target bundle does not support nested virtualization, the migration
+    # fails.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html
@@ -3837,6 +3884,7 @@ module Aws::WorkSpaces
     #     client_properties: { # required
     #       reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
     #       log_upload_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #       client_experience_policy: "ClientExperiencePolicy",
     #     },
     #   })
     #
@@ -4133,6 +4181,7 @@ module Aws::WorkSpaces
     #         mode: "ENABLED_AUTO", # required, accepts ENABLED_AUTO, DISABLED, INHERITED
     #         preferred_protocol: "TCP", # accepts TCP, NONE, INHERITED
     #       },
+    #       nested_virtualization_enabled: false,
     #     },
     #     data_replication: "NO_REPLICATION", # accepts NO_REPLICATION, PRIMARY_AS_SOURCE
     #   })
@@ -4519,10 +4568,22 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Starts the specified pool.
     #
     # You cannot start a pool unless it has a running mode of `AutoStop` and
     # a state of `STOPPED`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_id
     #   The identifier of the pool.
@@ -4583,11 +4644,23 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Stops the specified pool.
     #
     # You cannot stop a WorkSpace pool unless it has a running mode of
     # `AutoStop` and a state of `AVAILABLE`, `IMPAIRED`, `UNHEALTHY`, or
     # `ERROR`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_id
     #   The identifier of the pool.
@@ -4678,7 +4751,19 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Terminates the specified pool.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_id
     #   The identifier of the pool.
@@ -4700,7 +4785,19 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Terminates the pool session.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :session_id
     #   The identifier of the pool session.
@@ -4947,7 +5044,19 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # <note markdown="1"> End of support notice: On December 31, 2027, Amazon Web Services will
+    # end support for Amazon WorkSpaces Pools. After December 31, 2027, you
+    # will no longer be able to access the Amazon WorkSpaces Pools console
+    # or Amazon WorkSpaces Pools resources. For more information, see
+    # [Amazon WorkSpaces Pools end of support][1].
+    #
+    #  </note>
+    #
     # Updates the specified pool.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
     #
     # @option params [required, String] :pool_id
     #   The identifier of the specified pool to update.
@@ -5052,7 +5161,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

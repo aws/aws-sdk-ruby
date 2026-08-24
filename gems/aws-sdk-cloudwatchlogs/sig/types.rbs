@@ -241,6 +241,7 @@ module Aws::CloudWatchLogs
       attr_accessor lookup_table_name: ::String
       attr_accessor description: ::String
       attr_accessor table_body: ::String
+      attr_accessor query_id: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -583,6 +584,7 @@ module Aws::CloudWatchLogs
 
     class DescribeFieldIndexesRequest
       attr_accessor log_group_identifiers: ::Array[::String]
+      attr_accessor index_categories: ::Array[("DEFAULT" | "CUSTOM" | "AUTO" | "INACTIVE")]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -769,6 +771,7 @@ module Aws::CloudWatchLogs
 
     class DestinationConfiguration
       attr_accessor s3_configuration: Types::S3Configuration
+      attr_accessor lookup_table_configuration: Types::LookupTableConfiguration
       SENSITIVE: []
     end
 
@@ -826,6 +829,7 @@ module Aws::CloudWatchLogs
       attr_accessor first_event_time: ::Integer
       attr_accessor last_event_time: ::Integer
       attr_accessor type: ("FACET" | "FIELD_INDEX")
+      attr_accessor index_category: ("DEFAULT" | "CUSTOM" | "AUTO" | "INACTIVE")
       SENSITIVE: []
     end
 
@@ -1481,6 +1485,15 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class LookupTableConfiguration
+      attr_accessor table_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class LowerCaseString
       attr_accessor with_keys: ::Array[::String]
       SENSITIVE: []
@@ -2079,7 +2092,7 @@ module Aws::CloudWatchLogs
     end
 
     class ScheduledQueryDestination
-      attr_accessor destination_type: ("S3")
+      attr_accessor destination_type: ("S3" | "LOOKUP_TABLE")
       attr_accessor destination_identifier: ::String
       attr_accessor status: ("IN_PROGRESS" | "CLIENT_ERROR" | "FAILED" | "COMPLETE")
       attr_accessor processed_identifier: ::String
@@ -2347,6 +2360,7 @@ module Aws::CloudWatchLogs
       attr_accessor lookup_table_arn: ::String
       attr_accessor description: ::String
       attr_accessor table_body: ::String
+      attr_accessor query_id: ::String
       attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end

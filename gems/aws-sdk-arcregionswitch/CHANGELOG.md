@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2026-08-20)
+------------------
+
+* Feature - Adds support for Rds switchover read replica for Oracle databases in Region switch plans
+
 1.21.0 (2026-07-22)
 ------------------
 

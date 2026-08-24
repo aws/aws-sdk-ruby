@@ -518,6 +518,10 @@ module Aws::MWAAServerless
     #   compatible with the Amazon Managed Workflows for Apache Airflow
     #   Serverless execution environment.
     #
+    # @option params [Types::Code] :code
+    #   The location of code artifacts in Amazon S3 for the workflow. The
+    #   service copies the code from this location at the time of the request.
+    #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon Managed
     #   Workflows for Apache Airflow Serverless assumes when executing the
@@ -593,6 +597,13 @@ module Aws::MWAAServerless
     #       bucket: "String", # required
     #       object_key: "String", # required
     #       version_id: "String",
+    #     },
+    #     code: {
+    #       s3_location: {
+    #         bucket: "S3LocationBucketString", # required
+    #         object_key: "S3LocationObjectKeyString", # required
+    #         version_id: "S3LocationVersionIdString",
+    #       },
     #     },
     #     role_arn: "RoleARN", # required
     #     description: "DescriptionString",
@@ -773,6 +784,8 @@ module Aws::MWAAServerless
     #   * {Types::GetWorkflowResponse#engine_version #engine_version} => Integer
     #   * {Types::GetWorkflowResponse#workflow_status #workflow_status} => String
     #   * {Types::GetWorkflowResponse#definition_s3_location #definition_s3_location} => Types::DefinitionS3Location
+    #   * {Types::GetWorkflowResponse#code #code} => Types::Code
+    #   * {Types::GetWorkflowResponse#code_snapshotted_at #code_snapshotted_at} => Time
     #   * {Types::GetWorkflowResponse#schedule_configuration #schedule_configuration} => Types::ScheduleConfiguration
     #   * {Types::GetWorkflowResponse#role_arn #role_arn} => String
     #   * {Types::GetWorkflowResponse#network_configuration #network_configuration} => Types::NetworkConfiguration
@@ -802,6 +815,10 @@ module Aws::MWAAServerless
     #   resp.definition_s3_location.bucket #=> String
     #   resp.definition_s3_location.object_key #=> String
     #   resp.definition_s3_location.version_id #=> String
+    #   resp.code.s3_location.bucket #=> String
+    #   resp.code.s3_location.object_key #=> String
+    #   resp.code.s3_location.version_id #=> String
+    #   resp.code_snapshotted_at #=> Time
     #   resp.schedule_configuration.cron_expression #=> String
     #   resp.role_arn #=> String
     #   resp.network_configuration.security_group_ids #=> Array
@@ -1315,6 +1332,11 @@ module Aws::MWAAServerless
     #   The Amazon S3 location where the updated workflow definition file is
     #   stored.
     #
+    # @option params [Types::Code] :code
+    #   The location of code artifacts in Amazon S3 for the updated workflow.
+    #   The service copies the code from this location at the time of the
+    #   request.
+    #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon Managed
     #   Workflows for Apache Airflow Serverless assumes when it executes the
@@ -1351,6 +1373,13 @@ module Aws::MWAAServerless
     #       bucket: "String", # required
     #       object_key: "String", # required
     #       version_id: "String",
+    #     },
+    #     code: {
+    #       s3_location: {
+    #         bucket: "S3LocationBucketString", # required
+    #         object_key: "S3LocationObjectKeyString", # required
+    #         version_id: "S3LocationVersionIdString",
+    #       },
     #     },
     #     role_arn: "RoleARN", # required
     #     description: "DescriptionString",
@@ -1400,7 +1429,7 @@ module Aws::MWAAServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mwaaserverless'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

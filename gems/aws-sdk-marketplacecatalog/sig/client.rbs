@@ -115,6 +115,28 @@ module Aws
                                   ) -> _DeleteResourcePolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
 
+      interface _DescribeAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssessmentResponse]
+        def assessment_arn: () -> ::String
+        def assessment_id: () -> ::String
+        def framework_id: () -> ::String
+        def assessment_target_summary: () -> Types::AssessmentTargetSummary
+        def framework_summary: () -> Types::FrameworkSummary
+        def assessment_result: () -> ("PASS" | "FAIL")
+        def created_at: () -> ::String
+        def expires_at: () -> ::String
+        def control_assessments: () -> ::Array[Types::ControlAssessment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceCatalog/Client.html#describe_assessment-instance_method
+      def describe_assessment: (
+                                 catalog: ::String,
+                                 assessment_identifier: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _DescribeAssessmentResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssessmentResponseSuccess
+
       interface _DescribeChangeSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChangeSetResponse]
         def change_set_id: () -> ::String
@@ -160,6 +182,32 @@ module Aws
                                  resource_arn: ::String
                                ) -> _GetResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _ListAssessmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentsResponse]
+        def assessment_summary_list: () -> ::Array[Types::AssessmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceCatalog/Client.html#list_assessments-instance_method
+      def list_assessments: (
+                              catalog: ::String,
+                              ?framework_id: ::String,
+                              ?assessment_target_filter: {
+                                entity_id: ::String?,
+                                change_set_id: ::String?
+                              },
+                              ?framework_filters: {
+                                ami_security_filters: {
+                                  delivery_option_id: ::String?
+                                }?,
+                                container_security_filters: {
+                                  delivery_option_id: ::String?
+                                }?
+                              },
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListAssessmentsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentsResponseSuccess
 
       interface _ListChangeSetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListChangeSetsResponse]
@@ -304,6 +352,15 @@ module Aws
                                }?,
                                offer_set_id: {
                                  value_list: Array[::String]?
+                               }?,
+                               target_agreement_id: {
+                                 value_list: Array[::String]?
+                               }?,
+                               target_agreement_intent: {
+                                 value_list: Array[("Renew")]?
+                               }?,
+                               created_by_source: {
+                                 value_list: Array[("Seller" | "AwsMarketplace")]?
                                }?
                              }?,
                              container_product_filters: {
@@ -448,7 +505,7 @@ module Aws
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              offer_sort: {
-                               sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId")?,
+                               sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId" | "TargetAgreementId" | "TargetAgreementIntent" | "CreatedBySource")?,
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              container_product_sort: {

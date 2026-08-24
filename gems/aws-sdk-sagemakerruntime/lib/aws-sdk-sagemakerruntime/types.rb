@@ -313,6 +313,18 @@ module Aws::SageMakerRuntime
     #   instance that supports the session.
     #   @return [String]
     #
+    # @!attribute [rw] prefix_aware_id
+    #   An optional, stable identifier that serves as a routing hint for
+    #   prefix-aware routing. The service routes requests with the same
+    #   prefix and the same identifier to the same instance. If requests
+    #   from different applications might have the same prompt prefix, set a
+    #   different identifier for each application to differentiate their
+    #   routing decisions.
+    #
+    #   Applies only to endpoints configured with a `RoutingStrategy` of
+    #   `PREFIX_AWARE`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput AWS API Documentation
     #
     class InvokeEndpointInput < Struct.new(
@@ -327,7 +339,8 @@ module Aws::SageMakerRuntime
       :inference_id,
       :enable_explanations,
       :inference_component_name,
-      :session_id)
+      :session_id,
+      :prefix_aware_id)
       SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end
@@ -504,6 +517,18 @@ module Aws::SageMakerRuntime
     #   `NewSessionId` response parameter.
     #   @return [String]
     #
+    # @!attribute [rw] prefix_aware_id
+    #   An optional, stable identifier that serves as a routing hint for
+    #   prefix-aware routing. The service routes requests with the same
+    #   prefix and the same identifier to the same instance. If requests
+    #   from different applications might have the same prompt prefix, set a
+    #   different identifier for each application to differentiate their
+    #   routing decisions.
+    #
+    #   Applies only to endpoints configured with a `RoutingStrategy` of
+    #   `PREFIX_AWARE`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointWithResponseStreamInput AWS API Documentation
     #
     class InvokeEndpointWithResponseStreamInput < Struct.new(
@@ -516,7 +541,8 @@ module Aws::SageMakerRuntime
       :target_container_hostname,
       :inference_id,
       :inference_component_name,
-      :session_id)
+      :session_id,
+      :prefix_aware_id)
       SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end

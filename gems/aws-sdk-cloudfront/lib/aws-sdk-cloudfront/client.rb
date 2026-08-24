@@ -3212,7 +3212,7 @@ module Aws::CloudFront
     #     origin_access_control_config: { # required
     #       name: "string", # required
     #       description: "string",
-    #       signing_protocol: "sigv4", # required, accepts sigv4
+    #       signing_protocol: "sigv4", # required, accepts sigv4, sigv4a
     #       signing_behavior: "never", # required, accepts never, always, no-override
     #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore, mediapackagev2, lambda
     #     },
@@ -3223,7 +3223,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.id #=> String
     #   resp.origin_access_control.origin_access_control_config.name #=> String
     #   resp.origin_access_control.origin_access_control_config.description #=> String
-    #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
+    #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4", "sigv4a"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
     #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.location #=> String
@@ -6503,7 +6503,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.id #=> String
     #   resp.origin_access_control.origin_access_control_config.name #=> String
     #   resp.origin_access_control.origin_access_control_config.description #=> String
-    #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
+    #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4", "sigv4a"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
     #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
@@ -6537,7 +6537,7 @@ module Aws::CloudFront
     #
     #   resp.origin_access_control_config.name #=> String
     #   resp.origin_access_control_config.description #=> String
-    #   resp.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
+    #   resp.origin_access_control_config.signing_protocol #=> String, one of "sigv4", "sigv4a"
     #   resp.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
     #   resp.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
@@ -10288,7 +10288,7 @@ module Aws::CloudFront
     #   resp.origin_access_control_list.items[0].id #=> String
     #   resp.origin_access_control_list.items[0].description #=> String
     #   resp.origin_access_control_list.items[0].name #=> String
-    #   resp.origin_access_control_list.items[0].signing_protocol #=> String, one of "sigv4"
+    #   resp.origin_access_control_list.items[0].signing_protocol #=> String, one of "sigv4", "sigv4a"
     #   resp.origin_access_control_list.items[0].signing_behavior #=> String, one of "never", "always", "no-override"
     #   resp.origin_access_control_list.items[0].origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #
@@ -13063,7 +13063,7 @@ module Aws::CloudFront
     #     origin_access_control_config: { # required
     #       name: "string", # required
     #       description: "string",
-    #       signing_protocol: "sigv4", # required, accepts sigv4
+    #       signing_protocol: "sigv4", # required, accepts sigv4, sigv4a
     #       signing_behavior: "never", # required, accepts never, always, no-override
     #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore, mediapackagev2, lambda
     #     },
@@ -13076,7 +13076,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.id #=> String
     #   resp.origin_access_control.origin_access_control_config.name #=> String
     #   resp.origin_access_control.origin_access_control_config.description #=> String
-    #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
+    #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4", "sigv4a"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
     #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
@@ -13815,7 +13815,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.152.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

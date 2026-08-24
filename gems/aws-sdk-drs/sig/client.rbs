@@ -89,6 +89,16 @@ module Aws
                                           ) -> _AssociateSourceNetworkStackResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSourceNetworkStackResponseSuccess
 
+      interface _CancelRecoveryPlanExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelRecoveryPlanExecutionResponse]
+        def recovery_plan_execution: () -> Types::RecoveryPlanExecution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#cancel_recovery_plan_execution-instance_method
+      def cancel_recovery_plan_execution: (
+                                            recovery_plan_execution_arn: ::String
+                                          ) -> _CancelRecoveryPlanExecutionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelRecoveryPlanExecutionResponseSuccess
+
       interface _CreateExtendedSourceServerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateExtendedSourceServerResponse]
         def source_server: () -> Types::SourceServer
@@ -120,6 +130,33 @@ module Aws
                                                   ?recovery_mode: ("FAST" | "OPTIMAL")
                                                 ) -> _CreateLaunchConfigurationTemplateResponseSuccess
                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLaunchConfigurationTemplateResponseSuccess
+
+      interface _CreateRecoveryPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecoveryPlanResponse]
+        def recovery_plan: () -> Types::RecoveryPlan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#create_recovery_plan-instance_method
+      def create_recovery_plan: (
+                                  name: ::String,
+                                  ?description: ::String,
+                                  ?client_token: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateRecoveryPlanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecoveryPlanResponseSuccess
+
+      interface _CreateRecoveryPlanStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecoveryPlanStepResponse]
+        def recovery_plan_step: () -> Types::RecoveryPlanStep
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#create_recovery_plan_step-instance_method
+      def create_recovery_plan_step: (
+                                       recovery_plan_arn: ::String,
+                                       step_name: ::String,
+                                       ?step_order: ::Integer,
+                                       configuration: Params::recovery_plan_step_configuration,
+                                       ?client_token: ::String
+                                     ) -> _CreateRecoveryPlanStepResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecoveryPlanStepResponseSuccess
 
       interface _CreateReplicationConfigurationTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfigurationTemplate]
@@ -217,6 +254,36 @@ module Aws
                                       recovery_instance_id: ::String
                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteRecoveryPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRecoveryPlanResponse]
+        def recovery_plan_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#delete_recovery_plan-instance_method
+      def delete_recovery_plan: (
+                                  recovery_plan_arn: ::String
+                                ) -> _DeleteRecoveryPlanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRecoveryPlanResponseSuccess
+
+      interface _DeleteRecoveryPlanExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRecoveryPlanExecutionResponse]
+        def recovery_plan_execution_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#delete_recovery_plan_execution-instance_method
+      def delete_recovery_plan_execution: (
+                                            recovery_plan_execution_arn: ::String
+                                          ) -> _DeleteRecoveryPlanExecutionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRecoveryPlanExecutionResponseSuccess
+
+      interface _DeleteRecoveryPlanStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRecoveryPlanStepResponse]
+        def recovery_plan_step_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#delete_recovery_plan_step-instance_method
+      def delete_recovery_plan_step: (
+                                       recovery_plan_step_arn: ::String
+                                     ) -> _DeleteRecoveryPlanStepResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRecoveryPlanStepResponseSuccess
 
       interface _DeleteReplicationConfigurationTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationConfigurationTemplateResponse]
@@ -442,6 +509,46 @@ module Aws
                                     ) -> _GetLaunchConfigurationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLaunchConfigurationResponseSuccess
 
+      interface _GetRecoveryPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecoveryPlanResponse]
+        def recovery_plan: () -> Types::RecoveryPlan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#get_recovery_plan-instance_method
+      def get_recovery_plan: (
+                               recovery_plan_arn: ::String
+                             ) -> _GetRecoveryPlanResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecoveryPlanResponseSuccess
+
+      interface _GetRecoveryPlanExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecoveryPlanExecutionResponse]
+        def recovery_plan_execution: () -> Types::RecoveryPlanExecution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#get_recovery_plan_execution-instance_method
+      def get_recovery_plan_execution: (
+                                         recovery_plan_execution_arn: ::String
+                                       ) -> _GetRecoveryPlanExecutionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecoveryPlanExecutionResponseSuccess
+
+      interface _GetRecoveryPlanExecutionStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecoveryPlanExecutionStepResponse]
+        def recovery_plan_execution_step: () -> Types::RecoveryPlanExecutionStep
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#get_recovery_plan_execution_step-instance_method
+      def get_recovery_plan_execution_step: (
+                                              recovery_plan_execution_step_arn: ::String
+                                            ) -> _GetRecoveryPlanExecutionStepResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecoveryPlanExecutionStepResponseSuccess
+
+      interface _GetRecoveryPlanStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecoveryPlanStepResponse]
+        def recovery_plan_step: () -> Types::RecoveryPlanStep
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#get_recovery_plan_step-instance_method
+      def get_recovery_plan_step: (
+                                    recovery_plan_step_arn: ::String
+                                  ) -> _GetRecoveryPlanStepResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecoveryPlanStepResponseSuccess
+
       interface _GetReplicationConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfiguration]
         def source_server_id: () -> ::String
@@ -506,6 +613,61 @@ module Aws
                                ) -> _ListLaunchActionsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLaunchActionsResponseSuccess
 
+      interface _ListRecoveryPlanExecutionStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecoveryPlanExecutionStepsResponse]
+        def recovery_plan_execution_steps: () -> ::Array[Types::RecoveryPlanExecutionStepSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#list_recovery_plan_execution_steps-instance_method
+      def list_recovery_plan_execution_steps: (
+                                                recovery_plan_execution_arn: ::String,
+                                                ?filter: {
+                                                  status: ("NOT_STARTED" | "EXECUTING" | "WAITING" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "SKIPPED")?
+                                                },
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListRecoveryPlanExecutionStepsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecoveryPlanExecutionStepsResponseSuccess
+
+      interface _ListRecoveryPlanExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecoveryPlanExecutionsResponse]
+        def recovery_plan_executions: () -> ::Array[Types::RecoveryPlanExecutionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#list_recovery_plan_executions-instance_method
+      def list_recovery_plan_executions: (
+                                           ?recovery_plan_arn: ::String,
+                                           ?status: ("CREATED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED"),
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListRecoveryPlanExecutionsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecoveryPlanExecutionsResponseSuccess
+
+      interface _ListRecoveryPlanStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecoveryPlanStepsResponse]
+        def recovery_plan_steps: () -> ::Array[Types::RecoveryPlanStep]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#list_recovery_plan_steps-instance_method
+      def list_recovery_plan_steps: (
+                                      recovery_plan_arn: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListRecoveryPlanStepsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecoveryPlanStepsResponseSuccess
+
+      interface _ListRecoveryPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecoveryPlansResponse]
+        def recovery_plans: () -> ::Array[Types::RecoveryPlanSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#list_recovery_plans-instance_method
+      def list_recovery_plans: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListRecoveryPlansResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecoveryPlansResponseSuccess
+
       interface _ListStagingAccountsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStagingAccountsResponse]
         def accounts: () -> ::Array[Types::Account]
@@ -562,6 +724,17 @@ module Aws
                              ) -> _PutLaunchActionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLaunchActionResponseSuccess
 
+      interface _ReorderRecoveryPlanStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReorderRecoveryPlanStepsResponse]
+        def recovery_plan_steps: () -> ::Array[Types::RecoveryPlanStep]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#reorder_recovery_plan_steps-instance_method
+      def reorder_recovery_plan_steps: (
+                                         recovery_plan_arn: ::String,
+                                         ordered_step_arns: Array[::String]
+                                       ) -> _ReorderRecoveryPlanStepsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReorderRecoveryPlanStepsResponseSuccess
+
       interface _RetryDataReplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SourceServer]
         def source_server_id: () -> ::String
@@ -584,6 +757,16 @@ module Aws
                                     source_server_id: ::String
                                   ) -> _RetryDataReplicationResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetryDataReplicationResponseSuccess
+
+      interface _RetryRecoveryPlanExecutionStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetryRecoveryPlanExecutionStepResponse]
+        def recovery_plan_execution_step: () -> Types::RecoveryPlanExecutionStep
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#retry_recovery_plan_execution_step-instance_method
+      def retry_recovery_plan_execution_step: (
+                                                recovery_plan_execution_step_arn: ::String
+                                              ) -> _RetryRecoveryPlanExecutionStepResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetryRecoveryPlanExecutionStepResponseSuccess
 
       interface _ReverseReplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReverseReplicationResponse]
@@ -622,6 +805,25 @@ module Aws
                             ?tags: Hash[::String, ::String]
                           ) -> _StartRecoveryResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRecoveryResponseSuccess
+
+      interface _StartRecoveryPlanExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRecoveryPlanExecutionResponse]
+        def recovery_plan_execution: () -> Types::RecoveryPlanExecution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#start_recovery_plan_execution-instance_method
+      def start_recovery_plan_execution: (
+                                           recovery_plan_arn: ::String,
+                                           mode: ("DRILL" | "RECOVERY"),
+                                           ?client_token: ::String,
+                                           ?source_servers: Array[
+                                             {
+                                               source_server_id: ::String,
+                                               recovery_snapshot_id: ::String
+                                             }
+                                           ],
+                                           ?tags: Hash[::String, ::String]
+                                         ) -> _StartRecoveryPlanExecutionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRecoveryPlanExecutionResponseSuccess
 
       interface _StartReplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartReplicationResponse]
@@ -773,6 +975,48 @@ module Aws
                                                   ?recovery_mode: ("FAST" | "OPTIMAL")
                                                 ) -> _UpdateLaunchConfigurationTemplateResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchConfigurationTemplateResponseSuccess
+
+      interface _UpdateRecoveryPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecoveryPlanResponse]
+        def recovery_plan: () -> Types::RecoveryPlan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#update_recovery_plan-instance_method
+      def update_recovery_plan: (
+                                  recovery_plan_arn: ::String,
+                                  ?name: ::String,
+                                  ?description: ::String
+                                ) -> _UpdateRecoveryPlanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecoveryPlanResponseSuccess
+
+      interface _UpdateRecoveryPlanExecutionStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecoveryPlanExecutionStepResponse]
+        def recovery_plan_execution_step: () -> Types::RecoveryPlanExecutionStep
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#update_recovery_plan_execution_step-instance_method
+      def update_recovery_plan_execution_step: (
+                                                 recovery_plan_execution_step_arn: ::String,
+                                                 ?status: ("NOT_STARTED" | "EXECUTING" | "WAITING" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "SKIPPED"),
+                                                 ?servers: Array[
+                                                   {
+                                                     server_arn: ::String,
+                                                     impact_level: ("CRITICAL" | "OPTIONAL")?
+                                                   }
+                                                 ],
+                                                 ?wait_duration_minutes: ::Integer
+                                               ) -> _UpdateRecoveryPlanExecutionStepResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecoveryPlanExecutionStepResponseSuccess
+
+      interface _UpdateRecoveryPlanStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecoveryPlanStepResponse]
+        def recovery_plan_step: () -> Types::RecoveryPlanStep
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Drs/Client.html#update_recovery_plan_step-instance_method
+      def update_recovery_plan_step: (
+                                       recovery_plan_step_arn: ::String,
+                                       ?step_name: ::String,
+                                       ?configuration: Params::recovery_plan_step_configuration
+                                     ) -> _UpdateRecoveryPlanStepResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecoveryPlanStepResponseSuccess
 
       interface _UpdateReplicationConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfiguration]

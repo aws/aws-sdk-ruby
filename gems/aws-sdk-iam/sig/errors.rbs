@@ -75,6 +75,9 @@ module Aws
       class MalformedPolicyDocumentException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class NameConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class NoSuchEntityException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -95,6 +98,12 @@ module Aws
         def message: () -> ::String
       end
       class ReportGenerationLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RoleModifiedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RoleTemplateDisabledException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ServiceAccessNotEnabledException < ::Aws::Errors::ServiceError

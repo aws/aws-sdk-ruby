@@ -8830,8 +8830,17 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] scte_35_control
-    #   Optionally pass SCTE-35 signals from the input source to this
-    #   output.
+    #   SCTE-35 control. Option "none" indicates that a SCTE-35 marker
+    #   will not be inserted, nor will an IDR be inserted at the SCTE-35 cue
+    #   point, nor will the segment be segmented. Option
+    #   "scte35WithoutIdr" indicates that a SCTE-35 marker will be
+    #   inserted to indicate the cue point, but MediaLive will not insert an
+    #   IDR on that frame nor will it introduce a new segment boundary there
+    #   if it wasn't already going to be one (this option is required for
+    #   use with downstream multiview bitstream stitching workflows). Option
+    #   "passthrough" indicates that a SCTE-35 marker will be inserted to
+    #   indicate the cue point, and an IDR will be inserted on that frame,
+    #   and MediaLive itself will introduce a new segment boundary there.
     #   @return [String]
     #
     # @!attribute [rw] scte_35_pid
@@ -10318,12 +10327,19 @@ module Aws::MediaLive
     #   Nielsen NAES II (N2) and Nielsen NAES VI (NW).
     #   @return [Types::NielsenNaesIiNw]
     #
+    # @!attribute [rw] nielsen_nw_only_settings
+    #   Complete these fields only if you want to insert watermarks of type
+    #   Nielsen NAES VI (NW) only, without inserting NAES II (N2)
+    #   watermarks.
+    #   @return [Types::NielsenNwOnly]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NielsenWatermarksSettings AWS API Documentation
     #
     class NielsenWatermarksSettings < Struct.new(
       :nielsen_cbet_settings,
       :nielsen_distribution_type,
-      :nielsen_naes_ii_nw_settings)
+      :nielsen_naes_ii_nw_settings,
+      :nielsen_nw_only_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10507,13 +10523,18 @@ module Aws::MediaLive
     #   username for destination
     #   @return [String]
     #
+    # @!attribute [rw] virtual_source_address
+    #   Specifies the source IP address for outbound multicast packets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestinationSettings AWS API Documentation
     #
     class OutputDestinationSettings < Struct.new(
       :password_param,
       :stream_name,
       :url,
-      :username)
+      :username,
+      :virtual_source_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13969,6 +13990,25 @@ module Aws::MediaLive
     #   height and width are required.
     #   @return [Integer]
     #
+    # @!attribute [rw] crop_rectangle
+    #   Region of the input video to crop before scaling. If not specified,
+    #   the entire input frame is used. Note: Unlike \{@link
+    #   outputPositionRectangle}, the bounds of cropRectangle are validated
+    #   at ingest time by the encoder/scaler rather than at the API level,
+    #   because the input resolution is not known until the source is
+    #   probed. Field-level constraints on (x, y, width, height) defined on
+    #   \{@link VideoPositionRectangle} still apply.
+    #   @return [Types::VideoPositionRectangle]
+    #
+    # @!attribute [rw] output_position_rectangle
+    #   Position of the encoded video within the output frame. The area
+    #   outside the rectangle is filled with black. If not specified, the
+    #   video fills the entire output frame. When used, both \{@link width}
+    #   and \{@link height} of the VideoDescription must be explicitly
+    #   specified so that the rectangle can be validated against the output
+    #   frame.
+    #   @return [Types::VideoPositionRectangle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoDescription AWS API Documentation
     #
     class VideoDescription < Struct.new(
@@ -13978,7 +14018,9 @@ module Aws::MediaLive
       :respond_to_afd,
       :scaling_behavior,
       :sharpness,
-      :width)
+      :width,
+      :crop_rectangle,
+      :output_position_rectangle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14390,7 +14432,19 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] scte_35_type
-    #   Type of scte35 track to add. none or scte35WithoutSegmentation
+    #   SCTE-35 insertion type. Option "none" indicates that a SCTE-35
+    #   marker will not be inserted, nor will an IDR be inserted at the
+    #   SCTE-35 cue point, nor will the segment be segmented. Option
+    #   "scte35WithoutIdr" indicates that a SCTE-35 marker will be
+    #   inserted to indicate the cue point, but MediaLive will not insert an
+    #   IDR on that frame nor will it introduce a new segment boundary there
+    #   if it wasn't already going to be one (this option is required for
+    #   use with downstream multiview bitstream stitching workflows). Option
+    #   "scte35WithoutSegmentation" indicates that a SCTE-35 marker will
+    #   be inserted to indicate the cue point, and an IDR will be inserted
+    #   on that frame so that a downstream re-packager might split the
+    #   segment there, but MediaLive itself will not introduce a new segment
+    #   boundary there.
     #   @return [String]
     #
     # @!attribute [rw] segment_length
@@ -21647,8 +21701,17 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] scte_35_control
-    #   Optionally pass SCTE-35 signals from the input source to this
-    #   output.
+    #   SCTE-35 control. Option "none" indicates that a SCTE-35 marker
+    #   will not be inserted, nor will an IDR be inserted at the SCTE-35 cue
+    #   point, nor will the segment be segmented. Option
+    #   "scte35WithoutIdr" indicates that a SCTE-35 marker will be
+    #   inserted to indicate the cue point, but MediaLive will not insert an
+    #   IDR on that frame nor will it introduce a new segment boundary there
+    #   if it wasn't already going to be one (this option is required for
+    #   use with downstream multiview bitstream stitching workflows). Option
+    #   "passthrough" indicates that a SCTE-35 marker will be inserted to
+    #   indicate the cue point, and an IDR will be inserted on that frame,
+    #   and MediaLive itself will introduce a new segment boundary there.
     #   @return [String]
     #
     # @!attribute [rw] scte_35_preroll_pullup_milliseconds
@@ -22314,7 +22377,19 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] scte_35_type
-    #   Type of scte35 track to add. none or scte35WithoutSegmentation
+    #   SCTE-35 insertion type. Option "none" indicates that a SCTE-35
+    #   marker will not be inserted, nor will an IDR be inserted at the
+    #   SCTE-35 cue point, nor will the segment be segmented. Option
+    #   "scte35WithoutIdr" indicates that a SCTE-35 marker will be
+    #   inserted to indicate the cue point, but MediaLive will not insert an
+    #   IDR on that frame nor will it introduce a new segment boundary there
+    #   if it wasn't already going to be one (this option is required for
+    #   use with downstream multiview bitstream stitching workflows). Option
+    #   "scte35WithoutSegmentation" indicates that a SCTE-35 marker will
+    #   be inserted to indicate the cue point, and an IDR will be inserted
+    #   on that frame so that a downstream re-packager might split the
+    #   segment there, but MediaLive itself will not introduce a new segment
+    #   boundary there.
     #   @return [String]
     #
     # @!attribute [rw] segment_length
@@ -23280,6 +23355,61 @@ module Aws::MediaLive
       :channels,
       :gain_db,
       :remix_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Nielsen Nw Only
+    #
+    # @!attribute [rw] check_digit_string
+    #   Enter the check digit string for the watermark
+    #   @return [String]
+    #
+    # @!attribute [rw] sid
+    #   Enter the Nielsen Source ID (SID) to include in the watermark
+    #   @return [Float]
+    #
+    # @!attribute [rw] timezone
+    #   Choose the timezone for the time stamps in the watermark. If not
+    #   provided, the timestamps will be in Coordinated Universal Time (UTC)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NielsenNwOnly AWS API Documentation
+    #
+    class NielsenNwOnly < Struct.new(
+      :check_digit_string,
+      :sid,
+      :timezone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rectangle defined by position (x, y) and dimensions (width, height)
+    # in pixels. Used for output positioning and input cropping.
+    #
+    # @!attribute [rw] height
+    #   Height in pixels. Must be an even number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] width
+    #   Width in pixels. Must be an even number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] x
+    #   Left offset in pixels. Must be an even number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] y
+    #   Top offset in pixels. Must be an even number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoPositionRectangle AWS API Documentation
+    #
+    class VideoPositionRectangle < Struct.new(
+      :height,
+      :width,
+      :x,
+      :y)
       SENSITIVE = []
       include Aws::Structure
     end

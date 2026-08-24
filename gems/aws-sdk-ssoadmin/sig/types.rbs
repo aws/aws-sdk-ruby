@@ -466,6 +466,7 @@ module Aws::SSOAdmin
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "ACTIVE")
       attr_accessor status_reason: ::String
       attr_accessor encryption_configuration_details: Types::EncryptionConfigurationDetails
+      attr_accessor permission_sets_enabled: bool
       SENSITIVE: []
     end
 
@@ -1278,6 +1279,7 @@ module Aws::SSOAdmin
       attr_accessor name: ::String
       attr_accessor instance_arn: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor permission_sets_enabled: bool
       SENSITIVE: []
     end
 

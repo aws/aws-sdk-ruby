@@ -154,7 +154,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#create_report-instance_method
       def create_report: (
                            service_arn: ::String,
-                           report_type: ("FAILURE_MODE"),
+                           report_type: ("FAILURE_MODE" | "TESTING"),
                            ?client_token: ::String
                          ) -> _CreateReportResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReportResponseSuccess
@@ -235,6 +235,30 @@ module Aws
                            ?client_token: ::String
                          ) -> _CreateSystemResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSystemResponseSuccess
+
+      interface _CreateTestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTestResponse]
+        def test: () -> Types::Test
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#create_test-instance_method
+      def create_test: (
+                         service_arn: ::String,
+                         test_template_arn: ::String,
+                         ?logging_configuration: {
+                           s3_bucket_name: ::String?,
+                           cloud_watch_log_group_arn: ::String?,
+                           log_schema_version: ::String?
+                         },
+                         ?stop_conditions: Array[
+                           {
+                             source: ("aws:cloudwatch:alarm" | "none"),
+                             value: ::String
+                           }
+                         ],
+                         ?role_name: ::String,
+                         ?parameters: Hash[::String, Array[::String]]
+                       ) -> _CreateTestResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTestResponseSuccess
 
       interface _CreateUserJourneyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserJourneyResponse]
@@ -328,6 +352,30 @@ module Aws
                          ) -> _DeleteSystemResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSystemResponseSuccess
 
+      interface _DeleteTestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTestResponse]
+        def test_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#delete_test-instance_method
+      def delete_test: (
+                         test_id: ::String,
+                         service_arn: ::String
+                       ) -> _DeleteTestResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTestResponseSuccess
+
+      interface _DeleteTestSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTestSourcesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#delete_test_sources-instance_method
+      def delete_test_sources: (
+                                 test_id: ::String,
+                                 service_arn: ::String,
+                                 test_sources: Array[
+                                   Params::test_source_input
+                                 ]
+                               ) -> _DeleteTestSourcesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTestSourcesResponseSuccess
+
       interface _DeleteUserJourneyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserJourneyResponse]
         def user_journey_id: () -> ::String
@@ -379,6 +427,38 @@ module Aws
                         system_arn: ::String
                       ) -> _GetSystemResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSystemResponseSuccess
+
+      interface _GetTestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTestResponse]
+        def test: () -> Types::Test
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#get_test-instance_method
+      def get_test: (
+                      test_id: ::String,
+                      service_arn: ::String
+                    ) -> _GetTestResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTestResponseSuccess
+
+      interface _GetTestRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTestRunResponse]
+        def test_run: () -> Types::TestRun
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#get_test_run-instance_method
+      def get_test_run: (
+                          test_run_id: ::String,
+                          service_arn: ::String
+                        ) -> _GetTestRunResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTestRunResponseSuccess
+
+      interface _GetTestTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTestTemplateResponse]
+        def test_template: () -> Types::TestTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#get_test_template-instance_method
+      def get_test_template: (
+                               test_template_arn: ::String
+                             ) -> _GetTestTemplateResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTestTemplateResponseSuccess
 
       interface _GetUserJourneyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetUserJourneyResponse]
@@ -529,11 +609,26 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_reports-instance_method
       def list_reports: (
                           ?service_arn: ::String,
-                          ?report_type: ("FAILURE_MODE"),
+                          ?report_type: ("FAILURE_MODE" | "TESTING"),
+                          ?test_run_id: ::String,
                           ?max_results: ::Integer,
                           ?next_token: ::String
                         ) -> _ListReportsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReportsResponseSuccess
+
+      interface _ListResolvedTestRunTargetResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolvedTestRunTargetResourcesResponse]
+        def resolved_target_resources: () -> ::Array[Types::ResolvedTargetResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_resolved_test_run_target_resources-instance_method
+      def list_resolved_test_run_target_resources: (
+                                                     test_run_id: ::String,
+                                                     service_arn: ::String,
+                                                     ?max_results: ::Integer,
+                                                     ?next_token: ::String
+                                                   ) -> _ListResolvedTestRunTargetResourcesResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolvedTestRunTargetResourcesResponseSuccess
 
       interface _ListResourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesResponse]
@@ -652,6 +747,88 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListTestRunEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunEventsResponse]
+        def events: () -> ::Array[Types::TestRunEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_test_run_events-instance_method
+      def list_test_run_events: (
+                                  test_run_id: ::String,
+                                  service_arn: ::String,
+                                  ?started_at: ::Time,
+                                  ?ended_at: ::Time,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListTestRunEventsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestRunEventsResponseSuccess
+
+      interface _ListTestRunSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunSourcesResponse]
+        def test_run_sources: () -> ::Array[Types::TestRunSourceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_test_run_sources-instance_method
+      def list_test_run_sources: (
+                                   test_run_id: ::String,
+                                   service_arn: ::String,
+                                   ?type: ("SUCCESS_CRITERIA" | "OBSERVABILITY"),
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListTestRunSourcesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestRunSourcesResponseSuccess
+
+      interface _ListTestRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunsResponse]
+        def test_runs: () -> ::Array[Types::TestRunSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_test_runs-instance_method
+      def list_test_runs: (
+                            service_arn: ::String,
+                            ?test_id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListTestRunsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestRunsResponseSuccess
+
+      interface _ListTestSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestSourcesResponse]
+        def test_sources: () -> ::Array[Types::TestSourceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_test_sources-instance_method
+      def list_test_sources: (
+                               test_id: ::String,
+                               service_arn: ::String,
+                               ?type: ("SUCCESS_CRITERIA" | "OBSERVABILITY"),
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListTestSourcesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestSourcesResponseSuccess
+
+      interface _ListTestTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestTemplatesResponse]
+        def test_templates: () -> ::Array[Types::TestTemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_test_templates-instance_method
+      def list_test_templates: (
+                               ) -> _ListTestTemplatesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestTemplatesResponseSuccess
+
+      interface _ListTestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestsResponse]
+        def tests: () -> ::Array[Types::TestSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_tests-instance_method
+      def list_tests: (
+                        service_arn: ::String,
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListTestsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestsResponseSuccess
+
       interface _ListUserJourneysResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListUserJourneysResponse]
         def user_journey_summaries: () -> ::Array[Types::UserJourneySummary]
@@ -664,6 +841,19 @@ module Aws
                                 ?next_token: ::String
                               ) -> _ListUserJourneysResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserJourneysResponseSuccess
+
+      interface _PutTestSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutTestSourcesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#put_test_sources-instance_method
+      def put_test_sources: (
+                              test_id: ::String,
+                              service_arn: ::String,
+                              test_sources: Array[
+                                Params::test_source_input
+                              ]
+                            ) -> _PutTestSourcesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTestSourcesResponseSuccess
 
       interface _StartFailureModeAssessmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartFailureModeAssessmentResponse]
@@ -678,6 +868,31 @@ module Aws
                                            ?client_token: ::String
                                          ) -> _StartFailureModeAssessmentResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFailureModeAssessmentResponseSuccess
+
+      interface _StartTestRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTestRunResponse]
+        def test_run_id: () -> ::String
+        def status: () -> ("INITIALIZING" | "RUNNING" | "STOPPING" | "PASSED" | "FAILED" | "STOPPED" | "ERROR")
+        def experiment_arns: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#start_test_run-instance_method
+      def start_test_run: (
+                            test_id: ::String,
+                            service_arn: ::String
+                          ) -> _StartTestRunResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTestRunResponseSuccess
+
+      interface _StopTestRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTestRunResponse]
+        def test_run_id: () -> ::String
+        def status: () -> ("INITIALIZING" | "RUNNING" | "STOPPING" | "PASSED" | "FAILED" | "STOPPED" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#stop_test_run-instance_method
+      def stop_test_run: (
+                           test_run_id: ::String,
+                           service_arn: ::String
+                         ) -> _StopTestRunResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTestRunResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
@@ -827,6 +1042,30 @@ module Aws
                          ) -> _UpdateSystemResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSystemResponseSuccess
 
+      interface _UpdateTestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTestResponse]
+        def test: () -> Types::Test
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#update_test-instance_method
+      def update_test: (
+                         test_id: ::String,
+                         service_arn: ::String,
+                         ?logging_configuration: {
+                           s3_bucket_name: ::String?,
+                           cloud_watch_log_group_arn: ::String?,
+                           log_schema_version: ::String?
+                         },
+                         ?stop_conditions: Array[
+                           {
+                             source: ("aws:cloudwatch:alarm" | "none"),
+                             value: ::String
+                           }
+                         ],
+                         ?role_name: ::String,
+                         ?parameters: Hash[::String, Array[::String]]
+                       ) -> _UpdateTestResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTestResponseSuccess
+
       interface _UpdateUserJourneyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserJourneyResponse]
         def user_journey: () -> Types::UserJourney
@@ -855,7 +1094,8 @@ module Aws
                     | (:failure_mode_assessment_success waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_ListFailureModeAssessmentsResponseSuccess
                     | (:report_succeeded waiter_name, 
                     ?service_arn: ::String,
-                    ?report_type: ("FAILURE_MODE"),
+                    ?report_type: ("FAILURE_MODE" | "TESTING"),
+                    ?test_run_id: ::String,
                     ?max_results: ::Integer,
                     ?next_token: ::String
                   ) -> Client::_ListReportsResponseSuccess

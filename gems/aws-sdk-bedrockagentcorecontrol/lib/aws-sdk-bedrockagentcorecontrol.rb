@@ -55,7 +55,7 @@ module Aws::BedrockAgentCoreControl
   autoload :EndpointProvider, 'aws-sdk-bedrockagentcorecontrol/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bedrockagentcorecontrol/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

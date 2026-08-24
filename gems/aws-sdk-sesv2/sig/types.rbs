@@ -133,6 +133,11 @@ module Aws::SESV2
     class ConcurrentModificationException < Aws::EmptyStructure
     end
 
+    class ConfigurationOverrides
+      attr_accessor tracking: Types::TrackingConfigurationOverrides
+      SENSITIVE: []
+    end
+
     class ConflictException < Aws::EmptyStructure
     end
 
@@ -1794,6 +1799,7 @@ module Aws::SESV2
       attr_accessor configuration_set_name: ::String
       attr_accessor endpoint_id: ::String
       attr_accessor tenant_name: ::String
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides
       SENSITIVE: []
     end
 
@@ -1827,6 +1833,7 @@ module Aws::SESV2
       attr_accessor endpoint_id: ::String
       attr_accessor tenant_name: ::String
       attr_accessor list_management_options: Types::ListManagementOptions
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides
       SENSITIVE: []
     end
 
@@ -2010,6 +2017,12 @@ module Aws::SESV2
     class TopicPreference
       attr_accessor topic_name: ::String
       attr_accessor subscription_status: ("OPT_IN" | "OPT_OUT")
+      SENSITIVE: []
+    end
+
+    class TrackingConfigurationOverrides
+      attr_accessor open_tracking_enabled: ("ENABLED" | "DISABLED")
+      attr_accessor click_tracking_enabled: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

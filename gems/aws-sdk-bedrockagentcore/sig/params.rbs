@@ -76,6 +76,11 @@ module Aws
       cloudwatch_logs: Params::cloud_watch_logs_trace_config?,
       batch_evaluation: {
         batch_evaluation_arn: ::String
+      }?,
+      online_evaluation: {
+        online_evaluation_config_arn: ::String,
+        start_time: ::Time,
+        end_time: ::Time
       }?
     }
 

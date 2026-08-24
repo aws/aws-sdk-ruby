@@ -16,6 +16,9 @@ module Aws::EKSAuth
     class AssumeRoleForPodIdentityRequest
       attr_accessor cluster_name: ::String
       attr_accessor token: ::String
+      attr_accessor eks_node_name: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor zone: ::String
       SENSITIVE: [:token]
     end
 

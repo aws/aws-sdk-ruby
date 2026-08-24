@@ -1253,11 +1253,18 @@ module Aws
         def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
         def created_by: () -> ::String
         def security_group_ids: () -> ::Array[::String]
+        def private_dns_enabled: () -> bool
+        def dns_options: () -> Types::DnsOptions
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_service_network_vpc_association-instance_method
       def update_service_network_vpc_association: (
                                                     service_network_vpc_association_identifier: ::String,
-                                                    security_group_ids: Array[::String]
+                                                    ?security_group_ids: Array[::String],
+                                                    ?private_dns_enabled: bool,
+                                                    ?dns_options: {
+                                                      private_dns_preference: ("VERIFIED_DOMAINS_ONLY" | "ALL_DOMAINS" | "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS" | "SPECIFIED_DOMAINS_ONLY")?,
+                                                      private_dns_specified_domains: Array[::String]?
+                                                    }
                                                   ) -> _UpdateServiceNetworkVpcAssociationResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceNetworkVpcAssociationResponseSuccess
 

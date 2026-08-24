@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2026-08-04)
+------------------
+
+* Feature - AWS IAM Identity Center now lets you create organization-level instances without enabling multi-account permissions. You can enable multi-account permissions during instance creation or later via console or API, which then provisions the necessary service-linked roles.
+
 1.76.0 (2026-07-09)
 ------------------
 

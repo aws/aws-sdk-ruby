@@ -82,11 +82,15 @@ module Aws
       interface _AssociateGlossaryTermsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateGlossaryTermsResponse]
         def asset_identifier: () -> ::String
+        def iterable_form_name: () -> ::String
+        def item_identifier: () -> ::String
         def glossary_terms: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#associate_glossary_terms-instance_method
       def associate_glossary_terms: (
                                       asset_identifier: ::String,
+                                      ?iterable_form_name: ::String,
+                                      ?item_identifier: ::String,
                                       glossary_term_identifiers: Array[::String],
                                       ?client_token: ::String
                                     ) -> _AssociateGlossaryTermsResponseSuccess
@@ -1136,6 +1140,8 @@ module Aws
       interface _DeleteAttachmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAttachmentResponse]
         def asset_identifier: () -> ::String
+        def iterable_form_name: () -> ::String
+        def item_identifier: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#delete_attachment-instance_method
       def delete_attachment: (
@@ -1618,11 +1624,15 @@ module Aws
       interface _DisassociateGlossaryTermsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateGlossaryTermsResponse]
         def asset_identifier: () -> ::String
+        def iterable_form_name: () -> ::String
+        def item_identifier: () -> ::String
         def glossary_terms: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#disassociate_glossary_terms-instance_method
       def disassociate_glossary_terms: (
                                          asset_identifier: ::String,
+                                         ?iterable_form_name: ::String,
+                                         ?item_identifier: ::String,
                                          glossary_term_identifiers: Array[::String],
                                          ?client_token: ::String
                                        ) -> _DisassociateGlossaryTermsResponseSuccess
@@ -1917,6 +1927,20 @@ module Aws
                                                   ?catalog_id: ::String
                                                 ) -> _GetDataCatalogEncryptionSettingsResponseSuccess
                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataCatalogEncryptionSettingsResponseSuccess
+
+      interface _GetDataCatalogExportConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataCatalogExportConfigurationOutput]
+        def export_setting: () -> ("ENABLED" | "DISABLED")
+        def status: () -> ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+        def encryption_configuration: () -> Types::ExportEncryptionConfiguration
+        def s3_table_bucket_arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_catalog_export_configuration-instance_method
+      def get_data_catalog_export_configuration: (
+                                                 ) -> _GetDataCatalogExportConfigurationResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataCatalogExportConfigurationResponseSuccess
 
       interface _GetDataQualityModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityModelResponse]
@@ -3579,6 +3603,22 @@ module Aws
                                                   }
                                                 ) -> _PutDataCatalogEncryptionSettingsResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDataCatalogEncryptionSettingsResponseSuccess
+
+      interface _PutDataCatalogExportConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDataCatalogExportConfigurationOutput]
+        def export_setting: () -> ("ENABLED" | "DISABLED")
+        def encryption_configuration: () -> Types::ExportEncryptionConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#put_data_catalog_export_configuration-instance_method
+      def put_data_catalog_export_configuration: (
+                                                   export_setting: ("ENABLED" | "DISABLED"),
+                                                   ?encryption_configuration: {
+                                                     sse_algorithm: ::String?,
+                                                     kms_key_arn: ::String?
+                                                   },
+                                                   ?client_token: ::String
+                                                 ) -> _PutDataCatalogExportConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDataCatalogExportConfigurationResponseSuccess
 
       interface _PutDataQualityProfileAnnotationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutDataQualityProfileAnnotationResponse]

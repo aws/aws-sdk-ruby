@@ -4534,25 +4534,24 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # Set the pricing plan for your Amazon SES account. Use this operation
-    # to choose a billing plan that packages multiple Amazon SES features at
-    # a single rate.
+    # Set the pricing plan for your Amazon SES account.
     #
     # @option params [required, String] :plan
-    #   The pricing plan to apply to your Amazon SES account. Can be one of
-    #   the following:
+    #   The pricing plan to apply to your Amazon SES account. For details
+    #   about each plan, see [Amazon SES Pricing][1]. Can be one of the
+    #   following:
     #
-    #   * `NONE` – No pricing plan is applied; billing follows per-feature
-    #     pricing.
+    #   * `NONE`
     #
-    #   * `ESSENTIALS` – Baseline Amazon SES capabilities and select premium
-    #     features.
+    #   * `ESSENTIALS`
     #
-    #   * `PRO` – Includes everything in `ESSENTIALS`, plus additional premium
-    #     features for growing senders.
+    #   * `PRO`
     #
-    #   * `ENTERPRISE` – Includes everything in `PRO`, plus features intended
-    #     for large-scale senders.
+    #   * `ENTERPRISE`
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/ses/pricing/
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5524,6 +5523,12 @@ module Aws::SESV2
     #
     #    </note>
     #
+    # @option params [Types::ConfigurationOverrides] :configuration_overrides
+    #   An object that overrides, for the messages in this request only,
+    #   settings that would otherwise apply to them. The overrides apply to
+    #   every message in the request. Each setting that you don't override
+    #   keeps the value that already applies.
+    #
     # @return [Types::SendBulkEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendBulkEmailResponse#bulk_email_entry_results #bulk_email_entry_results} => Array&lt;Types::BulkEmailEntryResult&gt;
@@ -5600,6 +5605,12 @@ module Aws::SESV2
     #     configuration_set_name: "ConfigurationSetName",
     #     endpoint_id: "EndpointId",
     #     tenant_name: "TenantName",
+    #     configuration_overrides: {
+    #       tracking: {
+    #         open_tracking_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #         click_tracking_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -5775,6 +5786,11 @@ module Aws::SESV2
     #   An object used to specify a list or topic to which an email belongs,
     #   which will be used when a contact chooses to unsubscribe.
     #
+    # @option params [Types::ConfigurationOverrides] :configuration_overrides
+    #   An object that overrides, for this message only, settings that would
+    #   otherwise apply to it. Each setting that you don't override keeps the
+    #   value that already applies.
+    #
     # @return [Types::SendEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendEmailResponse#message_id #message_id} => String
@@ -5869,6 +5885,12 @@ module Aws::SESV2
     #     list_management_options: {
     #       contact_list_name: "ContactListName", # required
     #       topic_name: "TopicName",
+    #     },
+    #     configuration_overrides: {
+    #       tracking: {
+    #         open_tracking_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #         click_tracking_enabled: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
     #     },
     #   })
     #
@@ -6424,7 +6446,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

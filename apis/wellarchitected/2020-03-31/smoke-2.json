@@ -1,0 +1,249 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListAgentGoals",
+    "operationName" : "ListAgentGoals",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAgentContext",
+    "operationName" : "GetAgentContext",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
+      "id" : "f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "DeleteAgentProfile",
+    "operationName" : "DeleteAgentProfile",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "CreateAgentProfile",
+    "operationName" : "CreateAgentProfile",
+    "input" : {
+      "name" : "smoke-test-profile",
+      "executionRoleArn" : "arn:aws:iam::123456789012:role/test-role",
+      "aggregationConfiguration" : [ {
+        "accountId" : "123456789012",
+        "regions" : [ "us-west-2" ],
+        "accessRoleArn" : "arn:aws:iam::123456789012:role/COINAccessRole"
+      } ],
+      "pillars" : [ "COST_OPTIMIZATION" ],
+      "tags" : [ {
+        "key" : "test-key",
+        "value" : "test-value"
+      } ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UpdateAgentProfile",
+    "operationName" : "UpdateAgentProfile",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAgentProfile",
+    "operationName" : "GetAgentProfile",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-security-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListAgentProfiles",
+    "operationName" : "ListAgentProfiles",
+    "input" : { },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAgentGoal",
+    "operationName" : "GetAgentGoal",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
+      "id" : "f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UpdateAgentGoal",
+    "operationName" : "UpdateAgentGoal",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
+      "id" : "f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "CreateAgentContext",
+    "operationName" : "CreateAgentContext",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
+      "title" : "smoke-test-context",
+      "contextType" : "APPLICATION",
+      "content" : { }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "CreateAgentGoal",
+    "operationName" : "CreateAgentGoal",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
+      "pillars" : [ "COST_OPTIMIZATION" ],
+      "title" : "smoke-test-goal"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "DeleteAgentGoal",
+    "operationName" : "DeleteAgentGoal",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
+      "id" : "f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListAgentContexts",
+    "operationName" : "ListAgentContexts",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UpdateAgentContext",
+    "operationName" : "UpdateAgentContext",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
+      "id" : "f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "DeleteAgentContext",
+    "operationName" : "DeleteAgentContext",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
+      "id" : "f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

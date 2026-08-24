@@ -285,6 +285,7 @@ module Aws::CloudWatch
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OTelEnrichmentStatus = Shapes::StringShape.new(name: 'OTelEnrichmentStatus')
+    OnlyStartEvaluatingAfterWarmUpPeriodEnds = Shapes::BooleanShape.new(name: 'OnlyStartEvaluatingAfterWarmUpPeriodEnds')
     OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
     OwningAccounts = Shapes::ListShape.new(name: 'OwningAccounts')
     PartialFailure = Shapes::StructureShape.new(name: 'PartialFailure')
@@ -370,6 +371,8 @@ module Aws::CloudWatch
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     Values = Shapes::ListShape.new(name: 'Values')
     WallClockWindow = Shapes::StructureShape.new(name: 'WallClockWindow')
+    WarmUpConfiguration = Shapes::StructureShape.new(name: 'WarmUpConfiguration')
+    WarmUpPeriodDurationInMinutes = Shapes::IntegerShape.new(name: 'WarmUpPeriodDurationInMinutes')
 
     AlarmContributor.add_member(:contributor_id, Shapes::ShapeRef.new(shape: ContributorId, required: true, location_name: "ContributorId"))
     AlarmContributor.add_member(:contributor_attributes, Shapes::ShapeRef.new(shape: ContributorAttributes, required: true, location_name: "ContributorAttributes"))
@@ -947,6 +950,7 @@ module Aws::CloudWatch
     LogAlarm.add_member(:evaluation_state, Shapes::ShapeRef.new(shape: EvaluationState, location_name: "EvaluationState"))
     LogAlarm.add_member(:action_log_line_count, Shapes::ShapeRef.new(shape: ActionLogLineCount, location_name: "ActionLogLineCount"))
     LogAlarm.add_member(:action_log_line_role_arn, Shapes::ShapeRef.new(shape: ActionLogLineRoleArn, location_name: "ActionLogLineRoleArn"))
+    LogAlarm.add_member(:warm_up_configuration, Shapes::ShapeRef.new(shape: WarmUpConfiguration, location_name: "WarmUpConfiguration"))
     LogAlarm.struct_class = Types::LogAlarm
 
     LogAlarms.member = Shapes::ShapeRef.new(shape: LogAlarm)
@@ -1010,6 +1014,7 @@ module Aws::CloudWatch
     MetricAlarm.add_member(:evaluation_state, Shapes::ShapeRef.new(shape: EvaluationState, location_name: "EvaluationState"))
     MetricAlarm.add_member(:state_transitioned_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StateTransitionedTimestamp"))
     MetricAlarm.add_member(:evaluation_window, Shapes::ShapeRef.new(shape: EvaluationWindow, location_name: "EvaluationWindow"))
+    MetricAlarm.add_member(:warm_up_configuration, Shapes::ShapeRef.new(shape: WarmUpConfiguration, location_name: "WarmUpConfiguration"))
     MetricAlarm.add_member(:evaluation_criteria, Shapes::ShapeRef.new(shape: EvaluationCriteria, location_name: "EvaluationCriteria"))
     MetricAlarm.add_member(:evaluation_interval, Shapes::ShapeRef.new(shape: EvaluationInterval, location_name: "EvaluationInterval"))
     MetricAlarm.struct_class = Types::MetricAlarm
@@ -1184,6 +1189,7 @@ module Aws::CloudWatch
     PutLogAlarmInput.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
     PutLogAlarmInput.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: TreatMissingData, location_name: "TreatMissingData"))
     PutLogAlarmInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PutLogAlarmInput.add_member(:warm_up_configuration, Shapes::ShapeRef.new(shape: WarmUpConfiguration, location_name: "WarmUpConfiguration"))
     PutLogAlarmInput.struct_class = Types::PutLogAlarmInput
 
     PutManagedInsightRulesInput.add_member(:managed_rules, Shapes::ShapeRef.new(shape: ManagedRules, required: true, location_name: "ManagedRules"))
@@ -1215,6 +1221,7 @@ module Aws::CloudWatch
     PutMetricAlarmInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PutMetricAlarmInput.add_member(:threshold_metric_id, Shapes::ShapeRef.new(shape: MetricId, location_name: "ThresholdMetricId"))
     PutMetricAlarmInput.add_member(:evaluation_window, Shapes::ShapeRef.new(shape: EvaluationWindow, location_name: "EvaluationWindow"))
+    PutMetricAlarmInput.add_member(:warm_up_configuration, Shapes::ShapeRef.new(shape: WarmUpConfiguration, location_name: "WarmUpConfiguration"))
     PutMetricAlarmInput.add_member(:evaluation_criteria, Shapes::ShapeRef.new(shape: EvaluationCriteria, location_name: "EvaluationCriteria"))
     PutMetricAlarmInput.add_member(:evaluation_interval, Shapes::ShapeRef.new(shape: EvaluationInterval, location_name: "EvaluationInterval"))
     PutMetricAlarmInput.struct_class = Types::PutMetricAlarmInput
@@ -1344,6 +1351,10 @@ module Aws::CloudWatch
 
     WallClockWindow.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone"))
     WallClockWindow.struct_class = Types::WallClockWindow
+
+    WarmUpConfiguration.add_member(:warm_up_period_duration_in_minutes, Shapes::ShapeRef.new(shape: WarmUpPeriodDurationInMinutes, required: true, location_name: "WarmUpPeriodDurationInMinutes"))
+    WarmUpConfiguration.add_member(:only_start_evaluating_after_warm_up_period_ends, Shapes::ShapeRef.new(shape: OnlyStartEvaluatingAfterWarmUpPeriodEnds, location_name: "OnlyStartEvaluatingAfterWarmUpPeriodEnds"))
+    WarmUpConfiguration.struct_class = Types::WarmUpConfiguration
 
 
     # @api private

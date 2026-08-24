@@ -61,6 +61,25 @@ module Aws
       }?
     }
 
+      type vector_index = {
+      index_name: ::String,
+      vector_attribute: {
+        attribute_name: ::String
+      },
+      search_schema: Array[
+        {
+          attribute_name: ::String,
+          search_schema_element_type: ("HASH" | "INLINE_FILTER")
+        }
+      ]?,
+      projection: {
+        projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+        non_key_attributes: Array[::String]?
+      },
+      dimensions: ::Integer,
+      distance_function: ("COSINE" | "DOT_PRODUCT" | "EUCLIDEAN")
+    }
+
       type expected_attribute_value = {
       value: Params::attribute_value?,
       exists: bool?,

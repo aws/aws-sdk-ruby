@@ -869,6 +869,12 @@ module Aws::ACM
     #   in a certificate transparency log.
     #   @return [Types::CertificateOptions]
     #
+    # @!attribute [rw] update_summary
+    #   Contains information about the most recent update to the
+    #   certificate. This field exists only when the certificate type is
+    #   `AMAZON_ISSUED` and a certificate update has been requested.
+    #   @return [Types::UpdateSummary]
+    #
     # @!attribute [rw] certificate_key_pair_origin
     #   The origin of the certificate's key pair.
     #   @return [String]
@@ -911,6 +917,7 @@ module Aws::ACM
       :certificate_authority_arn,
       :renewal_eligibility,
       :options,
+      :update_summary,
       :certificate_key_pair_origin,
       :acme_endpoint_arn,
       :acme_account_id)
@@ -1015,11 +1022,12 @@ module Aws::ACM
     end
 
     # Structure that contains options for your certificate. You can use this
-    # structure to specify whether to export your certificate.
+    # structure to change the domain validation method or specify whether to
+    # export your certificate.
     #
-    # Certificate transparency logging opt-out is no longer available. All
-    # public certificates are recorded in a certificate transparency log.
-    # For general information, see [Certificate Transparency Logging][1].
+    # All public certificates are recorded in a certificate transparency
+    # log. For general information, see [Certificate Transparency
+    # Logging][1].
     #
     # You can export public ACM certificates to use with Amazon Web Services
     # services as well as outside Amazon Web Services Cloud. For more
@@ -1043,11 +1051,17 @@ module Aws::ACM
     #   the the certificate is created.
     #   @return [String]
     #
+    # @!attribute [rw] validation_method
+    #   The domain validation method for the certificate. To migrate from
+    #   email to DNS validation, specify `DNS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateOptions AWS API Documentation
     #
     class CertificateOptions < Struct.new(
       :certificate_transparency_logging_preference,
-      :export)
+      :export,
+      :validation_method)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1823,6 +1837,23 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # Contains the CNAME record that you must add to your DNS configuration
+    # to validate domain ownership using DNS validation.
+    #
+    # @!attribute [rw] resource_record
+    #   The CNAME record that ACM creates for DNS validation. Add this
+    #   record to your DNS configuration to prove that you own or control
+    #   the domain.
+    #   @return [Types::ResourceRecord]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DnsValidationChallenge AWS API Documentation
+    #
+    class DnsValidationChallenge < Struct.new(
+      :resource_record)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the scope of domain validation.
     #
     # @!attribute [rw] exact_domain
@@ -1918,6 +1949,28 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # Contains information about a domain validation method migration,
+    # including the previous validation method and the target validation
+    # method.
+    #
+    # @!attribute [rw] from
+    #   The validation method that the certificate was using before the
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] to
+    #   The target validation method for the update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DomainValidationMethodUpdateSummary AWS API Documentation
+    #
+    class DomainValidationMethodUpdateSummary < Struct.new(
+      :from,
+      :to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the domain names that you want ACM to use
     # to send you emails that enable you to validate domain ownership.
     #
@@ -1949,6 +2002,60 @@ module Aws::ACM
     #
     class DomainValidationOption < Struct.new(
       :domain_name,
+      :validation_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains per-domain validation information for a certificate. This
+    # structure is returned as a member of the
+    # ListCertificateDomainValidations response.
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name (FQDN) in the certificate for which
+    #   this validation summary applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_validation_configuration
+    #   The validation configuration currently in effect for this domain.
+    #   This reflects the validation method that ACM is currently using to
+    #   validate domain ownership (for example, email or DNS).
+    #   @return [Types::ValidationConfiguration]
+    #
+    # @!attribute [rw] requested_validation_configuration
+    #   The validation configuration for a pending validation method
+    #   migration. This field is present only when a migration is in
+    #   progress (for example, from email to DNS validation). It contains
+    #   the target validation method, the current validation status, and the
+    #   validation challenge details (such as the CNAME record to add to
+    #   your DNS configuration).
+    #   @return [Types::ValidationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DomainValidationSummary AWS API Documentation
+    #
+    class DomainValidationSummary < Struct.new(
+      :domain_name,
+      :active_validation_configuration,
+      :requested_validation_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the email addresses used for email-based domain validation.
+    #
+    # @!attribute [rw] validation_emails
+    #   A list of email addresses that ACM uses to send domain validation
+    #   emails.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] validation_domain
+    #   The domain name that ACM uses to send validation emails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/EmailValidationChallenge AWS API Documentation
+    #
+    class EmailValidationChallenge < Struct.new(
+      :validation_emails,
       :validation_domain)
       SENSITIVE = []
       include Aws::Structure
@@ -2659,6 +2766,54 @@ module Aws::ACM
     #
     class ListAcmeExternalAccountBindingsResponse < Struct.new(
       :external_account_bindings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate for which to list
+    #   domain validation summaries.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned by a previous call to
+    #   `ListCertificateDomainValidations`. If the number of results exceeds
+    #   `MaxItems`, use this token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of domain validation summaries to return. If you
+    #   don't specify a value, the default is 1000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificateDomainValidationsRequest AWS API Documentation
+    #
+    class ListCertificateDomainValidationsRequest < Struct.new(
+      :certificate_arn,
+      :next_token,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_validation_summary_list
+    #   A list of DomainValidationSummary objects, one for each domain on
+    #   the certificate. Each object contains the domain name and its active
+    #   and requested validation configurations.
+    #   @return [Array<Types::DomainValidationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the number of results exceeds `MaxItems`, this token is included
+    #   in the response. Use this token in a subsequent
+    #   `ListCertificateDomainValidations` request to retrieve the next page
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificateDomainValidationsResponse AWS API Documentation
+    #
+    class ListCertificateDomainValidationsResponse < Struct.new(
+      :domain_validation_summary_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3675,14 +3830,13 @@ module Aws::ACM
     #
     # @!attribute [rw] options
     #   Use to update the options for your certificate. Currently, you can
-    #   specify whether to export your certificate. Certificate transparency
-    #   logging opt-out is no longer available. All public certificates are
-    #   recorded in a certificate transparency log. For more information,
-    #   see [Certificate Transparency Logging][1].
+    #   change the domain validation method or specify whether to export
+    #   your certificate. For more information about migrating from email to
+    #   DNS validation, see [Migrate from email to DNS validation][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/email-to-dns-migration.html
     #   @return [Types::CertificateOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateCertificateOptionsRequest AWS API Documentation
@@ -3690,6 +3844,133 @@ module Aws::ACM
     class UpdateCertificateOptionsRequest < Struct.new(
       :certificate_arn,
       :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the most recent certificate update, such as
+    # a domain validation method migration. This structure is returned as
+    # part of the CertificateDetail response from DescribeCertificate.
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate update. The following are valid
+    #   values:
+    #
+    #   * `PENDING_DOMAIN_VALIDATION` – The certificate update is waiting
+    #     for domain ownership validation to complete.
+    #
+    #   * `SUCCESS` – The certificate was updated successfully.
+    #
+    #   * `FAILED` – The certificate update failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of update that was requested for the certificate. The
+    #   following are valid values:
+    #
+    #   * `DOMAIN_VALIDATION_METHOD` – The update changes the domain
+    #     validation method for the certificate.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_validation_method_update_summary
+    #   Contains information about a domain validation method migration,
+    #   including the previous and target validation methods.
+    #   @return [Types::DomainValidationMethodUpdateSummary]
+    #
+    # @!attribute [rw] requested_at
+    #   The time at which the certificate update was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the certificate update status was last changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateSummary AWS API Documentation
+    #
+    class UpdateSummary < Struct.new(
+      :status,
+      :type,
+      :domain_validation_method_update_summary,
+      :requested_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the challenge details that you use to prove domain ownership.
+    # Only one member is set, depending on the validation method.
+    #
+    # @note ValidationChallenge is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ValidationChallenge corresponding to the set member.
+    #
+    # @!attribute [rw] email_validation_challenge
+    #   Contains the email addresses used for email-based domain validation.
+    #   @return [Types::EmailValidationChallenge]
+    #
+    # @!attribute [rw] dns_validation_challenge
+    #   Contains the CNAME record that you must add to your DNS
+    #   configuration to validate domain ownership using DNS validation.
+    #   @return [Types::DnsValidationChallenge]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ValidationChallenge AWS API Documentation
+    #
+    class ValidationChallenge < Struct.new(
+      :email_validation_challenge,
+      :dns_validation_challenge,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EmailValidationChallenge < ValidationChallenge; end
+      class DnsValidationChallenge < ValidationChallenge; end
+      class Unknown < ValidationChallenge; end
+    end
+
+    # Contains the validation method, validation status, and validation
+    # challenge details for a domain. This structure appears in
+    # DomainValidationSummary as both the active and requested validation
+    # configuration.
+    #
+    # @!attribute [rw] validation_method
+    #   The validation method for this configuration. Valid values:
+    #
+    #   * `DNS` – Validation using a CNAME record added to your DNS
+    #     configuration.
+    #
+    #   * `EMAIL` – Validation using an approval email sent to domain
+    #     contacts.
+    #
+    #   * `HTTP` – Validation using an HTTP resource placed on your web
+    #     server.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_challenge
+    #   The validation challenge details for this configuration. The
+    #   structure varies by validation method: for DNS validation, contains
+    #   a `DnsValidationChallenge` with the CNAME record to add; for email
+    #   validation, contains an `EmailValidationChallenge` with the
+    #   validation email addresses.
+    #   @return [Types::ValidationChallenge]
+    #
+    # @!attribute [rw] validation_status
+    #   The validation status for this domain. Valid values:
+    #
+    #   * `PENDING_VALIDATION` – The domain is waiting for validation to
+    #     complete.
+    #
+    #   * `SUCCESS` – Validation completed successfully.
+    #
+    #   * `FAILED` – Validation failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ValidationConfiguration AWS API Documentation
+    #
+    class ValidationConfiguration < Struct.new(
+      :validation_method,
+      :validation_challenge,
+      :validation_status)
       SENSITIVE = []
       include Aws::Structure
     end

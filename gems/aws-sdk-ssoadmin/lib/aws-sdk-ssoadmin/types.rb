@@ -1703,6 +1703,11 @@ module Aws::SSOAdmin
     #   ARN.
     #   @return [Types::EncryptionConfigurationDetails]
     #
+    # @!attribute [rw] permission_sets_enabled
+    #   Indicates whether permission sets are enabled for this Identity
+    #   Center instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceResponse AWS API Documentation
     #
     class DescribeInstanceResponse < Struct.new(
@@ -1713,7 +1718,8 @@ module Aws::SSOAdmin
       :created_date,
       :status,
       :status_reason,
-      :encryption_configuration_details)
+      :encryption_configuration_details,
+      :permission_sets_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4603,12 +4609,25 @@ module Aws::SSOAdmin
     #   data.
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] permission_sets_enabled
+    #   Enables permission sets for this Identity Center instance. The only
+    #   accepted value is `true `. After permission sets are enabled, they
+    #   cannot be disabled.
+    #
+    #   <note markdown="1"> You can't set `EncryptionConfiguration` and `PermissionSetsEnabled`
+    #   in the same request. To configure both, make two separate
+    #   `UpdateInstance` calls. These calls can be made in parallel.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceRequest AWS API Documentation
     #
     class UpdateInstanceRequest < Struct.new(
       :name,
       :instance_arn,
-      :encryption_configuration)
+      :encryption_configuration,
+      :permission_sets_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

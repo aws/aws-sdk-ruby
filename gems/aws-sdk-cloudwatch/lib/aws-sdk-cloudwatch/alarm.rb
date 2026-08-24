@@ -269,6 +269,22 @@ module Aws::CloudWatch
       data[:evaluation_window]
     end
 
+    # The warm-up configuration for the alarm. A warm-up period delays alarm
+    # evaluation after you create or update the alarm. During the warm-up
+    # period, the alarm stays in `INSUFFICIENT_DATA` and does not perform
+    # alarm actions.
+    #
+    # For more information, see [Alarm warm-up periods][1] in the *Amazon
+    # CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+    # @return [Types::WarmUpConfiguration]
+    def warm_up_configuration
+      data[:warm_up_configuration]
+    end
+
     # The evaluation criteria for the alarm.
     # @return [Types::EvaluationCriteria]
     def evaluation_criteria

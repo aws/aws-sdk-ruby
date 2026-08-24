@@ -12225,7 +12225,8 @@
       "type": "string",
       "enum": [
         "NONE",
-        "PASSTHROUGH"
+        "PASSTHROUGH",
+        "SCTE_35_WITHOUT_IDR"
       ]
     },
     "M2tsSegmentationMarkers": {
@@ -13553,6 +13554,10 @@
         "NielsenNaesIiNwSettings": {
           "shape": "NielsenNaesIiNw",
           "locationName": "nielsenNaesIiNwSettings"
+        },
+        "NielsenNwOnlySettings": {
+          "shape": "NielsenNwOnly",
+          "locationName": "nielsenNwOnlySettings"
         }
       }
     },
@@ -13709,6 +13714,10 @@
         "Username": {
           "shape": "__string",
           "locationName": "username"
+        },
+        "VirtualSourceAddress": {
+          "shape": "__string",
+          "locationName": "virtualSourceAddress"
         }
       }
     },
@@ -16716,6 +16725,14 @@
         "Width": {
           "shape": "__integer",
           "locationName": "width"
+        },
+        "CropRectangle": {
+          "shape": "VideoPositionRectangle",
+          "locationName": "cropRectangle"
+        },
+        "OutputPositionRectangle": {
+          "shape": "VideoPositionRectangle",
+          "locationName": "outputPositionRectangle"
         }
       },
       "required": [
@@ -17891,7 +17908,8 @@
       "type": "string",
       "enum": [
         "NONE",
-        "SCTE_35_WITHOUT_SEGMENTATION"
+        "SCTE_35_WITHOUT_SEGMENTATION",
+        "SCTE_35_WITHOUT_IDR"
       ]
     },
     "BadRequestExceptionResponseContent": {
@@ -25840,6 +25858,60 @@
       "member": {
         "shape": "AudioPid"
       }
+    },
+    "NielsenNwOnly": {
+      "type": "structure",
+      "members": {
+        "CheckDigitString": {
+          "shape": "__stringMin2Max2",
+          "locationName": "checkDigitString"
+        },
+        "Sid": {
+          "shape": "__doubleMin1Max65535",
+          "locationName": "sid"
+        },
+        "Timezone": {
+          "shape": "NielsenWatermarkTimezones",
+          "locationName": "timezone"
+        }
+      },
+      "required": [
+        "CheckDigitString",
+        "Sid"
+      ]
+    },
+    "VideoPositionRectangle": {
+      "type": "structure",
+      "members": {
+        "Height": {
+          "shape": "__integerMin2Max8192",
+          "locationName": "height"
+        },
+        "Width": {
+          "shape": "__integerMin2Max8192",
+          "locationName": "width"
+        },
+        "X": {
+          "shape": "__integerMin0Max8190",
+          "locationName": "x"
+        },
+        "Y": {
+          "shape": "__integerMin0Max8190",
+          "locationName": "y"
+        }
+      },
+      "required": [
+        "X",
+        "Y",
+        "Height",
+        "Width"
+      ]
+    },
+    "__integerMin0Max8190": {
+      "type": "integer"
+    },
+    "__integerMin2Max8192": {
+      "type": "integer"
     }
   }
 }

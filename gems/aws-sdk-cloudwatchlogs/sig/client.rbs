@@ -217,7 +217,8 @@ module Aws
       def create_lookup_table: (
                                  lookup_table_name: ::String,
                                  ?description: ::String,
-                                 table_body: ::String,
+                                 ?table_body: ::String,
+                                 ?query_id: ::String,
                                  ?kms_key_id: ::String,
                                  ?tags: Hash[::String, ::String]
                                ) -> _CreateLookupTableResponseSuccess
@@ -496,6 +497,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_field_indexes-instance_method
       def describe_field_indexes: (
                                     log_group_identifiers: Array[::String],
+                                    ?index_categories: Array[("DEFAULT" | "CUSTOM" | "AUTO" | "INACTIVE")],
                                     ?next_token: ::String
                                   ) -> _DescribeFieldIndexesResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFieldIndexesResponseSuccess
@@ -1524,7 +1526,8 @@ module Aws
       def update_lookup_table: (
                                  lookup_table_arn: ::String,
                                  ?description: ::String,
-                                 table_body: ::String,
+                                 ?table_body: ::String,
+                                 ?query_id: ::String,
                                  ?kms_key_id: ::String
                                ) -> _UpdateLookupTableResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLookupTableResponseSuccess

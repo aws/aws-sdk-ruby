@@ -1917,7 +1917,7 @@ module Aws::Kinesis
     #   Kinesis Data Streams, which does not inspect, interpret, or change
     #   the data in the blob in any way. When the data blob (the payload
     #   before base64-encoding) is added to the partition key size, the
-    #   total size must not exceed the maximum record size (1 MiB).
+    #   total size must not exceed the maximum record size (10 MiB).
     #   @return [String]
     #
     # @!attribute [rw] partition_key

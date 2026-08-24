@@ -720,6 +720,7 @@ module Aws::RedshiftServerless
       attr_accessor namespace_arn: ::String
       attr_accessor namespace_id: ::String
       attr_accessor namespace_name: ::String
+      attr_accessor s3_table_publish_status: Types::S3TablePublishStatus
       attr_accessor status: ("AVAILABLE" | "MODIFYING" | "DELETING")
       SENSITIVE: [:admin_username]
     end
@@ -861,6 +862,15 @@ module Aws::RedshiftServerless
 
     class RestoreTableFromSnapshotResponse
       attr_accessor table_restore_status: Types::TableRestoreStatus
+      SENSITIVE: []
+    end
+
+    class S3TablePublishStatus
+      attr_accessor enabled_all: bool
+      attr_accessor last_ingestion_times: ::Hash[::String, ::String]
+      attr_accessor s3_table_granularity: ("namespace" | "account")
+      attr_accessor s3_table_namespace: ::String
+      attr_accessor s3_tables: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1065,9 +1075,14 @@ module Aws::RedshiftServerless
       attr_accessor default_iam_role_arn: ::String
       attr_accessor iam_roles: ::Array[::String]
       attr_accessor kms_key_id: ::String
+      attr_accessor log_destination_type: ("s3table" | "cloudwatch")
       attr_accessor log_exports: ::Array[("useractivitylog" | "userlog" | "connectionlog")]
       attr_accessor manage_admin_password: bool
       attr_accessor namespace_name: ::String
+      attr_accessor s3_table_action: ("Enable" | "Disable")
+      attr_accessor s3_table_granularity: ("namespace" | "account")
+      attr_accessor s3_table_kms_key_id: ::String
+      attr_accessor s3_table_names: ::Array[::String]
       SENSITIVE: [:admin_user_password, :admin_username]
     end
 

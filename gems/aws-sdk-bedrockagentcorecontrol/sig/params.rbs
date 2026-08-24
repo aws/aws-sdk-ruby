@@ -20,6 +20,28 @@ module Aws
       }?
     }
 
+      type limit_entry = {
+      dimensions: Hash[::String, ::String],
+      requests: Array[
+        {
+          rate: ::Float,
+          period: ("second" | "minute")
+        }
+      ]?,
+      tokens: Array[
+        {
+          rate: ::Float,
+          period: ("second" | "minute")
+        }
+      ]?,
+      connections: Array[
+        {
+          rate: ::Float,
+          period: ("second" | "minute")
+        }
+      ]?
+    }
+
       type code_configuration = {
       code: {
         s3: {
@@ -119,6 +141,10 @@ module Aws
       efs_access_point: {
         access_point_arn: ::String,
         mount_path: ::String
+      }?,
+      capacity_provider_volume: {
+        volume_name: ::String,
+        mount_path: ::String
       }?
     }
 
@@ -163,13 +189,29 @@ module Aws
       }?
     }
 
+      type open_responses_evaluator_model_config = {
+      model_id: ::String,
+      max_output_tokens: ::Integer?,
+      temperature: ::Float?,
+      top_p: ::Float?,
+      reasoning: {
+        effort: ::String?
+      }?
+    }
+
       type evaluator_model_config = {
-      bedrock_evaluator_model_config: Params::bedrock_evaluator_model_config?
+      bedrock_evaluator_model_config: Params::bedrock_evaluator_model_config?,
+      responses_evaluator_model_config: Params::open_responses_evaluator_model_config?
     }
 
       type llm_as_a_judge_evaluator_config = {
       instructions: ::String,
       rating_scale: Params::rating_scale,
+      model_config: Params::evaluator_model_config
+    }
+
+      type derived_evaluator_config = {
+      base_evaluator_id: ::String,
       model_config: Params::evaluator_model_config
     }
 
@@ -180,7 +222,8 @@ module Aws
           lambda_arn: ::String,
           lambda_timeout_in_seconds: ::Integer?
         }?
-      }?
+      }?,
+      derived: Params::derived_evaluator_config?
     }
 
       type mcp_gateway_configuration = {
@@ -392,13 +435,22 @@ module Aws
       schema: Params::http_api_schema_configuration?,
       stickiness_configuration: {
         identifier: ::String,
-        timeout: ::Integer?
-      }?
+        timeout: ::Integer?,
+        composite_identifier: Array[::String]?
+      }?,
+      static_query_parameters: Hash[::String, ::String]?,
+      static_query_parameter_conflict_resolution: ("CLIENT_OVERRIDE" | "STATIC_OVERRIDE")?
     }
 
       type http_target_configuration = {
       agentcore_runtime: Params::runtime_target_configuration?,
-      passthrough: Params::passthrough_target_configuration?
+      passthrough: Params::passthrough_target_configuration?,
+      connector: {
+        source: {
+          connector_id: ::String
+        },
+        parameters: Hash[::String, ::String]?
+      }?
     }
 
       type inference_provider_target_configuration = {

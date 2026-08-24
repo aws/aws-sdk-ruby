@@ -210,6 +210,15 @@ module Aws::ACM
       end
     end
 
+    class ListCertificateDomainValidations
+      def self.build(context)
+        Aws::ACM::EndpointParameters.create(
+          context.config,
+          service_type: "ACM",
+        )
+      end
+    end
+
     class ListCertificates
       def self.build(context)
         Aws::ACM::EndpointParameters.create(
@@ -410,6 +419,8 @@ module Aws::ACM
         ListAcmeEndpoints.build(context)
       when :list_acme_external_account_bindings
         ListAcmeExternalAccountBindings.build(context)
+      when :list_certificate_domain_validations
+        ListCertificateDomainValidations.build(context)
       when :list_certificates
         ListCertificates.build(context)
       when :list_tags_for_certificate

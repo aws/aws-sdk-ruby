@@ -85,6 +85,8 @@ module Aws::Outposts
     CreateOrderOutput = Shapes::StructureShape.new(name: 'CreateOrderOutput')
     CreateOutpostInput = Shapes::StructureShape.new(name: 'CreateOutpostInput')
     CreateOutpostOutput = Shapes::StructureShape.new(name: 'CreateOutpostOutput')
+    CreatePrivateConnectivityConfigInput = Shapes::StructureShape.new(name: 'CreatePrivateConnectivityConfigInput')
+    CreatePrivateConnectivityConfigOutput = Shapes::StructureShape.new(name: 'CreatePrivateConnectivityConfigOutput')
     CreateQuoteInput = Shapes::StructureShape.new(name: 'CreateQuoteInput')
     CreateQuoteOutput = Shapes::StructureShape.new(name: 'CreateQuoteOutput')
     CreateRenewalInput = Shapes::StructureShape.new(name: 'CreateRenewalInput')
@@ -129,6 +131,8 @@ module Aws::Outposts
     GetOutpostOutput = Shapes::StructureShape.new(name: 'GetOutpostOutput')
     GetOutpostSupportedInstanceTypesInput = Shapes::StructureShape.new(name: 'GetOutpostSupportedInstanceTypesInput')
     GetOutpostSupportedInstanceTypesOutput = Shapes::StructureShape.new(name: 'GetOutpostSupportedInstanceTypesOutput')
+    GetPrivateConnectivityConfigInput = Shapes::StructureShape.new(name: 'GetPrivateConnectivityConfigInput')
+    GetPrivateConnectivityConfigOutput = Shapes::StructureShape.new(name: 'GetPrivateConnectivityConfigOutput')
     GetQuoteInput = Shapes::StructureShape.new(name: 'GetQuoteInput')
     GetQuoteOutput = Shapes::StructureShape.new(name: 'GetQuoteOutput')
     GetRenewalPricingInput = Shapes::StructureShape.new(name: 'GetRenewalPricingInput')
@@ -235,6 +239,8 @@ module Aws::Outposts
     PricingOption = Shapes::StructureShape.new(name: 'PricingOption')
     PricingOptionList = Shapes::ListShape.new(name: 'PricingOptionList')
     PricingResult = Shapes::StringShape.new(name: 'PricingResult')
+    PrivateConnectivityConfig = Shapes::StructureShape.new(name: 'PrivateConnectivityConfig')
+    PrivateConnectivityStatus = Shapes::StringShape.new(name: 'PrivateConnectivityStatus')
     Quantity = Shapes::StringShape.new(name: 'Quantity')
     Quote = Shapes::StructureShape.new(name: 'Quote')
     QuoteCapacity = Shapes::StructureShape.new(name: 'QuoteCapacity')
@@ -264,6 +270,7 @@ module Aws::Outposts
     RackUnitHeight = Shapes::StringShape.new(name: 'RackUnitHeight')
     RequestedInstancePools = Shapes::ListShape.new(name: 'RequestedInstancePools')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ServerEndpoint = Shapes::StringShape.new(name: 'ServerEndpoint')
     ServerSpecificationDetails = Shapes::StructureShape.new(name: 'ServerSpecificationDetails')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -287,6 +294,8 @@ module Aws::Outposts
     StatusList = Shapes::ListShape.new(name: 'StatusList')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
+    SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     Subscription = Shapes::StructureShape.new(name: 'Subscription')
     SubscriptionList = Shapes::ListShape.new(name: 'SubscriptionList')
     SubscriptionPricingDetails = Shapes::StructureShape.new(name: 'SubscriptionPricingDetails')
@@ -324,6 +333,10 @@ module Aws::Outposts
     VCPUCount = Shapes::IntegerShape.new(name: 'VCPUCount')
     ValidateOnly = Shapes::BooleanShape.new(name: 'ValidateOnly')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
+    VpcInformation = Shapes::StructureShape.new(name: 'VpcInformation')
+    VpcInformationList = Shapes::ListShape.new(name: 'VpcInformationList')
     WireGuardPublicKey = Shapes::StringShape.new(name: 'WireGuardPublicKey')
     outpostListDefinition = Shapes::ListShape.new(name: 'outpostListDefinition')
     siteListDefinition = Shapes::ListShape.new(name: 'siteListDefinition')
@@ -488,6 +501,14 @@ module Aws::Outposts
     CreateOutpostOutput.add_member(:outpost, Shapes::ShapeRef.new(shape: Outpost, location_name: "Outpost"))
     CreateOutpostOutput.struct_class = Types::CreateOutpostOutput
 
+    CreatePrivateConnectivityConfigInput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, required: true, location: "uri", location_name: "OutpostId"))
+    CreatePrivateConnectivityConfigInput.add_member(:vpc_information_list, Shapes::ShapeRef.new(shape: VpcInformationList, required: true, location_name: "VpcInformationList"))
+    CreatePrivateConnectivityConfigInput.struct_class = Types::CreatePrivateConnectivityConfigInput
+
+    CreatePrivateConnectivityConfigOutput.add_member(:private_connectivity_config, Shapes::ShapeRef.new(shape: PrivateConnectivityConfig, location_name: "PrivateConnectivityConfig"))
+    CreatePrivateConnectivityConfigOutput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId"))
+    CreatePrivateConnectivityConfigOutput.struct_class = Types::CreatePrivateConnectivityConfigOutput
+
     CreateQuoteInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, location_name: "OutpostIdentifier"))
     CreateQuoteInput.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, required: true, location_name: "CountryCode"))
     CreateQuoteInput.add_member(:requested_capacities, Shapes::ShapeRef.new(shape: QuoteCapacityList, required: true, location_name: "RequestedCapacities"))
@@ -642,6 +663,12 @@ module Aws::Outposts
     GetOutpostSupportedInstanceTypesOutput.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeListDefinition, location_name: "InstanceTypes"))
     GetOutpostSupportedInstanceTypesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetOutpostSupportedInstanceTypesOutput.struct_class = Types::GetOutpostSupportedInstanceTypesOutput
+
+    GetPrivateConnectivityConfigInput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, required: true, location: "uri", location_name: "OutpostId"))
+    GetPrivateConnectivityConfigInput.struct_class = Types::GetPrivateConnectivityConfigInput
+
+    GetPrivateConnectivityConfigOutput.add_member(:private_connectivity_config, Shapes::ShapeRef.new(shape: PrivateConnectivityConfig, location_name: "PrivateConnectivityConfig"))
+    GetPrivateConnectivityConfigOutput.struct_class = Types::GetPrivateConnectivityConfigOutput
 
     GetQuoteInput.add_member(:quote_identifier, Shapes::ShapeRef.new(shape: QuoteIdentifier, required: true, location: "uri", location_name: "QuoteIdentifier"))
     GetQuoteInput.struct_class = Types::GetQuoteInput
@@ -898,6 +925,12 @@ module Aws::Outposts
 
     PricingOptionList.member = Shapes::ShapeRef.new(shape: PricingOption)
 
+    PrivateConnectivityConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    PrivateConnectivityConfig.add_member(:private_connectivity_status, Shapes::ShapeRef.new(shape: PrivateConnectivityStatus, location_name: "PrivateConnectivityStatus"))
+    PrivateConnectivityConfig.add_member(:vpc_information_list, Shapes::ShapeRef.new(shape: VpcInformationList, location_name: "VpcInformationList"))
+    PrivateConnectivityConfig.add_member(:provisioning_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ProvisioningRoleArn"))
+    PrivateConnectivityConfig.struct_class = Types::PrivateConnectivityConfig
+
     Quote.add_member(:quote_id, Shapes::ShapeRef.new(shape: QuoteId, location_name: "QuoteId"))
     Quote.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     Quote.add_member(:quote_status, Shapes::ShapeRef.new(shape: QuoteStatus, location_name: "QuoteStatus"))
@@ -1064,6 +1097,8 @@ module Aws::Outposts
 
     StatusList.member = Shapes::ShapeRef.new(shape: AssetState)
 
+    SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
+
     Subscription.add_member(:subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionId"))
     Subscription.add_member(:subscription_type, Shapes::ShapeRef.new(shape: SubscriptionType, location_name: "SubscriptionType"))
     Subscription.add_member(:subscription_status, Shapes::ShapeRef.new(shape: SubscriptionStatus, location_name: "SubscriptionStatus"))
@@ -1163,6 +1198,13 @@ module Aws::Outposts
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
 
+    VpcInformation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    VpcInformation.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    VpcInformation.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    VpcInformation.struct_class = Types::VpcInformation
+
+    VpcInformationList.member = Shapes::ShapeRef.new(shape: VpcInformation)
+
     outpostListDefinition.member = Shapes::ShapeRef.new(shape: Outpost)
 
     siteListDefinition.member = Shapes::ShapeRef.new(shape: Site)
@@ -1240,6 +1282,19 @@ module Aws::Outposts
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_private_connectivity_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePrivateConnectivityConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/outposts/{OutpostId}/privateConnectivity"
+        o.input = Shapes::ShapeRef.new(shape: CreatePrivateConnectivityConfigInput)
+        o.output = Shapes::ShapeRef.new(shape: CreatePrivateConnectivityConfigOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:create_quote, Seahorse::Model::Operation.new.tap do |o|
@@ -1427,6 +1482,18 @@ module Aws::Outposts
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_private_connectivity_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPrivateConnectivityConfig"
+        o.http_method = "GET"
+        o.http_request_uri = "/outposts/{OutpostId}/privateConnectivity"
+        o.input = Shapes::ShapeRef.new(shape: GetPrivateConnectivityConfigInput)
+        o.output = Shapes::ShapeRef.new(shape: GetPrivateConnectivityConfigOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_quote, Seahorse::Model::Operation.new.tap do |o|

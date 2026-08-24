@@ -175,7 +175,8 @@ module Aws
                                             device_proxy: {
                                               host: ::String,
                                               port: ::Integer
-                                            }?
+                                            }?,
+                                            parameters: Hash[::String, ::String]?
                                           },
                                           ?interaction_mode: ("INTERACTIVE" | "NO_VIDEO" | "VIDEO_ONLY"),
                                           ?skip_app_resign: bool

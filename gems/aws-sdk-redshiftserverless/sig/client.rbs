@@ -884,9 +884,14 @@ module Aws
                               ?default_iam_role_arn: ::String,
                               ?iam_roles: Array[::String],
                               ?kms_key_id: ::String,
+                              ?log_destination_type: ("s3table" | "cloudwatch"),
                               ?log_exports: Array[("useractivitylog" | "userlog" | "connectionlog")],
                               ?manage_admin_password: bool,
-                              namespace_name: ::String
+                              namespace_name: ::String,
+                              ?s3_table_action: ("Enable" | "Disable"),
+                              ?s3_table_granularity: ("namespace" | "account"),
+                              ?s3_table_kms_key_id: ::String,
+                              ?s3_table_names: Array[::String]
                             ) -> _UpdateNamespaceResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNamespaceResponseSuccess
 

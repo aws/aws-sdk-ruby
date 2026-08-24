@@ -1,0 +1,345 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AccountAccess
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AlreadyCreatedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationSummary
+      attr_accessor application_arn: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor identity_source: Types::IdentitySource
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResponse
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEntitlementRequest
+      attr_accessor application_arn: ::String
+      attr_accessor entitlement: Types::Entitlement
+      SENSITIVE: []
+    end
+
+    class CreateEntitlementResponse
+      attr_accessor entitlement_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEntitlementRequest
+      attr_accessor application_arn: ::String
+      attr_accessor entitlement_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEntitlementResponse < Aws::EmptyStructure
+    end
+
+    class Entitlement
+      attr_accessor principal_role: Types::PrincipalRoleEntitlement
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PrincipalRole < Entitlement
+      end
+      class Unknown < Entitlement
+      end
+    end
+
+    class EntitlementDetails
+      attr_accessor principal_role: Types::PrincipalRoleEntitlementDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PrincipalRole < EntitlementDetails
+      end
+      class Unknown < EntitlementDetails
+      end
+    end
+
+    class EntitlementFilter
+      attr_accessor principal_role: Types::PrincipalRoleEntitlementFilter
+      SENSITIVE: []
+    end
+
+    class EntitlementSummary
+      attr_accessor principal_role: Types::PrincipalRoleEntitlementSummary
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PrincipalRole < EntitlementSummary
+      end
+      class Unknown < EntitlementSummary
+      end
+    end
+
+    class EntitlementsListMember
+      attr_accessor entitlement_id: ::String
+      attr_accessor entitlement: Types::EntitlementSummary
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor code: ("AUTHORIZATION_ERROR" | "RESOURCE_NOT_FOUND_ERROR" | "SERVICE_QUOTA_EXCEEDED_ERROR" | "INTERNAL_SERVICE_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationRequest
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationResponse
+      attr_accessor identity_source: Types::IdentitySourceDetails
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor tenant_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor error: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class GetEntitlementRequest
+      attr_accessor application_arn: ::String
+      attr_accessor entitlement_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEntitlementResponse
+      attr_accessor application_arn: ::String
+      attr_accessor entitlement_id: ::String
+      attr_accessor entitlement: Types::EntitlementDetails
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IdentityCenter
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityCenterDetails
+      attr_accessor instance_arn: ::String
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityCenterPrincipal
+      attr_accessor user_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class UserId < IdentityCenterPrincipal
+      end
+      class GroupId < IdentityCenterPrincipal
+      end
+      class Unknown < IdentityCenterPrincipal
+      end
+    end
+
+    class IdentityCenterPrincipalFilter
+      attr_accessor user_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class UserId < IdentityCenterPrincipalFilter
+      end
+      class GroupId < IdentityCenterPrincipalFilter
+      end
+      class Unknown < IdentityCenterPrincipalFilter
+      end
+    end
+
+    class IdentitySource
+      attr_accessor identity_center: Types::IdentityCenter
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IdentityCenter < IdentitySource
+      end
+      class Unknown < IdentitySource
+      end
+    end
+
+    class IdentitySourceDetails
+      attr_accessor identity_center: Types::IdentityCenterDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IdentityCenter < IdentitySourceDetails
+      end
+      class Unknown < IdentitySourceDetails
+      end
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor applications: ::Array[Types::ApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitlementsRequest
+      attr_accessor application_arn: ::String
+      attr_accessor filter: Types::EntitlementFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEntitlementsResponse
+      attr_accessor entitlements: ::Array[Types::EntitlementsListMember]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Principal
+      attr_accessor identity_center: Types::IdentityCenterPrincipal
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IdentityCenter < Principal
+      end
+      class Unknown < Principal
+      end
+    end
+
+    class PrincipalFilter
+      attr_accessor identity_center: Types::IdentityCenterPrincipalFilter
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IdentityCenter < PrincipalFilter
+      end
+      class Unknown < PrincipalFilter
+      end
+    end
+
+    class PrincipalRoleEntitlement
+      attr_accessor principal: Types::Principal
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PrincipalRoleEntitlementDetails
+      attr_accessor principal: Types::Principal
+      attr_accessor role_arn: ::String
+      attr_accessor account: ::String
+      attr_accessor account_name: ::String
+      SENSITIVE: []
+    end
+
+    class PrincipalRoleEntitlementFilter
+      attr_accessor principal: Types::PrincipalFilter
+      attr_accessor role_arn: ::String
+      attr_accessor account: ::String
+      SENSITIVE: []
+    end
+
+    class PrincipalRoleEntitlementSummary
+      attr_accessor principal: Types::Principal
+      attr_accessor role_arn: ::String
+      attr_accessor account: ::String
+      attr_accessor account_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -27,6 +27,8 @@ module Aws::SocialMessaging
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ButtonType = Shapes::StringShape.new(name: 'ButtonType')
     CodeExpirationMinutes = Shapes::IntegerShape.new(name: 'CodeExpirationMinutes')
+    CreateWhatsAppDatasetInput = Shapes::StructureShape.new(name: 'CreateWhatsAppDatasetInput')
+    CreateWhatsAppDatasetOutput = Shapes::StructureShape.new(name: 'CreateWhatsAppDatasetOutput')
     CreateWhatsAppFlowInput = Shapes::StructureShape.new(name: 'CreateWhatsAppFlowInput')
     CreateWhatsAppFlowOutput = Shapes::StructureShape.new(name: 'CreateWhatsAppFlowOutput')
     CreateWhatsAppMessageTemplateFromLibraryInput = Shapes::StructureShape.new(name: 'CreateWhatsAppMessageTemplateFromLibraryInput')
@@ -173,6 +175,8 @@ module Aws::SocialMessaging
     S3FileKeyString = Shapes::StringShape.new(name: 'S3FileKeyString')
     S3PresignedUrl = Shapes::StructureShape.new(name: 'S3PresignedUrl')
     S3PresignedUrlUrlString = Shapes::StringShape.new(name: 'S3PresignedUrlUrlString')
+    SendWhatsAppConversionEventInput = Shapes::StructureShape.new(name: 'SendWhatsAppConversionEventInput')
+    SendWhatsAppConversionEventOutput = Shapes::StructureShape.new(name: 'SendWhatsAppConversionEventOutput')
     SendWhatsAppMessageInput = Shapes::StructureShape.new(name: 'SendWhatsAppMessageInput')
     SendWhatsAppMessageOutput = Shapes::StructureShape.new(name: 'SendWhatsAppMessageOutput')
     String = Shapes::StringShape.new(name: 'String')
@@ -210,6 +214,8 @@ module Aws::SocialMessaging
     WhatsAppBusinessAccountLinkDate = Shapes::TimestampShape.new(name: 'WhatsAppBusinessAccountLinkDate')
     WhatsAppBusinessAccountMarketingMessagesOnboardingStatus = Shapes::StringShape.new(name: 'WhatsAppBusinessAccountMarketingMessagesOnboardingStatus')
     WhatsAppBusinessAccountName = Shapes::StringShape.new(name: 'WhatsAppBusinessAccountName')
+    WhatsAppConversionEventBlob = Shapes::BlobShape.new(name: 'WhatsAppConversionEventBlob')
+    WhatsAppDatasetId = Shapes::StringShape.new(name: 'WhatsAppDatasetId')
     WhatsAppDisplayPhoneNumber = Shapes::StringShape.new(name: 'WhatsAppDisplayPhoneNumber')
     WhatsAppMediaId = Shapes::StringShape.new(name: 'WhatsAppMediaId')
     WhatsAppMessageBlob = Shapes::BlobShape.new(name: 'WhatsAppMessageBlob')
@@ -242,6 +248,12 @@ module Aws::SocialMessaging
     AssociateWhatsAppBusinessAccountOutput.add_member(:status_code, Shapes::ShapeRef.new(shape: Integer, location_name: "statusCode"))
     AssociateWhatsAppBusinessAccountOutput.add_member(:linked_whats_app_business_account_id, Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountId, location_name: "linkedWhatsAppBusinessAccountId"))
     AssociateWhatsAppBusinessAccountOutput.struct_class = Types::AssociateWhatsAppBusinessAccountOutput
+
+    CreateWhatsAppDatasetInput.add_member(:id, Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountId, required: true, location_name: "id"))
+    CreateWhatsAppDatasetInput.struct_class = Types::CreateWhatsAppDatasetInput
+
+    CreateWhatsAppDatasetOutput.add_member(:dataset_id, Shapes::ShapeRef.new(shape: WhatsAppDatasetId, required: true, location_name: "datasetId"))
+    CreateWhatsAppDatasetOutput.struct_class = Types::CreateWhatsAppDatasetOutput
 
     CreateWhatsAppFlowInput.add_member(:id, Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountId, required: true, location_name: "id"))
     CreateWhatsAppFlowInput.add_member(:flow_name, Shapes::ShapeRef.new(shape: MetaFlowName, required: true, location_name: "flowName"))
@@ -425,6 +437,7 @@ module Aws::SocialMessaging
     LinkedWhatsAppBusinessAccount.add_member(:waba_name, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountName, required: true, location_name: "wabaName"))
     LinkedWhatsAppBusinessAccount.add_member(:event_destinations, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountEventDestinations, required: true, location_name: "eventDestinations"))
     LinkedWhatsAppBusinessAccount.add_member(:marketing_messages_onboarding_status, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountMarketingMessagesOnboardingStatus, location_name: "marketingMessagesOnboardingStatus"))
+    LinkedWhatsAppBusinessAccount.add_member(:dataset_id, Shapes::ShapeRef.new(shape: WhatsAppDatasetId, location_name: "datasetId"))
     LinkedWhatsAppBusinessAccount.add_member(:phone_numbers, Shapes::ShapeRef.new(shape: WhatsAppPhoneNumberSummaryList, required: true, location_name: "phoneNumbers"))
     LinkedWhatsAppBusinessAccount.struct_class = Types::LinkedWhatsAppBusinessAccount
 
@@ -442,6 +455,7 @@ module Aws::SocialMessaging
     LinkedWhatsAppBusinessAccountSummary.add_member(:waba_name, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountName, required: true, location_name: "wabaName"))
     LinkedWhatsAppBusinessAccountSummary.add_member(:event_destinations, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountEventDestinations, required: true, location_name: "eventDestinations"))
     LinkedWhatsAppBusinessAccountSummary.add_member(:marketing_messages_onboarding_status, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountMarketingMessagesOnboardingStatus, location_name: "marketingMessagesOnboardingStatus"))
+    LinkedWhatsAppBusinessAccountSummary.add_member(:dataset_id, Shapes::ShapeRef.new(shape: WhatsAppDatasetId, location_name: "datasetId"))
     LinkedWhatsAppBusinessAccountSummary.struct_class = Types::LinkedWhatsAppBusinessAccountSummary
 
     LinkedWhatsAppBusinessAccountSummaryList.member = Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountSummary)
@@ -608,6 +622,14 @@ module Aws::SocialMessaging
     S3PresignedUrl.add_member(:url, Shapes::ShapeRef.new(shape: S3PresignedUrlUrlString, required: true, location_name: "url"))
     S3PresignedUrl.add_member(:headers, Shapes::ShapeRef.new(shape: Headers, required: true, location_name: "headers"))
     S3PresignedUrl.struct_class = Types::S3PresignedUrl
+
+    SendWhatsAppConversionEventInput.add_member(:id, Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountId, required: true, location_name: "id"))
+    SendWhatsAppConversionEventInput.add_member(:dataset_id, Shapes::ShapeRef.new(shape: WhatsAppDatasetId, required: true, location_name: "datasetId"))
+    SendWhatsAppConversionEventInput.add_member(:event_data, Shapes::ShapeRef.new(shape: WhatsAppConversionEventBlob, required: true, location_name: "eventData"))
+    SendWhatsAppConversionEventInput.struct_class = Types::SendWhatsAppConversionEventInput
+
+    SendWhatsAppConversionEventOutput.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
+    SendWhatsAppConversionEventOutput.struct_class = Types::SendWhatsAppConversionEventOutput
 
     SendWhatsAppMessageInput.add_member(:origination_phone_number_id, Shapes::ShapeRef.new(shape: WhatsAppPhoneNumberId, required: true, location_name: "originationPhoneNumberId"))
     SendWhatsAppMessageInput.add_member(:message, Shapes::ShapeRef.new(shape: WhatsAppMessageBlob, required: true, location_name: "message"))
@@ -777,6 +799,22 @@ module Aws::SocialMessaging
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+      end)
+
+      api.add_operation(:create_whats_app_dataset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWhatsAppDataset"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/whatsapp/waba/dataset"
+        o.input = Shapes::ShapeRef.new(shape: CreateWhatsAppDatasetInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateWhatsAppDatasetOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedByMetaException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyException)
       end)
 
@@ -1180,6 +1218,22 @@ module Aws::SocialMessaging
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:send_whats_app_conversion_event, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendWhatsAppConversionEvent"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/whatsapp/waba/dataset/events"
+        o.input = Shapes::ShapeRef.new(shape: SendWhatsAppConversionEventInput)
+        o.output = Shapes::ShapeRef.new(shape: SendWhatsAppConversionEventOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedByMetaException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
       end)
 
       api.add_operation(:send_whats_app_message, Seahorse::Model::Operation.new.tap do |o|

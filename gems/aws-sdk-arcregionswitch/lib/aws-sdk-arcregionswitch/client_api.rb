@@ -177,6 +177,10 @@ module Aws::ARCRegionswitch
     RdsDbInstanceArnMap = Shapes::MapShape.new(name: 'RdsDbInstanceArnMap')
     RdsPromoteReadReplicaConfiguration = Shapes::StructureShape.new(name: 'RdsPromoteReadReplicaConfiguration')
     RdsPromoteReadReplicaConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'RdsPromoteReadReplicaConfigurationTimeoutMinutesInteger')
+    RdsSwitchoverReadReplicaConfiguration = Shapes::StructureShape.new(name: 'RdsSwitchoverReadReplicaConfiguration')
+    RdsSwitchoverReadReplicaConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'RdsSwitchoverReadReplicaConfigurationTimeoutMinutesInteger')
+    RdsUngraceful = Shapes::StructureShape.new(name: 'RdsUngraceful')
+    RdsUngracefulBehavior = Shapes::StringShape.new(name: 'RdsUngracefulBehavior')
     RecoveryApproach = Shapes::StringShape.new(name: 'RecoveryApproach')
     RecoveryExecutionId = Shapes::StringShape.new(name: 'RecoveryExecutionId')
     Region = Shapes::StringShape.new(name: 'Region')
@@ -462,6 +466,7 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member(:aurora_serverless_scaling_config, Shapes::ShapeRef.new(shape: AuroraServerlessScalingConfiguration, location_name: "auroraServerlessScalingConfig"))
     ExecutionBlockConfiguration.add_member(:aurora_provisioned_scaling_config, Shapes::ShapeRef.new(shape: AuroraProvisionedScalingConfiguration, location_name: "auroraProvisionedScalingConfig"))
     ExecutionBlockConfiguration.add_member(:neptune_global_database_config, Shapes::ShapeRef.new(shape: NeptuneGlobalDatabaseConfiguration, location_name: "neptuneGlobalDatabaseConfig"))
+    ExecutionBlockConfiguration.add_member(:rds_switchover_read_replica_config, Shapes::ShapeRef.new(shape: RdsSwitchoverReadReplicaConfiguration, location_name: "rdsSwitchoverReadReplicaConfig"))
     ExecutionBlockConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ExecutionBlockConfiguration.add_member_subclass(:custom_action_lambda_config, Types::ExecutionBlockConfiguration::CustomActionLambdaConfig)
     ExecutionBlockConfiguration.add_member_subclass(:ec2_asg_capacity_increase_config, Types::ExecutionBlockConfiguration::Ec2AsgCapacityIncreaseConfig)
@@ -480,6 +485,7 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member_subclass(:aurora_serverless_scaling_config, Types::ExecutionBlockConfiguration::AuroraServerlessScalingConfig)
     ExecutionBlockConfiguration.add_member_subclass(:aurora_provisioned_scaling_config, Types::ExecutionBlockConfiguration::AuroraProvisionedScalingConfig)
     ExecutionBlockConfiguration.add_member_subclass(:neptune_global_database_config, Types::ExecutionBlockConfiguration::NeptuneGlobalDatabaseConfig)
+    ExecutionBlockConfiguration.add_member_subclass(:rds_switchover_read_replica_config, Types::ExecutionBlockConfiguration::RdsSwitchoverReadReplicaConfig)
     ExecutionBlockConfiguration.add_member_subclass(:unknown, Types::ExecutionBlockConfiguration::Unknown)
     ExecutionBlockConfiguration.struct_class = Types::ExecutionBlockConfiguration
 
@@ -730,6 +736,16 @@ module Aws::ARCRegionswitch
     RdsPromoteReadReplicaConfiguration.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
     RdsPromoteReadReplicaConfiguration.add_member(:db_instance_arn_map, Shapes::ShapeRef.new(shape: RdsDbInstanceArnMap, required: true, location_name: "dbInstanceArnMap"))
     RdsPromoteReadReplicaConfiguration.struct_class = Types::RdsPromoteReadReplicaConfiguration
+
+    RdsSwitchoverReadReplicaConfiguration.add_member(:timeout_minutes, Shapes::ShapeRef.new(shape: RdsSwitchoverReadReplicaConfigurationTimeoutMinutesInteger, location_name: "timeoutMinutes"))
+    RdsSwitchoverReadReplicaConfiguration.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
+    RdsSwitchoverReadReplicaConfiguration.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    RdsSwitchoverReadReplicaConfiguration.add_member(:db_instance_arn_map, Shapes::ShapeRef.new(shape: RdsDbInstanceArnMap, required: true, location_name: "dbInstanceArnMap"))
+    RdsSwitchoverReadReplicaConfiguration.add_member(:ungraceful, Shapes::ShapeRef.new(shape: RdsUngraceful, location_name: "ungraceful"))
+    RdsSwitchoverReadReplicaConfiguration.struct_class = Types::RdsSwitchoverReadReplicaConfiguration
+
+    RdsUngraceful.add_member(:ungraceful, Shapes::ShapeRef.new(shape: RdsUngracefulBehavior, location_name: "ungraceful"))
+    RdsUngraceful.struct_class = Types::RdsUngraceful
 
     RegionAndRoutingControls.key = Shapes::ShapeRef.new(shape: String)
     RegionAndRoutingControls.value = Shapes::ShapeRef.new(shape: ArcRoutingControlStates)

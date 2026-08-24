@@ -1015,7 +1015,7 @@ module Aws::MediaConvert
     __stringPatternDD = Shapes::StringShape.new(name: '__stringPatternDD')
     __stringPatternHttps = Shapes::StringShape.new(name: '__stringPatternHttps')
     __stringPatternHttpsD = Shapes::StringShape.new(name: '__stringPatternHttpsD')
-    __stringPatternHttpsKantarmedia = Shapes::StringShape.new(name: '__stringPatternHttpsKantarmedia')
+    __stringPatternHttpsKantarmedia55Prod = Shapes::StringShape.new(name: '__stringPatternHttpsKantarmedia55Prod')
     __stringPatternIdentityAZaZ26AZaZ09163 = Shapes::StringShape.new(name: '__stringPatternIdentityAZaZ26AZaZ09163')
     __stringPatternS3 = Shapes::StringShape.new(name: '__stringPatternS3')
     __stringPatternS3ASSETMAPXml = Shapes::StringShape.new(name: '__stringPatternS3ASSETMAPXml')
@@ -1402,6 +1402,7 @@ module Aws::MediaConvert
     CodecMetadata.add_member(:coded_frame_rate, Shapes::ShapeRef.new(shape: FrameRate, location_name: "codedFrameRate"))
     CodecMetadata.add_member(:color_primaries, Shapes::ShapeRef.new(shape: ColorPrimaries, location_name: "colorPrimaries"))
     CodecMetadata.add_member(:content_light_level, Shapes::ShapeRef.new(shape: ContentLightLevel, location_name: "contentLightLevel"))
+    CodecMetadata.add_member(:field_order, Shapes::ShapeRef.new(shape: __string, location_name: "fieldOrder"))
     CodecMetadata.add_member(:height, Shapes::ShapeRef.new(shape: __integer, location_name: "height"))
     CodecMetadata.add_member(:level, Shapes::ShapeRef.new(shape: __string, location_name: "level"))
     CodecMetadata.add_member(:matrix_coefficients, Shapes::ShapeRef.new(shape: MatrixCoefficients, location_name: "matrixCoefficients"))
@@ -1435,6 +1436,7 @@ module Aws::MediaConvert
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    Container.add_member(:bit_rate, Shapes::ShapeRef.new(shape: __long, location_name: "bitRate"))
     Container.add_member(:duration, Shapes::ShapeRef.new(shape: __double, location_name: "duration"))
     Container.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "format"))
     Container.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __string, location_name: "startTimecode"))
@@ -2282,7 +2284,7 @@ module Aws::MediaConvert
     KantarWatermarkSettings.add_member(:credentials_secret_name, Shapes::ShapeRef.new(shape: __stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09, location_name: "credentialsSecretName"))
     KantarWatermarkSettings.add_member(:file_offset, Shapes::ShapeRef.new(shape: __doubleMin0, location_name: "fileOffset"))
     KantarWatermarkSettings.add_member(:kantar_license_id, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "kantarLicenseId"))
-    KantarWatermarkSettings.add_member(:kantar_server_url, Shapes::ShapeRef.new(shape: __stringPatternHttpsKantarmedia, location_name: "kantarServerUrl"))
+    KantarWatermarkSettings.add_member(:kantar_server_url, Shapes::ShapeRef.new(shape: __stringPatternHttpsKantarmedia55Prod, location_name: "kantarServerUrl"))
     KantarWatermarkSettings.add_member(:log_destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "logDestination"))
     KantarWatermarkSettings.add_member(:metadata_3, Shapes::ShapeRef.new(shape: __stringMin1Max50, location_name: "metadata3"))
     KantarWatermarkSettings.add_member(:metadata_4, Shapes::ShapeRef.new(shape: __stringMin1Max50, location_name: "metadata4"))
@@ -2465,6 +2467,7 @@ module Aws::MediaConvert
     MotionImageInsertionOffset.add_member(:image_y, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "imageY"))
     MotionImageInsertionOffset.struct_class = Types::MotionImageInsertionOffset
 
+    MovSettings.add_member(:audio_duration, Shapes::ShapeRef.new(shape: CmfcAudioDuration, location_name: "audioDuration"))
     MovSettings.add_member(:clap_atom, Shapes::ShapeRef.new(shape: MovClapAtom, location_name: "clapAtom"))
     MovSettings.add_member(:cslg_atom, Shapes::ShapeRef.new(shape: MovCslgAtom, location_name: "cslgAtom"))
     MovSettings.add_member(:mpeg_2_four_cc_control, Shapes::ShapeRef.new(shape: MovMpeg2FourCCControl, location_name: "mpeg2FourCCControl"))

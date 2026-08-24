@@ -1133,6 +1133,10 @@ module Aws::DynamoDB
     #   * `TableName` - The table that consumed the provisioned throughput.
     #
     #   * `CapacityUnits` - The total number of capacity units consumed.
+    #
+    #   If the table has vector indexes, each element also includes a
+    #   `VectorIndexes` field with `VectorWriteRequestBytes` consumed for
+    #   each affected vector index.
     #   @return [Array<Types::ConsumedCapacity>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItemOutput AWS API Documentation
@@ -1585,6 +1589,13 @@ module Aws::DynamoDB
     #   the operation.
     #   @return [Hash<String,Types::Capacity>]
     #
+    # @!attribute [rw] vector_indexes
+    #   The amount of throughput consumed on each vector index affected by
+    #   the operation. Each entry contains `VectorWriteRequestBytes` (for
+    #   write operations) or `VectorSearchRequestBytes` (for search
+    #   operations).
+    #   @return [Hash<String,Types::VectorCapacity>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ConsumedCapacity AWS API Documentation
     #
     class ConsumedCapacity < Struct.new(
@@ -1594,7 +1605,8 @@ module Aws::DynamoDB
       :write_capacity_units,
       :table,
       :local_secondary_indexes,
-      :global_secondary_indexes)
+      :global_secondary_indexes,
+      :vector_indexes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2151,6 +2163,34 @@ module Aws::DynamoDB
     #   parameter is set to ENABLED\_WITH\_OVERRIDES.
     #   @return [String]
     #
+    # @!attribute [rw] vector_indexes
+    #   One or more vector indexes to be created on the table. Each vector
+    #   index enables similarity search on a vector attribute. Each element
+    #   in the list consists of:
+    #
+    #   * `IndexName` - The name of the vector index. Must be unique within
+    #     the table.
+    #
+    #   * `VectorAttribute` - The attribute that contains vector embeddings.
+    #     If multiple vector indexes reference the same attribute, they must
+    #     all use the same number of dimensions.
+    #
+    #   * `Dimensions` - The number of dimensions in each vector.
+    #
+    #   * `DistanceFunction` - The distance function used to calculate
+    #     similarity. Valid values: `COSINE`, `EUCLIDEAN`, `DOT_PRODUCT`.
+    #
+    #   * `Projection` - Specifies attributes that are copied (projected)
+    #     from the table into the vector index. The total number of
+    #     projected non-key attributes is shared across the vector attribute
+    #     (counts as 1) and `INLINE_FILTER` search schema elements (each
+    #     counts as 1). `HASH` search schema elements do not count toward
+    #     this limit.
+    #
+    #   * `SearchSchema` - (Optional) Defines the partition key (`HASH`) and
+    #     inline filter (`INLINE_FILTER`) attributes for the vector index.
+    #   @return [Array<Types::VectorIndex>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableInput AWS API Documentation
     #
     class CreateTableInput < Struct.new(
@@ -2170,7 +2210,8 @@ module Aws::DynamoDB
       :resource_policy,
       :on_demand_throughput,
       :global_table_source_arn,
-      :global_table_settings_replication_mode)
+      :global_table_settings_replication_mode,
+      :vector_indexes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2185,6 +2226,50 @@ module Aws::DynamoDB
     #
     class CreateTableOutput < Struct.new(
       :table_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A new vector index to be added to a table.
+    #
+    # @!attribute [rw] index_name
+    #   The name of the vector index. Must be unique within the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] vector_attribute
+    #   The attribute that contains vector embeddings. If multiple vector
+    #   indexes reference the same attribute, they must all use the same
+    #   number of dimensions.
+    #   @return [Types::VectorAttributeDefinition]
+    #
+    # @!attribute [rw] search_schema
+    #   The partition key and inline filter attribute definitions for the
+    #   vector index.
+    #   @return [Array<Types::SearchSchemaElement>]
+    #
+    # @!attribute [rw] projection
+    #   Specifies attributes that are copied (projected) from the table into
+    #   the vector index.
+    #   @return [Types::Projection]
+    #
+    # @!attribute [rw] dimensions
+    #   The number of dimensions in each vector.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] distance_function
+    #   The distance function used to calculate similarity. Valid values:
+    #   `COSINE`, `EUCLIDEAN`, `DOT_PRODUCT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateVectorIndexAction AWS API Documentation
+    #
+    class CreateVectorIndexAction < Struct.new(
+      :index_name,
+      :vector_attribute,
+      :search_schema,
+      :projection,
+      :dimensions,
+      :distance_function)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2554,6 +2639,10 @@ module Aws::DynamoDB
     #   information, see [Provisioned capacity mode][1] in the *Amazon
     #   DynamoDB Developer Guide*.
     #
+    #   If the table has vector indexes, the response includes a
+    #   `VectorIndexes` field with `VectorWriteRequestBytes` consumed for
+    #   each affected vector index.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
@@ -2707,6 +2796,20 @@ module Aws::DynamoDB
     #
     class DeleteTableOutput < Struct.new(
       :table_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A vector index to be removed from a table.
+    #
+    # @!attribute [rw] index_name
+    #   The name of the vector index to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteVectorIndexAction AWS API Documentation
+    #
+    class DeleteVectorIndexAction < Struct.new(
+      :index_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4756,8 +4859,7 @@ module Aws::DynamoDB
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The time at which this import task ended. (Does this include the
-    #   successful complete creation of the table it was imported to?)
+    #   The time at which this import task ended.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ImportSummary AWS API Documentation
@@ -4982,6 +5084,18 @@ module Aws::DynamoDB
     #   The view type that was chosen for the export. Valid values are
     #   `NEW_AND_OLD_IMAGES` and `NEW_IMAGES`. The default value is
     #   `NEW_AND_OLD_IMAGES`.
+    #
+    #   `NEW_AND_OLD_IMAGES` exports both the new and old images of each
+    #   changed item, while `NEW_IMAGES` exports only the new (latest)
+    #   image. The view type you choose determines the structure of each
+    #   item in the output for `insert`, `update`, and `delete` operations.
+    #   For details and examples of how each view type shapes the export
+    #   output, see [DynamoDB table export output format][1] in the *Amazon
+    #   DynamoDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/S3DataExport.Output.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/IncrementalExportSpecification AWS API Documentation
@@ -6196,11 +6310,19 @@ module Aws::DynamoDB
     #   consistent reads require less effort than strongly consistent reads,
     #   so a setting of 50 `ReadCapacityUnits` per second provides 100
     #   eventually consistent `ReadCapacityUnits` per second.
+    #
+    #   For a table or global secondary index that uses on-demand capacity
+    #   mode (`PAY_PER_REQUEST`), this value is `0`, because on-demand mode
+    #   does not use provisioned throughput.
     #   @return [Integer]
     #
     # @!attribute [rw] write_capacity_units
     #   The maximum number of writes consumed per second before DynamoDB
     #   returns a `ThrottlingException`.
+    #
+    #   For a table or global secondary index that uses on-demand capacity
+    #   mode (`PAY_PER_REQUEST`), this value is `0`, because on-demand mode
+    #   does not use provisioned throughput.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughputDescription AWS API Documentation
@@ -6338,6 +6460,19 @@ module Aws::DynamoDB
     #   If you specify any attributes that are part of an index key, then
     #   the data types for those attributes must match those of the schema
     #   in the table's attribute definition.
+    #
+    #   If the table has vector indexes, the following validations apply to
+    #   write operations. A violation of any of these constraints results in
+    #   a `ValidationException`:
+    #
+    #   * The vector attribute must be a list of numbers with dimensions
+    #     matching the index configuration.
+    #
+    #   * Vector values must fit in 32-bit IEEE-754 floating point format
+    #     (f32).
+    #
+    #   * Partition key and inline filter attributes defined in the search
+    #     schema must have data types matching the index schema definition.
     #
     #   Empty String and Binary attribute values are allowed. Attribute
     #   values of type String and Binary must have a length greater than
@@ -6575,6 +6710,10 @@ module Aws::DynamoDB
     #   `ReturnConsumedCapacity` parameter was specified. For more
     #   information, see [Capacity unity consumption for write
     #   operations][1] in the *Amazon DynamoDB Developer Guide*.
+    #
+    #   If the table has vector indexes, the response includes a
+    #   `VectorIndexes` field with `VectorWriteRequestBytes` consumed for
+    #   each affected vector index.
     #
     #
     #
@@ -7980,6 +8119,13 @@ module Aws::DynamoDB
     #   The new server-side encryption settings for the restored table.
     #   @return [Types::SSESpecification]
     #
+    # @!attribute [rw] vector_index_override
+    #   The vector indexes for the restored table. If not specified, all
+    #   vector indexes from the backup are restored. The indexes provided
+    #   must match existing vector indexes from the backup. You can choose
+    #   to exclude some or all of the vector indexes at the time of restore.
+    #   @return [Array<Types::VectorIndex>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackupInput AWS API Documentation
     #
     class RestoreTableFromBackupInput < Struct.new(
@@ -7990,7 +8136,8 @@ module Aws::DynamoDB
       :local_secondary_index_override,
       :provisioned_throughput_override,
       :on_demand_throughput_override,
-      :sse_specification_override)
+      :sse_specification_override,
+      :vector_index_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8038,6 +8185,12 @@ module Aws::DynamoDB
     #   List of global secondary indexes for the restored table. The indexes
     #   provided should match existing secondary indexes. You can choose to
     #   exclude some or all of the indexes at the time of restore.
+    #
+    #   The `WarmThroughput` setting is not supported on global secondary
+    #   indexes when you use `RestoreTableToPointInTime`. Although
+    #   `WarmThroughput` appears in the shared index definition, including
+    #   it in a `GlobalSecondaryIndexOverride` entry causes the request to
+    #   fail with a validation error.
     #   @return [Array<Types::GlobalSecondaryIndex>]
     #
     # @!attribute [rw] local_secondary_index_override
@@ -8060,6 +8213,14 @@ module Aws::DynamoDB
     #   The new server-side encryption settings for the restored table.
     #   @return [Types::SSESpecification]
     #
+    # @!attribute [rw] vector_index_override
+    #   The vector indexes for the restored table. If not specified, all
+    #   vector indexes from the source table are restored. The indexes
+    #   provided must match existing vector indexes from the source table.
+    #   You can choose to exclude some or all of the vector indexes at the
+    #   time of restore.
+    #   @return [Array<Types::VectorIndex>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTimeInput AWS API Documentation
     #
     class RestoreTableToPointInTimeInput < Struct.new(
@@ -8073,7 +8234,8 @@ module Aws::DynamoDB
       :local_secondary_index_override,
       :provisioned_throughput_override,
       :on_demand_throughput_override,
-      :sse_specification_override)
+      :sse_specification_override,
+      :vector_index_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8620,6 +8782,165 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # A single result from a `SearchVectors` operation.
+    #
+    # @!attribute [rw] item
+    #   A map of attribute names to `AttributeValue` objects, representing
+    #   the projected attributes of the item returned by the vector search.
+    #   @return [Hash<String,Types::AttributeValue>]
+    #
+    # @!attribute [rw] score
+    #   The similarity score for this item relative to the search vector.
+    #   The interpretation depends on the distance function configured for
+    #   the vector index.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SearchResultItem AWS API Documentation
+    #
+    class SearchResultItem < Struct.new(
+      :item,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An element in the search schema of a vector index.
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_schema_element_type
+    #   The role of the attribute in the search schema. Valid values:
+    #
+    #   * `HASH` - A partition key that partitions the vector index for
+    #     independent scaling. When specified, you must provide this
+    #     attribute's value in the `SearchConditionExpression`.
+    #
+    #   * `INLINE_FILTER` - An attribute projected into the vector index for
+    #     filtering at the storage layer during search. Inline filters are
+    #     optional in the `SearchConditionExpression`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SearchSchemaElement AWS API Documentation
+    #
+    class SearchSchemaElement < Struct.new(
+      :attribute_name,
+      :search_schema_element_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The name or Amazon Resource Name (ARN) of the table containing the
+    #   vector index.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the vector index to search. The index must be in the
+    #   `ACTIVE` state.
+    #   @return [String]
+    #
+    # @!attribute [rw] return_consumed_capacity
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
+    #
+    #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
+    #     for the operation, together with `ConsumedCapacity` for each table
+    #     and secondary index that was accessed.
+    #
+    #     Note that some operations, such as `GetItem` and `BatchGetItem`,
+    #     do not access any indexes at all. In these cases, specifying
+    #     `INDEXES` will only return `ConsumedCapacity` information for
+    #     table(s).
+    #
+    #   * `TOTAL` - The response includes only the aggregate
+    #     `ConsumedCapacity` for the operation.
+    #
+    #   * `NONE` - No `ConsumedCapacity` details are included in the
+    #     response.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression_attribute_names
+    #   One or more substitution tokens for attribute names in an
+    #   expression. Use the `#` character in an expression to dereference an
+    #   attribute name.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] expression_attribute_values
+    #   One or more values that can be substituted in an expression. Use the
+    #   `:` character in an expression to dereference an attribute value.
+    #   @return [Hash<String,Types::AttributeValue>]
+    #
+    # @!attribute [rw] projection_expression
+    #   A string that identifies one or more attributes to retrieve from the
+    #   index. Separate attribute names with commas. If not specified, the
+    #   operation returns all attributes projected into the vector index.
+    #
+    #   Only attributes projected into the vector index can be retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_vector
+    #   The search vector to compare against the indexed vectors. Each
+    #   element is a 32-bit IEEE-754 floating point number, provided in
+    #   DynamoDB list format.
+    #
+    #   The number of dimensions must match the number of dimensions
+    #   configured for the vector index.
+    #   @return [Array<Types::AttributeValue>]
+    #
+    # @!attribute [rw] search_condition_expression
+    #   A condition expression used to filter the vector search results. The
+    #   expression can reference attributes defined in the vector index
+    #   search schema, including `HASH` and `INLINE_FILTER` key elements.
+    #
+    #   Only the equality operator (`=`) is supported for `HASH` attributes.
+    #   Comparison and range operators are supported for `INLINE_FILTER`
+    #   attributes. Only top-level attributes from the search schema can be
+    #   referenced.
+    #   @return [String]
+    #
+    # @!attribute [rw] top_k
+    #   The number of most similar results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SearchVectorsInput AWS API Documentation
+    #
+    class SearchVectorsInput < Struct.new(
+      :table_name,
+      :index_name,
+      :return_consumed_capacity,
+      :expression_attribute_names,
+      :expression_attribute_values,
+      :projection_expression,
+      :search_vector,
+      :search_condition_expression,
+      :top_k)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] consumed_capacity
+    #   The capacity units consumed by the `SearchVectors` operation.
+    #   Contains `VectorSearchRequestBytes`, which represents the vector
+    #   search capacity consumed.
+    #   @return [Types::VectorCapacity]
+    #
+    # @!attribute [rw] search_results
+    #   A list of items returned by the vector similarity search, sorted by
+    #   similarity with the most similar item first. Each item contains the
+    #   projected attributes and a similarity score.
+    #   @return [Array<Types::SearchResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SearchVectorsOutput AWS API Documentation
+    #
+    class SearchVectorsOutput < Struct.new(
+      :consumed_capacity,
+      :search_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the details of the table when the backup was created.
     #
     # @!attribute [rw] table_name
@@ -8720,6 +9041,12 @@ module Aws::DynamoDB
     #   when the backup was created.
     #   @return [Types::SSEDescription]
     #
+    # @!attribute [rw] vector_indexes
+    #   The vector index properties for the table at the time the backup was
+    #   created, including the index name, vector attribute, dimensions,
+    #   distance function, search schema, and projection.
+    #   @return [Array<Types::VectorIndexInfo>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SourceTableFeatureDetails AWS API Documentation
     #
     class SourceTableFeatureDetails < Struct.new(
@@ -8727,7 +9054,8 @@ module Aws::DynamoDB
       :global_secondary_indexes,
       :stream_description,
       :time_to_live_description,
-      :sse_description)
+      :sse_description,
+      :vector_indexes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8880,6 +9208,11 @@ module Aws::DynamoDB
     #   part of the import operation.
     #   @return [Array<Types::GlobalSecondaryIndex>]
     #
+    # @!attribute [rw] vector_indexes
+    #   The vector indexes of the table to be created as part of the import
+    #   operation.
+    #   @return [Array<Types::VectorIndex>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableCreationParameters AWS API Documentation
     #
     class TableCreationParameters < Struct.new(
@@ -8890,7 +9223,8 @@ module Aws::DynamoDB
       :provisioned_throughput,
       :on_demand_throughput,
       :sse_specification,
-      :global_secondary_indexes)
+      :global_secondary_indexes,
+      :vector_indexes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9000,7 +9334,8 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] table_id
-    #   Unique identifier for the table for which the backup was created.
+    #   A unique identifier for the table, in UUID format, generated by
+    #   DynamoDB when the table is created.
     #   @return [String]
     #
     # @!attribute [rw] billing_mode_summary
@@ -9245,6 +9580,44 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes
     #   @return [String]
     #
+    # @!attribute [rw] vector_indexes
+    #   The vector indexes, if any, on the table. Each element is composed
+    #   of:
+    #
+    #   * `IndexName` - The name of the vector index.
+    #
+    #   * `IndexStatus` - The current status of the vector index:
+    #     `CREATING`, `ACTIVE`, or `DELETING`.
+    #
+    #   * `Backfilling` - Specifies whether the index is currently
+    #     backfilling. During backfill, `SearchVectors` operations might
+    #     return incomplete results.
+    #
+    #   * `VectorAttribute` - The attribute that contains vector embeddings.
+    #
+    #   * `Dimensions` - The number of dimensions in each vector.
+    #
+    #   * `DistanceFunction` - The distance function used to calculate
+    #     similarity (`COSINE`, `EUCLIDEAN`, or `DOT_PRODUCT`).
+    #
+    #   * `SearchSchema` - The partition key and inline filter attributes
+    #     for the vector index.
+    #
+    #   * `Projection` - Specifies attributes that are copied (projected)
+    #     from the table into the vector index.
+    #
+    #   * `IndexArn` - The Amazon Resource Name (ARN) that uniquely
+    #     identifies the index.
+    #
+    #   * `IndexSizeBytes` - The total size of the vector index, in bytes.
+    #     Amazon DynamoDB updates this value approximately every six hours.
+    #     Recent changes might not be reflected in this value.
+    #
+    #   * `ItemCount` - The number of items indexed in the vector index.
+    #     Amazon DynamoDB updates this value approximately every six hours.
+    #     Recent changes might not be reflected in this value.
+    #   @return [Array<Types::VectorIndexDescription>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription AWS API Documentation
     #
     class TableDescription < Struct.new(
@@ -9275,7 +9648,8 @@ module Aws::DynamoDB
       :deletion_protection_enabled,
       :on_demand_throughput,
       :warm_throughput,
-      :multi_region_consistency)
+      :multi_region_consistency,
+      :vector_indexes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9704,6 +10078,10 @@ module Aws::DynamoDB
     #   The capacity units consumed by the entire `TransactWriteItems`
     #   operation. The values of the list are ordered according to the
     #   ordering of the `TransactItems` request parameter.
+    #
+    #   If the table has vector indexes, each element also includes a
+    #   `VectorIndexes` field with `VectorWriteRequestBytes` consumed for
+    #   each affected vector index.
     #   @return [Array<Types::ConsumedCapacity>]
     #
     # @!attribute [rw] item_collection_metrics
@@ -9768,7 +10146,10 @@ module Aws::DynamoDB
     # <note markdown="1"> DynamoDB lists the cancellation reasons on the `CancellationReasons`
     # property. Transaction cancellation reasons are ordered in the order of
     # requested items, if an item has no error it will have `None` code and
-    # `Null` message.
+    # `Null` message. The `None` code is returned as the literal string
+    # `"None"`, not a null or absent value; the message field is omitted
+    # entirely for an item that has no error. This is important to note when
+    # using an SDK that surfaces the code as an optional or nullable type.
     #
     #  </note>
     #
@@ -10617,6 +10998,10 @@ module Aws::DynamoDB
     #   information, see [Capacity unity consumption for write
     #   operations][1] in the *Amazon DynamoDB Developer Guide*.
     #
+    #   If the table has vector indexes, the response includes a
+    #   `VectorIndexes` field with `VectorWriteRequestBytes` consumed for
+    #   each affected vector index.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#write-operation-consumption
@@ -10934,6 +11319,16 @@ module Aws::DynamoDB
     #     to create a Multi-Account Global Table using this table.
     #   @return [String]
     #
+    # @!attribute [rw] vector_index_updates
+    #   A list of vector indexes to be added to or removed from the table.
+    #   You can add or remove one vector index for each `UpdateTable`
+    #   operation.
+    #
+    #   To add a vector index, specify `IndexName`, `VectorAttribute`,
+    #   `Dimensions`, `DistanceFunction`, and `Projection`. To remove a
+    #   vector index, specify only the `IndexName`.
+    #   @return [Array<Types::VectorIndexUpdate>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableInput AWS API Documentation
     #
     class UpdateTableInput < Struct.new(
@@ -10951,7 +11346,8 @@ module Aws::DynamoDB
       :global_table_witness_updates,
       :on_demand_throughput,
       :warm_throughput,
-      :global_table_settings_replication_mode)
+      :global_table_settings_replication_mode,
+      :vector_index_updates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11043,6 +11439,230 @@ module Aws::DynamoDB
     #
     class UpdateTimeToLiveOutput < Struct.new(
       :time_to_live_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition of a vector attribute for a vector index.
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the vector attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/VectorAttributeDefinition AWS API Documentation
+    #
+    class VectorAttributeDefinition < Struct.new(
+      :attribute_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The consumed capacity for vector index operations, including vector
+    # search request bytes and vector write request bytes.
+    #
+    # @!attribute [rw] vector_search_request_bytes
+    #   The number of vector search request bytes consumed by a
+    #   `SearchVectors` operation.
+    #   @return [Float]
+    #
+    # @!attribute [rw] vector_write_request_bytes
+    #   The number of vector write request bytes consumed when writing to a
+    #   vector index. Reported for write operations that modify attributes
+    #   indexed by a vector index.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/VectorCapacity AWS API Documentation
+    #
+    class VectorCapacity < Struct.new(
+      :vector_search_request_bytes,
+      :vector_write_request_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration settings for a vector index, including the
+    # index name, vector attribute, dimensions, distance function, search
+    # schema, and projection.
+    #
+    # @!attribute [rw] index_name
+    #   The name of the vector index.
+    #   @return [String]
+    #
+    # @!attribute [rw] vector_attribute
+    #   The vector attribute configuration for the index.
+    #   @return [Types::VectorAttributeDefinition]
+    #
+    # @!attribute [rw] search_schema
+    #   The search schema that defines partition key and inline filter
+    #   attributes for the vector index.
+    #   @return [Array<Types::SearchSchemaElement>]
+    #
+    # @!attribute [rw] projection
+    #   Specifies attributes that are copied (projected) from the table into
+    #   the vector index.
+    #   @return [Types::Projection]
+    #
+    # @!attribute [rw] dimensions
+    #   The number of dimensions in each vector.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] distance_function
+    #   The distance function used to calculate similarity between vectors.
+    #   Valid values: `COSINE`, `EUCLIDEAN`, `DOT_PRODUCT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/VectorIndex AWS API Documentation
+    #
+    class VectorIndex < Struct.new(
+      :index_name,
+      :vector_attribute,
+      :search_schema,
+      :projection,
+      :dimensions,
+      :distance_function)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the current state and configuration of a vector index,
+    # including its status, size, item count, and the settings specified
+    # when the index was created.
+    #
+    # @!attribute [rw] index_name
+    #   The name of the vector index.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_schema
+    #   The search schema that defines partition key and inline filter
+    #   attributes for the vector index.
+    #   @return [Array<Types::SearchSchemaElement>]
+    #
+    # @!attribute [rw] projection
+    #   Specifies attributes that are copied (projected) from the table into
+    #   the vector index.
+    #   @return [Types::Projection]
+    #
+    # @!attribute [rw] vector_attribute
+    #   The vector attribute configuration for the index.
+    #   @return [Types::VectorAttributeDefinition]
+    #
+    # @!attribute [rw] dimensions
+    #   The number of dimensions in each vector.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] distance_function
+    #   The distance function used to calculate similarity between vectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_status
+    #   The current state of the vector index:
+    #
+    #   * `CREATING` - The index is being created.
+    #
+    #   * `ACTIVE` - The index is ready for use.
+    #
+    #   * `DELETING` - The index is being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] backfilling
+    #   Specifies whether the index is currently backfilling. During
+    #   backfill, `SearchVectors` operations might return incomplete
+    #   results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] index_size_bytes
+    #   The total size of the vector index, in bytes. Amazon DynamoDB
+    #   updates this value approximately every six hours. Recent changes
+    #   might not be reflected in this value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] item_count
+    #   The number of items indexed in the vector index. Amazon DynamoDB
+    #   updates this value approximately every six hours. Recent changes
+    #   might not be reflected in this value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] index_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the vector
+    #   index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/VectorIndexDescription AWS API Documentation
+    #
+    class VectorIndexDescription < Struct.new(
+      :index_name,
+      :search_schema,
+      :projection,
+      :vector_attribute,
+      :dimensions,
+      :distance_function,
+      :index_status,
+      :backfilling,
+      :index_size_bytes,
+      :item_count,
+      :index_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration of a vector index as it existed at the time
+    # a backup was created.
+    #
+    # @!attribute [rw] index_name
+    #   The name of the vector index.
+    #   @return [String]
+    #
+    # @!attribute [rw] vector_attribute
+    #   The vector attribute configuration for the index.
+    #   @return [Types::VectorAttributeDefinition]
+    #
+    # @!attribute [rw] search_schema
+    #   The search schema that defines partition key and inline filter
+    #   attributes for the vector index.
+    #   @return [Array<Types::SearchSchemaElement>]
+    #
+    # @!attribute [rw] projection
+    #   Specifies attributes that are copied (projected) from the table into
+    #   the vector index.
+    #   @return [Types::Projection]
+    #
+    # @!attribute [rw] dimensions
+    #   The number of dimensions in each vector.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] distance_function
+    #   The distance function used to calculate similarity between vectors.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/VectorIndexInfo AWS API Documentation
+    #
+    class VectorIndexInfo < Struct.new(
+      :index_name,
+      :vector_attribute,
+      :search_schema,
+      :projection,
+      :dimensions,
+      :distance_function)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A vector index to be added to or removed from a table.
+    #
+    # @!attribute [rw] create
+    #   The configuration for creating a new vector index on the table.
+    #   @return [Types::CreateVectorIndexAction]
+    #
+    # @!attribute [rw] delete
+    #   The configuration for deleting an existing vector index from the
+    #   table.
+    #   @return [Types::DeleteVectorIndexAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/VectorIndexUpdate AWS API Documentation
+    #
+    class VectorIndexUpdate < Struct.new(
+      :create,
+      :delete)
       SENSITIVE = []
       include Aws::Structure
     end

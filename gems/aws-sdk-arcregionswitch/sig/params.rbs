@@ -174,6 +174,16 @@ module Aws
       region_database_cluster_arns: Hash[::String, ::String]
     }
 
+      type rds_switchover_read_replica_configuration = {
+      timeout_minutes: ::Integer?,
+      cross_account_role: ::String?,
+      external_id: ::String?,
+      db_instance_arn_map: Hash[::String, ::String],
+      ungraceful: {
+        ungraceful: ("promoteReadReplica")?
+      }?
+    }
+
       type execution_block_configuration = {
       custom_action_lambda_config: Params::custom_action_lambda_configuration?,
       ec2_asg_capacity_increase_config: Params::ec2_asg_capacity_increase_configuration?,
@@ -222,14 +232,15 @@ module Aws
       lambda_event_source_mapping_config: Params::lambda_event_source_mapping_configuration?,
       aurora_serverless_scaling_config: Params::aurora_serverless_scaling_configuration?,
       aurora_provisioned_scaling_config: Params::aurora_provisioned_scaling_configuration?,
-      neptune_global_database_config: Params::neptune_global_database_configuration?
+      neptune_global_database_config: Params::neptune_global_database_configuration?,
+      rds_switchover_read_replica_config: Params::rds_switchover_read_replica_configuration?
     }
 
       type step = {
       name: ::String,
       description: ::String?,
       execution_block_configuration: Params::execution_block_configuration,
-      execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping" | "AuroraServerlessScaling" | "AuroraProvisionedScaling" | "NeptuneGlobalDatabase")
+      execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping" | "AuroraServerlessScaling" | "AuroraProvisionedScaling" | "NeptuneGlobalDatabase" | "RdsSwitchoverReadReplica")
     }
 
       type trigger = {

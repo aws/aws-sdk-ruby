@@ -695,6 +695,12 @@ module Aws::PrometheusService
     #   scraper.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] exporters
+    #   The exporter configurations for the scraper. You can configure at
+    #   most one Amazon OpenSearch Service domain. If you don't specify a
+    #   value, the scraper is created without an exporter configuration.
+    #   @return [Array<Types::ExporterConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateScraperRequest AWS API Documentation
     #
     class CreateScraperRequest < Struct.new(
@@ -704,7 +710,8 @@ module Aws::PrometheusService
       :destination,
       :role_configuration,
       :client_token,
-      :tags)
+      :tags,
+      :exporters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1427,6 +1434,30 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Contains the configuration for an exporter managed by the scraper.
+    #
+    # @note ExporterConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ExporterConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ExporterConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] open_search_configuration
+    #   The configuration that the scraper uses to export metrics to an
+    #   Amazon OpenSearch Service domain.
+    #   @return [Types::OpenSearchExporterConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ExporterConfiguration AWS API Documentation
+    #
+    class ExporterConfiguration < Struct.new(
+      :open_search_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class OpenSearchConfiguration < ExporterConfiguration; end
+      class Unknown < ExporterConfiguration; end
+    end
+
     # Represents the input of a `GetDefaultScraperConfiguration` operation.
     #
     # @api private
@@ -1912,6 +1943,22 @@ module Aws::PrometheusService
     #
     class LoggingFilter < Struct.new(
       :qsp_threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for exporting metrics to an Amazon OpenSearch
+    # Service domain.
+    #
+    # @!attribute [rw] domain_arn
+    #   The Amazon Resource Name (ARN) of the Amazon OpenSearch Service
+    #   domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/OpenSearchExporterConfiguration AWS API Documentation
+    #
+    class OpenSearchExporterConfiguration < Struct.new(
+      :domain_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2570,6 +2617,12 @@ module Aws::PrometheusService
     #   cross-account scraping configuration.
     #   @return [Types::RoleConfiguration]
     #
+    # @!attribute [rw] exporters
+    #   The exporter configurations for the scraper, if configured. The list
+    #   contains at most one configuration for an Amazon OpenSearch Service
+    #   domain.
+    #   @return [Array<Types::ExporterConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperDescription AWS API Documentation
     #
     class ScraperDescription < Struct.new(
@@ -2585,7 +2638,8 @@ module Aws::PrometheusService
       :scrape_configuration,
       :source,
       :destination,
-      :role_configuration)
+      :role_configuration,
+      :exporters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2706,6 +2760,12 @@ module Aws::PrometheusService
     #   cross-account scraping configuration.
     #   @return [Types::RoleConfiguration]
     #
+    # @!attribute [rw] exporters
+    #   The exporter configurations for the scraper, if configured. The list
+    #   contains at most one configuration for an Amazon OpenSearch Service
+    #   domain.
+    #   @return [Array<Types::ExporterConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperSummary AWS API Documentation
     #
     class ScraperSummary < Struct.new(
@@ -2720,7 +2780,8 @@ module Aws::PrometheusService
       :status_reason,
       :source,
       :destination,
-      :role_configuration)
+      :role_configuration,
+      :exporters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3024,6 +3085,12 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] exporters
+    #   The exporter configurations for the scraper. You can configure at
+    #   most one Amazon OpenSearch Service domain. If you don't specify a
+    #   value, the existing exporter configuration remains unchanged.
+    #   @return [Array<Types::ExporterConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateScraperRequest AWS API Documentation
     #
     class UpdateScraperRequest < Struct.new(
@@ -3032,7 +3099,8 @@ module Aws::PrometheusService
       :scrape_configuration,
       :destination,
       :role_configuration,
-      :client_token)
+      :client_token,
+      :exporters)
       SENSITIVE = []
       include Aws::Structure
     end

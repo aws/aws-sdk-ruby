@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.270.0 (2026-08-14)
+------------------
+
+* Feature - Added support for associating glossary terms with iterable form items, such as table columns.
+
+1.269.0 (2026-08-12)
+------------------
+
+* Feature - Documentation updates for materialized views APIs.
+
+1.268.0 (2026-08-05)
+------------------
+
+* Feature - Added the PutDataCatalogExportConfiguration to export Glue Data Catalog metadata to systems tables stored in S3 Tables.
+
 1.267.0 (2026-07-29)
 ------------------
 

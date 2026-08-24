@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-08-17)
+------------------
+
+* Feature - AWS Elastic Disaster Recovery (AWS DRS) now offers Recovery Plans to recover multi-server applications in the right order in one action. Define the launch sequence once, with ordered steps and wait times, and DRS runs it automatically. Validate with non-disruptive drills and monitor in real time.
+
 1.68.0 (2026-07-14)
 ------------------
 

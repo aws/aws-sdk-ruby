@@ -53,6 +53,13 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class AccountFreeTrialStatus
+      attr_accessor account_id: ::String
+      attr_accessor evaluated_at: ::Time
+      attr_accessor free_trial_statuses: ::Array[Types::FreeTrialStatus]
+      SENSITIVE: []
+    end
+
     class Action
       attr_accessor action_type: ::String
       attr_accessor network_connection_action: Types::NetworkConnectionAction
@@ -5816,6 +5823,14 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class FreeTrialStatus
+      attr_accessor feature_type: ("SECURITY_HUB_V2" | "SECURITY_HUB_V2_MULTI_CLOUD_AZURE")
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor started_at: ::Time
+      attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
     class GenerateRecommendedPolicyV2Request
       attr_accessor metadata_uid: ::String
       SENSITIVE: []
@@ -6461,6 +6476,20 @@ module Aws::SecurityHub
 
     class ListFindingAggregatorsResponse
       attr_accessor finding_aggregators: ::Array[Types::FindingAggregator]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFreeTrialStatusesV2Request
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor statuses: ::Array[("ACTIVE" | "INACTIVE")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFreeTrialStatusesV2Response
+      attr_accessor account_free_trial_statuses: ::Array[Types::AccountFreeTrialStatus]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end

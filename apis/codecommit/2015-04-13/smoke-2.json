@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "ListRepositoriesSuccess",
+            "operationName": "ListRepositories",
+            "input": {},
+            "expectation": {
+                "success": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        },
+        {
+            "id": "ListBranchesFailure",
+            "operationName": "ListBranches",
+            "input": {
+                "repositoryName": "fake-repo"
+            },
+            "expectation": {
+                "failure": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        }
+    ]
+}

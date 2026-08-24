@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2026-08-20)
+------------------
+
+* Feature - Added SigV4a as a supported signing protocol for Origin Access Control (OAC), enabling CloudFront to sign requests to Amazon S3 Multi-Region Access Point (S3-MRAP) origins.
+
 1.151.0 (2026-07-09)
 ------------------
 

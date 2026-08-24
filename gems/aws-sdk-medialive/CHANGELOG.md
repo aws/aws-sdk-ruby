@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.194.0 (2026-08-19)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports video cropping and output positioning. Use cropRectangle and outputPositionRectangle to position the encoded video within the output frame, with the surrounding area filled with black.
+
+1.193.0 (2026-08-18)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports SCTE-35 marker passthrough without IDR frame insertion for CMAF Ingest, MediaPackage V2, and transport stream outputs.
+
+1.192.0 (2026-08-10)
+------------------
+
+* Feature - Added VirtualSourceAddress to multicast output destinations for MediaLive Anywhere channels. Specifies the source IP address for outbound multicast packets when downstream networks enforce source-IP filtering.
+
 1.191.0 (2026-07-09)
 ------------------
 

@@ -53,6 +53,9 @@ module Aws::GeoMaps
     LanguageTag = Shapes::StringShape.new(name: 'LanguageTag')
     MapFeatureMode = Shapes::StringShape.new(name: 'MapFeatureMode')
     MapStyle = Shapes::StringShape.new(name: 'MapStyle')
+    PoiCategory = Shapes::StringShape.new(name: 'PoiCategory')
+    PoiCategoryList = Shapes::ListShape.new(name: 'PoiCategoryList')
+    PoiDensity = Shapes::StringShape.new(name: 'PoiDensity')
     PositionString = Shapes::StringShape.new(name: 'PositionString')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ScaleBarUnit = Shapes::StringShape.new(name: 'ScaleBarUnit')
@@ -140,6 +143,8 @@ module Aws::GeoMaps
     GetStyleDescriptorRequest.add_member(:traffic, Shapes::ShapeRef.new(shape: Traffic, location: "querystring", location_name: "traffic"))
     GetStyleDescriptorRequest.add_member(:travel_modes, Shapes::ShapeRef.new(shape: TravelModeList, location: "querystring", location_name: "travel-modes"))
     GetStyleDescriptorRequest.add_member(:buildings, Shapes::ShapeRef.new(shape: Buildings, location: "querystring", location_name: "buildings"))
+    GetStyleDescriptorRequest.add_member(:poi_density, Shapes::ShapeRef.new(shape: PoiDensity, location: "querystring", location_name: "poi-density"))
+    GetStyleDescriptorRequest.add_member(:poi_categories, Shapes::ShapeRef.new(shape: PoiCategoryList, location: "querystring", location_name: "poi-categories"))
     GetStyleDescriptorRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetStyleDescriptorRequest.struct_class = Types::GetStyleDescriptorRequest
 
@@ -170,6 +175,8 @@ module Aws::GeoMaps
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    PoiCategoryList.member = Shapes::ShapeRef.new(shape: PoiCategory)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -214,7 +221,7 @@ module Aws::GeoMaps
       api.add_operation(:get_glyphs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetGlyphs"
         o.http_method = "GET"
-        o.http_request_uri = "/glyphs/{FontStack}/{FontUnicodeRange}"
+        o.http_request_uri = "/v2/glyphs/{FontStack}/{FontUnicodeRange}"
         o.input = Shapes::ShapeRef.new(shape: GetGlyphsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetGlyphsResponse)
       end)
@@ -222,7 +229,7 @@ module Aws::GeoMaps
       api.add_operation(:get_sprites, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSprites"
         o.http_method = "GET"
-        o.http_request_uri = "/styles/{Style}/{ColorScheme}/{Variant}/sprites/{FileName}"
+        o.http_request_uri = "/v2/styles/{Style}/{ColorScheme}/{Variant}/sprites/{FileName}"
         o.input = Shapes::ShapeRef.new(shape: GetSpritesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSpritesResponse)
       end)
@@ -230,7 +237,7 @@ module Aws::GeoMaps
       api.add_operation(:get_static_map, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetStaticMap"
         o.http_method = "GET"
-        o.http_request_uri = "/static/{FileName}"
+        o.http_request_uri = "/v2/static/{FileName}"
         o.input = Shapes::ShapeRef.new(shape: GetStaticMapRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStaticMapResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -242,7 +249,7 @@ module Aws::GeoMaps
       api.add_operation(:get_style_descriptor, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetStyleDescriptor"
         o.http_method = "GET"
-        o.http_request_uri = "/styles/{Style}/descriptor"
+        o.http_request_uri = "/v2/styles/{Style}/descriptor"
         o.input = Shapes::ShapeRef.new(shape: GetStyleDescriptorRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStyleDescriptorResponse)
       end)
@@ -250,7 +257,7 @@ module Aws::GeoMaps
       api.add_operation(:get_tile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTile"
         o.http_method = "GET"
-        o.http_request_uri = "/tiles/{Tileset}/{Z}/{X}/{Y}"
+        o.http_request_uri = "/v2/tiles/{Tileset}/{Z}/{X}/{Y}"
         o.input = Shapes::ShapeRef.new(shape: GetTileRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTileResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

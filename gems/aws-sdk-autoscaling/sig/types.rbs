@@ -49,6 +49,7 @@ module Aws::AutoScaling
 
     class ActivityType
       attr_accessor activity: Types::Activity
+      attr_accessor activities: ::Array[Types::Activity]
       SENSITIVE: []
     end
 
@@ -149,6 +150,7 @@ module Aws::AutoScaling
       attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy
       attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification
       attr_accessor instance_lifecycle_policy: Types::InstanceLifecyclePolicy
+      attr_accessor operator: Types::Operator
       SENSITIVE: []
     end
 
@@ -323,6 +325,7 @@ module Aws::AutoScaling
       attr_accessor skip_zonal_shift_validation: bool
       attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification
       attr_accessor instance_lifecycle_policy: Types::InstanceLifecyclePolicy
+      attr_accessor operator: Types::Operator
       SENSITIVE: []
     end
 
@@ -716,6 +719,11 @@ module Aws::AutoScaling
       SENSITIVE: []
     end
 
+    class IdempotentCallInProgressFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class IdempotentParameterMismatchError
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1078,6 +1086,11 @@ module Aws::AutoScaling
       attr_accessor auto_scaling_group_name: ::String
       attr_accessor topic_arn: ::String
       attr_accessor notification_type: ::String
+      SENSITIVE: []
+    end
+
+    class Operator
+      attr_accessor principal: ::String
       SENSITIVE: []
     end
 
@@ -1464,6 +1477,8 @@ module Aws::AutoScaling
 
     class TerminateInstanceInAutoScalingGroupType
       attr_accessor instance_id: ::String
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor auto_scaling_group_name: ::String
       attr_accessor should_decrement_desired_capacity: bool
       SENSITIVE: []
     end

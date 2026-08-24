@@ -228,7 +228,10 @@ module Aws
                             max_write_request_units: ::Integer?
                           },
                           ?global_table_source_arn: ::String,
-                          ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
+                          ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES"),
+                          ?vector_indexes: Array[
+                            Params::vector_index
+                          ]
                         ) -> _CreateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTableResponseSuccess
 
@@ -599,6 +602,9 @@ module Aws
                             }?,
                             global_secondary_indexes: Array[
                               Params::global_secondary_index
+                            ]?,
+                            vector_indexes: Array[
+                              Params::vector_index
                             ]?
                           }
                         ) -> _ImportTableResponseSuccess
@@ -788,7 +794,10 @@ module Aws
                                          enabled: bool?,
                                          sse_type: ("AES256" | "KMS")?,
                                          kms_master_key_id: ::String?
-                                       }
+                                       },
+                                       ?vector_index_override: Array[
+                                         Params::vector_index
+                                       ]
                                      ) -> _RestoreTableFromBackupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreTableFromBackupResponseSuccess
 
@@ -822,7 +831,10 @@ module Aws
                                               enabled: bool?,
                                               sse_type: ("AES256" | "KMS")?,
                                               kms_master_key_id: ::String?
-                                            }
+                                            },
+                                            ?vector_index_override: Array[
+                                              Params::vector_index
+                                            ]
                                           ) -> _RestoreTableToPointInTimeResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreTableToPointInTimeResponseSuccess
 
@@ -854,6 +866,25 @@ module Aws
                   ?consistent_read: bool
                 ) -> _ScanResponseSuccess
               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ScanResponseSuccess
+
+      interface _SearchVectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchVectorsOutput]
+        def consumed_capacity: () -> Types::VectorCapacity
+        def search_results: () -> ::Array[Types::SearchResultItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#search_vectors-instance_method
+      def search_vectors: (
+                            table_name: ::String,
+                            index_name: ::String,
+                            ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                            ?expression_attribute_names: Hash[::String, ::String],
+                            ?expression_attribute_values: Hash[::String, Params::attribute_value],
+                            ?projection_expression: ::String,
+                            search_vector: Array[Params::attribute_value],
+                            ?search_condition_expression: ::String,
+                            top_k: ::Integer
+                          ) -> _SearchVectorsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchVectorsResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#tag_resource-instance_method
       def tag_resource: (
@@ -1205,7 +1236,32 @@ module Aws
                             read_units_per_second: ::Integer?,
                             write_units_per_second: ::Integer?
                           },
-                          ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
+                          ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES"),
+                          ?vector_index_updates: Array[
+                            {
+                              create: {
+                                index_name: ::String,
+                                vector_attribute: {
+                                  attribute_name: ::String
+                                },
+                                search_schema: Array[
+                                  {
+                                    attribute_name: ::String,
+                                    search_schema_element_type: ("HASH" | "INLINE_FILTER")
+                                  }
+                                ]?,
+                                projection: {
+                                  projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                                  non_key_attributes: Array[::String]?
+                                },
+                                dimensions: ::Integer,
+                                distance_function: ("COSINE" | "DOT_PRODUCT" | "EUCLIDEAN")
+                              }?,
+                              delete: {
+                                index_name: ::String
+                              }?
+                            }
+                          ]
                         ) -> _UpdateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableResponseSuccess
 

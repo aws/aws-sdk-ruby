@@ -163,6 +163,7 @@ module Aws::SageMaker
     AppSpecification = Shapes::StructureShape.new(name: 'AppSpecification')
     AppStatus = Shapes::StringShape.new(name: 'AppStatus')
     AppType = Shapes::StringShape.new(name: 'AppType')
+    ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
     ApprovalDescription = Shapes::StringShape.new(name: 'ApprovalDescription')
     ArnOrName = Shapes::StringShape.new(name: 'ArnOrName')
     ArtifactArn = Shapes::StringShape.new(name: 'ArtifactArn')
@@ -1424,6 +1425,8 @@ module Aws::SageMaker
     IPAddressType = Shapes::StringShape.new(name: 'IPAddressType')
     IamIdentity = Shapes::StructureShape.new(name: 'IamIdentity')
     IamPolicyConstraints = Shapes::StructureShape.new(name: 'IamPolicyConstraints')
+    IdcConfigInput = Shapes::StructureShape.new(name: 'IdcConfigInput')
+    IdcConfigOutput = Shapes::StructureShape.new(name: 'IdcConfigOutput')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdentityProviderOAuthSetting = Shapes::StructureShape.new(name: 'IdentityProviderOAuthSetting')
     IdentityProviderOAuthSettings = Shapes::ListShape.new(name: 'IdentityProviderOAuthSettings')
@@ -1526,6 +1529,7 @@ module Aws::SageMaker
     InputDataConfig = Shapes::ListShape.new(name: 'InputDataConfig')
     InputMode = Shapes::StringShape.new(name: 'InputMode')
     InputModes = Shapes::ListShape.new(name: 'InputModes')
+    InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InstanceCount = Shapes::IntegerShape.new(name: 'InstanceCount')
     InstanceGroup = Shapes::StructureShape.new(name: 'InstanceGroup')
     InstanceGroupHealthCheckConfiguration = Shapes::StructureShape.new(name: 'InstanceGroupHealthCheckConfiguration')
@@ -2250,6 +2254,9 @@ module Aws::SageMaker
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PredefinedMetricSpecification = Shapes::StructureShape.new(name: 'PredefinedMetricSpecification')
     PreemptTeamTasks = Shapes::StringShape.new(name: 'PreemptTeamTasks')
+    PrefixAwareRoutingConcurrencyThreshold = Shapes::IntegerShape.new(name: 'PrefixAwareRoutingConcurrencyThreshold')
+    PrefixAwareRoutingConfig = Shapes::StructureShape.new(name: 'PrefixAwareRoutingConfig')
+    PrefixAwareRoutingPrefixLength = Shapes::IntegerShape.new(name: 'PrefixAwareRoutingPrefixLength')
     PresignedDomainUrl = Shapes::StringShape.new(name: 'PresignedDomainUrl')
     PresignedUrlAccessConfig = Shapes::StructureShape.new(name: 'PresignedUrlAccessConfig')
     PriorityClass = Shapes::StructureShape.new(name: 'PriorityClass')
@@ -2533,6 +2540,7 @@ module Aws::SageMaker
     SendPipelineExecutionStepFailureResponse = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepFailureResponse')
     SendPipelineExecutionStepSuccessRequest = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepSuccessRequest')
     SendPipelineExecutionStepSuccessResponse = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepSuccessResponse')
+    SequenceLength = Shapes::StringShape.new(name: 'SequenceLength')
     ServerlessJobBaseModelArn = Shapes::StringShape.new(name: 'ServerlessJobBaseModelArn')
     ServerlessJobConfig = Shapes::StructureShape.new(name: 'ServerlessJobConfig')
     ServerlessJobType = Shapes::StringShape.new(name: 'ServerlessJobType')
@@ -5059,6 +5067,7 @@ module Aws::SageMaker
     CreateMlflowAppRequest.add_member(:name, Shapes::ShapeRef.new(shape: MlflowAppName, required: true, location_name: "Name"))
     CreateMlflowAppRequest.add_member(:artifact_store_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "ArtifactStoreUri"))
     CreateMlflowAppRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateMlflowAppRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateMlflowAppRequest.add_member(:model_registration_mode, Shapes::ShapeRef.new(shape: ModelRegistrationMode, location_name: "ModelRegistrationMode"))
     CreateMlflowAppRequest.add_member(:weekly_maintenance_window_start, Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
     CreateMlflowAppRequest.add_member(:account_default_status, Shapes::ShapeRef.new(shape: AccountDefaultStatus, location_name: "AccountDefaultStatus"))
@@ -5271,6 +5280,7 @@ module Aws::SageMaker
     CreatePartnerAppRequest.add_member(:maintenance_config, Shapes::ShapeRef.new(shape: PartnerAppMaintenanceConfig, location_name: "MaintenanceConfig"))
     CreatePartnerAppRequest.add_member(:tier, Shapes::ShapeRef.new(shape: NonEmptyString64, required: true, location_name: "Tier"))
     CreatePartnerAppRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: PartnerAppConfig, location_name: "ApplicationConfig"))
+    CreatePartnerAppRequest.add_member(:idc_config, Shapes::ShapeRef.new(shape: IdcConfigInput, location_name: "IdcConfig"))
     CreatePartnerAppRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: PartnerAppAuthType, required: true, location_name: "AuthType"))
     CreatePartnerAppRequest.add_member(:enable_iam_session_based_identity, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableIamSessionBasedIdentity", metadata: {"box" => true}))
     CreatePartnerAppRequest.add_member(:enable_auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableAutoMinorVersionUpgrade", metadata: {"box" => true}))
@@ -6759,6 +6769,7 @@ module Aws::SageMaker
     DescribeMlflowAppResponse.add_member(:artifact_store_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "ArtifactStoreUri"))
     DescribeMlflowAppResponse.add_member(:mlflow_version, Shapes::ShapeRef.new(shape: MlflowVersion, location_name: "MlflowVersion"))
     DescribeMlflowAppResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribeMlflowAppResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribeMlflowAppResponse.add_member(:status, Shapes::ShapeRef.new(shape: MlflowAppStatus, location_name: "Status"))
     DescribeMlflowAppResponse.add_member(:model_registration_mode, Shapes::ShapeRef.new(shape: ModelRegistrationMode, location_name: "ModelRegistrationMode"))
     DescribeMlflowAppResponse.add_member(:account_default_status, Shapes::ShapeRef.new(shape: AccountDefaultStatus, location_name: "AccountDefaultStatus"))
@@ -7041,6 +7052,7 @@ module Aws::SageMaker
     DescribePartnerAppResponse.add_member(:enable_auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableAutoMinorVersionUpgrade", metadata: {"box" => true}))
     DescribePartnerAppResponse.add_member(:current_version_eol_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CurrentVersionEolDate"))
     DescribePartnerAppResponse.add_member(:available_upgrade, Shapes::ShapeRef.new(shape: AvailableUpgrade, location_name: "AvailableUpgrade"))
+    DescribePartnerAppResponse.add_member(:idc_config, Shapes::ShapeRef.new(shape: IdcConfigOutput, location_name: "IdcConfig"))
     DescribePartnerAppResponse.struct_class = Types::DescribePartnerAppResponse
 
     DescribePipelineDefinitionForExecutionRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "PipelineExecutionArn"))
@@ -8281,6 +8293,13 @@ module Aws::SageMaker
     IamPolicyConstraints.add_member(:source_ip, Shapes::ShapeRef.new(shape: EnabledOrDisabled, location_name: "SourceIp"))
     IamPolicyConstraints.add_member(:vpc_source_ip, Shapes::ShapeRef.new(shape: EnabledOrDisabled, location_name: "VpcSourceIp"))
     IamPolicyConstraints.struct_class = Types::IamPolicyConstraints
+
+    IdcConfigInput.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    IdcConfigInput.struct_class = Types::IdcConfigInput
+
+    IdcConfigOutput.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    IdcConfigOutput.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
+    IdcConfigOutput.struct_class = Types::IdcConfigOutput
 
     IdentityProviderOAuthSetting.add_member(:data_source_name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "DataSourceName"))
     IdentityProviderOAuthSetting.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
@@ -11148,6 +11167,10 @@ module Aws::SageMaker
     PredefinedMetricSpecification.add_member(:predefined_metric_type, Shapes::ShapeRef.new(shape: String, location_name: "PredefinedMetricType"))
     PredefinedMetricSpecification.struct_class = Types::PredefinedMetricSpecification
 
+    PrefixAwareRoutingConfig.add_member(:prefix_length, Shapes::ShapeRef.new(shape: PrefixAwareRoutingPrefixLength, location_name: "PrefixLength"))
+    PrefixAwareRoutingConfig.add_member(:concurrency_threshold, Shapes::ShapeRef.new(shape: PrefixAwareRoutingConcurrencyThreshold, location_name: "ConcurrencyThreshold"))
+    PrefixAwareRoutingConfig.struct_class = Types::PrefixAwareRoutingConfig
+
     PresignedUrlAccessConfig.add_member(:accept_eula, Shapes::ShapeRef.new(shape: Boolean, location_name: "AcceptEula", metadata: {"box" => true}))
     PresignedUrlAccessConfig.add_member(:expected_s3_url, Shapes::ShapeRef.new(shape: S3ModelUri, location_name: "ExpectedS3Url"))
     PresignedUrlAccessConfig.struct_class = Types::PresignedUrlAccessConfig
@@ -11158,8 +11181,8 @@ module Aws::SageMaker
 
     PriorityClassList.member = Shapes::ShapeRef.new(shape: PriorityClass)
 
-    ProcessingClusterConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: ProcessingInstanceCount, required: true, location_name: "InstanceCount"))
-    ProcessingClusterConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProcessingInstanceType, required: true, location_name: "InstanceType"))
+    ProcessingClusterConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: ProcessingInstanceCount, location_name: "InstanceCount"))
+    ProcessingClusterConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProcessingInstanceType, location_name: "InstanceType"))
     ProcessingClusterConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: ProcessingVolumeSizeInGB, required: true, location_name: "VolumeSizeInGB"))
     ProcessingClusterConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     ProcessingClusterConfig.struct_class = Types::ProcessingClusterConfig
@@ -11300,6 +11323,7 @@ module Aws::SageMaker
     ProductionVariantManagedInstanceScalingScaleInPolicy.struct_class = Types::ProductionVariantManagedInstanceScalingScaleInPolicy
 
     ProductionVariantRoutingConfig.add_member(:routing_strategy, Shapes::ShapeRef.new(shape: RoutingStrategy, required: true, location_name: "RoutingStrategy"))
+    ProductionVariantRoutingConfig.add_member(:prefix_aware_routing_config, Shapes::ShapeRef.new(shape: PrefixAwareRoutingConfig, location_name: "PrefixAwareRoutingConfig"))
     ProductionVariantRoutingConfig.struct_class = Types::ProductionVariantRoutingConfig
 
     ProductionVariantServerlessConfig.add_member(:memory_size_in_mb, Shapes::ShapeRef.new(shape: ServerlessMemorySizeInMB, required: true, location_name: "MemorySizeInMB"))
@@ -11914,6 +11938,7 @@ module Aws::SageMaker
     ServerlessJobConfig.add_member(:peft, Shapes::ShapeRef.new(shape: Peft, location_name: "Peft"))
     ServerlessJobConfig.add_member(:evaluation_type, Shapes::ShapeRef.new(shape: EvaluationType, location_name: "EvaluationType"))
     ServerlessJobConfig.add_member(:evaluator_arn, Shapes::ShapeRef.new(shape: EvaluatorArn, location_name: "EvaluatorArn"))
+    ServerlessJobConfig.add_member(:sequence_length, Shapes::ShapeRef.new(shape: SequenceLength, location_name: "SequenceLength"))
     ServerlessJobConfig.struct_class = Types::ServerlessJobConfig
 
     ServiceCatalogProvisionedProductDetails.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: ServiceCatalogEntityId, location_name: "ProvisionedProductId"))
@@ -13107,6 +13132,8 @@ module Aws::SageMaker
     UpdatePartnerAppRequest.add_member(:maintenance_config, Shapes::ShapeRef.new(shape: PartnerAppMaintenanceConfig, location_name: "MaintenanceConfig"))
     UpdatePartnerAppRequest.add_member(:tier, Shapes::ShapeRef.new(shape: NonEmptyString64, location_name: "Tier"))
     UpdatePartnerAppRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: PartnerAppConfig, location_name: "ApplicationConfig"))
+    UpdatePartnerAppRequest.add_member(:idc_config, Shapes::ShapeRef.new(shape: IdcConfigInput, location_name: "IdcConfig"))
+    UpdatePartnerAppRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: PartnerAppAuthType, location_name: "AuthType"))
     UpdatePartnerAppRequest.add_member(:enable_iam_session_based_identity, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableIamSessionBasedIdentity", metadata: {"box" => true}))
     UpdatePartnerAppRequest.add_member(:enable_auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableAutoMinorVersionUpgrade", metadata: {"box" => true}))
     UpdatePartnerAppRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: MajorMinorVersion, location_name: "AppVersion"))

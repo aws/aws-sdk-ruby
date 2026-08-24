@@ -831,8 +831,19 @@ module Aws::ARCRegionswitch
     #                   "Region" => "NeptuneClusterArn",
     #                 },
     #               },
+    #               rds_switchover_read_replica_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 db_instance_arn_map: { # required
+    #                   "Region" => "RdsDbInstanceArn",
+    #                 },
+    #                 ungraceful: {
+    #                   ungraceful: "promoteReadReplica", # accepts promoteReadReplica
+    #                 },
+    #               },
     #             },
-    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica, LambdaEventSourceMapping, AuroraServerlessScaling, AuroraProvisionedScaling, NeptuneGlobalDatabase
+    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica, LambdaEventSourceMapping, AuroraServerlessScaling, AuroraProvisionedScaling, NeptuneGlobalDatabase, RdsSwitchoverReadReplica
     #           },
     #         ],
     #         workflow_target_action: "activate", # required, accepts activate, deactivate, postRecovery
@@ -1009,7 +1020,13 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.global_cluster_identifier #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.region_database_cluster_arns #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.region_database_cluster_arns["Region"] #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map["Region"] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.ungraceful.ungraceful #=> String, one of "promoteReadReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1216,7 +1233,13 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.global_cluster_identifier #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.region_database_cluster_arns #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.region_database_cluster_arns["Region"] #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map["Region"] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.ungraceful.ungraceful #=> String, one of "promoteReadReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1521,7 +1544,13 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.global_cluster_identifier #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.region_database_cluster_arns #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.region_database_cluster_arns["Region"] #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map["Region"] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.ungraceful.ungraceful #=> String, one of "promoteReadReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1716,7 +1745,13 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.global_cluster_identifier #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.region_database_cluster_arns #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.region_database_cluster_arns["Region"] #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map["Region"] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.ungraceful.ungraceful #=> String, one of "promoteReadReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1801,7 +1836,7 @@ module Aws::ARCRegionswitch
     #   resp.items[0].timestamp #=> Time
     #   resp.items[0].type #=> String, one of "unknown", "executionPending", "executionStarted", "executionSucceeded", "executionFailed", "executionPausing", "executionPaused", "executionCanceling", "executionCanceled", "executionPendingApproval", "executionBehaviorChangedToUngraceful", "executionBehaviorChangedToGraceful", "executionPendingChildPlanManualApproval", "executionSuccessMonitoringApplicationHealth", "stepStarted", "stepUpdate", "stepSucceeded", "stepFailed", "stepSkipped", "stepPausedByError", "stepPausedByOperator", "stepCanceled", "stepPendingApproval", "stepExecutionBehaviorChangedToUngraceful", "stepPendingApplicationHealthMonitor", "planEvaluationWarning"
     #   resp.items[0].step_name #=> String
-    #   resp.items[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase"
+    #   resp.items[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
     #   resp.items[0].resources #=> Array
     #   resp.items[0].resources[0] #=> String
     #   resp.items[0].error #=> String
@@ -2562,8 +2597,19 @@ module Aws::ARCRegionswitch
     #                   "Region" => "NeptuneClusterArn",
     #                 },
     #               },
+    #               rds_switchover_read_replica_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 db_instance_arn_map: { # required
+    #                   "Region" => "RdsDbInstanceArn",
+    #                 },
+    #                 ungraceful: {
+    #                   ungraceful: "promoteReadReplica", # accepts promoteReadReplica
+    #                 },
+    #               },
     #             },
-    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica, LambdaEventSourceMapping, AuroraServerlessScaling, AuroraProvisionedScaling, NeptuneGlobalDatabase
+    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica, LambdaEventSourceMapping, AuroraServerlessScaling, AuroraProvisionedScaling, NeptuneGlobalDatabase, RdsSwitchoverReadReplica
     #           },
     #         ],
     #         workflow_target_action: "activate", # required, accepts activate, deactivate, postRecovery
@@ -2733,7 +2779,13 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.global_cluster_identifier #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.region_database_cluster_arns #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.neptune_global_database_config.region_database_cluster_arns["Region"] #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map["Region"] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.ungraceful.ungraceful #=> String, one of "promoteReadReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -2871,7 +2923,7 @@ module Aws::ARCRegionswitch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-arcregionswitch'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

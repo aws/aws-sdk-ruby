@@ -14,7 +14,7 @@ module Aws::Connect
     end
 
     class ActionSummary
-      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION")
+      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION")
       SENSITIVE: []
     end
 
@@ -166,6 +166,11 @@ module Aws::Connect
       attr_accessor ai_use_case: ("AgentAssistance" | "SelfService")
       attr_accessor ai_agent_version_id: ::String
       attr_accessor ai_agent_escalated: bool
+      SENSITIVE: []
+    end
+
+    class AiAgentInput
+      attr_accessor ai_agent_id: ::String
       SENSITIVE: []
     end
 
@@ -587,6 +592,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AvailableFilter
+      attr_accessor id: ::String
+      attr_accessor type: ("METRIC_LEVEL" | "RESOURCE_LEVEL")
+      SENSITIVE: []
+    end
+
     class AvailableNumberSummary
       attr_accessor phone_number: ::String
       attr_accessor phone_number_country_code: ("AF" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BA" | "BW" | "BR" | "IO" | "VG" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CK" | "CR" | "HR" | "CU" | "CW" | "CY" | "CZ" | "CD" | "DK" | "DJ" | "DM" | "DO" | "TL" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "PF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "CI" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "KP" | "MP" | "NO" | "OM" | "PK" | "PW" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "CG" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "KR" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "VI" | "UG" | "UA" | "AE" | "GB" | "US" | "UY" | "UZ" | "VU" | "VA" | "VE" | "VN" | "WF" | "EH" | "YE" | "ZM" | "ZW")
@@ -775,6 +786,14 @@ module Aws::Connect
     class BooleanCondition
       attr_accessor field_name: ::String
       attr_accessor comparison_type: ("IS_TRUE" | "IS_FALSE")
+      SENSITIVE: []
+    end
+
+    class CalculationComponent
+      attr_accessor alias: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor metric_id: ::String
+      attr_accessor metric_filters: ::Array[Types::MetricFilter]
       SENSITIVE: []
     end
 
@@ -1514,6 +1533,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class CreateExtractionDefinitionRequest
+      attr_accessor client_token: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor extraction_configuration: Types::ExtractionConfiguration
+      attr_accessor display: Types::ExtractionDefinitionDisplay
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateExtractionDefinitionResponse
+      attr_accessor extraction_definition_arn: ::String
+      attr_accessor extraction_definition_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateHoursOfOperationOverrideRequest
       attr_accessor instance_id: ::String
       attr_accessor hours_of_operation_id: ::String
@@ -1580,6 +1615,25 @@ module Aws::Connect
     class CreateIntegrationAssociationResponse
       attr_accessor integration_association_id: ::String
       attr_accessor integration_association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMetricRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor metric_calculation: Types::MetricCalculation
+      attr_accessor unit: ("INTEGER" | "DOUBLE" | "PERCENT" | "SECONDS")
+      attr_accessor status: ("PUBLISHED" | "SAVED")
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor positive_trend_indicator: ("POSITIVE" | "NEGATIVE" | "NEUTRAL")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMetricResponse
+      attr_accessor metric_arn: ::String
+      attr_accessor metric_id: ::String
       SENSITIVE: []
     end
 
@@ -2297,6 +2351,15 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DeleteExtractionDefinitionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor extraction_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExtractionDefinitionResponse < Aws::EmptyStructure
+    end
+
     class DeleteHoursOfOperationOverrideRequest
       attr_accessor instance_id: ::String
       attr_accessor hours_of_operation_id: ::String
@@ -2320,6 +2383,15 @@ module Aws::Connect
       attr_accessor instance_id: ::String
       attr_accessor integration_association_id: ::String
       SENSITIVE: []
+    end
+
+    class DeleteMetricRequest
+      attr_accessor instance_id: ::String
+      attr_accessor metric_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMetricResponse < Aws::EmptyStructure
     end
 
     class DeleteNotificationRequest
@@ -2642,6 +2714,17 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DescribeExtractionDefinitionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor extraction_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExtractionDefinitionResponse
+      attr_accessor extraction_definition: Types::ExtractionDefinition
+      SENSITIVE: []
+    end
+
     class DescribeHoursOfOperationOverrideRequest
       attr_accessor instance_id: ::String
       attr_accessor hours_of_operation_id: ::String
@@ -2696,6 +2779,17 @@ module Aws::Connect
 
     class DescribeInstanceStorageConfigResponse
       attr_accessor storage_config: Types::InstanceStorageConfig
+      SENSITIVE: []
+    end
+
+    class DescribeMetricRequest
+      attr_accessor instance_id: ::String
+      attr_accessor metric_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMetricResponse
+      attr_accessor metric: Types::MetricDefinition
       SENSITIVE: []
     end
 
@@ -3401,7 +3495,7 @@ module Aws::Connect
     end
 
     class EvaluationFormLanguageConfiguration
-      attr_accessor form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN")
+      attr_accessor form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")
       SENSITIVE: []
     end
 
@@ -3561,7 +3655,7 @@ module Aws::Connect
       attr_accessor latest_version: ::Integer
       attr_accessor active_version: ::Integer
       attr_accessor auto_evaluation_enabled: bool
-      attr_accessor evaluation_form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN")
+      attr_accessor evaluation_form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")
       attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -3899,6 +3993,51 @@ module Aws::Connect
 
     class ExternalInvocationConfiguration
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ExtractInformationActionDefinition
+      attr_accessor rules_extraction_definitions: ::Array[Types::RulesExtractionDefinitionIdentifier]
+      SENSITIVE: []
+    end
+
+    class ExtractionConfiguration
+      attr_accessor prompt_hint: ::String
+      attr_accessor not_found_behavior: Types::ExtractionDefinitionNotFoundBehavior
+      SENSITIVE: []
+    end
+
+    class ExtractionDefinition
+      attr_accessor name: ::String
+      attr_accessor extraction_definition_id: ::String
+      attr_accessor extraction_definition_arn: ::String
+      attr_accessor extraction_configuration: Types::ExtractionConfiguration
+      attr_accessor display: Types::ExtractionDefinitionDisplay
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor last_updated_by: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ExtractionDefinitionDisplay
+      attr_accessor label: ::String
+      SENSITIVE: []
+    end
+
+    class ExtractionDefinitionNotFoundBehavior
+      attr_accessor behavior: ("USE_DEFAULT_VALUE" | "OMIT")
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class ExtractionDefinitionSummary
+      attr_accessor name: ::String
+      attr_accessor extraction_definition_id: ::String
+      attr_accessor extraction_definition_arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor last_updated_by: ::String
       SENSITIVE: []
     end
 
@@ -4993,6 +5132,19 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ListExtractionDefinitionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExtractionDefinitionsResponse
+      attr_accessor extraction_definition_summary_list: ::Array[Types::ExtractionDefinitionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListFlowAssociationsRequest
       attr_accessor instance_id: ::String
       attr_accessor resource_type: ("WHATSAPP_MESSAGING_PHONE_NUMBER" | "VOICE_PHONE_NUMBER" | "INBOUND_EMAIL" | "OUTBOUND_EMAIL" | "ANALYTICS_CONNECTOR")
@@ -5112,6 +5264,20 @@ module Aws::Connect
 
     class ListLexBotsResponse
       attr_accessor lex_bots: ::Array[Types::LexBot]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetricsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetricsResponse
+      attr_accessor metric_summary_list: ::Array[Types::MetricSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -5326,7 +5492,7 @@ module Aws::Connect
     class ListRulesRequest
       attr_accessor instance_id: ::String
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
-      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach" | "OnAlertUpdate" | "OnSchedulePublish" | "OnScheduleUpdate" | "OnScheduleTimeOffRequestActivity")
+      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnAfterCallWorkAvailable" | "OnAfterChatWorkAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach" | "OnAlertUpdate" | "OnSchedulePublish" | "OnScheduleUpdate" | "OnScheduleTimeOffRequestActivity")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -5691,9 +5857,72 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class MetricCalculation
+      attr_accessor calculation_components: ::Array[Types::CalculationComponent]
+      attr_accessor calculation: ::String
+      SENSITIVE: []
+    end
+
     class MetricDataV2
       attr_accessor metric: Types::MetricV2
       attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class MetricDefinition
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor metric_calculation: Types::MetricCalculation
+      attr_accessor creation_method: ("SERVICE_LEVEL_BUILDER" | "METRIC_BUILDER")
+      attr_accessor status: ("PUBLISHED" | "SAVED")
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor unit: ("INTEGER" | "DOUBLE" | "PERCENT" | "SECONDS")
+      attr_accessor positive_trend_indicator: ("POSITIVE" | "NEGATIVE" | "NEUTRAL")
+      attr_accessor groupings: ::Array[::String]
+      attr_accessor filters: ::Array[Types::AvailableFilter]
+      attr_accessor effective_time: ::Time
+      attr_accessor refresh_rate: ::Integer
+      attr_accessor category: ::String
+      attr_accessor supported_stats: ::Array[::String]
+      attr_accessor default_stat: ::String
+      attr_accessor supports_preaggregate_calculation: bool
+      attr_accessor supports_custom_calculation: bool
+      attr_accessor primary_event_source: ::String
+      attr_accessor primary_event_source_effective_timestamp_type: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor created_user: Types::CreatedByInfo
+      attr_accessor last_modified_region: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_user: Types::CreatedByInfo
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MetricFilter
+      attr_accessor metric_filter_key: ::String
+      attr_accessor negate: bool
+      attr_accessor number_condition: Types::MetricFilterNumberCondition
+      attr_accessor string_condition: Types::MetricFilterStringCondition
+      attr_accessor boolean_condition: Types::MetricFilterBooleanCondition
+      SENSITIVE: []
+    end
+
+    class MetricFilterBooleanCondition
+      attr_accessor comparison: ("IS_TRUE" | "IS_FALSE")
+      SENSITIVE: []
+    end
+
+    class MetricFilterNumberCondition
+      attr_accessor comparison: ("LESSER" | "LESSER_OR_EQUAL" | "GREATER" | "GREATER_OR_EQUAL")
+      attr_accessor values: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class MetricFilterStringCondition
+      attr_accessor comparison: ("MATCHES_ANY" | "MATCHES_NONE")
+      attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -5715,6 +5944,30 @@ module Aws::Connect
       attr_accessor dimensions: ::Hash[::String, ::String]
       attr_accessor metric_interval: Types::MetricInterval
       attr_accessor collections: ::Array[Types::MetricDataV2]
+      SENSITIVE: []
+    end
+
+    class MetricSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::MetricSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::MetricSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      attr_accessor boolean_condition: Types::BooleanCondition
+      SENSITIVE: []
+    end
+
+    class MetricSearchFilter
+      attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
+    class MetricSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("PUBLISHED" | "SAVED")
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor last_modified_region: ::String
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -6202,7 +6455,7 @@ module Aws::Connect
 
     class PropertyValidationExceptionProperty
       attr_accessor property_path: ::String
-      attr_accessor reason: ("INVALID_FORMAT" | "UNIQUE_CONSTRAINT_VIOLATED" | "REFERENCED_RESOURCE_NOT_FOUND" | "RESOURCE_NAME_ALREADY_EXISTS" | "REQUIRED_PROPERTY_MISSING" | "NOT_SUPPORTED")
+      attr_accessor reason: ("INVALID_FORMAT" | "UNIQUE_CONSTRAINT_VIOLATED" | "REFERENCED_RESOURCE_NOT_FOUND" | "RESOURCE_NAME_ALREADY_EXISTS" | "REQUIRED_PROPERTY_MISSING" | "NOT_SUPPORTED" | "TYPE_MISMATCH")
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -6805,7 +7058,7 @@ module Aws::Connect
     end
 
     class RuleAction
-      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION")
+      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION")
       attr_accessor task_action: Types::TaskActionDefinition
       attr_accessor event_bridge_action: Types::EventBridgeActionDefinition
       attr_accessor assign_contact_category_action: Types::AssignContactCategoryActionDefinition
@@ -6815,6 +7068,7 @@ module Aws::Connect
       attr_accessor assign_sla_action: Types::AssignSlaActionDefinition
       attr_accessor end_associated_tasks_action: Types::EndAssociatedTasksActionDefinition
       attr_accessor submit_auto_evaluation_action: Types::SubmitAutoEvaluationActionDefinition
+      attr_accessor extract_information_action: Types::ExtractInformationActionDefinition
       SENSITIVE: []
     end
 
@@ -6849,7 +7103,7 @@ module Aws::Connect
       attr_accessor name: ::String
       attr_accessor rule_id: ::String
       attr_accessor rule_arn: ::String
-      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach" | "OnAlertUpdate" | "OnSchedulePublish" | "OnScheduleUpdate" | "OnScheduleTimeOffRequestActivity")
+      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnAfterCallWorkAvailable" | "OnAfterChatWorkAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach" | "OnAlertUpdate" | "OnSchedulePublish" | "OnScheduleUpdate" | "OnScheduleTimeOffRequestActivity")
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
       attr_accessor rule_capability_tiers: ::Array[("GenerativeAI")]
       attr_accessor action_summaries: ::Array[Types::ActionSummary]
@@ -6859,13 +7113,18 @@ module Aws::Connect
     end
 
     class RuleTriggerEventSource
-      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach" | "OnAlertUpdate" | "OnSchedulePublish" | "OnScheduleUpdate" | "OnScheduleTimeOffRequestActivity")
+      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnAfterCallWorkAvailable" | "OnAfterChatWorkAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach" | "OnAlertUpdate" | "OnSchedulePublish" | "OnScheduleUpdate" | "OnScheduleTimeOffRequestActivity")
       attr_accessor integration_association_id: ::String
       SENSITIVE: []
     end
 
     class RulesConfiguration
       attr_accessor behavior: ("Enable" | "Disable")
+      SENSITIVE: []
+    end
+
+    class RulesExtractionDefinitionIdentifier
+      attr_accessor identifier: ::String
       SENSITIVE: []
     end
 
@@ -7104,6 +7363,22 @@ module Aws::Connect
 
     class SearchHoursOfOperationsResponse
       attr_accessor hours_of_operations: ::Array[Types::HoursOfOperation]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchMetricsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::MetricSearchFilter
+      attr_accessor search_criteria: Types::MetricSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchMetricsResponse
+      attr_accessor metrics: ::Array[Types::MetricDefinition]
       attr_accessor next_token: ::String
       attr_accessor approximate_total_count: ::Integer
       SENSITIVE: []
@@ -7579,6 +7854,26 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class StartAssistantContactRequest
+      attr_accessor instance_id: ::String
+      attr_accessor ai_agent: Types::AiAgentInput
+      attr_accessor participant_details: Types::ParticipantDetails
+      attr_accessor initial_message: Types::ChatMessage
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor persistent_chat: Types::PersistentChat
+      attr_accessor related_contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartAssistantContactResponse
+      attr_accessor contact_id: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor participant_token: ::String
+      attr_accessor continued_from_contact_id: ::String
+      SENSITIVE: []
+    end
+
     class StartAttachedFileUploadRequest
       attr_accessor client_token: ::String
       attr_accessor instance_id: ::String
@@ -7851,6 +8146,7 @@ module Aws::Connect
       attr_accessor related_contact_id: ::String
       attr_accessor references: ::Hash[::String, Types::Reference]
       attr_accessor description: ::String
+      attr_accessor segment_attributes: ::Hash[::String, Types::SegmentAttributeValue]
       SENSITIVE: [:description]
     end
 
@@ -8432,6 +8728,16 @@ module Aws::Connect
     class UpdateContactScheduleResponse < Aws::EmptyStructure
     end
 
+    class UpdateContactTaskTemplateRequest
+      attr_accessor instance_id: ::String
+      attr_accessor task_template_id: ::String
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContactTaskTemplateResponse < Aws::EmptyStructure
+    end
+
     class UpdateDataTableAttributeRequest
       attr_accessor instance_id: ::String
       attr_accessor data_table_id: ::String
@@ -8519,6 +8825,19 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class UpdateExtractionDefinitionRequest
+      attr_accessor client_token: ::String
+      attr_accessor extraction_definition_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor extraction_configuration: Types::ExtractionConfiguration
+      attr_accessor display: Types::ExtractionDefinitionDisplay
+      SENSITIVE: []
+    end
+
+    class UpdateExtractionDefinitionResponse < Aws::EmptyStructure
+    end
+
     class UpdateHoursOfOperationOverrideRequest
       attr_accessor instance_id: ::String
       attr_accessor hours_of_operation_id: ::String
@@ -8558,6 +8877,29 @@ module Aws::Connect
       attr_accessor storage_config: Types::InstanceStorageConfig
       attr_accessor client_token: ::String
       SENSITIVE: []
+    end
+
+    class UpdateMetricContentRequest
+      attr_accessor instance_id: ::String
+      attr_accessor metric_id: ::String
+      attr_accessor metric_calculation: Types::MetricCalculation
+      attr_accessor unit: ("INTEGER" | "DOUBLE" | "PERCENT" | "SECONDS")
+      attr_accessor positive_trend_indicator: ("POSITIVE" | "NEGATIVE" | "NEUTRAL")
+      SENSITIVE: []
+    end
+
+    class UpdateMetricContentResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMetricMetadataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor metric_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMetricMetadataResponse < Aws::EmptyStructure
     end
 
     class UpdateNotificationContentRequest

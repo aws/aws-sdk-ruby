@@ -28,7 +28,10 @@ module Aws::Drs
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundedString = Shapes::StringShape.new(name: 'BoundedString')
     CPU = Shapes::StructureShape.new(name: 'CPU')
+    CancelRecoveryPlanExecutionRequest = Shapes::StructureShape.new(name: 'CancelRecoveryPlanExecutionRequest')
+    CancelRecoveryPlanExecutionResponse = Shapes::StructureShape.new(name: 'CancelRecoveryPlanExecutionResponse')
     CfnStackName = Shapes::StringShape.new(name: 'CfnStackName')
+    ClientIdempotencyToken = Shapes::StringShape.new(name: 'ClientIdempotencyToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConversionMap = Shapes::MapShape.new(name: 'ConversionMap')
     ConversionProperties = Shapes::StructureShape.new(name: 'ConversionProperties')
@@ -37,6 +40,10 @@ module Aws::Drs
     CreateExtendedSourceServerResponse = Shapes::StructureShape.new(name: 'CreateExtendedSourceServerResponse')
     CreateLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateLaunchConfigurationTemplateRequest')
     CreateLaunchConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'CreateLaunchConfigurationTemplateResponse')
+    CreateRecoveryPlanRequest = Shapes::StructureShape.new(name: 'CreateRecoveryPlanRequest')
+    CreateRecoveryPlanResponse = Shapes::StructureShape.new(name: 'CreateRecoveryPlanResponse')
+    CreateRecoveryPlanStepRequest = Shapes::StructureShape.new(name: 'CreateRecoveryPlanStepRequest')
+    CreateRecoveryPlanStepResponse = Shapes::StructureShape.new(name: 'CreateRecoveryPlanStepResponse')
     CreateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateReplicationConfigurationTemplateRequest')
     CreateSourceNetworkRequest = Shapes::StructureShape.new(name: 'CreateSourceNetworkRequest')
     CreateSourceNetworkResponse = Shapes::StructureShape.new(name: 'CreateSourceNetworkResponse')
@@ -58,6 +65,12 @@ module Aws::Drs
     DeleteLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'DeleteLaunchConfigurationTemplateRequest')
     DeleteLaunchConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'DeleteLaunchConfigurationTemplateResponse')
     DeleteRecoveryInstanceRequest = Shapes::StructureShape.new(name: 'DeleteRecoveryInstanceRequest')
+    DeleteRecoveryPlanExecutionRequest = Shapes::StructureShape.new(name: 'DeleteRecoveryPlanExecutionRequest')
+    DeleteRecoveryPlanExecutionResponse = Shapes::StructureShape.new(name: 'DeleteRecoveryPlanExecutionResponse')
+    DeleteRecoveryPlanRequest = Shapes::StructureShape.new(name: 'DeleteRecoveryPlanRequest')
+    DeleteRecoveryPlanResponse = Shapes::StructureShape.new(name: 'DeleteRecoveryPlanResponse')
+    DeleteRecoveryPlanStepRequest = Shapes::StructureShape.new(name: 'DeleteRecoveryPlanStepRequest')
+    DeleteRecoveryPlanStepResponse = Shapes::StructureShape.new(name: 'DeleteRecoveryPlanStepResponse')
     DeleteReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'DeleteReplicationConfigurationTemplateRequest')
     DeleteReplicationConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'DeleteReplicationConfigurationTemplateResponse')
     DeleteSourceNetworkRequest = Shapes::StructureShape.new(name: 'DeleteSourceNetworkRequest')
@@ -99,7 +112,9 @@ module Aws::Drs
     EbsSnapshot = Shapes::StringShape.new(name: 'EbsSnapshot')
     EbsSnapshotsList = Shapes::ListShape.new(name: 'EbsSnapshotsList')
     EbsVolumeID = Shapes::StringShape.new(name: 'EbsVolumeID')
+    ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     EventResourceData = Shapes::UnionShape.new(name: 'EventResourceData')
+    ExecutionServerStepConfiguration = Shapes::StructureShape.new(name: 'ExecutionServerStepConfiguration')
     ExportSourceNetworkCfnTemplateRequest = Shapes::StructureShape.new(name: 'ExportSourceNetworkCfnTemplateRequest')
     ExportSourceNetworkCfnTemplateResponse = Shapes::StructureShape.new(name: 'ExportSourceNetworkCfnTemplateResponse')
     ExtensionStatus = Shapes::StringShape.new(name: 'ExtensionStatus')
@@ -110,6 +125,14 @@ module Aws::Drs
     GetFailbackReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'GetFailbackReplicationConfigurationRequest')
     GetFailbackReplicationConfigurationResponse = Shapes::StructureShape.new(name: 'GetFailbackReplicationConfigurationResponse')
     GetLaunchConfigurationRequest = Shapes::StructureShape.new(name: 'GetLaunchConfigurationRequest')
+    GetRecoveryPlanExecutionRequest = Shapes::StructureShape.new(name: 'GetRecoveryPlanExecutionRequest')
+    GetRecoveryPlanExecutionResponse = Shapes::StructureShape.new(name: 'GetRecoveryPlanExecutionResponse')
+    GetRecoveryPlanExecutionStepRequest = Shapes::StructureShape.new(name: 'GetRecoveryPlanExecutionStepRequest')
+    GetRecoveryPlanExecutionStepResponse = Shapes::StructureShape.new(name: 'GetRecoveryPlanExecutionStepResponse')
+    GetRecoveryPlanRequest = Shapes::StructureShape.new(name: 'GetRecoveryPlanRequest')
+    GetRecoveryPlanResponse = Shapes::StructureShape.new(name: 'GetRecoveryPlanResponse')
+    GetRecoveryPlanStepRequest = Shapes::StructureShape.new(name: 'GetRecoveryPlanStepRequest')
+    GetRecoveryPlanStepResponse = Shapes::StructureShape.new(name: 'GetRecoveryPlanStepResponse')
     GetReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'GetReplicationConfigurationRequest')
     IPsList = Shapes::ListShape.new(name: 'IPsList')
     ISO8601DatetimeString = Shapes::StringShape.new(name: 'ISO8601DatetimeString')
@@ -171,6 +194,15 @@ module Aws::Drs
     ListExtensibleSourceServersResponse = Shapes::StructureShape.new(name: 'ListExtensibleSourceServersResponse')
     ListLaunchActionsRequest = Shapes::StructureShape.new(name: 'ListLaunchActionsRequest')
     ListLaunchActionsResponse = Shapes::StructureShape.new(name: 'ListLaunchActionsResponse')
+    ListRecoveryPlanExecutionStepsFilter = Shapes::StructureShape.new(name: 'ListRecoveryPlanExecutionStepsFilter')
+    ListRecoveryPlanExecutionStepsRequest = Shapes::StructureShape.new(name: 'ListRecoveryPlanExecutionStepsRequest')
+    ListRecoveryPlanExecutionStepsResponse = Shapes::StructureShape.new(name: 'ListRecoveryPlanExecutionStepsResponse')
+    ListRecoveryPlanExecutionsRequest = Shapes::StructureShape.new(name: 'ListRecoveryPlanExecutionsRequest')
+    ListRecoveryPlanExecutionsResponse = Shapes::StructureShape.new(name: 'ListRecoveryPlanExecutionsResponse')
+    ListRecoveryPlanStepsRequest = Shapes::StructureShape.new(name: 'ListRecoveryPlanStepsRequest')
+    ListRecoveryPlanStepsResponse = Shapes::StructureShape.new(name: 'ListRecoveryPlanStepsResponse')
+    ListRecoveryPlansRequest = Shapes::StructureShape.new(name: 'ListRecoveryPlansRequest')
+    ListRecoveryPlansResponse = Shapes::StructureShape.new(name: 'ListRecoveryPlansResponse')
     ListStagingAccountsRequest = Shapes::StructureShape.new(name: 'ListStagingAccountsRequest')
     ListStagingAccountsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListStagingAccountsRequestMaxResultsInteger')
     ListStagingAccountsResponse = Shapes::StructureShape.new(name: 'ListStagingAccountsResponse')
@@ -219,11 +251,42 @@ module Aws::Drs
     RecoveryInstancesForTerminationRequest = Shapes::ListShape.new(name: 'RecoveryInstancesForTerminationRequest')
     RecoveryLifeCycle = Shapes::StructureShape.new(name: 'RecoveryLifeCycle')
     RecoveryMode = Shapes::StringShape.new(name: 'RecoveryMode')
+    RecoveryPlan = Shapes::StructureShape.new(name: 'RecoveryPlan')
+    RecoveryPlanDescription = Shapes::StringShape.new(name: 'RecoveryPlanDescription')
+    RecoveryPlanExecution = Shapes::StructureShape.new(name: 'RecoveryPlanExecution')
+    RecoveryPlanExecutionMode = Shapes::StringShape.new(name: 'RecoveryPlanExecutionMode')
+    RecoveryPlanExecutionServer = Shapes::StructureShape.new(name: 'RecoveryPlanExecutionServer')
+    RecoveryPlanExecutionServers = Shapes::ListShape.new(name: 'RecoveryPlanExecutionServers')
+    RecoveryPlanExecutionSourceServer = Shapes::StructureShape.new(name: 'RecoveryPlanExecutionSourceServer')
+    RecoveryPlanExecutionSourceServerList = Shapes::ListShape.new(name: 'RecoveryPlanExecutionSourceServerList')
+    RecoveryPlanExecutionStatus = Shapes::StringShape.new(name: 'RecoveryPlanExecutionStatus')
+    RecoveryPlanExecutionStep = Shapes::StructureShape.new(name: 'RecoveryPlanExecutionStep')
+    RecoveryPlanExecutionStepConfiguration = Shapes::UnionShape.new(name: 'RecoveryPlanExecutionStepConfiguration')
+    RecoveryPlanExecutionStepStatus = Shapes::StringShape.new(name: 'RecoveryPlanExecutionStepStatus')
+    RecoveryPlanExecutionStepSummary = Shapes::StructureShape.new(name: 'RecoveryPlanExecutionStepSummary')
+    RecoveryPlanExecutionStepSummaryList = Shapes::ListShape.new(name: 'RecoveryPlanExecutionStepSummaryList')
+    RecoveryPlanExecutionSummary = Shapes::StructureShape.new(name: 'RecoveryPlanExecutionSummary')
+    RecoveryPlanExecutionSummaryList = Shapes::ListShape.new(name: 'RecoveryPlanExecutionSummaryList')
+    RecoveryPlanName = Shapes::StringShape.new(name: 'RecoveryPlanName')
+    RecoveryPlanServer = Shapes::StructureShape.new(name: 'RecoveryPlanServer')
+    RecoveryPlanServerImpactLevel = Shapes::StringShape.new(name: 'RecoveryPlanServerImpactLevel')
+    RecoveryPlanServers = Shapes::ListShape.new(name: 'RecoveryPlanServers')
+    RecoveryPlanStatus = Shapes::StringShape.new(name: 'RecoveryPlanStatus')
+    RecoveryPlanStep = Shapes::StructureShape.new(name: 'RecoveryPlanStep')
+    RecoveryPlanStepArnList = Shapes::ListShape.new(name: 'RecoveryPlanStepArnList')
+    RecoveryPlanStepConfiguration = Shapes::UnionShape.new(name: 'RecoveryPlanStepConfiguration')
+    RecoveryPlanStepList = Shapes::ListShape.new(name: 'RecoveryPlanStepList')
+    RecoveryPlanStepName = Shapes::StringShape.new(name: 'RecoveryPlanStepName')
+    RecoveryPlanStepOrder = Shapes::IntegerShape.new(name: 'RecoveryPlanStepOrder')
+    RecoveryPlanSummary = Shapes::StructureShape.new(name: 'RecoveryPlanSummary')
+    RecoveryPlanSummaryList = Shapes::ListShape.new(name: 'RecoveryPlanSummaryList')
     RecoveryResult = Shapes::StringShape.new(name: 'RecoveryResult')
     RecoverySnapshot = Shapes::StructureShape.new(name: 'RecoverySnapshot')
     RecoverySnapshotID = Shapes::StringShape.new(name: 'RecoverySnapshotID')
     RecoverySnapshotsList = Shapes::ListShape.new(name: 'RecoverySnapshotsList')
     RecoverySnapshotsOrder = Shapes::StringShape.new(name: 'RecoverySnapshotsOrder')
+    ReorderRecoveryPlanStepsRequest = Shapes::StructureShape.new(name: 'ReorderRecoveryPlanStepsRequest')
+    ReorderRecoveryPlanStepsResponse = Shapes::StructureShape.new(name: 'ReorderRecoveryPlanStepsResponse')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
     ReplicationConfigurationDataPlaneRouting = Shapes::StringShape.new(name: 'ReplicationConfigurationDataPlaneRouting')
     ReplicationConfigurationDefaultLargeStagingDiskType = Shapes::StringShape.new(name: 'ReplicationConfigurationDefaultLargeStagingDiskType')
@@ -240,10 +303,13 @@ module Aws::Drs
     ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryDataReplicationRequest = Shapes::StructureShape.new(name: 'RetryDataReplicationRequest')
+    RetryRecoveryPlanExecutionStepRequest = Shapes::StructureShape.new(name: 'RetryRecoveryPlanExecutionStepRequest')
+    RetryRecoveryPlanExecutionStepResponse = Shapes::StructureShape.new(name: 'RetryRecoveryPlanExecutionStepResponse')
     ReverseReplicationRequest = Shapes::StructureShape.new(name: 'ReverseReplicationRequest')
     ReverseReplicationResponse = Shapes::StructureShape.new(name: 'ReverseReplicationResponse')
     SecurityGroupID = Shapes::StringShape.new(name: 'SecurityGroupID')
     SensitiveBoundedString = Shapes::StringShape.new(name: 'SensitiveBoundedString')
+    ServerStepConfiguration = Shapes::StructureShape.new(name: 'ServerStepConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SmallBoundedString = Shapes::StringShape.new(name: 'SmallBoundedString')
     SourceCloudProperties = Shapes::StructureShape.new(name: 'SourceCloudProperties')
@@ -264,6 +330,8 @@ module Aws::Drs
     StartFailbackLaunchRequest = Shapes::StructureShape.new(name: 'StartFailbackLaunchRequest')
     StartFailbackLaunchResponse = Shapes::StructureShape.new(name: 'StartFailbackLaunchResponse')
     StartFailbackRequestRecoveryInstanceIDs = Shapes::ListShape.new(name: 'StartFailbackRequestRecoveryInstanceIDs')
+    StartRecoveryPlanExecutionRequest = Shapes::StructureShape.new(name: 'StartRecoveryPlanExecutionRequest')
+    StartRecoveryPlanExecutionResponse = Shapes::StructureShape.new(name: 'StartRecoveryPlanExecutionResponse')
     StartRecoveryRequest = Shapes::StructureShape.new(name: 'StartRecoveryRequest')
     StartRecoveryRequestSourceServer = Shapes::StructureShape.new(name: 'StartRecoveryRequestSourceServer')
     StartRecoveryRequestSourceServers = Shapes::ListShape.new(name: 'StartRecoveryRequestSourceServers')
@@ -281,7 +349,9 @@ module Aws::Drs
     StopReplicationResponse = Shapes::StructureShape.new(name: 'StopReplicationResponse')
     StopSourceNetworkReplicationRequest = Shapes::StructureShape.new(name: 'StopSourceNetworkReplicationRequest')
     StopSourceNetworkReplicationResponse = Shapes::StructureShape.new(name: 'StopSourceNetworkReplicationResponse')
+    StrictDRSARN = Shapes::StringShape.new(name: 'StrictDRSARN')
     StrictlyPositiveInteger = Shapes::IntegerShape.new(name: 'StrictlyPositiveInteger')
+    String = Shapes::StringShape.new(name: 'String')
     SubnetID = Shapes::StringShape.new(name: 'SubnetID')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -299,6 +369,12 @@ module Aws::Drs
     UpdateLaunchConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationRequest')
     UpdateLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationTemplateRequest')
     UpdateLaunchConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationTemplateResponse')
+    UpdateRecoveryPlanExecutionStepRequest = Shapes::StructureShape.new(name: 'UpdateRecoveryPlanExecutionStepRequest')
+    UpdateRecoveryPlanExecutionStepResponse = Shapes::StructureShape.new(name: 'UpdateRecoveryPlanExecutionStepResponse')
+    UpdateRecoveryPlanRequest = Shapes::StructureShape.new(name: 'UpdateRecoveryPlanRequest')
+    UpdateRecoveryPlanResponse = Shapes::StructureShape.new(name: 'UpdateRecoveryPlanResponse')
+    UpdateRecoveryPlanStepRequest = Shapes::StructureShape.new(name: 'UpdateRecoveryPlanStepRequest')
+    UpdateRecoveryPlanStepResponse = Shapes::StructureShape.new(name: 'UpdateRecoveryPlanStepResponse')
     UpdateReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationRequest')
     UpdateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationTemplateRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -310,6 +386,8 @@ module Aws::Drs
     VolumeToProductCodes = Shapes::MapShape.new(name: 'VolumeToProductCodes')
     VolumeToSizeMap = Shapes::MapShape.new(name: 'VolumeToSizeMap')
     VpcID = Shapes::StringShape.new(name: 'VpcID')
+    WaitDurationMinutes = Shapes::IntegerShape.new(name: 'WaitDurationMinutes')
+    WaitStepConfiguration = Shapes::StructureShape.new(name: 'WaitStepConfiguration')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
     AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
@@ -332,6 +410,12 @@ module Aws::Drs
     CPU.add_member(:cores, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "cores"))
     CPU.add_member(:model_name, Shapes::ShapeRef.new(shape: BoundedString, location_name: "modelName"))
     CPU.struct_class = Types::CPU
+
+    CancelRecoveryPlanExecutionRequest.add_member(:recovery_plan_execution_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionArn"))
+    CancelRecoveryPlanExecutionRequest.struct_class = Types::CancelRecoveryPlanExecutionRequest
+
+    CancelRecoveryPlanExecutionResponse.add_member(:recovery_plan_execution, Shapes::ShapeRef.new(shape: RecoveryPlanExecution, required: true, location_name: "recoveryPlanExecution"))
+    CancelRecoveryPlanExecutionResponse.struct_class = Types::CancelRecoveryPlanExecutionResponse
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
     ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
@@ -373,6 +457,25 @@ module Aws::Drs
 
     CreateLaunchConfigurationTemplateResponse.add_member(:launch_configuration_template, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplate, location_name: "launchConfigurationTemplate"))
     CreateLaunchConfigurationTemplateResponse.struct_class = Types::CreateLaunchConfigurationTemplateResponse
+
+    CreateRecoveryPlanRequest.add_member(:name, Shapes::ShapeRef.new(shape: RecoveryPlanName, required: true, location_name: "name"))
+    CreateRecoveryPlanRequest.add_member(:description, Shapes::ShapeRef.new(shape: RecoveryPlanDescription, location_name: "description"))
+    CreateRecoveryPlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientIdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateRecoveryPlanRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateRecoveryPlanRequest.struct_class = Types::CreateRecoveryPlanRequest
+
+    CreateRecoveryPlanResponse.add_member(:recovery_plan, Shapes::ShapeRef.new(shape: RecoveryPlan, required: true, location_name: "recoveryPlan"))
+    CreateRecoveryPlanResponse.struct_class = Types::CreateRecoveryPlanResponse
+
+    CreateRecoveryPlanStepRequest.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    CreateRecoveryPlanStepRequest.add_member(:step_name, Shapes::ShapeRef.new(shape: RecoveryPlanStepName, required: true, location_name: "stepName"))
+    CreateRecoveryPlanStepRequest.add_member(:step_order, Shapes::ShapeRef.new(shape: RecoveryPlanStepOrder, location_name: "stepOrder"))
+    CreateRecoveryPlanStepRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RecoveryPlanStepConfiguration, required: true, location_name: "configuration"))
+    CreateRecoveryPlanStepRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientIdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateRecoveryPlanStepRequest.struct_class = Types::CreateRecoveryPlanStepRequest
+
+    CreateRecoveryPlanStepResponse.add_member(:recovery_plan_step, Shapes::ShapeRef.new(shape: RecoveryPlanStep, required: true, location_name: "recoveryPlanStep"))
+    CreateRecoveryPlanStepResponse.struct_class = Types::CreateRecoveryPlanStepResponse
 
     CreateReplicationConfigurationTemplateRequest.add_member(:staging_area_subnet_id, Shapes::ShapeRef.new(shape: SubnetID, required: true, location_name: "stagingAreaSubnetId"))
     CreateReplicationConfigurationTemplateRequest.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "associateDefaultSecurityGroup"))
@@ -454,6 +557,24 @@ module Aws::Drs
 
     DeleteRecoveryInstanceRequest.add_member(:recovery_instance_id, Shapes::ShapeRef.new(shape: RecoveryInstanceID, required: true, location_name: "recoveryInstanceID"))
     DeleteRecoveryInstanceRequest.struct_class = Types::DeleteRecoveryInstanceRequest
+
+    DeleteRecoveryPlanExecutionRequest.add_member(:recovery_plan_execution_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionArn"))
+    DeleteRecoveryPlanExecutionRequest.struct_class = Types::DeleteRecoveryPlanExecutionRequest
+
+    DeleteRecoveryPlanExecutionResponse.add_member(:recovery_plan_execution_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionArn"))
+    DeleteRecoveryPlanExecutionResponse.struct_class = Types::DeleteRecoveryPlanExecutionResponse
+
+    DeleteRecoveryPlanRequest.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    DeleteRecoveryPlanRequest.struct_class = Types::DeleteRecoveryPlanRequest
+
+    DeleteRecoveryPlanResponse.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    DeleteRecoveryPlanResponse.struct_class = Types::DeleteRecoveryPlanResponse
+
+    DeleteRecoveryPlanStepRequest.add_member(:recovery_plan_step_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanStepArn"))
+    DeleteRecoveryPlanStepRequest.struct_class = Types::DeleteRecoveryPlanStepRequest
+
+    DeleteRecoveryPlanStepResponse.add_member(:recovery_plan_step_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanStepArn"))
+    DeleteRecoveryPlanStepResponse.struct_class = Types::DeleteRecoveryPlanStepResponse
 
     DeleteReplicationConfigurationTemplateRequest.add_member(:replication_configuration_template_id, Shapes::ShapeRef.new(shape: ReplicationConfigurationTemplateID, required: true, location_name: "replicationConfigurationTemplateID"))
     DeleteReplicationConfigurationTemplateRequest.struct_class = Types::DeleteReplicationConfigurationTemplateRequest
@@ -589,11 +710,18 @@ module Aws::Drs
 
     EbsSnapshotsList.member = Shapes::ShapeRef.new(shape: EbsSnapshot)
 
+    ErrorDetail.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ErrorDetail.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    ErrorDetail.struct_class = Types::ErrorDetail
+
     EventResourceData.add_member(:source_network_data, Shapes::ShapeRef.new(shape: SourceNetworkData, location_name: "sourceNetworkData"))
     EventResourceData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EventResourceData.add_member_subclass(:source_network_data, Types::EventResourceData::SourceNetworkData)
     EventResourceData.add_member_subclass(:unknown, Types::EventResourceData::Unknown)
     EventResourceData.struct_class = Types::EventResourceData
+
+    ExecutionServerStepConfiguration.add_member(:servers, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionServers, required: true, location_name: "servers"))
+    ExecutionServerStepConfiguration.struct_class = Types::ExecutionServerStepConfiguration
 
     ExportSourceNetworkCfnTemplateRequest.add_member(:source_network_id, Shapes::ShapeRef.new(shape: SourceNetworkID, required: true, location_name: "sourceNetworkID"))
     ExportSourceNetworkCfnTemplateRequest.struct_class = Types::ExportSourceNetworkCfnTemplateRequest
@@ -613,6 +741,30 @@ module Aws::Drs
 
     GetLaunchConfigurationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     GetLaunchConfigurationRequest.struct_class = Types::GetLaunchConfigurationRequest
+
+    GetRecoveryPlanExecutionRequest.add_member(:recovery_plan_execution_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionArn"))
+    GetRecoveryPlanExecutionRequest.struct_class = Types::GetRecoveryPlanExecutionRequest
+
+    GetRecoveryPlanExecutionResponse.add_member(:recovery_plan_execution, Shapes::ShapeRef.new(shape: RecoveryPlanExecution, required: true, location_name: "recoveryPlanExecution"))
+    GetRecoveryPlanExecutionResponse.struct_class = Types::GetRecoveryPlanExecutionResponse
+
+    GetRecoveryPlanExecutionStepRequest.add_member(:recovery_plan_execution_step_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionStepArn"))
+    GetRecoveryPlanExecutionStepRequest.struct_class = Types::GetRecoveryPlanExecutionStepRequest
+
+    GetRecoveryPlanExecutionStepResponse.add_member(:recovery_plan_execution_step, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStep, required: true, location_name: "recoveryPlanExecutionStep"))
+    GetRecoveryPlanExecutionStepResponse.struct_class = Types::GetRecoveryPlanExecutionStepResponse
+
+    GetRecoveryPlanRequest.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    GetRecoveryPlanRequest.struct_class = Types::GetRecoveryPlanRequest
+
+    GetRecoveryPlanResponse.add_member(:recovery_plan, Shapes::ShapeRef.new(shape: RecoveryPlan, required: true, location_name: "recoveryPlan"))
+    GetRecoveryPlanResponse.struct_class = Types::GetRecoveryPlanResponse
+
+    GetRecoveryPlanStepRequest.add_member(:recovery_plan_step_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanStepArn"))
+    GetRecoveryPlanStepRequest.struct_class = Types::GetRecoveryPlanStepRequest
+
+    GetRecoveryPlanStepResponse.add_member(:recovery_plan_step, Shapes::ShapeRef.new(shape: RecoveryPlanStep, required: true, location_name: "recoveryPlanStep"))
+    GetRecoveryPlanStepResponse.struct_class = Types::GetRecoveryPlanStepResponse
 
     GetReplicationConfigurationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     GetReplicationConfigurationRequest.struct_class = Types::GetReplicationConfigurationRequest
@@ -774,6 +926,46 @@ module Aws::Drs
     ListLaunchActionsResponse.add_member(:items, Shapes::ShapeRef.new(shape: LaunchActions, location_name: "items"))
     ListLaunchActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListLaunchActionsResponse.struct_class = Types::ListLaunchActionsResponse
+
+    ListRecoveryPlanExecutionStepsFilter.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStepStatus, location_name: "status"))
+    ListRecoveryPlanExecutionStepsFilter.struct_class = Types::ListRecoveryPlanExecutionStepsFilter
+
+    ListRecoveryPlanExecutionStepsRequest.add_member(:recovery_plan_execution_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionArn"))
+    ListRecoveryPlanExecutionStepsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListRecoveryPlanExecutionStepsFilter, location_name: "filter"))
+    ListRecoveryPlanExecutionStepsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListRecoveryPlanExecutionStepsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecoveryPlanExecutionStepsRequest.struct_class = Types::ListRecoveryPlanExecutionStepsRequest
+
+    ListRecoveryPlanExecutionStepsResponse.add_member(:recovery_plan_execution_steps, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStepSummaryList, required: true, location_name: "recoveryPlanExecutionSteps"))
+    ListRecoveryPlanExecutionStepsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecoveryPlanExecutionStepsResponse.struct_class = Types::ListRecoveryPlanExecutionStepsResponse
+
+    ListRecoveryPlanExecutionsRequest.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, location_name: "recoveryPlanArn"))
+    ListRecoveryPlanExecutionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStatus, location_name: "status"))
+    ListRecoveryPlanExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListRecoveryPlanExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecoveryPlanExecutionsRequest.struct_class = Types::ListRecoveryPlanExecutionsRequest
+
+    ListRecoveryPlanExecutionsResponse.add_member(:recovery_plan_executions, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionSummaryList, required: true, location_name: "recoveryPlanExecutions"))
+    ListRecoveryPlanExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecoveryPlanExecutionsResponse.struct_class = Types::ListRecoveryPlanExecutionsResponse
+
+    ListRecoveryPlanStepsRequest.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    ListRecoveryPlanStepsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListRecoveryPlanStepsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecoveryPlanStepsRequest.struct_class = Types::ListRecoveryPlanStepsRequest
+
+    ListRecoveryPlanStepsResponse.add_member(:recovery_plan_steps, Shapes::ShapeRef.new(shape: RecoveryPlanStepList, required: true, location_name: "recoveryPlanSteps"))
+    ListRecoveryPlanStepsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecoveryPlanStepsResponse.struct_class = Types::ListRecoveryPlanStepsResponse
+
+    ListRecoveryPlansRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListRecoveryPlansRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecoveryPlansRequest.struct_class = Types::ListRecoveryPlansRequest
+
+    ListRecoveryPlansResponse.add_member(:recovery_plans, Shapes::ShapeRef.new(shape: RecoveryPlanSummaryList, required: true, location_name: "recoveryPlans"))
+    ListRecoveryPlansResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecoveryPlansResponse.struct_class = Types::ListRecoveryPlansResponse
 
     ListStagingAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListStagingAccountsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListStagingAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -949,6 +1141,112 @@ module Aws::Drs
     RecoveryLifeCycle.add_member(:last_recovery_result, Shapes::ShapeRef.new(shape: RecoveryResult, location_name: "lastRecoveryResult"))
     RecoveryLifeCycle.struct_class = Types::RecoveryLifeCycle
 
+    RecoveryPlan.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    RecoveryPlan.add_member(:name, Shapes::ShapeRef.new(shape: RecoveryPlanName, required: true, location_name: "name"))
+    RecoveryPlan.add_member(:description, Shapes::ShapeRef.new(shape: RecoveryPlanDescription, location_name: "description"))
+    RecoveryPlan.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPlanStatus, required: true, location_name: "status"))
+    RecoveryPlan.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "createdAt"))
+    RecoveryPlan.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "updatedAt"))
+    RecoveryPlan.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    RecoveryPlan.struct_class = Types::RecoveryPlan
+
+    RecoveryPlanExecution.add_member(:recovery_plan_execution_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionArn"))
+    RecoveryPlanExecution.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    RecoveryPlanExecution.add_member(:mode, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionMode, required: true, location_name: "mode"))
+    RecoveryPlanExecution.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStatus, required: true, location_name: "status"))
+    RecoveryPlanExecution.add_member(:started_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "startedAt"))
+    RecoveryPlanExecution.add_member(:completed_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "completedAt"))
+    RecoveryPlanExecution.add_member(:error_detail, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "errorDetail"))
+    RecoveryPlanExecution.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    RecoveryPlanExecution.struct_class = Types::RecoveryPlanExecution
+
+    RecoveryPlanExecutionServer.add_member(:server_arn, Shapes::ShapeRef.new(shape: SourceServerARN, required: true, location_name: "serverArn"))
+    RecoveryPlanExecutionServer.add_member(:impact_level, Shapes::ShapeRef.new(shape: RecoveryPlanServerImpactLevel, location_name: "impactLevel"))
+    RecoveryPlanExecutionServer.add_member(:job_id, Shapes::ShapeRef.new(shape: JobID, location_name: "jobID"))
+    RecoveryPlanExecutionServer.struct_class = Types::RecoveryPlanExecutionServer
+
+    RecoveryPlanExecutionServers.member = Shapes::ShapeRef.new(shape: RecoveryPlanExecutionServer)
+
+    RecoveryPlanExecutionSourceServer.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    RecoveryPlanExecutionSourceServer.add_member(:recovery_snapshot_id, Shapes::ShapeRef.new(shape: RecoverySnapshotID, required: true, location_name: "recoverySnapshotID"))
+    RecoveryPlanExecutionSourceServer.struct_class = Types::RecoveryPlanExecutionSourceServer
+
+    RecoveryPlanExecutionSourceServerList.member = Shapes::ShapeRef.new(shape: RecoveryPlanExecutionSourceServer)
+
+    RecoveryPlanExecutionStep.add_member(:recovery_plan_execution_step_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionStepArn"))
+    RecoveryPlanExecutionStep.add_member(:step_index, Shapes::ShapeRef.new(shape: RecoveryPlanStepOrder, required: true, location_name: "stepIndex"))
+    RecoveryPlanExecutionStep.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStepStatus, required: true, location_name: "status"))
+    RecoveryPlanExecutionStep.add_member(:step_name, Shapes::ShapeRef.new(shape: RecoveryPlanStepName, required: true, location_name: "stepName"))
+    RecoveryPlanExecutionStep.add_member(:configuration, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStepConfiguration, required: true, location_name: "configuration"))
+    RecoveryPlanExecutionStep.add_member(:error_detail, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "errorDetail"))
+    RecoveryPlanExecutionStep.add_member(:attempt, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, required: true, location_name: "attempt"))
+    RecoveryPlanExecutionStep.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "createdAt"))
+    RecoveryPlanExecutionStep.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "updatedAt"))
+    RecoveryPlanExecutionStep.struct_class = Types::RecoveryPlanExecutionStep
+
+    RecoveryPlanExecutionStepConfiguration.add_member(:execution_server_step_configuration, Shapes::ShapeRef.new(shape: ExecutionServerStepConfiguration, location_name: "executionServerStepConfiguration"))
+    RecoveryPlanExecutionStepConfiguration.add_member(:wait_step_configuration, Shapes::ShapeRef.new(shape: WaitStepConfiguration, location_name: "waitStepConfiguration"))
+    RecoveryPlanExecutionStepConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RecoveryPlanExecutionStepConfiguration.add_member_subclass(:execution_server_step_configuration, Types::RecoveryPlanExecutionStepConfiguration::ExecutionServerStepConfiguration)
+    RecoveryPlanExecutionStepConfiguration.add_member_subclass(:wait_step_configuration, Types::RecoveryPlanExecutionStepConfiguration::WaitStepConfiguration)
+    RecoveryPlanExecutionStepConfiguration.add_member_subclass(:unknown, Types::RecoveryPlanExecutionStepConfiguration::Unknown)
+    RecoveryPlanExecutionStepConfiguration.struct_class = Types::RecoveryPlanExecutionStepConfiguration
+
+    RecoveryPlanExecutionStepSummary.add_member(:recovery_plan_execution_step_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionStepArn"))
+    RecoveryPlanExecutionStepSummary.add_member(:step_name, Shapes::ShapeRef.new(shape: RecoveryPlanStepName, required: true, location_name: "stepName"))
+    RecoveryPlanExecutionStepSummary.add_member(:step_index, Shapes::ShapeRef.new(shape: RecoveryPlanStepOrder, required: true, location_name: "stepIndex"))
+    RecoveryPlanExecutionStepSummary.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStepStatus, required: true, location_name: "status"))
+    RecoveryPlanExecutionStepSummary.add_member(:configuration, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStepConfiguration, required: true, location_name: "configuration"))
+    RecoveryPlanExecutionStepSummary.add_member(:error_detail, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "errorDetail"))
+    RecoveryPlanExecutionStepSummary.struct_class = Types::RecoveryPlanExecutionStepSummary
+
+    RecoveryPlanExecutionStepSummaryList.member = Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStepSummary)
+
+    RecoveryPlanExecutionSummary.add_member(:recovery_plan_execution_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionArn"))
+    RecoveryPlanExecutionSummary.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    RecoveryPlanExecutionSummary.add_member(:mode, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionMode, required: true, location_name: "mode"))
+    RecoveryPlanExecutionSummary.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStatus, required: true, location_name: "status"))
+    RecoveryPlanExecutionSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "startedAt"))
+    RecoveryPlanExecutionSummary.add_member(:error_detail, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "errorDetail"))
+    RecoveryPlanExecutionSummary.struct_class = Types::RecoveryPlanExecutionSummary
+
+    RecoveryPlanExecutionSummaryList.member = Shapes::ShapeRef.new(shape: RecoveryPlanExecutionSummary)
+
+    RecoveryPlanServer.add_member(:server_arn, Shapes::ShapeRef.new(shape: SourceServerARN, required: true, location_name: "serverArn"))
+    RecoveryPlanServer.add_member(:impact_level, Shapes::ShapeRef.new(shape: RecoveryPlanServerImpactLevel, location_name: "impactLevel"))
+    RecoveryPlanServer.struct_class = Types::RecoveryPlanServer
+
+    RecoveryPlanServers.member = Shapes::ShapeRef.new(shape: RecoveryPlanServer)
+
+    RecoveryPlanStep.add_member(:recovery_plan_step_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanStepArn"))
+    RecoveryPlanStep.add_member(:step_order, Shapes::ShapeRef.new(shape: RecoveryPlanStepOrder, required: true, location_name: "stepOrder"))
+    RecoveryPlanStep.add_member(:step_name, Shapes::ShapeRef.new(shape: RecoveryPlanStepName, required: true, location_name: "stepName"))
+    RecoveryPlanStep.add_member(:configuration, Shapes::ShapeRef.new(shape: RecoveryPlanStepConfiguration, required: true, location_name: "configuration"))
+    RecoveryPlanStep.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "createdAt"))
+    RecoveryPlanStep.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "updatedAt"))
+    RecoveryPlanStep.struct_class = Types::RecoveryPlanStep
+
+    RecoveryPlanStepArnList.member = Shapes::ShapeRef.new(shape: StrictDRSARN)
+
+    RecoveryPlanStepConfiguration.add_member(:server_step_configuration, Shapes::ShapeRef.new(shape: ServerStepConfiguration, location_name: "serverStepConfiguration"))
+    RecoveryPlanStepConfiguration.add_member(:wait_step_configuration, Shapes::ShapeRef.new(shape: WaitStepConfiguration, location_name: "waitStepConfiguration"))
+    RecoveryPlanStepConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RecoveryPlanStepConfiguration.add_member_subclass(:server_step_configuration, Types::RecoveryPlanStepConfiguration::ServerStepConfiguration)
+    RecoveryPlanStepConfiguration.add_member_subclass(:wait_step_configuration, Types::RecoveryPlanStepConfiguration::WaitStepConfiguration)
+    RecoveryPlanStepConfiguration.add_member_subclass(:unknown, Types::RecoveryPlanStepConfiguration::Unknown)
+    RecoveryPlanStepConfiguration.struct_class = Types::RecoveryPlanStepConfiguration
+
+    RecoveryPlanStepList.member = Shapes::ShapeRef.new(shape: RecoveryPlanStep)
+
+    RecoveryPlanSummary.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    RecoveryPlanSummary.add_member(:name, Shapes::ShapeRef.new(shape: RecoveryPlanName, required: true, location_name: "name"))
+    RecoveryPlanSummary.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPlanStatus, required: true, location_name: "status"))
+    RecoveryPlanSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "createdAt"))
+    RecoveryPlanSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "updatedAt"))
+    RecoveryPlanSummary.struct_class = Types::RecoveryPlanSummary
+
+    RecoveryPlanSummaryList.member = Shapes::ShapeRef.new(shape: RecoveryPlanSummary)
+
     RecoverySnapshot.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: RecoverySnapshotID, required: true, location_name: "snapshotID"))
     RecoverySnapshot.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     RecoverySnapshot.add_member(:expected_timestamp, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, required: true, location_name: "expectedTimestamp"))
@@ -957,6 +1255,13 @@ module Aws::Drs
     RecoverySnapshot.struct_class = Types::RecoverySnapshot
 
     RecoverySnapshotsList.member = Shapes::ShapeRef.new(shape: RecoverySnapshot)
+
+    ReorderRecoveryPlanStepsRequest.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    ReorderRecoveryPlanStepsRequest.add_member(:ordered_step_arns, Shapes::ShapeRef.new(shape: RecoveryPlanStepArnList, required: true, location_name: "orderedStepArns"))
+    ReorderRecoveryPlanStepsRequest.struct_class = Types::ReorderRecoveryPlanStepsRequest
+
+    ReorderRecoveryPlanStepsResponse.add_member(:recovery_plan_steps, Shapes::ShapeRef.new(shape: RecoveryPlanStepList, required: true, location_name: "recoveryPlanSteps"))
+    ReorderRecoveryPlanStepsResponse.struct_class = Types::ReorderRecoveryPlanStepsResponse
 
     ReplicationConfiguration.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
     ReplicationConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: SmallBoundedString, location_name: "name"))
@@ -1023,11 +1328,20 @@ module Aws::Drs
     RetryDataReplicationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     RetryDataReplicationRequest.struct_class = Types::RetryDataReplicationRequest
 
+    RetryRecoveryPlanExecutionStepRequest.add_member(:recovery_plan_execution_step_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionStepArn"))
+    RetryRecoveryPlanExecutionStepRequest.struct_class = Types::RetryRecoveryPlanExecutionStepRequest
+
+    RetryRecoveryPlanExecutionStepResponse.add_member(:recovery_plan_execution_step, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStep, required: true, location_name: "recoveryPlanExecutionStep"))
+    RetryRecoveryPlanExecutionStepResponse.struct_class = Types::RetryRecoveryPlanExecutionStepResponse
+
     ReverseReplicationRequest.add_member(:recovery_instance_id, Shapes::ShapeRef.new(shape: RecoveryInstanceID, required: true, location_name: "recoveryInstanceID"))
     ReverseReplicationRequest.struct_class = Types::ReverseReplicationRequest
 
     ReverseReplicationResponse.add_member(:reversed_direction_source_server_arn, Shapes::ShapeRef.new(shape: SourceServerARN, location_name: "reversedDirectionSourceServerArn"))
     ReverseReplicationResponse.struct_class = Types::ReverseReplicationResponse
+
+    ServerStepConfiguration.add_member(:servers, Shapes::ShapeRef.new(shape: RecoveryPlanServers, required: true, location_name: "servers"))
+    ServerStepConfiguration.struct_class = Types::ServerStepConfiguration
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
     ServiceQuotaExceededException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
@@ -1116,6 +1430,16 @@ module Aws::Drs
     StartFailbackLaunchResponse.struct_class = Types::StartFailbackLaunchResponse
 
     StartFailbackRequestRecoveryInstanceIDs.member = Shapes::ShapeRef.new(shape: RecoveryInstanceID)
+
+    StartRecoveryPlanExecutionRequest.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    StartRecoveryPlanExecutionRequest.add_member(:mode, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionMode, required: true, location_name: "mode"))
+    StartRecoveryPlanExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientIdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartRecoveryPlanExecutionRequest.add_member(:source_servers, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionSourceServerList, location_name: "sourceServers"))
+    StartRecoveryPlanExecutionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    StartRecoveryPlanExecutionRequest.struct_class = Types::StartRecoveryPlanExecutionRequest
+
+    StartRecoveryPlanExecutionResponse.add_member(:recovery_plan_execution, Shapes::ShapeRef.new(shape: RecoveryPlanExecution, required: true, location_name: "recoveryPlanExecution"))
+    StartRecoveryPlanExecutionResponse.struct_class = Types::StartRecoveryPlanExecutionResponse
 
     StartRecoveryRequest.add_member(:source_servers, Shapes::ShapeRef.new(shape: StartRecoveryRequestSourceServers, required: true, location_name: "sourceServers"))
     StartRecoveryRequest.add_member(:is_drill, Shapes::ShapeRef.new(shape: Boolean, location_name: "isDrill"))
@@ -1235,6 +1559,31 @@ module Aws::Drs
     UpdateLaunchConfigurationTemplateResponse.add_member(:launch_configuration_template, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplate, location_name: "launchConfigurationTemplate"))
     UpdateLaunchConfigurationTemplateResponse.struct_class = Types::UpdateLaunchConfigurationTemplateResponse
 
+    UpdateRecoveryPlanExecutionStepRequest.add_member(:recovery_plan_execution_step_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanExecutionStepArn"))
+    UpdateRecoveryPlanExecutionStepRequest.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStepStatus, location_name: "status"))
+    UpdateRecoveryPlanExecutionStepRequest.add_member(:servers, Shapes::ShapeRef.new(shape: RecoveryPlanServers, location_name: "servers"))
+    UpdateRecoveryPlanExecutionStepRequest.add_member(:wait_duration_minutes, Shapes::ShapeRef.new(shape: WaitDurationMinutes, location_name: "waitDurationMinutes"))
+    UpdateRecoveryPlanExecutionStepRequest.struct_class = Types::UpdateRecoveryPlanExecutionStepRequest
+
+    UpdateRecoveryPlanExecutionStepResponse.add_member(:recovery_plan_execution_step, Shapes::ShapeRef.new(shape: RecoveryPlanExecutionStep, required: true, location_name: "recoveryPlanExecutionStep"))
+    UpdateRecoveryPlanExecutionStepResponse.struct_class = Types::UpdateRecoveryPlanExecutionStepResponse
+
+    UpdateRecoveryPlanRequest.add_member(:recovery_plan_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanArn"))
+    UpdateRecoveryPlanRequest.add_member(:name, Shapes::ShapeRef.new(shape: RecoveryPlanName, location_name: "name"))
+    UpdateRecoveryPlanRequest.add_member(:description, Shapes::ShapeRef.new(shape: RecoveryPlanDescription, location_name: "description"))
+    UpdateRecoveryPlanRequest.struct_class = Types::UpdateRecoveryPlanRequest
+
+    UpdateRecoveryPlanResponse.add_member(:recovery_plan, Shapes::ShapeRef.new(shape: RecoveryPlan, required: true, location_name: "recoveryPlan"))
+    UpdateRecoveryPlanResponse.struct_class = Types::UpdateRecoveryPlanResponse
+
+    UpdateRecoveryPlanStepRequest.add_member(:recovery_plan_step_arn, Shapes::ShapeRef.new(shape: StrictDRSARN, required: true, location_name: "recoveryPlanStepArn"))
+    UpdateRecoveryPlanStepRequest.add_member(:step_name, Shapes::ShapeRef.new(shape: RecoveryPlanStepName, location_name: "stepName"))
+    UpdateRecoveryPlanStepRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RecoveryPlanStepConfiguration, location_name: "configuration"))
+    UpdateRecoveryPlanStepRequest.struct_class = Types::UpdateRecoveryPlanStepRequest
+
+    UpdateRecoveryPlanStepResponse.add_member(:recovery_plan_step, Shapes::ShapeRef.new(shape: RecoveryPlanStep, required: true, location_name: "recoveryPlanStep"))
+    UpdateRecoveryPlanStepResponse.struct_class = Types::UpdateRecoveryPlanStepResponse
+
     UpdateReplicationConfigurationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     UpdateReplicationConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SmallBoundedString, location_name: "name"))
     UpdateReplicationConfigurationRequest.add_member(:staging_area_subnet_id, Shapes::ShapeRef.new(shape: SubnetID, location_name: "stagingAreaSubnetId"))
@@ -1295,6 +1644,9 @@ module Aws::Drs
     VolumeToSizeMap.key = Shapes::ShapeRef.new(shape: LargeBoundedString)
     VolumeToSizeMap.value = Shapes::ShapeRef.new(shape: PositiveInteger)
 
+    WaitStepConfiguration.add_member(:wait_duration_minutes, Shapes::ShapeRef.new(shape: WaitDurationMinutes, required: true, location_name: "waitDurationMinutes"))
+    WaitStepConfiguration.struct_class = Types::WaitStepConfiguration
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -1330,6 +1682,21 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)
 
+      api.add_operation(:cancel_recovery_plan_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelRecoveryPlanExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/CancelRecoveryPlanExecution"
+        o.input = Shapes::ShapeRef.new(shape: CancelRecoveryPlanExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelRecoveryPlanExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
       api.add_operation(:create_extended_source_server, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateExtendedSourceServer"
         o.http_method = "POST"
@@ -1352,6 +1719,37 @@ module Aws::Drs
         o.input = Shapes::ShapeRef.new(shape: CreateLaunchConfigurationTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateLaunchConfigurationTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:create_recovery_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRecoveryPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateRecoveryPlan"
+        o.input = Shapes::ShapeRef.new(shape: CreateRecoveryPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRecoveryPlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:create_recovery_plan_step, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRecoveryPlanStep"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateRecoveryPlanStep"
+        o.input = Shapes::ShapeRef.new(shape: CreateRecoveryPlanStepRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRecoveryPlanStepResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1437,6 +1835,51 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:delete_recovery_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRecoveryPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteRecoveryPlan"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRecoveryPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRecoveryPlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:delete_recovery_plan_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRecoveryPlanExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteRecoveryPlanExecution"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRecoveryPlanExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRecoveryPlanExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:delete_recovery_plan_step, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRecoveryPlanStep"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteRecoveryPlanStep"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRecoveryPlanStepRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRecoveryPlanStepResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)
 
@@ -1691,6 +2134,62 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)
 
+      api.add_operation(:get_recovery_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRecoveryPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetRecoveryPlan"
+        o.input = Shapes::ShapeRef.new(shape: GetRecoveryPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRecoveryPlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:get_recovery_plan_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRecoveryPlanExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetRecoveryPlanExecution"
+        o.input = Shapes::ShapeRef.new(shape: GetRecoveryPlanExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRecoveryPlanExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:get_recovery_plan_execution_step, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRecoveryPlanExecutionStep"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetRecoveryPlanExecutionStep"
+        o.input = Shapes::ShapeRef.new(shape: GetRecoveryPlanExecutionStepRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRecoveryPlanExecutionStepResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:get_recovery_plan_step, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRecoveryPlanStep"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetRecoveryPlanStep"
+        o.input = Shapes::ShapeRef.new(shape: GetRecoveryPlanStepRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRecoveryPlanStepResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
       api.add_operation(:get_replication_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetReplicationConfiguration"
         o.http_method = "POST"
@@ -1754,6 +2253,84 @@ module Aws::Drs
         )
       end)
 
+      api.add_operation(:list_recovery_plan_execution_steps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecoveryPlanExecutionSteps"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListRecoveryPlanExecutionSteps"
+        o.input = Shapes::ShapeRef.new(shape: ListRecoveryPlanExecutionStepsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRecoveryPlanExecutionStepsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_recovery_plan_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecoveryPlanExecutions"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListRecoveryPlanExecutions"
+        o.input = Shapes::ShapeRef.new(shape: ListRecoveryPlanExecutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRecoveryPlanExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_recovery_plan_steps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecoveryPlanSteps"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListRecoveryPlanSteps"
+        o.input = Shapes::ShapeRef.new(shape: ListRecoveryPlanStepsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRecoveryPlanStepsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_recovery_plans, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecoveryPlans"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListRecoveryPlans"
+        o.input = Shapes::ShapeRef.new(shape: ListRecoveryPlansRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRecoveryPlansResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_staging_accounts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListStagingAccounts"
         o.http_method = "GET"
@@ -1800,6 +2377,21 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)
 
+      api.add_operation(:reorder_recovery_plan_steps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReorderRecoveryPlanSteps"
+        o.http_method = "POST"
+        o.http_request_uri = "/ReorderRecoveryPlanSteps"
+        o.input = Shapes::ShapeRef.new(shape: ReorderRecoveryPlanStepsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ReorderRecoveryPlanStepsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
       api.add_operation(:retry_data_replication, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RetryDataReplication"
         o.http_method = "POST"
@@ -1810,6 +2402,21 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:retry_recovery_plan_execution_step, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RetryRecoveryPlanExecutionStep"
+        o.http_method = "POST"
+        o.http_request_uri = "/RetryRecoveryPlanExecutionStep"
+        o.input = Shapes::ShapeRef.new(shape: RetryRecoveryPlanExecutionStepRequest)
+        o.output = Shapes::ShapeRef.new(shape: RetryRecoveryPlanExecutionStepResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)
@@ -1853,6 +2460,22 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:start_recovery_plan_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRecoveryPlanExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartRecoveryPlanExecution"
+        o.input = Shapes::ShapeRef.new(shape: StartRecoveryPlanExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartRecoveryPlanExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)
 
@@ -2009,6 +2632,51 @@ module Aws::Drs
         o.output = Shapes::ShapeRef.new(shape: UpdateLaunchConfigurationTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:update_recovery_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRecoveryPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateRecoveryPlan"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRecoveryPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRecoveryPlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:update_recovery_plan_execution_step, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRecoveryPlanExecutionStep"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateRecoveryPlanExecutionStep"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRecoveryPlanExecutionStepRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRecoveryPlanExecutionStepResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:update_recovery_plan_step, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRecoveryPlanStep"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateRecoveryPlanStep"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRecoveryPlanStepRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRecoveryPlanStepResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

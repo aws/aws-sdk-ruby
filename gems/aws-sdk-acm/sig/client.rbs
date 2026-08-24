@@ -350,6 +350,19 @@ module Aws
                                                ) -> _ListAcmeExternalAccountBindingsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAcmeExternalAccountBindingsResponseSuccess
 
+      interface _ListCertificateDomainValidationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCertificateDomainValidationsResponse]
+        def domain_validation_summary_list: () -> ::Array[Types::DomainValidationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#list_certificate_domain_validations-instance_method
+      def list_certificate_domain_validations: (
+                                                 certificate_arn: ::String,
+                                                 ?next_token: ::String,
+                                                 ?max_items: ::Integer
+                                               ) -> _ListCertificateDomainValidationsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCertificateDomainValidationsResponseSuccess
+
       interface _ListCertificatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCertificatesResponse]
         def next_token: () -> ::String
@@ -438,7 +451,8 @@ module Aws
                                  ],
                                  ?options: {
                                    certificate_transparency_logging_preference: ("ENABLED" | "DISABLED")?,
-                                   export: ("ENABLED" | "DISABLED")?
+                                   export: ("ENABLED" | "DISABLED")?,
+                                   validation_method: ("EMAIL" | "DNS" | "HTTP")?
                                  },
                                  ?certificate_authority_arn: ::String,
                                  ?tags: Array[
@@ -543,7 +557,8 @@ module Aws
                                         certificate_arn: ::String,
                                         options: {
                                           certificate_transparency_logging_preference: ("ENABLED" | "DISABLED")?,
-                                          export: ("ENABLED" | "DISABLED")?
+                                          export: ("ENABLED" | "DISABLED")?,
+                                          validation_method: ("EMAIL" | "DNS" | "HTTP")?
                                         }
                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

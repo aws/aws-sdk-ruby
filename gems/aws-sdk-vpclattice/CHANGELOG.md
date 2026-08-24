@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2026-08-19)
+------------------
+
+* Feature - Amazon VPC Lattice now supports modification of private DNS options on Service Network VPC Associations
+
 1.52.0 (2026-07-09)
 ------------------
 

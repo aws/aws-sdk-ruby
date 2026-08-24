@@ -876,6 +876,11 @@ module Aws::PrometheusService
     #   (Optional) The list of tag keys and values to associate with the
     #   scraper.
     #
+    # @option params [Array<Types::ExporterConfiguration>] :exporters
+    #   The exporter configurations for the scraper. You can configure at most
+    #   one Amazon OpenSearch Service domain. If you don't specify a value,
+    #   the scraper is created without an exporter configuration.
+    #
     # @return [Types::CreateScraperResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateScraperResponse#scraper_id #scraper_id} => String
@@ -999,6 +1004,13 @@ module Aws::PrometheusService
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     exporters: [
+    #       {
+    #         open_search_configuration: {
+    #           domain_arn: "OpenSearchDomainArn", # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1741,6 +1753,8 @@ module Aws::PrometheusService
     #   resp.scraper.destination.cloud_watch_configuration.dataset_arn #=> String
     #   resp.scraper.role_configuration.source_role_arn #=> String
     #   resp.scraper.role_configuration.target_role_arn #=> String
+    #   resp.scraper.exporters #=> Array
+    #   resp.scraper.exporters[0].open_search_configuration.domain_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2234,6 +2248,8 @@ module Aws::PrometheusService
     #   resp.scrapers[0].destination.cloud_watch_configuration.dataset_arn #=> String
     #   resp.scrapers[0].role_configuration.source_role_arn #=> String
     #   resp.scrapers[0].role_configuration.target_role_arn #=> String
+    #   resp.scrapers[0].exporters #=> Array
+    #   resp.scrapers[0].exporters[0].open_search_configuration.domain_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListScrapers AWS API Documentation
@@ -2844,6 +2860,11 @@ module Aws::PrometheusService
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::ExporterConfiguration>] :exporters
+    #   The exporter configurations for the scraper. You can configure at most
+    #   one Amazon OpenSearch Service domain. If you don't specify a value,
+    #   the existing exporter configuration remains unchanged.
+    #
     # @return [Types::UpdateScraperResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateScraperResponse#scraper_id #scraper_id} => String
@@ -2901,6 +2922,13 @@ module Aws::PrometheusService
     #       target_role_arn: "IamRoleArn",
     #     },
     #     client_token: "IdempotencyToken",
+    #     exporters: [
+    #       {
+    #         open_search_configuration: {
+    #           domain_arn: "OpenSearchDomainArn", # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3104,7 +3132,7 @@ module Aws::PrometheusService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

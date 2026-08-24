@@ -1077,8 +1077,9 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Deletes the `IdMappingWorkflow` with a given name. This operation will
-    # succeed even if a workflow with the given name does not exist.
+    # Deletes the `IdMappingWorkflow` with a given name. This operation
+    # returns a `ResourceNotFoundException` if a workflow with the given
+    # name does not exist.
     #
     # @option params [required, String] :workflow_name
     #   The name of the workflow to be deleted.
@@ -1106,7 +1107,9 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Deletes the `IdNamespace` with a given name.
+    # Deletes the `IdNamespace` with a given name. This operation returns a
+    # `ResourceNotFoundException` if an ID namespace with the given name
+    # does not exist.
     #
     # @option params [required, String] :id_namespace_name
     #   The name of the ID namespace.
@@ -1134,8 +1137,9 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Deletes the `MatchingWorkflow` with a given name. This operation will
-    # succeed even if a workflow with the given name does not exist.
+    # Deletes the `MatchingWorkflow` with a given name. This operation
+    # returns a `ResourceNotFoundException` if a workflow with the given
+    # name does not exist.
     #
     # @option params [required, String] :workflow_name
     #   The name of the workflow to be retrieved.
@@ -1200,10 +1204,11 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Deletes the `SchemaMapping` with a given name. This operation will
-    # succeed even if a schema with the given name does not exist. This
-    # operation will fail if there is a `MatchingWorkflow` object that
-    # references the `SchemaMapping` in the workflow's `InputSourceConfig`.
+    # Deletes the `SchemaMapping` with a given name. This operation returns
+    # a `ResourceNotFoundException` if a schema with the given name does not
+    # exist. This operation will fail if there is a `MatchingWorkflow`
+    # object that references the `SchemaMapping` in the workflow's
+    # `InputSourceConfig`.
     #
     # @option params [required, String] :schema_name
     #   The name of the schema to delete.
@@ -2833,7 +2838,7 @@ module Aws::EntityResolution
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

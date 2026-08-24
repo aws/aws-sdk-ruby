@@ -543,6 +543,46 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Adds virtual machines to the specified Exascale VM cluster.
+    #
+    # @option params [required, String] :exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster to add virtual
+    #   machines to.
+    #
+    # @option params [required, Integer] :desired_node_count
+    #   The desired number of nodes in the Exascale VM cluster after the
+    #   association.
+    #
+    # @return [Types::AssociateVirtualMachinesToExadbVmClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateVirtualMachinesToExadbVmClusterOutput#display_name #display_name} => String
+    #   * {Types::AssociateVirtualMachinesToExadbVmClusterOutput#status #status} => String
+    #   * {Types::AssociateVirtualMachinesToExadbVmClusterOutput#status_reason #status_reason} => String
+    #   * {Types::AssociateVirtualMachinesToExadbVmClusterOutput#exadb_vm_cluster_id #exadb_vm_cluster_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_virtual_machines_to_exadb_vm_cluster({
+    #     exadb_vm_cluster_id: "ResourceIdOrArn", # required
+    #     desired_node_count: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.exadb_vm_cluster_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AssociateVirtualMachinesToExadbVmCluster AWS API Documentation
+    #
+    # @overload associate_virtual_machines_to_exadb_vm_cluster(params = {})
+    # @param [Hash] params ({})
+    def associate_virtual_machines_to_exadb_vm_cluster(params = {}, options = {})
+      req = build_request(:associate_virtual_machines_to_exadb_vm_cluster, params)
+      req.send_request(options)
+    end
+
     # Creates a new Autonomous Database.
     #
     # @option params [String] :odb_network_id
@@ -1285,7 +1325,7 @@ module Aws::Odb
     #   the VM cluster.
     #
     # @option params [Integer] :db_node_storage_size_in_g_bs
-    #   The amount of local node storage, in gigabytes (GBs), to allocate for
+    #   The amount of local node storage, in gigabytes (GB), to allocate for
     #   the VM cluster.
     #
     # @option params [Array<String>] :db_servers
@@ -1307,7 +1347,7 @@ module Aws::Odb
     #   Default: `LICENSE_INCLUDED`
     #
     # @option params [Integer] :memory_size_in_g_bs
-    #   The amount of memory, in gigabytes (GBs), to allocate for the VM
+    #   The amount of memory, in gigabytes (GB), to allocate for the VM
     #   cluster.
     #
     # @option params [String] :system_version
@@ -1390,6 +1430,226 @@ module Aws::Odb
     # @param [Hash] params ({})
     def create_cloud_vm_cluster(params = {}, options = {})
       req = build_request(:create_cloud_vm_cluster, params)
+      req.send_request(options)
+    end
+
+    # Creates an Exascale VM cluster.
+    #
+    # @option params [required, String] :display_name
+    #   A user-friendly name for the Exascale VM cluster.
+    #
+    # @option params [required, Integer] :enabled_ecpu_count
+    #   The number of ECPUs to enable for the Exascale VM cluster.
+    #
+    # @option params [required, String] :exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault for this Exascale
+    #   VM cluster.
+    #
+    # @option params [required, String] :grid_image_id
+    #   The Grid Infrastructure software image ID for the Exascale VM cluster.
+    #
+    # @option params [required, String] :hostname
+    #   The host name for the Exascale VM cluster.
+    #
+    # @option params [required, Integer] :node_count
+    #   The number of nodes in the Exascale VM cluster.
+    #
+    # @option params [required, String] :odb_network_id
+    #   The unique identifier of the ODB network for the Exascale VM cluster.
+    #
+    # @option params [required, String] :shape
+    #   The shape of the Exascale VM cluster.
+    #
+    # @option params [required, Array<String>] :ssh_public_keys
+    #   The public key portion of one or more key pairs used for SSH access to
+    #   the Exascale VM cluster.
+    #
+    # @option params [required, Integer] :total_ecpu_count
+    #   The total number of ECPUs for the Exascale VM cluster.
+    #
+    # @option params [required, Integer] :vm_file_system_storage_total_size_in_g_bs
+    #   The total amount of file system storage, in gigabytes (GB), for the
+    #   Exascale VM cluster.
+    #
+    # @option params [String] :cluster_name
+    #   A name for the Grid Infrastructure cluster. The name isn't case
+    #   sensitive.
+    #
+    # @option params [Types::DataCollectionOptions] :data_collection_options
+    #   The set of preferences for the various diagnostic collection options
+    #   for the Exascale VM cluster.
+    #
+    # @option params [String] :license_model
+    #   The Oracle license model to apply to the Exascale VM cluster.
+    #
+    # @option params [Integer] :scan_listener_port_tcp
+    #   The port number for TCP connections to the single client access name
+    #   (SCAN) listener.
+    #
+    # @option params [Integer] :scan_listener_port_tcp_ssl
+    #   The port number for TCP connections with SSL to the single client
+    #   access name (SCAN) listener.
+    #
+    # @option params [String] :shape_attribute
+    #   The shape attribute for the Exascale VM cluster.
+    #
+    # @option params [String] :system_version
+    #   The version of the operating system of the image for the Exascale VM
+    #   cluster.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The list of resource tags to apply to the Exascale VM cluster.
+    #
+    # @option params [String] :time_zone
+    #   The time zone for the Exascale VM cluster.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, the
+    #   Amazon Web Services SDK automatically generates one and uses it for
+    #   the request to ensure idempotency. The client token is valid for up to
+    #   24 hours after it's first used.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateExadbVmClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExadbVmClusterOutput#display_name #display_name} => String
+    #   * {Types::CreateExadbVmClusterOutput#status #status} => String
+    #   * {Types::CreateExadbVmClusterOutput#status_reason #status_reason} => String
+    #   * {Types::CreateExadbVmClusterOutput#exadb_vm_cluster_id #exadb_vm_cluster_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_exadb_vm_cluster({
+    #     display_name: "ResourceDisplayName", # required
+    #     enabled_ecpu_count: 1, # required
+    #     exascale_db_storage_vault_id: "ResourceIdOrArn", # required
+    #     grid_image_id: "CreateExadbVmClusterInputGridImageIdString", # required
+    #     hostname: "Hostname", # required
+    #     node_count: 1, # required
+    #     odb_network_id: "ResourceIdOrArn", # required
+    #     shape: "CreateExadbVmClusterInputShapeString", # required
+    #     ssh_public_keys: ["String"], # required
+    #     total_ecpu_count: 1, # required
+    #     vm_file_system_storage_total_size_in_g_bs: 1, # required
+    #     cluster_name: "ClusterName",
+    #     data_collection_options: {
+    #       is_diagnostics_events_enabled: false,
+    #       is_health_monitoring_enabled: false,
+    #       is_incident_logs_enabled: false,
+    #     },
+    #     license_model: "BRING_YOUR_OWN_LICENSE", # accepts BRING_YOUR_OWN_LICENSE, LICENSE_INCLUDED
+    #     scan_listener_port_tcp: 1,
+    #     scan_listener_port_tcp_ssl: 1,
+    #     shape_attribute: "SMART_STORAGE", # accepts SMART_STORAGE, BLOCK_STORAGE
+    #     system_version: "CreateExadbVmClusterInputSystemVersionString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     time_zone: "CreateExadbVmClusterInputTimeZoneString",
+    #     client_token: "CreateExadbVmClusterInputClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.exadb_vm_cluster_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CreateExadbVmCluster AWS API Documentation
+    #
+    # @overload create_exadb_vm_cluster(params = {})
+    # @param [Hash] params ({})
+    def create_exadb_vm_cluster(params = {}, options = {})
+      req = build_request(:create_exadb_vm_cluster, params)
+      req.send_request(options)
+    end
+
+    # Creates an Exascale storage vault.
+    #
+    # @option params [required, String] :display_name
+    #   A user-friendly name for the Exascale storage vault.
+    #
+    # @option params [required, Integer] :high_capacity_database_storage_total_size_in_g_bs
+    #   The total size of the high-capacity database storage, in gigabytes
+    #   (GB), for the Exascale storage vault.
+    #
+    # @option params [Integer] :additional_flash_cache_in_percent
+    #   The additional flash cache percentage for the Exascale storage vault.
+    #
+    # @option params [Integer] :autoscale_limit_in_g_bs
+    #   The autoscale limit in gigabytes (GB) for the Exascale storage vault.
+    #
+    # @option params [String] :availability_zone_id
+    #   The Availability Zone ID for the Exascale storage vault.
+    #
+    # @option params [String] :availability_zone
+    #   The Availability Zone for the Exascale storage vault.
+    #
+    # @option params [String] :description
+    #   A description of the Exascale storage vault.
+    #
+    # @option params [Boolean] :is_autoscale_enabled
+    #   Specifies whether autoscaling is enabled for the Exascale storage
+    #   vault.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The list of resource tags to apply to the Exascale storage vault.
+    #
+    # @option params [String] :time_zone
+    #   The time zone for the Exascale storage vault.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, the
+    #   Amazon Web Services SDK automatically generates one and uses it for
+    #   the request to ensure idempotency. The client token is valid for up to
+    #   24 hours after it's first used.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateExascaleDbStorageVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExascaleDbStorageVaultOutput#display_name #display_name} => String
+    #   * {Types::CreateExascaleDbStorageVaultOutput#status #status} => String
+    #   * {Types::CreateExascaleDbStorageVaultOutput#status_reason #status_reason} => String
+    #   * {Types::CreateExascaleDbStorageVaultOutput#exascale_db_storage_vault_id #exascale_db_storage_vault_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_exascale_db_storage_vault({
+    #     display_name: "ResourceDisplayName", # required
+    #     high_capacity_database_storage_total_size_in_g_bs: 1, # required
+    #     additional_flash_cache_in_percent: 1,
+    #     autoscale_limit_in_g_bs: 1,
+    #     availability_zone_id: "CreateExascaleDbStorageVaultInputAvailabilityZoneIdString",
+    #     availability_zone: "CreateExascaleDbStorageVaultInputAvailabilityZoneString",
+    #     description: "CreateExascaleDbStorageVaultInputDescriptionString",
+    #     is_autoscale_enabled: false,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     time_zone: "CreateExascaleDbStorageVaultInputTimeZoneString",
+    #     client_token: "CreateExascaleDbStorageVaultInputClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.exascale_db_storage_vault_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CreateExascaleDbStorageVault AWS API Documentation
+    #
+    # @overload create_exascale_db_storage_vault(params = {})
+    # @param [Hash] params ({})
+    def create_exascale_db_storage_vault(params = {}, options = {})
+      req = build_request(:create_exascale_db_storage_vault, params)
       req.send_request(options)
     end
 
@@ -1739,6 +1999,50 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Deletes the specified Exascale VM cluster.
+    #
+    # @option params [required, String] :exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_exadb_vm_cluster({
+    #     exadb_vm_cluster_id: "ResourceIdOrArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DeleteExadbVmCluster AWS API Documentation
+    #
+    # @overload delete_exadb_vm_cluster(params = {})
+    # @param [Hash] params ({})
+    def delete_exadb_vm_cluster(params = {}, options = {})
+      req = build_request(:delete_exadb_vm_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Exascale storage vault.
+    #
+    # @option params [required, String] :exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_exascale_db_storage_vault({
+    #     exascale_db_storage_vault_id: "ResourceIdOrArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DeleteExascaleDbStorageVault AWS API Documentation
+    #
+    # @overload delete_exascale_db_storage_vault(params = {})
+    # @param [Hash] params ({})
+    def delete_exascale_db_storage_vault(params = {}, options = {})
+      req = build_request(:delete_exascale_db_storage_vault, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified ODB network.
     #
     # @option params [required, String] :odb_network_id
@@ -1826,6 +2130,45 @@ module Aws::Odb
     # @param [Hash] params ({})
     def disassociate_iam_role_from_resource(params = {}, options = {})
       req = build_request(:disassociate_iam_role_from_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes virtual machines from the specified Exascale VM cluster.
+    #
+    # @option params [required, String] :exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster to remove virtual
+    #   machines from.
+    #
+    # @option params [required, Array<String>] :db_node_ids
+    #   The list of DB node IDs to remove from the Exascale VM cluster.
+    #
+    # @return [Types::DisassociateVirtualMachinesFromExadbVmClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateVirtualMachinesFromExadbVmClusterOutput#display_name #display_name} => String
+    #   * {Types::DisassociateVirtualMachinesFromExadbVmClusterOutput#status #status} => String
+    #   * {Types::DisassociateVirtualMachinesFromExadbVmClusterOutput#status_reason #status_reason} => String
+    #   * {Types::DisassociateVirtualMachinesFromExadbVmClusterOutput#exadb_vm_cluster_id #exadb_vm_cluster_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_virtual_machines_from_exadb_vm_cluster({
+    #     exadb_vm_cluster_id: "ResourceIdOrArn", # required
+    #     db_node_ids: ["ResourceId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.exadb_vm_cluster_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateVirtualMachinesFromExadbVmCluster AWS API Documentation
+    #
+    # @overload disassociate_virtual_machines_from_exadb_vm_cluster(params = {})
+    # @param [Hash] params ({})
+    def disassociate_virtual_machines_from_exadb_vm_cluster(params = {}, options = {})
+      req = build_request(:disassociate_virtual_machines_from_exadb_vm_cluster, params)
       req.send_request(options)
     end
 
@@ -2463,8 +2806,13 @@ module Aws::Odb
 
     # Returns information about the specified DB node.
     #
-    # @option params [required, String] :cloud_vm_cluster_id
-    #   The unique identifier of the VM cluster that contains the DB node.
+    # @option params [String] :cloud_vm_cluster_id
+    #   The unique identifier of the VM cluster that contains the DB node. You
+    #   must specify either this parameter or `exadbVmClusterId`.
+    #
+    # @option params [String] :exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster that contains the DB
+    #   node. You must specify either this parameter or `cloudVmClusterId`.
     #
     # @option params [required, String] :db_node_id
     #   The unique identifier of the DB node to retrieve information about.
@@ -2476,7 +2824,8 @@ module Aws::Odb
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_db_node({
-    #     cloud_vm_cluster_id: "ResourceId", # required
+    #     cloud_vm_cluster_id: "ResourceId",
+    #     exadb_vm_cluster_id: "ResourceId",
     #     db_node_id: "ResourceId", # required
     #   })
     #
@@ -2576,6 +2925,145 @@ module Aws::Odb
     # @param [Hash] params ({})
     def get_db_server(params = {}, options = {})
       req = build_request(:get_db_server, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the specified Exascale VM cluster.
+    #
+    # @option params [required, String] :exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster.
+    #
+    # @return [Types::GetExadbVmClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExadbVmClusterOutput#exadb_vm_cluster #exadb_vm_cluster} => Types::ExadbVmCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_exadb_vm_cluster({
+    #     exadb_vm_cluster_id: "ResourceIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.exadb_vm_cluster.exadb_vm_cluster_id #=> String
+    #   resp.exadb_vm_cluster.cluster_name #=> String
+    #   resp.exadb_vm_cluster.created_at #=> Time
+    #   resp.exadb_vm_cluster.data_collection_options.is_diagnostics_events_enabled #=> Boolean
+    #   resp.exadb_vm_cluster.data_collection_options.is_health_monitoring_enabled #=> Boolean
+    #   resp.exadb_vm_cluster.data_collection_options.is_incident_logs_enabled #=> Boolean
+    #   resp.exadb_vm_cluster.display_name #=> String
+    #   resp.exadb_vm_cluster.domain #=> String
+    #   resp.exadb_vm_cluster.enabled_ecpu_count #=> Integer
+    #   resp.exadb_vm_cluster.exadb_vm_cluster_arn #=> String
+    #   resp.exadb_vm_cluster.exascale_db_storage_vault_arn #=> String
+    #   resp.exadb_vm_cluster.exascale_db_storage_vault_id #=> String
+    #   resp.exadb_vm_cluster.gi_version #=> String
+    #   resp.exadb_vm_cluster.grid_image_id #=> String
+    #   resp.exadb_vm_cluster.grid_image_type #=> String, one of "RELEASE_UPDATE", "CUSTOM_IMAGE"
+    #   resp.exadb_vm_cluster.hostname #=> String
+    #   resp.exadb_vm_cluster.iam_roles #=> Array
+    #   resp.exadb_vm_cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.exadb_vm_cluster.iam_roles[0].status #=> String, one of "ASSOCIATING", "DISASSOCIATING", "FAILED", "CONNECTED", "DISCONNECTED", "PARTIALLY_CONNECTED", "UNKNOWN"
+    #   resp.exadb_vm_cluster.iam_roles[0].status_reason #=> String
+    #   resp.exadb_vm_cluster.iam_roles[0].aws_integration #=> String, one of "KmsTde"
+    #   resp.exadb_vm_cluster.iorm_config_cache.db_plans #=> Array
+    #   resp.exadb_vm_cluster.iorm_config_cache.db_plans[0].db_name #=> String
+    #   resp.exadb_vm_cluster.iorm_config_cache.db_plans[0].flash_cache_limit #=> String
+    #   resp.exadb_vm_cluster.iorm_config_cache.db_plans[0].share #=> Integer
+    #   resp.exadb_vm_cluster.iorm_config_cache.lifecycle_details #=> String
+    #   resp.exadb_vm_cluster.iorm_config_cache.lifecycle_state #=> String, one of "BOOTSTRAPPING", "DISABLED", "ENABLED", "FAILED", "UPDATING"
+    #   resp.exadb_vm_cluster.iorm_config_cache.objective #=> String, one of "AUTO", "BALANCED", "BASIC", "HIGH_THROUGHPUT", "LOW_LATENCY"
+    #   resp.exadb_vm_cluster.last_update_history_entry_id #=> String
+    #   resp.exadb_vm_cluster.license_model #=> String, one of "BRING_YOUR_OWN_LICENSE", "LICENSE_INCLUDED"
+    #   resp.exadb_vm_cluster.listener_port #=> Integer
+    #   resp.exadb_vm_cluster.memory_size_in_g_bs #=> Integer
+    #   resp.exadb_vm_cluster.node_count #=> Integer
+    #   resp.exadb_vm_cluster.ocid #=> String
+    #   resp.exadb_vm_cluster.oci_resource_anchor_name #=> String
+    #   resp.exadb_vm_cluster.oci_url #=> String
+    #   resp.exadb_vm_cluster.odb_network_arn #=> String
+    #   resp.exadb_vm_cluster.odb_network_id #=> String
+    #   resp.exadb_vm_cluster.percent_progress #=> Float
+    #   resp.exadb_vm_cluster.scan_dns_name #=> String
+    #   resp.exadb_vm_cluster.scan_dns_record_id #=> String
+    #   resp.exadb_vm_cluster.scan_ip_ids #=> Array
+    #   resp.exadb_vm_cluster.scan_ip_ids[0] #=> String
+    #   resp.exadb_vm_cluster.scan_listener_port_tcp #=> Integer
+    #   resp.exadb_vm_cluster.scan_listener_port_tcp_ssl #=> Integer
+    #   resp.exadb_vm_cluster.shape #=> String
+    #   resp.exadb_vm_cluster.shape_attribute #=> String, one of "SMART_STORAGE", "BLOCK_STORAGE"
+    #   resp.exadb_vm_cluster.snapshot_file_system_storage.total_size_in_g_bs #=> Integer
+    #   resp.exadb_vm_cluster.ssh_public_keys #=> Array
+    #   resp.exadb_vm_cluster.ssh_public_keys[0] #=> String
+    #   resp.exadb_vm_cluster.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.exadb_vm_cluster.status_reason #=> String
+    #   resp.exadb_vm_cluster.system_version #=> String
+    #   resp.exadb_vm_cluster.time_zone #=> String
+    #   resp.exadb_vm_cluster.total_ecpu_count #=> Integer
+    #   resp.exadb_vm_cluster.total_file_system_storage.total_size_in_g_bs #=> Integer
+    #   resp.exadb_vm_cluster.vip_ids #=> Array
+    #   resp.exadb_vm_cluster.vip_ids[0] #=> String
+    #   resp.exadb_vm_cluster.vm_file_system_storage.total_size_in_g_bs #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetExadbVmCluster AWS API Documentation
+    #
+    # @overload get_exadb_vm_cluster(params = {})
+    # @param [Hash] params ({})
+    def get_exadb_vm_cluster(params = {}, options = {})
+      req = build_request(:get_exadb_vm_cluster, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the specified Exascale storage vault.
+    #
+    # @option params [required, String] :exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault.
+    #
+    # @return [Types::GetExascaleDbStorageVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExascaleDbStorageVaultOutput#exascale_db_storage_vault #exascale_db_storage_vault} => Types::ExascaleDbStorageVault
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_exascale_db_storage_vault({
+    #     exascale_db_storage_vault_id: "ResourceIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.exascale_db_storage_vault.exascale_db_storage_vault_id #=> String
+    #   resp.exascale_db_storage_vault.additional_flash_cache_in_percent #=> Integer
+    #   resp.exascale_db_storage_vault.attached_shape_attributes #=> Array
+    #   resp.exascale_db_storage_vault.attached_shape_attributes[0] #=> String, one of "SMART_STORAGE", "BLOCK_STORAGE"
+    #   resp.exascale_db_storage_vault.autoscale_limit_in_g_bs #=> Integer
+    #   resp.exascale_db_storage_vault.availability_zone #=> String
+    #   resp.exascale_db_storage_vault.availability_zone_id #=> String
+    #   resp.exascale_db_storage_vault.created_at #=> Time
+    #   resp.exascale_db_storage_vault.description #=> String
+    #   resp.exascale_db_storage_vault.display_name #=> String
+    #   resp.exascale_db_storage_vault.vm_cluster_arns #=> Array
+    #   resp.exascale_db_storage_vault.vm_cluster_arns[0] #=> String
+    #   resp.exascale_db_storage_vault.vm_cluster_count #=> Integer
+    #   resp.exascale_db_storage_vault.vm_cluster_ids #=> Array
+    #   resp.exascale_db_storage_vault.vm_cluster_ids[0] #=> String
+    #   resp.exascale_db_storage_vault.exascale_db_storage_vault_arn #=> String
+    #   resp.exascale_db_storage_vault.high_capacity_database_storage.available_size_in_g_bs #=> Integer
+    #   resp.exascale_db_storage_vault.high_capacity_database_storage.total_size_in_g_bs #=> Integer
+    #   resp.exascale_db_storage_vault.is_autoscale_enabled #=> Boolean
+    #   resp.exascale_db_storage_vault.ocid #=> String
+    #   resp.exascale_db_storage_vault.oci_resource_anchor_name #=> String
+    #   resp.exascale_db_storage_vault.oci_url #=> String
+    #   resp.exascale_db_storage_vault.percent_progress #=> Float
+    #   resp.exascale_db_storage_vault.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.exascale_db_storage_vault.status_reason #=> String
+    #   resp.exascale_db_storage_vault.time_zone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetExascaleDbStorageVault AWS API Documentation
+    #
+    # @overload get_exascale_db_storage_vault(params = {})
+    # @param [Hash] params ({})
+    def get_exascale_db_storage_vault(params = {}, options = {})
+      req = build_request(:get_exascale_db_storage_vault, params)
       req.send_request(options)
     end
 
@@ -3811,8 +4299,13 @@ module Aws::Odb
     #   The token returned from a previous paginated request. Pagination
     #   continues from the end of the items returned by the previous request.
     #
-    # @option params [required, String] :cloud_vm_cluster_id
-    #   The unique identifier of the VM cluster.
+    # @option params [String] :cloud_vm_cluster_id
+    #   The unique identifier of the VM cluster. You must specify either this
+    #   parameter or `exadbVmClusterId`.
+    #
+    # @option params [String] :exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster. You must specify
+    #   either this parameter or `cloudVmClusterId`.
     #
     # @return [Types::ListDbNodesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3826,7 +4319,8 @@ module Aws::Odb
     #   resp = client.list_db_nodes({
     #     max_results: 1,
     #     next_token: "ListDbNodesInputNextTokenString",
-    #     cloud_vm_cluster_id: "ResourceId", # required
+    #     cloud_vm_cluster_id: "ResourceId",
+    #     exadb_vm_cluster_id: "ResourceId",
     #   })
     #
     # @example Response structure
@@ -3963,6 +4457,9 @@ module Aws::Odb
     #   The physical ID of the AZ, for example, use1-az4. This ID persists
     #   across accounts.
     #
+    # @option params [String] :shape_family
+    #   The shape family to filter results by.
+    #
     # @return [Types::ListDbSystemShapesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDbSystemShapesOutput#next_token #next_token} => String
@@ -3977,6 +4474,7 @@ module Aws::Odb
     #     next_token: "ListDbSystemShapesInputNextTokenString",
     #     availability_zone: "ListDbSystemShapesInputAvailabilityZoneString",
     #     availability_zone_id: "ListDbSystemShapesInputAvailabilityZoneIdString",
+    #     shape_family: "ListDbSystemShapesInputShapeFamilyString",
     #   })
     #
     # @example Response structure
@@ -4004,6 +4502,8 @@ module Aws::Odb
     #   resp.db_system_shapes[0].runtime_minimum_core_count #=> Integer
     #   resp.db_system_shapes[0].shape_family #=> String
     #   resp.db_system_shapes[0].shape_type #=> String, one of "AMD", "INTEL", "INTEL_FLEX_X9", "AMPERE_FLEX_A1"
+    #   resp.db_system_shapes[0].shape_attributes #=> Array
+    #   resp.db_system_shapes[0].shape_attributes[0] #=> String, one of "SMART_STORAGE", "BLOCK_STORAGE"
     #   resp.db_system_shapes[0].name #=> String
     #   resp.db_system_shapes[0].compute_model #=> String, one of "ECPU", "OCPU"
     #   resp.db_system_shapes[0].are_server_types_supported #=> Boolean
@@ -4014,6 +4514,234 @@ module Aws::Odb
     # @param [Hash] params ({})
     def list_db_system_shapes(params = {}, options = {})
       req = build_request(:list_db_system_shapes, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the Exascale VM clusters owned by your
+    # Amazon Web Services account.
+    #
+    # @option params [String] :exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault to list the
+    #   associated Exascale VM clusters.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @return [Types::ListExadbVmClustersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExadbVmClustersOutput#next_token #next_token} => String
+    #   * {Types::ListExadbVmClustersOutput#exadb_vm_clusters #exadb_vm_clusters} => Array&lt;Types::ExadbVmClusterSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_exadb_vm_clusters({
+    #     exascale_db_storage_vault_id: "ResourceIdOrArn",
+    #     max_results: 1,
+    #     next_token: "ListExadbVmClustersInputNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.exadb_vm_clusters #=> Array
+    #   resp.exadb_vm_clusters[0].exadb_vm_cluster_id #=> String
+    #   resp.exadb_vm_clusters[0].cluster_name #=> String
+    #   resp.exadb_vm_clusters[0].created_at #=> Time
+    #   resp.exadb_vm_clusters[0].data_collection_options.is_diagnostics_events_enabled #=> Boolean
+    #   resp.exadb_vm_clusters[0].data_collection_options.is_health_monitoring_enabled #=> Boolean
+    #   resp.exadb_vm_clusters[0].data_collection_options.is_incident_logs_enabled #=> Boolean
+    #   resp.exadb_vm_clusters[0].display_name #=> String
+    #   resp.exadb_vm_clusters[0].domain #=> String
+    #   resp.exadb_vm_clusters[0].enabled_ecpu_count #=> Integer
+    #   resp.exadb_vm_clusters[0].exadb_vm_cluster_arn #=> String
+    #   resp.exadb_vm_clusters[0].exascale_db_storage_vault_arn #=> String
+    #   resp.exadb_vm_clusters[0].exascale_db_storage_vault_id #=> String
+    #   resp.exadb_vm_clusters[0].gi_version #=> String
+    #   resp.exadb_vm_clusters[0].grid_image_id #=> String
+    #   resp.exadb_vm_clusters[0].grid_image_type #=> String, one of "RELEASE_UPDATE", "CUSTOM_IMAGE"
+    #   resp.exadb_vm_clusters[0].hostname #=> String
+    #   resp.exadb_vm_clusters[0].iam_roles #=> Array
+    #   resp.exadb_vm_clusters[0].iam_roles[0].iam_role_arn #=> String
+    #   resp.exadb_vm_clusters[0].iam_roles[0].status #=> String, one of "ASSOCIATING", "DISASSOCIATING", "FAILED", "CONNECTED", "DISCONNECTED", "PARTIALLY_CONNECTED", "UNKNOWN"
+    #   resp.exadb_vm_clusters[0].iam_roles[0].status_reason #=> String
+    #   resp.exadb_vm_clusters[0].iam_roles[0].aws_integration #=> String, one of "KmsTde"
+    #   resp.exadb_vm_clusters[0].iorm_config_cache.db_plans #=> Array
+    #   resp.exadb_vm_clusters[0].iorm_config_cache.db_plans[0].db_name #=> String
+    #   resp.exadb_vm_clusters[0].iorm_config_cache.db_plans[0].flash_cache_limit #=> String
+    #   resp.exadb_vm_clusters[0].iorm_config_cache.db_plans[0].share #=> Integer
+    #   resp.exadb_vm_clusters[0].iorm_config_cache.lifecycle_details #=> String
+    #   resp.exadb_vm_clusters[0].iorm_config_cache.lifecycle_state #=> String, one of "BOOTSTRAPPING", "DISABLED", "ENABLED", "FAILED", "UPDATING"
+    #   resp.exadb_vm_clusters[0].iorm_config_cache.objective #=> String, one of "AUTO", "BALANCED", "BASIC", "HIGH_THROUGHPUT", "LOW_LATENCY"
+    #   resp.exadb_vm_clusters[0].last_update_history_entry_id #=> String
+    #   resp.exadb_vm_clusters[0].license_model #=> String, one of "BRING_YOUR_OWN_LICENSE", "LICENSE_INCLUDED"
+    #   resp.exadb_vm_clusters[0].listener_port #=> Integer
+    #   resp.exadb_vm_clusters[0].memory_size_in_g_bs #=> Integer
+    #   resp.exadb_vm_clusters[0].node_count #=> Integer
+    #   resp.exadb_vm_clusters[0].ocid #=> String
+    #   resp.exadb_vm_clusters[0].oci_resource_anchor_name #=> String
+    #   resp.exadb_vm_clusters[0].oci_url #=> String
+    #   resp.exadb_vm_clusters[0].odb_network_arn #=> String
+    #   resp.exadb_vm_clusters[0].odb_network_id #=> String
+    #   resp.exadb_vm_clusters[0].percent_progress #=> Float
+    #   resp.exadb_vm_clusters[0].scan_dns_name #=> String
+    #   resp.exadb_vm_clusters[0].scan_dns_record_id #=> String
+    #   resp.exadb_vm_clusters[0].scan_ip_ids #=> Array
+    #   resp.exadb_vm_clusters[0].scan_ip_ids[0] #=> String
+    #   resp.exadb_vm_clusters[0].scan_listener_port_tcp #=> Integer
+    #   resp.exadb_vm_clusters[0].scan_listener_port_tcp_ssl #=> Integer
+    #   resp.exadb_vm_clusters[0].shape #=> String
+    #   resp.exadb_vm_clusters[0].shape_attribute #=> String, one of "SMART_STORAGE", "BLOCK_STORAGE"
+    #   resp.exadb_vm_clusters[0].snapshot_file_system_storage.total_size_in_g_bs #=> Integer
+    #   resp.exadb_vm_clusters[0].ssh_public_keys #=> Array
+    #   resp.exadb_vm_clusters[0].ssh_public_keys[0] #=> String
+    #   resp.exadb_vm_clusters[0].status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.exadb_vm_clusters[0].status_reason #=> String
+    #   resp.exadb_vm_clusters[0].system_version #=> String
+    #   resp.exadb_vm_clusters[0].time_zone #=> String
+    #   resp.exadb_vm_clusters[0].total_ecpu_count #=> Integer
+    #   resp.exadb_vm_clusters[0].total_file_system_storage.total_size_in_g_bs #=> Integer
+    #   resp.exadb_vm_clusters[0].vip_ids #=> Array
+    #   resp.exadb_vm_clusters[0].vip_ids[0] #=> String
+    #   resp.exadb_vm_clusters[0].vm_file_system_storage.total_size_in_g_bs #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListExadbVmClusters AWS API Documentation
+    #
+    # @overload list_exadb_vm_clusters(params = {})
+    # @param [Hash] params ({})
+    def list_exadb_vm_clusters(params = {}, options = {})
+      req = build_request(:list_exadb_vm_clusters, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the Exascale storage vaults owned by your
+    # Amazon Web Services account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @return [Types::ListExascaleDbStorageVaultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExascaleDbStorageVaultsOutput#next_token #next_token} => String
+    #   * {Types::ListExascaleDbStorageVaultsOutput#exascale_db_storage_vaults #exascale_db_storage_vaults} => Array&lt;Types::ExascaleDbStorageVaultSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_exascale_db_storage_vaults({
+    #     max_results: 1,
+    #     next_token: "ListExascaleDbStorageVaultsInputNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.exascale_db_storage_vaults #=> Array
+    #   resp.exascale_db_storage_vaults[0].exascale_db_storage_vault_id #=> String
+    #   resp.exascale_db_storage_vaults[0].additional_flash_cache_in_percent #=> Integer
+    #   resp.exascale_db_storage_vaults[0].attached_shape_attributes #=> Array
+    #   resp.exascale_db_storage_vaults[0].attached_shape_attributes[0] #=> String, one of "SMART_STORAGE", "BLOCK_STORAGE"
+    #   resp.exascale_db_storage_vaults[0].autoscale_limit_in_g_bs #=> Integer
+    #   resp.exascale_db_storage_vaults[0].availability_zone #=> String
+    #   resp.exascale_db_storage_vaults[0].availability_zone_id #=> String
+    #   resp.exascale_db_storage_vaults[0].created_at #=> Time
+    #   resp.exascale_db_storage_vaults[0].description #=> String
+    #   resp.exascale_db_storage_vaults[0].display_name #=> String
+    #   resp.exascale_db_storage_vaults[0].vm_cluster_arns #=> Array
+    #   resp.exascale_db_storage_vaults[0].vm_cluster_arns[0] #=> String
+    #   resp.exascale_db_storage_vaults[0].vm_cluster_count #=> Integer
+    #   resp.exascale_db_storage_vaults[0].vm_cluster_ids #=> Array
+    #   resp.exascale_db_storage_vaults[0].vm_cluster_ids[0] #=> String
+    #   resp.exascale_db_storage_vaults[0].exascale_db_storage_vault_arn #=> String
+    #   resp.exascale_db_storage_vaults[0].high_capacity_database_storage.available_size_in_g_bs #=> Integer
+    #   resp.exascale_db_storage_vaults[0].high_capacity_database_storage.total_size_in_g_bs #=> Integer
+    #   resp.exascale_db_storage_vaults[0].is_autoscale_enabled #=> Boolean
+    #   resp.exascale_db_storage_vaults[0].ocid #=> String
+    #   resp.exascale_db_storage_vaults[0].oci_resource_anchor_name #=> String
+    #   resp.exascale_db_storage_vaults[0].oci_url #=> String
+    #   resp.exascale_db_storage_vaults[0].percent_progress #=> Float
+    #   resp.exascale_db_storage_vaults[0].status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.exascale_db_storage_vaults[0].status_reason #=> String
+    #   resp.exascale_db_storage_vaults[0].time_zone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListExascaleDbStorageVaults AWS API Documentation
+    #
+    # @overload list_exascale_db_storage_vaults(params = {})
+    # @param [Hash] params ({})
+    def list_exascale_db_storage_vaults(params = {}, options = {})
+      req = build_request(:list_exascale_db_storage_vaults, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the Oracle Grid Infrastructure (GI) minor versions
+    # for the specified major version.
+    #
+    # @option params [required, String] :gi_version
+    #   The Oracle Grid Infrastructure (GI) major version.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [String] :shape_family
+    #   The shape family for the GI minor version.
+    #
+    # @option params [String] :availability_zone
+    #   The Availability Zone to filter GI minor versions.
+    #
+    # @option params [String] :availability_zone_id
+    #   The Availability Zone ID to filter GI minor versions.
+    #
+    # @return [Types::ListGiMinorVersionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGiMinorVersionsOutput#next_token #next_token} => String
+    #   * {Types::ListGiMinorVersionsOutput#gi_minor_versions #gi_minor_versions} => Array&lt;Types::GiMinorVersionSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_gi_minor_versions({
+    #     gi_version: "ListGiMinorVersionsInputGiVersionString", # required
+    #     max_results: 1,
+    #     next_token: "ListGiMinorVersionsInputNextTokenString",
+    #     shape_family: "ListGiMinorVersionsInputShapeFamilyString",
+    #     availability_zone: "ListGiMinorVersionsInputAvailabilityZoneString",
+    #     availability_zone_id: "ListGiMinorVersionsInputAvailabilityZoneIdString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.gi_minor_versions #=> Array
+    #   resp.gi_minor_versions[0].version #=> String
+    #   resp.gi_minor_versions[0].grid_image_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListGiMinorVersions AWS API Documentation
+    #
+    # @overload list_gi_minor_versions(params = {})
+    # @param [Hash] params ({})
+    def list_gi_minor_versions(params = {}, options = {})
+      req = build_request(:list_gi_minor_versions, params)
       req.send_request(options)
     end
 
@@ -4351,9 +5079,14 @@ module Aws::Odb
 
     # Reboots the specified DB node in a VM cluster.
     #
-    # @option params [required, String] :cloud_vm_cluster_id
+    # @option params [String] :cloud_vm_cluster_id
     #   The unique identifier of the VM cluster that contains the DB node to
-    #   reboot.
+    #   reboot. You must specify either this parameter or `exadbVmClusterId`.
+    #
+    # @option params [String] :exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster that contains the DB
+    #   node to reboot. You must specify either this parameter or
+    #   `cloudVmClusterId`.
     #
     # @option params [required, String] :db_node_id
     #   The unique identifier of the DB node to reboot.
@@ -4367,7 +5100,8 @@ module Aws::Odb
     # @example Request syntax with placeholder values
     #
     #   resp = client.reboot_db_node({
-    #     cloud_vm_cluster_id: "ResourceId", # required
+    #     cloud_vm_cluster_id: "ResourceId",
+    #     exadb_vm_cluster_id: "ResourceId",
     #     db_node_id: "ResourceId", # required
     #   })
     #
@@ -4495,9 +5229,14 @@ module Aws::Odb
 
     # Starts the specified DB node in a VM cluster.
     #
-    # @option params [required, String] :cloud_vm_cluster_id
+    # @option params [String] :cloud_vm_cluster_id
     #   The unique identifier of the VM cluster that contains the DB node to
-    #   start.
+    #   start. You must specify either this parameter or `exadbVmClusterId`.
+    #
+    # @option params [String] :exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster that contains the DB
+    #   node to start. You must specify either this parameter or
+    #   `cloudVmClusterId`.
     #
     # @option params [required, String] :db_node_id
     #   The unique identifier of the DB node to start.
@@ -4511,7 +5250,8 @@ module Aws::Odb
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_db_node({
-    #     cloud_vm_cluster_id: "ResourceId", # required
+    #     cloud_vm_cluster_id: "ResourceId",
+    #     exadb_vm_cluster_id: "ResourceId",
     #     db_node_id: "ResourceId", # required
     #   })
     #
@@ -4566,9 +5306,14 @@ module Aws::Odb
 
     # Stops the specified DB node in a VM cluster.
     #
-    # @option params [required, String] :cloud_vm_cluster_id
+    # @option params [String] :cloud_vm_cluster_id
     #   The unique identifier of the VM cluster that contains the DB node to
-    #   stop.
+    #   stop. You must specify either this parameter or `exadbVmClusterId`.
+    #
+    # @option params [String] :exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster that contains the DB
+    #   node to stop. You must specify either this parameter or
+    #   `cloudVmClusterId`.
     #
     # @option params [required, String] :db_node_id
     #   The unique identifier of the DB node to stop.
@@ -4582,7 +5327,8 @@ module Aws::Odb
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_db_node({
-    #     cloud_vm_cluster_id: "ResourceId", # required
+    #     cloud_vm_cluster_id: "ResourceId",
+    #     exadb_vm_cluster_id: "ResourceId",
     #     db_node_id: "ResourceId", # required
     #   })
     #
@@ -5072,6 +5818,148 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Updates the specified Exascale VM cluster.
+    #
+    # @option params [required, String] :exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster to update.
+    #
+    # @option params [Types::DataCollectionOptions] :data_collection_options
+    #   The set of preferences for the various diagnostic collection options
+    #   for the Exascale VM cluster.
+    #
+    # @option params [String] :display_name
+    #   A new user-friendly name for the Exascale VM cluster.
+    #
+    # @option params [Integer] :enabled_ecpu_count
+    #   The number of ECPUs to enable for the Exascale VM cluster.
+    #
+    # @option params [String] :grid_image_id
+    #   The Grid Infrastructure software image ID for the Exascale VM cluster.
+    #
+    # @option params [String] :license_model
+    #   The Oracle license model to apply to the Exascale VM cluster.
+    #
+    # @option params [Array<String>] :ssh_public_keys
+    #   The public key portion of one or more key pairs used for SSH access to
+    #   the Exascale VM cluster.
+    #
+    # @option params [String] :system_version
+    #   The version of the operating system of the image for the Exascale VM
+    #   cluster.
+    #
+    # @option params [Integer] :total_ecpu_count
+    #   The total number of ECPUs for the Exascale VM cluster.
+    #
+    # @option params [String] :update_action
+    #   The update action to perform on the Exascale VM cluster.
+    #
+    # @option params [Integer] :vm_file_system_storage_total_size_in_g_bs
+    #   The total amount of file system storage, in gigabytes (GB), for the
+    #   Exascale VM cluster.
+    #
+    # @return [Types::UpdateExadbVmClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateExadbVmClusterOutput#display_name #display_name} => String
+    #   * {Types::UpdateExadbVmClusterOutput#status #status} => String
+    #   * {Types::UpdateExadbVmClusterOutput#status_reason #status_reason} => String
+    #   * {Types::UpdateExadbVmClusterOutput#exadb_vm_cluster_id #exadb_vm_cluster_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_exadb_vm_cluster({
+    #     exadb_vm_cluster_id: "ResourceIdOrArn", # required
+    #     data_collection_options: {
+    #       is_diagnostics_events_enabled: false,
+    #       is_health_monitoring_enabled: false,
+    #       is_incident_logs_enabled: false,
+    #     },
+    #     display_name: "ResourceDisplayName",
+    #     enabled_ecpu_count: 1,
+    #     grid_image_id: "UpdateExadbVmClusterInputGridImageIdString",
+    #     license_model: "BRING_YOUR_OWN_LICENSE", # accepts BRING_YOUR_OWN_LICENSE, LICENSE_INCLUDED
+    #     ssh_public_keys: ["String"],
+    #     system_version: "UpdateExadbVmClusterInputSystemVersionString",
+    #     total_ecpu_count: 1,
+    #     update_action: "ROLLING_APPLY", # accepts ROLLING_APPLY, NON_ROLLING_APPLY, PRECHECK, ROLLBACK
+    #     vm_file_system_storage_total_size_in_g_bs: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.exadb_vm_cluster_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateExadbVmCluster AWS API Documentation
+    #
+    # @overload update_exadb_vm_cluster(params = {})
+    # @param [Hash] params ({})
+    def update_exadb_vm_cluster(params = {}, options = {})
+      req = build_request(:update_exadb_vm_cluster, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified Exascale storage vault.
+    #
+    # @option params [required, String] :exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault to update.
+    #
+    # @option params [Integer] :additional_flash_cache_in_percent
+    #   The additional flash cache percentage for the Exascale storage vault.
+    #
+    # @option params [Integer] :autoscale_limit_in_g_bs
+    #   The autoscale limit in gigabytes (GB) for the Exascale storage vault.
+    #
+    # @option params [String] :description
+    #   A new description for the Exascale storage vault.
+    #
+    # @option params [String] :display_name
+    #   A new user-friendly name for the Exascale storage vault.
+    #
+    # @option params [Integer] :high_capacity_database_storage_total_size_in_g_bs
+    #   The total size of the high-capacity database storage, in gigabytes
+    #   (GB), for the Exascale storage vault.
+    #
+    # @option params [Boolean] :is_autoscale_enabled
+    #   Specifies whether autoscaling is enabled for the Exascale storage
+    #   vault.
+    #
+    # @return [Types::UpdateExascaleDbStorageVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateExascaleDbStorageVaultOutput#display_name #display_name} => String
+    #   * {Types::UpdateExascaleDbStorageVaultOutput#status #status} => String
+    #   * {Types::UpdateExascaleDbStorageVaultOutput#status_reason #status_reason} => String
+    #   * {Types::UpdateExascaleDbStorageVaultOutput#exascale_db_storage_vault_id #exascale_db_storage_vault_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_exascale_db_storage_vault({
+    #     exascale_db_storage_vault_id: "ResourceIdOrArn", # required
+    #     additional_flash_cache_in_percent: 1,
+    #     autoscale_limit_in_g_bs: 1,
+    #     description: "UpdateExascaleDbStorageVaultInputDescriptionString",
+    #     display_name: "ResourceDisplayName",
+    #     high_capacity_database_storage_total_size_in_g_bs: 1,
+    #     is_autoscale_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.exascale_db_storage_vault_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateExascaleDbStorageVault AWS API Documentation
+    #
+    # @overload update_exascale_db_storage_vault(params = {})
+    # @param [Hash] params ({})
+    def update_exascale_db_storage_vault(params = {}, options = {})
+      req = build_request(:update_exascale_db_storage_vault, params)
+      req.send_request(options)
+    end
+
     # Updates properties of a specified ODB network.
     #
     # @option params [required, String] :odb_network_id
@@ -5237,7 +6125,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

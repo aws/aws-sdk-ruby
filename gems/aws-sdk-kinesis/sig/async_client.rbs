@@ -52,6 +52,7 @@ module Aws
                       ?use_dualstack_endpoint: bool,
                       ?use_fips_endpoint: bool,
                       ?validate_params: bool,
+                      ?account_id_endpoint_mode: String,
                       ?endpoint_provider: untyped,
                       ?connection_read_timeout: (Float | Integer),
                       ?connection_timeout: (Float | Integer),

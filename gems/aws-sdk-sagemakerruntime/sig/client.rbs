@@ -103,7 +103,8 @@ module Aws
                              ?inference_id: ::String,
                              ?enable_explanations: ::String,
                              ?inference_component_name: ::String,
-                             ?session_id: ::String
+                             ?session_id: ::String,
+                             ?prefix_aware_id: ::String
                            ) -> _InvokeEndpointResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeEndpointResponseSuccess
 
@@ -147,7 +148,8 @@ module Aws
                                                   ?target_container_hostname: ::String,
                                                   ?inference_id: ::String,
                                                   ?inference_component_name: ::String,
-                                                  ?session_id: ::String
+                                                  ?session_id: ::String,
+                                                  ?prefix_aware_id: ::String
                                                 ) ?{ (*untyped) -> void } -> _InvokeEndpointWithResponseStreamResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeEndpointWithResponseStreamResponseSuccess
     end

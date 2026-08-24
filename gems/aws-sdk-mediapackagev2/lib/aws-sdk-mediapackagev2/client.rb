@@ -1140,6 +1140,16 @@ module Aws::MediaPackageV2
     #   endpoint. This setting applies to all manifest types on the endpoint.
     #   If you don't specify a value, the default is `UNDERSCORE`.
     #
+    # @option params [String] :stream_name_output_mode
+    #   The output mode for stream names in egress manifests. This setting is
+    #   valid only when the associated channel's `InputType` is `HLS`. You
+    #   can't change the stream name output mode after you create the
+    #   endpoint.
+    #
+    #   `INDEX` uses numeric indices for stream names (for example, 1, 2, 3).
+    #   `PASSTHROUGH_NAME` uses the stream names from the input manifest. If
+    #   you don't specify a value, the default is `INDEX`.
+    #
     # @option params [Hash<String,String>] :tags
     #   A comma-separated list of tag key:value pairs that you define. For
     #   example:
@@ -1166,6 +1176,7 @@ module Aws::MediaPackageV2
     #   * {Types::CreateOriginEndpointResponse#mss_manifests #mss_manifests} => Array&lt;Types::GetMssManifestConfiguration&gt;
     #   * {Types::CreateOriginEndpointResponse#force_endpoint_error_configuration #force_endpoint_error_configuration} => Types::ForceEndpointErrorConfiguration
     #   * {Types::CreateOriginEndpointResponse#uri_separator #uri_separator} => String
+    #   * {Types::CreateOriginEndpointResponse#stream_name_output_mode #stream_name_output_mode} => String
     #   * {Types::CreateOriginEndpointResponse#etag #etag} => String
     #   * {Types::CreateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -1262,6 +1273,7 @@ module Aws::MediaPackageV2
     #       ts_use_audio_rendition_group: true, 
     #     }, 
     #     startover_window_seconds: 300, 
+    #     stream_name_output_mode: "INDEX", 
     #     tags: {
     #       "key1" => "value1", 
     #       "key2" => "value2", 
@@ -1370,6 +1382,7 @@ module Aws::MediaPackageV2
     #       ts_use_audio_rendition_group: true, 
     #     }, 
     #     startover_window_seconds: 300, 
+    #     stream_name_output_mode: "INDEX", 
     #     tags: {
     #       "key1" => "value1", 
     #       "key2" => "value2", 
@@ -2095,6 +2108,7 @@ module Aws::MediaPackageV2
     #       endpoint_error_conditions: ["STALE_MANIFEST"], # accepts STALE_MANIFEST, INCOMPLETE_MANIFEST, MISSING_DRM_KEY, SLATE_INPUT
     #     },
     #     uri_separator: "UNDERSCORE", # accepts UNDERSCORE, HYPHEN
+    #     stream_name_output_mode: "INDEX", # accepts INDEX, PASSTHROUGH_NAME
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -2230,6 +2244,7 @@ module Aws::MediaPackageV2
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.uri_separator #=> String, one of "UNDERSCORE", "HYPHEN"
+    #   resp.stream_name_output_mode #=> String, one of "INDEX", "PASSTHROUGH_NAME"
     #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -2902,6 +2917,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetOriginEndpointResponse#mss_manifests #mss_manifests} => Array&lt;Types::GetMssManifestConfiguration&gt;
     #   * {Types::GetOriginEndpointResponse#force_endpoint_error_configuration #force_endpoint_error_configuration} => Types::ForceEndpointErrorConfiguration
     #   * {Types::GetOriginEndpointResponse#uri_separator #uri_separator} => String
+    #   * {Types::GetOriginEndpointResponse#stream_name_output_mode #stream_name_output_mode} => String
     #   * {Types::GetOriginEndpointResponse#etag #etag} => String
     #   * {Types::GetOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -3231,6 +3247,7 @@ module Aws::MediaPackageV2
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.uri_separator #=> String, one of "UNDERSCORE", "HYPHEN"
+    #   resp.stream_name_output_mode #=> String, one of "INDEX", "PASSTHROUGH_NAME"
     #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -4049,6 +4066,7 @@ module Aws::MediaPackageV2
     #   resp.items[0].force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.items[0].force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.items[0].uri_separator #=> String, one of "UNDERSCORE", "HYPHEN"
+    #   resp.items[0].stream_name_output_mode #=> String, one of "INDEX", "PASSTHROUGH_NAME"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListOriginEndpoints AWS API Documentation
@@ -4769,6 +4787,11 @@ module Aws::MediaPackageV2
     #   If you don't specify a value in the update request, the current value
     #   is preserved.
     #
+    # @option params [String] :stream_name_output_mode
+    #   The output mode for stream names in egress manifests. If you provide a
+    #   value, it must match the current value. You can't change the stream
+    #   name output mode after you create the endpoint.
+    #
     # @option params [String] :etag
     #   The expected current Entity Tag (ETag) for the resource. If the
     #   specified ETag does not match the resource's current entity tag, the
@@ -4791,6 +4814,7 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateOriginEndpointResponse#mss_manifests #mss_manifests} => Array&lt;Types::GetMssManifestConfiguration&gt;
     #   * {Types::UpdateOriginEndpointResponse#force_endpoint_error_configuration #force_endpoint_error_configuration} => Types::ForceEndpointErrorConfiguration
     #   * {Types::UpdateOriginEndpointResponse#uri_separator #uri_separator} => String
+    #   * {Types::UpdateOriginEndpointResponse#stream_name_output_mode #stream_name_output_mode} => String
     #   * {Types::UpdateOriginEndpointResponse#etag #etag} => String
     #   * {Types::UpdateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::UpdateOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
@@ -5296,6 +5320,7 @@ module Aws::MediaPackageV2
     #       endpoint_error_conditions: ["STALE_MANIFEST"], # accepts STALE_MANIFEST, INCOMPLETE_MANIFEST, MISSING_DRM_KEY, SLATE_INPUT
     #     },
     #     uri_separator: "UNDERSCORE", # accepts UNDERSCORE, HYPHEN
+    #     stream_name_output_mode: "INDEX", # accepts INDEX, PASSTHROUGH_NAME
     #     etag: "EntityTag",
     #   })
     #
@@ -5385,6 +5410,7 @@ module Aws::MediaPackageV2
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.uri_separator #=> String, one of "UNDERSCORE", "HYPHEN"
+    #   resp.stream_name_output_mode #=> String, one of "INDEX", "PASSTHROUGH_NAME"
     #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -5460,7 +5486,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

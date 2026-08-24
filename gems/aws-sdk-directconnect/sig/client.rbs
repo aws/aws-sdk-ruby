@@ -122,6 +122,10 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_connection_on_interconnect-instance_method
       def allocate_connection_on_interconnect: (
@@ -159,6 +163,10 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_hosted_connection-instance_method
       def allocate_hosted_connection: (
@@ -205,6 +213,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_private_virtual_interface-instance_method
@@ -261,6 +271,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_public_virtual_interface-instance_method
@@ -347,6 +359,10 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_connection_with_lag-instance_method
       def associate_connection_with_lag: (
@@ -381,6 +397,10 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_hosted_connection-instance_method
       def associate_hosted_connection: (
@@ -432,6 +452,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_virtual_interface-instance_method
@@ -538,6 +560,10 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_connection-instance_method
       def create_connection: (
@@ -674,6 +700,10 @@ module Aws
         def mac_sec_capable: () -> bool
         def encryption_mode: () -> ::String
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
         def rate_limiter_status: () -> Types::RateLimiterStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_lag-instance_method
@@ -729,6 +759,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_private_virtual_interface-instance_method
@@ -753,6 +785,8 @@ module Aws
                                                   }
                                                 ]?,
                                                 enable_site_link: bool?,
+                                                prefix_pool_allocated_count_ipv_4: ::Integer?,
+                                                prefix_pool_allocated_count_ipv_6: ::Integer?,
                                                 rate_limit: ::String?
                                               }
                                             ) -> _CreatePrivateVirtualInterfaceResponseSuccess
@@ -787,6 +821,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_public_virtual_interface-instance_method
@@ -842,6 +878,8 @@ module Aws
                                                   }
                                                 ]?,
                                                 enable_site_link: bool?,
+                                                prefix_pool_allocated_count_ipv_4: ::Integer?,
+                                                prefix_pool_allocated_count_ipv_6: ::Integer?,
                                                 rate_limit: ::String?
                                               }
                                             ) -> _CreateTransitVirtualInterfaceResponseSuccess
@@ -887,6 +925,10 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_connection-instance_method
       def delete_connection: (
@@ -959,6 +1001,10 @@ module Aws
         def mac_sec_capable: () -> bool
         def encryption_mode: () -> ::String
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
         def rate_limiter_status: () -> Types::RateLimiterStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_lag-instance_method
@@ -1224,6 +1270,10 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#disassociate_connection_from_lag-instance_method
       def disassociate_connection_from_lag: (
@@ -1243,6 +1293,27 @@ module Aws
                                       secret_arn: ::String
                                     ) -> _DisassociateMacSecKeyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMacSecKeyResponseSuccess
+
+      interface _ListVirtualInterfaceRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualInterfaceRoutesResponse]
+        def virtual_interface_id: () -> ::String
+        def routes: () -> ::Array[Types::Route]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#list_virtual_interface_routes-instance_method
+      def list_virtual_interface_routes: (
+                                           ?virtual_interface_id: ::String,
+                                           ?filters: {
+                                             route_direction: ("accepted" | "advertised")?,
+                                             address_family: ("ipv4" | "ipv6")?,
+                                             cidrs: Array[::String]?,
+                                             as_path: Array[::Integer]?,
+                                             communities: Array[::String]?
+                                           },
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListVirtualInterfaceRoutesResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualInterfaceRoutesResponseSuccess
 
       interface _ListVirtualInterfaceTestHistoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualInterfaceTestHistoryResponse]
@@ -1333,6 +1404,10 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_connection-instance_method
       def update_connection: (
@@ -1396,6 +1471,10 @@ module Aws
         def mac_sec_capable: () -> bool
         def encryption_mode: () -> ::String
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
         def rate_limiter_status: () -> Types::RateLimiterStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_lag-instance_method
@@ -1436,6 +1515,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_virtual_interface_attributes-instance_method
@@ -1444,6 +1525,8 @@ module Aws
                                                  ?mtu: ::Integer,
                                                  ?enable_site_link: bool,
                                                  ?virtual_interface_name: ::String,
+                                                 ?prefix_pool_allocated_count_ipv_4: ::Integer,
+                                                 ?prefix_pool_allocated_count_ipv_6: ::Integer,
                                                  ?rate_limit: ::String
                                                ) -> _UpdateVirtualInterfaceAttributesResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVirtualInterfaceAttributesResponseSuccess

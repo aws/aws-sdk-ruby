@@ -323,6 +323,8 @@ module Aws::CloudWatchLogs
     ImportStatus = Shapes::StringShape.new(name: 'ImportStatus')
     ImportStatusList = Shapes::ListShape.new(name: 'ImportStatusList')
     IncludeLinkedAccounts = Shapes::BooleanShape.new(name: 'IncludeLinkedAccounts')
+    IndexCategories = Shapes::ListShape.new(name: 'IndexCategories')
+    IndexCategory = Shapes::StringShape.new(name: 'IndexCategory')
     IndexPolicies = Shapes::ListShape.new(name: 'IndexPolicies')
     IndexPolicy = Shapes::StructureShape.new(name: 'IndexPolicy')
     IndexSource = Shapes::StringShape.new(name: 'IndexSource')
@@ -425,6 +427,7 @@ module Aws::CloudWatchLogs
     LogType = Shapes::StringShape.new(name: 'LogType')
     LogTypes = Shapes::ListShape.new(name: 'LogTypes')
     LookupTable = Shapes::StructureShape.new(name: 'LookupTable')
+    LookupTableConfiguration = Shapes::StructureShape.new(name: 'LookupTableConfiguration')
     LookupTableDescription = Shapes::StringShape.new(name: 'LookupTableDescription')
     LookupTableName = Shapes::StringShape.new(name: 'LookupTableName')
     LookupTables = Shapes::ListShape.new(name: 'LookupTables')
@@ -906,7 +909,8 @@ module Aws::CloudWatchLogs
 
     CreateLookupTableRequest.add_member(:lookup_table_name, Shapes::ShapeRef.new(shape: LookupTableName, required: true, location_name: "lookupTableName"))
     CreateLookupTableRequest.add_member(:description, Shapes::ShapeRef.new(shape: LookupTableDescription, location_name: "description"))
-    CreateLookupTableRequest.add_member(:table_body, Shapes::ShapeRef.new(shape: TableBody, required: true, location_name: "tableBody"))
+    CreateLookupTableRequest.add_member(:table_body, Shapes::ShapeRef.new(shape: TableBody, location_name: "tableBody"))
+    CreateLookupTableRequest.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "queryId"))
     CreateLookupTableRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateLookupTableRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateLookupTableRequest.struct_class = Types::CreateLookupTableRequest
@@ -1169,6 +1173,7 @@ module Aws::CloudWatchLogs
     DescribeFieldIndexesLogGroupIdentifiers.member = Shapes::ShapeRef.new(shape: LogGroupIdentifier)
 
     DescribeFieldIndexesRequest.add_member(:log_group_identifiers, Shapes::ShapeRef.new(shape: DescribeFieldIndexesLogGroupIdentifiers, required: true, location_name: "logGroupIdentifiers"))
+    DescribeFieldIndexesRequest.add_member(:index_categories, Shapes::ShapeRef.new(shape: IndexCategories, location_name: "indexCategories"))
     DescribeFieldIndexesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeFieldIndexesRequest.struct_class = Types::DescribeFieldIndexesRequest
 
@@ -1308,7 +1313,8 @@ module Aws::CloudWatchLogs
     Destination.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     Destination.struct_class = Types::Destination
 
-    DestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3Configuration, required: true, location_name: "s3Configuration"))
+    DestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3Configuration, location_name: "s3Configuration"))
+    DestinationConfiguration.add_member(:lookup_table_configuration, Shapes::ShapeRef.new(shape: LookupTableConfiguration, location_name: "lookupTableConfiguration"))
     DestinationConfiguration.struct_class = Types::DestinationConfiguration
 
     Destinations.member = Shapes::ShapeRef.new(shape: Destination)
@@ -1373,6 +1379,7 @@ module Aws::CloudWatchLogs
     FieldIndex.add_member(:first_event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "firstEventTime"))
     FieldIndex.add_member(:last_event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastEventTime"))
     FieldIndex.add_member(:type, Shapes::ShapeRef.new(shape: IndexType, location_name: "type"))
+    FieldIndex.add_member(:index_category, Shapes::ShapeRef.new(shape: IndexCategory, location_name: "indexCategory"))
     FieldIndex.struct_class = Types::FieldIndex
 
     FieldIndexNames.member = Shapes::ShapeRef.new(shape: FieldIndexName)
@@ -1634,6 +1641,8 @@ module Aws::CloudWatchLogs
     ImportStatistics.struct_class = Types::ImportStatistics
 
     ImportStatusList.member = Shapes::ShapeRef.new(shape: ImportStatus)
+
+    IndexCategories.member = Shapes::ShapeRef.new(shape: IndexCategory)
 
     IndexPolicies.member = Shapes::ShapeRef.new(shape: IndexPolicy)
 
@@ -1898,6 +1907,13 @@ module Aws::CloudWatchLogs
     LookupTable.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
     LookupTable.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     LookupTable.struct_class = Types::LookupTable
+
+    LookupTableConfiguration.add_member(:table_name, Shapes::ShapeRef.new(shape: LookupTableName, required: true, location_name: "tableName"))
+    LookupTableConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    LookupTableConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: LookupTableDescription, location_name: "description"))
+    LookupTableConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    LookupTableConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    LookupTableConfiguration.struct_class = Types::LookupTableConfiguration
 
     LookupTables.member = Shapes::ShapeRef.new(shape: LookupTable)
 
@@ -2609,7 +2625,8 @@ module Aws::CloudWatchLogs
 
     UpdateLookupTableRequest.add_member(:lookup_table_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "lookupTableArn"))
     UpdateLookupTableRequest.add_member(:description, Shapes::ShapeRef.new(shape: LookupTableDescription, location_name: "description"))
-    UpdateLookupTableRequest.add_member(:table_body, Shapes::ShapeRef.new(shape: TableBody, required: true, location_name: "tableBody"))
+    UpdateLookupTableRequest.add_member(:table_body, Shapes::ShapeRef.new(shape: TableBody, location_name: "tableBody"))
+    UpdateLookupTableRequest.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "queryId"))
     UpdateLookupTableRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     UpdateLookupTableRequest.struct_class = Types::UpdateLookupTableRequest
 

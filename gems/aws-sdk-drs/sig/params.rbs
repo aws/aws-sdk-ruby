@@ -1,0 +1,27 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Drs
+    module Params
+      type recovery_plan_step_configuration = {
+      server_step_configuration: {
+        servers: Array[
+          {
+            server_arn: ::String,
+            impact_level: ("CRITICAL" | "OPTIONAL")?
+          }
+        ]
+      }?,
+      wait_step_configuration: {
+        wait_duration_minutes: ::Integer
+      }?
+    }
+
+    end
+  end
+end

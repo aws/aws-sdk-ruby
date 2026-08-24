@@ -651,9 +651,12 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
-    # Your client has exceeded one of the Amazon Transcribe limits. This is
-    # typically the audio length limit. Break your audio stream into smaller
-    # chunks and try your request again.
+    # Your client has exceeded one of the Amazon Transcribe limits,
+    # typically the concurrent stream service quota. This error can also
+    # occur if a stream exceeds the maximum session duration. In rare cases,
+    # this error can also occur if you increase your number of concurrent
+    # streams too quickly. Reduce your number of concurrent streams and try
+    # your request again using an exponential backoff strategy.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2789,6 +2792,21 @@ module Aws::TranscribeStreamingService
     #   session as many times as you want until 1:30 PM.
     #   @return [Integer]
     #
+    # @!attribute [rw] transcript_format
+    #   Specify how numbers, dates, and other alphanumeric entities are
+    #   rendered in your transcription results.
+    #
+    #   * `WRITTEN` renders these entities in their standard written form
+    #     (for example, `$50`, `10:30 AM`, and `101`).
+    #
+    #   * `SPOKEN` renders these entities as words, exactly as they were
+    #     spoken (for example, `fifty dollars`, `ten thirty a m`, and `one
+    #     oh one`).
+    #
+    #   If you don't specify a value, Amazon Transcribe uses `WRITTEN` by
+    #   default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionRequest AWS API Documentation
     #
     class StartStreamTranscriptionRequest < Struct.new(
@@ -2815,7 +2833,8 @@ module Aws::TranscribeStreamingService
       :identify_multiple_languages,
       :vocabulary_names,
       :vocabulary_filter_names,
-      :session_resume_window)
+      :session_resume_window,
+      :transcript_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2932,6 +2951,10 @@ module Aws::TranscribeStreamingService
     #   in your request.
     #   @return [Integer]
     #
+    # @!attribute [rw] transcript_format
+    #   Provides the transcript format that you specified in your request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionResponse AWS API Documentation
     #
     class StartStreamTranscriptionResponse < Struct.new(
@@ -2959,7 +2982,8 @@ module Aws::TranscribeStreamingService
       :identify_multiple_languages,
       :vocabulary_names,
       :vocabulary_filter_names,
-      :session_resume_window)
+      :session_resume_window,
+      :transcript_format)
       SENSITIVE = []
       include Aws::Structure
     end

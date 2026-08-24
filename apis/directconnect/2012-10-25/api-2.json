@@ -113,9 +113,9 @@
       "input":{"shape":"AssociateConnectionWithLagRequest"},
       "output":{"shape":"Connection"},
       "errors":[
+        {"shape":"LimitExceededException"},
         {"shape":"DirectConnectServerException"},
-        {"shape":"DirectConnectClientException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"DirectConnectClientException"}
       ]
     },
     "AssociateHostedConnection":{
@@ -731,6 +731,19 @@
         {"shape":"DirectConnectClientException"}
       ]
     },
+    "ListVirtualInterfaceRoutes":{
+      "name":"ListVirtualInterfaceRoutes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListVirtualInterfaceRoutesRequest"},
+      "output":{"shape":"ListVirtualInterfaceRoutesResponse"},
+      "errors":[
+        {"shape":"DirectConnectServerException"},
+        {"shape":"DirectConnectClientException"}
+      ]
+    },
     "ListVirtualInterfaceTestHistory":{
       "name":"ListVirtualInterfaceTestHistory",
       "http":{
@@ -982,6 +995,28 @@
       }
     },
     "AmazonAddress":{"type":"string"},
+    "AsPathList":{
+      "type":"list",
+      "member":{"shape":"LongAsn"}
+    },
+    "AsPathSegment":{
+      "type":"structure",
+      "members":{
+        "pathType":{"shape":"AsPathType"},
+        "path":{"shape":"AsPathList"}
+      }
+    },
+    "AsPathSegmentList":{
+      "type":"list",
+      "member":{"shape":"AsPathSegment"}
+    },
+    "AsPathType":{
+      "type":"string",
+      "enum":[
+        "seq",
+        "set"
+      ]
+    },
     "AssociateConnectionWithLagRequest":{
       "type":"structure",
       "required":[
@@ -1113,6 +1148,11 @@
     "CIDR":{"type":"string"},
     "Cak":{"type":"string"},
     "Ckn":{"type":"string"},
+    "CommunityEntry":{"type":"string"},
+    "CommunityList":{
+      "type":"list",
+      "member":{"shape":"CommunityEntry"}
+    },
     "ConfirmConnectionRequest":{
       "type":"structure",
       "required":["connectionId"],
@@ -1209,7 +1249,11 @@
         "encryptionMode":{"shape":"EncryptionMode"},
         "macSecKeys":{"shape":"MacSecKeyList"},
         "rateLimiterStatus":{"shape":"RateLimiterStatus"},
-        "partnerInterconnectMacSecCapable":{"shape":"PartnerInterconnectMacSecCapable"}
+        "partnerInterconnectMacSecCapable":{"shape":"PartnerInterconnectMacSecCapable"},
+        "prefixPoolSizeIpv4":{"shape":"PrefixPoolSize"},
+        "prefixPoolSizeIpv6":{"shape":"PrefixPoolSize"},
+        "prefixPoolUnallocatedCountIpv4":{"shape":"PrefixPoolUnallocatedCount"},
+        "prefixPoolUnallocatedCountIpv6":{"shape":"PrefixPoolUnallocatedCount"}
       }
     },
     "ConnectionId":{"type":"string"},
@@ -1721,6 +1765,7 @@
         "ownerAccount":{"shape":"OwnerAccount"},
         "directConnectGatewayState":{"shape":"DirectConnectGatewayState"},
         "stateChangeError":{"shape":"StateChangeError"},
+        "totalPrefixPoolAllocations":{"shape":"PrefixPoolAllocatedCount"},
         "tags":{"shape":"TagList"}
       }
     },
@@ -1964,6 +2009,10 @@
         "macSecCapable":{"shape":"MacSecCapable"},
         "encryptionMode":{"shape":"EncryptionMode"},
         "macSecKeys":{"shape":"MacSecKeyList"},
+        "prefixPoolSizeIpv4":{"shape":"PrefixPoolSize"},
+        "prefixPoolSizeIpv6":{"shape":"PrefixPoolSize"},
+        "prefixPoolUnallocatedCountIpv4":{"shape":"PrefixPoolUnallocatedCount"},
+        "prefixPoolUnallocatedCountIpv6":{"shape":"PrefixPoolUnallocatedCount"},
         "rateLimiterStatus":{"shape":"RateLimiterStatus"}
       }
     },
@@ -1996,6 +2045,23 @@
       "type":"structure",
       "members":{},
       "exception":true
+    },
+    "ListVirtualInterfaceRoutesRequest":{
+      "type":"structure",
+      "members":{
+        "virtualInterfaceId":{"shape":"VirtualInterfaceId"},
+        "filters":{"shape":"RouteFilters"},
+        "maxResults":{"shape":"MaxResultSetSize"},
+        "nextToken":{"shape":"PaginationToken"}
+      }
+    },
+    "ListVirtualInterfaceRoutesResponse":{
+      "type":"structure",
+      "members":{
+        "virtualInterfaceId":{"shape":"VirtualInterfaceId"},
+        "routes":{"shape":"RouteList"},
+        "nextToken":{"shape":"PaginationToken"}
+      }
     },
     "ListVirtualInterfaceTestHistoryRequest":{
       "type":"structure",
@@ -2102,6 +2168,8 @@
         "directConnectGatewayId":{"shape":"DirectConnectGatewayId"},
         "tags":{"shape":"TagList"},
         "enableSiteLink":{"shape":"EnableSiteLink"},
+        "prefixPoolAllocatedCountIpv4":{"shape":"PrefixPoolAllocatedCount"},
+        "prefixPoolAllocatedCountIpv6":{"shape":"PrefixPoolAllocatedCount"},
         "rateLimit":{"shape":"RateLimit"}
       }
     },
@@ -2180,6 +2248,8 @@
         "directConnectGatewayId":{"shape":"DirectConnectGatewayId"},
         "tags":{"shape":"TagList"},
         "enableSiteLink":{"shape":"EnableSiteLink"},
+        "prefixPoolAllocatedCountIpv4":{"shape":"PrefixPoolAllocatedCount"},
+        "prefixPoolAllocatedCountIpv6":{"shape":"PrefixPoolAllocatedCount"},
         "rateLimit":{"shape":"RateLimit"}
       }
     },
@@ -2214,6 +2284,18 @@
     "Platform":{"type":"string"},
     "PortEncryptionStatus":{"type":"string"},
     "PortSpeed":{"type":"string"},
+    "PrefixPoolAllocatedCount":{
+      "type":"integer",
+      "min":0
+    },
+    "PrefixPoolSize":{
+      "type":"integer",
+      "min":0
+    },
+    "PrefixPoolUnallocatedCount":{
+      "type":"integer",
+      "min":0
+    },
     "ProviderList":{
       "type":"list",
       "member":{"shape":"ProviderName"}
@@ -2247,6 +2329,33 @@
       "type":"list",
       "member":{"shape":"ResourceTag"}
     },
+    "Route":{
+      "type":"structure",
+      "members":{
+        "cidr":{"shape":"RouteCidr"},
+        "routeDirection":{"shape":"RouteDirection"},
+        "addressFamily":{"shape":"AddressFamily"},
+        "asPath":{"shape":"AsPathSegmentList"},
+        "communities":{"shape":"CommunityList"},
+        "awsLogicalDeviceId":{"shape":"AwsLogicalDeviceId"},
+        "routeInstalledAt":{"shape":"RouteInstalledAt"}
+      }
+    },
+    "RouteCidr":{"type":"string"},
+    "RouteDirection":{
+      "type":"string",
+      "enum":[
+        "accepted",
+        "advertised"
+      ]
+    },
+    "RouteFilterCidrString":{"type":"string"},
+    "RouteFilterCidrStringList":{
+      "type":"list",
+      "member":{"shape":"RouteFilterCidrString"},
+      "max":10,
+      "min":1
+    },
     "RouteFilterPrefix":{
       "type":"structure",
       "members":{
@@ -2256,6 +2365,21 @@
     "RouteFilterPrefixList":{
       "type":"list",
       "member":{"shape":"RouteFilterPrefix"}
+    },
+    "RouteFilters":{
+      "type":"structure",
+      "members":{
+        "routeDirection":{"shape":"RouteDirection"},
+        "addressFamily":{"shape":"AddressFamily"},
+        "cidrs":{"shape":"RouteFilterCidrStringList"},
+        "asPath":{"shape":"AsPathList"},
+        "communities":{"shape":"CommunityList"}
+      }
+    },
+    "RouteInstalledAt":{"type":"timestamp"},
+    "RouteList":{
+      "type":"list",
+      "member":{"shape":"Route"}
     },
     "RouterConfig":{"type":"string"},
     "RouterType":{
@@ -2436,6 +2560,8 @@
         "mtu":{"shape":"MTU"},
         "enableSiteLink":{"shape":"EnableSiteLink"},
         "virtualInterfaceName":{"shape":"VirtualInterfaceName"},
+        "prefixPoolAllocatedCountIpv4":{"shape":"PrefixPoolAllocatedCount"},
+        "prefixPoolAllocatedCountIpv6":{"shape":"PrefixPoolAllocatedCount"},
         "rateLimit":{"shape":"RateLimit"}
       }
     },
@@ -2494,6 +2620,8 @@
         "awsLogicalDeviceId":{"shape":"AwsLogicalDeviceId"},
         "tags":{"shape":"TagList"},
         "siteLinkEnabled":{"shape":"SiteLinkEnabled"},
+        "prefixPoolAllocatedCountIpv4":{"shape":"PrefixPoolAllocatedCount"},
+        "prefixPoolAllocatedCountIpv6":{"shape":"PrefixPoolAllocatedCount"},
         "rateLimit":{"shape":"RateLimit"}
       }
     },

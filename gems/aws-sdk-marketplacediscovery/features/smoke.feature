@@ -20,6 +20,18 @@ Feature: Smoke tests for MarketplaceDiscovery
     Then I expect a 'Aws::MarketplaceDiscovery::Errors::ResourceNotFoundException' was raised
 
   @marketplacediscovery @smoke
+  Scenario: GetProductFailure
+    Given I create a 'Aws::MarketplaceDiscovery' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_product' with params:
+      """
+{"product_id":"non-existent-product-id"}
+      """
+    Then I expect a 'Aws::MarketplaceDiscovery::Errors::ResourceNotFoundException' was raised
+
+  @marketplacediscovery @smoke
   Scenario: GetOfferFailure
     Given I create a 'Aws::MarketplaceDiscovery' client with config:
       """
@@ -32,14 +44,14 @@ Feature: Smoke tests for MarketplaceDiscovery
     Then I expect a 'Aws::MarketplaceDiscovery::Errors::ResourceNotFoundException' was raised
 
   @marketplacediscovery @smoke
-  Scenario: GetProductFailure
+  Scenario: GetOfferTermsFailure
     Given I create a 'Aws::MarketplaceDiscovery' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_product' with params:
+    When I call the operation 'get_offer_terms' with params:
       """
-{"product_id":"non-existent-product-id"}
+{"offer_id":"non-existent-offer-id"}
       """
     Then I expect a 'Aws::MarketplaceDiscovery::Errors::ResourceNotFoundException' was raised
 
@@ -56,36 +68,12 @@ Feature: Smoke tests for MarketplaceDiscovery
     Then I expect a 'Aws::MarketplaceDiscovery::Errors::ResourceNotFoundException' was raised
 
   @marketplacediscovery @smoke
-  Scenario: ListPurchaseOptionsSuccess
-    Given I create a 'Aws::MarketplaceDiscovery' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_purchase_options' with params:
-      """
-{"filters":[{"filter_type":"PRODUCT_ID","filter_values":["non-existent-product-id"]}]}
-      """
-    Then I expect an error was not raised
-
-  @marketplacediscovery @smoke
   Scenario: SearchListingsSuccess
     Given I create a 'Aws::MarketplaceDiscovery' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
     When I call the operation 'search_listings' with params:
-      """
-{}
-      """
-    Then I expect an error was not raised
-
-  @marketplacediscovery @smoke
-  Scenario: SearchFacetsSuccess
-    Given I create a 'Aws::MarketplaceDiscovery' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'search_facets' with params:
       """
 {}
       """
@@ -104,13 +92,25 @@ Feature: Smoke tests for MarketplaceDiscovery
     Then I expect a 'Aws::MarketplaceDiscovery::Errors::ResourceNotFoundException' was raised
 
   @marketplacediscovery @smoke
-  Scenario: GetOfferTermsFailure
+  Scenario: ListPurchaseOptionsSuccess
     Given I create a 'Aws::MarketplaceDiscovery' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_offer_terms' with params:
+    When I call the operation 'list_purchase_options' with params:
       """
-{"offer_id":"non-existent-offer-id"}
+{"filters":[{"filter_type":"PRODUCT_ID","filter_values":["non-existent-product-id"]}]}
       """
-    Then I expect a 'Aws::MarketplaceDiscovery::Errors::ResourceNotFoundException' was raised
+    Then I expect an error was not raised
+
+  @marketplacediscovery @smoke
+  Scenario: SearchFacetsSuccess
+    Given I create a 'Aws::MarketplaceDiscovery' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'search_facets' with params:
+      """
+{}
+      """
+    Then I expect an error was not raised

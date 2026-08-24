@@ -112,7 +112,7 @@ module Aws::IAM
 
     context "For region cn-northwest-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-northwest-1"}]}, "url" => "https://iam-fips.api.amazonwebservices.com.cn"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-north-1"}]}, "url" => "https://iam-fips.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -126,7 +126,7 @@ module Aws::IAM
 
     context "For region cn-northwest-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-northwest-1"}]}, "url" => "https://iam-fips.amazonaws.com.cn"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-north-1"}]}, "url" => "https://iam-fips.amazonaws.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

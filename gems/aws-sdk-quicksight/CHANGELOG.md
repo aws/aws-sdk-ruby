@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.195.0 (2026-08-12)
+------------------
+
+* Feature - Added APIs for DLP with Microsoft Purview (manage configs with label enforcement across Spaces, Chat, Knowledge Bases), Approval Workflows (CRUD for policies on asset sharing for Agents, Knowledge Bases, Spaces), and Limits Management (limit profiles for index storage and agent hours per user).
+
+1.194.0 (2026-07-31)
+------------------
+
+* Feature - Adding TopicV2 management APIs, adding possibility to use Topics in Analysis
+
 1.193.0 (2026-07-27)
 ------------------
 

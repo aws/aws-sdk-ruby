@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2026-08-03)
+------------------
+
+* Feature - This release adds support for customer-managed backup restore, and encryption of new DbInstances and DbClusters using customer-managed KMS keys.
+
 1.45.0 (2026-07-21)
 ------------------
 

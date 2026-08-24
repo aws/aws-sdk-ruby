@@ -23,7 +23,7 @@ module Aws
 
       type topic_ir_filter_option = {
       filter_type: ("CATEGORY_FILTER" | "NUMERIC_EQUALITY_FILTER" | "NUMERIC_RANGE_FILTER" | "DATE_RANGE_FILTER" | "RELATIVE_DATE_FILTER" | "TOP_BOTTOM_FILTER" | "EQUALS" | "RANK_LIMIT_FILTER" | "ACCEPT_ALL_FILTER")?,
-      filter_class: ("ENFORCED_VALUE_FILTER" | "CONDITIONAL_VALUE_FILTER" | "NAMED_VALUE_FILTER")?,
+      filter_class: ("ENFORCED_VALUE_FILTER" | "CONDITIONAL_VALUE_FILTER" | "NAMED_VALUE_FILTER" | "DASHBOARD_DEFAULT_FILTER")?,
       operand_field: {
         identity: ::String
       }?,
@@ -280,16 +280,24 @@ module Aws
       ]?
     }
 
+      type analysis_source_template = {
+      data_set_references: Array[
+        {
+          data_set_placeholder: ::String,
+          data_set_arn: ::String
+        }
+      ],
+      topic_references: Array[
+        {
+          topic_placeholder: ::String,
+          topic_arn: ::String
+        }
+      ]?,
+      arn: ::String
+    }
+
       type analysis_source_entity = {
-      source_template: {
-        data_set_references: Array[
-          {
-            data_set_placeholder: ::String,
-            data_set_arn: ::String
-          }
-        ],
-        arn: ::String
-      }?
+      source_template: Params::analysis_source_template?
     }
 
       type default_grid_layout_configuration = {
@@ -345,6 +353,21 @@ module Aws
       default_new_sheet_configuration: Params::default_new_sheet_configuration
     }
 
+      type visual_message_configuration = {
+      enabled: bool?,
+      title: ::String?,
+      title_visibility: ("HIDDEN" | "VISIBLE")?,
+      description: ::String?,
+      description_visibility: ("HIDDEN" | "VISIBLE")?,
+      link_text: ::String?,
+      link_url: ::String?,
+      link_visibility: ("HIDDEN" | "VISIBLE")?
+    }
+
+      type visual_messages = {
+      no_data_message: Params::visual_message_configuration?
+    }
+
       type asset_options = {
       timezone: ::String?,
       week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
@@ -354,7 +377,8 @@ module Aws
         highlight_operation: {
           trigger: ("DATA_POINT_CLICK" | "DATA_POINT_HOVER" | "NONE")
         }?
-      }?
+      }?,
+      visual_messages: Params::visual_messages?
     }
 
       type analysis_definition = {
@@ -364,6 +388,12 @@ module Aws
           data_set_arn: ::String
         }
       ],
+      topic_identifier_declarations: Array[
+        {
+          identifier: ::String,
+          topic_arn: ::String
+        }
+      ]?,
       sheets: Array[
         Params::sheet_definition
       ]?,
@@ -372,7 +402,8 @@ module Aws
       ]?,
       calculated_fields: Array[
         {
-          data_set_identifier: ::String,
+          data_set_identifier: ::String?,
+          topic_identifier: ::String?,
           name: ::String,
           expression: ::String
         }
@@ -486,15 +517,18 @@ module Aws
       }?
     }
 
+      type parameter_selectable_values = {
+      values: Array[::String]?,
+      link_to_data_set_column: {
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
+        column_name: ::String
+      }?
+    }
+
       type cascading_control_configuration = {
       source_controls: Array[
-        {
-          source_sheet_control_id: ::String?,
-          column_to_match: {
-            data_set_identifier: ::String,
-            column_name: ::String
-          }?
-        }
+        Params::cascading_control_source
       ]?
     }
 
@@ -504,13 +538,7 @@ module Aws
       source_parameter_name: ::String,
       display_options: Params::list_control_display_options?,
       type: ("MULTI_SELECT" | "SINGLE_SELECT")?,
-      selectable_values: {
-        values: Array[::String]?,
-        link_to_data_set_column: {
-          data_set_identifier: ::String,
-          column_name: ::String
-        }?
-      }?,
+      selectable_values: Params::parameter_selectable_values?,
       cascading_control_configuration: Params::cascading_control_configuration?,
       control_sort_configurations: Array[
         Params::control_sort_configuration
@@ -538,13 +566,7 @@ module Aws
       source_parameter_name: ::String,
       display_options: Params::drop_down_control_display_options?,
       type: ("MULTI_SELECT" | "SINGLE_SELECT")?,
-      selectable_values: {
-        values: Array[::String]?,
-        link_to_data_set_column: {
-          data_set_identifier: ::String,
-          column_name: ::String
-        }?
-      }?,
+      selectable_values: Params::parameter_selectable_values?,
       cascading_control_configuration: Params::cascading_control_configuration?,
       commit_mode: ("AUTO" | "MANUAL")?,
       control_sort_configurations: Array[
@@ -632,6 +654,15 @@ module Aws
       slider: Params::parameter_slider_control?
     }
 
+      type cascading_control_source = {
+      source_sheet_control_id: ::String?,
+      column_to_match: {
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
+        column_name: ::String
+      }?
+    }
+
       type aggregation_function = {
       numerical_aggregation_function: {
         simple_numerical_aggregation: ("SUM" | "AVERAGE" | "MIN" | "MAX" | "COUNT" | "DISTINCT_COUNT" | "VAR" | "VARP" | "STDEV" | "STDEVP" | "MEDIAN")?,
@@ -649,7 +680,8 @@ module Aws
 
       type aggregation_sort_configuration = {
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       sort_direction: ("ASC" | "DESC"),
@@ -935,16 +967,19 @@ module Aws
       }?
     }
 
+      type visual_customization_fields_configuration = {
+      status: ("ENABLED" | "DISABLED")?,
+      additional_fields: Array[
+        {
+          data_set_identifier: ::String?,
+          topic_identifier: ::String?,
+          column_name: ::String
+        }
+      ]?
+    }
+
       type dashboard_customization_visual_options = {
-      fields_configuration: {
-        status: ("ENABLED" | "DISABLED")?,
-        additional_fields: Array[
-          {
-            data_set_identifier: ::String,
-            column_name: ::String
-          }
-        ]?
-      }?
+      fields_configuration: Params::visual_customization_fields_configuration?
     }
 
       type visual_interaction_options = {
@@ -1361,15 +1396,7 @@ module Aws
         Params::reference_line
       ]?,
       contribution_analysis_defaults: Array[
-        {
-          measure_field_id: ::String,
-          contributor_dimensions: Array[
-            {
-              data_set_identifier: ::String,
-              column_name: ::String
-            }
-          ]
-        }
+        Params::contribution_analysis_default
       ]?,
       interactions: Params::visual_interaction_options?
     }
@@ -1589,15 +1616,7 @@ module Aws
       tooltip: Params::tooltip_options?,
       visual_palette: Params::visual_palette?,
       contribution_analysis_defaults: Array[
-        {
-          measure_field_id: ::String,
-          contributor_dimensions: Array[
-            {
-              data_set_identifier: ::String,
-              column_name: ::String
-            }
-          ]
-        }
+        Params::contribution_analysis_default
       ]?,
       interactions: Params::visual_interaction_options?
     }
@@ -1799,15 +1818,7 @@ module Aws
       ]?,
       tooltip: Params::tooltip_options?,
       contribution_analysis_defaults: Array[
-        {
-          measure_field_id: ::String,
-          contributor_dimensions: Array[
-            {
-              data_set_identifier: ::String,
-              column_name: ::String
-            }
-          ]
-        }
+        Params::contribution_analysis_default
       ]?,
       visual_palette: Params::visual_palette?,
       interactions: Params::visual_interaction_options?
@@ -2187,7 +2198,8 @@ module Aws
         }?
       }?,
       chart_configuration: Params::geospatial_layer_map_configuration?,
-      data_set_identifier: ::String,
+      data_set_identifier: ::String?,
+      topic_identifier: ::String?,
       visual_content_alt_text: ::String?
     }
 
@@ -2767,7 +2779,8 @@ module Aws
       actions: Array[
         Params::visual_custom_action
       ]?,
-      data_set_identifier: ::String,
+      data_set_identifier: ::String?,
+      topic_identifier: ::String?,
       visual_content_alt_text: ::String?
     }
 
@@ -2858,13 +2871,15 @@ module Aws
       actions: Array[
         Params::visual_custom_action
       ]?,
-      data_set_identifier: ::String,
+      data_set_identifier: ::String?,
+      topic_identifier: ::String?,
       visual_content_alt_text: ::String?
     }
 
       type empty_visual = {
       visual_id: ::String,
-      data_set_identifier: ::String,
+      data_set_identifier: ::String?,
+      topic_identifier: ::String?,
       actions: Array[
         Params::visual_custom_action
       ]?
@@ -3062,7 +3077,8 @@ module Aws
       type numerical_dimension_field = {
       field_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       hierarchy_id: ::String?,
@@ -3079,7 +3095,8 @@ module Aws
       type categorical_dimension_field = {
       field_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       hierarchy_id: ::String?,
@@ -3097,7 +3114,8 @@ module Aws
       type date_dimension_field = {
       field_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       date_granularity: ("YEAR" | "QUARTER" | "MONTH" | "WEEK" | "DAY" | "HOUR" | "MINUTE" | "SECOND" | "MILLISECOND")?,
@@ -3114,7 +3132,8 @@ module Aws
       type numerical_measure_field = {
       field_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       aggregation_function: {
@@ -3129,7 +3148,8 @@ module Aws
       type categorical_measure_field = {
       field_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       aggregation_function: ("COUNT" | "DISTINCT_COUNT")?,
@@ -3139,7 +3159,8 @@ module Aws
       type date_measure_field = {
       field_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       aggregation_function: ("COUNT" | "DISTINCT_COUNT" | "MIN" | "MAX")?,
@@ -3165,7 +3186,8 @@ module Aws
       type unaggregated_field = {
       field_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       format_configuration: Params::format_configuration?
@@ -3173,7 +3195,8 @@ module Aws
 
       type column_sort = {
       sort_by: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       direction: ("ASC" | "DESC"),
@@ -3260,7 +3283,8 @@ module Aws
 
       type column_tooltip_item = {
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       label: ::String?,
@@ -3356,7 +3380,8 @@ module Aws
       selected_field_options: ("ALL_FIELDS")?,
       selected_columns: Array[
         {
-          data_set_identifier: ::String,
+          data_set_identifier: ::String?,
+          topic_identifier: ::String?,
           column_name: ::String
         }
       ]?
@@ -3408,7 +3433,8 @@ module Aws
       source_parameter_name: ::String?,
       source_field: ::String?,
       source_column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       }?
     }
@@ -3505,16 +3531,19 @@ module Aws
       time_granularity: ("YEAR" | "QUARTER" | "MONTH" | "WEEK" | "DAY" | "HOUR" | "MINUTE" | "SECOND" | "MILLISECOND")?
     }
 
+      type axis_label_reference_options = {
+      field_id: ::String,
+      column: {
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
+        column_name: ::String
+      }
+    }
+
       type axis_label_options = {
       font_configuration: Params::font_configuration?,
       custom_label: ::String?,
-      apply_to: {
-        field_id: ::String,
-        column: {
-          data_set_identifier: ::String,
-          column_name: ::String
-        }
-      }?
+      apply_to: Params::axis_label_reference_options?
     }
 
       type bar_chart_series_settings = {
@@ -3571,7 +3600,8 @@ module Aws
 
       type reference_line_dynamic_data_configuration = {
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       measure_aggregation_function: Params::aggregation_function?,
@@ -3618,11 +3648,23 @@ module Aws
       label_configuration: Params::reference_line_label_configuration?
     }
 
+      type contribution_analysis_default = {
+      measure_field_id: ::String,
+      contributor_dimensions: Array[
+        {
+          data_set_identifier: ::String?,
+          topic_identifier: ::String?,
+          column_name: ::String
+        }
+      ]
+    }
+
       type explicit_hierarchy = {
       hierarchy_id: ::String,
       columns: Array[
         {
-          data_set_identifier: ::String,
+          data_set_identifier: ::String?,
+          topic_identifier: ::String?,
           column_name: ::String
         }
       ],
@@ -3642,7 +3684,8 @@ module Aws
       hierarchy_id: ::String,
       columns: Array[
         {
-          data_set_identifier: ::String,
+          data_set_identifier: ::String?,
+          topic_identifier: ::String?,
           column_name: ::String
         }
       ],
@@ -3657,9 +3700,28 @@ module Aws
       predefined_hierarchy: Params::predefined_hierarchy?
     }
 
+      type numeric_equality_drill_down_filter = {
+      column: {
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
+        column_name: ::String
+      },
+      value: ::Float
+    }
+
+      type category_drill_down_filter = {
+      column: {
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
+        column_name: ::String
+      },
+      category_values: Array[::String]
+    }
+
       type time_range_drill_down_filter = {
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       range_minimum: ::Time,
@@ -3668,20 +3730,8 @@ module Aws
     }
 
       type drill_down_filter = {
-      numeric_equality_filter: {
-        column: {
-          data_set_identifier: ::String,
-          column_name: ::String
-        },
-        value: ::Float
-      }?,
-      category_filter: {
-        column: {
-          data_set_identifier: ::String,
-          column_name: ::String
-        },
-        category_values: Array[::String]
-      }?,
+      numeric_equality_filter: Params::numeric_equality_drill_down_filter?,
+      category_filter: Params::category_drill_down_filter?,
       time_range_filter: Params::time_range_drill_down_filter?
     }
 
@@ -4379,7 +4429,8 @@ module Aws
 
       type body_section_dynamic_category_dimension_configuration = {
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       limit: ::Integer?,
@@ -4390,7 +4441,8 @@ module Aws
 
       type body_section_dynamic_numeric_dimension_configuration = {
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       limit: ::Integer?,
@@ -4431,15 +4483,18 @@ module Aws
 
       type dynamic_default_value = {
       user_name_column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       }?,
       group_name_column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       }?,
       default_value_column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       }
     }
@@ -4658,7 +4713,8 @@ module Aws
       type category_filter = {
       filter_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       configuration: Params::category_filter_configuration,
@@ -4668,7 +4724,8 @@ module Aws
       type numeric_range_filter = {
       filter_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       include_minimum: bool?,
@@ -4690,7 +4747,8 @@ module Aws
       type numeric_equality_filter = {
       filter_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       value: ::Float?,
@@ -4705,7 +4763,8 @@ module Aws
       type time_equality_filter = {
       filter_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       value: ::Time?,
@@ -4730,7 +4789,8 @@ module Aws
       type time_range_filter = {
       filter_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       include_minimum: bool?,
@@ -4750,7 +4810,8 @@ module Aws
       type relative_dates_filter = {
       filter_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       anchor_date_configuration: {
@@ -4774,7 +4835,8 @@ module Aws
       type top_bottom_filter = {
       filter_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       limit: ::Integer?,
@@ -4788,7 +4850,8 @@ module Aws
 
       type category_inner_filter = {
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       configuration: Params::category_filter_configuration,
@@ -4802,7 +4865,8 @@ module Aws
       type nested_filter = {
       filter_id: ::String,
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       include_inner_set: bool,
@@ -4834,7 +4898,8 @@ module Aws
 
       type column_configuration = {
       column: {
-        data_set_identifier: ::String,
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
         column_name: ::String
       },
       format_configuration: Params::format_configuration?,
@@ -5021,6 +5086,48 @@ module Aws
       approve_flow_share_requests: ("DENY" | "ALLOW")?,
       use_agent_web_search: ("DENY" | "ALLOW")?,
       knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_knowledge_bases: ("DENY" | "ALLOW")?,
+      share_knowledge_bases: ("DENY" | "ALLOW")?,
+      share_point_knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_share_point_knowledge_base: ("DENY" | "ALLOW")?,
+      share_share_point_knowledge_base: ("DENY" | "ALLOW")?,
+      use_share_point_knowledge_base: ("DENY" | "ALLOW")?,
+      google_drive_knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_google_drive_knowledge_base: ("DENY" | "ALLOW")?,
+      share_google_drive_knowledge_base: ("DENY" | "ALLOW")?,
+      use_google_drive_knowledge_base: ("DENY" | "ALLOW")?,
+      web_crawler_knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_web_crawler_knowledge_base: ("DENY" | "ALLOW")?,
+      share_web_crawler_knowledge_base: ("DENY" | "ALLOW")?,
+      use_web_crawler_knowledge_base: ("DENY" | "ALLOW")?,
+      s3_knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_s3_knowledge_base: ("DENY" | "ALLOW")?,
+      share_s3_knowledge_base: ("DENY" | "ALLOW")?,
+      use_s3_knowledge_base: ("DENY" | "ALLOW")?,
+      confluence_knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_confluence_knowledge_base: ("DENY" | "ALLOW")?,
+      share_confluence_knowledge_base: ("DENY" | "ALLOW")?,
+      use_confluence_knowledge_base: ("DENY" | "ALLOW")?,
+      one_drive_knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_one_drive_knowledge_base: ("DENY" | "ALLOW")?,
+      share_one_drive_knowledge_base: ("DENY" | "ALLOW")?,
+      use_one_drive_knowledge_base: ("DENY" | "ALLOW")?,
+      q_business_knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_q_business_knowledge_base: ("DENY" | "ALLOW")?,
+      share_q_business_knowledge_base: ("DENY" | "ALLOW")?,
+      use_q_business_knowledge_base: ("DENY" | "ALLOW")?,
+      bedrock_managed_knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_bedrock_managed_knowledge_base: ("DENY" | "ALLOW")?,
+      share_bedrock_managed_knowledge_base: ("DENY" | "ALLOW")?,
+      use_bedrock_managed_knowledge_base: ("DENY" | "ALLOW")?,
+      box_knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_box_knowledge_base: ("DENY" | "ALLOW")?,
+      share_box_knowledge_base: ("DENY" | "ALLOW")?,
+      use_box_knowledge_base: ("DENY" | "ALLOW")?,
+      idc_knowledge_base: ("DENY" | "ALLOW")?,
+      create_and_update_idc_knowledge_base: ("DENY" | "ALLOW")?,
+      share_idc_knowledge_base: ("DENY" | "ALLOW")?,
+      use_idc_knowledge_base: ("DENY" | "ALLOW")?,
       action: ("DENY" | "ALLOW")?,
       generic_http_action: ("DENY" | "ALLOW")?,
       create_and_update_generic_http_action: ("DENY" | "ALLOW")?,
@@ -5222,16 +5329,24 @@ module Aws
       quick_event_trigger: ("DENY" | "ALLOW")?
     }
 
+      type dashboard_source_template = {
+      data_set_references: Array[
+        {
+          data_set_placeholder: ::String,
+          data_set_arn: ::String
+        }
+      ],
+      topic_references: Array[
+        {
+          topic_placeholder: ::String,
+          topic_arn: ::String
+        }
+      ]?,
+      arn: ::String
+    }
+
       type dashboard_source_entity = {
-      source_template: {
-        data_set_references: Array[
-          {
-            data_set_placeholder: ::String,
-            data_set_arn: ::String
-          }
-        ],
-        arn: ::String
-      }?
+      source_template: Params::dashboard_source_template?
     }
 
       type dashboard_publish_options = {
@@ -5291,6 +5406,12 @@ module Aws
           data_set_arn: ::String
         }
       ],
+      topic_identifier_declarations: Array[
+        {
+          identifier: ::String,
+          topic_arn: ::String
+        }
+      ]?,
       sheets: Array[
         Params::sheet_definition
       ]?,
@@ -5299,7 +5420,8 @@ module Aws
       ]?,
       calculated_fields: Array[
         {
-          data_set_identifier: ::String,
+          data_set_identifier: ::String?,
+          topic_identifier: ::String?,
           name: ::String,
           expression: ::String
         }
@@ -6219,6 +6341,24 @@ module Aws
       }?
     }
 
+      type microsoft_purview_provider_config = {
+      credentials: {
+        secret_arn: ::String
+      },
+      label_action_mappings: Array[
+        {
+          label_id: ::String,
+          label_name: ::String,
+          action: ("ALLOW" | "WARN" | "BLOCK")
+        }
+      ],
+      unmapped_action: ("ALLOW" | "WARN" | "BLOCK")
+    }
+
+      type provider_config = {
+      microsoft_purview: Params::microsoft_purview_provider_config?
+    }
+
       type media_extraction_configuration = {
       image_extraction_configuration: {
         image_extraction_status: ("ENABLED" | "DISABLED")
@@ -6250,16 +6390,24 @@ module Aws
       arn: ::String?
     }
 
+      type template_source_analysis = {
+      arn: ::String,
+      data_set_references: Array[
+        {
+          data_set_placeholder: ::String,
+          data_set_arn: ::String
+        }
+      ],
+      topic_references: Array[
+        {
+          topic_placeholder: ::String,
+          topic_arn: ::String
+        }
+      ]?
+    }
+
       type template_source_entity = {
-      source_analysis: {
-        arn: ::String,
-        data_set_references: Array[
-          {
-            data_set_placeholder: ::String,
-            data_set_arn: ::String
-          }
-        ]
-      }?,
+      source_analysis: Params::template_source_analysis?,
       source_template: {
         arn: ::String
       }?
@@ -6269,6 +6417,9 @@ module Aws
       data_set_configurations: Array[
         Params::data_set_configuration
       ],
+      topic_configurations: Array[
+        Params::topic_configuration
+      ]?,
       sheets: Array[
         Params::sheet_definition
       ]?,
@@ -6277,7 +6428,8 @@ module Aws
       ]?,
       calculated_fields: Array[
         {
-          data_set_identifier: ::String,
+          data_set_identifier: ::String?,
+          topic_identifier: ::String?,
           name: ::String,
           expression: ::String
         }
@@ -6302,6 +6454,29 @@ module Aws
     }
 
       type data_set_configuration = {
+      placeholder: ::String?,
+      data_set_schema: {
+        column_schema_list: Array[
+          {
+            name: ::String?,
+            data_type: ::String?,
+            geographic_role: ::String?
+          }
+        ]?
+      }?,
+      column_group_schema_list: Array[
+        {
+          name: ::String?,
+          column_group_column_schema_list: Array[
+            {
+              name: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type topic_configuration = {
       placeholder: ::String?,
       data_set_schema: {
         column_schema_list: Array[
@@ -6460,7 +6635,18 @@ module Aws
           value_list: Array[::String]?
         }?
       }?,
-      inverse: bool?
+      inverse: bool?,
+      null_filter: ("ALL_VALUES" | "NON_NULLS_ONLY" | "NULLS_ONLY")?
+    }
+
+      type topic_numeric_equality_filter = {
+      constant: {
+        constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")?,
+        singular_constant: ::String?
+      }?,
+      aggregation: ("NO_AGGREGATION" | "SUM" | "AVERAGE" | "COUNT" | "DISTINCT_COUNT" | "MAX" | "MEDIAN" | "MIN" | "STDEV" | "STDEVP" | "VAR" | "VARP")?,
+      inverse: bool?,
+      null_filter: ("ALL_VALUES" | "NON_NULLS_ONLY" | "NULLS_ONLY")?
     }
 
       type topic_numeric_range_filter = {
@@ -6472,7 +6658,9 @@ module Aws
           maximum: ::String?
         }?
       }?,
-      aggregation: ("NO_AGGREGATION" | "SUM" | "AVERAGE" | "COUNT" | "DISTINCT_COUNT" | "MAX" | "MEDIAN" | "MIN" | "STDEV" | "STDEVP" | "VAR" | "VARP")?
+      aggregation: ("NO_AGGREGATION" | "SUM" | "AVERAGE" | "COUNT" | "DISTINCT_COUNT" | "MAX" | "MEDIAN" | "MIN" | "STDEV" | "STDEVP" | "VAR" | "VARP")?,
+      inverse: bool?,
+      null_filter: ("ALL_VALUES" | "NON_NULLS_ONLY" | "NULLS_ONLY")?
     }
 
       type topic_date_range_filter = {
@@ -6483,7 +6671,8 @@ module Aws
           minimum: ::String?,
           maximum: ::String?
         }?
-      }?
+      }?,
+      null_filter: ("ALL_VALUES" | "NON_NULLS_ONLY" | "NULLS_ONLY")?
     }
 
       type topic_relative_date_filter = {
@@ -6492,7 +6681,8 @@ module Aws
       constant: {
         constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")?,
         singular_constant: ::String?
-      }?
+      }?,
+      null_filter: ("ALL_VALUES" | "NON_NULLS_ONLY" | "NULLS_ONLY")?
     }
 
       type topic_null_filter = {
@@ -6506,19 +6696,13 @@ module Aws
 
       type topic_filter = {
       filter_description: ::String?,
-      filter_class: ("ENFORCED_VALUE_FILTER" | "CONDITIONAL_VALUE_FILTER" | "NAMED_VALUE_FILTER")?,
+      filter_class: ("ENFORCED_VALUE_FILTER" | "CONDITIONAL_VALUE_FILTER" | "NAMED_VALUE_FILTER" | "DASHBOARD_DEFAULT_FILTER")?,
       filter_name: ::String,
       filter_synonyms: Array[::String]?,
       operand_field_name: ::String,
       filter_type: ("CATEGORY_FILTER" | "NUMERIC_EQUALITY_FILTER" | "NUMERIC_RANGE_FILTER" | "DATE_RANGE_FILTER" | "RELATIVE_DATE_FILTER" | "NULL_FILTER")?,
       category_filter: Params::topic_category_filter?,
-      numeric_equality_filter: {
-        constant: {
-          constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")?,
-          singular_constant: ::String?
-        }?,
-        aggregation: ("NO_AGGREGATION" | "SUM" | "AVERAGE" | "COUNT" | "DISTINCT_COUNT" | "MAX" | "MEDIAN" | "MIN" | "STDEV" | "STDEVP" | "VAR" | "VARP")?
-      }?,
+      numeric_equality_filter: Params::topic_numeric_equality_filter?,
       numeric_range_filter: Params::topic_numeric_range_filter?,
       date_range_filter: Params::topic_date_range_filter?,
       relative_date_filter: Params::topic_relative_date_filter?,
@@ -6609,7 +6793,15 @@ module Aws
       }?,
       definition: Array[
         Params::named_entity_definition
-      ]?
+      ]?,
+      sort: Array[
+        {
+          field_name: ::String,
+          direction: ("ASCENDING" | "DESCENDING")
+        }
+      ]?,
+      rank_order: ::Integer?,
+      presentation_order: ::Integer?
     }
 
       type named_entity_definition = {
@@ -6620,7 +6812,10 @@ module Aws
       metric: {
         aggregation: ("SUM" | "MIN" | "MAX" | "COUNT" | "AVERAGE" | "DISTINCT_COUNT" | "STDEV" | "STDEVP" | "VAR" | "VARP" | "PERCENTILE" | "MEDIAN" | "CUSTOM")?,
         aggregation_function_parameters: Hash[::String, ::String]?
-      }?
+      }?,
+      rank_order: ::Integer?,
+      presentation_order: ::Integer?,
+      is_hidden: bool?
     }
 
       type topic_refresh_schedule = {
@@ -6630,6 +6825,31 @@ module Aws
       timezone: ::String?,
       repeat_at: ::String?,
       topic_schedule_type: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY")?
+    }
+
+      type topic_v2_details = {
+      name: ::String,
+      description: ::String?,
+      data_sets: Array[
+        {
+          data_set_arn: ::String,
+          data_set_name: ::String?
+        }
+      ]?,
+      data_set_relations: Array[
+        Params::topic_v2_data_set_relation
+      ]?
+    }
+
+      type topic_v2_data_set_relation = {
+      left: {
+        data_set_arn: ::String,
+        column_names: Array[::String]
+      },
+      right: {
+        data_set_arn: ::String,
+        column_names: Array[::String]
+      }
     }
 
       type registered_user_dashboard_feature_configurations = {

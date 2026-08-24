@@ -787,6 +787,7 @@ module Aws::MediaLive
     NielsenCBET = Shapes::StructureShape.new(name: 'NielsenCBET')
     NielsenConfiguration = Shapes::StructureShape.new(name: 'NielsenConfiguration')
     NielsenNaesIiNw = Shapes::StructureShape.new(name: 'NielsenNaesIiNw')
+    NielsenNwOnly = Shapes::StructureShape.new(name: 'NielsenNwOnly')
     NielsenPcmToId3TaggingState = Shapes::StringShape.new(name: 'NielsenPcmToId3TaggingState')
     NielsenWatermarkTimezones = Shapes::StringShape.new(name: 'NielsenWatermarkTimezones')
     NielsenWatermarksCbetStepaside = Shapes::StringShape.new(name: 'NielsenWatermarksCbetStepaside')
@@ -1078,6 +1079,7 @@ module Aws::MediaLive
     VideoDescription = Shapes::StructureShape.new(name: 'VideoDescription')
     VideoDescriptionRespondToAfd = Shapes::StringShape.new(name: 'VideoDescriptionRespondToAfd')
     VideoDescriptionScalingBehavior = Shapes::StringShape.new(name: 'VideoDescriptionScalingBehavior')
+    VideoPositionRectangle = Shapes::StructureShape.new(name: 'VideoPositionRectangle')
     VideoSelector = Shapes::StructureShape.new(name: 'VideoSelector')
     VideoSelectorColorSpace = Shapes::StringShape.new(name: 'VideoSelectorColorSpace')
     VideoSelectorColorSpaceSettings = Shapes::StructureShape.new(name: 'VideoSelectorColorSpaceSettings')
@@ -1130,6 +1132,7 @@ module Aws::MediaLive
     __integerMin0Max65536 = Shapes::IntegerShape.new(name: '__integerMin0Max65536')
     __integerMin0Max7 = Shapes::IntegerShape.new(name: '__integerMin0Max7')
     __integerMin0Max8000000 = Shapes::IntegerShape.new(name: '__integerMin0Max8000000')
+    __integerMin0Max8190 = Shapes::IntegerShape.new(name: '__integerMin0Max8190')
     __integerMin0Max8191 = Shapes::IntegerShape.new(name: '__integerMin0Max8191')
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
     __integerMin100 = Shapes::IntegerShape.new(name: '__integerMin100')
@@ -1158,6 +1161,7 @@ module Aws::MediaLive
     __integerMin256Max3840 = Shapes::IntegerShape.new(name: '__integerMin256Max3840')
     __integerMin25Max10000 = Shapes::IntegerShape.new(name: '__integerMin25Max10000')
     __integerMin25Max2000 = Shapes::IntegerShape.new(name: '__integerMin25Max2000')
+    __integerMin2Max8192 = Shapes::IntegerShape.new(name: '__integerMin2Max8192')
     __integerMin3 = Shapes::IntegerShape.new(name: '__integerMin3')
     __integerMin30 = Shapes::IntegerShape.new(name: '__integerMin30')
     __integerMin32Max8191 = Shapes::IntegerShape.new(name: '__integerMin32Max8191')
@@ -4543,9 +4547,15 @@ module Aws::MediaLive
     NielsenNaesIiNw.add_member(:timezone, Shapes::ShapeRef.new(shape: NielsenWatermarkTimezones, location_name: "timezone"))
     NielsenNaesIiNw.struct_class = Types::NielsenNaesIiNw
 
+    NielsenNwOnly.add_member(:check_digit_string, Shapes::ShapeRef.new(shape: __stringMin2Max2, required: true, location_name: "checkDigitString"))
+    NielsenNwOnly.add_member(:sid, Shapes::ShapeRef.new(shape: __doubleMin1Max65535, required: true, location_name: "sid"))
+    NielsenNwOnly.add_member(:timezone, Shapes::ShapeRef.new(shape: NielsenWatermarkTimezones, location_name: "timezone"))
+    NielsenNwOnly.struct_class = Types::NielsenNwOnly
+
     NielsenWatermarksSettings.add_member(:nielsen_cbet_settings, Shapes::ShapeRef.new(shape: NielsenCBET, location_name: "nielsenCbetSettings"))
     NielsenWatermarksSettings.add_member(:nielsen_distribution_type, Shapes::ShapeRef.new(shape: NielsenWatermarksDistributionTypes, location_name: "nielsenDistributionType"))
     NielsenWatermarksSettings.add_member(:nielsen_naes_ii_nw_settings, Shapes::ShapeRef.new(shape: NielsenNaesIiNw, location_name: "nielsenNaesIiNwSettings"))
+    NielsenWatermarksSettings.add_member(:nielsen_nw_only_settings, Shapes::ShapeRef.new(shape: NielsenNwOnly, location_name: "nielsenNwOnlySettings"))
     NielsenWatermarksSettings.struct_class = Types::NielsenWatermarksSettings
 
     NodeConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -4602,6 +4612,7 @@ module Aws::MediaLive
     OutputDestinationSettings.add_member(:stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "streamName"))
     OutputDestinationSettings.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     OutputDestinationSettings.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
+    OutputDestinationSettings.add_member(:virtual_source_address, Shapes::ShapeRef.new(shape: __string, location_name: "virtualSourceAddress"))
     OutputDestinationSettings.struct_class = Types::OutputDestinationSettings
 
     OutputGroup.add_member(:name, Shapes::ShapeRef.new(shape: __stringMax32, location_name: "name"))
@@ -5930,7 +5941,15 @@ module Aws::MediaLive
     VideoDescription.add_member(:scaling_behavior, Shapes::ShapeRef.new(shape: VideoDescriptionScalingBehavior, location_name: "scalingBehavior"))
     VideoDescription.add_member(:sharpness, Shapes::ShapeRef.new(shape: __integerMin0Max100, location_name: "sharpness"))
     VideoDescription.add_member(:width, Shapes::ShapeRef.new(shape: __integer, location_name: "width"))
+    VideoDescription.add_member(:crop_rectangle, Shapes::ShapeRef.new(shape: VideoPositionRectangle, location_name: "cropRectangle"))
+    VideoDescription.add_member(:output_position_rectangle, Shapes::ShapeRef.new(shape: VideoPositionRectangle, location_name: "outputPositionRectangle"))
     VideoDescription.struct_class = Types::VideoDescription
+
+    VideoPositionRectangle.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin2Max8192, required: true, location_name: "height"))
+    VideoPositionRectangle.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin2Max8192, required: true, location_name: "width"))
+    VideoPositionRectangle.add_member(:x, Shapes::ShapeRef.new(shape: __integerMin0Max8190, required: true, location_name: "x"))
+    VideoPositionRectangle.add_member(:y, Shapes::ShapeRef.new(shape: __integerMin0Max8190, required: true, location_name: "y"))
+    VideoPositionRectangle.struct_class = Types::VideoPositionRectangle
 
     VideoSelector.add_member(:color_space, Shapes::ShapeRef.new(shape: VideoSelectorColorSpace, location_name: "colorSpace"))
     VideoSelector.add_member(:color_space_settings, Shapes::ShapeRef.new(shape: VideoSelectorColorSpaceSettings, location_name: "colorSpaceSettings"))

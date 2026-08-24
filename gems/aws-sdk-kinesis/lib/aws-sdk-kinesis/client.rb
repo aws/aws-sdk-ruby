@@ -415,6 +415,15 @@ module Aws::Kinesis
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [String] :account_id_endpoint_mode
+    #     The account ID endpoint mode to use. This can be one of the following values:
+    #     * `preferred` - The default behavior. Use the account ID endpoint if
+    #       available, otherwise use the standard endpoint.
+    #     * `disabled` - Never use the account ID endpoint. Only use the standard
+    #       endpoint.
+    #     * `required` - Always use the account ID endpoint. If the account ID
+    #       cannot be retrieved from credentials, an error is raised.
+    #
     #   @option options [Aws::Kinesis::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to
     #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
@@ -1368,12 +1377,16 @@ module Aws::Kinesis
     # iterator reaches the record with the sequence number or other
     # attribute that marks it as the last record to process.
     #
-    # Each data record can be up to 1 MiB in size, and each shard can read
-    # up to 2 MiB per second. You can ensure that your calls don't exceed
-    # the maximum supported size or throughput by using the `Limit`
-    # parameter to specify the maximum number of records that GetRecords can
-    # return. Consider your average record size when determining this limit.
-    # The maximum number of records that can be returned per call is 10,000.
+    # Each data record can be up to 1 MiB in size by default. Amazon Kinesis
+    # Data Streams supports large records up to 10 MiB in size, but the
+    # average throughput for your stream cannot exceed 1 MiB per second. For
+    # more information about how large records are handled, see [Large
+    # records][2]. Each shard can read up to 2 MiB per second. You can
+    # ensure that your calls don't exceed the maximum supported size or
+    # throughput by using the `Limit` parameter to specify the maximum
+    # number of records that GetRecords can return. Consider your average
+    # record size when determining this limit. The maximum number of records
+    # that can be returned per call is 10,000.
     #
     # The size of the data returned by GetRecords varies depending on the
     # utilization of the shard. It is recommended that consumer applications
@@ -1393,7 +1406,7 @@ module Aws::Kinesis
     # To detect whether the application is falling behind in processing, you
     # can use the `MillisBehindLatest` response attribute. You can also
     # monitor the stream using CloudWatch metrics and other mechanisms (see
-    # [Monitoring][2] in the *Amazon Kinesis Data Streams Developer Guide*).
+    # [Monitoring][3] in the *Amazon Kinesis Data Streams Developer Guide*).
     #
     # Each Amazon Kinesis record includes a value,
     # `ApproximateArrivalTimestamp`, that is set when a stream successfully
@@ -1411,7 +1424,8 @@ module Aws::Kinesis
     #
     #
     # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
-    # [2]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html
+    # [2]: https://docs.aws.amazon.com/streams/latest/dev/large-records.html
+    # [3]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html
     #
     # @option params [required, String] :shard_iterator
     #   The position in the shard from which you want to start sequentially
@@ -3269,10 +3283,11 @@ module Aws::Kinesis
     end
 
     # Updates the warm throughput configuration for the specified Amazon
-    # Kinesis Data Streams on-demand data stream. This operation allows you
-    # to proactively scale your on-demand data stream to a specified
-    # throughput level, enabling better performance for sudden traffic
-    # spikes.
+    # Kinesis Data Streams on-demand data stream. Updates the warm
+    # throughput configuration for the specified on-demand data stream. Use
+    # this operation to scale your stream to a specified throughput level
+    # before anticipated traffic spikes, or to release excess capacity after
+    # traffic has decreased.
     #
     # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
     # `StreamName` parameter, or both. It is recommended that you use the
@@ -3292,6 +3307,9 @@ module Aws::Kinesis
     # capacity mode in accounts that have
     # `MinimumThroughputBillingCommitment` enabled. Provisioned capacity
     # mode streams do not support warm throughput configuration.
+    #
+    # To release excess capacity, call the API again and set the warm
+    # throughput to the same or a lower value.
     #
     # This operation has the following default limits. By default, you
     # cannot do the following:
@@ -3375,7 +3393,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

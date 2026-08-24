@@ -1579,6 +1579,8 @@ module Aws::VPCLattice
     class UpdateServiceNetworkVpcAssociationRequest
       attr_accessor service_network_vpc_association_identifier: ::String
       attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor private_dns_enabled: bool
+      attr_accessor dns_options: Types::DnsOptions
       SENSITIVE: []
     end
 
@@ -1588,6 +1590,8 @@ module Aws::VPCLattice
       attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
       attr_accessor created_by: ::String
       attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor private_dns_enabled: bool
+      attr_accessor dns_options: Types::DnsOptions
       SENSITIVE: []
     end
 

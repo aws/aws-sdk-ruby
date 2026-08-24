@@ -166,6 +166,7 @@ module Aws::WorkSpaces
     class ClientProperties
       attr_accessor reconnect_enabled: ("ENABLED" | "DISABLED")
       attr_accessor log_upload_enabled: ("ENABLED" | "DISABLED")
+      attr_accessor client_experience_policy: ::String
       SENSITIVE: []
     end
 
@@ -1107,7 +1108,7 @@ module Aws::WorkSpaces
     end
 
     class ModificationState
-      attr_accessor resource: ("ROOT_VOLUME" | "USER_VOLUME" | "COMPUTE_TYPE" | "PROTOCOL")
+      attr_accessor resource: ("ROOT_VOLUME" | "USER_VOLUME" | "COMPUTE_TYPE" | "PROTOCOL" | "NESTED_VIRTUALIZATION")
       attr_accessor state: ("UPDATE_INITIATED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
       SENSITIVE: []
     end
@@ -1767,6 +1768,7 @@ module Aws::WorkSpaces
       attr_accessor protocols: ::Array[("PCOIP" | "WSP")]
       attr_accessor operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "WINDOWS_SERVER_2025" | "RHEL_8" | "ROCKY_8")
       attr_accessor global_accelerator: Types::GlobalAcceleratorForWorkSpace
+      attr_accessor nested_virtualization_enabled: bool
       SENSITIVE: []
     end
 

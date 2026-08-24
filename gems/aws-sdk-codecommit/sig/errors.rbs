@@ -389,6 +389,8 @@ module Aws
       end
       class TooManyTagsException < ::Aws::Errors::ServiceError
       end
+      class ValidationException < ::Aws::Errors::ServiceError
+      end
     end
   end
 end

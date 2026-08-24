@@ -313,6 +313,35 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The capacity reservation configuration for Amazon ECS Managed
+    # Instances. Use this to target On-Demand Capacity Reservations or
+    # Reserved Instances.
+    #
+    # @!attribute [rw] reservation_group_arn
+    #   The Amazon Resource Name (ARN) of the capacity reservation group to
+    #   target.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_preference
+    #   The capacity reservation preference. Valid values:
+    #
+    #   * `RESERVATIONS_ONLY` — Use only capacity reservations.
+    #
+    #   * `RESERVATIONS_FIRST` — Prefer capacity reservations but fall back
+    #     to On-Demand if unavailable.
+    #
+    #   * `RESERVATIONS_EXCLUDED` — Do not use capacity reservations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CapacityReservationRequest AWS API Documentation
+    #
+    class CapacityReservationRequest < Struct.new(
+      :reservation_group_arn,
+      :reservation_preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # These errors are usually caused by a client action. One example cause
     # is using an action or resource on behalf of a user that doesn't have
     # permissions to use the action or resource. Another cause is specifying
@@ -455,6 +484,11 @@ module Aws::Batch
     #   Reserved.
     #   @return [String]
     #
+    # @!attribute [rw] ecs_settings
+    #   The Amazon ECS settings for the compute environment. These settings
+    #   control CloudWatch Container Insights collection.
+    #   @return [Types::EcsSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeEnvironmentDetail AWS API Documentation
     #
     class ComputeEnvironmentDetail < Struct.new(
@@ -473,7 +507,8 @@ module Aws::Batch
       :eks_configuration,
       :container_orchestration_type,
       :uuid,
-      :context)
+      :context,
+      :ecs_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -522,15 +557,23 @@ module Aws::Batch
     # [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
     # @!attribute [rw] type
-    #   The type of compute environment: `EC2`, `SPOT`, `FARGATE`, or
-    #   `FARGATE_SPOT`. For more information, see [Compute environments][1]
-    #   in the *Batch User Guide*.
+    #   The type of compute environment: `EC2`, `SPOT`, `FARGATE`,
+    #   `FARGATE_SPOT`, or `ECS_MANAGED_INSTANCES`. For more information,
+    #   see [Compute environments][1] in the *Batch User Guide*.
     #
     #   If you choose `SPOT`, you must also specify an Amazon EC2 Spot Fleet
     #   role with the `spotIamFleetRole` parameter. For more information,
     #   see [Amazon EC2 spot fleet role][2] in the *Batch User Guide*.
     #
-    #   <note markdown="1"> Multi-node parallel jobs aren't supported on Spot Instances.
+    #   If you choose `ECS_MANAGED_INSTANCES`, you must also specify a
+    #   `managedInstancesProvider` configuration. To use Spot capacity, set
+    #   `capacityOptionType` to `SPOT` in the
+    #   `managedInstancesProvider.instanceLaunchTemplate` configuration. For
+    #   more information, see [Amazon ECS Managed Instances compute
+    #   environments][3] in the *Batch User Guide*.
+    #
+    #   <note markdown="1"> Multi-node parallel jobs aren't supported on Spot Instances or
+    #   Amazon ECS Managed Instances.
     #
     #    </note>
     #
@@ -538,6 +581,7 @@ module Aws::Batch
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html
+    #   [3]: https://docs.aws.amazon.com/batch/latest/userguide/ecs_managed_instances.html
     #   @return [String]
     #
     # @!attribute [rw] allocation_strategy
@@ -976,6 +1020,32 @@ module Aws::Batch
     #    </note>
     #   @return [Types::ComputeScalingPolicy]
     #
+    # @!attribute [rw] managed_instances_provider
+    #   The configuration for the Amazon ECS Managed Instances capacity
+    #   provider. This parameter is required when `computeResources.type` is
+    #   `ECS_MANAGED_INSTANCES` and must not be specified for other compute
+    #   environment types.
+    #
+    #   For more information, see [Amazon ECS Managed Instances compute
+    #   environments][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/ecs_managed_instances.html
+    #   @return [Types::ManagedInstancesProvider]
+    #
+    # @!attribute [rw] capacity_tags
+    #   The tags to apply to the Amazon ECS capacity provider and Amazon EC2
+    #   instances launched by the compute environment. These tags are
+    #   separate from the compute environment resource tags (the top-level
+    #   `tags` parameter). Use `capacityTags` for cost allocation and
+    #   organization of the underlying infrastructure resources.
+    #
+    #   This parameter is only valid for `ECS_MANAGED_INSTANCES` compute
+    #   environments. You must have the `batch:SetCapacityTags` permission
+    #   on the compute environment resource to use this parameter.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResource AWS API Documentation
     #
     class ComputeResource < Struct.new(
@@ -996,7 +1066,9 @@ module Aws::Batch
       :spot_iam_fleet_role,
       :launch_template,
       :ec2_configuration,
-      :scaling_policy)
+      :scaling_policy,
+      :managed_instances_provider,
+      :capacity_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1490,9 +1562,9 @@ module Aws::Batch
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of compute environment: `EC2`, `SPOT`, `FARGATE`, or
-    #   `FARGATE_SPOT`. For more information, see [Compute environments][1]
-    #   in the *Batch User Guide*.
+    #   The type of compute environment: `EC2`, `SPOT`, `FARGATE`,
+    #   `FARGATE_SPOT`, or `ECS_MANAGED_INSTANCES`. For more information,
+    #   see [Compute environments][1] in the *Batch User Guide*.
     #
     #   If you choose `SPOT`, you must also specify an Amazon EC2 Spot Fleet
     #   role with the `spotIamFleetRole` parameter. For more information,
@@ -1502,6 +1574,8 @@ module Aws::Batch
     #   environment requires an infrastructure update of the compute
     #   environment. For more information, see [Updating compute
     #   environments][3] in the *Batch User Guide*.
+    #
+    #   You cannot change the type to or from `ECS_MANAGED_INSTANCES`.
     #
     #
     #
@@ -1553,6 +1627,21 @@ module Aws::Batch
     #    </note>
     #   @return [Types::ComputeScalingPolicy]
     #
+    # @!attribute [rw] managed_instances_provider
+    #   The updated configuration for the Amazon ECS Managed Instances
+    #   capacity provider. This parameter is only valid when the compute
+    #   environment type is `ECS_MANAGED_INSTANCES`. You cannot change
+    #   `capacityOptionType` or `fipsEnabled` on update.
+    #   @return [Types::UpdateManagedInstancesProviderConfiguration]
+    #
+    # @!attribute [rw] capacity_tags
+    #   The updated tags to apply to the Amazon ECS capacity provider and
+    #   Amazon EC2 instances. This parameter is only valid for
+    #   `ECS_MANAGED_INSTANCES` compute environments. You must have the
+    #   `batch:SetCapacityTags` permission on the compute environment
+    #   resource to use this parameter.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResourceUpdate AWS API Documentation
     #
     class ComputeResourceUpdate < Struct.new(
@@ -1573,7 +1662,9 @@ module Aws::Batch
       :update_to_latest_image_version,
       :type,
       :image_id,
-      :scaling_policy)
+      :scaling_policy,
+      :managed_instances_provider,
+      :capacity_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1713,8 +1804,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
     #
@@ -1769,8 +1860,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/commandline/run/
     #   @return [Boolean]
     #
@@ -1786,8 +1877,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Ulimit>]
     #
@@ -1809,8 +1900,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -1906,8 +1997,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/admin/logging/overview/
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties-logconfiguration.html
@@ -2130,8 +2221,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -2150,8 +2241,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
     #
@@ -2176,8 +2267,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#cmd
     #   @return [Array<String>]
@@ -2223,8 +2314,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::KeyValuePair>]
     #
@@ -2235,8 +2326,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::MountPoint>]
     #
@@ -2248,8 +2339,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   @return [Boolean]
     #
     # @!attribute [rw] privileged
@@ -2267,8 +2358,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
     #
@@ -2284,8 +2375,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Ulimit>]
     #
@@ -2296,8 +2387,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -2359,8 +2450,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/admin/logging/overview/
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties-logconfiguration.html
@@ -2604,6 +2695,12 @@ module Aws::Batch
     #   Reserved.
     #   @return [String]
     #
+    # @!attribute [rw] ecs_settings
+    #   The Amazon ECS settings for the compute environment. These settings
+    #   control CloudWatch Container Insights collection for the compute
+    #   environment.
+    #   @return [Types::EcsSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironmentRequest AWS API Documentation
     #
     class CreateComputeEnvironmentRequest < Struct.new(
@@ -2615,7 +2712,8 @@ module Aws::Batch
       :service_role,
       :tags,
       :eks_configuration,
-      :context)
+      :context,
+      :ecs_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4171,6 +4269,44 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The Amazon ECS settings for a compute environment, including the
+    # CloudWatch Container Insights mode. Use this structure with
+    # `CreateComputeEnvironment` and `UpdateComputeEnvironment`.
+    #
+    # @!attribute [rw] container_insights
+    #   Specifies the CloudWatch Container Insights mode for the compute
+    #   environment. Valid values are:
+    #
+    #   ENABLED
+    #
+    #   : Turns on standard Container Insights, which collects CPU, memory,
+    #     disk, and network utilization metrics for the compute environment.
+    #
+    #   ENHANCED
+    #
+    #   : Turns on enhanced Container Insights, which collects the standard
+    #     metrics along with additional per-task observability metrics.
+    #
+    #   DISABLED
+    #
+    #   : Turns off Container Insights for the compute environment.
+    #
+    #   If you don't specify a value, the default is `DISABLED`. For more
+    #   information, see [Container Insights][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/cloudwatch-container-insights.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EcsSettings AWS API Documentation
+    #
+    class EcsSettings < Struct.new(
+      :container_insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a task definition that describes the container and
     # volume definitions of an Amazon ECS task.
     #
@@ -4249,7 +4385,8 @@ module Aws::Batch
     #
     # @!attribute [rw] runtime_platform
     #   An object that represents the compute environment architecture for
-    #   Batch jobs on Fargate.
+    #   Batch jobs on Fargate or Amazon ECS Managed Instances. Contains the
+    #   operating system family and CPU architecture of the task.
     #   @return [Types::RuntimePlatform]
     #
     # @!attribute [rw] volumes
@@ -4261,6 +4398,12 @@ module Aws::Batch
     #   this task. If `true`, execute command functionality is turned on all
     #   the containers in the task.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] network_mode
+    #   The network mode configured for the task. This field is populated
+    #   for jobs running on Amazon ECS Managed Instances
+    #   (`MANAGED_INSTANCES` platform capability) and always returns `host`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EcsTaskDetails AWS API Documentation
     #
@@ -4277,7 +4420,8 @@ module Aws::Batch
       :network_configuration,
       :runtime_platform,
       :volumes,
-      :enable_execute_command)
+      :enable_execute_command,
+      :network_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4342,6 +4486,11 @@ module Aws::Batch
     #   depends on the Docker daemon setting on the container instance. For
     #   more information, see [IPC settings][1] in the Docker run reference.
     #
+    #   <note markdown="1"> This parameter is not supported for jobs that run on Fargate
+    #   resources.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
@@ -4384,13 +4533,19 @@ module Aws::Batch
     #
     # @!attribute [rw] network_configuration
     #   The network configuration for jobs that are running on Fargate
-    #   resources. Jobs that are running on Amazon EC2 resources must not
-    #   specify this parameter.
+    #   resources. Jobs that are running on Amazon EC2 resources or Amazon
+    #   ECS Managed Instances must not specify this parameter.
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] runtime_platform
     #   An object that represents the compute environment architecture for
-    #   Batch jobs on Fargate.
+    #   Batch jobs on Fargate or Amazon ECS Managed Instances. Use this to
+    #   specify the operating system family (`operatingSystemFamily`) and
+    #   CPU architecture (`cpuArchitecture`).
+    #
+    #   For Amazon ECS Managed Instances, the valid value for
+    #   `operatingSystemFamily` is `LINUX` (default). The valid values for
+    #   `cpuArchitecture` are `X86_64` and `ARM64`.
     #   @return [Types::RuntimePlatform]
     #
     # @!attribute [rw] volumes
@@ -4402,6 +4557,21 @@ module Aws::Batch
     #   this task. If `true`, execute command functionality is turned on all
     #   the containers in the task.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] network_mode
+    #   The network mode to use for the task. Valid values: `host`. When not
+    #   specified, the default is `host`.
+    #
+    #   With `host` mode, the container shares the host instance's network
+    #   stack directly. When running tasks that use the `host` network mode,
+    #   do not run containers using the root user (UID 0). Running as root
+    #   grants unrestricted access to host resources and increases the
+    #   attack surface.
+    #
+    #   This parameter only applies to jobs running on Amazon ECS Managed
+    #   Instances (`MANAGED_INSTANCES` platform capability). It cannot be
+    #   specified for Fargate or Amazon EC2 platform job definitions.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EcsTaskProperties AWS API Documentation
     #
@@ -4416,7 +4586,8 @@ module Aws::Batch
       :network_configuration,
       :runtime_platform,
       :volumes,
-      :enable_execute_command)
+      :enable_execute_command,
+      :network_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6163,6 +6334,179 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The infrastructure optimization configuration for an Amazon ECS
+    # Managed Instances capacity provider. Specifies the idle-instance
+    # scale-in behavior.
+    #
+    # @!attribute [rw] scale_in_after
+    #   The number of seconds an instance can remain idle before it is
+    #   terminated. Valid values are `-1` or `0` to `3600`. Use `-1` as a
+    #   special value to disable scale-in (instances are never terminated
+    #   for being idle). If not specified, a default value applies.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/InfrastructureOptimization AWS API Documentation
+    #
+    class InfrastructureOptimization < Struct.new(
+      :scale_in_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance launch configuration for an Amazon ECS Managed Instances
+    # capacity provider. Specifies the instance profile, networking,
+    # instance selection constraints, capacity pricing model, storage, and
+    # monitoring settings.
+    #
+    # @!attribute [rw] ec2_instance_profile_arn
+    #   The Amazon Resource Name (ARN) of the Amazon EC2 instance profile
+    #   for the managed instances. The instance profile must use the
+    #   `AmazonECSInstanceRolePolicyForManagedInstances` managed policy with
+    #   a trust policy for `ec2.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for the managed instances. Specifies the
+    #   VPC subnets and security groups where instances are launched.
+    #   @return [Types::ManagedInstancesNetworkConfiguration]
+    #
+    # @!attribute [rw] instance_requirements
+    #   The instance type requirements for the capacity provider. Use this
+    #   to constrain which Amazon EC2 instance types Amazon ECS can launch.
+    #   If not specified, all available instance types are eligible.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @!attribute [rw] capacity_option_type
+    #   The capacity pricing model for the managed instances. Valid values:
+    #
+    #   * `ON_DEMAND` (default) — On-Demand pricing.
+    #
+    #   * `SPOT` — Spot Instances, which can provide significant cost
+    #     savings for fault-tolerant workloads.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_configuration
+    #   The storage configuration for the managed instances. Configures the
+    #   root EBS volume size. If not specified, the service uses the default
+    #   EBS volume size for the instance type.
+    #   @return [Types::ManagedInstancesStorageConfiguration]
+    #
+    # @!attribute [rw] monitoring
+    #   The level of CloudWatch monitoring for the managed instances. Valid
+    #   values are `BASIC` and `DETAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] fips_enabled
+    #   Specifies whether FIPS 140-2 validated cryptographic modules are
+    #   enabled on the managed instances. Not available in all Regions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] capacity_reservations
+    #   The capacity reservation configuration for the managed instances.
+    #   Use this to target On-Demand Capacity Reservations or Reserved
+    #   Instances for predictable capacity and cost optimization.
+    #   @return [Types::CapacityReservationRequest]
+    #
+    # @!attribute [rw] instance_metadata_tags_propagation
+    #   Specifies whether instance tags are accessible from the instance
+    #   metadata service (IMDS). If not specified, instance tags are not
+    #   accessible from IMDS.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] local_storage_configuration
+    #   The local storage configuration for the managed instances. If not
+    #   specified, instance store volumes are not available to containers.
+    #   @return [Types::ManagedInstancesLocalStorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/InstanceLaunchTemplate AWS API Documentation
+    #
+    class InstanceLaunchTemplate < Struct.new(
+      :ec2_instance_profile_arn,
+      :network_configuration,
+      :instance_requirements,
+      :capacity_option_type,
+      :storage_configuration,
+      :monitoring,
+      :fips_enabled,
+      :capacity_reservations,
+      :instance_metadata_tags_propagation,
+      :local_storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance launch configuration for updating an Amazon ECS Managed
+    # Instances capacity provider. You cannot change `capacityOptionType` or
+    # `fipsEnabled` after the compute environment is created.
+    #
+    # @!attribute [rw] ec2_instance_profile_arn
+    #   The updated Amazon Resource Name (ARN) of the Amazon EC2 instance
+    #   profile for the managed instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The updated network configuration for the managed instances.
+    #   @return [Types::ManagedInstancesNetworkConfiguration]
+    #
+    # @!attribute [rw] instance_requirements
+    #   The updated instance type requirements for the capacity provider.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @!attribute [rw] storage_configuration
+    #   The updated storage configuration for the managed instances.
+    #   @return [Types::ManagedInstancesStorageConfiguration]
+    #
+    # @!attribute [rw] monitoring
+    #   The updated monitoring level. Valid values are `BASIC` and
+    #   `DETAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservations
+    #   The updated capacity reservation configuration.
+    #   @return [Types::CapacityReservationRequest]
+    #
+    # @!attribute [rw] instance_metadata_tags_propagation
+    #   Specifies whether instance tags are accessible from the instance
+    #   metadata service (IMDS).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] local_storage_configuration
+    #   The updated local storage configuration.
+    #   @return [Types::ManagedInstancesLocalStorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/InstanceLaunchTemplateUpdate AWS API Documentation
+    #
+    class InstanceLaunchTemplateUpdate < Struct.new(
+      :ec2_instance_profile_arn,
+      :network_configuration,
+      :instance_requirements,
+      :storage_configuration,
+      :monitoring,
+      :capacity_reservations,
+      :instance_metadata_tags_propagation,
+      :local_storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance type requirements for the Amazon ECS Managed Instances
+    # capacity provider. Use this to specify which Amazon EC2 instance types
+    # or instance families Amazon ECS can launch.
+    #
+    # @!attribute [rw] allowed_instance_types
+    #   A list of specific instance types or instance families that Amazon
+    #   ECS can launch (for example, `m5.large` or `g5`). When specified,
+    #   only these instance types are used.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/InstanceRequirementsRequest AWS API Documentation
+    #
+    class InstanceRequirementsRequest < Struct.new(
+      :allowed_instance_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The capacity usage for a job, including the unit of measure and
     # quantity of resources being used.
     #
@@ -6282,7 +6626,8 @@ module Aws::Batch
     # @!attribute [rw] platform_capabilities
     #   The platform capabilities required by the job definition. If no
     #   value is specified, it defaults to `EC2`. Jobs run on Fargate
-    #   resources specify `FARGATE`.
+    #   resources specify `FARGATE`. Jobs run on Amazon ECS Managed
+    #   Instances specify `MANAGED_INSTANCES`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ecs_properties
@@ -6509,7 +6854,8 @@ module Aws::Batch
     # @!attribute [rw] platform_capabilities
     #   The platform capabilities required by the job definition. If no
     #   value is specified, it defaults to `EC2`. Jobs run on Fargate
-    #   resources specify `FARGATE`.
+    #   resources specify `FARGATE`. Jobs run on Amazon ECS Managed
+    #   Instances specify `MANAGED_INSTANCES`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] eks_properties
@@ -7157,8 +7503,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Device>]
     #
@@ -8085,6 +8431,102 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The local storage configuration for Amazon ECS Managed Instances.
+    #
+    # @!attribute [rw] use_local_storage
+    #   Specifies whether instance store volumes (local NVMe SSDs) are
+    #   available to containers. When enabled, containers can use the
+    #   instance store for high-performance temporary storage.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ManagedInstancesLocalStorageConfiguration AWS API Documentation
+    #
+    class ManagedInstancesLocalStorageConfiguration < Struct.new(
+      :use_local_storage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The network configuration for Amazon ECS Managed Instances. Specifies
+    # the VPC subnets and security groups where instances are launched.
+    #
+    # @!attribute [rw] subnets
+    #   The VPC subnets where managed instances are launched. If your
+    #   subnets don't provide public IP addresses, they must have a NAT
+    #   gateway for outbound internet access.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The VPC security groups to associate with the managed instances.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ManagedInstancesNetworkConfiguration AWS API Documentation
+    #
+    class ManagedInstancesNetworkConfiguration < Struct.new(
+      :subnets,
+      :security_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an Amazon ECS Managed Instances capacity
+    # provider. This object is required when creating a compute environment
+    # with `computeResources.type` set to `ECS_MANAGED_INSTANCES`.
+    #
+    # @!attribute [rw] propagate_tags
+    #   Specifies whether tags on the capacity provider are propagated to
+    #   the Amazon EC2 instances it launches. Valid values:
+    #
+    #   * `CAPACITY_PROVIDER` — Propagates tags to instances.
+    #
+    #   * `NONE` (default) — Does not propagate tags to instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] infrastructure_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that Amazon ECS
+    #   assumes to manage Amazon EC2 instances on your behalf. This role
+    #   must have a trust policy for `ecs.amazonaws.com`. You must have the
+    #   `iam:PassRole` permission for this role with the condition
+    #   `iam:PassedToService: ecs.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_launch_template
+    #   The instance launch configuration for the Amazon ECS Managed
+    #   Instances capacity provider. Contains networking, instance profile,
+    #   instance requirements, capacity type, storage, and monitoring
+    #   configuration.
+    #   @return [Types::InstanceLaunchTemplate]
+    #
+    # @!attribute [rw] infrastructure_optimization
+    #   The infrastructure optimization configuration for the capacity
+    #   provider. Specifies the idle-instance scale-in behavior.
+    #   @return [Types::InfrastructureOptimization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ManagedInstancesProvider AWS API Documentation
+    #
+    class ManagedInstancesProvider < Struct.new(
+      :propagate_tags,
+      :infrastructure_role_arn,
+      :instance_launch_template,
+      :infrastructure_optimization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The storage configuration for Amazon ECS Managed Instances.
+    #
+    # @!attribute [rw] storage_size_gi_b
+    #   The size of the root EBS volume in GiB for the managed instances.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ManagedInstancesStorageConfiguration AWS API Documentation
+    #
+    class ManagedInstancesStorageConfiguration < Struct.new(
+      :storage_size_gi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details for a Docker volume mount point that's used in a job's
     # container properties. This parameter maps to `Volumes` in the [Create
     # a container][1] section of the *Docker Remote API* and the `--volume`
@@ -8092,7 +8534,7 @@ module Aws::Batch
     #
     #
     #
-    # [1]: https://docs.docker.com/engine/api/v1.43/#tag/Container/operation/ContainerCreate
+    # [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
     #
     # @!attribute [rw] container_path
     #   The path on the container where the host volume is mounted.
@@ -8798,7 +9240,12 @@ module Aws::Batch
     # @!attribute [rw] platform_capabilities
     #   The platform capabilities required by the job definition. If no
     #   value is specified, it defaults to `EC2`. To run the job on Fargate
-    #   resources, specify `FARGATE`.
+    #   resources, specify `FARGATE`. To run the job on Amazon ECS Managed
+    #   Instances, specify `MANAGED_INSTANCES`.
+    #
+    #   Jobs with the `MANAGED_INSTANCES` platform capability must use
+    #   `ecsProperties` (not `containerProperties`) and do not support
+    #   multi-node parallel jobs.
     #
     #   <note markdown="1"> If the job runs on Amazon EKS resources, then you must not specify
     #   `platformCapabilities`.
@@ -8970,17 +9417,29 @@ module Aws::Batch
     #
     #     : `VCPU` = 4 or 8
     #
-    #     value = 36864, 45056, 53248, or 61440
+    #     value = 36864, 45056, or 53248
     #
     #     : `VCPU` = 8
+    #
+    #     value = 61440
+    #
+    #     : `VCPU` = 8 or 32
     #
     #     value = 32768, 40960, 49152, or 57344
     #
     #     : `VCPU` = 8 or 16
     #
-    #     value = 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880
+    #     value = 65536, 73728, 81920, 90112, 98304, 106496, or 114688
     #
     #     : `VCPU` = 16
+    #
+    #     value = 122880
+    #
+    #     : `VCPU` = 16 or 32
+    #
+    #     value = 249856
+    #
+    #     : `VCPU` = 32
     #
     #   type="VCPU"
     #
@@ -8999,7 +9458,7 @@ module Aws::Batch
     #     For jobs that are running on Fargate resources, then `value` must
     #     match one of the supported values and the `MEMORY` values must be
     #     one of the values supported for that `VCPU` value. The supported
-    #     values are 0.25, 0.5, 1, 2, 4, 8, and 16
+    #     values are 0.25, 0.5, 1, 2, 4, 8, 16, and 32.
     #
     #     value = 0.25
     #
@@ -9034,10 +9493,14 @@ module Aws::Batch
     #     : `MEMORY` = 32768, 40960, 49152, 57344, 65536, 73728, 81920,
     #       90112, 98304, 106496, 114688, or 122880
     #
+    #     value = 32
+    #
+    #     : `MEMORY` = 61440, 122880, or 249856
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
     #   [5]: https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate
@@ -10133,8 +10596,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#cmd
     #   @return [Array<String>]
@@ -10153,8 +10616,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::KeyValuePair>]
     #
@@ -10202,8 +10665,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [String]
     #
@@ -10263,8 +10726,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   [4]: https://docs.docker.com/engine/admin/logging/overview/
     #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
@@ -10283,8 +10746,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [Array<Types::MountPoint>]
     #
@@ -10306,8 +10769,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [Boolean]
     #
@@ -10323,8 +10786,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [Boolean]
     #
@@ -10373,8 +10836,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [Array<Types::Ulimit>]
     #
@@ -10545,8 +11008,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#cmd
     #   @return [Array<String>]
@@ -10570,8 +11033,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::KeyValuePair>]
     #
@@ -10619,8 +11082,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [String]
     #
@@ -10676,8 +11139,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   [4]: https://docs.docker.com/engine/admin/logging/overview/
     #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
@@ -10696,8 +11159,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [Array<Types::MountPoint>]
     #
@@ -10720,8 +11183,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [Boolean]
     #
@@ -10737,8 +11200,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [Boolean]
     #
@@ -10787,8 +11250,8 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [1]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/latest/
     #   [3]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [Array<Types::Ulimit>]
     #
@@ -11143,6 +11606,12 @@ module Aws::Batch
     #   Reserved.
     #   @return [String]
     #
+    # @!attribute [rw] ecs_settings
+    #   The Amazon ECS settings for the compute environment. These settings
+    #   control CloudWatch Container Insights collection for the compute
+    #   environment.
+    #   @return [Types::EcsSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentRequest AWS API Documentation
     #
     class UpdateComputeEnvironmentRequest < Struct.new(
@@ -11152,7 +11621,8 @@ module Aws::Batch
       :compute_resources,
       :service_role,
       :update_policy,
-      :context)
+      :context,
+      :ecs_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11342,6 +11812,45 @@ module Aws::Batch
     class UpdateJobQueueResponse < Struct.new(
       :job_queue_name,
       :job_queue_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for updating an Amazon ECS Managed Instances
+    # capacity provider. Used in `UpdateComputeEnvironment` requests. The
+    # `capacityOptionType` and `fipsEnabled` fields cannot be changed on
+    # update.
+    #
+    # @!attribute [rw] propagate_tags
+    #   Specifies whether tags on the capacity provider are propagated to
+    #   the Amazon EC2 instances it launches. Valid values:
+    #
+    #   * `CAPACITY_PROVIDER` — Propagates tags to instances.
+    #
+    #   * `NONE` — Does not propagate tags to instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] infrastructure_role_arn
+    #   The updated Amazon Resource Name (ARN) of the IAM role that Amazon
+    #   ECS assumes to manage Amazon EC2 instances on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_launch_template
+    #   The updated instance launch configuration for the Amazon ECS Managed
+    #   Instances capacity provider.
+    #   @return [Types::InstanceLaunchTemplateUpdate]
+    #
+    # @!attribute [rw] infrastructure_optimization
+    #   The updated infrastructure optimization configuration.
+    #   @return [Types::InfrastructureOptimization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateManagedInstancesProviderConfiguration AWS API Documentation
+    #
+    class UpdateManagedInstancesProviderConfiguration < Struct.new(
+      :propagate_tags,
+      :infrastructure_role_arn,
+      :instance_launch_template,
+      :infrastructure_optimization)
       SENSITIVE = []
       include Aws::Structure
     end

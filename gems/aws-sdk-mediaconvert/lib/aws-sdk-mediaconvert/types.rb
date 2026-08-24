@@ -3230,6 +3230,15 @@ module Aws::MediaConvert
     #   level characteristics of the content.
     #   @return [Types::ContentLightLevel]
     #
+    # @!attribute [rw] field_order
+    #   The field order of interlaced video, which indicates whether the top
+    #   or bottom field is displayed first. Use this to select the correct
+    #   deinterlacing behavior. One of "TopFieldFirst" or
+    #   "BottomFieldFirst". This field is present only for interlaced
+    #   video; it is omitted for progressive video and when the field order
+    #   is not indicated by the source.
+    #   @return [String]
+    #
     # @!attribute [rw] height
     #   The height in pixels as coded by the codec. This represents the
     #   actual encoded video height as specified in the video stream
@@ -3288,6 +3297,7 @@ module Aws::MediaConvert
       :coded_frame_rate,
       :color_primaries,
       :content_light_level,
+      :field_order,
       :height,
       :level,
       :matrix_coefficients,
@@ -3489,6 +3499,12 @@ module Aws::MediaConvert
     # understand the overall structure and details of your media, including
     # format, duration, and track layout.
     #
+    # @!attribute [rw] bit_rate
+    #   The overall bit rate of your media file, in bits per second. This is
+    #   derived from the file size and duration as (file size in bytes * 8)
+    #   / duration in seconds.
+    #   @return [Integer]
+    #
     # @!attribute [rw] duration
     #   The total duration of your media file, in seconds.
     #   @return [Float]
@@ -3513,6 +3529,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Container AWS API Documentation
     #
     class Container < Struct.new(
+      :bit_rate,
       :duration,
       :format,
       :start_timecode,
@@ -11422,6 +11439,24 @@ module Aws::MediaConvert
 
     # These settings relate to your QuickTime MOV output container.
     #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration. In all other cases, keep the default
+    #   value, Default codec duration. When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
+    #   @return [String]
+    #
     # @!attribute [rw] clap_atom
     #   When enabled, include 'clap' atom if appropriate for the video
     #   output settings.
@@ -11457,6 +11492,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MovSettings AWS API Documentation
     #
     class MovSettings < Struct.new(
+      :audio_duration,
       :clap_atom,
       :cslg_atom,
       :mpeg_2_four_cc_control,

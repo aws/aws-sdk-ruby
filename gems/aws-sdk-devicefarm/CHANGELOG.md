@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2026-08-21)
+------------------
+
+* Feature - Added support to CreateRemoveAccessSession for selecting a server version on the mobile WebDriver endpoint.
+
+1.109.0 (2026-08-06)
+------------------
+
+* Feature - Adds support for service generated insights across runs, jobs, and tests.
+
 1.108.0 (2026-07-09)
 ------------------
 

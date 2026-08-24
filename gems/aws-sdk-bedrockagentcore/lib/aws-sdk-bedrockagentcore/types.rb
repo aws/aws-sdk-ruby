@@ -257,12 +257,18 @@ module Aws::BedrockAgentCore
     #   Use a completed batch evaluation as the source of agent traces.
     #   @return [Types::BatchEvaluationTraceConfig]
     #
+    # @!attribute [rw] online_evaluation
+    #   Agent traces from an online evaluation configuration over a
+    #   specified time range.
+    #   @return [Types::OnlineEvaluationTraceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AgentTracesConfig AWS API Documentation
     #
     class AgentTracesConfig < Struct.new(
       :session_spans,
       :cloudwatch_logs,
       :batch_evaluation,
+      :online_evaluation,
       :unknown)
       SENSITIVE = [:session_spans]
       include Aws::Structure
@@ -271,6 +277,7 @@ module Aws::BedrockAgentCore
       class SessionSpans < AgentTracesConfig; end
       class CloudwatchLogs < AgentTracesConfig; end
       class BatchEvaluation < AgentTracesConfig; end
+      class OnlineEvaluation < AgentTracesConfig; end
       class Unknown < AgentTracesConfig; end
     end
 
@@ -1643,7 +1650,7 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] payload
     #   The content payload of the event. This can include conversational
-    #   data or binary content.
+    #   data, JSON data, or binary content.
     #   @return [Array<Types::PayloadType>]
     #
     # @!attribute [rw] branch
@@ -1672,6 +1679,12 @@ module Aws::BedrockAgentCore
     #   processed for extraction as usual.
     #   @return [String]
     #
+    # @!attribute [rw] extraction_config
+    #   The extraction configuration for long-term memory records. Use this
+    #   parameter to specify namespace variable keys and their values for
+    #   namespace substitution during extraction.
+    #   @return [Types::ExtractionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreateEventInput AWS API Documentation
     #
     class CreateEventInput < Struct.new(
@@ -1683,7 +1696,8 @@ module Aws::BedrockAgentCore
       :branch,
       :client_token,
       :metadata,
-      :extraction_mode)
+      :extraction_mode,
+      :extraction_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1830,11 +1844,27 @@ module Aws::BedrockAgentCore
     #   The X402 payment payload.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] permit2_allowance_limit
+    #   The maximum on-chain Permit2 allowance to grant before signing the
+    #   payment authorization, in the asset's smallest denomination. This
+    #   field is valid only for the `upto` (metered) scheme; supplying it
+    #   for the `exact` scheme returns a validation error.
+    #
+    #   When set, the service approves an ERC-20 allowance for this amount
+    #   before processing the payment. The approval sets, rather than adds
+    #   to, the wallet's allowance. Set this field only when the wallet
+    #   needs approving, for example on its first `upto` payment, to avoid a
+    #   redundant on-chain transaction. Omit the field to skip allowance
+    #   handling. This is the default, and the only behavior for the `exact`
+    #   scheme.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CryptoX402PaymentInput AWS API Documentation
     #
     class CryptoX402PaymentInput < Struct.new(
       :version,
-      :payload)
+      :payload,
+      :permit2_allowance_limit)
       SENSITIVE = [:payload]
       include Aws::Structure
     end
@@ -1969,6 +1999,49 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] capacity_provider_id
+    #   The unique identifier of the capacity provider associated with the
+    #   session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the capacity provider session to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeleteCapacityProviderSessionRequest AWS API Documentation
+    #
+    class DeleteCapacityProviderSessionRequest < Struct.new(
+      :capacity_provider_id,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider_arn
+    #   The Amazon Resource Name (ARN) of the capacity provider associated
+    #   with the deleted session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the deleted capacity provider session.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capacity provider session. When the status
+    #   is `Deleting`, the session is being deleted and is not available.
+    #   When the status is `Deleted`, the session is no longer available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeleteCapacityProviderSessionResponse AWS API Documentation
+    #
+    class DeleteCapacityProviderSessionResponse < Struct.new(
+      :capacity_provider_arn,
+      :session_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] memory_id
     #   The identifier of the AgentCore Memory resource from which to delete
     #   the event.
@@ -2018,11 +2091,17 @@ module Aws::BedrockAgentCore
     #   The identifier of the memory record to delete.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The namespace of the memory record to delete. This value is used for
+    #   IAM condition key authorization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeleteMemoryRecordInput AWS API Documentation
     #
     class DeleteMemoryRecordInput < Struct.new(
       :memory_id,
-      :memory_record_id)
+      :memory_record_id,
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2891,6 +2970,24 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # The configuration for extraction behavior. Use this structure to
+    # specify namespace variable keys and their values for namespace
+    # substitution during long-term memory extraction.
+    #
+    # @!attribute [rw] namespace_variables
+    #   A map of `namespaceKeys` to their values. The service substitutes
+    #   these values into `namespaceTemplates` during long-term memory
+    #   extraction to control namespace hierarchy.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExtractionConfig AWS API Documentation
+    #
+    class ExtractionConfig < Struct.new(
+      :namespace_variables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the metadata of a memory extraction job such as the message
     # identifiers that compose this job.
     #
@@ -3694,11 +3791,17 @@ module Aws::BedrockAgentCore
     #   The identifier of the memory record to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The namespace of the memory record to retrieve. This value is used
+    #   for IAM condition key authorization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetMemoryRecordInput AWS API Documentation
     #
     class GetMemoryRecordInput < Struct.new(
       :memory_id,
-      :memory_record_id)
+      :memory_record_id,
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7043,6 +7146,23 @@ module Aws::BedrockAgentCore
       class Unknown < MemoryContent; end
     end
 
+    # Contains non-conversational, JSON-formatted content for an event
+    # payload. JSON payloads are extracted into long-term memory.
+    #
+    # @!attribute [rw] content
+    #   The JSON content of the payload. Accepts any JSON value, including
+    #   objects, arrays, strings, numbers, booleans, and null. The maximum
+    #   size is 100 KB.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryJsonData AWS API Documentation
+    #
+    class MemoryJsonData < Struct.new(
+      :content)
+      SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
     # Filters to apply to metadata associated with a memory. Specify the
     # metadata key and value in the `left` and `right` fields and use the
     # `operator` field to define the relationship to match.
@@ -7160,10 +7280,16 @@ module Aws::BedrockAgentCore
     #   The unique ID of the memory record to be deleted.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The namespace of the memory record being deleted. This value is used
+    #   for IAM condition key authorization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecordDeleteInput AWS API Documentation
     #
     class MemoryRecordDeleteInput < Struct.new(
-      :memory_record_id)
+      :memory_record_id,
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7353,6 +7479,11 @@ module Aws::BedrockAgentCore
     #   memory record.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] source_namespaces
+    #   The namespaces of the source memory record being updated. This value
+    #   is used for IAM condition key authorization.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] memory_strategy_id
     #   The updated ID of the memory strategy that defines how this memory
     #   record is grouped.
@@ -7369,6 +7500,7 @@ module Aws::BedrockAgentCore
       :timestamp,
       :content,
       :namespaces,
+      :source_namespaces,
       :memory_strategy_id,
       :metadata)
       SENSITIVE = []
@@ -7606,6 +7738,75 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Contains the payment challenge from a 402 Payment Required response.
+    # Forward the raw `WWW-Authenticate: Payment` header value verbatim. In
+    # response, you receive a payment credential that satisfies the
+    # challenge. Provide exactly one challenge per request.
+    #
+    # @!attribute [rw] version
+    #   The MPP protocol version, for example "1" or "2".
+    #   @return [String]
+    #
+    # @!attribute [rw] www_authenticate_headers
+    #   The raw `WWW-Authenticate: Payment` header value from the 402
+    #   response, passed verbatim. Provide exactly one entry. The service
+    #   uses this value to generate the payment credential.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] buyer_pays_gas_fees
+    #   Authorizes the service to sign a payment whose blockchain network
+    #   (gas) fees are charged to your wallet, on top of the payment amount.
+    #
+    #   The challenge indicates who sponsors the network fees. When the
+    #   challenge does not sponsor them, the service signs the payment only
+    #   if this field is `true`. Otherwise it returns a validation error, so
+    #   you can decide whether to pay the fees or obtain a challenge that
+    #   sponsors them.
+    #
+    #   Optional. When omitted or `false`, you decline to pay network fees.
+    #   This field has no effect on challenges that already sponsor the
+    #   fees.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MppPaymentInput AWS API Documentation
+    #
+    class MppPaymentInput < Struct.new(
+      :version,
+      :www_authenticate_headers,
+      :buyer_pays_gas_fees)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the payment credential, ready to retry the request.
+    #
+    # @!attribute [rw] version
+    #   The MPP protocol version, for example "1" or "2".
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_payment_id
+    #   The id of the challenge that was paid, echoed from the input
+    #   challenge so you can correlate the result without decoding the
+    #   credential.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_credential
+    #   Ready-to-send value for the `Authorization` header, in the form
+    #   "Payment &lt;base64url-token&gt;". Attach this header and retry
+    #   the original request. To inspect the full credential,
+    #   base64url-decode the token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MppPaymentOutput AWS API Documentation
+    #
+    class MppPaymentOutput < Struct.new(
+      :version,
+      :selected_payment_id,
+      :payment_credential)
+      SENSITIVE = [:payment_credential]
+      include Aws::Structure
+    end
+
     # OAuth2 authentication information for third-party providers.
     #
     # @!attribute [rw] sub
@@ -7694,6 +7895,36 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Contains the configuration for reusing agent traces from an online
+    # evaluation configuration for recommendation analysis. Because online
+    # evaluation is a continuous stream, a time range specifies which
+    # evaluated sessions the recommendation includes.
+    #
+    # @!attribute [rw] online_evaluation_config_arn
+    #   The ARN of the online evaluation configuration to reuse sessions
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the time range. Only sessions evaluated at or
+    #   after this timestamp are included.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the time range. Only sessions evaluated before this
+    #   timestamp are included.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/OnlineEvaluationTraceConfig AWS API Documentation
+    #
+    class OnlineEvaluationTraceConfig < Struct.new(
+      :online_evaluation_config_arn,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Output destination configuration.
     #
     # @note OutputConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OutputConfig corresponding to the set member.
@@ -7729,18 +7960,26 @@ module Aws::BedrockAgentCore
     #   The binary content of the payload.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] json
+    #   The JSON content of the payload. Use this type to store
+    #   non-conversational, JSON-formatted data, such as behavioral events,
+    #   activity logs, or system events.
+    #   @return [Types::MemoryJsonData]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PayloadType AWS API Documentation
     #
     class PayloadType < Struct.new(
       :conversational,
       :blob,
+      :json,
       :unknown)
-      SENSITIVE = [:blob]
+      SENSITIVE = [:blob, :json]
       include Aws::Structure
       include Aws::Structure::Union
 
       class Conversational < PayloadType; end
       class Blob < PayloadType; end
+      class Json < PayloadType; end
       class Unknown < PayloadType; end
     end
 
@@ -7752,16 +7991,25 @@ module Aws::BedrockAgentCore
     #   Input for a crypto X402 payment.
     #   @return [Types::CryptoX402PaymentInput]
     #
+    # @!attribute [rw] mpp
+    #   Contains the payment challenge from a 402 Payment Required response.
+    #   Forward the raw `WWW-Authenticate: Payment` header value verbatim.
+    #   In response, you receive a payment credential that satisfies the
+    #   challenge. Provide exactly one challenge per request.
+    #   @return [Types::MppPaymentInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentInput AWS API Documentation
     #
     class PaymentInput < Struct.new(
       :crypto_x402,
+      :mpp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class CryptoX402 < PaymentInput; end
+      class Mpp < PaymentInput; end
       class Unknown < PaymentInput; end
     end
 
@@ -7899,16 +8147,22 @@ module Aws::BedrockAgentCore
     #   Output from a crypto X402 payment.
     #   @return [Types::CryptoX402PaymentOutput]
     #
+    # @!attribute [rw] mpp
+    #   Contains the payment credential, ready to retry the request.
+    #   @return [Types::MppPaymentOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentOutput AWS API Documentation
     #
     class PaymentOutput < Struct.new(
       :crypto_x402,
+      :mpp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class CryptoX402 < PaymentOutput; end
+      class Mpp < PaymentOutput; end
       class Unknown < PaymentOutput; end
     end
 
@@ -10037,6 +10291,33 @@ module Aws::BedrockAgentCore
       :app_id,
       :basic_auth_token)
       SENSITIVE = [:authorization_signature, :basic_auth_token]
+      include Aws::Structure
+    end
+
+    # Returned when you attempt a wallet operation against a Coinbase
+    # Marketplace connector whose account does not hold an active
+    # Marketplace subscription and is not within the legacy exception
+    # period. Subscribe to the Marketplace listing before you retry the
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_url
+    #   The URL to the Marketplace listing where you can subscribe.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   The name of the product that requires a Marketplace subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SubscriptionRequiredException AWS API Documentation
+    #
+    class SubscriptionRequiredException < Struct.new(
+      :message,
+      :subscription_url,
+      :product_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 

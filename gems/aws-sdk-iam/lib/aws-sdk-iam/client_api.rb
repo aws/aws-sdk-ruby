@@ -22,6 +22,8 @@ module Aws::IAM
     AccessKeyLastUsed = Shapes::StructureShape.new(name: 'AccessKeyLastUsed')
     AccessKeyMetadata = Shapes::StructureShape.new(name: 'AccessKeyMetadata')
     AccountNotManagementOrDelegatedAdministratorException = Shapes::StructureShape.new(name: 'AccountNotManagementOrDelegatedAdministratorException')
+    AcquireRoleRequest = Shapes::StructureShape.new(name: 'AcquireRoleRequest')
+    AcquireRoleResponse = Shapes::StructureShape.new(name: 'AcquireRoleResponse')
     ActionNameListType = Shapes::ListShape.new(name: 'ActionNameListType')
     ActionNameType = Shapes::StringShape.new(name: 'ActionNameType')
     AddClientIDToOpenIDConnectProviderRequest = Shapes::StructureShape.new(name: 'AddClientIDToOpenIDConnectProviderRequest')
@@ -34,6 +36,8 @@ module Aws::IAM
     AttachUserPolicyRequest = Shapes::StructureShape.new(name: 'AttachUserPolicyRequest')
     AttachedPermissionsBoundary = Shapes::StructureShape.new(name: 'AttachedPermissionsBoundary')
     AttachedPolicy = Shapes::StructureShape.new(name: 'AttachedPolicy')
+    AttachmentName = Shapes::StringShape.new(name: 'AttachmentName')
+    AttachmentType = Shapes::StringShape.new(name: 'AttachmentType')
     BootstrapDatum = Shapes::BlobShape.new(name: 'BootstrapDatum')
     CallerIsNotManagementAccountException = Shapes::StructureShape.new(name: 'CallerIsNotManagementAccountException')
     CertificationKeyType = Shapes::StringShape.new(name: 'CertificationKeyType')
@@ -153,6 +157,8 @@ module Aws::IAM
     GetAccountAuthorizationDetailsRequest = Shapes::StructureShape.new(name: 'GetAccountAuthorizationDetailsRequest')
     GetAccountAuthorizationDetailsResponse = Shapes::StructureShape.new(name: 'GetAccountAuthorizationDetailsResponse')
     GetAccountPasswordPolicyResponse = Shapes::StructureShape.new(name: 'GetAccountPasswordPolicyResponse')
+    GetAccountPropertiesRequest = Shapes::StructureShape.new(name: 'GetAccountPropertiesRequest')
+    GetAccountPropertiesResponse = Shapes::StructureShape.new(name: 'GetAccountPropertiesResponse')
     GetAccountSummaryResponse = Shapes::StructureShape.new(name: 'GetAccountSummaryResponse')
     GetContextKeysForCustomPolicyRequest = Shapes::StructureShape.new(name: 'GetContextKeysForCustomPolicyRequest')
     GetContextKeysForPolicyResponse = Shapes::StructureShape.new(name: 'GetContextKeysForPolicyResponse')
@@ -185,6 +191,8 @@ module Aws::IAM
     GetRolePolicyResponse = Shapes::StructureShape.new(name: 'GetRolePolicyResponse')
     GetRoleRequest = Shapes::StructureShape.new(name: 'GetRoleRequest')
     GetRoleResponse = Shapes::StructureShape.new(name: 'GetRoleResponse')
+    GetRoleTemplateVersionRequest = Shapes::StructureShape.new(name: 'GetRoleTemplateVersionRequest')
+    GetRoleTemplateVersionResponse = Shapes::StructureShape.new(name: 'GetRoleTemplateVersionResponse')
     GetSAMLProviderRequest = Shapes::StructureShape.new(name: 'GetSAMLProviderRequest')
     GetSAMLProviderResponse = Shapes::StructureShape.new(name: 'GetSAMLProviderResponse')
     GetSSHPublicKeyRequest = Shapes::StructureShape.new(name: 'GetSSHPublicKeyRequest')
@@ -203,6 +211,8 @@ module Aws::IAM
     GetUserResponse = Shapes::StructureShape.new(name: 'GetUserResponse')
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupDetail = Shapes::StructureShape.new(name: 'GroupDetail')
+    InlinePolicy = Shapes::StructureShape.new(name: 'InlinePolicy')
+    InlinePolicyIdentifierType = Shapes::StructureShape.new(name: 'InlinePolicyIdentifierType')
     InstanceProfile = Shapes::StructureShape.new(name: 'InstanceProfile')
     InvalidAuthenticationCodeException = Shapes::StructureShape.new(name: 'InvalidAuthenticationCodeException', error: {"code" => "InvalidAuthenticationCode", "httpStatusCode" => 403, "senderFault" => true})
     InvalidCertificateException = Shapes::StructureShape.new(name: 'InvalidCertificateException', error: {"code" => "InvalidCertificate", "httpStatusCode" => 400, "senderFault" => true})
@@ -291,15 +301,19 @@ module Aws::IAM
     MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException', error: {"code" => "MalformedPolicyDocument", "httpStatusCode" => 400, "senderFault" => true})
     ManagedPolicyDetail = Shapes::StructureShape.new(name: 'ManagedPolicyDetail')
     ManagedPolicyDetailListType = Shapes::ListShape.new(name: 'ManagedPolicyDetailListType')
+    NameConflictException = Shapes::StructureShape.new(name: 'NameConflictException', error: {"code" => "NameConflict", "httpStatusCode" => 409, "senderFault" => true})
     NoSuchEntityException = Shapes::StructureShape.new(name: 'NoSuchEntityException', error: {"code" => "NoSuchEntity", "httpStatusCode" => 404, "senderFault" => true})
     OpenIDConnectProviderListEntry = Shapes::StructureShape.new(name: 'OpenIDConnectProviderListEntry')
     OpenIDConnectProviderListType = Shapes::ListShape.new(name: 'OpenIDConnectProviderListType')
     OpenIDConnectProviderUrlType = Shapes::StringShape.new(name: 'OpenIDConnectProviderUrlType')
     OpenIdIdpCommunicationErrorException = Shapes::StructureShape.new(name: 'OpenIdIdpCommunicationErrorException', error: {"code" => "OpenIdIdpCommunicationError", "httpStatusCode" => 400, "senderFault" => true})
+    OrderedOrganizationPolicyType = Shapes::StructureShape.new(name: 'OrderedOrganizationPolicyType')
     OrganizationIdType = Shapes::StringShape.new(name: 'OrganizationIdType')
     OrganizationNotFoundException = Shapes::StructureShape.new(name: 'OrganizationNotFoundException')
     OrganizationNotInAllFeaturesModeException = Shapes::StructureShape.new(name: 'OrganizationNotInAllFeaturesModeException')
+    OrganizationPolicyListType = Shapes::ListShape.new(name: 'OrganizationPolicyListType')
     OrganizationsDecisionDetail = Shapes::StructureShape.new(name: 'OrganizationsDecisionDetail')
+    ParameterDefinition = Shapes::StructureShape.new(name: 'ParameterDefinition')
     PasswordPolicy = Shapes::StructureShape.new(name: 'PasswordPolicy')
     PasswordPolicyViolationException = Shapes::StructureShape.new(name: 'PasswordPolicyViolationException', error: {"code" => "PasswordPolicyViolation", "httpStatusCode" => 400, "senderFault" => true})
     PermissionsBoundaryAttachmentType = Shapes::StringShape.new(name: 'PermissionsBoundaryAttachmentType')
@@ -308,9 +322,12 @@ module Aws::IAM
     PolicyDetail = Shapes::StructureShape.new(name: 'PolicyDetail')
     PolicyEvaluationDecisionType = Shapes::StringShape.new(name: 'PolicyEvaluationDecisionType')
     PolicyEvaluationException = Shapes::StructureShape.new(name: 'PolicyEvaluationException', error: {"code" => "PolicyEvaluation", "httpStatusCode" => 500})
+    PolicyExclusionsListType = Shapes::ListShape.new(name: 'PolicyExclusionsListType')
     PolicyGrantingServiceAccess = Shapes::StructureShape.new(name: 'PolicyGrantingServiceAccess')
     PolicyGroup = Shapes::StructureShape.new(name: 'PolicyGroup')
     PolicyGroupListType = Shapes::ListShape.new(name: 'PolicyGroupListType')
+    PolicyIdentifier = Shapes::UnionShape.new(name: 'PolicyIdentifier')
+    PolicyIdentifierPolicyType = Shapes::StringShape.new(name: 'PolicyIdentifierPolicyType')
     PolicyIdentifierType = Shapes::StringShape.new(name: 'PolicyIdentifierType')
     PolicyNotAttachableException = Shapes::StructureShape.new(name: 'PolicyNotAttachableException', error: {"code" => "PolicyNotAttachable", "httpStatusCode" => 400, "senderFault" => true})
     PolicyParameter = Shapes::StructureShape.new(name: 'PolicyParameter')
@@ -323,6 +340,8 @@ module Aws::IAM
     PolicyUserListType = Shapes::ListShape.new(name: 'PolicyUserListType')
     PolicyVersion = Shapes::StructureShape.new(name: 'PolicyVersion')
     Position = Shapes::StructureShape.new(name: 'Position')
+    PutAccountPropertiesRequest = Shapes::StructureShape.new(name: 'PutAccountPropertiesRequest')
+    PutAccountPropertiesResponse = Shapes::StructureShape.new(name: 'PutAccountPropertiesResponse')
     PutGroupPolicyRequest = Shapes::StructureShape.new(name: 'PutGroupPolicyRequest')
     PutRolePermissionsBoundaryRequest = Shapes::StructureShape.new(name: 'PutRolePermissionsBoundaryRequest')
     PutRolePolicyRequest = Shapes::StructureShape.new(name: 'PutRolePolicyRequest')
@@ -334,6 +353,7 @@ module Aws::IAM
     RemoveClientIDFromOpenIDConnectProviderRequest = Shapes::StructureShape.new(name: 'RemoveClientIDFromOpenIDConnectProviderRequest')
     RemoveRoleFromInstanceProfileRequest = Shapes::StructureShape.new(name: 'RemoveRoleFromInstanceProfileRequest')
     RemoveUserFromGroupRequest = Shapes::StructureShape.new(name: 'RemoveUserFromGroupRequest')
+    ReplacementValueEntry = Shapes::StructureShape.new(name: 'ReplacementValueEntry')
     ReportContentType = Shapes::BlobShape.new(name: 'ReportContentType')
     ReportFormatType = Shapes::StringShape.new(name: 'ReportFormatType')
     ReportGenerationLimitExceededException = Shapes::StructureShape.new(name: 'ReportGenerationLimitExceededException', error: {"code" => "ReportGenerationLimitExceeded", "httpStatusCode" => 409, "senderFault" => true})
@@ -350,6 +370,9 @@ module Aws::IAM
     Role = Shapes::StructureShape.new(name: 'Role')
     RoleDetail = Shapes::StructureShape.new(name: 'RoleDetail')
     RoleLastUsed = Shapes::StructureShape.new(name: 'RoleLastUsed')
+    RoleModifiedException = Shapes::StructureShape.new(name: 'RoleModifiedException', error: {"code" => "RoleModified", "httpStatusCode" => 409, "senderFault" => true})
+    RoleTemplateDisabledException = Shapes::StructureShape.new(name: 'RoleTemplateDisabledException', error: {"code" => "RoleTemplateDisabled", "httpStatusCode" => 400, "senderFault" => true})
+    RoleTemplateVersion = Shapes::StructureShape.new(name: 'RoleTemplateVersion')
     RoleUsageListType = Shapes::ListShape.new(name: 'RoleUsageListType')
     RoleUsageType = Shapes::StructureShape.new(name: 'RoleUsageType')
     SAMLMetadataDocumentType = Shapes::StringShape.new(name: 'SAMLMetadataDocumentType')
@@ -378,6 +401,7 @@ module Aws::IAM
     SimulatePolicyResponse = Shapes::StructureShape.new(name: 'SimulatePolicyResponse')
     SimulatePrincipalPolicyRequest = Shapes::StructureShape.new(name: 'SimulatePrincipalPolicyRequest')
     SimulationPolicyListType = Shapes::ListShape.new(name: 'SimulationPolicyListType')
+    SourceRoleTemplate = Shapes::StructureShape.new(name: 'SourceRoleTemplate')
     Statement = Shapes::StructureShape.new(name: 'Statement')
     StatementListType = Shapes::ListShape.new(name: 'StatementListType')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -388,6 +412,7 @@ module Aws::IAM
     TagRoleRequest = Shapes::StructureShape.new(name: 'TagRoleRequest')
     TagSAMLProviderRequest = Shapes::StructureShape.new(name: 'TagSAMLProviderRequest')
     TagServerCertificateRequest = Shapes::StructureShape.new(name: 'TagServerCertificateRequest')
+    TagTemplate = Shapes::StructureShape.new(name: 'TagTemplate')
     TagUserRequest = Shapes::StructureShape.new(name: 'TagUserRequest')
     TrackedActionLastAccessed = Shapes::StructureShape.new(name: 'TrackedActionLastAccessed')
     TrackedActionsLastAccessed = Shapes::ListShape.new(name: 'TrackedActionsLastAccessed')
@@ -434,6 +459,9 @@ module Aws::IAM
     accountAliasListType = Shapes::ListShape.new(name: 'accountAliasListType')
     accountAliasType = Shapes::StringShape.new(name: 'accountAliasType')
     accountIdType = Shapes::StringShape.new(name: 'accountIdType')
+    accountPropertiesMapType = Shapes::MapShape.new(name: 'accountPropertiesMapType')
+    accountPropertyKeyType = Shapes::StringShape.new(name: 'accountPropertyKeyType')
+    accountPropertyValueType = Shapes::StringShape.new(name: 'accountPropertyValueType')
     allUsers = Shapes::BooleanShape.new(name: 'allUsers')
     arnType = Shapes::StringShape.new(name: 'arnType')
     assertionEncryptionModeType = Shapes::StringShape.new(name: 'assertionEncryptionModeType')
@@ -475,6 +503,7 @@ module Aws::IAM
     groupNameListType = Shapes::ListShape.new(name: 'groupNameListType')
     groupNameType = Shapes::StringShape.new(name: 'groupNameType')
     idType = Shapes::StringShape.new(name: 'idType')
+    inlinePolicyTemplateListType = Shapes::ListShape.new(name: 'inlinePolicyTemplateListType')
     instanceProfileListType = Shapes::ListShape.new(name: 'instanceProfileListType')
     instanceProfileNameType = Shapes::StringShape.new(name: 'instanceProfileNameType')
     integerType = Shapes::IntegerShape.new(name: 'integerType')
@@ -491,11 +520,17 @@ module Aws::IAM
     localeType = Shapes::StringShape.new(name: 'localeType')
     malformedCertificateMessage = Shapes::StringShape.new(name: 'malformedCertificateMessage')
     malformedPolicyDocumentMessage = Shapes::StringShape.new(name: 'malformedPolicyDocumentMessage')
+    managedByTypeType = Shapes::StringShape.new(name: 'managedByTypeType')
+    managedByValueType = Shapes::StringShape.new(name: 'managedByValueType')
+    managedPolicyArnListType = Shapes::ListShape.new(name: 'managedPolicyArnListType')
+    mapStringReplacementValueEntry = Shapes::MapShape.new(name: 'mapStringReplacementValueEntry')
     markerType = Shapes::StringShape.new(name: 'markerType')
     maxItemsType = Shapes::IntegerShape.new(name: 'maxItemsType')
     maxPasswordAgeType = Shapes::IntegerShape.new(name: 'maxPasswordAgeType')
     mfaDeviceListType = Shapes::ListShape.new(name: 'mfaDeviceListType')
     minimumPasswordLengthType = Shapes::IntegerShape.new(name: 'minimumPasswordLengthType')
+    minorVersionType = Shapes::IntegerShape.new(name: 'minorVersionType')
+    nameConflictMessage = Shapes::StringShape.new(name: 'nameConflictMessage')
     noSuchEntityMessage = Shapes::StringShape.new(name: 'noSuchEntityMessage')
     notesType = Shapes::StringShape.new(name: 'notesType')
     notificationChannelType = Shapes::StringShape.new(name: 'notificationChannelType')
@@ -503,6 +538,12 @@ module Aws::IAM
     organizationsEntityPathType = Shapes::StringShape.new(name: 'organizationsEntityPathType')
     organizationsPolicyIdType = Shapes::StringShape.new(name: 'organizationsPolicyIdType')
     ownerIdType = Shapes::StringShape.new(name: 'ownerIdType')
+    parameterDefaultValueType = Shapes::StringShape.new(name: 'parameterDefaultValueType')
+    parameterDescriptionType = Shapes::StringShape.new(name: 'parameterDescriptionType')
+    parameterNameType = Shapes::StringShape.new(name: 'parameterNameType')
+    parameterSubTypeType = Shapes::StringShape.new(name: 'parameterSubTypeType')
+    parameterTypeType = Shapes::StringShape.new(name: 'parameterTypeType')
+    parametersDefinitionListType = Shapes::ListShape.new(name: 'parametersDefinitionListType')
     passwordPolicyViolationMessage = Shapes::StringShape.new(name: 'passwordPolicyViolationMessage')
     passwordReusePreventionType = Shapes::IntegerShape.new(name: 'passwordReusePreventionType')
     passwordType = Shapes::StringShape.new(name: 'passwordType')
@@ -537,17 +578,25 @@ module Aws::IAM
     publicKeyIdType = Shapes::StringShape.new(name: 'publicKeyIdType')
     publicKeyMaterialType = Shapes::StringShape.new(name: 'publicKeyMaterialType')
     redirectUrlType = Shapes::StringShape.new(name: 'redirectUrlType')
+    replacementValueListType = Shapes::ListShape.new(name: 'replacementValueListType')
     reportGenerationLimitExceededMessage = Shapes::StringShape.new(name: 'reportGenerationLimitExceededMessage')
     requestMessageType = Shapes::StringShape.new(name: 'requestMessageType')
     requestorNameType = Shapes::StringShape.new(name: 'requestorNameType')
     requestorWorkflowIdType = Shapes::StringShape.new(name: 'requestorWorkflowIdType')
     responseMarkerType = Shapes::StringShape.new(name: 'responseMarkerType')
+    roleDescriptionPatternType = Shapes::StringShape.new(name: 'roleDescriptionPatternType')
     roleDescriptionType = Shapes::StringShape.new(name: 'roleDescriptionType')
     roleDetailListType = Shapes::ListShape.new(name: 'roleDetailListType')
     roleListType = Shapes::ListShape.new(name: 'roleListType')
     roleMaxSessionDurationType = Shapes::IntegerShape.new(name: 'roleMaxSessionDurationType')
+    roleModifiedMessage = Shapes::StringShape.new(name: 'roleModifiedMessage')
+    roleNamePatternType = Shapes::StringShape.new(name: 'roleNamePatternType')
     roleNameType = Shapes::StringShape.new(name: 'roleNameType')
+    rolePathPatternType = Shapes::StringShape.new(name: 'rolePathPatternType')
     rolePermissionRestrictionArnListType = Shapes::ListShape.new(name: 'rolePermissionRestrictionArnListType')
+    roleTemplateDescriptionType = Shapes::StringShape.new(name: 'roleTemplateDescriptionType')
+    roleTemplateDisabledMessage = Shapes::StringShape.new(name: 'roleTemplateDisabledMessage')
+    roleTemplateNameType = Shapes::StringShape.new(name: 'roleTemplateNameType')
     serialNumberType = Shapes::StringShape.new(name: 'serialNumberType')
     serverCertificateMetadataListType = Shapes::ListShape.new(name: 'serverCertificateMetadataListType')
     serverCertificateNameType = Shapes::StringShape.new(name: 'serverCertificateNameType')
@@ -575,6 +624,9 @@ module Aws::IAM
     tagKeyListType = Shapes::ListShape.new(name: 'tagKeyListType')
     tagKeyType = Shapes::StringShape.new(name: 'tagKeyType')
     tagListType = Shapes::ListShape.new(name: 'tagListType')
+    tagTemplateKeyType = Shapes::StringShape.new(name: 'tagTemplateKeyType')
+    tagTemplateListType = Shapes::ListShape.new(name: 'tagTemplateListType')
+    tagTemplateValueType = Shapes::StringShape.new(name: 'tagTemplateValueType')
     tagValueType = Shapes::StringShape.new(name: 'tagValueType')
     thumbprintListType = Shapes::ListShape.new(name: 'thumbprintListType')
     thumbprintType = Shapes::StringShape.new(name: 'thumbprintType')
@@ -618,6 +670,14 @@ module Aws::IAM
     AccessKeyMetadata.struct_class = Types::AccessKeyMetadata
 
     AccountNotManagementOrDelegatedAdministratorException.struct_class = Types::AccountNotManagementOrDelegatedAdministratorException
+
+    AcquireRoleRequest.add_member(:template_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "TemplateArn"))
+    AcquireRoleRequest.add_member(:template_minor_version, Shapes::ShapeRef.new(shape: integerType, location_name: "TemplateMinorVersion"))
+    AcquireRoleRequest.add_member(:replacement_values, Shapes::ShapeRef.new(shape: mapStringReplacementValueEntry, location_name: "ReplacementValues"))
+    AcquireRoleRequest.struct_class = Types::AcquireRoleRequest
+
+    AcquireRoleResponse.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
+    AcquireRoleResponse.struct_class = Types::AcquireRoleResponse
 
     ActionNameListType.member = Shapes::ShapeRef.new(shape: ActionNameType)
 
@@ -1072,6 +1132,11 @@ module Aws::IAM
     GetAccountPasswordPolicyResponse.add_member(:password_policy, Shapes::ShapeRef.new(shape: PasswordPolicy, required: true, location_name: "PasswordPolicy"))
     GetAccountPasswordPolicyResponse.struct_class = Types::GetAccountPasswordPolicyResponse
 
+    GetAccountPropertiesRequest.struct_class = Types::GetAccountPropertiesRequest
+
+    GetAccountPropertiesResponse.add_member(:properties, Shapes::ShapeRef.new(shape: accountPropertiesMapType, location_name: "Properties"))
+    GetAccountPropertiesResponse.struct_class = Types::GetAccountPropertiesResponse
+
     GetAccountSummaryResponse.add_member(:summary_map, Shapes::ShapeRef.new(shape: summaryMapType, location_name: "SummaryMap"))
     GetAccountSummaryResponse.struct_class = Types::GetAccountSummaryResponse
 
@@ -1209,6 +1274,13 @@ module Aws::IAM
     GetRoleResponse.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
     GetRoleResponse.struct_class = Types::GetRoleResponse
 
+    GetRoleTemplateVersionRequest.add_member(:template_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "TemplateArn"))
+    GetRoleTemplateVersionRequest.add_member(:minor_version, Shapes::ShapeRef.new(shape: minorVersionType, location_name: "MinorVersion"))
+    GetRoleTemplateVersionRequest.struct_class = Types::GetRoleTemplateVersionRequest
+
+    GetRoleTemplateVersionResponse.add_member(:role_template_version, Shapes::ShapeRef.new(shape: RoleTemplateVersion, required: true, location_name: "RoleTemplateVersion"))
+    GetRoleTemplateVersionResponse.struct_class = Types::GetRoleTemplateVersionResponse
+
     GetSAMLProviderRequest.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "SAMLProviderArn"))
     GetSAMLProviderRequest.struct_class = Types::GetSAMLProviderRequest
 
@@ -1302,6 +1374,15 @@ module Aws::IAM
     GroupDetail.add_member(:group_policy_list, Shapes::ShapeRef.new(shape: policyDetailListType, location_name: "GroupPolicyList"))
     GroupDetail.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: attachedPoliciesListType, location_name: "AttachedManagedPolicies"))
     GroupDetail.struct_class = Types::GroupDetail
+
+    InlinePolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
+    InlinePolicy.add_member(:policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, required: true, location_name: "PolicyDocument"))
+    InlinePolicy.struct_class = Types::InlinePolicy
+
+    InlinePolicyIdentifierType.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
+    InlinePolicyIdentifierType.add_member(:attachment_type, Shapes::ShapeRef.new(shape: AttachmentType, required: true, location_name: "AttachmentType"))
+    InlinePolicyIdentifierType.add_member(:attachment_name, Shapes::ShapeRef.new(shape: AttachmentName, required: true, location_name: "AttachmentName"))
+    InlinePolicyIdentifierType.struct_class = Types::InlinePolicyIdentifierType
 
     InstanceProfile.add_member(:path, Shapes::ShapeRef.new(shape: pathType, required: true, location_name: "Path"))
     InstanceProfile.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: instanceProfileNameType, required: true, location_name: "InstanceProfileName"))
@@ -1727,6 +1808,9 @@ module Aws::IAM
 
     ManagedPolicyDetailListType.member = Shapes::ShapeRef.new(shape: ManagedPolicyDetail)
 
+    NameConflictException.add_member(:message, Shapes::ShapeRef.new(shape: nameConflictMessage, location_name: "message"))
+    NameConflictException.struct_class = Types::NameConflictException
+
     NoSuchEntityException.add_member(:message, Shapes::ShapeRef.new(shape: noSuchEntityMessage, location_name: "message"))
     NoSuchEntityException.struct_class = Types::NoSuchEntityException
 
@@ -1738,12 +1822,26 @@ module Aws::IAM
     OpenIdIdpCommunicationErrorException.add_member(:message, Shapes::ShapeRef.new(shape: openIdIdpCommunicationErrorExceptionMessage, location_name: "message"))
     OpenIdIdpCommunicationErrorException.struct_class = Types::OpenIdIdpCommunicationErrorException
 
+    OrderedOrganizationPolicyType.add_member(:service_control_policy_input_list, Shapes::ShapeRef.new(shape: SimulationPolicyListType, location_name: "ServiceControlPolicyInputList"))
+    OrderedOrganizationPolicyType.struct_class = Types::OrderedOrganizationPolicyType
+
     OrganizationNotFoundException.struct_class = Types::OrganizationNotFoundException
 
     OrganizationNotInAllFeaturesModeException.struct_class = Types::OrganizationNotInAllFeaturesModeException
 
+    OrganizationPolicyListType.member = Shapes::ShapeRef.new(shape: OrderedOrganizationPolicyType)
+
     OrganizationsDecisionDetail.add_member(:allowed_by_organizations, Shapes::ShapeRef.new(shape: booleanType, location_name: "AllowedByOrganizations"))
     OrganizationsDecisionDetail.struct_class = Types::OrganizationsDecisionDetail
+
+    ParameterDefinition.add_member(:name, Shapes::ShapeRef.new(shape: parameterNameType, required: true, location_name: "Name"))
+    ParameterDefinition.add_member(:type, Shapes::ShapeRef.new(shape: parameterTypeType, required: true, location_name: "Type"))
+    ParameterDefinition.add_member(:sub_type, Shapes::ShapeRef.new(shape: parameterSubTypeType, location_name: "SubType"))
+    ParameterDefinition.add_member(:description, Shapes::ShapeRef.new(shape: parameterDescriptionType, location_name: "Description"))
+    ParameterDefinition.add_member(:is_required, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsRequired"))
+    ParameterDefinition.add_member(:default_value, Shapes::ShapeRef.new(shape: parameterDefaultValueType, location_name: "DefaultValue"))
+    ParameterDefinition.add_member(:immutable, Shapes::ShapeRef.new(shape: booleanType, location_name: "Immutable"))
+    ParameterDefinition.struct_class = Types::ParameterDefinition
 
     PasswordPolicy.add_member(:minimum_password_length, Shapes::ShapeRef.new(shape: minimumPasswordLengthType, location_name: "MinimumPasswordLength"))
     PasswordPolicy.add_member(:require_symbols, Shapes::ShapeRef.new(shape: booleanType, location_name: "RequireSymbols"))
@@ -1784,6 +1882,8 @@ module Aws::IAM
     PolicyEvaluationException.add_member(:message, Shapes::ShapeRef.new(shape: policyEvaluationErrorMessage, location_name: "message"))
     PolicyEvaluationException.struct_class = Types::PolicyEvaluationException
 
+    PolicyExclusionsListType.member = Shapes::ShapeRef.new(shape: PolicyIdentifier)
+
     PolicyGrantingServiceAccess.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
     PolicyGrantingServiceAccess.add_member(:policy_type, Shapes::ShapeRef.new(shape: policyType, required: true, location_name: "PolicyType"))
     PolicyGrantingServiceAccess.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "PolicyArn"))
@@ -1796,6 +1896,16 @@ module Aws::IAM
     PolicyGroup.struct_class = Types::PolicyGroup
 
     PolicyGroupListType.member = Shapes::ShapeRef.new(shape: PolicyGroup)
+
+    PolicyIdentifier.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyIdentifierPolicyType, location_name: "PolicyType"))
+    PolicyIdentifier.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "PolicyArn"))
+    PolicyIdentifier.add_member(:inline_policy_identifier, Shapes::ShapeRef.new(shape: InlinePolicyIdentifierType, location_name: "InlinePolicyIdentifier"))
+    PolicyIdentifier.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PolicyIdentifier.add_member_subclass(:policy_type, Types::PolicyIdentifier::PolicyType)
+    PolicyIdentifier.add_member_subclass(:policy_arn, Types::PolicyIdentifier::PolicyArn)
+    PolicyIdentifier.add_member_subclass(:inline_policy_identifier, Types::PolicyIdentifier::InlinePolicyIdentifier)
+    PolicyIdentifier.add_member_subclass(:unknown, Types::PolicyIdentifier::Unknown)
+    PolicyIdentifier.struct_class = Types::PolicyIdentifier
 
     PolicyNotAttachableException.add_member(:message, Shapes::ShapeRef.new(shape: policyNotAttachableMessage, location_name: "message"))
     PolicyNotAttachableException.struct_class = Types::PolicyNotAttachableException
@@ -1826,6 +1936,11 @@ module Aws::IAM
     Position.add_member(:line, Shapes::ShapeRef.new(shape: LineNumber, location_name: "Line"))
     Position.add_member(:column, Shapes::ShapeRef.new(shape: ColumnNumber, location_name: "Column"))
     Position.struct_class = Types::Position
+
+    PutAccountPropertiesRequest.add_member(:properties, Shapes::ShapeRef.new(shape: accountPropertiesMapType, required: true, location_name: "Properties"))
+    PutAccountPropertiesRequest.struct_class = Types::PutAccountPropertiesRequest
+
+    PutAccountPropertiesResponse.struct_class = Types::PutAccountPropertiesResponse
 
     PutGroupPolicyRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: groupNameType, required: true, location_name: "GroupName"))
     PutGroupPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
@@ -1866,6 +1981,9 @@ module Aws::IAM
     RemoveUserFromGroupRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     RemoveUserFromGroupRequest.struct_class = Types::RemoveUserFromGroupRequest
 
+    ReplacementValueEntry.add_member(:values, Shapes::ShapeRef.new(shape: replacementValueListType, required: true, location_name: "Values"))
+    ReplacementValueEntry.struct_class = Types::ReplacementValueEntry
+
     ReportGenerationLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: reportGenerationLimitExceededMessage, location_name: "message"))
     ReportGenerationLimitExceededException.struct_class = Types::ReportGenerationLimitExceededException
 
@@ -1905,6 +2023,7 @@ module Aws::IAM
     Role.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     Role.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     Role.add_member(:role_last_used, Shapes::ShapeRef.new(shape: RoleLastUsed, location_name: "RoleLastUsed"))
+    Role.add_member(:source_role_template, Shapes::ShapeRef.new(shape: SourceRoleTemplate, location_name: "SourceRoleTemplate"))
     Role.struct_class = Types::Role
 
     RoleDetail.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
@@ -1924,6 +2043,37 @@ module Aws::IAM
     RoleLastUsed.add_member(:last_used_date, Shapes::ShapeRef.new(shape: dateType, location_name: "LastUsedDate"))
     RoleLastUsed.add_member(:region, Shapes::ShapeRef.new(shape: stringType, location_name: "Region"))
     RoleLastUsed.struct_class = Types::RoleLastUsed
+
+    RoleModifiedException.add_member(:message, Shapes::ShapeRef.new(shape: roleModifiedMessage, location_name: "message"))
+    RoleModifiedException.struct_class = Types::RoleModifiedException
+
+    RoleTemplateDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: roleTemplateDisabledMessage, location_name: "message"))
+    RoleTemplateDisabledException.struct_class = Types::RoleTemplateDisabledException
+
+    RoleTemplateVersion.add_member(:template_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "TemplateArn"))
+    RoleTemplateVersion.add_member(:template_name, Shapes::ShapeRef.new(shape: roleTemplateNameType, location_name: "TemplateName"))
+    RoleTemplateVersion.add_member(:template_version_id, Shapes::ShapeRef.new(shape: idType, location_name: "TemplateVersionId"))
+    RoleTemplateVersion.add_member(:description, Shapes::ShapeRef.new(shape: roleTemplateDescriptionType, location_name: "Description"))
+    RoleTemplateVersion.add_member(:major_version, Shapes::ShapeRef.new(shape: integerType, location_name: "MajorVersion"))
+    RoleTemplateVersion.add_member(:default_minor_version, Shapes::ShapeRef.new(shape: minorVersionType, location_name: "DefaultMinorVersion"))
+    RoleTemplateVersion.add_member(:managed_by_type, Shapes::ShapeRef.new(shape: managedByTypeType, location_name: "ManagedByType"))
+    RoleTemplateVersion.add_member(:managed_by_value, Shapes::ShapeRef.new(shape: managedByValueType, location_name: "ManagedByValue"))
+    RoleTemplateVersion.add_member(:enabled, Shapes::ShapeRef.new(shape: booleanType, location_name: "Enabled"))
+    RoleTemplateVersion.add_member(:minor_version, Shapes::ShapeRef.new(shape: minorVersionType, location_name: "MinorVersion"))
+    RoleTemplateVersion.add_member(:role_name_pattern, Shapes::ShapeRef.new(shape: roleNamePatternType, location_name: "RoleNamePattern"))
+    RoleTemplateVersion.add_member(:role_path_pattern, Shapes::ShapeRef.new(shape: rolePathPatternType, location_name: "RolePathPattern"))
+    RoleTemplateVersion.add_member(:role_description_pattern, Shapes::ShapeRef.new(shape: roleDescriptionPatternType, location_name: "RoleDescriptionPattern"))
+    RoleTemplateVersion.add_member(:assume_role_policy_document_template, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "AssumeRolePolicyDocumentTemplate"))
+    RoleTemplateVersion.add_member(:inline_policy_templates, Shapes::ShapeRef.new(shape: inlinePolicyTemplateListType, location_name: "InlinePolicyTemplates"))
+    RoleTemplateVersion.add_member(:managed_policy_arns, Shapes::ShapeRef.new(shape: managedPolicyArnListType, location_name: "ManagedPolicyArns"))
+    RoleTemplateVersion.add_member(:permission_boundary_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "PermissionBoundaryArn"))
+    RoleTemplateVersion.add_member(:parameters_definition, Shapes::ShapeRef.new(shape: parametersDefinitionListType, location_name: "ParametersDefinition"))
+    RoleTemplateVersion.add_member(:role_tags_template, Shapes::ShapeRef.new(shape: tagTemplateListType, location_name: "RoleTagsTemplate"))
+    RoleTemplateVersion.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
+    RoleTemplateVersion.add_member(:version_enabled, Shapes::ShapeRef.new(shape: booleanType, location_name: "VersionEnabled"))
+    RoleTemplateVersion.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateTimestamp"))
+    RoleTemplateVersion.add_member(:update_timestamp, Shapes::ShapeRef.new(shape: dateType, location_name: "UpdateTimestamp"))
+    RoleTemplateVersion.struct_class = Types::RoleTemplateVersion
 
     RoleUsageListType.member = Shapes::ShapeRef.new(shape: RoleUsageType)
 
@@ -2034,6 +2184,7 @@ module Aws::IAM
 
     SimulateCustomPolicyRequest.add_member(:policy_input_list, Shapes::ShapeRef.new(shape: SimulationPolicyListType, required: true, location_name: "PolicyInputList"))
     SimulateCustomPolicyRequest.add_member(:permissions_boundary_policy_input_list, Shapes::ShapeRef.new(shape: SimulationPolicyListType, location_name: "PermissionsBoundaryPolicyInputList"))
+    SimulateCustomPolicyRequest.add_member(:ordered_organization_policy_input_list, Shapes::ShapeRef.new(shape: OrganizationPolicyListType, location_name: "OrderedOrganizationPolicyInputList"))
     SimulateCustomPolicyRequest.add_member(:action_names, Shapes::ShapeRef.new(shape: ActionNameListType, required: true, location_name: "ActionNames"))
     SimulateCustomPolicyRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceNameListType, location_name: "ResourceArns"))
     SimulateCustomPolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "ResourcePolicy"))
@@ -2053,6 +2204,7 @@ module Aws::IAM
     SimulatePrincipalPolicyRequest.add_member(:policy_source_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicySourceArn"))
     SimulatePrincipalPolicyRequest.add_member(:policy_input_list, Shapes::ShapeRef.new(shape: SimulationPolicyListType, location_name: "PolicyInputList"))
     SimulatePrincipalPolicyRequest.add_member(:permissions_boundary_policy_input_list, Shapes::ShapeRef.new(shape: SimulationPolicyListType, location_name: "PermissionsBoundaryPolicyInputList"))
+    SimulatePrincipalPolicyRequest.add_member(:policy_exclusion_list, Shapes::ShapeRef.new(shape: PolicyExclusionsListType, location_name: "PolicyExclusionList"))
     SimulatePrincipalPolicyRequest.add_member(:action_names, Shapes::ShapeRef.new(shape: ActionNameListType, required: true, location_name: "ActionNames"))
     SimulatePrincipalPolicyRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceNameListType, location_name: "ResourceArns"))
     SimulatePrincipalPolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "ResourcePolicy"))
@@ -2065,6 +2217,10 @@ module Aws::IAM
     SimulatePrincipalPolicyRequest.struct_class = Types::SimulatePrincipalPolicyRequest
 
     SimulationPolicyListType.member = Shapes::ShapeRef.new(shape: policyDocumentType)
+
+    SourceRoleTemplate.add_member(:template_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "TemplateArn"))
+    SourceRoleTemplate.add_member(:template_minor_version, Shapes::ShapeRef.new(shape: integerType, required: true, location_name: "TemplateMinorVersion"))
+    SourceRoleTemplate.struct_class = Types::SourceRoleTemplate
 
     Statement.add_member(:source_policy_id, Shapes::ShapeRef.new(shape: PolicyIdentifierType, location_name: "SourcePolicyId"))
     Statement.add_member(:source_policy_type, Shapes::ShapeRef.new(shape: PolicySourceType, location_name: "SourcePolicyType"))
@@ -2105,6 +2261,10 @@ module Aws::IAM
     TagServerCertificateRequest.add_member(:server_certificate_name, Shapes::ShapeRef.new(shape: serverCertificateNameType, required: true, location_name: "ServerCertificateName"))
     TagServerCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, required: true, location_name: "Tags"))
     TagServerCertificateRequest.struct_class = Types::TagServerCertificateRequest
+
+    TagTemplate.add_member(:key, Shapes::ShapeRef.new(shape: tagTemplateKeyType, required: true, location_name: "Key"))
+    TagTemplate.add_member(:value, Shapes::ShapeRef.new(shape: tagTemplateValueType, required: true, location_name: "Value"))
+    TagTemplate.struct_class = Types::TagTemplate
 
     TagUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     TagUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, required: true, location_name: "Tags"))
@@ -2303,6 +2463,9 @@ module Aws::IAM
 
     accountAliasListType.member = Shapes::ShapeRef.new(shape: accountAliasType)
 
+    accountPropertiesMapType.key = Shapes::ShapeRef.new(shape: accountPropertyKeyType)
+    accountPropertiesMapType.value = Shapes::ShapeRef.new(shape: accountPropertyValueType)
+
     attachedPoliciesListType.member = Shapes::ShapeRef.new(shape: AttachedPolicy)
 
     certificateListType.member = Shapes::ShapeRef.new(shape: SigningCertificate)
@@ -2321,11 +2484,20 @@ module Aws::IAM
 
     groupNameListType.member = Shapes::ShapeRef.new(shape: groupNameType)
 
+    inlinePolicyTemplateListType.member = Shapes::ShapeRef.new(shape: InlinePolicy)
+
     instanceProfileListType.member = Shapes::ShapeRef.new(shape: InstanceProfile)
 
     listPolicyGrantingServiceAccessResponseListType.member = Shapes::ShapeRef.new(shape: ListPoliciesGrantingServiceAccessEntry)
 
+    managedPolicyArnListType.member = Shapes::ShapeRef.new(shape: arnType)
+
+    mapStringReplacementValueEntry.key = Shapes::ShapeRef.new(shape: stringType)
+    mapStringReplacementValueEntry.value = Shapes::ShapeRef.new(shape: ReplacementValueEntry)
+
     mfaDeviceListType.member = Shapes::ShapeRef.new(shape: MFADevice)
+
+    parametersDefinitionListType.member = Shapes::ShapeRef.new(shape: ParameterDefinition)
 
     policyDetailListType.member = Shapes::ShapeRef.new(shape: PolicyDetail)
 
@@ -2343,6 +2515,8 @@ module Aws::IAM
 
     privateKeyList.member = Shapes::ShapeRef.new(shape: SAMLPrivateKey)
 
+    replacementValueListType.member = Shapes::ShapeRef.new(shape: stringType)
+
     roleDetailListType.member = Shapes::ShapeRef.new(shape: RoleDetail)
 
     roleListType.member = Shapes::ShapeRef.new(shape: Role)
@@ -2359,6 +2533,8 @@ module Aws::IAM
     tagKeyListType.member = Shapes::ShapeRef.new(shape: tagKeyType)
 
     tagListType.member = Shapes::ShapeRef.new(shape: Tag)
+
+    tagTemplateListType.member = Shapes::ShapeRef.new(shape: TagTemplate)
 
     thumbprintListType.member = Shapes::ShapeRef.new(shape: thumbprintType)
 
@@ -2398,6 +2574,24 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:acquire_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcquireRole"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcquireRoleRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcquireRoleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: RoleModifiedException)
+        o.errors << Shapes::ShapeRef.new(shape: NameConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: RoleTemplateDisabledException)
       end)
 
       api.add_operation(:add_client_id_to_open_id_connect_provider, Seahorse::Model::Operation.new.tap do |o|
@@ -3158,6 +3352,16 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:get_account_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAccountPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccountPropertiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:get_account_summary, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAccountSummary"
         o.http_method = "POST"
@@ -3344,6 +3548,17 @@ module Aws::IAM
         o.input = Shapes::ShapeRef.new(shape: GetRolePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetRolePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_role_template_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRoleTemplateVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRoleTemplateVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRoleTemplateVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -3997,6 +4212,17 @@ module Aws::IAM
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:put_account_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountPropertiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:put_group_policy, Seahorse::Model::Operation.new.tap do |o|

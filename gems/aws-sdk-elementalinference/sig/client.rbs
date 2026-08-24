@@ -127,6 +127,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#create_feed-instance_method
       def create_feed: (
                          name: ::String,
+                         ?access_role_arn: ::String,
                          outputs: Array[
                            Params::create_output
                          ],
@@ -248,6 +249,27 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _SearchFixturesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchFixturesResponse]
+        def fixtures: () -> ::Array[Types::FixtureSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#search_fixtures-instance_method
+      def search_fixtures: (
+                             sport: ("basketball" | "american-football"),
+                             start_date: ::String,
+                             ?end_date: ::String,
+                             ?filters: Array[
+                               {
+                                 name: ("COMPETITOR"),
+                                 values: Array[::String]
+                               }
+                             ],
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _SearchFixturesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchFixturesResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#tag_resource-instance_method
       def tag_resource: (
                           resource_arn: ::String,
@@ -295,6 +317,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#update_feed-instance_method
       def update_feed: (
                          name: ::String,
+                         ?access_role_arn: ::String,
                          id: ::String,
                          outputs: Array[
                            {

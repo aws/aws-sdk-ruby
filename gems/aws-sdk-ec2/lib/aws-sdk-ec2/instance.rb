@@ -795,7 +795,7 @@ module Aws::EC2
     #   image = instance.create_image({
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator, ipam-pool-allocation, capacity-reservation-cancellation-quote
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, ipam-internet-registry-association, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator, ipam-pool-allocation, capacity-reservation-cancellation-quote, application-status-check
     #         tags: [
     #           {
     #             key: "String",
@@ -853,20 +853,28 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     # @option options [String] :snapshot_location
-    #   <note markdown="1"> Only supported for instances in Local Zones. If the source instance is
-    #   not in a Local Zone, omit this parameter.
+    #   <note markdown="1"> Only supported for instances in Local Zones and for instances on
+    #   Outposts that support local snapshots. If the source instance is not
+    #   in one of these locations, omit this parameter.
     #
     #    </note>
     #
     #   The Amazon S3 location where the snapshots will be stored.
     #
-    #   * To create local snapshots in the same Local Zone as the source
-    #     instance, specify `local`.
+    #   * To create local snapshots in the same Local Zone or on the same
+    #     Outpost as the source instance, specify `local`.
     #
-    #   * To create regional snapshots in the parent Region of the Local Zone,
-    #     specify `regional` or omit this parameter.
+    #   * To create regional snapshots in the parent Region of the Local Zone
+    #     or Outpost, specify `regional`.
     #
-    #   Default: `regional`
+    #   If the source instance is in a Local Zone and you omit this parameter,
+    #   regional snapshots are created in the parent Region of the Local Zone.
+    #
+    #   If the source instance is on an Outpost that supports local snapshots,
+    #   this parameter is required. If you omit it, the request fails with an
+    #   `InvalidParameterValue` error.
+    #
+    #   Default: `regional` (for instances in Local Zones only)
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

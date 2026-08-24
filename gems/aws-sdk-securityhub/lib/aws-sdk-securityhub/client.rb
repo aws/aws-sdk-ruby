@@ -10190,6 +10190,68 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Lists the free trial status of Security Hub features. A delegated
+    # Security Hub administrator can list the status for accounts in its
+    # organization. Any other account can list the status only for itself.
+    # Free trial status remains available after a feature is disabled.
+    #
+    # @option params [Array<String>] :account_ids
+    #   The Amazon Web Services account identifiers to list free trial status
+    #   for. You can specify accounts other than your own only if you are a
+    #   delegated Security Hub administrator.
+    #
+    # @option params [Array<String>] :statuses
+    #   The free trial statuses to filter the results by. Valid values:
+    #
+    #   * `ACTIVE` returns only features with an ongoing free trial period.
+    #
+    #   * `INACTIVE` returns only features whose free trial period has ended,
+    #     or that never started.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. If you don't specify a
+    #   value, Security Hub returns up to 100 results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to request the next page of results.
+    #
+    # @return [Types::ListFreeTrialStatusesV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFreeTrialStatusesV2Response#account_free_trial_statuses #account_free_trial_statuses} => Array&lt;Types::AccountFreeTrialStatus&gt;
+    #   * {Types::ListFreeTrialStatusesV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_free_trial_statuses_v2({
+    #     account_ids: ["FreeTrialAccountId"],
+    #     statuses: ["ACTIVE"], # accepts ACTIVE, INACTIVE
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_free_trial_statuses #=> Array
+    #   resp.account_free_trial_statuses[0].account_id #=> String
+    #   resp.account_free_trial_statuses[0].evaluated_at #=> Time
+    #   resp.account_free_trial_statuses[0].free_trial_statuses #=> Array
+    #   resp.account_free_trial_statuses[0].free_trial_statuses[0].feature_type #=> String, one of "SECURITY_HUB_V2", "SECURITY_HUB_V2_MULTI_CLOUD_AZURE"
+    #   resp.account_free_trial_statuses[0].free_trial_statuses[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.account_free_trial_statuses[0].free_trial_statuses[0].started_at #=> Time
+    #   resp.account_free_trial_statuses[0].free_trial_statuses[0].expires_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListFreeTrialStatusesV2 AWS API Documentation
+    #
+    # @overload list_free_trial_statuses_v2(params = {})
+    # @param [Hash] params ({})
+    def list_free_trial_statuses_v2(params = {}, options = {})
+      req = build_request(:list_free_trial_statuses_v2, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> We recommend using Organizations instead of Security Hub CSPM
     # invitations to manage your member accounts. For information, see
     # [Managing Security Hub CSPM administrator and member accounts with
@@ -13547,7 +13609,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.163.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

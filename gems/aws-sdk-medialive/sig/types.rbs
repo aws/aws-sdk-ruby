@@ -2210,7 +2210,7 @@ module Aws::MediaLive
       attr_accessor program_num: ::Integer
       attr_accessor rate_mode: ("CBR" | "VBR")
       attr_accessor scte_27_pids: ::String
-      attr_accessor scte_35_control: ("NONE" | "PASSTHROUGH")
+      attr_accessor scte_35_control: ("NONE" | "PASSTHROUGH" | "SCTE_35_WITHOUT_IDR")
       attr_accessor scte_35_pid: ::String
       attr_accessor scte_35_preroll_pullup_milliseconds: ::Float
       attr_accessor segmentation_markers: ("EBP" | "EBP_LEGACY" | "NONE" | "PSI_SEGSTART" | "RAI_ADAPT" | "RAI_SEGSTART")
@@ -2552,6 +2552,7 @@ module Aws::MediaLive
       attr_accessor nielsen_cbet_settings: Types::NielsenCBET
       attr_accessor nielsen_distribution_type: ("FINAL_DISTRIBUTOR" | "PROGRAM_CONTENT")
       attr_accessor nielsen_naes_ii_nw_settings: Types::NielsenNaesIiNw
+      attr_accessor nielsen_nw_only_settings: Types::NielsenNwOnly
       SENSITIVE: []
     end
 
@@ -2600,6 +2601,7 @@ module Aws::MediaLive
       attr_accessor stream_name: ::String
       attr_accessor url: ::String
       attr_accessor username: ::String
+      attr_accessor virtual_source_address: ::String
       SENSITIVE: []
     end
 
@@ -3557,6 +3559,8 @@ module Aws::MediaLive
       attr_accessor scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "SMART_CROP")
       attr_accessor sharpness: ::Integer
       attr_accessor width: ::Integer
+      attr_accessor crop_rectangle: Types::VideoPositionRectangle
+      attr_accessor output_position_rectangle: Types::VideoPositionRectangle
       SENSITIVE: []
     end
 
@@ -3665,7 +3669,7 @@ module Aws::MediaLive
     class CmafIngestGroupSettings
       attr_accessor destination: Types::OutputLocationRef
       attr_accessor nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
-      attr_accessor scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION")
+      attr_accessor scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION" | "SCTE_35_WITHOUT_IDR")
       attr_accessor segment_length: ::Integer
       attr_accessor segment_length_units: ("MILLISECONDS" | "SECONDS")
       attr_accessor send_delay_ms: ::Integer
@@ -5580,7 +5584,7 @@ module Aws::MediaLive
       attr_accessor nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
       attr_accessor pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")
       attr_accessor pcr_period: ::Integer
-      attr_accessor scte_35_control: ("NONE" | "PASSTHROUGH")
+      attr_accessor scte_35_control: ("NONE" | "PASSTHROUGH" | "SCTE_35_WITHOUT_IDR")
       attr_accessor scte_35_preroll_pullup_milliseconds: ::Float
       SENSITIVE: []
     end
@@ -5757,7 +5761,7 @@ module Aws::MediaLive
       attr_accessor id_3_behavior: ("DISABLED" | "ENABLED")
       attr_accessor klv_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
       attr_accessor nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
-      attr_accessor scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION")
+      attr_accessor scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION" | "SCTE_35_WITHOUT_IDR")
       attr_accessor segment_length: ::Integer
       attr_accessor segment_length_units: ("MILLISECONDS" | "SECONDS")
       attr_accessor timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")
@@ -6035,6 +6039,21 @@ module Aws::MediaLive
       attr_accessor channels: ::Integer
       attr_accessor gain_db: ::Float
       attr_accessor remix_settings: Types::RemixSettings
+      SENSITIVE: []
+    end
+
+    class NielsenNwOnly
+      attr_accessor check_digit_string: ::String
+      attr_accessor sid: ::Float
+      attr_accessor timezone: ("AMERICA_PUERTO_RICO" | "US_ALASKA" | "US_ARIZONA" | "US_CENTRAL" | "US_EASTERN" | "US_HAWAII" | "US_MOUNTAIN" | "US_PACIFIC" | "US_SAMOA" | "UTC")
+      SENSITIVE: []
+    end
+
+    class VideoPositionRectangle
+      attr_accessor height: ::Integer
+      attr_accessor width: ::Integer
+      attr_accessor x: ::Integer
+      attr_accessor y: ::Integer
       SENSITIVE: []
     end
   end

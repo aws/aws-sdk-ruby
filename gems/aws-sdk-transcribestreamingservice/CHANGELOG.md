@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2026-07-31)
+------------------
+
+* Feature - This release adds a new optional TranscriptFormat parameter to the Amazon Transcribe streaming API, letting customers select spoken or written form for numeric and formatted output.
+
 1.104.0 (2026-07-09)
 ------------------
 

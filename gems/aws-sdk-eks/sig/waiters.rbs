@@ -31,6 +31,20 @@ module Aws
                 | (Hash[Symbol, untyped]) -> Client::_DescribeAddonResponseSuccess
       end
 
+      class CertificateAuthorityUpdateComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String,
+                    update_id: ::String,
+                    ?nodegroup_name: ::String,
+                    ?addon_name: ::String,
+                    ?capability_name: ::String
+                  ) -> Client::_DescribeUpdateResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeUpdateResponseSuccess
+      end
+
       class ClusterActive
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void

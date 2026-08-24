@@ -99,6 +99,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#multi_region_consistency-instance_method
       def multi_region_consistency: () -> ("EVENTUAL" | "STRONG")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#vector_indexes-instance_method
+      def vector_indexes: () -> ::Array[Types::VectorIndexDescription]
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#load-instance_method
@@ -359,7 +362,32 @@ module Aws
                       read_units_per_second: ::Integer?,
                       write_units_per_second: ::Integer?
                     },
-                    ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
+                    ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES"),
+                    ?vector_index_updates: Array[
+                      {
+                        create: {
+                          index_name: ::String,
+                          vector_attribute: {
+                            attribute_name: ::String
+                          },
+                          search_schema: Array[
+                            {
+                              attribute_name: ::String,
+                              search_schema_element_type: ("HASH" | "INLINE_FILTER")
+                            }
+                          ]?,
+                          projection: {
+                            projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                            non_key_attributes: Array[::String]?
+                          },
+                          dimensions: ::Integer,
+                          distance_function: ("COSINE" | "DOT_PRODUCT" | "EUCLIDEAN")
+                        }?,
+                        delete: {
+                          index_name: ::String
+                        }?
+                      }
+                    ]
                   ) -> Table
                 | (?Hash[Symbol, untyped]) -> Table
 

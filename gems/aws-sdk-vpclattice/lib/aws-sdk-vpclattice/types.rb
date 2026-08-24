@@ -5926,11 +5926,21 @@ module Aws::VPCLattice
     #   The IDs of the security groups.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] private_dns_enabled
+    #   Indicates if private DNS is enabled for the VPC association.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dns_options
+    #   DNS options for the service network VPC association.
+    #   @return [Types::DnsOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateServiceNetworkVpcAssociationRequest AWS API Documentation
     #
     class UpdateServiceNetworkVpcAssociationRequest < Struct.new(
       :service_network_vpc_association_identifier,
-      :security_group_ids)
+      :security_group_ids,
+      :private_dns_enabled,
+      :dns_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5957,6 +5967,14 @@ module Aws::VPCLattice
     #   The IDs of the security groups.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] private_dns_enabled
+    #   Indicates if private DNS is enabled for the VPC association.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dns_options
+    #   DNS options for the service network VPC association.
+    #   @return [Types::DnsOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateServiceNetworkVpcAssociationResponse AWS API Documentation
     #
     class UpdateServiceNetworkVpcAssociationResponse < Struct.new(
@@ -5964,7 +5982,9 @@ module Aws::VPCLattice
       :arn,
       :status,
       :created_by,
-      :security_group_ids)
+      :security_group_ids,
+      :private_dns_enabled,
+      :dns_options)
       SENSITIVE = []
       include Aws::Structure
     end

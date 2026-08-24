@@ -611,6 +611,42 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # @!attribute [rw] outpost_id
+    #   The ID or ARN of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_information_list
+    #   Information about the VPC used for private connectivity, including
+    #   the VPC, its subnets, and an associated VPC endpoint. You can
+    #   specify at most one entry.
+    #   @return [Array<Types::VpcInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreatePrivateConnectivityConfigInput AWS API Documentation
+    #
+    class CreatePrivateConnectivityConfigInput < Struct.new(
+      :outpost_id,
+      :vpc_information_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] private_connectivity_config
+    #   The private connectivity configuration for the Outpost.
+    #   @return [Types::PrivateConnectivityConfig]
+    #
+    # @!attribute [rw] outpost_id
+    #   The ID of the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreatePrivateConnectivityConfigOutput AWS API Documentation
+    #
+    class CreatePrivateConnectivityConfigOutput < Struct.new(
+      :private_connectivity_config,
+      :outpost_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] outpost_identifier
     #   The ID or ARN of the Outpost to associate with the quote. If not
     #   specified, the quote is created without an Outpost association.
@@ -791,7 +827,7 @@ module Aws::Outposts
       :operating_address,
       :shipping_address,
       :rack_physical_properties)
-      SENSITIVE = []
+      SENSITIVE = [:operating_address, :shipping_address]
       include Aws::Structure
     end
 
@@ -1320,6 +1356,30 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # @!attribute [rw] outpost_id
+    #   The ID or ARN of the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetPrivateConnectivityConfigInput AWS API Documentation
+    #
+    class GetPrivateConnectivityConfigInput < Struct.new(
+      :outpost_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] private_connectivity_config
+    #   The private connectivity configuration for the Outpost.
+    #   @return [Types::PrivateConnectivityConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetPrivateConnectivityConfigOutput AWS API Documentation
+    #
+    class GetPrivateConnectivityConfigOutput < Struct.new(
+      :private_connectivity_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] quote_identifier
     #   The ID of the quote.
     #   @return [String]
@@ -1408,7 +1468,7 @@ module Aws::Outposts
       :site_id,
       :address_type,
       :address)
-      SENSITIVE = []
+      SENSITIVE = [:address]
       include Aws::Structure
     end
 
@@ -2423,6 +2483,43 @@ module Aws::Outposts
     class PricingOption < Struct.new(
       :pricing_type,
       :subscription_pricing_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the private connectivity configuration for an
+    # Outpost.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the service-linked role that
+    #   Amazon Web Services Outposts creates and uses to provision and
+    #   attach the network interfaces for private connectivity in your VPC.
+    #   The role's permissions are scoped to the specific Outpost and VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_connectivity_status
+    #   The status of private connectivity for the Outpost. Valid values are
+    #   `ENABLED` and `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_information_list
+    #   Information about the VPC used for private connectivity.
+    #   @return [Array<Types::VpcInformation>]
+    #
+    # @!attribute [rw] provisioning_role_arn
+    #   The Amazon Resource Name (ARN) of the provisioning role in your
+    #   account that Amazon Web Services Outposts uses to establish the
+    #   service link connection during Outpost installation. This field is
+    #   present only when VPC endpoint-based provisioning is configured.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/PrivateConnectivityConfig AWS API Documentation
+    #
+    class PrivateConnectivityConfig < Struct.new(
+      :role_arn,
+      :private_connectivity_status,
+      :vpc_information_list,
+      :provisioning_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3498,7 +3595,7 @@ module Aws::Outposts
       :site_id,
       :address_type,
       :address)
-      SENSITIVE = []
+      SENSITIVE = [:address]
       include Aws::Structure
     end
 
@@ -3515,7 +3612,7 @@ module Aws::Outposts
     class UpdateSiteAddressOutput < Struct.new(
       :address_type,
       :address)
-      SENSITIVE = []
+      SENSITIVE = [:address]
       include Aws::Structure
     end
 
@@ -3704,6 +3801,35 @@ module Aws::Outposts
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a VPC used for private connectivity, including its
+    # subnets and an associated VPC endpoint.
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC used for private connectivity.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of the subnets associated with the VPC endpoint. Currently,
+    #   only one subnet is supported.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the interface VPC endpoint for the Amazon Web Services
+    #   Outposts service. When specified, the endpoint must be in the
+    #   `available` state and the specified subnets must be associated with
+    #   it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/VpcInformation AWS API Documentation
+    #
+    class VpcInformation < Struct.new(
+      :vpc_id,
+      :subnet_ids,
+      :vpc_endpoint_id)
       SENSITIVE = []
       include Aws::Structure
     end

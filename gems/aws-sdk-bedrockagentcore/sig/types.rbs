@@ -82,6 +82,7 @@ module Aws::BedrockAgentCore
       attr_accessor session_spans: ::Array[untyped]
       attr_accessor cloudwatch_logs: Types::CloudWatchLogsTraceConfig
       attr_accessor batch_evaluation: Types::BatchEvaluationTraceConfig
+      attr_accessor online_evaluation: Types::OnlineEvaluationTraceConfig
       attr_accessor unknown: untyped
       SENSITIVE: [:session_spans]
 
@@ -90,6 +91,8 @@ module Aws::BedrockAgentCore
       class CloudwatchLogs < AgentTracesConfig
       end
       class BatchEvaluation < AgentTracesConfig
+      end
+      class OnlineEvaluation < AgentTracesConfig
       end
       class Unknown < AgentTracesConfig
       end
@@ -508,6 +511,7 @@ module Aws::BedrockAgentCore
       attr_accessor client_token: ::String
       attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
       attr_accessor extraction_mode: ("SKIP")
+      attr_accessor extraction_config: Types::ExtractionConfig
       SENSITIVE: []
     end
 
@@ -550,6 +554,7 @@ module Aws::BedrockAgentCore
     class CryptoX402PaymentInput
       attr_accessor version: ::String
       attr_accessor payload: untyped
+      attr_accessor permit2_allowance_limit: ::String
       SENSITIVE: [:payload]
     end
 
@@ -602,6 +607,19 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class DeleteCapacityProviderSessionRequest
+      attr_accessor capacity_provider_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCapacityProviderSessionResponse
+      attr_accessor capacity_provider_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor status: ("Provisioning" | "Deprovisioning" | "Active" | "Deleting" | "Deleted" | "Stopped")
+      SENSITIVE: []
+    end
+
     class DeleteEventInput
       attr_accessor memory_id: ::String
       attr_accessor session_id: ::String
@@ -618,6 +636,7 @@ module Aws::BedrockAgentCore
     class DeleteMemoryRecordInput
       attr_accessor memory_id: ::String
       attr_accessor memory_record_id: ::String
+      attr_accessor namespace: ::String
       SENSITIVE: []
     end
 
@@ -635,7 +654,7 @@ module Aws::BedrockAgentCore
     end
 
     class DeletePaymentInstrumentResponse
-      attr_accessor status: ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED")
+      attr_accessor status: ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED" | "BLOCKED")
       SENSITIVE: []
     end
 
@@ -861,6 +880,11 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ExtractionConfig
+      attr_accessor namespace_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class ExtractionJob
       attr_accessor job_id: ::String
       SENSITIVE: []
@@ -1082,6 +1106,7 @@ module Aws::BedrockAgentCore
     class GetMemoryRecordInput
       attr_accessor memory_id: ::String
       attr_accessor memory_record_id: ::String
+      attr_accessor namespace: ::String
       SENSITIVE: []
     end
 
@@ -2132,6 +2157,11 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class MemoryJsonData
+      attr_accessor content: untyped
+      SENSITIVE: [:content]
+    end
+
     class MemoryMetadataFilterExpression
       attr_accessor left: Types::MemoryRecordLeftExpression
       attr_accessor operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS" | "BEFORE" | "AFTER" | "CONTAINS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS")
@@ -2161,6 +2191,7 @@ module Aws::BedrockAgentCore
 
     class MemoryRecordDeleteInput
       attr_accessor memory_record_id: ::String
+      attr_accessor namespace: ::String
       SENSITIVE: []
     end
 
@@ -2231,6 +2262,7 @@ module Aws::BedrockAgentCore
       attr_accessor timestamp: ::Time
       attr_accessor content: Types::MemoryContent
       attr_accessor namespaces: ::Array[::String]
+      attr_accessor source_namespaces: ::Array[::String]
       attr_accessor memory_strategy_id: ::String
       attr_accessor metadata: ::Hash[::String, Types::MemoryRecordMetadataValue]
       SENSITIVE: []
@@ -2308,6 +2340,20 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class MppPaymentInput
+      attr_accessor version: ::String
+      attr_accessor www_authenticate_headers: ::Array[::String]
+      attr_accessor buyer_pays_gas_fees: bool
+      SENSITIVE: []
+    end
+
+    class MppPaymentOutput
+      attr_accessor version: ::String
+      attr_accessor selected_payment_id: ::String
+      attr_accessor payment_credential: ::String
+      SENSITIVE: [:payment_credential]
+    end
+
     class OAuth2Authentication
       attr_accessor sub: ::String
       attr_accessor email_address: ::String
@@ -2331,6 +2377,13 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class OnlineEvaluationTraceConfig
+      attr_accessor online_evaluation_config_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
     class OutputConfig
       attr_accessor cloud_watch_config: Types::CloudWatchOutputConfig
       attr_accessor unknown: untyped
@@ -2345,12 +2398,15 @@ module Aws::BedrockAgentCore
     class PayloadType
       attr_accessor conversational: Types::Conversational
       attr_accessor blob: untyped
+      attr_accessor json: Types::MemoryJsonData
       attr_accessor unknown: untyped
-      SENSITIVE: [:blob]
+      SENSITIVE: [:blob, :json]
 
       class Conversational < PayloadType
       end
       class Blob < PayloadType
+      end
+      class Json < PayloadType
       end
       class Unknown < PayloadType
       end
@@ -2358,10 +2414,13 @@ module Aws::BedrockAgentCore
 
     class PaymentInput
       attr_accessor crypto_x402: Types::CryptoX402PaymentInput
+      attr_accessor mpp: Types::MppPaymentInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CryptoX402 < PaymentInput
+      end
+      class Mpp < PaymentInput
       end
       class Unknown < PaymentInput
       end
@@ -2375,7 +2434,7 @@ module Aws::BedrockAgentCore
       attr_accessor payment_instrument_type: ("EMBEDDED_CRYPTO_WALLET")
       attr_accessor payment_instrument_details: Types::PaymentInstrumentDetails
       attr_accessor created_at: ::Time
-      attr_accessor status: ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED")
+      attr_accessor status: ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED" | "BLOCKED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -2397,7 +2456,7 @@ module Aws::BedrockAgentCore
       attr_accessor payment_connector_id: ::String
       attr_accessor user_id: ::String
       attr_accessor payment_instrument_type: ("EMBEDDED_CRYPTO_WALLET")
-      attr_accessor status: ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED")
+      attr_accessor status: ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED" | "BLOCKED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -2405,10 +2464,13 @@ module Aws::BedrockAgentCore
 
     class PaymentOutput
       attr_accessor crypto_x402: Types::CryptoX402PaymentOutput
+      attr_accessor mpp: Types::MppPaymentOutput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CryptoX402 < PaymentOutput
+      end
+      class Mpp < PaymentOutput
       end
       class Unknown < PaymentOutput
       end
@@ -2476,7 +2538,7 @@ module Aws::BedrockAgentCore
       attr_accessor payment_manager_arn: ::String
       attr_accessor payment_session_id: ::String
       attr_accessor payment_instrument_id: ::String
-      attr_accessor payment_type: ("CRYPTO_X402")
+      attr_accessor payment_type: ("CRYPTO_X402" | "MPP")
       attr_accessor payment_input: Types::PaymentInput
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -2487,7 +2549,7 @@ module Aws::BedrockAgentCore
       attr_accessor payment_manager_arn: ::String
       attr_accessor payment_session_id: ::String
       attr_accessor payment_instrument_id: ::String
-      attr_accessor payment_type: ("CRYPTO_X402")
+      attr_accessor payment_type: ("CRYPTO_X402" | "MPP")
       attr_accessor status: ("PROOF_GENERATED")
       attr_accessor payment_output: Types::PaymentOutput
       attr_accessor created_at: ::Time
@@ -3009,6 +3071,13 @@ module Aws::BedrockAgentCore
       attr_accessor app_id: ::String
       attr_accessor basic_auth_token: ::String
       SENSITIVE: [:authorization_signature, :basic_auth_token]
+    end
+
+    class SubscriptionRequiredException
+      attr_accessor message: ::String
+      attr_accessor subscription_url: ::String
+      attr_accessor product_name: ::String
+      SENSITIVE: []
     end
 
     class SystemPromptConfig

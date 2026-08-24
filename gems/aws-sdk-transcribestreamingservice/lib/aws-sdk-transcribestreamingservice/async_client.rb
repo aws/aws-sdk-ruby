@@ -817,7 +817,7 @@ module Aws::TranscribeStreamingService
     #   async_resp = async_client.start_call_analytics_stream_transcription({
     #     language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
     #     media_sample_rate_hertz: 1, # required
-    #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
+    #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac, g711-alaw, g711-ulaw, g729
     #     vocabulary_name: "VocabularyName",
     #     session_id: "SessionId",
     #     input_event_stream_hander: EventStreams::AudioStream.new,
@@ -845,7 +845,7 @@ module Aws::TranscribeStreamingService
     #   resp.request_id #=> String
     #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
     #   resp.media_sample_rate_hertz #=> Integer
-    #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
+    #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac", "g711-alaw", "g711-ulaw", "g729"
     #   resp.vocabulary_name #=> String
     #   resp.session_id #=> String
     #   # All events are available at resp.call_analytics_transcript_result_stream:
@@ -1452,7 +1452,7 @@ module Aws::TranscribeStreamingService
     #   async_resp = async_client.start_medical_stream_transcription({
     #     language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, es-ES, ar-SA, pt-PT, ca-ES, ar-AE, hi-IN, zh-HK, nl-NL, no-NO, sv-SE, pl-PL, fi-FI, zh-TW, en-IN, en-IE, en-NZ, en-AB, en-ZA, en-WL, de-CH, af-ZA, eu-ES, hr-HR, cs-CZ, da-DK, fa-IR, gl-ES, el-GR, he-IL, id-ID, lv-LV, ms-MY, ro-RO, ru-RU, sr-RS, sk-SK, so-SO, tl-PH, uk-UA, vi-VN, zu-ZA, am-ET, be-BY, bg-BG, bn-IN, bs-BA, ckb-IQ, ckb-IR, cy-WL, es-MX, et-ET, fa-AF, gu-IN, ht-HT, hu-HU, hy-AM, is-IS, jv-ID, ka-GE, kab-DZ, kk-KZ, km-KH, kn-IN, lg-IN, lt-LT, mk-MK, ml-IN, mr-IN, my-MM, ne-NP, or-IN, pa-IN, ps-AF, si-LK, sl-SI, sq-AL, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, ta-IN, te-IN, tr-TR, uz-UZ
     #     media_sample_rate_hertz: 1, # required
-    #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
+    #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac, g711-alaw, g711-ulaw, g729
     #     vocabulary_name: "VocabularyName",
     #     specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
     #     type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
@@ -1473,7 +1473,7 @@ module Aws::TranscribeStreamingService
     #   resp.request_id #=> String
     #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"
     #   resp.media_sample_rate_hertz #=> Integer
-    #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
+    #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac", "g711-alaw", "g711-ulaw", "g729"
     #   resp.vocabulary_name #=> String
     #   resp.specialty #=> String, one of "PRIMARYCARE", "CARDIOLOGY", "NEUROLOGY", "ONCOLOGY", "RADIOLOGY", "UROLOGY"
     #   resp.type #=> String, one of "CONVERSATION", "DICTATION"
@@ -1921,6 +1921,20 @@ module Aws::TranscribeStreamingService
     #   `SessionResumeWindow` of 30 minutes, you can reconnect to the session
     #   as many times as you want until 1:30 PM.
     #
+    # @option params [String] :transcript_format
+    #   Specify how numbers, dates, and other alphanumeric entities are
+    #   rendered in your transcription results.
+    #
+    #   * `WRITTEN` renders these entities in their standard written form (for
+    #     example, `$50`, `10:30 AM`, and `101`).
+    #
+    #   * `SPOKEN` renders these entities as words, exactly as they were
+    #     spoken (for example, `fifty dollars`, `ten thirty a m`, and `one oh
+    #     one`).
+    #
+    #   If you don't specify a value, Amazon Transcribe uses `WRITTEN` by
+    #   default.
+    #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartStreamTranscriptionResponse#request_id #request_id} => String
@@ -1948,6 +1962,7 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_names #vocabulary_names} => String
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_names #vocabulary_filter_names} => String
     #   * {Types::StartStreamTranscriptionResponse#session_resume_window #session_resume_window} => Integer
+    #   * {Types::StartStreamTranscriptionResponse#transcript_format #transcript_format} => String
     #
     # @example Bi-directional EventStream Operation Example
     #   # You can signal input events after the initial request is established. Events
@@ -2051,7 +2066,7 @@ module Aws::TranscribeStreamingService
     #   async_resp = async_client.start_stream_transcription({
     #     language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, es-ES, ar-SA, pt-PT, ca-ES, ar-AE, hi-IN, zh-HK, nl-NL, no-NO, sv-SE, pl-PL, fi-FI, zh-TW, en-IN, en-IE, en-NZ, en-AB, en-ZA, en-WL, de-CH, af-ZA, eu-ES, hr-HR, cs-CZ, da-DK, fa-IR, gl-ES, el-GR, he-IL, id-ID, lv-LV, ms-MY, ro-RO, ru-RU, sr-RS, sk-SK, so-SO, tl-PH, uk-UA, vi-VN, zu-ZA, am-ET, be-BY, bg-BG, bn-IN, bs-BA, ckb-IQ, ckb-IR, cy-WL, es-MX, et-ET, fa-AF, gu-IN, ht-HT, hu-HU, hy-AM, is-IS, jv-ID, ka-GE, kab-DZ, kk-KZ, km-KH, kn-IN, lg-IN, lt-LT, mk-MK, ml-IN, mr-IN, my-MM, ne-NP, or-IN, pa-IN, ps-AF, si-LK, sl-SI, sq-AL, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, ta-IN, te-IN, tr-TR, uz-UZ
     #     media_sample_rate_hertz: 1, # required
-    #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
+    #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac, g711-alaw, g711-ulaw, g729
     #     vocabulary_name: "VocabularyName",
     #     session_id: "SessionId",
     #     input_event_stream_hander: EventStreams::AudioStream.new,
@@ -2073,6 +2088,7 @@ module Aws::TranscribeStreamingService
     #     vocabulary_names: "VocabularyNames",
     #     vocabulary_filter_names: "VocabularyFilterNames",
     #     session_resume_window: 1,
+    #     transcript_format: "spoken", # accepts spoken, written
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -2084,7 +2100,7 @@ module Aws::TranscribeStreamingService
     #   resp.request_id #=> String
     #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"
     #   resp.media_sample_rate_hertz #=> Integer
-    #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
+    #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac", "g711-alaw", "g711-ulaw", "g729"
     #   resp.vocabulary_name #=> String
     #   resp.session_id #=> String
     #   # All events are available at resp.transcript_result_stream:
@@ -2154,6 +2170,7 @@ module Aws::TranscribeStreamingService
     #   resp.vocabulary_names #=> String
     #   resp.vocabulary_filter_names #=> String
     #   resp.session_resume_window #=> Integer
+    #   resp.transcript_format #=> String, one of "spoken", "written"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -2203,7 +2220,7 @@ module Aws::TranscribeStreamingService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

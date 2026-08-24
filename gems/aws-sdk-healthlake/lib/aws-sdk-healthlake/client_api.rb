@@ -63,6 +63,7 @@ module Aws::HealthLake
     DatastorePropertiesList = Shapes::ListShape.new(name: 'DatastorePropertiesList')
     DatastoreStatus = Shapes::StringShape.new(name: 'DatastoreStatus')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DefaultEnabledBoolean = Shapes::BooleanShape.new(name: 'DefaultEnabledBoolean')
     DefaultProfiles = Shapes::ListShape.new(name: 'DefaultProfiles')
     DeleteDataTransformationProfileRequest = Shapes::StructureShape.new(name: 'DeleteDataTransformationProfileRequest')
     DeleteDataTransformationProfileResponse = Shapes::StructureShape.new(name: 'DeleteDataTransformationProfileResponse')
@@ -611,6 +612,7 @@ module Aws::HealthLake
     StartFHIRImportJobRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: BoundedLengthString, location_name: "ProfileId"))
     StartFHIRImportJobRequest.add_member(:input_format, Shapes::ShapeRef.new(shape: BoundedLengthString, location_name: "InputFormat"))
     StartFHIRImportJobRequest.add_member(:drift_detection_enabled, Shapes::ShapeRef.new(shape: HealthLakeBoolean, location_name: "DriftDetectionEnabled"))
+    StartFHIRImportJobRequest.add_member(:provenance_enabled, Shapes::ShapeRef.new(shape: DefaultEnabledBoolean, location_name: "ProvenanceEnabled"))
     StartFHIRImportJobRequest.struct_class = Types::StartFHIRImportJobRequest
 
     StartFHIRImportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))

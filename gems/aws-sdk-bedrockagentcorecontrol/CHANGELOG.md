@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2026-08-21)
+------------------
+
+* Feature - Update Dataset schema to THIRDPARTYEVALUATIONV1
+
+1.66.0 (2026-08-19)
+------------------
+
+* Feature - AgentCore Memory now supports Flexible Namespaces
+
+1.65.0 (2026-08-17)
+------------------
+
+* Feature - Adds implementations of third-party evaluators, both managed-as-a-service and as templates within custom evaluators.
+
+1.64.0 (2026-08-14)
+------------------
+
+* Feature - Adds AgentCore Payments support for CMK, Marketplace Subscriptions and QuickCreate
+
+1.63.0 (2026-08-06)
+------------------
+
+* Feature - Add support for Gateway rate limits and Runtime instances in Amazon Bedrock AgentCore. Customers can now configure rate limits scoped to control request rates, token consumption rates, and active connection rates. Customers can now create capacity providers to launch runtimes on their EC2 instances.
+
+1.62.0 (2026-08-05)
+------------------
+
+* Feature - Adding support for fine-grained access control for AgentCore Memory through managed AgentCore Gateway HTTP Connectors.
+
+1.61.0 (2026-07-30)
+------------------
+
+* Feature - Adds support for configuring models through the OpenResponses API for custom evaluators. CreateEvaluator and UpdateEvaluator now accept an OpenResponses model configuration for LLM-as-a-Judge evaluations.
+
 1.60.0 (2026-07-28)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.193.0 (2026-08-20)
+------------------
+
+* Feature - Adds support for full JSON resource-based policies, enabling customers to create, retrieve, update, and delete function resource policies as complete JSON documents.
+
+1.192.0 (2026-07-30)
+------------------
+
+* Feature - Add Python3.15 (python3.15) and NodeJs 26 (nodejs26.x) support to AWS Lambda
+
 1.191.0 (2026-07-14)
 ------------------
 

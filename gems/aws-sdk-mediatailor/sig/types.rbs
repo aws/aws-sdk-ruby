@@ -36,6 +36,7 @@ module Aws::MediaTailor
 
     class AdDecisionServerConfiguration
       attr_accessor http_request: Types::HttpRequest
+      attr_accessor vast_response: Types::VastResponse
       SENSITIVE: []
     end
 
@@ -141,6 +142,15 @@ module Aws::MediaTailor
     class ClipRange
       attr_accessor end_offset_millis: ::Integer
       attr_accessor start_offset_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConcurrentExecutorConfiguration
+      attr_accessor runtime: ("JSONATA")
+      attr_accessor output: ::Hash[::String, ::String]
+      attr_accessor function_list: ::Array[Types::FunctionRef]
+      attr_accessor timeout_milliseconds: ::Integer
+      attr_accessor max_concurrency: ::Integer
       SENSITIVE: []
     end
 
@@ -527,10 +537,11 @@ module Aws::MediaTailor
 
     class Function
       attr_accessor function_id: ::String
-      attr_accessor function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "SEQUENTIAL_EXECUTOR")
+      attr_accessor function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR")
       attr_accessor description: ::String
       attr_accessor http_request_configuration: Types::HttpRequestConfiguration
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration
+      attr_accessor concurrent_executor_configuration: Types::ConcurrentExecutorConfiguration
       attr_accessor sequential_executor_configuration: Types::SequentialExecutorConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor arn: ::String
@@ -540,6 +551,7 @@ module Aws::MediaTailor
     class FunctionRef
       attr_accessor run_condition: ::String
       attr_accessor function_id: ::String
+      attr_accessor alias: ::String
       SENSITIVE: []
     end
 
@@ -575,10 +587,11 @@ module Aws::MediaTailor
 
     class GetFunctionResponse
       attr_accessor function_id: ::String
-      attr_accessor function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "SEQUENTIAL_EXECUTOR")
+      attr_accessor function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR")
       attr_accessor description: ::String
       attr_accessor http_request_configuration: Types::HttpRequestConfiguration
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration
+      attr_accessor concurrent_executor_configuration: Types::ConcurrentExecutorConfiguration
       attr_accessor sequential_executor_configuration: Types::SequentialExecutorConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor arn: ::String
@@ -804,6 +817,7 @@ module Aws::MediaTailor
     class LivePreRollConfiguration
       attr_accessor ad_decision_server_url: ::String
       attr_accessor max_duration_seconds: ::Integer
+      attr_accessor ad_decision_server_configuration: Types::PreRollAdDecisionServerConfiguration
       SENSITIVE: []
     end
 
@@ -873,6 +887,16 @@ module Aws::MediaTailor
       SENSITIVE: []
     end
 
+    class PreRollAdDecisionServerConfiguration
+      attr_accessor vast_response: Types::PreRollVastResponse
+      SENSITIVE: []
+    end
+
+    class PreRollVastResponse
+      attr_accessor ad_sequencing_mode: ("FOLLOW_AD_SEQUENCE" | "IGNORE_AD_SEQUENCE")
+      SENSITIVE: []
+    end
+
     class PrefetchConsumption
       attr_accessor avail_matching_criteria: ::Array[Types::AvailMatchingCriteria]
       attr_accessor end_time: ::Time
@@ -914,10 +938,11 @@ module Aws::MediaTailor
 
     class PutFunctionRequest
       attr_accessor function_id: ::String
-      attr_accessor function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "SEQUENTIAL_EXECUTOR")
+      attr_accessor function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR")
       attr_accessor description: ::String
       attr_accessor http_request_configuration: Types::HttpRequestConfiguration
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration
+      attr_accessor concurrent_executor_configuration: Types::ConcurrentExecutorConfiguration
       attr_accessor sequential_executor_configuration: Types::SequentialExecutorConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -925,10 +950,11 @@ module Aws::MediaTailor
 
     class PutFunctionResponse
       attr_accessor function_id: ::String
-      attr_accessor function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "SEQUENTIAL_EXECUTOR")
+      attr_accessor function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR")
       attr_accessor description: ::String
       attr_accessor http_request_configuration: Types::HttpRequestConfiguration
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration
+      attr_accessor concurrent_executor_configuration: Types::ConcurrentExecutorConfiguration
       attr_accessor sequential_executor_configuration: Types::SequentialExecutorConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor arn: ::String
@@ -1296,6 +1322,11 @@ module Aws::MediaTailor
       attr_accessor source_location_name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class VastResponse
+      attr_accessor ad_sequencing_mode: ("FOLLOW_AD_SEQUENCE" | "IGNORE_AD_SEQUENCE" | "FOLLOW_AD_SEQUENCE_ONLY_LIVE" | "FOLLOW_AD_SEQUENCE_ONLY_VOD")
       SENSITIVE: []
     end
 

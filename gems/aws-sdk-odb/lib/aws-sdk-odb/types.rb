@@ -140,6 +140,52 @@ module Aws::Odb
     #
     class AssociateIamRoleToResourceOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster to add virtual
+    #   machines to.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_node_count
+    #   The desired number of nodes in the Exascale VM cluster after the
+    #   association.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AssociateVirtualMachinesToExadbVmClusterInput AWS API Documentation
+    #
+    class AssociateVirtualMachinesToExadbVmClusterInput < Struct.new(
+      :exadb_vm_cluster_id,
+      :desired_node_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AssociateVirtualMachinesToExadbVmClusterOutput AWS API Documentation
+    #
+    class AssociateVirtualMachinesToExadbVmClusterOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :exadb_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Autonomous Database.
     #
     # @!attribute [rw] autonomous_database_id
@@ -3189,8 +3235,9 @@ module Aws::Odb
     #   @return [String]
     #
     # @!attribute [rw] scan_dns_name
-    #   The FQDN of the DNS record for the Single Client Access Name (SCAN)
-    #   IP addresses that are associated with the VM cluster.
+    #   The fully qualified domain name (FQDN) of the DNS record for the
+    #   Single Client Access Name (SCAN) IP addresses that are associated
+    #   with the VM cluster.
     #   @return [String]
     #
     # @!attribute [rw] scan_dns_record_id
@@ -3442,8 +3489,9 @@ module Aws::Odb
     #   @return [String]
     #
     # @!attribute [rw] scan_dns_name
-    #   The FQDN of the DNS record for the Single Client Access Name (SCAN)
-    #   IP addresses that are associated with the VM cluster.
+    #   The fully qualified domain name (FQDN) of the DNS record for the
+    #   Single Client Access Name (SCAN) IP addresses that are associated
+    #   with the VM cluster.
     #   @return [String]
     #
     # @!attribute [rw] scan_dns_record_id
@@ -4315,8 +4363,8 @@ module Aws::Odb
     #   @return [Float]
     #
     # @!attribute [rw] db_node_storage_size_in_g_bs
-    #   The amount of local node storage, in gigabytes (GBs), to allocate
-    #   for the VM cluster.
+    #   The amount of local node storage, in gigabytes (GB), to allocate for
+    #   the VM cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] db_servers
@@ -4343,7 +4391,7 @@ module Aws::Odb
     #   @return [String]
     #
     # @!attribute [rw] memory_size_in_g_bs
-    #   The amount of memory, in gigabytes (GBs), to allocate for the VM
+    #   The amount of memory, in gigabytes (GB), to allocate for the VM
     #   cluster.
     #   @return [Integer]
     #
@@ -4430,6 +4478,263 @@ module Aws::Odb
       :status,
       :status_reason,
       :cloud_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   A user-friendly name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_ecpu_count
+    #   The number of ECPUs to enable for the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault for this
+    #   Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] grid_image_id
+    #   The Grid Infrastructure software image ID for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] hostname
+    #   The host name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_count
+    #   The number of nodes in the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] odb_network_id
+    #   The unique identifier of the ODB network for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] shape
+    #   The shape of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssh_public_keys
+    #   The public key portion of one or more key pairs used for SSH access
+    #   to the Exascale VM cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] total_ecpu_count
+    #   The total number of ECPUs for the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vm_file_system_storage_total_size_in_g_bs
+    #   The total amount of file system storage, in gigabytes (GB), for the
+    #   Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cluster_name
+    #   A name for the Grid Infrastructure cluster. The name isn't case
+    #   sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_collection_options
+    #   The set of preferences for the various diagnostic collection options
+    #   for the Exascale VM cluster.
+    #   @return [Types::DataCollectionOptions]
+    #
+    # @!attribute [rw] license_model
+    #   The Oracle license model to apply to the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_listener_port_tcp
+    #   The port number for TCP connections to the single client access name
+    #   (SCAN) listener.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scan_listener_port_tcp_ssl
+    #   The port number for TCP connections with SSL to the single client
+    #   access name (SCAN) listener.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] shape_attribute
+    #   The shape attribute for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] system_version
+    #   The version of the operating system of the image for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of resource tags to apply to the Exascale VM cluster.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token,
+    #   the Amazon Web Services SDK automatically generates one and uses it
+    #   for the request to ensure idempotency. The client token is valid for
+    #   up to 24 hours after it's first used.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CreateExadbVmClusterInput AWS API Documentation
+    #
+    class CreateExadbVmClusterInput < Struct.new(
+      :display_name,
+      :enabled_ecpu_count,
+      :exascale_db_storage_vault_id,
+      :grid_image_id,
+      :hostname,
+      :node_count,
+      :odb_network_id,
+      :shape,
+      :ssh_public_keys,
+      :total_ecpu_count,
+      :vm_file_system_storage_total_size_in_g_bs,
+      :cluster_name,
+      :data_collection_options,
+      :license_model,
+      :scan_listener_port_tcp,
+      :scan_listener_port_tcp_ssl,
+      :shape_attribute,
+      :system_version,
+      :tags,
+      :time_zone,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CreateExadbVmClusterOutput AWS API Documentation
+    #
+    class CreateExadbVmClusterOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :exadb_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   A user-friendly name for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] high_capacity_database_storage_total_size_in_g_bs
+    #   The total size of the high-capacity database storage, in gigabytes
+    #   (GB), for the Exascale storage vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_flash_cache_in_percent
+    #   The additional flash cache percentage for the Exascale storage
+    #   vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] autoscale_limit_in_g_bs
+    #   The autoscale limit in gigabytes (GB) for the Exascale storage
+    #   vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_autoscale_enabled
+    #   Specifies whether autoscaling is enabled for the Exascale storage
+    #   vault.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   The list of resource tags to apply to the Exascale storage vault.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token,
+    #   the Amazon Web Services SDK automatically generates one and uses it
+    #   for the request to ensure idempotency. The client token is valid for
+    #   up to 24 hours after it's first used.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CreateExascaleDbStorageVaultInput AWS API Documentation
+    #
+    class CreateExascaleDbStorageVaultInput < Struct.new(
+      :display_name,
+      :high_capacity_database_storage_total_size_in_g_bs,
+      :additional_flash_cache_in_percent,
+      :autoscale_limit_in_g_bs,
+      :availability_zone_id,
+      :availability_zone,
+      :description,
+      :is_autoscale_enabled,
+      :tags,
+      :time_zone,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exascale storage
+    #   vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CreateExascaleDbStorageVaultOutput AWS API Documentation
+    #
+    class CreateExascaleDbStorageVaultOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :exascale_db_storage_vault_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5121,7 +5426,7 @@ module Aws::Odb
     #   @return [Integer]
     #
     # @!attribute [rw] db_node_storage_size_in_g_bs
-    #   The amount of local node storage, in gigabytes (GBs), that's
+    #   The amount of local node storage, in gigabytes (GB), that's
     #   allocated on the DB node.
     #   @return [Integer]
     #
@@ -5758,6 +6063,11 @@ module Aws::Odb
     #   The shape type. This property is determined by the CPU hardware.
     #   @return [String]
     #
+    # @!attribute [rw] shape_attributes
+    #   If provided and applicable, return DB System shape parameters based
+    #   on the shape attribute provided.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] name
     #   The name of the shape.
     #   @return [String]
@@ -5800,6 +6110,7 @@ module Aws::Odb
       :runtime_minimum_core_count,
       :shape_family,
       :shape_type,
+      :shape_attributes,
       :name,
       :compute_model,
       :are_server_types_supported)
@@ -5887,6 +6198,38 @@ module Aws::Odb
     #
     class DeleteCloudVmClusterOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DeleteExadbVmClusterInput AWS API Documentation
+    #
+    class DeleteExadbVmClusterInput < Struct.new(
+      :exadb_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DeleteExadbVmClusterOutput AWS API Documentation
+    #
+    class DeleteExadbVmClusterOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DeleteExascaleDbStorageVaultInput AWS API Documentation
+    #
+    class DeleteExascaleDbStorageVaultInput < Struct.new(
+      :exascale_db_storage_vault_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DeleteExascaleDbStorageVaultOutput AWS API Documentation
+    #
+    class DeleteExascaleDbStorageVaultOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] odb_network_id
     #   The unique identifier of the ODB network to delete.
     #   @return [String]
@@ -5956,6 +6299,51 @@ module Aws::Odb
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateIamRoleFromResourceOutput AWS API Documentation
     #
     class DisassociateIamRoleFromResourceOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster to remove virtual
+    #   machines from.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_node_ids
+    #   The list of DB node IDs to remove from the Exascale VM cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateVirtualMachinesFromExadbVmClusterInput AWS API Documentation
+    #
+    class DisassociateVirtualMachinesFromExadbVmClusterInput < Struct.new(
+      :exadb_vm_cluster_id,
+      :db_node_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateVirtualMachinesFromExadbVmClusterOutput AWS API Documentation
+    #
+    class DisassociateVirtualMachinesFromExadbVmClusterOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :exadb_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The disaster recovery configuration for an Autonomous Database.
     #
@@ -6096,6 +6484,811 @@ module Aws::Odb
       :lifecycle_details,
       :lifecycle_state,
       :objective)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Exascale VM cluster.
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Grid Infrastructure (GI) cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the Exascale VM cluster was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_collection_options
+    #   The set of diagnostic collection options enabled for the Exascale VM
+    #   cluster.
+    #   @return [Types::DataCollectionOptions]
+    #
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_ecpu_count
+    #   The number of elastic compute processing units (ECPUs) enabled on
+    #   the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] exadb_vm_cluster_arn
+    #   The Amazon Resource Name (ARN) of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_arn
+    #   The Amazon Resource Name (ARN) of the Exascale storage vault
+    #   associated with this Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault associated with
+    #   this Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] gi_version
+    #   The software version of the Oracle Grid Infrastructure (GI) for the
+    #   Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] grid_image_id
+    #   The Grid Infrastructure software image ID for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] grid_image_type
+    #   The type of Grid Infrastructure image for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] hostname
+    #   The host name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_roles
+    #   The Amazon Web Services Identity and Access Management (IAM) service
+    #   roles associated with the Exascale VM cluster.
+    #   @return [Array<Types::IamRole>]
+    #
+    # @!attribute [rw] iorm_config_cache
+    #   The I/O Resource Management (IORM) configuration cache details for
+    #   the Exascale VM cluster.
+    #   @return [Types::ExadataIormConfig]
+    #
+    # @!attribute [rw] last_update_history_entry_id
+    #   The Oracle Cloud ID (OCID) of the last maintenance update history
+    #   entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   The Oracle license model applied to the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] listener_port
+    #   The port number configured for the listener on the Exascale VM
+    #   cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory_size_in_g_bs
+    #   The amount of memory, in gigabytes (GB), that's allocated for the
+    #   Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] node_count
+    #   The number of nodes in the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ocid
+    #   The OCID of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] oci_resource_anchor_name
+    #   The name of the OCI resource anchor for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] oci_url
+    #   The HTTPS link to the Exascale VM cluster in Oracle Cloud
+    #   Infrastructure (OCI).
+    #   @return [String]
+    #
+    # @!attribute [rw] odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network associated with
+    #   this Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] odb_network_id
+    #   The unique identifier of the ODB network for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] percent_progress
+    #   The amount of progress made on the current operation on the Exascale
+    #   VM cluster, expressed as a percentage.
+    #   @return [Float]
+    #
+    # @!attribute [rw] scan_dns_name
+    #   The fully qualified domain name (FQDN) of the DNS record for the
+    #   Single Client Access Name (SCAN) IP addresses that are associated
+    #   with the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_dns_record_id
+    #   The OCID of the DNS record for the SCAN IP addresses that are
+    #   associated with the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_ip_ids
+    #   The OCID of the SCAN IP addresses that are associated with the
+    #   Exascale VM cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scan_listener_port_tcp
+    #   The port number for TCP connections to the single client access name
+    #   (SCAN) listener for the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scan_listener_port_tcp_ssl
+    #   The port number for TCP connections with SSL to the single client
+    #   access name (SCAN) listener for the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] shape
+    #   The hardware model name of the Exadata infrastructure that's
+    #   running the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] shape_attribute
+    #   The shape attribute for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_file_system_storage
+    #   The snapshot file system storage details for the Exascale VM
+    #   cluster.
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    #
+    # @!attribute [rw] ssh_public_keys
+    #   The public key portion of one or more key pairs used for SSH access
+    #   to the Exascale VM cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] system_version
+    #   The operating system version of the image chosen for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_ecpu_count
+    #   The total number of ECPUs for the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_file_system_storage
+    #   The total file system storage details for the Exascale VM cluster.
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    #
+    # @!attribute [rw] vip_ids
+    #   The virtual IP (VIP) addresses associated with the Exascale VM
+    #   cluster. One VIP address is assigned per node to support failover.
+    #   If a node fails, its VIP is reassigned to another active node in the
+    #   cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vm_file_system_storage
+    #   The VM file system storage details for the Exascale VM cluster.
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ExadbVmCluster AWS API Documentation
+    #
+    class ExadbVmCluster < Struct.new(
+      :exadb_vm_cluster_id,
+      :cluster_name,
+      :created_at,
+      :data_collection_options,
+      :display_name,
+      :domain,
+      :enabled_ecpu_count,
+      :exadb_vm_cluster_arn,
+      :exascale_db_storage_vault_arn,
+      :exascale_db_storage_vault_id,
+      :gi_version,
+      :grid_image_id,
+      :grid_image_type,
+      :hostname,
+      :iam_roles,
+      :iorm_config_cache,
+      :last_update_history_entry_id,
+      :license_model,
+      :listener_port,
+      :memory_size_in_g_bs,
+      :node_count,
+      :ocid,
+      :oci_resource_anchor_name,
+      :oci_url,
+      :odb_network_arn,
+      :odb_network_id,
+      :percent_progress,
+      :scan_dns_name,
+      :scan_dns_record_id,
+      :scan_ip_ids,
+      :scan_listener_port_tcp,
+      :scan_listener_port_tcp_ssl,
+      :shape,
+      :shape_attribute,
+      :snapshot_file_system_storage,
+      :ssh_public_keys,
+      :status,
+      :status_reason,
+      :system_version,
+      :time_zone,
+      :total_ecpu_count,
+      :total_file_system_storage,
+      :vip_ids,
+      :vm_file_system_storage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Storage details for an Exascale VM cluster.
+    #
+    # @!attribute [rw] total_size_in_g_bs
+    #   The total storage size, in gigabytes (GB).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ExadbVmClusterStorageDetails AWS API Documentation
+    #
+    class ExadbVmClusterStorageDetails < Struct.new(
+      :total_size_in_g_bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an Exascale VM cluster.
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Grid Infrastructure (GI) cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the Exascale VM cluster was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_collection_options
+    #   The set of diagnostic collection options enabled for the Exascale VM
+    #   cluster.
+    #   @return [Types::DataCollectionOptions]
+    #
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_ecpu_count
+    #   The number of elastic compute processing units (ECPUs) enabled on
+    #   the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] exadb_vm_cluster_arn
+    #   The Amazon Resource Name (ARN) of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_arn
+    #   The Amazon Resource Name (ARN) of the Exascale storage vault
+    #   associated with this Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault associated with
+    #   this Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] gi_version
+    #   The software version of the Oracle Grid Infrastructure (GI) for the
+    #   Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] grid_image_id
+    #   The Grid Infrastructure software image ID for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] grid_image_type
+    #   The type of Grid Infrastructure image for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] hostname
+    #   The host name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_roles
+    #   The Amazon Web Services Identity and Access Management (IAM) service
+    #   roles associated with the Exascale VM cluster.
+    #   @return [Array<Types::IamRole>]
+    #
+    # @!attribute [rw] iorm_config_cache
+    #   The I/O Resource Management (IORM) configuration cache details for
+    #   the Exascale VM cluster.
+    #   @return [Types::ExadataIormConfig]
+    #
+    # @!attribute [rw] last_update_history_entry_id
+    #   The Oracle Cloud ID (OCID) of the last maintenance update history
+    #   entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   The Oracle license model applied to the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] listener_port
+    #   The port number configured for the listener on the Exascale VM
+    #   cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory_size_in_g_bs
+    #   The amount of memory, in gigabytes (GB), that's allocated for the
+    #   Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] node_count
+    #   The number of nodes in the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ocid
+    #   The OCID of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] oci_resource_anchor_name
+    #   The name of the OCI resource anchor for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] oci_url
+    #   The HTTPS link to the Exascale VM cluster in Oracle Cloud
+    #   Infrastructure (OCI).
+    #   @return [String]
+    #
+    # @!attribute [rw] odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network associated with
+    #   this Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] odb_network_id
+    #   The unique identifier of the ODB network for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] percent_progress
+    #   The amount of progress made on the current operation on the Exascale
+    #   VM cluster, expressed as a percentage.
+    #   @return [Float]
+    #
+    # @!attribute [rw] scan_dns_name
+    #   The fully qualified domain name (FQDN) of the DNS record for the
+    #   Single Client Access Name (SCAN) IP addresses that are associated
+    #   with the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_dns_record_id
+    #   The OCID of the DNS record for the SCAN IP addresses that are
+    #   associated with the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_ip_ids
+    #   The OCID of the SCAN IP addresses that are associated with the
+    #   Exascale VM cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scan_listener_port_tcp
+    #   The port number for TCP connections to the single client access name
+    #   (SCAN) listener for the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scan_listener_port_tcp_ssl
+    #   The port number for TCP connections with SSL to the single client
+    #   access name (SCAN) listener for the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] shape
+    #   The hardware model name of the Exadata infrastructure that's
+    #   running the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] shape_attribute
+    #   The shape attribute for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_file_system_storage
+    #   The snapshot file system storage details for the Exascale VM
+    #   cluster.
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    #
+    # @!attribute [rw] ssh_public_keys
+    #   The public key portion of one or more key pairs used for SSH access
+    #   to the Exascale VM cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] system_version
+    #   The operating system version of the image chosen for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_ecpu_count
+    #   The total number of ECPUs for the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_file_system_storage
+    #   The total file system storage details for the Exascale VM cluster.
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    #
+    # @!attribute [rw] vip_ids
+    #   The virtual IP (VIP) addresses associated with the Exascale VM
+    #   cluster. One VIP address is assigned per node to support failover.
+    #   If a node fails, its VIP is reassigned to another active node in the
+    #   cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vm_file_system_storage
+    #   The VM file system storage details for the Exascale VM cluster.
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ExadbVmClusterSummary AWS API Documentation
+    #
+    class ExadbVmClusterSummary < Struct.new(
+      :exadb_vm_cluster_id,
+      :cluster_name,
+      :created_at,
+      :data_collection_options,
+      :display_name,
+      :domain,
+      :enabled_ecpu_count,
+      :exadb_vm_cluster_arn,
+      :exascale_db_storage_vault_arn,
+      :exascale_db_storage_vault_id,
+      :gi_version,
+      :grid_image_id,
+      :grid_image_type,
+      :hostname,
+      :iam_roles,
+      :iorm_config_cache,
+      :last_update_history_entry_id,
+      :license_model,
+      :listener_port,
+      :memory_size_in_g_bs,
+      :node_count,
+      :ocid,
+      :oci_resource_anchor_name,
+      :oci_url,
+      :odb_network_arn,
+      :odb_network_id,
+      :percent_progress,
+      :scan_dns_name,
+      :scan_dns_record_id,
+      :scan_ip_ids,
+      :scan_listener_port_tcp,
+      :scan_listener_port_tcp_ssl,
+      :shape,
+      :shape_attribute,
+      :snapshot_file_system_storage,
+      :ssh_public_keys,
+      :status,
+      :status_reason,
+      :system_version,
+      :time_zone,
+      :total_ecpu_count,
+      :total_file_system_storage,
+      :vip_ids,
+      :vm_file_system_storage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The storage details for an Exascale storage vault.
+    #
+    # @!attribute [rw] available_size_in_g_bs
+    #   The available storage size, in gigabytes (GB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_size_in_g_bs
+    #   The total storage size, in gigabytes (GB).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ExascaleDbStorageDetails AWS API Documentation
+    #
+    class ExascaleDbStorageDetails < Struct.new(
+      :available_size_in_g_bs,
+      :total_size_in_g_bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Exascale storage vault.
+    #
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_flash_cache_in_percent
+    #   The additional flash cache percentage for the Exascale storage
+    #   vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attached_shape_attributes
+    #   The list of shape attributes attached to the Exascale storage vault.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] autoscale_limit_in_g_bs
+    #   The autoscale limit in gigabytes (GB) for the Exascale storage
+    #   vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the Exascale storage vault was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_cluster_arns
+    #   The list of Amazon Resource Names (ARNs) of the VM clusters
+    #   associated with this Exascale storage vault.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vm_cluster_count
+    #   The number of VM clusters associated with this Exascale storage
+    #   vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vm_cluster_ids
+    #   The list of unique identifiers of the VM clusters associated with
+    #   this Exascale storage vault.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_arn
+    #   The Amazon Resource Name (ARN) of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] high_capacity_database_storage
+    #   The high-capacity database storage details for the Exascale storage
+    #   vault.
+    #   @return [Types::ExascaleDbStorageDetails]
+    #
+    # @!attribute [rw] is_autoscale_enabled
+    #   Specifies whether autoscaling is enabled for the Exascale storage
+    #   vault.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ocid
+    #   The OCID of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] oci_resource_anchor_name
+    #   The name of the OCI resource anchor for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] oci_url
+    #   The HTTPS link to the Exascale storage vault in Oracle Cloud
+    #   Infrastructure (OCI).
+    #   @return [String]
+    #
+    # @!attribute [rw] percent_progress
+    #   The amount of progress made on the current operation on the Exascale
+    #   storage vault, expressed as a percentage.
+    #   @return [Float]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exascale storage
+    #   vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ExascaleDbStorageVault AWS API Documentation
+    #
+    class ExascaleDbStorageVault < Struct.new(
+      :exascale_db_storage_vault_id,
+      :additional_flash_cache_in_percent,
+      :attached_shape_attributes,
+      :autoscale_limit_in_g_bs,
+      :availability_zone,
+      :availability_zone_id,
+      :created_at,
+      :description,
+      :display_name,
+      :vm_cluster_arns,
+      :vm_cluster_count,
+      :vm_cluster_ids,
+      :exascale_db_storage_vault_arn,
+      :high_capacity_database_storage,
+      :is_autoscale_enabled,
+      :ocid,
+      :oci_resource_anchor_name,
+      :oci_url,
+      :percent_progress,
+      :status,
+      :status_reason,
+      :time_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an Exascale storage vault.
+    #
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_flash_cache_in_percent
+    #   The additional flash cache percentage for the Exascale storage
+    #   vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attached_shape_attributes
+    #   The list of shape attributes attached to the Exascale storage vault.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] autoscale_limit_in_g_bs
+    #   The autoscale limit in gigabytes (GB) for the Exascale storage
+    #   vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the Exascale storage vault was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_cluster_arns
+    #   The list of Amazon Resource Names (ARNs) of the VM clusters
+    #   associated with this Exascale storage vault.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vm_cluster_count
+    #   The number of VM clusters associated with this Exascale storage
+    #   vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vm_cluster_ids
+    #   The list of unique identifiers of the VM clusters associated with
+    #   this Exascale storage vault.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_arn
+    #   The Amazon Resource Name (ARN) of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] high_capacity_database_storage
+    #   The high-capacity database storage details for the Exascale storage
+    #   vault.
+    #   @return [Types::ExascaleDbStorageDetails]
+    #
+    # @!attribute [rw] is_autoscale_enabled
+    #   Specifies whether autoscaling is enabled for the Exascale storage
+    #   vault.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ocid
+    #   The OCID of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] oci_resource_anchor_name
+    #   The name of the OCI resource anchor for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] oci_url
+    #   The HTTPS link to the Exascale storage vault in Oracle Cloud
+    #   Infrastructure (OCI).
+    #   @return [String]
+    #
+    # @!attribute [rw] percent_progress
+    #   The amount of progress made on the current operation on the Exascale
+    #   storage vault, expressed as a percentage.
+    #   @return [Float]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exascale storage
+    #   vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ExascaleDbStorageVaultSummary AWS API Documentation
+    #
+    class ExascaleDbStorageVaultSummary < Struct.new(
+      :exascale_db_storage_vault_id,
+      :additional_flash_cache_in_percent,
+      :attached_shape_attributes,
+      :autoscale_limit_in_g_bs,
+      :availability_zone,
+      :availability_zone_id,
+      :created_at,
+      :description,
+      :display_name,
+      :vm_cluster_arns,
+      :vm_cluster_count,
+      :vm_cluster_ids,
+      :exascale_db_storage_vault_arn,
+      :high_capacity_database_storage,
+      :is_autoscale_enabled,
+      :ocid,
+      :oci_resource_anchor_name,
+      :oci_url,
+      :percent_progress,
+      :status,
+      :status_reason,
+      :time_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6329,6 +7522,13 @@ module Aws::Odb
 
     # @!attribute [rw] cloud_vm_cluster_id
     #   The unique identifier of the VM cluster that contains the DB node.
+    #   You must specify either this parameter or `exadbVmClusterId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster that contains the
+    #   DB node. You must specify either this parameter or
+    #   `cloudVmClusterId`.
     #   @return [String]
     #
     # @!attribute [rw] db_node_id
@@ -6339,6 +7539,7 @@ module Aws::Odb
     #
     class GetDbNodeInput < Struct.new(
       :cloud_vm_cluster_id,
+      :exadb_vm_cluster_id,
       :db_node_id)
       SENSITIVE = []
       include Aws::Structure
@@ -6383,6 +7584,54 @@ module Aws::Odb
     #
     class GetDbServerOutput < Struct.new(
       :db_server)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetExadbVmClusterInput AWS API Documentation
+    #
+    class GetExadbVmClusterInput < Struct.new(
+      :exadb_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exadb_vm_cluster
+    #   The Exascale VM cluster.
+    #   @return [Types::ExadbVmCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetExadbVmClusterOutput AWS API Documentation
+    #
+    class GetExadbVmClusterOutput < Struct.new(
+      :exadb_vm_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetExascaleDbStorageVaultInput AWS API Documentation
+    #
+    class GetExascaleDbStorageVaultInput < Struct.new(
+      :exascale_db_storage_vault_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exascale_db_storage_vault
+    #   The Exascale storage vault.
+    #   @return [Types::ExascaleDbStorageVault]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetExascaleDbStorageVaultOutput AWS API Documentation
+    #
+    class GetExascaleDbStorageVaultOutput < Struct.new(
+      :exascale_db_storage_vault)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6493,6 +7742,26 @@ module Aws::Odb
     #
     class GetOdbPeeringConnectionOutput < Struct.new(
       :odb_peering_connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an Oracle Grid Infrastructure (GI) minor
+    # version.
+    #
+    # @!attribute [rw] version
+    #   The GI minor version.
+    #   @return [String]
+    #
+    # @!attribute [rw] grid_image_id
+    #   The Grid Infrastructure software image ID for this minor version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GiMinorVersionSummary AWS API Documentation
+    #
+    class GiMinorVersionSummary < Struct.new(
+      :version,
+      :grid_image_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7084,7 +8353,13 @@ module Aws::Odb
     #   @return [String]
     #
     # @!attribute [rw] cloud_vm_cluster_id
-    #   The unique identifier of the VM cluster.
+    #   The unique identifier of the VM cluster. You must specify either
+    #   this parameter or `exadbVmClusterId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster. You must specify
+    #   either this parameter or `cloudVmClusterId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListDbNodesInput AWS API Documentation
@@ -7092,7 +8367,8 @@ module Aws::Odb
     class ListDbNodesInput < Struct.new(
       :max_results,
       :next_token,
-      :cloud_vm_cluster_id)
+      :cloud_vm_cluster_id,
+      :exadb_vm_cluster_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7185,13 +8461,18 @@ module Aws::Odb
     #   across accounts.
     #   @return [String]
     #
+    # @!attribute [rw] shape_family
+    #   The shape family to filter results by.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListDbSystemShapesInput AWS API Documentation
     #
     class ListDbSystemShapesInput < Struct.new(
       :max_results,
       :next_token,
       :availability_zone,
-      :availability_zone_id)
+      :availability_zone_id,
+      :shape_family)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7210,6 +8491,149 @@ module Aws::Odb
     class ListDbSystemShapesOutput < Struct.new(
       :next_token,
       :db_system_shapes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault to list the
+    #   associated Exascale VM clusters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListExadbVmClustersInput AWS API Documentation
+    #
+    class ListExadbVmClustersInput < Struct.new(
+      :exascale_db_storage_vault_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] exadb_vm_clusters
+    #   The list of Exascale VM clusters.
+    #   @return [Array<Types::ExadbVmClusterSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListExadbVmClustersOutput AWS API Documentation
+    #
+    class ListExadbVmClustersOutput < Struct.new(
+      :next_token,
+      :exadb_vm_clusters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListExascaleDbStorageVaultsInput AWS API Documentation
+    #
+    class ListExascaleDbStorageVaultsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vaults
+    #   The list of Exascale storage vaults.
+    #   @return [Array<Types::ExascaleDbStorageVaultSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListExascaleDbStorageVaultsOutput AWS API Documentation
+    #
+    class ListExascaleDbStorageVaultsOutput < Struct.new(
+      :next_token,
+      :exascale_db_storage_vaults)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gi_version
+    #   The Oracle Grid Infrastructure (GI) major version.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] shape_family
+    #   The shape family for the GI minor version.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone to filter GI minor versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID to filter GI minor versions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListGiMinorVersionsInput AWS API Documentation
+    #
+    class ListGiMinorVersionsInput < Struct.new(
+      :gi_version,
+      :max_results,
+      :next_token,
+      :shape_family,
+      :availability_zone,
+      :availability_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] gi_minor_versions
+    #   The list of GI minor versions.
+    #   @return [Array<Types::GiMinorVersionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListGiMinorVersionsOutput AWS API Documentation
+    #
+    class ListGiMinorVersionsOutput < Struct.new(
+      :next_token,
+      :gi_minor_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8256,7 +9680,14 @@ module Aws::Odb
 
     # @!attribute [rw] cloud_vm_cluster_id
     #   The unique identifier of the VM cluster that contains the DB node to
-    #   reboot.
+    #   reboot. You must specify either this parameter or
+    #   `exadbVmClusterId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster that contains the
+    #   DB node to reboot. You must specify either this parameter or
+    #   `cloudVmClusterId`.
     #   @return [String]
     #
     # @!attribute [rw] db_node_id
@@ -8267,6 +9698,7 @@ module Aws::Odb
     #
     class RebootDbNodeInput < Struct.new(
       :cloud_vm_cluster_id,
+      :exadb_vm_cluster_id,
       :db_node_id)
       SENSITIVE = []
       include Aws::Structure
@@ -8675,7 +10107,13 @@ module Aws::Odb
 
     # @!attribute [rw] cloud_vm_cluster_id
     #   The unique identifier of the VM cluster that contains the DB node to
-    #   start.
+    #   start. You must specify either this parameter or `exadbVmClusterId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster that contains the
+    #   DB node to start. You must specify either this parameter or
+    #   `cloudVmClusterId`.
     #   @return [String]
     #
     # @!attribute [rw] db_node_id
@@ -8686,6 +10124,7 @@ module Aws::Odb
     #
     class StartDbNodeInput < Struct.new(
       :cloud_vm_cluster_id,
+      :exadb_vm_cluster_id,
       :db_node_id)
       SENSITIVE = []
       include Aws::Structure
@@ -8757,7 +10196,13 @@ module Aws::Odb
 
     # @!attribute [rw] cloud_vm_cluster_id
     #   The unique identifier of the VM cluster that contains the DB node to
-    #   stop.
+    #   stop. You must specify either this parameter or `exadbVmClusterId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster that contains the
+    #   DB node to stop. You must specify either this parameter or
+    #   `cloudVmClusterId`.
     #   @return [String]
     #
     # @!attribute [rw] db_node_id
@@ -8768,6 +10213,7 @@ module Aws::Odb
     #
     class StopDbNodeInput < Struct.new(
       :cloud_vm_cluster_id,
+      :exadb_vm_cluster_id,
       :db_node_id)
       SENSITIVE = []
       include Aws::Structure
@@ -9375,6 +10821,174 @@ module Aws::Odb
       :status,
       :status_reason,
       :cloud_exadata_infrastructure_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_collection_options
+    #   The set of preferences for the various diagnostic collection options
+    #   for the Exascale VM cluster.
+    #   @return [Types::DataCollectionOptions]
+    #
+    # @!attribute [rw] display_name
+    #   A new user-friendly name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_ecpu_count
+    #   The number of ECPUs to enable for the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] grid_image_id
+    #   The Grid Infrastructure software image ID for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   The Oracle license model to apply to the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssh_public_keys
+    #   The public key portion of one or more key pairs used for SSH access
+    #   to the Exascale VM cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] system_version
+    #   The version of the operating system of the image for the Exascale VM
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_ecpu_count
+    #   The total number of ECPUs for the Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] update_action
+    #   The update action to perform on the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_file_system_storage_total_size_in_g_bs
+    #   The total amount of file system storage, in gigabytes (GB), for the
+    #   Exascale VM cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateExadbVmClusterInput AWS API Documentation
+    #
+    class UpdateExadbVmClusterInput < Struct.new(
+      :exadb_vm_cluster_id,
+      :data_collection_options,
+      :display_name,
+      :enabled_ecpu_count,
+      :grid_image_id,
+      :license_model,
+      :ssh_public_keys,
+      :system_version,
+      :total_ecpu_count,
+      :update_action,
+      :vm_file_system_storage_total_size_in_g_bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] exadb_vm_cluster_id
+    #   The unique identifier of the Exascale VM cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateExadbVmClusterOutput AWS API Documentation
+    #
+    class UpdateExadbVmClusterOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :exadb_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_flash_cache_in_percent
+    #   The additional flash cache percentage for the Exascale storage
+    #   vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] autoscale_limit_in_g_bs
+    #   The autoscale limit in gigabytes (GB) for the Exascale storage
+    #   vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A new description for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   A new user-friendly name for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] high_capacity_database_storage_total_size_in_g_bs
+    #   The total size of the high-capacity database storage, in gigabytes
+    #   (GB), for the Exascale storage vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_autoscale_enabled
+    #   Specifies whether autoscaling is enabled for the Exascale storage
+    #   vault.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateExascaleDbStorageVaultInput AWS API Documentation
+    #
+    class UpdateExascaleDbStorageVaultInput < Struct.new(
+      :exascale_db_storage_vault_id,
+      :additional_flash_cache_in_percent,
+      :autoscale_limit_in_g_bs,
+      :description,
+      :display_name,
+      :high_capacity_database_storage_total_size_in_g_bs,
+      :is_autoscale_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exascale storage
+    #   vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateExascaleDbStorageVaultOutput AWS API Documentation
+    #
+    class UpdateExascaleDbStorageVaultOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :exascale_db_storage_vault_id)
       SENSITIVE = []
       include Aws::Structure
     end

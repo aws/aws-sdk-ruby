@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2026-07-31)
+------------------
+
+* Feature - Adds GetEnterpriseSupportChargeSummary, GetEnterpriseSupportContractDetails, and ListEnterpriseSupportLinkedAccountCharges. These APIs provide first-time programmatic access to billing data for Enterprise Support usage previously only available upon request through AWS Concierge or Support.
+
 1.29.0 (2026-07-09)
 ------------------
 

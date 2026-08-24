@@ -889,6 +889,9 @@ module Aws::DeviceFarm
     #         host: "DeviceProxyHost", # required
     #         port: 1, # required
     #       },
+    #       parameters: {
+    #         "RemoteAccessParameterKey" => "RemoteAccessParameterValue",
+    #       },
     #     },
     #     interaction_mode: "INTERACTIVE", # accepts INTERACTIVE, NO_VIDEO, VIDEO_ONLY
     #     skip_app_resign: false,
@@ -1892,6 +1895,7 @@ module Aws::DeviceFarm
     #         },
     #       ],
     #       execution_role_arn: "AmazonRoleResourceName",
+    #       insights_types: ["TEST_REPORT"], # accepts TEST_REPORT
     #     },
     #     project_arn: "AmazonResourceName",
     #   })
@@ -2117,6 +2121,18 @@ module Aws::DeviceFarm
     #   resp.job.device_minutes.unmetered #=> Float
     #   resp.job.video_endpoint #=> String
     #   resp.job.video_capture #=> Boolean
+    #   resp.job.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
+    #   resp.job.insights.test_report.message #=> String
+    #   resp.job.insights.test_report.metrics.tests_total #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_passed #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_failed #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_skipped #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_errored #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_other #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_passed_percentage #=> Float
+    #   resp.job.insights.test_report.metrics.total_test_execution_duration_seconds #=> Float
+    #   resp.job.insights.test_report.metrics.median_test_execution_duration_seconds #=> Float
+    #   resp.job.insights.test_report.test_details_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJob AWS API Documentation
     #
@@ -2562,6 +2578,21 @@ module Aws::DeviceFarm
     #   resp.run.environment_variables #=> Array
     #   resp.run.environment_variables[0].name #=> String
     #   resp.run.environment_variables[0].value #=> String
+    #   resp.run.insights_types #=> Array
+    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.run.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
+    #   resp.run.insights.job_report.message #=> String
+    #   resp.run.insights.job_report.metrics.jobs_total #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_passed #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_failed #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_skipped #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_errored #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_stopped #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_passed_percentage #=> Float
+    #   resp.run.insights.job_report.metrics.total_job_execution_duration_seconds #=> Float
+    #   resp.run.insights.job_report.metrics.average_job_execution_duration_seconds #=> Float
+    #   resp.run.insights.job_report.metrics.median_job_execution_duration_seconds #=> Float
+    #   resp.run.insights.job_report.job_details_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
     #
@@ -2732,14 +2763,12 @@ module Aws::DeviceFarm
     end
 
     # A session is an instance of a browser created through a
-    # `RemoteWebDriver` with the URL from CreateTestGridUrlResult$url. You
+    # `RemoteWebDriver` with the URL from ` CreateTestGridUrlResult`. You
     # can use the following to look up sessions:
     #
-    # * The session ARN (GetTestGridSessionRequest$sessionArn).
+    # * The session ARN.
     #
-    # * The project ARN and a session ID
-    #   (GetTestGridSessionRequest$projectArn and
-    #   GetTestGridSessionRequest$sessionId).
+    # * The project ARN and a session ID.
     #
     # @option params [String] :project_arn
     #   The ARN for the project that this session belongs to. See
@@ -3445,6 +3474,18 @@ module Aws::DeviceFarm
     #   resp.jobs[0].device_minutes.unmetered #=> Float
     #   resp.jobs[0].video_endpoint #=> String
     #   resp.jobs[0].video_capture #=> Boolean
+    #   resp.jobs[0].insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
+    #   resp.jobs[0].insights.test_report.message #=> String
+    #   resp.jobs[0].insights.test_report.metrics.tests_total #=> Integer
+    #   resp.jobs[0].insights.test_report.metrics.tests_passed #=> Integer
+    #   resp.jobs[0].insights.test_report.metrics.tests_failed #=> Integer
+    #   resp.jobs[0].insights.test_report.metrics.tests_skipped #=> Integer
+    #   resp.jobs[0].insights.test_report.metrics.tests_errored #=> Integer
+    #   resp.jobs[0].insights.test_report.metrics.tests_other #=> Integer
+    #   resp.jobs[0].insights.test_report.metrics.tests_passed_percentage #=> Float
+    #   resp.jobs[0].insights.test_report.metrics.total_test_execution_duration_seconds #=> Float
+    #   resp.jobs[0].insights.test_report.metrics.median_test_execution_duration_seconds #=> Float
+    #   resp.jobs[0].insights.test_report.test_details_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListJobs AWS API Documentation
@@ -4159,6 +4200,21 @@ module Aws::DeviceFarm
     #   resp.runs[0].environment_variables #=> Array
     #   resp.runs[0].environment_variables[0].name #=> String
     #   resp.runs[0].environment_variables[0].value #=> String
+    #   resp.runs[0].insights_types #=> Array
+    #   resp.runs[0].insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.runs[0].insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
+    #   resp.runs[0].insights.job_report.message #=> String
+    #   resp.runs[0].insights.job_report.metrics.jobs_total #=> Integer
+    #   resp.runs[0].insights.job_report.metrics.jobs_passed #=> Integer
+    #   resp.runs[0].insights.job_report.metrics.jobs_failed #=> Integer
+    #   resp.runs[0].insights.job_report.metrics.jobs_skipped #=> Integer
+    #   resp.runs[0].insights.job_report.metrics.jobs_errored #=> Integer
+    #   resp.runs[0].insights.job_report.metrics.jobs_stopped #=> Integer
+    #   resp.runs[0].insights.job_report.metrics.jobs_passed_percentage #=> Float
+    #   resp.runs[0].insights.job_report.metrics.total_job_execution_duration_seconds #=> Float
+    #   resp.runs[0].insights.job_report.metrics.average_job_execution_duration_seconds #=> Float
+    #   resp.runs[0].insights.job_report.metrics.median_job_execution_duration_seconds #=> Float
+    #   resp.runs[0].insights.job_report.job_details_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
@@ -4171,6 +4227,9 @@ module Aws::DeviceFarm
     end
 
     # Gets information about samples, given an AWS Device Farm job ARN.
+    #
+    # Device Farm does not support performance data samples during test
+    # executions.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the job used to list samples.
@@ -5182,6 +5241,7 @@ module Aws::DeviceFarm
     #         },
     #       ],
     #       execution_role_arn: "AmazonRoleResourceName",
+    #       insights_types: ["TEST_REPORT"], # accepts TEST_REPORT
     #     },
     #     execution_configuration: {
     #       job_timeout_minutes: 1,
@@ -5270,6 +5330,21 @@ module Aws::DeviceFarm
     #   resp.run.environment_variables #=> Array
     #   resp.run.environment_variables[0].name #=> String
     #   resp.run.environment_variables[0].value #=> String
+    #   resp.run.insights_types #=> Array
+    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.run.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
+    #   resp.run.insights.job_report.message #=> String
+    #   resp.run.insights.job_report.metrics.jobs_total #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_passed #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_failed #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_skipped #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_errored #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_stopped #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_passed_percentage #=> Float
+    #   resp.run.insights.job_report.metrics.total_job_execution_duration_seconds #=> Float
+    #   resp.run.insights.job_report.metrics.average_job_execution_duration_seconds #=> Float
+    #   resp.run.insights.job_report.metrics.median_job_execution_duration_seconds #=> Float
+    #   resp.run.insights.job_report.job_details_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
     #
@@ -5362,6 +5437,18 @@ module Aws::DeviceFarm
     #   resp.job.device_minutes.unmetered #=> Float
     #   resp.job.video_endpoint #=> String
     #   resp.job.video_capture #=> Boolean
+    #   resp.job.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
+    #   resp.job.insights.test_report.message #=> String
+    #   resp.job.insights.test_report.metrics.tests_total #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_passed #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_failed #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_skipped #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_errored #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_other #=> Integer
+    #   resp.job.insights.test_report.metrics.tests_passed_percentage #=> Float
+    #   resp.job.insights.test_report.metrics.total_test_execution_duration_seconds #=> Float
+    #   resp.job.insights.test_report.metrics.median_test_execution_duration_seconds #=> Float
+    #   resp.job.insights.test_report.test_details_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopJob AWS API Documentation
     #
@@ -5577,6 +5664,21 @@ module Aws::DeviceFarm
     #   resp.run.environment_variables #=> Array
     #   resp.run.environment_variables[0].name #=> String
     #   resp.run.environment_variables[0].value #=> String
+    #   resp.run.insights_types #=> Array
+    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.run.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
+    #   resp.run.insights.job_report.message #=> String
+    #   resp.run.insights.job_report.metrics.jobs_total #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_passed #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_failed #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_skipped #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_errored #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_stopped #=> Integer
+    #   resp.run.insights.job_report.metrics.jobs_passed_percentage #=> Float
+    #   resp.run.insights.job_report.metrics.total_job_execution_duration_seconds #=> Float
+    #   resp.run.insights.job_report.metrics.average_job_execution_duration_seconds #=> Float
+    #   resp.run.insights.job_report.metrics.median_job_execution_duration_seconds #=> Float
+    #   resp.run.insights.job_report.job_details_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
@@ -6249,7 +6351,7 @@ module Aws::DeviceFarm
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

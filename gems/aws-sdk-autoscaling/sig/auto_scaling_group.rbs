@@ -132,6 +132,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#instance_lifecycle_policy-instance_method
       def instance_lifecycle_policy: () -> Types::InstanceLifecyclePolicy
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#operator-instance_method
+      def operator: () -> Types::Operator
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#load-instance_method

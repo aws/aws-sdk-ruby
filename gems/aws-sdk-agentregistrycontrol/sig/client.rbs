@@ -1,0 +1,464 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AgentRegistryControl
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateRegistryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRegistryResponse]
+        def registry_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#create_registry-instance_method
+      def create_registry: (
+                             name: ::String,
+                             ?description: ::String,
+                             ?discovery_configuration: {
+                               authorizer_configuration: Params::authorizer_configuration?,
+                               authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")?
+                             },
+                             ?client_token: ::String,
+                             ?tags: Hash[::String, ::String],
+                             ?approval_configuration: {
+                               auto_approval_rules: Array[("APPROVE_ALL")]?
+                             }
+                           ) -> _CreateRegistryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegistryResponseSuccess
+
+      interface _CreateRegistryRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRegistryRecordResponse]
+        def record_arn: () -> ::String
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#create_registry_record-instance_method
+      def create_registry_record: (
+                                    registry_id: ::String,
+                                    name: ::String,
+                                    ?display_name: ::String,
+                                    ?description: ::String,
+                                    record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL"),
+                                    descriptors: {
+                                      mcp_server: {
+                                        data: ::String?,
+                                        data_schema_version: ::String?,
+                                        additional_data: {
+                                          tools: {
+                                            data: ::String?,
+                                            data_schema_version: ::String?
+                                          }?
+                                        }?,
+                                        source: Params::descriptor_source?
+                                      }?,
+                                      a2a_agent_card: {
+                                        data: ::String?,
+                                        data_schema_version: ::String?,
+                                        source: Params::descriptor_source?
+                                      }?,
+                                      agent_skills_definition: {
+                                        data: ::String?,
+                                        data_schema_version: ::String?,
+                                        additional_data: {
+                                          skill_md: {
+                                            data: ::String?,
+                                            data_schema_version: ::String?,
+                                            source: Params::descriptor_source?
+                                          }?
+                                        }?
+                                      }?,
+                                      custom: {
+                                        data: ::String?
+                                      }?
+                                    },
+                                    ?record_version: ::String,
+                                    ?client_token: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateRegistryRecordResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegistryRecordResponseSuccess
+
+      interface _DeleteRegistryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRegistryResponse]
+        def status: () -> ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#delete_registry-instance_method
+      def delete_registry: (
+                             registry_id: ::String
+                           ) -> _DeleteRegistryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRegistryResponseSuccess
+
+      interface _DeleteRegistryRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRegistryRecordResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#delete_registry_record-instance_method
+      def delete_registry_record: (
+                                    registry_id: ::String,
+                                    record_id: ::String
+                                  ) -> _DeleteRegistryRecordResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRegistryRecordResponseSuccess
+
+      interface _GetRegistryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRegistryResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def registry_id: () -> ::String
+        def registry_arn: () -> ::String
+        def discovery_configuration: () -> Types::DiscoveryConfiguration
+        def approval_configuration: () -> Types::ApprovalConfiguration
+        def status: () -> ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+        def status_reason: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#get_registry-instance_method
+      def get_registry: (
+                          registry_id: ::String
+                        ) -> _GetRegistryResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRegistryResponseSuccess
+
+      interface _GetRegistryRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRegistryRecordResponse]
+        def registry_arn: () -> ::String
+        def record_arn: () -> ::String
+        def record_id: () -> ::String
+        def name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+        def descriptors: () -> Types::Descriptors
+        def record_version: () -> ::String
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#get_registry_record-instance_method
+      def get_registry_record: (
+                                 registry_id: ::String,
+                                 record_id: ::String
+                               ) -> _GetRegistryRecordResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRegistryRecordResponseSuccess
+
+      interface _ListRegistriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRegistriesResponse]
+        def registries: () -> ::Array[Types::RegistrySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#list_registries-instance_method
+      def list_registries: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?filters: Array[
+                               {
+                                 name: ("status" | "discoveryConfiguration.authorizerType"),
+                                 values: Array[::String]
+                               }
+                             ]
+                           ) -> _ListRegistriesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegistriesResponseSuccess
+
+      interface _ListRegistryRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRegistryRecordsResponse]
+        def registry_records: () -> ::Array[Types::RegistryRecordSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#list_registry_records-instance_method
+      def list_registry_records: (
+                                   registry_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?filters: Array[
+                                     {
+                                       name: ("name" | "status" | "recordType"),
+                                       values: Array[::String]
+                                     }
+                                   ]
+                                 ) -> _ListRegistryRecordsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegistryRecordsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _SubmitRegistryRecordForApprovalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubmitRegistryRecordForApprovalResponse]
+        def registry_arn: () -> ::String
+        def record_arn: () -> ::String
+        def record_id: () -> ::String
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#submit_registry_record_for_approval-instance_method
+      def submit_registry_record_for_approval: (
+                                                 registry_id: ::String,
+                                                 record_id: ::String
+                                               ) -> _SubmitRegistryRecordForApprovalResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubmitRegistryRecordForApprovalResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateRegistryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRegistryResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def registry_id: () -> ::String
+        def registry_arn: () -> ::String
+        def discovery_configuration: () -> Types::DiscoveryConfiguration
+        def approval_configuration: () -> Types::ApprovalConfiguration
+        def status: () -> ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+        def status_reason: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#update_registry-instance_method
+      def update_registry: (
+                             registry_id: ::String,
+                             ?name: ::String,
+                             ?description: {
+                               optional_value: ::String?
+                             },
+                             ?discovery_configuration: {
+                               authorizer_configuration: {
+                                 optional_value: Params::authorizer_configuration?
+                               }?
+                             },
+                             ?approval_configuration: {
+                               optional_value: {
+                                 auto_approval_rules: Array[("APPROVE_ALL")]?
+                               }?
+                             }
+                           ) -> _UpdateRegistryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegistryResponseSuccess
+
+      interface _UpdateRegistryRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRegistryRecordResponse]
+        def registry_arn: () -> ::String
+        def record_arn: () -> ::String
+        def record_id: () -> ::String
+        def name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+        def descriptors: () -> Types::Descriptors
+        def record_version: () -> ::String
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#update_registry_record-instance_method
+      def update_registry_record: (
+                                    registry_id: ::String,
+                                    record_id: ::String,
+                                    ?name: ::String,
+                                    ?display_name: {
+                                      optional_value: ::String?
+                                    },
+                                    ?description: {
+                                      optional_value: ::String?
+                                    },
+                                    ?record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL"),
+                                    ?descriptors: {
+                                      optional_value: {
+                                        mcp_server: {
+                                          optional_value: {
+                                            data: {
+                                              optional_value: ::String?
+                                            }?,
+                                            data_schema_version: {
+                                              optional_value: ::String?
+                                            }?,
+                                            source: Params::updated_descriptor_source?,
+                                            additional_data: {
+                                              optional_value: {
+                                                tools: {
+                                                  optional_value: {
+                                                    data: {
+                                                      optional_value: ::String?
+                                                    }?,
+                                                    data_schema_version: {
+                                                      optional_value: ::String?
+                                                    }?
+                                                  }?
+                                                }?
+                                              }?
+                                            }?
+                                          }?
+                                        }?,
+                                        a2a_agent_card: {
+                                          optional_value: {
+                                            data: {
+                                              optional_value: ::String?
+                                            }?,
+                                            data_schema_version: {
+                                              optional_value: ::String?
+                                            }?,
+                                            source: Params::updated_descriptor_source?
+                                          }?
+                                        }?,
+                                        agent_skills_definition: {
+                                          optional_value: {
+                                            data: {
+                                              optional_value: ::String?
+                                            }?,
+                                            data_schema_version: {
+                                              optional_value: ::String?
+                                            }?,
+                                            additional_data: {
+                                              optional_value: {
+                                                skill_md: {
+                                                  optional_value: {
+                                                    data: {
+                                                      optional_value: ::String?
+                                                    }?,
+                                                    data_schema_version: {
+                                                      optional_value: ::String?
+                                                    }?,
+                                                    source: Params::updated_descriptor_source?
+                                                  }?
+                                                }?
+                                              }?
+                                            }?
+                                          }?
+                                        }?,
+                                        custom: {
+                                          optional_value: {
+                                            data: {
+                                              optional_value: ::String?
+                                            }?
+                                          }?
+                                        }?
+                                      }?
+                                    },
+                                    ?record_version: ::String,
+                                    ?trigger_synchronization: bool
+                                  ) -> _UpdateRegistryRecordResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegistryRecordResponseSuccess
+
+      interface _UpdateRegistryRecordStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRegistryRecordStatusResponse]
+        def registry_arn: () -> ::String
+        def record_arn: () -> ::String
+        def record_id: () -> ::String
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+        def status_reason: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#update_registry_record_status-instance_method
+      def update_registry_record_status: (
+                                           registry_id: ::String,
+                                           record_id: ::String,
+                                           status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED"),
+                                           status_reason: ::String
+                                         ) -> _UpdateRegistryRecordStatusResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegistryRecordStatusResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#wait_until-instance_method
+      def wait_until: (:registry_ready waiter_name, 
+                    registry_id: ::String
+                  ) -> Client::_GetRegistryResponseSuccess
+                    | (:registry_ready waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRegistryResponseSuccess
+                    | (:registry_record_approved waiter_name, 
+                    registry_id: ::String,
+                    record_id: ::String
+                  ) -> Client::_GetRegistryRecordResponseSuccess
+                    | (:registry_record_approved waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRegistryRecordResponseSuccess
+    end
+  end
+end
+

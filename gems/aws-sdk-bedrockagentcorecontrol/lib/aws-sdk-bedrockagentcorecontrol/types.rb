@@ -303,6 +303,32 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Summary information about an agent runtime version associated with a
+    # capacity provider. This is returned by
+    # `ListAgentRuntimeVersionsByCapacityProvider`.
+    #
+    # @!attribute [rw] agent_runtime_arn
+    #   The Amazon Resource Name (ARN) of the agent runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_runtime_version
+    #   The version of the agent runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the agent runtime version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AgentRuntimeVersionSummary AWS API Documentation
+    #
+    class AgentRuntimeVersionSummary < Struct.new(
+      :agent_runtime_arn,
+      :agent_runtime_version,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The agent skills descriptor for a registry record. Contains an
     # optional skill markdown definition in human-readable format and an
     # optional structured skill definition.
@@ -695,6 +721,89 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] gateway_identifier
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] rate_limits
+    #   The complete set of rate limits for this gateway. This operation
+    #   replaces all existing rate limits in a single request. If the
+    #   operation fails, no rate limits are changed.
+    #   @return [Array<Types::BatchPutLimitEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BatchPutGatewayRateLimitsRequest AWS API Documentation
+    #
+    class BatchPutGatewayRateLimitsRequest < Struct.new(
+      :gateway_identifier,
+      :client_token,
+      :rate_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rate_limits
+    #   The resulting set of rate limits after the batch operation.
+    #   @return [Array<Types::GatewayRateLimitDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BatchPutGatewayRateLimitsResponse AWS API Documentation
+    #
+    class BatchPutGatewayRateLimitsResponse < Struct.new(
+      :rate_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rate limit definition within a batch put request. If you provide a
+    # `rateLimitId`, the service uses it for upsert matching against
+    # existing rate limits.
+    #
+    # @!attribute [rw] rate_limit_id
+    #   The unique identifier of the rate limit. If provided, the service
+    #   uses it for upsert matching against existing rate limits.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional human-readable description for this rate limit. If not
+    #   provided, the rate limit is created without a description.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_keys
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] entries
+    #   The list of rule entries that map dimension values to rate
+    #   configurations.
+    #   @return [Array<Types::LimitEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BatchPutLimitEntry AWS API Documentation
+    #
+    class BatchPutLimitEntry < Struct.new(
+      :rate_limit_id,
+      :description,
+      :dimension_keys,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for using Amazon Bedrock models in evaluator
     # assessments, including model selection and inference parameters.
     #
@@ -908,6 +1017,128 @@ module Aws::BedrockAgentCoreControl
       :created_at,
       :last_updated_at)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Configuration for customer-managed compute capacity for the AgentCore
+    # Runtime. A capacity provider runs the AgentCore Runtime on the
+    # Instances compute type, using Amazon Web Services managed compute in
+    # your account.
+    #
+    # @!attribute [rw] capacity_provider_arn
+    #   The Amazon Resource Name (ARN) of the capacity provider to use for
+    #   the AgentCore Runtime.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CapacityProviderConfiguration AWS API Documentation
+    #
+    class CapacityProviderConfiguration < Struct.new(
+      :capacity_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a capacity provider, as returned by
+    # `ListCapacityProviders`. Each summary includes the capacity provider
+    # identifier, Amazon Resource Name (ARN), name, status, and last-updated
+    # timestamp.
+    #
+    # @!attribute [rw] capacity_provider_id
+    #   The unique identifier of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_provider_arn
+    #   The Amazon Resource Name (ARN) of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capacity provider. For possible values,
+    #   see `CapacityProviderStatus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the capacity provider was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CapacityProviderSummary AWS API Documentation
+    #
+    class CapacityProviderSummary < Struct.new(
+      :capacity_provider_id,
+      :capacity_provider_arn,
+      :name,
+      :status,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a capacity provider volume mounted into the
+    # AgentCore Runtime. This references a persistent volume by its logical
+    # name, as defined in the capacity provider's list of volumes.
+    #
+    # @!attribute [rw] volume_name
+    #   The logical name of the capacity provider volume to mount. This name
+    #   must match a volume that is defined in the capacity provider's list
+    #   of volumes.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_path
+    #   The mount path for the capacity provider volume inside the AgentCore
+    #   Runtime. The path must be under `/mnt` with exactly one subdirectory
+    #   level (for example, `/mnt/data`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CapacityProviderVolumeConfiguration AWS API Documentation
+    #
+    class CapacityProviderVolumeConfiguration < Struct.new(
+      :volume_name,
+      :mount_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Capacity Reservation targeting option for the instances.
+    #
+    # @!attribute [rw] capacity_reservation_preference
+    #   The Capacity Reservation preference for the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_target
+    #   The target Capacity Reservation or Capacity Reservation group for
+    #   the instances.
+    #   @return [Types::CapacityReservationTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CapacityReservationSpecification AWS API Documentation
+    #
+    class CapacityReservationSpecification < Struct.new(
+      :capacity_reservation_preference,
+      :capacity_reservation_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the target Capacity Reservation or Capacity
+    # Reservation group for the instances.
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation in which to run the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_resource_group_arn
+    #   The Amazon Resource Name (ARN) of the Capacity Reservation resource
+    #   group in which to run the instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CapacityReservationTarget AWS API Documentation
+    #
+    class CapacityReservationTarget < Struct.new(
+      :capacity_reservation_id,
+      :capacity_reservation_resource_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1350,6 +1581,31 @@ module Aws::BedrockAgentCoreControl
       :configuration)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The compute configuration for a capacity provider. This structure
+    # defines the type and settings of the compute resources used to launch
+    # instances.
+    #
+    # @note ComputeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ComputeConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ComputeConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] ec2_configuration
+    #   The Amazon EC2 compute configuration for the capacity provider.
+    #   @return [Types::Ec2Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ComputeConfiguration AWS API Documentation
+    #
+    class ComputeConfiguration < Struct.new(
+      :ec2_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Ec2Configuration < ComputeConfiguration; end
+      class Unknown < ComputeConfiguration; end
     end
 
     # Exception thrown when a resource is modified concurrently by multiple
@@ -1863,6 +2119,13 @@ module Aws::BedrockAgentCoreControl
     #   AgentCore Runtime sessions.
     #   @return [Array<Types::FilesystemConfiguration>]
     #
+    # @!attribute [rw] capacity_provider_configuration
+    #   The capacity provider configuration for the AgentCore Runtime. Use a
+    #   capacity provider to run the AgentCore Runtime on the Instances
+    #   compute type, which provisions Amazon Web Services managed compute
+    #   in your account.
+    #   @return [Types::CapacityProviderConfiguration]
+    #
     # @!attribute [rw] tags
     #   A map of tag keys and values to assign to the agent runtime. Tags
     #   enable you to categorize your resources in different ways, for
@@ -1884,6 +2147,7 @@ module Aws::BedrockAgentCoreControl
       :lifecycle_configuration,
       :environment_variables,
       :filesystem_configurations,
+      :capacity_provider_configuration,
       :tags)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
@@ -2170,6 +2434,92 @@ module Aws::BedrockAgentCoreControl
       :browser_id,
       :browser_arn,
       :created_at,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the capacity provider. The name must be unique within
+    #   your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description of the capacity provider. If you don't
+    #   specify a description, the service creates the capacity provider
+    #   without one.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_configuration
+    #   The permissions configuration for the capacity provider. This
+    #   specifies the IAM role that AgentCore uses to manage the Amazon EC2
+    #   instances on your behalf.
+    #   @return [Types::PermissionsConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to associate with the capacity
+    #   provider. If you don't specify tags, the capacity provider is
+    #   created with no tags.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration for the capacity provider. This defines
+    #   the Amazon EC2 compute resources used to launch instances: the
+    #   operating system, allowed instance types, networking, and storage.
+    #   @return [Types::ComputeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateCapacityProviderInput AWS API Documentation
+    #
+    class CreateCapacityProviderInput < Struct.new(
+      :name,
+      :description,
+      :permissions_configuration,
+      :client_token,
+      :tags,
+      :compute_configuration)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider_id
+    #   The unique identifier of the created capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_provider_arn
+    #   The Amazon Resource Name (ARN) of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capacity provider. For possible values,
+    #   see `CapacityProviderStatus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateCapacityProviderOutput AWS API Documentation
+    #
+    class CreateCapacityProviderOutput < Struct.new(
+      :capacity_provider_id,
+      :capacity_provider_arn,
+      :name,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -2605,6 +2955,110 @@ module Aws::BedrockAgentCoreControl
       :evaluator_id,
       :created_at,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_identifier
+    #   The unique identifier of the gateway to create the rate limit for.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] rate_limit_id
+    #   An optional customer-defined identifier for the rate limit. If not
+    #   provided, the system generates one.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional human-readable description for this rate limit. If not
+    #   provided, the rate limit is created without a description.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_keys
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit. Must be unique per gateway—no two rate limits can
+    #   share the same dimension keys.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] entries
+    #   The rule entries that map dimension values to rate configurations.
+    #   @return [Array<Types::LimitEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayRateLimitRequest AWS API Documentation
+    #
+    class CreateGatewayRateLimitRequest < Struct.new(
+      :gateway_identifier,
+      :client_token,
+      :rate_limit_id,
+      :description,
+      :dimension_keys,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Shared fields for `GatewayRateLimit` responses.
+    #
+    # @!attribute [rw] rate_limit_id
+    #   The unique identifier of the created rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_identifier
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_keys
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] entries
+    #   The list of rule entries that map dimension values to rate
+    #   configurations.
+    #   @return [Array<Types::LimitEntry>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the rate limit was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the rate limit was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayRateLimitResponse AWS API Documentation
+    #
+    class CreateGatewayRateLimitResponse < Struct.new(
+      :rate_limit_id,
+      :gateway_identifier,
+      :description,
+      :dimension_keys,
+      :entries,
+      :status,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3339,6 +3793,12 @@ module Aws::BedrockAgentCoreControl
     #   cannot be removed.
     #   @return [Array<Types::IndexedKey>]
     #
+    # @!attribute [rw] namespace_keys
+    #   The namespace variable key definitions with optional validation
+    #   rules. Use these `namespaceKeys` in `namespaceTemplates` to control
+    #   namespace hierarchy.
+    #   @return [Array<Types::NamespaceKeyEntry>]
+    #
     # @!attribute [rw] stream_delivery_resources
     #   Configuration for streaming memory record data to external
     #   resources.
@@ -3361,6 +3821,7 @@ module Aws::BedrockAgentCoreControl
       :event_expiry_duration,
       :memory_strategies,
       :indexed_keys,
+      :namespace_keys,
       :stream_delivery_resources,
       :tags)
       SENSITIVE = [:description]
@@ -3631,6 +4092,17 @@ module Aws::BedrockAgentCoreControl
     #   the payment provider.
     #   @return [Array<Types::CredentialsProviderConfiguration>]
     #
+    # @!attribute [rw] provision_mode
+    #   The provision mode for creating the payment connector. If you don't
+    #   specify a value, the default is `MANUAL`.
+    #
+    #   * `MANUAL` - You provide the credential provider configurations
+    #     directly.
+    #
+    #   * `QUICK_CREATE` - The service orchestrates OAuth consent and
+    #     provisions the credential provider for you.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If you don't specify this field, a
@@ -3655,6 +4127,7 @@ module Aws::BedrockAgentCoreControl
       :description,
       :type,
       :credential_provider_configurations,
+      :provision_mode,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3691,6 +4164,12 @@ module Aws::BedrockAgentCoreControl
     #   `UPDATE_FAILED`, and `DELETE_FAILED`.
     #   @return [String]
     #
+    # @!attribute [rw] authorization_url
+    #   The URL that the user must open to complete OAuth consent. This
+    #   field is only present when the payment connector status is
+    #   `PENDING_AUTHENTICATION`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentConnectorResponse AWS API Documentation
     #
     class CreatePaymentConnectorResponse < Struct.new(
@@ -3700,7 +4179,8 @@ module Aws::BedrockAgentCoreControl
       :type,
       :credential_provider_configurations,
       :created_at,
-      :status)
+      :status,
+      :authorization_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3808,6 +4288,13 @@ module Aws::BedrockAgentCoreControl
     #   A map of tag keys and values to assign to the payment manager.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed KMS key to
+    #   use for encrypting sensitive payment manager data at rest. If you
+    #   don't specify a key, the data is encrypted with an Amazon Web
+    #   Services owned key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentManagerRequest AWS API Documentation
     #
     class CreatePaymentManagerRequest < Struct.new(
@@ -3817,7 +4304,8 @@ module Aws::BedrockAgentCoreControl
       :authorizer_configuration,
       :role_arn,
       :client_token,
-      :tags)
+      :tags,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3866,6 +4354,11 @@ module Aws::BedrockAgentCoreControl
     #   The tags associated with the created payment manager.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt
+    #   sensitive payment manager data at rest, if configured.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentManagerResponse AWS API Documentation
     #
     class CreatePaymentManagerResponse < Struct.new(
@@ -3878,7 +4371,8 @@ module Aws::BedrockAgentCoreControl
       :workload_identity_details,
       :created_at,
       :status,
-      :tags)
+      :tags,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4870,10 +5364,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] private_key_jwt_config
-    #   Configuration for private\_key\_jwt client authentication (RFC
-    #   7523). On Create: privateKeySource and signingAlgorithm are required
-    #   (enforced server-side). On Update: all fields are optional — only
-    #   provided fields are updated.
+    #   The private\_key\_jwt client authentication configuration for this
+    #   credential provider. When specified, the credential provider uses
+    #   JWT client assertions to authenticate with the token endpoint.
     #   @return [Types::PrivateKeyJwtConfig]
     #
     # @!attribute [rw] private_endpoint
@@ -4935,10 +5428,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
     # @!attribute [rw] private_key_jwt_config
-    #   Configuration for private\_key\_jwt client authentication (RFC
-    #   7523). On Create: privateKeySource and signingAlgorithm are required
-    #   (enforced server-side). On Update: all fields are optional — only
-    #   provided fields are updated.
+    #   The configuration for private\_key\_jwt client authentication used
+    #   by this OAuth2 credential provider.
     #   @return [Types::PrivateKeyJwtConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomOauth2ProviderConfigOutput AWS API Documentation
@@ -5218,6 +5709,12 @@ module Aws::BedrockAgentCoreControl
     #   The unique identifier of the AgentCore Runtime to delete.
     #   @return [String]
     #
+    # @!attribute [rw] agent_runtime_version
+    #   The version of the AgentCore Runtime to delete. When you provide
+    #   this value, only that version is deleted. When you omit it, the
+    #   entire AgentCore Runtime and all of its versions are deleted.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
@@ -5232,6 +5729,7 @@ module Aws::BedrockAgentCoreControl
     #
     class DeleteAgentRuntimeRequest < Struct.new(
       :agent_runtime_id,
+      :agent_runtime_version,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5245,11 +5743,17 @@ module Aws::BedrockAgentCoreControl
     #   The unique identifier of the AgentCore Runtime.
     #   @return [String]
     #
+    # @!attribute [rw] agent_runtime_version
+    #   The version of the AgentCore Runtime that was deleted. This value is
+    #   present only when you delete a single version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteAgentRuntimeResponse AWS API Documentation
     #
     class DeleteAgentRuntimeResponse < Struct.new(
       :status,
-      :agent_runtime_id)
+      :agent_runtime_id,
+      :agent_runtime_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5363,6 +5867,53 @@ module Aws::BedrockAgentCoreControl
       :browser_id,
       :status,
       :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider_id
+    #   The unique identifier of the capacity provider to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteCapacityProviderInput AWS API Documentation
+    #
+    class DeleteCapacityProviderInput < Struct.new(
+      :capacity_provider_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider_id
+    #   The unique identifier of the deleted capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capacity provider. For possible values,
+    #   see `CapacityProviderStatus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteCapacityProviderOutput AWS API Documentation
+    #
+    class DeleteCapacityProviderOutput < Struct.new(
+      :capacity_provider_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5584,6 +6135,40 @@ module Aws::BedrockAgentCoreControl
     class DeleteEvaluatorResponse < Struct.new(
       :evaluator_arn,
       :evaluator_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_identifier
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate_limit_id
+    #   The unique identifier of the rate limit to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteGatewayRateLimitRequest AWS API Documentation
+    #
+    class DeleteGatewayRateLimitRequest < Struct.new(
+      :gateway_identifier,
+      :rate_limit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rate_limit_id
+    #   The unique identifier of the deleted rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the rate limit deletion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteGatewayRateLimitResponse AWS API Documentation
+    #
+    class DeleteGatewayRateLimitResponse < Struct.new(
+      :rate_limit_id,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -6261,6 +6846,27 @@ module Aws::BedrockAgentCoreControl
     #
     class DeleteWorkloadIdentityResponse < Aws::EmptyStructure; end
 
+    # The configuration for a derived evaluator. It reuses an existing
+    # evaluator's logic on your own model.
+    #
+    # @!attribute [rw] base_evaluator_id
+    #   The identifier of the base evaluator whose logic to run (a
+    #   `Builtin.*` or `ThirdParty.*` evaluator).
+    #   @return [String]
+    #
+    # @!attribute [rw] model_config
+    #   The configuration of the evaluator model that you supply.
+    #   @return [Types::EvaluatorModelConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DerivedEvaluatorConfig AWS API Documentation
+    #
+    class DerivedEvaluatorConfig < Struct.new(
+      :base_evaluator_id,
+      :model_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains descriptor-type-specific configurations for a registry
     # record. Only the descriptor matching the record's `descriptorType`
     # should be populated.
@@ -6292,6 +6898,109 @@ module Aws::BedrockAgentCoreControl
       :a2a,
       :custom,
       :agent_skills)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an Amazon EBS-backed persistent volume. The
+    # service creates persistent volumes when a session first launches, and
+    # the volumes survive instance termination. The volumes persist until
+    # you delete the session.
+    #
+    # @!attribute [rw] name
+    #   The logical name of the volume. Use this name to reference the
+    #   volume when you mount it into an agent runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_gi_b
+    #   The size of the volume, in GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_type
+    #   The Amazon EBS volume type. If you do not specify a type, the
+    #   default is `gp3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   The number of IOPS to provision. Valid only for `gp3`, `io1`, and
+    #   `io2` volumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput
+    #   The throughput, in MiB/s. Valid only for `gp3` volumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encrypted
+    #   Specifies whether to encrypt the volume. If `true`, the service
+    #   encrypts the volume with the KMS key that you specify in `kmsKeyId`,
+    #   or the default KMS key for Amazon EBS if you do not specify one. The
+    #   default is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the KMS key to use for encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   An optional Amazon EBS snapshot ID. If provided, the volume is
+    #   initialized from this snapshot the first time it is created. On
+    #   subsequent restarts, the existing volume is used and the snapshot is
+    #   ignored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EbsVolumeConfiguration AWS API Documentation
+    #
+    class EbsVolumeConfiguration < Struct.new(
+      :name,
+      :size_gi_b,
+      :volume_type,
+      :iops,
+      :throughput,
+      :encrypted,
+      :kms_key_id,
+      :snapshot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for Amazon EC2-based compute, including the launch
+    # template source, networking, storage volumes, and instance lifecycle
+    # settings.
+    #
+    # @!attribute [rw] launch_template_source
+    #   The source of the launch template configuration that defines how
+    #   instances are launched.
+    #   @return [Types::LaunchTemplateSource]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The VPC configuration for launching instances, including subnets and
+    #   security groups.
+    #   @return [Types::VpcConfiguration]
+    #
+    # @!attribute [rw] volumes
+    #   The named persistent Amazon EBS volumes for the capacity provider. A
+    #   capacity provider can define up to five volumes.
+    #   @return [Array<Types::VolumeConfiguration>]
+    #
+    # @!attribute [rw] lifecycle_configuration
+    #   The lifecycle configuration for instances in the capacity provider.
+    #   @return [Types::InstanceLifecycleConfiguration]
+    #
+    # @!attribute [rw] root_volume
+    #   The configuration for the instance root volume. Specify the amount
+    #   of free space to guarantee and, optionally, the Amazon EBS
+    #   performance and encryption settings. The device name and
+    #   delete-on-termination behavior are not configurable.
+    #   @return [Types::RootVolumeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Ec2Configuration AWS API Documentation
+    #
+    class Ec2Configuration < Struct.new(
+      :launch_template_source,
+      :vpc_configuration,
+      :volumes,
+      :lifecycle_configuration,
+      :root_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6357,6 +7066,107 @@ module Aws::BedrockAgentCoreControl
     #
     class EncryptionFailure < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A block device mapping for an instance store (ephemeral) volume.
+    #
+    # @!attribute [rw] device_name
+    #   The device name, for example `/dev/sdh` or `xvdh`.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_name
+    #   The virtual device name (`ephemeralN`). Instance store volumes are
+    #   numbered starting from 0. The number of available instance store
+    #   volumes depends on the instance type. After you connect to the
+    #   instance, you must mount the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs
+    #   The shared Amazon EBS performance and encryption properties for a
+    #   volume. These properties are common across the different volume
+    #   configurations for a capacity provider.
+    #   @return [Types::EphemeralEBSVolumeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EphemeralBlockDeviceMapping AWS API Documentation
+    #
+    class EphemeralBlockDeviceMapping < Struct.new(
+      :device_name,
+      :virtual_name,
+      :ebs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The shared Amazon EBS performance and encryption properties for a
+    # volume. These properties are common across the different volume
+    # configurations for a capacity provider.
+    #
+    # @!attribute [rw] volume_type
+    #   The Amazon EBS volume type. If you do not specify a type, the
+    #   default is `gp3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   The number of IOPS to provision. For `gp3`, `io1`, and `io2`
+    #   volumes, this is the number of IOPS provisioned for the volume. For
+    #   `gp2` volumes, this sets the baseline IOPS performance. It also
+    #   controls the rate at which the volume accumulates I/O credits for
+    #   bursting. Supported values: `gp3`, 3,000–80,000; `io1`, 100–64,000;
+    #   `io2`, 100–256,000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput
+    #   The throughput to provision, in MiB/s. Valid only for `gp3` volumes.
+    #   Valid range: 125–2,000 MiB/s.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encrypted
+    #   Specifies whether to encrypt the volume. Encrypted volumes can be
+    #   attached only to instances that support Amazon EBS encryption. If
+    #   you create a volume from a snapshot, you cannot specify an
+    #   encryption value.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier (key ID, key alias, key ARN, or alias ARN) of the
+    #   customer managed KMS key to use for Amazon EBS encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size
+    #   The size of the volume, in GiB. You must specify either a snapshot
+    #   ID or a volume size. Supported sizes: `gp2`, 1–16,384; `gp3`,
+    #   1–65,536; `io1`, 4–16,384; `io2`, 4–65,536.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_initialization_rate
+    #   The rate at which the volume is initialized after creation, in
+    #   MiB/s. Supported only for volumes created from snapshots. Valid
+    #   range: 100–300 MiB/s.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ebs_card_index
+    #   The index of the Amazon EBS card. Applies to instances with multiple
+    #   Amazon EBS cards.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EphemeralEBSVolumeConfiguration AWS API Documentation
+    #
+    class EphemeralEBSVolumeConfiguration < Struct.new(
+      :volume_type,
+      :iops,
+      :throughput,
+      :encrypted,
+      :kms_key_id,
+      :snapshot_id,
+      :volume_size,
+      :volume_initialization_rate,
+      :ebs_card_index)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6672,11 +7482,18 @@ module Aws::BedrockAgentCoreControl
     #   performance.
     #   @return [Types::CodeBasedEvaluatorConfig]
     #
+    # @!attribute [rw] derived
+    #   The configuration for an evaluator derived from an existing base
+    #   evaluator (a built-in or third-party evaluator), run on your own
+    #   model. The base evaluator supplies the prompt and scoring.
+    #   @return [Types::DerivedEvaluatorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EvaluatorConfig AWS API Documentation
     #
     class EvaluatorConfig < Struct.new(
       :llm_as_a_judge,
       :code_based,
+      :derived,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -6684,6 +7501,7 @@ module Aws::BedrockAgentCoreControl
 
       class LlmAsAJudge < EvaluatorConfig; end
       class CodeBased < EvaluatorConfig; end
+      class Derived < EvaluatorConfig; end
       class Unknown < EvaluatorConfig; end
     end
 
@@ -6698,16 +7516,22 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Bedrock model configuration for evaluation.
     #   @return [Types::BedrockEvaluatorModelConfig]
     #
+    # @!attribute [rw] responses_evaluator_model_config
+    #   The OpenResponses model configuration for evaluation.
+    #   @return [Types::OpenResponsesEvaluatorModelConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EvaluatorModelConfig AWS API Documentation
     #
     class EvaluatorModelConfig < Struct.new(
       :bedrock_evaluator_model_config,
+      :responses_evaluator_model_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class BedrockEvaluatorModelConfig < EvaluatorModelConfig; end
+      class ResponsesEvaluatorModelConfig < EvaluatorModelConfig; end
       class Unknown < EvaluatorModelConfig; end
     end
 
@@ -6760,6 +7584,11 @@ module Aws::BedrockAgentCoreControl
     #   provided by the service or a custom evaluator created by the user.
     #   @return [String]
     #
+    # @!attribute [rw] provider
+    #   The source of the evaluator's logic: Amazon Web Services, a
+    #   third-party library, or you.
+    #   @return [String]
+    #
     # @!attribute [rw] level
     #   The evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that
     #   determines the scope of evaluation.
@@ -6796,6 +7625,7 @@ module Aws::BedrockAgentCoreControl
       :evaluator_name,
       :description,
       :evaluator_type,
+      :provider,
       :level,
       :status,
       :created_at,
@@ -6873,12 +7703,19 @@ module Aws::BedrockAgentCoreControl
     #   AgentCore Runtime.
     #   @return [Types::EfsAccessPointConfiguration]
     #
+    # @!attribute [rw] capacity_provider_volume
+    #   Configuration for a capacity provider volume to mount into the
+    #   AgentCore Runtime. This mounts a persistent volume that is defined
+    #   on the capacity provider, referenced by its logical name.
+    #   @return [Types::CapacityProviderVolumeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/FilesystemConfiguration AWS API Documentation
     #
     class FilesystemConfiguration < Struct.new(
       :session_storage,
       :s3_files_access_point,
       :efs_access_point,
+      :capacity_provider_volume,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -6887,6 +7724,7 @@ module Aws::BedrockAgentCoreControl
       class SessionStorage < FilesystemConfiguration; end
       class S3FilesAccessPoint < FilesystemConfiguration; end
       class EfsAccessPoint < FilesystemConfiguration; end
+      class CapacityProviderVolume < FilesystemConfiguration; end
       class Unknown < FilesystemConfiguration; end
     end
 
@@ -7096,6 +7934,58 @@ module Aws::BedrockAgentCoreControl
 
       class Mcp < GatewayProtocolConfiguration; end
       class Unknown < GatewayProtocolConfiguration; end
+    end
+
+    # Contains detailed information about a gateway rate limit, including
+    # its configuration and current status.
+    #
+    # @!attribute [rw] rate_limit_id
+    #   The unique identifier of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_identifier
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_keys
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] entries
+    #   The list of rule entries that map dimension values to rate
+    #   configurations.
+    #   @return [Array<Types::LimitEntry>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the rate limit was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the rate limit was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GatewayRateLimitDetail AWS API Documentation
+    #
+    class GatewayRateLimitDetail < Struct.new(
+      :rate_limit_id,
+      :gateway_identifier,
+      :description,
+      :dimension_keys,
+      :entries,
+      :status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Detailed information about a gateway rule.
@@ -7488,6 +8378,10 @@ module Aws::BedrockAgentCoreControl
     #   The filesystem configurations mounted into the AgentCore Runtime.
     #   @return [Array<Types::FilesystemConfiguration>]
     #
+    # @!attribute [rw] capacity_provider_configuration
+    #   The capacity provider configuration for the AgentCore Runtime.
+    #   @return [Types::CapacityProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeResponse AWS API Documentation
     #
     class GetAgentRuntimeResponse < Struct.new(
@@ -7510,7 +8404,8 @@ module Aws::BedrockAgentCoreControl
       :authorizer_configuration,
       :request_header_configuration,
       :metadata_configuration,
-      :filesystem_configurations)
+      :filesystem_configurations,
+      :capacity_provider_configuration)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -7737,6 +8632,84 @@ module Aws::BedrockAgentCoreControl
       :filesystem_configurations,
       :status,
       :failure_reason,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider_id
+    #   The unique identifier of the capacity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetCapacityProviderInput AWS API Documentation
+    #
+    class GetCapacityProviderInput < Struct.new(
+      :capacity_provider_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider_id
+    #   The unique identifier of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_provider_arn
+    #   The Amazon Resource Name (ARN) of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capacity provider. For possible values,
+    #   see `CapacityProviderStatus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the capacity provider, if one was provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   A reason code for a capacity provider that is not in the `READY`
+    #   state. Use this code for programmatic error handling.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A human-readable message that describes why the capacity provider is
+    #   not in the `READY` state. Because these messages can change, use
+    #   `statusCode` for programmatic error handling.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_configuration
+    #   The permissions configuration for the capacity provider.
+    #   @return [Types::PermissionsConfiguration]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration for the capacity provider.
+    #   @return [Types::ComputeConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the capacity provider was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the capacity provider was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetCapacityProviderOutput AWS API Documentation
+    #
+    class GetCapacityProviderOutput < Struct.new(
+      :capacity_provider_id,
+      :capacity_provider_arn,
+      :name,
+      :status,
+      :description,
+      :status_code,
+      :status_reason,
+      :permissions_configuration,
+      :compute_configuration,
       :created_at,
       :last_updated_at)
       SENSITIVE = [:description]
@@ -8138,6 +9111,27 @@ module Aws::BedrockAgentCoreControl
     #   code-based settings.
     #   @return [Types::EvaluatorConfig]
     #
+    # @!attribute [rw] evaluator_type
+    #   The kind of evaluator resource. Valid values:
+    #
+    #   * `Builtin` – An Amazon Web Services-managed global evaluator.
+    #
+    #   * `ThirdParty` – An Amazon Web Services-managed global evaluator
+    #     from a third-party provider.
+    #
+    #   * `Custom` – A customer-created evaluator.
+    #
+    #   * `CustomCode` – A customer-created code-based evaluator.
+    #
+    #   * `CustomDerived` – A customer-created evaluator derived from an
+    #     existing base evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The source of the evaluator's logic: Amazon Web Services, a
+    #   third-party library, or you.
+    #   @return [String]
+    #
     # @!attribute [rw] level
     #   The evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that
     #   determines the scope of evaluation.
@@ -8174,6 +9168,8 @@ module Aws::BedrockAgentCoreControl
       :evaluator_name,
       :description,
       :evaluator_config,
+      :evaluator_type,
+      :provider,
       :level,
       :status,
       :created_at,
@@ -8181,6 +9177,74 @@ module Aws::BedrockAgentCoreControl
       :locked_for_modification,
       :kms_key_arn)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_identifier
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate_limit_id
+    #   The unique identifier of the rate limit to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayRateLimitRequest AWS API Documentation
+    #
+    class GetGatewayRateLimitRequest < Struct.new(
+      :gateway_identifier,
+      :rate_limit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Shared fields for `GatewayRateLimit` responses.
+    #
+    # @!attribute [rw] rate_limit_id
+    #   The unique identifier of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_identifier
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_keys
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] entries
+    #   The list of rule entries that map dimension values to rate
+    #   configurations.
+    #   @return [Array<Types::LimitEntry>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the rate limit was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the rate limit was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayRateLimitResponse AWS API Documentation
+    #
+    class GetGatewayRateLimitResponse < Struct.new(
+      :rate_limit_id,
+      :gateway_identifier,
+      :description,
+      :dimension_keys,
+      :entries,
+      :status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8847,6 +9911,12 @@ module Aws::BedrockAgentCoreControl
     #   `UPDATE_FAILED`, and `DELETE_FAILED`.
     #   @return [String]
     #
+    # @!attribute [rw] authorization_url
+    #   The URL that the user must open to complete OAuth consent. This
+    #   field is only present when the payment connector status is
+    #   `PENDING_AUTHENTICATION`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentConnectorResponse AWS API Documentation
     #
     class GetPaymentConnectorResponse < Struct.new(
@@ -8857,7 +9927,8 @@ module Aws::BedrockAgentCoreControl
       :credential_provider_configurations,
       :created_at,
       :last_updated_at,
-      :status)
+      :status,
+      :authorization_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8986,6 +10057,11 @@ module Aws::BedrockAgentCoreControl
     #   The tags associated with the payment manager.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt
+    #   sensitive payment manager data at rest, if configured.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentManagerResponse AWS API Documentation
     #
     class GetPaymentManagerResponse < Struct.new(
@@ -9000,7 +10076,8 @@ module Aws::BedrockAgentCoreControl
       :created_at,
       :last_updated_at,
       :status,
-      :tags)
+      :tags,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11113,6 +12190,42 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The source identifying the HTTP connector integration.
+    #
+    # @!attribute [rw] connector_id
+    #   The identifier for the HTTP connector integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HttpConnectorSource AWS API Documentation
+    #
+    class HttpConnectorSource < Struct.new(
+      :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an HTTP connector target. Use this configuration
+    # when you want to route HTTP requests through a managed connector.
+    #
+    # @!attribute [rw] source
+    #   The source configuration identifying which HTTP connector to use.
+    #   @return [Types::HttpConnectorSource]
+    #
+    # @!attribute [rw] parameters
+    #   The resource parameters for this connector (for example,
+    #   `memoryId`). The service validates these parameters against the
+    #   request path at runtime.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HttpConnectorTargetConfiguration AWS API Documentation
+    #
+    class HttpConnectorTargetConfiguration < Struct.new(
+      :source,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The HTTP target configuration for a gateway target. Contains the
     # configuration for HTTP-based target endpoints.
     #
@@ -11130,11 +12243,18 @@ module Aws::BedrockAgentCoreControl
     #   target forwards requests directly to an external HTTP endpoint.
     #   @return [Types::PassthroughTargetConfiguration]
     #
+    # @!attribute [rw] connector
+    #   The connector-based configuration for the HTTP target. Use this
+    #   configuration when you want to route HTTP requests through a managed
+    #   connector.
+    #   @return [Types::HttpConnectorTargetConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HttpTargetConfiguration AWS API Documentation
     #
     class HttpTargetConfiguration < Struct.new(
       :agentcore_runtime,
       :passthrough,
+      :connector,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -11142,6 +12262,7 @@ module Aws::BedrockAgentCoreControl
 
       class AgentcoreRuntime < HttpTargetConfiguration; end
       class Passthrough < HttpTargetConfiguration; end
+      class Connector < HttpTargetConfiguration; end
       class Unknown < HttpTargetConfiguration; end
     end
 
@@ -11481,6 +12602,46 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The configuration that manages the lifecycle of instances in a
+    # capacity provider, including idle timeout and maximum lifetime.
+    #
+    # @!attribute [rw] idle_instance_timeout
+    #   The number of seconds an instance can remain idle before it is
+    #   stopped. An instance is considered idle when all of its agents are
+    #   idle. The default is 900 seconds (15 minutes).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_lifetime
+    #   The maximum lifetime of an instance, in seconds. When an instance
+    #   reaches this limit, the service terminates it regardless of
+    #   activity. The default is 28800 seconds (8 hours). The maximum is
+    #   1209600 seconds (14 days).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/InstanceLifecycleConfiguration AWS API Documentation
+    #
+    class InstanceLifecycleConfiguration < Struct.new(
+      :idle_instance_timeout,
+      :max_lifetime)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requirements for Amazon EC2 instance types in a capacity provider.
+    #
+    # @!attribute [rw] allowed_instance_types
+    #   The list of allowed instance types. You can specify up to 30
+    #   instance types.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/InstanceRequirements AWS API Documentation
+    #
+    class InstanceRequirements < Struct.new(
+      :allowed_instance_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The interceptor configuration.
     #
     # @note InterceptorConfiguration is a union - when making an API calls you must set exactly one of the members.
@@ -11726,6 +12887,108 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The parameters for launching Amazon EC2 instances in a capacity
+    # provider.
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system and CPU architecture for the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_requirements
+    #   The requirements that determine which instance types can be
+    #   launched.
+    #   @return [Types::InstanceRequirements]
+    #
+    # @!attribute [rw] ephemeral_volumes
+    #   The block device mappings for instance store (ephemeral) volumes.
+    #   You can specify up to five mappings.
+    #   @return [Array<Types::EphemeralBlockDeviceMapping>]
+    #
+    # @!attribute [rw] monitoring
+    #   The monitoring level for the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_specifications
+    #   The license configurations to associate with the instances. You can
+    #   specify up to five configurations.
+    #   @return [Array<Types::LicenseSpecification>]
+    #
+    # @!attribute [rw] capacity_reservation_specification
+    #   The Capacity Reservation targeting option for the instances.
+    #   @return [Types::CapacityReservationSpecification]
+    #
+    # @!attribute [rw] ssh_key_name
+    #   The name of the SSH key pair to configure on the instances for SSH
+    #   connectivity.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_profile_arn
+    #   The Amazon Resource Name (ARN) of the IAM instance profile to
+    #   associate with launched instances. If provided, this overrides the
+    #   default instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] propagated_tags
+    #   The tags to propagate to all Amazon EC2 resources (instances,
+    #   volumes, and network interfaces) that the capacity provider creates.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LaunchParameters AWS API Documentation
+    #
+    class LaunchParameters < Struct.new(
+      :operating_system,
+      :instance_requirements,
+      :ephemeral_volumes,
+      :monitoring,
+      :license_specifications,
+      :capacity_reservation_specification,
+      :ssh_key_name,
+      :instance_profile_arn,
+      :propagated_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of the launch template configuration for a capacity
+    # provider. The `launchParameters` member specifies the operating
+    # system, instance requirements, and other settings used to launch
+    # instances.
+    #
+    # @note LaunchTemplateSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note LaunchTemplateSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LaunchTemplateSource corresponding to the set member.
+    #
+    # @!attribute [rw] launch_parameters
+    #   The parameters that AgentCore uses to create the launch template.
+    #   @return [Types::LaunchParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LaunchTemplateSource AWS API Documentation
+    #
+    class LaunchTemplateSource < Struct.new(
+      :launch_parameters,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class LaunchParameters < LaunchTemplateSource; end
+      class Unknown < LaunchTemplateSource; end
+    end
+
+    # A license configuration to associate with the instances.
+    #
+    # @!attribute [rw] license_configuration_arn
+    #   The Amazon Resource Name (ARN) of the license configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LicenseSpecification AWS API Documentation
+    #
+    class LicenseSpecification < Struct.new(
+      :license_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # LifecycleConfiguration lets you manage the lifecycle of runtime
     # sessions and resources in AgentCore Runtime. This configuration helps
     # optimize resource utilization by automatically cleaning up idle
@@ -11749,6 +13012,43 @@ module Aws::BedrockAgentCoreControl
     class LifecycleConfiguration < Struct.new(
       :idle_runtime_session_timeout,
       :max_lifetime)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single rule entry within a rate limit that maps dimension values to
+    # rate configurations. Each entry defines the rate limits for a specific
+    # combination of dimension values.
+    #
+    # @!attribute [rw] dimensions
+    #   A map of dimension names to dimension values for this rule entry.
+    #   Keys must match the parent rate limit's dimension keys. Values may
+    #   use `*` as a wildcard, but only in trailing positions based on the
+    #   dimension keys ordering.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] requests
+    #   The request rate limit configuration. Specifies the maximum number
+    #   of requests allowed per time period.
+    #   @return [Array<Types::RateConfig>]
+    #
+    # @!attribute [rw] tokens
+    #   The token rate limit configuration. Specifies the maximum number of
+    #   tokens allowed per time period.
+    #   @return [Array<Types::RateConfig>]
+    #
+    # @!attribute [rw] connections
+    #   The connection rate limit configuration. Specifies the maximum
+    #   number of concurrent connections allowed.
+    #   @return [Array<Types::RateConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LimitEntry AWS API Documentation
+    #
+    class LimitEntry < Struct.new(
+      :dimensions,
+      :requests,
+      :tokens,
+      :connections)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11847,6 +13147,55 @@ module Aws::BedrockAgentCoreControl
     #
     class ListAgentRuntimeEndpointsResponse < Struct.new(
       :runtime_endpoints,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider_id
+    #   The unique identifier of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimeVersionsByCapacityProviderInput AWS API Documentation
+    #
+    class ListAgentRuntimeVersionsByCapacityProviderInput < Struct.new(
+      :capacity_provider_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_runtimes
+    #   The list of agent runtime versions that are associated with the
+    #   capacity provider.
+    #   @return [Array<Types::AgentRuntimeVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimeVersionsByCapacityProviderOutput AWS API Documentation
+    #
+    class ListAgentRuntimeVersionsByCapacityProviderOutput < Struct.new(
+      :agent_runtimes,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -12036,6 +13385,49 @@ module Aws::BedrockAgentCoreControl
     #
     class ListBrowsersResponse < Struct.new(
       :browser_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListCapacityProvidersInput AWS API Documentation
+    #
+    class ListCapacityProvidersInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_providers
+    #   The list of capacity provider summaries.
+    #   @return [Array<Types::CapacityProviderSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListCapacityProvidersOutput AWS API Documentation
+    #
+    class ListCapacityProvidersOutput < Struct.new(
+      :capacity_providers,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -12350,6 +13742,50 @@ module Aws::BedrockAgentCoreControl
     #
     class ListEvaluatorsResponse < Struct.new(
       :evaluators,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_identifier
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. Use the value
+    #   returned in a previous `ListGatewayRateLimits` response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListGatewayRateLimitsRequest AWS API Documentation
+    #
+    class ListGatewayRateLimitsRequest < Struct.new(
+      :gateway_identifier,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rate_limits
+    #   The list of rate limits for the gateway.
+    #   @return [Array<Types::GatewayRateLimitDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. If this value is absent,
+    #   there are no more results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListGatewayRateLimitsResponse AWS API Documentation
+    #
+    class ListGatewayRateLimitsResponse < Struct.new(
+      :rate_limits,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -13874,6 +15310,12 @@ module Aws::BedrockAgentCoreControl
     #   used in metadata filters.
     #   @return [Array<Types::IndexedKey>]
     #
+    # @!attribute [rw] namespace_keys
+    #   The namespace variable key definitions for this memory. Namespace
+    #   keys define custom variables used in `namespaceTemplates` with
+    #   optional validation rules.
+    #   @return [Array<Types::NamespaceKeyEntry>]
+    #
     # @!attribute [rw] stream_delivery_resources
     #   Configuration for streaming memory record data to external
     #   resources.
@@ -13901,6 +15343,7 @@ module Aws::BedrockAgentCoreControl
       :updated_at,
       :strategies,
       :indexed_keys,
+      :namespace_keys,
       :stream_delivery_resources,
       :managed_by_resource_arn)
       SENSITIVE = [:description]
@@ -14457,6 +15900,48 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A namespace variable key definition with optional
+    # `NamespaceKeyValidation` rules.
+    #
+    # @!attribute [rw] key
+    #   The namespace variable key name.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation
+    #   The validation rules that constrain values for this namespace
+    #   variable at runtime (`CreateEvent` API).
+    #   @return [Types::NamespaceKeyValidation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/NamespaceKeyEntry AWS API Documentation
+    #
+    class NamespaceKeyEntry < Struct.new(
+      :key,
+      :validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The validation rules for namespace variable values. When you specify
+    # multiple rules, the service enforces a logical `AND` across all
+    # provided key-value pairs.
+    #
+    # @!attribute [rw] allowed_values
+    #   The allowed values for this namespace variable key.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regex_pattern
+    #   A regex pattern that the namespace variable key-value must match.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/NamespaceKeyValidation AWS API Documentation
+    #
+    class NamespaceKeyValidation < Struct.new(
+      :allowed_values,
+      :regex_pattern)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # SecurityConfig for the Agent.
     #
     # @!attribute [rw] network_mode
@@ -14923,6 +16408,47 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The configuration for using models served through the OpenResponses
+    # API in evaluator assessments, including model selection and inference
+    # parameters.
+    #
+    # @!attribute [rw] model_id
+    #   The identifier of the model to use for evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_output_tokens
+    #   The maximum number of tokens to generate in the model response,
+    #   including visible output and reasoning tokens.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] temperature
+    #   The temperature value that controls randomness in the model's
+    #   responses. Lower values produce more deterministic outputs.
+    #   @return [Float]
+    #
+    # @!attribute [rw] top_p
+    #   The top-p sampling parameter that controls the diversity of the
+    #   model's responses by limiting the cumulative probability of token
+    #   choices.
+    #   @return [Float]
+    #
+    # @!attribute [rw] reasoning
+    #   The reasoning configuration for reasoning models. Non-reasoning
+    #   models ignore this configuration.
+    #   @return [Types::ReasoningConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OpenResponsesEvaluatorModelConfig AWS API Documentation
+    #
+    class OpenResponsesEvaluatorModelConfig < Struct.new(
+      :model_id,
+      :max_output_tokens,
+      :temperature,
+      :top_p,
+      :reasoning)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration that specifies where evaluation results should be
     # written for monitoring and analysis.
     #
@@ -14972,14 +16498,35 @@ module Aws::BedrockAgentCoreControl
     #   same target.
     #   @return [Types::StickinessConfiguration]
     #
+    # @!attribute [rw] static_query_parameters
+    #   A map of static query parameters that the gateway always appends to
+    #   the outbound URL when forwarding requests to the target. The total
+    #   outbound URL length, which includes the endpoint and the
+    #   percent-encoded query parameters, is enforced by the service.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] static_query_parameter_conflict_resolution
+    #   Controls precedence when a client request supplies a query parameter
+    #   whose name matches a configured static query parameter. If not set,
+    #   defaults to `CLIENT_OVERRIDE`:
+    #
+    #   * `CLIENT_OVERRIDE` - The client-supplied value overrides the
+    #     configured static value for that parameter name.
+    #
+    #   * `STATIC_OVERRIDE` - The configured static value is retained,
+    #     overriding the client-supplied value for that parameter name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PassthroughTargetConfiguration AWS API Documentation
     #
     class PassthroughTargetConfiguration < Struct.new(
       :endpoint,
       :protocol_type,
       :schema,
-      :stickiness_configuration)
-      SENSITIVE = []
+      :stickiness_configuration,
+      :static_query_parameters,
+      :static_query_parameter_conflict_resolution)
+      SENSITIVE = [:static_query_parameters]
       include Aws::Structure
     end
 
@@ -15116,6 +16663,11 @@ module Aws::BedrockAgentCoreControl
     #   The timestamp when the payment manager was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt
+    #   sensitive payment manager data at rest, if configured.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PaymentManagerSummary AWS API Documentation
     #
     class PaymentManagerSummary < Struct.new(
@@ -15127,7 +16679,8 @@ module Aws::BedrockAgentCoreControl
       :role_arn,
       :status,
       :created_at,
-      :last_updated_at)
+      :last_updated_at,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15186,6 +16739,26 @@ module Aws::BedrockAgentCoreControl
       class CoinbaseCdpConfiguration < PaymentProviderConfigurationOutput; end
       class StripePrivyConfiguration < PaymentProviderConfigurationOutput; end
       class Unknown < PaymentProviderConfigurationOutput; end
+    end
+
+    # The permissions configuration for a capacity provider. This specifies
+    # the IAM role that AgentCore uses to manage the Amazon EC2 instances
+    # for the capacity provider on your behalf.
+    #
+    # @!attribute [rw] capacity_provider_operator_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that AgentCore
+    #   assumes to manage the capacity provider, including launching,
+    #   tagging, and terminating instances and their network interfaces. We
+    #   recommend scoping this role to the minimum permissions that your
+    #   workloads require.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PermissionsConfiguration AWS API Documentation
+    #
+    class PermissionsConfiguration < Struct.new(
+      :capacity_provider_operator_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Represents a complete policy resource within the AgentCore Policy
@@ -15793,10 +17366,8 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # Configuration for private\_key\_jwt client authentication (RFC 7523).
-    # On Create: privateKeySource and signingAlgorithm are required
-    # (enforced server-side). On Update: all fields are optional — only
-    # provided fields are updated.
+    # The private key configuration for private\_key\_jwt client
+    # authentication.
     #
     # @!attribute [rw] private_key_source
     #   The private key source for the JWT client assertion.
@@ -15924,6 +17495,33 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Contains the rate configuration for a rate limit metric, specifying
+    # the allowed rate and time period.
+    #
+    # @!attribute [rw] rate
+    #   The rate value for the limit. For request limits, this is the number
+    #   of requests allowed per period. For token limits, this is the number
+    #   of tokens allowed per period. For connection limits, this is the
+    #   number of concurrent connections allowed.
+    #   @return [Float]
+    #
+    # @!attribute [rw] period
+    #   The time period for the rate limit. Valid values:
+    #
+    #   * `second`—Measures the rate limit over a one-second window.
+    #
+    #   * `minute`—Measures the rate limit over a one-minute window.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RateConfig AWS API Documentation
+    #
+    class RateConfig < Struct.new(
+      :rate,
+      :period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The rating scale that defines how evaluators should score agent
     # performance, supporting both numerical and categorical scales.
     #
@@ -15954,6 +17552,23 @@ module Aws::BedrockAgentCoreControl
       class Numerical < RatingScale; end
       class Categorical < RatingScale; end
       class Unknown < RatingScale; end
+    end
+
+    # The reasoning configuration that controls how a reasoning model
+    # allocates effort during evaluation.
+    #
+    # @!attribute [rw] effort
+    #   The level of reasoning effort the model applies when generating a
+    #   response. For supported values, see the model provider's
+    #   documentation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ReasoningConfiguration AWS API Documentation
+    #
+    class ReasoningConfiguration < Struct.new(
+      :effort)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The recording configuration for a browser. This structure defines how
@@ -16350,6 +17965,75 @@ module Aws::BedrockAgentCoreControl
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation failed because of a conflicting request. Retry the
+    # request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RetryableConflictException AWS API Documentation
+    #
+    class RetryableConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the root volume of a capacity provider instance.
+    # Specify the amount of free space to guarantee on the root volume. The
+    # device name and delete-on-termination settings are fixed and cannot be
+    # changed.
+    #
+    # @!attribute [rw] volume_type
+    #   The Amazon EBS volume type. If you do not specify a type, the
+    #   default is `gp3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   The number of IOPS to provision. For `gp3`, `io1`, and `io2`
+    #   volumes, this is the number of IOPS provisioned for the volume. For
+    #   `gp2` volumes, this sets the baseline IOPS performance. It also
+    #   controls the rate at which the volume accumulates I/O credits for
+    #   bursting. Supported values: `gp3`, 3,000–80,000; `io1`, 100–64,000;
+    #   `io2`, 100–256,000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput
+    #   The throughput to provision, in MiB/s. Valid only for `gp3` volumes.
+    #   Valid range: 125–2,000 MiB/s.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encrypted
+    #   Specifies whether to encrypt the volume. Encrypted volumes can be
+    #   attached only to instances that support Amazon EBS encryption. If
+    #   you create a volume from a snapshot, you cannot specify an
+    #   encryption value.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier (key ID, key alias, key ARN, or alias ARN) of the
+    #   customer managed KMS key to use for Amazon EBS encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] free_space_gi_b
+    #   The free space guaranteed on the root volume, in GiB. AgentCore adds
+    #   the operating system overhead on top of this value. The default is 8
+    #   GiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RootVolumeConfiguration AWS API Documentation
+    #
+    class RootVolumeConfiguration < Struct.new(
+      :volume_type,
+      :iops,
+      :throughput,
+      :encrypted,
+      :kms_key_id,
+      :free_space_gi_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17328,11 +19012,18 @@ module Aws::BedrockAgentCoreControl
     #   to 86400.
     #   @return [Integer]
     #
+    # @!attribute [rw] composite_identifier
+    #   Additional headers to include in session affinity routing. When set,
+    #   requests are only considered part of the same session if both the
+    #   `identifier` and all composite identifier values match.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/StickinessConfiguration AWS API Documentation
     #
     class StickinessConfiguration < Struct.new(
       :identifier,
-      :timeout)
+      :timeout,
+      :composite_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17625,6 +19316,31 @@ module Aws::BedrockAgentCoreControl
       :record_id,
       :status,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request failed because it requires an active Amazon Web Services
+    # Marketplace subscription that is not present. Subscribe to the
+    # required product in Amazon Web Services Marketplace and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_url
+    #   URL to the Marketplace listing for subscription
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   The product requiring subscription
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SubscriptionRequiredException AWS API Documentation
+    #
+    class SubscriptionRequiredException < Struct.new(
+      :message,
+      :subscription_url,
+      :product_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18448,6 +20164,11 @@ module Aws::BedrockAgentCoreControl
     #   Runtime.
     #   @return [Array<Types::FilesystemConfiguration>]
     #
+    # @!attribute [rw] capacity_provider_configuration
+    #   The updated capacity provider configuration for the AgentCore
+    #   Runtime.
+    #   @return [Types::CapacityProviderConfiguration]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -18471,6 +20192,7 @@ module Aws::BedrockAgentCoreControl
       :metadata_configuration,
       :environment_variables,
       :filesystem_configurations,
+      :capacity_provider_configuration,
       :client_token)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
@@ -18593,6 +20315,78 @@ module Aws::BedrockAgentCoreControl
       :credential_provider_arn,
       :created_time,
       :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider_id
+    #   The unique identifier of the capacity provider to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the capacity provider.
+    #   @return [Types::UpdatedDescription]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateCapacityProviderInput AWS API Documentation
+    #
+    class UpdateCapacityProviderInput < Struct.new(
+      :capacity_provider_id,
+      :description,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider_id
+    #   The unique identifier of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_provider_arn
+    #   The Amazon Resource Name (ARN) of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capacity provider. For possible values,
+    #   see `CapacityProviderStatus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the capacity provider was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the capacity provider was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateCapacityProviderOutput AWS API Documentation
+    #
+    class UpdateCapacityProviderOutput < Struct.new(
+      :capacity_provider_id,
+      :capacity_provider_arn,
+      :name,
+      :status,
+      :created_at,
+      :last_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18913,6 +20707,85 @@ module Aws::BedrockAgentCoreControl
       :evaluator_id,
       :updated_at,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_identifier
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate_limit_id
+    #   The unique identifier of the rate limit to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated human-readable description for this rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] entries
+    #   The updated rule entries. The dimension keys are immutable after
+    #   creation and cannot be changed.
+    #   @return [Array<Types::LimitEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayRateLimitRequest AWS API Documentation
+    #
+    class UpdateGatewayRateLimitRequest < Struct.new(
+      :gateway_identifier,
+      :rate_limit_id,
+      :description,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Shared fields for `GatewayRateLimit` responses.
+    #
+    # @!attribute [rw] rate_limit_id
+    #   The unique identifier of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_identifier
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_keys
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] entries
+    #   The list of rule entries that map dimension values to rate
+    #   configurations.
+    #   @return [Array<Types::LimitEntry>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the rate limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the rate limit was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the rate limit was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayRateLimitResponse AWS API Documentation
+    #
+    class UpdateGatewayRateLimitResponse < Struct.new(
+      :rate_limit_id,
+      :gateway_identifier,
+      :description,
+      :dimension_keys,
+      :entries,
+      :status,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19596,6 +21469,13 @@ module Aws::BedrockAgentCoreControl
     #   removed.
     #   @return [Array<Types::IndexedKey>]
     #
+    # @!attribute [rw] namespace_keys
+    #   The namespace variable key definitions with validation rules for
+    #   this memory. This value fully replaces the existing set — any key
+    #   you omit is removed. Any referenced `namespaceKey` omission will
+    #   throw ValidationException.
+    #   @return [Array<Types::NamespaceKeyEntry>]
+    #
     # @!attribute [rw] stream_delivery_resources
     #   Configuration for streaming memory record data to external
     #   resources.
@@ -19611,6 +21491,7 @@ module Aws::BedrockAgentCoreControl
       :memory_execution_role_arn,
       :memory_strategies,
       :add_indexed_keys,
+      :namespace_keys,
       :stream_delivery_resources)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -19915,6 +21796,12 @@ module Aws::BedrockAgentCoreControl
     #   `CREATE_FAILED`, `UPDATE_FAILED`, and `DELETE_FAILED`.
     #   @return [String]
     #
+    # @!attribute [rw] authorization_url
+    #   The URL that the user must open to complete OAuth consent. This
+    #   field is only present when the payment connector status is
+    #   `PENDING_AUTHENTICATION`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentConnectorResponse AWS API Documentation
     #
     class UpdatePaymentConnectorResponse < Struct.new(
@@ -19924,7 +21811,8 @@ module Aws::BedrockAgentCoreControl
       :type,
       :credential_provider_configurations,
       :last_updated_at,
-      :status)
+      :status,
+      :authorization_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20028,6 +21916,11 @@ module Aws::BedrockAgentCoreControl
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The updated Amazon Resource Name (ARN) of the customer managed KMS
+    #   key used to encrypt sensitive payment manager data at rest.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentManagerRequest AWS API Documentation
     #
     class UpdatePaymentManagerRequest < Struct.new(
@@ -20036,7 +21929,8 @@ module Aws::BedrockAgentCoreControl
       :authorizer_type,
       :authorizer_configuration,
       :role_arn,
-      :client_token)
+      :client_token,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20076,6 +21970,11 @@ module Aws::BedrockAgentCoreControl
     #   `CREATE_FAILED`, `UPDATE_FAILED`, and `DELETE_FAILED`.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt
+    #   sensitive payment manager data at rest, if configured.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentManagerResponse AWS API Documentation
     #
     class UpdatePaymentManagerResponse < Struct.new(
@@ -20086,7 +21985,8 @@ module Aws::BedrockAgentCoreControl
       :role_arn,
       :workload_identity_details,
       :last_updated_at,
-      :status)
+      :status,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21293,6 +23193,32 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The configuration for a persistent volume attached to a capacity
+    # provider. This structure defines the storage backing for the
+    # persistent volumes used by agents that run on capacity provider
+    # instances.
+    #
+    # @note VolumeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VolumeConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VolumeConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] ebs_configuration
+    #   The configuration for an Amazon EBS-backed persistent volume.
+    #   @return [Types::EbsVolumeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/VolumeConfiguration AWS API Documentation
+    #
+    class VolumeConfiguration < Struct.new(
+      :ebs_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EbsConfiguration < VolumeConfiguration; end
+      class Unknown < VolumeConfiguration; end
+    end
+
     # VpcConfig for the Agent.
     #
     # @!attribute [rw] security_groups
@@ -21344,6 +23270,27 @@ module Aws::BedrockAgentCoreControl
       :security_groups,
       :subnets,
       :require_service_s3_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC configuration for launching Amazon EC2 instances.
+    #
+    # @!attribute [rw] subnets
+    #   The IDs of the subnets in which to launch instances. You must
+    #   specify at least one subnet.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The IDs of the security groups to associate with the instances. You
+    #   must specify at least one security group.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/VpcConfiguration AWS API Documentation
+    #
+    class VpcConfiguration < Struct.new(
+      :subnets,
+      :security_groups)
       SENSITIVE = []
       include Aws::Structure
     end

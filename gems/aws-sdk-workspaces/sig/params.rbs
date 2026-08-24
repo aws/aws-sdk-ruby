@@ -19,7 +19,8 @@ module Aws
       global_accelerator: {
         mode: ("ENABLED_AUTO" | "DISABLED" | "INHERITED"),
         preferred_protocol: ("TCP" | "NONE" | "INHERITED")?
-      }?
+      }?,
+      nested_virtualization_enabled: bool?
     }
 
     end

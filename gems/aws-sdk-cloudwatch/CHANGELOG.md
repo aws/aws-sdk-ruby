@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2026-08-21)
+------------------
+
+* Feature - Allows customers to specify an initial warm up period to wait for metrics to arrive when creating metric or log alarms
+
 1.145.0 (2026-07-22)
 ------------------
 

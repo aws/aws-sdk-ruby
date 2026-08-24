@@ -1599,7 +1599,7 @@ module Aws::VPCLattice
     #
     #   resp = client.create_service_network_vpc_association({
     #     client_token: "ClientToken",
-    #     service_network_identifier: "ServiceNetworkIdentifier", # required
+    #     service_network_identifier: "ServiceNetworkIdentifierWithoutRegex", # required
     #     vpc_identifier: "VpcId", # required
     #     private_dns_enabled: false,
     #     security_group_ids: ["SecurityGroupId"],
@@ -4539,8 +4539,14 @@ module Aws::VPCLattice
     # @option params [required, String] :service_network_vpc_association_identifier
     #   The ID or ARN of the association.
     #
-    # @option params [required, Array<String>] :security_group_ids
+    # @option params [Array<String>] :security_group_ids
     #   The IDs of the security groups.
+    #
+    # @option params [Boolean] :private_dns_enabled
+    #   Indicates if private DNS is enabled for the VPC association.
+    #
+    # @option params [Types::DnsOptions] :dns_options
+    #   DNS options for the service network VPC association.
     #
     # @return [Types::UpdateServiceNetworkVpcAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4549,12 +4555,19 @@ module Aws::VPCLattice
     #   * {Types::UpdateServiceNetworkVpcAssociationResponse#status #status} => String
     #   * {Types::UpdateServiceNetworkVpcAssociationResponse#created_by #created_by} => String
     #   * {Types::UpdateServiceNetworkVpcAssociationResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::UpdateServiceNetworkVpcAssociationResponse#private_dns_enabled #private_dns_enabled} => Boolean
+    #   * {Types::UpdateServiceNetworkVpcAssociationResponse#dns_options #dns_options} => Types::DnsOptions
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_service_network_vpc_association({
     #     service_network_vpc_association_identifier: "ServiceNetworkVpcAssociationIdentifier", # required
-    #     security_group_ids: ["SecurityGroupId"], # required
+    #     security_group_ids: ["SecurityGroupId"],
+    #     private_dns_enabled: false,
+    #     dns_options: {
+    #       private_dns_preference: "VERIFIED_DOMAINS_ONLY", # accepts VERIFIED_DOMAINS_ONLY, ALL_DOMAINS, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS, SPECIFIED_DOMAINS_ONLY
+    #       private_dns_specified_domains: ["PrivateDnsSpecifiedDomain"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -4565,6 +4578,10 @@ module Aws::VPCLattice
     #   resp.created_by #=> String
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
+    #   resp.private_dns_enabled #=> Boolean
+    #   resp.dns_options.private_dns_preference #=> String, one of "VERIFIED_DOMAINS_ONLY", "ALL_DOMAINS", "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS", "SPECIFIED_DOMAINS_ONLY"
+    #   resp.dns_options.private_dns_specified_domains #=> Array
+    #   resp.dns_options.private_dns_specified_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateServiceNetworkVpcAssociation AWS API Documentation
     #
@@ -4663,7 +4680,7 @@ module Aws::VPCLattice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -69,6 +69,7 @@ module Aws::MarketplaceAgreement
       attr_accessor free_trial_pricing_term: Types::FreeTrialPricingTerm
       attr_accessor fixed_upfront_pricing_term: Types::FixedUpfrontPricingTerm
       attr_accessor variable_payment_term: Types::VariablePaymentTerm
+      attr_accessor net_payment_term: Types::NetPaymentTerm
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -95,6 +96,8 @@ module Aws::MarketplaceAgreement
       class FixedUpfrontPricingTerm < AcceptedTerm
       end
       class VariablePaymentTerm < AcceptedTerm
+      end
+      class NetPaymentTerm < AcceptedTerm
       end
       class Unknown < AcceptedTerm
       end
@@ -627,6 +630,13 @@ module Aws::MarketplaceAgreement
     class ListBillingAdjustmentRequestsOutput
       attr_accessor next_token: ::String
       attr_accessor items: ::Array[Types::BillingAdjustmentSummary]
+      SENSITIVE: []
+    end
+
+    class NetPaymentTerm
+      attr_accessor type: ::String
+      attr_accessor id: ::String
+      attr_accessor payment_due_period: ::String
       SENSITIVE: []
     end
 

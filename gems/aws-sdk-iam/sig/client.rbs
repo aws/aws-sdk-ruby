@@ -84,6 +84,20 @@ module Aws
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _AcquireRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcquireRoleResponse]
+        def role: () -> Types::Role
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#acquire_role-instance_method
+      def acquire_role: (
+                          template_arn: ::String,
+                          ?template_minor_version: ::Integer,
+                          ?replacement_values: Hash[::String, {
+                              values: Array[::String]
+                            }]
+                        ) -> _AcquireRoleResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcquireRoleResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#add_client_id_to_open_id_connect_provider-instance_method
       def add_client_id_to_open_id_connect_provider: (
                                                        open_id_connect_provider_arn: ::String,
@@ -677,6 +691,15 @@ module Aws
       def get_account_password_policy: () -> _GetAccountPasswordPolicyResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountPasswordPolicyResponseSuccess
 
+      interface _GetAccountPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountPropertiesResponse]
+        def properties: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_account_properties-instance_method
+      def get_account_properties: (
+                                  ) -> _GetAccountPropertiesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountPropertiesResponseSuccess
+
       interface _GetAccountSummaryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSummaryResponse]
         def summary_map: () -> ::Hash[("Users" | "UsersQuota" | "Groups" | "GroupsQuota" | "ServerCertificates" | "ServerCertificatesQuota" | "UserPolicySizeQuota" | "GroupPolicySizeQuota" | "GroupsPerUserQuota" | "SigningCertificatesPerUserQuota" | "AccessKeysPerUserQuota" | "MFADevices" | "MFADevicesInUse" | "AccountMFAEnabled" | "AccountAccessKeysPresent" | "AccountPasswordPresent" | "AccountSigningCertificatesPresent" | "AttachedPoliciesPerGroupQuota" | "AttachedPoliciesPerRoleQuota" | "AttachedPoliciesPerUserQuota" | "Policies" | "PoliciesQuota" | "PolicySizeQuota" | "PolicyVersionsInUse" | "PolicyVersionsInUseQuota" | "VersionsPerPolicyQuota" | "GlobalEndpointTokenVersion" | "AssumeRolePolicySizeQuota" | "InstanceProfiles" | "InstanceProfilesQuota" | "Providers" | "RolePolicySizeQuota" | "Roles" | "RolesQuota"), ::Integer]
@@ -891,6 +914,17 @@ module Aws
                              policy_name: ::String
                            ) -> _GetRolePolicyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRolePolicyResponseSuccess
+
+      interface _GetRoleTemplateVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRoleTemplateVersionResponse]
+        def role_template_version: () -> Types::RoleTemplateVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_role_template_version-instance_method
+      def get_role_template_version: (
+                                       template_arn: ::String,
+                                       ?minor_version: ::Integer
+                                     ) -> _GetRoleTemplateVersionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRoleTemplateVersionResponseSuccess
 
       interface _GetSAMLProviderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSAMLProviderResponse]
@@ -1502,6 +1536,15 @@ module Aws
                                     ) -> _ListVirtualMFADevicesResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualMFADevicesResponseSuccess
 
+      interface _PutAccountPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountPropertiesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#put_account_properties-instance_method
+      def put_account_properties: (
+                                    properties: Hash[::String, ::String]
+                                  ) -> _PutAccountPropertiesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountPropertiesResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#put_group_policy-instance_method
       def put_group_policy: (
                               group_name: ::String,
@@ -1617,6 +1660,11 @@ module Aws
       def simulate_custom_policy: (
                                     policy_input_list: Array[::String],
                                     ?permissions_boundary_policy_input_list: Array[::String],
+                                    ?ordered_organization_policy_input_list: Array[
+                                      {
+                                        service_control_policy_input_list: Array[::String]?
+                                      }
+                                    ],
                                     action_names: Array[::String],
                                     ?resource_arns: Array[::String],
                                     ?resource_policy: ::String,
@@ -1646,6 +1694,17 @@ module Aws
                                        policy_source_arn: ::String,
                                        ?policy_input_list: Array[::String],
                                        ?permissions_boundary_policy_input_list: Array[::String],
+                                       ?policy_exclusion_list: Array[
+                                         {
+                                           policy_type: ("inline" | "aws-managed" | "user-managed" | "permission-boundary" | "scp" | "rcp")?,
+                                           policy_arn: ::String?,
+                                           inline_policy_identifier: {
+                                             policy_name: ::String,
+                                             attachment_type: ("user" | "group" | "role"),
+                                             attachment_name: ::String
+                                           }?
+                                         }
+                                       ],
                                        action_names: Array[::String],
                                        ?resource_arns: Array[::String],
                                        ?resource_policy: ::String,

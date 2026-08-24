@@ -1147,6 +1147,17 @@ module Aws::MediaPackageV2
     #   `UNDERSCORE`.
     #   @return [String]
     #
+    # @!attribute [rw] stream_name_output_mode
+    #   The output mode for stream names in egress manifests. This setting
+    #   is valid only when the associated channel's `InputType` is `HLS`.
+    #   You can't change the stream name output mode after you create the
+    #   endpoint.
+    #
+    #   `INDEX` uses numeric indices for stream names (for example, 1, 2,
+    #   3). `PASSTHROUGH_NAME` uses the stream names from the input
+    #   manifest. If you don't specify a value, the default is `INDEX`.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A comma-separated list of tag key:value pairs that you define. For
     #   example:
@@ -1173,6 +1184,7 @@ module Aws::MediaPackageV2
       :mss_manifests,
       :force_endpoint_error_configuration,
       :uri_separator,
+      :stream_name_output_mode,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1253,6 +1265,11 @@ module Aws::MediaPackageV2
     #   endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] stream_name_output_mode
+    #   The output mode for stream names in egress manifests for this origin
+    #   endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] etag
     #   The current Entity Tag (ETag) associated with this resource. The
     #   entity tag can be used to safely make concurrent updates to the
@@ -1283,6 +1300,7 @@ module Aws::MediaPackageV2
       :mss_manifests,
       :force_endpoint_error_configuration,
       :uri_separator,
+      :stream_name_output_mode,
       :etag,
       :tags)
       SENSITIVE = []
@@ -2864,6 +2882,11 @@ module Aws::MediaPackageV2
     #   endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] stream_name_output_mode
+    #   The output mode for stream names in egress manifests for this origin
+    #   endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] etag
     #   The current Entity Tag (ETag) associated with this resource. The
     #   entity tag can be used to safely make concurrent updates to the
@@ -2895,6 +2918,7 @@ module Aws::MediaPackageV2
       :mss_manifests,
       :force_endpoint_error_configuration,
       :uri_separator,
+      :stream_name_output_mode,
       :etag,
       :tags)
       SENSITIVE = []
@@ -3532,6 +3556,11 @@ module Aws::MediaPackageV2
     #   endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] stream_name_output_mode
+    #   The output mode for stream names in egress manifests for this origin
+    #   endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/OriginEndpointListConfiguration AWS API Documentation
     #
     class OriginEndpointListConfiguration < Struct.new(
@@ -3548,7 +3577,8 @@ module Aws::MediaPackageV2
       :dash_manifests,
       :mss_manifests,
       :force_endpoint_error_configuration,
-      :uri_separator)
+      :uri_separator,
+      :stream_name_output_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4457,6 +4487,12 @@ module Aws::MediaPackageV2
     #   current value is preserved.
     #   @return [String]
     #
+    # @!attribute [rw] stream_name_output_mode
+    #   The output mode for stream names in egress manifests. If you provide
+    #   a value, it must match the current value. You can't change the
+    #   stream name output mode after you create the endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] etag
     #   The expected current Entity Tag (ETag) for the resource. If the
     #   specified ETag does not match the resource's current entity tag,
@@ -4479,6 +4515,7 @@ module Aws::MediaPackageV2
       :mss_manifests,
       :force_endpoint_error_configuration,
       :uri_separator,
+      :stream_name_output_mode,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -4555,6 +4592,11 @@ module Aws::MediaPackageV2
     #   endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] stream_name_output_mode
+    #   The output mode for stream names in egress manifests for this origin
+    #   endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] etag
     #   The current Entity Tag (ETag) associated with this resource. The
     #   entity tag can be used to safely make concurrent updates to the
@@ -4588,6 +4630,7 @@ module Aws::MediaPackageV2
       :mss_manifests,
       :force_endpoint_error_configuration,
       :uri_separator,
+      :stream_name_output_mode,
       :etag,
       :tags,
       :dash_manifests)

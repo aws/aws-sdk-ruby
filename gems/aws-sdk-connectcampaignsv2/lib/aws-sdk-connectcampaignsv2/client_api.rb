@@ -14,6 +14,8 @@ module Aws::ConnectCampaignsV2
 
     include Seahorse::Model
 
+    AbandonmentRatePacingConfig = Shapes::StructureShape.new(name: 'AbandonmentRatePacingConfig')
+    AbandonmentRatePacingConfigConnectionThresholdSecondsInteger = Shapes::IntegerShape.new(name: 'AbandonmentRatePacingConfigConnectionThresholdSecondsInteger')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AgentAction = Shapes::StringShape.new(name: 'AgentAction')
     AgentActions = Shapes::ListShape.new(name: 'AgentActions')
@@ -53,6 +55,7 @@ module Aws::ConnectCampaignsV2
     CommunicationTimeConfig = Shapes::StructureShape.new(name: 'CommunicationTimeConfig')
     CommunicationTimeConfigType = Shapes::StringShape.new(name: 'CommunicationTimeConfigType')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionStartPoint = Shapes::StringShape.new(name: 'ConnectionStartPoint')
     ContactFlowId = Shapes::StringShape.new(name: 'ContactFlowId')
     CreateCampaignRequest = Shapes::StructureShape.new(name: 'CreateCampaignRequest')
     CreateCampaignResponse = Shapes::StructureShape.new(name: 'CreateCampaignResponse')
@@ -85,6 +88,7 @@ module Aws::ConnectCampaignsV2
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EntryLimitsConfig = Shapes::StructureShape.new(name: 'EntryLimitsConfig')
     EntryLimitsConfigMaxEntryCountInteger = Shapes::IntegerShape.new(name: 'EntryLimitsConfigMaxEntryCountInteger')
+    EvaluationWindow = Shapes::StringShape.new(name: 'EvaluationWindow')
     EventTrigger = Shapes::StructureShape.new(name: 'EventTrigger')
     EventTriggerContext = Shapes::StructureShape.new(name: 'EventTriggerContext')
     EventType = Shapes::StringShape.new(name: 'EventType')
@@ -148,6 +152,8 @@ module Aws::ConnectCampaignsV2
     OpenHours = Shapes::UnionShape.new(name: 'OpenHours')
     OutboundRequest = Shapes::StructureShape.new(name: 'OutboundRequest')
     OutboundRequestList = Shapes::ListShape.new(name: 'OutboundRequestList')
+    PacingStrategy = Shapes::UnionShape.new(name: 'PacingStrategy')
+    PacingStrategyList = Shapes::ListShape.new(name: 'PacingStrategyList')
     PauseCampaignRequest = Shapes::StructureShape.new(name: 'PauseCampaignRequest')
     PredictiveConfig = Shapes::StructureShape.new(name: 'PredictiveConfig')
     PreviewConfig = Shapes::StructureShape.new(name: 'PreviewConfig')
@@ -201,6 +207,7 @@ module Aws::ConnectCampaignsV2
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetRate = Shapes::FloatShape.new(name: 'TargetRate')
     TelephonyChannelSubtypeConfig = Shapes::StructureShape.new(name: 'TelephonyChannelSubtypeConfig')
     TelephonyChannelSubtypeParameters = Shapes::StructureShape.new(name: 'TelephonyChannelSubtypeParameters')
     TelephonyOutboundConfig = Shapes::StructureShape.new(name: 'TelephonyOutboundConfig')
@@ -229,6 +236,12 @@ module Aws::ConnectCampaignsV2
     WhatsAppOutboundConfig = Shapes::StructureShape.new(name: 'WhatsAppOutboundConfig')
     WhatsAppOutboundMode = Shapes::UnionShape.new(name: 'WhatsAppOutboundMode')
     XAmazonErrorType = Shapes::StringShape.new(name: 'XAmazonErrorType')
+
+    AbandonmentRatePacingConfig.add_member(:target_rate, Shapes::ShapeRef.new(shape: TargetRate, required: true, location_name: "targetRate"))
+    AbandonmentRatePacingConfig.add_member(:connection_start_point, Shapes::ShapeRef.new(shape: ConnectionStartPoint, required: true, location_name: "connectionStartPoint"))
+    AbandonmentRatePacingConfig.add_member(:connection_threshold_seconds, Shapes::ShapeRef.new(shape: AbandonmentRatePacingConfigConnectionThresholdSecondsInteger, required: true, location_name: "connectionThresholdSeconds"))
+    AbandonmentRatePacingConfig.add_member(:evaluation_window, Shapes::ShapeRef.new(shape: EvaluationWindow, required: true, location_name: "evaluationWindow"))
+    AbandonmentRatePacingConfig.struct_class = Types::AbandonmentRatePacingConfig
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.add_member(:x_amz_error_type, Shapes::ShapeRef.new(shape: XAmazonErrorType, location: "header", location_name: "x-amzn-ErrorType"))
@@ -603,10 +616,19 @@ module Aws::ConnectCampaignsV2
 
     OutboundRequestList.member = Shapes::ShapeRef.new(shape: OutboundRequest)
 
+    PacingStrategy.add_member(:abandonment_rate, Shapes::ShapeRef.new(shape: AbandonmentRatePacingConfig, location_name: "abandonmentRate"))
+    PacingStrategy.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PacingStrategy.add_member_subclass(:abandonment_rate, Types::PacingStrategy::AbandonmentRate)
+    PacingStrategy.add_member_subclass(:unknown, Types::PacingStrategy::Unknown)
+    PacingStrategy.struct_class = Types::PacingStrategy
+
+    PacingStrategyList.member = Shapes::ShapeRef.new(shape: PacingStrategy)
+
     PauseCampaignRequest.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location: "uri", location_name: "id"))
     PauseCampaignRequest.struct_class = Types::PauseCampaignRequest
 
     PredictiveConfig.add_member(:bandwidth_allocation, Shapes::ShapeRef.new(shape: BandwidthAllocation, required: true, location_name: "bandwidthAllocation"))
+    PredictiveConfig.add_member(:pacing_strategies, Shapes::ShapeRef.new(shape: PacingStrategyList, location_name: "pacingStrategies"))
     PredictiveConfig.struct_class = Types::PredictiveConfig
 
     PreviewConfig.add_member(:bandwidth_allocation, Shapes::ShapeRef.new(shape: BandwidthAllocation, required: true, location_name: "bandwidthAllocation"))

@@ -1,0 +1,53 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "SearchDiscoverableRegistryRecordsNonexistentFailure",
+    "operationName" : "SearchDiscoverableRegistryRecords",
+    "input" : {
+      "searchQuery" : "smoke-test",
+      "registryIds" : [ "aaaaaaaaaaaa" ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListDiscoverableRegistryRecordsNonexistentFailure",
+    "operationName" : "ListDiscoverableRegistryRecords",
+    "input" : {
+      "registryId" : "aaaaaaaaaaaa"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "BatchGetDiscoverableRegistryRecordNonexistentFailure",
+    "operationName" : "BatchGetDiscoverableRegistryRecord",
+    "input" : {
+      "entries" : [ {
+        "registryId" : "aaaaaaaaaaaa",
+        "recordIds" : [ "bbbbbbbbbbbb" ]
+      } ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

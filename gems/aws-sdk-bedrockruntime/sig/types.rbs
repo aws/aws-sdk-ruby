@@ -218,6 +218,8 @@ module Aws::BedrockRuntime
       attr_accessor reasoning_content: Types::ReasoningContentBlock
       attr_accessor citations_content: Types::CitationsContentBlock
       attr_accessor search_result: Types::SearchResultBlock
+      attr_accessor tool_addition: Types::ToolAdditionBlock
+      attr_accessor tool_removal: Types::ToolRemovalBlock
       attr_accessor unknown: untyped
       SENSITIVE: [:reasoning_content]
 
@@ -244,6 +246,10 @@ module Aws::BedrockRuntime
       class CitationsContent < ContentBlock
       end
       class SearchResult < ContentBlock
+      end
+      class ToolAddition < ContentBlock
+      end
+      class ToolRemoval < ContentBlock
       end
       class Unknown < ContentBlock
       end
@@ -1189,6 +1195,7 @@ module Aws::BedrockRuntime
 
     class OutputConfig
       attr_accessor text_format: Types::OutputFormat
+      attr_accessor effort: ::String
       SENSITIVE: []
     end
 
@@ -1400,6 +1407,11 @@ module Aws::BedrockRuntime
       end
     end
 
+    class ToolAdditionBlock
+      attr_accessor tool: Types::ToolReference
+      SENSITIVE: []
+    end
+
     class ToolChoice
       attr_accessor auto: Types::AutoToolChoice
       attr_accessor any: Types::AnyToolChoice
@@ -1432,6 +1444,18 @@ module Aws::BedrockRuntime
       end
       class Unknown < ToolInputSchema
       end
+    end
+
+    class ToolReference
+      attr_accessor type: ::String
+      attr_accessor name: ::String
+      attr_accessor server_name: ::String
+      SENSITIVE: []
+    end
+
+    class ToolRemovalBlock
+      attr_accessor tool: Types::ToolReference
+      SENSITIVE: []
     end
 
     class ToolResultBlock

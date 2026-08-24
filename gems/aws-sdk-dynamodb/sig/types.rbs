@@ -240,6 +240,7 @@ module Aws::DynamoDB
       attr_accessor table: Types::Capacity
       attr_accessor local_secondary_indexes: ::Hash[::String, Types::Capacity]
       attr_accessor global_secondary_indexes: ::Hash[::String, Types::Capacity]
+      attr_accessor vector_indexes: ::Hash[::String, Types::VectorCapacity]
       SENSITIVE: []
     end
 
@@ -332,11 +333,22 @@ module Aws::DynamoDB
       attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor global_table_source_arn: ::String
       attr_accessor global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
+      attr_accessor vector_indexes: ::Array[Types::VectorIndex]
       SENSITIVE: []
     end
 
     class CreateTableOutput
       attr_accessor table_description: Types::TableDescription
+      SENSITIVE: []
+    end
+
+    class CreateVectorIndexAction
+      attr_accessor index_name: ::String
+      attr_accessor vector_attribute: Types::VectorAttributeDefinition
+      attr_accessor search_schema: ::Array[Types::SearchSchemaElement]
+      attr_accessor projection: Types::Projection
+      attr_accessor dimensions: ::Integer
+      attr_accessor distance_function: ("COSINE" | "DOT_PRODUCT" | "EUCLIDEAN")
       SENSITIVE: []
     end
 
@@ -431,6 +443,11 @@ module Aws::DynamoDB
 
     class DeleteTableOutput
       attr_accessor table_description: Types::TableDescription
+      SENSITIVE: []
+    end
+
+    class DeleteVectorIndexAction
+      attr_accessor index_name: ::String
       SENSITIVE: []
     end
 
@@ -1423,6 +1440,7 @@ module Aws::DynamoDB
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughput
       attr_accessor on_demand_throughput_override: Types::OnDemandThroughput
       attr_accessor sse_specification_override: Types::SSESpecification
+      attr_accessor vector_index_override: ::Array[Types::VectorIndex]
       SENSITIVE: []
     end
 
@@ -1443,6 +1461,7 @@ module Aws::DynamoDB
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughput
       attr_accessor on_demand_throughput_override: Types::OnDemandThroughput
       attr_accessor sse_specification_override: Types::SSESpecification
+      attr_accessor vector_index_override: ::Array[Types::VectorIndex]
       SENSITIVE: []
     end
 
@@ -1502,6 +1521,37 @@ module Aws::DynamoDB
       SENSITIVE: []
     end
 
+    class SearchResultItem
+      attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class SearchSchemaElement
+      attr_accessor attribute_name: ::String
+      attr_accessor search_schema_element_type: ("HASH" | "INLINE_FILTER")
+      SENSITIVE: []
+    end
+
+    class SearchVectorsInput
+      attr_accessor table_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
+      attr_accessor projection_expression: ::String
+      attr_accessor search_vector: ::Array[Types::AttributeValue]
+      attr_accessor search_condition_expression: ::String
+      attr_accessor top_k: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchVectorsOutput
+      attr_accessor consumed_capacity: Types::VectorCapacity
+      attr_accessor search_results: ::Array[Types::SearchResultItem]
+      SENSITIVE: []
+    end
+
     class SourceTableDetails
       attr_accessor table_name: ::String
       attr_accessor table_id: ::String
@@ -1522,6 +1572,7 @@ module Aws::DynamoDB
       attr_accessor stream_description: Types::StreamSpecification
       attr_accessor time_to_live_description: Types::TimeToLiveDescription
       attr_accessor sse_description: Types::SSEDescription
+      attr_accessor vector_indexes: ::Array[Types::VectorIndexInfo]
       SENSITIVE: []
     end
 
@@ -1558,6 +1609,7 @@ module Aws::DynamoDB
       attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor sse_specification: Types::SSESpecification
       attr_accessor global_secondary_indexes: ::Array[Types::GlobalSecondaryIndex]
+      attr_accessor vector_indexes: ::Array[Types::VectorIndex]
       SENSITIVE: []
     end
 
@@ -1590,6 +1642,7 @@ module Aws::DynamoDB
       attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor warm_throughput: Types::TableWarmThroughputDescription
       attr_accessor multi_region_consistency: ("EVENTUAL" | "STRONG")
+      attr_accessor vector_indexes: ::Array[Types::VectorIndexDescription]
       SENSITIVE: []
     end
 
@@ -1850,6 +1903,7 @@ module Aws::DynamoDB
       attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor warm_throughput: Types::WarmThroughput
       attr_accessor global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
+      attr_accessor vector_index_updates: ::Array[Types::VectorIndexUpdate]
       SENSITIVE: []
     end
 
@@ -1879,6 +1933,58 @@ module Aws::DynamoDB
 
     class UpdateTimeToLiveOutput
       attr_accessor time_to_live_specification: Types::TimeToLiveSpecification
+      SENSITIVE: []
+    end
+
+    class VectorAttributeDefinition
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class VectorCapacity
+      attr_accessor vector_search_request_bytes: ::Float
+      attr_accessor vector_write_request_bytes: ::Float
+      SENSITIVE: []
+    end
+
+    class VectorIndex
+      attr_accessor index_name: ::String
+      attr_accessor vector_attribute: Types::VectorAttributeDefinition
+      attr_accessor search_schema: ::Array[Types::SearchSchemaElement]
+      attr_accessor projection: Types::Projection
+      attr_accessor dimensions: ::Integer
+      attr_accessor distance_function: ("COSINE" | "DOT_PRODUCT" | "EUCLIDEAN")
+      SENSITIVE: []
+    end
+
+    class VectorIndexDescription
+      attr_accessor index_name: ::String
+      attr_accessor search_schema: ::Array[Types::SearchSchemaElement]
+      attr_accessor projection: Types::Projection
+      attr_accessor vector_attribute: Types::VectorAttributeDefinition
+      attr_accessor dimensions: ::Integer
+      attr_accessor distance_function: ("COSINE" | "DOT_PRODUCT" | "EUCLIDEAN")
+      attr_accessor index_status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      attr_accessor backfilling: bool
+      attr_accessor index_size_bytes: ::Integer
+      attr_accessor item_count: ::Integer
+      attr_accessor index_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VectorIndexInfo
+      attr_accessor index_name: ::String
+      attr_accessor vector_attribute: Types::VectorAttributeDefinition
+      attr_accessor search_schema: ::Array[Types::SearchSchemaElement]
+      attr_accessor projection: Types::Projection
+      attr_accessor dimensions: ::Integer
+      attr_accessor distance_function: ("COSINE" | "DOT_PRODUCT" | "EUCLIDEAN")
+      SENSITIVE: []
+    end
+
+    class VectorIndexUpdate
+      attr_accessor create: Types::CreateVectorIndexAction
+      attr_accessor delete: Types::DeleteVectorIndexAction
       SENSITIVE: []
     end
 

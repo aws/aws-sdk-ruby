@@ -10,6 +10,36 @@
 module Aws::MarketplaceCatalog
   module Types
 
+    # Filters that apply to assessments performed against the AMI Security
+    # framework.
+    #
+    # @!attribute [rw] delivery_option_id
+    #   The unique ID of the delivery option whose AMI Security assessments
+    #   you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/AMISecurityFilters AWS API Documentation
+    #
+    class AMISecurityFilters < Struct.new(
+      :delivery_option_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the resource assessed under the AMI Security framework.
+    #
+    # @!attribute [rw] delivery_option_id
+    #   The unique ID of the delivery option that was evaluated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/AMISecuritySummary AWS API Documentation
+    #
+    class AMISecuritySummary < Struct.new(
+      :delivery_option_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Access is denied.
     #
     # HTTP status code: 403
@@ -177,6 +207,100 @@ module Aws::MarketplaceCatalog
     #
     class AmiProductVisibilityFilter < Struct.new(
       :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summarized information about an assessment.
+    #
+    # @!attribute [rw] assessment_arn
+    #   The ARN associated with the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_id
+    #   The unique ID of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_id
+    #   The identifier of the framework that was evaluated by this
+    #   assessment, in the format `frameworkId@version` (for example,
+    #   `AMISecurity@1.0`).
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_target_summary
+    #   Identifies the entity or change set that was assessed.
+    #   @return [Types::AssessmentTargetSummary]
+    #
+    # @!attribute [rw] framework_summary
+    #   The framework-specific details of the assessed resource. The set
+    #   member corresponds to the framework identified by `FrameworkId`.
+    #   @return [Types::FrameworkSummary]
+    #
+    # @!attribute [rw] assessment_result
+    #   The overall result of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the assessment was created, in ISO 8601 format
+    #   (`2018-02-27T13:45:22Z`).
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The date and time the assessment expires, in ISO 8601 format
+    #   (`2018-02-27T13:45:22Z`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/AssessmentSummary AWS API Documentation
+    #
+    class AssessmentSummary < Struct.new(
+      :assessment_arn,
+      :assessment_id,
+      :framework_id,
+      :assessment_target_summary,
+      :framework_summary,
+      :assessment_result,
+      :created_at,
+      :expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters assessment list results by the resource that was assessed.
+    # Provide an entity identifier, a change set identifier, or both.
+    #
+    # @!attribute [rw] entity_id
+    #   The unique ID of the entity whose assessments you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_set_id
+    #   The unique ID of the change set that triggered the assessments you
+    #   want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/AssessmentTargetFilter AWS API Documentation
+    #
+    class AssessmentTargetFilter < Struct.new(
+      :entity_id,
+      :change_set_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the entity or change set that was assessed.
+    #
+    # @!attribute [rw] entity_id
+    #   The unique ID of the entity that was assessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_set_id
+    #   The unique ID of the change set that was assessed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/AssessmentTargetSummary AWS API Documentation
+    #
+    class AssessmentTargetSummary < Struct.new(
+      :entity_id,
+      :change_set_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -600,6 +724,87 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # Filters that apply to assessments performed against the Container
+    # Security framework.
+    #
+    # @!attribute [rw] delivery_option_id
+    #   The unique ID of the delivery option whose Container Security
+    #   assessments you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ContainerSecurityFilters AWS API Documentation
+    #
+    class ContainerSecurityFilters < Struct.new(
+      :delivery_option_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the resource assessed under the Container Security
+    # framework.
+    #
+    # @!attribute [rw] delivery_option_id
+    #   The unique ID of the delivery option that was evaluated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ContainerSecuritySummary AWS API Documentation
+    #
+    class ContainerSecuritySummary < Struct.new(
+      :delivery_option_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of evaluating a single control as part of an assessment.
+    #
+    # @!attribute [rw] control_id
+    #   The unique ID of the control that was evaluated.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_assessment_result
+    #   The result of the control evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   An array of `ControlError` objects associated with the control
+    #   evaluation.
+    #   @return [Array<Types::ControlError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ControlAssessment AWS API Documentation
+    #
+    class ControlAssessment < Struct.new(
+      :control_id,
+      :control_assessment_result,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An error reported during the evaluation of a single control.
+    #
+    # @!attribute [rw] code
+    #   The error code that identifies the type of error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message for the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The list of name-value pairs that identify the resource or attribute
+    #   that the error applies to.
+    #   @return [Array<Types::ErrorScope>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ControlError AWS API Documentation
+    #
+    class ControlError < Struct.new(
+      :code,
+      :message,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object that allows filtering on entity id of a data product.
     #
     # @!attribute [rw] value_list
@@ -772,6 +977,103 @@ module Aws::MarketplaceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DeleteResourcePolicyResponse AWS API Documentation
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_identifier
+    #   The unique identifier of the assessment to describe. You can provide
+    #   either the assessment ID (for example, `assessment-12345`) or the
+    #   full assessment ARN (for example,
+    #   `arn:aws:aws-marketplace:us-east-1::AWSMarketplace/Assessment/assessment-12345`).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the upper limit of `ControlAssessment` elements returned
+    #   on a single page. If a value isn't provided, the default value is
+    #   50. Valid values range from 1 to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The value of the next token, if it exists. `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DescribeAssessmentRequest AWS API Documentation
+    #
+    class DescribeAssessmentRequest < Struct.new(
+      :catalog,
+      :assessment_identifier,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_arn
+    #   The ARN associated with the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_id
+    #   The unique ID of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_id
+    #   The identifier of the framework that was evaluated by this
+    #   assessment, in the format `frameworkId@version` (for example,
+    #   `AMISecurity@1.0`).
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_target_summary
+    #   Identifies the entity or change set that was assessed.
+    #   @return [Types::AssessmentTargetSummary]
+    #
+    # @!attribute [rw] framework_summary
+    #   The framework-specific details of the assessed resource. The set
+    #   member corresponds to the framework identified by `FrameworkId`.
+    #   @return [Types::FrameworkSummary]
+    #
+    # @!attribute [rw] assessment_result
+    #   The overall result of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the assessment was created, in ISO 8601 format
+    #   (`2018-02-27T13:45:22Z`).
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The date and time the assessment expires, in ISO 8601 format
+    #   (`2018-02-27T13:45:22Z`).
+    #   @return [String]
+    #
+    # @!attribute [rw] control_assessments
+    #   An array of `ControlAssessment` objects, each containing the result
+    #   of an individual control evaluated as part of the assessment.
+    #   @return [Array<Types::ControlAssessment>]
+    #
+    # @!attribute [rw] next_token
+    #   The value of the next token, if it exists. `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DescribeAssessmentResponse AWS API Documentation
+    #
+    class DescribeAssessmentResponse < Struct.new(
+      :assessment_arn,
+      :assessment_id,
+      :framework_id,
+      :assessment_target_summary,
+      :framework_summary,
+      :assessment_result,
+      :created_at,
+      :expires_at,
+      :control_assessments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] catalog
     #   Required. The catalog related to the request. Fixed value:
@@ -1239,6 +1541,27 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # A name-value pair that identifies the resource or attribute that a
+    # `ControlError` applies to.
+    #
+    # @!attribute [rw] name
+    #   The name of the resource field the error applies to (for example,
+    #   `AMI_ID`, `FILE_PATH`, or `PACKAGE_NAME`).
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the resource field the error applies to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ErrorScope AWS API Documentation
+    #
+    class ErrorScope < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A filter object, used to optionally filter results from calls to the
     # `ListEntities` and `ListChangeSets` actions.
     #
@@ -1286,6 +1609,67 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # Framework-specific filters used to scope `ListAssessments` results.
+    # Set exactly one member, corresponding to the framework you want to
+    # filter by.
+    #
+    # @note FrameworkFilters is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] ami_security_filters
+    #   Filters that apply to assessments performed against the AMI Security
+    #   framework.
+    #   @return [Types::AMISecurityFilters]
+    #
+    # @!attribute [rw] container_security_filters
+    #   Filters that apply to assessments performed against the Container
+    #   Security framework.
+    #   @return [Types::ContainerSecurityFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/FrameworkFilters AWS API Documentation
+    #
+    class FrameworkFilters < Struct.new(
+      :ami_security_filters,
+      :container_security_filters,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AmiSecurityFilters < FrameworkFilters; end
+      class ContainerSecurityFilters < FrameworkFilters; end
+      class Unknown < FrameworkFilters; end
+    end
+
+    # The framework-specific details of the assessed resource. Exactly one
+    # member is set, corresponding to the framework that was assessed.
+    #
+    # @note FrameworkSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FrameworkSummary corresponding to the set member.
+    #
+    # @!attribute [rw] ami_security_summary
+    #   The details of the resource assessed under the AMI Security
+    #   framework.
+    #   @return [Types::AMISecuritySummary]
+    #
+    # @!attribute [rw] container_security_summary
+    #   The details of the resource assessed under the Container Security
+    #   framework.
+    #   @return [Types::ContainerSecuritySummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/FrameworkSummary AWS API Documentation
+    #
+    class FrameworkSummary < Struct.new(
+      :ami_security_summary,
+      :container_security_summary,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AmiSecuritySummary < FrameworkSummary; end
+      class ContainerSecuritySummary < FrameworkSummary; end
+      class Unknown < FrameworkSummary; end
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the entity resource that is
     #   associated with the resource policy.
@@ -1322,6 +1706,68 @@ module Aws::MarketplaceCatalog
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_id
+    #   The unique identifier of a framework. When specified, only
+    #   assessments performed against this framework are returned. For
+    #   example, `AMISecurity`.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_target_filter
+    #   Filters the list of assessments to those performed against a
+    #   specific entity or change set.
+    #   @return [Types::AssessmentTargetFilter]
+    #
+    # @!attribute [rw] framework_filters
+    #   Framework-specific filters. Set exactly one member to filter results
+    #   to assessments performed against that framework.
+    #   @return [Types::FrameworkFilters]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the upper limit of the elements on a single page. If a
+    #   value isn't provided, the default value is 20. Valid values range
+    #   from 1 to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The value of the next token, if it exists. `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListAssessmentsRequest AWS API Documentation
+    #
+    class ListAssessmentsRequest < Struct.new(
+      :catalog,
+      :framework_id,
+      :assessment_target_filter,
+      :framework_filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_summary_list
+    #   An array of `AssessmentSummary` objects.
+    #   @return [Array<Types::AssessmentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The value of the next token, if it exists. `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListAssessmentsResponse AWS API Documentation
+    #
+    class ListAssessmentsResponse < Struct.new(
+      :assessment_summary_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1714,6 +2160,21 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # Allows filtering on the `CreatedBySource` of an offer.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `CreatedBySource` of an offer with list
+    #   input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferCreatedBySourceFilter AWS API Documentation
+    #
+    class OfferCreatedBySourceFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Allows filtering on the entity id of an offer.
     #
     # @!attribute [rw] value_list
@@ -1781,6 +2242,18 @@ module Aws::MarketplaceCatalog
     #   Allows filtering on the `OfferSetId` of an offer.
     #   @return [Types::OfferSetIdFilter]
     #
+    # @!attribute [rw] target_agreement_id
+    #   Allows filtering on the `TargetAgreementId` of an offer.
+    #   @return [Types::OfferTargetAgreementIdFilter]
+    #
+    # @!attribute [rw] target_agreement_intent
+    #   Allows filtering on the `TargetAgreementIntent` of an offer.
+    #   @return [Types::OfferTargetAgreementIntentFilter]
+    #
+    # @!attribute [rw] created_by_source
+    #   Allows filtering on the `CreatedBySource` of an offer.
+    #   @return [Types::OfferCreatedBySourceFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferFilters AWS API Documentation
     #
     class OfferFilters < Struct.new(
@@ -1794,7 +2267,10 @@ module Aws::MarketplaceCatalog
       :state,
       :targeting,
       :last_modified_date,
-      :offer_set_id)
+      :offer_set_id,
+      :target_agreement_id,
+      :target_agreement_intent,
+      :created_by_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2250,6 +2726,18 @@ module Aws::MarketplaceCatalog
     #   The offer set ID of the offer.
     #   @return [String]
     #
+    # @!attribute [rw] target_agreement_id
+    #   The target agreement ID of the offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_agreement_intent
+    #   The target agreement intent of the offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by_source
+    #   The creation source of the offer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSummary AWS API Documentation
     #
     class OfferSummary < Struct.new(
@@ -2261,7 +2749,40 @@ module Aws::MarketplaceCatalog
       :buyer_accounts,
       :state,
       :targeting,
-      :offer_set_id)
+      :offer_set_id,
+      :target_agreement_id,
+      :target_agreement_intent,
+      :created_by_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `TargetAgreementId` of an offer.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `TargetAgreementId` of an offer with list
+    #   input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferTargetAgreementIdFilter AWS API Documentation
+    #
+    class OfferTargetAgreementIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `TargetAgreementIntent` of an offer.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `TargetAgreementIntent` of an offer with
+    #   list input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferTargetAgreementIntentFilter AWS API Documentation
+    #
+    class OfferTargetAgreementIntentFilter < Struct.new(
+      :value_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3200,9 +3721,61 @@ module Aws::MarketplaceCatalog
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] validation_exception_field_list
+    #   A list of detailed entries describing the request fields that failed
+    #   validation. Present when the failure can be attributed to one or
+    #   more specific fields.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
+      :message,
+      :validation_exception_field_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about a single request field that failed
+    # validation, including the field's location, the reason it failed, and
+    # a human-readable message.
+    #
+    # @!attribute [rw] reason
+    #   The reason the field failed validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type the failing field applies to, if the field is on a
+    #   specific entity. For example, `AmiProduct@1.0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The entity identifier the failing field applies to, if the field is
+    #   on a specific entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_type
+    #   The change type the failing field applies to, if the field is part
+    #   of a change request. For example, `AddDeliveryOptions`.
+    #   @return [String]
+    #
+    # @!attribute [rw] field
+    #   The name of the request field that failed validation, expressed as a
+    #   JSON path (for example, `Details.DeliveryOptions[0].Type`).
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing why the field failed validation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ValidationExceptionField AWS API Documentation
+    #
+    class ValidationExceptionField < Struct.new(
+      :reason,
+      :entity_type,
+      :entity_id,
+      :change_type,
+      :field,
       :message)
       SENSITIVE = []
       include Aws::Structure

@@ -241,7 +241,7 @@ module Aws::S3
       attr_accessor checksum_xxhash3: ::String
       attr_accessor checksum_xxhash128: ::String
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor version_id: ::String
       attr_accessor ssekms_key_id: ::String
       attr_accessor bucket_key_enabled: bool
@@ -313,7 +313,7 @@ module Aws::S3
       attr_accessor expiration: ::String
       attr_accessor copy_source_version_id: ::String
       attr_accessor version_id: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
       attr_accessor ssekms_key_id: ::String
@@ -349,8 +349,8 @@ module Aws::S3
       attr_accessor metadata_directive: ("COPY" | "REPLACE")
       attr_accessor tagging_directive: ("COPY" | "REPLACE")
       attr_accessor annotation_directive: ("COPY" | "EXCLUDE")
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor website_redirect_location: ::String
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key: ::String
@@ -457,7 +457,7 @@ module Aws::S3
       attr_accessor bucket: ::String
       attr_accessor key: ::String
       attr_accessor upload_id: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
       attr_accessor ssekms_key_id: ::String
@@ -484,8 +484,8 @@ module Aws::S3
       attr_accessor grant_write_acp: ::String
       attr_accessor key: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor website_redirect_location: ::String
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key: ::String
@@ -505,7 +505,7 @@ module Aws::S3
     end
 
     class CreateSessionOutput
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor ssekms_key_id: ::String
       attr_accessor ssekms_encryption_context: ::String
       attr_accessor bucket_key_enabled: bool
@@ -516,7 +516,7 @@ module Aws::S3
     class CreateSessionRequest
       attr_accessor session_mode: ("ReadOnly" | "ReadWrite")
       attr_accessor bucket: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor ssekms_key_id: ::String
       attr_accessor ssekms_encryption_context: ::String
       attr_accessor bucket_key_enabled: bool
@@ -730,7 +730,7 @@ module Aws::S3
     class Destination
       attr_accessor bucket: ::String
       attr_accessor account: ::String
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor access_control_translation: Types::AccessControlTranslation
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor replication_time: Types::ReplicationTime
@@ -746,7 +746,7 @@ module Aws::S3
     end
 
     class Encryption
-      attr_accessor encryption_type: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor encryption_type: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor kms_key_id: ::String
       attr_accessor kms_context: ::String
       SENSITIVE: [:kms_key_id]
@@ -1114,7 +1114,7 @@ module Aws::S3
       attr_accessor checksum_xxhash3: ::String
       attr_accessor checksum_xxhash128: ::String
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor request_charged: ("requester")
       attr_accessor replication_status: ("COMPLETE" | "PENDING" | "FAILED" | "REPLICA" | "COMPLETED")
       SENSITIVE: []
@@ -1139,7 +1139,7 @@ module Aws::S3
       attr_accessor etag: ::String
       attr_accessor checksum: Types::Checksum
       attr_accessor object_parts: Types::GetObjectAttributesParts
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor object_size: ::Integer
       SENSITIVE: []
     end
@@ -1225,13 +1225,13 @@ module Aws::S3
       attr_accessor expires: ::Time
       attr_accessor expires_string: ::String
       attr_accessor website_redirect_location: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
       attr_accessor ssekms_key_id: ::String
       attr_accessor bucket_key_enabled: bool
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor request_charged: ("requester")
       attr_accessor replication_status: ("COMPLETE" | "PENDING" | "FAILED" | "REPLICA" | "COMPLETED")
       attr_accessor parts_count: ::Integer
@@ -1387,13 +1387,13 @@ module Aws::S3
       attr_accessor expires: ::Time
       attr_accessor expires_string: ::String
       attr_accessor website_redirect_location: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
       attr_accessor ssekms_key_id: ::String
       attr_accessor bucket_key_enabled: bool
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor request_charged: ("requester")
       attr_accessor replication_status: ("COMPLETE" | "PENDING" | "FAILED" | "REPLICA" | "COMPLETED")
       attr_accessor parts_count: ::Integer
@@ -1476,7 +1476,7 @@ module Aws::S3
     end
 
     class InvalidObjectState
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor access_tier: ("ARCHIVE_ACCESS" | "DEEP_ARCHIVE_ACCESS")
       SENSITIVE: []
     end
@@ -1881,7 +1881,7 @@ module Aws::S3
       attr_accessor parts: ::Array[Types::Part]
       attr_accessor initiator: Types::Initiator
       attr_accessor owner: Types::Owner
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor request_charged: ("requester")
       attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
@@ -1984,7 +1984,7 @@ module Aws::S3
       attr_accessor upload_id: ::String
       attr_accessor key: ::String
       attr_accessor initiated: ::Time
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor owner: Types::Owner
       attr_accessor initiator: Types::Initiator
       attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")
@@ -2044,7 +2044,7 @@ module Aws::S3
       attr_accessor checksum_algorithm: ::Array[("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")]
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       attr_accessor size: ::Integer
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor owner: Types::Owner
       attr_accessor restore_status: Types::RestoreStatus
       SENSITIVE: []
@@ -2444,7 +2444,7 @@ module Aws::S3
       attr_accessor checksum_xxhash3: ::String
       attr_accessor checksum_xxhash128: ::String
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor request_charged: ("requester")
       SENSITIVE: []
     end
@@ -2520,7 +2520,7 @@ module Aws::S3
       attr_accessor checksum_xxhash3: ::String
       attr_accessor checksum_xxhash128: ::String
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor version_id: ::String
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
@@ -2564,8 +2564,8 @@ module Aws::S3
       attr_accessor key: ::String
       attr_accessor write_offset_bytes: ::Integer
       attr_accessor metadata: ::Hash[::String, ::String]
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor website_redirect_location: ::String
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key: ::String
@@ -2811,7 +2811,7 @@ module Aws::S3
       attr_accessor access_control_list: ::Array[Types::Grant]
       attr_accessor tagging: Types::Tagging
       attr_accessor user_metadata: ::Array[Types::MetadataEntry]
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       SENSITIVE: []
     end
 
@@ -2879,7 +2879,7 @@ module Aws::S3
     end
 
     class ServerSideEncryptionByDefault
-      attr_accessor sse_algorithm: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor sse_algorithm: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor kms_master_key_id: ::String
       SENSITIVE: [:kms_master_key_id]
     end
@@ -3047,7 +3047,7 @@ module Aws::S3
     class UploadPartCopyOutput
       attr_accessor copy_source_version_id: ::String
       attr_accessor copy_part_result: Types::CopyPartResult
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key_md5: ::String
       attr_accessor ssekms_key_id: ::String
@@ -3080,7 +3080,7 @@ module Aws::S3
     end
 
     class UploadPartOutput
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor etag: ::String
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
@@ -3180,11 +3180,11 @@ module Aws::S3
       attr_accessor replication_status: ("COMPLETE" | "PENDING" | "FAILED" | "REPLICA" | "COMPLETED")
       attr_accessor request_charged: ("requester")
       attr_accessor restore: ::String
-      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor server_side_encryption: ("AES256" | "aws:fsx" | "aws:backup" | "aws:kms" | "aws:kms:dsse")
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor ssekms_key_id: ::String
       attr_accessor sse_customer_key_md5: ::String
-      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP" | "AWS_BACKUP_WARM" | "AWS_BACKUP_LOW_COST_WARM")
       attr_accessor tag_count: ::Integer
       attr_accessor version_id: ::String
       attr_accessor bucket_key_enabled: bool

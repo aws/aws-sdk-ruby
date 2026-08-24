@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2026-08-19)
+------------------
+
+* Feature - Amazon Redshift Enhanced System Table Retention that allows customers to store their system table data directly in S3 Tables in customer's account instead of Redshift Managed Storage
+
+1.72.0 (2026-08-14)
+------------------
+
+* Feature - Amazon Redshift now unlocks a locked admin user account and resets the failed-login counter when you update the admin password using the UpdateNamespace API. This option is available only when account lockout security is enabled.
+
 1.71.0 (2026-07-13)
 ------------------
 

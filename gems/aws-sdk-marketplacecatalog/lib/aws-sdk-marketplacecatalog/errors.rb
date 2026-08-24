@@ -160,6 +160,11 @@ module Aws::MarketplaceCatalog
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def validation_exception_field_list
+        @data[:validation_exception_field_list]
+      end
     end
 
   end

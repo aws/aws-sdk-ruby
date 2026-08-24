@@ -120,7 +120,8 @@ module Aws
                                          memory_id: ::String,
                                          records: Array[
                                            {
-                                             memory_record_id: ::String
+                                             memory_record_id: ::String,
+                                             namespace: ::String?
                                            }
                                          ]
                                        ) -> _BatchDeleteMemoryRecordsResponseSuccess
@@ -142,6 +143,7 @@ module Aws
                                                text: ::String?
                                              }?,
                                              namespaces: Array[::String]?,
+                                             source_namespaces: Array[::String]?,
                                              memory_strategy_id: ::String?,
                                              metadata: Hash[::String, {
                                                  string_value: ::String?,
@@ -222,6 +224,10 @@ module Aws
                                 role: ("ASSISTANT" | "USER" | "TOOL" | "OTHER")
                               }?,
                               blob: {
+                              }?,
+                              json: {
+                                content: {
+                                }
                               }?
                             }
                           ],
@@ -233,7 +239,10 @@ module Aws
                           ?metadata: Hash[::String, {
                               string_value: ::String?
                             }],
-                          ?extraction_mode: ("SKIP")
+                          ?extraction_mode: ("SKIP"),
+                          ?extraction_config: {
+                            namespace_variables: Hash[::String, ::String]?
+                          }
                         ) -> _CreateEventResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventResponseSuccess
 
@@ -349,6 +358,19 @@ module Aws
                                    ) -> _DeleteBatchEvaluationResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBatchEvaluationResponseSuccess
 
+      interface _DeleteCapacityProviderSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCapacityProviderSessionResponse]
+        def capacity_provider_arn: () -> ::String
+        def session_id: () -> ::String
+        def status: () -> ("Provisioning" | "Deprovisioning" | "Active" | "Deleting" | "Deleted" | "Stopped")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#delete_capacity_provider_session-instance_method
+      def delete_capacity_provider_session: (
+                                              capacity_provider_id: ::String,
+                                              session_id: ::String
+                                            ) -> _DeleteCapacityProviderSessionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCapacityProviderSessionResponseSuccess
+
       interface _DeleteEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventOutput]
         def event_id: () -> ::String
@@ -369,13 +391,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#delete_memory_record-instance_method
       def delete_memory_record: (
                                   memory_id: ::String,
-                                  memory_record_id: ::String
+                                  memory_record_id: ::String,
+                                  ?namespace: ::String
                                 ) -> _DeleteMemoryRecordResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemoryRecordResponseSuccess
 
       interface _DeletePaymentInstrumentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePaymentInstrumentResponse]
-        def status: () -> ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED")
+        def status: () -> ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED" | "BLOCKED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#delete_payment_instrument-instance_method
       def delete_payment_instrument: (
@@ -583,7 +606,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_memory_record-instance_method
       def get_memory_record: (
                                memory_id: ::String,
-                               memory_record_id: ::String
+                               memory_record_id: ::String,
+                               ?namespace: ::String
                              ) -> _GetMemoryRecordResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemoryRecordResponseSuccess
 
@@ -1258,7 +1282,7 @@ module Aws
         def payment_manager_arn: () -> ::String
         def payment_session_id: () -> ::String
         def payment_instrument_id: () -> ::String
-        def payment_type: () -> ("CRYPTO_X402")
+        def payment_type: () -> ("CRYPTO_X402" | "MPP")
         def status: () -> ("PROOF_GENERATED")
         def payment_output: () -> Types::PaymentOutput
         def created_at: () -> ::Time
@@ -1271,12 +1295,18 @@ module Aws
                              payment_manager_arn: ::String,
                              payment_session_id: ::String,
                              payment_instrument_id: ::String,
-                             payment_type: ("CRYPTO_X402"),
+                             payment_type: ("CRYPTO_X402" | "MPP"),
                              payment_input: {
                                crypto_x402: {
                                  version: ::String,
                                  payload: {
-                                 }
+                                 },
+                                 permit2_allowance_limit: ::String?
+                               }?,
+                               mpp: {
+                                 version: ::String,
+                                 www_authenticate_headers: Array[::String],
+                                 buyer_pays_gas_fees: bool?
                                }?
                              },
                              ?client_token: ::String

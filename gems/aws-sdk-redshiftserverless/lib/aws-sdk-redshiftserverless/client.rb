@@ -767,6 +767,13 @@ module Aws::RedshiftServerless
     #   resp.namespace.namespace_arn #=> String
     #   resp.namespace.namespace_id #=> String
     #   resp.namespace.namespace_name #=> String
+    #   resp.namespace.s3_table_publish_status.enabled_all #=> Boolean
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times #=> Hash
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times["String"] #=> String
+    #   resp.namespace.s3_table_publish_status.s3_table_granularity #=> String, one of "namespace", "account"
+    #   resp.namespace.s3_table_publish_status.s3_table_namespace #=> String
+    #   resp.namespace.s3_table_publish_status.s3_tables #=> Array
+    #   resp.namespace.s3_table_publish_status.s3_tables[0] #=> String
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateNamespace AWS API Documentation
@@ -1461,6 +1468,13 @@ module Aws::RedshiftServerless
     #   resp.namespace.namespace_arn #=> String
     #   resp.namespace.namespace_id #=> String
     #   resp.namespace.namespace_name #=> String
+    #   resp.namespace.s3_table_publish_status.enabled_all #=> Boolean
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times #=> Hash
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times["String"] #=> String
+    #   resp.namespace.s3_table_publish_status.s3_table_granularity #=> String, one of "namespace", "account"
+    #   resp.namespace.s3_table_publish_status.s3_table_namespace #=> String
+    #   resp.namespace.s3_table_publish_status.s3_tables #=> Array
+    #   resp.namespace.s3_table_publish_status.s3_tables[0] #=> String
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DeleteNamespace AWS API Documentation
@@ -1974,6 +1988,13 @@ module Aws::RedshiftServerless
     #   resp.namespace.namespace_arn #=> String
     #   resp.namespace.namespace_id #=> String
     #   resp.namespace.namespace_name #=> String
+    #   resp.namespace.s3_table_publish_status.enabled_all #=> Boolean
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times #=> Hash
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times["String"] #=> String
+    #   resp.namespace.s3_table_publish_status.s3_table_granularity #=> String, one of "namespace", "account"
+    #   resp.namespace.s3_table_publish_status.s3_table_namespace #=> String
+    #   resp.namespace.s3_table_publish_status.s3_tables #=> Array
+    #   resp.namespace.s3_table_publish_status.s3_tables[0] #=> String
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetNamespace AWS API Documentation
@@ -2626,6 +2647,13 @@ module Aws::RedshiftServerless
     #   resp.namespaces[0].namespace_arn #=> String
     #   resp.namespaces[0].namespace_id #=> String
     #   resp.namespaces[0].namespace_name #=> String
+    #   resp.namespaces[0].s3_table_publish_status.enabled_all #=> Boolean
+    #   resp.namespaces[0].s3_table_publish_status.last_ingestion_times #=> Hash
+    #   resp.namespaces[0].s3_table_publish_status.last_ingestion_times["String"] #=> String
+    #   resp.namespaces[0].s3_table_publish_status.s3_table_granularity #=> String, one of "namespace", "account"
+    #   resp.namespaces[0].s3_table_publish_status.s3_table_namespace #=> String
+    #   resp.namespaces[0].s3_table_publish_status.s3_tables #=> Array
+    #   resp.namespaces[0].s3_table_publish_status.s3_tables[0] #=> String
     #   resp.namespaces[0].status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #   resp.next_token #=> String
     #
@@ -3356,6 +3384,13 @@ module Aws::RedshiftServerless
     #   resp.namespace.namespace_arn #=> String
     #   resp.namespace.namespace_id #=> String
     #   resp.namespace.namespace_name #=> String
+    #   resp.namespace.s3_table_publish_status.enabled_all #=> Boolean
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times #=> Hash
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times["String"] #=> String
+    #   resp.namespace.s3_table_publish_status.s3_table_granularity #=> String, one of "namespace", "account"
+    #   resp.namespace.s3_table_publish_status.s3_table_namespace #=> String
+    #   resp.namespace.s3_table_publish_status.s3_tables #=> Array
+    #   resp.namespace.s3_table_publish_status.s3_tables[0] #=> String
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #   resp.recovery_point_id #=> String
     #
@@ -3446,6 +3481,13 @@ module Aws::RedshiftServerless
     #   resp.namespace.namespace_arn #=> String
     #   resp.namespace.namespace_id #=> String
     #   resp.namespace.namespace_name #=> String
+    #   resp.namespace.s3_table_publish_status.enabled_all #=> Boolean
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times #=> Hash
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times["String"] #=> String
+    #   resp.namespace.s3_table_publish_status.s3_table_granularity #=> String, one of "namespace", "account"
+    #   resp.namespace.s3_table_publish_status.s3_table_namespace #=> String
+    #   resp.namespace.s3_table_publish_status.s3_tables #=> Array
+    #   resp.namespace.s3_table_publish_status.s3_tables[0] #=> String
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #   resp.owner_account #=> String
     #   resp.snapshot_name #=> String
@@ -3859,6 +3901,11 @@ module Aws::RedshiftServerless
     # either field, but you can't update both `kmsKeyId` and `logExports`
     # in a single request.
     #
+    # Similarly, an S3 Tables log-publishing update (a request where
+    # `logDestinationType` is `s3table`) cannot be combined with any other
+    # namespace configuration change and must be submitted as its own
+    # request.
+    #
     # @option params [String] :admin_password_secret_kms_key_id
     #   The ID of the Key Management Service (KMS) key used to encrypt and
     #   store the namespace's admin credentials secret. You can only use this
@@ -3870,6 +3917,10 @@ module Aws::RedshiftServerless
     #   `adminUsername`.
     #
     #   You can't use `adminUserPassword` if `manageAdminPassword` is true.
+    #
+    #   If your admin user account is locked, this operation also unlocks your
+    #   account and resets the failed-login counter. This option is available
+    #   only when account lockout security is enabled for the namespace.
     #
     # @option params [String] :admin_username
     #   The username of the administrator for the first database created in
@@ -3889,6 +3940,13 @@ module Aws::RedshiftServerless
     #   The ID of the Amazon Web Services Key Management Service key used to
     #   encrypt your data.
     #
+    # @option params [String] :log_destination_type
+    #   The destination for the log data. Valid values are `s3table` and
+    #   `cloudwatch`.
+    #
+    #   Set this to `s3table` to manage Amazon S3 Tables system-table
+    #   publishing for the namespace.
+    #
     # @option params [Array<String>] :log_exports
     #   The types of logs the namespace can export. The export types are
     #   `userlog`, `connectionlog`, and `useractivitylog`.
@@ -3904,6 +3962,41 @@ module Aws::RedshiftServerless
     #   The name of the namespace to update. You can't update the name of a
     #   namespace once it is created.
     #
+    # @option params [String] :s3_table_action
+    #   Whether to enable or disable Amazon S3 Tables publishing. Valid values
+    #   are `Enable` and `Disable`, matched case-insensitively.
+    #
+    #   When omitted, defaults to `Enable`. Valid only when
+    #   `logDestinationType` is `s3table`.
+    #
+    # @option params [String] :s3_table_granularity
+    #   The scope of the Amazon S3 Tables destination. Valid values are
+    #   `namespace` and `account`, matched case-insensitively. `namespace`
+    #   scopes the published tables to this namespace; `account` scopes them
+    #   to the Amazon Web Services account.
+    #
+    #   Required when enabling. Omitting this parameter or passing a blank
+    #   value fails with `ValidationException`. Valid only when
+    #   `logDestinationType` is `s3table`.
+    #
+    # @option params [String] :s3_table_kms_key_id
+    #   The identifier of the Key Management Service key used to encrypt the
+    #   published Amazon S3 Tables data. When omitted, the data is encrypted
+    #   with SSE-S3 (Amazon S3 managed keys).
+    #
+    #   Valid only when `logDestinationType` is `s3table`.
+    #
+    # @option params [Array<String>] :s3_table_names
+    #   The system tables to publish (on enable) or to stop publishing (on
+    #   disable). Each value is either a system table view name that begins
+    #   with `sys_` or the keyword `all`.
+    #
+    #   Omitting this parameter, passing an empty list, or including `all`
+    #   each select every current and future system table. Each name must be
+    #   1-128 characters, and the list can contain up to 256 names.
+    #
+    #   Valid only when `logDestinationType` is `s3table`.
+    #
     # @return [Types::UpdateNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateNamespaceResponse#namespace #namespace} => Types::Namespace
@@ -3917,9 +4010,14 @@ module Aws::RedshiftServerless
     #     default_iam_role_arn: "String",
     #     iam_roles: ["IamRoleArn"],
     #     kms_key_id: "String",
+    #     log_destination_type: "s3table", # accepts s3table, cloudwatch
     #     log_exports: ["useractivitylog"], # accepts useractivitylog, userlog, connectionlog
     #     manage_admin_password: false,
     #     namespace_name: "NamespaceName", # required
+    #     s3_table_action: "Enable", # accepts Enable, Disable
+    #     s3_table_granularity: "namespace", # accepts namespace, account
+    #     s3_table_kms_key_id: "KmsKeyId",
+    #     s3_table_names: ["S3TableName"],
     #   })
     #
     # @example Response structure
@@ -3940,6 +4038,13 @@ module Aws::RedshiftServerless
     #   resp.namespace.namespace_arn #=> String
     #   resp.namespace.namespace_id #=> String
     #   resp.namespace.namespace_name #=> String
+    #   resp.namespace.s3_table_publish_status.enabled_all #=> Boolean
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times #=> Hash
+    #   resp.namespace.s3_table_publish_status.last_ingestion_times["String"] #=> String
+    #   resp.namespace.s3_table_publish_status.s3_table_granularity #=> String, one of "namespace", "account"
+    #   resp.namespace.s3_table_publish_status.s3_table_namespace #=> String
+    #   resp.namespace.s3_table_publish_status.s3_tables #=> Array
+    #   resp.namespace.s3_table_publish_status.s3_tables[0] #=> String
     #   resp.namespace.status #=> String, one of "AVAILABLE", "MODIFYING", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateNamespace AWS API Documentation
@@ -4405,7 +4510,7 @@ module Aws::RedshiftServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

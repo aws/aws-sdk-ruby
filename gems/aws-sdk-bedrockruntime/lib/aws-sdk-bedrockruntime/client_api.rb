@@ -316,6 +316,7 @@ module Aws::BedrockRuntime
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
+    OutputConfigEffortString = Shapes::StringShape.new(name: 'OutputConfigEffortString')
     OutputFormat = Shapes::StructureShape.new(name: 'OutputFormat')
     OutputFormatStructure = Shapes::UnionShape.new(name: 'OutputFormatStructure')
     OutputFormatType = Shapes::StringShape.new(name: 'OutputFormatType')
@@ -375,11 +376,17 @@ module Aws::BedrockRuntime
     TokenUsageOutputTokensInteger = Shapes::IntegerShape.new(name: 'TokenUsageOutputTokensInteger')
     TokenUsageTotalTokensInteger = Shapes::IntegerShape.new(name: 'TokenUsageTotalTokensInteger')
     Tool = Shapes::UnionShape.new(name: 'Tool')
+    ToolAdditionBlock = Shapes::StructureShape.new(name: 'ToolAdditionBlock')
     ToolChoice = Shapes::UnionShape.new(name: 'ToolChoice')
     ToolConfiguration = Shapes::StructureShape.new(name: 'ToolConfiguration')
     ToolConfigurationToolsList = Shapes::ListShape.new(name: 'ToolConfigurationToolsList')
     ToolInputSchema = Shapes::UnionShape.new(name: 'ToolInputSchema')
     ToolName = Shapes::StringShape.new(name: 'ToolName')
+    ToolReference = Shapes::StructureShape.new(name: 'ToolReference')
+    ToolReferenceNameString = Shapes::StringShape.new(name: 'ToolReferenceNameString')
+    ToolReferenceServerNameString = Shapes::StringShape.new(name: 'ToolReferenceServerNameString')
+    ToolReferenceTypeString = Shapes::StringShape.new(name: 'ToolReferenceTypeString')
+    ToolRemovalBlock = Shapes::StructureShape.new(name: 'ToolRemovalBlock')
     ToolResultBlock = Shapes::StructureShape.new(name: 'ToolResultBlock')
     ToolResultBlockDelta = Shapes::UnionShape.new(name: 'ToolResultBlockDelta')
     ToolResultBlockStart = Shapes::StructureShape.new(name: 'ToolResultBlockStart')
@@ -554,6 +561,8 @@ module Aws::BedrockRuntime
     ContentBlock.add_member(:reasoning_content, Shapes::ShapeRef.new(shape: ReasoningContentBlock, location_name: "reasoningContent"))
     ContentBlock.add_member(:citations_content, Shapes::ShapeRef.new(shape: CitationsContentBlock, location_name: "citationsContent"))
     ContentBlock.add_member(:search_result, Shapes::ShapeRef.new(shape: SearchResultBlock, location_name: "searchResult"))
+    ContentBlock.add_member(:tool_addition, Shapes::ShapeRef.new(shape: ToolAdditionBlock, location_name: "toolAddition"))
+    ContentBlock.add_member(:tool_removal, Shapes::ShapeRef.new(shape: ToolRemovalBlock, location_name: "toolRemoval"))
     ContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ContentBlock.add_member_subclass(:text, Types::ContentBlock::Text)
     ContentBlock.add_member_subclass(:image, Types::ContentBlock::Image)
@@ -567,6 +576,8 @@ module Aws::BedrockRuntime
     ContentBlock.add_member_subclass(:reasoning_content, Types::ContentBlock::ReasoningContent)
     ContentBlock.add_member_subclass(:citations_content, Types::ContentBlock::CitationsContent)
     ContentBlock.add_member_subclass(:search_result, Types::ContentBlock::SearchResult)
+    ContentBlock.add_member_subclass(:tool_addition, Types::ContentBlock::ToolAddition)
+    ContentBlock.add_member_subclass(:tool_removal, Types::ContentBlock::ToolRemoval)
     ContentBlock.add_member_subclass(:unknown, Types::ContentBlock::Unknown)
     ContentBlock.struct_class = Types::ContentBlock
 
@@ -1320,6 +1331,7 @@ module Aws::BedrockRuntime
     ModelTimeoutException.struct_class = Types::ModelTimeoutException
 
     OutputConfig.add_member(:text_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "textFormat"))
+    OutputConfig.add_member(:effort, Shapes::ShapeRef.new(shape: OutputConfigEffortString, location_name: "effort"))
     OutputConfig.struct_class = Types::OutputConfig
 
     OutputFormat.add_member(:type, Shapes::ShapeRef.new(shape: OutputFormatType, required: true, location_name: "type"))
@@ -1471,6 +1483,9 @@ module Aws::BedrockRuntime
     Tool.add_member_subclass(:unknown, Types::Tool::Unknown)
     Tool.struct_class = Types::Tool
 
+    ToolAdditionBlock.add_member(:tool, Shapes::ShapeRef.new(shape: ToolReference, required: true, location_name: "tool"))
+    ToolAdditionBlock.struct_class = Types::ToolAdditionBlock
+
     ToolChoice.add_member(:auto, Shapes::ShapeRef.new(shape: AutoToolChoice, location_name: "auto"))
     ToolChoice.add_member(:any, Shapes::ShapeRef.new(shape: AnyToolChoice, location_name: "any"))
     ToolChoice.add_member(:tool, Shapes::ShapeRef.new(shape: SpecificToolChoice, location_name: "tool"))
@@ -1492,6 +1507,14 @@ module Aws::BedrockRuntime
     ToolInputSchema.add_member_subclass(:json, Types::ToolInputSchema::Json)
     ToolInputSchema.add_member_subclass(:unknown, Types::ToolInputSchema::Unknown)
     ToolInputSchema.struct_class = Types::ToolInputSchema
+
+    ToolReference.add_member(:type, Shapes::ShapeRef.new(shape: ToolReferenceTypeString, location_name: "type"))
+    ToolReference.add_member(:name, Shapes::ShapeRef.new(shape: ToolReferenceNameString, location_name: "name"))
+    ToolReference.add_member(:server_name, Shapes::ShapeRef.new(shape: ToolReferenceServerNameString, location_name: "serverName"))
+    ToolReference.struct_class = Types::ToolReference
+
+    ToolRemovalBlock.add_member(:tool, Shapes::ShapeRef.new(shape: ToolReference, required: true, location_name: "tool"))
+    ToolRemovalBlock.struct_class = Types::ToolRemovalBlock
 
     ToolResultBlock.add_member(:tool_use_id, Shapes::ShapeRef.new(shape: ToolUseId, required: true, location_name: "toolUseId"))
     ToolResultBlock.add_member(:content, Shapes::ShapeRef.new(shape: ToolResultContentBlocks, required: true, location_name: "content"))

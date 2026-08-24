@@ -1422,6 +1422,13 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html
     #
+    # @option params [Types::Operator] :operator
+    #   The entity that manages the Auto Scaling group. If you specify this
+    #   parameter, Amazon EC2 Auto Scaling passes the operator identity to EC2
+    #   for instance launches and only allows the designated operator to make
+    #   changes to the Auto Scaling group. All mutating API calls from
+    #   non-operator callers are rejected with an `AccessDenied` exception.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1718,6 +1725,9 @@ module Aws::AutoScaling
     #       retention_triggers: {
     #         terminate_hook_abandon: "retain", # accepts retain, terminate
     #       },
+    #     },
+    #     operator: {
+    #       principal: "ManagerIdentifier", # required
     #     },
     #   })
     #
@@ -2855,6 +2865,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arns #=> Array
     #   resp.auto_scaling_groups[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arns[0] #=> String
     #   resp.auto_scaling_groups[0].instance_lifecycle_policy.retention_triggers.terminate_hook_abandon #=> String, one of "retain", "terminate"
+    #   resp.auto_scaling_groups[0].operator.principal #=> String
     #   resp.next_token #=> String
     #
     #
@@ -7142,7 +7153,7 @@ module Aws::AutoScaling
     # group size. This operation cannot be called on instances in a warm
     # pool.
     #
-    # This call simply makes a termination request. The instance is not
+    # This call simply makes a termination request. The instances are not
     # terminated immediately. When an instance is terminated, the instance
     # status changes to `terminated`. You can't connect to or start an
     # instance after you've terminated it.
@@ -7150,6 +7161,11 @@ module Aws::AutoScaling
     # If you do not specify the option to decrement the desired capacity,
     # Amazon EC2 Auto Scaling launches instances to replace the ones that
     # are terminated.
+    #
+    # To terminate multiple instances in a single call, use the
+    # `InstanceIds` and `AutoScalingGroupName` parameters instead of
+    # `InstanceId`. When terminating multiple instances, the response
+    # populates `Activities` instead of `Activity`.
     #
     # By default, Amazon EC2 Auto Scaling balances instances across all
     # Availability Zones. If you decrement the desired capacity, your Auto
@@ -7162,8 +7178,16 @@ module Aws::AutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-manually.html
     #
-    # @option params [required, String] :instance_id
+    # @option params [String] :instance_id
     #   The ID of the instance.
+    #
+    # @option params [Array<String>] :instance_ids
+    #   The IDs of the instances. You can specify up to 100 instances.
+    #
+    #   This parameter requires that you also specify `AutoScalingGroupName`.
+    #
+    # @option params [String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group. Required when using `InstanceIds`.
     #
     # @option params [required, Boolean] :should_decrement_desired_capacity
     #   Indicates whether terminating the instance also decrements the size of
@@ -7172,6 +7196,7 @@ module Aws::AutoScaling
     # @return [Types::ActivityType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ActivityType#activity #activity} => Types::Activity
+    #   * {Types::ActivityType#activities #activities} => Array&lt;Types::Activity&gt;
     #
     #
     # @example Example: To terminate an instance in an Auto Scaling group
@@ -7184,10 +7209,50 @@ module Aws::AutoScaling
     #     should_decrement_desired_capacity: false, 
     #   })
     #
+    # @example Example: To terminate multiple instances in an Auto Scaling group
+    #
+    #   # This example terminates multiple instances from the specified Auto Scaling group without updating the size of the group.
+    #   # Auto Scaling launches replacement instances after the specified instances terminate.
+    #
+    #   resp = client.terminate_instance_in_auto_scaling_group({
+    #     auto_scaling_group_name: "my-asg", 
+    #     instance_ids: [
+    #       "i-93633f9b", 
+    #       "i-ab4d5e6f7", 
+    #     ], 
+    #     should_decrement_desired_capacity: false, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     activities: [
+    #       {
+    #         activity_id: "12345678-1234-1234-1234-123456789012", 
+    #         auto_scaling_group_name: "my-asg", 
+    #         cause: "At 2024-03-14T00:07:30Z instance i-93633f9b was taken out of service in response to a user request.", 
+    #         description: "Terminating EC2 instance: i-93633f9b", 
+    #         progress: 0, 
+    #         start_time: Time.parse("2024-03-14T00:07:30.280Z"), 
+    #         status_code: "InProgress", 
+    #       }, 
+    #       {
+    #         activity_id: "12345678-1234-1234-1234-123456789013", 
+    #         auto_scaling_group_name: "my-asg", 
+    #         cause: "At 2024-03-14T00:07:30Z instance i-ab4d5e6f7 was taken out of service in response to a user request.", 
+    #         description: "Terminating EC2 instance: i-ab4d5e6f7", 
+    #         progress: 0, 
+    #         start_time: Time.parse("2024-03-14T00:07:30.280Z"), 
+    #         status_code: "InProgress", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.terminate_instance_in_auto_scaling_group({
-    #     instance_id: "XmlStringMaxLen19", # required
+    #     instance_id: "XmlStringMaxLen19",
+    #     instance_ids: ["XmlStringMaxLen19"],
+    #     auto_scaling_group_name: "XmlStringMaxLen255",
     #     should_decrement_desired_capacity: false, # required
     #   })
     #
@@ -7205,6 +7270,19 @@ module Aws::AutoScaling
     #   resp.activity.details #=> String
     #   resp.activity.auto_scaling_group_state #=> String
     #   resp.activity.auto_scaling_group_arn #=> String
+    #   resp.activities #=> Array
+    #   resp.activities[0].activity_id #=> String
+    #   resp.activities[0].auto_scaling_group_name #=> String
+    #   resp.activities[0].description #=> String
+    #   resp.activities[0].cause #=> String
+    #   resp.activities[0].start_time #=> Time
+    #   resp.activities[0].end_time #=> Time
+    #   resp.activities[0].status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled", "WaitingForConnectionDraining", "WaitingForInPlaceUpdateToStart", "WaitingForInPlaceUpdateToFinalize", "InPlaceUpdateInProgress"
+    #   resp.activities[0].status_message #=> String
+    #   resp.activities[0].progress #=> Integer
+    #   resp.activities[0].details #=> String
+    #   resp.activities[0].auto_scaling_group_state #=> String
+    #   resp.activities[0].auto_scaling_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TerminateInstanceInAutoScalingGroup AWS API Documentation
     #
@@ -7747,7 +7825,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.163.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

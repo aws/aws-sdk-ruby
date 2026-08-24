@@ -1254,8 +1254,9 @@ module Aws
         def last_successful_delivery_time: () -> ::Time
         def last_failure_time: () -> ::Time
         def last_failure_message: () -> ::String
-        def log_destination_type: () -> ("s3" | "cloudwatch")
+        def log_destination_type: () -> ("s3" | "cloudwatch" | "s3table")
         def log_exports: () -> ::Array[::String]
+        def s3_tables: () -> Types::S3TablePublishStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_logging_status-instance_method
       def describe_logging_status: (
@@ -1523,12 +1524,15 @@ module Aws
         def last_successful_delivery_time: () -> ::Time
         def last_failure_time: () -> ::Time
         def last_failure_message: () -> ::String
-        def log_destination_type: () -> ("s3" | "cloudwatch")
+        def log_destination_type: () -> ("s3" | "cloudwatch" | "s3table")
         def log_exports: () -> ::Array[::String]
+        def s3_tables: () -> Types::S3TablePublishStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#disable_logging-instance_method
       def disable_logging: (
-                             cluster_identifier: ::String
+                             cluster_identifier: ::String,
+                             ?log_destination_type: ("s3" | "cloudwatch" | "s3table"),
+                             ?log_exports: Array[::String]
                            ) -> _DisableLoggingResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableLoggingResponseSuccess
 
@@ -1568,16 +1572,19 @@ module Aws
         def last_successful_delivery_time: () -> ::Time
         def last_failure_time: () -> ::Time
         def last_failure_message: () -> ::String
-        def log_destination_type: () -> ("s3" | "cloudwatch")
+        def log_destination_type: () -> ("s3" | "cloudwatch" | "s3table")
         def log_exports: () -> ::Array[::String]
+        def s3_tables: () -> Types::S3TablePublishStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#enable_logging-instance_method
       def enable_logging: (
                             cluster_identifier: ::String,
                             ?bucket_name: ::String,
                             ?s3_key_prefix: ::String,
-                            ?log_destination_type: ("s3" | "cloudwatch"),
-                            ?log_exports: Array[::String]
+                            ?log_destination_type: ("s3" | "cloudwatch" | "s3table"),
+                            ?log_exports: Array[::String],
+                            ?s3_table_kms_key_id: ::String,
+                            ?s3_table_granularity: ::String
                           ) -> _EnableLoggingResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableLoggingResponseSuccess
 

@@ -1800,6 +1800,7 @@ module Aws::SSOAdmin
     #   * {Types::DescribeInstanceResponse#status #status} => String
     #   * {Types::DescribeInstanceResponse#status_reason #status_reason} => String
     #   * {Types::DescribeInstanceResponse#encryption_configuration_details #encryption_configuration_details} => Types::EncryptionConfigurationDetails
+    #   * {Types::DescribeInstanceResponse#permission_sets_enabled #permission_sets_enabled} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1820,6 +1821,7 @@ module Aws::SSOAdmin
     #   resp.encryption_configuration_details.kms_key_arn #=> String
     #   resp.encryption_configuration_details.encryption_status #=> String, one of "UPDATING", "ENABLED", "UPDATE_FAILED"
     #   resp.encryption_configuration_details.encryption_status_reason #=> String
+    #   resp.permission_sets_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstance AWS API Documentation
     #
@@ -4129,6 +4131,20 @@ module Aws::SSOAdmin
     # Update the details for the instance of IAM Identity Center that is
     # owned by the Amazon Web Services account.
     #
+    # In a single `UpdateInstance` request, you can perform only one of the
+    # following operations:
+    #
+    # * Update the encryption configuration of the instance by specifying
+    #   `EncryptionConfiguration`.
+    #
+    # * Enable permission sets for the instance by specifying
+    #   `PermissionSetsEnabled`.
+    #
+    # A request that specifies both `EncryptionConfiguration` and
+    # `PermissionSetsEnabled` returns a `ValidationException`. To perform
+    # both operations, call `UpdateInstance` separately for each. The two
+    # calls can be made in parallel.
+    #
     # @option params [String] :name
     #   Updates the instance name.
     #
@@ -4144,6 +4160,17 @@ module Aws::SSOAdmin
     #   instance. You can use this to configure customer managed KMS keys or
     #   Amazon Web Services owned KMS keys for encrypting your instance data.
     #
+    # @option params [Boolean] :permission_sets_enabled
+    #   Enables permission sets for this Identity Center instance. The only
+    #   accepted value is `true `. After permission sets are enabled, they
+    #   cannot be disabled.
+    #
+    #   <note markdown="1"> You can't set `EncryptionConfiguration` and `PermissionSetsEnabled`
+    #   in the same request. To configure both, make two separate
+    #   `UpdateInstance` calls. These calls can be made in parallel.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4155,6 +4182,7 @@ module Aws::SSOAdmin
     #       key_type: "AWS_OWNED_KMS_KEY", # required, accepts AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KEY
     #       kms_key_arn: "KmsKeyArn",
     #     },
+    #     permission_sets_enabled: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstance AWS API Documentation
@@ -4322,7 +4350,7 @@ module Aws::SSOAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

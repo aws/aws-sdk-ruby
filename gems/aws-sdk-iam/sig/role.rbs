@@ -48,6 +48,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Role.html#role_last_used-instance_method
       def role_last_used: () -> Types::RoleLastUsed
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Role.html#source_role_template-instance_method
+      def source_role_template: () -> Types::SourceRoleTemplate
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Role.html#load-instance_method

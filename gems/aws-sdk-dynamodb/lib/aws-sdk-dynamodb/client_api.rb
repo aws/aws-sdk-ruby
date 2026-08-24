@@ -110,6 +110,7 @@ module Aws::DynamoDB
     CreateReplicationGroupMemberAction = Shapes::StructureShape.new(name: 'CreateReplicationGroupMemberAction')
     CreateTableInput = Shapes::StructureShape.new(name: 'CreateTableInput')
     CreateTableOutput = Shapes::StructureShape.new(name: 'CreateTableOutput')
+    CreateVectorIndexAction = Shapes::StructureShape.new(name: 'CreateVectorIndexAction')
     CsvDelimiter = Shapes::StringShape.new(name: 'CsvDelimiter')
     CsvHeader = Shapes::StringShape.new(name: 'CsvHeader')
     CsvHeaderList = Shapes::ListShape.new(name: 'CsvHeaderList')
@@ -129,6 +130,7 @@ module Aws::DynamoDB
     DeleteResourcePolicyOutput = Shapes::StructureShape.new(name: 'DeleteResourcePolicyOutput')
     DeleteTableInput = Shapes::StructureShape.new(name: 'DeleteTableInput')
     DeleteTableOutput = Shapes::StructureShape.new(name: 'DeleteTableOutput')
+    DeleteVectorIndexAction = Shapes::StructureShape.new(name: 'DeleteVectorIndexAction')
     DeletionProtectionEnabled = Shapes::BooleanShape.new(name: 'DeletionProtectionEnabled')
     DescribeBackupInput = Shapes::StructureShape.new(name: 'DescribeBackupInput')
     DescribeBackupOutput = Shapes::StructureShape.new(name: 'DescribeBackupOutput')
@@ -422,6 +424,15 @@ module Aws::DynamoDB
     ScanOutput = Shapes::StructureShape.new(name: 'ScanOutput')
     ScanSegment = Shapes::IntegerShape.new(name: 'ScanSegment')
     ScanTotalSegments = Shapes::IntegerShape.new(name: 'ScanTotalSegments')
+    ScoreNumber = Shapes::FloatShape.new(name: 'ScoreNumber')
+    SearchResultItem = Shapes::StructureShape.new(name: 'SearchResultItem')
+    SearchResultList = Shapes::ListShape.new(name: 'SearchResultList')
+    SearchSchema = Shapes::ListShape.new(name: 'SearchSchema')
+    SearchSchemaElement = Shapes::StructureShape.new(name: 'SearchSchemaElement')
+    SearchSchemaElementType = Shapes::StringShape.new(name: 'SearchSchemaElementType')
+    SearchVectorList = Shapes::ListShape.new(name: 'SearchVectorList')
+    SearchVectorsInput = Shapes::StructureShape.new(name: 'SearchVectorsInput')
+    SearchVectorsOutput = Shapes::StructureShape.new(name: 'SearchVectorsOutput')
     SecondaryIndexesCapacityMap = Shapes::MapShape.new(name: 'SecondaryIndexesCapacityMap')
     Select = Shapes::StringShape.new(name: 'Select')
     SourceTableDetails = Shapes::StructureShape.new(name: 'SourceTableDetails')
@@ -464,6 +475,7 @@ module Aws::DynamoDB
     TimeToLiveEnabled = Shapes::BooleanShape.new(name: 'TimeToLiveEnabled')
     TimeToLiveSpecification = Shapes::StructureShape.new(name: 'TimeToLiveSpecification')
     TimeToLiveStatus = Shapes::StringShape.new(name: 'TimeToLiveStatus')
+    TopKInteger = Shapes::IntegerShape.new(name: 'TopKInteger')
     TransactGetItem = Shapes::StructureShape.new(name: 'TransactGetItem')
     TransactGetItemList = Shapes::ListShape.new(name: 'TransactGetItemList')
     TransactGetItemsInput = Shapes::StructureShape.new(name: 'TransactGetItemsInput')
@@ -499,6 +511,19 @@ module Aws::DynamoDB
     UpdateTableReplicaAutoScalingOutput = Shapes::StructureShape.new(name: 'UpdateTableReplicaAutoScalingOutput')
     UpdateTimeToLiveInput = Shapes::StructureShape.new(name: 'UpdateTimeToLiveInput')
     UpdateTimeToLiveOutput = Shapes::StructureShape.new(name: 'UpdateTimeToLiveOutput')
+    VectorAttributeDefinition = Shapes::StructureShape.new(name: 'VectorAttributeDefinition')
+    VectorAttributeName = Shapes::StringShape.new(name: 'VectorAttributeName')
+    VectorCapacity = Shapes::StructureShape.new(name: 'VectorCapacity')
+    VectorDistanceFunction = Shapes::StringShape.new(name: 'VectorDistanceFunction')
+    VectorIndex = Shapes::StructureShape.new(name: 'VectorIndex')
+    VectorIndexDescription = Shapes::StructureShape.new(name: 'VectorIndexDescription')
+    VectorIndexDescriptionList = Shapes::ListShape.new(name: 'VectorIndexDescriptionList')
+    VectorIndexInfo = Shapes::StructureShape.new(name: 'VectorIndexInfo')
+    VectorIndexList = Shapes::ListShape.new(name: 'VectorIndexList')
+    VectorIndexUpdate = Shapes::StructureShape.new(name: 'VectorIndexUpdate')
+    VectorIndexUpdateList = Shapes::ListShape.new(name: 'VectorIndexUpdateList')
+    VectorIndexes = Shapes::ListShape.new(name: 'VectorIndexes')
+    VectorIndexesCapacityMap = Shapes::MapShape.new(name: 'VectorIndexesCapacityMap')
     WarmThroughput = Shapes::StructureShape.new(name: 'WarmThroughput')
     WitnessStatus = Shapes::StringShape.new(name: 'WitnessStatus')
     WriteRequest = Shapes::StructureShape.new(name: 'WriteRequest')
@@ -704,6 +729,7 @@ module Aws::DynamoDB
     ConsumedCapacity.add_member(:table, Shapes::ShapeRef.new(shape: Capacity, location_name: "Table"))
     ConsumedCapacity.add_member(:local_secondary_indexes, Shapes::ShapeRef.new(shape: SecondaryIndexesCapacityMap, location_name: "LocalSecondaryIndexes"))
     ConsumedCapacity.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: SecondaryIndexesCapacityMap, location_name: "GlobalSecondaryIndexes"))
+    ConsumedCapacity.add_member(:vector_indexes, Shapes::ShapeRef.new(shape: VectorIndexesCapacityMap, location_name: "VectorIndexes"))
     ConsumedCapacity.struct_class = Types::ConsumedCapacity
 
     ConsumedCapacityMultiple.member = Shapes::ShapeRef.new(shape: ConsumedCapacity)
@@ -778,10 +804,19 @@ module Aws::DynamoDB
     CreateTableInput.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     CreateTableInput.add_member(:global_table_source_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "GlobalTableSourceArn"))
     CreateTableInput.add_member(:global_table_settings_replication_mode, Shapes::ShapeRef.new(shape: GlobalTableSettingsReplicationMode, location_name: "GlobalTableSettingsReplicationMode"))
+    CreateTableInput.add_member(:vector_indexes, Shapes::ShapeRef.new(shape: VectorIndexList, location_name: "VectorIndexes"))
     CreateTableInput.struct_class = Types::CreateTableInput
 
     CreateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
     CreateTableOutput.struct_class = Types::CreateTableOutput
+
+    CreateVectorIndexAction.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
+    CreateVectorIndexAction.add_member(:vector_attribute, Shapes::ShapeRef.new(shape: VectorAttributeDefinition, required: true, location_name: "VectorAttribute"))
+    CreateVectorIndexAction.add_member(:search_schema, Shapes::ShapeRef.new(shape: SearchSchema, location_name: "SearchSchema"))
+    CreateVectorIndexAction.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, required: true, location_name: "Projection"))
+    CreateVectorIndexAction.add_member(:dimensions, Shapes::ShapeRef.new(shape: PositiveLongObject, required: true, location_name: "Dimensions"))
+    CreateVectorIndexAction.add_member(:distance_function, Shapes::ShapeRef.new(shape: VectorDistanceFunction, required: true, location_name: "DistanceFunction"))
+    CreateVectorIndexAction.struct_class = Types::CreateVectorIndexAction
 
     CsvHeaderList.member = Shapes::ShapeRef.new(shape: CsvHeader)
 
@@ -848,6 +883,9 @@ module Aws::DynamoDB
 
     DeleteTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
     DeleteTableOutput.struct_class = Types::DeleteTableOutput
+
+    DeleteVectorIndexAction.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
+    DeleteVectorIndexAction.struct_class = Types::DeleteVectorIndexAction
 
     DescribeBackupInput.add_member(:backup_arn, Shapes::ShapeRef.new(shape: BackupArn, required: true, location_name: "BackupArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeBackupInput.struct_class = Types::DescribeBackupInput
@@ -1677,6 +1715,7 @@ module Aws::DynamoDB
     RestoreTableFromBackupInput.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughputOverride"))
     RestoreTableFromBackupInput.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughputOverride"))
     RestoreTableFromBackupInput.add_member(:sse_specification_override, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecificationOverride"))
+    RestoreTableFromBackupInput.add_member(:vector_index_override, Shapes::ShapeRef.new(shape: VectorIndexList, location_name: "VectorIndexOverride"))
     RestoreTableFromBackupInput.struct_class = Types::RestoreTableFromBackupInput
 
     RestoreTableFromBackupOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1693,6 +1732,7 @@ module Aws::DynamoDB
     RestoreTableToPointInTimeInput.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughputOverride"))
     RestoreTableToPointInTimeInput.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughputOverride"))
     RestoreTableToPointInTimeInput.add_member(:sse_specification_override, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecificationOverride"))
+    RestoreTableToPointInTimeInput.add_member(:vector_index_override, Shapes::ShapeRef.new(shape: VectorIndexList, location_name: "VectorIndexOverride"))
     RestoreTableToPointInTimeInput.struct_class = Types::RestoreTableToPointInTimeInput
 
     RestoreTableToPointInTimeOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1739,6 +1779,35 @@ module Aws::DynamoDB
     ScanOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: ConsumedCapacity, location_name: "ConsumedCapacity"))
     ScanOutput.struct_class = Types::ScanOutput
 
+    SearchResultItem.add_member(:item, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Item"))
+    SearchResultItem.add_member(:score, Shapes::ShapeRef.new(shape: ScoreNumber, location_name: "Score"))
+    SearchResultItem.struct_class = Types::SearchResultItem
+
+    SearchResultList.member = Shapes::ShapeRef.new(shape: SearchResultItem)
+
+    SearchSchema.member = Shapes::ShapeRef.new(shape: SearchSchemaElement)
+
+    SearchSchemaElement.add_member(:attribute_name, Shapes::ShapeRef.new(shape: AttributeName, required: true, location_name: "AttributeName"))
+    SearchSchemaElement.add_member(:search_schema_element_type, Shapes::ShapeRef.new(shape: SearchSchemaElementType, required: true, location_name: "SearchSchemaElementType"))
+    SearchSchemaElement.struct_class = Types::SearchSchemaElement
+
+    SearchVectorList.member = Shapes::ShapeRef.new(shape: AttributeValue)
+
+    SearchVectorsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
+    SearchVectorsInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
+    SearchVectorsInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
+    SearchVectorsInput.add_member(:expression_attribute_names, Shapes::ShapeRef.new(shape: ExpressionAttributeNameMap, location_name: "ExpressionAttributeNames"))
+    SearchVectorsInput.add_member(:expression_attribute_values, Shapes::ShapeRef.new(shape: ExpressionAttributeValueMap, location_name: "ExpressionAttributeValues"))
+    SearchVectorsInput.add_member(:projection_expression, Shapes::ShapeRef.new(shape: ProjectionExpression, location_name: "ProjectionExpression"))
+    SearchVectorsInput.add_member(:search_vector, Shapes::ShapeRef.new(shape: SearchVectorList, required: true, location_name: "SearchVector"))
+    SearchVectorsInput.add_member(:search_condition_expression, Shapes::ShapeRef.new(shape: String, location_name: "SearchConditionExpression"))
+    SearchVectorsInput.add_member(:top_k, Shapes::ShapeRef.new(shape: TopKInteger, required: true, location_name: "TopK"))
+    SearchVectorsInput.struct_class = Types::SearchVectorsInput
+
+    SearchVectorsOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: VectorCapacity, location_name: "ConsumedCapacity"))
+    SearchVectorsOutput.add_member(:search_results, Shapes::ShapeRef.new(shape: SearchResultList, location_name: "SearchResults"))
+    SearchVectorsOutput.struct_class = Types::SearchVectorsOutput
+
     SecondaryIndexesCapacityMap.key = Shapes::ShapeRef.new(shape: IndexName)
     SecondaryIndexesCapacityMap.value = Shapes::ShapeRef.new(shape: Capacity)
 
@@ -1759,6 +1828,7 @@ module Aws::DynamoDB
     SourceTableFeatureDetails.add_member(:stream_description, Shapes::ShapeRef.new(shape: StreamSpecification, location_name: "StreamDescription"))
     SourceTableFeatureDetails.add_member(:time_to_live_description, Shapes::ShapeRef.new(shape: TimeToLiveDescription, location_name: "TimeToLiveDescription"))
     SourceTableFeatureDetails.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
+    SourceTableFeatureDetails.add_member(:vector_indexes, Shapes::ShapeRef.new(shape: VectorIndexes, location_name: "VectorIndexes"))
     SourceTableFeatureDetails.struct_class = Types::SourceTableFeatureDetails
 
     StreamSpecification.add_member(:stream_enabled, Shapes::ShapeRef.new(shape: StreamEnabled, required: true, location_name: "StreamEnabled"))
@@ -1787,6 +1857,7 @@ module Aws::DynamoDB
     TableCreationParameters.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     TableCreationParameters.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     TableCreationParameters.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexes"))
+    TableCreationParameters.add_member(:vector_indexes, Shapes::ShapeRef.new(shape: VectorIndexList, location_name: "VectorIndexes"))
     TableCreationParameters.struct_class = Types::TableCreationParameters
 
     TableDescription.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, location_name: "AttributeDefinitions"))
@@ -1817,6 +1888,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     TableDescription.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: TableWarmThroughputDescription, location_name: "WarmThroughput"))
     TableDescription.add_member(:multi_region_consistency, Shapes::ShapeRef.new(shape: MultiRegionConsistency, location_name: "MultiRegionConsistency"))
+    TableDescription.add_member(:vector_indexes, Shapes::ShapeRef.new(shape: VectorIndexDescriptionList, location_name: "VectorIndexes"))
     TableDescription.struct_class = Types::TableDescription
 
     TableInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -2017,6 +2089,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     UpdateTableInput.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
     UpdateTableInput.add_member(:global_table_settings_replication_mode, Shapes::ShapeRef.new(shape: GlobalTableSettingsReplicationMode, location_name: "GlobalTableSettingsReplicationMode"))
+    UpdateTableInput.add_member(:vector_index_updates, Shapes::ShapeRef.new(shape: VectorIndexUpdateList, location_name: "VectorIndexUpdates"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -2037,6 +2110,57 @@ module Aws::DynamoDB
 
     UpdateTimeToLiveOutput.add_member(:time_to_live_specification, Shapes::ShapeRef.new(shape: TimeToLiveSpecification, location_name: "TimeToLiveSpecification"))
     UpdateTimeToLiveOutput.struct_class = Types::UpdateTimeToLiveOutput
+
+    VectorAttributeDefinition.add_member(:attribute_name, Shapes::ShapeRef.new(shape: VectorAttributeName, required: true, location_name: "AttributeName"))
+    VectorAttributeDefinition.struct_class = Types::VectorAttributeDefinition
+
+    VectorCapacity.add_member(:vector_search_request_bytes, Shapes::ShapeRef.new(shape: ConsumedCapacityUnits, location_name: "VectorSearchRequestBytes"))
+    VectorCapacity.add_member(:vector_write_request_bytes, Shapes::ShapeRef.new(shape: ConsumedCapacityUnits, location_name: "VectorWriteRequestBytes"))
+    VectorCapacity.struct_class = Types::VectorCapacity
+
+    VectorIndex.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
+    VectorIndex.add_member(:vector_attribute, Shapes::ShapeRef.new(shape: VectorAttributeDefinition, required: true, location_name: "VectorAttribute"))
+    VectorIndex.add_member(:search_schema, Shapes::ShapeRef.new(shape: SearchSchema, location_name: "SearchSchema"))
+    VectorIndex.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, required: true, location_name: "Projection"))
+    VectorIndex.add_member(:dimensions, Shapes::ShapeRef.new(shape: PositiveLongObject, required: true, location_name: "Dimensions"))
+    VectorIndex.add_member(:distance_function, Shapes::ShapeRef.new(shape: VectorDistanceFunction, required: true, location_name: "DistanceFunction"))
+    VectorIndex.struct_class = Types::VectorIndex
+
+    VectorIndexDescription.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
+    VectorIndexDescription.add_member(:search_schema, Shapes::ShapeRef.new(shape: SearchSchema, location_name: "SearchSchema"))
+    VectorIndexDescription.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, location_name: "Projection"))
+    VectorIndexDescription.add_member(:vector_attribute, Shapes::ShapeRef.new(shape: VectorAttributeDefinition, location_name: "VectorAttribute"))
+    VectorIndexDescription.add_member(:dimensions, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "Dimensions"))
+    VectorIndexDescription.add_member(:distance_function, Shapes::ShapeRef.new(shape: VectorDistanceFunction, location_name: "DistanceFunction"))
+    VectorIndexDescription.add_member(:index_status, Shapes::ShapeRef.new(shape: IndexStatus, location_name: "IndexStatus"))
+    VectorIndexDescription.add_member(:backfilling, Shapes::ShapeRef.new(shape: Backfilling, location_name: "Backfilling"))
+    VectorIndexDescription.add_member(:index_size_bytes, Shapes::ShapeRef.new(shape: LongObject, location_name: "IndexSizeBytes"))
+    VectorIndexDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: LongObject, location_name: "ItemCount"))
+    VectorIndexDescription.add_member(:index_arn, Shapes::ShapeRef.new(shape: String, location_name: "IndexArn"))
+    VectorIndexDescription.struct_class = Types::VectorIndexDescription
+
+    VectorIndexDescriptionList.member = Shapes::ShapeRef.new(shape: VectorIndexDescription)
+
+    VectorIndexInfo.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
+    VectorIndexInfo.add_member(:vector_attribute, Shapes::ShapeRef.new(shape: VectorAttributeDefinition, location_name: "VectorAttribute"))
+    VectorIndexInfo.add_member(:search_schema, Shapes::ShapeRef.new(shape: SearchSchema, location_name: "SearchSchema"))
+    VectorIndexInfo.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, location_name: "Projection"))
+    VectorIndexInfo.add_member(:dimensions, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "Dimensions"))
+    VectorIndexInfo.add_member(:distance_function, Shapes::ShapeRef.new(shape: VectorDistanceFunction, location_name: "DistanceFunction"))
+    VectorIndexInfo.struct_class = Types::VectorIndexInfo
+
+    VectorIndexList.member = Shapes::ShapeRef.new(shape: VectorIndex)
+
+    VectorIndexUpdate.add_member(:create, Shapes::ShapeRef.new(shape: CreateVectorIndexAction, location_name: "Create"))
+    VectorIndexUpdate.add_member(:delete, Shapes::ShapeRef.new(shape: DeleteVectorIndexAction, location_name: "Delete"))
+    VectorIndexUpdate.struct_class = Types::VectorIndexUpdate
+
+    VectorIndexUpdateList.member = Shapes::ShapeRef.new(shape: VectorIndexUpdate)
+
+    VectorIndexes.member = Shapes::ShapeRef.new(shape: VectorIndexInfo)
+
+    VectorIndexesCapacityMap.key = Shapes::ShapeRef.new(shape: IndexName)
+    VectorIndexesCapacityMap.value = Shapes::ShapeRef.new(shape: VectorCapacity)
 
     WarmThroughput.add_member(:read_units_per_second, Shapes::ShapeRef.new(shape: LongObject, location_name: "ReadUnitsPerSecond"))
     WarmThroughput.add_member(:write_units_per_second, Shapes::ShapeRef.new(shape: LongObject, location_name: "WriteUnitsPerSecond"))
@@ -2686,6 +2810,18 @@ module Aws::DynamoDB
             "last_evaluated_key" => "exclusive_start_key"
           }
         )
+      end)
+
+      api.add_operation(:search_vectors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchVectors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SearchVectorsInput)
+        o.output = Shapes::ShapeRef.new(shape: SearchVectorsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

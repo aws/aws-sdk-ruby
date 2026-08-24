@@ -63,6 +63,7 @@ module Aws::SSOAdmin
     AuthorizationCodeGrant = Shapes::StructureShape.new(name: 'AuthorizationCodeGrant')
     AuthorizedTokenIssuer = Shapes::StructureShape.new(name: 'AuthorizedTokenIssuer')
     AuthorizedTokenIssuers = Shapes::ListShape.new(name: 'AuthorizedTokenIssuers')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClaimAttributePath = Shapes::StringShape.new(name: 'ClaimAttributePath')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -680,6 +681,7 @@ module Aws::SSOAdmin
     DescribeInstanceResponse.add_member(:status, Shapes::ShapeRef.new(shape: InstanceStatus, location_name: "Status"))
     DescribeInstanceResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
     DescribeInstanceResponse.add_member(:encryption_configuration_details, Shapes::ShapeRef.new(shape: EncryptionConfigurationDetails, location_name: "EncryptionConfigurationDetails"))
+    DescribeInstanceResponse.add_member(:permission_sets_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PermissionSetsEnabled"))
     DescribeInstanceResponse.struct_class = Types::DescribeInstanceResponse
 
     DescribePermissionSetProvisioningStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
@@ -1263,6 +1265,7 @@ module Aws::SSOAdmin
     UpdateInstanceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
     UpdateInstanceRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     UpdateInstanceRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    UpdateInstanceRequest.add_member(:permission_sets_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PermissionSetsEnabled"))
     UpdateInstanceRequest.struct_class = Types::UpdateInstanceRequest
 
     UpdateInstanceResponse.struct_class = Types::UpdateInstanceResponse

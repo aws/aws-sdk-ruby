@@ -43,7 +43,8 @@ module Aws
       integrated_repositories: Array[
         {
           integration_id: ::String,
-          provider_resource_id: ::String
+          provider_resource_id: ::String,
+          branch: ::String?
         }
       ]?
     }
@@ -55,7 +56,9 @@ module Aws
         provider_type: ("SECRETS_MANAGER" | "AWS_LAMBDA" | "AWS_IAM_ROLE" | "AWS_INTERNAL")?,
         value: ::String?
       }?,
-      description: ::String?
+      description: ::String?,
+      enable_email_mfa: bool?,
+      mfa_forwarding_address: ::String?
     }
 
       type document_info = {

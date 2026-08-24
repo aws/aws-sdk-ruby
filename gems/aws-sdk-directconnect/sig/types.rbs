@@ -66,6 +66,12 @@ module Aws::DirectConnect
       SENSITIVE: []
     end
 
+    class AsPathSegment
+      attr_accessor path_type: ("seq" | "set")
+      attr_accessor path: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
     class AssociateConnectionWithLagRequest
       attr_accessor connection_id: ::String
       attr_accessor lag_id: ::String
@@ -206,6 +212,10 @@ module Aws::DirectConnect
       attr_accessor mac_sec_keys: ::Array[Types::MacSecKey]
       attr_accessor rate_limiter_status: Types::RateLimiterStatus
       attr_accessor partner_interconnect_mac_sec_capable: bool
+      attr_accessor prefix_pool_size_ipv_4: ::Integer
+      attr_accessor prefix_pool_size_ipv_6: ::Integer
+      attr_accessor prefix_pool_unallocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_unallocated_count_ipv_6: ::Integer
       SENSITIVE: []
     end
 
@@ -577,6 +587,7 @@ module Aws::DirectConnect
       attr_accessor owner_account: ::String
       attr_accessor direct_connect_gateway_state: ("pending" | "available" | "deleting" | "deleted")
       attr_accessor state_change_error: ::String
+      attr_accessor total_prefix_pool_allocations: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -695,6 +706,10 @@ module Aws::DirectConnect
       attr_accessor mac_sec_capable: bool
       attr_accessor encryption_mode: ::String
       attr_accessor mac_sec_keys: ::Array[Types::MacSecKey]
+      attr_accessor prefix_pool_size_ipv_4: ::Integer
+      attr_accessor prefix_pool_size_ipv_6: ::Integer
+      attr_accessor prefix_pool_unallocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_unallocated_count_ipv_6: ::Integer
       attr_accessor rate_limiter_status: Types::RateLimiterStatus
       SENSITIVE: []
     end
@@ -706,6 +721,21 @@ module Aws::DirectConnect
     end
 
     class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListVirtualInterfaceRoutesRequest
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor filters: Types::RouteFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVirtualInterfaceRoutesResponse
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor routes: ::Array[Types::Route]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
     end
 
     class ListVirtualInterfaceTestHistoryRequest
@@ -777,6 +807,8 @@ module Aws::DirectConnect
       attr_accessor direct_connect_gateway_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor enable_site_link: bool
+      attr_accessor prefix_pool_allocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_allocated_count_ipv_6: ::Integer
       attr_accessor rate_limit: ::String
       SENSITIVE: []
     end
@@ -839,6 +871,8 @@ module Aws::DirectConnect
       attr_accessor direct_connect_gateway_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor enable_site_link: bool
+      attr_accessor prefix_pool_allocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_allocated_count_ipv_6: ::Integer
       attr_accessor rate_limit: ::String
       SENSITIVE: []
     end
@@ -872,8 +906,28 @@ module Aws::DirectConnect
       SENSITIVE: []
     end
 
+    class Route
+      attr_accessor cidr: ::String
+      attr_accessor route_direction: ("accepted" | "advertised")
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor as_path: ::Array[Types::AsPathSegment]
+      attr_accessor communities: ::Array[::String]
+      attr_accessor aws_logical_device_id: ::String
+      attr_accessor route_installed_at: ::Time
+      SENSITIVE: []
+    end
+
     class RouteFilterPrefix
       attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class RouteFilters
+      attr_accessor route_direction: ("accepted" | "advertised")
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor cidrs: ::Array[::String]
+      attr_accessor as_path: ::Array[::Integer]
+      attr_accessor communities: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -979,6 +1033,8 @@ module Aws::DirectConnect
       attr_accessor mtu: ::Integer
       attr_accessor enable_site_link: bool
       attr_accessor virtual_interface_name: ::String
+      attr_accessor prefix_pool_allocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_allocated_count_ipv_6: ::Integer
       attr_accessor rate_limit: ::String
       SENSITIVE: []
     end
@@ -1022,6 +1078,8 @@ module Aws::DirectConnect
       attr_accessor aws_logical_device_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor site_link_enabled: bool
+      attr_accessor prefix_pool_allocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_allocated_count_ipv_6: ::Integer
       attr_accessor rate_limit: ::String
       SENSITIVE: []
     end

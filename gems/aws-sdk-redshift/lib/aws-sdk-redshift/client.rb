@@ -1893,6 +1893,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -3639,6 +3646,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -5424,6 +5438,13 @@ module Aws::Redshift
     #   resp.clusters[0].lakehouse_registration_status #=> String
     #   resp.clusters[0].catalog_arn #=> String
     #   resp.clusters[0].extra_compute_for_automatic_optimization #=> String
+    #   resp.clusters[0].logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.clusters[0].logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.clusters[0].logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.clusters[0].logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.clusters[0].logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.clusters[0].logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.clusters[0].logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6553,6 +6574,7 @@ module Aws::Redshift
     #   * {Types::LoggingStatus#last_failure_message #last_failure_message} => String
     #   * {Types::LoggingStatus#log_destination_type #log_destination_type} => String
     #   * {Types::LoggingStatus#log_exports #log_exports} => Array&lt;String&gt;
+    #   * {Types::LoggingStatus#s3_tables #s3_tables} => Types::S3TablePublishStatus
     #
     # @example Request syntax with placeholder values
     #
@@ -6568,9 +6590,16 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
-    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch"
+    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch", "s3table"
     #   resp.log_exports #=> Array
     #   resp.log_exports[0] #=> String
+    #   resp.s3_tables.s3_tables #=> Array
+    #   resp.s3_tables.s3_tables[0] #=> String
+    #   resp.s3_tables.s3_table_namespace #=> String
+    #   resp.s3_tables.s3_table_granularity #=> String
+    #   resp.s3_tables.enabled_all #=> Boolean
+    #   resp.s3_tables.last_ingestion_times #=> Hash
+    #   resp.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatus AWS API Documentation
     #
@@ -7847,6 +7876,17 @@ module Aws::Redshift
     #
     #   Example: `examplecluster`
     #
+    # @option params [String] :log_destination_type
+    #   The log destination type. An enum with possible values of `s3`,
+    #   `cloudwatch`, and `s3table`. When set to `s3table`, stops system table
+    #   publishing. When omitted, the operation disables audit logging.
+    #
+    # @option params [Array<String>] :log_exports
+    #   The collection of log types to stop exporting. When
+    #   `LogDestinationType` is `s3table`, the values are the names of the
+    #   system tables to stop publishing. Omitting this parameter or passing
+    #   `all` stops publishing all system tables.
+    #
     # @return [Types::LoggingStatus] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::LoggingStatus#logging_enabled #logging_enabled} => Boolean
@@ -7857,11 +7897,14 @@ module Aws::Redshift
     #   * {Types::LoggingStatus#last_failure_message #last_failure_message} => String
     #   * {Types::LoggingStatus#log_destination_type #log_destination_type} => String
     #   * {Types::LoggingStatus#log_exports #log_exports} => Array&lt;String&gt;
+    #   * {Types::LoggingStatus#s3_tables #s3_tables} => Types::S3TablePublishStatus
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_logging({
     #     cluster_identifier: "String", # required
+    #     log_destination_type: "s3", # accepts s3, cloudwatch, s3table
+    #     log_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -7872,9 +7915,16 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
-    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch"
+    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch", "s3table"
     #   resp.log_exports #=> Array
     #   resp.log_exports[0] #=> String
+    #   resp.s3_tables.s3_tables #=> Array
+    #   resp.s3_tables.s3_tables[0] #=> String
+    #   resp.s3_tables.s3_table_namespace #=> String
+    #   resp.s3_tables.s3_table_granularity #=> String
+    #   resp.s3_tables.enabled_all #=> Boolean
+    #   resp.s3_tables.last_ingestion_times #=> Hash
+    #   resp.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLogging AWS API Documentation
     #
@@ -8046,6 +8096,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -8146,12 +8203,28 @@ module Aws::Redshift
     #   plus (`+`), backslash (``), hyphen (`-`), at symbol (`@`).
     #
     # @option params [String] :log_destination_type
-    #   The log destination type. An enum with possible values of `s3` and
-    #   `cloudwatch`.
+    #   The log destination type. An enum with possible values of `s3`,
+    #   `cloudwatch`, and `s3table`.
     #
     # @option params [Array<String>] :log_exports
-    #   The collection of exported log types. Possible values are
-    #   `connectionlog`, `useractivitylog`, and `userlog`.
+    #   The collection of exported log types. When `LogDestinationType` is
+    #   `s3` or `cloudwatch`, possible values are `connectionlog`,
+    #   `useractivitylog`, and `userlog`. When `LogDestinationType` is
+    #   `s3table`, the values are the names of the system tables to publish.
+    #   Omitting this parameter, passing an empty list, or including the value
+    #   `all` publishes all current and future system tables.
+    #
+    # @option params [String] :s3_table_kms_key_id
+    #   The identifier of a customer managed KMS key used to encrypt the S3
+    #   tables. This parameter is valid only when `LogDestinationType` is
+    #   `s3table`.
+    #
+    # @option params [String] :s3_table_granularity
+    #   The scope of system table publishing. Valid values are `cluster` and
+    #   `account`. A value of `cluster` scopes publishing to the individual
+    #   cluster. A value of `account` scopes publishing to the Amazon Web
+    #   Services account. This parameter is valid only when
+    #   `LogDestinationType` is `s3table`.
     #
     # @return [Types::LoggingStatus] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8163,6 +8236,7 @@ module Aws::Redshift
     #   * {Types::LoggingStatus#last_failure_message #last_failure_message} => String
     #   * {Types::LoggingStatus#log_destination_type #log_destination_type} => String
     #   * {Types::LoggingStatus#log_exports #log_exports} => Array&lt;String&gt;
+    #   * {Types::LoggingStatus#s3_tables #s3_tables} => Types::S3TablePublishStatus
     #
     # @example Request syntax with placeholder values
     #
@@ -8170,8 +8244,10 @@ module Aws::Redshift
     #     cluster_identifier: "String", # required
     #     bucket_name: "String",
     #     s3_key_prefix: "S3KeyPrefixValue",
-    #     log_destination_type: "s3", # accepts s3, cloudwatch
+    #     log_destination_type: "s3", # accepts s3, cloudwatch, s3table
     #     log_exports: ["String"],
+    #     s3_table_kms_key_id: "String",
+    #     s3_table_granularity: "String",
     #   })
     #
     # @example Response structure
@@ -8182,9 +8258,16 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
-    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch"
+    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch", "s3table"
     #   resp.log_exports #=> Array
     #   resp.log_exports[0] #=> String
+    #   resp.s3_tables.s3_tables #=> Array
+    #   resp.s3_tables.s3_tables[0] #=> String
+    #   resp.s3_tables.s3_table_namespace #=> String
+    #   resp.s3_tables.s3_table_granularity #=> String
+    #   resp.s3_tables.enabled_all #=> Boolean
+    #   resp.s3_tables.last_ingestion_times #=> Hash
+    #   resp.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLogging AWS API Documentation
     #
@@ -8387,6 +8470,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -8550,6 +8640,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/FailoverPrimaryCompute AWS API Documentation
     #
@@ -9702,6 +9799,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -9872,6 +9976,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -10058,6 +10169,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -10244,6 +10362,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -11297,6 +11422,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -11566,6 +11698,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -11832,6 +11971,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -12200,6 +12346,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -12731,6 +12884,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -12992,6 +13152,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -13390,6 +13557,13 @@ module Aws::Redshift
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
     #   resp.cluster.extra_compute_for_automatic_optimization #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables #=> Array
+    #   resp.cluster.logging_publish_status.s3_tables.s3_tables[0] #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_namespace #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.s3_table_granularity #=> String
+    #   resp.cluster.logging_publish_status.s3_tables.enabled_all #=> Boolean
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times #=> Hash
+    #   resp.cluster.logging_publish_status.s3_tables.last_ingestion_times["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -13470,7 +13644,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -512,6 +512,17 @@ module Aws::Glue
     #   The unique identifier of the asset to associate glossary terms with.
     #   @return [String]
     #
+    # @!attribute [rw] iterable_form_name
+    #   The name of the iterable form. When specified along with
+    #   `itemIdentifier`, the glossary terms are associated with an item
+    #   within the iterable form rather than the asset itself.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier
+    #   The identifier of the item within the iterable form. Required when
+    #   `iterableFormName` is specified.
+    #   @return [String]
+    #
     # @!attribute [rw] glossary_term_identifiers
     #   The list of glossary term identifiers to associate with the asset.
     #   @return [Array<String>]
@@ -528,6 +539,8 @@ module Aws::Glue
     #
     class AssociateGlossaryTermsRequest < Struct.new(
       :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
       :glossary_term_identifiers,
       :client_token)
       SENSITIVE = []
@@ -538,6 +551,14 @@ module Aws::Glue
     #   The unique identifier of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] iterable_form_name
+    #   The name of the iterable form, if the association targets an item.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier
+    #   The identifier of the item within the iterable form, if applicable.
+    #   @return [String]
+    #
     # @!attribute [rw] glossary_terms
     #   The glossary terms now associated with the asset.
     #   @return [Array<String>]
@@ -546,6 +567,8 @@ module Aws::Glue
     #
     class AssociateGlossaryTermsResponse < Struct.new(
       :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
       :glossary_terms)
       SENSITIVE = []
       include Aws::Structure
@@ -9806,10 +9829,20 @@ module Aws::Glue
     #   The unique identifier of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] iterable_form_name
+    #   The name of the iterable form, if the deletion targets an item.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier
+    #   The identifier of the item within the iterable form, if applicable.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAttachmentResponse AWS API Documentation
     #
     class DeleteAttachmentResponse < Struct.new(
-      :asset_identifier)
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11454,6 +11487,17 @@ module Aws::Glue
     #   from.
     #   @return [String]
     #
+    # @!attribute [rw] iterable_form_name
+    #   The name of the iterable form. When specified along with
+    #   `itemIdentifier`, the glossary terms are disassociated from an item
+    #   within the iterable form rather than the asset itself.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier
+    #   The identifier of the item within the iterable form. Required when
+    #   `iterableFormName` is specified.
+    #   @return [String]
+    #
     # @!attribute [rw] glossary_term_identifiers
     #   The list of glossary term identifiers to disassociate from the
     #   asset.
@@ -11471,6 +11515,8 @@ module Aws::Glue
     #
     class DisassociateGlossaryTermsRequest < Struct.new(
       :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
       :glossary_term_identifiers,
       :client_token)
       SENSITIVE = []
@@ -11481,6 +11527,15 @@ module Aws::Glue
     #   The unique identifier of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] iterable_form_name
+    #   The name of the iterable form, if the disassociation targets an
+    #   item.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier
+    #   The identifier of the item within the iterable form, if applicable.
+    #   @return [String]
+    #
     # @!attribute [rw] glossary_terms
     #   The remaining glossary terms associated with the asset.
     #   @return [Array<String>]
@@ -11489,6 +11544,8 @@ module Aws::Glue
     #
     class DisassociateGlossaryTermsResponse < Struct.new(
       :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
       :glossary_terms)
       SENSITIVE = []
       include Aws::Structure
@@ -12180,6 +12237,26 @@ module Aws::Glue
     #
     class ExecutionProperty < Struct.new(
       :max_concurrent_runs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The encryption configuration for exported data catalog metadata.
+    #
+    # @!attribute [rw] sse_algorithm
+    #   The server-side encryption algorithm used for the exported data.
+    #   Valid values are `AES256` and `aws:kms`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the KMS key used to encrypt the exported data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ExportEncryptionConfiguration AWS API Documentation
+    #
+    class ExportEncryptionConfiguration < Struct.new(
+      :sse_algorithm,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12967,6 +13044,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The asset metadata returned by the `GetAsset` operation.
+    #
     # @!attribute [rw] id
     #   The unique identifier of the asset.
     #   @return [String]
@@ -13864,6 +13943,54 @@ module Aws::Glue
     #
     class GetDataCatalogEncryptionSettingsResponse < Struct.new(
       :data_catalog_encryption_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogExportConfigurationInput AWS API Documentation
+    #
+    class GetDataCatalogExportConfigurationInput < Aws::EmptyStructure; end
+
+    # The export configuration returned by the
+    # `GetDataCatalogExportConfiguration` operation.
+    #
+    # @!attribute [rw] export_setting
+    #   The export setting for the data catalog. Valid values are `ENABLED`
+    #   and `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the export. Valid values are `ENABLING`,
+    #   `ENABLED`, `DISABLING`, `DISABLED`, and `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the exported data.
+    #   @return [Types::ExportEncryptionConfiguration]
+    #
+    # @!attribute [rw] s3_table_bucket_arn
+    #   The ARN of the S3 Tables bucket where catalog metadata is exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the export configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the export configuration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogExportConfigurationOutput AWS API Documentation
+    #
+    class GetDataCatalogExportConfigurationOutput < Struct.new(
+      :export_setting,
+      :status,
+      :encryption_configuration,
+      :s3_table_bucket_arn,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22062,7 +22189,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the table for which statistics is generated.
+    #   The name of the materialized view.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -22898,6 +23025,7 @@ module Aws::Glue
     # Exception thrown when stopping a task that is not in running state.
     #
     # @!attribute [rw] message
+    #   A message describing the problem.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MaterializedViewRefreshTaskNotRunningException AWS API Documentation
@@ -22924,7 +23052,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the table for which statistics is generated.
+    #   The name of the materialized view.
     #   @return [String]
     #
     # @!attribute [rw] catalog_id
@@ -22933,7 +23061,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The IAM role that the service assumes to generate statistics.
+    #   The IAM role that the service assumes to run the materialized view
+    #   refresh task.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -22998,6 +23127,7 @@ module Aws::Glue
     # Exception thrown when a task is already in running state.
     #
     # @!attribute [rw] message
+    #   A message describing the problem.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MaterializedViewRefreshTaskRunningException AWS API Documentation
@@ -23011,6 +23141,7 @@ module Aws::Glue
     # Exception thrown when a task is already in stopping state.
     #
     # @!attribute [rw] message
+    #   A message describing the problem.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MaterializedViewRefreshTaskStoppingException AWS API Documentation
@@ -24696,6 +24827,55 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogEncryptionSettingsResponse AWS API Documentation
     #
     class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] export_setting
+    #   The export setting for the data catalog. Specify `ENABLED` to start
+    #   exporting catalog metadata to S3 Tables, or `DISABLED` to stop
+    #   exporting. This field is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the exported data. If not
+    #   specified, the default encryption settings are used.
+    #   @return [Types::ExportEncryptionConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogExportConfigurationInput AWS API Documentation
+    #
+    class PutDataCatalogExportConfigurationInput < Struct.new(
+      :export_setting,
+      :encryption_configuration,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The export configuration returned by the
+    # `PutDataCatalogExportConfiguration` operation.
+    #
+    # @!attribute [rw] export_setting
+    #   The export setting for the data catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the exported data.
+    #   @return [Types::ExportEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogExportConfigurationOutput AWS API Documentation
+    #
+    class PutDataCatalogExportConfigurationOutput < Struct.new(
+      :export_setting,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] profile_id
     #   The ID of the data quality monitoring profile to annotate.
@@ -27536,6 +27716,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The search results returned by the `SearchAssets` operation.
+    #
     # @!attribute [rw] items
     #   The list of assets matching the search criteria.
     #   @return [Array<Types::SearchResultItem>]
@@ -29376,8 +29558,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the table to generate run the materialized view refresh
-    #   task.
+    #   The name of the materialized view to run the refresh task for.
     #   @return [String]
     #
     # @!attribute [rw] full_refresh
@@ -29830,7 +30011,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the table to generate statistics.
+    #   The name of the materialized view.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopMaterializedViewRefreshTaskRunRequest AWS API Documentation

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2026-08-20)
+------------------
+
+* Feature - Increased the maximum allowed length from 255 to 4,096 characters to support longer access tokens.
+
+1.105.0 (2026-08-07)
+------------------
+
+* Feature - Increased the maximum allowed length of the oauthToken parameter in the CreateApp and UpdateApp APIs to support longer OAuth tokens issued by third-party Git providers.
+
 1.104.0 (2026-07-09)
 ------------------
 

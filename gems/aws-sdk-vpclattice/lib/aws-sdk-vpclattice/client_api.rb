@@ -560,7 +560,7 @@ module Aws::VPCLattice
     CreateServiceNetworkServiceAssociationResponse.struct_class = Types::CreateServiceNetworkServiceAssociationResponse
 
     CreateServiceNetworkVpcAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
-    CreateServiceNetworkVpcAssociationRequest.add_member(:service_network_identifier, Shapes::ShapeRef.new(shape: ServiceNetworkIdentifier, required: true, location_name: "serviceNetworkIdentifier"))
+    CreateServiceNetworkVpcAssociationRequest.add_member(:service_network_identifier, Shapes::ShapeRef.new(shape: ServiceNetworkIdentifierWithoutRegex, required: true, location_name: "serviceNetworkIdentifier"))
     CreateServiceNetworkVpcAssociationRequest.add_member(:vpc_identifier, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcIdentifier"))
     CreateServiceNetworkVpcAssociationRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
     CreateServiceNetworkVpcAssociationRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: CreateServiceNetworkVpcAssociationRequestSecurityGroupIdsList, location_name: "securityGroupIds"))
@@ -1627,7 +1627,9 @@ module Aws::VPCLattice
     UpdateServiceNetworkResponse.struct_class = Types::UpdateServiceNetworkResponse
 
     UpdateServiceNetworkVpcAssociationRequest.add_member(:service_network_vpc_association_identifier, Shapes::ShapeRef.new(shape: ServiceNetworkVpcAssociationIdentifier, required: true, location: "uri", location_name: "serviceNetworkVpcAssociationIdentifier"))
-    UpdateServiceNetworkVpcAssociationRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: UpdateServiceNetworkVpcAssociationRequestSecurityGroupIdsList, required: true, location_name: "securityGroupIds"))
+    UpdateServiceNetworkVpcAssociationRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: UpdateServiceNetworkVpcAssociationRequestSecurityGroupIdsList, location_name: "securityGroupIds"))
+    UpdateServiceNetworkVpcAssociationRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
+    UpdateServiceNetworkVpcAssociationRequest.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptions, location_name: "dnsOptions"))
     UpdateServiceNetworkVpcAssociationRequest.struct_class = Types::UpdateServiceNetworkVpcAssociationRequest
 
     UpdateServiceNetworkVpcAssociationRequestSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
@@ -1637,6 +1639,8 @@ module Aws::VPCLattice
     UpdateServiceNetworkVpcAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ServiceNetworkVpcAssociationStatus, location_name: "status"))
     UpdateServiceNetworkVpcAssociationResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: AccountId, location_name: "createdBy"))
     UpdateServiceNetworkVpcAssociationResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "securityGroupIds"))
+    UpdateServiceNetworkVpcAssociationResponse.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
+    UpdateServiceNetworkVpcAssociationResponse.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptions, location_name: "dnsOptions"))
     UpdateServiceNetworkVpcAssociationResponse.struct_class = Types::UpdateServiceNetworkVpcAssociationResponse
 
     UpdateServiceRequest.add_member(:service_identifier, Shapes::ShapeRef.new(shape: ServiceIdentifier, required: true, location: "uri", location_name: "serviceIdentifier"))

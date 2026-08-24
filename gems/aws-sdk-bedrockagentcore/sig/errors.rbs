@@ -41,6 +41,11 @@ module Aws
       class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class SubscriptionRequiredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def subscription_url: () -> ::String
+        def product_name: () -> ::String
+      end
       class ThrottledException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

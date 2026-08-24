@@ -681,10 +681,10 @@ module Aws::PartnerCentralSelling
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :title
+    # @option params [String] :title
     #   Specifies the title of the `Engagement`.
     #
-    # @option params [required, String] :description
+    # @option params [String] :description
     #   Provides a description of the `Engagement`.
     #
     # @option params [Array<Types::EngagementContextDetails>] :contexts
@@ -715,8 +715,8 @@ module Aws::PartnerCentralSelling
     #   resp = client.create_engagement({
     #     catalog: "CatalogIdentifier", # required
     #     client_token: "ClientToken", # required
-    #     title: "EngagementTitle", # required
-    #     description: "EngagementDescription", # required
+    #     title: "EngagementTitle",
+    #     description: "EngagementDescription",
     #     contexts: [
     #       {
     #         id: "EngagementContextIdentifier",
@@ -741,44 +741,39 @@ module Aws::PartnerCentralSelling
     #             },
     #             qualification_status: "LeadQualificationStatus",
     #             customer: { # required
-    #               industry: "Aerospace", # accepts Aerospace, Agriculture, Automotive, Computers and Electronics, Consumer Goods, Education, Energy - Oil and Gas, Energy - Power and Utilities, Financial Services, Gaming, Government, Healthcare, Hospitality, Life Sciences, Manufacturing, Marketing and Advertising, Media and Entertainment, Mining, Non-Profit Organization, Professional Services, Real Estate and Construction, Retail, Software and Internet, Telecommunications, Transportation and Logistics, Travel, Wholesale and Distribution, Other
+    #               industry: "LeadIndustry",
     #               company_name: "CompanyName", # required
-    #               website_url: "CompanyWebsiteUrl",
-    #               address: { # required
-    #                 city: "AddressSummaryCityString",
-    #                 postal_code: "AddressSummaryPostalCodeString",
-    #                 state_or_region: "AddressPart",
-    #                 country_code: "US", # accepts US, AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CK, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #               website_url: "LeadWebsiteUrl",
+    #               address: {
+    #                 city: "LeadAddressCityString",
+    #                 postal_code: "LeadAddressPostalCodeString",
+    #                 state_or_region: "LeadAddressStateOrRegionString",
+    #                 country_code: "LeadCountryCode",
     #               },
     #               aws_maturity: "AwsMaturity",
-    #               market_segment: "Enterprise", # accepts Enterprise, Large, Medium, Small, Micro
+    #               market_segment: "LeadMarketSegment",
     #             },
     #             interactions: [ # required
     #               {
-    #                 source_type: "LeadSourceType", # required
-    #                 source_id: "LeadSourceId", # required
-    #                 source_name: "LeadSourceName", # required
+    #                 source_type: "LeadSourceType",
+    #                 source_id: "LeadSourceId",
+    #                 source_name: "LeadSourceName",
     #                 usecase: "EngagementUseCase",
     #                 interaction_date: Time.now,
-    #                 customer_action: "CustomerAction", # required
-    #                 business_problem: "EngagementCustomerBusinessProblem",
+    #                 customer_action: "CustomerAction",
+    #                 business_problem: "LeadBusinessProblem",
     #                 contact: { # required
-    #                   business_title: "JobTitle", # required
-    #                   email: "Email", # required
+    #                   business_title: "LeadJobTitle", # required
+    #                   email: "LeadEmail", # required
     #                   first_name: "Name", # required
     #                   last_name: "Name", # required
-    #                   phone: "PhoneNumber",
+    #                   phone: "LeadPhoneNumber",
     #                 },
     #               },
     #             ],
     #           },
     #           prospecting_result: {
     #             aws: {
-    #               start_time: Time.now,
-    #               end_time: Time.now,
-    #               task_id: "ProspectingTaskIdentifier",
-    #               task_arn: "TaskArn",
-    #               task_name: "TaskName",
     #               customer: {
     #                 account_name: "ProspectingAccountName",
     #                 geo: "ProspectingGeo",
@@ -798,6 +793,11 @@ module Aws::PartnerCentralSelling
     #                 solution_category: "String",
     #                 solution_sub_category: "String",
     #               },
+    #               start_time: Time.now,
+    #               end_time: Time.now,
+    #               task_id: "ProspectingTaskIdentifier",
+    #               task_arn: "TaskArn",
+    #               task_name: "TaskName",
     #             },
     #           },
     #         },
@@ -895,44 +895,39 @@ module Aws::PartnerCentralSelling
     #         },
     #         qualification_status: "LeadQualificationStatus",
     #         customer: { # required
-    #           industry: "Aerospace", # accepts Aerospace, Agriculture, Automotive, Computers and Electronics, Consumer Goods, Education, Energy - Oil and Gas, Energy - Power and Utilities, Financial Services, Gaming, Government, Healthcare, Hospitality, Life Sciences, Manufacturing, Marketing and Advertising, Media and Entertainment, Mining, Non-Profit Organization, Professional Services, Real Estate and Construction, Retail, Software and Internet, Telecommunications, Transportation and Logistics, Travel, Wholesale and Distribution, Other
+    #           industry: "LeadIndustry",
     #           company_name: "CompanyName", # required
-    #           website_url: "CompanyWebsiteUrl",
-    #           address: { # required
-    #             city: "AddressSummaryCityString",
-    #             postal_code: "AddressSummaryPostalCodeString",
-    #             state_or_region: "AddressPart",
-    #             country_code: "US", # accepts US, AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CK, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #           website_url: "LeadWebsiteUrl",
+    #           address: {
+    #             city: "LeadAddressCityString",
+    #             postal_code: "LeadAddressPostalCodeString",
+    #             state_or_region: "LeadAddressStateOrRegionString",
+    #             country_code: "LeadCountryCode",
     #           },
     #           aws_maturity: "AwsMaturity",
-    #           market_segment: "Enterprise", # accepts Enterprise, Large, Medium, Small, Micro
+    #           market_segment: "LeadMarketSegment",
     #         },
     #         interactions: [ # required
     #           {
-    #             source_type: "LeadSourceType", # required
-    #             source_id: "LeadSourceId", # required
-    #             source_name: "LeadSourceName", # required
+    #             source_type: "LeadSourceType",
+    #             source_id: "LeadSourceId",
+    #             source_name: "LeadSourceName",
     #             usecase: "EngagementUseCase",
     #             interaction_date: Time.now,
-    #             customer_action: "CustomerAction", # required
-    #             business_problem: "EngagementCustomerBusinessProblem",
+    #             customer_action: "CustomerAction",
+    #             business_problem: "LeadBusinessProblem",
     #             contact: { # required
-    #               business_title: "JobTitle", # required
-    #               email: "Email", # required
+    #               business_title: "LeadJobTitle", # required
+    #               email: "LeadEmail", # required
     #               first_name: "Name", # required
     #               last_name: "Name", # required
-    #               phone: "PhoneNumber",
+    #               phone: "LeadPhoneNumber",
     #             },
     #           },
     #         ],
     #       },
     #       prospecting_result: {
     #         aws: {
-    #           start_time: Time.now,
-    #           end_time: Time.now,
-    #           task_id: "ProspectingTaskIdentifier",
-    #           task_arn: "TaskArn",
-    #           task_name: "TaskName",
     #           customer: {
     #             account_name: "ProspectingAccountName",
     #             geo: "ProspectingGeo",
@@ -952,6 +947,11 @@ module Aws::PartnerCentralSelling
     #             solution_category: "String",
     #             solution_sub_category: "String",
     #           },
+    #           start_time: Time.now,
+    #           end_time: Time.now,
+    #           task_id: "ProspectingTaskIdentifier",
+    #           task_arn: "TaskArn",
+    #           task_name: "TaskName",
     #         },
     #       },
     #     },
@@ -1057,17 +1057,17 @@ module Aws::PartnerCentralSelling
     #         },
     #         lead_invitation: {
     #           customer: { # required
-    #             industry: "Aerospace", # accepts Aerospace, Agriculture, Automotive, Computers and Electronics, Consumer Goods, Education, Energy - Oil and Gas, Energy - Power and Utilities, Financial Services, Gaming, Government, Healthcare, Hospitality, Life Sciences, Manufacturing, Marketing and Advertising, Media and Entertainment, Mining, Non-Profit Organization, Professional Services, Real Estate and Construction, Retail, Software and Internet, Telecommunications, Transportation and Logistics, Travel, Wholesale and Distribution, Other
+    #             industry: "LeadIndustry",
     #             company_name: "CompanyName", # required
-    #             website_url: "CompanyWebsiteUrl",
-    #             country_code: "US", # required, accepts US, AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CK, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             website_url: "LeadWebsiteUrl",
+    #             country_code: "LeadCountryCode",
     #             aws_maturity: "AwsMaturity",
-    #             market_segment: "Enterprise", # accepts Enterprise, Large, Medium, Small, Micro
+    #             market_segment: "LeadMarketSegment",
     #           },
     #           interaction: { # required
-    #             source_type: "LeadSourceType", # required
-    #             source_id: "LeadSourceId", # required
-    #             source_name: "LeadSourceName", # required
+    #             source_type: "LeadSourceType",
+    #             source_id: "LeadSourceId",
+    #             source_name: "LeadSourceName",
     #             usecase: "EngagementUseCase",
     #             contact_business_title: "JobTitle", # required
     #           },
@@ -1815,15 +1815,15 @@ module Aws::PartnerCentralSelling
     #   resp.contexts[0].payload.customer_project.project.target_completion_date #=> String
     #   resp.contexts[0].payload.lead.insights.lead_readiness_score #=> String
     #   resp.contexts[0].payload.lead.qualification_status #=> String
-    #   resp.contexts[0].payload.lead.customer.industry #=> String, one of "Aerospace", "Agriculture", "Automotive", "Computers and Electronics", "Consumer Goods", "Education", "Energy - Oil and Gas", "Energy - Power and Utilities", "Financial Services", "Gaming", "Government", "Healthcare", "Hospitality", "Life Sciences", "Manufacturing", "Marketing and Advertising", "Media and Entertainment", "Mining", "Non-Profit Organization", "Professional Services", "Real Estate and Construction", "Retail", "Software and Internet", "Telecommunications", "Transportation and Logistics", "Travel", "Wholesale and Distribution", "Other"
+    #   resp.contexts[0].payload.lead.customer.industry #=> String
     #   resp.contexts[0].payload.lead.customer.company_name #=> String
     #   resp.contexts[0].payload.lead.customer.website_url #=> String
     #   resp.contexts[0].payload.lead.customer.address.city #=> String
     #   resp.contexts[0].payload.lead.customer.address.postal_code #=> String
     #   resp.contexts[0].payload.lead.customer.address.state_or_region #=> String
-    #   resp.contexts[0].payload.lead.customer.address.country_code #=> String, one of "US", "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.contexts[0].payload.lead.customer.address.country_code #=> String
     #   resp.contexts[0].payload.lead.customer.aws_maturity #=> String
-    #   resp.contexts[0].payload.lead.customer.market_segment #=> String, one of "Enterprise", "Large", "Medium", "Small", "Micro"
+    #   resp.contexts[0].payload.lead.customer.market_segment #=> String
     #   resp.contexts[0].payload.lead.interactions #=> Array
     #   resp.contexts[0].payload.lead.interactions[0].source_type #=> String
     #   resp.contexts[0].payload.lead.interactions[0].source_id #=> String
@@ -1837,11 +1837,6 @@ module Aws::PartnerCentralSelling
     #   resp.contexts[0].payload.lead.interactions[0].contact.first_name #=> String
     #   resp.contexts[0].payload.lead.interactions[0].contact.last_name #=> String
     #   resp.contexts[0].payload.lead.interactions[0].contact.phone #=> String
-    #   resp.contexts[0].payload.prospecting_result.aws.start_time #=> Time
-    #   resp.contexts[0].payload.prospecting_result.aws.end_time #=> Time
-    #   resp.contexts[0].payload.prospecting_result.aws.task_id #=> String
-    #   resp.contexts[0].payload.prospecting_result.aws.task_arn #=> String
-    #   resp.contexts[0].payload.prospecting_result.aws.task_name #=> String
     #   resp.contexts[0].payload.prospecting_result.aws.customer.account_name #=> String
     #   resp.contexts[0].payload.prospecting_result.aws.customer.geo #=> String
     #   resp.contexts[0].payload.prospecting_result.aws.customer.region #=> String
@@ -1858,6 +1853,11 @@ module Aws::PartnerCentralSelling
     #   resp.contexts[0].payload.prospecting_result.aws.insights.solution_score #=> String
     #   resp.contexts[0].payload.prospecting_result.aws.insights.solution_category #=> String
     #   resp.contexts[0].payload.prospecting_result.aws.insights.solution_sub_category #=> String
+    #   resp.contexts[0].payload.prospecting_result.aws.start_time #=> Time
+    #   resp.contexts[0].payload.prospecting_result.aws.end_time #=> Time
+    #   resp.contexts[0].payload.prospecting_result.aws.task_id #=> String
+    #   resp.contexts[0].payload.prospecting_result.aws.task_arn #=> String
+    #   resp.contexts[0].payload.prospecting_result.aws.task_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/GetEngagement AWS API Documentation
     #
@@ -1902,6 +1902,7 @@ module Aws::PartnerCentralSelling
     #   * {Types::GetEngagementInvitationResponse#invitation_message #invitation_message} => String
     #   * {Types::GetEngagementInvitationResponse#engagement_description #engagement_description} => String
     #   * {Types::GetEngagementInvitationResponse#existing_members #existing_members} => Array&lt;Types::EngagementMemberSummary&gt;
+    #   * {Types::GetEngagementInvitationResponse#enrichment_context #enrichment_context} => Types::EnrichmentContext
     #
     # @example Request syntax with placeholder values
     #
@@ -1947,12 +1948,12 @@ module Aws::PartnerCentralSelling
     #   resp.payload.opportunity_invitation.project.expected_customer_spend[0].frequency #=> String, one of "Monthly"
     #   resp.payload.opportunity_invitation.project.expected_customer_spend[0].target_company #=> String
     #   resp.payload.opportunity_invitation.project.expected_customer_spend[0].estimation_url #=> String
-    #   resp.payload.lead_invitation.customer.industry #=> String, one of "Aerospace", "Agriculture", "Automotive", "Computers and Electronics", "Consumer Goods", "Education", "Energy - Oil and Gas", "Energy - Power and Utilities", "Financial Services", "Gaming", "Government", "Healthcare", "Hospitality", "Life Sciences", "Manufacturing", "Marketing and Advertising", "Media and Entertainment", "Mining", "Non-Profit Organization", "Professional Services", "Real Estate and Construction", "Retail", "Software and Internet", "Telecommunications", "Transportation and Logistics", "Travel", "Wholesale and Distribution", "Other"
+    #   resp.payload.lead_invitation.customer.industry #=> String
     #   resp.payload.lead_invitation.customer.company_name #=> String
     #   resp.payload.lead_invitation.customer.website_url #=> String
-    #   resp.payload.lead_invitation.customer.country_code #=> String, one of "US", "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.payload.lead_invitation.customer.country_code #=> String
     #   resp.payload.lead_invitation.customer.aws_maturity #=> String
-    #   resp.payload.lead_invitation.customer.market_segment #=> String, one of "Enterprise", "Large", "Medium", "Small", "Micro"
+    #   resp.payload.lead_invitation.customer.market_segment #=> String
     #   resp.payload.lead_invitation.interaction.source_type #=> String
     #   resp.payload.lead_invitation.interaction.source_id #=> String
     #   resp.payload.lead_invitation.interaction.source_name #=> String
@@ -1963,6 +1964,23 @@ module Aws::PartnerCentralSelling
     #   resp.existing_members #=> Array
     #   resp.existing_members[0].company_name #=> String
     #   resp.existing_members[0].website_url #=> String
+    #   resp.enrichment_context.prospecting_result_aws.customer.account_name #=> String
+    #   resp.enrichment_context.prospecting_result_aws.customer.geo #=> String
+    #   resp.enrichment_context.prospecting_result_aws.customer.region #=> String
+    #   resp.enrichment_context.prospecting_result_aws.customer.sub_region #=> String
+    #   resp.enrichment_context.prospecting_result_aws.customer.country #=> String, one of "US", "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.enrichment_context.prospecting_result_aws.customer.industry #=> String, one of "Aerospace", "Agriculture", "Automotive", "Computers and Electronics", "Consumer Goods", "Education", "Energy - Oil and Gas", "Energy - Power and Utilities", "Financial Services", "Gaming", "Government", "Healthcare", "Hospitality", "Life Sciences", "Manufacturing", "Marketing and Advertising", "Media and Entertainment", "Mining", "Non-Profit Organization", "Professional Services", "Real Estate and Construction", "Retail", "Software and Internet", "Telecommunications", "Transportation and Logistics", "Travel", "Wholesale and Distribution", "Other"
+    #   resp.enrichment_context.prospecting_result_aws.customer.sub_industry #=> String
+    #   resp.enrichment_context.prospecting_result_aws.customer.segment #=> String
+    #   resp.enrichment_context.prospecting_result_aws.customer.company_size #=> String
+    #   resp.enrichment_context.prospecting_result_aws.customer.eligible_programs #=> Array
+    #   resp.enrichment_context.prospecting_result_aws.customer.eligible_programs[0] #=> String
+    #   resp.enrichment_context.prospecting_result_aws.customer.public_profile_summary #=> String
+    #   resp.enrichment_context.prospecting_result_aws.insights.marketplace_engagement_score #=> String
+    #   resp.enrichment_context.prospecting_result_aws.insights.solution_score #=> String
+    #   resp.enrichment_context.prospecting_result_aws.insights.solution_category #=> String
+    #   resp.enrichment_context.prospecting_result_aws.insights.solution_sub_category #=> String
+    #   resp.enrichment_context.lead_insights.lead_readiness_score #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/GetEngagementInvitation AWS API Documentation
     #
@@ -4244,32 +4262,32 @@ module Aws::PartnerCentralSelling
     #       lead: {
     #         qualification_status: "LeadQualificationStatus",
     #         customer: { # required
-    #           industry: "Aerospace", # accepts Aerospace, Agriculture, Automotive, Computers and Electronics, Consumer Goods, Education, Energy - Oil and Gas, Energy - Power and Utilities, Financial Services, Gaming, Government, Healthcare, Hospitality, Life Sciences, Manufacturing, Marketing and Advertising, Media and Entertainment, Mining, Non-Profit Organization, Professional Services, Real Estate and Construction, Retail, Software and Internet, Telecommunications, Transportation and Logistics, Travel, Wholesale and Distribution, Other
+    #           industry: "LeadIndustry",
     #           company_name: "CompanyName", # required
-    #           website_url: "CompanyWebsiteUrl",
-    #           address: { # required
-    #             city: "AddressSummaryCityString",
-    #             postal_code: "AddressSummaryPostalCodeString",
-    #             state_or_region: "AddressPart",
-    #             country_code: "US", # accepts US, AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CK, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #           website_url: "LeadWebsiteUrl",
+    #           address: {
+    #             city: "LeadAddressCityString",
+    #             postal_code: "LeadAddressPostalCodeString",
+    #             state_or_region: "LeadAddressStateOrRegionString",
+    #             country_code: "LeadCountryCode",
     #           },
     #           aws_maturity: "AwsMaturity",
-    #           market_segment: "Enterprise", # accepts Enterprise, Large, Medium, Small, Micro
+    #           market_segment: "LeadMarketSegment",
     #         },
     #         interaction: {
-    #           source_type: "LeadSourceType", # required
-    #           source_id: "LeadSourceId", # required
-    #           source_name: "LeadSourceName", # required
+    #           source_type: "LeadSourceType",
+    #           source_id: "LeadSourceId",
+    #           source_name: "LeadSourceName",
     #           usecase: "EngagementUseCase",
     #           interaction_date: Time.now,
-    #           customer_action: "CustomerAction", # required
-    #           business_problem: "EngagementCustomerBusinessProblem",
+    #           customer_action: "CustomerAction",
+    #           business_problem: "LeadBusinessProblem",
     #           contact: { # required
-    #             business_title: "JobTitle", # required
-    #             email: "Email", # required
+    #             business_title: "LeadJobTitle", # required
+    #             email: "LeadEmail", # required
     #             first_name: "Name", # required
     #             last_name: "Name", # required
-    #             phone: "PhoneNumber",
+    #             phone: "LeadPhoneNumber",
     #           },
     #         },
     #         insights: {
@@ -4291,11 +4309,6 @@ module Aws::PartnerCentralSelling
     #       },
     #       prospecting_result: {
     #         aws: {
-    #           start_time: Time.now,
-    #           end_time: Time.now,
-    #           task_id: "ProspectingTaskIdentifier",
-    #           task_arn: "TaskArn",
-    #           task_name: "TaskName",
     #           customer: {
     #             account_name: "ProspectingAccountName",
     #             geo: "ProspectingGeo",
@@ -4315,6 +4328,11 @@ module Aws::PartnerCentralSelling
     #             solution_category: "String",
     #             solution_sub_category: "String",
     #           },
+    #           start_time: Time.now,
+    #           end_time: Time.now,
+    #           task_id: "ProspectingTaskIdentifier",
+    #           task_arn: "TaskArn",
+    #           task_name: "TaskName",
     #         },
     #       },
     #     },
@@ -4580,7 +4598,7 @@ module Aws::PartnerCentralSelling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralselling'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

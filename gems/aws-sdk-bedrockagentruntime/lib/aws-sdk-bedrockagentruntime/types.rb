@@ -384,6 +384,11 @@ module Aws::BedrockAgentRuntime
     #   Details of a full document expansion action.
     #   @return [Types::AgenticRetrieveFullDocExpansionDetails]
     #
+    # @!attribute [rw] memory_retrieve
+    #   The details of a long-term memory retrieval that the agent chose to
+    #   perform.
+    #   @return [Types::AgenticRetrieveMemoryRetrieveDetails]
+    #
     # @!attribute [rw] retrieve
     #   Details of the retrieve action.
     #   @return [Types::AgenticRetrieveActionDetails]
@@ -392,6 +397,7 @@ module Aws::BedrockAgentRuntime
     #
     class AgenticRetrieveAction < Struct.new(
       :full_document_expansion,
+      :memory_retrieve,
       :retrieve)
       SENSITIVE = []
       include Aws::Structure
@@ -625,6 +631,270 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Specifies an AgentCore Memory resource and how this retrieval uses it.
+    # Set sessionBinding to restore and continue a session. Set
+    # retrievalConfigs to let the agent retrieve from long-term memory. You
+    # must specify at least one of the two.
+    #
+    # @!attribute [rw] memory_id
+    #   The identifier of the AgentCore Memory resource to use. The resource
+    #   must exist in your account and be in the ACTIVE state.
+    #   @return [String]
+    #
+    # @!attribute [rw] persistence_mode
+    #   Specifies whether the agent-generated answer is written back to the
+    #   given short-term memory session, and applies only when
+    #   sessionBinding is set. Valid values:
+    #
+    #   * `DEFAULT` (default) – Specifies that the question and the
+    #     agent-generated answer are persisted to the session as a single
+    #     event. This value requires generateResponse to be true.
+    #
+    #   * `NONE` – Specifies that the session is left unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval_configs
+    #   Specifies the long-term memory configuration the agent can retrieve
+    #   from. The agent decides whether to retrieve and composes its own
+    #   query. This field currently accepts at most one entry.
+    #   @return [Array<Types::AgenticRetrieveMemoryRetrievalConfig>]
+    #
+    # @!attribute [rw] session_binding
+    #   The short-term memory session whose history is restored for this
+    #   retrieval. To persist the agent-generated answer to the session,
+    #   omit persistenceMode or set it to DEFAULT. To leave the session
+    #   unchanged, set persistenceMode to NONE. Supply session history
+    #   through the existing messages parameter or through short-term
+    #   memory, but not both.
+    #   @return [Types::AgenticRetrieveMemorySessionBinding]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveMemoryConfiguration AWS API Documentation
+    #
+    class AgenticRetrieveMemoryConfiguration < Struct.new(
+      :memory_id,
+      :persistence_mode,
+      :retrieval_configs,
+      :session_binding)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A metadata filter expression, in the form accepted by the AgentCore
+    # Memory RetrieveMemoryRecords operation. The expression has a left
+    # operand that names the metadata key, an operator, and a right operand.
+    # For the EXISTS and NOT\_EXISTS operators, omit the right operand.
+    #
+    # @!attribute [rw] left
+    #   The metadata key that the expression evaluates.
+    #   @return [Types::AgenticRetrieveMemoryMetadataFilterLeft]
+    #
+    # @!attribute [rw] operator
+    #   The relationship that the metadata key and value must have for a
+    #   memory record to match.
+    #   @return [String]
+    #
+    # @!attribute [rw] right
+    #   The value that the expression compares the metadata key against.
+    #   Supply this value for every operator except EXISTS and NOT\_EXISTS.
+    #   @return [Types::AgenticRetrieveMemoryMetadataFilterRight]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveMemoryMetadataFilter AWS API Documentation
+    #
+    class AgenticRetrieveMemoryMetadataFilter < Struct.new(
+      :left,
+      :operator,
+      :right)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The left operand of a metadata filter expression. Set exactly one
+    # member.
+    #
+    # @note AgenticRetrieveMemoryMetadataFilterLeft is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] metadata_key
+    #   The metadata key to filter on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveMemoryMetadataFilterLeft AWS API Documentation
+    #
+    class AgenticRetrieveMemoryMetadataFilterLeft < Struct.new(
+      :metadata_key,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MetadataKey < AgenticRetrieveMemoryMetadataFilterLeft; end
+      class Unknown < AgenticRetrieveMemoryMetadataFilterLeft; end
+    end
+
+    # The right operand of a metadata filter expression. Set exactly one
+    # member.
+    #
+    # @note AgenticRetrieveMemoryMetadataFilterRight is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] metadata_value
+    #   The value to compare the metadata key against.
+    #   @return [Types::AgenticRetrieveMemoryMetadataValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveMemoryMetadataFilterRight AWS API Documentation
+    #
+    class AgenticRetrieveMemoryMetadataFilterRight < Struct.new(
+      :metadata_value,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MetadataValue < AgenticRetrieveMemoryMetadataFilterRight; end
+      class Unknown < AgenticRetrieveMemoryMetadataFilterRight; end
+    end
+
+    # A metadata value that a filter expression compares against. Set
+    # exactly one member.
+    #
+    # @note AgenticRetrieveMemoryMetadataValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] date_time_value
+    #   A timestamp value in ISO 8601 UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] number_value
+    #   A numeric value.
+    #   @return [Float]
+    #
+    # @!attribute [rw] string_list_value
+    #   A list of string values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] string_value
+    #   A string value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveMemoryMetadataValue AWS API Documentation
+    #
+    class AgenticRetrieveMemoryMetadataValue < Struct.new(
+      :date_time_value,
+      :number_value,
+      :string_list_value,
+      :string_value,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DateTimeValue < AgenticRetrieveMemoryMetadataValue; end
+      class NumberValue < AgenticRetrieveMemoryMetadataValue; end
+      class StringListValue < AgenticRetrieveMemoryMetadataValue; end
+      class StringValue < AgenticRetrieveMemoryMetadataValue; end
+      class Unknown < AgenticRetrieveMemoryMetadataValue; end
+    end
+
+    # The long-term memory namespace that the agent might retrieve memory
+    # records from, and the filters applied to that retrieval. You must
+    # specify either namespace or namespacePath.
+    #
+    # @!attribute [rw] metadata_filters
+    #   The metadata filter expressions that restrict retrieval to matching
+    #   memory records. You can specify a maximum of 5 expressions.
+    #   @return [Array<Types::AgenticRetrieveMemoryMetadataFilter>]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace prefix to filter memory records by. The agent
+    #   retrieves memory records in namespaces that start with the provided
+    #   prefix. You must specify either namespace or namespacePath.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_path
+    #   The parent namespace to use for hierarchical retrievals. The agent
+    #   retrieves all memory records whose namespace falls under the same
+    #   parent hierarchy. You must specify either namespace or
+    #   namespacePath.
+    #   @return [String]
+    #
+    # @!attribute [rw] strategy_id
+    #   The extraction strategy ID that restricts retrieval to memory
+    #   records produced by a single strategy. Omit this parameter to
+    #   retrieve records from every strategy on the memory resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveMemoryRetrievalConfig AWS API Documentation
+    #
+    class AgenticRetrieveMemoryRetrievalConfig < Struct.new(
+      :metadata_filters,
+      :namespace,
+      :namespace_path,
+      :strategy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A long-term memory retrieval that the agent chose to perform. The
+    # record reports the query and the namespace. The corresponding
+    # Retrieval step reports the results.
+    #
+    # @!attribute [rw] input_query
+    #   The query that the agent composed.
+    #   @return [Types::AgenticRetrieveMessageContent]
+    #
+    # @!attribute [rw] memory_id
+    #   The identifier of the AgentCore Memory resource retrieved from.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace prefix retrieved from, as supplied in the request.
+    #   This field is present when the request specified namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_path
+    #   The parent namespace retrieved from hierarchically, as supplied in
+    #   the request. This field is present when the request specified
+    #   namespacePath.
+    #   @return [String]
+    #
+    # @!attribute [rw] strategy_id
+    #   The extraction strategy that restricted retrieval, if the request
+    #   specified one.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveMemoryRetrieveDetails AWS API Documentation
+    #
+    class AgenticRetrieveMemoryRetrieveDetails < Struct.new(
+      :input_query,
+      :memory_id,
+      :namespace,
+      :namespace_path,
+      :strategy_id)
+      SENSITIVE = [:input_query]
+      include Aws::Structure
+    end
+
+    # The short-term memory session that this retrieval reads from and
+    # writes to.
+    #
+    # @!attribute [rw] actor_id
+    #   The identifier of the end user or agent that the session belongs to.
+    #   This identifier scopes session history so that one actor's history
+    #   is never returned for another. You are responsible for sending the
+    #   correct actor value.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of the session to restore and continue. You are
+    #   responsible for sending the correct session value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveMemorySessionBinding AWS API Documentation
+    #
+    class AgenticRetrieveMemorySessionBinding < Struct.new(
+      :actor_id,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A message in the agentic retrieval conversation.
     #
     # @!attribute [rw] content
@@ -798,6 +1068,11 @@ module Aws::BedrockAgentRuntime
     #   Whether to generate a response based on the retrieved results.
     #   @return [Boolean]
     #
+    # @!attribute [rw] memory_configuration
+    #   The configuration for using an Amazon Bedrock AgentCore Memory
+    #   resource with this retrieval.
+    #   @return [Types::AgenticRetrieveMemoryConfiguration]
+    #
     # @!attribute [rw] messages
     #   The list of messages for the agentic retrieval conversation.
     #   @return [Array<Types::AgenticRetrieveMessage>]
@@ -825,6 +1100,7 @@ module Aws::BedrockAgentRuntime
     class AgenticRetrieveStreamRequest < Struct.new(
       :agentic_retrieve_configuration,
       :generate_response,
+      :memory_configuration,
       :messages,
       :next_token,
       :policy_configuration,
@@ -1469,6 +1745,50 @@ module Aws::BedrockAgentRuntime
       class Unknown < Caller; end
     end
 
+    # @!attribute [rw] data_source_id
+    #   The unique identifier of the data source that contains the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The unique identifier of the document to check access for.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base that contains the
+    #   document.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_context
+    #   The context object containing identity information for access
+    #   control filtering, including user ID and optional group memberships
+    #   used to evaluate the document access control list (ACL).
+    #   @return [Types::UserContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CheckIngestedDocumentAclRequest AWS API Documentation
+    #
+    class CheckIngestedDocumentAclRequest < Struct.new(
+      :data_source_id,
+      :document_id,
+      :knowledge_base_id,
+      :user_context)
+      SENSITIVE = [:user_context]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] has_access
+    #   Specifies whether the user has access to the document based on the
+    #   ingested access control list (ACL). Returns `true` if the user is
+    #   allowed access, and `false` otherwise.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CheckIngestedDocumentAclResponse AWS API Documentation
+    #
+    class CheckIngestedDocumentAclResponse < Struct.new(
+      :has_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object containing a segment of the generated response that is based
     # on a source in the knowledge base, alongside information about the
     # source.
@@ -2033,6 +2353,114 @@ module Aws::BedrockAgentRuntime
       :message,
       :resource_name,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The access control list for a document, containing allow and deny
+    # membership lists. Each list specifies conditions that determine which
+    # users and groups are granted or denied access.
+    #
+    # @!attribute [rw] allow_list
+    #   The list of principals allowed access to the document.
+    #   @return [Types::DocumentAclMembership]
+    #
+    # @!attribute [rw] deny_list
+    #   The list of principals denied access to the document.
+    #   @return [Types::DocumentAclMembership]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/DocumentAcl AWS API Documentation
+    #
+    class DocumentAcl < Struct.new(
+      :allow_list,
+      :deny_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A condition within a document access control list (ACL) membership,
+    # specifying users and groups that are evaluated together.
+    #
+    # @!attribute [rw] condition_operator
+    #   The logical operator for combining users and groups within this
+    #   condition. Valid values: `AND` – Both a user match and a group match
+    #   are required. `OR` – Either a user match or a group match is
+    #   sufficient.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   The list of group entries in this condition.
+    #   @return [Array<Types::DocumentAclGroup>]
+    #
+    # @!attribute [rw] users
+    #   The list of user entries in this condition.
+    #   @return [Array<Types::DocumentAclUser>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/DocumentAclCondition AWS API Documentation
+    #
+    class DocumentAclCondition < Struct.new(
+      :condition_operator,
+      :groups,
+      :users)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A group entry within a document access control list (ACL) condition.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The membership type indicating the scope of the group entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/DocumentAclGroup AWS API Documentation
+    #
+    class DocumentAclGroup < Struct.new(
+      :id,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The membership entry for a document access control list (ACL),
+    # containing conditions and their logical relation.
+    #
+    # @!attribute [rw] conditions
+    #   The list of conditions that determine membership.
+    #   @return [Array<Types::DocumentAclCondition>]
+    #
+    # @!attribute [rw] member_relation
+    #   The logical relation between conditions. Valid values: `AND` – All
+    #   conditions must match. `OR` – At least one condition must match.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/DocumentAclMembership AWS API Documentation
+    #
+    class DocumentAclMembership < Struct.new(
+      :conditions,
+      :member_relation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A user entry within a document access control list (ACL) condition.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The membership type indicating the scope of the user entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/DocumentAclUser AWS API Documentation
+    #
+    class DocumentAclUser < Struct.new(
+      :id,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3710,10 +4138,9 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] user_context
-    #   Contains information about the user making the request. Use this to
-    #   pass user identity information for access control filtering, so that
-    #   retrieval results only include documents the user is authorized to
-    #   access.
+    #   Contains information about the user making the request. This is used
+    #   for access control filtering to ensure that results only include
+    #   documents the user is authorized to access.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetDocumentContentRequest AWS API Documentation
@@ -3897,6 +4324,43 @@ module Aws::BedrockAgentRuntime
       :started_at,
       :status)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_source_id
+    #   The unique identifier of the data source that contains the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The unique identifier of the document to retrieve the ingested
+    #   access control list (ACL) for.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base that contains the
+    #   document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetIngestedDocumentAclRequest AWS API Documentation
+    #
+    class GetIngestedDocumentAclRequest < Struct.new(
+      :data_source_id,
+      :document_id,
+      :knowledge_base_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_acl
+    #   The ingested document access control list (ACL) containing allow and
+    #   deny membership information.
+    #   @return [Types::DocumentAcl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetIngestedDocumentAclResponse AWS API Documentation
+    #
+    class GetIngestedDocumentAclResponse < Struct.new(
+      :document_acl)
+      SENSITIVE = [:document_acl]
       include Aws::Structure
     end
 
@@ -6183,22 +6647,8 @@ module Aws::BedrockAgentRuntime
     # store configuration.
     #
     # @!attribute [rw] filter
-    #   Specifies the filters to use on the metadata attributes in the
-    #   knowledge base data sources before returning results. For more
-    #   information, see [Query configurations][1]. See the examples below
-    #   to see how to use these filters.
-    #
-    #   This data type is used in the following API operations:
-    #
-    #   * [Retrieve request][2] – in the `filter` field
-    #
-    #   * [RetrieveAndGenerate request][3] – in the `filter` field
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
-    #   [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
-    #   [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+    #   Filters the metadata of the retrieved results so that Amazon Bedrock
+    #   returns only results that match the filter.
     #   @return [Types::RetrievalFilter]
     #
     # @!attribute [rw] number_of_results
@@ -8846,10 +9296,9 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] user_context
-    #   Contains information about the user making the request. Use this to
-    #   pass user identity information for access control filtering, so that
-    #   retrieval results only include documents the user is authorized to
-    #   access.
+    #   Contains information about the user making the request. This is used
+    #   for access control filtering to ensure that retrieval results only
+    #   include documents the user is authorized to access.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveAndGenerateRequest AWS API Documentation
@@ -8950,10 +9399,9 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] user_context
-    #   Contains information about the user making the request. Use this to
-    #   pass user identity information for access control filtering, so that
-    #   retrieval results only include documents the user is authorized to
-    #   access.
+    #   Contains information about the user making the request. This is used
+    #   for access control filtering to ensure that retrieval results only
+    #   include documents the user is authorized to access.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveAndGenerateStreamRequest AWS API Documentation
@@ -9013,10 +9461,9 @@ module Aws::BedrockAgentRuntime
     #   @return [Types::KnowledgeBaseQuery]
     #
     # @!attribute [rw] user_context
-    #   Contains information about the user making the request. Use this to
-    #   pass user identity information for access control filtering, so that
-    #   retrieval results only include documents the user is authorized to
-    #   access.
+    #   Contains information about the user making the request. This is used
+    #   for access control filtering to ensure that retrieval results only
+    #   include documents the user is authorized to access.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveRequest AWS API Documentation

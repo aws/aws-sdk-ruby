@@ -28,7 +28,9 @@ module Aws::SecurityAgent
       attr_accessor uris: ::Array[::String]
       attr_accessor authentication: Types::Authentication
       attr_accessor description: ::String
-      SENSITIVE: []
+      attr_accessor enable_email_mfa: bool
+      attr_accessor mfa_forwarding_address: ::String
+      SENSITIVE: [:mfa_forwarding_address]
     end
 
     class AddArtifactInput
@@ -460,6 +462,7 @@ module Aws::SecurityAgent
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
+      attr_accessor max_task_hours: ::Float
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -480,6 +483,7 @@ module Aws::SecurityAgent
       attr_accessor error_information: Types::ErrorInformation
       attr_accessor integrated_repositories: ::Array[Types::IntegratedRepository]
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
+      attr_accessor max_task_hours: ::Float
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -623,6 +627,7 @@ module Aws::SecurityAgent
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
+      attr_accessor max_task_hours: ::Float
       SENSITIVE: []
     end
 
@@ -637,6 +642,7 @@ module Aws::SecurityAgent
       attr_accessor agent_space_id: ::String
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
+      attr_accessor max_task_hours: ::Float
       SENSITIVE: []
     end
 
@@ -678,6 +684,7 @@ module Aws::SecurityAgent
       attr_accessor network_traffic_config: Types::NetworkTrafficConfig
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
+      attr_accessor max_task_hours: ::Float
       SENSITIVE: []
     end
 
@@ -1033,6 +1040,8 @@ module Aws::SecurityAgent
       attr_accessor code_locations: ::Array[Types::CodeLocation]
       attr_accessor verification_script: Types::VerificationScript
       attr_accessor alignment_rationale: ::String
+      attr_accessor revalidation_job_ids: ::Array[::String]
+      attr_accessor original_finding_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1234,6 +1243,7 @@ module Aws::SecurityAgent
     class IntegratedRepository
       attr_accessor integration_id: ::String
       attr_accessor provider_resource_id: ::String
+      attr_accessor branch: ::String
       SENSITIVE: []
     end
 
@@ -1710,6 +1720,7 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
+      attr_accessor max_task_hours: ::Float
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1739,6 +1750,9 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
+      attr_accessor max_task_hours: ::Float
+      attr_accessor job_type: ("FULL" | "REVALIDATION")
+      attr_accessor selected_finding_ids: ::Array[::String]
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1934,6 +1948,8 @@ module Aws::SecurityAgent
     class StartPentestJobInput
       attr_accessor agent_space_id: ::String
       attr_accessor pentest_id: ::String
+      attr_accessor job_type: ("FULL" | "REVALIDATION")
+      attr_accessor selected_finding_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -2250,6 +2266,7 @@ module Aws::SecurityAgent
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
+      attr_accessor max_task_hours: ::Float
       SENSITIVE: []
     end
 
@@ -2264,6 +2281,7 @@ module Aws::SecurityAgent
       attr_accessor agent_space_id: ::String
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
+      attr_accessor max_task_hours: ::Float
       SENSITIVE: []
     end
 
@@ -2307,6 +2325,7 @@ module Aws::SecurityAgent
       attr_accessor network_traffic_config: Types::NetworkTrafficConfig
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
+      attr_accessor max_task_hours: ::Float
       SENSITIVE: []
     end
 

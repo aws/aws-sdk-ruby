@@ -493,8 +493,18 @@ module Aws::CloudWatch
     #
     # You can call `AssociateDatasetKmsKey` on a dataset that is already
     # associated with a KMS key to replace the existing key with a different
-    # one. To replace a key, the caller must have `kms:Decrypt` permission
-    # on both the current key and the new key.
+    # one. The caller must have `kms:Decrypt` permission on both the current
+    # key and the new key.
+    #
+    # <note markdown="1"> If the currently associated key has been deleted, is scheduled for
+    # deletion, is pending import, is unavailable, or has been disabled,
+    # Amazon CloudWatch does not require `kms:Decrypt` permission on the
+    # current key and the rotation proceeds. If the key was only disabled,
+    # consider re-enabling it instead of rotating, because re-enabling
+    # allows Amazon CloudWatch to resume decrypting your existing metric
+    # data encrypted with that key.
+    #
+    #  </note>
     #
     # The KMS key that you specify must meet all of the following
     # requirements:
@@ -526,15 +536,14 @@ module Aws::CloudWatch
     # `kms:GenerateDataKey`, `kms:Encrypt`, `kms:Decrypt`, and
     # `kms:ReEncrypt*`. After those succeed, a `kms:Decrypt` dry-run is run
     # with the caller's credentials to verify that the calling principal
-    # can use the key. When you are replacing an existing key, the caller's
-    # `kms:Decrypt` dry-run is run on the current key first, and only then
-    # on the new key.
+    # can use the new key. When you are replacing an existing key, the
+    # caller's `kms:Decrypt` dry-run is also run on the current key.
     #
-    # If any of these checks fails, the operation fails and the existing key
-    # association (if any) remains unchanged. Common failure causes include
-    # the key being disabled, the key policy not granting the required
-    # permissions to Amazon CloudWatch, or the caller lacking `kms:Decrypt`
-    # permission on the key.
+    # If any of these checks on the new key fails, the operation fails and
+    # the existing key association (if any) remains unchanged. Common
+    # failure causes include the new key being disabled, the key policy not
+    # granting the required permissions to Amazon CloudWatch, or the caller
+    # lacking `kms:Decrypt` permission on the new key.
     #
     # For more information about using customer managed keys with Amazon
     # CloudWatch, see [Encryption at rest with customer managed keys][1] in
@@ -1219,6 +1228,8 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"
     #   resp.metric_alarms[0].state_transitioned_timestamp #=> Time
     #   resp.metric_alarms[0].evaluation_window.wall_clock_window.timezone #=> String
+    #   resp.metric_alarms[0].warm_up_configuration.warm_up_period_duration_in_minutes #=> Integer
+    #   resp.metric_alarms[0].warm_up_configuration.only_start_evaluating_after_warm_up_period_ends #=> Boolean
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.query #=> String
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.pending_period #=> Integer
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.recovery_period #=> Integer
@@ -1260,6 +1271,8 @@ module Aws::CloudWatch
     #   resp.log_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"
     #   resp.log_alarms[0].action_log_line_count #=> Integer
     #   resp.log_alarms[0].action_log_line_role_arn #=> String
+    #   resp.log_alarms[0].warm_up_configuration.warm_up_period_duration_in_minutes #=> Integer
+    #   resp.log_alarms[0].warm_up_configuration.only_start_evaluating_after_warm_up_period_ends #=> Boolean
     #   resp.next_token #=> String
     #
     #
@@ -1384,6 +1397,8 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"
     #   resp.metric_alarms[0].state_transitioned_timestamp #=> Time
     #   resp.metric_alarms[0].evaluation_window.wall_clock_window.timezone #=> String
+    #   resp.metric_alarms[0].warm_up_configuration.warm_up_period_duration_in_minutes #=> Integer
+    #   resp.metric_alarms[0].warm_up_configuration.only_start_evaluating_after_warm_up_period_ends #=> Boolean
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.query #=> String
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.pending_period #=> Integer
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.recovery_period #=> Integer
@@ -1641,19 +1656,27 @@ module Aws::CloudWatch
     # it. If the dataset has no associated KMS key, the operation fails with
     # `ResourceNotFoundException`.
     #
-    # Amazon CloudWatch performs a dry-run `kms:Decrypt` call on the key as
-    # part of this operation. This verifies that the caller is authorized to
-    # use the currently associated key. The caller must have `kms:Decrypt`
-    # permission on the currently associated key, and the key must be
-    # enabled and accessible. If the key has been disabled or scheduled for
-    # deletion, you must first re-enable or restore it before you can
-    # disassociate it from the dataset.
+    # Amazon CloudWatch performs a dry-run `kms:Decrypt` call on the
+    # currently associated key as part of this operation. The caller must
+    # have `kms:Decrypt` permission on the currently associated key. If the
+    # key is accessible but the caller lacks `kms:Decrypt` permission, the
+    # operation fails with `AccessDeniedException`.
+    #
+    # <note markdown="1"> If the currently associated key has been deleted, is scheduled for
+    # deletion, is pending import, is unavailable, or has been disabled,
+    # Amazon CloudWatch does not require `kms:Decrypt` permission on that
+    # key and the disassociation proceeds. If the key was only disabled,
+    # consider re-enabling it instead of disassociating, because re-enabling
+    # allows Amazon CloudWatch to resume decrypting your existing metric
+    # data.
+    #
+    #  </note>
     #
     # Disassociating a KMS key from a dataset does not immediately remove
     # the `kms:Decrypt` requirement on data plane operations. For up to
     # three hours after disassociation, callers must continue to have
     # `kms:Decrypt` permission on the previously associated key. Some data
-    # may still be encrypted with that key during this window. After this
+    # might still be encrypted with that key during this window. After this
     # enforcement window elapses, the `kms:Decrypt` requirement is lifted.
     #
     # For more information about using customer managed keys with Amazon
@@ -3948,6 +3971,19 @@ module Aws::CloudWatch
     #   A list of key-value pairs to associate with the alarm. You can use
     #   tags to categorize and manage your alarms.
     #
+    # @option params [Types::WarmUpConfiguration] :warm_up_configuration
+    #   The warm-up configuration for the alarm. A warm-up period delays alarm
+    #   evaluation after you create or update the alarm. The warm-up period
+    #   reduces alarm noise from missing data while a new resource or service
+    #   starts publishing data.
+    #
+    #   For more information, see [Alarm warm-up periods][1] in the *Amazon
+    #   CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3990,6 +4026,10 @@ module Aws::CloudWatch
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     warm_up_configuration: {
+    #       warm_up_period_duration_in_minutes: 1, # required
+    #       only_start_evaluating_after_warm_up_period_ends: false,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutLogAlarm AWS API Documentation
@@ -4564,6 +4604,19 @@ module Aws::CloudWatch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html
     #
+    # @option params [Types::WarmUpConfiguration] :warm_up_configuration
+    #   The warm-up configuration for the alarm. A warm-up period delays alarm
+    #   evaluation after you create or update the alarm. The warm-up period
+    #   reduces alarm noise from missing data while a new resource or service
+    #   starts publishing metrics.
+    #
+    #   For more information, see [Alarm warm-up periods][1] in the *Amazon
+    #   CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+    #
     # @option params [Types::EvaluationCriteria] :evaluation_criteria
     #   The evaluation criteria for the alarm. For each `PutMetricAlarm`
     #   operation, you must specify either `MetricName`, a `Metrics` array, or
@@ -4655,6 +4708,10 @@ module Aws::CloudWatch
     #       },
     #       sliding_window: {
     #       },
+    #     },
+    #     warm_up_configuration: {
+    #       warm_up_period_duration_in_minutes: 1, # required
+    #       only_start_evaluating_after_warm_up_period_ends: false,
     #     },
     #     evaluation_criteria: {
     #       prom_ql_criteria: {
@@ -5010,7 +5067,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
     #
     # @option params [Boolean] :include_linked_accounts_metrics
     #   If you are creating a metric stream in a monitoring account, specify
@@ -5370,7 +5427,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
