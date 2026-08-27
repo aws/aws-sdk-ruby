@@ -50,9 +50,11 @@ module Aws
           end
 
           def param_name(placeholder)
-            member_name = placeholder.gsub(/[{}+]/, '')
-            # TODO: optimize
-            param_name, = @ref.target.members.find { |_, shape| shape.location_name == member_name }
+            modeled_name = placeholder.gsub(/[{}+]/, '')
+            # URI labels are modeled names, not Ruby member accessor names.
+            param_name, = @ref.target.members.find do |_, member_ref|
+              member_ref.name == modeled_name
+            end
             param_name
           end
 

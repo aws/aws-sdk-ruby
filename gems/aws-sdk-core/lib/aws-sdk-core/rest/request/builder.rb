@@ -60,8 +60,8 @@ module Aws
           def default_content_type(context)
             protocol = context.config.protocol
             case protocol
-            when 'aws.protocols#restJson1' then 'application/json'
-            when 'aws.protocols#restXml' then 'application/xml'
+            when Aws::Core::RestJson then 'application/json'
+            when Aws::Core::RestXml then 'application/xml'
             else raise "Unsupported protocol: #{protocol}"
             end
           end

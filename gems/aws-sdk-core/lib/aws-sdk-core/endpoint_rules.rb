@@ -45,7 +45,7 @@ module Aws
         end
 
         # aws.isVirtualHostableS3Bucket(value: string, allowSubDomains: bool) bool
-        # rubocop:disable Naming/PredicatePrefix, Style/OptionalBooleanParameter
+        # rubocop:disable-next Naming/PredicatePrefix, Style/OptionalBooleanParameter
         def is_virtual_hostable_s3_bucket?(value, allow_sub_domains = false)
           return false if value.empty?
 
@@ -58,7 +58,6 @@ module Aws
           # must be between 3 and 63 characters long, no uppercase and not an IP address
           value.match?(VALID_S3_BUCKET) && !value.match?(IP_ADDRESS)
         end
-        # rubocop:enable Naming/PredicatePrefix, Style/OptionalBooleanParameter
       end
     end
   end

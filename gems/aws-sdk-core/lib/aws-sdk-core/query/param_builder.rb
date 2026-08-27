@@ -11,6 +11,7 @@ module Aws
 
         def initialize(options = {})
           @ec2 = options[:ec2] || false
+          @extension = Aws::Core::Query::Extension
         end
 
         def build(shape, params, result = nil)
@@ -41,7 +42,7 @@ module Aws
 
           member_shape = shape.target.member
           unless @ec2
-            if flat?(shape)
+            if @extension.flattened?(shape)
               if (name = query_name(shape))
                 parts = prefix.split('.')
                 parts.pop
@@ -49,7 +50,7 @@ module Aws
                 prefix = parts.join('.')
               end
             else
-              prefix += ".#{query_name(member_shape, 'member')}"
+              prefix += ".#{query_name(member_shape)}"
             end
           end
           values.each.with_index do |value, n|
@@ -62,9 +63,9 @@ module Aws
 
           key_member = shape.target.key
           value_member = shape.target.value
-          prefix += '.entry' unless flat?(shape)
-          key_name = "%s.%d.#{query_name(key_member, 'key')}"
-          value_name = "%s.%d.#{query_name(value_member, 'value')}"
+          prefix += '.entry' unless @extension.flattened?(shape)
+          key_name = "%s.%d.#{query_name(key_member)}"
+          value_name = "%s.%d.#{query_name(value_member)}"
           values.each.with_index do |(key, value), n|
             build_shape(key_member, key, result, format(key_name, prefix, n + 1))
             build_shape(value_member, value, result, format(value_name, prefix, n + 1))
@@ -76,7 +77,7 @@ module Aws
             next if value.nil?
 
             member_shape = shape.target.member(name)
-            build_shape(member_shape, value, result, prefix + query_name(member_shape, member_shape.location_name))
+            build_shape(member_shape, value, result, prefix + query_name(member_shape))
           end
         end
 
@@ -95,19 +96,8 @@ module Aws
           result.set(name, value)
         end
 
-        def query_name(shape, default = nil)
-          xml_name = shape.traits['smithy.api#xmlName'] || default
-          return xml_name unless @ec2
-
-          shape.traits['aws.protocols#ec2QueryName'] || ucfirst(xml_name)
-        end
-
-        def ucfirst(str)
-          str[0].upcase + str[1..]
-        end
-
-        def flat?(shape)
-          shape.traits.key?('smithy.api#xmlFlattened')
+        def query_name(shape)
+          @ec2 ? @extension.ec2_query_name(shape) : @extension.query_name(shape)
         end
       end
     end

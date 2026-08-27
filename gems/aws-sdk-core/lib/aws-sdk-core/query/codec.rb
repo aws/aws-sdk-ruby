@@ -9,14 +9,14 @@ module Aws
         # @param [Hash] options
         # @option options [Boolean] :ec2 whether to use EC2 specific query encoding
         def initialize(options = {})
-          @options = options
+          @builder = ParamBuilder.new(options)
         end
 
         # @param [Shape] shape
         # @param [Object] data
         # @return [String, nil]
         def build(shape, data, target = nil)
-          ParamBuilder.new(@options).build(shape, data, target)
+          @builder.build(shape, data, target)
         end
 
         def parse(*)
