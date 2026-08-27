@@ -56,92 +56,92 @@ module Aws::MarketplaceMetering
     VersionInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.marketplacemetering#VersionInteger", name: "VersionInteger", traits: {"smithy.api#range" => {"min" => 1}})
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacemetering#errorMessage", name: "ErrorMessage")
 
-    BatchMeterUsageRequest.add_member(:usage_records, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordList, location_name: "UsageRecords", traits: {"smithy.api#required" => {}}))
-    BatchMeterUsageRequest.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, location_name: "ProductCode", traits: {"smithy.api#required" => {}}))
+    BatchMeterUsageRequest.add_member(:usage_records, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordList, name: "UsageRecords", traits: {"smithy.api#required" => {}}))
+    BatchMeterUsageRequest.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, name: "ProductCode", traits: {"smithy.api#required" => {}}))
     BatchMeterUsageRequest.type = Types::BatchMeterUsageRequest
-    BatchMeterUsageResult.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordResultList, location_name: "Results"))
-    BatchMeterUsageResult.add_member(:unprocessed_records, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordList, location_name: "UnprocessedRecords"))
+    BatchMeterUsageResult.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordResultList, name: "Results"))
+    BatchMeterUsageResult.add_member(:unprocessed_records, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordList, name: "UnprocessedRecords"))
     BatchMeterUsageResult.type = Types::BatchMeterUsageResult
-    CustomerNotEntitledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    CustomerNotEntitledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     CustomerNotEntitledException.type = Types::CustomerNotEntitledException
-    DisabledApiException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    DisabledApiException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     DisabledApiException.type = Types::DisabledApiException
-    DuplicateRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    DuplicateRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     DuplicateRequestException.type = Types::DuplicateRequestException
-    ExpiredTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    ExpiredTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ExpiredTokenException.type = Types::ExpiredTokenException
-    InternalServiceErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InternalServiceErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InternalServiceErrorException.type = Types::InternalServiceErrorException
-    InvalidCustomerIdentifierException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidCustomerIdentifierException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidCustomerIdentifierException.type = Types::InvalidCustomerIdentifierException
-    InvalidEndpointRegionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidEndpointRegionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidEndpointRegionException.type = Types::InvalidEndpointRegionException
-    InvalidProductCodeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidProductCodeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidProductCodeException.type = Types::InvalidProductCodeException
-    InvalidPublicKeyVersionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidPublicKeyVersionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidPublicKeyVersionException.type = Types::InvalidPublicKeyVersionException
-    InvalidRegionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidRegionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidRegionException.type = Types::InvalidRegionException
-    InvalidTagException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidTagException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidTagException.type = Types::InvalidTagException
-    InvalidTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidTokenException.type = Types::InvalidTokenException
-    InvalidUsageAllocationsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidUsageAllocationsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidUsageAllocationsException.type = Types::InvalidUsageAllocationsException
-    InvalidUsageDimensionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidUsageDimensionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidUsageDimensionException.type = Types::InvalidUsageDimensionException
-    MeterUsageRequest.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, location_name: "ProductCode", traits: {"smithy.api#required" => {}}))
-    MeterUsageRequest.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Timestamp", traits: {"smithy.api#required" => {}}))
-    MeterUsageRequest.add_member(:usage_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageDimension, location_name: "UsageDimension", traits: {"smithy.api#required" => {}}))
-    MeterUsageRequest.add_member(:usage_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageQuantity, location_name: "UsageQuantity"))
-    MeterUsageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "DryRun"))
-    MeterUsageRequest.add_member(:usage_allocations, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAllocations, location_name: "UsageAllocations"))
+    MeterUsageRequest.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, name: "ProductCode", traits: {"smithy.api#required" => {}}))
+    MeterUsageRequest.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#required" => {}}))
+    MeterUsageRequest.add_member(:usage_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageDimension, name: "UsageDimension", traits: {"smithy.api#required" => {}}))
+    MeterUsageRequest.add_member(:usage_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageQuantity, name: "UsageQuantity"))
+    MeterUsageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DryRun"))
+    MeterUsageRequest.add_member(:usage_allocations, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAllocations, name: "UsageAllocations"))
     MeterUsageRequest.type = Types::MeterUsageRequest
-    MeterUsageResult.add_member(:metering_record_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MeteringRecordId"))
+    MeterUsageResult.add_member(:metering_record_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MeteringRecordId"))
     MeterUsageResult.type = Types::MeterUsageResult
-    PlatformNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    PlatformNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     PlatformNotSupportedException.type = Types::PlatformNotSupportedException
-    RegisterUsageRequest.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, location_name: "ProductCode", traits: {"smithy.api#required" => {}}))
-    RegisterUsageRequest.add_member(:public_key_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionInteger, location_name: "PublicKeyVersion", traits: {"smithy.api#required" => {}}))
-    RegisterUsageRequest.add_member(:nonce, ::Smithy::Schema::Shapes::MemberShape.new(target: Nonce, location_name: "Nonce"))
+    RegisterUsageRequest.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, name: "ProductCode", traits: {"smithy.api#required" => {}}))
+    RegisterUsageRequest.add_member(:public_key_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionInteger, name: "PublicKeyVersion", traits: {"smithy.api#required" => {}}))
+    RegisterUsageRequest.add_member(:nonce, ::Smithy::Schema::Shapes::MemberShape.new(target: Nonce, name: "Nonce"))
     RegisterUsageRequest.type = Types::RegisterUsageRequest
-    RegisterUsageResult.add_member(:public_key_rotation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "PublicKeyRotationTimestamp"))
-    RegisterUsageResult.add_member(:signature, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Signature"))
+    RegisterUsageResult.add_member(:public_key_rotation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "PublicKeyRotationTimestamp"))
+    RegisterUsageResult.add_member(:signature, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Signature"))
     RegisterUsageResult.type = Types::RegisterUsageResult
-    ResolveCustomerRequest.add_member(:registration_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "RegistrationToken", traits: {"smithy.api#required" => {}}))
+    ResolveCustomerRequest.add_member(:registration_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RegistrationToken", traits: {"smithy.api#required" => {}}))
     ResolveCustomerRequest.type = Types::ResolveCustomerRequest
-    ResolveCustomerResult.add_member(:customer_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerIdentifier, location_name: "CustomerIdentifier"))
-    ResolveCustomerResult.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, location_name: "ProductCode"))
-    ResolveCustomerResult.add_member(:customer_aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAWSAccountId, location_name: "CustomerAWSAccountId"))
+    ResolveCustomerResult.add_member(:customer_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerIdentifier, name: "CustomerIdentifier"))
+    ResolveCustomerResult.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, name: "ProductCode"))
+    ResolveCustomerResult.add_member(:customer_aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAWSAccountId, name: "CustomerAWSAccountId"))
     ResolveCustomerResult.type = Types::ResolveCustomerResult
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
-    TimestampOutOfBoundsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    TimestampOutOfBoundsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TimestampOutOfBoundsException.type = Types::TimestampOutOfBoundsException
-    UsageAllocation.add_member(:allocated_usage_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: AllocatedUsageQuantity, location_name: "AllocatedUsageQuantity", traits: {"smithy.api#required" => {}}))
-    UsageAllocation.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    UsageAllocation.add_member(:allocated_usage_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: AllocatedUsageQuantity, name: "AllocatedUsageQuantity", traits: {"smithy.api#required" => {}}))
+    UsageAllocation.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     UsageAllocation.type = Types::UsageAllocation
-    UsageAllocations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAllocation)
-    UsageRecord.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Timestamp", traits: {"smithy.api#required" => {}}))
-    UsageRecord.add_member(:customer_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerIdentifier, location_name: "CustomerIdentifier", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
-    UsageRecord.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageDimension, location_name: "Dimension", traits: {"smithy.api#required" => {}}))
-    UsageRecord.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageQuantity, location_name: "Quantity"))
-    UsageRecord.add_member(:usage_allocations, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAllocations, location_name: "UsageAllocations"))
-    UsageRecord.add_member(:customer_aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAWSAccountId, location_name: "CustomerAWSAccountId"))
+    UsageAllocations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAllocation, name: "member")
+    UsageRecord.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#required" => {}}))
+    UsageRecord.add_member(:customer_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerIdentifier, name: "CustomerIdentifier", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    UsageRecord.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageDimension, name: "Dimension", traits: {"smithy.api#required" => {}}))
+    UsageRecord.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageQuantity, name: "Quantity"))
+    UsageRecord.add_member(:usage_allocations, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAllocations, name: "UsageAllocations"))
+    UsageRecord.add_member(:customer_aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAWSAccountId, name: "CustomerAWSAccountId"))
     UsageRecord.type = Types::UsageRecord
-    UsageRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecord)
-    UsageRecordResult.add_member(:usage_record, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecord, location_name: "UsageRecord"))
-    UsageRecordResult.add_member(:metering_record_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MeteringRecordId"))
-    UsageRecordResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordResultStatus, location_name: "Status"))
+    UsageRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecord, name: "member")
+    UsageRecordResult.add_member(:usage_record, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecord, name: "UsageRecord"))
+    UsageRecordResult.add_member(:metering_record_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MeteringRecordId"))
+    UsageRecordResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordResultStatus, name: "Status"))
     UsageRecordResult.type = Types::UsageRecordResult
-    UsageRecordResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordResult)
-    UsageRecordResultStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
-    UsageRecordResultStatus.add_member(:customer_not_subscribed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CUSTOMER_NOT_SUBSCRIBED", traits: {"smithy.api#enumValue" => "CustomerNotSubscribed"}))
-    UsageRecordResultStatus.add_member(:duplicate_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DUPLICATE_RECORD", traits: {"smithy.api#enumValue" => "DuplicateRecord"}))
+    UsageRecordResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordResult, name: "member")
+    UsageRecordResultStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
+    UsageRecordResultStatus.add_member(:customer_not_subscribed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_NOT_SUBSCRIBED", traits: {"smithy.api#enumValue" => "CustomerNotSubscribed"}))
+    UsageRecordResultStatus.add_member(:duplicate_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUPLICATE_RECORD", traits: {"smithy.api#enumValue" => "DuplicateRecord"}))
 
     AWSMPMeteringService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.marketplacemetering#AWSMPMeteringService"

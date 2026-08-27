@@ -49,87 +49,87 @@ module Aws::QLDBSession
     WriteIOs = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.qldbsession#WriteIOs", name: "WriteIOs", traits: {"smithy.api#default" => 0})
 
     AbortTransactionRequest.type = Types::AbortTransactionRequest
-    AbortTransactionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, location_name: "TimingInformation"))
+    AbortTransactionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, name: "TimingInformation"))
     AbortTransactionResult.type = Types::AbortTransactionResult
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
-    BadRequestException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
+    BadRequestException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     BadRequestException.type = Types::BadRequestException
-    CapacityExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    CapacityExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     CapacityExceededException.type = Types::CapacityExceededException
-    CommitTransactionRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, location_name: "TransactionId", traits: {"smithy.api#required" => {}}))
-    CommitTransactionRequest.add_member(:commit_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitDigest, location_name: "CommitDigest", traits: {"smithy.api#required" => {}}))
+    CommitTransactionRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, name: "TransactionId", traits: {"smithy.api#required" => {}}))
+    CommitTransactionRequest.add_member(:commit_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitDigest, name: "CommitDigest", traits: {"smithy.api#required" => {}}))
     CommitTransactionRequest.type = Types::CommitTransactionRequest
-    CommitTransactionResult.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, location_name: "TransactionId"))
-    CommitTransactionResult.add_member(:commit_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitDigest, location_name: "CommitDigest"))
-    CommitTransactionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, location_name: "TimingInformation"))
-    CommitTransactionResult.add_member(:consumed_i_os, ::Smithy::Schema::Shapes::MemberShape.new(target: IOUsage, location_name: "ConsumedIOs"))
+    CommitTransactionResult.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, name: "TransactionId"))
+    CommitTransactionResult.add_member(:commit_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitDigest, name: "CommitDigest"))
+    CommitTransactionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, name: "TimingInformation"))
+    CommitTransactionResult.add_member(:consumed_i_os, ::Smithy::Schema::Shapes::MemberShape.new(target: IOUsage, name: "ConsumedIOs"))
     CommitTransactionResult.type = Types::CommitTransactionResult
     EndSessionRequest.type = Types::EndSessionRequest
-    EndSessionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, location_name: "TimingInformation"))
+    EndSessionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, name: "TimingInformation"))
     EndSessionResult.type = Types::EndSessionResult
-    ExecuteStatementRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, location_name: "TransactionId", traits: {"smithy.api#required" => {}}))
-    ExecuteStatementRequest.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, location_name: "Statement", traits: {"smithy.api#required" => {}}))
-    ExecuteStatementRequest.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementParameters, location_name: "Parameters"))
+    ExecuteStatementRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, name: "TransactionId", traits: {"smithy.api#required" => {}}))
+    ExecuteStatementRequest.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, name: "Statement", traits: {"smithy.api#required" => {}}))
+    ExecuteStatementRequest.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementParameters, name: "Parameters"))
     ExecuteStatementRequest.type = Types::ExecuteStatementRequest
-    ExecuteStatementResult.add_member(:first_page, ::Smithy::Schema::Shapes::MemberShape.new(target: Page, location_name: "FirstPage"))
-    ExecuteStatementResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, location_name: "TimingInformation"))
-    ExecuteStatementResult.add_member(:consumed_i_os, ::Smithy::Schema::Shapes::MemberShape.new(target: IOUsage, location_name: "ConsumedIOs"))
+    ExecuteStatementResult.add_member(:first_page, ::Smithy::Schema::Shapes::MemberShape.new(target: Page, name: "FirstPage"))
+    ExecuteStatementResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, name: "TimingInformation"))
+    ExecuteStatementResult.add_member(:consumed_i_os, ::Smithy::Schema::Shapes::MemberShape.new(target: IOUsage, name: "ConsumedIOs"))
     ExecuteStatementResult.type = Types::ExecuteStatementResult
-    FetchPageRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, location_name: "TransactionId", traits: {"smithy.api#required" => {}}))
-    FetchPageRequest.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PageToken, location_name: "NextPageToken", traits: {"smithy.api#required" => {}}))
+    FetchPageRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, name: "TransactionId", traits: {"smithy.api#required" => {}}))
+    FetchPageRequest.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PageToken, name: "NextPageToken", traits: {"smithy.api#required" => {}}))
     FetchPageRequest.type = Types::FetchPageRequest
-    FetchPageResult.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: Page, location_name: "Page"))
-    FetchPageResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, location_name: "TimingInformation"))
-    FetchPageResult.add_member(:consumed_i_os, ::Smithy::Schema::Shapes::MemberShape.new(target: IOUsage, location_name: "ConsumedIOs"))
+    FetchPageResult.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: Page, name: "Page"))
+    FetchPageResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, name: "TimingInformation"))
+    FetchPageResult.add_member(:consumed_i_os, ::Smithy::Schema::Shapes::MemberShape.new(target: IOUsage, name: "ConsumedIOs"))
     FetchPageResult.type = Types::FetchPageResult
-    IOUsage.add_member(:read_i_os, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadIOs, location_name: "ReadIOs", traits: {"smithy.api#default" => 0}))
-    IOUsage.add_member(:write_i_os, ::Smithy::Schema::Shapes::MemberShape.new(target: WriteIOs, location_name: "WriteIOs", traits: {"smithy.api#default" => 0}))
+    IOUsage.add_member(:read_i_os, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadIOs, name: "ReadIOs", traits: {"smithy.api#default" => 0}))
+    IOUsage.add_member(:write_i_os, ::Smithy::Schema::Shapes::MemberShape.new(target: WriteIOs, name: "WriteIOs", traits: {"smithy.api#default" => 0}))
     IOUsage.type = Types::IOUsage
-    InvalidSessionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
-    InvalidSessionException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, location_name: "Code"))
+    InvalidSessionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
+    InvalidSessionException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     InvalidSessionException.type = Types::InvalidSessionException
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    OccConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    OccConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     OccConflictException.type = Types::OccConflictException
-    Page.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueHolders, location_name: "Values"))
-    Page.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PageToken, location_name: "NextPageToken"))
+    Page.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueHolders, name: "Values"))
+    Page.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PageToken, name: "NextPageToken"))
     Page.type = Types::Page
-    RateExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    RateExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     RateExceededException.type = Types::RateExceededException
-    SendCommandRequest.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionToken, location_name: "SessionToken"))
-    SendCommandRequest.add_member(:start_session, ::Smithy::Schema::Shapes::MemberShape.new(target: StartSessionRequest, location_name: "StartSession"))
-    SendCommandRequest.add_member(:start_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTransactionRequest, location_name: "StartTransaction"))
-    SendCommandRequest.add_member(:end_session, ::Smithy::Schema::Shapes::MemberShape.new(target: EndSessionRequest, location_name: "EndSession"))
-    SendCommandRequest.add_member(:commit_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitTransactionRequest, location_name: "CommitTransaction"))
-    SendCommandRequest.add_member(:abort_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: AbortTransactionRequest, location_name: "AbortTransaction"))
-    SendCommandRequest.add_member(:execute_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecuteStatementRequest, location_name: "ExecuteStatement"))
-    SendCommandRequest.add_member(:fetch_page, ::Smithy::Schema::Shapes::MemberShape.new(target: FetchPageRequest, location_name: "FetchPage"))
+    SendCommandRequest.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionToken, name: "SessionToken"))
+    SendCommandRequest.add_member(:start_session, ::Smithy::Schema::Shapes::MemberShape.new(target: StartSessionRequest, name: "StartSession"))
+    SendCommandRequest.add_member(:start_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTransactionRequest, name: "StartTransaction"))
+    SendCommandRequest.add_member(:end_session, ::Smithy::Schema::Shapes::MemberShape.new(target: EndSessionRequest, name: "EndSession"))
+    SendCommandRequest.add_member(:commit_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitTransactionRequest, name: "CommitTransaction"))
+    SendCommandRequest.add_member(:abort_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: AbortTransactionRequest, name: "AbortTransaction"))
+    SendCommandRequest.add_member(:execute_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecuteStatementRequest, name: "ExecuteStatement"))
+    SendCommandRequest.add_member(:fetch_page, ::Smithy::Schema::Shapes::MemberShape.new(target: FetchPageRequest, name: "FetchPage"))
     SendCommandRequest.type = Types::SendCommandRequest
-    SendCommandResult.add_member(:start_session, ::Smithy::Schema::Shapes::MemberShape.new(target: StartSessionResult, location_name: "StartSession"))
-    SendCommandResult.add_member(:start_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTransactionResult, location_name: "StartTransaction"))
-    SendCommandResult.add_member(:end_session, ::Smithy::Schema::Shapes::MemberShape.new(target: EndSessionResult, location_name: "EndSession"))
-    SendCommandResult.add_member(:commit_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitTransactionResult, location_name: "CommitTransaction"))
-    SendCommandResult.add_member(:abort_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: AbortTransactionResult, location_name: "AbortTransaction"))
-    SendCommandResult.add_member(:execute_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecuteStatementResult, location_name: "ExecuteStatement"))
-    SendCommandResult.add_member(:fetch_page, ::Smithy::Schema::Shapes::MemberShape.new(target: FetchPageResult, location_name: "FetchPage"))
+    SendCommandResult.add_member(:start_session, ::Smithy::Schema::Shapes::MemberShape.new(target: StartSessionResult, name: "StartSession"))
+    SendCommandResult.add_member(:start_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTransactionResult, name: "StartTransaction"))
+    SendCommandResult.add_member(:end_session, ::Smithy::Schema::Shapes::MemberShape.new(target: EndSessionResult, name: "EndSession"))
+    SendCommandResult.add_member(:commit_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitTransactionResult, name: "CommitTransaction"))
+    SendCommandResult.add_member(:abort_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: AbortTransactionResult, name: "AbortTransaction"))
+    SendCommandResult.add_member(:execute_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecuteStatementResult, name: "ExecuteStatement"))
+    SendCommandResult.add_member(:fetch_page, ::Smithy::Schema::Shapes::MemberShape.new(target: FetchPageResult, name: "FetchPage"))
     SendCommandResult.type = Types::SendCommandResult
-    StartSessionRequest.add_member(:ledger_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LedgerName, location_name: "LedgerName", traits: {"smithy.api#required" => {}}))
+    StartSessionRequest.add_member(:ledger_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LedgerName, name: "LedgerName", traits: {"smithy.api#required" => {}}))
     StartSessionRequest.type = Types::StartSessionRequest
-    StartSessionResult.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionToken, location_name: "SessionToken"))
-    StartSessionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, location_name: "TimingInformation"))
+    StartSessionResult.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionToken, name: "SessionToken"))
+    StartSessionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, name: "TimingInformation"))
     StartSessionResult.type = Types::StartSessionResult
     StartTransactionRequest.type = Types::StartTransactionRequest
-    StartTransactionResult.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, location_name: "TransactionId"))
-    StartTransactionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, location_name: "TimingInformation"))
+    StartTransactionResult.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, name: "TransactionId"))
+    StartTransactionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, name: "TimingInformation"))
     StartTransactionResult.type = Types::StartTransactionResult
-    StatementParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueHolder)
-    TimingInformation.add_member(:processing_time_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingTimeMilliseconds, location_name: "ProcessingTimeMilliseconds", traits: {"smithy.api#default" => 0}))
+    StatementParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueHolder, name: "member")
+    TimingInformation.add_member(:processing_time_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingTimeMilliseconds, name: "ProcessingTimeMilliseconds", traits: {"smithy.api#default" => 0}))
     TimingInformation.type = Types::TimingInformation
-    ValueHolder.add_member(:ion_binary, ::Smithy::Schema::Shapes::MemberShape.new(target: IonBinary, location_name: "IonBinary"))
-    ValueHolder.add_member(:ion_text, ::Smithy::Schema::Shapes::MemberShape.new(target: IonText, location_name: "IonText"))
+    ValueHolder.add_member(:ion_binary, ::Smithy::Schema::Shapes::MemberShape.new(target: IonBinary, name: "IonBinary"))
+    ValueHolder.add_member(:ion_text, ::Smithy::Schema::Shapes::MemberShape.new(target: IonText, name: "IonText"))
     ValueHolder.type = Types::ValueHolder
-    ValueHolders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueHolder)
+    ValueHolders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueHolder, name: "member")
 
     QLDBSession = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.qldbsession#QLDBSession"

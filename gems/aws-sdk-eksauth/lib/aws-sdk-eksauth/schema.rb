@@ -24,46 +24,46 @@ module Aws::EKSAuth
     Subject = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.eksauth#Subject", name: "Subject")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.eksauth#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AssumeRoleForPodIdentityRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterName, location_name: "clusterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AssumeRoleForPodIdentityRequest.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtToken, location_name: "token", traits: {"smithy.api#required" => {}}))
+    AssumeRoleForPodIdentityRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterName, name: "clusterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssumeRoleForPodIdentityRequest.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtToken, name: "token", traits: {"smithy.api#required" => {}}))
     AssumeRoleForPodIdentityRequest.type = Types::AssumeRoleForPodIdentityRequest
-    AssumeRoleForPodIdentityResponse.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, location_name: "subject", traits: {"smithy.api#required" => {}}))
-    AssumeRoleForPodIdentityResponse.add_member(:audience, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "audience", traits: {"smithy.api#required" => {}}))
-    AssumeRoleForPodIdentityResponse.add_member(:pod_identity_association, ::Smithy::Schema::Shapes::MemberShape.new(target: PodIdentityAssociation, location_name: "podIdentityAssociation", traits: {"smithy.api#required" => {}}))
-    AssumeRoleForPodIdentityResponse.add_member(:assumed_role_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AssumedRoleUser, location_name: "assumedRoleUser", traits: {"smithy.api#required" => {}}))
-    AssumeRoleForPodIdentityResponse.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: Credentials, location_name: "credentials", traits: {"smithy.api#required" => {}}))
+    AssumeRoleForPodIdentityResponse.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, name: "subject", traits: {"smithy.api#required" => {}}))
+    AssumeRoleForPodIdentityResponse.add_member(:audience, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "audience", traits: {"smithy.api#required" => {}}))
+    AssumeRoleForPodIdentityResponse.add_member(:pod_identity_association, ::Smithy::Schema::Shapes::MemberShape.new(target: PodIdentityAssociation, name: "podIdentityAssociation", traits: {"smithy.api#required" => {}}))
+    AssumeRoleForPodIdentityResponse.add_member(:assumed_role_user, ::Smithy::Schema::Shapes::MemberShape.new(target: AssumedRoleUser, name: "assumedRoleUser", traits: {"smithy.api#required" => {}}))
+    AssumeRoleForPodIdentityResponse.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: Credentials, name: "credentials", traits: {"smithy.api#required" => {}}))
     AssumeRoleForPodIdentityResponse.type = Types::AssumeRoleForPodIdentityResponse
-    AssumedRoleUser.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    AssumedRoleUser.add_member(:assume_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "assumeRoleId", traits: {"smithy.api#required" => {}}))
+    AssumedRoleUser.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn", traits: {"smithy.api#required" => {}}))
+    AssumedRoleUser.add_member(:assume_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "assumeRoleId", traits: {"smithy.api#required" => {}}))
     AssumedRoleUser.type = Types::AssumedRoleUser
-    Credentials.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "sessionToken", traits: {"smithy.api#required" => {}}))
-    Credentials.add_member(:secret_access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "secretAccessKey", traits: {"smithy.api#required" => {}}))
-    Credentials.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "accessKeyId", traits: {"smithy.api#required" => {}}))
-    Credentials.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expiration", traits: {"smithy.api#required" => {}}))
+    Credentials.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sessionToken", traits: {"smithy.api#required" => {}}))
+    Credentials.add_member(:secret_access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "secretAccessKey", traits: {"smithy.api#required" => {}}))
+    Credentials.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "accessKeyId", traits: {"smithy.api#required" => {}}))
+    Credentials.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expiration", traits: {"smithy.api#required" => {}}))
     Credentials.type = Types::Credentials
-    ExpiredTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ExpiredTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ExpiredTokenException.type = Types::ExpiredTokenException
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerException.type = Types::InternalServerException
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InvalidParameterException.type = Types::InvalidParameterException
-    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    InvalidTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InvalidTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InvalidTokenException.type = Types::InvalidTokenException
-    PodIdentityAssociation.add_member(:association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "associationArn", traits: {"smithy.api#required" => {}}))
-    PodIdentityAssociation.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "associationId", traits: {"smithy.api#required" => {}}))
+    PodIdentityAssociation.add_member(:association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "associationArn", traits: {"smithy.api#required" => {}}))
+    PodIdentityAssociation.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "associationId", traits: {"smithy.api#required" => {}}))
     PodIdentityAssociation.type = Types::PodIdentityAssociation
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    Subject.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "namespace", traits: {"smithy.api#required" => {}}))
-    Subject.add_member(:service_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "serviceAccount", traits: {"smithy.api#required" => {}}))
+    Subject.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "namespace", traits: {"smithy.api#required" => {}}))
+    Subject.add_member(:service_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceAccount", traits: {"smithy.api#required" => {}}))
     Subject.type = Types::Subject
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
 
     EKSAuthFrontend = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

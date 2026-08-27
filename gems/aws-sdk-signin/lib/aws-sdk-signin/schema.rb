@@ -26,48 +26,48 @@ module Aws::Signin
     TooManyRequestsError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#TooManyRequestsError", name: "TooManyRequestsError", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AccessDeniedException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2ErrorCode, location_name: "error", traits: {"smithy.api#required" => {}}))
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2ErrorCode, name: "error", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccessToken.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "accessKeyId", traits: {"smithy.api#jsonName" => "accessKeyId", "smithy.api#required" => {}}))
-    AccessToken.add_member(:secret_access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "secretAccessKey", traits: {"smithy.api#jsonName" => "secretAccessKey", "smithy.api#required" => {}}))
-    AccessToken.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "sessionToken", traits: {"smithy.api#jsonName" => "sessionToken", "smithy.api#required" => {}}))
+    AccessToken.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "accessKeyId", traits: {"smithy.api#jsonName" => "accessKeyId", "smithy.api#required" => {}}))
+    AccessToken.add_member(:secret_access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "secretAccessKey", traits: {"smithy.api#jsonName" => "secretAccessKey", "smithy.api#required" => {}}))
+    AccessToken.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sessionToken", traits: {"smithy.api#jsonName" => "sessionToken", "smithy.api#required" => {}}))
     AccessToken.type = Types::AccessToken
-    CreateOAuth2TokenRequest.add_member(:token_input, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateOAuth2TokenRequestBody, location_name: "tokenInput", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    CreateOAuth2TokenRequest.add_member(:token_input, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateOAuth2TokenRequestBody, name: "tokenInput", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateOAuth2TokenRequest[:http_payload] = :token_input
     CreateOAuth2TokenRequest[:http_payload_member] = CreateOAuth2TokenRequest.member(:token_input)
     CreateOAuth2TokenRequest.type = Types::CreateOAuth2TokenRequest
-    CreateOAuth2TokenRequestBody.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, location_name: "clientId", traits: {"smithy.api#jsonName" => "clientId", "smithy.api#required" => {}}))
-    CreateOAuth2TokenRequestBody.add_member(:grant_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantType, location_name: "grantType", traits: {"smithy.api#jsonName" => "grantType", "smithy.api#required" => {}}))
-    CreateOAuth2TokenRequestBody.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationCode, location_name: "code"))
-    CreateOAuth2TokenRequestBody.add_member(:redirect_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUri, location_name: "redirectUri", traits: {"smithy.api#jsonName" => "redirectUri"}))
-    CreateOAuth2TokenRequestBody.add_member(:code_verifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeVerifier, location_name: "codeVerifier", traits: {"smithy.api#jsonName" => "codeVerifier"}))
-    CreateOAuth2TokenRequestBody.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshToken, location_name: "refreshToken", traits: {"smithy.api#jsonName" => "refreshToken"}))
+    CreateOAuth2TokenRequestBody.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, name: "clientId", traits: {"smithy.api#jsonName" => "clientId", "smithy.api#required" => {}}))
+    CreateOAuth2TokenRequestBody.add_member(:grant_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantType, name: "grantType", traits: {"smithy.api#jsonName" => "grantType", "smithy.api#required" => {}}))
+    CreateOAuth2TokenRequestBody.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationCode, name: "code"))
+    CreateOAuth2TokenRequestBody.add_member(:redirect_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUri, name: "redirectUri", traits: {"smithy.api#jsonName" => "redirectUri"}))
+    CreateOAuth2TokenRequestBody.add_member(:code_verifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeVerifier, name: "codeVerifier", traits: {"smithy.api#jsonName" => "codeVerifier"}))
+    CreateOAuth2TokenRequestBody.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshToken, name: "refreshToken", traits: {"smithy.api#jsonName" => "refreshToken"}))
     CreateOAuth2TokenRequestBody.type = Types::CreateOAuth2TokenRequestBody
-    CreateOAuth2TokenResponse.add_member(:token_output, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateOAuth2TokenResponseBody, location_name: "tokenOutput", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    CreateOAuth2TokenResponse.add_member(:token_output, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateOAuth2TokenResponseBody, name: "tokenOutput", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateOAuth2TokenResponse[:http_payload] = :token_output
     CreateOAuth2TokenResponse[:http_payload_member] = CreateOAuth2TokenResponse.member(:token_output)
     CreateOAuth2TokenResponse.type = Types::CreateOAuth2TokenResponse
-    CreateOAuth2TokenResponseBody.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessToken, location_name: "accessToken", traits: {"smithy.api#jsonName" => "accessToken", "smithy.api#required" => {}}))
-    CreateOAuth2TokenResponseBody.add_member(:token_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenType, location_name: "tokenType", traits: {"smithy.api#jsonName" => "tokenType", "smithy.api#required" => {}}))
-    CreateOAuth2TokenResponseBody.add_member(:expires_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiresIn, location_name: "expiresIn", traits: {"smithy.api#jsonName" => "expiresIn", "smithy.api#required" => {}}))
-    CreateOAuth2TokenResponseBody.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshToken, location_name: "refreshToken", traits: {"smithy.api#jsonName" => "refreshToken", "smithy.api#required" => {}}))
-    CreateOAuth2TokenResponseBody.add_member(:id_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdToken, location_name: "idToken", traits: {"smithy.api#jsonName" => "idToken"}))
+    CreateOAuth2TokenResponseBody.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessToken, name: "accessToken", traits: {"smithy.api#jsonName" => "accessToken", "smithy.api#required" => {}}))
+    CreateOAuth2TokenResponseBody.add_member(:token_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenType, name: "tokenType", traits: {"smithy.api#jsonName" => "tokenType", "smithy.api#required" => {}}))
+    CreateOAuth2TokenResponseBody.add_member(:expires_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiresIn, name: "expiresIn", traits: {"smithy.api#jsonName" => "expiresIn", "smithy.api#required" => {}}))
+    CreateOAuth2TokenResponseBody.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshToken, name: "refreshToken", traits: {"smithy.api#jsonName" => "refreshToken", "smithy.api#required" => {}}))
+    CreateOAuth2TokenResponseBody.add_member(:id_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdToken, name: "idToken", traits: {"smithy.api#jsonName" => "idToken"}))
     CreateOAuth2TokenResponseBody.type = Types::CreateOAuth2TokenResponseBody
-    InternalServerException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2ErrorCode, location_name: "error", traits: {"smithy.api#required" => {}}))
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2ErrorCode, name: "error", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    OAuth2ErrorCode.add_member(:token_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOKEN_EXPIRED", traits: {"smithy.api#enumValue" => "TOKEN_EXPIRED"}))
-    OAuth2ErrorCode.add_member(:user_credentials_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_CREDENTIALS_CHANGED", traits: {"smithy.api#enumValue" => "USER_CREDENTIALS_CHANGED"}))
-    OAuth2ErrorCode.add_member(:insufficient_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSUFFICIENT_PERMISSIONS", traits: {"smithy.api#enumValue" => "INSUFFICIENT_PERMISSIONS"}))
-    OAuth2ErrorCode.add_member(:authcode_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTHCODE_EXPIRED", traits: {"smithy.api#enumValue" => "AUTHCODE_EXPIRED"}))
-    OAuth2ErrorCode.add_member(:server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_ERROR", traits: {"smithy.api#enumValue" => "server_error"}))
-    OAuth2ErrorCode.add_member(:invalid_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_REQUEST", traits: {"smithy.api#enumValue" => "INVALID_REQUEST"}))
-    TooManyRequestsError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2ErrorCode, location_name: "error", traits: {"smithy.api#required" => {}}))
-    TooManyRequestsError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    OAuth2ErrorCode.add_member(:token_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOKEN_EXPIRED", traits: {"smithy.api#enumValue" => "TOKEN_EXPIRED"}))
+    OAuth2ErrorCode.add_member(:user_credentials_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_CREDENTIALS_CHANGED", traits: {"smithy.api#enumValue" => "USER_CREDENTIALS_CHANGED"}))
+    OAuth2ErrorCode.add_member(:insufficient_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_PERMISSIONS", traits: {"smithy.api#enumValue" => "INSUFFICIENT_PERMISSIONS"}))
+    OAuth2ErrorCode.add_member(:authcode_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHCODE_EXPIRED", traits: {"smithy.api#enumValue" => "AUTHCODE_EXPIRED"}))
+    OAuth2ErrorCode.add_member(:server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVER_ERROR", traits: {"smithy.api#enumValue" => "server_error"}))
+    OAuth2ErrorCode.add_member(:invalid_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_REQUEST", traits: {"smithy.api#enumValue" => "INVALID_REQUEST"}))
+    TooManyRequestsError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2ErrorCode, name: "error", traits: {"smithy.api#required" => {}}))
+    TooManyRequestsError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     TooManyRequestsError.type = Types::TooManyRequestsError
-    ValidationException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2ErrorCode, location_name: "error", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2ErrorCode, name: "error", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
 
     Signin = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

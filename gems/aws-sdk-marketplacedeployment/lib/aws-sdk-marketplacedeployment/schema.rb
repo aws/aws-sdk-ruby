@@ -35,54 +35,54 @@ module Aws::MarketplaceDeployment
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacedeployment#UntagResourceResponse", name: "UntagResourceResponse")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacedeployment#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    DeploymentParameterInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentParameterName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    DeploymentParameterInput.add_member(:secret_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretString, location_name: "secretString", traits: {"smithy.api#required" => {}}))
+    DeploymentParameterInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentParameterName, name: "name", traits: {"smithy.api#required" => {}}))
+    DeploymentParameterInput.add_member(:secret_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretString, name: "secretString", traits: {"smithy.api#required" => {}}))
     DeploymentParameterInput.type = Types::DeploymentParameterInput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    PutDeploymentParameterRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, location_name: "catalog", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutDeploymentParameterRequest.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "productId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutDeploymentParameterRequest.add_member(:agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "agreementId", traits: {"smithy.api#required" => {}}))
-    PutDeploymentParameterRequest.add_member(:deployment_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentParameterInput, location_name: "deploymentParameter", traits: {"smithy.api#required" => {}}))
-    PutDeploymentParameterRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, location_name: "tags"))
-    PutDeploymentParameterRequest.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: "expirationDate", traits: {"smithy.api#timestampFormat" => "date-time"}))
-    PutDeploymentParameterRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, location_name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutDeploymentParameterRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, name: "catalog", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutDeploymentParameterRequest.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "productId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutDeploymentParameterRequest.add_member(:agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "agreementId", traits: {"smithy.api#required" => {}}))
+    PutDeploymentParameterRequest.add_member(:deployment_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentParameterInput, name: "deploymentParameter", traits: {"smithy.api#required" => {}}))
+    PutDeploymentParameterRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    PutDeploymentParameterRequest.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expirationDate", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    PutDeploymentParameterRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     PutDeploymentParameterRequest.type = Types::PutDeploymentParameterRequest
-    PutDeploymentParameterResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, location_name: "resourceArn", traits: {"smithy.api#required" => {}}))
-    PutDeploymentParameterResponse.add_member(:agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "agreementId", traits: {"smithy.api#required" => {}}))
-    PutDeploymentParameterResponse.add_member(:deployment_parameter_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentParameterResourceIdentifier, location_name: "deploymentParameterId", traits: {"smithy.api#required" => {}}))
-    PutDeploymentParameterResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, location_name: "tags"))
+    PutDeploymentParameterResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    PutDeploymentParameterResponse.add_member(:agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "agreementId", traits: {"smithy.api#required" => {}}))
+    PutDeploymentParameterResponse.add_member(:deployment_parameter_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentParameterResourceIdentifier, name: "deploymentParameterId", traits: {"smithy.api#required" => {}}))
+    PutDeploymentParameterResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     PutDeploymentParameterResponse.type = Types::PutDeploymentParameterResponse
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, location_name: "tags"))
+    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String)
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
+    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
+    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "fieldName", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "fieldName", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
 
     AWSMPDeploymentParametersService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

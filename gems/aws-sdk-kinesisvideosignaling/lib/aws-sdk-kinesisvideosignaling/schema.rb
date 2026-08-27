@@ -30,39 +30,39 @@ module Aws::KinesisVideoSignaling
     Uris = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.kinesisvideosignaling#Uris", name: "Uris")
     Username = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kinesisvideosignaling#Username", name: "Username", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9_.-]+$"})
 
-    ClientLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ClientLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ClientLimitExceededException.type = Types::ClientLimitExceededException
-    GetIceServerConfigRequest.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ChannelARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    GetIceServerConfigRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, location_name: "ClientId"))
-    GetIceServerConfigRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, location_name: "Service"))
-    GetIceServerConfigRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: Username, location_name: "Username"))
+    GetIceServerConfigRequest.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ChannelARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetIceServerConfigRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, name: "ClientId"))
+    GetIceServerConfigRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "Service"))
+    GetIceServerConfigRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: Username, name: "Username"))
     GetIceServerConfigRequest.type = Types::GetIceServerConfigRequest
-    GetIceServerConfigResponse.add_member(:ice_server_list, ::Smithy::Schema::Shapes::MemberShape.new(target: IceServerList, location_name: "IceServerList"))
+    GetIceServerConfigResponse.add_member(:ice_server_list, ::Smithy::Schema::Shapes::MemberShape.new(target: IceServerList, name: "IceServerList"))
     GetIceServerConfigResponse.type = Types::GetIceServerConfigResponse
-    IceServer.add_member(:uris, ::Smithy::Schema::Shapes::MemberShape.new(target: Uris, location_name: "Uris"))
-    IceServer.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: Username, location_name: "Username"))
-    IceServer.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, location_name: "Password"))
-    IceServer.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: Ttl, location_name: "Ttl"))
+    IceServer.add_member(:uris, ::Smithy::Schema::Shapes::MemberShape.new(target: Uris, name: "Uris"))
+    IceServer.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: Username, name: "Username"))
+    IceServer.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, name: "Password"))
+    IceServer.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: Ttl, name: "Ttl"))
     IceServer.type = Types::IceServer
-    IceServerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IceServer)
-    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    IceServerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IceServer, name: "member")
+    InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidArgumentException.type = Types::InvalidArgumentException
-    InvalidClientException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InvalidClientException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidClientException.type = Types::InvalidClientException
-    NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     NotAuthorizedException.type = Types::NotAuthorizedException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SendAlexaOfferToMasterRequest.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, location_name: "ChannelARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SendAlexaOfferToMasterRequest.add_member(:sender_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, location_name: "SenderClientId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SendAlexaOfferToMasterRequest.add_member(:message_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: MessagePayload, location_name: "MessagePayload", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SendAlexaOfferToMasterRequest.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ChannelARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SendAlexaOfferToMasterRequest.add_member(:sender_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, name: "SenderClientId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SendAlexaOfferToMasterRequest.add_member(:message_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: MessagePayload, name: "MessagePayload", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SendAlexaOfferToMasterRequest.type = Types::SendAlexaOfferToMasterRequest
-    SendAlexaOfferToMasterResponse.add_member(:answer, ::Smithy::Schema::Shapes::MemberShape.new(target: Answer, location_name: "Answer"))
+    SendAlexaOfferToMasterResponse.add_member(:answer, ::Smithy::Schema::Shapes::MemberShape.new(target: Answer, name: "Answer"))
     SendAlexaOfferToMasterResponse.type = Types::SendAlexaOfferToMasterResponse
-    Service.add_member(:turn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TURN", traits: {"smithy.api#enumValue" => "TURN"}))
-    SessionExpiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    Service.add_member(:turn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TURN", traits: {"smithy.api#enumValue" => "TURN"}))
+    SessionExpiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     SessionExpiredException.type = Types::SessionExpiredException
-    Uris.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Uri)
+    Uris.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "member")
 
     AWSAcuitySignalingService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.kinesisvideosignaling#AWSAcuitySignalingService"

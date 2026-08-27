@@ -41,74 +41,74 @@ module Aws::SageMakerA2IRuntime
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.sagemakera2iruntime#Timestamp", name: "Timestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemakera2iruntime#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, location_name: "Message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "Message"))
     ConflictException.type = Types::ConflictException
-    ContentClassifier.add_member(:free_of_personally_identifiable_information, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION", traits: {"smithy.api#enumValue" => "FreeOfPersonallyIdentifiableInformation"}))
-    ContentClassifier.add_member(:free_of_adult_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FREE_OF_ADULT_CONTENT", traits: {"smithy.api#enumValue" => "FreeOfAdultContent"}))
-    ContentClassifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentClassifier)
-    DeleteHumanLoopRequest.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, location_name: "HumanLoopName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ContentClassifier.add_member(:free_of_personally_identifiable_information, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION", traits: {"smithy.api#enumValue" => "FreeOfPersonallyIdentifiableInformation"}))
+    ContentClassifier.add_member(:free_of_adult_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREE_OF_ADULT_CONTENT", traits: {"smithy.api#enumValue" => "FreeOfAdultContent"}))
+    ContentClassifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentClassifier, name: "member")
+    DeleteHumanLoopRequest.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, name: "HumanLoopName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteHumanLoopRequest.type = Types::DeleteHumanLoopRequest
     DeleteHumanLoopResponse.type = Types::DeleteHumanLoopResponse
-    DescribeHumanLoopRequest.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, location_name: "HumanLoopName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeHumanLoopRequest.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, name: "HumanLoopName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeHumanLoopRequest.type = Types::DescribeHumanLoopRequest
-    DescribeHumanLoopResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DescribeHumanLoopResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "FailureReason"))
-    DescribeHumanLoopResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "FailureCode"))
-    DescribeHumanLoopResponse.add_member(:human_loop_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopStatus, location_name: "HumanLoopStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DescribeHumanLoopResponse.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, location_name: "HumanLoopName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DescribeHumanLoopResponse.add_member(:human_loop_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopArn, location_name: "HumanLoopArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DescribeHumanLoopResponse.add_member(:flow_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionArn, location_name: "FlowDefinitionArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    DescribeHumanLoopResponse.add_member(:human_loop_output, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopOutput, location_name: "HumanLoopOutput"))
+    DescribeHumanLoopResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeHumanLoopResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureReason"))
+    DescribeHumanLoopResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureCode"))
+    DescribeHumanLoopResponse.add_member(:human_loop_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopStatus, name: "HumanLoopStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeHumanLoopResponse.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, name: "HumanLoopName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeHumanLoopResponse.add_member(:human_loop_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopArn, name: "HumanLoopArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeHumanLoopResponse.add_member(:flow_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionArn, name: "FlowDefinitionArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeHumanLoopResponse.add_member(:human_loop_output, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopOutput, name: "HumanLoopOutput"))
     DescribeHumanLoopResponse.type = Types::DescribeHumanLoopResponse
-    HumanLoopDataAttributes.add_member(:content_classifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentClassifiers, location_name: "ContentClassifiers", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HumanLoopDataAttributes.add_member(:content_classifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentClassifiers, name: "ContentClassifiers", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     HumanLoopDataAttributes.type = Types::HumanLoopDataAttributes
-    HumanLoopInput.add_member(:input_content, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContent, location_name: "InputContent", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HumanLoopInput.add_member(:input_content, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContent, name: "InputContent", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     HumanLoopInput.type = Types::HumanLoopInput
-    HumanLoopOutput.add_member(:output_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "OutputS3Uri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HumanLoopOutput.add_member(:output_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OutputS3Uri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     HumanLoopOutput.type = Types::HumanLoopOutput
-    HumanLoopStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
-    HumanLoopStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    HumanLoopStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
-    HumanLoopStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
-    HumanLoopStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
-    HumanLoopSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopSummary)
-    HumanLoopSummary.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, location_name: "HumanLoopName"))
-    HumanLoopSummary.add_member(:human_loop_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopStatus, location_name: "HumanLoopStatus"))
-    HumanLoopSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTime"))
-    HumanLoopSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, location_name: "FailureReason"))
-    HumanLoopSummary.add_member(:flow_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionArn, location_name: "FlowDefinitionArn"))
+    HumanLoopStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
+    HumanLoopStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    HumanLoopStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    HumanLoopStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
+    HumanLoopStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
+    HumanLoopSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopSummary, name: "member")
+    HumanLoopSummary.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, name: "HumanLoopName"))
+    HumanLoopSummary.add_member(:human_loop_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopStatus, name: "HumanLoopStatus"))
+    HumanLoopSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
+    HumanLoopSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
+    HumanLoopSummary.add_member(:flow_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionArn, name: "FlowDefinitionArn"))
     HumanLoopSummary.type = Types::HumanLoopSummary
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, location_name: "Message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    ListHumanLoopsRequest.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTimeAfter", traits: {"smithy.api#httpQuery" => "CreationTimeAfter"}))
-    ListHumanLoopsRequest.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreationTimeBefore", traits: {"smithy.api#httpQuery" => "CreationTimeBefore"}))
-    ListHumanLoopsRequest.add_member(:flow_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionArn, location_name: "FlowDefinitionArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "FlowDefinitionArn", "smithy.api#required" => {}}))
-    ListHumanLoopsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, location_name: "SortOrder", traits: {"smithy.api#httpQuery" => "SortOrder"}))
-    ListHumanLoopsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListHumanLoopsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, location_name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListHumanLoopsRequest.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeAfter", traits: {"smithy.api#httpQuery" => "CreationTimeAfter"}))
+    ListHumanLoopsRequest.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeBefore", traits: {"smithy.api#httpQuery" => "CreationTimeBefore"}))
+    ListHumanLoopsRequest.add_member(:flow_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionArn, name: "FlowDefinitionArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "FlowDefinitionArn", "smithy.api#required" => {}}))
+    ListHumanLoopsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder", traits: {"smithy.api#httpQuery" => "SortOrder"}))
+    ListHumanLoopsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListHumanLoopsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
     ListHumanLoopsRequest.type = Types::ListHumanLoopsRequest
-    ListHumanLoopsResponse.add_member(:human_loop_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopSummaries, location_name: "HumanLoopSummaries", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ListHumanLoopsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListHumanLoopsResponse.add_member(:human_loop_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopSummaries, name: "HumanLoopSummaries", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListHumanLoopsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListHumanLoopsResponse.type = Types::ListHumanLoopsResponse
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASCENDING", traits: {"smithy.api#enumValue" => "Ascending"}))
-    SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DESCENDING", traits: {"smithy.api#enumValue" => "Descending"}))
-    StartHumanLoopRequest.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, location_name: "HumanLoopName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    StartHumanLoopRequest.add_member(:flow_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionArn, location_name: "FlowDefinitionArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    StartHumanLoopRequest.add_member(:human_loop_input, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopInput, location_name: "HumanLoopInput", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    StartHumanLoopRequest.add_member(:data_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopDataAttributes, location_name: "DataAttributes"))
+    SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "Ascending"}))
+    SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "Descending"}))
+    StartHumanLoopRequest.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, name: "HumanLoopName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StartHumanLoopRequest.add_member(:flow_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionArn, name: "FlowDefinitionArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StartHumanLoopRequest.add_member(:human_loop_input, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopInput, name: "HumanLoopInput", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StartHumanLoopRequest.add_member(:data_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopDataAttributes, name: "DataAttributes"))
     StartHumanLoopRequest.type = Types::StartHumanLoopRequest
-    StartHumanLoopResponse.add_member(:human_loop_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopArn, location_name: "HumanLoopArn"))
+    StartHumanLoopResponse.add_member(:human_loop_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopArn, name: "HumanLoopArn"))
     StartHumanLoopResponse.type = Types::StartHumanLoopResponse
-    StopHumanLoopRequest.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, location_name: "HumanLoopName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StopHumanLoopRequest.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, name: "HumanLoopName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StopHumanLoopRequest.type = Types::StopHumanLoopRequest
     StopHumanLoopResponse.type = Types::StopHumanLoopResponse
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, location_name: "Message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, location_name: "Message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "Message"))
     ValidationException.type = Types::ValidationException
 
     AmazonSageMakerA2IRuntime = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

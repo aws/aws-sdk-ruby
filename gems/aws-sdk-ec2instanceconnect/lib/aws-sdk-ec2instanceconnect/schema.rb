@@ -31,44 +31,44 @@ module Aws::EC2InstanceConnect
     Success = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ec2instanceconnect#Success", name: "Success", traits: {"smithy.api#default" => false})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ec2instanceconnect#ThrottlingException", name: "ThrottlingException", traits: {"aws.protocols#awsQueryError" => {"code" => "TooManyRequests", "httpResponseCode" => 429}, "smithy.api#error" => "client", "smithy.api#httpError" => 429})
 
-    AuthException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    AuthException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     AuthException.type = Types::AuthException
-    EC2InstanceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    EC2InstanceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     EC2InstanceNotFoundException.type = Types::EC2InstanceNotFoundException
-    EC2InstanceStateInvalidException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    EC2InstanceStateInvalidException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     EC2InstanceStateInvalidException.type = Types::EC2InstanceStateInvalidException
-    EC2InstanceTypeInvalidException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    EC2InstanceTypeInvalidException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     EC2InstanceTypeInvalidException.type = Types::EC2InstanceTypeInvalidException
-    EC2InstanceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    EC2InstanceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     EC2InstanceUnavailableException.type = Types::EC2InstanceUnavailableException
-    InvalidArgsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    InvalidArgsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     InvalidArgsException.type = Types::InvalidArgsException
-    SendSSHPublicKeyRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "InstanceId", traits: {"smithy.api#required" => {}}))
-    SendSSHPublicKeyRequest.add_member(:instance_os_user, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceOSUser, location_name: "InstanceOSUser", traits: {"smithy.api#required" => {}}))
-    SendSSHPublicKeyRequest.add_member(:ssh_public_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SSHPublicKey, location_name: "SSHPublicKey", traits: {"smithy.api#required" => {}}))
-    SendSSHPublicKeyRequest.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, location_name: "AvailabilityZone"))
+    SendSSHPublicKeyRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#required" => {}}))
+    SendSSHPublicKeyRequest.add_member(:instance_os_user, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceOSUser, name: "InstanceOSUser", traits: {"smithy.api#required" => {}}))
+    SendSSHPublicKeyRequest.add_member(:ssh_public_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SSHPublicKey, name: "SSHPublicKey", traits: {"smithy.api#required" => {}}))
+    SendSSHPublicKeyRequest.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "AvailabilityZone"))
     SendSSHPublicKeyRequest.type = Types::SendSSHPublicKeyRequest
-    SendSSHPublicKeyResponse.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
-    SendSSHPublicKeyResponse.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: Success, location_name: "Success", traits: {"smithy.api#default" => false}))
+    SendSSHPublicKeyResponse.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
+    SendSSHPublicKeyResponse.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: Success, name: "Success", traits: {"smithy.api#default" => false}))
     SendSSHPublicKeyResponse.type = Types::SendSSHPublicKeyResponse
-    SendSerialConsoleSSHPublicKeyRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "InstanceId", traits: {"smithy.api#required" => {}}))
-    SendSerialConsoleSSHPublicKeyRequest.add_member(:serial_port, ::Smithy::Schema::Shapes::MemberShape.new(target: SerialPort, location_name: "SerialPort", traits: {"smithy.api#default" => 0}))
-    SendSerialConsoleSSHPublicKeyRequest.add_member(:ssh_public_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SSHPublicKey, location_name: "SSHPublicKey", traits: {"smithy.api#required" => {}}))
+    SendSerialConsoleSSHPublicKeyRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#required" => {}}))
+    SendSerialConsoleSSHPublicKeyRequest.add_member(:serial_port, ::Smithy::Schema::Shapes::MemberShape.new(target: SerialPort, name: "SerialPort", traits: {"smithy.api#default" => 0}))
+    SendSerialConsoleSSHPublicKeyRequest.add_member(:ssh_public_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SSHPublicKey, name: "SSHPublicKey", traits: {"smithy.api#required" => {}}))
     SendSerialConsoleSSHPublicKeyRequest.type = Types::SendSerialConsoleSSHPublicKeyRequest
-    SendSerialConsoleSSHPublicKeyResponse.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, location_name: "RequestId"))
-    SendSerialConsoleSSHPublicKeyResponse.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: Success, location_name: "Success", traits: {"smithy.api#default" => false}))
+    SendSerialConsoleSSHPublicKeyResponse.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
+    SendSerialConsoleSSHPublicKeyResponse.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: Success, name: "Success", traits: {"smithy.api#default" => false}))
     SendSerialConsoleSSHPublicKeyResponse.type = Types::SendSerialConsoleSSHPublicKeyResponse
-    SerialConsoleAccessDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    SerialConsoleAccessDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     SerialConsoleAccessDisabledException.type = Types::SerialConsoleAccessDisabledException
-    SerialConsoleSessionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    SerialConsoleSessionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     SerialConsoleSessionLimitExceededException.type = Types::SerialConsoleSessionLimitExceededException
-    SerialConsoleSessionUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    SerialConsoleSessionUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     SerialConsoleSessionUnavailableException.type = Types::SerialConsoleSessionUnavailableException
-    SerialConsoleSessionUnsupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    SerialConsoleSessionUnsupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     SerialConsoleSessionUnsupportedException.type = Types::SerialConsoleSessionUnsupportedException
-    ServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    ServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ServiceException.type = Types::ServiceException
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
 
     AWSEC2InstanceConnectService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

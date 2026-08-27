@@ -42,11 +42,8 @@ require_relative 'aws-sdk-core/static_credentials_provider'
 
 # Protocol Codecs
 
-require_relative 'aws-sdk-core/json'
 require_relative 'aws-sdk-core/query'
 require_relative 'aws-sdk-core/rest'
-require_relative 'aws-sdk-core/stubbing'
-require_relative 'aws-sdk-core/xml'
 
 module Aws
   # The root namespace for the AWS SDK for Ruby core modules and classes.

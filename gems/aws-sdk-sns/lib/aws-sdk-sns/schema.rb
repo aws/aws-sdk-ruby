@@ -180,356 +180,356 @@ module Aws::SNS
     TopicARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sns#topicARN", name: "TopicARN")
     TopicName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sns#topicName", name: "TopicName")
 
-    ActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action)
-    AddPermissionInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
-    AddPermissionInput.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, location_name: "Label", traits: {"smithy.api#required" => {}}))
-    AddPermissionInput.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegatesList, location_name: "AWSAccountId", traits: {"smithy.api#required" => {}}))
-    AddPermissionInput.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsList, location_name: "ActionName", traits: {"smithy.api#required" => {}}))
+    ActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member")
+    AddPermissionInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    AddPermissionInput.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "Label", traits: {"smithy.api#required" => {}}))
+    AddPermissionInput.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegatesList, name: "AWSAccountId", traits: {"smithy.api#required" => {}}))
+    AddPermissionInput.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsList, name: "ActionName", traits: {"smithy.api#required" => {}}))
     AddPermissionInput.type = Types::AddPermissionInput
-    AuthorizationErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    AuthorizationErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     AuthorizationErrorException.type = Types::AuthorizationErrorException
-    BatchEntryIdsNotDistinctException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    BatchEntryIdsNotDistinctException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     BatchEntryIdsNotDistinctException.type = Types::BatchEntryIdsNotDistinctException
-    BatchRequestTooLongException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    BatchRequestTooLongException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     BatchRequestTooLongException.type = Types::BatchRequestTooLongException
-    BatchResultErrorEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    BatchResultErrorEntry.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Code", traits: {"smithy.api#required" => {}}))
-    BatchResultErrorEntry.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
-    BatchResultErrorEntry.add_member(:sender_fault, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "SenderFault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    BatchResultErrorEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#required" => {}}))
+    BatchResultErrorEntry.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code", traits: {"smithy.api#required" => {}}))
+    BatchResultErrorEntry.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
+    BatchResultErrorEntry.add_member(:sender_fault, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SenderFault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     BatchResultErrorEntry.type = Types::BatchResultErrorEntry
-    BatchResultErrorEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntry)
-    CheckIfPhoneNumberIsOptedOutInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "phoneNumber", traits: {"smithy.api#required" => {}}))
+    BatchResultErrorEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntry, name: "member")
+    CheckIfPhoneNumberIsOptedOutInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "phoneNumber", traits: {"smithy.api#required" => {}}))
     CheckIfPhoneNumberIsOptedOutInput.type = Types::CheckIfPhoneNumberIsOptedOutInput
-    CheckIfPhoneNumberIsOptedOutResponse.add_member(:is_opted_out, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "isOptedOut", traits: {"smithy.api#default" => false}))
+    CheckIfPhoneNumberIsOptedOutResponse.add_member(:is_opted_out, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isOptedOut", traits: {"smithy.api#default" => false}))
     CheckIfPhoneNumberIsOptedOutResponse.type = Types::CheckIfPhoneNumberIsOptedOutResponse
-    ConcurrentAccessException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    ConcurrentAccessException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ConcurrentAccessException.type = Types::ConcurrentAccessException
-    ConfirmSubscriptionInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
-    ConfirmSubscriptionInput.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "Token", traits: {"smithy.api#required" => {}}))
-    ConfirmSubscriptionInput.add_member(:authenticate_on_unsubscribe, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateOnUnsubscribe, location_name: "AuthenticateOnUnsubscribe"))
+    ConfirmSubscriptionInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    ConfirmSubscriptionInput.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "Token", traits: {"smithy.api#required" => {}}))
+    ConfirmSubscriptionInput.add_member(:authenticate_on_unsubscribe, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateOnUnsubscribe, name: "AuthenticateOnUnsubscribe"))
     ConfirmSubscriptionInput.type = Types::ConfirmSubscriptionInput
-    ConfirmSubscriptionResponse.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, location_name: "SubscriptionArn"))
+    ConfirmSubscriptionResponse.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, name: "SubscriptionArn"))
     ConfirmSubscriptionResponse.type = Types::ConfirmSubscriptionResponse
-    CreateEndpointResponse.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EndpointArn"))
+    CreateEndpointResponse.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndpointArn"))
     CreateEndpointResponse.type = Types::CreateEndpointResponse
-    CreatePlatformApplicationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreatePlatformApplicationInput.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Platform", traits: {"smithy.api#required" => {}}))
-    CreatePlatformApplicationInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, location_name: "Attributes", traits: {"smithy.api#required" => {}}))
+    CreatePlatformApplicationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
+    CreatePlatformApplicationInput.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Platform", traits: {"smithy.api#required" => {}}))
+    CreatePlatformApplicationInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "Attributes", traits: {"smithy.api#required" => {}}))
     CreatePlatformApplicationInput.type = Types::CreatePlatformApplicationInput
-    CreatePlatformApplicationResponse.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PlatformApplicationArn"))
+    CreatePlatformApplicationResponse.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformApplicationArn"))
     CreatePlatformApplicationResponse.type = Types::CreatePlatformApplicationResponse
-    CreatePlatformEndpointInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
-    CreatePlatformEndpointInput.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Token", traits: {"smithy.api#required" => {}}))
-    CreatePlatformEndpointInput.add_member(:custom_user_data, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CustomUserData"))
-    CreatePlatformEndpointInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, location_name: "Attributes"))
+    CreatePlatformEndpointInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
+    CreatePlatformEndpointInput.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Token", traits: {"smithy.api#required" => {}}))
+    CreatePlatformEndpointInput.add_member(:custom_user_data, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomUserData"))
+    CreatePlatformEndpointInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "Attributes"))
     CreatePlatformEndpointInput.type = Types::CreatePlatformEndpointInput
-    CreateSMSSandboxPhoneNumberInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberString, location_name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
-    CreateSMSSandboxPhoneNumberInput.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, location_name: "LanguageCode"))
+    CreateSMSSandboxPhoneNumberInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberString, name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
+    CreateSMSSandboxPhoneNumberInput.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, name: "LanguageCode"))
     CreateSMSSandboxPhoneNumberInput.type = Types::CreateSMSSandboxPhoneNumberInput
     CreateSMSSandboxPhoneNumberResult.type = Types::CreateSMSSandboxPhoneNumberResult
-    CreateTopicInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicName, location_name: "Name", traits: {"smithy.api#required" => {}}))
-    CreateTopicInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicAttributesMap, location_name: "Attributes"))
-    CreateTopicInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
-    CreateTopicInput.add_member(:data_protection_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, location_name: "DataProtectionPolicy"))
+    CreateTopicInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicName, name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateTopicInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicAttributesMap, name: "Attributes"))
+    CreateTopicInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateTopicInput.add_member(:data_protection_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "DataProtectionPolicy"))
     CreateTopicInput.type = Types::CreateTopicInput
-    CreateTopicResponse.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn"))
+    CreateTopicResponse.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn"))
     CreateTopicResponse.type = Types::CreateTopicResponse
-    DelegatesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Delegate)
-    DeleteEndpointInput.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
+    DelegatesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Delegate, name: "member")
+    DeleteEndpointInput.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndpointArn", traits: {"smithy.api#required" => {}}))
     DeleteEndpointInput.type = Types::DeleteEndpointInput
-    DeletePlatformApplicationInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
+    DeletePlatformApplicationInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
     DeletePlatformApplicationInput.type = Types::DeletePlatformApplicationInput
-    DeleteSMSSandboxPhoneNumberInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberString, location_name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
+    DeleteSMSSandboxPhoneNumberInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberString, name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
     DeleteSMSSandboxPhoneNumberInput.type = Types::DeleteSMSSandboxPhoneNumberInput
     DeleteSMSSandboxPhoneNumberResult.type = Types::DeleteSMSSandboxPhoneNumberResult
-    DeleteTopicInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    DeleteTopicInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
     DeleteTopicInput.type = Types::DeleteTopicInput
-    EmptyBatchRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    EmptyBatchRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     EmptyBatchRequestException.type = Types::EmptyBatchRequestException
-    Endpoint.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EndpointArn"))
-    Endpoint.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, location_name: "Attributes"))
+    Endpoint.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndpointArn"))
+    Endpoint.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "Attributes"))
     Endpoint.type = Types::Endpoint
-    EndpointDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    EndpointDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     EndpointDisabledException.type = Types::EndpointDisabledException
-    FilterPolicyLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    FilterPolicyLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     FilterPolicyLimitExceededException.type = Types::FilterPolicyLimitExceededException
-    GetDataProtectionPolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    GetDataProtectionPolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     GetDataProtectionPolicyInput.type = Types::GetDataProtectionPolicyInput
-    GetDataProtectionPolicyResponse.add_member(:data_protection_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, location_name: "DataProtectionPolicy"))
+    GetDataProtectionPolicyResponse.add_member(:data_protection_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "DataProtectionPolicy"))
     GetDataProtectionPolicyResponse.type = Types::GetDataProtectionPolicyResponse
-    GetEndpointAttributesInput.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
+    GetEndpointAttributesInput.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndpointArn", traits: {"smithy.api#required" => {}}))
     GetEndpointAttributesInput.type = Types::GetEndpointAttributesInput
-    GetEndpointAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, location_name: "Attributes"))
+    GetEndpointAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "Attributes"))
     GetEndpointAttributesResponse.type = Types::GetEndpointAttributesResponse
-    GetPlatformApplicationAttributesInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
+    GetPlatformApplicationAttributesInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
     GetPlatformApplicationAttributesInput.type = Types::GetPlatformApplicationAttributesInput
-    GetPlatformApplicationAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, location_name: "Attributes"))
+    GetPlatformApplicationAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "Attributes"))
     GetPlatformApplicationAttributesResponse.type = Types::GetPlatformApplicationAttributesResponse
-    GetSMSAttributesInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ListString, location_name: "attributes"))
+    GetSMSAttributesInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ListString, name: "attributes"))
     GetSMSAttributesInput.type = Types::GetSMSAttributesInput
-    GetSMSAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, location_name: "attributes"))
+    GetSMSAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "attributes"))
     GetSMSAttributesResponse.type = Types::GetSMSAttributesResponse
     GetSMSSandboxAccountStatusInput.type = Types::GetSMSSandboxAccountStatusInput
-    GetSMSSandboxAccountStatusResult.add_member(:is_in_sandbox, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "IsInSandbox", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    GetSMSSandboxAccountStatusResult.add_member(:is_in_sandbox, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsInSandbox", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     GetSMSSandboxAccountStatusResult.type = Types::GetSMSSandboxAccountStatusResult
-    GetSubscriptionAttributesInput.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, location_name: "SubscriptionArn", traits: {"smithy.api#required" => {}}))
+    GetSubscriptionAttributesInput.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, name: "SubscriptionArn", traits: {"smithy.api#required" => {}}))
     GetSubscriptionAttributesInput.type = Types::GetSubscriptionAttributesInput
-    GetSubscriptionAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionAttributesMap, location_name: "Attributes"))
+    GetSubscriptionAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionAttributesMap, name: "Attributes"))
     GetSubscriptionAttributesResponse.type = Types::GetSubscriptionAttributesResponse
-    GetTopicAttributesInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    GetTopicAttributesInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
     GetTopicAttributesInput.type = Types::GetTopicAttributesInput
-    GetTopicAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicAttributesMap, location_name: "Attributes"))
+    GetTopicAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicAttributesMap, name: "Attributes"))
     GetTopicAttributesResponse.type = Types::GetTopicAttributesResponse
-    InternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InternalErrorException.type = Types::InternalErrorException
-    InvalidBatchEntryIdException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InvalidBatchEntryIdException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InvalidBatchEntryIdException.type = Types::InvalidBatchEntryIdException
-    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InvalidParameterException.type = Types::InvalidParameterException
-    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InvalidParameterValueException.type = Types::InvalidParameterValueException
-    InvalidSecurityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InvalidSecurityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InvalidSecurityException.type = Types::InvalidSecurityException
-    InvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    InvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InvalidStateException.type = Types::InvalidStateException
-    KMSAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    KMSAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     KMSAccessDeniedException.type = Types::KMSAccessDeniedException
-    KMSDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    KMSDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     KMSDisabledException.type = Types::KMSDisabledException
-    KMSInvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    KMSInvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     KMSInvalidStateException.type = Types::KMSInvalidStateException
-    KMSNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    KMSNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     KMSNotFoundException.type = Types::KMSNotFoundException
-    KMSOptInRequired.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    KMSOptInRequired.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     KMSOptInRequired.type = Types::KMSOptInRequired
-    KMSThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    KMSThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     KMSThrottlingException.type = Types::KMSThrottlingException
-    LanguageCodeString.add_member(:en_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "en_US", traits: {"smithy.api#enumValue" => "en-US"}))
-    LanguageCodeString.add_member(:en_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "en_GB", traits: {"smithy.api#enumValue" => "en-GB"}))
-    LanguageCodeString.add_member(:es_419, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "es_419", traits: {"smithy.api#enumValue" => "es-419"}))
-    LanguageCodeString.add_member(:es_es, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "es_ES", traits: {"smithy.api#enumValue" => "es-ES"}))
-    LanguageCodeString.add_member(:de_de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "de_DE", traits: {"smithy.api#enumValue" => "de-DE"}))
-    LanguageCodeString.add_member(:fr_ca, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "fr_CA", traits: {"smithy.api#enumValue" => "fr-CA"}))
-    LanguageCodeString.add_member(:fr_fr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "fr_FR", traits: {"smithy.api#enumValue" => "fr-FR"}))
-    LanguageCodeString.add_member(:it_it, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "it_IT", traits: {"smithy.api#enumValue" => "it-IT"}))
-    LanguageCodeString.add_member(:jp_jp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "jp_JP", traits: {"smithy.api#enumValue" => "ja-JP"}))
-    LanguageCodeString.add_member(:pt_br, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "pt_BR", traits: {"smithy.api#enumValue" => "pt-BR"}))
-    LanguageCodeString.add_member(:kr_kr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "kr_KR", traits: {"smithy.api#enumValue" => "kr-KR"}))
-    LanguageCodeString.add_member(:zh_cn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "zh_CN", traits: {"smithy.api#enumValue" => "zh-CN"}))
-    LanguageCodeString.add_member(:zh_tw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "zh_TW", traits: {"smithy.api#enumValue" => "zh-TW"}))
-    ListEndpointsByPlatformApplicationInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
-    ListEndpointsByPlatformApplicationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    LanguageCodeString.add_member(:en_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "en_US", traits: {"smithy.api#enumValue" => "en-US"}))
+    LanguageCodeString.add_member(:en_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "en_GB", traits: {"smithy.api#enumValue" => "en-GB"}))
+    LanguageCodeString.add_member(:es_419, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "es_419", traits: {"smithy.api#enumValue" => "es-419"}))
+    LanguageCodeString.add_member(:es_es, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "es_ES", traits: {"smithy.api#enumValue" => "es-ES"}))
+    LanguageCodeString.add_member(:de_de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "de_DE", traits: {"smithy.api#enumValue" => "de-DE"}))
+    LanguageCodeString.add_member(:fr_ca, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "fr_CA", traits: {"smithy.api#enumValue" => "fr-CA"}))
+    LanguageCodeString.add_member(:fr_fr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "fr_FR", traits: {"smithy.api#enumValue" => "fr-FR"}))
+    LanguageCodeString.add_member(:it_it, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "it_IT", traits: {"smithy.api#enumValue" => "it-IT"}))
+    LanguageCodeString.add_member(:jp_jp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "jp_JP", traits: {"smithy.api#enumValue" => "ja-JP"}))
+    LanguageCodeString.add_member(:pt_br, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pt_BR", traits: {"smithy.api#enumValue" => "pt-BR"}))
+    LanguageCodeString.add_member(:kr_kr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "kr_KR", traits: {"smithy.api#enumValue" => "kr-KR"}))
+    LanguageCodeString.add_member(:zh_cn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "zh_CN", traits: {"smithy.api#enumValue" => "zh-CN"}))
+    LanguageCodeString.add_member(:zh_tw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "zh_TW", traits: {"smithy.api#enumValue" => "zh-TW"}))
+    ListEndpointsByPlatformApplicationInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
+    ListEndpointsByPlatformApplicationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListEndpointsByPlatformApplicationInput.type = Types::ListEndpointsByPlatformApplicationInput
-    ListEndpointsByPlatformApplicationResponse.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfEndpoints, location_name: "Endpoints"))
-    ListEndpointsByPlatformApplicationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListEndpointsByPlatformApplicationResponse.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfEndpoints, name: "Endpoints"))
+    ListEndpointsByPlatformApplicationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListEndpointsByPlatformApplicationResponse.type = Types::ListEndpointsByPlatformApplicationResponse
-    ListOfEndpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint)
-    ListOfPlatformApplications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformApplication)
-    ListOriginationNumbersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
-    ListOriginationNumbersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItemsListOriginationNumbers, location_name: "MaxResults"))
+    ListOfEndpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member")
+    ListOfPlatformApplications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformApplication, name: "member")
+    ListOriginationNumbersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListOriginationNumbersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItemsListOriginationNumbers, name: "MaxResults"))
     ListOriginationNumbersRequest.type = Types::ListOriginationNumbersRequest
-    ListOriginationNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
-    ListOriginationNumbersResult.add_member(:phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberInformationList, location_name: "PhoneNumbers"))
+    ListOriginationNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListOriginationNumbersResult.add_member(:phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberInformationList, name: "PhoneNumbers"))
     ListOriginationNumbersResult.type = Types::ListOriginationNumbersResult
-    ListPhoneNumbersOptedOutInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken"))
+    ListPhoneNumbersOptedOutInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListPhoneNumbersOptedOutInput.type = Types::ListPhoneNumbersOptedOutInput
-    ListPhoneNumbersOptedOutResponse.add_member(:phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberList, location_name: "phoneNumbers"))
-    ListPhoneNumbersOptedOutResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "nextToken"))
+    ListPhoneNumbersOptedOutResponse.add_member(:phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberList, name: "phoneNumbers"))
+    ListPhoneNumbersOptedOutResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListPhoneNumbersOptedOutResponse.type = Types::ListPhoneNumbersOptedOutResponse
-    ListPlatformApplicationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListPlatformApplicationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListPlatformApplicationsInput.type = Types::ListPlatformApplicationsInput
-    ListPlatformApplicationsResponse.add_member(:platform_applications, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfPlatformApplications, location_name: "PlatformApplications"))
-    ListPlatformApplicationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListPlatformApplicationsResponse.add_member(:platform_applications, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfPlatformApplications, name: "PlatformApplications"))
+    ListPlatformApplicationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListPlatformApplicationsResponse.type = Types::ListPlatformApplicationsResponse
-    ListSMSSandboxPhoneNumbersInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
-    ListSMSSandboxPhoneNumbersInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, location_name: "MaxResults"))
+    ListSMSSandboxPhoneNumbersInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListSMSSandboxPhoneNumbersInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, name: "MaxResults"))
     ListSMSSandboxPhoneNumbersInput.type = Types::ListSMSSandboxPhoneNumbersInput
-    ListSMSSandboxPhoneNumbersResult.add_member(:phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSSandboxPhoneNumberList, location_name: "PhoneNumbers", traits: {"smithy.api#required" => {}}))
-    ListSMSSandboxPhoneNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken"))
+    ListSMSSandboxPhoneNumbersResult.add_member(:phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSSandboxPhoneNumberList, name: "PhoneNumbers", traits: {"smithy.api#required" => {}}))
+    ListSMSSandboxPhoneNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListSMSSandboxPhoneNumbersResult.type = Types::ListSMSSandboxPhoneNumbersResult
-    ListString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
-    ListSubscriptionsByTopicInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
-    ListSubscriptionsByTopicInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ListSubscriptionsByTopicInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    ListSubscriptionsByTopicInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListSubscriptionsByTopicInput.type = Types::ListSubscriptionsByTopicInput
-    ListSubscriptionsByTopicResponse.add_member(:subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionsList, location_name: "Subscriptions"))
-    ListSubscriptionsByTopicResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListSubscriptionsByTopicResponse.add_member(:subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionsList, name: "Subscriptions"))
+    ListSubscriptionsByTopicResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListSubscriptionsByTopicResponse.type = Types::ListSubscriptionsByTopicResponse
-    ListSubscriptionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListSubscriptionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListSubscriptionsInput.type = Types::ListSubscriptionsInput
-    ListSubscriptionsResponse.add_member(:subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionsList, location_name: "Subscriptions"))
-    ListSubscriptionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListSubscriptionsResponse.add_member(:subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionsList, name: "Subscriptions"))
+    ListSubscriptionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListSubscriptionsResponse.type = Types::ListSubscriptionsResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListTopicsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListTopicsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTopicsInput.type = Types::ListTopicsInput
-    ListTopicsResponse.add_member(:topics, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicsList, location_name: "Topics"))
-    ListTopicsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    ListTopicsResponse.add_member(:topics, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicsList, name: "Topics"))
+    ListTopicsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTopicsResponse.type = Types::ListTopicsResponse
-    MapStringToString.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
-    MapStringToString.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String)
-    MessageAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, traits: {"smithy.api#xmlName" => "Name"})
-    MessageAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeValue, traits: {"smithy.api#xmlName" => "Value"})
-    MessageAttributeValue.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DataType", traits: {"smithy.api#required" => {}}))
-    MessageAttributeValue.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "StringValue"))
-    MessageAttributeValue.add_member(:binary_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Binary, location_name: "BinaryValue"))
+    MapStringToString.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
+    MapStringToString.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    MessageAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key", traits: {"smithy.api#xmlName" => "Name"})
+    MessageAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeValue, name: "value", traits: {"smithy.api#xmlName" => "Value"})
+    MessageAttributeValue.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataType", traits: {"smithy.api#required" => {}}))
+    MessageAttributeValue.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StringValue"))
+    MessageAttributeValue.add_member(:binary_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Binary, name: "BinaryValue"))
     MessageAttributeValue.type = Types::MessageAttributeValue
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     NotFoundException.type = Types::NotFoundException
-    NumberCapability.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SMS", traits: {"smithy.api#enumValue" => "SMS"}))
-    NumberCapability.add_member(:mms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "MMS", traits: {"smithy.api#enumValue" => "MMS"}))
-    NumberCapability.add_member(:voice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "VOICE", traits: {"smithy.api#enumValue" => "VOICE"}))
-    NumberCapabilityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability)
-    OptInPhoneNumberInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "phoneNumber", traits: {"smithy.api#required" => {}}))
+    NumberCapability.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMS", traits: {"smithy.api#enumValue" => "SMS"}))
+    NumberCapability.add_member(:mms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MMS", traits: {"smithy.api#enumValue" => "MMS"}))
+    NumberCapability.add_member(:voice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOICE", traits: {"smithy.api#enumValue" => "VOICE"}))
+    NumberCapabilityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability, name: "member")
+    OptInPhoneNumberInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "phoneNumber", traits: {"smithy.api#required" => {}}))
     OptInPhoneNumberInput.type = Types::OptInPhoneNumberInput
     OptInPhoneNumberResponse.type = Types::OptInPhoneNumberResponse
-    OptedOutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    OptedOutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     OptedOutException.type = Types::OptedOutException
-    PhoneNumberInformation.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "CreatedAt"))
-    PhoneNumberInformation.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "PhoneNumber"))
-    PhoneNumberInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status"))
-    PhoneNumberInformation.add_member(:iso2_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso2CountryCode, location_name: "Iso2CountryCode"))
-    PhoneNumberInformation.add_member(:route_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteType, location_name: "RouteType"))
-    PhoneNumberInformation.add_member(:number_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, location_name: "NumberCapabilities"))
+    PhoneNumberInformation.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    PhoneNumberInformation.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "PhoneNumber"))
+    PhoneNumberInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
+    PhoneNumberInformation.add_member(:iso2_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso2CountryCode, name: "Iso2CountryCode"))
+    PhoneNumberInformation.add_member(:route_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteType, name: "RouteType"))
+    PhoneNumberInformation.add_member(:number_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, name: "NumberCapabilities"))
     PhoneNumberInformation.type = Types::PhoneNumberInformation
-    PhoneNumberInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberInformation)
-    PhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber)
-    PlatformApplication.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PlatformApplicationArn"))
-    PlatformApplication.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, location_name: "Attributes"))
+    PhoneNumberInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberInformation, name: "member")
+    PhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member")
+    PlatformApplication.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformApplicationArn"))
+    PlatformApplication.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "Attributes"))
     PlatformApplication.type = Types::PlatformApplication
-    PlatformApplicationDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    PlatformApplicationDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     PlatformApplicationDisabledException.type = Types::PlatformApplicationDisabledException
-    PublishBatchInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
-    PublishBatchInput.add_member(:publish_batch_request_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchRequestEntryList, location_name: "PublishBatchRequestEntries", traits: {"smithy.api#required" => {}}))
+    PublishBatchInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    PublishBatchInput.add_member(:publish_batch_request_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchRequestEntryList, name: "PublishBatchRequestEntries", traits: {"smithy.api#required" => {}}))
     PublishBatchInput.type = Types::PublishBatchInput
-    PublishBatchRequestEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Id", traits: {"smithy.api#required" => {}}))
-    PublishBatchRequestEntry.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    PublishBatchRequestEntry.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, location_name: "Subject"))
-    PublishBatchRequestEntry.add_member(:message_structure, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageStructure, location_name: "MessageStructure"))
-    PublishBatchRequestEntry.add_member(:message_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeMap, location_name: "MessageAttributes"))
-    PublishBatchRequestEntry.add_member(:message_deduplication_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MessageDeduplicationId"))
-    PublishBatchRequestEntry.add_member(:message_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MessageGroupId"))
+    PublishBatchRequestEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#required" => {}}))
+    PublishBatchRequestEntry.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
+    PublishBatchRequestEntry.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, name: "Subject"))
+    PublishBatchRequestEntry.add_member(:message_structure, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageStructure, name: "MessageStructure"))
+    PublishBatchRequestEntry.add_member(:message_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeMap, name: "MessageAttributes"))
+    PublishBatchRequestEntry.add_member(:message_deduplication_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageDeduplicationId"))
+    PublishBatchRequestEntry.add_member(:message_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageGroupId"))
     PublishBatchRequestEntry.type = Types::PublishBatchRequestEntry
-    PublishBatchRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchRequestEntry)
-    PublishBatchResponse.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchResultEntryList, location_name: "Successful"))
-    PublishBatchResponse.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntryList, location_name: "Failed"))
+    PublishBatchRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchRequestEntry, name: "member")
+    PublishBatchResponse.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchResultEntryList, name: "Successful"))
+    PublishBatchResponse.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntryList, name: "Failed"))
     PublishBatchResponse.type = Types::PublishBatchResponse
-    PublishBatchResultEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Id"))
-    PublishBatchResultEntry.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, location_name: "MessageId"))
-    PublishBatchResultEntry.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SequenceNumber"))
+    PublishBatchResultEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id"))
+    PublishBatchResultEntry.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "MessageId"))
+    PublishBatchResultEntry.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SequenceNumber"))
     PublishBatchResultEntry.type = Types::PublishBatchResultEntry
-    PublishBatchResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchResultEntry)
-    PublishInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn"))
-    PublishInput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "TargetArn"))
-    PublishInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, location_name: "PhoneNumber"))
-    PublishInput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    PublishInput.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, location_name: "Subject"))
-    PublishInput.add_member(:message_structure, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageStructure, location_name: "MessageStructure"))
-    PublishInput.add_member(:message_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeMap, location_name: "MessageAttributes"))
-    PublishInput.add_member(:message_deduplication_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MessageDeduplicationId"))
-    PublishInput.add_member(:message_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MessageGroupId"))
+    PublishBatchResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchResultEntry, name: "member")
+    PublishInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn"))
+    PublishInput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetArn"))
+    PublishInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "PhoneNumber"))
+    PublishInput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
+    PublishInput.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, name: "Subject"))
+    PublishInput.add_member(:message_structure, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageStructure, name: "MessageStructure"))
+    PublishInput.add_member(:message_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeMap, name: "MessageAttributes"))
+    PublishInput.add_member(:message_deduplication_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageDeduplicationId"))
+    PublishInput.add_member(:message_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageGroupId"))
     PublishInput.type = Types::PublishInput
-    PublishResponse.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, location_name: "MessageId"))
-    PublishResponse.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SequenceNumber"))
+    PublishResponse.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "MessageId"))
+    PublishResponse.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SequenceNumber"))
     PublishResponse.type = Types::PublishResponse
-    PutDataProtectionPolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    PutDataProtectionPolicyInput.add_member(:data_protection_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, location_name: "DataProtectionPolicy", traits: {"smithy.api#required" => {}}))
+    PutDataProtectionPolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    PutDataProtectionPolicyInput.add_member(:data_protection_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "DataProtectionPolicy", traits: {"smithy.api#required" => {}}))
     PutDataProtectionPolicyInput.type = Types::PutDataProtectionPolicyInput
-    RemovePermissionInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
-    RemovePermissionInput.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, location_name: "Label", traits: {"smithy.api#required" => {}}))
+    RemovePermissionInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    RemovePermissionInput.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "Label", traits: {"smithy.api#required" => {}}))
     RemovePermissionInput.type = Types::RemovePermissionInput
-    ReplayLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    ReplayLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ReplayLimitExceededException.type = Types::ReplayLimitExceededException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RouteType.add_member(:transactional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Transactional", traits: {"smithy.api#enumValue" => "Transactional"}))
-    RouteType.add_member(:promotional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Promotional", traits: {"smithy.api#enumValue" => "Promotional"}))
-    RouteType.add_member(:premium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Premium", traits: {"smithy.api#enumValue" => "Premium"}))
-    SMSSandboxPhoneNumber.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberString, location_name: "PhoneNumber"))
-    SMSSandboxPhoneNumber.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSSandboxPhoneNumberVerificationStatus, location_name: "Status"))
+    RouteType.add_member(:transactional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Transactional", traits: {"smithy.api#enumValue" => "Transactional"}))
+    RouteType.add_member(:promotional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Promotional", traits: {"smithy.api#enumValue" => "Promotional"}))
+    RouteType.add_member(:premium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Premium", traits: {"smithy.api#enumValue" => "Premium"}))
+    SMSSandboxPhoneNumber.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberString, name: "PhoneNumber"))
+    SMSSandboxPhoneNumber.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSSandboxPhoneNumberVerificationStatus, name: "Status"))
     SMSSandboxPhoneNumber.type = Types::SMSSandboxPhoneNumber
-    SMSSandboxPhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SMSSandboxPhoneNumber)
-    SMSSandboxPhoneNumberVerificationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
-    SMSSandboxPhoneNumberVerificationStatus.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Verified", traits: {"smithy.api#enumValue" => "Verified"}))
-    SetEndpointAttributesInput.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EndpointArn", traits: {"smithy.api#required" => {}}))
-    SetEndpointAttributesInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, location_name: "Attributes", traits: {"smithy.api#required" => {}}))
+    SMSSandboxPhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SMSSandboxPhoneNumber, name: "member")
+    SMSSandboxPhoneNumberVerificationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
+    SMSSandboxPhoneNumberVerificationStatus.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Verified", traits: {"smithy.api#enumValue" => "Verified"}))
+    SetEndpointAttributesInput.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndpointArn", traits: {"smithy.api#required" => {}}))
+    SetEndpointAttributesInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "Attributes", traits: {"smithy.api#required" => {}}))
     SetEndpointAttributesInput.type = Types::SetEndpointAttributesInput
-    SetPlatformApplicationAttributesInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
-    SetPlatformApplicationAttributesInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, location_name: "Attributes", traits: {"smithy.api#required" => {}}))
+    SetPlatformApplicationAttributesInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
+    SetPlatformApplicationAttributesInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "Attributes", traits: {"smithy.api#required" => {}}))
     SetPlatformApplicationAttributesInput.type = Types::SetPlatformApplicationAttributesInput
-    SetSMSAttributesInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, location_name: "attributes", traits: {"smithy.api#required" => {}}))
+    SetSMSAttributesInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "attributes", traits: {"smithy.api#required" => {}}))
     SetSMSAttributesInput.type = Types::SetSMSAttributesInput
     SetSMSAttributesResponse.type = Types::SetSMSAttributesResponse
-    SetSubscriptionAttributesInput.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, location_name: "SubscriptionArn", traits: {"smithy.api#required" => {}}))
-    SetSubscriptionAttributesInput.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, location_name: "AttributeName", traits: {"smithy.api#required" => {}}))
-    SetSubscriptionAttributesInput.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, location_name: "AttributeValue"))
+    SetSubscriptionAttributesInput.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, name: "SubscriptionArn", traits: {"smithy.api#required" => {}}))
+    SetSubscriptionAttributesInput.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "AttributeName", traits: {"smithy.api#required" => {}}))
+    SetSubscriptionAttributesInput.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "AttributeValue"))
     SetSubscriptionAttributesInput.type = Types::SetSubscriptionAttributesInput
-    SetTopicAttributesInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
-    SetTopicAttributesInput.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, location_name: "AttributeName", traits: {"smithy.api#required" => {}}))
-    SetTopicAttributesInput.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, location_name: "AttributeValue"))
+    SetTopicAttributesInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    SetTopicAttributesInput.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "AttributeName", traits: {"smithy.api#required" => {}}))
+    SetTopicAttributesInput.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "AttributeValue"))
     SetTopicAttributesInput.type = Types::SetTopicAttributesInput
-    StaleTagException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    StaleTagException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     StaleTagException.type = Types::StaleTagException
-    SubscribeInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn", traits: {"smithy.api#required" => {}}))
-    SubscribeInput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "Protocol", traits: {"smithy.api#required" => {}}))
-    SubscribeInput.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint2, location_name: "Endpoint"))
-    SubscribeInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionAttributesMap, location_name: "Attributes"))
-    SubscribeInput.add_member(:return_subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "ReturnSubscriptionArn", traits: {"smithy.api#default" => false}))
+    SubscribeInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
+    SubscribeInput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "Protocol", traits: {"smithy.api#required" => {}}))
+    SubscribeInput.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint2, name: "Endpoint"))
+    SubscribeInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionAttributesMap, name: "Attributes"))
+    SubscribeInput.add_member(:return_subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ReturnSubscriptionArn", traits: {"smithy.api#default" => false}))
     SubscribeInput.type = Types::SubscribeInput
-    SubscribeResponse.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, location_name: "SubscriptionArn"))
+    SubscribeResponse.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, name: "SubscriptionArn"))
     SubscribeResponse.type = Types::SubscribeResponse
-    Subscription.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, location_name: "SubscriptionArn"))
-    Subscription.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Account, location_name: "Owner"))
-    Subscription.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "Protocol"))
-    Subscription.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint2, location_name: "Endpoint"))
-    Subscription.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn"))
+    Subscription.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, name: "SubscriptionArn"))
+    Subscription.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "Owner"))
+    Subscription.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "Protocol"))
+    Subscription.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint2, name: "Endpoint"))
+    Subscription.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn"))
     Subscription.type = Types::Subscription
-    SubscriptionAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName)
-    SubscriptionAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue)
-    SubscriptionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    SubscriptionAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
+    SubscriptionAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    SubscriptionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     SubscriptionLimitExceededException.type = Types::SubscriptionLimitExceededException
-    SubscriptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    SubscriptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member")
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
-    TagLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TagLimitExceededException.type = Types::TagLimitExceededException
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
-    TagPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TagPolicyException.type = Types::TagPolicyException
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    ThrottledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    ThrottledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ThrottledException.type = Types::ThrottledException
-    TooManyEntriesInBatchRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    TooManyEntriesInBatchRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TooManyEntriesInBatchRequestException.type = Types::TooManyEntriesInBatchRequestException
-    Topic.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, location_name: "TopicArn"))
+    Topic.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn"))
     Topic.type = Types::Topic
-    TopicAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName)
-    TopicAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue)
-    TopicLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    TopicAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
+    TopicAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    TopicLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TopicLimitExceededException.type = Types::TopicLimitExceededException
-    TopicsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Topic)
-    UnsubscribeInput.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, location_name: "SubscriptionArn", traits: {"smithy.api#required" => {}}))
+    TopicsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Topic, name: "member")
+    UnsubscribeInput.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, name: "SubscriptionArn", traits: {"smithy.api#required" => {}}))
     UnsubscribeInput.type = Types::UnsubscribeInput
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, location_name: "ResourceArn", traits: {"smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UserErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "message"))
+    UserErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     UserErrorException.type = Types::UserErrorException
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
-    VerificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#required" => {}}))
-    VerificationException.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    VerificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
+    VerificationException.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status", traits: {"smithy.api#required" => {}}))
     VerificationException.type = Types::VerificationException
-    VerifySMSSandboxPhoneNumberInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberString, location_name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
-    VerifySMSSandboxPhoneNumberInput.add_member(:one_time_password, ::Smithy::Schema::Shapes::MemberShape.new(target: OTPCode, location_name: "OneTimePassword", traits: {"smithy.api#required" => {}}))
+    VerifySMSSandboxPhoneNumberInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberString, name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
+    VerifySMSSandboxPhoneNumberInput.add_member(:one_time_password, ::Smithy::Schema::Shapes::MemberShape.new(target: OTPCode, name: "OneTimePassword", traits: {"smithy.api#required" => {}}))
     VerifySMSSandboxPhoneNumberInput.type = Types::VerifySMSSandboxPhoneNumberInput
     VerifySMSSandboxPhoneNumberResult.type = Types::VerifySMSSandboxPhoneNumberResult
 

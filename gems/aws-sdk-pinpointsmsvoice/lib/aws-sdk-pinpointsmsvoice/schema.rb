@@ -47,100 +47,100 @@ module Aws::PinpointSMSVoice
     VoiceMessageContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoice#VoiceMessageContent", name: "VoiceMessageContent")
     WordCharactersWithDelimiters = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoice#WordCharactersWithDelimiters", name: "WordCharactersWithDelimiters")
 
-    AlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    AlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     AlreadyExistsException.type = Types::AlreadyExistsException
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     BadRequestException.type = Types::BadRequestException
-    CallInstructionsMessageType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Text"))
+    CallInstructionsMessageType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Text"))
     CallInstructionsMessageType.type = Types::CallInstructionsMessageType
-    CloudWatchLogsDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "IamRoleArn"))
-    CloudWatchLogsDestination.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LogGroupArn"))
+    CloudWatchLogsDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IamRoleArn"))
+    CloudWatchLogsDestination.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LogGroupArn"))
     CloudWatchLogsDestination.type = Types::CloudWatchLogsDestination
-    ConfigurationSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WordCharactersWithDelimiters)
-    CreateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateConfigurationSetEventDestinationRequest.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationDefinition, location_name: "EventDestination"))
-    CreateConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "EventDestinationName"))
+    ConfigurationSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WordCharactersWithDelimiters, name: "member")
+    CreateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateConfigurationSetEventDestinationRequest.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationDefinition, name: "EventDestination"))
+    CreateConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "EventDestinationName"))
     CreateConfigurationSetEventDestinationRequest.type = Types::CreateConfigurationSetEventDestinationRequest
     CreateConfigurationSetEventDestinationResponse.type = Types::CreateConfigurationSetEventDestinationResponse
-    CreateConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WordCharactersWithDelimiters, location_name: "ConfigurationSetName"))
+    CreateConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WordCharactersWithDelimiters, name: "ConfigurationSetName"))
     CreateConfigurationSetRequest.type = Types::CreateConfigurationSetRequest
     CreateConfigurationSetResponse.type = Types::CreateConfigurationSetResponse
-    DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EventDestinationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EventDestinationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConfigurationSetEventDestinationRequest.type = Types::DeleteConfigurationSetEventDestinationRequest
     DeleteConfigurationSetEventDestinationResponse.type = Types::DeleteConfigurationSetEventDestinationResponse
-    DeleteConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConfigurationSetRequest.type = Types::DeleteConfigurationSetRequest
     DeleteConfigurationSetResponse.type = Types::DeleteConfigurationSetResponse
-    EventDestination.add_member(:cloud_watch_logs_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
-    EventDestination.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "Enabled"))
-    EventDestination.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
-    EventDestination.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypes, location_name: "MatchingEventTypes"))
-    EventDestination.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Name"))
-    EventDestination.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, location_name: "SnsDestination"))
+    EventDestination.add_member(:cloud_watch_logs_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsDestination, name: "CloudWatchLogsDestination"))
+    EventDestination.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
+    EventDestination.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisFirehoseDestination, name: "KinesisFirehoseDestination"))
+    EventDestination.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypes, name: "MatchingEventTypes"))
+    EventDestination.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
+    EventDestination.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, name: "SnsDestination"))
     EventDestination.type = Types::EventDestination
-    EventDestinationDefinition.add_member(:cloud_watch_logs_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
-    EventDestinationDefinition.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, location_name: "Enabled"))
-    EventDestinationDefinition.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
-    EventDestinationDefinition.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypes, location_name: "MatchingEventTypes"))
-    EventDestinationDefinition.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, location_name: "SnsDestination"))
+    EventDestinationDefinition.add_member(:cloud_watch_logs_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsDestination, name: "CloudWatchLogsDestination"))
+    EventDestinationDefinition.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
+    EventDestinationDefinition.add_member(:kinesis_firehose_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisFirehoseDestination, name: "KinesisFirehoseDestination"))
+    EventDestinationDefinition.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypes, name: "MatchingEventTypes"))
+    EventDestinationDefinition.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, name: "SnsDestination"))
     EventDestinationDefinition.type = Types::EventDestinationDefinition
-    EventDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination)
-    EventType.add_member(:initiated_call, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INITIATED_CALL", traits: {"smithy.api#enumValue" => "INITIATED_CALL"}))
-    EventType.add_member(:ringing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RINGING", traits: {"smithy.api#enumValue" => "RINGING"}))
-    EventType.add_member(:answered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ANSWERED", traits: {"smithy.api#enumValue" => "ANSWERED"}))
-    EventType.add_member(:completed_call, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED_CALL", traits: {"smithy.api#enumValue" => "COMPLETED_CALL"}))
-    EventType.add_member(:busy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BUSY", traits: {"smithy.api#enumValue" => "BUSY"}))
-    EventType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    EventType.add_member(:no_answer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NO_ANSWER", traits: {"smithy.api#enumValue" => "NO_ANSWER"}))
-    EventTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType)
-    GetConfigurationSetEventDestinationsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    EventDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, name: "member")
+    EventType.add_member(:initiated_call, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIATED_CALL", traits: {"smithy.api#enumValue" => "INITIATED_CALL"}))
+    EventType.add_member(:ringing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RINGING", traits: {"smithy.api#enumValue" => "RINGING"}))
+    EventType.add_member(:answered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANSWERED", traits: {"smithy.api#enumValue" => "ANSWERED"}))
+    EventType.add_member(:completed_call, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_CALL", traits: {"smithy.api#enumValue" => "COMPLETED_CALL"}))
+    EventType.add_member(:busy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSY", traits: {"smithy.api#enumValue" => "BUSY"}))
+    EventType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    EventType.add_member(:no_answer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_ANSWER", traits: {"smithy.api#enumValue" => "NO_ANSWER"}))
+    EventTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member")
+    GetConfigurationSetEventDestinationsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConfigurationSetEventDestinationsRequest.type = Types::GetConfigurationSetEventDestinationsRequest
-    GetConfigurationSetEventDestinationsResponse.add_member(:event_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinations, location_name: "EventDestinations"))
+    GetConfigurationSetEventDestinationsResponse.add_member(:event_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinations, name: "EventDestinations"))
     GetConfigurationSetEventDestinationsResponse.type = Types::GetConfigurationSetEventDestinationsResponse
-    InternalServiceErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    InternalServiceErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     InternalServiceErrorException.type = Types::InternalServiceErrorException
-    KinesisFirehoseDestination.add_member(:delivery_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "DeliveryStreamArn"))
-    KinesisFirehoseDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "IamRoleArn"))
+    KinesisFirehoseDestination.add_member(:delivery_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DeliveryStreamArn"))
+    KinesisFirehoseDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IamRoleArn"))
     KinesisFirehoseDestination.type = Types::KinesisFirehoseDestination
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListConfigurationSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListConfigurationSetsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
+    ListConfigurationSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListConfigurationSetsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
     ListConfigurationSetsRequest.type = Types::ListConfigurationSetsRequest
-    ListConfigurationSetsResponse.add_member(:configuration_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSets, location_name: "ConfigurationSets"))
-    ListConfigurationSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenString, location_name: "NextToken"))
+    ListConfigurationSetsResponse.add_member(:configuration_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSets, name: "ConfigurationSets"))
+    ListConfigurationSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenString, name: "NextToken"))
     ListConfigurationSetsResponse.type = Types::ListConfigurationSetsResponse
-    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     NotFoundException.type = Types::NotFoundException
-    PlainTextMessageType.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LanguageCode"))
-    PlainTextMessageType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Text"))
-    PlainTextMessageType.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VoiceId"))
+    PlainTextMessageType.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LanguageCode"))
+    PlainTextMessageType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Text"))
+    PlainTextMessageType.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VoiceId"))
     PlainTextMessageType.type = Types::PlainTextMessageType
-    SSMLMessageType.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "LanguageCode"))
-    SSMLMessageType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "Text"))
-    SSMLMessageType.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "VoiceId"))
+    SSMLMessageType.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LanguageCode"))
+    SSMLMessageType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Text"))
+    SSMLMessageType.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VoiceId"))
     SSMLMessageType.type = Types::SSMLMessageType
-    SendVoiceMessageRequest.add_member(:caller_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "CallerId"))
-    SendVoiceMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WordCharactersWithDelimiters, location_name: "ConfigurationSetName"))
-    SendVoiceMessageRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceMessageContent, location_name: "Content"))
-    SendVoiceMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "DestinationPhoneNumber"))
-    SendVoiceMessageRequest.add_member(:origination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, location_name: "OriginationPhoneNumber"))
+    SendVoiceMessageRequest.add_member(:caller_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CallerId"))
+    SendVoiceMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WordCharactersWithDelimiters, name: "ConfigurationSetName"))
+    SendVoiceMessageRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceMessageContent, name: "Content"))
+    SendVoiceMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DestinationPhoneNumber"))
+    SendVoiceMessageRequest.add_member(:origination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OriginationPhoneNumber"))
     SendVoiceMessageRequest.type = Types::SendVoiceMessageRequest
-    SendVoiceMessageResponse.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "MessageId"))
+    SendVoiceMessageResponse.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageId"))
     SendVoiceMessageResponse.type = Types::SendVoiceMessageResponse
-    SnsDestination.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "TopicArn"))
+    SnsDestination.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TopicArn"))
     SnsDestination.type = Types::SnsDestination
-    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message"))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    UpdateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationDefinition, location_name: "EventDestination"))
-    UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "EventDestinationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationDefinition, name: "EventDestination"))
+    UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EventDestinationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateConfigurationSetEventDestinationRequest.type = Types::UpdateConfigurationSetEventDestinationRequest
     UpdateConfigurationSetEventDestinationResponse.type = Types::UpdateConfigurationSetEventDestinationResponse
-    VoiceMessageContent.add_member(:call_instructions_message, ::Smithy::Schema::Shapes::MemberShape.new(target: CallInstructionsMessageType, location_name: "CallInstructionsMessage"))
-    VoiceMessageContent.add_member(:plain_text_message, ::Smithy::Schema::Shapes::MemberShape.new(target: PlainTextMessageType, location_name: "PlainTextMessage"))
-    VoiceMessageContent.add_member(:ssml_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SSMLMessageType, location_name: "SSMLMessage"))
+    VoiceMessageContent.add_member(:call_instructions_message, ::Smithy::Schema::Shapes::MemberShape.new(target: CallInstructionsMessageType, name: "CallInstructionsMessage"))
+    VoiceMessageContent.add_member(:plain_text_message, ::Smithy::Schema::Shapes::MemberShape.new(target: PlainTextMessageType, name: "PlainTextMessage"))
+    VoiceMessageContent.add_member(:ssml_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SSMLMessageType, name: "SSMLMessage"))
     VoiceMessageContent.type = Types::VoiceMessageContent
 
     PinpointSMSVoice = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

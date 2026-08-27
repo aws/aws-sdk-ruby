@@ -54,88 +54,88 @@ module Aws::NotificationsContacts
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.notificationscontacts#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.notificationscontacts#ValidationExceptionReason", name: "ValidationExceptionReason")
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    ActivateEmailContactRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ActivateEmailContactRequest.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, location_name: "code", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ActivateEmailContactRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ActivateEmailContactRequest.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "code", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ActivateEmailContactRequest.type = Types::ActivateEmailContactRequest
     ActivateEmailContactResponse.type = Types::ActivateEmailContactResponse
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CreateEmailContactRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    CreateEmailContactRequest.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactAddress, location_name: "emailAddress", traits: {"smithy.api#required" => {}}))
-    CreateEmailContactRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    CreateEmailContactRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateEmailContactRequest.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactAddress, name: "emailAddress", traits: {"smithy.api#required" => {}}))
+    CreateEmailContactRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     CreateEmailContactRequest.type = Types::CreateEmailContactRequest
-    CreateEmailContactResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
+    CreateEmailContactResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, name: "arn", traits: {"smithy.api#required" => {}}))
     CreateEmailContactResponse.type = Types::CreateEmailContactResponse
-    DeleteEmailContactRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteEmailContactRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEmailContactRequest.type = Types::DeleteEmailContactRequest
     DeleteEmailContactResponse.type = Types::DeleteEmailContactResponse
-    EmailContact.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, location_name: "arn", traits: {"smithy.api#required" => {}}))
-    EmailContact.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactName, location_name: "name", traits: {"smithy.api#required" => {}}))
-    EmailContact.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveEmailContactAddress, location_name: "address", traits: {"smithy.api#required" => {}}))
-    EmailContact.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactStatus, location_name: "status", traits: {"smithy.api#required" => {}}))
-    EmailContact.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, location_name: "creationTime", traits: {"smithy.api#required" => {}}))
-    EmailContact.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, location_name: "updateTime", traits: {"smithy.api#required" => {}}))
+    EmailContact.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    EmailContact.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactName, name: "name", traits: {"smithy.api#required" => {}}))
+    EmailContact.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveEmailContactAddress, name: "address", traits: {"smithy.api#required" => {}}))
+    EmailContact.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    EmailContact.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, name: "creationTime", traits: {"smithy.api#required" => {}}))
+    EmailContact.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, name: "updateTime", traits: {"smithy.api#required" => {}}))
     EmailContact.type = Types::EmailContact
-    EmailContacts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContact)
-    GetEmailContactRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    EmailContacts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContact, name: "member")
+    GetEmailContactRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEmailContactRequest.type = Types::GetEmailContactRequest
-    GetEmailContactResponse.add_member(:email_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContact, location_name: "emailContact", traits: {"smithy.api#required" => {}}))
+    GetEmailContactResponse.add_member(:email_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContact, name: "emailContact", traits: {"smithy.api#required" => {}}))
     GetEmailContactResponse.type = Types::GetEmailContactResponse
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    ListEmailContactsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
-    ListEmailContactsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListEmailContactsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListEmailContactsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListEmailContactsRequest.type = Types::ListEmailContactsRequest
-    ListEmailContactsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "nextToken"))
-    ListEmailContactsResponse.add_member(:email_contacts, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContacts, location_name: "emailContacts", traits: {"smithy.api#required" => {}}))
+    ListEmailContactsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
+    ListEmailContactsResponse.add_member(:email_contacts, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContacts, name: "emailContacts", traits: {"smithy.api#required" => {}}))
     ListEmailContactsResponse.type = Types::ListEmailContactsResponse
-    ListTagsForResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
-    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SendActivationCodeRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SendActivationCodeRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     SendActivationCodeRequest.type = Types::SendActivationCodeRequest
     SendActivationCodeResponse.type = Types::SendActivationCodeResponse
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, location_name: "resourceId", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, location_name: "resourceType", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode", traits: {"smithy.api#required" => {}}))
-    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "quotaCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, name: "quotaCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue)
-    TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, location_name: "tags", traits: {"smithy.api#required" => {}}))
+    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
+    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, location_name: "serviceCode"))
-    ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, location_name: "quotaCode"))
-    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, name: "serviceCode"))
+    ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, name: "quotaCode"))
+    ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, location_name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, location_name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailContactArn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, location_name: "reason", traits: {"smithy.api#required" => {}}))
-    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, location_name: "fieldList"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "fieldList"))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "name", traits: {"smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField)
-    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
-    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
+    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
 
     NotificationsContacts = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.notificationscontacts#NotificationsContacts"

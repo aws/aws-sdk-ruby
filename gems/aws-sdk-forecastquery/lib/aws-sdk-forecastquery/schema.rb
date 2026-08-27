@@ -31,42 +31,42 @@ module Aws::Forecastquery
     TimeSeries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.forecastquery#TimeSeries", name: "TimeSeries")
     Timestamp = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.forecastquery#Timestamp", name: "Timestamp")
 
-    DataPoint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, location_name: "Timestamp"))
-    DataPoint.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, location_name: "Value"))
+    DataPoint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
+    DataPoint.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Value"))
     DataPoint.type = Types::DataPoint
-    Filters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName)
-    Filters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue)
-    Forecast.add_member(:predictions, ::Smithy::Schema::Shapes::MemberShape.new(target: Predictions, location_name: "Predictions"))
+    Filters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
+    Filters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    Forecast.add_member(:predictions, ::Smithy::Schema::Shapes::MemberShape.new(target: Predictions, name: "Predictions"))
     Forecast.type = Types::Forecast
-    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidInputException.type = Types::InvalidInputException
-    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidNextTokenException.type = Types::InvalidNextTokenException
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    Predictions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Statistic)
-    Predictions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeries)
-    QueryForecastRequest.add_member(:forecast_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, location_name: "ForecastArn", traits: {"smithy.api#required" => {}}))
-    QueryForecastRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartDate"))
-    QueryForecastRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndDate"))
-    QueryForecastRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, location_name: "Filters", traits: {"smithy.api#required" => {}}))
-    QueryForecastRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    Predictions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Statistic, name: "key")
+    Predictions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeries, name: "value")
+    QueryForecastRequest.add_member(:forecast_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ForecastArn", traits: {"smithy.api#required" => {}}))
+    QueryForecastRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartDate"))
+    QueryForecastRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EndDate"))
+    QueryForecastRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, name: "Filters", traits: {"smithy.api#required" => {}}))
+    QueryForecastRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     QueryForecastRequest.type = Types::QueryForecastRequest
-    QueryForecastResponse.add_member(:forecast, ::Smithy::Schema::Shapes::MemberShape.new(target: Forecast, location_name: "Forecast"))
+    QueryForecastResponse.add_member(:forecast, ::Smithy::Schema::Shapes::MemberShape.new(target: Forecast, name: "Forecast"))
     QueryForecastResponse.type = Types::QueryForecastResponse
-    QueryWhatIfForecastRequest.add_member(:what_if_forecast_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, location_name: "WhatIfForecastArn", traits: {"smithy.api#required" => {}}))
-    QueryWhatIfForecastRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "StartDate"))
-    QueryWhatIfForecastRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, location_name: "EndDate"))
-    QueryWhatIfForecastRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, location_name: "Filters", traits: {"smithy.api#required" => {}}))
-    QueryWhatIfForecastRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, location_name: "NextToken"))
+    QueryWhatIfForecastRequest.add_member(:what_if_forecast_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, name: "WhatIfForecastArn", traits: {"smithy.api#required" => {}}))
+    QueryWhatIfForecastRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartDate"))
+    QueryWhatIfForecastRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EndDate"))
+    QueryWhatIfForecastRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, name: "Filters", traits: {"smithy.api#required" => {}}))
+    QueryWhatIfForecastRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     QueryWhatIfForecastRequest.type = Types::QueryWhatIfForecastRequest
-    QueryWhatIfForecastResponse.add_member(:forecast, ::Smithy::Schema::Shapes::MemberShape.new(target: Forecast, location_name: "Forecast"))
+    QueryWhatIfForecastResponse.add_member(:forecast, ::Smithy::Schema::Shapes::MemberShape.new(target: Forecast, name: "Forecast"))
     QueryWhatIfForecastResponse.type = Types::QueryWhatIfForecastResponse
-    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    TimeSeries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataPoint)
+    TimeSeries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataPoint, name: "member")
 
     AmazonForecastRuntime = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.forecastquery#AmazonForecastRuntime"

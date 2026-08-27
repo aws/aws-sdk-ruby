@@ -189,327 +189,327 @@ module Aws::ElasticLoadBalancing
     UnsupportedProtocolException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancing#UnsupportedProtocolException", name: "UnsupportedProtocolException", traits: {"aws.protocols#awsQueryError" => {"code" => "UnsupportedProtocol", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VPCId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancing#VPCId", name: "VPCId")
 
-    AccessLog.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogEnabled, location_name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    AccessLog.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, location_name: "S3BucketName"))
-    AccessLog.add_member(:emit_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogInterval, location_name: "EmitInterval"))
-    AccessLog.add_member(:s3_bucket_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogPrefix, location_name: "S3BucketPrefix"))
+    AccessLog.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogEnabled, name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    AccessLog.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "S3BucketName"))
+    AccessLog.add_member(:emit_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogInterval, name: "EmitInterval"))
+    AccessLog.add_member(:s3_bucket_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogPrefix, name: "S3BucketPrefix"))
     AccessLog.type = Types::AccessLog
-    AccessPointNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    AccessPointNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     AccessPointNotFoundException.type = Types::AccessPointNotFoundException
-    AddAvailabilityZonesInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    AddAvailabilityZonesInput.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, location_name: "AvailabilityZones", traits: {"smithy.api#required" => {}}))
+    AddAvailabilityZonesInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    AddAvailabilityZonesInput.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, name: "AvailabilityZones", traits: {"smithy.api#required" => {}}))
     AddAvailabilityZonesInput.type = Types::AddAvailabilityZonesInput
-    AddAvailabilityZonesOutput.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, location_name: "AvailabilityZones"))
+    AddAvailabilityZonesOutput.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, name: "AvailabilityZones"))
     AddAvailabilityZonesOutput.type = Types::AddAvailabilityZonesOutput
-    AddTagsInput.add_member(:load_balancer_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerNames, location_name: "LoadBalancerNames", traits: {"smithy.api#required" => {}}))
-    AddTagsInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    AddTagsInput.add_member(:load_balancer_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerNames, name: "LoadBalancerNames", traits: {"smithy.api#required" => {}}))
+    AddTagsInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     AddTagsInput.type = Types::AddTagsInput
     AddTagsOutput.type = Types::AddTagsOutput
-    AdditionalAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAttributeKey, location_name: "Key"))
-    AdditionalAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAttributeValue, location_name: "Value"))
+    AdditionalAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAttributeKey, name: "Key"))
+    AdditionalAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAttributeValue, name: "Value"))
     AdditionalAttribute.type = Types::AdditionalAttribute
-    AdditionalAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAttribute)
-    AppCookieStickinessPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppCookieStickinessPolicy)
-    AppCookieStickinessPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, location_name: "PolicyName"))
-    AppCookieStickinessPolicy.add_member(:cookie_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieName, location_name: "CookieName"))
+    AdditionalAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAttribute, name: "member")
+    AppCookieStickinessPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppCookieStickinessPolicy, name: "member")
+    AppCookieStickinessPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "PolicyName"))
+    AppCookieStickinessPolicy.add_member(:cookie_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieName, name: "CookieName"))
     AppCookieStickinessPolicy.type = Types::AppCookieStickinessPolicy
-    ApplySecurityGroupsToLoadBalancerInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    ApplySecurityGroupsToLoadBalancerInput.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, location_name: "SecurityGroups", traits: {"smithy.api#required" => {}}))
+    ApplySecurityGroupsToLoadBalancerInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    ApplySecurityGroupsToLoadBalancerInput.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, name: "SecurityGroups", traits: {"smithy.api#required" => {}}))
     ApplySecurityGroupsToLoadBalancerInput.type = Types::ApplySecurityGroupsToLoadBalancerInput
-    ApplySecurityGroupsToLoadBalancerOutput.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, location_name: "SecurityGroups"))
+    ApplySecurityGroupsToLoadBalancerOutput.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, name: "SecurityGroups"))
     ApplySecurityGroupsToLoadBalancerOutput.type = Types::ApplySecurityGroupsToLoadBalancerOutput
-    AttachLoadBalancerToSubnetsInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    AttachLoadBalancerToSubnetsInput.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, location_name: "Subnets", traits: {"smithy.api#required" => {}}))
+    AttachLoadBalancerToSubnetsInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    AttachLoadBalancerToSubnetsInput.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, name: "Subnets", traits: {"smithy.api#required" => {}}))
     AttachLoadBalancerToSubnetsInput.type = Types::AttachLoadBalancerToSubnetsInput
-    AttachLoadBalancerToSubnetsOutput.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, location_name: "Subnets"))
+    AttachLoadBalancerToSubnetsOutput.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, name: "Subnets"))
     AttachLoadBalancerToSubnetsOutput.type = Types::AttachLoadBalancerToSubnetsOutput
-    AvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone)
-    BackendServerDescription.add_member(:instance_port, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePort, location_name: "InstancePort"))
-    BackendServerDescription.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, location_name: "PolicyNames"))
+    AvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member")
+    BackendServerDescription.add_member(:instance_port, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePort, name: "InstancePort"))
+    BackendServerDescription.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, name: "PolicyNames"))
     BackendServerDescription.type = Types::BackendServerDescription
-    BackendServerDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackendServerDescription)
-    CertificateNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    BackendServerDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackendServerDescription, name: "member")
+    CertificateNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     CertificateNotFoundException.type = Types::CertificateNotFoundException
-    ConfigureHealthCheckInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    ConfigureHealthCheckInput.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheck, location_name: "HealthCheck", traits: {"smithy.api#required" => {}}))
+    ConfigureHealthCheckInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    ConfigureHealthCheckInput.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheck, name: "HealthCheck", traits: {"smithy.api#required" => {}}))
     ConfigureHealthCheckInput.type = Types::ConfigureHealthCheckInput
-    ConfigureHealthCheckOutput.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheck, location_name: "HealthCheck"))
+    ConfigureHealthCheckOutput.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheck, name: "HealthCheck"))
     ConfigureHealthCheckOutput.type = Types::ConfigureHealthCheckOutput
-    ConnectionDraining.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionDrainingEnabled, location_name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
-    ConnectionDraining.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionDrainingTimeout, location_name: "Timeout"))
+    ConnectionDraining.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionDrainingEnabled, name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    ConnectionDraining.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionDrainingTimeout, name: "Timeout"))
     ConnectionDraining.type = Types::ConnectionDraining
-    ConnectionSettings.add_member(:idle_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleTimeout, location_name: "IdleTimeout", traits: {"smithy.api#required" => {}}))
+    ConnectionSettings.add_member(:idle_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleTimeout, name: "IdleTimeout", traits: {"smithy.api#required" => {}}))
     ConnectionSettings.type = Types::ConnectionSettings
-    CreateAccessPointInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    CreateAccessPointInput.add_member(:listeners, ::Smithy::Schema::Shapes::MemberShape.new(target: Listeners, location_name: "Listeners", traits: {"smithy.api#required" => {}}))
-    CreateAccessPointInput.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, location_name: "AvailabilityZones"))
-    CreateAccessPointInput.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, location_name: "Subnets"))
-    CreateAccessPointInput.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, location_name: "SecurityGroups"))
-    CreateAccessPointInput.add_member(:scheme, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerScheme, location_name: "Scheme"))
-    CreateAccessPointInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateAccessPointInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    CreateAccessPointInput.add_member(:listeners, ::Smithy::Schema::Shapes::MemberShape.new(target: Listeners, name: "Listeners", traits: {"smithy.api#required" => {}}))
+    CreateAccessPointInput.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, name: "AvailabilityZones"))
+    CreateAccessPointInput.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, name: "Subnets"))
+    CreateAccessPointInput.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, name: "SecurityGroups"))
+    CreateAccessPointInput.add_member(:scheme, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerScheme, name: "Scheme"))
+    CreateAccessPointInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateAccessPointInput.type = Types::CreateAccessPointInput
-    CreateAccessPointOutput.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, location_name: "DNSName"))
+    CreateAccessPointOutput.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, name: "DNSName"))
     CreateAccessPointOutput.type = Types::CreateAccessPointOutput
-    CreateAppCookieStickinessPolicyInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    CreateAppCookieStickinessPolicyInput.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
-    CreateAppCookieStickinessPolicyInput.add_member(:cookie_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieName, location_name: "CookieName", traits: {"smithy.api#required" => {}}))
+    CreateAppCookieStickinessPolicyInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    CreateAppCookieStickinessPolicyInput.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "PolicyName", traits: {"smithy.api#required" => {}}))
+    CreateAppCookieStickinessPolicyInput.add_member(:cookie_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieName, name: "CookieName", traits: {"smithy.api#required" => {}}))
     CreateAppCookieStickinessPolicyInput.type = Types::CreateAppCookieStickinessPolicyInput
     CreateAppCookieStickinessPolicyOutput.type = Types::CreateAppCookieStickinessPolicyOutput
-    CreateLBCookieStickinessPolicyInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    CreateLBCookieStickinessPolicyInput.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
-    CreateLBCookieStickinessPolicyInput.add_member(:cookie_expiration_period, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieExpirationPeriod, location_name: "CookieExpirationPeriod"))
+    CreateLBCookieStickinessPolicyInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    CreateLBCookieStickinessPolicyInput.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "PolicyName", traits: {"smithy.api#required" => {}}))
+    CreateLBCookieStickinessPolicyInput.add_member(:cookie_expiration_period, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieExpirationPeriod, name: "CookieExpirationPeriod"))
     CreateLBCookieStickinessPolicyInput.type = Types::CreateLBCookieStickinessPolicyInput
     CreateLBCookieStickinessPolicyOutput.type = Types::CreateLBCookieStickinessPolicyOutput
-    CreateLoadBalancerListenerInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    CreateLoadBalancerListenerInput.add_member(:listeners, ::Smithy::Schema::Shapes::MemberShape.new(target: Listeners, location_name: "Listeners", traits: {"smithy.api#required" => {}}))
+    CreateLoadBalancerListenerInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    CreateLoadBalancerListenerInput.add_member(:listeners, ::Smithy::Schema::Shapes::MemberShape.new(target: Listeners, name: "Listeners", traits: {"smithy.api#required" => {}}))
     CreateLoadBalancerListenerInput.type = Types::CreateLoadBalancerListenerInput
     CreateLoadBalancerListenerOutput.type = Types::CreateLoadBalancerListenerOutput
-    CreateLoadBalancerPolicyInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    CreateLoadBalancerPolicyInput.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
-    CreateLoadBalancerPolicyInput.add_member(:policy_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeName, location_name: "PolicyTypeName", traits: {"smithy.api#required" => {}}))
-    CreateLoadBalancerPolicyInput.add_member(:policy_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttributes, location_name: "PolicyAttributes"))
+    CreateLoadBalancerPolicyInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    CreateLoadBalancerPolicyInput.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "PolicyName", traits: {"smithy.api#required" => {}}))
+    CreateLoadBalancerPolicyInput.add_member(:policy_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeName, name: "PolicyTypeName", traits: {"smithy.api#required" => {}}))
+    CreateLoadBalancerPolicyInput.add_member(:policy_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttributes, name: "PolicyAttributes"))
     CreateLoadBalancerPolicyInput.type = Types::CreateLoadBalancerPolicyInput
     CreateLoadBalancerPolicyOutput.type = Types::CreateLoadBalancerPolicyOutput
-    CrossZoneLoadBalancing.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossZoneLoadBalancingEnabled, location_name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    CrossZoneLoadBalancing.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossZoneLoadBalancingEnabled, name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     CrossZoneLoadBalancing.type = Types::CrossZoneLoadBalancing
-    DeleteAccessPointInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    DeleteAccessPointInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
     DeleteAccessPointInput.type = Types::DeleteAccessPointInput
     DeleteAccessPointOutput.type = Types::DeleteAccessPointOutput
-    DeleteLoadBalancerListenerInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    DeleteLoadBalancerListenerInput.add_member(:load_balancer_ports, ::Smithy::Schema::Shapes::MemberShape.new(target: Ports, location_name: "LoadBalancerPorts", traits: {"smithy.api#required" => {}}))
+    DeleteLoadBalancerListenerInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    DeleteLoadBalancerListenerInput.add_member(:load_balancer_ports, ::Smithy::Schema::Shapes::MemberShape.new(target: Ports, name: "LoadBalancerPorts", traits: {"smithy.api#required" => {}}))
     DeleteLoadBalancerListenerInput.type = Types::DeleteLoadBalancerListenerInput
     DeleteLoadBalancerListenerOutput.type = Types::DeleteLoadBalancerListenerOutput
-    DeleteLoadBalancerPolicyInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    DeleteLoadBalancerPolicyInput.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, location_name: "PolicyName", traits: {"smithy.api#required" => {}}))
+    DeleteLoadBalancerPolicyInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    DeleteLoadBalancerPolicyInput.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "PolicyName", traits: {"smithy.api#required" => {}}))
     DeleteLoadBalancerPolicyInput.type = Types::DeleteLoadBalancerPolicyInput
     DeleteLoadBalancerPolicyOutput.type = Types::DeleteLoadBalancerPolicyOutput
-    DependencyThrottleException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    DependencyThrottleException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     DependencyThrottleException.type = Types::DependencyThrottleException
-    DeregisterEndPointsInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    DeregisterEndPointsInput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, location_name: "Instances", traits: {"smithy.api#required" => {}}))
+    DeregisterEndPointsInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    DeregisterEndPointsInput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, name: "Instances", traits: {"smithy.api#required" => {}}))
     DeregisterEndPointsInput.type = Types::DeregisterEndPointsInput
-    DeregisterEndPointsOutput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, location_name: "Instances"))
+    DeregisterEndPointsOutput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, name: "Instances"))
     DeregisterEndPointsOutput.type = Types::DeregisterEndPointsOutput
-    DescribeAccessPointsInput.add_member(:load_balancer_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerNames, location_name: "LoadBalancerNames"))
-    DescribeAccessPointsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
-    DescribeAccessPointsInput.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, location_name: "PageSize"))
+    DescribeAccessPointsInput.add_member(:load_balancer_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerNames, name: "LoadBalancerNames"))
+    DescribeAccessPointsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, name: "Marker"))
+    DescribeAccessPointsInput.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "PageSize"))
     DescribeAccessPointsInput.type = Types::DescribeAccessPointsInput
-    DescribeAccessPointsOutput.add_member(:load_balancer_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerDescriptions, location_name: "LoadBalancerDescriptions"))
-    DescribeAccessPointsOutput.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "NextMarker"))
+    DescribeAccessPointsOutput.add_member(:load_balancer_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerDescriptions, name: "LoadBalancerDescriptions"))
+    DescribeAccessPointsOutput.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, name: "NextMarker"))
     DescribeAccessPointsOutput.type = Types::DescribeAccessPointsOutput
-    DescribeAccountLimitsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "Marker"))
-    DescribeAccountLimitsInput.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, location_name: "PageSize"))
+    DescribeAccountLimitsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, name: "Marker"))
+    DescribeAccountLimitsInput.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "PageSize"))
     DescribeAccountLimitsInput.type = Types::DescribeAccountLimitsInput
-    DescribeAccountLimitsOutput.add_member(:limits, ::Smithy::Schema::Shapes::MemberShape.new(target: Limits, location_name: "Limits"))
-    DescribeAccountLimitsOutput.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, location_name: "NextMarker"))
+    DescribeAccountLimitsOutput.add_member(:limits, ::Smithy::Schema::Shapes::MemberShape.new(target: Limits, name: "Limits"))
+    DescribeAccountLimitsOutput.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, name: "NextMarker"))
     DescribeAccountLimitsOutput.type = Types::DescribeAccountLimitsOutput
-    DescribeEndPointStateInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    DescribeEndPointStateInput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, location_name: "Instances"))
+    DescribeEndPointStateInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    DescribeEndPointStateInput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, name: "Instances"))
     DescribeEndPointStateInput.type = Types::DescribeEndPointStateInput
-    DescribeEndPointStateOutput.add_member(:instance_states, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStates, location_name: "InstanceStates"))
+    DescribeEndPointStateOutput.add_member(:instance_states, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStates, name: "InstanceStates"))
     DescribeEndPointStateOutput.type = Types::DescribeEndPointStateOutput
-    DescribeLoadBalancerAttributesInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    DescribeLoadBalancerAttributesInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
     DescribeLoadBalancerAttributesInput.type = Types::DescribeLoadBalancerAttributesInput
-    DescribeLoadBalancerAttributesOutput.add_member(:load_balancer_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttributes, location_name: "LoadBalancerAttributes"))
+    DescribeLoadBalancerAttributesOutput.add_member(:load_balancer_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttributes, name: "LoadBalancerAttributes"))
     DescribeLoadBalancerAttributesOutput.type = Types::DescribeLoadBalancerAttributesOutput
-    DescribeLoadBalancerPoliciesInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName"))
-    DescribeLoadBalancerPoliciesInput.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, location_name: "PolicyNames"))
+    DescribeLoadBalancerPoliciesInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName"))
+    DescribeLoadBalancerPoliciesInput.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, name: "PolicyNames"))
     DescribeLoadBalancerPoliciesInput.type = Types::DescribeLoadBalancerPoliciesInput
-    DescribeLoadBalancerPoliciesOutput.add_member(:policy_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescriptions, location_name: "PolicyDescriptions"))
+    DescribeLoadBalancerPoliciesOutput.add_member(:policy_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescriptions, name: "PolicyDescriptions"))
     DescribeLoadBalancerPoliciesOutput.type = Types::DescribeLoadBalancerPoliciesOutput
-    DescribeLoadBalancerPolicyTypesInput.add_member(:policy_type_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeNames, location_name: "PolicyTypeNames"))
+    DescribeLoadBalancerPolicyTypesInput.add_member(:policy_type_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeNames, name: "PolicyTypeNames"))
     DescribeLoadBalancerPolicyTypesInput.type = Types::DescribeLoadBalancerPolicyTypesInput
-    DescribeLoadBalancerPolicyTypesOutput.add_member(:policy_type_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeDescriptions, location_name: "PolicyTypeDescriptions"))
+    DescribeLoadBalancerPolicyTypesOutput.add_member(:policy_type_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeDescriptions, name: "PolicyTypeDescriptions"))
     DescribeLoadBalancerPolicyTypesOutput.type = Types::DescribeLoadBalancerPolicyTypesOutput
-    DescribeTagsInput.add_member(:load_balancer_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerNamesMax20, location_name: "LoadBalancerNames", traits: {"smithy.api#required" => {}}))
+    DescribeTagsInput.add_member(:load_balancer_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerNamesMax20, name: "LoadBalancerNames", traits: {"smithy.api#required" => {}}))
     DescribeTagsInput.type = Types::DescribeTagsInput
-    DescribeTagsOutput.add_member(:tag_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: TagDescriptions, location_name: "TagDescriptions"))
+    DescribeTagsOutput.add_member(:tag_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: TagDescriptions, name: "TagDescriptions"))
     DescribeTagsOutput.type = Types::DescribeTagsOutput
-    DetachLoadBalancerFromSubnetsInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    DetachLoadBalancerFromSubnetsInput.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, location_name: "Subnets", traits: {"smithy.api#required" => {}}))
+    DetachLoadBalancerFromSubnetsInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    DetachLoadBalancerFromSubnetsInput.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, name: "Subnets", traits: {"smithy.api#required" => {}}))
     DetachLoadBalancerFromSubnetsInput.type = Types::DetachLoadBalancerFromSubnetsInput
-    DetachLoadBalancerFromSubnetsOutput.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, location_name: "Subnets"))
+    DetachLoadBalancerFromSubnetsOutput.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, name: "Subnets"))
     DetachLoadBalancerFromSubnetsOutput.type = Types::DetachLoadBalancerFromSubnetsOutput
-    DuplicateAccessPointNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    DuplicateAccessPointNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     DuplicateAccessPointNameException.type = Types::DuplicateAccessPointNameException
-    DuplicateListenerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    DuplicateListenerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     DuplicateListenerException.type = Types::DuplicateListenerException
-    DuplicatePolicyNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    DuplicatePolicyNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     DuplicatePolicyNameException.type = Types::DuplicatePolicyNameException
-    DuplicateTagKeysException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    DuplicateTagKeysException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     DuplicateTagKeysException.type = Types::DuplicateTagKeysException
-    HealthCheck.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckTarget, location_name: "Target", traits: {"smithy.api#required" => {}}))
-    HealthCheck.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckInterval, location_name: "Interval", traits: {"smithy.api#required" => {}}))
-    HealthCheck.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckTimeout, location_name: "Timeout", traits: {"smithy.api#required" => {}}))
-    HealthCheck.add_member(:unhealthy_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: UnhealthyThreshold, location_name: "UnhealthyThreshold", traits: {"smithy.api#required" => {}}))
-    HealthCheck.add_member(:healthy_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthyThreshold, location_name: "HealthyThreshold", traits: {"smithy.api#required" => {}}))
+    HealthCheck.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckTarget, name: "Target", traits: {"smithy.api#required" => {}}))
+    HealthCheck.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckInterval, name: "Interval", traits: {"smithy.api#required" => {}}))
+    HealthCheck.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckTimeout, name: "Timeout", traits: {"smithy.api#required" => {}}))
+    HealthCheck.add_member(:unhealthy_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: UnhealthyThreshold, name: "UnhealthyThreshold", traits: {"smithy.api#required" => {}}))
+    HealthCheck.add_member(:healthy_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthyThreshold, name: "HealthyThreshold", traits: {"smithy.api#required" => {}}))
     HealthCheck.type = Types::HealthCheck
-    Instance.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "InstanceId"))
+    Instance.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId"))
     Instance.type = Types::Instance
-    InstanceState.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, location_name: "InstanceId"))
-    InstanceState.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, location_name: "State"))
-    InstanceState.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonCode, location_name: "ReasonCode"))
-    InstanceState.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
+    InstanceState.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId"))
+    InstanceState.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "State"))
+    InstanceState.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonCode, name: "ReasonCode"))
+    InstanceState.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     InstanceState.type = Types::InstanceState
-    InstanceStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceState)
-    Instances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Instance)
-    InvalidConfigurationRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    InstanceStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceState, name: "member")
+    Instances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member")
+    InvalidConfigurationRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     InvalidConfigurationRequestException.type = Types::InvalidConfigurationRequestException
-    InvalidEndPointException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    InvalidEndPointException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     InvalidEndPointException.type = Types::InvalidEndPointException
-    InvalidSchemeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    InvalidSchemeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     InvalidSchemeException.type = Types::InvalidSchemeException
-    InvalidSecurityGroupException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    InvalidSecurityGroupException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     InvalidSecurityGroupException.type = Types::InvalidSecurityGroupException
-    InvalidSubnetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    InvalidSubnetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     InvalidSubnetException.type = Types::InvalidSubnetException
-    LBCookieStickinessPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LBCookieStickinessPolicy)
-    LBCookieStickinessPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, location_name: "PolicyName"))
-    LBCookieStickinessPolicy.add_member(:cookie_expiration_period, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieExpirationPeriod, location_name: "CookieExpirationPeriod"))
+    LBCookieStickinessPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LBCookieStickinessPolicy, name: "member")
+    LBCookieStickinessPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "PolicyName"))
+    LBCookieStickinessPolicy.add_member(:cookie_expiration_period, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieExpirationPeriod, name: "CookieExpirationPeriod"))
     LBCookieStickinessPolicy.type = Types::LBCookieStickinessPolicy
-    Limit.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, location_name: "Name"))
-    Limit.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Max, location_name: "Max"))
+    Limit.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
+    Limit.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Max, name: "Max"))
     Limit.type = Types::Limit
-    Limits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Limit)
-    Listener.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "Protocol", traits: {"smithy.api#required" => {}}))
-    Listener.add_member(:load_balancer_port, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPort, location_name: "LoadBalancerPort", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    Listener.add_member(:instance_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, location_name: "InstanceProtocol"))
-    Listener.add_member(:instance_port, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePort, location_name: "InstancePort", traits: {"smithy.api#required" => {}}))
-    Listener.add_member(:ssl_certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SSLCertificateId, location_name: "SSLCertificateId"))
+    Limits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, name: "member")
+    Listener.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "Protocol", traits: {"smithy.api#required" => {}}))
+    Listener.add_member(:load_balancer_port, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPort, name: "LoadBalancerPort", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    Listener.add_member(:instance_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "InstanceProtocol"))
+    Listener.add_member(:instance_port, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePort, name: "InstancePort", traits: {"smithy.api#required" => {}}))
+    Listener.add_member(:ssl_certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SSLCertificateId, name: "SSLCertificateId"))
     Listener.type = Types::Listener
-    ListenerDescription.add_member(:listener, ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, location_name: "Listener"))
-    ListenerDescription.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, location_name: "PolicyNames"))
+    ListenerDescription.add_member(:listener, ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "Listener"))
+    ListenerDescription.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, name: "PolicyNames"))
     ListenerDescription.type = Types::ListenerDescription
-    ListenerDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerDescription)
-    ListenerNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    ListenerDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerDescription, name: "member")
+    ListenerNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     ListenerNotFoundException.type = Types::ListenerNotFoundException
-    Listeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Listener)
-    LoadBalancerAttributeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    Listeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "member")
+    LoadBalancerAttributeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     LoadBalancerAttributeNotFoundException.type = Types::LoadBalancerAttributeNotFoundException
-    LoadBalancerAttributes.add_member(:cross_zone_load_balancing, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossZoneLoadBalancing, location_name: "CrossZoneLoadBalancing"))
-    LoadBalancerAttributes.add_member(:access_log, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLog, location_name: "AccessLog"))
-    LoadBalancerAttributes.add_member(:connection_draining, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionDraining, location_name: "ConnectionDraining"))
-    LoadBalancerAttributes.add_member(:connection_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionSettings, location_name: "ConnectionSettings"))
-    LoadBalancerAttributes.add_member(:additional_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAttributes, location_name: "AdditionalAttributes"))
+    LoadBalancerAttributes.add_member(:cross_zone_load_balancing, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossZoneLoadBalancing, name: "CrossZoneLoadBalancing"))
+    LoadBalancerAttributes.add_member(:access_log, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLog, name: "AccessLog"))
+    LoadBalancerAttributes.add_member(:connection_draining, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionDraining, name: "ConnectionDraining"))
+    LoadBalancerAttributes.add_member(:connection_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionSettings, name: "ConnectionSettings"))
+    LoadBalancerAttributes.add_member(:additional_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAttributes, name: "AdditionalAttributes"))
     LoadBalancerAttributes.type = Types::LoadBalancerAttributes
-    LoadBalancerDescription.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName"))
-    LoadBalancerDescription.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, location_name: "DNSName"))
-    LoadBalancerDescription.add_member(:canonical_hosted_zone_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, location_name: "CanonicalHostedZoneName"))
-    LoadBalancerDescription.add_member(:canonical_hosted_zone_name_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, location_name: "CanonicalHostedZoneNameID"))
-    LoadBalancerDescription.add_member(:listener_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerDescriptions, location_name: "ListenerDescriptions"))
-    LoadBalancerDescription.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: Policies, location_name: "Policies"))
-    LoadBalancerDescription.add_member(:backend_server_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: BackendServerDescriptions, location_name: "BackendServerDescriptions"))
-    LoadBalancerDescription.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, location_name: "AvailabilityZones"))
-    LoadBalancerDescription.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, location_name: "Subnets"))
-    LoadBalancerDescription.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCId, location_name: "VPCId"))
-    LoadBalancerDescription.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, location_name: "Instances"))
-    LoadBalancerDescription.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheck, location_name: "HealthCheck"))
-    LoadBalancerDescription.add_member(:source_security_group, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceSecurityGroup, location_name: "SourceSecurityGroup"))
-    LoadBalancerDescription.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, location_name: "SecurityGroups"))
-    LoadBalancerDescription.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedTime, location_name: "CreatedTime"))
-    LoadBalancerDescription.add_member(:scheme, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerScheme, location_name: "Scheme"))
+    LoadBalancerDescription.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName"))
+    LoadBalancerDescription.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, name: "DNSName"))
+    LoadBalancerDescription.add_member(:canonical_hosted_zone_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, name: "CanonicalHostedZoneName"))
+    LoadBalancerDescription.add_member(:canonical_hosted_zone_name_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, name: "CanonicalHostedZoneNameID"))
+    LoadBalancerDescription.add_member(:listener_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerDescriptions, name: "ListenerDescriptions"))
+    LoadBalancerDescription.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: Policies, name: "Policies"))
+    LoadBalancerDescription.add_member(:backend_server_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: BackendServerDescriptions, name: "BackendServerDescriptions"))
+    LoadBalancerDescription.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, name: "AvailabilityZones"))
+    LoadBalancerDescription.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, name: "Subnets"))
+    LoadBalancerDescription.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCId, name: "VPCId"))
+    LoadBalancerDescription.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, name: "Instances"))
+    LoadBalancerDescription.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheck, name: "HealthCheck"))
+    LoadBalancerDescription.add_member(:source_security_group, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceSecurityGroup, name: "SourceSecurityGroup"))
+    LoadBalancerDescription.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, name: "SecurityGroups"))
+    LoadBalancerDescription.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedTime, name: "CreatedTime"))
+    LoadBalancerDescription.add_member(:scheme, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerScheme, name: "Scheme"))
     LoadBalancerDescription.type = Types::LoadBalancerDescription
-    LoadBalancerDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerDescription)
-    LoadBalancerNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName)
-    LoadBalancerNamesMax20.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName)
-    ModifyLoadBalancerAttributesInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    ModifyLoadBalancerAttributesInput.add_member(:load_balancer_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttributes, location_name: "LoadBalancerAttributes", traits: {"smithy.api#required" => {}}))
+    LoadBalancerDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerDescription, name: "member")
+    LoadBalancerNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "member")
+    LoadBalancerNamesMax20.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "member")
+    ModifyLoadBalancerAttributesInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    ModifyLoadBalancerAttributesInput.add_member(:load_balancer_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttributes, name: "LoadBalancerAttributes", traits: {"smithy.api#required" => {}}))
     ModifyLoadBalancerAttributesInput.type = Types::ModifyLoadBalancerAttributesInput
-    ModifyLoadBalancerAttributesOutput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName"))
-    ModifyLoadBalancerAttributesOutput.add_member(:load_balancer_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttributes, location_name: "LoadBalancerAttributes"))
+    ModifyLoadBalancerAttributesOutput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName"))
+    ModifyLoadBalancerAttributesOutput.add_member(:load_balancer_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttributes, name: "LoadBalancerAttributes"))
     ModifyLoadBalancerAttributesOutput.type = Types::ModifyLoadBalancerAttributesOutput
-    OperationNotPermittedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    OperationNotPermittedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     OperationNotPermittedException.type = Types::OperationNotPermittedException
-    Policies.add_member(:app_cookie_stickiness_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: AppCookieStickinessPolicies, location_name: "AppCookieStickinessPolicies"))
-    Policies.add_member(:lb_cookie_stickiness_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: LBCookieStickinessPolicies, location_name: "LBCookieStickinessPolicies"))
-    Policies.add_member(:other_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, location_name: "OtherPolicies"))
+    Policies.add_member(:app_cookie_stickiness_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: AppCookieStickinessPolicies, name: "AppCookieStickinessPolicies"))
+    Policies.add_member(:lb_cookie_stickiness_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: LBCookieStickinessPolicies, name: "LBCookieStickinessPolicies"))
+    Policies.add_member(:other_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, name: "OtherPolicies"))
     Policies.type = Types::Policies
-    PolicyAttribute.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, location_name: "AttributeName"))
-    PolicyAttribute.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, location_name: "AttributeValue"))
+    PolicyAttribute.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "AttributeName"))
+    PolicyAttribute.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "AttributeValue"))
     PolicyAttribute.type = Types::PolicyAttribute
-    PolicyAttributeDescription.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, location_name: "AttributeName"))
-    PolicyAttributeDescription.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, location_name: "AttributeValue"))
+    PolicyAttributeDescription.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "AttributeName"))
+    PolicyAttributeDescription.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "AttributeValue"))
     PolicyAttributeDescription.type = Types::PolicyAttributeDescription
-    PolicyAttributeDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttributeDescription)
-    PolicyAttributeTypeDescription.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, location_name: "AttributeName"))
-    PolicyAttributeTypeDescription.add_member(:attribute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeType, location_name: "AttributeType"))
-    PolicyAttributeTypeDescription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
-    PolicyAttributeTypeDescription.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultValue, location_name: "DefaultValue"))
-    PolicyAttributeTypeDescription.add_member(:cardinality, ::Smithy::Schema::Shapes::MemberShape.new(target: Cardinality, location_name: "Cardinality"))
+    PolicyAttributeDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttributeDescription, name: "member")
+    PolicyAttributeTypeDescription.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "AttributeName"))
+    PolicyAttributeTypeDescription.add_member(:attribute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeType, name: "AttributeType"))
+    PolicyAttributeTypeDescription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    PolicyAttributeTypeDescription.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultValue, name: "DefaultValue"))
+    PolicyAttributeTypeDescription.add_member(:cardinality, ::Smithy::Schema::Shapes::MemberShape.new(target: Cardinality, name: "Cardinality"))
     PolicyAttributeTypeDescription.type = Types::PolicyAttributeTypeDescription
-    PolicyAttributeTypeDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttributeTypeDescription)
-    PolicyAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttribute)
-    PolicyDescription.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, location_name: "PolicyName"))
-    PolicyDescription.add_member(:policy_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeName, location_name: "PolicyTypeName"))
-    PolicyDescription.add_member(:policy_attribute_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttributeDescriptions, location_name: "PolicyAttributeDescriptions"))
+    PolicyAttributeTypeDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttributeTypeDescription, name: "member")
+    PolicyAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttribute, name: "member")
+    PolicyDescription.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "PolicyName"))
+    PolicyDescription.add_member(:policy_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeName, name: "PolicyTypeName"))
+    PolicyDescription.add_member(:policy_attribute_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttributeDescriptions, name: "PolicyAttributeDescriptions"))
     PolicyDescription.type = Types::PolicyDescription
-    PolicyDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescription)
-    PolicyNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName)
-    PolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    PolicyDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescription, name: "member")
+    PolicyNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "member")
+    PolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     PolicyNotFoundException.type = Types::PolicyNotFoundException
-    PolicyTypeDescription.add_member(:policy_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeName, location_name: "PolicyTypeName"))
-    PolicyTypeDescription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, location_name: "Description"))
-    PolicyTypeDescription.add_member(:policy_attribute_type_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttributeTypeDescriptions, location_name: "PolicyAttributeTypeDescriptions"))
+    PolicyTypeDescription.add_member(:policy_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeName, name: "PolicyTypeName"))
+    PolicyTypeDescription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    PolicyTypeDescription.add_member(:policy_attribute_type_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttributeTypeDescriptions, name: "PolicyAttributeTypeDescriptions"))
     PolicyTypeDescription.type = Types::PolicyTypeDescription
-    PolicyTypeDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeDescription)
-    PolicyTypeNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeName)
-    PolicyTypeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    PolicyTypeDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeDescription, name: "member")
+    PolicyTypeNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeName, name: "member")
+    PolicyTypeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     PolicyTypeNotFoundException.type = Types::PolicyTypeNotFoundException
-    Ports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPort)
-    RegisterEndPointsInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    RegisterEndPointsInput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, location_name: "Instances", traits: {"smithy.api#required" => {}}))
+    Ports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPort, name: "member")
+    RegisterEndPointsInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    RegisterEndPointsInput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, name: "Instances", traits: {"smithy.api#required" => {}}))
     RegisterEndPointsInput.type = Types::RegisterEndPointsInput
-    RegisterEndPointsOutput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, location_name: "Instances"))
+    RegisterEndPointsOutput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Instances, name: "Instances"))
     RegisterEndPointsOutput.type = Types::RegisterEndPointsOutput
-    RemoveAvailabilityZonesInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    RemoveAvailabilityZonesInput.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, location_name: "AvailabilityZones", traits: {"smithy.api#required" => {}}))
+    RemoveAvailabilityZonesInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    RemoveAvailabilityZonesInput.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, name: "AvailabilityZones", traits: {"smithy.api#required" => {}}))
     RemoveAvailabilityZonesInput.type = Types::RemoveAvailabilityZonesInput
-    RemoveAvailabilityZonesOutput.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, location_name: "AvailabilityZones"))
+    RemoveAvailabilityZonesOutput.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, name: "AvailabilityZones"))
     RemoveAvailabilityZonesOutput.type = Types::RemoveAvailabilityZonesOutput
-    RemoveTagsInput.add_member(:load_balancer_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerNames, location_name: "LoadBalancerNames", traits: {"smithy.api#required" => {}}))
-    RemoveTagsInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    RemoveTagsInput.add_member(:load_balancer_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerNames, name: "LoadBalancerNames", traits: {"smithy.api#required" => {}}))
+    RemoveTagsInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "Tags", traits: {"smithy.api#required" => {}}))
     RemoveTagsInput.type = Types::RemoveTagsInput
     RemoveTagsOutput.type = Types::RemoveTagsOutput
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId)
-    SetLoadBalancerListenerSSLCertificateInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    SetLoadBalancerListenerSSLCertificateInput.add_member(:load_balancer_port, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPort, location_name: "LoadBalancerPort", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    SetLoadBalancerListenerSSLCertificateInput.add_member(:ssl_certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SSLCertificateId, location_name: "SSLCertificateId", traits: {"smithy.api#required" => {}}))
+    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SetLoadBalancerListenerSSLCertificateInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    SetLoadBalancerListenerSSLCertificateInput.add_member(:load_balancer_port, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPort, name: "LoadBalancerPort", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SetLoadBalancerListenerSSLCertificateInput.add_member(:ssl_certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SSLCertificateId, name: "SSLCertificateId", traits: {"smithy.api#required" => {}}))
     SetLoadBalancerListenerSSLCertificateInput.type = Types::SetLoadBalancerListenerSSLCertificateInput
     SetLoadBalancerListenerSSLCertificateOutput.type = Types::SetLoadBalancerListenerSSLCertificateOutput
-    SetLoadBalancerPoliciesForBackendServerInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    SetLoadBalancerPoliciesForBackendServerInput.add_member(:instance_port, ::Smithy::Schema::Shapes::MemberShape.new(target: EndPointPort, location_name: "InstancePort", traits: {"smithy.api#required" => {}}))
-    SetLoadBalancerPoliciesForBackendServerInput.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, location_name: "PolicyNames", traits: {"smithy.api#required" => {}}))
+    SetLoadBalancerPoliciesForBackendServerInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    SetLoadBalancerPoliciesForBackendServerInput.add_member(:instance_port, ::Smithy::Schema::Shapes::MemberShape.new(target: EndPointPort, name: "InstancePort", traits: {"smithy.api#required" => {}}))
+    SetLoadBalancerPoliciesForBackendServerInput.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, name: "PolicyNames", traits: {"smithy.api#required" => {}}))
     SetLoadBalancerPoliciesForBackendServerInput.type = Types::SetLoadBalancerPoliciesForBackendServerInput
     SetLoadBalancerPoliciesForBackendServerOutput.type = Types::SetLoadBalancerPoliciesForBackendServerOutput
-    SetLoadBalancerPoliciesOfListenerInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
-    SetLoadBalancerPoliciesOfListenerInput.add_member(:load_balancer_port, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPort, location_name: "LoadBalancerPort", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    SetLoadBalancerPoliciesOfListenerInput.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, location_name: "PolicyNames", traits: {"smithy.api#required" => {}}))
+    SetLoadBalancerPoliciesOfListenerInput.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName", traits: {"smithy.api#required" => {}}))
+    SetLoadBalancerPoliciesOfListenerInput.add_member(:load_balancer_port, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPort, name: "LoadBalancerPort", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SetLoadBalancerPoliciesOfListenerInput.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNames, name: "PolicyNames", traits: {"smithy.api#required" => {}}))
     SetLoadBalancerPoliciesOfListenerInput.type = Types::SetLoadBalancerPoliciesOfListenerInput
     SetLoadBalancerPoliciesOfListenerOutput.type = Types::SetLoadBalancerPoliciesOfListenerOutput
-    SourceSecurityGroup.add_member(:owner_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupOwnerAlias, location_name: "OwnerAlias"))
-    SourceSecurityGroup.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupName, location_name: "GroupName"))
+    SourceSecurityGroup.add_member(:owner_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupOwnerAlias, name: "OwnerAlias"))
+    SourceSecurityGroup.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupName, name: "GroupName"))
     SourceSecurityGroup.type = Types::SourceSecurityGroup
-    SubnetNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    SubnetNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     SubnetNotFoundException.type = Types::SubnetNotFoundException
-    Subnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId)
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value"))
+    Subnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagDescription.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, location_name: "LoadBalancerName"))
-    TagDescription.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    TagDescription.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "LoadBalancerName"))
+    TagDescription.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     TagDescription.type = Types::TagDescription
-    TagDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagDescription)
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyOnly)
-    TagKeyOnly.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key"))
+    TagDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagDescription, name: "member")
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyOnly, name: "member")
+    TagKeyOnly.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     TagKeyOnly.type = Types::TagKeyOnly
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
-    TooManyAccessPointsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TooManyAccessPointsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     TooManyAccessPointsException.type = Types::TooManyAccessPointsException
-    TooManyPoliciesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    TooManyPoliciesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     TooManyPoliciesException.type = Types::TooManyPoliciesException
-    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     TooManyTagsException.type = Types::TooManyTagsException
-    UnsupportedProtocolException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, location_name: "Message"))
+    UnsupportedProtocolException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     UnsupportedProtocolException.type = Types::UnsupportedProtocolException
 
     ElasticLoadBalancingV7 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

@@ -48,92 +48,92 @@ module Aws::SupportApp
     TeamId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.supportapp#teamId", name: "TeamId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^\\S+$"})
     TeamName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.supportapp#teamName", name: "TeamName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^.+$"})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ConflictException.type = Types::ConflictException
-    CreateSlackChannelConfigurationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, location_name: "teamId", traits: {"smithy.api#required" => {}}))
-    CreateSlackChannelConfigurationInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#required" => {}}))
-    CreateSlackChannelConfigurationInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "channelName"))
-    CreateSlackChannelConfigurationInput.add_member(:notify_on_create_or_reopen_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnCreateOrReopenCase"))
-    CreateSlackChannelConfigurationInput.add_member(:notify_on_add_correspondence_to_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnAddCorrespondenceToCase"))
-    CreateSlackChannelConfigurationInput.add_member(:notify_on_resolve_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnResolveCase"))
-    CreateSlackChannelConfigurationInput.add_member(:notify_on_case_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSeverityLevel, location_name: "notifyOnCaseSeverity", traits: {"smithy.api#required" => {}}))
-    CreateSlackChannelConfigurationInput.add_member(:channel_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "channelRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateSlackChannelConfigurationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "teamId", traits: {"smithy.api#required" => {}}))
+    CreateSlackChannelConfigurationInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, name: "channelId", traits: {"smithy.api#required" => {}}))
+    CreateSlackChannelConfigurationInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "channelName"))
+    CreateSlackChannelConfigurationInput.add_member(:notify_on_create_or_reopen_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnCreateOrReopenCase"))
+    CreateSlackChannelConfigurationInput.add_member(:notify_on_add_correspondence_to_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnAddCorrespondenceToCase"))
+    CreateSlackChannelConfigurationInput.add_member(:notify_on_resolve_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnResolveCase"))
+    CreateSlackChannelConfigurationInput.add_member(:notify_on_case_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSeverityLevel, name: "notifyOnCaseSeverity", traits: {"smithy.api#required" => {}}))
+    CreateSlackChannelConfigurationInput.add_member(:channel_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "channelRoleArn", traits: {"smithy.api#required" => {}}))
     CreateSlackChannelConfigurationInput.type = Types::CreateSlackChannelConfigurationInput
     CreateSlackChannelConfigurationOutput.type = Types::CreateSlackChannelConfigurationOutput
     DeleteAccountAliasInput.type = Types::DeleteAccountAliasInput
     DeleteAccountAliasOutput.type = Types::DeleteAccountAliasOutput
-    DeleteSlackChannelConfigurationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, location_name: "teamId", traits: {"smithy.api#required" => {}}))
-    DeleteSlackChannelConfigurationInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#required" => {}}))
+    DeleteSlackChannelConfigurationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "teamId", traits: {"smithy.api#required" => {}}))
+    DeleteSlackChannelConfigurationInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, name: "channelId", traits: {"smithy.api#required" => {}}))
     DeleteSlackChannelConfigurationInput.type = Types::DeleteSlackChannelConfigurationInput
     DeleteSlackChannelConfigurationOutput.type = Types::DeleteSlackChannelConfigurationOutput
-    DeleteSlackWorkspaceConfigurationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, location_name: "teamId", traits: {"smithy.api#required" => {}}))
+    DeleteSlackWorkspaceConfigurationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "teamId", traits: {"smithy.api#required" => {}}))
     DeleteSlackWorkspaceConfigurationInput.type = Types::DeleteSlackWorkspaceConfigurationInput
     DeleteSlackWorkspaceConfigurationOutput.type = Types::DeleteSlackWorkspaceConfigurationOutput
     GetAccountAliasInput.type = Types::GetAccountAliasInput
-    GetAccountAliasOutput.add_member(:account_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountAlias, location_name: "accountAlias"))
+    GetAccountAliasOutput.add_member(:account_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountAlias, name: "accountAlias"))
     GetAccountAliasOutput.type = Types::GetAccountAliasOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InternalServerException.type = Types::InternalServerException
-    ListSlackChannelConfigurationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
+    ListSlackChannelConfigurationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListSlackChannelConfigurationsInput.type = Types::ListSlackChannelConfigurationsInput
-    ListSlackChannelConfigurationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
-    ListSlackChannelConfigurationsOutput.add_member(:slack_channel_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfigurationList, location_name: "slackChannelConfigurations", traits: {"smithy.api#required" => {}}))
+    ListSlackChannelConfigurationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListSlackChannelConfigurationsOutput.add_member(:slack_channel_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfigurationList, name: "slackChannelConfigurations", traits: {"smithy.api#required" => {}}))
     ListSlackChannelConfigurationsOutput.type = Types::ListSlackChannelConfigurationsOutput
-    ListSlackWorkspaceConfigurationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
+    ListSlackWorkspaceConfigurationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListSlackWorkspaceConfigurationsInput.type = Types::ListSlackWorkspaceConfigurationsInput
-    ListSlackWorkspaceConfigurationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "nextToken"))
-    ListSlackWorkspaceConfigurationsOutput.add_member(:slack_workspace_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackWorkspaceConfigurationList, location_name: "slackWorkspaceConfigurations"))
+    ListSlackWorkspaceConfigurationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListSlackWorkspaceConfigurationsOutput.add_member(:slack_workspace_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackWorkspaceConfigurationList, name: "slackWorkspaceConfigurations"))
     ListSlackWorkspaceConfigurationsOutput.type = Types::ListSlackWorkspaceConfigurationsOutput
-    PutAccountAliasInput.add_member(:account_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountAlias, location_name: "accountAlias", traits: {"smithy.api#required" => {}}))
+    PutAccountAliasInput.add_member(:account_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountAlias, name: "accountAlias", traits: {"smithy.api#required" => {}}))
     PutAccountAliasInput.type = Types::PutAccountAliasInput
     PutAccountAliasOutput.type = Types::PutAccountAliasOutput
-    RegisterSlackWorkspaceForOrganizationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, location_name: "teamId", traits: {"smithy.api#required" => {}}))
+    RegisterSlackWorkspaceForOrganizationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "teamId", traits: {"smithy.api#required" => {}}))
     RegisterSlackWorkspaceForOrganizationInput.type = Types::RegisterSlackWorkspaceForOrganizationInput
-    RegisterSlackWorkspaceForOrganizationOutput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, location_name: "teamId"))
-    RegisterSlackWorkspaceForOrganizationOutput.add_member(:team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamName, location_name: "teamName"))
-    RegisterSlackWorkspaceForOrganizationOutput.add_member(:account_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountType, location_name: "accountType"))
+    RegisterSlackWorkspaceForOrganizationOutput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "teamId"))
+    RegisterSlackWorkspaceForOrganizationOutput.add_member(:team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamName, name: "teamName"))
+    RegisterSlackWorkspaceForOrganizationOutput.add_member(:account_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountType, name: "accountType"))
     RegisterSlackWorkspaceForOrganizationOutput.type = Types::RegisterSlackWorkspaceForOrganizationOutput
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SlackChannelConfiguration.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, location_name: "teamId", traits: {"smithy.api#required" => {}}))
-    SlackChannelConfiguration.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#required" => {}}))
-    SlackChannelConfiguration.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "channelName"))
-    SlackChannelConfiguration.add_member(:notify_on_create_or_reopen_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnCreateOrReopenCase"))
-    SlackChannelConfiguration.add_member(:notify_on_add_correspondence_to_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnAddCorrespondenceToCase"))
-    SlackChannelConfiguration.add_member(:notify_on_resolve_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnResolveCase"))
-    SlackChannelConfiguration.add_member(:notify_on_case_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSeverityLevel, location_name: "notifyOnCaseSeverity"))
-    SlackChannelConfiguration.add_member(:channel_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "channelRoleArn"))
+    SlackChannelConfiguration.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "teamId", traits: {"smithy.api#required" => {}}))
+    SlackChannelConfiguration.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, name: "channelId", traits: {"smithy.api#required" => {}}))
+    SlackChannelConfiguration.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "channelName"))
+    SlackChannelConfiguration.add_member(:notify_on_create_or_reopen_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnCreateOrReopenCase"))
+    SlackChannelConfiguration.add_member(:notify_on_add_correspondence_to_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnAddCorrespondenceToCase"))
+    SlackChannelConfiguration.add_member(:notify_on_resolve_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnResolveCase"))
+    SlackChannelConfiguration.add_member(:notify_on_case_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSeverityLevel, name: "notifyOnCaseSeverity"))
+    SlackChannelConfiguration.add_member(:channel_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "channelRoleArn"))
     SlackChannelConfiguration.type = Types::SlackChannelConfiguration
-    SlackWorkspaceConfiguration.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, location_name: "teamId", traits: {"smithy.api#required" => {}}))
-    SlackWorkspaceConfiguration.add_member(:team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamName, location_name: "teamName"))
-    SlackWorkspaceConfiguration.add_member(:allow_organization_member_account, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "allowOrganizationMemberAccount"))
+    SlackWorkspaceConfiguration.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "teamId", traits: {"smithy.api#required" => {}}))
+    SlackWorkspaceConfiguration.add_member(:team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamName, name: "teamName"))
+    SlackWorkspaceConfiguration.add_member(:allow_organization_member_account, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "allowOrganizationMemberAccount"))
     SlackWorkspaceConfiguration.type = Types::SlackWorkspaceConfiguration
-    SlackWorkspaceConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackWorkspaceConfiguration)
-    UpdateSlackChannelConfigurationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, location_name: "teamId", traits: {"smithy.api#required" => {}}))
-    UpdateSlackChannelConfigurationInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId", traits: {"smithy.api#required" => {}}))
-    UpdateSlackChannelConfigurationInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "channelName"))
-    UpdateSlackChannelConfigurationInput.add_member(:notify_on_create_or_reopen_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnCreateOrReopenCase"))
-    UpdateSlackChannelConfigurationInput.add_member(:notify_on_add_correspondence_to_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnAddCorrespondenceToCase"))
-    UpdateSlackChannelConfigurationInput.add_member(:notify_on_resolve_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnResolveCase"))
-    UpdateSlackChannelConfigurationInput.add_member(:notify_on_case_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSeverityLevel, location_name: "notifyOnCaseSeverity"))
-    UpdateSlackChannelConfigurationInput.add_member(:channel_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "channelRoleArn"))
+    SlackWorkspaceConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackWorkspaceConfiguration, name: "member")
+    UpdateSlackChannelConfigurationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "teamId", traits: {"smithy.api#required" => {}}))
+    UpdateSlackChannelConfigurationInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, name: "channelId", traits: {"smithy.api#required" => {}}))
+    UpdateSlackChannelConfigurationInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "channelName"))
+    UpdateSlackChannelConfigurationInput.add_member(:notify_on_create_or_reopen_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnCreateOrReopenCase"))
+    UpdateSlackChannelConfigurationInput.add_member(:notify_on_add_correspondence_to_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnAddCorrespondenceToCase"))
+    UpdateSlackChannelConfigurationInput.add_member(:notify_on_resolve_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnResolveCase"))
+    UpdateSlackChannelConfigurationInput.add_member(:notify_on_case_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSeverityLevel, name: "notifyOnCaseSeverity"))
+    UpdateSlackChannelConfigurationInput.add_member(:channel_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "channelRoleArn"))
     UpdateSlackChannelConfigurationInput.type = Types::UpdateSlackChannelConfigurationInput
-    UpdateSlackChannelConfigurationOutput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, location_name: "teamId"))
-    UpdateSlackChannelConfigurationOutput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, location_name: "channelId"))
-    UpdateSlackChannelConfigurationOutput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, location_name: "channelName"))
-    UpdateSlackChannelConfigurationOutput.add_member(:notify_on_create_or_reopen_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnCreateOrReopenCase"))
-    UpdateSlackChannelConfigurationOutput.add_member(:notify_on_add_correspondence_to_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnAddCorrespondenceToCase"))
-    UpdateSlackChannelConfigurationOutput.add_member(:notify_on_resolve_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, location_name: "notifyOnResolveCase"))
-    UpdateSlackChannelConfigurationOutput.add_member(:notify_on_case_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSeverityLevel, location_name: "notifyOnCaseSeverity"))
-    UpdateSlackChannelConfigurationOutput.add_member(:channel_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, location_name: "channelRoleArn"))
+    UpdateSlackChannelConfigurationOutput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "teamId"))
+    UpdateSlackChannelConfigurationOutput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, name: "channelId"))
+    UpdateSlackChannelConfigurationOutput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "channelName"))
+    UpdateSlackChannelConfigurationOutput.add_member(:notify_on_create_or_reopen_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnCreateOrReopenCase"))
+    UpdateSlackChannelConfigurationOutput.add_member(:notify_on_add_correspondence_to_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnAddCorrespondenceToCase"))
+    UpdateSlackChannelConfigurationOutput.add_member(:notify_on_resolve_case, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "notifyOnResolveCase"))
+    UpdateSlackChannelConfigurationOutput.add_member(:notify_on_case_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSeverityLevel, name: "notifyOnCaseSeverity"))
+    UpdateSlackChannelConfigurationOutput.add_member(:channel_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "channelRoleArn"))
     UpdateSlackChannelConfigurationOutput.type = Types::UpdateSlackChannelConfigurationOutput
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "message"))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ValidationException.type = Types::ValidationException
-    SlackChannelConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfiguration)
+    SlackChannelConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfiguration, name: "member")
 
     SupportApp = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.supportapp#SupportApp"

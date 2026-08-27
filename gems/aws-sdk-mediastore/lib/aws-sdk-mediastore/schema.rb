@@ -89,136 +89,136 @@ module Aws::MediaStore
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediastore#UntagResourceInput", name: "UntagResourceInput")
     UntagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediastore#UntagResourceOutput", name: "UntagResourceOutput")
 
-    AllowedHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Header)
-    AllowedMethods.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MethodName)
-    AllowedOrigins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Origin)
-    Container.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, location_name: "Endpoint"))
-    Container.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, location_name: "CreationTime"))
-    Container.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, location_name: "ARN"))
-    Container.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "Name"))
-    Container.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerStatus, location_name: "Status"))
-    Container.add_member(:access_logging_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerAccessLoggingEnabled, location_name: "AccessLoggingEnabled"))
+    AllowedHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Header, name: "member")
+    AllowedMethods.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MethodName, name: "member")
+    AllowedOrigins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Origin, name: "member")
+    Container.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "Endpoint"))
+    Container.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "CreationTime"))
+    Container.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, name: "ARN"))
+    Container.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "Name"))
+    Container.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerStatus, name: "Status"))
+    Container.add_member(:access_logging_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerAccessLoggingEnabled, name: "AccessLoggingEnabled"))
     Container.type = Types::Container
-    ContainerInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ContainerInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ContainerInUseException.type = Types::ContainerInUseException
-    ContainerLevelMetrics.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    ContainerLevelMetrics.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    ContainerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Container)
-    ContainerNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ContainerLevelMetrics.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ContainerLevelMetrics.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ContainerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "member")
+    ContainerNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ContainerNotFoundException.type = Types::ContainerNotFoundException
-    ContainerStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    ContainerStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    ContainerStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    CorsPolicy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CorsRule)
-    CorsPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    ContainerStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ContainerStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ContainerStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    CorsPolicy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CorsRule, name: "member")
+    CorsPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     CorsPolicyNotFoundException.type = Types::CorsPolicyNotFoundException
-    CorsRule.add_member(:allowed_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOrigins, location_name: "AllowedOrigins", traits: {"smithy.api#required" => {}}))
-    CorsRule.add_member(:allowed_methods, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedMethods, location_name: "AllowedMethods"))
-    CorsRule.add_member(:allowed_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedHeaders, location_name: "AllowedHeaders", traits: {"smithy.api#required" => {}}))
-    CorsRule.add_member(:max_age_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxAgeSeconds, location_name: "MaxAgeSeconds", traits: {"smithy.api#default" => 0}))
-    CorsRule.add_member(:expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: ExposeHeaders, location_name: "ExposeHeaders"))
+    CorsRule.add_member(:allowed_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOrigins, name: "AllowedOrigins", traits: {"smithy.api#required" => {}}))
+    CorsRule.add_member(:allowed_methods, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedMethods, name: "AllowedMethods"))
+    CorsRule.add_member(:allowed_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedHeaders, name: "AllowedHeaders", traits: {"smithy.api#required" => {}}))
+    CorsRule.add_member(:max_age_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxAgeSeconds, name: "MaxAgeSeconds", traits: {"smithy.api#default" => 0}))
+    CorsRule.add_member(:expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: ExposeHeaders, name: "ExposeHeaders"))
     CorsRule.type = Types::CorsRule
-    CreateContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
-    CreateContainerInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    CreateContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    CreateContainerInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateContainerInput.type = Types::CreateContainerInput
-    CreateContainerOutput.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, location_name: "Container", traits: {"smithy.api#required" => {}}))
+    CreateContainerOutput.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "Container", traits: {"smithy.api#required" => {}}))
     CreateContainerOutput.type = Types::CreateContainerOutput
-    DeleteContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    DeleteContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     DeleteContainerInput.type = Types::DeleteContainerInput
     DeleteContainerOutput.type = Types::DeleteContainerOutput
-    DeleteContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    DeleteContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     DeleteContainerPolicyInput.type = Types::DeleteContainerPolicyInput
     DeleteContainerPolicyOutput.type = Types::DeleteContainerPolicyOutput
-    DeleteCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    DeleteCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     DeleteCorsPolicyInput.type = Types::DeleteCorsPolicyInput
     DeleteCorsPolicyOutput.type = Types::DeleteCorsPolicyOutput
-    DeleteLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    DeleteLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     DeleteLifecyclePolicyInput.type = Types::DeleteLifecyclePolicyInput
     DeleteLifecyclePolicyOutput.type = Types::DeleteLifecyclePolicyOutput
-    DeleteMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    DeleteMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     DeleteMetricPolicyInput.type = Types::DeleteMetricPolicyInput
     DeleteMetricPolicyOutput.type = Types::DeleteMetricPolicyOutput
-    DescribeContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName"))
+    DescribeContainerInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName"))
     DescribeContainerInput.type = Types::DescribeContainerInput
-    DescribeContainerOutput.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, location_name: "Container"))
+    DescribeContainerOutput.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "Container"))
     DescribeContainerOutput.type = Types::DescribeContainerOutput
-    ExposeHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Header)
-    GetContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    ExposeHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Header, name: "member")
+    GetContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     GetContainerPolicyInput.type = Types::GetContainerPolicyInput
-    GetContainerPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPolicy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
+    GetContainerPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPolicy, name: "Policy", traits: {"smithy.api#required" => {}}))
     GetContainerPolicyOutput.type = Types::GetContainerPolicyOutput
-    GetCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    GetCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     GetCorsPolicyInput.type = Types::GetCorsPolicyInput
-    GetCorsPolicyOutput.add_member(:cors_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CorsPolicy, location_name: "CorsPolicy", traits: {"smithy.api#required" => {}}))
+    GetCorsPolicyOutput.add_member(:cors_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CorsPolicy, name: "CorsPolicy", traits: {"smithy.api#required" => {}}))
     GetCorsPolicyOutput.type = Types::GetCorsPolicyOutput
-    GetLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    GetLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     GetLifecyclePolicyInput.type = Types::GetLifecyclePolicyInput
-    GetLifecyclePolicyOutput.add_member(:lifecycle_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicy, location_name: "LifecyclePolicy", traits: {"smithy.api#required" => {}}))
+    GetLifecyclePolicyOutput.add_member(:lifecycle_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicy, name: "LifecyclePolicy", traits: {"smithy.api#required" => {}}))
     GetLifecyclePolicyOutput.type = Types::GetLifecyclePolicyOutput
-    GetMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    GetMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     GetMetricPolicyInput.type = Types::GetMetricPolicyInput
-    GetMetricPolicyOutput.add_member(:metric_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicy, location_name: "MetricPolicy", traits: {"smithy.api#required" => {}}))
+    GetMetricPolicyOutput.add_member(:metric_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicy, name: "MetricPolicy", traits: {"smithy.api#required" => {}}))
     GetMetricPolicyOutput.type = Types::GetMetricPolicyOutput
-    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalServerError.type = Types::InternalServerError
-    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListContainersInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
-    ListContainersInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerListLimit, location_name: "MaxResults"))
+    ListContainersInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
+    ListContainersInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerListLimit, name: "MaxResults"))
     ListContainersInput.type = Types::ListContainersInput
-    ListContainersOutput.add_member(:containers, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerList, location_name: "Containers", traits: {"smithy.api#required" => {}}))
-    ListContainersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, location_name: "NextToken"))
+    ListContainersOutput.add_member(:containers, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerList, name: "Containers", traits: {"smithy.api#required" => {}}))
+    ListContainersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListContainersOutput.type = Types::ListContainersOutput
-    ListTagsForResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, location_name: "Resource", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, name: "Resource", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
-    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags"))
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    MethodName.add_member(:put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PUT", traits: {"smithy.api#enumValue" => "PUT"}))
-    MethodName.add_member(:get, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GET", traits: {"smithy.api#enumValue" => "GET"}))
-    MethodName.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
-    MethodName.add_member(:head, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "HEAD", traits: {"smithy.api#enumValue" => "HEAD"}))
-    MetricPolicy.add_member(:container_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerLevelMetrics, location_name: "ContainerLevelMetrics", traits: {"smithy.api#required" => {}}))
-    MetricPolicy.add_member(:metric_policy_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicyRules, location_name: "MetricPolicyRules"))
+    MethodName.add_member(:put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUT", traits: {"smithy.api#enumValue" => "PUT"}))
+    MethodName.add_member(:get, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GET", traits: {"smithy.api#enumValue" => "GET"}))
+    MethodName.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
+    MethodName.add_member(:head, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEAD", traits: {"smithy.api#enumValue" => "HEAD"}))
+    MetricPolicy.add_member(:container_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerLevelMetrics, name: "ContainerLevelMetrics", traits: {"smithy.api#required" => {}}))
+    MetricPolicy.add_member(:metric_policy_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicyRules, name: "MetricPolicyRules"))
     MetricPolicy.type = Types::MetricPolicy
-    MetricPolicyRule.add_member(:object_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectGroup, location_name: "ObjectGroup", traits: {"smithy.api#required" => {}}))
-    MetricPolicyRule.add_member(:object_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectGroupName, location_name: "ObjectGroupName", traits: {"smithy.api#required" => {}}))
+    MetricPolicyRule.add_member(:object_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectGroup, name: "ObjectGroup", traits: {"smithy.api#required" => {}}))
+    MetricPolicyRule.add_member(:object_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectGroupName, name: "ObjectGroupName", traits: {"smithy.api#required" => {}}))
     MetricPolicyRule.type = Types::MetricPolicyRule
-    MetricPolicyRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicyRule)
-    PolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, location_name: "Message"))
+    MetricPolicyRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicyRule, name: "member")
+    PolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     PolicyNotFoundException.type = Types::PolicyNotFoundException
-    PutContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
-    PutContainerPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPolicy, location_name: "Policy", traits: {"smithy.api#required" => {}}))
+    PutContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    PutContainerPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPolicy, name: "Policy", traits: {"smithy.api#required" => {}}))
     PutContainerPolicyInput.type = Types::PutContainerPolicyInput
     PutContainerPolicyOutput.type = Types::PutContainerPolicyOutput
-    PutCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
-    PutCorsPolicyInput.add_member(:cors_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CorsPolicy, location_name: "CorsPolicy", traits: {"smithy.api#required" => {}}))
+    PutCorsPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    PutCorsPolicyInput.add_member(:cors_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CorsPolicy, name: "CorsPolicy", traits: {"smithy.api#required" => {}}))
     PutCorsPolicyInput.type = Types::PutCorsPolicyInput
     PutCorsPolicyOutput.type = Types::PutCorsPolicyOutput
-    PutLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
-    PutLifecyclePolicyInput.add_member(:lifecycle_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicy, location_name: "LifecyclePolicy", traits: {"smithy.api#required" => {}}))
+    PutLifecyclePolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    PutLifecyclePolicyInput.add_member(:lifecycle_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicy, name: "LifecyclePolicy", traits: {"smithy.api#required" => {}}))
     PutLifecyclePolicyInput.type = Types::PutLifecyclePolicyInput
     PutLifecyclePolicyOutput.type = Types::PutLifecyclePolicyOutput
-    PutMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
-    PutMetricPolicyInput.add_member(:metric_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicy, location_name: "MetricPolicy", traits: {"smithy.api#required" => {}}))
+    PutMetricPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    PutMetricPolicyInput.add_member(:metric_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicy, name: "MetricPolicy", traits: {"smithy.api#required" => {}}))
     PutMetricPolicyInput.type = Types::PutMetricPolicyInput
     PutMetricPolicyOutput.type = Types::PutMetricPolicyOutput
-    StartAccessLoggingInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    StartAccessLoggingInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     StartAccessLoggingInput.type = Types::StartAccessLoggingInput
     StartAccessLoggingOutput.type = Types::StartAccessLoggingOutput
-    StopAccessLoggingInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, location_name: "ContainerName", traits: {"smithy.api#required" => {}}))
+    StopAccessLoggingInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     StopAccessLoggingInput.type = Types::StopAccessLoggingInput
     StopAccessLoggingOutput.type = Types::StopAccessLoggingOutput
-    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
-    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, location_name: "Value"))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey)
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag)
-    TagResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, location_name: "Resource", traits: {"smithy.api#required" => {}}))
-    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, location_name: "Tags", traits: {"smithy.api#required" => {}}))
+    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, name: "Resource", traits: {"smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    UntagResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, location_name: "Resource", traits: {"smithy.api#required" => {}}))
-    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, location_name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, name: "Resource", traits: {"smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
 

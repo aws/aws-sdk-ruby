@@ -19,24 +19,24 @@ module Aws::ApiGatewayManagementApi
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewaymanagementapi#__string", name: "String")
     Timestampiso8601 = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.apigatewaymanagementapi#__timestampIso8601", name: "Timestampiso8601", traits: {"smithy.api#timestampFormat" => "date-time"})
 
-    DeleteConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConnectionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConnectionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConnectionRequest.type = Types::DeleteConnectionRequest
     ForbiddenException.type = Types::ForbiddenException
-    GetConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConnectionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConnectionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConnectionRequest.type = Types::GetConnectionRequest
-    GetConnectionResponse.add_member(:connected_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "ConnectedAt", traits: {"smithy.api#jsonName" => "connectedAt"}))
-    GetConnectionResponse.add_member(:identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, location_name: "Identity", traits: {"smithy.api#jsonName" => "identity"}))
-    GetConnectionResponse.add_member(:last_active_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, location_name: "LastActiveAt", traits: {"smithy.api#jsonName" => "lastActiveAt"}))
+    GetConnectionResponse.add_member(:connected_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "ConnectedAt", traits: {"smithy.api#jsonName" => "connectedAt"}))
+    GetConnectionResponse.add_member(:identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "Identity", traits: {"smithy.api#jsonName" => "identity"}))
+    GetConnectionResponse.add_member(:last_active_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastActiveAt", traits: {"smithy.api#jsonName" => "lastActiveAt"}))
     GetConnectionResponse.type = Types::GetConnectionResponse
     GoneException.type = Types::GoneException
-    Identity.add_member(:source_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "SourceIp", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "sourceIp", "smithy.api#required" => {}}))
-    Identity.add_member(:user_agent, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "UserAgent", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "userAgent", "smithy.api#required" => {}}))
+    Identity.add_member(:source_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceIp", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "sourceIp", "smithy.api#required" => {}}))
+    Identity.add_member(:user_agent, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "UserAgent", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "userAgent", "smithy.api#required" => {}}))
     Identity.type = Types::Identity
     LimitExceededException.type = Types::LimitExceededException
-    PayloadTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    PayloadTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     PayloadTooLargeException.type = Types::PayloadTooLargeException
-    PostToConnectionRequest.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, location_name: "Data", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
-    PostToConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, location_name: "ConnectionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PostToConnectionRequest.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, name: "Data", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    PostToConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConnectionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PostToConnectionRequest[:http_payload] = :data
     PostToConnectionRequest[:http_payload_member] = PostToConnectionRequest.member(:data)
     PostToConnectionRequest.type = Types::PostToConnectionRequest

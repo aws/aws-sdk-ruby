@@ -16,21 +16,21 @@ module Aws::MarketplaceReporting
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacereporting#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     UnauthorizedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacereporting#UnauthorizedException", name: "UnauthorizedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 401})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     BadRequestException.type = Types::BadRequestException
-    EmbeddingDomains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddingDomain)
-    GetBuyerDashboardInput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardIdentifier, location_name: "dashboardIdentifier", traits: {"smithy.api#required" => {}}))
-    GetBuyerDashboardInput.add_member(:embedding_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddingDomains, location_name: "embeddingDomains", traits: {"smithy.api#required" => {}}))
+    EmbeddingDomains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddingDomain, name: "member")
+    GetBuyerDashboardInput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardIdentifier, name: "dashboardIdentifier", traits: {"smithy.api#required" => {}}))
+    GetBuyerDashboardInput.add_member(:embedding_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddingDomains, name: "embeddingDomains", traits: {"smithy.api#required" => {}}))
     GetBuyerDashboardInput.type = Types::GetBuyerDashboardInput
-    GetBuyerDashboardOutput.add_member(:embed_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "embedUrl", traits: {"smithy.api#required" => {}}))
-    GetBuyerDashboardOutput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardIdentifier, location_name: "dashboardIdentifier", traits: {"smithy.api#required" => {}}))
-    GetBuyerDashboardOutput.add_member(:embedding_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddingDomains, location_name: "embeddingDomains", traits: {"smithy.api#required" => {}}))
+    GetBuyerDashboardOutput.add_member(:embed_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "embedUrl", traits: {"smithy.api#required" => {}}))
+    GetBuyerDashboardOutput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardIdentifier, name: "dashboardIdentifier", traits: {"smithy.api#required" => {}}))
+    GetBuyerDashboardOutput.add_member(:embedding_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddingDomains, name: "embeddingDomains", traits: {"smithy.api#required" => {}}))
     GetBuyerDashboardOutput.type = Types::GetBuyerDashboardOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerException.type = Types::InternalServerException
-    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
+    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     UnauthorizedException.type = Types::UnauthorizedException
 
     AWSMarketplaceReporting = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
