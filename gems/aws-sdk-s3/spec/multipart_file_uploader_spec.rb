@@ -170,6 +170,25 @@ module Aws
           expect(client).to receive(:abort_multipart_upload).with(params.merge(upload_id: 'MultipartUploadId'))
           expect { subject.upload(large_file, params) }.to raise_error(Aws::S3::MultipartUploadError)
         end
+
+        it 'aborts multipart upload when the executor rejects a task mid-upload' do
+          client.stub_responses(:upload_part, etag: 'etag')
+          executor = DefaultExecutor.new
+          calls = 0
+          # Simulate a concurrent shutdown closing the queue: the second post is
+          # rejected the way DefaultExecutor#post now raises on a closed queue.
+          allow(executor).to receive(:post).and_wrap_original do |original, *args, &blk|
+            calls += 1
+            raise 'Executor has been shutdown and is no longer accepting tasks' if calls == 2
+
+            original.call(*args, &blk)
+          end
+          uploader = MultipartFileUploader.new(client: client, executor: executor)
+
+          expect(client).to receive(:abort_multipart_upload)
+            .with(params.merge(upload_id: 'MultipartUploadId')).and_call_original
+          expect { uploader.upload(large_file, params) }.to raise_error(Aws::S3::MultipartUploadError)
+        end
       end
     end
   end
