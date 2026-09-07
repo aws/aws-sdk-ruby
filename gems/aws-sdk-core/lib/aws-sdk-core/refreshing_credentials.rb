@@ -156,12 +156,21 @@ module Aws
       handle_failure(error, raise_to_caller: raise_to_caller)
     end
 
-    # Calls the source via #refresh. Returns nil on success, or an error.
+    # Calls the source via #refresh. Returns nil on success, or an error (a
+    # raised error, or a stale response whose Expiration is at or before now).
+    # Restores the prior credentials on failure so a failed or stale refresh
+    # never discards the cached credentials.
     def call_source
+      prior = [@credentials, @expiration]
       @before_refresh&.call(self)
       refresh
-      !@expiration.nil? && @expiration <= Time.now ? Errors::StaleCredentialsError.new : nil
+      if !@expiration.nil? && @expiration <= Time.now
+        @credentials, @expiration = prior
+        return Errors::StaleCredentialsError.new
+      end
+      nil
     rescue StandardError => e
+      @credentials, @expiration = prior
       e
     end
 
