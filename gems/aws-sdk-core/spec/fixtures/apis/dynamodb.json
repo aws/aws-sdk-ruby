@@ -3047,7 +3047,7 @@
       "type":"structure",
       "members":{
         "message":{"shape":"ErrorMessage"},
-        "foo":{"shape":"String"} // custom
+        "foo":{"shape":"String"}
       },
       "exception":true
     },
