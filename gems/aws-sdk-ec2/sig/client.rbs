@@ -14892,6 +14892,17 @@ module Aws
                                                            ) -> _UpdateSecurityGroupRuleDescriptionsIngressResponseSuccess
                                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSecurityGroupRuleDescriptionsIngressResponseSuccess
 
+      interface _ValidateSecurityGroupQuotasForInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateSecurityGroupQuotasForInterfaceResult]
+        def valid: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#validate_security_group_quotas_for_interface-instance_method
+      def validate_security_group_quotas_for_interface: (
+                                                          security_group_ids: Array[::String],
+                                                          ?dry_run: bool
+                                                        ) -> _ValidateSecurityGroupQuotasForInterfaceResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateSecurityGroupQuotasForInterfaceResponseSuccess
+
       interface _WithdrawByoipCidrResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::WithdrawByoipCidrResult]
         def byoip_cidr: () -> Types::ByoipCidr

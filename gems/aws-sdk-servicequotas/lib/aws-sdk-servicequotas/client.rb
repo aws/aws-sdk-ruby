@@ -621,6 +621,7 @@ module Aws::ServiceQuotas
     #   resp.quota.quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
     #   resp.quota.quota_context.context_scope_type #=> String
     #   resp.quota.quota_context.context_id #=> String
+    #   resp.quota.quota_context.adjustable_at_level #=> String, one of "ACCOUNT", "PER_RESOURCE", "ALL"
     #   resp.quota.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAWSDefaultServiceQuota AWS API Documentation
@@ -801,6 +802,7 @@ module Aws::ServiceQuotas
     #   resp.requested_quota.quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
     #   resp.requested_quota.quota_context.context_scope_type #=> String
     #   resp.requested_quota.quota_context.context_id #=> String
+    #   resp.requested_quota.quota_context.adjustable_at_level #=> String, one of "ACCOUNT", "PER_RESOURCE", "ALL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetRequestedServiceQuotaChange AWS API Documentation
     #
@@ -864,6 +866,7 @@ module Aws::ServiceQuotas
     #   resp.quota.quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
     #   resp.quota.quota_context.context_scope_type #=> String
     #   resp.quota.quota_context.context_id #=> String
+    #   resp.quota.quota_context.adjustable_at_level #=> String, one of "ACCOUNT", "PER_RESOURCE", "ALL"
     #   resp.quota.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetServiceQuota AWS API Documentation
@@ -994,6 +997,7 @@ module Aws::ServiceQuotas
     #   resp.quotas[0].quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
     #   resp.quotas[0].quota_context.context_scope_type #=> String
     #   resp.quotas[0].quota_context.context_id #=> String
+    #   resp.quotas[0].quota_context.adjustable_at_level #=> String, one of "ACCOUNT", "PER_RESOURCE", "ALL"
     #   resp.quotas[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListAWSDefaultServiceQuotas AWS API Documentation
@@ -1084,6 +1088,7 @@ module Aws::ServiceQuotas
     #   resp.requested_quotas[0].quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
     #   resp.requested_quotas[0].quota_context.context_scope_type #=> String
     #   resp.requested_quotas[0].quota_context.context_id #=> String
+    #   resp.requested_quotas[0].quota_context.adjustable_at_level #=> String, one of "ACCOUNT", "PER_RESOURCE", "ALL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistory AWS API Documentation
     #
@@ -1178,6 +1183,7 @@ module Aws::ServiceQuotas
     #   resp.requested_quotas[0].quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
     #   resp.requested_quotas[0].quota_context.context_scope_type #=> String
     #   resp.requested_quotas[0].quota_context.context_id #=> String
+    #   resp.requested_quotas[0].quota_context.adjustable_at_level #=> String, one of "ACCOUNT", "PER_RESOURCE", "ALL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistoryByQuota AWS API Documentation
     #
@@ -1343,6 +1349,7 @@ module Aws::ServiceQuotas
     #   resp.quotas[0].quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
     #   resp.quotas[0].quota_context.context_scope_type #=> String
     #   resp.quotas[0].quota_context.context_id #=> String
+    #   resp.quotas[0].quota_context.adjustable_at_level #=> String, one of "ACCOUNT", "PER_RESOURCE", "ALL"
     #   resp.quotas[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotas AWS API Documentation
@@ -1563,6 +1570,7 @@ module Aws::ServiceQuotas
     #   resp.requested_quota.quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
     #   resp.requested_quota.quota_context.context_scope_type #=> String
     #   resp.requested_quota.quota_context.context_id #=> String
+    #   resp.requested_quota.quota_context.adjustable_at_level #=> String, one of "ACCOUNT", "PER_RESOURCE", "ALL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/RequestServiceQuotaIncrease AWS API Documentation
     #
@@ -1822,7 +1830,7 @@ module Aws::ServiceQuotas
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-servicequotas'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

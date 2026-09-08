@@ -16,6 +16,7 @@ module Aws::ServiceQuotas
 
     AWSServiceAccessNotEnabledException = Shapes::StructureShape.new(name: 'AWSServiceAccessNotEnabledException')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AdjustableAtLevelEnum = Shapes::StringShape.new(name: 'AdjustableAtLevelEnum')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AppliedLevelEnum = Shapes::StringShape.new(name: 'AppliedLevelEnum')
     AppliedValue = Shapes::FloatShape.new(name: 'AppliedValue')
@@ -372,6 +373,7 @@ module Aws::ServiceQuotas
     QuotaContextInfo.add_member(:context_scope, Shapes::ShapeRef.new(shape: QuotaContextScope, location_name: "ContextScope"))
     QuotaContextInfo.add_member(:context_scope_type, Shapes::ShapeRef.new(shape: QuotaContextScopeType, location_name: "ContextScopeType"))
     QuotaContextInfo.add_member(:context_id, Shapes::ShapeRef.new(shape: QuotaContextId, location_name: "ContextId"))
+    QuotaContextInfo.add_member(:adjustable_at_level, Shapes::ShapeRef.new(shape: AdjustableAtLevelEnum, location_name: "AdjustableAtLevel"))
     QuotaContextInfo.struct_class = Types::QuotaContextInfo
 
     QuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
@@ -668,6 +670,7 @@ module Aws::ServiceQuotas
         o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 

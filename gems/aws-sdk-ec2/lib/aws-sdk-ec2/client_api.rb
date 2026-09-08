@@ -4037,6 +4037,8 @@ module Aws::EC2
     VCpuCountRange = Shapes::StructureShape.new(name: 'VCpuCountRange')
     VCpuCountRangeRequest = Shapes::StructureShape.new(name: 'VCpuCountRangeRequest')
     VCpuInfo = Shapes::StructureShape.new(name: 'VCpuInfo')
+    ValidateSecurityGroupQuotasForInterfaceRequest = Shapes::StructureShape.new(name: 'ValidateSecurityGroupQuotasForInterfaceRequest')
+    ValidateSecurityGroupQuotasForInterfaceResult = Shapes::StructureShape.new(name: 'ValidateSecurityGroupQuotasForInterfaceResult')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     ValidationWarning = Shapes::StructureShape.new(name: 'ValidationWarning')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
@@ -20062,6 +20064,13 @@ module Aws::EC2
     VCpuInfo.add_member(:valid_threads_per_core, Shapes::ShapeRef.new(shape: ThreadsPerCoreList, location_name: "validThreadsPerCore"))
     VCpuInfo.struct_class = Types::VCpuInfo
 
+    ValidateSecurityGroupQuotasForInterfaceRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, required: true, location_name: "SecurityGroupId"))
+    ValidateSecurityGroupQuotasForInterfaceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ValidateSecurityGroupQuotasForInterfaceRequest.struct_class = Types::ValidateSecurityGroupQuotasForInterfaceRequest
+
+    ValidateSecurityGroupQuotasForInterfaceResult.add_member(:valid, Shapes::ShapeRef.new(shape: Boolean, location_name: "valid"))
+    ValidateSecurityGroupQuotasForInterfaceResult.struct_class = Types::ValidateSecurityGroupQuotasForInterfaceResult
+
     ValidationError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
     ValidationError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationError.struct_class = Types::ValidationError
@@ -28241,6 +28250,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateSecurityGroupRuleDescriptionsIngressRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSecurityGroupRuleDescriptionsIngressResult)
+      end)
+
+      api.add_operation(:validate_security_group_quotas_for_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ValidateSecurityGroupQuotasForInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ValidateSecurityGroupQuotasForInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ValidateSecurityGroupQuotasForInterfaceResult)
       end)
 
       api.add_operation(:withdraw_byoip_cidr, Seahorse::Model::Operation.new.tap do |o|

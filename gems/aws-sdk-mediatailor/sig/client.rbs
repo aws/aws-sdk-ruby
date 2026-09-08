@@ -104,8 +104,8 @@ module Aws
                                                        playback_configuration_name: ::String,
                                                        ?enabled_logging_strategies: Array[("VENDED_LOGS" | "LEGACY_CLOUDWATCH")],
                                                        ?ads_interaction_log: {
-                                                         publish_opt_in_event_types: Array[("RAW_ADS_RESPONSE" | "RAW_ADS_REQUEST" | "PRE_ADS_REQUEST_HOOK_SUMMARY" | "PRE_ADS_REQUEST_FUNCTION_COMPLETED")]?,
-                                                         exclude_event_types: Array[("AD_MARKER_FOUND" | "NON_AD_MARKER_FOUND" | "MAKING_ADS_REQUEST" | "MODIFIED_TARGET_URL" | "VAST_REDIRECT" | "EMPTY_VAST_RESPONSE" | "EMPTY_VMAP_RESPONSE" | "VAST_RESPONSE" | "REDIRECTED_VAST_RESPONSE" | "FILLED_AVAIL" | "FILLED_OVERLAY_AVAIL" | "BEACON_FIRED" | "WARNING_NO_ADVERTISEMENTS" | "WARNING_VPAID_AD_DROPPED" | "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED" | "ERROR_UNKNOWN" | "ERROR_UNKNOWN_HOST" | "ERROR_DISALLOWED_HOST" | "ERROR_ADS_IO" | "ERROR_ADS_TIMEOUT" | "ERROR_ADS_RESPONSE_PARSE" | "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT" | "ERROR_ADS_INVALID_RESPONSE" | "ERROR_VAST_REDIRECT_EMPTY_RESPONSE" | "ERROR_VAST_REDIRECT_MULTIPLE_VAST" | "ERROR_VAST_REDIRECT_FAILED" | "ERROR_VAST_MISSING_MEDIAFILES" | "ERROR_VAST_MISSING_CREATIVES" | "ERROR_VAST_MISSING_OVERLAYS" | "ERROR_VAST_MISSING_IMPRESSION" | "ERROR_VAST_INVALID_VAST_AD_TAG_URI" | "ERROR_VAST_MULTIPLE_TRACKING_EVENTS" | "ERROR_VAST_MULTIPLE_LINEAR" | "ERROR_VAST_INVALID_MEDIA_FILE" | "ERROR_FIRING_BEACON_FAILED" | "ERROR_PERSONALIZATION_DISABLED" | "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET" | "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS" | "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS" | "INTERSTITIAL_VOD_SUCCESS" | "INTERSTITIAL_VOD_FAILURE" | "PRE_ADS_REQUEST_HOOK_ERROR" | "PRE_ADS_REQUEST_FUNCTION_ERROR")]?
+                                                         publish_opt_in_event_types: Array[("RAW_ADS_RESPONSE" | "RAW_ADS_REQUEST" | "RAW_BID_REQUEST" | "RAW_BID_RESPONSE" | "PRE_ADS_REQUEST_HOOK_SUMMARY" | "PRE_ADS_REQUEST_FUNCTION_COMPLETED" | "POST_ADS_RESPONSE_HOOK_SUMMARY" | "POST_ADS_RESPONSE_FUNCTION_COMPLETED" | "PRE_MANIFEST_INSERTION_HOOK_SUMMARY" | "PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED")]?,
+                                                         exclude_event_types: Array[("AD_MARKER_FOUND" | "NON_AD_MARKER_FOUND" | "MAKING_ADS_REQUEST" | "MODIFIED_TARGET_URL" | "VAST_REDIRECT" | "EMPTY_VAST_RESPONSE" | "EMPTY_VMAP_RESPONSE" | "VAST_RESPONSE" | "REDIRECTED_VAST_RESPONSE" | "FILLED_AVAIL" | "FILLED_OVERLAY_AVAIL" | "BEACON_FIRED" | "WARNING_NO_ADVERTISEMENTS" | "WARNING_VPAID_AD_DROPPED" | "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED" | "ERROR_UNKNOWN" | "ERROR_UNKNOWN_HOST" | "ERROR_DISALLOWED_HOST" | "ERROR_ADS_IO" | "ERROR_ADS_TIMEOUT" | "ERROR_ADS_RESPONSE_PARSE" | "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT" | "ERROR_ADS_INVALID_RESPONSE" | "ERROR_VAST_REDIRECT_EMPTY_RESPONSE" | "ERROR_VAST_REDIRECT_MULTIPLE_VAST" | "ERROR_VAST_REDIRECT_FAILED" | "ERROR_VAST_MISSING_MEDIAFILES" | "ERROR_VAST_MISSING_CREATIVES" | "ERROR_VAST_MISSING_OVERLAYS" | "ERROR_VAST_MISSING_IMPRESSION" | "ERROR_VAST_INVALID_VAST_AD_TAG_URI" | "ERROR_VAST_MULTIPLE_TRACKING_EVENTS" | "ERROR_VAST_MULTIPLE_LINEAR" | "ERROR_VAST_INVALID_MEDIA_FILE" | "ERROR_FIRING_BEACON_FAILED" | "ERROR_PERSONALIZATION_DISABLED" | "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET" | "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS" | "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS" | "INTERSTITIAL_VOD_SUCCESS" | "INTERSTITIAL_VOD_FAILURE" | "PRE_ADS_REQUEST_HOOK_ERROR" | "PRE_ADS_REQUEST_FUNCTION_ERROR" | "POST_ADS_RESPONSE_HOOK_ERROR" | "POST_ADS_RESPONSE_FUNCTION_ERROR" | "PRE_MANIFEST_INSERTION_HOOK_ERROR" | "PRE_MANIFEST_INSERTION_FUNCTION_ERROR")]?
                                                        },
                                                        ?manifest_service_interaction_log: {
                                                          publish_opt_in_event_types: Array[("PRE_SESSION_INIT_HOOK_SUMMARY" | "PRE_SESSION_INIT_FUNCTION_COMPLETED")]?,
@@ -558,12 +558,13 @@ module Aws
       interface _GetFunctionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionResponse]
         def function_id: () -> ::String
-        def function_type: () -> ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR")
+        def function_type: () -> ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST")
         def description: () -> ::String
         def http_request_configuration: () -> Types::HttpRequestConfiguration
         def custom_output_configuration: () -> Types::CustomOutputConfiguration
         def concurrent_executor_configuration: () -> Types::ConcurrentExecutorConfiguration
         def sequential_executor_configuration: () -> Types::SequentialExecutorConfiguration
+        def vast_request_configuration: () -> Types::VastRequestConfiguration
         def tags: () -> ::Hash[::String, ::String]
         def arn: () -> ::String
       end
@@ -599,7 +600,8 @@ module Aws
         def video_content_source_url: () -> ::String
         def ad_conditioning_configuration: () -> Types::AdConditioningConfiguration
         def ad_decision_server_configuration: () -> Types::AdDecisionServerConfiguration
-        def function_mapping: () -> ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
+        def yield_optimization_configuration: () -> Types::YieldOptimizationConfiguration
+        def function_mapping: () -> ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION"), ::String]
         def ads_personalization_timeouts: () -> Types::AdsPersonalizationTimeouts
         def ads_personalization_concurrency: () -> Types::AdsPersonalizationConcurrency
       end
@@ -753,19 +755,20 @@ module Aws
       interface _PutFunctionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutFunctionResponse]
         def function_id: () -> ::String
-        def function_type: () -> ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR")
+        def function_type: () -> ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST")
         def description: () -> ::String
         def http_request_configuration: () -> Types::HttpRequestConfiguration
         def custom_output_configuration: () -> Types::CustomOutputConfiguration
         def concurrent_executor_configuration: () -> Types::ConcurrentExecutorConfiguration
         def sequential_executor_configuration: () -> Types::SequentialExecutorConfiguration
+        def vast_request_configuration: () -> Types::VastRequestConfiguration
         def tags: () -> ::Hash[::String, ::String]
         def arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#put_function-instance_method
       def put_function: (
                           function_id: ::String,
-                          function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR"),
+                          function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST"),
                           ?description: ::String,
                           ?http_request_configuration: {
                             runtime: ("JSONATA"),
@@ -805,6 +808,15 @@ module Aws
                             ],
                             timeout_milliseconds: ::Integer
                           },
+                          ?vast_request_configuration: {
+                            runtime: ("JSONATA"),
+                            output: Hash[::String, ::String]?,
+                            method_type: ("GET" | "POST"),
+                            request_timeout_milliseconds: ::Integer,
+                            url: ::String,
+                            body: ::String?,
+                            headers: Hash[::String, ::String]?
+                          },
                           ?tags: Hash[::String, ::String]
                         ) -> _PutFunctionResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFunctionResponseSuccess
@@ -835,7 +847,8 @@ module Aws
         def video_content_source_url: () -> ::String
         def ad_conditioning_configuration: () -> Types::AdConditioningConfiguration
         def ad_decision_server_configuration: () -> Types::AdDecisionServerConfiguration
-        def function_mapping: () -> ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
+        def yield_optimization_configuration: () -> Types::YieldOptimizationConfiguration
+        def function_mapping: () -> ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION"), ::String]
         def ads_personalization_timeouts: () -> Types::AdsPersonalizationTimeouts
         def ads_personalization_concurrency: () -> Types::AdsPersonalizationConcurrency
       end
@@ -895,7 +908,13 @@ module Aws
                                             ad_sequencing_mode: ("FOLLOW_AD_SEQUENCE" | "IGNORE_AD_SEQUENCE" | "FOLLOW_AD_SEQUENCE_ONLY_LIVE" | "FOLLOW_AD_SEQUENCE_ONLY_VOD")?
                                           }?
                                         },
-                                        ?function_mapping: Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String],
+                                        ?yield_optimization_configuration: {
+                                          minimum_unfilled_duration: ::Integer,
+                                          publisher_id: ::String,
+                                          region: ("AMERICAS" | "EUROPE" | "ASIA_PACIFIC"),
+                                          open_rtb_template: ::String
+                                        },
+                                        ?function_mapping: Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION"), ::String],
                                         ?ads_personalization_timeouts: {
                                           ads_request_timeout_milliseconds: ::Integer?,
                                           live_maximum_ads_personalization_time_milliseconds: ::Integer?,

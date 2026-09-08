@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2026-09-04)
+------------------
+
+* Feature - New AWS REVIEW mode as supported data retention mode for Bedrock models
+
 1.91.0 (2026-08-24)
 ------------------
 

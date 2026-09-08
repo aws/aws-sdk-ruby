@@ -77256,6 +77256,55 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Validates whether the specified security groups can be associated with
+    # a single network interface. The operation checks Amazon Virtual
+    # Private Cloud (Amazon VPC) quotas for inbound or outbound rules per
+    # security group and security groups per network interface. Only
+    # authorized AWS services can call this operation.
+    #
+    # For more information about security group quotas, see [Amazon VPC
+    # quotas][1] in the *Amazon VPC User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-security-groups
+    #
+    # @option params [required, Array<String>] :security_group_ids
+    #   The IDs of the security groups to validate for association with a
+    #   single network interface. You must specify at least one ID, and each
+    #   ID must be unique. The number of IDs cannot exceed the maximum number
+    #   of security groups allowed per network interface.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ValidateSecurityGroupQuotasForInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidateSecurityGroupQuotasForInterfaceResult#valid #valid} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_security_group_quotas_for_interface({
+    #     security_group_ids: ["SecurityGroupId"], # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.valid #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidateSecurityGroupQuotasForInterface AWS API Documentation
+    #
+    # @overload validate_security_group_quotas_for_interface(params = {})
+    # @param [Hash] params ({})
+    def validate_security_group_quotas_for_interface(params = {}, options = {})
+      req = build_request(:validate_security_group_quotas_for_interface, params)
+      req.send_request(options)
+    end
+
     # Stops advertising an address range that is provisioned as an address
     # pool.
     #
@@ -77329,7 +77378,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.643.0'
+      context[:gem_version] = '1.644.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

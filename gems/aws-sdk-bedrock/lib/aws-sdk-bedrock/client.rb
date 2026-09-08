@@ -3438,7 +3438,7 @@ module Aws::Bedrock
     #
     # @example Response structure
     #
-    #   resp.mode #=> String, one of "default", "none", "provider_data_share", "inherit"
+    #   resp.mode #=> String, one of "default", "none", "aws_review", "provider_data_share", "inherit"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAccountDataRetention AWS API Documentation
@@ -7061,12 +7061,12 @@ module Aws::Bedrock
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_data_retention({
-    #     mode: "default", # required, accepts default, none, provider_data_share, inherit
+    #     mode: "default", # required, accepts default, none, aws_review, provider_data_share, inherit
     #   })
     #
     # @example Response structure
     #
-    #   resp.mode #=> String, one of "default", "none", "provider_data_share", "inherit"
+    #   resp.mode #=> String, one of "default", "none", "aws_review", "provider_data_share", "inherit"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutAccountDataRetention AWS API Documentation
@@ -8346,7 +8346,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

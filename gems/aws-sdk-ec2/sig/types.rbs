@@ -19267,6 +19267,17 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ValidateSecurityGroupQuotasForInterfaceRequest
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ValidateSecurityGroupQuotasForInterfaceResult
+      attr_accessor valid: bool
+      SENSITIVE: []
+    end
+
     class ValidationError
       attr_accessor code: ::String
       attr_accessor message: ::String

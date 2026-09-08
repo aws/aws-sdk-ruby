@@ -89220,6 +89220,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups to validate for association with a
+    #   single network interface. You must specify at least one ID, and each
+    #   ID must be unique. The number of IDs cannot exceed the maximum
+    #   number of security groups allowed per network interface.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidateSecurityGroupQuotasForInterfaceRequest AWS API Documentation
+    #
+    class ValidateSecurityGroupQuotasForInterfaceRequest < Struct.new(
+      :security_group_ids,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] valid
+    #   The operation returns `true` if the specified security groups can be
+    #   associated with a single network interface without exceeding the
+    #   quotas. It returns an error if associating the security groups would
+    #   exceed a quota.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidateSecurityGroupQuotasForInterfaceResult AWS API Documentation
+    #
+    class ValidateSecurityGroupQuotasForInterfaceResult < Struct.new(
+      :valid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The error code and error message that is returned for a parameter or
     # parameter combination that is not valid when a new launch template or
     # new version of a launch template is created.

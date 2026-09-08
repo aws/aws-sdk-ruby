@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2026-09-04)
+------------------
+
+* Feature - Elemental MediaTailor now supports two new Monetization Functions lifecycle hooks, Post Ads Response and Pre Manifest Insertion, and a VAST Request function type that calls a VAST or VMAP ad server. This release also adds Yield Optimization with demand from Amazon Publisher Services.
+
 1.126.0 (2026-08-07)
 ------------------
 
