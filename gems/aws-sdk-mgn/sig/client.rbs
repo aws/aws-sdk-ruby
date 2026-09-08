@@ -252,12 +252,16 @@ module Aws
                                                   ?small_volume_conf: {
                                                     volume_type: ("io1" | "io2" | "gp3" | "gp2" | "st1" | "sc1" | "standard")?,
                                                     iops: ::Integer?,
-                                                    throughput: ::Integer?
+                                                    throughput: ::Integer?,
+                                                    volume_initialization_rate: ::Integer?,
+                                                    delete_on_termination: bool?
                                                   },
                                                   ?large_volume_conf: {
                                                     volume_type: ("io1" | "io2" | "gp3" | "gp2" | "st1" | "sc1" | "standard")?,
                                                     iops: ::Integer?,
-                                                    throughput: ::Integer?
+                                                    throughput: ::Integer?,
+                                                    volume_initialization_rate: ::Integer?,
+                                                    delete_on_termination: bool?
                                                   },
                                                   ?enable_parameters_encryption: bool,
                                                   ?parameters_encryption_key: ::String
@@ -1694,12 +1698,16 @@ module Aws
                                                   ?small_volume_conf: {
                                                     volume_type: ("io1" | "io2" | "gp3" | "gp2" | "st1" | "sc1" | "standard")?,
                                                     iops: ::Integer?,
-                                                    throughput: ::Integer?
+                                                    throughput: ::Integer?,
+                                                    volume_initialization_rate: ::Integer?,
+                                                    delete_on_termination: bool?
                                                   },
                                                   ?large_volume_conf: {
                                                     volume_type: ("io1" | "io2" | "gp3" | "gp2" | "st1" | "sc1" | "standard")?,
                                                     iops: ::Integer?,
-                                                    throughput: ::Integer?
+                                                    throughput: ::Integer?,
+                                                    volume_initialization_rate: ::Integer?,
+                                                    delete_on_termination: bool?
                                                   },
                                                   ?enable_parameters_encryption: bool,
                                                   ?parameters_encryption_key: ::String

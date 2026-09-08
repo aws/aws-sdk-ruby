@@ -727,6 +727,8 @@ module Aws::Mgn
       attr_accessor volume_type: ("io1" | "io2" | "gp3" | "gp2" | "st1" | "sc1" | "standard")
       attr_accessor iops: ::Integer
       attr_accessor throughput: ::Integer
+      attr_accessor volume_initialization_rate: ::Integer
+      attr_accessor delete_on_termination: bool
       SENSITIVE: []
     end
 

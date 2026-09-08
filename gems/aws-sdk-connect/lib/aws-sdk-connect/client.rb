@@ -5053,10 +5053,19 @@ module Aws::Connect
     #     media_concurrencies: [ # required
     #       {
     #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
-    #         concurrency: 1, # required
+    #         concurrency: 1,
     #         cross_channel_behavior: {
     #           behavior_type: "ROUTE_CURRENT_CHANNEL_ONLY", # required, accepts ROUTE_CURRENT_CHANNEL_ONLY, ROUTE_ANY_CHANNEL
     #         },
+    #         workload_type_concurrencies: [
+    #           {
+    #             workload_type: "WorkloadType", # required
+    #             concurrency: 1, # required
+    #             cross_channel_workload_behavior: {
+    #               channel_workload_behavior_type: "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", # accepts ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY, ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY, ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #     tags: {
@@ -9816,6 +9825,10 @@ module Aws::Connect
     #   resp.routing_profile.media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
     #   resp.routing_profile.media_concurrencies[0].concurrency #=> Integer
     #   resp.routing_profile.media_concurrencies[0].cross_channel_behavior.behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_ONLY", "ROUTE_ANY_CHANNEL"
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies #=> Array
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies[0].workload_type #=> String
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies[0].concurrency #=> Integer
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies[0].cross_channel_workload_behavior.channel_workload_behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY", "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE"
     #   resp.routing_profile.default_outbound_queue_id #=> String
     #   resp.routing_profile.tags #=> Hash
     #   resp.routing_profile.tags["TagKey"] #=> String
@@ -22724,6 +22737,10 @@ module Aws::Connect
     #   resp.routing_profiles[0].media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
     #   resp.routing_profiles[0].media_concurrencies[0].concurrency #=> Integer
     #   resp.routing_profiles[0].media_concurrencies[0].cross_channel_behavior.behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_ONLY", "ROUTE_ANY_CHANNEL"
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies #=> Array
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies[0].workload_type #=> String
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies[0].concurrency #=> Integer
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies[0].cross_channel_workload_behavior.channel_workload_behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY", "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE"
     #   resp.routing_profiles[0].default_outbound_queue_id #=> String
     #   resp.routing_profiles[0].tags #=> Hash
     #   resp.routing_profiles[0].tags["TagKey"] #=> String
@@ -29813,10 +29830,19 @@ module Aws::Connect
     #     media_concurrencies: [ # required
     #       {
     #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
-    #         concurrency: 1, # required
+    #         concurrency: 1,
     #         cross_channel_behavior: {
     #           behavior_type: "ROUTE_CURRENT_CHANNEL_ONLY", # required, accepts ROUTE_CURRENT_CHANNEL_ONLY, ROUTE_ANY_CHANNEL
     #         },
+    #         workload_type_concurrencies: [
+    #           {
+    #             workload_type: "WorkloadType", # required
+    #             concurrency: 1, # required
+    #             cross_channel_workload_behavior: {
+    #               channel_workload_behavior_type: "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", # accepts ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY, ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY, ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -31436,7 +31462,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.275.0'
+      context[:gem_version] = '1.276.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

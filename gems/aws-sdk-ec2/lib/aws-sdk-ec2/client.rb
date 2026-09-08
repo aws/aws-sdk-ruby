@@ -32562,8 +32562,8 @@ module Aws::EC2
     #
     # If you specify one or more instance IDs, Amazon EC2 returns the credit
     # option (`standard` or `unlimited`) of those instances. If you specify
-    # an instance ID that is not valid, such as an instance that is not a
-    # burstable performance instance, an error is returned.
+    # an instance ID that is not a burstable performance instance, Amazon
+    # EC2 returns the `standard` credit option.
     #
     # Recently terminated instances might appear in the returned results.
     # This interval is usually less than one hour.
@@ -33968,6 +33968,8 @@ module Aws::EC2
     #   resp.instance_types[0].network_info.network_cards[0].default_ena_queue_count_per_interface #=> Integer
     #   resp.instance_types[0].network_info.network_cards[0].maximum_ena_queue_count #=> Integer
     #   resp.instance_types[0].network_info.network_cards[0].maximum_ena_queue_count_per_interface #=> Integer
+    #   resp.instance_types[0].network_info.network_cards[0].interface_types #=> Array
+    #   resp.instance_types[0].network_info.network_cards[0].interface_types[0] #=> String, one of "interface", "efa", "efa-only", "secondary"
     #   resp.instance_types[0].network_info.ipv_4_addresses_per_interface #=> Integer
     #   resp.instance_types[0].network_info.ipv_6_addresses_per_interface #=> Integer
     #   resp.instance_types[0].network_info.ipv_6_supported #=> Boolean
@@ -77378,7 +77380,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.644.0'
+      context[:gem_version] = '1.645.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

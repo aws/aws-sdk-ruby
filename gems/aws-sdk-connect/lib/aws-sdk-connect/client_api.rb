@@ -249,6 +249,7 @@ module Aws::Connect
     Channel = Shapes::StringShape.new(name: 'Channel')
     ChannelList = Shapes::ListShape.new(name: 'ChannelList')
     ChannelToCountMap = Shapes::MapShape.new(name: 'ChannelToCountMap')
+    ChannelWorkloadBehaviorType = Shapes::StringShape.new(name: 'ChannelWorkloadBehaviorType')
     Channels = Shapes::ListShape.new(name: 'Channels')
     ChatContactMetrics = Shapes::StructureShape.new(name: 'ChatContactMetrics')
     ChatContent = Shapes::StringShape.new(name: 'ChatContent')
@@ -468,6 +469,7 @@ module Aws::Connect
     CreatedByInfo = Shapes::UnionShape.new(name: 'CreatedByInfo')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
     CrossChannelBehavior = Shapes::StructureShape.new(name: 'CrossChannelBehavior')
+    CrossChannelWorkloadBehavior = Shapes::StructureShape.new(name: 'CrossChannelWorkloadBehavior')
     CurrentMetric = Shapes::StructureShape.new(name: 'CurrentMetric')
     CurrentMetricData = Shapes::StructureShape.new(name: 'CurrentMetricData')
     CurrentMetricDataCollections = Shapes::ListShape.new(name: 'CurrentMetricDataCollections')
@@ -2322,6 +2324,10 @@ module Aws::Connect
     WidgetDestination = Shapes::StructureShape.new(name: 'WidgetDestination')
     WidgetId = Shapes::StringShape.new(name: 'WidgetId')
     WisdomInfo = Shapes::StructureShape.new(name: 'WisdomInfo')
+    WorkloadType = Shapes::StringShape.new(name: 'WorkloadType')
+    WorkloadTypeConcurrencies = Shapes::ListShape.new(name: 'WorkloadTypeConcurrencies')
+    WorkloadTypeConcurrency = Shapes::StructureShape.new(name: 'WorkloadTypeConcurrency')
+    WorkloadTypeConcurrencyType = Shapes::IntegerShape.new(name: 'WorkloadTypeConcurrencyType')
     Workspace = Shapes::StructureShape.new(name: 'Workspace')
     WorkspaceAssociatedResourceId = Shapes::StringShape.new(name: 'WorkspaceAssociatedResourceId')
     WorkspaceAssociatedResourceName = Shapes::StringShape.new(name: 'WorkspaceAssociatedResourceName')
@@ -4028,6 +4034,9 @@ module Aws::Connect
 
     CrossChannelBehavior.add_member(:behavior_type, Shapes::ShapeRef.new(shape: BehaviorType, required: true, location_name: "BehaviorType"))
     CrossChannelBehavior.struct_class = Types::CrossChannelBehavior
+
+    CrossChannelWorkloadBehavior.add_member(:channel_workload_behavior_type, Shapes::ShapeRef.new(shape: ChannelWorkloadBehaviorType, location_name: "ChannelWorkloadBehaviorType"))
+    CrossChannelWorkloadBehavior.struct_class = Types::CrossChannelWorkloadBehavior
 
     CurrentMetric.add_member(:name, Shapes::ShapeRef.new(shape: CurrentMetricName, location_name: "Name"))
     CurrentMetric.add_member(:metric_id, Shapes::ShapeRef.new(shape: CurrentMetricId, location_name: "MetricId"))
@@ -6936,8 +6945,9 @@ module Aws::Connect
     MediaConcurrencies.member = Shapes::ShapeRef.new(shape: MediaConcurrency)
 
     MediaConcurrency.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
-    MediaConcurrency.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, required: true, location_name: "Concurrency"))
+    MediaConcurrency.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, location_name: "Concurrency"))
     MediaConcurrency.add_member(:cross_channel_behavior, Shapes::ShapeRef.new(shape: CrossChannelBehavior, location_name: "CrossChannelBehavior"))
+    MediaConcurrency.add_member(:workload_type_concurrencies, Shapes::ShapeRef.new(shape: WorkloadTypeConcurrencies, location_name: "WorkloadTypeConcurrencies"))
     MediaConcurrency.struct_class = Types::MediaConcurrency
 
     MediaItem.add_member(:type, Shapes::ShapeRef.new(shape: MediaType, location_name: "Type"))
@@ -10151,6 +10161,13 @@ module Aws::Connect
     WisdomInfo.add_member(:session_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SessionArn"))
     WisdomInfo.add_member(:ai_agents, Shapes::ShapeRef.new(shape: AiAgents, location_name: "AiAgents"))
     WisdomInfo.struct_class = Types::WisdomInfo
+
+    WorkloadTypeConcurrencies.member = Shapes::ShapeRef.new(shape: WorkloadTypeConcurrency)
+
+    WorkloadTypeConcurrency.add_member(:workload_type, Shapes::ShapeRef.new(shape: WorkloadType, required: true, location_name: "WorkloadType"))
+    WorkloadTypeConcurrency.add_member(:concurrency, Shapes::ShapeRef.new(shape: WorkloadTypeConcurrencyType, required: true, location_name: "Concurrency"))
+    WorkloadTypeConcurrency.add_member(:cross_channel_workload_behavior, Shapes::ShapeRef.new(shape: CrossChannelWorkloadBehavior, location_name: "CrossChannelWorkloadBehavior"))
+    WorkloadTypeConcurrency.struct_class = Types::WorkloadTypeConcurrency
 
     Workspace.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     Workspace.add_member(:id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "Id"))

@@ -438,6 +438,23 @@ module Aws
       }?
     }
 
+      type media_concurrency = {
+      channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+      concurrency: ::Integer?,
+      cross_channel_behavior: {
+        behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
+      }?,
+      workload_type_concurrencies: Array[
+        {
+          workload_type: ::String,
+          concurrency: ::Integer,
+          cross_channel_workload_behavior: {
+            channel_workload_behavior_type: ("ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY" | "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY" | "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE")?
+          }?
+        }
+      ]?
+    }
+
       type task_action_definition = {
       name: ::String,
       description: ::String?,

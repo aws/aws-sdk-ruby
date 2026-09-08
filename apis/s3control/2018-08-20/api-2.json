@@ -6094,6 +6094,13 @@
       "max":128,
       "min":4
     },
+    "S3AnnotationDirective":{
+      "type":"string",
+      "enum":[
+        "COPY",
+        "EXCLUDE"
+      ]
+    },
     "S3BucketArnString":{
       "type":"string",
       "max":128,
@@ -6168,6 +6175,7 @@
           "box":true
         },
         "MetadataDirective":{"shape":"S3MetadataDirective"},
+        "AnnotationDirective":{"shape":"S3AnnotationDirective"},
         "ModifiedSinceConstraint":{"shape":"TimeStamp"},
         "NewObjectMetadata":{"shape":"S3ObjectMetadata"},
         "NewObjectTagging":{"shape":"S3TagSet"},
@@ -6181,7 +6189,9 @@
         "ObjectLockMode":{"shape":"S3ObjectLockMode"},
         "ObjectLockRetainUntilDate":{"shape":"TimeStamp"},
         "BucketKeyEnabled":{"shape":"Boolean"},
-        "ChecksumAlgorithm":{"shape":"S3ChecksumAlgorithm"}
+        "ChecksumAlgorithm":{"shape":"S3ChecksumAlgorithm"},
+        "ObjectLockEventHold":{"shape":"S3ObjectLockEventHold"},
+        "ObjectLockEventHoldDuration":{"shape":"S3ObjectLockEventHoldDuration"}
       }
     },
     "S3DeleteObjectTaggingOperation":{
@@ -6287,6 +6297,38 @@
         "REPLACE"
       ]
     },
+    "S3ObjectLockEventHold":{
+      "type":"string",
+      "enum":[
+        "ON",
+        "OFF"
+      ]
+    },
+    "S3ObjectLockEventHoldDuration":{
+      "type":"structure",
+      "members":{
+        "Days":{
+          "shape":"S3ObjectLockEventHoldDurationDays",
+          "box":true
+        },
+        "Years":{
+          "shape":"S3ObjectLockEventHoldDurationYears",
+          "box":true
+        }
+      }
+    },
+    "S3ObjectLockEventHoldDurationDays":{
+      "type":"integer",
+      "box":true,
+      "max":36500,
+      "min":1
+    },
+    "S3ObjectLockEventHoldDurationYears":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
     "S3ObjectLockLegalHold":{
       "type":"structure",
       "required":["Status"],
@@ -6307,6 +6349,38 @@
         "COMPLIANCE",
         "GOVERNANCE"
       ]
+    },
+    "S3ObjectLockRetentionEventHold":{
+      "type":"string",
+      "enum":[
+        "ON",
+        "OFF"
+      ]
+    },
+    "S3ObjectLockRetentionEventHoldDuration":{
+      "type":"structure",
+      "members":{
+        "Days":{
+          "shape":"S3ObjectLockRetentionEventHoldDurationDays",
+          "box":true
+        },
+        "Years":{
+          "shape":"S3ObjectLockRetentionEventHoldDurationYears",
+          "box":true
+        }
+      }
+    },
+    "S3ObjectLockRetentionEventHoldDurationDays":{
+      "type":"integer",
+      "box":true,
+      "max":36500,
+      "min":1
+    },
+    "S3ObjectLockRetentionEventHoldDurationYears":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
     },
     "S3ObjectLockRetentionMode":{
       "type":"string",
@@ -6390,7 +6464,9 @@
       "type":"structure",
       "members":{
         "RetainUntilDate":{"shape":"TimeStamp"},
-        "Mode":{"shape":"S3ObjectLockRetentionMode"}
+        "Mode":{"shape":"S3ObjectLockRetentionMode"},
+        "EventHold":{"shape":"S3ObjectLockRetentionEventHold"},
+        "EventHoldDuration":{"shape":"S3ObjectLockRetentionEventHoldDuration"}
       }
     },
     "S3SSEAlgorithm":{

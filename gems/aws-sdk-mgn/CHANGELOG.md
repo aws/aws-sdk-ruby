@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-09-08)
+------------------
+
+* Feature - This release adds support for configuring the EBS volume initialization rate and delete on termination behavior in launch configuration template
+
 1.74.0 (2026-09-02)
 ------------------
 

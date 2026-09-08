@@ -379,6 +379,9 @@ module Aws::S3
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
     #     object_lock_retain_until_date: Time.now,
     #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #     object_lock_event_hold: "ON", # accepts ON, OFF
+    #     object_lock_event_hold_duration_days: 1,
+    #     object_lock_event_hold_duration_years: 1,
     #     expected_bucket_owner: "AccountId",
     #     expected_source_bucket_owner: "AccountId",
     #   })
@@ -1120,6 +1123,25 @@ module Aws::S3
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    # @option options [String] :object_lock_event_hold
+    #   The event hold status to apply to the object copy. Set to `ON` to
+    #   enable or `OFF` to disable.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    # @option options [Integer] :object_lock_event_hold_duration_days
+    #   The event hold duration in days to apply to the object copy.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    # @option options [Integer] :object_lock_event_hold_duration_years
+    #   The event hold duration in years to apply to the object copy.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     # @option options [String] :expected_bucket_owner
     #   The account ID of the expected destination bucket owner. If the
     #   account ID that you provide does not match the actual owner of the
@@ -1536,6 +1558,9 @@ module Aws::S3
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
     #     object_lock_retain_until_date: Time.now,
     #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #     object_lock_event_hold: "ON", # accepts ON, OFF
+    #     object_lock_event_hold_duration_days: 1,
+    #     object_lock_event_hold_duration_years: 1,
     #     expected_bucket_owner: "AccountId",
     #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME, SHA512, MD5, XXHASH64, XXHASH3, XXHASH128
     #     checksum_type: "COMPOSITE", # accepts COMPOSITE, FULL_OBJECT
@@ -2057,6 +2082,27 @@ module Aws::S3
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    # @option options [String] :object_lock_event_hold
+    #   Specifies the event hold status to apply to the uploaded object. Set
+    #   to `ON` to enable or `OFF` to disable.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    # @option options [Integer] :object_lock_event_hold_duration_days
+    #   Specifies the event hold duration in days to apply to the uploaded
+    #   object.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    # @option options [Integer] :object_lock_event_hold_duration_years
+    #   Specifies the event hold duration in years to apply to the uploaded
+    #   object.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     # @option options [String] :expected_bucket_owner
     #   The account ID of the expected bucket owner. If the account ID that
     #   you provide does not match the actual owner of the bucket, the request
@@ -2142,6 +2188,9 @@ module Aws::S3
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
     #     object_lock_retain_until_date: Time.now,
     #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #     object_lock_event_hold: "ON", # accepts ON, OFF
+    #     object_lock_event_hold_duration_days: 1,
+    #     object_lock_event_hold_duration_years: 1,
     #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
@@ -2767,6 +2816,25 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
+    # @option options [String] :object_lock_event_hold
+    #   Specifies the event hold status to apply to this object. Set to `ON`
+    #   to enable or `OFF` to disable.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    # @option options [Integer] :object_lock_event_hold_duration_days
+    #   Specifies the event hold duration in days to apply to this object.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    # @option options [Integer] :object_lock_event_hold_duration_years
+    #   Specifies the event hold duration in years to apply to this object.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     # @option options [String] :expected_bucket_owner
     #   The account ID of the expected bucket owner. If the account ID that
     #   you provide does not match the actual owner of the bucket, the request

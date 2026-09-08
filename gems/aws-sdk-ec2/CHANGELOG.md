@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.645.0 (2026-09-08)
+------------------
+
+* Feature - Adds the InterfaceTypes field to NetworkCardInfo in the DescribeInstanceTypes response. This field identifies the network interface types supported by each network card.
+
 1.644.0 (2026-09-04)
 ------------------
 

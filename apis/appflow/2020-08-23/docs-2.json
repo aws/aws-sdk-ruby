@@ -370,6 +370,12 @@
         "RedshiftConnectorProfileProperties$clusterIdentifier": "<p>The unique ID that's assigned to an Amazon Redshift cluster.</p>"
       }
     },
+    "CodeVerifier": {
+      "base": null,
+      "refs": {
+        "ConnectorOAuthRequest$codeVerifier": "<p> The code verifier used in the PKCE (Proof Key for Code Exchange) OAuth flow. </p>"
+      }
+    },
     "ConflictException": {
       "base": "<p> There was a conflict when processing the request (for example, a flow with the given name already exists within the account. Check for conflicting resource names and try again. </p>",
       "refs": {}
@@ -1869,6 +1875,12 @@
       "base": null,
       "refs": {
         "PrivateConnectionProvisioningState$status": "<p> Specifies the private connection provisioning status. </p>"
+      }
+    },
+    "PrivateKey": {
+      "base": null,
+      "refs": {
+        "SnowflakeConnectorProfileCredentials$privateKey": "<p> The RSA private key used for key pair authentication with Snowflake. Provide this instead of a password when your Snowflake account uses key pair authentication. </p>"
       }
     },
     "PrivateLinkServiceName": {

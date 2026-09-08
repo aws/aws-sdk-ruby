@@ -383,6 +383,7 @@
         "LaunchConfigurationTemplate$associatePublicIpAddress": "<p>Associate public Ip address.</p>",
         "LaunchConfigurationTemplate$copyTags": "<p>Copy tags.</p>",
         "LaunchConfigurationTemplate$enableParametersEncryption": "<p>Enable parameters encryption.</p>",
+        "LaunchTemplateDiskConf$deleteOnTermination": "<p>Launch template disk delete on termination configuration.</p>",
         "Licensing$osByol": "<p>Configure BYOL OS licensing.</p>",
         "ListApplicationsRequestFilters$isArchived": "<p>Filter applications list by archival status.</p>",
         "ListWavesRequestFilters$isArchived": "<p>Filter waves list by archival status.</p>",
@@ -3636,6 +3637,12 @@
       "base": null,
       "refs": {
         "DescribeVcenterClientsResponse$items": "<p>List of items returned by DescribeVcenterClients.</p>"
+      }
+    },
+    "VolumeInitializationRate": {
+      "base": null,
+      "refs": {
+        "LaunchTemplateDiskConf$volumeInitializationRate": "<p>Launch template disk volume initialization rate configuration.</p>"
       }
     },
     "VolumeType": {

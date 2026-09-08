@@ -1549,6 +1549,8 @@ module Aws::SageMaker
     InstancePoolPriority = Shapes::IntegerShape.new(name: 'InstancePoolPriority')
     InstancePoolSummary = Shapes::StructureShape.new(name: 'InstancePoolSummary')
     InstancePoolSummaryList = Shapes::ListShape.new(name: 'InstancePoolSummaryList')
+    InstancePreference = Shapes::StructureShape.new(name: 'InstancePreference')
+    InstancePreferenceList = Shapes::ListShape.new(name: 'InstancePreferenceList')
     InstanceRequirementsEniConfiguration = Shapes::StructureShape.new(name: 'InstanceRequirementsEniConfiguration')
     InstanceRequirementsEniConfigurations = Shapes::ListShape.new(name: 'InstanceRequirementsEniConfigurations')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
@@ -2272,6 +2274,8 @@ module Aws::SageMaker
     ProcessingInput = Shapes::StructureShape.new(name: 'ProcessingInput')
     ProcessingInputs = Shapes::ListShape.new(name: 'ProcessingInputs')
     ProcessingInstanceCount = Shapes::IntegerShape.new(name: 'ProcessingInstanceCount')
+    ProcessingInstancePreference = Shapes::StructureShape.new(name: 'ProcessingInstancePreference')
+    ProcessingInstancePreferenceList = Shapes::ListShape.new(name: 'ProcessingInstancePreferenceList')
     ProcessingInstanceType = Shapes::StringShape.new(name: 'ProcessingInstanceType')
     ProcessingJob = Shapes::StructureShape.new(name: 'ProcessingJob')
     ProcessingJobArn = Shapes::StringShape.new(name: 'ProcessingJobArn')
@@ -2784,6 +2788,7 @@ module Aws::SageMaker
     TrainingJobSummaries = Shapes::ListShape.new(name: 'TrainingJobSummaries')
     TrainingJobSummary = Shapes::StructureShape.new(name: 'TrainingJobSummary')
     TrainingPlanArn = Shapes::StringShape.new(name: 'TrainingPlanArn')
+    TrainingPlanArnList = Shapes::ListShape.new(name: 'TrainingPlanArnList')
     TrainingPlanArns = Shapes::ListShape.new(name: 'TrainingPlanArns')
     TrainingPlanDurationHours = Shapes::IntegerShape.new(name: 'TrainingPlanDurationHours')
     TrainingPlanDurationHoursInput = Shapes::IntegerShape.new(name: 'TrainingPlanDurationHoursInput')
@@ -8614,6 +8619,13 @@ module Aws::SageMaker
 
     InstancePoolSummaryList.member = Shapes::ShapeRef.new(shape: InstancePoolSummary)
 
+    InstancePreference.add_member(:instance_type, Shapes::ShapeRef.new(shape: TrainingInstanceType, required: true, location_name: "InstanceType"))
+    InstancePreference.add_member(:instance_count, Shapes::ShapeRef.new(shape: TrainingInstanceCount, location_name: "InstanceCount", metadata: {"box" => true}))
+    InstancePreference.add_member(:training_plan_arns, Shapes::ShapeRef.new(shape: TrainingPlanArnList, location_name: "TrainingPlanArns"))
+    InstancePreference.struct_class = Types::InstancePreference
+
+    InstancePreferenceList.member = Shapes::ShapeRef.new(shape: InstancePreference)
+
     InstanceRequirementsEniConfiguration.add_member(:customer_eni, Shapes::ShapeRef.new(shape: String, location_name: "CustomerEni"))
     InstanceRequirementsEniConfiguration.add_member(:additional_enis, Shapes::ShapeRef.new(shape: AdditionalEnis, location_name: "AdditionalEnis"))
     InstanceRequirementsEniConfiguration.struct_class = Types::InstanceRequirementsEniConfiguration
@@ -11186,6 +11198,9 @@ module Aws::SageMaker
     ProcessingClusterConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProcessingInstanceType, location_name: "InstanceType"))
     ProcessingClusterConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: ProcessingVolumeSizeInGB, required: true, location_name: "VolumeSizeInGB"))
     ProcessingClusterConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    ProcessingClusterConfig.add_member(:instance_preferences, Shapes::ShapeRef.new(shape: ProcessingInstancePreferenceList, location_name: "InstancePreferences"))
+    ProcessingClusterConfig.add_member(:selected_instance_type, Shapes::ShapeRef.new(shape: ProcessingInstanceType, location_name: "SelectedInstanceType"))
+    ProcessingClusterConfig.add_member(:selected_instance_count, Shapes::ShapeRef.new(shape: ProcessingInstanceCount, location_name: "SelectedInstanceCount"))
     ProcessingClusterConfig.struct_class = Types::ProcessingClusterConfig
 
     ProcessingEnvironmentMap.key = Shapes::ShapeRef.new(shape: ProcessingEnvironmentKey)
@@ -11201,6 +11216,12 @@ module Aws::SageMaker
     ProcessingInput.struct_class = Types::ProcessingInput
 
     ProcessingInputs.member = Shapes::ShapeRef.new(shape: ProcessingInput)
+
+    ProcessingInstancePreference.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProcessingInstanceType, required: true, location_name: "InstanceType"))
+    ProcessingInstancePreference.add_member(:instance_count, Shapes::ShapeRef.new(shape: ProcessingInstanceCount, location_name: "InstanceCount"))
+    ProcessingInstancePreference.struct_class = Types::ProcessingInstancePreference
+
+    ProcessingInstancePreferenceList.member = Shapes::ShapeRef.new(shape: ProcessingInstancePreference)
 
     ProcessingJob.add_member(:processing_inputs, Shapes::ShapeRef.new(shape: ProcessingInputs, location_name: "ProcessingInputs"))
     ProcessingJob.add_member(:processing_output_config, Shapes::ShapeRef.new(shape: ProcessingOutputConfig, location_name: "ProcessingOutputConfig"))
@@ -11700,6 +11721,9 @@ module Aws::SageMaker
     ResourceConfig.add_member(:instance_groups, Shapes::ShapeRef.new(shape: InstanceGroups, location_name: "InstanceGroups"))
     ResourceConfig.add_member(:training_plan_arn, Shapes::ShapeRef.new(shape: TrainingPlanArn, location_name: "TrainingPlanArn"))
     ResourceConfig.add_member(:instance_placement_config, Shapes::ShapeRef.new(shape: InstancePlacementConfig, location_name: "InstancePlacementConfig"))
+    ResourceConfig.add_member(:instance_preferences, Shapes::ShapeRef.new(shape: InstancePreferenceList, location_name: "InstancePreferences"))
+    ResourceConfig.add_member(:selected_instance_type, Shapes::ShapeRef.new(shape: TrainingInstanceType, location_name: "SelectedInstanceType"))
+    ResourceConfig.add_member(:selected_instance_count, Shapes::ShapeRef.new(shape: TrainingInstanceCount, location_name: "SelectedInstanceCount", metadata: {"box" => true}))
     ResourceConfig.struct_class = Types::ResourceConfig
 
     ResourceConfigForUpdate.add_member(:keep_alive_period_in_seconds, Shapes::ShapeRef.new(shape: KeepAlivePeriodInSeconds, required: true, location_name: "KeepAlivePeriodInSeconds"))
@@ -12432,6 +12456,8 @@ module Aws::SageMaker
     TrainingJobSummary.add_member(:warm_pool_status, Shapes::ShapeRef.new(shape: WarmPoolStatus, location_name: "WarmPoolStatus"))
     TrainingJobSummary.add_member(:training_plan_arn, Shapes::ShapeRef.new(shape: TrainingPlanArn, location_name: "TrainingPlanArn"))
     TrainingJobSummary.struct_class = Types::TrainingJobSummary
+
+    TrainingPlanArnList.member = Shapes::ShapeRef.new(shape: TrainingPlanArn)
 
     TrainingPlanArns.member = Shapes::ShapeRef.new(shape: TrainingPlanArn)
 

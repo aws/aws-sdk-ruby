@@ -2463,12 +2463,22 @@ module Aws::Mgn
     #   Launch template disk throughput configuration.
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_initialization_rate
+    #   Launch template disk volume initialization rate configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Launch template disk delete on termination configuration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/LaunchTemplateDiskConf AWS API Documentation
     #
     class LaunchTemplateDiskConf < Struct.new(
       :volume_type,
       :iops,
-      :throughput)
+      :throughput,
+      :volume_initialization_rate,
+      :delete_on_termination)
       SENSITIVE = []
       include Aws::Structure
     end

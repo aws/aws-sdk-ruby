@@ -529,6 +529,7 @@ module Aws::Mgn
     VcenterClient = Shapes::StructureShape.new(name: 'VcenterClient')
     VcenterClientID = Shapes::StringShape.new(name: 'VcenterClientID')
     VcenterClientList = Shapes::ListShape.new(name: 'VcenterClientList')
+    VolumeInitializationRate = Shapes::IntegerShape.new(name: 'VolumeInitializationRate')
     VolumeType = Shapes::StringShape.new(name: 'VolumeType')
     VpcID = Shapes::StringShape.new(name: 'VpcID')
     VpcIDsFilter = Shapes::ListShape.new(name: 'VpcIDsFilter')
@@ -1146,6 +1147,8 @@ module Aws::Mgn
     LaunchTemplateDiskConf.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
     LaunchTemplateDiskConf.add_member(:iops, Shapes::ShapeRef.new(shape: Iops, location_name: "iops"))
     LaunchTemplateDiskConf.add_member(:throughput, Shapes::ShapeRef.new(shape: Throughput, location_name: "throughput"))
+    LaunchTemplateDiskConf.add_member(:volume_initialization_rate, Shapes::ShapeRef.new(shape: VolumeInitializationRate, location_name: "volumeInitializationRate"))
+    LaunchTemplateDiskConf.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     LaunchTemplateDiskConf.struct_class = Types::LaunchTemplateDiskConf
 
     LaunchedInstance.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: EC2InstanceID, location_name: "ec2InstanceID"))

@@ -219,6 +219,7 @@ module Aws
         def cloud_watch_logs_role_arn: () -> ::String
         def kms_key_id: () -> ::String
         def is_organization_trail: () -> bool
+        def recursive_logging: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#create_trail-instance_method
       def create_trail: (
@@ -238,7 +239,8 @@ module Aws
                               key: ::String,
                               value: ::String?
                             }
-                          ]
+                          ],
+                          ?recursive_logging: bool
                         ) -> _CreateTrailResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrailResponseSuccess
 
@@ -1080,6 +1082,7 @@ module Aws
         def cloud_watch_logs_role_arn: () -> ::String
         def kms_key_id: () -> ::String
         def is_organization_trail: () -> bool
+        def recursive_logging: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#update_trail-instance_method
       def update_trail: (
@@ -1093,7 +1096,8 @@ module Aws
                           ?cloud_watch_logs_log_group_arn: ::String,
                           ?cloud_watch_logs_role_arn: ::String,
                           ?kms_key_id: ::String,
-                          ?is_organization_trail: bool
+                          ?is_organization_trail: bool,
+                          ?recursive_logging: bool
                         ) -> _UpdateTrailResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrailResponseSuccess
     end

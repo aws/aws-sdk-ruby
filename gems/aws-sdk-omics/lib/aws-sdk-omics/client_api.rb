@@ -525,6 +525,7 @@ module Aws::Omics
     SequenceStoreStatus = Shapes::StringShape.new(name: 'SequenceStoreStatus')
     SequenceStoreStatusMessage = Shapes::StringShape.new(name: 'SequenceStoreStatusMessage')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SessionPolicy = Shapes::StringShape.new(name: 'SessionPolicy')
     ShareDetails = Shapes::StructureShape.new(name: 'ShareDetails')
     ShareDetailsList = Shapes::ListShape.new(name: 'ShareDetailsList')
     ShareName = Shapes::StringShape.new(name: 'ShareName')
@@ -1125,6 +1126,7 @@ module Aws::Omics
     DefaultRunSetting.add_member(:workflow_version_name, Shapes::ShapeRef.new(shape: WorkflowVersionName, location_name: "workflowVersionName"))
     DefaultRunSetting.add_member(:networking_mode, Shapes::ShapeRef.new(shape: NetworkingMode, location_name: "networkingMode"))
     DefaultRunSetting.add_member(:configuration_name, Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "configurationName"))
+    DefaultRunSetting.add_member(:session_policy, Shapes::ShapeRef.new(shape: SessionPolicy, location_name: "sessionPolicy"))
     DefaultRunSetting.add_member(:engine_settings, Shapes::ShapeRef.new(shape: EngineSettings, location_name: "engineSettings"))
     DefaultRunSetting.add_member(:scratch_storage_mode, Shapes::ShapeRef.new(shape: ScratchStorageMode, location_name: "scratchStorageMode"))
     DefaultRunSetting.struct_class = Types::DefaultRunSetting
@@ -1567,6 +1569,7 @@ module Aws::Omics
     GetRunResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationDetails, location_name: "configuration"))
     GetRunResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigResponse, location_name: "vpcConfig"))
     GetRunResponse.add_member(:engine_settings, Shapes::ShapeRef.new(shape: EngineSettings, location_name: "engineSettings"))
+    GetRunResponse.add_member(:session_policy, Shapes::ShapeRef.new(shape: SessionPolicy, location_name: "sessionPolicy"))
     GetRunResponse.struct_class = Types::GetRunResponse
 
     GetRunTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: RunId, required: true, location: "uri", location_name: "id"))
@@ -2528,6 +2531,7 @@ module Aws::Omics
     StartRunRequest.add_member(:networking_mode, Shapes::ShapeRef.new(shape: NetworkingMode, location_name: "networkingMode"))
     StartRunRequest.add_member(:scratch_storage_mode, Shapes::ShapeRef.new(shape: ScratchStorageMode, location_name: "scratchStorageMode"))
     StartRunRequest.add_member(:configuration_name, Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "configurationName"))
+    StartRunRequest.add_member(:session_policy, Shapes::ShapeRef.new(shape: SessionPolicy, location_name: "sessionPolicy"))
     StartRunRequest.add_member(:engine_settings, Shapes::ShapeRef.new(shape: EngineSettings, location_name: "engineSettings"))
     StartRunRequest.struct_class = Types::StartRunRequest
 

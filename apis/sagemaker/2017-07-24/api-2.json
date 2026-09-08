@@ -19043,6 +19043,24 @@
       "member":{"shape":"InstancePoolSummary"},
       "min":1
     },
+    "InstancePreference":{
+      "type":"structure",
+      "required":["InstanceType"],
+      "members":{
+        "InstanceType":{"shape":"TrainingInstanceType"},
+        "InstanceCount":{
+          "shape":"TrainingInstanceCount",
+          "box":true
+        },
+        "TrainingPlanArns":{"shape":"TrainingPlanArnList"}
+      }
+    },
+    "InstancePreferenceList":{
+      "type":"list",
+      "member":{"shape":"InstancePreference"},
+      "max":5,
+      "min":1
+    },
     "InstanceRequirementsEniConfiguration":{
       "type":"structure",
       "members":{
@@ -22111,7 +22129,7 @@
       "type":"integer",
       "box":true,
       "max":2419200,
-      "min":7200
+      "min":1800
     },
     "MaxPercentageOfInputDatasetLabeled":{
       "type":"integer",
@@ -25416,7 +25434,10 @@
         "InstanceCount":{"shape":"ProcessingInstanceCount"},
         "InstanceType":{"shape":"ProcessingInstanceType"},
         "VolumeSizeInGB":{"shape":"ProcessingVolumeSizeInGB"},
-        "VolumeKmsKeyId":{"shape":"KmsKeyId"}
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "InstancePreferences":{"shape":"ProcessingInstancePreferenceList"},
+        "SelectedInstanceType":{"shape":"ProcessingInstanceType"},
+        "SelectedInstanceCount":{"shape":"ProcessingInstanceCount"}
       }
     },
     "ProcessingEnvironmentKey":{
@@ -25468,6 +25489,20 @@
       "type":"integer",
       "box":true,
       "max":100,
+      "min":1
+    },
+    "ProcessingInstancePreference":{
+      "type":"structure",
+      "required":["InstanceType"],
+      "members":{
+        "InstanceType":{"shape":"ProcessingInstanceType"},
+        "InstanceCount":{"shape":"ProcessingInstanceCount"}
+      }
+    },
+    "ProcessingInstancePreferenceList":{
+      "type":"list",
+      "member":{"shape":"ProcessingInstancePreference"},
+      "max":5,
       "min":1
     },
     "ProcessingInstanceType":{
@@ -27362,7 +27397,13 @@
         "KeepAlivePeriodInSeconds":{"shape":"KeepAlivePeriodInSeconds"},
         "InstanceGroups":{"shape":"InstanceGroups"},
         "TrainingPlanArn":{"shape":"TrainingPlanArn"},
-        "InstancePlacementConfig":{"shape":"InstancePlacementConfig"}
+        "InstancePlacementConfig":{"shape":"InstancePlacementConfig"},
+        "InstancePreferences":{"shape":"InstancePreferenceList"},
+        "SelectedInstanceType":{"shape":"TrainingInstanceType"},
+        "SelectedInstanceCount":{
+          "shape":"TrainingInstanceCount",
+          "box":true
+        }
       }
     },
     "ResourceConfigForUpdate":{
@@ -30142,6 +30183,12 @@
       "max":2048,
       "min":50,
       "pattern":"arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*"
+    },
+    "TrainingPlanArnList":{
+      "type":"list",
+      "member":{"shape":"TrainingPlanArn"},
+      "max":1,
+      "min":1
     },
     "TrainingPlanArns":{
       "type":"list",

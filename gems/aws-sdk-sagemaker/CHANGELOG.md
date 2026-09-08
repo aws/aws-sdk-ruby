@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.390.0 (2026-09-08)
+------------------
+
+* Feature - Add support for InstancePreferences list for multiple instance type input support on SageMaker Training and Processing
+
 1.389.0 (2026-09-02)
 ------------------
 

@@ -1015,11 +1015,15 @@ module Aws::Mgn
     #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
     #       iops: 1,
     #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false,
     #     },
     #     large_volume_conf: {
     #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
     #       iops: 1,
     #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false,
     #     },
     #     enable_parameters_encryption: false,
     #     parameters_encryption_key: "KmsKeyArn",
@@ -1060,9 +1064,13 @@ module Aws::Mgn
     #   resp.small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.small_volume_conf.iops #=> Integer
     #   resp.small_volume_conf.throughput #=> Integer
+    #   resp.small_volume_conf.volume_initialization_rate #=> Integer
+    #   resp.small_volume_conf.delete_on_termination #=> Boolean
     #   resp.large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.large_volume_conf.iops #=> Integer
     #   resp.large_volume_conf.throughput #=> Integer
+    #   resp.large_volume_conf.volume_initialization_rate #=> Integer
+    #   resp.large_volume_conf.delete_on_termination #=> Boolean
     #   resp.enable_parameters_encryption #=> Boolean
     #   resp.parameters_encryption_key #=> String
     #
@@ -1915,9 +1923,13 @@ module Aws::Mgn
     #   resp.items[0].small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.items[0].small_volume_conf.iops #=> Integer
     #   resp.items[0].small_volume_conf.throughput #=> Integer
+    #   resp.items[0].small_volume_conf.volume_initialization_rate #=> Integer
+    #   resp.items[0].small_volume_conf.delete_on_termination #=> Boolean
     #   resp.items[0].large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.items[0].large_volume_conf.iops #=> Integer
     #   resp.items[0].large_volume_conf.throughput #=> Integer
+    #   resp.items[0].large_volume_conf.volume_initialization_rate #=> Integer
+    #   resp.items[0].large_volume_conf.delete_on_termination #=> Boolean
     #   resp.items[0].enable_parameters_encryption #=> Boolean
     #   resp.items[0].parameters_encryption_key #=> String
     #   resp.next_token #=> String
@@ -6828,11 +6840,15 @@ module Aws::Mgn
     #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
     #       iops: 1,
     #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false,
     #     },
     #     large_volume_conf: {
     #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
     #       iops: 1,
     #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false,
     #     },
     #     enable_parameters_encryption: false,
     #     parameters_encryption_key: "ARN",
@@ -6873,9 +6889,13 @@ module Aws::Mgn
     #   resp.small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.small_volume_conf.iops #=> Integer
     #   resp.small_volume_conf.throughput #=> Integer
+    #   resp.small_volume_conf.volume_initialization_rate #=> Integer
+    #   resp.small_volume_conf.delete_on_termination #=> Boolean
     #   resp.large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.large_volume_conf.iops #=> Integer
     #   resp.large_volume_conf.throughput #=> Integer
+    #   resp.large_volume_conf.volume_initialization_rate #=> Integer
+    #   resp.large_volume_conf.delete_on_termination #=> Boolean
     #   resp.enable_parameters_encryption #=> Boolean
     #   resp.parameters_encryption_key #=> String
     #
@@ -7848,7 +7868,7 @@ module Aws::Mgn
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

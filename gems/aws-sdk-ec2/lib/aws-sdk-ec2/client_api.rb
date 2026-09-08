@@ -3025,6 +3025,8 @@ module Aws::EC2
     NetworkCardIndex = Shapes::IntegerShape.new(name: 'NetworkCardIndex')
     NetworkCardInfo = Shapes::StructureShape.new(name: 'NetworkCardInfo')
     NetworkCardInfoList = Shapes::ListShape.new(name: 'NetworkCardInfoList')
+    NetworkCardInterfaceType = Shapes::StringShape.new(name: 'NetworkCardInterfaceType')
+    NetworkCardInterfaceTypeList = Shapes::ListShape.new(name: 'NetworkCardInterfaceTypeList')
     NetworkInfo = Shapes::StructureShape.new(name: 'NetworkInfo')
     NetworkInsightsAccessScope = Shapes::StructureShape.new(name: 'NetworkInsightsAccessScope')
     NetworkInsightsAccessScopeAnalysis = Shapes::StructureShape.new(name: 'NetworkInsightsAccessScopeAnalysis')
@@ -16465,9 +16467,12 @@ module Aws::EC2
     NetworkCardInfo.add_member(:default_ena_queue_count_per_interface, Shapes::ShapeRef.new(shape: DefaultEnaQueueCountPerInterface, location_name: "defaultEnaQueueCountPerInterface"))
     NetworkCardInfo.add_member(:maximum_ena_queue_count, Shapes::ShapeRef.new(shape: MaximumEnaQueueCount, location_name: "maximumEnaQueueCount"))
     NetworkCardInfo.add_member(:maximum_ena_queue_count_per_interface, Shapes::ShapeRef.new(shape: MaximumEnaQueueCountPerInterface, location_name: "maximumEnaQueueCountPerInterface"))
+    NetworkCardInfo.add_member(:interface_types, Shapes::ShapeRef.new(shape: NetworkCardInterfaceTypeList, location_name: "interfaceTypeSet"))
     NetworkCardInfo.struct_class = Types::NetworkCardInfo
 
     NetworkCardInfoList.member = Shapes::ShapeRef.new(shape: NetworkCardInfo, location_name: "item")
+
+    NetworkCardInterfaceTypeList.member = Shapes::ShapeRef.new(shape: NetworkCardInterfaceType, location_name: "item")
 
     NetworkInfo.add_member(:network_performance, Shapes::ShapeRef.new(shape: NetworkPerformance, location_name: "networkPerformance"))
     NetworkInfo.add_member(:maximum_network_interfaces, Shapes::ShapeRef.new(shape: MaxNetworkInterfaces, location_name: "maximumNetworkInterfaces"))

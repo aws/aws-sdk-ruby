@@ -721,6 +721,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #         },
     #         honeycode: {
@@ -729,6 +730,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #         },
     #         infor_nexus: {
@@ -744,6 +746,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #         },
     #         redshift: {
@@ -756,6 +759,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #           client_credentials_arn: "ClientCredentialsArn",
     #           o_auth_2_grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, JWT_BEARER
@@ -772,6 +776,7 @@ module Aws::Appflow
     #             o_auth_request: {
     #               auth_code: "AuthCode",
     #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier",
     #             },
     #           },
     #         },
@@ -785,11 +790,13 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #         },
     #         snowflake: {
     #           username: "Username", # required
-    #           password: "Password", # required
+    #           password: "Password",
+    #           private_key: "PrivateKey",
     #         },
     #         trendmicro: {
     #           api_secret_key: "ApiSecretKey", # required
@@ -805,6 +812,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #         },
     #         sapo_data: {
@@ -820,6 +828,7 @@ module Aws::Appflow
     #             o_auth_request: {
     #               auth_code: "AuthCode",
     #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier",
     #             },
     #           },
     #         },
@@ -837,6 +846,7 @@ module Aws::Appflow
     #             o_auth_request: {
     #               auth_code: "AuthCode",
     #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier",
     #             },
     #           },
     #           api_key: {
@@ -856,6 +866,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #           client_credentials_arn: "ClientCredentialsArn",
     #         },
@@ -2765,6 +2776,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #         },
     #         honeycode: {
@@ -2773,6 +2785,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #         },
     #         infor_nexus: {
@@ -2788,6 +2801,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #         },
     #         redshift: {
@@ -2800,6 +2814,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #           client_credentials_arn: "ClientCredentialsArn",
     #           o_auth_2_grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, JWT_BEARER
@@ -2816,6 +2831,7 @@ module Aws::Appflow
     #             o_auth_request: {
     #               auth_code: "AuthCode",
     #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier",
     #             },
     #           },
     #         },
@@ -2829,11 +2845,13 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #         },
     #         snowflake: {
     #           username: "Username", # required
-    #           password: "Password", # required
+    #           password: "Password",
+    #           private_key: "PrivateKey",
     #         },
     #         trendmicro: {
     #           api_secret_key: "ApiSecretKey", # required
@@ -2849,6 +2867,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #         },
     #         sapo_data: {
@@ -2864,6 +2883,7 @@ module Aws::Appflow
     #             o_auth_request: {
     #               auth_code: "AuthCode",
     #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier",
     #             },
     #           },
     #         },
@@ -2881,6 +2901,7 @@ module Aws::Appflow
     #             o_auth_request: {
     #               auth_code: "AuthCode",
     #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier",
     #             },
     #           },
     #           api_key: {
@@ -2900,6 +2921,7 @@ module Aws::Appflow
     #           o_auth_request: {
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier",
     #           },
     #           client_credentials_arn: "ClientCredentialsArn",
     #         },
@@ -3359,7 +3381,7 @@ module Aws::Appflow
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1064,13 +1064,7 @@ module Aws
                                       }
                                     ],
                                     media_concurrencies: Array[
-                                      {
-                                        channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
-                                        concurrency: ::Integer,
-                                        cross_channel_behavior: {
-                                          behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
-                                        }?
-                                      }
+                                      Params::media_concurrency
                                     ],
                                     ?tags: Hash[::String, ::String],
                                     ?agent_availability_timer: ("TIME_SINCE_LAST_ACTIVITY" | "TIME_SINCE_LAST_INBOUND")
@@ -5790,13 +5784,7 @@ module Aws
                                                 instance_id: ::String,
                                                 routing_profile_id: ::String,
                                                 media_concurrencies: Array[
-                                                  {
-                                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
-                                                    concurrency: ::Integer,
-                                                    cross_channel_behavior: {
-                                                      behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
-                                                    }?
-                                                  }
+                                                  Params::media_concurrency
                                                 ]
                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

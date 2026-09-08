@@ -1734,6 +1734,7 @@ module Aws::S3Control
       attr_accessor canned_access_control_list: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control")
       attr_accessor access_control_grants: ::Array[Types::S3Grant]
       attr_accessor metadata_directive: ("COPY" | "REPLACE")
+      attr_accessor annotation_directive: ("COPY" | "EXCLUDE")
       attr_accessor modified_since_constraint: ::Time
       attr_accessor new_object_metadata: Types::S3ObjectMetadata
       attr_accessor new_object_tagging: ::Array[Types::S3Tag]
@@ -1748,6 +1749,8 @@ module Aws::S3Control
       attr_accessor object_lock_retain_until_date: ::Time
       attr_accessor bucket_key_enabled: bool
       attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")
+      attr_accessor object_lock_event_hold: ("ON" | "OFF")
+      attr_accessor object_lock_event_hold_duration: Types::S3ObjectLockEventHoldDuration
       SENSITIVE: []
     end
 
@@ -1797,8 +1800,20 @@ module Aws::S3Control
       SENSITIVE: []
     end
 
+    class S3ObjectLockEventHoldDuration
+      attr_accessor days: ::Integer
+      attr_accessor years: ::Integer
+      SENSITIVE: []
+    end
+
     class S3ObjectLockLegalHold
       attr_accessor status: ("OFF" | "ON")
+      SENSITIVE: []
+    end
+
+    class S3ObjectLockRetentionEventHoldDuration
+      attr_accessor days: ::Integer
+      attr_accessor years: ::Integer
       SENSITIVE: []
     end
 
@@ -1829,6 +1844,8 @@ module Aws::S3Control
     class S3Retention
       attr_accessor retain_until_date: ::Time
       attr_accessor mode: ("COMPLIANCE" | "GOVERNANCE")
+      attr_accessor event_hold: ("ON" | "OFF")
+      attr_accessor event_hold_duration: Types::S3ObjectLockRetentionEventHoldDuration
       SENSITIVE: []
     end
 

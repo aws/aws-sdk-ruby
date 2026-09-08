@@ -71205,6 +71205,10 @@ module Aws::EC2
     #   The maximum number of the ENA queues for each interface.
     #   @return [Integer]
     #
+    # @!attribute [rw] interface_types
+    #   The supported interface types for the network card.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkCardInfo AWS API Documentation
     #
     class NetworkCardInfo < Struct.new(
@@ -71216,7 +71220,8 @@ module Aws::EC2
       :peak_bandwidth_in_gbps,
       :default_ena_queue_count_per_interface,
       :maximum_ena_queue_count,
-      :maximum_ena_queue_count_per_interface)
+      :maximum_ena_queue_count_per_interface,
+      :interface_types)
       SENSITIVE = []
       include Aws::Structure
     end

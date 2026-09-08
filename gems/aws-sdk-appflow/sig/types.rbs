@@ -188,7 +188,8 @@ module Aws::Appflow
     class ConnectorOAuthRequest
       attr_accessor auth_code: ::String
       attr_accessor redirect_uri: ::String
-      SENSITIVE: []
+      attr_accessor code_verifier: ::String
+      SENSITIVE: [:code_verifier]
     end
 
     class ConnectorOperator
@@ -1197,7 +1198,8 @@ module Aws::Appflow
     class SnowflakeConnectorProfileCredentials
       attr_accessor username: ::String
       attr_accessor password: ::String
-      SENSITIVE: [:password]
+      attr_accessor private_key: ::String
+      SENSITIVE: [:password, :private_key]
     end
 
     class SnowflakeConnectorProfileProperties

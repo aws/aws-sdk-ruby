@@ -3163,7 +3163,9 @@
       "members":{
         "volumeType":{"shape":"VolumeType"},
         "iops":{"shape":"Iops"},
-        "throughput":{"shape":"Throughput"}
+        "throughput":{"shape":"Throughput"},
+        "volumeInitializationRate":{"shape":"VolumeInitializationRate"},
+        "deleteOnTermination":{"shape":"Boolean"}
       }
     },
     "LaunchedInstance":{
@@ -5521,7 +5523,7 @@
     "Throughput":{
       "type":"long",
       "box":true,
-      "max":1000,
+      "max":2000,
       "min":125
     },
     "Timestamp":{"type":"timestamp"},
@@ -5815,6 +5817,12 @@
     "VcenterClientList":{
       "type":"list",
       "member":{"shape":"VcenterClient"}
+    },
+    "VolumeInitializationRate":{
+      "type":"long",
+      "box":true,
+      "max":300,
+      "min":100
     },
     "VolumeType":{
       "type":"string",

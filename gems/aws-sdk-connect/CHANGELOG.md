@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.276.0 (2026-09-08)
+------------------
+
+* Feature - Releasing workload types feature. A proper launch announcement or details will follow up.
+
 1.275.0 (2026-09-03)
 ------------------
 

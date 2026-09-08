@@ -56,6 +56,7 @@ module Aws::Appflow
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ClusterIdentifier = Shapes::StringShape.new(name: 'ClusterIdentifier')
+    CodeVerifier = Shapes::StringShape.new(name: 'CodeVerifier')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionMode = Shapes::StringShape.new(name: 'ConnectionMode')
     ConnectorAuthenticationException = Shapes::StructureShape.new(name: 'ConnectorAuthenticationException')
@@ -279,6 +280,7 @@ module Aws::Appflow
     PrivateConnectionProvisioningFailureMessage = Shapes::StringShape.new(name: 'PrivateConnectionProvisioningFailureMessage')
     PrivateConnectionProvisioningState = Shapes::StructureShape.new(name: 'PrivateConnectionProvisioningState')
     PrivateConnectionProvisioningStatus = Shapes::StringShape.new(name: 'PrivateConnectionProvisioningStatus')
+    PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
     PrivateLinkServiceName = Shapes::StringShape.new(name: 'PrivateLinkServiceName')
     ProfilePropertiesMap = Shapes::MapShape.new(name: 'ProfilePropertiesMap')
     ProfilePropertyKey = Shapes::StringShape.new(name: 'ProfilePropertyKey')
@@ -591,6 +593,7 @@ module Aws::Appflow
 
     ConnectorOAuthRequest.add_member(:auth_code, Shapes::ShapeRef.new(shape: AuthCode, location_name: "authCode"))
     ConnectorOAuthRequest.add_member(:redirect_uri, Shapes::ShapeRef.new(shape: RedirectUri, location_name: "redirectUri"))
+    ConnectorOAuthRequest.add_member(:code_verifier, Shapes::ShapeRef.new(shape: CodeVerifier, location_name: "codeVerifier"))
     ConnectorOAuthRequest.struct_class = Types::ConnectorOAuthRequest
 
     ConnectorOperator.add_member(:amplitude, Shapes::ShapeRef.new(shape: AmplitudeConnectorOperator, location_name: "Amplitude"))
@@ -1381,7 +1384,8 @@ module Aws::Appflow
     SlackSourceProperties.struct_class = Types::SlackSourceProperties
 
     SnowflakeConnectorProfileCredentials.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "username"))
-    SnowflakeConnectorProfileCredentials.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "password"))
+    SnowflakeConnectorProfileCredentials.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "password"))
+    SnowflakeConnectorProfileCredentials.add_member(:private_key, Shapes::ShapeRef.new(shape: PrivateKey, location_name: "privateKey"))
     SnowflakeConnectorProfileCredentials.struct_class = Types::SnowflakeConnectorProfileCredentials
 
     SnowflakeConnectorProfileProperties.add_member(:warehouse, Shapes::ShapeRef.new(shape: Warehouse, required: true, location_name: "warehouse"))

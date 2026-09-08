@@ -2157,6 +2157,12 @@
         "UserData$ActiveSlotsByChannel": "<p> A map of active slots by channel. The key is a channel name. The value is an integer: the number of active slots. </p>"
       }
     },
+    "ChannelWorkloadBehaviorType": {
+      "base": null,
+      "refs": {
+        "CrossChannelWorkloadBehavior$ChannelWorkloadBehaviorType": "<p>Specifies the routing behavior for an agent handling their current channel and workload type.</p>"
+      }
+    },
     "Channels": {
       "base": null,
       "refs": {
@@ -3612,6 +3618,12 @@
       "base": "<p>Defines the cross-channel routing behavior that allows an agent working on a contact in one channel to be offered a contact from a different channel.</p>",
       "refs": {
         "MediaConcurrency$CrossChannelBehavior": "<p>Defines the cross-channel routing behavior for each channel that is enabled for this Routing Profile. For example, this allows you to offer an agent a different contact from another channel when they are currently working with a contact from a Voice channel.</p>"
+      }
+    },
+    "CrossChannelWorkloadBehavior": {
+      "base": "<p>Defines the cross-channel and workload type routing behavior that allows an agent working on a contact to be offered a contact from a different channel or workload type.</p>",
+      "refs": {
+        "WorkloadTypeConcurrency$CrossChannelWorkloadBehavior": "<p>Defines the cross-channel and workload type routing behavior for each channel and workload type combination that is enabled for this Routing Profile.</p>"
       }
     },
     "CurrentMetric": {
@@ -15880,6 +15892,30 @@
       "base": "<p>Information about Connect Customer Wisdom.</p>",
       "refs": {
         "Contact$WisdomInfo": "<p>Information about Connect Customer Wisdom.</p>"
+      }
+    },
+    "WorkloadType": {
+      "base": null,
+      "refs": {
+        "WorkloadTypeConcurrency$WorkloadType": "<p>The value of the workload type.</p>"
+      }
+    },
+    "WorkloadTypeConcurrencies": {
+      "base": null,
+      "refs": {
+        "MediaConcurrency$WorkloadTypeConcurrencies": "<p>Defines the list of workload type concurrency configurations for a channel. When provided, enables granular concurrency control based on workload type values.</p>"
+      }
+    },
+    "WorkloadTypeConcurrency": {
+      "base": "<p>Defines the maximum number of contacts an agent can handle simultaneously for a specific channel and workload type combination.</p>",
+      "refs": {
+        "WorkloadTypeConcurrencies$member": null
+      }
+    },
+    "WorkloadTypeConcurrencyType": {
+      "base": null,
+      "refs": {
+        "WorkloadTypeConcurrency$Concurrency": "<p>The maximum number of contacts an agent can handle simultaneously for a specific channel and workload type combination.</p> <p>Valid Range for <code>VOICE</code>: Minimum value of 1. Maximum value of 1.</p> <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 10.</p> <p>Valid Range for <code>TASK</code>: Minimum value of 1. Maximum value of 10.</p>"
       }
     },
     "Workspace": {

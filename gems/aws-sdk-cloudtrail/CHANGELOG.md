@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2026-09-08)
+------------------
+
+* Feature - Adds support for the RecursiveLogging trail setting, which suppresses recursive events generated when CloudTrail delivers logs to a trail's destinations.
+
 1.125.0 (2026-07-09)
 ------------------
 

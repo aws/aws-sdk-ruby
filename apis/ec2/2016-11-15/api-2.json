@@ -47070,6 +47070,10 @@
         "MaximumEnaQueueCountPerInterface":{
           "shape":"MaximumEnaQueueCountPerInterface",
           "locationName":"maximumEnaQueueCountPerInterface"
+        },
+        "InterfaceTypes":{
+          "shape":"NetworkCardInterfaceTypeList",
+          "locationName":"interfaceTypeSet"
         }
       }
     },
@@ -47077,6 +47081,22 @@
       "type":"list",
       "member":{
         "shape":"NetworkCardInfo",
+        "locationName":"item"
+      }
+    },
+    "NetworkCardInterfaceType":{
+      "type":"string",
+      "enum":[
+        "interface",
+        "efa",
+        "efa-only",
+        "secondary"
+      ]
+    },
+    "NetworkCardInterfaceTypeList":{
+      "type":"list",
+      "member":{
+        "shape":"NetworkCardInterfaceType",
         "locationName":"item"
       }
     },

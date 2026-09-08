@@ -15337,6 +15337,7 @@ module Aws::EC2
       attr_accessor default_ena_queue_count_per_interface: ::Integer
       attr_accessor maximum_ena_queue_count: ::Integer
       attr_accessor maximum_ena_queue_count_per_interface: ::Integer
+      attr_accessor interface_types: ::Array[("interface" | "efa" | "efa-only" | "secondary")]
       SENSITIVE: []
     end
 

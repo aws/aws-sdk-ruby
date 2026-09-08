@@ -1385,6 +1385,7 @@ module Aws::S3Control
     #           },
     #         ],
     #         metadata_directive: "COPY", # accepts COPY, REPLACE
+    #         annotation_directive: "COPY", # accepts COPY, EXCLUDE
     #         modified_since_constraint: Time.now,
     #         new_object_metadata: {
     #           cache_control: "NonEmptyMaxLength1024String",
@@ -1418,6 +1419,11 @@ module Aws::S3Control
     #         object_lock_retain_until_date: Time.now,
     #         bucket_key_enabled: false,
     #         checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME, SHA512, MD5, XXHASH64, XXHASH3, XXHASH128
+    #         object_lock_event_hold: "ON", # accepts ON, OFF
+    #         object_lock_event_hold_duration: {
+    #           days: 1,
+    #           years: 1,
+    #         },
     #       },
     #       s3_put_object_acl: {
     #         access_control_policy: {
@@ -1464,6 +1470,11 @@ module Aws::S3Control
     #         retention: { # required
     #           retain_until_date: Time.now,
     #           mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
+    #           event_hold: "ON", # accepts ON, OFF
+    #           event_hold_duration: {
+    #             days: 1,
+    #             years: 1,
+    #           },
     #         },
     #       },
     #       s3_replicate_object: {
@@ -2970,6 +2981,7 @@ module Aws::S3Control
     #   resp.job.operation.s3_put_object_copy.access_control_grants[0].grantee.display_name #=> String
     #   resp.job.operation.s3_put_object_copy.access_control_grants[0].permission #=> String, one of "FULL_CONTROL", "READ", "WRITE", "READ_ACP", "WRITE_ACP"
     #   resp.job.operation.s3_put_object_copy.metadata_directive #=> String, one of "COPY", "REPLACE"
+    #   resp.job.operation.s3_put_object_copy.annotation_directive #=> String, one of "COPY", "EXCLUDE"
     #   resp.job.operation.s3_put_object_copy.modified_since_constraint #=> Time
     #   resp.job.operation.s3_put_object_copy.new_object_metadata.cache_control #=> String
     #   resp.job.operation.s3_put_object_copy.new_object_metadata.content_disposition #=> String
@@ -2997,6 +3009,9 @@ module Aws::S3Control
     #   resp.job.operation.s3_put_object_copy.object_lock_retain_until_date #=> Time
     #   resp.job.operation.s3_put_object_copy.bucket_key_enabled #=> Boolean
     #   resp.job.operation.s3_put_object_copy.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME", "SHA512", "MD5", "XXHASH64", "XXHASH3", "XXHASH128"
+    #   resp.job.operation.s3_put_object_copy.object_lock_event_hold #=> String, one of "ON", "OFF"
+    #   resp.job.operation.s3_put_object_copy.object_lock_event_hold_duration.days #=> Integer
+    #   resp.job.operation.s3_put_object_copy.object_lock_event_hold_duration.years #=> Integer
     #   resp.job.operation.s3_put_object_acl.access_control_policy.access_control_list.owner.id #=> String
     #   resp.job.operation.s3_put_object_acl.access_control_policy.access_control_list.owner.display_name #=> String
     #   resp.job.operation.s3_put_object_acl.access_control_policy.access_control_list.grants #=> Array
@@ -3014,6 +3029,9 @@ module Aws::S3Control
     #   resp.job.operation.s3_put_object_retention.bypass_governance_retention #=> Boolean
     #   resp.job.operation.s3_put_object_retention.retention.retain_until_date #=> Time
     #   resp.job.operation.s3_put_object_retention.retention.mode #=> String, one of "COMPLIANCE", "GOVERNANCE"
+    #   resp.job.operation.s3_put_object_retention.retention.event_hold #=> String, one of "ON", "OFF"
+    #   resp.job.operation.s3_put_object_retention.retention.event_hold_duration.days #=> Integer
+    #   resp.job.operation.s3_put_object_retention.retention.event_hold_duration.years #=> Integer
     #   resp.job.operation.s3_compute_object_checksum.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "CRC64NVME", "MD5", "SHA1", "SHA256", "SHA512", "XXHASH64", "XXHASH3", "XXHASH128"
     #   resp.job.operation.s3_compute_object_checksum.checksum_type #=> String, one of "FULL_OBJECT", "COMPOSITE"
     #   resp.job.operation.s3_update_object_encryption.object_encryption.ssekms.kms_key_arn #=> String
@@ -8218,7 +8236,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3383,6 +3383,10 @@ module Aws::PinpointSMSVoiceV2
     #   resp.phone_numbers[0].deletion_protection_enabled #=> Boolean
     #   resp.phone_numbers[0].pool_id #=> String
     #   resp.phone_numbers[0].registration_id #=> String
+    #   resp.phone_numbers[0].messaging_limits.rate_limits #=> Hash
+    #   resp.phone_numbers[0].messaging_limits.rate_limits["String"] #=> Integer
+    #   resp.phone_numbers[0].messaging_limits.daily_message_caps #=> Hash
+    #   resp.phone_numbers[0].messaging_limits.daily_message_caps["String"] #=> Integer
     #   resp.phone_numbers[0].created_timestamp #=> Time
     #   resp.next_token #=> String
     #
@@ -3676,6 +3680,10 @@ module Aws::PinpointSMSVoiceV2
     #   resp.rcs_agents[0].testing_agent.status #=> String, one of "CREATED", "PENDING", "ACTIVE"
     #   resp.rcs_agents[0].testing_agent.testing_agent_id #=> String
     #   resp.rcs_agents[0].testing_agent.registration_id #=> String
+    #   resp.rcs_agents[0].messaging_limits.rate_limits #=> Hash
+    #   resp.rcs_agents[0].messaging_limits.rate_limits["String"] #=> Integer
+    #   resp.rcs_agents[0].messaging_limits.daily_message_caps #=> Hash
+    #   resp.rcs_agents[0].messaging_limits.daily_message_caps["String"] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRcsAgents AWS API Documentation
@@ -4229,6 +4237,10 @@ module Aws::PinpointSMSVoiceV2
     #   resp.sender_ids[0].deletion_protection_enabled #=> Boolean
     #   resp.sender_ids[0].registered #=> Boolean
     #   resp.sender_ids[0].registration_id #=> String
+    #   resp.sender_ids[0].messaging_limits.rate_limits #=> Hash
+    #   resp.sender_ids[0].messaging_limits.rate_limits["String"] #=> Integer
+    #   resp.sender_ids[0].messaging_limits.daily_message_caps #=> Hash
+    #   resp.sender_ids[0].messaging_limits.daily_message_caps["String"] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeSenderIds AWS API Documentation
@@ -4579,6 +4591,117 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def get_resource_policy(params = {}, options = {})
       req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Search available phone numbers from aggregator inventory, optionally
+    # filtered by pattern. If NumberPreference is omitted, returns
+    # unfiltered available numbers. Returns empty list (not an exception)
+    # when no numbers match. ResourceNotFoundException is thrown only for
+    # invalid RegistrationId (campaign not found).
+    #
+    # @option params [required, String] :iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the country
+    #   or region in which to search for available phone numbers. This
+    #   operation currently supports only `US`.
+    #
+    # @option params [required, Array<String>] :number_capabilities
+    #   The capabilities to filter by, such as SMS. Only phone numbers that
+    #   support all of the specified capabilities are returned.
+    #
+    # @option params [required, String] :number_type
+    #   The type of phone number to search for.
+    #
+    # @option params [String] :registration_id
+    #   The registration associated with the request. A registration is
+    #   required for regulated number types. You can specify either:
+    #
+    #   * The unique identifier of the registration.
+    #
+    #   * The Amazon Resource Name (ARN) of the registration.
+    #
+    # @option params [Array<Types::NumberPreferenceItem>] :number_preference
+    #   Optional. If omitted, returns unfiltered available numbers. Max 1
+    #   element for List API.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous request to retrieve the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. If you don't
+    #   specify a value, the default is 10.
+    #
+    # @return [Types::ListAvailablePhoneNumbersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAvailablePhoneNumbersResult#available_phone_numbers #available_phone_numbers} => Array&lt;String&gt;
+    #   * {Types::ListAvailablePhoneNumbersResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListAvailablePhoneNumbers
+    #
+    #   # Search for available TEN_DLC phone numbers in the US that start with a specific area code.
+    #
+    #   resp = client.list_available_phone_numbers({
+    #     iso_country_code: "US", 
+    #     max_results: 10, 
+    #     number_capabilities: [
+    #       "SMS", 
+    #     ], 
+    #     number_preference: [
+    #       {
+    #         filter: [
+    #           "+1206", 
+    #         ], 
+    #         preference_type: [
+    #           "StartsWith", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     number_type: "TEN_DLC", 
+    #     registration_id: "reg-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     available_phone_numbers: [
+    #       "+12065550100", 
+    #       "+12065550142", 
+    #       "+12065550187", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_available_phone_numbers({
+    #     iso_country_code: "IsoCountryCode", # required
+    #     number_capabilities: ["SMS"], # required, accepts SMS, VOICE, MMS, RCS
+    #     number_type: "TEN_DLC", # required, accepts TEN_DLC
+    #     registration_id: "RegistrationIdOrArn",
+    #     number_preference: [
+    #       {
+    #         preference_type: ["StartsWith"], # required, accepts StartsWith, EndsWith, Contains, ExactMatch
+    #         filter: ["NumberFilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.available_phone_numbers #=> Array
+    #   resp.available_phone_numbers[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListAvailablePhoneNumbers AWS API Documentation
+    #
+    # @overload list_available_phone_numbers(params = {})
+    # @param [Hash] params ({})
+    def list_available_phone_numbers(params = {}, options = {})
+      req = build_request(:list_available_phone_numbers, params)
       req.send_request(options)
     end
 
@@ -5399,6 +5522,12 @@ module Aws::PinpointSMSVoiceV2
     #   Use this field to attach your phone number for an external
     #   registration process.
     #
+    # @option params [Array<Types::NumberPreferenceItem>] :number_preference
+    #   An optional selection preference used to request a specific phone
+    #   number, such as a number that starts with, ends with, or contains a
+    #   particular digit pattern. You can specify at most one preference.
+    #   Number preferences apply only to `TEN_DLC` requests in the `US`.
+    #
     # @option params [Boolean] :international_sending_enabled
     #   By default this is set to false. When set to true the international
     #   sending of phone number is Enabled.
@@ -5453,6 +5582,12 @@ module Aws::PinpointSMSVoiceV2
     #     opt_out_list_name: "OptOutListNameOrArn",
     #     pool_id: "PoolIdOrArn",
     #     registration_id: "RegistrationIdOrArn",
+    #     number_preference: [
+    #       {
+    #         preference_type: ["StartsWith"], # required, accepts StartsWith, EndsWith, Contains, ExactMatch
+    #         filter: ["NumberFilterValue"], # required
+    #       },
+    #     ],
     #     international_sending_enabled: false,
     #     deletion_protection_enabled: false,
     #     tags: [
@@ -7673,7 +7808,7 @@ module Aws::PinpointSMSVoiceV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

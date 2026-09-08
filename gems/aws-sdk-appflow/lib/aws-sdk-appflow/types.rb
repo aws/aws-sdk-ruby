@@ -757,12 +757,18 @@ module Aws::Appflow
     #   after authorization has been granted.
     #   @return [String]
     #
+    # @!attribute [rw] code_verifier
+    #   The code verifier used in the PKCE (Proof Key for Code Exchange)
+    #   OAuth flow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorOAuthRequest AWS API Documentation
     #
     class ConnectorOAuthRequest < Struct.new(
       :auth_code,
-      :redirect_uri)
-      SENSITIVE = []
+      :redirect_uri,
+      :code_verifier)
+      SENSITIVE = [:code_verifier]
       include Aws::Structure
     end
 
@@ -4940,12 +4946,19 @@ module Aws::Appflow
     #   The password that corresponds to the user name.
     #   @return [String]
     #
+    # @!attribute [rw] private_key
+    #   The RSA private key used for key pair authentication with Snowflake.
+    #   Provide this instead of a password when your Snowflake account uses
+    #   key pair authentication.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SnowflakeConnectorProfileCredentials AWS API Documentation
     #
     class SnowflakeConnectorProfileCredentials < Struct.new(
       :username,
-      :password)
-      SENSITIVE = [:password]
+      :password,
+      :private_key)
+      SENSITIVE = [:password, :private_key]
       include Aws::Structure
     end
 

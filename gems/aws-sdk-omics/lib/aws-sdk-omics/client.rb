@@ -1505,8 +1505,8 @@ module Aws::Omics
     end
 
     # Creates a cross-account shared resource. The resource owner makes an
-    # offer to share the resource with the principal subscriber (an AWS user
-    # with a different account than the resource owner).
+    # offer to share the resource with the principal subscriber (an Amazon
+    # Web Services user with a different account than the resource owner).
     #
     # The following resources support cross-account sharing:
     #
@@ -2226,10 +2226,10 @@ module Aws::Omics
     # runs, call `DeleteRunBatch` before calling `DeleteBatch`.
     #
     # `DeleteBatch` requires the batch to be in a terminal state:
-    # `PROCESSED`, `FAILED`, `CANCELLED`, or `RUNS_DELETED`. After
-    # `DeleteBatch` completes, the batch metadata is no longer accessible.
-    # You cannot call `GetBatch`, `ListRunsInBatch`, `DeleteRunBatch`, or
-    # `CancelRunBatch` on a deleted batch.
+    # `PROCESSED`, `FAILED`, `CANCELLED`, `RUNS_DELETE_FAILED`, or
+    # `RUNS_DELETED`. After `DeleteBatch` completes, the batch metadata is
+    # no longer accessible. You cannot call `GetBatch`, `ListRunsInBatch`,
+    # `DeleteRunBatch`, or `CancelRunBatch` on a deleted batch.
     #
     # @option params [required, String] :batch_id
     #   The identifier portion of the run batch ARN.
@@ -2928,7 +2928,7 @@ module Aws::Omics
     #   resp.arn #=> String
     #   resp.uuid #=> String
     #   resp.name #=> String
-    #   resp.status #=> String, one of "CREATING", "PENDING", "SUBMITTING", "INPROGRESS", "STOPPING", "CANCELLED", "FAILED", "PROCESSED", "RUNS_DELETING", "RUNS_DELETED"
+    #   resp.status #=> String, one of "CREATING", "PENDING", "SUBMITTING", "INPROGRESS", "STOPPING", "CANCELLED", "FAILED", "PROCESSED", "RUNS_DELETING", "RUNS_DELETE_FAILED", "RUNS_DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.total_runs #=> Integer
@@ -2952,6 +2952,7 @@ module Aws::Omics
     #   resp.default_run_setting.workflow_version_name #=> String
     #   resp.default_run_setting.networking_mode #=> String, one of "RESTRICTED", "VPC"
     #   resp.default_run_setting.configuration_name #=> String
+    #   resp.default_run_setting.session_policy #=> String
     #   resp.default_run_setting.scratch_storage_mode #=> String, one of "LOCAL", "SHARED"
     #   resp.submission_summary.successful_start_submission_count #=> Integer
     #   resp.submission_summary.failed_start_submission_count #=> Integer
@@ -3608,6 +3609,7 @@ module Aws::Omics
     #   * {Types::GetRunResponse#configuration #configuration} => Types::ConfigurationDetails
     #   * {Types::GetRunResponse#vpc_config #vpc_config} => Types::VpcConfigResponse
     #   * {Types::GetRunResponse#engine_settings #engine_settings} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::GetRunResponse#session_policy #session_policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3667,6 +3669,7 @@ module Aws::Omics
     #   resp.vpc_config.subnet_ids #=> Array
     #   resp.vpc_config.subnet_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.session_policy #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4601,7 +4604,7 @@ module Aws::Omics
     #   resp = client.list_batch({
     #     max_items: 1,
     #     starting_token: "ListToken",
-    #     status: "CREATING", # accepts CREATING, PENDING, SUBMITTING, INPROGRESS, STOPPING, CANCELLED, FAILED, PROCESSED, RUNS_DELETING, RUNS_DELETED
+    #     status: "CREATING", # accepts CREATING, PENDING, SUBMITTING, INPROGRESS, STOPPING, CANCELLED, FAILED, PROCESSED, RUNS_DELETING, RUNS_DELETE_FAILED, RUNS_DELETED
     #     name: "BatchName",
     #     run_group_id: "RunGroupId",
     #   })
@@ -4611,7 +4614,7 @@ module Aws::Omics
     #   resp.items #=> Array
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "PENDING", "SUBMITTING", "INPROGRESS", "STOPPING", "CANCELLED", "FAILED", "PROCESSED", "RUNS_DELETING", "RUNS_DELETED"
+    #   resp.items[0].status #=> String, one of "CREATING", "PENDING", "SUBMITTING", "INPROGRESS", "STOPPING", "CANCELLED", "FAILED", "PROCESSED", "RUNS_DELETING", "RUNS_DELETE_FAILED", "RUNS_DELETED"
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].total_runs #=> Integer
     #   resp.items[0].workflow_id #=> String
@@ -6061,9 +6064,9 @@ module Aws::Omics
     end
 
     # Activates an archived read set and returns its metadata in a JSON
-    # formatted output. AWS HealthOmics automatically archives unused read
-    # sets after 30 days. To monitor the status of your read set activation
-    # job, use the `GetReadSetActivationJob` operation.
+    # formatted output. Amazon Web Services HealthOmics automatically
+    # archives unused read sets after 30 days. To monitor the status of your
+    # read set activation job, use the `GetReadSetActivationJob` operation.
     #
     # To learn more, see [Activating read sets][1] in the *Amazon Web
     # Services HealthOmics User Guide*.
@@ -6392,8 +6395,8 @@ module Aws::Omics
     #   Web Services HealthOmics, S3, Cloudwatch logs, and EC2. An example
     #   `roleArn` is
     #   `arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ`.
-    #   In this example, the AWS account ID is `123456789012` and the role
-    #   name is `omics-service-role-serviceRole-W8O1XMPL7QZ`.
+    #   In this example, the Amazon Web Services account ID is `123456789012`
+    #   and the role name is `omics-service-role-serviceRole-W8O1XMPL7QZ`.
     #
     # @option params [String] :name
     #   A name for the run. This is recommended to view and organize runs in
@@ -6537,6 +6540,10 @@ module Aws::Omics
     # @option params [String] :configuration_name
     #   Optional configuration name to use for the workflow run.
     #
+    # @option params [String] :session_policy
+    #   Optional inline policy json for scoping down permissions via a session
+    #   policy on the IAM role provided in the roleArn parameter.
+    #
     # @option params [Hash,Array,String,Numeric,Boolean] :engine_settings
     #   Engine-specific settings for the workflow run. Use this field to
     #   specify configuration options that are specific to the workflow engine
@@ -6586,6 +6593,7 @@ module Aws::Omics
     #     networking_mode: "RESTRICTED", # accepts RESTRICTED, VPC
     #     scratch_storage_mode: "LOCAL", # accepts LOCAL, SHARED
     #     configuration_name: "ConfigurationName",
+    #     session_policy: "SessionPolicy",
     #     engine_settings: {
     #     },
     #   })
@@ -6636,8 +6644,8 @@ module Aws::Omics
     #   not need to pass this option.**
     #
     # @option params [Hash<String,String>] :tags
-    #   AWS tags to associate with the batch resource. These tags are not
-    #   inherited by individual runs. To tag individual runs, use
+    #   Amazon Web Services tags to associate with the batch resource. These
+    #   tags are not inherited by individual runs. To tag individual runs, use
     #   `defaultRunSetting.runTags`.
     #
     # @option params [required, Types::DefaultRunSetting] :default_run_setting
@@ -6688,6 +6696,7 @@ module Aws::Omics
     #       workflow_version_name: "WorkflowVersionName",
     #       networking_mode: "RESTRICTED", # accepts RESTRICTED, VPC
     #       configuration_name: "ConfigurationName",
+    #       session_policy: "SessionPolicy",
     #       engine_settings: {
     #       },
     #       scratch_storage_mode: "LOCAL", # accepts LOCAL, SHARED
@@ -6717,7 +6726,7 @@ module Aws::Omics
     #
     #   resp.id #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "PENDING", "SUBMITTING", "INPROGRESS", "STOPPING", "CANCELLED", "FAILED", "PROCESSED", "RUNS_DELETING", "RUNS_DELETED"
+    #   resp.status #=> String, one of "CREATING", "PENDING", "SUBMITTING", "INPROGRESS", "STOPPING", "CANCELLED", "FAILED", "PROCESSED", "RUNS_DELETING", "RUNS_DELETE_FAILED", "RUNS_DELETED"
     #   resp.uuid #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -7415,7 +7424,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

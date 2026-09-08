@@ -32695,6 +32695,53 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A candidate instance type preference in an `InstancePreferences` list.
+    #
+    # @!attribute [rw] instance_type
+    #   The ML compute instance type. An instance type can appear only once
+    #   in an `InstancePreferences` list.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances to launch if this instance type is selected.
+    #   Specify the instance count for the training job in one of the
+    #   following two ways:
+    #
+    #   1.  **Per preference** – Set `InstanceCount` on every preference in
+    #       the `InstancePreferences` list and don't set
+    #       `ResourceConfig$InstanceCount`. Use this when each instance type
+    #       needs a different number of instances to deliver equivalent
+    #       compute.
+    #
+    #   2.  **One count for the job** – Set `ResourceConfig$InstanceCount`
+    #       and omit it from every preference. SageMaker applies this to all
+    #       instance types in the list.
+    #
+    #   For example, in a list of five preferences, either all five specify
+    #   `InstanceCount` or none of them do. SageMaker rejects requests that
+    #   set `InstanceCount` on only some preferences, that set it both per
+    #   preference and in `ResourceConfig`, or that omit it in both places.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] training_plan_arns
+    #   The Amazon Resource Name (ARN) of a training plan to use if this
+    #   instance type is selected. The plan's instance type must match
+    #   `InstanceType`. A preference with a training plan uses that plan's
+    #   reserved capacity; a preference without one uses on-demand capacity.
+    #   Per-preference `TrainingPlanArns` is mutually exclusive with the
+    #   job-level `TrainingPlanArn` in `ResourceConfig`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InstancePreference AWS API Documentation
+    #
+    class InstancePreference < Struct.new(
+      :instance_type,
+      :instance_count,
+      :training_plan_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The customer ENI and additional ENIs associated with a network
     # interface category.
     #
@@ -46439,13 +46486,41 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
+    # @!attribute [rw] instance_preferences
+    #   An ordered list of ML compute instance types for the processing job,
+    #   in priority order. Amazon SageMaker launches the job on the first
+    #   instance type in the list that has available capacity. If capacity
+    #   is insufficient, Amazon SageMaker evaluates the next instance type
+    #   in the list. Exactly one instance type is selected for the job.
+    #
+    #   `InstancePreferences` is mutually exclusive with `InstanceType`.
+    #   @return [Array<Types::ProcessingInstancePreference>]
+    #
+    # @!attribute [rw] selected_instance_type
+    #   The instance type that Amazon SageMaker selected for the job from
+    #   `InstancePreferences`. Returned by ` DescribeProcessingJob ` after
+    #   an instance type is selected. This field is read-only and isn't
+    #   accepted in `CreateProcessingJob` requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_instance_count
+    #   The number of instances of `SelectedInstanceType` that the job
+    #   launched with. The job is billed for this instance type and count.
+    #   Returned by `DescribeProcessingJob` after an instance type is
+    #   selected. This field is read-only and isn't accepted in
+    #   `CreateProcessingJob` requests.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingClusterConfig AWS API Documentation
     #
     class ProcessingClusterConfig < Struct.new(
       :instance_count,
       :instance_type,
       :volume_size_in_gb,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :instance_preferences,
+      :selected_instance_type,
+      :selected_instance_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46496,6 +46571,46 @@ module Aws::SageMaker
       :app_managed,
       :s3_input,
       :dataset_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A candidate instance type preference in a processing
+    # `InstancePreferences` list.
+    #
+    # @!attribute [rw] instance_type
+    #   The ML compute instance type. An instance type can appear only once
+    #   in an `InstancePreferences` list.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances to launch if this instance type is selected.
+    #   Specify the instance count for the processing job in one of the
+    #   following two ways:
+    #
+    #   1.  **Per preference** – Set `InstanceCount` on every preference in
+    #       the `InstancePreferences` list and don't set
+    #       `ProcessingClusterConfig$InstanceCount`. Use this when each
+    #       instance type needs a different number of instances to deliver
+    #       equivalent compute.
+    #
+    #   2.  **One count for the job** – Set
+    #       `ProcessingClusterConfig$InstanceCount` and omit it from every
+    #       preference. Amazon SageMaker applies this to all instance types
+    #       in the list.
+    #
+    #   For example, in a list of five preferences, either all five specify
+    #   `InstanceCount` or none of them do. Amazon SageMaker rejects
+    #   requests that set `InstanceCount` on only some preferences, that set
+    #   it both per preference and in `ProcessingClusterConfig`, or that
+    #   omit it in both places.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingInstancePreference AWS API Documentation
+    #
+    class ProcessingInstancePreference < Struct.new(
+      :instance_type,
+      :instance_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49612,6 +49727,35 @@ module Aws::SageMaker
     #   capacity.
     #   @return [Types::InstancePlacementConfig]
     #
+    # @!attribute [rw] instance_preferences
+    #   An ordered list of ML compute instance types for the training job,
+    #   in priority order. SageMaker launches the training job on the first
+    #   instance type in the list that has available capacity. If capacity
+    #   is insufficient, SageMaker evaluates the next instance type in the
+    #   preferred list. Exactly one instance type is selected for the job.
+    #
+    #   `InstancePreferences` is mutually exclusive with `InstanceType`,
+    #   `InstanceGroups`, `InstancePlacementConfig`, and
+    #   `EnableManagedSpotTraining`, and supports only Flexible Training
+    #   Plans (FTP) and On-Demand capacity.
+    #   @return [Array<Types::InstancePreference>]
+    #
+    # @!attribute [rw] selected_instance_type
+    #   The instance type that SageMaker selected for the job from the
+    #   provided `InstancePreferences`. The job is billed for this instance
+    #   type and count. Returned by ` DescribeTrainingJob ` after an
+    #   instance type is selected. This field is read-only and isn't
+    #   accepted in `CreateTrainingJob` requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_instance_count
+    #   The number of instances of `SelectedInstanceType` that the training
+    #   job launched with. The job is billed for this instance type and
+    #   count. Returned by `DescribeTrainingJob` after an instance type is
+    #   selected. This field is read-only and isn't accepted in
+    #   `CreateTrainingJob` requests.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig AWS API Documentation
     #
     class ResourceConfig < Struct.new(
@@ -49622,7 +49766,10 @@ module Aws::SageMaker
       :keep_alive_period_in_seconds,
       :instance_groups,
       :training_plan_arn,
-      :instance_placement_config)
+      :instance_placement_config,
+      :instance_preferences,
+      :selected_instance_type,
+      :selected_instance_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52598,6 +52745,19 @@ module Aws::SageMaker
     #
     #    `MaxPendingTimeInSeconds` only increments when jobs are actively
     #   waiting for capacity in an `Active` plan.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> * `MaxPendingTimeInSeconds` takes effect only for jobs that request
+    #     accelerated computing instance types, such as instances in the
+    #     `ml.p`, `ml.g`, and `ml.trn` families. It has no effect on jobs
+    #     that request CPU-only instance types.
+    #
+    #   * If the job specifies `InstancePreferences`,
+    #     `MaxPendingTimeInSeconds` bounds the total time SageMaker spends
+    #     working through your list of instance types. It is not applied per
+    #     instance type preference, and takes effect only when the list
+    #     includes at least one accelerated computing instance type.
     #
     #    </note>
     #

@@ -8645,6 +8645,23 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Defines the cross-channel and workload type routing behavior that
+    # allows an agent working on a contact to be offered a contact from a
+    # different channel or workload type.
+    #
+    # @!attribute [rw] channel_workload_behavior_type
+    #   Specifies the routing behavior for an agent handling their current
+    #   channel and workload type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CrossChannelWorkloadBehavior AWS API Documentation
+    #
+    class CrossChannelWorkloadBehavior < Struct.new(
+      :channel_workload_behavior_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a real-time metric. For a description of
     # each metric, see [Metrics definitions][1] in the *Connect Customer
     # Administrator Guide*.
@@ -25547,12 +25564,19 @@ module Aws::Connect
     #   are currently working with a contact from a Voice channel.
     #   @return [Types::CrossChannelBehavior]
     #
+    # @!attribute [rw] workload_type_concurrencies
+    #   Defines the list of workload type concurrency configurations for a
+    #   channel. When provided, enables granular concurrency control based
+    #   on workload type values.
+    #   @return [Array<Types::WorkloadTypeConcurrency>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MediaConcurrency AWS API Documentation
     #
     class MediaConcurrency < Struct.new(
       :channel,
       :concurrency,
-      :cross_channel_behavior)
+      :cross_channel_behavior,
+      :workload_type_concurrencies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41534,6 +41558,40 @@ module Aws::Connect
     class WisdomInfo < Struct.new(
       :session_arn,
       :ai_agents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the maximum number of contacts an agent can handle
+    # simultaneously for a specific channel and workload type combination.
+    #
+    # @!attribute [rw] workload_type
+    #   The value of the workload type.
+    #   @return [String]
+    #
+    # @!attribute [rw] concurrency
+    #   The maximum number of contacts an agent can handle simultaneously
+    #   for a specific channel and workload type combination.
+    #
+    #   Valid Range for `VOICE`: Minimum value of 1. Maximum value of 1.
+    #
+    #   Valid Range for `CHAT`: Minimum value of 1. Maximum value of 10.
+    #
+    #   Valid Range for `TASK`: Minimum value of 1. Maximum value of 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cross_channel_workload_behavior
+    #   Defines the cross-channel and workload type routing behavior for
+    #   each channel and workload type combination that is enabled for this
+    #   Routing Profile.
+    #   @return [Types::CrossChannelWorkloadBehavior]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/WorkloadTypeConcurrency AWS API Documentation
+    #
+    class WorkloadTypeConcurrency < Struct.new(
+      :workload_type,
+      :concurrency,
+      :cross_channel_workload_behavior)
       SENSITIVE = []
       include Aws::Structure
     end
